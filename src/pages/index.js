@@ -22,7 +22,7 @@ const title = css({
 
 const Home = () => (
   <Layout>
-    <div id="homepage" css={[container]}>
+    <div css={[container]}>
       <h1 css={[title]}>STEER</h1>
     </div>
   </Layout>
