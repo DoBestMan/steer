@@ -9,8 +9,10 @@
 /coverage
 
 # next.js
-/.next/
-/out/
+/out
+/.cache
+/.next
+/.now
 
 # production
 /build
@@ -28,3 +30,5 @@ yarn-error.log*
 .env.development.local
 .env.test.local
 .env.production.local
+
+.now
