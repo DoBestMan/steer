@@ -42,7 +42,7 @@ Then, make sure to run the correct version of node contained in `.nvmuse`.
 nvm use
 ```
 
-Finally, install the `node_modules`:
+Finally, install the `node_modules`. (Note, we're using `npm` because ZEIT Now prefers it.)
 
 ```bash
 npm i 
