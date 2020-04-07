@@ -1,4 +1,4 @@
-import React, { ReactChild } from 'react';
+import { ReactChild } from 'react';
 import { css } from '@emotion/core';
 
 const styles = {
@@ -11,11 +11,11 @@ const styles = {
   }),
 };
 
-interface TProps {
+interface Props {
   children: ReactChild;
 }
 
-function Layout(props: TProps) {
+function Layout(props: Props) {
   return (
     <div css={styles.container}>
       <main role="main" css={styles.mainContent}>
