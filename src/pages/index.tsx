@@ -1,4 +1,3 @@
-import React from 'react';
 import { css } from '@emotion/core';
 
 import Layout from '~/components/global/Layout/Layout';

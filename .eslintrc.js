@@ -22,6 +22,7 @@ module.exports = {
     'react-hooks/exhaustive-deps': 'warn',
     'react-hooks/rules-of-hooks': 'error',
     'react/jsx-no-bind': 'error',
+    'react/react-in-jsx-scope': 'off',
     'sort-keys': 'error',
     curly: 'error',
   },
