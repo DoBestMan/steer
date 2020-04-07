@@ -1,0 +1,17 @@
+export const BREAKPOINTS = {
+  S: 375,
+  M: 600,
+  L: 976,
+  XL: 1200,
+};
+
+// Generates a object such as
+// { SMALL: `min-width: ${BREAKPOINTS.SMALL}px`, ... }
+export const MQ = Object.fromEntries(
+  new Map(
+    Object.entries(BREAKPOINTS).map(([mq, value]) => [
+      mq,
+      `@media(min-width: ${value}px)`,
+    ]),
+  ),
+);
