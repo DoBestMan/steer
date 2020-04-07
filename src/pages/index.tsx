@@ -1,30 +1,20 @@
 import React from 'react';
-import { css } from '@emotion/core';
+import Link from 'next/link';
 
+// Components
 import Layout from '~/components/global/Layout/Layout';
 
-const styles = {
-  container: css({
-    alignItems: 'center',
-    display: 'flex',
-    justifyContent: '100vh',
-    minHeight: '100vh',
-    padding: '0 0.5rem',
-  }),
-  title: css({
-    fontSize: '4rem',
-    lineHeight: 1.15,
-    margin: 0,
-    textAlign: 'center',
-    width: '100%',
-  }),
-};
+// Styles
+import { typography } from '~/styles/global/typography';
 
 function Home() {
   return (
     <Layout>
-      <div css={styles.container}>
-        <h1 css={styles.title}>STEER</h1>
+      <div>
+        <h1 css={typography.jumboHeadline}>STEER</h1>
+        <Link href="/styleguide">
+          <a>See Styleguide</a>
+        </Link>
       </div>
     </Layout>
   );
