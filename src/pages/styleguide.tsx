@@ -4,7 +4,7 @@ import React from 'react';
 import Layout from '~/components/global/Layout/Layout';
 
 // Styles
-import { typography } from '~/styles/global/typography';
+import { typography } from '~/styles/global/typography.styles';
 
 function Styleguide() {
   return (
