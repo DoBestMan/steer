@@ -3,6 +3,7 @@
 Dependencies
 
 - [nvm]: https://github.com/nvm-sh/nvm
+- [yarn]: https://classic.yarnpkg.com
 
 ## Installation
 
@@ -20,7 +21,7 @@ Then, login in
 now login
 ```
 
-Finally, link your local project 
+Finally, link your local project
 
 ```bash
 now
@@ -42,10 +43,10 @@ Then, make sure to run the correct version of node contained in `.nvmuse`.
 nvm use
 ```
 
-Finally, install the `node_modules`. (Note, we're using `npm` because ZEIT Now prefers it.)
+Finally, install the `node_modules`.
 
 ```bash
-npm i 
+yarn
 ```
 
 You're all set!
@@ -58,6 +59,32 @@ As the project use Now env. variables, to start a local server:
 now dev
 ```
 
+## Other Scripts
+
+Lint files:
+
+```
+yarn lint
+```
+
+Lint files and apply fixes:
+
+```
+yarn lint:fix
+```
+
+Check for Typescript errors:
+
+```
+yarn ts
+```
+
+Run all checks (linting and ts):
+
+```
+yarn checks
+```
+
 ## Deploying
 
 Every push generates a URL you can see online.
@@ -67,7 +94,7 @@ But if you wish to deploy your local work on a preview link, at any time
 now
 ```
 
-To deploy on prod, merge with the `master` branch, or 
+To deploy on prod, merge with the `master` branch, or
 
 ```bash
 now --prod

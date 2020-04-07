@@ -1,0 +1,50 @@
+{
+  "compilerOptions": {
+    "alwaysStrict": true,
+    "baseUrl": "./",
+    "declaration": true,
+    "esModuleInterop": true,
+    "importHelpers": true,
+    "jsx": "preserve",
+    "lib": [
+      "dom",
+      "esnext"
+    ],
+    "module": "esnext",
+    "moduleResolution": "node",
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "paths": {
+      "~/*": [
+        "src/*"
+      ]
+    },
+    "preserveSymlinks": true,
+    "resolveJsonModule": true,
+    "rootDir": "./",
+    "sourceMap": true,
+    "strict": true,
+    "strictFunctionTypes": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
+    "target": "es6",
+    "allowJs": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "isolatedModules": true
+  },
+  "exclude": [
+    ".next",
+    "node_modules",
+    "public"
+  ],
+  "include": [
+    "src",
+    "next-env.d.ts"
+  ]
+}
