@@ -1,3 +1,4 @@
+/* eslint sort-keys: 0 */
 export const BREAKPOINTS = {
   S: 375,
   M: 600,

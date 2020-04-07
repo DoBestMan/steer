@@ -1,3 +1,4 @@
+/* eslint sort-keys: 0 */
 export const NB_COLUMNS = {
   S: 4,
   M: 6,

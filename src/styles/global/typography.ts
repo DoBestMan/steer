@@ -2,13 +2,40 @@ import { css } from '@emotion/core';
 import { MQ } from '~/styles/constants/breakpoints';
 
 export const typography = {
+  bodyCopy: css({
+    fontFamily: `Circular Std`,
+    fontSize: `1.5rem`,
+    fontStyle: `normal`,
+    fontWeight: `normal`,
+    letterSpacing: `-0.01em`,
+    lineHeight: `22px`,
+
+    [MQ.M]: {
+      fontSize: `1.8rem`,
+      lineHeight: `25px`,
+    },
+  }),
+  eyebrow: css({
+    fontFamily: `Circular Std`,
+    fontSize: `1.2rem`,
+    fontStyle: `normal`,
+    fontWeight: `bold`,
+    lineHeight: `15px`,
+    textTransform: 'uppercase',
+
+    [MQ.M]: {
+      fontSize: `1.5rem`,
+      letterSpacing: `-0.01em`,
+      lineHeight: `20px`,
+    },
+  }),
   jumboHeadline: css({
     fontFamily: `Circular Std`,
     fontSize: `4.0rem`,
     fontStyle: `normal`,
     fontWeight: `bold`,
-    lineHeight: `40px`,
     letterSpacing: `-0.03em`,
+    lineHeight: `40px`,
 
     [MQ.M]: {
       fontSize: `6.0rem`,
@@ -57,59 +84,6 @@ export const typography = {
       lineHeight: `30px`,
     },
   }),
-  tertiaryHeadline: css({
-    fontFamily: `Circular Std`,
-    fontSize: `1.4rem`,
-    fontStyle: `normal`,
-    fontWeight: `bold`,
-    lineHeight: `20px`,
-    letterSpacing: `-0.01em`,
-
-    [MQ.M]: {
-      fontSize: `1.8rem`,
-      lineHeight: `25px`,
-    },
-  }),
-  subhead: css({
-    fontFamily: `Circular Std`,
-    fontSize: `1.2rem`,
-    fontStyle: `normal`,
-    fontWeight: `bold`,
-    lineHeight: `5px`,
-
-    [MQ.M]: {
-      fontSize: `1.5rem`,
-      lineHeight: `20px`,
-      letterSpacing: `-0.01em`,
-    },
-  }),
-  eyebrow: css({
-    fontFamily: `Circular Std`,
-    fontSize: `1.2rem`,
-    fontStyle: `normal`,
-    fontWeight: `bold`,
-    lineHeight: `15px`,
-    textTransform: 'uppercase',
-
-    [MQ.M]: {
-      fontSize: `1.5rem`,
-      letterSpacing: `-0.01em`,
-      lineHeight: `20px`,
-    },
-  }),
-  bodyCopy: css({
-    fontFamily: `Circular Std`,
-    fontSize: `1.5rem`,
-    fontStyle: `normal`,
-    fontWeight: `normal`,
-    letterSpacing: `-0.01em`,
-    lineHeight: `22px`,
-
-    [MQ.M]: {
-      fontSize: `1.8rem`,
-      lineHeight: `25px`,
-    },
-  }),
   smallCopy: css({
     fontFamily: `Circular Std`,
     fontSize: `1.2rem`,
@@ -122,6 +96,32 @@ export const typography = {
       fontSize: `1.5rem`,
       letterSpacing: `-0.01em`,
       lineHeight: `22px`,
+    },
+  }),
+  subhead: css({
+    fontFamily: `Circular Std`,
+    fontSize: `1.2rem`,
+    fontStyle: `normal`,
+    fontWeight: `bold`,
+    lineHeight: `5px`,
+
+    [MQ.M]: {
+      fontSize: `1.5rem`,
+      letterSpacing: `-0.01em`,
+      lineHeight: `20px`,
+    },
+  }),
+  tertiaryHeadline: css({
+    fontFamily: `Circular Std`,
+    fontSize: `1.4rem`,
+    fontStyle: `normal`,
+    fontWeight: `bold`,
+    letterSpacing: `-0.01em`,
+    lineHeight: `20px`,
+
+    [MQ.M]: {
+      fontSize: `1.8rem`,
+      lineHeight: `25px`,
     },
   }),
 };

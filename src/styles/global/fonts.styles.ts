@@ -23,29 +23,29 @@ const fontFace = (props: Props): string => {
 export const fonts = `
   ${fontFace({
     fontFamily: 'Circular Std',
-    fontWeigth: 'normal',
     fontStyle: 'normal',
+    fontWeigth: 'normal',
     source: '/static/fonts/CircularStd-Book',
   })}
 
   ${fontFace({
     fontFamily: 'Circular Std',
-    fontWeigth: 'normal',
     fontStyle: 'italic',
+    fontWeigth: 'normal',
     source: '/static/fonts/CircularStd-BookItalic',
   })}
 
   ${fontFace({
     fontFamily: 'Circular Std',
-    fontWeigth: 'bold',
     fontStyle: 'normal',
+    fontWeigth: 'bold',
     source: '/static/fonts/CircularStd-Bold',
   })}
 
   ${fontFace({
     fontFamily: 'Circular Std',
-    fontWeigth: 'bold',
     fontStyle: 'italic',
+    fontWeigth: 'bold',
     source: '/static/fonts/CircularStd-BoldItalic',
   })}
 `;
