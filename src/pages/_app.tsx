@@ -2,7 +2,7 @@ import App from 'next/app';
 import Head from 'next/head';
 
 import { Global } from '@emotion/core';
-import { global } from '~/styles/global.styles';
+import { global } from '~/styles/global/global.styles';
 
 class MyApp extends App {
   render() {
