@@ -1,1 +1,5 @@
-{}
+{
+  "redirects": [
+    { "source": "/storybook", "destination": "storybook/index.html" }
+  ]
+}
