@@ -1,6 +1,8 @@
+import { Breakpoint } from './breakpoints.types';
+
 /* eslint sort-keys: 0 */
-export const BREAKPOINTS = {
-  S: 375,
+export const BREAKPOINTS: Record<Breakpoint, number> = {
+  S: 0,
   M: 600,
   L: 976,
   XL: 1200,
