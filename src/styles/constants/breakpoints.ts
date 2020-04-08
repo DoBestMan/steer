@@ -8,7 +8,7 @@ export const BREAKPOINTS: Record<Breakpoint, number> = {
   XL: 1200,
 };
 
-// Generates a object such as
+// Generates an object such as
 // { SMALL: `min-width: ${BREAKPOINTS.SMALL}px`, ... }
 export const MQ = Object.fromEntries(
   new Map(
