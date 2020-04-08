@@ -5,9 +5,10 @@ module.exports = {
   stories: ['../src/**/*.stories.tsx'],
   addons: [
     '@storybook/addon-actions',
+    '@storybook/addon-knobs/register',
     '@storybook/addon-links',
-    '@storybook/preset-typescript',
     '@storybook/addon-viewport',
+    '@storybook/preset-typescript',
   ],
   webpackFinal: async (config) => {
     // Alias
