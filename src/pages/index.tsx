@@ -1,9 +1,6 @@
 import Link from 'next/link';
 
-// Components
 import Layout from '~/components/global/Layout/Layout';
-
-// Styles
 import { typography } from '~/styles/global/typography.styles';
 
 function Home() {
