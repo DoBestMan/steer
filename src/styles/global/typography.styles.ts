@@ -8,11 +8,11 @@ export const typography = {
     fontStyle: 'normal',
     fontWeight: 'normal',
     letterSpacing: '-0.01em',
-    lineHeight: '22px',
+    lineHeight: 22 / 15, //'22px',
 
     [MQ.M]: {
       fontSize: '1.8rem',
-      lineHeight: '25px',
+      lineHeight: 25 / 18, //'25px',
     },
   }),
   eyebrow: css({
@@ -20,13 +20,13 @@ export const typography = {
     fontSize: '1.2rem',
     fontStyle: 'normal',
     fontWeight: 'bold',
-    lineHeight: '15px',
+    lineHeight: 15 / 12, // '15px',
     textTransform: 'uppercase',
 
     [MQ.M]: {
       fontSize: '1.5rem',
       letterSpacing: '-0.01em',
-      lineHeight: '20px',
+      lineHeight: 20 / 15, // 20px',
     },
   }),
   jumboHeadline: css({
@@ -35,17 +35,17 @@ export const typography = {
     fontStyle: 'normal',
     fontWeight: 'bold',
     letterSpacing: '-0.03em',
-    lineHeight: '40px',
+    lineHeight: 40 / 40, // '40px',
 
     [MQ.M]: {
       fontSize: '6.0rem',
       letterSpacing: '-0.04em',
-      lineHeight: '60px',
+      lineHeight: 60 / 60, // '60px',
     },
 
     [MQ.L]: {
       fontSize: '8.0rem',
-      lineHeight: '75px',
+      lineHeight: 75 / 80, // '75px',
     },
   }),
   primaryHeadline: css({
@@ -54,16 +54,16 @@ export const typography = {
     fontStyle: 'normal',
     fontWeight: 'bold',
     letterSpacing: '-0.02em',
-    lineHeight: '30px',
+    lineHeight: 30 / 25, // 30px',
 
     [MQ.M]: {
       fontSize: '3.5rem',
-      lineHeight: '40px',
+      lineHeight: 40 / 35, // 40px',
     },
 
     [MQ.L]: {
       fontSize: '4.0rem',
-      lineHeight: '45px',
+      lineHeight: 45 / 40, // '45px',
     },
   }),
   secondaryHeadline: css({
@@ -72,16 +72,16 @@ export const typography = {
     fontStyle: 'normal',
     fontWeight: 'bold',
     letterSpacing: '-0.02em',
-    lineHeight: '25px',
+    lineHeight: 25 / 20, // '25px',
 
     [MQ.M]: {
       fontSize: '2.4rem',
-      lineHeight: '30px',
+      lineHeight: 30 / 24, // '30px',
     },
 
     [MQ.L]: {
       fontSize: '2.8rem',
-      lineHeight: '30px',
+      lineHeight: 30 / 2.8, // '30px',
     },
   }),
   smallCopy: css({
@@ -90,12 +90,12 @@ export const typography = {
     fontStyle: 'normal',
     fontWeight: 'normal',
     letterSpacing: '-0.01em',
-    lineHeight: '20px',
+    lineHeight: 20 / 12, // '20px',
 
     [MQ.M]: {
       fontSize: '1.5rem',
       letterSpacing: '-0.01em',
-      lineHeight: '22px',
+      lineHeight: 22 / 15, // '22px',
     },
   }),
   subhead: css({
@@ -103,12 +103,12 @@ export const typography = {
     fontSize: '1.2rem',
     fontStyle: 'normal',
     fontWeight: 'bold',
-    lineHeight: '5px',
+    lineHeight: 5 / 12, // '5px',
 
     [MQ.M]: {
       fontSize: '1.5rem',
       letterSpacing: '-0.01em',
-      lineHeight: '20px',
+      lineHeight: 20 / 15, // '20px',
     },
   }),
   tertiaryHeadline: css({
@@ -117,11 +117,11 @@ export const typography = {
     fontStyle: 'normal',
     fontWeight: 'bold',
     letterSpacing: '-0.01em',
-    lineHeight: '20px',
+    lineHeight: 20 / 14, // '20px',
 
     [MQ.M]: {
       fontSize: '1.8rem',
-      lineHeight: '25px',
+      lineHeight: 25 / 18, // '25px',
     },
   }),
 };
