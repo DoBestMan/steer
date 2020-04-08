@@ -15,6 +15,32 @@ export const typography = {
       lineHeight: 25 / 18, //'25px',
     },
   }),
+  cta: css({
+    fontFamily: 'Circular Std',
+    fontSize: '1.5rem',
+    fontStyle: 'normal',
+    fontWeight: 'bold',
+    letterSpacing: '-0.01em',
+    lineHeight: 22 / 15, //'22px',
+
+    [MQ.M]: {
+      fontSize: '1.8rem',
+      lineHeight: 25 / 18, //'25px',
+    },
+  }),
+  ctaSmall: css({
+    fontFamily: 'Circular Std',
+    fontSize: '1.2rem',
+    fontStyle: 'normal',
+    fontWeight: 'bold',
+    letterSpacing: '-0.01em',
+    lineHeight: 20 / 12, // '20px',
+
+    [MQ.M]: {
+      fontSize: '1.5rem',
+      lineHeight: 22 / 15, // '22px',
+    },
+  }),
   eyebrow: css({
     fontFamily: 'Circular Std',
     fontSize: '1.2rem',
