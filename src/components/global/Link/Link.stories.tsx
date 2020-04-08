@@ -1,9 +1,8 @@
 import LinkComponent from './Link';
-import { withKnobs, text, select } from '@storybook/addon-knobs';
+import { text, select } from '@storybook/addon-knobs';
 
 export default {
   component: Link,
-  decorators: [withKnobs],
   title: 'Link',
 };
 

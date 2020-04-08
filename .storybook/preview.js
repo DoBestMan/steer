@@ -1,4 +1,5 @@
 import { addDecorator, addParameters } from '@storybook/react';
+import { withKnobs } from '@storybook/addon-knobs';
 
 import { Global } from '@emotion/core';
 import { global } from '../src/styles/global/global.styles';
@@ -53,3 +54,4 @@ addParameters({
 });
 
 addDecorator(withGlobal);
+addDecorator(withKnobs);
