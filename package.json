@@ -8,11 +8,14 @@
   "scripts": {
     "dev": "next dev",
     "checks": "yarn lint && yarn ts",
-    "build": "next build",
+    "build": "if [[ ${NOW_GITHUB_COMMIT_REF} == \"\" || ${NOW_GITHUB_COMMIT_REF} == \"master\" ]]; then yarn build-prod; else yarn build-ci; fi",
+    "build-ci": "next build && build-storybook -o public/storybook",
+    "build-prod": "next build",
     "lint": "eslint \"src/**/*.{ts,tsx,md}\"",
     "lint:fix": "eslint \"src/**/*.{ts,tsx,md}\" --fix",
     "ts": "tsc --noEmit",
-    "start": "next start"
+    "start": "next start",
+    "storybook": "start-storybook -p 6006"
   },
   "dependencies": {
     "@emotion/babel-preset-css-prop": "^10.0.27",
@@ -24,17 +27,26 @@
     "react-dom": "^16.13.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@storybook/addon-actions": "^5.3.18",
+    "@storybook/addon-links": "^5.3.18",
+    "@storybook/addons": "^5.3.18",
+    "@storybook/preset-typescript": "^3.0.0",
+    "@storybook/react": "^5.3.18",
     "@types/node": "^13.11.0",
     "@types/react": "^16.9.32",
     "@types/react-dom": "^16.9.6",
     "@typescript-eslint/eslint-plugin": "^2.27.0",
     "@typescript-eslint/parser": "^2.27.0",
+    "babel-loader": "^8.1.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.1",
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^3.0.0",
+    "fork-ts-checker-webpack-plugin": "^4.1.2",
     "prettier": "^2.0.4",
+    "ts-loader": "^6.2.2",
     "typescript": "^3.8.3"
   }
 }

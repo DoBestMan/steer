@@ -85,6 +85,12 @@ Run all checks (linting and ts):
 yarn checks
 ```
 
+Run Storybook locally:
+
+```
+yarn storybook
+```
+
 ## Deploying
 
 Every push generates a URL you can see online.
@@ -99,3 +105,15 @@ To deploy on prod, merge with the `master` branch, or
 ```bash
 now --prod
 ```
+
+### `build` scripts
+
+`yarn build` has conditional behavior depending on the existence of `NOW_GITHUB_COMMIT_REF`, a ZEIT Now environment variable with the current Github branch.
+
+- If there's no `NOW_GITHUB_COMMIT_REF` variable because we are deploying from the command line, run `yarn build-prod`
+- If `NOW_GITHUB_COMMIT_REF` is master, run `yarn build-prod`
+- If `NOW_GITHUB_COMMIT_REF` is another else, run `yarn build-ci`
+
+`build-prod` will create a Next.js build. `build-ci` will create a Next.js build containing storybook at the `/storybook` route.
+
+Note: Builds from other branches (eg staging) that are promoted to production will still contain a visible `/storybook` route.
