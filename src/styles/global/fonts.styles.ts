@@ -1,7 +1,7 @@
 interface Props {
   fontFamily: string;
-  fontWeigth: string;
   fontStyle: string;
+  fontWeigth: string;
   source: string;
 }
 
