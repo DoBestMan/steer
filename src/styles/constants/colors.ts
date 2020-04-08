@@ -1,11 +1,18 @@
 export const colors = {
-  STBlack: '#222',
-  STGrey1: 'rgba(34, 34, 34, 0.7)',
-  STGrey2: 'rgba(34, 34, 34, 0.5)',
-  STLightGrey: '#F4F4F4',
-  STOffwhite1: '#ECEBE1',
-  STOffwhite2: '#F8F7F0',
-  STOrange: '#FE5F10',
-  trueBlack: '#000',
-  trueWhite: '#FFF',
+  dark: {
+    gray40: 'rgba(255, 255, 255, 0.6)',
+    gray80: 'rgba(255, 255, 255, 0.2)',
+    gray90: 'rgba(255, 255, 255, 0.1)',
+  },
+  global: {
+    black: '#181818',
+    orange: '#FE5F10',
+    white: '#FFF',
+  },
+  light: {
+    gray10: 'rgba(24, 24, 24, 0.06)',
+    gray20: 'rgba(24, 24, 24, 0.13)',
+    gray70: 'rgba(24, 24, 24, 0.7)',
+    offWhite: '#ECEBE1',
+  },
 };
