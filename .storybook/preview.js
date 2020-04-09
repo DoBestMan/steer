@@ -4,6 +4,8 @@ import { withKnobs } from '@storybook/addon-knobs';
 import { Global } from '@emotion/core';
 import { global } from '../src/styles/global/global.styles';
 
+import './mockNextRouter';
+
 const withGlobal = (cb) => (
   <>
     <Global styles={global} />
