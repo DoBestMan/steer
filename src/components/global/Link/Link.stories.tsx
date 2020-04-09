@@ -10,8 +10,8 @@ export function LinkWithKnobs() {
   return (
     <Link
       href="/"
-      size={select('Size', LinkSizes, LinkSizes.standard)}
-      theme={select('Theme', LinkThemes, LinkThemes.orange)}
+      size={select('Size', LinkSizes, LinkSizes.STANDARD)}
+      theme={select('Theme', LinkThemes, LinkThemes.ORANGE)}
     >
       {text('Link Text', 'Link Example')}
     </Link>
@@ -20,7 +20,7 @@ export function LinkWithKnobs() {
 
 export function OrangeLink() {
   return (
-    <Link href="/" size={LinkSizes.standard} theme={LinkThemes.orange}>
+    <Link href="/" size={LinkSizes.STANDARD} theme={LinkThemes.ORANGE}>
       {text('Link Text', 'Link Example')}
     </Link>
   );
@@ -28,7 +28,7 @@ export function OrangeLink() {
 
 export function BlackLink() {
   return (
-    <Link href="/" size={LinkSizes.standard} theme={LinkThemes.black}>
+    <Link href="/" size={LinkSizes.STANDARD} theme={LinkThemes.BLACK}>
       {text('Link Text', 'Link Example')}
     </Link>
   );
@@ -36,7 +36,7 @@ export function BlackLink() {
 
 export function SmallOrangeLink() {
   return (
-    <Link href="/" size={LinkSizes.small} theme={LinkThemes.orange}>
+    <Link href="/" size={LinkSizes.SMALL} theme={LinkThemes.ORANGE}>
       {text('Link Text', 'Link Example')}
     </Link>
   );
@@ -44,7 +44,7 @@ export function SmallOrangeLink() {
 
 export function SmallBlackLink() {
   return (
-    <Link href="/" size={LinkSizes.small} theme={LinkThemes.black}>
+    <Link href="/" size={LinkSizes.SMALL} theme={LinkThemes.BLACK}>
       {text('Link Text', 'Link Example')}
     </Link>
   );

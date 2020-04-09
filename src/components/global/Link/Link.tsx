@@ -6,17 +6,17 @@ import { colors } from '~/styles/global/colors.styles';
 import { link } from './Link.styles';
 
 export enum LinkSizes {
-  small = 'small',
-  standard = 'standard',
+  SMALL = 'small',
+  STANDARD = 'standard',
 }
 
 export enum LinkThemes {
-  orange = 'orange',
-  black = 'black',
+  ORANGE = 'orange',
+  BLACK = 'black',
 }
 
-export type TLinkThemes = LinkThemes.orange | LinkThemes.black;
-export type TLinkSizes = LinkSizes.small | LinkSizes.standard;
+export type TLinkThemes = LinkThemes.ORANGE | LinkThemes.BLACK;
+export type TLinkSizes = LinkSizes.SMALL | LinkSizes.STANDARD;
 
 export interface Props {
   href: string;
