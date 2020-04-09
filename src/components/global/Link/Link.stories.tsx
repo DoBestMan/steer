@@ -1,4 +1,4 @@
-import LinkComponent from './Link';
+import Link, { LinkSizes, LinkThemes } from './Link';
 import { text, select } from '@storybook/addon-knobs';
 
 export default {
@@ -6,24 +6,46 @@ export default {
   title: 'Link',
 };
 
-const themes = {
-  black: '',
-  orange: 'orange',
-};
-
-const sizes = {
-  small: 'small',
-  standard: '',
-};
-
-export function Link() {
+export function LinkWithKnobs() {
   return (
-    <LinkComponent
+    <Link
       href="/"
-      size={select('Size', sizes, sizes.standard)}
-      theme={select('Theme', themes, themes.orange)}
+      size={select('Size', LinkSizes, LinkSizes.standard)}
+      theme={select('Theme', LinkThemes, LinkThemes.orange)}
     >
       {text('Link Text', 'Link Example')}
-    </LinkComponent>
+    </Link>
+  );
+}
+
+export function OrangeLink() {
+  return (
+    <Link href="/" size={LinkSizes.standard} theme={LinkThemes.orange}>
+      {text('Link Text', 'Link Example')}
+    </Link>
+  );
+}
+
+export function BlackLink() {
+  return (
+    <Link href="/" size={LinkSizes.standard} theme={LinkThemes.black}>
+      {text('Link Text', 'Link Example')}
+    </Link>
+  );
+}
+
+export function SmallOrangeLink() {
+  return (
+    <Link href="/" size={LinkSizes.small} theme={LinkThemes.orange}>
+      {text('Link Text', 'Link Example')}
+    </Link>
+  );
+}
+
+export function SmallBlackLink() {
+  return (
+    <Link href="/" size={LinkSizes.small} theme={LinkThemes.black}>
+      {text('Link Text', 'Link Example')}
+    </Link>
   );
 }

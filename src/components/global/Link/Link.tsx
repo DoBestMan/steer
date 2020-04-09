@@ -5,11 +5,24 @@ import { typography } from '~/styles/global/typography.styles';
 import { colors } from '~/styles/global/colors.styles';
 import { link } from './Link.styles';
 
-interface Props {
+export enum LinkSizes {
+  small = 'small',
+  standard = 'standard',
+}
+
+export enum LinkThemes {
+  orange = 'orange',
+  black = 'black',
+}
+
+export type TLinkThemes = LinkThemes.orange | LinkThemes.black;
+export type TLinkSizes = LinkSizes.small | LinkSizes.standard;
+
+export interface Props {
   href: string;
   children: ReactChild;
-  size?: string;
-  theme?: string;
+  size?: TLinkSizes;
+  theme?: TLinkThemes;
 }
 
 function Link(props: Props) {
