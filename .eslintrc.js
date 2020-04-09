@@ -5,6 +5,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'prettier/@typescript-eslint',
     'plugin:prettier/recommended',
+    'plugin:jest-formatting/strict'
   ],
   parserOptions: {
     ecmaVersion: 2020,
