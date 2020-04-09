@@ -7,12 +7,15 @@
   },
   "scripts": {
     "dev": "next dev",
-    "checks": "yarn lint && yarn ts",
+    "checks": "yarn lint && yarn ts && yarn test",
     "build": "if [[ ${NOW_GITHUB_COMMIT_REF} == \"\" || ${NOW_GITHUB_COMMIT_REF} == \"master\" ]]; then yarn build-prod; else yarn build-ci; fi",
     "build-ci": "next build && build-storybook -o public/storybook",
     "build-prod": "next build",
     "lint": "eslint \"src/**/*.{ts,tsx,md}\"",
     "lint:fix": "eslint \"src/**/*.{ts,tsx,md}\" --fix",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watch",
     "ts": "tsc --noEmit",
     "start": "next start",
     "storybook": "start-storybook -p 6006"
@@ -33,6 +36,9 @@
     "@storybook/addons": "^5.3.18",
     "@storybook/preset-typescript": "^3.0.0",
     "@storybook/react": "^5.3.18",
+    "@testing-library/jest-dom": "^5.4.0",
+    "@testing-library/react": "^10.0.2",
+    "@testing-library/react-hooks": "^3.2.1",
     "@types/node": "^13.11.0",
     "@types/react": "^16.9.32",
     "@types/react-dom": "^16.9.6",
@@ -45,7 +51,9 @@
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^3.0.0",
     "fork-ts-checker-webpack-plugin": "^4.1.2",
+    "jest": "^25.3.0",
     "prettier": "^2.0.4",
+    "react-test-renderer": "^16.13.1",
     "ts-loader": "^6.2.2",
     "typescript": "^3.8.3"
   }

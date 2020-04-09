@@ -79,7 +79,25 @@ Check for Typescript errors:
 yarn ts
 ```
 
-Run all checks (linting and ts):
+Run tests:
+
+```
+yarn test
+```
+
+Run tests in watch mode:
+
+```
+yarn test:watch
+```
+
+Run tests and generate coverage report
+
+```
+yarn test:coverage
+```
+
+Run all checks (linting, ts, tests):
 
 ```
 yarn checks
