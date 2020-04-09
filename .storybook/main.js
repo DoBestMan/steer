@@ -3,8 +3,12 @@ const path = require('path');
 
 module.exports = {
   stories: ['../src/**/*.stories.tsx'],
-  addons: ['@storybook/addon-actions', '@storybook/addon-links'],
-  addons: ['@storybook/preset-typescript'],
+  addons: [
+    '@storybook/addon-actions',
+    '@storybook/addon-links',
+    '@storybook/preset-typescript',
+    '@storybook/addon-viewport',
+  ],
   webpackFinal: async (config) => {
     // Alias
     config.resolve.alias['~'] = path.resolve(__dirname + '/../src');
