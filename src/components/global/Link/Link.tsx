@@ -25,8 +25,9 @@ export interface Props {
 function Link(props: Props) {
   const { children, theme, href, size } = props;
 
-  const textStyle = size === 'small' ? typography.ctaSmall : typography.cta;
-  const themeStyle = theme === 'orange' ? colors.global.orange : '';
+  const textStyle =
+    size === LinkSizes.SMALL ? typography.ctaSmall : typography.cta;
+  const themeStyle = theme === LinkThemes.ORANGE ? colors.global.orange : '';
 
   return (
     <NextLink href={href}>
