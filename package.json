@@ -18,7 +18,7 @@
     "test:watch": "jest --watch",
     "ts": "tsc --noEmit",
     "start": "next start",
-    "storybook": "start-storybook -p 6006"
+    "storybook": "start-storybook -s ./public -p 6006"
   },
   "dependencies": {
     "@emotion/babel-preset-css-prop": "^10.0.27",
