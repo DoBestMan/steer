@@ -10,11 +10,13 @@ module.exports = {
     ecmaVersion: 2020,
     sourceType: 'module',
   },
-  plugins: ['react-hooks'],
+  plugins: ['react-hooks', 'jest'],
   rules: {
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-empty-function': 'off',
     '@typescript-eslint/no-use-before-define': 'off',
+    'jest/no-focused-tests': 'error',
+    'jest/prefer-inline-snapshots': 'error',
     'no-duplicate-imports': 'error',
     'react/function-component-definition': ['error', {
       'namedComponents': 'function-declaration'
