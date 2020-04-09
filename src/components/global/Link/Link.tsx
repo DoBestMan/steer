@@ -15,14 +15,11 @@ export enum LinkThemes {
   BLACK = 'black',
 }
 
-export type TLinkThemes = LinkThemes.ORANGE | LinkThemes.BLACK;
-export type TLinkSizes = LinkSizes.SMALL | LinkSizes.STANDARD;
-
 export interface Props {
   href: string;
   children: ReactChild;
-  size?: TLinkSizes;
-  theme?: TLinkThemes;
+  size?: LinkSizes;
+  theme?: LinkThemes;
 }
 
 function Link(props: Props) {
