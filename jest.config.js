@@ -8,6 +8,7 @@ module.exports = {
     // Make sure this is the last mapper, since it will match any file extension
     '^~/(.*)$': '<rootDir>/src/$1',
   },
+  restoreMocks: true,
   roots: ['<rootDir>/src'],
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   testPathIgnorePatterns: ['/node_modules/', '/.next/'],

@@ -55,6 +55,10 @@ yarn
 
 You're all set!
 
+## Documentation
+
+- [Testing](./docs/TESTING.md)
+
 ## Development
 
 As the project use Now env. variables, to start a local server:
