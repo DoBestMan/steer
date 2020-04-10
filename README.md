@@ -46,6 +46,11 @@ Then, make sure to run the correct version of node contained in `.nvmuse`.
 ```bash
 nvm use
 ```
+Windows users:
+```bash
+type .\.nvmrc | %{$_ -replace "v",""} | %{nvm install $_}
+type .\.nvmrc | %{$_ -replace "v",""} | %{nvm use $_}
+```
 
 Finally, install the `node_modules`.
 
