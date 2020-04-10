@@ -5,6 +5,10 @@ Dependencies
 - [nvm]: https://github.com/nvm-sh/nvm
 - [yarn]: https://classic.yarnpkg.com
 
+## Documentation
+
+- [Contributing](./docs/CONTRIBUTING.md)
+
 ## Installation
 
 Make sure you're a member of https://zeit.co/steer/steer . Ask Chris Vitale (chris.vitale@simpletire.com) or Arnaud Tanielian (tanielian@work.co) for access.
