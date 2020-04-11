@@ -107,7 +107,7 @@ export const typography = {
 
     [MQ.L]: {
       fontSize: '2.8rem',
-      lineHeight: 30 / 2.8, // '30px',
+      lineHeight: 30 / 28, // '30px',
     },
   }),
   smallCopy: css({

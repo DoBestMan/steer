@@ -1,4 +1,5 @@
 import Layout from '~/components/global/Layout/Layout';
+
 import { typography } from '~/styles/global/typography.styles';
 
 function Home() {
