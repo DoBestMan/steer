@@ -1,15 +1,16 @@
 # Simpletire STEER
 
-Dependencies
-
-- [nvm]: https://github.com/nvm-sh/nvm
-- [yarn]: https://classic.yarnpkg.com
-
 ## Documentation
 
 - [Contributing](./docs/CONTRIBUTING.md)
+- [Testing](./docs/TESTING.md)
 
 ## Installation
+
+Dependencies
+
+- [nvm](https://github.com/nvm-sh/nvm)
+- [yarn](https://classic.yarnpkg.com)
 
 Make sure you're a member of https://zeit.co/steer/steer . Ask Chris Vitale (chris.vitale@simpletire.com) or Arnaud Tanielian (tanielian@work.co) for access.
 
@@ -59,10 +60,6 @@ yarn
 ```
 
 You're all set!
-
-## Documentation
-
-- [Testing](./docs/TESTING.md)
 
 ## Development
 

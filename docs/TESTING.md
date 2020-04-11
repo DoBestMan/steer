@@ -53,7 +53,7 @@ To make longer tests manageable, use the `test` syntax and add inline comments. 
 
 Further reading: https://kentcdodds.com/blog/write-fewer-longer-tests
 
-## Query Best Practices
+### Query Best Practices
 
 Prefer [queries](https://testing-library.com/docs/dom-testing-library/api-queries#queries) (`byText`, `byAriaLabel`, etc.) that relate to behavior that can be experienced by a user.
 
