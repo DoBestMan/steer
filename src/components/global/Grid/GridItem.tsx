@@ -5,20 +5,20 @@ import { validateColSpan } from './GridItem.utils';
 
 interface ContainerProps {
   gridColumn?: string;
-  gridColumnS?: string;
-  gridColumnM?: string;
   gridColumnL?: string;
+  gridColumnM?: string;
+  gridColumnS?: string;
   gridColumnXL?: string;
 }
 
 interface Props extends ContainerProps {
-  fullbleed?: boolean;
-  fullbleedS?: boolean;
-  fullbleedM?: boolean;
-  fullbleedL?: boolean;
-  fullbleedXL?: boolean;
   as?: string;
   children?: ReactNode;
+  fullbleed?: boolean;
+  fullbleedL?: boolean;
+  fullbleedM?: boolean;
+  fullbleedS?: boolean;
+  fullbleedXL?: boolean;
 }
 
 function gridColumnProperty(value = 'start/end'): object {
@@ -45,6 +45,8 @@ function styledContainer(props: ContainerProps) {
   };
 }
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// @ts-ignore
 const Container = styled('div')<ContainerProps>(styledContainer);
 
 function GridItem(props: Props) {
@@ -65,19 +67,19 @@ function GridItem(props: Props) {
     gridColumnXL,
   } = props;
 
-  if (!!fullbleed) {
+  if (fullbleed) {
     gridColumn = 'wrapper-start/wrapper-end';
   }
-  if (!!fullbleedS) {
+  if (fullbleedS) {
     gridColumnS = 'wrapper-start/wrapper-end';
   }
-  if (!!fullbleedM) {
+  if (fullbleedM) {
     gridColumnM = 'wrapper-start/wrapper-end';
   }
-  if (!!fullbleedL) {
+  if (fullbleedL) {
     gridColumnL = 'wrapper-start/wrapper-end';
   }
-  if (!!fullbleedXL) {
+  if (fullbleedXL) {
     gridColumnXL = 'wrapper-start/wrapper-end';
   }
 

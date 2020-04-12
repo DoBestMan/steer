@@ -2,9 +2,9 @@ import { stringSlashString } from '~/utils/regex';
 
 interface Props {
   gridColumn: string;
-  gridColumnS?: string;
-  gridColumnM?: string;
   gridColumnL?: string;
+  gridColumnM?: string;
+  gridColumnS?: string;
   gridColumnXL?: string;
 }
 

@@ -13,7 +13,7 @@ export const styles = {
     height: '100%',
   }),
   item: css({
-    backgroundColor: `rgba(255, 0, 0, 0.2)`,
+    backgroundColor: 'rgba(255, 0, 0, 0.2)',
     height: '100%',
   }),
 };

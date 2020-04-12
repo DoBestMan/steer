@@ -1,10 +1,9 @@
-import React from 'react';
+import { styles } from './styleguide.styles';
 
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 
 import { typography } from '~/styles/global/typography.styles';
-import { styles } from './styleguide.styles';
 
 function Styleguide() {
   return (

@@ -1,9 +1,10 @@
-import React, { ReactNode, ReactType } from 'react';
+import { ReactNode, ReactType } from 'react';
+
 import { styles } from './Grid.styles';
 
 interface Props {
-  children: ReactNode;
   as?: ReactType;
+  children: ReactNode;
 }
 
 function Grid({ as = 'div', children, ...rest }: Props) {

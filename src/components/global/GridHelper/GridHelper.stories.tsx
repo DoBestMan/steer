@@ -1,5 +1,6 @@
-import Layout from '~/components/global/Layout/Layout';
 import GridHelper from './GridHelper';
+
+import Layout from '~/components/global/Layout/Layout';
 
 export default {
   component: GridHelper,

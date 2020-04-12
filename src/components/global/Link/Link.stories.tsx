@@ -1,5 +1,6 @@
-import Link, { LinkSizes, LinkThemes } from './Link';
 import { text, select } from '@storybook/addon-knobs';
+
+import Link, { LinkSizes, LinkThemes } from './Link';
 
 export default {
   component: Link,

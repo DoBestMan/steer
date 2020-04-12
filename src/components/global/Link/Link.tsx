@@ -1,9 +1,10 @@
 import { ReactChild } from 'react';
 import NextLink from 'next/link';
 
+import { link } from './Link.styles';
+
 import { typography } from '~/styles/global/typography.styles';
 import { colors } from '~/styles/global/colors.styles';
-import { link } from './Link.styles';
 
 export enum LinkSizes {
   SMALL = 'small',
@@ -11,13 +12,13 @@ export enum LinkSizes {
 }
 
 export enum LinkThemes {
-  ORANGE = 'orange',
   BLACK = 'black',
+  ORANGE = 'orange',
 }
 
 export interface Props {
-  href: string;
   children: ReactChild;
+  href: string;
   size?: LinkSizes;
   theme?: LinkThemes;
 }

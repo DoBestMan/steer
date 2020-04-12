@@ -1,4 +1,5 @@
 import { css } from '@emotion/core';
+
 import { NB_COLUMNS, GAP_COLUMNS, GRID_MARGIN } from '~/styles/constants/grid';
 import { Breakpoint } from '~/styles/constants/breakpoints.types';
 import { MQ } from '~/styles/constants/breakpoints';

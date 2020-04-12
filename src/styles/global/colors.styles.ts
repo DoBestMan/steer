@@ -1,4 +1,5 @@
 import { css } from '@emotion/core';
+
 import { colors as colorConsts } from '~/styles/constants/colors';
 
 const colorCategoryKeys = Object.keys(colorConsts);
