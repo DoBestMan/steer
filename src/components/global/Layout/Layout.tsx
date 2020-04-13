@@ -1,17 +1,8 @@
 import { ReactChild } from 'react';
-import { css } from '@emotion/core';
+
+import styles from './Layout.styles';
 
 import GridHelper from '~/components/global/GridHelper/GridHelper';
-
-const styles = {
-  container: css({
-    width: '100vw',
-  }),
-  mainContent: css({
-    height: '100%',
-    minHeight: 700,
-  }),
-};
 
 interface Props {
   children: ReactChild;

@@ -15,7 +15,7 @@ const gridColumnByMQ = (mq: Breakpoint): object => {
   };
 };
 
-export const styles = {
+const styles = {
   container: css({
     display: 'grid',
     gridTemplateRows: 'auto',
@@ -35,3 +35,5 @@ export const styles = {
     },
   }),
 };
+
+export default styles;

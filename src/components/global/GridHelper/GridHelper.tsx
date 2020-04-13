@@ -1,4 +1,4 @@
-import { styles } from './GridHelper.styles';
+import styles from './GridHelper.styles';
 
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { useSearch } from '~/hooks/useSearch';

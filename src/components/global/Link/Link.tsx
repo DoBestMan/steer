@@ -1,7 +1,7 @@
 import { ReactChild } from 'react';
 import NextLink from 'next/link';
 
-import { link } from './Link.styles';
+import styles from './Link.styles';
 
 import { typography } from '~/styles/global/typography.styles';
 import { colors } from '~/styles/global/colors.styles';
@@ -32,7 +32,7 @@ function Link(props: Props) {
 
   return (
     <NextLink href={href}>
-      <a css={[link, textStyle, themeStyle]} {...props}>
+      <a css={[styles, textStyle, themeStyle]} {...props}>
         {children}
       </a>
     </NextLink>

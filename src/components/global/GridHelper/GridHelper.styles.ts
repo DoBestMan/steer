@@ -1,6 +1,6 @@
 import { css } from '@emotion/core';
 
-export const styles = {
+const styles = {
   container: css({
     height: '100%',
     left: 0,
@@ -17,3 +17,5 @@ export const styles = {
     height: '100%',
   }),
 };
+
+export default styles;

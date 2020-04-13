@@ -1,6 +1,6 @@
 import { ReactNode, ReactType } from 'react';
 
-import { styles } from './Grid.styles';
+import styles from './Grid.styles';
 
 interface Props {
   as?: ReactType;

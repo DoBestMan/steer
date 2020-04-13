@@ -1,5 +1,7 @@
+import ErrorPage from '~/components/pages/ErrorPage/ErrorPage';
+
 function NotFoundPage() {
-  return <h1>This is the 404 page</h1>;
+  return <ErrorPage />;
 }
 
 export default NotFoundPage;
