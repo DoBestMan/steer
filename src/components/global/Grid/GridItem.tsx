@@ -3,6 +3,8 @@ import styled from '@emotion/styled';
 
 import { validateColSpan } from './GridItem.utils';
 
+import { MQ } from '~/styles/constants/breakpoints';
+
 interface ContainerProps {
   gridColumn?: string;
   gridColumnL?: string;
@@ -38,10 +40,18 @@ function styledContainer(props: ContainerProps) {
 
   return {
     ...gridColumnProperty(gridColumn),
-    ...(gridColumnS && gridColumnProperty(gridColumnS)),
-    ...(gridColumnM && gridColumnProperty(gridColumnM)),
-    ...(gridColumnL && gridColumnProperty(gridColumnL)),
-    ...(gridColumnXL && gridColumnProperty(gridColumnXL)),
+    [MQ.S]: {
+      ...(gridColumnS && gridColumnProperty(gridColumnS)),
+    },
+    [MQ.M]: {
+      ...(gridColumnM && gridColumnProperty(gridColumnM)),
+    },
+    [MQ.L]: {
+      ...(gridColumnL && gridColumnProperty(gridColumnL)),
+    },
+    [MQ.XL]: {
+      ...(gridColumnXL && gridColumnProperty(gridColumnXL)),
+    },
   };
 }
 
