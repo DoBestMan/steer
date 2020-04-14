@@ -48,7 +48,9 @@ Then, make sure to run the correct version of node contained in `.nvmuse`.
 ```bash
 nvm use
 ```
+
 Windows users:
+
 ```bash
 type .\.nvmrc | %{$_ -replace "v",""} | %{nvm install $_}
 type .\.nvmrc | %{$_ -replace "v",""} | %{nvm use $_}
@@ -119,6 +121,14 @@ Run Storybook locally:
 ```
 yarn storybook
 ```
+
+## (Re)building the icon library
+
+We're generating and using an SVG Sprite in the application. If you need to add more icons, please:
+
+- add your SVG icon in `/src/assets/icons`. Make sure the filename is respecting the kebab-case format.
+- run `yarn generate-svg-sprite`.
+- You're all set, commit your change and voilà!
 
 ## Deploying
 
