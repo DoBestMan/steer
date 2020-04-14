@@ -3,6 +3,7 @@
 ## Documentation
 
 - [Contributing](./docs/CONTRIBUTING.md)
+- [Storybook](./docs/STORYBOOK.md)
 - [Testing](./docs/TESTING.md)
 
 ## Installation
