@@ -3,13 +3,16 @@ import { withKnobs } from '@storybook/addon-knobs';
 
 import { Global } from '@emotion/core';
 import { global } from '../src/styles/global/global.styles';
+import Layout from '../src/components/global/Layout/Layout'
 
 import './mockNextRouter';
 
 const withGlobal = (cb) => (
   <>
     <Global styles={global} />
-    {cb()}
+    <Layout>
+      {cb()}
+    </Layout>
   </>
 );
 
@@ -51,7 +54,6 @@ const customViewports = {
 addParameters({
   viewport: {
     viewports: customViewports,
-    defaultViewport: 'responsive',
   },
 });
 
