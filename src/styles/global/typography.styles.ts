@@ -11,7 +11,7 @@ export const typography = {
     letterSpacing: '-0.01em',
     lineHeight: 22 / 15, //'22px',
 
-    [MQ.M]: {
+    [MQ.XL]: {
       fontSize: '1.8rem',
       lineHeight: 25 / 18, //'25px',
     },
