@@ -6,10 +6,10 @@ interface Props {
 }
 
 function getIconSize(name: string): IconSize | null {
-  const key = Object.keys(ICONS).find((key) => ICONS[key] === name);
+  const key = Object.keys(ICONS).find((key) => ICONS[key as IconType] === name);
 
   if (key) {
-    return ICON_SIZES[key];
+    return ICON_SIZES[key as IconType];
   }
 
   return null;

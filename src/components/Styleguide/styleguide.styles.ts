@@ -1,14 +1,14 @@
 import { css } from '@emotion/core';
 
-import { colors } from '~/styles/constants/colors';
+import { COLORS } from '~/lib/constants';
 
 export const styles = {
   containerFullbleed: css({
-    backgroundColor: colors.light.gray70,
-    color: colors.global.white,
+    backgroundColor: COLORS.LIGHT.GRAY_70,
+    color: COLORS.GLOBAL.WHITE,
     padding: 50,
   }),
   containerText: css({
-    backgroundColor: colors.light.offWhite,
+    backgroundColor: COLORS.LIGHT.OFF_WHITE,
   }),
 };

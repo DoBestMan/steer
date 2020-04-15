@@ -3,13 +3,13 @@ import { css } from '@emotion/core';
 
 import Markdown from './Markdown';
 
-import { colors } from '~/styles/constants/colors';
+import { COLORS } from '~/lib/constants';
 import { typography } from '~/styles/global/typography.styles';
 
 const styles = {
   headline: css({
     strong: {
-      color: colors.global.orange,
+      color: COLORS.GLOBAL.ORANGE,
       fontWeight: 'inherit',
     },
   }),

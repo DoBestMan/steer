@@ -28,7 +28,7 @@ function Link(props: Props) {
 
   const textStyle =
     size === LinkSizes.SMALL ? typography.ctaSmall : typography.cta;
-  const themeStyle = theme === LinkThemes.ORANGE ? colors.global.orange : '';
+  const themeStyle = theme === LinkThemes.ORANGE ? colors.GLOBAL.ORANGE : '';
 
   return (
     <NextLink href={href}>

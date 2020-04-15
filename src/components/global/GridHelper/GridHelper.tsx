@@ -3,7 +3,7 @@ import styles from './GridHelper.styles';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { useSearch } from '~/hooks/useSearch';
 
-import { NB_COLUMNS } from '~/styles/constants/grid';
+import { NB_COLUMNS } from '~/lib/constants';
 
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';

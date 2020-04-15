@@ -1,6 +1,6 @@
 import { css } from '@emotion/core';
 
-import { MQ } from '~/styles/constants/breakpoints';
+import { MQ } from '~/lib/constants';
 
 export const typography = {
   bodyCopy: css({

@@ -17,7 +17,7 @@ export const BREAKPOINTS: Record<Breakpoint, number> = {
 };
 
 // Generates an object such as
-// { SMALL: `min-width: ${BREAKPOINTS.SMALL}px`, ... }
+// { SMALL: `min-width: ${Breakpoints.SMALL}px`, ... }
 export const MQ = Object.fromEntries(
   new Map(
     Object.entries(BREAKPOINTS).map(([mq, value]) => [

@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 
 import { validateColSpan } from './GridItem.utils';
 
-import { MQ } from '~/styles/constants/breakpoints';
+import { MQ } from '~/lib/constants';
 
 interface ContainerProps {
   gridColumn?: string;
