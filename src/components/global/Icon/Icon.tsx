@@ -1,7 +1,10 @@
 import { Icon as IconType, IconSize } from './Icon.types';
 import { ICONS, ICON_SIZES } from './Icon.constants';
 
+import { COLORS } from '~/lib/constants';
+
 interface Props {
+  fill?: string;
   name: IconType;
 }
 
@@ -15,7 +18,7 @@ function getIconSize(name: string): IconSize | null {
   return null;
 }
 
-function Icon({ name, ...rest }: Props) {
+function Icon({ fill, name, ...rest }: Props) {
   const size = getIconSize(name);
 
   if (!size) {
@@ -25,7 +28,12 @@ function Icon({ name, ...rest }: Props) {
 
   return (
     <span {...rest}>
-      <svg viewBox={`0 0 ${size.w} ${size.h}`} width={size.w} height={size.h}>
+      <svg
+        fill={fill || COLORS.GLOBAL.BLACK}
+        viewBox={`0 0 ${size.w} ${size.h}`}
+        width={size.w}
+        height={size.h}
+      >
         <use xlinkHref={`#steer--${name}`}></use>
       </svg>
     </span>
