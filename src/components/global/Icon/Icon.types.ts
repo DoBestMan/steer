@@ -18,10 +18,12 @@ export type Icon =
   | 'instagram'
   | 'linkedin'
   | 'location'
+  | 'mail'
   | 'main-search-l'
   | 'main-search-m'
   | 'main-search-s'
   | 'menu'
+  | 'phone'
   | 'search'
   | 'twitter'
   | 'youtube';
