@@ -49,8 +49,9 @@ export const footerLink = [
   colors.LIGHT.GRAY_70,
   typography.bodyCopy,
   css({
-    [MQ.XL]: typography.smallCopy,
     '&:hover': colors.GLOBAL.BLACK,
+    display: 'inline-block',
+    [MQ.XL]: typography.smallCopy,
   }),
 ];
 

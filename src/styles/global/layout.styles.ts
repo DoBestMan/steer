@@ -20,10 +20,14 @@ export const layout = {
     justifyContent: 'space-between',
   }),
   container: css({
-    flex: 1,
+    display: 'flex',
+  }),
+  horizontalContainer: css({
+    display: 'flex',
+    flexDirection: 'row',
   }),
   verticalContainer: css({
-    flex: 1,
+    display: 'flex',
     flexDirection: 'column',
   }),
 };
