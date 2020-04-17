@@ -50,7 +50,7 @@ export const typography = {
     lineHeight: 15 / 12, // '15px',
     textTransform: 'uppercase',
 
-    [MQ.M]: {
+    [MQ.XL]: {
       fontSize: '1.5rem',
       letterSpacing: '-0.01em',
       lineHeight: 20 / 15, // 20px',
@@ -70,7 +70,7 @@ export const typography = {
       lineHeight: 60 / 60, // '60px',
     },
 
-    [MQ.L]: {
+    [MQ.XL]: {
       fontSize: '8.0rem',
       lineHeight: 75 / 80, // '75px',
     },
@@ -88,7 +88,7 @@ export const typography = {
       lineHeight: 40 / 35, // 40px',
     },
 
-    [MQ.L]: {
+    [MQ.XL]: {
       fontSize: '4.0rem',
       lineHeight: 45 / 40, // '45px',
     },
@@ -102,11 +102,11 @@ export const typography = {
     lineHeight: 25 / 20, // '25px',
 
     [MQ.M]: {
-      fontSize: '2.4rem',
-      lineHeight: 30 / 24, // '30px',
+      fontSize: '2.5rem',
+      lineHeight: 30 / 25, // '30px',
     },
 
-    [MQ.L]: {
+    [MQ.XL]: {
       fontSize: '2.8rem',
       lineHeight: 30 / 28, // '30px',
     },
@@ -119,7 +119,7 @@ export const typography = {
     letterSpacing: '-0.01em',
     lineHeight: 20 / 12, // '20px',
 
-    [MQ.M]: {
+    [MQ.XL]: {
       fontSize: '1.5rem',
       letterSpacing: '-0.01em',
       lineHeight: 22 / 15, // '22px',
@@ -130,9 +130,9 @@ export const typography = {
     fontSize: '1.2rem',
     fontStyle: 'normal',
     fontWeight: 'bold',
-    lineHeight: 5 / 12, // '5px',
+    lineHeight: 15 / 12, // '15px',
 
-    [MQ.M]: {
+    [MQ.XL]: {
       fontSize: '1.5rem',
       letterSpacing: '-0.01em',
       lineHeight: 20 / 15, // '20px',
@@ -140,13 +140,13 @@ export const typography = {
   }),
   tertiaryHeadline: css({
     fontFamily: 'Circular Std',
-    fontSize: '1.4rem',
+    fontSize: '1.5rem',
     fontStyle: 'normal',
     fontWeight: 'bold',
     letterSpacing: '-0.01em',
-    lineHeight: 20 / 14, // '20px',
+    lineHeight: 20 / 15, // '20px',
 
-    [MQ.M]: {
+    [MQ.XL]: {
       fontSize: '1.8rem',
       lineHeight: 25 / 18, // '25px',
     },
