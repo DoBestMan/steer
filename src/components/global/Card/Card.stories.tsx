@@ -3,12 +3,14 @@ import { css } from '@emotion/core';
 
 import Card from './Card';
 
-import { SPACING } from '~/lib/constants';
+import ListCard from './ListCard';
+
+import { SPACING, Image as ImageType } from '~/lib/constants';
 
 import { ICONS } from '~/components/global/Icon/Icon.constants';
-import Layout from '~/components/global/Layout/Layout';
 
 import { backgroundColors } from '~/styles/global/colors.styles';
+import { IconOrImageProps } from '~/components/global/IconOrImage/IconOrImage';
 
 export default {
   component: Card,
@@ -26,11 +28,7 @@ const styles = {
 };
 
 function CardContainer({ children }: { children: React.ReactChild }) {
-  return (
-    <div css={styles.root}>
-      <Layout>{children}</Layout>
-    </div>
-  );
+  return <div css={styles.root}>{children}</div>;
 }
 
 export function CardWithKnobs() {
@@ -79,6 +77,58 @@ export function CardWithIcon() {
         decorator={ICONS.ICON_WHEEL}
         description="Most drivers select tires that last between more than 50,000 miles."
         title="Drivers prioritize tires with long durability."
+      />
+    </CardContainer>
+  );
+}
+
+const mockImagePlaceholder = {
+  altText: '25x25 image',
+  srcSet: 'https://via.placeholder.com/25',
+  type: ImageType.BITMAP,
+} as IconOrImageProps;
+
+const mockSvg = {
+  svgId: ICONS.RV,
+  type: ImageType.SVG,
+} as IconOrImageProps;
+
+const mockListItems = [
+  {
+    href: '/',
+    image: mockImagePlaceholder,
+    label: text('List Item 1 Text', 'Passenger'),
+  },
+  {
+    href: '/',
+    image: mockImagePlaceholder,
+    label: text('List Item 2 Text', 'Light trucks'),
+  },
+  {
+    href: '/',
+    image: mockImagePlaceholder,
+    label: text('List Item 3 Text', 'Farm & Agriculture'),
+  },
+  {
+    href: '/',
+    image: mockImagePlaceholder,
+    label: text('List Item 4 Text', 'Specialty'),
+  },
+  {
+    href: '/',
+    image: mockSvg,
+    label: text('List Item 5 Text', 'RV'),
+  },
+];
+
+export function CardWithList() {
+  return (
+    <CardContainer>
+      <ListCard
+        title="Find any tire."
+        listItems={mockListItems}
+        cta="See more"
+        ctaLink="/"
       />
     </CardContainer>
   );

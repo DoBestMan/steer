@@ -15,9 +15,9 @@ interface ImageProps {
   type: ImageType.BITMAP;
 }
 
-type Props = IconProps | ImageProps;
+export type IconOrImageProps = IconProps | ImageProps;
 
-function IconOrImage(props: Props) {
+function IconOrImage(props: IconOrImageProps) {
   if (props.type === ImageType.SVG) {
     const { svgId, type: _type, ...rest } = props;
     return <Icon name={svgId} {...rest} />;

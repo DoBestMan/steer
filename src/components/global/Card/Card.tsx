@@ -64,9 +64,8 @@ function Card({
           )}
           <p css={styles.title}>{title}</p>
           <p css={styles.description}>{description}</p>
-          <Link href={ctaLink}>
-            <span css={styles.link}>{cta}</span>
-            <Icon name={ICONS.CHEVRON_RIGHT_SM} fill={COLORS.DARK.GRAY_40} />
+          <Link href={ctaLink} icon={ICONS.CHEVRON_RIGHT}>
+            {cta}
           </Link>
         </GridItem>
       </GridItem>

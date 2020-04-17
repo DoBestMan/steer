@@ -11,7 +11,6 @@ export type Icon =
   | 'chevron-down'
   | 'chevron-left'
   | 'chevron-right'
-  | 'chevron-right-sm'
   | 'chevron-up'
   | 'clear-search'
   | 'close'
@@ -26,6 +25,7 @@ export type Icon =
   | 'main-search-s'
   | 'menu'
   | 'phone'
+  | 'rv'
   | 'search'
   | 'twitter'
   | 'youtube';

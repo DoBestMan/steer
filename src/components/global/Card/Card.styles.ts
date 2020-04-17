@@ -22,23 +22,22 @@ const styles = {
       },
     }),
   ],
-  description: [typography.bodyCopy, colors.DARK.GRAY_40],
+  description: [
+    typography.bodyCopy,
+    colors.DARK.GRAY_40,
+    css({
+      marginBottom: SPACING.SIZE_40,
+    }),
+  ],
   eyebrow: [typography.secondaryHeadline, colors.GLOBAL.ORANGE],
   eyebrowIcon: css({
     paddingLeft: 8,
   }),
-  link: [
-    typography.bodyCopy,
-    colors.DARK.GRAY_40,
-    css({
-      marginRight: 6,
-    }),
-  ],
   root: [
     backgroundColors.DARK.GRAY_90,
     typography.jumboHeadline,
     css({
-      borderRadius: RADIUS.CIRCLE,
+      borderRadius: RADIUS.RADIUS_15,
 
       [MQ.S]: {
         padding: SPACING.SIZE_40,
