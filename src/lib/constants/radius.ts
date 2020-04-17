@@ -1,4 +1,5 @@
 export const RADIUS = {
   CIRCLE: '50%',
-  ROUNDED: '15px',
+  RADIUS_15: '15px',
+  RADIUS_5: '5px',
 };

@@ -38,7 +38,7 @@ const styles = {
     backgroundColors.DARK.GRAY_90,
     typography.jumboHeadline,
     css({
-      borderRadius: RADIUS.ROUNDED,
+      borderRadius: RADIUS.CIRCLE,
 
       [MQ.S]: {
         padding: SPACING.SIZE_40,
