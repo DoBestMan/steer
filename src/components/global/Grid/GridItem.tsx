@@ -4,8 +4,8 @@ import styled from '@emotion/styled';
 import { validateColSpan } from './GridItem.utils';
 
 import {
-  BREAKPOINT_SIZES,
   Breakpoint,
+  BREAKPOINT_SIZES,
   GAP_COLUMNS,
   MQ,
   NB_COLUMNS,

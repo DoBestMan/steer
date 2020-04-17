@@ -1,4 +1,4 @@
-import { ReactChild } from 'react';
+import { ReactNode } from 'react';
 import NextLink from 'next/link';
 
 import styles from './Link.styles';
@@ -17,7 +17,7 @@ export enum LinkThemes {
 }
 
 export interface Props {
-  children: ReactChild;
+  children: ReactNode;
   href: string;
   size?: LinkSizes;
   theme?: LinkThemes;
@@ -32,7 +32,7 @@ function Link(props: Props) {
 
   return (
     <NextLink href={href}>
-      <a css={[styles, textStyle, themeStyle]} {...props}>
+      <a css={[styles.root, textStyle, themeStyle]} {...props}>
         {children}
       </a>
     </NextLink>
