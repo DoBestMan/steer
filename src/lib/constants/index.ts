@@ -6,5 +6,6 @@ export * from './grid';
 export * from './image.types';
 export * from './links';
 export * from './radius';
+export * from './routes';
 export * from './spacing';
 export * from './time';
