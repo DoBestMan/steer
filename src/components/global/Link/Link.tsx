@@ -4,7 +4,12 @@ import styles from './Link.styles';
 
 import BaseLink from './BaseLink';
 
-import { LSize, LTheme, LWeight } from '~/lib/constants';
+import {
+  LinkIconPosition,
+  LinkSize,
+  LinkTheme,
+  LinkWeight,
+} from '~/lib/constants';
 import { Icon as IconType } from '~/components/global/Icon/Icon.types';
 import Icon from '~/components/global/Icon/Icon';
 
@@ -12,28 +17,34 @@ export interface LinkProps {
   children: ReactNode;
   href: string;
   icon?: IconType;
-  size?: LSize;
-  theme?: LTheme;
-  weight?: LWeight;
+  iconPosition?: LinkIconPosition;
+  size?: LinkSize;
+  theme?: LinkTheme;
+  weight?: LinkWeight;
 }
 
 function Link({
   children,
   href,
   icon,
-  size = LSize.REG,
-  theme = LTheme.DARK,
-  weight = LWeight.NORMAL,
+  iconPosition = LinkIconPosition.RIGHT,
+  size = LinkSize.REG,
+  theme = LinkTheme.DARK,
+  weight = LinkWeight.NORMAL,
   ...rest
 }: LinkProps) {
+  const inlineIcon = icon && (
+    <Icon fill="currentColor" name={icon} css={styles[iconPosition]} />
+  );
   return (
     <BaseLink
       href={href}
       css={[styles.root, styles[theme], styles[size], styles[weight]]}
       {...rest}
     >
+      {iconPosition === LinkIconPosition.LEFT && inlineIcon}
       <span css={styles.link}>{children}</span>
-      {icon && <Icon fill="currentColor" name={icon} css={styles.icon} />}
+      {iconPosition === LinkIconPosition.RIGHT && inlineIcon}
     </BaseLink>
   );
 }
