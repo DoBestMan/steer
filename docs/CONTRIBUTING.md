@@ -2,9 +2,37 @@
 
 ## Naming Commits and Branches
 
-This project follows the standards established by [Conventional Commits](https://www.conventionalcommits.org).
-
 Create branches off our development branch, `dev`. Include a summary of the feature in addition to the JIRA ticket (formatted in caps). Ex: `add-buttons-WCS-123`
+
+Guidelines for commit messages:
+
+- Use active voice
+- Include JIRA ticket number in brackets
+- If you Squash and Merge your PR, be sure that the final commit has the PR number in the title (GitHub will automatically do this for you):
+
+```
+[WCS-123] Implement PDP header (#456)
+```
+
+- If you Rebase and Merge your PR, each commit should follow proper formatting:
+
+```
+[WCS-789] Define Catalog endpoints
+[WCS-789] Wire up Catalog container
+[WCS-789] Implement Catalog page styles
+```
+
+## Merging PRs
+
+Please choose one of the following methods when merging your PRs:
+
+1. [Squash and Merge](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-request-merges#squash-and-merge-your-pull-request-commits)
+Good if code can be collapsed into one meaningful commit.
+
+2. [Rebase and Merge](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-request-merges#rebase-and-merge-your-pull-request-commits)
+Good if all commits will be valuable in the git history.
+
+The current configuration will automatically delete the branch upon merging but if this fails, delete the branch manually.
 
 ### Branching off branches
 
@@ -15,13 +43,10 @@ If the base branch is still an open PR when you're done with your work, you may 
 ## Submitting PRs
 
 - Prefer small PRs to make code easier to review and get merged
-- Use **human readable** titles on PRs, including JIRA tickets:
+- Use **human readable** titles on PRs, including JIRA tickets numbers:
 
-```diff
--docs(readme): setup
-+[WCS-123] Setup readme file
--chore: bump
-+[WCS-456] Bump up `foo` to version `1.1.0`
+```
+[WCS-123] Setup readme file
 ```
 
 - Give detailed description of what your PR addresses; use images, links, or videos to provide context
@@ -47,15 +72,3 @@ If the base branch is still an open PR when you're done with your work, you may 
   Does not count as an approval, but adds comments or questions the author can address at their discretion.
 
 - For optional comments on change requests, start them with hints such as "_(optional)_", "_(minor)_", or "_(nit)_" to indicate their intent.
-
-## Merging PRs
-
-Please choose one of the following methods when merging your PRs:
-
-1. [Squash and Merge](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-request-merges#squash-and-merge-your-pull-request-commits)
-Good if code can be collapsed into one meaningful commit.
-
-2. [Rebase and Merge](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-request-merges#rebase-and-merge-your-pull-request-commits)
-Good if all commits will be valuable in the git history.
-
-After a PR is merged, delete the branch.
