@@ -10,10 +10,10 @@ import NavLink from './NavLink';
 import IconCTA from './IconCTA';
 
 import {
-  LinkIconPosition,
-  LinkSize,
-  LinkTheme,
-  LinkWeight,
+  LINK_ICON_POSITION,
+  LINK_SIZE,
+  LINK_THEME,
+  LINK_WEIGHT,
 } from '~/lib/constants';
 import { backgroundColors } from '~/styles/global/colors.styles';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
@@ -34,13 +34,13 @@ function LinkContainer({
   children,
 }: {
   children: ReactChild;
-  theme: LinkTheme;
+  theme: LINK_THEME;
 }) {
   return (
     <div
       css={[
         styles.root,
-        theme === LinkTheme.DARK
+        theme === LINK_THEME.DARK
           ? backgroundColors.GLOBAL.BLACK
           : backgroundColors.GLOBAL.WHITE,
       ]}
@@ -51,23 +51,23 @@ function LinkContainer({
 }
 
 export function LightLinkWithKnobs() {
-  const size = select('Size', [LinkSize.SM, LinkSize.REG], LinkSize.REG);
+  const size = select('Size', [LINK_SIZE.SM, LINK_SIZE.REG], LINK_SIZE.REG);
   const weight = select(
     'Weight',
-    [LinkWeight.NORMAL, LinkWeight.BOLD],
-    LinkWeight.NORMAL,
+    [LINK_WEIGHT.NORMAL, LINK_WEIGHT.BOLD],
+    LINK_WEIGHT.NORMAL,
   );
   const icon = select('Icon Name', ICONS, ICONS.CHEVRON_RIGHT);
   const iconPosition = select(
     'Icon Position',
-    [LinkIconPosition.LEFT, LinkIconPosition.RIGHT],
-    LinkIconPosition.RIGHT,
+    [LINK_ICON_POSITION.LEFT, LINK_ICON_POSITION.RIGHT],
+    LINK_ICON_POSITION.RIGHT,
   );
   return (
-    <LinkContainer theme={LinkTheme.LIGHT}>
+    <LinkContainer theme={LINK_THEME.LIGHT}>
       <Link
         href="/"
-        theme={LinkTheme.LIGHT}
+        theme={LINK_THEME.LIGHT}
         {...{ icon, iconPosition, size, weight }}
       >
         {text('Link Text', 'Link Example')}
@@ -78,8 +78,8 @@ export function LightLinkWithKnobs() {
 
 export function LightLinkRegular() {
   return (
-    <LinkContainer theme={LinkTheme.LIGHT}>
-      <Link href="/" theme={LinkTheme.LIGHT}>
+    <LinkContainer theme={LINK_THEME.LIGHT}>
+      <Link href="/" theme={LINK_THEME.LIGHT}>
         Link Example
       </Link>
     </LinkContainer>
@@ -88,8 +88,8 @@ export function LightLinkRegular() {
 
 export function LightLinkBold() {
   return (
-    <LinkContainer theme={LinkTheme.LIGHT}>
-      <Link href="/" theme={LinkTheme.LIGHT} weight={LinkWeight.BOLD}>
+    <LinkContainer theme={LINK_THEME.LIGHT}>
+      <Link href="/" theme={LINK_THEME.LIGHT} weight={LINK_WEIGHT.BOLD}>
         Link Example
       </Link>
     </LinkContainer>
@@ -98,8 +98,8 @@ export function LightLinkBold() {
 
 export function LightLinkRegularSmall() {
   return (
-    <LinkContainer theme={LinkTheme.LIGHT}>
-      <Link href="/" size={LinkSize.SM} theme={LinkTheme.LIGHT}>
+    <LinkContainer theme={LINK_THEME.LIGHT}>
+      <Link href="/" size={LINK_SIZE.SM} theme={LINK_THEME.LIGHT}>
         Link Example
       </Link>
     </LinkContainer>
@@ -108,12 +108,12 @@ export function LightLinkRegularSmall() {
 
 export function LightLinkBoldSmall() {
   return (
-    <LinkContainer theme={LinkTheme.LIGHT}>
+    <LinkContainer theme={LINK_THEME.LIGHT}>
       <Link
         href="/"
-        theme={LinkTheme.LIGHT}
-        size={LinkSize.SM}
-        weight={LinkWeight.BOLD}
+        theme={LINK_THEME.LIGHT}
+        size={LINK_SIZE.SM}
+        weight={LINK_WEIGHT.BOLD}
       >
         Link Example
       </Link>
@@ -123,8 +123,8 @@ export function LightLinkBoldSmall() {
 
 export function LightLinkInlineIconRight() {
   return (
-    <LinkContainer theme={LinkTheme.LIGHT}>
-      <Link href="/" theme={LinkTheme.LIGHT} icon={ICONS.CHEVRON_RIGHT}>
+    <LinkContainer theme={LINK_THEME.LIGHT}>
+      <Link href="/" theme={LINK_THEME.LIGHT} icon={ICONS.CHEVRON_RIGHT}>
         Link Example
       </Link>
     </LinkContainer>
@@ -133,11 +133,11 @@ export function LightLinkInlineIconRight() {
 
 export function LightLinkInlineIconLeft() {
   return (
-    <LinkContainer theme={LinkTheme.LIGHT}>
+    <LinkContainer theme={LINK_THEME.LIGHT}>
       <Link
         href="/"
-        theme={LinkTheme.LIGHT}
-        iconPosition={LinkIconPosition.LEFT}
+        theme={LINK_THEME.LIGHT}
+        iconPosition={LINK_ICON_POSITION.LEFT}
         icon={ICONS.YOUTUBE}
       >
         Link Example
@@ -147,20 +147,20 @@ export function LightLinkInlineIconLeft() {
 }
 
 export function DarkLinkWithKnobs() {
-  const size = select('Size', [LinkSize.SM, LinkSize.REG], LinkSize.REG);
+  const size = select('Size', [LINK_SIZE.SM, LINK_SIZE.REG], LINK_SIZE.REG);
   const weight = select(
     'Weight',
-    [LinkWeight.NORMAL, LinkWeight.BOLD],
-    LinkWeight.NORMAL,
+    [LINK_WEIGHT.NORMAL, LINK_WEIGHT.BOLD],
+    LINK_WEIGHT.NORMAL,
   );
   const icon = select('Icon Name', ICONS, ICONS.CHEVRON_RIGHT);
   const iconPosition = select(
     'Icon Position',
-    [LinkIconPosition.LEFT, LinkIconPosition.RIGHT],
-    LinkIconPosition.RIGHT,
+    [LINK_ICON_POSITION.LEFT, LINK_ICON_POSITION.RIGHT],
+    LINK_ICON_POSITION.RIGHT,
   );
   return (
-    <LinkContainer theme={LinkTheme.DARK}>
+    <LinkContainer theme={LINK_THEME.DARK}>
       <Link href="/" {...{ icon, iconPosition, size, weight }}>
         {text('Link Text', 'Link Example')}
       </Link>
@@ -169,8 +169,8 @@ export function DarkLinkWithKnobs() {
 }
 export function DarkLinkRegular() {
   return (
-    <LinkContainer theme={LinkTheme.DARK}>
-      <Link href="/" theme={LinkTheme.DARK}>
+    <LinkContainer theme={LINK_THEME.DARK}>
+      <Link href="/" theme={LINK_THEME.DARK}>
         Link Example
       </Link>
     </LinkContainer>
@@ -178,8 +178,8 @@ export function DarkLinkRegular() {
 }
 export function DarkLinkBold() {
   return (
-    <LinkContainer theme={LinkTheme.DARK}>
-      <Link href="/" theme={LinkTheme.DARK} weight={LinkWeight.BOLD}>
+    <LinkContainer theme={LINK_THEME.DARK}>
+      <Link href="/" theme={LINK_THEME.DARK} weight={LINK_WEIGHT.BOLD}>
         Link Example
       </Link>
     </LinkContainer>
@@ -188,8 +188,8 @@ export function DarkLinkBold() {
 
 export function DarkLinkRegularSmall() {
   return (
-    <LinkContainer theme={LinkTheme.DARK}>
-      <Link href="/" size={LinkSize.SM} theme={LinkTheme.DARK}>
+    <LinkContainer theme={LINK_THEME.DARK}>
+      <Link href="/" size={LINK_SIZE.SM} theme={LINK_THEME.DARK}>
         Link Example
       </Link>
     </LinkContainer>
@@ -198,12 +198,12 @@ export function DarkLinkRegularSmall() {
 
 export function DarkLinkBoldSmall() {
   return (
-    <LinkContainer theme={LinkTheme.DARK}>
+    <LinkContainer theme={LINK_THEME.DARK}>
       <Link
         href="/"
-        theme={LinkTheme.DARK}
-        size={LinkSize.SM}
-        weight={LinkWeight.BOLD}
+        theme={LINK_THEME.DARK}
+        size={LINK_SIZE.SM}
+        weight={LINK_WEIGHT.BOLD}
       >
         Link Example
       </Link>
@@ -213,7 +213,7 @@ export function DarkLinkBoldSmall() {
 
 export function DarkLinkInlineIconRight() {
   return (
-    <LinkContainer theme={LinkTheme.DARK}>
+    <LinkContainer theme={LINK_THEME.DARK}>
       <Link href="/" icon={ICONS.CHEVRON_RIGHT}>
         Link Example
       </Link>
@@ -223,8 +223,12 @@ export function DarkLinkInlineIconRight() {
 
 export function DarkLinkInlineIconLeft() {
   return (
-    <LinkContainer theme={LinkTheme.DARK}>
-      <Link href="/" iconPosition={LinkIconPosition.LEFT} icon={ICONS.YOUTUBE}>
+    <LinkContainer theme={LINK_THEME.DARK}>
+      <Link
+        href="/"
+        iconPosition={LINK_ICON_POSITION.LEFT}
+        icon={ICONS.YOUTUBE}
+      >
         Link Example
       </Link>
     </LinkContainer>
@@ -241,8 +245,8 @@ export function LinkNav() {
 
 export function IconCTALight() {
   return (
-    <LinkContainer theme={LinkTheme.LIGHT}>
-      <IconCTA theme={LinkTheme.LIGHT} icon={ICONS.PHONE} href="/">
+    <LinkContainer theme={LINK_THEME.LIGHT}>
+      <IconCTA theme={LINK_THEME.LIGHT} icon={ICONS.PHONE} href="/">
         Link Example
       </IconCTA>
     </LinkContainer>
@@ -251,7 +255,7 @@ export function IconCTALight() {
 
 export function IconCTADark() {
   return (
-    <LinkContainer theme={LinkTheme.DARK}>
+    <LinkContainer theme={LINK_THEME.DARK}>
       <IconCTA icon={ICONS.PHONE} href="/">
         Link Example
       </IconCTA>

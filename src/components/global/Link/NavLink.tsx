@@ -1,14 +1,14 @@
 import Link, { LinkProps } from './Link';
 import { navLink } from './Link.styles';
 
-import { LinkTheme, LinkWeight } from '~/lib/constants';
+import { LINK_THEME, LINK_WEIGHT } from '~/lib/constants';
 
 function NavLink({ children, ...rest }: LinkProps) {
   return (
     <Link
       {...rest}
-      weight={LinkWeight.BOLD}
-      theme={LinkTheme.LIGHT}
+      weight={LINK_WEIGHT.BOLD}
+      theme={LINK_THEME.LIGHT}
       css={navLink}
     >
       {children}

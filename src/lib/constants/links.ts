@@ -1,19 +1,19 @@
-export enum LinkIconPosition {
+export enum LINK_ICON_POSITION {
   LEFT = 'left',
   RIGHT = 'right',
 }
 
-export enum LinkSize {
+export enum LINK_SIZE {
   REG = 'regular',
   SM = 'small',
 }
 
-export enum LinkTheme {
+export enum LINK_THEME {
   DARK = 'dark',
   LIGHT = 'light',
 }
 
-export enum LinkWeight {
+export enum LINK_WEIGHT {
   BOLD = 'bold',
   NORMAL = 'normal',
 }

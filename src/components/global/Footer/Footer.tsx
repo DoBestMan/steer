@@ -11,7 +11,7 @@ import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 
 import { typography } from '~/styles/global/typography.styles';
-import { LinkTheme } from '~/lib/constants';
+import { LINK_THEME } from '~/lib/constants';
 
 export interface Props {
   isBusinessHours?: boolean;
@@ -46,7 +46,7 @@ function Footer(props: Props) {
       >
         <li css={styles.supportButton}>
           <IconCTA
-            theme={LinkTheme.LIGHT}
+            theme={LINK_THEME.LIGHT}
             icon="phone"
             href={supportContent.sales.action}
           >
@@ -55,7 +55,7 @@ function Footer(props: Props) {
         </li>
         <li css={styles.supportButton}>
           <IconCTA
-            theme={LinkTheme.LIGHT}
+            theme={LINK_THEME.LIGHT}
             icon="mail"
             href={supportContent.support.action}
           >

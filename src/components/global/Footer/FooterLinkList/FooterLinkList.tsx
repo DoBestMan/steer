@@ -1,7 +1,7 @@
 import styles from './FooterLinkList.styles';
 
 import Link from '~/components/global/Link/FooterLink';
-import { LinkSize } from '~/lib/constants';
+import { LINK_SIZE } from '~/lib/constants';
 
 interface Link {
   action: string;
@@ -22,7 +22,7 @@ function FooterLinkList(props: Props) {
         const { action, text } = item;
         return (
           <li css={styles.listItem} key={text}>
-            <Link size={LinkSize.SM} href={action}>
+            <Link size={LINK_SIZE.SM} href={action}>
               {text}
             </Link>
           </li>

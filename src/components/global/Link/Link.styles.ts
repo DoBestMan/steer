@@ -5,10 +5,10 @@ import { typography } from '~/styles/global/typography.styles';
 
 import {
   BORDERS,
-  LinkIconPosition,
-  LinkSize,
-  LinkTheme,
-  LinkWeight,
+  LINK_ICON_POSITION,
+  LINK_SIZE,
+  LINK_THEME,
+  LINK_WEIGHT,
   MQ,
   RADIUS,
   SPACING,
@@ -36,30 +36,30 @@ const styles = {
   }),
 
   // conditional styles
-  [LinkIconPosition.LEFT]: css({
+  [LINK_ICON_POSITION.LEFT]: css({
     paddingRight: 5,
   }),
-  [LinkIconPosition.RIGHT]: css({
+  [LINK_ICON_POSITION.RIGHT]: css({
     paddingLeft: 5,
   }),
-  [LinkTheme.DARK]: [
+  [LINK_THEME.DARK]: [
     colors.DARK.GRAY_40,
     css({
       '&:hover:not(:active)': colors.GLOBAL.WHITE,
     }),
   ],
-  [LinkTheme.LIGHT]: [
+  [LINK_THEME.LIGHT]: [
     colors.GLOBAL.BLACK,
     css({
       '&:active span, &:focus span': colors.LIGHT.GRAY_70,
     }),
   ],
-  [LinkSize.REG]: typography.bodyCopy,
-  [LinkSize.SM]: typography.smallCopy,
-  [LinkWeight.BOLD]: css({
+  [LINK_SIZE.REG]: typography.bodyCopy,
+  [LINK_SIZE.SM]: typography.smallCopy,
+  [LINK_WEIGHT.BOLD]: css({
     fontWeight: 'bold',
   }),
-  [LinkWeight.NORMAL]: css({
+  [LINK_WEIGHT.NORMAL]: css({
     fontWeight: 'normal',
   }),
 };

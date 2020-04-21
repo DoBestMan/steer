@@ -4,7 +4,7 @@ import styles, { iconCTA } from './Link.styles';
 
 import BaseLink from './BaseLink';
 
-import { LinkSize, LinkTheme, LinkWeight } from '~/lib/constants';
+import { LINK_SIZE, LINK_THEME, LINK_WEIGHT } from '~/lib/constants';
 import Icon from '~/components/global/Icon/Icon';
 import { Icon as IconType } from '~/components/global/Icon/Icon.types';
 
@@ -15,7 +15,7 @@ function IconLink({
   children,
   href,
   icon,
-  theme = LinkTheme.DARK,
+  theme = LINK_THEME.DARK,
   ...rest
 }: Props) {
   return (
@@ -25,8 +25,8 @@ function IconLink({
         css={[
           styles.root,
           styles[theme],
-          styles[LinkSize.REG],
-          styles[LinkWeight.BOLD],
+          styles[LINK_SIZE.REG],
+          styles[LINK_WEIGHT.BOLD],
         ]}
         {...rest}
       >
