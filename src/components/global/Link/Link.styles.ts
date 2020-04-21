@@ -4,6 +4,7 @@ import { colors, backgroundColors } from '~/styles/global/colors.styles';
 import { typography } from '~/styles/global/typography.styles';
 
 import {
+  BORDERS,
   LinkIconPosition,
   LinkSize,
   LinkTheme,
@@ -22,7 +23,7 @@ const CONSTANTS = {
 
 const styles = {
   link: css({
-    borderBottom: '2px dotted transparent',
+    borderBottom: BORDERS.DOTTED_TRANSPARENT_2PX,
     transition: `border-color ${TIME.MS100}ms ease`,
   }),
   root: css({

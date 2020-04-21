@@ -1,9 +1,6 @@
 import { css } from '@emotion/core';
 
-import { BORDERS } from '~/lib/constants/borders';
-import { SPACING } from '~/lib/constants/spacing';
-import { GAP_COLUMNS } from '~/lib/constants';
-import { MQ } from '~/lib/constants/breakpoints';
+import { BORDERS, GAP_COLUMNS, MQ, SPACING } from '~/lib/constants';
 
 export const borderTop = css({
   borderTop: BORDERS.SOLID_GRAY_20_1PX,

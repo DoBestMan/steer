@@ -1,5 +1,6 @@
 export * from './breakpoints.types';
 export * from './breakpoints';
+export * from './borders';
 export * from './colors';
 export * from './easing';
 export * from './grid';

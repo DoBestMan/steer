@@ -1,10 +1,10 @@
 import { css } from '@emotion/core';
 
-import { COLORS } from '~/lib/constants';
+import { BORDERS, COLORS } from '~/lib/constants';
 
 const styles = {
   container: css({
-    borderTop: `1px solid ${COLORS.DARK.GRAY_80}`,
+    borderTop: BORDERS.SOLID_GRAY_80_1PX,
     display: 'flex',
     justifyContent: 'space-between',
     padding: '45px 0',
