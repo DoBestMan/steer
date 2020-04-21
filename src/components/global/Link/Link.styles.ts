@@ -92,16 +92,32 @@ export const footerLink = [
   }),
 ];
 
-export const navLink = [
-  colors.LIGHT.GRAY_70,
-  typography.tertiaryHeadline,
-  css({
-    '&:hover span': colors.GLOBAL.BLACK,
+export const navLink = {
+  root: [
+    colors.LIGHT.GRAY_70,
+    typography.tertiaryHeadline,
+    css({
+      '&:hover span': colors.GLOBAL.BLACK,
 
-    // eslint-disable-next-line sort-keys
-    '&:active span, &:focus span': colors.GLOBAL.ORANGE,
-    [MQ.XL]: typography.tertiaryHeadline,
-  }),
-];
+      // eslint-disable-next-line sort-keys
+      '&:active span, &:focus span': colors.LIGHT.GRAY_70,
+      [MQ.XL]: typography.tertiaryHeadline,
+    }),
+  ],
+  selected: [
+    colors.GLOBAL.ORANGE,
+    typography.tertiaryHeadline,
+    css({
+      '&:hover, &:focus, &:active': {
+        span: colors.GLOBAL.ORANGE,
+      },
+      span: {
+        borderBottom: '2px dotted',
+        transition: `border-color ${TIME.MS100}ms ease`,
+      },
+      [MQ.XL]: typography.tertiaryHeadline,
+    }),
+  ],
+};
 
 export default styles;

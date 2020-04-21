@@ -243,6 +243,14 @@ export function LinkNav() {
   return <NavLink href="/">Link Example</NavLink>;
 }
 
+export function LinkNavActive() {
+  return (
+    <NavLink isActive href="/">
+      Link Example
+    </NavLink>
+  );
+}
+
 export function IconCTALight() {
   return (
     <LinkContainer theme={LINK_THEME.LIGHT}>

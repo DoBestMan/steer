@@ -3,13 +3,17 @@ import { navLink } from './Link.styles';
 
 import { LINK_THEME, LINK_WEIGHT } from '~/lib/constants';
 
-function NavLink({ children, ...rest }: LinkProps) {
+interface Props extends LinkProps {
+  isActive?: boolean;
+}
+
+function NavLink({ children, isActive = false, ...rest }: Props) {
   return (
     <Link
       {...rest}
       weight={LINK_WEIGHT.BOLD}
       theme={LINK_THEME.LIGHT}
-      css={navLink}
+      css={isActive ? navLink.selected : navLink.root}
     >
       {children}
     </Link>
