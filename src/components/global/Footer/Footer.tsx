@@ -10,7 +10,7 @@ import Image from '~/components/global/Image/Image';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 
-import { typography } from '~/styles/global/typography.styles';
+import { typography } from '~/styles/typography.styles';
 import { LINK_THEME } from '~/lib/constants';
 
 export interface Props {

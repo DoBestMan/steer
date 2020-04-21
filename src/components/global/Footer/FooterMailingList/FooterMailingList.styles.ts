@@ -1,7 +1,7 @@
 import { css } from '@emotion/core';
 
-import { typography } from '~/styles/global/typography.styles';
-import { colors } from '~/styles/global/colors.styles';
+import { typography } from '~/styles/typography.styles';
+import { colors } from '~/styles/colors.styles';
 
 import { SPACING } from '~/lib/constants/spacing';
 import { MQ } from '~/lib/constants/breakpoints';

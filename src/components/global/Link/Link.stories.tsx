@@ -15,7 +15,7 @@ import {
   LINK_THEME,
   LINK_WEIGHT,
 } from '~/lib/constants';
-import { backgroundColors } from '~/styles/global/colors.styles';
+import { backgroundColors } from '~/styles/colors.styles';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 
 export default {

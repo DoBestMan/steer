@@ -12,7 +12,7 @@ import GridItem from '~/components/global/Grid/GridItem';
 import Image from '~/components/global/Image/Image';
 import Markdown from '~/components/global/Markdown/Markdown';
 
-import { typography } from '~/styles/global/typography.styles';
+import { typography } from '~/styles/typography.styles';
 
 interface Props {
   body: string;

@@ -9,7 +9,7 @@ import { SPACING, Image as ImageType } from '~/lib/constants';
 
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 
-import { backgroundColors } from '~/styles/global/colors.styles';
+import { backgroundColors } from '~/styles/colors.styles';
 import { IconOrImageProps } from '~/components/global/IconOrImage/IconOrImage';
 
 export default {

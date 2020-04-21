@@ -4,15 +4,15 @@ import { COLORS } from '~/lib/constants/colors';
 import { SPACING } from '~/lib/constants/spacing';
 import { MQ } from '~/lib/constants/breakpoints';
 
-import { typography } from '~/styles/global/typography.styles';
-import { layout } from '~/styles/global/layout.styles';
+import { typography } from '~/styles/typography.styles';
+import { layout } from '~/styles/layout.styles';
 import {
   borderBottom,
   borderBottomWithGap,
   borderTop,
   borderTopWithGapAndSpacing,
   borderTopWithSpacing,
-} from '~/styles/utils/borders.styles';
+} from '~/styles/borders.styles';
 
 const CONSTANTS = {
   LOGO_SIZE: 130,

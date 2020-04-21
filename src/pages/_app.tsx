@@ -5,7 +5,7 @@ import { Global } from '@emotion/core';
 
 import Footer from '~/components/global/Footer/Footer';
 
-import { global } from '~/styles/global/global.styles';
+import { global } from '~/styles/document/global.styles';
 
 class MyApp extends App {
   render() {

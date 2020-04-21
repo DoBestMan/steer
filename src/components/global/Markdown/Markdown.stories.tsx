@@ -4,7 +4,7 @@ import { css } from '@emotion/core';
 import Markdown from './Markdown';
 
 import { COLORS } from '~/lib/constants';
-import { typography } from '~/styles/global/typography.styles';
+import { typography } from '~/styles/typography.styles';
 
 const styles = {
   headline: css({

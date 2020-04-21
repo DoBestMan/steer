@@ -5,7 +5,7 @@ import GridHelper from './GridHelper';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 
-import { typography } from '~/styles/global/typography.styles';
+import { typography } from '~/styles/typography.styles';
 import { MQ, SPACING } from '~/lib/constants';
 
 export default {

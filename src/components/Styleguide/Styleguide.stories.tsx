@@ -2,11 +2,11 @@ import { ReactChild } from 'react';
 
 import { styles } from './styleguide.styles';
 
-import { typography } from '~/styles/global/typography.styles';
+import { backgroundColors } from '~/styles/colors.styles';
+import { typography } from '~/styles/typography.styles';
 
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
-import { backgroundColors } from '~/styles/global/colors.styles';
 
 export default {
   title: 'Styleguide',

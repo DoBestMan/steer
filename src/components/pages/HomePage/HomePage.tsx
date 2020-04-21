@@ -1,6 +1,6 @@
 import Layout from '~/components/global/Layout/Layout';
 
-import { typography } from '~/styles/global/typography.styles';
+import { typography } from '~/styles/typography.styles';
 
 function HomePage() {
   return (

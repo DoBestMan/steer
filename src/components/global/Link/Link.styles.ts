@@ -1,7 +1,7 @@
 import { css } from '@emotion/core';
 
-import { colors, backgroundColors } from '~/styles/global/colors.styles';
-import { typography } from '~/styles/global/typography.styles';
+import { colors, backgroundColors } from '~/styles/colors.styles';
+import { typography } from '~/styles/typography.styles';
 
 import {
   BORDERS,

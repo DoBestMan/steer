@@ -9,7 +9,7 @@ import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import { Icon as IconType } from '~/components/global/Icon/Icon.types';
 
-import { typography } from '~/styles/global/typography.styles';
+import { typography } from '~/styles/typography.styles';
 
 export interface Props {
   cta: string;

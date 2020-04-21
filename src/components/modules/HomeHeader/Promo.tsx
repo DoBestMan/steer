@@ -1,6 +1,6 @@
 import styles from './Promo.styles';
 
-import { typography } from '~/styles/global/typography.styles';
+import { typography } from '~/styles/typography.styles';
 
 export interface PromoProps {
   countdownEnd: string | null;

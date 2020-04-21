@@ -1,4 +1,4 @@
-import { stringSlashString } from '~/utils/regex';
+import { stringSlashString } from '~/lib/constants/utils/regex';
 
 interface Props {
   gridColumn: string;

@@ -12,7 +12,7 @@ import { COLORS } from '~/lib/constants';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 
-import { typography } from '~/styles/global/typography.styles';
+import { typography } from '~/styles/typography.styles';
 
 export default {
   component: Icon,

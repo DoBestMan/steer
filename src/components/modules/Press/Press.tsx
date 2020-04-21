@@ -1,6 +1,6 @@
 import styles from './Press.styles';
 
-import { typography } from '~/styles/global/typography.styles';
+import { typography } from '~/styles/typography.styles';
 
 interface PressReviewProps {
   imageUrl: string;

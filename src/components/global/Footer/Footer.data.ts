@@ -1,5 +1,5 @@
 import { ICONS } from '~/components/global/Icon/Icon.constants';
-import { getCurrentYear } from '~/utils/date';
+import { getCurrentYear } from '~/lib/constants/utils/date';
 
 export const data = {
   company: {
