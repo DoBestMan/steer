@@ -4,19 +4,25 @@ import { COLORS, GRID_MARGIN, MQ, SPACING } from '~/lib/constants';
 
 const CONSTANTS = {
   CONTAINER_BG_BOTTOM: {
-    M: 50,
+    /* eslint-disable sort-keys */
     S: 20,
+    M: 50,
     XL: 25,
+    /* eslint-enable sort-keys */
   },
   CONTAINER_BG_HEIGHT: {
-    M: 175,
+    /* eslint-disable sort-keys */
     S: 106,
+    M: 175,
     XL: 206,
+    /* eslint-enable sort-keys */
   },
   VEHICLE_WIDTH: {
-    M: 223,
+    /* eslint-disable sort-keys */
     S: 128,
-    XL: 288,
+    M: 223,
+    L: 288,
+    /* eslint-enable sort-keys */
   },
 };
 
@@ -67,10 +73,10 @@ const styles = {
     },
     [MQ.L]: {
       right: GRID_MARGIN.L,
+      width: CONSTANTS.VEHICLE_WIDTH.L,
     },
     [MQ.XL]: {
       right: GRID_MARGIN.XL,
-      width: CONSTANTS.VEHICLE_WIDTH.XL,
     },
   }),
 };
