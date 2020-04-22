@@ -16,8 +16,6 @@ export const layout = {
   }),
   centeredVertical: css({
     alignItems: 'center',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
   }),
   container: css({
     display: 'flex',

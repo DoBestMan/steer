@@ -1,6 +1,6 @@
 import { css } from '@emotion/core';
 
-import { SPACING } from '~/lib/constants/spacing';
+import { SPACING } from '~/lib/constants';
 
 const styles = {
   listItem: css({

@@ -1,11 +1,12 @@
 import styles from './FooterLinkList.styles';
 
 import Link from '~/components/global/Link/FooterLink';
-import { LINK_SIZE } from '~/lib/constants';
+import { LINK_ICON_POSITION, LINK_SIZE } from '~/lib/constants';
+import { Icon } from '~/components/global/Icon/Icon.types';
 
 interface Link {
   action: string;
-  icon?: string;
+  icon?: Icon;
   text: string;
 }
 
@@ -19,10 +20,15 @@ function FooterLinkList(props: Props) {
   return (
     <ul>
       {links.map((item: Link) => {
-        const { action, text } = item;
+        const { action, icon, text } = item;
         return (
           <li css={styles.listItem} key={text}>
-            <Link size={LINK_SIZE.SM} href={action}>
+            <Link
+              href={action}
+              icon={icon}
+              iconPosition={LINK_ICON_POSITION.LEFT}
+              size={LINK_SIZE.SM}
+            >
               {text}
             </Link>
           </li>

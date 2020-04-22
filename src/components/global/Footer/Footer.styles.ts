@@ -118,7 +118,19 @@ const styles = {
         li: {
           display: 'inline',
           marginLeft: SPACING.SIZE_15,
+          'span:nth-of-type(1)': {
+            paddingRight: 0,
+            [MQ.XL]: {
+              paddingRight: SPACING.SIZE_15,
+            },
+          },
+          'span:nth-of-type(2)': {
+            display: 'none',
 
+            [MQ.XL]: {
+              display: 'block',
+            },
+          },
           [MQ.XL]: {
             display: 'block',
             marginLeft: 0,

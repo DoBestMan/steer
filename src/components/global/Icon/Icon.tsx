@@ -3,6 +3,8 @@ import { ICONS, ICON_SIZES } from './Icon.constants';
 
 import { COLORS } from '~/lib/constants';
 
+import { layout } from '~/styles/layout.styles';
+
 interface Props {
   fill?: string;
   name: IconType;
@@ -27,7 +29,7 @@ function Icon({ fill, name, ...rest }: Props) {
   }
 
   return (
-    <span {...rest}>
+    <span css={[layout.container, layout.centeredVertical]} {...rest}>
       <svg
         fill={fill || COLORS.GLOBAL.BLACK}
         viewBox={`0 0 ${size.w} ${size.h}`}

@@ -3,8 +3,6 @@ import Head from 'next/head';
 
 import { Global } from '@emotion/core';
 
-import Footer from '~/components/global/Footer/Footer';
-
 import { global } from '~/styles/document/global.styles';
 
 class MyApp extends App {
@@ -20,8 +18,6 @@ class MyApp extends App {
         <Global styles={global} />
 
         <Component {...pageProps} />
-
-        <Footer />
       </>
     );
   }

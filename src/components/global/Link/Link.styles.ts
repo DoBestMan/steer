@@ -1,19 +1,20 @@
 import { css } from '@emotion/core';
 
-import { colors, backgroundColors } from '~/styles/colors.styles';
-import { typography } from '~/styles/typography.styles';
-
 import {
   BORDERS,
   LINK_ICON_POSITION,
   LINK_SIZE,
   LINK_THEME,
   LINK_WEIGHT,
+  COLORS,
   MQ,
   RADIUS,
   SPACING,
   TIME,
 } from '~/lib/constants';
+
+import { colors, backgroundColors } from '~/styles/colors.styles';
+import { typography } from '~/styles/typography.styles';
 
 const CONSTANTS = {
   OPACITY_ACTIVE: 0.8,
@@ -37,7 +38,7 @@ const styles = {
 
   // conditional styles
   [LINK_ICON_POSITION.LEFT]: css({
-    paddingRight: 5,
+    paddingRight: SPACING.SIZE_15,
   }),
   [LINK_ICON_POSITION.RIGHT]: css({
     paddingLeft: 5,
@@ -86,8 +87,15 @@ export const footerLink = [
   colors.LIGHT.GRAY_70,
   typography.bodyCopy,
   css({
-    '&:hover': colors.GLOBAL.BLACK,
-    display: 'inline-block',
+    '&:hover span svg, &:focus span svg': {
+      fill: COLORS.GLOBAL.ORANGE,
+    },
+    '&:hover, &:focus': colors.GLOBAL.ORANGE,
+    'span svg': {
+      fill: COLORS.GLOBAL.BLACK,
+    },
+    // eslint-disable-next-line sort-keys
+    display: 'inline-flex',
     [MQ.XL]: typography.smallCopy,
   }),
 ];
