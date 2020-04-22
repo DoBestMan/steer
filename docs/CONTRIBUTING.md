@@ -27,10 +27,10 @@ Guidelines for commit messages:
 Please choose one of the following methods when merging your PRs:
 
 1. [Squash and Merge](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-request-merges#squash-and-merge-your-pull-request-commits)
-Good if code can be collapsed into one meaningful commit.
+   Good if code can be collapsed into one meaningful commit.
 
 2. [Rebase and Merge](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-request-merges#rebase-and-merge-your-pull-request-commits)
-Good if all commits will be valuable in the git history.
+   Good if all commits will be valuable in the git history.
 
 The current configuration will automatically delete the branch upon merging but if this fails, delete the branch manually.
 
@@ -54,9 +54,16 @@ If the base branch is still an open PR when you're done with your work, you may 
 - Assign all Work & Co developers as reviewers
 - When iterating on a feedback, use the "Resolve conversation" button to mark the item as complete
 - Use [granular commits](https://dev.to/wes/opening-a-pr-a-primer-4kgc#commits)
- to separate chunks of work to make code easier to review. It's especially important to isolate "noisy" changes like an extra div that adds indentation on every line of a component
+  to separate chunks of work to make code easier to review. It's especially important to isolate "noisy" changes like an extra div that adds indentation on every line of a component
 - Be explicit if your PR is a work-in-progress (use the `WIP` label)
 - Before assigning reviewers, add inline comments on your PR for areas of code where you're looking for particular feedback or that require extra explanation
+
+For all PRs that involve creating/updating stories, be sure to:
+
+- Include a link to the relevant ticket(s)
+- Include a link to the relevant story in Storybook (eg: https://`branch`.steer.now.sh/storybook/index.html?path=`path-to-the-story`)
+
+Also be sure to add links to QA branch (eg: https://qa.steer.now.sh/storybook/index.html?path=`path-to-the-story`) to our **Storybook tickets** to help QA.
 
 ## Giving Feedback
 
