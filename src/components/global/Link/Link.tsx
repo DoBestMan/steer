@@ -14,7 +14,7 @@ import { Icon as IconType } from '~/components/global/Icon/Icon.types';
 import Icon from '~/components/global/Icon/Icon';
 
 export interface LinkProps {
-  children: ReactNode;
+  children?: ReactNode;
   href: string;
   icon?: IconType;
   iconPosition?: LINK_ICON_POSITION;
@@ -34,7 +34,12 @@ function Link({
   ...rest
 }: LinkProps) {
   const inlineIcon = icon && (
-    <Icon fill="currentColor" name={icon} css={styles[iconPosition]} />
+    <Icon
+      aria-hidden={!!children}
+      fill="currentColor"
+      name={icon}
+      css={children && styles[iconPosition]}
+    />
   );
   return (
     <BaseLink
@@ -43,7 +48,7 @@ function Link({
       {...rest}
     >
       {iconPosition === LINK_ICON_POSITION.LEFT && inlineIcon}
-      <span css={styles.link}>{children}</span>
+      {children && <span css={styles.link}>{children}</span>}
       {iconPosition === LINK_ICON_POSITION.RIGHT && inlineIcon}
     </BaseLink>
   );

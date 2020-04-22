@@ -38,7 +38,7 @@ const styles = {
 
   // conditional styles
   [LINK_ICON_POSITION.LEFT]: css({
-    paddingRight: SPACING.SIZE_15,
+    paddingRight: SPACING.SIZE_10,
   }),
   [LINK_ICON_POSITION.RIGHT]: css({
     paddingLeft: 5,
