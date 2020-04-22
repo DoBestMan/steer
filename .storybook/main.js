@@ -9,6 +9,7 @@ module.exports = {
     '@storybook/addon-links',
     '@storybook/addon-viewport',
     '@storybook/preset-typescript',
+    '@storybook/addon-a11y/register',
   ],
   webpackFinal: async (config) => {
     // remove svg from existing rule
