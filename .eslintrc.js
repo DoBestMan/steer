@@ -41,6 +41,7 @@ module.exports = {
     'jest/prefer-inline-snapshots': 'error',
     'jest/no-identical-title': 'error',
     'jest/valid-expect': 'error',
+    'no-console': ['error', { allow: ['warn', 'error', 'info'] }],
     'no-duplicate-imports': 'error',
     'react/function-component-definition': [
       'error',

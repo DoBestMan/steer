@@ -21,7 +21,6 @@ export function validateColSpan(props: Props) {
     const isValid = colSpan && stringSlashString.test(colSpan);
 
     if (!isValid) {
-      // eslint-disable-next-line no-console
       console.info(
         `<GridItem /> : "${colSpan}" is not a valid value. Expected format: string/string`,
       );
