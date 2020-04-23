@@ -1,5 +1,5 @@
 import { ROUTE_MAP } from '~/lib/constants';
-import { absoluteLink, specialLink } from '~/lib/constants/utils/regex';
+import { absoluteLink, specialLink } from '~/lib/utils/regex';
 
 // Turn links into regular expressions we can use to match routes from the API
 const dynamicRouteRegexMap: Record<string, RegExp> = {};

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 import { useWindowSize } from '~/hooks/useWindowSize';
 
-import { getBreakpoint } from '~/lib/constants/utils/breakpoints';
+import { getBreakpoint } from '~/lib/utils/breakpoints';
 import { Breakpoint, BREAKPOINT_SIZES } from '~/lib/constants';
 
 export function useBreakpoints(): Breakpoint {

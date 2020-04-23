@@ -2,7 +2,6 @@ import styles from './Card.styles';
 
 import { COLORS } from '~/lib/constants';
 
-import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import Link from '~/components/global/Link/Link';
 import Icon from '~/components/global/Icon/Icon';
@@ -39,37 +38,35 @@ function Card({
   );
 
   return (
-    <Grid>
-      <GridItem
-        gridColumnS="2/5"
-        gridColumnM="2/5"
-        gridColumnL="2/7"
-        gridColumnXL="2/7"
-        isGrid
-        css={styles.root}
-      >
-        <GridItem gridColumnL="1/3" gridColumnXL="1/3">
-          <div css={styles.decorator}>{decoratorEl}</div>
-        </GridItem>
-        <GridItem gridColumnL="3/6" gridColumnXL="3/6">
-          {eyebrow && eyebrowIcon && (
-            <div css={styles.eyebrow}>
-              <span>Trending</span>
-              <Icon
-                fill={COLORS.GLOBAL.ORANGE}
-                name={eyebrowIcon}
-                css={styles.eyebrowIcon}
-              />
-            </div>
-          )}
-          <p css={styles.title}>{title}</p>
-          <p css={styles.description}>{description}</p>
-          <Link href={ctaLink} icon={ICONS.CHEVRON_RIGHT}>
-            {cta}
-          </Link>
-        </GridItem>
+    <GridItem
+      gridColumnS="2/5"
+      gridColumnM="2/5"
+      gridColumnL="2/7"
+      gridColumnXL="2/7"
+      isGrid
+      css={styles.root}
+    >
+      <GridItem gridColumnL="1/3" gridColumnXL="1/3">
+        <div css={styles.decorator}>{decoratorEl}</div>
       </GridItem>
-    </Grid>
+      <GridItem gridColumnL="3/6" gridColumnXL="3/6">
+        {eyebrow && eyebrowIcon && (
+          <div css={styles.eyebrow}>
+            <span>{eyebrow}</span>
+            <Icon
+              fill={COLORS.GLOBAL.ORANGE}
+              name={eyebrowIcon}
+              css={styles.eyebrowIcon}
+            />
+          </div>
+        )}
+        <p css={styles.title}>{title}</p>
+        <p css={styles.description}>{description}</p>
+        <Link href={ctaLink} icon={ICONS.CHEVRON_RIGHT}>
+          {cta}
+        </Link>
+      </GridItem>
+    </GridItem>
   );
 }
 

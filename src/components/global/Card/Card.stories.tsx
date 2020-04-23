@@ -8,6 +8,7 @@ import ListCard from './ListCard';
 import { SPACING, Image as ImageType } from '~/lib/constants';
 
 import { ICONS } from '~/components/global/Icon/Icon.constants';
+import Grid from '~/components/global/Grid/Grid';
 
 import { backgroundColors } from '~/styles/colors.styles';
 import { IconOrImageProps } from '~/components/global/IconOrImage/IconOrImage';
@@ -18,6 +19,9 @@ export default {
 };
 
 const styles = {
+  container: css({
+    height: '100%',
+  }),
   root: [
     backgroundColors.GLOBAL.BLACK,
     css({
@@ -28,7 +32,11 @@ const styles = {
 };
 
 function CardContainer({ children }: { children: React.ReactChild }) {
-  return <div css={styles.root}>{children}</div>;
+  return (
+    <div css={styles.root}>
+      <Grid css={styles.container}>{children}</Grid>
+    </div>
+  );
 }
 
 export function CardWithKnobs() {
@@ -93,41 +101,41 @@ const mockSvg = {
   type: ImageType.SVG,
 } as IconOrImageProps;
 
-const mockListItems = [
-  {
-    href: '/',
-    image: mockImagePlaceholder,
-    label: text('List Item 1 Text', 'Passenger'),
-  },
-  {
-    href: '/',
-    image: mockImagePlaceholder,
-    label: text('List Item 2 Text', 'Light trucks'),
-  },
-  {
-    href: '/',
-    image: mockImagePlaceholder,
-    label: text('List Item 3 Text', 'Farm & Agriculture'),
-  },
-  {
-    href: '/',
-    image: mockImagePlaceholder,
-    label: text('List Item 4 Text', 'Specialty'),
-  },
-  {
-    href: '/',
-    image: mockSvg,
-    label: text('List Item 5 Text', 'RV'),
-  },
-];
-
 export function CardWithList() {
+  const mockListItems = [
+    {
+      href: '/',
+      image: mockImagePlaceholder,
+      label: text('List Item 1 Text', 'Passenger'),
+    },
+    {
+      href: '/',
+      image: mockImagePlaceholder,
+      label: text('List Item 2 Text', 'Light trucks'),
+    },
+    {
+      href: '/',
+      image: mockImagePlaceholder,
+      label: text('List Item 3 Text', 'Farm & Agriculture'),
+    },
+    {
+      href: '/',
+      image: mockImagePlaceholder,
+      label: text('List Item 4 Text', 'Specialty'),
+    },
+    {
+      href: '/',
+      image: mockSvg,
+      label: text('List Item 5 Text', 'RV'),
+    },
+  ];
+
   return (
     <CardContainer>
       <ListCard
-        title="Find any tire."
+        title={text('Title', 'Find any tire.')}
         listItems={mockListItems}
-        cta="See more"
+        cta={text('CTA Text', 'See more')}
         ctaLink="/"
       />
     </CardContainer>
