@@ -2,20 +2,20 @@ import styles from './Press.styles';
 
 import { typography } from '~/styles/typography.styles';
 
-interface PressReviewProps {
+export interface PressReviewProps {
   imageUrl: string;
   name: string;
   quote: string;
 }
 
 interface Props {
-  reviews: PressReviewProps[];
+  pressReviews: PressReviewProps[];
 }
 
 function Press(props: Props) {
   return (
     <ul css={styles.container}>
-      {props.reviews.map((review) => (
+      {props.pressReviews.map((review) => (
         <li css={styles.item} key={review.name}>
           <img css={styles.logo} src={review.imageUrl} alt={review.name} />
           <div css={[styles.copy, typography.bodyCopy]}>{review.quote}</div>

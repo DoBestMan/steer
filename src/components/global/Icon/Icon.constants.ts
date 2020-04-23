@@ -10,6 +10,7 @@ export const ICONS: Record<string, Icon> = {
   ARROW_DOWN: 'arrow-down',
   ARROW_LEFT: 'arrow-left',
   ARROW_RIGHT: 'arrow-right',
+  CHECK_VERIFIED: 'check-verified',
   CHEVRON_DOWN: 'chevron-down',
   CHEVRON_LEFT: 'chevron-left',
   CHEVRON_RIGHT: 'chevron-right',
@@ -27,6 +28,7 @@ export const ICONS: Record<string, Icon> = {
   PHONE: 'phone',
   RV: 'rv',
   SEARCH: 'search',
+  STAR: 'star',
   TWITTER: 'twitter',
   YOUTUBE: 'youtube',
 };
@@ -37,6 +39,7 @@ export const ICON_SIZES: Record<string, IconSize> = {
   ARROW_DOWN: { h: 14, w: 12 },
   ARROW_LEFT: { h: 12, w: 14 },
   ARROW_RIGHT: { h: 12, w: 14 },
+  CHECK_VERIFIED: { h: 13, w: 13 },
   CHEVRON_DOWN: { h: 7, w: 12 },
   CHEVRON_LEFT: { h: 12, w: 7 },
   CHEVRON_RIGHT: { h: 12, w: 7 },
@@ -54,6 +57,7 @@ export const ICON_SIZES: Record<string, IconSize> = {
   PHONE: { h: 14, w: 16 },
   RV: { h: 34, w: 54 },
   SEARCH: { h: 17, w: 17 },
+  STAR: { h: 20, w: 22 },
   TWITTER: { h: 18, w: 21 },
   YOUTUBE: { h: 16, w: 22 },
 };

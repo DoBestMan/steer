@@ -8,6 +8,7 @@ export type Icon =
   | 'arrow-down'
   | 'arrow-left'
   | 'arrow-right'
+  | 'check-verified'
   | 'chevron-down'
   | 'chevron-left'
   | 'chevron-right'
@@ -25,6 +26,7 @@ export type Icon =
   | 'phone'
   | 'rv'
   | 'search'
+  | 'star'
   | 'twitter'
   | 'youtube';
 
