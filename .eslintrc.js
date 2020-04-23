@@ -48,7 +48,7 @@ module.exports = {
         namedComponents: 'function-declaration',
       },
     ],
-    'react-hooks/exhaustive-deps': 'warn',
+    'react-hooks/exhaustive-deps': 'error',
     'react-hooks/rules-of-hooks': 'error',
     'react/jsx-no-bind': 'error',
     'react/jsx-boolean-value': ['error', 'never'],
