@@ -18,6 +18,7 @@ export const ICONS: Record<string, Icon> = {
   CLEAR_SEARCH: 'clear-search',
   CLOSE: 'close',
   FACEBOOK: 'facebook',
+  FIVE_STARS: 'five-stars',
   ICON_WHEEL: 'icon-wheel',
   INSTAGRAM: 'instagram',
   LINKEDIN: 'linkedin',
@@ -28,7 +29,6 @@ export const ICONS: Record<string, Icon> = {
   PHONE: 'phone',
   RV: 'rv',
   SEARCH: 'search',
-  STAR: 'star',
   TWITTER: 'twitter',
   YOUTUBE: 'youtube',
 };
@@ -47,6 +47,7 @@ export const ICON_SIZES: Record<string, IconSize> = {
   CLEAR_SEARCH: { h: 16, w: 16 },
   CLOSE: { h: 12, w: 12 },
   FACEBOOK: { h: 18, w: 9 },
+  FIVE_STARS: { h: 20, w: 122 },
   ICON_WHEEL: { h: 70, w: 70 },
   INSTAGRAM: { h: 18, w: 18 },
   LINKEDIN: { h: 18, w: 18 },
@@ -57,7 +58,6 @@ export const ICON_SIZES: Record<string, IconSize> = {
   PHONE: { h: 14, w: 16 },
   RV: { h: 34, w: 54 },
   SEARCH: { h: 17, w: 17 },
-  STAR: { h: 20, w: 22 },
   TWITTER: { h: 18, w: 21 },
   YOUTUBE: { h: 16, w: 22 },
 };

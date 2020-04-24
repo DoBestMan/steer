@@ -5,14 +5,12 @@ import GridItem from '~/components/global/Grid/GridItem';
 
 export interface UserReviewProps {
   avatarURL: string;
-  key?: string;
   name: string;
   review: string;
   title: string;
 }
 
-function UserReview(props: UserReviewProps) {
-  const { avatarURL, key, name, review, title } = props;
+function UserReview({ avatarURL, name, review, title }: UserReviewProps) {
   return (
     <GridItem
       as="div"
@@ -20,7 +18,6 @@ function UserReview(props: UserReviewProps) {
       gridColumnM="5/8"
       gridColumnL="8/13"
       css={styles.container}
-      key={key}
       isGrid
     >
       <GridItem
@@ -28,16 +25,20 @@ function UserReview(props: UserReviewProps) {
         gridColumnS="1/4"
         gridColumnM="1/3"
         gridColumnL="1/4"
-        css={[styles.review, typography.bodyCopy]}
+        css={[typography.bodyCopy, styles.review]}
       >
         <div css={styles.title}>{title}</div>
         {review}
         <br />
         {name}
       </GridItem>
-      <div
+      <GridItem
+        as="div"
+        gridColumnS="4/5"
+        gridColumnM="3/4"
+        gridColumnL="5/6"
         css={[styles.avatar, { backgroundImage: `url("${avatarURL}")` }]}
-      ></div>
+      ></GridItem>
     </GridItem>
   );
 }

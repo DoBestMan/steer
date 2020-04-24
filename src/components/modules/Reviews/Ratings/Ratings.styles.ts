@@ -1,31 +1,20 @@
 import { css } from '@emotion/core';
 
-import { COLORS, MQ } from '~/lib/constants';
-
-const iconMargin = {
-  span: {
-    display: 'inline-block',
-    height: 20,
-    marginLeft: 4,
-  },
-};
+import { COLORS, MQ, SPACING } from '~/lib/constants';
 
 const styles = {
   container: css({
-    margin: '40px 0',
-    width: '100%',
+    margin: `${SPACING.SIZE_40}px 0`,
 
     [MQ.M]: {
-      margin: '20px 0',
+      margin: `${SPACING.SIZE_20}px 0`,
     },
   }),
-  greyStars: css({
-    ...iconMargin,
-    color: COLORS.DARK.GRAY_40,
-    display: 'flex',
+  iconVerified: css({
+    height: 19,
+    marginLeft: 4,
   }),
   orangeStars: css({
-    ...iconMargin,
     color: COLORS.GLOBAL.ORANGE,
     display: 'flex',
     overflow: 'hidden',
@@ -34,21 +23,19 @@ const styles = {
   }),
   rating: css({
     color: COLORS.GLOBAL.ORANGE,
-    marginLeft: 10,
+    marginLeft: SPACING.SIZE_10,
   }),
   ratingContainer: css({
     alignItems: 'center',
     display: 'flex',
-    position: 'relative',
   }),
   ratingCopy: css({
-    ...iconMargin,
     alignItems: 'center',
     color: COLORS.DARK.GRAY_40,
     display: 'flex',
   }),
   starContainer: css({
-    marginLeft: -4,
+    color: COLORS.DARK.GRAY_40,
     position: 'relative',
   }),
   title: css({

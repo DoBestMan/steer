@@ -12,13 +12,13 @@ interface Props {
   pressReviews: PressReviewProps[];
 }
 
-function Press(props: Props) {
+function Press({ pressReviews }: Props) {
   return (
     <ul css={styles.container}>
-      {props.pressReviews.map((review) => (
+      {pressReviews.map((review) => (
         <li css={styles.item} key={review.name}>
           <img css={styles.logo} src={review.imageUrl} alt={review.name} />
-          <div css={[styles.copy, typography.bodyCopy]}>{review.quote}</div>
+          <div css={[typography.bodyCopy, styles.copy]}>{review.quote}</div>
         </li>
       ))}
     </ul>

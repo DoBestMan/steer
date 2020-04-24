@@ -8,6 +8,7 @@ import { typography } from '~/styles/typography.styles';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import Link from '~/components/global/Link/Link';
+import { layout } from '~/styles/layout.styles';
 
 interface Props extends RatingsProps {
   description: string;
@@ -20,30 +21,37 @@ interface Props extends RatingsProps {
   userReviews: UserReviewProps[];
 }
 
-function Reviews(props: Props) {
-  const {
-    description,
-    link,
-    numberOfReviews,
-    pressReviews,
-    rating,
-    title,
-    userReviews,
-  } = props;
+function Reviews({
+  description,
+  link,
+  numberOfReviews,
+  pressReviews,
+  rating,
+  title,
+  userReviews,
+}: Props) {
   return (
     <Grid>
       <GridItem gridColumnM="2/5" gridColumnL="3/7">
-        <div css={[styles.title, typography.primaryHeadline]}>{title}</div>
+        <div
+          css={[layout.hideOnSmall, typography.primaryHeadline, styles.title]}
+        >
+          {title}
+        </div>
         <Ratings numberOfReviews={numberOfReviews} rating={rating} />
-        <div css={[styles.description, typography.bodyCopy]}>{description}</div>
-        <Link href={link.href} css={styles.link}>
+        <div
+          css={[layout.hideOnSmall, typography.bodyCopy, styles.description]}
+        >
+          {description}
+        </div>
+        <Link href={link.href} css={[layout.hideOnSmall, styles.link]}>
           {link.title}
         </Link>
       </GridItem>
       <GridItem as="div" gridColumnM="5/8" gridColumnL="8/13">
-        {userReviews.map((review, index) => {
-          return <UserReview {...review} key={`user-review-${index}`} />;
-        })}
+        {userReviews.map((review, index) => (
+          <UserReview {...review} key={`user-review-${index}`} />
+        ))}
         <Press pressReviews={pressReviews} />
       </GridItem>
     </Grid>

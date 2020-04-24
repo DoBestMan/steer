@@ -9,33 +9,25 @@ export interface RatingsProps {
   rating: number;
 }
 
-function Ratings(props: RatingsProps) {
-  const { numberOfReviews, rating } = props;
+function Ratings({ numberOfReviews, rating }: RatingsProps) {
+  const formattedRating = rating > 0 ? rating.toFixed(1) : 0;
   const ratingFillWidth = (rating / 5) * 100;
   return (
     <div css={styles.container}>
       <div css={styles.ratingContainer}>
         <div css={styles.starContainer}>
-          <div css={styles.greyStars}>
-            <Icon name={ICONS.STAR} />
-            <Icon name={ICONS.STAR} />
-            <Icon name={ICONS.STAR} />
-            <Icon name={ICONS.STAR} />
-            <Icon name={ICONS.STAR} />
-          </div>
+          <Icon name={ICONS.FIVE_STARS} />
           <div css={[styles.orangeStars, { width: `${ratingFillWidth}%` }]}>
-            <Icon name={ICONS.STAR} />
-            <Icon name={ICONS.STAR} />
-            <Icon name={ICONS.STAR} />
-            <Icon name={ICONS.STAR} />
-            <Icon name={ICONS.STAR} />
+            <Icon name={ICONS.FIVE_STARS} />
           </div>
         </div>
-        <div css={[styles.rating, typography.primaryHeadline]}>{rating}</div>
+        <div css={[typography.primaryHeadline, styles.rating]}>
+          {formattedRating}
+        </div>
       </div>
-      <div css={[styles.ratingCopy, typography.bodyCopy]}>
-        Rated by {numberOfReviews} verified customers
-        <Icon name={ICONS.CHECK_VERIFIED} />
+      <div css={[typography.bodyCopy, styles.ratingCopy]}>
+        Rated by {numberOfReviews.toLocaleString()} verified customers
+        <Icon css={styles.iconVerified} name={ICONS.CHECK_VERIFIED} />
       </div>
     </div>
   );

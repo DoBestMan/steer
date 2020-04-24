@@ -1,6 +1,6 @@
 import { css } from '@emotion/core';
 
-import { BORDERS, COLORS } from '~/lib/constants';
+import { BORDERS, COLORS, SPACING } from '~/lib/constants';
 
 const styles = {
   container: css({
@@ -8,7 +8,6 @@ const styles = {
     display: 'flex',
     justifyContent: 'space-between',
     padding: '45px 0',
-    width: '100%',
   }),
   copy: css({
     '&::after': {
@@ -18,12 +17,12 @@ const styles = {
       content: 'open-quote',
     },
     color: COLORS.DARK.GRAY_40,
-    marginTop: 20,
+    marginTop: SPACING.SIZE_20,
     quotes: '"“" "”" "‘" "’"',
   }),
   item: css({
     '&:not(last-child)': {
-      marginRight: 20,
+      marginRight: SPACING.SIZE_20,
     },
     textAlign: 'center',
   }),

@@ -1,5 +1,7 @@
 import { css } from '@emotion/core';
 
+import { MQ } from '~/lib/constants';
+
 export const layout = {
   absoluteContainer: css({
     height: '100%',
@@ -20,6 +22,13 @@ export const layout = {
   container: css({
     display: 'flex',
   }),
+  hideOnSmall: {
+    display: 'none',
+
+    [MQ.M]: {
+      display: 'block',
+    },
+  },
   horizontalContainer: css({
     display: 'flex',
     flexDirection: 'row',

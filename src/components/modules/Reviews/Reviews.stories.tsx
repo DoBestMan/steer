@@ -1,4 +1,4 @@
-import { text } from '@storybook/addon-knobs';
+import { number } from '@storybook/addon-knobs';
 
 import Reviews from './Reviews';
 
@@ -9,6 +9,13 @@ export default {
   title: 'Reviews',
 };
 
+const ratingOptions = {
+  max: 5,
+  min: 0,
+  range: true,
+  step: 0.1,
+};
+
 export function ReviewsWithKnobs() {
   const reviewsMockData = {
     description:
@@ -17,15 +24,12 @@ export function ReviewsWithKnobs() {
       href: '',
       title: 'See all reviews',
     },
-    numberOfReviews: 52135,
+    numberOfReviews: number('Number of reviews', 52135),
     pressReviews: [
       {
-        imageUrl: text(
-          'Image URL',
-          'https://via.placeholder.com/100x35.png?text=Inc.',
-        ),
-        name: text('Press Name', 'Inc. Magazine'),
-        quote: text('Quote', 'Fastest-growing'),
+        imageUrl: 'https://via.placeholder.com/100x35.png?text=Inc.',
+        name: 'Inc. Magazine',
+        quote: 'Fastest-growing',
       },
       {
         imageUrl: 'https://via.placeholder.com/160x60.png?text=Forbes',
@@ -38,7 +42,7 @@ export function ReviewsWithKnobs() {
         quote: 'A new way',
       },
     ],
-    rating: 4.8,
+    rating: number('Rating', 4.8, ratingOptions),
     title: 'Why replace with us',
     userReviews: [
       {

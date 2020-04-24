@@ -16,6 +16,7 @@ export type Icon =
   | 'clear-search'
   | 'close'
   | 'facebook'
+  | 'five-stars'
   | 'icon-wheel'
   | 'instagram'
   | 'linkedin'
@@ -26,7 +27,6 @@ export type Icon =
   | 'phone'
   | 'rv'
   | 'search'
-  | 'star'
   | 'twitter'
   | 'youtube';
 

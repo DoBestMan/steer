@@ -1,6 +1,6 @@
 import { css } from '@emotion/core';
 
-import { COLORS, MQ, GRID_MARGIN } from '~/lib/constants';
+import { COLORS, MQ, RADIUS, GAP_COLUMNS, SPACING } from '~/lib/constants';
 
 const avatarSize = {
   large: 60,
@@ -10,7 +10,7 @@ const avatarSize = {
 const styles = {
   avatar: css({
     backgroundPosition: 'center',
-    borderRadius: '50%',
+    borderRadius: RADIUS.CIRCLE,
     height: avatarSize.standard,
     marginLeft: 'auto',
     width: avatarSize.standard,
@@ -22,14 +22,13 @@ const styles = {
   }),
   container: css({
     alignItems: 'flex-start',
-    marginBottom: 40,
-    width: '100%',
+    marginBottom: SPACING.SIZE_40,
   }),
   review: css({
     color: COLORS.DARK.GRAY_40,
 
     [MQ.M]: {
-      marginRight: GRID_MARGIN.M * -1,
+      marginRight: GAP_COLUMNS.M * -1,
     },
 
     [MQ.L]: {
