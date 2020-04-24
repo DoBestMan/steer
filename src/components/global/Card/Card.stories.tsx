@@ -5,13 +5,16 @@ import Card from './Card';
 
 import ListCard from './ListCard';
 
-import { SPACING, Image as ImageType } from '~/lib/constants';
+import { SPACING } from '~/lib/constants';
 
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Grid from '~/components/global/Grid/Grid';
 
 import { backgroundColors } from '~/styles/colors.styles';
-import { IconOrImageProps } from '~/components/global/IconOrImage/IconOrImage';
+import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
+import { INSIGHT_TYPE } from '~/lib/backend/insights.types';
+import { SiteImage } from '~/data/models/SiteImage';
+import { SiteIcon } from '~/data/models/SiteIcon';
 
 export default {
   component: Card,
@@ -44,17 +47,19 @@ export function CardWithKnobs() {
   const decorator = text('Decorator', '#');
   const eyebrowIcon = select('Eyebrow Icon', Object.values(ICONS), 'close');
   const highlight = text('Eyebrow Text', 'Eyebrow Text');
-  const description = text('Description', 'Description Text');
+  const body = text('Description', 'Description Text');
   const cta = text('CTA Text', 'CTA Text');
   return (
     <CardContainer>
       <Card
-        cta={cta}
-        ctaLink="/"
+        id="1"
+        type={INSIGHT_TYPE.DEFAULT}
+        linkLabel={cta}
+        link={{ href: '/', isExternal: false }}
         eyebrow={highlight}
-        eyebrowIcon={eyebrowIcon}
-        decorator={decorator}
-        {...{ description, title }}
+        eyebrowIcon={{ svgId: eyebrowIcon, type: ICON_IMAGE_TYPE.ICON }}
+        figures={[{ type: 'string', value: decorator }]}
+        {...{ body, title }}
       />
     </CardContainer>
   );
@@ -64,12 +69,14 @@ export function CardWithNumber() {
   return (
     <CardContainer>
       <Card
-        cta="Find tires with long durability"
-        ctaLink="/"
+        id="2"
+        type={INSIGHT_TYPE.DEFAULT}
+        linkLabel="Find tires with long durability"
+        link={{ href: '/', isExternal: false }}
         eyebrow="Trending"
-        eyebrowIcon={ICONS.ARROW_BOTTOM}
-        decorator="8 in 10"
-        description="Most drivers select tires that last between more than 50,000 miles."
+        eyebrowIcon={{ svgId: ICONS.ARROW_BOTTOM, type: ICON_IMAGE_TYPE.ICON }}
+        figures={[{ type: 'string', value: '8 in 10' }]}
+        body="Most drivers select tires that last between more than 50,000 miles."
         title="Drivers prioritize tires with long durability."
       />
     </CardContainer>
@@ -80,10 +87,14 @@ export function CardWithIcon() {
   return (
     <CardContainer>
       <Card
-        cta="Find tires with long durability"
-        ctaLink="/"
-        decorator={ICONS.ICON_WHEEL}
-        description="Most drivers select tires that last between more than 50,000 miles."
+        id="3"
+        eyebrow={null}
+        eyebrowIcon={null}
+        type={INSIGHT_TYPE.DEFAULT}
+        linkLabel="Find tires with long durability"
+        link={{ href: '/', isExternal: false }}
+        figures={[{ svgId: ICONS.ICON_WHEEL, type: ICON_IMAGE_TYPE.ICON }]}
+        body="Most drivers select tires that last between more than 50,000 miles."
         title="Drivers prioritize tires with long durability."
       />
     </CardContainer>
@@ -93,50 +104,52 @@ export function CardWithIcon() {
 const mockImagePlaceholder = {
   altText: '25x25 image',
   srcSet: 'https://via.placeholder.com/25',
-  type: ImageType.BITMAP,
-} as IconOrImageProps;
+  type: ICON_IMAGE_TYPE.IMAGE,
+} as SiteImage;
 
 const mockSvg = {
   svgId: ICONS.RV,
-  type: ImageType.SVG,
-} as IconOrImageProps;
+  type: ICON_IMAGE_TYPE.ICON,
+} as SiteIcon;
 
 export function CardWithList() {
   const mockListItems = [
     {
-      href: '/',
-      image: mockImagePlaceholder,
+      icon: mockImagePlaceholder,
       label: text('List Item 1 Text', 'Passenger'),
+      link: { href: '/', isExternal: false },
     },
     {
-      href: '/',
-      image: mockImagePlaceholder,
+      icon: mockImagePlaceholder,
       label: text('List Item 2 Text', 'Light trucks'),
+      link: { href: '/', isExternal: false },
     },
     {
-      href: '/',
-      image: mockImagePlaceholder,
+      icon: mockImagePlaceholder,
       label: text('List Item 3 Text', 'Farm & Agriculture'),
+      link: { href: '/', isExternal: false },
     },
     {
-      href: '/',
-      image: mockImagePlaceholder,
+      icon: mockImagePlaceholder,
       label: text('List Item 4 Text', 'Specialty'),
+      link: { href: '/', isExternal: false },
     },
     {
-      href: '/',
-      image: mockSvg,
+      icon: mockSvg,
       label: text('List Item 5 Text', 'RV'),
+      link: { href: '/', isExternal: false },
     },
   ];
 
   return (
     <CardContainer>
       <ListCard
+        id="5"
         title={text('Title', 'Find any tire.')}
-        listItems={mockListItems}
-        cta={text('CTA Text', 'See more')}
-        ctaLink="/"
+        items={mockListItems}
+        moreLinkLabel={text('CTA Text', 'See more')}
+        moreLink={{ href: '/', isExternal: false }}
+        type={INSIGHT_TYPE.LIST}
       />
     </CardContainer>
   );

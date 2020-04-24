@@ -1,8 +1,9 @@
 import { SiteLink } from './SiteLink';
 import { SiteIcon } from './SiteIcon';
+import { SiteImage } from './SiteImage';
 
 export interface SiteInsightItemListItems {
-  icon: SiteIcon;
+  icon: SiteIcon | SiteImage;
 
   /**
    * Item display text

@@ -5,11 +5,36 @@ import { MQ, RADIUS, SPACING } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 import { colors, backgroundColors } from '~/styles/colors.styles';
 
+const ICON_SIZE = {
+  H: 50,
+  W: 50,
+};
 const styles = {
   decorator: [
     colors.GLOBAL.ORANGE,
+    typography.jumboHeadline,
     css({
       display: 'flex',
+      height: ICON_SIZE.H,
+      img: {
+        // overlap brand images
+        ':nth-of-type(1)': {
+          left: 0,
+          zIndex: 2,
+        },
+        ':nth-of-type(2)': {
+          left: -SPACING.SIZE_25,
+          zIndex: 1,
+        },
+        ':nth-of-type(3)': {
+          left: -SPACING.SIZE_50,
+        },
+        height: ICON_SIZE.H,
+        position: 'relative',
+        width: ICON_SIZE.W,
+      },
+      position: 'relative',
+      width: '100%',
       [MQ.S]: {
         marginBottom: SPACING.SIZE_40,
       },
@@ -20,6 +45,12 @@ const styles = {
           marginTop: -5, // line height causes misalignemnt to right column content
         },
       },
+      [MQ.XL]: {
+        // exception for jumbo headline, should be 60px on XL for card decorator
+        fontSize: '6.0rem',
+        letterSpacing: '-0.04em',
+        lineHeight: 60 / 60, // '60px',
+      },
     }),
   ],
   description: [
@@ -29,7 +60,11 @@ const styles = {
       marginBottom: SPACING.SIZE_40,
     }),
   ],
-  eyebrow: [typography.secondaryHeadline, colors.GLOBAL.ORANGE],
+  eyebrow: [
+    typography.secondaryHeadline,
+    colors.GLOBAL.ORANGE,
+    { display: 'flex' },
+  ],
   eyebrowIcon: css({
     paddingLeft: 8,
   }),

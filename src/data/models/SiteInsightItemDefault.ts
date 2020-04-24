@@ -2,6 +2,8 @@ import { SiteLink } from './SiteLink';
 import { SiteIcon } from './SiteIcon';
 import { SiteImage } from './SiteImage';
 
+import { INSIGHT_TYPE } from '~/lib/backend/insights.types';
+
 /**
  * Insight item, default style, used on the homepage.
  */
@@ -40,5 +42,5 @@ export interface SiteInsightItemDefault {
   /**
    * Discriminator when used with oneOf
    */
-  type: 'SiteInsightItemDefault';
+  type: INSIGHT_TYPE.DEFAULT;
 }

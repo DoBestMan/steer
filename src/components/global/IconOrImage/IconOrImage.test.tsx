@@ -3,17 +3,17 @@ import { render } from '@testing-library/react';
 import IconOrImage from './IconOrImage';
 import { ICONS } from '../Icon/Icon.constants';
 
-import { Image } from '~/lib/constants';
+import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 
 describe('IconOrImage', () => {
   test('icon', () => {
     const { container } = render(
-      <IconOrImage svgId={ICONS.ARROW_RIGHT} type={Image.SVG} />,
+      <IconOrImage svgId={ICONS.ARROW_RIGHT} type={ICON_IMAGE_TYPE.ICON} />,
     );
 
     expect(container.firstChild).toMatchInlineSnapshot(`
       <span
-        class="css-2lxzuo-container-centeredVertical-Icon"
+        class="css-1h82lze-container-centeredVertical-Icon"
       >
         <svg
           fill="#181818"
@@ -34,7 +34,7 @@ describe('IconOrImage', () => {
       <IconOrImage
         srcSet="https://via.placeholder.com/150"
         altText="150x150 image"
-        type={Image.BITMAP}
+        type={ICON_IMAGE_TYPE.IMAGE}
       />,
     );
 

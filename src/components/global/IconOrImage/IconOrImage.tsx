@@ -1,24 +1,14 @@
 import Icon from '../Icon/Icon';
-import { Icon as IconType } from '../Icon/Icon.types';
 import Image from '../Image/Image';
 
-import { Image as ImageType } from '~/lib/constants';
+import { SiteIcon } from '~/data/models/SiteIcon';
+import { SiteImage } from '~/data/models/SiteImage';
+import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 
-interface IconProps {
-  svgId: IconType;
-  type: ImageType.SVG;
-}
-
-interface ImageProps {
-  altText: string;
-  srcSet: string;
-  type: ImageType.BITMAP;
-}
-
-export type IconOrImageProps = IconProps | ImageProps;
+export type IconOrImageProps = SiteIcon | SiteImage;
 
 function IconOrImage(props: IconOrImageProps) {
-  if (props.type === ImageType.SVG) {
+  if (props.type === ICON_IMAGE_TYPE.ICON) {
     const { svgId, type: _type, ...rest } = props;
     return <Icon name={svgId} {...rest} />;
   }

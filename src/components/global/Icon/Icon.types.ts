@@ -18,6 +18,8 @@ export type Icon =
   | 'facebook'
   | 'five-stars'
   | 'icon-wheel'
+  | 'insights-trending'
+  | 'insights-winter'
   | 'instagram'
   | 'linkedin'
   | 'location'

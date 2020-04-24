@@ -3,24 +3,15 @@ import styles from './ListCard.styles';
 import GridItem from '~/components/global/Grid/GridItem';
 import Link from '~/components/global/Link/Link';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
-import IconOrImage, {
-  IconOrImageProps,
-} from '~/components/global/IconOrImage/IconOrImage';
+import IconOrImage from '~/components/global/IconOrImage/IconOrImage';
+import { SiteInsightItemList } from '~/data/models/SiteInsightItemList';
 
-interface ListItem {
-  href: string;
-  image: IconOrImageProps;
-  label: string;
-}
-
-interface Props {
-  cta: string;
-  ctaLink: string;
-  listItems: ListItem[];
-  title: string;
-}
-
-function ListCard({ cta, ctaLink, listItems, title }: Props) {
+function ListCard({
+  items,
+  moreLink,
+  moreLinkLabel,
+  title,
+}: SiteInsightItemList) {
   return (
     <GridItem
       gridColumnS="2/5"
@@ -35,15 +26,15 @@ function ListCard({ cta, ctaLink, listItems, title }: Props) {
       </GridItem>
       <GridItem gridColumnL="3/6" gridColumnXL="3/6">
         <ul css={styles.list}>
-          {listItems.map(({ href, image, label }) => (
+          {items.map(({ icon, label, link }) => (
             <li css={styles.listItem} key={label}>
               <div css={styles.content}>
-                <Link href={href}>
+                <Link href={link.href}>
                   <p>{label}</p>
                 </Link>
                 <div css={styles.imageContainer}>
                   <div css={styles.image}>
-                    <IconOrImage {...image} css={styles.icon} />
+                    <IconOrImage {...icon} css={styles.icon} />
                   </div>
                 </div>
               </div>
@@ -51,8 +42,8 @@ function ListCard({ cta, ctaLink, listItems, title }: Props) {
           ))}
         </ul>
         <div css={styles.cta}>
-          <Link href={ctaLink} icon={ICONS.CHEVRON_RIGHT}>
-            {cta}
+          <Link href={moreLink.href} icon={ICONS.CHEVRON_RIGHT}>
+            {moreLinkLabel}
           </Link>
         </div>
       </GridItem>

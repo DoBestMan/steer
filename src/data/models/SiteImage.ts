@@ -1,3 +1,5 @@
+import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
+
 /**
  * General image implementation for the site
  */
@@ -15,5 +17,5 @@ export interface SiteImage {
   /**
    * Discriminator when icons and images are used with oneOf
    */
-  type: 'SiteImage';
+  type: ICON_IMAGE_TYPE.IMAGE;
 }

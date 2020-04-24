@@ -1,5 +1,3 @@
-import { ReactChild } from 'react';
-
 import styles from './DriverInsights.styles';
 
 import GridItem from '~/components/global/Grid/GridItem';
@@ -9,16 +7,33 @@ import Link from '~/components/global/Link/Link';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { BREAKPOINT_SIZES } from '~/lib/constants';
 import { colors } from '~/styles/colors.styles';
+import { SiteInsights } from '~/data/models/SiteInsights';
+import { INSIGHT_TYPE } from '~/lib/backend/insights.types';
+import ListCard from '~/components/global/Card/ListCard';
+import Card from '~/components/global/Card/Card';
+import { SiteInsightItemDefault } from '~/data/models/SiteInsightItemDefault';
+import { SiteInsightItemList } from '~/data/models/SiteInsightItemList';
 
-interface Props {
-  children: ReactChild[];
-  cta?: string;
-  ctaLink?: string;
-  description: string;
-  title: string;
-}
+const mapInsightTypeToCard = {
+  [INSIGHT_TYPE.DEFAULT]: function Default(
+    card: SiteInsightItemDefault | SiteInsightItemList,
+  ) {
+    return <Card key={card.id} {...(card as SiteInsightItemDefault)} />;
+  },
+  [INSIGHT_TYPE.LIST]: function List(
+    card: SiteInsightItemDefault | SiteInsightItemList,
+  ) {
+    return <ListCard key={card.id} {...(card as SiteInsightItemList)} />;
+  },
+};
 
-function DriverInsights({ children, cta, ctaLink, description, title }: Props) {
+function DriverInsights({
+  body,
+  // link = { href: '/' },
+  linkLabel,
+  siteInsightList,
+  title,
+}: SiteInsights) {
   const breakpoint = useBreakpoints();
   const isMobile = breakpoint === BREAKPOINT_SIZES.S;
   return (
@@ -30,22 +45,20 @@ function DriverInsights({ children, cta, ctaLink, description, title }: Props) {
           <p
             css={[typography.bodyCopy, colors.DARK.GRAY_40, styles.description]}
           >
-            {description}
+            {body}
           </p>
         )}
-        {cta && ctaLink && (
-          <Link href={ctaLink} css={styles.cta}>
-            {cta}
+        {linkLabel && (
+          // TODO: add link href to mock data
+          <Link href="/" css={styles.cta}>
+            {linkLabel}
           </Link>
         )}
       </GridItem>
-      <GridItem
-        gridColumnM="5/8"
-        gridColumnL="8/14"
-        gridColumnXL="8/12"
-        css={styles.cards}
-      >
-        {children}
+      <GridItem gridColumnM="5/8" gridColumnL="8/13" css={styles.cards}>
+        {siteInsightList.map((props) =>
+          mapInsightTypeToCard[props.type](props),
+        )}
       </GridItem>
     </>
   );

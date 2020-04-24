@@ -1,42 +1,36 @@
 import styles from './Card.styles';
 
+import IconOrImage from '../IconOrImage/IconOrImage';
+
 import { COLORS } from '~/lib/constants';
 
 import GridItem from '~/components/global/Grid/GridItem';
 import Link from '~/components/global/Link/Link';
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
-import { Icon as IconType } from '~/components/global/Icon/Icon.types';
 
-import { typography } from '~/styles/typography.styles';
-
-export interface Props {
-  cta: string;
-  ctaLink: string;
-  decorator: string | IconType;
-  description: string;
-  eyebrow?: string;
-  eyebrowIcon?: IconType;
-  title: string;
-}
+import { SiteInsightItemDefault } from '~/data/models/SiteInsightItemDefault';
+import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 
 function Card({
-  cta,
-  ctaLink,
-  decorator,
-  description,
+  body,
   eyebrow,
   eyebrowIcon,
+  figures,
+  link,
+  linkLabel,
   title,
-}: Props) {
-  const icon = Object.entries(ICONS).find(([_, v]) => v === decorator);
-  const iconName = icon && ICONS[icon[0]];
-  const decoratorEl = iconName ? (
-    <Icon name={iconName} />
-  ) : (
-    <p css={typography.primaryHeadline}>{decorator}</p>
-  );
+}: SiteInsightItemDefault) {
+  const decorators = figures?.map((figure, idx) => {
+    if (
+      figure.type === ICON_IMAGE_TYPE.ICON ||
+      figure.type === ICON_IMAGE_TYPE.IMAGE
+    ) {
+      return <IconOrImage key={idx} {...figure} />;
+    }
 
+    return figure.value;
+  });
   return (
     <GridItem
       gridColumnS="2/5"
@@ -47,7 +41,7 @@ function Card({
       css={styles.root}
     >
       <GridItem gridColumnL="1/3" gridColumnXL="1/3">
-        <div css={styles.decorator}>{decoratorEl}</div>
+        <div css={styles.decorator}>{decorators}</div>
       </GridItem>
       <GridItem gridColumnL="3/6" gridColumnXL="3/6">
         {eyebrow && eyebrowIcon && (
@@ -55,15 +49,15 @@ function Card({
             <span>{eyebrow}</span>
             <Icon
               fill={COLORS.GLOBAL.ORANGE}
-              name={eyebrowIcon}
+              name={eyebrowIcon.svgId}
               css={styles.eyebrowIcon}
             />
           </div>
         )}
         <p css={styles.title}>{title}</p>
-        <p css={styles.description}>{description}</p>
-        <Link href={ctaLink} icon={ICONS.CHEVRON_RIGHT}>
-          {cta}
+        <p css={styles.description}>{body}</p>
+        <Link href={link.href} icon={ICONS.CHEVRON_RIGHT}>
+          {linkLabel}
         </Link>
       </GridItem>
     </GridItem>
