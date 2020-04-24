@@ -15,7 +15,7 @@ export interface SiteHero {
   /**
    * Optional end date-time for a countdown inside the eyebrow
    */
-  eyebrowCountdownEnd: Date;
+  eyebrowCountdownEnd: Date | null;
 
   /**
    * Type of scenery, supported by the front-end

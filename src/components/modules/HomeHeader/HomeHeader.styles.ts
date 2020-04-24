@@ -1,6 +1,6 @@
 import { css } from '@emotion/core';
 
-import { COLORS, GRID_MARGIN, MQ, SPACING } from '~/lib/constants';
+import { COLORS, GRID_MARGIN, MQ, RADIUS, SPACING } from '~/lib/constants';
 
 const CONSTANTS = {
   CONTAINER_BG_BOTTOM: {
@@ -49,6 +49,15 @@ const styles = {
   }),
   description: css({
     color: COLORS.LIGHT.GRAY_70,
+  }),
+  eyebrow: css({
+    alignItems: 'baseline',
+    background: COLORS.GLOBAL.BLACK,
+    borderRadius: RADIUS.RADIUS_5,
+    color: COLORS.GLOBAL.WHITE,
+    display: 'inline-flex',
+    marginBottom: SPACING.SIZE_10,
+    padding: `${SPACING.SIZE_01}px 6px`,
   }),
   title: css({
     marginBottom: SPACING.SIZE_10,

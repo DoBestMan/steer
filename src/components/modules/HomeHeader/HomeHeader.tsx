@@ -5,7 +5,6 @@ import {
   SCENERY_IMG_MAP,
 } from './HomeHeader.constants';
 import styles from './HomeHeader.styles';
-import Promo, { PromoProps } from './Promo';
 
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
@@ -14,17 +13,21 @@ import Markdown from '~/components/global/Markdown/Markdown';
 
 import { typography } from '~/styles/typography.styles';
 
-interface Props {
-  body: string;
-  eyebrow: PromoProps | null;
-  sceneryType: string;
-  title: string;
-  vehicleType: string;
-}
+import { SiteHero } from '~/data/models/SiteHero';
 
-function HomeHeader({ body, eyebrow, sceneryType, title, vehicleType }: Props) {
-  const landscapeImg = SCENERY_IMG_MAP[sceneryType] || DEFAULT_SCENERY;
-  const vehicleImage = VEHICLE_IMG_MAP[vehicleType] || DEFAULT_VEHICLE;
+function HomeHeader({
+  body,
+  eyebrow,
+  sceneryType,
+  title,
+  vehicleType,
+}: SiteHero) {
+  const landscapeImg = sceneryType
+    ? SCENERY_IMG_MAP[sceneryType]
+    : DEFAULT_SCENERY;
+  const vehicleImage = vehicleType
+    ? VEHICLE_IMG_MAP[vehicleType]
+    : DEFAULT_VEHICLE;
   const backgroundImage = {
     backgroundImage: `url(${landscapeImg})`,
   };
@@ -34,7 +37,9 @@ function HomeHeader({ body, eyebrow, sceneryType, title, vehicleType }: Props) {
       <Grid>
         <GridItem gridColumnS="2/6" gridColumnM="2/8" gridColumnXL="2/8">
           {eyebrow && (
-            <Promo text={eyebrow.text} countdownEnd={eyebrow.countdownEnd} />
+            <div css={styles.eyebrow}>
+              <span css={typography.eyebrow}>{eyebrow}</span>
+            </div>
           )}
           <h1 css={[typography.jumboHeadline, styles.title]}>
             <Markdown>{title}</Markdown>

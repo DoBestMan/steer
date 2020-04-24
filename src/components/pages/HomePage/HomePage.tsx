@@ -1,3 +1,5 @@
+import HomeHeader from '~/components/modules/HomeHeader/HomeHeader';
+
 import Layout from '~/components/global/Layout/Layout';
 import { SiteHero } from '~/data/models/SiteHero';
 import { SiteInsights } from '~/data/models/SiteInsights';
@@ -21,8 +23,7 @@ function HomePage({ serverData }: Props) {
     <Layout>
       <div>
         <h1 css={typography.jumboHeadline}>STEER</h1>
-        <h2>{siteHero.title}</h2>
-        <p>{siteHero.body}</p>
+        <HomeHeader {...siteHero} />
 
         <h2>{siteInsights.title}</h2>
         <p>{siteInsights.body}</p>
