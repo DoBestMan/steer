@@ -58,7 +58,7 @@ function Nav({ links }: Props) {
         <li css={[styles.listItem, styles.hamburger]}>
           <NavLink
             aria-label={CONSTANTS.MOBILE_MENU_ARIA_LABEL}
-            href="/"
+            as="button"
             icon={ICONS.MENU}
           />
         </li>

@@ -1,19 +1,6 @@
-export enum LINK_ICON_POSITION {
-  LEFT = 'left',
-  RIGHT = 'right',
-}
+import { LINK_TYPE } from './links.types';
 
-export enum LINK_SIZE {
-  REG = 'regular',
-  SM = 'small',
-}
-
-export enum LINK_THEME {
-  DARK = 'dark',
-  LIGHT = 'light',
-}
-
-export enum LINK_WEIGHT {
-  BOLD = 'bold',
-  NORMAL = 'normal',
-}
+export const LINK_TYPES: Record<string, LINK_TYPE> = {
+  A: 'a',
+  BUTTON: 'button',
+};

@@ -14,6 +14,7 @@ import {
   LINK_SIZE,
   LINK_THEME,
   LINK_WEIGHT,
+  LINK_TYPES,
 } from '~/lib/constants';
 import { backgroundColors } from '~/styles/colors.styles';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
@@ -63,12 +64,15 @@ export function LightLinkWithKnobs() {
     [LINK_ICON_POSITION.LEFT, LINK_ICON_POSITION.RIGHT],
     LINK_ICON_POSITION.RIGHT,
   );
+
+  const as = select('As', [LINK_TYPES.A, LINK_TYPES.BUTTON], LINK_TYPES.A);
+
   return (
     <LinkContainer theme={LINK_THEME.LIGHT}>
       <Link
-        href="/"
         theme={LINK_THEME.LIGHT}
-        {...{ icon, iconPosition, size, weight }}
+        href={as === LINK_TYPES.A ? '/' : ''}
+        {...{ as, icon, iconPosition, size, weight }}
       >
         {text('Link Text', 'Link Example')}
       </Link>
@@ -159,9 +163,15 @@ export function DarkLinkWithKnobs() {
     [LINK_ICON_POSITION.LEFT, LINK_ICON_POSITION.RIGHT],
     LINK_ICON_POSITION.RIGHT,
   );
+
+  const as = select('As', [LINK_TYPES.A, LINK_TYPES.BUTTON], LINK_TYPES.A);
+
   return (
     <LinkContainer theme={LINK_THEME.DARK}>
-      <Link href="/" {...{ icon, iconPosition, size, weight }}>
+      <Link
+        href={as === LINK_TYPES.A ? '/' : ''}
+        {...{ as, icon, iconPosition, size, weight }}
+      >
         {text('Link Text', 'Link Example')}
       </Link>
     </LinkContainer>

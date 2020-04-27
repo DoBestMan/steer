@@ -1,4 +1,4 @@
-import { LinkProps } from './Link';
+import { AnchorProps } from './Link';
 
 import styles, { iconCTA } from './Link.styles';
 
@@ -8,7 +8,7 @@ import { LINK_SIZE, LINK_THEME, LINK_WEIGHT } from '~/lib/constants';
 import Icon from '~/components/global/Icon/Icon';
 import { Icon as IconType } from '~/components/global/Icon/Icon.types';
 
-interface Props extends Pick<LinkProps, 'theme' | 'href' | 'children'> {
+interface Props extends Pick<AnchorProps, 'theme' | 'href' | 'children'> {
   icon: IconType;
 }
 function IconLink({

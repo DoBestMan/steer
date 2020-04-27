@@ -1,13 +1,19 @@
-import Link, { LinkProps } from './Link';
+import Link, { AnchorProps, ButtonProps } from './Link';
 import { navLink } from './Link.styles';
 
 import { LINK_ICON_POSITION, LINK_THEME, LINK_WEIGHT } from '~/lib/constants';
 
-interface Props extends LinkProps {
+interface Props {
   isActive?: boolean;
 }
 
-function NavLink({ children, isActive = false, ...rest }: Props) {
+interface ExtendedButtonProps extends ButtonProps, Props {}
+
+interface ExtendedAnchorProps extends AnchorProps, Props {}
+
+type NavLinkProps = ExtendedButtonProps | ExtendedAnchorProps;
+
+function NavLink({ children, isActive = false, ...rest }: NavLinkProps) {
   return (
     <Link
       {...rest}
