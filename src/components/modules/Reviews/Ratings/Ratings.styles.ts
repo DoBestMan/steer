@@ -4,7 +4,7 @@ import { COLORS, MQ, SPACING } from '~/lib/constants';
 
 const styles = {
   container: css({
-    margin: `${SPACING.SIZE_40}px 0`,
+    margin: `0 0 ${SPACING.SIZE_40}px`,
 
     [MQ.M]: {
       margin: `${SPACING.SIZE_20}px 0`,

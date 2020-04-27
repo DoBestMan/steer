@@ -1,10 +1,18 @@
 import { css } from '@emotion/core';
 
-import { SPACING } from '~/lib/constants';
+import { SPACING, MQ } from '~/lib/constants';
 
 const styles = {
   content: css({
-    paddingTop: SPACING.SIZE_160,
+    padding: `${SPACING.SIZE_80}px 0`,
+
+    [MQ.M]: {
+      padding: `${SPACING.SIZE_100}px 0`,
+    },
+
+    [MQ.XL]: {
+      padding: `${SPACING.SIZE_120}px 0`,
+    },
   }),
 };
 

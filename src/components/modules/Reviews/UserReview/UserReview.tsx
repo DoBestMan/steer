@@ -1,16 +1,11 @@
 import styles from './UserReview.styles';
 
 import { typography } from '~/styles/typography.styles';
+import { SiteReviewItem } from '~/data/models/SiteReviewItem';
 import GridItem from '~/components/global/Grid/GridItem';
+import Image from '~/components/global/Image/Image';
 
-export interface UserReviewProps {
-  avatarURL: string;
-  name: string;
-  review: string;
-  title: string;
-}
-
-function UserReview({ avatarURL, name, review, title }: UserReviewProps) {
+function UserReview({ authorImage, authorName, body, title }: SiteReviewItem) {
   return (
     <GridItem
       as="div"
@@ -28,17 +23,17 @@ function UserReview({ avatarURL, name, review, title }: UserReviewProps) {
         css={[typography.bodyCopy, styles.review]}
       >
         <div css={styles.title}>{title}</div>
-        {review}
+        {body}
         <br />
-        {name}
+        {authorName}
       </GridItem>
-      <GridItem
-        as="div"
-        gridColumnS="4/5"
-        gridColumnM="3/4"
-        gridColumnL="5/6"
-        css={[styles.avatar, { backgroundImage: `url("${avatarURL}")` }]}
-      ></GridItem>
+      <GridItem as="div" gridColumnS="4/5" gridColumnM="3/4" gridColumnL="5/6">
+        <Image
+          css={styles.avatar}
+          srcSet={authorImage.srcSet}
+          altText={authorImage.altText}
+        />
+      </GridItem>
     </GridItem>
   );
 }

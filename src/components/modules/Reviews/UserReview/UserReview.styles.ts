@@ -9,7 +9,6 @@ const avatarSize = {
 
 const styles = {
   avatar: css({
-    backgroundPosition: 'center',
     borderRadius: RADIUS.CIRCLE,
     height: avatarSize.standard,
     marginLeft: 'auto',

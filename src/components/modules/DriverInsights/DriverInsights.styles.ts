@@ -5,8 +5,14 @@ import { typography } from '~/styles/typography.styles';
 
 const styles = {
   cards: css({
-    '> div': {
+    '> div:not(:last-child)': {
       marginBottom: SPACING.SIZE_20,
+    },
+
+    marginBottom: SPACING.SIZE_80,
+
+    [MQ.M]: {
+      marginBottom: SPACING.SIZE_120,
     },
   }),
   cta: css({

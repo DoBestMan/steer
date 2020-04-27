@@ -7,7 +7,8 @@ const styles = {
     borderTop: BORDERS.SOLID_GRAY_80_1PX,
     display: 'flex',
     justifyContent: 'space-between',
-    padding: '45px 0',
+    paddingBottom: SPACING.SIZE_10,
+    paddingTop: SPACING.SIZE_40,
   }),
   copy: css({
     '&::after': {
