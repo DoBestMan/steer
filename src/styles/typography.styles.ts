@@ -30,6 +30,14 @@ export const typography = {
       lineHeight: 20 / 15, // 20px',
     },
   }),
+  headlineReduced: css({
+    fontFamily: 'Circular Std',
+    fontSize: '1.2rem',
+    fontStyle: 'normal',
+    fontWeight: 'bold',
+    letterSpacing: '-0.01em',
+    lineHeight: 15 / 12, // '15px',
+  }),
   jumboHeadline: css({
     fontFamily: 'Circular Std',
     fontSize: '4.0rem',
@@ -91,13 +99,21 @@ export const typography = {
     fontStyle: 'normal',
     fontWeight: 'normal',
     letterSpacing: '-0.01em',
-    lineHeight: 20 / 12, // '20px',
+    lineHeight: 15 / 12, // '15px',
 
     [MQ.XL]: {
       fontSize: '1.5rem',
       letterSpacing: '-0.01em',
-      lineHeight: 22 / 15, // '22px',
+      lineHeight: 20 / 15, // '20px',
     },
+  }),
+  smallCopyReduced: css({
+    fontFamily: 'Circular Std',
+    fontSize: '1.2rem',
+    fontStyle: 'normal',
+    fontWeight: 'normal',
+    letterSpacing: '-0.01em',
+    lineHeight: 15 / 12, // '15px',
   }),
   subhead: css({
     fontFamily: 'Circular Std',

@@ -30,6 +30,8 @@ export function Text() {
         <p css={typography.eyebrow}>Eyebrow</p>
         <p css={typography.bodyCopy}>Body Copy</p>
         <p css={typography.smallCopy}>Small Copy</p>
+        <p css={typography.headlineReduced}>Reduced</p>
+        <p css={typography.smallCopyReduced}>Reduced Copy</p>
       </GridItem>
       <GridItem
         fullbleed
