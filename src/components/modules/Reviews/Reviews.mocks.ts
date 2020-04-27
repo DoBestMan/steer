@@ -1,15 +1,6 @@
-import { number } from '@storybook/addon-knobs';
-
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 import { SiteReviews } from '~/data/models/SiteReviews';
-
-const ratingOptions = {
-  max: 5,
-  min: 0,
-  range: true,
-  step: 0.1,
-};
 
 export const mockReviews: SiteReviews = {
   body:
@@ -24,7 +15,7 @@ export const mockReviews: SiteReviews = {
     svgId: ICONS.CHECK_VERIFIED,
     type: ICON_IMAGE_TYPE.ICON,
   },
-  ratingStars: number('Rating', 4.8, ratingOptions),
+  ratingStars: 4.8,
   siteReviewList: [
     {
       authorImage: {

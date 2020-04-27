@@ -1,3 +1,5 @@
+import { number } from '@storybook/addon-knobs';
+
 import Reviews from './Reviews';
 import { mockReviews } from './Reviews.mocks';
 
@@ -9,10 +11,20 @@ export default {
   title: 'Reviews',
 };
 
+const ratingOptions = {
+  max: 5,
+  min: 0,
+  range: true,
+  step: 0.1,
+};
+
 export function ReviewsWithKnobs() {
   return (
     <Grid css={{ backgroundColor: COLORS.GLOBAL.BLACK }}>
-      <Reviews {...mockReviews} />
+      <Reviews
+        {...mockReviews}
+        ratingStars={number('Rating', mockReviews.ratingStars, ratingOptions)}
+      />
     </Grid>
   );
 }
