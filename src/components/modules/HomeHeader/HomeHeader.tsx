@@ -22,12 +22,10 @@ function HomeHeader({
   title,
   vehicleType,
 }: SiteHero) {
-  const landscapeImg = sceneryType
-    ? SCENERY_IMG_MAP[sceneryType]
-    : DEFAULT_SCENERY;
-  const vehicleImage = vehicleType
-    ? VEHICLE_IMG_MAP[vehicleType]
-    : DEFAULT_VEHICLE;
+  const landscapeImg =
+    (sceneryType && SCENERY_IMG_MAP[sceneryType]) || DEFAULT_SCENERY;
+  const vehicleImage =
+    (vehicleType && VEHICLE_IMG_MAP[vehicleType]) || DEFAULT_VEHICLE;
   const backgroundImage = {
     backgroundImage: `url(${landscapeImg})`,
   };

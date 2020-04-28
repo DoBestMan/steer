@@ -1,18 +1,18 @@
 export enum Sceneries {
-  FORREST = 'forrest',
+  MOUNTAIN = 'mountain',
 }
 
 export enum Vehicles {
-  CAR = 'car',
+  HATCH = 'hatch',
 }
 
 export const VEHICLE_IMG_MAP: { [key: string]: string } = {
-  [Vehicles.CAR]: '/images/home-header/home-header-car.png',
+  [Vehicles.HATCH]: '/images/home-header/home-header-hatch.png',
 };
 
 export const SCENERY_IMG_MAP: { [key: string]: string } = {
-  [Sceneries.FORREST]: '/images/home-header/home-header-forrest.png',
+  [Sceneries.MOUNTAIN]: '/images/home-header/home-header-mountain.png',
 };
 
-export const DEFAULT_SCENERY = SCENERY_IMG_MAP[Sceneries.FORREST];
-export const DEFAULT_VEHICLE = VEHICLE_IMG_MAP[Vehicles.CAR];
+export const DEFAULT_SCENERY = SCENERY_IMG_MAP[Sceneries.MOUNTAIN];
+export const DEFAULT_VEHICLE = VEHICLE_IMG_MAP[Vehicles.HATCH];

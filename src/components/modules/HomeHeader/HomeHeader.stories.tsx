@@ -20,9 +20,9 @@ export function HeaderWithKnobs() {
     ),
     eyebrow: text('Promo', 'Black Friday'),
     eyebrowCountdownEnd: null,
-    sceneryType: text('Landscape ID', 'forrest'),
+    sceneryType: text('Landscape ID', 'mountain'),
     title: text('Title', 'Replacing <br /> tires is now <br />simple**.**'),
-    vehicleType: text('Vehicle ID', 'car'),
+    vehicleType: text('Vehicle ID', 'hatch'),
     weatherType: null,
   };
 
@@ -37,9 +37,9 @@ export function DefaultHeader() {
     ),
     eyebrow: null,
     eyebrowCountdownEnd: null,
-    sceneryType: text('Landscape ID', 'forrest'),
+    sceneryType: text('Landscape ID', 'mountain'),
     title: text('Title', 'Replacing <br /> tires is now <br />simple**.**'),
-    vehicleType: text('Vehicle ID', 'car'),
+    vehicleType: text('Vehicle ID', 'hatch'),
     weatherType: null,
   };
 
@@ -54,9 +54,9 @@ export function PromoHeaderDefault() {
     ),
     eyebrow: text('Promo', 'Black Friday'),
     eyebrowCountdownEnd: null,
-    sceneryType: text('Landscape ID', 'forrest'),
+    sceneryType: text('Landscape ID', 'mountain'),
     title: text('Title', 'Replacing <br /> tires is now <br />simple**.**'),
-    vehicleType: text('Vehicle ID', 'car'),
+    vehicleType: text('Vehicle ID', 'hatch'),
     weatherType: null,
   };
 
