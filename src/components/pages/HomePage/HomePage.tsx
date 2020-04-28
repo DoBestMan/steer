@@ -1,13 +1,13 @@
 import styles from './HomePage.styles';
 
-import HomeHeader from '~/components/modules/HomeHeader/HomeHeader';
+import HomeHeader from '~/components/pages/HomePage/HomeHeader/HomeHeader';
 
 import Layout from '~/components/global/Layout/Layout';
 import { SiteHero } from '~/data/models/SiteHero';
 import { SiteInsights } from '~/data/models/SiteInsights';
 import { SiteReviews } from '~/data/models/SiteReviews';
-import DriverInsights from '~/components/modules/DriverInsights/DriverInsights';
-import Reviews from '~/components/modules/Reviews/Reviews';
+import DriverInsights from '~/components/pages/HomePage/DriverInsights/DriverInsights';
+import Reviews from '~/components/pages/HomePage/Reviews/Reviews';
 import { backgroundColors } from '~/styles/colors.styles';
 import Grid from '~/components/global/Grid/Grid';
 
