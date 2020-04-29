@@ -8,13 +8,25 @@ Guidelines for commit messages:
 
 - Use active voice
 - Include JIRA ticket number in brackets
-- If you Squash and Merge your PR, be sure that the final commit has the PR number in the title (GitHub will automatically do this for you):
+
+### Squash and Merge
+
+If you Squash and Merge your PR, be sure that the final commit has the PR number in the title (GitHub will automatically do this for you):
 
 ```
 [WCS-123] Implement PDP header (#456)
 ```
 
-- If you Rebase and Merge your PR, each commit should follow proper formatting:
+Before squashing, please remove (preferred) or consolidate the automatically generated PR description. A consolidated description can be in simple bullet format:
+
+```
+- Created the PDP template
+- Fixed modal tests
+```
+
+### Rebase and Merge
+
+If you Rebase and Merge your PR, each commit should follow proper formatting:
 
 ```
 [WCS-789] Define Catalog endpoints
