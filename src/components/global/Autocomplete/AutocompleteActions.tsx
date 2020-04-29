@@ -12,8 +12,8 @@ interface SearchOrClearIconProps {
 function AutocompleteActions({ onClick, value }: SearchOrClearIconProps) {
   if (value) {
     return (
-      <Button aria-label="cancel" onClick={onClick}>
-        <Icon name={ICONS.CLEAR_SEARCH} css={styles.clearSearchIcon} />
+      <Button onClick={onClick} css={styles.clearSearch}>
+        Clear
       </Button>
     );
   }

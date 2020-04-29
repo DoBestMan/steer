@@ -16,6 +16,7 @@ export type Icon =
   | 'close'
   | 'facebook'
   | 'five-stars'
+  | 'geolocation'
   | 'icon-wheel'
   | 'insights-trending'
   | 'insights-winter'

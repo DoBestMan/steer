@@ -3,6 +3,7 @@ module.exports = {
     '**/*.{js,jsx,ts,tsx}',
     '!**/*.d.ts',
     '!**/node_modules/**',
+    '!**/*.stories.tsx',
   ],
   moduleNameMapper: {
     // Make sure this is the last mapper, since it will match any file extension

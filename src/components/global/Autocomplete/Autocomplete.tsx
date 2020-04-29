@@ -1,7 +1,16 @@
-import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
+import {
+  ChangeEvent,
+  KeyboardEvent,
+  ReactChild,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
 import AutocompleteActions from './AutocompleteActions';
-import AutocompleteResultItem from './AutocompleteResultItem';
+import AutocompleteResultItem, {
+  AutocompleteResult,
+} from './AutocompleteResultItem';
 import { generateIDs, getItemDOMId } from './Autocomplete.utils';
 import styles from './Autocomplete.styles';
 
@@ -11,13 +20,15 @@ import { randomString } from '~/lib/utils/string';
 const CONSTANTS = {
   DEFAULT_SELECTED_INDEX: -1,
   DEFAULT_VALUE: '',
+  MINIMUM_CHARACTER_BEFORE_ERROR: 3,
 };
 
 interface Props {
+  children?: ReactChild;
   errorLabel: string | JSX.Element;
   label: string;
   onChange: (value: string) => void;
-  results: string[];
+  results: AutocompleteResult[];
 }
 
 // Autocomplete combobox with listbox popup
@@ -25,7 +36,13 @@ interface Props {
 // Approach: https://www.w3.org/TR/wai-aria-practices/#combobox
 // Example: https://www.w3.org/TR/wai-aria-practices/examples/combobox/aria1.1pattern/listbox-combo.html (List Autocomplete with Automatic Selection)
 
-function Autocomplete({ errorLabel, label, onChange, results }: Props) {
+function Autocomplete({
+  children,
+  errorLabel,
+  label,
+  onChange,
+  results,
+}: Props) {
   const [ids, setIds] = useState({
     invalidID: '',
     labelID: '',
@@ -42,7 +59,10 @@ function Autocomplete({ errorLabel, label, onChange, results }: Props) {
   );
   const isInputEmpty = value.length < 1;
   const hasResults = results.length > 0;
-  const isInvalidInput = !hasResults && !isInputEmpty;
+  const validResults = results.filter((result) => result.main.includes(value));
+  const isInvalidInput =
+    validResults.length < 1 &&
+    value.length > CONSTANTS.MINIMUM_CHARACTER_BEFORE_ERROR;
   const textInput = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -50,7 +70,7 @@ function Autocomplete({ errorLabel, label, onChange, results }: Props) {
   }, []);
 
   useEffect(() => {
-    setShouldShowListbox(hasResults && !isInputEmpty);
+    setShouldShowListbox(!isInvalidInput && hasResults && !isInputEmpty);
     setActivedescendant(
       isInvalidInput ? ids.invalidID : CONSTANTS.DEFAULT_VALUE,
     );
@@ -73,8 +93,10 @@ function Autocomplete({ errorLabel, label, onChange, results }: Props) {
   };
 
   const selectIndex = (index: number) => {
-    setActivedescendant(getItemDOMId(ids.listboxItemID, results[index]));
-    setSelectedIndex(index);
+    if (selectedIndex !== CONSTANTS.DEFAULT_SELECTED_INDEX) {
+      setActivedescendant(getItemDOMId(ids.listboxItemID, results[index].main));
+      setSelectedIndex(index);
+    }
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -105,7 +127,7 @@ function Autocomplete({ errorLabel, label, onChange, results }: Props) {
   };
 
   const onItemSelected = (index: number, shouldFocusInput?: boolean) => {
-    setValue(results[index]);
+    setValue(results[index].main);
     setActivedescendant(CONSTANTS.DEFAULT_VALUE);
 
     setSelectedIndex(-1);
@@ -117,63 +139,67 @@ function Autocomplete({ errorLabel, label, onChange, results }: Props) {
   };
 
   return (
-    <div css={styles.container}>
-      <label
-        id={ids.labelID}
-        css={[styles.label, !!value && styles.labelHidden]}
-      >
-        {label}
-      </label>
-
-      <div css={styles.comboboxWrapper}>
-        <div
-          aria-expanded={shouldShowListbox}
-          aria-haspopup="listbox"
-          aria-owns={ids.listboxID}
-          role="combobox"
+    <>
+      <div css={styles.container}>
+        <label
+          id={ids.labelID}
+          css={[styles.label, !!value && styles.labelHidden]}
         >
-          <input
-            aria-activedescendant={activedescendant}
-            aria-autocomplete="list"
-            aria-controls={ids.listboxID}
+          {label}
+        </label>
+
+        <div css={styles.comboboxWrapper}>
+          <div
+            aria-expanded={shouldShowListbox}
+            aria-haspopup="listbox"
+            aria-owns={ids.listboxID}
+            role="combobox"
+          >
+            <input
+              aria-activedescendant={activedescendant}
+              aria-autocomplete="list"
+              aria-controls={ids.listboxID}
+              aria-labelledby={ids.labelID}
+              css={styles.input}
+              onChange={handleOnChange}
+              onKeyDown={handleKeyDown}
+              ref={textInput}
+              type="text"
+              value={value}
+            />
+          </div>
+          <ul
             aria-labelledby={ids.labelID}
-            css={styles.input}
-            onChange={handleOnChange}
-            onKeyDown={handleKeyDown}
-            ref={textInput}
-            type="text"
-            value={value}
-          />
+            css={styles.listbox}
+            id={ids.listboxID}
+            role={shouldShowListbox ? 'listbox' : ''}
+          >
+            {shouldShowListbox &&
+              results.map((result: AutocompleteResult, index: number) => (
+                <AutocompleteResultItem
+                  index={index}
+                  inputValue={value}
+                  key={result.main}
+                  listboxItemID={ids.listboxItemID}
+                  onItemSelected={onItemSelected}
+                  main={result.main}
+                  secondary={result.secondary}
+                  selectedIndex={selectedIndex}
+                />
+              ))}
+
+            {isInvalidInput && (
+              <li css={styles.errorMessage} id={ids.invalidID}>
+                {errorLabel}
+              </li>
+            )}
+          </ul>
         </div>
-        <ul
-          aria-labelledby={ids.labelID}
-          css={styles.listbox}
-          id={ids.listboxID}
-          role={shouldShowListbox ? 'listbox' : ''}
-        >
-          {shouldShowListbox &&
-            results.map((result: string, index: number) => (
-              <AutocompleteResultItem
-                index={index}
-                inputValue={value}
-                key={result}
-                listboxItemID={ids.listboxItemID}
-                onItemSelected={onItemSelected}
-                result={result}
-                selectedIndex={selectedIndex}
-              />
-            ))}
 
-          {isInvalidInput && (
-            <li css={styles.listboxItem} id={ids.invalidID}>
-              {errorLabel}
-            </li>
-          )}
-        </ul>
+        <AutocompleteActions value={value} onClick={cancelSelection} />
       </div>
-
-      <AutocompleteActions value={value} onClick={cancelSelection} />
-    </div>
+      {!shouldShowListbox && !isInvalidInput && children}
+    </>
   );
 }
 

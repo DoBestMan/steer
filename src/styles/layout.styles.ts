@@ -8,6 +8,9 @@ export const layout = {
     position: 'absolute',
     width: '100%',
   }),
+  alignBaseline: css({
+    alignItems: 'baseline',
+  }),
   centered: css({
     alignItems: 'center',
     justifyContent: 'center',

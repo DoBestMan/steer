@@ -4,12 +4,16 @@ import styles from './Autocomplete.styles';
 
 import Button from '~/components/global/Button/Button';
 
-interface Props {
+export type AutocompleteResult = {
+  main: string;
+  secondary: string;
+};
+
+interface Props extends AutocompleteResult {
   index: number;
   inputValue: string;
   listboxItemID: string;
   onItemSelected: (index: number, shouldFocusInput?: boolean) => void;
-  result: string;
   selectedIndex: number;
 }
 
@@ -17,12 +21,13 @@ function AutocompleteResultsItem({
   index,
   inputValue,
   listboxItemID,
+  main,
   onItemSelected,
-  result,
+  secondary,
   selectedIndex,
 }: Props) {
   const isSelected = index === selectedIndex;
-  const id = getItemDOMId(listboxItemID, result);
+  const id = getItemDOMId(listboxItemID, main);
   const handleItemClicked = () => {
     onItemSelected(index, true);
   };
@@ -36,7 +41,14 @@ function AutocompleteResultsItem({
       <span aria-hidden="true" css={styles.listboxItemHighlight}>
         {inputValue}
       </span>
-      <Button onClick={handleItemClicked}>{result}</Button>
+      <Button tabIndex={-1} onClick={handleItemClicked}>
+        <>
+          {main}
+          {secondary && (
+            <span css={styles.listboxItemSecondary}>{secondary}</span>
+          )}
+        </>
+      </Button>
     </li>
   );
 }

@@ -3,6 +3,7 @@ import { MouseEventHandler, ReactChild } from 'react';
 interface Props {
   children: ReactChild;
   onClick: MouseEventHandler;
+  tabIndex?: number;
 }
 
 function Button(props: Props) {

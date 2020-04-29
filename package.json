@@ -25,6 +25,7 @@
     "@emotion/babel-preset-css-prop": "^10.0.27",
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
+    "@types/googlemaps": "^3.39.3",
     "jest-raw-loader": "^1.0.1",
     "next": "^9.3.0",
     "node-fetch": "^2.6.0",

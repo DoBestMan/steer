@@ -2,6 +2,7 @@ import { SetStateAction, useState } from 'react';
 import { css } from '@emotion/core';
 
 import Autocomplete from './Autocomplete';
+import { AutocompleteResult } from './AutocompleteResultItem';
 
 export default {
   component: Autocomplete,
@@ -15,37 +16,41 @@ const styles = {
 };
 
 const ZIP_CODES = [
-  '08203',
-  '10019',
-  '11208',
-  '11223',
-  '19111',
-  '20854',
-  '21012',
-  '21750',
-  '30102',
-  '32439',
-  '32801',
-  '34237',
-  '38103',
-  '40245',
-  '43017',
-  '53015',
-  '55386',
-  '71485',
-  '73170',
-  '74072',
-  '75229',
-  '78602',
-  '85249',
-  '89101',
-  '89506',
-  '92128',
-  '94502',
+  { main: '08203', secondary: 'secondary text for 08203' },
+  { main: '10019', secondary: 'secondary text for 10019' },
+  { main: '11208', secondary: 'secondary text for 11208' },
+  { main: '11223', secondary: 'secondary text for 11223' },
+  { main: '19111', secondary: 'secondary text for 19111' },
+  { main: '20854', secondary: 'secondary text for 20854' },
+  { main: '21012', secondary: 'secondary text for 21012' },
+  { main: '21750', secondary: 'secondary text for 21750' },
+  { main: '30102', secondary: 'secondary text for 30102' },
+  { main: '32439', secondary: 'secondary text for 32439' },
+  { main: '32801', secondary: 'secondary text for 32801' },
+  { main: '34237', secondary: 'secondary text for 34237' },
+  { main: '38103', secondary: 'secondary text for 38103' },
+  { main: '40245', secondary: 'secondary text for 40245' },
+  { main: '43017', secondary: 'secondary text for 43017' },
+  { main: '53015', secondary: 'secondary text for 53015' },
+  { main: '55386', secondary: 'secondary text for 55386' },
+  { main: '71485', secondary: 'secondary text for 71485' },
+  { main: '73170', secondary: 'secondary text for 73170' },
+  { main: '74072', secondary: 'secondary text for 74072' },
+  { main: '75229', secondary: 'secondary text for 75229' },
+  { main: '78602', secondary: 'secondary text for 78602' },
+  { main: '85249', secondary: 'secondary text for 85249' },
+  { main: '89101', secondary: 'secondary text for 89101' },
+  { main: '89506', secondary: 'secondary text for 89506' },
+  { main: '92128', secondary: 'secondary text for 92128' },
+  { main: '94502', secondary: 'secondary text for 94502' },
 ];
 
-const startsWith = (list: string[], string: string) =>
-  string ? list.filter((data) => data.startsWith(string)) : [];
+const startsWith = (list: AutocompleteResult[], comparisonString: string) =>
+  comparisonString
+    ? list.filter((item: AutocompleteResult) =>
+        item.main.startsWith(comparisonString),
+      )
+    : [];
 
 export function AutocompleteDefault() {
   const [results, setResults] = useState([]);
