@@ -1,9 +1,4 @@
-import {
-  VEHICLE_IMG_MAP,
-  DEFAULT_SCENERY,
-  DEFAULT_VEHICLE,
-  SCENERY_IMG_MAP,
-} from './HomeHeader.constants';
+import { DEFAULT_SCENERY, DEFAULT_VEHICLE } from './HomeHeader.constants';
 import styles from './HomeHeader.styles';
 
 import Grid from '~/components/global/Grid/Grid';
@@ -15,17 +10,9 @@ import { typography } from '~/styles/typography.styles';
 
 import { SiteHero } from '~/data/models/SiteHero';
 
-function HomeHeader({
-  body,
-  eyebrow,
-  sceneryType,
-  title,
-  vehicleType,
-}: SiteHero) {
-  const landscapeImg =
-    (sceneryType && SCENERY_IMG_MAP[sceneryType]) || DEFAULT_SCENERY;
-  const vehicleImage =
-    (vehicleType && VEHICLE_IMG_MAP[vehicleType]) || DEFAULT_VEHICLE;
+function HomeHeader({ body, eyebrow, title }: SiteHero) {
+  const landscapeImg = DEFAULT_SCENERY;
+  const vehicleImage = DEFAULT_VEHICLE;
   const backgroundImage = {
     backgroundImage: `url(${landscapeImg})`,
   };

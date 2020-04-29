@@ -13,27 +13,7 @@ export interface SiteHero {
   eyebrow: string | null;
 
   /**
-   * Optional end date-time for a countdown inside the eyebrow
-   */
-  eyebrowCountdownEnd: Date | null;
-
-  /**
-   * Type of scenery, supported by the front-end
-   */
-  sceneryType: string | null;
-
-  /**
    * Hero title
    */
   title: string;
-
-  /**
-   * Type of vehicle, supported by the front-end
-   */
-  vehicleType: string | null;
-
-  /**
-   * Type of the current weather
-   */
-  weatherType: string | null;
 }

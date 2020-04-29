@@ -6,11 +6,11 @@ export enum Vehicles {
   HATCH = 'hatch',
 }
 
-export const VEHICLE_IMG_MAP: { [key: string]: string } = {
+const VEHICLE_IMG_MAP: { [key: string]: string } = {
   [Vehicles.HATCH]: '/images/home-header/home-header-hatch.png',
 };
 
-export const SCENERY_IMG_MAP: { [key: string]: string } = {
+const SCENERY_IMG_MAP: { [key: string]: string } = {
   [Sceneries.MOUNTAIN]: '/images/home-header/home-header-mountain.png',
 };
 
