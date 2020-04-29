@@ -1,0 +1,41 @@
+name: Run script and notify Slack
+
+on:
+  schedule:
+  # 6:00pm EDT Mon-Fri
+  - cron: '0 22 * * 1-5'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v1
+      with:
+        python-version: '3.x'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install PyGithub
+        pip install jira
+    - name: Run scripts
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        JIRA_TOKEN: ${{ secrets.JIRA_TOKEN }}
+        VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        JIRA_USERNAME: george@work.co
+        VERCEL_URL: https://api.vercel.com/v5/now/deployments
+        VERCEL_TEAM_ID: team_VPd1oc6P6ZnTcxG88nPVzK1c
+      run: |
+        python scripts/tickets.py
+    - name: Notifying via Slack
+      uses: aibexhq/slack-rich-notify@v2.0.1
+      with:
+        token: ${{secrets.SLACK_AUTH_TOKEN}}
+        secret: ${{secrets.SLACK_SIGNING_TOKEN}}
+        channel: G010S9J6BT7
+        evals: |
+          message = cat notification.txt
+        message: |
+          {{evals.message}}

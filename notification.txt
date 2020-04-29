@@ -1,0 +1,50 @@
+Commits:
+
+[WCS-41] Let Links be displayed as other elements (#62)
+
+* Implement as prop on Link component
+
+* Integrate Link changes with Link subcomponents
+
+* Add back in erroring href and homepage nav
+
+* Fix Link typescript issues
+
+* Remove Nav from global app
+
+* Add as to stories and create link_types constants
+
+* Remove span as a link type option
+[WCS-125] Global Autocomplete component (#63)
+
+* feat(autocomplete): base component
+
+* feat(autocomplete): logic and functionality
+
+* chore(autocomplete): refactor components
+
+* chore(autocomplete): extract actions and fix error msg
+
+* fix(autocomplete): file and story names
+
+* fix(autocomplete): component filenames
+
+* fix(autocomplete): fix expanded and clear logic
+
+* fix(autocomplete): PR comments
+
+* fix(autocomplete): fix accessibility warnings
+
+* fix(autocomplete): generate random ids
+
+* fix(autocomplete): refactor ids and listboxitem
+
+* chore(autocomplete): refactor results item
+
+* feat(autocomplete): highlight matching characters
+Use Correct header image names and vars (#77)
+Merge branch 'dev' into qa
+Build version: v0.10.0
+Build URL: https://steer-6x3k5dw42.now.sh
+
+
