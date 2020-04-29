@@ -13,7 +13,7 @@ describe('IconOrImage', () => {
 
     expect(container.firstChild).toMatchInlineSnapshot(`
       <span
-        class="css-1h82lze-container-centeredVertical-Icon"
+        class="container-centeredVertical-Icon"
       >
         <svg
           fill="#181818"

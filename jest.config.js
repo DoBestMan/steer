@@ -11,6 +11,7 @@ module.exports = {
   restoreMocks: true,
   roots: ['<rootDir>/src'],
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
+  snapshotSerializers: ['<rootDir>/jest.emotionSerializer.ts'],
   testPathIgnorePatterns: ['/node_modules/', '/.next/'],
   transform: {
     '^.+\\.(js|jsx|ts|tsx)$': '<rootDir>/node_modules/babel-jest',
