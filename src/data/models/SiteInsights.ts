@@ -12,11 +12,6 @@ export interface SiteInsights {
   body: string;
 
   /**
-   * Link displayed below the body
-   */
-  linkLabel: string | null;
-
-  /**
    * List of insights
    */
 

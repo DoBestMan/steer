@@ -15,20 +15,6 @@ const styles = {
       marginBottom: SPACING.SIZE_120,
     },
   }),
-  cta: css({
-    [MQ.S]: [
-      typography.smallCopy,
-      {
-        marginBottom: SPACING.SIZE_20,
-      },
-    ],
-    [MQ.M]: [
-      typography.bodyCopy,
-      {
-        marginBottom: 0,
-      },
-    ],
-  }),
   description: css({
     marginBottom: SPACING.SIZE_40,
   }),

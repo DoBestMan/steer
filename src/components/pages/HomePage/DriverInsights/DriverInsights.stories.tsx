@@ -1,6 +1,6 @@
 import { css } from '@emotion/core';
 
-import { text, boolean } from '@storybook/addon-knobs';
+import { text } from '@storybook/addon-knobs';
 
 import DriverInsights from './DriverInsights';
 
@@ -30,10 +30,8 @@ const styles = {
 const title = 'What drivers look for.';
 const description =
   "We know, buying tires online may feel complicated. That's why we're here to help. We empower you with data and reviews to make you comfortable to find tires and installers near you";
-const cta = 'Where do these trends come from?';
 
 export function WhatDriversLookFor() {
-  const hasCTA = boolean('Has CTA', true);
   return (
     <Grid css={styles.root}>
       <DriverInsights
@@ -41,8 +39,6 @@ export function WhatDriversLookFor() {
           mockInsights as Array<SiteInsightItemDefault | SiteInsightItemList>
         }
         title={text('Title', title)}
-        linkLabel={hasCTA ? text('CTA', cta) : null}
-        // link={hasCTA ? { href: '/' } : null}
         body={text('Description', description)}
       />
     </Grid>

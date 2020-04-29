@@ -3,7 +3,6 @@ import styles from './DriverInsights.styles';
 import GridItem from '~/components/global/Grid/GridItem';
 
 import { typography } from '~/styles/typography.styles';
-import Link from '~/components/global/Link/Link';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { BREAKPOINT_SIZES } from '~/lib/constants';
 import { colors } from '~/styles/colors.styles';
@@ -27,13 +26,7 @@ const mapInsightTypeToCard = {
   },
 };
 
-function DriverInsights({
-  body,
-  // link = { href: '/' },
-  linkLabel,
-  siteInsightList,
-  title,
-}: SiteInsights) {
+function DriverInsights({ body, siteInsightList, title }: SiteInsights) {
   const breakpoint = useBreakpoints();
   const isMobile = breakpoint === BREAKPOINT_SIZES.S;
   return (
@@ -47,12 +40,6 @@ function DriverInsights({
           >
             {body}
           </p>
-        )}
-        {linkLabel && (
-          // TODO: add link href to mock data
-          <Link href="/" css={styles.cta}>
-            {linkLabel}
-          </Link>
         )}
       </GridItem>
       <GridItem gridColumnM="5/8" gridColumnL="8/13" css={styles.cards}>
