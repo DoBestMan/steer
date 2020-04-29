@@ -26,12 +26,14 @@ export function Text() {
         <p css={typography.primaryHeadline}>Primary Headline</p>
         <p css={typography.secondaryHeadline}>Secondary Headline</p>
         <p css={typography.tertiaryHeadline}>Tertiary Headline</p>
-        <p css={typography.subhead}>Subhead</p>
+        <p css={typography.primarySubhead}>Primary Subhead</p>
+        <p css={typography.secondarySubhead}>Secondary Subhead</p>
         <p css={typography.eyebrow}>Eyebrow</p>
+        <p css={typography.largeCopy}>Large Copy</p>
         <p css={typography.bodyCopy}>Body Copy</p>
+        <p css={typography.bodyCopyTight}>Body Copy Tight</p>
         <p css={typography.smallCopy}>Small Copy</p>
-        <p css={typography.headlineReduced}>Reduced</p>
-        <p css={typography.smallCopyReduced}>Reduced Copy</p>
+        <p css={typography.smallCopyTight}>Small Copy Tight</p>
       </GridItem>
       <GridItem
         fullbleed
