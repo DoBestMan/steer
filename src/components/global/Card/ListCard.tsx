@@ -6,12 +6,7 @@ import { ICONS } from '~/components/global/Icon/Icon.constants';
 import IconOrImage from '~/components/global/IconOrImage/IconOrImage';
 import { SiteInsightItemList } from '~/data/models/SiteInsightItemList';
 
-function ListCard({
-  items,
-  moreLink,
-  moreLinkLabel,
-  title,
-}: SiteInsightItemList) {
+function ListCard({ items, more, title }: SiteInsightItemList) {
   return (
     <GridItem
       gridColumnS="2/5"
@@ -41,11 +36,13 @@ function ListCard({
             </li>
           ))}
         </ul>
-        <div css={styles.cta}>
-          <Link href={moreLink.href} icon={ICONS.CHEVRON_RIGHT}>
-            {moreLinkLabel}
-          </Link>
-        </div>
+        {more && (
+          <div css={styles.cta}>
+            <Link href={more.link.href} icon={ICONS.CHEVRON_RIGHT}>
+              {more.label}
+            </Link>
+          </div>
+        )}
       </GridItem>
     </GridItem>
   );

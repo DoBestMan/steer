@@ -17,9 +17,11 @@ export interface SiteInsightItemList {
    */
   items: Array<SiteInsightItemListItems>;
 
-  moreLink: SiteLink;
+  more: {
+    label: string;
 
-  moreLinkLabel: string;
+    link: SiteLink;
+  };
 
   title: string;
 

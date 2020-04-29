@@ -147,8 +147,10 @@ export function CardWithList() {
         id="5"
         title={text('Title', 'Find any tire.')}
         items={mockListItems}
-        moreLinkLabel={text('CTA Text', 'See more')}
-        moreLink={{ href: '/', isExternal: false }}
+        more={{
+          label: text('CTA Text', 'See more'),
+          link: { href: '/', isExternal: false },
+        }}
         type={INSIGHT_TYPE.LIST}
       />
     </CardContainer>
