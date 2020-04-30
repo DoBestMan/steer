@@ -1,3 +1,5 @@
+import 'intersection-observer';
+
 import { Global } from '@emotion/core';
 import App from 'next/app';
 import Head from 'next/head';

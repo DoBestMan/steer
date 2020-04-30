@@ -4,6 +4,7 @@ export * from './borders';
 export * from './colors';
 export * from './easing';
 export * from './grid';
+export * from './image';
 export * from './image.types';
 export * from './keycodes';
 export * from './links';

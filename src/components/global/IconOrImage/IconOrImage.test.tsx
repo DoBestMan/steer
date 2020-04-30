@@ -38,9 +38,8 @@ describe('IconOrImage', () => {
     );
 
     expect(container.firstChild).toMatchInlineSnapshot(`
-      <img
-        alt="150x150 image"
-        srcset="https://via.placeholder.com/150"
+      <div
+        class="root-placeholder-Image"
       />
     `);
   });
