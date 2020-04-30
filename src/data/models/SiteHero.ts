@@ -13,7 +13,22 @@ export interface SiteHero {
   eyebrow: string | null;
 
   /**
+   * Type of scenery, supported by the front-end
+   */
+  sceneryType: string | null;
+
+  /**
    * Hero title
    */
   title: string;
+
+  /**
+   * Type of vehicle, supported by the front-end
+   */
+  vehicleType: string | null;
+
+  /**
+   * Type of the current weather
+   */
+  weatherType: string | null;
 }

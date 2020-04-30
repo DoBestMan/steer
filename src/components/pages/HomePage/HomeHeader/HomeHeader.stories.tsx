@@ -19,7 +19,10 @@ export function HeaderWithKnobs() {
       'Access over 55 million tires,<br />10,000 installation centers, <br />300 brands. <br />All in one place.',
     ),
     eyebrow: text('Promo', 'Black Friday'),
+    sceneryType: text('Landscape ID', 'mountain'),
     title: text('Title', 'Replacing <br /> tires is now <br />simple**.**'),
+    vehicleType: text('Vehicle ID', 'hatch'),
+    weatherType: null,
   };
 
   return <HomeHeader {...headerData} />;
@@ -32,7 +35,10 @@ export function DefaultHeader() {
       'Access over 55 million tires,<br />10,000 installation centers, <br />300 brands. <br />All in one place.',
     ),
     eyebrow: null,
+    sceneryType: text('Landscape ID', 'mountain'),
     title: text('Title', 'Replacing <br /> tires is now <br />simple**.**'),
+    vehicleType: text('Vehicle ID', 'hatch'),
+    weatherType: null,
   };
 
   return <HomeHeader {...headerData} />;
@@ -45,7 +51,10 @@ export function PromoHeaderDefault() {
       'Access over 55 million tires,<br />10,000 installation centers, <br />300 brands. <br />All in one place.',
     ),
     eyebrow: text('Promo', 'Black Friday'),
+    sceneryType: text('Landscape ID', 'mountain'),
     title: text('Title', 'Replacing <br /> tires is now <br />simple**.**'),
+    vehicleType: text('Vehicle ID', 'hatch'),
+    weatherType: null,
   };
 
   return <HomeHeader {...headerData} />;
