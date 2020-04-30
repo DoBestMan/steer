@@ -1,0 +1,9 @@
+{
+  "common": {
+    "modal": {
+      "close": "close that modal!",
+      "open": "open {{moduleName}}"
+    }
+  },
+  "homepage": {}
+}

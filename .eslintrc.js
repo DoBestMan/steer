@@ -19,11 +19,15 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: ['jest', 'react-hooks', 'typescript-sort-keys'],
+  ignorePatterns: ['*.md'],
   rules: {
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-empty-function': 'off',
     '@typescript-eslint/no-use-before-define': 'off',
-    '@typescript-eslint/no-unused-vars': ['error', { 'argsIgnorePattern': '^_', 'varsIgnorePattern': '^_' }],
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
+    ],
     'jest/no-focused-tests': 'error',
     'jest/prefer-inline-snapshots': 'error',
     'jest/no-identical-title': 'error',
