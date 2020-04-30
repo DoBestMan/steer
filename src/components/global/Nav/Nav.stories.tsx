@@ -7,5 +7,9 @@ export default {
 };
 
 export function NavNoKnobs() {
+  return <Nav links={data.links} isHomepage />;
+}
+
+export function NavNotHomepage() {
   return <Nav links={data.links} />;
 }

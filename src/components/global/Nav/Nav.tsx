@@ -8,6 +8,7 @@ import NavLink from '~/components/global/Link/NavLink';
 import { layout } from '~/styles/layout.styles';
 
 import styles from './Nav.styles';
+import NavSearchButton from './NavSearchBar/NavSearchButton';
 
 interface LinkType {
   action: string;
@@ -17,6 +18,7 @@ interface LinkType {
 }
 
 interface Props {
+  isHomepage?: boolean;
   links: LinkType[];
 }
 
@@ -25,7 +27,7 @@ const CONSTANTS = {
   MOBILE_MENU_ARIA_LABEL: 'Mobile menu',
 };
 
-function Nav({ links }: Props) {
+function Nav({ isHomepage, links }: Props) {
   return (
     <Grid as="nav" css={styles.root}>
       <GridItem css={layout.container} gridColumn="2/4">
@@ -42,8 +44,13 @@ function Nav({ links }: Props) {
         css={styles.links}
         gridColumn="4/6"
         gridColumnM="4/8"
-        gridColumnL="6/14"
+        gridColumnL="4/14"
       >
+        {!isHomepage && (
+          <li css={styles.searchButton}>
+            <NavSearchButton />
+          </li>
+        )}
         {links.map(({ action, icon, label, text }: LinkType) => {
           return (
             <li css={styles.listItem} key={`${text}${icon}`}>

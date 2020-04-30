@@ -10,6 +10,7 @@ const CONSTANTS = {
 const styles = {
   hamburger: {
     display: 'inline-flex',
+    marginLeft: SPACING.SIZE_20,
     [MQ.L]: {
       display: 'none',
     },
@@ -43,6 +44,17 @@ const styles = {
     },
     [MQ.L]: {
       padding: `${SPACING.SIZE_60}px 0`,
+    },
+  }),
+  searchButton: css({
+    [MQ.L]: {
+      marginRight: 'auto',
+      width: 200,
+    },
+
+    [MQ.XL]: {
+      maxWidth: 420,
+      width: '35%',
     },
   }),
 };
