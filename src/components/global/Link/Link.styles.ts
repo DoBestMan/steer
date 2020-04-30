@@ -71,6 +71,7 @@ export const iconCTA = {
     css({
       alignItems: 'center',
       borderRadius: RADIUS.CIRCLE,
+      color: COLORS.GLOBAL.WHITE,
       display: 'flex',
       height: CONSTANTS.SIZE,
       justifyContent: 'center',

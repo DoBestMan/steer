@@ -11,4 +11,5 @@ export * from './links.types';
 export * from './radius';
 export * from './routes';
 export * from './spacing';
+export * from './storybook';
 export * from './time';

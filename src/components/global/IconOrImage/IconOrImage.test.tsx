@@ -16,7 +16,6 @@ describe('IconOrImage', () => {
         class="container-centeredVertical-Icon"
       >
         <svg
-          fill="#181818"
           height="12"
           viewBox="0 0 14 12"
           width="14"

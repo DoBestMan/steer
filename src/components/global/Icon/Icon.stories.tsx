@@ -1,13 +1,12 @@
+import { select } from '@storybook/addon-knobs';
 import { css } from '@emotion/core';
-import { text } from '@storybook/addon-knobs';
 
 import { Fragment } from 'react';
 
 import Icon from './Icon';
 import { ICONS } from './Icon.constants';
-import { Icon as IconType } from './Icon.types';
 
-import { COLORS } from '~/lib/constants';
+import { STORYBOOK_COLORS } from '~/lib/constants';
 
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
@@ -25,19 +24,45 @@ const styles = {
   }),
 };
 
-export function ShowListOfIcons() {
-  const fillHex = text('Color hex', COLORS.GLOBAL.BLACK);
+export function ShowListOfIconsWithKnobs() {
+  const color = select('Color', STORYBOOK_COLORS, STORYBOOK_COLORS.DARK_BLACK);
+  const backgroundColor = select(
+    'Background Color',
+    STORYBOOK_COLORS,
+    STORYBOOK_COLORS.WHITE,
+  );
+
   return (
-    <Grid css={styles.container}>
-      {Object.values(ICONS).map((icon: string) => {
-        const name = icon as IconType;
+    <Grid css={[styles.container, { backgroundColor }]}>
+      {Object.values(ICONS).map((icon) => {
+        const name = icon;
         return (
           <Fragment key={name}>
-            <GridItem gridColumn={'2/4'} css={typography.bodyCopy}>
+            <GridItem gridColumn="2/4" css={[typography.bodyCopy, { color }]}>
               {name}
             </GridItem>
-            <GridItem gridColumn={'4/6'}>
-              <Icon fill={fillHex} name={name} key={name} />
+            <GridItem gridColumn="4/6">
+              <Icon name={name} key={name} css={{ color }} />
+            </GridItem>
+          </Fragment>
+        );
+      })}
+    </Grid>
+  );
+}
+
+export function ShowListOfIcons() {
+  return (
+    <Grid css={styles.container}>
+      {Object.values(ICONS).map((icon) => {
+        const name = icon;
+        return (
+          <Fragment key={name}>
+            <GridItem gridColumn="2/4" css={typography.bodyCopy}>
+              {name}
+            </GridItem>
+            <GridItem gridColumn="4/6">
+              <Icon name={name} key={name} />
             </GridItem>
           </Fragment>
         );

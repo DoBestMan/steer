@@ -2,8 +2,6 @@ import styles from './Card.styles';
 
 import IconOrImage from '../IconOrImage/IconOrImage';
 
-import { COLORS } from '~/lib/constants';
-
 import GridItem from '~/components/global/Grid/GridItem';
 import Link from '~/components/global/Link/Link';
 import Icon from '~/components/global/Icon/Icon';
@@ -47,11 +45,7 @@ function Card({
         {eyebrow && eyebrowIcon && (
           <div css={styles.eyebrow}>
             <span>{eyebrow}</span>
-            <Icon
-              fill={COLORS.GLOBAL.ORANGE}
-              name={eyebrowIcon.svgId}
-              css={styles.eyebrowIcon}
-            />
+            <Icon name={eyebrowIcon.svgId} css={styles.eyebrowIcon} />
           </div>
         )}
         <p css={styles.title}>{title}</p>

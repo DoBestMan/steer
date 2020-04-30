@@ -53,7 +53,6 @@ function Link({
   const inlineIcon = icon && (
     <Icon
       aria-hidden={!!children}
-      fill="currentColor"
       name={icon}
       css={children && styles[iconPosition]}
     />

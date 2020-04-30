@@ -96,3 +96,19 @@ interface Props {
   boo: string
 }
 ```
+
+## Icons
+
+- To allow icons to be colored, replace any strokes or fills with `currentColor` and make sure to pass the desired color to the `Icon` or container.
+
+```diff
+- <svg viewBox="0 0 25 25" fill="none">
+-  <path stroke="#000" d="M23 2L13.4903 23L12.05 13.2194L2 11.6889L23 2Z" stroke-width="3" stroke-linejoin="round"/>
+- </svg>
++ <svg viewBox="0 0 25 25" fill="none">
++  <path stroke="currentColor" d="M23 2L13.4903 23L12.05 13.2194L2 11.6889L23 2Z" stroke-width="3" stroke-linejoin="round"/>
++ </svg>
+```
+
+- Don't forget to run `yarn generate-svg-sprite`
+- If an icon has multiple colors, like `icon-wheel`, you may not want to allow the color to be changed.
