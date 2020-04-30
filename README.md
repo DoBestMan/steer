@@ -3,6 +3,7 @@
 ## Documentation
 
 - [Contributing](./docs/CONTRIBUTING.md)
+- [Data Fetching](./docs/DATA_FETCHING.md)
 - [Storybook](./docs/STORYBOOK.md)
 - [Testing](./docs/TESTING.md)
 
