@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import Autocomplete from '~/components/global/Autocomplete/Autocomplete';
+import { AutocompleteResult } from '~/components/global/Autocomplete/AutocompleteResultItem';
 
 import { styles } from './Location.styles';
+import UseCurrentLocation from './UseCurrentLocation';
 
 interface Props {
   currentLocation?: {
@@ -10,6 +12,8 @@ interface Props {
     stateAbbr: string | null;
     zip: string | null;
   };
+  onCurrentLocationError: (error: string) => void;
+  onLocationChangeSuccess: (location: AutocompleteResult) => void;
 }
 
 const CONSTANTS = {
@@ -30,21 +34,18 @@ const CONSTANTS = {
   US_CENTER_COORDS: { lat: 39.8283459, lng: -98.5794797 },
 };
 
-const filterResults = (
-  results: Array<google.maps.places.AutocompletePrediction>,
-) => {
-  const newResults = results.map((result) => ({
-    main: result.structured_formatting.main_text,
-    secondary: result.structured_formatting.secondary_text.replace(', USA', ''),
-  }));
-
-  return newResults;
-};
-
 const filterPredictions = (
   predictions: google.maps.places.AutocompletePrediction[],
 ) =>
-  predictions.filter((prediction) => prediction.types.includes('postal_code'));
+  predictions
+    .filter((prediction) => prediction.types.includes('postal_code'))
+    .map((result) => ({
+      main: result.structured_formatting.main_text,
+      secondary: result.structured_formatting.secondary_text.replace(
+        ', USA',
+        '',
+      ),
+    }));
 
 const appendGMapScript = (onLoadCallBack: () => void) => {
   const script = document.createElement('script');
@@ -58,10 +59,13 @@ const appendGMapScript = (onLoadCallBack: () => void) => {
   };
 };
 
-function LocationContainer({ currentLocation }: Props) {
-  const [results, setResults] = useState<
-    Array<google.maps.places.AutocompletePrediction>
-  >([]);
+function LocationContainer({
+  currentLocation,
+  onCurrentLocationError,
+  onLocationChangeSuccess,
+}: Props) {
+  const [inputValue, setInputValue] = useState('');
+  const [results, setResults] = useState<Array<AutocompleteResult>>([]);
   const [latLng, setLatLng] = useState<google.maps.LatLng | undefined>(
     undefined,
   );
@@ -71,9 +75,18 @@ function LocationContainer({ currentLocation }: Props) {
     setAutocomplete,
   ] = useState<google.maps.places.AutocompleteService | null>(null);
 
-  const onChange = (input: string) => {
-    setSearch(input);
-  };
+  const onChange = useCallback(
+    (input: string) => {
+      // We need to clear the results when the input is empty to
+      // prevent glitches caused by the API req/res time when entering
+      // a new search term while trying to match it to old results
+      if (input === '') {
+        setResults([]);
+      }
+      setSearch(input);
+    },
+    [setSearch],
+  );
 
   const initGMapScripts = () => {
     setAutocomplete(new window.google.maps.places.AutocompleteService());
@@ -119,6 +132,10 @@ function LocationContainer({ currentLocation }: Props) {
     };
   }, [autocomplete, latLng, search]);
 
+  const onCurrentLocationSuccess = (zip: string) => {
+    setInputValue(zip);
+  };
+
   const errorLabel = (
     <span>
       Oops. <br />
@@ -130,8 +147,10 @@ function LocationContainer({ currentLocation }: Props) {
     <Autocomplete
       label="Enter your ZIP code"
       errorLabel={errorLabel}
+      inputValue={inputValue}
       onChange={onChange}
-      results={filterResults(results)}
+      onValueSelectionSuccess={onLocationChangeSuccess}
+      results={results}
     >
       <>
         {currentLocation && (
@@ -140,6 +159,10 @@ function LocationContainer({ currentLocation }: Props) {
             {currentLocation.zip}
           </span>
         )}
+        <UseCurrentLocation
+          onCurrentLocationSuccess={onCurrentLocationSuccess}
+          onCurrentLocationError={onCurrentLocationError}
+        />
       </>
     </Autocomplete>
   );

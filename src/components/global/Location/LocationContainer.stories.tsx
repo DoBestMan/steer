@@ -1,3 +1,7 @@
+import { useState } from 'react';
+
+import { AutocompleteResult } from '~/components/global/Autocomplete/AutocompleteResultItem';
+
 import LocationContainer from './LocationContainer';
 
 export default {
@@ -6,11 +10,35 @@ export default {
 };
 
 const currentLocation = {
-  cityName: 'Brooklyn',
-  stateAbbr: 'NY',
-  zip: '11201',
+  cityName: 'Boulder',
+  stateAbbr: 'CO',
+  zip: '80301',
+};
+
+const onCurrentLocationError = (error: string) => {
+  console.error(error);
 };
 
 export function Location() {
-  return <LocationContainer currentLocation={currentLocation} />;
+  const [location, setLocation] = useState(currentLocation);
+
+  const handleLocationChangeSuccess = (location: AutocompleteResult) => {
+    const [cityName, stateAbbr] = location.secondary.split(', ');
+
+    const newLocation = {
+      cityName,
+      stateAbbr,
+      zip: location.main,
+    };
+
+    setLocation(newLocation);
+  };
+
+  return (
+    <LocationContainer
+      currentLocation={location}
+      onLocationChangeSuccess={handleLocationChangeSuccess}
+      onCurrentLocationError={onCurrentLocationError}
+    />
+  );
 }

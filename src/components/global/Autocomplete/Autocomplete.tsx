@@ -26,8 +26,10 @@ const CONSTANTS = {
 interface Props {
   children?: ReactChild;
   errorLabel: string | JSX.Element;
+  inputValue?: string;
   label: string;
   onChange: (value: string) => void;
+  onValueSelectionSuccess: (value: AutocompleteResult) => void;
   results: AutocompleteResult[];
 }
 
@@ -39,8 +41,10 @@ interface Props {
 function Autocomplete({
   children,
   errorLabel,
+  inputValue = CONSTANTS.DEFAULT_VALUE,
   label,
   onChange,
+  onValueSelectionSuccess,
   results,
 }: Props) {
   const [ids, setIds] = useState({
@@ -50,7 +54,7 @@ function Autocomplete({
     listboxItemID: '',
   });
   const [shouldShowListbox, setShouldShowListbox] = useState(false);
-  const [value, setValue] = useState(CONSTANTS.DEFAULT_VALUE);
+  const [value, setValue] = useState(inputValue);
   const [activedescendant, setActivedescendant] = useState(
     CONSTANTS.DEFAULT_VALUE,
   );
@@ -64,6 +68,12 @@ function Autocomplete({
     validResults.length < 1 &&
     value.length > CONSTANTS.MINIMUM_CHARACTER_BEFORE_ERROR;
   const textInput = useRef<HTMLInputElement>(null);
+
+  const focusOnInput = () => {
+    if (textInput.current) {
+      textInput.current.focus();
+    }
+  };
 
   useEffect(() => {
     setIds(generateIDs(randomString(10)));
@@ -86,11 +96,20 @@ function Autocomplete({
   };
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const targetValue = e.currentTarget.value;
+    // Ignore non alphanumeric characters
+    const targetValue = e.currentTarget.value.replace(/[^a-zA-Z0-9]/g, '');
 
     onChange(targetValue);
     setValue(targetValue);
   };
+
+  useEffect(() => {
+    if (inputValue) {
+      onChange(inputValue);
+      setValue(inputValue);
+      focusOnInput();
+    }
+  }, [inputValue, onChange]);
 
   const selectIndex = (index: number) => {
     if (selectedIndex !== CONSTANTS.DEFAULT_SELECTED_INDEX) {
@@ -114,6 +133,7 @@ function Autocomplete({
         selectIndex(prevIndex);
         break;
       case KEYCODES.ENTER:
+        e.preventDefault();
         if (hasResults) {
           onItemSelected(selectedIndex);
         }
@@ -130,12 +150,13 @@ function Autocomplete({
     setValue(results[index].main);
     setActivedescendant(CONSTANTS.DEFAULT_VALUE);
 
-    setSelectedIndex(-1);
     setShouldShowListbox(false);
 
-    if (shouldFocusInput && textInput.current) {
-      textInput.current.focus();
+    if (shouldFocusInput) {
+      focusOnInput();
     }
+
+    onValueSelectionSuccess(results[index]);
   };
 
   return (

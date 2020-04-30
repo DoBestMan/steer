@@ -62,6 +62,7 @@ const styles = {
     background: COLORS.GLOBAL.WHITE,
     color: COLORS.LIGHT.GRAY_70,
     left: 0,
+    pointerEvents: 'none',
     position: 'absolute',
     top: 0,
   }),

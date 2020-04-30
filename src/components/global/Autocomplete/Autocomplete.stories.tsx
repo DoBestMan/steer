@@ -1,4 +1,5 @@
 import { css } from '@emotion/core';
+import { action } from '@storybook/addon-actions';
 import { SetStateAction, useState } from 'react';
 
 import Autocomplete from './Autocomplete';
@@ -52,6 +53,8 @@ const startsWith = (list: AutocompleteResult[], comparisonString: string) =>
       )
     : [];
 
+const handleSelectionSuccess = action('selection-success');
+
 export function AutocompleteDefault() {
   const [results, setResults] = useState([]);
   const onChange = (value: string) => {
@@ -70,6 +73,7 @@ export function AutocompleteDefault() {
       results={results}
       label="Enter ZIP Code"
       errorLabel={errorLabel}
+      onValueSelectionSuccess={handleSelectionSuccess}
     />
   );
 }

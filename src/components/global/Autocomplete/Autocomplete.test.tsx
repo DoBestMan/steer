@@ -12,6 +12,7 @@ describe('autocomplete', () => {
         results={[]}
         label="Enter input"
         errorLabel="Invalid input"
+        onValueSelectionSuccess={jest.fn()}
       />,
     );
 
@@ -31,6 +32,7 @@ describe('autocomplete', () => {
         results={[]}
         label="Enter input"
         errorLabel="Invalid input"
+        onValueSelectionSuccess={jest.fn()}
       />,
     );
 
@@ -60,6 +62,7 @@ describe('autocomplete', () => {
         results={[]}
         label="Enter input"
         errorLabel="Invalid input"
+        onValueSelectionSuccess={jest.fn()}
       />,
     );
 
@@ -77,6 +80,7 @@ describe('autocomplete', () => {
         ]}
         label="Enter input"
         errorLabel="Invalid input"
+        onValueSelectionSuccess={jest.fn()}
       />,
     );
 
@@ -110,6 +114,7 @@ describe('autocomplete', () => {
         results={[]}
         label="Enter input"
         errorLabel="Invalid input"
+        onValueSelectionSuccess={jest.fn()}
       />,
     );
 
@@ -127,6 +132,7 @@ describe('autocomplete', () => {
         ]}
         label="Enter input"
         errorLabel="Invalid input"
+        onValueSelectionSuccess={jest.fn()}
       />,
     );
 
@@ -160,6 +166,7 @@ describe('autocomplete', () => {
         results={[]}
         label="Enter input"
         errorLabel="Invalid input"
+        onValueSelectionSuccess={jest.fn()}
       />,
     );
 
@@ -177,6 +184,7 @@ describe('autocomplete', () => {
         ]}
         label="Enter input"
         errorLabel="Invalid input"
+        onValueSelectionSuccess={jest.fn()}
       />,
     );
 
@@ -197,6 +205,7 @@ describe('autocomplete', () => {
         results={[]}
         label="Enter input"
         errorLabel="Invalid input"
+        onValueSelectionSuccess={jest.fn()}
       />,
     );
 
@@ -214,6 +223,7 @@ describe('autocomplete', () => {
         ]}
         label="Enter input"
         errorLabel="Invalid input"
+        onValueSelectionSuccess={jest.fn()}
       />,
     );
 
