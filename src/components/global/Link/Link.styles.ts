@@ -12,7 +12,6 @@ import {
   SPACING,
   TIME,
 } from '~/lib/constants';
-import { backgroundColors, colors } from '~/styles/colors.styles';
 import { disableGlobalFocus } from '~/styles/document/accessibility.styles';
 import { typography } from '~/styles/typography.styles';
 
@@ -44,17 +43,17 @@ const styles = {
     paddingLeft: 5,
   }),
   [LINK_THEME.DARK]: [
-    colors.DARK.GRAY_40,
     css({
       ...disableGlobalFocus,
-      '&:hover:not(:active)': colors.GLOBAL.WHITE,
+      '&:hover:not(:active)': { color: COLORS.GLOBAL.WHITE },
+      color: COLORS.DARK.GRAY_40,
     }),
   ],
   [LINK_THEME.LIGHT]: [
-    colors.GLOBAL.BLACK,
     css({
       ...disableGlobalFocus,
-      '&:active span, &:focus span': colors.LIGHT.GRAY_70,
+      '&:active span, &:focus span': { color: COLORS.LIGHT.GRAY_70 },
+      color: COLORS.GLOBAL.BLACK,
     }),
   ],
   [LINK_SIZE.REG]: typography.bodyCopy,
@@ -69,9 +68,9 @@ const styles = {
 
 export const iconCTA = {
   icon: [
-    backgroundColors.GLOBAL.ORANGE,
     css({
       alignItems: 'center',
+      backgroundColor: COLORS.GLOBAL.ORANGE,
       borderRadius: RADIUS.CIRCLE,
       color: COLORS.GLOBAL.WHITE,
       display: 'flex',
@@ -87,17 +86,17 @@ export const iconCTA = {
 };
 
 export const footerLink = [
-  colors.LIGHT.GRAY_70,
   typography.bodyCopy,
   css({
     '&:hover span svg, &:focus span svg': {
       fill: COLORS.GLOBAL.ORANGE,
     },
-    '&:hover, &:focus': colors.GLOBAL.ORANGE,
+    '&:hover, &:focus': { color: COLORS.GLOBAL.ORANGE },
     'span svg': {
       fill: COLORS.GLOBAL.BLACK,
     },
     // eslint-disable-next-line sort-keys
+    color: COLORS.LIGHT.GRAY_70,
     display: 'inline-flex',
     [MQ.XL]: typography.smallCopy,
   }),
@@ -105,23 +104,22 @@ export const footerLink = [
 
 export const navLink = {
   root: [
-    colors.LIGHT.GRAY_70,
     typography.tertiaryHeadline,
     css({
-      '&:hover span': colors.GLOBAL.BLACK,
-
+      '&:hover span': { color: COLORS.GLOBAL.BLACK },
       // eslint-disable-next-line sort-keys
-      '&:active span, &:focus span': colors.LIGHT.GRAY_70,
+      '&:active span, &:focus span': { color: COLORS.LIGHT.GRAY_70 },
+      color: COLORS.LIGHT.GRAY_70,
       [MQ.XL]: typography.tertiaryHeadline,
     }),
   ],
   selected: [
-    colors.GLOBAL.ORANGE,
     typography.tertiaryHeadline,
     css({
       '&:hover, &:focus, &:active': {
-        span: colors.GLOBAL.ORANGE,
+        span: { color: COLORS.GLOBAL.ORANGE },
       },
+      color: COLORS.GLOBAL.ORANGE,
       span: {
         borderBottom: '2px dotted',
         transition: `border-color ${TIME.MS100}ms ease`,

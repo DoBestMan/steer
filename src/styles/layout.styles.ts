@@ -3,18 +3,6 @@ import { css } from '@emotion/core';
 import { MQ } from '~/lib/constants';
 
 export const layout = {
-  absoluteContainer: css({
-    height: '100%',
-    position: 'absolute',
-    width: '100%',
-  }),
-  alignBaseline: css({
-    alignItems: 'baseline',
-  }),
-  centered: css({
-    alignItems: 'center',
-    justifyContent: 'center',
-  }),
   centeredHorizontal: css({
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -32,12 +20,4 @@ export const layout = {
       display: 'block',
     },
   },
-  horizontalContainer: css({
-    display: 'flex',
-    flexDirection: 'row',
-  }),
-  verticalContainer: css({
-    display: 'flex',
-    flexDirection: 'column',
-  }),
 };

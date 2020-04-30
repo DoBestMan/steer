@@ -188,22 +188,23 @@ const styles = {
     }),
   ],
 
-  supportSectionButtons: [
-    layout.verticalContainer,
-    css({
-      order: 2,
+  supportSectionButtons: css({
+    display: 'flex',
+    flexDirection: 'column',
+    order: 2,
 
-      [MQ.M]: [layout.horizontalContainer],
+    [MQ.M]: {
+      flexDirection: 'row',
+    },
 
-      [MQ.L]: [
-        borderBottom,
-        {
-          marginBottom: SPACING.SIZE_60,
-          paddingBottom: SPACING.SIZE_60,
-        },
-      ],
-    }),
-  ],
+    [MQ.L]: [
+      borderBottom,
+      {
+        marginBottom: SPACING.SIZE_60,
+        paddingBottom: SPACING.SIZE_60,
+      },
+    ],
+  }),
 
   text: [
     typography.smallCopy,

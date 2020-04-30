@@ -13,7 +13,7 @@ interface Props {
   type: HomeType;
 }
 
-const mapTypesToStyles: { [key: string]: SerializedStyles[] } = {
+const mapTypesToStyles: { [key: string]: SerializedStyles } = {
   [HomeType.NORMAL]: styles.primary,
   [HomeType.PROMOTIONAL]: styles.secondary,
 };

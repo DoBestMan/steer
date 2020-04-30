@@ -4,8 +4,7 @@ import { text } from '@storybook/addon-knobs';
 import Grid from '~/components/global/Grid/Grid';
 import { SiteInsightItemDefault } from '~/data/models/SiteInsightItemDefault';
 import { SiteInsightItemList } from '~/data/models/SiteInsightItemList';
-import { SPACING } from '~/lib/constants';
-import { backgroundColors } from '~/styles/colors.styles';
+import { COLORS, SPACING } from '~/lib/constants';
 
 import DriverInsights from './DriverInsights';
 import { mockInsights } from './DriverInsights.mocks';
@@ -17,8 +16,8 @@ export default {
 
 const styles = {
   root: [
-    backgroundColors.GLOBAL.BLACK,
     css({
+      backgroundColor: COLORS.GLOBAL.BLACK,
       minHeight: '100vh',
       padding: `${SPACING.SIZE_50}px 0`,
     }),

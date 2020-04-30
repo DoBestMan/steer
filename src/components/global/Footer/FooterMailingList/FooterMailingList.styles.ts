@@ -1,7 +1,6 @@
 import { css } from '@emotion/core';
 
-import { MQ, SPACING } from '~/lib/constants';
-import { colors } from '~/styles/colors.styles';
+import { COLORS, MQ, SPACING } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const styles = {
@@ -15,9 +14,9 @@ const styles = {
     }),
   ],
   text: [
-    colors.LIGHT.GRAY_70,
     typography.bodyCopy,
     css({
+      color: COLORS.LIGHT.GRAY_70,
       [MQ.L]: typography.smallCopy,
     }),
   ],

@@ -7,8 +7,7 @@ import Reviews from '~/components/pages/HomePage/Reviews/Reviews';
 import { SiteHero } from '~/data/models/SiteHero';
 import { SiteInsights } from '~/data/models/SiteInsights';
 import { SiteReviews } from '~/data/models/SiteReviews';
-import { LOADING_OPTIONS } from '~/lib/constants';
-import { backgroundColors } from '~/styles/colors.styles';
+import { COLORS, LOADING_OPTIONS } from '~/lib/constants';
 
 import styles from './HomePage.styles';
 
@@ -24,13 +23,14 @@ function HomePage({ serverData }: Props) {
   // TODO: Request from client with personalization data
   // https://simpletire.atlassian.net/browse/WCS-92
   const { siteHero, siteInsights, siteReviews } = serverData;
+  const backgroundColor = COLORS.GLOBAL.BLACK;
   return (
     <Layout>
       <>
         {false && (
           <>
             <HomeHeader {...siteHero} />
-            <Grid css={[backgroundColors.GLOBAL.BLACK, styles.content]}>
+            <Grid css={[{ backgroundColor }, styles.content]}>
               <DriverInsights {...siteInsights} />
               <Reviews {...siteReviews} />
             </Grid>

@@ -16,8 +16,8 @@ export const styles = {
   useCurrentLocationButton: [
     typography.primaryHeadline,
     layout.container,
-    layout.alignBaseline,
     css({
+      alignItems: 'baseline',
       marginTop: SPACING.SIZE_40,
     }),
   ],

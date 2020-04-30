@@ -7,8 +7,7 @@ import { SiteIcon } from '~/data/models/SiteIcon';
 import { SiteImage } from '~/data/models/SiteImage';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 import { INSIGHT_TYPE } from '~/lib/backend/insights.types';
-import { SPACING } from '~/lib/constants';
-import { backgroundColors } from '~/styles/colors.styles';
+import { COLORS, SPACING } from '~/lib/constants';
 
 import Card from './Card';
 import ListCard from './ListCard';
@@ -22,13 +21,11 @@ const styles = {
   container: css({
     height: '100%',
   }),
-  root: [
-    backgroundColors.GLOBAL.BLACK,
-    css({
-      minHeight: '100vh',
-      padding: `${SPACING.SIZE_40}px 0`,
-    }),
-  ],
+  root: css({
+    backgroundColor: COLORS.GLOBAL.BLACK,
+    minHeight: '100vh',
+    padding: `${SPACING.SIZE_40}px 0`,
+  }),
 };
 
 function CardContainer({ children }: { children: React.ReactChild }) {

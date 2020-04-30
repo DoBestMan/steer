@@ -1,7 +1,6 @@
 import { css } from '@emotion/core';
 
-import { BORDERS, MQ, RADIUS, SPACING } from '~/lib/constants';
-import { backgroundColors, colors } from '~/styles/colors.styles';
+import { BORDERS, COLORS, MQ, RADIUS, SPACING } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const styles = {
@@ -39,10 +38,10 @@ const styles = {
     marginBottom: SPACING.SIZE_40,
   }),
   listItem: [
-    colors.GLOBAL.WHITE,
     typography.smallCopy,
     css({
       borderBottom: BORDERS.SOLID_GRAY_90_1PX,
+      color: COLORS.GLOBAL.WHITE,
       position: 'relative',
       [MQ.S]: {
         padding: `${SPACING.SIZE_20}px ${SPACING.SIZE_40}px`,
@@ -53,11 +52,10 @@ const styles = {
     }),
   ],
   root: [
-    backgroundColors.DARK.GRAY_90,
     typography.jumboHeadline,
     css({
+      backgroundColor: COLORS.DARK.GRAY_90,
       borderRadius: RADIUS.RADIUS_15,
-
       [MQ.S]: {
         padding: `${SPACING.SIZE_40}px 0`,
       },
@@ -67,9 +65,9 @@ const styles = {
     }),
   ],
   title: [
-    colors.GLOBAL.ORANGE,
     typography.primaryHeadline,
     css({
+      color: COLORS.GLOBAL.ORANGE,
       display: 'flex',
       [MQ.S]: {
         marginBottom: SPACING.SIZE_20,

@@ -4,13 +4,13 @@ import { ReactChild } from 'react';
 
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import {
+  COLORS,
   LINK_ICON_POSITION,
   LINK_SIZE,
   LINK_THEME,
   LINK_TYPES,
   LINK_WEIGHT,
 } from '~/lib/constants';
-import { backgroundColors } from '~/styles/colors.styles';
 
 import FooterLink from './FooterLink';
 import IconCTA from './IconCTA';
@@ -35,18 +35,10 @@ function LinkContainer({
   children: ReactChild;
   theme: LINK_THEME;
 }) {
-  return (
-    <div
-      css={[
-        styles.root,
-        theme === LINK_THEME.DARK
-          ? backgroundColors.GLOBAL.BLACK
-          : backgroundColors.GLOBAL.WHITE,
-      ]}
-    >
-      {children}
-    </div>
-  );
+  const backgroundColor =
+    theme === LINK_THEME.DARK ? COLORS.GLOBAL.BLACK : COLORS.GLOBAL.WHITE;
+
+  return <div css={[styles.root, { backgroundColor }]}>{children}</div>;
 }
 
 export function LightLinkWithKnobs() {

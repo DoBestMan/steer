@@ -1,7 +1,6 @@
 import { css } from '@emotion/core';
 
 import { COLORS, GRID_MARGIN, MQ, SPACING } from '~/lib/constants';
-import { backgroundColors, colors } from '~/styles/colors.styles';
 import { typography } from '~/styles/typography.styles';
 
 const CONSTANTS = {
@@ -17,11 +16,11 @@ const CONSTANTS = {
 
 const styles = {
   container: [
-    colors.GLOBAL.WHITE,
     typography.primaryHeadline,
     css({
       alignItems: 'center',
       boxSizing: 'border-box',
+      color: COLORS.GLOBAL.WHITE,
       display: 'flex',
       justifyContent: 'space-between',
       padding: CONSTANTS.PADDING.S,
@@ -43,18 +42,16 @@ const styles = {
       },
 
       // eslint-disable-next-line sort-keys
-      '&:after': [
-        backgroundColors.DARK.GRAY_40,
-        {
-          bottom: 0,
-          content: '""',
-          display: 'inline',
-          height: 1,
-          left: 0,
-          position: 'absolute',
-          width: '100%',
-        },
-      ],
+      '&:after': {
+        backgroundColor: COLORS.DARK.GRAY_40,
+        bottom: 0,
+        content: '""',
+        display: 'inline',
+        height: 1,
+        left: 0,
+        position: 'absolute',
+        width: '100%',
+      },
     }),
   ],
   icon: css({
@@ -72,8 +69,8 @@ const styles = {
       },
     },
   }),
-  primary: backgroundColors.GLOBAL.ORANGE,
-  secondary: backgroundColors.GLOBAL.BLACK,
+  primary: css({ backgroundColor: COLORS.GLOBAL.ORANGE }),
+  secondary: css({ backgroundColor: COLORS.GLOBAL.BLACK }),
 };
 
 export default styles;
