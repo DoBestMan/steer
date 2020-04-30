@@ -15,7 +15,7 @@ const config = {
     id: {
       // SVG shape ID related options
       separator: '--', // Separator for directory name traversal
-      generator: function (name) {
+      generator(name) {
         return (
           'steer--' +
           path.basename(

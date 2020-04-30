@@ -34,6 +34,7 @@ module.exports = {
     'jest/valid-expect': 'error',
     'no-console': ['error', { allow: ['warn', 'error', 'info'] }],
     'no-duplicate-imports': 'error',
+    'object-shorthand': ['error', 'always'],
     'react/function-component-definition': [
       'error',
       {
