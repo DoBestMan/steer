@@ -5,6 +5,10 @@ export const reset = `
     box-sizing: inherit;
   }
 
+  *:focus {
+    outline: 1px dotted #666;
+  }
+
   html,
   body,
   div,

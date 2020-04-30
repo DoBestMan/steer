@@ -13,6 +13,7 @@ import {
   TIME,
 } from '~/lib/constants';
 import { backgroundColors, colors } from '~/styles/colors.styles';
+import { disableGlobalFocus } from '~/styles/document/accessibility.styles';
 import { typography } from '~/styles/typography.styles';
 
 const CONSTANTS = {
@@ -45,12 +46,14 @@ const styles = {
   [LINK_THEME.DARK]: [
     colors.DARK.GRAY_40,
     css({
+      ...disableGlobalFocus,
       '&:hover:not(:active)': colors.GLOBAL.WHITE,
     }),
   ],
   [LINK_THEME.LIGHT]: [
     colors.GLOBAL.BLACK,
     css({
+      ...disableGlobalFocus,
       '&:active span, &:focus span': colors.LIGHT.GRAY_70,
     }),
   ],
