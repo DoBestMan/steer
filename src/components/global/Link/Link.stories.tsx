@@ -1,23 +1,21 @@
-import { ReactChild } from 'react';
-import { text, select } from '@storybook/addon-knobs';
 import { css } from '@emotion/core';
+import { select, text } from '@storybook/addon-knobs';
+import { ReactChild } from 'react';
 
-import FooterLink from './FooterLink';
-import Link from './Link';
-
-import NavLink from './NavLink';
-
-import IconCTA from './IconCTA';
-
+import { ICONS } from '~/components/global/Icon/Icon.constants';
 import {
   LINK_ICON_POSITION,
   LINK_SIZE,
   LINK_THEME,
-  LINK_WEIGHT,
   LINK_TYPES,
+  LINK_WEIGHT,
 } from '~/lib/constants';
 import { backgroundColors } from '~/styles/colors.styles';
-import { ICONS } from '~/components/global/Icon/Icon.constants';
+
+import FooterLink from './FooterLink';
+import IconCTA from './IconCTA';
+import Link from './Link';
+import NavLink from './NavLink';
 
 export default {
   component: Link,

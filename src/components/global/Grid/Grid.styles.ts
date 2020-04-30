@@ -2,10 +2,10 @@ import { css } from '@emotion/core';
 
 import {
   Breakpoint,
-  MQ,
-  NB_COLUMNS,
   GAP_COLUMNS,
   GRID_MARGIN,
+  MQ,
+  NB_COLUMNS,
 } from '~/lib/constants';
 
 const gridColumnByMQ = (mq: Breakpoint): object => {

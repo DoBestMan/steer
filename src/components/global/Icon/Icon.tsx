@@ -1,7 +1,7 @@
-import { Icon as IconType, IconSize } from './Icon.types';
-import { ICONS, ICON_SIZES } from './Icon.constants';
-
 import { layout } from '~/styles/layout.styles';
+
+import { ICON_SIZES, ICONS } from './Icon.constants';
+import { Icon as IconType, IconSize } from './Icon.types';
 
 interface Props {
   name: IconType;

@@ -1,7 +1,5 @@
-import { ReactNode } from 'react';
 import styled from '@emotion/styled';
-
-import { validateColSpan } from './GridItem.utils';
+import { ReactNode } from 'react';
 
 import {
   Breakpoint,
@@ -10,6 +8,8 @@ import {
   MQ,
   NB_COLUMNS,
 } from '~/lib/constants';
+
+import { validateColSpan } from './GridItem.utils';
 
 interface ContainerProps {
   gridColumn?: string;

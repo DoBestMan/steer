@@ -1,5 +1,5 @@
-import { SiteLink } from './SiteLink';
 import { SiteIcon } from './SiteIcon';
+import { SiteLink } from './SiteLink';
 import { SiteReviewItem } from './SiteReviewItem';
 
 /**

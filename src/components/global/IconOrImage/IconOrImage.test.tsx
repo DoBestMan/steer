@@ -1,9 +1,9 @@
 import { render } from '@testing-library/react';
 
-import IconOrImage from './IconOrImage';
-import { ICONS } from '../Icon/Icon.constants';
-
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
+
+import { ICONS } from '../Icon/Icon.constants';
+import IconOrImage from './IconOrImage';
 
 describe('IconOrImage', () => {
   test('icon', () => {

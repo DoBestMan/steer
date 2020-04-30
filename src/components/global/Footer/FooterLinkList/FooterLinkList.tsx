@@ -1,8 +1,8 @@
-import styles from './FooterLinkList.styles';
-
+import { Icon } from '~/components/global/Icon/Icon.types';
 import Link from '~/components/global/Link/FooterLink';
 import { LINK_ICON_POSITION, LINK_SIZE } from '~/lib/constants';
-import { Icon } from '~/components/global/Icon/Icon.types';
+
+import styles from './FooterLinkList.styles';
 
 interface Link {
   action: string;

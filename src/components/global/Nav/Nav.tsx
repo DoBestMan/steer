@@ -1,15 +1,13 @@
-import styles from './Nav.styles';
-
-import Image from '~/components/global/Image/Image';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
-import NavLink from '~/components/global/Link/NavLink';
-import BaseLink from '~/components/global/Link/BaseLink';
-
-import { Icon as IconType } from '~/components/global/Icon/Icon.types';
-
-import { layout } from '~/styles/layout.styles';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
+import { Icon as IconType } from '~/components/global/Icon/Icon.types';
+import Image from '~/components/global/Image/Image';
+import BaseLink from '~/components/global/Link/BaseLink';
+import NavLink from '~/components/global/Link/NavLink';
+import { layout } from '~/styles/layout.styles';
+
+import styles from './Nav.styles';
 
 interface LinkType {
   action: string;

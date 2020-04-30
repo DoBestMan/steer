@@ -1,13 +1,12 @@
-import { Fragment, MouseEventHandler } from 'react';
 import { SerializedStyles } from '@emotion/core';
-
-import styles from './SearchButton.styles';
+import { Fragment, MouseEventHandler } from 'react';
 
 import Button from '~/components/global/Button/Button';
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
-
 import { Home as HomeType } from '~/lib/constants/home.types';
+
+import styles from './SearchButton.styles';
 
 interface Props {
   onClick: MouseEventHandler;

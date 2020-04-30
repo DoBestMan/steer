@@ -1,5 +1,5 @@
-import { SetStateAction, useState } from 'react';
 import { css } from '@emotion/core';
+import { SetStateAction, useState } from 'react';
 
 import Autocomplete from './Autocomplete';
 import { AutocompleteResult } from './AutocompleteResultItem';

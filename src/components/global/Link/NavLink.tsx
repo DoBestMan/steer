@@ -1,7 +1,7 @@
+import { LINK_ICON_POSITION, LINK_THEME, LINK_WEIGHT } from '~/lib/constants';
+
 import Link, { AnchorProps, ButtonProps } from './Link';
 import { navLink } from './Link.styles';
-
-import { LINK_ICON_POSITION, LINK_THEME, LINK_WEIGHT } from '~/lib/constants';
 
 interface Props {
   isActive?: boolean;

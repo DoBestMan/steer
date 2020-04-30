@@ -1,7 +1,6 @@
 import { css } from '@emotion/core';
 
-import { SPACING } from '~/lib/constants/spacing';
-import { MQ } from '~/lib/constants/breakpoints';
+import { MQ, SPACING } from '~/lib/constants';
 
 const CONSTANTS = {
   LOGO_SIZE: 130,

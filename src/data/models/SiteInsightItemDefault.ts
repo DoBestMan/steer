@@ -1,8 +1,8 @@
-import { SiteLink } from './SiteLink';
+import { INSIGHT_TYPE } from '~/lib/backend/insights.types';
+
 import { SiteIcon } from './SiteIcon';
 import { SiteImage } from './SiteImage';
-
-import { INSIGHT_TYPE } from '~/lib/backend/insights.types';
+import { SiteLink } from './SiteLink';
 
 /**
  * Insight item, default style, used on the homepage.

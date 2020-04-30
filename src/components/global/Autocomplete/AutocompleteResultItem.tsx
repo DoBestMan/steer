@@ -1,8 +1,7 @@
-import { getItemDOMId } from './Autocomplete.utils';
+import Button from '~/components/global/Button/Button';
 
 import styles from './Autocomplete.styles';
-
-import Button from '~/components/global/Button/Button';
+import { getItemDOMId } from './Autocomplete.utils';
 
 export type AutocompleteResult = {
   main: string;

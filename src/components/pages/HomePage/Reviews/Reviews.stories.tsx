@@ -1,10 +1,10 @@
 import { number } from '@storybook/addon-knobs';
 
+import Grid from '~/components/global/Grid/Grid';
+import { COLORS } from '~/lib/constants';
+
 import Reviews from './Reviews';
 import { mockReviews } from './Reviews.mocks';
-
-import { COLORS } from '~/lib/constants';
-import Grid from '~/components/global/Grid/Grid';
 
 export default {
   component: Reviews,

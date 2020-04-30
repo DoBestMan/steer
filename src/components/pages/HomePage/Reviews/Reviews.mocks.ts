@@ -1,6 +1,6 @@
 import { ICONS } from '~/components/global/Icon/Icon.constants';
-import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 import { SiteReviews } from '~/data/models/SiteReviews';
+import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 
 export const mockReviews: SiteReviews = {
   body:

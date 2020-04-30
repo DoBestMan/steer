@@ -1,7 +1,7 @@
-import SVGSpriter from 'svg-sprite';
 import fs from 'fs';
-import path from 'path';
 import mkdirp from 'mkdirp';
+import path from 'path';
+import SVGSpriter from 'svg-sprite';
 
 import { createFile, lineBreak } from './utils';
 

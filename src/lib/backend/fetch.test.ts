@@ -1,13 +1,13 @@
 import * as NodeFetchModule from 'node-fetch';
 import { mocked } from 'ts-jest/utils';
 
+import { BackendErrorCodes } from './constants/errors';
 import {
+  backendFetch,
   backendSetApiUrlBase,
   backendSetUserRegion,
   backendSetUserZip,
-  backendFetch,
 } from './fetch';
-import { BackendErrorCodes } from './constants/errors';
 
 const { FetchError, Response } = NodeFetchModule;
 

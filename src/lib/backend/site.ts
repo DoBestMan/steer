@@ -1,8 +1,8 @@
-import { backendFetch } from './fetch';
-
 import { SiteHero } from '~/data/models/SiteHero';
 import { SiteInsights } from '~/data/models/SiteInsights';
 import { SiteReviews } from '~/data/models/SiteReviews';
+
+import { backendFetch } from './fetch';
 
 export async function backendGetSiteHome() {
   const response = await backendFetch<{

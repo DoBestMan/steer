@@ -1,17 +1,14 @@
-import FooterLinkList from './FooterLinkList/FooterLinkList';
-import FooterMailingList from './FooterMailingList/FooterMailingList';
-import { data } from './Footer.data';
-
-import styles from './Footer.styles';
-
-import IconCTA from '~/components/global/Link/IconCTA';
-
-import Image from '~/components/global/Image/Image';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
-
-import { typography } from '~/styles/typography.styles';
+import Image from '~/components/global/Image/Image';
+import IconCTA from '~/components/global/Link/IconCTA';
 import { LINK_THEME } from '~/lib/constants';
+import { typography } from '~/styles/typography.styles';
+
+import { data } from './Footer.data';
+import styles from './Footer.styles';
+import FooterLinkList from './FooterLinkList/FooterLinkList';
+import FooterMailingList from './FooterMailingList/FooterMailingList';
 
 export interface Props {
   isBusinessHours?: boolean;

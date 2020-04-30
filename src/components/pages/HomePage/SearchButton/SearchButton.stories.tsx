@@ -1,9 +1,9 @@
 import { action } from '@storybook/addon-actions';
 import { select } from '@storybook/addon-knobs';
 
-import SearchButton from './SearchButton';
-
 import { Home as HomeType } from '~/lib/constants/home.types';
+
+import SearchButton from './SearchButton';
 
 export default {
   component: SearchButton,

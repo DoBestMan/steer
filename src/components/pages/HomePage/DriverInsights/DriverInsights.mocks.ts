@@ -1,8 +1,8 @@
 import { text } from '@storybook/addon-knobs';
 
-import { INSIGHT_TYPE } from '~/lib/backend/insights.types';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
+import { INSIGHT_TYPE } from '~/lib/backend/insights.types';
 
 export const mockInsights = [
   {

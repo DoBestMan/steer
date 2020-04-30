@@ -1,8 +1,8 @@
-import { render, fireEvent } from '@testing-library/react';
-
-import Autocomplete from './Autocomplete';
+import { fireEvent, render } from '@testing-library/react';
 
 import { KEYCODES } from '~/lib/constants';
+
+import Autocomplete from './Autocomplete';
 
 describe('autocomplete', () => {
   it('has expected initial state', () => {

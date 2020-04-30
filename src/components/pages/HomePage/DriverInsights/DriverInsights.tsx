@@ -1,17 +1,16 @@
-import styles from './DriverInsights.styles';
-
-import GridItem from '~/components/global/Grid/GridItem';
-
-import { typography } from '~/styles/typography.styles';
-import { useBreakpoints } from '~/hooks/useBreakpoints';
-import { BREAKPOINT_SIZES } from '~/lib/constants';
-import { colors } from '~/styles/colors.styles';
-import { SiteInsights } from '~/data/models/SiteInsights';
-import { INSIGHT_TYPE } from '~/lib/backend/insights.types';
-import ListCard from '~/components/global/Card/ListCard';
 import Card from '~/components/global/Card/Card';
+import ListCard from '~/components/global/Card/ListCard';
+import GridItem from '~/components/global/Grid/GridItem';
 import { SiteInsightItemDefault } from '~/data/models/SiteInsightItemDefault';
 import { SiteInsightItemList } from '~/data/models/SiteInsightItemList';
+import { SiteInsights } from '~/data/models/SiteInsights';
+import { useBreakpoints } from '~/hooks/useBreakpoints';
+import { INSIGHT_TYPE } from '~/lib/backend/insights.types';
+import { BREAKPOINT_SIZES } from '~/lib/constants';
+import { colors } from '~/styles/colors.styles';
+import { typography } from '~/styles/typography.styles';
+
+import styles from './DriverInsights.styles';
 
 const mapInsightTypeToCard = {
   [INSIGHT_TYPE.DEFAULT]: function Default(

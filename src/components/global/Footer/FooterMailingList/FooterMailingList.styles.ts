@@ -1,10 +1,8 @@
 import { css } from '@emotion/core';
 
-import { typography } from '~/styles/typography.styles';
+import { MQ, SPACING } from '~/lib/constants';
 import { colors } from '~/styles/colors.styles';
-
-import { SPACING } from '~/lib/constants/spacing';
-import { MQ } from '~/lib/constants/breakpoints';
+import { typography } from '~/styles/typography.styles';
 
 const styles = {
   container: css({}),

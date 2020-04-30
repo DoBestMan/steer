@@ -2,7 +2,7 @@
 // To add new icons place svg file in /src/assets/icons
 // and run 'yarn run generate-svg-sprite'
 
-import { IconSize, Icon } from './Icon.types';
+import { Icon, IconSize } from './Icon.types';
 
 export const ICONS: Record<string, Icon> = {
   ACCOUNT: 'account',

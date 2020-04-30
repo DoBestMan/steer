@@ -1,12 +1,10 @@
-import { AnchorProps } from './Link';
-
-import styles, { iconCTA } from './Link.styles';
-
-import BaseLink from './BaseLink';
-
-import { LINK_SIZE, LINK_THEME, LINK_WEIGHT } from '~/lib/constants';
 import Icon from '~/components/global/Icon/Icon';
 import { Icon as IconType } from '~/components/global/Icon/Icon.types';
+import { LINK_SIZE, LINK_THEME, LINK_WEIGHT } from '~/lib/constants';
+
+import BaseLink from './BaseLink';
+import { AnchorProps } from './Link';
+import styles, { iconCTA } from './Link.styles';
 
 interface Props extends Pick<AnchorProps, 'theme' | 'href' | 'children'> {
   icon: IconType;

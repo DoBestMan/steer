@@ -60,7 +60,6 @@
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.1",
     "eslint-import-resolver-typescript": "^2.0.0",
-    "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-jest": "^23.8.2",
     "eslint-plugin-jest-formatting": "^1.2.0",
     "eslint-plugin-prettier": "^3.1.2",
@@ -68,13 +67,22 @@
     "eslint-plugin-react-hooks": "^3.0.0",
     "eslint-plugin-typescript-sort-keys": "^0.8.0",
     "fork-ts-checker-webpack-plugin": "^4.1.2",
+    "import-sort": "^6.0.0",
+    "import-sort-style-wes": "^3.0.2",
     "jest": "^25.3.0",
     "prettier": "^2.0.4",
+    "prettier-plugin-import-sort": "^0.0.4",
     "react-svg-inline": "^2.1.1",
     "react-test-renderer": "^16.13.1",
     "ts-jest": "^25.3.1",
     "ts-loader": "^6.2.2",
     "typescript": "^3.8.3",
     "yarn": "^1.22.4"
+  },
+  "importSort": {
+    ".js, .jsx, .ts, .tsx": {
+      "parser": "typescript",
+      "style": "wes"
+    }
   }
 }

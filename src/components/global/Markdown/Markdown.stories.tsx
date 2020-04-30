@@ -1,10 +1,10 @@
-import { text } from '@storybook/addon-knobs';
 import { css } from '@emotion/core';
-
-import Markdown from './Markdown';
+import { text } from '@storybook/addon-knobs';
 
 import { COLORS } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
+
+import Markdown from './Markdown';
 
 const styles = {
   headline: css({

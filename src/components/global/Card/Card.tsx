@@ -1,14 +1,12 @@
-import styles from './Card.styles';
-
-import IconOrImage from '../IconOrImage/IconOrImage';
-
 import GridItem from '~/components/global/Grid/GridItem';
-import Link from '~/components/global/Link/Link';
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
-
+import Link from '~/components/global/Link/Link';
 import { SiteInsightItemDefault } from '~/data/models/SiteInsightItemDefault';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
+
+import IconOrImage from '../IconOrImage/IconOrImage';
+import styles from './Card.styles';
 
 function Card({
   body,

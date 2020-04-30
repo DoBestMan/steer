@@ -1,6 +1,6 @@
-import * as FetchModule from './fetch';
 import { backendBootstrap } from './bootstrap';
 import { BackendEndpoints } from './constants/endpoints';
+import * as FetchModule from './fetch';
 
 describe('backendBootstrap', () => {
   beforeEach(() => {

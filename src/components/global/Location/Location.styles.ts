@@ -1,7 +1,6 @@
 import { css } from '@emotion/core';
 
 import { COLORS, SPACING } from '~/lib/constants';
-
 import { layout } from '~/styles/layout.styles';
 import { typography } from '~/styles/typography.styles';
 

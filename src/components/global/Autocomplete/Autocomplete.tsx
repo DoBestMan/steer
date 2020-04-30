@@ -7,15 +7,15 @@ import {
   useState,
 } from 'react';
 
+import { KEYCODES } from '~/lib/constants';
+import { randomString } from '~/lib/utils/string';
+
+import styles from './Autocomplete.styles';
+import { generateIDs, getItemDOMId } from './Autocomplete.utils';
 import AutocompleteActions from './AutocompleteActions';
 import AutocompleteResultItem, {
   AutocompleteResult,
 } from './AutocompleteResultItem';
-import { generateIDs, getItemDOMId } from './Autocomplete.utils';
-import styles from './Autocomplete.styles';
-
-import { KEYCODES } from '~/lib/constants';
-import { randomString } from '~/lib/utils/string';
 
 const CONSTANTS = {
   DEFAULT_SELECTED_INDEX: -1,

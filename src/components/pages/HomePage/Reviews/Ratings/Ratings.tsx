@@ -1,9 +1,9 @@
-import styles from './Ratings.styles';
-
-import { typography } from '~/styles/typography.styles';
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import { SiteIcon } from '~/data/models/SiteIcon';
+import { typography } from '~/styles/typography.styles';
+
+import styles from './Ratings.styles';
 
 interface Props {
   ratingLabel: string;

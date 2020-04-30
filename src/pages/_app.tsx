@@ -1,7 +1,6 @@
+import { Global } from '@emotion/core';
 import App from 'next/app';
 import Head from 'next/head';
-
-import { Global } from '@emotion/core';
 
 import { global } from '~/styles/document/global.styles';
 

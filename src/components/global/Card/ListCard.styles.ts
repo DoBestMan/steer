@@ -1,9 +1,8 @@
 import { css } from '@emotion/core';
 
 import { BORDERS, MQ, RADIUS, SPACING } from '~/lib/constants';
-
+import { backgroundColors, colors } from '~/styles/colors.styles';
 import { typography } from '~/styles/typography.styles';
-import { colors, backgroundColors } from '~/styles/colors.styles';
 
 const styles = {
   content: css({

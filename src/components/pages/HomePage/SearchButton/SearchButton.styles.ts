@@ -1,7 +1,6 @@
 import { css } from '@emotion/core';
 
 import { COLORS, GRID_MARGIN, MQ, SPACING } from '~/lib/constants';
-
 import { backgroundColors, colors } from '~/styles/colors.styles';
 import { typography } from '~/styles/typography.styles';
 

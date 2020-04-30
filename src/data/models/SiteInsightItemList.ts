@@ -1,7 +1,7 @@
+import { INSIGHT_TYPE } from '~/lib/backend/insights.types';
+
 import { SiteInsightItemListItems } from './SiteInsightItemListItems';
 import { SiteLink } from './SiteLink';
-
-import { INSIGHT_TYPE } from '~/lib/backend/insights.types';
 
 /**
  * Insight item, list of links style, used on the homepage.

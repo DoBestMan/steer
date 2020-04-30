@@ -1,9 +1,7 @@
 import { ReactNode } from 'react';
 
-import styles from './Link.styles';
-
-import BaseLink from './BaseLink';
-
+import Icon from '~/components/global/Icon/Icon';
+import { Icon as IconType } from '~/components/global/Icon/Icon.types';
 import {
   LINK_BUTTON_TYPE,
   LINK_ICON_POSITION,
@@ -13,8 +11,9 @@ import {
   LINK_TYPES,
   LINK_WEIGHT,
 } from '~/lib/constants';
-import { Icon as IconType } from '~/components/global/Icon/Icon.types';
-import Icon from '~/components/global/Icon/Icon';
+
+import BaseLink from './BaseLink';
+import styles from './Link.styles';
 
 export interface Props {
   as?: LINK_TYPE;

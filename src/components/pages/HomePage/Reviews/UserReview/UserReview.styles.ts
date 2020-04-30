@@ -1,6 +1,6 @@
 import { css } from '@emotion/core';
 
-import { COLORS, MQ, RADIUS, GAP_COLUMNS, SPACING } from '~/lib/constants';
+import { COLORS, GAP_COLUMNS, MQ, RADIUS, SPACING } from '~/lib/constants';
 
 const avatarSize = {
   large: 60,

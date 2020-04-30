@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 
-import { styles } from './Location.styles';
-
 import Autocomplete from '~/components/global/Autocomplete/Autocomplete';
+
+import { styles } from './Location.styles';
 
 interface Props {
   currentLocation?: {

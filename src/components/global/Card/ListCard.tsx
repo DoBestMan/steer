@@ -1,10 +1,10 @@
-import styles from './ListCard.styles';
-
 import GridItem from '~/components/global/Grid/GridItem';
-import Link from '~/components/global/Link/Link';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import IconOrImage from '~/components/global/IconOrImage/IconOrImage';
+import Link from '~/components/global/Link/Link';
 import { SiteInsightItemList } from '~/data/models/SiteInsightItemList';
+
+import styles from './ListCard.styles';
 
 function ListCard({ items, more, title }: SiteInsightItemList) {
   return (

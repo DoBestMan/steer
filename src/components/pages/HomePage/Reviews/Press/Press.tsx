@@ -1,7 +1,7 @@
-import styles from './Press.styles';
-
-import { typography } from '~/styles/typography.styles';
 import Image from '~/components/global/Image/Image';
+import { typography } from '~/styles/typography.styles';
+
+import styles from './Press.styles';
 
 const pressReviews = [
   {

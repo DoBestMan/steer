@@ -2,18 +2,17 @@ import { css } from '@emotion/core';
 
 import {
   BORDERS,
+  COLORS,
   LINK_ICON_POSITION,
   LINK_SIZE,
   LINK_THEME,
   LINK_WEIGHT,
-  COLORS,
   MQ,
   RADIUS,
   SPACING,
   TIME,
 } from '~/lib/constants';
-
-import { colors, backgroundColors } from '~/styles/colors.styles';
+import { backgroundColors, colors } from '~/styles/colors.styles';
 import { typography } from '~/styles/typography.styles';
 
 const CONSTANTS = {

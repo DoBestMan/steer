@@ -1,14 +1,13 @@
-import UserReview from './UserReview/UserReview';
-import Ratings from './Ratings/Ratings';
-import Press from './Press/Press';
-
-import styles from './Reviews.styles';
-
-import { typography } from '~/styles/typography.styles';
 import GridItem from '~/components/global/Grid/GridItem';
 import Link from '~/components/global/Link/Link';
-import { layout } from '~/styles/layout.styles';
 import { SiteReviews } from '~/data/models/SiteReviews';
+import { layout } from '~/styles/layout.styles';
+import { typography } from '~/styles/typography.styles';
+
+import Press from './Press/Press';
+import Ratings from './Ratings/Ratings';
+import styles from './Reviews.styles';
+import UserReview from './UserReview/UserReview';
 
 function Reviews({
   body,

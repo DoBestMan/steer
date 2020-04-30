@@ -1,19 +1,17 @@
-import {
-  VEHICLE_IMG_MAP,
-  DEFAULT_SCENERY,
-  DEFAULT_VEHICLE,
-  SCENERY_IMG_MAP,
-} from './HomeHeader.constants';
-import styles from './HomeHeader.styles';
-
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import Image from '~/components/global/Image/Image';
 import Markdown from '~/components/global/Markdown/Markdown';
-
+import { SiteHero } from '~/data/models/SiteHero';
 import { typography } from '~/styles/typography.styles';
 
-import { SiteHero } from '~/data/models/SiteHero';
+import {
+  DEFAULT_SCENERY,
+  DEFAULT_VEHICLE,
+  SCENERY_IMG_MAP,
+  VEHICLE_IMG_MAP,
+} from './HomeHeader.constants';
+import styles from './HomeHeader.styles';
 
 function HomeHeader({
   body,

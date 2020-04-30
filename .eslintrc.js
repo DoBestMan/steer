@@ -7,9 +7,6 @@ module.exports = {
     'prettier/@typescript-eslint',
     'plugin:prettier/recommended',
     'plugin:jest-formatting/strict',
-    'plugin:import/errors',
-    'plugin:import/warnings',
-    'plugin:import/typescript',
   ],
   env: {
     es6: true,
@@ -27,16 +24,6 @@ module.exports = {
     '@typescript-eslint/no-empty-function': 'off',
     '@typescript-eslint/no-use-before-define': 'off',
     '@typescript-eslint/no-unused-vars': ['error', { 'argsIgnorePattern': '^_', 'varsIgnorePattern': '^_' }],
-    'import/order': [
-      2,
-      {
-        groups: [
-          ['builtin', 'external'],
-          ['sibling', 'parent', 'internal', 'index'],
-        ],
-        'newlines-between': 'always-and-inside-groups',
-      },
-    ],
     'jest/no-focused-tests': 'error',
     'jest/prefer-inline-snapshots': 'error',
     'jest/no-identical-title': 'error',
@@ -62,14 +49,5 @@ module.exports = {
   },
   settings: {
     react: { version: 'detect' },
-    'import/extensions': ['.js', '.jsx', '.ts', '.tsx'],
-    'import/parsers': {
-      '@typescript-eslint/parser': ['.ts', '.tsx'],
-    },
-    'import/resolver': {
-      typescript: {
-        alwaysTryTypes: true,
-      },
-    },
   },
 };

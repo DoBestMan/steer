@@ -1,6 +1,6 @@
 import { css } from '@emotion/core';
 
-import { COLORS, SPACING, RADIUS } from '~/lib/constants';
+import { COLORS, RADIUS, SPACING } from '~/lib/constants';
 
 export const styles = {
   colors: css({

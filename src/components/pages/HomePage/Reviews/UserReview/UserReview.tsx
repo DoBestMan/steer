@@ -1,9 +1,9 @@
-import styles from './UserReview.styles';
-
-import { typography } from '~/styles/typography.styles';
-import { SiteReviewItem } from '~/data/models/SiteReviewItem';
 import GridItem from '~/components/global/Grid/GridItem';
 import Image from '~/components/global/Image/Image';
+import { SiteReviewItem } from '~/data/models/SiteReviewItem';
+import { typography } from '~/styles/typography.styles';
+
+import styles from './UserReview.styles';
 
 function UserReview({ authorImage, authorName, body, title }: SiteReviewItem) {
   return (

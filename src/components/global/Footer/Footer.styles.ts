@@ -1,11 +1,6 @@
 import { css } from '@emotion/core';
 
-import { COLORS } from '~/lib/constants/colors';
-import { SPACING } from '~/lib/constants/spacing';
-import { MQ } from '~/lib/constants/breakpoints';
-
-import { typography } from '~/styles/typography.styles';
-import { layout } from '~/styles/layout.styles';
+import { COLORS, MQ, SPACING } from '~/lib/constants';
 import {
   borderBottom,
   borderBottomWithGap,
@@ -13,6 +8,8 @@ import {
   borderTopWithGapAndSpacing,
   borderTopWithSpacing,
 } from '~/styles/borders.styles';
+import { layout } from '~/styles/layout.styles';
+import { typography } from '~/styles/typography.styles';
 
 const CONSTANTS = {
   LOGO_SIZE: 130,

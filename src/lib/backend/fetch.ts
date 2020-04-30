@@ -1,7 +1,7 @@
 import fetch, { Response } from 'node-fetch';
 
-import { BackendErrorCodes } from './constants/errors';
 import { BackendError } from './classes/BackendError';
+import { BackendErrorCodes } from './constants/errors';
 
 let apiUrlBase = '';
 

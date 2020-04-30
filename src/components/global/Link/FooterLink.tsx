@@ -1,8 +1,7 @@
-import Link, { LinkProps } from './Link';
-
-import { footerLink } from './Link.styles';
-
 import { LINK_THEME } from '~/lib/constants';
+
+import Link, { LinkProps } from './Link';
+import { footerLink } from './Link.styles';
 
 function FooterLink({ children, ...rest }: LinkProps) {
   return (

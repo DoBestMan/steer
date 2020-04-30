@@ -1,16 +1,14 @@
 import { css } from '@emotion/core';
-
 import { text } from '@storybook/addon-knobs';
 
-import DriverInsights from './DriverInsights';
-
-import { mockInsights } from './DriverInsights.mocks';
-
-import { backgroundColors } from '~/styles/colors.styles';
-import { SPACING } from '~/lib/constants';
 import Grid from '~/components/global/Grid/Grid';
 import { SiteInsightItemDefault } from '~/data/models/SiteInsightItemDefault';
 import { SiteInsightItemList } from '~/data/models/SiteInsightItemList';
+import { SPACING } from '~/lib/constants';
+import { backgroundColors } from '~/styles/colors.styles';
+
+import DriverInsights from './DriverInsights';
+import { mockInsights } from './DriverInsights.mocks';
 
 export default {
   component: DriverInsights,

@@ -1,17 +1,14 @@
-import { select } from '@storybook/addon-knobs';
 import { css } from '@emotion/core';
-
+import { select } from '@storybook/addon-knobs';
 import { Fragment } from 'react';
-
-import Icon from './Icon';
-import { ICONS } from './Icon.constants';
-
-import { STORYBOOK_COLORS } from '~/lib/constants';
 
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
-
+import { STORYBOOK_COLORS } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
+
+import Icon from './Icon';
+import { ICONS } from './Icon.constants';
 
 export default {
   component: Icon,

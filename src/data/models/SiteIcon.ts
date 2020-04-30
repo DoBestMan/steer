@@ -1,5 +1,5 @@
-import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 import { Icon as IconType } from '~/components/global/Icon/Icon.types';
+import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 
 export interface SiteIcon {
   /**
