@@ -53,13 +53,12 @@ function getSubgridTemplate(mq: Breakpoint, gridColumn: string) {
 
   // Converts it to column index if needed
   const gridColumnStart =
-    gridColumnStartStr === '[start]' ? 0 : +gridColumnStartStr;
+    gridColumnStartStr === 'start' ? 0 : +gridColumnStartStr;
   const gridColumnEnd =
-    gridColumnEndStr === '[end]' ? NB_COLUMNS[mq] : +gridColumnEndStr;
+    gridColumnEndStr === 'end' ? NB_COLUMNS[mq] : +gridColumnEndStr;
 
   // Calculate the number of column, for the grid-template property for the current <GridItem>
   const nbColumn = gridColumnEnd - gridColumnStart;
-
   return {
     display: 'grid',
     gridTemplateRows: 'auto',
