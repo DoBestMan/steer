@@ -8,6 +8,7 @@ import {
 } from 'react';
 
 import { KEYCODES } from '~/lib/constants';
+import { onlyNumbers } from '~/lib/utils/regex';
 import { randomString } from '~/lib/utils/string';
 
 import styles from './Autocomplete.styles';
@@ -29,6 +30,7 @@ interface Props {
   inputValue?: string;
   label: string;
   onChange: (value: string) => void;
+  onInputResultMatch?: (inputMatchesResult: boolean) => void;
   onValueSelectionSuccess: (value: AutocompleteResult) => void;
   results: AutocompleteResult[];
 }
@@ -45,6 +47,7 @@ function Autocomplete({
   label,
   onChange,
   onValueSelectionSuccess,
+  onInputResultMatch,
   results,
 }: Props) {
   const [ids, setIds] = useState({
@@ -68,6 +71,7 @@ function Autocomplete({
     validResults.length < 1 &&
     value.length > CONSTANTS.MINIMUM_CHARACTER_BEFORE_ERROR;
   const textInput = useRef<HTMLInputElement>(null);
+  const inputMatchesResult = value.length === 5 && !isInvalidInput;
 
   const focusOnInput = () => {
     if (textInput.current) {
@@ -78,6 +82,12 @@ function Autocomplete({
   useEffect(() => {
     setIds(generateIDs(randomString(10)));
   }, []);
+
+  useEffect(() => {
+    if (onInputResultMatch) {
+      onInputResultMatch(inputMatchesResult);
+    }
+  }, [inputMatchesResult, onInputResultMatch]);
 
   useEffect(() => {
     setShouldShowListbox(!isInvalidInput && hasResults && !isInputEmpty);
@@ -96,8 +106,8 @@ function Autocomplete({
   };
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
-    // Ignore non alphanumeric characters
-    const targetValue = e.currentTarget.value.replace(/[^a-zA-Z0-9]/g, '');
+    // Ignore non numeric characters
+    const targetValue = e.currentTarget.value.replace(onlyNumbers, '');
 
     onChange(targetValue);
     setValue(targetValue);
@@ -161,7 +171,7 @@ function Autocomplete({
 
   return (
     <>
-      <div css={styles.container}>
+      <div css={styles.inputContainer}>
         <label
           id={ids.labelID}
           css={[styles.label, !!value && styles.labelHidden]}
@@ -182,6 +192,7 @@ function Autocomplete({
               aria-controls={ids.listboxID}
               aria-labelledby={ids.labelID}
               css={styles.input}
+              maxLength={5}
               onChange={handleOnChange}
               onKeyDown={handleKeyDown}
               ref={textInput}
@@ -189,36 +200,36 @@ function Autocomplete({
               value={value}
             />
           </div>
-          <ul
-            aria-labelledby={ids.labelID}
-            css={styles.listbox}
-            id={ids.listboxID}
-            role={shouldShowListbox ? 'listbox' : ''}
-          >
-            {shouldShowListbox &&
-              results.map((result: AutocompleteResult, index: number) => (
-                <AutocompleteResultItem
-                  index={index}
-                  inputValue={value}
-                  key={result.main}
-                  listboxItemID={ids.listboxItemID}
-                  onItemSelected={onItemSelected}
-                  main={result.main}
-                  secondary={result.secondary}
-                  selectedIndex={selectedIndex}
-                />
-              ))}
-
-            {isInvalidInput && (
-              <li css={styles.errorMessage} id={ids.invalidID}>
-                {errorLabel}
-              </li>
-            )}
-          </ul>
         </div>
 
         <AutocompleteActions value={value} onClick={cancelSelection} />
       </div>
+      <ul
+        aria-labelledby={ids.labelID}
+        css={styles.listbox}
+        id={ids.listboxID}
+        role={shouldShowListbox ? 'listbox' : ''}
+      >
+        {shouldShowListbox &&
+          results.map((result: AutocompleteResult, index: number) => (
+            <AutocompleteResultItem
+              index={index}
+              inputValue={value}
+              key={result.main}
+              listboxItemID={ids.listboxItemID}
+              onItemSelected={onItemSelected}
+              main={result.main}
+              secondary={result.secondary}
+              selectedIndex={selectedIndex}
+            />
+          ))}
+
+        {isInvalidInput && (
+          <li css={styles.errorMessage} id={ids.invalidID}>
+            {errorLabel}
+          </li>
+        )}
+      </ul>
       {!shouldShowListbox && !isInvalidInput && children}
     </>
   );

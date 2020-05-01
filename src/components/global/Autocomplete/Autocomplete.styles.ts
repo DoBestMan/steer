@@ -13,13 +13,6 @@ const styles = {
   comboboxWrapper: css({
     width: '100%',
   }),
-  container: css({
-    alignItems: 'baseline',
-    borderBottom: BORDERS.SOLID_BLACK_1PX,
-    display: 'flex',
-    paddingBottom: SPACING.SIZE_15,
-    position: 'relative',
-  }),
   errorMessage: typography.primaryHeadline,
   input: [
     typography.primaryHeadline,
@@ -28,6 +21,13 @@ const styles = {
       width: '100%',
     }),
   ],
+  inputContainer: css({
+    alignItems: 'baseline',
+    borderBottom: BORDERS.SOLID_BLACK_1PX,
+    display: 'flex',
+    paddingBottom: SPACING.SIZE_15,
+    position: 'relative',
+  }),
   label: [
     typography.primaryHeadline,
     css({
@@ -44,34 +44,27 @@ const styles = {
   }),
   listbox: css({
     listStyle: 'none',
-    position: 'absolute',
-    top: 90,
+    marginTop: 30,
     zIndex: 1,
   }),
   listboxItem: [
     typography.primaryHeadline,
 
     css({
-      border: BORDERS.DOTTED_TRANSPARENT_2PX,
       lineHeight: 1.68,
       position: 'relative',
       [MQ.M]: { lineHeight: 1.68 },
     }),
   ],
   listboxItemHighlight: css({
-    background: COLORS.GLOBAL.WHITE,
     color: COLORS.LIGHT.GRAY_70,
-    left: 0,
-    pointerEvents: 'none',
-    position: 'absolute',
-    top: 0,
   }),
   listboxItemSecondary: [
     typography.bodyCopy,
     css({ marginLeft: SPACING.SIZE_10 }),
   ],
   listboxItemSelected: css({
-    borderColor: COLORS.GLOBAL.ORANGE,
+    outline: BORDERS.FOCUS_STATE,
   }),
   searchIcon: css({
     svg: {

@@ -1,3 +1,5 @@
+import { BORDERS } from '~/lib/constants';
+
 export const reset = `
   *,
   *:after,
@@ -6,7 +8,7 @@ export const reset = `
   }
 
   *:focus {
-    outline: 1px dotted #666;
+    outline: ${BORDERS.FOCUS_STATE};
   }
 
   html,

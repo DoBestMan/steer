@@ -40,10 +40,10 @@ describe('autocomplete', () => {
     const combobox = getByRole('combobox');
 
     // when text is entered with no result
-    fireEvent.change(input, { target: { value: 'abcd' } });
+    fireEvent.change(input, { target: { value: '1234' } });
 
     // it calls onChange
-    expect(onChange).toHaveBeenCalledWith('abcd');
+    expect(onChange).toHaveBeenCalledWith('1234');
 
     // it renders cancel button
     expect(getByText('Clear')).toBeInTheDocument();
@@ -56,7 +56,13 @@ describe('autocomplete', () => {
 
   test('autocomplete flow - success', () => {
     const onChange = jest.fn();
-    const { getByRole, getByText, queryByText, rerender } = render(
+    const {
+      getByLabelText,
+      getByRole,
+      getByText,
+      queryByText,
+      rerender,
+    } = render(
       <Autocomplete
         onChange={onChange}
         results={[]}
@@ -95,11 +101,12 @@ describe('autocomplete', () => {
     expect(queryByText('Invalid input')).toBe(null);
 
     // it renders results
-    expect(getByText('08203')).toBeInTheDocument();
-    expect(getByText('secondary text for 08203')).toBeInTheDocument();
+    expect(
+      getByLabelText('08203 secondary text for 08203'),
+    ).toBeInTheDocument();
 
     // when item is clicked
-    fireEvent.click(getByText('08203'));
+    fireEvent.click(getByText('secondary text for 08203'));
 
     // it updates input value and closes combo box
     expect(input.value).toBe('08203');
@@ -108,7 +115,13 @@ describe('autocomplete', () => {
 
   test('autocomplete flow - success keyboard', () => {
     const onChange = jest.fn();
-    const { getByRole, getByText, queryByText, rerender } = render(
+    const {
+      getByLabelText,
+      getByRole,
+      getByText,
+      queryByText,
+      rerender,
+    } = render(
       <Autocomplete
         onChange={onChange}
         results={[]}
@@ -147,8 +160,9 @@ describe('autocomplete', () => {
     expect(queryByText('Invalid input')).toBe(null);
 
     // it renders results
-    expect(getByText('08203')).toBeInTheDocument();
-    expect(getByText('secondary text for 08203')).toBeInTheDocument();
+    expect(
+      getByLabelText('08203 secondary text for 08203'),
+    ).toBeInTheDocument();
 
     // select second result with arrow key
     fireEvent.keyDown(input, { keyCode: KEYCODES.ARROW_DOWN });

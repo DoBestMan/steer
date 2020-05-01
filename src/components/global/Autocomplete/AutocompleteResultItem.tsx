@@ -30,19 +30,23 @@ function AutocompleteResultsItem({
   const handleItemClicked = () => {
     onItemSelected(index, true);
   };
+
   return (
     <li
       aria-selected={isSelected}
-      css={[styles.listboxItem, isSelected && styles.listboxItemSelected]}
+      css={styles.listboxItem}
       id={id}
       role="option"
+      aria-label={`${main} ${secondary && secondary}`}
     >
-      <span aria-hidden="true" css={styles.listboxItemHighlight}>
-        {inputValue}
-      </span>
-      <Button tabIndex={-1} onClick={handleItemClicked}>
+      <Button
+        tabIndex={-1}
+        onClick={handleItemClicked}
+        css={[isSelected && styles.listboxItemSelected]}
+      >
         <>
-          {main}
+          <span css={styles.listboxItemHighlight}>{inputValue}</span>
+          {main.replace(inputValue, '')}{' '}
           {secondary && (
             <span css={styles.listboxItemSecondary}>{secondary}</span>
           )}

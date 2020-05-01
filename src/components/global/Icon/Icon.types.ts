@@ -8,6 +8,7 @@ export type Icon =
   | 'arrow-down'
   | 'arrow-left'
   | 'arrow-right'
+  | 'checkmark'
   | 'chevron-down'
   | 'chevron-left'
   | 'chevron-right'

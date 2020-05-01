@@ -1,8 +1,15 @@
+import { css } from '@emotion/core';
 import { useState } from 'react';
 
 import { AutocompleteResult } from '~/components/global/Autocomplete/AutocompleteResultItem';
 
 import LocationContainer from './LocationContainer';
+
+const styles = {
+  container: css({
+    height: '100vh',
+  }),
+};
 
 export default {
   component: LocationContainer,
@@ -35,10 +42,12 @@ export function Location() {
   };
 
   return (
-    <LocationContainer
-      currentLocation={location}
-      onLocationChangeSuccess={handleLocationChangeSuccess}
-      onCurrentLocationError={onCurrentLocationError}
-    />
+    <div css={styles.container}>
+      <LocationContainer
+        currentLocation={location}
+        onLocationChangeSuccess={handleLocationChangeSuccess}
+        onCurrentLocationError={onCurrentLocationError}
+      />
+    </div>
   );
 }

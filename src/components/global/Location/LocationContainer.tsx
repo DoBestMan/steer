@@ -4,6 +4,7 @@ import Autocomplete from '~/components/global/Autocomplete/Autocomplete';
 import { AutocompleteResult } from '~/components/global/Autocomplete/AutocompleteResultItem';
 
 import { styles } from './Location.styles';
+import LocationInfo from './LocationInfo';
 import UseCurrentLocation from './UseCurrentLocation';
 
 interface Props {
@@ -70,6 +71,7 @@ function LocationContainer({
     undefined,
   );
   const [search, setSearch] = useState('');
+  const [isFreeShipping, setIsFreeShipping] = useState(false);
   const [
     autocomplete,
     setAutocomplete,
@@ -144,27 +146,32 @@ function LocationContainer({
   );
 
   return (
-    <Autocomplete
-      label="Enter your ZIP code"
-      errorLabel={errorLabel}
-      inputValue={inputValue}
-      onChange={onChange}
-      onValueSelectionSuccess={onLocationChangeSuccess}
-      results={results}
-    >
-      <>
-        {currentLocation && (
-          <span css={styles.currentLocation}>
-            {currentLocation.cityName}, {currentLocation.stateAbbr}{' '}
-            {currentLocation.zip}
-          </span>
-        )}
-        <UseCurrentLocation
-          onCurrentLocationSuccess={onCurrentLocationSuccess}
-          onCurrentLocationError={onCurrentLocationError}
-        />
-      </>
-    </Autocomplete>
+    <div css={styles.container}>
+      <Autocomplete
+        label="Enter your ZIP code"
+        errorLabel={errorLabel}
+        inputValue={inputValue}
+        onChange={onChange}
+        onInputResultMatch={setIsFreeShipping}
+        onValueSelectionSuccess={onLocationChangeSuccess}
+        results={results}
+      >
+        <>
+          {currentLocation && (
+            <span css={styles.currentLocation}>
+              {currentLocation.cityName}, {currentLocation.stateAbbr}{' '}
+              {currentLocation.zip}
+            </span>
+          )}
+          <UseCurrentLocation
+            onCurrentLocationSuccess={onCurrentLocationSuccess}
+            onCurrentLocationError={onCurrentLocationError}
+          />
+        </>
+      </Autocomplete>
+
+      <LocationInfo isFreeShipping={isFreeShipping} />
+    </div>
   );
 }
 
