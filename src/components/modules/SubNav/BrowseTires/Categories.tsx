@@ -1,44 +1,56 @@
 import GridItem from '~/components/global/Grid/GridItem';
 import IconOrImage from '~/components/global/IconOrImage/IconOrImage';
 import Link from '~/components/global/Link/Link';
+import SubNavContentWrapper from '~/components/modules/SubNav/SubNavContentWrapper';
 import { SiteMenuBrowseGroupItem } from '~/data/models/SiteMenuBrowseGroupItem';
 import { SiteMenuBrowseItem } from '~/data/models/SiteMenuBrowseItem';
-import { LINK_THEME } from '~/lib/constants';
+import { useBreakpoints } from '~/hooks/useBreakpoints';
+import { BREAKPOINT_SIZES, LINK_THEME } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
+import styles from './BrowseTires.styles';
 import CategoryInfo from './CategoryInfo';
-import CategoryListWrapper from './CategoryListWrapper';
 import Flair from './Flair';
-import styles from './SubNav.styles';
 
 interface Props {
   category: string;
   info: SiteMenuBrowseItem['info'];
-  selectedCategory: string;
+  onClearSelectedLink: () => void;
+  selectedLink: string;
   siteMenuBrowseGroupList: SiteMenuBrowseGroupItem[];
 }
 
 function Categories({
   category,
   info,
-  selectedCategory,
+  selectedLink,
+  onClearSelectedLink,
   siteMenuBrowseGroupList,
 }: Props) {
-  if (selectedCategory !== category) {
+  const breakpoint = useBreakpoints();
+  const isMobile = breakpoint === BREAKPOINT_SIZES.S;
+
+  if (selectedLink !== category) {
     return null;
   }
   return (
-    <GridItem gridColumnM="4/8" gridColumnXL="11/14">
-      <CategoryListWrapper
+    <GridItem gridColumnM="3/7" gridColumnL="4/8">
+      <SubNavContentWrapper
         category={category}
-        selectedCategory={selectedCategory}
+        isOpen={selectedLink === category}
+        onClose={onClearSelectedLink}
       >
         <>
+          {isMobile && (
+            <h1 css={[typography.jumboHeadline, styles.mobileHeader]}>
+              {category}
+            </h1>
+          )}
           {siteMenuBrowseGroupList.map(
             ({ header, items, more }, idx: number) => (
-              <div css={styles.list} key={idx}>
+              <div css={styles.title} key={idx}>
                 {header && (
-                  <div css={[typography.eyebrow, styles.header]}>
+                  <div css={[typography.eyebrow, styles.listTitle]}>
                     {header.title}
                     {header.icon && (
                       <span css={styles.image}>
@@ -47,10 +59,10 @@ function Categories({
                     )}
                   </div>
                 )}
-                <ul>
+                <ul css={styles.list}>
                   {items.map((item) => (
                     <li key={item.label} css={styles.listItem}>
-                      <div css={styles.label}>
+                      <div css={styles.linkLabel}>
                         <Link
                           theme={LINK_THEME.LIGHT}
                           href={item.link.href}
@@ -71,24 +83,24 @@ function Categories({
                       </div>
                     </li>
                   ))}
+                  {more && (
+                    <li css={styles.listItem}>
+                      <Link
+                        theme={LINK_THEME.LIGHT}
+                        href={more.link.href}
+                        css={styles.link}
+                      >
+                        {more.label}
+                      </Link>
+                    </li>
+                  )}
                 </ul>
-                {more && (
-                  <div css={styles.more}>
-                    <Link
-                      theme={LINK_THEME.LIGHT}
-                      href={more.link.href}
-                      css={styles.link}
-                    >
-                      {more.label}
-                    </Link>
-                  </div>
-                )}
               </div>
             ),
           )}
           {info && <CategoryInfo {...info} />}
         </>
-      </CategoryListWrapper>
+      </SubNavContentWrapper>
     </GridItem>
   );
 }

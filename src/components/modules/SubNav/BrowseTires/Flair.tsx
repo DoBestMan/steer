@@ -3,7 +3,7 @@ import { FlairType } from '~/data/models/SiteMenuBrowseGroupItem';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 import { typography } from '~/styles/typography.styles';
 
-import styles from './SubNav.styles';
+import styles from './BrowseTires.styles';
 
 function Flair(props: FlairType) {
   if (

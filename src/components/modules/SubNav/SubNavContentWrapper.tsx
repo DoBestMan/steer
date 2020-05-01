@@ -3,15 +3,16 @@ import { ReactChild } from 'react';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { BREAKPOINT_SIZES } from '~/lib/constants';
 
-import CategoryModal from './CategoryModal';
+import SubNavModal from './SubNavModal';
 
 interface Props {
-  category: string;
+  category?: string;
   children: ReactChild;
-  selectedCategory: string;
+  isOpen: boolean;
+  onClose: () => void;
 }
 
-function CategoryListWrapper({ category, children, selectedCategory }: Props) {
+function SubNavContentWrapper({ children, isOpen, onClose }: Props) {
   const breakpoint = useBreakpoints();
   const isMobile = breakpoint === BREAKPOINT_SIZES.S;
   if (!isMobile) {
@@ -19,10 +20,10 @@ function CategoryListWrapper({ category, children, selectedCategory }: Props) {
   }
 
   return (
-    <CategoryModal isOpen={selectedCategory === category}>
+    <SubNavModal isOpen={isOpen} onClose={onClose}>
       {children}
-    </CategoryModal>
+    </SubNavModal>
   );
 }
 
-export default CategoryListWrapper;
+export default SubNavContentWrapper;

@@ -1,17 +1,17 @@
 import { SiteMenuBrowseItem } from '~/data/models/SiteMenuBrowseItem';
 import { typography } from '~/styles/typography.styles';
 
-import styles from './SubNav.styles';
+import styles from './BrowseTires.styles';
 
 function CategoryInfo({
   title,
   body,
 }: NonNullable<SiteMenuBrowseItem['info']>) {
   return (
-    <p css={[typography.smallCopy, styles.info]}>
+    <span css={[typography.smallCopy, styles.info]}>
       <h4 css={styles.infoTitle}>{title}</h4>
-      {body}
-    </p>
+      <p>{body}</p>
+    </span>
   );
 }
 
