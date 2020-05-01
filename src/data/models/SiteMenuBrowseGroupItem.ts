@@ -2,6 +2,14 @@ import { SiteIcon } from './SiteIcon';
 import { SiteImage } from './SiteImage';
 import { SiteLink } from './SiteLink';
 
+export type FlairType =
+  | SiteIcon
+  | SiteImage
+  | {
+      type: 'string';
+      value: string;
+    };
+
 /**
  * Group of browse links
  */
@@ -22,7 +30,7 @@ export interface SiteMenuBrowseGroupItem {
     /**
      * Accent property for list item
      */
-    flair: SiteIcon | SiteImage | object | null;
+    flair: FlairType;
 
     icon: SiteIcon | SiteImage | null;
     /**

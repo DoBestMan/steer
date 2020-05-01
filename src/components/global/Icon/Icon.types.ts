@@ -15,6 +15,7 @@ export type Icon =
   | 'clear-search'
   | 'close'
   | 'facebook'
+  | 'fire'
   | 'five-stars'
   | 'geolocation'
   | 'icon-wheel'
