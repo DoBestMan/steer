@@ -16,13 +16,26 @@ Dependencies
 
 Make sure you're a member of https://zeit.co/steer/steer . Ask Chris Vitale (chris.vitale@simpletire.com) or Arnaud Tanielian (tanielian@work.co) for access.
 
-First, install `now` globally on your computer
+First, make sure to install the correct version of node contained in `.nvmrc`.
+
+```bash
+nvm use
+```
+
+Windows users:
+
+```bash
+type .\.nvmrc | %{$_ -replace "v",""} | %{nvm install $_}
+type .\.nvmrc | %{$_ -replace "v",""} | %{nvm use $_}
+```
+
+Next, install `now` globally on your computer
 
 ```bash
 npm i -g now
 ```
 
-Then, login in
+Then, login
 
 ```bash
 now login
@@ -42,19 +55,6 @@ Now CLI 17.1.1
 ? Set up and deploy “~/path-to-project/steer”? [Y/n] y
 ? Which scope do you want to deploy to? STEER
 ? Found project “steer/steer”. Link to it? [Y/n] y
-```
-
-Then, make sure to run the correct version of node contained in `.nvmuse`.
-
-```bash
-nvm use
-```
-
-Windows users:
-
-```bash
-type .\.nvmrc | %{$_ -replace "v",""} | %{nvm install $_}
-type .\.nvmrc | %{$_ -replace "v",""} | %{nvm use $_}
 ```
 
 Finally, install the `node_modules`.
