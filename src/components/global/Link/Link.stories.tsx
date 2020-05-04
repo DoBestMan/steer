@@ -1,5 +1,5 @@
 import { css } from '@emotion/core';
-import { select, text } from '@storybook/addon-knobs';
+import { boolean, select, text } from '@storybook/addon-knobs';
 import { ReactChild } from 'react';
 
 import { ICONS } from '~/components/global/Icon/Icon.constants';
@@ -62,6 +62,7 @@ export function LightLinkWithKnobs() {
       <Link
         theme={LINK_THEME.LIGHT}
         href={as === LINK_TYPES.A ? '/' : ''}
+        isDisabled={boolean('Disabled', false)}
         {...{ as, icon, iconPosition, size, weight }}
       >
         {text('Link Text', 'Link Example')}
@@ -160,6 +161,7 @@ export function DarkLinkWithKnobs() {
     <LinkContainer theme={LINK_THEME.DARK}>
       <Link
         href={as === LINK_TYPES.A ? '/' : ''}
+        isDisabled={boolean('Disabled', false)}
         {...{ as, icon, iconPosition, size, weight }}
       >
         {text('Link Text', 'Link Example')}

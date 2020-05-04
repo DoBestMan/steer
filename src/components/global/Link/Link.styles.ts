@@ -12,7 +12,6 @@ import {
   SPACING,
   TIME,
 } from '~/lib/constants';
-import { disableGlobalFocus } from '~/styles/document/accessibility.styles';
 import { typography } from '~/styles/typography.styles';
 
 const CONSTANTS = {
@@ -22,6 +21,10 @@ const CONSTANTS = {
 };
 
 const styles = {
+  disabled: css({
+    opacity: CONSTANTS.OPACITY_DISABLED,
+    pointerEvents: 'none',
+  }),
   link: css({
     borderBottom: BORDERS.DOTTED_TRANSPARENT_2PX,
     transition: `border-color ${TIME.MS100}ms ease`,
@@ -30,7 +33,6 @@ const styles = {
     '&:hover span, &:focus span': {
       borderColor: 'inherit',
     },
-
     alignItems: 'center',
     display: 'flex',
   }),
@@ -42,20 +44,16 @@ const styles = {
   [LINK_ICON_POSITION.RIGHT]: css({
     paddingLeft: 5,
   }),
-  [LINK_THEME.DARK]: [
-    css({
-      ...disableGlobalFocus,
-      '&:hover:not(:active)': { color: COLORS.GLOBAL.WHITE },
-      color: COLORS.DARK.GRAY_40,
-    }),
-  ],
-  [LINK_THEME.LIGHT]: [
-    css({
-      ...disableGlobalFocus,
-      '&:active span, &:focus span': { color: COLORS.LIGHT.GRAY_70 },
-      color: COLORS.GLOBAL.BLACK,
-    }),
-  ],
+  [LINK_THEME.DARK]: css({
+    '&:hover:not(:active)': { color: COLORS.GLOBAL.WHITE },
+    color: COLORS.DARK.GRAY_40,
+  }),
+
+  [LINK_THEME.LIGHT]: css({
+    '&:active span, &:focus span': { color: COLORS.LIGHT.GRAY_70 },
+    color: COLORS.GLOBAL.BLACK,
+  }),
+
   [LINK_SIZE.REG]: typography.bodyCopy,
   [LINK_SIZE.SM]: typography.smallCopy,
   [LINK_WEIGHT.BOLD]: css({

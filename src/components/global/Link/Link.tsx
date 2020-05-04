@@ -11,6 +11,7 @@ import {
   LINK_TYPES,
   LINK_WEIGHT,
 } from '~/lib/constants';
+import { disableGlobalFocus } from '~/styles/document/accessibility.styles';
 
 import BaseLink from './BaseLink';
 import styles from './Link.styles';
@@ -20,6 +21,7 @@ export interface Props {
   children?: ReactNode;
   icon?: IconType;
   iconPosition?: LINK_ICON_POSITION;
+  isDisabled?: boolean;
   size?: LINK_SIZE;
   theme?: LINK_THEME;
   weight?: LINK_WEIGHT;
@@ -40,12 +42,20 @@ function Link({
   children,
   icon,
   iconPosition = LINK_ICON_POSITION.RIGHT,
+  isDisabled,
   size = LINK_SIZE.REG,
   theme = LINK_THEME.DARK,
   weight = LINK_WEIGHT.NORMAL,
   ...rest
 }: LinkProps) {
-  const linkStyles = [styles.root, styles[theme], styles[size], styles[weight]];
+  const linkStyles = [
+    disableGlobalFocus,
+    styles.root,
+    styles[theme],
+    styles[size],
+    styles[weight],
+    isDisabled && styles.disabled,
+  ];
   const isAnchor = as === LINK_TYPES.A;
   const Container = as;
 
