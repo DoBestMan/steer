@@ -296,7 +296,7 @@ const subnav = {
     },
   ],
   siteMenuLearn: {
-    items: [
+    list: [
       {
         label: 'How SimpleTire works',
         link: { href: '/how-we-work', isExternal: false },

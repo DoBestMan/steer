@@ -4,7 +4,7 @@ export interface SiteMenuLearn {
   /**
    * List of links of resources
    */
-  items: Array<{
+  list: Array<{
     /**
      * Link display text
      */

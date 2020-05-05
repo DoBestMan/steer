@@ -18,7 +18,7 @@ function Learn({ onClearSelectedLink, selectedLink, siteMenuLearn }: Props) {
       onClose={onClearSelectedLink}
     >
       <ul>
-        {siteMenuLearn.items.map((item) => (
+        {siteMenuLearn.list.map((item) => (
           <li key={item.label}>{item.label}</li>
         ))}
       </ul>
