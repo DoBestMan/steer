@@ -4,14 +4,16 @@ import { Global } from '@emotion/core';
 import App, { AppContext, AppInitialProps } from 'next/app';
 import Head from 'next/head';
 
+import { SiteGlobals } from '~/data/models/SiteGlobals';
 import { SiteMenuBrowseItem } from '~/data/models/SiteMenuBrowseItem';
 import { SiteMenuLearn } from '~/data/models/SiteMenuLearn';
-import { backendGetSiteMenu } from '~/lib/backend';
+import { backendGetSiteGlobals, backendGetSiteMenu } from '~/lib/backend';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
 import { global } from '~/styles/document/global.styles';
 
 interface Props extends AppContext, AppInitialProps {
   serverData: {
+    siteGlobals: SiteGlobals;
     siteMenuBrowseList: Array<SiteMenuBrowseItem>;
     siteMenuLearn: SiteMenuLearn;
   };
@@ -55,10 +57,12 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
   backendBootstrap();
 
   const { siteMenuBrowseList, siteMenuLearn } = await backendGetSiteMenu();
+  const siteGlobals = await backendGetSiteGlobals();
 
   return {
     ...appProps,
     serverData: {
+      siteGlobals,
       siteMenuBrowseList,
       siteMenuLearn,
     },

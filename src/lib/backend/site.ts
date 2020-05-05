@@ -6,6 +6,18 @@ import { SiteReviews } from '~/data/models/SiteReviews';
 
 import { backendFetch } from './fetch';
 
+export async function backendGetSiteGlobals() {
+  const response = await backendFetch<{
+    siteHero: SiteHero;
+    siteInsights: SiteInsights;
+  }>({
+    endpoint: './site/globals',
+    method: 'get',
+  });
+
+  return response;
+}
+
 export async function backendGetSiteHome() {
   const response = await backendFetch<{
     siteHero: SiteHero;
