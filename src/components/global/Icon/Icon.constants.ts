@@ -34,6 +34,8 @@ export const ICONS: Record<string, Icon> = {
   REVIEWS_VERIFIED: 'reviews-verified',
   RV: 'rv',
   SEARCH: 'search',
+  SMALL_CHEVRON_DOWN: 'small-chevron-down',
+  SMALL_CHEVRON_UP: 'small-chevron-up',
   TWITTER: 'twitter',
   YOUTUBE: 'youtube',
 };
@@ -68,6 +70,8 @@ export const ICON_SIZES: Record<string, IconSize> = {
   REVIEWS_VERIFIED: { h: 13, w: 13 },
   RV: { h: 34, w: 54 },
   SEARCH: { h: 17, w: 17 },
+  SMALL_CHEVRON_DOWN: { h: 5, w: 8 },
+  SMALL_CHEVRON_UP: { h: 5, w: 8 },
   TWITTER: { h: 18, w: 21 },
   YOUTUBE: { h: 16, w: 22 },
 };

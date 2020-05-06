@@ -32,6 +32,8 @@ export type Icon =
   | 'reviews-verified'
   | 'rv'
   | 'search'
+  | 'small-chevron-down'
+  | 'small-chevron-up'
   | 'twitter'
   | 'youtube';
 
