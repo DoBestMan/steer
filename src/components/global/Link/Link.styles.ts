@@ -99,6 +99,10 @@ export const footerLink = [
   typography.bodyCopy,
   css({
     '&:hover, &:focus': { borderColor: 'inherit', color: COLORS.GLOBAL.BLACK },
+    'span svg': {
+      color: COLORS.GLOBAL.BLACK,
+    },
+    // eslint-disable-next-line sort-keys
     color: COLORS.LIGHT.GRAY_70,
     display: 'inline-flex',
     span: {

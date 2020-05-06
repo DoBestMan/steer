@@ -8,11 +8,13 @@ export default {
 };
 
 export function FooterWithKnobs() {
-  return <Footer isBusinessHours={boolean('Is Business Hours', true)} />;
+  return (
+    <Footer isCustomerServiceEnabled={boolean('Is Business Hours', true)} />
+  );
 }
 
 export function FooterIsBusinessHours() {
-  return <Footer isBusinessHours />;
+  return <Footer isCustomerServiceEnabled />;
 }
 
 export function FooterIsNotBusinessHours() {

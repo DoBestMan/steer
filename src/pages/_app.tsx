@@ -4,6 +4,7 @@ import { Global } from '@emotion/core';
 import App, { AppContext, AppInitialProps } from 'next/app';
 import Head from 'next/head';
 
+import Footer from '~/components/global/Footer/Footer';
 import ConnectedNav from '~/components/global/Nav/Nav.container';
 import { SiteGlobals } from '~/data/models/SiteGlobals';
 import { SiteMenuBrowseItem } from '~/data/models/SiteMenuBrowseItem';
@@ -29,6 +30,7 @@ class MyApp extends App<Props> {
 
   render() {
     const { Component, pageProps } = this.props;
+    const { customerServiceEnabled } = this.state.serverData.siteGlobals;
 
     return (
       <>
@@ -39,6 +41,8 @@ class MyApp extends App<Props> {
         <Global styles={global} />
         <ConnectedNav />
         <Component {...pageProps} />
+
+        <Footer isCustomerServiceEnabled={customerServiceEnabled} />
       </>
     );
   }

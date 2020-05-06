@@ -12,6 +12,7 @@ import { layout } from '~/styles/layout.styles';
 import { typography } from '~/styles/typography.styles';
 
 const CONSTANTS = {
+  ICON_WIDTH: 22, // Width of the widest icon (youtube)
   LOGO_SIZE: 130,
   LOGO_SIZE_SMALL: 100,
 };
@@ -115,12 +116,21 @@ const styles = {
         li: {
           display: 'inline',
           marginLeft: SPACING.SIZE_15,
+
+          // the first span is the icon
           'span:nth-of-type(1)': {
-            paddingRight: 0,
+            paddingRight: 0, // Remove padding from base footer links
+            [MQ.L]: {
+              display: 'flex',
+              justifyContent: 'center',
+              width: CONSTANTS.ICON_WIDTH,
+            },
             [MQ.XL]: {
-              paddingRight: SPACING.SIZE_15,
+              marginRight: SPACING.SIZE_15,
             },
           },
+
+          // the second span is the text
           'span:nth-of-type(2)': {
             display: 'none',
 
@@ -128,6 +138,7 @@ const styles = {
               display: 'block',
             },
           },
+
           [MQ.XL]: {
             display: 'block',
             marginLeft: 0,
@@ -207,8 +218,7 @@ const styles = {
   }),
 
   text: [
-    typography.smallCopy,
-
+    typography.bodyCopy,
     css({
       color: COLORS.LIGHT.GRAY_70,
     }),

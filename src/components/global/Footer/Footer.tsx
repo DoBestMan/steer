@@ -1,6 +1,7 @@
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import Image from '~/components/global/Image/Image';
+import BaseLink from '~/components/global/Link/BaseLink';
 import IconCTA from '~/components/global/Link/IconCTA';
 import { LINK_THEME } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
@@ -11,13 +12,13 @@ import FooterLinkList from './FooterLinkList/FooterLinkList';
 import FooterMailingList from './FooterMailingList/FooterMailingList';
 
 export interface Props {
-  isBusinessHours?: boolean;
+  isCustomerServiceEnabled?: boolean;
 }
 
 function Footer(props: Props) {
-  const { isBusinessHours } = props;
+  const { isCustomerServiceEnabled } = props;
 
-  const supportContent = isBusinessHours
+  const supportContent = isCustomerServiceEnabled
     ? data.isBusinessHours
     : data.isNotBusinessHours;
 
@@ -62,17 +63,19 @@ function Footer(props: Props) {
       </GridItem>
 
       <GridItem
-        gridColumnS="2/4"
+        gridColumnS="2/3"
         gridColumnM="2/5"
         gridColumnL="2/6"
         gridColumnXL="2/5"
         css={styles.logoSection}
       >
-        <Image
-          altText={data.logo.altText}
-          css={styles.logo}
-          srcSet="/static/assets/logo.svg"
-        />
+        <BaseLink href="/">
+          <Image
+            altText={data.logo.altText}
+            css={styles.logo}
+            srcSet="/static/assets/logo.svg"
+          />
+        </BaseLink>
       </GridItem>
 
       <GridItem
@@ -98,7 +101,7 @@ function Footer(props: Props) {
       </GridItem>
 
       <GridItem
-        gridColumnS="4/6"
+        gridColumnS="3/6"
         gridColumnM="5/8"
         gridColumnL="6/14"
         gridColumnXL="9/11"
