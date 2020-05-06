@@ -1,3 +1,4 @@
+import { IncomingMessage } from 'http';
 import { GetServerSideProps } from 'next';
 
 import HomePage from '~/components/pages/HomePage/HomePage';
@@ -19,8 +20,10 @@ function Home(props: Props) {
   return <HomePage {...props} />;
 }
 
-export const getServerSideProps: GetServerSideProps<Props> = async () => {
-  backendBootstrap();
+export const getServerSideProps: GetServerSideProps<Props> = async (context: {
+  req: IncomingMessage;
+}) => {
+  backendBootstrap({ request: context.req });
 
   const { siteHero, siteInsights } = await backendGetSiteHome();
   const { siteReviews } = await backendGetSiteReviews();

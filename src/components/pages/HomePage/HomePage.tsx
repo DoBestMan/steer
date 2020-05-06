@@ -6,6 +6,7 @@ import Reviews from '~/components/pages/HomePage/Reviews/Reviews';
 import { SiteHero } from '~/data/models/SiteHero';
 import { SiteInsights } from '~/data/models/SiteInsights';
 import { SiteReviews } from '~/data/models/SiteReviews';
+import { useApiDataWithDefault } from '~/hooks/useApiDataWithDefault';
 import { COLORS } from '~/lib/constants';
 
 import styles from './HomePage.styles';
@@ -18,11 +19,29 @@ interface Props {
   };
 }
 
+interface HomeData {
+  siteHero: SiteHero;
+  siteInsights: SiteInsights;
+}
+
 function HomePage({ serverData }: Props) {
-  // TODO: Request from client with personalization data
-  // https://simpletire.atlassian.net/browse/WCS-92
-  const { siteHero, siteInsights, siteReviews } = serverData;
+  const { siteReviews } = serverData;
+
+  const {
+    data: { siteHero, siteInsights },
+    error,
+  } = useApiDataWithDefault<HomeData>({
+    defaultData: serverData,
+    endpoint: '/home',
+    includeUserRegion: true,
+  });
+
+  if (error) {
+    console.error(error);
+  }
+
   const backgroundColor = COLORS.GLOBAL.BLACK;
+
   return (
     <Layout>
       <>

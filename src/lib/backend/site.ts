@@ -4,14 +4,14 @@ import { SiteMenuBrowseItem } from '~/data/models/SiteMenuBrowseItem';
 import { SiteMenuLearn } from '~/data/models/SiteMenuLearn';
 import { SiteReviews } from '~/data/models/SiteReviews';
 
-import { backendFetch } from './fetch';
+import { fetch } from '../fetch';
 
 export async function backendGetSiteGlobals() {
-  const response = await backendFetch<{
+  const response = await fetch<{
     siteHero: SiteHero;
     siteInsights: SiteInsights;
   }>({
-    endpoint: './site/globals',
+    endpoint: '/site/globals',
     method: 'get',
   });
 
@@ -19,13 +19,12 @@ export async function backendGetSiteGlobals() {
 }
 
 export async function backendGetSiteHome() {
-  const response = await backendFetch<{
+  const response = await fetch<{
     siteHero: SiteHero;
     siteInsights: SiteInsights;
   }>({
-    endpoint: './site/home',
+    endpoint: '/site/home',
     includeUserRegion: true,
-    includeUserZip: true,
     method: 'get',
   });
 
@@ -33,11 +32,11 @@ export async function backendGetSiteHome() {
 }
 
 export async function backendGetSiteMenu() {
-  const response = await backendFetch<{
+  const response = await fetch<{
     siteMenuBrowseList: Array<SiteMenuBrowseItem>;
     siteMenuLearn: SiteMenuLearn;
   }>({
-    endpoint: './site/menu',
+    endpoint: '/site/menu',
     includeUserRegion: true,
     method: 'get',
   });
@@ -46,10 +45,10 @@ export async function backendGetSiteMenu() {
 }
 
 export async function backendGetSiteReviews() {
-  const response = await backendFetch<{
+  const response = await fetch<{
     siteReviews: SiteReviews;
   }>({
-    endpoint: './site/reviews',
+    endpoint: '/site/reviews',
     method: 'get',
   });
 

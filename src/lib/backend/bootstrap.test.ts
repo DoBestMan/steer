@@ -1,18 +1,47 @@
+import { IncomingMessage } from 'http';
+import { Socket } from 'net';
+
+import * as FetchModule from '../fetch';
 import { backendBootstrap } from './bootstrap';
-import { BackendEndpoints } from './constants/endpoints';
-import * as FetchModule from './fetch';
+import { BackendEndpoints } from './constants';
+
+function createFakeRequest() {
+  const fakeIncomingMessage = new IncomingMessage(new Socket());
+  const fakeRequest = Object.assign(fakeIncomingMessage, {
+    query: {},
+  });
+  return fakeRequest;
+}
 
 describe('backendBootstrap', () => {
   beforeEach(() => {
-    jest.spyOn(FetchModule, 'backendSetApiUrlBase').mockImplementation();
+    jest.spyOn(FetchModule, 'fetchSetAuthorizationHeader').mockImplementation();
+    jest.spyOn(FetchModule, 'fetchSetUrlBase').mockImplementation();
+  });
+
+  it('works without a request object', () => {
+    backendBootstrap();
+
+    expect(FetchModule.fetchSetUrlBase).toHaveBeenCalled();
+  });
+
+  it('configures authentication header', () => {
+    const request = createFakeRequest();
+    request.headers.authorization = 'Bearer Test123';
+    backendBootstrap({ request });
+
+    expect(FetchModule.fetchSetAuthorizationHeader).toHaveBeenCalledWith(
+      request.headers.authorization,
+    );
   });
 
   it('configures the mock server by default', () => {
-    backendBootstrap();
+    const request = createFakeRequest();
+    backendBootstrap({ request });
 
-    const expectedEnvironment = BackendEndpoints['main-api-mock'].apiBaseUrl;
+    const expectedEnvironment = BackendEndpoints['mainApiMock'].apiBaseUrl;
 
-    expect(FetchModule.backendSetApiUrlBase).toHaveBeenCalledWith(
+    expect(FetchModule.fetchSetUrlBase).toHaveBeenCalledWith(
       expectedEnvironment,
     );
   });
@@ -22,11 +51,12 @@ describe('backendBootstrap', () => {
 
     process.env.STEER_BACKEND = 'local';
 
-    backendBootstrap();
+    const request = createFakeRequest();
+    backendBootstrap({ request });
 
-    const expectedEnvironment = BackendEndpoints['main-api-local'].apiBaseUrl;
+    const expectedEnvironment = BackendEndpoints['mainApiLocal'].apiBaseUrl;
 
-    expect(FetchModule.backendSetApiUrlBase).toHaveBeenCalledWith(
+    expect(FetchModule.fetchSetUrlBase).toHaveBeenCalledWith(
       expectedEnvironment,
     );
 

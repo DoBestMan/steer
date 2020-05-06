@@ -27,14 +27,17 @@
     "@emotion/styled": "^10.0.27",
     "@types/googlemaps": "^3.39.3",
     "intersection-observer": "^0.10.0",
+    "isomorphic-unfetch": "^3.0.0",
     "jest-raw-loader": "^1.0.1",
+    "lscache": "^1.3.0",
     "next": "^9.3.0",
     "node-fetch": "^2.6.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-markdown": "^4.3.1",
     "react-modal": "^3.11.2",
-    "svg-sprite": "^1.5.0"
+    "svg-sprite": "^1.5.0",
+    "swr": "^0.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
@@ -50,6 +53,7 @@
     "@testing-library/jest-dom": "^5.4.0",
     "@testing-library/react": "^10.0.2",
     "@testing-library/react-hooks": "^3.2.1",
+    "@types/lscache": "^1.3.0",
     "@types/node": "^13.11.0",
     "@types/node-fetch": "^2.5.6",
     "@types/react": "^16.9.32",
