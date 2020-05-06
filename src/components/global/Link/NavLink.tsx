@@ -1,3 +1,4 @@
+import { ActionType, LinkType } from '~/components/global/Nav/Nav.data';
 import { LINK_ICON_POSITION, LINK_THEME, LINK_WEIGHT } from '~/lib/constants';
 
 import Link, { AnchorProps, ButtonProps } from './Link';
@@ -5,26 +6,46 @@ import { navLink } from './Link.styles';
 
 interface Props {
   isActive?: boolean;
+  label?: string;
 }
 
-interface ExtendedButtonProps extends ButtonProps, Props {}
+type NavLinkAnchor = LinkType & AnchorProps;
+type NavLinkButton = ActionType & ButtonProps;
 
-interface ExtendedAnchorProps extends AnchorProps, Props {}
+function NavLink({
+  isActive = false,
+  text,
+  ...rest
+}: (NavLinkAnchor | NavLinkButton) & Props) {
+  if ('href' in rest) {
+    return (
+      <Link
+        weight={LINK_WEIGHT.BOLD}
+        theme={LINK_THEME.LIGHT}
+        css={isActive ? navLink.selected : navLink.root}
+        iconPosition={LINK_ICON_POSITION.LEFT}
+        {...rest}
+      >
+        {text}
+      </Link>
+    );
+  }
+  if ('target' in rest) {
+    return (
+      <Link
+        as="button"
+        weight={LINK_WEIGHT.BOLD}
+        theme={LINK_THEME.LIGHT}
+        css={isActive ? navLink.selected : navLink.root}
+        iconPosition={LINK_ICON_POSITION.LEFT}
+        {...rest}
+      >
+        {text}
+      </Link>
+    );
+  }
 
-type NavLinkProps = ExtendedButtonProps | ExtendedAnchorProps;
-
-function NavLink({ children, isActive = false, ...rest }: NavLinkProps) {
-  return (
-    <Link
-      {...rest}
-      weight={LINK_WEIGHT.BOLD}
-      theme={LINK_THEME.LIGHT}
-      css={isActive ? navLink.selected : navLink.root}
-      iconPosition={LINK_ICON_POSITION.LEFT}
-    >
-      {children}
-    </Link>
-  );
+  return null;
 }
 
 export default NavLink;

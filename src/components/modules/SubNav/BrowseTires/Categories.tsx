@@ -1,6 +1,7 @@
 import GridItem from '~/components/global/Grid/GridItem';
 import IconOrImage from '~/components/global/IconOrImage/IconOrImage';
 import Link from '~/components/global/Link/Link';
+import { useNavState } from '~/components/global/Nav/Nav.container';
 import SubNavContentWrapper from '~/components/modules/SubNav/SubNavContentWrapper';
 import { SiteMenuBrowseGroupItem } from '~/data/models/SiteMenuBrowseGroupItem';
 import { SiteMenuBrowseItem } from '~/data/models/SiteMenuBrowseItem';
@@ -15,32 +16,29 @@ import Flair from './Flair';
 interface Props {
   category: string;
   info: SiteMenuBrowseItem['info'];
-  onClearSelectedLink: () => void;
-  selectedLink: string;
   siteMenuBrowseGroupList: SiteMenuBrowseGroupItem[];
 }
 
-function Categories({
-  category,
-  info,
-  selectedLink,
-  onClearSelectedLink,
-  siteMenuBrowseGroupList,
-}: Props) {
+function Categories({ category, info, siteMenuBrowseGroupList }: Props) {
   const breakpoint = useBreakpoints();
   const isMobile = breakpoint === BREAKPOINT_SIZES.S;
-
-  if (selectedLink !== category) {
+  const {
+    activeCategory,
+    handleClearCategory,
+    handleCloseSubNav,
+  } = useNavState();
+  if (activeCategory !== category) {
     return null;
   }
   return (
     <GridItem gridColumnM="3/7" gridColumnL="4/8">
       <SubNavContentWrapper
         category={category}
-        isOpen={selectedLink === category}
-        onClose={onClearSelectedLink}
+        isOpen={activeCategory === category}
+        onClose={handleCloseSubNav}
+        onBack={handleClearCategory}
       >
-        <>
+        <div css={styles.content}>
           {isMobile && (
             <h1 css={[typography.jumboHeadline, styles.mobileHeader]}>
               {category}
@@ -48,7 +46,7 @@ function Categories({
           )}
           {siteMenuBrowseGroupList.map(
             ({ header, items, more }, idx: number) => (
-              <div css={styles.title} key={idx}>
+              <div css={styles.categoryList} key={idx}>
                 {header && (
                   <div css={[typography.eyebrow, styles.listTitle]}>
                     {header.title}
@@ -59,7 +57,7 @@ function Categories({
                     )}
                   </div>
                 )}
-                <ul css={styles.list}>
+                <ul css={[styles.list, !header && styles.alignList]}>
                   {items.map((item) => (
                     <li key={item.label} css={styles.listItem}>
                       <div css={styles.linkLabel}>
@@ -99,7 +97,7 @@ function Categories({
             ),
           )}
           {info && <CategoryInfo {...info} />}
-        </>
+        </div>
       </SubNavContentWrapper>
     </GridItem>
   );

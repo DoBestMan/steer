@@ -14,3 +14,4 @@ export * from './routes';
 export * from './spacing';
 export * from './storybook';
 export * from './time';
+export * from './zindex';

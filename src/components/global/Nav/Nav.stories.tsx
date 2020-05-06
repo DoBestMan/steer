@@ -1,15 +1,34 @@
+import { css } from '@emotion/core';
+
 import Nav from '~/components/global/Nav/Nav';
-import { data } from '~/components/global/Nav/Nav.data';
+import { COLORS } from '~/lib/constants';
+
+import ConnectedNav from './Nav.container';
 
 export default {
   component: Nav,
   title: 'Nav',
 };
 
+const styles = {
+  root: css({
+    background: COLORS.LIGHT.OFF_WHITE,
+    minHeight: '100vh',
+  }),
+};
+
 export function NavNoKnobs() {
-  return <Nav links={data.links} isHomepage />;
+  return (
+    <div css={styles.root}>
+      <ConnectedNav isHomepage />
+    </div>
+  );
 }
 
 export function NavNotHomepage() {
-  return <Nav links={data.links} />;
+  return (
+    <div css={styles.root}>
+      <ConnectedNav />
+    </div>
+  );
 }

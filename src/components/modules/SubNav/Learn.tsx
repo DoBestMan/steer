@@ -1,21 +1,19 @@
+import { useNavState } from '~/components/global/Nav/Nav.container';
 import { SiteMenuLearn } from '~/data/models/SiteMenuLearn';
 
 import SubNavContentWrapper from './SubNavContentWrapper';
 
 interface Props {
-  onClearSelectedLink: () => void;
-  selectedLink: string;
   siteMenuLearn: SiteMenuLearn;
 }
 
-function Learn({ onClearSelectedLink, selectedLink, siteMenuLearn }: Props) {
-  if (selectedLink !== 'Learn') {
-    return null;
-  }
+function Learn({ siteMenuLearn }: Props) {
+  const { handleClearLink, handleCloseSubNav } = useNavState();
   return (
     <SubNavContentWrapper
-      isOpen={selectedLink === 'Learn'}
-      onClose={onClearSelectedLink}
+      isOpen
+      onBack={handleClearLink}
+      onClose={handleCloseSubNav}
     >
       <ul>
         {siteMenuLearn.list.map((item) => (

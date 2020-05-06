@@ -4,6 +4,7 @@ import { Global } from '@emotion/core';
 import App, { AppContext, AppInitialProps } from 'next/app';
 import Head from 'next/head';
 
+import ConnectedNav from '~/components/global/Nav/Nav.container';
 import { SiteGlobals } from '~/data/models/SiteGlobals';
 import { SiteMenuBrowseItem } from '~/data/models/SiteMenuBrowseItem';
 import { SiteMenuLearn } from '~/data/models/SiteMenuLearn';
@@ -36,7 +37,7 @@ class MyApp extends App<Props> {
         </Head>
 
         <Global styles={global} />
-
+        <ConnectedNav />
         <Component {...pageProps} />
       </>
     );

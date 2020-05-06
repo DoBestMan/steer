@@ -1,6 +1,6 @@
 import { css } from '@emotion/core';
 
-import { COLORS, MQ, RADIUS, SPACING } from '~/lib/constants';
+import { COLORS, MQ, RADIUS, SPACING, Z_INDEX } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const ICON_SIZE = {
@@ -13,16 +13,15 @@ const styles = {
     css({
       color: COLORS.GLOBAL.ORANGE,
       display: 'flex',
-      height: ICON_SIZE.H,
-      img: {
+      div: {
         // overlap brand images
         ':nth-of-type(1)': {
           left: 0,
-          zIndex: 2,
+          zIndex: Z_INDEX.TOP,
         },
         ':nth-of-type(2)': {
           left: -SPACING.SIZE_25,
-          zIndex: 1,
+          zIndex: Z_INDEX.FRONT,
         },
         ':nth-of-type(3)': {
           left: -SPACING.SIZE_50,
@@ -31,6 +30,7 @@ const styles = {
         position: 'relative',
         width: ICON_SIZE.W,
       },
+      height: ICON_SIZE.H,
       position: 'relative',
       width: '100%',
       [MQ.S]: {

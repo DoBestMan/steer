@@ -1,6 +1,6 @@
 import { css } from '@emotion/core';
 
-import { MQ, SPACING } from '~/lib/constants';
+import { COLORS, MQ, SPACING } from '~/lib/constants';
 
 const CONSTANTS = {
   LOGO_SIZE: 130,
@@ -38,6 +38,8 @@ const styles = {
   }),
 
   root: css({
+    background: COLORS.LIGHT.OFF_WHITE,
+    height: '100%',
     padding: `${SPACING.SIZE_30}px 0`,
     [MQ.M]: {
       padding: `${SPACING.SIZE_50}px 0`,

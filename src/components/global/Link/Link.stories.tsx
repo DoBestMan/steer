@@ -1,4 +1,5 @@
 import { css } from '@emotion/core';
+import { action } from '@storybook/addon-actions';
 import { boolean, select, text } from '@storybook/addon-knobs';
 import { ReactChild } from 'react';
 
@@ -12,6 +13,7 @@ import {
   LINK_WEIGHT,
 } from '~/lib/constants';
 
+import { NAV_TARGETS } from '../Nav/Nav.data';
 import FooterLink from './FooterLink';
 import IconCTA from './IconCTA';
 import Link from './Link';
@@ -242,14 +244,29 @@ export function LinkFooter() {
 }
 
 export function LinkNav() {
-  return <NavLink href="/">Link Example</NavLink>;
+  return (
+    <NavLink {...{ href: '/', isExternal: false, text: 'Link Example' }} />
+  );
+}
+
+export function ButtonNav() {
+  return (
+    <NavLink
+      {...{
+        onClick: action('Nav link click'),
+        target: NAV_TARGETS.BROWSE_TIRES,
+        text: 'Link Example',
+      }}
+    />
+  );
 }
 
 export function LinkNavActive() {
   return (
-    <NavLink isActive href="/">
-      Link Example
-    </NavLink>
+    <NavLink
+      isActive
+      {...{ href: '/', isExternal: false, text: 'Link Example' }}
+    />
   );
 }
 

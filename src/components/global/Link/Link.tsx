@@ -32,6 +32,7 @@ export interface AnchorProps extends Props {
 }
 
 export interface ButtonProps extends Props {
+  onClick: () => void;
   type?: LINK_BUTTON_TYPE;
 }
 
@@ -76,11 +77,13 @@ function Link({
   const rightIcon = iconPosition === LINK_ICON_POSITION.RIGHT && inlineIcon;
 
   if (isAnchor && 'href' in rest) {
-    <BaseLink css={linkStyles} {...rest}>
-      {leftIcon}
-      {linkText}
-      {rightIcon}
-    </BaseLink>;
+    return (
+      <BaseLink css={linkStyles} {...rest}>
+        {leftIcon}
+        {linkText}
+        {rightIcon}
+      </BaseLink>
+    );
   }
 
   return (

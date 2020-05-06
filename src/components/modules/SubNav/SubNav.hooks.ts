@@ -3,7 +3,7 @@ import { useState } from 'react';
 function useSelectCategory() {
   const [selectedLink, setSelectedLink] = useState('');
   return {
-    handleSelectLink: (link: string) => () => {
+    createSelectLinkHandler: (link: string) => () => {
       setSelectedLink(link);
     },
     onClearSelectedLink: () => {

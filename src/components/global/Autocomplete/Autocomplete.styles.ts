@@ -1,6 +1,6 @@
 import { css } from '@emotion/core';
 
-import { BORDERS, COLORS, SPACING } from '~/lib/constants';
+import { BORDERS, COLORS, SPACING, Z_INDEX } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const styles = {
@@ -45,7 +45,7 @@ const styles = {
   listbox: css({
     listStyle: 'none',
     marginTop: 30,
-    zIndex: 1,
+    zIndex: Z_INDEX.FRONT,
   }),
   searchIcon: css({
     svg: {

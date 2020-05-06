@@ -14,9 +14,7 @@ function Flair(props: FlairType) {
   }
   return (
     <div css={styles.flairSeparator}>
-      <p css={[typography.smallCopy, styles.flair, styles.selected]}>
-        {props.value}
-      </p>
+      <p css={[typography.smallCopy, styles.flair]}>{props.value}</p>
     </div>
   );
 }

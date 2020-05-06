@@ -1,20 +1,25 @@
+import GridItem from '~/components/global/Grid/GridItem';
 import { SiteMenuBrowseItem } from '~/data/models/SiteMenuBrowseItem';
+import { useBreakpoints } from '~/hooks/useBreakpoints';
+import { BREAKPOINT_SIZES } from '~/lib/constants';
 
 import Categories from './Categories';
+import TireCategoryLinks from './TireCategoryLinks';
 
 interface Props {
-  onClearSelectedLink: () => void;
-  selectedLink: string;
   siteMenuBrowseList: SiteMenuBrowseItem[];
 }
 
-function BrowseTires({
-  onClearSelectedLink,
-  selectedLink,
-  siteMenuBrowseList,
-}: Props) {
+function BrowseTires({ siteMenuBrowseList }: Props) {
+  const breakpoint = useBreakpoints();
+  const isMobile = breakpoint === BREAKPOINT_SIZES.S;
   return (
     <>
+      {!isMobile && (
+        <GridItem gridColumnM="1/3" gridColumnL="1/4">
+          <TireCategoryLinks {...{ siteMenuBrowseList }} />
+        </GridItem>
+      )}
       {siteMenuBrowseList.map(
         ({ info, siteMenuBrowseGroupList, title }, idx: number) => (
           <Categories
@@ -22,8 +27,6 @@ function BrowseTires({
             {...{
               category: title,
               info,
-              onClearSelectedLink,
-              selectedLink,
               siteMenuBrowseGroupList,
             }}
           />

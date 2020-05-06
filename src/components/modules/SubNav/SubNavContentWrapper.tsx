@@ -9,10 +9,11 @@ interface Props {
   category?: string;
   children: ReactChild;
   isOpen: boolean;
+  onBack?: () => void;
   onClose: () => void;
 }
 
-function SubNavContentWrapper({ children, isOpen, onClose }: Props) {
+function SubNavContentWrapper({ children, isOpen, onBack, onClose }: Props) {
   const breakpoint = useBreakpoints();
   const isMobile = breakpoint === BREAKPOINT_SIZES.S;
   if (!isMobile) {
@@ -20,7 +21,7 @@ function SubNavContentWrapper({ children, isOpen, onClose }: Props) {
   }
 
   return (
-    <SubNavModal isOpen={isOpen} onClose={onClose}>
+    <SubNavModal onBack={onBack} isOpen={isOpen} onClose={onClose}>
       {children}
     </SubNavModal>
   );

@@ -9,11 +9,34 @@ const DECORATOR_CONTENT = {
 };
 
 const styles = {
+  alignList: css({
+    [MQ.M]: {
+      marginTop: -SPACING.SIZE_20, // align content with links label
+    },
+  }),
+  categoryList: css({
+    [MQ.S]: {
+      marginBottom: SPACING.SIZE_40,
+    },
+    [MQ.L]: {
+      marginBottom: SPACING.SIZE_60,
+    },
+  }),
   container: css({
     color: COLORS.GLOBAL.BLACK,
     display: 'flex',
     marginBottom: SPACING.SIZE_10,
     position: 'relative',
+  }),
+  content: css({
+    background: COLORS.GLOBAL.WHITE,
+    [MQ.S]: {
+      padding: `0 ${SPACING.SIZE_20}px ${SPACING.SIZE_50}px ${SPACING.SIZE_20}px`,
+    },
+    [MQ.M]: {
+      height: '100%',
+      padding: `0 0 ${SPACING.SIZE_50}px 0`,
+    },
   }),
   decoration: css({
     ':before': {
@@ -26,6 +49,7 @@ const styles = {
     transform: 'translateY(-50%)',
   }),
   flair: css({
+    color: COLORS.GLOBAL.ORANGE,
     paddingLeft: SPACING.SIZE_10,
   }),
   flairIcon: css({
@@ -52,7 +76,7 @@ const styles = {
     [MQ.S]: [
       typography.tertiaryHeadline,
       {
-        paddingTop: SPACING.SIZE_70,
+        paddingTop: SPACING.SIZE_30,
       },
     ],
     [MQ.M]: [
@@ -79,6 +103,8 @@ const styles = {
   }),
   info: css({
     color: COLORS.LIGHT.GRAY_70,
+    [MQ.S]: typography.smallCopyTight,
+    [MQ.L]: typography.bodyCopyTight,
   }),
   infoTitle: css({
     fontWeight: 'bold',
@@ -125,13 +151,10 @@ const styles = {
   }),
   mobileHeader: css({
     marginBottom: SPACING.SIZE_20,
-    paddingTop: SPACING.SIZE_100,
+    paddingTop: SPACING.SIZE_30,
   }),
   selected: css({
     color: COLORS.GLOBAL.ORANGE,
-  }),
-  title: css({
-    marginBottom: SPACING.SIZE_30,
   }),
 };
 

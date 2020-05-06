@@ -1,25 +1,20 @@
+import Button from '~/components/global/Button/Button';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
+import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
-import { Icon as IconType } from '~/components/global/Icon/Icon.types';
 import Image from '~/components/global/Image/Image';
 import BaseLink from '~/components/global/Link/BaseLink';
 import NavLink from '~/components/global/Link/NavLink';
+import { data } from '~/components/global/Nav/Nav.data';
 import { layout } from '~/styles/layout.styles';
 
+import { useNavState } from './Nav.container';
 import styles from './Nav.styles';
 import NavSearchButton from './NavSearchBar/NavSearchButton';
 
-interface LinkType {
-  action: string;
-  icon?: IconType;
-  label?: string;
-  text?: string;
-}
-
 interface Props {
   isHomepage?: boolean;
-  links: LinkType[];
 }
 
 const CONSTANTS = {
@@ -27,7 +22,8 @@ const CONSTANTS = {
   MOBILE_MENU_ARIA_LABEL: 'Mobile menu',
 };
 
-function Nav({ isHomepage, links }: Props) {
+function Nav({ isHomepage }: Props) {
+  const { isSubNavOpen, toggleSubNav, createSelectLinkHandler } = useNavState();
   return (
     <Grid as="nav" css={styles.root}>
       <GridItem css={layout.container} gridColumn="2/4">
@@ -51,21 +47,25 @@ function Nav({ isHomepage, links }: Props) {
             <NavSearchButton />
           </li>
         )}
-        {links.map(({ action, icon, label, text }: LinkType) => {
-          return (
-            <li css={styles.listItem} key={`${text}${icon}`}>
-              <NavLink aria-label={label} href={action} icon={icon}>
-                {text}
-              </NavLink>
-            </li>
-          );
-        })}
+        {!isSubNavOpen &&
+          data.links.map((link, idx) => {
+            return (
+              <li css={styles.listItem} key={idx}>
+                <NavLink
+                  isActive={false}
+                  onClick={createSelectLinkHandler(link.text || '')}
+                  {...link}
+                />
+              </li>
+            );
+          })}
         <li css={[styles.listItem, styles.hamburger]}>
-          <NavLink
+          <Button
             aria-label={CONSTANTS.MOBILE_MENU_ARIA_LABEL}
-            as="button"
-            icon={ICONS.MENU}
-          />
+            onClick={toggleSubNav}
+          >
+            <Icon name={ICONS.MENU} />
+          </Button>
         </li>
       </GridItem>
     </Grid>
