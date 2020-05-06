@@ -68,7 +68,11 @@ function Link({
   );
 
   const leftIcon = iconPosition === LINK_ICON_POSITION.LEFT && inlineIcon;
-  const linkText = children && <span css={styles.link}>{children}</span>;
+  const linkText = children && (
+    <span css={[styles.link, !icon && styles.linkBorder[theme]]}>
+      {children}
+    </span>
+  );
   const rightIcon = iconPosition === LINK_ICON_POSITION.RIGHT && inlineIcon;
 
   if (isAnchor && 'href' in rest) {

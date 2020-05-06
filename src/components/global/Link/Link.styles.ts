@@ -29,6 +29,15 @@ const styles = {
     borderBottom: BORDERS.DOTTED_TRANSPARENT_2PX,
     transition: `border-color ${TIME.MS100}ms ease`,
   }),
+  linkBorder: {
+    [LINK_THEME.DARK]: css({
+      borderColor: 'inherit',
+    }),
+
+    [LINK_THEME.LIGHT]: css({
+      borderColor: COLORS.LIGHT.GRAY_70,
+    }),
+  },
   root: css({
     '&:hover span, &:focus span': {
       borderColor: 'inherit',
@@ -80,51 +89,53 @@ export const iconCTA = {
   ],
   root: css({
     display: 'flex',
+    svg: {
+      color: COLORS.GLOBAL.WHITE,
+    },
   }),
 };
 
 export const footerLink = [
   typography.bodyCopy,
   css({
-    '&:hover span svg, &:focus span svg': {
-      fill: COLORS.GLOBAL.ORANGE,
-    },
-    '&:hover, &:focus': { color: COLORS.GLOBAL.ORANGE },
-    'span svg': {
-      fill: COLORS.GLOBAL.BLACK,
-    },
-    // eslint-disable-next-line sort-keys
+    '&:hover, &:focus': { borderColor: 'inherit', color: COLORS.GLOBAL.BLACK },
     color: COLORS.LIGHT.GRAY_70,
     display: 'inline-flex',
-    [MQ.XL]: typography.smallCopy,
+    span: {
+      borderColor: 'transparent',
+    },
+    svg: {
+      color: COLORS.GLOBAL.BLACK,
+    },
+    [MQ.XL]: typography.bodyCopyTight,
   }),
 ];
 
 export const navLink = {
   root: [
-    typography.tertiaryHeadline,
+    typography.bodyCopy,
     css({
-      '&:hover span': { color: COLORS.GLOBAL.BLACK },
+      '&:hover': { color: COLORS.GLOBAL.BLACK },
       // eslint-disable-next-line sort-keys
-      '&:active span, &:focus span': { color: COLORS.LIGHT.GRAY_70 },
+      '&:active, &:focus': { color: COLORS.LIGHT.GRAY_70 },
       color: COLORS.LIGHT.GRAY_70,
-      [MQ.XL]: typography.tertiaryHeadline,
-    }),
-  ],
-  selected: [
-    typography.tertiaryHeadline,
-    css({
-      '&:hover, &:focus, &:active': {
-        span: { color: COLORS.GLOBAL.ORANGE },
-      },
-      color: COLORS.GLOBAL.ORANGE,
       span: {
-        borderBottom: '2px dotted',
-        transition: `border-color ${TIME.MS100}ms ease`,
+        borderColor: 'transparent',
       },
-      [MQ.XL]: typography.tertiaryHeadline,
+      [MQ.M]: typography.tertiaryHeadline,
+      [MQ.L]: typography.primarySubhead,
     }),
   ],
+  selected: css({
+    '&:hover, &:focus, &:active': {
+      span: { color: COLORS.GLOBAL.ORANGE },
+    },
+    color: COLORS.GLOBAL.ORANGE,
+    span: {
+      borderColor: COLORS.GLOBAL.ORANGE,
+      transition: `border-color ${TIME.MS100}ms ease`,
+    },
+  }),
 };
 
 export default styles;
