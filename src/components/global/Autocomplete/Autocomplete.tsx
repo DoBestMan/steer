@@ -8,15 +8,13 @@ import {
 } from 'react';
 
 import { KEYCODES } from '~/lib/constants';
-import { onlyNumbers } from '~/lib/utils/regex';
 import { randomString } from '~/lib/utils/string';
 
 import styles from './Autocomplete.styles';
 import { generateIDs, getItemDOMId } from './Autocomplete.utils';
 import AutocompleteActions from './AutocompleteActions';
-import AutocompleteResultItem, {
-  AutocompleteResult,
-} from './AutocompleteResultItem';
+import { AutocompleteResult } from './AutocompleteResultItem';
+import AutocompleteResultItemDefault from './AutocompleteResultItemDefault';
 
 const CONSTANTS = {
   DEFAULT_SELECTED_INDEX: -1,
@@ -24,14 +22,26 @@ const CONSTANTS = {
   MINIMUM_CHARACTER_BEFORE_ERROR: 3,
 };
 
+export interface ResultItemProps {
+  index: number;
+  inputValue: string;
+  listboxItemID: string;
+  onItemSelected: (index: number, shouldFocusInput?: boolean) => void;
+  result: AutocompleteResult;
+  selectedIndex: number;
+}
+
 interface Props {
   children?: ReactChild;
   errorLabel: string | JSX.Element;
+  inputMaxLength?: number;
+  inputValidationRegEx?: RegExp;
   inputValue?: string;
   label: string;
   onChange: (value: string) => void;
   onInputResultMatch?: (inputMatchesResult: boolean) => void;
   onValueSelectionSuccess: (value: AutocompleteResult) => void;
+  resultItemComponent?: (resultItemProps: ResultItemProps) => JSX.Element;
   results: AutocompleteResult[];
 }
 
@@ -39,15 +49,17 @@ interface Props {
 // Based on:
 // Approach: https://www.w3.org/TR/wai-aria-practices/#combobox
 // Example: https://www.w3.org/TR/wai-aria-practices/examples/combobox/aria1.1pattern/listbox-combo.html (List Autocomplete with Automatic Selection)
-
 function Autocomplete({
   children,
   errorLabel,
+  inputMaxLength,
+  inputValidationRegEx,
   inputValue = CONSTANTS.DEFAULT_VALUE,
   label,
   onChange,
   onValueSelectionSuccess,
   onInputResultMatch,
+  resultItemComponent: ResultItemComponent = AutocompleteResultItemDefault,
   results,
 }: Props) {
   const [ids, setIds] = useState({
@@ -64,14 +76,16 @@ function Autocomplete({
   const [selectedIndex, setSelectedIndex] = useState(
     CONSTANTS.DEFAULT_SELECTED_INDEX,
   );
+
+  const textInput = useRef<HTMLInputElement>(null);
+
   const isInputEmpty = value.length < 1;
   const hasResults = results.length > 0;
-  const validResults = results.filter((result) => result.main.includes(value));
+  const validResults = results.find((result) => result.main.includes(value));
   const isInvalidInput =
-    validResults.length < 1 &&
-    value.length > CONSTANTS.MINIMUM_CHARACTER_BEFORE_ERROR;
-  const textInput = useRef<HTMLInputElement>(null);
-  const inputMatchesResult = value.length === 5 && !isInvalidInput;
+    !validResults && value.length > CONSTANTS.MINIMUM_CHARACTER_BEFORE_ERROR;
+  const inputMatchesResult =
+    !!validResults && validResults.main === value && !isInvalidInput;
 
   const focusOnInput = () => {
     if (textInput.current) {
@@ -106,8 +120,11 @@ function Autocomplete({
   };
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
-    // Ignore non numeric characters
-    const targetValue = e.currentTarget.value.replace(onlyNumbers, '');
+    let targetValue = e.currentTarget.value;
+
+    if (inputValidationRegEx) {
+      targetValue = targetValue.replace(inputValidationRegEx, '');
+    }
 
     onChange(targetValue);
     setValue(targetValue);
@@ -192,7 +209,7 @@ function Autocomplete({
               aria-controls={ids.listboxID}
               aria-labelledby={ids.labelID}
               css={styles.input}
-              maxLength={5}
+              maxLength={inputMaxLength}
               onChange={handleOnChange}
               onKeyDown={handleKeyDown}
               ref={textInput}
@@ -211,15 +228,14 @@ function Autocomplete({
         role={shouldShowListbox ? 'listbox' : ''}
       >
         {shouldShowListbox &&
-          results.map((result: AutocompleteResult, index: number) => (
-            <AutocompleteResultItem
+          results.map((result, index) => (
+            <ResultItemComponent
               index={index}
               inputValue={value}
-              key={result.main}
+              key={index}
               listboxItemID={ids.listboxItemID}
               onItemSelected={onItemSelected}
-              main={result.main}
-              secondary={result.secondary}
+              result={result}
               selectedIndex={selectedIndex}
             />
           ))}

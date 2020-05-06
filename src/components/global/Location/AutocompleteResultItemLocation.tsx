@@ -1,0 +1,48 @@
+import { ResultItemProps } from '~/components/global/Autocomplete/Autocomplete';
+import { getItemDOMId } from '~/components/global/Autocomplete/Autocomplete.utils';
+import AutocompleteResultsItem from '~/components/global/Autocomplete/AutocompleteResultItem';
+import Button from '~/components/global/Button/Button';
+
+import styles from './AutocompleteResultItemLocation.styles';
+
+function AutocompleteResultItemLocation({
+  index,
+  inputValue,
+  listboxItemID,
+  onItemSelected,
+  result,
+  selectedIndex,
+}: ResultItemProps) {
+  const { main, secondary } = result;
+  const isSelected = index === selectedIndex;
+  const id = getItemDOMId(listboxItemID, main);
+  const handleItemClicked = () => {
+    onItemSelected(index, true);
+  };
+
+  return (
+    <AutocompleteResultsItem
+      id={id}
+      aria-label={`${main} ${secondary && secondary}`}
+      aria-selected={isSelected}
+      css={styles.listboxItem}
+      role="option"
+    >
+      <Button
+        tabIndex={-1}
+        onClick={handleItemClicked}
+        css={[isSelected && styles.listboxItemSelected]}
+      >
+        <>
+          <span css={styles.listboxItemHighlight}>{inputValue}</span>
+          {main.replace(inputValue, '')}{' '}
+          {secondary && (
+            <span css={styles.listboxItemSecondary}>{secondary}</span>
+          )}
+        </>
+      </Button>
+    </AutocompleteResultsItem>
+  );
+}
+
+export default AutocompleteResultItemLocation;

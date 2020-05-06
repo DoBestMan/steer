@@ -2,7 +2,9 @@ import { useCallback, useEffect, useState } from 'react';
 
 import Autocomplete from '~/components/global/Autocomplete/Autocomplete';
 import { AutocompleteResult } from '~/components/global/Autocomplete/AutocompleteResultItem';
+import { onlyNumbers } from '~/lib/utils/regex';
 
+import AutocompleteResultItemLocation from './AutocompleteResultItemLocation';
 import { styles } from './Location.styles';
 import LocationInfo from './LocationInfo';
 import UseCurrentLocation from './UseCurrentLocation';
@@ -150,11 +152,14 @@ function LocationContainer({
       <Autocomplete
         label="Enter your ZIP code"
         errorLabel={errorLabel}
+        inputMaxLength={5}
+        inputValidationRegEx={onlyNumbers}
         inputValue={inputValue}
         onChange={onChange}
         onInputResultMatch={setIsFreeShipping}
         onValueSelectionSuccess={onLocationChangeSuccess}
         results={results}
+        resultItemComponent={AutocompleteResultItemLocation}
       >
         <>
           {currentLocation && (

@@ -55,7 +55,7 @@ const startsWith = (list: AutocompleteResult[], comparisonString: string) =>
 
 const handleSelectionSuccess = action('selection-success');
 
-export function AutocompleteDefault() {
+export function DefaultAutocomplete() {
   const [results, setResults] = useState([]);
   const onChange = (value: string) => {
     setResults(startsWith(ZIP_CODES, value) as SetStateAction<never[]>);
@@ -66,6 +66,7 @@ export function AutocompleteDefault() {
       <span css={styles.errorLine}>Please enter a valid zip code.</span>
     </>
   );
+  const handleInputResultMatch = action('input-result-match');
 
   return (
     <Autocomplete
@@ -73,6 +74,7 @@ export function AutocompleteDefault() {
       results={results}
       label="Enter ZIP Code"
       errorLabel={errorLabel}
+      onInputResultMatch={handleInputResultMatch}
       onValueSelectionSuccess={handleSelectionSuccess}
     />
   );

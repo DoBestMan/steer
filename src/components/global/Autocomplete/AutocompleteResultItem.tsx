@@ -1,57 +1,20 @@
-import Button from '~/components/global/Button/Button';
-
-import styles from './Autocomplete.styles';
-import { getItemDOMId } from './Autocomplete.utils';
+import { ReactNode } from 'react';
 
 export type AutocompleteResult = {
   main: string;
   secondary: string;
 };
 
-interface Props extends AutocompleteResult {
-  index: number;
-  inputValue: string;
-  listboxItemID: string;
-  onItemSelected: (index: number, shouldFocusInput?: boolean) => void;
-  selectedIndex: number;
+interface Props {
+  children: ReactNode;
+  id?: string;
+  role?: string;
 }
 
-function AutocompleteResultsItem({
-  index,
-  inputValue,
-  listboxItemID,
-  main,
-  onItemSelected,
-  secondary,
-  selectedIndex,
-}: Props) {
-  const isSelected = index === selectedIndex;
-  const id = getItemDOMId(listboxItemID, main);
-  const handleItemClicked = () => {
-    onItemSelected(index, true);
-  };
-
+function AutocompleteResultsItem({ children, id, ...rest }: Props) {
   return (
-    <li
-      aria-selected={isSelected}
-      css={styles.listboxItem}
-      id={id}
-      role="option"
-      aria-label={`${main} ${secondary && secondary}`}
-    >
-      <Button
-        tabIndex={-1}
-        onClick={handleItemClicked}
-        css={[isSelected && styles.listboxItemSelected]}
-      >
-        <>
-          <span css={styles.listboxItemHighlight}>{inputValue}</span>
-          {main.replace(inputValue, '')}{' '}
-          {secondary && (
-            <span css={styles.listboxItemSecondary}>{secondary}</span>
-          )}
-        </>
-      </Button>
+    <li id={id} {...rest}>
+      {children}
     </li>
   );
 }
