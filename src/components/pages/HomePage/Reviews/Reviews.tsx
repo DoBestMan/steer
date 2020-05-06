@@ -40,7 +40,7 @@ function Reviews({
         <Link
           href={link.href}
           css={[layout.hideOnSmall, styles.link]}
-          {...link.isExternal}
+          isExternal={link.isExternal}
         >
           {linkLabel}
         </Link>

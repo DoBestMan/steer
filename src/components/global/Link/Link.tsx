@@ -13,10 +13,10 @@ import {
 } from '~/lib/constants';
 import { disableGlobalFocus } from '~/styles/document/accessibility.styles';
 
-import BaseLink from './BaseLink';
+import BaseLink, { BaseLinkProps } from './BaseLink';
 import styles from './Link.styles';
 
-export interface Props {
+interface Props {
   as?: LINK_TYPE;
   children?: ReactNode;
   icon?: IconType;
@@ -27,9 +27,7 @@ export interface Props {
   weight?: LINK_WEIGHT;
 }
 
-export interface AnchorProps extends Props {
-  href: string;
-}
+export interface AnchorProps extends BaseLinkProps, Props {}
 
 export interface ButtonProps extends Props {
   onClick: () => void;
