@@ -36,7 +36,12 @@ export const ICONS: Record<string, Icon> = {
   SEARCH: 'search',
   SMALL_CHEVRON_DOWN: 'small-chevron-down',
   SMALL_CHEVRON_UP: 'small-chevron-up',
+  TIRE: 'tire',
   TWITTER: 'twitter',
+  VEHICLE_COMMERCIAL: 'vehicle-commercial',
+  VEHICLE_LIGHT_TRUCK: 'vehicle-light-truck',
+  VEHICLE_PASSENGER: 'vehicle-passenger',
+  WHEEL: 'wheel',
   YOUTUBE: 'youtube',
 };
 
@@ -72,7 +77,12 @@ export const ICON_SIZES: Record<string, IconSize> = {
   SEARCH: { h: 17, w: 17 },
   SMALL_CHEVRON_DOWN: { h: 5, w: 8 },
   SMALL_CHEVRON_UP: { h: 5, w: 8 },
+  TIRE: { h: 30, w: 30 },
   TWITTER: { h: 18, w: 21 },
+  VEHICLE_COMMERCIAL: { h: 43, w: 56 },
+  VEHICLE_LIGHT_TRUCK: { h: 36, w: 54 },
+  VEHICLE_PASSENGER: { h: 25, w: 55 },
+  WHEEL: { h: 30, w: 30 },
   YOUTUBE: { h: 16, w: 22 },
 };
 

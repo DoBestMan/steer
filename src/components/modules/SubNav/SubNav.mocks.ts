@@ -113,7 +113,7 @@ const subnav = {
               label: 'Commercial',
               link: { href: '/vehicle/commercial', isExternal: false },
               flair: null,
-              icon: { type: 'SiteIcon', svgId: 'vehicle-commerical' },
+              icon: { type: 'SiteIcon', svgId: 'vehicle-commercial' },
             },
           ],
           more: {

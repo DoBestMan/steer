@@ -101,6 +101,16 @@ const styles = {
     height: '100%',
     right: 0,
   }),
+  imageVehicle: css({
+    span: {
+      bottom: 0,
+      display: 'inline-flex',
+      maxWidth: 'unset',
+      pointerEvents: 'none',
+      position: 'absolute',
+      right: 0,
+    },
+  }),
   info: css({
     color: COLORS.LIGHT.GRAY_70,
     [MQ.S]: typography.smallCopyTight,
@@ -144,6 +154,9 @@ const styles = {
     width: '100%',
   }),
   listTitle: css({
+    alignItems: 'center',
+    display: 'flex',
+    justifyContent: 'space-between',
     marginBottom: SPACING.SIZE_15,
     [MQ.S]: {
       marginTop: SPACING.SIZE_20,

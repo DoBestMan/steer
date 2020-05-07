@@ -9,6 +9,7 @@ import { SiteMenuBrowseGroupItem } from '~/data/models/SiteMenuBrowseGroupItem';
 import { SiteMenuBrowseItem } from '~/data/models/SiteMenuBrowseItem';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { BREAKPOINT_SIZES, LINK_THEME } from '~/lib/constants';
+import { isVehicleSvg } from '~/lib/utils/icon';
 import { typography } from '~/styles/typography.styles';
 
 import styles from './BrowseTires.styles';
@@ -95,7 +96,12 @@ function Categories({
                       </span>
                       <div css={styles.imageContainer}>
                         {item.icon && (
-                          <span css={styles.image}>
+                          <span
+                            css={[
+                              styles.image,
+                              isVehicleSvg(item.icon) && styles.imageVehicle,
+                            ]}
+                          >
                             <IconOrImage {...item.icon} />
                           </span>
                         )}

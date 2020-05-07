@@ -34,7 +34,12 @@ export type Icon =
   | 'search'
   | 'small-chevron-down'
   | 'small-chevron-up'
+  | 'tire'
   | 'twitter'
+  | 'vehicle-commercial'
+  | 'vehicle-light-truck'
+  | 'vehicle-passenger'
+  | 'wheel'
   | 'youtube';
 
 export type IconSize = { h: number; w: number };
