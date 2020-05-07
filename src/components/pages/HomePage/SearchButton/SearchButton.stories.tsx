@@ -1,8 +1,6 @@
 import { action } from '@storybook/addon-actions';
 import { select } from '@storybook/addon-knobs';
 
-import { Home as HomeType } from '~/lib/constants/home.types';
-
 import SearchButton from './SearchButton';
 
 export default {
@@ -10,14 +8,15 @@ export default {
   title: 'SearchButton',
 };
 
-const options: HomeType[] = Object.keys(HomeType).map(
-  (key: string) => HomeType[key as keyof typeof HomeType],
-);
+const options = {
+  default: null,
+  promotional: 'promotional',
+};
 
 const handleButtonClick = action('button-click');
 
 export function ButtonWithKnobs() {
-  const type = select('Types', options, options[0]);
+  const theme = select('Themes', options, options.default);
 
-  return <SearchButton onClick={handleButtonClick} type={type} />;
+  return <SearchButton onClick={handleButtonClick} theme={theme} />;
 }

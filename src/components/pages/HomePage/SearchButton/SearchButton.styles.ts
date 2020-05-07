@@ -15,7 +15,7 @@ const CONSTANTS = {
 };
 
 const styles = {
-  container: [
+  button: [
     typography.primaryHeadline,
     css({
       alignItems: 'center',
@@ -31,13 +31,9 @@ const styles = {
         padding: CONSTANTS.PADDING.M,
       },
 
-      [MQ.M]: {
+      [MQ.L]: {
         flexDirection: 'row-reverse',
         justifyContent: 'flex-end',
-        padding: CONSTANTS.PADDING.L,
-      },
-
-      [MQ.L]: {
         padding: CONSTANTS.PADDING.L,
       },
 
@@ -54,6 +50,16 @@ const styles = {
       },
     }),
   ],
+  container: css({
+    paddingBottom: 160,
+
+    [MQ.M]: {
+      paddingBottom: 240,
+    },
+    [MQ.L]: {
+      paddingBottom: 190,
+    },
+  }),
   icon: css({
     svg: {
       display: 'block',

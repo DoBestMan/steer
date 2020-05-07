@@ -7,5 +7,5 @@ export interface SiteGlobals {
   /**
    * Optional color scheme (used for promotions)
    */
-  theme: string | null;
+  siteTheme: string | null;
 }

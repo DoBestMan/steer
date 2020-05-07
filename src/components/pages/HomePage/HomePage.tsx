@@ -8,8 +8,10 @@ import { SiteInsights } from '~/data/models/SiteInsights';
 import { SiteReviews } from '~/data/models/SiteReviews';
 import { useApiDataWithDefault } from '~/hooks/useApiDataWithDefault';
 import { COLORS } from '~/lib/constants';
+import { useSiteGlobalsContext } from '~/pages/SiteGlobals.context';
 
 import styles from './HomePage.styles';
+import SearchButton from './SearchButton/SearchButton';
 
 interface Props {
   serverData: {
@@ -42,10 +44,19 @@ function HomePage({ serverData }: Props) {
 
   const backgroundColor = COLORS.GLOBAL.BLACK;
 
+  const siteGlobals = useSiteGlobalsContext();
+  const siteTheme = siteGlobals && siteGlobals.siteTheme;
+
+  function handleSearchClick() {
+    // TODO Wire up homepage search https://simpletire.atlassian.net/browse/WCS-216
+    console.info('Search button click');
+  }
+
   return (
     <Layout>
       <>
         <HomeHeader {...siteHero} />
+        <SearchButton onClick={handleSearchClick} theme={siteTheme} />
         <Grid css={[{ backgroundColor }, styles.content]}>
           <DriverInsights {...siteInsights} />
           <Reviews {...siteReviews} />

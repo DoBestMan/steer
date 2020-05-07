@@ -43,7 +43,12 @@ module.exports = {
     ],
     'react-hooks/exhaustive-deps': 'error',
     'react-hooks/rules-of-hooks': 'error',
-    'react/jsx-no-bind': 'error',
+    'react/jsx-no-bind': [
+      'error',
+      {
+        allowFunctions: true,
+      },
+    ],
     'react/jsx-boolean-value': ['error', 'never'],
     'react/react-in-jsx-scope': 'off',
     'sort-keys': 'error',

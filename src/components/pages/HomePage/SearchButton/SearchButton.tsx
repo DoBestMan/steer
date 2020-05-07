@@ -1,34 +1,35 @@
 import { SerializedStyles } from '@emotion/core';
-import { Fragment, MouseEventHandler } from 'react';
+import { MouseEventHandler } from 'react';
 
 import Button from '~/components/global/Button/Button';
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
-import { Home as HomeType } from '~/lib/constants/home.types';
+import { SiteGlobals } from '~/data/models/SiteGlobals';
+import { ui } from '~/lib/utils/ui-dictionary';
 
 import styles from './SearchButton.styles';
 
 interface Props {
   onClick: MouseEventHandler;
-  type: HomeType;
+  theme: SiteGlobals['siteTheme'];
 }
 
-const mapTypesToStyles: { [key: string]: SerializedStyles } = {
-  [HomeType.NORMAL]: styles.primary,
-  [HomeType.PROMOTIONAL]: styles.secondary,
+const mapThemeToStyles: { [key: string]: SerializedStyles } = {
+  promotional: styles.secondary,
 };
 
-function SearchButton(props: Props) {
-  const { onClick, type = HomeType.NORMAL } = props;
-  const typeStyles = mapTypesToStyles[type];
+function SearchButton({ onClick, theme }: Props) {
+  const themeStyles = !theme ? styles.primary : mapThemeToStyles[theme];
 
   return (
-    <Button onClick={onClick} css={[styles.container, typeStyles]}>
-      <Fragment>
-        Search by vehicle
-        <Icon name={ICONS.MAIN_SEARCH} css={styles.icon} />
-      </Fragment>
-    </Button>
+    <div css={[styles.container, themeStyles]}>
+      <Button onClick={onClick} css={styles.button}>
+        <>
+          {ui('common.header.searchShortLabel')}
+          <Icon name={ICONS.MAIN_SEARCH} css={styles.icon} />
+        </>
+      </Button>
+    </div>
   );
 }
 
