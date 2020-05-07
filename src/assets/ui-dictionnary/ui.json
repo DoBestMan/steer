@@ -9,5 +9,8 @@
       "searchShortLabel": "Search by vehicle"
     }
   },
-  "homepage": {}
+  "homepage": {},
+  "search": {
+    "cancelButtonLabel": "Cancel"
+  }
 }
