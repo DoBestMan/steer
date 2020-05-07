@@ -54,7 +54,9 @@ const styles = {
     paddingLeft: 5,
   }),
   [LINK_THEME.DARK]: css({
-    '&:hover:not(:active)': { color: COLORS.GLOBAL.WHITE },
+    '&:hover:not(:active), &:focus:not(:active)': {
+      color: COLORS.GLOBAL.WHITE,
+    },
     color: COLORS.DARK.GRAY_40,
   }),
 

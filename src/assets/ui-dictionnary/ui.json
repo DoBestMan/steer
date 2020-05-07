@@ -7,6 +7,9 @@
     "header": {
       "searchLongLabel": "Search by vehicle, tire size or brand",
       "searchShortLabel": "Search by vehicle"
+    },
+    "toast": {
+      "close": "Close notification"
     }
   },
   "homepage": {},
