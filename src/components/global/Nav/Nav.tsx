@@ -24,6 +24,7 @@ const CONSTANTS = {
 
 function Nav({ isHomepage }: Props) {
   const { isSubNavOpen, toggleSubNav, createSelectLinkHandler } = useNavState();
+
   return (
     <Grid as="nav" css={styles.root}>
       <GridItem css={layout.container} gridColumn="2/4">
@@ -47,18 +48,21 @@ function Nav({ isHomepage }: Props) {
             <NavSearchButton />
           </li>
         )}
-        {!isSubNavOpen &&
-          data.links.map((link, idx) => {
-            return (
-              <li css={styles.listItem} key={idx}>
-                <NavLink
-                  isActive={false}
-                  onClick={createSelectLinkHandler(link.text || '')}
-                  {...link}
-                />
-              </li>
-            );
-          })}
+        <span css={isSubNavOpen && styles.hide}>
+          {data.links.map((link, idx) => (
+            <li css={styles.listItem} key={idx}>
+              <NavLink
+                isActive={false}
+                onClick={
+                  'target' in link
+                    ? createSelectLinkHandler(link.text || '')
+                    : undefined
+                }
+                {...link}
+              />
+            </li>
+          ))}
+        </span>
         <li css={[styles.listItem, styles.hamburger]}>
           <Button
             aria-label={CONSTANTS.MOBILE_MENU_ARIA_LABEL}

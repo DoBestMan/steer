@@ -1,3 +1,5 @@
+import { useCallback } from 'react';
+
 import GridItem from '~/components/global/Grid/GridItem';
 import IconOrImage from '~/components/global/IconOrImage/IconOrImage';
 import Link from '~/components/global/Link/Link';
@@ -16,10 +18,16 @@ import Flair from './Flair';
 interface Props {
   category: string;
   info: SiteMenuBrowseItem['info'];
+  shouldSetFocus: boolean;
   siteMenuBrowseGroupList: SiteMenuBrowseGroupItem[];
 }
 
-function Categories({ category, info, siteMenuBrowseGroupList }: Props) {
+function Categories({
+  category,
+  info,
+  shouldSetFocus,
+  siteMenuBrowseGroupList,
+}: Props) {
   const breakpoint = useBreakpoints();
   const isMobile = breakpoint === BREAKPOINT_SIZES.S;
   const {
@@ -27,13 +35,23 @@ function Categories({ category, info, siteMenuBrowseGroupList }: Props) {
     handleClearCategory,
     handleCloseSubNav,
   } = useNavState();
+  const focusRef = useCallback(
+    (node) => {
+      if (shouldSetFocus && node !== null) {
+        // focus on the first list item element when category is selected
+        node.firstChild.focus();
+      }
+    },
+    [shouldSetFocus],
+  );
+
   if (activeCategory !== category) {
     return null;
   }
   return (
     <GridItem gridColumnM="3/7" gridColumnL="4/8">
       <SubNavContentWrapper
-        category={category}
+        contentLabel={category}
         isOpen={activeCategory === category}
         onClose={handleCloseSubNav}
         onBack={handleClearCategory}
@@ -58,9 +76,12 @@ function Categories({ category, info, siteMenuBrowseGroupList }: Props) {
                   </div>
                 )}
                 <ul css={[styles.list, !header && styles.alignList]}>
-                  {items.map((item) => (
+                  {items.map((item, childIdx) => (
                     <li key={item.label} css={styles.listItem}>
-                      <div css={styles.linkLabel}>
+                      <span
+                        ref={(!childIdx && !idx && focusRef) || null}
+                        css={styles.linkLabel}
+                      >
                         <Link
                           theme={LINK_THEME.LIGHT}
                           href={item.link.href}
@@ -71,7 +92,7 @@ function Categories({ category, info, siteMenuBrowseGroupList }: Props) {
                         {item.flair && (
                           <Flair {...item.flair} css={styles.selected} />
                         )}
-                      </div>
+                      </span>
                       <div css={styles.imageContainer}>
                         {item.icon && (
                           <span css={styles.image}>

@@ -12,6 +12,7 @@ function Learn({ siteMenuLearn }: Props) {
   return (
     <SubNavContentWrapper
       isOpen
+      contentLabel="Learn more"
       onBack={handleClearLink}
       onClose={handleCloseSubNav}
     >

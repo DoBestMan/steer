@@ -30,7 +30,7 @@ interface Props {
 export interface AnchorProps extends BaseLinkProps, Props {}
 
 export interface ButtonProps extends Props {
-  onClick: () => void;
+  onClick?: () => void;
   type?: LINK_BUTTON_TYPE;
 }
 
@@ -48,7 +48,7 @@ function Link({
   ...rest
 }: LinkProps) {
   const linkStyles = [
-    disableGlobalFocus,
+    !!children && disableGlobalFocus,
     styles.root,
     styles[theme],
     styles[size],

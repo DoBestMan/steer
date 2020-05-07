@@ -16,7 +16,11 @@ interface Props {
 }
 
 function SubNavLinks({ siteMenuBrowseList }: Props) {
-  const { activeLink, createSelectLinkHandler, toggleSubNav } = useNavState();
+  const {
+    activeLink,
+    createSelectLinkHandler,
+    handleCloseSubNav,
+  } = useNavState();
   const breakpoint = useBreakpoints();
   const isMobile = breakpoint === BREAKPOINT_SIZES.S;
   const links = isMobile ? data.mobileLinks : data.links;
@@ -31,7 +35,11 @@ function SubNavLinks({ siteMenuBrowseList }: Props) {
             <li css={styles.link} key={idx}>
               <NavLink
                 {...link}
-                onClick={createSelectLinkHandler(link.text || '')}
+                onClick={
+                  'target' in link
+                    ? createSelectLinkHandler(link.text || '')
+                    : undefined
+                }
                 isActive={activeLink === link.text}
               />
             </li>
@@ -42,14 +50,21 @@ function SubNavLinks({ siteMenuBrowseList }: Props) {
             <li css={styles.link} key={idx}>
               <NavLink
                 {...link}
-                onClick={createSelectLinkHandler(link.text || '')}
+                onClick={
+                  'target' in link
+                    ? createSelectLinkHandler(link.text || '')
+                    : undefined
+                }
                 isActive={activeLink === link.text}
               />
             </li>
           ))}
           {!isMobile && (
             <li css={styles.link}>
-              <Button onClick={toggleSubNav}>
+              <Button
+                aria-label="Close navigation modal"
+                onClick={handleCloseSubNav}
+              >
                 <Icon name={ICONS.CLOSE} />
               </Button>
             </li>

@@ -7,10 +7,11 @@ import Categories from './Categories';
 import TireCategoryLinks from './TireCategoryLinks';
 
 interface Props {
+  shouldSetFocus: boolean;
   siteMenuBrowseList: SiteMenuBrowseItem[];
 }
 
-function BrowseTires({ siteMenuBrowseList }: Props) {
+function BrowseTires({ shouldSetFocus, siteMenuBrowseList }: Props) {
   const breakpoint = useBreakpoints();
   const isMobile = breakpoint === BREAKPOINT_SIZES.S;
   return (
@@ -27,6 +28,7 @@ function BrowseTires({ siteMenuBrowseList }: Props) {
             {...{
               category: title,
               info,
+              shouldSetFocus,
               siteMenuBrowseGroupList,
             }}
           />

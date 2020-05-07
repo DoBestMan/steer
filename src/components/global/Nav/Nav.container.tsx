@@ -23,7 +23,7 @@ function ConnectedNav({ isHomepage = false }: { isHomepage?: boolean }) {
   return (
     <NavContext.Provider value={navState}>
       <Nav isHomepage={isHomepage} />
-      {navState.isSubNavOpen && <SubNav {...subnav} />}
+      <SubNav {...subnav} />
     </NavContext.Provider>
   );
 }

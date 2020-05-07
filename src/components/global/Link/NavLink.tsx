@@ -14,6 +14,7 @@ type NavLinkButton = ActionType & ButtonProps;
 
 function NavLink({
   isActive = false,
+  label,
   text,
   ...rest
 }: (NavLinkAnchor | NavLinkButton) & Props) {
@@ -24,6 +25,7 @@ function NavLink({
         theme={LINK_THEME.LIGHT}
         css={isActive ? navLink.selected : navLink.root}
         iconPosition={LINK_ICON_POSITION.LEFT}
+        aria-label={label || text}
         {...rest}
       >
         {text}
@@ -38,6 +40,7 @@ function NavLink({
         theme={LINK_THEME.LIGHT}
         css={isActive ? navLink.selected : navLink.root}
         iconPosition={LINK_ICON_POSITION.LEFT}
+        aria-label={label || text}
         {...rest}
       >
         {text}

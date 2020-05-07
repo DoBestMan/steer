@@ -30,11 +30,11 @@ const styles = {
   }),
   content: css({
     background: COLORS.GLOBAL.WHITE,
+    minHeight: '100%',
     [MQ.S]: {
       padding: `0 ${SPACING.SIZE_20}px ${SPACING.SIZE_50}px ${SPACING.SIZE_20}px`,
     },
     [MQ.M]: {
-      height: '100%',
       padding: `0 0 ${SPACING.SIZE_50}px 0`,
     },
   }),
@@ -138,6 +138,9 @@ const styles = {
     justifyContent: 'space-between',
     padding: `${SPACING.SIZE_20}px 0`,
     position: 'relative',
+    span: {
+      borderColor: 'transparent',
+    },
     width: '100%',
   }),
   listTitle: css({

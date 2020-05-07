@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 import Button from '~/components/global/Button/Button';
 import Grid from '~/components/global/Grid/Grid';
@@ -28,26 +28,40 @@ function SubNav({ siteMenuBrowseList, siteMenuLearn }: Props) {
     activeCategory,
     handleCloseSubNav,
     createSelectCategoryHandler,
+    isSubNavOpen,
     activeLink,
-    toggleSubNav,
   } = useNavState();
 
   const breakpoint = useBreakpoints();
   const isMobile = breakpoint === BREAKPOINT_SIZES.S;
+
+  const prevLink = useRef(activeLink);
   useEffect(() => {
     if (!activeCategory && !isMobile) {
       createSelectCategoryHandler(siteMenuBrowseList[0].title)();
     }
+    // don't set focus on first list item if opening subnav
+    prevLink.current = activeLink;
   }, [
     activeCategory,
     createSelectCategoryHandler,
+    activeLink,
     isMobile,
     siteMenuBrowseList,
   ]);
+
   return (
-    <SubNavModal onClose={toggleSubNav} isOpen>
+    <SubNavModal
+      contentLabel={`Navigation - ${activeLink}`}
+      onClose={handleCloseSubNav}
+      isOpen={isSubNavOpen}
+    >
       <Grid css={styles.root}>
-        <Button css={[styles.action, styles.close]} onClick={handleCloseSubNav}>
+        <Button
+          aria-label="Close navigation modal"
+          css={[styles.action, styles.close]}
+          onClick={handleCloseSubNav}
+        >
           <Icon name={ICONS.CLOSE} />
         </Button>
         <GridItem fullbleedS fullbleedM gridColumnL="8/15" css={styles.subnav}>
@@ -55,7 +69,10 @@ function SubNav({ siteMenuBrowseList, siteMenuLearn }: Props) {
           <SubNavLinks siteMenuBrowseList={siteMenuBrowseList} />
           <GridItem isGrid fullbleedS fullbleedM gridColumnL="8/15">
             {activeLink === NAV_TARGETS.BROWSE_TIRES && (
-              <BrowseTires siteMenuBrowseList={siteMenuBrowseList} />
+              <BrowseTires
+                shouldSetFocus={!!(prevLink.current === activeLink)}
+                siteMenuBrowseList={siteMenuBrowseList}
+              />
             )}
             {activeLink === NAV_TARGETS.LEARN && (
               <Learn siteMenuLearn={siteMenuLearn} />

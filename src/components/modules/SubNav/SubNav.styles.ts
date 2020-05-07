@@ -75,15 +75,6 @@ const styles = {
     right: 0,
     top: 0,
   },
-  modalContent: css({
-    height: '100%',
-    [MQ.S]: {
-      background: COLORS.GLOBAL.WHITE,
-    },
-    [MQ.M]: {
-      background: 'none',
-    },
-  }),
   overlay: {
     background: COLORS.LIGHT.GRAY_20,
     zIndex: Z_INDEX.TOP,

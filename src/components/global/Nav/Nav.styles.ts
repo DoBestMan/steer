@@ -16,6 +16,10 @@ const styles = {
     },
   },
 
+  hide: css({
+    display: 'none',
+  }),
+
   links: css({
     display: 'flex',
     justifyContent: 'flex-end',

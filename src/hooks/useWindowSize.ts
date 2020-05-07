@@ -7,7 +7,11 @@ interface Size {
 
 export function useWindowSize() {
   const isClient = typeof window !== 'undefined';
-  const [elementSize, setElementSize] = useState<Size>({ height: 0, width: 0 });
+  const initialSize = {
+    height: isClient ? window.innerHeight : 0,
+    width: isClient ? window.innerWidth : 0,
+  };
+  const [elementSize, setElementSize] = useState<Size>(initialSize);
 
   useEffect(() => {
     if (!isClient) {
@@ -22,7 +26,7 @@ export function useWindowSize() {
     };
 
     window.addEventListener('resize', handleResize);
-    handleResize(); // trigers a re-render, potentially rendering a new value for element
+    handleResize(); // triggers a re-render, potentially rendering a new value for element
     return () => window.removeEventListener('resize', handleResize);
   }, [isClient]); // if element changes, reset it.
 
