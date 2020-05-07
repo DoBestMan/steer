@@ -166,14 +166,6 @@ const styles = {
 
       [MQ.M]: {
         marginBottom: 0,
-        marginRight: SPACING.SIZE_100,
-      },
-
-      [MQ.L]: {
-        marginRight: SPACING.SIZE_80,
-      },
-      [MQ.XL]: {
-        marginRight: SPACING.SIZE_60,
       },
     },
   }),

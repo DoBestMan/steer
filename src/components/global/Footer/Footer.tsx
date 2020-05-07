@@ -40,9 +40,16 @@ function Footer(props: Props) {
         gridColumnM="2/8"
         gridColumnL="6/14"
         gridColumnXL="5/14"
+        isGrid
         css={styles.supportSectionButtons}
       >
-        <li css={styles.supportButton}>
+        <GridItem
+          gridColumnM="1/4"
+          gridColumnL="1/5"
+          gridColumnXL="1/4"
+          as="li"
+          css={styles.supportButton}
+        >
           <IconCTA
             theme={LINK_THEME.LIGHT}
             icon="phone"
@@ -50,8 +57,14 @@ function Footer(props: Props) {
           >
             {supportContent.sales.text}
           </IconCTA>
-        </li>
-        <li css={styles.supportButton}>
+        </GridItem>
+        <GridItem
+          gridColumnM="4/7"
+          gridColumnL="5/9"
+          gridColumnXL="4/7"
+          as="li"
+          css={styles.supportButton}
+        >
           <IconCTA
             theme={LINK_THEME.LIGHT}
             icon="mail"
@@ -59,7 +72,7 @@ function Footer(props: Props) {
           >
             {supportContent.support.text}
           </IconCTA>
-        </li>
+        </GridItem>
       </GridItem>
 
       <GridItem
