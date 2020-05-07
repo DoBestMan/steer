@@ -5,12 +5,10 @@ import { COLORS, TIME } from '~/lib/constants';
 const styles = {
   image: css({
     display: 'block',
-    height: '100%',
     objectFit: 'inherit',
     objectPosition: 'inherit',
     opacity: 0,
     transition: `opacity ${TIME.MS350}ms ease-in-out`,
-    width: '100%',
   }),
 
   isLoaded: css({

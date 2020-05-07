@@ -42,7 +42,7 @@ function Image({
       css={[
         styles.root,
         isLazyAndNotLoaded && styles.placeholder,
-        { height: `${height}px`, width: `${width}px` },
+        { height: height && `${height}px`, width: width && `${width}px` },
       ]}
     >
       {finalSrcSet && (
