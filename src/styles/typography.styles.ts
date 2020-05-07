@@ -5,9 +5,12 @@ import { MQ } from '~/lib/constants';
 /* line heights are calculated by taking the 
 ratio of lineHeightInPixels / fontSizeInPixels */
 
+const fontFamily =
+  '"Circular Std", "Helvetica Neue", Helvetica, Arial, sans-serif';
+
 export const typography = {
   bodyCopy: css({
-    fontFamily: 'Circular Std',
+    fontFamily,
     fontSize: '1.5rem',
     fontStyle: 'normal',
     fontWeight: 'normal',
@@ -15,7 +18,7 @@ export const typography = {
     lineHeight: 22 / 15,
   }),
   bodyCopyTight: css({
-    fontFamily: 'Circular Std',
+    fontFamily,
     fontSize: '1.5rem',
     fontStyle: 'normal',
     fontWeight: 'normal',
@@ -23,7 +26,7 @@ export const typography = {
     lineHeight: 20 / 15,
   }),
   eyebrow: css({
-    fontFamily: 'Circular Std',
+    fontFamily,
     fontSize: '1.2rem',
     fontStyle: 'normal',
     fontWeight: 'bold',
@@ -31,7 +34,7 @@ export const typography = {
     textTransform: 'uppercase',
   }),
   jumboHeadline: css({
-    fontFamily: 'Circular Std',
+    fontFamily,
     fontSize: '4.0rem',
     fontStyle: 'normal',
     fontWeight: 'bold',
@@ -50,7 +53,7 @@ export const typography = {
     },
   }),
   largeCopy: css({
-    fontFamily: 'Circular Std',
+    fontFamily,
     fontSize: '1.8rem',
     fontStyle: 'normal',
     fontWeight: 'normal',
@@ -58,7 +61,7 @@ export const typography = {
     lineHeight: 25 / 18,
   }),
   primaryHeadline: css({
-    fontFamily: 'Circular Std',
+    fontFamily,
     fontSize: '2.5rem',
     fontStyle: 'normal',
     fontWeight: 'bold',
@@ -76,7 +79,7 @@ export const typography = {
     },
   }),
   primarySubhead: css({
-    fontFamily: 'Circular Std',
+    fontFamily,
     fontSize: '1.5rem',
     fontStyle: 'normal',
     fontWeight: 'bold',
@@ -84,7 +87,7 @@ export const typography = {
     lineHeight: 20 / 15,
   }),
   secondaryHeadline: css({
-    fontFamily: 'Circular Std',
+    fontFamily,
     fontSize: '2.0rem',
     fontStyle: 'normal',
     fontWeight: 'bold',
@@ -102,28 +105,28 @@ export const typography = {
     },
   }),
   secondarySubhead: css({
-    fontFamily: 'Circular Std',
+    fontFamily,
     fontSize: '1.2rem',
     fontStyle: 'normal',
     fontWeight: 'bold',
     lineHeight: 15 / 12,
   }),
   smallCopy: css({
-    fontFamily: 'Circular Std',
+    fontFamily,
     fontSize: '1.2rem',
     fontStyle: 'normal',
     fontWeight: 'normal',
     lineHeight: 20 / 12,
   }),
   smallCopyTight: css({
-    fontFamily: 'Circular Std',
+    fontFamily,
     fontSize: '1.2rem',
     fontStyle: 'normal',
     fontWeight: 'normal',
     lineHeight: 15 / 12,
   }),
   tertiaryHeadline: css({
-    fontFamily: 'Circular Std',
+    fontFamily,
     fontSize: '1.5rem',
     fontStyle: 'normal',
     fontWeight: 'bold',
