@@ -31,10 +31,24 @@ const styles = {
   close: css({
     position: 'absolute',
     right: SPACING.SIZE_20,
-    top: SPACING.SIZE_20,
+    top: SPACING.SIZE_30,
     zIndex: Z_INDEX.FRONT,
     [MQ.M]: {
       display: 'none',
+    },
+  }),
+  closeSubNav: css({
+    button: {
+      display: 'flex',
+      height: 30,
+      justifyContent: 'center',
+      width: 30,
+    },
+    [MQ.S]: {
+      display: 'none',
+    },
+    [MQ.M]: {
+      display: 'initial',
     },
   }),
   link: css({
@@ -81,6 +95,14 @@ const styles = {
   },
   root: css({
     height: '100%',
+  }),
+  smallShow: css({
+    [MQ.S]: {
+      display: 'initial',
+    },
+    [MQ.M]: {
+      display: 'none',
+    },
   }),
   subnav: css({
     display: 'flex',

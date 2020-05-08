@@ -39,14 +39,16 @@ const styles = {
     },
   }),
   decoration: css({
-    ':before': {
-      ...DECORATOR_CONTENT,
-      fontSize: 20,
+    [MQ.M]: {
+      ':before': {
+        ...DECORATOR_CONTENT,
+        fontSize: 20,
+      },
+      left: -SPACING.SIZE_20,
+      position: 'absolute',
+      top: '50%',
+      transform: 'translateY(-50%)',
     },
-    left: -SPACING.SIZE_20,
-    position: 'absolute',
-    top: '50%',
-    transform: 'translateY(-50%)',
   }),
   flair: css({
     color: COLORS.GLOBAL.ORANGE,
@@ -166,11 +168,26 @@ const styles = {
     },
   }),
   mobileHeader: css({
-    marginBottom: SPACING.SIZE_20,
-    paddingTop: SPACING.SIZE_30,
+    [MQ.S]: {
+      marginBottom: SPACING.SIZE_20,
+      paddingTop: SPACING.SIZE_30,
+    },
+    [MQ.M]: {
+      display: 'none',
+      marginBottom: 0,
+      paddingTop: 0,
+    },
   }),
   selected: css({
     color: COLORS.GLOBAL.ORANGE,
+  }),
+  smallHide: css({
+    [MQ.S]: {
+      display: 'none',
+    },
+    [MQ.M]: {
+      display: 'initial',
+    },
   }),
 };
 

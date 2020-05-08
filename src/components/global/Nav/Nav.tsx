@@ -49,7 +49,7 @@ function Nav({ isHomepage }: Props) {
         gridColumnL="4/14"
       >
         {!isHomepage && (
-          <li css={styles.searchButton}>
+          <li css={[styles.searchButton, styles.iconButton]}>
             <NavSearchButton />
           </li>
         )}
@@ -64,7 +64,7 @@ function Nav({ isHomepage }: Props) {
             </li>
           ))}
         </span>
-        <li css={[styles.listItem, styles.hamburger]}>
+        <li css={[styles.listItem, styles.hamburger, styles.iconButton]}>
           <Button
             aria-label={CONSTANTS.MOBILE_MENU_ARIA_LABEL}
             onClick={toggleSubNav}

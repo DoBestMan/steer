@@ -4,9 +4,7 @@ import GridItem from '~/components/global/Grid/GridItem';
 import { SiteInsightItemDefault } from '~/data/models/SiteInsightItemDefault';
 import { SiteInsightItemList } from '~/data/models/SiteInsightItemList';
 import { SiteInsights } from '~/data/models/SiteInsights';
-import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { INSIGHT_TYPE } from '~/lib/backend/insights.types';
-import { BREAKPOINT_SIZES, COLORS } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 import styles from './DriverInsights.styles';
@@ -25,24 +23,11 @@ const mapInsightTypeToCard = {
 };
 
 function DriverInsights({ body, siteInsightList, title }: SiteInsights) {
-  const breakpoint = useBreakpoints();
-  const isMobile = breakpoint === BREAKPOINT_SIZES.S;
   return (
     <>
       <GridItem gridColumnM="2/5" gridColumnL="3/7">
-        <h2 css={[{ color: COLORS.GLOBAL.WHITE }, styles.title]}>{title}</h2>
-
-        {!isMobile && (
-          <p
-            css={[
-              typography.bodyCopy,
-              { color: COLORS.DARK.GRAY_40 },
-              styles.description,
-            ]}
-          >
-            {body}
-          </p>
-        )}
+        <h2 css={styles.title}>{title}</h2>
+        <p css={[typography.bodyCopy, styles.description]}>{body}</p>
       </GridItem>
       <GridItem gridColumnM="5/8" gridColumnL="8/13" css={styles.cards}>
         {siteInsightList.map((props) =>

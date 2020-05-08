@@ -7,8 +7,7 @@ import SubNavContentWrapper from '~/components/modules/SubNav/SubNavContentWrapp
 import { useNavContext } from '~/context/Nav.context';
 import { SiteMenuBrowseGroupItem } from '~/data/models/SiteMenuBrowseGroupItem';
 import { SiteMenuBrowseItem } from '~/data/models/SiteMenuBrowseItem';
-import { useBreakpoints } from '~/hooks/useBreakpoints';
-import { BREAKPOINT_SIZES, LINK_THEME } from '~/lib/constants';
+import { LINK_THEME } from '~/lib/constants';
 import { isVehicleSvg } from '~/lib/utils/icon';
 import { typography } from '~/styles/typography.styles';
 
@@ -29,8 +28,6 @@ function Categories({
   shouldSetFocus,
   siteMenuBrowseGroupList,
 }: Props) {
-  const breakpoint = useBreakpoints();
-  const isMobile = breakpoint === BREAKPOINT_SIZES.S;
   const {
     activeCategory,
     handleClearCategory,
@@ -58,11 +55,9 @@ function Categories({
         onBack={handleClearCategory}
       >
         <div css={styles.content}>
-          {isMobile && (
-            <h1 css={[typography.jumboHeadline, styles.mobileHeader]}>
-              {category}
-            </h1>
-          )}
+          <h1 css={[typography.jumboHeadline, styles.mobileHeader]}>
+            {category}
+          </h1>
           {siteMenuBrowseGroupList.map(
             ({ header, items, more }, idx: number) => (
               <div css={styles.categoryList} key={idx}>

@@ -30,7 +30,7 @@ function TireCategoryLinks({ siteMenuBrowseList }: Props) {
             key={title}
             css={[styles.container, isSelected && styles.selected]}
           >
-            <div css={!isMobile && isSelected && styles.decoration} />
+            <div css={isSelected && styles.decoration} />
             <button
               aria-label={title}
               aria-current={isSelected}

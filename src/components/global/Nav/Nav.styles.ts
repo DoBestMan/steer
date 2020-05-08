@@ -10,13 +10,20 @@ const CONSTANTS = {
 const styles = {
   hamburger: {
     display: 'inline-flex',
-    marginLeft: SPACING.SIZE_20,
+    marginLeft: SPACING.SIZE_10,
     [MQ.L]: {
       display: 'none',
     },
   },
   hide: css({
     display: 'none',
+  }),
+  iconButton: css({
+    span: {
+      height: 30,
+      justifyContent: 'center',
+      width: 30,
+    },
   }),
   links: css({
     alignContent: 'center',
@@ -43,12 +50,12 @@ const styles = {
   root: css({
     background: COLORS.LIGHT.OFF_WHITE,
     height: '100%',
-    padding: `${SPACING.SIZE_30}px 0`,
-    [MQ.M]: {
-      padding: `${SPACING.SIZE_50}px 0`,
+    [MQ.S]: {
+      paddingBottom: SPACING.SIZE_40,
+      paddingTop: SPACING.SIZE_30,
     },
-    [MQ.L]: {
-      padding: `${SPACING.SIZE_60}px 0`,
+    [MQ.M]: {
+      padding: `${SPACING.SIZE_30}px 0`,
     },
   }),
   searchButton: css({

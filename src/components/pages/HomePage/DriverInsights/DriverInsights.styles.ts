@@ -1,6 +1,6 @@
 import { css } from '@emotion/core';
 
-import { MQ, SPACING } from '~/lib/constants';
+import { COLORS, MQ, SPACING } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const styles = {
@@ -16,9 +16,17 @@ const styles = {
     },
   }),
   description: css({
-    marginBottom: SPACING.SIZE_40,
+    color: COLORS.DARK.GRAY_40,
+    [MQ.S]: {
+      display: 'none',
+    },
+    [MQ.M]: {
+      display: 'initial',
+      marginBottom: SPACING.SIZE_40,
+    },
   }),
   title: css({
+    color: COLORS.GLOBAL.WHITE,
     marginBottom: SPACING.SIZE_20,
     [MQ.S]: typography.eyebrow,
     [MQ.M]: [

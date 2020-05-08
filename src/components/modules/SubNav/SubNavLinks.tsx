@@ -43,21 +43,21 @@ function SubNavLinks({ siteMenuBrowseList }: Props) {
 
   return (
     <>
-      {isMobile && <TireCategoryLinks {...{ siteMenuBrowseList }} />}
+      <div css={styles.smallShow}>
+        <TireCategoryLinks {...{ siteMenuBrowseList }} />
+      </div>
       <ul css={styles.subnavLinkList}>
         <span css={styles.linkSection}>{textLinks.map(renderLink)}</span>
         <span css={styles.linkSection}>
           {iconLinks.map(renderLink)}
-          {!isMobile && (
-            <li css={styles.link}>
-              <Button
-                aria-label="Close navigation modal"
-                onClick={handleCloseSubNav}
-              >
-                <Icon name={ICONS.CLOSE} />
-              </Button>
-            </li>
-          )}
+          <li css={[styles.link, styles.closeSubNav]}>
+            <Button
+              aria-label="Close navigation modal"
+              onClick={handleCloseSubNav}
+            >
+              <Icon name={ICONS.CLOSE} />
+            </Button>
+          </li>
         </span>
       </ul>
     </>
