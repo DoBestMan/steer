@@ -4,6 +4,7 @@ import { useNavContext } from '~/context/Nav.context';
 import { SiteMenuBrowseItem } from '~/data/models/SiteMenuBrowseItem';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { BREAKPOINT_SIZES } from '~/lib/constants';
+import { ui } from '~/lib/utils/ui-dictionary';
 
 import styles from './BrowseTires.styles';
 
@@ -17,7 +18,11 @@ function TireCategoryLinks({ siteMenuBrowseList }: Props) {
   const isMobile = breakpoint === BREAKPOINT_SIZES.S;
   return (
     <GridItem gridColumnM="1/3" gridColumnL="1/4">
-      <div css={styles.header}>{isMobile ? 'Browse tires by' : 'Shop by'}</div>
+      <div css={styles.header}>
+        {isMobile
+          ? ui('nav.browseTires.mobileHeader')
+          : ui('nav.browseTires.header')}
+      </div>
       {siteMenuBrowseList.map(({ title, icon }) => {
         const isSelected = activeCategory === title;
         return (

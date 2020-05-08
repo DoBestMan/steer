@@ -1,10 +1,12 @@
+import { ui } from '~/lib/utils/ui-dictionary';
+
 export const steps = {
   list: [
-    'Confirm if you need new tires',
-    'Define how many tires you need',
-    'Pick the right sized tire',
-    'Select the right type of tire according to your use',
-    'Schedule online and install in a shop near you',
+    ui('nav.learn.step.one'),
+    ui('nav.learn.step.two'),
+    ui('nav.learn.step.three'),
+    ui('nav.learn.step.four'),
+    ui('nav.learn.step.five'),
   ],
-  title: 'Replacing tires in 5 steps.',
+  title: ui('nav.learn.title'),
 };

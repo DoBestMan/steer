@@ -7,6 +7,7 @@ import Image from '~/components/global/Image/Image';
 import BaseLink from '~/components/global/Link/BaseLink';
 import NavLink from '~/components/global/Link/NavLink';
 import { useNavContext } from '~/context/Nav.context';
+import { ui } from '~/lib/utils/ui-dictionary';
 import { layout } from '~/styles/layout.styles';
 
 import styles from './Nav.styles';
@@ -17,8 +18,8 @@ interface Props {
 }
 
 const CONSTANTS = {
-  LOGO_ALT_TEXT: 'Simple Tire',
-  MOBILE_MENU_ARIA_LABEL: 'Mobile menu',
+  LOGO_ALT_TEXT: ui('nav.logo.alt'),
+  MOBILE_MENU_ARIA_LABEL: ui('nav.mobile.label'),
 };
 
 function Nav({ isHomepage }: Props) {

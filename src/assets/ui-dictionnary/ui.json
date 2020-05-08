@@ -21,6 +21,38 @@
     "learnMoreLabel": "Learn More",
     "freeShipping": "We ship free to this location"
   },
+  "nav": {
+    "close": "Close navigation modal",
+    "contentLabel": "Navigation",
+    "browseTires": {
+      "header": "Shop by",
+      "mobileHeader": "Browse tires by"
+    },
+    "learn": {
+      "contentLabel": "Learn more",
+      "step": {
+        "one": "Confirm if you need new tires",
+        "two": "Define how many tires you need",
+        "three": "Pick the right sized tire",
+        "four": "Select the right type of tire according to your use",
+        "five": "Schedule online and install in a shop near you"
+      },
+      "title": "Replacing tires in 5 steps."
+    },
+    "links": {
+      "browseTires": "Browse tires",
+      "learn": "Learn",
+      "findShop": "Find a Shop",
+      "location": "Select location",
+      "trackOrder": "Track your order"
+    },
+    "logo": {
+      "alt": "Simple Tire"
+    },
+    "mobile": {
+      "label": "Mobile Menu"
+    }
+  },
   "search": {
     "cancelButtonLabel": "Cancel",
     "cancelButtonClear": "Clear"

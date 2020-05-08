@@ -12,6 +12,7 @@ import { SiteMenuBrowseItem } from '~/data/models/SiteMenuBrowseItem';
 import { SiteMenuLearn } from '~/data/models/SiteMenuLearn';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { BREAKPOINT_SIZES } from '~/lib/constants';
+import { ui } from '~/lib/utils/ui-dictionary';
 
 import Learn from './Learn/Learn';
 import styles from './SubNav.styles';
@@ -65,13 +66,13 @@ function SubNav({
 
   return (
     <SubNavModal
-      contentLabel={`Navigation - ${activeLink}`}
+      contentLabel={`${ui('nav.contentLabel')} - ${activeLink}`}
       onClose={handleCloseSubNav}
       isOpen={isSubNavOpen}
     >
       <Grid css={styles.root}>
         <Button
-          aria-label="Close navigation modal"
+          aria-label={ui('nav.close')}
           css={[styles.action, styles.close]}
           onClick={handleCloseSubNav}
         >
