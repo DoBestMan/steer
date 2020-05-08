@@ -2,6 +2,7 @@ import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import Image from '~/components/global/Image/Image';
 import BaseLink from '~/components/global/Link/BaseLink';
+import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
 
 import EmailSupport from '../Support/EmailSupport';
@@ -67,7 +68,7 @@ function Footer({ isCustomerServiceEnabled }: Props) {
       >
         <BaseLink href="/">
           <Image
-            altText={data.logo.altText}
+            altText={ui('logo.alt')}
             css={styles.logo}
             srcSet="/static/assets/logo.svg"
           />
@@ -81,7 +82,7 @@ function Footer({ isCustomerServiceEnabled }: Props) {
         gridColumnXL="5/7"
         css={styles.companyLinksSection}
       >
-        <p css={styles.linksHeading}>{data.company.heading}</p>
+        <p css={styles.linksHeading}>{ui('footer.company')}</p>
         <FooterLinkList links={data.company.links} />
       </GridItem>
 
@@ -92,7 +93,7 @@ function Footer({ isCustomerServiceEnabled }: Props) {
         gridColumnXL="7/9"
         css={styles.tiresLinksSection}
       >
-        <p css={styles.linksHeading}>{data.tires.heading}</p>
+        <p css={styles.linksHeading}>{ui('footer.tires')}</p>
         <FooterLinkList links={data.tires.links} />
       </GridItem>
 
@@ -104,7 +105,7 @@ function Footer({ isCustomerServiceEnabled }: Props) {
         css={styles.socialLinksSection}
       >
         <p css={[styles.linksHeading, styles.socialHeading]}>
-          {data.social.heading}
+          {ui('footer.social')}
         </p>
         <FooterLinkList links={data.social.links} />
       </GridItem>

@@ -3,7 +3,6 @@ import { getCurrentYear } from '~/lib/utils/date';
 
 export const data = {
   company: {
-    heading: 'Company',
     links: [
       { action: '/', text: 'About Us' },
       { action: '/', text: 'Blog' },
@@ -18,12 +17,7 @@ export const data = {
     text: `© ${getCurrentYear()} SimpleTire. All Rights Reserved.`,
   },
 
-  logo: {
-    altText: 'Simple Tire',
-  },
-
   social: {
-    heading: 'Social',
     links: [
       { action: '/', icon: ICONS.FACEBOOK, text: 'Facebook' },
       { action: '/', icon: ICONS.TWITTER, text: 'Twitter' },
@@ -34,7 +28,6 @@ export const data = {
   },
 
   tires: {
-    heading: 'Tires 101',
     links: [
       { action: '/', text: 'Tire Reviews' },
       { action: '/', text: 'Tire buying guide' },

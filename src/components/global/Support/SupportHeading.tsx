@@ -1,15 +1,15 @@
-import { data } from './Support.data';
+import { ui } from '~/lib/utils/ui-dictionary';
 
 export interface Props {
   isCustomerServiceEnabled?: boolean;
 }
 
 function SupportHeading({ isCustomerServiceEnabled, ...rest }: Props) {
-  const supportContent = isCustomerServiceEnabled
-    ? data.isBusinessHours
-    : data.isNotBusinessHours;
+  const heading = isCustomerServiceEnabled
+    ? ui('support.enabled')
+    : ui('support.disabled');
 
-  return <p {...rest}>{supportContent.heading}</p>;
+  return <p {...rest}>{heading}</p>;
 }
 
 export default SupportHeading;

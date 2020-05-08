@@ -18,7 +18,7 @@ interface Props {
 }
 
 const CONSTANTS = {
-  LOGO_ALT_TEXT: ui('nav.logo.alt'),
+  LOGO_ALT_TEXT: ui('logo.alt'),
   MOBILE_MENU_ARIA_LABEL: ui('nav.mobile.label'),
 };
 

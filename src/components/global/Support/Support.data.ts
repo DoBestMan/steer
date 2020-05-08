@@ -1,6 +1,5 @@
 export const data = {
   isBusinessHours: {
-    heading: 'Need live support?',
     sales: {
       action: '/',
       icon: 'phone',
@@ -13,7 +12,6 @@ export const data = {
     },
   },
   isNotBusinessHours: {
-    heading: 'Need support?',
     sales: {
       action: '/',
       icon: 'phone',

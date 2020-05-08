@@ -12,7 +12,20 @@
       "close": "Close notification"
     }
   },
+  "footer": {
+    "company": "Company",
+    "mailingList": {
+      "heading": "Join our mailing list",
+      "description": "Subscribe for updates and promotions."
+    },
+    "social": "Social",
+    "tires": "Tires 101"
+  },
   "homepage": {},
+  "support": {
+    "enabled": "Need live support?",
+    "disabled": "Need support?"
+  },
   "location": {
     "useCurrentLocationLabel": "Use current location",
     "locationSupportError": "Sorry, but Geolocation is not supported by this browser.",
@@ -20,6 +33,9 @@
     "locationInfo": "We use your location to provide accurate <br /> pricing and help you find local shops.",
     "learnMoreLabel": "Learn More",
     "freeShipping": "We ship free to this location"
+  },
+  "logo": {
+    "alt": "Simple Tire"
   },
   "nav": {
     "close": "Close navigation modal",
@@ -45,9 +61,6 @@
       "findShop": "Find a Shop",
       "location": "Select location",
       "trackOrder": "Track your order"
-    },
-    "logo": {
-      "alt": "Simple Tire"
     },
     "mobile": {
       "label": "Mobile Menu"
