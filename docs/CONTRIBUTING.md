@@ -63,7 +63,6 @@ If the base branch is still an open PR when you're done with your work, you may 
 
 - Give detailed description of what your PR addresses; use images, links, or videos to provide context
 - Assign **yourself** to the PR
-- Assign all Work & Co developers as reviewers
 - When iterating on a feedback, use the "Resolve conversation" button to mark the item as complete
 - Use [granular commits](https://dev.to/wes/opening-a-pr-a-primer-4kgc#commits)
   to separate chunks of work to make code easier to review. It's especially important to isolate "noisy" changes like an extra div that adds indentation on every line of a component
@@ -76,6 +75,16 @@ For all PRs that involve creating/updating stories, be sure to:
 - Include a link to the relevant story in Storybook (eg: https://`branch`.steer.now.sh/storybook/index.html?path=`path-to-the-story`)
 
 Also be sure to add links to QA branch (eg: https://qa.steer.now.sh/storybook/index.html?path=`path-to-the-story`) to our **Storybook tickets** to help QA.
+
+## Assigning Reviewers
+
+You do not need to assign specific developers to review your PR. Since one team is working on this project, we can use our judgment on which PRs to review. In general, developers should try to achieve a balance by reviewing parts of the code they know well, and other parts they are less familiar with.
+
+However, you can assign reviewers if you want to specifically request their feedback on your work.
+
+Please assign the entire `w-c-reviewers` group for changes you think the whole team should be aware of. These would include new conventions or big structural changes to the code.
+
+Since not all team members will be looking at all PRs, important discussions should also be posted in the **#simpletire-development** Slack channel to increase visibility.
 
 ## Giving Feedback
 
