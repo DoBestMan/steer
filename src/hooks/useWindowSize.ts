@@ -7,11 +7,7 @@ interface Size {
 
 export function useWindowSize() {
   const isClient = typeof window !== 'undefined';
-  const initialSize = {
-    height: isClient ? window.innerHeight : 0,
-    width: isClient ? window.innerWidth : 0,
-  };
-  const [elementSize, setElementSize] = useState<Size>(initialSize);
+  const [elementSize, setElementSize] = useState<Size>({ height: 0, width: 0 });
 
   useEffect(() => {
     if (!isClient) {
