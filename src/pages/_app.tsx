@@ -13,7 +13,7 @@ import { backendGetSiteGlobals, backendGetSiteMenu } from '~/lib/backend';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
 import { global } from '~/styles/document/global.styles';
 
-import SiteGlobalsContext from './SiteGlobals.context';
+import { SiteGlobalsContextProvider } from '../context/SiteGlobals.context';
 
 interface Props extends AppContext, AppInitialProps {
   serverData: {
@@ -35,7 +35,7 @@ class MyApp extends App<Props> {
     const { customerServiceEnabled } = this.state.serverData.siteGlobals;
 
     return (
-      <SiteGlobalsContext.Provider value={this.state.serverData.siteGlobals}>
+      <SiteGlobalsContextProvider value={this.state.serverData.siteGlobals}>
         <Head>
           <title>Simpletire</title>
         </Head>
@@ -45,7 +45,7 @@ class MyApp extends App<Props> {
         <Component {...pageProps} />
 
         <Footer isCustomerServiceEnabled={customerServiceEnabled} />
-      </SiteGlobalsContext.Provider>
+      </SiteGlobalsContextProvider>
     );
   }
 }

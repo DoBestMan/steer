@@ -15,11 +15,11 @@ interface Props {
 }
 
 const mapThemeToStyles: { [key: string]: SerializedStyles } = {
-  promotional: styles.secondary,
+  promotion: styles.secondary,
 };
 
 function SearchButton({ onClick, theme }: Props) {
-  const themeStyles = !theme ? styles.primary : mapThemeToStyles[theme];
+  const themeStyles = (theme && mapThemeToStyles[theme]) || styles.primary;
 
   return (
     <div css={[styles.container, themeStyles]}>
