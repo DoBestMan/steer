@@ -1,13 +1,19 @@
 import { ReactNode, useState } from 'react';
 
-import { NAV_TARGETS } from '~/components/global/Nav/Nav.data';
+import {
+  ActionType,
+  LinkType,
+  NAV_TARGETS,
+} from '~/components/global/Nav/Nav.constants';
 import { createContext } from '~/lib/utils/context';
 
 interface NavContextProps {
   activeCategory: string;
   activeLink: string;
   createSelectCategoryHandler: (category: string) => () => void;
-  createSelectLinkHandler: (link: string) => () => void;
+  createSelectLinkHandler: (
+    link: LinkType | ActionType,
+  ) => (() => void) | undefined;
   handleClearCategory: () => void;
   handleClearLink: () => void;
   handleCloseSubNav: () => void;
@@ -28,10 +34,13 @@ export function useContextSetup() {
     createSelectCategoryHandler: (category: string) => () => {
       setActiveCategory(category);
     },
-    createSelectLinkHandler: (link: string) => () => {
-      setIsSubNavOpen(true);
-      setActiveLink(link);
-    },
+    createSelectLinkHandler: (link: LinkType | ActionType) =>
+      'target' in link
+        ? () => {
+            setIsSubNavOpen(true);
+            setActiveLink(link.target);
+          }
+        : undefined,
     handleClearCategory: () => {
       setActiveCategory('');
     },

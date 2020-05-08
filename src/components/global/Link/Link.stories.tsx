@@ -13,7 +13,7 @@ import {
   LINK_WEIGHT,
 } from '~/lib/constants';
 
-import { NAV_TARGETS } from '../Nav/Nav.data';
+import { NAV_TARGETS } from '../Nav/Nav.constants';
 import FooterLink from './FooterLink';
 import IconCTA from './IconCTA';
 import Link from './Link';

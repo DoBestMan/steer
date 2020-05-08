@@ -1,7 +1,7 @@
 import { renderHook } from '@testing-library/react-hooks';
 import { act } from 'react-test-renderer';
 
-import { NAV_TARGETS } from '~/components/global/Nav/Nav.data';
+import { NAV_TARGETS } from '~/components/global/Nav/Nav.constants';
 
 import { useContextSetup } from './Nav.context';
 
@@ -10,7 +10,11 @@ describe('useContextSetup', () => {
     const { result } = renderHook(() => useContextSetup());
 
     act(() => {
-      result.current.createSelectLinkHandler('link')();
+      const handler = result.current.createSelectLinkHandler({
+        target: NAV_TARGETS.LEARN,
+        text: 'Learn',
+      });
+      handler && handler();
     });
 
     expect(result.current.activeLink).toEqual('link');
@@ -31,7 +35,11 @@ describe('useContextSetup', () => {
     const { result } = renderHook(() => useContextSetup());
 
     act(() => {
-      result.current.createSelectLinkHandler('link')();
+      const handler = result.current.createSelectLinkHandler({
+        target: NAV_TARGETS.LEARN,
+        text: 'Learn',
+      });
+      handler && handler();
       result.current.createSelectCategoryHandler('category')();
       result.current.handleCloseSubNav();
     });

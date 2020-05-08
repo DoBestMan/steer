@@ -2,7 +2,11 @@ import Button from '~/components/global/Button/Button';
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import NavLink from '~/components/global/Link/NavLink';
-import { data } from '~/components/global/Nav/Nav.data';
+import {
+  ActionType,
+  data,
+  LinkType,
+} from '~/components/global/Nav/Nav.constants';
 import { useNavContext } from '~/context/Nav.context';
 import { SiteMenuBrowseItem } from '~/data/models/SiteMenuBrowseItem';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
@@ -26,39 +30,26 @@ function SubNavLinks({ siteMenuBrowseList }: Props) {
   const links = isMobile ? data.mobileLinks : data.links;
   const iconLinks = links.filter((link) => link.icon);
   const textLinks = links.filter((link) => !link.icon);
+
+  function renderLink(link: LinkType | ActionType, idx: number) {
+    return (
+      <li css={styles.link} key={idx}>
+        <NavLink
+          {...link}
+          onClick={createSelectLinkHandler(link)}
+          isActive={'target' in link && activeLink === link.target}
+        />
+      </li>
+    );
+  }
+
   return (
     <>
       {isMobile && <TireCategoryLinks {...{ siteMenuBrowseList }} />}
       <ul css={styles.subnavLinkList}>
+        <span css={styles.linkSection}>{textLinks.map(renderLink)}</span>
         <span css={styles.linkSection}>
-          {textLinks.map((link, idx) => (
-            <li css={styles.link} key={idx}>
-              <NavLink
-                {...link}
-                onClick={
-                  'target' in link
-                    ? createSelectLinkHandler(link.text || '')
-                    : undefined
-                }
-                isActive={activeLink === link.text}
-              />
-            </li>
-          ))}
-        </span>
-        <span css={styles.linkSection}>
-          {iconLinks.map((link, idx) => (
-            <li css={styles.link} key={idx}>
-              <NavLink
-                {...link}
-                onClick={
-                  'target' in link
-                    ? createSelectLinkHandler(link.text || '')
-                    : undefined
-                }
-                isActive={activeLink === link.text}
-              />
-            </li>
-          ))}
+          {iconLinks.map(renderLink)}
           {!isMobile && (
             <li css={styles.link}>
               <Button

@@ -16,8 +16,9 @@ export interface ActionType {
 }
 
 export enum NAV_TARGETS {
-  BROWSE_TIRES = 'Browse tires',
-  LEARN = 'Learn',
+  BROWSE_TIRES = 'BROWSE TIRES',
+  LEARN = 'LEARN',
+  LOCATION = 'LOCATION',
 }
 
 export const data: { [key: string]: Array<LinkType | ActionType> } = {
@@ -26,10 +27,9 @@ export const data: { [key: string]: Array<LinkType | ActionType> } = {
     { target: NAV_TARGETS.LEARN, text: 'Learn' },
     { href: '/', isExternal: true, text: 'Find a Shop' },
     {
-      href: '/',
       icon: ICONS.LOCATION,
-      isExternal: false,
       label: 'Select location',
+      target: NAV_TARGETS.LOCATION,
       text: 'Brooklyn, NY',
     },
     { href: '/', icon: ICONS.ACCOUNT, isExternal: true, label: 'Account' },
@@ -39,10 +39,9 @@ export const data: { [key: string]: Array<LinkType | ActionType> } = {
     { href: '/', isExternal: true, text: 'Find a Shop' },
     { href: '/', isExternal: true, text: 'Track your order' },
     {
-      href: '/',
       icon: ICONS.LOCATION,
-      isExternal: false,
       label: 'Select location',
+      target: NAV_TARGETS.LOCATION,
       text: 'Brooklyn, NY',
     },
   ],

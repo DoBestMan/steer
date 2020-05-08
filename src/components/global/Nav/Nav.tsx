@@ -6,7 +6,7 @@ import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Image from '~/components/global/Image/Image';
 import BaseLink from '~/components/global/Link/BaseLink';
 import NavLink from '~/components/global/Link/NavLink';
-import { data } from '~/components/global/Nav/Nav.data';
+import { data } from '~/components/global/Nav/Nav.constants';
 import { useNavContext } from '~/context/Nav.context';
 import { layout } from '~/styles/layout.styles';
 
@@ -57,11 +57,7 @@ function Nav({ isHomepage }: Props) {
             <li css={styles.listItem} key={idx}>
               <NavLink
                 isActive={false}
-                onClick={
-                  'target' in link
-                    ? createSelectLinkHandler(link.text || '')
-                    : undefined
-                }
+                onClick={createSelectLinkHandler(link)}
                 {...link}
               />
             </li>
