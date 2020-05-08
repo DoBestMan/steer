@@ -3,8 +3,8 @@ import { useCallback } from 'react';
 import GridItem from '~/components/global/Grid/GridItem';
 import IconOrImage from '~/components/global/IconOrImage/IconOrImage';
 import Link from '~/components/global/Link/Link';
-import { useNavState } from '~/components/global/Nav/Nav.container';
 import SubNavContentWrapper from '~/components/modules/SubNav/SubNavContentWrapper';
+import { useNavContext } from '~/context/Nav.context';
 import { SiteMenuBrowseGroupItem } from '~/data/models/SiteMenuBrowseGroupItem';
 import { SiteMenuBrowseItem } from '~/data/models/SiteMenuBrowseItem';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
@@ -35,7 +35,7 @@ function Categories({
     activeCategory,
     handleClearCategory,
     handleCloseSubNav,
-  } = useNavState();
+  } = useNavContext();
   const focusRef = useCallback(
     (node) => {
       if (shouldSetFocus && node !== null) {

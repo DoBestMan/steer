@@ -2,10 +2,10 @@ import GridItem from '~/components/global/Grid/GridItem';
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Link from '~/components/global/Link/Link';
-import { useNavState } from '~/components/global/Nav/Nav.container';
 import EmailSupport from '~/components/global/Support/EmailSupport';
 import PhoneSupport from '~/components/global/Support/PhoneSupport';
 import SupportHeading from '~/components/global/Support/SupportHeading';
+import { useNavContext } from '~/context/Nav.context';
 import { SiteMenuLearn } from '~/data/models/SiteMenuLearn';
 import { LINK_THEME } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
@@ -20,7 +20,7 @@ interface Props {
 }
 
 function Learn({ isCustomerServiceEnabled, siteMenuLearn }: Props) {
-  const { handleClearLink, handleCloseSubNav } = useNavState();
+  const { handleClearLink, handleCloseSubNav } = useNavContext();
   return (
     <SubNavContentWrapper
       onBack={handleClearLink}

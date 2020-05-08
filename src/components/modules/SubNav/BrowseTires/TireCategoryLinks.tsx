@@ -1,6 +1,6 @@
 import GridItem from '~/components/global/Grid/GridItem';
 import IconOrImage from '~/components/global/IconOrImage/IconOrImage';
-import { useNavState } from '~/components/global/Nav/Nav.container';
+import { useNavContext } from '~/context/Nav.context';
 import { SiteMenuBrowseItem } from '~/data/models/SiteMenuBrowseItem';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { BREAKPOINT_SIZES } from '~/lib/constants';
@@ -12,7 +12,7 @@ interface Props {
 }
 
 function TireCategoryLinks({ siteMenuBrowseList }: Props) {
-  const { activeCategory, createSelectCategoryHandler } = useNavState();
+  const { activeCategory, createSelectCategoryHandler } = useNavContext();
   const breakpoint = useBreakpoints();
   const isMobile = breakpoint === BREAKPOINT_SIZES.S;
   return (

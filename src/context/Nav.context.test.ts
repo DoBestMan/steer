@@ -3,11 +3,11 @@ import { act } from 'react-test-renderer';
 
 import { NAV_TARGETS } from '~/components/global/Nav/Nav.data';
 
-import useNav from './useNav';
+import { useContextSetup } from './Nav.context';
 
-describe('useNav', () => {
+describe('useContextSetup', () => {
   test('updating active link', () => {
-    const { result } = renderHook(() => useNav());
+    const { result } = renderHook(() => useContextSetup());
 
     act(() => {
       result.current.createSelectLinkHandler('link')();
@@ -18,7 +18,7 @@ describe('useNav', () => {
   });
 
   test('updating tire category', () => {
-    const { result } = renderHook(() => useNav());
+    const { result } = renderHook(() => useContextSetup());
 
     act(() => {
       result.current.createSelectCategoryHandler('category')();
@@ -28,7 +28,7 @@ describe('useNav', () => {
   });
 
   test('closing subnav clears link and category', () => {
-    const { result } = renderHook(() => useNav());
+    const { result } = renderHook(() => useContextSetup());
 
     act(() => {
       result.current.createSelectLinkHandler('link')();
@@ -42,7 +42,7 @@ describe('useNav', () => {
   });
 
   test('toggling sub nav should select the first link (Browse Tires) by default', () => {
-    const { result } = renderHook(() => useNav());
+    const { result } = renderHook(() => useContextSetup());
 
     act(() => {
       result.current.toggleSubNav();
@@ -52,7 +52,7 @@ describe('useNav', () => {
   });
 
   test('navigating back from a link should set the active link to the default', () => {
-    const { result } = renderHook(() => useNav());
+    const { result } = renderHook(() => useContextSetup());
 
     act(() => {
       result.current.toggleSubNav();

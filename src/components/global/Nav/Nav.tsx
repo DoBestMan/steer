@@ -7,9 +7,9 @@ import Image from '~/components/global/Image/Image';
 import BaseLink from '~/components/global/Link/BaseLink';
 import NavLink from '~/components/global/Link/NavLink';
 import { data } from '~/components/global/Nav/Nav.data';
+import { useNavContext } from '~/context/Nav.context';
 import { layout } from '~/styles/layout.styles';
 
-import { useNavState } from './Nav.container';
 import styles from './Nav.styles';
 import NavSearchButton from './NavSearchBar/NavSearchButton';
 
@@ -23,7 +23,11 @@ const CONSTANTS = {
 };
 
 function Nav({ isHomepage }: Props) {
-  const { isSubNavOpen, toggleSubNav, createSelectLinkHandler } = useNavState();
+  const {
+    isSubNavOpen,
+    toggleSubNav,
+    createSelectLinkHandler,
+  } = useNavContext();
 
   return (
     <Grid as="nav" css={styles.root}>

@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { ReactNode, useState } from 'react';
 
 import { NAV_TARGETS } from '~/components/global/Nav/Nav.data';
+import { createCtx } from '~/lib/utils/context';
 
-export interface UseNav {
+interface NavContextProps {
   activeCategory: string;
   activeLink: string;
   createSelectCategoryHandler: (category: string) => () => void;
@@ -13,7 +14,11 @@ export interface UseNav {
   isSubNavOpen: boolean;
   toggleSubNav: () => void;
 }
-function useNav(): UseNav {
+
+const NavContext = createCtx<NavContextProps>();
+
+// Exported for testing only
+export function useContextSetup() {
   const [isSubNavOpen, setIsSubNavOpen] = useState(false);
   const [activeLink, setActiveLink] = useState('');
   const [activeCategory, setActiveCategory] = useState('');
@@ -46,4 +51,9 @@ function useNav(): UseNav {
   };
 }
 
-export default useNav;
+export function NavContextProvider({ children }: { children: ReactNode }) {
+  const value = useContextSetup();
+  return <NavContext.Provider value={value}>{children}</NavContext.Provider>;
+}
+
+export const useNavContext = NavContext.useContext;

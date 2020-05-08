@@ -5,9 +5,9 @@ import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
-import { useNavState } from '~/components/global/Nav/Nav.container';
 import { NAV_TARGETS } from '~/components/global/Nav/Nav.data';
 import BrowseTires from '~/components/modules/SubNav/BrowseTires/BrowseTires';
+import { useNavContext } from '~/context/Nav.context';
 import { SiteMenuBrowseItem } from '~/data/models/SiteMenuBrowseItem';
 import { SiteMenuLearn } from '~/data/models/SiteMenuLearn';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
@@ -36,7 +36,7 @@ function SubNav({
     createSelectCategoryHandler,
     isSubNavOpen,
     activeLink,
-  } = useNavState();
+  } = useNavContext();
 
   const breakpoint = useBreakpoints();
   const isMobile = breakpoint === BREAKPOINT_SIZES.S;
