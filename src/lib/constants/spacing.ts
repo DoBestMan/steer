@@ -3,6 +3,7 @@
 export const SPACING = {
   SIZE_01: 1,
   SIZE_02: 2,
+  SIZE_05: 5,
   SIZE_10: 10,
   SIZE_15: 15,
   SIZE_20: 20,

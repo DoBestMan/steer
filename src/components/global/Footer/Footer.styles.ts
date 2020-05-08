@@ -104,6 +104,7 @@ const styles = {
 
     [MQ.XL]: {
       display: 'block',
+      marginBottom: SPACING.SIZE_15,
     },
   }),
 
@@ -114,6 +115,10 @@ const styles = {
       paddingBottom: 0,
       ul: css({
         li: {
+          '&:not(:last-child)': {
+            marginBottom: SPACING.SIZE_15,
+          },
+
           display: 'inline',
           marginLeft: SPACING.SIZE_15,
 
@@ -133,6 +138,7 @@ const styles = {
           // the second span is the text
           'span:nth-of-type(2)': {
             display: 'none',
+            paddingTop: SPACING.SIZE_05,
 
             [MQ.XL]: {
               display: 'block',
