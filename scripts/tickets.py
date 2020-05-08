@@ -17,6 +17,11 @@ class VercelSteer:
         self.vercel_headers = {
             'Authorization': 'Bearer '+os.environ.get('VERCEL_TOKEN')}
 
+    def write_build_url(self, url):
+        filename = open('notification.txt', 'w')
+        filename.write("A build is available here: https://%s\n" % url)
+        filename.close()
+
     def get_build_url(self):
         query = "?teamId="+os.environ.get(
             'VERCEL_TEAM_ID')+"&limit=1&meta-githubCommitRef=qa"
@@ -29,9 +34,7 @@ class VercelSteer:
         else:
             deployment = response.json()['deployments'][0]
             url = deployment['url']
-            filename = open('notification.txt', 'a+')
-            filename.write("Build URL: https://%s\n\n\n" % url)
-            filename.close()
+            return url
 
 
 class GithubSteer:
@@ -53,13 +56,18 @@ class GithubSteer:
         self.compare = repo.compare(base=base, head=head)
 
     def find_commits_add_to_json(self):
-        filename = open('notification.txt', 'w')
-        filename.write("Commits:\n\n")
+        filename = open('notification.txt', 'a+')
+        commits = []
+        build = ""
         for commit in self.compare.commits:
             if self.version_re.match(commit.commit.message):
-                filename.write("Build version: %s\n" % commit.commit.message)
+                build = "Build version: %s\n" % commit.commit.message
             else:
-                filename.write("%s\n" % commit.commit.message)
+                commits.append("%s\n" % commit.commit.message)
+        filename.write(build+"\n")
+        filename.write("Commits:\n")
+        for c in commits:
+            filename.write(c)
         filename.close()
 
 ############################################################
@@ -70,13 +78,23 @@ class JiraSteer:
         self.jiraclient = JIRA({'server': "https://simpletire.atlassian.net"}, basic_auth=(
             os.environ.get("JIRA_USERNAME"), os.environ.get("JIRA_TOKEN")))
 
-    def get_issues_with_jql(self, jql="project='WCS' and status='Merged'"):
+    def get_issues_with_jql(self, jql="project='WCS' and key='WCS-135' or key='WCS-232'"):
         return self.jiraclient.search_issues(jql, maxResults=200)
+
+    def comment_build(self, issue_to_mod):
+        comment = open('notification.txt', 'r')
+        self.jiraclient.add_comment(issue_to_mod, comment.read())
 
     def change_issue_state(self, issue_to_mod, state):
         self.jiraclient.transition_issue(issue_to_mod, state)
 
-    def bulk_change_issues_statuses(self, data, status):
+    def bulk_update_deployed(self, data, status):
+        for key in data:
+            issue_to_mod = self.jiraclient.search_issues("key="+key)[0]
+            self.comment_build(issue_to_mod)
+            self.change_issue_state(issue_to_mod, status)
+
+    def bulk_update_done(self, data, status):
         for key in data:
             issue_to_mod = self.jiraclient.search_issues("key="+key)[0]
             self.change_issue_state(issue_to_mod, status)
@@ -98,9 +116,10 @@ jirawc = JiraSteer()
 githubwc = GithubSteer()
 vercelwc = VercelSteer()
 
+url = vercelwc.get_build_url()
+vercelwc.write_build_url(url)
 githubwc.find_commits_add_to_json()
-vercelwc.get_build_url()
 
 keys = jirawc.get_issue_keys(jirawc.get_issues_with_jql())
-jirawc.bulk_change_issues_statuses(keys['done'], 'QA Not Required')
-jirawc.bulk_change_issues_statuses(keys['deploy'], 'Deployed to QA')
+jirawc.bulk_update_done(keys['done'], 'QA Not Required')
+jirawc.bulk_update_deployed(keys['deploy'], 'Deployed to QA')
