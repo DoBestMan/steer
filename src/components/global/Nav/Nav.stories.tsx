@@ -20,7 +20,7 @@ const styles = {
 export function NavHomepage() {
   return (
     <div css={styles.root}>
-      <ConnectedNav isHomepage />
+      <ConnectedNav isHomepage locationString="Portland, OR" />
     </div>
   );
 }
@@ -28,7 +28,11 @@ export function NavHomepage() {
 export function NavOutsideBusinessHours() {
   return (
     <div css={styles.root}>
-      <ConnectedNav isHomepage isCustomerServiceEnabled={false} />
+      <ConnectedNav
+        isHomepage
+        isCustomerServiceEnabled={false}
+        locationString="Portland, OR"
+      />
     </div>
   );
 }
@@ -36,7 +40,11 @@ export function NavOutsideBusinessHours() {
 export function NavBusinessHours() {
   return (
     <div css={styles.root}>
-      <ConnectedNav isCustomerServiceEnabled isHomepage />
+      <ConnectedNav
+        isCustomerServiceEnabled
+        isHomepage
+        locationString="Portland, OR"
+      />
     </div>
   );
 }
@@ -44,7 +52,15 @@ export function NavBusinessHours() {
 export function NavNotHomepage() {
   return (
     <div css={styles.root}>
-      <ConnectedNav />
+      <ConnectedNav locationString="Portland, OR" />
+    </div>
+  );
+}
+
+export function NavNoLocation() {
+  return (
+    <div css={styles.root}>
+      <ConnectedNav locationString="" />
     </div>
   );
 }

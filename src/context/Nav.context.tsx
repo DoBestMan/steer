@@ -8,10 +8,7 @@ import {
 } from '~/components/global/Nav/Nav.constants';
 import { createContext } from '~/lib/utils/context';
 
-import {
-  UserPersonalizationProps,
-  useUserPersonalizationContext,
-} from './UserPersonalization.context';
+import { UserPersonalizationProps } from './UserPersonalization.context';
 
 interface NavContextProps {
   activeCategory: string;
@@ -31,9 +28,11 @@ interface NavContextProps {
 
 const NavContext = createContext<NavContextProps>();
 
-function buildLinks(
-  locationString: UserPersonalizationProps['locationString'],
-) {
+interface BuildLinksProps {
+  locationString: UserPersonalizationProps['locationString'];
+}
+
+function buildLinks({ locationString }: BuildLinksProps) {
   return {
     links: [
       { target: NAV_TARGETS.BROWSE_TIRES, text: 'Browse tires' },
@@ -62,13 +61,12 @@ function buildLinks(
 }
 
 // Exported for testing only
-export function useContextSetup() {
+export function useContextSetup(buildLinksProps: BuildLinksProps) {
   const [isSubNavOpen, setIsSubNavOpen] = useState(false);
   const [activeLink, setActiveLink] = useState('');
   const [activeCategory, setActiveCategory] = useState('');
-  const { locationString } = useUserPersonalizationContext();
-  const { links, linksMobile } = useMemo(() => buildLinks(locationString), [
-    locationString,
+  const { links, linksMobile } = useMemo(() => buildLinks(buildLinksProps), [
+    buildLinksProps,
   ]);
   return {
     activeCategory,
@@ -104,8 +102,13 @@ export function useContextSetup() {
   };
 }
 
-export function NavContextProvider({ children }: { children: ReactNode }) {
-  const value = useContextSetup();
+export function NavContextProvider({
+  children,
+  locationString,
+}: {
+  children: ReactNode;
+} & BuildLinksProps) {
+  const value = useContextSetup({ locationString });
   return <NavContext.Provider value={value}>{children}</NavContext.Provider>;
 }
 

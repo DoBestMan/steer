@@ -1,25 +1,15 @@
 import { renderHook } from '@testing-library/react-hooks';
 import { act } from 'react-test-renderer';
-import { mocked } from 'ts-jest/utils';
 
 import { NAV_TARGETS } from '~/components/global/Nav/Nav.constants';
 
 import { useContextSetup } from './Nav.context';
-import * as UserPersonalizationContextUtils from './UserPersonalization.context';
+
+const defaultContextProps = { locationString: '' };
 
 describe('useContextSetup', () => {
-  beforeEach(() => {
-    jest
-      .spyOn(UserPersonalizationContextUtils, 'useUserPersonalizationContext')
-      .mockReturnValue({
-        locationString: '',
-        updateLocation() {},
-        userPersonalizationData: null,
-      });
-  });
-
   test('updating active link', () => {
-    const { result } = renderHook(() => useContextSetup());
+    const { result } = renderHook(() => useContextSetup(defaultContextProps));
 
     act(() => {
       const handler = result.current.createSelectLinkHandler({
@@ -34,7 +24,7 @@ describe('useContextSetup', () => {
   });
 
   test('updating tire category', () => {
-    const { result } = renderHook(() => useContextSetup());
+    const { result } = renderHook(() => useContextSetup(defaultContextProps));
 
     act(() => {
       result.current.createSelectCategoryHandler('category')();
@@ -44,7 +34,7 @@ describe('useContextSetup', () => {
   });
 
   test('closing subnav clears link and category', () => {
-    const { result } = renderHook(() => useContextSetup());
+    const { result } = renderHook(() => useContextSetup(defaultContextProps));
 
     act(() => {
       const handler = result.current.createSelectLinkHandler({
@@ -62,7 +52,7 @@ describe('useContextSetup', () => {
   });
 
   test('toggling sub nav should select the first link (Browse Tires) by default', () => {
-    const { result } = renderHook(() => useContextSetup());
+    const { result } = renderHook(() => useContextSetup(defaultContextProps));
 
     act(() => {
       result.current.toggleSubNav();
@@ -72,7 +62,7 @@ describe('useContextSetup', () => {
   });
 
   test('navigating back from a link should set the active link to the default', () => {
-    const { result } = renderHook(() => useContextSetup());
+    const { result } = renderHook(() => useContextSetup(defaultContextProps));
 
     act(() => {
       result.current.toggleSubNav();
@@ -82,7 +72,7 @@ describe('useContextSetup', () => {
   });
 
   test('creating links - no personalization data', () => {
-    const { result } = renderHook(() => useContextSetup());
+    const { result } = renderHook(() => useContextSetup(defaultContextProps));
 
     expect(result.current.links).toEqual(
       expect.arrayContaining([
@@ -97,22 +87,9 @@ describe('useContextSetup', () => {
   });
 
   test('creating links - personalization data', () => {
-    mocked(
-      UserPersonalizationContextUtils.useUserPersonalizationContext,
-    ).mockReturnValue({
-      locationString: 'Portland, OR',
-      updateLocation() {},
-      userPersonalizationData: {
-        gaClientId: '123',
-        userLocation: {
-          cityName: 'Portland',
-          region: 1,
-          stateAbbr: 'OR',
-          zip: '12345',
-        },
-      },
-    });
-    const { result } = renderHook(() => useContextSetup());
+    const { result } = renderHook(() =>
+      useContextSetup({ locationString: 'Portland, OR' }),
+    );
 
     expect(result.current.links).toEqual(
       expect.arrayContaining([

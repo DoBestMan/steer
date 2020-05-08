@@ -1,11 +1,10 @@
 import 'intersection-observer';
 
 import { Global } from '@emotion/core';
-import App, { AppContext, AppInitialProps } from 'next/app';
+import NextApp, { AppContext, AppInitialProps } from 'next/app';
 import Head from 'next/head';
 
-import Footer from '~/components/global/Footer/Footer';
-import ConnectedNav from '~/components/global/Nav/Nav.container';
+import App from '~/components/modules/App/App';
 import AppProviders from '~/context/AppProviders';
 import { SiteGlobals } from '~/data/models/SiteGlobals';
 import { SiteMenuBrowseItem } from '~/data/models/SiteMenuBrowseItem';
@@ -22,7 +21,7 @@ interface Props extends AppContext, AppInitialProps {
   };
 }
 
-class MyApp extends App<Props> {
+class MyApp extends NextApp<Props> {
   state = {
     // Store serverData in internal state
     // to preserve across client-side navigation
@@ -31,7 +30,6 @@ class MyApp extends App<Props> {
 
   render() {
     const { Component, pageProps } = this.props;
-    const { customerServiceEnabled } = this.state.serverData.siteGlobals;
 
     return (
       <AppProviders siteGlobalsContextValue={this.state.serverData.siteGlobals}>
@@ -40,10 +38,9 @@ class MyApp extends App<Props> {
         </Head>
 
         <Global styles={global} />
-        <ConnectedNav isCustomerServiceEnabled={customerServiceEnabled} />
-        <Component {...pageProps} />
-
-        <Footer isCustomerServiceEnabled={customerServiceEnabled} />
+        <App>
+          <Component {...pageProps} />
+        </App>
       </AppProviders>
     );
   }
@@ -51,7 +48,7 @@ class MyApp extends App<Props> {
 
 MyApp.getInitialProps = async (appContext: AppContext) => {
   // calls page's `getInitialProps` and fills `appProps.pageProps`
-  const appProps = await App.getInitialProps(appContext);
+  const appProps = await NextApp.getInitialProps(appContext);
 
   // We can return if fetching on the client side because
   // global data is already available in internal state
