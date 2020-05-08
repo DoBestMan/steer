@@ -59,6 +59,15 @@ Prefer [queries](https://testing-library.com/docs/dom-testing-library/api-querie
 
 When this is not possible, query `byTestId` after adding a `data-testid` attribute in the code.
 
+Import `screen` for queries to avoid the overhead of keeping the `render` destructure up to date.
+
+```diff
+- const { getByRole } = render(<Example />)
+- const errorMessageNode = getByRole('alert')
++ render(<Example />)
++ const errorMessageNode = screen.getByRole('alert')
+```
+
 ### Mocking
 
 We've enabled Jest's `restoreMocks` option, so any mocked function will be reset at the end of each test. We can use the `ts-jest`'s `mocked` util to control mocked functions inside tests. Example:

@@ -1,4 +1,4 @@
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 
 import AutocompleteResultItemLocation from '~/components/global/Location/AutocompleteResultItemLocation';
 import { KEYCODES } from '~/lib/constants';
@@ -7,7 +7,7 @@ import Autocomplete from './Autocomplete';
 
 describe('autocomplete', () => {
   it('has expected initial state', () => {
-    const { getByRole, queryByLabelText, queryByText } = render(
+    render(
       <Autocomplete
         onChange={jest.fn()}
         results={[]}
@@ -17,17 +17,17 @@ describe('autocomplete', () => {
       />,
     );
 
-    const combobox = getByRole('combobox');
+    const combobox = screen.getByRole('combobox');
 
     // it starts with a closed combo box and no error message
     expect(combobox).toHaveAttribute('aria-expanded', 'false');
-    expect(queryByText('Invalid input')).toBe(null);
-    expect(queryByLabelText('cancel')).toBe(null);
+    expect(screen.queryByText('Invalid input')).toBe(null);
+    expect(screen.queryByLabelText('cancel')).toBe(null);
   });
 
   test('autocomplete flow - error', () => {
     const onChange = jest.fn();
-    const { getByRole, queryByText, getByText } = render(
+    render(
       <Autocomplete
         onChange={onChange}
         results={[]}
@@ -38,8 +38,8 @@ describe('autocomplete', () => {
       />,
     );
 
-    const input = getByRole('textbox');
-    const combobox = getByRole('combobox');
+    const input = screen.getByRole('textbox');
+    const combobox = screen.getByRole('combobox');
 
     // when text is entered with no result
     fireEvent.change(input, { target: { value: '1234' } });
@@ -48,24 +48,18 @@ describe('autocomplete', () => {
     expect(onChange).toHaveBeenCalledWith('1234');
 
     // it renders cancel button
-    expect(getByText('Clear')).toBeInTheDocument();
+    expect(screen.getByText('Clear')).toBeInTheDocument();
 
     // results listbox should be closed if combo box displays an error
     expect(combobox).toHaveAttribute('aria-expanded', 'false');
     // it opens the combo box with an error
-    expect(queryByText('Invalid input')).toBeInTheDocument();
+    expect(screen.queryByText('Invalid input')).toBeInTheDocument();
   });
 
   // TODO: update and fix these tests as part of https://simpletire.atlassian.net/browse/WCS-40
   test.skip('autocomplete flow - success', () => {
     const onChange = jest.fn();
-    const {
-      getByLabelText,
-      getByRole,
-      getByText,
-      queryByText,
-      rerender,
-    } = render(
+    const { rerender } = render(
       <Autocomplete
         onChange={onChange}
         results={[]}
@@ -76,8 +70,8 @@ describe('autocomplete', () => {
       />,
     );
 
-    const input = getByRole('textbox') as HTMLInputElement;
-    const combobox = getByRole('combobox');
+    const input = screen.getByRole('textbox') as HTMLInputElement;
+    const combobox = screen.getByRole('combobox');
 
     // when text is entered with results
     fireEvent.change(input, { target: { value: '0' } });
@@ -99,19 +93,19 @@ describe('autocomplete', () => {
     expect(onChange).toHaveBeenCalledWith('0');
 
     // it renders cancel button
-    expect(getByText('Clear')).toBeInTheDocument();
+    expect(screen.getByText('Clear')).toBeInTheDocument();
 
     // it opens the combo box with no error
     expect(combobox).toHaveAttribute('aria-expanded', 'true');
-    expect(queryByText('Invalid input')).toBe(null);
+    expect(screen.queryByText('Invalid input')).toBe(null);
 
     // it renders results
     expect(
-      getByLabelText('08203 secondary text for 08203'),
+      screen.getByLabelText('08203 secondary text for 08203'),
     ).toBeInTheDocument();
 
     // when item is clicked
-    fireEvent.click(getByText('secondary text for 08203'));
+    fireEvent.click(screen.getByText('secondary text for 08203'));
 
     // it updates input value and closes combo box
     expect(input.value).toBe('08203');
@@ -121,13 +115,7 @@ describe('autocomplete', () => {
   // TODO: update and fix these tests as part of https://simpletire.atlassian.net/browse/WCS-40
   test.skip('autocomplete flow - success keyboard', () => {
     const onChange = jest.fn();
-    const {
-      getByLabelText,
-      getByRole,
-      getByText,
-      queryByText,
-      rerender,
-    } = render(
+    const { rerender } = render(
       <Autocomplete
         onChange={onChange}
         results={[]}
@@ -138,8 +126,8 @@ describe('autocomplete', () => {
       />,
     );
 
-    const input = getByRole('textbox') as HTMLInputElement;
-    const combobox = getByRole('combobox');
+    const input = screen.getByRole('textbox') as HTMLInputElement;
+    const combobox = screen.getByRole('combobox');
 
     // when text is entered with results
     fireEvent.change(input, { target: { value: '0' } });
@@ -161,15 +149,15 @@ describe('autocomplete', () => {
     expect(onChange).toHaveBeenCalledWith('0');
 
     // it renders cancel button
-    expect(getByText('Clear')).toBeInTheDocument();
+    expect(screen.getByText('Clear')).toBeInTheDocument();
 
     // it opens the combo box with no error
     expect(combobox).toHaveAttribute('aria-expanded', 'true');
-    expect(queryByText('Invalid input')).toBe(null);
+    expect(screen.queryByText('Invalid input')).toBe(null);
 
     // it renders results
     expect(
-      getByLabelText('08203 secondary text for 08203'),
+      screen.getByLabelText('08203 secondary text for 08203'),
     ).toBeInTheDocument();
 
     // select second result with arrow key
@@ -182,7 +170,7 @@ describe('autocomplete', () => {
   });
 
   it('clears input on cancel', () => {
-    const { getByRole, rerender, getByText } = render(
+    const { rerender } = render(
       <Autocomplete
         onChange={jest.fn()}
         results={[]}
@@ -192,8 +180,8 @@ describe('autocomplete', () => {
       />,
     );
 
-    const input = getByRole('textbox') as HTMLInputElement;
-    const combobox = getByRole('combobox');
+    const input = screen.getByRole('textbox') as HTMLInputElement;
+    const combobox = screen.getByRole('combobox');
 
     // when text is entered with results
     fireEvent.change(input, { target: { value: '0' } });
@@ -210,7 +198,7 @@ describe('autocomplete', () => {
       />,
     );
 
-    const cancelButton = getByText('Clear');
+    const cancelButton = screen.getByText('Clear');
 
     // when cancel button is clicked
     fireEvent.click(cancelButton);
@@ -221,7 +209,7 @@ describe('autocomplete', () => {
   });
 
   it('clears input on ESC keyPress', () => {
-    const { getByRole, rerender } = render(
+    const { rerender } = render(
       <Autocomplete
         onChange={jest.fn()}
         results={[]}
@@ -231,8 +219,8 @@ describe('autocomplete', () => {
       />,
     );
 
-    const input = getByRole('textbox') as HTMLInputElement;
-    const combobox = getByRole('combobox');
+    const input = screen.getByRole('textbox') as HTMLInputElement;
+    const combobox = screen.getByRole('combobox');
 
     // when text is entered with results
     fireEvent.change(input, { target: { value: '0' } });
