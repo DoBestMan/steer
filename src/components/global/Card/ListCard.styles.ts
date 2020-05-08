@@ -3,6 +3,8 @@ import { css } from '@emotion/core';
 import { BORDERS, COLORS, MQ, RADIUS, SPACING } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
+const ITEM_HEIGHT = 60;
+
 const styles = {
   content: css({
     display: 'flex',
@@ -20,21 +22,31 @@ const styles = {
     display: 'inline-flex',
   }),
   image: css({
-    alignItems: 'flex-end',
+    alignItems: 'center',
     display: 'flex',
     height: '100%',
+    span: {
+      maxWidth: 30, // targets svg icon
+    },
   }),
   imageContainer: css({
+    alignItems: 'flex-end',
     bottom: 0,
+    display: 'flex',
     height: '100%',
-    pointerEvents: 'none',
-    position: 'absolute',
-    right: SPACING.SIZE_20,
+    right: 0,
+  }),
+  imageVehicle: css({
+    span: {
+      bottom: 0,
+      display: 'inline-flex',
+      maxWidth: 'unset',
+      pointerEvents: 'none',
+      position: 'absolute',
+      right: SPACING.SIZE_30,
+    },
   }),
   list: css({
-    'li:first-of-type': {
-      paddingTop: 0,
-    },
     marginBottom: SPACING.SIZE_40,
   }),
   listItem: [
@@ -42,12 +54,19 @@ const styles = {
     css({
       borderBottom: BORDERS.SOLID_GRAY_90_1PX,
       color: COLORS.GLOBAL.WHITE,
+      display: 'flex',
+      height: ITEM_HEIGHT,
+      justifyContent: 'space-between',
       position: 'relative',
+      span: {
+        borderColor: 'transparent',
+      },
+      width: '100%',
       [MQ.S]: {
         padding: `${SPACING.SIZE_20}px ${SPACING.SIZE_40}px`,
       },
       [MQ.L]: {
-        padding: `${SPACING.SIZE_20}px 0`,
+        padding: `${SPACING.SIZE_20}px ${SPACING.SIZE_40}px ${SPACING.SIZE_20}px 0`,
       },
     }),
   ],

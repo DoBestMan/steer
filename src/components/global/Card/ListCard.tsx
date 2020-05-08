@@ -3,6 +3,7 @@ import { ICONS } from '~/components/global/Icon/Icon.constants';
 import IconOrImage from '~/components/global/IconOrImage/IconOrImage';
 import Link from '~/components/global/Link/Link';
 import { SiteInsightItemList } from '~/data/models/SiteInsightItemList';
+import { isVehicleSvg } from '~/lib/utils/icon';
 
 import styles from './ListCard.styles';
 
@@ -23,15 +24,18 @@ function ListCard({ items, more, title }: SiteInsightItemList) {
         <ul css={styles.list}>
           {items.map(({ icon, label, link }) => (
             <li css={styles.listItem} key={label}>
-              <div css={styles.content}>
-                <Link href={link.href}>
-                  <p>{label}</p>
-                </Link>
-                <div css={styles.imageContainer}>
-                  <div css={styles.image}>
-                    <IconOrImage {...icon} css={styles.icon} />
-                  </div>
-                </div>
+              <Link href={link.href}>
+                <p>{label}</p>
+              </Link>
+              <div css={styles.imageContainer}>
+                <span
+                  css={[
+                    styles.image,
+                    isVehicleSvg(icon) && styles.imageVehicle,
+                  ]}
+                >
+                  <IconOrImage {...icon} css={styles.icon} />
+                </span>
               </div>
             </li>
           ))}

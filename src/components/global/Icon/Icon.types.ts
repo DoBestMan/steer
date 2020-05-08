@@ -30,7 +30,6 @@ export type Icon =
   | 'menu'
   | 'phone'
   | 'reviews-verified'
-  | 'rv'
   | 'search'
   | 'small-chevron-down'
   | 'small-chevron-up'
@@ -39,6 +38,7 @@ export type Icon =
   | 'vehicle-commercial'
   | 'vehicle-light-truck'
   | 'vehicle-passenger'
+  | 'vehicle-rv'
   | 'wheel'
   | 'youtube';
 

@@ -102,7 +102,7 @@ const mockImagePlaceholder = {
 } as SiteImage;
 
 const mockSvg = {
-  svgId: ICONS.RV,
+  svgId: ICONS.VEHICLE_RV,
   type: ICON_IMAGE_TYPE.ICON,
 } as SiteIcon;
 

@@ -32,7 +32,6 @@ export const ICONS: Record<string, Icon> = {
   MENU: 'menu',
   PHONE: 'phone',
   REVIEWS_VERIFIED: 'reviews-verified',
-  RV: 'rv',
   SEARCH: 'search',
   SMALL_CHEVRON_DOWN: 'small-chevron-down',
   SMALL_CHEVRON_UP: 'small-chevron-up',
@@ -41,6 +40,7 @@ export const ICONS: Record<string, Icon> = {
   VEHICLE_COMMERCIAL: 'vehicle-commercial',
   VEHICLE_LIGHT_TRUCK: 'vehicle-light-truck',
   VEHICLE_PASSENGER: 'vehicle-passenger',
+  VEHICLE_RV: 'vehicle-rv',
   WHEEL: 'wheel',
   YOUTUBE: 'youtube',
 };
@@ -73,7 +73,6 @@ export const ICON_SIZES: Record<string, IconSize> = {
   MENU: { h: 8, w: 16 },
   PHONE: { h: 14, w: 16 },
   REVIEWS_VERIFIED: { h: 13, w: 13 },
-  RV: { h: 34, w: 54 },
   SEARCH: { h: 17, w: 17 },
   SMALL_CHEVRON_DOWN: { h: 5, w: 8 },
   SMALL_CHEVRON_UP: { h: 5, w: 8 },
@@ -82,6 +81,7 @@ export const ICON_SIZES: Record<string, IconSize> = {
   VEHICLE_COMMERCIAL: { h: 43, w: 56 },
   VEHICLE_LIGHT_TRUCK: { h: 36, w: 54 },
   VEHICLE_PASSENGER: { h: 25, w: 55 },
+  VEHICLE_RV: { h: 34, w: 54 },
   WHEEL: { h: 30, w: 30 },
   YOUTUBE: { h: 16, w: 22 },
 };
