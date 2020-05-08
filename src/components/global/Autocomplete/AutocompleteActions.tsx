@@ -1,6 +1,7 @@
 import Button from '~/components/global/Button/Button';
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
+import { ui } from '~/lib/utils/ui-dictionary';
 
 import styles from './Autocomplete.styles';
 
@@ -13,7 +14,7 @@ function AutocompleteActions({ onClick, value }: SearchOrClearIconProps) {
   if (value) {
     return (
       <Button onClick={onClick} css={styles.clearSearch}>
-        Clear
+        {ui('search.cancelButtonClear')}
       </Button>
     );
   }

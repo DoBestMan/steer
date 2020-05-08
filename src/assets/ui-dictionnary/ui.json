@@ -13,7 +13,16 @@
     }
   },
   "homepage": {},
+  "location": {
+    "useCurrentLocationLabel": "Use current location",
+    "locationSupportError": "Sorry, but Geolocation is not supported by this browser.",
+    "errorLabel": "Oops. <br />Please enter a valid ZIP code.",
+    "locationInfo": "We use your location to provide accurate <br /> pricing and help you find local shops.",
+    "learnMoreLabel": "Learn More",
+    "freeShipping": "We ship free to this location"
+  },
   "search": {
-    "cancelButtonLabel": "Cancel"
+    "cancelButtonLabel": "Cancel",
+    "cancelButtonClear": "Clear"
   }
 }

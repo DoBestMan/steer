@@ -1,6 +1,9 @@
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Link from '~/components/global/Link/Link';
+import Markdown from '~/components/global/Markdown/Markdown';
+import { LINK_THEME } from '~/lib/constants';
+import { ui } from '~/lib/utils/ui-dictionary';
 
 import { styles } from './Location.styles';
 
@@ -14,16 +17,14 @@ function LocationInfo({ isFreeShipping }: Props) {
       {isFreeShipping ? (
         <p css={styles.freeShipping}>
           <Icon name={ICONS.CHECKMARK} css={styles.freeShippingIcon} />
-          We ship free to this location
+          {ui('location.freeShipping')}
         </p>
       ) : (
         <p>
-          We use your location to provide accurate
-          <br />
-          pricing and help you find local shops.
+          <Markdown>{ui('location.locationInfo')}</Markdown>
           {/* TODO: update link when available */}
-          <Link href="/" css={styles.infoLink}>
-            Learn More
+          <Link theme={LINK_THEME.LIGHT} href="/#" css={styles.infoLink}>
+            {ui('location.learnMoreLabel')}
           </Link>
         </p>
       )}

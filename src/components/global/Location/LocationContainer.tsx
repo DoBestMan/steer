@@ -2,7 +2,9 @@ import { useCallback, useEffect, useState } from 'react';
 
 import Autocomplete from '~/components/global/Autocomplete/Autocomplete';
 import { AutocompleteResult } from '~/components/global/Autocomplete/AutocompleteResultItem';
+import Markdown from '~/components/global/Markdown/Markdown';
 import { onlyNumbers } from '~/lib/utils/regex';
+import { ui } from '~/lib/utils/ui-dictionary';
 
 import AutocompleteResultItemLocation from './AutocompleteResultItemLocation';
 import { styles } from './Location.styles';
@@ -140,12 +142,7 @@ function LocationContainer({
     setInputValue(zip);
   };
 
-  const errorLabel = (
-    <span>
-      Oops. <br />
-      Please enter a valid ZIP code.
-    </span>
-  );
+  const errorLabel = <Markdown>{ui('location.errorLabel')}</Markdown>;
 
   return (
     <div css={styles.container}>

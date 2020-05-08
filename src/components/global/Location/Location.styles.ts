@@ -31,6 +31,9 @@ export const styles = {
     }),
   ],
   infoLink: css({
+    '&:hover span, &:focus span': {
+      color: COLORS.GLOBAL.BLACK,
+    },
     color: COLORS.LIGHT.GRAY_70,
   }),
   useCurrentLocationButton: [
