@@ -1,7 +1,7 @@
 import { SiteGlobals } from '~/data/models/SiteGlobals';
-import { createCtx } from '~/lib/utils/context';
+import { createContext } from '~/lib/utils/context';
 
-const SiteGlobalsContext = createCtx<SiteGlobals>();
+const SiteGlobalsContext = createContext<SiteGlobals>();
 
 export const SiteGlobalsContextProvider = SiteGlobalsContext.Provider;
 

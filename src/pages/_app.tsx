@@ -6,14 +6,13 @@ import Head from 'next/head';
 
 import Footer from '~/components/global/Footer/Footer';
 import ConnectedNav from '~/components/global/Nav/Nav.container';
+import AppProviders from '~/context/AppProviders';
 import { SiteGlobals } from '~/data/models/SiteGlobals';
 import { SiteMenuBrowseItem } from '~/data/models/SiteMenuBrowseItem';
 import { SiteMenuLearn } from '~/data/models/SiteMenuLearn';
 import { backendGetSiteGlobals, backendGetSiteMenu } from '~/lib/backend';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
 import { global } from '~/styles/document/global.styles';
-
-import { SiteGlobalsContextProvider } from '../context/SiteGlobals.context';
 
 interface Props extends AppContext, AppInitialProps {
   serverData: {
@@ -35,7 +34,7 @@ class MyApp extends App<Props> {
     const { customerServiceEnabled } = this.state.serverData.siteGlobals;
 
     return (
-      <SiteGlobalsContextProvider value={this.state.serverData.siteGlobals}>
+      <AppProviders siteGlobalsContextValue={this.state.serverData.siteGlobals}>
         <Head>
           <title>Simpletire</title>
         </Head>
@@ -45,7 +44,7 @@ class MyApp extends App<Props> {
         <Component {...pageProps} />
 
         <Footer isCustomerServiceEnabled={customerServiceEnabled} />
-      </SiteGlobalsContextProvider>
+      </AppProviders>
     );
   }
 }

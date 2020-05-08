@@ -112,3 +112,66 @@ interface Props {
 
 - Don't forget to run `yarn generate-svg-sprite`
 - If an icon has multiple colors, like `icon-wheel`, you may not want to allow the color to be changed.
+
+## Context
+
+Create new context instances in `/context`. Use the `createContext` utility to create a provider and hook. `createContext` provides a better Typescript development experience than the default React implementation; you don't need to provide a default value or add checks for null/undefined.
+
+### Simple Implementation
+
+```javascript
+// MyContext.context.ts
+
+const MyContext = createContext<MyContextType>();
+
+export const MyContextProvider = MyContext.Provider;
+
+export const useMyContext = MyContext.useContext;
+
+// SomePage.container.tsx
+
+<MyContextProvider>
+  <OtherComponent />
+</MyContextProvider>
+
+// OtherComponent.tsx
+
+const { coolContextProp } = useMyContext();
+```
+
+### Complex Implementation
+
+You can also wrap the `createContext` provider in your own custom provider to add properties or define the context value internally.
+
+```javascript
+// MyContext.context.ts
+
+const MyContext = createContext<MyContextType>();
+
+function useContextSetup() {
+  const [isOpen, setIsOpen] = useState(false);
+  return {
+    isOpen,
+    setIsOpen
+  }
+}
+
+export function MyContextProvider({ children }: { children: ReactNode }) {
+  const value = useContextSetup();
+  return <MyContext.Provider value={value}>{children}</MyContext.Provider>;
+}
+
+export const useMyContext = MyContext.useContext;
+```
+
+### When & Where
+
+Context is not needed in all cases; `useState` and `useReducer` on their own can manage many use cases. Context is great for:
+
+- Data that needs to be available throughout the application
+- Data that is cumbersome to pass through multiple components (see an article on [Prop drilling](https://kentcdodds.com/blog/prop-drilling) for help making the decision)
+
+Context should live as close to where it's needed as possible.
+
+- Some context needs to be at the app-level; our `MyApp` component contains an `AppProviders` wrapper for all of these providers.
+- In other cases, a context provider can wrap a subset of components, like the `Nav` module, or a specific page.

@@ -1,7 +1,7 @@
 import { ReactNode, useState } from 'react';
 
 import { NAV_TARGETS } from '~/components/global/Nav/Nav.data';
-import { createCtx } from '~/lib/utils/context';
+import { createContext } from '~/lib/utils/context';
 
 interface NavContextProps {
   activeCategory: string;
@@ -15,7 +15,7 @@ interface NavContextProps {
   toggleSubNav: () => void;
 }
 
-const NavContext = createCtx<NavContextProps>();
+const NavContext = createContext<NavContextProps>();
 
 // Exported for testing only
 export function useContextSetup() {
