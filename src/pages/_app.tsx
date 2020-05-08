@@ -41,7 +41,7 @@ class MyApp extends App<Props> {
         </Head>
 
         <Global styles={global} />
-        <ConnectedNav />
+        <ConnectedNav isCustomerServiceEnabled={customerServiceEnabled} />
         <Component {...pageProps} />
 
         <Footer isCustomerServiceEnabled={customerServiceEnabled} />

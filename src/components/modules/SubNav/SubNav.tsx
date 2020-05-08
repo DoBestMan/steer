@@ -13,19 +13,25 @@ import { SiteMenuLearn } from '~/data/models/SiteMenuLearn';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { BREAKPOINT_SIZES } from '~/lib/constants';
 
-import Learn from './Learn';
+import Learn from './Learn/Learn';
 import styles from './SubNav.styles';
 import SubNavLinks from './SubNavLinks';
 import SubNavModal from './SubNavModal';
 
 interface Props {
+  isCustomerServiceEnabled: boolean;
   siteMenuBrowseList: SiteMenuBrowseItem[];
   siteMenuLearn: SiteMenuLearn;
 }
 
-function SubNav({ siteMenuBrowseList, siteMenuLearn }: Props) {
+function SubNav({
+  isCustomerServiceEnabled,
+  siteMenuBrowseList,
+  siteMenuLearn,
+}: Props) {
   const {
     activeCategory,
+    handleClearLink,
     handleCloseSubNav,
     createSelectCategoryHandler,
     isSubNavOpen,
@@ -40,12 +46,19 @@ function SubNav({ siteMenuBrowseList, siteMenuLearn }: Props) {
     if (!activeCategory && !isMobile) {
       createSelectCategoryHandler(siteMenuBrowseList[0].title)();
     }
+
+    // learn link on mobile goes to a separate page, reset active link if browser is resized
+    if (isMobile && activeLink === NAV_TARGETS.LEARN) {
+      handleClearLink();
+      createSelectCategoryHandler('')();
+    }
     // don't set focus on first list item if opening subnav
     prevLink.current = activeLink;
   }, [
     activeCategory,
-    createSelectCategoryHandler,
     activeLink,
+    createSelectCategoryHandler,
+    handleClearLink,
     isMobile,
     siteMenuBrowseList,
   ]);
@@ -75,7 +88,10 @@ function SubNav({ siteMenuBrowseList, siteMenuLearn }: Props) {
               />
             )}
             {activeLink === NAV_TARGETS.LEARN && (
-              <Learn siteMenuLearn={siteMenuLearn} />
+              <Learn
+                isCustomerServiceEnabled={isCustomerServiceEnabled}
+                siteMenuLearn={siteMenuLearn}
+              />
             )}
           </GridItem>
         </GridItem>

@@ -2,10 +2,11 @@ import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import Image from '~/components/global/Image/Image';
 import BaseLink from '~/components/global/Link/BaseLink';
-import IconCTA from '~/components/global/Link/IconCTA';
-import { LINK_THEME } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
+import EmailSupport from '../Support/EmailSupport';
+import PhoneSupport from '../Support/PhoneSupport';
+import SupportHeading from '../Support/SupportHeading';
 import { data } from './Footer.data';
 import styles from './Footer.styles';
 import FooterLinkList from './FooterLinkList/FooterLinkList';
@@ -15,13 +16,7 @@ export interface Props {
   isCustomerServiceEnabled?: boolean;
 }
 
-function Footer(props: Props) {
-  const { isCustomerServiceEnabled } = props;
-
-  const supportContent = isCustomerServiceEnabled
-    ? data.isBusinessHours
-    : data.isNotBusinessHours;
-
+function Footer({ isCustomerServiceEnabled }: Props) {
   return (
     <Grid as="footer" css={styles.container}>
       <GridItem
@@ -29,9 +24,9 @@ function Footer(props: Props) {
         gridColumnM="2/8"
         gridColumnL="2/6"
         gridColumnXL="2/5"
-        css={styles.supportSection}
+        css={[typography.secondaryHeadline, styles.supportSection]}
       >
-        <p css={typography.secondaryHeadline}>{supportContent.heading}</p>
+        <SupportHeading isCustomerServiceEnabled={isCustomerServiceEnabled} />
       </GridItem>
 
       <GridItem
@@ -50,13 +45,7 @@ function Footer(props: Props) {
           as="li"
           css={styles.supportButton}
         >
-          <IconCTA
-            theme={LINK_THEME.LIGHT}
-            icon="phone"
-            href={supportContent.sales.action}
-          >
-            {supportContent.sales.text}
-          </IconCTA>
+          <PhoneSupport isCustomerServiceEnabled={isCustomerServiceEnabled} />
         </GridItem>
         <GridItem
           gridColumnM="4/7"
@@ -65,13 +54,7 @@ function Footer(props: Props) {
           as="li"
           css={styles.supportButton}
         >
-          <IconCTA
-            theme={LINK_THEME.LIGHT}
-            icon="mail"
-            href={supportContent.support.action}
-          >
-            {supportContent.support.text}
-          </IconCTA>
+          <EmailSupport isCustomerServiceEnabled={isCustomerServiceEnabled} />
         </GridItem>
       </GridItem>
 

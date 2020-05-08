@@ -38,7 +38,7 @@ function Nav({ isHomepage }: Props) {
       </GridItem>
       <GridItem
         as="ul"
-        css={styles.links}
+        css={styles.nav}
         gridColumn="4/6"
         gridColumnM="4/8"
         gridColumnL="4/14"
@@ -48,7 +48,7 @@ function Nav({ isHomepage }: Props) {
             <NavSearchButton />
           </li>
         )}
-        <span css={isSubNavOpen && styles.hide}>
+        <span css={[styles.links, isSubNavOpen && styles.hide]}>
           {data.links.map((link, idx) => (
             <li css={styles.listItem} key={idx}>
               <NavLink

@@ -6,6 +6,11 @@ import useNav from '~/hooks/useNav';
 
 import Nav from './Nav';
 
+interface Props {
+  isCustomerServiceEnabled?: boolean;
+  isHomepage?: boolean;
+}
+
 export const NavContext = createContext({
   activeCategory: '',
   activeLink: '',
@@ -18,12 +23,15 @@ export const NavContext = createContext({
   toggleSubNav: () => {},
 });
 
-function ConnectedNav({ isHomepage = false }: { isHomepage?: boolean }) {
+function ConnectedNav({
+  isCustomerServiceEnabled = false,
+  isHomepage = false,
+}: Props) {
   const navState = useNav();
   return (
     <NavContext.Provider value={navState}>
       <Nav isHomepage={isHomepage} />
-      <SubNav {...subnav} />
+      <SubNav isCustomerServiceEnabled={isCustomerServiceEnabled} {...subnav} />
     </NavContext.Provider>
   );
 }

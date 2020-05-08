@@ -35,7 +35,7 @@ export const data: { [key: string]: Array<LinkType | ActionType> } = {
     { href: '/', icon: ICONS.ACCOUNT, isExternal: true, label: 'Account' },
   ],
   mobileLinks: [
-    { target: NAV_TARGETS.LEARN, text: 'Learn' },
+    { href: '/', isExternal: false, text: 'Learn' },
     { href: '/', isExternal: true, text: 'Find a Shop' },
     { href: '/', isExternal: true, text: 'Track your order' },
     {

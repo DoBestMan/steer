@@ -15,16 +15,13 @@ const styles = {
       display: 'none',
     },
   },
-
   hide: css({
     display: 'none',
   }),
-
   links: css({
+    alignContent: 'center',
     display: 'flex',
-    justifyContent: 'flex-end',
   }),
-
   listItem: css({
     alignItems: 'center',
     display: 'none',
@@ -33,14 +30,16 @@ const styles = {
       display: 'inline-flex',
     },
   }),
-
   logo: css({
     width: CONSTANTS.LOGO_SIZE_SMALL,
     [MQ.M]: {
       width: CONSTANTS.LOGO_SIZE,
     },
   }),
-
+  nav: css({
+    display: 'flex',
+    justifyContent: 'flex-end',
+  }),
   root: css({
     background: COLORS.LIGHT.OFF_WHITE,
     height: '100%',

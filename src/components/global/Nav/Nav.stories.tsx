@@ -17,10 +17,26 @@ const styles = {
   }),
 };
 
-export function NavNoKnobs() {
+export function NavHomepage() {
   return (
     <div css={styles.root}>
       <ConnectedNav isHomepage />
+    </div>
+  );
+}
+
+export function NavOutsideBusinessHours() {
+  return (
+    <div css={styles.root}>
+      <ConnectedNav isHomepage isCustomerServiceEnabled={false} />
+    </div>
+  );
+}
+
+export function NavBusinessHours() {
+  return (
+    <div css={styles.root}>
+      <ConnectedNav isCustomerServiceEnabled isHomepage />
     </div>
   );
 }
