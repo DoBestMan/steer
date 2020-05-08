@@ -1,11 +1,23 @@
 import { renderHook } from '@testing-library/react-hooks';
 import { act } from 'react-test-renderer';
+import { mocked } from 'ts-jest/utils';
 
 import { NAV_TARGETS } from '~/components/global/Nav/Nav.constants';
 
 import { useContextSetup } from './Nav.context';
+import * as UserPersonalizationContextUtils from './UserPersonalization.context';
 
 describe('useContextSetup', () => {
+  beforeEach(() => {
+    jest
+      .spyOn(UserPersonalizationContextUtils, 'useUserPersonalizationContext')
+      .mockReturnValue({
+        locationString: '',
+        updateLocation() {},
+        userPersonalizationData: null,
+      });
+  });
+
   test('updating active link', () => {
     const { result } = renderHook(() => useContextSetup());
 
@@ -17,7 +29,7 @@ describe('useContextSetup', () => {
       handler && handler();
     });
 
-    expect(result.current.activeLink).toEqual('link');
+    expect(result.current.activeLink).toEqual(NAV_TARGETS.LEARN);
     expect(result.current.isSubNavOpen).toEqual(true);
   });
 
@@ -67,5 +79,50 @@ describe('useContextSetup', () => {
     });
 
     expect(result.current.activeLink).toEqual(NAV_TARGETS.BROWSE_TIRES);
+  });
+
+  test('creating links - no personalization data', () => {
+    const { result } = renderHook(() => useContextSetup());
+
+    expect(result.current.links).toEqual(
+      expect.arrayContaining([
+        {
+          icon: 'location',
+          label: 'Select location',
+          target: NAV_TARGETS.LOCATION,
+          text: '',
+        },
+      ]),
+    );
+  });
+
+  test('creating links - personalization data', () => {
+    mocked(
+      UserPersonalizationContextUtils.useUserPersonalizationContext,
+    ).mockReturnValue({
+      locationString: 'Portland, OR',
+      updateLocation() {},
+      userPersonalizationData: {
+        gaClientId: '123',
+        userLocation: {
+          cityName: 'Portland',
+          region: 1,
+          stateAbbr: 'OR',
+          zip: '12345',
+        },
+      },
+    });
+    const { result } = renderHook(() => useContextSetup());
+
+    expect(result.current.links).toEqual(
+      expect.arrayContaining([
+        {
+          icon: 'location',
+          label: 'Select location',
+          target: NAV_TARGETS.LOCATION,
+          text: 'Portland, OR',
+        },
+      ]),
+    );
   });
 });

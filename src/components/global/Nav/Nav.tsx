@@ -6,7 +6,6 @@ import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Image from '~/components/global/Image/Image';
 import BaseLink from '~/components/global/Link/BaseLink';
 import NavLink from '~/components/global/Link/NavLink';
-import { data } from '~/components/global/Nav/Nav.constants';
 import { useNavContext } from '~/context/Nav.context';
 import { layout } from '~/styles/layout.styles';
 
@@ -25,6 +24,7 @@ const CONSTANTS = {
 function Nav({ isHomepage }: Props) {
   const {
     isSubNavOpen,
+    links,
     toggleSubNav,
     createSelectLinkHandler,
   } = useNavContext();
@@ -53,7 +53,7 @@ function Nav({ isHomepage }: Props) {
           </li>
         )}
         <span css={[styles.links, isSubNavOpen && styles.hide]}>
-          {data.links.map((link, idx) => (
+          {links.map((link, idx) => (
             <li css={styles.listItem} key={idx}>
               <NavLink
                 isActive={false}

@@ -105,6 +105,10 @@ export async function fetch<T, U = never>({
   return data;
 }
 
+export function fetchGetUserPersonalization() {
+  return currentUserPersonalization;
+}
+
 export function fetchSetAuthorizationHeader(
   newAuthorizationHeader: string | null,
 ) {

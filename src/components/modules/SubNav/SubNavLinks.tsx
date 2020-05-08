@@ -2,11 +2,7 @@ import Button from '~/components/global/Button/Button';
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import NavLink from '~/components/global/Link/NavLink';
-import {
-  ActionType,
-  data,
-  LinkType,
-} from '~/components/global/Nav/Nav.constants';
+import { ActionType, LinkType } from '~/components/global/Nav/Nav.constants';
 import { useNavContext } from '~/context/Nav.context';
 import { SiteMenuBrowseItem } from '~/data/models/SiteMenuBrowseItem';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
@@ -24,12 +20,14 @@ function SubNavLinks({ siteMenuBrowseList }: Props) {
     activeLink,
     createSelectLinkHandler,
     handleCloseSubNav,
+    linksMobile,
+    links,
   } = useNavContext();
   const breakpoint = useBreakpoints();
   const isMobile = breakpoint === BREAKPOINT_SIZES.S;
-  const links = isMobile ? data.mobileLinks : data.links;
-  const iconLinks = links.filter((link) => link.icon);
-  const textLinks = links.filter((link) => !link.icon);
+  const navLinks = isMobile ? linksMobile : links;
+  const iconLinks = navLinks.filter((link) => 'icon' in link && link.icon);
+  const textLinks = navLinks.filter((link) => !('icon' in link && link.icon));
 
   function renderLink(link: LinkType | ActionType, idx: number) {
     return (

@@ -3,6 +3,7 @@ import { ReactNode } from 'react';
 import { SiteGlobals } from '~/data/models/SiteGlobals';
 
 import { SiteGlobalsContextProvider } from './SiteGlobals.context';
+import { UserPersonalizationContextProvider } from './UserPersonalization.context';
 
 interface Props {
   children: ReactNode;
@@ -14,7 +15,9 @@ interface Props {
 function AppProviders({ children, siteGlobalsContextValue }: Props) {
   return (
     <SiteGlobalsContextProvider value={siteGlobalsContextValue}>
-      {children}
+      <UserPersonalizationContextProvider>
+        {children}
+      </UserPersonalizationContextProvider>
     </SiteGlobalsContextProvider>
   );
 }
