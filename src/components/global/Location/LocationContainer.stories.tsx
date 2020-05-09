@@ -44,6 +44,7 @@ export function Location() {
   return (
     <div css={styles.container}>
       <LocationContainer
+        focusInputOnMount
         currentLocation={location}
         onLocationChangeSuccess={handleLocationChangeSuccess}
         onCurrentLocationError={onCurrentLocationError}

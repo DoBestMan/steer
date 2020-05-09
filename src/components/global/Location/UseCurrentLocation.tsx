@@ -19,6 +19,12 @@ const getBrowserLocation = (callback: PositionCallback) => {
   }
 };
 
+const getZipFromAddressComponents = (
+  addressComponents: google.maps.GeocoderAddressComponent[],
+) =>
+  addressComponents.find((component) => component.types.includes('postal_code'))
+    ?.long_name;
+
 function UseCurrentLocation({
   onCurrentLocationError,
   onCurrentLocationSuccess,
@@ -50,11 +56,15 @@ function UseCurrentLocation({
         geocoder.geocode(request, (results, status) => {
           if (status === window.google.maps.GeocoderStatus.OK) {
             if (results[0]) {
-              onCurrentLocationSuccess(
-                results[0].address_components[7].long_name,
+              const zipCode = getZipFromAddressComponents(
+                results[0].address_components,
               );
-            } else {
-              onCurrentLocationError('No results found');
+
+              if (zipCode) {
+                onCurrentLocationSuccess(zipCode);
+              } else {
+                onCurrentLocationError('No results found');
+              }
             }
           } else {
             onCurrentLocationError(`Geocoder failed due to: ${status}`);

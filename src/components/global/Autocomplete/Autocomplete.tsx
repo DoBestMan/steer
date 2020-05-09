@@ -34,6 +34,7 @@ export interface ResultItemProps {
 interface Props {
   children?: ReactChild;
   errorLabel: string | JSX.Element;
+  focusOnMount?: boolean;
   inputMaxLength?: number;
   inputValidationRegEx?: RegExp;
   inputValue?: string;
@@ -52,6 +53,7 @@ interface Props {
 function Autocomplete({
   children,
   errorLabel,
+  focusOnMount = false,
   inputMaxLength,
   inputValidationRegEx,
   inputValue = CONSTANTS.DEFAULT_VALUE,
@@ -92,6 +94,12 @@ function Autocomplete({
       textInput.current.focus();
     }
   };
+
+  useEffect(() => {
+    if (focusOnMount) {
+      focusOnInput();
+    }
+  }, [focusOnMount]);
 
   useEffect(() => {
     setIds(generateIDs(randomString(10)));

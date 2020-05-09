@@ -17,6 +17,7 @@ interface Props {
     stateAbbr: string | null;
     zip: string | null;
   };
+  focusInputOnMount?: boolean;
   onCurrentLocationError: (error: string) => void;
   onLocationChangeSuccess: (location: AutocompleteResult) => void;
 }
@@ -66,6 +67,7 @@ const appendGMapScript = (onLoadCallBack: () => void) => {
 
 function LocationContainer({
   currentLocation,
+  focusInputOnMount,
   onCurrentLocationError,
   onLocationChangeSuccess,
 }: Props) {
@@ -150,6 +152,7 @@ function LocationContainer({
         label="Enter your ZIP code"
         errorLabel={errorLabel}
         inputMaxLength={5}
+        focusOnMount={focusInputOnMount}
         inputValidationRegEx={onlyNumbers}
         inputValue={inputValue}
         onChange={onChange}
