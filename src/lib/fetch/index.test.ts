@@ -7,6 +7,7 @@ import { mocked } from 'ts-jest/utils';
 import { FetchErrorCodes } from './FetchError';
 import {
   fetch,
+  fetchSetAuthorizationFunction,
   fetchSetAuthorizationHeader,
   fetchSetAuthorizationToken,
   fetchSetUrlBase,
@@ -31,7 +32,7 @@ describe('fetch', () => {
     mocked(nativeFetch).mockResolvedValue(response);
 
     const result = await fetch<{ test: boolean }>({
-      endpoint: '/test-get',
+      endpoint: '/v1/test-get',
       method: 'get',
     });
 
@@ -55,7 +56,7 @@ describe('fetch', () => {
       body: {
         testBody: '1',
       },
-      endpoint: '/test-post',
+      endpoint: '/v1/test-post',
       method: 'post',
     });
 
@@ -71,6 +72,99 @@ describe('fetch', () => {
     expect(result.test).toEqual(true);
   });
 
+  it('calls authorization function', async () => {
+    const response = new Response('{"test":true}');
+    mocked(nativeFetch).mockResolvedValue(response);
+
+    const token = '1234';
+    const authorizationFunction = jest.fn().mockImplementation(() => {
+      fetchSetAuthorizationToken(token, null);
+    });
+    fetchSetAuthorizationFunction(authorizationFunction);
+
+    await fetch<{ test: boolean }, { testBody: string }>({
+      endpoint: '/v1/test-get-authorized',
+      includeAuthorization: true,
+      method: 'get',
+    });
+
+    expect(authorizationFunction).toHaveBeenCalled();
+
+    const headers = mocked(nativeFetch).mock.calls[0][1]?.headers;
+
+    expect(
+      headers && 'Authorization' in headers && headers.Authorization,
+    ).toEqual(`Bearer ${token}`);
+  });
+
+  it('calls authorization function when token is expired', async () => {
+    const response = new Response('{"test":true}');
+    mocked(nativeFetch).mockResolvedValue(response);
+
+    const authorizationHeader = 'test 5678';
+    fetchSetAuthorizationHeader(authorizationHeader);
+
+    const oldToken = '1234';
+    const oldExpiresOn = new Date(2010, 0, 1, 0, 0, 0);
+    const newToken = '5678';
+    const newExpiresOn = new Date(Date.now() + 60000);
+
+    fetchSetAuthorizationToken(oldToken, oldExpiresOn);
+
+    const authorizationFunction = jest.fn().mockImplementation(() => {
+      fetchSetAuthorizationToken(newToken, newExpiresOn);
+    });
+    fetchSetAuthorizationFunction(authorizationFunction);
+
+    await fetch<{ test: boolean }, { testBody: string }>({
+      endpoint: '/v1/test-get-authorized',
+      includeAuthorization: true,
+      method: 'get',
+    });
+
+    expect(authorizationFunction).toHaveBeenCalled();
+
+    const headers = mocked(nativeFetch).mock.calls[0][1]?.headers;
+
+    expect(
+      headers && 'Authorization' in headers && headers.Authorization,
+    ).toEqual(`Bearer ${newToken}`);
+  });
+
+  it("doesn't call authorization function when token is not expired", async () => {
+    const response = new Response('{"test":true}');
+    mocked(nativeFetch).mockResolvedValue(response);
+
+    const authorizationHeader = 'test 5678';
+    fetchSetAuthorizationHeader(authorizationHeader);
+
+    const currentToken = '1234';
+    const currentExpiresOn = new Date(Date.now() + 60000);
+    const newToken = '5678';
+    const newExpiresOn = new Date(Date.now() + 120000);
+
+    fetchSetAuthorizationToken(currentToken, currentExpiresOn);
+
+    const authorizationFunction = jest.fn().mockImplementation(() => {
+      fetchSetAuthorizationToken(newToken, newExpiresOn);
+    });
+    fetchSetAuthorizationFunction(authorizationFunction);
+
+    await fetch<{ test: boolean }, { testBody: string }>({
+      endpoint: '/v1/test-get-authorized',
+      includeAuthorization: true,
+      method: 'get',
+    });
+
+    expect(authorizationFunction).not.toHaveBeenCalled();
+
+    const headers = mocked(nativeFetch).mock.calls[0][1]?.headers;
+
+    expect(
+      headers && 'Authorization' in headers && headers.Authorization,
+    ).toEqual(`Bearer ${currentToken}`);
+  });
+
   it('includes authorization header', async () => {
     const response = new Response('{"test":true}');
     mocked(nativeFetch).mockResolvedValue(response);
@@ -79,7 +173,7 @@ describe('fetch', () => {
     fetchSetAuthorizationHeader(authorization);
 
     await fetch<{ test: boolean }, { testBody: string }>({
-      endpoint: '/test-get-authorized',
+      endpoint: '/v1/test-get-authorized',
       includeAuthorization: true,
       method: 'get',
     });
@@ -98,10 +192,10 @@ describe('fetch', () => {
     mocked(nativeFetch).mockResolvedValue(response);
 
     const token = '1234';
-    fetchSetAuthorizationToken(token);
+    fetchSetAuthorizationToken(token, null);
 
     await fetch<{ test: boolean }, { testBody: string }>({
-      endpoint: '/test-get-authorized',
+      endpoint: '/v1/test-get-authorized',
       includeAuthorization: true,
       method: 'get',
     });
@@ -120,10 +214,10 @@ describe('fetch', () => {
     mocked(nativeFetch).mockResolvedValue(response);
 
     const token = '1234';
-    fetchSetAuthorizationToken(token);
+    fetchSetAuthorizationToken(token, null);
 
     await fetch<{ test: boolean }, { testBody: string }>({
-      endpoint: '/test-get-authorized',
+      endpoint: '/v1/test-get-authorized',
       method: 'get',
     });
 
@@ -151,7 +245,7 @@ describe('fetch', () => {
     });
 
     await fetch<{ test: boolean }, { testBody: string }>({
-      endpoint: '/test-get-personalized',
+      endpoint: '/v1/test-get-personalized',
       includeUserRegion: true,
       includeUserZip: true,
       method: 'get',
@@ -165,7 +259,7 @@ describe('fetch', () => {
     fetchSetUrlBase('');
 
     const promise = fetch<{ test: boolean }, { testBody: string }>({
-      endpoint: '/test-get-personalized',
+      endpoint: '/v1/test-get-personalized',
       method: 'get',
     });
 
@@ -186,7 +280,7 @@ describe('fetch', () => {
     );
 
     const promise = fetch<{ test: boolean }, { testBody: string }>({
-      endpoint: '/test-get',
+      endpoint: '/v1/test-get',
       method: 'get',
     });
 
@@ -205,7 +299,7 @@ describe('fetch', () => {
     mocked(nativeFetch).mockResolvedValue(response);
 
     const promise = fetch<{ test: boolean }, { testBody: string }>({
-      endpoint: '/test-get',
+      endpoint: '/v1/test-get',
       method: 'get',
     });
 
@@ -235,7 +329,7 @@ describe('fetch', () => {
       mocked(nativeFetch).mockResolvedValue(response);
 
       const promise = fetch<{ test: boolean }, { testBody: string }>({
-        endpoint: '/test-get',
+        endpoint: '/v1/test-get',
         includeUserRegion: true,
         method: 'get',
       });

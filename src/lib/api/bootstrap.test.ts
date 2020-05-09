@@ -48,6 +48,7 @@ describe('apiBootstrap', () => {
     );
     expect(Fetch.fetchSetAuthorizationToken).toHaveBeenCalledWith(
       userSessionId,
+      null,
     );
     expect(Fetch.fetchSetAuthorizationToken).toHaveBeenCalledTimes(1);
     expect(lscache.set).toHaveBeenCalledWith('ST_SESSION', userSessionId, 60);
@@ -63,9 +64,11 @@ describe('apiBootstrap', () => {
     );
     expect(Fetch.fetchSetAuthorizationToken).toHaveBeenCalledWith(
       'OldSessionId',
+      null,
     );
     expect(Fetch.fetchSetAuthorizationToken).toHaveBeenCalledWith(
       userSessionId,
+      null,
     );
     expect(Fetch.fetchSetAuthorizationToken).toHaveBeenCalledTimes(2);
     expect(lscache.set).toHaveBeenCalledWith('ST_SESSION', userSessionId, 60);

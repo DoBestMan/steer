@@ -41,7 +41,7 @@ Then, login
 now login
 ```
 
-Finally, link your local project
+Then, link your local project
 
 ```bash
 now
@@ -55,6 +55,12 @@ Now CLI 17.1.1
 ? Set up and deploy “~/path-to-project/steer”? [Y/n] y
 ? Which scope do you want to deploy to? STEER
 ? Found project “steer/steer”. Link to it? [Y/n] y
+```
+
+Then, pull the development environment variables.
+
+```bash
+now env pull
 ```
 
 Finally, install the `node_modules`.

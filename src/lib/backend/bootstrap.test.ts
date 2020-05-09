@@ -15,7 +15,9 @@ function createFakeRequest() {
 
 describe('backendBootstrap', () => {
   beforeEach(() => {
-    jest.spyOn(FetchModule, 'fetchSetAuthorizationHeader').mockImplementation();
+    jest
+      .spyOn(FetchModule, 'fetchSetAuthorizationFunction')
+      .mockImplementation();
     jest.spyOn(FetchModule, 'fetchSetUrlBase').mockImplementation();
   });
 
@@ -27,19 +29,16 @@ describe('backendBootstrap', () => {
 
   it('configures authentication header', () => {
     const request = createFakeRequest();
-    request.headers.authorization = 'Bearer Test123';
     backendBootstrap({ request });
 
-    expect(FetchModule.fetchSetAuthorizationHeader).toHaveBeenCalledWith(
-      request.headers.authorization,
-    );
+    expect(FetchModule.fetchSetAuthorizationFunction).toHaveBeenCalled();
   });
 
   it('configures the mock server by default', () => {
     const request = createFakeRequest();
     backendBootstrap({ request });
 
-    const expectedEnvironment = BackendEndpoints['mainApiMock'].apiBaseUrl;
+    const expectedEnvironment = BackendEndpoints.mainApiMock.apiBaseUrl;
 
     expect(FetchModule.fetchSetUrlBase).toHaveBeenCalledWith(
       expectedEnvironment,
@@ -54,7 +53,7 @@ describe('backendBootstrap', () => {
     const request = createFakeRequest();
     backendBootstrap({ request });
 
-    const expectedEnvironment = BackendEndpoints['mainApiLocal'].apiBaseUrl;
+    const expectedEnvironment = BackendEndpoints.mainApiLocal.apiBaseUrl;
 
     expect(FetchModule.fetchSetUrlBase).toHaveBeenCalledWith(
       expectedEnvironment,

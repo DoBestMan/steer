@@ -19,13 +19,13 @@ async function asyncApiBootstrap() {
   const isCachedAuthorizationTokenValid =
     typeof cachedAuthorizationToken === 'string';
   if (isCachedAuthorizationTokenValid) {
-    fetchSetAuthorizationToken(cachedAuthorizationToken);
+    fetchSetAuthorizationToken(cachedAuthorizationToken, null);
   }
 
   fetchSetUrlBase('/api');
 
   const { userPersonalization, userSessionId } = await apiGetUserSession();
-  fetchSetAuthorizationToken(userSessionId);
+  fetchSetAuthorizationToken(userSessionId, null);
 
   lscache.set(
     SimpleTireSessionKey,

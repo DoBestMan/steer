@@ -4,7 +4,9 @@ import { UserPersonalization } from '~/data/models/UserPersonalization';
 
 import { FetchError, FetchErrorCodes } from './FetchError';
 
+let authorizationExpiration: Date | null = null;
 let authorizationHeader: string | null = null;
+let authorizationFunction: (() => Promise<void>) | null = null;
 let urlBase = '';
 
 let currentUserPersonalization: UserPersonalization = {
@@ -33,6 +35,7 @@ function buildUrl(
 }
 
 export async function fetch<T, U = never>({
+  authorizationFunctionRetriesLeft = 1,
   body,
   endpoint,
   includeAuthorization,
@@ -42,6 +45,7 @@ export async function fetch<T, U = never>({
   params = {},
   query = {},
 }: {
+  authorizationFunctionRetriesLeft?: number;
   body?: U;
   endpoint: string;
   includeAuthorization?: boolean;
@@ -50,7 +54,7 @@ export async function fetch<T, U = never>({
   method: RequestInit['method'];
   params?: Record<string, string>;
   query?: Record<string, string>;
-}) {
+}): Promise<T> {
   if (urlBase === '') {
     throw new FetchError(
       FetchErrorCodes.UrlBaseNotConfigured,
@@ -66,9 +70,25 @@ export async function fetch<T, U = never>({
     query.userZip = currentUserPersonalization.userLocation.zip;
   }
 
+  const hasAuthorizationHeader = Boolean(authorizationHeader);
+  const isAuthorizationExpired =
+    authorizationExpiration !== null && Date.now() >= +authorizationExpiration;
+
+  if (
+    includeAuthorization &&
+    authorizationFunction &&
+    (!hasAuthorizationHeader || isAuthorizationExpired)
+  ) {
+    await authorizationFunction();
+  }
+
   const headers: Record<string, string> = {};
   if (includeAuthorization && authorizationHeader) {
     headers.Authorization = authorizationHeader;
+  }
+
+  if (body) {
+    headers['Content-Type'] = 'application/json';
   }
 
   let response: Response;
@@ -93,6 +113,27 @@ export async function fetch<T, U = never>({
   }
 
   if (response.status < 200 || response.status >= 300) {
+    if (
+      response.status === 401 &&
+      includeAuthorization &&
+      authorizationFunction &&
+      authorizationFunctionRetriesLeft > 0
+    ) {
+      await authorizationFunction();
+
+      return fetch<T, U>({
+        authorizationFunctionRetriesLeft: authorizationFunctionRetriesLeft - 1,
+        body,
+        endpoint,
+        includeAuthorization,
+        includeUserRegion,
+        includeUserZip,
+        method,
+        params,
+        query,
+      });
+    }
+
     const error = new FetchError(
       ErrorByStatus[response.status] ?? FetchErrorCodes.ServerError,
       `Invalid response status ${response.status}`,
@@ -115,10 +156,24 @@ export function fetchSetAuthorizationHeader(
   authorizationHeader = newAuthorizationHeader;
 }
 
+export function fetchSetAuthorizationExpiration(
+  newAuthorizationExpiration: Date | null,
+) {
+  authorizationExpiration = newAuthorizationExpiration;
+}
+
+export function fetchSetAuthorizationFunction(
+  newAuthorizationFunction: (() => Promise<void>) | null,
+) {
+  authorizationFunction = newAuthorizationFunction;
+}
+
 export function fetchSetAuthorizationToken(
   newAuthorizationToken: string | null,
+  expiresOn: Date | null,
 ) {
   fetchSetAuthorizationHeader(`Bearer ${newAuthorizationToken}`);
+  fetchSetAuthorizationExpiration(expiresOn);
 }
 
 export function fetchSetUrlBase(newUrlBase: string) {

@@ -14,7 +14,8 @@ export async function backendCreateUserSession({ userIp }: { userIp: string }) {
     body: {
       userIp,
     },
-    endpoint: '/users/session',
+    endpoint: '/v1/users/session',
+    includeAuthorization: true,
     method: 'post',
   });
 
@@ -27,7 +28,7 @@ export async function backendGetUserPersonalization({
   userId: string;
 }) {
   const response = await fetch<UserPersonalization>({
-    endpoint: '/users/{userId}/personalization',
+    endpoint: '/v1/users/{userId}/personalization',
     includeAuthorization: true,
     method: 'get',
     params: {
@@ -52,7 +53,7 @@ export async function backendSetUserPersonalization({
       gaClientId,
       userLocationZip,
     },
-    endpoint: '/users/{userId}/personalization',
+    endpoint: '/v1/users/{userId}/personalization',
     includeAuthorization: true,
     method: 'post',
     params: {

@@ -11,7 +11,8 @@ export async function backendGetSiteGlobals() {
     siteHero: SiteHero;
     siteInsights: SiteInsights;
   }>({
-    endpoint: '/site/globals',
+    endpoint: '/v1/site/globals',
+    includeAuthorization: true,
     method: 'get',
   });
 
@@ -23,7 +24,8 @@ export async function backendGetSiteHome() {
     siteHero: SiteHero;
     siteInsights: SiteInsights;
   }>({
-    endpoint: '/site/home',
+    endpoint: '/v1/site/home',
+    includeAuthorization: true,
     includeUserRegion: true,
     method: 'get',
   });
@@ -36,7 +38,8 @@ export async function backendGetSiteMenu() {
     siteMenuBrowseList: Array<SiteMenuBrowseItem>;
     siteMenuLearn: SiteMenuLearn;
   }>({
-    endpoint: '/site/menu',
+    endpoint: '/v1/site/menu',
+    includeAuthorization: true,
     includeUserRegion: true,
     method: 'get',
   });
@@ -48,7 +51,8 @@ export async function backendGetSiteReviews() {
   const response = await fetch<{
     siteReviews: SiteReviews;
   }>({
-    endpoint: '/site/reviews',
+    endpoint: '/v1/site/reviews',
+    includeAuthorization: true,
     method: 'get',
   });
 
