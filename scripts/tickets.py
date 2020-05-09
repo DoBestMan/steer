@@ -78,7 +78,7 @@ class JiraSteer:
         self.jiraclient = JIRA({'server': "https://simpletire.atlassian.net"}, basic_auth=(
             os.environ.get("JIRA_USERNAME"), os.environ.get("JIRA_TOKEN")))
 
-    def get_issues_with_jql(self, jql="project='WCS' and key='WCS-135' or key='WCS-232'"):
+    def get_issues_with_jql(self, jql="project='WCS' and status='Merged'"):
         return self.jiraclient.search_issues(jql, maxResults=200)
 
     def comment_build(self, issue_to_mod):
