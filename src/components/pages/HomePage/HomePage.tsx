@@ -34,7 +34,7 @@ function HomePage({ serverData }: Props) {
     error,
   } = useApiDataWithDefault<HomeData>({
     defaultData: serverData,
-    endpoint: '/v1/home',
+    endpoint: '/home',
     includeUserRegion: true,
   });
 

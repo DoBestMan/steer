@@ -7,7 +7,7 @@ export async function apiGetUserSession() {
     userPersonalization: UserPersonalization;
     userSessionId: string;
   }>({
-    endpoint: '/v1/users/session',
+    endpoint: '/users/session',
     includeAuthorization: true,
     method: 'get',
   });
