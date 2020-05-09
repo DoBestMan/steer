@@ -1,4 +1,4 @@
-import { ReactChild } from 'react';
+import { ReactNode } from 'react';
 import SVGInline from 'react-svg-inline';
 
 import SVGSprite from '~/assets/svg-sprite/symbol/svg/sprite.symbol.svg';
@@ -7,7 +7,7 @@ import GridHelper from '~/components/global/GridHelper/GridHelper';
 import styles from './Layout.styles';
 
 interface Props {
-  children: ReactChild;
+  children: ReactNode;
 }
 
 function Layout(props: Props) {

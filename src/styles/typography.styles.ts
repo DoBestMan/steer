@@ -2,7 +2,7 @@ import { css } from '@emotion/core';
 
 import { MQ } from '~/lib/constants';
 
-/* line heights are calculated by taking the 
+/* line heights are calculated by taking the
 ratio of lineHeightInPixels / fontSizeInPixels */
 
 const fontFamily =

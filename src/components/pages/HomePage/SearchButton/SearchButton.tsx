@@ -1,28 +1,19 @@
-import { SerializedStyles } from '@emotion/core';
 import { MouseEventHandler } from 'react';
 
 import Button from '~/components/global/Button/Button';
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
-import { SiteGlobals } from '~/data/models/SiteGlobals';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import styles from './SearchButton.styles';
 
 interface Props {
   onClick: MouseEventHandler;
-  theme: SiteGlobals['siteTheme'];
 }
 
-const mapThemeToStyles: { [key: string]: SerializedStyles } = {
-  promotion: styles.secondary,
-};
-
-function SearchButton({ onClick, theme }: Props) {
-  const themeStyles = (theme && mapThemeToStyles[theme]) || styles.primary;
-
+function SearchButton({ onClick }: Props) {
   return (
-    <div css={[styles.container, themeStyles]}>
+    <div css={styles.container}>
       <Button onClick={onClick} css={styles.button}>
         <>
           {ui('common.header.searchShortLabel')}

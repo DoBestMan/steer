@@ -1,6 +1,10 @@
+export function isBrowser() {
+  return process.browser;
+}
+
 export function hasNativeLoadingSupport() {
   return (
-    process.browser &&
+    isBrowser() &&
     !!window.HTMLImageElement &&
     'loading' in window.HTMLImageElement.prototype
   );

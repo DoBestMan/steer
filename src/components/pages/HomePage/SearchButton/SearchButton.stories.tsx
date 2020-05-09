@@ -1,6 +1,8 @@
 import { action } from '@storybook/addon-actions';
 import { select } from '@storybook/addon-knobs';
 
+import { COLORS } from '~/lib/constants';
+
 import SearchButton from './SearchButton';
 
 export default {
@@ -9,14 +11,18 @@ export default {
 };
 
 const options = {
-  default: null,
-  promotional: 'promotional',
+  default: COLORS.GLOBAL.ORANGE,
+  promotional: COLORS.GLOBAL.BLACK,
 };
 
 const handleButtonClick = action('button-click');
 
 export function ButtonWithKnobs() {
-  const theme = select('Themes', options, options.default);
+  const backgroundColor = select('Background Color', options, options.default);
 
-  return <SearchButton onClick={handleButtonClick} theme={theme} />;
+  return (
+    <div css={{ backgroundColor }}>
+      <SearchButton onClick={handleButtonClick} />
+    </div>
+  );
 }

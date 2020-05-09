@@ -1,5 +1,6 @@
 import { css } from '@emotion/core';
 
+import { CONTENT_PADDING } from '~/components/pages/HomePage/HomePage.styles';
 import { COLORS, GRID_MARGIN, MQ, SPACING } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
@@ -51,13 +52,16 @@ const styles = {
     }),
   ],
   container: css({
-    paddingBottom: 160,
+    paddingBottom: 160 + CONTENT_PADDING.S,
 
     [MQ.M]: {
-      paddingBottom: 240,
+      paddingBottom: 240 + CONTENT_PADDING.M,
     },
     [MQ.L]: {
-      paddingBottom: 190,
+      paddingBottom: 190 + CONTENT_PADDING.M,
+    },
+    [MQ.L]: {
+      paddingBottom: 190 + CONTENT_PADDING.XL,
     },
   }),
   icon: css({
@@ -75,8 +79,6 @@ const styles = {
       },
     },
   }),
-  primary: css({ backgroundColor: COLORS.GLOBAL.ORANGE }),
-  secondary: css({ backgroundColor: COLORS.GLOBAL.BLACK }),
 };
 
 export default styles;
