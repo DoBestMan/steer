@@ -20,7 +20,7 @@ interface Props {
 function Home(props: Props) {
   return (
     <ScrollContextProvider>
-      <HomePage {...props} />;
+      <HomePage {...props} />
     </ScrollContextProvider>
   );
 }
