@@ -1,7 +1,6 @@
 import { ReactChild } from 'react';
 
 import { useBreakpoints } from '~/hooks/useBreakpoints';
-import { BREAKPOINT_SIZES } from '~/lib/constants';
 
 import SubNavModal from './SubNavModal';
 
@@ -20,8 +19,7 @@ function SubNavContentWrapper({
   onBack,
   onClose,
 }: Props) {
-  const breakpoint = useBreakpoints();
-  const isMobile = breakpoint === BREAKPOINT_SIZES.S;
+  const { isMobile } = useBreakpoints();
   if (!isMobile) {
     return <>{children}</>;
   }

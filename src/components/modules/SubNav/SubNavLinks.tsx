@@ -5,7 +5,6 @@ import { ActionType, LinkType } from '~/components/modules/Nav/Nav.constants';
 import { useNavContext } from '~/context/Nav.context';
 import { SiteMenuBrowseItem } from '~/data/models/SiteMenuBrowseItem';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
-import { BREAKPOINT_SIZES } from '~/lib/constants';
 
 import TireCategoryLinks from './BrowseTires/TireCategoryLinks';
 import styles from './SubNav.styles';
@@ -22,8 +21,7 @@ function SubNavLinks({ siteMenuBrowseList }: Props) {
     linksMobile,
     links,
   } = useNavContext();
-  const breakpoint = useBreakpoints();
-  const isMobile = breakpoint === BREAKPOINT_SIZES.S;
+  const { isMobile } = useBreakpoints();
   const navLinks = isMobile ? linksMobile : links;
   const iconLinks = navLinks.filter((link) => 'icon' in link && link.icon);
   const textLinks = navLinks.filter((link) => !('icon' in link && link.icon));

@@ -13,7 +13,7 @@ interface Props {
 function GridHelper(props: Props) {
   const { show } = props;
   const search = useSearch();
-  const bk = useBreakpoints();
+  const { bk } = useBreakpoints();
 
   if (!search.grid && !show) {
     return null;

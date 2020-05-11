@@ -3,7 +3,6 @@ import IconOrImage from '~/components/global/IconOrImage/IconOrImage';
 import { useNavContext } from '~/context/Nav.context';
 import { SiteMenuBrowseItem } from '~/data/models/SiteMenuBrowseItem';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
-import { BREAKPOINT_SIZES } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import styles from './BrowseTires.styles';
@@ -14,8 +13,7 @@ interface Props {
 
 function TireCategoryLinks({ siteMenuBrowseList }: Props) {
   const { activeCategory, createSelectCategoryHandler } = useNavContext();
-  const breakpoint = useBreakpoints();
-  const isMobile = breakpoint === BREAKPOINT_SIZES.S;
+  const { isMobile } = useBreakpoints();
   return (
     <GridItem gridColumnM="1/3" gridColumnL="1/4">
       <div css={styles.header}>

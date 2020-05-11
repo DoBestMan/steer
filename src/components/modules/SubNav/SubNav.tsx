@@ -10,7 +10,6 @@ import { useNavContext } from '~/context/Nav.context';
 import { SiteMenuBrowseItem } from '~/data/models/SiteMenuBrowseItem';
 import { SiteMenuLearn } from '~/data/models/SiteMenuLearn';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
-import { BREAKPOINT_SIZES } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import Learn from './Learn/Learn';
@@ -38,8 +37,7 @@ function SubNav({
     activeLink,
   } = useNavContext();
 
-  const breakpoint = useBreakpoints();
-  const isMobile = breakpoint === BREAKPOINT_SIZES.S;
+  const { isMobile } = useBreakpoints();
 
   const prevLink = useRef(activeLink);
   useEffect(() => {
