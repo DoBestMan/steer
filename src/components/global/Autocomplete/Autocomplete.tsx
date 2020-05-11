@@ -7,8 +7,10 @@ import {
   useState,
 } from 'react';
 
+import { Icon as IconType } from '~/components/global/Icon/Icon.types';
 import { KEYCODES } from '~/lib/constants';
 import { randomString } from '~/lib/utils/string';
+import { ui } from '~/lib/utils/ui-dictionary';
 
 import styles from './Autocomplete.styles';
 import { generateIDs, getItemDOMId } from './Autocomplete.utils';
@@ -19,7 +21,7 @@ import AutocompleteResultItemDefault from './AutocompleteResultItemDefault';
 const CONSTANTS = {
   DEFAULT_SELECTED_INDEX: -1,
   DEFAULT_VALUE: '',
-  MINIMUM_CHARACTER_BEFORE_ERROR: 3,
+  MINIMUM_CHARACTER_BEFORE_ERROR: 0,
 };
 
 export interface ResultItemProps {
@@ -31,14 +33,18 @@ export interface ResultItemProps {
   selectedIndex: number;
 }
 
-interface Props {
+export interface Props {
   children?: ReactChild;
+  clearSearchComponent?: string | JSX.Element;
   errorLabel: string | JSX.Element;
   focusOnMount?: boolean;
+  icon?: IconType;
   inputMaxLength?: number;
   inputValidationRegEx?: RegExp;
   inputValue?: string;
+  isLoadingResults?: boolean;
   label: string;
+  minimumCharacterBeforeError?: number;
   onChange: (value: string) => void;
   onInputResultMatch?: (inputMatchesResult: boolean) => void;
   onValueSelectionSuccess: (value: AutocompleteResult) => void;
@@ -52,17 +58,22 @@ interface Props {
 // Example: https://www.w3.org/TR/wai-aria-practices/examples/combobox/aria1.1pattern/listbox-combo.html (List Autocomplete with Automatic Selection)
 function Autocomplete({
   children,
+  clearSearchComponent = ui('common.search.cancelButtonClear'),
   errorLabel,
   focusOnMount = false,
+  icon,
   inputMaxLength,
   inputValidationRegEx,
   inputValue = CONSTANTS.DEFAULT_VALUE,
+  isLoadingResults,
   label,
+  minimumCharacterBeforeError = CONSTANTS.MINIMUM_CHARACTER_BEFORE_ERROR,
   onChange,
   onValueSelectionSuccess,
   onInputResultMatch,
   resultItemComponent: ResultItemComponent = AutocompleteResultItemDefault,
   results,
+  ...rest
 }: Props) {
   const [ids, setIds] = useState({
     invalidID: '',
@@ -85,7 +96,9 @@ function Autocomplete({
   const hasResults = results.length > 0;
   const validResults = results.find((result) => result.main.includes(value));
   const isInvalidInput =
-    !validResults && value.length > CONSTANTS.MINIMUM_CHARACTER_BEFORE_ERROR;
+    !validResults &&
+    value.length > minimumCharacterBeforeError &&
+    !isLoadingResults;
   const inputMatchesResult =
     !!validResults && validResults.main === value && !isInvalidInput;
 
@@ -195,7 +208,7 @@ function Autocomplete({
   };
 
   return (
-    <>
+    <div {...rest}>
       <div css={styles.inputContainer}>
         <label
           id={ids.labelID}
@@ -227,7 +240,12 @@ function Autocomplete({
           </div>
         </div>
 
-        <AutocompleteActions value={value} onClick={cancelSelection} />
+        <AutocompleteActions
+          clearSearchComponent={clearSearchComponent}
+          icon={icon}
+          value={value}
+          onClick={cancelSelection}
+        />
       </div>
       <ul
         aria-labelledby={ids.labelID}
@@ -255,7 +273,7 @@ function Autocomplete({
         )}
       </ul>
       {!shouldShowListbox && !isInvalidInput && children}
-    </>
+    </div>
   );
 }
 

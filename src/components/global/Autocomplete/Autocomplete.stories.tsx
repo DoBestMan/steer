@@ -1,6 +1,12 @@
 import { css } from '@emotion/core';
 import { action } from '@storybook/addon-actions';
+import { select, text } from '@storybook/addon-knobs';
 import { SetStateAction, useState } from 'react';
+
+import { locationAutocomplete as locationAutocompleteStyles } from '~/components/global/Autocomplete/Autocomplete.styles';
+import Icon from '~/components/global/Icon/Icon';
+import { ICONS } from '~/components/global/Icon/Icon.constants';
+import { COLORS } from '~/lib/constants';
 
 import Autocomplete from './Autocomplete';
 import { AutocompleteResult } from './AutocompleteResultItem';
@@ -11,6 +17,9 @@ export default {
 };
 
 const styles = {
+  clearSearch: css({
+    color: COLORS.LIGHT.GRAY_70,
+  }),
   errorLine: css({
     display: 'block',
   }),
@@ -46,6 +55,24 @@ const ZIP_CODES = [
   { main: '94502', secondary: 'secondary text for 94502' },
 ];
 
+// Simple hook to reuse autocomplete funcitonality across multiple stories
+interface UseAutocompleteProps {
+  onChange: (value: string) => void;
+  results: AutocompleteResult[];
+}
+
+const useAutocompleteProps = (): UseAutocompleteProps => {
+  const [results, setResults] = useState([]);
+  const onChange = (value: string) => {
+    setResults(startsWith(ZIP_CODES, value) as SetStateAction<never[]>);
+  };
+
+  return {
+    onChange,
+    results,
+  };
+};
+
 const startsWith = (list: AutocompleteResult[], comparisonString: string) =>
   comparisonString
     ? list.filter((item: AutocompleteResult) =>
@@ -55,27 +82,67 @@ const startsWith = (list: AutocompleteResult[], comparisonString: string) =>
 
 const handleSelectionSuccess = action('selection-success');
 
-export function DefaultAutocomplete() {
-  const [results, setResults] = useState([]);
-  const onChange = (value: string) => {
-    setResults(startsWith(ZIP_CODES, value) as SetStateAction<never[]>);
-  };
-  const errorLabel = (
-    <>
-      <span css={styles.errorLine}>Oops.</span>
-      <span css={styles.errorLine}>Please enter a valid zip code.</span>
-    </>
-  );
-  const handleInputResultMatch = action('input-result-match');
+const errorLabel = (
+  <>
+    <span css={styles.errorLine}>Oops.</span>
+    <span css={styles.errorLine}>Please enter a valid zip code.</span>
+  </>
+);
+const handleInputResultMatch = action('input-result-match');
+
+export function AutocompleteWithKnobs() {
+  const icon = select('Icon Name', ICONS, ICONS.CHEVRON_RIGHT);
+  const label = text('Label', 'Search...');
+  const clearSearchComponent = text('Clear search label', 'Clear');
+  const { results, onChange } = useAutocompleteProps();
 
   return (
     <Autocomplete
-      onChange={onChange}
-      results={results}
-      label="Enter ZIP Code"
+      clearSearchComponent={clearSearchComponent}
       errorLabel={errorLabel}
+      icon={icon}
+      label={label}
+      onChange={onChange}
       onInputResultMatch={handleInputResultMatch}
       onValueSelectionSuccess={handleSelectionSuccess}
+      results={results}
+    />
+  );
+}
+
+export function AutocompleteWithClearIcon() {
+  const { results, onChange } = useAutocompleteProps();
+
+  const clearSearchComponent = (
+    <Icon name={ICONS.CLEAR_SEARCH} css={styles.clearSearch} />
+  );
+
+  return (
+    <Autocomplete
+      clearSearchComponent={clearSearchComponent}
+      errorLabel={errorLabel}
+      label="Type to see icon"
+      onChange={onChange}
+      onInputResultMatch={handleInputResultMatch}
+      onValueSelectionSuccess={handleSelectionSuccess}
+      results={results}
+    />
+  );
+}
+
+export function LocationSpecificAutocomplete() {
+  const { results, onChange } = useAutocompleteProps();
+
+  return (
+    <Autocomplete
+      css={locationAutocompleteStyles}
+      errorLabel={errorLabel}
+      icon={ICONS.SEARCH}
+      label="Enter ZIP Code"
+      onChange={onChange}
+      onInputResultMatch={handleInputResultMatch}
+      onValueSelectionSuccess={handleSelectionSuccess}
+      results={results}
     />
   );
 }

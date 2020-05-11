@@ -1,7 +1,9 @@
 import { useCallback, useEffect, useState } from 'react';
 
 import Autocomplete from '~/components/global/Autocomplete/Autocomplete';
+import { locationAutocomplete as locationAutocompleteStyles } from '~/components/global/Autocomplete/Autocomplete.styles';
 import { AutocompleteResult } from '~/components/global/Autocomplete/AutocompleteResultItem';
+import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Markdown from '~/components/global/Markdown/Markdown';
 import { onlyNumbers } from '~/lib/utils/regex';
 import { ui } from '~/lib/utils/ui-dictionary';
@@ -77,6 +79,7 @@ function LocationContainer({
     undefined,
   );
   const [search, setSearch] = useState('');
+  const [isLoadingLocation, setIsLoadingLocation] = useState(false);
   const [isFreeShipping, setIsFreeShipping] = useState(false);
   const [
     autocomplete,
@@ -127,16 +130,20 @@ function LocationContainer({
           !didCancel &&
             status === window.google.maps.places.PlacesServiceStatus.OK &&
             setResults(filterPredictions(predictions));
+
+          setIsLoadingLocation(false);
         },
       );
     };
 
     if (search.length) {
       fetchPredictions();
+      setIsLoadingLocation(true);
     }
 
     return () => {
       didCancel = true;
+      setIsLoadingLocation(false);
     };
   }, [autocomplete, latLng, search]);
 
@@ -146,21 +153,29 @@ function LocationContainer({
 
   const errorLabel = <Markdown>{ui('location.errorLabel')}</Markdown>;
 
+  const hasResults = results.length > 0;
+
   return (
     <div css={styles.container}>
       <Autocomplete
+        css={locationAutocompleteStyles}
+        icon={ICONS.SEARCH}
         label="Enter your ZIP code"
         errorLabel={errorLabel}
         inputMaxLength={5}
         focusOnMount={focusInputOnMount}
         inputValidationRegEx={onlyNumbers}
         inputValue={inputValue}
+        isLoadingResults={isLoadingLocation}
+        minimumCharacterBeforeError={3}
         onChange={onChange}
         onInputResultMatch={setIsFreeShipping}
         onValueSelectionSuccess={onLocationChangeSuccess}
         results={results}
         resultItemComponent={AutocompleteResultItemLocation}
-      >
+      />
+
+      {!hasResults && (
         <>
           {currentLocation && (
             <span css={styles.currentLocation}>
@@ -173,7 +188,7 @@ function LocationContainer({
             onCurrentLocationError={onCurrentLocationError}
           />
         </>
-      </Autocomplete>
+      )}
 
       <LocationInfo isFreeShipping={isFreeShipping} />
     </div>

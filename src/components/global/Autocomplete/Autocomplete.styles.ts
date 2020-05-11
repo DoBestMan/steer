@@ -4,6 +4,13 @@ import { BORDERS, COLORS, SPACING, Z_INDEX } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const styles = {
+  actionIcon: css({
+    svg: {
+      display: 'block',
+      height: SPACING.SIZE_20,
+      width: SPACING.SIZE_20,
+    },
+  }),
   clearSearch: [
     typography.bodyCopy,
     css({
@@ -17,15 +24,14 @@ const styles = {
   input: [
     typography.primaryHeadline,
     css({
+      backgroundColor: 'inherit',
       border: 'none',
       width: '100%',
     }),
   ],
   inputContainer: css({
     alignItems: 'baseline',
-    borderBottom: BORDERS.SOLID_BLACK_1PX,
     display: 'flex',
-    paddingBottom: SPACING.SIZE_15,
     position: 'relative',
   }),
   label: [
@@ -47,13 +53,13 @@ const styles = {
     marginTop: 30,
     zIndex: Z_INDEX.FRONT,
   }),
-  searchIcon: css({
-    svg: {
-      display: 'block',
-      height: SPACING.SIZE_20,
-      width: SPACING.SIZE_20,
-    },
-  }),
 };
+
+export const locationAutocomplete = css({
+  '> div': {
+    borderBottom: BORDERS.SOLID_BLACK_1PX,
+    paddingBottom: SPACING.SIZE_15,
+  },
+});
 
 export default styles;
