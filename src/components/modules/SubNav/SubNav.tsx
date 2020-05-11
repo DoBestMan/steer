@@ -4,7 +4,7 @@ import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
-import { NAV_TARGETS } from '~/components/global/Nav/Nav.constants';
+import { NAV_TARGETS } from '~/components/modules/Nav/Nav.constants';
 import BrowseTires from '~/components/modules/SubNav/BrowseTires/BrowseTires';
 import { useNavContext } from '~/context/Nav.context';
 import { SiteMenuBrowseItem } from '~/data/models/SiteMenuBrowseItem';

@@ -11,7 +11,7 @@ interface Props {
   locationString: UserPersonalizationProps['locationString'];
 }
 
-function ConnectedNav({
+function NavContainer({
   isCustomerServiceEnabled = false,
   isHomepage = false,
   locationString,
@@ -24,4 +24,4 @@ function ConnectedNav({
   );
 }
 
-export default ConnectedNav;
+export default NavContainer;

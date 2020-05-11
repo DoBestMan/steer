@@ -1,4 +1,4 @@
-import { ActionType, LinkType } from '~/components/global/Nav/Nav.constants';
+import { ActionType, LinkType } from '~/components/modules/Nav/Nav.constants';
 import { LINK_ICON_POSITION, LINK_THEME, LINK_WEIGHT } from '~/lib/constants';
 
 import Link, { AnchorProps, ButtonProps } from './Link';

@@ -1,7 +1,7 @@
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import NavLink from '~/components/global/Link/NavLink';
-import { ActionType, LinkType } from '~/components/global/Nav/Nav.constants';
+import { ActionType, LinkType } from '~/components/modules/Nav/Nav.constants';
 import { useNavContext } from '~/context/Nav.context';
 import { SiteMenuBrowseItem } from '~/data/models/SiteMenuBrowseItem';
 import { useBreakpoints } from '~/hooks/useBreakpoints';

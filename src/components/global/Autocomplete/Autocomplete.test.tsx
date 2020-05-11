@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import AutocompleteResultItemLocation from '~/components/global/Location/AutocompleteResultItemLocation';
+import AutocompleteResultItemLocation from '~/components/modules/Location/AutocompleteResultItemLocation';
 import { KEYCODES } from '~/lib/constants';
 
 import Autocomplete from './Autocomplete';

@@ -1,9 +1,9 @@
 import { css } from '@emotion/core';
 
-import Nav from '~/components/global/Nav/Nav';
 import { COLORS } from '~/lib/constants';
 
-import ConnectedNav from './Nav.container';
+import Nav from './Nav';
+import NavContainer from './Nav.container';
 
 export default {
   component: Nav,
@@ -20,7 +20,7 @@ const styles = {
 export function NavHomepage() {
   return (
     <div css={styles.root}>
-      <ConnectedNav isHomepage locationString="Portland, OR" />
+      <NavContainer isHomepage locationString="Portland, OR" />
     </div>
   );
 }
@@ -28,7 +28,7 @@ export function NavHomepage() {
 export function NavOutsideBusinessHours() {
   return (
     <div css={styles.root}>
-      <ConnectedNav
+      <NavContainer
         isHomepage
         isCustomerServiceEnabled={false}
         locationString="Portland, OR"
@@ -40,7 +40,7 @@ export function NavOutsideBusinessHours() {
 export function NavBusinessHours() {
   return (
     <div css={styles.root}>
-      <ConnectedNav
+      <NavContainer
         isCustomerServiceEnabled
         isHomepage
         locationString="Portland, OR"
@@ -52,7 +52,7 @@ export function NavBusinessHours() {
 export function NavNotHomepage() {
   return (
     <div css={styles.root}>
-      <ConnectedNav locationString="Portland, OR" />
+      <NavContainer locationString="Portland, OR" />
     </div>
   );
 }
@@ -60,7 +60,7 @@ export function NavNotHomepage() {
 export function NavNoLocation() {
   return (
     <div css={styles.root}>
-      <ConnectedNav locationString="" />
+      <NavContainer locationString="" />
     </div>
   );
 }

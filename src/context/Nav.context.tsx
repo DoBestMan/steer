@@ -5,7 +5,7 @@ import {
   ActionType,
   LinkType,
   NAV_TARGETS,
-} from '~/components/global/Nav/Nav.constants';
+} from '~/components/modules/Nav/Nav.constants';
 import { createContext } from '~/lib/utils/context';
 
 import { UserPersonalizationProps } from './UserPersonalization.context';

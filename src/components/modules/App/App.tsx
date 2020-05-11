@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
-import Footer from '~/components/global/Footer/Footer';
-import ConnectedNav from '~/components/global/Nav/Nav.container';
+import Footer from '~/components/modules/Footer/Footer';
+import NavContainer from '~/components/modules/Nav/Nav.container';
 import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
 import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
 
@@ -14,7 +14,7 @@ function App({ children }: Props) {
   const { locationString } = useUserPersonalizationContext();
   return (
     <>
-      <ConnectedNav
+      <NavContainer
         isCustomerServiceEnabled={customerServiceEnabled}
         locationString={locationString}
       />

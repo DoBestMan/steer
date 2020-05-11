@@ -6,9 +6,10 @@
 
   - `src/components`
     - `src/components/global` - global reusable components
-    - `src/components/modules` - non-page components that are more complex than atomic components
+    - `src/components/modules` - non-page components that are more complex than atomic components (eg they have containers or external data files)
     - `src/components/pages` - page components
   - `src/hooks` - global hooks
+  - `src/context` - global context
   - `src/lib` - global types, constants and utils
   - `src/pages` - page components that map to NextJS routes
   - `src/styles` - global serialized styles
@@ -29,9 +30,9 @@ components/
 ```
 components/
   pages/
-     Homepage/
-        Homepage.tsx
-        Homepage.container.ts
+     HomePage/
+        HomePage.tsx // <HomePage />
+        HomePage.container.ts // <HomePageContainer />
 ```
 
 - Naming convention for constants is all caps and snake case, and enums are encouraged over objects. eg `FOO_BAR.BAZ` Component-specific constants should go at the top of the component unless there are many, in which case they should be in an adjacent file in the component directory. If a constant is used elsewhere in the code, it should be in `src/lib/constants`
