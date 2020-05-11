@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 
 import Icon from '~/components/global/Icon/Icon';
+import { UserPersonalizationUpdate } from '~/data/models/UserPersonalizationUpdate';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import { styles } from './Location.styles';
 
 interface Props {
   onCurrentLocationError: (error: string) => void;
-  onCurrentLocationSuccess: (zip: string) => void;
+  onCurrentLocationSuccess: (location: UserPersonalizationUpdate) => void;
 }
 
 const getBrowserLocation = (callback: PositionCallback) => {
@@ -60,7 +61,10 @@ function UseCurrentLocation({
               );
 
               if (zipCode) {
-                onCurrentLocationSuccess(zipCode);
+                onCurrentLocationSuccess({
+                  userLocationGooglePlacesId: results[0].place_id,
+                  userLocationZip: zipCode,
+                });
               } else {
                 onCurrentLocationError('No results found');
               }

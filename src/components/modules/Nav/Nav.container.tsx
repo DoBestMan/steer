@@ -5,19 +5,24 @@ import { UserPersonalizationProps } from '~/context/UserPersonalization.context'
 
 import Nav from './Nav';
 
-interface Props {
+interface Props extends UserPersonalizationProps {
   isCustomerServiceEnabled?: boolean;
   isHomepage?: boolean;
-  locationString: UserPersonalizationProps['locationString'];
 }
 
 function NavContainer({
   isCustomerServiceEnabled = false,
   isHomepage = false,
   locationString,
+  updateLocation,
+  userPersonalizationData,
 }: Props) {
   return (
-    <NavContextProvider locationString={locationString}>
+    <NavContextProvider
+      locationString={locationString}
+      updateLocation={updateLocation}
+      userPersonalizationData={userPersonalizationData}
+    >
       <Nav isHomepage={isHomepage} />
       <SubNav isCustomerServiceEnabled={isCustomerServiceEnabled} {...subnav} />
     </NavContextProvider>

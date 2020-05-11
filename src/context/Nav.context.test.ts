@@ -4,8 +4,13 @@ import { act } from 'react-test-renderer';
 import { NAV_TARGETS } from '~/components/modules/Nav/Nav.constants';
 
 import { useContextSetup } from './Nav.context';
+import { UserPersonalizationProps } from './UserPersonalization.context';
 
-const defaultContextProps = { locationString: '' };
+const defaultContextProps: UserPersonalizationProps = {
+  locationString: '',
+  updateLocation: () => {},
+  userPersonalizationData: null,
+};
 
 describe('useContextSetup', () => {
   test('updating active link', () => {
@@ -88,7 +93,10 @@ describe('useContextSetup', () => {
 
   test('creating links - personalization data', () => {
     const { result } = renderHook(() =>
-      useContextSetup({ locationString: 'Portland, OR' }),
+      useContextSetup({
+        ...defaultContextProps,
+        locationString: 'Portland, OR',
+      }),
     );
 
     expect(result.current.links).toEqual(

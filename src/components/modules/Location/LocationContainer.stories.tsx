@@ -1,7 +1,8 @@
 import { css } from '@emotion/core';
+import { action } from '@storybook/addon-actions';
 import { useState } from 'react';
 
-import { AutocompleteResult } from '~/components/global/Autocomplete/AutocompleteResultItem';
+import { UserPersonalizationUpdate } from '~/data/models/UserPersonalizationUpdate';
 
 import LocationContainer from './LocationContainer';
 
@@ -29,13 +30,15 @@ const onCurrentLocationError = (error: string) => {
 export function Location() {
   const [location, setLocation] = useState(currentLocation);
 
-  const handleLocationChangeSuccess = (location: AutocompleteResult) => {
-    const [cityName, stateAbbr] = location.secondary.split(', ');
+  const handleLocationChangeSuccess = (location: UserPersonalizationUpdate) => {
+    action(
+      `handleLocationChangeSuccess - id: ${location.userLocationGooglePlacesId}, zip: ${location.userLocationZip}`,
+    );
 
     const newLocation = {
-      cityName,
-      stateAbbr,
-      zip: location.main,
+      cityName: 'Brooklyn',
+      stateAbbr: 'NY',
+      zip: '11201',
     };
 
     setLocation(newLocation);

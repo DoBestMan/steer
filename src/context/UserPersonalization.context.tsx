@@ -1,13 +1,15 @@
 import { ReactNode, useEffect, useState } from 'react';
 
 import { UserPersonalization } from '~/data/models/UserPersonalization';
+import { UserPersonalizationUpdate } from '~/data/models/UserPersonalizationUpdate';
 import { apiBootstrap } from '~/lib/api/bootstrap';
+import { apiUpdateUserPersonalization } from '~/lib/api/users';
 import { fetchGetUserPersonalization } from '~/lib/fetch';
 import { createContext } from '~/lib/utils/context';
 
 export interface UserPersonalizationProps {
   locationString: string;
-  updateLocation: () => void;
+  updateLocation: (body: UserPersonalizationUpdate) => void;
   userPersonalizationData: UserPersonalization | null;
 }
 
@@ -34,8 +36,9 @@ export function useContextSetup() {
     getData();
   }, []);
 
-  async function updateLocation() {
-    // TODO https://simpletire.atlassian.net/browse/WCS-140
+  async function updateLocation(body: UserPersonalizationUpdate) {
+    const userPersonalization = await apiUpdateUserPersonalization(body);
+    setUserPersonalizationData(userPersonalization);
   }
 
   const location = userPersonalizationData?.userLocation;

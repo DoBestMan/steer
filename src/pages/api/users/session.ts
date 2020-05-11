@@ -6,8 +6,7 @@ import {
   backendCreateUserSession,
   backendGetUserPersonalization,
 } from '~/lib/backend/users';
-
-const BearerAuthorizationHeader = /^bearer (.+)$/i;
+import { getUserSessionId, hasAuthorizationHeader } from '~/lib/utils/api';
 
 type UserSessionResponse = NextApiResponse<{
   userPersonalization: UserPersonalization;
@@ -40,11 +39,7 @@ async function getUserSession(
   request: NextApiRequest,
   response: UserSessionResponse,
 ) {
-  const userSessionId = request.headers.authorization?.replace(
-    BearerAuthorizationHeader,
-    '$1',
-  );
-
+  const userSessionId = getUserSessionId(request);
   if (!userSessionId) {
     console.error('Invalid authentication');
     response.status(500).end();
@@ -52,7 +47,7 @@ async function getUserSession(
   }
 
   const userPersonalization = await backendGetUserPersonalization({
-    userId: 'me',
+    userSessionId,
   });
 
   response.json({
@@ -69,12 +64,9 @@ export default async (
 
   response.setHeader('Cache-control', 'no-cache');
 
-  if (
-    !request.headers.authorization ||
-    !BearerAuthorizationHeader.test(request.headers.authorization)
-  ) {
-    await createUserSession(request, response);
-  } else {
+  if (hasAuthorizationHeader(request)) {
     await getUserSession(request, response);
+  } else {
+    await createUserSession(request, response);
   }
 };

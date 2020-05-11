@@ -23,41 +23,39 @@ export async function backendCreateUserSession({ userIp }: { userIp: string }) {
 }
 
 export async function backendGetUserPersonalization({
-  userId,
+  userSessionId,
 }: {
-  userId: string;
+  userSessionId: string;
 }) {
   const response = await fetch<UserPersonalization>({
-    endpoint: '/v1/users/{userId}/personalization',
+    endpoint: '/v1/users/{userSessionId}/personalization',
     includeAuthorization: true,
     method: 'get',
     params: {
-      userId,
+      userSessionId,
     },
   });
 
   return response;
 }
 
-export async function backendSetUserPersonalization({
+export async function backendUpdateUserPersonalization({
   gaClientId,
-  userId,
+  userLocationGooglePlacesId,
   userLocationZip,
-}: {
-  gaClientId: string | null;
-  userId: string;
-  userLocationZip: string | null;
-}) {
+  userSessionId,
+}: { userSessionId: string } & UserPersonalizationUpdate) {
   const response = await fetch<UserPersonalization, UserPersonalizationUpdate>({
     body: {
       gaClientId,
+      userLocationGooglePlacesId,
       userLocationZip,
     },
-    endpoint: '/v1/users/{userId}/personalization',
+    endpoint: '/v1/users/{userSessionId}/personalization',
     includeAuthorization: true,
-    method: 'post',
+    method: 'put',
     params: {
-      userId,
+      userSessionId,
     },
   });
 

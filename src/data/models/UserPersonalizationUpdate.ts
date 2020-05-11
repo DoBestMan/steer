@@ -5,10 +5,15 @@ export interface UserPersonalizationUpdate {
   /**
    * User Google Analytics Client ID
    */
-  gaClientId: string | null;
+  gaClientId?: string | null;
+
+  /**
+   * User Google Places ID
+   */
+  userLocationGooglePlacesId?: string | null;
 
   /**
    * User ZIP Code
    */
-  userLocationZip: string | null;
+  userLocationZip?: string | null;
 }

@@ -79,8 +79,8 @@ describe('autocomplete', () => {
       <Autocomplete
         onChange={jest.fn()}
         results={[
-          { main: '08203', secondary: 'secondary text for 08203' },
-          { main: '10019', secondary: 'secondary text for 10019' },
+          { id: '08203', main: '08203', secondary: 'secondary text for 08203' },
+          { id: '10019', main: '10019', secondary: 'secondary text for 10019' },
         ]}
         label="Enter input"
         errorLabel="Invalid input"
@@ -135,8 +135,8 @@ describe('autocomplete', () => {
       <Autocomplete
         onChange={jest.fn()}
         results={[
-          { main: '08203', secondary: 'secondary text for 08203' },
-          { main: '09019', secondary: 'secondary text for 09019' },
+          { id: '08203', main: '08203', secondary: 'secondary text for 08203' },
+          { id: '09019', main: '09019', secondary: 'secondary text for 09019' },
         ]}
         label="Enter input"
         errorLabel="Invalid input"
@@ -189,8 +189,8 @@ describe('autocomplete', () => {
       <Autocomplete
         onChange={jest.fn()}
         results={[
-          { main: '08203', secondary: 'secondary text for 08203' },
-          { main: '10019', secondary: 'secondary text for 10019' },
+          { id: '08203', main: '08203', secondary: 'secondary text for 08203' },
+          { id: '10019', main: '10019', secondary: 'secondary text for 10019' },
         ]}
         label="Enter input"
         errorLabel="Invalid input"
@@ -228,8 +228,8 @@ describe('autocomplete', () => {
       <Autocomplete
         onChange={jest.fn()}
         results={[
-          { main: '08203', secondary: 'secondary text for 08203' },
-          { main: '10019', secondary: 'secondary text for 10019' },
+          { id: '08203', main: '08203', secondary: 'secondary text for 08203' },
+          { id: '10019', main: '10019', secondary: 'secondary text for 10019' },
         ]}
         label="Enter input"
         errorLabel="Invalid input"

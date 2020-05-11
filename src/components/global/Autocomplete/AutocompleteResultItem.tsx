@@ -1,9 +1,10 @@
 import { ReactNode } from 'react';
 
-export type AutocompleteResult = {
+export interface AutocompleteResult {
+  id: string;
   main: string;
   secondary: string;
-};
+}
 
 interface Props {
   children: ReactNode;

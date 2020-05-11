@@ -3,8 +3,10 @@ import { useCallback, useEffect, useState } from 'react';
 import Autocomplete from '~/components/global/Autocomplete/Autocomplete';
 import { locationAutocomplete as locationAutocompleteStyles } from '~/components/global/Autocomplete/Autocomplete.styles';
 import { AutocompleteResult } from '~/components/global/Autocomplete/AutocompleteResultItem';
+import GridItem from '~/components/global/Grid/GridItem';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Markdown from '~/components/global/Markdown/Markdown';
+import { UserPersonalizationUpdate } from '~/data/models/UserPersonalizationUpdate';
 import { onlyNumbers } from '~/lib/utils/regex';
 import { ui } from '~/lib/utils/ui-dictionary';
 
@@ -14,14 +16,14 @@ import LocationInfo from './LocationInfo';
 import UseCurrentLocation from './UseCurrentLocation';
 
 interface Props {
-  currentLocation?: {
+  currentLocation: {
     cityName: string | null;
     stateAbbr: string | null;
     zip: string | null;
-  };
+  } | null;
   focusInputOnMount?: boolean;
   onCurrentLocationError: (error: string) => void;
-  onLocationChangeSuccess: (location: AutocompleteResult) => void;
+  onLocationChangeSuccess: (location: UserPersonalizationUpdate) => void;
 }
 
 const CONSTANTS = {
@@ -48,6 +50,7 @@ const filterPredictions = (
   predictions
     .filter((prediction) => prediction.types.includes('postal_code'))
     .map((result) => ({
+      id: result.place_id,
       main: result.structured_formatting.main_text,
       secondary: result.structured_formatting.secondary_text.replace(
         ', USA',
@@ -73,7 +76,6 @@ function LocationContainer({
   onCurrentLocationError,
   onLocationChangeSuccess,
 }: Props) {
-  const [inputValue, setInputValue] = useState('');
   const [results, setResults] = useState<Array<AutocompleteResult>>([]);
   const [latLng, setLatLng] = useState<google.maps.LatLng | undefined>(
     undefined,
@@ -147,16 +149,18 @@ function LocationContainer({
     };
   }, [autocomplete, latLng, search]);
 
-  const onCurrentLocationSuccess = (zip: string) => {
-    setInputValue(zip);
-  };
-
   const errorLabel = <Markdown>{ui('location.errorLabel')}</Markdown>;
 
   const hasResults = results.length > 0;
+  function onValueSelectionSuccess(result: AutocompleteResult) {
+    onLocationChangeSuccess({
+      userLocationGooglePlacesId: result.id,
+      userLocationZip: result.main,
+    });
+  }
 
   return (
-    <div css={styles.container}>
+    <GridItem css={styles.container}>
       <Autocomplete
         css={locationAutocompleteStyles}
         icon={ICONS.SEARCH}
@@ -165,12 +169,11 @@ function LocationContainer({
         inputMaxLength={5}
         focusOnMount={focusInputOnMount}
         inputValidationRegEx={onlyNumbers}
-        inputValue={inputValue}
         isLoadingResults={isLoadingLocation}
         minimumCharacterBeforeError={3}
         onChange={onChange}
         onInputResultMatch={setIsFreeShipping}
-        onValueSelectionSuccess={onLocationChangeSuccess}
+        onValueSelectionSuccess={onValueSelectionSuccess}
         results={results}
         resultItemComponent={AutocompleteResultItemLocation}
       />
@@ -184,14 +187,14 @@ function LocationContainer({
             </span>
           )}
           <UseCurrentLocation
-            onCurrentLocationSuccess={onCurrentLocationSuccess}
+            onCurrentLocationSuccess={onLocationChangeSuccess}
             onCurrentLocationError={onCurrentLocationError}
           />
         </>
       )}
 
       <LocationInfo isFreeShipping={isFreeShipping} />
-    </div>
+    </GridItem>
   );
 }
 

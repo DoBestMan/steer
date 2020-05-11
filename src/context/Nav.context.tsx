@@ -24,15 +24,17 @@ interface NavContextProps {
   links: Array<LinkType | ActionType>;
   linksMobile: Array<LinkType | ActionType>;
   toggleSubNav: () => void;
+  updateLocation: UserPersonalizationProps['updateLocation'];
+  userPersonalizationData: UserPersonalizationProps['userPersonalizationData'];
 }
 
 const NavContext = createContext<NavContextProps>();
 
-interface BuildLinksProps {
+function buildLinks({
+  locationString,
+}: {
   locationString: UserPersonalizationProps['locationString'];
-}
-
-function buildLinks({ locationString }: BuildLinksProps) {
+}) {
   return {
     links: [
       { target: NAV_TARGETS.BROWSE_TIRES, text: 'Browse tires' },
@@ -61,12 +63,16 @@ function buildLinks({ locationString }: BuildLinksProps) {
 }
 
 // Exported for testing only
-export function useContextSetup(buildLinksProps: BuildLinksProps) {
+export function useContextSetup({
+  locationString,
+  updateLocation,
+  userPersonalizationData,
+}: UserPersonalizationProps) {
   const [isSubNavOpen, setIsSubNavOpen] = useState(false);
   const [activeLink, setActiveLink] = useState('');
   const [activeCategory, setActiveCategory] = useState('');
-  const { links, linksMobile } = useMemo(() => buildLinks(buildLinksProps), [
-    buildLinksProps,
+  const { links, linksMobile } = useMemo(() => buildLinks({ locationString }), [
+    locationString,
   ]);
   return {
     activeCategory,
@@ -99,16 +105,24 @@ export function useContextSetup(buildLinksProps: BuildLinksProps) {
       setIsSubNavOpen(!isSubNavOpen);
       setActiveLink(NAV_TARGETS.BROWSE_TIRES);
     },
+    updateLocation,
+    userPersonalizationData,
   };
 }
 
 export function NavContextProvider({
   children,
   locationString,
+  updateLocation,
+  userPersonalizationData,
 }: {
   children: ReactNode;
-} & BuildLinksProps) {
-  const value = useContextSetup({ locationString });
+} & UserPersonalizationProps) {
+  const value = useContextSetup({
+    locationString,
+    updateLocation,
+    userPersonalizationData,
+  });
   return <NavContext.Provider value={value}>{children}</NavContext.Provider>;
 }
 

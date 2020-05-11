@@ -11,12 +11,18 @@ interface Props {
 
 function App({ children }: Props) {
   const { customerServiceEnabled } = useSiteGlobalsContext();
-  const { locationString } = useUserPersonalizationContext();
+  const {
+    updateLocation,
+    locationString,
+    userPersonalizationData,
+  } = useUserPersonalizationContext();
   return (
     <>
       <NavContainer
         isCustomerServiceEnabled={customerServiceEnabled}
         locationString={locationString}
+        updateLocation={updateLocation}
+        userPersonalizationData={userPersonalizationData}
       />
       {children}
       <Footer isCustomerServiceEnabled={customerServiceEnabled} />

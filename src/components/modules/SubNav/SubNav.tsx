@@ -4,11 +4,13 @@ import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
+import LocationContainer from '~/components/modules/Location/LocationContainer';
 import { NAV_TARGETS } from '~/components/modules/Nav/Nav.constants';
 import BrowseTires from '~/components/modules/SubNav/BrowseTires/BrowseTires';
 import { useNavContext } from '~/context/Nav.context';
 import { SiteMenuBrowseItem } from '~/data/models/SiteMenuBrowseItem';
 import { SiteMenuLearn } from '~/data/models/SiteMenuLearn';
+import { UserPersonalizationUpdate } from '~/data/models/UserPersonalizationUpdate';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { ui } from '~/lib/utils/ui-dictionary';
 
@@ -35,6 +37,8 @@ function SubNav({
     createSelectCategoryHandler,
     isSubNavOpen,
     activeLink,
+    updateLocation,
+    userPersonalizationData,
   } = useNavContext();
 
   const { isMobile } = useBreakpoints();
@@ -60,6 +64,20 @@ function SubNav({
     isMobile,
     siteMenuBrowseList,
   ]);
+
+  // TODO Final error functionality
+  // https://simpletire.atlassian.net/browse/WCS-127
+  function onCurrentLocationError(error: string) {
+    console.error(error);
+  }
+
+  // TODO Final success functionality
+  // https://simpletire.atlassian.net/browse/WCS-127
+  // Not: THis function is getting called repeatedly right now in the "Use Current Location" flow.
+  // Hopefully this will resolve itself after the flow is fully wired up and the location component unmounts. -SM
+  function onLocationChangeSuccess(location: UserPersonalizationUpdate) {
+    updateLocation(location);
+  }
 
   return (
     <SubNavModal
@@ -91,9 +109,15 @@ function SubNav({
                 siteMenuLearn={siteMenuLearn}
               />
             )}
-            {/* TODO LocationContainer
-                   https://simpletire.atlassian.net/browse/WCS-127 */}
-            {activeLink === NAV_TARGETS.LOCATION && <span />}
+            {/* Temporarily hiding on mobile until final UI implementation
+                TODO https://simpletire.atlassian.net/browse/WCS-127 */}
+            {activeLink === NAV_TARGETS.LOCATION && !isMobile && (
+              <LocationContainer
+                currentLocation={userPersonalizationData?.userLocation ?? null}
+                onCurrentLocationError={onCurrentLocationError}
+                onLocationChangeSuccess={onLocationChangeSuccess}
+              />
+            )}
           </GridItem>
         </GridItem>
       </Grid>

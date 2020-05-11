@@ -1,5 +1,7 @@
 import { css } from '@emotion/core';
+import { action } from '@storybook/addon-actions';
 
+import { UserPersonalizationProps } from '~/context/UserPersonalization.context';
 import { COLORS } from '~/lib/constants';
 
 import Nav from './Nav';
@@ -17,10 +19,16 @@ const styles = {
   }),
 };
 
+const defaultContextProps: UserPersonalizationProps = {
+  locationString: 'Portland, OR',
+  updateLocation: action('updateLocation'),
+  userPersonalizationData: null,
+};
+
 export function NavHomepage() {
   return (
     <div css={styles.root}>
-      <NavContainer isHomepage locationString="Portland, OR" />
+      <NavContainer isHomepage {...defaultContextProps} />
     </div>
   );
 }
@@ -31,7 +39,7 @@ export function NavOutsideBusinessHours() {
       <NavContainer
         isHomepage
         isCustomerServiceEnabled={false}
-        locationString="Portland, OR"
+        {...defaultContextProps}
       />
     </div>
   );
@@ -43,7 +51,7 @@ export function NavBusinessHours() {
       <NavContainer
         isCustomerServiceEnabled
         isHomepage
-        locationString="Portland, OR"
+        {...defaultContextProps}
       />
     </div>
   );
@@ -52,7 +60,7 @@ export function NavBusinessHours() {
 export function NavNotHomepage() {
   return (
     <div css={styles.root}>
-      <NavContainer locationString="Portland, OR" />
+      <NavContainer {...defaultContextProps} />
     </div>
   );
 }
@@ -60,7 +68,7 @@ export function NavNotHomepage() {
 export function NavNoLocation() {
   return (
     <div css={styles.root}>
-      <NavContainer locationString="" />
+      <NavContainer {...defaultContextProps} locationString="" />
     </div>
   );
 }
