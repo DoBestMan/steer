@@ -9,21 +9,13 @@ import {
   DEFAULT_SCENERY,
   DEFAULT_VEHICLE,
   SCENERY_IMG_MAP,
-  VEHICLE_IMG_MAP,
 } from './HomeHeader.constants';
 import styles from './HomeHeader.styles';
 
-function HomeHeader({
-  body,
-  eyebrow,
-  sceneryType,
-  title,
-  vehicleType,
-}: SiteHero) {
+function HomeHeader({ body, eyebrow, sceneryType, title }: SiteHero) {
   const landscapeImg =
     (sceneryType && SCENERY_IMG_MAP[sceneryType]) || DEFAULT_SCENERY;
-  const vehicleImage =
-    (vehicleType && VEHICLE_IMG_MAP[vehicleType]) || DEFAULT_VEHICLE;
+  const vehicleImage = DEFAULT_VEHICLE;
   const backgroundImage = {
     backgroundImage: `url(${landscapeImg})`,
   };

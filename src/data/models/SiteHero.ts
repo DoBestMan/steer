@@ -23,11 +23,6 @@ export interface SiteHero {
   title: string;
 
   /**
-   * Type of vehicle, supported by the front-end
-   */
-  vehicleType: string | null;
-
-  /**
    * Type of the current weather
    */
   weatherType: string | null;
