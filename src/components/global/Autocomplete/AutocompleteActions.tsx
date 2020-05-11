@@ -1,4 +1,3 @@
-import Button from '~/components/global/Button/Button';
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import { ui } from '~/lib/utils/ui-dictionary';
@@ -13,9 +12,9 @@ interface SearchOrClearIconProps {
 function AutocompleteActions({ onClick, value }: SearchOrClearIconProps) {
   if (value) {
     return (
-      <Button onClick={onClick} css={styles.clearSearch}>
+      <button onClick={onClick} css={styles.clearSearch}>
         {ui('search.cancelButtonClear')}
-      </Button>
+      </button>
     );
   }
   return <Icon name={ICONS.SEARCH} css={styles.searchIcon} />;

@@ -1,7 +1,6 @@
 import { ReactChild } from 'react';
 import ReactModal from 'react-modal';
 
-import Button from '~/components/global/Button/Button';
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 
@@ -38,20 +37,20 @@ function SubNavModal({
     >
       {onBack && (
         <div css={styles.actions}>
-          <Button
+          <button
             aria-label="Return to main navigation"
             onClick={onBack}
             css={styles.action}
           >
             <Icon name={ICONS.CHEVRON_LEFT} />
-          </Button>
-          <Button
+          </button>
+          <button
             aria-label={`Close ${contentLabel}`}
             onClick={onClose}
             css={styles.action}
           >
             <Icon name={ICONS.CLOSE} />
-          </Button>
+          </button>
         </div>
       )}
       {children}

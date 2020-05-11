@@ -1,4 +1,3 @@
-import Button from '~/components/global/Button/Button';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import Icon from '~/components/global/Icon/Icon';
@@ -65,12 +64,12 @@ function Nav({ isHomepage }: Props) {
           ))}
         </span>
         <li css={[styles.listItem, styles.hamburger, styles.iconButton]}>
-          <Button
+          <button
             aria-label={CONSTANTS.MOBILE_MENU_ARIA_LABEL}
             onClick={toggleSubNav}
           >
             <Icon name={ICONS.MENU} />
-          </Button>
+          </button>
         </li>
       </GridItem>
     </Grid>

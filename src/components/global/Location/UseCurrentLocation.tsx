@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 
-import Button from '~/components/global/Button/Button';
 import Icon from '~/components/global/Icon/Icon';
 import { ui } from '~/lib/utils/ui-dictionary';
 
@@ -77,12 +76,10 @@ function UseCurrentLocation({
   }, [latlng, onCurrentLocationSuccess, onCurrentLocationError]);
 
   return (
-    <Button css={styles.useCurrentLocationButton} onClick={handleOnClick}>
-      <>
-        {ui('location.useCurrentLocationLabel')}
-        <Icon css={styles.useCurrentLocationIcon} name="geolocation" />
-      </>
-    </Button>
+    <button css={styles.useCurrentLocationButton} onClick={handleOnClick}>
+      {ui('location.useCurrentLocationLabel')}
+      <Icon css={styles.useCurrentLocationIcon} name="geolocation" />
+    </button>
   );
 }
 

@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react';
 
-import Button from '~/components/global/Button/Button';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import Icon from '~/components/global/Icon/Icon';
@@ -71,13 +70,13 @@ function SubNav({
       isOpen={isSubNavOpen}
     >
       <Grid css={styles.root}>
-        <Button
+        <button
           aria-label={ui('nav.close')}
           css={[styles.action, styles.close]}
           onClick={handleCloseSubNav}
         >
           <Icon name={ICONS.CLOSE} />
-        </Button>
+        </button>
         <GridItem fullbleedS fullbleedM gridColumnL="8/15" css={styles.subnav}>
           <div css={styles.border} />
           <SubNavLinks siteMenuBrowseList={siteMenuBrowseList} />

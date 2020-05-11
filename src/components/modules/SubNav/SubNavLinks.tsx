@@ -1,4 +1,3 @@
-import Button from '~/components/global/Button/Button';
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import NavLink from '~/components/global/Link/NavLink';
@@ -51,12 +50,12 @@ function SubNavLinks({ siteMenuBrowseList }: Props) {
         <span css={styles.linkSection}>
           {iconLinks.map(renderLink)}
           <li css={[styles.link, styles.closeSubNav]}>
-            <Button
+            <button
               aria-label="Close navigation modal"
               onClick={handleCloseSubNav}
             >
               <Icon name={ICONS.CLOSE} />
-            </Button>
+            </button>
           </li>
         </span>
       </ul>

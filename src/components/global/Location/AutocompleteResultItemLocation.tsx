@@ -1,7 +1,6 @@
 import { ResultItemProps } from '~/components/global/Autocomplete/Autocomplete';
 import { getItemDOMId } from '~/components/global/Autocomplete/Autocomplete.utils';
 import AutocompleteResultsItem from '~/components/global/Autocomplete/AutocompleteResultItem';
-import Button from '~/components/global/Button/Button';
 
 import styles from './AutocompleteResultItemLocation.styles';
 
@@ -28,19 +27,17 @@ function AutocompleteResultItemLocation({
       css={styles.listboxItem}
       role="option"
     >
-      <Button
+      <button
         tabIndex={-1}
         onClick={handleItemClicked}
         css={[isSelected && styles.listboxItemSelected]}
       >
-        <>
-          <span css={styles.listboxItemHighlight}>{inputValue}</span>
-          {main.replace(inputValue, '')}{' '}
-          {secondary && (
-            <span css={styles.listboxItemSecondary}>{secondary}</span>
-          )}
-        </>
-      </Button>
+        <span css={styles.listboxItemHighlight}>{inputValue}</span>
+        {main.replace(inputValue, '')}{' '}
+        {secondary && (
+          <span css={styles.listboxItemSecondary}>{secondary}</span>
+        )}
+      </button>
     </AutocompleteResultsItem>
   );
 }
