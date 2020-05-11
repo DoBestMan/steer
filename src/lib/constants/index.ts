@@ -2,6 +2,7 @@ export * from './accessibility';
 export * from './breakpoints.types';
 export * from './breakpoints';
 export * from './borders';
+export * from './buttons.types';
 export * from './colors';
 export * from './easing';
 export * from './grid';
