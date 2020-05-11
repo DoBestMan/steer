@@ -1,44 +1,59 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
+import {
+  getScroll,
+  SCROLL_DIRECTION,
+  subscribeScroll,
+} from '~/lib/helpers/scroll';
 import { isBrowser } from '~/lib/utils/browser';
 
-enum SCROLL_DIRECTION {
-  DOWN = 'down',
-  NONE = '',
-  UP = 'up',
-}
+type UseScroll = {
+  direction: SCROLL_DIRECTION;
+  scrollX: number;
+  scrollY: number;
+};
 
-export function useScroll() {
-  const [lastScroll, setLastScroll] = useState(0);
-  const [scroll, setScroll] = useState(0);
-  const [scrollDirection, setDirection] = useState<SCROLL_DIRECTION>(
-    SCROLL_DIRECTION.NONE,
-  );
+type UseScrollCallback = (props: UseScroll) => void;
 
-  function scrollListener() {
-    setScroll(window.scrollY);
-  }
-
+/*
+ * How to use
+ *
+ * Using scroll value in a "normal" way (reading values on render)
+ * would trigger a render on every new scroll value
+ *
+ * Pass a callback to `useScroll()` to read the values,
+ * and change the render the way you want
+ *
+ * useScroll((scroll) => {
+ *  console.log('scrollY', scroll.scrollY);
+ * });
+ */
+export function useScroll(callback?: UseScrollCallback): UseScroll {
   useEffect(() => {
-    if (scroll !== lastScroll && lastScroll !== window.scrollY) {
-      setLastScroll(scroll);
-      setDirection(
-        lastScroll > scroll ? SCROLL_DIRECTION.UP : SCROLL_DIRECTION.DOWN,
-      );
-    }
-  }, [lastScroll, scroll]);
-
-  useEffect(() => {
-    if (isBrowser()) {
-      window.addEventListener('scroll', scrollListener);
+    if (!isBrowser || !callback) {
+      return;
     }
 
-    // Cleanup on unmount
-    return () => window.removeEventListener('scroll', scrollListener);
-  }, []);
+    function cb() {
+      if (callback) {
+        callback({
+          direction: getScroll().direction,
+          scrollX: getScroll().x,
+          scrollY: getScroll().y,
+        });
+      }
+    }
+
+    const subScroll = subscribeScroll(cb);
+
+    return () => {
+      subScroll();
+    };
+  }, [callback]);
 
   return {
-    scrollDirection,
-    scrollY: scroll,
+    direction: getScroll().direction,
+    scrollX: getScroll().x,
+    scrollY: getScroll().y,
   };
 }

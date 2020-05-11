@@ -9,3 +9,12 @@ export function hasNativeLoadingSupport() {
     'loading' in window.HTMLImageElement.prototype
   );
 }
+
+export function hasIntersectionObserver() {
+  return (
+    isBrowser() &&
+    !!window.IntersectionObserver &&
+    !!window.IntersectionObserverEntry &&
+    'intersectionRatio' in window.IntersectionObserverEntry.prototype
+  );
+}
