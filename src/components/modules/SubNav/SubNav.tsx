@@ -8,13 +8,14 @@ import LocationContainer from '~/components/modules/Location/LocationContainer';
 import { NAV_TARGETS } from '~/components/modules/Nav/Nav.types';
 import BrowseTires from '~/components/modules/SubNav/BrowseTires/BrowseTires';
 import { useNavContext } from '~/context/Nav.context';
+import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
 import { SiteMenuBrowseItem } from '~/data/models/SiteMenuBrowseItem';
 import { SiteMenuLearn } from '~/data/models/SiteMenuLearn';
 import { UserPersonalizationUpdate } from '~/data/models/UserPersonalizationUpdate';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { ui } from '~/lib/utils/ui-dictionary';
 
-import Learn from './Learn/Learn';
+import LearnContainer from './Learn/Learn.container';
 import styles from './SubNav.styles';
 import SubNavLinks from './SubNavLinks';
 import SubNavModal from './SubNavModal';
@@ -37,9 +38,11 @@ function SubNav({
     createSelectCategoryHandler,
     isSubNavOpen,
     activeLink,
+  } = useNavContext();
+  const {
     updateLocation,
     userPersonalizationData,
-  } = useNavContext();
+  } = useUserPersonalizationContext();
 
   const { isMobile } = useBreakpoints();
 
@@ -104,7 +107,7 @@ function SubNav({
               />
             )}
             {activeLink === NAV_TARGETS.LEARN && (
-              <Learn
+              <LearnContainer
                 isCustomerServiceEnabled={isCustomerServiceEnabled}
                 siteMenuLearn={siteMenuLearn}
               />

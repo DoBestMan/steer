@@ -8,9 +8,12 @@ import {
 } from '~/components/modules/Nav/Nav.types';
 import { createContext } from '~/lib/utils/context';
 
-import { UserPersonalizationProps } from './UserPersonalization.context';
+import {
+  UserPersonalizationProps,
+  useUserPersonalizationContext,
+} from './UserPersonalization.context';
 
-interface NavContextProps {
+export interface NavContextProps {
   activeCategory: string;
   activeLink: string;
   createSelectCategoryHandler: (category: string) => () => void;
@@ -24,8 +27,6 @@ interface NavContextProps {
   links: Array<LinkType | ActionType>;
   linksMobile: Array<LinkType | ActionType>;
   toggleSubNav: () => void;
-  updateLocation: UserPersonalizationProps['updateLocation'];
-  userPersonalizationData: UserPersonalizationProps['userPersonalizationData'];
 }
 
 const NavContext = createContext<NavContextProps>();
@@ -63,14 +64,11 @@ function buildLinks({
 }
 
 // Exported for testing only
-export function useContextSetup({
-  locationString,
-  updateLocation,
-  userPersonalizationData,
-}: UserPersonalizationProps) {
+export function useContextSetup() {
   const [isSubNavOpen, setIsSubNavOpen] = useState(false);
   const [activeLink, setActiveLink] = useState('');
   const [activeCategory, setActiveCategory] = useState('');
+  const { locationString } = useUserPersonalizationContext();
   const { links, linksMobile } = useMemo(() => buildLinks({ locationString }), [
     locationString,
   ]);
@@ -105,24 +103,11 @@ export function useContextSetup({
       setIsSubNavOpen(!isSubNavOpen);
       setActiveLink(NAV_TARGETS.BROWSE_TIRES);
     },
-    updateLocation,
-    userPersonalizationData,
   };
 }
 
-export function NavContextProvider({
-  children,
-  locationString,
-  updateLocation,
-  userPersonalizationData,
-}: {
-  children: ReactNode;
-} & UserPersonalizationProps) {
-  const value = useContextSetup({
-    locationString,
-    updateLocation,
-    userPersonalizationData,
-  });
+export function NavContextProvider({ children }: { children: ReactNode }) {
+  const value = useContextSetup();
   return <NavContext.Provider value={value}>{children}</NavContext.Provider>;
 }
 

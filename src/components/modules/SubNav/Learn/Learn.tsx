@@ -5,7 +5,7 @@ import Link from '~/components/global/Link/Link';
 import EmailSupport from '~/components/modules/Support/EmailSupport';
 import PhoneSupport from '~/components/modules/Support/PhoneSupport';
 import SupportHeading from '~/components/modules/Support/SupportHeading';
-import { useNavContext } from '~/context/Nav.context';
+import { NavContextProps } from '~/context/Nav.context';
 import { SiteMenuLearn } from '~/data/models/SiteMenuLearn';
 import { LINK_THEME } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
@@ -14,13 +14,19 @@ import SubNavContentWrapper from '../SubNavContentWrapper';
 import { steps } from './Learn.data';
 import styles from './Learn.styles';
 
-interface Props {
+export interface LearnProps {
+  handleClearLink: NavContextProps['handleClearLink'];
+  handleCloseSubNav: NavContextProps['handleCloseSubNav'];
   isCustomerServiceEnabled: boolean;
   siteMenuLearn: SiteMenuLearn;
 }
 
-function Learn({ isCustomerServiceEnabled, siteMenuLearn }: Props) {
-  const { handleClearLink, handleCloseSubNav } = useNavContext();
+function Learn({
+  isCustomerServiceEnabled,
+  siteMenuLearn,
+  handleClearLink,
+  handleCloseSubNav,
+}: LearnProps) {
   return (
     <SubNavContentWrapper
       onBack={handleClearLink}

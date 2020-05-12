@@ -30,7 +30,7 @@ export interface SiteMenuBrowseGroupItem {
     /**
      * Accent property for list item
      */
-    flair: FlairType;
+    flair: FlairType | null;
 
     icon: SiteIcon | SiteImage | null;
     /**

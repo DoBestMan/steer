@@ -1,11 +1,10 @@
 import SubNav from '~/components/modules/SubNav/SubNav';
 import subnav from '~/components/modules/SubNav/SubNav.mocks';
 import { NavContextProvider } from '~/context/Nav.context';
-import { UserPersonalizationProps } from '~/context/UserPersonalization.context';
 
 import Nav from './Nav';
 
-interface Props extends UserPersonalizationProps {
+interface Props {
   isCustomerServiceEnabled?: boolean;
   isHomepage?: boolean;
 }
@@ -13,16 +12,9 @@ interface Props extends UserPersonalizationProps {
 function NavContainer({
   isCustomerServiceEnabled = false,
   isHomepage = false,
-  locationString,
-  updateLocation,
-  userPersonalizationData,
 }: Props) {
   return (
-    <NavContextProvider
-      locationString={locationString}
-      updateLocation={updateLocation}
-      userPersonalizationData={userPersonalizationData}
-    >
+    <NavContextProvider>
       <Nav isHomepage={isHomepage} />
       <SubNav isCustomerServiceEnabled={isCustomerServiceEnabled} {...subnav} />
     </NavContextProvider>
