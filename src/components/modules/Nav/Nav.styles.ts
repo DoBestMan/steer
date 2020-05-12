@@ -2,12 +2,16 @@ import { css } from '@emotion/core';
 
 import { COLORS, MQ, SPACING } from '~/lib/constants';
 
+export const NAV_CONTENT_HEIGHT = 20;
 const CONSTANTS = {
   LOGO_SIZE: 130,
   LOGO_SIZE_SMALL: 108,
 };
 
 const styles = {
+  container: css({
+    height: NAV_CONTENT_HEIGHT,
+  }),
   hamburger: {
     display: 'inline-flex',
     marginLeft: SPACING.SIZE_10,
@@ -15,24 +19,13 @@ const styles = {
       display: 'none',
     },
   },
-  hide: css({
-    display: 'none',
-  }),
-  iconButton: css({
-    span: {
-      height: 30,
-      justifyContent: 'center',
-      width: 30,
-    },
-  }),
-  links: css({
-    alignContent: 'center',
-    display: 'flex',
-  }),
   listItem: css({
+    ':last-of-type': {
+      marginLeft: SPACING.SIZE_30,
+    },
     alignItems: 'center',
     display: 'none',
-    marginLeft: SPACING.SIZE_30,
+    marginLeft: SPACING.SIZE_40,
     [MQ.L]: {
       display: 'inline-flex',
     },
@@ -44,6 +37,7 @@ const styles = {
     },
   }),
   nav: css({
+    alignContent: 'center',
     display: 'flex',
     justifyContent: 'flex-end',
   }),
@@ -51,11 +45,11 @@ const styles = {
     background: COLORS.LIGHT.OFF_WHITE,
     height: '100%',
     [MQ.S]: {
-      paddingBottom: SPACING.SIZE_40,
       paddingTop: SPACING.SIZE_30,
     },
     [MQ.M]: {
-      padding: `${SPACING.SIZE_30}px 0`,
+      paddingBottom: SPACING.SIZE_30,
+      paddingTop: SPACING.SIZE_60,
     },
   }),
   searchButton: css({

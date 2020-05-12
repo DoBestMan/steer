@@ -43,7 +43,7 @@ function Categories({
     return null;
   }
   return (
-    <GridItem gridColumnM="3/7" gridColumnL="4/8">
+    <GridItem gridColumnM="3/7" gridColumnL="4/10" gridColumnXL="4/8">
       <SubNavContentWrapper
         contentLabel={category}
         isOpen={activeCategory === category}

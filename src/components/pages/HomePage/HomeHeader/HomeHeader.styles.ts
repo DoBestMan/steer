@@ -35,10 +35,18 @@ const styles = {
     paddingBottom: 170,
     position: 'relative',
 
+    [MQ.S]: {
+      paddingTop: SPACING.SIZE_40,
+    },
     [MQ.M]: {
       backgroundPosition: `left 0 bottom ${CONSTANTS.CONTAINER_BG_BOTTOM.M}px`,
       backgroundSize: `auto ${CONSTANTS.CONTAINER_BG_HEIGHT.M}px`,
       paddingBottom: 210,
+      paddingTop: SPACING.SIZE_30,
+    },
+
+    [MQ.L]: {
+      paddingTop: SPACING.SIZE_50,
     },
 
     [MQ.XL]: {

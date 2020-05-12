@@ -22,16 +22,11 @@ const CONSTANTS = {
 };
 
 function Nav({ isHomepage }: Props) {
-  const {
-    isSubNavOpen,
-    links,
-    toggleSubNav,
-    createSelectLinkHandler,
-  } = useNavContext();
+  const { links, toggleSubNav, createSelectLinkHandler } = useNavContext();
 
   return (
     <Grid as="nav" css={styles.root}>
-      <GridItem css={layout.container} gridColumn="2/4">
+      <GridItem css={[layout.container, styles.container]} gridColumn="2/4">
         <BaseLink href="/" css={[layout.container, layout.centeredVertical]}>
           <Image
             altText={CONSTANTS.LOGO_ALT_TEXT}
@@ -42,28 +37,26 @@ function Nav({ isHomepage }: Props) {
       </GridItem>
       <GridItem
         as="ul"
-        css={styles.nav}
+        css={[styles.nav, styles.container]}
         gridColumn="4/6"
         gridColumnM="4/8"
         gridColumnL="4/14"
       >
         {!isHomepage && (
-          <li css={[styles.searchButton, styles.iconButton]}>
+          <li css={styles.searchButton}>
             <NavSearchButton />
           </li>
         )}
-        <span css={[styles.links, isSubNavOpen && styles.hide]}>
-          {links.map((link, idx) => (
-            <li css={styles.listItem} key={idx}>
-              <NavLink
-                isActive={false}
-                onClick={createSelectLinkHandler(link)}
-                {...link}
-              />
-            </li>
-          ))}
-        </span>
-        <li css={[styles.listItem, styles.hamburger, styles.iconButton]}>
+        {links.map((link, idx) => (
+          <li css={styles.listItem} key={idx}>
+            <NavLink
+              isActive={false}
+              onClick={createSelectLinkHandler(link)}
+              {...link}
+            />
+          </li>
+        ))}
+        <li css={[styles.listItem, styles.hamburger]}>
           <button
             aria-label={CONSTANTS.MOBILE_MENU_ARIA_LABEL}
             onClick={toggleSubNav}

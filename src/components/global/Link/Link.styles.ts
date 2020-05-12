@@ -25,6 +25,12 @@ const styles = {
     opacity: CONSTANTS.OPACITY_DISABLED,
     pointerEvents: 'none',
   }),
+  iconOnly: css({
+    display: 'flex',
+    justifyContent: 'center',
+    minHeight: 30,
+    minWidth: 30,
+  }),
   link: css({
     borderBottom: BORDERS.DOTTED_TRANSPARENT_2PX,
     transition: `border-color ${TIME.MS100}ms ease`,

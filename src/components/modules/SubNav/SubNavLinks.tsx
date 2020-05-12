@@ -1,10 +1,12 @@
-import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
+import Link from '~/components/global/Link/Link';
 import NavLink from '~/components/global/Link/NavLink';
 import { ActionType, LinkType } from '~/components/modules/Nav/Nav.types';
 import { useNavContext } from '~/context/Nav.context';
 import { SiteMenuBrowseItem } from '~/data/models/SiteMenuBrowseItem';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
+import { LINK_THEME } from '~/lib/constants';
+import { ui } from '~/lib/utils/ui-dictionary';
 
 import TireCategoryLinks from './BrowseTires/TireCategoryLinks';
 import styles from './SubNav.styles';
@@ -45,15 +47,17 @@ function SubNavLinks({ siteMenuBrowseList }: Props) {
       </div>
       <ul css={styles.subnavLinkList}>
         <span css={styles.linkSection}>{textLinks.map(renderLink)}</span>
-        <span css={styles.linkSection}>
+        <span css={[styles.linkSection, styles.linkSectionIcons]}>
           {iconLinks.map(renderLink)}
-          <li css={[styles.link, styles.closeSubNav]}>
-            <button
-              aria-label="Close navigation modal"
+          <li css={styles.link}>
+            <Link
+              as="button"
+              icon={ICONS.CLOSE}
+              theme={LINK_THEME.LIGHT}
+              aria-label={ui('nav.close')}
               onClick={handleCloseSubNav}
-            >
-              <Icon name={ICONS.CLOSE} />
-            </button>
+              css={styles.closeSubNav}
+            />
           </li>
         </span>
       </ul>

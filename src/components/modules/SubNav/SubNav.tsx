@@ -96,10 +96,22 @@ function SubNav({
         >
           <Icon name={ICONS.CLOSE} />
         </button>
-        <GridItem fullbleedS fullbleedM gridColumnL="8/15" css={styles.subnav}>
+        <GridItem
+          fullbleedS
+          fullbleedM
+          gridColumnL="6/15"
+          gridColumnXL="8/15"
+          css={styles.subnav}
+        >
           <div css={styles.border} />
           <SubNavLinks siteMenuBrowseList={siteMenuBrowseList} />
-          <GridItem isGrid fullbleedS fullbleedM gridColumnL="8/15">
+          <GridItem
+            isGrid
+            fullbleedS
+            fullbleedM
+            gridColumnL="6/15"
+            gridColumnXL="8/15"
+          >
             {activeLink === NAV_TARGETS.BROWSE_TIRES && (
               <BrowseTires
                 shouldSetFocus={!!(prevLink.current === activeLink)}

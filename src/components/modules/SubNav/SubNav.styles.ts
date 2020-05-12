@@ -38,27 +38,27 @@ const styles = {
     },
   }),
   closeSubNav: css({
-    button: {
-      display: 'flex',
-      height: 30,
-      justifyContent: 'center',
-      width: 30,
-    },
+    color: COLORS.LIGHT.GRAY_70,
     [MQ.S]: {
       display: 'none',
     },
     [MQ.M]: {
-      display: 'initial',
+      display: 'flex',
     },
   }),
   link: css({
     alignContent: 'center',
     color: COLORS.LIGHT.GRAY_70,
     display: 'flex',
+    whiteSpace: 'nowrap',
+
     [MQ.S]: typography.bodyCopy,
     [MQ.XL]: typography.smallCopy,
   }),
   linkSection: css({
+    li: {
+      marginRight: SPACING.SIZE_30,
+    },
     span: {
       // overrides nav link sizes
       [MQ.S]: typography.bodyCopy,
@@ -71,11 +71,19 @@ const styles = {
     },
     [MQ.M]: {
       display: 'flex',
-      li: {
-        ':not(:last-of-type)': {
-          marginRight: SPACING.SIZE_30,
-        },
+    },
+  }),
+  linkSectionIcons: css({
+    li: {
+      // accommodates margins from designs, icon only buttons have extra padding to make them more clickable
+      // MVP will have hardcoded text link first and icon links following
+      ':first-of-type': {
+        marginRight: SPACING.SIZE_20,
       },
+      ':last-of-type': {
+        marginRight: -SPACING.SIZE_10,
+      },
+      marginRight: SPACING.SIZE_10,
     },
   }),
   modal: {
@@ -142,7 +150,7 @@ const styles = {
         justifyContent: 'space-between',
         marginBottom: 'unset',
         paddingBottom: SPACING.SIZE_80,
-        paddingTop: SPACING.SIZE_60,
+        paddingTop: SPACING.SIZE_50 + SPACING.SIZE_02, // align to main nav links
         svg: {
           width: 20,
         },

@@ -49,6 +49,7 @@ function Link({
 }: LinkProps) {
   const linkStyles = [
     !!children && disableGlobalFocus,
+    !children && icon && styles.iconOnly,
     styles.root,
     styles[theme],
     styles[size],
