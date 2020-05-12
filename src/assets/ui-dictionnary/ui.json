@@ -71,6 +71,15 @@
   },
   "search": {
     "cancelButtonLabel": "Cancel",
-    "cancelButtonClear": "Clear"
+    "cancelButtonClear": "Clear",
+    "clearPastSearchesButtonLabel": "Clear all",
+    "pastSearches": "Past searches",
+    "searchBy": "Search by",
+    "searchCategories": {
+      "vehicle": "Vehicle",
+      "tireSize": "Tire size",
+      "brand": "Brand",
+      "popularTires": "Popular tires"
+    }
   }
 }

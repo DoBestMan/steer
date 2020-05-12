@@ -122,7 +122,7 @@ const paramsScrollTo: ParamsScrollTo = {
   y: 0,
 };
 
-export const scrollTo = (to: number, duration = 1, cb: () => void) => {
+export const scrollTo = (to: number, duration = 1, cb?: () => void) => {
   paramsScrollTo.from = window.scrollY || window.pageYOffset;
   paramsScrollTo.duration = duration;
   paramsScrollTo.to = to;
@@ -130,7 +130,7 @@ export const scrollTo = (to: number, duration = 1, cb: () => void) => {
 
   if (paramsScrollTo.to !== paramsScrollTo.from) {
     window.requestAnimationFrame(scrollToRAF);
-  } else if (cb !== null) {
+  } else if (cb) {
     cb();
   }
 };
