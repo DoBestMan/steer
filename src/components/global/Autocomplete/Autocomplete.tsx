@@ -8,7 +8,7 @@ import {
 } from 'react';
 
 import { Icon as IconType } from '~/components/global/Icon/Icon.types';
-import { KEYCODES } from '~/lib/constants';
+import { KEYCODES, SPACING } from '~/lib/constants';
 import { randomString } from '~/lib/utils/string';
 import { ui } from '~/lib/utils/ui-dictionary';
 
@@ -207,6 +207,10 @@ function Autocomplete({
     onValueSelectionSuccess(results[index]);
   };
 
+  const listBoxStyle = {
+    marginTop: shouldShowListbox || isInvalidInput ? SPACING.SIZE_40 : 0,
+  };
+
   return (
     <div {...rest}>
       <div css={styles.inputContainer}>
@@ -249,7 +253,7 @@ function Autocomplete({
       </div>
       <ul
         aria-labelledby={ids.labelID}
-        css={styles.listbox}
+        css={[styles.listbox, listBoxStyle]}
         id={ids.listboxID}
         role={shouldShowListbox ? 'listbox' : ''}
       >
