@@ -4,7 +4,7 @@ import { boolean, select, text } from '@storybook/addon-knobs';
 import { ReactChild } from 'react';
 
 import { ICONS } from '~/components/global/Icon/Icon.constants';
-import { NAV_TARGETS } from '~/components/modules/Nav/Nav.constants';
+import { NAV_TARGETS } from '~/components/modules/Nav/Nav.types';
 import {
   COLORS,
   LINK_ICON_POSITION,

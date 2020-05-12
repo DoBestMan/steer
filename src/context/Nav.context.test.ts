@@ -1,7 +1,7 @@
 import { renderHook } from '@testing-library/react-hooks';
 import { act } from 'react-test-renderer';
 
-import { NAV_TARGETS } from '~/components/modules/Nav/Nav.constants';
+import { NAV_TARGETS } from '~/components/modules/Nav/Nav.types';
 
 import { useContextSetup } from './Nav.context';
 import { UserPersonalizationProps } from './UserPersonalization.context';

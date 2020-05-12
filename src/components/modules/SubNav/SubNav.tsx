@@ -5,7 +5,7 @@ import GridItem from '~/components/global/Grid/GridItem';
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import LocationContainer from '~/components/modules/Location/LocationContainer';
-import { NAV_TARGETS } from '~/components/modules/Nav/Nav.constants';
+import { NAV_TARGETS } from '~/components/modules/Nav/Nav.types';
 import BrowseTires from '~/components/modules/SubNav/BrowseTires/BrowseTires';
 import { useNavContext } from '~/context/Nav.context';
 import { SiteMenuBrowseItem } from '~/data/models/SiteMenuBrowseItem';
