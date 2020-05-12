@@ -1,5 +1,8 @@
 {
   "common": {
+    "loading": {
+      "label": "Loading"
+    },
     "modal": {
       "close": "close that modal!",
       "open": "open {{moduleName}}"
