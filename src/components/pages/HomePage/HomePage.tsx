@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import Grid from '~/components/global/Grid/Grid';
 import Layout from '~/components/global/Layout/Layout';
+import NavContainer from '~/components/modules/Nav/Nav.container';
 import DriverInsights from '~/components/pages/HomePage/DriverInsights/DriverInsights';
 import HomeHeader from '~/components/pages/HomePage/HomeHeader/HomeHeader';
 import Reviews from '~/components/pages/HomePage/Reviews/Reviews';
@@ -39,7 +40,8 @@ function getColorFromScrollState(thresholdCrossed: boolean) {
 function HomePage({ serverData }: Props) {
   const { siteReviews } = serverData;
   const [thresholdCrossed, setThresholdCrossed] = useState(false);
-  const { siteTheme } = useSiteGlobalsContext();
+
+  const { customerServiceEnabled, siteTheme } = useSiteGlobalsContext();
   const contentContainerRef = useRef<HTMLDivElement>(null);
 
   const {
@@ -104,7 +106,14 @@ function HomePage({ serverData }: Props) {
 
   return (
     <Layout>
-      <HomeHeader {...siteHero} />
+      <div css={styles.root}>
+        <NavContainer
+          isHomepage
+          isCustomerServiceEnabled={customerServiceEnabled}
+        />
+        <HomeHeader {...siteHero} />
+      </div>
+
       <div css={[styles.scrollColorContainer, { backgroundColor }]}>
         <SearchButton onClick={handleSearchClick} />
         <div ref={contentContainerRef}>

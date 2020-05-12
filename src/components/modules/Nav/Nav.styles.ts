@@ -1,6 +1,6 @@
 import { css } from '@emotion/core';
 
-import { COLORS, MQ, SPACING } from '~/lib/constants';
+import { MQ, SPACING } from '~/lib/constants';
 
 export const NAV_CONTENT_HEIGHT = 20;
 const CONSTANTS = {
@@ -42,7 +42,6 @@ const styles = {
     justifyContent: 'flex-end',
   }),
   root: css({
-    background: COLORS.LIGHT.OFF_WHITE,
     height: '100%',
     [MQ.S]: {
       paddingTop: SPACING.SIZE_30,

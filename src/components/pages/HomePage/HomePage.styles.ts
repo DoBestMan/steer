@@ -1,6 +1,6 @@
 import { css } from '@emotion/core';
 
-import { MQ, SPACING, TIME } from '~/lib/constants';
+import { COLORS, MQ, SPACING, TIME } from '~/lib/constants';
 
 export const CONTENT_PADDING = {
   /* eslint-disable sort-keys */
@@ -21,6 +21,9 @@ const styles = {
     [MQ.XL]: {
       paddingBottom: CONTENT_PADDING.XL,
     },
+  }),
+  root: css({
+    background: COLORS.LIGHT.OFF_WHITE,
   }),
   scrollColorContainer: css({
     transition: `background-color ${TIME.MS300}ms ease-in-out`,
