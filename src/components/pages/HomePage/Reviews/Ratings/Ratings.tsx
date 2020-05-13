@@ -2,9 +2,10 @@ import Icon from '~/components/global/Icon/Icon';
 import { ICON_SIZES, ICONS } from '~/components/global/Icon/Icon.constants';
 import { SiteIcon } from '~/data/models/SiteIcon';
 import { COLORS } from '~/lib/constants';
+import { randomString } from '~/lib/utils/string';
 import { typography } from '~/styles/typography.styles';
 
-import styles, { RATING_GRADIENT_ID } from './Ratings.styles';
+import styles from './Ratings.styles';
 
 interface Props {
   ratingLabel: string;
@@ -15,6 +16,8 @@ interface Props {
 function Ratings({ ratingLabel, ratingLabelIcon, ratingStars }: Props) {
   const formattedRating = ratingStars > 0 ? ratingStars.toFixed(1) : 0;
   const ratingFillWidth = (ratingStars / 5) * 100;
+  const RATING_GRADIENT_ID = randomString();
+
   return (
     <div css={styles.container}>
       <div css={styles.ratingContainer}>
@@ -42,7 +45,13 @@ function Ratings({ ratingLabel, ratingLabelIcon, ratingStars }: Props) {
             <stop offset="0%" stopColor={COLORS.DARK.GRAY_40} />
           </linearGradient>
         </svg>
-        <Icon css={styles.ratingStars} name={ICONS.FIVE_STARS} />
+        <Icon
+          css={[
+            { '--rating-gradient-id': `url(#${RATING_GRADIENT_ID})` },
+            styles.ratingStars,
+          ]}
+          name={ICONS.FIVE_STARS}
+        />
         <div css={[typography.primaryHeadline, styles.rating]}>
           {formattedRating}
         </div>

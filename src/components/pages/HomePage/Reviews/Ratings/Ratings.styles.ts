@@ -1,42 +1,38 @@
-import { css } from '@emotion/core';
-
 import { COLORS, MQ, SPACING } from '~/lib/constants';
 
-export const RATING_GRADIENT_ID = 'rating-gradient';
-
 const styles = {
-  container: css({
+  container: {
     margin: `0 0 ${SPACING.SIZE_40}px`,
 
     [MQ.M]: {
       margin: `${SPACING.SIZE_20}px 0`,
     },
-  }),
-  iconVerified: css({
+  },
+  iconVerified: {
     height: 19,
     marginLeft: 4,
-  }),
-  rating: css({
+  },
+  rating: {
     color: COLORS.GLOBAL.ORANGE,
     marginLeft: SPACING.SIZE_10,
-  }),
-  ratingContainer: css({
+  },
+  ratingContainer: {
     alignItems: 'center',
     display: 'flex',
-  }),
-  ratingLabel: css({
+  },
+  ratingLabel: {
     alignItems: 'center',
     color: COLORS.DARK.GRAY_40,
     display: 'flex',
-  }),
-  ratingStars: css({
+  },
+  ratingStars: {
     svg: {
-      fill: `url(#${RATING_GRADIENT_ID})`,
+      fill: 'var(--rating-gradient-id)',
     },
-  }),
-  title: css({
+  },
+  title: {
     color: COLORS.GLOBAL.WHITE,
-  }),
+  },
 };
 
 export default styles;
