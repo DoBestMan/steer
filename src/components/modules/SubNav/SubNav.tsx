@@ -78,8 +78,12 @@ function SubNav({
   // https://simpletire.atlassian.net/browse/WCS-127
   // Not: THis function is getting called repeatedly right now in the "Use Current Location" flow.
   // Hopefully this will resolve itself after the flow is fully wired up and the location component unmounts. -SM
-  function onLocationChangeSuccess(location: UserPersonalizationUpdate) {
-    updateLocation(location);
+  async function onLocationChangeSuccess(location: UserPersonalizationUpdate) {
+    try {
+      await updateLocation(location);
+    } catch (error) {
+      onCurrentLocationError(error.message);
+    }
   }
 
   return (
