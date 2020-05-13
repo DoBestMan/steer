@@ -1,10 +1,10 @@
-import { css } from '@emotion/core';
+import { CSSObject } from '@emotion/core';
 
 import { BORDERS, COLORS, MQ, SPACING, Z_INDEX } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
-const styles = {
-  autocompleteGrid: css({
+const styles: CSSObject = {
+  autocompleteGrid: {
     padding: `${SPACING.SIZE_25}px 0 0`,
     [MQ.M]: {
       padding: `${SPACING.SIZE_50}px 0 ${SPACING.SIZE_20}px`,
@@ -13,24 +13,24 @@ const styles = {
       borderBottom: BORDERS.SOLID_GRAY_80_1PX,
       padding: `${SPACING.SIZE_50}px 0`,
     },
-  }),
-  autocompleteGridItem: css({
+  },
+  autocompleteGridItem: {
     position: 'relative',
-  }),
-  clearPastSearchesButton: css({
+  },
+  clearPastSearchesButton: {
     span: {
       borderBottom: BORDERS.DOTTED_TRANSPARENT_2PX,
     },
-  }),
-  clearPastSearchesWrapper: css({
+  },
+  clearPastSearchesWrapper: {
     alignItems: 'baseline',
     display: 'flex',
     justifyContent: 'space-between',
     [MQ.M]: {
       justifyContent: 'flex-start',
     },
-  }),
-  clearSearch: css({
+  },
+  clearSearch: {
     color: COLORS.LIGHT.GRAY_70,
     marginLeft: SPACING.SIZE_15,
     [MQ.M]: {
@@ -39,7 +39,7 @@ const styles = {
         width: 24,
       },
     },
-  }),
+  },
   closeSearchButton: {
     span: {
       borderBottom: BORDERS.DOTTED_TRANSPARENT_2PX,
@@ -48,7 +48,7 @@ const styles = {
       span: [typography.bodyCopy],
     },
   },
-  closeSearchWrapper: css({
+  closeSearchWrapper: {
     alignItems: 'flex-start',
     display: 'flex',
     justifyContent: 'flex-end',
@@ -61,8 +61,8 @@ const styles = {
     [MQ.XL]: {
       top: SPACING.SIZE_15,
     },
-  }),
-  container: css({
+  },
+  container: {
     backgroundColor: COLORS.GLOBAL.ORANGE,
     minHeight: '100vh',
     paddingBottom: SPACING.SIZE_50,
@@ -74,43 +74,43 @@ const styles = {
     [MQ.L]: {
       paddingBottom: SPACING.SIZE_160,
     },
-  }),
+  },
   errorLabel: [
     typography.secondaryHeadline,
-    css({
+    {
       color: COLORS.GLOBAL.BLACK,
       [MQ.M]: [typography.primaryHeadline],
-    }),
+    },
   ],
-  pastSearchBullet: css({
+  pastSearchBullet: {
     display: 'none',
     margin: `0 ${SPACING.SIZE_10}px`,
     [MQ.M]: {
       display: 'block',
     },
-  }),
-  searchIcon: css({
+  },
+  searchIcon: {
     '> svg': {
       height: 34,
       width: 34,
     },
     color: COLORS.ORANGE.TINT_30,
-  }),
-  searchIconGridItem: css({
+  },
+  searchIconGridItem: {
     alignItems: 'center',
     display: 'none',
     justifyContent: 'center',
     [MQ.L]: {
       display: 'block',
     },
-  }),
-  searchIconWrapper: css({
+  },
+  searchIconWrapper: {
     alignItems: 'flex-start',
     display: 'flex',
     justifyContent: 'center',
     marginTop: SPACING.SIZE_05,
-  }),
-  searchSectionGridItem: css({
+  },
+  searchSectionGridItem: {
     paddingTop: SPACING.SIZE_40,
     position: 'relative',
     [MQ.M]: {
@@ -119,7 +119,7 @@ const styles = {
     [MQ.L]: {
       paddingTop: SPACING.SIZE_70,
     },
-  }),
+  },
 };
 
 export default styles;

@@ -51,25 +51,28 @@ components/
 - Styles will be exported as one object with keys:
 
 ```diff
-- const foo = css({
--   background: 'red'
-- })
-- const bar = css({
--   background: 'blue'
-- })
+import { CSSObject } from '@emotion/core';
 
-+ const styles = {
-+   foo: css({
+- const foo: CSSObject = {
+-   background: 'red'
+- };
+- const bar: CSSObject = {
+-   background: 'blue'
+- };
+
++ const styles: CSSObject = {
++   foo: {
 +     background: 'red'
-+   }),
-+   bar: css({
++   },
++   bar: {
 +     background: 'blue'
-+   })
++   },
 + }
 + export default styles
 ```
 
 - Composed styles should generally be composed within the component
+- Typing with `CSSObject` helps us avoid issues with "type widening" (ie: things like `{ borderTopStyle: 'solid' as 'solid' }`). Read more about it [here](https://github.com/emotion-js/emotion/pull/1129#issuecomment-452376242)
 
 ```
 css={[styles.root, styles.other]}
