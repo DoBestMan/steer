@@ -47,7 +47,9 @@ describe('useApiData', () => {
     // it calls useApiData
     expect(mocked(useApiData)).toHaveBeenCalledWith({
       endpoint: '/test-endpoint',
+      includeAuthorization: false,
       includeUserRegion: false,
+      includeUserZip: false,
       params: {},
     });
 

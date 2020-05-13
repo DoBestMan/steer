@@ -53,6 +53,7 @@ function HomePage({ serverData }: Props) {
     defaultData: serverData,
     endpoint: '/home',
     includeUserRegion: true,
+    includeUserZip: true,
   });
 
   if (error) {

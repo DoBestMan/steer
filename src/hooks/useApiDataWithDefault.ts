@@ -3,7 +3,9 @@ import { useApiData, UseApiData, UseApiDataParams } from './useApiData';
 export function useApiDataWithDefault<T, U = T>({
   defaultData,
   endpoint,
+  includeAuthorization = false,
   includeUserRegion = false,
+  includeUserZip = false,
   params = {},
 }: UseApiDataParams & {
   defaultData: T;
@@ -12,7 +14,9 @@ export function useApiDataWithDefault<T, U = T>({
 } {
   const { data, error, isValidating, mutate, revalidate } = useApiData<U>({
     endpoint,
+    includeAuthorization,
     includeUserRegion,
+    includeUserZip,
     params,
   });
 

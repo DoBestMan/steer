@@ -27,6 +27,7 @@ export async function backendGetSiteHome() {
     endpoint: '/v1/site/home',
     includeAuthorization: true,
     includeUserRegion: true,
+    includeUserZip: true,
     method: 'get',
   });
 
