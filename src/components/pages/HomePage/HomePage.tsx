@@ -19,6 +19,9 @@ import styles from './HomePage.styles';
 import SearchButton from './SearchButton/SearchButton';
 
 const SCROLL_THRESHOLD = 80;
+const THEME_COLOR_MAP: Record<string, string> = {
+  promotion: COLORS.GLOBAL.BLACK,
+};
 
 interface Props {
   serverData: {
@@ -43,7 +46,6 @@ function HomePage({ serverData }: Props) {
 
   const { customerServiceEnabled, siteTheme } = useSiteGlobalsContext();
   const contentContainerRef = useRef<HTMLDivElement>(null);
-
   const {
     data: { siteHero, siteInsights },
     error,
@@ -57,9 +59,9 @@ function HomePage({ serverData }: Props) {
     console.error(error);
   }
 
-  const backgroundColor = !siteTheme
-    ? getColorFromScrollState(thresholdCrossed)
-    : COLORS.GLOBAL.BLACK;
+  const backgroundColor =
+    (siteTheme && THEME_COLOR_MAP[siteTheme]) ||
+    getColorFromScrollState(thresholdCrossed);
 
   function handleSearchClick() {
     // TODO Wire up homepage search https://simpletire.atlassian.net/browse/WCS-216
