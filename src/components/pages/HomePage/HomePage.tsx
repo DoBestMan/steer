@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
 import Grid from '~/components/global/Grid/Grid';
-import Layout from '~/components/global/Layout/Layout';
 import NavContainer from '~/components/modules/Nav/Nav.container';
 import DriverInsights from '~/components/pages/HomePage/DriverInsights/DriverInsights';
 import HomeHeader from '~/components/pages/HomePage/HomeHeader/HomeHeader';
@@ -108,7 +107,7 @@ function HomePage({ serverData }: Props) {
   }, [contentContainerRef]);
 
   return (
-    <Layout>
+    <>
       <div css={styles.root}>
         <NavContainer
           isHomepage
@@ -126,7 +125,7 @@ function HomePage({ serverData }: Props) {
           </Grid>
         </div>
       </div>
-    </Layout>
+    </>
   );
 }
 
