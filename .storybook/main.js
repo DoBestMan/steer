@@ -41,6 +41,10 @@ module.exports = {
     // Alias
     config.resolve.alias['~'] = path.resolve(__dirname + '/../src');
 
+    config.performance = {
+      hints: false
+    }
+
     return config;
   },
 };
