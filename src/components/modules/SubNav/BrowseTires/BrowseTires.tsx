@@ -1,13 +1,12 @@
 import GridItem from '~/components/global/Grid/GridItem';
-import { SiteMenuBrowseItem } from '~/data/models/SiteMenuBrowseItem';
+import { SiteMenu } from '~/data/models/SiteMenu';
 
 import styles from './BrowseTires.styles';
 import Categories from './Categories';
 import TireCategoryLinks from './TireCategoryLinks';
 
-interface Props {
+interface Props extends Pick<SiteMenu, 'siteMenuBrowseList'> {
   shouldSetFocus: boolean;
-  siteMenuBrowseList: SiteMenuBrowseItem[];
 }
 
 function BrowseTires({ shouldSetFocus, siteMenuBrowseList }: Props) {

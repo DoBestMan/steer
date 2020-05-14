@@ -1,6 +1,6 @@
 import SubNav from '~/components/modules/SubNav/SubNav';
-import subnav from '~/components/modules/SubNav/SubNav.mocks';
 import { NavContextProvider } from '~/context/Nav.context';
+import { useSiteMenuContext } from '~/context/SiteMenu.context';
 
 import Nav from './Nav';
 
@@ -13,10 +13,14 @@ function NavContainer({
   isCustomerServiceEnabled = false,
   isHomepage = false,
 }: Props) {
+  const siteMenu = useSiteMenuContext();
   return (
     <NavContextProvider>
       <Nav isHomepage={isHomepage} />
-      <SubNav isCustomerServiceEnabled={isCustomerServiceEnabled} {...subnav} />
+      <SubNav
+        isCustomerServiceEnabled={isCustomerServiceEnabled}
+        {...siteMenu}
+      />
     </NavContextProvider>
   );
 }

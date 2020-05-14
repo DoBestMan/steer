@@ -8,8 +8,7 @@ import LocationContainer from '~/components/modules/Location/LocationContainer';
 import { NAV_TARGETS } from '~/components/modules/Nav/Nav.types';
 import BrowseTires from '~/components/modules/SubNav/BrowseTires/BrowseTires';
 import { useNavContext } from '~/context/Nav.context';
-import { SiteMenuBrowseItem } from '~/data/models/SiteMenuBrowseItem';
-import { SiteMenuLearn } from '~/data/models/SiteMenuLearn';
+import { SiteMenu } from '~/data/models/SiteMenu';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { ui } from '~/lib/utils/ui-dictionary';
 
@@ -18,10 +17,8 @@ import styles from './SubNav.styles';
 import SubNavLinks from './SubNavLinks';
 import SubNavModal from './SubNavModal';
 
-interface Props {
+interface Props extends SiteMenu {
   isCustomerServiceEnabled: boolean;
-  siteMenuBrowseList: SiteMenuBrowseItem[];
-  siteMenuLearn: SiteMenuLearn;
 }
 
 function SubNav({

@@ -1,17 +1,15 @@
 import GridItem from '~/components/global/Grid/GridItem';
 import IconOrImage from '~/components/global/IconOrImage/IconOrImage';
 import { useNavContext } from '~/context/Nav.context';
-import { SiteMenuBrowseItem } from '~/data/models/SiteMenuBrowseItem';
+import { SiteMenu } from '~/data/models/SiteMenu';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import styles from './BrowseTires.styles';
 
-interface Props {
-  siteMenuBrowseList: SiteMenuBrowseItem[];
-}
-
-function TireCategoryLinks({ siteMenuBrowseList }: Props) {
+function TireCategoryLinks({
+  siteMenuBrowseList,
+}: Pick<SiteMenu, 'siteMenuBrowseList'>) {
   const { activeCategory, createSelectCategoryHandler } = useNavContext();
   const { isMobile } = useBreakpoints();
   return (

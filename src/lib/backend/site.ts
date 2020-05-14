@@ -1,8 +1,7 @@
 import { SiteGlobals } from '~/data/models/SiteGlobals';
 import { SiteHero } from '~/data/models/SiteHero';
 import { SiteInsights } from '~/data/models/SiteInsights';
-import { SiteMenuBrowseItem } from '~/data/models/SiteMenuBrowseItem';
-import { SiteMenuLearn } from '~/data/models/SiteMenuLearn';
+import { SiteMenu } from '~/data/models/SiteMenu';
 import { SiteReviews } from '~/data/models/SiteReviews';
 
 import { fetch } from '../fetch';
@@ -35,10 +34,7 @@ export async function backendGetSiteHome() {
 }
 
 export async function backendGetSiteMenu() {
-  const response = await fetch<{
-    siteMenuBrowseList: Array<SiteMenuBrowseItem>;
-    siteMenuLearn: SiteMenuLearn;
-  }>({
+  const response = await fetch<SiteMenu>({
     endpoint: '/v1/site/menu',
     includeAuthorization: true,
     includeUserRegion: true,

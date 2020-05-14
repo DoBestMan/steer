@@ -6,7 +6,7 @@ import EmailSupport from '~/components/modules/Support/EmailSupport';
 import PhoneSupport from '~/components/modules/Support/PhoneSupport';
 import SupportHeading from '~/components/modules/Support/SupportHeading';
 import { NavContextProps } from '~/context/Nav.context';
-import { SiteMenuLearn } from '~/data/models/SiteMenuLearn';
+import { SiteMenu } from '~/data/models/SiteMenu';
 import { LINK_THEME } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
@@ -14,11 +14,10 @@ import SubNavContentWrapper from '../SubNavContentWrapper';
 import { steps } from './Learn.data';
 import styles from './Learn.styles';
 
-export interface LearnProps {
+export interface LearnProps extends Pick<SiteMenu, 'siteMenuLearn'> {
   handleClearLink: NavContextProps['handleClearLink'];
   handleCloseSubNav: NavContextProps['handleCloseSubNav'];
   isCustomerServiceEnabled: boolean;
-  siteMenuLearn: SiteMenuLearn;
 }
 
 function Learn({

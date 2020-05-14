@@ -8,8 +8,7 @@ import Layout from '~/components/global/Layout/Layout';
 import App from '~/components/modules/App/App';
 import AppProviders from '~/context/AppProviders';
 import { SiteGlobals } from '~/data/models/SiteGlobals';
-import { SiteMenuBrowseItem } from '~/data/models/SiteMenuBrowseItem';
-import { SiteMenuLearn } from '~/data/models/SiteMenuLearn';
+import { SiteMenu } from '~/data/models/SiteMenu';
 import { backendGetSiteGlobals, backendGetSiteMenu } from '~/lib/backend';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
 import { global } from '~/styles/document/global.styles';
@@ -17,8 +16,7 @@ import { global } from '~/styles/document/global.styles';
 interface Props extends AppInitialProps {
   serverData: {
     siteGlobals: SiteGlobals;
-    siteMenuBrowseList: Array<SiteMenuBrowseItem>;
-    siteMenuLearn: SiteMenuLearn;
+    siteMenu: SiteMenu;
   };
 }
 
@@ -31,9 +29,13 @@ class MyApp extends NextApp<Props> {
 
   render() {
     const { Component, pageProps } = this.props;
+    const { siteGlobals, siteMenu } = this.state.serverData;
 
     return (
-      <AppProviders siteGlobalsContextValue={this.state.serverData.siteGlobals}>
+      <AppProviders
+        siteGlobalsContextValue={siteGlobals}
+        siteMenuContextValue={siteMenu}
+      >
         <Head>
           <title>Simpletire</title>
         </Head>
@@ -62,15 +64,14 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
 
   backendBootstrap();
 
-  const { siteMenuBrowseList, siteMenuLearn } = await backendGetSiteMenu();
   const { siteGlobals } = await backendGetSiteGlobals();
+  const siteMenu = await backendGetSiteMenu();
 
   const finalProps: Props = {
     ...appProps,
     serverData: {
       siteGlobals,
-      siteMenuBrowseList,
-      siteMenuLearn,
+      siteMenu,
     },
   };
 

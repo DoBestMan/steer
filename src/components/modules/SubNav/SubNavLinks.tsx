@@ -3,7 +3,7 @@ import Link from '~/components/global/Link/Link';
 import NavLink from '~/components/global/Link/NavLink';
 import { ActionType, LinkType } from '~/components/modules/Nav/Nav.types';
 import { useNavContext } from '~/context/Nav.context';
-import { SiteMenuBrowseItem } from '~/data/models/SiteMenuBrowseItem';
+import { SiteMenu } from '~/data/models/SiteMenu';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { LINK_THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
@@ -11,11 +11,9 @@ import { ui } from '~/lib/utils/ui-dictionary';
 import TireCategoryLinks from './BrowseTires/TireCategoryLinks';
 import styles from './SubNav.styles';
 
-interface Props {
-  siteMenuBrowseList: SiteMenuBrowseItem[];
-}
-
-function SubNavLinks({ siteMenuBrowseList }: Props) {
+function SubNavLinks({
+  siteMenuBrowseList,
+}: Pick<SiteMenu, 'siteMenuBrowseList'>) {
   const {
     activeLink,
     createSelectLinkHandler,
