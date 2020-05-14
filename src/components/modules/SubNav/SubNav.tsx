@@ -8,10 +8,8 @@ import LocationContainer from '~/components/modules/Location/LocationContainer';
 import { NAV_TARGETS } from '~/components/modules/Nav/Nav.types';
 import BrowseTires from '~/components/modules/SubNav/BrowseTires/BrowseTires';
 import { useNavContext } from '~/context/Nav.context';
-import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
 import { SiteMenuBrowseItem } from '~/data/models/SiteMenuBrowseItem';
 import { SiteMenuLearn } from '~/data/models/SiteMenuLearn';
-import { UserPersonalizationUpdate } from '~/data/models/UserPersonalizationUpdate';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { ui } from '~/lib/utils/ui-dictionary';
 
@@ -39,11 +37,6 @@ function SubNav({
     isSubNavOpen,
     activeLink,
   } = useNavContext();
-  const {
-    updateLocation,
-    userPersonalizationData,
-  } = useUserPersonalizationContext();
-
   const { isMobile } = useBreakpoints();
 
   const prevLink = useRef(activeLink);
@@ -67,24 +60,6 @@ function SubNav({
     isMobile,
     siteMenuBrowseList,
   ]);
-
-  // TODO Final error functionality
-  // https://simpletire.atlassian.net/browse/WCS-127
-  function onCurrentLocationError(error: string) {
-    console.error(error);
-  }
-
-  // TODO Final success functionality
-  // https://simpletire.atlassian.net/browse/WCS-127
-  // Not: THis function is getting called repeatedly right now in the "Use Current Location" flow.
-  // Hopefully this will resolve itself after the flow is fully wired up and the location component unmounts. -SM
-  async function onLocationChangeSuccess(location: UserPersonalizationUpdate) {
-    try {
-      await updateLocation(location);
-    } catch (error) {
-      onCurrentLocationError(error.message);
-    }
-  }
 
   return (
     <SubNavModal
@@ -115,6 +90,7 @@ function SubNav({
             fullbleedM
             gridColumnL="6/15"
             gridColumnXL="8/15"
+            css={styles.subnavInnerGrid}
           >
             {activeLink === NAV_TARGETS.BROWSE_TIRES && (
               <BrowseTires
@@ -128,14 +104,8 @@ function SubNav({
                 siteMenuLearn={siteMenuLearn}
               />
             )}
-            {/* Temporarily hiding on mobile until final UI implementation
-                TODO https://simpletire.atlassian.net/browse/WCS-127 */}
-            {activeLink === NAV_TARGETS.LOCATION && !isMobile && (
-              <LocationContainer
-                currentLocation={userPersonalizationData?.userLocation ?? null}
-                onCurrentLocationError={onCurrentLocationError}
-                onLocationChangeSuccess={onLocationChangeSuccess}
-              />
+            {activeLink === NAV_TARGETS.LOCATION && (
+              <LocationContainer onDismiss={handleCloseSubNav} />
             )}
           </GridItem>
         </GridItem>

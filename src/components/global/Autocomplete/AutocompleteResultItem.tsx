@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 export interface AutocompleteResult {
   id: string;
   main: string;
-  secondary: string;
+  secondary?: string;
 }
 
 interface Props {

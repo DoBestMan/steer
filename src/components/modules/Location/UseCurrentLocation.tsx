@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 
+import { AutocompleteResult } from '~/components/global/Autocomplete/AutocompleteResultItem';
 import Icon from '~/components/global/Icon/Icon';
-import { UserPersonalizationUpdate } from '~/data/models/UserPersonalizationUpdate';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import { styles } from './Location.styles';
 
 interface Props {
   onCurrentLocationError: (error: string) => void;
-  onCurrentLocationSuccess: (location: UserPersonalizationUpdate) => void;
+  onCurrentLocationSuccess: (result: AutocompleteResult) => void;
 }
 
 const getBrowserLocation = (callback: PositionCallback) => {
@@ -61,10 +61,12 @@ function UseCurrentLocation({
               );
 
               if (zipCode) {
-                onCurrentLocationSuccess({
-                  userLocationGooglePlacesId: results[0].place_id,
-                  userLocationZip: zipCode,
-                });
+                const result = {
+                  id: results[0].place_id,
+                  main: zipCode,
+                };
+
+                onCurrentLocationSuccess(result);
               } else {
                 onCurrentLocationError('No results found');
               }

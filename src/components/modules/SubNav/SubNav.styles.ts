@@ -129,6 +129,11 @@ const styles = {
       padding: `0 ${SPACING.SIZE_60}px`,
     },
   }),
+  subnavInnerGrid: css({
+    [MQ.M]: {
+      height: '100%',
+    },
+  }),
   subnavLinkList: css({
     display: 'flex',
     width: '100%',

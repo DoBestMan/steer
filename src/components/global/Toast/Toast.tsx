@@ -1,3 +1,4 @@
+import { SerializedStyles } from '@emotion/core';
 import { ReactChild, useEffect } from 'react';
 
 import { ICONS } from '~/components/global/Icon/Icon.constants';
@@ -10,12 +11,14 @@ import styles from './Toast.styles';
 interface Props {
   autoDismiss?: boolean; // There should be no use cases with auto dismiss disabled, this prop is for testing
   children: ReactChild;
+  customStyles?: SerializedStyles;
   isOpen?: boolean;
   onDismiss: () => void;
 }
 
 function Toast({
   children,
+  customStyles,
   autoDismiss = true,
   isOpen = false,
   onDismiss,
@@ -31,7 +34,7 @@ function Toast({
   return (
     <div
       aria-live={isOpen ? ARIA_LIVE.ASSERTIVE : ARIA_LIVE.OFF}
-      css={[styles.root, !isOpen && styles.isDismissed]}
+      css={[styles.root, !isOpen && styles.isDismissed, customStyles]}
       role="alert"
     >
       <span>{children}</span>
