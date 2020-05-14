@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import Autocomplete from '~/components/global/Autocomplete/Autocomplete';
 import { searchAutocomplete } from '~/components/global/Autocomplete/Autocomplete.styles';
 import { AutocompleteResult } from '~/components/global/Autocomplete/AutocompleteResultItem';
@@ -10,27 +12,9 @@ import { LINK_SIZE, LINK_THEME, LINK_TYPES, TIME } from '~/lib/constants';
 import { scrollTo } from '~/lib/helpers/scroll';
 import { ui } from '~/lib/utils/ui-dictionary';
 
+import InitialSearch from './InitialSearch';
 import styles from './Search.styles';
-import SearchSection, { SearchItem } from './SearchSection';
-
-const SEARCH_CATEGORIES = [
-  {
-    id: 'vehicle',
-    text: ui('search.searchCategories.vehicle'),
-  },
-  {
-    id: 'tire-size',
-    text: ui('search.searchCategories.tireSize'),
-  },
-  {
-    id: 'brand',
-    text: ui('search.searchCategories.brand'),
-  },
-  {
-    id: 'popular-tires',
-    text: ui('search.searchCategories.popularTires'),
-  },
-];
+import { SearchItem } from './SearchSection';
 
 interface Props {
   onClearSearchesClick: () => void;
@@ -43,35 +27,24 @@ function Search({
   onCloseSearchClick,
   pastSearches,
 }: Props) {
+  const [query, setQuery] = useState('');
+
   const handleClearSearchesClick = () => {
     onClearSearchesClick();
     scrollTo(0, TIME.MS300 / 1000);
   };
-  const clearSearchComponent = (
-    <Icon name={ICONS.CLEAR_SEARCH} css={styles.clearSearch} />
-  );
 
   const errorLabel = (
     <span css={styles.errorLabel}>Sorry, no matching results found.</span>
   );
 
-  const pastSearchesEyebrow = (
-    <div css={styles.clearPastSearchesWrapper}>
-      <span>{ui('search.pastSearches')}</span>
-      <span css={styles.pastSearchBullet}>&bull;</span>
-      <Link
-        as={LINK_TYPES.BUTTON}
-        css={styles.clearPastSearchesButton}
-        onClick={handleClearSearchesClick}
-        size={LINK_SIZE.SM}
-        theme={LINK_THEME.LIGHT}
-      >
-        {ui('search.clearPastSearchesButtonLabel')}
-      </Link>
-    </div>
+  const clearSearchComponent = (
+    <Icon name={ICONS.CLEAR_SEARCH} css={styles.clearSearch} />
   );
 
-  const onChange = () => {};
+  const onChange = (input: string) => {
+    setQuery(input);
+  };
   const handleInputResultMatch = () => {};
   const handleSelectionSuccess = () => {};
   const results: AutocompleteResult[] = [];
@@ -120,33 +93,12 @@ function Search({
         </GridItem>
       </Grid>
       <Grid>
-        <GridItem
-          css={styles.searchSectionGridItem}
-          gridColumnS="2/6"
-          gridColumnM="2/8"
-          gridColumnL="3/14"
-          gridColumnXL="3/14"
-        >
-          <SearchSection
-            eyebrow={ui('search.searchBy')}
-            onClick={handleSearchClick}
-            searchItems={SEARCH_CATEGORIES}
+        {query.length === 0 && (
+          <InitialSearch
+            onClearSearchesClick={handleClearSearchesClick}
+            onSearchClick={handleSearchClick}
+            pastSearches={pastSearches}
           />
-        </GridItem>
-        {pastSearches.length > 0 && (
-          <GridItem
-            css={styles.searchSectionGridItem}
-            gridColumnS="2/6"
-            gridColumnM="2/8"
-            gridColumnL="3/14"
-            gridColumnXL="3/14"
-          >
-            <SearchSection
-              eyebrow={pastSearchesEyebrow}
-              onClick={handleSearchClick}
-              searchItems={pastSearches}
-            />
-          </GridItem>
         )}
       </Grid>
     </div>

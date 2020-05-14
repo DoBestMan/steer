@@ -36,7 +36,7 @@ export interface ResultItemProps {
 export interface Props {
   children?: ReactChild;
   clearSearchComponent?: string | JSX.Element;
-  errorLabel: string | JSX.Element;
+  errorLabel?: string | JSX.Element;
   focusOnMount?: boolean;
   icon?: IconType;
   inputMaxLength?: number;
@@ -207,8 +207,10 @@ function Autocomplete({
     onValueSelectionSuccess(results[index]);
   };
 
+  const shouldShowError = isInvalidInput && errorLabel;
+
   const listBoxStyle = {
-    marginTop: shouldShowListbox || isInvalidInput ? SPACING.SIZE_40 : 0,
+    marginTop: shouldShowListbox || shouldShowError ? SPACING.SIZE_40 : 0,
   };
 
   return (
@@ -270,7 +272,7 @@ function Autocomplete({
             />
           ))}
 
-        {isInvalidInput && (
+        {shouldShowError && (
           <li css={styles.errorMessage} id={ids.invalidID}>
             {errorLabel}
           </li>

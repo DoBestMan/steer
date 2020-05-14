@@ -1,6 +1,6 @@
 import { css } from '@emotion/core';
 
-import { COLORS, MQ, SPACING } from '~/lib/constants';
+import { BORDERS, COLORS, MQ, SPACING, TIME } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const styles = {
@@ -17,7 +17,16 @@ const styles = {
   itemButton: [
     typography.secondaryHeadline,
     css({
+      '&:active': {
+        borderColor: COLORS.ORANGE.TINT_30,
+        color: COLORS.ORANGE.TINT_30,
+      },
+      '&:hover:not(:active), &:focus:not(:active)': {
+        borderColor: COLORS.GLOBAL.WHITE,
+      },
+      borderBottom: BORDERS.DOTTED_TRANSPARENT_2PX,
       color: COLORS.GLOBAL.WHITE,
+      transition: `border-color ${TIME.MS100}ms ease, color ${TIME.MS100}ms ease`,
       [MQ.M]: typography.primaryHeadline,
     }),
   ],
