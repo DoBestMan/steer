@@ -4,7 +4,8 @@
       "label": "Loading"
     },
     "modal": {
-      "close": "close that modal!",
+      "back": "Navigate back",
+      "close": "Close",
       "open": "open {{moduleName}}"
     },
     "header": {

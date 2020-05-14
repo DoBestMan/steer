@@ -79,3 +79,32 @@ export const fadeOutDown20px = keyframes({
     transform: `translate3D(0, ${SPACING.SIZE_20}px, 0)`,
   },
 });
+
+export const slideFadeInLeft = keyframes({
+  '0%': {
+    opacity: 0,
+    transform: 'translate3d(100%, 0, 0)',
+  },
+  '50%': {
+    opacity: 0,
+  },
+  // eslint-disable-next-line sort-keys
+  '100%': {
+    opacity: 1,
+    transform: 'translate3d(0, 0, 0)',
+  },
+});
+
+export const slideFadeOutLeft = keyframes({
+  '0%': {
+    opacity: 1,
+  },
+  '50%': {
+    opacity: 1,
+  },
+  // eslint-disable-next-line sort-keys
+  '100%': {
+    opacity: 0,
+    transform: 'translate3d(100%, 0, 0)',
+  },
+});
