@@ -1,6 +1,7 @@
 import { action } from '@storybook/addon-actions';
 
 import { siteMenuLearn } from '~/components/modules/SubNav/SubNav.mocks';
+import { useBreakpoints } from '~/hooks/useBreakpoints';
 
 import Learn from './Learn';
 
@@ -10,8 +11,10 @@ export default {
 };
 
 export function LearnWithCustomerSupport() {
+  const { isMobile } = useBreakpoints();
   return (
     <Learn
+      isMobile={isMobile}
       isCustomerServiceEnabled
       siteMenuLearn={siteMenuLearn}
       handleClearLink={action('handleClearLink')}
@@ -21,8 +24,10 @@ export function LearnWithCustomerSupport() {
 }
 
 export function LearnWithoutCustomerSupport() {
+  const { isMobile } = useBreakpoints();
   return (
     <Learn
+      isMobile={isMobile}
       isCustomerServiceEnabled={false}
       siteMenuLearn={siteMenuLearn}
       handleClearLink={action('handleClearLink')}

@@ -18,16 +18,19 @@ export interface LearnProps extends Pick<SiteMenu, 'siteMenuLearn'> {
   handleClearLink: NavContextProps['handleClearLink'];
   handleCloseSubNav: NavContextProps['handleCloseSubNav'];
   isCustomerServiceEnabled: boolean;
+  isMobile: boolean;
 }
 
 function Learn({
   isCustomerServiceEnabled,
+  isMobile,
   siteMenuLearn,
   handleClearLink,
   handleCloseSubNav,
 }: LearnProps) {
   return (
     <SubNavContentWrapper
+      isMobile={isMobile}
       onBack={handleClearLink}
       onClose={handleCloseSubNav}
       isOpen

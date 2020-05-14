@@ -1,12 +1,12 @@
 import { ReactChild } from 'react';
 
-import { useBreakpoints } from '~/hooks/useBreakpoints';
-
+import { Animation } from './SubNav.styles';
 import SubNavModal from './SubNavModal';
 
 interface Props {
   children: ReactChild;
   contentLabel?: string;
+  isMobile?: boolean;
   isOpen: boolean;
   onBack?: () => void;
   onClose: () => void;
@@ -15,16 +15,18 @@ interface Props {
 function SubNavContentWrapper({
   children,
   contentLabel,
+  isMobile,
   isOpen,
   onBack,
   onClose,
 }: Props) {
-  const { isMobile } = useBreakpoints();
   if (!isMobile) {
     return <>{children}</>;
   }
+
   return (
     <SubNavModal
+      animation={Animation.SLIDE_LEFT}
       contentLabel={contentLabel}
       onBack={onBack}
       isOpen={isOpen}

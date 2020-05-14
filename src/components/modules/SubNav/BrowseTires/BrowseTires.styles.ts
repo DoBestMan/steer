@@ -189,6 +189,11 @@ const styles = {
       display: 'initial',
     },
   }),
+  smallShow: css({
+    [MQ.M]: {
+      display: 'none',
+    },
+  }),
 };
 
 export default styles;

@@ -1,17 +1,15 @@
-import { ReactChild } from 'react';
-import ReactModal from 'react-modal';
+import { clearAllBodyScrollLocks, disableBodyScroll } from 'body-scroll-lock';
+import { ReactChild, useEffect, useRef } from 'react';
 
+import FocusTrap from '~/components/global/FocusTrap/FocusTrap';
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
+import { KEYCODES } from '~/lib/constants';
 
-import styles from './SubNav.styles';
-
-if (typeof document !== 'undefined') {
-  const appElId = document.getElementById('__next') ? '#__next' : '#root';
-  ReactModal.setAppElement(appElId);
-}
+import styles, { Animation } from './SubNav.styles';
 
 interface Props {
+  animation?: Animation;
   children: ReactChild;
   contentLabel?: string;
   isOpen: boolean;
@@ -20,41 +18,74 @@ interface Props {
 }
 
 function SubNavModal({
+  animation = Animation.SLIDE_LEFT,
   children,
   contentLabel,
   isOpen,
   onBack,
   onClose,
 }: Props) {
+  const navRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  // escape button
+  useEffect(() => {
+    function onKeypress(e: KeyboardEvent) {
+      if (e.keyCode === KEYCODES.ESCAPE) {
+        onClose();
+      }
+    }
+
+    if (isOpen && onClose && contentRef.current) {
+      document.addEventListener('keydown', onKeypress);
+      disableBodyScroll(contentRef.current);
+    }
+
+    return () => {
+      document.removeEventListener('keydown', onKeypress);
+      clearAllBodyScrollLocks();
+    };
+  }, [isOpen, onClose]);
   return (
-    <ReactModal
-      contentLabel={contentLabel}
-      style={{ content: styles.modal, overlay: styles.overlay }}
-      isOpen={isOpen}
-      onRequestClose={onClose}
-      shouldReturnFocusAfterClose
-      shouldCloseOnEsc
-    >
-      {onBack && (
-        <div css={styles.actions}>
-          <button
-            aria-label="Return to main navigation"
-            onClick={onBack}
-            css={styles.action}
-          >
-            <Icon name={ICONS.CHEVRON_LEFT} />
-          </button>
-          <button
-            aria-label={`Close ${contentLabel}`}
-            onClick={onClose}
-            css={styles.action}
-          >
-            <Icon name={ICONS.CLOSE} />
-          </button>
+    // FocusTrap will need to know if another modal is open on top
+    // so active should be forced to false here
+    <FocusTrap active={isOpen} ref={navRef}>
+      <nav
+        ref={navRef}
+        css={[styles.navModalContainer, isOpen && styles.navModalContainerOpen]}
+      >
+        {!onBack && <span css={styles.overlay} onClick={onClose}></span>}
+        <div
+          ref={contentRef}
+          css={[
+            styles.navContent,
+            styles[animation].default,
+            isOpen && styles[animation].open,
+          ]}
+        >
+          {onBack && (
+            <div css={styles.actions}>
+              <button
+                aria-label="Return to main navigation"
+                onClick={onBack}
+                css={styles.action}
+              >
+                <Icon name={ICONS.CHEVRON_LEFT} />
+              </button>
+              <button
+                aria-label={`Close ${contentLabel}`}
+                onClick={onClose}
+                css={styles.action}
+              >
+                <Icon name={ICONS.CLOSE} />
+              </button>
+            </div>
+          )}
+
+          {children}
         </div>
-      )}
-      {children}
-    </ReactModal>
+      </nav>
+    </FocusTrap>
   );
 }
 

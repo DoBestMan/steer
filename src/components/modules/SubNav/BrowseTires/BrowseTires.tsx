@@ -6,10 +6,11 @@ import Categories from './Categories';
 import TireCategoryLinks from './TireCategoryLinks';
 
 interface Props extends Pick<SiteMenu, 'siteMenuBrowseList'> {
+  isMobile: boolean;
   shouldSetFocus: boolean;
 }
 
-function BrowseTires({ shouldSetFocus, siteMenuBrowseList }: Props) {
+function BrowseTires({ isMobile, shouldSetFocus, siteMenuBrowseList }: Props) {
   return (
     <>
       <GridItem gridColumnM="1/3" gridColumnL="1/4" css={styles.smallHide}>
@@ -22,6 +23,7 @@ function BrowseTires({ shouldSetFocus, siteMenuBrowseList }: Props) {
             {...{
               category: title,
               info,
+              isMobile,
               shouldSetFocus,
               siteMenuBrowseGroupList,
             }}

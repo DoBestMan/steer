@@ -14,6 +14,7 @@ import CategoryInfo from './CategoryInfo';
 interface Props {
   category: string;
   info: SiteMenuBrowseItem['info'];
+  isMobile: boolean;
   shouldSetFocus: boolean;
   siteMenuBrowseGroupList: SiteMenuBrowseGroupItem[];
 }
@@ -21,6 +22,7 @@ interface Props {
 function Categories({
   category,
   info,
+  isMobile,
   shouldSetFocus,
   siteMenuBrowseGroupList,
 }: Props) {
@@ -29,24 +31,28 @@ function Categories({
     handleClearCategory,
     handleCloseSubNav,
   } = useNavContext();
+  const isSelected = activeCategory === category;
   const focusRef = useCallback(
     (node) => {
-      if (shouldSetFocus && node !== null) {
+      if (isSelected && shouldSetFocus && node !== null) {
         // focus on the first list item element when category is selected
         node.firstChild.focus();
       }
     },
-    [shouldSetFocus],
+    [isSelected, shouldSetFocus],
   );
 
-  if (activeCategory !== category) {
-    return null;
-  }
   return (
-    <GridItem gridColumnM="3/7" gridColumnL="4/10" gridColumnXL="4/8">
+    <GridItem
+      gridColumnM="3/7"
+      gridColumnL="4/10"
+      gridColumnXL="4/8"
+      css={!isSelected && styles.smallShow}
+    >
       <SubNavContentWrapper
+        isMobile={isMobile}
         contentLabel={category}
-        isOpen={activeCategory === category}
+        isOpen={isSelected}
         onClose={handleCloseSubNav}
         onBack={handleClearCategory}
       >

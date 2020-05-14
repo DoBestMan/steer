@@ -25,6 +25,7 @@ const styles = {
         },
         ':nth-of-type(3)': {
           left: -SPACING.SIZE_50,
+          zIndex: Z_INDEX.ZERO,
         },
         height: ICON_SIZE.H,
         position: 'relative',
