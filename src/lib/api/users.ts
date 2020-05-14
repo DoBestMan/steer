@@ -1,6 +1,6 @@
 import { UserPersonalization } from '~/data/models/UserPersonalization';
 import { UserPersonalizationUpdate } from '~/data/models/UserPersonalizationUpdate';
-import { fetch } from '~/lib/fetch';
+import { fetch, fetchSetUserPersonalization } from '~/lib/fetch';
 
 export async function apiUpdateUserPersonalization(
   body: UserPersonalizationUpdate,
@@ -14,6 +14,8 @@ export async function apiUpdateUserPersonalization(
     includeAuthorization: true,
     method: 'put',
   });
+
+  fetchSetUserPersonalization(userSessionData);
 
   return userSessionData;
 }
