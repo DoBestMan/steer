@@ -14,7 +14,7 @@ import { backendGetSiteGlobals, backendGetSiteMenu } from '~/lib/backend';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
 import { global } from '~/styles/document/global.styles';
 
-interface Props extends AppContext, AppInitialProps {
+interface Props extends AppInitialProps {
   serverData: {
     siteGlobals: SiteGlobals;
     siteMenuBrowseList: Array<SiteMenuBrowseItem>;
@@ -63,9 +63,9 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
   backendBootstrap();
 
   const { siteMenuBrowseList, siteMenuLearn } = await backendGetSiteMenu();
-  const siteGlobals = await backendGetSiteGlobals();
+  const { siteGlobals } = await backendGetSiteGlobals();
 
-  return {
+  const finalProps: Props = {
     ...appProps,
     serverData: {
       siteGlobals,
@@ -73,6 +73,8 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
       siteMenuLearn,
     },
   };
+
+  return finalProps;
 };
 
 export default MyApp;

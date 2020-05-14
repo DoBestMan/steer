@@ -46,7 +46,7 @@ async function getUserSession(
     return;
   }
 
-  const userPersonalization = await backendGetUserPersonalization({
+  const { userPersonalization } = await backendGetUserPersonalization({
     userSessionId,
   });
 

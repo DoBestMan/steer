@@ -1,3 +1,4 @@
+import { SiteGlobals } from '~/data/models/SiteGlobals';
 import { SiteHero } from '~/data/models/SiteHero';
 import { SiteInsights } from '~/data/models/SiteInsights';
 import { SiteMenuBrowseItem } from '~/data/models/SiteMenuBrowseItem';
@@ -8,8 +9,7 @@ import { fetch } from '../fetch';
 
 export async function backendGetSiteGlobals() {
   const response = await fetch<{
-    siteHero: SiteHero;
-    siteInsights: SiteInsights;
+    siteGlobals: SiteGlobals;
   }>({
     endpoint: '/v1/site/globals',
     includeAuthorization: true,

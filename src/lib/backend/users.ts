@@ -27,7 +27,7 @@ export async function backendGetUserPersonalization({
 }: {
   userSessionId: string;
 }) {
-  const response = await fetch<UserPersonalization>({
+  const response = await fetch<{ userPersonalization: UserPersonalization }>({
     endpoint: '/v1/users/{userSessionId}/personalization',
     includeAuthorization: true,
     method: 'get',
@@ -45,7 +45,10 @@ export async function backendUpdateUserPersonalization({
   userLocationZip,
   userSessionId,
 }: { userSessionId: string } & UserPersonalizationUpdate) {
-  const response = await fetch<UserPersonalization, UserPersonalizationUpdate>({
+  const response = await fetch<
+    { userPersonalization: UserPersonalization },
+    UserPersonalizationUpdate
+  >({
     body: {
       gaClientId,
       userLocationGooglePlacesId,

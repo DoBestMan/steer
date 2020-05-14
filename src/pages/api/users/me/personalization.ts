@@ -22,7 +22,7 @@ export default async (
 
       const { userLocationGooglePlacesId, userLocationZip } = request.body;
 
-      const userPersonalization = await backendUpdateUserPersonalization({
+      const { userPersonalization } = await backendUpdateUserPersonalization({
         userLocationGooglePlacesId: String(userLocationGooglePlacesId),
         userLocationZip: String(userLocationZip),
         userSessionId,

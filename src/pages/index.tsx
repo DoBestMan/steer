@@ -28,14 +28,16 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context: {
   const { siteHero, siteInsights } = await backendGetSiteHome();
   const { siteReviews } = await backendGetSiteReviews();
 
-  return {
-    props: {
-      serverData: {
-        siteHero,
-        siteInsights,
-        siteReviews,
-      },
+  const props: Props = {
+    serverData: {
+      siteHero,
+      siteInsights,
+      siteReviews,
     },
+  };
+
+  return {
+    props,
   };
 };
 
