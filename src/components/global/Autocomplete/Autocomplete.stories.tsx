@@ -114,7 +114,7 @@ export function AutocompleteWithClearIcon() {
   const { results, onChange } = useAutocompleteProps();
 
   const clearSearchComponent = (
-    <Icon name={ICONS.CLEAR_SEARCH} css={styles.clearSearch} />
+    <Icon name={ICONS.CLEAR_INPUT} css={styles.clearSearch} />
   );
 
   return (

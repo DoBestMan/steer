@@ -25,7 +25,7 @@ export const mockInsights = [
       'The ones that came with the vehicle from the factory.',
     ),
     eyebrow: 'Trending',
-    eyebrowIcon: { svgId: ICONS.ARROW_BOTTOM, type: ICON_IMAGE_TYPE.ICON },
+    eyebrowIcon: { svgId: ICONS.ARROW_UP, type: ICON_IMAGE_TYPE.ICON },
     figures: [
       {
         svgId: text('Card 2 Decorator', 'icon-wheel'),
