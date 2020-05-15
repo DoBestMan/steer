@@ -55,7 +55,7 @@ function InitialSearch({
   return (
     <>
       <GridItem
-        css={styles.searchSectionGridItem}
+        css={styles.initialSearchGridItem}
         gridColumnS="2/6"
         gridColumnM="2/8"
         gridColumnL="3/14"
@@ -69,7 +69,7 @@ function InitialSearch({
       </GridItem>
       {pastSearches.length > 0 && (
         <GridItem
-          css={styles.searchSectionGridItem}
+          css={styles.initialSearchGridItem}
           gridColumnS="2/6"
           gridColumnM="2/8"
           gridColumnL="3/14"

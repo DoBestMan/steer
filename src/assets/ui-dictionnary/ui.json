@@ -77,11 +77,14 @@
     "clearPastSearchesButtonLabel": "Clear all",
     "pastSearches": "Past searches",
     "searchBy": "Search by",
+    "searchAutocompleteLabelSM": "Search by vehicle",
+    "searchAutocompleteLabelLG": "Search by vehicle, tire size or brand",
     "searchCategories": {
       "vehicle": "Vehicle",
       "tireSize": "Tire size",
       "brand": "Brand",
       "popularTires": "Popular tires"
-    }
+    },
+    "searchError": "Sorry, no matching results found."
   }
 }

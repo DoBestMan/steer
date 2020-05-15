@@ -6,27 +6,44 @@ export interface SearchItem {
 }
 
 interface Props {
-  eyebrow: string | JSX.Element;
-  onClick: (searchText: string) => void;
+  eyebrow?: string | JSX.Element;
+  onClick: (searchText: SearchItem) => void;
   searchItems: SearchItem[];
+  sectionIndex?: number;
+  selectedItemIndex?: [number, number];
 }
 
-function SearchSection({ eyebrow, onClick, searchItems }: Props) {
-  const handleClick = (searchText: string) => () => {
-    onClick(searchText);
+function SearchSection({
+  eyebrow,
+  onClick,
+  searchItems,
+  sectionIndex,
+  selectedItemIndex = [0, -1],
+}: Props) {
+  const handleClick = (item: SearchItem) => () => {
+    onClick(item);
   };
 
   return (
     <div>
-      <h5 css={styles.eyebrow}>{eyebrow}</h5>
+      {eyebrow && <h5 css={styles.eyebrow}>{eyebrow}</h5>}
       <ul>
-        {searchItems.map((item) => (
-          <li key={item.id} css={styles.listItem}>
-            <button css={styles.itemButton} onClick={handleClick(item.text)}>
-              {item.text}
-            </button>
-          </li>
-        ))}
+        {searchItems.map((item, index) => {
+          const isSelected =
+            sectionIndex === selectedItemIndex[0] &&
+            index === selectedItemIndex[1];
+
+          return (
+            <li css={styles.listItem} key={item.id}>
+              <button
+                css={[styles.itemButton, isSelected && styles.isSelected]}
+                onClick={handleClick(item)}
+              >
+                {item.text}
+              </button>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
