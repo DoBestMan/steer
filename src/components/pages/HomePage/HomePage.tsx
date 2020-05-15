@@ -11,6 +11,7 @@ import { SiteInsights } from '~/data/models/SiteInsights';
 import { SiteReviews } from '~/data/models/SiteReviews';
 import { useApiDataWithDefault } from '~/hooks/useApiDataWithDefault';
 import { COLORS } from '~/lib/constants';
+import { eventEmitters } from '~/lib/events/emitters';
 import { getScroll } from '~/lib/helpers/scroll';
 import { hasIntersectionObserver } from '~/lib/utils/browser';
 
@@ -50,12 +51,21 @@ function HomePage({ serverData }: Props) {
   const {
     data: { siteHero, siteInsights },
     error,
+    revalidate,
   } = useApiDataWithDefault<HomeData>({
     defaultData: serverData,
     endpoint: '/home',
     includeUserRegion: true,
     includeUserZip: true,
   });
+
+  useEffect(() => {
+    eventEmitters.userPersonalizationLocationUpdate.on(revalidate);
+
+    return () => {
+      eventEmitters.userPersonalizationLocationUpdate.off(revalidate);
+    };
+  }, [revalidate]);
 
   if (error) {
     console.error(error);
