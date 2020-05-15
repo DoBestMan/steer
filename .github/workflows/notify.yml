@@ -1,9 +1,7 @@
 name: Run script and notify Slack
 
-on:
-  schedule:
-  # 6:00pm EDT Mon-Fri
-  - cron: '0 22 * * 1-5'
+on: repository_dispatch
+    types: [release_qa]
 
 jobs:
   deploy:
@@ -29,6 +27,7 @@ jobs:
         VERCEL_TEAM_ID: team_VPd1oc6P6ZnTcxG88nPVzK1c
       run: |
         python scripts/tickets.py
+        echo 'jira updated'
     - name: Notifying via Slack
       uses: aibexhq/slack-rich-notify@v2.0.1
       with:

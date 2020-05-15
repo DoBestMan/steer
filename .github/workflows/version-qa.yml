@@ -14,10 +14,20 @@ jobs:
         ref: 'qa'
 
     - name: Bump version and create tag
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         yarn version --minor
+    - name: Create repository dispatch event
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        EVENT: release_qa
+        ORG: SimpleTire
+        REPO: steer
+      run: |
+        curl -d "{\"event_type\": \"${EVENT}\"}" -H "Content-Type: application/json" -H "Authorization: token ${GITHUB_TOKEN}" -H "Accept: application/vnd.github.everest-preview+json" "https://api.github.com/repos/${ORG}/${REPO}/dispatches"
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
