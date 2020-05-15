@@ -1,4 +1,4 @@
-import useSWR from 'swr';
+import useSWR, { ConfigInterface } from 'swr';
 
 import { apiBootstrap } from '~/lib/api/bootstrap';
 import { fetch } from '~/lib/fetch';
@@ -19,6 +19,7 @@ export interface UseApiDataParams {
   includeAuthorization?: boolean;
   includeUserRegion?: boolean;
   includeUserZip?: boolean;
+  options?: ConfigInterface;
   params?: Record<string, string>;
 }
 
@@ -28,6 +29,7 @@ export function useApiData<T>({
   includeUserRegion = false,
   includeUserZip = false,
   params = {},
+  options = {},
 }: UseApiDataParams): UseApiData<T> {
   const { data, error, isValidating, mutate, revalidate } = useSWR<T>(
     [endpoint, JSON.stringify(params)],
@@ -43,7 +45,7 @@ export function useApiData<T>({
         params,
       });
     },
-    {},
+    options,
   );
 
   return {

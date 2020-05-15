@@ -50,6 +50,7 @@ describe('useApiData', () => {
       includeAuthorization: false,
       includeUserRegion: false,
       includeUserZip: false,
+      options: {},
       params: {},
     });
 

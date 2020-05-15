@@ -5,22 +5,15 @@ import { useSiteMenuContext } from '~/context/SiteMenu.context';
 import Nav from './Nav';
 
 interface Props {
-  isCustomerServiceEnabled?: boolean;
   isHomepage?: boolean;
 }
 
-function NavContainer({
-  isCustomerServiceEnabled = false,
-  isHomepage = false,
-}: Props) {
+function NavContainer({ isHomepage = false }: Props) {
   const siteMenu = useSiteMenuContext();
   return (
     <NavContextProvider>
       <Nav isHomepage={isHomepage} />
-      <SubNav
-        isCustomerServiceEnabled={isCustomerServiceEnabled}
-        {...siteMenu}
-      />
+      <SubNav {...siteMenu} />
     </NavContextProvider>
   );
 }

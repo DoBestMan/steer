@@ -1,21 +1,16 @@
 import { useNavContext } from '~/context/Nav.context';
+import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
 
 import Learn, { LearnProps } from './Learn';
 
-type Props = Pick<
-  LearnProps,
-  'isCustomerServiceEnabled' | 'siteMenuLearn' | 'isMobile'
->;
+type Props = Pick<LearnProps, 'siteMenuLearn' | 'isMobile'>;
 
-function LearnContainer({
-  isCustomerServiceEnabled,
-  isMobile,
-  siteMenuLearn,
-}: Props) {
+function LearnContainer({ isMobile, siteMenuLearn }: Props) {
+  const { customerServiceEnabled } = useSiteGlobalsContext();
   const { handleClearLink, handleCloseSubNav } = useNavContext();
   return (
     <Learn
-      isCustomerServiceEnabled={isCustomerServiceEnabled}
+      isCustomerServiceEnabled={customerServiceEnabled}
       siteMenuLearn={siteMenuLearn}
       isMobile={isMobile}
       handleClearLink={handleClearLink}

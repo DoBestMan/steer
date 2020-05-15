@@ -41,10 +41,12 @@ function getColorFromScrollState(thresholdCrossed: boolean) {
 
 function HomePage({ serverData }: Props) {
   const { siteReviews } = serverData;
+  const { siteTheme } = useSiteGlobalsContext();
+
   const [thresholdCrossed, setThresholdCrossed] = useState(false);
 
-  const { customerServiceEnabled, siteTheme } = useSiteGlobalsContext();
   const contentContainerRef = useRef<HTMLDivElement>(null);
+
   const {
     data: { siteHero, siteInsights },
     error,
@@ -109,10 +111,7 @@ function HomePage({ serverData }: Props) {
   return (
     <>
       <div css={styles.root}>
-        <NavContainer
-          isHomepage
-          isCustomerServiceEnabled={customerServiceEnabled}
-        />
+        <NavContainer isHomepage />
         <HomeHeader {...siteHero} />
       </div>
 

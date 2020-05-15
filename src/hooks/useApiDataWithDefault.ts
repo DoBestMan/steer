@@ -7,6 +7,7 @@ export function useApiDataWithDefault<T, U = T>({
   includeUserRegion = false,
   includeUserZip = false,
   params = {},
+  options = {},
 }: UseApiDataParams & {
   defaultData: T;
 }): UseApiData<U> & {
@@ -17,6 +18,7 @@ export function useApiDataWithDefault<T, U = T>({
     includeAuthorization,
     includeUserRegion,
     includeUserZip,
+    options,
     params,
   });
 

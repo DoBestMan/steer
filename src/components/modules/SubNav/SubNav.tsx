@@ -17,15 +17,7 @@ import styles, { Animation } from './SubNav.styles';
 import SubNavLinks from './SubNavLinks';
 import SubNavModal from './SubNavModal';
 
-interface Props extends SiteMenu {
-  isCustomerServiceEnabled: boolean;
-}
-
-function SubNav({
-  isCustomerServiceEnabled,
-  siteMenuBrowseList,
-  siteMenuLearn,
-}: Props) {
+function SubNav({ siteMenuBrowseList, siteMenuLearn }: SiteMenu) {
   const {
     activeCategory,
     handleClearLink,
@@ -112,7 +104,6 @@ function SubNav({
             {activeLink === NAV_TARGETS.LEARN && (
               <LearnContainer
                 isMobile={isMobile}
-                isCustomerServiceEnabled={isCustomerServiceEnabled}
                 siteMenuLearn={siteMenuLearn}
               />
             )}
