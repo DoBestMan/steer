@@ -1,4 +1,4 @@
-import { MouseEventHandler, ReactChild } from 'react';
+import { MouseEventHandler, ReactNode } from 'react';
 
 import {
   BUTTON_STYLE,
@@ -14,8 +14,10 @@ import styles from './Button.styles';
 
 interface Props {
   as?: LINK_TYPE;
-  children: ReactChild;
+  children: ReactNode;
   isDisabled?: boolean;
+  isToggle?: boolean;
+  isToggleActive?: boolean;
   onClick: MouseEventHandler;
   style?: BUTTON_STYLE;
   tabIndex?: number;
@@ -36,14 +38,20 @@ function Button({
   as = LINK_TYPES.BUTTON,
   children,
   isDisabled,
+  isToggle = false,
+  isToggleActive = false,
   style = BUTTON_STYLE.SOLID,
   theme = BUTTON_THEME.LIGHT,
   ...rest
 }: ButtonProps) {
+  const toggleStyles = isToggleActive
+    ? styles.toggle.active[theme]
+    : styles.toggle.inactive[theme];
+
   const buttonStyles = [
     disableGlobalFocus,
     styles.root,
-    styles[style][theme],
+    isToggle && toggleStyles ? toggleStyles : styles[style][theme],
     isDisabled && styles.disabled,
   ];
   const isAnchor = as === LINK_TYPES.A;

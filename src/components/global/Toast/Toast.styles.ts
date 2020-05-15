@@ -45,7 +45,7 @@ const styles = {
     alignSelf: 'flex-start',
     color: COLORS.GLOBAL.WHITE,
     [MQ.L]: {
-      color: COLORS.ORANGE.TINT_30,
+      color: COLORS.ORANGE.TINT_70,
       paddingLeft: SPACING.SIZE_15,
       paddingTop: 3,
     },

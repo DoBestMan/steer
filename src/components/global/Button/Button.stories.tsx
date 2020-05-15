@@ -1,7 +1,7 @@
 import { css } from '@emotion/core';
 import { action } from '@storybook/addon-actions';
 import { boolean, select, text } from '@storybook/addon-knobs';
-import { ReactChild } from 'react';
+import { ReactChild, useState } from 'react';
 
 import {
   BUTTON_STYLE,
@@ -11,6 +11,7 @@ import {
 } from '~/lib/constants';
 
 import Button from './Button';
+import FilterButton from './FilterButton';
 
 export default {
   component: Button,
@@ -50,7 +51,7 @@ export function ButtonWithKnobs() {
   );
   const style = select(
     'Style',
-    [BUTTON_STYLE.SOLID, BUTTON_STYLE.OUTLINED, BUTTON_STYLE.FILTERS],
+    [BUTTON_STYLE.SOLID, BUTTON_STYLE.OUTLINED],
     BUTTON_STYLE.SOLID,
   );
   const theme = select(
@@ -172,6 +173,116 @@ export function OrangeButtonOutlined() {
       >
         {text('Label', 'Button Label')}
       </Button>
+    </ButtonContainer>
+  );
+}
+
+export function FilterButtonWithKnobs() {
+  const theme = select(
+    'Theme',
+    [BUTTON_THEME.DARK, BUTTON_THEME.ORANGE],
+    BUTTON_THEME.DARK,
+  );
+
+  return (
+    <ButtonContainer theme={theme}>
+      <FilterButton
+        isActive={boolean('Active', false)}
+        isDisabled={boolean('Disabled', false)}
+        hasDropDown={boolean('Drop down', false)}
+        onClick={handleButtonClick}
+        theme={theme}
+      >
+        {text('Label', 'Button Label')}
+      </FilterButton>
+    </ButtonContainer>
+  );
+}
+
+export function DarkFilterButtonInactive() {
+  return (
+    <ButtonContainer theme={BUTTON_THEME.DARK}>
+      <FilterButton
+        hasDropDown={boolean('Drop down', false)}
+        isActive={false}
+        isDisabled={boolean('Disabled', false)}
+        onClick={handleButtonClick}
+      >
+        {text('Label', 'Button Label')}
+      </FilterButton>
+    </ButtonContainer>
+  );
+}
+
+export function DarkFilterButtonActive() {
+  return (
+    <ButtonContainer theme={BUTTON_THEME.DARK}>
+      <FilterButton
+        hasDropDown={boolean('Drop down', false)}
+        isActive
+        isDisabled={boolean('Disabled', false)}
+        onClick={handleButtonClick}
+      >
+        {text('Label', 'Button Label')}
+      </FilterButton>
+    </ButtonContainer>
+  );
+}
+
+export function OrangeFilterButtonInactive() {
+  return (
+    <ButtonContainer theme={BUTTON_THEME.ORANGE}>
+      <FilterButton
+        hasDropDown={boolean('Drop down', false)}
+        isActive={false}
+        isDisabled={boolean('Disabled', false)}
+        onClick={handleButtonClick}
+        theme={BUTTON_THEME.ORANGE}
+      >
+        {text('Label', 'Button Label')}
+      </FilterButton>
+    </ButtonContainer>
+  );
+}
+
+export function OrangeFilterButtonActive() {
+  return (
+    <ButtonContainer theme={BUTTON_THEME.ORANGE}>
+      <FilterButton
+        hasDropDown={boolean('Drop down', false)}
+        isActive
+        isDisabled={boolean('Disabled', false)}
+        onClick={handleButtonClick}
+        theme={BUTTON_THEME.ORANGE}
+      >
+        {text('Label', 'Button Label')}
+      </FilterButton>
+    </ButtonContainer>
+  );
+}
+
+export function FilterButtonWithToggleState() {
+  const [isActive, setIsActive] = useState(false);
+
+  const theme = select(
+    'Theme',
+    [BUTTON_THEME.DARK, BUTTON_THEME.ORANGE],
+    BUTTON_THEME.DARK,
+  );
+
+  return (
+    <ButtonContainer theme={theme}>
+      <FilterButton
+        hasDropDown={boolean('Drop down', false)}
+        isActive={isActive}
+        isDisabled={boolean('Disabled', false)}
+        onClick={function () {
+          setIsActive(!isActive);
+        }}
+        theme={theme}
+      >
+        {text('Label', 'Button Label')}
+      </FilterButton>
     </ButtonContainer>
   );
 }

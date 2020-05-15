@@ -94,7 +94,7 @@ const styles: CSSObject = {
       height: 34,
       width: 34,
     },
-    color: COLORS.ORANGE.TINT_30,
+    color: COLORS.ORANGE.TINT_70,
   },
   searchIconGridItem: {
     alignItems: 'center',

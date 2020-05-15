@@ -18,8 +18,8 @@ const styles = {
     typography.secondaryHeadline,
     css({
       '&:active': {
-        borderColor: COLORS.ORANGE.TINT_30,
-        color: COLORS.ORANGE.TINT_30,
+        borderColor: COLORS.ORANGE.TINT_70,
+        color: COLORS.ORANGE.TINT_70,
       },
       '&:hover:not(:active), &:focus:not(:active)': {
         borderColor: COLORS.GLOBAL.WHITE,

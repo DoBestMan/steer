@@ -12,6 +12,7 @@ import { typography } from '~/styles/typography.styles';
 
 const CONSTANTS = {
   BORDER_SIZE: 2,
+  ICON_SPACING: 5,
   OPACITY_ACTIVE: 0.8,
   OPACITY_DISABLED: 0.4,
   SIZE: 50,
@@ -21,6 +22,9 @@ const styles = {
   disabled: css({
     opacity: CONSTANTS.OPACITY_DISABLED,
     pointerEvents: 'none',
+  }),
+  filterIcon: css({
+    marginLeft: CONSTANTS.ICON_SPACING,
   }),
   root: [
     typography.primarySubhead,
@@ -33,15 +37,74 @@ const styles = {
       display: 'inline-flex',
       height: CONSTANTS.SIZE,
       padding: `0 ${SPACING.SIZE_25}px`,
-      transition: `border-color ${TIME.MS100}ms ease`,
+      transition: `all ${TIME.MS100}ms ease`,
     }),
   ],
-
-  [BUTTON_STYLE.FILTERS]: {
-    [BUTTON_THEME.DARK]: css({}),
-    [BUTTON_THEME.LIGHT]: css({}),
-    [BUTTON_THEME.ORANGE]: css({}),
+  toggle: {
+    active: {
+      [BUTTON_THEME.DARK]: css({
+        '&:focus': {
+          backgroundColor: COLORS.DARK.GRAY_40,
+          borderColor: COLORS.GLOBAL.WHITE,
+        },
+        '&:hover': {
+          // backgroundClip prevents background color from bleeding
+          // under the border. Required for semi-transparent border
+          // colors to be rendered correctly.
+          backgroundClip: 'padding-box',
+          backgroundColor: COLORS.DARK.GRAY_40,
+          borderColor: COLORS.DARK.GRAY_40,
+        },
+        backgroundColor: COLORS.GLOBAL.WHITE,
+        borderColor: COLORS.GLOBAL.WHITE,
+        color: COLORS.GLOBAL.BLACK,
+      }),
+      [BUTTON_THEME.LIGHT]: css({}), // Not an option
+      [BUTTON_THEME.ORANGE]: css({
+        '&:focus': {
+          backgroundColor: COLORS.ORANGE.TINT_70,
+          borderColor: COLORS.GLOBAL.BLACK,
+        },
+        '&:hover': {
+          // backgroundClip prevents background color from bleeding
+          // under the border. Required for semi-transparent border
+          // colors to be rendered correctly.
+          backgroundClip: 'padding-box',
+          backgroundColor: COLORS.ORANGE.TINT_70,
+          borderColor: COLORS.ORANGE.TINT_70,
+        },
+        backgroundColor: COLORS.GLOBAL.WHITE,
+        borderColor: COLORS.GLOBAL.WHITE,
+        color: COLORS.GLOBAL.ORANGE,
+      }),
+    },
+    inactive: {
+      [BUTTON_THEME.DARK]: css({
+        '&:focus': {
+          borderColor: COLORS.GLOBAL.WHITE,
+        },
+        '&:hover': {
+          borderColor: COLORS.DARK.GRAY_40,
+        },
+        backgroundColor: COLORS.GLOBAL.BLACK,
+        borderColor: COLORS.DARK.GRAY_80,
+        color: COLORS.GLOBAL.WHITE,
+      }),
+      [BUTTON_THEME.LIGHT]: css({}), // Not an option
+      [BUTTON_THEME.ORANGE]: css({
+        '&:focus': {
+          borderColor: COLORS.GLOBAL.BLACK,
+        },
+        '&:hover': {
+          borderColor: COLORS.LIGHT.GRAY_70,
+        },
+        backgroundColor: COLORS.GLOBAL.ORANGE,
+        borderColor: COLORS.ORANGE.SHADE_30,
+        color: COLORS.GLOBAL.WHITE,
+      }),
+    },
   },
+
   [BUTTON_STYLE.OUTLINED]: {
     // Outlined Dark
     [BUTTON_THEME.DARK]: css({
@@ -49,10 +112,10 @@ const styles = {
         backgroundColor: COLORS.DARK.GRAY_90,
         borderColor: COLORS.DARK.GRAY_40,
       },
-      '&:focus': {
+      '&:focus:not(:active)': {
         borderColor: COLORS.GLOBAL.WHITE,
       },
-      '&:hover': {
+      '&:hover:not(:active)': {
         borderColor: COLORS.DARK.GRAY_40,
       },
       backgroundColor: COLORS.GLOBAL.BLACK,
@@ -65,10 +128,10 @@ const styles = {
         backgroundColor: COLORS.LIGHT.GRAY_10,
         borderColor: COLORS.LIGHT.GRAY_70,
       },
-      '&:focus': {
+      '&:focus:not(:active)': {
         borderColor: COLORS.GLOBAL.BLACK,
       },
-      '&:hover': {
+      '&:hover:not(:active)': {
         borderColor: COLORS.LIGHT.GRAY_70,
       },
       backgroundColor: COLORS.GLOBAL.WHITE,
@@ -81,10 +144,10 @@ const styles = {
         backgroundColor: COLORS.LIGHT.GRAY_20,
         borderColor: COLORS.LIGHT.GRAY_70,
       },
-      '&:focus': {
+      '&:focus:not(:active)': {
         borderColor: COLORS.GLOBAL.BLACK,
       },
-      '&:hover': {
+      '&:hover:not(:active)': {
         borderColor: COLORS.LIGHT.GRAY_70,
       },
       backgroundColor: COLORS.GLOBAL.ORANGE,
@@ -98,10 +161,10 @@ const styles = {
       '&:active': {
         borderColor: COLORS.ORANGE.SHADE_30,
       },
-      '&:focus': {
+      '&:focus:not(:active)': {
         borderColor: COLORS.GLOBAL.WHITE,
       },
-      '&:hover': {
+      '&:hover:not(:active)': {
         borderColor: COLORS.DARK.GRAY_40,
       },
       backgroundColor: COLORS.GLOBAL.ORANGE,
@@ -111,12 +174,12 @@ const styles = {
     // Solid Light
     [BUTTON_THEME.LIGHT]: css({
       '&:active': {
-        borderColor: COLORS.ORANGE.TINT_30,
+        borderColor: COLORS.ORANGE.TINT_70,
       },
-      '&:focus': {
+      '&:focus:not(:active)': {
         borderColor: COLORS.GLOBAL.BLACK,
       },
-      '&:hover': {
+      '&:hover:not(:active)': {
         borderColor: COLORS.ORANGE.SHADE_30,
       },
       backgroundColor: COLORS.GLOBAL.ORANGE,
@@ -126,13 +189,13 @@ const styles = {
     // Solid Orange
     [BUTTON_THEME.ORANGE]: css({
       '&:active': {
-        backgroundColor: COLORS.ORANGE.TINT_30,
+        backgroundColor: COLORS.ORANGE.TINT_70,
         borderColor: '#B94A12', // TODO: var
       },
-      '&:focus': {
+      '&:focus:not(:active)': {
         borderColor: COLORS.GLOBAL.BLACK,
       },
-      '&:hover': {
+      '&:hover:not(:active)': {
         borderColor: '#B94A12', // TODO: var
       },
       backgroundColor: COLORS.GLOBAL.WHITE,

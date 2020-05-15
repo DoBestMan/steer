@@ -70,7 +70,7 @@ export const searchAutocomplete = css({
   },
   'input, label': [typography.secondaryHeadline],
   label: {
-    color: COLORS.ORANGE.TINT_30,
+    color: COLORS.ORANGE.TINT_70,
   },
   [MQ.M]: {
     ' > div': {
