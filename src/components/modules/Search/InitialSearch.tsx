@@ -3,32 +3,15 @@ import Link from '~/components/global/Link/Link';
 import { LINK_SIZE, LINK_THEME, LINK_TYPES } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
+import { SearchResult } from './Search';
+import { initialSearchCategories } from './Search.mocks';
 import styles from './Search.styles';
-import SearchSection, { SearchItem } from './SearchSection';
-
-const SEARCH_CATEGORIES = [
-  {
-    id: 'vehicle',
-    text: ui('search.searchCategories.vehicle'),
-  },
-  {
-    id: 'tire-size',
-    text: ui('search.searchCategories.tireSize'),
-  },
-  {
-    id: 'brand',
-    text: ui('search.searchCategories.brand'),
-  },
-  {
-    id: 'popular-tires',
-    text: ui('search.searchCategories.popularTires'),
-  },
-];
+import SearchSection from './SearchSection';
 
 interface Props {
   onClearSearchesClick: () => void;
   onSearchClick: () => void;
-  pastSearches: SearchItem[];
+  pastSearches: SearchResult[];
 }
 
 function InitialSearch({
@@ -62,9 +45,9 @@ function InitialSearch({
         gridColumnXL="3/14"
       >
         <SearchSection
-          eyebrow={ui('search.searchBy')}
+          label={ui('search.searchBy')}
           onClick={onSearchClick}
-          searchItems={SEARCH_CATEGORIES}
+          searchResults={initialSearchCategories}
         />
       </GridItem>
       {pastSearches.length > 0 && (
@@ -76,9 +59,9 @@ function InitialSearch({
           gridColumnXL="3/14"
         >
           <SearchSection
-            eyebrow={pastSearchesEyebrow}
+            label={pastSearchesEyebrow}
             onClick={onSearchClick}
-            searchItems={pastSearches}
+            searchResults={pastSearches}
           />
         </GridItem>
       )}

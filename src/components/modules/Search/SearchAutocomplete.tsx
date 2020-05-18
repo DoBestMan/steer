@@ -25,20 +25,15 @@ import { getScroll, subscribeScroll } from '~/lib/helpers/scroll';
 import { randomString } from '~/lib/utils/string';
 import { ui } from '~/lib/utils/ui-dictionary';
 
+import { SearchGroup, SearchResult } from './Search';
 import { useAutocompleteSelectedItem } from './Search.hooks';
 import styles from './SearchAutocomplete.styles';
-import SearchSection, { SearchItem } from './SearchSection';
+import SearchSection from './SearchSection';
 
 const CONSTANTS = {
   DEFAULT_SELECTED_ITEM_INDEX: [0, -1],
   DEFAULT_VALUE: '',
 };
-
-export interface SearchResult {
-  id: string;
-  items: SearchItem[];
-  title?: string;
-}
 
 export interface Props {
   children?: ReactChild;
@@ -47,8 +42,9 @@ export interface Props {
   isLoadingResults?: boolean;
   onChange: (value: string) => void;
   onCloseSearchClick: () => void;
-  onValueSelection: (value: SearchItem) => void;
-  results: SearchResult[];
+  onValueSelection: (value: SearchResult) => void;
+  query: string;
+  results: SearchGroup[];
 }
 
 function SearchAutocomplete({
@@ -59,6 +55,7 @@ function SearchAutocomplete({
   onCloseSearchClick,
   onValueSelection,
   results,
+  query,
   ...rest
 }: Props) {
   const [ids, setIds] = useState({
@@ -69,7 +66,6 @@ function SearchAutocomplete({
   });
   const [hasScrolled, setHasScrolled] = useState(false);
   const [shouldShowListbox, setShouldShowListbox] = useState(false);
-  const [value, setValue] = useState(inputValue);
   const textInput = useRef<HTMLInputElement>(null);
   const {
     selectNextItemIndex,
@@ -79,7 +75,7 @@ function SearchAutocomplete({
   } = useAutocompleteSelectedItem(results);
   const { lessThan } = useBreakpoints();
 
-  const isInputEmpty = value.length < 1;
+  const isInputEmpty = query.length < 1;
   const hasResults = results.length > 0;
   const isInvalidInput = !hasResults && !isInputEmpty && !isLoadingResults;
 
@@ -107,27 +103,25 @@ function SearchAutocomplete({
     onChange(CONSTANTS.DEFAULT_VALUE);
     setSelectedItemIndex([0, -1]);
     setShouldShowListbox(false);
-    setValue(CONSTANTS.DEFAULT_VALUE);
   };
 
   const confirmSelection = () => {
     const [currentResultIndex, currentResultItemIndex] = selectedItemIndex;
     const selectedItem =
-      results[currentResultIndex].items[currentResultItemIndex];
+      results[currentResultIndex].siteSearchResultList[currentResultItemIndex];
     onValueSelection(selectedItem);
   };
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     const targetValue = e.currentTarget.value;
 
+    setSelectedItemIndex([0, -1]);
     onChange(targetValue);
-    setValue(targetValue);
   };
 
   useEffect(() => {
     if (inputValue) {
       onChange(inputValue);
-      setValue(inputValue);
       focusOnInput();
     }
   }, [inputValue, onChange]);
@@ -190,7 +184,7 @@ function SearchAutocomplete({
           <div css={styles.inputContainer}>
             <label
               id={ids.labelID}
-              css={[styles.label, !!value && styles.labelHidden]}
+              css={[styles.label, !!query && styles.labelHidden]}
             >
               {lessThan.L
                 ? ui('search.searchAutocompleteLabelSM')
@@ -205,11 +199,11 @@ function SearchAutocomplete({
                 onKeyDown={handleKeyDown}
                 ref={textInput}
                 type="text"
-                value={value}
+                value={query}
               />
             </div>
 
-            {value && (
+            {query && (
               <button
                 aria-label={ui('search.cancelButtonClear')}
                 onClick={cancelSelection}
@@ -240,12 +234,13 @@ function SearchAutocomplete({
         >
           <ul css={styles.listbox} id={ids.listboxID}>
             {shouldShowListbox &&
-              results.map((result: SearchResult, index) => (
-                <li css={styles.searchResultsGridItem} key={result.id}>
+              results.map((searchGroup: SearchGroup, index) => (
+                <li css={styles.searchResultsGridItem} key={index}>
                   <SearchSection
-                    eyebrow={result.title}
+                    label={searchGroup.label}
                     onClick={onValueSelection}
-                    searchItems={result.items}
+                    query={query}
+                    searchResults={searchGroup.siteSearchResultList}
                     sectionIndex={index}
                     selectedItemIndex={selectedItemIndex}
                   />

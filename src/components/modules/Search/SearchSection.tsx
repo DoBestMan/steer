@@ -1,45 +1,69 @@
+import { SearchResult } from './Search';
 import styles from './SearchSection.styles';
 
-export interface SearchItem {
-  id: string;
-  text: string;
-}
-
 interface Props {
-  eyebrow?: string | JSX.Element;
-  onClick: (searchText: SearchItem) => void;
-  searchItems: SearchItem[];
+  label?: string | JSX.Element;
+  onClick: (searchText: SearchResult) => void;
+  query?: string;
+  searchResults: SearchResult[];
   sectionIndex?: number;
   selectedItemIndex?: [number, number];
 }
 
 function SearchSection({
-  eyebrow,
+  query = '',
+  label,
   onClick,
-  searchItems,
+  searchResults,
   sectionIndex,
   selectedItemIndex = [0, -1],
 }: Props) {
-  const handleClick = (item: SearchItem) => () => {
-    onClick(item);
+  const handleClick = (searchResult: SearchResult) => () => {
+    onClick(searchResult);
   };
 
   return (
     <div>
-      {eyebrow && <h5 css={styles.eyebrow}>{eyebrow}</h5>}
+      {label && <h5 css={styles.eyebrow}>{label}</h5>}
       <ul>
-        {searchItems.map((item, index) => {
+        {searchResults.map((item, index) => {
           const isSelected =
             sectionIndex === selectedItemIndex[0] &&
             index === selectedItemIndex[1];
 
+          // Display search result with search query highlighted.
+          const queryIndex = item.displayValue
+            .toUpperCase()
+            .indexOf(query.toUpperCase());
+
+          let display = <>{item.displayValue}</>;
+
+          if (queryIndex > -1) {
+            const queryStart = item.displayValue.substring(0, queryIndex);
+            const queryHighlighted = item.displayValue.substring(
+              queryIndex,
+              queryIndex + query.length,
+            );
+            const queryEnd = item.displayValue.substring(
+              queryIndex + query.length,
+            );
+
+            display = (
+              <>
+                {queryStart}
+                <span css={styles.searchQuery}>{queryHighlighted}</span>
+                {queryEnd}
+              </>
+            );
+          }
+
           return (
-            <li css={styles.listItem} key={item.id}>
+            <li css={styles.listItem} key={item.value}>
               <button
                 css={[styles.itemButton, isSelected && styles.isSelected]}
                 onClick={handleClick(item)}
               >
-                {item.text}
+                {display}
               </button>
             </li>
           );

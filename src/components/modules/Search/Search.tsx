@@ -6,19 +6,36 @@ import { scrollTo } from '~/lib/helpers/scroll';
 
 import InitialSearch from './InitialSearch';
 import styles from './Search.styles';
-import SearchAutocomplete, { SearchResult } from './SearchAutocomplete';
-import { SearchItem } from './SearchSection';
+import SearchAutocomplete from './SearchAutocomplete';
+
+export interface Results {
+  siteSearchGroupList: SearchGroup[];
+}
+
+export interface SearchGroup {
+  label?: string;
+  siteSearchResultList: SearchResult[];
+  type: string;
+}
+
+export interface SearchResult {
+  displayValue: string;
+  type: string;
+  value: string;
+}
 
 interface Props {
   onClearSearchesClick: () => void;
   onCloseSearchClick: () => void;
-  pastSearches: SearchItem[];
+  pastSearches: SearchResult[];
+  results: Results;
 }
 
 function Search({
   onClearSearchesClick,
   onCloseSearchClick,
   pastSearches,
+  results,
 }: Props) {
   const [query, setQuery] = useState('');
 
@@ -31,8 +48,9 @@ function Search({
     setQuery(input);
   };
 
-  const handleSelectionSuccess = () => {};
-  const results: SearchResult[] = [];
+  const handleValueSelection = (searchResult: SearchResult) => {
+    setQuery(searchResult.displayValue);
+  };
   const handleSearchClick = () => {};
 
   return (
@@ -40,8 +58,9 @@ function Search({
       <SearchAutocomplete
         onChange={onChange}
         onCloseSearchClick={onCloseSearchClick}
-        onValueSelection={handleSelectionSuccess}
-        results={results}
+        onValueSelection={handleValueSelection}
+        results={results.siteSearchGroupList}
+        query={query}
       />
       <Grid>
         {query.length === 0 && (

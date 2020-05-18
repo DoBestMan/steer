@@ -1,4 +1,4 @@
-import { CSSObject } from '@emotion/core';
+import { css, CSSObject } from '@emotion/core';
 
 import { BORDERS, COLORS, MQ, SPACING, TIME } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
@@ -19,7 +19,7 @@ const styles: CSSObject = {
   },
   itemButton: [
     typography.secondaryHeadline,
-    {
+    css({
       '&:active': {
         borderColor: COLORS.ORANGE.TINT_70,
         color: COLORS.ORANGE.TINT_70,
@@ -29,14 +29,18 @@ const styles: CSSObject = {
       },
       borderBottom: BORDERS.DOTTED_TRANSPARENT_2PX,
       color: COLORS.GLOBAL.WHITE,
+      textAlign: 'left',
       transition: `border-color ${TIME.MS100}ms ease, color ${TIME.MS100}ms ease`,
       [MQ.M]: typography.primaryHeadline,
-    },
+    }),
   ],
   listItem: {
     '&:not(:last-child)': {
       paddingBottom: SPACING.SIZE_15,
     },
+  },
+  searchQuery: {
+    color: COLORS.ORANGE.TINT_70,
   },
 };
 
