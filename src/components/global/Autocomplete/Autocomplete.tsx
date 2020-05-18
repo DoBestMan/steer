@@ -105,9 +105,12 @@ function Autocomplete({
     !!validResults && validResults.main === value && !isInvalidInput;
 
   const focusOnInput = () => {
-    if (textInput.current) {
-      textInput.current.focus();
-    }
+    setTimeout(() => {
+      // TODO: revisit this with nav stuff; using transition group might prevent the need for a delayed focus
+      if (textInput.current) {
+        textInput.current.focus();
+      }
+    }, 200);
   };
 
   useEffect(() => {

@@ -44,14 +44,11 @@ export function LocationPage() {
   }
 
   const onCurrentLocationError = action('Current location error event');
-  const handleOnDismiss = action('Dismissed successful location change');
-
   return (
     <div css={styles.container}>
       <Location
         currentLocation={location}
         focusInputOnMount
-        onDismiss={handleOnDismiss}
         onLocationChangeSuccess={handleLocationChangeSuccess}
         onCurrentLocationError={onCurrentLocationError}
       />

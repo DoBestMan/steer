@@ -1,10 +1,10 @@
-import { ReactChild } from 'react';
+import { ReactNode } from 'react';
 
 import { Animation } from './SubNav.styles';
 import SubNavModal from './SubNavModal';
 
 interface Props {
-  children: ReactChild;
+  children: ReactNode;
   contentLabel?: string;
   isMobile?: boolean;
   isOpen: boolean;

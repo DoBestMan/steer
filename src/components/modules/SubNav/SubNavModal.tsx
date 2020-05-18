@@ -1,5 +1,5 @@
 import { clearAllBodyScrollLocks, disableBodyScroll } from 'body-scroll-lock';
-import { ReactChild, useEffect, useRef } from 'react';
+import { ReactNode, useEffect, useRef } from 'react';
 
 import FocusTrap from '~/components/global/FocusTrap/FocusTrap';
 import Icon from '~/components/global/Icon/Icon';
@@ -10,7 +10,7 @@ import styles, { Animation } from './SubNav.styles';
 
 interface Props {
   animation?: Animation;
-  children: ReactChild;
+  children: ReactNode;
   contentLabel?: string;
   isOpen: boolean;
   onBack?: () => void;
@@ -81,7 +81,6 @@ function SubNavModal({
               </button>
             </div>
           )}
-
           {children}
         </div>
       </nav>

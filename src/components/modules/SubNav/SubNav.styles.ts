@@ -108,7 +108,6 @@ const styles = {
   navContent: css({
     height: '100%',
     overflow: 'auto',
-    pointerEvents: 'none', // just so we can click on the overlay to close the modal
     position: 'relative',
     top: 0,
     zIndex: Z_INDEX.TOP + 1,

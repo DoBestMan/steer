@@ -107,9 +107,7 @@ function SubNav({ siteMenuBrowseList, siteMenuLearn }: SiteMenu) {
                 siteMenuLearn={siteMenuLearn}
               />
             )}
-            {activeLink === NAV_TARGETS.LOCATION && (
-              <LocationContainer onDismiss={handleCloseSubNav} />
-            )}
+            <LocationContainer isMobile={isMobile} />
           </GridItem>
         </GridItem>
       </Grid>

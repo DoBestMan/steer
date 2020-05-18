@@ -5,7 +5,6 @@ import { AutocompleteResult } from '~/components/global/Autocomplete/Autocomplet
 import GridItem from '~/components/global/Grid/GridItem';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Markdown from '~/components/global/Markdown/Markdown';
-import SubNavContentWrapper from '~/components/modules/SubNav/SubNavContentWrapper';
 import { UserPersonalizationUpdate } from '~/data/models/UserPersonalizationUpdate';
 import { onlyNumbers } from '~/lib/utils/regex';
 import { ui } from '~/lib/utils/ui-dictionary';
@@ -25,7 +24,6 @@ interface Props {
   } | null;
   focusInputOnMount?: boolean;
   onCurrentLocationError?: (error: string) => void;
-  onDismiss: () => void;
   onLocationChangeSuccess: (location: UserPersonalizationUpdate) => void;
 }
 
@@ -55,7 +53,6 @@ function Location({
   currentLocation,
   focusInputOnMount,
   onCurrentLocationError,
-  onDismiss,
   onLocationChangeSuccess,
 }: Props) {
   const [results, setResults] = useState<Array<AutocompleteResult>>([]);
@@ -64,7 +61,9 @@ function Location({
   const [isLoadingLocation, setIsLoadingLocation] = useState(false);
   const [hasInvalidInput, setHasInvalidInput] = useState(false);
   const [toastMessage, setToastMessage] = useState<TOAST_TYPE | string>('');
-
+  function onDismiss() {
+    setToastMessage('');
+  }
   const onChange = useCallback(
     (input: string) => {
       // We need to clear the results when the input is empty to
@@ -157,47 +156,45 @@ function Location({
 
   return (
     <GridItem css={styles.container}>
-      <SubNavContentWrapper isOpen onClose={onDismiss} onBack={onDismiss}>
-        <div css={styles.content}>
-          <Autocomplete
-            icon={ICONS.SEARCH}
-            label={ui('location.inputLabel')}
-            errorLabel={errorLabel}
-            inputMaxLength={5}
-            focusOnMount={focusInputOnMount}
-            inputValidationRegEx={onlyNumbers}
-            isLoadingResults={isLoadingLocation}
-            minimumCharacterBeforeError={3}
-            onChange={onChange}
-            onInvalidInput={handleInvalidInput}
-            onValueSelectionSuccess={onValueSelectionSuccess}
-            results={results}
-            resultItemComponent={AutocompleteResultItemLocation}
-          />
-          {!hasResults && !toastMessage && !hasInvalidInput && (
-            <>
-              {currentLocation && (
-                <span css={styles.currentLocation}>
-                  {currentLocation.cityName}, {currentLocation.stateAbbr}{' '}
-                  {currentLocation.zip}
-                </span>
-              )}
-              <UseCurrentLocation
-                onCurrentLocationSuccess={onValueSelectionSuccess}
-                onCurrentLocationError={handleCurrentLocationError}
-              />
-              <LocationInfo />
-            </>
-          )}
+      <div css={styles.content}>
+        <Autocomplete
+          icon={ICONS.SEARCH}
+          label={ui('location.inputLabel')}
+          errorLabel={errorLabel}
+          inputMaxLength={5}
+          focusOnMount={focusInputOnMount}
+          inputValidationRegEx={onlyNumbers}
+          isLoadingResults={isLoadingLocation}
+          minimumCharacterBeforeError={3}
+          onChange={onChange}
+          onInvalidInput={handleInvalidInput}
+          onValueSelectionSuccess={onValueSelectionSuccess}
+          results={results}
+          resultItemComponent={AutocompleteResultItemLocation}
+        />
+        {!hasResults && !toastMessage && !hasInvalidInput && (
+          <>
+            {currentLocation && (
+              <span css={styles.currentLocation}>
+                {currentLocation.cityName}, {currentLocation.stateAbbr}{' '}
+                {currentLocation.zip}
+              </span>
+            )}
+            <UseCurrentLocation
+              onCurrentLocationSuccess={onValueSelectionSuccess}
+              onCurrentLocationError={handleCurrentLocationError}
+            />
+            <LocationInfo />
+          </>
+        )}
 
-          <LocationToast
-            toastMessage={toastMessage}
-            message={toastMessages[toastMessage]}
-            onDismiss={onDismiss}
-            setToastMessage={setToastMessage}
-          />
-        </div>
-      </SubNavContentWrapper>
+        <LocationToast
+          toastMessage={toastMessage}
+          message={toastMessages[toastMessage]}
+          onDismiss={onDismiss}
+          setToastMessage={setToastMessage}
+        />
+      </div>
     </GridItem>
   );
 }

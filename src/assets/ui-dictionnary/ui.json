@@ -32,6 +32,7 @@
   },
   "location": {
     "loadingCurrentLocationLabel": "Getting current location from your browser.",
+    "contentLabel": "Location",
     "useCurrentLocationLabel": "Use current location",
     "locationSupportError": "Sorry, but Geolocation is not supported by this browser.",
     "inputLabel": "Enter your zip code",
