@@ -41,9 +41,15 @@ const styles = {
     }),
   ],
   inputContainer: css({
-    alignItems: 'baseline',
+    alignItems: 'center',
+    borderBottom: BORDERS.SOLID_BLACK_1PX,
     display: 'flex',
+    paddingBottom: SPACING.SIZE_15,
     position: 'relative',
+    [MQ.M]: {
+      borderBottom: BORDERS.SOLID_BLACK_1PX,
+      paddingBottom: SPACING.SIZE_15,
+    },
   }),
   label: [
     typography.secondaryHeadline,
@@ -66,34 +72,5 @@ const styles = {
     zIndex: Z_INDEX.FRONT,
   }),
 };
-
-export const locationAutocomplete = css({
-  '> div': {
-    alignItems: 'center',
-    [MQ.M]: {
-      borderBottom: BORDERS.SOLID_BLACK_1PX,
-      paddingBottom: SPACING.SIZE_15,
-    },
-  },
-});
-
-export const searchAutocomplete = css({
-  ' > div': {
-    paddingRight: SPACING.SIZE_50,
-  },
-  input: {
-    color: COLORS.GLOBAL.WHITE,
-  },
-  'input, label': [typography.secondaryHeadline],
-  label: {
-    color: COLORS.ORANGE.TINT_70,
-  },
-  [MQ.M]: {
-    ' > div': {
-      paddingRight: SPACING.SIZE_80,
-    },
-    'input, label': [typography.primaryHeadline],
-  },
-});
 
 export default styles;

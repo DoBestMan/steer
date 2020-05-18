@@ -3,7 +3,6 @@ import { action } from '@storybook/addon-actions';
 import { select, text } from '@storybook/addon-knobs';
 import { SetStateAction, useState } from 'react';
 
-import { locationAutocomplete as locationAutocompleteStyles } from '~/components/global/Autocomplete/Autocomplete.styles';
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import { COLORS } from '~/lib/constants';
@@ -135,7 +134,6 @@ export function LocationSpecificAutocomplete() {
 
   return (
     <Autocomplete
-      css={locationAutocompleteStyles}
       errorLabel={errorLabel}
       icon={ICONS.SEARCH}
       label="Enter ZIP Code"

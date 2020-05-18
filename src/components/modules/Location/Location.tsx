@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 
 import Autocomplete from '~/components/global/Autocomplete/Autocomplete';
-import { locationAutocomplete as locationAutocompleteStyles } from '~/components/global/Autocomplete/Autocomplete.styles';
 import { AutocompleteResult } from '~/components/global/Autocomplete/AutocompleteResultItem';
 import GridItem from '~/components/global/Grid/GridItem';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
@@ -161,7 +160,6 @@ function Location({
       <SubNavContentWrapper isOpen onClose={onDismiss} onBack={onDismiss}>
         <div css={styles.content}>
           <Autocomplete
-            css={locationAutocompleteStyles}
             icon={ICONS.SEARCH}
             label={ui('location.inputLabel')}
             errorLabel={errorLabel}
