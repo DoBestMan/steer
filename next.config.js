@@ -1,7 +1,9 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const path = require('path');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const withTM = require('next-transpile-modules')(['swr']);
 
-module.exports = {
+module.exports = withTM({
   webpack: (config) => {
     config.module.rules.push({
       issuer: {
@@ -16,4 +18,4 @@ module.exports = {
 
     return config;
   },
-};
+});
