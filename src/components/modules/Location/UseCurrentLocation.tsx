@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { AutocompleteResult } from '~/components/global/Autocomplete/AutocompleteResultItem';
 import Icon from '~/components/global/Icon/Icon';
+import Loading from '~/components/global/Loading/Loading';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import { styles } from './Location.styles';
@@ -30,8 +31,10 @@ function UseCurrentLocation({
   onCurrentLocationSuccess,
 }: Props) {
   const [latlng, setLatlng] = useState<google.maps.LatLngLiteral>();
+  const [isWaiting, setIsWaiting] = useState(false);
 
   const handleOnClick = () => {
+    setIsWaiting(true);
     getBrowserLocation((e) => {
       const { coords } = e;
 
@@ -82,10 +85,19 @@ function UseCurrentLocation({
   }, [latlng, onCurrentLocationSuccess, onCurrentLocationError]);
 
   return (
-    <button css={styles.useCurrentLocationButton} onClick={handleOnClick}>
-      {ui('location.useCurrentLocationLabel')}
-      <Icon css={styles.useCurrentLocationIcon} name="geolocation" />
-    </button>
+    <div css={styles.useCurrentLocationContainer}>
+      {isWaiting ? (
+        <Loading
+          customStyles={styles.userCurrentLocationLoader}
+          label={ui('location.loadingCurrentLocationLabel')}
+        />
+      ) : (
+        <button css={styles.useCurrentLocationButton} onClick={handleOnClick}>
+          {ui('location.useCurrentLocationLabel')}
+          <Icon css={styles.useCurrentLocationIcon} name="geolocation" />
+        </button>
+      )}
+    </div>
   );
 }
 

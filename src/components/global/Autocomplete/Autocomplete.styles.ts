@@ -1,20 +1,28 @@
 import { css } from '@emotion/core';
 
 import { BORDERS, COLORS, MQ, SPACING, Z_INDEX } from '~/lib/constants';
-import { typography } from '~/styles/typography.styles';
+import { typography, typographyStyles } from '~/styles/typography.styles';
 
 const styles = {
   actionIcon: css({
-    svg: {
-      display: 'block',
-      height: SPACING.SIZE_20,
-      width: SPACING.SIZE_20,
+    [MQ.S]: {
+      display: 'none',
+    },
+    [MQ.M]: {
+      display: 'inherit',
+      svg: {
+        display: 'block',
+        height: SPACING.SIZE_20,
+        width: SPACING.SIZE_20,
+      },
     },
   }),
   clearSearch: [
-    typography.bodyCopy,
+    typography.smallCopyTight,
     css({
       color: COLORS.LIGHT.GRAY_70,
+      [MQ.M]: typography.bodyCopy,
+      [MQ.XL]: typography.largeCopy,
     }),
   ],
   comboboxWrapper: css({
@@ -22,11 +30,14 @@ const styles = {
   }),
   errorMessage: typography.primaryHeadline,
   input: [
-    typography.primaryHeadline,
+    typography.secondaryHeadline,
     css({
       backgroundColor: 'inherit',
       border: 'none',
       width: '100%',
+
+      [MQ.M]: typography.primaryHeadline,
+      [MQ.XL]: typography.secondaryHeadline,
     }),
   ],
   inputContainer: css({
@@ -35,7 +46,7 @@ const styles = {
     position: 'relative',
   }),
   label: [
-    typography.primaryHeadline,
+    typography.secondaryHeadline,
     css({
       color: COLORS.LIGHT.GRAY_70,
       left: 0,
@@ -43,6 +54,8 @@ const styles = {
       pointerEvents: 'none',
       position: 'absolute',
       top: 0,
+      [MQ.M]: typographyStyles.primaryHeadline.M,
+      [MQ.XL]: typographyStyles.secondaryHeadline.XL,
     }),
   ],
   labelHidden: css({
@@ -56,8 +69,11 @@ const styles = {
 
 export const locationAutocomplete = css({
   '> div': {
-    borderBottom: BORDERS.SOLID_BLACK_1PX,
-    paddingBottom: SPACING.SIZE_15,
+    alignItems: 'center',
+    [MQ.M]: {
+      borderBottom: BORDERS.SOLID_BLACK_1PX,
+      paddingBottom: SPACING.SIZE_15,
+    },
   },
 });
 

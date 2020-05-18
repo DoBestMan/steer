@@ -1,4 +1,4 @@
-import { css } from '@emotion/core';
+import { css, CSSObject } from '@emotion/core';
 
 import { MQ } from '~/lib/constants';
 
@@ -7,6 +7,49 @@ ratio of lineHeightInPixels / fontSizeInPixels */
 
 const fontFamily =
   '"Circular Std", "Helvetica Neue", Helvetica, Arial, sans-serif';
+
+export const typographyStyles: { [name: string]: CSSObject } = {
+  primaryHeadline: {
+    /* eslint-disable sort-keys */
+    base: {
+      fontFamily,
+      fontSize: '2.5rem',
+      fontStyle: 'normal',
+      fontWeight: 'bold',
+      letterSpacing: '-0.02em',
+      lineHeight: 30 / 25,
+    },
+    M: {
+      fontSize: '3.5rem',
+      lineHeight: 40 / 35,
+    },
+    XL: {
+      fontSize: '4.0rem',
+      lineHeight: 45 / 40,
+    },
+    /* eslint-enable sort-keys */
+  },
+  secondaryHeadline: {
+    /* eslint-disable sort-keys */
+    base: {
+      fontFamily,
+      fontSize: '2.0rem',
+      fontStyle: 'normal',
+      fontWeight: 'bold',
+      letterSpacing: '-0.02em',
+      lineHeight: 25 / 20,
+    },
+    M: {
+      fontSize: '2.5rem',
+      lineHeight: 30 / 25,
+    },
+    XL: {
+      fontSize: '2.8rem',
+      lineHeight: 30 / 28,
+    },
+    /* eslint-enable sort-keys */
+  },
+};
 
 export const typography = {
   bodyCopy: css({
@@ -60,24 +103,13 @@ export const typography = {
     letterSpacing: '-0.01em',
     lineHeight: 25 / 18,
   }),
-  primaryHeadline: css({
-    fontFamily,
-    fontSize: '2.5rem',
-    fontStyle: 'normal',
-    fontWeight: 'bold',
-    letterSpacing: '-0.02em',
-    lineHeight: 30 / 25,
-
-    [MQ.M]: {
-      fontSize: '3.5rem',
-      lineHeight: 40 / 35,
-    },
-
-    [MQ.XL]: {
-      fontSize: '4.0rem',
-      lineHeight: 45 / 40,
-    },
-  }),
+  primaryHeadline: [
+    typographyStyles.primaryHeadline.base,
+    css({
+      [MQ.M]: typographyStyles.primaryHeadline.M,
+      [MQ.XL]: typographyStyles.primaryHeadline.XL,
+    }),
+  ],
   primarySubhead: css({
     fontFamily,
     fontSize: '1.5rem',
@@ -86,24 +118,13 @@ export const typography = {
     letterSpacing: '-0.01em',
     lineHeight: 20 / 15,
   }),
-  secondaryHeadline: css({
-    fontFamily,
-    fontSize: '2.0rem',
-    fontStyle: 'normal',
-    fontWeight: 'bold',
-    letterSpacing: '-0.02em',
-    lineHeight: 25 / 20,
-
-    [MQ.M]: {
-      fontSize: '2.5rem',
-      lineHeight: 30 / 25,
-    },
-
-    [MQ.XL]: {
-      fontSize: '2.8rem',
-      lineHeight: 30 / 28,
-    },
-  }),
+  secondaryHeadline: [
+    typographyStyles.secondaryHeadline.base,
+    css({
+      [MQ.M]: typographyStyles.secondaryHeadline.M,
+      [MQ.XL]: typographyStyles.secondaryHeadline.XL,
+    }),
+  ],
   secondarySubhead: css({
     fontFamily,
     fontSize: '1.2rem',

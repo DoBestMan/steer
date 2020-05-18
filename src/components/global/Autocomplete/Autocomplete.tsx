@@ -47,6 +47,7 @@ export interface Props {
   minimumCharacterBeforeError?: number;
   onChange: (value: string) => void;
   onInputResultMatch?: (inputMatchesResult: boolean) => void;
+  onInvalidInput?: (isInvalidInput: boolean) => void;
   onValueSelectionSuccess: (value: AutocompleteResult) => void;
   resultItemComponent?: (resultItemProps: ResultItemProps) => JSX.Element;
   results: AutocompleteResult[];
@@ -69,6 +70,7 @@ function Autocomplete({
   label,
   minimumCharacterBeforeError = CONSTANTS.MINIMUM_CHARACTER_BEFORE_ERROR,
   onChange,
+  onInvalidInput,
   onValueSelectionSuccess,
   onInputResultMatch,
   resultItemComponent: ResultItemComponent = AutocompleteResultItemDefault,
@@ -113,6 +115,12 @@ function Autocomplete({
       focusOnInput();
     }
   }, [focusOnMount]);
+
+  useEffect(() => {
+    if (onInvalidInput) {
+      onInvalidInput(isInvalidInput);
+    }
+  }, [isInvalidInput, onInvalidInput]);
 
   useEffect(() => {
     setIds(generateIDs(randomString(10)));

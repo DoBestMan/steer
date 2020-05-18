@@ -63,7 +63,7 @@ function Location({
   const { autocomplete, latLng } = useGMapsScripts();
   const [search, setSearch] = useState('');
   const [isLoadingLocation, setIsLoadingLocation] = useState(false);
-
+  const [hasInvalidInput, setHasInvalidInput] = useState(false);
   const [toastMessage, setToastMessage] = useState<TOAST_TYPE | string>('');
 
   const onChange = useCallback(
@@ -150,6 +150,12 @@ function Location({
     [TOAST_TYPE.ERROR]: <Markdown>{ui('location.errorMessage')}</Markdown>,
   };
 
+  function handleInvalidInput(isInvalidInput: boolean) {
+    if (hasInvalidInput !== isInvalidInput) {
+      setHasInvalidInput(isInvalidInput);
+    }
+  }
+
   return (
     <GridItem css={styles.container}>
       <SubNavContentWrapper isOpen onClose={onDismiss} onBack={onDismiss}>
@@ -157,7 +163,7 @@ function Location({
           <Autocomplete
             css={locationAutocompleteStyles}
             icon={ICONS.SEARCH}
-            label="Enter your ZIP code"
+            label={ui('location.inputLabel')}
             errorLabel={errorLabel}
             inputMaxLength={5}
             focusOnMount={focusInputOnMount}
@@ -165,11 +171,12 @@ function Location({
             isLoadingResults={isLoadingLocation}
             minimumCharacterBeforeError={3}
             onChange={onChange}
+            onInvalidInput={handleInvalidInput}
             onValueSelectionSuccess={onValueSelectionSuccess}
             results={results}
             resultItemComponent={AutocompleteResultItemLocation}
           />
-          {!hasResults && !toastMessage && (
+          {!hasResults && !toastMessage && !hasInvalidInput && (
             <>
               {currentLocation && (
                 <span css={styles.currentLocation}>
