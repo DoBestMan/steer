@@ -1,6 +1,7 @@
 name: Run script and notify Slack
 
-on: repository_dispatch
+on:
+  repository_dispatch:
     types: [release_qa]
 
 jobs:
