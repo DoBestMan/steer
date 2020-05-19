@@ -65,6 +65,11 @@ function SearchSection({
               >
                 {display}
               </button>
+              {item.additionalDisplayValue && (
+                <div css={styles.secondaryItemDisplay}>
+                  {item.additionalDisplayValue}
+                </div>
+              )}
             </li>
           );
         })}

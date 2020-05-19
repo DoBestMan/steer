@@ -19,6 +19,7 @@ export interface SearchGroup {
 }
 
 export interface SearchResult {
+  additionalDisplayValue?: string;
   displayValue: string;
   type: string;
   value: string;

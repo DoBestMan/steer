@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Search from './Search';
 import {
   noSearchResults,
+  partNumberResults,
   pastSearchResults,
   simpleSearchResults,
 } from './Search.mocks';
@@ -13,7 +14,7 @@ export default {
   title: 'Search',
 };
 
-export function DefaultSearch() {
+export function PastSearchResults() {
   const [pastSearches, setPastSearches] = useState(pastSearchResults);
 
   const handleCloseSearchClick = action('Close search');
@@ -35,42 +36,42 @@ export function DefaultSearch() {
 }
 
 export function SearchResultsRegular() {
-  const [pastSearches, setPastSearches] = useState(pastSearchResults);
-
   const handleCloseSearchClick = action('Close search');
-  const handleClearSearchesClick = function () {
-    // Temporariliy delay removing searches (until React Transition Group implemented)
-    setTimeout(() => {
-      setPastSearches([]);
-    }, 200);
-  };
+  const handleClearSearchesClick = action('Clear searches');
 
   return (
     <Search
       onClearSearchesClick={handleClearSearchesClick}
       onCloseSearchClick={handleCloseSearchClick}
-      pastSearches={pastSearches}
+      pastSearches={[]}
       results={simpleSearchResults}
     />
   );
 }
 
-export function NoSearchResults() {
-  const [pastSearches, setPastSearches] = useState(pastSearchResults);
-
+export function SearchResultsPartNumber() {
   const handleCloseSearchClick = action('Close search');
-  const handleClearSearchesClick = function () {
-    // Temporariliy delay removing searches (until React Transition Group implemented)
-    setTimeout(() => {
-      setPastSearches([]);
-    }, 200);
-  };
+  const handleClearSearchesClick = action('Clear searches');
 
   return (
     <Search
       onClearSearchesClick={handleClearSearchesClick}
       onCloseSearchClick={handleCloseSearchClick}
-      pastSearches={pastSearches}
+      pastSearches={[]}
+      results={partNumberResults}
+    />
+  );
+}
+
+export function NoSearchResults() {
+  const handleCloseSearchClick = action('Close search');
+  const handleClearSearchesClick = action('Clear searches');
+
+  return (
+    <Search
+      onClearSearchesClick={handleClearSearchesClick}
+      onCloseSearchClick={handleCloseSearchClick}
+      pastSearches={[]}
       results={noSearchResults}
     />
   );

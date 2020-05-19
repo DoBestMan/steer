@@ -56,6 +56,49 @@ export const simpleSearchResults: Results = {
   ],
 };
 
+export const partNumberResults: Results = {
+  siteSearchGroupList: [
+    {
+      siteSearchResultList: [
+        {
+          additionalDisplayValue: 'Goodyear Eagle GT II・Size 275/45R20',
+          displayValue: '106137625',
+          type: 'term',
+          value: '106137625',
+        },
+        {
+          additionalDisplayValue: 'Goodyear Eagle GT II・Size 305/50R20',
+          displayValue: '106134277',
+          type: 'term',
+          value: '106134277',
+        },
+        {
+          additionalDisplayValue:
+            'Bridgestone Turanza Serenity Plus・Size 275/40R19',
+          displayValue: '106134223',
+          type: 'term',
+          value: '106134223',
+        },
+        {
+          additionalDisplayValue:
+            'Bridgestone Turanza Serenity Plus・Size 235/40R18',
+          displayValue: '106134224',
+          type: 'term',
+          value: '106134224',
+        },
+        {
+          additionalDisplayValue:
+            'Bridgestone Turanza Serenity Plus・Size 245/40R18',
+          displayValue: '106134294',
+          type: 'term',
+          value: '106134294',
+        },
+      ],
+      type: 'SiteSearchResultsList',
+    },
+  ],
+};
+
 export const pastSearchResults = [
   {
     displayValue: 'Mini Cooper 2018 Hardtop',

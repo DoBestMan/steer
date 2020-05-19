@@ -42,6 +42,13 @@ const styles: CSSObject = {
   searchQuery: {
     color: COLORS.ORANGE.TINT_70,
   },
+  secondaryItemDisplay: [
+    typography.smallCopyTight,
+    {
+      color: COLORS.GLOBAL.BLACK,
+      marginTop: 3,
+    },
+  ],
 };
 
 export default styles;
