@@ -1,8 +1,7 @@
-import { css } from '@emotion/core';
+import { CSSObject } from '@emotion/core';
 
 import { CONTENT_PADDING } from '~/components/pages/HomePage/HomePage.styles';
-import { COLORS, GRID_MARGIN, MQ, SPACING } from '~/lib/constants';
-import { typography } from '~/styles/typography.styles';
+import { COLORS, GRID_MARGIN, MQ, SPACING, TIME } from '~/lib/constants';
 
 const CONSTANTS = {
   ICON_SIZE_L: 34,
@@ -15,43 +14,38 @@ const CONSTANTS = {
   },
 };
 
-const styles = {
-  button: [
-    typography.primaryHeadline,
-    css({
-      alignItems: 'center',
-      boxSizing: 'border-box',
-      color: COLORS.GLOBAL.WHITE,
-      display: 'flex',
-      justifyContent: 'space-between',
-      padding: CONSTANTS.PADDING.S,
-      position: 'relative',
-      width: '100%',
+const styles: CSSObject = {
+  bottomBorder: {
+    backgroundColor: COLORS.DARK.GRAY_40,
+    height: 1,
+  },
+  button: {
+    alignItems: 'center',
+    boxSizing: 'border-box',
+    color: COLORS.GLOBAL.WHITE,
+    display: 'flex',
+    justifyContent: 'space-between',
+    padding: CONSTANTS.PADDING.S,
+    position: 'relative',
+    width: '100%',
 
-      [MQ.M]: {
-        padding: CONSTANTS.PADDING.M,
+    [MQ.M]: {
+      '&:hover': {
+        backgroundColor: COLORS.DARK.GRAY_90,
       },
 
-      [MQ.L]: {
-        flexDirection: 'row-reverse',
-        justifyContent: 'flex-end',
-        padding: CONSTANTS.PADDING.L,
-      },
+      padding: CONSTANTS.PADDING.M,
+      transition: `background-color ${TIME.MS100}ms ease`,
+    },
 
-      // eslint-disable-next-line sort-keys
-      '&:after': {
-        backgroundColor: COLORS.DARK.GRAY_40,
-        bottom: 0,
-        content: '""',
-        display: 'inline',
-        height: 1,
-        left: 0,
-        position: 'absolute',
-        width: '100%',
-      },
-    }),
-  ],
-  container: css({
+    [MQ.L]: {
+      flexDirection: 'row-reverse',
+      justifyContent: 'flex-end',
+      padding: CONSTANTS.PADDING.L,
+    },
+  },
+
+  container: {
     paddingBottom: 160 + CONTENT_PADDING.S,
 
     [MQ.M]: {
@@ -63,8 +57,8 @@ const styles = {
     [MQ.L]: {
       paddingBottom: 190 + CONTENT_PADDING.XL,
     },
-  }),
-  icon: css({
+  },
+  icon: {
     svg: {
       display: 'block',
       fill: COLORS.GLOBAL.WHITE,
@@ -78,7 +72,7 @@ const styles = {
         marginRight: SPACING.SIZE_60,
       },
     },
-  }),
+  },
 };
 
 export default styles;
