@@ -12,10 +12,7 @@ export default async (
 ) => {
   backendBootstrap({ request });
 
-  response.setHeader(
-    'Cache-control',
-    's-maxage=3600, stale-while-revalidate=60',
-  );
+  response.setHeader('Cache-control', 's-maxage=60, stale-while-revalidate=15');
 
   const siteGlobals = await backendGetSiteGlobals();
   response.json(siteGlobals);
