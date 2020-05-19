@@ -5,7 +5,7 @@ const styles = {
     display: 'none',
   }),
   container: css({
-    width: '100vw',
+    width: '100%',
   }),
   mainContent: css({
     height: '100%',
