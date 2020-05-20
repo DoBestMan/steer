@@ -2,6 +2,7 @@ import { useRouter } from 'next/dist/client/router';
 import { ReactNode } from 'react';
 
 import NavContainer from '~/components/modules/Nav/Nav.container';
+import SearchModal from '~/components/modules/Search/SearchModal';
 import { ROUTE_MAP, ROUTES } from '~/lib/constants';
 import { isBrowser } from '~/lib/utils/browser';
 
@@ -21,6 +22,7 @@ function App({ children }: Props) {
       )}
       {children}
       <FooterContainer />
+      <SearchModal />
     </>
   );
 }

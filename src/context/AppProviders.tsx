@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 
+import { SearchContextProvider } from '~/components/modules/Search/Search.context';
 import { SiteGlobals } from '~/data/models/SiteGlobals';
 import { SiteMenu } from '~/data/models/SiteMenu';
 
@@ -24,7 +25,7 @@ function AppProviders({
     <SiteGlobalsContextProvider value={siteGlobalsContextValue}>
       <SiteMenuContextProvider value={siteMenuContextValue}>
         <UserPersonalizationContextProvider>
-          {children}
+          <SearchContextProvider>{children}</SearchContextProvider>
         </UserPersonalizationContextProvider>
       </SiteMenuContextProvider>
     </SiteGlobalsContextProvider>

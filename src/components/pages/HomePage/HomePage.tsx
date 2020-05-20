@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import Grid from '~/components/global/Grid/Grid';
 import NavContainer from '~/components/modules/Nav/Nav.container';
+import { useSearchContext } from '~/components/modules/Search/Search.context';
 import DriverInsights from '~/components/pages/HomePage/DriverInsights/DriverInsights';
 import HomeHeader from '~/components/pages/HomePage/HomeHeader/HomeHeader';
 import Reviews from '~/components/pages/HomePage/Reviews/Reviews';
@@ -10,9 +11,9 @@ import { SiteHero } from '~/data/models/SiteHero';
 import { SiteInsights } from '~/data/models/SiteInsights';
 import { SiteReviews } from '~/data/models/SiteReviews';
 import { useApiDataWithDefault } from '~/hooks/useApiDataWithDefault';
-import { COLORS } from '~/lib/constants';
+import { COLORS, TIME } from '~/lib/constants';
 import { eventEmitters } from '~/lib/events/emitters';
-import { getScroll } from '~/lib/helpers/scroll';
+import { getScroll, scrollToRef } from '~/lib/helpers/scroll';
 import { hasIntersectionObserver } from '~/lib/utils/browser';
 
 import styles from './HomePage.styles';
@@ -47,6 +48,7 @@ function HomePage({ serverData }: Props) {
   const [thresholdCrossed, setThresholdCrossed] = useState(false);
 
   const contentContainerRef = useRef<HTMLDivElement>(null);
+  const searchButtonRef = useRef<HTMLDivElement>(null);
 
   const {
     data: { siteHero, siteInsights },
@@ -67,9 +69,10 @@ function HomePage({ serverData }: Props) {
     (siteTheme && THEME_COLOR_MAP[siteTheme]) ||
     getColorFromScrollState(thresholdCrossed);
 
-  function handleSearchClick() {
-    // TODO Wire up homepage search https://simpletire.atlassian.net/browse/WCS-216
-    console.info('Search button click');
+  const { toggleIsSearchOpen } = useSearchContext();
+
+  function handleOpenModal() {
+    scrollToRef(searchButtonRef, TIME.MS400, toggleIsSearchOpen);
   }
 
   // Scroll Effect : Changes background color
@@ -118,7 +121,9 @@ function HomePage({ serverData }: Props) {
       </div>
 
       <div css={[styles.scrollColorContainer, { backgroundColor }]}>
-        <SearchButton onClick={handleSearchClick} />
+        <div ref={searchButtonRef}>
+          <SearchButton onClick={handleOpenModal} />
+        </div>
         <div ref={contentContainerRef}>
           <Grid css={styles.content}>
             <DriverInsights {...siteInsights} />

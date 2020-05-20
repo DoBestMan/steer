@@ -20,8 +20,27 @@ function SearchButton({ onClick }: Props) {
         onClick={onClick}
         css={[typography.primaryHeadline, styles.button]}
       >
-        {ui('common.header.searchShortLabel')}
-        <Icon name={ICONS.MAIN_SEARCH} css={styles.icon} />
+        <Grid>
+          <GridItem
+            gridColumnS="5/6"
+            gridColumnM="7/8"
+            gridColumnL="2/3"
+            css={styles.iconColumn}
+          >
+            <Icon name={ICONS.MAIN_SEARCH} css={styles.icon} />
+          </GridItem>
+
+          <GridItem
+            as="span"
+            css={styles.label}
+            gridColumnS="2/5"
+            gridColumnM="2/7"
+            gridColumnL="3/14"
+            gridColumnXL="3/14"
+          >
+            {ui('common.header.searchShortLabel')}
+          </GridItem>
+        </Grid>
       </button>
       <Grid>
         <GridItem css={styles.bottomBorder} />

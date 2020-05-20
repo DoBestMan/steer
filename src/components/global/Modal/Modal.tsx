@@ -9,6 +9,7 @@ import {
   MODAL_THEME,
   MODAL_TYPE,
   TIME,
+  Z_INDEX,
 } from '~/lib/constants';
 import { bindAppElement } from '~/lib/utils/modal';
 import { ui } from '~/lib/utils/ui-dictionary';
@@ -61,6 +62,7 @@ function Modal({
             'transparent', // removes overlay flash for fullscreen
           opacity: isOpen ? 1 : 0,
           transition: `opacity ${TIME.MS350}ms ease-in-out ${TIME.MS100}ms`,
+          zIndex: Z_INDEX.TOP,
         },
       }}
       css={[

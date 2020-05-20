@@ -1,15 +1,14 @@
 import { CSSObject } from '@emotion/core';
 
 import { CONTENT_PADDING } from '~/components/pages/HomePage/HomePage.styles';
-import { COLORS, GRID_MARGIN, MQ, SPACING, TIME } from '~/lib/constants';
+import { COLORS, MQ, TIME } from '~/lib/constants';
 
 const CONSTANTS = {
   ICON_SIZE_L: 34,
   PADDING: {
     /* eslint-disable sort-keys */
-    S: `25px ${GRID_MARGIN.S}px`,
-    M: `30px ${GRID_MARGIN.M}px`,
-    L: `30px ${GRID_MARGIN.L}px 30px 86px`,
+    S: '25px 0',
+    M: '50px 0',
     /* eslint-enable sort-keys */
   },
 };
@@ -37,12 +36,6 @@ const styles: CSSObject = {
       padding: CONSTANTS.PADDING.M,
       transition: `background-color ${TIME.MS100}ms ease`,
     },
-
-    [MQ.L]: {
-      flexDirection: 'row-reverse',
-      justifyContent: 'flex-end',
-      padding: CONSTANTS.PADDING.L,
-    },
   },
 
   container: {
@@ -59,6 +52,13 @@ const styles: CSSObject = {
     },
   },
   icon: {
+    height: '100%',
+    justifyContent: 'flex-end',
+
+    [MQ.L]: {
+      justifyContent: 'center',
+    },
+
     svg: {
       display: 'block',
       fill: COLORS.GLOBAL.WHITE,
@@ -67,11 +67,13 @@ const styles: CSSObject = {
         height: CONSTANTS.ICON_SIZE_L,
         width: CONSTANTS.ICON_SIZE_L,
       },
-
-      [MQ.L]: {
-        marginRight: SPACING.SIZE_60,
-      },
     },
+  },
+  iconColumn: {
+    gridRow: 1,
+  },
+  label: {
+    textAlign: 'left',
   },
 };
 

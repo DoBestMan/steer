@@ -82,6 +82,7 @@ const styles = {
     bottom: 0,
     height: '100%',
     left: 0,
+    overflowY: 'scroll',
     padding: `${SPACING.SIZE_10}px ${SPACING.SIZE_20}px ${SPACING.SIZE_60}px ${SPACING.SIZE_20}px`,
     position: 'relative',
     right: 0,

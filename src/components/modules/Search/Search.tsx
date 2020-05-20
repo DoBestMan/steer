@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { RefObject, useState } from 'react';
 
 import Grid from '~/components/global/Grid/Grid';
 import { TIME } from '~/lib/constants';
@@ -27,6 +27,7 @@ export interface SearchResult {
 }
 
 interface Props {
+  forwardedRef?: RefObject<HTMLDivElement>;
   onClearSearchesClick: () => void;
   onCloseSearchClick: () => void;
   pastSearches: SearchResult[];
@@ -37,6 +38,7 @@ function Search({
   onClearSearchesClick,
   onCloseSearchClick,
   pastSearches,
+  forwardedRef,
   results,
 }: Props) {
   const [query, setQuery] = useState('');
@@ -56,8 +58,9 @@ function Search({
   const handleSearchClick = () => {};
 
   return (
-    <div css={styles.container}>
+    <div css={styles.container} ref={forwardedRef}>
       <SearchAutocomplete
+        focusOnMount
         onChange={onChange}
         onCloseSearchClick={onCloseSearchClick}
         onValueSelection={handleValueSelection}

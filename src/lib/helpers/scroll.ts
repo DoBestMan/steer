@@ -1,3 +1,5 @@
+import { MutableRefObject } from 'react';
+
 import { TWEEN_FUNCTIONS } from '~/lib/utils/ease';
 import { randomString } from '~/lib/utils/string';
 
@@ -159,4 +161,16 @@ const scrollToRAF = () => {
       paramsScrollTo.cb();
     }
   }
+};
+
+export const scrollToRef = (
+  ref: MutableRefObject<HTMLDivElement | null>,
+  duration: number,
+  cb?: () => void,
+) => {
+  if (!ref.current) {
+    return;
+  }
+
+  scrollTo(ref.current.offsetTop, duration / 1000, cb);
 };
