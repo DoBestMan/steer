@@ -12,22 +12,19 @@ jobs:
     - uses: actions/checkout@v2
       with:
         ref: 'qa'
-
     - name: Bump version and create tag
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         yarn version --minor
     - name: Create repository dispatch event
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        WEBHOOK_TOKEN: ${{ secrets.WEBHOOK_TOKEN }}
         EVENT: release_qa
         ORG: SimpleTire
         REPO: steer
       run: |
-        curl -d "{\"event_type\": \"${EVENT}\"}" -H "Content-Type: application/json" -H "Authorization: token ${GITHUB_TOKEN}" -H "Accept: application/vnd.github.everest-preview+json" "https://api.github.com/repos/${ORG}/${REPO}/dispatches"
+        curl -d "{\"event_type\": \"${EVENT}\"}" -H "Content-Type: application/json" -H "Authorization: token ${WEBHOOK_TOKEN}" -H "Accept: application/vnd.github.v3+json" "https://api.github.com/repos/${ORG}/${REPO}/dispatches"
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
