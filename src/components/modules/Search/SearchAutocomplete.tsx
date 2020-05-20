@@ -238,6 +238,7 @@ function SearchAutocomplete({
                 <li css={styles.searchResultsGridItem} key={index}>
                   <SearchSection
                     label={searchGroup.label}
+                    labelFragments={searchGroup.labelFragments}
                     onClick={onValueSelection}
                     query={query}
                     searchResults={searchGroup.siteSearchResultList}

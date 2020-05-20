@@ -14,6 +14,7 @@ export interface Results {
 
 export interface SearchGroup {
   label?: string;
+  labelFragments?: Array<{ highlighted: boolean; value: string }>;
   siteSearchResultList: SearchResult[];
   type: string;
 }

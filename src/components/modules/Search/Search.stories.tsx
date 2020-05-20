@@ -7,6 +7,7 @@ import {
   partNumberResults,
   pastSearchResults,
   simpleSearchResults,
+  tireSizeResults,
 } from './Search.mocks';
 
 export default {
@@ -59,6 +60,20 @@ export function SearchResultsPartNumber() {
       onCloseSearchClick={handleCloseSearchClick}
       pastSearches={[]}
       results={partNumberResults}
+    />
+  );
+}
+
+export function SearchResultsTireSize() {
+  const handleCloseSearchClick = action('Close search');
+  const handleClearSearchesClick = action('Clear searches');
+
+  return (
+    <Search
+      onClearSearchesClick={handleClearSearchesClick}
+      onCloseSearchClick={handleCloseSearchClick}
+      pastSearches={[]}
+      results={tireSizeResults}
     />
   );
 }

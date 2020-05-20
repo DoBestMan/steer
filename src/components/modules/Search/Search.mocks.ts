@@ -99,6 +99,41 @@ export const partNumberResults: Results = {
   ],
 };
 
+export const tireSizeResults: Results = {
+  siteSearchGroupList: [
+    {
+      labelFragments: [
+        { highlighted: false, value: 'Front width' },
+        { highlighted: false, value: 'Ratio' },
+        { highlighted: true, value: 'Rim' },
+      ],
+      siteSearchResultList: [
+        {
+          displayValue: '215/50R12',
+          type: 'term',
+          value: '215/50R12',
+        },
+        {
+          displayValue: '215/50R16',
+          type: 'term',
+          value: '215/50R16',
+        },
+        {
+          displayValue: '215/50R17',
+          type: 'term',
+          value: '215/50R17',
+        },
+        {
+          displayValue: '215/50R18',
+          type: 'term',
+          value: '215/50R18',
+        },
+      ],
+      type: 'SiteSearchResultsList',
+    },
+  ],
+};
+
 export const pastSearchResults = [
   {
     displayValue: 'Mini Cooper 2018 Hardtop',

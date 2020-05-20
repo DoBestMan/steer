@@ -14,6 +14,9 @@ const styles: CSSObject = {
       },
     },
   ],
+  faded: {
+    color: COLORS.ORANGE.SHADE_85,
+  },
   isSelected: {
     borderColor: COLORS.GLOBAL.WHITE,
   },
@@ -45,8 +48,9 @@ const styles: CSSObject = {
   secondaryItemDisplay: [
     typography.smallCopyTight,
     {
-      color: COLORS.GLOBAL.BLACK,
+      color: COLORS.ORANGE.SHADE_85,
       marginTop: 3,
+      [MQ.M]: typography.bodyCopyTight,
     },
   ],
 };

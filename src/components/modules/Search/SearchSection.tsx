@@ -3,6 +3,7 @@ import styles from './SearchSection.styles';
 
 interface Props {
   label?: string | JSX.Element;
+  labelFragments?: Array<{ highlighted: boolean; value: string }>;
   onClick: (searchText: SearchResult) => void;
   query?: string;
   searchResults: SearchResult[];
@@ -10,9 +11,27 @@ interface Props {
   selectedItemIndex?: [number, number];
 }
 
+interface FragmentedLabelProps {
+  labelFragments: Array<{ highlighted: boolean; value: string }>;
+}
+
+function FragmentedLabel({ labelFragments }: FragmentedLabelProps) {
+  return (
+    <h5 css={styles.eyebrow}>
+      {labelFragments.map(({ highlighted, value }, index) => (
+        <span key={value} css={!highlighted && styles.faded}>
+          {value}
+          {index < labelFragments.length - 1 && '  >  '}
+        </span>
+      ))}
+    </h5>
+  );
+}
+
 function SearchSection({
   query = '',
   label,
+  labelFragments,
   onClick,
   searchResults,
   sectionIndex,
@@ -25,6 +44,7 @@ function SearchSection({
   return (
     <div>
       {label && <h5 css={styles.eyebrow}>{label}</h5>}
+      {labelFragments && <FragmentedLabel labelFragments={labelFragments} />}
       <ul>
         {searchResults.map((item, index) => {
           const isSelected =
