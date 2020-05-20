@@ -6,6 +6,7 @@ export function useApiDataWithDefault<T, U = T>({
   includeAuthorization = false,
   includeUserRegion = false,
   includeUserZip = false,
+  revalidateEmitter,
   params = {},
   options = {},
 }: UseApiDataParams & {
@@ -20,6 +21,7 @@ export function useApiDataWithDefault<T, U = T>({
     includeUserZip,
     options,
     params,
+    revalidateEmitter,
   });
 
   return {

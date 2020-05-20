@@ -51,21 +51,13 @@ function HomePage({ serverData }: Props) {
   const {
     data: { siteHero, siteInsights },
     error,
-    revalidate,
   } = useApiDataWithDefault<HomeData>({
     defaultData: serverData,
     endpoint: '/home',
     includeUserRegion: true,
     includeUserZip: true,
+    revalidateEmitter: eventEmitters.userPersonalizationLocationUpdate,
   });
-
-  useEffect(() => {
-    eventEmitters.userPersonalizationLocationUpdate.on(revalidate);
-
-    return () => {
-      eventEmitters.userPersonalizationLocationUpdate.off(revalidate);
-    };
-  }, [revalidate]);
 
   if (error) {
     console.error(error);

@@ -1,7 +1,9 @@
+import { useEffect } from 'react';
 import useSWR, { ConfigInterface } from 'swr';
 
 import { apiBootstrap } from '~/lib/api/bootstrap';
 import { fetch } from '~/lib/fetch';
+import { Emitter } from '~/lib/utils/Emitter';
 
 export interface UseApiData<T> {
   data: T | undefined;
@@ -21,6 +23,7 @@ export interface UseApiDataParams {
   includeUserZip?: boolean;
   options?: ConfigInterface;
   params?: Record<string, string>;
+  revalidateEmitter?: Emitter<null>;
 }
 
 export function useApiData<T>({
@@ -29,6 +32,7 @@ export function useApiData<T>({
   includeUserRegion = false,
   includeUserZip = false,
   params = {},
+  revalidateEmitter,
   options = {},
 }: UseApiDataParams): UseApiData<T> {
   const { data, error, isValidating, mutate, revalidate } = useSWR<T>(
@@ -47,6 +51,20 @@ export function useApiData<T>({
     },
     options,
   );
+
+  useEffect(() => {
+    if (revalidateEmitter) {
+      // If an event emitter is provided,
+      // call `revalidate` to fetch new data on update
+      revalidateEmitter.on(revalidate);
+
+      return () => {
+        revalidateEmitter.off(revalidate);
+      };
+    }
+
+    return;
+  }, [revalidateEmitter, revalidate]);
 
   return {
     data,
