@@ -59,7 +59,23 @@ const styles = {
         borderColor: COLORS.GLOBAL.WHITE,
         color: COLORS.GLOBAL.BLACK,
       }),
-      [BUTTON_THEME.LIGHT]: css({}), // Not an option
+      [BUTTON_THEME.LIGHT]: css({
+        '&:focus': {
+          backgroundColor: COLORS.LIGHT.GRAY_70,
+          borderColor: COLORS.GLOBAL.BLACK,
+        },
+        '&:hover': {
+          // backgroundClip prevents background color from bleeding
+          // under the border. Required for semi-transparent border
+          // colors to be rendered correctly.
+          backgroundClip: 'padding-box',
+          backgroundColor: COLORS.LIGHT.GRAY_70,
+          borderColor: COLORS.LIGHT.GRAY_70,
+        },
+        backgroundColor: COLORS.GLOBAL.BLACK,
+        borderColor: COLORS.GLOBAL.BLACK,
+        color: COLORS.GLOBAL.WHITE,
+      }),
       [BUTTON_THEME.ORANGE]: css({
         '&:focus': {
           backgroundColor: COLORS.ORANGE.TINT_70,
@@ -90,7 +106,17 @@ const styles = {
         borderColor: COLORS.DARK.GRAY_80,
         color: COLORS.GLOBAL.WHITE,
       }),
-      [BUTTON_THEME.LIGHT]: css({}), // Not an option
+      [BUTTON_THEME.LIGHT]: css({
+        '&:focus': {
+          borderColor: COLORS.GLOBAL.BLACK,
+        },
+        '&:hover': {
+          borderColor: COLORS.LIGHT.GRAY_70,
+        },
+        backgroundColor: COLORS.GLOBAL.WHITE,
+        borderColor: COLORS.LIGHT.GRAY_20,
+        color: COLORS.GLOBAL.BLACK,
+      }),
       [BUTTON_THEME.ORANGE]: css({
         '&:focus': {
           borderColor: COLORS.GLOBAL.BLACK,

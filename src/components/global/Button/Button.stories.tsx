@@ -180,8 +180,8 @@ export function OrangeButtonOutlined() {
 export function FilterButtonWithKnobs() {
   const theme = select(
     'Theme',
-    [BUTTON_THEME.DARK, BUTTON_THEME.ORANGE],
-    BUTTON_THEME.DARK,
+    [BUTTON_THEME.LIGHT, BUTTON_THEME.DARK, BUTTON_THEME.ORANGE],
+    BUTTON_THEME.LIGHT,
   );
 
   return (
@@ -199,6 +199,36 @@ export function FilterButtonWithKnobs() {
   );
 }
 
+export function LightFilterButtonInactive() {
+  return (
+    <ButtonContainer theme={BUTTON_THEME.LIGHT}>
+      <FilterButton
+        hasDropDown={boolean('Drop down', false)}
+        isActive={false}
+        isDisabled={boolean('Disabled', false)}
+        onClick={handleButtonClick}
+      >
+        {text('Label', 'Button Label')}
+      </FilterButton>
+    </ButtonContainer>
+  );
+}
+
+export function LightFilterButtonActive() {
+  return (
+    <ButtonContainer theme={BUTTON_THEME.LIGHT}>
+      <FilterButton
+        hasDropDown={boolean('Drop down', false)}
+        isActive
+        isDisabled={boolean('Disabled', false)}
+        onClick={handleButtonClick}
+      >
+        {text('Label', 'Button Label')}
+      </FilterButton>
+    </ButtonContainer>
+  );
+}
+
 export function DarkFilterButtonInactive() {
   return (
     <ButtonContainer theme={BUTTON_THEME.DARK}>
@@ -207,6 +237,7 @@ export function DarkFilterButtonInactive() {
         isActive={false}
         isDisabled={boolean('Disabled', false)}
         onClick={handleButtonClick}
+        theme={BUTTON_THEME.DARK}
       >
         {text('Label', 'Button Label')}
       </FilterButton>
@@ -222,6 +253,7 @@ export function DarkFilterButtonActive() {
         isActive
         isDisabled={boolean('Disabled', false)}
         onClick={handleButtonClick}
+        theme={BUTTON_THEME.DARK}
       >
         {text('Label', 'Button Label')}
       </FilterButton>
@@ -266,8 +298,8 @@ export function FilterButtonWithToggleState() {
 
   const theme = select(
     'Theme',
-    [BUTTON_THEME.DARK, BUTTON_THEME.ORANGE],
-    BUTTON_THEME.DARK,
+    [BUTTON_THEME.LIGHT, BUTTON_THEME.DARK, BUTTON_THEME.ORANGE],
+    BUTTON_THEME.LIGHT,
   );
 
   return (

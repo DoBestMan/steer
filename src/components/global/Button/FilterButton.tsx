@@ -29,7 +29,7 @@ function FilterButton({
   hasDropDown = false,
   isActive,
   onClick,
-  theme = BUTTON_THEME.DARK,
+  theme = BUTTON_THEME.LIGHT,
   ...rest
 }: Props) {
   const [isExpanded, setIsExpanded] = useState(false);
