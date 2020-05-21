@@ -46,6 +46,7 @@ function HomePage({ serverData }: Props) {
   const { siteTheme } = useSiteGlobalsContext();
 
   const [thresholdCrossed, setThresholdCrossed] = useState(false);
+  const [isContentVisible, setIsContentVisible] = useState(false);
 
   const contentContainerRef = useRef<HTMLDivElement>(null);
   const searchButtonRef = useRef<HTMLDivElement>(null);
@@ -75,9 +76,18 @@ function HomePage({ serverData }: Props) {
     scrollToRef(searchButtonRef, TIME.MS400, toggleIsSearchOpen);
   }
 
+  useEffect(() => {
+    // Hiding the content and preventing the scroll color
+    // change while the localized data loads
+    const timer = setTimeout(() => {
+      setIsContentVisible(true);
+    }, TIME.MS1000);
+    return () => clearTimeout(timer);
+  }, []);
+
   // Scroll Effect : Changes background color
   useEffect(() => {
-    if (!contentContainerRef.current) {
+    if (!contentContainerRef.current || !isContentVisible) {
       return;
     }
 
@@ -111,7 +121,7 @@ function HomePage({ serverData }: Props) {
     return () => {
       observer.disconnect();
     };
-  }, [contentContainerRef]);
+  }, [contentContainerRef, isContentVisible]);
 
   return (
     <>
@@ -125,7 +135,9 @@ function HomePage({ serverData }: Props) {
           <SearchButton onClick={handleOpenModal} />
         </div>
         <div ref={contentContainerRef}>
-          <Grid css={styles.content}>
+          <Grid
+            css={[styles.content, isContentVisible && styles.contentVisible]}
+          >
             <DriverInsights {...siteInsights} />
             <Reviews {...siteReviews} />
           </Grid>

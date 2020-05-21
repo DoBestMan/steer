@@ -1,6 +1,6 @@
 import { css } from '@emotion/core';
 
-import { COLORS, MQ, SPACING, TIME } from '~/lib/constants';
+import { COLORS, EASING, MQ, SPACING, TIME } from '~/lib/constants';
 
 export const CONTENT_PADDING = {
   /* eslint-disable sort-keys */
@@ -12,6 +12,7 @@ export const CONTENT_PADDING = {
 
 const styles = {
   content: css({
+    opacity: 0,
     paddingBottom: CONTENT_PADDING.S,
 
     [MQ.M]: {
@@ -22,6 +23,10 @@ const styles = {
       paddingBottom: CONTENT_PADDING.XL,
     },
   }),
+  contentVisible: {
+    opacity: 1,
+    transition: `opacity ${TIME.MS600}ms ${EASING.CUBIC_EASE_OUT}`,
+  },
   root: css({
     background: COLORS.LIGHT.OFF_WHITE,
   }),
