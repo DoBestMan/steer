@@ -34,6 +34,7 @@ const styles = {
     css({
       backgroundColor: 'inherit',
       border: 'none',
+      padding: 0,
       width: '100%',
 
       [MQ.M]: typography.primaryHeadline,
