@@ -98,8 +98,8 @@ function useFallbackSrc(srcSet: string) {
   let fallbackSrc;
 
   if (hasMultipleImages) {
-    const images = srcSet.match(/(?<=, )\S*/g);
-    fallbackSrc = images?.pop();
+    const images = srcSet.match(/, \S*/g);
+    fallbackSrc = images?.pop()?.slice(2);
   } else {
     fallbackSrc = srcSet;
   }
