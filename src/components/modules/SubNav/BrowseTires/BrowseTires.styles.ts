@@ -31,6 +31,7 @@ const styles = {
   content: css({
     background: COLORS.GLOBAL.WHITE,
     minHeight: '100%',
+    width: '100%',
     [MQ.S]: {
       padding: `0 ${SPACING.SIZE_20}px ${SPACING.SIZE_50}px ${SPACING.SIZE_20}px`,
     },

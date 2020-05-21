@@ -81,7 +81,11 @@ function SubNavModal({
               </button>
             </div>
           )}
-          {children}
+          {onBack ? (
+            <div css={styles.navContentNested}>{children}</div>
+          ) : (
+            children
+          )}
         </div>
       </nav>
     </FocusTrap>

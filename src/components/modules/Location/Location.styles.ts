@@ -7,14 +7,14 @@ import { typography, typographyStyles } from '~/styles/typography.styles';
 export const styles = {
   container: css({
     height: '100%',
-    paddingBottom: SPACING.SIZE_60,
+    width: '100%',
   }),
   content: css({
     background: COLORS.GLOBAL.WHITE,
     display: 'flex',
     flexDirection: 'column',
     height: '100%',
-    minHeight: '100%',
+    paddingBottom: SPACING.SIZE_60,
     [MQ.S]: {
       padding: `0 ${SPACING.SIZE_20}px ${SPACING.SIZE_50}px ${SPACING.SIZE_20}px`,
     },

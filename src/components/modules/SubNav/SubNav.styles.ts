@@ -107,11 +107,18 @@ const styles = {
     },
   }),
   navContent: css({
+    display: 'flex',
+    flexDirection: 'column',
     height: '100%',
     overflow: 'auto',
     position: 'relative',
-    top: 0,
     zIndex: Z_INDEX.TOP + 1,
+  }),
+  navContentNested: css({
+    display: 'flex',
+    flexGrow: 1,
+    height: '100%',
+    width: '100%',
   }),
   navModalContainer: css({
     height: '100%',
@@ -148,10 +155,15 @@ const styles = {
   root: css({
     height: '100%',
   }),
-  smallShow: css({
+  smallHide: css({
     [MQ.S]: {
+      display: 'none',
+    },
+    [MQ.M]: {
       display: 'initial',
     },
+  }),
+  smallShow: css({
     [MQ.M]: {
       display: 'none',
     },
@@ -177,9 +189,8 @@ const styles = {
     },
   }),
   subnavInnerGrid: css({
-    [MQ.M]: {
-      height: '100%',
-    },
+    'grid-auto-rows': 'minmax(auto, 100%)',
+    height: '100%',
   }),
   subnavLinkList: css({
     display: 'flex',

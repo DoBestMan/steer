@@ -79,7 +79,10 @@ function SubNav({ siteMenuBrowseList, siteMenuLearn }: SiteMenu) {
             <Icon name={ICONS.CLOSE} />
           </button>
           <div css={styles.border} />
-          <SubNavLinks siteMenuBrowseList={siteMenuBrowseList} />
+          <SubNavLinks
+            siteMenuBrowseList={siteMenuBrowseList}
+            css={styles.smallShow}
+          />
           <GridItem
             isGrid
             fullbleedS
@@ -88,6 +91,9 @@ function SubNav({ siteMenuBrowseList, siteMenuLearn }: SiteMenu) {
             gridColumnXL="8/15"
             css={styles.subnavInnerGrid}
           >
+            <GridItem css={styles.smallHide}>
+              <SubNavLinks siteMenuBrowseList={siteMenuBrowseList} />
+            </GridItem>
             {activeLink === NAV_TARGETS.BROWSE_TIRES && (
               <BrowseTires
                 isMobile={isMobile}

@@ -13,6 +13,7 @@ import styles from './SubNav.styles';
 
 function SubNavLinks({
   siteMenuBrowseList,
+  ...rest
 }: Pick<SiteMenu, 'siteMenuBrowseList'>) {
   const {
     activeLink,
@@ -43,7 +44,7 @@ function SubNavLinks({
       <div css={styles.smallShow}>
         <TireCategoryLinks {...{ siteMenuBrowseList }} />
       </div>
-      <ul css={styles.subnavLinkList}>
+      <ul css={styles.subnavLinkList} {...rest}>
         <span css={styles.linkSection}>{textLinks.map(renderLink)}</span>
         <span css={[styles.linkSection, styles.linkSectionIcons]}>
           {iconLinks.map(renderLink)}
