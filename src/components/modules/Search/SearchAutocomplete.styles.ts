@@ -1,6 +1,7 @@
 import { css, CSSObject } from '@emotion/core';
 
 import { BORDERS, COLORS, MQ, SPACING, TIME, Z_INDEX } from '~/lib/constants';
+import { disableGlobalFocus } from '~/styles/document/accessibility.styles';
 import { typography } from '~/styles/typography.styles';
 
 const styles: CSSObject = {
@@ -75,6 +76,7 @@ const styles: CSSObject = {
   errorMessage: typography.primaryHeadline,
   input: [
     typography.secondaryHeadline,
+    disableGlobalFocus,
     {
       backgroundColor: 'inherit',
       border: 'none',
