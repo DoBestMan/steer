@@ -27,7 +27,12 @@ function UserReview({ authorImage, authorName, body, title }: SiteReviewItem) {
         <br />
         {authorName}
       </GridItem>
-      <GridItem as="div" gridColumnS="4/5" gridColumnM="3/4" gridColumnL="5/6">
+      <GridItem
+        css={styles.avatarContainer}
+        gridColumnS="4/5"
+        gridColumnM="3/4"
+        gridColumnL="5/6"
+      >
         <Image
           css={styles.avatar}
           srcSet={authorImage.srcSet}

@@ -11,7 +11,6 @@ const styles = {
   avatar: css({
     borderRadius: RADIUS.CIRCLE,
     height: avatarSize.standard,
-    marginLeft: 'auto',
     width: avatarSize.standard,
 
     [MQ.XL]: {
@@ -19,6 +18,9 @@ const styles = {
       width: avatarSize.large,
     },
   }),
+  avatarContainer: {
+    marginLeft: 'auto',
+  },
   container: css({
     alignItems: 'flex-start',
     marginBottom: SPACING.SIZE_40,
