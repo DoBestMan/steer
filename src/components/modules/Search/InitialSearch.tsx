@@ -1,7 +1,8 @@
 import GridItem from '~/components/global/Grid/GridItem';
 import Link from '~/components/global/Link/Link';
-import { LINK_SIZE, LINK_THEME, LINK_TYPES } from '~/lib/constants';
+import { LINK_THEME, LINK_TYPES } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
+import { typography } from '~/styles/typography.styles';
 
 import { SearchResult } from './Search';
 import { initialSearchCategories } from './Search.mocks';
@@ -25,9 +26,8 @@ function InitialSearch({
       <span css={styles.pastSearchBullet}>&bull;</span>
       <Link
         as={LINK_TYPES.BUTTON}
-        css={styles.clearPastSearchesButton}
+        css={[typography.smallCopy, styles.clearPastSearchesButton]}
         onClick={onClearSearchesClick}
-        size={LINK_SIZE.SM}
         theme={LINK_THEME.LIGHT}
       >
         {ui('search.clearPastSearchesButtonLabel')}

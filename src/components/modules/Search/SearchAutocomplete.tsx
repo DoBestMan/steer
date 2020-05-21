@@ -14,16 +14,11 @@ import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Link from '~/components/global/Link/Link';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
-import {
-  COLORS,
-  KEYCODES,
-  LINK_SIZE,
-  LINK_THEME,
-  LINK_TYPES,
-} from '~/lib/constants';
+import { COLORS, KEYCODES, LINK_THEME, LINK_TYPES } from '~/lib/constants';
 import { getScroll, subscribeScroll } from '~/lib/helpers/scroll';
 import { randomString } from '~/lib/utils/string';
 import { ui } from '~/lib/utils/ui-dictionary';
+import { typography } from '~/styles/typography.styles';
 
 import { SearchGroup, SearchResult } from './Search';
 import { useAutocompleteSelectedItem } from './Search.hooks';
@@ -215,9 +210,8 @@ function SearchAutocomplete({
           <div css={styles.closeSearchWrapper}>
             <Link
               as={LINK_TYPES.BUTTON}
-              css={styles.closeSearchButton}
+              css={[typography.smallCopy, styles.closeSearchButton]}
               onClick={onCloseSearchClick}
-              size={LINK_SIZE.SM}
               theme={LINK_THEME.LIGHT}
             >
               {ui('search.cancelButtonLabel')}

@@ -5,13 +5,12 @@ import { Icon as IconType } from '~/components/global/Icon/Icon.types';
 import {
   LINK_BUTTON_TYPE,
   LINK_ICON_POSITION,
-  LINK_SIZE,
   LINK_THEME,
   LINK_TYPE,
   LINK_TYPES,
-  LINK_WEIGHT,
 } from '~/lib/constants';
 import { disableGlobalFocus } from '~/styles/document/accessibility.styles';
+import { typography } from '~/styles/typography.styles';
 
 import BaseLink, { BaseLinkProps } from './BaseLink';
 import styles from './Link.styles';
@@ -22,9 +21,7 @@ interface Props {
   icon?: IconType;
   iconPosition?: LINK_ICON_POSITION;
   isDisabled?: boolean;
-  size?: LINK_SIZE;
   theme?: LINK_THEME;
-  weight?: LINK_WEIGHT;
 }
 
 export interface AnchorProps extends BaseLinkProps, Props {}
@@ -42,18 +39,15 @@ function Link({
   icon,
   iconPosition = LINK_ICON_POSITION.RIGHT,
   isDisabled,
-  size = LINK_SIZE.REG,
   theme = LINK_THEME.DARK,
-  weight = LINK_WEIGHT.NORMAL,
   ...rest
 }: LinkProps) {
   const linkStyles = [
+    typography.bodyCopy,
     !!children && disableGlobalFocus,
     !children && icon && styles.iconOnly,
     styles.root,
     styles[theme],
-    styles[size],
-    styles[weight],
     isDisabled && styles.disabled,
   ];
   const isAnchor = as === LINK_TYPES.A;
@@ -69,7 +63,7 @@ function Link({
 
   const leftIcon = iconPosition === LINK_ICON_POSITION.LEFT && inlineIcon;
   const linkText = children && (
-    <span css={[styles.link, !icon && styles.linkBorder[theme]]}>
+    <span css={[styles.link, !icon && styles[`linkBorder${theme}`]]}>
       {children}
     </span>
   );

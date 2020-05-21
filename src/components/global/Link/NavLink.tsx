@@ -1,5 +1,6 @@
 import { ActionType, LinkType } from '~/components/modules/Nav/Nav.types';
-import { LINK_ICON_POSITION, LINK_THEME, LINK_WEIGHT } from '~/lib/constants';
+import { LINK_ICON_POSITION, LINK_THEME } from '~/lib/constants';
+import { typography } from '~/styles/typography.styles';
 
 import Link, { AnchorProps, ButtonProps } from './Link';
 import { navLink } from './Link.styles';
@@ -21,9 +22,11 @@ function NavLink({
   if ('href' in rest) {
     return (
       <Link
-        weight={LINK_WEIGHT.BOLD}
         theme={LINK_THEME.LIGHT}
-        css={isActive ? navLink.selected : navLink.root}
+        css={[
+          typography.primarySubhead,
+          isActive ? navLink.selected : navLink.root,
+        ]}
         iconPosition={LINK_ICON_POSITION.LEFT}
         aria-label={label || text}
         {...rest}
@@ -36,9 +39,11 @@ function NavLink({
     return (
       <Link
         as="button"
-        weight={LINK_WEIGHT.BOLD}
         theme={LINK_THEME.LIGHT}
-        css={isActive ? navLink.selected : navLink.root}
+        css={[
+          typography.primarySubhead,
+          isActive ? navLink.selected : navLink.root,
+        ]}
         iconPosition={LINK_ICON_POSITION.LEFT}
         aria-label={label || text}
         {...rest}

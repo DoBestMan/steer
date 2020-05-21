@@ -1,6 +1,7 @@
 import Icon from '~/components/global/Icon/Icon';
 import { Icon as IconType } from '~/components/global/Icon/Icon.types';
-import { LINK_SIZE, LINK_THEME, LINK_WEIGHT } from '~/lib/constants';
+import { LINK_THEME } from '~/lib/constants';
+import { typography } from '~/styles/typography.styles';
 
 import BaseLink from './BaseLink';
 import { AnchorProps } from './Link';
@@ -20,12 +21,7 @@ function IconLink({
     <div css={iconCTA.root}>
       <BaseLink
         href={href}
-        css={[
-          styles.root,
-          styles[theme],
-          styles[LINK_SIZE.REG],
-          styles[LINK_WEIGHT.BOLD],
-        ]}
+        css={[typography.primarySubhead, styles.root, styles[theme]]}
         {...rest}
       >
         <Icon name={icon} css={iconCTA.icon} />

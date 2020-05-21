@@ -8,10 +8,8 @@ import { NAV_TARGETS } from '~/components/modules/Nav/Nav.types';
 import {
   COLORS,
   LINK_ICON_POSITION,
-  LINK_SIZE,
   LINK_THEME,
   LINK_TYPES,
-  LINK_WEIGHT,
 } from '~/lib/constants';
 
 import FooterLink from './FooterLink';
@@ -44,12 +42,6 @@ function LinkContainer({
 }
 
 export function LightLinkWithKnobs() {
-  const size = select('Size', [LINK_SIZE.SM, LINK_SIZE.REG], LINK_SIZE.REG);
-  const weight = select(
-    'Weight',
-    [LINK_WEIGHT.NORMAL, LINK_WEIGHT.BOLD],
-    LINK_WEIGHT.NORMAL,
-  );
   const icon = select('Icon Name', ICONS, ICONS.CHEVRON_RIGHT);
   const iconPosition = select(
     'Icon Position',
@@ -65,7 +57,7 @@ export function LightLinkWithKnobs() {
         theme={LINK_THEME.LIGHT}
         href={as === LINK_TYPES.A ? '/' : ''}
         isDisabled={boolean('Disabled', false)}
-        {...{ as, icon, iconPosition, size, weight }}
+        {...{ as, icon, iconPosition }}
       >
         {text('Link Text', 'Link Example')}
       </Link>
@@ -77,41 +69,6 @@ export function LightLinkRegular() {
   return (
     <LinkContainer theme={LINK_THEME.LIGHT}>
       <Link href="/" theme={LINK_THEME.LIGHT}>
-        Link Example
-      </Link>
-    </LinkContainer>
-  );
-}
-
-export function LightLinkBold() {
-  return (
-    <LinkContainer theme={LINK_THEME.LIGHT}>
-      <Link href="/" theme={LINK_THEME.LIGHT} weight={LINK_WEIGHT.BOLD}>
-        Link Example
-      </Link>
-    </LinkContainer>
-  );
-}
-
-export function LightLinkRegularSmall() {
-  return (
-    <LinkContainer theme={LINK_THEME.LIGHT}>
-      <Link href="/" size={LINK_SIZE.SM} theme={LINK_THEME.LIGHT}>
-        Link Example
-      </Link>
-    </LinkContainer>
-  );
-}
-
-export function LightLinkBoldSmall() {
-  return (
-    <LinkContainer theme={LINK_THEME.LIGHT}>
-      <Link
-        href="/"
-        theme={LINK_THEME.LIGHT}
-        size={LINK_SIZE.SM}
-        weight={LINK_WEIGHT.BOLD}
-      >
         Link Example
       </Link>
     </LinkContainer>
@@ -144,12 +101,6 @@ export function LightLinkInlineIconLeft() {
 }
 
 export function DarkLinkWithKnobs() {
-  const size = select('Size', [LINK_SIZE.SM, LINK_SIZE.REG], LINK_SIZE.REG);
-  const weight = select(
-    'Weight',
-    [LINK_WEIGHT.NORMAL, LINK_WEIGHT.BOLD],
-    LINK_WEIGHT.NORMAL,
-  );
   const icon = select('Icon Name', ICONS, ICONS.CHEVRON_RIGHT);
   const iconPosition = select(
     'Icon Position',
@@ -164,51 +115,18 @@ export function DarkLinkWithKnobs() {
       <Link
         href={as === LINK_TYPES.A ? '/' : ''}
         isDisabled={boolean('Disabled', false)}
-        {...{ as, icon, iconPosition, size, weight }}
+        {...{ as, icon, iconPosition }}
       >
         {text('Link Text', 'Link Example')}
       </Link>
     </LinkContainer>
   );
 }
+
 export function DarkLinkRegular() {
   return (
     <LinkContainer theme={LINK_THEME.DARK}>
       <Link href="/" theme={LINK_THEME.DARK}>
-        Link Example
-      </Link>
-    </LinkContainer>
-  );
-}
-export function DarkLinkBold() {
-  return (
-    <LinkContainer theme={LINK_THEME.DARK}>
-      <Link href="/" theme={LINK_THEME.DARK} weight={LINK_WEIGHT.BOLD}>
-        Link Example
-      </Link>
-    </LinkContainer>
-  );
-}
-
-export function DarkLinkRegularSmall() {
-  return (
-    <LinkContainer theme={LINK_THEME.DARK}>
-      <Link href="/" size={LINK_SIZE.SM} theme={LINK_THEME.DARK}>
-        Link Example
-      </Link>
-    </LinkContainer>
-  );
-}
-
-export function DarkLinkBoldSmall() {
-  return (
-    <LinkContainer theme={LINK_THEME.DARK}>
-      <Link
-        href="/"
-        theme={LINK_THEME.DARK}
-        size={LINK_SIZE.SM}
-        weight={LINK_WEIGHT.BOLD}
-      >
         Link Example
       </Link>
     </LinkContainer>
