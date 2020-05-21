@@ -43,8 +43,9 @@ const styles = {
   }),
   close: css({
     position: 'absolute',
-    right: SPACING.SIZE_20,
-    top: SPACING.SIZE_30,
+    // manually position it because hit area
+    right: 12,
+    top: 24,
     zIndex: Z_INDEX.FRONT,
     [MQ.M]: {
       display: 'none',
