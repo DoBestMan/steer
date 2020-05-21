@@ -30,6 +30,7 @@ const styles = {
       [MQ.L]: [
         typography.primarySubhead,
         css({
+          alignItems: 'center',
           animation: `${fadeInUp20px} ${TIME.MS200}ms ease-in`,
           borderRadius: RADIUS.RADIUS_15,
           minHeight: 'auto',

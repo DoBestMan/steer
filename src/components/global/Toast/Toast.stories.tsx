@@ -1,5 +1,5 @@
 import { css } from '@emotion/core';
-import { boolean } from '@storybook/addon-knobs';
+import { boolean, text } from '@storybook/addon-knobs';
 import { ReactChild, useState } from 'react';
 
 import Grid from '~/components/global/Grid/Grid';
@@ -58,11 +58,7 @@ export function ToastNoAutoDismiss() {
         isOpen={boolean('Visible', isVisible)}
         onDismiss={handleDismiss}
       >
-        <p>
-          Thanks for subscribing!
-          <br />
-          We look forward to being in touch.
-        </p>
+        {text('Toast Message', 'Your location has been updated!')}
       </Toast>
     </Container>
   );
