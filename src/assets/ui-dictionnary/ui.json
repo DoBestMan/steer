@@ -40,7 +40,9 @@
     "locationInfo": "We use your location to provide accurate <br /> pricing and help you find local shops.",
     "learnMoreLabel": "Learn More",
     "successMessage": "Your location has been updated to {{location}}. <br /> We ship free to this location",
-    "errorMessage": "Oops. Something went wrong, please try again."
+    "errorMessage": "Oops. Something went wrong, please try again.",
+    "geolocationNoResults": "No results found",
+    "geocoderFailure": "Geocoder failed due to: {{status}}"
   },
   "logo": {
     "alt": "Simple Tire"

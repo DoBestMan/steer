@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { AutocompleteResult } from '~/components/global/Autocomplete/AutocompleteResultItem';
 import Icon from '~/components/global/Icon/Icon';
@@ -30,7 +30,7 @@ function UseCurrentLocation({
   onCurrentLocationError,
   onCurrentLocationSuccess,
 }: Props) {
-  const [latlng, setLatlng] = useState<google.maps.LatLngLiteral>();
+  const [latlng, setLatlng] = useState<google.maps.LatLngLiteral | null>(null);
   const [isWaiting, setIsWaiting] = useState(false);
 
   const handleOnClick = () => {
@@ -47,42 +47,49 @@ function UseCurrentLocation({
     });
   };
 
+  const getGeoCodeLocation = useCallback(
+    (request: google.maps.GeocoderRequest) => {
+      const geocoder = new window.google.maps.Geocoder();
+
+      geocoder.geocode(request, (results, status) => {
+        if (status === window.google.maps.GeocoderStatus.OK) {
+          if (results[0]) {
+            const zipCode = getZipFromAddressComponents(
+              results[0].address_components,
+            );
+
+            if (zipCode) {
+              const result = {
+                id: results[0].place_id,
+                main: zipCode,
+              };
+
+              onCurrentLocationSuccess(result);
+            } else {
+              onCurrentLocationError(ui('location.geolocationNoResults'));
+            }
+          }
+        } else {
+          onCurrentLocationError(
+            ui('location.geocoderFailure', {
+              status,
+            }),
+          );
+        }
+        // Resetting latlng to prevent multiple re-renders
+        setLatlng(null);
+      });
+    },
+    [onCurrentLocationSuccess, onCurrentLocationError],
+  );
+
   useEffect(() => {
-    if (!window.google) {
+    if (!window.google || !latlng) {
       return;
     }
 
-    if (latlng) {
-      const getGeoCodeLocation = (request: google.maps.GeocoderRequest) => {
-        const geocoder = new window.google.maps.Geocoder();
-
-        geocoder.geocode(request, (results, status) => {
-          if (status === window.google.maps.GeocoderStatus.OK) {
-            if (results[0]) {
-              const zipCode = getZipFromAddressComponents(
-                results[0].address_components,
-              );
-
-              if (zipCode) {
-                const result = {
-                  id: results[0].place_id,
-                  main: zipCode,
-                };
-
-                onCurrentLocationSuccess(result);
-              } else {
-                onCurrentLocationError('No results found');
-              }
-            }
-          } else {
-            onCurrentLocationError(`Geocoder failed due to: ${status}`);
-          }
-        });
-      };
-
-      getGeoCodeLocation({ location: latlng });
-    }
-  }, [latlng, onCurrentLocationSuccess, onCurrentLocationError]);
+    getGeoCodeLocation({ location: latlng });
+  }, [latlng, getGeoCodeLocation]);
 
   return (
     <div css={styles.useCurrentLocationContainer}>
