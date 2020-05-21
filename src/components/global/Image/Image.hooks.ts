@@ -1,5 +1,6 @@
 import { RefObject, useEffect, useState } from 'react';
 
+import { useWindowSize } from '~/hooks/useWindowSize';
 import { Loading, LOADING_OPTIONS } from '~/lib/constants';
 import { hasNativeLoadingSupport } from '~/lib/utils/browser';
 
@@ -44,9 +45,10 @@ interface Props {
   imgRef?: RefObject<HTMLDivElement>;
   loading?: Loading;
   srcSet: string;
+  width?: string;
 }
 
-export function useLazyImage({ loading, srcSet, imgRef }: Props) {
+function useLazyImage({ loading, srcSet, imgRef }: Props) {
   const isLazy = loading === LOADING_OPTIONS.LAZY;
   const [lazyLoadingState, setLazyLoadingState] = useState(
     isLazy ? LAZY_LOADING_METHOD.CHECKING : LAZY_LOADING_METHOD.NONE,
@@ -70,18 +72,76 @@ export function useLazyImage({ loading, srcSet, imgRef }: Props) {
 
   const { loadedSrc } = useIOImage(isLazyIO, srcSet, imgRef);
 
-  let finalSrcSet = srcSet;
+  let lazySrcSet = srcSet;
 
   if (isLazyIO) {
-    finalSrcSet = loadedSrc;
+    lazySrcSet = loadedSrc;
   } else if (isChecking) {
     // Do not pass an srcSet value if we are still checking
     // browser support to avoid kicking off an eager load
-    finalSrcSet = '';
+    lazySrcSet = '';
   }
 
   return {
-    finalSrcSet,
     isLazy: isLazyNative || isLazyIO,
+    lazySrcSet,
+  };
+}
+
+function checkSrcSet(srcSet: string) {
+  return /,/.test(srcSet);
+}
+
+function useFallbackSrc(srcSet: string) {
+  const hasMultipleImages = checkSrcSet(srcSet);
+
+  let fallbackSrc;
+
+  if (hasMultipleImages) {
+    const images = srcSet.match(/(?<=, )\S*/g);
+    fallbackSrc = images?.pop();
+  } else {
+    fallbackSrc = srcSet;
+  }
+
+  return { fallbackSrc, hasMultipleImages };
+}
+
+function useResponsiveImage(srcSet: string, imgRef?: RefObject<HTMLElement>) {
+  const { width } = useWindowSize();
+  const [sizes, setSizes] = useState('');
+  const hasMultipleImages = checkSrcSet(srcSet);
+  const hasRef = imgRef && imgRef.current;
+  const measuredWidth = hasRef ? `${hasRef.clientWidth}px` : '';
+  const shouldUpdateSizes = hasMultipleImages && measuredWidth !== sizes;
+
+  useEffect(() => {
+    if (shouldUpdateSizes) {
+      setSizes(measuredWidth);
+    }
+  }, [measuredWidth, shouldUpdateSizes, width]);
+
+  return { sizes };
+}
+
+export function useImageProps({ imgRef, loading, srcSet, width }: Props) {
+  const { lazySrcSet, isLazy } = useLazyImage({
+    imgRef,
+    loading,
+    srcSet,
+  });
+
+  const { sizes } = useResponsiveImage(srcSet, imgRef);
+  const { fallbackSrc, hasMultipleImages } = useFallbackSrc(srcSet);
+  const isResponsive = !width && hasMultipleImages;
+
+  const finalSrcSet = isResponsive && !sizes ? '' : lazySrcSet;
+  const src = finalSrcSet ? fallbackSrc : '';
+
+  return {
+    finalSrcSet,
+    isLazy,
+    sizes,
+    src,
   };
 }

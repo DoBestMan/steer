@@ -39,7 +39,7 @@ describe('IconOrImage', () => {
 
     expect(container.firstChild).toMatchInlineSnapshot(`
       <div
-        class="root-placeholder-Image"
+        class="Image"
       />
     `);
   });

@@ -1,9 +1,3 @@
-import { css } from '@emotion/core';
-
-import Grid from '~/components/global/Grid/Grid';
-import GridItem from '~/components/global/Grid/GridItem';
-import { SPACING } from '~/lib/constants';
-
 import Image from './Image';
 
 export default {
@@ -11,67 +5,24 @@ export default {
   title: 'Image',
 };
 
-const styles = {
-  paddingBottom: css({
-    paddingBottom: SPACING.SIZE_50,
-  }),
-  paddingTop: css({
-    paddingTop: SPACING.SIZE_50,
-  }),
-};
-
-export function Images() {
+export function ImageWithHeightAndWidth() {
   return (
-    <div>
-      <Grid>
-        <GridItem gridColumn="2/8" css={styles.paddingTop}>
-          <Image
-            altText="test"
-            srcSet="https://picsum.photos/600/300"
-            height="300"
-            width="600"
-          />
-        </GridItem>
+    <Image
+      altText="test"
+      srcSet="https://picsum.photos/600/300"
+      height="300"
+      width="600"
+    />
+  );
+}
 
-        <GridItem gridColumn="2/8" css={styles.paddingTop}>
-          <Image
-            altText="test"
-            srcSet="https://picsum.photos/400/200"
-            height="200"
-            width="400"
-          />
-        </GridItem>
-
-        <GridItem gridColumn="2/8" css={styles.paddingTop}>
-          <Image
-            altText="test"
-            srcSet="https://picsum.photos/500/400"
-            height="400"
-            width="500"
-          />
-        </GridItem>
-
-        <GridItem gridColumn="2/8" css={styles.paddingTop}>
-          <Image
-            altText="test"
-            srcSet="https://picsum.photos/600/600"
-            height="600"
-            width="600"
-          />
-        </GridItem>
-
-        <GridItem
-          gridColumn="2/8"
-          css={[styles.paddingTop, styles.paddingBottom]}
-        >
-          <Image
-            altText="test"
-            srcSet="https://picsum.photos/600/300"
-            height="300"
-            width="600"
-          />
-        </GridItem>
-      </Grid>
+export function ImageResponsive() {
+  return (
+    <div css={{ width: '50%' }}>
+      <Image
+        altText="test"
+        srcSet="https://dummyimage.com/800x400/000/f00.jpg 800w, https://dummyimage.com/1600x400/000/f00.jpg 1600w, https://dummyimage.com/3000x400/000/f00.jpg 3000w"
+      />
     </div>
   );
 }

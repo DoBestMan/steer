@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 
 import { Loading, LOADING_OPTIONS } from '~/lib/constants';
 
-import { useLazyImage } from './Image.hooks';
+import { useImageProps } from './Image.hooks';
 import styles from './Image.styles';
 
 interface Props {
@@ -13,7 +13,6 @@ interface Props {
   width?: string;
 }
 
-// TODO Responsive images - https://simpletire.atlassian.net/browse/WCS-183
 function Image({
   altText,
   height,
@@ -25,10 +24,11 @@ function Image({
   const imgRef = useRef<HTMLDivElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const { finalSrcSet, isLazy } = useLazyImage({
+  const { finalSrcSet, isLazy, sizes, src } = useImageProps({
     imgRef,
     loading,
     srcSet,
+    width,
   });
 
   const isLazyAndNotLoaded = isLazy && !isLoaded;
@@ -36,6 +36,7 @@ function Image({
   function handleImageLoad() {
     setIsLoaded(true);
   }
+
   return (
     <div
       ref={imgRef}
@@ -48,7 +49,8 @@ function Image({
       {finalSrcSet && (
         <img
           css={[styles.image, isLoaded && styles.isLoaded]}
-          src={finalSrcSet}
+          sizes={sizes}
+          src={src}
           srcSet={finalSrcSet}
           alt={altText}
           height={height}
