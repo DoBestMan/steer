@@ -158,6 +158,7 @@ const styles = {
   }),
   listTitle: css({
     alignItems: 'center',
+    color: COLORS.LIGHT.GRAY_70,
     display: 'flex',
     justifyContent: 'space-between',
     marginBottom: SPACING.SIZE_15,
