@@ -9,7 +9,6 @@ const styles = {
   }),
   mainContent: css({
     height: '100%',
-    minHeight: 700,
   }),
 };
 
