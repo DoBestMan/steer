@@ -112,6 +112,11 @@ const styles = {
       pointerEvents: 'none',
       position: 'absolute',
       right: 0,
+
+      svg: {
+        transform: 'scale3d(0.11, 0.11, 0.11)',
+        transformOrigin: '100% 100%',
+      },
     },
   }),
   info: css({

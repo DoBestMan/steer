@@ -127,7 +127,7 @@ spriter.compile((error: string, result: object) => {
   // Extract viewport to get original size for each SVG
   /* eslint no-useless-escape: 0 */
   const viewBoxes = contents
-    .match(/viewBox\=\"([0-9 ]*)\"/g)
+    .match(/viewBox\=\"([\d*\.?\d* ]*)\"/g)
     .map((viewBox) =>
       viewBox.replace('viewBox="', '').replace('"', '').substr(4),
     );

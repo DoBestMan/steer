@@ -137,6 +137,10 @@ We're generating and using an SVG Sprite in the application. If you need to add 
 - run `yarn generate-svg-sprite`.
 - You're all set, commit your change and voilà!
 
+Note: make sure that every SVG file used has a `viewBox` attribute.
+
+List of assets [here](https://docs.google.com/spreadsheets/d/1kjsrjn0Y-dQAo_ahsUV-jxhk58JpxPmHUNkiwCI-lw8/edit#gid=0)
+
 ## Deploying
 
 Every push generates a URL you can see online.

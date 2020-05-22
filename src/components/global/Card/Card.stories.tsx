@@ -87,7 +87,7 @@ export function CardWithIcon() {
         type={INSIGHT_TYPE.DEFAULT}
         linkLabel="Find tires with long durability"
         link={{ href: '/', isExternal: false }}
-        figures={[{ svgId: ICONS.ICON_WHEEL, type: ICON_IMAGE_TYPE.ICON }]}
+        figures={[{ svgId: ICONS.WHEEL, type: ICON_IMAGE_TYPE.ICON }]}
         body="Most drivers select tires that last between more than 50,000 miles."
         title="Drivers prioritize tires with long durability."
       />

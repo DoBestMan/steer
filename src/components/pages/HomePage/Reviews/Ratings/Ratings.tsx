@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 import Icon from '~/components/global/Icon/Icon';
 import { ICON_SIZES, ICONS } from '~/components/global/Icon/Icon.constants';
 import { SiteIcon } from '~/data/models/SiteIcon';
@@ -14,9 +16,13 @@ interface Props {
 }
 
 function Ratings({ ratingLabel, ratingLabelIcon, ratingStars }: Props) {
+  const [ratingGradientId, setRatingGradientId] = useState<string>();
   const formattedRating = ratingStars > 0 ? ratingStars.toFixed(1) : 0;
   const ratingFillWidth = (ratingStars / 5) * 100;
-  const RATING_GRADIENT_ID = randomString();
+
+  useEffect(() => {
+    setRatingGradientId(randomString());
+  }, []);
 
   return (
     <div css={styles.container}>
@@ -31,7 +37,7 @@ function Ratings({ ratingLabel, ratingLabelIcon, ratingStars }: Props) {
           viewBox={`0 0 ${ICON_SIZES.FIVE_STARS.w} ${ICON_SIZES.FIVE_STARS.h}`}
         >
           <linearGradient
-            id={RATING_GRADIENT_ID}
+            id={ratingGradientId}
             gradientUnits="userSpaceOnUse"
             x1="0%"
             y1="0%"
@@ -47,7 +53,7 @@ function Ratings({ ratingLabel, ratingLabelIcon, ratingStars }: Props) {
         </svg>
         <Icon
           css={[
-            { '--rating-gradient-id': `url(#${RATING_GRADIENT_ID})` },
+            { '--rating-gradient-id': `url(#${ratingGradientId})` },
             styles.ratingStars,
           ]}
           name={ICONS.FIVE_STARS}

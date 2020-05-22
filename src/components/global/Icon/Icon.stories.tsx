@@ -18,6 +18,10 @@ export default {
 const styles = {
   container: css({
     padding: '50px 0',
+
+    svg: {
+      height: 'auto',
+    },
   }),
 };
 

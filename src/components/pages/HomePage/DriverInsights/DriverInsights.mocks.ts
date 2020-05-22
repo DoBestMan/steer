@@ -28,7 +28,7 @@ export const mockInsights = [
     eyebrowIcon: { svgId: ICONS.ARROW_UP, type: ICON_IMAGE_TYPE.ICON },
     figures: [
       {
-        svgId: text('Card 2 Decorator', 'icon-wheel'),
+        svgId: text('Card 2 Decorator', 'wheel'),
 
         type: ICON_IMAGE_TYPE.ICON,
       },
