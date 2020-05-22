@@ -36,7 +36,8 @@ function buildUrl(
 
 export async function fetch<T, U = never>({
   authorizationFunctionRetriesLeft = 1,
-  body,
+  jsonBody,
+  formBody,
   endpoint,
   includeAuthorization,
   includeUserRegion,
@@ -46,11 +47,12 @@ export async function fetch<T, U = never>({
   query = {},
 }: {
   authorizationFunctionRetriesLeft?: number;
-  body?: U;
   endpoint: string;
+  formBody?: Record<string, string>;
   includeAuthorization?: boolean;
   includeUserRegion?: boolean;
   includeUserZip?: boolean;
+  jsonBody?: U;
   method: RequestInit['method'];
   params?: Record<string, string>;
   query?: Record<string, string>;
@@ -87,15 +89,21 @@ export async function fetch<T, U = never>({
     headers.Authorization = authorizationHeader;
   }
 
-  if (body) {
+  let body;
+
+  if (jsonBody) {
     headers['Content-Type'] = 'application/json';
+    body = JSON.stringify(jsonBody);
+  } else if (formBody) {
+    headers['Content-Type'] = 'application/x-www-form-urlencoded';
+    body = new URLSearchParams(formBody).toString();
   }
 
   let response: Response;
   try {
     const url = buildUrl(`${urlBase}${endpoint}`, params, query);
     response = await nativeFetch(url, {
-      body: body ? JSON.stringify(body) : undefined,
+      body,
       headers,
       method,
     });
@@ -123,11 +131,12 @@ export async function fetch<T, U = never>({
 
       return fetch<T, U>({
         authorizationFunctionRetriesLeft: authorizationFunctionRetriesLeft - 1,
-        body,
         endpoint,
+        formBody,
         includeAuthorization,
         includeUserRegion,
         includeUserZip,
+        jsonBody,
         method,
         params,
         query,

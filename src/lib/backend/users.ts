@@ -11,11 +11,11 @@ export async function backendCreateUserSession({ userIp }: { userIp: string }) {
     },
     { userIp: string }
   >({
-    body: {
-      userIp,
-    },
     endpoint: '/v1/users/session',
     includeAuthorization: true,
+    jsonBody: {
+      userIp,
+    },
     method: 'post',
   });
 
@@ -49,13 +49,13 @@ export async function backendUpdateUserPersonalization({
     { userPersonalization: UserPersonalization },
     UserPersonalizationUpdate
   >({
-    body: {
+    endpoint: '/v1/users/{userSessionId}/personalization',
+    includeAuthorization: true,
+    jsonBody: {
       gaClientId,
       userLocationGooglePlacesId,
       userLocationZip,
     },
-    endpoint: '/v1/users/{userSessionId}/personalization',
-    includeAuthorization: true,
     method: 'put',
     params: {
       userSessionId,

@@ -8,24 +8,17 @@ export async function backendOauthToken({
   clientId: string;
   clientSecret: string;
 }) {
-  const response = await fetch<
-    {
-      access_token: string;
-      expires_in: number;
-      token_type: string;
-    },
-    {
-      client_id: string;
-      client_secret: string;
-      grant_type: 'client_credentials';
-    }
-  >({
-    body: {
+  const response = await fetch<{
+    access_token: string;
+    expires_in: number;
+    token_type: string;
+  }>({
+    endpoint: '/token',
+    formBody: {
       client_id: clientId,
       client_secret: clientSecret,
       grant_type: 'client_credentials',
     },
-    endpoint: '/token',
     method: 'post',
   });
 

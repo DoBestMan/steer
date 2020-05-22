@@ -11,9 +11,9 @@ export async function apiUpdateUserPersonalization(
     UserPersonalization,
     UserPersonalizationUpdate
   >({
-    body,
     endpoint: '/users/me/personalization',
     includeAuthorization: true,
+    jsonBody: body,
     method: 'put',
   });
 

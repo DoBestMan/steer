@@ -53,10 +53,10 @@ describe('fetch', () => {
     mocked(nativeFetch).mockResolvedValue(response);
 
     const result = await fetch<{ test: boolean }, { testBody: string }>({
-      body: {
+      endpoint: '/v1/test-post',
+      jsonBody: {
         testBody: '1',
       },
-      endpoint: '/v1/test-post',
       method: 'post',
     });
 
