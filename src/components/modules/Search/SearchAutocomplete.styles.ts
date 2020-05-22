@@ -1,8 +1,14 @@
 import { css, CSSObject } from '@emotion/core';
+import {
+  ENTERED,
+  ENTERING,
+  EXITED,
+  EXITING,
+} from 'react-transition-group/Transition';
 
 import { BORDERS, COLORS, MQ, SPACING, TIME, Z_INDEX } from '~/lib/constants';
 import { disableGlobalFocus } from '~/styles/document/accessibility.styles';
-import { typography } from '~/styles/typography.styles';
+import { typography, typographyStyles } from '~/styles/typography.styles';
 
 const styles: CSSObject = {
   actionIcon: {
@@ -41,6 +47,9 @@ const styles: CSSObject = {
       },
     },
   },
+  clearSearchButton: {
+    flexShrink: 0,
+  },
   closeSearchButton: {
     span: {
       borderBottom: BORDERS.DOTTED_TRANSPARENT_2PX,
@@ -64,7 +73,7 @@ const styles: CSSObject = {
     },
   },
   comboboxWrapper: {
-    width: '100%',
+    flexGrow: 1,
   },
   errorLabel: [
     typography.secondaryHeadline,
@@ -75,15 +84,9 @@ const styles: CSSObject = {
   ],
   errorMessage: typography.primaryHeadline,
   input: [
-    typography.secondaryHeadline,
     disableGlobalFocus,
     {
-      backgroundColor: 'inherit',
-      border: 'none',
-      color: COLORS.GLOBAL.WHITE,
-      padding: 0,
       width: '100%',
-      [MQ.M]: typography.primaryHeadline,
     },
   ],
   inputContainer: {
@@ -95,6 +98,17 @@ const styles: CSSObject = {
       paddingRight: SPACING.SIZE_80,
     },
   },
+  inputText: [
+    typography.secondaryHeadline,
+    {
+      backgroundColor: 'inherit',
+      border: 'none',
+      color: COLORS.GLOBAL.WHITE,
+      padding: 0,
+      [MQ.M]: typographyStyles.primaryHeadline.M,
+      [MQ.XL]: typographyStyles.primaryHeadline.XL,
+    },
+  ],
   label: [
     typography.secondaryHeadline,
     css({
@@ -110,9 +124,26 @@ const styles: CSSObject = {
   labelHidden: {
     opacity: 0,
   },
-  listbox: {
+  listboxRoot: {
     listStyle: 'none',
+    transition: `opacity ${TIME.MS600}ms ease, transform ${TIME.MS300}ms ease`,
   },
+  /* eslint-disable sort-keys */
+  [`listbox_${ENTERING}`]: {
+    opacity: 0,
+    transform: 'translateX(10%)',
+  },
+  [`listbox_${ENTERED}`]: {
+    opacity: 1,
+    transform: 'translateX(0)',
+  },
+  [`listbox_${EXITING}`]: {
+    opacity: 1,
+  },
+  [`listbox_${EXITED}`]: {
+    opacity: 0,
+  },
+  /* eslint-enable sort-keys */
   searchIcon: {
     '> svg': {
       height: 34,
@@ -148,6 +179,10 @@ const styles: CSSObject = {
     [MQ.L]: {
       padding: `${SPACING.SIZE_70}px 0 ${SPACING.SIZE_10}px`,
     },
+  },
+  searchState: {
+    flexShrink: 0,
+    paddingRight: SPACING.SIZE_05,
   },
 };
 

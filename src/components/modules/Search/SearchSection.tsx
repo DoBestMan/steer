@@ -4,7 +4,7 @@ import styles from './SearchSection.styles';
 interface Props {
   label?: string | JSX.Element;
   labelFragments?: Array<{ highlighted: boolean; value: string }>;
-  onClick: (searchText: SearchResult) => void;
+  onClick: (searchResult: SearchResult) => void;
   query?: string;
   searchResults: SearchResult[];
   sectionIndex?: number;

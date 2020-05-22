@@ -11,13 +11,15 @@ import SearchSection from './SearchSection';
 
 interface Props {
   onClearSearchesClick: () => void;
-  onSearchClick: () => void;
+  onPastSearchClick: () => void;
+  onSearchCategoryClick: (searchResult: SearchResult) => void;
   pastSearches: SearchResult[];
 }
 
 function InitialSearch({
   onClearSearchesClick,
-  onSearchClick,
+  onPastSearchClick,
+  onSearchCategoryClick,
   pastSearches,
 }: Props) {
   const pastSearchesEyebrow = (
@@ -46,7 +48,7 @@ function InitialSearch({
       >
         <SearchSection
           label={ui('search.searchBy')}
-          onClick={onSearchClick}
+          onClick={onSearchCategoryClick}
           searchResults={initialSearchCategories}
         />
       </GridItem>
@@ -60,7 +62,7 @@ function InitialSearch({
         >
           <SearchSection
             label={pastSearchesEyebrow}
-            onClick={onSearchClick}
+            onClick={onPastSearchClick}
             searchResults={pastSearches}
           />
         </GridItem>

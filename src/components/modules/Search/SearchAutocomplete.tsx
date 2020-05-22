@@ -6,6 +6,8 @@ import {
   useRef,
   useState,
 } from 'react';
+import { Transition } from 'react-transition-group';
+import { TransitionStatus } from 'react-transition-group/Transition';
 
 import { generateIDs } from '~/components/global/Autocomplete/Autocomplete.utils';
 import Grid from '~/components/global/Grid/Grid';
@@ -21,7 +23,9 @@ import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
 
 import { SearchGroup, SearchResult } from './Search';
+import { SearchState, SearchStateType } from './Search.constants';
 import { useAutocompleteSelectedItem } from './Search.hooks';
+import { initialSearchCategories } from './Search.mocks';
 import styles from './SearchAutocomplete.styles';
 import SearchSection from './SearchSection';
 
@@ -35,22 +39,26 @@ export interface Props {
   focusOnMount?: boolean;
   inputValue?: string;
   isLoadingResults?: boolean;
+  onCancelSelection: () => void;
   onChange: (value: string) => void;
   onCloseSearchClick: () => void;
   onValueSelection: (value: SearchResult) => void;
   query: string;
   results: SearchGroup[];
+  searchState: SearchStateType;
 }
 
 function SearchAutocomplete({
   focusOnMount = false,
   inputValue = CONSTANTS.DEFAULT_VALUE,
   isLoadingResults,
+  onCancelSelection,
   onChange,
   onCloseSearchClick,
   onValueSelection,
   results,
   query,
+  searchState,
   ...rest
 }: Props) {
   const [ids, setIds] = useState({
@@ -73,6 +81,8 @@ function SearchAutocomplete({
   const isInputEmpty = query.length < 1;
   const hasResults = results.length > 0;
   const isInvalidInput = !hasResults && !isInputEmpty && !isLoadingResults;
+  const hasActiveSearchState = searchState !== SearchState.FREE_SEARCH;
+  const isSearchInProgress = !!query || hasActiveSearchState;
 
   const focusOnInput = () => {
     if (textInput.current) {
@@ -91,20 +101,42 @@ function SearchAutocomplete({
   }, []);
 
   useEffect(() => {
-    setShouldShowListbox(!isInvalidInput && hasResults && !isInputEmpty);
-  }, [hasResults, isInputEmpty, ids.invalidID, isInvalidInput, results]);
+    setShouldShowListbox(
+      !isInvalidInput &&
+        hasResults &&
+        (!isInputEmpty || searchState !== SearchState.FREE_SEARCH),
+    );
+  }, [
+    hasResults,
+    isInputEmpty,
+    ids.invalidID,
+    isInvalidInput,
+    results,
+    searchState,
+  ]);
 
-  const cancelSelection = () => {
+  useEffect(() => {
+    focusOnInput();
+  }, [searchState]);
+
+  const handleCancelSelection = () => {
     onChange(CONSTANTS.DEFAULT_VALUE);
     setSelectedItemIndex([0, -1]);
-    setShouldShowListbox(false);
+    focusOnInput();
+
+    onCancelSelection();
   };
 
-  const confirmSelection = () => {
+  const handleConfirmSelection = () => {
     const [currentResultIndex, currentResultItemIndex] = selectedItemIndex;
     const selectedItem =
       results[currentResultIndex].siteSearchResultList[currentResultItemIndex];
     onValueSelection(selectedItem);
+  };
+
+  const handleValueSelection = (searchResult: SearchResult) => {
+    onValueSelection(searchResult);
+    focusOnInput();
   };
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -112,6 +144,12 @@ function SearchAutocomplete({
 
     setSelectedItemIndex([0, -1]);
     onChange(targetValue);
+  };
+
+  const handleBackspace = () => {
+    if (hasActiveSearchState && !query) {
+      handleCancelSelection();
+    }
   };
 
   useEffect(() => {
@@ -133,10 +171,13 @@ function SearchAutocomplete({
         break;
       case KEYCODES.ENTER:
         e.preventDefault();
-        confirmSelection();
+        handleConfirmSelection();
         break;
       case KEYCODES.ESCAPE:
-        cancelSelection();
+        handleCancelSelection();
+        break;
+      case KEYCODES.BACKSPACE:
+        handleBackspace();
         break;
       default:
         break;
@@ -155,6 +196,13 @@ function SearchAutocomplete({
 
   const autocompleteGridStyles = {
     borderColor: hasScrolled ? COLORS.LIGHT.GRAY_20 : '',
+  };
+
+  const getSearchStateLabel = () => {
+    const currentCategory = initialSearchCategories.find(
+      (category) => searchState === category.value,
+    );
+    return currentCategory && `${currentCategory.displayValue}:`;
   };
 
   return (
@@ -177,9 +225,14 @@ function SearchAutocomplete({
           gridColumnXL="3/14"
         >
           <div css={styles.inputContainer}>
+            {hasActiveSearchState && (
+              <div css={[styles.inputText, styles.searchState]}>
+                {getSearchStateLabel()}
+              </div>
+            )}
             <label
               id={ids.labelID}
-              css={[styles.label, !!query && styles.labelHidden]}
+              css={[styles.label, isSearchInProgress && styles.labelHidden]}
             >
               {lessThan.L
                 ? ui('search.searchAutocompleteLabelSM')
@@ -189,7 +242,7 @@ function SearchAutocomplete({
             <div css={styles.comboboxWrapper}>
               <input
                 aria-labelledby={ids.labelID}
-                css={styles.input}
+                css={[styles.input, styles.inputText]}
                 onChange={handleOnChange}
                 onKeyDown={handleKeyDown}
                 ref={textInput}
@@ -198,10 +251,11 @@ function SearchAutocomplete({
               />
             </div>
 
-            {query && (
+            {isSearchInProgress && (
               <button
                 aria-label={ui('search.cancelButtonClear')}
-                onClick={cancelSelection}
+                css={styles.clearSearchButton}
+                onClick={handleCancelSelection}
               >
                 <Icon name={ICONS.CLEAR_INPUT} css={styles.clearSearch} />
               </button>
@@ -226,31 +280,52 @@ function SearchAutocomplete({
           gridColumnL="3/14"
           gridColumnXL="3/14"
         >
-          <ul css={styles.listbox} id={ids.listboxID}>
-            {shouldShowListbox &&
-              results.map((searchGroup: SearchGroup, index) => (
-                <li css={styles.searchResultsGridItem} key={index}>
-                  <SearchSection
-                    label={searchGroup.label}
-                    labelFragments={searchGroup.labelFragments}
-                    onClick={onValueSelection}
-                    query={query}
-                    searchResults={searchGroup.siteSearchResultList}
-                    sectionIndex={index}
-                    selectedItemIndex={selectedItemIndex}
-                  />
-                </li>
-              ))}
+          <Transition
+            appear
+            mountOnEnter
+            unmountOnExit
+            in={shouldShowListbox}
+            timeout={0}
+          >
+            {(searchTransitionState: TransitionStatus) => {
+              const animationStyles = [
+                styles.listboxRoot,
+                hasActiveSearchState &&
+                  styles[`listbox_${searchTransitionState}`],
+              ];
 
-            {isInvalidInput && (
-              <li
-                css={[styles.errorMessage, styles.searchResultsGridItem]}
-                id={ids.invalidID}
-              >
-                <span css={styles.errorLabel}>{ui('search.searchError')}</span>
-              </li>
-            )}
-          </ul>
+              return (
+                <ul
+                  css={animationStyles}
+                  id={ids.listboxID}
+                  role="region"
+                  aria-live="polite"
+                >
+                  {results.map((searchGroup: SearchGroup, index) => (
+                    <li css={styles.searchResultsGridItem} key={index}>
+                      <SearchSection
+                        label={searchGroup.label}
+                        labelFragments={searchGroup.labelFragments}
+                        onClick={handleValueSelection}
+                        query={query}
+                        searchResults={searchGroup.siteSearchResultList}
+                        sectionIndex={index}
+                        selectedItemIndex={selectedItemIndex}
+                      />
+                    </li>
+                  ))}
+                </ul>
+              );
+            }}
+          </Transition>
+          {isInvalidInput && (
+            <div
+              css={[styles.errorMessage, styles.searchResultsGridItem]}
+              id={ids.invalidID}
+            >
+              <span css={styles.errorLabel}>{ui('search.searchError')}</span>
+            </div>
+          )}
         </GridItem>
       </Grid>
     </div>
