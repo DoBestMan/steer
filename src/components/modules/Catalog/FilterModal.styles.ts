@@ -5,8 +5,8 @@ import {
   COLORS,
   EASING,
   MODAL_ANIMATION,
-  MODAL_THEME,
-  MODAL_TYPE,
+  MQ,
+  RADIUS,
   SPACING,
   TIME,
 } from '~/lib/constants';
@@ -63,44 +63,7 @@ export const overlayBkStyles: Record<Breakpoint, AnimationStyles> = {
 };
 
 const styles = {
-  [MODAL_THEME.DARK]: css({
-    background: COLORS.GLOBAL.BLACK,
-    color: COLORS.DARK.GRAY_40,
-  }),
-  [MODAL_THEME.LIGHT]: css({
-    background: COLORS.GLOBAL.WHITE,
-    color: COLORS.GLOBAL.BLACK,
-  }),
-  [MODAL_THEME.ORANGE]: css({
-    background: COLORS.GLOBAL.ORANGE,
-    color: COLORS.GLOBAL.WHITE,
-  }),
-  [MODAL_TYPE.FULLSCREEN]: css({
-    background: COLORS.GLOBAL.WHITE,
-    bottom: 0,
-    height: '100%',
-    left: 0,
-    overflowY: 'scroll',
-    padding: `${SPACING.SIZE_10}px ${SPACING.SIZE_20}px ${SPACING.SIZE_60}px ${SPACING.SIZE_20}px`,
-    position: 'relative',
-    right: 0,
-    top: 0,
-    width: '100%',
-  }),
-  [MODAL_TYPE.OVERLAY]: css({
-    background: COLORS.GLOBAL.WHITE,
-    borderRadius: 0,
-    bottom: 0,
-    boxShadow: OVERLAY_BOX_SHADOW,
-    height: '100%',
-    padding: `${SPACING.SIZE_40}px ${SPACING.SIZE_60}px`,
-    position: 'absolute',
-    right: 0,
-    top: 0,
-    width: OVERLAY_PANEL_WIDTH,
-  }),
   [MODAL_ANIMATION.FADE]: FADE,
-  [MODAL_ANIMATION.SLIDE_LEFT]: SLIDE_LEFT,
   actions: css({
     display: 'flex',
     justifyContent: 'space-between',
@@ -110,6 +73,38 @@ const styles = {
     position: 'absolute',
     right: SPACING.SIZE_10,
     top: SPACING.SIZE_10,
+  }),
+  root: css({
+    background: COLORS.GLOBAL.WHITE,
+    boxShadow: OVERLAY_BOX_SHADOW,
+    color: COLORS.GLOBAL.BLACK,
+    [MQ.S]: {
+      borderRadius: `${RADIUS.RADIUS_15} ${RADIUS.RADIUS_15} 0 0`,
+      bottom: 0,
+      padding: `${SPACING.SIZE_30}px ${SPACING.SIZE_20}px`,
+      position: 'absolute',
+      width: '100%',
+    },
+    [MQ.M]: {
+      borderRadius: RADIUS.RADIUS_15,
+      margin: 'auto',
+      padding: SPACING.SIZE_40,
+      position: 'relative',
+      top: '50%',
+      transform: 'translateY(-50%)',
+      width: 'fit-content',
+    },
+    [MQ.L]: {
+      borderRadius: 0,
+      bottom: 0,
+      height: '100%',
+      padding: `${SPACING.SIZE_40}px ${SPACING.SIZE_60}px`,
+      position: 'absolute',
+      right: 0,
+      top: 0,
+      transform: 'unset',
+      width: OVERLAY_PANEL_WIDTH,
+    },
   }),
 };
 

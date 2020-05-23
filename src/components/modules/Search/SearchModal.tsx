@@ -32,6 +32,7 @@ function SearchModal() {
 
   return (
     <Modal
+      isFullscreen
       contentLabel="Modal"
       hasCloseButton={false}
       theme={MODAL_THEME.ORANGE}

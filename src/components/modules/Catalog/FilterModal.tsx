@@ -1,22 +1,14 @@
 import { ReactNode } from 'react';
 import ReactModal from 'react-modal';
 
+import { ICONS } from '~/components/global/Icon/Icon.constants';
+import Link from '~/components/global/Link/Link';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
-import {
-  COLORS,
-  LINK_THEME,
-  MODAL_ANIMATION,
-  MODAL_THEME,
-  MODAL_TYPE,
-  TIME,
-  Z_INDEX,
-} from '~/lib/constants';
+import { COLORS, LINK_THEME, TIME, Z_INDEX } from '~/lib/constants';
 import { bindAppElement } from '~/lib/utils/modal';
 import { ui } from '~/lib/utils/ui-dictionary';
 
-import { ICONS } from '../Icon/Icon.constants';
-import Link from '../Link/Link';
-import styles from './Modal.styles';
+import styles, { overlayBkStyles } from './FilterModal.styles';
 
 bindAppElement();
 
@@ -24,31 +16,20 @@ interface Props {
   children: ReactNode;
   contentLabel: string;
   hasCloseButton?: boolean;
-  isFullscreen?: boolean;
   isOpen: boolean;
   onBack?: () => void;
   onClose: () => void;
-  theme?: MODAL_THEME;
 }
 
-function Modal({
+function FilterModal({
   children,
   contentLabel,
   hasCloseButton = true,
-  isFullscreen = false,
   isOpen,
   onBack,
   onClose,
-  theme = MODAL_THEME.LIGHT,
 }: Props) {
-  const linkTheme =
-    theme === MODAL_THEME.LIGHT ? LINK_THEME.LIGHT : LINK_THEME.DARK;
-  const { lessThan } = useBreakpoints();
-  const fullscreen = lessThan.L || isFullscreen;
-  const rootStyles = fullscreen ? MODAL_TYPE.FULLSCREEN : MODAL_TYPE.OVERLAY;
-  const animationStyles = fullscreen
-    ? styles[MODAL_ANIMATION.FADE]
-    : styles[MODAL_ANIMATION.SLIDE_LEFT];
+  const { bk } = useBreakpoints();
   return (
     <ReactModal
       contentLabel={contentLabel}
@@ -58,18 +39,16 @@ function Modal({
       style={{
         overlay: {
           // react-modal library can't take serialized styles
-          backgroundColor:
-            (!fullscreen && COLORS.LIGHT.GRAY_70) || 'transparent', // removes overlay flash for fullscreen
+          backgroundColor: COLORS.LIGHT.GRAY_70,
           opacity: isOpen ? 1 : 0,
           transition: `opacity ${TIME.MS350}ms ease-in-out ${TIME.MS100}ms`,
           zIndex: Z_INDEX.TOP,
         },
       }}
       css={[
-        styles[rootStyles],
-        styles[theme],
-        animationStyles.default,
-        isOpen && animationStyles.open,
+        styles.root,
+        overlayBkStyles[bk].default,
+        isOpen && overlayBkStyles[bk].open,
       ]}
     >
       {(onBack || hasCloseButton) && (
@@ -80,16 +59,16 @@ function Modal({
               aria-label={ui('modal.back')}
               onClick={onBack}
               icon={ICONS.CHEVRON_LEFT}
-              theme={linkTheme}
+              theme={LINK_THEME.LIGHT}
             />
           )}
           {hasCloseButton && (
             <Link
               as="button"
               icon={ICONS.CLOSE}
-              aria-label={ui('modal.close', { contentLabel })}
+              aria-label={`${ui('modal.close')} ${contentLabel}`}
               onClick={onClose}
-              theme={linkTheme}
+              theme={LINK_THEME.LIGHT}
               // this will allow modal content to start where padding begins rather than pushed down from actions bar
               css={!onBack && styles.close}
             />
@@ -101,4 +80,4 @@ function Modal({
   );
 }
 
-export default Modal;
+export default FilterModal;

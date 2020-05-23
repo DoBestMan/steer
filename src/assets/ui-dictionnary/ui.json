@@ -5,7 +5,7 @@
     },
     "modal": {
       "back": "Navigate back",
-      "close": "Close",
+      "close": "Close {{contentLabel}}",
       "open": "open {{moduleName}}"
     },
     "header": {
