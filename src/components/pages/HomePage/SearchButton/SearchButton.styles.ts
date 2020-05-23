@@ -1,9 +1,14 @@
 import { CSSObject } from '@emotion/core';
 
-import { CONTENT_PADDING } from '~/components/pages/HomePage/HomePage.styles';
 import { COLORS, MQ, TIME } from '~/lib/constants';
 
-const CONSTANTS = {
+export const CONSTANTS = {
+  CONTENT_PEEKING_AMOUNT: {
+    /* eslint-disable sort-keys */
+    S: 50,
+    M: 30,
+    /* eslint-enable sort-keys */
+  },
   ICON_SIZE_L: 34,
   PADDING: {
     /* eslint-disable sort-keys */
@@ -39,16 +44,12 @@ const styles: CSSObject = {
   },
 
   container: {
-    paddingBottom: 160 + CONTENT_PADDING.S,
+    minHeight: `calc(33.333vh - ${CONSTANTS.CONTENT_PEEKING_AMOUNT.S}px)`,
+    paddingBottom: 40,
 
     [MQ.M]: {
-      paddingBottom: 240 + CONTENT_PADDING.M,
-    },
-    [MQ.L]: {
-      paddingBottom: 190 + CONTENT_PADDING.M,
-    },
-    [MQ.L]: {
-      paddingBottom: 190 + CONTENT_PADDING.XL,
+      minHeight: `calc(33.333vh - ${CONSTANTS.CONTENT_PEEKING_AMOUNT.M}px)`,
+      paddingBottom: 60,
     },
   },
   icon: {

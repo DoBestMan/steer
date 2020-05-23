@@ -9,14 +9,20 @@ interface Props {
 interface SearchContextProps {
   isSearchOpen: boolean;
   setIsSearchOpen: (isSearchOpen: boolean) => void;
-  toggleIsSearchOpen: () => void;
+  toggleIsSearchOpen: (callback?: () => void) => void;
 }
 
 const SearchContext = createContext<SearchContextProps>();
 
 function useContextSetup() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const toggleIsSearchOpen = () => setIsSearchOpen(!isSearchOpen);
+  const toggleIsSearchOpen = (callback?: () => void) => {
+    setIsSearchOpen(!isSearchOpen);
+
+    if (callback && typeof callback === 'function') {
+      callback();
+    }
+  };
 
   return {
     isSearchOpen,

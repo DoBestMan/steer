@@ -11,6 +11,7 @@ import { SiteHero } from '~/data/models/SiteHero';
 import { SiteInsights } from '~/data/models/SiteInsights';
 import { SiteReviews } from '~/data/models/SiteReviews';
 import { useApiDataWithDefault } from '~/hooks/useApiDataWithDefault';
+import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { COLORS, TIME } from '~/lib/constants';
 import { eventEmitters } from '~/lib/events/emitters';
 import { getScroll, scrollToRef } from '~/lib/helpers/scroll';
@@ -18,8 +19,8 @@ import { hasIntersectionObserver } from '~/lib/utils/browser';
 
 import styles from './HomePage.styles';
 import SearchButton from './SearchButton/SearchButton';
+import { CONSTANTS as BUTTON_CONSTANTS } from './SearchButton/SearchButton.styles';
 
-const SCROLL_THRESHOLD = 80;
 const THEME_COLOR_MAP: Record<string, string> = {
   promotion: COLORS.GLOBAL.BLACK,
 };
@@ -44,9 +45,11 @@ function getColorFromScrollState(thresholdCrossed: boolean) {
 function HomePage({ serverData }: Props) {
   const { siteReviews } = serverData;
   const { siteTheme } = useSiteGlobalsContext();
+  const { isMobile } = useBreakpoints();
 
   const [thresholdCrossed, setThresholdCrossed] = useState(false);
   const [isContentVisible, setIsContentVisible] = useState(false);
+  const [shouldCancelColorChange, setShouldCancelColorChange] = useState(false);
 
   const contentContainerRef = useRef<HTMLDivElement>(null);
   const searchButtonRef = useRef<HTMLDivElement>(null);
@@ -66,15 +69,33 @@ function HomePage({ serverData }: Props) {
     console.error(error);
   }
 
+  const SCROLL_THRESHOLD_BELOW_FOLD = 40;
+  const SCROLL_THRESHOLD = isMobile
+    ? BUTTON_CONSTANTS.CONTENT_PEEKING_AMOUNT.S + SCROLL_THRESHOLD_BELOW_FOLD
+    : BUTTON_CONSTANTS.CONTENT_PEEKING_AMOUNT.M + SCROLL_THRESHOLD_BELOW_FOLD;
+
   const backgroundColor =
     (siteTheme && THEME_COLOR_MAP[siteTheme]) ||
     getColorFromScrollState(thresholdCrossed);
 
-  const { toggleIsSearchOpen } = useSearchContext();
+  const { isSearchOpen, toggleIsSearchOpen } = useSearchContext();
 
   function handleOpenModal() {
-    scrollToRef(searchButtonRef, TIME.MS400, toggleIsSearchOpen);
+    const scrollToCallback = () =>
+      toggleIsSearchOpen(() => setShouldCancelColorChange(true));
+
+    setIsContentVisible(false);
+
+    scrollToRef(searchButtonRef, TIME.MS400, scrollToCallback);
   }
+
+  // Display hidden content after search modal is closed
+  useEffect(() => {
+    if (!isSearchOpen && shouldCancelColorChange) {
+      setShouldCancelColorChange(false);
+      setIsContentVisible(true);
+    }
+  }, [isSearchOpen, shouldCancelColorChange]);
 
   useEffect(() => {
     // Hiding the content and preventing the scroll color
@@ -87,7 +108,11 @@ function HomePage({ serverData }: Props) {
 
   // Scroll Effect : Changes background color
   useEffect(() => {
-    if (!contentContainerRef.current || !isContentVisible) {
+    if (
+      !contentContainerRef.current ||
+      !isContentVisible ||
+      shouldCancelColorChange
+    ) {
       return;
     }
 
@@ -112,7 +137,7 @@ function HomePage({ serverData }: Props) {
         });
       },
       {
-        rootMargin: `${SCROLL_THRESHOLD}px`,
+        rootMargin: `-${SCROLL_THRESHOLD}px`,
       },
     );
 
@@ -121,7 +146,12 @@ function HomePage({ serverData }: Props) {
     return () => {
       observer.disconnect();
     };
-  }, [contentContainerRef, isContentVisible]);
+  }, [
+    contentContainerRef,
+    isContentVisible,
+    SCROLL_THRESHOLD,
+    shouldCancelColorChange,
+  ]);
 
   return (
     <>

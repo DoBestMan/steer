@@ -42,7 +42,6 @@ const styles = {
     justifyContent: 'flex-end',
   }),
   root: css({
-    height: '100%',
     [MQ.S]: {
       paddingTop: SPACING.SIZE_30,
     },

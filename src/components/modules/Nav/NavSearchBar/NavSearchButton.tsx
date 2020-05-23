@@ -8,11 +8,15 @@ import styles from './NavSearchButton.styles';
 
 function NavSearchButton() {
   const { toggleIsSearchOpen } = useSearchContext();
+  function handleToggleSearch() {
+    toggleIsSearchOpen();
+  }
+
   return (
     <button
       aria-label={ui('common.modal.open', { moduleName: 'search' })}
       css={[typography.primarySubhead, styles.button]}
-      onClick={toggleIsSearchOpen}
+      onClick={handleToggleSearch}
       type="button"
     >
       <Icon css={styles.icon} name={ICONS.SEARCH} aria-hidden="true" />

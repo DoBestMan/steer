@@ -2,7 +2,7 @@ import { css } from '@emotion/core';
 
 import { COLORS, EASING, MQ, SPACING, TIME } from '~/lib/constants';
 
-export const CONTENT_PADDING = {
+const CONTENT_PADDING = {
   /* eslint-disable sort-keys */
   S: SPACING.SIZE_80,
   M: SPACING.SIZE_100,
@@ -29,6 +29,11 @@ const styles = {
   },
   root: css({
     background: COLORS.LIGHT.OFF_WHITE,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    minHeight: '66.666vh',
+    overflow: 'hidden',
   }),
   scrollColorContainer: css({
     transition: `background-color ${TIME.MS300}ms ease-in-out`,

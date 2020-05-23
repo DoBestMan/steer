@@ -32,27 +32,23 @@ const styles = {
     backgroundPosition: `left 0 bottom ${CONSTANTS.CONTAINER_BG_BOTTOM.S}px`,
     backgroundRepeat: 'repeat-x',
     backgroundSize: `auto ${CONSTANTS.CONTAINER_BG_HEIGHT.S}px`,
-    paddingBottom: 170,
+    flex: 1,
+    paddingBottom: 20,
+    paddingTop: 30,
     position: 'relative',
 
-    [MQ.S]: {
-      paddingTop: SPACING.SIZE_40,
-    },
     [MQ.M]: {
       backgroundPosition: `left 0 bottom ${CONSTANTS.CONTAINER_BG_BOTTOM.M}px`,
       backgroundSize: `auto ${CONSTANTS.CONTAINER_BG_HEIGHT.M}px`,
-      paddingBottom: 210,
-      paddingTop: SPACING.SIZE_30,
+      paddingBottom: 25,
+      paddingTop: 40,
     },
-
     [MQ.L]: {
-      paddingTop: SPACING.SIZE_50,
+      paddingBottom: 60,
     },
-
     [MQ.XL]: {
       backgroundPosition: `left 0 bottom ${CONSTANTS.CONTAINER_BG_BOTTOM.XL}px`,
       backgroundSize: `auto ${CONSTANTS.CONTAINER_BG_HEIGHT.XL}px`,
-      paddingBottom: 98,
     },
   }),
   description: css({
