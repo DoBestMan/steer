@@ -62,10 +62,23 @@ const iconsSrc = path.resolve(__dirname, '../src/assets/icons');
 const iconNameArray = [];
 
 fs.readdirSync(iconsSrc).forEach((file: string): void => {
-  const iconSrc = path.resolve(iconsSrc, file);
+  if (file.indexOf('.svg') > -1) {
+    const iconSrc = path.resolve(iconsSrc, file);
 
-  spriter.add(iconSrc, file, fs.readFileSync(iconSrc, { encoding: 'utf-8' }));
-  iconNameArray.push(file.replace('.svg', ''));
+    const content = fs.readFileSync(iconSrc, { encoding: 'utf-8' });
+    const viewBox = content.match(/viewBox\=\"([\d*\.?\d* ]*)\"/g);
+
+    if (!viewBox) {
+      console.error(
+        '/!/ WARNING -  No viewBox found in:',
+        file,
+        ', therefore not added to the sprite. ',
+      );
+    } else {
+      spriter.add(iconSrc, file, content);
+      iconNameArray.push(file.replace('.svg', ''));
+    }
+  }
 });
 
 iconNameArray.sort();
@@ -132,7 +145,15 @@ spriter.compile((error: string, result: object) => {
       viewBox.replace('viewBox="', '').replace('"', '').substr(4),
     );
 
+  if (viewBoxes.length !== iconNameArray.length) {
+    console.error(
+      '/!/ ERROR - An issue occured when mappping viewboxes to the list of icon - Please Make sure you have valid SVG icon files, with valid viewbox attributes',
+    );
+    return;
+  }
+
   const sizes = {};
+
   viewBoxes.forEach((viewBox, i) => {
     const name = iconNameArray[i];
     const key = name.toUpperCase().replace(/-/g, '_');

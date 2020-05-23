@@ -3,20 +3,6 @@ import { css } from '@emotion/core';
 import { COLORS, GRID_MARGIN, MQ, RADIUS, SPACING } from '~/lib/constants';
 
 const CONSTANTS = {
-  CONTAINER_BG_BOTTOM: {
-    /* eslint-disable sort-keys */
-    S: 20,
-    M: 50,
-    XL: 25,
-    /* eslint-enable sort-keys */
-  },
-  CONTAINER_BG_HEIGHT: {
-    /* eslint-disable sort-keys */
-    S: 106,
-    M: 175,
-    XL: 206,
-    /* eslint-enable sort-keys */
-  },
   VEHICLE_WIDTH: {
     /* eslint-disable sort-keys */
     S: 128,
@@ -29,26 +15,17 @@ const CONSTANTS = {
 const styles = {
   container: css({
     backgroundColor: COLORS.LIGHT.OFF_WHITE,
-    backgroundPosition: `left 0 bottom ${CONSTANTS.CONTAINER_BG_BOTTOM.S}px`,
-    backgroundRepeat: 'repeat-x',
-    backgroundSize: `auto ${CONSTANTS.CONTAINER_BG_HEIGHT.S}px`,
     flex: 1,
     paddingBottom: 20,
     paddingTop: 30,
     position: 'relative',
 
     [MQ.M]: {
-      backgroundPosition: `left 0 bottom ${CONSTANTS.CONTAINER_BG_BOTTOM.M}px`,
-      backgroundSize: `auto ${CONSTANTS.CONTAINER_BG_HEIGHT.M}px`,
       paddingBottom: 25,
       paddingTop: 40,
     },
     [MQ.L]: {
       paddingBottom: 60,
-    },
-    [MQ.XL]: {
-      backgroundPosition: `left 0 bottom ${CONSTANTS.CONTAINER_BG_BOTTOM.XL}px`,
-      backgroundSize: `auto ${CONSTANTS.CONTAINER_BG_HEIGHT.XL}px`,
     },
   }),
   description: css({
@@ -62,6 +39,12 @@ const styles = {
     display: 'inline-flex',
     marginBottom: SPACING.SIZE_10,
     padding: `${SPACING.SIZE_01}px 6px`,
+  }),
+  scenery: css({
+    bottom: 0,
+    left: 0,
+    position: 'absolute',
+    width: '100%',
   }),
   title: css({
     marginBottom: SPACING.SIZE_10,
@@ -91,6 +74,12 @@ const styles = {
     [MQ.XL]: {
       right: GRID_MARGIN.XL,
     },
+  }),
+  weather: css({
+    left: 0,
+    position: 'absolute',
+    top: 0,
+    width: '100%',
   }),
 };
 

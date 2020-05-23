@@ -83,14 +83,15 @@ export const ICON_SIZES: Record<string, IconSize> = {
   TIRE: { h: 30, w: 30 },
   TRENDING: { h: 13, w: 24 },
   TWITTER: { h: 18, w: 21 },
-  VEHICLE_COMMERCIAL: { h: 430.1, w: 582.9 },
-  VEHICLE_FARM: { h: 446.1, w: 564.1 },
-  VEHICLE_INDUSTRIAL: { h: 271.09, w: 709.49 },
-  VEHICLE_LIGHT_TRUCK: { h: 226.9, w: 735.61 },
-  VEHICLE_PASSENGER: { h: 376.05, w: 806.32 },
-  VEHICLE_RV: { h: 30, w: 30 },
-  WHEEL: { h: 72, w: 64 },
-  WINTER: { h: 16, w: 22 },
+  VEHICLE_COMMERCIAL: { h: 283.11, w: 710.89 },
+  VEHICLE_FARM: { h: 430.1, w: 582.9 },
+  VEHICLE_INDUSTRIAL: { h: 446.1, w: 564.1 },
+  VEHICLE_LIGHT_TRUCK: { h: 271.09, w: 709.49 },
+  VEHICLE_PASSENGER: { h: 226.9, w: 735.61 },
+  VEHICLE_RV: { h: 376.05, w: 806.32 },
+  WHEEL: { h: 30, w: 30 },
+  WINTER: { h: 72, w: 64 },
+  YOUTUBE: { h: 16, w: 22 },
 };
 
 // DO NOT MANUALLY EDIT THIS FILE, this file is auto-generated.

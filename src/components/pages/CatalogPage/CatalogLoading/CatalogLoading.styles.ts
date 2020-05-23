@@ -9,20 +9,6 @@ import {
 import { COLORS, EASING, GRID_MARGIN, MQ, TIME } from '~/lib/constants';
 
 const CONSTANTS = {
-  BG_BOTTOM: {
-    /* eslint-disable sort-keys */
-    S: 20,
-    M: 50,
-    L: 25,
-    /* eslint-enable sort-keys */
-  },
-  BG_HEIGHT: {
-    /* eslint-disable sort-keys */
-    S: 106,
-    M: 175,
-    L: 206,
-    /* eslint-enable sort-keys */
-  },
   BG_IN_DELAY: TIME.MS1200,
   BG_IN_DURATION: TIME.MS300,
   DURATION_IN: TIME.MS1200,
@@ -49,9 +35,6 @@ const CONSTANTS = {
 
 const styles: CSSObject = {
   backgroundRoot: {
-    backgroundPosition: `left 0 bottom ${CONSTANTS.BG_BOTTOM.S}px`,
-    backgroundRepeat: 'repeat-x',
-    backgroundSize: `auto ${CONSTANTS.BG_HEIGHT.S}px`,
     height: CONSTANTS.MESSAGE_TOP_END.S,
     left: 0,
     opacity: 0,
@@ -61,14 +44,10 @@ const styles: CSSObject = {
     width: '100%',
 
     [MQ.M]: {
-      backgroundPosition: `left 0 bottom ${CONSTANTS.BG_BOTTOM.M}px`,
-      backgroundSize: `auto ${CONSTANTS.BG_HEIGHT.M}px`,
       height: CONSTANTS.MESSAGE_TOP_END.M,
     },
 
     [MQ.L]: {
-      backgroundPosition: `left 0 bottom ${CONSTANTS.BG_BOTTOM.L}px`,
-      backgroundSize: `auto ${CONSTANTS.BG_HEIGHT.L}px`,
       height: CONSTANTS.MESSAGE_TOP_END.L,
     },
   },
@@ -87,10 +66,19 @@ const styles: CSSObject = {
   },
   /* eslint-enable sort-keys */
 
+  car: {
+    svg: {
+      '.solid-body-background *': {
+        fill: '#FFF',
+      },
+    },
+  },
+
   container: {
     // max of screen height or message position + height
     height: `max(100vh, calc(${CONSTANTS.MESSAGE_TOP_END.S} + ${CONSTANTS.MESSAGE_HEIGHT.S}))`,
     overflow: 'hidden',
+    pointerEvents: 'none', // remove it so we can access the header
     position: 'relative',
     width: '100%',
 
@@ -106,6 +94,7 @@ const styles: CSSObject = {
   contentRoot: {
     height: '100%',
     left: 0,
+    pointerEvents: 'all', // put it back
     position: 'absolute',
     top: 0,
     transform: `translateY(${CONSTANTS.MESSAGE_TOP_START})`,
@@ -182,8 +171,16 @@ const styles: CSSObject = {
   },
   /* eslint-enable sort-keys */
 
+  scenery: {
+    bottom: 0,
+    left: 0,
+    position: 'absolute',
+    width: '100%',
+  },
+
   vehicleContainer: {
     bottom: '100%',
+    fontSize: 0, // fix for weird bottom space
     opacity: 0,
     position: 'absolute',
     right: GRID_MARGIN.S,

@@ -141,6 +141,29 @@ Note: make sure that every SVG file used has a `viewBox` attribute.
 
 List of assets [here](https://docs.google.com/spreadsheets/d/1kjsrjn0Y-dQAo_ahsUV-jxhk58JpxPmHUNkiwCI-lw8/edit#gid=0)
 
+## (Re)building the car library
+
+Similar to the icon library, we've created a script that:
+
+- cleans the car SVG files
+- extracts detail info of each car
+
+Each car SVG file should:
+
+- Have 4 `<g>` elements:
+  - `<g class="body-car">`: Group containing the body car of the illustration
+  - `<g class="back-wheel">`: Group containing the back wheel of the illustration
+  - `<g class="front-wheel">`: (Optional) Group containing the front wheel of the illustration
+  - `<g class="solid-body-background">`: Group containing a transparent path for the hero homepage animation
+- be correctly named, based on the `id` from the list of assets [here](https://docs.google.com/spreadsheets/d/1kjsrjn0Y-dQAo_ahsUV-jxhk58JpxPmHUNkiwCI-lw8/edit#gid=0)
+
+If you need to add more cars, please:
+
+- Make sure that the previous requirements are met
+- add your SVG car in `/src/assets/cars`. Make sure the filename is respecting the kebab-case format, based on the `id` of the car.
+- run `yarn generate-cars-constants`.
+- You're all set, commit your change and voilà!
+
 ## Deploying
 
 Every push generates a URL you can see online.

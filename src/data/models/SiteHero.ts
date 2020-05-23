@@ -23,6 +23,11 @@ export interface SiteHero {
   title: string;
 
   /**
+   * Vehicle types: List of Cars
+   */
+  vehicleTypes: Array<string>;
+
+  /**
    * Type of the current weather
    */
   weatherType: string | null;
