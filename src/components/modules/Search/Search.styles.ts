@@ -6,7 +6,7 @@ import {
   EXITING,
 } from 'react-transition-group/Transition';
 
-import { BORDERS, COLORS, MQ, SPACING, TIME, Z_INDEX } from '~/lib/constants';
+import { COLORS, MQ, SPACING, TIME, Z_INDEX } from '~/lib/constants';
 
 const animationStyles: CSSObject = {
   /* eslint-disable sort-keys */
@@ -28,7 +28,7 @@ const animationStyles: CSSObject = {
 const styles: CSSObject = {
   clearPastSearchesButton: {
     span: {
-      borderBottom: BORDERS.DOTTED_TRANSPARENT_2PX,
+      borderBottom: `2px dotted ${COLORS.ORANGE.SHADE_30}`,
     },
   },
   clearPastSearchesWrapper: {
