@@ -49,7 +49,10 @@ function Search({
 
   const handleClearSearchesClick = () => {
     onClearSearchesClick();
-    scrollTo(0, TIME.MS300 / 1000);
+
+    setTimeout(() => {
+      scrollTo(0, TIME.MS400 / 1000);
+    }, TIME.MS200);
   };
 
   const onChange = (input: string) => {

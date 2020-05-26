@@ -41,10 +41,7 @@ export function PastSearchResults() {
 
   const handleCloseSearchClick = action('Close search');
   const handleClearSearchesClick = function () {
-    // Temporariliy delay removing searches (until React Transition Group implemented)
-    setTimeout(() => {
-      setPastSearches([]);
-    }, 200);
+    setPastSearches([]);
   };
   const handleSetSearchCategory = action('Set search category');
 

@@ -1,6 +1,29 @@
 import { CSSObject } from '@emotion/core';
+import {
+  ENTERED,
+  ENTERING,
+  EXITED,
+  EXITING,
+} from 'react-transition-group/Transition';
 
-import { BORDERS, COLORS, MQ, SPACING, Z_INDEX } from '~/lib/constants';
+import { BORDERS, COLORS, MQ, SPACING, TIME, Z_INDEX } from '~/lib/constants';
+
+const animationStyles: CSSObject = {
+  /* eslint-disable sort-keys */
+  [`initialSearchGridItem_${ENTERING}`]: {
+    opacity: 1,
+  },
+  [`initialSearchGridItem_${ENTERED}`]: {
+    opacity: 1,
+  },
+  [`initialSearchGridItem_${EXITING}`]: {
+    opacity: 0,
+  },
+  [`initialSearchGridItem_${EXITED}`]: {
+    opacity: 0,
+  },
+  /* eslint-enable sort-keys */
+};
 
 const styles: CSSObject = {
   clearPastSearchesButton: {
@@ -32,6 +55,7 @@ const styles: CSSObject = {
   initialSearchGridItem: {
     padding: `${SPACING.SIZE_15}px 0 ${SPACING.SIZE_25}px`,
     position: 'relative',
+    transition: `opacity ${TIME.MS300}ms ease`,
     [MQ.M]: {
       padding: `${SPACING.SIZE_30}px 0`,
     },
@@ -46,6 +70,7 @@ const styles: CSSObject = {
       display: 'block',
     },
   },
+  ...animationStyles,
 };
 
 export default styles;
