@@ -15,7 +15,7 @@ interface Props {
 
 function SearchButton({ onClick }: Props) {
   return (
-    <div css={styles.container}>
+    <div>
       <button
         onClick={onClick}
         css={[typography.primaryHeadline, styles.button]}

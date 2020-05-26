@@ -40,16 +40,6 @@ const styles: CSSObject = {
       transition: `background-color ${TIME.MS100}ms ease`,
     },
   },
-
-  container: {
-    minHeight: `calc(33.333vh - ${CONSTANTS.CONTENT_PEEKING_AMOUNT.S}px)`,
-    paddingBottom: 40,
-
-    [MQ.M]: {
-      minHeight: `calc(33.333vh - ${CONSTANTS.CONTENT_PEEKING_AMOUNT.M}px)`,
-      paddingBottom: 60,
-    },
-  },
   icon: {
     height: '100%',
     justifyContent: 'flex-end',

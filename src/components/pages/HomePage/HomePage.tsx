@@ -12,6 +12,7 @@ import { SiteInsights } from '~/data/models/SiteInsights';
 import { SiteReviews } from '~/data/models/SiteReviews';
 import { useApiDataWithDefault } from '~/hooks/useApiDataWithDefault';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
+import { useSupportsPositionSticky } from '~/hooks/useSupportsPositionSticky';
 import { COLORS, TIME } from '~/lib/constants';
 import { eventEmitters } from '~/lib/events/emitters';
 import { getScroll, scrollToRef } from '~/lib/helpers/scroll';
@@ -46,13 +47,16 @@ function HomePage({ serverData }: Props) {
   const { siteReviews } = serverData;
   const { siteTheme } = useSiteGlobalsContext();
   const { isMobile } = useBreakpoints();
+  const { supportsPositionSticky } = useSupportsPositionSticky();
 
   const [thresholdCrossed, setThresholdCrossed] = useState(false);
   const [isContentVisible, setIsContentVisible] = useState(false);
   const [shouldCancelColorChange, setShouldCancelColorChange] = useState(false);
 
+  const buttonRef = useRef<HTMLDivElement>(null);
   const contentContainerRef = useRef<HTMLDivElement>(null);
-  const searchButtonRef = useRef<HTMLDivElement>(null);
+  const heroRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   const {
     data: { siteHero, siteInsights },
@@ -70,9 +74,10 @@ function HomePage({ serverData }: Props) {
   }
 
   const SCROLL_THRESHOLD_BELOW_FOLD = 40;
-  const SCROLL_THRESHOLD = isMobile
-    ? BUTTON_CONSTANTS.CONTENT_PEEKING_AMOUNT.S + SCROLL_THRESHOLD_BELOW_FOLD
-    : BUTTON_CONSTANTS.CONTENT_PEEKING_AMOUNT.M + SCROLL_THRESHOLD_BELOW_FOLD;
+  const CONTENT_PEEKING_AMOUNT = isMobile
+    ? BUTTON_CONSTANTS.CONTENT_PEEKING_AMOUNT.S
+    : BUTTON_CONSTANTS.CONTENT_PEEKING_AMOUNT.M;
+  const SCROLL_THRESHOLD = CONTENT_PEEKING_AMOUNT + SCROLL_THRESHOLD_BELOW_FOLD;
 
   const backgroundColor =
     (siteTheme && THEME_COLOR_MAP[siteTheme]) ||
@@ -85,8 +90,7 @@ function HomePage({ serverData }: Props) {
       toggleIsSearchOpen(() => setShouldCancelColorChange(true));
 
     setIsContentVisible(false);
-
-    scrollToRef(searchButtonRef, TIME.MS400, scrollToCallback);
+    scrollToRef(contentRef, TIME.MS400, scrollToCallback);
   }
 
   // Display hidden content after search modal is closed
@@ -153,17 +157,71 @@ function HomePage({ serverData }: Props) {
     shouldCancelColorChange,
   ]);
 
+  const [isFallbackSticky, setIsFallbackSticky] = useState(false);
+
+  useEffect(() => {
+    if (!heroRef.current || supportsPositionSticky) {
+      return;
+    }
+
+    const searchButtonObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setIsFallbackSticky(false);
+        } else {
+          setIsFallbackSticky(true);
+        }
+      });
+    });
+
+    searchButtonObserver.observe(heroRef.current);
+
+    return () => {
+      searchButtonObserver.disconnect();
+    };
+  }, [heroRef, supportsPositionSticky]);
+
+  const [buttonHeight, setButtonHeight] = useState({});
+
+  useEffect(() => {
+    if (!buttonRef.current) {
+      return;
+    }
+
+    const buttonRect = buttonRef.current.getBoundingClientRect();
+    const buttonHeight = supportsPositionSticky ? buttonRect.height : 0;
+
+    setButtonHeight({
+      minHeight: `calc(33.333vh - ${CONTENT_PEEKING_AMOUNT + buttonHeight}px)`,
+    });
+  }, [CONTENT_PEEKING_AMOUNT, isMobile, supportsPositionSticky]);
+
+  const searchButtonContainerStyles = [
+    { backgroundColor },
+    styles.searchButtonContainer,
+    supportsPositionSticky && styles.searchButtonStickySupport,
+    !supportsPositionSticky && styles.searchButtonStickyFallback,
+    !supportsPositionSticky &&
+      isFallbackSticky &&
+      styles.searchButtonStickyFallbackFixed,
+  ];
+
   return (
     <>
-      <div css={styles.root}>
+      <div css={styles.root} ref={heroRef}>
         <NavContainer isHomepage />
         <HomeHeader {...siteHero} />
       </div>
 
-      <div css={[styles.scrollColorContainer, { backgroundColor }]}>
-        <div ref={searchButtonRef}>
+      <div
+        css={[styles.scrollColorContainer, { backgroundColor }]}
+        ref={contentRef}
+      >
+        <div css={searchButtonContainerStyles} ref={buttonRef}>
           <SearchButton onClick={handleOpenModal} />
         </div>
+
+        <div css={[styles.contentSpacer, buttonHeight]}></div>
         <div ref={contentContainerRef}>
           <Grid
             css={[styles.content, isContentVisible && styles.contentVisible]}
