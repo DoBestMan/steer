@@ -1,6 +1,7 @@
 import { css, CSSObject } from '@emotion/core';
 
 import { BORDERS, COLORS, MQ, SPACING, TIME } from '~/lib/constants';
+import { disableGlobalFocus } from '~/styles/document/accessibility.styles';
 import { typography } from '~/styles/typography.styles';
 
 const styles: CSSObject = {
@@ -21,6 +22,7 @@ const styles: CSSObject = {
     borderColor: COLORS.GLOBAL.WHITE,
   },
   itemButton: [
+    disableGlobalFocus,
     typography.secondaryHeadline,
     css({
       '&:active': {
