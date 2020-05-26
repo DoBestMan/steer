@@ -1,7 +1,6 @@
-import { ReactNode, useEffect } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import SVGInline from 'react-svg-inline';
 
-import SVGSprite from '~/assets/svg-sprite/symbol/svg/sprite.symbol.svg';
 import GridHelper from '~/components/global/GridHelper/GridHelper';
 import { ScrollObject, setScroll } from '~/lib/helpers/scroll';
 
@@ -12,8 +11,11 @@ interface Props {
 }
 
 function Layout(props: Props) {
+  const [SVGString, setSVGString] = useState<string | null>(null);
+
   useEffect(() => {
     let scrollTicket = false;
+    let frame = 0;
 
     function onScroll() {
       scrollTicket = true;
@@ -31,19 +33,41 @@ function Layout(props: Props) {
         setScroll(scrollObj);
       }
 
-      window.requestAnimationFrame(onUpdate);
+      frame = window.requestAnimationFrame(onUpdate);
     }
 
     window.addEventListener('scroll', onScroll, false);
-    window.requestAnimationFrame(onUpdate);
+    frame = window.requestAnimationFrame(onUpdate);
 
-    return () => {};
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.removeEventListener('scroll', onScroll);
+    };
   });
+
+  // Load SVG Sprite as a text file
+  useEffect(() => {
+    if (SVGString) {
+      return;
+    }
+
+    const url = '/static/assets/svg-sprite/symbol/svg/sprite.symbol.svg';
+
+    const getSVG = async () => {
+      const data = await fetch(url)
+        .then((response) => response.text())
+        .then((data) => data);
+
+      setSVGString(data);
+    };
+
+    getSVG();
+  }, [SVGString]);
 
   return (
     <div css={styles.container}>
       <span css={styles.SVGSpriteContainer}>
-        <SVGInline svg={SVGSprite} />
+        {SVGString && <SVGInline svg={SVGString} />}
       </span>
       <GridHelper />
       <main role="main" css={styles.mainContent}>

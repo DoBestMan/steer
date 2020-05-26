@@ -1,7 +1,7 @@
+import dynamic from 'next/dynamic';
 import { useEffect, useRef, useState } from 'react';
 
 import Grid from '~/components/global/Grid/Grid';
-import NavContainer from '~/components/modules/Nav/Nav.container';
 import { useSearchContext } from '~/components/modules/Search/Search.context';
 import DriverInsights from '~/components/pages/HomePage/DriverInsights/DriverInsights';
 import HomeHeader from '~/components/pages/HomePage/HomeHeader/HomeHeader';
@@ -21,6 +21,10 @@ import { hasIntersectionObserver } from '~/lib/utils/browser';
 import styles from './HomePage.styles';
 import SearchButton from './SearchButton/SearchButton';
 import { CONSTANTS as BUTTON_CONSTANTS } from './SearchButton/SearchButton.styles';
+
+const NavContainer = dynamic(() =>
+  import('~/components/modules/Nav/Nav.container'),
+);
 
 const THEME_COLOR_MAP: Record<string, string> = {
   promotion: COLORS.GLOBAL.BLACK,

@@ -8,7 +8,7 @@ import { createFile, lineBreak } from './utils';
 // Remove sorting key to keep config consistant with online documentation
 /* eslint sort-keys: 0 */
 const config = {
-  dest: path.resolve(__dirname, '../src/assets/svg-sprite'), // Main output directory
+  dest: path.resolve(__dirname, '../public/static/assets/svg-sprite'), // Main output directory
   log: null, // Logging verbosity (default: no logging)
   shape: {
     // SVG shape related options
@@ -132,7 +132,7 @@ spriter.compile((error: string, result: object) => {
   const contents = fs.readFileSync(
     path.resolve(
       __dirname,
-      '../src/assets/svg-sprite/symbol/svg/sprite.symbol.svg',
+      '../public/static/assets/svg-sprite/symbol/svg/sprite.symbol.svg',
     ),
     'utf8',
   );
