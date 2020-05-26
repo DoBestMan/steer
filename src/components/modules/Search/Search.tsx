@@ -1,11 +1,14 @@
 import { RefObject, useState } from 'react';
 
-import Grid from '~/components/global/Grid/Grid';
 import { TIME } from '~/lib/constants';
 import { scrollTo } from '~/lib/helpers/scroll';
 
 import InitialSearch from './InitialSearch';
-import { SearchState, SearchStateType } from './Search.constants';
+import {
+  SearchResultListEnum,
+  SearchState,
+  SearchStateType,
+} from './Search.constants';
 import styles from './Search.styles';
 import SearchAutocomplete from './SearchAutocomplete';
 
@@ -17,11 +20,12 @@ export interface SearchGroup {
   label?: string;
   labelFragments?: Array<{ highlighted: boolean; value: string }>;
   siteSearchResultList: SearchResult[];
-  type: string;
+  type: SearchResultListEnum;
 }
 
 export interface SearchResult {
   additionalDisplayValue?: string;
+  displayImage?: string;
   displayValue: string;
   type: string;
   value: string;
@@ -96,16 +100,14 @@ function Search({
         query={query}
         searchState={searchState}
       />
-      <Grid>
-        {shouldShowInitialSearch && (
-          <InitialSearch
-            onClearSearchesClick={handleClearSearchesClick}
-            onPastSearchClick={handlePastSearchClick}
-            onSearchCategoryClick={handleSearchCategoryClick}
-            pastSearches={pastSearches}
-          />
-        )}
-      </Grid>
+      {shouldShowInitialSearch && (
+        <InitialSearch
+          onClearSearchesClick={handleClearSearchesClick}
+          onPastSearchClick={handlePastSearchClick}
+          onSearchCategoryClick={handleSearchCategoryClick}
+          pastSearches={pastSearches}
+        />
+      )}
     </div>
   );
 }

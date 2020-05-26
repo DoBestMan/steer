@@ -1,7 +1,7 @@
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import { Results } from './Search';
-import { SearchStateEnum } from './Search.constants';
+import { SearchResultListEnum, SearchStateEnum } from './Search.constants';
 
 export const noSearchResults: Results = {
   siteSearchGroupList: [],
@@ -52,7 +52,7 @@ export const simpleSearchResults: Results = {
           value: 'Hyundai Tucson',
         },
       ],
-      type: 'SiteSearchResultsList',
+      type: SearchResultListEnum.LIST,
     },
   ],
 };
@@ -95,7 +95,7 @@ export const partNumberResults: Results = {
           value: '106134294',
         },
       ],
-      type: 'SiteSearchResultsList',
+      type: SearchResultListEnum.LIST,
     },
   ],
 };
@@ -130,7 +130,7 @@ export const tireSizeResults: Results = {
           value: '215/50R18',
         },
       ],
-      type: 'SiteSearchResultsList',
+      type: SearchResultListEnum.LIST,
     },
   ],
 };
@@ -217,7 +217,7 @@ export const searchByVehicle: Results = {
           value: 'Chevrolet',
         },
       ],
-      type: 'SiteSearchResultsList',
+      type: SearchResultListEnum.LIST,
     },
     {
       label: 'All',
@@ -453,7 +453,7 @@ export const searchByVehicle: Results = {
           value: 'Volvo',
         },
       ],
-      type: 'SiteSearchResultsList',
+      type: SearchResultListEnum.LIST,
     },
   ],
 };
@@ -489,7 +489,7 @@ export const searchByTireSize: Results = {
           value: '235',
         },
       ],
-      type: 'SiteSearchResultsList',
+      type: SearchResultListEnum.LIST,
     },
     {
       label: 'All Widths',
@@ -700,7 +700,7 @@ export const searchByTireSize: Results = {
           value: '12.75',
         },
       ],
-      type: 'SiteSearchResultsList',
+      type: SearchResultListEnum.LIST,
     },
   ],
 };
@@ -711,12 +711,79 @@ export const searchByBrand: Results = {
       label: 'Featured',
       siteSearchResultList: [
         {
-          displayValue: 'This will be a carousel',
+          displayImage: '/images/brands/pirelli_logo.svg',
+          displayValue: 'Pirelli',
           type: 'term',
-          value: 'This will be a carousel',
+          value: 'Pirelli',
+        },
+        {
+          displayImage: '/images/brands/michelin_logo.svg',
+          displayValue: 'Michelin',
+          type: 'term',
+          value: 'Michelin',
+        },
+        {
+          displayImage: '/images/brands/continental_logo.svg',
+          displayValue: 'Continental',
+          type: 'term',
+          value: 'Continental',
+        },
+        {
+          displayImage: '/images/brands/bridgestone_logo.svg',
+          displayValue: 'Bridgestone',
+          type: 'term',
+          value: 'Bridgestone',
+        },
+        {
+          displayImage: '/images/brands/pirelli_logo.svg',
+          displayValue: 'Pirelli-2',
+          type: 'term',
+          value: 'Pirelli-2',
+        },
+        {
+          displayImage: '/images/brands/michelin_logo.svg',
+          displayValue: 'Michelin-2',
+          type: 'term',
+          value: 'Michelin-2',
+        },
+        {
+          displayImage: '/images/brands/continental_logo.svg',
+          displayValue: 'Continental-2',
+          type: 'term',
+          value: 'Continental-2',
+        },
+        {
+          displayImage: '/images/brands/bridgestone_logo.svg',
+          displayValue: 'Bridgestone-2',
+          type: 'term',
+          value: 'Bridgestone-2',
+        },
+        {
+          displayImage: '/images/brands/pirelli_logo.svg',
+          displayValue: 'Pirelli-3',
+          type: 'term',
+          value: 'Pirelli-3',
+        },
+        {
+          displayImage: '/images/brands/michelin_logo.svg',
+          displayValue: 'Michelin-3',
+          type: 'term',
+          value: 'Michelin-3',
+        },
+        {
+          displayImage: '/images/brands/continental_logo.svg',
+          displayValue: 'Continental-3',
+          type: 'term',
+          value: 'Continental-3',
+        },
+        {
+          displayImage: '/images/brands/bridgestone_logo.svg',
+          displayValue: 'Bridgestone-3',
+          type: 'term',
+          value: 'Bridgestone-3',
         },
       ],
-      type: 'SiteSearchResultsList',
+      type: SearchResultListEnum.CAROUSEL,
     },
     {
       label: 'All',
@@ -837,7 +904,7 @@ export const searchByBrand: Results = {
           value: 'Yokoham',
         },
       ],
-      type: 'SiteSearchResultsList',
+      type: SearchResultListEnum.LIST,
     },
   ],
 };
@@ -888,7 +955,7 @@ export const searchByMostPopular: Results = {
           value: 'Hankook Ventus ST RH06',
         },
       ],
-      type: 'SiteSearchResultsList',
+      type: SearchResultListEnum.LIST,
     },
   ],
 };

@@ -26,8 +26,8 @@ import { SearchGroup, SearchResult } from './Search';
 import { SearchState, SearchStateType } from './Search.constants';
 import { useAutocompleteSelectedItem } from './Search.hooks';
 import { initialSearchCategories } from './Search.mocks';
+import { getSearchResultComponent } from './Search.utils';
 import styles from './SearchAutocomplete.styles';
-import SearchSection from './SearchSection';
 
 const CONSTANTS = {
   DEFAULT_SELECTED_ITEM_INDEX: [0, -1],
@@ -273,37 +273,35 @@ function SearchAutocomplete({
           </div>
         </GridItem>
       </Grid>
-      <Grid css={styles.searchResultsGrid}>
-        <GridItem
-          gridColumnS="2/6"
-          gridColumnM="2/8"
-          gridColumnL="3/14"
-          gridColumnXL="3/14"
+      <div css={styles.searchResultsGrid}>
+        <Transition
+          appear
+          mountOnEnter
+          unmountOnExit
+          in={shouldShowListbox}
+          timeout={0}
         >
-          <Transition
-            appear
-            mountOnEnter
-            unmountOnExit
-            in={shouldShowListbox}
-            timeout={0}
-          >
-            {(searchTransitionState: TransitionStatus) => {
-              const animationStyles = [
-                styles.listboxRoot,
-                hasActiveSearchState &&
-                  styles[`listbox_${searchTransitionState}`],
-              ];
+          {(searchTransitionState: TransitionStatus) => {
+            const animationStyles = [
+              styles.listboxRoot,
+              hasActiveSearchState &&
+                styles[`listbox_${searchTransitionState}`],
+            ];
 
-              return (
-                <ul
-                  css={animationStyles}
-                  id={ids.listboxID}
-                  role="region"
-                  aria-live="polite"
-                >
-                  {results.map((searchGroup: SearchGroup, index) => (
+            return (
+              <ul
+                css={animationStyles}
+                id={ids.listboxID}
+                role="region"
+                aria-live="polite"
+              >
+                {results.map((searchGroup: SearchGroup, index) => {
+                  const SearchResults = getSearchResultComponent(
+                    searchGroup.type,
+                  );
+                  return (
                     <li css={styles.searchResultsGridItem} key={index}>
-                      <SearchSection
+                      <SearchResults
                         label={searchGroup.label}
                         labelFragments={searchGroup.labelFragments}
                         onClick={handleValueSelection}
@@ -313,21 +311,30 @@ function SearchAutocomplete({
                         selectedItemIndex={selectedItemIndex}
                       />
                     </li>
-                  ))}
-                </ul>
-              );
-            }}
-          </Transition>
-          {isInvalidInput && (
-            <div
-              css={[styles.errorMessage, styles.searchResultsGridItem]}
-              id={ids.invalidID}
+                  );
+                })}
+              </ul>
+            );
+          }}
+        </Transition>
+        {isInvalidInput && (
+          <Grid>
+            <GridItem
+              gridColumnS="2/6"
+              gridColumnM="2/8"
+              gridColumnL="3/14"
+              gridColumnXL="3/14"
             >
-              <span css={styles.errorLabel}>{ui('search.searchError')}</span>
-            </div>
-          )}
-        </GridItem>
-      </Grid>
+              <div
+                css={[styles.errorMessage, styles.searchResultsGridItem]}
+                id={ids.invalidID}
+              >
+                <span css={styles.errorLabel}>{ui('search.searchError')}</span>
+              </div>
+            </GridItem>
+          </Grid>
+        )}
+      </div>
     </div>
   );
 }

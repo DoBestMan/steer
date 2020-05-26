@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Transition } from 'react-transition-group';
 import { TransitionStatus } from 'react-transition-group/Transition';
 
-import GridItem from '~/components/global/Grid/GridItem';
 import Link from '~/components/global/Link/Link';
 import { LINK_THEME, LINK_TYPES, TIME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
@@ -45,19 +44,13 @@ function InitialSearch({
 
   return (
     <>
-      <GridItem
-        css={styles.initialSearchGridItem}
-        gridColumnS="2/6"
-        gridColumnM="2/8"
-        gridColumnL="3/14"
-        gridColumnXL="3/14"
-      >
+      <div css={styles.initialSearchWrapper}>
         <SearchSection
           label={ui('search.searchBy')}
           onClick={onSearchCategoryClick}
           searchResults={initialSearchCategories}
         />
-      </GridItem>
+      </div>
       <Transition
         appear
         mountOnEnter
@@ -67,24 +60,18 @@ function InitialSearch({
       >
         {(searchTransitionState: TransitionStatus) => {
           const animationStyles = [
-            styles.initialSearchGridItem,
-            styles[`initialSearchGridItem_${searchTransitionState}`],
+            styles.initialSearchWrapper,
+            styles[`initialSearchWrapper_${searchTransitionState}`],
           ];
 
           return (
-            <GridItem
-              css={animationStyles}
-              gridColumnS="2/6"
-              gridColumnM="2/8"
-              gridColumnL="3/14"
-              gridColumnXL="3/14"
-            >
+            <div css={animationStyles}>
               <SearchSection
                 label={pastSearchesEyebrow}
                 onClick={onPastSearchClick}
                 searchResults={visiblePastSearches}
               />
-            </GridItem>
+            </div>
           );
         }}
       </Transition>

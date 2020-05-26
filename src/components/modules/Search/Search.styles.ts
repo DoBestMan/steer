@@ -10,16 +10,16 @@ import { COLORS, MQ, SPACING, TIME, Z_INDEX } from '~/lib/constants';
 
 const animationStyles: CSSObject = {
   /* eslint-disable sort-keys */
-  [`initialSearchGridItem_${ENTERING}`]: {
+  [`initialSearchWrapper_${ENTERING}`]: {
     opacity: 1,
   },
-  [`initialSearchGridItem_${ENTERED}`]: {
+  [`initialSearchWrapper_${ENTERED}`]: {
     opacity: 1,
   },
-  [`initialSearchGridItem_${EXITING}`]: {
+  [`initialSearchWrapper_${EXITING}`]: {
     opacity: 0,
   },
-  [`initialSearchGridItem_${EXITED}`]: {
+  [`initialSearchWrapper_${EXITED}`]: {
     opacity: 0,
   },
   /* eslint-enable sort-keys */
@@ -52,7 +52,7 @@ const styles: CSSObject = {
       paddingBottom: SPACING.SIZE_160,
     },
   },
-  initialSearchGridItem: {
+  initialSearchWrapper: {
     padding: `${SPACING.SIZE_15}px 0 ${SPACING.SIZE_25}px`,
     position: 'relative',
     transition: `opacity ${TIME.MS300}ms ease`,

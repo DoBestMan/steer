@@ -1,3 +1,6 @@
+import SearchCarousel from './SearchCarousel';
+import SearchSection from './SearchSection';
+
 export enum SearchStateEnum {
   BRAND = 'brand',
   FREE_SEARCH = 'free-search',
@@ -19,4 +22,14 @@ export const SearchState: Record<string, SearchStateType> = {
   [SearchStateEnum.POPULAR]: 'popular',
   [SearchStateEnum.TIRE_SIZE]: 'tire-size',
   [SearchStateEnum.VEHICLE]: 'vehicle',
+};
+
+export enum SearchResultListEnum {
+  CAROUSEL = 'SiteSearchResultsCarousel',
+  LIST = 'SiteSearchResultsList',
+}
+
+export const SearchResultListComponent = {
+  [SearchResultListEnum.CAROUSEL]: SearchCarousel,
+  [SearchResultListEnum.LIST]: SearchSection,
 };

@@ -38,6 +38,7 @@
     "puppeteer-cluster": "^0.20.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-glider": "^1.1.5",
     "react-markdown": "^4.3.1",
     "react-modal": "^3.11.2",
     "react-transition-group": "^4.4.1",

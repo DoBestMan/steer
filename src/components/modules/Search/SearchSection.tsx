@@ -1,7 +1,10 @@
+import Grid from '~/components/global/Grid/Grid';
+import GridItem from '~/components/global/Grid/GridItem';
+
 import { SearchResult } from './Search';
 import styles from './SearchSection.styles';
 
-interface Props {
+export interface SearchSectionProps {
   label?: string | JSX.Element;
   labelFragments?: Array<{ highlighted: boolean; value: string }>;
   onClick: (searchResult: SearchResult) => void;
@@ -36,65 +39,67 @@ function SearchSection({
   searchResults,
   sectionIndex,
   selectedItemIndex = [0, -1],
-}: Props) {
+}: SearchSectionProps) {
   const handleClick = (searchResult: SearchResult) => () => {
     onClick(searchResult);
   };
 
   return (
-    <div>
-      {label && <h5 css={styles.eyebrow}>{label}</h5>}
-      {labelFragments && <FragmentedLabel labelFragments={labelFragments} />}
-      <ul>
-        {searchResults.map((item, index) => {
-          const isSelected =
-            sectionIndex === selectedItemIndex[0] &&
-            index === selectedItemIndex[1];
+    <Grid>
+      <GridItem gridColumnS="2/6" gridColumnM="2/8" gridColumnL="3/14">
+        {label && <h5 css={styles.eyebrow}>{label}</h5>}
+        {labelFragments && <FragmentedLabel labelFragments={labelFragments} />}
+        <ul>
+          {searchResults.map((item, index) => {
+            const isSelected =
+              sectionIndex === selectedItemIndex[0] &&
+              index === selectedItemIndex[1];
 
-          // Display search result with search query highlighted.
-          const queryIndex = item.displayValue
-            .toUpperCase()
-            .indexOf(query.toUpperCase());
+            // Display search result with search query highlighted.
+            const queryIndex = item.displayValue
+              .toUpperCase()
+              .indexOf(query.toUpperCase());
 
-          let display = <>{item.displayValue}</>;
+            let display = <>{item.displayValue}</>;
 
-          if (queryIndex > -1) {
-            const queryStart = item.displayValue.substring(0, queryIndex);
-            const queryHighlighted = item.displayValue.substring(
-              queryIndex,
-              queryIndex + query.length,
+            if (queryIndex > -1) {
+              const queryStart = item.displayValue.substring(0, queryIndex);
+              const queryHighlighted = item.displayValue.substring(
+                queryIndex,
+                queryIndex + query.length,
+              );
+              const queryEnd = item.displayValue.substring(
+                queryIndex + query.length,
+              );
+
+              display = (
+                <>
+                  {queryStart}
+                  <span css={styles.searchQuery}>{queryHighlighted}</span>
+                  {queryEnd}
+                </>
+              );
+            }
+
+            return (
+              <li css={styles.listItem} key={item.value}>
+                <button
+                  css={[styles.itemButton, isSelected && styles.isSelected]}
+                  onClick={handleClick(item)}
+                >
+                  {display}
+                </button>
+                {item.additionalDisplayValue && (
+                  <div css={styles.secondaryItemDisplay}>
+                    {item.additionalDisplayValue}
+                  </div>
+                )}
+              </li>
             );
-            const queryEnd = item.displayValue.substring(
-              queryIndex + query.length,
-            );
-
-            display = (
-              <>
-                {queryStart}
-                <span css={styles.searchQuery}>{queryHighlighted}</span>
-                {queryEnd}
-              </>
-            );
-          }
-
-          return (
-            <li css={styles.listItem} key={item.value}>
-              <button
-                css={[styles.itemButton, isSelected && styles.isSelected]}
-                onClick={handleClick(item)}
-              >
-                {display}
-              </button>
-              {item.additionalDisplayValue && (
-                <div css={styles.secondaryItemDisplay}>
-                  {item.additionalDisplayValue}
-                </div>
-              )}
-            </li>
-          );
-        })}
-      </ul>
-    </div>
+          })}
+        </ul>
+      </GridItem>
+    </Grid>
   );
 }
 
