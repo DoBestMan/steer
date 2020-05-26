@@ -2,13 +2,11 @@ import { css } from '@emotion/core';
 
 import { COLORS, EASING, MQ, SPACING, TIME } from '~/lib/constants';
 
-const CONTENT_PADDING = {
-  /* eslint-disable sort-keys */
+export const CONTENT_PADDING = {
   S: SPACING.SIZE_80,
   M: SPACING.SIZE_100,
   XL: SPACING.SIZE_120,
 };
-/* eslint-enable sort-keys */
 
 const styles = {
   content: css({

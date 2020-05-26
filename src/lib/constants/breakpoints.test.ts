@@ -12,7 +12,6 @@ describe('useBreakpoints', () => {
 
     expect(result.current.bk).toEqual(BREAKPOINT_SIZES.S);
     expect(result.current.isMobile).toEqual(true);
-    /* eslint sort-keys: 0 */
     expect(result.current.is).toStrictEqual({
       S: true,
       M: false,
@@ -33,7 +32,6 @@ describe('useBreakpoints', () => {
 
     expect(result.current.bk).toEqual(BREAKPOINT_SIZES.M);
     expect(result.current.isMobile).toEqual(false);
-    /* eslint sort-keys: 0 */
     expect(result.current.is).toStrictEqual({
       S: false,
       M: true,
@@ -54,7 +52,6 @@ describe('useBreakpoints', () => {
 
     expect(result.current.bk).toEqual(BREAKPOINT_SIZES.L);
     expect(result.current.isMobile).toEqual(false);
-    /* eslint sort-keys: 0 */
     expect(result.current.is).toStrictEqual({
       S: false,
       M: false,
@@ -75,7 +72,6 @@ describe('useBreakpoints', () => {
 
     expect(result.current.bk).toEqual(BREAKPOINT_SIZES.XL);
     expect(result.current.isMobile).toEqual(false);
-    /* eslint sort-keys: 0 */
     expect(result.current.is).toStrictEqual({
       S: false,
       M: false,

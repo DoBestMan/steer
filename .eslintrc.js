@@ -51,7 +51,11 @@ module.exports = {
     ],
     'react/jsx-boolean-value': ['error', 'never'],
     'react/react-in-jsx-scope': 'off',
-    'sort-keys': 'error',
+    'sort-keys': [
+      'error',
+      'asc',
+      { caseSensitive: false, natural: true, minKeys: 5 },
+    ],
     curly: 'error',
     'typescript-sort-keys/interface': 'error',
     'typescript-sort-keys/string-enum': 'error',

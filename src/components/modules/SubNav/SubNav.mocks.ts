@@ -4,7 +4,6 @@ import { SiteMenuBrowseGroupItem } from '~/data/models/SiteMenuBrowseGroupItem';
 import { SiteMenuLearn } from '~/data/models/SiteMenuLearn';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 
-/* eslint-disable sort-keys */
 const deals: SiteMenuBrowseGroupItem = {
   header: null,
   items: [

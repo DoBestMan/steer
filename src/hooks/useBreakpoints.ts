@@ -14,20 +14,16 @@ export function useBreakpoints() {
   return {
     bk,
     is: {
-      /* eslint-disable sort-keys */
       S: bk === BREAKPOINT_SIZES.S,
       M: bk === BREAKPOINT_SIZES.M,
       L: bk === BREAKPOINT_SIZES.L,
       XL: bk === BREAKPOINT_SIZES.XL,
-      /* eslint-enable sort-keys */
     },
     isMobile: bk === BREAKPOINT_SIZES.S,
     lessThan: {
-      /* eslint-disable sort-keys */
       M: BREAKPOINTS[bk] < BREAKPOINTS[BREAKPOINT_SIZES.M],
       L: BREAKPOINTS[bk] < BREAKPOINTS[BREAKPOINT_SIZES.L],
       XL: BREAKPOINTS[bk] < BREAKPOINTS[BREAKPOINT_SIZES.XL],
-      /* eslint-enable sort-keys */
     },
   };
 }

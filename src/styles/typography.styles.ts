@@ -10,7 +10,6 @@ const fontFamily =
 
 export const typographyStyles: { [name: string]: CSSObject } = {
   primaryHeadline: {
-    /* eslint-disable sort-keys */
     base: {
       fontFamily,
       fontSize: '2.5rem',
@@ -27,10 +26,8 @@ export const typographyStyles: { [name: string]: CSSObject } = {
       fontSize: '4.0rem',
       lineHeight: 45 / 40,
     },
-    /* eslint-enable sort-keys */
   },
   secondaryHeadline: {
-    /* eslint-disable sort-keys */
     base: {
       fontFamily,
       fontSize: '2.0rem',
@@ -47,7 +44,6 @@ export const typographyStyles: { [name: string]: CSSObject } = {
       fontSize: '2.8rem',
       lineHeight: 30 / 28,
     },
-    /* eslint-enable sort-keys */
   },
 };
 

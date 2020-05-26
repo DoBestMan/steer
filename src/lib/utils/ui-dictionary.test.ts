@@ -4,11 +4,11 @@ const UIData: UIType = {
   common: {
     aBoolean: true,
     aDangerousInterpolation: 'My name is {{- name}}',
-    aNumber: 23,
-    aString: 'this is a string',
     anArray: [],
     anInterpolation: 'My name is {{name}}',
     anObject: {},
+    aNumber: 23,
+    aString: 'this is a string',
   },
 };
 

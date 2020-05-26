@@ -54,12 +54,10 @@ interface AnimationStyles {
   open: SerializedStyles;
 }
 export const overlayBkStyles: Record<Breakpoint, AnimationStyles> = {
-  /* eslint-disable sort-keys */
   S: SLIDE_DOWN,
   M: FADE,
   L: SLIDE_LEFT,
   XL: SLIDE_LEFT,
-  /* eslint-enable sort-keys */
 };
 
 const styles = {

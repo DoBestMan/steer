@@ -28,7 +28,6 @@ export const fadeInUp = keyframes({
   '50%': {
     opacity: 0,
   },
-  // eslint-disable-next-line sort-keys
   '100%': {
     opacity: 1,
     transform: 'translate3D(0)',
@@ -43,7 +42,6 @@ export const fadeInUp20px = keyframes({
   '50%': {
     opacity: 0,
   },
-  // eslint-disable-next-line sort-keys
   '100%': {
     opacity: 1,
     transform: 'translate3D(0)',
@@ -58,7 +56,6 @@ export const fadeOutDown = keyframes({
   '50%': {
     opacity: 1,
   },
-  // eslint-disable-next-line sort-keys
   '100%': {
     opacity: 0,
     transform: 'translate3D(0, 100%, 0)',
@@ -73,7 +70,6 @@ export const fadeOutDown20px = keyframes({
   '50%': {
     opacity: 1,
   },
-  // eslint-disable-next-line sort-keys
   '100%': {
     opacity: 0,
     transform: `translate3D(0, ${SPACING.SIZE_20}px, 0)`,
@@ -88,7 +84,6 @@ export const slideFadeInLeft = keyframes({
   '50%': {
     opacity: 0,
   },
-  // eslint-disable-next-line sort-keys
   '100%': {
     opacity: 1,
     transform: 'translate3d(0, 0, 0)',
@@ -102,7 +97,6 @@ export const slideFadeOutLeft = keyframes({
   '50%': {
     opacity: 1,
   },
-  // eslint-disable-next-line sort-keys
   '100%': {
     opacity: 0,
     transform: 'translate3d(100%, 0, 0)',

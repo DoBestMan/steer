@@ -11,10 +11,8 @@ export const CONSTANTS = {
   },
   ICON_SIZE_L: 34,
   PADDING: {
-    /* eslint-disable sort-keys */
     S: '25px 0',
     M: '50px 0',
-    /* eslint-enable sort-keys */
   },
 };
 

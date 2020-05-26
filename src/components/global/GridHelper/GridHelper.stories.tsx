@@ -34,12 +34,12 @@ const styles = {
     height: 100,
     marginTop: SPACING.SIZE_20,
   }),
+  subgrid: css({
+    outline: '1px solid red',
+  }),
   subItem: css({
     backgroundColor: 'rgba(0, 0, 0, 0.3)',
     height: '100px',
-  }),
-  subgrid: css({
-    outline: '1px solid red',
   }),
   title: css({
     marginTop: SPACING.SIZE_20,

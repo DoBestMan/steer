@@ -1,6 +1,5 @@
 import { Breakpoint } from './breakpoints.types';
 
-/* eslint sort-keys: 0 */
 export const NB_COLUMNS: Record<Breakpoint, number> = {
   S: 4,
   M: 6,
@@ -8,7 +7,6 @@ export const NB_COLUMNS: Record<Breakpoint, number> = {
   XL: 12,
 };
 
-/* eslint sort-keys: 0 */
 export const GRID_MARGIN: Record<Breakpoint, number> = {
   S: 20,
   M: 20,
@@ -16,7 +14,6 @@ export const GRID_MARGIN: Record<Breakpoint, number> = {
   XL: 60,
 };
 
-/* eslint sort-keys: 0 */
 export const GAP_COLUMNS: Record<Breakpoint, number> = {
   S: 20,
   M: 20,

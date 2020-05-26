@@ -41,7 +41,6 @@ const styles = {
     }),
   ]),
 
-  // eslint-disable-next-line sort-keys
   icon: css({
     alignSelf: 'flex-start',
     color: COLORS.GLOBAL.WHITE,

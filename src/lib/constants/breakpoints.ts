@@ -1,6 +1,5 @@
 import { Breakpoint } from './breakpoints.types';
 
-/* eslint sort-keys: 0 */
 export const BREAKPOINT_SIZES: Record<Breakpoint, Breakpoint> = {
   S: 'S',
   M: 'M',
@@ -8,7 +7,6 @@ export const BREAKPOINT_SIZES: Record<Breakpoint, Breakpoint> = {
   XL: 'XL',
 };
 
-/* eslint sort-keys: 0 */
 export const BREAKPOINTS: Record<Breakpoint, number> = {
   S: 0,
   M: 600,

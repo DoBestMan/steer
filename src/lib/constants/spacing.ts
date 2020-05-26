@@ -1,5 +1,3 @@
-/* eslint-disable sort-keys */
-// Disabling sort keys so we can list them in order
 export const SPACING = {
   SIZE_01: 1,
   SIZE_02: 2,
