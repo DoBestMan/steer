@@ -76,6 +76,9 @@ export function useContextSetup() {
     activeCategory,
     activeLink,
     createSelectCategoryHandler: (category: string) => () => {
+      if (!activeLink) {
+        setActiveLink(NAV_TARGETS.BROWSE_TIRES);
+      }
       setActiveCategory(category);
     },
     createSelectLinkHandler: (link: LinkType | ActionType) =>
@@ -87,9 +90,10 @@ export function useContextSetup() {
         : undefined,
     handleClearCategory: () => {
       setActiveCategory('');
+      setActiveLink('');
     },
     handleClearLink: () => {
-      setActiveLink(NAV_TARGETS.BROWSE_TIRES);
+      setActiveLink('');
     },
     handleCloseSubNav: () => {
       setActiveLink('');
@@ -101,7 +105,6 @@ export function useContextSetup() {
     linksMobile,
     toggleSubNav: () => {
       setIsSubNavOpen(!isSubNavOpen);
-      setActiveLink(NAV_TARGETS.BROWSE_TIRES);
     },
   };
 }

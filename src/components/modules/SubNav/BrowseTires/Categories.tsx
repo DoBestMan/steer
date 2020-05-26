@@ -15,6 +15,7 @@ interface Props {
   category: string;
   info: SiteMenuBrowseItem['info'];
   isMobile: boolean;
+  isOpen: boolean;
   shouldSetFocus: boolean;
   siteMenuBrowseGroupList: SiteMenuBrowseGroupItem[];
 }
@@ -22,6 +23,7 @@ interface Props {
 function Categories({
   category,
   info,
+  isOpen,
   isMobile,
   shouldSetFocus,
   siteMenuBrowseGroupList,
@@ -41,36 +43,33 @@ function Categories({
     },
     [isSelected, shouldSetFocus],
   );
-
   return (
-    <GridItem
-      gridColumnM="3/7"
-      gridColumnL="4/10"
-      gridColumnXL="4/8"
-      css={!isSelected && styles.smallShow}
+    <SubNavContentWrapper
+      isMobile={isMobile}
+      contentLabel={category}
+      isOpen={isSelected && isOpen}
+      onClose={handleCloseSubNav}
+      onBack={handleClearCategory}
     >
-      <SubNavContentWrapper
-        isMobile={isMobile}
-        contentLabel={category}
-        isOpen={isSelected}
-        onClose={handleCloseSubNav}
-        onBack={handleClearCategory}
+      <GridItem
+        gridColumnM="3/7"
+        gridColumnL="4/10"
+        gridColumnXL="4/8"
+        css={styles.content}
       >
-        <div css={styles.content}>
-          <h1 css={[typography.jumboHeadline, styles.mobileHeader]}>
-            {category}
-          </h1>
-          {siteMenuBrowseGroupList.map((props, idx) => (
-            <BrowseTiresGroupItem
-              key={idx}
-              focusRef={idx === 0 ? focusRef : undefined}
-              {...props}
-            />
-          ))}
-          {info && <CategoryInfo {...info} />}
-        </div>
-      </SubNavContentWrapper>
-    </GridItem>
+        <h1 css={[typography.jumboHeadline, styles.mobileHeader]}>
+          {category}
+        </h1>
+        {siteMenuBrowseGroupList.map((props, idx) => (
+          <BrowseTiresGroupItem
+            key={idx}
+            focusRef={idx === 0 ? focusRef : undefined}
+            {...props}
+          />
+        ))}
+        {info && <CategoryInfo {...info} />}
+      </GridItem>
+    </SubNavContentWrapper>
   );
 }
 

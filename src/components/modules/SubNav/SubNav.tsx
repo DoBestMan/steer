@@ -10,10 +10,11 @@ import BrowseTires from '~/components/modules/SubNav/BrowseTires/BrowseTires';
 import { useNavContext } from '~/context/Nav.context';
 import { SiteMenu } from '~/data/models/SiteMenu';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
+import { Animation } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import LearnContainer from './Learn/Learn.container';
-import styles, { Animation } from './SubNav.styles';
+import styles from './SubNav.styles';
 import SubNavLinks from './SubNavLinks';
 import SubNavModal from './SubNavModal';
 
@@ -55,13 +56,13 @@ function SubNav({ siteMenuBrowseList, siteMenuLearn }: SiteMenu) {
     isMobile,
     siteMenuBrowseList,
   ]);
-
   return (
     <SubNavModal
       animation={isMobile ? Animation.FADE : Animation.SLIDE_LEFT}
       contentLabel={`${ui('nav.contentLabel')} - ${activeLink}`}
       onClose={handleCloseSubNav}
       isOpen={isSubNavOpen}
+      unlockOnClose
     >
       <Grid css={styles.root}>
         <GridItem
@@ -69,7 +70,7 @@ function SubNav({ siteMenuBrowseList, siteMenuLearn }: SiteMenu) {
           fullbleedM
           gridColumnL="6/15"
           gridColumnXL="8/15"
-          css={[styles.subnav, isSubNavOpen && styles.subnavOpen]}
+          css={styles.subnav}
         >
           <button
             aria-label={ui('nav.close')}
@@ -79,40 +80,51 @@ function SubNav({ siteMenuBrowseList, siteMenuLearn }: SiteMenu) {
             <Icon name={ICONS.CLOSE} />
           </button>
           <div css={styles.border} />
-          <SubNavLinks
-            siteMenuBrowseList={siteMenuBrowseList}
-            css={styles.smallShow}
-          />
+          <div
+            css={[
+              styles.smallShow,
+              styles.mobileLinks,
+              isSubNavOpen && styles.mobileLinksOpen,
+            ]}
+          >
+            <SubNavLinks siteMenuBrowseList={siteMenuBrowseList} />
+          </div>
           <GridItem
             isGrid
             fullbleedS
             fullbleedM
             gridColumnL="6/15"
             gridColumnXL="8/15"
-            css={styles.subnavInnerGrid}
+            css={[
+              styles.subnavInnerGrid,
+              activeLink && styles.subnavInnerGridOpen,
+            ]}
           >
-            <GridItem css={styles.smallHide}>
+            <GridItem
+              gridColumnM="1/7"
+              gridColumnL="1/10"
+              gridColumnXL="1/8"
+              css={styles.smallHide}
+            >
               <SubNavLinks siteMenuBrowseList={siteMenuBrowseList} />
             </GridItem>
-            {activeLink === NAV_TARGETS.BROWSE_TIRES && (
-              <BrowseTires
-                isMobile={isMobile}
-                shouldSetFocus={
-                  !!(
-                    prevCategory.current ||
-                    (prevCategory.current &&
-                      prevCategory.current !== activeCategory)
-                  )
-                }
-                siteMenuBrowseList={siteMenuBrowseList}
-              />
-            )}
-            {activeLink === NAV_TARGETS.LEARN && (
-              <LearnContainer
-                isMobile={isMobile}
-                siteMenuLearn={siteMenuLearn}
-              />
-            )}
+            <BrowseTires
+              isOpen={activeLink === NAV_TARGETS.BROWSE_TIRES}
+              isMobile={isMobile}
+              shouldSetFocus={
+                !!(
+                  prevCategory.current ||
+                  (prevCategory.current &&
+                    prevCategory.current !== activeCategory)
+                )
+              }
+              siteMenuBrowseList={siteMenuBrowseList}
+            />
+            <LearnContainer
+              isOpen={activeLink === NAV_TARGETS.LEARN}
+              isMobile={isMobile}
+              siteMenuLearn={siteMenuLearn}
+            />
             <LocationContainer isMobile={isMobile} />
           </GridItem>
         </GridItem>

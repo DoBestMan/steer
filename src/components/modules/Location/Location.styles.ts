@@ -6,7 +6,6 @@ import { typography, typographyStyles } from '~/styles/typography.styles';
 
 export const styles = {
   container: css({
-    height: '100%',
     width: '100%',
   }),
   content: css({

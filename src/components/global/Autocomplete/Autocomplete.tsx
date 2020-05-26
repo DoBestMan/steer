@@ -8,7 +8,7 @@ import {
 } from 'react';
 
 import { Icon as IconType } from '~/components/global/Icon/Icon.types';
-import { KEYCODES, SPACING } from '~/lib/constants';
+import { KEYCODES, SPACING, TIME } from '~/lib/constants';
 import { randomString } from '~/lib/utils/string';
 import { ui } from '~/lib/utils/ui-dictionary';
 
@@ -105,17 +105,16 @@ function Autocomplete({
     !!validResults && validResults.main === value && !isInvalidInput;
 
   const focusOnInput = () => {
-    setTimeout(() => {
-      // TODO: revisit this with nav stuff; using transition group might prevent the need for a delayed focus
-      if (textInput.current) {
-        textInput.current.focus();
-      }
-    }, 200);
+    if (textInput.current) {
+      textInput.current.focus();
+    }
   };
 
   useEffect(() => {
     if (focusOnMount) {
-      focusOnInput();
+      setTimeout(() => {
+        focusOnInput();
+      }, TIME.MS100);
     }
   }, [focusOnMount]);
 

@@ -1,4 +1,5 @@
 export * from './accessibility';
+export * from './animation';
 export * from './borders';
 export * from './breakpoints.types';
 export * from './breakpoints';

@@ -20,19 +20,19 @@ function LocationContainer({ isMobile }: Props) {
 
   return (
     <SubNavContentWrapper
+      unmountOnExit
+      mountOnEnter
       isMobile={isMobile}
       isOpen={isOpen}
       onClose={handleCloseSubNav}
       onBack={handleClearLink}
       contentLabel={ui('location.contentLabel')}
     >
-      {isOpen && (
-        <Location
-          currentLocation={userPersonalizationData?.userLocation ?? null}
-          onLocationChangeSuccess={updateLocation}
-          focusInputOnMount
-        />
-      )}
+      <Location
+        currentLocation={userPersonalizationData?.userLocation ?? null}
+        onLocationChangeSuccess={updateLocation}
+        focusInputOnMount
+      />
     </SubNavContentWrapper>
   );
 }

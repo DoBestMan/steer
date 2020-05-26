@@ -2,16 +2,14 @@ import createFocusTrap from 'focus-trap';
 import {
   forwardRef,
   MutableRefObject,
-  ReactChild,
+  ReactNode,
   useEffect,
   useState,
 } from 'react';
 
-import { TIME } from '~/lib/constants';
-
 interface Props {
   active?: boolean;
-  children: ReactChild;
+  children: ReactNode;
 }
 
 // ref type requires all of these, typecast in `modalRef` because we will only ever pass a MutableRefObject
@@ -20,7 +18,7 @@ type RefType =
   | MutableRefObject<HTMLDivElement | null>
   | null;
 function FocusTrap(props: Props, ref: RefType) {
-  const { active = false, children } = props;
+  const { active = false, children, ...rest } = props;
   const modalRef = ref as MutableRefObject<HTMLDivElement>;
   const [
     focusTrapInstance,
@@ -37,9 +35,7 @@ function FocusTrap(props: Props, ref: RefType) {
         setFocusTrapInstance(focusTrap);
         setPreviouslyFocusedElement(document.activeElement as HTMLElement);
 
-        setTimeout(() => {
-          focusTrap.activate();
-        }, TIME.MS400);
+        focusTrap.activate();
       }
     } else {
       if (focusTrapInstance) {
@@ -53,7 +49,11 @@ function FocusTrap(props: Props, ref: RefType) {
     }
   }, [active, modalRef, focusTrapInstance, previouslyFocusedElement]);
 
-  return <div ref={ref}>{children}</div>;
+  return (
+    <div ref={ref} {...rest}>
+      {children}
+    </div>
+  );
 }
 
 export default forwardRef(FocusTrap);

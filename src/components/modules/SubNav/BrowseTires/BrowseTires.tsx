@@ -7,13 +7,23 @@ import TireCategoryLinks from './TireCategoryLinks';
 
 interface Props extends Pick<SiteMenu, 'siteMenuBrowseList'> {
   isMobile: boolean;
+  isOpen: boolean;
   shouldSetFocus: boolean;
 }
 
-function BrowseTires({ isMobile, shouldSetFocus, siteMenuBrowseList }: Props) {
+function BrowseTires({
+  isOpen,
+  isMobile,
+  shouldSetFocus,
+  siteMenuBrowseList,
+}: Props) {
   return (
     <>
-      <GridItem gridColumnM="1/3" gridColumnL="1/4" css={styles.smallHide}>
+      <GridItem
+        gridColumnM="1/3"
+        gridColumnL="1/4"
+        css={[styles.smallHide, !isOpen && styles.hide]}
+      >
         <TireCategoryLinks {...{ siteMenuBrowseList }} />
       </GridItem>
       {siteMenuBrowseList.map(
@@ -24,6 +34,7 @@ function BrowseTires({ isMobile, shouldSetFocus, siteMenuBrowseList }: Props) {
               category: title,
               info,
               isMobile,
+              isOpen,
               shouldSetFocus,
               siteMenuBrowseGroupList,
             }}

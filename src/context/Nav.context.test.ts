@@ -41,6 +41,28 @@ describe('useContextSetup', () => {
     });
 
     expect(result.current.activeCategory).toEqual('category');
+    expect(result.current.activeLink).toEqual(NAV_TARGETS.BROWSE_TIRES);
+  });
+
+  test('clearing tire category', () => {
+    const { result } = renderHook(() => useContextSetup());
+
+    act(() => {
+      result.current.handleClearCategory();
+    });
+
+    expect(result.current.activeCategory).toBeFalsy();
+    expect(result.current.activeLink).toBeFalsy();
+  });
+
+  test('clearing active link', () => {
+    const { result } = renderHook(() => useContextSetup());
+
+    act(() => {
+      result.current.handleClearLink();
+    });
+
+    expect(result.current.activeLink).toBeFalsy();
   });
 
   test('closing subnav clears link and category', () => {
@@ -61,24 +83,14 @@ describe('useContextSetup', () => {
     expect(result.current.isSubNavOpen).toEqual(false);
   });
 
-  test('toggling sub nav should select the first link (Browse Tires) by default', () => {
+  test('navigating back from a link should clear the active link', () => {
     const { result } = renderHook(() => useContextSetup());
 
     act(() => {
       result.current.toggleSubNav();
     });
 
-    expect(result.current.activeLink).toEqual(NAV_TARGETS.BROWSE_TIRES);
-  });
-
-  test('navigating back from a link should set the active link to the default', () => {
-    const { result } = renderHook(() => useContextSetup());
-
-    act(() => {
-      result.current.toggleSubNav();
-    });
-
-    expect(result.current.activeLink).toEqual(NAV_TARGETS.BROWSE_TIRES);
+    expect(result.current.activeLink).toBeFalsy();
   });
 
   test('creating links - no personalization data', () => {

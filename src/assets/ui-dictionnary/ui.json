@@ -4,8 +4,8 @@
       "label": "Loading"
     },
     "modal": {
-      "back": "Navigate back",
-      "close": "Close {{contentLabel}}",
+      "back": "Return to {{moduleName}}",
+      "close": "Close {{moduleName}}",
       "open": "open {{moduleName}}"
     },
     "header": {

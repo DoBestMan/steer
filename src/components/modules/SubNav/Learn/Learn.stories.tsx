@@ -14,6 +14,7 @@ export function LearnWithCustomerSupport() {
   const { isMobile } = useBreakpoints();
   return (
     <Learn
+      isOpen
       isMobile={isMobile}
       isCustomerServiceEnabled
       siteMenuLearn={siteMenuLearn}
@@ -27,6 +28,7 @@ export function LearnWithoutCustomerSupport() {
   const { isMobile } = useBreakpoints();
   return (
     <Learn
+      isOpen
       isMobile={isMobile}
       isCustomerServiceEnabled={false}
       siteMenuLearn={siteMenuLearn}

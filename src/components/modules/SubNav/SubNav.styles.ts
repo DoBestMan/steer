@@ -1,4 +1,11 @@
 import { css } from '@emotion/core';
+import {
+  ENTERED,
+  ENTERING,
+  EXITED,
+  EXITING,
+  UNMOUNTED,
+} from 'react-transition-group/Transition';
 
 import { COLORS, EASING, MQ, SPACING, TIME, Z_INDEX } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
@@ -6,20 +13,16 @@ import { typography } from '~/styles/typography.styles';
 import { NAV_CONTENT_HEIGHT } from '../Nav/Nav.styles';
 
 export const SUBNAV_TIME_SLIDE_OPEN = TIME.MS400;
-export const SUBNAV_TIME_SLIDE_CLOSE = TIME.MS1200;
+export const SUBNAV_TIME_SLIDE_CLOSE = TIME.MS3000;
 export const SUBNAV_TIME_FADE_OPEN = TIME.MS400;
 export const SUBNAV_TIME_FADE_CLOSE = TIME.MS600;
-
-export enum Animation {
-  FADE = 'FADE',
-  SLIDE_LEFT = 'SLIDE_LEFT',
-}
 
 const styles = {
   action: css({
     padding: SPACING.SIZE_10,
   }),
   actions: css({
+    alignItems: 'baseline',
     background: COLORS.GLOBAL.WHITE,
     display: 'flex',
     justifyContent: 'space-between',
@@ -64,6 +67,10 @@ const styles = {
     opacity: 0,
     transition: `all ${TIME.MS1200}ms linear`,
   }),
+  focusHide: css({
+    // removes phantom height in parent modal
+    display: 'none',
+  }),
   link: css({
     alignContent: 'center',
     color: COLORS.LIGHT.GRAY_70,
@@ -105,19 +112,33 @@ const styles = {
       },
       marginRight: SPACING.SIZE_10,
     },
+    [MQ.S]: {
+      bottom: SPACING.SIZE_40,
+      position: 'absolute',
+    },
+    [MQ.M]: {
+      position: 'initial',
+    },
+  }),
+  mobileLinks: css({
+    opacity: 0,
+  }),
+  mobileLinksOpen: css({
+    opacity: 1,
+    transition: `all ${TIME.MS400}ms ${EASING.CUBIC_EASE_IN} 400ms`, // fade in content after subnav open animation
   }),
   navContent: css({
     display: 'flex',
     flexDirection: 'column',
     height: '100%',
     overflow: 'auto',
+    pointerEvents: 'none',
     position: 'relative',
     zIndex: Z_INDEX.TOP + 1,
   }),
   navContentNested: css({
     display: 'flex',
     flexGrow: 1,
-    height: '100%',
     width: '100%',
   }),
   navModalContainer: css({
@@ -126,16 +147,8 @@ const styles = {
     pointerEvents: 'none',
     position: 'fixed',
     top: 0,
-    transition: `z-index ${TIME.MS200}ms linear`,
     visibility: 'hidden',
     width: '100%',
-    zIndex: Z_INDEX.BEHIND,
-  }),
-  navModalContainerOpen: css({
-    pointerEvents: 'all',
-    transition: 'z-index 0ms linear',
-    visibility: 'visible',
-    zIndex: Z_INDEX.OVERLAY,
   }),
   overlay: css({
     [MQ.S]: {
@@ -146,14 +159,22 @@ const styles = {
       display: 'initial',
       height: '100%',
       left: 0,
+      opacity: 0,
       position: 'absolute',
       top: 0,
       width: '100%',
       zIndex: Z_INDEX.FRONT,
     },
   }),
+  overlayOpen: css({
+    [MQ.L]: {
+      opacity: 1,
+      transition: 'opacity 200ms linear 300ms',
+    },
+  }),
   root: css({
     height: '100%',
+    pointerEvents: 'none',
   }),
   smallHide: css({
     [MQ.S]: {
@@ -172,10 +193,11 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     height: '100%',
-    opacity: 0,
+    minHeight: 500,
+    overflowY: 'auto',
     pointerEvents: 'all',
     position: 'relative',
-    transition: `all ${TIME.MS1200}ms linear`, // fade in content after subnav open animation
+    zIndex: Z_INDEX.FRONT,
     [MQ.S]: {
       backgroundColor: COLORS.LIGHT.OFF_WHITE,
       padding: `${SPACING.SIZE_70}px ${SPACING.SIZE_20}px 0 ${SPACING.SIZE_20}px`,
@@ -188,9 +210,26 @@ const styles = {
       padding: `0 ${SPACING.SIZE_60}px`,
     },
   }),
-  subnavInnerGrid: css({
-    'grid-auto-rows': 'minmax(auto, 100%)',
+  subnavContent: css({
     height: '100%',
+    zIndex: Z_INDEX.BEHIND,
+  }),
+  subnavInnerGrid: css({
+    gridAutoRows: 'minmax(auto, 100%)',
+    height: '100%',
+    pointerEvents: 'none',
+    zIndex: Z_INDEX.OVERLAY,
+    [MQ.S]: {
+      bottom: 0,
+      left: 0,
+      position: 'absolute',
+    },
+    [MQ.M]: {
+      position: 'initial',
+    },
+  }),
+  subnavInnerGridOpen: css({
+    pointerEvents: 'all',
   }),
   subnavLinkList: css({
     display: 'flex',
@@ -220,29 +259,67 @@ const styles = {
       },
     ],
   }),
-  subnavOpen: css({
-    opacity: 1,
-    transition: `all ${TIME.MS400}ms ${EASING.CUBIC_EASE_IN}`,
-  }),
-  [Animation.FADE]: {
-    default: css({
-      opacity: 0,
-      transition: `all ${SUBNAV_TIME_FADE_CLOSE}ms ${EASING.EXPO_EASE_OUT}`,
-    }),
-    open: css({
-      opacity: 1,
-      transition: `all ${SUBNAV_TIME_FADE_OPEN}ms ${EASING.CUBIC_EASE_OUT}`,
-    }),
-  },
-  [Animation.SLIDE_LEFT]: {
-    default: css({
-      transform: 'translate3d(100%, 0, 0)',
-      transition: `all ${SUBNAV_TIME_SLIDE_CLOSE}ms ${EASING.EXPO_EASE_OUT}`,
-    }),
-    open: css({
-      transform: 'translate3d(0, 0, 0)',
-      transition: `all ${SUBNAV_TIME_SLIDE_OPEN}ms ${EASING.CUBIC_EASE_OUT}`,
-    }),
-  },
 };
+
+export const subNavContainer = {
+  /* eslint-disable sort-keys */
+  [ENTERING]: {
+    pointerEvents: 'all',
+    visibility: 'visible',
+    zIndex: Z_INDEX.OVERLAY,
+  },
+  [ENTERED]: {
+    pointerEvents: 'all',
+    visibility: 'visible',
+    zIndex: Z_INDEX.OVERLAY,
+  },
+  [EXITING]: {
+    pointerEvents: 'all',
+    visibility: 'visible',
+    zIndex: Z_INDEX.OVERLAY,
+  },
+  [EXITED]: {
+    pointerEvents: 'none',
+    visibility: 'hidden',
+    zIndex: Z_INDEX.BEHIND,
+  },
+  [UNMOUNTED]: {},
+};
+
+export const slideLeft = {
+  [ENTERING]: {
+    transform: 'translate3d(100%, 0, 0)',
+  },
+  [ENTERED]: {
+    transform: 'translate3d(0, 0, 0)',
+    transition: `all ${SUBNAV_TIME_SLIDE_OPEN}ms ${EASING.CUBIC_EASE_OUT}`,
+  },
+  [EXITING]: {
+    transform: 'translate3d(100%, 0, 0)',
+    transition: `all ${SUBNAV_TIME_SLIDE_CLOSE}ms ${EASING.EXPO_EASE_OUT}`,
+  },
+  [EXITED]: {
+    transform: 'translate3d(100%, 0, 0)',
+  },
+  [UNMOUNTED]: {},
+};
+
+export const fade = {
+  [ENTERING]: {
+    opacity: 0,
+  },
+  [ENTERED]: {
+    opacity: 1,
+    transition: `all ${SUBNAV_TIME_FADE_OPEN}ms ${EASING.CUBIC_EASE_OUT}`,
+  },
+  [EXITING]: {
+    opacity: 0,
+    transition: `all ${SUBNAV_TIME_FADE_CLOSE}ms ${EASING.EXPO_EASE_OUT}`,
+  },
+  [EXITED]: {
+    opacity: 0,
+  },
+  [UNMOUNTED]: {},
+};
+
 export default styles;

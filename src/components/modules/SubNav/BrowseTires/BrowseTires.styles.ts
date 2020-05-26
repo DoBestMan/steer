@@ -30,7 +30,7 @@ const styles = {
   }),
   content: css({
     background: COLORS.GLOBAL.WHITE,
-    minHeight: '100%',
+    height: '100%',
     width: '100%',
     [MQ.S]: {
       padding: `0 ${SPACING.SIZE_20}px ${SPACING.SIZE_50}px ${SPACING.SIZE_20}px`,
@@ -88,6 +88,11 @@ const styles = {
         paddingTop: 'unset',
       },
     ],
+  }),
+  hide: css({
+    [MQ.M]: {
+      display: 'none',
+    },
   }),
   image: css({
     alignItems: 'center',

@@ -19,21 +19,23 @@ export interface LearnProps extends Pick<SiteMenu, 'siteMenuLearn'> {
   handleCloseSubNav: NavContextProps['handleCloseSubNav'];
   isCustomerServiceEnabled: boolean;
   isMobile: boolean;
+  isOpen: boolean;
 }
 
 function Learn({
-  isCustomerServiceEnabled,
-  isMobile,
-  siteMenuLearn,
   handleClearLink,
   handleCloseSubNav,
+  isCustomerServiceEnabled,
+  isMobile,
+  isOpen,
+  siteMenuLearn,
 }: LearnProps) {
   return (
     <SubNavContentWrapper
       isMobile={isMobile}
       onBack={handleClearLink}
       onClose={handleCloseSubNav}
-      isOpen
+      isOpen={isOpen}
       contentLabel="Learn more"
     >
       <GridItem css={styles.root}>
