@@ -1,37 +1,55 @@
-import dynamic from 'next/dynamic';
+import { useEffect, useState } from 'react';
+import SVGInline from 'react-svg-inline';
 
-import { CARS } from './Car.constants';
 import { Cars } from './Car.types';
 
-// Dynamically import the illustrations
-// so we exclude the illustrations from the main page bundle
-// and only inject the correct illustration
-// To make it work, we have to list all the dynamic imports, one by one...
-export const CommercialVan = dynamic(
-  () => import('~/components/global/Car/all/CommercialVan'),
-  {
-    ssr: false, //not server side rendered
-  },
-);
-
-export const Sedan = dynamic(
-  () => import('~/components/global/Car/all/Sedan'),
-  {
-    ssr: false, //not server side rendered
-  },
-);
-
-const mapIdToCar = {
-  [CARS.COMMERCIAL_VAN]: CommercialVan,
-  [CARS.SEDAN]: Sedan,
+type Cache = {
+  [key: string]: string;
 };
 
-export function renderCar(id: Cars | string): JSX.Element | null {
-  const Component = mapIdToCar[id];
-  if (!Component) {
-    console.error(
-      `Car > renderCar: ${id} doesn't map with a valid component (see mapIdToCar)`,
-    );
+const cache: Cache = {};
+
+type Props = {
+  id: Cars | string;
+};
+
+function RenderCar(props: Props) {
+  const { id } = props;
+  const [SVGString, setSVGString] = useState<string | null>(null);
+
+  // Load SVG sa text files, store the content in cache
+  useEffect(() => {
+    if (cache[id]) {
+      setSVGString(cache[id]);
+      return;
+    }
+
+    let didCancel = false;
+    const url = `/static/assets/cars/${id}.svg`;
+
+    const getSVG = async () => {
+      const data = await fetch(url)
+        .then((response) => response.text())
+        .then((data) => data);
+
+      // cache data
+      cache[id] = data;
+
+      !didCancel && setSVGString(data);
+    };
+
+    getSVG();
+
+    return () => {
+      didCancel = true;
+    };
+  }, [id]);
+
+  if (SVGString) {
+    return <SVGInline svg={SVGString}></SVGInline>;
   }
-  return Component ? <Component /> : null;
+
+  return null;
 }
+
+export default RenderCar;

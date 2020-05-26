@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { MQ } from '~/lib/constants';
 
 import { DEFAULT_CAR, VEHICLE_SCALE_SMALL } from './Car.constants';
-import { renderCar } from './Car.renders';
+import RenderCar from './Car.renders';
 import { styles } from './Car.styles';
 import { Cars, CarSizes, instanceOfCars } from './Car.types';
 import { CAR_DETAILS } from './CarDetails.constants';
@@ -71,7 +71,7 @@ function Car({ carId, size, solid, animateWheel, ...rest }: Props) {
       ]}
       {...rest}
     >
-      {renderCar(carId)}
+      <RenderCar id={carId} />
     </CarContainer>
   );
 }

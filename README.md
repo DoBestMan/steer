@@ -160,7 +160,7 @@ Each car SVG file should:
 If you need to add more cars, please:
 
 - Make sure that the previous requirements are met
-- add your SVG car in `/src/assets/cars`. Make sure the filename is respecting the kebab-case format, based on the `id` of the car.
+- add your SVG car in `/public/static/assets/cars`. Make sure the filename is respecting the kebab-case format, based on the `id` of the car.
 - run `yarn generate-cars-constants`.
 - You're all set, commit your change and voilà!
 

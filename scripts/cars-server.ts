@@ -9,7 +9,7 @@ import { createFile, lineBreak } from './utils';
   const app = express();
   const port = 8888;
   const location = `http://localhost:${port}`;
-  app.use(express.static('src'));
+  app.use(express.static('public'));
 
   /* eslint no-console: 0 */
   console.log(`1/4 - Start server at ${location}`);
@@ -18,10 +18,10 @@ import { createFile, lineBreak } from './utils';
   app.listen(port, () => {});
 
   // get all cars
-  const carFolder = '/assets/cars';
+  const carFolder = '/static/assets/cars';
 
   /* eslint no-undef: 0 */
-  const carsSrc = path.resolve(__dirname, `../src/${carFolder}`);
+  const carsSrc = path.resolve(__dirname, `../public/${carFolder}`);
   const aCarPath = [];
 
   /* eslint no-console: 0 */
@@ -32,7 +32,7 @@ import { createFile, lineBreak } from './utils';
 
     if (carSrc.indexOf('.svg') > -1) {
       // get content, replace id= with class=
-      const filePath = path.resolve(__dirname, `../src${carFolder}/${file}`);
+      const filePath = path.resolve(__dirname, `../public${carFolder}/${file}`);
 
       let contents = fs.readFileSync(filePath, 'utf8');
       contents = contents.replace(' id=', ' class=');

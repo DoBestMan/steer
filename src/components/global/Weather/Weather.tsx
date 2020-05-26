@@ -4,7 +4,7 @@ import Rain from './all/Rain';
 import Snow from './all/Snow';
 import { WEATHERS } from './Weather.constants';
 import { styles } from './Weather.styles';
-import { instanceOfWeathers, Weathers } from './Weather.types';
+import { Weathers } from './Weather.types';
 
 type Props = {
   weatherID: Weathers | string | null;
@@ -21,7 +21,7 @@ function Weather({ weatherID, ...rest }: Props) {
 
   useEffect(() => {
     const handleResize = () => {
-      if (containerRef && containerRef.current) {
+      if (containerRef && containerRef.current && weatherID) {
         const bounds = containerRef.current.getBoundingClientRect();
 
         setElementSize({
@@ -38,12 +38,7 @@ function Weather({ weatherID, ...rest }: Props) {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, []);
-
-  // No need to render
-  if (!weatherID || !instanceOfWeathers(weatherID)) {
-    return null;
-  }
+  }, [weatherID]);
 
   return (
     <div css={styles.container} ref={containerRef} {...rest}>
