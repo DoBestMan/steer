@@ -9,6 +9,7 @@ export default {
 };
 
 const defaultProps = {
+  activeFilter: undefined,
   isAdvancedView: false,
   isInternal: false,
   location: 'Portland, OR',
@@ -38,12 +39,23 @@ export function HeaderWithKnobs() {
       {car}
     </>
   );
+  const [activeFilters, setActiveFilters] = useState<string[]>([]);
+  function toggleFilter(filter: string) {
+    if (activeFilters.includes(filter)) {
+      const filters = activeFilters.filter((f) => f !== filter);
+      setActiveFilters(filters);
+      return;
+    }
+    setActiveFilters([...activeFilters, filter]);
+  }
   const tireSize = text('Tire size', defaultProps.tireSize);
   const rearTireSize = text('Rear tire size', defaultProps.tireSize);
   const location = text('Location', defaultProps.location);
+
   return (
     <Header
       {...{
+        activeFilters,
         isAdvancedView,
         isInternal,
         location,
@@ -51,6 +63,7 @@ export function HeaderWithKnobs() {
         rearTireSize,
         tireSize,
         title: titleEl,
+        toggleFilter,
       }}
     />
   );
@@ -63,12 +76,23 @@ export function Main() {
   function toggleView() {
     setIsAdvancedView(!isAdvancedView);
   }
+  const [activeFilters, setActiveFilters] = useState<string[]>([]);
+  function toggleFilter(filter: string) {
+    if (activeFilters.includes(filter)) {
+      const filters = activeFilters.filter((f) => f !== filter);
+      setActiveFilters(filters);
+      return;
+    }
+    setActiveFilters([...activeFilters, filter]);
+  }
   return (
     <Header
       {...defaultProps}
-      title={defaultTitle}
-      onToggle={toggleView}
+      toggleFilter={toggleFilter}
+      activeFilters={activeFilters}
       isAdvancedView={isAdvancedView}
+      onToggle={toggleView}
+      title={defaultTitle}
     />
   );
 }
@@ -80,13 +104,24 @@ export function MainWithoutRearTireSize() {
   function toggleView() {
     setIsAdvancedView(!isAdvancedView);
   }
+  const [activeFilters, setActiveFilters] = useState<string[]>([]);
+  function toggleFilter(filter: string) {
+    if (activeFilters.includes(filter)) {
+      const filters = activeFilters.filter((f) => f !== filter);
+      setActiveFilters(filters);
+      return;
+    }
+    setActiveFilters([...activeFilters, filter]);
+  }
   return (
     <Header
       {...defaultProps}
+      activeFilters={activeFilters}
+      toggleFilter={toggleFilter}
+      isAdvancedView={isAdvancedView}
+      onToggle={toggleView}
       rearTireSize={undefined}
       title={defaultTitle}
-      onToggle={toggleView}
-      isAdvancedView={isAdvancedView}
     />
   );
 }
@@ -98,14 +133,25 @@ export function Internal() {
   function toggleView() {
     setIsAdvancedView(!isAdvancedView);
   }
+  const [activeFilters, setActiveFilters] = useState<string[]>([]);
+  function toggleFilter(filter: string) {
+    if (activeFilters.includes(filter)) {
+      const filters = activeFilters.filter((f) => f !== filter);
+      setActiveFilters(filters);
+      return;
+    }
+    setActiveFilters([...activeFilters, filter]);
+  }
 
   return (
     <Header
       {...defaultProps}
+      activeFilters={activeFilters}
+      toggleFilter={toggleFilter}
       isInternal
-      title="Winter Tires"
-      onToggle={toggleView}
       isAdvancedView={isAdvancedView}
+      onToggle={toggleView}
+      title="Winter Tires"
     />
   );
 }
@@ -115,11 +161,22 @@ export function AdvancedView() {
   function toggleView() {
     setIsAdvancedView(!isAdvancedView);
   }
+  const [activeFilters, setActiveFilters] = useState<string[]>([]);
+  function toggleFilter(filter: string) {
+    if (activeFilters.includes(filter)) {
+      const filters = activeFilters.filter((f) => f !== filter);
+      setActiveFilters(filters);
+      return;
+    }
+    setActiveFilters([...activeFilters, filter]);
+  }
   return (
     <Header
       {...defaultProps}
-      title={defaultTitle}
+      activeFilters={activeFilters}
+      toggleFilter={toggleFilter}
       onToggle={toggleView}
+      title={defaultTitle}
       isAdvancedView={isAdvancedView}
     />
   );

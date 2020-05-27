@@ -51,7 +51,9 @@ const styles: CSSObject = {
   root: {
     background: COLORS.GLOBAL.ORANGE,
     color: COLORS.GLOBAL.WHITE,
+    position: 'relative',
     transition: `all ${TIME.MS300}ms ease`,
+    width: 'fit-content',
     [MQ.S]: {
       padding: SPACING.SIZE_20,
     },
@@ -76,15 +78,8 @@ const styles: CSSObject = {
     alignItems: 'center',
     display: 'flex',
     position: 'absolute',
-    [MQ.S]: {
-      right: SPACING.SIZE_20,
-    },
-    [MQ.M]: {
-      right: SPACING.SIZE_40,
-    },
-    [MQ.L]: {
-      right: SPACING.SIZE_60,
-    },
+    right: SPACING.SIZE_10,
+    top: 0,
   },
   wrappedLocation: {
     paddingTop: SPACING.SIZE_05,

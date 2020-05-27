@@ -10,6 +10,7 @@ import Filters from './Filters';
 import styles from './Header.styles';
 
 interface Props {
+  activeFilters?: string[];
   isAdvancedView?: boolean;
   isInternal?: boolean;
   location: string;
@@ -17,12 +18,15 @@ interface Props {
   rearTireSize?: string;
   tireSize: string;
   title: string | ReactNode;
+  toggleFilter: (filter: string) => void;
 }
 
 export default function Header({
+  activeFilters = [],
   isAdvancedView = false,
   isInternal = false,
   location,
+  toggleFilter,
   onToggle,
   rearTireSize,
   tireSize,
@@ -78,6 +82,12 @@ export default function Header({
           {secondItem}
         </div>
         {thirdItem}
+      </div>
+      <Filters
+        activeFilters={activeFilters}
+        toggleFilter={toggleFilter}
+        isAdvancedView={isAdvancedView}
+      >
         <div css={styles.toggle}>
           <span css={styles.label}>
             {ui('catalog.header.advancedViewLabel')}
@@ -88,8 +98,7 @@ export default function Header({
             defaultChecked={isAdvancedView}
           />
         </div>
-      </div>
-      <Filters isAdvancedView={isAdvancedView} />
+      </Filters>
     </div>
   );
 }
