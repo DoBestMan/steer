@@ -48,7 +48,14 @@ function Nav({ isHomepage }: Props) {
           </li>
         )}
         {links.map((link, idx) => (
-          <li css={styles.listItem} key={idx}>
+          <li
+            css={[
+              styles.listItem,
+              !isHomepage && styles.listItemNotHomepage,
+              idx === links.length - 1 && styles.lastItem,
+            ]}
+            key={idx}
+          >
             <NavLink
               isActive={false}
               onClick={createSelectLinkHandler(link)}

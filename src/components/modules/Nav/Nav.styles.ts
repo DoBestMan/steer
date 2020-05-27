@@ -19,6 +19,15 @@ const styles = {
       display: 'none',
     },
   },
+  lastItem: css({
+    [MQ.L]: {
+      // Should be the account logo
+      // Change it to button if it becomes a button
+      a: {
+        minWidth: 'auto',
+      },
+    },
+  }),
   listItem: css({
     ':last-of-type': {
       marginLeft: SPACING.SIZE_30,
@@ -28,6 +37,11 @@ const styles = {
     marginLeft: SPACING.SIZE_40,
     [MQ.L]: {
       display: 'inline-flex',
+    },
+  }),
+  listItemNotHomepage: css({
+    [MQ.L]: {
+      marginLeft: SPACING.SIZE_20,
     },
   }),
   logo: css({
