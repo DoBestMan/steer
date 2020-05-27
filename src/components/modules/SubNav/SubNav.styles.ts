@@ -99,6 +99,10 @@ const styles = {
       alignItems: 'center',
       display: 'flex',
     },
+    [MQ.L]: {
+      // accommodates margin top from designs to align with header
+      marginTop: -1,
+    },
   }),
   linkSectionIcons: css({
     li: {
@@ -258,6 +262,13 @@ const styles = {
         },
       },
     ],
+    [MQ.L]: {
+      // accommodates spacing top from designs to align with header behind
+      paddingTop: SPACING.SIZE_60 + 2,
+      svg: {
+        marginTop: -2,
+      },
+    },
   }),
 };
 
