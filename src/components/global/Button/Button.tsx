@@ -18,7 +18,7 @@ interface Props {
   isDisabled?: boolean;
   isToggle?: boolean;
   isToggleActive?: boolean;
-  onClick: MouseEventHandler;
+  onClick?: MouseEventHandler;
   style?: BUTTON_STYLE;
   tabIndex?: number;
   theme?: BUTTON_THEME;

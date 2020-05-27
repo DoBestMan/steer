@@ -33,6 +33,8 @@ export type Icon =
   | 'small-chevron-down'
   | 'small-chevron-up'
   | 'smiley'
+  | 'smiley-concerned'
+  | 'smiley-wink'
   | 'tire'
   | 'trending'
   | 'twitter'

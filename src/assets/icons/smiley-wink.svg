@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="33" height="30" fill="none" viewBox="0 0 33 30">
+  <defs/>
+  <path fill="currentColor" stroke="currentColor" stroke-width=".5" d="M11.004 4.19a3.685 3.685 0 01-3.688 3.683A3.684 3.684 0 013.63 4.191 3.685 3.685 0 017.316.509a3.687 3.687 0 013.688 3.682z"/>
+  <rect width="8" height="2.996" x="22" y="2.609" fill="currentColor" rx="1.498"/>
+  <path fill="currentColor" stroke="currentColor" stroke-width=".5" d="M1.684 16.562h0a2.38 2.38 0 013.247.862c2.39 4.122 6.823 6.682 11.569 6.682 4.747 0 9.183-2.56 11.569-6.682h0a2.364 2.364 0 013.243-.863h0a2.362 2.362 0 01.864 3.239h0c-3.23 5.58-9.24 9.047-15.677 9.048C10.067 28.847 4.06 25.38.82 19.8a2.367 2.367 0 01.864-3.24z"/>
+</svg>
