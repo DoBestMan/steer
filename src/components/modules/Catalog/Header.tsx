@@ -6,7 +6,7 @@ import Toggle from '~/components/global/Toggle/Toggle';
 import { LINK_ICON_POSITION } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
-import Filters from './Filters';
+import Filters from './Filters/Filters';
 import styles from './Header.styles';
 
 interface Props {

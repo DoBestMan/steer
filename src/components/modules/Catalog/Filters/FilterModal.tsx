@@ -9,30 +9,19 @@ import { bindAppElement } from '~/lib/utils/modal';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import styles, { overlayBkStyles } from './FilterModal.styles';
+import { PopupProps } from './FilterPopup';
 
 bindAppElement();
 
-interface Props {
+interface Props extends PopupProps {
   children: ReactNode;
-  contentLabel: string;
-  hasCloseButton?: boolean;
-  isOpen: boolean;
-  onBack?: () => void;
-  onClose: () => void;
 }
 
-function FilterModal({
-  children,
-  contentLabel,
-  hasCloseButton = true,
-  isOpen,
-  onBack,
-  onClose,
-}: Props) {
+function FilterModal({ children, isOpen, label, onClose }: Props) {
   const { bk } = useBreakpoints();
   return (
     <ReactModal
-      contentLabel={contentLabel}
+      contentLabel={label}
       isOpen={isOpen}
       onRequestClose={onClose}
       closeTimeoutMS={TIME.MS350}
@@ -51,30 +40,17 @@ function FilterModal({
         isOpen && overlayBkStyles[bk].open,
       ]}
     >
-      {(onBack || hasCloseButton) && (
-        <div css={styles.actions}>
-          {onBack && (
-            <Link
-              as="button"
-              aria-label={ui('modal.back')}
-              onClick={onBack}
-              icon={ICONS.CHEVRON_LEFT}
-              theme={LINK_THEME.LIGHT}
-            />
-          )}
-          {hasCloseButton && (
-            <Link
-              as="button"
-              icon={ICONS.CLOSE}
-              aria-label={`${ui('modal.close')} ${contentLabel}`}
-              onClick={onClose}
-              theme={LINK_THEME.LIGHT}
-              // this will allow modal content to start where padding begins rather than pushed down from actions bar
-              css={!onBack && styles.close}
-            />
-          )}
-        </div>
-      )}
+      <div css={styles.actions}>
+        <Link
+          as="button"
+          icon={ICONS.CLOSE}
+          aria-label={`${ui('modal.close')} ${label}`}
+          onClick={onClose}
+          theme={LINK_THEME.LIGHT}
+          // this will allow modal content to start where padding begins rather than pushed down from actions bar
+          css={styles.close}
+        />
+      </div>
       {children}
     </ReactModal>
   );

@@ -1,19 +1,17 @@
-import { useEffect, useRef } from 'react';
+import { ReactNode, useEffect, useRef } from 'react';
 
 import Button from '~/components/global/Button/Button';
 
 import styles from './Dropdown.styles';
+import { PopupProps } from './FilterPopup';
 
-interface Props {
-  isOpen: boolean;
-  label?: string;
-  onClose: () => void;
-  onSelectFilter: () => void;
+interface Props extends PopupProps {
+  children: ReactNode;
 }
 
 export default function FilterDropdown({
+  children,
   isOpen,
-  label,
   onClose,
   onSelectFilter,
 }: Props) {
@@ -34,11 +32,11 @@ export default function FilterDropdown({
     return () => {
       window.removeEventListener('mouseup', onClick);
     };
-  }, [isOpen, label, onClose]);
+  }, [isOpen, onClose]);
 
   return (
     <div ref={dropdownEl} css={[styles.root, isOpen && styles.open]}>
-      <p>{label} dropdown</p>
+      {children}
       <Button onClick={onSelectFilter}>Toggle filter</Button>
     </div>
   );

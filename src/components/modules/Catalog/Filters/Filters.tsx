@@ -4,10 +4,10 @@ import FilterButton from '~/components/global/Button/FilterButton';
 import { BUTTON_THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
-import { mockFilters } from './Catalog.mocks';
-import FilterDropdown from './Dropdown';
+import { mockFilters } from '../Catalog.mocks';
+import hStyles from '../Header.styles';
+import FilterPopup from './FilterPopup';
 import styles from './Filters.styles';
-import hStyles from './Header.styles';
 
 interface Props {
   activeFilters: string[];
@@ -65,7 +65,9 @@ export default function Filters({
               {label}
             </FilterButton>
             {hasDropdown && (
-              <FilterDropdown
+              <FilterPopup
+                // TODO: determine more filters label
+                isDropdown={label !== 'More filters'}
                 label={label}
                 isOpen={label === selectingFilter}
                 onClose={clearSelectingFilter}

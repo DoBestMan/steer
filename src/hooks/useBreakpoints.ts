@@ -13,6 +13,11 @@ export function useBreakpoints() {
 
   return {
     bk,
+    greaterThan: {
+      S: BREAKPOINTS[bk] > BREAKPOINTS[BREAKPOINT_SIZES.S],
+      M: BREAKPOINTS[bk] > BREAKPOINTS[BREAKPOINT_SIZES.M],
+      L: BREAKPOINTS[bk] > BREAKPOINTS[BREAKPOINT_SIZES.L],
+    },
     is: {
       S: bk === BREAKPOINT_SIZES.S,
       M: bk === BREAKPOINT_SIZES.M,
