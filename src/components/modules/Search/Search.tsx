@@ -5,8 +5,10 @@ import { scrollTo } from '~/lib/helpers/scroll';
 
 import InitialSearch from './InitialSearch';
 import {
+  SearchInputEnum,
   SearchResultListEnum,
   SearchState,
+  SearchStateEnum,
   SearchStateType,
 } from './Search.constants';
 import styles from './Search.styles';
@@ -49,7 +51,11 @@ function Search({
   results,
 }: Props) {
   const [query, setQuery] = useState('');
+  const [secondaryQuery, setSecondaryQuery] = useState('');
   const [searchState, setSearchState] = useState(SearchState.FREE_SEARCH);
+  const [activeInputType, setActiveInputType] = useState(
+    SearchInputEnum.PRIMARY,
+  );
 
   const handleClearSearchesClick = () => {
     onClearSearchesClick();
@@ -59,8 +65,12 @@ function Search({
     }, TIME.MS200);
   };
 
-  const onChange = (input: string) => {
-    setQuery(input);
+  const onInputChange = (input: string) => {
+    if (activeInputType === SearchInputEnum.PRIMARY) {
+      setQuery(input);
+    } else if (activeInputType === SearchInputEnum.SECONDARY) {
+      setSecondaryQuery(input);
+    }
   };
 
   const onCancelSelection = () => {
@@ -71,8 +81,22 @@ function Search({
     }
   };
 
+  const onToggleRearTire = (isShowing: boolean) => {
+    if (isShowing) {
+      setSearchState(SearchStateEnum.REAR_TIRE);
+    } else {
+      setSearchState(SearchStateEnum.TIRE_SIZE);
+      setActiveInputType(SearchInputEnum.PRIMARY);
+      setSecondaryQuery('');
+    }
+  };
+
   const handleValueSelection = (searchResult: SearchResult) => {
-    setQuery(searchResult.displayValue);
+    if (activeInputType === SearchInputEnum.PRIMARY) {
+      setQuery(searchResult.displayValue);
+    } else if (activeInputType === SearchInputEnum.SECONDARY) {
+      setSecondaryQuery(searchResult.displayValue);
+    }
   };
 
   // We need to set the search state internally for UI purposes, but also
@@ -85,20 +109,28 @@ function Search({
 
   const handlePastSearchClick = () => {};
 
+  const handleInputFocus = (inputType: SearchInputEnum) => {
+    setActiveInputType(inputType);
+  };
+
   const shouldShowInitialSearch =
     query.length === 0 && searchState === SearchState.FREE_SEARCH;
 
   return (
     <div css={styles.container} ref={forwardedRef}>
       <SearchAutocomplete
+        activeInputType={activeInputType}
         focusOnMount
         onCancelSelection={onCancelSelection}
-        onChange={onChange}
+        onInputChange={onInputChange}
         onCloseSearchClick={onCloseSearchClick}
+        onInputFocus={handleInputFocus}
+        onToggleRearTire={onToggleRearTire}
         onValueSelection={handleValueSelection}
         results={results.siteSearchGroupList}
         query={query}
         searchState={searchState}
+        secondaryQuery={secondaryQuery}
       />
       {shouldShowInitialSearch && (
         <InitialSearch

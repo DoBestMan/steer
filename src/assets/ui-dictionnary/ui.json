@@ -102,11 +102,16 @@
     }
   },
   "search": {
+    "addRearTire": "Add different rear size",
     "cancelButtonLabel": "Cancel",
     "cancelButtonClear": "Clear",
     "clearPastSearchesButtonLabel": "Clear all",
+    "frontTire": "Front:",
     "pastSearches": "Past searches",
+    "rearTire": "Rear:",
+    "removeRearTire": "Remove",
     "searchBy": "Search by",
+    "searchByTireSize": "Search by tire size",
     "searchAutocompleteLabelSM": "Search by vehicle",
     "searchAutocompleteLabelLG": "Search by vehicle, tire size or brand",
     "searchCategories": {

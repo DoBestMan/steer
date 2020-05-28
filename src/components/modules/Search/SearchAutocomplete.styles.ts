@@ -1,4 +1,4 @@
-import { css, CSSObject } from '@emotion/core';
+import { CSSObject } from '@emotion/core';
 import {
   ENTERED,
   ENTERING,
@@ -6,128 +6,18 @@ import {
   EXITING,
 } from 'react-transition-group/Transition';
 
-import { BORDERS, COLORS, MQ, SPACING, TIME, Z_INDEX } from '~/lib/constants';
-import { disableGlobalFocus } from '~/styles/document/accessibility.styles';
-import { typography, typographyStyles } from '~/styles/typography.styles';
+import {
+  BORDERS,
+  COLORS,
+  GRID_MARGIN,
+  MQ,
+  SPACING,
+  TIME,
+  Z_INDEX,
+} from '~/lib/constants';
+import { typography } from '~/styles/typography.styles';
 
-const styles: CSSObject = {
-  actionIcon: {
-    svg: {
-      display: 'block',
-      height: SPACING.SIZE_20,
-      width: SPACING.SIZE_20,
-    },
-  },
-  autocompleteGrid: {
-    backgroundColor: COLORS.GLOBAL.ORANGE,
-    borderBottom: '1px solid transparent',
-    left: 0,
-    padding: `${SPACING.SIZE_25}px 0`,
-    position: 'fixed',
-    top: 0,
-    transition: `border-color ${TIME.MS100}ms ease`,
-    zIndex: Z_INDEX.FRONT,
-    [MQ.M]: {
-      padding: `${SPACING.SIZE_50}px 0`,
-    },
-    [MQ.L]: {
-      borderBottom: BORDERS.SOLID_GRAY_80_1PX,
-    },
-  },
-  autocompleteGridItem: {
-    position: 'relative',
-  },
-  clearSearch: {
-    color: COLORS.LIGHT.GRAY_70,
-    marginLeft: SPACING.SIZE_15,
-    [MQ.M]: {
-      svg: {
-        height: 24,
-        width: 24,
-      },
-    },
-  },
-  clearSearchButton: {
-    flexShrink: 0,
-  },
-  closeSearchButton: {
-    span: {
-      borderBottom: BORDERS.DOTTED_TRANSPARENT_2PX,
-    },
-    [MQ.M]: {
-      span: [typography.bodyCopy],
-    },
-  },
-  closeSearchWrapper: {
-    alignItems: 'flex-start',
-    display: 'flex',
-    justifyContent: 'flex-end',
-    position: 'absolute',
-    right: 0,
-    top: 4,
-    [MQ.M]: {
-      top: SPACING.SIZE_10,
-    },
-    [MQ.XL]: {
-      top: SPACING.SIZE_15,
-    },
-  },
-  comboboxWrapper: {
-    flexGrow: 1,
-  },
-  errorLabel: [
-    typography.secondaryHeadline,
-    {
-      color: COLORS.GLOBAL.BLACK,
-      [MQ.M]: [typography.primaryHeadline],
-    },
-  ],
-  errorMessage: typography.primaryHeadline,
-  input: [
-    disableGlobalFocus,
-    {
-      width: '100%',
-    },
-  ],
-  inputContainer: {
-    alignItems: 'baseline',
-    display: 'flex',
-    paddingRight: SPACING.SIZE_50,
-    position: 'relative',
-    [MQ.M]: {
-      paddingRight: SPACING.SIZE_80,
-    },
-  },
-  inputText: [
-    typography.secondaryHeadline,
-    {
-      backgroundColor: 'inherit',
-      border: 'none',
-      color: COLORS.GLOBAL.WHITE,
-      padding: 0,
-      [MQ.M]: typographyStyles.primaryHeadline.M,
-      [MQ.XL]: typographyStyles.primaryHeadline.XL,
-    },
-  ],
-  label: [
-    typography.secondaryHeadline,
-    css({
-      color: COLORS.ORANGE.TINT_70,
-      left: 0,
-      opacity: 1,
-      pointerEvents: 'none',
-      position: 'absolute',
-      top: 0,
-      [MQ.M]: typography.primaryHeadline,
-    }),
-  ],
-  labelHidden: {
-    opacity: 0,
-  },
-  listboxRoot: {
-    listStyle: 'none',
-    transition: `opacity ${TIME.MS600}ms ease, transform ${TIME.MS300}ms ease`,
-  },
+const animationStyles = {
   /* eslint-disable sort-keys */
   [`listbox_${ENTERING}`]: {
     opacity: 0,
@@ -144,6 +34,118 @@ const styles: CSSObject = {
     opacity: 0,
   },
   /* eslint-enable sort-keys */
+};
+
+const styles: CSSObject = {
+  autocompleteGrid: {
+    backgroundColor: COLORS.GLOBAL.ORANGE,
+    borderBottom: '1px solid transparent',
+    transition: `border-color ${TIME.MS100}ms ease`,
+    [MQ.L]: {
+      borderBottom: BORDERS.SOLID_GRAY_80_1PX,
+    },
+  },
+  autocompleteGridItem: {
+    padding: `${SPACING.SIZE_25}px ${SPACING.SIZE_50}px ${SPACING.SIZE_25}px 0`,
+    position: 'relative',
+    [MQ.M]: {
+      padding: `${SPACING.SIZE_50}px ${SPACING.SIZE_80}px ${SPACING.SIZE_50}px 0`,
+    },
+  },
+  autocompleteGridItemRearTireState: {
+    borderBottom: `1px solid ${COLORS.ORANGE.SHADE_30}`,
+    padding: `${SPACING.SIZE_25}px 0 ${SPACING.SIZE_25}px 0`,
+    [MQ.M]: {
+      padding: `${SPACING.SIZE_40}px 0 ${SPACING.SIZE_20}px 0`,
+    },
+    [MQ.L]: {
+      borderBottom: BORDERS.SOLID_GRAY_80_1PX,
+      padding: `${SPACING.SIZE_50}px 0 ${SPACING.SIZE_30}px 0`,
+    },
+  },
+  autocompleteGridRearTireState: {
+    [MQ.L]: {
+      borderColor: 'transparent',
+    },
+  },
+  clearSearch: {
+    color: COLORS.LIGHT.GRAY_70,
+    marginLeft: SPACING.SIZE_15,
+    [MQ.M]: {
+      svg: {
+        height: 24,
+        width: 24,
+      },
+    },
+  },
+  clearSearchButton: {
+    flexShrink: 0,
+  },
+  clearSecondaryInput: {
+    color: COLORS.GLOBAL.BLACK,
+    [MQ.M]: typography.bodyCopy,
+  },
+  closeSearchButton: {
+    span: {
+      borderBottom: BORDERS.DOTTED_TRANSPARENT_2PX,
+    },
+    [MQ.M]: {
+      span: [typography.bodyCopy],
+    },
+  },
+  closeSearchRearTire: {
+    '> button': {
+      color: COLORS.GLOBAL.ORANGE,
+    },
+    top: 21,
+    [MQ.M]: {
+      top: SPACING.SIZE_30,
+    },
+    [MQ.L]: {
+      top: SPACING.SIZE_40,
+    },
+    [MQ.XL]: {
+      top: SPACING.SIZE_40,
+    },
+  },
+  closeSearchWrapper: {
+    alignItems: 'flex-start',
+    display: 'flex',
+    justifyContent: 'flex-end',
+    position: 'absolute',
+    right: GRID_MARGIN.S,
+    top: 27,
+    [MQ.M]: {
+      right: GRID_MARGIN.M,
+      top: 60,
+    },
+    [MQ.L]: {
+      right: GRID_MARGIN.L,
+    },
+    [MQ.XL]: {
+      right: GRID_MARGIN.XL,
+      top: 65,
+    },
+  },
+  errorLabel: [
+    typography.secondaryHeadline,
+    {
+      color: COLORS.GLOBAL.BLACK,
+      [MQ.M]: [typography.primaryHeadline],
+    },
+  ],
+  errorMessage: typography.primaryHeadline,
+  header: {
+    left: 0,
+    position: 'fixed',
+    top: 0,
+    width: '100%',
+    zIndex: Z_INDEX.FRONT,
+  },
+  listboxRoot: {
+    listStyle: 'none',
+    transition: `opacity ${TIME.MS600}ms ease, transform ${TIME.MS300}ms ease`,
+  },
   searchIcon: {
     '> svg': {
       height: 34,
@@ -157,6 +159,15 @@ const styles: CSSObject = {
     justifyContent: 'center',
     [MQ.L]: {
       display: 'block',
+      padding: `${SPACING.SIZE_50}px 0`,
+    },
+  },
+  searchIconGridRearTire: {
+    [MQ.L]: {
+      padding: `${SPACING.SIZE_40}px 0 ${SPACING.SIZE_20}px`,
+    },
+    [MQ.XL]: {
+      padding: `${SPACING.SIZE_50}px 0 ${SPACING.SIZE_30}px`,
     },
   },
   searchIconWrapper: {
@@ -180,10 +191,56 @@ const styles: CSSObject = {
       padding: `${SPACING.SIZE_70}px 0 ${SPACING.SIZE_10}px`,
     },
   },
-  searchState: {
-    flexShrink: 0,
-    paddingRight: SPACING.SIZE_05,
+  searchResultsGridRearTire: {
+    paddingTop: 140,
+    [MQ.M]: {
+      paddingTop: 330,
+    },
+    [MQ.L]: {
+      paddingTop: 350,
+    },
+    [MQ.XL]: {
+      paddingTop: 360,
+    },
   },
+  secondaryActionButton: [
+    typography.smallCopy,
+    {
+      span: {
+        borderBottom: `2px dotted ${COLORS.ORANGE.SHADE_30}`,
+      },
+    },
+  ],
+  secondaryActionWrapper: {
+    bottom: SPACING.SIZE_20,
+    position: 'fixed',
+    right: GRID_MARGIN.S,
+    zIndex: Z_INDEX.TOP,
+    [MQ.M]: {
+      right: GRID_MARGIN.M,
+    },
+    [MQ.L]: {
+      right: SPACING.SIZE_90,
+    },
+  },
+  tireSizeHeader: {
+    alignItems: 'center',
+    backgroundColor: COLORS.GLOBAL.BLACK,
+    height: 60,
+    [MQ.M]: {
+      height: 80,
+    },
+    [MQ.L]: {
+      height: 100,
+    },
+  },
+  tireSizeHeaderCopy: [
+    typography.eyebrow,
+    {
+      color: COLORS.GLOBAL.WHITE,
+    },
+  ],
+  ...animationStyles,
 };
 
 export default styles;
