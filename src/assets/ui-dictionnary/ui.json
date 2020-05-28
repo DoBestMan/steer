@@ -96,6 +96,11 @@
       "label": "Mobile Menu"
     }
   },
+  "pdp": {
+    "everyPurchaseIncludes": {
+      "title": "Every purchase includes"
+    }
+  },
   "search": {
     "cancelButtonLabel": "Cancel",
     "cancelButtonClear": "Clear",
