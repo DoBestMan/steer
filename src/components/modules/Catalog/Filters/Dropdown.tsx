@@ -35,7 +35,11 @@ export default function FilterDropdown({
   }, [isOpen, onClose]);
 
   return (
-    <div ref={dropdownEl} css={[styles.root, isOpen && styles.open]}>
+    <div
+      ref={dropdownEl}
+      aria-hidden={!isOpen}
+      css={[styles.root, isOpen && styles.open]}
+    >
       {children}
       <Button onClick={onSelectFilter}>Toggle filter</Button>
     </div>

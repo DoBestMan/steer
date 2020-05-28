@@ -1,80 +1,44 @@
 import { action } from '@storybook/addon-actions';
-import { boolean } from '@storybook/addon-knobs';
+import { select } from '@storybook/addon-knobs';
 import { useState } from 'react';
 
 import Button from '~/components/global/Button/Button';
-import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { typography } from '~/styles/typography.styles';
 
+import { FilterContentTypes } from './Filter.types';
 import FilterPopup from './FilterPopup';
+import { filterTypeMap, filterTypeSelect } from './Filters.mocks';
 
 export default {
   component: FilterPopup,
-  title: 'Filter Popup',
+  title: 'Catalog Filters',
 };
 
 function ModalButton({ toggleModal }: { toggleModal: () => void }) {
   return (
     <Button css={typography.bodyCopy} onClick={toggleModal}>
-      Open Popup
+      Open Modal
     </Button>
   );
 }
+// TODO: add filter type content stories
 
 export function FilterPopupWithKnobs() {
   const [isOpen, setIsOpen] = useState(false);
   function toggleModal() {
     setIsOpen(!isOpen);
   }
-  const moreFilters = boolean('More filters view', false);
-  const { bk } = useBreakpoints();
-  return (
-    <div>
-      <ModalButton {...{ toggleModal }} />
-      <FilterPopup
-        isDropdown={!moreFilters}
-        onSelectFilter={action('select filter')}
-        label={`Popup on ${bk} breakpoint`}
-        onClose={toggleModal}
-        isOpen={isOpen}
-      />
-    </div>
+  const type = select(
+    'Filter type',
+    filterTypeSelect,
+    FilterContentTypes.CatalogFilterChecklist,
   );
-}
-
-export function FilterPopupDefault() {
-  const [isOpen, setIsOpen] = useState(false);
-  function toggleModal() {
-    setIsOpen(!isOpen);
-  }
-  const { bk } = useBreakpoints();
   return (
     <div>
       <ModalButton {...{ toggleModal }} />
       <FilterPopup
-        isDropdown
+        filter={filterTypeMap[type]}
         onSelectFilter={action('select filter')}
-        label={`Filter popup on ${bk} breakpoint`}
-        onClose={toggleModal}
-        isOpen={isOpen}
-      />
-    </div>
-  );
-}
-
-export function FilterPopupMoreFilters() {
-  const [isOpen, setIsOpen] = useState(false);
-  function toggleModal() {
-    setIsOpen(!isOpen);
-  }
-  const { bk } = useBreakpoints();
-  return (
-    <div>
-      <ModalButton {...{ toggleModal }} />
-      <FilterPopup
-        isDropdown={false}
-        onSelectFilter={action('select filter')}
-        label={`More filters popup on ${bk} breakpoint`}
         onClose={toggleModal}
         isOpen={isOpen}
       />

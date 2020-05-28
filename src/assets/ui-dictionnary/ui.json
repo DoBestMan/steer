@@ -30,8 +30,7 @@
       "advancedViewLabel": "Advanced View",
       "allTiresLink": "All tires",
       "dealsFor": "Deals for",
-      "filterLabel": "Drivers usually filter by",
-      "filterLabelAdvanced": "Technical specs",
+      "filterLabel": "Filter by",
       "rear": "Rear {{rearTireSize}}",
       "size": "Size {{tireSize}}"
     }

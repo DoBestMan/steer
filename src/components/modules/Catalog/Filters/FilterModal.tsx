@@ -15,13 +15,14 @@ bindAppElement();
 
 interface Props extends PopupProps {
   children: ReactNode;
+  contentLabel: string;
 }
 
-function FilterModal({ children, isOpen, label, onClose }: Props) {
+function FilterModal({ children, contentLabel, isOpen, onClose }: Props) {
   const { bk } = useBreakpoints();
   return (
     <ReactModal
-      contentLabel={label}
+      contentLabel={contentLabel}
       isOpen={isOpen}
       onRequestClose={onClose}
       closeTimeoutMS={TIME.MS350}
@@ -44,7 +45,7 @@ function FilterModal({ children, isOpen, label, onClose }: Props) {
         <Link
           as="button"
           icon={ICONS.CLOSE}
-          aria-label={`${ui('modal.close')} ${label}`}
+          aria-label={`${ui('modal.close')} ${contentLabel}`}
           onClick={onClose}
           theme={LINK_THEME.LIGHT}
           // this will allow modal content to start where padding begins rather than pushed down from actions bar
