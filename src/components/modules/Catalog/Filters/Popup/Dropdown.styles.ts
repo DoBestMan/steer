@@ -21,7 +21,7 @@ const styles: CSSObject = {
       marginTop: SPACING.SIZE_05,
       minHeight: 300, // remove once content is added
       padding: SPACING.SIZE_30,
-      position: 'absolute',
+      position: 'fixed',
       width: FILTER_DROPDOWN_WIDTH,
     },
   ],

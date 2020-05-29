@@ -83,22 +83,19 @@ export default function Header({
         </div>
         {thirdItem}
       </div>
+      <div css={styles.toggle}>
+        <span css={styles.label}>{ui('catalog.header.advancedViewLabel')}</span>
+        <Toggle
+          name={ui('catalog.header.advancedViewLabel')}
+          onToggle={onToggle}
+          defaultChecked={isAdvancedView}
+        />
+      </div>
       <Filters
         activeFilters={activeFilters}
         toggleFilter={toggleFilter}
         isAdvancedView={isAdvancedView}
-      >
-        <div css={styles.toggle}>
-          <span css={styles.label}>
-            {ui('catalog.header.advancedViewLabel')}
-          </span>
-          <Toggle
-            name={ui('catalog.header.advancedViewLabel')}
-            onToggle={onToggle}
-            defaultChecked={isAdvancedView}
-          />
-        </div>
-      </Filters>
+      />
     </div>
   );
 }

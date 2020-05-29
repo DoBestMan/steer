@@ -8,10 +8,12 @@ import {
   BUTTON_THEME,
   COLORS,
   LINK_TYPES,
+  RADIUS,
 } from '~/lib/constants';
 
 import Button from './Button';
 import FilterButton from './FilterButton';
+import FilterButtonToggle from './FilterButtonToggle';
 
 export default {
   component: Button,
@@ -24,6 +26,14 @@ const styles = {
   root: css({
     minHeight: '100vh',
   }),
+  popup: {
+    background: COLORS.GLOBAL.WHITE,
+    borderRadius: RADIUS.RADIUS_15,
+    height: 150,
+    marginTop: 5,
+    padding: 10,
+    width: 200,
+  },
 };
 
 function ButtonContainer({
@@ -177,7 +187,7 @@ export function OrangeButtonOutlined() {
   );
 }
 
-export function FilterButtonWithKnobs() {
+export function FilterButtonToggleWithKnobs() {
   const theme = select(
     'Theme',
     [BUTTON_THEME.LIGHT, BUTTON_THEME.DARK, BUTTON_THEME.ORANGE],
@@ -186,30 +196,51 @@ export function FilterButtonWithKnobs() {
 
   return (
     <ButtonContainer theme={theme}>
-      <FilterButton
+      <FilterButtonToggle
         isActive={boolean('Active', false)}
         isDisabled={boolean('Disabled', false)}
-        hasDropDown={boolean('Drop down', false)}
         onClick={handleButtonClick}
         theme={theme}
       >
         {text('Label', 'Button Label')}
-      </FilterButton>
+      </FilterButtonToggle>
     </ButtonContainer>
   );
 }
 
+export function FilterButtonDropdownWithKnobs() {
+  const theme = select(
+    'Theme',
+    [BUTTON_THEME.LIGHT, BUTTON_THEME.DARK, BUTTON_THEME.ORANGE],
+    BUTTON_THEME.LIGHT,
+  );
+
+  const isDropdownOpen = boolean('Drop down', false);
+  return (
+    <ButtonContainer theme={theme}>
+      <FilterButton
+        label={text('Label', 'Button Label')}
+        isActive={boolean('Active', false)}
+        isDisabled={boolean('Disabled', false)}
+        isDropdownOpen={isDropdownOpen}
+        onClick={handleButtonClick}
+        theme={theme}
+      >
+        {isDropdownOpen && <div css={styles.popup}>Popup content</div>}
+      </FilterButton>
+    </ButtonContainer>
+  );
+}
 export function LightFilterButtonInactive() {
   return (
     <ButtonContainer theme={BUTTON_THEME.LIGHT}>
-      <FilterButton
-        hasDropDown={boolean('Drop down', false)}
+      <FilterButtonToggle
         isActive={false}
         isDisabled={boolean('Disabled', false)}
         onClick={handleButtonClick}
       >
         {text('Label', 'Button Label')}
-      </FilterButton>
+      </FilterButtonToggle>
     </ButtonContainer>
   );
 }
@@ -217,14 +248,13 @@ export function LightFilterButtonInactive() {
 export function LightFilterButtonActive() {
   return (
     <ButtonContainer theme={BUTTON_THEME.LIGHT}>
-      <FilterButton
-        hasDropDown={boolean('Drop down', false)}
+      <FilterButtonToggle
         isActive
         isDisabled={boolean('Disabled', false)}
         onClick={handleButtonClick}
       >
         {text('Label', 'Button Label')}
-      </FilterButton>
+      </FilterButtonToggle>
     </ButtonContainer>
   );
 }
@@ -232,15 +262,14 @@ export function LightFilterButtonActive() {
 export function DarkFilterButtonInactive() {
   return (
     <ButtonContainer theme={BUTTON_THEME.DARK}>
-      <FilterButton
-        hasDropDown={boolean('Drop down', false)}
+      <FilterButtonToggle
         isActive={false}
         isDisabled={boolean('Disabled', false)}
         onClick={handleButtonClick}
         theme={BUTTON_THEME.DARK}
       >
         {text('Label', 'Button Label')}
-      </FilterButton>
+      </FilterButtonToggle>
     </ButtonContainer>
   );
 }
@@ -248,15 +277,14 @@ export function DarkFilterButtonInactive() {
 export function DarkFilterButtonActive() {
   return (
     <ButtonContainer theme={BUTTON_THEME.DARK}>
-      <FilterButton
-        hasDropDown={boolean('Drop down', false)}
+      <FilterButtonToggle
         isActive
         isDisabled={boolean('Disabled', false)}
         onClick={handleButtonClick}
         theme={BUTTON_THEME.DARK}
       >
         {text('Label', 'Button Label')}
-      </FilterButton>
+      </FilterButtonToggle>
     </ButtonContainer>
   );
 }
@@ -264,38 +292,37 @@ export function DarkFilterButtonActive() {
 export function OrangeFilterButtonInactive() {
   return (
     <ButtonContainer theme={BUTTON_THEME.ORANGE}>
-      <FilterButton
-        hasDropDown={boolean('Drop down', false)}
+      <FilterButtonToggle
         isActive={false}
         isDisabled={boolean('Disabled', false)}
         onClick={handleButtonClick}
         theme={BUTTON_THEME.ORANGE}
       >
         {text('Label', 'Button Label')}
-      </FilterButton>
+      </FilterButtonToggle>
     </ButtonContainer>
   );
 }
 
-export function OrangeFilterButtonActive() {
+export function OrangeFilterButtonWithDropdownActive() {
   return (
     <ButtonContainer theme={BUTTON_THEME.ORANGE}>
       <FilterButton
-        hasDropDown={boolean('Drop down', false)}
+        isDropdownOpen={boolean('Drop down', false)}
         isActive
         isDisabled={boolean('Disabled', false)}
         onClick={handleButtonClick}
         theme={BUTTON_THEME.ORANGE}
+        label={text('Label', 'Button Label')}
       >
-        {text('Label', 'Button Label')}
+        <div css={styles.popup}>Popup content</div>
       </FilterButton>
     </ButtonContainer>
   );
 }
 
-export function FilterButtonWithToggleState() {
+export function FilterButtonWithDropdownState() {
   const [isActive, setIsActive] = useState(false);
-
   const theme = select(
     'Theme',
     [BUTTON_THEME.LIGHT, BUTTON_THEME.DARK, BUTTON_THEME.ORANGE],
@@ -305,15 +332,16 @@ export function FilterButtonWithToggleState() {
   return (
     <ButtonContainer theme={theme}>
       <FilterButton
-        hasDropDown={boolean('Drop down', false)}
+        isDropdownOpen={isActive}
         isActive={isActive}
         isDisabled={boolean('Disabled', false)}
         onClick={function () {
           setIsActive(!isActive);
         }}
         theme={theme}
+        label={text('Label', 'Button Label')}
       >
-        {text('Label', 'Button Label')}
+        {isActive && <div css={styles.popup}>Popup content</div>}
       </FilterButton>
     </ButtonContainer>
   );

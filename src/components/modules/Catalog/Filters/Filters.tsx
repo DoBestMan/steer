@@ -1,6 +1,7 @@
-import { ReactNode, useState } from 'react';
+import { useState } from 'react';
 
 import FilterButton from '~/components/global/Button/FilterButton';
+import FilterButtonToggle from '~/components/global/Button/FilterButtonToggle';
 import { BUTTON_THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
@@ -12,14 +13,12 @@ import FilterPopup from './Popup/FilterPopup';
 
 interface Props {
   activeFilters: string[];
-  children: ReactNode;
   isAdvancedView?: boolean;
   toggleFilter: (filter: string) => void;
 }
 
 export default function Filters({
   activeFilters,
-  children,
   isAdvancedView,
   toggleFilter,
 }: Props) {
@@ -32,50 +31,53 @@ export default function Filters({
       setSelectingFilter(label);
     };
   }
-  function onClick(filter: string) {
+  function onFilterClick(filter: string) {
     return () => {
       toggleFilter(filter);
     };
   }
   return (
-    <div css={styles.root}>
+    <>
       <p css={[styles.filterLabel, isAdvancedView && hStyles.textAdvanced]}>
         {ui('catalog.header.filterLabel')}:
       </p>
-      {children}
-      <ul css={styles.filterList}>
-        {/* schema will change */}
-        {mockFilters.map((filter) => {
-          const label = filter.label;
-          const hasPopup =
-            filter.type !== FilterContentTypes.CatalogFilterToggle;
-          return (
-            <div css={styles.button} key={label}>
+      <div css={styles.listContainer}>
+        <div css={[styles.filterList, selectingFilter && styles.disableScroll]}>
+          {mockFilters.map(({ label, ...filter }) => {
+            const isActive = activeFilters.includes(label);
+            return filter.type !== FilterContentTypes.CatalogFilterToggle ? (
+              // filter with dropdown
               <FilterButton
-                isActive={
-                  activeFilters.includes(label) || label === selectingFilter
-                }
-                hasDropDown={hasPopup}
-                onClick={
-                  hasPopup ? selectFilterDropdown(label) : onClick(label)
-                }
+                css={styles.button}
+                key={label}
+                label={label}
+                isDropdownOpen={label === selectingFilter}
+                isActive={isActive}
+                onClick={selectFilterDropdown(label)}
                 theme={isAdvancedView ? BUTTON_THEME.DARK : BUTTON_THEME.ORANGE}
-                aria-expanded={hasPopup ? label === selectingFilter : undefined}
+                aria-expanded={label === selectingFilter}
               >
-                {label}
-              </FilterButton>
-              {hasPopup && (
                 <FilterPopup
                   isOpen={label === selectingFilter}
                   onClose={clearSelectingFilter}
-                  onSelectFilter={onClick(label)}
-                  filter={filter}
+                  onSelectFilter={onFilterClick(label)}
+                  filter={{ ...filter, label }}
                 />
-              )}
-            </div>
-          );
-        })}
-      </ul>
-    </div>
+              </FilterButton>
+            ) : (
+              <FilterButtonToggle
+                css={styles.button}
+                key={label}
+                isActive={isActive}
+                onClick={onFilterClick(label)}
+                theme={isAdvancedView ? BUTTON_THEME.DARK : BUTTON_THEME.ORANGE}
+              >
+                {label}
+              </FilterButtonToggle>
+            );
+          })}
+        </div>
+      </div>
+    </>
   );
 }

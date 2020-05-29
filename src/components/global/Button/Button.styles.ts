@@ -23,6 +23,16 @@ const styles = {
     opacity: CONSTANTS.OPACITY_DISABLED,
     pointerEvents: 'none',
   }),
+  filterButtonSelecting: css({
+    '&:hover, &:focus': {
+      backgroundColor: COLORS.DARK.GRAY_80,
+      borderColor: COLORS.GLOBAL.WHITE,
+    },
+    backgroundColor: COLORS.DARK.GRAY_80,
+    borderColor: COLORS.GLOBAL.WHITE,
+    color: COLORS.GLOBAL.WHITE,
+    pointerEvents: 'none',
+  }),
   filterIcon: css({
     marginLeft: CONSTANTS.ICON_SPACING,
   }),
@@ -122,10 +132,15 @@ const styles = {
           borderColor: COLORS.GLOBAL.BLACK,
         },
         '&:hover': {
-          borderColor: COLORS.LIGHT.GRAY_70,
+          borderColor: COLORS.ORANGE.SHADE_30,
+        },
+        // eslint-disable-next-line sort-keys
+        '&:active': {
+          backgroundColor: COLORS.ORANGE.TINT_30,
+          borderColor: COLORS.DARK.GRAY_80,
         },
         backgroundColor: COLORS.GLOBAL.ORANGE,
-        borderColor: COLORS.ORANGE.SHADE_30,
+        borderColor: COLORS.ORANGE.SHADE_15,
         color: COLORS.GLOBAL.WHITE,
       }),
     },

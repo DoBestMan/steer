@@ -1,14 +1,16 @@
 import { CSSObject } from '@emotion/core';
 
-import { COLORS, SPACING } from '~/lib/constants';
+import { COLORS, MQ, SPACING } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const styles: CSSObject = {
   button: {
-    ':not(:last-of-type)': {
-      marginRight: SPACING.SIZE_05,
-    },
+    marginRight: SPACING.SIZE_05,
     position: 'relative',
+    whiteSpace: 'nowrap',
+  },
+  disableScroll: {
+    overflowX: 'hidden',
   },
   filterLabel: [
     typography.bodyCopy,
@@ -19,10 +21,33 @@ const styles: CSSObject = {
   ],
   filterList: {
     display: 'flex',
-    whiteSpace: 'nowrap',
+    width: 'fit-content',
+    [MQ.S]: {
+      padding: `0 ${SPACING.SIZE_20}px`,
+    },
+    [MQ.M]: {
+      padding: `0 ${SPACING.SIZE_40}px`,
+    },
+    [MQ.L]: {
+      padding: `0 ${SPACING.SIZE_60}px`,
+    },
   },
-  root: {
-    position: 'relative',
+  listContainer: {
+    '::-webkit-scrollbar': {
+      opacity: 0,
+      height: 0,
+    },
+    boxSizing: 'content-box',
+    overflowX: 'auto',
+    [MQ.S]: {
+      margin: `0 ${-SPACING.SIZE_20}px`,
+    },
+    [MQ.M]: {
+      margin: `0 ${-SPACING.SIZE_40}px`,
+    },
+    [MQ.L]: {
+      margin: `0 ${-SPACING.SIZE_60}px`,
+    },
   },
 };
 

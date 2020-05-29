@@ -1,5 +1,5 @@
 import { boolean, text } from '@storybook/addon-knobs';
-import { useState } from 'react';
+import { ReactNode, useState } from 'react';
 
 import Header from './Header';
 
@@ -24,6 +24,14 @@ const defaultTitle = (
   </>
 );
 
+function HeaderContainer({ children }: { children: ReactNode }) {
+  const styles = {
+    root: {
+      height: '150vh', // allow for scroll if popup is open
+    },
+  };
+  return <div css={styles.root}>{children}</div>;
+}
 export function HeaderWithKnobs() {
   const [isAdvancedView, setIsAdvancedView] = useState(false);
   const isInternal = boolean('Internal', defaultProps.isInternal);
@@ -53,19 +61,21 @@ export function HeaderWithKnobs() {
   const location = text('Location', defaultProps.location);
 
   return (
-    <Header
-      {...{
-        activeFilters,
-        isAdvancedView,
-        isInternal,
-        location,
-        onToggle: () => setIsAdvancedView(!isAdvancedView),
-        rearTireSize,
-        tireSize,
-        title: titleEl,
-        toggleFilter,
-      }}
-    />
+    <HeaderContainer>
+      <Header
+        {...{
+          activeFilters,
+          isAdvancedView,
+          isInternal,
+          location,
+          onToggle: () => setIsAdvancedView(!isAdvancedView),
+          rearTireSize,
+          tireSize,
+          title: titleEl,
+          toggleFilter,
+        }}
+      />
+    </HeaderContainer>
   );
 }
 
@@ -86,14 +96,16 @@ export function Main() {
     setActiveFilters([...activeFilters, filter]);
   }
   return (
-    <Header
-      {...defaultProps}
-      toggleFilter={toggleFilter}
-      activeFilters={activeFilters}
-      isAdvancedView={isAdvancedView}
-      onToggle={toggleView}
-      title={defaultTitle}
-    />
+    <HeaderContainer>
+      <Header
+        {...defaultProps}
+        toggleFilter={toggleFilter}
+        activeFilters={activeFilters}
+        isAdvancedView={isAdvancedView}
+        onToggle={toggleView}
+        title={defaultTitle}
+      />
+    </HeaderContainer>
   );
 }
 
@@ -114,15 +126,17 @@ export function MainWithoutRearTireSize() {
     setActiveFilters([...activeFilters, filter]);
   }
   return (
-    <Header
-      {...defaultProps}
-      activeFilters={activeFilters}
-      toggleFilter={toggleFilter}
-      isAdvancedView={isAdvancedView}
-      onToggle={toggleView}
-      rearTireSize={undefined}
-      title={defaultTitle}
-    />
+    <HeaderContainer>
+      <Header
+        {...defaultProps}
+        activeFilters={activeFilters}
+        toggleFilter={toggleFilter}
+        isAdvancedView={isAdvancedView}
+        onToggle={toggleView}
+        rearTireSize={undefined}
+        title={defaultTitle}
+      />
+    </HeaderContainer>
   );
 }
 
@@ -144,15 +158,17 @@ export function Internal() {
   }
 
   return (
-    <Header
-      {...defaultProps}
-      activeFilters={activeFilters}
-      toggleFilter={toggleFilter}
-      isInternal
-      isAdvancedView={isAdvancedView}
-      onToggle={toggleView}
-      title="Winter Tires"
-    />
+    <HeaderContainer>
+      <Header
+        {...defaultProps}
+        activeFilters={activeFilters}
+        toggleFilter={toggleFilter}
+        isInternal
+        isAdvancedView={isAdvancedView}
+        onToggle={toggleView}
+        title="Winter Tires"
+      />
+    </HeaderContainer>
   );
 }
 
@@ -171,13 +187,15 @@ export function AdvancedView() {
     setActiveFilters([...activeFilters, filter]);
   }
   return (
-    <Header
-      {...defaultProps}
-      activeFilters={activeFilters}
-      toggleFilter={toggleFilter}
-      onToggle={toggleView}
-      title={defaultTitle}
-      isAdvancedView={isAdvancedView}
-    />
+    <HeaderContainer>
+      <Header
+        {...defaultProps}
+        activeFilters={activeFilters}
+        toggleFilter={toggleFilter}
+        onToggle={toggleView}
+        title={defaultTitle}
+        isAdvancedView={isAdvancedView}
+      />
+    </HeaderContainer>
   );
 }
