@@ -10,7 +10,7 @@ import { ui } from '~/lib/utils/ui-dictionary';
 import { layout } from '~/styles/layout.styles';
 
 import styles from './Nav.styles';
-import NavSearchButton from './NavSearchBar/NavSearchButton';
+import NavSearchButton from './NavSearchButton/NavSearchButton';
 
 interface Props {
   isHomepage?: boolean;

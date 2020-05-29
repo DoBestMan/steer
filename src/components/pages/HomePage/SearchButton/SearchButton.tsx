@@ -4,7 +4,7 @@ import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
-import { ui } from '~/lib/utils/ui-dictionary';
+import SearchLabel from '~/components/modules/Search/SearchLabel/SearchLabel';
 import { typography } from '~/styles/typography.styles';
 
 import styles from './SearchButton.styles';
@@ -38,7 +38,7 @@ function SearchButton({ onClick }: Props) {
             gridColumnL="3/14"
             gridColumnXL="3/14"
           >
-            {ui('common.header.searchShortLabel')}
+            <SearchLabel />
           </GridItem>
         </Grid>
       </button>

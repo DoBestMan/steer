@@ -14,7 +14,6 @@ import GridItem from '~/components/global/Grid/GridItem';
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Link from '~/components/global/Link/Link';
-import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { KEYCODES, LINK_THEME, LINK_TYPES } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
@@ -31,6 +30,7 @@ import { initialSearchCategories } from './Search.mocks';
 import { getSearchResultComponent } from './Search.utils';
 import styles from './SearchAutocomplete.styles';
 import SearchInput from './SearchInput';
+import SearchLabel from './SearchLabel/SearchLabel';
 
 const CONSTANTS = {
   DEFAULT_SELECTED_ITEM_INDEX: [0, -1],
@@ -80,7 +80,6 @@ function SearchAutocomplete({
     selectedItemIndex,
     setSelectedItemIndex,
   } = useAutocompleteSelectedItem(results);
-  const { lessThan } = useBreakpoints();
 
   const isInputEmpty = query.length < 1;
   const hasResults = results.length > 0;
@@ -262,11 +261,7 @@ function SearchAutocomplete({
                   ? clearPrimaryInputComponent
                   : undefined
               }
-              label={
-                lessThan.L
-                  ? ui('search.searchAutocompleteLabelSM')
-                  : ui('search.searchAutocompleteLabelLG')
-              }
+              label={<SearchLabel />}
               onChange={handleOnChange}
               onClearInputClick={handleCancelSelection}
               onFocus={onInputFocus}

@@ -4,7 +4,17 @@ import { useWindowSize } from '~/hooks/useWindowSize';
 import { Breakpoint, BREAKPOINT_SIZES, BREAKPOINTS } from '~/lib/constants';
 import { getBreakpoint } from '~/lib/utils/breakpoints';
 
-export function useBreakpoints() {
+type UseBreakpointsProps = {
+  bk: Breakpoint;
+  greaterThan: { [key: string]: boolean };
+  is: {
+    [key: string]: boolean;
+  };
+  isMobile: boolean;
+  lessThan: { [key: string]: boolean };
+};
+
+export function useBreakpoints(): UseBreakpointsProps {
   const windowSize = useWindowSize();
   const [bk, setBK] = useState<Breakpoint>(BREAKPOINT_SIZES.S);
   useEffect(() => {

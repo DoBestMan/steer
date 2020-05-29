@@ -2,6 +2,7 @@ import {
   ChangeEvent,
   forwardRef,
   KeyboardEvent,
+  ReactNode,
   useEffect,
   useState,
 } from 'react';
@@ -10,11 +11,12 @@ import { randomString } from '~/lib/utils/string';
 
 import { SearchInputEnum } from './Search.constants';
 import styles from './SearchInput.styles';
+import SearchLabel from './SearchLabel/SearchLabel';
 
 interface AutocompleteInputProps {
   activeInputType: SearchInputEnum;
   clearInputComponent?: string | JSX.Element;
-  label?: string;
+  label?: ReactNode;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   onClearInputClick?: () => void;
   onFocus: (inputType: SearchInputEnum) => void;
@@ -65,7 +67,7 @@ const SearchInput = forwardRef<HTMLInputElement, AutocompleteInputProps>(
             css={[styles.label, isLabelHidden && styles.labelHidden]}
             id={labelID}
           >
-            {label}
+            <SearchLabel />
           </label>
         )}
         <div css={styles.comboboxWrapper}>

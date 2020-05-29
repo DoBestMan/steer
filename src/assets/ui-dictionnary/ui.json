@@ -17,10 +17,6 @@
       "close": "Close {{moduleName}}",
       "open": "open {{moduleName}}"
     },
-    "header": {
-      "searchLongLabel": "Search by vehicle, tire size or brand",
-      "searchShortLabel": "Search by vehicle"
-    },
     "toast": {
       "close": "Close notification"
     }
@@ -110,9 +106,7 @@
     "rearTire": "Rear:",
     "removeRearTire": "Remove",
     "searchBy": "Search by",
-    "searchByTireSize": "Search by tire size",
-    "searchAutocompleteLabelSM": "Search by vehicle",
-    "searchAutocompleteLabelLG": "Search by vehicle, tire size or brand",
+    "searchAutocompleteLabel": "Search by vehicle, tire size or brand",
     "searchCategories": {
       "vehicle": "Vehicle",
       "tireSize": "Tire size",

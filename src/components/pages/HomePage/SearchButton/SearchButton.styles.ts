@@ -4,10 +4,8 @@ import { COLORS, MQ, TIME } from '~/lib/constants';
 
 export const CONSTANTS = {
   CONTENT_PEEKING_AMOUNT: {
-    /* eslint-disable sort-keys */
     S: 50,
     M: 30,
-    /* eslint-enable sort-keys */
   },
   ICON_SIZE_L: 34,
   PADDING: {
@@ -62,7 +60,15 @@ const styles: CSSObject = {
     gridRow: 1,
   },
   label: {
+    height: CONSTANTS.ICON_SIZE_L,
     textAlign: 'left',
+
+    // the letter "i" gets cut off from the overflow: hidden
+    [MQ.L]: {
+      '> span': {
+        height: 38,
+      },
+    },
   },
 };
 
