@@ -1,37 +1,48 @@
-import { css } from '@emotion/core';
+import { CSSObject } from '@emotion/core';
 
-import { BORDERS, COLORS, SPACING } from '~/lib/constants';
+import { BORDERS, COLORS, MQ, SPACING } from '~/lib/constants';
+import { typography } from '~/styles/typography.styles';
 
-const styles = {
-  container: css({
+const styles: CSSObject = {
+  container: {
     borderTop: BORDERS.SOLID_GRAY_80_1PX,
     display: 'flex',
     justifyContent: 'space-between',
     paddingBottom: SPACING.SIZE_10,
     paddingTop: SPACING.SIZE_40,
-  }),
-  copy: css({
-    '&::after': {
-      content: 'close-quote',
+  },
+  copy: [
+    typography.smallCopy,
+    {
+      '&::after': {
+        content: 'close-quote',
+      },
+      '&::before': {
+        content: 'open-quote',
+      },
+      color: COLORS.DARK.GRAY_40,
+      marginTop: SPACING.SIZE_20,
+      quotes: '"“" "”" "‘" "’"',
+      whiteSpace: 'nowrap',
+
+      [MQ.L]: typography.bodyCopy,
     },
-    '&::before': {
-      content: 'open-quote',
-    },
-    color: COLORS.DARK.GRAY_40,
-    marginTop: SPACING.SIZE_20,
-    quotes: '"“" "”" "‘" "’"',
-  }),
-  item: css({
+  ],
+  item: {
     '&:not(last-child)': {
-      marginRight: SPACING.SIZE_20,
+      marginRight: SPACING.SIZE_15,
     },
     textAlign: 'center',
-  }),
-  logo: css({
-    height: 30,
+  },
+  logo: {
+    height: 20,
     margin: 'auto',
     width: 'auto',
-  }),
+
+    [MQ.L]: {
+      height: 25,
+    },
+  },
 };
 
 export default styles;
