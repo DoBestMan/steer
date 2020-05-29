@@ -1,9 +1,11 @@
+import { MouseEvent } from 'react';
+
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 
-import FilterChecklist from './Content/FilterChecklist';
-import FilterChecklistLarge from './Content/FilterChecklistLarge';
-import FilterRange from './Content/FilterRange';
-import FilterSort from './Content/FilterSort';
+import FilterChecklist from '../Content/FilterChecklist';
+import FilterChecklistLarge from '../Content/FilterChecklistLarge';
+import FilterRange from '../Content/FilterRange';
+import FilterSort from '../Content/FilterSort';
 import {
   CatalogFilterChecklist,
   CatalogFilterChecklistLarge,
@@ -11,14 +13,14 @@ import {
   CatalogFilterSort,
   CatalogFilterTypes,
   FilterContentTypes,
-} from './Filter.types';
-import FilterDropdown from './Popup/Dropdown';
-import FilterModal from './Popup/FilterModal';
+} from '../Filter.types';
+import FilterDropdown from './Dropdown';
+import FilterModal from './FilterModal';
 
 export interface PopupProps {
   isOpen: boolean;
   onClose: () => void;
-  onSelectFilter: () => void;
+  onSelectFilter: (e: MouseEvent) => void;
 }
 
 interface Props extends PopupProps {

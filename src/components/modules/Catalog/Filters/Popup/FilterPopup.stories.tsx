@@ -5,9 +5,9 @@ import { useState } from 'react';
 import Button from '~/components/global/Button/Button';
 import { typography } from '~/styles/typography.styles';
 
-import { FilterContentTypes } from './Filter.types';
+import { FilterContentTypes } from '../Filter.types';
+import { filterTypeMap, filterTypeSelect } from '../Filters.mocks';
 import FilterPopup from './FilterPopup';
-import { filterTypeMap, filterTypeSelect } from './Filters.mocks';
 
 export default {
   component: FilterPopup,

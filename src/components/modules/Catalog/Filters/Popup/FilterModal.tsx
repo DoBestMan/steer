@@ -8,8 +8,8 @@ import { COLORS, LINK_THEME, TIME, Z_INDEX } from '~/lib/constants';
 import { bindAppElement } from '~/lib/utils/modal';
 import { ui } from '~/lib/utils/ui-dictionary';
 
+import styles, { overlayBkStyles } from './FilterModal.styles';
 import { PopupProps } from './FilterPopup';
-import styles, { overlayBkStyles } from './Popup/FilterModal.styles';
 
 bindAppElement();
 

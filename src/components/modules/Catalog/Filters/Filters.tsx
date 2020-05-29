@@ -6,9 +6,9 @@ import { ui } from '~/lib/utils/ui-dictionary';
 
 import hStyles from '../Header.styles';
 import { FilterContentTypes } from './Filter.types';
-import FilterPopup from './FilterPopup';
 import mockFilters from './Filters.mocks';
 import styles from './Filters.styles';
+import FilterPopup from './Popup/FilterPopup';
 
 interface Props {
   activeFilters: string[];
