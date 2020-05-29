@@ -8,6 +8,7 @@ const styles: CSSObject = {
     '&:not(:last-child)': {
       marginRight: SPACING.SIZE_10,
     },
+    backgroundColor: 'transparent',
   },
   buttonContainer: {
     display: 'flex',
