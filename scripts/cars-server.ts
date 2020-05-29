@@ -35,8 +35,13 @@ import { createFile, lineBreak } from './utils';
       const filePath = path.resolve(__dirname, `../public${carFolder}/${file}`);
 
       let contents = fs.readFileSync(filePath, 'utf8');
-      contents = contents.replace(' id=', ' class=');
-      fs.writeFileSync(filePath, contents);
+      contents = contents.replace(/id=/g, ' class=');
+
+      try {
+        fs.writeFileSync(filePath, contents);
+      } catch (e) {
+        console.log('error writing file', filePath);
+      }
 
       const carPath = `${carFolder}/${file}`;
       aCarPath.push(carPath);
@@ -154,21 +159,49 @@ import { createFile, lineBreak } from './utils';
 
   const getCarDetailConstantsContent = (): string => {
     const doNotEditWarning = 'DO NOT MANUALLY EDIT THIS FILE';
-    const fileDescription = `// ${doNotEditWarning}, this file is auto-generated.${lineBreak}// To add new icons place svg file in /src/assets/icons${lineBreak}// and run 'yarn run generate-svg-sprite'`;
+    const fileDescription = `// ${doNotEditWarning}, this file is auto-generated.${lineBreak}// To add a new car, add the car svg file in /src/assets/cars${lineBreak}// and run 'yarn run generate-cars-constants'`;
 
-    const importTypes = 'import { Cars, CarDetail } from "./Car.types";';
+    const importTypes = 'import { CarDetail } from "./Car.types";';
+    const importEnums = 'import { Cars } from "./Car.enums";';
 
-    const carsConstant = `${lineBreak}export const CAR_DETAILS: Record<Cars, CarDetail> = ${JSON.stringify(
+    const carsConstant = `${lineBreak}export const CARS: Record<string, string> = { ${Object.keys(
+      carDetailsOrdered,
+    ).map((key) => {
+      // generate CONSTANT_NAME
+      const keyStr = key.replace('car--', '').replace(/-/g, '_').toUpperCase();
+      return `${keyStr}: Cars['${key}']`;
+    })} }`;
+
+    const carsDetailsConstant = `${lineBreak}export const CAR_DETAILS: Record<Cars, CarDetail> = ${JSON.stringify(
       carDetailsOrdered,
     )}`;
 
-    return `${fileDescription}${lineBreak}${lineBreak}${importTypes}${lineBreak}${lineBreak}${carsConstant}${lineBreak}${lineBreak}${lineBreak}${lineBreak}${lineBreak}${fileDescription}${lineBreak}`;
+    return `${fileDescription}${lineBreak}${lineBreak}${importTypes}${lineBreak}${importEnums}${lineBreak}${lineBreak}${carsConstant}${lineBreak}${lineBreak}${carsDetailsConstant}${lineBreak}${lineBreak}${lineBreak}${lineBreak}${lineBreak}${fileDescription}${lineBreak}`;
+  };
+
+  const getCarsEnumContent = (): string => {
+    const doNotEditWarning = 'DO NOT MANUALLY EDIT THIS FILE';
+    const fileDescription = `// ${doNotEditWarning}, this file is auto-generated.${lineBreak}// To add a new car, add the car svg file in /src/assets/cars${lineBreak}// and run 'yarn run generate-cars-constants'`;
+
+    const carsConstant = `${lineBreak}export enum Cars { ${Object.keys(
+      carDetailsOrdered,
+    ).map((key) => {
+      return `'${key}' = '${key}'`;
+    })} }`;
+
+    return `${fileDescription}${lineBreak}${lineBreak}${carsConstant}${lineBreak}${lineBreak}${lineBreak}${lineBreak}${lineBreak}${fileDescription}${lineBreak}`;
   };
 
   createFile(
     'src/components/global/Car/',
     'CarDetails.constants.ts',
     getCarDetailConstantsContent(),
+  );
+
+  createFile(
+    'src/components/global/Car/',
+    'Car.enums.ts',
+    getCarsEnumContent(),
   );
 
   process.exit(0);

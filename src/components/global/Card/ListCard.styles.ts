@@ -46,7 +46,7 @@ const styles = {
       right: SPACING.SIZE_30,
 
       svg: {
-        transform: 'scale3d(0.11, 0.11, 0.11)',
+        transform: 'scale3d(0.4, 0.4, 0.4)',
         transformOrigin: '100% 100%',
       },
     },

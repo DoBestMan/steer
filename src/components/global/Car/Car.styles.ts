@@ -1,5 +1,7 @@
 import { css, keyframes } from '@emotion/core';
 
+import { MQ } from '~/lib/constants';
+
 export const rotateWheel = keyframes({
   '0%': {
     transform: 'rotateZ(0deg)',
@@ -30,16 +32,29 @@ export const styles = {
       // set just in case
       '.solid-body-background *': {
         fillOpacity: 0,
+        opacity: 0,
       },
 
       height: 'auto',
       width: '100%',
     },
   }),
+  scaleAcrossBreakpoints: css({
+    transformOrigin: '100% 100%',
+
+    [MQ.M]: {
+      transform: 'scale3d(1.5, 1.5, 1.5)',
+    },
+
+    [MQ.L]: {
+      transform: 'scale3d(1.7, 1.7, 1.7)',
+    },
+  }),
   solid: css({
     svg: {
       '.solid-body-background *': {
         fillOpacity: 1,
+        opacity: 1,
       },
     },
   }),

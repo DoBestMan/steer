@@ -1,6 +1,6 @@
 import { select, text } from '@storybook/addon-knobs';
 
-import { Cars } from '~/components/global/Car/Car.types';
+import { Cars } from '~/components/global/Car/Car.enums';
 import { Sceneries } from '~/components/global/Scenery/Scenery.types';
 import { Weathers } from '~/components/global/Weather/Weather.types';
 

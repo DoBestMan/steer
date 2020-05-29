@@ -2,24 +2,6 @@ import { css } from '@emotion/core';
 
 import { COLORS, GRID_MARGIN, MQ, RADIUS, SPACING } from '~/lib/constants';
 
-const CONSTANTS = {
-  CONTAINER_BG_BOTTOM: {
-    S: 20,
-    M: 50,
-    XL: 25,
-  },
-  CONTAINER_BG_HEIGHT: {
-    S: 106,
-    M: 175,
-    XL: 206,
-  },
-  VEHICLE_WIDTH: {
-    S: 128,
-    M: 223,
-    L: 288,
-  },
-};
-
 const styles = {
   container: css({
     backgroundColor: COLORS.LIGHT.OFF_WHITE,
@@ -69,15 +51,12 @@ const styles = {
     bottom: 0,
     position: 'absolute',
     right: GRID_MARGIN.S,
-    width: CONSTANTS.VEHICLE_WIDTH.S,
 
     [MQ.M]: {
       right: GRID_MARGIN.M,
-      width: CONSTANTS.VEHICLE_WIDTH.M,
     },
     [MQ.L]: {
       right: GRID_MARGIN.L,
-      width: CONSTANTS.VEHICLE_WIDTH.L,
     },
     [MQ.XL]: {
       right: GRID_MARGIN.XL,

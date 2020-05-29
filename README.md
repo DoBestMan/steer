@@ -157,11 +157,14 @@ Each car SVG file should:
   - `<g class="solid-body-background">`: Group containing a transparent path for the hero homepage animation
 - be correctly named, based on the `id` from the list of assets [here](https://docs.google.com/spreadsheets/d/1kjsrjn0Y-dQAo_ahsUV-jxhk58JpxPmHUNkiwCI-lw8/edit#gid=0)
 
+Note: Don't worry if you have `id` instead of `class`, the script converts every instance of `id=...` to `class="...` on every SVG.
+
 If you need to add more cars, please:
 
 - Make sure that the previous requirements are met
 - add your SVG car in `/public/static/assets/cars`. Make sure the filename is respecting the kebab-case format, based on the `id` of the car.
 - run `yarn generate-cars-constants`.
+- Update `CAR_DETAILS_TYPES` in `~/components/global/Car/Car.constants.ts` and add the new type of the added cars
 - You're all set, commit your change and voilà!
 
 ## Deploying

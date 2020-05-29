@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import SVGInline from 'react-svg-inline';
 
-import { Cars } from './Car.types';
+import { Cars } from './Car.enums';
 
 type Cache = {
   [key: string]: string;

@@ -1,23 +1,22 @@
 import styled from '@emotion/styled';
 
-import { MQ } from '~/lib/constants';
-
-import { DEFAULT_CAR, VEHICLE_SCALE_SMALL } from './Car.constants';
+import { DEFAULT_CAR } from './Car.constants';
+import { Cars } from './Car.enums';
 import RenderCar from './Car.renders';
 import { styles } from './Car.styles';
-import { Cars, CarSizes, instanceOfCars } from './Car.types';
+import { instanceOfCars } from './Car.utils';
 import { CAR_DETAILS } from './CarDetails.constants';
 
 type Props = {
   // supports string in case wrong id is given, still renders a default car
   animateWheel?: boolean;
   carId: Cars | string;
-  size?: CarSizes;
+  scaleAcrossBreakpoints?: boolean;
   solid?: boolean;
 };
 
 function styledCarContainer(props: Props) {
-  const { carId, size } = props;
+  const { carId } = props;
 
   const carDetail = CAR_DETAILS[carId as Cars];
 
@@ -33,28 +32,18 @@ function styledCarContainer(props: Props) {
     },
   };
 
-  if (size !== 'small') {
-    return base;
-  }
-
-  return {
-    ...base,
-
-    width: VEHICLE_SCALE_SMALL.S * carDetail.width,
-
-    [MQ.M]: {
-      width: VEHICLE_SCALE_SMALL.M * carDetail.width,
-    },
-
-    [MQ.L]: {
-      width: VEHICLE_SCALE_SMALL.L * carDetail.width,
-    },
-  };
+  return base;
 }
 
 const CarContainer = styled('span')<Props>(styledCarContainer);
 
-function Car({ carId, size, solid, animateWheel, ...rest }: Props) {
+function Car({
+  carId,
+  solid,
+  scaleAcrossBreakpoints,
+  animateWheel,
+  ...rest
+}: Props) {
   // renders DEFAULT_CAR if "id" is not a known Car
   if (!instanceOfCars(carId)) {
     carId = DEFAULT_CAR;
@@ -63,11 +52,11 @@ function Car({ carId, size, solid, animateWheel, ...rest }: Props) {
   return (
     <CarContainer
       carId={carId}
-      size={size}
       css={[
         styles.container,
         solid && styles.solid,
         animateWheel && styles.animateWheel,
+        scaleAcrossBreakpoints && styles.scaleAcrossBreakpoints,
       ]}
       {...rest}
     >

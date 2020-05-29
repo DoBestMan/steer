@@ -4,7 +4,7 @@ import { Fragment } from 'react';
 import { typography } from '~/styles/typography.styles';
 
 import Car from './Car';
-import { Cars, CarSizes } from './Car.types';
+import { Cars } from './Car.enums';
 
 export default {
   component: Car,
@@ -13,12 +13,11 @@ export default {
 
 export function CarWithKnobs() {
   const car = select('Car', Object.keys(Cars), Object.keys(Cars)[0]);
-  const size = select('Size', Object.keys(CarSizes), CarSizes['none']);
   const animateWheel = boolean('animateWheel', false);
 
   return (
     <Fragment>
-      <Car animateWheel={animateWheel} carId={car} size={size as CarSizes} />
+      <Car animateWheel={animateWheel} carId={car} />
     </Fragment>
   );
 }
@@ -30,7 +29,7 @@ export function AllCars() {
         return (
           <li key={car}>
             <p css={typography.primaryHeadline}>{car}</p>
-            <Car carId={car} size={CarSizes.small} />
+            <Car carId={car} />
           </li>
         );
       })}

@@ -1,6 +1,5 @@
 import Car from '~/components/global/Car/Car';
-import { CAR_SIZES } from '~/components/global/Car/Car.constants';
-import { Cars } from '~/components/global/Car/Car.types';
+import { Cars } from '~/components/global/Car/Car.enums';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import Markdown from '~/components/global/Markdown/Markdown';
@@ -56,8 +55,8 @@ function HomeHeader({
       <Car
         solid
         animateWheel
+        scaleAcrossBreakpoints
         carId={carId}
-        size={CAR_SIZES.SMALL}
         css={styles.vehicle}
       />
     </div>
