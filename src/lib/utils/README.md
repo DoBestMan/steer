@@ -84,3 +84,25 @@ function HomePage() {
   );
 }
 ```
+
+## ui-jsx-dictionary
+
+Similiar to `ui()`, use `uiJSX()` to be able to interpolate a JSX value.
+
+Note: React needs a `key` prop.
+
+```jsx
+import { uiJSX } from 'utils/ui-jsx-dictionary';
+
+function HomePage() {
+  return (
+    <div>
+      <p>
+        {uiJSX('homepage.anInterpolation', {
+          interpolation: <p key={'a-key'}>Interpolation</p>,
+        })}
+      </p>
+    </div>
+  );
+}
+```

@@ -1,27 +1,51 @@
-import { doubleBrackets } from './regex';
-import { sanitizeHTML } from './sanitizer';
 import { InterpolationType, UIData, UIType } from './ui-dictionary.common';
 
-function interpolationFn(
+function interpolationJSXFn(
   templateString: string,
   templateVars: InterpolationType,
-) {
-  return templateString.replace(doubleBrackets, function (n: string): string {
-    let replaced: string = n;
+): JSX.Element {
+  const valuesInTemplate = templateString.match(/{{(.*?)}}/g);
 
-    for (const [key, value] of Object.entries(templateVars)) {
-      // Unescape: dangerous!
-      if (`{{- ${key}}}` === n) {
-        replaced = String(value);
-      }
-      // Should sanitize by default
-      else if (`{{${key}}}` === n) {
-        replaced = sanitizeHTML(String(value));
-      }
-    }
+  if (!valuesInTemplate || !valuesInTemplate.length) {
+    return <> {templateString} </>;
+  }
 
-    return replaced;
+  const aSnippet: Array<string | number | JSX.Element> = [];
+  let currentIdx = 0;
+
+  valuesInTemplate?.forEach((key) => {
+    const idx = templateString.indexOf(key);
+    const idxEnd = idx + key.length;
+
+    // add previous snippet
+    aSnippet.push(templateString.substr(currentIdx, idx - currentIdx));
+
+    // clear key
+    key = key
+      .replace('{{-', '')
+      .replace('{{', '')
+      .replace('}}', '')
+      .replace(/ /g, '');
+
+    // add value
+    aSnippet.push(templateVars[key]);
+
+    // update currentIdx
+    currentIdx = idxEnd;
   });
+
+  // finish the sentence
+  if (currentIdx < templateString.length) {
+    aSnippet.push(templateString.substr(currentIdx));
+  }
+
+  return (
+    <>
+      {aSnippet.map((item) => {
+        return item;
+      })}
+    </>
+  );
 }
 
 /*
@@ -30,10 +54,10 @@ function interpolationFn(
  * Use ui('path.to.key', {key: value}) to retrieve the computed value from the original json.
  * You can also have dynamic values with the {{value}} notation.
  */
-export function ui(
+export function uiJSX(
   key: string,
   interpolationParams?: InterpolationType,
-): string {
+): JSX.Element {
   const keys = key.split('.');
   let currentObject: UIType | {} | string | number = UIData;
   let answer: string = key;
@@ -58,10 +82,12 @@ export function ui(
     }
   });
 
+  let element = <> {answer} </>;
+
   // Interpolation
   if (typeof interpolationParams !== 'undefined') {
-    answer = interpolationFn(answer, interpolationParams);
+    element = interpolationJSXFn(answer, interpolationParams);
   }
 
-  return answer;
+  return element;
 }

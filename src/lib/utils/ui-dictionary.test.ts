@@ -1,4 +1,5 @@
-import { setUIData, ui, UIType } from '~/lib/utils/ui-dictionary';
+import { ui } from '~/lib/utils/ui-dictionary';
+import { setUIData, UIType } from '~/lib/utils/ui-dictionary.common';
 
 const UIData: UIType = {
   common: {
