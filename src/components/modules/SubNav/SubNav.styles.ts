@@ -159,7 +159,7 @@ const styles = {
       display: 'none',
     },
     [MQ.L]: {
-      background: COLORS.LIGHT.GRAY_20,
+      background: COLORS.LIGHT.GRAY_70,
       display: 'initial',
       height: '100%',
       left: 0,
