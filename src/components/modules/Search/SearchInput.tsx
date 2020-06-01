@@ -11,7 +11,6 @@ import { randomString } from '~/lib/utils/string';
 
 import { SearchInputEnum } from './Search.constants';
 import styles from './SearchInput.styles';
-import SearchLabel from './SearchLabel/SearchLabel';
 
 interface AutocompleteInputProps {
   activeInputType: SearchInputEnum;
@@ -67,7 +66,7 @@ const SearchInput = forwardRef<HTMLInputElement, AutocompleteInputProps>(
             css={[styles.label, isLabelHidden && styles.labelHidden]}
             id={labelID}
           >
-            <SearchLabel />
+            {label}
           </label>
         )}
         <div css={styles.comboboxWrapper}>

@@ -22,7 +22,7 @@ function NavSearchButton() {
       type="button"
     >
       <Icon css={styles.icon} name={ICONS.SEARCH} aria-hidden="true" />
-      <SearchLabel fullLabelAt={BREAKPOINT_SIZES.XL} />
+      <SearchLabel fullLabelAt={BREAKPOINT_SIZES.XL} hideOnSmallMedium />
     </button>
   );
 }

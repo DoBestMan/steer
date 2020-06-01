@@ -44,6 +44,7 @@ const styles: CSSObject = {
     typography.secondaryHeadline,
     css({
       color: COLORS.ORANGE.TINT_70,
+      height: '100%',
       left: 0,
       opacity: 1,
       pointerEvents: 'none',

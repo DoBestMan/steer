@@ -6,15 +6,19 @@ import styles from './SearchLabel.styles';
 
 interface Props {
   fullLabelAt?: Breakpoint;
+  hideOnSmallMedium?: boolean;
 }
 
-function SearchLabel({ fullLabelAt = BREAKPOINT_SIZES.L }: Props) {
+function SearchLabel({
+  fullLabelAt = BREAKPOINT_SIZES.L,
+  hideOnSmallMedium = false,
+}: Props) {
   const { lessThan } = useBreakpoints();
 
   if (lessThan[fullLabelAt]) {
     return (
       <span
-        css={styles.label}
+        css={[styles.label, hideOnSmallMedium && styles.hideOnSmallMedium]}
         aria-label={ui('search.searchAutocompleteLabel')}
       >
         {ui('search.searchBy')}

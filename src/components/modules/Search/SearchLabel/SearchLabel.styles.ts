@@ -1,5 +1,7 @@
 import { CSSObject, keyframes } from '@emotion/core';
 
+import { MQ } from '~/lib/constants';
+
 const searchScrollAnimation = keyframes({
   '0%, 23%': {
     opacity: 1,
@@ -31,6 +33,13 @@ const searchScrollAnimation = keyframes({
 const styles: CSSObject = {
   label: {
     height: 'inherit',
+  },
+  hideOnSmallMedium: {
+    display: 'none',
+
+    [MQ.L]: {
+      display: 'block',
+    },
   },
   scrollContainer: {
     alignSelf: 'flex-end',
