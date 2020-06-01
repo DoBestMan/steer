@@ -28,3 +28,25 @@ export const TIRE_SEARCH_MODAL_DATA = {
   steps: TIRE_SEARCH_STEPS,
   title: ui('search.findTireSize.title'),
 };
+
+const VEHICLE_TRIM_STEPS = [
+  ui('search.identifyTrim.stepOne'),
+  ui('search.identifyTrim.stepTwo'),
+  ui('search.identifyTrim.stepThree'),
+];
+
+export const VEHICLE_TRIM_MODAL_DATA = {
+  alternateSearch: {
+    title: ui('search.identifyTrim.alternateSearchTitle'),
+    copy: ui('search.identifyTrim.alternateSearchCopy'),
+    linkText: ui('search.identifyTrim.alternateSearchLink'),
+    linkURL: '#',
+  },
+  eyebrow: ui('search.identifyTrim.eyebrow'),
+  imageAlt: ui('search.identifyTrim.imageAlt'),
+  imageSrcLg: '/static/assets/search/vehicle-trim-lg.png',
+  imageSrcSm: '/static/assets/search/vehicle-trim-sm.png',
+  modalLabel: ui('search.identifyTrim.modalLabel'),
+  steps: VEHICLE_TRIM_STEPS,
+  title: ui('search.identifyTrim.title'),
+};

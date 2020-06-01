@@ -5,7 +5,10 @@ import { useState } from 'react';
 import Button from '~/components/global/Button/Button';
 
 import AdditionalInfoModal from './AdditionalInfoModal/AdditionalInfoModal';
-import { TIRE_SEARCH_MODAL_DATA } from './AdditionalInfoModal/AdditionalInfoModal.constants';
+import {
+  TIRE_SEARCH_MODAL_DATA,
+  VEHICLE_TRIM_MODAL_DATA,
+} from './AdditionalInfoModal/AdditionalInfoModal.constants';
 import Search from './Search';
 import { SearchStateEnum, SearchStateType } from './Search.constants';
 import {
@@ -158,6 +161,24 @@ export function TireSize() {
         isOpen={isOpen}
         onClose={toggleModal}
         {...TIRE_SEARCH_MODAL_DATA}
+      />
+    </>
+  );
+}
+
+export function VehicleTrim() {
+  const [isOpen, setIsOpen] = useState(true);
+  function toggleModal() {
+    setIsOpen(!isOpen);
+  }
+  return (
+    <>
+      <Button onClick={toggleModal}>Open modal</Button>
+      <AdditionalInfoModal
+        isCustomerServiceEnabled={boolean('Is Business Hours', true)}
+        isOpen={isOpen}
+        onClose={toggleModal}
+        {...VEHICLE_TRIM_MODAL_DATA}
       />
     </>
   );

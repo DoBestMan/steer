@@ -16,6 +16,8 @@ interface AlternateSearch {
   title: string;
 }
 
+type Step = JSX.Element | string;
+
 export interface AdditionalInfoModalContainerProps {
   alternateSearch: AlternateSearch;
   eyebrow: string;
@@ -25,7 +27,7 @@ export interface AdditionalInfoModalContainerProps {
   isOpen: boolean;
   modalLabel: string;
   onClose: () => void;
-  steps: JSX.Element[];
+  steps: Step[];
   title: string;
 }
 
@@ -76,13 +78,15 @@ function AdditionalInfoModal({
         <div css={styles.alternateSearch}>
           <h3 css={styles.alternateSearchTitle}>{alternateSearch.title}</h3>
           <p css={styles.alternateSearchCopy}>{alternateSearch.copy}</p>
-          <Link
-            href={alternateSearch.linkURL}
-            css={styles.alternateSearchLink}
-            theme={LINK_THEME.DARK}
-          >
-            {alternateSearch.linkText}
-          </Link>
+          <div css={styles.alternateSearchLinkWrapper}>
+            <Link
+              href={alternateSearch.linkURL}
+              css={styles.alternateSearchLink}
+              theme={LINK_THEME.DARK}
+            >
+              {alternateSearch.linkText}
+            </Link>
+          </div>
         </div>
         <div css={styles.supportPrompt}>
           <h3 css={styles.supportPromptTitle}>{ui('search.support')}</h3>

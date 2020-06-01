@@ -18,7 +18,11 @@ const styles: CSSObject = {
   alternateSearchLink: {
     span: {
       borderColor: COLORS.DARK.GRAY_40,
+      transition: `border-color ${TIME.MS100}ms ease, color ${TIME.MS100}ms ease`,
     },
+  },
+  alternateSearchLinkWrapper: {
+    display: 'flex',
   },
   alternateSearchTitle: [
     typography.tertiaryHeadline,
