@@ -53,6 +53,9 @@ function Modal({
           transition: `opacity ${TIME.MS350}ms ease-in-out ${TIME.MS100}ms`,
           zIndex: Z_INDEX.TOP,
         },
+        content: {
+          overflow: 'auto',
+        },
       }}
       css={[
         styles[rootStyles],

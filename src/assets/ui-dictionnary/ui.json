@@ -113,6 +113,19 @@
       "brand": "Brand",
       "popularTires": "Popular tires"
     },
-    "searchError": "Sorry, no matching results found."
+    "searchError": "Sorry, no matching results found.",
+    "support": "Need support?",
+    "findTireSize": {
+      "alternateSearchCopy": "If you know your vehicle year, make, model, and trim, we can match the size for you.",
+      "alternateSearchLink": "Search by vehicle",
+      "alternateSearchTitle": "Can’t look at your vehicle now?",
+      "eyebrow": "How to",
+      "imageAlt": "Close-up of tire",
+      "modalLabel": "How to find your tire size",
+      "stepOne": "Check {{link}} of your tire",
+      "stepTwo": "View {{link}} of the driver’s door",
+      "stepThree": "Check {{link}}",
+      "title": "Find your tire size"
+    }
   }
 }

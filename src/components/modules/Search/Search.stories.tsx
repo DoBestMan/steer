@@ -1,6 +1,11 @@
 import { action } from '@storybook/addon-actions';
+import { boolean } from '@storybook/addon-knobs';
 import { useState } from 'react';
 
+import Button from '~/components/global/Button/Button';
+
+import AdditionalInfoModal from './AdditionalInfoModal/AdditionalInfoModal';
+import { TIRE_SEARCH_MODAL_DATA } from './AdditionalInfoModal/AdditionalInfoModal.constants';
 import Search from './Search';
 import { SearchStateEnum, SearchStateType } from './Search.constants';
 import {
@@ -137,5 +142,23 @@ export function SearchBy() {
       pastSearches={[]}
       results={results}
     />
+  );
+}
+
+export function TireSize() {
+  const [isOpen, setIsOpen] = useState(true);
+  function toggleModal() {
+    setIsOpen(!isOpen);
+  }
+  return (
+    <>
+      <Button onClick={toggleModal}>Open modal</Button>
+      <AdditionalInfoModal
+        isCustomerServiceEnabled={boolean('Is Business Hours', true)}
+        isOpen={isOpen}
+        onClose={toggleModal}
+        {...TIRE_SEARCH_MODAL_DATA}
+      />
+    </>
   );
 }
