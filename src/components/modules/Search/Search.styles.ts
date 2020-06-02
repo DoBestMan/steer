@@ -28,7 +28,7 @@ const animationStyles: CSSObject = {
 const styles: CSSObject = {
   clearPastSearchesButton: {
     span: {
-      borderBottom: `2px dotted ${COLORS.ORANGE.SHADE_30}`,
+      borderBottom: `2px dotted ${COLORS.LIGHT.GRAY_70}`,
     },
   },
   clearPastSearchesWrapper: {
