@@ -51,10 +51,10 @@
     "useCurrentLocationLabel": "Use current location",
     "locationSupportError": "Sorry, but Geolocation is not supported by this browser.",
     "inputLabel": "Enter your zip code",
-    "errorLabel": "Oops. <br />Please enter a valid ZIP code.",
-    "locationInfo": "We use your location to provide accurate <br /> pricing and help you find local shops.",
+    "errorLabel": "Oops.\n\nPlease enter a valid ZIP code.",
+    "locationInfo": "We use your location to provide accurate\n\npricing and help you find local shops.",
     "learnMoreLabel": "Learn More",
-    "successMessage": "Your location has been updated to {{location}}. <br /> We ship free to this location",
+    "successMessage": "Your location has been updated to {{location}}.\n\nWe ship free to this location",
     "errorMessage": "Oops. Something went wrong, please try again.",
     "geolocationNoResults": "No results found",
     "geocoderFailure": "Geocoder failed due to: {{status}}"

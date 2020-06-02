@@ -23,7 +23,7 @@ export function HeaderWithKnobs() {
   const headerData = {
     body: text(
       'Description',
-      'Access over 55 million tires,<br />10,000 installation centers, <br />300 brands. <br />All in one place.',
+      'Access over 55 million tires,<br />10,000 installation centers,<br />300 brands.<br />All in one place.',
     ),
     eyebrow: text('Promo', 'Black Friday'),
     sceneryType: select(
@@ -31,7 +31,7 @@ export function HeaderWithKnobs() {
       Object.keys(Sceneries),
       Sceneries['scenery--rural'],
     ),
-    title: text('Title', 'Replacing <br /> tires is now <br />simple**.**'),
+    title: text('Title', 'Replacing<br />tires is now<br />simple**.**'),
     vehicleTypes: Object.keys(Cars),
     weatherType: select(
       'Weather ID',
@@ -50,7 +50,7 @@ export function DefaultHeader() {
   const headerData = {
     body: text(
       'Description',
-      'Access over 55 million tires,<br />10,000 installation centers, <br />300 brands. <br />All in one place.',
+      'Access over 55 million tires,<br />10,000 installation centers,<br />300 brands.<br />All in one place.',
     ),
     eyebrow: null,
     sceneryType: select(
@@ -58,7 +58,7 @@ export function DefaultHeader() {
       Object.keys(Sceneries),
       Sceneries['scenery--rural'],
     ),
-    title: text('Title', 'Replacing <br /> tires is now <br />simple**.**'),
+    title: text('Title', 'Replacing<br /> tires is now<br />simple**.**'),
     vehicleTypes: Object.keys(Cars),
     weatherType: select(
       'Weather ID',
@@ -77,7 +77,7 @@ export function PromoHeaderDefault() {
   const headerData = {
     body: text(
       'Description',
-      'Access over 55 million tires,<br />10,000 installation centers, <br />300 brands. <br />All in one place.',
+      'Access over 55 million tires,<br />10,000 installation centers,<br />300 brands.<br />All in one place.',
     ),
     eyebrow: text('Promo', 'Black Friday'),
     sceneryType: select(
@@ -85,7 +85,7 @@ export function PromoHeaderDefault() {
       Object.keys(Sceneries),
       Sceneries['scenery--rural'],
     ),
-    title: text('Title', 'Replacing <br /> tires is now <br />simple**.**'),
+    title: text('Title', 'Replacing<br /> tires is now<br />simple**.**'),
     vehicleTypes: Object.keys(Cars),
     weatherType: select(
       'Weather ID',

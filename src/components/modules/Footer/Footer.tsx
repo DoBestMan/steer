@@ -2,12 +2,12 @@ import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import Image from '~/components/global/Image/Image';
 import BaseLink from '~/components/global/Link/BaseLink';
+import EmailSupport from '~/components/modules/Support/EmailSupport';
+import PhoneSupport from '~/components/modules/Support/PhoneSupport';
+import SupportHeading from '~/components/modules/Support/SupportHeading';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
 
-import EmailSupport from '../Support/EmailSupport';
-import PhoneSupport from '../Support/PhoneSupport';
-import SupportHeading from '../Support/SupportHeading';
 import { data } from './Footer.data';
 import styles from './Footer.styles';
 import FooterLinkList from './FooterLinkList/FooterLinkList';

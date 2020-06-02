@@ -26,11 +26,11 @@ export default {
 };
 
 const markdownText =
-  'This is an example of a markdown line break <br /> **and text wrapped a strong tag.** <br> <h1>The markdown renderer</h1> <em>will</em> strip HTML tags <strong>passed to it.</strong>';
-const headlineText = 'Replace tires <br /> with up to <br /> **60% off.**';
+  'This is an example of a markdown line break\n\n**and text wrapped in a strong tag.**';
+const headlineText = 'Replace tires<br />with up to<br />**60% off.**';
 
 const descriptionText =
-  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. <br /> Aenean fermentum a elit non volutpat. Morbi ipsum metus, lobortis sit amet convallis sed, cursus id metus. <br /> Duis nisl lacus, aliquet eget sapien ut, vestibulum gravida magna. Aenean accumsan ex quis nibh congue mollis. Nulla elementum, <br /> dui eget suscipit maximus, sapien ligula semper ipsum, ut congue lorem tortor vel enim. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aenean vitae nibh et neque tincidunt laoreet. Aliquam lobortis dui quis sem tincidunt, nec ultrices orci egestas.';
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n\nAenean fermentum a elit non volutpat. Morbi ipsum metus, lobortis sit amet convallis sed, cursus id metus.\n\nDuis nisl lacus, aliquet eget sapien ut, vestibulum gravida magna. Aenean accumsan ex quis nibh congue mollis. Nulla elementum,\n\ndui eget suscipit maximus, sapien ligula semper ipsum, ut congue lorem tortor vel enim. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aenean vitae nibh et neque tincidunt laoreet. Aliquam lobortis dui quis sem tincidunt, nec ultrices orci egestas.';
 
 export function TextWithKnobs() {
   return <Markdown>{text('Markdown Text', markdownText)}</Markdown>;

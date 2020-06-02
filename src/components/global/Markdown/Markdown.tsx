@@ -7,10 +7,8 @@ interface Props {
   children: ReactChild;
 }
 
-// This markdown component allows only a subset of markdown and html tags
-// to be passed to it while it unwraps the children of the remainder ignored nodes.
-function Markdown(props: Props) {
-  return <MarkdownDynamic>{props.children}</MarkdownDynamic>;
+function Markdown({ children }: Props) {
+  return <MarkdownDynamic>{children}</MarkdownDynamic>;
 }
 
 export default Markdown;
