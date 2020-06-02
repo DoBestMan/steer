@@ -36,3 +36,11 @@ export const brands: Brands = [
     src: '/images/brands/pirelli_logo.svg',
   },
 ];
+
+export enum STAGES {
+  CONFIRM_SIZE = 'confirmSize',
+  DATA_MOMENT = 'dataMoment',
+  LOADING = 'loading',
+  NO_RESULTS = 'noResults',
+  TOP_PICKS = 'topPicks',
+}
