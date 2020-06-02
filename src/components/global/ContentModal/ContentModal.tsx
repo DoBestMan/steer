@@ -13,14 +13,13 @@ import { typography } from '~/styles/typography.styles';
 
 import styles from './ContentModal.styles';
 
-export interface Props {
+export interface ModalContentProps {
   content: string;
   image: {
     altText: string;
     src: string;
   };
-  isCustomerServiceEnabled: boolean;
-  isOpen: boolean;
+
   link?: {
     label: string;
     link: {
@@ -28,10 +27,15 @@ export interface Props {
       isExternal?: boolean;
     };
   };
-  onClose: () => void;
-  showSupportSection?: boolean;
   subtitle: string;
   title: string;
+}
+
+export interface Props extends ModalContentProps {
+  isCustomerServiceEnabled: boolean;
+  isOpen: boolean;
+  onClose: () => void;
+  showSupportSection?: boolean;
 }
 
 function ContentModal({

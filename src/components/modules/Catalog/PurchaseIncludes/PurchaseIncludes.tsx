@@ -15,14 +15,7 @@ function PurchaseIncludes() {
 
       <Glider draggable slidesToShow="auto">
         {everyPurchaseIncludesData.map((item: CardType) => (
-          <PurchaseIncludesCard
-            description={item.description}
-            icon={item.icon}
-            key={item.title}
-            linkLabel={item.linkLabel}
-            linkUrl={item.linkUrl}
-            title={item.title}
-          />
+          <PurchaseIncludesCard {...item} key={item.title} />
         ))}
       </Glider>
     </>
