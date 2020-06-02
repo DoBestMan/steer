@@ -43,3 +43,8 @@ export enum SearchInputEnum {
 }
 
 export type SearchInputType = 'primary' | 'secondary';
+
+export enum SearchModalEnum {
+  TIRE_SIZE = 'tire-size',
+  VEHICLE_TRIM = 'vehicle-trim',
+}

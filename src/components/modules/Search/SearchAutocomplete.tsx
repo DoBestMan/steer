@@ -18,9 +18,11 @@ import { KEYCODES, LINK_THEME, LINK_TYPES } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
 
+import AdditionalInfoModals from './AdditionalInfoModals';
 import { SearchGroup, SearchResult } from './Search';
 import {
   SearchInputEnum,
+  SearchModalEnum,
   SearchState,
   SearchStateEnum,
   SearchStateType,
@@ -41,6 +43,7 @@ export interface Props {
   activeInputType: SearchInputEnum;
   focusOnMount?: boolean;
   inputValue?: string;
+  isCustomerServiceEnabled: boolean;
   isLoadingResults?: boolean;
   onCancelSelection: () => void;
   onCloseSearchClick: () => void;
@@ -58,6 +61,7 @@ function SearchAutocomplete({
   activeInputType,
   focusOnMount = false,
   inputValue = CONSTANTS.DEFAULT_VALUE,
+  isCustomerServiceEnabled,
   isLoadingResults,
   onCancelSelection,
   onCloseSearchClick,
@@ -72,6 +76,7 @@ function SearchAutocomplete({
   ...rest
 }: Props) {
   const [shouldShowListbox, setShouldShowListbox] = useState(false);
+  const [activeModal, setActiveModal] = useState<SearchModalEnum | null>(null);
   const primaryInput = useRef<HTMLInputElement>(null);
   const secondaryInput = useRef<HTMLInputElement>(null);
   const {
@@ -156,6 +161,10 @@ function SearchAutocomplete({
 
   const handleAddRearTire = () => () => {
     onToggleRearTire(true);
+  };
+
+  const handleSetActiveModal = (modalType: SearchModalEnum | null) => () => {
+    setActiveModal(modalType);
   };
 
   useEffect(() => {
@@ -316,13 +325,33 @@ function SearchAutocomplete({
       </div>
       <div css={styles.secondaryActionWrapper}>
         {searchState === SearchStateEnum.TIRE_SIZE && (
+          <>
+            <Link
+              as={LINK_TYPES.BUTTON}
+              css={[typography.smallCopy, styles.secondaryActionButton]}
+              onClick={handleSetActiveModal(SearchModalEnum.TIRE_SIZE)}
+              theme={LINK_THEME.LIGHT}
+            >
+              {ui('search.notSure')}
+            </Link>
+            <Link
+              as={LINK_TYPES.BUTTON}
+              css={[typography.smallCopy, styles.secondaryActionButton]}
+              onClick={handleAddRearTire()}
+              theme={LINK_THEME.LIGHT}
+            >
+              {ui('search.addRearTire')}
+            </Link>
+          </>
+        )}
+        {searchState === SearchStateEnum.VEHICLE && (
           <Link
             as={LINK_TYPES.BUTTON}
             css={[typography.smallCopy, styles.secondaryActionButton]}
-            onClick={handleAddRearTire()}
+            onClick={handleSetActiveModal(SearchModalEnum.VEHICLE_TRIM)}
             theme={LINK_THEME.LIGHT}
           >
-            {ui('search.addRearTire')}
+            {ui('search.notSure')}
           </Link>
         )}
       </div>
@@ -385,6 +414,11 @@ function SearchAutocomplete({
           </Grid>
         )}
       </div>
+      <AdditionalInfoModals
+        activeModal={activeModal}
+        isCustomerServiceEnabled={isCustomerServiceEnabled}
+        onClose={handleSetActiveModal(null)}
+      />
     </div>
   );
 }

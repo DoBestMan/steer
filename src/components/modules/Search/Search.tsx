@@ -35,6 +35,7 @@ export interface SearchResult {
 
 interface Props {
   forwardedRef?: RefObject<HTMLDivElement>;
+  isCustomerServiceEnabled: boolean;
   onClearSearchesClick: () => void;
   onCloseSearchClick: () => void;
   onSetSearchCategory: (category: SearchStateType) => void;
@@ -43,6 +44,7 @@ interface Props {
 }
 
 function Search({
+  isCustomerServiceEnabled,
   onClearSearchesClick,
   onCloseSearchClick,
   onSetSearchCategory,
@@ -121,6 +123,7 @@ function Search({
       <SearchAutocomplete
         activeInputType={activeInputType}
         focusOnMount
+        isCustomerServiceEnabled={isCustomerServiceEnabled}
         onCancelSelection={onCancelSelection}
         onInputChange={onInputChange}
         onCloseSearchClick={onCloseSearchClick}

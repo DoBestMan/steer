@@ -55,6 +55,7 @@ export function PastSearchResults() {
 
   return (
     <Search
+      isCustomerServiceEnabled={boolean('Is Business Hours', true)}
       onClearSearchesClick={handleClearSearchesClick}
       onCloseSearchClick={handleCloseSearchClick}
       onSetSearchCategory={handleSetSearchCategory}
@@ -71,6 +72,7 @@ export function SearchResultsRegular() {
 
   return (
     <Search
+      isCustomerServiceEnabled={boolean('Is Business Hours', true)}
       onClearSearchesClick={handleClearSearchesClick}
       onCloseSearchClick={handleCloseSearchClick}
       onSetSearchCategory={handleSetSearchCategory}
@@ -87,6 +89,7 @@ export function SearchResultsPartNumber() {
 
   return (
     <Search
+      isCustomerServiceEnabled={boolean('Is Business Hours', true)}
       onClearSearchesClick={handleClearSearchesClick}
       onCloseSearchClick={handleCloseSearchClick}
       onSetSearchCategory={handleSetSearchCategory}
@@ -103,6 +106,7 @@ export function SearchResultsTireSize() {
 
   return (
     <Search
+      isCustomerServiceEnabled={boolean('Is Business Hours', true)}
       onClearSearchesClick={handleClearSearchesClick}
       onCloseSearchClick={handleCloseSearchClick}
       onSetSearchCategory={handleSetSearchCategory}
@@ -119,6 +123,7 @@ export function NoSearchResults() {
 
   return (
     <Search
+      isCustomerServiceEnabled={boolean('Is Business Hours', true)}
       onClearSearchesClick={handleClearSearchesClick}
       onCloseSearchClick={handleCloseSearchClick}
       onSetSearchCategory={handleSetSearchCategory}
@@ -139,6 +144,7 @@ export function SearchBy() {
 
   return (
     <Search
+      isCustomerServiceEnabled={boolean('Is Business Hours', true)}
       onClearSearchesClick={handleClearSearchesClick}
       onCloseSearchClick={handleCloseSearchClick}
       onSetSearchCategory={handleSetSearchCategory}

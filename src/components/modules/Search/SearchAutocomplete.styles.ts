@@ -206,13 +206,29 @@ const styles: CSSObject = {
   secondaryActionButton: [
     typography.smallCopy,
     {
+      '&:not(:last-child)': {
+        marginRight: SPACING.SIZE_20,
+      },
+      backgroundColor: COLORS.GLOBAL.ORANGE,
+      boxShadow: '0px 0px 10px 10px rgba(254, 95, 16, 1)',
       span: {
         borderBottom: `2px dotted ${COLORS.ORANGE.SHADE_30}`,
+      },
+      [MQ.M]: {
+        '&:not(:last-child)': {
+          marginRight: SPACING.SIZE_30,
+        },
+      },
+      [MQ.L]: {
+        '&:not(:last-child)': {
+          marginRight: SPACING.SIZE_40,
+        },
       },
     },
   ],
   secondaryActionWrapper: {
     bottom: SPACING.SIZE_20,
+    display: 'flex',
     position: 'fixed',
     right: GRID_MARGIN.S,
     zIndex: Z_INDEX.TOP,

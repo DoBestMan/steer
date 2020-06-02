@@ -7,7 +7,6 @@ import { typography, typographyStyles } from '~/styles/typography.styles';
 const styles: CSSObject = {
   comboboxWrapper: {
     flexGrow: 1,
-    flexShrink: 0,
   },
   inactive: {
     color: COLORS.ORANGE.TINT_70,

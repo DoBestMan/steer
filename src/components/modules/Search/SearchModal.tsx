@@ -3,6 +3,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 import Modal from '~/components/global/Modal/Modal';
 import { useSearchContext } from '~/components/modules/Search/Search.context';
+import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
 import { MODAL_THEME } from '~/lib/constants';
 
 import Search from './Search';
@@ -11,6 +12,7 @@ import { pastSearchResults, simpleSearchResults } from './Search.mocks';
 function SearchModal() {
   const [pastSearches, setPastSearches] = useState(pastSearchResults);
   const { isSearchOpen, toggleIsSearchOpen } = useSearchContext();
+  const { customerServiceEnabled } = useSiteGlobalsContext();
   const handleClearSearchesClick = function () {
     setPastSearches([]);
   };
@@ -40,6 +42,7 @@ function SearchModal() {
       isOpen={isSearchOpen}
     >
       <Search
+        isCustomerServiceEnabled={customerServiceEnabled}
         forwardedRef={contentRef}
         onClearSearchesClick={handleClearSearchesClick}
         onCloseSearchClick={toggleIsSearchOpen}
