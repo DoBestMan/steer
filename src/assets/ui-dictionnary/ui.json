@@ -94,6 +94,10 @@
   "pdp": {
     "everyPurchaseIncludes": {
       "title": "Every purchase includes"
+    },
+    "shopWithConfidence": {
+      "title": "Shop with confidence",
+      "linkLabel": "Learn More"
     }
   },
   "search": {
