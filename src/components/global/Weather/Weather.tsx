@@ -7,6 +7,7 @@ import { styles } from './Weather.styles';
 import { Weathers } from './Weather.types';
 
 type Props = {
+  animate?: boolean;
   weatherID: Weathers | string | null;
 };
 
@@ -15,7 +16,7 @@ interface Size {
   width: number;
 }
 
-function Weather({ weatherID, ...rest }: Props) {
+function Weather({ weatherID, animate, ...rest }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [elementSize, setElementSize] = useState<Size>({ height: 0, width: 0 });
 
@@ -43,11 +44,19 @@ function Weather({ weatherID, ...rest }: Props) {
   return (
     <div css={styles.container} ref={containerRef} {...rest}>
       {elementSize.width > 0 && weatherID === WEATHERS.SNOWING && (
-        <Snow width={elementSize.width} height={elementSize.height} />
+        <Snow
+          width={elementSize.width}
+          height={elementSize.height}
+          animate={animate}
+        />
       )}
 
       {elementSize.width > 0 && weatherID === WEATHERS.RAINING && (
-        <Rain width={elementSize.width} height={elementSize.height} />
+        <Rain
+          width={elementSize.width}
+          height={elementSize.height}
+          animate={animate}
+        />
       )}
     </div>
   );

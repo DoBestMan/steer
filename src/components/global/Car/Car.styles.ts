@@ -30,12 +30,19 @@ export const styles = {
 
     svg: {
       // set just in case
-      '.solid-body-background *': {
-        fillOpacity: 0,
-        opacity: 0,
+      '.solid-body-background': {
+        '*': {
+          fillOpacity: 0,
+          opacity: 0,
+        },
+
+        fillOpacity: 1,
+        opacity: 1,
       },
 
+      backfaceVisibility: 'hidden',
       height: 'auto',
+      transform: 'scale3d(1.0, 1.0, 1.0)',
       width: '100%',
     },
   }),

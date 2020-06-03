@@ -5,6 +5,7 @@ import Snowflake from '~/assets/weather/snowflake.svg';
 import { styles } from '../Weather.styles';
 
 type Props = {
+  animate?: boolean;
   height: number;
   width: number;
 };
@@ -22,7 +23,7 @@ const SNOWFLAKE_HEIGHT = 11.93;
 function Snow(props: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [snowflakeData, setSnowflakeData] = useState<ImageData>();
-  const { height, width } = props;
+  const { animate = true, height, width } = props;
 
   useEffect(() => {
     if (
@@ -82,7 +83,7 @@ function Snow(props: Props) {
         d: Math.random() * mp, //density
         r: Math.random() * 4 + 1, //radius
         x: Math.random() * width, //x-coordinate
-        y: -Math.random() * height, //y-coordinate
+        y: animate ? -Math.random() * height : Math.random() * height, //y-coordinate
       });
     }
 
@@ -147,10 +148,14 @@ function Snow(props: Props) {
         }
 
         // move them
-        moveSnowflakes();
+        if (animate) {
+          moveSnowflakes();
+        }
       }
 
-      frame = requestAnimationFrame(draw);
+      if (animate) {
+        frame = requestAnimationFrame(draw);
+      }
     }
 
     frame = requestAnimationFrame(draw);
@@ -158,7 +163,7 @@ function Snow(props: Props) {
     return () => {
       cancelAnimationFrame(frame);
     };
-  }, [canvasRef, width, height, snowflakeData]);
+  }, [canvasRef, width, height, snowflakeData, animate]);
 
   return (
     <canvas

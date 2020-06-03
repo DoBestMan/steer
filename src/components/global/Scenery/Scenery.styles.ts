@@ -36,12 +36,12 @@ export const styles = {
     pointerEvents: 'none',
   }),
   [`containerAnimated_${SCENERIES.RURAL}`]: css({
-    animation: `${backgroundImageRural} 17s linear infinite`,
+    animation: `${backgroundImageRural} 50s linear infinite`,
   }),
   [`containerAnimated_${SCENERIES.SUBURBAN}`]: css({
-    animation: `${backgroundImageSuburban} 17s linear infinite`,
+    animation: `${backgroundImageSuburban} 50s linear infinite`,
   }),
   [`containerAnimated_${SCENERIES.URBAN}`]: css({
-    animation: `${backgroundImageUrban} 17s linear infinite`,
+    animation: `${backgroundImageUrban} 50s linear infinite`,
   }),
 };

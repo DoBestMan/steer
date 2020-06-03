@@ -1,6 +1,6 @@
 // DO NOT MANUALLY EDIT THIS FILE, this file is auto-generated.
-// To add new icons place svg file in /src/assets/icons
-// and run 'yarn run generate-svg-sprite'
+// To add a new car, add the car svg file in /src/assets/cars
+// and run 'yarn run generate-cars-constants'
 
 export enum Cars {
   'car--atv-utv' = 'car--atv-utv',
@@ -56,5 +56,5 @@ export enum Cars {
 }
 
 // DO NOT MANUALLY EDIT THIS FILE, this file is auto-generated.
-// To add new icons place svg file in /src/assets/icons
-// and run 'yarn run generate-svg-sprite'
+// To add a new car, add the car svg file in /src/assets/cars
+// and run 'yarn run generate-cars-constants'

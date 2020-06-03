@@ -3,6 +3,7 @@ import { useEffect, useRef } from 'react';
 import { styles } from '../Weather.styles';
 
 type Props = {
+  animate?: boolean;
   height: number;
   width: number;
 };
@@ -21,9 +22,9 @@ class Rain {
     this.z = 0;
   }
 
-  init(width: number) {
+  init(width: number, height: number, render?: boolean) {
     this.x = Math.random() * width;
-    this.y = Math.random() * -100;
+    this.y = render ? Math.random() * -100 : Math.random() * height;
     this.z = Math.random() * 0.5 + 0.5;
   }
 }
@@ -35,7 +36,7 @@ const SPEED = 25;
 
 function Snow(props: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const { height, width } = props;
+  const { animate = true, height, width } = props;
 
   useEffect(() => {
     if (
@@ -54,7 +55,6 @@ function Snow(props: Props) {
 
     const ctx = canvasRef.current.getContext('2d');
     let mp = Math.round(width / 10); //max particles
-    // console.log('mp');
     if (mp < 10) {
       mp = 10;
     }
@@ -63,7 +63,7 @@ function Snow(props: Props) {
 
     for (let i = 0; i < mp; i++) {
       const rain = new Rain();
-      rain.init(width);
+      rain.init(width, height, animate);
 
       rainPool.push(rain);
     }
@@ -91,9 +91,10 @@ function Snow(props: Props) {
         ctx.strokeStyle = RAIN_COLOR;
         ctx.stroke();
 
-        moveRain();
-
-        frame = requestAnimationFrame(draw);
+        if (animate) {
+          moveRain();
+          frame = requestAnimationFrame(draw);
+        }
       }
     }
 
@@ -110,7 +111,7 @@ function Snow(props: Props) {
           (WIND < 0 && r.x < WIND) ||
           (WIND > 0 && r.x > width + WIND)
         ) {
-          r.init(width);
+          r.init(width, height, animate);
         }
       }
     }
@@ -120,7 +121,7 @@ function Snow(props: Props) {
     return () => {
       cancelAnimationFrame(frame);
     };
-  }, [canvasRef, width, height]);
+  }, [canvasRef, width, height, animate]);
 
   return (
     <canvas
