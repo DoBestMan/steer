@@ -13,7 +13,7 @@ function PurchaseIncludes() {
     <>
       <h2 css={styles.title}>{ui('pdp.everyPurchaseIncludes.title')}:</h2>
 
-      <Glider draggable slidesToShow="auto">
+      <Glider draggable slidesToShow="auto" dragVelocity={1.25}>
         {everyPurchaseIncludesData.map((item: CardType) => (
           <PurchaseIncludesCard {...item} key={item.title} />
         ))}

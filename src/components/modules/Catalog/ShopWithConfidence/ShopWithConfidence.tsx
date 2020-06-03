@@ -32,7 +32,7 @@ function ShopWithConfidence() {
       </div>
 
       <div css={styles.gliderContainer}>
-        <Glider draggable slidesToShow="auto">
+        <Glider draggable slidesToShow="auto" dragVelocity={1.25}>
           {statsMock.map((item) => (
             <div key={item.heading}>
               <span css={styles.statHeading}>{item.heading}</span>
