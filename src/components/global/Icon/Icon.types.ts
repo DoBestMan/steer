@@ -25,6 +25,7 @@ export type Icon =
   | 'free-returns'
   | 'free-shipping'
   | 'geolocation'
+  | 'grip'
   | 'instagram'
   | 'linkedin'
   | 'local-business'

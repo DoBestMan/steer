@@ -1,7 +1,13 @@
 export enum KEYCODES {
   ARROW_DOWN = 40,
+  ARROW_LEFT = 37,
+  ARROW_RIGHT = 39,
   ARROW_UP = 38,
   BACKSPACE = 8,
+  END = 36,
   ENTER = 13,
   ESCAPE = 27,
+  HOME = 35,
+  PAGE_DOWN = 34,
+  PAGE_UP = 33,
 }

@@ -22,6 +22,10 @@
     }
   },
   "catalog": {
+    "filters": {
+      "max": "maximum",
+      "min": "minimum"
+    },
     "header": {
       "advancedViewLabel": "Advanced View",
       "allTiresLink": "All tires",
