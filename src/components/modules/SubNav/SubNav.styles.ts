@@ -1,4 +1,4 @@
-import { css } from '@emotion/core';
+import { CSSObject } from '@emotion/core';
 import {
   ENTERED,
   ENTERING,
@@ -17,11 +17,11 @@ export const SUBNAV_TIME_SLIDE_CLOSE = TIME.MS3000;
 export const SUBNAV_TIME_FADE_OPEN = TIME.MS400;
 export const SUBNAV_TIME_FADE_CLOSE = TIME.MS600;
 
-const styles = {
-  action: css({
+const styles: CSSObject = {
+  action: {
     padding: SPACING.SIZE_10,
-  }),
-  actions: css({
+  },
+  actions: {
     alignItems: 'baseline',
     background: COLORS.GLOBAL.WHITE,
     display: 'flex',
@@ -32,8 +32,8 @@ const styles = {
     [MQ.M]: {
       display: 'none',
     },
-  }),
-  border: css({
+  },
+  borderMobile: {
     background: COLORS.GLOBAL.ORANGE,
     bottom: 0,
     height: 20,
@@ -43,8 +43,8 @@ const styles = {
     [MQ.M]: {
       display: 'none',
     },
-  }),
-  close: css({
+  },
+  close: {
     position: 'absolute',
     // manually position it because hit area
     right: 12,
@@ -53,8 +53,8 @@ const styles = {
     [MQ.M]: {
       display: 'none',
     },
-  }),
-  closeSubNav: css({
+  },
+  closeSubNav: {
     color: COLORS.LIGHT.GRAY_70,
     [MQ.S]: {
       display: 'none',
@@ -62,16 +62,12 @@ const styles = {
     [MQ.M]: {
       display: 'flex',
     },
-  }),
-  content: css({
-    opacity: 0,
-    transition: `all ${TIME.MS1200}ms linear`,
-  }),
-  focusHide: css({
+  },
+  focusHide: {
     // removes phantom height in parent modal
     display: 'none',
-  }),
-  link: css({
+  },
+  link: {
     alignContent: 'center',
     color: COLORS.LIGHT.GRAY_70,
     display: 'flex',
@@ -79,8 +75,8 @@ const styles = {
 
     [MQ.S]: typography.bodyCopy,
     [MQ.XL]: typography.smallCopy,
-  }),
-  linkSection: css({
+  },
+  linkSection: {
     height: NAV_CONTENT_HEIGHT,
     li: {
       marginRight: SPACING.SIZE_30,
@@ -103,8 +99,8 @@ const styles = {
       // accommodates margin top from designs to align with header
       marginTop: -1,
     },
-  }),
-  linkSectionIcons: css({
+  },
+  linkSectionIcons: {
     li: {
       // accommodates margins from designs, icon only buttons have extra padding to make them more clickable
       // MVP will have hardcoded text link first and icon links following
@@ -123,15 +119,15 @@ const styles = {
     [MQ.M]: {
       position: 'initial',
     },
-  }),
-  mobileLinks: css({
+  },
+  mobileLinks: {
     opacity: 0,
-  }),
-  mobileLinksOpen: css({
+  },
+  mobileLinksOpen: {
     opacity: 1,
     transition: `all ${TIME.MS400}ms ${EASING.CUBIC_EASE_IN} 400ms`, // fade in content after subnav open animation
-  }),
-  navContent: css({
+  },
+  navContent: {
     display: 'flex',
     flexDirection: 'column',
     height: '100%',
@@ -139,13 +135,14 @@ const styles = {
     pointerEvents: 'none',
     position: 'relative',
     zIndex: Z_INDEX.TOP + 1,
-  }),
-  navContentNested: css({
+  },
+  navContentNested: {
     display: 'flex',
     flexGrow: 1,
+    pointerEvents: 'all',
     width: '100%',
-  }),
-  navModalContainer: css({
+  },
+  navModalContainer: {
     height: '100%',
     left: 0,
     pointerEvents: 'none',
@@ -153,8 +150,8 @@ const styles = {
     top: 0,
     visibility: 'hidden',
     width: '100%',
-  }),
-  overlay: css({
+  },
+  overlay: {
     [MQ.S]: {
       display: 'none',
     },
@@ -169,31 +166,31 @@ const styles = {
       width: '100%',
       zIndex: Z_INDEX.FRONT,
     },
-  }),
-  overlayOpen: css({
+  },
+  overlayOpen: {
     [MQ.L]: {
       opacity: 1,
       transition: 'opacity 200ms linear 300ms',
     },
-  }),
-  root: css({
+  },
+  root: {
     height: '100%',
     pointerEvents: 'none',
-  }),
-  smallHide: css({
+  },
+  smallHide: {
     [MQ.S]: {
       display: 'none',
     },
     [MQ.M]: {
       display: 'initial',
     },
-  }),
-  smallShow: css({
+  },
+  smallShow: {
     [MQ.M]: {
       display: 'none',
     },
-  }),
-  subnav: css({
+  },
+  subnav: {
     display: 'flex',
     flexDirection: 'column',
     height: '100%',
@@ -213,12 +210,12 @@ const styles = {
     [MQ.L]: {
       padding: `0 ${SPACING.SIZE_60}px`,
     },
-  }),
-  subnavContent: css({
+  },
+  subnavContent: {
     height: '100%',
     zIndex: Z_INDEX.BEHIND,
-  }),
-  subnavInnerGrid: css({
+  },
+  subnavInnerGrid: {
     gridAutoRows: 'minmax(auto, 100%)',
     height: '100%',
     pointerEvents: 'none',
@@ -231,11 +228,11 @@ const styles = {
     [MQ.M]: {
       position: 'initial',
     },
-  }),
-  subnavInnerGridOpen: css({
+  },
+  subnavInnerGridOpen: {
     pointerEvents: 'all',
-  }),
-  subnavLinkList: css({
+  },
+  subnavLinkList: {
     display: 'flex',
     width: '100%',
     [MQ.S]: [
@@ -269,7 +266,7 @@ const styles = {
         marginTop: -2,
       },
     },
-  }),
+  },
 };
 
 export const subNavContainer = {

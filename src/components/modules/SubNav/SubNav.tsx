@@ -79,7 +79,7 @@ function SubNav({ siteMenuBrowseList, siteMenuLearn }: SiteMenu) {
           >
             <Icon name={ICONS.CLOSE} />
           </button>
-          <div css={styles.border} />
+          <div css={styles.borderMobile} />
           <div
             css={[
               styles.smallShow,
