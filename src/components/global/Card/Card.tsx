@@ -4,6 +4,7 @@ import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Link from '~/components/global/Link/Link';
 import { SiteInsightItemDefault } from '~/data/models/SiteInsightItemDefault';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
+import { typography } from '~/styles/typography.styles';
 
 import IconOrImage from '../IconOrImage/IconOrImage';
 import styles from './Card.styles';
@@ -34,20 +35,22 @@ function Card({
       gridColumnL="2/7"
       gridColumnXL="2/7"
       isGrid
-      css={styles.root}
+      css={[typography.jumboHeadline, styles.root]}
     >
       <GridItem gridColumnL="1/3" gridColumnXL="1/3">
-        <div css={styles.decorator}>{decorators}</div>
+        <div css={[typography.jumboHeadline, styles.decorator]}>
+          {decorators}
+        </div>
       </GridItem>
       <GridItem gridColumnL="3/6" gridColumnXL="3/6">
         {eyebrow && eyebrowIcon && (
-          <div css={styles.eyebrow}>
+          <div css={[typography.secondaryHeadline, styles.eyebrow]}>
             <span>{eyebrow}</span>
             <Icon name={eyebrowIcon.svgId} css={styles.eyebrowIcon} />
           </div>
         )}
-        <p css={styles.title}>{title}</p>
-        <p css={styles.description}>{body}</p>
+        <p css={[typography.secondaryHeadline, styles.title]}>{title}</p>
+        <p css={[typography.bodyCopy, styles.description]}>{body}</p>
         <Link href={link.href} icon={ICONS.CHEVRON_RIGHT}>
           {linkLabel}
         </Link>

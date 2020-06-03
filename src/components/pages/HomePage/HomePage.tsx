@@ -228,7 +228,10 @@ function HomePage({ serverData }: Props) {
         <div css={[styles.contentSpacer, buttonHeight]}></div>
         <div ref={contentContainerRef}>
           <Grid
-            css={[styles.content, isContentVisible && styles.contentVisible]}
+            css={[
+              styles.contentContainer,
+              isContentVisible && styles.contentVisible,
+            ]}
           >
             <DriverInsights {...siteInsights} />
             <Reviews {...siteReviews} />

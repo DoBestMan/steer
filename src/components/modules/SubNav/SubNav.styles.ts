@@ -164,7 +164,7 @@ const styles: CSSObject = {
       position: 'absolute',
       top: 0,
       width: '100%',
-      zIndex: Z_INDEX.FRONT,
+      zIndex: Z_INDEX.TOP,
     },
   },
   overlayOpen: {
