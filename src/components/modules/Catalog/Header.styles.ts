@@ -7,7 +7,7 @@ const styles: CSSObject = {
   action: {
     alignItems: 'baseline',
     color: COLORS.GLOBAL.WHITE,
-    marginBottom: SPACING.SIZE_20,
+    marginBottom: SPACING.SIZE_15,
   },
   back: {
     alignItems: 'center',

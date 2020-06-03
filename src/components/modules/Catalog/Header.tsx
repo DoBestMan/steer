@@ -57,7 +57,11 @@ export default function Header({
   const locationEl = (
     <div css={[infoStyles, rearTireSize && styles.wrappedLocation]}>
       {ui('catalog.header.dealsFor')}
-      <Link css={[styles.link, infoStyles]}> {location}</Link>
+      {/* TODO: location redirect or modal open */}
+      <Link css={[styles.link, infoStyles]} href="/">
+        {' '}
+        {location}
+      </Link>
     </div>
   );
 
@@ -75,13 +79,17 @@ export default function Header({
       <div css={styles.header}>
         {backEl}
         <h1 css={styles.title}>{title}</h1>
-        <div css={infoStyles}>
-          <p css={styles.decorator}>
-            {ui('catalog.header.size', { tireSize })}
-          </p>
-          {secondItem}
-        </div>
-        {thirdItem}
+        {!isInternal && (
+          <>
+            <div css={infoStyles}>
+              <p css={styles.decorator}>
+                {ui('catalog.header.size', { tireSize })}
+              </p>
+              {secondItem}
+            </div>
+            {thirdItem}
+          </>
+        )}
       </div>
       <div css={styles.toggle}>
         <span css={styles.label}>{ui('catalog.header.advancedViewLabel')}</span>
