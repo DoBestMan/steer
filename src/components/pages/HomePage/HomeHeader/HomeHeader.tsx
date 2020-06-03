@@ -169,9 +169,9 @@ function HomeHeader({
                   <Markdown>{title}</Markdown>
                 </h1>
 
-                <p css={descriptionStyles}>
+                <div css={descriptionStyles}>
                   <Markdown>{body}</Markdown>
-                </p>
+                </div>
               </GridItem>
             </Grid>
 

@@ -43,7 +43,6 @@ export const styles = {
       backfaceVisibility: 'hidden',
       height: 'auto',
       transform: 'scale3d(1.0, 1.0, 1.0)',
-      width: '100%',
     },
   }),
   scaleAcrossBreakpoints: css({
