@@ -41,18 +41,20 @@ function FilterModal({ children, contentLabel, isOpen, onClose }: Props) {
         isOpen && overlayBkStyles[bk].open,
       ]}
     >
-      <div css={styles.actions}>
-        <Link
-          as="button"
-          icon={ICONS.CLOSE}
-          aria-label={`${ui('modal.close')} ${contentLabel}`}
-          onClick={onClose}
-          theme={LINK_THEME.LIGHT}
-          // this will allow modal content to start where padding begins rather than pushed down from actions bar
-          css={styles.close}
-        />
+      <div css={styles.scrollContainer}>
+        <div css={styles.content}>
+          <Link
+            as="button"
+            icon={ICONS.CLOSE}
+            aria-label={`${ui('modal.close')} ${contentLabel}`}
+            onClick={onClose}
+            theme={LINK_THEME.LIGHT}
+            // this will allow modal content to start where padding begins rather than pushed down from actions bar
+            css={styles.close}
+          />
+          {children}
+        </div>
       </div>
-      {children}
     </ReactModal>
   );
 }

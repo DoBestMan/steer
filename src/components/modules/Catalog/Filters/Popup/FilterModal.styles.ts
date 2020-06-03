@@ -4,6 +4,7 @@ import {
   Breakpoint,
   COLORS,
   EASING,
+  GRID_MARGIN,
   MODAL_ANIMATION,
   MQ,
   RADIUS,
@@ -64,31 +65,44 @@ export const overlayBkStyles: Record<Breakpoint, AnimationStyles> = {
 
 const styles = {
   [MODAL_ANIMATION.FADE]: FADE,
-  actions: css({
-    display: 'flex',
-    justifyContent: 'space-between',
-    margin: `0 ${-SPACING.SIZE_10}px`,
-  }),
   close: css({
+    color: COLORS.LIGHT.GRAY_70,
     position: 'absolute',
-    right: SPACING.SIZE_10,
-    top: SPACING.SIZE_10,
+    top: SPACING.SIZE_20 + 1,
+    [MQ.S]: {
+      right: SPACING.SIZE_15,
+    },
+    [MQ.M]: {
+      right: SPACING.SIZE_35,
+    },
+  }),
+  content: css({
+    overflowY: 'auto',
+    [MQ.S]: {
+      padding: `${SPACING.SIZE_30}px ${SPACING.SIZE_20}px`,
+    },
+    [MQ.M]: {
+      padding: SPACING.SIZE_40,
+    },
+    [MQ.L]: {
+      padding: `${SPACING.SIZE_40}px ${SPACING.SIZE_60}px`,
+    },
   }),
   root: css({
     background: COLORS.GLOBAL.WHITE,
     boxShadow: OVERLAY_BOX_SHADOW,
     color: COLORS.GLOBAL.BLACK,
+    overflowY: 'auto',
     [MQ.S]: {
       borderRadius: `${RADIUS.RADIUS_15} ${RADIUS.RADIUS_15} 0 0`,
       bottom: 0,
-      padding: `${SPACING.SIZE_30}px ${SPACING.SIZE_20}px`,
       position: 'absolute',
       width: '100%',
     },
     [MQ.M]: {
       borderRadius: RADIUS.RADIUS_15,
       margin: 'auto',
-      padding: SPACING.SIZE_40,
+      maxHeight: `calc(100vh - ${GRID_MARGIN.M}px)`,
       position: 'relative',
       top: '50%',
       transform: 'translateY(-50%)',
@@ -98,13 +112,18 @@ const styles = {
       borderRadius: 0,
       bottom: 0,
       height: '100%',
-      padding: `${SPACING.SIZE_40}px ${SPACING.SIZE_60}px`,
+      maxHeight: 'unset',
       position: 'absolute',
       right: 0,
       top: 0,
       transform: 'unset',
       width: OVERLAY_PANEL_WIDTH,
     },
+  }),
+  scrollContainer: css({
+    height: '100%',
+    overflowY: 'auto',
+    position: 'relative',
   }),
 };
 

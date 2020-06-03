@@ -3,8 +3,6 @@ import { CSSObject } from '@emotion/core';
 import { BORDERS, COLORS, RADIUS, SPACING } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
-const FILTER_DROPDOWN_WIDTH = 277;
-
 const styles: CSSObject = {
   open: {
     display: 'block',
@@ -19,10 +17,8 @@ const styles: CSSObject = {
       color: COLORS.GLOBAL.BLACK,
       display: 'none',
       marginTop: SPACING.SIZE_05,
-      minHeight: 300, // remove once content is added
       padding: SPACING.SIZE_30,
       position: 'fixed',
-      width: FILTER_DROPDOWN_WIDTH,
     },
   ],
 };

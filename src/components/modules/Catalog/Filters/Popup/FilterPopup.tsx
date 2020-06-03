@@ -3,7 +3,6 @@ import { MouseEvent } from 'react';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 
 import FilterChecklist from '../Content/FilterChecklist';
-import FilterChecklistLarge from '../Content/FilterChecklistLarge';
 import FilterRange from '../Content/FilterRange';
 import FilterSort from '../Content/FilterSort';
 import {
@@ -35,7 +34,7 @@ const mapTypeToContent: Record<
     return <FilterChecklist {...(props as CatalogFilterChecklist)} />;
   },
   [FilterContentTypes.CatalogFilterChecklistLarge](props: CatalogFilterTypes) {
-    return <FilterChecklistLarge {...(props as CatalogFilterChecklistLarge)} />;
+    return <FilterChecklist {...(props as CatalogFilterChecklistLarge)} />;
   },
   [FilterContentTypes.CatalogFilterRange](props: CatalogFilterTypes) {
     return <FilterRange {...(props as CatalogFilterRange)} />;

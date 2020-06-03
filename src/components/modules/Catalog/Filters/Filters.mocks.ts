@@ -97,7 +97,7 @@ export const filterTypeMap: Record<FilterContentTypes, CatalogFilterTypes> = {
             title: 'Popular brands',
             id: 'popularBrands',
             flair: null,
-            description: null,
+            description: 'Fastest delivery, best ratings and value',
             count: 86,
             isSelected: true,
           },

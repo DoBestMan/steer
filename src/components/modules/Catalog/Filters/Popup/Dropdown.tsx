@@ -1,6 +1,7 @@
 import { ReactNode, useEffect, useRef, useState } from 'react';
 
 import Button from '~/components/global/Button/Button';
+import FocusTrap from '~/components/global/FocusTrap/FocusTrap';
 import { useScroll } from '~/hooks/useScroll';
 import { KEYCODES } from '~/lib/constants';
 
@@ -49,10 +50,10 @@ export default function FilterDropdown({
       }
     }
 
-    document.addEventListener('mouseup', onClick);
+    document.addEventListener('mousedown', onClick);
     document.addEventListener('keydown', onKeypress);
     return () => {
-      document.removeEventListener('mouseup', onClick);
+      document.removeEventListener('mousedown', onClick);
       document.removeEventListener('keydown', onKeypress);
     };
   }, [isOpen, onClose]);
@@ -63,14 +64,16 @@ export default function FilterDropdown({
   }, [isOpen]);
 
   return (
-    <div
-      ref={dropdownEl}
-      aria-hidden={!isOpen}
-      css={[styles.root, isOpen && styles.open]}
-      style={{ left: xPos, top: yPos }}
-    >
-      {children}
-      <Button onClick={onSelectFilter}>Toggle filter</Button>
-    </div>
+    <FocusTrap active={isOpen} ref={dropdownEl}>
+      <div
+        ref={dropdownEl}
+        aria-hidden={!isOpen}
+        css={[styles.root, isOpen && styles.open]}
+        style={{ left: xPos, top: yPos }}
+      >
+        {children}
+        <Button onClick={onSelectFilter}>Toggle filter</Button>
+      </div>
+    </FocusTrap>
   );
 }
