@@ -13,8 +13,14 @@ import {
 } from './Search.constants';
 import styles from './Search.styles';
 import SearchAutocomplete from './SearchAutocomplete';
+import SearchSupport from './SearchSupport';
+
+interface ResultMetadata {
+  noExactMatches?: boolean;
+}
 
 export interface Results {
+  resultMetadata: ResultMetadata;
   siteSearchGroupList: SearchGroup[];
 }
 
@@ -58,6 +64,9 @@ function Search({
   const [activeInputType, setActiveInputType] = useState(
     SearchInputEnum.PRIMARY,
   );
+
+  const { resultMetadata, siteSearchGroupList } = results;
+  const { noExactMatches } = resultMetadata;
 
   const handleClearSearchesClick = () => {
     onClearSearchesClick();
@@ -110,13 +119,19 @@ function Search({
   };
 
   const handlePastSearchClick = () => {};
+  const handleSupportClick = () => {};
 
   const handleInputFocus = (inputType: SearchInputEnum) => {
     setActiveInputType(inputType);
   };
 
+  const isInputEmpty = query.length < 1;
+  const hasResults = siteSearchGroupList.length > 0;
+  const shouldShowSearchSupport =
+    noExactMatches && !hasResults && !isInputEmpty;
   const shouldShowInitialSearch =
-    query.length === 0 && searchState === SearchState.FREE_SEARCH;
+    (shouldShowSearchSupport || isInputEmpty) &&
+    searchState === SearchState.FREE_SEARCH;
 
   return (
     <div css={styles.container} ref={forwardedRef}>
@@ -124,13 +139,14 @@ function Search({
         activeInputType={activeInputType}
         focusOnMount
         isCustomerServiceEnabled={isCustomerServiceEnabled}
+        noExactMatches={noExactMatches}
         onCancelSelection={onCancelSelection}
         onInputChange={onInputChange}
         onCloseSearchClick={onCloseSearchClick}
         onInputFocus={handleInputFocus}
         onToggleRearTire={onToggleRearTire}
         onValueSelection={handleValueSelection}
-        results={results.siteSearchGroupList}
+        results={siteSearchGroupList}
         query={query}
         searchState={searchState}
         secondaryQuery={secondaryQuery}
@@ -142,6 +158,9 @@ function Search({
           onSearchCategoryClick={handleSearchCategoryClick}
           pastSearches={pastSearches}
         />
+      )}
+      {shouldShowSearchSupport && (
+        <SearchSupport onClick={handleSupportClick} />
       )}
     </div>
   );

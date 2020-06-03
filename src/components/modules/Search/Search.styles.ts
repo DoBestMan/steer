@@ -10,16 +10,16 @@ import { COLORS, MQ, SPACING, TIME, Z_INDEX } from '~/lib/constants';
 
 const animationStyles: CSSObject = {
   /* eslint-disable sort-keys */
-  [`initialSearchWrapper_${ENTERING}`]: {
+  [`searchSectionWrapper_${ENTERING}`]: {
     opacity: 1,
   },
-  [`initialSearchWrapper_${ENTERED}`]: {
+  [`searchSectionWrapper_${ENTERED}`]: {
     opacity: 1,
   },
-  [`initialSearchWrapper_${EXITING}`]: {
+  [`searchSectionWrapper_${EXITING}`]: {
     opacity: 0,
   },
-  [`initialSearchWrapper_${EXITED}`]: {
+  [`searchSectionWrapper_${EXITED}`]: {
     opacity: 0,
   },
   /* eslint-enable sort-keys */
@@ -52,7 +52,14 @@ const styles: CSSObject = {
       paddingBottom: SPACING.SIZE_160,
     },
   },
-  initialSearchWrapper: {
+  pastSearchBullet: {
+    display: 'none',
+    margin: `0 ${SPACING.SIZE_10}px`,
+    [MQ.M]: {
+      display: 'block',
+    },
+  },
+  searchSectionWrapper: {
     padding: `${SPACING.SIZE_15}px 0 ${SPACING.SIZE_25}px`,
     position: 'relative',
     transition: `opacity ${TIME.MS300}ms ease`,
@@ -61,13 +68,6 @@ const styles: CSSObject = {
     },
     [MQ.L]: {
       padding: `${SPACING.SIZE_70}px 0 ${SPACING.SIZE_10}px`,
-    },
-  },
-  pastSearchBullet: {
-    display: 'none',
-    margin: `0 ${SPACING.SIZE_10}px`,
-    [MQ.M]: {
-      display: 'block',
     },
   },
   ...animationStyles,

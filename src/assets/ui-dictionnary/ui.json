@@ -102,6 +102,7 @@
   },
   "search": {
     "addRearTire": "Add different rear size",
+    "callUs": "Call us at (888) 410-0604",
     "cancelButtonLabel": "Cancel",
     "cancelButtonClear": "Clear",
     "clearPastSearchesButtonLabel": "Clear all",
@@ -111,6 +112,7 @@
     "rearTire": "Rear:",
     "removeRearTire": "Remove",
     "searchBy": "Search by",
+    "searchByTireSize": "Search by tire size",
     "searchAutocompleteLabel": "Search by vehicle, tire size or brand",
     "searchCategories": {
       "vehicle": "Vehicle",

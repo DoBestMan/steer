@@ -4,10 +4,53 @@ import { Results } from './Search';
 import { SearchResultListEnum, SearchStateEnum } from './Search.constants';
 
 export const noSearchResults: Results = {
+  resultMetadata: {
+    noExactMatches: true,
+  },
   siteSearchGroupList: [],
 };
 
+export const noResultsWithSuggestions: Results = {
+  resultMetadata: {
+    noExactMatches: true,
+  },
+  siteSearchGroupList: [
+    {
+      label: 'Did you mean',
+      type: SearchResultListEnum.LIST,
+      siteSearchResultList: [
+        {
+          displayValue: '205',
+          type: 'term',
+          value: '205',
+        },
+        {
+          displayValue: '215',
+          type: 'term',
+          value: '215',
+        },
+        {
+          displayValue: '245',
+          type: 'term',
+          value: '245',
+        },
+        {
+          displayValue: '225',
+          type: 'term',
+          value: '225',
+        },
+        {
+          displayValue: '235',
+          type: 'term',
+          value: '235',
+        },
+      ],
+    },
+  ],
+};
+
 export const simpleSearchResults: Results = {
+  resultMetadata: {},
   siteSearchGroupList: [
     {
       siteSearchResultList: [
@@ -58,6 +101,7 @@ export const simpleSearchResults: Results = {
 };
 
 export const partNumberResults: Results = {
+  resultMetadata: {},
   siteSearchGroupList: [
     {
       siteSearchResultList: [
@@ -101,6 +145,7 @@ export const partNumberResults: Results = {
 };
 
 export const tireSizeResults: Results = {
+  resultMetadata: {},
   siteSearchGroupList: [
     {
       labelFragments: [
@@ -187,6 +232,7 @@ export const initialSearchCategories = [
 ];
 
 export const searchByVehicle: Results = {
+  resultMetadata: {},
   siteSearchGroupList: [
     {
       label: 'Most Popular',
@@ -459,6 +505,7 @@ export const searchByVehicle: Results = {
 };
 
 export const searchByTireSize: Results = {
+  resultMetadata: {},
   siteSearchGroupList: [
     {
       label: 'Popular Widths',
@@ -706,6 +753,7 @@ export const searchByTireSize: Results = {
 };
 
 export const searchByBrand: Results = {
+  resultMetadata: {},
   siteSearchGroupList: [
     {
       label: 'Featured',
@@ -910,6 +958,7 @@ export const searchByBrand: Results = {
 };
 
 export const searchByMostPopular: Results = {
+  resultMetadata: {},
   siteSearchGroupList: [
     {
       label: 'Most Popular',

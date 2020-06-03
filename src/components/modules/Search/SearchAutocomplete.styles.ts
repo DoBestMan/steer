@@ -134,7 +134,18 @@ const styles: CSSObject = {
       [MQ.M]: [typography.primaryHeadline],
     },
   ],
-  errorMessage: typography.primaryHeadline,
+  errorMessage: [
+    typography.primaryHeadline,
+    {
+      padding: `${SPACING.SIZE_15}px 0 ${SPACING.SIZE_10}px`,
+      [MQ.M]: {
+        padding: `${SPACING.SIZE_30}px 0 ${SPACING.SIZE_20}px`,
+      },
+      [MQ.L]: {
+        padding: `${SPACING.SIZE_70}px 0 ${SPACING.SIZE_10}px`,
+      },
+    },
+  ],
   header: {
     left: 0,
     position: 'fixed',
@@ -192,7 +203,7 @@ const styles: CSSObject = {
     },
   },
   searchResultsGridRearTire: {
-    paddingTop: 140,
+    paddingTop: 230,
     [MQ.M]: {
       paddingTop: 330,
     },

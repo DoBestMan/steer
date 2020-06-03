@@ -45,6 +45,7 @@ export interface Props {
   inputValue?: string;
   isCustomerServiceEnabled: boolean;
   isLoadingResults?: boolean;
+  noExactMatches?: boolean;
   onCancelSelection: () => void;
   onCloseSearchClick: () => void;
   onInputChange: (value: string) => void;
@@ -63,6 +64,7 @@ function SearchAutocomplete({
   inputValue = CONSTANTS.DEFAULT_VALUE,
   isCustomerServiceEnabled,
   isLoadingResults,
+  noExactMatches,
   onCancelSelection,
   onCloseSearchClick,
   onInputChange,
@@ -73,7 +75,6 @@ function SearchAutocomplete({
   results,
   searchState,
   secondaryQuery,
-  ...rest
 }: Props) {
   const [shouldShowListbox, setShouldShowListbox] = useState(false);
   const [activeModal, setActiveModal] = useState<SearchModalEnum | null>(null);
@@ -88,7 +89,8 @@ function SearchAutocomplete({
 
   const isInputEmpty = query.length < 1;
   const hasResults = results.length > 0;
-  const isInvalidInput = !hasResults && !isInputEmpty && !isLoadingResults;
+  const hasNoMatchingResults =
+    noExactMatches && !isInputEmpty && !isLoadingResults;
   const hasActiveSearchState = searchState !== SearchState.FREE_SEARCH;
   const isRearTireState = searchState === SearchStateEnum.REAR_TIRE;
   const isSearchInProgress = !!query || hasActiveSearchState;
@@ -112,11 +114,9 @@ function SearchAutocomplete({
 
   useEffect(() => {
     setShouldShowListbox(
-      !isInvalidInput &&
-        hasResults &&
-        (!isInputEmpty || searchState !== SearchState.FREE_SEARCH),
+      hasResults && (!isInputEmpty || searchState !== SearchState.FREE_SEARCH),
     );
-  }, [hasResults, isInputEmpty, isInvalidInput, results, searchState]);
+  }, [hasResults, isInputEmpty, results, searchState]);
 
   useEffect(() => {
     focusOnInput();
@@ -226,7 +226,7 @@ function SearchAutocomplete({
   );
 
   return (
-    <div {...rest}>
+    <div>
       <div css={styles.header}>
         {isRearTireState && (
           <Grid css={styles.tireSizeHeader}>
@@ -361,6 +361,20 @@ function SearchAutocomplete({
           isRearTireState && styles.searchResultsGridRearTire,
         ]}
       >
+        {hasNoMatchingResults && (
+          <Grid>
+            <GridItem
+              gridColumnS="2/6"
+              gridColumnM="2/8"
+              gridColumnL="3/14"
+              gridColumnXL="3/14"
+            >
+              <div css={styles.errorMessage}>
+                <span css={styles.errorLabel}>{ui('search.searchError')}</span>
+              </div>
+            </GridItem>
+          </Grid>
+        )}
         <Transition
           appear
           mountOnEnter
@@ -399,20 +413,6 @@ function SearchAutocomplete({
             );
           }}
         </Transition>
-        {isInvalidInput && (
-          <Grid>
-            <GridItem
-              gridColumnS="2/6"
-              gridColumnM="2/8"
-              gridColumnL="3/14"
-              gridColumnXL="3/14"
-            >
-              <div css={[styles.errorMessage, styles.searchResultsGridItem]}>
-                <span css={styles.errorLabel}>{ui('search.searchError')}</span>
-              </div>
-            </GridItem>
-          </Grid>
-        )}
       </div>
       <AdditionalInfoModals
         activeModal={activeModal}

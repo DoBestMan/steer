@@ -44,7 +44,7 @@ function InitialSearch({
 
   return (
     <>
-      <div css={styles.initialSearchWrapper}>
+      <div css={styles.searchSectionWrapper}>
         <SearchSection
           label={ui('search.searchBy')}
           onClick={onSearchCategoryClick}
@@ -60,8 +60,8 @@ function InitialSearch({
       >
         {(searchTransitionState: TransitionStatus) => {
           const animationStyles = [
-            styles.initialSearchWrapper,
-            styles[`initialSearchWrapper_${searchTransitionState}`],
+            styles.searchSectionWrapper,
+            styles[`searchSectionWrapper_${searchTransitionState}`],
           ];
 
           return (

@@ -12,6 +12,7 @@ import {
 import Search from './Search';
 import { SearchStateEnum, SearchStateType } from './Search.constants';
 import {
+  noResultsWithSuggestions,
   noSearchResults,
   partNumberResults,
   pastSearchResults,
@@ -116,23 +117,6 @@ export function SearchResultsTireSize() {
   );
 }
 
-export function NoSearchResults() {
-  const handleCloseSearchClick = action('Close search');
-  const handleClearSearchesClick = action('Clear searches');
-  const handleSetSearchCategory = action('Set search category');
-
-  return (
-    <Search
-      isCustomerServiceEnabled={boolean('Is Business Hours', true)}
-      onClearSearchesClick={handleClearSearchesClick}
-      onCloseSearchClick={handleCloseSearchClick}
-      onSetSearchCategory={handleSetSearchCategory}
-      pastSearches={[]}
-      results={noSearchResults}
-    />
-  );
-}
-
 export function SearchBy() {
   const [results, setResults] = useState(noSearchResults);
   const handleCloseSearchClick = action('Close search');
@@ -187,5 +171,39 @@ export function VehicleTrim() {
         {...VEHICLE_TRIM_MODAL_DATA}
       />
     </>
+  );
+}
+
+export function NoResultsNoSuggestions() {
+  const handleCloseSearchClick = action('Close search');
+  const handleClearSearchesClick = action('Clear searches');
+  const handleSetSearchCategory = action('Set search category');
+
+  return (
+    <Search
+      isCustomerServiceEnabled={boolean('Is Business Hours', true)}
+      onClearSearchesClick={handleClearSearchesClick}
+      onCloseSearchClick={handleCloseSearchClick}
+      onSetSearchCategory={handleSetSearchCategory}
+      pastSearches={[]}
+      results={noSearchResults}
+    />
+  );
+}
+
+export function NoResultsWithSuggestions() {
+  const handleCloseSearchClick = action('Close search');
+  const handleClearSearchesClick = action('Clear searches');
+  const handleSetSearchCategory = action('Set search category');
+
+  return (
+    <Search
+      isCustomerServiceEnabled={boolean('Is Business Hours', true)}
+      onClearSearchesClick={handleClearSearchesClick}
+      onCloseSearchClick={handleCloseSearchClick}
+      onSetSearchCategory={handleSetSearchCategory}
+      pastSearches={[]}
+      results={noResultsWithSuggestions}
+    />
   );
 }
