@@ -3,8 +3,11 @@ import { useEffect, useState } from 'react';
 import Icon from '~/components/global/Icon/Icon';
 import { ICON_SIZES, ICONS } from '~/components/global/Icon/Icon.constants';
 import { SiteIcon } from '~/data/models/SiteIcon';
-import { COLORS } from '~/lib/constants';
+import { COLORS, RATINGS } from '~/lib/constants';
+import { numberWithDecimal, percentageFromNumber } from '~/lib/utils/number';
 import { randomString } from '~/lib/utils/string';
+import { ui } from '~/lib/utils/ui-dictionary';
+import { screenReaderText } from '~/styles/document/accessibility.styles';
 import { typography } from '~/styles/typography.styles';
 
 import styles from './Ratings.styles';
@@ -17,8 +20,9 @@ interface Props {
 
 function Ratings({ ratingLabel, ratingLabelIcon, ratingStars }: Props) {
   const [ratingGradientId, setRatingGradientId] = useState<string>();
-  const formattedRating = ratingStars > 0 ? ratingStars.toFixed(1) : 0;
-  const ratingFillWidth = (ratingStars / 5) * 100;
+  const formattedRating = numberWithDecimal(ratingStars);
+  const ratingFillWidth = percentageFromNumber(ratingStars, RATINGS.MAX_RATING);
+  const a11yLabel = ` ${ui('common.ratings.outOf')} ${RATINGS.MAX_RATING}`;
 
   useEffect(() => {
     setRatingGradientId(randomString());
@@ -61,6 +65,7 @@ function Ratings({ ratingLabel, ratingLabelIcon, ratingStars }: Props) {
         <div css={[typography.primaryHeadline, styles.rating]}>
           {formattedRating}
         </div>
+        <span css={screenReaderText}>{a11yLabel}</span>
       </div>
       <div css={[typography.bodyCopy, styles.ratingLabel]}>
         {ratingLabel}

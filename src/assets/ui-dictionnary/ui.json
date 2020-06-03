@@ -104,6 +104,9 @@
       "linkLabel": "Learn More"
     }
   },
+  "ratings": {
+    "outOf": "out of"
+  },
   "search": {
     "addRearTire": "Add different rear size",
     "callUs": "Call us at (888) 410-0604",
