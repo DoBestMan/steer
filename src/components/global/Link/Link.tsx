@@ -13,7 +13,7 @@ import { disableGlobalFocus } from '~/styles/document/accessibility.styles';
 import { typography } from '~/styles/typography.styles';
 
 import BaseLink, { BaseLinkProps } from './BaseLink';
-import styles from './Link.styles';
+import styles, { linkBorder } from './Link.styles';
 
 interface Props {
   as?: LINK_TYPE;
@@ -63,9 +63,7 @@ function Link({
 
   const leftIcon = iconPosition === LINK_ICON_POSITION.LEFT && inlineIcon;
   const linkText = children && (
-    <span css={[styles.link, !icon && styles[`linkBorder${theme}`]]}>
-      {children}
-    </span>
+    <span css={[styles.link, !icon && linkBorder[theme]]}>{children}</span>
   );
   const rightIcon = iconPosition === LINK_ICON_POSITION.RIGHT && inlineIcon;
 

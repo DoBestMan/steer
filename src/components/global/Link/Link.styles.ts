@@ -33,15 +33,6 @@ const styles: CSSObject = {
     borderBottom: BORDERS.DOTTED_TRANSPARENT_2PX,
     transition: `border-color ${TIME.MS100}ms ease`,
   },
-  linkBorder: {
-    [LINK_THEME.DARK]: {
-      borderColor: 'inherit',
-    },
-
-    [LINK_THEME.LIGHT]: {
-      borderColor: COLORS.LIGHT.GRAY_70,
-    },
-  },
   root: {
     '&:hover span, &:focus span': {
       borderColor: 'inherit',
@@ -87,6 +78,16 @@ export const iconCTA = {
     svg: {
       color: COLORS.GLOBAL.WHITE,
     },
+  },
+};
+
+export const linkBorder: CSSObject = {
+  [LINK_THEME.DARK]: {
+    borderColor: 'inherit',
+  },
+
+  [LINK_THEME.LIGHT]: {
+    borderColor: COLORS.LIGHT.GRAY_70,
   },
 };
 
