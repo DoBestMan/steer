@@ -45,6 +45,20 @@ export const typographyStyles: { [name: string]: CSSObject } = {
       lineHeight: 30 / 28,
     },
   },
+  tertiaryHeadline: {
+    base: {
+      fontFamily,
+      fontSize: '1.5rem',
+      fontStyle: 'normal',
+      fontWeight: 'bold',
+      letterSpacing: '-0.01em',
+      lineHeight: 20 / 15,
+    },
+    XL: {
+      fontSize: '1.8rem',
+      lineHeight: 25 / 18,
+    },
+  },
 };
 
 export const typography = {
@@ -142,17 +156,10 @@ export const typography = {
     fontWeight: 'normal',
     lineHeight: 15 / 12,
   }),
-  tertiaryHeadline: css({
-    fontFamily,
-    fontSize: '1.5rem',
-    fontStyle: 'normal',
-    fontWeight: 'bold',
-    letterSpacing: '-0.01em',
-    lineHeight: 20 / 15,
-
-    [MQ.XL]: {
-      fontSize: '1.8rem',
-      lineHeight: 25 / 18,
-    },
-  }),
+  tertiaryHeadline: [
+    typographyStyles.tertiaryHeadline.base,
+    css({
+      [MQ.XL]: typographyStyles.tertiaryHeadline.XL,
+    }),
+  ],
 };
