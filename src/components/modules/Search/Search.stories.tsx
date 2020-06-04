@@ -10,7 +10,6 @@ import {
   VEHICLE_TRIM_MODAL_DATA,
 } from './AdditionalInfoModal/AdditionalInfoModal.constants';
 import Search from './Search';
-import { SearchStateEnum, SearchStateType } from './Search.constants';
 import {
   noResultsWithSuggestions,
   noSearchResults,
@@ -23,6 +22,7 @@ import {
   simpleSearchResults,
   tireSizeResults,
 } from './Search.mocks';
+import { SearchStateEnum, SearchStateType } from './Search.types';
 
 export default {
   component: Search,

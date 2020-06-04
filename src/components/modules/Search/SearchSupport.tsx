@@ -1,6 +1,7 @@
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import styles from './Search.styles';
+import { SearchResultType } from './Search.types';
 import SearchSection from './SearchSection';
 
 interface Props {
@@ -9,9 +10,9 @@ interface Props {
 
 function SearchSupport({ onClick }: Props) {
   const supportResult = {
-    displayValue: ui('search.callUs'),
-    type: 'term',
-    value: 'call-us',
+    label: ui('search.callUs'),
+    labelSegments: [{ label: ui('search.callUs'), matches: false }],
+    type: SearchResultType.SiteSearchResultTextItem,
   };
 
   return (

@@ -15,9 +15,6 @@ const styles: CSSObject = {
       },
     },
   ],
-  faded: {
-    color: COLORS.ORANGE.SHADE_85,
-  },
   isSelected: {
     borderColor: COLORS.GLOBAL.WHITE,
   },

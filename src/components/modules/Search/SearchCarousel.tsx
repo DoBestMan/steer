@@ -4,7 +4,7 @@ import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import Image from '~/components/global/Image/Image';
 
-import { SearchResult } from './Search';
+import { SearchResult } from './Search.types';
 import styles from './SearchCarousel.styles';
 
 export interface SearchCarouselProps {
@@ -37,10 +37,10 @@ function SearchCarousel({
       >
         <Glider draggable slidesToShow="auto">
           {searchResults.map((result) => (
-            <div css={styles.carouselItem} key={result.value}>
+            <div css={styles.carouselItem} key={result.label}>
               <button css={styles.carouselButton} onClick={handleClick(result)}>
                 <Image
-                  altText={result.displayValue}
+                  altText={result.label}
                   srcSet={result.displayImage || ''} // note: this is gross, but temporary. data schema will change in the future.
                 />
               </button>

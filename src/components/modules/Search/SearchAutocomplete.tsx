@@ -19,16 +19,17 @@ import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
 
 import AdditionalInfoModals from './AdditionalInfoModals';
-import { SearchGroup, SearchResult } from './Search';
+import { useAutocompleteSelectedItem } from './Search.hooks';
 import {
+  SearchGroup,
   SearchInputEnum,
   SearchModalEnum,
+  SearchResult,
   SearchState,
+  SearchStateCopy,
   SearchStateEnum,
   SearchStateType,
-} from './Search.constants';
-import { useAutocompleteSelectedItem } from './Search.hooks';
-import { initialSearchCategories } from './Search.mocks';
+} from './Search.types';
 import { getSearchResultComponent } from './Search.utils';
 import styles from './SearchAutocomplete.styles';
 import SearchInput from './SearchInput';
@@ -204,10 +205,8 @@ function SearchAutocomplete({
       return ui('search.frontTire');
     }
 
-    const currentCategory = initialSearchCategories.find(
-      (category) => searchState === category.value,
-    );
-    return currentCategory && `${currentCategory.displayValue}:`;
+    const searchStateCopy = SearchStateCopy[searchState];
+    return searchStateCopy && `${SearchStateCopy[searchState]}:`;
   };
 
   const clearPrimaryInputComponent = (
@@ -399,9 +398,7 @@ function SearchAutocomplete({
                     <li css={styles.searchResultsGridItem} key={index}>
                       <SearchResults
                         label={searchGroup.label}
-                        labelFragments={searchGroup.labelFragments}
                         onClick={handleValueSelection}
-                        query={query}
                         searchResults={searchGroup.siteSearchResultList}
                         sectionIndex={index}
                         selectedItemIndex={selectedItemIndex}

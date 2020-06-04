@@ -1,7 +1,107 @@
-import { ui } from '~/lib/utils/ui-dictionary';
+import {
+  Results,
+  SearchResultActionType,
+  SearchResultListEnum,
+  SearchResultType,
+  SearchStateCopy,
+  SearchStateEnum,
+} from './Search.types';
 
-import { Results } from './Search';
-import { SearchResultListEnum, SearchStateEnum } from './Search.constants';
+export const pastSearchResults = [
+  {
+    label: 'Mini Cooper 2018 Hardtop',
+    labelSegments: [
+      {
+        label: 'Mini Cooper 2018 Hardtop',
+        matches: false,
+      },
+    ],
+    type: SearchResultType.SiteSearchResultTextItem,
+  },
+  {
+    label: 'Honda Civic 2016 EX-L',
+    labelSegments: [
+      {
+        label: 'Honda Civic 2016 EX-L',
+        matches: false,
+      },
+    ],
+    type: SearchResultType.SiteSearchResultTextItem,
+  },
+  {
+    label: '215/50R16',
+    labelSegments: [
+      {
+        label: '215/50R16',
+        matches: false,
+      },
+    ],
+    type: SearchResultType.SiteSearchResultTextItem,
+  },
+  {
+    label: 'Toyota Sienna 2018 LE',
+    labelSegments: [
+      {
+        label: 'Toyota Sienna 2018 LE',
+        matches: false,
+      },
+    ],
+    type: SearchResultType.SiteSearchResultTextItem,
+  },
+  {
+    label: 'Hankook Kinergy PT',
+    labelSegments: [
+      {
+        label: 'Hankook Kinergy PT',
+        matches: false,
+      },
+    ],
+    type: SearchResultType.SiteSearchResultTextItem,
+  },
+];
+
+export const initialSearchCategories = [
+  {
+    label: SearchStateCopy[SearchStateEnum.VEHICLE],
+    labelSegments: [
+      {
+        label: SearchStateCopy[SearchStateEnum.VEHICLE],
+        matches: false,
+      },
+    ],
+    type: SearchResultType.SiteSearchResultTextItem,
+  },
+  {
+    label: SearchStateCopy[SearchStateEnum.TIRE_SIZE],
+    labelSegments: [
+      {
+        label: SearchStateCopy[SearchStateEnum.TIRE_SIZE],
+        matches: false,
+      },
+    ],
+    type: SearchResultType.SiteSearchResultTextItem,
+  },
+  {
+    label: SearchStateCopy[SearchStateEnum.BRAND],
+    labelSegments: [
+      {
+        label: SearchStateCopy[SearchStateEnum.BRAND],
+        matches: false,
+      },
+    ],
+    type: SearchResultType.SiteSearchResultTextItem,
+  },
+  {
+    label: SearchStateCopy[SearchStateEnum.POPULAR],
+    labelSegments: [
+      {
+        label: SearchStateCopy[SearchStateEnum.POPULAR],
+        matches: false,
+      },
+    ],
+    type: SearchResultType.SiteSearchResultTextItem,
+  },
+];
 
 export const noSearchResults: Results = {
   resultMetadata: {
@@ -20,29 +120,54 @@ export const noResultsWithSuggestions: Results = {
       type: SearchResultListEnum.LIST,
       siteSearchResultList: [
         {
-          displayValue: '205',
-          type: 'term',
-          value: '205',
+          label: '205',
+          labelSegments: [
+            {
+              label: '205',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: '215',
-          type: 'term',
-          value: '215',
+          label: '215',
+          labelSegments: [
+            {
+              label: '215',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: '245',
-          type: 'term',
-          value: '245',
+          label: '245',
+          labelSegments: [
+            {
+              label: '245',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: '225',
-          type: 'term',
-          value: '225',
+          label: '225',
+          labelSegments: [
+            {
+              label: '225',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: '235',
-          type: 'term',
-          value: '235',
+          label: '235',
+          labelSegments: [
+            {
+              label: '235',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
       ],
     },
@@ -55,44 +180,156 @@ export const simpleSearchResults: Results = {
     {
       siteSearchResultList: [
         {
-          displayValue: 'Honda',
-          type: 'term',
-          value: 'Honda',
+          action: {
+            queryText: 'Honda',
+            queryType: 'vehicleMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Honda',
+          labelSegments: [
+            {
+              label: 'H',
+              matches: true,
+            },
+            {
+              label: 'onda',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Honda Accord',
-          type: 'term',
-          value: 'Honda Accord',
+          action: {
+            queryText: 'Honda Accord',
+            queryType: 'vehicleMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Honda Accord',
+          labelSegments: [
+            {
+              label: 'H',
+              matches: true,
+            },
+            {
+              label: 'onda Accord',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Honda Civic',
-          type: 'term',
-          value: 'Honda Civic',
+          action: {
+            queryText: 'Honda Civic',
+            queryType: 'vehicleMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Honda Civic',
+          labelSegments: [
+            {
+              label: 'H',
+              matches: true,
+            },
+            {
+              label: 'onda Civic',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Honda CRV',
-          type: 'term',
-          value: 'Honda CRV',
+          action: {
+            queryText: 'Honda CRV',
+            queryType: 'vehicleMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Honda CRV',
+          labelSegments: [
+            {
+              label: 'H',
+              matches: true,
+            },
+            {
+              label: 'onda CRV',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Honda Super Crazy Long Name Awesome Car 3000',
-          type: 'term',
-          value: 'Honda Super Long Name Awesome Car 3000',
+          action: {
+            queryText: 'Honda Super Crazy Long Name Awesome Car 3000',
+            queryType: 'vehicleMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Honda Super Crazy Long Name Awesome Car 3000',
+          labelSegments: [
+            {
+              label: 'H',
+              matches: true,
+            },
+            {
+              label: 'onda Super Long Name Awesome Car 3000',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Hyundai',
-          type: 'term',
-          value: 'Hyundai',
+          action: {
+            queryText: 'Hyundai',
+            queryType: 'vehicleMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Hyundai',
+          labelSegments: [
+            {
+              label: 'H',
+              matches: true,
+            },
+            {
+              label: 'yundai',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Hyundai Elantra',
-          type: 'term',
-          value: 'Hyundai Elantra',
+          action: {
+            queryText: 'Hyundai Elantra',
+            queryType: 'vehicleMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Hyundai Elantra',
+          labelSegments: [
+            {
+              label: 'H',
+              matches: true,
+            },
+            {
+              label: 'yundai Elantra',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Hyundai Tucson',
-          type: 'term',
-          value: 'Hyundai Tucson',
+          action: {
+            queryText: 'Hyundai Tucson',
+            queryType: 'vehicleMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Hyundai Tucson',
+          labelSegments: [
+            {
+              label: 'H',
+              matches: true,
+            },
+            {
+              label: 'yundai Tucson',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
       ],
       type: SearchResultListEnum.LIST,
@@ -106,37 +343,87 @@ export const partNumberResults: Results = {
     {
       siteSearchResultList: [
         {
+          action: {
+            queryText: '106137625',
+            queryType: 'partNumber',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
           additionalDisplayValue: 'Goodyear Eagle GT II・Size 275/45R20',
-          displayValue: '106137625',
-          type: 'term',
-          value: '106137625',
+          label: '106137625',
+          labelSegments: [
+            {
+              label: '106137625',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
+          action: {
+            queryText: '106134277',
+            queryType: 'partNumber',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
           additionalDisplayValue: 'Goodyear Eagle GT II・Size 305/50R20',
-          displayValue: '106134277',
-          type: 'term',
-          value: '106134277',
+          label: '106134277',
+          labelSegments: [
+            {
+              label: '106134277',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
+          action: {
+            queryText: '106134223',
+            queryType: 'partNumber',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
           additionalDisplayValue:
             'Bridgestone Turanza Serenity Plus・Size 275/40R19',
-          displayValue: '106134223',
-          type: 'term',
-          value: '106134223',
+          label: '106134223',
+          labelSegments: [
+            {
+              label: '106134223',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
+          action: {
+            queryText: '106134224',
+            queryType: 'partNumber',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
           additionalDisplayValue:
             'Bridgestone Turanza Serenity Plus・Size 235/40R18',
-          displayValue: '106134224',
-          type: 'term',
-          value: '106134224',
+          label: '106134224',
+          labelSegments: [
+            {
+              label: '106134224',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
+          action: {
+            queryText: '106134294',
+            queryType: 'partNumber',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
           additionalDisplayValue:
             'Bridgestone Turanza Serenity Plus・Size 245/40R18',
-          displayValue: '106134294',
-          type: 'term',
-          value: '106134294',
+          label: '106134294',
+          labelSegments: [
+            {
+              label: '106134294',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
       ],
       type: SearchResultListEnum.LIST,
@@ -148,88 +435,73 @@ export const tireSizeResults: Results = {
   resultMetadata: {},
   siteSearchGroupList: [
     {
-      labelFragments: [
-        { highlighted: false, value: 'Front width' },
-        { highlighted: false, value: 'Ratio' },
-        { highlighted: true, value: 'Rim' },
-      ],
+      label: 'Width > Ratio > Rim',
       siteSearchResultList: [
         {
-          displayValue: '215/50R12',
-          type: 'term',
-          value: '215/50R12',
+          action: {
+            queryText: '215/50R12',
+            queryType: 'tireSize',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: '215/50R12',
+          labelSegments: [
+            {
+              label: '215/50R12',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: '215/50R16',
-          type: 'term',
-          value: '215/50R16',
+          action: {
+            queryText: '215/50R16',
+            queryType: 'tireSize',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: '215/50R16',
+          labelSegments: [
+            {
+              label: '215/50R16',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: '215/50R17',
-          type: 'term',
-          value: '215/50R17',
+          action: {
+            queryText: '215/50R17',
+            queryType: 'tireSize',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: '215/50R17',
+          labelSegments: [
+            {
+              label: '215/50R17',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: '215/50R18',
-          type: 'term',
-          value: '215/50R18',
+          action: {
+            queryText: '215/50R18',
+            queryType: 'tireSize',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: '215/50R18',
+          labelSegments: [
+            {
+              label: '215/50R18',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
       ],
       type: SearchResultListEnum.LIST,
     },
   ],
 };
-
-export const pastSearchResults = [
-  {
-    displayValue: 'Mini Cooper 2018 Hardtop',
-    type: 'term',
-    value: 'Mini Cooper 2018 Hardtop',
-  },
-  {
-    displayValue: 'Honda Civic 2016 EX-L',
-    type: 'term',
-    value: 'Honda Civic 2016 EX-L',
-  },
-  {
-    displayValue: '215/50R16',
-    type: 'term',
-    value: '215/50R16',
-  },
-  {
-    displayValue: 'Toyota Sienna 2018 LE',
-    type: 'term',
-    value: 'Toyota Sienna 2018 LE',
-  },
-  {
-    displayValue: 'Hankook Kinergy PT',
-    type: 'term',
-    value: 'Hankook Kinergy PT',
-  },
-];
-
-export const initialSearchCategories = [
-  {
-    displayValue: ui('search.searchCategories.vehicle'),
-    type: 'term',
-    value: SearchStateEnum.VEHICLE,
-  },
-  {
-    displayValue: ui('search.searchCategories.tireSize'),
-    type: 'term',
-    value: SearchStateEnum.TIRE_SIZE,
-  },
-  {
-    displayValue: ui('search.searchCategories.brand'),
-    type: 'term',
-    value: SearchStateEnum.BRAND,
-  },
-  {
-    displayValue: ui('search.searchCategories.popularTires'),
-    type: 'term',
-    value: SearchStateEnum.POPULAR,
-  },
-];
 
 export const searchByVehicle: Results = {
   resultMetadata: {},
@@ -238,29 +510,79 @@ export const searchByVehicle: Results = {
       label: 'Most Popular',
       siteSearchResultList: [
         {
-          displayValue: 'Honda',
-          type: 'term',
-          value: 'Honda',
+          action: {
+            queryText: 'Honda',
+            queryType: 'carMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Honda',
+          labelSegments: [
+            {
+              label: 'Honda',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Toyota',
-          type: 'term',
-          value: 'Toyota',
+          action: {
+            queryText: 'Toyota',
+            queryType: 'carMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Toyota',
+          labelSegments: [
+            {
+              label: 'Toyota',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Ford',
-          type: 'term',
-          value: 'Ford',
+          action: {
+            queryText: 'Ford',
+            queryType: 'carMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Ford',
+          labelSegments: [
+            {
+              label: 'Ford',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Subaru',
-          type: 'term',
-          value: 'Subaru',
+          action: {
+            queryText: 'Subaru',
+            queryType: 'carMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Subaru',
+          labelSegments: [
+            {
+              label: 'Subaru',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Chevrolet',
-          type: 'term',
-          value: 'Chevrolet',
+          action: {
+            queryText: 'Chevrolet',
+            queryType: 'carMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Chevrolet',
+          labelSegments: [
+            {
+              label: 'Chevrolet',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
       ],
       type: SearchResultListEnum.LIST,
@@ -269,234 +591,694 @@ export const searchByVehicle: Results = {
       label: 'All',
       siteSearchResultList: [
         {
-          displayValue: 'Alfa Romeo',
-          type: 'term',
-          value: 'Alfa Romeo',
+          action: {
+            queryText: 'Alfa Romeo',
+            queryType: 'carMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Alfa Romeo',
+          labelSegments: [
+            {
+              label: 'Alfa Romeo',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Aston Martin',
-          type: 'term',
-          value: 'Aston Martin',
+          action: {
+            queryText: 'Aston Martin',
+            queryType: 'carMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Aston Martin',
+          labelSegments: [
+            {
+              label: 'Aston Martin',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Audi',
-          type: 'term',
-          value: 'Audi',
+          action: {
+            queryText: 'Audi',
+            queryType: 'carMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Audi',
+          labelSegments: [
+            {
+              label: 'Audi',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Bentley',
-          type: 'term',
-          value: 'Bentley',
+          action: {
+            queryText: 'Bentley',
+            queryType: 'carMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Bentley',
+          labelSegments: [
+            {
+              label: 'Bentley',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'BMW',
-          type: 'term',
-          value: 'BMW',
+          action: {
+            queryText: 'BMW',
+            queryType: 'carMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'BMW',
+          labelSegments: [
+            {
+              label: 'BMW',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Bugatti',
-          type: 'term',
-          value: 'Bugatti',
+          action: {
+            queryText: 'Bugatti',
+            queryType: 'carMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Bugatti',
+          labelSegments: [
+            {
+              label: 'Bugatti',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Cadillac',
-          type: 'term',
-          value: 'Cadillac',
+          action: {
+            queryText: 'Cadillac',
+            queryType: 'carMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Cadillac',
+          labelSegments: [
+            {
+              label: 'Cadillac',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Chevrolet',
-          type: 'term',
-          value: 'Chevrolet',
+          action: {
+            queryText: 'Chevrolet',
+            queryType: 'carMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Chevrolet',
+          labelSegments: [
+            {
+              label: 'Chevrolet',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Chrysler',
-          type: 'term',
-          value: 'Chrysler',
+          action: {
+            queryText: 'Chrysler',
+            queryType: 'carMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Chrysler',
+          labelSegments: [
+            {
+              label: 'Chrysler',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Citroën',
-          type: 'term',
-          value: 'Citroën',
+          action: {
+            queryText: 'Citroën',
+            queryType: 'carMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Citroën',
+          labelSegments: [
+            {
+              label: 'Citroën',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Dacia',
-          type: 'term',
-          value: 'Dacia',
+          action: {
+            queryText: 'Dacia',
+            queryType: 'carMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Dacia',
+          labelSegments: [
+            {
+              label: 'Dacia',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Daewoo',
-          type: 'term',
-          value: 'Daewoo',
+          action: {
+            queryText: 'Daewoo',
+            queryType: 'carMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Daewoo',
+          labelSegments: [
+            {
+              label: 'Daewoo',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Dodge',
-          type: 'term',
-          value: 'Dodge',
+          action: {
+            queryText: 'Dodge',
+            queryType: 'carMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Dodge',
+          labelSegments: [
+            {
+              label: 'Dodge',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Ferrari',
-          type: 'term',
-          value: 'Ferrari',
+          action: {
+            queryText: 'Ferrari',
+            queryType: 'carMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Ferrari',
+          labelSegments: [
+            {
+              label: 'Ferrari',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Fiat',
-          type: 'term',
-          value: 'Fiat',
+          action: {
+            queryText: 'Fiat',
+            queryType: 'carMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Fiat',
+          labelSegments: [
+            {
+              label: 'Fiat',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Ford',
-          type: 'term',
-          value: 'Ford',
+          action: {
+            queryText: 'Ford',
+            queryType: 'carMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Ford',
+          labelSegments: [
+            {
+              label: 'Ford',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Honda',
-          type: 'term',
-          value: 'Honda',
+          action: {
+            queryText: 'Honda',
+            queryType: 'carMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Honda',
+          labelSegments: [
+            {
+              label: 'Honda',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Hummer',
-          type: 'term',
-          value: 'Hummer',
+          action: {
+            queryText: 'Hummer',
+            queryType: 'carMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Hummer',
+          labelSegments: [
+            {
+              label: 'Hummer',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Hyundai',
-          type: 'term',
-          value: 'Hyundai',
+          action: {
+            queryText: 'Hyundai',
+            queryType: 'carMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Hyundai',
+          labelSegments: [
+            {
+              label: 'Hyundai',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Infiniti',
-          type: 'term',
-          value: 'Infiniti',
+          action: {
+            queryText: 'Infiniti',
+            queryType: 'carMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Infiniti',
+          labelSegments: [
+            {
+              label: 'Infiniti',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Jaguar',
-          type: 'term',
-          value: 'Jaguar',
+          action: {
+            queryText: 'Jaguar',
+            queryType: 'carMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Jaguar',
+          labelSegments: [
+            {
+              label: 'Jaguar',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Jeep',
-          type: 'term',
-          value: 'Jeep',
+          action: {
+            queryText: 'Jeep',
+            queryType: 'carMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Jeep',
+          labelSegments: [
+            {
+              label: 'Jeep',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Kia',
-          type: 'term',
-          value: 'Kia',
+          action: {
+            queryText: 'Kia',
+            queryType: 'carMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Kia',
+          labelSegments: [
+            {
+              label: 'Kia',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Lamborghini',
-          type: 'term',
-          value: 'Lamborghini',
+          action: {
+            queryText: 'Lamborghini',
+            queryType: 'carMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Lamborghini',
+          labelSegments: [
+            {
+              label: 'Lamborghini',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Land Rover',
-          type: 'term',
-          value: 'Land Rover',
+          action: {
+            queryText: 'Land Rover',
+            queryType: 'carMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Land Rover',
+          labelSegments: [
+            {
+              label: 'Land Rover',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Lexus',
-          type: 'term',
-          value: 'Lexus',
+          action: {
+            queryText: 'Lexus',
+            queryType: 'carMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Lexus',
+          labelSegments: [
+            {
+              label: 'Lexus',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Lotus',
-          type: 'term',
-          value: 'Lotus',
+          action: {
+            queryText: 'Lotus',
+            queryType: 'carMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Lotus',
+          labelSegments: [
+            {
+              label: 'Lotus',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Maserati',
-          type: 'term',
-          value: 'Maserati',
+          action: {
+            queryText: 'Maserati',
+            queryType: 'carMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Maserati',
+          labelSegments: [
+            {
+              label: 'Maserati',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Mazda',
-          type: 'term',
-          value: 'Mazda',
+          action: {
+            queryText: 'Mazda',
+            queryType: 'carMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Mazda',
+          labelSegments: [
+            {
+              label: 'Mazda',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Mercedes-Benz',
-          type: 'term',
-          value: 'Mercedes-Benz',
+          action: {
+            queryText: 'Mercedes-Benz',
+            queryType: 'carMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Mercedes-Benz',
+          labelSegments: [
+            {
+              label: 'Mercedes-Benz',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Mini',
-          type: 'term',
-          value: 'Mini',
+          action: {
+            queryText: 'Mini',
+            queryType: 'carMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Mini',
+          labelSegments: [
+            {
+              label: 'Mini',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Mitsubishi',
-          type: 'term',
-          value: 'Mitsubishi',
+          action: {
+            queryText: 'Mitsubishi',
+            queryType: 'carMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Mitsubishi',
+          labelSegments: [
+            {
+              label: 'Mitsubishi',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Nissan',
-          type: 'term',
-          value: 'Nissan',
+          action: {
+            queryText: 'Nissan',
+            queryType: 'carMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Nissan',
+          labelSegments: [
+            {
+              label: 'Nissan',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Opel',
-          type: 'term',
-          value: 'Opel',
+          action: {
+            queryText: 'Opel',
+            queryType: 'carMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Opel',
+          labelSegments: [
+            {
+              label: 'Opel',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Peugeot',
-          type: 'term',
-          value: 'Peugeot',
+          action: {
+            queryText: 'Peugeot',
+            queryType: 'carMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Peugeot',
+          labelSegments: [
+            {
+              label: 'Peugeot',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Porsche',
-          type: 'term',
-          value: 'Porsche',
+          action: {
+            queryText: 'Porsche',
+            queryType: 'carMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Porsche',
+          labelSegments: [
+            {
+              label: 'Porsche',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Renault',
-          type: 'term',
-          value: 'Renault',
+          action: {
+            queryText: 'Renault',
+            queryType: 'carMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Renault',
+          labelSegments: [
+            {
+              label: 'Renault',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Rover',
-          type: 'term',
-          value: 'Rover',
+          action: {
+            queryText: 'Rover',
+            queryType: 'carMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Rover',
+          labelSegments: [
+            {
+              label: 'Rover',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Saab',
-          type: 'term',
-          value: 'Saab',
+          action: {
+            queryText: 'Saab',
+            queryType: 'carMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Saab',
+          labelSegments: [
+            {
+              label: 'Saab',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Smart',
-          type: 'term',
-          value: 'Smart',
+          action: {
+            queryText: 'Smart',
+            queryType: 'carMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Smart',
+          labelSegments: [
+            {
+              label: 'Smart',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Subaru',
-          type: 'term',
-          value: 'Subaru',
+          action: {
+            queryText: 'Subaru',
+            queryType: 'carMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Subaru',
+          labelSegments: [
+            {
+              label: 'Subaru',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Suzuki',
-          type: 'term',
-          value: 'Suzuki',
+          action: {
+            queryText: 'Suzuki',
+            queryType: 'carMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Suzuki',
+          labelSegments: [
+            {
+              label: 'Suzuki',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Tesla',
-          type: 'term',
-          value: 'Tesla',
+          action: {
+            queryText: 'Tesla',
+            queryType: 'carMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Tesla',
+          labelSegments: [
+            {
+              label: 'Tesla',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Toyota',
-          type: 'term',
-          value: 'Toyota',
+          action: {
+            queryText: 'Toyota',
+            queryType: 'carMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Toyota',
+          labelSegments: [
+            {
+              label: 'Toyota',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Volkswagen',
-          type: 'term',
-          value: 'Volkswagen',
+          action: {
+            queryText: 'Volkswagen',
+            queryType: 'carMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Volkswagen',
+          labelSegments: [
+            {
+              label: 'Volkswagen',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Volvo',
-          type: 'term',
-          value: 'Volvo',
+          action: {
+            queryText: 'Volvo',
+            queryType: 'carMake',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Volvo',
+          labelSegments: [
+            {
+              label: 'Volvo',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
       ],
       type: SearchResultListEnum.LIST,
@@ -511,29 +1293,79 @@ export const searchByTireSize: Results = {
       label: 'Popular Widths',
       siteSearchResultList: [
         {
-          displayValue: '205',
-          type: 'term',
-          value: '205',
+          action: {
+            queryText: '205',
+            queryType: 'tireSize',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: '205',
+          labelSegments: [
+            {
+              label: '205',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: '215',
-          type: 'term',
-          value: '215',
+          action: {
+            queryText: '215',
+            queryType: 'tireSize',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: '215',
+          labelSegments: [
+            {
+              label: '215',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: '245',
-          type: 'term',
-          value: '245',
+          action: {
+            queryText: '245',
+            queryType: 'tireSize',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: '245',
+          labelSegments: [
+            {
+              label: '245',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: '225',
-          type: 'term',
-          value: '225',
+          action: {
+            queryText: '225',
+            queryType: 'tireSize',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: '225',
+          labelSegments: [
+            {
+              label: '225',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: '235',
-          type: 'term',
-          value: '235',
+          action: {
+            queryText: '235',
+            queryType: 'tireSize',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: '235',
+          labelSegments: [
+            {
+              label: '235',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
       ],
       type: SearchResultListEnum.LIST,
@@ -542,209 +1374,619 @@ export const searchByTireSize: Results = {
       label: 'All Widths',
       siteSearchResultList: [
         {
-          displayValue: '2.5',
-          type: 'term',
-          value: '2.5',
+          action: {
+            queryText: '2.5',
+            queryType: 'tireSize',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: '2.5',
+          labelSegments: [
+            {
+              label: '2.5',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: '2.75',
-          type: 'term',
-          value: '2.75',
+          action: {
+            queryText: '2.75',
+            queryType: 'tireSize',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: '2.75',
+          labelSegments: [
+            {
+              label: '2.75',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: '2.8',
-          type: 'term',
-          value: '2.8',
+          action: {
+            queryText: '2.8',
+            queryType: 'tireSize',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: '2.8',
+          labelSegments: [
+            {
+              label: '2.8',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: '3',
-          type: 'term',
-          value: '3',
+          action: {
+            queryText: '3',
+            queryType: 'tireSize',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: '3',
+          labelSegments: [
+            {
+              label: '3',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: '3.5',
-          type: 'term',
-          value: '3.5',
+          action: {
+            queryText: '3.5',
+            queryType: 'tireSize',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: '3.5',
+          labelSegments: [
+            {
+              label: '3.5',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: '4',
-          type: 'term',
-          value: '4',
+          action: {
+            queryText: '4',
+            queryType: 'tireSize',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: '4',
+          labelSegments: [
+            {
+              label: '4',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: '4.1',
-          type: 'term',
-          value: '4.1',
+          action: {
+            queryText: '4.1',
+            queryType: 'tireSize',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: '4.1',
+          labelSegments: [
+            {
+              label: '4.1',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: '4.5',
-          type: 'term',
-          value: '4.5',
+          action: {
+            queryText: '4.5',
+            queryType: 'tireSize',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: '4.5',
+          labelSegments: [
+            {
+              label: '4.5',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: '4.8',
-          type: 'term',
-          value: '4.8',
+          action: {
+            queryText: '4.8',
+            queryType: 'tireSize',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: '4.8',
+          labelSegments: [
+            {
+              label: '4.8',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: '5',
-          type: 'term',
-          value: '5',
+          action: {
+            queryText: '5',
+            queryType: 'tireSize',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: '5',
+          labelSegments: [
+            {
+              label: '5',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: '5.3',
-          type: 'term',
-          value: '5.3',
+          action: {
+            queryText: '5.3',
+            queryType: 'tireSize',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: '5.3',
+          labelSegments: [
+            {
+              label: '5.3',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: '5.5',
-          type: 'term',
-          value: '5.5',
+          action: {
+            queryText: '5.5',
+            queryType: 'tireSize',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: '5.5',
+          labelSegments: [
+            {
+              label: '5.5',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: '5.7',
-          type: 'term',
-          value: '5.7',
+          action: {
+            queryText: '5.7',
+            queryType: 'tireSize',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: '5.7',
+          labelSegments: [
+            {
+              label: '5.7',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: '5.9',
-          type: 'term',
-          value: '5.9',
+          action: {
+            queryText: '5.9',
+            queryType: 'tireSize',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: '5.9',
+          labelSegments: [
+            {
+              label: '5.9',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: '6',
-          type: 'term',
-          value: '6',
+          action: {
+            queryText: '6',
+            queryType: 'tireSize',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: '6',
+          labelSegments: [
+            {
+              label: '6',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: '6.4',
-          type: 'term',
-          value: '6.4',
+          action: {
+            queryText: '6.4',
+            queryType: 'tireSize',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: '6.4',
+          labelSegments: [
+            {
+              label: '6.4',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: '6.5',
-          type: 'term',
-          value: '6.5',
+          action: {
+            queryText: '6.5',
+            queryType: 'tireSize',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: '6.5',
+          labelSegments: [
+            {
+              label: '6.5',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: '6.7',
-          type: 'term',
-          value: '6.7',
+          action: {
+            queryText: '6.7',
+            queryType: 'tireSize',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: '6.7',
+          labelSegments: [
+            {
+              label: '6.7',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: '6.9',
-          type: 'term',
-          value: '6.9',
+          action: {
+            queryText: '6.9',
+            queryType: 'tireSize',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: '6.9',
+          labelSegments: [
+            {
+              label: '6.9',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: '7',
-          type: 'term',
-          value: '7',
+          action: {
+            queryText: '7',
+            queryType: 'tireSize',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: '7',
+          labelSegments: [
+            {
+              label: '7',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: '7.2',
-          type: 'term',
-          value: '7.2',
+          action: {
+            queryText: '7.2',
+            queryType: 'tireSize',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: '7.2',
+          labelSegments: [
+            {
+              label: '7.2',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: '7.5',
-          type: 'term',
-          value: '7.5',
+          action: {
+            queryText: '7.5',
+            queryType: 'tireSize',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: '7.5',
+          labelSegments: [
+            {
+              label: '7.5',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: '7.6',
-          type: 'term',
-          value: '7.6',
+          action: {
+            queryText: '7.6',
+            queryType: 'tireSize',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: '7.6',
+          labelSegments: [
+            {
+              label: '7.6',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: '8',
-          type: 'term',
-          value: '8',
+          action: {
+            queryText: '8',
+            queryType: 'tireSize',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: '8',
+          labelSegments: [
+            {
+              label: '8',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: '8.15',
-          type: 'term',
-          value: '8.15',
+          action: {
+            queryText: '8.15',
+            queryType: 'tireSize',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: '8.15',
+          labelSegments: [
+            {
+              label: '8.15',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: '8.25',
-          type: 'term',
-          value: '8.25',
+          action: {
+            queryText: '8.25',
+            queryType: 'tireSize',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: '8.25',
+          labelSegments: [
+            {
+              label: '8.25',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: '8.3',
-          type: 'term',
-          value: '8.3',
+          action: {
+            queryText: '8.3',
+            queryType: 'tireSize',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: '8.3',
+          labelSegments: [
+            {
+              label: '8.3',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: '8.5',
-          type: 'term',
-          value: '8.5',
+          action: {
+            queryText: '8.5',
+            queryType: 'tireSize',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: '8.5',
+          labelSegments: [
+            {
+              label: '8.5',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: '8.75',
-          type: 'term',
-          value: '8.75',
+          action: {
+            queryText: '8.75',
+            queryType: 'tireSize',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: '8.75',
+          labelSegments: [
+            {
+              label: '8.75',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: '9',
-          type: 'term',
-          value: '9',
+          action: {
+            queryText: '9',
+            queryType: 'tireSize',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: '9',
+          labelSegments: [
+            {
+              label: '9',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: '9.5',
-          type: 'term',
-          value: '9.5',
+          action: {
+            queryText: '9.5',
+            queryType: 'tireSize',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: '9.5',
+          labelSegments: [
+            {
+              label: '9.5',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: '10',
-          type: 'term',
-          value: '10',
+          action: {
+            queryText: '10',
+            queryType: 'tireSize',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: '10',
+          labelSegments: [
+            {
+              label: '10',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: '10.5',
-          type: 'term',
-          value: '10.5',
+          action: {
+            queryText: '10.5',
+            queryType: 'tireSize',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: '10.5',
+          labelSegments: [
+            {
+              label: '10.5',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: '11',
-          type: 'term',
-          value: '11',
+          action: {
+            queryText: '11',
+            queryType: 'tireSize',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: '11',
+          labelSegments: [
+            {
+              label: '11',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: '11.2',
-          type: 'term',
-          value: '11.2',
+          action: {
+            queryText: '11.2',
+            queryType: 'tireSize',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: '11.2',
+          labelSegments: [
+            {
+              label: '11.2',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: '11.25',
-          type: 'term',
-          value: '11.25',
+          action: {
+            queryText: '11.25',
+            queryType: 'tireSize',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: '11.25',
+          labelSegments: [
+            {
+              label: '11.25',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: '11.5',
-          type: 'term',
-          value: '11.5',
+          action: {
+            queryText: '11.5',
+            queryType: 'tireSize',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: '11.5',
+          labelSegments: [
+            {
+              label: '11.5',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: '12',
-          type: 'term',
-          value: '12',
+          action: {
+            queryText: '12',
+            queryType: 'tireSize',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: '12',
+          labelSegments: [
+            {
+              label: '12',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: '12.4',
-          type: 'term',
-          value: '12.4',
+          action: {
+            queryText: '12.4',
+            queryType: 'tireSize',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: '12.4',
+          labelSegments: [
+            {
+              label: '12.4',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: '12.5',
-          type: 'term',
-          value: '12.5',
+          action: {
+            queryText: '12.5',
+            queryType: 'tireSize',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: '12.5',
+          labelSegments: [
+            {
+              label: '12.5',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: '12.75',
-          type: 'term',
-          value: '12.75',
+          action: {
+            queryText: '12.75',
+            queryType: 'tireSize',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: '12.75',
+          labelSegments: [
+            {
+              label: '12.75',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
       ],
       type: SearchResultListEnum.LIST,
@@ -759,76 +2001,196 @@ export const searchByBrand: Results = {
       label: 'Featured',
       siteSearchResultList: [
         {
+          action: {
+            queryText: 'Pirelli',
+            queryType: 'brand',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
           displayImage: '/images/brands/pirelli_logo.svg',
-          displayValue: 'Pirelli',
-          type: 'term',
-          value: 'Pirelli',
+          label: 'Pirelli',
+          labelSegments: [
+            {
+              label: 'Pirelli',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultImageItem,
         },
         {
+          action: {
+            queryText: 'Michelin',
+            queryType: 'brand',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
           displayImage: '/images/brands/michelin_logo.svg',
-          displayValue: 'Michelin',
-          type: 'term',
-          value: 'Michelin',
+          label: 'Michelin',
+          labelSegments: [
+            {
+              label: 'Michelin',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultImageItem,
         },
         {
+          action: {
+            queryText: 'Continental',
+            queryType: 'brand',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
           displayImage: '/images/brands/continental_logo.svg',
-          displayValue: 'Continental',
-          type: 'term',
-          value: 'Continental',
+          label: 'Continental',
+          labelSegments: [
+            {
+              label: 'Continental',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultImageItem,
         },
         {
+          action: {
+            queryText: 'Bridgestone',
+            queryType: 'brand',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
           displayImage: '/images/brands/bridgestone_logo.svg',
-          displayValue: 'Bridgestone',
-          type: 'term',
-          value: 'Bridgestone',
+          label: 'Bridgestone',
+          labelSegments: [
+            {
+              label: 'Bridgestone',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultImageItem,
         },
         {
+          action: {
+            queryText: 'Pirelli-2',
+            queryType: 'brand',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
           displayImage: '/images/brands/pirelli_logo.svg',
-          displayValue: 'Pirelli-2',
-          type: 'term',
-          value: 'Pirelli-2',
+          label: 'Pirelli-2',
+          labelSegments: [
+            {
+              label: 'Pirelli-2',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultImageItem,
         },
         {
+          action: {
+            queryText: 'Michelin-2',
+            queryType: 'brand',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
           displayImage: '/images/brands/michelin_logo.svg',
-          displayValue: 'Michelin-2',
-          type: 'term',
-          value: 'Michelin-2',
+          label: 'Michelin-2',
+          labelSegments: [
+            {
+              label: 'Michelin-2',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultImageItem,
         },
         {
+          action: {
+            queryText: 'Continental-2',
+            queryType: 'brand',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
           displayImage: '/images/brands/continental_logo.svg',
-          displayValue: 'Continental-2',
-          type: 'term',
-          value: 'Continental-2',
+          label: 'Continental-2',
+          labelSegments: [
+            {
+              label: 'Continental-2',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultImageItem,
         },
         {
+          action: {
+            queryText: 'Bridgestone-2',
+            queryType: 'brand',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
           displayImage: '/images/brands/bridgestone_logo.svg',
-          displayValue: 'Bridgestone-2',
-          type: 'term',
-          value: 'Bridgestone-2',
+          label: 'Bridgestone-2',
+          labelSegments: [
+            {
+              label: 'Bridgestone-2',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultImageItem,
         },
         {
+          action: {
+            queryText: 'Pirelli-3',
+            queryType: 'brand',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
           displayImage: '/images/brands/pirelli_logo.svg',
-          displayValue: 'Pirelli-3',
-          type: 'term',
-          value: 'Pirelli-3',
+          label: 'Pirelli-3',
+          labelSegments: [
+            {
+              label: 'Pirelli-3',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultImageItem,
         },
         {
+          action: {
+            queryText: 'Michelin-3',
+            queryType: 'brand',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
           displayImage: '/images/brands/michelin_logo.svg',
-          displayValue: 'Michelin-3',
-          type: 'term',
-          value: 'Michelin-3',
+          label: 'Michelin-3',
+          labelSegments: [
+            {
+              label: 'Michelin-3',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultImageItem,
         },
         {
+          action: {
+            queryText: 'Continental-3',
+            queryType: 'brand',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
           displayImage: '/images/brands/continental_logo.svg',
-          displayValue: 'Continental-3',
-          type: 'term',
-          value: 'Continental-3',
+          label: 'Continental-3',
+          labelSegments: [
+            {
+              label: 'Continental-3',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultImageItem,
         },
         {
+          action: {
+            queryText: 'Bridgestone-3',
+            queryType: 'brand',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
           displayImage: '/images/brands/bridgestone_logo.svg',
-          displayValue: 'Bridgestone-3',
-          type: 'term',
-          value: 'Bridgestone-3',
+          label: 'Bridgestone-3',
+          labelSegments: [
+            {
+              label: 'Bridgestone-3',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultImageItem,
         },
       ],
       type: SearchResultListEnum.CAROUSEL,
@@ -837,119 +2199,349 @@ export const searchByBrand: Results = {
       label: 'All',
       siteSearchResultList: [
         {
-          displayValue: 'Anatares',
-          type: 'term',
-          value: 'Anatares',
+          action: {
+            queryText: 'Anatares',
+            queryType: 'brand',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Anatares',
+          labelSegments: [
+            {
+              label: 'Anatares',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'BFGoodrich',
-          type: 'term',
-          value: 'BFGoodrich',
+          action: {
+            queryText: 'BFGoodrich',
+            queryType: 'brand',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'BFGoodrich',
+          labelSegments: [
+            {
+              label: 'BFGoodrich',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Bridgestone',
-          type: 'term',
-          value: 'Bridgestone',
+          action: {
+            queryText: 'Bridgestone',
+            queryType: 'brand',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Bridgestone',
+          labelSegments: [
+            {
+              label: 'Bridgestone',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Continental',
-          type: 'term',
-          value: 'Continental',
+          action: {
+            queryText: 'Continental',
+            queryType: 'brand',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Continental',
+          labelSegments: [
+            {
+              label: 'Continental',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Cooper',
-          type: 'term',
-          value: 'Cooper',
+          action: {
+            queryText: 'Cooper',
+            queryType: 'brand',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Cooper',
+          labelSegments: [
+            {
+              label: 'Cooper',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Dextero',
-          type: 'term',
-          value: 'Dextero',
+          action: {
+            queryText: 'Dextero',
+            queryType: 'brand',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Dextero',
+          labelSegments: [
+            {
+              label: 'Dextero',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Douglas',
-          type: 'term',
-          value: 'Douglas',
+          action: {
+            queryText: 'Douglas',
+            queryType: 'brand',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Douglas',
+          labelSegments: [
+            {
+              label: 'Douglas',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Dunlop',
-          type: 'term',
-          value: 'Dunlop',
+          action: {
+            queryText: 'Dunlop',
+            queryType: 'brand',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Dunlop',
+          labelSegments: [
+            {
+              label: 'Dunlop',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Falken',
-          type: 'term',
-          value: 'Falken',
+          action: {
+            queryText: 'Falken',
+            queryType: 'brand',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Falken',
+          labelSegments: [
+            {
+              label: 'Falken',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Goodyear',
-          type: 'term',
-          value: 'Goodyear',
+          action: {
+            queryText: 'Goodyear',
+            queryType: 'brand',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Goodyear',
+          labelSegments: [
+            {
+              label: 'Goodyear',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Hankook',
-          type: 'term',
-          value: 'Hankook',
+          action: {
+            queryText: 'Hankook',
+            queryType: 'brand',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Hankook',
+          labelSegments: [
+            {
+              label: 'Hankook',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Kelly',
-          type: 'term',
-          value: 'Kelly',
+          action: {
+            queryText: 'Kelly',
+            queryType: 'brand',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Kelly',
+          labelSegments: [
+            {
+              label: 'Kelly',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Kumho',
-          type: 'term',
-          value: 'Kumho',
+          action: {
+            queryText: 'Kumho',
+            queryType: 'brand',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Kumho',
+          labelSegments: [
+            {
+              label: 'Kumho',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Mastercraft',
-          type: 'term',
-          value: 'Mastercraft',
+          action: {
+            queryText: 'Mastercraft',
+            queryType: 'brand',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Mastercraft',
+          labelSegments: [
+            {
+              label: 'Mastercraft',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Michelin',
-          type: 'term',
-          value: 'Michelin',
+          action: {
+            queryText: 'Michelin',
+            queryType: 'brand',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Michelin',
+          labelSegments: [
+            {
+              label: 'Michelin',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Nexen',
-          type: 'term',
-          value: 'Nexen',
+          action: {
+            queryText: 'Nexen',
+            queryType: 'brand',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Nexen',
+          labelSegments: [
+            {
+              label: 'Nexen',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Nitto',
-          type: 'term',
-          value: 'Nitto',
+          action: {
+            queryText: 'Nitto',
+            queryType: 'brand',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Nitto',
+          labelSegments: [
+            {
+              label: 'Nitto',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Nokian',
-          type: 'term',
-          value: 'Nokian',
+          action: {
+            queryText: 'Nokian',
+            queryType: 'brand',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Nokian',
+          labelSegments: [
+            {
+              label: 'Nokian',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Pirelli',
-          type: 'term',
-          value: 'Pirelli',
+          action: {
+            queryText: 'Pirelli',
+            queryType: 'brand',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Pirelli',
+          labelSegments: [
+            {
+              label: 'Pirelli',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Rydanz',
-          type: 'term',
-          value: 'Rydanz',
+          action: {
+            queryText: 'Rydanz',
+            queryType: 'brand',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Rydanz',
+          labelSegments: [
+            {
+              label: 'Rydanz',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Solar',
-          type: 'term',
-          value: 'Solar',
+          action: {
+            queryText: 'Solar',
+            queryType: 'brand',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Solar',
+          labelSegments: [
+            {
+              label: 'Solar',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Uniroyal',
-          type: 'term',
-          value: 'Uniroyal',
+          action: {
+            queryText: 'Uniroyal',
+            queryType: 'brand',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Uniroyal',
+          labelSegments: [
+            {
+              label: 'Uniroyal',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Yokoham',
-          type: 'term',
-          value: 'Yokoham',
+          action: {
+            queryText: 'Yokoham',
+            queryType: 'brand',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Yokoham',
+          labelSegments: [
+            {
+              label: 'Yokoham',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
       ],
       type: SearchResultListEnum.LIST,
@@ -964,44 +2556,124 @@ export const searchByMostPopular: Results = {
       label: 'Most Popular',
       siteSearchResultList: [
         {
-          displayValue: 'Michelin Pilot Sports A/S',
-          type: 'term',
-          value: 'Michelin Pilot Sports A/S',
+          action: {
+            queryText: 'Michelin Pilot Sports A/S',
+            queryType: 'popular',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Michelin Pilot Sports A/S',
+          labelSegments: [
+            {
+              label: 'Michelin Pilot Sports A/S',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Michelin Defender',
-          type: 'term',
-          value: 'Michelin Defender',
+          action: {
+            queryText: 'Michelin Defender',
+            queryType: 'popular',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Michelin Defender',
+          labelSegments: [
+            {
+              label: 'Michelin Defender',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Hankook Ventus ST',
-          type: 'term',
-          value: 'Hankook Ventus ST',
+          action: {
+            queryText: 'Hankook Ventus ST',
+            queryType: 'popular',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Hankook Ventus ST',
+          labelSegments: [
+            {
+              label: 'Hankook Ventus ST',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Pirelli P Zero Nero',
-          type: 'term',
-          value: 'Pirelli P Zero Nero',
+          action: {
+            queryText: 'Pirelli P Zero Nero',
+            queryType: 'popular',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Pirelli P Zero Nero',
+          labelSegments: [
+            {
+              label: 'Pirelli P Zero Nero',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Yokohama AVID Ascend',
-          type: 'term',
-          value: 'Yokohama AVID Ascend',
+          action: {
+            queryText: 'Yokohama AVID Ascend',
+            queryType: 'popular',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Yokohama AVID Ascend',
+          labelSegments: [
+            {
+              label: 'Yokohama AVID Ascend',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Michelin Primacy',
-          type: 'term',
-          value: 'Michelin Primacy',
+          action: {
+            queryText: 'Michelin Primacy',
+            queryType: 'popular',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Michelin Primacy',
+          labelSegments: [
+            {
+              label: 'Michelin Primacy',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Bridgestone Dueler H/P Sport AS',
-          type: 'term',
-          value: 'Bridgestone Dueler H/P Sport AS',
+          action: {
+            queryText: 'Bridgestone Dueler H/P Sport AS',
+            queryType: 'popular',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Bridgestone Dueler H/P Sport AS',
+          labelSegments: [
+            {
+              label: 'Bridgestone Dueler H/P Sport AS',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
         {
-          displayValue: 'Hankook Ventus ST RH06',
-          type: 'term',
-          value: 'Hankook Ventus ST RH06',
+          action: {
+            queryText: 'Hankook Ventus ST RH06',
+            queryType: 'popular',
+            type: SearchResultActionType.SiteSearchResultActionQuery,
+          },
+          label: 'Hankook Ventus ST RH06',
+          labelSegments: [
+            {
+              label: 'Hankook Ventus ST RH06',
+              matches: false,
+            },
+          ],
+          type: SearchResultType.SiteSearchResultTextItem,
         },
       ],
       type: SearchResultListEnum.LIST,

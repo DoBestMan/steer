@@ -9,7 +9,7 @@ import {
 
 import { randomString } from '~/lib/utils/string';
 
-import { SearchInputEnum } from './Search.constants';
+import { SearchInputEnum } from './Search.types';
 import styles from './SearchInput.styles';
 
 interface AutocompleteInputProps {

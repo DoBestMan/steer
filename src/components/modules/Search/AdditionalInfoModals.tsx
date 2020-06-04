@@ -3,7 +3,7 @@ import {
   TIRE_SEARCH_MODAL_DATA,
   VEHICLE_TRIM_MODAL_DATA,
 } from './AdditionalInfoModal/AdditionalInfoModal.constants';
-import { SearchModalEnum } from './Search.constants';
+import { SearchModalEnum } from './Search.types';
 
 interface Props {
   activeModal: SearchModalEnum | null;

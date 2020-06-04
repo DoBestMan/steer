@@ -4,40 +4,17 @@ import { TIME } from '~/lib/constants';
 import { scrollTo } from '~/lib/helpers/scroll';
 
 import InitialSearch from './InitialSearch';
+import styles from './Search.styles';
 import {
+  Results,
   SearchInputEnum,
-  SearchResultListEnum,
+  SearchResult,
   SearchState,
   SearchStateEnum,
   SearchStateType,
-} from './Search.constants';
-import styles from './Search.styles';
+} from './Search.types';
 import SearchAutocomplete from './SearchAutocomplete';
 import SearchSupport from './SearchSupport';
-
-interface ResultMetadata {
-  noExactMatches?: boolean;
-}
-
-export interface Results {
-  resultMetadata: ResultMetadata;
-  siteSearchGroupList: SearchGroup[];
-}
-
-export interface SearchGroup {
-  label?: string;
-  labelFragments?: Array<{ highlighted: boolean; value: string }>;
-  siteSearchResultList: SearchResult[];
-  type: SearchResultListEnum;
-}
-
-export interface SearchResult {
-  additionalDisplayValue?: string;
-  displayImage?: string;
-  displayValue: string;
-  type: string;
-  value: string;
-}
 
 interface Props {
   forwardedRef?: RefObject<HTMLDivElement>;
@@ -104,16 +81,16 @@ function Search({
 
   const handleValueSelection = (searchResult: SearchResult) => {
     if (activeInputType === SearchInputEnum.PRIMARY) {
-      setQuery(searchResult.displayValue);
+      setQuery(searchResult.label);
     } else if (activeInputType === SearchInputEnum.SECONDARY) {
-      setSecondaryQuery(searchResult.displayValue);
+      setSecondaryQuery(searchResult.label);
     }
   };
 
   // We need to set the search state internally for UI purposes, but also
   // externally in order to update the search results.
   const handleSearchCategoryClick = (searchResult: SearchResult) => {
-    const category = SearchState[searchResult.value];
+    const category = SearchState[searchResult.label];
     setSearchState(category);
     onSetSearchCategory(category);
   };

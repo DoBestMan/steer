@@ -1,7 +1,7 @@
 import {
   SearchResultListComponent,
   SearchResultListEnum,
-} from './Search.constants';
+} from './Search.types';
 
 export function getSearchResultComponent(resultType: SearchResultListEnum) {
   return SearchResultListComponent[resultType];

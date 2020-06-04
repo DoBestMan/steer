@@ -7,9 +7,9 @@ import { LINK_THEME, LINK_TYPES, TIME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
 
-import { SearchResult } from './Search';
 import { initialSearchCategories } from './Search.mocks';
 import styles from './Search.styles';
+import { SearchResult } from './Search.types';
 import SearchSection from './SearchSection';
 
 interface Props {

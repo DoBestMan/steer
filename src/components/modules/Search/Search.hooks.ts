@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { SearchGroup } from './Search';
+import { SearchGroup } from './Search.types';
 
 /**
  * This hook takes care of the selection logic for selecting search
