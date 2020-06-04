@@ -5,6 +5,7 @@ import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { styles } from './Casino.styles';
 
 type SlotProps = {
+  animate: boolean;
   height: number;
   numberToDisplay: number;
   to: number;
@@ -13,13 +14,21 @@ type SlotProps = {
 };
 
 type Props = {
+  animate: boolean;
   numberDisplayed: number;
 };
 
 const NB_CHARACTERS = 10;
 
 function Slot(props: SlotProps) {
-  const { height, numberToDisplay, to, transitionDuration, width } = props;
+  const {
+    height,
+    numberToDisplay,
+    animate,
+    to,
+    transitionDuration,
+    width,
+  } = props;
 
   const [y, setY] = useState<number>(0);
   const [top, setTop] = useState<number>(0);
@@ -28,6 +37,10 @@ function Slot(props: SlotProps) {
   const prevToRef = useRef<number>(0);
 
   useEffect(() => {
+    if (!animate) {
+      return;
+    }
+
     const diffTo = to - prevToRef.current;
 
     /* 
@@ -74,7 +87,16 @@ function Slot(props: SlotProps) {
 
     prevToRef.current = to;
     prevNumberToDisplayRef.current = numberToDisplay;
-  }, [setY, setTop, y, prevNumberToDisplayRef, numberToDisplay, prevToRef, to]);
+  }, [
+    setY,
+    setTop,
+    animate,
+    y,
+    prevNumberToDisplayRef,
+    numberToDisplay,
+    prevToRef,
+    to,
+  ]);
 
   const style = {
     top,
@@ -97,7 +119,7 @@ function Slot(props: SlotProps) {
   );
 }
 
-function Casino({ numberDisplayed, ...rest }: Props) {
+function Casino({ numberDisplayed, animate, ...rest }: Props) {
   const containerEl = useRef<HTMLSpanElement>(null);
 
   const [hasMounted, setHasMounted] = useState<boolean>(false);
@@ -208,6 +230,7 @@ function Casino({ numberDisplayed, ...rest }: Props) {
                 numberToDisplay={parseInt(nb, 10)}
                 height={height}
                 width={width}
+                animate={animate}
                 transitionDuration={transitionDuration}
               />
             );
