@@ -14,7 +14,7 @@ import GridItem from '~/components/global/Grid/GridItem';
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Link from '~/components/global/Link/Link';
-import { KEYCODES, LINK_THEME, LINK_TYPES } from '~/lib/constants';
+import { ARIA_LIVE, KEYCODES, LINK_THEME, LINK_TYPES } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
 
@@ -355,6 +355,8 @@ function SearchAutocomplete({
         )}
       </div>
       <div
+        role="region"
+        aria-live={ARIA_LIVE.POLITE}
         css={[
           styles.searchResultsGrid,
           isRearTireState && styles.searchResultsGridRearTire,
@@ -389,7 +391,7 @@ function SearchAutocomplete({
             ];
 
             return (
-              <ul css={animationStyles} role="region" aria-live="polite">
+              <ul css={animationStyles}>
                 {results.map((searchGroup: SearchGroup, index) => {
                   const SearchResults = getSearchResultComponent(
                     searchGroup.type,
