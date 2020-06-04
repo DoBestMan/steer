@@ -1,3 +1,9 @@
+import {
+  mapUnitToLabelFormatter,
+  UNITS,
+} from '~/components/modules/Catalog/Filters/Filters.constants';
+import { abbreviateThousand } from '~/lib/utils/string';
+
 import Range from './Range';
 
 export default {
@@ -53,9 +59,8 @@ export function RangeMileage() {
     <div css={styles.root}>
       <Range
         {...{
-          formatLabel: (value: number) =>
-            value ? `${value.toString().slice(0, -3)}k` : '0',
-          getAriaText: (value: number) => `${value} miles`,
+          formatLabel: mapUnitToLabelFormatter[UNITS.MILES],
+          getAriaText: abbreviateThousand,
           interval: 5000,
           max: 30000,
           maxDefault: 0,

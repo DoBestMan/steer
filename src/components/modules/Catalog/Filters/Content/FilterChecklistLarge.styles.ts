@@ -19,7 +19,6 @@ const styles: CSSObject = {
     typography.primarySubhead,
     {
       marginRight: SPACING.SIZE_05,
-      [MQ.L]: typography.primarySubhead,
     },
   ],
   title: [

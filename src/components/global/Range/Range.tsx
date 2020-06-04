@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
+import { useWindowSize } from '~/hooks/useWindowSize';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import styles, { INDICATOR_SIZE } from './Range.styles';
@@ -12,10 +13,10 @@ interface Props {
   interval?: number;
   max: number;
   maxDefault?: number;
-  maxLabel: string;
+  maxLabel?: string;
   min: number;
   minDefault?: number;
-  minLabel: string;
+  minLabel?: string;
   name: string;
 }
 
@@ -35,6 +36,8 @@ export default function Range({
   const [minCurrent, setMinCurrent] = useState(minDefault || min);
   const [maxCurrent, setMaxCurrent] = useState(maxDefault || max);
   const [fillStyles, setFillStyles] = useState({});
+  const { width } = useWindowSize(); // update fill color width if window is resized
+
   function handleMaxChange(value: number) {
     setMaxCurrent(value);
   }
@@ -51,7 +54,6 @@ export default function Range({
     }
     const minEl = railEl.current.firstElementChild;
     const maxEl = railEl.current.lastElementChild;
-
     if (maxEl instanceof HTMLElement && minEl instanceof HTMLElement) {
       const indicatorHalf = INDICATOR_SIZE / 2;
       const width = maxEl.offsetLeft - minEl.offsetLeft + indicatorHalf;
@@ -60,7 +62,7 @@ export default function Range({
         width,
       });
     }
-  }, [minCurrent, maxCurrent]);
+  }, [minCurrent, maxCurrent, width]);
   return (
     <>
       <div css={styles.root}>

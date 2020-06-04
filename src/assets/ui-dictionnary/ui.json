@@ -24,7 +24,9 @@
   "catalog": {
     "filters": {
       "max": "maximum",
-      "min": "minimum"
+      "min": "minimum",
+      "slider": "{{name}} slider",
+      "milesAbbr": "mi"
     },
     "header": {
       "advancedViewLabel": "Advanced view",
