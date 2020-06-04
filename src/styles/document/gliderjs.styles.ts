@@ -117,18 +117,4 @@ export const gliderjs = `
   .glider-dot.active {
     background: #a89cc8;
   }
-  @media(max-width: 36em){
-    .glider::-webkit-scrollbar {
-      opacity: 1;
-      -webkit-appearance: none;
-      width: 7px;
-      height: 3px;
-    }
-    .glider::-webkit-scrollbar-thumb {
-      opacity: 1;
-      border-radius: 99px;
-      background-color: rgba(156, 156, 156, 0.25);
-      box-shadow: 0 0 1px rgba(255,255,255,.25);
-    }
-  }
 `;
