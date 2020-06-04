@@ -132,14 +132,12 @@ const styles: CSSObject = {
     flexDirection: 'column',
     height: '100%',
     overflow: 'auto',
-    pointerEvents: 'none',
     position: 'relative',
     zIndex: Z_INDEX.TOP + 1,
   },
   navContentNested: {
     display: 'flex',
     flexGrow: 1,
-    pointerEvents: 'all',
     width: '100%',
   },
   navModalContainer: {
