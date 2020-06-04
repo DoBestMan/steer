@@ -26,7 +26,7 @@ import { SearchStateEnum, SearchStateType } from './Search.types';
 
 export default {
   component: Search,
-  title: 'Search',
+  title: 'Search/Search',
 };
 
 // Temporary helper function for mock data

@@ -17,7 +17,7 @@ import FilterButtonToggle from './FilterButtonToggle';
 
 export default {
   component: Button,
-  title: 'Button',
+  title: 'Global/Button',
 };
 
 const handleButtonClick = action('button-click');

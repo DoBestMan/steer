@@ -12,7 +12,7 @@ import { AutocompleteResult } from './AutocompleteResultItem';
 
 export default {
   component: Autocomplete,
-  title: 'Autocomplete',
+  title: 'Global/Autocomplete',
 };
 
 const styles = {

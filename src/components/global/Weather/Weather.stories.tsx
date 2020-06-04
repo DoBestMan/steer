@@ -14,7 +14,7 @@ const styles = {
 
 export default {
   component: Weather,
-  title: 'Weather',
+  title: 'Global/Weather',
 };
 
 export function WeatherWithKnobs() {

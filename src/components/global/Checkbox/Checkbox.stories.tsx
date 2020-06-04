@@ -2,7 +2,7 @@ import Checkbox from './Checkbox';
 
 export default {
   component: CheckboxDefault,
-  title: 'Checkbox',
+  title: 'Global/Checkbox',
 };
 
 export function CheckboxDefault() {

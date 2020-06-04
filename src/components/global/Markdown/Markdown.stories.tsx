@@ -22,7 +22,7 @@ export default {
       escapeHTML: false,
     },
   },
-  title: 'Markdown',
+  title: 'Global/Markdown',
 };
 
 const markdownText =

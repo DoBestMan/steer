@@ -5,7 +5,7 @@ import Header from './Header';
 
 export default {
   component: HeaderWithKnobs,
-  title: 'Catalog Header',
+  title: 'Catalog/Grid/Header',
 };
 
 const defaultProps = {

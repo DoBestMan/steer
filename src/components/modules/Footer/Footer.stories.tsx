@@ -4,7 +4,7 @@ import Footer from './Footer';
 
 export default {
   component: Footer,
-  title: 'Footer',
+  title: 'Footer/Footer',
 };
 
 export function FooterWithKnobs() {

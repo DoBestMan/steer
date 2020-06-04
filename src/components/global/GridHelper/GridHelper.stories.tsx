@@ -9,7 +9,7 @@ import GridHelper from './GridHelper';
 
 export default {
   component: GridHelper,
-  title: 'GridHelper',
+  title: 'Global/GridHelper',
 };
 
 const styles = {

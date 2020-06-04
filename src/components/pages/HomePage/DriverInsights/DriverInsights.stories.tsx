@@ -13,7 +13,7 @@ import DriverInsights from './DriverInsights';
 
 export default {
   component: DriverInsights,
-  title: 'Driver Insights',
+  title: 'Homepage/Driver Insights',
 };
 
 const styles = {

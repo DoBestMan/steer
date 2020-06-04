@@ -8,7 +8,7 @@ import Range from './Range';
 
 export default {
   component: RangeSlider,
-  title: 'Range',
+  title: 'Global/Range',
 };
 
 const styles = {

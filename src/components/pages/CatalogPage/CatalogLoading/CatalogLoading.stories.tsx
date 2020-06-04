@@ -9,7 +9,7 @@ export default {
       escapeHTML: false,
     },
   },
-  title: 'CatalogHeader',
+  title: 'Catalog/Loading Interstitial/Intro',
 };
 
 export function HeaderWithKnobs() {

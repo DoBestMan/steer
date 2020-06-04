@@ -13,7 +13,7 @@ export default {
       escapeHTML: false,
     },
   },
-  title: 'HomeHeader',
+  title: 'Homepage/Hero',
 };
 
 export function HeaderWithKnobs() {

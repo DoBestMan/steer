@@ -7,7 +7,7 @@ import Learn from './Learn';
 
 export default {
   component: Learn,
-  title: 'Nav Learn',
+  title: 'Nav/Learn Subnav Section',
 };
 
 export function LearnWithCustomerSupport() {

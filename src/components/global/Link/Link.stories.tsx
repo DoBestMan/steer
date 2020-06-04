@@ -19,7 +19,7 @@ import NavLink from './NavLink';
 
 export default {
   component: Link,
-  title: 'Link',
+  title: 'Global/Link',
 };
 
 const styles = {

@@ -6,7 +6,7 @@ import ContentModal from './ContentModal';
 
 export default {
   component: ContentModal,
-  title: 'Content Modal',
+  title: 'Modal/Content Modal',
 };
 
 const modalData = {

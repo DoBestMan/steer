@@ -2,7 +2,7 @@ import Image from './Image';
 
 export default {
   component: Image,
-  title: 'Image',
+  title: 'Global/Image',
 };
 
 export function ImageWithHeightAndWidth() {

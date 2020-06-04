@@ -38,7 +38,7 @@ const styles = {
 
 export default {
   component: Loading,
-  title: 'Loading',
+  title: 'Global/Loading',
 };
 
 export function LoadingDots() {

@@ -14,7 +14,7 @@ import ListCard from './ListCard';
 
 export default {
   component: Card,
-  title: 'Card',
+  title: 'Global/Card',
 };
 
 const styles = {

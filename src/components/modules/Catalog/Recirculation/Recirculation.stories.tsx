@@ -5,7 +5,7 @@ import { recirculationData } from './Recirculation.mock';
 
 export default {
   component: Recirculation,
-  title: 'Catalog recirculation',
+  title: 'Catalog/Grid/Recirculation',
 };
 
 export function Recirculation() {

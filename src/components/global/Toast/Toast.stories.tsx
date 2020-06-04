@@ -12,7 +12,7 @@ import Toast from './Toast';
 
 export default {
   component: Toast,
-  title: 'Toast',
+  title: 'Global/Toast',
 };
 
 const styles = {

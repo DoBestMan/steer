@@ -12,7 +12,7 @@ import { ICONS } from './Icon.constants';
 
 export default {
   component: Icon,
-  title: 'Icon',
+  title: 'Global/Icon',
 };
 
 const styles = {

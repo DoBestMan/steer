@@ -4,7 +4,7 @@ import BrowseTiresGroupItem from './BrowseTiresGroupItem';
 
 export default {
   component: BrowseTiresGroupItem,
-  title: 'Nav BrowseTiresGroupItem',
+  title: 'Nav/Browse Tires GroupItem',
 };
 
 export function ImagesAndFlair() {

@@ -6,7 +6,7 @@ import { typography } from '~/styles/typography.styles';
 
 export default {
   component: Casino,
-  title: 'Casino',
+  title: 'Global/Casino',
 };
 
 const styles = {

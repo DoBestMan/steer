@@ -18,7 +18,7 @@ import Modal from './Modal';
 
 export default {
   component: Modal,
-  title: 'Modal',
+  title: 'Modal/Modal',
 };
 
 function ModalButton({ toggleModal }: { toggleModal: () => void }) {

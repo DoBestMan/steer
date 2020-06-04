@@ -11,7 +11,7 @@ import { Cars } from './Car.enums';
 
 export default {
   component: Car,
-  title: 'Cars',
+  title: 'Global/Cars',
 };
 
 const styles = {

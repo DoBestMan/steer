@@ -5,7 +5,7 @@ import { Sceneries } from './Scenery.types';
 
 export default {
   component: Scenery,
-  title: 'Scenery',
+  title: 'Global/Scenery',
 };
 
 export function WeatherWithKnobs() {

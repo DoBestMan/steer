@@ -10,7 +10,7 @@ import CatalogMessage, {
 
 export default {
   component: CatalogMessage,
-  title: 'CatalogMessage',
+  title: 'Catalog/Loading Interstitial/Message',
 };
 
 export function CatalogLoadingMessage() {

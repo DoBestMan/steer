@@ -8,7 +8,7 @@ import { typography } from '~/styles/typography.styles';
 import { styles } from './styleguide.styles';
 
 export default {
-  title: 'Styleguide',
+  title: 'Global/Typography',
 };
 
 enum Theme {

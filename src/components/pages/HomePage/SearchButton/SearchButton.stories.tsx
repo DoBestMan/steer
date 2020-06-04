@@ -7,7 +7,7 @@ import SearchButton from './SearchButton';
 
 export default {
   component: SearchButton,
-  title: 'SearchButton',
+  title: 'Homepage/SearchButton',
 };
 
 const options = {

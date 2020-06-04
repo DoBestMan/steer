@@ -8,7 +8,7 @@ import { mockReviews } from './Reviews.mocks';
 
 export default {
   component: Reviews,
-  title: 'Reviews',
+  title: 'Homepage/Reviews',
 };
 
 const ratingOptions = {

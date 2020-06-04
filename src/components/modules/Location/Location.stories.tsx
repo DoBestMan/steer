@@ -15,7 +15,7 @@ const styles = {
 
 export default {
   component: Location,
-  title: 'Location Page',
+  title: 'Nav/Location Subnav Section',
 };
 
 const oldCurrentLocation = {
