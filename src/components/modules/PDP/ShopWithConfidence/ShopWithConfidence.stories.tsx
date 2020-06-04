@@ -2,7 +2,7 @@ import ShopWithConfidence from './ShopWithConfidence';
 
 export default {
   component: ShopWithConfidence,
-  title: 'Shop With Confidence',
+  title: 'PDP/Shop With Confidence',
 };
 
 export function ShopWithConfidenceDefault() {
