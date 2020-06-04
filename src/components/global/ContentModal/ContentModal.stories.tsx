@@ -16,7 +16,6 @@ const modalData = {
     src: 'https://dummyimage.com/1600x900/000/f00.jpg',
     altText: 'Free shipping',
   },
-  subtitle: 'Tires shipped for free to anywhere in the U.S.',
   title: 'Free shipping',
 };
 
@@ -36,6 +35,7 @@ export function ConentModalWithProps() {
   }
 
   const hasLink = boolean('Has Link', false);
+  const hasSubtitle = boolean('Has Subtitle', false);
 
   return (
     <>
@@ -43,9 +43,12 @@ export function ConentModalWithProps() {
       <ContentModal
         {...modalData}
         {...(hasLink && { link: modalLink })}
+        {...(hasSubtitle && {
+          subtitle: 'Tires shipped for free to anywhere in the U.S.',
+        })}
         isOpen={isOpen}
         isCustomerServiceEnabled
-        showSupportSection={boolean('Show Support Section', false)}
+        showSupportSection={boolean('Show Support Section', true)}
         onClose={toggleModal}
       />
     </>

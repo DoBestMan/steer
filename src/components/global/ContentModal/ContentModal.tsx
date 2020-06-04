@@ -1,15 +1,11 @@
-import Grid from '~/components/global/Grid/Grid';
-import GridItem from '~/components/global/Grid/GridItem';
 import Image from '~/components/global/Image/Image';
 import Link from '~/components/global/Link/Link';
 import Markdown from '~/components/global/Markdown/Markdown';
 import Modal from '~/components/global/Modal/Modal';
-import footerStyles from '~/components/modules/Footer/Footer.styles';
 import EmailSupport from '~/components/modules/Support/EmailSupport';
 import PhoneSupport from '~/components/modules/Support/PhoneSupport';
 import SupportHeading from '~/components/modules/Support/SupportHeading';
 import { LINK_THEME, MODAL_THEME } from '~/lib/constants';
-import { typography } from '~/styles/typography.styles';
 
 import styles from './ContentModal.styles';
 
@@ -27,7 +23,7 @@ export interface ModalContentProps {
       isExternal?: boolean;
     };
   };
-  subtitle: string;
+  subtitle?: string;
   title: string;
 }
 
@@ -51,15 +47,14 @@ function ContentModal({
 }: Props) {
   return (
     <Modal
-      isFullscreen
       contentLabel={title}
       theme={MODAL_THEME.LIGHT}
       onClose={onClose}
       isOpen={isOpen}
     >
       <div css={styles.container}>
-        <h1 css={styles.title}>{title}</h1>
-        <h2 css={styles.subtitle}>{subtitle}</h2>
+        <h1 css={[styles.title, !subtitle && styles.noSubtitle]}>{title}</h1>
+        {subtitle && <h2 css={styles.subtitle}>{subtitle}</h2>}
 
         <div css={styles.imageContainer}>
           <Image
@@ -84,52 +79,19 @@ function ContentModal({
           )}
         </div>
         {showSupportSection && (
-          <Grid css={styles.supportContainer}>
-            <GridItem
-              gridColumnS="1/6"
-              gridColumnM="1/8"
-              gridColumnL="1/6"
-              gridColumnXL="1/5"
-              css={[typography.secondaryHeadline, footerStyles.supportSection]}
-            >
-              <SupportHeading
+          <div css={styles.supportContainer}>
+            <SupportHeading
+              css={styles.supportHeading}
+              isCustomerServiceEnabled={isCustomerServiceEnabled}
+            />
+            <div css={styles.phoneSupport}>
+              <PhoneSupport
                 isCustomerServiceEnabled={isCustomerServiceEnabled}
               />
-            </GridItem>
+            </div>
 
-            <GridItem
-              as="ul"
-              gridColumnS="1/6"
-              gridColumnM="1/8"
-              gridColumnL="6/14"
-              gridColumnXL="5/14"
-              isGrid
-              css={footerStyles.supportSectionButtons}
-            >
-              <GridItem
-                gridColumnM="1/4"
-                gridColumnL="1/5"
-                gridColumnXL="1/4"
-                as="li"
-                css={footerStyles.supportButton}
-              >
-                <PhoneSupport
-                  isCustomerServiceEnabled={isCustomerServiceEnabled}
-                />
-              </GridItem>
-              <GridItem
-                gridColumnM="4/7"
-                gridColumnL="5/9"
-                gridColumnXL="4/7"
-                as="li"
-                css={footerStyles.supportButton}
-              >
-                <EmailSupport
-                  isCustomerServiceEnabled={isCustomerServiceEnabled}
-                />
-              </GridItem>
-            </GridItem>
-          </Grid>
+            <EmailSupport isCustomerServiceEnabled={isCustomerServiceEnabled} />
+          </div>
         )}
       </div>
     </Modal>

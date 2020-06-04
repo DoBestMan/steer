@@ -21,7 +21,6 @@ import {
 
 const OVERLAY_BOX_SHADOW = '0px 4px 4px rgba(0, 0, 0, 0.25)';
 const OVERLAY_PANEL_WIDTH = 425;
-export const FULLSCREEN_LATERAL_PADDING = SPACING.SIZE_20;
 
 const FADE = {
   default: css({
@@ -80,7 +79,7 @@ const styles = {
     height: '100%',
     left: 0,
     overflowY: 'scroll',
-    padding: `${SPACING.SIZE_10}px ${FULLSCREEN_LATERAL_PADDING}px ${SPACING.SIZE_60}px ${FULLSCREEN_LATERAL_PADDING}px`,
+    padding: `${SPACING.SIZE_10}px ${SPACING.SIZE_20}px ${SPACING.SIZE_60}px`,
     position: 'relative',
     right: 0,
     top: 0,
