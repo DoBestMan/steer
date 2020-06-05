@@ -138,7 +138,7 @@ export function SearchBy() {
   );
 }
 
-export function TireSize() {
+export function TireSizeModal() {
   const [isOpen, setIsOpen] = useState(true);
   function toggleModal() {
     setIsOpen(!isOpen);
@@ -156,7 +156,7 @@ export function TireSize() {
   );
 }
 
-export function VehicleTrim() {
+export function VehicleTrimModal() {
   const [isOpen, setIsOpen] = useState(true);
   function toggleModal() {
     setIsOpen(!isOpen);

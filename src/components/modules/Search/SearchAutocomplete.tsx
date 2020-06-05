@@ -13,12 +13,12 @@ import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
-import Link from '~/components/global/Link/Link';
-import { ARIA_LIVE, KEYCODES, LINK_THEME, LINK_TYPES } from '~/lib/constants';
+import { ARIA_LIVE, KEYCODES } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
 
 import AdditionalInfoModals from './AdditionalInfoModals';
+import CloseSearchButton from './CloseSearchButton';
 import { useAutocompleteSelectedItem } from './Search.hooks';
 import {
   SearchGroup,
@@ -34,6 +34,7 @@ import { getSearchResultComponent } from './Search.utils';
 import styles from './SearchAutocomplete.styles';
 import SearchInput from './SearchInput';
 import SearchLabel from './SearchLabel/SearchLabel';
+import SearchSecondaryActions from './SearchSecondaryActions';
 
 const CONSTANTS = {
   DEFAULT_SELECTED_ITEM_INDEX: [0, -1],
@@ -160,7 +161,7 @@ function SearchAutocomplete({
     onToggleRearTire(false);
   };
 
-  const handleAddRearTire = () => () => {
+  const handleAddRearTire = () => {
     onToggleRearTire(true);
   };
 
@@ -232,6 +233,10 @@ function SearchAutocomplete({
             <GridItem css={styles.tireSizeHeaderCopy} gridColumnS={'start/end'}>
               {ui('search.searchByTireSize')}
             </GridItem>
+            <CloseSearchButton
+              isRearTireState={isRearTireState}
+              onCloseSearchClick={onCloseSearchClick}
+            />
           </Grid>
         )}
         <Grid
@@ -306,54 +311,21 @@ function SearchAutocomplete({
             </GridItem>
           )}
         </Grid>
-        <div
-          css={[
-            styles.closeSearchWrapper,
-            isRearTireState && styles.closeSearchRearTire,
-          ]}
-        >
-          <Link
-            as={LINK_TYPES.BUTTON}
-            css={[typography.smallCopy, styles.closeSearchButton]}
-            onClick={onCloseSearchClick}
-            theme={LINK_THEME.LIGHT}
-          >
-            {ui('search.cancelButtonLabel')}
-          </Link>
-        </div>
-      </div>
-      <div css={styles.secondaryActionWrapper}>
-        {searchState === SearchStateEnum.TIRE_SIZE && (
-          <>
-            <Link
-              as={LINK_TYPES.BUTTON}
-              css={[typography.smallCopy, styles.secondaryActionButton]}
-              onClick={handleSetActiveModal(SearchModalEnum.TIRE_SIZE)}
-              theme={LINK_THEME.LIGHT}
-            >
-              {ui('search.notSure')}
-            </Link>
-            <Link
-              as={LINK_TYPES.BUTTON}
-              css={[typography.smallCopy, styles.secondaryActionButton]}
-              onClick={handleAddRearTire()}
-              theme={LINK_THEME.LIGHT}
-            >
-              {ui('search.addRearTire')}
-            </Link>
-          </>
-        )}
-        {searchState === SearchStateEnum.VEHICLE && (
-          <Link
-            as={LINK_TYPES.BUTTON}
-            css={[typography.smallCopy, styles.secondaryActionButton]}
-            onClick={handleSetActiveModal(SearchModalEnum.VEHICLE_TRIM)}
-            theme={LINK_THEME.LIGHT}
-          >
-            {ui('search.notSure')}
-          </Link>
+
+        {!isRearTireState && (
+          <CloseSearchButton
+            isRearTireState={isRearTireState}
+            onCloseSearchClick={onCloseSearchClick}
+          />
         )}
       </div>
+
+      <SearchSecondaryActions
+        onAddRearTire={handleAddRearTire}
+        onSetActiveModal={handleSetActiveModal}
+        searchState={searchState}
+      />
+
       <div
         role="region"
         aria-live={ARIA_LIVE.POLITE}

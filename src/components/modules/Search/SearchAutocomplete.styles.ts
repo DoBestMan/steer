@@ -15,7 +15,7 @@ import {
   TIME,
   Z_INDEX,
 } from '~/lib/constants';
-import { typography } from '~/styles/typography.styles';
+import { typography, typographyStyles } from '~/styles/typography.styles';
 
 const animationStyles = {
   /* eslint-disable sort-keys */
@@ -90,13 +90,16 @@ const styles: CSSObject = {
       borderBottom: BORDERS.DOTTED_TRANSPARENT_2PX,
     },
     [MQ.M]: {
-      span: [typography.bodyCopy],
+      span: typographyStyles.bodyCopy,
     },
   },
-  closeSearchRearTire: {
-    '> button': {
+  closeSearchButtonRearTire: {
+    '&:focus > span': {
       color: COLORS.GLOBAL.ORANGE,
     },
+    color: COLORS.GLOBAL.ORANGE,
+  },
+  closeSearchRearTire: {
     top: 21,
     [MQ.M]: {
       top: SPACING.SIZE_30,

@@ -58,6 +58,9 @@ const styles: CSSObject = {
   searchState: {
     flexShrink: 0,
     paddingRight: SPACING.SIZE_05,
+    [MQ.M]: {
+      paddingRight: SPACING.SIZE_10,
+    },
   },
 };
 
