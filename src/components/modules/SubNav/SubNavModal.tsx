@@ -76,12 +76,6 @@ function SubNavModal({
             active={isOpen && state === ENTERED}
             ref={navRef}
           >
-            {!onBack && isOpen && (
-              <span
-                css={[styles.overlay, state === ENTERED && styles.overlayOpen]}
-                onClick={onClose}
-              />
-            )}
             <nav
               ref={navRef}
               css={[
@@ -90,15 +84,6 @@ function SubNavModal({
                 subNavContainer[state],
               ]}
             >
-              {!onBack && isOpen && (
-                <span
-                  css={[
-                    styles.overlay,
-                    state === ENTERED && styles.overlayOpen,
-                  ]}
-                  onClick={onClose}
-                />
-              )}
               <div
                 ref={contentRef}
                 css={[styles.navContent, animationStyles[state]]}

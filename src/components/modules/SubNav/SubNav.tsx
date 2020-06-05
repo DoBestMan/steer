@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { CSSTransition } from 'react-transition-group';
 
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
@@ -14,7 +15,7 @@ import { Animation } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import LearnContainer from './Learn/Learn.container';
-import styles from './SubNav.styles';
+import styles, { fade, SUBNAV_TIME_FADE_OPEN } from './SubNav.styles';
 import SubNavLinks from './SubNavLinks';
 import SubNavModal from './SubNavModal';
 
@@ -65,6 +66,23 @@ function SubNav({ siteMenuBrowseList, siteMenuLearn }: SiteMenu) {
       unlockOnClose
     >
       <Grid css={styles.root}>
+        <GridItem
+          gridColumnL="1/6"
+          gridColumnXL="1/8"
+          css={styles.overlayContainer}
+        >
+          <CSSTransition
+            timeout={{ enter: SUBNAV_TIME_FADE_OPEN }}
+            in={isSubNavOpen}
+          >
+            {(state) => (
+              <span
+                onClick={handleCloseSubNav}
+                css={[styles.overlay, fade[state]]}
+              />
+            )}
+          </CSSTransition>
+        </GridItem>
         <GridItem
           fullbleedS
           fullbleedM

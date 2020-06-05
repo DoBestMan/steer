@@ -7,7 +7,15 @@ import {
   UNMOUNTED,
 } from 'react-transition-group/Transition';
 
-import { COLORS, EASING, MQ, SPACING, TIME, Z_INDEX } from '~/lib/constants';
+import {
+  COLORS,
+  EASING,
+  GAP_COLUMNS,
+  MQ,
+  SPACING,
+  TIME,
+  Z_INDEX,
+} from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 import { NAV_CONTENT_HEIGHT } from '../Nav/Nav.styles';
@@ -27,7 +35,6 @@ const styles: CSSObject = {
     display: 'flex',
     justifyContent: 'space-between',
     padding: `${SPACING.SIZE_30}px ${SPACING.SIZE_10}px`,
-    pointerEvents: 'all',
     width: '100%',
     [MQ.M]: {
       display: 'none',
@@ -143,37 +150,35 @@ const styles: CSSObject = {
   navModalContainer: {
     height: '100%',
     left: 0,
-    pointerEvents: 'none',
     position: 'fixed',
     top: 0,
     visibility: 'hidden',
     width: '100%',
   },
   overlay: {
-    [MQ.S]: {
-      display: 'none',
-    },
     [MQ.L]: {
       background: COLORS.LIGHT.GRAY_70,
-      display: 'initial',
       height: '100%',
       left: 0,
-      opacity: 0,
       position: 'absolute',
       top: 0,
       width: '100%',
       zIndex: Z_INDEX.TOP,
     },
   },
-  overlayOpen: {
+  overlayContainer: {
+    height: '100%',
+    position: 'relative',
+    width: `calc(100% + ${GAP_COLUMNS.L}px)`,
+    [MQ.S]: {
+      display: 'none',
+    },
     [MQ.L]: {
-      opacity: 1,
-      transition: 'opacity 200ms linear 300ms',
+      display: 'initial',
     },
   },
   root: {
     height: '100%',
-    pointerEvents: 'none',
   },
   smallHide: {
     [MQ.S]: {
@@ -194,7 +199,6 @@ const styles: CSSObject = {
     height: '100%',
     minHeight: 500,
     overflowY: 'auto',
-    pointerEvents: 'all',
     position: 'relative',
     zIndex: Z_INDEX.FRONT,
     [MQ.S]: {
@@ -228,7 +232,7 @@ const styles: CSSObject = {
     },
   },
   subnavInnerGridOpen: {
-    pointerEvents: 'all',
+    pointerEvents: 'auto',
   },
   subnavLinkList: {
     display: 'flex',
@@ -270,17 +274,17 @@ const styles: CSSObject = {
 export const subNavContainer = {
   /* eslint-disable sort-keys */
   [ENTERING]: {
-    pointerEvents: 'all',
+    pointerEvents: 'auto',
     visibility: 'visible',
     zIndex: Z_INDEX.OVERLAY,
   },
   [ENTERED]: {
-    pointerEvents: 'all',
+    pointerEvents: 'auto',
     visibility: 'visible',
     zIndex: Z_INDEX.OVERLAY,
   },
   [EXITING]: {
-    pointerEvents: 'all',
+    pointerEvents: 'auto',
     visibility: 'visible',
     zIndex: Z_INDEX.OVERLAY,
   },
