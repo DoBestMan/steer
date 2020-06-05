@@ -16,7 +16,7 @@ function App({ children }: Props) {
   const router = useRouter();
   return (
     <>
-      {isBrowser() && router?.asPath !== ROUTE_MAP[ROUTES.HOME] && (
+      {isBrowser() && router?.pathname !== ROUTE_MAP[ROUTES.HOME] && (
         // router has unique rendering + styles on homepage, renders in HomePage.tsx
         <NavContainer isHomepage={false} />
       )}

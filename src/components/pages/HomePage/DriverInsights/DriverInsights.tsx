@@ -25,11 +25,16 @@ const mapInsightTypeToCard = {
 function DriverInsights({ body, siteInsightList, title }: SiteInsights) {
   return (
     <>
-      <GridItem gridColumnM="2/5" gridColumnL="3/7">
+      <GridItem gridColumnM="2/5" gridColumnL="2/6" gridColumnXL="3/7">
         <h2 css={styles.title}>{title}</h2>
         <p css={[typography.bodyCopy, styles.description]}>{body}</p>
       </GridItem>
-      <GridItem gridColumnM="5/8" gridColumnL="8/13" css={styles.cards}>
+      <GridItem
+        gridColumnM="5/8"
+        gridColumnL="7/14"
+        gridColumnXL="8/13"
+        css={styles.cards}
+      >
         {siteInsightList.map((props) =>
           mapInsightTypeToCard[props.type](props),
         )}
