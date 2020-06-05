@@ -104,6 +104,13 @@
     "shopWithConfidence": {
       "title": "Shop with confidence",
       "linkLabel": "Learn More"
+    },
+    "quantitySelector": {
+      "modalLabel": "Select a quantity",
+      "confirmButtonLabel": "Confirm",
+      "copy": "Most drivers replace 4 tires.<br />If you had a flat tire, replace at least two.",
+      "cta": "Replace tires in pairs for better<br />traction and braking",
+      "title": "PRO tip"
     }
   },
   "ratings": {

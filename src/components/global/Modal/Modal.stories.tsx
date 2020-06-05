@@ -14,6 +14,7 @@ import { typography } from '~/styles/typography.styles';
 
 import Button from '../Button/Button';
 import Link from '../Link/Link';
+import BottomCardModal from './BottomCardModal';
 import Modal from './Modal';
 
 export default {
@@ -156,6 +157,25 @@ export function DefaultModalOrange() {
       >
         <p css={typography.bodyCopy}>Fullscreen modal content</p>
       </Modal>
+    </div>
+  );
+}
+
+export function BottomCardModalDefault() {
+  const [isOpen, setIsOpen] = useState(false);
+  function toggleModal() {
+    setIsOpen(!isOpen);
+  }
+  return (
+    <div>
+      <ModalButton {...{ toggleModal }} />
+      <BottomCardModal
+        contentLabel="Modal"
+        onClose={toggleModal}
+        isOpen={isOpen}
+      >
+        <p css={typography.bodyCopy}>Bottom Card Modal</p>
+      </BottomCardModal>
     </div>
   );
 }

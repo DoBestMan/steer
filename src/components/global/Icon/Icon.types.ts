@@ -36,6 +36,7 @@ export type Icon =
   | 'money-back'
   | 'performance'
   | 'phone'
+  | 'quantity-selector-car'
   | 'reviews-verified'
   | 'search'
   | 'shield'

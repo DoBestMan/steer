@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="34px" height="31px" viewBox="0 0 34 31" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="car">
+            <path d="M26.2598,0 C27.912632,0 29.387503,1.01534515 29.9845869,2.541674 L30.0546,2.73509 L34,14.5714 L34,21.5 C34,23.6421576 32.3159949,25.3910766 30.199637,25.4951046 L30,25.5 L4,25.5 C1.85780364,25.5 0.108921065,23.8159949 0.00489530456,21.699637 L0,21.5 L0,14.5714 L3.94545,2.73509 C4.468122,1.1670548 5.89774978,0.08898824 7.53455139,0.00525177152 L7.74018,0 L26.2598,0 Z M32,15.5714 L32,21.5 C32,22.5543909 31.18415,23.4181678 30.1492661,23.4945144 L30,23.5 L4,23.5 C2.94563773,23.5 2.08183483,22.68415 2.00548573,21.6492661 L2,21.5 L2,15.5714 L32,15.5714 Z M26.2598,2 C27.1207,2 27.885,2.55086 28.1572,3.36754 L31.5585,13.5714 L2.44152,13.5714 L5.84281,3.36755 C6.11504,2.55086 6.87932,2 7.74018,2 L26.2598,2 Z" fill="currentColor"></path>
+            <rect stroke="currentColor" stroke-width="2" x="4.42969" y="24.5547" width="5.5" height="5.28571" rx="1"></rect>
+            <rect stroke="currentColor" stroke-width="2" x="24.0703" y="24.5547" width="5.5" height="5.28571" rx="1"></rect>
+            <rect fill="currentColor" fill-rule="nonzero" x="6.07031" y="18.2148" width="2.42857" height="2.42857"></rect>
+            <rect fill="currentColor" fill-rule="nonzero" x="25.5" y="18.2148" width="2.42857" height="2.42857"></rect>
+        </g>
+    </g>
+</svg>
