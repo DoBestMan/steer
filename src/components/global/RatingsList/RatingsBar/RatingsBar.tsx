@@ -1,40 +1,60 @@
-import { RATINGS } from '~/lib/constants';
+import { RATINGS, RATINGS_DISPLAY, RATINGS_THEME } from '~/lib/constants';
 import { numberWithDecimal, percentageFromNumber } from '~/lib/utils/number';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { screenReaderText } from '~/styles/document/accessibility.styles';
-import { typography } from '~/styles/typography.styles';
 
-import styles from './RatingsBar.styles';
+import styles, { dStyles, tStyles } from './RatingsBar.styles';
 
-interface Props {
+export interface Props {
+  display?: RATINGS_DISPLAY;
   label: string;
   rating: number;
+  theme?: RATINGS_THEME;
 }
 
 const CONSTANTS = {
   RATING_HIGHLIGHT_THRESHOLD: 4,
 };
 
-function RatingsBar({ label, rating }: Props) {
+function RatingsBar({
+  display = RATINGS_DISPLAY.DEFAULT,
+  label,
+  rating,
+  theme = RATINGS_THEME.DARK,
+}: Props) {
   const isRatingHighlighted = rating >= CONSTANTS.RATING_HIGHLIGHT_THRESHOLD;
   const formattedRating = numberWithDecimal(rating);
   const barWidth = `${percentageFromNumber(rating, RATINGS.MAX_RATING)}%`;
-  const highlightedClasses = [styles.emphasized, typography.primarySubhead];
   const a11yLabel = ` ${ui('common.ratings.outOf')} ${RATINGS.MAX_RATING}`;
+  const highlightedClasses = [
+    dStyles[display].emphasized,
+    tStyles[theme].emphasized,
+  ];
 
   return (
-    <li css={styles.container}>
-      <span css={[typography.bodyCopy, styles.label]}>{label}</span>
+    <li
+      css={[
+        styles.container,
+        dStyles[display].container,
+        tStyles[theme].container,
+      ]}
+    >
+      <span css={dStyles[display].label}>{label}</span>
       <div css={styles.barContainer}>
-        <span css={[styles.bar, styles.barFull]}></span>
+        <span css={[styles.bar, styles.barFull, tStyles[theme].barFull]} />
         <span
-          css={[styles.bar, styles.barProgress, { width: barWidth }]}
-        ></span>
+          css={[
+            styles.bar,
+            styles.barProgress,
+            tStyles[theme].barProgress,
+            { width: barWidth },
+          ]}
+        />
       </div>
       <span
         css={[
-          typography.bodyCopy,
           styles.rating,
+          dStyles[display].rating,
           isRatingHighlighted && highlightedClasses,
         ]}
       >

@@ -1,6 +1,6 @@
-import { typography } from '~/styles/typography.styles';
+import { RATINGS_DISPLAY, RATINGS_THEME } from '~/lib/constants';
 
-import styles from './MomentList.styles';
+import styles, { dStyles, tStyles } from './MomentList.styles';
 
 export interface MomentListItem {
   label: string;
@@ -9,15 +9,23 @@ export interface MomentListItem {
 
 interface Props {
   data: Array<MomentListItem>;
+  display?: RATINGS_DISPLAY;
+  theme?: RATINGS_THEME;
 }
 
-export function MomentList({ data }: Props) {
+export function MomentList({
+  data,
+  theme = RATINGS_THEME.DARK,
+  display = RATINGS_DISPLAY.DEFAULT,
+}: Props) {
   return (
-    <ul css={styles.container}>
-      {data.map(({ label, value }: MomentListItem) => (
-        <li css={styles.item} key={label}>
-          <span css={typography.bodyCopy}>{label}</span>
-          <span css={[typography.primarySubhead, styles.value]}>{value}</span>
+    <ul css={[styles.theme, styles.container, tStyles[theme].container]}>
+      {data.map(({ label, value }) => (
+        <li css={[styles.item, dStyles[display].item]} key={label}>
+          <span css={dStyles[display].label}>{label}</span>
+          <span css={[dStyles[display].value, tStyles[theme].value]}>
+            {value}
+          </span>
         </li>
       ))}
     </ul>

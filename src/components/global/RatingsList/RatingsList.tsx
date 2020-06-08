@@ -1,19 +1,29 @@
-import RatingsBar from '~/components/global/RatingsList/RatingsBar/RatingsBar';
-
-export interface RatingsListItem {
-  label: string;
-  rating: number;
-}
+import RatingsBar, {
+  Props as RatingsListItem,
+} from '~/components/global/RatingsList/RatingsBar/RatingsBar';
+import { RATINGS_DISPLAY, RATINGS_THEME } from '~/lib/constants';
 
 interface Props {
+  display?: RATINGS_DISPLAY;
   ratings: Array<RatingsListItem>;
+  theme?: RATINGS_THEME;
 }
 
-export function RatingsList({ ratings }: Props) {
+export function RatingsList({
+  display = RATINGS_DISPLAY.DEFAULT,
+  ratings,
+  theme = RATINGS_THEME.DARK,
+}: Props) {
   return (
     <ul>
-      {ratings.map(({ label, rating }: RatingsListItem) => (
-        <RatingsBar key={label} label={label} rating={rating}></RatingsBar>
+      {ratings.map(({ label, rating }) => (
+        <RatingsBar
+          display={display}
+          key={label}
+          label={label}
+          rating={rating}
+          theme={theme}
+        ></RatingsBar>
       ))}
     </ul>
   );

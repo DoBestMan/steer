@@ -3,9 +3,8 @@ import Image from '~/components/global/Image/Image';
 import MomentList, {
   MomentListItem,
 } from '~/components/global/MomentList/MomentList';
-import RatingsList, {
-  RatingsListItem,
-} from '~/components/global/RatingsList/RatingsList';
+import { Props as RatingsListItem } from '~/components/global/RatingsList/RatingsBar/RatingsBar';
+import RatingsList from '~/components/global/RatingsList/RatingsList';
 import { typography } from '~/styles/typography.styles';
 
 import styles from './TireRatings.styles';
