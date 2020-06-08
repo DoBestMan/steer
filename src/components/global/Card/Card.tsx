@@ -1,12 +1,13 @@
 import GridItem from '~/components/global/Grid/GridItem';
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
+import IconOrImage from '~/components/global/IconOrImage/IconOrImage';
+import { getSrcset } from '~/components/global/Image/Image.utils';
 import Link from '~/components/global/Link/Link';
 import { SiteInsightItemDefault } from '~/data/models/SiteInsightItemDefault';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 import { typography } from '~/styles/typography.styles';
 
-import IconOrImage from '../IconOrImage/IconOrImage';
 import styles from './Card.styles';
 
 function Card({
@@ -23,6 +24,16 @@ function Card({
       figure.type === ICON_IMAGE_TYPE.ICON ||
       figure.type === ICON_IMAGE_TYPE.IMAGE
     ) {
+      // If image, generate/replace the srcSet based on layout
+      if (figure.type === ICON_IMAGE_TYPE.IMAGE && figure.src) {
+        figure.srcSet = getSrcset(figure.src, {
+          '200w': { width: 200 },
+          '300w': { width: 300 },
+          '500w': { width: 500 },
+          '800w': { width: 800 },
+        });
+      }
+
       return <IconOrImage key={idx} {...figure} />;
     }
 

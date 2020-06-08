@@ -13,7 +13,7 @@ const deals: SiteMenuBrowseGroupItem = {
       flair: { type: 'string', value: 'Best seller' },
       icon: {
         type: ICON_IMAGE_TYPE.IMAGE,
-        srcSet: 'https://via.placeholder.com/45',
+        src: 'https://via.placeholder.com/45',
         altText: '',
       },
     },
@@ -23,7 +23,7 @@ const deals: SiteMenuBrowseGroupItem = {
       flair: null,
       icon: {
         type: ICON_IMAGE_TYPE.IMAGE,
-        srcSet: 'https://via.placeholder.com/45',
+        src: 'https://via.placeholder.com/45',
         altText: '',
       },
     },
@@ -33,7 +33,7 @@ const deals: SiteMenuBrowseGroupItem = {
       flair: null,
       icon: {
         type: ICON_IMAGE_TYPE.IMAGE,
-        srcSet: 'https://via.placeholder.com/45',
+        src: 'https://via.placeholder.com/45',
         altText: '',
       },
     },
@@ -43,7 +43,7 @@ const deals: SiteMenuBrowseGroupItem = {
       flair: { type: ICON_IMAGE_TYPE.ICON, svgId: 'fire' },
       icon: {
         type: ICON_IMAGE_TYPE.IMAGE,
-        srcSet: 'https://via.placeholder.com/45',
+        src: 'https://via.placeholder.com/45',
         altText: '',
       },
     },
@@ -53,7 +53,7 @@ const deals: SiteMenuBrowseGroupItem = {
       flair: null,
       icon: {
         type: ICON_IMAGE_TYPE.IMAGE,
-        srcSet: 'https://via.placeholder.com/45',
+        src: 'https://via.placeholder.com/45',
         altText: '',
       },
     },
@@ -63,7 +63,7 @@ const deals: SiteMenuBrowseGroupItem = {
       link: { href: '/military-discount', isExternal: false },
       icon: {
         type: ICON_IMAGE_TYPE.IMAGE,
-        srcSet: 'https://via.placeholder.com/45',
+        src: 'https://via.placeholder.com/45',
         altText: '',
       },
     },

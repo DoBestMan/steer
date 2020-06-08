@@ -2,6 +2,7 @@ import Button from '~/components/global/Button/Button';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import Image from '~/components/global/Image/Image';
+import { getSrcset } from '~/components/global/Image/Image.utils';
 import BaseLink from '~/components/global/Link/BaseLink';
 import { BUTTON_STYLE, BUTTON_THEME } from '~/lib/constants';
 
@@ -21,12 +22,18 @@ export function LoadingMessage({ brands = [] }: LoadingMessageProps) {
         <ul css={styles.list}>
           {brands.map((brand) => {
             const imageStyles = styles[`logo_${brand.id}`];
+            const srcSet = getSrcset(brand.src, {
+              '100w': { width: 100 },
+              '200w': { width: 200 },
+              '500w': { width: 500 },
+            });
+
             return (
               <li key={brand.altText}>
                 <Image
                   altText={brand.altText}
                   css={imageStyles}
-                  srcSet={brand.src}
+                  srcSet={srcSet}
                 />
               </li>
             );

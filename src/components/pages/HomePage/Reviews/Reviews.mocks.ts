@@ -20,7 +20,7 @@ export const mockReviews: SiteReviews = {
     {
       authorImage: {
         altText: 'author image',
-        srcSet: 'https://via.placeholder.com/100?text=:)',
+        src: 'https://via.placeholder.com/100?text=:)',
         type: ICON_IMAGE_TYPE.IMAGE,
       },
       authorName: 'Melissa',
@@ -32,7 +32,7 @@ export const mockReviews: SiteReviews = {
     {
       authorImage: {
         altText: 'author image',
-        srcSet: 'https://via.placeholder.com/100?text=:D',
+        src: 'https://via.placeholder.com/100?text=:D',
         type: ICON_IMAGE_TYPE.IMAGE,
       },
       authorName: 'James',
@@ -43,7 +43,7 @@ export const mockReviews: SiteReviews = {
     {
       authorImage: {
         altText: 'author image',
-        srcSet: 'https://via.placeholder.com/100?text=;P',
+        src: 'https://via.placeholder.com/100?text=;P',
         type: ICON_IMAGE_TYPE.IMAGE,
       },
       authorName: 'Andrew',

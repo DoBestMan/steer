@@ -31,7 +31,7 @@ describe('IconOrImage', () => {
   test('image', () => {
     const { container } = render(
       <IconOrImage
-        srcSet="https://via.placeholder.com/150"
+        src="https://via.placeholder.com/150"
         altText="150x150 image"
         type={ICON_IMAGE_TYPE.IMAGE}
       />,

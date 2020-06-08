@@ -1,4 +1,5 @@
 import Image from '~/components/global/Image/Image';
+import { getSrcset } from '~/components/global/Image/Image.utils';
 import Link from '~/components/global/Link/Link';
 import Markdown from '~/components/global/Markdown/Markdown';
 import Modal from '~/components/global/Modal/Modal';
@@ -45,6 +46,14 @@ function ContentModal({
   subtitle,
   title,
 }: Props) {
+  const srcSet = getSrcset(image.src, {
+    '320w': { width: 320 },
+    '600w': { width: 600 },
+    '1000w': { width: 1000 },
+    '1500w': { width: 1500 },
+    '2000w': { width: 2000 },
+  });
+
   return (
     <Modal
       contentLabel={title}
@@ -59,7 +68,7 @@ function ContentModal({
         <div css={styles.imageContainer}>
           <Image
             altText={image.altText || title}
-            srcSet={image.src}
+            srcSet={srcSet}
             css={styles.hero}
           />
         </div>

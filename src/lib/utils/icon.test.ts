@@ -15,7 +15,7 @@ describe('isVehicleSvg', () => {
     expect(
       isVehicleSvg({
         altText: 'altText',
-        srcSet: 'srcSet',
+        src: 'src',
         type: ICON_IMAGE_TYPE.IMAGE,
       }),
     ).toBe(false);

@@ -1,19 +1,48 @@
+import Grid from '~/components/global/Grid/Grid';
+import GridItem from '~/components/global/Grid/GridItem';
+
 import Image from './Image';
+import { getSrcset } from './Image.utils';
 
 export default {
   component: Image,
   title: 'Global/Image',
 };
 
-export function ImageWithHeightAndWidth() {
-  return (
-    <Image
-      altText="test"
-      srcSet="https://picsum.photos/600/300"
-      height="300"
-      width="600"
-    />
+export function ImageWithHeightAndWidthInGrid() {
+  const srcset = getSrcset(
+    'https://res.cloudinary.com/demo/image/upload/sample.jpg',
+    {
+      '600w': { width: 600 },
+      '1000w': { width: 1000 },
+      '1400w': { width: 1400 },
+    },
   );
+
+  return (
+    <Grid>
+      <GridItem gridColumn={'2/6'} gridColumnM={'2/5'} gridColumnL={'2/8'}>
+        <Image
+          altText="test"
+          srcSet={srcset}
+          height="400" // original height (from data)
+          width="600" // original width (from data)
+          responsive
+        />
+      </GridItem>
+    </Grid>
+  );
+}
+
+export function ImageWithFixedHeightAndWidth() {
+  const srcset = getSrcset(
+    'https://res.cloudinary.com/demo/image/upload/sample.jpg',
+    {
+      '600w': { width: 600 },
+    },
+  );
+
+  return <Image altText="test" srcSet={srcset} height="400" width="600" />;
 }
 
 export function ImageResponsive() {

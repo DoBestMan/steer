@@ -45,7 +45,7 @@ interface Props {
   imgRef?: RefObject<HTMLDivElement>;
   loading?: Loading;
   srcSet: string;
-  width?: string;
+  width?: string | number;
 }
 
 function useLazyImage({ loading, srcSet, imgRef }: Props) {

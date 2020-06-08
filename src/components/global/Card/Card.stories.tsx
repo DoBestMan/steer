@@ -97,7 +97,7 @@ export function CardWithIcon() {
 
 const mockImagePlaceholder = {
   altText: '25x25 image',
-  srcSet: 'https://via.placeholder.com/25',
+  src: 'https://via.placeholder.com/25',
   type: ICON_IMAGE_TYPE.IMAGE,
 } as SiteImage;
 
