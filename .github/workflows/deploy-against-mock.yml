@@ -1,0 +1,40 @@
+name: Deploy branch against mock API
+
+on:
+  push:
+    branches:
+      - "int-*"
+      - dev
+      - qa
+      - staging
+
+jobs:
+  deploy-against-mock:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    # Add mock prefix to branch name, remove int prefix if present
+    # qa            => mock-qa
+    # int-my-branch => mock-my-branch
+    - name: Get new branch name
+      shell: bash
+      run: |
+        BRANCH="${{ github.ref }}"
+        BRANCH="${BRANCH/refs\/heads\//}"
+        BRANCH="mock-${BRANCH/int-/}"
+        echo "##[set-output name=new_branch;]$(echo ${BRANCH})"
+      id: extract_branch
+    - name: Merge into mock branch, change last commit
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git fetch --no-tags --prune --unshallow
+        git checkout -b ${{ steps.extract_branch.outputs.new_branch }}
+        git merge ${{ github.ref }}
+        git commit --amend --no-edit
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ steps.extract_branch.outputs.new_branch }}
+        force: true

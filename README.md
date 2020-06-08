@@ -79,6 +79,19 @@ As the project use Now env. variables, to start a local server:
 now dev
 ```
 
+By default, you'll run against the mock server.
+
+### To run against a local server, `http://localhost:3000`:
+
+- Clone the `steer-api-definition` repo and follow the instructions to start a local server
+- Update this project's `.env` file's `STEER_BACKEND` value to `"local"`
+- Run `now dev` to start local development in this project (it will start on port 3001)
+
+### To run against the integration server:
+
+- Update this project's `.env` file's `STEER_BACKEND` value to `"integration"`
+- Run `now dev` to start local development in this project
+
 ## Other Scripts
 
 Lint files:

@@ -17,14 +17,16 @@ class VercelSteer:
         self.vercel_headers = {
             'Authorization': 'Bearer '+os.environ.get('VERCEL_TOKEN')}
 
-    def write_build_url(self, url):
-        filename = open('notification.txt', 'w')
-        filename.write("A build is available here: https://%s\n" % url)
+    def write_build_url(self, branch_name, url):
+        write_mode = 'w' if branch_name == 'qa' else 'a+'
+        build_desc = 'Integration' if branch_name == 'qa' else 'Mock'
+        filename = open('notification.txt', write_mode)
+        filename.write("%s Build: https://%s\n" % (build_desc, url))
         filename.close()
 
-    def get_build_url(self):
+    def get_build_url(self, branch_name):
         query = "?teamId="+os.environ.get(
-            'VERCEL_TEAM_ID')+"&limit=1&meta-githubCommitRef=qa"
+            'VERCEL_TEAM_ID')+"&limit=1&meta-githubCommitRef="+branch_name
         response = requests.get(os.environ.get(
             'VERCEL_URL')+query, headers=self.vercel_headers)
 
@@ -116,8 +118,10 @@ jirawc = JiraSteer()
 githubwc = GithubSteer()
 vercelwc = VercelSteer()
 
-url = vercelwc.get_build_url()
-vercelwc.write_build_url(url)
+url = vercelwc.get_build_url('qa')
+vercelwc.write_build_url('qa', url)
+url = vercelwc.get_build_url('mock-qa')
+vercelwc.write_build_url('mock-qa', url)
 githubwc.find_commits_add_to_json()
 
 keys = jirawc.get_issue_keys(jirawc.get_issues_with_jql())
