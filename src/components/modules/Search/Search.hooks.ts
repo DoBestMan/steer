@@ -1,6 +1,13 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+
+import { scrollIntoViewIfNeeded } from '~/lib/utils/accessibility';
 
 import { SearchGroup } from './Search.types';
+
+const DEFAULT_CLEARANCE = {
+  bottom: 0,
+  top: 145, // height of search input bar
+};
 
 /**
  * This hook takes care of the selection logic for selecting search
@@ -60,5 +67,25 @@ export function useAutocompleteSelectedItem(results: SearchGroup[]) {
     selectPrevItemIndex,
     selectedItemIndex,
     setSelectedItemIndex,
+  };
+}
+
+export function useFocusScrollIntoView({
+  clearance = DEFAULT_CLEARANCE,
+}: {
+  clearance?: { bottom: number; top: number };
+}) {
+  const itemRefs = useRef<HTMLButtonElement[]>([]);
+  const pushRefToArray = (ref: HTMLButtonElement) => {
+    itemRefs.current.push(ref);
+  };
+
+  const onFocus = (index: number) => () => {
+    scrollIntoViewIfNeeded(itemRefs.current[index], clearance);
+  };
+
+  return {
+    onFocus,
+    pushRefToArray,
   };
 }

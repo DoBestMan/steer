@@ -4,6 +4,7 @@ import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import Image from '~/components/global/Image/Image';
 
+import { useFocusScrollIntoView } from './Search.hooks';
 import { SearchResult } from './Search.types';
 import styles from './SearchCarousel.styles';
 
@@ -18,6 +19,7 @@ function SearchCarousel({
   onClick,
   searchResults,
 }: SearchCarouselProps) {
+  const { onFocus, pushRefToArray } = useFocusScrollIntoView({});
   const handleClick = (searchResult: SearchResult) => () => {
     onClick(searchResult);
   };
@@ -36,9 +38,14 @@ function SearchCarousel({
         gridColumnL="1/15"
       >
         <Glider draggable slidesToShow="auto">
-          {searchResults.map((result) => (
+          {searchResults.map((result, index) => (
             <div css={styles.carouselItem} key={result.label}>
-              <button css={styles.carouselButton} onClick={handleClick(result)}>
+              <button
+                css={styles.carouselButton}
+                onClick={handleClick(result)}
+                onFocus={onFocus(index)}
+                ref={pushRefToArray}
+              >
                 <Image
                   altText={result.label}
                   srcSet={result.displayImage || ''} // note: this is gross, but temporary. data schema will change in the future.

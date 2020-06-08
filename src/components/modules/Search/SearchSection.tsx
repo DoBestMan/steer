@@ -1,6 +1,7 @@
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 
+import { useFocusScrollIntoView } from './Search.hooks';
 import { SearchResult } from './Search.types';
 import styles from './SearchSection.styles';
 
@@ -19,6 +20,7 @@ function SearchSection({
   sectionIndex,
   selectedItemIndex = [0, -1],
 }: SearchSectionProps) {
+  const { onFocus, pushRefToArray } = useFocusScrollIntoView({});
   const handleClick = (searchResult: SearchResult) => () => {
     onClick(searchResult);
   };
@@ -38,6 +40,8 @@ function SearchSection({
                 <button
                   css={[styles.itemButton, isSelected && styles.isSelected]}
                   onClick={handleClick(item)}
+                  onFocus={onFocus(index)}
+                  ref={pushRefToArray}
                 >
                   {item.labelSegments.map((segment) => (
                     <span
