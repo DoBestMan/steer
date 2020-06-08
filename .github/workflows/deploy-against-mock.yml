@@ -20,7 +20,7 @@ jobs:
     - name: Get new branch name
       shell: bash
       run: |
-        if [[ "${{ github.ref }}" == "" ]]; then BRANCH="qa"; else BRANCH="${{ github.ref }}"; fi
+        if [[ "${{ github.event_name }}" == "push" ]]; then BRANCH="${{ github.ref }}"; else BRANCH="qa"; fi
         BRANCH="${BRANCH/refs\/heads\//}"
         BRANCH="mock-${BRANCH/int-/}"
         echo "##[set-output name=new_branch;]$(echo ${BRANCH})"
