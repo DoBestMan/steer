@@ -4,6 +4,7 @@ import Grid from '~/components/global/Grid/Grid';
 import { COLORS } from '~/lib/constants';
 
 import { default as StarsComponent } from './Stars';
+import { default as StarsWithRatingComponent } from './StarsWithRating';
 
 export default {
   component: StarsComponent,
@@ -35,6 +36,24 @@ export function Stars() {
         color={color}
         isSmall={boolean('Small', false)}
         number={number('Number', 3.2, starOptions)}
+      />
+    </Grid>
+  );
+}
+
+export function StarsWithRating() {
+  const color = select('Color', colorOptions, COLORS.GLOBAL.ORANGE);
+  return (
+    <Grid
+      css={{
+        backgroundColor:
+          color === COLORS.GLOBAL.ORANGE ? COLORS.GLOBAL.BLACK : 'transparent',
+      }}
+    >
+      <StarsWithRatingComponent
+        color={color}
+        isSmall={boolean('Small', false)}
+        number={number('Number', 4.8, starOptions)}
       />
     </Grid>
   );

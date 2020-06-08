@@ -12,23 +12,10 @@ const styles = {
     height: 19,
     marginLeft: 4,
   },
-  rating: {
-    color: COLORS.GLOBAL.ORANGE,
-    marginLeft: SPACING.SIZE_10,
-  },
-  ratingContainer: {
-    alignItems: 'center',
-    display: 'flex',
-  },
   ratingLabel: {
     alignItems: 'center',
     color: COLORS.DARK.GRAY_40,
     display: 'flex',
-  },
-  ratingStars: {
-    svg: {
-      fill: 'var(--rating-gradient-id)',
-    },
   },
   title: {
     color: COLORS.GLOBAL.WHITE,

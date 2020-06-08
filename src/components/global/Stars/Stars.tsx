@@ -8,7 +8,7 @@ import { randomString } from '~/lib/utils/string';
 
 import styles from './Stars.styles';
 
-interface Props {
+export interface Props {
   color?: string;
   isSmall?: boolean;
   number: number;
