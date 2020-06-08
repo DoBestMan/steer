@@ -4,10 +4,8 @@ export const randomString = (maxLength?: number): string =>
 export const abbreviateThousand = (value: number): string =>
   value ? `${value.toString().slice(0, -3)}k` : '0';
 
-export const formatDollars = (cents: string, isRounded = false): string =>
+export const formatDollars = (cents: string): string =>
   (parseInt(cents) / 100).toLocaleString('en-US', {
     style: 'currency',
     currency: 'USD',
-    maximumFractionDigits: isRounded ? 0 : 2,
-    minimumFractionDigits: isRounded ? 0 : 2,
   });

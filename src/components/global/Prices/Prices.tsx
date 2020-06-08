@@ -38,7 +38,7 @@ function Prices({ priceList, isLarge, isLight }: Props) {
                 isLight && { color: COLORS.GLOBAL.WHITE },
               ]}
             >
-              {formatDollars(price.originalInCents, true)}
+              {formatDollars(price.originalInCents)}
             </span>
           )}
         </div>
