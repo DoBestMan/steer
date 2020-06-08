@@ -35,4 +35,10 @@ export const styles = {
   slotContainers: css({
     lineHeight: 'normal',
   }),
+  slotNotANumber: css({
+    left: 0,
+    position: 'absolute',
+    top: 0,
+    width: '100%',
+  }),
 };

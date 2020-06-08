@@ -16,7 +16,7 @@ const styles = {
 };
 
 export function CasinoWithKnobs() {
-  const numberDisplayed = number('Casino number', 132);
+  const numberDisplayed = number('Casino number', 132.56);
   const animate = boolean('Start animation', false);
 
   return (

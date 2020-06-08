@@ -210,6 +210,8 @@ function Casino({ numberDisplayed, animate, ...rest }: Props) {
     }, 0);
   }, [containerEl, BK.bk, hasMounted, fontLoaded]);
 
+  let indexPlus = 1;
+
   return (
     <span css={styles.container} {...rest} aria-label={numberToDisplayStr}>
       {/* Use to get constant width/height on a character */}
@@ -222,7 +224,40 @@ function Casino({ numberDisplayed, animate, ...rest }: Props) {
           width &&
           hasMounted &&
           aNumberToDisplay.map((nb, i) => {
-            const to = parseInt(numberToDisplayStr.substr(0, i + 1), 10);
+            const numberToDisplay = parseInt(nb, 10);
+            const to = parseInt(
+              numberToDisplayStr.replace('.', '').substr(0, i + indexPlus),
+              10,
+            );
+
+            // Likely "."
+            if (Number.isNaN(numberToDisplay)) {
+              const isDot = nb === '.' || nb === ',';
+
+              // Unshift
+              indexPlus = 0;
+
+              return (
+                <span
+                  key={i}
+                  css={styles.slotContainer}
+                  style={{
+                    height,
+                    width: isDot ? width / 2 : width,
+                  }}
+                >
+                  <span
+                    style={{
+                      transform: isDot ? 'translate3d(-50%, 0, 0)' : 'none',
+                    }}
+                    css={styles.slotNotANumber}
+                  >
+                    {nb}
+                  </span>
+                </span>
+              );
+            }
+
             return (
               <Slot
                 key={i}

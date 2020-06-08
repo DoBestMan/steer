@@ -5,7 +5,7 @@ import Radio from './Radio';
 
 export default {
   component: RadioDefault,
-  title: 'Radio',
+  title: 'Global/Radio',
 };
 
 export function RadioDefault() {
