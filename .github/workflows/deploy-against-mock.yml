@@ -32,7 +32,7 @@ jobs:
         git fetch --no-tags --prune --unshallow
         git checkout -b ${{ steps.extract_branch.outputs.new_branch }}
         git merge ${{ github.ref }}
-        git commit --amend --no-edit
+        git commit --amend --no-edit --date "$(date)"
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
