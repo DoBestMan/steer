@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Button from '~/components/global/Button/Button';
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
+import Markdown from '~/components/global/Markdown/Markdown';
 import { BUTTON_STYLE, BUTTON_THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
@@ -70,7 +71,9 @@ function Feedback() {
   return (
     <div css={styles.container}>
       <Icon name={icon} css={styles.icon} />
-      <h3 css={styles.label}>{label}</h3>
+      <h3 css={styles.label}>
+        <Markdown>{label}</Markdown>
+      </h3>
 
       <div css={styles.buttonContainer}>
         {actions.map((action: FeedbackActionProps) => (

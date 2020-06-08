@@ -1,9 +1,9 @@
 {
   "common": {
     "feedback": {
-      "defaultMessageLabel": "Did you find what you were looking for?",
-      "negativeMessageLabel": "Sorry to hear that. Let us help you",
-      "positiveMessageLabel": "Happy to hear that. Tell us about your experience",
+      "defaultMessageLabel": "Did you find what <br /> you were looking for?",
+      "negativeMessageLabel": "Sorry to hear that. <br /> Let us help you",
+      "positiveMessageLabel": "Happy to hear that. <br /> Tell us about your experience",
       "yes": "Yes",
       "no": "No",
       "contact": "Contact us",

@@ -35,6 +35,11 @@ const styles: CSSObject = {
     typography.secondaryHeadline,
     {
       marginBottom: SPACING.SIZE_20,
+      [MQ.M]: {
+        br: {
+          display: 'none',
+        },
+      },
     },
   ],
 };
