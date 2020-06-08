@@ -63,6 +63,12 @@ export const overlayBkStyles: Record<Breakpoint, AnimationStyles> = {
   /* eslint-enable sort-keys */
 };
 
+export const CONTENT_LATERAL_PADDING: { [key: string]: number } = {
+  S: SPACING.SIZE_20,
+  M: SPACING.SIZE_40,
+  L: SPACING.SIZE_60,
+};
+
 const styles = {
   [MODAL_ANIMATION.FADE]: FADE,
   close: css({
@@ -79,13 +85,13 @@ const styles = {
   content: css({
     overflowY: 'auto',
     [MQ.S]: {
-      padding: `${SPACING.SIZE_30}px ${SPACING.SIZE_20}px`,
+      padding: `${SPACING.SIZE_30}px ${CONTENT_LATERAL_PADDING.S}px`,
     },
     [MQ.M]: {
-      padding: SPACING.SIZE_40,
+      padding: CONTENT_LATERAL_PADDING.M,
     },
     [MQ.L]: {
-      padding: `${SPACING.SIZE_40}px ${SPACING.SIZE_60}px`,
+      padding: `${SPACING.SIZE_40}px ${CONTENT_LATERAL_PADDING.L}px`,
     },
   }),
   root: css({
