@@ -1,11 +1,12 @@
 name: Deploy branch against mock API
 
 on:
+  repository_dispatch:
+    types: [release_qa]
   push:
     branches:
       - "int-*"
       - dev
-      - qa
       - staging
 
 jobs:
@@ -14,12 +15,12 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     # Add mock prefix to branch name, remove int prefix if present
-    # qa            => mock-qa
-    # int-my-branch => mock-my-branch
+    # dev            => mock-dev
+    # int-my-branch  => mock-my-branch
     - name: Get new branch name
       shell: bash
       run: |
-        BRANCH="${{ github.ref }}"
+        if [[ "${{ github.ref }}" == "" ]]; then BRANCH="qa"; else BRANCH="${{ github.ref }}"; fi
         BRANCH="${BRANCH/refs\/heads\//}"
         BRANCH="mock-${BRANCH/int-/}"
         echo "##[set-output name=new_branch;]$(echo ${BRANCH})"
