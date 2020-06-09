@@ -140,7 +140,7 @@
       "vehicle": "Vehicle",
       "tireSize": "Tire size",
       "brand": "Brand",
-      "popularTires": "Popular tires"
+      "popular": "Popular tires"
     },
     "searchError": "Sorry, no matching results found.",
     "support": "Need support?",

@@ -13,6 +13,9 @@ import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
+import { SiteSearchResultGroup } from '~/data/models/SiteSearchResultGroup';
+import { SiteSearchResultImageItem } from '~/data/models/SiteSearchResultImageItem';
+import { SiteSearchResultTextItem } from '~/data/models/SiteSearchResultTextItem';
 import { ARIA_LIVE, KEYCODES } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
@@ -21,20 +24,19 @@ import AdditionalInfoModals from './AdditionalInfoModals';
 import CloseSearchButton from './CloseSearchButton';
 import { useAutocompleteSelectedItem } from './Search.hooks';
 import {
-  SearchGroup,
   SearchInputEnum,
   SearchModalEnum,
   SearchResult,
-  SearchState,
+  SearchResultEnum,
   SearchStateCopy,
   SearchStateEnum,
-  SearchStateType,
 } from './Search.types';
-import { getSearchResultComponent } from './Search.utils';
 import styles from './SearchAutocomplete.styles';
+import SearchCarousel from './SearchCarousel';
 import SearchInput from './SearchInput';
 import SearchLabel from './SearchLabel/SearchLabel';
 import SearchSecondaryActions from './SearchSecondaryActions';
+import SearchSection from './SearchSection';
 
 const CONSTANTS = {
   DEFAULT_SELECTED_ITEM_INDEX: [0, -1],
@@ -47,7 +49,7 @@ export interface Props {
   inputValue?: string;
   isCustomerServiceEnabled: boolean;
   isLoadingResults?: boolean;
-  noExactMatches?: boolean;
+  noExactMatch?: boolean;
   onCancelSelection: () => void;
   onCloseSearchClick: () => void;
   onInputChange: (value: string) => void;
@@ -55,8 +57,8 @@ export interface Props {
   onToggleRearTire: (isShowing: boolean) => void;
   onValueSelection: (value: SearchResult) => void;
   query: string;
-  results: SearchGroup[];
-  searchState: SearchStateType;
+  results: SiteSearchResultGroup[];
+  searchState: string;
   secondaryQuery: string;
 }
 
@@ -66,7 +68,7 @@ function SearchAutocomplete({
   inputValue = CONSTANTS.DEFAULT_VALUE,
   isCustomerServiceEnabled,
   isLoadingResults,
-  noExactMatches,
+  noExactMatch,
   onCancelSelection,
   onCloseSearchClick,
   onInputChange,
@@ -92,8 +94,8 @@ function SearchAutocomplete({
   const isInputEmpty = query.length < 1;
   const hasResults = results.length > 0;
   const hasNoMatchingResults =
-    noExactMatches && !isInputEmpty && !isLoadingResults;
-  const hasActiveSearchState = searchState !== SearchState.FREE_SEARCH;
+    noExactMatch && !isInputEmpty && !isLoadingResults;
+  const hasActiveSearchState = !!searchState;
   const isRearTireState = searchState === SearchStateEnum.REAR_TIRE;
   const isSearchInProgress = !!query || hasActiveSearchState;
 
@@ -115,9 +117,7 @@ function SearchAutocomplete({
   }, [focusOnMount, focusOnInput]);
 
   useEffect(() => {
-    setShouldShowListbox(
-      hasResults && (!isInputEmpty || searchState !== SearchState.FREE_SEARCH),
-    );
+    setShouldShowListbox(hasResults && (!isInputEmpty || !!searchState));
   }, [hasResults, isInputEmpty, results, searchState]);
 
   useEffect(() => {
@@ -364,19 +364,38 @@ function SearchAutocomplete({
 
             return (
               <ul css={animationStyles}>
-                {results.map((searchGroup: SearchGroup, index) => {
-                  const SearchResults = getSearchResultComponent(
-                    searchGroup.type,
+                {results.map((searchGroup: SiteSearchResultGroup, index) => {
+                  // We need to be explicit about which types are in each array.
+                  const siteSearchResultImageList: SiteSearchResultImageItem[] = [];
+                  const siteSearchResultTextList: SiteSearchResultTextItem[] = [];
+
+                  searchGroup.siteSearchResultList.forEach(
+                    (siteSearchResult) => {
+                      if (siteSearchResult.type === SearchResultEnum.IMAGE) {
+                        siteSearchResultImageList.push(siteSearchResult);
+                      } else if (
+                        siteSearchResult.type === SearchResultEnum.TEXT
+                      ) {
+                        siteSearchResultTextList.push(siteSearchResult);
+                      }
+                    },
                   );
+
                   return (
                     <li css={styles.searchResultsGridItem} key={index}>
-                      <SearchResults
-                        label={searchGroup.label}
-                        onClick={handleValueSelection}
-                        searchResults={searchGroup.siteSearchResultList}
-                        sectionIndex={index}
-                        selectedItemIndex={selectedItemIndex}
-                      />
+                      {siteSearchResultImageList.length > 0 ? (
+                        <SearchCarousel
+                          label={searchGroup.label}
+                          siteSearchResultList={siteSearchResultImageList}
+                          onClick={handleValueSelection}
+                        />
+                      ) : (
+                        <SearchSection
+                          label={searchGroup.label}
+                          siteSearchResultList={siteSearchResultTextList}
+                          onClick={handleValueSelection}
+                        />
+                      )}
                     </li>
                   );
                 })}

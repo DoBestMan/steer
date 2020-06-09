@@ -3,17 +3,13 @@ import { LINK_THEME, LINK_TYPES } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
 
-import {
-  SearchModalEnum,
-  SearchStateEnum,
-  SearchStateType,
-} from './Search.types';
+import { SearchModalEnum, SearchStateEnum } from './Search.types';
 import styles from './SearchAutocomplete.styles';
 
 interface Props {
   onAddRearTire: () => void;
   onSetActiveModal: (modalType: SearchModalEnum | null) => () => void;
-  searchState: SearchStateType;
+  searchState: string;
 }
 
 function SearchSecondaryActions({

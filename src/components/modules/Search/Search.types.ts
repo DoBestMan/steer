@@ -1,74 +1,37 @@
+import { ListResultMetadata } from '~/data/models/ListResultMetadata';
+import { SiteSearchResultGroup } from '~/data/models/SiteSearchResultGroup';
+import { SiteSearchResultImageItem } from '~/data/models/SiteSearchResultImageItem';
+import { SiteSearchResultTextItem } from '~/data/models/SiteSearchResultTextItem';
 import { ui } from '~/lib/utils/ui-dictionary';
 
-import SearchCarousel from './SearchCarousel';
-import SearchSection from './SearchSection';
-
-interface ResultMetadata {
-  noExactMatches?: boolean;
-}
-
 export interface Results {
-  resultMetadata: ResultMetadata;
-  siteSearchGroupList: SearchGroup[];
+  resultMetadata: ListResultMetadata;
+  siteSearchGroupList: SiteSearchResultGroup[];
 }
 
-export interface SearchGroup {
-  label?: string;
-  siteSearchResultList: SearchResult[];
-  type: SearchResultListEnum;
+export type SearchResult = SiteSearchResultImageItem | SiteSearchResultTextItem;
+
+export enum SearchResultEnum {
+  IMAGE = 'SiteSearchResultImageItem',
+  TEXT = 'SiteSearchResultTextItem',
 }
 
-export interface SearchResult {
-  action?: SearchResultAction;
-  additionalDisplayValue?: string;
-  displayImage?: string;
-  label: string;
-  labelSegments: LabelSegment[];
-  type: SearchResultType;
-}
+export type SearchResultType =
+  | 'SiteSearchResultImageItem'
+  | 'SiteSearchResultTextItem';
 
-export enum SearchResultType {
-  SiteSearchResultImageItem = 'SiteSearchResultImageItem',
-  SiteSearchResultTextItem = 'SiteSearchResultTextItem',
-}
-
-type SearchResultAction =
-  | SearchResultActionTypeLink
-  | SearchResultActionTypeQuery;
-
-interface SearchResultActionTypeLink {
-  link: SearchResultActionLink;
-  type: SearchResultActionType.SiteSearchResultActionLink;
-}
-
-interface SearchResultActionTypeQuery {
-  queryText: string;
-  queryType: string;
-  type: SearchResultActionType.SiteSearchResultActionQuery;
-}
-
-export enum SearchResultActionType {
-  SiteSearchResultActionLink = 'SiteSearchResultActionLink',
-  SiteSearchResultActionQuery = 'SiteSearchResultActionQuery',
-}
-
-interface SearchResultActionLink {
-  href: string;
-  isExternal: boolean;
-}
-
-interface LabelSegment {
-  label: string;
-  matches: boolean;
+export enum SearchActionType {
+  LINK = 'SiteSearchResultActionLink',
+  QUERY = 'SiteSearchResultActionQuery',
 }
 
 export enum SearchStateEnum {
   BRAND = 'brand',
-  FREE_SEARCH = 'free-search',
-  POPULAR = 'popular',
-  REAR_TIRE = 'rear-tire',
-  TIRE_SIZE = 'tire-size',
-  VEHICLE = 'vehicle',
+  FREE_SEARCH = '',
+  POPULAR = 'mostPopularProductLine',
+  REAR_TIRE = 'rearTire',
+  TIRE_SIZE = 'tireSize',
+  VEHICLE = 'makeModel',
 }
 
 export type SearchStateType =
@@ -81,7 +44,7 @@ export type SearchStateType =
 
 export const SearchStateCopy: Record<string, string> = {
   [SearchStateEnum.BRAND]: ui('search.searchCategories.brand'),
-  [SearchStateEnum.POPULAR]: ui('search.searchCategories.popularTires'),
+  [SearchStateEnum.POPULAR]: ui('search.searchCategories.popular'),
   [SearchStateEnum.TIRE_SIZE]: ui('search.searchCategories.tireSize'),
   [SearchStateEnum.VEHICLE]: ui('search.searchCategories.vehicle'),
 };
@@ -93,16 +56,6 @@ export const SearchState: Record<string, SearchStateType> = {
   [SearchStateCopy[SearchStateEnum.REAR_TIRE]]: 'rear-tire',
   [SearchStateCopy[SearchStateEnum.TIRE_SIZE]]: 'tire-size',
   [SearchStateCopy[SearchStateEnum.VEHICLE]]: 'vehicle',
-};
-
-export enum SearchResultListEnum {
-  CAROUSEL = 'SiteSearchResultsCarousel',
-  LIST = 'SiteSearchResultsList',
-}
-
-export const SearchResultListComponent = {
-  [SearchResultListEnum.CAROUSEL]: SearchCarousel,
-  [SearchResultListEnum.LIST]: SearchSection,
 };
 
 export enum SearchInputEnum {

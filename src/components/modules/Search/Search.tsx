@@ -1,5 +1,6 @@
 import { RefObject, useState } from 'react';
 
+import { SiteSearchResultTextItem } from '~/data/models/SiteSearchResultTextItem';
 import { TIME } from '~/lib/constants';
 import { scrollTo } from '~/lib/helpers/scroll';
 
@@ -7,11 +8,11 @@ import InitialSearch from './InitialSearch';
 import styles from './Search.styles';
 import {
   Results,
+  SearchActionType,
   SearchInputEnum,
   SearchResult,
-  SearchState,
+  SearchResultEnum,
   SearchStateEnum,
-  SearchStateType,
 } from './Search.types';
 import SearchAutocomplete from './SearchAutocomplete';
 import SearchSupport from './SearchSupport';
@@ -21,8 +22,8 @@ interface Props {
   isCustomerServiceEnabled: boolean;
   onClearSearchesClick: () => void;
   onCloseSearchClick: () => void;
-  onSetSearchCategory: (category: SearchStateType) => void;
-  pastSearches: SearchResult[];
+  onSetSearchCategory: (category: string) => void;
+  pastSearches: SiteSearchResultTextItem[];
   results: Results;
 }
 
@@ -37,13 +38,13 @@ function Search({
 }: Props) {
   const [query, setQuery] = useState('');
   const [secondaryQuery, setSecondaryQuery] = useState('');
-  const [searchState, setSearchState] = useState(SearchState.FREE_SEARCH);
+  const [searchState, setSearchState] = useState('');
   const [activeInputType, setActiveInputType] = useState(
     SearchInputEnum.PRIMARY,
   );
 
   const { resultMetadata, siteSearchGroupList } = results;
-  const { noExactMatches } = resultMetadata;
+  const { noExactMatch } = resultMetadata;
 
   const handleClearSearchesClick = () => {
     onClearSearchesClick();
@@ -64,8 +65,8 @@ function Search({
   const onCancelSelection = () => {
     // Reset the search category when search cleared with no query.
     if (!query) {
-      setSearchState(SearchState.FREE_SEARCH);
-      onSetSearchCategory(SearchState.FREE_SEARCH);
+      setSearchState('');
+      onSetSearchCategory('');
     }
   };
 
@@ -80,17 +81,28 @@ function Search({
   };
 
   const handleValueSelection = (searchResult: SearchResult) => {
+    let queryText = '';
+
+    if (searchResult.type === SearchResultEnum.TEXT) {
+      queryText = searchResult.label;
+    } else if (searchResult.type === SearchResultEnum.IMAGE) {
+      queryText = searchResult.image.altText;
+    }
+
     if (activeInputType === SearchInputEnum.PRIMARY) {
-      setQuery(searchResult.label);
+      setQuery(queryText);
     } else if (activeInputType === SearchInputEnum.SECONDARY) {
-      setSecondaryQuery(searchResult.label);
+      setSecondaryQuery(queryText);
     }
   };
 
   // We need to set the search state internally for UI purposes, but also
   // externally in order to update the search results.
   const handleSearchCategoryClick = (searchResult: SearchResult) => {
-    const category = SearchState[searchResult.label];
+    const category =
+      searchResult.action.type === SearchActionType.QUERY
+        ? searchResult.action.queryType
+        : '';
     setSearchState(category);
     onSetSearchCategory(category);
   };
@@ -104,11 +116,9 @@ function Search({
 
   const isInputEmpty = query.length < 1;
   const hasResults = siteSearchGroupList.length > 0;
-  const shouldShowSearchSupport =
-    noExactMatches && !hasResults && !isInputEmpty;
+  const shouldShowSearchSupport = noExactMatch && !hasResults && !isInputEmpty;
   const shouldShowInitialSearch =
-    (shouldShowSearchSupport || isInputEmpty) &&
-    searchState === SearchState.FREE_SEARCH;
+    (shouldShowSearchSupport || isInputEmpty) && !searchState;
 
   return (
     <div css={styles.container} ref={forwardedRef}>
@@ -116,7 +126,7 @@ function Search({
         activeInputType={activeInputType}
         focusOnMount
         isCustomerServiceEnabled={isCustomerServiceEnabled}
-        noExactMatches={noExactMatches}
+        noExactMatch={noExactMatch}
         onCancelSelection={onCancelSelection}
         onInputChange={onInputChange}
         onCloseSearchClick={onCloseSearchClick}

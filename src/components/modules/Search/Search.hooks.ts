@@ -1,8 +1,7 @@
 import { useRef, useState } from 'react';
 
+import { SiteSearchResultGroup } from '~/data/models/SiteSearchResultGroup';
 import { scrollIntoViewIfNeeded } from '~/lib/utils/accessibility';
-
-import { SearchGroup } from './Search.types';
 
 const DEFAULT_CLEARANCE = {
   bottom: 0,
@@ -13,7 +12,7 @@ const DEFAULT_CLEARANCE = {
  * This hook takes care of the selection logic for selecting search
  * results via keyboard.
  */
-export function useAutocompleteSelectedItem(results: SearchGroup[]) {
+export function useAutocompleteSelectedItem(results: SiteSearchResultGroup[]) {
   const [selectedItemIndex, setSelectedItemIndex] = useState<[number, number]>([
     0,
     -1,

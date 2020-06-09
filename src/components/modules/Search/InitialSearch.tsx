@@ -3,20 +3,20 @@ import { Transition } from 'react-transition-group';
 import { TransitionStatus } from 'react-transition-group/Transition';
 
 import Link from '~/components/global/Link/Link';
+import { SiteSearchResultTextItem } from '~/data/models/SiteSearchResultTextItem';
 import { LINK_THEME, LINK_TYPES, TIME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
 
 import { initialSearchCategories } from './Search.mocks';
 import styles from './Search.styles';
-import { SearchResult } from './Search.types';
 import SearchSection from './SearchSection';
 
 interface Props {
   onClearSearchesClick: () => void;
   onPastSearchClick: () => void;
-  onSearchCategoryClick: (searchResult: SearchResult) => void;
-  pastSearches: SearchResult[];
+  onSearchCategoryClick: (searchResult: SiteSearchResultTextItem) => void;
+  pastSearches: SiteSearchResultTextItem[];
 }
 
 function InitialSearch({
@@ -48,7 +48,7 @@ function InitialSearch({
         <SearchSection
           label={ui('search.searchBy')}
           onClick={onSearchCategoryClick}
-          searchResults={initialSearchCategories}
+          siteSearchResultList={initialSearchCategories}
         />
       </div>
       <Transition
@@ -69,7 +69,7 @@ function InitialSearch({
               <SearchSection
                 label={pastSearchesEyebrow}
                 onClick={onPastSearchClick}
-                searchResults={visiblePastSearches}
+                siteSearchResultList={visiblePastSearches}
               />
             </div>
           );

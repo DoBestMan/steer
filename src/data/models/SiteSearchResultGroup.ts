@@ -3,7 +3,8 @@ import { SiteSearchResultTextItem } from './SiteSearchResultTextItem';
 
 export interface SiteSearchResultGroup {
   label: string;
-  siteSearchResultList:
-    | SiteSearchResultImageItem[]
-    | SiteSearchResultTextItem[];
+  siteSearchResultList: (
+    | SiteSearchResultImageItem
+    | SiteSearchResultTextItem
+  )[];
 }

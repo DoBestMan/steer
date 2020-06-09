@@ -1,27 +1,27 @@
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
+import { SiteSearchResultTextItem } from '~/data/models/SiteSearchResultTextItem';
 
 import { useFocusScrollIntoView } from './Search.hooks';
-import { SearchResult } from './Search.types';
 import styles from './SearchSection.styles';
 
 export interface SearchSectionProps {
   label?: string | JSX.Element;
-  onClick: (searchResult: SearchResult) => void;
-  searchResults: SearchResult[];
+  onClick: (searchResult: SiteSearchResultTextItem) => void;
   sectionIndex?: number;
   selectedItemIndex?: [number, number];
+  siteSearchResultList: SiteSearchResultTextItem[];
 }
 
 function SearchSection({
   label,
   onClick,
-  searchResults,
+  siteSearchResultList,
   sectionIndex,
   selectedItemIndex = [0, -1],
 }: SearchSectionProps) {
   const { onFocus, pushRefToArray } = useFocusScrollIntoView({});
-  const handleClick = (searchResult: SearchResult) => () => {
+  const handleClick = (searchResult: SiteSearchResultTextItem) => () => {
     onClick(searchResult);
   };
 
@@ -30,7 +30,7 @@ function SearchSection({
       <GridItem gridColumnS="2/6" gridColumnM="2/8" gridColumnL="3/14">
         {label && <h5 css={styles.eyebrow}>{label}</h5>}
         <ul>
-          {searchResults.map((item, index) => {
+          {siteSearchResultList.map((item, index) => {
             const isSelected =
               sectionIndex === selectedItemIndex[0] &&
               index === selectedItemIndex[1];
@@ -52,9 +52,9 @@ function SearchSection({
                     </span>
                   ))}
                 </button>
-                {item.additionalDisplayValue && (
+                {item.detailLabel && (
                   <div css={styles.secondaryItemDisplay}>
-                    {item.additionalDisplayValue}
+                    {item.detailLabel}
                   </div>
                 )}
               </li>

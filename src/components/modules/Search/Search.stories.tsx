@@ -22,7 +22,7 @@ import {
   simpleSearchResults,
   tireSizeResults,
 } from './Search.mocks';
-import { SearchStateEnum, SearchStateType } from './Search.types';
+import { SearchStateEnum } from './Search.types';
 
 export default {
   component: Search,
@@ -30,7 +30,7 @@ export default {
 };
 
 // Temporary helper function for mock data
-function getCategoryResults(category: SearchStateType) {
+function getCategoryResults(category: string) {
   switch (category) {
     case SearchStateEnum.VEHICLE:
       return searchByVehicle;
@@ -121,7 +121,7 @@ export function SearchBy() {
   const [results, setResults] = useState(noSearchResults);
   const handleCloseSearchClick = action('Close search');
   const handleClearSearchesClick = action('Clear searches');
-  const handleSetSearchCategory = (category: SearchStateType) => {
+  const handleSetSearchCategory = (category: string) => {
     const categoryResults = getCategoryResults(category);
     setResults(categoryResults);
   };

@@ -3,24 +3,24 @@ import Glider from 'react-glider';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import Image from '~/components/global/Image/Image';
+import { SiteSearchResultImageItem } from '~/data/models/SiteSearchResultImageItem';
 
 import { useFocusScrollIntoView } from './Search.hooks';
-import { SearchResult } from './Search.types';
 import styles from './SearchCarousel.styles';
 
 export interface SearchCarouselProps {
   label?: string | JSX.Element;
-  onClick: (searchResult: SearchResult) => void;
-  searchResults: SearchResult[];
+  onClick: (searchResult: SiteSearchResultImageItem) => void;
+  siteSearchResultList: SiteSearchResultImageItem[];
 }
 
 function SearchCarousel({
   label,
   onClick,
-  searchResults,
+  siteSearchResultList,
 }: SearchCarouselProps) {
   const { onFocus, pushRefToArray } = useFocusScrollIntoView({});
-  const handleClick = (searchResult: SearchResult) => () => {
+  const handleClick = (searchResult: SiteSearchResultImageItem) => () => {
     onClick(searchResult);
   };
 
@@ -38,8 +38,8 @@ function SearchCarousel({
         gridColumnL="1/15"
       >
         <Glider draggable slidesToShow="auto">
-          {searchResults.map((result, index) => (
-            <div css={styles.carouselItem} key={result.label}>
+          {siteSearchResultList.map((result, index) => (
+            <div css={styles.carouselItem} key={result.image.altText}>
               <button
                 css={styles.carouselButton}
                 onClick={handleClick(result)}
@@ -47,8 +47,8 @@ function SearchCarousel({
                 ref={pushRefToArray}
               >
                 <Image
-                  altText={result.label}
-                  srcSet={result.displayImage || ''} // note: this is gross, but temporary. data schema will change in the future.
+                  altText={result.image.altText}
+                  srcSet={result.image.srcSet}
                 />
               </button>
             </div>
