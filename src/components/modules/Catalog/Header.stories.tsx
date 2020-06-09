@@ -1,6 +1,8 @@
 import { boolean, text } from '@storybook/addon-knobs';
 import { ReactNode, useState } from 'react';
 
+import { COLORS } from '~/lib/constants';
+
 import Header from './Header';
 
 export default {
@@ -27,6 +29,7 @@ const defaultTitle = (
 function HeaderContainer({ children }: { children: ReactNode }) {
   const styles = {
     root: {
+      background: COLORS.LIGHT.OFF_WHITE,
       height: '150vh', // allow for scroll if popup is open
     },
   };

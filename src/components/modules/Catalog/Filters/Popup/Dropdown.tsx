@@ -71,7 +71,9 @@ export default function FilterDropdown({
         css={[styles.root, isOpen && styles.open]}
         style={{ left: xPos, top: yPos }}
       >
-        {children}
+        {/* focus trap and dropdown wrapper need to be in dom to update positioning
+        and focus but wait to render children until it's open */}
+        {isOpen && children}
         <Button onClick={onSelectFilter}>Toggle filter</Button>
       </div>
     </FocusTrap>

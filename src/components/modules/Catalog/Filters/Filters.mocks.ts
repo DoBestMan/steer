@@ -1,4 +1,9 @@
-import { CatalogFilterTypes, FilterContentTypes } from './Filter.types';
+import {
+  CatalogFilterRange,
+  CatalogFilterSort,
+  CatalogFilterTypes,
+  FilterContentTypes,
+} from './Filter.types';
 
 export const filterTypeSelect: FilterContentTypes[] = [
   FilterContentTypes.CatalogFilterChecklist,
@@ -7,83 +12,98 @@ export const filterTypeSelect: FilterContentTypes[] = [
   FilterContentTypes.CatalogFilterSort,
   FilterContentTypes.CatalogFilterToggle,
 ];
+
+export const filterRange = {
+  currentMax: null,
+  currentMin: null,
+  id: 'price',
+  label: 'Price',
+  maxValue: 349,
+  minValue: 49,
+  step: 1,
+  type: FilterContentTypes.CatalogFilterRange,
+  unit: 'UnitUSD',
+} as CatalogFilterRange;
+
+export const filterSort = {
+  label: 'Sort by',
+  id: 'sort',
+  type: FilterContentTypes.CatalogFilterSort,
+  items: [
+    {
+      title: 'Best match',
+      description: 'Fastest delivery, best ratings and value',
+      flair: null,
+      id: 'bestMatch',
+    },
+    {
+      title: 'Best Value',
+      description: null,
+      flair: null,
+      id: 'bestValue',
+    },
+    {
+      title: 'Price: Low to High',
+      description: null,
+      flair: null,
+      id: 'priceAsc',
+    },
+    {
+      title: 'Price: High to Low',
+      description: null,
+      flair: null,
+      id: 'priceDesc',
+    },
+    {
+      title: 'Best Seller',
+      description: null,
+      flair: null,
+      id: 'bestSeller',
+    },
+    {
+      title: 'Brand: A-Z',
+      description: null,
+      flair: null,
+      id: 'brandAsc',
+    },
+    {
+      title: 'Brand: Z-A',
+      description: null,
+      flair: null,
+      id: 'brandDesc',
+    },
+    {
+      title: 'Mileage Warranty',
+      description: null,
+      flair: null,
+      id: 'warranty',
+    },
+    {
+      title: 'Highest Rating',
+      description: null,
+      flair: null,
+      id: 'highestRating',
+    },
+  ],
+} as CatalogFilterSort;
+
 export const filterTypeMap: Record<FilterContentTypes, CatalogFilterTypes> = {
   /* eslint-disable sort-keys */
   [FilterContentTypes.CatalogFilterToggle]: {
     label: 'Deals',
     type: FilterContentTypes.CatalogFilterToggle,
   },
-  [FilterContentTypes.CatalogFilterSort]: {
-    label: 'Sort by',
-    id: 'sort',
-    type: FilterContentTypes.CatalogFilterSort,
-    items: [
-      {
-        title: 'Best match',
-        description: 'Fastest delivery, best ratings and value',
-        flair: null,
-        id: 'bestMatch',
-      },
-      {
-        title: 'Best Value',
-        description: null,
-        flair: null,
-        id: 'bestValue',
-      },
-      {
-        title: 'Price: Low to High',
-        description: null,
-        flair: null,
-        id: 'priceAsc',
-      },
-      {
-        title: 'Price: High to Low',
-        description: null,
-        flair: null,
-        id: 'priceDesc',
-      },
-      {
-        title: 'Best Seller',
-        description: null,
-        flair: null,
-        id: 'bestSeller',
-      },
-      {
-        title: 'Brand: A-Z',
-        description: null,
-        flair: null,
-        id: 'brandAsc',
-      },
-      {
-        title: 'Brand: Z-A',
-        description: null,
-        flair: null,
-        id: 'brandDesc',
-      },
-      {
-        title: 'Mileage Warranty',
-        description: null,
-        flair: null,
-        id: 'warranty',
-      },
-      {
-        title: 'Highest Rating',
-        description: null,
-        flair: null,
-        id: 'highestRating',
-      },
-    ],
-  },
+  [FilterContentTypes.CatalogFilterSort]: filterSort,
   [FilterContentTypes.CatalogFilterRange]: {
-    label: 'Price',
-    id: 'price',
-    type: FilterContentTypes.CatalogFilterRange,
-    minValue: 49,
-    maxValue: 349,
-    currentMin: null,
     currentMax: null,
-    step: 1,
-    unit: 'UnitUSD',
+    currentMin: null,
+    id: 'warranty',
+    label: 'Warranty',
+    maxValue: 70_000,
+    minValue: 0,
+    step: 5_000,
+    type: FilterContentTypes.CatalogFilterRange,
+    unit: 'UnitMiles',
   },
   [FilterContentTypes.CatalogFilterChecklist]: {
     label: 'Brand',
@@ -245,18 +265,6 @@ export const filterTypeMap: Record<FilterContentTypes, CatalogFilterTypes> = {
 };
 const filters = [
   filterTypeMap[FilterContentTypes.CatalogFilterRange],
-  {
-    label: 'Warranty',
-    id: 'warranty',
-    type: 'CatalogFilterRange',
-    minValue: 0,
-    maxValue: 70_000,
-    currentMin: null,
-    currentMax: null,
-    step: 5_000,
-    unit: 'UnitMiles',
-  },
-  filterTypeMap[FilterContentTypes.CatalogFilterSort],
   filterTypeMap[FilterContentTypes.CatalogFilterToggle],
   filterTypeMap[FilterContentTypes.CatalogFilterChecklist],
   {

@@ -21,7 +21,6 @@ function ModalButton({ toggleModal }: { toggleModal: () => void }) {
     </Button>
   );
 }
-// TODO: add filter type content stories
 
 export function FilterPopupWithKnobs() {
   const [isOpen, setIsOpen] = useState(false);

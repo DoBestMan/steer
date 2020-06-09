@@ -3,6 +3,7 @@ import { MutableRefObject, useRef } from 'react';
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 
+import { RANGE_SLIDER_SIZE } from './Range.constants';
 import useRangeSliderManager from './Range.hooks';
 import styles from './Range.styles';
 
@@ -15,9 +16,15 @@ interface Props {
   onAriaTextChange: (value: number) => string;
   onChange: (value: number) => void;
   railEl: MutableRefObject<HTMLDivElement | null>;
+  size: RANGE_SLIDER_SIZE;
 }
 
-export default function Slider({ label, onAriaTextChange, ...props }: Props) {
+export default function Slider({
+  label,
+  onAriaTextChange,
+  size,
+  ...props
+}: Props) {
   const sliderEl = useRef<HTMLDivElement | null>(null);
   const { maxCurrent, minCurrent, value } = useRangeSliderManager({
     ...props,
@@ -28,14 +35,14 @@ export default function Slider({ label, onAriaTextChange, ...props }: Props) {
       ref={sliderEl}
       role="slider"
       tabIndex={0}
-      css={styles.indicator}
+      css={[styles.indicator, styles[size]]}
       aria-valuemin={minCurrent}
       aria-valuenow={value}
       aria-valuemax={maxCurrent}
       aria-label={label}
       aria-valuetext={onAriaTextChange(value)}
     >
-      <Icon name={ICONS.GRIP} />
+      {size !== RANGE_SLIDER_SIZE.SMALL && <Icon name={ICONS.GRIP} />}
     </div>
   );
 }

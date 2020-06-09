@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useWindowSize } from '~/hooks/useWindowSize';
 import { ui } from '~/lib/utils/ui-dictionary';
 
+import { RANGE_SLIDER_SIZE } from './Range.constants';
 import styles, { INDICATOR_SIZE } from './Range.styles';
 import Slider from './Slider';
 
@@ -18,6 +19,7 @@ interface Props {
   minDefault?: number;
   minLabel?: string;
   name: string;
+  size?: RANGE_SLIDER_SIZE;
 }
 
 export default function Range({
@@ -29,13 +31,15 @@ export default function Range({
   name,
   max,
   min,
+  size = RANGE_SLIDER_SIZE.REGULAR,
 }: Props) {
+  const isSmall = size === RANGE_SLIDER_SIZE.SMALL;
   const railEl = useRef<HTMLDivElement | null>(null);
-  const minLabelEl = useRef<HTMLDivElement | null>(null);
-  const maxLabelEl = useRef<HTMLDivElement | null>(null);
   const [minCurrent, setMinCurrent] = useState(minDefault || min);
   const [maxCurrent, setMaxCurrent] = useState(maxDefault || max);
   const [fillStyles, setFillStyles] = useState({});
+  const maxLabel = (formatLabel && formatLabel(maxCurrent)) || maxCurrent;
+  const minLabel = (formatLabel && formatLabel(minCurrent)) || minCurrent;
   const { width } = useWindowSize(); // update fill color width if window is resized
 
   function handleMaxChange(value: number) {
@@ -55,17 +59,18 @@ export default function Range({
     const minEl = railEl.current.firstElementChild;
     const maxEl = railEl.current.lastElementChild;
     if (maxEl instanceof HTMLElement && minEl instanceof HTMLElement) {
-      const indicatorHalf = INDICATOR_SIZE / 2;
+      const indicatorHalf = INDICATOR_SIZE[size] / 2;
       const width = maxEl.offsetLeft - minEl.offsetLeft + indicatorHalf;
       setFillStyles({
         marginLeft: minEl.offsetLeft + indicatorHalf,
         width,
       });
     }
-  }, [minCurrent, maxCurrent, width]);
+  }, [minCurrent, maxCurrent, size, width]);
   return (
-    <>
-      <div css={styles.root}>
+    <div css={isSmall && styles.rootSmall}>
+      {isSmall && <p css={styles.labelSm}>{minLabel}</p>}
+      <div css={styles.container}>
         <div css={[styles.fillColor, fillStyles]} />
         <div ref={railEl} css={styles.rail}>
           <Slider
@@ -78,6 +83,7 @@ export default function Range({
             defaultValue={minCurrent}
             label={`${name} ${ui('catalog.filters.min')}`}
             css={styles.minIndicator}
+            size={size}
           />
           <Slider
             onAriaTextChange={announceTextChange}
@@ -89,17 +95,17 @@ export default function Range({
             defaultValue={maxCurrent}
             label={`${name} ${ui('catalog.filters.max')}`}
             css={styles.maxIndicator}
+            size={size}
           />
         </div>
       </div>
-      <div css={styles.labels}>
-        <div ref={minLabelEl}>
-          {(formatLabel && formatLabel(minCurrent)) || minCurrent}
+      {isSmall && <p css={styles.labelSm}>{maxLabel}</p>}
+      {!isSmall && (
+        <div css={styles.labels}>
+          <p>{minLabel}</p>
+          <p>{maxLabel}</p>
         </div>
-        <div ref={maxLabelEl}>
-          {(formatLabel && formatLabel(maxCurrent)) || maxCurrent}
-        </div>
-      </div>
-    </>
+      )}
+    </div>
   );
 }

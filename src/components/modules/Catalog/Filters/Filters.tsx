@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import FilterButton from '~/components/global/Button/FilterButton';
 import FilterButtonToggle from '~/components/global/Button/FilterButtonToggle';
 import { BUTTON_THEME } from '~/lib/constants';
@@ -14,28 +12,20 @@ import FilterPopup from './Popup/FilterPopup';
 interface Props {
   activeFilters: string[];
   isAdvancedView?: boolean;
-  toggleFilter: (filter: string) => void;
+  onClose: () => void;
+  onOpen: (filter: string) => () => void;
+  selectingFilter: string;
+  toggleFilter: (filter: string) => () => void;
 }
 
 export default function Filters({
   activeFilters,
   isAdvancedView,
+  selectingFilter,
   toggleFilter,
+  onOpen,
+  onClose,
 }: Props) {
-  const [selectingFilter, setSelectingFilter] = useState('');
-  function clearSelectingFilter() {
-    setSelectingFilter('');
-  }
-  function selectFilterDropdown(label: string) {
-    return () => {
-      setSelectingFilter(label);
-    };
-  }
-  function onFilterClick(filter: string) {
-    return () => {
-      toggleFilter(filter);
-    };
-  }
   return (
     <>
       <p css={[styles.filterLabel, isAdvancedView && hStyles.textAdvanced]}>
@@ -53,14 +43,14 @@ export default function Filters({
                 label={label}
                 isDropdownOpen={label === selectingFilter}
                 isActive={isActive}
-                onClick={selectFilterDropdown(label)}
+                onClick={onOpen(label)}
                 theme={isAdvancedView ? BUTTON_THEME.DARK : BUTTON_THEME.ORANGE}
                 aria-expanded={label === selectingFilter}
               >
                 <FilterPopup
                   isOpen={label === selectingFilter}
-                  onClose={clearSelectingFilter}
-                  onSelectFilter={onFilterClick(label)}
+                  onClose={onClose}
+                  onSelectFilter={toggleFilter(label)}
                   filter={{ ...filter, label }}
                 />
               </FilterButton>
@@ -69,7 +59,7 @@ export default function Filters({
                 css={styles.button}
                 key={label}
                 isActive={isActive}
-                onClick={onFilterClick(label)}
+                onClick={toggleFilter(label)}
                 theme={isAdvancedView ? BUTTON_THEME.DARK : BUTTON_THEME.ORANGE}
               >
                 {label}

@@ -26,7 +26,11 @@
       "max": "maximum",
       "min": "minimum",
       "slider": "{{name}} slider",
-      "milesAbbr": "mi"
+      "milesAbbr": "mi",
+      "sortBy": "Sort by",
+      "priceRangeLabel": "Price Range",
+      "priceRange": "{{min}} to {{max}}",
+      "results": "{{number}} results"
     },
     "header": {
       "advancedViewLabel": "Advanced view",

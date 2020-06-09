@@ -1,13 +1,10 @@
-import { ReactNode } from 'react';
-
-import { ICONS } from '~/components/global/Icon/Icon.constants';
-import Link from '~/components/global/Link/Link';
-import Toggle from '~/components/global/Toggle/Toggle';
-import { LINK_ICON_POSITION } from '~/lib/constants';
-import { ui } from '~/lib/utils/ui-dictionary';
+import { ReactNode, useState } from 'react';
 
 import Filters from './Filters/Filters';
+import { filterRange, filterSort } from './Filters/Filters.mocks';
+import SubFilters from './Filters/SubFilters/SubFilters';
 import styles from './Header.styles';
+import HeaderInfo from './HeaderInfo/HeaderInfo';
 
 interface Props {
   activeFilters?: string[];
@@ -24,86 +21,44 @@ interface Props {
 export default function Header({
   activeFilters = [],
   isAdvancedView = false,
-  isInternal = false,
-  location,
   toggleFilter,
-  onToggle,
-  rearTireSize,
-  tireSize,
-  title,
+  isInternal = false,
+  ...rest
 }: Props) {
-  const infoStyles = [
-    styles.text,
-    styles.info,
-    isAdvancedView && styles.textAdvanced,
-  ];
-  const backEl = isInternal ? (
-    <Link
-      css={styles.action}
-      href="/"
-      icon={ICONS.CHEVRON_LEFT}
-      iconPosition={LINK_ICON_POSITION.LEFT}
-    >
-      {ui('catalog.header.allTiresLink')}
-    </Link>
-  ) : (
-    <Link
-      css={[styles.action, styles.back]}
-      as="button"
-      icon={ICONS.ARROW_UP}
-    />
-  );
-
-  const locationEl = (
-    <div css={[infoStyles, rearTireSize && styles.wrappedLocation]}>
-      {ui('catalog.header.dealsFor')}
-      {/* TODO: location redirect or modal open */}
-      <Link css={[styles.link, infoStyles]} href="/">
-        {' '}
-        {location}
-      </Link>
-    </div>
-  );
-
-  let secondItem, thirdItem;
-  if (rearTireSize) {
-    secondItem = ui('catalog.header.rear', { rearTireSize });
-    thirdItem = locationEl;
-  } else {
-    secondItem = locationEl;
-    thirdItem = null;
+  const [selectingFilter, setSelectingFilter] = useState('');
+  function clearSelectingFilter() {
+    setSelectingFilter('');
+  }
+  function selectFilterDropdown(label: string) {
+    return () => {
+      setSelectingFilter(label);
+    };
+  }
+  function onFilterClick(filter: string) {
+    return () => {
+      toggleFilter(filter);
+    };
   }
 
+  const commonProps = {
+    activeFilters,
+    onClose: clearSelectingFilter,
+    onOpen: selectFilterDropdown,
+    selectingFilter,
+    toggleFilter: onFilterClick,
+  };
   return (
-    <div css={[styles.root, isAdvancedView && styles.rootAdvanced]}>
-      <div css={styles.header}>
-        {backEl}
-        <h1 css={styles.title}>{title}</h1>
-        {!isInternal && (
-          <>
-            <div css={infoStyles}>
-              <p css={styles.decorator}>
-                {ui('catalog.header.size', { tireSize })}
-              </p>
-              {secondItem}
-            </div>
-            {thirdItem}
-          </>
-        )}
+    <>
+      <div css={[styles.root, isAdvancedView && styles.rootAdvanced]}>
+        <HeaderInfo {...{ isInternal }} {...rest} />
+        <Filters {...commonProps} isAdvancedView={isAdvancedView} />
       </div>
-      <div css={styles.toggle}>
-        <span css={styles.label}>{ui('catalog.header.advancedViewLabel')}</span>
-        <Toggle
-          name={ui('catalog.header.advancedViewLabel')}
-          onToggle={onToggle}
-          defaultChecked={isAdvancedView}
-        />
-      </div>
-      <Filters
-        activeFilters={activeFilters}
-        toggleFilter={toggleFilter}
-        isAdvancedView={isAdvancedView}
+      <SubFilters
+        resultsCount={232}
+        priceFilter={filterRange}
+        sortFilter={filterSort}
+        {...commonProps}
       />
-    </div>
+    </>
   );
 }

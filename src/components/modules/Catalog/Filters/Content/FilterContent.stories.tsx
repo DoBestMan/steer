@@ -1,11 +1,9 @@
 import {
   CatalogFilterChecklist,
   CatalogFilterChecklistLarge,
-  CatalogFilterRange,
-  CatalogFilterSort,
   FilterContentTypes,
 } from '../Filter.types';
-import { filterTypeMap } from '../Filters.mocks';
+import { filterRange, filterSort, filterTypeMap } from '../Filters.mocks';
 import FilterChecklist from './FilterChecklist';
 import FilterRange from './FilterRange';
 import FilterSort from './FilterSort';
@@ -36,21 +34,9 @@ export function FilterContentChecklistLarge() {
 }
 
 export function FilterContentRange() {
-  return (
-    <FilterRange
-      {...(filterTypeMap[
-        FilterContentTypes.CatalogFilterRange
-      ] as CatalogFilterRange)}
-    />
-  );
+  return <FilterRange {...filterRange} />;
 }
 
 export function FilterContentSort() {
-  return (
-    <FilterSort
-      {...(filterTypeMap[
-        FilterContentTypes.CatalogFilterSort
-      ] as CatalogFilterSort)}
-    />
-  );
+  return <FilterSort {...filterSort} />;
 }

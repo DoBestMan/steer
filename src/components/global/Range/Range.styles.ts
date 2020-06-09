@@ -3,10 +3,23 @@ import { CSSObject } from '@emotion/core';
 import { COLORS, RADIUS, SPACING } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
-export const INDICATOR_SIZE = 20;
+import { RANGE_SLIDER_SIZE } from './Range.constants';
+
+export const INDICATOR_SIZE = {
+  [RANGE_SLIDER_SIZE.REGULAR]: 20,
+  [RANGE_SLIDER_SIZE.SMALL]: 8,
+};
+// prevents rail width changing
+const LABEL_SM_WIDTH = 35;
 const RAIL_HEIGHT = 2;
 
 const styles: CSSObject = {
+  container: {
+    marginLeft: SPACING.SIZE_05,
+    marginRight: SPACING.SIZE_10,
+    padding: `${SPACING.SIZE_10}px 0`,
+    width: '100%',
+  },
   fillColor: {
     backgroundColor: COLORS.GLOBAL.ORANGE,
     height: RAIL_HEIGHT,
@@ -28,13 +41,9 @@ const styles: CSSObject = {
       position: 'absolute',
       width: '100%',
     },
-    background: COLORS.GLOBAL.ORANGE,
     borderRadius: RADIUS.CIRCLE,
     cursor: 'grab',
-    height: INDICATOR_SIZE,
     position: 'absolute',
-    top: -SPACING.SIZE_10,
-    width: INDICATOR_SIZE,
   },
   labels: [
     typography.secondaryHeadline,
@@ -45,6 +54,7 @@ const styles: CSSObject = {
       width: '100%',
     },
   ],
+  labelSm: [typography.bodyCopyTight, { minWidth: LABEL_SM_WIDTH }],
   maxIndicator: {
     right: 0,
   },
@@ -58,8 +68,23 @@ const styles: CSSObject = {
     position: 'relative',
     width: '100%',
   },
-  root: {
-    padding: `${SPACING.SIZE_10}px 0`,
+  rootSmall: {
+    display: 'flex',
+    width: '100%',
+  },
+
+  [RANGE_SLIDER_SIZE.REGULAR]: {
+    background: COLORS.GLOBAL.ORANGE,
+    height: INDICATOR_SIZE[RANGE_SLIDER_SIZE.REGULAR],
+    top: -SPACING.SIZE_10,
+    width: INDICATOR_SIZE[RANGE_SLIDER_SIZE.REGULAR],
+  },
+  [RANGE_SLIDER_SIZE.SMALL]: {
+    background: COLORS.GLOBAL.WHITE,
+    border: `2px solid ${COLORS.GLOBAL.ORANGE}`,
+    height: INDICATOR_SIZE[RANGE_SLIDER_SIZE.SMALL],
+    top: -3,
+    width: INDICATOR_SIZE[RANGE_SLIDER_SIZE.SMALL],
   },
 };
 
