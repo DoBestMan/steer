@@ -9,3 +9,14 @@ export const formatDollars = (cents: string): string =>
     style: 'currency',
     currency: 'USD',
   });
+
+export const truncateText = (
+  str: string,
+  length: number,
+  ending = '',
+): string => {
+  if (str.length > length) {
+    return str.substring(0, length - ending.length).trim() + ending;
+  }
+  return str;
+};

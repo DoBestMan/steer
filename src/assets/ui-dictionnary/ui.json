@@ -1,5 +1,6 @@
 {
   "common": {
+    "ellipsis": "...",
     "feedback": {
       "defaultMessageLabel": "Did you find what <br /> you were looking for?",
       "negativeMessageLabel": "Sorry to hear that. <br /> Let us help you",
@@ -116,11 +117,21 @@
       "copyConfirmation": "Having tires with the same wear on the axle guarantees a <br />safer and more efficient performance.",
       "confirmationSubtitle": "Are you sure? <br />Replacing 4 is better for safety",
       "subtitle": "Replace tires in pairs for better<br />traction and braking",
-      "title": "PRO tip",
       "singleTireQtyTitle": "Select tire quantity",
       "totalPrice": "Total price",
       "changeQuantity": "Change to {{quantity}} tires",
-      "keepQuantity": "Keep {{quantity}} tires"
+      "keepQuantity": "Keep {{quantity}} tires",
+      "cta": "Replace tires in pairs for better<br />traction and braking",
+      "title": "PRO tip"
+    },
+    "reviews": {
+      "none": "No reviews yet",
+      "reviewFrom": "{{quantity}} from {{where}}",
+      "reviewOn": "{{quantity}} on {{where}}",
+      "readMore": "Read more",
+      "seeAll": "See all customer reviews",
+      "verifiedCustomer": "Verified Customer",
+      "writeReview": "Write a review"
     }
   },
   "ratings": {

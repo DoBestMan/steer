@@ -19,7 +19,7 @@ export function MomentList({
   display = RATINGS_DISPLAY.DEFAULT,
 }: Props) {
   return (
-    <ul css={[styles.theme, styles.container, tStyles[theme].container]}>
+    <ul css={[styles.container, tStyles[theme].container]}>
       {data.map(({ label, value }) => (
         <li css={[styles.item, dStyles[display].item]} key={label}>
           <span css={dStyles[display].label}>{label}</span>
