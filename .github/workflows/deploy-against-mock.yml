@@ -20,10 +20,11 @@ jobs:
     - name: Get new branch name
       shell: bash
       run: |
-        if [[ "${{ github.event_name }}" == "push" ]]; then BRANCH="${{ github.ref }}"; else BRANCH="qa"; fi
-        BRANCH="${BRANCH/refs\/heads\//}"
-        BRANCH="mock-${BRANCH/int-/}"
-        echo "##[set-output name=new_branch;]$(echo ${BRANCH})"
+        if [[ "${{ github.event_name }}" == "push" ]]; then ORIGINAL_BRANCH="${{ github.ref }}"; else ORIGINAL_BRANCH="qa"; fi
+        NEW_BRANCH="${ORIGINAL_BRANCH/refs\/heads\//}"
+        NEW_BRANCH="mock-${NEW_BRANCH/int-/}"
+        echo "##[set-output name=new_branch;]$(echo ${NEW_BRANCH})"
+        echo "##[set-output name=original_branch;]$(echo ${ORIGINAL_BRANCH})"
       id: extract_branch
     - name: Merge into mock branch, change last commit
       run: |
@@ -31,7 +32,7 @@ jobs:
         git config --local user.name "GitHub Action"
         git fetch --no-tags --prune --unshallow
         git checkout -b ${{ steps.extract_branch.outputs.new_branch }}
-        git merge ${{ github.ref }}
+        git merge ${{ steps.extract_branch.outputs.original_branch }}
         git commit --amend --no-edit --date "$(date)"
     - name: Push changes
       uses: ad-m/github-push-action@master
