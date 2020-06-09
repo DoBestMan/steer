@@ -37,6 +37,7 @@ export type Icon =
   | 'performance'
   | 'phone'
   | 'quantity-selector-car'
+  | 'quantity-selector-car-tilted'
   | 'reviews-verified'
   | 'search'
   | 'shield'

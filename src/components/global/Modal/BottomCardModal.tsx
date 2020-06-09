@@ -1,3 +1,4 @@
+import { CSSObject } from '@emotion/core';
 import { ReactNode } from 'react';
 import ReactModal from 'react-modal';
 
@@ -15,11 +16,18 @@ bindAppElement();
 interface Props {
   children: ReactNode;
   contentLabel: string;
+  customContentStyles?: CSSObject;
   isOpen: boolean;
   onClose: () => void;
 }
 
-function BottomCardModal({ children, contentLabel, isOpen, onClose }: Props) {
+function BottomCardModal({
+  children,
+  contentLabel,
+  customContentStyles,
+  isOpen,
+  onClose,
+}: Props) {
   const { bk } = useBreakpoints();
   return (
     <ReactModal
@@ -43,7 +51,7 @@ function BottomCardModal({ children, contentLabel, isOpen, onClose }: Props) {
       ]}
     >
       <div css={styles.scrollContainer}>
-        <div css={styles.content}>
+        <div css={[styles.content, customContentStyles]}>
           <Link
             as="button"
             icon={ICONS.CLOSE}

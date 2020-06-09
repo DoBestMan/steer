@@ -1,3 +1,4 @@
+import { CSSObject } from '@emotion/core';
 import { ReactNode } from 'react';
 
 import Button from '~/components/global/Button/Button';
@@ -12,6 +13,7 @@ import styles from './QuantitySelector.styles';
 
 interface Props {
   children: ReactNode;
+  hasIcon?: boolean;
   isIntercept?: boolean;
   isOpen: boolean;
   onClose: () => void;
@@ -22,6 +24,7 @@ interface Props {
 
 function QuantitySelector({
   children,
+  hasIcon = true,
   isIntercept = false,
   isOpen,
   onClose,
@@ -40,14 +43,19 @@ function QuantitySelector({
     onInterceptAction(value);
   };
 
+  const icon = isIntercept
+    ? ICONS.QUANTITY_SELECTOR_CAR_TILTED
+    : ICONS.QUANTITY_SELECTOR_CAR;
+
   return (
     <BottomCardModal
       contentLabel={ui('pdp.quantitySelector.modalLabel')}
+      customContentStyles={styles.modalContentStyles as CSSObject}
       isOpen={isOpen}
       onClose={onClose}
     >
       <div css={styles.container}>
-        <Icon name={ICONS.QUANTITY_SELECTOR_CAR} css={styles.icon} />
+        {hasIcon && <Icon name={icon} css={styles.icon} />}
         <h2 css={styles.title}>{ui('pdp.quantitySelector.title')}</h2>
 
         <h3 css={styles.subtitle}>
@@ -63,6 +71,7 @@ function QuantitySelector({
           {isIntercept && quantityToIntercept ? (
             <>
               <Button
+                css={styles.button}
                 onClick={handleInterceptAction(quantityToIntercept + 1)}
                 theme={BUTTON_THEME.LIGHT}
               >
@@ -71,6 +80,7 @@ function QuantitySelector({
                 })}
               </Button>
               <Button
+                css={styles.button}
                 onClick={handleInterceptAction(quantityToIntercept)}
                 style={BUTTON_STYLE.OUTLINED}
                 theme={BUTTON_THEME.LIGHT}
@@ -81,7 +91,11 @@ function QuantitySelector({
               </Button>
             </>
           ) : (
-            <Button onClick={onConfirm} theme={BUTTON_THEME.LIGHT}>
+            <Button
+              css={styles.button}
+              onClick={onConfirm}
+              theme={BUTTON_THEME.LIGHT}
+            >
               {ui('pdp.quantitySelector.confirmButtonLabel')}
             </Button>
           )}

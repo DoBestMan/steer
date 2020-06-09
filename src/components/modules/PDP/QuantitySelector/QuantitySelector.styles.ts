@@ -1,17 +1,40 @@
 import { CSSObject } from '@emotion/core';
 
-import { BORDERS, COLORS, SPACING } from '~/lib/constants';
+import { BORDERS, COLORS, MQ, SPACING } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 import { getResponsiveModalStyles } from './QuantitySelector.utils';
 
 const styles: CSSObject = {
+  button: {
+    [MQ.L]: {
+      width: '100%',
+      display: 'block',
+    },
+  },
   carouselStyles: getResponsiveModalStyles(),
   container: {
     paddingTop: SPACING.SIZE_30,
     textAlign: 'center',
+
+    [MQ.L]: {
+      display: 'flex',
+      flexDirection: 'column',
+      height: '100%',
+      paddingBottom: SPACING.SIZE_20,
+      paddingTop: SPACING.SIZE_60,
+    },
   },
-  copy: [typography.smallCopy],
+  copy: [
+    typography.smallCopy,
+    {
+      [MQ.L]: {
+        br: {
+          display: 'none',
+        },
+      },
+    },
+  ],
   copyConfirmation: {
     marginBottom: SPACING.SIZE_50,
   },
@@ -19,11 +42,23 @@ const styles: CSSObject = {
     display: 'flex',
     justifyContent: 'center',
 
+    /* eslint-disable sort-keys */
     '> :only-child': {
-      padding: `0 ${SPACING.SIZE_70}px`,
+      width: '100%',
+      display: 'block',
     },
     '> :not(:only-child):first-of-type': {
       marginRight: SPACING.SIZE_10,
+
+      [MQ.L]: {
+        marginBottom: SPACING.SIZE_10,
+      },
+    },
+    /* eslint-enable sort-keys */
+
+    [MQ.L]: {
+      display: 'block',
+      marginTop: 'auto',
     },
   },
   decorator: {
@@ -38,6 +73,9 @@ const styles: CSSObject = {
     justifyContent: 'center',
     marginBottom: SPACING.SIZE_10,
   },
+  modalContentStyles: {
+    height: '100%',
+  },
   pickerContainer: {
     borderTop: BORDERS.SOLID_GRAY_20_1PX,
     marginTop: SPACING.SIZE_30,
@@ -47,6 +85,12 @@ const styles: CSSObject = {
     typography.secondaryHeadline,
     {
       marginBottom: SPACING.SIZE_05,
+
+      [MQ.L]: {
+        br: {
+          display: 'none',
+        },
+      },
     },
   ],
   title: [

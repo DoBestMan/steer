@@ -41,6 +41,7 @@ export function QuantitySelectorDefault() {
     setIsOpen(!isOpen);
   }
 
+  const hasIcon = boolean('Display Icon', true);
   const isFrontAndRear = boolean('Display Front and Rear', false);
   const primaryPrice = text('Primary Price', '$205.38');
   const secondaryPrice = text('Secondary Price', '$205.38');
@@ -55,6 +56,7 @@ export function QuantitySelectorDefault() {
       <Button onClick={toggleModal}>Open Modal</Button>
 
       <QuantitySelector
+        hasIcon={hasIcon}
         isIntercept={shouldIntercept}
         isOpen={isOpen}
         onClose={toggleModal}
