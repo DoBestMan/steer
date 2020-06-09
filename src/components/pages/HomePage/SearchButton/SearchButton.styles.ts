@@ -1,6 +1,6 @@
 import { CSSObject } from '@emotion/core';
 
-import { COLORS, MQ, TIME } from '~/lib/constants';
+import { COLORS, MQ, SPACING, TIME } from '~/lib/constants';
 
 export const CONSTANTS = {
   CONTENT_PEEKING_AMOUNT: {
@@ -11,6 +11,10 @@ export const CONSTANTS = {
   PADDING: {
     S: '25px 0',
     M: '50px 0',
+  },
+  SEARCH_LABEL_HEIGHT: {
+    S: 35,
+    L: 40,
   },
 };
 
@@ -43,6 +47,8 @@ const styles: CSSObject = {
     justifyContent: 'flex-end',
 
     [MQ.L]: {
+      alignItems: 'unset',
+      marginTop: SPACING.SIZE_05,
       justifyContent: 'center',
     },
 
@@ -60,14 +66,13 @@ const styles: CSSObject = {
     gridRow: 1,
   },
   label: {
-    height: CONSTANTS.ICON_SIZE_L,
     textAlign: 'left',
-
+  },
+  searchLabel: {
     // the letter "i" gets cut off from the overflow: hidden
+    height: CONSTANTS.SEARCH_LABEL_HEIGHT.S,
     [MQ.L]: {
-      '> span': {
-        height: 38,
-      },
+      height: CONSTANTS.SEARCH_LABEL_HEIGHT.L,
     },
   },
 };

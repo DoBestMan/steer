@@ -1,3 +1,5 @@
+import { CSSObject } from '@emotion/core';
+
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { Breakpoint, BREAKPOINT_SIZES } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
@@ -5,11 +7,13 @@ import { ui } from '~/lib/utils/ui-dictionary';
 import styles from './SearchLabel.styles';
 
 interface Props {
+  customContainerStyles?: CSSObject;
   fullLabelAt?: Breakpoint;
   hideOnSmallMedium?: boolean;
 }
 
 function SearchLabel({
+  customContainerStyles,
   fullLabelAt = BREAKPOINT_SIZES.L,
   hideOnSmallMedium = false,
 }: Props) {
@@ -22,7 +26,10 @@ function SearchLabel({
         aria-label={ui('search.searchAutocompleteLabel')}
       >
         {ui('search.searchBy')}
-        <span css={styles.scrollContainer} aria-hidden="true">
+        <span
+          css={[styles.scrollContainer, customContainerStyles]}
+          aria-hidden="true"
+        >
           <span css={styles.scrollItem}>
             {ui('search.searchCategories.vehicle').toLocaleLowerCase()}
           </span>

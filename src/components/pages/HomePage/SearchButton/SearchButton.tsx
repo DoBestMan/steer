@@ -1,3 +1,4 @@
+import { CSSObject } from '@emotion/core';
 import { MouseEventHandler } from 'react';
 
 import Grid from '~/components/global/Grid/Grid';
@@ -38,7 +39,9 @@ function SearchButton({ onClick }: Props) {
             gridColumnL="3/14"
             gridColumnXL="3/14"
           >
-            <SearchLabel />
+            <SearchLabel
+              customContainerStyles={styles.searchLabel as CSSObject}
+            />
           </GridItem>
         </Grid>
       </button>
