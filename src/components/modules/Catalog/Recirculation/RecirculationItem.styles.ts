@@ -1,7 +1,7 @@
 import { CSSObject } from '@emotion/core';
 
 import { BORDERS, COLORS, MQ, SPACING } from '~/lib/constants';
-import { typography, typographyStyles } from '~/styles/typography.styles';
+import { typography } from '~/styles/typography.styles';
 
 const ICON_SIZE = {
   S: 25,
@@ -48,12 +48,7 @@ const styles: CSSObject = {
       padding: `${SPACING.SIZE_30}px 0`,
     },
   },
-  title: [
-    typographyStyles.tertiaryHeadline.base,
-    {
-      [MQ.L]: typographyStyles.secondaryHeadline.XL,
-    },
-  ],
+  title: [typography.secondaryHeadline],
 };
 
 export default styles;
