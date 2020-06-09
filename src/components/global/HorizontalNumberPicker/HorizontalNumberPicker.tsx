@@ -26,17 +26,20 @@ function HorizontalNumberPicker({
   const [selectedItemIndex, setSelectedItemIndex] = useState<number>(-1);
 
   useEffect(() => {
-    if (!selectedIndex) {
+    if (onSelect) {
+      onSelect(numbers[selectedItemIndex]);
+    }
+  }, [numbers, onSelect, selectedItemIndex]);
+
+  useEffect(() => {
+    if (selectedIndex === undefined) {
       return;
     }
 
     setSelectedItemIndex(selectedIndex);
-  }, [selectedIndex]);
+  }, [numbers, selectedIndex]);
 
-  const handleClick = (value: number, index: number) => () => {
-    if (onSelect) {
-      onSelect(value);
-    }
+  const handleClick = (index: number) => () => {
     setSelectedItemIndex(index);
   };
 
@@ -63,7 +66,7 @@ function HorizontalNumberPicker({
                   styles.numberItem,
                   selectedItemIndex === index && styles.selectedItem,
                 ]}
-                onClick={handleClick(value, index)}
+                onClick={handleClick(index)}
                 key={index}
               >
                 <span css={styles.innerItem}>{value}</span>

@@ -13,8 +13,8 @@ interface Props {
   toggleModal: () => void;
 }
 
-const CONSTANTS = {
-  PICKER_NUMBERS: Array.from(Array(7).keys()),
+export const CONSTANTS = {
+  PICKER_NUMBERS: Array.from(Array(17).keys()),
   QUANTITIES_TO_INTERCEPT: [1, 3],
 };
 
