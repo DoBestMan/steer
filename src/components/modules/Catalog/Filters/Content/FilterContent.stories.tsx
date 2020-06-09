@@ -1,3 +1,5 @@
+import { useBreakpoints } from '~/hooks/useBreakpoints';
+
 import {
   CatalogFilterChecklist,
   CatalogFilterChecklistLarge,
@@ -38,5 +40,6 @@ export function FilterContentRange() {
 }
 
 export function FilterContentSort() {
-  return <FilterSort {...filterSort} />;
+  const { greaterThan } = useBreakpoints();
+  return <FilterSort isLarge={greaterThan.M} {...filterSort} />;
 }

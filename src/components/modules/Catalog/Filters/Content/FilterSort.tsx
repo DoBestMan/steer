@@ -1,13 +1,15 @@
 import { useState } from 'react';
 
 import Radio from '~/components/global/Radio/Radio';
-import { useBreakpoints } from '~/hooks/useBreakpoints';
 
 import { CatalogFilterSort } from '../Filter.types';
 import styles from './FilterSort.styles';
 
-export default function FilterSort({ items, label }: CatalogFilterSort) {
-  const { lessThan } = useBreakpoints();
+interface Props extends CatalogFilterSort {
+  isLarge: boolean;
+}
+
+export default function FilterSort({ isLarge, items, label }: Props) {
   const [activeValue, setActiveValue] = useState('');
   function updateValue(value: string) {
     setActiveValue(value);
@@ -18,7 +20,7 @@ export default function FilterSort({ items, label }: CatalogFilterSort) {
       <ul>
         {items.map(({ title, description, flair, id }) => (
           <li key={id}>
-            {lessThan.L ? (
+            {!isLarge ? (
               <Radio
                 onChange={updateValue}
                 name={title}

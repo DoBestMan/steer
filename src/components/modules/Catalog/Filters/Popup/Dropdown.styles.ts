@@ -1,6 +1,6 @@
 import { CSSObject } from '@emotion/core';
 
-import { BORDERS, COLORS, RADIUS, SPACING } from '~/lib/constants';
+import { BORDERS, COLORS, RADIUS, SPACING, Z_INDEX } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const styles: CSSObject = {
@@ -19,6 +19,7 @@ const styles: CSSObject = {
       marginTop: SPACING.SIZE_05,
       padding: SPACING.SIZE_30,
       position: 'fixed',
+      zIndex: Z_INDEX.TOP,
     },
   ],
 };

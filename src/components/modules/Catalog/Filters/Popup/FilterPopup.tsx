@@ -26,9 +26,11 @@ interface Props extends PopupProps {
   filter: CatalogFilterTypes;
 }
 
+// have to pass in `isLarge` otherwise if children components rely on bk styles
+// there will be a flash due to the default being S breakpoint
 const mapTypeToContent: Record<
   FilterContentTypes,
-  (props: CatalogFilterTypes) => JSX.Element | null
+  (props: CatalogFilterTypes, isLarge: boolean) => JSX.Element | null
 > = {
   [FilterContentTypes.CatalogFilterChecklist](props: CatalogFilterTypes) {
     return <FilterChecklist {...(props as CatalogFilterChecklist)} />;
@@ -39,8 +41,11 @@ const mapTypeToContent: Record<
   [FilterContentTypes.CatalogFilterRange](props: CatalogFilterTypes) {
     return <FilterRange {...(props as CatalogFilterRange)} />;
   },
-  [FilterContentTypes.CatalogFilterSort](props: CatalogFilterTypes) {
-    return <FilterSort {...(props as CatalogFilterSort)} />;
+  [FilterContentTypes.CatalogFilterSort](
+    props: CatalogFilterTypes,
+    isLarge: boolean,
+  ) {
+    return <FilterSort {...(props as CatalogFilterSort)} isLarge={isLarge} />;
   },
   [FilterContentTypes.CatalogFilterToggle]() {
     return null;
@@ -49,6 +54,7 @@ const mapTypeToContent: Record<
 
 export default function FilterPopup({ filter, ...props }: Props) {
   const { greaterThan } = useBreakpoints();
+
   if (filter.type === FilterContentTypes.CatalogFilterToggle) {
     return null;
   }
@@ -59,14 +65,14 @@ export default function FilterPopup({ filter, ...props }: Props) {
   ) {
     return (
       <FilterDropdown {...props}>
-        {mapTypeToContent[filter.type](filter)}
+        {mapTypeToContent[filter.type](filter, greaterThan.M)}
       </FilterDropdown>
     );
   }
 
   return (
     <FilterModal contentLabel={filter.label} {...props}>
-      {mapTypeToContent[filter.type](filter)}
+      {mapTypeToContent[filter.type](filter, greaterThan.M)}
     </FilterModal>
   );
 }

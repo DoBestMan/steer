@@ -31,8 +31,10 @@ export default function Filters({
       <p css={[styles.filterLabel, isAdvancedView && hStyles.textAdvanced]}>
         {ui('catalog.header.filterLabel')}:
       </p>
-      <div css={styles.listContainer}>
-        <div css={[styles.filterList, selectingFilter && styles.disableScroll]}>
+      <div
+        css={[styles.listContainer, selectingFilter && styles.disableScroll]}
+      >
+        <div css={styles.filterList}>
           {mockFilters.map(({ label, ...filter }) => {
             const isActive = activeFilters.includes(label);
             return filter.type !== FilterContentTypes.CatalogFilterToggle ? (

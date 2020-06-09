@@ -6,6 +6,7 @@ import { useScroll } from '~/hooks/useScroll';
 import { KEYCODES } from '~/lib/constants';
 
 import styles from './Dropdown.styles';
+import { getParentX, getParentY } from './Dropdown.utils';
 import { PopupProps } from './FilterPopup';
 
 interface Props extends PopupProps {
@@ -19,19 +20,11 @@ export default function FilterDropdown({
   onSelectFilter,
 }: Props) {
   const dropdownEl = useRef<HTMLDivElement | null>(null);
-  // set left: buttonX and top: buttonTop, dropdown has to be fixed position to overcome list container height and overflow hidden.
-  function getParentY() {
-    const buttonElBounds = dropdownEl.current?.previousElementSibling?.getBoundingClientRect();
-    if (!buttonElBounds) {
-      return;
-    }
-    return buttonElBounds.top + buttonElBounds.height;
-  }
-  useScroll(() => setYPos(getParentY()));
-  const y = getParentY();
-  const [yPos, setYPos] = useState(y);
-  const xPos = dropdownEl.current?.previousElementSibling?.getBoundingClientRect()
-    .x;
+
+  useScroll(() => setYPos(getParentY({ dropdownEl })));
+
+  const [yPos, setYPos] = useState(getParentY({ dropdownEl }));
+  const [xPos, setXPos] = useState(getParentX({ dropdownEl }));
 
   useEffect(() => {
     // click/mouse handlers to close dropdown, click outside + escape
@@ -59,8 +52,9 @@ export default function FilterDropdown({
   }, [isOpen, onClose]);
 
   useEffect(() => {
-    // update y position on open
-    setYPos(getParentY());
+    // update x/y position on open
+    setYPos(getParentY({ dropdownEl }));
+    setXPos(getParentX({ dropdownEl }));
   }, [isOpen]);
 
   return (
@@ -69,7 +63,7 @@ export default function FilterDropdown({
         ref={dropdownEl}
         aria-hidden={!isOpen}
         css={[styles.root, isOpen && styles.open]}
-        style={{ left: xPos, top: yPos }}
+        style={{ ...xPos, top: yPos }}
       >
         {/* focus trap and dropdown wrapper need to be in dom to update positioning
         and focus but wait to render children until it's open */}

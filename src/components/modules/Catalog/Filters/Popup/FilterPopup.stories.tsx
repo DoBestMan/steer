@@ -33,7 +33,7 @@ export function FilterPopupWithKnobs() {
     FilterContentTypes.CatalogFilterChecklist,
   );
   return (
-    <div>
+    <>
       <ModalButton {...{ toggleModal }} />
       <FilterPopup
         filter={filterTypeMap[type]}
@@ -41,6 +41,6 @@ export function FilterPopupWithKnobs() {
         onClose={toggleModal}
         isOpen={isOpen}
       />
-    </div>
+    </>
   );
 }
