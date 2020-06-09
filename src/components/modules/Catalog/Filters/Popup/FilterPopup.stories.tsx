@@ -11,7 +11,7 @@ import FilterPopup from './FilterPopup';
 
 export default {
   component: FilterPopup,
-  title: 'Catalog/Grid/Filters',
+  title: 'Catalog/Header/Filter Popup',
 };
 
 function ModalButton({ toggleModal }: { toggleModal: () => void }) {

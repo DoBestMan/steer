@@ -12,7 +12,7 @@ import FilterSort from './FilterSort';
 
 export default {
   component: FilterContentChecklist,
-  title: 'Catalog/Grid/Filter Content',
+  title: 'Catalog/Header/Filter Content',
 };
 
 export function FilterContentChecklist() {
