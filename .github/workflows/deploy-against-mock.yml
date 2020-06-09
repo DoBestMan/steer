@@ -20,7 +20,7 @@ jobs:
     - name: Get new branch name
       shell: bash
       run: |
-        if [[ "${{ github.event_name }}" == "push" ]]; then ORIGINAL_BRANCH="${{ github.ref }}"; else ORIGINAL_BRANCH="qa"; fi
+        if [[ "${{ github.event_name }}" == "push" ]]; then ORIGINAL_BRANCH="${{ github.ref }}"; else ORIGINAL_BRANCH="refs/heads/qa"; fi
         NEW_BRANCH="${ORIGINAL_BRANCH/refs\/heads\//}"
         NEW_BRANCH="mock-${NEW_BRANCH/int-/}"
         echo "##[set-output name=new_branch;]$(echo ${NEW_BRANCH})"
@@ -30,10 +30,11 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git fetch --no-tags --prune --unshallow
+        git fetch origin ${{ steps.extract_branch.outputs.original_branch }}
         git checkout -b ${{ steps.extract_branch.outputs.new_branch }}
-        git merge ${{ steps.extract_branch.outputs.original_branch }}
-        git commit --amend --no-edit --date "$(date)"
+        touch empty-file-to-force-new-deploy.txt
+        git add .
+        git commit -m 'Mock Deploy'
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
