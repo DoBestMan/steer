@@ -1,21 +1,15 @@
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
-import { SiteLink } from '~/data/models/SiteLink';
+import { SiteCatalogSummaryRecirculation } from '~/data/models/SiteCatalogSummaryRecirculation';
 
 import styles from './Recirculation.styles';
-import RecirculationItem, { ItemProps } from './RecirculationItem';
+import RecirculationItem from './RecirculationItem';
 
-interface Props {
-  items: ItemProps[];
-  more: {
-    description: string;
-    label: string;
-    link: SiteLink;
-  };
-  title: string;
-}
-
-function Recirculation({ items, title, more }: Props) {
+function Recirculation({
+  items,
+  title,
+  more,
+}: SiteCatalogSummaryRecirculation) {
   return (
     <Grid>
       <GridItem gridColumnS="2/5" gridColumnM="2/5" gridColumnL="2/6">

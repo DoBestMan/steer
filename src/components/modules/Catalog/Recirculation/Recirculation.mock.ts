@@ -1,8 +1,9 @@
 import { ICONS } from '~/components/global/Icon/Icon.constants';
+import { SiteCatalogSummaryRecirculation } from '~/data/models/SiteCatalogSummaryRecirculation';
 import { SiteIcon } from '~/data/models/SiteIcon';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 
-export const recirculationData = {
+export const recirculationData: SiteCatalogSummaryRecirculation = {
   title: 'You may also be interested in:',
   items: [
     {
