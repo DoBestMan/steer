@@ -18,7 +18,7 @@ interface Props {
 function Recirculation({ items, title, more }: Props) {
   return (
     <Grid>
-      <GridItem gridColumnM="2/5" gridColumnL="2/6">
+      <GridItem gridColumnS="2/5" gridColumnM="2/5" gridColumnL="2/6">
         <h2 css={styles.title}>{title}</h2>
       </GridItem>
       <GridItem gridColumnM="5/8" gridColumnL="7/14">
