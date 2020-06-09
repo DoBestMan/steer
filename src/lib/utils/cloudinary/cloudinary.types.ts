@@ -244,3 +244,8 @@ export type Transformations = {
   y?: number;
   zoom?: number;
 };
+
+export type TransformationArgs =
+  | Transformations
+  | Array<Transformations>
+  | Record<string, Transformations | Array<Transformations>>;

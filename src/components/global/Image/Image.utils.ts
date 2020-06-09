@@ -1,6 +1,7 @@
 import { transformation } from '~/lib/utils/cloudinary/cloudinary';
 import {
   FetchFormat,
+  TransformationArgs,
   Transformations,
 } from '~/lib/utils/cloudinary/cloudinary.types';
 import { isTransformations } from '~/lib/utils/cloudinary/cloudinary.utils';
@@ -9,13 +10,7 @@ const IS_CLIENT = typeof window !== 'undefined';
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 const anyNavigator: any = IS_CLIENT && window.navigator;
 
-export function getSrcset(
-  url: string,
-  q?:
-    | Transformations
-    | Array<Transformations>
-    | Record<string, Transformations | Array<Transformations>>,
-): string {
+export function getSrcset(url: string, q?: TransformationArgs): string {
   if (!url) {
     return '';
   }
@@ -32,7 +27,7 @@ export function getSrcset(
   }
 
   // q:Transformations
-  if (isTransformations(q)) {
+  if (q && isTransformations(q)) {
     queries = { all: [q as Transformations] };
   }
 

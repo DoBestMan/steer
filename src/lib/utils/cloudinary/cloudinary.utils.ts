@@ -1,9 +1,16 @@
-import { Transformations } from '~/lib/utils/cloudinary/cloudinary.types';
+import {
+  TransformationArgs,
+  Transformations,
+} from '~/lib/utils/cloudinary/cloudinary.types';
 
-export function isTransformations(arg: any): arg is Transformations {
+export function isTransformations(
+  arg: TransformationArgs,
+): arg is Transformations {
   return (
     arg &&
-    (arg.angle ||
+    !Array.isArray(arg) &&
+    !!(
+      arg.angle ||
       arg.aspectRatio ||
       arg.background ||
       arg.border ||
@@ -18,6 +25,7 @@ export function isTransformations(arg: any): arg is Transformations {
       arg.width ||
       arg.x ||
       arg.y ||
-      arg.zoom)
+      arg.zoom
+    )
   );
 }
