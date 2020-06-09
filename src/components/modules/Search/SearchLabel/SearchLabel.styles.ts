@@ -3,28 +3,28 @@ import { CSSObject, keyframes } from '@emotion/core';
 import { MQ } from '~/lib/constants';
 
 const searchScrollAnimation = keyframes({
-  '0%, 23%': {
+  '0%, 30%': {
     opacity: 1,
     transform: 'translate3d(0, 0, 0)',
   },
-  '24%': {
+  '32%': {
     opacity: 0,
   },
-  '25%, 48%': {
+  '34%, 63%': {
     opacity: 1,
     transform: 'translate3d(0, 100%, 0)',
   },
-  '49%': {
+  '65%': {
     opacity: 0,
   },
-  '50%, 73%': {
+  '67%, 96%': {
     opacity: 1,
     transform: 'translate3d(0, 200%, 0)',
   },
-  '74%': {
+  '98%': {
     opacity: 0,
   },
-  '75%, 100%': {
+  '100%': {
     opacity: 1,
     transform: 'translate3d(0, 300%, 0)',
   },

@@ -35,7 +35,12 @@ const styles: CSSObject = {
       backgroundColor: 'inherit',
       border: 'none',
       padding: 0,
-      [MQ.M]: typographyStyles.primaryHeadline.M,
+      [MQ.M]: [
+        typographyStyles.primaryHeadline.M,
+        {
+          height: 40,
+        },
+      ],
       [MQ.XL]: typographyStyles.primaryHeadline.XL,
     },
   ],

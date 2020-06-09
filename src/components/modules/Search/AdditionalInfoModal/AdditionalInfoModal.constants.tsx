@@ -3,13 +3,25 @@ import { uiJSX } from '~/lib/utils/ui-dictionary-jsx';
 
 const TIRE_SEARCH_STEPS = [
   uiJSX('search.findTireSize.stepOne', {
-    link: <a href="#">the sidewall</a>,
+    link: (
+      <a href="#" key="step-1">
+        the sidewall
+      </a>
+    ),
   }),
   uiJSX('search.findTireSize.stepTwo', {
-    link: <a href="#">inside the frame</a>,
+    link: (
+      <a href="#" key="step-2">
+        inside the frame
+      </a>
+    ),
   }),
   uiJSX('search.findTireSize.stepThree', {
-    link: <a href="#">the owner&apos;s manual</a>,
+    link: (
+      <a href="#" key="step-3">
+        the owner&apos;s manual
+      </a>
+    ),
   }),
 ];
 
