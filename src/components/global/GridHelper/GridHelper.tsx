@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
@@ -12,10 +14,16 @@ interface Props {
 
 function GridHelper(props: Props) {
   const { show } = props;
+
+  const [hasMounted, setHasMounted] = useState(false);
   const search = useSearch();
   const { bk } = useBreakpoints();
 
-  if (!search.grid && !show) {
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  if ((!search.grid && !show) || !hasMounted) {
     return null;
   }
 

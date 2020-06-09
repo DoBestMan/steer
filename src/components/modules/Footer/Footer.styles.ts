@@ -26,6 +26,7 @@ const styles = {
   }),
 
   container: css({
+    backgroundColor: COLORS.GLOBAL.WHITE,
     padding: `${SPACING.SIZE_40}px 0`,
 
     [MQ.XL]: {

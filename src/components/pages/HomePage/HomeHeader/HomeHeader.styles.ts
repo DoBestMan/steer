@@ -6,6 +6,7 @@ import {
   EXITING,
 } from 'react-transition-group/Transition';
 
+import { NAV_HEIGHT } from '~/components/modules/Nav/Nav.styles';
 import {
   COLORS,
   EASING,
@@ -104,15 +105,21 @@ export const styles = {
     backgroundColor: COLORS.LIGHT.OFF_WHITE,
     flex: 1,
     paddingBottom: 20,
-    paddingTop: 30,
+    paddingTop: NAV_HEIGHT.S + 30,
     position: 'relative',
 
     [MQ.M]: {
       paddingBottom: 25,
-      paddingTop: 40,
+      paddingTop: NAV_HEIGHT.M + 40,
     },
+
     [MQ.L]: {
       paddingBottom: 60,
+      paddingTop: NAV_HEIGHT.L + 40,
+    },
+
+    [MQ.XL]: {
+      paddingTop: NAV_HEIGHT.XL + 40,
     },
   }),
   copyContainer: css({

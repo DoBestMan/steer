@@ -1,4 +1,3 @@
-import dynamic from 'next/dynamic';
 import { useEffect, useRef, useState } from 'react';
 
 import Grid from '~/components/global/Grid/Grid';
@@ -21,10 +20,6 @@ import { hasIntersectionObserver } from '~/lib/utils/browser';
 import styles from './HomePage.styles';
 import SearchButton from './SearchButton/SearchButton';
 import { CONSTANTS as BUTTON_CONSTANTS } from './SearchButton/SearchButton.styles';
-
-const NavContainer = dynamic(() =>
-  import('~/components/modules/Nav/Nav.container'),
-);
 
 const THEME_COLOR_MAP: Record<string, string> = {
   promotion: COLORS.GLOBAL.BLACK,
@@ -213,7 +208,6 @@ function HomePage({ serverData }: Props) {
   return (
     <>
       <div css={styles.root} ref={heroRef}>
-        <NavContainer isHomepage />
         <HomeHeader {...siteHero} />
       </div>
 
