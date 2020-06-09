@@ -17,6 +17,8 @@ export interface Props {
 function Stars({ number, color = COLORS.GLOBAL.ORANGE, isSmall }: Props) {
   const [ratingGradientId, setRatingGradientId] = useState<string>();
   const ratingFillWidth = percentageFromNumber(number, RATINGS.MAX_RATING);
+  const unSelectedColor =
+    color === COLORS.GLOBAL.ORANGE ? COLORS.DARK.GRAY_40 : COLORS.LIGHT.GRAY_20;
 
   useEffect(() => {
     setRatingGradientId(randomString());
@@ -47,7 +49,7 @@ function Stars({ number, color = COLORS.GLOBAL.ORANGE, isSmall }: Props) {
           y2="0%"
         >
           <stop offset={`${ratingFillWidth}%`} stopColor={color} />
-          <stop offset="0%" stopColor={COLORS.DARK.GRAY_40} />
+          <stop offset="0%" stopColor={unSelectedColor} />
         </linearGradient>
       </svg>
       <Icon

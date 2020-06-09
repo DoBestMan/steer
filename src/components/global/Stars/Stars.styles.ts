@@ -5,6 +5,7 @@ const styles = {
   container: {
     alignItems: 'center',
     display: 'flex',
+    marginRight: SPACING.SIZE_05,
   },
   rating: [
     typography.primaryHeadline,
