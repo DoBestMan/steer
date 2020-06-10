@@ -1,14 +1,15 @@
 import dynamic from 'next/dynamic';
 import { ReactChild } from 'react';
+import { ReactMarkdownProps } from 'react-markdown';
 
 const MarkdownDynamic = dynamic(() => import('./MarkdownDynamic'));
 
-interface Props {
+interface Props extends ReactMarkdownProps {
   children: ReactChild;
 }
 
-function Markdown({ children }: Props) {
-  return <MarkdownDynamic>{children}</MarkdownDynamic>;
+function Markdown({ children, ...rest }: Props) {
+  return <MarkdownDynamic {...rest}>{children}</MarkdownDynamic>;
 }
 
 export default Markdown;

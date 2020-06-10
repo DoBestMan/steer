@@ -10,4 +10,5 @@ export enum KEYCODES {
   HOME = 35,
   PAGE_DOWN = 34,
   PAGE_UP = 33,
+  SPACE = 32,
 }

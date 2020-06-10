@@ -1,12 +1,16 @@
 import { ReactChild } from 'react';
-import ReactMarkdown from 'react-markdown';
+import ReactMarkdown, { ReactMarkdownProps } from 'react-markdown';
 
-interface Props {
+interface Props extends ReactMarkdownProps {
   children: ReactChild;
 }
 
-function Markdown({ children }: Props) {
-  return <ReactMarkdown escapeHtml={false}>{children}</ReactMarkdown>;
+function Markdown({ children, ...rest }: Props) {
+  return (
+    <ReactMarkdown escapeHtml={false} {...rest}>
+      {children}
+    </ReactMarkdown>
+  );
 }
 
 export default Markdown;

@@ -15,6 +15,9 @@
 /.now
 /.vercel
 
+# IDE
+/.vscode
+
 # production
 /build
 

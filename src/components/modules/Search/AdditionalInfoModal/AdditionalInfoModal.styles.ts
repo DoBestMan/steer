@@ -64,7 +64,7 @@ const styles: CSSObject = {
           borderColor: COLORS.GLOBAL.WHITE,
           color: COLORS.GLOBAL.WHITE,
         },
-        borderBottom: `2px dotted ${COLORS.DARK.GRAY_40}`,
+        borderBottom: BORDERS.DOTTED_GRAY_40_2PX,
         transition: `border-color ${TIME.MS100}ms ease, color ${TIME.MS100}ms ease`,
       },
       color: COLORS.DARK.GRAY_40,

@@ -156,6 +156,10 @@ export const reset = `
     font-weight: bold;
   }
 
+  em {
+    font-style: italic;
+  }
+
   li {
     list-style-type: none;
   }

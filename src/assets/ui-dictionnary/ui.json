@@ -135,6 +135,9 @@
       "seeAll": "See all customer reviews",
       "verifiedCustomer": "Verified Customer",
       "writeReview": "Write a review"
+    },
+    "faq": {
+      "showAllDefaultLabel": "See all"
     }
   },
   "ratings": {
