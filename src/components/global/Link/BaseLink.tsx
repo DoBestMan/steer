@@ -5,6 +5,7 @@ import { useBaseLinkProps, UseBaseLinkProps } from './BaseLink.hooks';
 
 export interface BaseLinkProps extends UseBaseLinkProps {
   children?: ReactNode;
+  onFocus?: () => void;
 }
 
 // Wrapper for Next's Link component to parse various combinations

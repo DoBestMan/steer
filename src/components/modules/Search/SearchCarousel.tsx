@@ -39,12 +39,15 @@ function SearchCarousel({
       >
         <Glider draggable slidesToShow="auto">
           {siteSearchResultList.map((result, index) => (
-            <div css={styles.carouselItem} key={result.image.altText}>
+            <div
+              css={styles.carouselItem}
+              key={result.image.altText}
+              ref={pushRefToArray}
+            >
               <button
                 css={styles.carouselButton}
                 onClick={handleClick(result)}
                 onFocus={onFocus(index)}
-                ref={pushRefToArray}
               >
                 <Image
                   altText={result.image.altText}

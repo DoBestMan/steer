@@ -1,8 +1,10 @@
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
+import BaseLink from '~/components/global/Link/BaseLink';
 import { SiteSearchResultTextItem } from '~/data/models/SiteSearchResultTextItem';
 
 import { useFocusScrollIntoView } from './Search.hooks';
+import { SearchActionType } from './Search.types';
 import styles from './SearchSection.styles';
 
 export interface SearchSectionProps {
@@ -35,22 +37,43 @@ function SearchSection({
               sectionIndex === selectedItemIndex[0] &&
               index === selectedItemIndex[1];
 
+            const innerContent = (
+              <>
+                {item.labelSegments.map((segment) => (
+                  <span
+                    key={segment.label}
+                    css={[segment.matches && styles.searchQuery]}
+                  >
+                    {segment.label}
+                  </span>
+                ))}
+              </>
+            );
+
+            if (item.action.type === SearchActionType.LINK) {
+              const { href, isExternal } = item.action.link;
+              return (
+                <li css={styles.listItem} key={item.label} ref={pushRefToArray}>
+                  <BaseLink
+                    css={[styles.itemButton, isSelected && styles.isSelected]}
+                    href={href}
+                    isExternal={isExternal}
+                    onFocus={onFocus(index)}
+                  >
+                    {innerContent}
+                  </BaseLink>
+                </li>
+              );
+            }
+
             return (
-              <li css={styles.listItem} key={item.label}>
+              <li css={styles.listItem} key={item.label} ref={pushRefToArray}>
                 <button
                   css={[styles.itemButton, isSelected && styles.isSelected]}
                   onClick={handleClick(item)}
                   onFocus={onFocus(index)}
-                  ref={pushRefToArray}
                 >
-                  {item.labelSegments.map((segment) => (
-                    <span
-                      key={segment.label}
-                      css={[segment.matches && styles.searchQuery]}
-                    >
-                      {segment.label}
-                    </span>
-                  ))}
+                  {innerContent}
                 </button>
                 {item.detailLabel && (
                   <div css={styles.secondaryItemDisplay}>

@@ -74,8 +74,8 @@ export function useFocusScrollIntoView({
 }: {
   clearance?: { bottom: number; top: number };
 }) {
-  const itemRefs = useRef<HTMLButtonElement[]>([]);
-  const pushRefToArray = (ref: HTMLButtonElement) => {
+  const itemRefs = useRef<HTMLLIElement[] & HTMLDivElement[]>([]);
+  const pushRefToArray = (ref: HTMLLIElement & HTMLDivElement) => {
     itemRefs.current.push(ref);
   };
 
