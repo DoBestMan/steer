@@ -47,7 +47,7 @@ const styles: CSSObject = {
   },
   linkText: {
     '&::after': {
-      content: "''",
+      content: '""',
       height: '100%',
       left: 0,
       position: 'absolute',

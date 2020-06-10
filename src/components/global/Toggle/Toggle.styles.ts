@@ -10,7 +10,7 @@ const styles = {
     background: COLORS.GLOBAL.WHITE,
     borderRadius: RADIUS.CIRCLE,
     bottom: 2,
-    content: '',
+    content: '""',
     height: 9,
     left: 2,
     position: 'absolute',

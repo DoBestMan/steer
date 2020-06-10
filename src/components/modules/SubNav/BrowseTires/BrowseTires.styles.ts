@@ -140,7 +140,7 @@ const styles = {
   list: css({
     // enables the entire list item to be clickable while only triggering focus styles on link label
     'a:after': {
-      content: "''",
+      content: '""',
       height: '100%',
       position: 'absolute',
       width: '100%',
