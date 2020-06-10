@@ -8,7 +8,7 @@ const styles = {
     marginRight: SPACING.SIZE_05,
   },
   rating: [
-    typography.primaryHeadline,
+    typography.secondaryHeadline,
     {
       marginLeft: SPACING.SIZE_10,
     },

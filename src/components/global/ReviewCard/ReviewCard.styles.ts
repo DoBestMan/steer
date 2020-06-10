@@ -6,8 +6,8 @@ import { typography } from '~/styles/typography.styles';
 const CONSTANTS = {
   DATE_MIN_WIDTH: 80,
   SEPARATOR: '"•"',
-  SEPARATOR_SIZE: 8,
   SEPARATOR_EMPTY: '""',
+  SEPARATOR_SIZE: 8,
 };
 
 const styles: CSSObject = {

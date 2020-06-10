@@ -129,12 +129,8 @@
     },
     "reviews": {
       "none": "No reviews yet",
-      "reviewFrom": "{{quantity}} from {{where}}",
-      "reviewOn": "{{quantity}} on {{where}}",
       "readMore": "Read more",
-      "seeAll": "See all customer reviews",
-      "verifiedCustomer": "Verified Customer",
-      "writeReview": "Write a review"
+      "verifiedCustomer": "Verified Customer"
     },
     "faq": {
       "showAllDefaultLabel": "See all"

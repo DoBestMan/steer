@@ -16,10 +16,11 @@ import { layout } from '~/styles/layout.styles';
 
 import styles from './ReviewCard.styles';
 
-interface Props {
+export interface ReviewCardProps {
   body: string;
   car?: string;
   date: string;
+  id: string;
   isVerified?: boolean;
   location?: string;
   momentList?: Array<MomentListItem>;
@@ -38,7 +39,7 @@ function ReviewCard({
   ratings,
   ratingStars,
   title,
-}: Props) {
+}: ReviewCardProps) {
   const [isCollapsed, setIsCollapsed] = useState(true);
 
   const formattedBody = isCollapsed
@@ -50,7 +51,7 @@ function ReviewCard({
   }
 
   return (
-    <div css={styles.container}>
+    <article css={styles.container}>
       <div css={styles.ratingTopContainer}>
         <span css={styles.title}>{title}</span>
         <Stars number={ratingStars} isSmall />
@@ -91,7 +92,7 @@ function ReviewCard({
           {!!ratings && <RatingsList ratings={ratings} />}
         </div>
       )}
-    </div>
+    </article>
   );
 }
 
