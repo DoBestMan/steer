@@ -5,19 +5,22 @@ import { useSearchContext } from '~/components/modules/Search/Search.context';
 import DriverInsights from '~/components/pages/HomePage/DriverInsights/DriverInsights';
 import HomeHeader from '~/components/pages/HomePage/HomeHeader/HomeHeader';
 import Reviews from '~/components/pages/HomePage/Reviews/Reviews';
-import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
+import { SiteGlobals } from '~/data/models/SiteGlobals';
 import { SiteHero } from '~/data/models/SiteHero';
 import { SiteInsights } from '~/data/models/SiteInsights';
 import { SiteReviews } from '~/data/models/SiteReviews';
-import { useApiDataWithDefault } from '~/hooks/useApiDataWithDefault';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { useSupportsPositionSticky } from '~/hooks/useSupportsPositionSticky';
 import { COLORS, TIME } from '~/lib/constants';
-import { eventEmitters } from '~/lib/events/emitters';
-import { getScroll, scrollToRef } from '~/lib/helpers/scroll';
-import { hasIntersectionObserver } from '~/lib/utils/browser';
+import { scrollToRef } from '~/lib/helpers/scroll';
 
+import {
+  useButtonHeight,
+  useChangeBackgroundColor,
+  useIsFallbackSticky,
+} from './HomePage.hooks';
 import styles from './HomePage.styles';
+import { getColorFromScrollState } from './HomePage.utils';
 import SearchButton from './SearchButton/SearchButton';
 import { CONSTANTS as BUTTON_CONSTANTS } from './SearchButton/SearchButton.styles';
 
@@ -25,58 +28,39 @@ const THEME_COLOR_MAP: Record<string, string> = {
   promotion: COLORS.GLOBAL.BLACK,
 };
 
-interface Props {
-  serverData: {
-    siteHero: SiteHero;
-    siteInsights: SiteInsights;
-    siteReviews: SiteReviews;
-  };
+export interface Props {
+  siteReviews: SiteReviews;
+  siteTheme: SiteGlobals['siteTheme'];
 }
 
-interface HomeData {
+export interface HomeData {
   siteHero: SiteHero;
   siteInsights: SiteInsights;
 }
 
-function getColorFromScrollState(thresholdCrossed: boolean) {
-  return thresholdCrossed ? COLORS.GLOBAL.BLACK : COLORS.GLOBAL.ORANGE;
-}
-
-function HomePage({ serverData }: Props) {
-  const { siteReviews } = serverData;
-  const { siteTheme } = useSiteGlobalsContext();
+function HomePage({
+  siteReviews,
+  siteHero,
+  siteInsights,
+  siteTheme,
+}: Props & HomeData) {
   const { isMobile } = useBreakpoints();
   const { supportsPositionSticky } = useSupportsPositionSticky();
 
-  const [thresholdCrossed, setThresholdCrossed] = useState(false);
   const [isContentVisible, setIsContentVisible] = useState(false);
   const [shouldCancelColorChange, setShouldCancelColorChange] = useState(false);
 
-  const buttonRef = useRef<HTMLDivElement>(null);
-  const contentContainerRef = useRef<HTMLDivElement>(null);
-  const heroRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
-  const {
-    data: { siteHero, siteInsights },
-    error,
-  } = useApiDataWithDefault<HomeData>({
-    defaultData: serverData,
-    endpoint: '/home',
-    includeUserRegion: true,
-    includeUserZip: true,
-    revalidateEmitter: eventEmitters.userPersonalizationLocationUpdate,
-  });
-
-  if (error) {
-    console.error(error);
-  }
-
-  const SCROLL_THRESHOLD_BELOW_FOLD = 40;
   const CONTENT_PEEKING_AMOUNT = isMobile
     ? BUTTON_CONSTANTS.CONTENT_PEEKING_AMOUNT.S
     : BUTTON_CONSTANTS.CONTENT_PEEKING_AMOUNT.M;
-  const SCROLL_THRESHOLD = CONTENT_PEEKING_AMOUNT + SCROLL_THRESHOLD_BELOW_FOLD;
+
+  const { contentContainerRef, thresholdCrossed } = useChangeBackgroundColor({
+    CONTENT_PEEKING_AMOUNT,
+    isContentVisible,
+    shouldCancelColorChange,
+  });
 
   const backgroundColor =
     (siteTheme && THEME_COLOR_MAP[siteTheme]) ||
@@ -109,91 +93,15 @@ function HomePage({ serverData }: Props) {
     return () => clearTimeout(timer);
   }, []);
 
-  // Scroll Effect : Changes background color
-  useEffect(() => {
-    if (
-      !contentContainerRef.current ||
-      !isContentVisible ||
-      shouldCancelColorChange
-    ) {
-      return;
-    }
+  const { heroRef, isFallbackSticky } = useIsFallbackSticky({
+    supportsPositionSticky,
+  });
 
-    // if no IO, no scroll animation.
-    if (!hasIntersectionObserver()) {
-      setThresholdCrossed(true);
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setThresholdCrossed(true);
-          } else {
-            if (getScroll().y < entry.boundingClientRect.top) {
-              setThresholdCrossed(false);
-            } else {
-              setThresholdCrossed(true);
-            }
-          }
-        });
-      },
-      {
-        rootMargin: `-${SCROLL_THRESHOLD}px`,
-      },
-    );
-
-    observer.observe(contentContainerRef.current);
-
-    return () => {
-      observer.disconnect();
-    };
-  }, [
-    contentContainerRef,
-    isContentVisible,
-    SCROLL_THRESHOLD,
-    shouldCancelColorChange,
-  ]);
-
-  const [isFallbackSticky, setIsFallbackSticky] = useState(false);
-
-  useEffect(() => {
-    if (!heroRef.current || supportsPositionSticky) {
-      return;
-    }
-
-    const searchButtonObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setIsFallbackSticky(false);
-        } else {
-          setIsFallbackSticky(true);
-        }
-      });
-    });
-
-    searchButtonObserver.observe(heroRef.current);
-
-    return () => {
-      searchButtonObserver.disconnect();
-    };
-  }, [heroRef, supportsPositionSticky]);
-
-  const [buttonHeight, setButtonHeight] = useState({});
-
-  useEffect(() => {
-    if (!buttonRef.current) {
-      return;
-    }
-
-    const buttonRect = buttonRef.current.getBoundingClientRect();
-    const buttonHeight = supportsPositionSticky ? buttonRect.height : 0;
-
-    setButtonHeight({
-      minHeight: `calc(33.333vh - ${CONTENT_PEEKING_AMOUNT + buttonHeight}px)`,
-    });
-  }, [CONTENT_PEEKING_AMOUNT, isMobile, supportsPositionSticky]);
+  const { buttonHeight, buttonRef } = useButtonHeight({
+    CONTENT_PEEKING_AMOUNT,
+    isMobile,
+    supportsPositionSticky,
+  });
 
   const searchButtonContainerStyles = [
     { backgroundColor },
