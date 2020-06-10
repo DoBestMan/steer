@@ -16,7 +16,7 @@ interface Props {
 
 function SearchButton({ onClick }: Props) {
   return (
-    <div>
+    <div css={styles.buttonContainer}>
       <button
         onClick={onClick}
         css={[typography.primaryHeadline, styles.button]}
@@ -45,9 +45,6 @@ function SearchButton({ onClick }: Props) {
           </GridItem>
         </Grid>
       </button>
-      <Grid>
-        <GridItem css={styles.bottomBorder} />
-      </Grid>
     </div>
   );
 }

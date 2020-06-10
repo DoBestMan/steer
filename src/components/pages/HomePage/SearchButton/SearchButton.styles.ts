@@ -1,6 +1,6 @@
 import { CSSObject } from '@emotion/core';
 
-import { COLORS, MQ, SPACING, TIME } from '~/lib/constants';
+import { COLORS, GRID_MARGIN, MQ, SPACING, TIME } from '~/lib/constants';
 
 export const CONSTANTS = {
   CONTENT_PEEKING_AMOUNT: {
@@ -19,10 +19,6 @@ export const CONSTANTS = {
 };
 
 const styles: CSSObject = {
-  bottomBorder: {
-    backgroundColor: COLORS.DARK.GRAY_40,
-    height: 1,
-  },
   button: {
     alignItems: 'center',
     boxSizing: 'border-box',
@@ -40,6 +36,25 @@ const styles: CSSObject = {
 
       padding: CONSTANTS.PADDING.M,
       transition: `background-color ${TIME.MS100}ms ease`,
+    },
+  },
+  buttonContainer: {
+    '&::after': {
+      backgroundColor: COLORS.DARK.GRAY_40,
+      content: '""',
+      display: 'block',
+      height: 1,
+      margin: `0 ${GRID_MARGIN.S}px`,
+
+      [MQ.M]: {
+        margin: `0 ${GRID_MARGIN.M}px`,
+      },
+      [MQ.L]: {
+        margin: `0 ${GRID_MARGIN.L}px`,
+      },
+      [MQ.XL]: {
+        margin: `0 ${GRID_MARGIN.XL}px`,
+      },
     },
   },
   icon: {
