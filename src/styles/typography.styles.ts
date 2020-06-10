@@ -1,165 +1,166 @@
-import { css, CSSObject } from '@emotion/core';
+import { CSSObject } from '@emotion/core';
 
 import { MQ } from '~/lib/constants';
 
-/* line heights are calculated by taking the
-ratio of lineHeightInPixels / fontSizeInPixels */
+const fontStyles = (fontSize: number, lineHeight: number) => ({
+  fontSize: `${fontSize / 10}rem`,
+  lineHeight: lineHeight / fontSize,
+});
 
-const fontFamily =
-  '"Circular Std", "Helvetica Neue", Helvetica, Arial, sans-serif';
-
-export const typographyStyles: { [name: string]: CSSObject } = {
+export const typographyStyles: {
+  [name: string]: { [className: string]: CSSObject };
+} = {
   primaryHeadline: {
     base: {
-      fontFamily,
-      fontSize: '2.5rem',
-      fontStyle: 'normal',
+      ...fontStyles(25, 30),
       fontWeight: 'bold',
       letterSpacing: '-0.02em',
-      lineHeight: 30 / 25,
     },
-    M: {
-      fontSize: '3.5rem',
-      lineHeight: 40 / 35,
-    },
-    XL: {
-      fontSize: '4.0rem',
-      lineHeight: 45 / 40,
-    },
+    M: fontStyles(35, 40),
+    XL: fontStyles(40, 45),
   },
   secondaryHeadline: {
     base: {
-      fontFamily,
-      fontSize: '2.0rem',
-      fontStyle: 'normal',
+      ...fontStyles(20, 25),
       fontWeight: 'bold',
       letterSpacing: '-0.02em',
-      lineHeight: 25 / 20,
     },
-    M: {
-      fontSize: '2.5rem',
-      lineHeight: 30 / 25,
-    },
-    XL: {
-      fontSize: '2.8rem',
-      lineHeight: 30 / 28,
-    },
+    M: fontStyles(25, 30),
+    XL: fontStyles(28, 30),
   },
   tertiaryHeadline: {
     base: {
-      fontFamily,
-      fontSize: '1.5rem',
-      fontStyle: 'normal',
+      ...fontStyles(15, 20),
       fontWeight: 'bold',
       letterSpacing: '-0.01em',
-      lineHeight: 20 / 15,
     },
-    XL: {
-      fontSize: '1.8rem',
-      lineHeight: 25 / 18,
-    },
+    XL: fontStyles(18, 25),
   },
 };
 
-export const typography = {
-  bodyCopy: css({
-    fontFamily,
-    fontSize: '1.5rem',
-    fontStyle: 'normal',
-    fontWeight: 'normal',
-    letterSpacing: '-0.01em',
-    lineHeight: 22 / 15,
-  }),
-  bodyCopyTight: css({
-    fontFamily,
-    fontSize: '1.5rem',
-    fontStyle: 'normal',
-    fontWeight: 'normal',
-    letterSpacing: '-0.01em',
-    lineHeight: 20 / 15,
-  }),
-  eyebrow: css({
-    fontFamily,
-    fontSize: '1.2rem',
-    fontStyle: 'normal',
-    fontWeight: 'bold',
-    lineHeight: 15 / 12,
-    textTransform: 'uppercase',
-  }),
-  jumboHeadline: css({
-    fontFamily,
-    fontSize: '4.0rem',
-    fontStyle: 'normal',
-    fontWeight: 'bold',
-    letterSpacing: '-0.03em',
-    lineHeight: 40 / 40,
-
-    [MQ.M]: {
-      fontSize: '6.0rem',
-      letterSpacing: '-0.04em',
-      lineHeight: 60 / 60,
+export const typography: { [className: string]: CSSObject[] } = {
+  bodyCopy: [
+    fontStyles(15, 22),
+    {
+      letterSpacing: '-0.01em',
     },
-
-    [MQ.XL]: {
-      fontSize: '8.0rem',
-      lineHeight: 75 / 80,
+  ],
+  bodyCopyTight: [
+    fontStyles(15, 20),
+    {
+      letterSpacing: '-0.01em',
     },
-  }),
-  largeCopy: css({
-    fontFamily,
-    fontSize: '1.8rem',
-    fontStyle: 'normal',
-    fontWeight: 'normal',
-    letterSpacing: '-0.01em',
-    lineHeight: 25 / 18,
-  }),
+  ],
+  eyebrow: [
+    fontStyles(12, 15),
+    {
+      fontWeight: 'bold',
+      textTransform: 'uppercase',
+    },
+  ],
+  filterItemLabel: [
+    fontStyles(20, 25),
+    {
+      fontWeight: 'bold',
+      [MQ.M]: fontStyles(25, 30),
+      [MQ.XL]: fontStyles(15, 20),
+    },
+  ],
+  jumboHeadline: [
+    fontStyles(40, 40),
+    {
+      fontWeight: 'bold',
+      letterSpacing: '-0.03em',
+
+      [MQ.M]: {
+        ...fontStyles(60, 60),
+        letterSpacing: '-0.04em',
+      },
+
+      [MQ.XL]: fontStyles(80, 75),
+    },
+  ],
+  labelCopy: [
+    fontStyles(12, 20),
+    {
+      [MQ.M]: fontStyles(15, 22),
+    },
+  ],
+  labelCopyTight: [
+    fontStyles(12, 15),
+    {
+      [MQ.M]: fontStyles(15, 20),
+    },
+  ],
+  labelHeadline: [
+    fontStyles(12, 15),
+    {
+      fontWeight: 'bold',
+      [MQ.M]: fontStyles(15, 20),
+    },
+  ],
+  largeCopy: [
+    fontStyles(18, 25),
+    {
+      letterSpacing: '-0.01em',
+    },
+  ],
+  locationHeadline: [
+    fontStyles(20, 25),
+    {
+      fontWeight: 'bold',
+      [MQ.M]: fontStyles(35, 40),
+      [MQ.XL]: fontStyles(28, 30),
+    },
+  ],
+  modalHeadline: [
+    fontStyles(40, 40),
+    {
+      fontWeight: 'bold',
+      [MQ.M]: fontStyles(60, 60),
+      [MQ.XL]: fontStyles(40, 45),
+    },
+  ],
   primaryHeadline: [
     typographyStyles.primaryHeadline.base,
-    css({
+    {
       [MQ.M]: typographyStyles.primaryHeadline.M,
       [MQ.XL]: typographyStyles.primaryHeadline.XL,
-    }),
+    },
   ],
-  primarySubhead: css({
-    fontFamily,
-    fontSize: '1.5rem',
-    fontStyle: 'normal',
-    fontWeight: 'bold',
-    letterSpacing: '-0.01em',
-    lineHeight: 20 / 15,
-  }),
+  primarySubhead: [
+    fontStyles(15, 20),
+    {
+      fontWeight: 'bold',
+      letterSpacing: '-0.01em',
+    },
+  ],
   secondaryHeadline: [
     typographyStyles.secondaryHeadline.base,
-    css({
+    {
       [MQ.M]: typographyStyles.secondaryHeadline.M,
       [MQ.XL]: typographyStyles.secondaryHeadline.XL,
-    }),
+    },
   ],
-  secondarySubhead: css({
-    fontFamily,
-    fontSize: '1.2rem',
-    fontStyle: 'normal',
-    fontWeight: 'bold',
-    lineHeight: 15 / 12,
-  }),
-  smallCopy: css({
-    fontFamily,
-    fontSize: '1.2rem',
-    fontStyle: 'normal',
-    fontWeight: 'normal',
-    lineHeight: 20 / 12,
-  }),
-  smallCopyTight: css({
-    fontFamily,
-    fontSize: '1.2rem',
-    fontStyle: 'normal',
-    fontWeight: 'normal',
-    lineHeight: 15 / 12,
-  }),
+  secondarySubhead: [
+    fontStyles(12, 15),
+    {
+      fontWeight: 'bold',
+    },
+  ],
+  smallCopy: [fontStyles(12, 20)],
+  smallCopyTight: [fontStyles(12, 15)],
   tertiaryHeadline: [
     typographyStyles.tertiaryHeadline.base,
-    css({
+    {
       [MQ.XL]: typographyStyles.tertiaryHeadline.XL,
-    }),
+    },
+  ],
+  topPicksPrice: [
+    fontStyles(20, 20),
+    {
+      fontWeight: 'bold',
+      letterSpacing: '-0.02em',
+    },
   ],
 };

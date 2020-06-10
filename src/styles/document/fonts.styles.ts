@@ -49,3 +49,10 @@ export const fonts = `
     source: '/static/fonts/CircularStd-BoldItalic',
   })}
 `;
+
+export const globalFont = `
+  body {
+    font-family: "Circular Std", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+  }`;

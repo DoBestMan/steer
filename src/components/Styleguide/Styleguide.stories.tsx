@@ -22,15 +22,21 @@ export function Text() {
     <Grid as="section">
       <GridItem css={styles.containerText}>
         <p css={typography.jumboHeadline}>Jumbo Headline</p>
+        <p css={typography.modalHeadline}>Modal Headline</p>
         <p css={typography.primaryHeadline}>Primary Headline</p>
+        <p css={typography.locationHeadline}>Location Headline</p>
         <p css={typography.secondaryHeadline}>Secondary Headline</p>
         <p css={typography.tertiaryHeadline}>Tertiary Headline</p>
+        <p css={typography.labelHeadline}>LabelHeadline</p>
         <p css={typography.primarySubhead}>Primary Subhead</p>
         <p css={typography.secondarySubhead}>Secondary Subhead</p>
+        <p css={typography.filterItemLabel}>Filter Item Label</p>
         <p css={typography.eyebrow}>Eyebrow</p>
         <p css={typography.largeCopy}>Large Copy</p>
         <p css={typography.bodyCopy}>Body Copy</p>
         <p css={typography.bodyCopyTight}>Body Copy Tight</p>
+        <p css={typography.labelCopy}>Label Copy</p>
+        <p css={typography.labelCopyTight}>Label Copy Tight</p>
         <p css={typography.smallCopy}>Small Copy</p>
         <p css={typography.smallCopyTight}>Small Copy Tight</p>
       </GridItem>
