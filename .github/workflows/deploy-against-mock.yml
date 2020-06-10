@@ -32,7 +32,7 @@ jobs:
         git config --local user.name "GitHub Action"
         git fetch origin ${{ steps.extract_branch.outputs.original_branch }}
         git checkout -b ${{ steps.extract_branch.outputs.new_branch }}
-        touch empty-file-to-force-new-deploy.txt
+        echo "${{ steps.extract_branch.outputs.new_branch }}" > file-to-force-new-deploy.txt
         git add .
         git commit -m 'Mock Deploy'
     - name: Push changes
