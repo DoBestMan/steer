@@ -6,7 +6,7 @@ import { ui } from '~/lib/utils/ui-dictionary';
 
 export interface Results {
   resultMetadata: ListResultMetadata;
-  siteSearchGroupList: SiteSearchResultGroup[];
+  siteSearchResultGroupList: SiteSearchResultGroup[];
 }
 
 export type SearchResult = SiteSearchResultImageItem | SiteSearchResultTextItem;

@@ -7,11 +7,16 @@ import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
 import { MODAL_THEME } from '~/lib/constants';
 
 import Search from './Search';
-import { pastSearchResults, simpleSearchResults } from './Search.mocks';
+import { pastSearchResults } from './Search.mocks';
 
 function SearchModal() {
   const [pastSearches, setPastSearches] = useState(pastSearchResults);
-  const { isSearchOpen, toggleIsSearchOpen } = useSearchContext();
+  const {
+    isSearchOpen,
+    searchQuery,
+    searchResults,
+    toggleIsSearchOpen,
+  } = useSearchContext();
   const { customerServiceEnabled } = useSiteGlobalsContext();
   const handleClearSearchesClick = function () {
     setPastSearches([]);
@@ -46,9 +51,10 @@ function SearchModal() {
         forwardedRef={contentRef}
         onClearSearchesClick={handleClearSearchesClick}
         onCloseSearchClick={toggleIsSearchOpen}
+        onSearchQuery={searchQuery}
         onSetSearchCategory={handleSetSearchCategory}
         pastSearches={pastSearches}
-        results={simpleSearchResults}
+        results={searchResults}
       />
     </Modal>
   );

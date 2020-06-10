@@ -45,20 +45,24 @@ function getCategoryResults(category: string) {
   }
 }
 
+const handleCloseSearchClick = action('Close search');
+const handleClearSearchesClick = action('Clear searches');
+const handleSetSearchCategory = action('Set search category');
+const handleSearchQuery = action('Search for query');
+
 export function PastSearchResults() {
   const [pastSearches, setPastSearches] = useState(pastSearchResults);
 
-  const handleCloseSearchClick = action('Close search');
-  const handleClearSearchesClick = function () {
+  const clearSearches = function () {
     setPastSearches([]);
   };
-  const handleSetSearchCategory = action('Set search category');
 
   return (
     <Search
       isCustomerServiceEnabled={boolean('Is Business Hours', true)}
-      onClearSearchesClick={handleClearSearchesClick}
+      onClearSearchesClick={clearSearches}
       onCloseSearchClick={handleCloseSearchClick}
+      onSearchQuery={handleSearchQuery}
       onSetSearchCategory={handleSetSearchCategory}
       pastSearches={pastSearches}
       results={simpleSearchResults}
@@ -67,15 +71,12 @@ export function PastSearchResults() {
 }
 
 export function SearchResultsRegular() {
-  const handleCloseSearchClick = action('Close search');
-  const handleClearSearchesClick = action('Clear searches');
-  const handleSetSearchCategory = action('Set search category');
-
   return (
     <Search
       isCustomerServiceEnabled={boolean('Is Business Hours', true)}
       onClearSearchesClick={handleClearSearchesClick}
       onCloseSearchClick={handleCloseSearchClick}
+      onSearchQuery={handleSearchQuery}
       onSetSearchCategory={handleSetSearchCategory}
       pastSearches={[]}
       results={simpleSearchResults}
@@ -84,15 +85,12 @@ export function SearchResultsRegular() {
 }
 
 export function SearchResultsPartNumber() {
-  const handleCloseSearchClick = action('Close search');
-  const handleClearSearchesClick = action('Clear searches');
-  const handleSetSearchCategory = action('Set search category');
-
   return (
     <Search
       isCustomerServiceEnabled={boolean('Is Business Hours', true)}
       onClearSearchesClick={handleClearSearchesClick}
       onCloseSearchClick={handleCloseSearchClick}
+      onSearchQuery={handleSearchQuery}
       onSetSearchCategory={handleSetSearchCategory}
       pastSearches={[]}
       results={partNumberResults}
@@ -101,15 +99,12 @@ export function SearchResultsPartNumber() {
 }
 
 export function SearchResultsTireSize() {
-  const handleCloseSearchClick = action('Close search');
-  const handleClearSearchesClick = action('Clear searches');
-  const handleSetSearchCategory = action('Set search category');
-
   return (
     <Search
       isCustomerServiceEnabled={boolean('Is Business Hours', true)}
       onClearSearchesClick={handleClearSearchesClick}
       onCloseSearchClick={handleCloseSearchClick}
+      onSearchQuery={handleSearchQuery}
       onSetSearchCategory={handleSetSearchCategory}
       pastSearches={[]}
       results={tireSizeResults}
@@ -119,8 +114,6 @@ export function SearchResultsTireSize() {
 
 export function SearchBy() {
   const [results, setResults] = useState(noSearchResults);
-  const handleCloseSearchClick = action('Close search');
-  const handleClearSearchesClick = action('Clear searches');
   const handleSetSearchCategory = (category: string) => {
     const categoryResults = getCategoryResults(category);
     setResults(categoryResults);
@@ -131,6 +124,7 @@ export function SearchBy() {
       isCustomerServiceEnabled={boolean('Is Business Hours', true)}
       onClearSearchesClick={handleClearSearchesClick}
       onCloseSearchClick={handleCloseSearchClick}
+      onSearchQuery={handleSearchQuery}
       onSetSearchCategory={handleSetSearchCategory}
       pastSearches={[]}
       results={results}
@@ -175,15 +169,12 @@ export function VehicleTrimModal() {
 }
 
 export function NoResultsNoSuggestions() {
-  const handleCloseSearchClick = action('Close search');
-  const handleClearSearchesClick = action('Clear searches');
-  const handleSetSearchCategory = action('Set search category');
-
   return (
     <Search
       isCustomerServiceEnabled={boolean('Is Business Hours', true)}
       onClearSearchesClick={handleClearSearchesClick}
       onCloseSearchClick={handleCloseSearchClick}
+      onSearchQuery={handleSearchQuery}
       onSetSearchCategory={handleSetSearchCategory}
       pastSearches={[]}
       results={noSearchResults}
@@ -192,15 +183,12 @@ export function NoResultsNoSuggestions() {
 }
 
 export function NoResultsWithSuggestions() {
-  const handleCloseSearchClick = action('Close search');
-  const handleClearSearchesClick = action('Clear searches');
-  const handleSetSearchCategory = action('Set search category');
-
   return (
     <Search
       isCustomerServiceEnabled={boolean('Is Business Hours', true)}
       onClearSearchesClick={handleClearSearchesClick}
       onCloseSearchClick={handleCloseSearchClick}
+      onSearchQuery={handleSearchQuery}
       onSetSearchCategory={handleSetSearchCategory}
       pastSearches={[]}
       results={noResultsWithSuggestions}

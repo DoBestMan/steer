@@ -56,10 +56,10 @@ export interface Props {
   onInputFocus: (inputType: SearchInputEnum) => void;
   onToggleRearTire: (isShowing: boolean) => void;
   onValueSelection: (value: SearchResult) => void;
-  query: string;
+  queryText: string;
   results: SiteSearchResultGroup[];
   searchState: string;
-  secondaryQuery: string;
+  secondaryQueryText: string;
 }
 
 function SearchAutocomplete({
@@ -75,10 +75,10 @@ function SearchAutocomplete({
   onInputFocus,
   onToggleRearTire,
   onValueSelection,
-  query,
+  queryText,
   results,
   searchState,
-  secondaryQuery,
+  secondaryQueryText,
 }: Props) {
   const [shouldShowListbox, setShouldShowListbox] = useState(false);
   const [activeModal, setActiveModal] = useState<SearchModalEnum | null>(null);
@@ -91,13 +91,13 @@ function SearchAutocomplete({
     setSelectedItemIndex,
   } = useAutocompleteSelectedItem(results);
 
-  const isInputEmpty = query.length < 1;
+  const isInputEmpty = queryText.length < 1;
   const hasResults = results.length > 0;
   const hasNoMatchingResults =
     noExactMatch && !isInputEmpty && !isLoadingResults;
   const hasActiveSearchState = !!searchState;
   const isRearTireState = searchState === SearchStateEnum.REAR_TIRE;
-  const isSearchInProgress = !!query || hasActiveSearchState;
+  const isSearchInProgress = !!queryText || hasActiveSearchState;
 
   const focusOnInput = useCallback(() => {
     if (activeInputType === SearchInputEnum.PRIMARY && primaryInput.current) {
@@ -152,7 +152,7 @@ function SearchAutocomplete({
   };
 
   const handleBackspace = () => {
-    if (hasActiveSearchState && !query && !isRearTireState) {
+    if (hasActiveSearchState && !queryText && !isRearTireState) {
       handleCancelSelection();
     }
   };
@@ -282,7 +282,7 @@ function SearchAutocomplete({
               ref={primaryInput}
               searchStateLabel={getSearchStateLabel()}
               type={SearchInputEnum.PRIMARY}
-              value={query}
+              value={queryText}
             />
           </GridItem>
           {isRearTireState && (
@@ -306,7 +306,7 @@ function SearchAutocomplete({
                 ref={secondaryInput}
                 searchStateLabel={ui('search.rearTire')}
                 type={SearchInputEnum.SECONDARY}
-                value={secondaryQuery}
+                value={secondaryQueryText}
               />
             </GridItem>
           )}

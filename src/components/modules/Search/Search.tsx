@@ -1,6 +1,7 @@
 import { RefObject, useState } from 'react';
 
 import { SiteSearchResultTextItem } from '~/data/models/SiteSearchResultTextItem';
+import { SearchDataParams } from '~/lib/api/search';
 import { TIME } from '~/lib/constants';
 import { scrollTo } from '~/lib/helpers/scroll';
 
@@ -11,7 +12,6 @@ import {
   SearchActionType,
   SearchInputEnum,
   SearchResult,
-  SearchResultEnum,
   SearchStateEnum,
 } from './Search.types';
 import SearchAutocomplete from './SearchAutocomplete';
@@ -22,12 +22,14 @@ interface Props {
   isCustomerServiceEnabled: boolean;
   onClearSearchesClick: () => void;
   onCloseSearchClick: () => void;
+  onSearchQuery: ({ queryText, queryType }: SearchDataParams) => void;
   onSetSearchCategory: (category: string) => void;
   pastSearches: SiteSearchResultTextItem[];
   results: Results;
 }
 
 function Search({
+  onSearchQuery,
   isCustomerServiceEnabled,
   onClearSearchesClick,
   onCloseSearchClick,
@@ -36,14 +38,15 @@ function Search({
   forwardedRef,
   results,
 }: Props) {
-  const [query, setQuery] = useState('');
-  const [secondaryQuery, setSecondaryQuery] = useState('');
+  const [queryText, setQueryText] = useState('');
+  const [secondaryQueryText, setSecondaryQueryText] = useState('');
+  const [queryType, setQueryType] = useState('');
   const [searchState, setSearchState] = useState('');
   const [activeInputType, setActiveInputType] = useState(
     SearchInputEnum.PRIMARY,
   );
 
-  const { resultMetadata, siteSearchGroupList } = results;
+  const { resultMetadata, siteSearchResultGroupList } = results;
   const { noExactMatch } = resultMetadata;
 
   const handleClearSearchesClick = () => {
@@ -56,15 +59,17 @@ function Search({
 
   const onInputChange = (input: string) => {
     if (activeInputType === SearchInputEnum.PRIMARY) {
-      setQuery(input);
+      setQueryText(input);
     } else if (activeInputType === SearchInputEnum.SECONDARY) {
-      setSecondaryQuery(input);
+      setSecondaryQueryText(input);
     }
+
+    onSearchQuery({ queryText: input, queryType });
   };
 
   const onCancelSelection = () => {
     // Reset the search category when search cleared with no query.
-    if (!query) {
+    if (!queryText) {
       setSearchState('');
       onSetSearchCategory('');
     }
@@ -76,23 +81,27 @@ function Search({
     } else {
       setSearchState(SearchStateEnum.TIRE_SIZE);
       setActiveInputType(SearchInputEnum.PRIMARY);
-      setSecondaryQuery('');
+      setSecondaryQueryText('');
     }
   };
 
   const handleValueSelection = (searchResult: SearchResult) => {
-    let queryText = '';
+    const { action } = searchResult;
 
-    if (searchResult.type === SearchResultEnum.TEXT) {
-      queryText = searchResult.label;
-    } else if (searchResult.type === SearchResultEnum.IMAGE) {
-      queryText = searchResult.image.altText;
-    }
+    if (action.type === SearchActionType.QUERY) {
+      if (activeInputType === SearchInputEnum.PRIMARY) {
+        setQueryText(action.queryText);
+      } else if (activeInputType === SearchInputEnum.SECONDARY) {
+        setSecondaryQueryText(action.queryText);
+      }
 
-    if (activeInputType === SearchInputEnum.PRIMARY) {
-      setQuery(queryText);
-    } else if (activeInputType === SearchInputEnum.SECONDARY) {
-      setSecondaryQuery(queryText);
+      setQueryType(action.queryType);
+      onSearchQuery({
+        queryText: action.queryText,
+        queryType: action.queryType,
+      });
+    } else if (action.type === SearchActionType.LINK) {
+      // TODO
     }
   };
 
@@ -114,8 +123,8 @@ function Search({
     setActiveInputType(inputType);
   };
 
-  const isInputEmpty = query.length < 1;
-  const hasResults = siteSearchGroupList.length > 0;
+  const isInputEmpty = queryText.length < 1;
+  const hasResults = siteSearchResultGroupList.length > 0;
   const shouldShowSearchSupport = noExactMatch && !hasResults && !isInputEmpty;
   const shouldShowInitialSearch =
     (shouldShowSearchSupport || isInputEmpty) && !searchState;
@@ -133,10 +142,10 @@ function Search({
         onInputFocus={handleInputFocus}
         onToggleRearTire={onToggleRearTire}
         onValueSelection={handleValueSelection}
-        results={siteSearchGroupList}
-        query={query}
+        results={siteSearchResultGroupList}
+        queryText={queryText}
         searchState={searchState}
-        secondaryQuery={secondaryQuery}
+        secondaryQueryText={secondaryQueryText}
       />
       {shouldShowInitialSearch && (
         <InitialSearch

@@ -172,14 +172,14 @@ export const noSearchResults: Results = {
   resultMetadata: {
     noExactMatch: true,
   },
-  siteSearchGroupList: [],
+  siteSearchResultGroupList: [],
 };
 
 export const noResultsWithSuggestions: Results = {
   resultMetadata: {
     noExactMatch: true,
   },
-  siteSearchGroupList: [
+  siteSearchResultGroupList: [
     {
       label: 'Did you mean',
       siteSearchResultList: [
@@ -270,7 +270,7 @@ export const noResultsWithSuggestions: Results = {
 
 export const simpleSearchResults: Results = {
   resultMetadata: {},
-  siteSearchGroupList: [
+  siteSearchResultGroupList: [
     {
       label: '',
       siteSearchResultList: [
@@ -441,7 +441,7 @@ export const simpleSearchResults: Results = {
 
 export const partNumberResults: Results = {
   resultMetadata: {},
-  siteSearchGroupList: [
+  siteSearchResultGroupList: [
     {
       label: '',
       siteSearchResultList: [
@@ -532,7 +532,7 @@ export const partNumberResults: Results = {
 
 export const tireSizeResults: Results = {
   resultMetadata: {},
-  siteSearchGroupList: [
+  siteSearchResultGroupList: [
     {
       label: 'Width > Ratio > Rim',
       siteSearchResultList: [
@@ -607,7 +607,7 @@ export const tireSizeResults: Results = {
 
 export const searchByVehicle: Results = {
   resultMetadata: {},
-  siteSearchGroupList: [
+  siteSearchResultGroupList: [
     {
       label: 'Most Popular',
       siteSearchResultList: [
@@ -1439,7 +1439,7 @@ export const searchByVehicle: Results = {
 
 export const searchByTireSize: Results = {
   resultMetadata: {},
-  siteSearchGroupList: [
+  siteSearchResultGroupList: [
     {
       label: 'Popular Widths',
       siteSearchResultList: [
@@ -2191,7 +2191,7 @@ export const searchByTireSize: Results = {
 
 export const searchByBrand: Results = {
   resultMetadata: {},
-  siteSearchGroupList: [
+  siteSearchResultGroupList: [
     {
       label: 'Featured',
       siteSearchResultList: [
@@ -2705,7 +2705,7 @@ export const searchByBrand: Results = {
 
 export const searchByMostPopular: Results = {
   resultMetadata: {},
-  siteSearchGroupList: [
+  siteSearchResultGroupList: [
     {
       label: 'Most Popular',
       siteSearchResultList: [
