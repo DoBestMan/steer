@@ -72,6 +72,11 @@ class GithubSteer:
             filename.write(c)
         filename.close()
 
+    def notify_devs(self):
+      filename = open('notification.txt', 'a+')
+      filename.write("\n\n@here -- Devs, remember to update your tickets with testing notes, links to stories, or exceptions. :robot_face:")
+      filename.close()
+
 ############################################################
 
 

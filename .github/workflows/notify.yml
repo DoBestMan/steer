@@ -8,6 +8,10 @@ jobs:
   notify:
     runs-on: ubuntu-latest
     steps:
+    - name: Sleep for 5 minutes while QA build deploys
+      uses: jakejarvis/wait-action@master
+      with:
+        time: '5m'
     - uses: actions/checkout@v2
     - name: Set up Python
       uses: actions/setup-python@v1
