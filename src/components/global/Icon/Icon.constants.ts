@@ -29,6 +29,7 @@ export const ICONS: Record<string, Icon> = {
   GEOLOCATION: 'geolocation',
   GRIP: 'grip',
   INSTAGRAM: 'instagram',
+  LIGHTNING: 'lightning',
   LINKEDIN: 'linkedin',
   LOCAL_BUSINESS: 'local-business',
   LOCATION: 'location',
@@ -40,6 +41,7 @@ export const ICONS: Record<string, Icon> = {
   PHONE: 'phone',
   QUANTITY_SELECTOR_CAR: 'quantity-selector-car',
   QUANTITY_SELECTOR_CAR_TILTED: 'quantity-selector-car-tilted',
+  RETURN: 'return',
   REVIEWS_VERIFIED: 'reviews-verified',
   SEARCH: 'search',
   SHIELD: 'shield',
@@ -49,6 +51,7 @@ export const ICONS: Record<string, Icon> = {
   SMILEY_CONCERNED: 'smiley-concerned',
   SMILEY_WINK: 'smiley-wink',
   STAR: 'star',
+  TAG: 'tag',
   TIRE: 'tire',
   TRENDING: 'trending',
   TWITTER: 'twitter',
@@ -60,6 +63,7 @@ export const ICONS: Record<string, Icon> = {
   VEHICLE_RV: 'vehicle-rv',
   WHEEL: 'wheel',
   WINTER: 'winter',
+  WRENCH: 'wrench',
   YOUTUBE: 'youtube',
 };
 
@@ -88,6 +92,7 @@ export const ICON_SIZES: Record<string, IconSize> = {
   GEOLOCATION: { h: 25, w: 25 },
   GRIP: { h: 8, w: 6 },
   INSTAGRAM: { h: 18, w: 18 },
+  LIGHTNING: { h: 12, w: 8 },
   LINKEDIN: { h: 18, w: 18 },
   LOCAL_BUSINESS: { h: 33, w: 69 },
   LOCATION: { h: 20, w: 16 },
@@ -99,6 +104,7 @@ export const ICON_SIZES: Record<string, IconSize> = {
   PHONE: { h: 14, w: 16 },
   QUANTITY_SELECTOR_CAR: { h: 31, w: 34 },
   QUANTITY_SELECTOR_CAR_TILTED: { h: 39, w: 39 },
+  RETURN: { h: 10, w: 12 },
   REVIEWS_VERIFIED: { h: 13, w: 13 },
   SEARCH: { h: 17, w: 17 },
   SHIELD: { h: 49, w: 50 },
@@ -108,6 +114,7 @@ export const ICON_SIZES: Record<string, IconSize> = {
   SMILEY_CONCERNED: { h: 37, w: 35 },
   SMILEY_WINK: { h: 30, w: 33 },
   STAR: { h: 56, w: 61 },
+  TAG: { h: 13, w: 13 },
   TIRE: { h: 30, w: 30 },
   TRENDING: { h: 13, w: 24 },
   TWITTER: { h: 18, w: 21 },
@@ -119,6 +126,7 @@ export const ICON_SIZES: Record<string, IconSize> = {
   VEHICLE_RV: { h: 30, w: 62 },
   WHEEL: { h: 30, w: 30 },
   WINTER: { h: 72, w: 64 },
+  WRENCH: { h: 11, w: 11 },
   YOUTUBE: { h: 16, w: 22 },
 };
 

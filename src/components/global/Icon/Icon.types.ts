@@ -27,6 +27,7 @@ export type Icon =
   | 'geolocation'
   | 'grip'
   | 'instagram'
+  | 'lightning'
   | 'linkedin'
   | 'local-business'
   | 'location'
@@ -38,6 +39,7 @@ export type Icon =
   | 'phone'
   | 'quantity-selector-car'
   | 'quantity-selector-car-tilted'
+  | 'return'
   | 'reviews-verified'
   | 'search'
   | 'shield'
@@ -47,6 +49,7 @@ export type Icon =
   | 'smiley-concerned'
   | 'smiley-wink'
   | 'star'
+  | 'tag'
   | 'tire'
   | 'trending'
   | 'twitter'
@@ -58,6 +61,7 @@ export type Icon =
   | 'vehicle-rv'
   | 'wheel'
   | 'winter'
+  | 'wrench'
   | 'youtube';
 
 export type IconSize = { h: number; w: number };

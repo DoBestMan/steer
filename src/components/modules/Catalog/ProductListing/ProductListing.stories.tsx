@@ -2,11 +2,14 @@ import { boolean, number, text } from '@storybook/addon-knobs';
 
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
+import { ICONS } from '~/components/global/Icon/Icon.constants';
+import { SiteIcon } from '~/data/models/SiteIcon';
 import { SiteImage } from '~/data/models/SiteImage';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 
 import ProductListing from './ProductListing';
 import { PRODUCT_IMAGE_TYPES } from './ProductListing.types';
+import { PROMO_STYLES } from './PromoTag/PromoTag.types';
 
 export default {
   component: ProductListing,
@@ -56,11 +59,30 @@ const ratingOptions = {
   step: 0.1,
 };
 
+const mockPromotions = [
+  {
+    style: PROMO_STYLES.WHITE_PILL,
+    label: 'Installation included',
+    icon: { svgId: ICONS.WRENCH, type: ICON_IMAGE_TYPE.ICON } as SiteIcon,
+  },
+  {
+    style: PROMO_STYLES.DEFAULT,
+    label: 'Spring Sale',
+    icon: { svgId: ICONS.TAG, type: ICON_IMAGE_TYPE.ICON } as SiteIcon,
+  },
+  {
+    style: PROMO_STYLES.WHITE_PILL,
+    label: '$70 rebate',
+    icon: { svgId: ICONS.RETURN, type: ICON_IMAGE_TYPE.ICON } as SiteIcon,
+  },
+];
+
 export function ProductListingWithKnobs() {
   const isHighlighted = boolean('Highlighted product', false);
   const showFilters = boolean('Show filters', false);
   const showBrandLogo = boolean('Show brand logo', true);
   const showRatings = boolean('Show ratings', true);
+  const promosToRender = number('Promos to display', 1, { max: 3, min: 0 });
 
   return (
     <Grid>
@@ -77,9 +99,14 @@ export function ProductListingWithKnobs() {
             label: 'Firestone',
           }}
           defaultImage={PRODUCT_IMAGE_TYPES.SIDEWALL}
+          highlight={text('Highlight', 'best seller')}
           link={{ href: '/', isExternal: false }}
           name={text('Name', 'FT140')}
           priceList={mockPriceList}
+          promotionList={{
+            count: promosToRender,
+            list: mockPromotions.slice(0, promosToRender),
+          }}
           images={mockImages}
           isHighlighted={isHighlighted}
           rating={
@@ -113,6 +140,7 @@ export function FilteredProductListing() {
           defaultImage={PRODUCT_IMAGE_TYPES.SIDEWALL}
           link={{ href: '/', isExternal: false }}
           name="FT140"
+          promotionList={{ count: 0, list: [] }}
           priceList={mockPriceList}
           images={mockImages}
           rating={{
@@ -141,6 +169,7 @@ export function HighlightedProductListing() {
           defaultImage={PRODUCT_IMAGE_TYPES.SIDEWALL}
           link={{ href: '/', isExternal: false }}
           name="FT140"
+          promotionList={{ count: 0, list: [] }}
           priceList={mockPriceList}
           images={mockImages}
           isHighlighted

@@ -1,6 +1,6 @@
 import { CSSObject } from '@emotion/core';
 
-import { BORDERS, COLORS, MQ, SPACING } from '~/lib/constants';
+import { BORDERS, COLORS, MQ, RADIUS, SPACING } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const IMAGE_SIZES = {
@@ -8,6 +8,8 @@ const IMAGE_SIZES = {
   M: 250,
   L: 300,
 };
+
+const DISC_SIZE = 50;
 
 const styles: CSSObject = {
   attribute: [
@@ -32,6 +34,7 @@ const styles: CSSObject = {
       maxWidth: IMAGE_SIZES.L,
     },
   },
+  imageWrapper: { position: 'relative' },
   info: {
     alignItems: 'center',
     display: 'flex',
@@ -55,6 +58,30 @@ const styles: CSSObject = {
       width: '100%',
     },
   },
+  morePromos: [
+    typography.secondarySubhead,
+    {
+      color: COLORS.GLOBAL.ORANGE,
+    },
+  ],
+  promoDisc: [
+    typography.smallCopyTight,
+    {
+      alignItems: 'center',
+      backgroundColor: COLORS.GLOBAL.ORANGE,
+      borderRadius: RADIUS.CIRCLE,
+      color: COLORS.GLOBAL.WHITE,
+      display: 'flex',
+      height: DISC_SIZE,
+      justifyContent: 'center',
+      left: SPACING.SIZE_20,
+      lineHeight: 0.9,
+      position: 'absolute',
+      textAlign: 'center',
+      top: SPACING.SIZE_10,
+      width: DISC_SIZE,
+    },
+  ],
   rating: {
     display: 'flex',
     alignItems: 'center',

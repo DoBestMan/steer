@@ -40,6 +40,9 @@
       "filterLabel": "Filter by",
       "rear": "Rear {{rearTireSize}}",
       "size": "Size {{tireSize}}"
+    },
+    "productListing": {
+      "morePromos": "+ {{number}} other deals"
     }
   },
   "footer": {
