@@ -69,7 +69,8 @@ export const reset = `
   form,
   label,
   legend,
-  button {
+  button,
+  input {
     border: 0 none;
     color: inherit;
     font-family: inherit;
