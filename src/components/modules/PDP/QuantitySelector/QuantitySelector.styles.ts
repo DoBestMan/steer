@@ -40,6 +40,7 @@ const styles: CSSObject = {
   },
   cta: {
     display: 'flex',
+    flexDirection: 'row-reverse',
     justifyContent: 'center',
 
     /* eslint-disable sort-keys */
@@ -48,9 +49,10 @@ const styles: CSSObject = {
       display: 'block',
     },
     '> :not(:only-child):first-of-type': {
-      marginRight: SPACING.SIZE_10,
+      marginLeft: SPACING.SIZE_10,
 
       [MQ.L]: {
+        marginLeft: 0,
         marginBottom: SPACING.SIZE_10,
       },
     },
