@@ -1,5 +1,4 @@
-import Glider from 'react-glider';
-
+import Carousel from '~/components/global/Carousel/Carousel';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import Image from '~/components/global/Image/Image';
@@ -37,7 +36,7 @@ function SearchCarousel({
         gridColumnM="1/9"
         gridColumnL="1/15"
       >
-        <Glider draggable slidesToShow="auto">
+        <Carousel freeScroll>
           {siteSearchResultList.map((result, index) => (
             <div
               css={styles.carouselItem}
@@ -56,7 +55,7 @@ function SearchCarousel({
               </button>
             </div>
           ))}
-        </Glider>
+        </Carousel>
       </GridItem>
     </Grid>
   );

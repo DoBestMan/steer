@@ -5,26 +5,28 @@ import { typography } from '~/styles/typography.styles';
 
 const styles: CSSObject = {
   cardContainer: {
-    '&:not(:last-of-type)': {
-      marginRight: SPACING.SIZE_15,
+    '&.swiper-slide': {
+      '&:not(:last-of-type)': {
+        marginRight: SPACING.SIZE_15,
+
+        [MQ.L]: {
+          marginRight: SPACING.SIZE_30,
+        },
+      },
+      backgroundColor: COLORS.LIGHT.OFF_WHITE,
+      borderRadius: RADIUS.RADIUS_15,
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'space-between',
+      minHeight: 240,
+      padding: SPACING.SIZE_25,
+      width: 250,
 
       [MQ.L]: {
-        marginRight: SPACING.SIZE_30,
+        minHeight: 270,
+        width: 300,
+        padding: SPACING.SIZE_40,
       },
-    },
-    backgroundColor: COLORS.LIGHT.OFF_WHITE,
-    borderRadius: RADIUS.RADIUS_15,
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    minHeight: 240,
-    minWidth: 250,
-    padding: SPACING.SIZE_25,
-
-    [MQ.L]: {
-      minHeight: 270,
-      minWidth: 300,
-      padding: SPACING.SIZE_40,
     },
   },
   cardIcon: {

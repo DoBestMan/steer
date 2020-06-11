@@ -59,26 +59,24 @@ const styles: CSSObject = {
     },
   },
   carouselItem: {
-    '&.glider-slide': {
-      minWidth: 'initial',
+    '&.swiper-slide': {
+      width: 'initial',
     },
     '&:first-child': {
-      paddingLeft: GRID_MARGIN.S,
+      marginLeft: GRID_MARGIN.S,
     },
     paddingRight: SPACING.SIZE_15,
     [MQ.M]: {
       '&:first-child': {
-        paddingLeft: GRID_MARGIN.M,
+        marginLeft: GRID_MARGIN.M,
       },
       paddingRight: SPACING.SIZE_20,
     },
     [MQ.L]: {
       '&:first-child': {
-        paddingLeft: `calc(${PADDING_LEFT_L})`,
-        width: `calc(${PADDING_LEFT_L} + ${BUTTON_SIZE_L}px + ${SPACING.SIZE_30}px + ${GRID_MARGIN.L}px)`,
+        marginLeft: `calc(${PADDING_LEFT_L})`,
       },
       paddingRight: SPACING.SIZE_30,
-      width: `calc(${BUTTON_SIZE_L}px + ${SPACING.SIZE_30}px)`,
     },
   },
   eyebrow: [

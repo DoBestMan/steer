@@ -1,8 +1,9 @@
 import { CSSObject } from '@emotion/core';
 import { useEffect, useState } from 'react';
-import Glider from 'react-glider';
 
-import styles, { ITEM_SIZE } from './HorizontalNumberPicker.styles';
+import Carousel from '~/components/global/Carousel/Carousel';
+
+import styles from './HorizontalNumberPicker.styles';
 
 interface Props {
   customCarouselStyles?: CSSObject;
@@ -52,28 +53,24 @@ function HorizontalNumberPicker({
       </div>
 
       <div css={customCarouselStyles}>
-        <Glider
-          draggable
-          slidesToShow="auto"
-          dragVelocity={1.25}
-          scrollLock={false}
-          itemWidth={ITEM_SIZE}
-        >
-          {numbers.map((value, index) => {
-            return (
-              <button
+        <Carousel activeSlide={selectedItemIndex} centerActiveSlide>
+          {numbers.map((value, index) => (
+            <button
+              css={styles.numberItem}
+              onClick={handleClick(index)}
+              key={index}
+            >
+              <span
                 css={[
-                  styles.numberItem,
+                  styles.innerItem,
                   selectedItemIndex === index && styles.selectedItem,
                 ]}
-                onClick={handleClick(index)}
-                key={index}
               >
-                <span css={styles.innerItem}>{value}</span>
-              </button>
-            );
-          })}
-        </Glider>
+                {value}
+              </span>
+            </button>
+          ))}
+        </Carousel>
       </div>
     </div>
   );

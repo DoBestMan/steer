@@ -33,21 +33,19 @@ function PurchaseIncludesCard({
 
   return (
     <>
-      <div css={styles.cardContainer}>
-        <Icon name={icon} css={styles.cardIcon} />
-        <div>
-          <h2 css={styles.cardTitle}>{title}</h2>
-          <p css={typography.bodyCopy}>{description}</p>
-        </div>
-        <Link
-          as="button"
-          onClick={toggleModal}
-          theme={LINK_THEME.LIGHT}
-          css={styles.cardLink}
-        >
-          {linkLabel}
-        </Link>
+      <Icon name={icon} css={styles.cardIcon} />
+      <div>
+        <h2 css={styles.cardTitle}>{title}</h2>
+        <p css={typography.bodyCopy}>{description}</p>
       </div>
+      <Link
+        as="button"
+        onClick={toggleModal}
+        theme={LINK_THEME.LIGHT}
+        css={styles.cardLink}
+      >
+        {linkLabel}
+      </Link>
 
       <ContentModalContainer
         {...modalData}

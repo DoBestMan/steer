@@ -4,21 +4,9 @@ import { COLORS, MQ, RADIUS, SPACING } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const styles: CSSObject = {
-  checkmark: {
-    background: COLORS.GLOBAL.BLACK,
-    borderRadius: RADIUS.CIRCLE,
-    color: COLORS.GLOBAL.WHITE,
-    height: 12,
-    marginLeft: SPACING.SIZE_05,
-    padding: 3,
-    width: 12,
-  },
-  gliderContainer: {
-    '.glider-slide': {
-      '&:not(:last-of-type)': {
-        marginRight: SPACING.SIZE_30,
-      },
-      flex: '0 1 0',
+  carouselContainer: {
+    '.swiper-slide': {
+      flex: '0 1 auto',
       minWidth: 'auto',
 
       [MQ.L]: {
@@ -27,6 +15,15 @@ const styles: CSSObject = {
         },
       },
     },
+  },
+  checkmark: {
+    background: COLORS.GLOBAL.BLACK,
+    borderRadius: RADIUS.CIRCLE,
+    color: COLORS.GLOBAL.WHITE,
+    height: 12,
+    marginLeft: SPACING.SIZE_05,
+    padding: 3,
+    width: 12,
   },
   heading: {
     display: 'flex',

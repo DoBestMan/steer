@@ -1,5 +1,4 @@
-import Glider from 'react-glider';
-
+import Carousel from '~/components/global/Carousel/Carousel';
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Link from '~/components/global/Link/Link';
@@ -9,6 +8,10 @@ import { ui } from '~/lib/utils/ui-dictionary';
 
 import { statsMock } from './ShopWithConfidence.mock';
 import styles from './ShopWithConfidence.styles';
+
+const carouselParams = {
+  spaceBetween: 30,
+};
 
 function ShopWithConfidence() {
   return (
@@ -31,8 +34,8 @@ function ShopWithConfidence() {
         </Link>
       </div>
 
-      <div css={styles.gliderContainer}>
-        <Glider draggable slidesToShow="auto" dragVelocity={1.25}>
+      <div css={styles.carouselContainer}>
+        <Carousel {...carouselParams}>
           {statsMock.map((item) => (
             <div key={item.heading}>
               <span css={styles.statHeading}>{item.heading}</span>
@@ -43,7 +46,7 @@ function ShopWithConfidence() {
               </span>
             </div>
           ))}
-        </Glider>
+        </Carousel>
       </div>
     </div>
   );

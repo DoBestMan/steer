@@ -1,5 +1,4 @@
-import Glider from 'react-glider';
-
+import Carousel from '~/components/global/Carousel/Carousel';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import { everyPurchaseIncludesData } from './PurchaseIncludes.mock';
@@ -13,11 +12,13 @@ function PurchaseIncludes() {
     <>
       <h2 css={styles.title}>{ui('pdp.everyPurchaseIncludes.title')}:</h2>
 
-      <Glider draggable slidesToShow="auto" dragVelocity={1.25}>
+      <Carousel>
         {everyPurchaseIncludesData.map((item: CardType) => (
-          <PurchaseIncludesCard {...item} key={item.title} />
+          <div css={styles.cardContainer} key={item.title}>
+            <PurchaseIncludesCard {...item} />
+          </div>
         ))}
-      </Glider>
+      </Carousel>
     </>
   );
 }
