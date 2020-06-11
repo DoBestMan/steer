@@ -2,7 +2,7 @@ import { css } from '@emotion/core';
 
 import { BORDERS, COLORS, MQ, SPACING, Z_INDEX } from '~/lib/constants';
 import { disableGlobalFocus } from '~/styles/document/accessibility.styles';
-import { typography, typographyStyles } from '~/styles/typography.styles';
+import { typography } from '~/styles/typography.styles';
 
 const styles = {
   actionIcon: css({
@@ -19,11 +19,9 @@ const styles = {
     },
   }),
   clearSearch: [
-    typography.smallCopyTight,
+    typography.labelCopyTight,
     css({
       color: COLORS.LIGHT.GRAY_70,
-      [MQ.M]: typography.bodyCopy,
-      [MQ.XL]: typography.largeCopy,
     }),
   ],
   comboboxWrapper: css({
@@ -31,16 +29,13 @@ const styles = {
   }),
   errorMessage: typography.primaryHeadline,
   input: [
-    typography.secondaryHeadline,
+    typography.locationHeadline,
     disableGlobalFocus,
     css({
       backgroundColor: 'inherit',
       border: 'none',
       padding: 0,
       width: '100%',
-
-      [MQ.M]: typography.primaryHeadline,
-      [MQ.XL]: typography.secondaryHeadline,
     }),
   ],
   inputContainer: css({
@@ -55,7 +50,7 @@ const styles = {
     },
   }),
   label: [
-    typography.secondaryHeadline,
+    typography.locationHeadline,
     css({
       color: COLORS.LIGHT.GRAY_70,
       left: 0,
@@ -63,8 +58,6 @@ const styles = {
       pointerEvents: 'none',
       position: 'absolute',
       top: 0,
-      [MQ.M]: typographyStyles.primaryHeadline.M,
-      [MQ.XL]: typographyStyles.secondaryHeadline.XL,
     }),
   ],
   labelHidden: css({

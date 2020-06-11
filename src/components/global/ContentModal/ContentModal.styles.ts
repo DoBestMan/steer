@@ -1,7 +1,7 @@
 import { CSSObject } from '@emotion/core';
 
 import { BORDERS, COLORS, MQ, SPACING } from '~/lib/constants';
-import { typography, typographyStyles } from '~/styles/typography.styles';
+import { typography } from '~/styles/typography.styles';
 
 const styles: CSSObject = {
   container: {
@@ -93,13 +93,12 @@ const styles: CSSObject = {
     },
   ],
   title: [
-    typography.jumboHeadline,
+    typography.modalHeadline,
     {
       marginBottom: SPACING.SIZE_10,
       [MQ.M]: {
         marginBottom: SPACING.SIZE_20,
       },
-      [MQ.L]: typographyStyles.primaryHeadline.XL,
     },
   ],
 };

@@ -2,7 +2,7 @@ import { css } from '@emotion/core';
 
 import { COLORS, MQ, SPACING } from '~/lib/constants';
 import { layout } from '~/styles/layout.styles';
-import { typography, typographyStyles } from '~/styles/typography.styles';
+import { typography } from '~/styles/typography.styles';
 
 export const styles = {
   container: css({
@@ -60,12 +60,10 @@ export const styles = {
     marginTop: 'auto',
   }),
   useCurrentLocationButton: [
-    typography.secondaryHeadline,
+    typography.locationHeadline,
     layout.container,
     css({
       alignItems: 'baseline',
-      [MQ.M]: typographyStyles.primaryHeadline.M,
-      [MQ.XL]: typographyStyles.secondaryHeadline.XL,
     }),
   ],
   useCurrentLocationContainer: css({

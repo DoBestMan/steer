@@ -39,10 +39,9 @@ const styles: CSSObject = {
     },
   },
   learnMoreButton: [
-    typography.smallCopyTight,
+    typography.labelCopyTight,
     {
       color: COLORS.LIGHT.GRAY_70,
-      [MQ.L]: typography.bodyCopyTight,
 
       span: {
         borderColor: COLORS.LIGHT.GRAY_70,
@@ -56,8 +55,7 @@ const styles: CSSObject = {
     },
   ],
   statDetail: [
-    typography.smallCopyTight,
-
+    typography.labelCopyTight,
     {
       color: COLORS.LIGHT.GRAY_70,
       display: 'block',

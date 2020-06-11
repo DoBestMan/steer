@@ -55,15 +55,12 @@ const styles: CSSObject = {
     },
   ],
   title: [
-    typography.tertiaryHeadline,
+    typography.primaryHeadline,
     {
       marginBottom: SPACING.SIZE_20,
-      [MQ.L]: [
-        typography.primaryHeadline,
-        {
-          marginBottom: SPACING.SIZE_30,
-        },
-      ],
+      [MQ.L]: {
+        marginBottom: SPACING.SIZE_30,
+      },
     },
   ],
 };
