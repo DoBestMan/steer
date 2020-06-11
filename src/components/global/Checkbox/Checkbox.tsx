@@ -1,4 +1,4 @@
-import { ChangeEvent, ReactNode, useState } from 'react';
+import { ReactNode, useState } from 'react';
 
 import Icon from '../Icon/Icon';
 import { ICONS } from '../Icon/Icon.constants';
@@ -8,7 +8,7 @@ interface Props {
   checked?: boolean;
   children?: ReactNode;
   defaultChecked?: boolean;
-  onChange?: (value: string) => void;
+  onChange?: (value: boolean) => void;
 }
 
 export default function Checkbox({
@@ -18,9 +18,9 @@ export default function Checkbox({
   ...rest
 }: Props) {
   const [isChecked, setIsChecked] = useState(defaultChecked);
-  function handleChange(e: ChangeEvent<HTMLInputElement>) {
+  function handleChange() {
     if (onChange) {
-      onChange(e.target.value);
+      onChange(!isChecked);
     }
     setIsChecked(!isChecked);
   }

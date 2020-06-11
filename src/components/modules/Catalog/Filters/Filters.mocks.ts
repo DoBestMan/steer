@@ -119,7 +119,7 @@ export const filterTypeMap: Record<FilterContentTypes, CatalogFilterTypes> = {
             flair: null,
             description: 'Fastest delivery, best ratings and value',
             count: 86,
-            isSelected: true,
+            isSelected: false,
           },
           {
             title: 'Highest rated brands',
@@ -135,7 +135,7 @@ export const filterTypeMap: Record<FilterContentTypes, CatalogFilterTypes> = {
             flair: null,
             description: null,
             count: 8,
-            isSelected: true,
+            isSelected: false,
           },
         ],
       },
@@ -149,7 +149,7 @@ export const filterTypeMap: Record<FilterContentTypes, CatalogFilterTypes> = {
             flair: 'Best seller',
             description: null,
             count: 3,
-            isSelected: true,
+            isSelected: false,
           },
           {
             title: 'Goodyear',
@@ -218,7 +218,7 @@ export const filterTypeMap: Record<FilterContentTypes, CatalogFilterTypes> = {
             flair: null,
             description: 'Made with embedded metal studs for traction on ice',
             count: 58,
-            isSelected: true,
+            isSelected: false,
           },
           {
             title: 'Studdable',
@@ -248,7 +248,7 @@ export const filterTypeMap: Record<FilterContentTypes, CatalogFilterTypes> = {
             flair: null,
             description: null,
             count: 18,
-            isSelected: true,
+            isSelected: false,
           },
           {
             title: 'VSB - Vertical Serrated Band',
@@ -289,7 +289,7 @@ const filters = [
             flair: null,
             description: 'For snow, ice, and freezing temperatures',
             count: 12,
-            isSelected: true,
+            isSelected: false,
           },
           {
             title: 'Summer',

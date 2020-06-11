@@ -82,15 +82,7 @@ export function initListeners(props: Props) {
  * Adds `mouseup` listener to determine when mouse tracking listeners should be removed
  */
 export function handleMouseDown(props: Props, e: MouseEvent) {
-  const {
-    interval,
-    railMax,
-    railMin,
-    railEl,
-    railWidth,
-    sliderEl,
-    valueNow,
-  } = props;
+  const { interval, railMax, railMin, railEl, railWidth, sliderEl } = props;
   if (!sliderEl.current || !railEl.current) {
     return;
   }
@@ -107,8 +99,8 @@ export function handleMouseDown(props: Props, e: MouseEvent) {
       railMin.current +
       ((railMax.current - railMin.current) * diffX) / railWidth.current;
     // round to the nearest interval
-    valueNow.current = Math.round(currentValue / interval) * interval;
-    moveSlider(props, valueNow.current);
+    const value = Math.round(currentValue / interval) * interval;
+    moveSlider(props, value);
 
     e.preventDefault();
     e.stopPropagation();
@@ -183,7 +175,7 @@ function moveSlider(props: Props, value: number) {
   props.onChange(roundedVal);
 }
 
-function setNodeStyle({
+export function setNodeStyle({
   minEl,
   railEl,
   railMax,

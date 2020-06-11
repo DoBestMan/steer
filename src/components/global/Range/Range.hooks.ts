@@ -2,7 +2,12 @@ import { MutableRefObject, useEffect, useRef } from 'react';
 
 import { useWindowSize } from '~/hooks/useWindowSize';
 
-import { handleKeyDown, handleMouseDown, initListeners } from './Range.utils';
+import {
+  handleKeyDown,
+  handleMouseDown,
+  initListeners,
+  setNodeStyle,
+} from './Range.utils';
 
 interface SliderArgs {
   defaultValue?: number;
@@ -38,12 +43,16 @@ function useRangeSliderManager({
     valueNow,
   };
   useEffect(() => {
-    initListeners(handlerProps);
-
     if (rest.railEl.current) {
       // updates rail width if window is resized
       railWidth.current = rest.railEl.current.clientWidth;
     }
+    setNodeStyle(handlerProps);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [rest.railEl, width]);
+
+  useEffect(() => {
+    initListeners(handlerProps);
 
     () => {
       if (!sliderEl.current) {
@@ -62,8 +71,7 @@ function useRangeSliderManager({
     // triggered on mouse move, updating the values will cause use effect to run too often
     // possible TODO: update fill styles via DOM manipulation rather than repaint
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sliderEl, width]);
-
+  }, [sliderEl]);
   return {
     maxCurrent: railMax.current,
     minCurrent: railMin.current,

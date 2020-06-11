@@ -19,6 +19,7 @@ interface Props {
   minDefault?: number;
   minLabel?: string;
   name: string;
+  onChange?: (extrema: string, value: number) => void;
   size?: RANGE_SLIDER_SIZE;
 }
 
@@ -26,11 +27,12 @@ export default function Range({
   formatLabel,
   getAriaText,
   interval = 1,
-  minDefault,
-  maxDefault,
-  name,
   max,
+  maxDefault,
   min,
+  minDefault,
+  name,
+  onChange,
   size = RANGE_SLIDER_SIZE.REGULAR,
 }: Props) {
   const isSmall = size === RANGE_SLIDER_SIZE.SMALL;
@@ -51,6 +53,13 @@ export default function Range({
   function announceTextChange(value: number) {
     return (getAriaText && getAriaText(value)) || value.toString();
   }
+
+  useEffect(() => {
+    onChange && onChange('currentMax', maxCurrent);
+  }, [maxCurrent, onChange]);
+  useEffect(() => {
+    onChange && onChange('currentMin', minCurrent);
+  }, [minCurrent, onChange]);
 
   useEffect(() => {
     if (!railEl.current) {
@@ -80,7 +89,7 @@ export default function Range({
             interval={interval}
             max={max}
             onChange={handleMinChange}
-            defaultValue={minCurrent}
+            defaultValue={minDefault || min}
             label={`${name} ${ui('catalog.filters.min')}`}
             css={styles.minIndicator}
             size={size}
@@ -92,7 +101,7 @@ export default function Range({
             max={max}
             interval={interval}
             onChange={handleMaxChange}
-            defaultValue={maxCurrent}
+            defaultValue={maxDefault || max}
             label={`${name} ${ui('catalog.filters.max')}`}
             css={styles.maxIndicator}
             size={size}

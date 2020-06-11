@@ -12,7 +12,7 @@ interface Props {
   isAdvancedView?: boolean;
   isInternal?: boolean;
   location: string;
-  onToggle: () => void;
+  onToggleView: () => void;
   rearTireSize?: string;
   tireSize: string;
   title: string | ReactNode;
@@ -22,7 +22,7 @@ export default function HeaderInfo({
   isAdvancedView = false,
   isInternal = false,
   location,
-  onToggle,
+  onToggleView,
   rearTireSize,
   tireSize,
   title,
@@ -39,7 +39,7 @@ export default function HeaderInfo({
       icon={ICONS.CHEVRON_LEFT}
       iconPosition={LINK_ICON_POSITION.LEFT}
     >
-      {ui('catalog.header.allTiresLink')}
+      {ui('catalog.header.back')}
     </Link>
   ) : (
     <Link
@@ -89,7 +89,7 @@ export default function HeaderInfo({
         <span css={styles.label}>{ui('catalog.header.advancedViewLabel')}</span>
         <Toggle
           name={ui('catalog.header.advancedViewLabel')}
-          onToggle={onToggle}
+          onToggle={onToggleView}
           defaultChecked={isAdvancedView}
         />
       </div>

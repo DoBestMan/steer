@@ -6,19 +6,27 @@ import {
   CatalogFilterChecklistLarge,
   FilterContentTypes,
 } from '../Filter.types';
+import { ChildProps } from '../Popup/FilterPopup.utils';
 import styles from './FilterChecklist.styles';
 import largeStyles from './FilterChecklistLarge.styles';
 
 export default function FilterChecklist({
   filterGroups,
   label,
+  onChange,
   type,
-}: CatalogFilterChecklist | CatalogFilterChecklistLarge) {
+}: (CatalogFilterChecklist | CatalogFilterChecklistLarge) &
+  Pick<ChildProps, 'onChange'>) {
   const { greaterThan } = useBreakpoints();
   const lgStyles =
     greaterThan.M && type === FilterContentTypes.CatalogFilterChecklistLarge
       ? largeStyles
       : styles;
+
+  function handleChange(id: string) {
+    return (value: boolean) => onChange(label, id, value);
+  }
+
   return (
     <div>
       <h2 css={lgStyles.title}>{label}</h2>
@@ -27,7 +35,7 @@ export default function FilterChecklist({
           <h3 css={lgStyles.groupTitle}>{title}</h3>
           {items.map(({ count, description, id, isSelected, flair, title }) => (
             <div css={styles.container} key={id}>
-              <Checkbox defaultChecked={isSelected}>
+              <Checkbox onChange={handleChange(id)} defaultChecked={isSelected}>
                 <span css={styles.checkboxLabel}>
                   <span css={styles.containerLabel}>
                     <p css={lgStyles.label}>{title}</p>

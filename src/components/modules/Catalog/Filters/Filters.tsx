@@ -5,26 +5,27 @@ import { ui } from '~/lib/utils/ui-dictionary';
 
 import hStyles from '../Header.styles';
 import { FilterContentTypes } from './Filter.types';
+import { FiltersContextProps } from './Filters.context';
 import mockFilters from './Filters.mocks';
 import styles from './Filters.styles';
 import FilterPopup from './Popup/FilterPopup';
 
-interface Props {
-  activeFilters: string[];
+interface Props extends Pick<FiltersContextProps, 'createToggleFilterHandler'> {
+  activeFilters: FiltersContextProps['activeFilters'];
+  createToggleFilterHandler: FiltersContextProps['createToggleFilterHandler'];
   isAdvancedView?: boolean;
-  onClose: () => void;
-  onOpen: (filter: string) => () => void;
-  selectingFilter: string;
-  toggleFilter: (filter: string) => () => void;
+  onClose: FiltersContextProps['clearSelectingFilter'];
+  onOpen: FiltersContextProps['createOpenFilterHandler'];
+  selectingFilter: FiltersContextProps['selectingFilter'];
 }
 
 export default function Filters({
   activeFilters,
+  createToggleFilterHandler,
   isAdvancedView,
-  selectingFilter,
-  toggleFilter,
-  onOpen,
   onClose,
+  onOpen,
+  selectingFilter,
 }: Props) {
   return (
     <>
@@ -36,7 +37,7 @@ export default function Filters({
       >
         <div css={styles.filterList}>
           {mockFilters.map(({ label, ...filter }) => {
-            const isActive = activeFilters.includes(label);
+            const isActive = !!activeFilters[label];
             return filter.type !== FilterContentTypes.CatalogFilterToggle ? (
               // filter with dropdown
               <FilterButton
@@ -52,7 +53,6 @@ export default function Filters({
                 <FilterPopup
                   isOpen={label === selectingFilter}
                   onClose={onClose}
-                  onSelectFilter={toggleFilter(label)}
                   filter={{ ...filter, label }}
                 />
               </FilterButton>
@@ -61,7 +61,7 @@ export default function Filters({
                 css={styles.button}
                 key={label}
                 isActive={isActive}
-                onClick={toggleFilter(label)}
+                onClick={createToggleFilterHandler(label, !isActive)}
                 theme={isAdvancedView ? BUTTON_THEME.DARK : BUTTON_THEME.ORANGE}
               >
                 {label}

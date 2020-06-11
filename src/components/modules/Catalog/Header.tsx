@@ -1,60 +1,56 @@
-import { ReactNode, useState } from 'react';
+import { ReactNode } from 'react';
 
 import Filters from './Filters/Filters';
+import { useFiltersContext } from './Filters/Filters.context';
 import { filterRange, filterSort } from './Filters/Filters.mocks';
 import SubFilters from './Filters/SubFilters/SubFilters';
 import styles from './Header.styles';
 import HeaderInfo from './HeaderInfo/HeaderInfo';
 
 interface Props {
-  activeFilters?: string[];
   isAdvancedView?: boolean;
   isInternal?: boolean;
   location: string;
-  onToggle: () => void;
+  onToggleView: () => void;
   rearTireSize?: string;
+  resultsCount: number;
   tireSize: string;
   title: string | ReactNode;
-  toggleFilter: (filter: string) => void;
 }
 
 export default function Header({
-  activeFilters = [],
   isAdvancedView = false,
-  toggleFilter,
   isInternal = false,
+  resultsCount,
   ...rest
 }: Props) {
-  const [selectingFilter, setSelectingFilter] = useState('');
-  function clearSelectingFilter() {
-    setSelectingFilter('');
-  }
-  function selectFilterDropdown(label: string) {
-    return () => {
-      setSelectingFilter(label);
-    };
-  }
-  function onFilterClick(filter: string) {
-    return () => {
-      toggleFilter(filter);
-    };
-  }
+  const {
+    activeFilters,
+    clearSelectingFilter,
+    createOpenFilterHandler,
+    selectingFilter,
+    createToggleFilterHandler,
+  } = useFiltersContext();
 
   const commonProps = {
     activeFilters,
+    createToggleFilterHandler,
     onClose: clearSelectingFilter,
-    onOpen: selectFilterDropdown,
+    onOpen: createOpenFilterHandler,
     selectingFilter,
-    toggleFilter: onFilterClick,
   };
   return (
     <>
       <div css={[styles.root, isAdvancedView && styles.rootAdvanced]}>
-        <HeaderInfo {...{ isInternal }} {...rest} />
+        <HeaderInfo
+          isInternal={isInternal}
+          isAdvancedView={isAdvancedView}
+          {...rest}
+        />
         <Filters {...commonProps} isAdvancedView={isAdvancedView} />
       </div>
       <SubFilters
-        resultsCount={232}
+        resultsCount={resultsCount}
         priceFilter={filterRange}
         sortFilter={filterSort}
         {...commonProps}

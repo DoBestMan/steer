@@ -1,23 +1,27 @@
 import { ReactNode, useEffect, useRef, useState } from 'react';
 
-import Button from '~/components/global/Button/Button';
 import FocusTrap from '~/components/global/FocusTrap/FocusTrap';
 import { useScroll } from '~/hooks/useScroll';
 import { KEYCODES } from '~/lib/constants';
 
+import ActionBar from './ActionBar';
 import styles from './Dropdown.styles';
 import { getParentX, getParentY } from './Dropdown.utils';
-import { PopupProps } from './FilterPopup';
 
-interface Props extends PopupProps {
+interface Props {
   children: ReactNode;
+  hasActionBar: boolean;
+  isOpen: boolean;
+  onApplyFilters: () => void;
+  onClose: () => void;
 }
 
 export default function FilterDropdown({
   children,
+  hasActionBar,
   isOpen,
+  onApplyFilters,
   onClose,
-  onSelectFilter,
 }: Props) {
   const dropdownEl = useRef<HTMLDivElement | null>(null);
 
@@ -68,7 +72,7 @@ export default function FilterDropdown({
         {/* focus trap and dropdown wrapper need to be in dom to update positioning
         and focus but wait to render children until it's open */}
         {isOpen && children}
-        <Button onClick={onSelectFilter}>Toggle filter</Button>
+        {hasActionBar && <ActionBar onApplyFilters={onApplyFilters} />}
       </div>
     </FocusTrap>
   );

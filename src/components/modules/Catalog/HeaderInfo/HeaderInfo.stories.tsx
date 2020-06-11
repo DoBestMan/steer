@@ -62,7 +62,7 @@ export function HeaderInfoWithKnobs() {
         {...{
           isAdvancedView,
           location,
-          onToggle: () => setIsAdvancedView(!isAdvancedView),
+          onToggleView: () => setIsAdvancedView(!isAdvancedView),
           rearTireSize,
           tireSize,
           title: titleEl,
@@ -84,7 +84,7 @@ export function HeaderInfoMain() {
       <HeaderInfo
         {...defaultProps}
         isAdvancedView={isAdvancedView}
-        onToggle={toggleView}
+        onToggleView={toggleView}
         title={defaultTitle}
       />
     </HeaderContainer>
@@ -102,7 +102,7 @@ export function HeaderInfoWithoutRearTireSize() {
     <HeaderContainer isAdvancedView={isAdvancedView}>
       <HeaderInfo
         {...defaultProps}
-        onToggle={toggleView}
+        onToggleView={toggleView}
         title={defaultTitle}
         rearTireSize={undefined}
       />
@@ -122,7 +122,7 @@ export function HeaderInfoInternal() {
       <HeaderInfo
         {...defaultProps}
         isInternal
-        onToggle={toggleView}
+        onToggleView={toggleView}
         title={defaultTitle}
       />
     </HeaderContainer>
@@ -138,7 +138,7 @@ export function HeaderInfoAdvancedView() {
     <HeaderContainer isAdvancedView={isAdvancedView}>
       <HeaderInfo
         {...defaultProps}
-        onToggle={toggleView}
+        onToggleView={toggleView}
         title={defaultTitle}
         isAdvancedView={isAdvancedView}
       />

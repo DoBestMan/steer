@@ -64,7 +64,7 @@ function buildLinks({
 }
 
 // Exported for testing only
-export function useContextSetup() {
+export function useNavContextSetup() {
   const [isSubNavOpen, setIsSubNavOpen] = useState(false);
   const [activeLink, setActiveLink] = useState('');
   const [activeCategory, setActiveCategory] = useState('');
@@ -110,7 +110,7 @@ export function useContextSetup() {
 }
 
 export function NavContextProvider({ children }: { children: ReactNode }) {
-  const value = useContextSetup();
+  const value = useNavContextSetup();
   return <NavContext.Provider value={value}>{children}</NavContext.Provider>;
 }
 

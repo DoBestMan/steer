@@ -2,14 +2,25 @@ import { ReactNode } from 'react';
 
 import BottomCardModal from '~/components/global/Modal/BottomCardModal';
 
-import { PopupProps } from './FilterPopup';
+import ActionBar from './ActionBar';
 
-interface Props extends PopupProps {
+interface Props {
   children: ReactNode;
   contentLabel: string;
+  hasActionBar: boolean;
+  isOpen: boolean;
+  onApplyFilters: () => void;
+  onClose: () => void;
 }
 
-function FilterModal({ children, contentLabel, isOpen, onClose }: Props) {
+function FilterModal({
+  children,
+  contentLabel,
+  hasActionBar,
+  isOpen,
+  onApplyFilters,
+  onClose,
+}: Props) {
   return (
     <BottomCardModal
       contentLabel={contentLabel}
@@ -17,6 +28,7 @@ function FilterModal({ children, contentLabel, isOpen, onClose }: Props) {
       onClose={onClose}
     >
       {children}
+      {hasActionBar && <ActionBar onApplyFilters={onApplyFilters} />}
     </BottomCardModal>
   );
 }

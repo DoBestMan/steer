@@ -1,59 +1,22 @@
-import { MouseEvent } from 'react';
-
-import { useBreakpoints } from '~/hooks/useBreakpoints';
-
-import FilterChecklist from '../Content/FilterChecklist';
-import FilterRange from '../Content/FilterRange';
-import FilterSort from '../Content/FilterSort';
-import {
-  CatalogFilterChecklist,
-  CatalogFilterChecklistLarge,
-  CatalogFilterRange,
-  CatalogFilterSort,
-  CatalogFilterTypes,
-  FilterContentTypes,
-} from '../Filter.types';
+import { CatalogFilterTypes, FilterContentTypes } from '../Filter.types';
+import { useFiltersContext } from '../Filters.context';
 import FilterDropdown from './Dropdown';
 import FilterModal from './FilterModal';
+import useFilterPopup from './FilterPopup.hooks';
+import { mapTypeToContent } from './FilterPopup.utils';
 
-export interface PopupProps {
+interface Props {
+  filter: CatalogFilterTypes;
   isOpen: boolean;
   onClose: () => void;
-  onSelectFilter: (e: MouseEvent) => void;
 }
-
-interface Props extends PopupProps {
-  filter: CatalogFilterTypes;
-}
-
-// have to pass in `isLarge` otherwise if children components rely on bk styles
-// there will be a flash due to the default being S breakpoint
-const mapTypeToContent: Record<
-  FilterContentTypes,
-  (props: CatalogFilterTypes, isLarge: boolean) => JSX.Element | null
-> = {
-  [FilterContentTypes.CatalogFilterChecklist](props: CatalogFilterTypes) {
-    return <FilterChecklist {...(props as CatalogFilterChecklist)} />;
-  },
-  [FilterContentTypes.CatalogFilterChecklistLarge](props: CatalogFilterTypes) {
-    return <FilterChecklist {...(props as CatalogFilterChecklistLarge)} />;
-  },
-  [FilterContentTypes.CatalogFilterRange](props: CatalogFilterTypes) {
-    return <FilterRange {...(props as CatalogFilterRange)} />;
-  },
-  [FilterContentTypes.CatalogFilterSort](
-    props: CatalogFilterTypes,
-    isLarge: boolean,
-  ) {
-    return <FilterSort {...(props as CatalogFilterSort)} isLarge={isLarge} />;
-  },
-  [FilterContentTypes.CatalogFilterToggle]() {
-    return null;
-  },
-};
 
 export default function FilterPopup({ filter, ...props }: Props) {
-  const { greaterThan } = useBreakpoints();
+  const { createApplyFiltersHandler } = useFiltersContext();
+  const hasActionBar = filter.type !== FilterContentTypes.CatalogFilterSort;
+  const { filtersToApply, ...childProps } = useFilterPopup({
+    createApplyFiltersHandler,
+  });
 
   if (filter.type === FilterContentTypes.CatalogFilterToggle) {
     return null;
@@ -61,18 +24,27 @@ export default function FilterPopup({ filter, ...props }: Props) {
 
   if (
     filter.type !== FilterContentTypes.CatalogFilterChecklistLarge &&
-    greaterThan.M
+    childProps.isLarge
   ) {
     return (
-      <FilterDropdown {...props}>
-        {mapTypeToContent[filter.type](filter, greaterThan.M)}
+      <FilterDropdown
+        hasActionBar={hasActionBar}
+        onApplyFilters={createApplyFiltersHandler(filtersToApply)}
+        {...props}
+      >
+        {mapTypeToContent[filter.type]({ filter, ...childProps })}
       </FilterDropdown>
     );
   }
 
   return (
-    <FilterModal contentLabel={filter.label} {...props}>
-      {mapTypeToContent[filter.type](filter, greaterThan.M)}
+    <FilterModal
+      hasActionBar={hasActionBar}
+      onApplyFilters={createApplyFiltersHandler(filtersToApply)}
+      contentLabel={filter.label}
+      {...props}
+    >
+      {mapTypeToContent[filter.type]({ filter, ...childProps })}
     </FilterModal>
   );
 }

@@ -31,11 +31,12 @@
       "sortBy": "Sort by",
       "priceRangeLabel": "Price Range",
       "priceRange": "{{min}} to {{max}}",
-      "results": "{{number}} results"
+      "results": "{{number}} results",
+      "apply": "Apply"
     },
     "header": {
       "advancedViewLabel": "Advanced view",
-      "allTiresLink": "All tires",
+      "back": "Back",
       "dealsFor": "Deals for",
       "filterLabel": "Filter by",
       "rear": "Rear {{rearTireSize}}",

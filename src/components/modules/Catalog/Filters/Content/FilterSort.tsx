@@ -1,19 +1,35 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import Radio from '~/components/global/Radio/Radio';
 
 import { CatalogFilterSort } from '../Filter.types';
+import { useFiltersContext } from '../Filters.context';
+import { ChildProps } from '../Popup/FilterPopup.utils';
 import styles from './FilterSort.styles';
 
-interface Props extends CatalogFilterSort {
-  isLarge: boolean;
-}
-
-export default function FilterSort({ isLarge, items, label }: Props) {
+export default function FilterSort({
+  applyFilter,
+  isLarge,
+  items,
+  label,
+}: CatalogFilterSort & Pick<ChildProps, 'applyFilter' | 'isLarge'>) {
   const [activeValue, setActiveValue] = useState('');
+  const { createToggleFilterHandler } = useFiltersContext();
   function updateValue(value: string) {
-    setActiveValue(value);
+    return () => {
+      setActiveValue(value);
+      createToggleFilterHandler(label, value)();
+    };
   }
+
+  const prevActiveFilter = useRef(activeValue);
+  useEffect(() => {
+    if (activeValue !== prevActiveFilter.current) {
+      applyFilter();
+    }
+    prevActiveFilter.current = activeValue;
+  }, [activeValue, applyFilter]);
+
   return (
     <>
       <h3 css={styles.title}>{label}</h3>
@@ -22,7 +38,7 @@ export default function FilterSort({ isLarge, items, label }: Props) {
           <li key={id}>
             {!isLarge ? (
               <Radio
-                onChange={updateValue}
+                onChange={updateValue(id)}
                 name={title}
                 value={id}
                 activeValue={activeValue}
@@ -37,7 +53,7 @@ export default function FilterSort({ isLarge, items, label }: Props) {
                 </span>
               </Radio>
             ) : (
-              <button css={styles.button}>
+              <button onClick={updateValue(id)} css={styles.button}>
                 <span>
                   <p css={styles.label}>{title}</p>
                   {flair && <p css={styles.flair}>{flair}</p>}

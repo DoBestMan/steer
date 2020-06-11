@@ -1,14 +1,13 @@
-import { useBreakpoints } from '~/hooks/useBreakpoints';
+import { action } from '@storybook/addon-actions';
 
 import {
   CatalogFilterChecklist,
   CatalogFilterChecklistLarge,
   FilterContentTypes,
 } from '../Filter.types';
-import { filterRange, filterSort, filterTypeMap } from '../Filters.mocks';
+import { filterRange, filterTypeMap } from '../Filters.mocks';
 import FilterChecklist from './FilterChecklist';
 import FilterRange from './FilterRange';
-import FilterSort from './FilterSort';
 
 export default {
   component: FilterContentChecklist,
@@ -21,6 +20,7 @@ export function FilterContentChecklist() {
       {...(filterTypeMap[
         FilterContentTypes.CatalogFilterChecklist
       ] as CatalogFilterChecklist)}
+      onChange={action('Add filter')}
     />
   );
 }
@@ -31,15 +31,11 @@ export function FilterContentChecklistLarge() {
       {...(filterTypeMap[
         FilterContentTypes.CatalogFilterChecklistLarge
       ] as CatalogFilterChecklistLarge)}
+      onChange={action('Add filter')}
     />
   );
 }
 
 export function FilterContentRange() {
-  return <FilterRange {...filterRange} />;
-}
-
-export function FilterContentSort() {
-  const { greaterThan } = useBreakpoints();
-  return <FilterSort isLarge={greaterThan.M} {...filterSort} />;
+  return <FilterRange {...filterRange} onChange={action('Add filter')} />;
 }

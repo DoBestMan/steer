@@ -4,10 +4,10 @@ import { mocked } from 'ts-jest/utils';
 
 import { NAV_TARGETS } from '~/components/modules/Nav/Nav.types';
 
-import { useContextSetup } from './Nav.context';
+import { useNavContextSetup } from './Nav.context';
 import * as UserPersonalizationContextUtils from './UserPersonalization.context';
 
-describe('useContextSetup', () => {
+describe('useNavContextSetup', () => {
   beforeEach(() => {
     jest
       .spyOn(UserPersonalizationContextUtils, 'useUserPersonalizationContext')
@@ -19,7 +19,7 @@ describe('useContextSetup', () => {
   });
 
   test('updating active link', () => {
-    const { result } = renderHook(() => useContextSetup());
+    const { result } = renderHook(() => useNavContextSetup());
 
     act(() => {
       const handler = result.current.createSelectLinkHandler({
@@ -34,7 +34,7 @@ describe('useContextSetup', () => {
   });
 
   test('updating tire category', () => {
-    const { result } = renderHook(() => useContextSetup());
+    const { result } = renderHook(() => useNavContextSetup());
 
     act(() => {
       result.current.createSelectCategoryHandler('category')();
@@ -45,7 +45,7 @@ describe('useContextSetup', () => {
   });
 
   test('clearing tire category', () => {
-    const { result } = renderHook(() => useContextSetup());
+    const { result } = renderHook(() => useNavContextSetup());
 
     act(() => {
       result.current.handleClearCategory();
@@ -56,7 +56,7 @@ describe('useContextSetup', () => {
   });
 
   test('clearing active link', () => {
-    const { result } = renderHook(() => useContextSetup());
+    const { result } = renderHook(() => useNavContextSetup());
 
     act(() => {
       result.current.handleClearLink();
@@ -66,7 +66,7 @@ describe('useContextSetup', () => {
   });
 
   test('closing subnav clears link and category', () => {
-    const { result } = renderHook(() => useContextSetup());
+    const { result } = renderHook(() => useNavContextSetup());
 
     act(() => {
       const handler = result.current.createSelectLinkHandler({
@@ -84,7 +84,7 @@ describe('useContextSetup', () => {
   });
 
   test('navigating back from a link should clear the active link', () => {
-    const { result } = renderHook(() => useContextSetup());
+    const { result } = renderHook(() => useNavContextSetup());
 
     act(() => {
       result.current.toggleSubNav();
@@ -94,7 +94,7 @@ describe('useContextSetup', () => {
   });
 
   test('creating links - no personalization data', () => {
-    const { result } = renderHook(() => useContextSetup());
+    const { result } = renderHook(() => useNavContextSetup());
 
     expect(result.current.links).toEqual(
       expect.arrayContaining([
@@ -124,7 +124,7 @@ describe('useContextSetup', () => {
         },
       },
     });
-    const { result } = renderHook(() => useContextSetup());
+    const { result } = renderHook(() => useNavContextSetup());
 
     expect(result.current.links).toEqual(
       expect.arrayContaining([
