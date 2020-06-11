@@ -72,7 +72,7 @@ function Feedback() {
     <div css={styles.container}>
       <Icon name={icon} css={styles.icon} />
       <h3 css={styles.label}>
-        <Markdown>{label}</Markdown>
+        <Markdown renderers={{ paragraph: 'span' }}>{label}</Markdown>
       </h3>
 
       <div css={styles.buttonContainer}>

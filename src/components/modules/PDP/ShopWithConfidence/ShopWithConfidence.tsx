@@ -37,7 +37,9 @@ function ShopWithConfidence() {
             <div key={item.heading}>
               <span css={styles.statHeading}>{item.heading}</span>
               <span css={styles.statDetail}>
-                <Markdown>{item.detail}</Markdown>
+                <Markdown renderers={{ paragraph: 'span' }}>
+                  {item.detail}
+                </Markdown>
               </span>
             </div>
           ))}

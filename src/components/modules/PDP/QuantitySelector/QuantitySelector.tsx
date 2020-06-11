@@ -59,7 +59,7 @@ function QuantitySelector({
         <h2 css={styles.title}>{ui('pdp.quantitySelector.title')}</h2>
 
         <h3 css={styles.subtitle}>
-          <Markdown>{cta}</Markdown>
+          <Markdown renderers={{ paragraph: 'span' }}>{cta}</Markdown>
         </h3>
         <div css={[styles.copy, isIntercept && styles.copyConfirmation]}>
           <Markdown>{copy}</Markdown>

@@ -166,7 +166,7 @@ function HomeHeader({
                   </div>
                 )}
                 <h1 css={titleStyles}>
-                  <Markdown>{title}</Markdown>
+                  <Markdown renderers={{ paragraph: 'span' }}>{title}</Markdown>
                 </h1>
 
                 <div css={descriptionStyles}>

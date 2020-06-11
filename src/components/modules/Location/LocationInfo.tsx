@@ -9,7 +9,9 @@ function LocationInfo() {
   return (
     <div css={styles.infoContainer}>
       <p>
-        <Markdown>{ui('location.locationInfo')}</Markdown>
+        <Markdown renderers={{ paragraph: 'span' }}>
+          {ui('location.locationInfo')}
+        </Markdown>
         {/* TODO: update link when available */}
         <Link theme={LINK_THEME.LIGHT} href="/#" css={styles.infoLink}>
           {ui('location.learnMoreLabel')}
