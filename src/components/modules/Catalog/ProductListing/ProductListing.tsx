@@ -22,6 +22,7 @@ function ProductListing({
   images,
   isHighlighted,
   link,
+  loadSpeedRating,
   name,
   rating,
 }: ProductListingProps) {
@@ -50,7 +51,7 @@ function ProductListing({
         {attribute && <span css={styles.attribute}>{attribute}</span>}
         <h3 css={styles.subcopy}>
           <BaseLink css={styles.linkText} href={link.href}>
-            {name}
+            {name} {loadSpeedRating}
           </BaseLink>
         </h3>
         {rating && (

@@ -101,6 +101,7 @@ export function ProductListingWithKnobs() {
           defaultImage={PRODUCT_IMAGE_TYPES.SIDEWALL}
           highlight={text('Highlight', 'best seller')}
           link={{ href: '/', isExternal: false }}
+          loadSpeedRating={text('Load/Speed rating', '91H')}
           name={text('Name', 'FT140')}
           priceList={mockPriceList}
           promotionList={{
@@ -139,6 +140,7 @@ export function FilteredProductListing() {
           }}
           defaultImage={PRODUCT_IMAGE_TYPES.SIDEWALL}
           link={{ href: '/', isExternal: false }}
+          loadSpeedRating="91H"
           name="FT140"
           promotionList={{ count: 0, list: [] }}
           priceList={mockPriceList}
@@ -168,6 +170,7 @@ export function HighlightedProductListing() {
           }}
           defaultImage={PRODUCT_IMAGE_TYPES.SIDEWALL}
           link={{ href: '/', isExternal: false }}
+          loadSpeedRating="91H"
           name="FT140"
           promotionList={{ count: 0, list: [] }}
           priceList={mockPriceList}

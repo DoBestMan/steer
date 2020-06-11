@@ -23,6 +23,7 @@ export interface ProductListingProps {
   }[];
   isHighlighted?: boolean;
   link: SiteLink;
+  loadSpeedRating: string;
   name: string;
   priceList: {
     label: string | null;
