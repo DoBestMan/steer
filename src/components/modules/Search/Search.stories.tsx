@@ -3,6 +3,7 @@ import { boolean } from '@storybook/addon-knobs';
 import { useState } from 'react';
 
 import Button from '~/components/global/Button/Button';
+import { SearchDataParams } from '~/lib/api/search';
 
 import AdditionalInfoModal from './AdditionalInfoModal/AdditionalInfoModal';
 import {
@@ -47,7 +48,6 @@ function getCategoryResults(category: string) {
 
 const handleCloseSearchClick = action('Close search');
 const handleClearSearchesClick = action('Clear searches');
-const handleSetSearchCategory = action('Set search category');
 const handleSearchQuery = action('Search for query');
 
 export function PastSearchResults() {
@@ -63,7 +63,6 @@ export function PastSearchResults() {
       onClearSearchesClick={clearSearches}
       onCloseSearchClick={handleCloseSearchClick}
       onSearchQuery={handleSearchQuery}
-      onSetSearchCategory={handleSetSearchCategory}
       pastSearches={pastSearches}
       results={simpleSearchResults}
     />
@@ -77,7 +76,6 @@ export function SearchResultsRegular() {
       onClearSearchesClick={handleClearSearchesClick}
       onCloseSearchClick={handleCloseSearchClick}
       onSearchQuery={handleSearchQuery}
-      onSetSearchCategory={handleSetSearchCategory}
       pastSearches={[]}
       results={simpleSearchResults}
     />
@@ -91,7 +89,6 @@ export function SearchResultsPartNumber() {
       onClearSearchesClick={handleClearSearchesClick}
       onCloseSearchClick={handleCloseSearchClick}
       onSearchQuery={handleSearchQuery}
-      onSetSearchCategory={handleSetSearchCategory}
       pastSearches={[]}
       results={partNumberResults}
     />
@@ -105,7 +102,6 @@ export function SearchResultsTireSize() {
       onClearSearchesClick={handleClearSearchesClick}
       onCloseSearchClick={handleCloseSearchClick}
       onSearchQuery={handleSearchQuery}
-      onSetSearchCategory={handleSetSearchCategory}
       pastSearches={[]}
       results={tireSizeResults}
     />
@@ -114,8 +110,8 @@ export function SearchResultsTireSize() {
 
 export function SearchBy() {
   const [results, setResults] = useState(noSearchResults);
-  const handleSetSearchCategory = (category: string) => {
-    const categoryResults = getCategoryResults(category);
+  const searchQuery = ({ queryType }: SearchDataParams) => {
+    const categoryResults = getCategoryResults(queryType);
     setResults(categoryResults);
   };
 
@@ -124,8 +120,7 @@ export function SearchBy() {
       isCustomerServiceEnabled={boolean('Is Business Hours', true)}
       onClearSearchesClick={handleClearSearchesClick}
       onCloseSearchClick={handleCloseSearchClick}
-      onSearchQuery={handleSearchQuery}
-      onSetSearchCategory={handleSetSearchCategory}
+      onSearchQuery={searchQuery}
       pastSearches={[]}
       results={results}
     />
@@ -175,7 +170,6 @@ export function NoResultsNoSuggestions() {
       onClearSearchesClick={handleClearSearchesClick}
       onCloseSearchClick={handleCloseSearchClick}
       onSearchQuery={handleSearchQuery}
-      onSetSearchCategory={handleSetSearchCategory}
       pastSearches={[]}
       results={noSearchResults}
     />
@@ -189,7 +183,6 @@ export function NoResultsWithSuggestions() {
       onClearSearchesClick={handleClearSearchesClick}
       onCloseSearchClick={handleCloseSearchClick}
       onSearchQuery={handleSearchQuery}
-      onSetSearchCategory={handleSetSearchCategory}
       pastSearches={[]}
       results={noResultsWithSuggestions}
     />

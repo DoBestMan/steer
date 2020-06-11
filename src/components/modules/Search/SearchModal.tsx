@@ -21,7 +21,6 @@ function SearchModal() {
   const handleClearSearchesClick = function () {
     setPastSearches([]);
   };
-  const handleSetSearchCategory = () => {};
 
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -52,7 +51,6 @@ function SearchModal() {
         onClearSearchesClick={handleClearSearchesClick}
         onCloseSearchClick={toggleIsSearchOpen}
         onSearchQuery={searchQuery}
-        onSetSearchCategory={handleSetSearchCategory}
         pastSearches={pastSearches}
         results={searchResults}
       />

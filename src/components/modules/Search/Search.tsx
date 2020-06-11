@@ -24,7 +24,6 @@ interface Props {
   onClearSearchesClick: () => void;
   onCloseSearchClick: () => void;
   onSearchQuery: ({ queryText, queryType }: SearchDataParams) => void;
-  onSetSearchCategory: (category: string) => void;
   pastSearches: SiteSearchResultTextItem[];
   results: Results;
 }
@@ -34,7 +33,6 @@ function Search({
   isCustomerServiceEnabled,
   onClearSearchesClick,
   onCloseSearchClick,
-  onSetSearchCategory,
   pastSearches,
   forwardedRef,
   results,
@@ -78,7 +76,6 @@ function Search({
     // Reset the search category when search cleared with no query.
     if (!queryText) {
       setSearchState('');
-      onSetSearchCategory('');
     }
   };
 
@@ -102,25 +99,30 @@ function Search({
         setSecondaryQueryText(action.queryText);
       }
 
-      setQueryType(action.queryType);
-      onSearchQuery({
-        queryText: action.queryText,
-        queryType: action.queryType,
-      });
-    } else if (action.type === SearchActionType.LINK) {
-      // TODO
+      handleSearchQuery(searchResult);
     }
   };
 
-  // We need to set the search state internally for UI purposes, but also
-  // externally in order to update the search results.
   const handleSearchCategoryClick = (searchResult: SearchResult) => {
     const category =
       searchResult.action.type === SearchActionType.QUERY
         ? searchResult.action.queryType
         : '';
     setSearchState(category);
-    onSetSearchCategory(category);
+
+    handleSearchQuery(searchResult);
+  };
+
+  const handleSearchQuery = (searchResult: SearchResult) => {
+    const { action } = searchResult;
+
+    if (action.type === SearchActionType.QUERY) {
+      setQueryType(action.queryType);
+      onSearchQuery({
+        queryText: action.queryText,
+        queryType: action.queryType,
+      });
+    }
   };
 
   const handlePastSearchClick = () => {};
