@@ -89,7 +89,7 @@ const styles: CSSObject = {
   },
   root: {
     '&:hover': {
-      backgroundColor: COLORS.LIGHT.OFF_WHITE,
+      borderColor: COLORS.GLOBAL.ORANGE,
     },
 
     alignItems: 'center',
