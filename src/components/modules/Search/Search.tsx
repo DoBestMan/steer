@@ -1,9 +1,10 @@
-import { RefObject, useState } from 'react';
+import { RefObject, useCallback, useState } from 'react';
 
 import { SiteSearchResultTextItem } from '~/data/models/SiteSearchResultTextItem';
 import { SearchDataParams } from '~/lib/api/search';
 import { TIME } from '~/lib/constants';
 import { scrollTo } from '~/lib/helpers/scroll';
+import debounce from '~/lib/utils/debounce';
 
 import InitialSearch from './InitialSearch';
 import styles from './Search.styles';
@@ -45,6 +46,12 @@ function Search({
   const [activeInputType, setActiveInputType] = useState(
     SearchInputEnum.PRIMARY,
   );
+  const delayedSearch = useCallback(
+    debounce(({ queryText, queryType }) => {
+      onSearchQuery({ queryText, queryType });
+    }, 200),
+    [],
+  );
 
   const { resultMetadata, siteSearchResultGroupList } = results;
   const { noExactMatch } = resultMetadata;
@@ -64,7 +71,7 @@ function Search({
       setSecondaryQueryText(input);
     }
 
-    onSearchQuery({ queryText: input, queryType });
+    delayedSearch({ queryText: input, queryType });
   };
 
   const onCancelSelection = () => {
