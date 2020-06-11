@@ -131,7 +131,14 @@ const styles = {
     alignItems: 'center',
     display: 'flex',
     [MQ.S]: typography.jumboHeadline,
-    [MQ.M]: typography.primaryHeadline,
+    [MQ.M]: [
+      typography.primaryHeadline,
+      {
+        '&:hover': {
+          color: COLORS.GLOBAL.ORANGE,
+        },
+      },
+    ],
   }),
   link: typography.bodyCopy,
   linkLabel: css({
