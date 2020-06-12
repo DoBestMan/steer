@@ -1,7 +1,7 @@
 import { CSSObject } from '@emotion/core';
 import { action } from '@storybook/addon-actions';
 import { boolean, number } from '@storybook/addon-knobs';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Button from '~/components/global/Button/Button';
 import HorizontalNumberPicker from '~/components/global/HorizontalNumberPicker/HorizontalNumberPicker';
@@ -39,22 +39,32 @@ export function QuantitySelectorDefault() {
   function toggleModal() {
     setIsOpen(!isOpen);
   }
+  const isFrontAndRear = boolean('Display Front and Rear', false);
+
+  const [primaryQuantity, setPrimaryQuantity] = useState(2);
+  const [secondaryQuantity, setSecondaryQuantity] = useState(2);
 
   const hasIcon = boolean('Display Icon', true);
-  const isFrontAndRear = boolean('Display Front and Rear', false);
   const handleInterceptAction = action('number-picker-selection');
   const shouldIntercept = boolean('Display Intercept', false);
   const quantityToIntercep = number('Quantity to Intercept', 3);
 
-  const handleSelectSecondaryPicker = (value: number) => {
+  const handleSelectSecondaryPicker = (value: number, index: number) => {
     setSecondaryPrice(String(value * 100));
+    setSecondaryQuantity(index);
   };
-  const handleSelectPrimaryPicker = (value: number) => {
+  const handleSelectPrimaryPicker = (value: number, index: number) => {
     setPrimaryPrice(String(value * 100));
+    setPrimaryQuantity(index);
   };
 
-  const primarySelection = number('Primary Selection', 2);
-  const secondarySelection = number('Secondary Selection', 1);
+  const shouldDisableButton = primaryQuantity === 0 && secondaryQuantity === 0;
+
+  useEffect(() => {
+    setDefaultSelectedIndex(isFrontAndRear ? 2 : 4);
+  }, [isFrontAndRear]);
+
+  const [defaultSelectedIndex, setDefaultSelectedIndex] = useState(2);
 
   return (
     <>
@@ -62,6 +72,7 @@ export function QuantitySelectorDefault() {
 
       <QuantitySelector
         hasIcon={hasIcon}
+        isButtonDisabled={shouldDisableButton}
         isIntercept={shouldIntercept}
         isOpen={isOpen}
         onClose={toggleModal}
@@ -70,7 +81,7 @@ export function QuantitySelectorDefault() {
         quantityToIntercept={quantityToIntercep}
       >
         <HorizontalNumberPicker
-          selectedIndex={primarySelection}
+          selectedIndex={defaultSelectedIndex}
           customCarouselStyles={styles.carouselStyles as CSSObject}
           {...(isFrontAndRear && {
             customContainerStyles: { marginBottom: SPACING.SIZE_30 },
@@ -87,7 +98,7 @@ export function QuantitySelectorDefault() {
 
         {isFrontAndRear && (
           <HorizontalNumberPicker
-            selectedIndex={secondarySelection}
+            selectedIndex={defaultSelectedIndex}
             customCarouselStyles={styles.carouselStyles as CSSObject}
             numbers={QUANTITY_SELECTOR_CONSTANTS.PICKER_NUMBERS}
             onSelect={handleSelectSecondaryPicker}

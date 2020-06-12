@@ -127,15 +127,15 @@
     "quantitySelector": {
       "modalLabel": "Select a quantity",
       "confirmButtonLabel": "Confirm",
-      "copy": "Most drivers replace 4 tires.<br />If you had a flat tire, replace at least two.",
+      "copy": "Most drivers replace 4 tires. <br />If you had a flat tire, replace at least two.",
       "copyConfirmation": "Having tires with the same wear on the axle guarantees a <br />safer and more efficient performance.",
       "confirmationSubtitle": "Are you sure? <br />Replacing 4 is better for safety",
-      "subtitle": "Replace tires in pairs for better<br />traction and braking",
+      "subtitle": "Replace tires in pairs for better <br />traction and braking",
       "singleTireQtyTitle": "Select tire quantity",
       "totalPrice": "Total price",
       "changeQuantity": "Change to {{quantity}} tires",
       "keepQuantity": "Keep {{quantity}} tires",
-      "cta": "Replace tires in pairs for better<br />traction and braking",
+      "cta": "Replace tires in pairs for better <br />traction and braking",
       "title": "PRO tip"
     },
     "reviews": {

@@ -14,6 +14,7 @@ import styles from './QuantitySelector.styles';
 interface Props {
   children: ReactNode;
   hasIcon?: boolean;
+  isButtonDisabled?: boolean;
   isIntercept?: boolean;
   isOpen: boolean;
   onClose: () => void;
@@ -25,6 +26,7 @@ interface Props {
 function QuantitySelector({
   children,
   hasIcon = true,
+  isButtonDisabled = false,
   isIntercept = false,
   isOpen,
   onClose,
@@ -92,6 +94,7 @@ function QuantitySelector({
             </>
           ) : (
             <Button
+              isDisabled={isButtonDisabled}
               css={styles.button}
               onClick={onConfirm}
               theme={BUTTON_THEME.LIGHT}

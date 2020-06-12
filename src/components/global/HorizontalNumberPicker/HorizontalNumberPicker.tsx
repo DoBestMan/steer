@@ -9,7 +9,7 @@ interface Props {
   customCarouselStyles?: CSSObject;
   customContainerStyles?: CSSObject;
   numbers: number[];
-  onSelect?: (value: number) => void;
+  onSelect?: (value: number, index: number) => void;
   selectedIndex?: number;
   subTitle?: string | JSX.Element;
   title: string;
@@ -28,7 +28,7 @@ function HorizontalNumberPicker({
 
   useEffect(() => {
     if (onSelect) {
-      onSelect(numbers[selectedItemIndex]);
+      onSelect(numbers[selectedItemIndex], selectedItemIndex);
     }
   }, [numbers, onSelect, selectedItemIndex]);
 
