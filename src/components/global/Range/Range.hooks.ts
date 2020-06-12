@@ -16,12 +16,14 @@ interface SliderArgs {
   min?: number;
   onChange: (value: number) => void;
   railEl: MutableRefObject<HTMLDivElement | null>;
+  shouldReset?: boolean;
   sliderEl: MutableRefObject<HTMLDivElement | null>;
 }
 function useRangeSliderManager({
   defaultValue = 0,
-  min = 0,
   max = 5,
+  min = 0,
+  shouldReset,
   sliderEl,
   ...rest
 }: SliderArgs) {
@@ -42,6 +44,12 @@ function useRangeSliderManager({
     sliderEl,
     valueNow,
   };
+  useEffect(() => {
+    valueNow.current = defaultValue;
+    setNodeStyle(handlerProps);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [shouldReset]);
+
   useEffect(() => {
     if (rest.railEl.current) {
       // updates rail width if window is resized

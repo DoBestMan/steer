@@ -110,6 +110,7 @@ const styles = {
       margin: 'auto',
       maxHeight: `calc(100vh - ${GRID_MARGIN.M}px)`,
       maxWidth: OVERLAY_PANEL_WIDTH,
+      minWidth: 400,
       position: 'relative',
       top: '50%',
       transform: 'translateY(-50%)',

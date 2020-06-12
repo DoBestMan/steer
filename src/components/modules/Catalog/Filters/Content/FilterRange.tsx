@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import Range from '~/components/global/Range/Range';
 import { ui } from '~/lib/utils/ui-dictionary';
@@ -14,13 +14,16 @@ import styles from './FilterRange.styles';
 export default function FilterRange({
   currentMax = 0,
   currentMin = 0,
+  filtersToApply,
   label,
   maxValue,
   minValue,
   onChange,
   step,
   unit,
-}: CatalogFilterRange & Pick<ChildProps, 'onChange'>) {
+}: CatalogFilterRange & Pick<ChildProps, 'onChange' | 'filtersToApply'>) {
+  const [shouldReset, setShouldReset] = useState(false);
+  const filterGroup = filtersToApply[label];
   const handleChange = useCallback(
     (extrema: string, value: number) => {
       onChange(label, extrema, value);
@@ -28,6 +31,12 @@ export default function FilterRange({
     [label, onChange],
   );
 
+  useEffect(() => {
+    if (!filterGroup) {
+      return setShouldReset(true);
+    }
+    setShouldReset(false);
+  }, [filterGroup]);
   return (
     <div css={styles.root}>
       <h3 css={styles.title}>{label}</h3>
@@ -38,6 +47,7 @@ export default function FilterRange({
         interval={step}
         onChange={handleChange}
         max={maxValue}
+        shouldReset={shouldReset}
         min={minValue}
         maxDefault={currentMax || maxValue}
         minDefault={currentMin || minValue}

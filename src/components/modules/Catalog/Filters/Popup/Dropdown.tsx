@@ -14,6 +14,7 @@ interface Props {
   isOpen: boolean;
   onApplyFilters: () => void;
   onClose: () => void;
+  onResetFilters: () => void;
 }
 
 export default function FilterDropdown({
@@ -22,6 +23,7 @@ export default function FilterDropdown({
   isOpen,
   onApplyFilters,
   onClose,
+  onResetFilters,
 }: Props) {
   const dropdownEl = useRef<HTMLDivElement | null>(null);
 
@@ -47,10 +49,10 @@ export default function FilterDropdown({
       }
     }
 
-    document.addEventListener('mousedown', onClick);
+    document.addEventListener('mouseup', onClick);
     document.addEventListener('keydown', onKeypress);
     return () => {
-      document.removeEventListener('mousedown', onClick);
+      document.removeEventListener('mouseup', onClick);
       document.removeEventListener('keydown', onKeypress);
     };
   }, [isOpen, onClose]);
@@ -72,7 +74,12 @@ export default function FilterDropdown({
         {/* focus trap and dropdown wrapper need to be in dom to update positioning
         and focus but wait to render children until it's open */}
         {isOpen && children}
-        {hasActionBar && <ActionBar onApplyFilters={onApplyFilters} />}
+        {hasActionBar && (
+          <ActionBar
+            onResetFilters={onResetFilters}
+            onApplyFilters={onApplyFilters}
+          />
+        )}
       </div>
     </FocusTrap>
   );

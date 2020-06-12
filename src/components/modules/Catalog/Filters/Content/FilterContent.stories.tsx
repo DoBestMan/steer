@@ -20,6 +20,7 @@ export function FilterContentChecklist() {
       {...(filterTypeMap[
         FilterContentTypes.CatalogFilterChecklist
       ] as CatalogFilterChecklist)}
+      filtersToApply={{}}
       onChange={action('Add filter')}
     />
   );
@@ -31,11 +32,18 @@ export function FilterContentChecklistLarge() {
       {...(filterTypeMap[
         FilterContentTypes.CatalogFilterChecklistLarge
       ] as CatalogFilterChecklistLarge)}
+      filtersToApply={{}}
       onChange={action('Add filter')}
     />
   );
 }
 
 export function FilterContentRange() {
-  return <FilterRange {...filterRange} onChange={action('Add filter')} />;
+  return (
+    <FilterRange
+      {...filterRange}
+      filtersToApply={{}}
+      onChange={action('Add filter')}
+    />
+  );
 }

@@ -12,12 +12,14 @@ import largeStyles from './FilterChecklistLarge.styles';
 
 export default function FilterChecklist({
   filterGroups,
+  filtersToApply,
   label,
   onChange,
   type,
 }: (CatalogFilterChecklist | CatalogFilterChecklistLarge) &
-  Pick<ChildProps, 'onChange'>) {
+  Pick<ChildProps, 'onChange' | 'filtersToApply'>) {
   const { greaterThan } = useBreakpoints();
+  const filterGroup = filtersToApply[label];
   const lgStyles =
     greaterThan.M && type === FilterContentTypes.CatalogFilterChecklistLarge
       ? largeStyles
@@ -26,7 +28,6 @@ export default function FilterChecklist({
   function handleChange(id: string) {
     return (value: boolean) => onChange(label, id, value);
   }
-
   return (
     <div>
       <h2 css={lgStyles.title}>{label}</h2>
@@ -35,7 +36,10 @@ export default function FilterChecklist({
           <h3 css={lgStyles.groupTitle}>{title}</h3>
           {items.map(({ count, description, id, isSelected, flair, title }) => (
             <div css={styles.container} key={id}>
-              <Checkbox onChange={handleChange(id)} defaultChecked={isSelected}>
+              <Checkbox
+                onChange={handleChange(id)}
+                defaultChecked={filterGroup ? !!filterGroup[id] : isSelected}
+              >
                 <span css={styles.checkboxLabel}>
                   <span css={styles.containerLabel}>
                     <p css={lgStyles.label}>{title}</p>

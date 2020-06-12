@@ -6,6 +6,16 @@ export const disableGlobalFocus = css({
   },
 });
 
+export const hideScrollbar = css({
+  '::-webkit-scrollbar': {
+    height: 0,
+    opacity: 0,
+    width: 0,
+  },
+  scrollbarWidth: 'none', // firefox
+  msOverflowStyle: '-ms-autohiding-scrollbar',
+});
+
 export const screenReaderText = css({
   clip: 'rect(1px, 1px, 1px, 1px)',
   height: 1,

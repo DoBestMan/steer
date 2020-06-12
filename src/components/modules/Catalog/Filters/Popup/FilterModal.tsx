@@ -3,6 +3,7 @@ import { ReactNode } from 'react';
 import BottomCardModal from '~/components/global/Modal/BottomCardModal';
 
 import ActionBar from './ActionBar';
+import styles from './FilterModal.styles';
 
 interface Props {
   children: ReactNode;
@@ -11,6 +12,7 @@ interface Props {
   isOpen: boolean;
   onApplyFilters: () => void;
   onClose: () => void;
+  onResetFilters: () => void;
 }
 
 function FilterModal({
@@ -20,6 +22,7 @@ function FilterModal({
   isOpen,
   onApplyFilters,
   onClose,
+  onResetFilters,
 }: Props) {
   return (
     <BottomCardModal
@@ -27,8 +30,13 @@ function FilterModal({
       isOpen={isOpen}
       onClose={onClose}
     >
-      {children}
-      {hasActionBar && <ActionBar onApplyFilters={onApplyFilters} />}
+      <div css={styles.filterContent}>{children}</div>
+      {hasActionBar && (
+        <ActionBar
+          onResetFilters={onResetFilters}
+          onApplyFilters={onApplyFilters}
+        />
+      )}
     </BottomCardModal>
   );
 }

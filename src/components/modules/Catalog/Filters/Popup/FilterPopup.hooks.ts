@@ -23,17 +23,39 @@ function useFilterPopup({
   >({});
 
   return {
-    applyFilter: () => createApplyFiltersHandler(filtersToApply)(),
+    applyFilter: () => {
+      createApplyFiltersHandler(filtersToApply)();
+    },
+    createResetFiltersHandler(group: string) {
+      return () => {
+        setFiltersToApply((prevState) => ({
+          ...prevState,
+          [group]: {},
+        }));
+      };
+    },
     filtersToApply,
     isLarge: greaterThan.M,
     onChange: useCallback((group: string, id: string, value: FilterValue) => {
-      setFiltersToApply((prevState) => ({
-        ...prevState,
-        [group]: {
-          ...prevState[group],
-          [id]: value,
-        },
-      }));
+      setFiltersToApply((prevState) => {
+        if (prevState[group] && prevState[group][id]) {
+          // immutably removes id from group in prevState
+          const { [id]: _, ...rest } = prevState[group];
+          return {
+            ...prevState,
+            [group]: {
+              ...rest,
+            },
+          };
+        }
+        return {
+          ...prevState,
+          [group]: {
+            ...prevState[group],
+            [id]: value,
+          },
+        };
+      });
     }, []),
   };
 }

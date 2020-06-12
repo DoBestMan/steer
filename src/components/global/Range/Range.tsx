@@ -20,6 +20,7 @@ interface Props {
   minLabel?: string;
   name: string;
   onChange?: (extrema: string, value: number) => void;
+  shouldReset?: boolean;
   size?: RANGE_SLIDER_SIZE;
 }
 
@@ -32,6 +33,7 @@ export default function Range({
   min,
   minDefault,
   name,
+  shouldReset,
   onChange,
   size = RANGE_SLIDER_SIZE.REGULAR,
 }: Props) {
@@ -55,6 +57,21 @@ export default function Range({
   }
 
   useEffect(() => {
+    if (shouldReset) {
+      setMinCurrent(minDefault || min);
+      setMaxCurrent(maxDefault || max);
+    }
+  }, [
+    maxDefault,
+    minDefault,
+    min,
+    max,
+    setMaxCurrent,
+    setMinCurrent,
+    shouldReset,
+  ]);
+
+  useEffect(() => {
     onChange && onChange('currentMax', maxCurrent);
   }, [maxCurrent, onChange]);
   useEffect(() => {
@@ -76,6 +93,7 @@ export default function Range({
       });
     }
   }, [minCurrent, maxCurrent, size, width]);
+
   return (
     <div css={isSmall && styles.rootSmall}>
       {isSmall && <p css={styles.labelSm}>{minLabel}</p>}
@@ -89,6 +107,7 @@ export default function Range({
             interval={interval}
             max={max}
             onChange={handleMinChange}
+            shouldReset={shouldReset}
             defaultValue={minDefault || min}
             label={`${name} ${ui('catalog.filters.min')}`}
             css={styles.minIndicator}
@@ -99,6 +118,7 @@ export default function Range({
             railEl={railEl}
             min={min}
             max={max}
+            shouldReset={shouldReset}
             interval={interval}
             onChange={handleMaxChange}
             defaultValue={maxDefault || max}

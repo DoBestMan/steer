@@ -1,6 +1,7 @@
 import { CSSObject } from '@emotion/core';
 
 import { COLORS, MQ, SPACING } from '~/lib/constants';
+import { hideScrollbar } from '~/styles/document/accessibility.styles';
 import { typography } from '~/styles/typography.styles';
 
 const styles: CSSObject = {
@@ -32,23 +33,22 @@ const styles: CSSObject = {
       padding: `0 ${SPACING.SIZE_60}px`,
     },
   },
-  listContainer: {
-    '::-webkit-scrollbar': {
-      opacity: 0,
-      height: 0,
+  listContainer: [
+    hideScrollbar,
+    {
+      boxSizing: 'content-box',
+      overflowX: 'auto',
+      [MQ.S]: {
+        margin: `0 ${-SPACING.SIZE_20}px`,
+      },
+      [MQ.M]: {
+        margin: `0 ${-SPACING.SIZE_40}px`,
+      },
+      [MQ.L]: {
+        margin: `0 ${-SPACING.SIZE_60}px`,
+      },
     },
-    boxSizing: 'content-box',
-    overflowX: 'auto',
-    [MQ.S]: {
-      margin: `0 ${-SPACING.SIZE_20}px`,
-    },
-    [MQ.M]: {
-      margin: `0 ${-SPACING.SIZE_40}px`,
-    },
-    [MQ.L]: {
-      margin: `0 ${-SPACING.SIZE_60}px`,
-    },
-  },
+  ],
 };
 
 export default styles;

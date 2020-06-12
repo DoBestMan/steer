@@ -9,7 +9,7 @@ import {
   CatalogFilterTypes,
   FilterContentTypes,
 } from '../Filter.types';
-import { FilterValue } from '../Filters.context';
+import { FilterObject, FilterValue } from '../Filters.context';
 
 /*
  * ChildProps interface will be used in the filter content components, and generally use the same props with some exceptions (marked with **)
@@ -21,6 +21,7 @@ import { FilterValue } from '../Filters.context';
 export interface ChildProps {
   applyFilter: () => void;
   filter: CatalogFilterTypes;
+  filtersToApply: Record<string, FilterObject>;
   isLarge?: boolean;
   onChange: (group: string, id: string, value: FilterValue) => void;
 }
@@ -35,29 +36,41 @@ export const mapTypeToContent: Record<
 > = {
   [FilterContentTypes.CatalogFilterChecklist]({
     filter,
+    filtersToApply,
     onChange,
   }: ChildProps) {
     return (
       <FilterChecklist
         {...(filter as CatalogFilterChecklist)}
         onChange={onChange}
+        filtersToApply={filtersToApply}
       />
     );
   },
   [FilterContentTypes.CatalogFilterChecklistLarge]({
     filter,
+    filtersToApply,
     onChange,
   }: ChildProps) {
     return (
       <FilterChecklist
         {...(filter as CatalogFilterChecklistLarge)}
+        filtersToApply={filtersToApply}
         onChange={onChange}
       />
     );
   },
-  [FilterContentTypes.CatalogFilterRange]({ filter, onChange }: ChildProps) {
+  [FilterContentTypes.CatalogFilterRange]({
+    filter,
+    filtersToApply,
+    onChange,
+  }: ChildProps) {
     return (
-      <FilterRange {...(filter as CatalogFilterRange)} onChange={onChange} />
+      <FilterRange
+        {...(filter as CatalogFilterRange)}
+        onChange={onChange}
+        filtersToApply={filtersToApply}
+      />
     );
   },
   [FilterContentTypes.CatalogFilterSort]({

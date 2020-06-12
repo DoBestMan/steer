@@ -63,12 +63,8 @@ export function useFiltersContextSetup({ onApplyFilters }: ContextArgs) {
   const [selectingFilter, setSelectingFilter] = useState('');
 
   useEffect(() => {
-    if (!Object.keys(filtersMap).length) {
-      return;
-    }
     onApplyFilters(filtersMap);
   }, [filtersMap, onApplyFilters]);
-
   return {
     activeFilters: filtersMap,
     clearSelectingFilter: () => setSelectingFilter(''),

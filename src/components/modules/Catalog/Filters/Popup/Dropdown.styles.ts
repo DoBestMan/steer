@@ -1,7 +1,10 @@
 import { CSSObject } from '@emotion/core';
 
-import { BORDERS, COLORS, RADIUS, SPACING, Z_INDEX } from '~/lib/constants';
+import { BORDERS, COLORS, MQ, RADIUS, SPACING, Z_INDEX } from '~/lib/constants';
+import { hideScrollbar } from '~/styles/document/accessibility.styles';
 import { typography } from '~/styles/typography.styles';
+
+import { ACTION_BAR_HEIGHT } from './ActionBar.styles';
 
 const styles: CSSObject = {
   open: {
@@ -10,6 +13,16 @@ const styles: CSSObject = {
   root: [
     typography.primarySubhead,
     {
+      // allow dropdown content to be scrollable with action bar overlaying content
+      '> div:first-of-type': [
+        hideScrollbar,
+        {
+          maxHeight: 500,
+          minHeight: 150,
+          overflow: 'auto',
+          padding: SPACING.SIZE_30,
+        },
+      ],
       background: COLORS.GLOBAL.WHITE,
       border: BORDERS.SOLID_GRAY_10_1PX,
       borderRadius: RADIUS.RADIUS_15,
@@ -17,9 +30,17 @@ const styles: CSSObject = {
       color: COLORS.GLOBAL.BLACK,
       display: 'none',
       marginTop: SPACING.SIZE_05,
-      padding: SPACING.SIZE_30,
       position: 'fixed',
       zIndex: Z_INDEX.TOP,
+      [MQ.S]: {
+        paddingBottom: ACTION_BAR_HEIGHT.SM + SPACING.SIZE_20,
+      },
+      [MQ.M]: {
+        paddingBottom: ACTION_BAR_HEIGHT.MED + SPACING.SIZE_20,
+      },
+      [MQ.L]: {
+        paddingBottom: ACTION_BAR_HEIGHT.LG + SPACING.SIZE_20,
+      },
     },
   ],
 };

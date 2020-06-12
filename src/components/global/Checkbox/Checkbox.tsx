@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 
 import Icon from '../Icon/Icon';
 import { ICONS } from '../Icon/Icon.constants';
@@ -24,6 +24,10 @@ export default function Checkbox({
     }
     setIsChecked(!isChecked);
   }
+
+  useEffect(() => {
+    setIsChecked(defaultChecked);
+  }, [defaultChecked]);
   return (
     <label css={[styles.root, isChecked && styles.rootChecked]}>
       {children}

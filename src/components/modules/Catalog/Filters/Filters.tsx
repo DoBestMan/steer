@@ -37,7 +37,7 @@ export default function Filters({
       >
         <div css={styles.filterList}>
           {mockFilters.map(({ label, ...filter }) => {
-            const isActive = !!activeFilters[label];
+            const isActive = activeFilters[label];
             return filter.type !== FilterContentTypes.CatalogFilterToggle ? (
               // filter with dropdown
               <FilterButton
@@ -45,7 +45,9 @@ export default function Filters({
                 key={label}
                 label={label}
                 isDropdownOpen={label === selectingFilter}
-                isActive={isActive}
+                isActive={
+                  !!(isActive && Object.keys(activeFilters[label]).length)
+                }
                 onClick={onOpen(label)}
                 theme={isAdvancedView ? BUTTON_THEME.DARK : BUTTON_THEME.ORANGE}
                 aria-expanded={label === selectingFilter}
@@ -60,7 +62,7 @@ export default function Filters({
               <FilterButtonToggle
                 css={styles.button}
                 key={label}
-                isActive={isActive}
+                isActive={!!isActive}
                 onClick={createToggleFilterHandler(label, !isActive)}
                 theme={isAdvancedView ? BUTTON_THEME.DARK : BUTTON_THEME.ORANGE}
               >

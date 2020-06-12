@@ -5,7 +5,7 @@ import { typography } from '~/styles/typography.styles';
 
 const styles: CSSObject = {
   root: {
-    [MQ.M]: { minWidth: 400 },
+    [MQ.L]: { minWidth: 400 },
   },
   title: [
     typography.eyebrow,

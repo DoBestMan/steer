@@ -14,7 +14,7 @@ interface Props {
 export default function FilterPopup({ filter, ...props }: Props) {
   const { createApplyFiltersHandler } = useFiltersContext();
   const hasActionBar = filter.type !== FilterContentTypes.CatalogFilterSort;
-  const { filtersToApply, ...childProps } = useFilterPopup({
+  const { createResetFiltersHandler, ...childProps } = useFilterPopup({
     createApplyFiltersHandler,
   });
 
@@ -29,7 +29,8 @@ export default function FilterPopup({ filter, ...props }: Props) {
     return (
       <FilterDropdown
         hasActionBar={hasActionBar}
-        onApplyFilters={createApplyFiltersHandler(filtersToApply)}
+        onApplyFilters={childProps.applyFilter}
+        onResetFilters={createResetFiltersHandler(filter.label)}
         {...props}
       >
         {mapTypeToContent[filter.type]({ filter, ...childProps })}
@@ -40,7 +41,8 @@ export default function FilterPopup({ filter, ...props }: Props) {
   return (
     <FilterModal
       hasActionBar={hasActionBar}
-      onApplyFilters={createApplyFiltersHandler(filtersToApply)}
+      onApplyFilters={childProps.applyFilter}
+      onResetFilters={createResetFiltersHandler(filter.label)}
       contentLabel={filter.label}
       {...props}
     >
