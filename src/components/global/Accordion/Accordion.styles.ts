@@ -1,6 +1,6 @@
 import { css, CSSObject } from '@emotion/core';
 
-import { COLORS, EASING, SPACING, TIME } from '~/lib/constants';
+import { BORDERS, COLORS, EASING, SPACING, TIME } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const styles: CSSObject = {
@@ -8,6 +8,7 @@ const styles: CSSObject = {
     typography.primarySubhead,
     {
       alignItems: 'center',
+      borderTop: BORDERS.SOLID_GRAY_80_1PX,
       color: COLORS.DARK.GRAY_40,
       display: 'flex',
       justifyContent: 'space-between',
@@ -28,6 +29,9 @@ const styles: CSSObject = {
       height: SPACING.SIZE_05,
       padding: SPACING.SIZE_05,
     },
+  },
+  itemContainerBorder: {
+    borderBottom: BORDERS.SOLID_GRAY_80_1PX,
   },
 };
 

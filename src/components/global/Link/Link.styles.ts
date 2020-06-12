@@ -48,11 +48,16 @@ const styles: CSSObject = {
   [LINK_ICON_POSITION.RIGHT]: {
     paddingLeft: 5,
   },
+
   [LINK_THEME.DARK]: {
     '&:hover:not(:active), &:focus:not(:active)': {
       color: COLORS.GLOBAL.WHITE,
     },
     color: COLORS.DARK.GRAY_40,
+  },
+
+  [LINK_THEME.DARK_HIGHLIGHTED]: {
+    color: COLORS.GLOBAL.WHITE,
   },
 
   [LINK_THEME.LIGHT]: {
@@ -84,6 +89,12 @@ export const iconCTA = {
 export const linkBorder: CSSObject = {
   [LINK_THEME.DARK]: {
     borderColor: 'inherit',
+  },
+
+  [LINK_THEME.DARK_HIGHLIGHTED]: {
+    borderColor: COLORS.DARK.GRAY_40,
+
+    '&:hover, &:focus': { borderColor: COLORS.GLOBAL.WHITE },
   },
 
   [LINK_THEME.LIGHT]: {

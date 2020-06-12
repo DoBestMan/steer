@@ -144,6 +144,21 @@
     },
     "faq": {
       "showAllDefaultLabel": "See all"
+    },
+    "technicalSpecs": {
+      "imageAlt": "Close-up of tire",
+      "title": "Get technical",
+      "description": "The ContiProContact is Continental's Grand Touring All-Season tire originally developed for European sport coupes and sedans sold in North America, and is now available for a wide range of imported and domestic cars.",
+      "technicalSpecs": {
+        "tabLabel": "Technical specs",
+        "showAllLabel": "See all specs"
+      },
+      "tireSizes": {
+        "tabLabel": "Available sizes",
+        "findMyTireSizeLabel": "How to find my size",
+        "specLabelHead": "Specification",
+        "specValueHead": "Value"
+      }
     }
   },
   "ratings": {

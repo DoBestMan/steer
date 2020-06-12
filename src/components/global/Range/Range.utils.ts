@@ -249,12 +249,12 @@ export function handleKeyDown(props: Props, e: KeyboardEvent) {
       break;
 
     case KEYCODES.HOME:
-      moveSlider(props, props.railMax.current);
+      moveSlider(props, props.railMin.current);
       flag = true;
       break;
 
     case KEYCODES.END:
-      moveSlider(props, props.railMin.current);
+      moveSlider(props, props.railMax.current);
       flag = true;
       break;
 

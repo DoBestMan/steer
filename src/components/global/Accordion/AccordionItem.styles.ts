@@ -1,6 +1,6 @@
 import { css, CSSObject } from '@emotion/core';
 
-import { BORDERS, COLORS, EASING, SPACING, TIME } from '~/lib/constants';
+import { BORDERS, COLORS, EASING, MQ, SPACING, TIME } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const styles: CSSObject = {
@@ -42,25 +42,20 @@ const styles: CSSObject = {
   buttonIconExpanded: {
     transform: 'rotate(-180deg)',
   },
-  container: {
-    a: {
-      borderBottom: BORDERS.DOTTED_GRAY_40_2PX,
-      transition: `all ${TIME.MS100}ms ${EASING.CIRC_EASE_OUT}`,
-
-      '&:hover': {
-        color: COLORS.GLOBAL.WHITE,
-        borderColor: COLORS.GLOBAL.WHITE,
-      },
-    },
-
-    borderBottom: BORDERS.SOLID_GRAY_80_1PX,
-
-    p: {
-      '&:not(:last-child)': {
-        marginBottom: '1em',
-      },
-    },
+  buttonLabel: {
+    flexGrow: 1,
+    textAlign: 'left',
   },
+  buttonValue: css({
+    fontWeight: 'bold',
+    marginLeft: SPACING.SIZE_05,
+    marginRight: SPACING.SIZE_15,
+    whiteSpace: 'nowrap',
+
+    [MQ.M]: {
+      marginRight: SPACING.SIZE_25,
+    },
+  }),
   contentContainer: [
     typography.bodyCopyTight,
     {
@@ -68,6 +63,7 @@ const styles: CSSObject = {
       marginBottom: 0,
       maxHeight: 0,
       opacity: 0,
+      overflow: 'hidden',
       transition: `opacity ${TIME.MS200}ms ${EASING.CIRC_EASE_OUT}, max-height ${TIME.MS400}ms ${EASING.CIRC_EASE_OUT}`,
       visibility: 'hidden',
     },
@@ -80,6 +76,26 @@ const styles: CSSObject = {
       },
     }),
   ],
+  contentInnerContent: {
+    paddingBottom: 2,
+  },
+  markdown: {
+    a: {
+      borderBottom: BORDERS.DOTTED_GRAY_40_2PX,
+      transition: `all ${TIME.MS100}ms ${EASING.CIRC_EASE_OUT}`,
+
+      '&:hover': {
+        color: COLORS.GLOBAL.WHITE,
+        borderColor: COLORS.GLOBAL.WHITE,
+      },
+    },
+
+    p: {
+      '&:not(:last-child)': {
+        marginBottom: '1em',
+      },
+    },
+  },
 };
 
 export default styles;

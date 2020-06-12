@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 import { NodeType } from 'react-markdown';
 
 import Icon from '~/components/global/Icon/Icon';
@@ -10,9 +10,13 @@ import { KEYCODES } from '~/lib/constants';
 import styles from './AccordionItem.styles';
 
 interface Props {
-  content: string;
+  children?: ReactNode;
+  content?: string;
   id: string;
-  title: string;
+  isExpanded?: boolean;
+  label: string;
+  onToggle?: () => void;
+  value?: string;
 }
 
 // Allow only the simplest markdown to prevent unexpected markups
@@ -26,25 +30,28 @@ const markdownAllowedTypes: NodeType[] = [
   'link',
 ];
 
-function AccordionItem({ id, content, title }: Props) {
-  const [isExpanded, setIsExpanded] = useState(false);
+function AccordionItem({
+  id,
+  children,
+  content,
+  label,
+  value,
+  onToggle,
+  isExpanded,
+}: Props) {
   const [containerHeight, setContainerHeight] = useState(0);
   const innerElement = useRef<HTMLDivElement | null>(null);
   const { width } = useWindowSize();
   const buttonId = `accordion-button-${id}`;
   const panelId = `accordion-panel-${id}`;
 
-  const toggleIsExpanded = useCallback(() => {
-    setIsExpanded(!isExpanded);
-  }, [isExpanded, setIsExpanded]);
-
   const mouseDownHandler = useCallback(
     (event: React.MouseEvent) => {
       event.preventDefault();
 
-      toggleIsExpanded();
+      onToggle && onToggle();
     },
-    [toggleIsExpanded],
+    [onToggle],
   );
 
   const keyUpHandler = useCallback(
@@ -56,9 +63,9 @@ function AccordionItem({ id, content, title }: Props) {
         return;
       }
 
-      toggleIsExpanded();
+      onToggle && onToggle();
     },
-    [toggleIsExpanded],
+    [onToggle],
   );
 
   useEffect(() => {
@@ -70,7 +77,7 @@ function AccordionItem({ id, content, title }: Props) {
   }, [innerElement, setContainerHeight, width, content, isExpanded]);
 
   return (
-    <div css={styles.container}>
+    <>
       <button
         aria-controls={panelId}
         aria-expanded={isExpanded}
@@ -79,7 +86,8 @@ function AccordionItem({ id, content, title }: Props) {
         onKeyUp={keyUpHandler}
         css={styles.button}
       >
-        <span>{title}</span>
+        <span css={styles.buttonLabel}>{label}</span>
+        {value && <span css={styles.buttonValue}>{value}</span>}
         <Icon
           name={ICONS.CHEVRON_DOWN}
           css={[styles.buttonIcon, isExpanded && styles.buttonIconExpanded]}
@@ -95,17 +103,21 @@ function AccordionItem({ id, content, title }: Props) {
           isExpanded && { maxHeight: containerHeight },
         ]}
       >
-        <div ref={innerElement}>
-          <Markdown
-            linkTarget="_blank"
-            allowedTypes={markdownAllowedTypes}
-            unwrapDisallowed
-          >
-            {content}
-          </Markdown>
+        <div ref={innerElement} css={styles.contentInnerContent}>
+          {children}
+          {content && (
+            <Markdown
+              css={styles.markdown}
+              linkTarget="_blank"
+              allowedTypes={markdownAllowedTypes}
+              unwrapDisallowed
+            >
+              {content}
+            </Markdown>
+          )}
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
