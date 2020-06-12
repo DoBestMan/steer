@@ -72,6 +72,27 @@ describe('fetch', () => {
     expect(result.test).toEqual(true);
   });
 
+  it('fetches using DELETE and gets a successful empty response (204)', async () => {
+    const response = new Response(null, {
+      status: 204,
+    });
+    mocked(nativeFetch).mockResolvedValue(response);
+
+    const result = await fetch<null>({
+      endpoint: '/v1/test-delete',
+      method: 'delete',
+    });
+
+    expect(nativeFetch).toHaveBeenCalledWith(
+      expect.stringContaining('test-delete'),
+      expect.objectContaining({
+        method: 'delete',
+      }),
+    );
+
+    expect(result).toBeNull();
+  });
+
   it('calls authorization function', async () => {
     const response = new Response('{"test":true}');
     mocked(nativeFetch).mockResolvedValue(response);

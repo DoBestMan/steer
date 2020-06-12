@@ -1,3 +1,5 @@
+import { UserHistorySearch } from '~/data/models/UserHistorySearch';
+import { UserHistorySearchItem } from '~/data/models/UserHistorySearchItem';
 import { UserPersonalization } from '~/data/models/UserPersonalization';
 import { UserPersonalizationUpdate } from '~/data/models/UserPersonalizationUpdate';
 
@@ -63,4 +65,41 @@ export async function backendUpdateUserPersonalization({
   });
 
   return response;
+}
+
+export async function backendGetUserSearchHistory(userSessionId: string) {
+  return await fetch<UserHistorySearch>({
+    endpoint: '/v1/users/{userSessionId}/history/search',
+    includeAuthorization: true,
+    method: 'get',
+    params: {
+      userSessionId,
+    },
+  });
+}
+
+export async function backendAddUserSearchHistory(
+  userSessionId: string,
+  item: UserHistorySearchItem,
+) {
+  return await fetch<UserHistorySearch, UserHistorySearchItem>({
+    endpoint: '/v1/users/{userSessionId}/history/search',
+    includeAuthorization: true,
+    jsonBody: item,
+    method: 'post',
+    params: {
+      userSessionId,
+    },
+  });
+}
+
+export async function backendDeleteUserSearchHistory(userSessionId: string) {
+  return await fetch<null>({
+    endpoint: '/v1/users/{userSessionId}/history/search',
+    includeAuthorization: true,
+    method: 'delete',
+    params: {
+      userSessionId,
+    },
+  });
 }

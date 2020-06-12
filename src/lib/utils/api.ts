@@ -1,4 +1,4 @@
-import { NextApiRequest } from 'next';
+import { NextApiRequest, NextApiResponse } from 'next';
 
 const BearerAuthorizationHeader = /^bearer (.+)$/i;
 
@@ -14,4 +14,16 @@ export function getUserSessionId(request: NextApiRequest) {
     BearerAuthorizationHeader,
     '$1',
   );
+}
+
+export function getAndCheckUserSessionId(
+  request: NextApiRequest,
+  response: NextApiResponse,
+) {
+  const userSessionId = getUserSessionId(request);
+  if (!userSessionId) {
+    console.error('Invalid authentication');
+    response.status(500).end();
+  }
+  return userSessionId;
 }

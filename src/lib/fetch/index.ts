@@ -113,11 +113,13 @@ export async function fetch<T, U = never>({
   }
 
   let data: T | null = null;
-  try {
-    data = (await response.json()) as T;
-  } catch (error) {
-    console.error(error);
-    throw new FetchError(FetchErrorCodes.InvalidJson, error);
+  if (response.status !== 204) {
+    try {
+      data = (await response.json()) as T;
+    } catch (error) {
+      console.error(error);
+      throw new FetchError(FetchErrorCodes.InvalidJson, error);
+    }
   }
 
   if (response.status < 200 || response.status >= 300) {
@@ -152,7 +154,7 @@ export async function fetch<T, U = never>({
     throw error;
   }
 
-  return data;
+  return data as T;
 }
 
 export function fetchGetUserPersonalization() {
