@@ -1,4 +1,3 @@
-import { CSSObject } from '@emotion/core';
 import {
   ENTERED,
   ENTERING,
@@ -13,6 +12,7 @@ import {
   GAP_COLUMNS,
   MQ,
   SPACING,
+  StylesMap,
   TIME,
   Z_INDEX,
 } from '~/lib/constants';
@@ -25,7 +25,7 @@ export const SUBNAV_TIME_SLIDE_CLOSE = TIME.MS3000;
 export const SUBNAV_TIME_FADE_OPEN = TIME.MS400;
 export const SUBNAV_TIME_FADE_CLOSE = TIME.MS600;
 
-const styles: CSSObject = {
+const styles: StylesMap = {
   action: {
     padding: SPACING.SIZE_10,
   },
@@ -63,9 +63,7 @@ const styles: CSSObject = {
   },
   closeSubNav: {
     color: COLORS.LIGHT.GRAY_70,
-    [MQ.S]: {
-      display: 'none',
-    },
+    display: 'none',
     [MQ.M]: {
       display: 'flex',
     },
@@ -74,30 +72,32 @@ const styles: CSSObject = {
     // removes phantom height in parent modal
     display: 'none',
   },
-  link: {
-    alignContent: 'center',
-    color: COLORS.LIGHT.GRAY_70,
-    display: 'flex',
-    whiteSpace: 'nowrap',
-
-    [MQ.S]: typography.bodyCopy,
-    [MQ.XL]: typography.smallCopy,
-  },
+  link: [
+    typography.bodyCopy,
+    {
+      alignContent: 'center',
+      color: COLORS.LIGHT.GRAY_70,
+      display: 'flex',
+      whiteSpace: 'nowrap',
+      [MQ.XL]: typography.smallCopy,
+    },
+  ],
   linkSection: {
     height: NAV_CONTENT_HEIGHT,
     li: {
       marginRight: SPACING.SIZE_30,
     },
-    span: {
-      // overrides nav link sizes
-      [MQ.S]: typography.bodyCopy,
-      [MQ.M]: [
-        {
-          fontSize: '1.5rem',
-          fontWeight: 'bold',
-        },
-      ],
-    },
+    // overrides nav link sizes
+    span: [
+      typography.bodyCopy,
+      {
+        [MQ.M]: [
+          {
+            fontWeight: 'bold',
+          },
+        ],
+      },
+    ],
     [MQ.M]: {
       alignItems: 'center',
       display: 'flex',
@@ -119,10 +119,8 @@ const styles: CSSObject = {
       },
       marginRight: SPACING.SIZE_10,
     },
-    [MQ.S]: {
-      bottom: SPACING.SIZE_40,
-      position: 'absolute',
-    },
+    bottom: SPACING.SIZE_40,
+    position: 'absolute',
     [MQ.M]: {
       position: 'initial',
     },
@@ -168,12 +166,10 @@ const styles: CSSObject = {
     },
   },
   overlayContainer: {
+    display: 'none',
     height: '100%',
     position: 'relative',
     width: `calc(100% + ${GAP_COLUMNS.L}px)`,
-    [MQ.S]: {
-      display: 'none',
-    },
     [MQ.L]: {
       display: 'initial',
     },
@@ -182,9 +178,7 @@ const styles: CSSObject = {
     height: '100%',
   },
   smallHide: {
-    [MQ.S]: {
-      display: 'none',
-    },
+    display: 'none',
     [MQ.M]: {
       display: 'initial',
     },
@@ -195,17 +189,15 @@ const styles: CSSObject = {
     },
   },
   subnav: {
+    backgroundColor: COLORS.LIGHT.OFF_WHITE,
     display: 'flex',
     flexDirection: 'column',
     height: '100%',
     minHeight: 500,
     overflowY: 'auto',
+    padding: `${SPACING.SIZE_70}px ${SPACING.SIZE_20}px 0 ${SPACING.SIZE_20}px`,
     position: 'relative',
     zIndex: Z_INDEX.FRONT,
-    [MQ.S]: {
-      backgroundColor: COLORS.LIGHT.OFF_WHITE,
-      padding: `${SPACING.SIZE_70}px ${SPACING.SIZE_20}px 0 ${SPACING.SIZE_20}px`,
-    },
     [MQ.M]: {
       backgroundColor: COLORS.GLOBAL.WHITE,
       padding: `0 ${SPACING.SIZE_40}px`,
@@ -219,15 +211,13 @@ const styles: CSSObject = {
     zIndex: Z_INDEX.BEHIND,
   },
   subnavInnerGrid: {
+    bottom: 0,
     gridAutoRows: 'minmax(auto, 100%)',
     height: '100%',
+    left: 0,
     pointerEvents: 'none',
+    position: 'absolute',
     zIndex: Z_INDEX.OVERLAY,
-    [MQ.S]: {
-      bottom: 0,
-      left: 0,
-      position: 'absolute',
-    },
     [MQ.M]: {
       position: 'initial',
     },
@@ -235,21 +225,17 @@ const styles: CSSObject = {
   subnavInnerGridOpen: {
     pointerEvents: 'auto',
   },
-  subnavLinkList: {
-    display: 'flex',
-    width: '100%',
-    [MQ.S]: [
-      typography.bodyCopy,
-      {
-        flexDirection: 'column',
-        flexGrow: 1,
-        justifyContent: 'space-between',
-        marginBottom: SPACING.SIZE_40,
-      },
-    ],
-    [MQ.M]: [
-      typography.bodyCopy,
-      {
+  subnavLinkList: [
+    typography.bodyCopy,
+    {
+      display: 'flex',
+      flexDirection: 'column',
+      flexGrow: 1,
+      justifyContent: 'space-between',
+      marginBottom: SPACING.SIZE_40,
+      width: '100%',
+
+      [MQ.M]: {
         flexDirection: 'row',
         flexGrow: 0,
         height: 'auto',
@@ -261,15 +247,15 @@ const styles: CSSObject = {
           width: 20,
         },
       },
-    ],
-    [MQ.L]: {
-      // accommodates spacing top from designs to align with header behind
-      paddingTop: SPACING.SIZE_60 + 2,
-      svg: {
-        marginTop: -2,
+      [MQ.L]: {
+        // accommodates spacing top from designs to align with header behind
+        paddingTop: SPACING.SIZE_60 + 2,
+        svg: {
+          marginTop: -2,
+        },
       },
     },
-  },
+  ],
 };
 
 export const subNavContainer = {

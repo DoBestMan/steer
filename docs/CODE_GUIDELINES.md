@@ -51,7 +51,7 @@ components/
 - Styles will be exported as one object with keys:
 
 ```diff
-import { CSSObject } from '@emotion/core';
+import { StylesMap } from '@emotion/core';
 
 - const foo: CSSObject = {
 -   background: 'red'
@@ -60,7 +60,7 @@ import { CSSObject } from '@emotion/core';
 -   background: 'blue'
 - };
 
-+ const styles: CSSObject = {
++ const styles: StylesMap = {
 +   foo: {
 +     background: 'red'
 +   },
@@ -72,7 +72,7 @@ import { CSSObject } from '@emotion/core';
 ```
 
 - Composed styles should generally be composed within the component
-- Typing with `CSSObject` helps us avoid issues with "type widening" (ie: things like `{ borderTopStyle: 'solid' as 'solid' }`). Read more about it [here](https://github.com/emotion-js/emotion/pull/1129#issuecomment-452376242)
+- Typing with `StylesMap` helps us avoid issues with "type widening" (ie: things like `{ borderTopStyle: 'solid' as 'solid' }`). Read more about it [here](https://github.com/emotion-js/emotion/pull/1129#issuecomment-452376242)
 
 ```
 css={[styles.root, styles.other]}
@@ -184,8 +184,6 @@ Context should live as close to where it's needed as possible.
 
 This component uses the [react-markdown](https://github.com/rexxars/react-markdown) library to parse Markdown formatted strings in HTML elements
 
-
-
 ### Line breaks
 
 Markdown allows a few different ways to apply breaks between lines. Because of those variations and some quirks with the `react-markdown` library, we recommend to follow the below methods to apply different types of line breaks consistently.
@@ -194,11 +192,11 @@ Markdown allows a few different ways to apply breaks between lines. Because of t
 
 Use `\n\n` to break a line into a new HTML element. The generated element will be a `p` tag by default but can be turned into another element by preceding it with a Markdown tag (`#`, `*`, etc).
 
- Examples:
+Examples:
+
 - `"# Title\n\n A new paragraph."` will render an `h1` and a `p` tag.
 - `"* List Item 1\n\n*List Item 2"` will render two `li` tags inside a `ul`
 - `"Oops.\n\nPlease enter a valid ZIP code."` will render "Oops." and "Please enter a valid ZIP code." as two separate `p` tags.
-
 
 ### Add a break whithin the same HTML element
 
