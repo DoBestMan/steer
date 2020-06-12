@@ -1,59 +1,138 @@
+import { Transition } from 'react-transition-group';
+import { TransitionStatus } from 'react-transition-group/Transition';
+
 import Button from '~/components/global/Button/Button';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import Image from '~/components/global/Image/Image';
 import { getSrcset } from '~/components/global/Image/Image.utils';
 import BaseLink from '~/components/global/Link/BaseLink';
+import Loading, { THEME } from '~/components/global/Loading/Loading';
+import { useCatalogSummaryContext } from '~/context/CatalogSummary.context';
 import { BUTTON_STYLE, BUTTON_THEME } from '~/lib/constants';
 
-import { Brands, STAGES } from '../CatalogPage.constants';
+import { Brands } from '../CatalogPage.constants';
+import {
+  STAGES,
+  stageToMessageTimeout,
+} from '../CatalogSummary/CatalogSummary.constants';
 import styles from './CatalogMessage.styles';
+import MessageContainer from './components/MessageContainer';
 
-interface LoadingMessageProps {
-  brands?: Brands;
+export function LoadingIndicator() {
+  return (
+    <div css={styles.loadingContainer}>
+      <Loading theme={THEME.DARK} />
+    </div>
+  );
 }
 
-export function LoadingMessage({ brands = [] }: LoadingMessageProps) {
+interface BuildInMessageProps {
+  brands?: Brands;
+  hasMultipleTireSizes: boolean;
+}
+
+export function BuildInMessage({
+  brands = [],
+  hasMultipleTireSizes,
+}: BuildInMessageProps) {
   return (
     <Grid css={styles.container}>
-      <GridItem>
+      <GridItem css={styles.containerInner}>
         {/* TODO: check heading hierarchy */}
-        <h2 css={styles.heading}>3 tires fit your Civic</h2>
-        <ul css={styles.list}>
-          {brands.map((brand) => {
-            const imageStyles = styles[`logo_${brand.id}`];
-            const srcSet = getSrcset(brand.src, {
-              '100w': { width: 100 },
-              '200w': { width: 200 },
-              '500w': { width: 500 },
-            });
+        <h2 css={styles.heading}>
+          {hasMultipleTireSizes
+            ? "Ok, let's confirm the tire size of your Civic"
+            : '3 tires fit your Civic'}
+        </h2>
+        {!hasMultipleTireSizes && (
+          <ul css={styles.list}>
+            {brands.map((brand) => {
+              const imageStyles = styles[`logo_${brand.id}`];
+              const srcSet = getSrcset(brand.src, {
+                '100w': { width: 100 },
+                '200w': { width: 200 },
+                '500w': { width: 500 },
+              });
 
-            return (
-              <li key={brand.altText}>
-                <Image
-                  altText={brand.altText}
-                  css={imageStyles}
-                  srcSet={srcSet}
-                />
-              </li>
-            );
-          })}
-        </ul>
+              return (
+                <li key={brand.altText}>
+                  <Image
+                    altText={brand.altText}
+                    css={imageStyles}
+                    srcSet={srcSet}
+                  />
+                </li>
+              );
+            })}
+          </ul>
+        )}
       </GridItem>
     </Grid>
   );
 }
 
 interface DataMomentMessageProps {
+  hasMultipleTireSizes: boolean;
   hasOE?: boolean;
-  onContinue?(): void;
+  onHelpClick?(): void;
+  onSizeSelect?(id: string): void;
+  setStage(stage: STAGES): void;
 }
 
 export function DataMomentMessage({
   hasOE = false,
-  onContinue,
+  hasMultipleTireSizes,
+  onHelpClick,
+  onSizeSelect,
+  setStage,
 }: DataMomentMessageProps) {
-  return (
+  const sizeOptions = [
+    {
+      id: '91W',
+      label: '235/40R18 91W',
+    },
+    {
+      id: '95Y',
+      label: '235/40R18 95Y XL',
+    },
+  ];
+
+  // TODO: this is a quick fix for displaying the two different states
+  // of the data moment. On integration I will tidy this up into a single
+  // return statement.
+  return hasMultipleTireSizes ? (
+    <Grid css={styles.container}>
+      <GridItem css={styles.containerInner}>
+        {/* TODO: check heading hierarchy */}
+        <h2 css={[styles.heading, styles.dataMomentHeading]}>
+          Ok, let&apos;s confirm the tire size of your Civic
+        </h2>
+        <p css={styles.dataMomentCopy}>
+          Find it on tthe sidewall of your current tires, the owner&apos;s
+          manual or inside the frame of the driver&apos;s door.
+        </p>
+        <div css={styles.dataMomentCtaWrapper}>
+          {sizeOptions.map((option) => (
+            <Button
+              key={option.id}
+              onClick={function () {
+                onSizeSelect && onSizeSelect(option.id);
+                setStage(STAGES.TOP_PICKS);
+              }}
+              style={BUTTON_STYLE.OUTLINED}
+              theme={BUTTON_THEME.ORANGE}
+            >
+              {option.label}
+            </Button>
+          ))}
+        </div>
+        <button css={styles.dataMomentHelp} onClick={onHelpClick}>
+          Not sure?
+        </button>
+      </GridItem>
+    </Grid>
+  ) : (
     <Grid css={styles.container}>
       <GridItem
         css={styles.containerInner}
@@ -90,7 +169,9 @@ export function DataMomentMessage({
         </div>
         <div css={styles.dataMomentCta}>
           <Button
-            onClick={onContinue}
+            onClick={function () {
+              setStage(STAGES.TOP_PICKS);
+            }}
             style={BUTTON_STYLE.SOLID}
             theme={BUTTON_THEME.ORANGE}
           >
@@ -105,54 +186,7 @@ export function DataMomentMessage({
 interface ConfirmSizeMessageProps {
   onHelpClick?(): void;
   onSizeSelect?(id: string): void;
-}
-
-export function ConfirmSizeMessage({
-  onHelpClick,
-  onSizeSelect,
-}: ConfirmSizeMessageProps) {
-  const sizeOptions = [
-    {
-      id: '91W',
-      label: '235/40R18 91W',
-    },
-    {
-      id: '95Y',
-      label: '235/40R18 95Y XL',
-    },
-  ];
-
-  return (
-    <Grid css={styles.container}>
-      <GridItem css={styles.containerInner}>
-        {/* TODO: check heading hierarchy */}
-        <h2 css={[styles.heading, styles.dataMomentHeading]}>
-          Ok, let&apos;s confirm the tire size of your Civic
-        </h2>
-        <p css={styles.dataMomentCopy}>
-          Find it on tthe sidewall of your current tires, the owner&apos;s
-          manual or inside the frame of the driver&apos;s door.
-        </p>
-        <div css={styles.dataMomentCtaWrapper}>
-          {sizeOptions.map((option) => (
-            <Button
-              key={option.id}
-              onClick={function () {
-                onSizeSelect && onSizeSelect(option.id);
-              }}
-              style={BUTTON_STYLE.OUTLINED}
-              theme={BUTTON_THEME.ORANGE}
-            >
-              {option.label}
-            </Button>
-          ))}
-        </div>
-        <button css={styles.dataMomentHelp} onClick={onHelpClick}>
-          Not sure?
-        </button>
-      </GridItem>
-    </Grid>
-  );
+  setStage(stage: STAGES): void;
 }
 
 interface NoResultsMessageProps {
@@ -227,29 +261,47 @@ export function NoResultsMessage({ onSearchBy }: NoResultsMessageProps) {
 }
 
 const mapMessageToStage = {
-  [STAGES.LOADING]: LoadingMessage,
+  [STAGES.LOADING]: LoadingIndicator,
+  [STAGES.BUILD_IN]: BuildInMessage,
   [STAGES.DATA_MOMENT]: DataMomentMessage,
-  [STAGES.CONFIRM_SIZE]: ConfirmSizeMessage, // TODO
   [STAGES.TOP_PICKS]: null,
   [STAGES.NO_RESULTS]: NoResultsMessage,
 };
 
 interface Props
-  extends LoadingMessageProps,
+  extends BuildInMessageProps,
     DataMomentMessageProps,
     ConfirmSizeMessageProps,
     NoResultsMessageProps {
-  stage?: STAGES;
+  hasMultipleTireSizes: boolean;
 }
 
-function CatalogMessage({ stage = STAGES.LOADING, ...rest }: Props) {
-  const MessageComponent = mapMessageToStage[stage];
+function CatalogMessage({ ...rest }: Props) {
+  const {
+    setStage,
+    stage,
+    messageStage,
+    setNewMessage,
+  } = useCatalogSummaryContext();
 
-  if (!MessageComponent) {
-    return null;
-  }
+  const MessageComponent = mapMessageToStage[messageStage];
 
-  return <MessageComponent {...rest} />;
+  return (
+    <Transition
+      appear
+      in={stage === messageStage}
+      timeout={stageToMessageTimeout[messageStage]}
+      onExited={setNewMessage}
+    >
+      {(transitionStatus: TransitionStatus) => (
+        <MessageContainer stage={stage} transitionStatus={transitionStatus}>
+          {MessageComponent && (
+            <MessageComponent {...rest} setStage={setStage} />
+          )}
+        </MessageContainer>
+      )}
+    </Transition>
+  );
 }
 
 export default CatalogMessage;

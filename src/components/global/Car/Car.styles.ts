@@ -2,6 +2,8 @@ import { css, keyframes } from '@emotion/core';
 
 import { MQ } from '~/lib/constants';
 
+import { DEFAULT_SCALE_VECTOR } from './Car.constants';
+
 export const rotateWheel = keyframes({
   '0%': {
     transform: 'rotateZ(0deg)',
@@ -42,18 +44,18 @@ export const styles = {
 
       backfaceVisibility: 'hidden',
       height: 'auto',
-      transform: 'scale3d(1.0, 1.0, 1.0)',
+      transform: `scale3d(${DEFAULT_SCALE_VECTOR.S}, ${DEFAULT_SCALE_VECTOR.S}, ${DEFAULT_SCALE_VECTOR.S})`,
     },
   }),
   scaleAcrossBreakpoints: css({
     transformOrigin: '100% 100%',
 
     [MQ.M]: {
-      transform: 'scale3d(1.5, 1.5, 1.5)',
+      transform: `scale3d(${DEFAULT_SCALE_VECTOR.M}, ${DEFAULT_SCALE_VECTOR.M}, ${DEFAULT_SCALE_VECTOR.M})`,
     },
 
     [MQ.L]: {
-      transform: 'scale3d(1.7, 1.7, 1.7)',
+      transform: `scale3d(${DEFAULT_SCALE_VECTOR.L}, ${DEFAULT_SCALE_VECTOR.L}, ${DEFAULT_SCALE_VECTOR.L})`,
     },
   }),
   solid: css({

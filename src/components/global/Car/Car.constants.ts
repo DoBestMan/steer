@@ -11,12 +11,18 @@ export const CAR_TYPES: Record<string, CarTypes> = {
 
 export const DEFAULT_CAR = Cars['car--sedan'];
 
-/* eslint sort-keys: 0 */
 export const WHEEL_WIDTH: Record<Breakpoint, number> = {
-  S: 300,
-  M: 300,
-  L: 300,
-  XL: 300,
+  S: 175,
+  M: 260,
+  L: 230,
+  XL: 230,
+};
+
+export const DEFAULT_SCALE_VECTOR: Record<Breakpoint, number> = {
+  S: 1,
+  M: 1.5,
+  L: 1.7,
+  XL: 1.7,
 };
 
 export const CAR_DETAILS_TYPES: Record<Cars, CarTypes> = {

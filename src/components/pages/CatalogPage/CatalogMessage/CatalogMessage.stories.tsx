@@ -1,46 +1,51 @@
 import { action } from '@storybook/addon-actions';
 
 import { brands } from '../CatalogPage.constants';
-import CatalogMessage, {
-  ConfirmSizeMessage,
+import {
+  BuildInMessage,
   DataMomentMessage,
-  LoadingMessage,
   NoResultsMessage,
 } from './CatalogMessage';
 
 export default {
-  component: CatalogMessage,
   title: 'Catalog/Loading Interstitial/Message',
 };
 
 export function CatalogLoadingMessage() {
-  const messageData = {
-    brands,
-  };
+  return <BuildInMessage brands={brands} hasMultipleTireSizes={false} />;
+}
 
-  return <LoadingMessage {...messageData} />;
+export function CatalogLoadingConfirmSizeMessage() {
+  return <BuildInMessage brands={brands} hasMultipleTireSizes />;
 }
 
 export function CatalogDataMomentMessage() {
   return (
-    <DataMomentMessage hasOE onContinue={action('Continue button click')} />
+    <DataMomentMessage
+      hasMultipleTireSizes={false}
+      hasOE
+      setStage={action('Go to top picks')}
+    />
   );
 }
 
 export function CatalogDataMomentNoOEMessage() {
   return (
     <DataMomentMessage
+      hasMultipleTireSizes={false}
       hasOE={false}
-      onContinue={action('Continue button click')}
+      setStage={action('Go to top picks')}
     />
   );
 }
 
 export function CatalogConfirmSizeMessage() {
   return (
-    <ConfirmSizeMessage
+    <DataMomentMessage
+      hasMultipleTireSizes
       onHelpClick={action('Not sure button click')}
       onSizeSelect={action('Size option click')}
+      setStage={action('Go to top picks')}
     />
   );
 }

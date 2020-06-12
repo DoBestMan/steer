@@ -109,6 +109,18 @@ const styles: CSSObject = {
     padding: 0,
   },
 
+  loadingContainer: {
+    alignItems: 'center',
+    color: COLORS.GLOBAL.WHITE,
+    display: 'flex',
+    height: '100%',
+    justifyContent: 'center',
+    left: 0,
+    position: 'absolute',
+    top: 0,
+    width: '100%',
+  },
+
   [`logo_${BRANDS.BRIDGESTONE}`]: {
     height: 11,
     width: 73,

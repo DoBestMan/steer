@@ -1,12 +1,28 @@
-import HeaderContainer from '~/components/modules/Catalog/Header.container';
+import { useRouter } from 'next/router';
 
-import CatalogLoading from './CatalogLoading/CatalogLoading';
+import HeaderContainer from '~/components/modules/Catalog/Header.container';
+import { CatalogSummaryContextProvider } from '~/context/CatalogSummary.context';
+
 import styles from './CatalogPage.styles';
+import CatalogSummary from './CatalogSummary/CatalogSummary';
 
 function CatalogPage() {
+  // TEMP: use route params for testing flows
+  const router = useRouter();
+  const { hasMultipleTireSizes, hasResults, isSearch } = router.query;
+
   return (
     <div css={styles.root}>
-      <CatalogLoading isSearching />
+      <CatalogSummaryContextProvider
+        hasMultipleTireSizes={hasMultipleTireSizes === 'true'}
+        hasResults={hasResults === 'true'}
+        isSearch={isSearch === 'true'}
+      >
+        <CatalogSummary
+          hasMultipleTireSizes={hasMultipleTireSizes === 'true'}
+          isSearch={isSearch === 'true'}
+        />
+      </CatalogSummaryContextProvider>
       <HeaderContainer />
     </div>
   );
