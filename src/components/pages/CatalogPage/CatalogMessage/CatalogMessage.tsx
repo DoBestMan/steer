@@ -8,14 +8,16 @@ import Image from '~/components/global/Image/Image';
 import { getSrcset } from '~/components/global/Image/Image.utils';
 import BaseLink from '~/components/global/Link/BaseLink';
 import Loading, { THEME } from '~/components/global/Loading/Loading';
+import Markdown from '~/components/global/Markdown/Markdown';
 import { useCatalogSummaryContext } from '~/context/CatalogSummary.context';
-import { BUTTON_STYLE, BUTTON_THEME } from '~/lib/constants';
+import { SiteCatalogSummary } from '~/data/models/SiteCatalogSummary';
+import { SiteCatalogSummaryBuildIn } from '~/data/models/SiteCatalogSummaryBuildIn';
+import { SiteCatalogSummaryPrompt } from '~/data/models/SiteCatalogSummaryPrompt';
+import { BUTTON_STYLE, BUTTON_THEME, LINK_TYPES } from '~/lib/constants';
+import { ui } from '~/lib/utils/ui-dictionary';
 
-import { Brands } from '../CatalogPage.constants';
-import {
-  STAGES,
-  stageToMessageTimeout,
-} from '../CatalogSummary/CatalogSummary.constants';
+import { STAGES } from '../CatalogPage.constants';
+import { stageToMessageTimeout } from '../CatalogSummary/CatalogSummary.constants';
 import styles from './CatalogMessage.styles';
 import MessageContainer from './components/MessageContainer';
 
@@ -28,235 +30,200 @@ export function LoadingIndicator() {
 }
 
 interface BuildInMessageProps {
-  brands?: Brands;
-  hasMultipleTireSizes: boolean;
+  siteCatalogSummaryBuildIn: SiteCatalogSummaryBuildIn | null;
 }
 
 export function BuildInMessage({
-  brands = [],
-  hasMultipleTireSizes,
+  siteCatalogSummaryBuildIn,
 }: BuildInMessageProps) {
   return (
-    <Grid css={styles.container}>
-      <GridItem css={styles.containerInner}>
-        {/* TODO: check heading hierarchy */}
-        <h2 css={styles.heading}>
-          {hasMultipleTireSizes
-            ? "Ok, let's confirm the tire size of your Civic"
-            : '3 tires fit your Civic'}
-        </h2>
-        {!hasMultipleTireSizes && (
-          <ul css={styles.list}>
-            {brands.map((brand) => {
-              const imageStyles = styles[`logo_${brand.id}`];
-              const srcSet = getSrcset(brand.src, {
-                '100w': { width: 100 },
-                '200w': { width: 200 },
-                '500w': { width: 500 },
-              });
+    siteCatalogSummaryBuildIn && (
+      <Grid css={styles.container}>
+        <GridItem css={styles.containerInner}>
+          {/* TODO: check heading hierarchy */}
+          <h2 css={styles.heading}>{siteCatalogSummaryBuildIn.title}</h2>
+          {siteCatalogSummaryBuildIn.brandList && (
+            <ul css={styles.list}>
+              {siteCatalogSummaryBuildIn.brandList.map(({ image, label }) => {
+                if (!image) {
+                  return;
+                }
+                const id = label.replace(/\s+/g, '').toLowerCase();
+                // TODO: test with actual assets
+                const imageStyles = styles[`logo_${id}`];
+                const srcSet = getSrcset(image.src || '', {
+                  // TODO: src is only temporarily optional
+                  '100w': { width: 100 },
+                  '200w': { width: 200 },
+                  '500w': { width: 500 },
+                });
 
-              return (
-                <li key={brand.altText}>
-                  <Image
-                    altText={brand.altText}
-                    css={imageStyles}
-                    srcSet={srcSet}
-                  />
-                </li>
-              );
-            })}
-          </ul>
-        )}
-      </GridItem>
-    </Grid>
+                return (
+                  <li key={id}>
+                    <Image altText={label} css={imageStyles} srcSet={srcSet} />
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+        </GridItem>
+      </Grid>
+    )
   );
 }
 
 interface DataMomentMessageProps {
-  hasMultipleTireSizes: boolean;
-  hasOE?: boolean;
-  onHelpClick?(): void;
-  onSizeSelect?(id: string): void;
-  setStage(stage: STAGES): void;
+  setStage?(stage: STAGES): void;
+  siteCatalogSummaryPrompt: SiteCatalogSummaryPrompt | null;
 }
 
 export function DataMomentMessage({
-  hasOE = false,
-  hasMultipleTireSizes,
-  onHelpClick,
-  onSizeSelect,
   setStage,
+  siteCatalogSummaryPrompt,
 }: DataMomentMessageProps) {
-  const sizeOptions = [
-    {
-      id: '91W',
-      label: '235/40R18 91W',
-    },
-    {
-      id: '95Y',
-      label: '235/40R18 95Y XL',
-    },
-  ];
-
-  // TODO: this is a quick fix for displaying the two different states
-  // of the data moment. On integration I will tidy this up into a single
-  // return statement.
-  return hasMultipleTireSizes ? (
-    <Grid css={styles.container}>
-      <GridItem css={styles.containerInner}>
-        {/* TODO: check heading hierarchy */}
-        <h2 css={[styles.heading, styles.dataMomentHeading]}>
-          Ok, let&apos;s confirm the tire size of your Civic
-        </h2>
-        <p css={styles.dataMomentCopy}>
-          Find it on tthe sidewall of your current tires, the owner&apos;s
-          manual or inside the frame of the driver&apos;s door.
-        </p>
-        <div css={styles.dataMomentCtaWrapper}>
-          {sizeOptions.map((option) => (
-            <Button
-              key={option.id}
-              onClick={function () {
-                onSizeSelect && onSizeSelect(option.id);
-                setStage(STAGES.TOP_PICKS);
-              }}
-              style={BUTTON_STYLE.OUTLINED}
-              theme={BUTTON_THEME.ORANGE}
-            >
-              {option.label}
-            </Button>
-          ))}
-        </div>
-        <button css={styles.dataMomentHelp} onClick={onHelpClick}>
-          Not sure?
-        </button>
-      </GridItem>
-    </Grid>
-  ) : (
-    <Grid css={styles.container}>
-      <GridItem
-        css={styles.containerInner}
-        gridColumnM="4/end"
-        gridColumnL="8/end"
-      >
-        {/* TODO: check heading hierarchy */}
-        <h2 css={[styles.heading, styles.dataMomentHeading]}>
-          {hasOE
-            ? 'From the factory, your Civic came with a Continental or Firestone'
-            : "We'll start with our 5 top picks"}
-        </h2>
-        <div css={[styles.dataMomentCopy, hasOE && styles.dataMomentCopyNoOE]}>
-          {hasOE ? (
-            <>
-              <p>
-                <strong>Most Civic drivers keep original tires.</strong>
-              </p>
-              <p>
-                That keeps the performance that Honda designed your car for.
-              </p>
-            </>
-          ) : (
-            <>
-              <p>
-                <strong>Most drivers choose from our top picks.</strong>
-              </p>
-              <p>
-                They include the best matches for your Civic based on
-                popularity, user ratings and price.
-              </p>
-            </>
-          )}
-        </div>
-        <div css={styles.dataMomentCta}>
-          <Button
-            onClick={function () {
-              setStage(STAGES.TOP_PICKS);
-            }}
-            style={BUTTON_STYLE.SOLID}
-            theme={BUTTON_THEME.ORANGE}
+  return (
+    siteCatalogSummaryPrompt && (
+      <Grid css={styles.container}>
+        <GridItem
+          css={styles.containerInner}
+          gridColumnM="4/end"
+          gridColumnL="8/end"
+        >
+          {/* TODO: check heading hierarchy */}
+          <Markdown
+            css={[styles.heading, styles.dataMomentHeading]}
+            renderers={{ paragraph: 'h2' }}
           >
-            Ok, continue
-          </Button>
-        </div>
-      </GridItem>
-    </Grid>
+            {siteCatalogSummaryPrompt.title}
+          </Markdown>
+          {siteCatalogSummaryPrompt.body && (
+            <Markdown css={styles.dataMomentCopy}>
+              {siteCatalogSummaryPrompt.body}
+            </Markdown>
+          )}
+          {siteCatalogSummaryPrompt.ctaList && (
+            <div css={styles.dataMomentCtaWrapper}>
+              {siteCatalogSummaryPrompt.ctaList.map(({ label, link }) => {
+                const id = label.replace(/\s+/g, '').toLowerCase();
+                return link ? (
+                  <Button
+                    key={id}
+                    as={LINK_TYPES.A}
+                    href={link.href}
+                    isExternal={link.isExternal}
+                    style={BUTTON_STYLE.OUTLINED}
+                    theme={BUTTON_THEME.ORANGE}
+                  >
+                    {label}
+                  </Button>
+                ) : (
+                  <Button
+                    key={id}
+                    onClick={function () {
+                      setStage && setStage(STAGES.TOP_PICKS);
+                    }}
+                    style={BUTTON_STYLE.OUTLINED}
+                    theme={BUTTON_THEME.ORANGE}
+                  >
+                    {label}
+                  </Button>
+                );
+              })}
+            </div>
+          )}
+          {siteCatalogSummaryPrompt.infoLink && (
+            <button
+              css={styles.dataMomentHelp}
+              onClick={function () {
+                // TODO: Handle "Not sure?" click
+              }}
+            >
+              {siteCatalogSummaryPrompt.infoLink.label}
+            </button>
+          )}
+        </GridItem>
+      </Grid>
+    )
   );
 }
 
-interface ConfirmSizeMessageProps {
-  onHelpClick?(): void;
-  onSizeSelect?(id: string): void;
-  setStage(stage: STAGES): void;
-}
-
 interface NoResultsMessageProps {
-  onSearchBy?(id: string): void;
+  onSearchBy?(opt: string): void;
+  siteCatalogSummaryPrompt: SiteCatalogSummaryPrompt | null;
 }
 
-export function NoResultsMessage({ onSearchBy }: NoResultsMessageProps) {
+export function NoResultsMessage({
+  onSearchBy,
+  siteCatalogSummaryPrompt,
+}: NoResultsMessageProps) {
   const searchByOptions = [
     {
       id: 'vehicle',
-      label: 'Vehicle',
+      labelId: 'catalog.summary.noResultsVehicleLabel',
     },
     {
       id: 'size',
-      label: 'Tire size',
+      labelId: 'catalog.summary.noResultsSizeLabel',
     },
     {
       id: 'brand',
-      label: 'Brand',
+      labelId: 'catalog.summary.noResultsBrandLabel',
     },
     {
       id: 'popular',
-      label: 'Popular tires',
+      labelId: 'catalog.summary.noResultsPopularLabel',
     },
   ];
 
   return (
-    <Grid css={styles.container}>
-      <GridItem
-        css={[styles.containerInner, styles.containerAlignLeft]}
-        gridColumnM="start/7"
-        gridColumnL="3/9"
-      >
-        {/* TODO: check heading hierarchy */}
-        <h2 css={[styles.heading, styles.noResultsHeading]}>
-          Sorry, no tires found for your Honda Civic 1982 Type-R.
-        </h2>
-        <dl css={styles.noResultsSection}>
-          <dt>Let us help you</dt>
-          <dd>
-            Call us at{' '}
-            <BaseLink
-              href="tel:+18884100604"
-              css={styles.noResultsButton}
-              isExternal
-            >
-              (888) 410-0604
-            </BaseLink>
-          </dd>
-          <dt>Or try new search by:</dt>
-          <dd>
-            <ul>
-              {searchByOptions.map((option) => (
-                <li css={styles.noResultsButtonWrapper} key={option.label}>
-                  {/* TODO: hover/focus styles */}
-                  <button
-                    css={styles.noResultsButton}
-                    onClick={function () {
-                      onSearchBy && onSearchBy(option.id);
-                    }}
-                  >
-                    {option.label}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </dd>
-        </dl>
-      </GridItem>
-    </Grid>
+    siteCatalogSummaryPrompt && (
+      <Grid css={styles.container}>
+        <GridItem
+          css={[styles.containerInner, styles.containerAlignLeft]}
+          gridColumnM="start/7"
+          gridColumnL="3/9"
+        >
+          {/* TODO: check heading hierarchy */}
+          <Markdown
+            css={[styles.heading, styles.noResultsHeading]}
+            renderers={{ paragraph: 'h2' }}
+          >
+            {siteCatalogSummaryPrompt.title}
+          </Markdown>
+          <dl css={styles.noResultsSection}>
+            <dt>{ui('catalog.summary.noResultsContactLabel')}</dt>
+            <dd>
+              {ui('catalog.summary.noResultsContactDesc')}
+              <BaseLink
+                href="tel:+18884100604"
+                css={styles.noResultsButton}
+                isExternal
+              >
+                {/* TODO: get number from Global API: https://simpletire.atlassian.net/browse/WCS-482 */}
+                (888) 410-0604
+              </BaseLink>
+            </dd>
+            <dt>{ui('catalog.summary.noResultsNewSearchLabel')}</dt>
+            <dd>
+              <ul>
+                {searchByOptions.map((option) => (
+                  <li css={styles.noResultsButtonWrapper} key={option.id}>
+                    <button
+                      css={styles.noResultsButton}
+                      onClick={function () {
+                        onSearchBy && onSearchBy(option.id);
+                      }}
+                    >
+                      {ui(option.labelId)}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </dd>
+          </dl>
+        </GridItem>
+      </Grid>
+    )
   );
 }
 
@@ -268,15 +235,11 @@ const mapMessageToStage = {
   [STAGES.NO_RESULTS]: NoResultsMessage,
 };
 
-interface Props
-  extends BuildInMessageProps,
-    DataMomentMessageProps,
-    ConfirmSizeMessageProps,
-    NoResultsMessageProps {
-  hasMultipleTireSizes: boolean;
+interface Props {
+  catalogSummary: SiteCatalogSummary;
 }
 
-function CatalogMessage({ ...rest }: Props) {
+function CatalogMessage({ catalogSummary }: Props) {
   const {
     setStage,
     stage,
@@ -296,7 +259,7 @@ function CatalogMessage({ ...rest }: Props) {
       {(transitionStatus: TransitionStatus) => (
         <MessageContainer stage={stage} transitionStatus={transitionStatus}>
           {MessageComponent && (
-            <MessageComponent {...rest} setStage={setStage} />
+            <MessageComponent {...catalogSummary} setStage={setStage} />
           )}
         </MessageContainer>
       )}

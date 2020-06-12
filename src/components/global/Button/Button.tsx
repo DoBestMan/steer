@@ -16,6 +16,7 @@ interface Props {
   as?: LINK_TYPE;
   children: ReactNode;
   isDisabled?: boolean;
+  isExternal?: boolean;
   isToggle?: boolean;
   isToggleActive?: boolean;
   onClick?: MouseEventHandler;

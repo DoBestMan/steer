@@ -1,6 +1,10 @@
 import { action } from '@storybook/addon-actions';
 
-import { brands } from '../CatalogPage.constants';
+import {
+  vehiclesDisambiguation,
+  vehiclesNoOeWithSize,
+  vehiclesNoResultWithTrim,
+} from '../CatalogSummary/CatalogSummary.mocks';
 import {
   BuildInMessage,
   DataMomentMessage,
@@ -11,45 +15,47 @@ export default {
   title: 'Catalog/Loading Interstitial/Message',
 };
 
-export function CatalogLoadingMessage() {
-  return <BuildInMessage brands={brands} hasMultipleTireSizes={false} />;
-}
-
-export function CatalogLoadingConfirmSizeMessage() {
-  return <BuildInMessage brands={brands} hasMultipleTireSizes />;
-}
-
-export function CatalogDataMomentMessage() {
+export function CatalogBuildInNoOeMessage() {
   return (
-    <DataMomentMessage
-      hasMultipleTireSizes={false}
-      hasOE
-      setStage={action('Go to top picks')}
+    <BuildInMessage
+      siteCatalogSummaryBuildIn={vehiclesNoOeWithSize.siteCatalogSummaryBuildIn}
     />
   );
 }
 
-export function CatalogDataMomentNoOEMessage() {
+export function CatalogBuildInDisambiguationMessage() {
   return (
-    <DataMomentMessage
-      hasMultipleTireSizes={false}
-      hasOE={false}
-      setStage={action('Go to top picks')}
+    <BuildInMessage
+      siteCatalogSummaryBuildIn={
+        vehiclesDisambiguation.siteCatalogSummaryBuildIn
+      }
     />
   );
 }
 
-export function CatalogConfirmSizeMessage() {
+export function CatalogDataMomentNoOeMessage() {
   return (
     <DataMomentMessage
-      hasMultipleTireSizes
-      onHelpClick={action('Not sure button click')}
-      onSizeSelect={action('Size option click')}
-      setStage={action('Go to top picks')}
+      siteCatalogSummaryPrompt={vehiclesNoOeWithSize.siteCatalogSummaryPrompt}
+    />
+  );
+}
+
+export function CatalogDataMomentDisambiguationMessage() {
+  return (
+    <DataMomentMessage
+      siteCatalogSummaryPrompt={vehiclesDisambiguation.siteCatalogSummaryPrompt}
     />
   );
 }
 
 export function CatalogNoResultsMessage() {
-  return <NoResultsMessage onSearchBy={action('Search by button click')} />;
+  return (
+    <NoResultsMessage
+      onSearchBy={action('Search by click')}
+      siteCatalogSummaryPrompt={
+        vehiclesNoResultWithTrim.siteCatalogSummaryPrompt
+      }
+    />
+  );
 }

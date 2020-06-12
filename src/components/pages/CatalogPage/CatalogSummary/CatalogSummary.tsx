@@ -4,7 +4,7 @@ import { useCatalogSummaryContext } from '~/context/CatalogSummary.context';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 
 import CatalogMessage from '../CatalogMessage/CatalogMessage';
-import { brands } from '../CatalogPage.constants';
+import { vehiclesNoOeWithSize } from './CatalogSummary.mocks';
 import Background from './components/Background';
 import Car from './components/Car';
 import Content from './components/Content';
@@ -17,21 +17,14 @@ interface Props {
   isSearch: boolean;
 }
 
-function CatalogSummary({ hasMultipleTireSizes, isSearch }: Props) {
-  const { stage, setStage } = useCatalogSummaryContext();
+function CatalogSummary({ isSearch }: Props) {
+  const { stage } = useCatalogSummaryContext();
 
   const { bk } = useBreakpoints();
 
   // TODO: Temp fix before mock data using correct asset ids.
   const sceneryType = 'scenery--rural' as Sceneries;
   const carId = Cars['car--sedan'];
-
-  // TODO: Temp fix before mock data
-  const messageData = {
-    brands,
-    hasMultipleTireSizes,
-    setStage,
-  };
 
   return (
     <>
@@ -64,7 +57,10 @@ function CatalogSummary({ hasMultipleTireSizes, isSearch }: Props) {
         </Overlay>
       </Background>
       <Content data-component="Content" stage={stage}>
-        <CatalogMessage data-component="MessageContainer" {...messageData} />
+        <CatalogMessage
+          data-component="MessageContainer"
+          catalogSummary={vehiclesNoOeWithSize}
+        />
       </Content>
     </>
   );

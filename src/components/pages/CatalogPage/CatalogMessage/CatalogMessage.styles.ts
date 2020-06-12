@@ -1,10 +1,15 @@
 import { CSSObject } from '@emotion/core';
 
-import { BORDERS, COLORS, MQ, SPACING, TIME } from '~/lib/constants';
+import {
+  BORDERS,
+  COLORS,
+  GAP_COLUMNS,
+  MQ,
+  SPACING,
+  TIME,
+} from '~/lib/constants';
 import { disableGlobalFocus } from '~/styles/document/accessibility.styles';
 import { typography, typographyStyles } from '~/styles/typography.styles';
-
-import { BRANDS } from '../CatalogPage.constants';
 
 const styles: CSSObject = {
   container: {
@@ -35,16 +40,19 @@ const styles: CSSObject = {
       color: COLORS.ORANGE.SHADE_85,
       marginBottom: SPACING.SIZE_40,
       textAlign: 'right',
-      width: 220,
+
+      [MQ.M]: {
+        width: `calc(75% - ${GAP_COLUMNS.M / 4}px)`, // 3 of 4 columns
+      },
+
+      [MQ.L]: {
+        width: `calc(66.66% - ${GAP_COLUMNS.L / 3}px`, // 4 of 6 columns
+      },
     },
   ],
 
-  dataMomentCopyNoOE: {
-    width: 260,
-  },
-
   dataMomentCtaWrapper: {
-    'button:not(:last-child)': {
+    '> *:not(:last-child)': {
       marginBottom: SPACING.SIZE_10,
 
       [MQ.M]: {
@@ -121,7 +129,8 @@ const styles: CSSObject = {
     width: '100%',
   },
 
-  [`logo_${BRANDS.BRIDGESTONE}`]: {
+  /* eslint-disable @typescript-eslint/camelcase */
+  logo_bridgestone: {
     height: 11,
     width: 73,
 
@@ -130,7 +139,7 @@ const styles: CSSObject = {
       width: 87,
     },
   },
-  [`logo_${BRANDS.CONTINENTAL}`]: {
+  logo_continental: {
     height: 14,
     width: 70,
 
@@ -139,7 +148,7 @@ const styles: CSSObject = {
       width: 84,
     },
   },
-  [`logo_${BRANDS.MICHELIN}`]: {
+  logo_michelin: {
     height: 16,
     width: 80,
 
@@ -148,7 +157,7 @@ const styles: CSSObject = {
       width: 95,
     },
   },
-  [`logo_${BRANDS.PIRELLI}`]: {
+  logo_pirelli: {
     height: 12,
     width: 48,
 
@@ -157,6 +166,7 @@ const styles: CSSObject = {
       width: 57,
     },
   },
+  /* eslint-enable @typescript-eslint/camelcase */
 
   noResultsButton: [
     disableGlobalFocus,

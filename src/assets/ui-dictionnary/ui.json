@@ -44,6 +44,15 @@
     },
     "productListing": {
       "morePromos": "+ {{number}} other deals"
+    },
+    "summary": {
+      "noResultsContactLabel": "Let us help you",
+      "noResultsContactDesc": "Call us at ",
+      "noResultsNewSearchLabel": "Or try new search by:",
+      "noResultsVehicleLabel": "Vehicle",
+      "noResultsSizeLabel": "Tire size",
+      "noResultsBrandLabel": "Brand",
+      "noResultsPopularLabel": "Popular tires"
     }
   },
   "footer": {
