@@ -48,10 +48,9 @@ const styles: CSSObject = {
     },
   ],
   label: [
-    typography.secondaryHeadline,
+    typography.filterItemLabel,
     {
       marginRight: SPACING.SIZE_05,
-      [MQ.L]: typography.primarySubhead,
     },
   ],
   title: [

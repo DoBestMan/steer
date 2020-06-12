@@ -55,7 +55,7 @@ function Categories({
         gridColumnM="3/7"
         gridColumnL="4/10"
         gridColumnXL="4/8"
-        css={styles.content}
+        css={styles.categoryContent}
       >
         <h1 css={[typography.jumboHeadline, styles.mobileHeader]}>
           {category}

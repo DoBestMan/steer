@@ -1,4 +1,4 @@
-import { css } from '@emotion/core';
+import { CSSObject } from '@emotion/core';
 
 import { BORDERS, COLORS, MQ, SPACING } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
@@ -8,27 +8,13 @@ const DECORATOR_CONTENT = {
   content: '"•"',
 };
 
-const styles = {
-  alignList: css({
+const styles: CSSObject = {
+  alignList: {
     [MQ.M]: {
       marginTop: -SPACING.SIZE_20, // align content with links label
     },
-  }),
-  categoryList: css({
-    [MQ.S]: {
-      marginBottom: SPACING.SIZE_40,
-    },
-    [MQ.L]: {
-      marginBottom: SPACING.SIZE_60,
-    },
-  }),
-  container: css({
-    color: COLORS.GLOBAL.BLACK,
-    display: 'flex',
-    marginBottom: SPACING.SIZE_10,
-    position: 'relative',
-  }),
-  content: css({
+  },
+  categoryContent: {
     background: COLORS.GLOBAL.WHITE,
     height: '100%',
     width: '100%',
@@ -38,8 +24,22 @@ const styles = {
     [MQ.M]: {
       padding: `0 0 ${SPACING.SIZE_50}px 0`,
     },
-  }),
-  decoration: css({
+  },
+  categoryList: {
+    [MQ.S]: {
+      marginBottom: SPACING.SIZE_40,
+    },
+    [MQ.L]: {
+      marginBottom: SPACING.SIZE_60,
+    },
+  },
+  container: {
+    color: COLORS.GLOBAL.BLACK,
+    display: 'flex',
+    marginBottom: SPACING.SIZE_10,
+    position: 'relative',
+  },
+  decoration: {
     [MQ.M]: {
       ':before': {
         ...DECORATOR_CONTENT,
@@ -50,12 +50,12 @@ const styles = {
       top: '50%',
       transform: 'translateY(-50%)',
     },
-  }),
-  flair: css({
+  },
+  flair: {
     color: COLORS.GLOBAL.ORANGE,
     paddingLeft: SPACING.SIZE_10,
-  }),
-  flairIcon: css({
+  },
+  flairIcon: {
     maxWidth: 20,
     paddingLeft: 5,
 
@@ -63,8 +63,8 @@ const styles = {
       // aligning items in flex container will misalign text flair
       paddingBottom: 8,
     },
-  }),
-  flairSeparator: css({
+  },
+  flairSeparator: {
     ':before': {
       ...DECORATOR_CONTENT,
       fontSize: 6,
@@ -72,8 +72,8 @@ const styles = {
     alignItems: 'center',
     display: 'flex',
     paddingLeft: SPACING.SIZE_10,
-  }),
-  header: css({
+  },
+  header: {
     color: COLORS.LIGHT.GRAY_70,
     marginBottom: SPACING.SIZE_10,
     [MQ.S]: [
@@ -88,28 +88,28 @@ const styles = {
         paddingTop: 'unset',
       },
     ],
-  }),
-  hide: css({
+  },
+  hide: {
     [MQ.M]: {
       display: 'none',
     },
-  }),
-  image: css({
+  },
+  image: {
     alignItems: 'center',
     display: 'flex',
     height: '100%',
     span: {
       maxWidth: 30, // targets svg icon
     },
-  }),
-  imageContainer: css({
+  },
+  imageContainer: {
     alignItems: 'flex-end',
     bottom: 0,
     display: 'flex',
     height: '100%',
     right: 0,
-  }),
-  imageVehicle: css({
+  },
+  imageVehicle: {
     span: {
       bottom: 0,
       display: 'inline-flex',
@@ -118,16 +118,17 @@ const styles = {
       position: 'absolute',
       right: 0,
     },
-  }),
-  info: css({
-    color: COLORS.LIGHT.GRAY_70,
-    [MQ.S]: typography.smallCopyTight,
-    [MQ.L]: typography.bodyCopyTight,
-  }),
-  infoTitle: css({
+  },
+  info: [
+    typography.labelCopyTight,
+    {
+      color: COLORS.LIGHT.GRAY_70,
+    },
+  ],
+  infoTitle: {
     fontWeight: 'bold',
-  }),
-  label: css({
+  },
+  label: {
     alignItems: 'center',
     display: 'flex',
     [MQ.S]: typography.jumboHeadline,
@@ -139,12 +140,12 @@ const styles = {
         },
       },
     ],
-  }),
+  },
   link: typography.bodyCopy,
-  linkLabel: css({
+  linkLabel: {
     display: 'flex',
-  }),
-  list: css({
+  },
+  list: {
     // enables the entire list item to be clickable while only triggering focus styles on link label
     'a:after': {
       content: '""',
@@ -153,8 +154,8 @@ const styles = {
       width: '100%',
     },
     width: '100%',
-  }),
-  listItem: css({
+  },
+  listItem: {
     ':not(:last-of-type)': {
       borderBottom: BORDERS.SOLID_GRAY_10_1PX,
     },
@@ -167,8 +168,8 @@ const styles = {
       borderColor: 'transparent',
     },
     width: '100%',
-  }),
-  listTitle: css({
+  },
+  listTitle: {
     alignItems: 'center',
     color: COLORS.LIGHT.GRAY_70,
     display: 'flex',
@@ -180,8 +181,8 @@ const styles = {
     [MQ.M]: {
       marginTop: 0,
     },
-  }),
-  mobileHeader: css({
+  },
+  mobileHeader: {
     [MQ.S]: {
       marginBottom: SPACING.SIZE_20,
       paddingTop: SPACING.SIZE_30,
@@ -191,23 +192,23 @@ const styles = {
       marginBottom: 0,
       paddingTop: 0,
     },
-  }),
-  selected: css({
+  },
+  selected: {
     color: COLORS.GLOBAL.ORANGE,
-  }),
-  smallHide: css({
+  },
+  smallHide: {
     [MQ.S]: {
       display: 'none',
     },
     [MQ.M]: {
       display: 'initial',
     },
-  }),
-  smallShow: css({
+  },
+  smallShow: {
     [MQ.M]: {
       display: 'none',
     },
-  }),
+  },
 };
 
 export default styles;

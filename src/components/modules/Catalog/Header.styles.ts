@@ -37,11 +37,12 @@ const styles: CSSObject = {
       display: 'flex',
     },
   ],
-  label: {
-    marginRight: SPACING.SIZE_15,
-    [MQ.S]: typography.secondarySubhead,
-    [MQ.M]: typography.primarySubhead,
-  },
+  label: [
+    typography.labelHeadline,
+    {
+      marginRight: SPACING.SIZE_15,
+    },
+  ],
   link: {
     marginLeft: SPACING.SIZE_05,
   },

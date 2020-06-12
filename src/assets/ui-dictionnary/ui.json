@@ -27,6 +27,7 @@
       "max": "maximum",
       "min": "minimum",
       "slider": "{{name}} slider",
+      "from": "From",
       "milesAbbr": "mi",
       "sortBy": "Sort by",
       "priceRangeLabel": "Price Range",

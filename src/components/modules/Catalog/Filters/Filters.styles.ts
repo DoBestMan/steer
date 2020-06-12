@@ -14,7 +14,7 @@ const styles: CSSObject = {
     overflowX: 'hidden',
   },
   filterLabel: [
-    typography.bodyCopy,
+    typography.labelCopyTight,
     {
       color: COLORS.GLOBAL.BLACK,
       marginBottom: SPACING.SIZE_15,

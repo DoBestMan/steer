@@ -4,42 +4,57 @@ import { COLORS, MQ, SPACING } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const styles: CSSObject = {
-  range: {
-    [MQ.S]: [
-      typography.smallCopyTight,
-      {
-        flexGrow: 1,
-      },
-    ],
-    [MQ.M]: typography.bodyCopy,
-  },
+  range: [
+    typography.labelCopyTight,
+    {
+      flexGrow: 1,
+    },
+  ],
   rangeLabel: [
-    typography.bodyCopyTight,
+    typography.labelCopyTight,
     {
       color: COLORS.LIGHT.GRAY_70,
       marginRight: SPACING.SIZE_05,
     },
   ],
-  results: {
-    alignItems: 'center',
-    display: 'flex',
-    [MQ.S]: [
-      typography.secondarySubhead,
-      {
+  rangePrefix: [
+    typography.labelHeadline,
+    {
+      marginRight: SPACING.SIZE_05,
+      [MQ.L]: {
+        display: 'none',
+      },
+    },
+  ],
+  rangePrefixHide: {
+    display: 'none',
+  },
+  results: [
+    typography.labelHeadline,
+    {
+      alignItems: 'center',
+      display: 'flex',
+      [MQ.S]: {
         ':after': {
           content: '"•"',
           fontSize: 6,
           padding: SPACING.SIZE_10,
         },
       },
-    ],
-    [MQ.M]: typography.tertiaryHeadline,
-    [MQ.L]: {
-      ':after': {
-        content: '""',
-        padding: 'unset',
+      [MQ.L]: {
+        ':after': {
+          content: '""',
+          padding: 'unset',
+        },
+        flexGrow: 1,
       },
-      flexGrow: 1,
+    },
+  ],
+  resultsNone: {
+    display: 'none',
+    [MQ.L]: {
+      display: 'unset',
+      visibility: 'hidden',
     },
   },
   root: {
@@ -73,16 +88,14 @@ const styles: CSSObject = {
       display: 'none',
     },
   },
-  sort: {
-    [MQ.S]: typography.smallCopyTight,
-    [MQ.M]: typography.bodyCopy,
-  },
-  sortLabel: {
-    color: COLORS.LIGHT.GRAY_70,
-    marginRight: SPACING.SIZE_05,
-    [MQ.S]: typography.smallCopy,
-    [MQ.M]: typography.bodyCopyTight,
-  },
+  sort: typography.labelCopy,
+  sortLabel: [
+    typography.labelCopy,
+    {
+      color: COLORS.LIGHT.GRAY_70,
+      marginRight: SPACING.SIZE_05,
+    },
+  ],
 };
 
 export default styles;

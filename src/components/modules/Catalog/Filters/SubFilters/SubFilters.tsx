@@ -53,8 +53,11 @@ export default function SubFilters({
 
   return (
     <div css={styles.root}>
-      <p css={styles.results}>
+      <p css={[styles.results, !resultsCount && styles.resultsNone]}>
         {ui('catalog.filters.results', { number: resultsCount })}
+      </p>
+      <p css={[styles.rangePrefix, resultsCount && styles.rangePrefixHide]}>
+        {ui('catalog.filters.from')}
       </p>
       <Link
         theme={LINK_THEME.LIGHT}
