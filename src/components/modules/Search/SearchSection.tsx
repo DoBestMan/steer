@@ -62,6 +62,11 @@ function SearchSection({
                   >
                     {innerContent}
                   </BaseLink>
+                  {item.detailLabel && (
+                    <div css={styles.secondaryItemDisplay}>
+                      {item.detailLabel}
+                    </div>
+                  )}
                 </li>
               );
             }

@@ -48,7 +48,7 @@ const styles: CSSObject = {
     typography.smallCopyTight,
     {
       color: COLORS.ORANGE.SHADE_85,
-      marginTop: 3,
+      marginTop: SPACING.SIZE_10,
       [MQ.M]: typography.bodyCopyTight,
     },
   ],
