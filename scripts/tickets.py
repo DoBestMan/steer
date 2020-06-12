@@ -128,6 +128,7 @@ vercelwc.write_build_url('qa', url)
 url = vercelwc.get_build_url('mock-qa')
 vercelwc.write_build_url('mock-qa', url)
 githubwc.find_commits_add_to_json()
+githubwc.notify_devs()
 
 keys = jirawc.get_issue_keys(jirawc.get_issues_with_jql())
 jirawc.bulk_update_done(keys['done'], 'QA Not Required')
