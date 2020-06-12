@@ -144,7 +144,7 @@ const styles: CSSObject = {
   },
   navContentNested: {
     display: 'flex',
-    flexBasis: '100%',
+    flexBasis: 'auto',
     flexGrow: 1,
     width: '100%',
   },
