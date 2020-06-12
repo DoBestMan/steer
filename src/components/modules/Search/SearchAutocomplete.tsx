@@ -394,6 +394,8 @@ function SearchAutocomplete({
                           label={searchGroup.label}
                           siteSearchResultList={siteSearchResultTextList}
                           onClick={handleValueSelection}
+                          sectionIndex={index}
+                          selectedItemIndex={selectedItemIndex}
                         />
                       )}
                     </li>
