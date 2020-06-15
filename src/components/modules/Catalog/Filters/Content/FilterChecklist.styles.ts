@@ -6,6 +6,7 @@ import { typography } from '~/styles/typography.styles';
 const styles: CSSObject = {
   checkboxLabel: {
     flexGrow: 1,
+    marginRight: SPACING.SIZE_10,
   },
   container: {
     alignItems: 'center',
@@ -53,6 +54,9 @@ const styles: CSSObject = {
       marginRight: SPACING.SIZE_05,
     },
   ],
+  root: {
+    minWidth: 200,
+  },
   title: [
     typography.eyebrow,
     {

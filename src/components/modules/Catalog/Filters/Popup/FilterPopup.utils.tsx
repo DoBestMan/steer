@@ -1,15 +1,17 @@
 import FilterChecklist from '../Content/FilterChecklist';
+import FilterPopular from '../Content/FilterPopular';
 import FilterRange from '../Content/FilterRange';
 import FilterSort from '../Content/FilterSort';
 import {
   CatalogFilterChecklist,
   CatalogFilterChecklistLarge,
+  CatalogFilterPopular,
   CatalogFilterRange,
   CatalogFilterSort,
   CatalogFilterTypes,
   FilterContentTypes,
 } from '../Filter.types';
-import { FilterObject, FilterValue } from '../Filters.context';
+import { FilterMap, FiltersContextProps } from '../Filters.context';
 
 /*
  * ChildProps interface will be used in the filter content components, and generally use the same props with some exceptions (marked with **)
@@ -19,11 +21,11 @@ import { FilterObject, FilterValue } from '../Filters.context';
  * @onChange - used to update filter map as user applies filter values (NOT the `Apply` button)
  */
 export interface ChildProps {
-  applyFilter: () => void;
+  applyFilters: () => void;
   filter: CatalogFilterTypes;
-  filtersToApply: Record<string, FilterObject>;
+  filtersToApply: FilterMap;
   isLarge?: boolean;
-  onChange: (group: string, id: string, value: FilterValue) => void;
+  onChange: FiltersContextProps['createUpdateFilterGroup'];
 }
 
 /*
@@ -74,7 +76,7 @@ export const mapTypeToContent: Record<
     );
   },
   [FilterContentTypes.CatalogFilterSort]({
-    applyFilter,
+    applyFilters,
     filter,
     ...rest
   }: ChildProps) {
@@ -82,7 +84,20 @@ export const mapTypeToContent: Record<
       <FilterSort
         {...(filter as CatalogFilterSort)}
         {...rest}
-        applyFilter={applyFilter}
+        applyFilters={applyFilters}
+      />
+    );
+  },
+  [FilterContentTypes.CatalogFilterPopular]({
+    filter,
+    filtersToApply,
+    onChange,
+  }: ChildProps) {
+    return (
+      <FilterPopular
+        {...(filter as CatalogFilterPopular)}
+        filtersToApply={filtersToApply}
+        onChange={onChange}
       />
     );
   },

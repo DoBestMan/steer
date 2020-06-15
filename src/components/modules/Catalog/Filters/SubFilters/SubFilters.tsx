@@ -14,14 +14,13 @@ import { FiltersContextProps } from '../Filters.context';
 import FilterPopup from '../Popup/FilterPopup';
 import styles from './SubFilters.styles';
 
-interface Props {
-  activeFilters: FiltersContextProps['activeFilters'];
+interface Props
+  extends Pick<FiltersContextProps, 'activeFilters' | 'selectingFilter'> {
   isAdvancedView?: boolean;
   onClose: FiltersContextProps['clearSelectingFilter'];
   onOpen: FiltersContextProps['createOpenFilterHandler'];
   priceFilter: CatalogFilterRange;
   resultsCount: number;
-  selectingFilter: FiltersContextProps['selectingFilter'];
   sortFilter: CatalogFilterSort;
 }
 
@@ -47,10 +46,11 @@ export default function SubFilters({
   const max = currentMax || maxValue;
   const { lessThan } = useBreakpoints();
   const priceFormatter = mapUnitToLabelFormatter[unit];
-  const sortItem = sortFilter.items.find(
-    (item) => item.id === activeFilters[sortFilter.label],
-  );
-
+  const sortKey =
+    activeFilters[sortFilter.label] &&
+    Object.keys(activeFilters[sortFilter.label])[0];
+  const sortItem =
+    sortKey && sortFilter.items.find((item) => item.id === sortKey);
   return (
     <div css={styles.root}>
       <p css={[styles.results, !resultsCount && styles.resultsNone]}>
@@ -101,7 +101,7 @@ export default function SubFilters({
         onClick={onOpen(sortFilter.label)}
         css={styles.sort}
       >
-        {sortItem?.title || sortFilter.items[0].title}
+        {(sortItem && sortItem.title) || sortFilter.items[0].title}
       </Link>
       <FilterPopup
         isOpen={sortFilter.label === selectingFilter}

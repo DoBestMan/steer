@@ -33,7 +33,8 @@
       "priceRangeLabel": "Price Range",
       "priceRange": "{{min}} to {{max}}",
       "results": "{{number}} results",
-      "apply": "Apply"
+      "apply": "Apply",
+      "popularFilters": "Popular Filters"
     },
     "header": {
       "advancedViewLabel": "Advanced view",

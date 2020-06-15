@@ -1,8 +1,12 @@
+import { useEffect, useRef } from 'react';
+
+import { useBreakpoints } from '~/hooks/useBreakpoints';
+import { TIME } from '~/lib/constants';
+
 import { CatalogFilterTypes, FilterContentTypes } from '../Filter.types';
 import { useFiltersContext } from '../Filters.context';
 import FilterDropdown from './Dropdown';
 import FilterModal from './FilterModal';
-import useFilterPopup from './FilterPopup.hooks';
 import { mapTypeToContent } from './FilterPopup.utils';
 
 interface Props {
@@ -11,42 +15,78 @@ interface Props {
   onClose: () => void;
 }
 
-export default function FilterPopup({ filter, ...props }: Props) {
-  const { createApplyFiltersHandler } = useFiltersContext();
+export default function FilterPopup({ filter, isOpen, onClose }: Props) {
+  const { greaterThan } = useBreakpoints();
+  const isLarge = greaterThan.M;
+  const {
+    applyFilters,
+    cancelApplyFilters,
+    createResetFiltersHandler,
+    createUpdateFilterGroup,
+    filtersToApply,
+  } = useFiltersContext();
   const hasActionBar = filter.type !== FilterContentTypes.CatalogFilterSort;
-  const { createResetFiltersHandler, ...childProps } = useFilterPopup({
-    createApplyFiltersHandler,
-  });
+
+  const prevIsLarge = useRef(isLarge);
+  const prevIsOpen = useRef(isOpen);
+  useEffect(() => {
+    // closes popular filter dropdown if open while resizing browser
+    if (
+      isOpen &&
+      !prevIsLarge.current &&
+      isLarge &&
+      filter.type === FilterContentTypes.CatalogFilterPopular
+    ) {
+      onClose();
+    }
+    prevIsLarge.current = isLarge;
+
+    // returns filtersToApply to original state if popup closes without applying
+    if (prevIsOpen.current && !isOpen) {
+      setTimeout(() => cancelApplyFilters(), TIME.MS350);
+    }
+    prevIsOpen.current = isOpen;
+  }, [cancelApplyFilters, isOpen, onClose, filter.type, isLarge]);
 
   if (filter.type === FilterContentTypes.CatalogFilterToggle) {
     return null;
   }
 
+  const childProps = {
+    applyFilters,
+    filter,
+    filtersToApply,
+    isLarge,
+    onChange: createUpdateFilterGroup,
+  };
+
   if (
     filter.type !== FilterContentTypes.CatalogFilterChecklistLarge &&
-    childProps.isLarge
+    isLarge
   ) {
     return (
       <FilterDropdown
+        isOpen={isOpen}
         hasActionBar={hasActionBar}
-        onApplyFilters={childProps.applyFilter}
+        onApplyFilters={applyFilters}
         onResetFilters={createResetFiltersHandler(filter.label)}
-        {...props}
+        onClose={onClose}
       >
-        {mapTypeToContent[filter.type]({ filter, ...childProps })}
+        {mapTypeToContent[filter.type](childProps)}
       </FilterDropdown>
     );
   }
 
   return (
     <FilterModal
+      isOpen={isOpen}
       hasActionBar={hasActionBar}
-      onApplyFilters={childProps.applyFilter}
+      onApplyFilters={applyFilters}
       onResetFilters={createResetFiltersHandler(filter.label)}
       contentLabel={filter.label}
-      {...props}
+      onClose={onClose}
     >
-      {mapTypeToContent[filter.type]({ filter, ...childProps })}
+      {mapTypeToContent[filter.type](childProps)}
     </FilterModal>
   );
 }

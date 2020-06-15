@@ -28,13 +28,12 @@ export default function Header({
     activeFilters,
     clearSelectingFilter,
     createOpenFilterHandler,
-    selectingFilter,
     createToggleFilterHandler,
+    selectingFilter,
   } = useFiltersContext();
 
   const commonProps = {
     activeFilters,
-    createToggleFilterHandler,
     onClose: clearSelectingFilter,
     onOpen: createOpenFilterHandler,
     selectingFilter,
@@ -47,7 +46,11 @@ export default function Header({
           isAdvancedView={isAdvancedView}
           {...rest}
         />
-        <Filters {...commonProps} isAdvancedView={isAdvancedView} />
+        <Filters
+          {...commonProps}
+          createToggleFilterHandler={createToggleFilterHandler}
+          isAdvancedView={isAdvancedView}
+        />
       </div>
       <SubFilters
         resultsCount={resultsCount}

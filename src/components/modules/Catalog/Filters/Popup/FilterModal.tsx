@@ -30,7 +30,7 @@ function FilterModal({
       isOpen={isOpen}
       onClose={onClose}
     >
-      <div css={styles.filterContent}>{children}</div>
+      <div css={hasActionBar && styles.actionBar}>{children}</div>
       {hasActionBar && (
         <ActionBar
           onResetFilters={onResetFilters}

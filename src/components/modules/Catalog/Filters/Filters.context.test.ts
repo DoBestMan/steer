@@ -15,40 +15,92 @@ describe('useFiltersContextSetup', () => {
   //   expect(result.current.activeFilters).toHaveProperty('filter', 'value');
   // });
 
-  test('applying a filter', () => {
+  test('applying a group of filters', () => {
     const { result } = renderHook(() => useFiltersContextSetup(mockArgs));
 
     act(() => {
-      result.current.createOpenFilterHandler('filter');
-      result.current.createApplyFiltersHandler({ filter: { id: 'value' } })();
+      result.current.createUpdateFilterGroup({
+        group: 'filter',
+        id: 'id',
+        value: 'value',
+      })();
+      result.current.createUpdateFilterGroup({
+        group: 'filter',
+        id: 'anotherId',
+        value: 'val',
+      })();
     });
 
+    expect(result.current.filtersToApply).toHaveProperty('filter', {
+      id: 'value',
+      anotherId: 'val',
+    });
+    expect(result.current.activeFilters).toEqual({});
+
+    act(() => result.current.applyFilters());
+
     expect(result.current.activeFilters).toHaveProperty('filter', {
+      anotherId: 'val',
       id: 'value',
     });
-    expect(result.current.selectingFilter).toBeFalsy();
   });
 
-  test('merging an applied filter with current filters', () => {
+  test('toggling filters with no dropdown', () => {
+    const { result } = renderHook(() => useFiltersContextSetup(mockArgs));
+
+    act(() =>
+      result.current.createToggleFilterHandler({
+        group: 'group1',
+        id: 'id',
+        value: true,
+      })(),
+    );
+    act(() =>
+      result.current.createToggleFilterHandler({
+        group: 'group1',
+        id: 'id2',
+        value: true,
+      })(),
+    );
+    act(() =>
+      result.current.createToggleFilterHandler({
+        group: 'group2',
+        id: 'id',
+        value: true,
+      })(),
+    );
+
+    expect(result.current.activeFilters).toHaveProperty('group1', {
+      id: true,
+      id2: true,
+    });
+    expect(result.current.activeFilters).toHaveProperty('group2', {
+      id: true,
+    });
+  });
+
+  test('overwriting a toggle filter', () => {
     const { result } = renderHook(() => useFiltersContextSetup(mockArgs));
 
     act(() => {
-      result.current.createOpenFilterHandler('filter');
-      result.current.createApplyFiltersHandler({ filter: { id: 'value' } })();
+      result.current.createToggleFilterHandler({
+        group: 'toggle',
+        id: 'id',
+        value: true,
+        overwrite: true,
+      })();
+      result.current.createToggleFilterHandler({
+        group: 'filter',
+        id: 'id',
+        value: true,
+        overwrite: true,
+      })();
     });
 
-    act(() => {
-      result.current.createOpenFilterHandler('filter2');
-      result.current.createApplyFiltersHandler({ filter2: { id: 'value' } })();
+    expect(result.current.activeFilters).toHaveProperty('filter', { id: true });
+    expect(result.current.activeFilters).not.toHaveProperty('toggle', {
+      id: true,
     });
-
-    expect(result.current.activeFilters).toHaveProperty('filter', {
-      id: 'value',
-    });
-    expect(result.current.activeFilters).toHaveProperty('filter2', {
-      id: 'value',
-    });
-    expect(result.current.selectingFilter).toBeFalsy();
   });
 
   test('clearing filter dropdown', () => {
@@ -70,13 +122,32 @@ describe('useFiltersContextSetup', () => {
     expect(result.current.selectingFilter).toEqual('filter');
   });
 
-  test('toggling a filter with no dropdown', () => {
+  test('resetting a group of filters', () => {
     const { result } = renderHook(() => useFiltersContextSetup(mockArgs));
 
     act(() => {
-      result.current.createToggleFilterHandler('toggle', true)();
+      result.current.createUpdateFilterGroup({
+        group: 'group',
+        id: 'id',
+        value: 'value',
+      })();
+      result.current.createUpdateFilterGroup({
+        group: 'group',
+        id: 'anotherId',
+        value: 'val',
+      })();
+      result.current.createUpdateFilterGroup({
+        group: 'group2',
+        id: 'id',
+        value: 'val',
+      })();
     });
 
-    expect(result.current.activeFilters).toHaveProperty('toggle', true);
+    act(() => result.current.createResetFiltersHandler('group')());
+
+    expect(result.current.filtersToApply).toHaveProperty('group2', {
+      id: 'val',
+    });
+    expect(result.current.filtersToApply.group).toEqual({});
   });
 });

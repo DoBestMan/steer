@@ -10,6 +10,15 @@ const styles: CSSObject = {
   open: {
     display: 'block',
   },
+  actionBar: {
+    paddingBottom: ACTION_BAR_HEIGHT.SM + SPACING.SIZE_20,
+    [MQ.M]: {
+      paddingBottom: ACTION_BAR_HEIGHT.MED + SPACING.SIZE_20,
+    },
+    [MQ.L]: {
+      paddingBottom: ACTION_BAR_HEIGHT.LG + SPACING.SIZE_20,
+    },
+  },
   root: [
     typography.primarySubhead,
     {
@@ -32,15 +41,6 @@ const styles: CSSObject = {
       marginTop: SPACING.SIZE_05,
       position: 'fixed',
       zIndex: Z_INDEX.TOP,
-      [MQ.S]: {
-        paddingBottom: ACTION_BAR_HEIGHT.SM + SPACING.SIZE_20,
-      },
-      [MQ.M]: {
-        paddingBottom: ACTION_BAR_HEIGHT.MED + SPACING.SIZE_20,
-      },
-      [MQ.L]: {
-        paddingBottom: ACTION_BAR_HEIGHT.LG + SPACING.SIZE_20,
-      },
     },
   ],
 };

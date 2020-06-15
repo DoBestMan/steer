@@ -8,30 +8,35 @@ import { ChildProps } from '../Popup/FilterPopup.utils';
 import styles from './FilterSort.styles';
 
 export default function FilterSort({
-  applyFilter,
+  applyFilters,
   isLarge,
   items,
   label,
-}: CatalogFilterSort & Pick<ChildProps, 'applyFilter' | 'isLarge'>) {
+}: CatalogFilterSort & Pick<ChildProps, 'applyFilters' | 'isLarge'>) {
   const [activeValue, setActiveValue] = useState('');
   const { createToggleFilterHandler } = useFiltersContext();
-  function updateValue(value: string) {
+  function updateValue(id: string) {
     return () => {
-      setActiveValue(value);
-      createToggleFilterHandler(label, value)();
+      setActiveValue(id);
+      createToggleFilterHandler({
+        group: label,
+        id,
+        value: true,
+        overwrite: true,
+      })();
     };
   }
 
   const prevActiveFilter = useRef(activeValue);
   useEffect(() => {
     if (activeValue !== prevActiveFilter.current) {
-      applyFilter();
+      applyFilters();
     }
     prevActiveFilter.current = activeValue;
-  }, [activeValue, applyFilter]);
+  }, [activeValue, applyFilters]);
 
   return (
-    <>
+    <div>
       <h3 css={styles.title}>{label}</h3>
       <ul>
         {items.map(({ title, description, flair, id }) => (
@@ -64,6 +69,6 @@ export default function FilterSort({
           </li>
         ))}
       </ul>
-    </>
+    </div>
   );
 }

@@ -26,7 +26,7 @@ export default function FilterRange({
   const filterGroup = filtersToApply[label];
   const handleChange = useCallback(
     (extrema: string, value: number) => {
-      onChange(label, extrema, value);
+      onChange({ group: label, id: extrema, value })();
     },
     [label, onChange],
   );

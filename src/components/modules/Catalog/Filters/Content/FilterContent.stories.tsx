@@ -14,6 +14,10 @@ export default {
   title: 'Catalog/Header/Filter Content',
 };
 
+function onChange() {
+  return () => action('Apply filter');
+}
+
 export function FilterContentChecklist() {
   return (
     <FilterChecklist
@@ -21,7 +25,7 @@ export function FilterContentChecklist() {
         FilterContentTypes.CatalogFilterChecklist
       ] as CatalogFilterChecklist)}
       filtersToApply={{}}
-      onChange={action('Add filter')}
+      onChange={onChange()}
     />
   );
 }
@@ -33,17 +37,13 @@ export function FilterContentChecklistLarge() {
         FilterContentTypes.CatalogFilterChecklistLarge
       ] as CatalogFilterChecklistLarge)}
       filtersToApply={{}}
-      onChange={action('Add filter')}
+      onChange={onChange()}
     />
   );
 }
 
 export function FilterContentRange() {
   return (
-    <FilterRange
-      {...filterRange}
-      filtersToApply={{}}
-      onChange={action('Add filter')}
-    />
+    <FilterRange {...filterRange} filtersToApply={{}} onChange={onChange()} />
   );
 }

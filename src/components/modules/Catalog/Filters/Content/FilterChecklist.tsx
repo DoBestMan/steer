@@ -26,10 +26,10 @@ export default function FilterChecklist({
       : styles;
 
   function handleChange(id: string) {
-    return (value: boolean) => onChange(label, id, value);
+    return (value: boolean) => onChange({ group: label, id, value })();
   }
   return (
-    <div>
+    <div css={styles.root}>
       <h2 css={lgStyles.title}>{label}</h2>
       {filterGroups?.map(({ id, items, title }) => (
         <div css={lgStyles.group} key={id}>

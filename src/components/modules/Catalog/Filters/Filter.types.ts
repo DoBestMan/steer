@@ -1,6 +1,7 @@
 export enum FilterContentTypes {
   CatalogFilterChecklist = 'CatalogFilterChecklist',
   CatalogFilterChecklistLarge = 'CatalogFilterChecklistLarge',
+  CatalogFilterPopular = 'CatalogFilterPopular',
   CatalogFilterRange = 'CatalogFilterRange',
   CatalogFilterSort = 'CatalogFilterSort',
   CatalogFilterToggle = 'CatalogFilterToggle',
@@ -64,9 +65,16 @@ export interface CatalogFilterToggle {
   type: FilterContentTypes.CatalogFilterToggle;
 }
 
+export type CatalogFilterPopular = {
+  items: CatalogFilterTypes[];
+  label: string;
+  type: FilterContentTypes.CatalogFilterPopular;
+};
+
 export type CatalogFilterTypes =
   | CatalogFilterChecklist
   | CatalogFilterChecklistLarge
   | CatalogFilterRange
   | CatalogFilterToggle
-  | CatalogFilterSort;
+  | CatalogFilterSort
+  | CatalogFilterPopular;

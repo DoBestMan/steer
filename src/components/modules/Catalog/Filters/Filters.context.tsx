@@ -1,10 +1,18 @@
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useCallback, useState } from 'react';
 
 import { createContext } from '~/lib/utils/context';
 
 export type FilterValue = number | string | boolean;
 export type FilterObject = { [id: string]: FilterValue };
-export type FilterMap = Record<string, FilterObject | FilterValue>;
+export type FilterMap = Record<string, FilterObject>;
+export interface UpdateFilterArgs {
+  group: string;
+  id: string;
+  value: FilterValue;
+}
+export interface ToggleFilterArgs extends UpdateFilterArgs {
+  overwrite?: boolean;
+}
 
 interface ContextProviderProps {
   children: ReactNode;
@@ -14,20 +22,28 @@ interface ContextProviderProps {
 /*
  * Filter context props
  * @activeFilters - currently applied filters (see data structure below)
- * @applyFilters - triggers search with newly added filters
+ * @applyFilters - triggers search with newly added filters (filtersToApply)
+ * @cancelApplyFilters - resets filtersToApply if a popup is closed without applying
  * @clearSelectingFilter - closes filter dropdown
  * @createOpenFilterHandler - opens filter dropdown
- * @createToggleFilterHandler - used for toggle filters that have no dropdown
+ * @createResetFiltersHandler - resets all selected filters from a group
+ * @createToggleFilterHandler - used for filters that are immediately applied on click (toggles/sort) with the option to overwrite all values
+ * @createUpdateFilterGroup - updates grouped filters to apply once `Apply` is clicked
+ * @filtersToApply - selected filters from a currently open popup (not immediately applied)
  * @selectingFilter - the filter that has an open dropdown
  * Some function props are used in both click event and other scenarios (useEffect or other custom trigger)
  * which is why they might be wrapped with another function
  */
 export interface FiltersContextProps {
   activeFilters: FilterMap;
+  applyFilters: () => void;
+  cancelApplyFilters: () => void;
   clearSelectingFilter: () => void;
-  createApplyFiltersHandler: (filters: FilterMap) => () => void;
   createOpenFilterHandler: (label: string) => () => void;
-  createToggleFilterHandler: (filter: string, value: FilterValue) => () => void;
+  createResetFiltersHandler: (label: string) => () => void;
+  createToggleFilterHandler: (filter: ToggleFilterArgs) => () => void;
+  createUpdateFilterGroup: (filter: UpdateFilterArgs) => () => void;
+  filtersToApply: FilterMap;
   selectingFilter: string;
 }
 
@@ -40,8 +56,13 @@ const FiltersContext = createContext<FiltersContextProps>();
  * Dropdown filters have a nested key value and toggle filters will be top level key/value
  * An example of what this might look like:
  *    {
- *      sortBy: 'priceDesc',
- *      deals: true,
+ *      sortBy: {
+ *        priceDesc: true
+ *      },
+ *      popular: {
+ *        deals: true,
+ *        fuelEfficient: true
+ *      },
  *      brands: {
  *        firestone: true
  *      },
@@ -59,26 +80,74 @@ interface ContextArgs {
 export function useFiltersContextSetup({ onApplyFilters }: ContextArgs) {
   // TODO: parse query params and add to default applied filters
   const initialState = {};
-  const [filtersMap, setFiltersMap] = useState<FilterMap>(initialState);
+  const [activeFilters, setActiveFilters] = useState<FilterMap>(initialState);
   const [selectingFilter, setSelectingFilter] = useState('');
+  const [filtersToApply, setFiltersToApply] = useState<FilterMap>(
+    activeFilters,
+  );
 
-  useEffect(() => {
-    onApplyFilters(filtersMap);
-  }, [filtersMap, onApplyFilters]);
   return {
-    activeFilters: filtersMap,
-    clearSelectingFilter: () => setSelectingFilter(''),
-    createApplyFiltersHandler: (filters: FilterMap) => () => {
-      setFiltersMap({ ...filtersMap, ...filters });
+    activeFilters,
+    applyFilters: () => {
       setSelectingFilter('');
+      onApplyFilters(filtersToApply);
+      setActiveFilters(filtersToApply);
     },
+    cancelApplyFilters: () => {
+      setFiltersToApply(activeFilters);
+    },
+    clearSelectingFilter: () => setSelectingFilter(''),
     createOpenFilterHandler: (label: string) => () => setSelectingFilter(label),
-    createToggleFilterHandler: (filter: string, value: FilterValue) => () => {
-      setFiltersMap({
-        ...filtersMap,
-        [filter]: value,
-      });
+    createResetFiltersHandler(group: string) {
+      return () => {
+        setFiltersToApply((prevState) => ({
+          ...prevState,
+          [group]: {},
+        }));
+      };
     },
+    createToggleFilterHandler: ({
+      group,
+      id,
+      value,
+      overwrite = false,
+    }: ToggleFilterArgs) => () => {
+      const newFilters = {
+        ...filtersToApply,
+        [group]: {
+          ...(!overwrite && filtersToApply[group]),
+          [id]: value,
+        },
+      };
+      setFiltersToApply(newFilters);
+      setActiveFilters(newFilters);
+      onApplyFilters(newFilters);
+    },
+    createUpdateFilterGroup: useCallback(
+      ({ group, id, value }: UpdateFilterArgs) => () => {
+        setFiltersToApply((prevState) => {
+          if (prevState[group] && prevState[group][id]) {
+            // immutably removes id from group in prevState
+            const { [id]: _, ...rest } = prevState[group];
+            return {
+              ...prevState,
+              [group]: {
+                ...rest,
+              },
+            };
+          }
+          return {
+            ...prevState,
+            [group]: {
+              ...prevState[group],
+              [id]: value,
+            },
+          };
+        });
+      },
+      [],
+    ),
+    filtersToApply,
     selectingFilter,
   };
 }

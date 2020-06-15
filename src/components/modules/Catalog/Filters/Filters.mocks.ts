@@ -87,12 +87,16 @@ export const filterSort = {
   ],
 } as CatalogFilterSort;
 
-export const filterTypeMap: Record<FilterContentTypes, CatalogFilterTypes> = {
+export const filterTypeMap: Record<
+  FilterContentTypes,
+  CatalogFilterTypes | null
+> = {
   /* eslint-disable sort-keys */
   [FilterContentTypes.CatalogFilterToggle]: {
     label: 'Deals',
     type: FilterContentTypes.CatalogFilterToggle,
   },
+  [FilterContentTypes.CatalogFilterPopular]: null,
   [FilterContentTypes.CatalogFilterSort]: filterSort,
   [FilterContentTypes.CatalogFilterRange]: {
     currentMax: null,
@@ -268,6 +272,14 @@ const filters = [
   filterTypeMap[FilterContentTypes.CatalogFilterToggle],
   filterTypeMap[FilterContentTypes.CatalogFilterChecklist],
   {
+    label: 'Free installation',
+    type: FilterContentTypes.CatalogFilterToggle,
+  },
+  {
+    label: 'Fuel efficient',
+    type: FilterContentTypes.CatalogFilterToggle,
+  },
+  {
     label: 'Tire type',
     type: 'CatalogFilterChecklist',
     filterGroups: [
@@ -328,9 +340,21 @@ const filters = [
     ],
   },
   {
+    label: '2-day Delivery',
+    type: FilterContentTypes.CatalogFilterToggle,
+  },
+  {
+    label: 'Original tires',
+    type: FilterContentTypes.CatalogFilterToggle,
+  },
+  {
+    label: 'All Season',
+    type: FilterContentTypes.CatalogFilterToggle,
+  },
+  {
     label: 'Load',
     type: 'CatalogFilterChecklist',
-    groups: [
+    filterGroups: [
       {
         title: 'Range',
         id: 'range',

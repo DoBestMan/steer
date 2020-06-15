@@ -68,7 +68,11 @@ export default function FilterDropdown({
       <div
         ref={dropdownEl}
         aria-hidden={!isOpen}
-        css={[styles.root, isOpen && styles.open]}
+        css={[
+          styles.root,
+          isOpen && styles.open,
+          hasActionBar && styles.actionBar,
+        ]}
         style={{ ...xPos, top: yPos }}
       >
         {/* focus trap and dropdown wrapper need to be in dom to update positioning
