@@ -43,6 +43,7 @@ export type Icon =
   | 'reviews-verified'
   | 'search'
   | 'shield'
+  | 'shipping-truck'
   | 'small-chevron-down'
   | 'small-chevron-up'
   | 'smiley'

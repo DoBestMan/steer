@@ -1,4 +1,5 @@
 export const TIME = {
+  MS50: 50,
   MS100: 100,
   MS150: 150,
   MS200: 200,

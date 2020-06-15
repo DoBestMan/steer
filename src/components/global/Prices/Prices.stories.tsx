@@ -131,3 +131,15 @@ export function LargePrices() {
 
   return <Prices isLarge priceList={priceList} />;
 }
+
+export function NoPrices() {
+  return (
+    <div
+      css={{
+        backgroundColor: COLORS.GLOBAL.ORANGE,
+      }}
+    >
+      <Prices />
+    </div>
+  );
+}

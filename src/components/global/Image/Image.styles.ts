@@ -1,6 +1,8 @@
+import { CSSObject } from '@emotion/core';
+
 import { COLORS, TIME } from '~/lib/constants';
 
-const styles = {
+const styles: CSSObject = {
   image: {
     display: 'block',
     objectFit: 'inherit',
@@ -15,6 +17,14 @@ const styles = {
 
   placeholder: {
     backgroundColor: COLORS.LIGHT.GRAY_10,
+  },
+
+  responsive: {
+    height: '100%',
+    left: 0,
+    position: 'absolute',
+    top: 0,
+    width: '100%',
   },
 
   root: {

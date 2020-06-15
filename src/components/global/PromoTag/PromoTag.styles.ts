@@ -41,6 +41,9 @@ const styles: CSSObject = {
     borderColor: COLORS.GLOBAL.WHITE,
     color: COLORS.GLOBAL.WHITE,
   },
+  uppercase: {
+    textTransform: 'uppercase',
+  },
 };
 
 export default styles;

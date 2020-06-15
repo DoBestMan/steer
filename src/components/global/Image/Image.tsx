@@ -1,4 +1,5 @@
-import { useRef, useState } from 'react';
+import { CSSObject } from '@emotion/core';
+import { ReactType, useRef, useState } from 'react';
 
 import { Loading, LOADING_OPTIONS } from '~/lib/constants';
 import { percentageFromNumber } from '~/lib/utils/number';
@@ -8,6 +9,7 @@ import styles from './Image.styles';
 
 interface Props {
   altText: string;
+  as?: ReactType;
   height?: string | number;
   loading?: Loading;
   responsive?: boolean;
@@ -15,14 +17,9 @@ interface Props {
   width?: string | number;
 }
 
-interface StyleImage {
-  height?: string;
-  paddingBottom?: string;
-  width?: string;
-}
-
 function Image({
   altText,
+  as = 'div',
   responsive,
   height,
   loading = LOADING_OPTIONS.LAZY,
@@ -56,9 +53,10 @@ function Image({
     ratio = percentageFromNumber(h, w);
   }
 
-  const style: StyleImage = {};
+  const style: CSSObject = {};
 
   if (ratio && responsive) {
+    style.position = 'relative';
     style.paddingBottom = `${ratio}%`;
   }
 
@@ -71,8 +69,10 @@ function Image({
     style.height = `${height}px`;
   }
 
+  const Container: ReactType = as;
+
   return (
-    <div
+    <Container
       ref={imgRef}
       css={[
         styles.root,
@@ -82,7 +82,11 @@ function Image({
     >
       {finalSrcSet && (
         <img
-          css={[styles.image, isLoaded && styles.isLoaded]}
+          css={[
+            styles.image,
+            isLoaded && styles.isLoaded,
+            ratio && responsive && styles.responsive,
+          ]}
           sizes={sizes}
           src={src}
           srcSet={finalSrcSet}
@@ -92,7 +96,7 @@ function Image({
           {...rest}
         />
       )}
-    </div>
+    </Container>
   );
 }
 

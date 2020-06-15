@@ -1,4 +1,4 @@
-import { select, text } from '@storybook/addon-knobs';
+import { boolean, select, text } from '@storybook/addon-knobs';
 
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
@@ -8,7 +8,7 @@ import { PROMO_STYLES } from './PromoTag.types';
 
 export default {
   component: PromoTag,
-  title: 'Catalog/Grid/Promo Tag',
+  title: 'Global/Promo Tag',
 };
 
 const styleOptions = {
@@ -31,6 +31,7 @@ export function PromoTagWithKnobs() {
   return (
     <PromoTag
       style={select('Style', styleOptions, PROMO_STYLES.DEFAULT)}
+      isUppercase={boolean('Uppercase', false)}
       icon={{
         svgId: select('Icon', iconOptions, ICONS.TAG),
         type: ICON_IMAGE_TYPE.ICON,
@@ -44,10 +45,7 @@ export function BlackPillPromoTag() {
   return (
     <PromoTag
       style={PROMO_STYLES.BLACK_PILL}
-      icon={{
-        svgId: ICONS.LIGHTNING,
-        type: ICON_IMAGE_TYPE.ICON,
-      }}
+      isUppercase
       label="Black Friday"
     />
   );

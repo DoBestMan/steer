@@ -1,9 +1,10 @@
-import { PROMO_STYLES } from '~/components/modules/Catalog/ProductListing/PromoTag/PromoTag.types';
+import { PROMO_STYLES } from '~/components/global/PromoTag/PromoTag.types';
 
 import { SiteIcon } from './SiteIcon';
 
 export interface SiteCatalogPromotion {
-  icon: SiteIcon;
+  icon?: SiteIcon;
+  isUppercase?: boolean;
   label: string;
   style: PROMO_STYLES;
 }

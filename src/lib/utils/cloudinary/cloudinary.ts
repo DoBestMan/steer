@@ -1,4 +1,7 @@
-import { CLOUDINARY_SRC_REGEX } from './cloudinary.constants';
+import {
+  CLOUDINARY_SRC_REGEX,
+  CLOUDINARY_ST_SRC_REGEX,
+} from './cloudinary.constants';
 import {
   Angle,
   CropMode,
@@ -8,13 +11,19 @@ import {
   Transformations,
 } from './cloudinary.types';
 
-export function isCloudinarySrc(src: string) {
-  const matches = src.match(CLOUDINARY_SRC_REGEX);
+export function isCloudinarySrc(
+  src: string,
+  reg: RegExp = CLOUDINARY_SRC_REGEX,
+) {
+  const matches = src.match(reg);
   return matches && matches.length === 3;
 }
 
-function getMatches(src: string): Array<string> | null {
-  const matches = src.match(CLOUDINARY_SRC_REGEX);
+function getMatches(
+  src: string,
+  reg: RegExp = CLOUDINARY_SRC_REGEX,
+): Array<string> | null {
+  const matches = src.match(reg);
   if (matches) {
     return matches;
   }
@@ -31,11 +40,20 @@ export function transformation(
     transformations = [transformations];
   }
 
-  if (!isCloudinarySrc(src) || !transformations || !transformations.length) {
+  if (
+    (!isCloudinarySrc(src, CLOUDINARY_ST_SRC_REGEX) && !isCloudinarySrc(src)) ||
+    !transformations ||
+    !transformations.length
+  ) {
     return src;
   }
 
-  const matches = getMatches(src);
+  let matches = getMatches(src, CLOUDINARY_ST_SRC_REGEX);
+
+  if (!matches) {
+    matches = getMatches(src);
+  }
+
   if (!matches) {
     return src;
   }

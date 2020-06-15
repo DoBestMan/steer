@@ -3,11 +3,11 @@ import { SiteCatalogPromotion } from '~/data/models/SiteCatalogPromotionList';
 
 import styles from './PromoTag.styles';
 
-function PromoTag({ style, label, icon }: SiteCatalogPromotion) {
+function PromoTag({ style, label, icon, isUppercase }: SiteCatalogPromotion) {
   return (
-    <div css={[styles.root, styles[style]]}>
+    <div css={[styles.root, styles[style], isUppercase && styles.uppercase]}>
       {label}
-      <Icon css={styles.icon} name={icon.svgId} />
+      {icon && <Icon css={styles.icon} name={icon.svgId} />}
     </div>
   );
 }

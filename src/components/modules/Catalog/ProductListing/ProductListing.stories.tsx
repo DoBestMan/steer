@@ -3,13 +3,13 @@ import { boolean, number, text } from '@storybook/addon-knobs';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
+import { PROMO_STYLES } from '~/components/global/PromoTag/PromoTag.types';
 import { SiteIcon } from '~/data/models/SiteIcon';
 import { SiteImage } from '~/data/models/SiteImage';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 
 import ProductListing from './ProductListing';
 import { PRODUCT_IMAGE_TYPES } from './ProductListing.types';
-import { PROMO_STYLES } from './PromoTag/PromoTag.types';
 
 export default {
   component: ProductListing,

@@ -46,6 +46,20 @@
     "productListing": {
       "morePromos": "+ {{number}} other deals"
     },
+    "topPicks": {
+      "addVehicleText": "Add your vehicle info to find your original tire and get even better recommendations",
+      "addVehicleCtaLabel": "Add your vehicle",
+      "backLabel": "Back",
+      "callNumberLabel": "Call (888) 410-0604",
+      "callNumber": "(888)410-0604",
+      "ctaLabelFallback": "Select",
+      "frontLabel": "Front",
+      "noPrice": "Price available upon request",
+      "oeModal": {
+        "closeModalLabel": "Got it"
+      },
+      "viewMoreTire": "{{totalResult}} tires"
+    },
     "summary": {
       "noResultsContactLabel": "Let us help you",
       "noResultsContactDesc": "Call us at ",

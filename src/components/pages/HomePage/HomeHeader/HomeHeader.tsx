@@ -7,6 +7,8 @@ import { Cars } from '~/components/global/Car/Car.enums';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import Markdown from '~/components/global/Markdown/Markdown';
+import PromoTag from '~/components/global/PromoTag/PromoTag';
+import { PROMO_STYLES } from '~/components/global/PromoTag/PromoTag.types';
 import Scenary from '~/components/global/Scenery/Scenery';
 import { Sceneries } from '~/components/global/Scenery/Scenery.types';
 import Weather from '~/components/global/Weather/Weather';
@@ -162,7 +164,11 @@ function HomeHeader({
               <GridItem gridColumnS="2/6" gridColumnM="2/8" gridColumnXL="2/8">
                 {eyebrow && (
                   <div css={eyebrowStyles}>
-                    <span css={typography.eyebrow}>{eyebrow}</span>
+                    <PromoTag
+                      label={eyebrow}
+                      style={PROMO_STYLES.BLACK_PILL}
+                      isUppercase
+                    />
                   </div>
                 )}
                 <h1 css={titleStyles}>

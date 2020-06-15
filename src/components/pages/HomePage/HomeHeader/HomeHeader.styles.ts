@@ -7,14 +7,7 @@ import {
 } from 'react-transition-group/Transition';
 
 import { NAV_HEIGHT } from '~/components/modules/Nav/Nav.styles';
-import {
-  COLORS,
-  EASING,
-  GRID_MARGIN,
-  MQ,
-  RADIUS,
-  SPACING,
-} from '~/lib/constants';
+import { COLORS, EASING, GRID_MARGIN, MQ, SPACING } from '~/lib/constants';
 
 export const CAR_ROTATION_DURATION = 400;
 export const SCENERY_OR_WEATHER_DURATION = 400;
@@ -133,12 +126,8 @@ export const styles = {
   }),
   eyebrow: css({
     alignItems: 'baseline',
-    background: COLORS.GLOBAL.BLACK,
-    borderRadius: RADIUS.RADIUS_5,
-    color: COLORS.GLOBAL.WHITE,
     display: 'inline-flex',
     marginBottom: SPACING.SIZE_10,
-    padding: `${SPACING.SIZE_01}px 6px`,
     transition: `all 400ms ${EASING.CUBIC_EASE_OUT}`,
   }),
   scenery: css({

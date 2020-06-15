@@ -1,13 +1,13 @@
 import Image from '~/components/global/Image/Image';
 import BaseLink from '~/components/global/Link/BaseLink';
 import Prices from '~/components/global/Prices/Prices';
+import PromoTag from '~/components/global/PromoTag/PromoTag';
 import Stars from '~/components/global/Stars/Stars';
 import { COLORS } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import styles from './ProductListing.styles';
 import { ProductListingProps } from './ProductListing.types';
-import PromoTag from './PromoTag/PromoTag';
 
 const MAX_PROMOS = 2;
 

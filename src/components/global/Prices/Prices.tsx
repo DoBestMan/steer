@@ -1,6 +1,7 @@
 import { SitePrice } from '~/data/models/SitePrice';
 import { COLORS } from '~/lib/constants';
 import { formatDollars } from '~/lib/utils/string';
+import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
 
 import styles from './Prices.styles';
@@ -8,7 +9,7 @@ import styles from './Prices.styles';
 interface Props {
   isLarge?: boolean;
   isLight?: boolean;
-  priceList: {
+  priceList?: {
     label: string | null;
     price: SitePrice;
   }[];
@@ -17,32 +18,38 @@ interface Props {
 function Prices({ priceList, isLarge, isLight }: Props) {
   return (
     <>
-      {priceList.map(({ label, price }) => (
-        <div key={price.currentInCents}>
-          <span
-            css={[
-              price.originalInCents && { color: COLORS.GLOBAL.ORANGE },
-              isLight && { color: COLORS.GLOBAL.WHITE },
-              isLarge
-                ? typography.secondaryHeadline
-                : typography.tertiaryHeadline,
-            ]}
-          >
-            {label && `${label} `}
-            {formatDollars(price.currentInCents)}
-          </span>
-          {price.originalInCents && (
+      {priceList ? (
+        priceList.map(({ label, price }) => (
+          <div key={price.currentInCents}>
             <span
               css={[
-                styles.originalValue,
+                price.originalInCents && { color: COLORS.GLOBAL.ORANGE },
                 isLight && { color: COLORS.GLOBAL.WHITE },
+                isLarge
+                  ? typography.secondaryHeadline
+                  : typography.topPicksPrice,
               ]}
             >
-              {formatDollars(price.originalInCents)}
+              {label && <span css={styles.label}>{label} </span>}
+              {formatDollars(price.currentInCents)}
             </span>
-          )}
-        </div>
-      ))}
+            {price.originalInCents && (
+              <span
+                css={[
+                  styles.originalValue,
+                  isLight && { color: COLORS.ORANGE.TINT_70 },
+                ]}
+              >
+                {formatDollars(price.originalInCents)}
+              </span>
+            )}
+          </div>
+        ))
+      ) : (
+        <span css={[typography.topPicksPrice, styles.noPrice]}>
+          {ui('catalog.topPicks.noPrice')}
+        </span>
+      )}
     </>
   );
 }
