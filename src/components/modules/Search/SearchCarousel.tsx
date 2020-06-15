@@ -2,9 +2,11 @@ import Carousel from '~/components/global/Carousel/Carousel';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import Image from '~/components/global/Image/Image';
+import BaseLink from '~/components/global/Link/BaseLink';
 import { SiteSearchResultImageItem } from '~/data/models/SiteSearchResultImageItem';
 
 import { useFocusScrollIntoView } from './Search.hooks';
+import { SearchActionType } from './Search.types';
 import styles from './SearchCarousel.styles';
 
 export interface SearchCarouselProps {
@@ -37,24 +39,49 @@ function SearchCarousel({
         gridColumnL="1/15"
       >
         <Carousel freeScroll>
-          {siteSearchResultList.map((result, index) => (
-            <div
-              css={styles.carouselItem}
-              key={result.image.altText}
-              ref={pushRefToArray}
-            >
-              <button
-                css={styles.carouselButton}
-                onClick={handleClick(result)}
-                onFocus={onFocus(index)}
+          {siteSearchResultList.map((item, index) => {
+            if (item.action.type === SearchActionType.LINK) {
+              const { href, isExternal } = item.action.link;
+              return (
+                <div
+                  css={styles.carouselItem}
+                  key={item.image.altText}
+                  ref={pushRefToArray}
+                >
+                  <BaseLink
+                    css={styles.carouselButton}
+                    href={href}
+                    isExternal={isExternal}
+                    onFocus={onFocus(index)}
+                  >
+                    <Image
+                      altText={item.image.altText}
+                      srcSet={item.image.src || item.image.srcSet || ''}
+                    />
+                  </BaseLink>
+                </div>
+              );
+            }
+
+            return (
+              <div
+                css={styles.carouselItem}
+                key={item.image.altText}
+                ref={pushRefToArray}
               >
-                <Image
-                  altText={result.image.altText}
-                  srcSet={result.image.srcSet}
-                />
-              </button>
-            </div>
-          ))}
+                <button
+                  css={styles.carouselButton}
+                  onClick={handleClick(item)}
+                  onFocus={onFocus(index)}
+                >
+                  <Image
+                    altText={item.image.altText}
+                    srcSet={item.image.src || item.image.srcSet || ''}
+                  />
+                </button>
+              </div>
+            );
+          })}
         </Carousel>
       </GridItem>
     </Grid>
