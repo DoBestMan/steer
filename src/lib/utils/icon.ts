@@ -1,4 +1,3 @@
-// import { SiteIcon } from '~/data/models/SiteIcon';
 import { IconOrImage } from '~/data/models/IconOrImage';
 
 export function isVehicleSvg(icon: IconOrImage) {

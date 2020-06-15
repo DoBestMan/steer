@@ -28,7 +28,7 @@ function TireRatings({ videoId, momentList, ratings, title }: Props) {
             css={styles.video}
             altText=""
             // TODO: To replace with final asset
-            srcSet="https://picsum.photos/600/300"
+            src="https://picsum.photos/600/300"
           />
         )}
 

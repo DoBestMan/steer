@@ -1,20 +1,11 @@
 import GridItem from '~/components/global/Grid/GridItem';
 import Image from '~/components/global/Image/Image';
-import { getSrcset } from '~/components/global/Image/Image.utils';
 import { SiteReviewItem } from '~/data/models/SiteReviewItem';
 import { typography } from '~/styles/typography.styles';
 
 import styles from './UserReview.styles';
 
 function UserReview({ authorImage, authorName, body, title }: SiteReviewItem) {
-  if (authorImage.src) {
-    authorImage.srcSet = getSrcset(authorImage.src, {
-      '50w': { width: 50 },
-      '60w': { width: 60 },
-      '120w': { width: 120 }, // retina
-    });
-  }
-
   return (
     <GridItem
       as="div"
@@ -44,7 +35,8 @@ function UserReview({ authorImage, authorName, body, title }: SiteReviewItem) {
       >
         <Image
           css={styles.avatar}
-          srcSet={authorImage.srcSet}
+          widths={[50, 60, 120]}
+          src={authorImage.src}
           altText={authorImage.altText}
           height={authorImage?.height}
           width={authorImage?.width}

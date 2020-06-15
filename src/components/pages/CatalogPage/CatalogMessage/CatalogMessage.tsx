@@ -5,7 +5,6 @@ import Button from '~/components/global/Button/Button';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import Image from '~/components/global/Image/Image';
-import { getSrcset } from '~/components/global/Image/Image.utils';
 import BaseLink from '~/components/global/Link/BaseLink';
 import Loading, { THEME } from '~/components/global/Loading/Loading';
 import Markdown from '~/components/global/Markdown/Markdown';
@@ -51,16 +50,15 @@ export function BuildInMessage({
                 const id = label.replace(/\s+/g, '').toLowerCase();
                 // TODO: test with actual assets
                 const imageStyles = styles[`logo_${id}`];
-                const srcSet = getSrcset(image.src || '', {
-                  // TODO: src is only temporarily optional
-                  '100w': { width: 100 },
-                  '200w': { width: 200 },
-                  '500w': { width: 500 },
-                });
 
                 return (
                   <li key={id}>
-                    <Image altText={label} css={imageStyles} srcSet={srcSet} />
+                    <Image
+                      altText={label}
+                      src={image.src}
+                      css={imageStyles}
+                      widths={[100, 200, 500]}
+                    />
                   </li>
                 );
               })}

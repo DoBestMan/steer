@@ -90,10 +90,14 @@ export function getSrcset(url: string, q?: TransformationArgs): string {
   return srcset;
 }
 
-export function getMinimalQuery(width: number | undefined) {
+export function getMinimalQuery(width: number | string | undefined) {
   let query;
 
   if (width) {
+    if (typeof width === 'string') {
+      width = parseInt(width, 10);
+    }
+
     query = { [`${width}w`]: { width } };
   }
 

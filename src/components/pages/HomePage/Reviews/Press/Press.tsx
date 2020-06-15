@@ -26,11 +26,7 @@ function Press() {
     <ul css={styles.container}>
       {pressReviews.map((review) => (
         <li css={styles.item} key={review.name}>
-          <Image
-            css={styles.logo}
-            srcSet={review.logoSrc}
-            altText={review.name}
-          />
+          <Image css={styles.logo} src={review.logoSrc} altText={review.name} />
           <div css={[typography.bodyCopy, styles.copy]}>{review.quote}</div>
         </li>
       ))}

@@ -71,7 +71,7 @@ function AdditionalInfoModal({
         <div css={styles.imageWrapper}>
           <Image
             css={styles.image}
-            srcSet={is.M ? imageSrcLg : imageSrcSm}
+            src={is.M ? imageSrcLg : imageSrcSm}
             altText={imageAlt}
           />
         </div>

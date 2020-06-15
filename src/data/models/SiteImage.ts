@@ -16,15 +16,8 @@ export interface SiteImage {
 
   /**
    * HTML `img` src
-   * TODO: When final endpoints added `src` on Siteimage, make src mandatory (remove '?')
    */
-  src?: string;
-
-  /**
-   * HTML `img` [srcset](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-srcset) attribute
-   * TODO: When final endpoints removed `srcset` on Siteimage, remove `srcset` from here
-   */
-  srcSet?: string;
+  src: string;
 
   /**
    * Discriminator when icons and images are used with oneOf

@@ -16,7 +16,7 @@ const measuredSizes = `${measuredRef}px`;
 const emptyValues = {
   finalSrcSet: '',
   sizes: '',
-  src: '',
+  finalSrc: '',
 };
 const multipleSrcSet = 'small.jpg 50w, large.jpg 100w';
 const fallbackSrc = 'large.jpg';
@@ -61,7 +61,7 @@ describe('useImageProps', () => {
       finalSrcSet: multipleSrcSet,
       isLazy: true,
       sizes: measuredSizes,
-      src: fallbackSrc,
+      finalSrc: fallbackSrc,
     });
   });
 
@@ -90,7 +90,7 @@ describe('useImageProps', () => {
       finalSrcSet: '',
       isLazy: true,
       sizes: measuredSizes,
-      src: '',
+      finalSrc: '',
     });
 
     // when intersection occurs
@@ -108,7 +108,7 @@ describe('useImageProps', () => {
       finalSrcSet: multipleSrcSet,
       isLazy: true,
       sizes: measuredSizes,
-      src: fallbackSrc,
+      finalSrc: fallbackSrc,
     });
   });
 
@@ -150,7 +150,7 @@ describe('useImageProps', () => {
       finalSrcSet: multipleSrcSet,
       isLazy: true,
       sizes: measuredSizes,
-      src: fallbackSrc,
+      finalSrc: fallbackSrc,
     });
   });
 
@@ -176,7 +176,7 @@ describe('useImageProps', () => {
       finalSrcSet: multipleSrcSet,
       isLazy: false,
       sizes: measuredSizes,
-      src: fallbackSrc,
+      finalSrc: fallbackSrc,
     });
   });
 
@@ -198,7 +198,7 @@ describe('useImageProps', () => {
       finalSrcSet: 'testSrcSet',
       isLazy: true,
       sizes: '',
-      src: 'testSrcSet',
+      finalSrc: 'testSrcSet',
     });
   });
 
@@ -230,7 +230,7 @@ describe('useImageProps', () => {
       finalSrcSet: 'testSrcSet',
       isLazy: true,
       sizes: '',
-      src: 'testSrcSet',
+      finalSrc: 'testSrcSet',
     });
   });
 
@@ -248,7 +248,7 @@ describe('useImageProps', () => {
       finalSrcSet: multipleSrcSet,
       isLazy: false,
       sizes: '',
-      src: fallbackSrc,
+      finalSrc: fallbackSrc,
     });
   });
 });

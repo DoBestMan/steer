@@ -142,6 +142,6 @@ export function useImageProps({ imgRef, loading, srcSet, width }: Props) {
     finalSrcSet,
     isLazy,
     sizes,
-    src,
+    finalSrc: src,
   };
 }

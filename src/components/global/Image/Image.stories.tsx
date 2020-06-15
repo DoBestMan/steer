@@ -2,7 +2,6 @@ import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 
 import Image from './Image';
-import { getSrcset } from './Image.utils';
 
 export default {
   component: Image,
@@ -10,21 +9,13 @@ export default {
 };
 
 export function ImageWithHeightAndWidthInGrid() {
-  const srcset = getSrcset(
-    'https://res.cloudinary.com/demo/image/upload/sample.jpg',
-    {
-      '600w': { width: 600 },
-      '1000w': { width: 1000 },
-      '1400w': { width: 1400 },
-    },
-  );
-
   return (
     <Grid>
       <GridItem gridColumn={'2/6'} gridColumnM={'2/5'} gridColumnL={'2/8'}>
         <Image
           altText="test"
-          srcSet={srcset}
+          src="https://res.cloudinary.com/demo/image/upload/sample.jpg"
+          widths={[600, 1000, 1400]}
           height="400" // original height (from data)
           width="600" // original width (from data)
           responsive
@@ -35,14 +26,15 @@ export function ImageWithHeightAndWidthInGrid() {
 }
 
 export function ImageWithFixedHeightAndWidth() {
-  const srcset = getSrcset(
-    'https://res.cloudinary.com/demo/image/upload/sample.jpg',
-    {
-      '600w': { width: 600 },
-    },
+  return (
+    <Image
+      altText="test"
+      src="https://res.cloudinary.com/demo/image/upload/sample.jpg"
+      widths={[600]}
+      height="400"
+      width="600"
+    />
   );
-
-  return <Image altText="test" srcSet={srcset} height="400" width="600" />;
 }
 
 export function ImageResponsive() {
@@ -50,6 +42,7 @@ export function ImageResponsive() {
     <div css={{ width: '50%' }}>
       <Image
         altText="test"
+        src="https://dummyimage.com/800x400/000/f00.jpg"
         srcSet="https://dummyimage.com/800x400/000/f00.jpg 800w, https://dummyimage.com/1600x400/000/f00.jpg 1600w, https://dummyimage.com/3000x400/000/f00.jpg 3000w"
       />
     </div>

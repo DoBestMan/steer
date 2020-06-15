@@ -60,7 +60,7 @@ function Nav({ isHomepage }: Props) {
                 <Image
                   altText={CONSTANTS.LOGO_ALT_TEXT}
                   css={styles.logo}
-                  srcSet="/static/assets/logo.svg"
+                  src="/static/assets/logo.svg"
                 />
               </BaseLink>
             </GridItem>

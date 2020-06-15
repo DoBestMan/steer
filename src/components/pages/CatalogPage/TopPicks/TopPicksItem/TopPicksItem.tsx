@@ -5,7 +5,6 @@ import Button from '~/components/global/Button/Button';
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Image from '~/components/global/Image/Image';
-import { getSrcset } from '~/components/global/Image/Image.utils';
 import BaseLink from '~/components/global/Link/BaseLink';
 import Prices from '~/components/global/Prices/Prices';
 import PromoTag from '~/components/global/PromoTag/PromoTag';
@@ -49,23 +48,6 @@ function TopPicksItem(props: TopPickItemsProps) {
   } = props;
 
   const [modalOpened, setModalOpened] = useState(false);
-
-  // TODO: Simply using `widths` prop of the <Image> component once https://github.com/SimpleTire/steer/pull/377 merged
-  if (asset?.src) {
-    asset.srcSet = getSrcset(asset.src, {
-      '300w': { width: 300 },
-      '450w': { width: 450 },
-      '600w': { width: 600 },
-    });
-  }
-
-  if (brand?.image?.src) {
-    brand.image.srcSet = getSrcset(brand.image.src, {
-      '200w': { width: 200 },
-      '400w': { width: 400 },
-      '600w': { width: 600 },
-    });
-  }
 
   const onCtaClick = () => {
     if (addVehicleInfo) {
@@ -159,7 +141,12 @@ function TopPicksItem(props: TopPickItemsProps) {
 
             {/* Tire asset */}
             {!viewMoreData && asset && (
-              <Image {...asset} responsive as={'span'} />
+              <Image
+                {...asset}
+                responsive
+                as={'span'}
+                widths={[300, 450, 600]}
+              />
             )}
 
             {/* View More */}
@@ -207,7 +194,7 @@ function TopPicksItem(props: TopPickItemsProps) {
             {/* Brand logo or brand label if no logo */}
             {brand && (
               <span css={[styles.brand, brand.image && styles.brandWithImage]}>
-                <BrandLogoOrLabel brand={brand} />
+                <BrandLogoOrLabel brand={brand} widths={[200, 400, 600]} />
               </span>
             )}
 

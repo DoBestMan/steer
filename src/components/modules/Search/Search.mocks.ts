@@ -2203,7 +2203,7 @@ export const searchByBrand: Results = {
           },
           image: {
             altText: 'Pirelli',
-            srcSet: '/images/brands/pirelli_logo.svg',
+            src: '/images/brands/pirelli_logo.svg',
             type: ICON_IMAGE_TYPE.IMAGE,
           },
           type: 'SiteSearchResultImageItem',
@@ -2216,7 +2216,7 @@ export const searchByBrand: Results = {
           },
           image: {
             altText: 'Michelin',
-            srcSet: '/images/brands/michelin_logo.svg',
+            src: '/images/brands/michelin_logo.svg',
             type: ICON_IMAGE_TYPE.IMAGE,
           },
           type: 'SiteSearchResultImageItem',
@@ -2229,7 +2229,7 @@ export const searchByBrand: Results = {
           },
           image: {
             altText: 'Continental',
-            srcSet: '/images/brands/continental_logo.svg',
+            src: '/images/brands/continental_logo.svg',
             type: ICON_IMAGE_TYPE.IMAGE,
           },
           type: 'SiteSearchResultImageItem',
@@ -2242,7 +2242,7 @@ export const searchByBrand: Results = {
           },
           image: {
             altText: 'Bridgestone',
-            srcSet: '/images/brands/bridgestone_logo.svg',
+            src: '/images/brands/bridgestone_logo.svg',
             type: ICON_IMAGE_TYPE.IMAGE,
           },
           type: 'SiteSearchResultImageItem',
@@ -2255,7 +2255,7 @@ export const searchByBrand: Results = {
           },
           image: {
             altText: 'Pirelli',
-            srcSet: '/images/brands/pirelli_logo.svg',
+            src: '/images/brands/pirelli_logo.svg',
             type: ICON_IMAGE_TYPE.IMAGE,
           },
           type: 'SiteSearchResultImageItem',
@@ -2268,7 +2268,7 @@ export const searchByBrand: Results = {
           },
           image: {
             altText: 'Michelin',
-            srcSet: '/images/brands/michelin_logo.svg',
+            src: '/images/brands/michelin_logo.svg',
             type: ICON_IMAGE_TYPE.IMAGE,
           },
           type: 'SiteSearchResultImageItem',
@@ -2281,7 +2281,7 @@ export const searchByBrand: Results = {
           },
           image: {
             altText: 'Continental',
-            srcSet: '/images/brands/continental_logo.svg',
+            src: '/images/brands/continental_logo.svg',
             type: ICON_IMAGE_TYPE.IMAGE,
           },
           type: 'SiteSearchResultImageItem',
@@ -2294,7 +2294,7 @@ export const searchByBrand: Results = {
           },
           image: {
             altText: 'Bridgestone',
-            srcSet: '/images/brands/bridgestone_logo.svg',
+            src: '/images/brands/bridgestone_logo.svg',
             type: ICON_IMAGE_TYPE.IMAGE,
           },
           type: 'SiteSearchResultImageItem',
@@ -2307,7 +2307,7 @@ export const searchByBrand: Results = {
           },
           image: {
             altText: 'Pirelli',
-            srcSet: '/images/brands/pirelli_logo.svg',
+            src: '/images/brands/pirelli_logo.svg',
             type: ICON_IMAGE_TYPE.IMAGE,
           },
           type: 'SiteSearchResultImageItem',
@@ -2320,7 +2320,7 @@ export const searchByBrand: Results = {
           },
           image: {
             altText: 'Michelin',
-            srcSet: '/images/brands/michelin_logo.svg',
+            src: '/images/brands/michelin_logo.svg',
             type: ICON_IMAGE_TYPE.IMAGE,
           },
           type: 'SiteSearchResultImageItem',

@@ -25,6 +25,8 @@ function SearchCarousel({
     onClick(searchResult);
   };
 
+  const widths = [50, 100];
+
   return (
     <Grid>
       {label && (
@@ -56,7 +58,10 @@ function SearchCarousel({
                   >
                     <Image
                       altText={item.image.altText}
-                      srcSet={item.image.src || item.image.srcSet || ''}
+                      src={item.image.src}
+                      width={item.image.width || 50} // TODO: with real data, "|| 50" should be useless
+                      height={item.image.height}
+                      widths={widths}
                     />
                   </BaseLink>
                 </div>
@@ -76,7 +81,10 @@ function SearchCarousel({
                 >
                   <Image
                     altText={item.image.altText}
-                    srcSet={item.image.src || item.image.srcSet || ''}
+                    src={item.image.src}
+                    width={item.image.width || 50} // TODO: with real data, "|| 50" should be useless
+                    height={item.image.height}
+                    widths={widths}
                   />
                 </button>
               </div>

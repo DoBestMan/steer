@@ -79,7 +79,7 @@ function TechnicalSpecs({ isCustomerServiceEnabled, specs, sizes }: Props) {
             css={styles.imageContainer}
           >
             <Image
-              srcSet={is.S ? headerImage.sm : headerImage.md}
+              src={is.S ? headerImage.sm : headerImage.md}
               altText={ui('pdp.technicalSpecs.imageAlt')}
             />
           </GridItem>

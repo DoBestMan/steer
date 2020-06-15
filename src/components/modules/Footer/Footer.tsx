@@ -70,7 +70,7 @@ function Footer({ isCustomerServiceEnabled }: Props) {
           <Image
             altText={ui('logo.alt')}
             css={styles.logo}
-            srcSet="/static/assets/logo.svg"
+            src="/static/assets/logo.svg"
           />
         </BaseLink>
       </GridItem>

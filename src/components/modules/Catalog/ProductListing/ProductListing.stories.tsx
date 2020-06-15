@@ -28,13 +28,13 @@ const mockPriceList = [
 
 const mockImage = {
   altText: '300x300 image',
-  srcSet: 'https://via.placeholder.com/300',
+  src: 'https://via.placeholder.com/300',
   type: ICON_IMAGE_TYPE.IMAGE,
 } as SiteImage;
 
 const mockLogo = {
   altText: '75x16 image',
-  srcSet: 'https://via.placeholder.com/75x16',
+  src: 'https://via.placeholder.com/75x16',
   type: ICON_IMAGE_TYPE.IMAGE,
 } as SiteImage;
 

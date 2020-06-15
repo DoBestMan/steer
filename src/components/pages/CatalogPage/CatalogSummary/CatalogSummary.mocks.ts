@@ -48,8 +48,6 @@ export const vehiclesDisambiguation: SiteCatalogSummary = {
       altText: '',
       height: 225,
       src: 'https://steer-api-definition.now.sh/mock-images/catalog-tire-1.jpg',
-      srcSet:
-        'https://steer-api-definition.now.sh/mock-images/catalog-tire-1.jpg',
       type: ICON_IMAGE_TYPE.IMAGE,
       width: 225,
     },
@@ -97,7 +95,6 @@ export const vehiclesNoOeWithSize: SiteCatalogSummary = {
           altText: '',
           height: 15,
           src: 'https://via.placeholder.com/75x15',
-          srcSet: 'https://via.placeholder.com/75x15',
           type: ICON_IMAGE_TYPE.IMAGE,
           width: 75,
         },
@@ -112,8 +109,6 @@ export const vehiclesNoOeWithSize: SiteCatalogSummary = {
       altText: '',
       height: 225,
       src: 'https://steer-api-definition.now.sh/mock-images/catalog-tire-1.jpg',
-      srcSet:
-        'https://steer-api-definition.now.sh/mock-images/catalog-tire-1.jpg',
       type: ICON_IMAGE_TYPE.IMAGE,
       width: 225,
     },
@@ -228,8 +223,6 @@ export const vehiclesNoResultWithTrim: SiteCatalogSummary = {
       altText: '',
       height: 225,
       src: 'https://steer-api-definition.now.sh/mock-images/catalog-tire-1.jpg',
-      srcSet:
-        'https://steer-api-definition.now.sh/mock-images/catalog-tire-1.jpg',
       type: ICON_IMAGE_TYPE.IMAGE,
       width: 225,
     },
