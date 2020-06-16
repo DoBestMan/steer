@@ -16,11 +16,11 @@ import { CONSTANTS } from '../CatalogSummary.styles';
 type Props = {
   bk: Breakpoint;
   carId: Cars;
-  isSearch: boolean;
   stage: STAGES;
+  useTransitions: boolean;
 };
 
-function styledCarContainer({ bk, carId, isSearch, stage }: Props) {
+function styledCarContainer({ bk, carId, stage, useTransitions }: Props) {
   const carDetails = CAR_DETAILS[carId];
   const distanceFrontToRearWheel =
     carDetails.width -
@@ -58,7 +58,7 @@ function styledCarContainer({ bk, carId, isSearch, stage }: Props) {
     // By default, the "small" Car scales up on MD + LG brakpoints
     transform: `scale3d(${DEFAULT_SCALE_VECTOR[bk]}, ${DEFAULT_SCALE_VECTOR[bk]}, ${DEFAULT_SCALE_VECTOR[bk]})`,
     transformOrigin: '100% 100%',
-    transition: isSearch
+    transition: useTransitions
       ? 'transform 1200ms cubic-bezier(0.645,0.045,0.355,1.000)'
       : 'none',
     willChange: 'transform',
@@ -68,17 +68,19 @@ function styledCarContainer({ bk, carId, isSearch, stage }: Props) {
     [STAGES.DATA_MOMENT]: {
       '~ .back-wheel-img': {
         opacity: 1,
-        transition: isSearch
+        transition: useTransitions
           ? `opacity 300ms ${CONSTANTS.EASING} 1200ms`
           : 'none',
       },
       'svg .back-wheel': {
         opacity: 0,
-        transition: isSearch ? `opacity 300ms ${CONSTANTS.EASING}` : 'none',
+        transition: useTransitions
+          ? `opacity 300ms ${CONSTANTS.EASING}`
+          : 'none',
       },
       'svg .body-car': {
         opacity: 0.13,
-        transition: isSearch
+        transition: useTransitions
           ? `opacity ${CONSTANTS[STAGES.DATA_MOMENT].DURATION}ms ${
               CONSTANTS.EASING
             }`
@@ -86,7 +88,9 @@ function styledCarContainer({ bk, carId, isSearch, stage }: Props) {
       },
       'svg .front-wheel': {
         opacity: 0,
-        transition: isSearch ? `opacity 300ms ${CONSTANTS.EASING}` : 'none',
+        transition: useTransitions
+          ? `opacity 300ms ${CONSTANTS.EASING}`
+          : 'none',
       },
 
       transform: `${scaleUpTransform} translate3d(${distanceFrontToRearWheel}px, 0, 0)`,
@@ -98,7 +102,7 @@ function styledCarContainer({ bk, carId, isSearch, stage }: Props) {
           scaleUpVector *
           (distanceFrontToRearWheel - carDetails.distanceFrontToFrontWheel)
         }px, 0, 0)`,
-        transition: isSearch
+        transition: useTransitions
           ? 'transform 1200ms cubic-bezier(0.645,0.045,0.355,1.000)'
           : 'none',
       },

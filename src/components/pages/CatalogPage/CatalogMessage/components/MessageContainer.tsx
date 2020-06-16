@@ -108,7 +108,9 @@ function styledMessageContainer(props: Props) {
           // fade in after slide down
           transition: `opacity ${
             CONSTANTS[STAGES.NO_RESULTS].MESSAGE_IN_DURATION
-          }ms ${CONSTANTS.EASING}`,
+          }ms ${CONSTANTS.EASING} ${
+            CONSTANTS[STAGES.NO_RESULTS].MESSAGE_IN_DELAY
+          }ms`,
         },
       ];
     default:

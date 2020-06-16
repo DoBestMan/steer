@@ -1,10 +1,8 @@
-import { Cars } from '~/components/global/Car/Car.enums';
-import { Sceneries } from '~/components/global/Scenery/Scenery.types';
 import { useCatalogSummaryContext } from '~/context/CatalogSummary.context';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 
 import CatalogMessage from '../CatalogMessage/CatalogMessage';
-import { vehiclesNoOeWithSize } from './CatalogSummary.mocks';
+import { DEFAULT_SCENERY, DEFAULT_VEHICLE } from './CatalogSummary.constants';
 import Background from './components/Background';
 import Car from './components/Car';
 import Content from './components/Content';
@@ -12,19 +10,20 @@ import Overlay from './components/Overlay';
 import Scenery from './components/Scenery';
 import VehicleContainer from './components/VehicleContainer';
 
-interface Props {
-  hasMultipleTireSizes: boolean;
-  isSearch: boolean;
-}
-
-function CatalogSummary({ isSearch }: Props) {
-  const { stage } = useCatalogSummaryContext();
+function CatalogSummary() {
+  const {
+    catalogSummary,
+    contentStage,
+    stage,
+    useTransitions,
+  } = useCatalogSummaryContext();
 
   const { bk } = useBreakpoints();
 
-  // TODO: Temp fix before mock data using correct asset ids.
-  const sceneryType = 'scenery--rural' as Sceneries;
-  const carId = Cars['car--sedan'];
+  const { siteCatalogSummaryMeta } = catalogSummary;
+
+  const sceneryType = siteCatalogSummaryMeta?.sceneryType || DEFAULT_SCENERY;
+  const carId = siteCatalogSummaryMeta?.vehicleType || DEFAULT_VEHICLE;
 
   return (
     <>
@@ -37,14 +36,14 @@ function CatalogSummary({ isSearch }: Props) {
         <Overlay data-component="Overlay" stage={stage}>
           <VehicleContainer
             data-component="VehicleContainer"
-            isSearch={isSearch}
+            useTransitions={useTransitions}
             stage={stage}
           >
             <Car
               bk={bk}
               carId={carId}
               data-component="Car"
-              isSearch={isSearch}
+              useTransitions={useTransitions}
               solid
               stage={stage}
             />
@@ -56,10 +55,10 @@ function CatalogSummary({ isSearch }: Props) {
           </VehicleContainer>
         </Overlay>
       </Background>
-      <Content data-component="Content" stage={stage}>
+      <Content data-component="Content" stage={contentStage}>
         <CatalogMessage
           data-component="MessageContainer"
-          catalogSummary={vehiclesNoOeWithSize}
+          catalogSummary={catalogSummary}
         />
       </Content>
     </>

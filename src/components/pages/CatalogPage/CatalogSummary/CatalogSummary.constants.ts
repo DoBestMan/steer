@@ -1,3 +1,9 @@
+import { Cars } from '~/components/global/Car/Car.enums';
+import { SCENERIES } from '~/components/global/Scenery/Scenery.constants';
+
+export const DEFAULT_VEHICLE = Cars['car--sedan'];
+export const DEFAULT_SCENERY = SCENERIES.RURAL;
+
 export enum STAGES {
   BUILD_IN = 'buildIn', // the build-in animation
   DATA_MOMENT = 'dataMoment', // continue, or choose tire size

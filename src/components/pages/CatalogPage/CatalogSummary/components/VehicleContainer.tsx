@@ -8,11 +8,11 @@ import { STAGES } from '../CatalogSummary.constants';
 import { CONSTANTS } from '../CatalogSummary.styles';
 
 type Props = {
-  isSearch: boolean;
   stage: STAGES;
+  useTransitions: boolean;
 };
 
-function styledVehicleContainer({ isSearch, stage }: Props) {
+function styledVehicleContainer({ useTransitions, stage }: Props) {
   const base: CSSObject = {
     bottom: '100%',
     fontSize: 0, // fix for bottom space under image
@@ -42,7 +42,7 @@ function styledVehicleContainer({ isSearch, stage }: Props) {
       transform: `translate3d(calc(${GRID_MARGIN.S}px - 50vw + ${
         WHEEL_WIDTH.S / 2
       }px), 0, 0)`,
-      transition: isSearch
+      transition: useTransitions
         ? 'transform 1200ms cubic-bezier(0.645,0.045,0.355,1.000)'
         : 'none',
 

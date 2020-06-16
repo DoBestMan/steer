@@ -108,7 +108,6 @@ export function DataMomentMessage({
                     key={id}
                     as={LINK_TYPES.A}
                     href={link.href}
-                    isExternal={link.isExternal}
                     style={BUTTON_STYLE.OUTLINED}
                     theme={BUTTON_THEME.ORANGE}
                   >
@@ -241,21 +240,24 @@ function CatalogMessage({ catalogSummary }: Props) {
   const {
     setStage,
     stage,
-    messageStage,
-    setNewMessage,
+    contentStage,
+    setNewContent,
   } = useCatalogSummaryContext();
 
-  const MessageComponent = mapMessageToStage[messageStage];
+  const MessageComponent = mapMessageToStage[contentStage];
 
   return (
     <Transition
       appear
-      in={stage === messageStage}
-      timeout={stageToMessageTimeout[messageStage]}
-      onExited={setNewMessage}
+      in={stage === contentStage}
+      timeout={stageToMessageTimeout[contentStage]}
+      onExited={setNewContent}
     >
       {(transitionStatus: TransitionStatus) => (
-        <MessageContainer stage={stage} transitionStatus={transitionStatus}>
+        <MessageContainer
+          stage={contentStage}
+          transitionStatus={transitionStatus}
+        >
           {MessageComponent && (
             <MessageComponent {...catalogSummary} setStage={setStage} />
           )}

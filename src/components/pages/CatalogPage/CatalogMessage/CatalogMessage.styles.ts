@@ -56,8 +56,12 @@ const styles: CSSObject = {
       marginBottom: SPACING.SIZE_10,
 
       [MQ.M]: {
-        margin: `0 ${SPACING.SIZE_10}px 0 0`,
+        marginBottom: 0,
       },
+    },
+
+    '> *:not(:first-of-type)': {
+      marginLeft: SPACING.SIZE_10,
     },
 
     marginBottom: SPACING.SIZE_25,

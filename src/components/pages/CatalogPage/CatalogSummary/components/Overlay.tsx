@@ -42,7 +42,6 @@ function styledOverlay(props: Props) {
       }, 0)`,
     },
     [STAGES.BUILD_IN]: {
-      // TODO: prefer transition > animation to avoid flashes
       animation: `${getTransformKeyframes(
         0,
         CONSTANTS[STAGES.BUILD_IN].CONTENT_TOP.S,
