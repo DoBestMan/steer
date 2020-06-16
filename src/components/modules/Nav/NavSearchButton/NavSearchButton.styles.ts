@@ -1,10 +1,8 @@
-import { CSSObject } from '@emotion/core';
-
-import { BORDERS, COLORS, MQ, SPACING } from '~/lib/constants';
+import { BORDERS, COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
 
 import { NAV_CONTENT_HEIGHT } from '../Nav.styles';
 
-const styles: CSSObject = {
+const styles: StylesMap = {
   button: {
     alignItems: 'center',
     color: COLORS.LIGHT.GRAY_70,

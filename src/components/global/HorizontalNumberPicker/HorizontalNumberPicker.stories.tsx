@@ -1,4 +1,3 @@
-import { CSSObject } from '@emotion/core';
 import { action } from '@storybook/addon-actions';
 import { number, text } from '@storybook/addon-knobs';
 
@@ -9,7 +8,7 @@ export default {
   title: 'Global/Horizontal Number Picker',
 };
 
-const decoratorStyles: CSSObject = {
+const decoratorStyles = {
   ':before': {
     padding: '0 2px',
     content: '"•"',

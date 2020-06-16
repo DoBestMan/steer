@@ -1,8 +1,7 @@
-import { CSSObject } from '@emotion/core';
 import { ReactType, useRef, useState } from 'react';
 
 import { SiteImageExtended } from '~/data/models/SiteImageExtended';
-import { LOADING_OPTIONS } from '~/lib/constants';
+import { CSSStyles, LOADING_OPTIONS } from '~/lib/constants';
 import { Transformations } from '~/lib/utils/cloudinary/cloudinary.types';
 import { percentageFromNumber } from '~/lib/utils/number';
 
@@ -80,7 +79,7 @@ function Image({
     ratio = percentageFromNumber(h, w);
   }
 
-  const style: CSSObject = {};
+  const style: CSSStyles = {};
 
   if (ratio && responsive) {
     style.position = 'relative';

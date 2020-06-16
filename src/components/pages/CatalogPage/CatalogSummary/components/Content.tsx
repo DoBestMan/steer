@@ -1,7 +1,6 @@
-import { CSSObject } from '@emotion/core';
 import styled from '@emotion/styled';
 
-import { MQ, Z_INDEX } from '~/lib/constants';
+import { CSSStyles, MQ, Z_INDEX } from '~/lib/constants';
 
 import { STAGES } from '../CatalogSummary.constants';
 import { CONSTANTS } from '../CatalogSummary.styles';
@@ -13,7 +12,7 @@ type Props = {
 function styledContent(props: Props) {
   const { stage } = props;
 
-  const base: CSSObject = {
+  const base: CSSStyles = {
     backgroundColor: 'transparent',
     minHeight: CONSTANTS[stage].CONTENT_MIN_HEIGHT.S,
     paddingTop: CONSTANTS[stage].CONTENT_TOP.S,

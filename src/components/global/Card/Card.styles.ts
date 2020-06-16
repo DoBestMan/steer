@@ -1,12 +1,17 @@
-import { CSSObject } from '@emotion/core';
-
-import { COLORS, MQ, RADIUS, SPACING, Z_INDEX } from '~/lib/constants';
+import {
+  COLORS,
+  MQ,
+  RADIUS,
+  SPACING,
+  StylesMap,
+  Z_INDEX,
+} from '~/lib/constants';
 
 const ICON_SIZE = {
   H: 50,
   W: 50,
 };
-const styles: CSSObject = {
+const styles: StylesMap = {
   decorator: {
     color: COLORS.GLOBAL.ORANGE,
     display: 'flex',

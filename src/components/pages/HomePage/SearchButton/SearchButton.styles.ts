@@ -1,6 +1,11 @@
-import { CSSObject } from '@emotion/core';
-
-import { COLORS, GRID_MARGIN, MQ, SPACING, TIME } from '~/lib/constants';
+import {
+  COLORS,
+  GRID_MARGIN,
+  MQ,
+  SPACING,
+  StylesMap,
+  TIME,
+} from '~/lib/constants';
 
 export const CONSTANTS = {
   CONTENT_PEEKING_AMOUNT: {
@@ -18,7 +23,7 @@ export const CONSTANTS = {
   },
 };
 
-const styles: CSSObject = {
+const styles: StylesMap = {
   button: {
     alignItems: 'center',
     boxSizing: 'border-box',

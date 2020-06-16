@@ -1,4 +1,3 @@
-import { CSSObject } from '@emotion/core';
 import {
   ENTERED,
   ENTERING,
@@ -12,13 +11,13 @@ import {
   GRID_MARGIN,
   MQ,
   SPACING,
+  StylesMap,
   TIME,
   Z_INDEX,
 } from '~/lib/constants';
 import { typography, typographyStyles } from '~/styles/typography.styles';
 
 const animationStyles = {
-  /* eslint-disable sort-keys */
   [`listbox_${ENTERING}`]: {
     opacity: 0,
     transform: 'translateX(10%)',
@@ -33,10 +32,9 @@ const animationStyles = {
   [`listbox_${EXITED}`]: {
     opacity: 0,
   },
-  /* eslint-enable sort-keys */
 };
 
-const styles: CSSObject = {
+const styles: StylesMap = {
   autocompleteGrid: {
     backgroundColor: COLORS.GLOBAL.ORANGE,
     borderBottom: '1px solid transparent',

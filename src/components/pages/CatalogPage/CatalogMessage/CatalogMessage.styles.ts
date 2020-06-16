@@ -1,17 +1,16 @@
-import { CSSObject } from '@emotion/core';
-
 import {
   BORDERS,
   COLORS,
   GAP_COLUMNS,
   MQ,
   SPACING,
+  StylesMap,
   TIME,
 } from '~/lib/constants';
 import { disableGlobalFocus } from '~/styles/document/accessibility.styles';
 import { typography, typographyStyles } from '~/styles/typography.styles';
 
-const styles: CSSObject = {
+const styles: StylesMap = {
   container: {
     backgroundColor: COLORS.GLOBAL.ORANGE,
     color: COLORS.GLOBAL.WHITE,

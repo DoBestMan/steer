@@ -1,9 +1,7 @@
-import { CSSObject } from '@emotion/core';
-
-import { COLORS, SPACING } from '~/lib/constants';
+import { COLORS, SPACING, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
-const styles: CSSObject = {
+const styles: StylesMap = {
   label: {
     fontWeight: 'normal',
   },

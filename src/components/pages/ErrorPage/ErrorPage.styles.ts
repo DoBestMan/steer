@@ -1,8 +1,6 @@
-import { CSSObject } from '@emotion/core';
+import { COLORS, StylesMap } from '~/lib/constants';
 
-import { COLORS } from '~/lib/constants';
-
-export const styles: CSSObject = {
+export const styles: StylesMap = {
   height100: {
     height: '100%',
   },

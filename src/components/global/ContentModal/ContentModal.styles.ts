@@ -1,9 +1,7 @@
-import { CSSObject } from '@emotion/core';
-
-import { BORDERS, COLORS, MQ, SPACING } from '~/lib/constants';
+import { BORDERS, COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
-const styles: CSSObject = {
+const styles: StylesMap = {
   container: {
     paddingTop: SPACING.SIZE_70,
     [MQ.M]: {

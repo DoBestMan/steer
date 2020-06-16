@@ -1,23 +1,18 @@
-import { css, CSSObject } from '@emotion/core';
-
-import { BORDERS, COLORS, EASING, MQ, SPACING, TIME } from '~/lib/constants';
+import {
+  BORDERS,
+  COLORS,
+  EASING,
+  MQ,
+  SPACING,
+  StylesMap,
+  TIME,
+} from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
-const styles: CSSObject = {
+const styles: StylesMap = {
   button: [
     typography.bodyCopyTight,
     {
-      alignItems: 'center',
-      color: COLORS.DARK.GRAY_40,
-      display: 'flex',
-      justifyContent: 'space-between',
-      overflow: 'hidden',
-      paddingBottom: SPACING.SIZE_20,
-      paddingTop: SPACING.SIZE_20,
-      transition: `color ${TIME.MS100}ms ${EASING.CIRC_EASE_OUT}`,
-      width: '100%',
-    },
-    css({
       '&:hover, &:focus, &:active': {
         color: COLORS.GLOBAL.WHITE,
       },
@@ -28,7 +23,16 @@ const styles: CSSObject = {
           color: COLORS.GLOBAL.WHITE,
         },
       ],
-    }),
+      alignItems: 'center',
+      color: COLORS.DARK.GRAY_40,
+      display: 'flex',
+      justifyContent: 'space-between',
+      overflow: 'hidden',
+      paddingBottom: SPACING.SIZE_20,
+      paddingTop: SPACING.SIZE_20,
+      transition: `color ${TIME.MS100}ms ${EASING.CIRC_EASE_OUT}`,
+      width: '100%',
+    },
   ],
   buttonIcon: {
     transition: `transform ${TIME.MS100}ms ${EASING.CIRC_EASE_OUT}`,
@@ -46,7 +50,7 @@ const styles: CSSObject = {
     flexGrow: 1,
     textAlign: 'left',
   },
-  buttonValue: css({
+  buttonValue: {
     fontWeight: 'bold',
     marginLeft: SPACING.SIZE_05,
     marginRight: SPACING.SIZE_15,
@@ -55,10 +59,15 @@ const styles: CSSObject = {
     [MQ.M]: {
       marginRight: SPACING.SIZE_25,
     },
-  }),
+  },
   contentContainer: [
     typography.bodyCopyTight,
     {
+      '&[aria-hidden="false"]': {
+        marginBottom: SPACING.SIZE_20,
+        opacity: 1,
+        visibility: 'visible',
+      },
       color: COLORS.DARK.GRAY_40,
       marginBottom: 0,
       maxHeight: 0,
@@ -67,14 +76,6 @@ const styles: CSSObject = {
       transition: `opacity ${TIME.MS200}ms ${EASING.CIRC_EASE_OUT}, max-height ${TIME.MS400}ms ${EASING.CIRC_EASE_OUT}`,
       visibility: 'hidden',
     },
-
-    css({
-      '&[aria-hidden="false"]': {
-        marginBottom: SPACING.SIZE_20,
-        opacity: 1,
-        visibility: 'visible',
-      },
-    }),
   ],
   contentInnerContent: {
     paddingBottom: 2,

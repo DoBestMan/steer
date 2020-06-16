@@ -1,6 +1,6 @@
 import { CSSObject } from '@emotion/core';
 
-import { MQ } from '~/lib/constants';
+import { CSSObjectType, MQ } from '~/lib/constants';
 
 const fontStyles = (fontSize: number, lineHeight: number) => ({
   fontSize: `${fontSize / 10}rem`,
@@ -8,7 +8,7 @@ const fontStyles = (fontSize: number, lineHeight: number) => ({
 });
 
 export const typographyStyles: {
-  [name: string]: { [className: string]: CSSObject };
+  [name: string]: CSSObjectType;
 } = {
   primaryHeadline: {
     base: {

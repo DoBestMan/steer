@@ -1,13 +1,11 @@
-import { CSSObject } from '@emotion/core';
-
-import { COLORS, RADIUS, SPACING } from '~/lib/constants';
+import { COLORS, RADIUS, SPACING, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 import { PROMO_STYLES } from './PromoTag.types';
 
 const ICON_SIZE = 10;
 
-const styles: CSSObject = {
+const styles: StylesMap = {
   icon: {
     height: ICON_SIZE,
     width: ICON_SIZE,

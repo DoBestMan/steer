@@ -1,7 +1,7 @@
-import { CSSObject, keyframes } from '@emotion/core';
+import { keyframes } from '@emotion/core';
 import styled from '@emotion/styled';
 
-import { COLORS, MQ } from '~/lib/constants';
+import { COLORS, CSSStyles, MQ } from '~/lib/constants';
 
 import { STAGES } from '../CatalogSummary.constants';
 import { CONSTANTS } from '../CatalogSummary.styles';
@@ -26,7 +26,7 @@ type Props = {
 function styledOverlay(props: Props) {
   const { stage } = props;
 
-  const base: CSSObject = {
+  const base: CSSStyles = {
     backgroundColor: COLORS.GLOBAL.ORANGE,
     height: '100%',
     left: 0,
@@ -35,7 +35,7 @@ function styledOverlay(props: Props) {
     width: '100%',
   };
 
-  const stageStyles: CSSObject = {
+  const stageStyles: CSSStyles = {
     [STAGES.LOADING]: {
       transform: `translate3d(0, ${
         CONSTANTS[STAGES.LOADING].CONTENT_TOP.S

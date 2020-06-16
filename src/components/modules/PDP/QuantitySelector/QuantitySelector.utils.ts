@@ -1,10 +1,8 @@
-import { CSSObject } from '@emotion/core';
-
 import { CONTENT_LATERAL_PADDING } from '~/components/global/Modal/BottomCardModal.styles';
-import { MQ } from '~/lib/constants';
+import { CSSObjectType, MQ } from '~/lib/constants';
 
-export const getResponsiveModalStyles = (): CSSObject => {
-  const reponsiveStyles: CSSObject = {};
+export const getResponsiveModalStyles = (): CSSObjectType => {
+  const reponsiveStyles: CSSObjectType = {};
 
   for (const key in CONTENT_LATERAL_PADDING) {
     const value: number = CONTENT_LATERAL_PADDING[key];

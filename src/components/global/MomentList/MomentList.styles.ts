@@ -1,14 +1,13 @@
-import { CSSObject } from '@emotion/core';
-
 import {
   COLORS,
   RATINGS_DISPLAY,
   RATINGS_THEME,
   SPACING,
+  StylesMap,
 } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
-const styles: CSSObject = {
+const styles: StylesMap = {
   container: {
     paddingBottom: SPACING.SIZE_40,
   },

@@ -1,7 +1,7 @@
-import styled, { CSSObject } from '@emotion/styled';
+import styled from '@emotion/styled';
 import { TransitionStatus } from 'react-transition-group/Transition';
 
-import { COLORS, MQ } from '~/lib/constants';
+import { COLORS, CSSStyles, MQ } from '~/lib/constants';
 
 import { STAGES } from '../../CatalogSummary/CatalogSummary.constants';
 import { CONSTANTS } from '../../CatalogSummary/CatalogSummary.styles';
@@ -18,7 +18,7 @@ function styledMessageContainer(props: Props) {
   const isEntered = transitionStatus === 'entered';
   const isExiting = transitionStatus === 'exiting';
 
-  const baseStyles: CSSObject = {
+  const baseStyles: CSSStyles = {
     backgroundColor: COLORS.GLOBAL.ORANGE,
     color: COLORS.GLOBAL.WHITE,
     minHeight: CONSTANTS[stage].CONTENT_MIN_HEIGHT.S,

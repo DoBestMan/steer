@@ -1,9 +1,7 @@
-import { CSSObject } from '@emotion/core';
-
-import { BORDERS, COLORS, MQ, SPACING } from '~/lib/constants';
+import { BORDERS, COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
-const styles: CSSObject = {
+const styles: StylesMap = {
   container: {
     borderTop: BORDERS.SOLID_GRAY_80_1PX,
     display: 'flex',

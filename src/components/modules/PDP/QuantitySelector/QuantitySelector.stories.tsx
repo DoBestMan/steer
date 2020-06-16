@@ -1,4 +1,3 @@
-import { CSSObject } from '@emotion/core';
 import { action } from '@storybook/addon-actions';
 import { boolean, number } from '@storybook/addon-knobs';
 import { useEffect, useState } from 'react';
@@ -82,7 +81,7 @@ export function QuantitySelectorDefault() {
       >
         <HorizontalNumberPicker
           selectedIndex={defaultSelectedIndex}
-          customCarouselStyles={styles.carouselStyles as CSSObject}
+          customCarouselStyles={styles.carouselStyles}
           {...(isFrontAndRear && {
             customContainerStyles: { marginBottom: SPACING.SIZE_30 },
           })}
@@ -99,7 +98,7 @@ export function QuantitySelectorDefault() {
         {isFrontAndRear && (
           <HorizontalNumberPicker
             selectedIndex={defaultSelectedIndex}
-            customCarouselStyles={styles.carouselStyles as CSSObject}
+            customCarouselStyles={styles.carouselStyles}
             numbers={QUANTITY_SELECTOR_CONSTANTS.PICKER_NUMBERS}
             onSelect={handleSelectSecondaryPicker}
             subTitle={

@@ -1,8 +1,6 @@
-import { CSSObject } from '@emotion/core';
+import { COLORS, StylesMap, TIME } from '~/lib/constants';
 
-import { COLORS, TIME } from '~/lib/constants';
-
-const styles: CSSObject = {
+const styles: StylesMap = {
   image: {
     display: 'block',
     objectFit: 'inherit',

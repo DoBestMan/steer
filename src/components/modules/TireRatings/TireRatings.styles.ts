@@ -1,8 +1,6 @@
-import { CSSObject } from '@emotion/core';
+import { COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
 
-import { COLORS, MQ, SPACING } from '~/lib/constants';
-
-const styles: CSSObject = {
+const styles: StylesMap = {
   container: {
     paddingBottom: SPACING.SIZE_120,
     paddingTop: SPACING.SIZE_40,

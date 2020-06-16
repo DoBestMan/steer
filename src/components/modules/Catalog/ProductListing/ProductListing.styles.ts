@@ -1,6 +1,11 @@
-import { CSSObject } from '@emotion/core';
-
-import { BORDERS, COLORS, MQ, RADIUS, SPACING } from '~/lib/constants';
+import {
+  BORDERS,
+  COLORS,
+  MQ,
+  RADIUS,
+  SPACING,
+  StylesMap,
+} from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const IMAGE_SIZES = {
@@ -11,7 +16,7 @@ const IMAGE_SIZES = {
 
 const DISC_SIZE = 50;
 
-const styles: CSSObject = {
+const styles: StylesMap = {
   attribute: [
     typography.primarySubhead,
     {

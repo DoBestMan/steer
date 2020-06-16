@@ -1,6 +1,11 @@
-import { CSSObject } from '@emotion/core';
-
-import { BORDERS, COLORS, MQ, RADIUS, SPACING } from '~/lib/constants';
+import {
+  BORDERS,
+  COLORS,
+  MQ,
+  RADIUS,
+  SPACING,
+  StylesMap,
+} from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 export const ACTION_BAR_HEIGHT = {
@@ -9,7 +14,7 @@ export const ACTION_BAR_HEIGHT = {
   LG: 80,
 };
 
-const styles: CSSObject = {
+const styles: StylesMap = {
   open: {
     display: 'block',
   },

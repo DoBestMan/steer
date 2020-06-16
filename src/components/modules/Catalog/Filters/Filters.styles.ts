@@ -1,10 +1,8 @@
-import { CSSObject } from '@emotion/core';
-
-import { COLORS, MQ, SPACING } from '~/lib/constants';
+import { COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
 import { hideScrollbar } from '~/styles/document/accessibility.styles';
 import { typography } from '~/styles/typography.styles';
 
-const styles: CSSObject = {
+const styles: StylesMap = {
   button: {
     marginRight: SPACING.SIZE_05,
     position: 'relative',

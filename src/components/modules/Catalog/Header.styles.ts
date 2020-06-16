@@ -1,9 +1,7 @@
-import { CSSObject } from '@emotion/core';
-
-import { COLORS, MQ, SPACING, TIME } from '~/lib/constants';
+import { COLORS, MQ, SPACING, StylesMap, TIME } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
-const styles: CSSObject = {
+const styles: StylesMap = {
   action: {
     alignItems: 'baseline',
     color: COLORS.GLOBAL.WHITE,

@@ -1,6 +1,4 @@
-import { CSSObject } from '@emotion/core';
-
-import { COLORS, RADIUS, SPACING } from '~/lib/constants';
+import { COLORS, RADIUS, SPACING, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 import { RANGE_SLIDER_SIZE } from './Range.constants';
@@ -13,7 +11,7 @@ export const INDICATOR_SIZE = {
 const LABEL_SM_WIDTH = 35;
 const RAIL_HEIGHT = 2;
 
-const styles: CSSObject = {
+const styles: StylesMap = {
   container: {
     marginLeft: SPACING.SIZE_05,
     marginRight: SPACING.SIZE_10,

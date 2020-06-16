@@ -1,10 +1,8 @@
-import { CSSObject } from '@emotion/core';
-
-import { BORDERS, COLORS, RADIUS } from '~/lib/constants';
+import { BORDERS, COLORS, RADIUS, StylesMap } from '~/lib/constants';
 
 const CHECKBOX_HEIGHT = 20;
 
-const styles: CSSObject = {
+const styles: StylesMap = {
   container: {
     background: COLORS.LIGHT.GRAY_20,
     borderRadius: RADIUS.CIRCLE,

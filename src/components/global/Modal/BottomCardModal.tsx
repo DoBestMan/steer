@@ -1,11 +1,10 @@
-import { CSSObject } from '@emotion/core';
 import { ReactNode } from 'react';
 import ReactModal from 'react-modal';
 
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Link from '~/components/global/Link/Link';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
-import { COLORS, THEME, TIME, Z_INDEX } from '~/lib/constants';
+import { COLORS, CSSStyles, THEME, TIME, Z_INDEX } from '~/lib/constants';
 import { bindAppElement } from '~/lib/utils/modal';
 import { ui } from '~/lib/utils/ui-dictionary';
 
@@ -16,7 +15,7 @@ bindAppElement();
 interface Props {
   children: ReactNode;
   contentLabel: string;
-  customContentStyles?: CSSObject;
+  customContentStyles?: CSSStyles;
   isOpen: boolean;
   onClose: () => void;
 }

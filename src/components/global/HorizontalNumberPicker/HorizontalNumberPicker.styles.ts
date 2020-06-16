@@ -1,11 +1,9 @@
-import { CSSObject } from '@emotion/core';
-
-import { BORDERS, COLORS, RADIUS, SPACING } from '~/lib/constants';
+import { BORDERS, COLORS, RADIUS, SPACING, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 export const ITEM_SIZE = 75;
 
-const styles: CSSObject = {
+const styles: StylesMap = {
   header: {
     alignItems: 'baseline',
     color: COLORS.LIGHT.GRAY_70,

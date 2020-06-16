@@ -1,5 +1,3 @@
-import { CSSObject } from '@emotion/core';
-
 import {
   BORDERS,
   COLORS,
@@ -8,6 +6,7 @@ import {
   MQ,
   RADIUS,
   SPACING,
+  StylesMap,
   THEME,
   TIME,
 } from '~/lib/constants';
@@ -19,7 +18,7 @@ const CONSTANTS = {
   SIZE: 50,
 };
 
-const styles: CSSObject = {
+const styles: StylesMap = {
   disabled: {
     opacity: CONSTANTS.OPACITY_DISABLED,
     pointerEvents: 'none',
@@ -87,7 +86,7 @@ export const iconCTA = {
   },
 };
 
-export const linkBorder: CSSObject = {
+export const linkBorder = {
   [THEME.DARK]: {
     borderColor: 'inherit',
   },

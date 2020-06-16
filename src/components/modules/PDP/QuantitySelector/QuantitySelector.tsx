@@ -1,4 +1,3 @@
-import { CSSObject } from '@emotion/core';
 import { ReactNode } from 'react';
 
 import Button from '~/components/global/Button/Button';
@@ -52,7 +51,7 @@ function QuantitySelector({
   return (
     <BottomCardModal
       contentLabel={ui('pdp.quantitySelector.modalLabel')}
-      customContentStyles={styles.modalContentStyles as CSSObject}
+      customContentStyles={styles.modalContentStyles}
       isOpen={isOpen}
       onClose={onClose}
     >

@@ -1,7 +1,7 @@
-import styled, { CSSObject } from '@emotion/styled';
+import styled from '@emotion/styled';
 
 import Scenery from '~/components/global/Scenery/Scenery';
-import { MQ, TIME } from '~/lib/constants';
+import { CSSStyles, MQ, TIME } from '~/lib/constants';
 
 import { STAGES } from '../CatalogSummary.constants';
 import { CONSTANTS } from '../CatalogSummary.styles';
@@ -11,7 +11,7 @@ type Props = {
 };
 
 function styledSceneryContainer({ stage }: Props) {
-  const base: CSSObject = {
+  const base: CSSStyles = {
     backgroundPosition: '0 100%',
     height: CONSTANTS[stage].CONTENT_TOP.S,
     left: 0,
@@ -29,7 +29,7 @@ function styledSceneryContainer({ stage }: Props) {
     },
   };
 
-  const stageStyles: CSSObject = {
+  const stageStyles: CSSStyles = {
     [STAGES.LOADING]: {
       display: 'none',
     },

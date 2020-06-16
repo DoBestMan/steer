@@ -1,7 +1,5 @@
-import { CSSObject } from '@emotion/core';
-
 import { WHEEL_WIDTH } from '~/components/global/Car/Car.constants';
-import { COLORS, EASING, MQ, SPACING, TIME } from '~/lib/constants';
+import { COLORS, EASING, MQ, SPACING, StylesMap, TIME } from '~/lib/constants';
 
 const ASSET_MARGIN_TOP = {
   /* eslint-disable sort-keys */
@@ -13,7 +11,7 @@ const ASSET_MARGIN_TOP = {
 
 const HEIGHT_BUTTON = 50;
 
-export const styles: CSSObject = {
+export const styles: StylesMap = {
   addVehicleContainer: {
     color: COLORS.GLOBAL.WHITE,
     fontWeight: 'normal',

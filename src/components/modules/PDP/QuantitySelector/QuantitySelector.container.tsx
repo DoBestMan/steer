@@ -1,4 +1,3 @@
-import { CSSObject } from '@emotion/core';
 import { useState } from 'react';
 
 import HorizontalNumberPicker from '~/components/global/HorizontalNumberPicker/HorizontalNumberPicker';
@@ -73,7 +72,7 @@ function QuantitySelectorContainer({ isOpen, toggleModal }: Props) {
     >
       <HorizontalNumberPicker
         selectedIndex={selectedPrimaryIndex}
-        customCarouselStyles={styles.carouselStyles as CSSObject}
+        customCarouselStyles={styles.carouselStyles}
         {...(isFrontAndRear && {
           customContainerStyles: { marginBottom: SPACING.SIZE_30 },
         })}
@@ -85,7 +84,7 @@ function QuantitySelectorContainer({ isOpen, toggleModal }: Props) {
 
       {isFrontAndRear && (
         <HorizontalNumberPicker
-          customCarouselStyles={styles.carouselStyles as CSSObject}
+          customCarouselStyles={styles.carouselStyles}
           numbers={CONSTANTS.PICKER_NUMBERS}
           onSelect={handleSelectSecondaryPicker}
           subTitle={secondaryPrice && <Subtitle price={secondaryPrice} />}

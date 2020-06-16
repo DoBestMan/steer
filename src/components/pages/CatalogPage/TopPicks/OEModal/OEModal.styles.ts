@@ -1,10 +1,8 @@
-import { CSSObject } from '@emotion/core';
-
-import { COLORS, MQ, SPACING } from '~/lib/constants';
+import { COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
 import { GAP_COLUMNS } from '~/lib/constants/grid.ts';
 import { typography, typographyStyles } from '~/styles/typography.styles';
 
-export const styles: CSSObject = {
+export const styles: StylesMap = {
   closeButton: {
     marginTop: SPACING.SIZE_60,
   },

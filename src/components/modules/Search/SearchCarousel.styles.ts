@@ -1,5 +1,3 @@
-import { CSSObject } from '@emotion/core';
-
 import {
   COLORS,
   GAP_COLUMNS,
@@ -8,6 +6,7 @@ import {
   NB_COLUMNS,
   RADIUS,
   SPACING,
+  StylesMap,
   TIME,
 } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
@@ -30,7 +29,7 @@ const PADDING_LEFT_L = `(100% - (${GRID_MARGIN.L}px * 2) - (${
   GAP_COLUMNS.L
 }px`;
 
-const styles: CSSObject = {
+const styles: StylesMap = {
   carouselButton: {
     '&:focus:not(:active)': {
       backgroundColor: COLORS.ORANGE.SHADE_30,

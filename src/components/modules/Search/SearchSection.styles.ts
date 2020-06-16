@@ -1,10 +1,8 @@
-import { css, CSSObject } from '@emotion/core';
-
-import { BORDERS, COLORS, MQ, SPACING, TIME } from '~/lib/constants';
+import { BORDERS, COLORS, MQ, SPACING, StylesMap, TIME } from '~/lib/constants';
 import { disableGlobalFocus } from '~/styles/document/accessibility.styles';
 import { typography } from '~/styles/typography.styles';
 
-const styles: CSSObject = {
+const styles: StylesMap = {
   eyebrow: [
     typography.eyebrow,
     {
@@ -21,7 +19,7 @@ const styles: CSSObject = {
   itemButton: [
     disableGlobalFocus,
     typography.secondaryHeadline,
-    css({
+    {
       '&:active': {
         borderColor: COLORS.ORANGE.TINT_70,
         color: COLORS.ORANGE.TINT_70,
@@ -34,7 +32,7 @@ const styles: CSSObject = {
       textAlign: 'left',
       transition: `border-color ${TIME.MS100}ms ease, color ${TIME.MS100}ms ease`,
       [MQ.M]: typography.primaryHeadline,
-    }),
+    },
   ],
   listItem: {
     '&:not(:last-child)': {

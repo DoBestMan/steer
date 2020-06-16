@@ -1,4 +1,3 @@
-import { CSSObject } from '@emotion/core';
 import {
   ENTERED,
   ENTERING,
@@ -6,10 +5,17 @@ import {
   EXITING,
 } from 'react-transition-group/Transition';
 
-import { COLORS, MQ, SPACING, TIME, Z_INDEX } from '~/lib/constants';
+import {
+  COLORS,
+  CSSObjectType,
+  MQ,
+  SPACING,
+  StylesMap,
+  TIME,
+  Z_INDEX,
+} from '~/lib/constants';
 
-const animationStyles: CSSObject = {
-  /* eslint-disable sort-keys */
+const animationStyles: CSSObjectType = {
   [`searchSectionWrapper_${ENTERING}`]: {
     opacity: 1,
   },
@@ -22,10 +28,9 @@ const animationStyles: CSSObject = {
   [`searchSectionWrapper_${EXITED}`]: {
     opacity: 0,
   },
-  /* eslint-enable sort-keys */
 };
 
-const styles: CSSObject = {
+const styles: StylesMap = {
   clearPastSearchesButton: {
     span: {
       borderBottom: `2px dotted ${COLORS.LIGHT.GRAY_70}`,

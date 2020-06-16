@@ -1,6 +1,4 @@
-import { CSSObject } from '@emotion/core';
-
-import { BORDERS, COLORS, MQ, SPACING } from '~/lib/constants';
+import { BORDERS, COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const ITEM_HEIGHT = 60;
@@ -8,7 +6,7 @@ const DECORATOR_CONTENT = {
   content: '"•"',
 };
 
-const styles: CSSObject = {
+const styles: StylesMap = {
   alignList: {
     [MQ.M]: {
       marginTop: -SPACING.SIZE_20, // align content with links label

@@ -1,12 +1,20 @@
-import { css, CSSObject } from '@emotion/core';
-
-import { BORDERS, COLORS, EASING, SPACING, TIME } from '~/lib/constants';
+import {
+  BORDERS,
+  COLORS,
+  EASING,
+  SPACING,
+  StylesMap,
+  TIME,
+} from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
-const styles: CSSObject = {
+const styles: StylesMap = {
   showAll: [
     typography.primarySubhead,
     {
+      '&:hover, &:focus, &:active': {
+        color: COLORS.GLOBAL.WHITE,
+      },
       alignItems: 'center',
       borderTop: BORDERS.SOLID_GRAY_80_1PX,
       color: COLORS.DARK.GRAY_40,
@@ -17,11 +25,6 @@ const styles: CSSObject = {
       transition: `color ${TIME.MS100}ms ${EASING.CIRC_EASE_OUT}`,
       width: '100%',
     },
-    css({
-      '&:hover, &:focus, &:active': {
-        color: COLORS.GLOBAL.WHITE,
-      },
-    }),
   ],
   showAllIcon: {
     svg: {

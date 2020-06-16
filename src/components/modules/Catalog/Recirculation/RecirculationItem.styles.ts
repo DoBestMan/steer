@@ -1,6 +1,4 @@
-import { CSSObject } from '@emotion/core';
-
-import { BORDERS, COLORS, MQ, SPACING } from '~/lib/constants';
+import { BORDERS, COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const ICON_SIZE = {
@@ -9,7 +7,7 @@ const ICON_SIZE = {
   L: 50,
 };
 
-const styles: CSSObject = {
+const styles: StylesMap = {
   description: [
     typography.bodyCopyTight,
     {

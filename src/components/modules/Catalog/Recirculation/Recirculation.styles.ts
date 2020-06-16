@@ -1,9 +1,7 @@
-import { CSSObject } from '@emotion/core';
-
-import { SPACING } from '~/lib/constants';
+import { SPACING, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
-const styles: CSSObject = {
+const styles: StylesMap = {
   title: [
     typography.primaryHeadline,
     {

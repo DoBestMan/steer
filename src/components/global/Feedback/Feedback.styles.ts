@@ -1,9 +1,7 @@
-import { CSSObject } from '@emotion/core';
-
-import { COLORS, MQ, SPACING } from '~/lib/constants';
+import { COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
-const styles: CSSObject = {
+const styles: StylesMap = {
   button: {
     '&:not(:last-child)': {
       marginRight: SPACING.SIZE_10,

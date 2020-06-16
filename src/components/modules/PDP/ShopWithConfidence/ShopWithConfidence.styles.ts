@@ -1,9 +1,7 @@
-import { CSSObject } from '@emotion/core';
-
-import { COLORS, MQ, RADIUS, SPACING } from '~/lib/constants';
+import { COLORS, MQ, RADIUS, SPACING, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
-const styles: CSSObject = {
+const styles: StylesMap = {
   carouselContainer: {
     '.swiper-slide': {
       flex: '0 1 auto',

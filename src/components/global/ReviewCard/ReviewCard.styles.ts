@@ -1,6 +1,4 @@
-import { CSSObject } from '@emotion/core';
-
-import { COLORS, MQ, RADIUS, SPACING } from '~/lib/constants';
+import { COLORS, MQ, RADIUS, SPACING, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const CONSTANTS = {
@@ -10,7 +8,7 @@ const CONSTANTS = {
   SEPARATOR_SIZE: 8,
 };
 
-const styles: CSSObject = {
+const styles: StylesMap = {
   additionalContentContainer: {
     ul: {
       paddingTop: SPACING.SIZE_30,

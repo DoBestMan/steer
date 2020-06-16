@@ -1,13 +1,11 @@
-import { CSSObject } from '@emotion/core';
-
 import { useBreakpoints } from '~/hooks/useBreakpoints';
-import { Breakpoint, BREAKPOINT_SIZES } from '~/lib/constants';
+import { Breakpoint, BREAKPOINT_SIZES, CSSStyles } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import styles from './SearchLabel.styles';
 
 interface Props {
-  customContainerStyles?: CSSObject;
+  customContainerStyles?: CSSStyles;
   fullLabelAt?: Breakpoint;
   hideOnSmallMedium?: boolean;
 }

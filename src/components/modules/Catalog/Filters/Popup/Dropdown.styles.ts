@@ -1,12 +1,18 @@
-import { CSSObject } from '@emotion/core';
-
-import { BORDERS, COLORS, MQ, RADIUS, SPACING, Z_INDEX } from '~/lib/constants';
+import {
+  BORDERS,
+  COLORS,
+  MQ,
+  RADIUS,
+  SPACING,
+  StylesMap,
+  Z_INDEX,
+} from '~/lib/constants';
 import { hideScrollbar } from '~/styles/document/accessibility.styles';
 import { typography } from '~/styles/typography.styles';
 
 import { ACTION_BAR_HEIGHT } from './ActionBar.styles';
 
-const styles: CSSObject = {
+const styles: StylesMap = {
   open: {
     display: 'block',
   },

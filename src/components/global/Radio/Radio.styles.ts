@@ -1,11 +1,10 @@
-import { CSSObject } from '@emotion/core';
-
-import { BORDERS, COLORS, RADIUS } from '~/lib/constants';
+import { BORDERS, COLORS, RADIUS, StylesMap } from '~/lib/constants';
 
 const RADIO_SIZE = 25;
 const RADIO_BORDER = `2px solid ${COLORS.GLOBAL.ORANGE}`;
 const INNER_SIZE = 13;
-const styles: CSSObject = {
+
+const styles: StylesMap = {
   indicator: {
     background: COLORS.LIGHT.GRAY_20,
     border: RADIO_BORDER,

@@ -1,10 +1,8 @@
-import { css, CSSObject } from '@emotion/core';
-
-import { COLORS, MQ, SPACING } from '~/lib/constants';
+import { COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
 import { disableGlobalFocus } from '~/styles/document/accessibility.styles';
 import { typography, typographyStyles } from '~/styles/typography.styles';
 
-const styles: CSSObject = {
+const styles: StylesMap = {
   comboboxWrapper: {
     flexGrow: 1,
   },
@@ -46,7 +44,7 @@ const styles: CSSObject = {
   ],
   label: [
     typography.secondaryHeadline,
-    css({
+    {
       color: COLORS.ORANGE.TINT_70,
       height: '100%',
       left: 0,
@@ -55,7 +53,7 @@ const styles: CSSObject = {
       position: 'absolute',
       top: 0,
       [MQ.M]: typography.primaryHeadline,
-    }),
+    },
   ],
   labelHidden: {
     opacity: 0,

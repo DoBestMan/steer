@@ -1,7 +1,7 @@
-import styled, { CSSObject } from '@emotion/styled';
+import styled from '@emotion/styled';
 
 import { WHEEL_WIDTH } from '~/components/global/Car/Car.constants';
-import { GRID_MARGIN, MQ } from '~/lib/constants';
+import { CSSStyles, GRID_MARGIN, MQ } from '~/lib/constants';
 import { fadeIn } from '~/styles/animations.styles';
 
 import { STAGES } from '../CatalogSummary.constants';
@@ -13,7 +13,7 @@ type Props = {
 };
 
 function styledVehicleContainer({ useTransitions, stage }: Props) {
-  const base: CSSObject = {
+  const base: CSSStyles = {
     bottom: '100%',
     fontSize: 0, // fix for bottom space under image
     position: 'absolute',
@@ -28,7 +28,7 @@ function styledVehicleContainer({ useTransitions, stage }: Props) {
     },
   };
 
-  const stageStyles: CSSObject = {
+  const stageStyles: CSSStyles = {
     [STAGES.BUILD_IN]: {
       // Fade in vehicle as build-in screen slides down
       animation: `${fadeIn} ${

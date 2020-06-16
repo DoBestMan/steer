@@ -1,6 +1,6 @@
-import { CSSObject, keyframes } from '@emotion/core';
+import { keyframes } from '@emotion/core';
 
-import { MQ } from '~/lib/constants';
+import { MQ, StylesMap } from '~/lib/constants';
 
 const searchScrollAnimation = keyframes({
   '0%, 30%': {
@@ -30,7 +30,7 @@ const searchScrollAnimation = keyframes({
   },
 });
 
-const styles: CSSObject = {
+const styles: StylesMap = {
   label: {
     height: 'inherit',
   },

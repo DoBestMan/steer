@@ -1,4 +1,4 @@
-import styled, { CSSObject } from '@emotion/styled';
+import styled from '@emotion/styled';
 
 import Car from '~/components/global/Car/Car';
 import {
@@ -8,7 +8,7 @@ import {
 import { Cars } from '~/components/global/Car/Car.enums';
 import { getScaleVector } from '~/components/global/Car/Car.utils';
 import { CAR_DETAILS } from '~/components/global/Car/CarDetails.constants';
-import { Breakpoint, MQ } from '~/lib/constants';
+import { Breakpoint, CSSStyles, MQ } from '~/lib/constants';
 
 import { STAGES } from '../CatalogSummary.constants';
 import { CONSTANTS } from '../CatalogSummary.styles';
@@ -32,7 +32,7 @@ function styledCarContainer({ bk, carId, stage, useTransitions }: Props) {
 
   // Note: If not part of the loading interstitial (e.g. only when
   // transitioning from Search), all transitions are set to 'none'.
-  const base: CSSObject = {
+  const base: CSSStyles = {
     '~ .back-wheel-img': {
       bottom: 0,
       opacity: 0,
@@ -64,7 +64,7 @@ function styledCarContainer({ bk, carId, stage, useTransitions }: Props) {
     willChange: 'transform',
   };
 
-  const stageStyles: CSSObject = {
+  const stageStyles: CSSStyles = {
     [STAGES.DATA_MOMENT]: {
       '~ .back-wheel-img': {
         opacity: 1,

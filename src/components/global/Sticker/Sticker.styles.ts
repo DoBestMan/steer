@@ -1,8 +1,5 @@
-import { CSSObject } from '@emotion/core';
-
-import { COLORS, MQ } from '~/lib/constants';
-
-export const styles: CSSObject = {
+import { COLORS, MQ, StylesMap } from '~/lib/constants';
+export const styles: StylesMap = {
   root: {
     alignItems: 'center',
     backgroundColor: COLORS.GLOBAL.ORANGE,

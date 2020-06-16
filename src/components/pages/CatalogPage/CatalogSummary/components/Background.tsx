@@ -1,7 +1,9 @@
-import styled, { CSSObject } from '@emotion/styled';
+import styled from '@emotion/styled';
+
+import { CSSStyles } from '~/lib/constants';
 
 function styledBackgroundContainer() {
-  const base: CSSObject = {
+  const base: CSSStyles = {
     height: '100vh',
     left: 0,
     overflow: 'hidden',

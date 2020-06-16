@@ -1,11 +1,10 @@
-import { CSSObject } from '@emotion/core';
-
 import {
   COLORS,
   RADIUS,
   RATINGS_DISPLAY,
   RATINGS_THEME,
   SPACING,
+  StylesMap,
 } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
@@ -23,7 +22,7 @@ const CONSTANTS = {
   },
 };
 
-const styles: CSSObject = {
+const styles: StylesMap = {
   bar: {
     borderRadius: RADIUS.RADIUS_10,
     display: 'block',
