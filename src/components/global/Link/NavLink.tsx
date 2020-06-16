@@ -1,5 +1,5 @@
 import { ActionType, LinkType } from '~/components/modules/Nav/Nav.types';
-import { LINK_ICON_POSITION, LINK_THEME } from '~/lib/constants';
+import { LINK_ICON_POSITION, THEME } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 import Link, { AnchorProps, ButtonProps } from './Link';
@@ -22,7 +22,7 @@ function NavLink({
   if ('href' in rest) {
     return (
       <Link
-        theme={LINK_THEME.LIGHT}
+        theme={THEME.LIGHT}
         css={[
           typography.primarySubhead,
           isActive ? navLink.selected : navLink.root,
@@ -39,7 +39,7 @@ function NavLink({
     return (
       <Link
         as="button"
-        theme={LINK_THEME.LIGHT}
+        theme={THEME.LIGHT}
         css={[
           typography.primarySubhead,
           isActive ? navLink.selected : navLink.root,

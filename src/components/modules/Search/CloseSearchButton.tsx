@@ -1,5 +1,5 @@
 import Link from '~/components/global/Link/Link';
-import { LINK_THEME, LINK_TYPES } from '~/lib/constants';
+import { LINK_TYPES, THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
 
@@ -26,7 +26,7 @@ function CloseSearchButton({ isRearTireState, onCloseSearchClick }: Props) {
           isRearTireState && styles.closeSearchButtonRearTire,
         ]}
         onClick={onCloseSearchClick}
-        theme={LINK_THEME.LIGHT}
+        theme={THEME.LIGHT}
       >
         {ui('search.cancelButtonLabel')}
       </Link>

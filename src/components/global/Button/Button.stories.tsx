@@ -5,10 +5,10 @@ import { ReactChild, useState } from 'react';
 
 import {
   BUTTON_STYLE,
-  BUTTON_THEME,
   COLORS,
   LINK_TYPES,
   RADIUS,
+  THEME,
 } from '~/lib/constants';
 
 import Button from './Button';
@@ -41,12 +41,12 @@ function ButtonContainer({
   children,
 }: {
   children: ReactChild;
-  theme: BUTTON_THEME;
+  theme: THEME.DARK | THEME.LIGHT | THEME.ORANGE;
 }) {
   const themeMap = {
-    [BUTTON_THEME.LIGHT]: COLORS.GLOBAL.WHITE,
-    [BUTTON_THEME.DARK]: COLORS.GLOBAL.BLACK,
-    [BUTTON_THEME.ORANGE]: COLORS.GLOBAL.ORANGE,
+    [THEME.LIGHT]: COLORS.GLOBAL.WHITE,
+    [THEME.DARK]: COLORS.GLOBAL.BLACK,
+    [THEME.ORANGE]: COLORS.GLOBAL.ORANGE,
   };
   const backgroundColor = themeMap[theme];
 
@@ -66,8 +66,8 @@ export function ButtonWithKnobs() {
   );
   const theme = select(
     'Theme',
-    [BUTTON_THEME.LIGHT, BUTTON_THEME.DARK, BUTTON_THEME.ORANGE],
-    BUTTON_THEME.LIGHT,
+    [THEME.LIGHT, THEME.DARK, THEME.ORANGE],
+    THEME.LIGHT,
   );
 
   return (
@@ -86,7 +86,7 @@ export function ButtonWithKnobs() {
 
 export function LightButtonSolid() {
   return (
-    <ButtonContainer theme={BUTTON_THEME.LIGHT}>
+    <ButtonContainer theme={THEME.LIGHT}>
       <Button
         isDisabled={boolean('Disabled', false)}
         onClick={handleButtonClick}
@@ -99,7 +99,7 @@ export function LightButtonSolid() {
 
 export function LightButtonSolidAsAnchor() {
   return (
-    <ButtonContainer theme={BUTTON_THEME.LIGHT}>
+    <ButtonContainer theme={THEME.LIGHT}>
       <Button
         as={LINK_TYPES.A}
         href="/"
@@ -114,12 +114,12 @@ export function LightButtonSolidAsAnchor() {
 
 export function LightButtonOutlined() {
   return (
-    <ButtonContainer theme={BUTTON_THEME.LIGHT}>
+    <ButtonContainer theme={THEME.LIGHT}>
       <Button
         isDisabled={boolean('Disabled', false)}
         onClick={handleButtonClick}
         style={BUTTON_STYLE.OUTLINED}
-        theme={BUTTON_THEME.LIGHT}
+        theme={THEME.LIGHT}
       >
         {text('Label', 'Button Label')}
       </Button>
@@ -129,12 +129,12 @@ export function LightButtonOutlined() {
 
 export function DarkButtonSolid() {
   return (
-    <ButtonContainer theme={BUTTON_THEME.DARK}>
+    <ButtonContainer theme={THEME.DARK}>
       <Button
         isDisabled={boolean('Disabled', false)}
         onClick={handleButtonClick}
         style={BUTTON_STYLE.SOLID}
-        theme={BUTTON_THEME.DARK}
+        theme={THEME.DARK}
       >
         {text('Label', 'Button Label')}
       </Button>
@@ -144,12 +144,12 @@ export function DarkButtonSolid() {
 
 export function DarkButtonOutlined() {
   return (
-    <ButtonContainer theme={BUTTON_THEME.DARK}>
+    <ButtonContainer theme={THEME.DARK}>
       <Button
         isDisabled={boolean('Disabled', false)}
         onClick={handleButtonClick}
         style={BUTTON_STYLE.OUTLINED}
-        theme={BUTTON_THEME.DARK}
+        theme={THEME.DARK}
       >
         {text('Label', 'Button Label')}
       </Button>
@@ -159,12 +159,12 @@ export function DarkButtonOutlined() {
 
 export function OrangeButtonSolid() {
   return (
-    <ButtonContainer theme={BUTTON_THEME.ORANGE}>
+    <ButtonContainer theme={THEME.ORANGE}>
       <Button
         isDisabled={boolean('Disabled', false)}
         onClick={handleButtonClick}
         style={BUTTON_STYLE.SOLID}
-        theme={BUTTON_THEME.ORANGE}
+        theme={THEME.ORANGE}
       >
         {text('Label', 'Button Label')}
       </Button>
@@ -174,12 +174,12 @@ export function OrangeButtonSolid() {
 
 export function OrangeButtonOutlined() {
   return (
-    <ButtonContainer theme={BUTTON_THEME.ORANGE}>
+    <ButtonContainer theme={THEME.ORANGE}>
       <Button
         isDisabled={boolean('Disabled', false)}
         onClick={handleButtonClick}
         style={BUTTON_STYLE.OUTLINED}
-        theme={BUTTON_THEME.ORANGE}
+        theme={THEME.ORANGE}
       >
         {text('Label', 'Button Label')}
       </Button>
@@ -190,8 +190,8 @@ export function OrangeButtonOutlined() {
 export function FilterButtonToggleWithKnobs() {
   const theme = select(
     'Theme',
-    [BUTTON_THEME.LIGHT, BUTTON_THEME.DARK, BUTTON_THEME.ORANGE],
-    BUTTON_THEME.LIGHT,
+    [THEME.LIGHT, THEME.DARK, THEME.ORANGE],
+    THEME.LIGHT,
   );
 
   return (
@@ -211,8 +211,8 @@ export function FilterButtonToggleWithKnobs() {
 export function FilterButtonDropdownWithKnobs() {
   const theme = select(
     'Theme',
-    [BUTTON_THEME.LIGHT, BUTTON_THEME.DARK, BUTTON_THEME.ORANGE],
-    BUTTON_THEME.LIGHT,
+    [THEME.LIGHT, THEME.DARK, THEME.ORANGE],
+    THEME.LIGHT,
   );
 
   const isDropdownOpen = boolean('Drop down', false);
@@ -233,7 +233,7 @@ export function FilterButtonDropdownWithKnobs() {
 }
 export function LightFilterButtonInactive() {
   return (
-    <ButtonContainer theme={BUTTON_THEME.LIGHT}>
+    <ButtonContainer theme={THEME.LIGHT}>
       <FilterButtonToggle
         isActive={false}
         isDisabled={boolean('Disabled', false)}
@@ -247,7 +247,7 @@ export function LightFilterButtonInactive() {
 
 export function LightFilterButtonActive() {
   return (
-    <ButtonContainer theme={BUTTON_THEME.LIGHT}>
+    <ButtonContainer theme={THEME.LIGHT}>
       <FilterButtonToggle
         isActive
         isDisabled={boolean('Disabled', false)}
@@ -261,12 +261,12 @@ export function LightFilterButtonActive() {
 
 export function DarkFilterButtonInactive() {
   return (
-    <ButtonContainer theme={BUTTON_THEME.DARK}>
+    <ButtonContainer theme={THEME.DARK}>
       <FilterButtonToggle
         isActive={false}
         isDisabled={boolean('Disabled', false)}
         onClick={handleButtonClick}
-        theme={BUTTON_THEME.DARK}
+        theme={THEME.DARK}
       >
         {text('Label', 'Button Label')}
       </FilterButtonToggle>
@@ -276,12 +276,12 @@ export function DarkFilterButtonInactive() {
 
 export function DarkFilterButtonActive() {
   return (
-    <ButtonContainer theme={BUTTON_THEME.DARK}>
+    <ButtonContainer theme={THEME.DARK}>
       <FilterButtonToggle
         isActive
         isDisabled={boolean('Disabled', false)}
         onClick={handleButtonClick}
-        theme={BUTTON_THEME.DARK}
+        theme={THEME.DARK}
       >
         {text('Label', 'Button Label')}
       </FilterButtonToggle>
@@ -291,12 +291,12 @@ export function DarkFilterButtonActive() {
 
 export function OrangeFilterButtonInactive() {
   return (
-    <ButtonContainer theme={BUTTON_THEME.ORANGE}>
+    <ButtonContainer theme={THEME.ORANGE}>
       <FilterButtonToggle
         isActive={false}
         isDisabled={boolean('Disabled', false)}
         onClick={handleButtonClick}
-        theme={BUTTON_THEME.ORANGE}
+        theme={THEME.ORANGE}
       >
         {text('Label', 'Button Label')}
       </FilterButtonToggle>
@@ -306,13 +306,13 @@ export function OrangeFilterButtonInactive() {
 
 export function OrangeFilterButtonWithDropdownActive() {
   return (
-    <ButtonContainer theme={BUTTON_THEME.ORANGE}>
+    <ButtonContainer theme={THEME.ORANGE}>
       <FilterButton
         isDropdownOpen={boolean('Drop down', false)}
         isActive
         isDisabled={boolean('Disabled', false)}
         onClick={handleButtonClick}
-        theme={BUTTON_THEME.ORANGE}
+        theme={THEME.ORANGE}
         label={text('Label', 'Button Label')}
       >
         <div css={styles.popup}>Popup content</div>
@@ -325,8 +325,8 @@ export function FilterButtonWithDropdownState() {
   const [isActive, setIsActive] = useState(false);
   const theme = select(
     'Theme',
-    [BUTTON_THEME.LIGHT, BUTTON_THEME.DARK, BUTTON_THEME.ORANGE],
-    BUTTON_THEME.LIGHT,
+    [THEME.LIGHT, THEME.DARK, THEME.ORANGE],
+    THEME.LIGHT,
   );
 
   return (

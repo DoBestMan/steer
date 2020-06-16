@@ -4,7 +4,7 @@ import Modal from '~/components/global/Modal/Modal';
 import EmailSupport from '~/components/modules/Support/EmailSupport';
 import PhoneSupport from '~/components/modules/Support/PhoneSupport';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
-import { LINK_THEME, MODAL_THEME } from '~/lib/constants';
+import { MODAL_THEME, THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import styles from './AdditionalInfoModal.styles';
@@ -82,7 +82,7 @@ function AdditionalInfoModal({
             <Link
               href={alternateSearch.linkURL}
               css={styles.alternateSearchLink}
-              theme={LINK_THEME.DARK}
+              theme={THEME.DARK}
             >
               {alternateSearch.linkText}
             </Link>
@@ -93,13 +93,13 @@ function AdditionalInfoModal({
           <div css={styles.supportPromptButton}>
             <PhoneSupport
               isCustomerServiceEnabled={isCustomerServiceEnabled}
-              theme={LINK_THEME.DARK}
+              theme={THEME.DARK}
             />
           </div>
           <div css={styles.supportPromptButton}>
             <EmailSupport
               isCustomerServiceEnabled={isCustomerServiceEnabled}
-              theme={LINK_THEME.DARK}
+              theme={THEME.DARK}
             />
           </div>
         </div>

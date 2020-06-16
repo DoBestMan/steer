@@ -1,5 +1,5 @@
 import Link from '~/components/global/Link/Link';
-import { LINK_THEME, LINK_TYPES } from '~/lib/constants';
+import { LINK_TYPES, THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
 
@@ -27,7 +27,7 @@ function SearchSecondaryActions({
           as={LINK_TYPES.BUTTON}
           css={[typography.smallCopy, styles.secondaryActionButton]}
           onClick={onSetActiveModal(SearchModalEnum.TIRE_SIZE)}
-          theme={LINK_THEME.LIGHT}
+          theme={THEME.LIGHT}
         >
           {ui('search.notSure')}
         </Link>
@@ -37,7 +37,7 @@ function SearchSecondaryActions({
           as={LINK_TYPES.BUTTON}
           css={[typography.smallCopy, styles.secondaryActionButton]}
           onClick={onAddRearTire}
-          theme={LINK_THEME.LIGHT}
+          theme={THEME.LIGHT}
         >
           {ui('search.addRearTire')}
         </Link>
@@ -47,7 +47,7 @@ function SearchSecondaryActions({
           as={LINK_TYPES.BUTTON}
           css={[typography.smallCopy, styles.secondaryActionButton]}
           onClick={onSetActiveModal(SearchModalEnum.VEHICLE_TRIM)}
-          theme={LINK_THEME.LIGHT}
+          theme={THEME.LIGHT}
         >
           {ui('search.notSure')}
         </Link>

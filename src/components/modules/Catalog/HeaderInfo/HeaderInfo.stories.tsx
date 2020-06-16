@@ -1,5 +1,12 @@
 import { boolean, text } from '@storybook/addon-knobs';
+import { ThemeProvider } from 'emotion-theming';
 import { ReactNode, useState } from 'react';
+
+import {
+  defaultTheme,
+  headerAdvanced,
+} from '~/components/pages/CatalogPage/CatalogPage';
+import { COLORS } from '~/lib/constants';
 
 import styles from '../Header.styles';
 import HeaderInfo from './HeaderInfo';
@@ -31,9 +38,14 @@ function HeaderContainer({
   children: ReactNode;
   isAdvancedView: boolean;
 }) {
+  const bg = isAdvancedView ? COLORS.GLOBAL.BLACK : COLORS.GLOBAL.ORANGE;
   return (
-    <div css={[styles.root, isAdvancedView && styles.rootAdvanced]}>
-      {children}
+    <div css={[styles.root, { background: bg }]}>
+      <ThemeProvider
+        theme={{ ...defaultTheme, ...(isAdvancedView && headerAdvanced) }}
+      >
+        {children}
+      </ThemeProvider>
     </div>
   );
 }

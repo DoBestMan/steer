@@ -12,7 +12,7 @@ import { PROMO_STYLES } from '~/components/global/PromoTag/PromoTag.types';
 import Stars from '~/components/global/Stars/Stars';
 import Sticker from '~/components/global/Sticker/Sticker';
 import { navigationPaddingTop } from '~/components/modules/Nav/Nav.styles';
-import { BUTTON_THEME, COLORS } from '~/lib/constants';
+import { COLORS, THEME } from '~/lib/constants';
 import { ordinalSuffixOf } from '~/lib/utils/string';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
@@ -284,7 +284,7 @@ function TopPicksItem(props: TopPickItemsProps) {
         {!viewMoreData && (
           <span css={[styles.cta, isCurrent && styles.ctaShow]}>
             {priceList ? (
-              <Button theme={BUTTON_THEME.ORANGE} onClick={onCtaClick}>
+              <Button theme={THEME.ORANGE} onClick={onCtaClick}>
                 {addVehicleInfo
                   ? ui('catalog.topPicks.addVehicleCtaLabel')
                   : ctaLabelStr}
@@ -293,7 +293,7 @@ function TopPicksItem(props: TopPickItemsProps) {
               <Button
                 as="a"
                 href={`tel:${ui('catalog.topPicks.callNumber')}`}
-                theme={BUTTON_THEME.ORANGE}
+                theme={THEME.ORANGE}
               >
                 {ctaLabelStr}
               </Button>

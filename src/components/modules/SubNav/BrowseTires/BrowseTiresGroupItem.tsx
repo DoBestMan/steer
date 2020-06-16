@@ -1,7 +1,7 @@
 import IconOrImage from '~/components/global/IconOrImage/IconOrImage';
 import Link from '~/components/global/Link/Link';
 import { SiteMenuBrowseGroupItem } from '~/data/models/SiteMenuBrowseGroupItem';
-import { LINK_THEME } from '~/lib/constants';
+import { THEME } from '~/lib/constants';
 import { isVehicleSvg } from '~/lib/utils/icon';
 import { typography } from '~/styles/typography.styles';
 
@@ -29,11 +29,7 @@ function BrowseTiresGroupItem({ header, items, more, focusRef }: Props) {
         {items.map((item, idx) => (
           <li key={item.label} css={styles.listItem}>
             <span ref={(!idx && focusRef) || null} css={styles.linkLabel}>
-              <Link
-                theme={LINK_THEME.LIGHT}
-                href={item.link.href}
-                css={styles.link}
-              >
+              <Link theme={THEME.LIGHT} href={item.link.href} css={styles.link}>
                 {item.label}
               </Link>
               {item.flair && <Flair {...item.flair} css={styles.selected} />}
@@ -54,11 +50,7 @@ function BrowseTiresGroupItem({ header, items, more, focusRef }: Props) {
         ))}
         {more && (
           <li css={styles.listItem}>
-            <Link
-              theme={LINK_THEME.LIGHT}
-              href={more.link.href}
-              css={styles.link}
-            >
+            <Link theme={THEME.LIGHT} href={more.link.href} css={styles.link}>
               {more.label}
             </Link>
           </li>

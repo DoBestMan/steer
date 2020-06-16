@@ -3,13 +3,7 @@ import { boolean, select } from '@storybook/addon-knobs';
 import { useState } from 'react';
 
 import { useBreakpoints } from '~/hooks/useBreakpoints';
-import {
-  BUTTON_THEME,
-  COLORS,
-  LINK_THEME,
-  MODAL_THEME,
-  SPACING,
-} from '~/lib/constants';
+import { COLORS, MODAL_THEME, SPACING, THEME } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 import Button from '../Button/Button';
@@ -82,7 +76,7 @@ export function StackedModals() {
         isOpen={isOpen}
       >
         <Link
-          theme={LINK_THEME.DARK}
+          theme={THEME.DARK}
           as="button"
           css={buttonStyles}
           onClick={toggleModal}
@@ -92,7 +86,7 @@ export function StackedModals() {
         <p css={typography.bodyCopy}>Fullscreen modal content</p>
         <Button
           css={{ marginTop: SPACING.SIZE_40 }}
-          theme={BUTTON_THEME.ORANGE}
+          theme={THEME.ORANGE}
           onClick={toggleNestedModal}
         >
           Open more modals!
@@ -200,7 +194,7 @@ export function DefaultModalWithCustomClose() {
         isOpen={isOpen}
       >
         <Link
-          theme={LINK_THEME.LIGHT}
+          theme={THEME.LIGHT}
           as="button"
           css={buttonStyles}
           onClick={toggleModal}
@@ -318,7 +312,7 @@ export function FullscreenModalWithCustomClose() {
         isOpen={isOpen}
       >
         <Link
-          theme={LINK_THEME.DARK}
+          theme={THEME.DARK}
           as="button"
           css={buttonStyles}
           onClick={toggleModal}

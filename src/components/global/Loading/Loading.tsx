@@ -1,19 +1,15 @@
 import { SerializedStyles } from '@emotion/core';
 
+import { THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { screenReaderText } from '~/styles/document/accessibility.styles';
 
 import styles from './Loading.styles';
 
-export enum THEME {
-  DARK = 'dark',
-  LIGHT = 'light',
-}
-
 interface Props {
   customStyles?: SerializedStyles;
   label?: string;
-  theme?: THEME;
+  theme?: THEME.LIGHT | THEME.DARK;
 }
 
 function Loading({

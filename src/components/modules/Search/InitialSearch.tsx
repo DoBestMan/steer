@@ -4,7 +4,7 @@ import { TransitionStatus } from 'react-transition-group/Transition';
 
 import Link from '~/components/global/Link/Link';
 import { SiteSearchResultTextItem } from '~/data/models/SiteSearchResultTextItem';
-import { LINK_THEME, LINK_TYPES, TIME } from '~/lib/constants';
+import { LINK_TYPES, THEME, TIME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
 
@@ -35,7 +35,7 @@ function InitialSearch({
         as={LINK_TYPES.BUTTON}
         css={[typography.smallCopy, styles.clearPastSearchesButton]}
         onClick={onClearSearchesClick}
-        theme={LINK_THEME.LIGHT}
+        theme={THEME.LIGHT}
       >
         {ui('search.clearPastSearchesButtonLabel')}
       </Link>

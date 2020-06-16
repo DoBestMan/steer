@@ -8,6 +8,7 @@ import {
   LINK_THEME,
   LINK_TYPE,
   LINK_TYPES,
+  THEME,
 } from '~/lib/constants';
 import { disableGlobalFocus } from '~/styles/document/accessibility.styles';
 import { typography } from '~/styles/typography.styles';
@@ -21,7 +22,7 @@ interface Props {
   icon?: IconType;
   iconPosition?: LINK_ICON_POSITION;
   isDisabled?: boolean;
-  theme?: LINK_THEME;
+  theme?: THEME.DARK | THEME.LIGHT | LINK_THEME;
 }
 
 export interface AnchorProps extends BaseLinkProps, Props {}
@@ -39,7 +40,7 @@ function Link({
   icon,
   iconPosition = LINK_ICON_POSITION.RIGHT,
   isDisabled,
-  theme = LINK_THEME.DARK,
+  theme = THEME.DARK,
   ...rest
 }: LinkProps) {
   const linkStyles = [

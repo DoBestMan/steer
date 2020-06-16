@@ -50,7 +50,6 @@ const styles: CSSObject = {
     color: COLORS.GLOBAL.BLACK,
   },
   root: {
-    background: COLORS.GLOBAL.ORANGE,
     color: COLORS.GLOBAL.WHITE,
     position: 'relative',
     transition: `all ${TIME.MS300}ms ease`,
@@ -64,15 +63,6 @@ const styles: CSSObject = {
     [MQ.L]: {
       padding: SPACING.SIZE_60,
     },
-  },
-  rootAdvanced: {
-    background: COLORS.GLOBAL.BLACK,
-  },
-  text: {
-    color: COLORS.GLOBAL.BLACK,
-  },
-  textAdvanced: {
-    color: COLORS.DARK.GRAY_40,
   },
   title: [typography.primaryHeadline, { marginBottom: SPACING.SIZE_10 }],
   toggle: {

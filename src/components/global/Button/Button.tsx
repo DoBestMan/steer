@@ -2,10 +2,10 @@ import { MouseEventHandler, ReactNode } from 'react';
 
 import {
   BUTTON_STYLE,
-  BUTTON_THEME,
   LINK_BUTTON_TYPE,
   LINK_TYPE,
   LINK_TYPES,
+  THEME,
 } from '~/lib/constants';
 import { disableGlobalFocus } from '~/styles/document/accessibility.styles';
 
@@ -22,7 +22,7 @@ interface Props {
   onClick?: MouseEventHandler;
   style?: BUTTON_STYLE;
   tabIndex?: number;
-  theme?: BUTTON_THEME;
+  theme?: THEME.DARK | THEME.LIGHT | THEME.ORANGE;
 }
 
 export interface AnchorProps extends Props {
@@ -42,7 +42,7 @@ function Button({
   isToggle = false,
   isToggleActive = false,
   style = BUTTON_STYLE.SOLID,
-  theme = BUTTON_THEME.LIGHT,
+  theme = THEME.LIGHT,
   ...rest
 }: ButtonProps) {
   const toggleStyles = isToggleActive

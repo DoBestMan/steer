@@ -1,3 +1,4 @@
+import { useTheme } from 'emotion-theming';
 import { Transition } from 'react-transition-group';
 import { TransitionStatus } from 'react-transition-group/Transition';
 
@@ -6,13 +7,13 @@ import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import Image from '~/components/global/Image/Image';
 import BaseLink from '~/components/global/Link/BaseLink';
-import Loading, { THEME } from '~/components/global/Loading/Loading';
+import Loading from '~/components/global/Loading/Loading';
 import Markdown from '~/components/global/Markdown/Markdown';
 import { useCatalogSummaryContext } from '~/context/CatalogSummary.context';
 import { SiteCatalogSummary } from '~/data/models/SiteCatalogSummary';
 import { SiteCatalogSummaryBuildIn } from '~/data/models/SiteCatalogSummaryBuildIn';
 import { SiteCatalogSummaryPrompt } from '~/data/models/SiteCatalogSummaryPrompt';
-import { BUTTON_STYLE, BUTTON_THEME, LINK_TYPES } from '~/lib/constants';
+import { LINK_TYPES } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import { STAGES } from '../CatalogPage.constants';
@@ -21,9 +22,10 @@ import styles from './CatalogMessage.styles';
 import MessageContainer from './components/MessageContainer';
 
 export function LoadingIndicator() {
+  const { message } = useTheme();
   return (
     <div css={styles.loadingContainer}>
-      <Loading theme={THEME.DARK} />
+      <Loading theme={message.loadingTheme} />
     </div>
   );
 }
@@ -79,6 +81,7 @@ export function DataMomentMessage({
   setStage,
   siteCatalogSummaryPrompt,
 }: DataMomentMessageProps) {
+  const { message } = useTheme();
   return (
     siteCatalogSummaryPrompt && (
       <Grid css={styles.container}>
@@ -108,8 +111,8 @@ export function DataMomentMessage({
                     key={id}
                     as={LINK_TYPES.A}
                     href={link.href}
-                    style={BUTTON_STYLE.OUTLINED}
-                    theme={BUTTON_THEME.ORANGE}
+                    style={message.buttonStyle}
+                    theme={message.buttonTheme}
                   >
                     {label}
                   </Button>
@@ -119,8 +122,8 @@ export function DataMomentMessage({
                     onClick={function () {
                       setStage && setStage(STAGES.TOP_PICKS);
                     }}
-                    style={BUTTON_STYLE.OUTLINED}
-                    theme={BUTTON_THEME.ORANGE}
+                    style={message.buttonStyle}
+                    theme={message.buttonTheme}
                   >
                     {label}
                   </Button>

@@ -5,7 +5,7 @@ import { ActionType, LinkType } from '~/components/modules/Nav/Nav.types';
 import { useNavContext } from '~/context/Nav.context';
 import { SiteMenu } from '~/data/models/SiteMenu';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
-import { LINK_THEME } from '~/lib/constants';
+import { THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import TireCategoryLinks from './BrowseTires/TireCategoryLinks';
@@ -52,7 +52,7 @@ function SubNavLinks({
             <Link
               as="button"
               icon={ICONS.CLOSE}
-              theme={LINK_THEME.LIGHT}
+              theme={THEME.LIGHT}
               aria-label={ui('nav.close')}
               onClick={handleCloseSubNav}
               css={styles.closeSubNav}

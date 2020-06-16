@@ -8,6 +8,7 @@ import {
   MQ,
   RADIUS,
   SPACING,
+  THEME,
   TIME,
 } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
@@ -49,7 +50,7 @@ const styles: CSSObject = {
     paddingLeft: 5,
   },
 
-  [LINK_THEME.DARK]: {
+  [THEME.DARK]: {
     '&:hover:not(:active), &:focus:not(:active)': {
       color: COLORS.GLOBAL.WHITE,
     },
@@ -60,7 +61,7 @@ const styles: CSSObject = {
     color: COLORS.GLOBAL.WHITE,
   },
 
-  [LINK_THEME.LIGHT]: {
+  [THEME.LIGHT]: {
     '&:active span, &:focus span': { color: COLORS.LIGHT.GRAY_70 },
     color: COLORS.GLOBAL.BLACK,
   },
@@ -87,7 +88,7 @@ export const iconCTA = {
 };
 
 export const linkBorder: CSSObject = {
-  [LINK_THEME.DARK]: {
+  [THEME.DARK]: {
     borderColor: 'inherit',
   },
 
@@ -97,7 +98,7 @@ export const linkBorder: CSSObject = {
     '&:hover, &:focus': { borderColor: COLORS.GLOBAL.WHITE },
   },
 
-  [LINK_THEME.LIGHT]: {
+  [THEME.LIGHT]: {
     borderColor: COLORS.LIGHT.GRAY_70,
   },
 };

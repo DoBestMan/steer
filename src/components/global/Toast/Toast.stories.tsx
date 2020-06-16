@@ -5,7 +5,7 @@ import { ReactChild, useState } from 'react';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import Link from '~/components/global/Link/Link';
-import { LINK_THEME, SPACING } from '~/lib/constants';
+import { SPACING, THEME } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 import Toast from './Toast';
@@ -78,7 +78,7 @@ export function ToastToggleable() {
         css={styles.paddingBottom}
         type="button"
         onClick={handleToggleToast}
-        theme={LINK_THEME.LIGHT}
+        theme={THEME.LIGHT}
       >
         Toggle toast
       </Link>
@@ -110,7 +110,7 @@ export function ToastToggleableNoAutoDismiss() {
         css={styles.paddingBottom}
         type="button"
         onClick={handleToggleToast}
-        theme={LINK_THEME.LIGHT}
+        theme={THEME.LIGHT}
       >
         Toggle toast
       </Link>

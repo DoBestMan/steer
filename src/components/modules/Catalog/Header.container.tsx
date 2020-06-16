@@ -1,13 +1,12 @@
-import { useState } from 'react';
-
 import { FiltersContextProvider } from '~/components/modules/Catalog/Filters/Filters.context';
 import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
 
 import Header from './Header';
 
 interface Props {
-  defaultAdvancedView?: boolean;
+  isAdvancedView: boolean;
   isInternal?: boolean;
+  toggleView: () => void;
 }
 
 function onSearchWithFilters(_filters: object) {
@@ -22,14 +21,8 @@ const titlePlaceholder = (
   </>
 );
 
-export default function HeaderContainer({
-  defaultAdvancedView = false,
-}: Props) {
+export default function HeaderContainer({ isAdvancedView, toggleView }: Props) {
   const { locationString } = useUserPersonalizationContext();
-  const [isAdvancedView, setIsAdvancedView] = useState(defaultAdvancedView);
-  function toggleView() {
-    setIsAdvancedView(!isAdvancedView);
-  }
 
   // TODO: hook up metadata
 

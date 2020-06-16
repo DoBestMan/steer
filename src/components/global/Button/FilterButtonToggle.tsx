@@ -1,6 +1,6 @@
 import { MouseEvent, MouseEventHandler, ReactChild, useState } from 'react';
 
-import { BUTTON_THEME, LINK_BUTTON_TYPE, LINK_TYPES } from '~/lib/constants';
+import { LINK_BUTTON_TYPE, LINK_TYPES, THEME } from '~/lib/constants';
 
 import Button from './Button';
 
@@ -10,7 +10,7 @@ interface Props {
   isDisabled?: boolean;
   onClick: MouseEventHandler;
   tabIndex?: number;
-  theme?: BUTTON_THEME;
+  theme?: THEME.DARK | THEME.LIGHT | THEME.ORANGE;
   type?: LINK_BUTTON_TYPE;
 }
 
@@ -18,7 +18,7 @@ function FilterButtonToggle({
   children,
   isActive,
   onClick,
-  theme = BUTTON_THEME.LIGHT,
+  theme = THEME.LIGHT,
   ...rest
 }: Props) {
   const [isExpanded, setIsExpanded] = useState(false);

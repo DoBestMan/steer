@@ -21,4 +21,5 @@ export * from './spacing';
 export * from './storybook';
 export * from './styles.types';
 export * from './time';
+export * from './theme';
 export * from './zindex';

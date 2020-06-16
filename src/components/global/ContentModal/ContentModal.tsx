@@ -5,7 +5,7 @@ import Modal from '~/components/global/Modal/Modal';
 import EmailSupport from '~/components/modules/Support/EmailSupport';
 import PhoneSupport from '~/components/modules/Support/PhoneSupport';
 import SupportHeading from '~/components/modules/Support/SupportHeading';
-import { LINK_THEME, MODAL_THEME } from '~/lib/constants';
+import { MODAL_THEME, THEME } from '~/lib/constants';
 
 import styles from './ContentModal.styles';
 
@@ -72,7 +72,7 @@ function ContentModal({
             <Link
               href={link.link.href}
               isExternal={link.link.isExternal}
-              theme={LINK_THEME.LIGHT}
+              theme={THEME.LIGHT}
               css={styles.link}
             >
               {link.label}

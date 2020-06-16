@@ -1,6 +1,6 @@
 import { MouseEventHandler, ReactNode } from 'react';
 
-import { BUTTON_THEME, LINK_BUTTON_TYPE, LINK_TYPES } from '~/lib/constants';
+import { LINK_BUTTON_TYPE, LINK_TYPES, THEME } from '~/lib/constants';
 
 import Icon from '../Icon/Icon';
 import { ICONS } from '../Icon/Icon.constants';
@@ -15,7 +15,7 @@ interface Props {
   label: string;
   onClick: MouseEventHandler;
   tabIndex?: number;
-  theme?: BUTTON_THEME;
+  theme?: THEME.DARK | THEME.LIGHT | THEME.ORANGE;
   type?: LINK_BUTTON_TYPE;
 }
 
@@ -25,7 +25,7 @@ function FilterButton({
   isDropdownOpen,
   label,
   onClick,
-  theme = BUTTON_THEME.LIGHT,
+  theme = THEME.LIGHT,
   ...rest
 }: Props) {
   const iconName = isDropdownOpen

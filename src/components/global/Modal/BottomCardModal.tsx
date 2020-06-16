@@ -5,7 +5,7 @@ import ReactModal from 'react-modal';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Link from '~/components/global/Link/Link';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
-import { COLORS, LINK_THEME, TIME, Z_INDEX } from '~/lib/constants';
+import { COLORS, THEME, TIME, Z_INDEX } from '~/lib/constants';
 import { bindAppElement } from '~/lib/utils/modal';
 import { ui } from '~/lib/utils/ui-dictionary';
 
@@ -57,7 +57,7 @@ function BottomCardModal({
             icon={ICONS.CLOSE}
             aria-label={`${ui('modal.close')} ${contentLabel}`}
             onClick={onClose}
-            theme={LINK_THEME.LIGHT}
+            theme={THEME.LIGHT}
             // this will allow modal content to start where padding begins rather than pushed down from actions bar
             css={styles.close}
           />

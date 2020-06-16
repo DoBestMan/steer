@@ -1,10 +1,10 @@
+import { useTheme } from 'emotion-theming';
+
 import FilterButton from '~/components/global/Button/FilterButton';
 import FilterButtonToggle from '~/components/global/Button/FilterButtonToggle';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
-import { BUTTON_THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
-import hStyles from '../Header.styles';
 import { FilterContentTypes } from './Filter.types';
 import { FiltersContextProps } from './Filters.context';
 import mockFilters from './Filters.mocks';
@@ -18,7 +18,6 @@ interface Props
     FiltersContextProps,
     'activeFilters' | 'createToggleFilterHandler' | 'selectingFilter'
   > {
-  isAdvancedView?: boolean;
   onClose: FiltersContextProps['clearSelectingFilter'];
   onOpen: FiltersContextProps['createOpenFilterHandler'];
 }
@@ -26,11 +25,11 @@ interface Props
 export default function Filters({
   activeFilters,
   createToggleFilterHandler,
-  isAdvancedView,
   onClose,
   onOpen,
   selectingFilter,
 }: Props) {
+  const { header } = useTheme();
   const { greaterThan } = useBreakpoints();
   const groupedFilters = greaterThan.M && getGroupedFilters(mockFilters);
   const filtersToMap = groupedFilters
@@ -39,7 +38,7 @@ export default function Filters({
 
   return (
     <>
-      <p css={[styles.filterLabel, isAdvancedView && hStyles.textAdvanced]}>
+      <p css={[styles.filterLabel, header.text]}>
         {ui('catalog.header.filterLabel')}:
       </p>
       <div
@@ -50,7 +49,6 @@ export default function Filters({
             <PopularFiltersButton
               activeFilters={activeFilters}
               filters={groupedFilters.popularFilters}
-              isAdvancedView={isAdvancedView}
               onClose={onClose}
               onOpen={onOpen}
               selectingFilter={selectingFilter}
@@ -77,7 +75,7 @@ export default function Filters({
                 isDropdownOpen={label === selectingFilter}
                 isActive={isDropdownActive}
                 onClick={onOpen(label)}
-                theme={isAdvancedView ? BUTTON_THEME.DARK : BUTTON_THEME.ORANGE}
+                theme={header.buttonTheme}
                 aria-expanded={label === selectingFilter}
               >
                 <FilterPopup
@@ -96,7 +94,7 @@ export default function Filters({
                   id: label,
                   value: !isToggleActive,
                 })}
-                theme={isAdvancedView ? BUTTON_THEME.DARK : BUTTON_THEME.ORANGE}
+                theme={header.buttonTheme}
               >
                 {label}
               </FilterButtonToggle>

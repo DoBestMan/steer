@@ -1,6 +1,6 @@
 import { css, keyframes } from '@emotion/core';
 
-import { COLORS, RADIUS, TIME } from '~/lib/constants';
+import { COLORS, RADIUS, THEME, TIME } from '~/lib/constants';
 
 const CONSTANTS = {
   ANIMATION_STEP: TIME.MS300,
@@ -86,7 +86,7 @@ const styles = {
     display: 'block',
     width: CONSTANTS.CIRCLE_MARGIN * 2 + CONSTANTS.CIRCLE_SIZE * 3,
   }),
-  dark: css({
+  [THEME.DARK]: css({
     '&, &:after, &:before': {
       animationDuration: `${CONSTANTS.ANIMATION_STEP * 3}ms`,
       animationIterationCount: 'infinite',
@@ -94,7 +94,7 @@ const styles = {
       background: CONSTANTS.DARK_DEFAULT,
     },
   }),
-  light: css({
+  [THEME.LIGHT]: css({
     '&, &:after, &:before': {
       animationDuration: `${CONSTANTS.ANIMATION_STEP * 3}ms`,
       animationIterationCount: 'infinite',

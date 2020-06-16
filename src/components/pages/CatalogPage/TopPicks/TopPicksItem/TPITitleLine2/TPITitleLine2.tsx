@@ -1,6 +1,6 @@
 import Link from '~/components/global/Link/Link';
 import { SiteCatalogSummaryTopPickItemAdditionalInfo } from '~/data/models/SiteCatalogSummaryTopPickItemAdditionalInfo';
-import { LINK_THEME } from '~/lib/constants';
+import { THEME } from '~/lib/constants';
 import { uiJSX } from '~/lib/utils/ui-dictionary-jsx';
 import { typography } from '~/styles/typography.styles';
 
@@ -40,7 +40,7 @@ export default function TPITitleLine2({ header, oeModal, openModal }: Props) {
           buttonLabel: (
             <Link
               key={'modalButton'}
-              theme={LINK_THEME.LIGHT}
+              theme={THEME.LIGHT}
               as="button"
               onClick={openModal}
               css={[typography.primaryHeadline, styles.modalButton]}
@@ -55,7 +55,7 @@ export default function TPITitleLine2({ header, oeModal, openModal }: Props) {
 
   return (
     <Link
-      theme={LINK_THEME.LIGHT}
+      theme={THEME.LIGHT}
       as="button"
       onClick={openModal}
       css={[typography.primaryHeadline, styles.modalButton]}

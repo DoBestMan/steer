@@ -7,7 +7,7 @@ import PhoneSupport from '~/components/modules/Support/PhoneSupport';
 import SupportHeading from '~/components/modules/Support/SupportHeading';
 import { NavContextProps } from '~/context/Nav.context';
 import { SiteMenu } from '~/data/models/SiteMenu';
-import { LINK_THEME } from '~/lib/constants';
+import { THEME } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 import SubNavContentWrapper from '../SubNavContentWrapper';
@@ -53,7 +53,7 @@ function Learn({
         <ul css={styles.moreLinks}>
           {siteMenuLearn.list.map(({ label, link }) => (
             <li css={styles.link} key={label}>
-              <Link theme={LINK_THEME.LIGHT} {...link}>
+              <Link theme={THEME.LIGHT} {...link}>
                 {label}
               </Link>
             </li>

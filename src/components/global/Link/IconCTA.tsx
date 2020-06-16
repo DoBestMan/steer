@@ -1,6 +1,6 @@
 import Icon from '~/components/global/Icon/Icon';
 import { Icon as IconType } from '~/components/global/Icon/Icon.types';
-import { LINK_THEME } from '~/lib/constants';
+import { THEME } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 import BaseLink from './BaseLink';
@@ -14,7 +14,7 @@ function IconLink({
   children,
   href,
   icon,
-  theme = LINK_THEME.DARK,
+  theme = THEME.DARK,
   ...rest
 }: Props) {
   return (

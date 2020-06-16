@@ -5,7 +5,7 @@ import ContentModalContainer from '~/components/global/ContentModal/ContentModal
 import Icon from '~/components/global/Icon/Icon';
 import { Icon as IconType } from '~/components/global/Icon/Icon.types';
 import Link from '~/components/global/Link/Link';
-import { LINK_THEME } from '~/lib/constants';
+import { THEME } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 import styles from './PurchaseIncludesCard.styles';
@@ -41,7 +41,7 @@ function PurchaseIncludesCard({
       <Link
         as="button"
         onClick={toggleModal}
-        theme={LINK_THEME.LIGHT}
+        theme={THEME.LIGHT}
         css={styles.cardLink}
       >
         {linkLabel}

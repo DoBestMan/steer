@@ -3,10 +3,10 @@ import ReactModal from 'react-modal';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import {
   COLORS,
-  LINK_THEME,
   MODAL_ANIMATION,
   MODAL_THEME,
   MODAL_TYPE,
+  THEME,
   TIME,
   Z_INDEX,
 } from '~/lib/constants';
@@ -30,8 +30,7 @@ function Modal({
   onClose,
   theme = MODAL_THEME.LIGHT,
 }: Props) {
-  const linkTheme =
-    theme === MODAL_THEME.LIGHT ? LINK_THEME.LIGHT : LINK_THEME.DARK;
+  const linkTheme = theme === MODAL_THEME.LIGHT ? THEME.LIGHT : THEME.DARK;
   const { lessThan } = useBreakpoints();
   const fullscreen = lessThan.L || isFullscreen;
   const rootStyles = fullscreen ? MODAL_TYPE.FULLSCREEN : MODAL_TYPE.OVERLAY;

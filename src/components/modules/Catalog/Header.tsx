@@ -1,3 +1,4 @@
+import { useTheme } from 'emotion-theming';
 import { ReactNode } from 'react';
 
 import Filters from './Filters/Filters';
@@ -24,6 +25,7 @@ export default function Header({
   resultsCount,
   ...rest
 }: Props) {
+  const { header } = useTheme();
   const {
     activeFilters,
     clearSelectingFilter,
@@ -40,7 +42,7 @@ export default function Header({
   };
   return (
     <>
-      <div css={[styles.root, isAdvancedView && styles.rootAdvanced]}>
+      <div css={[styles.root, header.background]}>
         <HeaderInfo
           isInternal={isInternal}
           isAdvancedView={isAdvancedView}
@@ -49,7 +51,6 @@ export default function Header({
         <Filters
           {...commonProps}
           createToggleFilterHandler={createToggleFilterHandler}
-          isAdvancedView={isAdvancedView}
         />
       </div>
       <SubFilters

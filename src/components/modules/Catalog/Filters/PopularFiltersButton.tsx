@@ -1,5 +1,6 @@
+import { useTheme } from 'emotion-theming';
+
 import FilterButton from '~/components/global/Button/FilterButton';
-import { BUTTON_THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import { CatalogFilterTypes, FilterContentTypes } from './Filter.types';
@@ -10,7 +11,6 @@ import FilterPopup from './Popup/FilterPopup';
 interface Props
   extends Pick<FiltersContextProps, 'activeFilters' | 'selectingFilter'> {
   filters: CatalogFilterTypes[];
-  isAdvancedView?: boolean;
   onClose: FiltersContextProps['clearSelectingFilter'];
   onOpen: FiltersContextProps['createOpenFilterHandler'];
 }
@@ -18,11 +18,11 @@ interface Props
 export default function PopularFilters({
   activeFilters,
   filters,
-  isAdvancedView,
   onClose,
   onOpen,
   selectingFilter,
 }: Props) {
+  const { header } = useTheme();
   const label = ui('catalog.filters.popularFilters');
   return (
     <FilterButton
@@ -33,7 +33,7 @@ export default function PopularFilters({
         !!(activeFilters[label] && Object.keys(activeFilters[label]).length)
       }
       onClick={onOpen(label)}
-      theme={isAdvancedView ? BUTTON_THEME.DARK : BUTTON_THEME.ORANGE}
+      theme={header.buttonTheme}
       aria-expanded={label === selectingFilter}
     >
       <FilterPopup

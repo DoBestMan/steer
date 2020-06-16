@@ -5,12 +5,7 @@ import { ReactChild } from 'react';
 
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import { NAV_TARGETS } from '~/components/modules/Nav/Nav.types';
-import {
-  COLORS,
-  LINK_ICON_POSITION,
-  LINK_THEME,
-  LINK_TYPES,
-} from '~/lib/constants';
+import { COLORS, LINK_ICON_POSITION, LINK_TYPES, THEME } from '~/lib/constants';
 
 import FooterLink from './FooterLink';
 import IconCTA from './IconCTA';
@@ -33,10 +28,10 @@ function LinkContainer({
   children,
 }: {
   children: ReactChild;
-  theme: LINK_THEME;
+  theme: THEME;
 }) {
   const backgroundColor =
-    theme === LINK_THEME.DARK ? COLORS.GLOBAL.BLACK : COLORS.GLOBAL.WHITE;
+    theme === THEME.DARK ? COLORS.GLOBAL.BLACK : COLORS.GLOBAL.WHITE;
 
   return <div css={[styles.root, { backgroundColor }]}>{children}</div>;
 }
@@ -52,9 +47,9 @@ export function LightLinkWithKnobs() {
   const as = select('As', [LINK_TYPES.A, LINK_TYPES.BUTTON], LINK_TYPES.A);
 
   return (
-    <LinkContainer theme={LINK_THEME.LIGHT}>
+    <LinkContainer theme={THEME.LIGHT}>
       <Link
-        theme={LINK_THEME.LIGHT}
+        theme={THEME.LIGHT}
         href={as === LINK_TYPES.A ? '/' : ''}
         isDisabled={boolean('Disabled', false)}
         {...{ as, icon, iconPosition }}
@@ -67,8 +62,8 @@ export function LightLinkWithKnobs() {
 
 export function LightLinkRegular() {
   return (
-    <LinkContainer theme={LINK_THEME.LIGHT}>
-      <Link href="/" theme={LINK_THEME.LIGHT}>
+    <LinkContainer theme={THEME.LIGHT}>
+      <Link href="/" theme={THEME.LIGHT}>
         Link Example
       </Link>
     </LinkContainer>
@@ -77,8 +72,8 @@ export function LightLinkRegular() {
 
 export function LightLinkInlineIconRight() {
   return (
-    <LinkContainer theme={LINK_THEME.LIGHT}>
-      <Link href="/" theme={LINK_THEME.LIGHT} icon={ICONS.CHEVRON_RIGHT}>
+    <LinkContainer theme={THEME.LIGHT}>
+      <Link href="/" theme={THEME.LIGHT} icon={ICONS.CHEVRON_RIGHT}>
         Link Example
       </Link>
     </LinkContainer>
@@ -87,10 +82,10 @@ export function LightLinkInlineIconRight() {
 
 export function LightLinkInlineIconLeft() {
   return (
-    <LinkContainer theme={LINK_THEME.LIGHT}>
+    <LinkContainer theme={THEME.LIGHT}>
       <Link
         href="/"
-        theme={LINK_THEME.LIGHT}
+        theme={THEME.LIGHT}
         iconPosition={LINK_ICON_POSITION.LEFT}
         icon={ICONS.YOUTUBE}
       >
@@ -111,7 +106,7 @@ export function DarkLinkWithKnobs() {
   const as = select('As', [LINK_TYPES.A, LINK_TYPES.BUTTON], LINK_TYPES.A);
 
   return (
-    <LinkContainer theme={LINK_THEME.DARK}>
+    <LinkContainer theme={THEME.DARK}>
       <Link
         href={as === LINK_TYPES.A ? '/' : ''}
         isDisabled={boolean('Disabled', false)}
@@ -125,8 +120,8 @@ export function DarkLinkWithKnobs() {
 
 export function DarkLinkRegular() {
   return (
-    <LinkContainer theme={LINK_THEME.DARK}>
-      <Link href="/" theme={LINK_THEME.DARK}>
+    <LinkContainer theme={THEME.DARK}>
+      <Link href="/" theme={THEME.DARK}>
         Link Example
       </Link>
     </LinkContainer>
@@ -135,7 +130,7 @@ export function DarkLinkRegular() {
 
 export function DarkLinkInlineIconRight() {
   return (
-    <LinkContainer theme={LINK_THEME.DARK}>
+    <LinkContainer theme={THEME.DARK}>
       <Link href="/" icon={ICONS.CHEVRON_RIGHT}>
         Link Example
       </Link>
@@ -145,7 +140,7 @@ export function DarkLinkInlineIconRight() {
 
 export function DarkLinkInlineIconLeft() {
   return (
-    <LinkContainer theme={LINK_THEME.DARK}>
+    <LinkContainer theme={THEME.DARK}>
       <Link
         href="/"
         iconPosition={LINK_ICON_POSITION.LEFT}
@@ -190,8 +185,8 @@ export function LinkNavActive() {
 
 export function IconCTALight() {
   return (
-    <LinkContainer theme={LINK_THEME.LIGHT}>
-      <IconCTA theme={LINK_THEME.LIGHT} icon={ICONS.PHONE} href="/">
+    <LinkContainer theme={THEME.LIGHT}>
+      <IconCTA theme={THEME.LIGHT} icon={ICONS.PHONE} href="/">
         Link Example
       </IconCTA>
     </LinkContainer>
@@ -200,7 +195,7 @@ export function IconCTALight() {
 
 export function IconCTADark() {
   return (
-    <LinkContainer theme={LINK_THEME.DARK}>
+    <LinkContainer theme={THEME.DARK}>
       <IconCTA icon={ICONS.PHONE} href="/">
         Link Example
       </IconCTA>

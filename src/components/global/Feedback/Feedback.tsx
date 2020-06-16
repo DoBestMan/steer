@@ -4,7 +4,7 @@ import Button from '~/components/global/Button/Button';
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Markdown from '~/components/global/Markdown/Markdown';
-import { BUTTON_STYLE, BUTTON_THEME } from '~/lib/constants';
+import { BUTTON_STYLE, THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import styles from './Feedback.styles';
@@ -82,7 +82,7 @@ function Feedback() {
             css={styles.button}
             key={action.label}
             style={BUTTON_STYLE.OUTLINED}
-            theme={BUTTON_THEME.LIGHT}
+            theme={THEME.LIGHT}
             {...(action.href
               ? { href: action.href }
               : { onClick: events[action.action] })}

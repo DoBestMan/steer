@@ -8,7 +8,7 @@ import Link from '~/components/global/Link/Link';
 import Tabs from '~/components/global/Tabs/Tabs';
 import AdditionalInfoModal from '~/components/modules/Search/AdditionalInfoModal/AdditionalInfoModal';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
-import { LINK_THEME } from '~/lib/constants';
+import { THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import { TIRE_SEARCH_MODAL_DATA } from '../../Search/AdditionalInfoModal/AdditionalInfoModal.constants';
@@ -117,7 +117,7 @@ function TechnicalSpecs({ isCustomerServiceEnabled, specs, sizes }: Props) {
               ))}
             </Accordion>
             <Link
-              theme={LINK_THEME.DARK}
+              theme={THEME.DARK}
               as="button"
               onClick={toggleTireSizeModal}
               css={styles.findMyTireSizeLabel}

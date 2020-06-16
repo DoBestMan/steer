@@ -2,10 +2,10 @@ import { css } from '@emotion/core';
 
 import {
   BUTTON_STYLE,
-  BUTTON_THEME,
   COLORS,
   RADIUS,
   SPACING,
+  THEME,
   TIME,
 } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
@@ -52,7 +52,7 @@ const styles = {
   ],
   toggle: {
     active: {
-      [BUTTON_THEME.DARK]: css({
+      [THEME.DARK]: css({
         '&:focus': {
           backgroundColor: COLORS.DARK.GRAY_40,
           borderColor: COLORS.GLOBAL.WHITE,
@@ -69,7 +69,7 @@ const styles = {
         borderColor: COLORS.GLOBAL.WHITE,
         color: COLORS.GLOBAL.BLACK,
       }),
-      [BUTTON_THEME.LIGHT]: css({
+      [THEME.LIGHT]: css({
         '&:focus': {
           backgroundColor: COLORS.LIGHT.GRAY_70,
           borderColor: COLORS.GLOBAL.BLACK,
@@ -86,7 +86,7 @@ const styles = {
         borderColor: COLORS.GLOBAL.BLACK,
         color: COLORS.GLOBAL.WHITE,
       }),
-      [BUTTON_THEME.ORANGE]: css({
+      [THEME.ORANGE]: css({
         '&:focus': {
           backgroundColor: COLORS.ORANGE.TINT_70,
           borderColor: COLORS.GLOBAL.BLACK,
@@ -105,7 +105,7 @@ const styles = {
       }),
     },
     inactive: {
-      [BUTTON_THEME.DARK]: css({
+      [THEME.DARK]: css({
         '&:focus': {
           borderColor: COLORS.GLOBAL.WHITE,
         },
@@ -116,7 +116,7 @@ const styles = {
         borderColor: COLORS.DARK.GRAY_80,
         color: COLORS.GLOBAL.WHITE,
       }),
-      [BUTTON_THEME.LIGHT]: css({
+      [THEME.LIGHT]: css({
         '&:focus': {
           borderColor: COLORS.GLOBAL.BLACK,
         },
@@ -127,7 +127,7 @@ const styles = {
         borderColor: COLORS.LIGHT.GRAY_20,
         color: COLORS.GLOBAL.BLACK,
       }),
-      [BUTTON_THEME.ORANGE]: css({
+      [THEME.ORANGE]: css({
         '&:focus': {
           borderColor: COLORS.GLOBAL.BLACK,
         },
@@ -148,7 +148,7 @@ const styles = {
 
   [BUTTON_STYLE.OUTLINED]: {
     // Outlined Dark
-    [BUTTON_THEME.DARK]: css({
+    [THEME.DARK]: css({
       '&:active': {
         backgroundColor: COLORS.DARK.GRAY_90,
         borderColor: COLORS.DARK.GRAY_40,
@@ -164,7 +164,7 @@ const styles = {
       color: COLORS.GLOBAL.WHITE,
     }),
     // Outlined Light
-    [BUTTON_THEME.LIGHT]: css({
+    [THEME.LIGHT]: css({
       '&:active': {
         backgroundColor: COLORS.LIGHT.GRAY_10,
         borderColor: COLORS.LIGHT.GRAY_70,
@@ -180,7 +180,7 @@ const styles = {
       color: COLORS.GLOBAL.BLACK,
     }),
     // Outlined Orange
-    [BUTTON_THEME.ORANGE]: css({
+    [THEME.ORANGE]: css({
       '&:active': {
         backgroundColor: COLORS.LIGHT.GRAY_20,
         borderColor: COLORS.LIGHT.GRAY_70,
@@ -198,7 +198,7 @@ const styles = {
   },
   [BUTTON_STYLE.SOLID]: {
     // Solid Dark
-    [BUTTON_THEME.DARK]: css({
+    [THEME.DARK]: css({
       '&:active': {
         borderColor: COLORS.ORANGE.SHADE_30,
       },
@@ -213,7 +213,7 @@ const styles = {
       color: COLORS.GLOBAL.WHITE,
     }),
     // Solid Light
-    [BUTTON_THEME.LIGHT]: css({
+    [THEME.LIGHT]: css({
       '&:active': {
         borderColor: COLORS.ORANGE.TINT_70,
       },
@@ -228,7 +228,7 @@ const styles = {
       color: COLORS.GLOBAL.WHITE,
     }),
     // Solid Orange
-    [BUTTON_THEME.ORANGE]: css({
+    [THEME.ORANGE]: css({
       '&:active': {
         backgroundColor: COLORS.ORANGE.TINT_70,
         borderColor: '#B94A12', // TODO: var

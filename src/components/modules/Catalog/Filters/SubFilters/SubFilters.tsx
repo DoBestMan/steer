@@ -2,7 +2,7 @@ import Link from '~/components/global/Link/Link';
 import Range from '~/components/global/Range/Range';
 import { RANGE_SLIDER_SIZE } from '~/components/global/Range/Range.constants';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
-import { LINK_THEME } from '~/lib/constants';
+import { THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import { CatalogFilterRange, CatalogFilterSort } from '../Filter.types';
@@ -60,7 +60,7 @@ export default function SubFilters({
         {ui('catalog.filters.from')}
       </p>
       <Link
-        theme={LINK_THEME.LIGHT}
+        theme={THEME.LIGHT}
         as="button"
         onClick={onOpen(priceFilter.label)}
         css={[styles.range, styles.smallShow]}
@@ -96,7 +96,7 @@ export default function SubFilters({
       )}
       <p css={styles.sortLabel}>{ui('catalog.filters.sortBy')} </p>
       <Link
-        theme={LINK_THEME.LIGHT}
+        theme={THEME.LIGHT}
         as="button"
         onClick={onOpen(sortFilter.label)}
         css={styles.sort}

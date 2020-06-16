@@ -4,9 +4,7 @@ export enum LINK_ICON_POSITION {
 }
 
 export enum LINK_THEME {
-  DARK = 'dark',
   DARK_HIGHLIGHTED = 'darkHighlighted',
-  LIGHT = 'light',
 }
 
 export type LINK_TYPE = 'a' | 'button';

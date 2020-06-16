@@ -1,3 +1,4 @@
+import { useTheme } from 'emotion-theming';
 import React, { ReactNode } from 'react';
 
 import { ICONS } from '~/components/global/Icon/Icon.constants';
@@ -27,11 +28,8 @@ export default function HeaderInfo({
   tireSize,
   title,
 }: Props) {
-  const infoStyles = [
-    styles.text,
-    styles.info,
-    isAdvancedView && styles.textAdvanced,
-  ];
+  const { header } = useTheme();
+  const infoStyles = [styles.info, header.text];
   const backEl = isInternal ? (
     <Link
       css={styles.action}

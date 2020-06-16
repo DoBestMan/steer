@@ -2,9 +2,9 @@ import { css } from '@emotion/core';
 import { useEffect, useState } from 'react';
 
 import Button from '~/components/global/Button/Button';
-import { COLORS, SPACING, TIME } from '~/lib/constants';
+import { COLORS, SPACING, THEME, TIME } from '~/lib/constants';
 
-import Loading, { THEME } from './Loading';
+import Loading from './Loading';
 
 const styles = {
   buttonContainer: css({
