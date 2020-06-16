@@ -1,10 +1,9 @@
-import { css } from '@emotion/core';
 import { select } from '@storybook/addon-knobs';
 import { Fragment } from 'react';
 
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
-import { STORYBOOK_COLORS } from '~/lib/constants';
+import { STORYBOOK_COLORS, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 import Icon from './Icon';
@@ -15,14 +14,14 @@ export default {
   title: 'Global/Icon',
 };
 
-const styles = {
-  container: css({
+const styles: StylesMap = {
+  container: {
     padding: '50px 0',
 
     svg: {
       height: 'auto',
     },
-  }),
+  },
 };
 
 export function ShowListOfIconsWithKnobs() {

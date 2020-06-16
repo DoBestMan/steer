@@ -1,11 +1,10 @@
-import { css } from '@emotion/core';
-
 import {
   Breakpoint,
   GAP_COLUMNS,
   GRID_MARGIN,
   MQ,
   NB_COLUMNS,
+  StylesMap,
 } from '~/lib/constants';
 
 const gridColumnByMQ = (mq: Breakpoint): object => {
@@ -19,8 +18,8 @@ const gridColumnByMQ = (mq: Breakpoint): object => {
   };
 };
 
-const styles = {
-  container: css({
+const styles: StylesMap = {
+  container: {
     display: 'grid',
     gridTemplateRows: 'auto',
     width: '100%',
@@ -37,7 +36,7 @@ const styles = {
     [MQ.XL]: {
       ...gridColumnByMQ('XL'),
     },
-  }),
+  },
 };
 
 export default styles;

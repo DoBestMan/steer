@@ -1,4 +1,3 @@
-import { css } from '@emotion/core';
 import { select, text } from '@storybook/addon-knobs';
 
 import Grid from '~/components/global/Grid/Grid';
@@ -7,7 +6,7 @@ import { SiteIcon } from '~/data/models/SiteIcon';
 import { SiteImage } from '~/data/models/SiteImage';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 import { INSIGHT_TYPE } from '~/lib/backend/insights.types';
-import { COLORS, SPACING } from '~/lib/constants';
+import { COLORS, SPACING, StylesMap } from '~/lib/constants';
 
 import Card from './Card';
 import ListCard from './ListCard';
@@ -17,15 +16,15 @@ export default {
   title: 'Global/Card',
 };
 
-const styles = {
-  container: css({
+const styles: StylesMap = {
+  container: {
     height: '100%',
-  }),
-  root: css({
+  },
+  root: {
     backgroundColor: COLORS.GLOBAL.BLACK,
     minHeight: '100vh',
     padding: `${SPACING.SIZE_40}px 0`,
-  }),
+  },
 };
 
 function CardContainer({ children }: { children: React.ReactChild }) {

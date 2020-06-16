@@ -1,8 +1,6 @@
-import { css } from '@emotion/core';
-
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
-import { MQ, SPACING } from '~/lib/constants';
+import { MQ, SPACING, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 import GridHelper from './GridHelper';
@@ -12,38 +10,38 @@ export default {
   title: 'Global/GridHelper',
 };
 
-const styles = {
-  container: css({
+const styles: StylesMap = {
+  container: {
     paddingBottom: SPACING.SIZE_20,
     paddingTop: SPACING.SIZE_20,
-  }),
-  displayedOnL: css({
+  },
+  displayedOnL: {
     display: 'none',
     [MQ.L]: {
       display: 'block',
     },
-  }),
-  displayedOnM: css({
+  },
+  displayedOnM: {
     display: 'none',
     [MQ.M]: {
       display: 'block',
     },
-  }),
-  item: css({
+  },
+  item: {
     backgroundColor: 'rgba(0, 255, 0, 0.3)',
     height: 100,
     marginTop: SPACING.SIZE_20,
-  }),
-  subgrid: css({
+  },
+  subgrid: {
     outline: '1px solid red',
-  }),
-  subItem: css({
+  },
+  subItem: {
     backgroundColor: 'rgba(0, 0, 0, 0.3)',
     height: '100px',
-  }),
-  title: css({
+  },
+  title: {
     marginTop: SPACING.SIZE_20,
-  }),
+  },
 };
 
 export function ShowGridHelper() {

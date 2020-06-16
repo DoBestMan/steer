@@ -1,11 +1,10 @@
-import { css } from '@emotion/core';
 import { action } from '@storybook/addon-actions';
 import { select, text } from '@storybook/addon-knobs';
 import { SetStateAction, useState } from 'react';
 
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
-import { COLORS } from '~/lib/constants';
+import { COLORS, StylesMap } from '~/lib/constants';
 
 import Autocomplete from './Autocomplete';
 import { AutocompleteResult } from './AutocompleteResultItem';
@@ -15,13 +14,13 @@ export default {
   title: 'Global/Autocomplete',
 };
 
-const styles = {
-  clearSearch: css({
+const styles: StylesMap = {
+  clearSearch: {
     color: COLORS.LIGHT.GRAY_70,
-  }),
-  errorLine: css({
+  },
+  errorLine: {
     display: 'block',
-  }),
+  },
 };
 
 const ZIP_CODES = [

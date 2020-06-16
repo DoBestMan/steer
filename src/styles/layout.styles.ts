@@ -1,18 +1,16 @@
-import { css } from '@emotion/core';
-
 import { MQ } from '~/lib/constants';
 
 export const layout = {
-  centeredHorizontal: css({
+  centeredHorizontal: {
     alignItems: 'center',
     justifyContent: 'space-between',
-  }),
-  centeredVertical: css({
+  },
+  centeredVertical: {
     alignItems: 'center',
-  }),
-  container: css({
+  },
+  container: {
     display: 'flex',
-  }),
+  },
   hideOnSmall: {
     display: 'none',
 

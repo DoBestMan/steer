@@ -1,19 +1,17 @@
-import { css } from '@emotion/core';
+import { COLORS, SPACING, StylesMap } from '~/lib/constants';
 
-import { COLORS, SPACING } from '~/lib/constants';
-
-const styles = {
-  description: css({
+const styles: StylesMap = {
+  description: {
     color: COLORS.DARK.GRAY_40,
-  }),
-  link: css({
+  },
+  link: {
     marginTop: SPACING.SIZE_40,
 
     span: { borderBottomColor: 'currentColor' },
-  }),
-  title: css({
+  },
+  title: {
     color: COLORS.GLOBAL.WHITE,
-  }),
+  },
 };
 
 export default styles;

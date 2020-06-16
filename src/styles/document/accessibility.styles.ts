@@ -1,4 +1,4 @@
-import { css, CSSObject } from '@emotion/core';
+import { CSSObject } from '@emotion/core';
 
 export const disableGlobalFocus = {
   '&:focus': {
@@ -16,11 +16,11 @@ export const hideScrollbar: CSSObject = {
   msOverflowStyle: '-ms-autohiding-scrollbar',
 };
 
-export const screenReaderText = css({
+export const screenReaderText: CSSObject = {
   clip: 'rect(1px, 1px, 1px, 1px)',
   height: 1,
   overflow: 'hidden',
   position: 'absolute',
   whiteSpace: 'nowrap',
   width: 1,
-});
+};

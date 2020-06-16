@@ -15,7 +15,7 @@ import { ui } from '~/lib/utils/ui-dictionary';
 
 import { ICONS } from '../Icon/Icon.constants';
 import Link from '../Link/Link';
-import styles from './Modal.styles';
+import styles, { animation } from './Modal.styles';
 import { Props } from './Modal.types';
 
 bindAppElement();
@@ -35,8 +35,8 @@ function Modal({
   const fullscreen = lessThan.L || isFullscreen;
   const rootStyles = fullscreen ? MODAL_TYPE.FULLSCREEN : MODAL_TYPE.OVERLAY;
   const animationStyles = fullscreen
-    ? styles[MODAL_ANIMATION.FADE]
-    : styles[MODAL_ANIMATION.SLIDE_LEFT];
+    ? animation[MODAL_ANIMATION.FADE]
+    : animation[MODAL_ANIMATION.SLIDE_LEFT];
   return (
     <ReactModal
       contentLabel={contentLabel}

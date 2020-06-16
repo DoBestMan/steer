@@ -1,4 +1,6 @@
-import { css, keyframes } from '@emotion/core';
+import { keyframes } from '@emotion/core';
+
+import { StylesMap } from '~/lib/constants';
 
 import { SCENERIES, SCENERIES_WIDTH } from './Scenery.constants';
 
@@ -29,19 +31,19 @@ export const backgroundImageUrban = keyframes({
   },
 });
 
-export const styles = {
-  container: css({
+export const styles: StylesMap = {
+  container: {
     backgroundRepeat: 'repeat-x',
     height: '130px',
     pointerEvents: 'none',
-  }),
-  [`containerAnimated_${SCENERIES.RURAL}`]: css({
+  },
+  [`containerAnimated_${SCENERIES.RURAL}`]: {
     animation: `${backgroundImageRural} 50s linear infinite`,
-  }),
-  [`containerAnimated_${SCENERIES.SUBURBAN}`]: css({
+  },
+  [`containerAnimated_${SCENERIES.SUBURBAN}`]: {
     animation: `${backgroundImageSuburban} 50s linear infinite`,
-  }),
-  [`containerAnimated_${SCENERIES.URBAN}`]: css({
+  },
+  [`containerAnimated_${SCENERIES.URBAN}`]: {
     animation: `${backgroundImageUrban} 50s linear infinite`,
-  }),
+  },
 };

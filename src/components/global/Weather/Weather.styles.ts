@@ -1,13 +1,13 @@
-import { css } from '@emotion/core';
+import { StylesMap } from '~/lib/constants';
 
-export const styles = {
-  canvas: css({
+export const styles: StylesMap = {
+  canvas: {
     position: 'absolute',
-  }),
-  container: css({
+  },
+  container: {
     height: '100%',
     pointerEvents: 'none',
     position: 'relative',
     width: '100%',
-  }),
+  },
 };

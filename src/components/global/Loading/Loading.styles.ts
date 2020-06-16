@@ -1,6 +1,6 @@
-import { css, keyframes } from '@emotion/core';
+import { keyframes } from '@emotion/core';
 
-import { COLORS, RADIUS, THEME, TIME } from '~/lib/constants';
+import { COLORS, RADIUS, StylesMap, THEME, TIME } from '~/lib/constants';
 
 const CONSTANTS = {
   ANIMATION_STEP: TIME.MS300,
@@ -62,8 +62,8 @@ const circleStyles = {
   width: CONSTANTS.CIRCLE_SIZE,
 };
 
-const styles = {
-  circle: css({
+const styles: StylesMap = {
+  circle: {
     ...circleStyles,
     '&:after': {
       animationDelay: `${CONSTANTS.ANIMATION_STEP * 2}ms`,
@@ -81,27 +81,27 @@ const styles = {
     animationDelay: `${CONSTANTS.ANIMATION_STEP}ms`,
     left: CONSTANTS.CIRCLE_SIZE + CONSTANTS.CIRCLE_MARGIN,
     position: 'relative',
-  }),
-  container: css({
+  },
+  container: {
     display: 'block',
     width: CONSTANTS.CIRCLE_MARGIN * 2 + CONSTANTS.CIRCLE_SIZE * 3,
-  }),
-  [THEME.DARK]: css({
+  },
+  [THEME.DARK]: {
     '&, &:after, &:before': {
       animationDuration: `${CONSTANTS.ANIMATION_STEP * 3}ms`,
       animationIterationCount: 'infinite',
       animationName: loadingDark,
       background: CONSTANTS.DARK_DEFAULT,
     },
-  }),
-  [THEME.LIGHT]: css({
+  },
+  [THEME.LIGHT]: {
     '&, &:after, &:before': {
       animationDuration: `${CONSTANTS.ANIMATION_STEP * 3}ms`,
       animationIterationCount: 'infinite',
       animationName: loadingLight,
       background: COLORS.LIGHT.GRAY_20,
     },
-  }),
+  },
 };
 
 export default styles;

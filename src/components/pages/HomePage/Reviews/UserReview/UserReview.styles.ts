@@ -1,14 +1,19 @@
-import { css } from '@emotion/core';
-
-import { COLORS, GAP_COLUMNS, MQ, RADIUS, SPACING } from '~/lib/constants';
+import {
+  COLORS,
+  GAP_COLUMNS,
+  MQ,
+  RADIUS,
+  SPACING,
+  StylesMap,
+} from '~/lib/constants';
 
 const avatarSize = {
   large: 60,
   standard: 50,
 };
 
-const styles = {
-  avatar: css({
+const styles: StylesMap = {
+  avatar: {
     borderRadius: RADIUS.CIRCLE,
     height: avatarSize.standard,
     width: avatarSize.standard,
@@ -17,15 +22,15 @@ const styles = {
       height: avatarSize.large,
       width: avatarSize.large,
     },
-  }),
+  },
   avatarContainer: {
     marginLeft: 'auto',
   },
-  container: css({
+  container: {
     alignItems: 'flex-start',
     marginBottom: SPACING.SIZE_40,
-  }),
-  review: css({
+  },
+  review: {
     color: COLORS.DARK.GRAY_40,
 
     [MQ.M]: {
@@ -35,10 +40,10 @@ const styles = {
     [MQ.L]: {
       marginRight: 0,
     },
-  }),
-  title: css({
+  },
+  title: {
     color: COLORS.GLOBAL.WHITE,
-  }),
+  },
 };
 
 export default styles;

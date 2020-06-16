@@ -1,11 +1,10 @@
-import { css } from '@emotion/core';
 import { boolean, text } from '@storybook/addon-knobs';
 import { ReactChild, useState } from 'react';
 
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import Link from '~/components/global/Link/Link';
-import { SPACING, THEME } from '~/lib/constants';
+import { SPACING, StylesMap, THEME } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 import Toast from './Toast';
@@ -15,11 +14,11 @@ export default {
   title: 'Global/Toast',
 };
 
-const styles = {
-  paddingBottom: css({
+const styles: StylesMap = {
+  paddingBottom: {
     paddingBottom: SPACING.SIZE_20,
-  }),
-  root: [typography.bodyCopy, css({ paddingTop: SPACING.SIZE_20 })],
+  },
+  root: [typography.bodyCopy, { paddingTop: SPACING.SIZE_20 }],
 };
 
 function Container({ children }: { children: ReactChild[] }) {

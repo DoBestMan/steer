@@ -1,18 +1,17 @@
-import { css } from '@emotion/core';
 import { text } from '@storybook/addon-knobs';
 
-import { COLORS } from '~/lib/constants';
+import { COLORS, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 import Markdown from './Markdown';
 
-const styles = {
-  headline: css({
+const styles: StylesMap = {
+  headline: {
     strong: {
       color: COLORS.GLOBAL.ORANGE,
       fontWeight: 'inherit',
     },
-  }),
+  },
 };
 
 export default {

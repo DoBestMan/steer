@@ -1,39 +1,38 @@
-import { css } from '@emotion/core';
 import { useEffect, useState } from 'react';
 
 import Button from '~/components/global/Button/Button';
-import { COLORS, SPACING, THEME, TIME } from '~/lib/constants';
+import { COLORS, SPACING, StylesMap, THEME, TIME } from '~/lib/constants';
 
 import Loading from './Loading';
 
-const styles = {
-  buttonContainer: css({
+const styles: StylesMap = {
+  buttonContainer: {
     transition: `all ${TIME.MS350}ms ease-in-out`,
-  }),
-  buttonHidden: css({
+  },
+  buttonHidden: {
     opacity: 0,
     visibility: 'hidden',
-  }),
-  container: css({
+  },
+  container: {
     padding: SPACING.SIZE_20,
     position: 'relative',
     textAlign: 'center',
-  }),
-  interactionContainer: css({
+  },
+  interactionContainer: {
     position: 'relative',
     textAlign: 'center',
-  }),
-  loading: css({
+  },
+  loading: {
     left: 0,
     margin: '0 auto',
     position: 'absolute',
     right: 0,
     top: '50%',
     transform: 'translateY(-50%)',
-  }),
-  orangeContainer: css({
+  },
+  orangeContainer: {
     background: COLORS.GLOBAL.ORANGE,
-  }),
+  },
 };
 
 export default {

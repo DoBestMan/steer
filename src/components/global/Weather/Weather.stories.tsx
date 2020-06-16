@@ -1,15 +1,16 @@
-import { css } from '@emotion/core';
 import { select } from '@storybook/addon-knobs';
+
+import { StylesMap } from '~/lib/constants';
 
 import Weather from './Weather';
 import { Weathers } from './Weather.types';
 
-const styles = {
-  container: css({
+const styles: StylesMap = {
+  container: {
     height: '100%',
     position: 'absolute',
     width: '100%',
-  }),
+  },
 };
 
 export default {

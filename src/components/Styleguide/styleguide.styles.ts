@@ -1,13 +1,11 @@
-import { css } from '@emotion/core';
+import { COLORS, RADIUS, SPACING, StylesMap } from '~/lib/constants';
 
-import { COLORS, RADIUS, SPACING } from '~/lib/constants';
-
-export const styles = {
-  colors: css({
+export const styles: StylesMap = {
+  colors: {
     minHeight: '100vh',
     padding: SPACING.SIZE_50,
-  }),
-  colorsContainer: css({
+  },
+  colorsContainer: {
     display: 'flex',
     div: {
       '&:not(:last-of-type)': {
@@ -18,13 +16,13 @@ export const styles = {
       width: '33%',
     },
     maxWidth: 900,
-  }),
-  containerFullbleed: css({
+  },
+  containerFullbleed: {
     backgroundColor: COLORS.LIGHT.GRAY_70,
     color: COLORS.GLOBAL.WHITE,
     padding: SPACING.SIZE_50,
-  }),
-  containerText: css({
+  },
+  containerText: {
     backgroundColor: COLORS.LIGHT.OFF_WHITE,
-  }),
+  },
 };

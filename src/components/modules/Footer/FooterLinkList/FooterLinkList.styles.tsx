@@ -1,13 +1,11 @@
-import { css } from '@emotion/core';
+import { SPACING, StylesMap } from '~/lib/constants';
 
-import { SPACING } from '~/lib/constants';
-
-const styles = {
-  listItem: css({
+const styles: StylesMap = {
+  listItem: {
     '&:not(:last-child)': {
       marginBottom: SPACING.SIZE_20,
     },
-  }),
+  },
 };
 
 export default styles;

@@ -1,4 +1,3 @@
-import { css } from '@emotion/core';
 import {
   ENTERED,
   ENTERING,
@@ -6,7 +5,14 @@ import {
   EXITING,
 } from 'react-transition-group/Transition';
 
-import { EASING, MQ, SPACING, Z_INDEX } from '~/lib/constants';
+import {
+  CSSStyles,
+  EASING,
+  MQ,
+  SPACING,
+  StylesMap,
+  Z_INDEX,
+} from '~/lib/constants';
 
 export const NAV_CONTENT_HEIGHT = 20;
 
@@ -19,7 +25,7 @@ export const NAV_HEIGHT = {
   /* eslint-enable sort-keys */
 };
 
-export const navigationPaddingTop = css({
+export const navigationPaddingTop: CSSStyles = {
   paddingTop: NAV_HEIGHT.S,
 
   [MQ.M]: {
@@ -33,7 +39,7 @@ export const navigationPaddingTop = css({
   [MQ.XL]: {
     paddingTop: NAV_HEIGHT.XL,
   },
-});
+};
 
 const CONSTANTS = {
   LOGO_SIZE: 130,
@@ -61,10 +67,10 @@ export const animations = {
   /* eslint-enable sort-keys */
 };
 
-export const styles = {
-  container: css({
+export const styles: StylesMap = {
+  container: {
     height: NAV_CONTENT_HEIGHT,
-  }),
+  },
   hamburger: {
     display: 'inline-flex',
     marginLeft: SPACING.SIZE_10,
@@ -72,7 +78,7 @@ export const styles = {
       display: 'none',
     },
   },
-  lastItem: css({
+  lastItem: {
     [MQ.L]: {
       // Should be the account logo
       // Change it to button if it becomes a button
@@ -80,8 +86,8 @@ export const styles = {
         minWidth: 'auto',
       },
     },
-  }),
-  listItem: css({
+  },
+  listItem: {
     ':last-of-type': {
       marginLeft: SPACING.SIZE_30,
     },
@@ -91,24 +97,24 @@ export const styles = {
     [MQ.L]: {
       display: 'inline-flex',
     },
-  }),
-  listItemNotHomepage: css({
+  },
+  listItemNotHomepage: {
     [MQ.L]: {
       marginLeft: SPACING.SIZE_20,
     },
-  }),
-  logo: css({
+  },
+  logo: {
     width: CONSTANTS.LOGO_SIZE_SMALL,
     [MQ.M]: {
       width: CONSTANTS.LOGO_SIZE,
     },
-  }),
-  nav: css({
+  },
+  nav: {
     alignContent: 'center',
     display: 'flex',
     justifyContent: 'flex-end',
-  }),
-  root: css({
+  },
+  root: {
     position: 'absolute',
     transition: `all 400ms ${EASING.CUBIC_EASE_OUT}`,
     width: '100%',
@@ -121,8 +127,8 @@ export const styles = {
       paddingBottom: SPACING.SIZE_30,
       paddingTop: SPACING.SIZE_60,
     },
-  }),
-  searchButton: css({
+  },
+  searchButton: {
     [MQ.L]: {
       marginRight: 'auto',
       width: 200,
@@ -132,5 +138,5 @@ export const styles = {
       maxWidth: 420,
       width: '35%',
     },
-  }),
+  },
 };

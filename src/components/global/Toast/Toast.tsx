@@ -1,9 +1,8 @@
-import { SerializedStyles } from '@emotion/core';
 import { ReactChild, useEffect } from 'react';
 
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Link from '~/components/global/Link/Link';
-import { ARIA_LIVE, TIME } from '~/lib/constants';
+import { ARIA_LIVE, CSSStyles, TIME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import styles from './Toast.styles';
@@ -11,7 +10,7 @@ import styles from './Toast.styles';
 interface Props {
   autoDismiss?: boolean; // There should be no use cases with auto dismiss disabled, this prop is for testing
   children: ReactChild;
-  customStyles?: SerializedStyles;
+  customStyles?: CSSStyles;
   isOpen?: boolean;
   onDismiss: () => void;
 }

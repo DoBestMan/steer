@@ -1,9 +1,7 @@
-import { css } from '@emotion/core';
+import { StylesMap, Z_INDEX } from '~/lib/constants';
 
-import { Z_INDEX } from '~/lib/constants';
-
-const styles = {
-  container: css({
+const styles: StylesMap = {
+  container: {
     height: '100%',
     left: 0,
     pointerEvents: 'none',
@@ -11,14 +9,14 @@ const styles = {
     top: 0,
     width: '100%',
     zIndex: Z_INDEX.TOP,
-  }),
-  grid: css({
+  },
+  grid: {
     height: '100%',
-  }),
-  item: css({
+  },
+  item: {
     backgroundColor: 'rgba(255, 0, 0, 0.2)',
     height: '100%',
-  }),
+  },
 };
 
 export default styles;

@@ -1,7 +1,7 @@
-import { css } from '@emotion/core';
 import { boolean, number } from '@storybook/addon-knobs';
 
 import Casino from '~/components/global/Casino/Casino';
+import { StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 export default {
@@ -9,10 +9,10 @@ export default {
   title: 'Global/Casino',
 };
 
-const styles = {
-  container: css({
+const styles: StylesMap = {
+  container: {
     color: 'red',
-  }),
+  },
 };
 
 export function CasinoWithKnobs() {

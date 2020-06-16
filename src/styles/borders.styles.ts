@@ -1,24 +1,22 @@
-import { css } from '@emotion/core';
-
 import { BORDERS, GAP_COLUMNS, MQ, SPACING } from '~/lib/constants';
 
-export const borderTop = css({
+export const borderTop = {
   borderTop: BORDERS.SOLID_GRAY_20_1PX,
-});
+};
 
-export const borderBottom = css({
+export const borderBottom = {
   borderBottom: BORDERS.SOLID_GRAY_20_1PX,
-});
+};
 
-const borderGapFix = css({
+const borderGapFix = {
   marginRight: -GAP_COLUMNS.S,
 
   [MQ.L]: {
     marginRight: -GAP_COLUMNS.L,
   },
-});
+};
 
-const borderTopMarginPadding = css({
+const borderTopMarginPadding = {
   [MQ.S]: {
     marginTop: SPACING.SIZE_40,
     paddingTop: SPACING.SIZE_40,
@@ -31,7 +29,7 @@ const borderTopMarginPadding = css({
     marginTop: SPACING.SIZE_60,
     paddingTop: SPACING.SIZE_60,
   },
-});
+};
 
 export const borderTopWithGap = [borderTop, borderGapFix];
 

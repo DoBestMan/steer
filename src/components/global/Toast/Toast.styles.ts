@@ -1,6 +1,4 @@
-import { css } from '@emotion/core';
-
-import { COLORS, MQ, RADIUS, SPACING, TIME } from '~/lib/constants';
+import { COLORS, MQ, RADIUS, SPACING, StylesMap, TIME } from '~/lib/constants';
 import {
   fadeInUp,
   fadeInUp20px,
@@ -9,10 +7,10 @@ import {
 } from '~/styles/animations.styles';
 import { typography } from '~/styles/typography.styles';
 
-const styles = {
-  root: css([
+const styles: StylesMap = {
+  root: [
     typography.secondaryHeadline,
-    css({
+    {
       animation: `${fadeInUp} ${TIME.MS350}ms ease-in`,
       backgroundColor: COLORS.GLOBAL.ORANGE,
       bottom: 0,
@@ -29,19 +27,19 @@ const styles = {
       },
       [MQ.L]: [
         typography.primarySubhead,
-        css({
+        {
           alignItems: 'center',
           animation: `${fadeInUp20px} ${TIME.MS200}ms ease-in`,
           borderRadius: RADIUS.RADIUS_15,
           minHeight: 'auto',
           padding: SPACING.SIZE_20,
           position: 'relative',
-        }),
+        },
       ],
-    }),
-  ]),
+    },
+  ],
 
-  icon: css({
+  icon: {
     alignSelf: 'flex-start',
     color: COLORS.GLOBAL.WHITE,
     [MQ.L]: {
@@ -49,20 +47,20 @@ const styles = {
       paddingLeft: SPACING.SIZE_15,
       paddingTop: 3,
     },
-  }),
+  },
 
-  isDismissed: css({
+  isDismissed: {
     pointerEvents: 'none',
     visibility: 'hidden',
-    [MQ.S]: css({
+    [MQ.S]: {
       animation: `${fadeOutDown} ${TIME.MS350}ms ease-out`,
       transition: `visibility ${TIME.MS350}ms ease-out`,
-    }),
-    [MQ.L]: css({
+    },
+    [MQ.L]: {
       animation: `${fadeOutDown20px} ${TIME.MS200}ms ease-in`,
       transition: `visibility ${TIME.MS200}ms ease-out`,
-    }),
-  }),
+    },
+  },
 };
 
 export default styles;

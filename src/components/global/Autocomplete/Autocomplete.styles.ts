@@ -1,11 +1,16 @@
-import { css } from '@emotion/core';
-
-import { BORDERS, COLORS, MQ, SPACING, Z_INDEX } from '~/lib/constants';
+import {
+  BORDERS,
+  COLORS,
+  MQ,
+  SPACING,
+  StylesMap,
+  Z_INDEX,
+} from '~/lib/constants';
 import { disableGlobalFocus } from '~/styles/document/accessibility.styles';
 import { typography } from '~/styles/typography.styles';
 
-const styles = {
-  actionIcon: css({
+const styles: StylesMap = {
+  actionIcon: {
     [MQ.S]: {
       display: 'none',
     },
@@ -17,28 +22,28 @@ const styles = {
         width: SPACING.SIZE_20,
       },
     },
-  }),
+  },
   clearSearch: [
     typography.labelCopyTight,
-    css({
+    {
       color: COLORS.LIGHT.GRAY_70,
-    }),
+    },
   ],
-  comboboxWrapper: css({
+  comboboxWrapper: {
     width: '100%',
-  }),
+  },
   errorMessage: typography.primaryHeadline,
   input: [
     typography.locationHeadline,
     disableGlobalFocus,
-    css({
+    {
       backgroundColor: 'inherit',
       border: 'none',
       padding: 0,
       width: '100%',
-    }),
+    },
   ],
-  inputContainer: css({
+  inputContainer: {
     alignItems: 'center',
     borderBottom: BORDERS.SOLID_BLACK_1PX,
     display: 'flex',
@@ -48,25 +53,25 @@ const styles = {
       borderBottom: BORDERS.SOLID_BLACK_1PX,
       paddingBottom: SPACING.SIZE_15,
     },
-  }),
+  },
   label: [
     typography.locationHeadline,
-    css({
+    {
       color: COLORS.LIGHT.GRAY_70,
       left: 0,
       opacity: 1,
       pointerEvents: 'none',
       position: 'absolute',
       top: 0,
-    }),
+    },
   ],
-  labelHidden: css({
+  labelHidden: {
     opacity: 0,
-  }),
-  listbox: css({
+  },
+  listbox: {
     listStyle: 'none',
     zIndex: Z_INDEX.FRONT,
-  }),
+  },
 };
 
 export default styles;

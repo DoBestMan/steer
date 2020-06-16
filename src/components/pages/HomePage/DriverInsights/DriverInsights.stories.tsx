@@ -1,4 +1,3 @@
-import { css } from '@emotion/core';
 import { text } from '@storybook/addon-knobs';
 
 import Grid from '~/components/global/Grid/Grid';
@@ -7,7 +6,7 @@ import { SiteInsightItemDefault } from '~/data/models/SiteInsightItemDefault';
 import { SiteInsightItemList } from '~/data/models/SiteInsightItemList';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 import { INSIGHT_TYPE } from '~/lib/backend/insights.types';
-import { COLORS, SPACING } from '~/lib/constants';
+import { COLORS, SPACING, StylesMap } from '~/lib/constants';
 
 import DriverInsights from './DriverInsights';
 
@@ -16,14 +15,12 @@ export default {
   title: 'Homepage/Driver Insights',
 };
 
-const styles = {
-  root: [
-    css({
-      backgroundColor: COLORS.GLOBAL.BLACK,
-      minHeight: '100vh',
-      padding: `${SPACING.SIZE_50}px 0`,
-    }),
-  ],
+const styles: StylesMap = {
+  root: {
+    backgroundColor: COLORS.GLOBAL.BLACK,
+    minHeight: '100vh',
+    padding: `${SPACING.SIZE_50}px 0`,
+  },
 };
 
 const title = 'What drivers look for.';

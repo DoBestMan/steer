@@ -1,4 +1,3 @@
-import { css } from '@emotion/core';
 import { action } from '@storybook/addon-actions';
 import { boolean, select, text } from '@storybook/addon-knobs';
 import { ReactChild, useState } from 'react';
@@ -8,6 +7,7 @@ import {
   COLORS,
   LINK_TYPES,
   RADIUS,
+  StylesMap,
   THEME,
 } from '~/lib/constants';
 
@@ -22,10 +22,10 @@ export default {
 
 const handleButtonClick = action('button-click');
 
-const styles = {
-  root: css({
+const styles: StylesMap = {
+  root: {
     minHeight: '100vh',
-  }),
+  },
   popup: {
     background: COLORS.GLOBAL.WHITE,
     borderRadius: RADIUS.RADIUS_15,

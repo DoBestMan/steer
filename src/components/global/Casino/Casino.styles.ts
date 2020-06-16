@@ -1,20 +1,18 @@
-import { css } from '@emotion/core';
+import { EASING, StylesMap } from '~/lib/constants';
 
-import { EASING } from '~/lib/constants';
-
-export const styles = {
-  container: css({
+export const styles: StylesMap = {
+  container: {
     fontVariantNumeric: 'tabular-nums',
     overflow: 'hidden',
     position: 'relative',
     verticalAlign: 'sub',
-  }),
-  ref: css({
+  },
+  ref: {
     lineHeight: 'normal',
     opacity: 0,
     position: 'absolute',
-  }),
-  slot: css({
+  },
+  slot: {
     left: 0,
     position: 'absolute',
 
@@ -26,19 +24,19 @@ export const styles = {
     transition: `transform 3500ms ${EASING.CUSTOM_SLOTS_EASE}`,
     width: '100%',
     willChange: 'transform',
-  }),
-  slotContainer: css({
+  },
+  slotContainer: {
     display: 'inline-flex',
     overflow: 'hidden',
     position: 'relative',
-  }),
-  slotContainers: css({
+  },
+  slotContainers: {
     lineHeight: 'normal',
-  }),
-  slotNotANumber: css({
+  },
+  slotNotANumber: {
     left: 0,
     position: 'absolute',
     top: 0,
     width: '100%',
-  }),
+  },
 };

@@ -1,9 +1,14 @@
-import { css } from '@emotion/core';
 import { boolean, select } from '@storybook/addon-knobs';
 import { useState } from 'react';
 
 import { useBreakpoints } from '~/hooks/useBreakpoints';
-import { COLORS, MODAL_THEME, SPACING, THEME } from '~/lib/constants';
+import {
+  COLORS,
+  CSSStyles,
+  MODAL_THEME,
+  SPACING,
+  THEME,
+} from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 import Button from '../Button/Button';
@@ -58,12 +63,12 @@ export function StackedModals() {
   function toggleNestedModal() {
     setIsNestedOpen(!isNestedOpen);
   }
-  const buttonStyles = css({
+  const buttonStyles: CSSStyles = {
     color: COLORS.GLOBAL.WHITE,
     position: 'absolute',
     right: SPACING.SIZE_10,
     top: SPACING.SIZE_10,
-  });
+  };
   return (
     <div>
       <ModalButton {...{ toggleModal }} />
@@ -179,11 +184,11 @@ export function DefaultModalWithCustomClose() {
   function toggleModal() {
     setIsOpen(!isOpen);
   }
-  const buttonStyles = css({
+  const buttonStyles: CSSStyles = {
     position: 'absolute',
     right: SPACING.SIZE_10,
     top: SPACING.SIZE_10,
-  });
+  };
   return (
     <div>
       <ModalButton {...{ toggleModal }} />
@@ -294,12 +299,12 @@ export function FullscreenModalWithCustomClose() {
   function toggleModal() {
     setIsOpen(!isOpen);
   }
-  const buttonStyles = css({
+  const buttonStyles: CSSStyles = {
     color: COLORS.GLOBAL.WHITE,
     position: 'absolute',
     right: SPACING.SIZE_10,
     top: SPACING.SIZE_10,
-  });
+  };
   return (
     <div>
       <ModalButton {...{ toggleModal }} />

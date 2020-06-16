@@ -1,4 +1,3 @@
-import { css } from '@emotion/core';
 import {
   ENTERED,
   ENTERING,
@@ -6,7 +5,7 @@ import {
   EXITING,
 } from 'react-transition-group/Transition';
 
-import { COLORS, EASING } from '~/lib/constants';
+import { COLORS, EASING, StylesMap } from '~/lib/constants';
 
 export const animations = {
   /* eslint-disable sort-keys */
@@ -25,15 +24,15 @@ export const animations = {
   /* eslint-enable sort-keys */
 };
 
-export const styles = {
-  component: css({
+export const styles: StylesMap = {
+  component: {
     transition: `all 800ms ${EASING.CUBIC_EASE_OUT}`,
-  }),
-  root: css({
+  },
+  root: {
     backgroundColor: 'transparent',
     transition: `all 400ms ${EASING.CUBIC_EASE_OUT}`,
-  }),
-  rootWithOffWhiteBg: css({
+  },
+  rootWithOffWhiteBg: {
     backgroundColor: COLORS.LIGHT.OFF_WHITE,
-  }),
+  },
 };

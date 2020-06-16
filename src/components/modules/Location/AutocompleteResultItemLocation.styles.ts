@@ -1,28 +1,23 @@
-import { css } from '@emotion/core';
-
-import { BORDERS, COLORS, MQ, SPACING } from '~/lib/constants';
+import { BORDERS, COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
-const styles = {
+const styles: StylesMap = {
   listboxItem: [
     typography.primaryHeadline,
 
-    css({
+    {
       lineHeight: 1.68,
       position: 'relative',
       [MQ.M]: { lineHeight: 1.68 },
-    }),
+    },
   ],
-  listboxItemHighlight: css({
+  listboxItemHighlight: {
     color: COLORS.LIGHT.GRAY_70,
-  }),
-  listboxItemSecondary: [
-    typography.bodyCopy,
-    css({ marginLeft: SPACING.SIZE_10 }),
-  ],
-  listboxItemSelected: css({
+  },
+  listboxItemSecondary: [typography.bodyCopy, { marginLeft: SPACING.SIZE_10 }],
+  listboxItemSelected: {
     outline: BORDERS.FOCUS_STATE,
-  }),
+  },
 };
 
 export default styles;

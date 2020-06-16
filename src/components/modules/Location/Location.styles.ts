@@ -1,14 +1,12 @@
-import { css } from '@emotion/core';
-
-import { COLORS, MQ, SPACING } from '~/lib/constants';
+import { COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
 import { layout } from '~/styles/layout.styles';
 import { typography } from '~/styles/typography.styles';
 
-export const styles = {
-  container: css({
+export const styles: StylesMap = {
+  container: {
     width: '100%',
-  }),
-  content: css({
+  },
+  content: {
     background: COLORS.GLOBAL.WHITE,
     display: 'flex',
     flexDirection: 'column',
@@ -20,10 +18,10 @@ export const styles = {
     [MQ.M]: {
       padding: `0 0 ${SPACING.SIZE_50}px 0`,
     },
-  }),
+  },
   currentLocation: [
     typography.smallCopyTight,
-    css({
+    {
       color: COLORS.LIGHT.GRAY_70,
       display: 'block',
       marginTop: SPACING.SIZE_10,
@@ -34,42 +32,42 @@ export const styles = {
         },
       ],
       [MQ.XL]: typography.bodyCopyTight,
-    }),
+    },
   ],
   infoContainer: [
     typography.smallCopyTight,
-    css({
+    {
       color: COLORS.LIGHT.GRAY_70,
       marginTop: 'auto',
       [MQ.M]: typography.bodyCopy,
       [MQ.XL]: typography.bodyCopyTight,
-    }),
+    },
   ],
   infoLink: [
     typography.smallCopyTight,
-    css({
+    {
       '&:hover span, &:focus span': {
         color: COLORS.GLOBAL.BLACK,
       },
       color: COLORS.LIGHT.GRAY_70,
       [MQ.M]: typography.bodyCopy,
       [MQ.XL]: typography.bodyCopyTight,
-    }),
+    },
   ],
-  toast: css({
+  toast: {
     marginTop: 'auto',
-  }),
+  },
   useCurrentLocationButton: [
     typography.locationHeadline,
     layout.container,
-    css({
+    {
       alignItems: 'baseline',
-    }),
+    },
   ],
-  useCurrentLocationContainer: css({
+  useCurrentLocationContainer: {
     marginTop: SPACING.SIZE_40,
-  }),
-  useCurrentLocationIcon: css({
+  },
+  useCurrentLocationIcon: {
     marginLeft: SPACING.SIZE_10,
     svg: {
       height: 18,
@@ -81,11 +79,11 @@ export const styles = {
         width: 25,
       },
     },
-  }),
-  userCurrentLocationLoader: css({
+  },
+  userCurrentLocationLoader: {
     paddingTop: 12,
     [MQ.M]: {
       paddingTop: 17,
     },
-  }),
+  },
 };

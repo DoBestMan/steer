@@ -1,13 +1,11 @@
-import { SerializedStyles } from '@emotion/core';
-
-import { THEME } from '~/lib/constants';
+import { CSSStyles, THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { screenReaderText } from '~/styles/document/accessibility.styles';
 
 import styles from './Loading.styles';
 
 interface Props {
-  customStyles?: SerializedStyles;
+  customStyles?: CSSStyles;
   label?: string;
   theme?: THEME.LIGHT | THEME.DARK;
 }

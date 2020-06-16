@@ -1,9 +1,8 @@
-import { css } from '@emotion/core';
 import { boolean, select } from '@storybook/addon-knobs';
 
 import Scenary from '~/components/global/Scenery/Scenery';
 import { Sceneries } from '~/components/global/Scenery/Scenery.types';
-import { COLORS } from '~/lib/constants';
+import { COLORS, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 import Car from './Car';
@@ -14,24 +13,24 @@ export default {
   title: 'Global/Cars',
 };
 
-const styles = {
-  container: css({
+const styles: StylesMap = {
+  container: {
     backgroundColor: COLORS.LIGHT.OFF_WHITE,
     height: 500,
     position: 'relative',
-  }),
-  scenery: css({
+  },
+  scenery: {
     bottom: 0,
     left: 0,
     position: 'absolute',
     width: '100%',
-  }),
-  vehicle: css({
+  },
+  vehicle: {
     bottom: 0,
     right: 50,
     position: 'absolute',
     zIndex: 2,
-  }),
+  },
 };
 
 export function CarWithKnobs() {

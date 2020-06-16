@@ -1,6 +1,6 @@
-import { css, keyframes } from '@emotion/core';
+import { keyframes } from '@emotion/core';
 
-import { MQ } from '~/lib/constants';
+import { MQ, StylesMap } from '~/lib/constants';
 
 import { DEFAULT_SCALE_VECTOR } from './Car.constants';
 
@@ -13,15 +13,15 @@ export const rotateWheel = keyframes({
   },
 });
 
-export const styles = {
-  animateWheel: css({
+export const styles: StylesMap = {
+  animateWheel: {
     svg: {
       '.back-wheel, .front-wheel': {
         animation: `${rotateWheel} 2000ms linear infinite`,
       },
     },
-  }),
-  container: css({
+  },
+  container: {
     '.SVGInline': {
       display: 'block',
       fontSize: 0,
@@ -46,8 +46,8 @@ export const styles = {
       height: 'auto',
       transform: `scale3d(${DEFAULT_SCALE_VECTOR.S}, ${DEFAULT_SCALE_VECTOR.S}, ${DEFAULT_SCALE_VECTOR.S})`,
     },
-  }),
-  scaleAcrossBreakpoints: css({
+  },
+  scaleAcrossBreakpoints: {
     transformOrigin: '100% 100%',
 
     [MQ.M]: {
@@ -57,13 +57,13 @@ export const styles = {
     [MQ.L]: {
       transform: `scale3d(${DEFAULT_SCALE_VECTOR.L}, ${DEFAULT_SCALE_VECTOR.L}, ${DEFAULT_SCALE_VECTOR.L})`,
     },
-  }),
-  solid: css({
+  },
+  solid: {
     svg: {
       '.solid-body-background *': {
         fillOpacity: 1,
         opacity: 1,
       },
     },
-  }),
+  },
 };

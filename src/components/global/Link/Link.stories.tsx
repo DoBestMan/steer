@@ -1,11 +1,16 @@
-import { css } from '@emotion/core';
 import { action } from '@storybook/addon-actions';
 import { boolean, select, text } from '@storybook/addon-knobs';
 import { ReactChild } from 'react';
 
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import { NAV_TARGETS } from '~/components/modules/Nav/Nav.types';
-import { COLORS, LINK_ICON_POSITION, LINK_TYPES, THEME } from '~/lib/constants';
+import {
+  COLORS,
+  LINK_ICON_POSITION,
+  LINK_TYPES,
+  StylesMap,
+  THEME,
+} from '~/lib/constants';
 
 import FooterLink from './FooterLink';
 import IconCTA from './IconCTA';
@@ -17,10 +22,10 @@ export default {
   title: 'Global/Link',
 };
 
-const styles = {
-  root: css({
+const styles: StylesMap = {
+  root: {
     minHeight: '100vh',
-  }),
+  },
 };
 
 function LinkContainer({

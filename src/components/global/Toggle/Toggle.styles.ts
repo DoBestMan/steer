@@ -1,12 +1,10 @@
-import { css } from '@emotion/core';
+import { COLORS, RADIUS, StylesMap, TIME } from '~/lib/constants';
 
-import { COLORS, RADIUS, TIME } from '~/lib/constants';
-
-const styles = {
-  checked: css({
+const styles: StylesMap = {
+  checked: {
     transform: 'translateX(12px)',
-  }),
-  indicator: css({
+  },
+  indicator: {
     background: COLORS.GLOBAL.WHITE,
     borderRadius: RADIUS.CIRCLE,
     bottom: 2,
@@ -16,8 +14,8 @@ const styles = {
     position: 'absolute',
     transition: `${TIME.MS300}ms ease`,
     width: 9,
-  }),
-  slider: css({
+  },
+  slider: {
     background: COLORS.ORANGE.SHADE_30,
     borderRadius: RADIUS.PILL,
     bottom: 0,
@@ -27,16 +25,16 @@ const styles = {
     right: 0,
     top: 0,
     transition: `${TIME.MS300}ms ease`,
-  }),
-  sliderActive: css({
+  },
+  sliderActive: {
     background: COLORS.GLOBAL.ORANGE,
-  }),
-  switch: css({
+  },
+  switch: {
     display: 'inline-block',
     height: 13,
     position: 'relative',
     width: 25,
-  }),
+  },
 };
 
 export default styles;

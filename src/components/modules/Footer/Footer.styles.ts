@@ -1,6 +1,4 @@
-import { css } from '@emotion/core';
-
-import { COLORS, MQ, SPACING } from '~/lib/constants';
+import { COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
 import {
   borderBottom,
   borderBottomWithGap,
@@ -17,24 +15,24 @@ const CONSTANTS = {
   LOGO_SIZE_SMALL: 100,
 };
 
-const styles = {
-  companyLinksSection: css({
+const styles: StylesMap = {
+  companyLinksSection: {
     order: 4,
     [MQ.L]: {
       order: 3,
     },
-  }),
+  },
 
-  container: css({
+  container: {
     backgroundColor: COLORS.GLOBAL.WHITE,
     padding: `${SPACING.SIZE_40}px 0`,
 
     [MQ.XL]: {
       padding: `${SPACING.SIZE_60}px 0`,
     },
-  }),
+  },
 
-  copyrightSection: css({
+  copyrightSection: {
     order: 8,
     paddingTop: SPACING.SIZE_20,
 
@@ -45,15 +43,15 @@ const styles = {
         paddingTop: SPACING.SIZE_60,
       },
     ],
-  }),
+  },
 
   linksHeading: [
     typography.secondaryHeadline,
-    css({
+    {
       marginBottom: SPACING.SIZE_20,
 
       [MQ.L]: [typography.tertiaryHeadline],
-    }),
+    },
   ],
 
   logo: {
@@ -66,7 +64,7 @@ const styles = {
 
   logoSection: [
     borderTopWithGapAndSpacing,
-    css({
+    {
       order: 6,
       paddingBottom: 0,
 
@@ -76,13 +74,13 @@ const styles = {
         order: 3,
         padding: 0,
       },
-    }),
+    },
   ],
 
   mailingListSection: [
     borderTop,
     borderBottom,
-    css({
+    {
       margin: `${SPACING.SIZE_40}px 0`,
       order: 3,
       padding: `${SPACING.SIZE_40}px 0`,
@@ -97,24 +95,24 @@ const styles = {
       [MQ.XL]: {
         order: 7,
       },
-    }),
+    },
   ],
 
-  socialHeading: css({
+  socialHeading: {
     display: 'none',
 
     [MQ.XL]: {
       display: 'block',
       marginBottom: SPACING.SIZE_15,
     },
-  }),
+  },
 
   socialLinksSection: [
     borderTopWithSpacing,
-    css({
+    {
       order: 7,
       paddingBottom: 0,
-      ul: css({
+      ul: {
         li: {
           '&:not(:last-child)': {
             marginBottom: SPACING.SIZE_15,
@@ -157,17 +155,17 @@ const styles = {
         [MQ.XL]: {
           textAlign: 'left',
         },
-      }),
+      },
 
       [MQ.XL]: {
         border: 'none',
         margin: 0,
         padding: 0,
       },
-    }),
+    },
   ],
 
-  supportButton: css({
+  supportButton: {
     '&:not(:last-child)': {
       marginBottom: SPACING.SIZE_20,
 
@@ -175,12 +173,12 @@ const styles = {
         marginBottom: 0,
       },
     },
-  }),
+  },
 
   supportSection: [
     layout.container,
     layout.centeredHorizontal,
-    css({
+    {
       order: 1,
       paddingBottom: SPACING.SIZE_20,
 
@@ -195,10 +193,10 @@ const styles = {
           paddingBottom: SPACING.SIZE_60,
         },
       ],
-    }),
+    },
   ],
 
-  supportSectionButtons: css({
+  supportSectionButtons: {
     display: 'flex',
     flexDirection: 'column',
     order: 2,
@@ -214,22 +212,22 @@ const styles = {
         paddingBottom: SPACING.SIZE_60,
       },
     ],
-  }),
+  },
 
   text: [
     typography.bodyCopy,
-    css({
+    {
       color: COLORS.LIGHT.GRAY_70,
-    }),
+    },
   ],
 
-  tiresLinksSection: css({
+  tiresLinksSection: {
     order: 5,
 
     [MQ.L]: {
       order: 4,
     },
-  }),
+  },
 };
 
 export default styles;

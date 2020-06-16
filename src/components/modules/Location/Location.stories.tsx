@@ -1,16 +1,16 @@
-import { css } from '@emotion/core';
 import { action } from '@storybook/addon-actions';
 import { useState } from 'react';
 
 import { UserPersonalizationUpdate } from '~/data/models/UserPersonalizationUpdate';
+import { StylesMap } from '~/lib/constants';
 import { FetchErrorCodes } from '~/lib/fetch/FetchError';
 
 import Location from './Location';
 
-const styles = {
-  container: css({
+const styles: StylesMap = {
+  container: {
     height: '100vh',
-  }),
+  },
 };
 
 export default {

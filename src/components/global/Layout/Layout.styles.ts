@@ -1,15 +1,15 @@
-import { css } from '@emotion/core';
+import { StylesMap } from '~/lib/constants';
 
-const styles = {
-  SVGSpriteContainer: css({
+const styles: StylesMap = {
+  SVGSpriteContainer: {
     display: 'none',
-  }),
-  container: css({
+  },
+  container: {
     width: '100%',
-  }),
-  mainContent: css({
+  },
+  mainContent: {
     height: '100%',
-  }),
+  },
 };
 
 export default styles;

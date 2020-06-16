@@ -1,14 +1,14 @@
-import { css, SerializedStyles } from '@emotion/core';
-
 import {
   Breakpoint,
   COLORS,
+  CSSObjectType,
   EASING,
   GRID_MARGIN,
   MODAL_ANIMATION,
   MQ,
   RADIUS,
   SPACING,
+  StylesMap,
   TIME,
 } from '~/lib/constants';
 import {
@@ -23,38 +23,34 @@ import {
 const OVERLAY_BOX_SHADOW = '0px 4px 4px rgba(0, 0, 0, 0.25)';
 const OVERLAY_PANEL_WIDTH = 425;
 
-const FADE = {
-  default: css({
+const FADE: CSSObjectType = {
+  default: {
     animation: `${fadeOut} ${TIME.MS350}ms ease-in`,
-  }),
-  open: css({
+  },
+  open: {
     animation: `${fadeIn} ${TIME.MS350}ms ${EASING.CUBIC_EASE_IN}`,
-  }),
+  },
 };
 
-const SLIDE_DOWN = {
-  default: css({
+const SLIDE_DOWN: CSSObjectType = {
+  default: {
     animation: `${fadeOutDown} ${TIME.MS350}ms ease-in`,
-  }),
-  open: css({
+  },
+  open: {
     animation: `${fadeInUp} ${TIME.MS350}ms ease-in`,
-  }),
+  },
 };
 
-const SLIDE_LEFT = {
-  default: css({
+const SLIDE_LEFT: CSSObjectType = {
+  default: {
     animation: `${slideFadeOutLeft} ${TIME.MS350}ms ease-in`,
-  }),
-  open: css({
+  },
+  open: {
     animation: `${slideFadeInLeft} ${TIME.MS350}ms ease-in`,
-  }),
+  },
 };
 
-interface AnimationStyles {
-  default: SerializedStyles;
-  open: SerializedStyles;
-}
-export const overlayBkStyles: Record<Breakpoint, AnimationStyles> = {
+export const overlayBkStyles: Record<Breakpoint, CSSObjectType> = {
   /* eslint-disable sort-keys */
   S: SLIDE_DOWN,
   M: FADE,
@@ -69,9 +65,9 @@ export const CONTENT_LATERAL_PADDING: { [key: string]: number } = {
   L: SPACING.SIZE_60,
 };
 
-const styles = {
+const styles: StylesMap = {
   [MODAL_ANIMATION.FADE]: FADE,
-  close: css({
+  close: {
     color: COLORS.LIGHT.GRAY_70,
     position: 'absolute',
     top: SPACING.SIZE_20 + 1,
@@ -81,8 +77,8 @@ const styles = {
     [MQ.M]: {
       right: SPACING.SIZE_35,
     },
-  }),
-  content: css({
+  },
+  content: {
     overflowY: 'auto',
     [MQ.S]: {
       padding: `${SPACING.SIZE_30}px ${CONTENT_LATERAL_PADDING.S}px`,
@@ -93,8 +89,8 @@ const styles = {
     [MQ.L]: {
       padding: `${SPACING.SIZE_40}px ${CONTENT_LATERAL_PADDING.L}px`,
     },
-  }),
-  root: css({
+  },
+  root: {
     background: COLORS.GLOBAL.WHITE,
     boxShadow: OVERLAY_BOX_SHADOW,
     color: COLORS.GLOBAL.BLACK,
@@ -127,12 +123,12 @@ const styles = {
       transform: 'unset',
       width: OVERLAY_PANEL_WIDTH,
     },
-  }),
-  scrollContainer: css({
+  },
+  scrollContainer: {
     height: '100%',
     overflowY: 'auto',
     position: 'relative',
-  }),
+  },
 };
 
 export default styles;

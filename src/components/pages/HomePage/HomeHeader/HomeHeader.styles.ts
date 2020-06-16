@@ -1,4 +1,3 @@
-import { css } from '@emotion/core';
 import {
   ENTERED,
   ENTERING,
@@ -7,7 +6,14 @@ import {
 } from 'react-transition-group/Transition';
 
 import { NAV_HEIGHT } from '~/components/modules/Nav/Nav.styles';
-import { COLORS, EASING, GRID_MARGIN, MQ, SPACING } from '~/lib/constants';
+import {
+  COLORS,
+  EASING,
+  GRID_MARGIN,
+  MQ,
+  SPACING,
+  StylesMap,
+} from '~/lib/constants';
 
 export const CAR_ROTATION_DURATION = 400;
 export const SCENERY_OR_WEATHER_DURATION = 400;
@@ -93,8 +99,8 @@ export const animations = {
   /* eslint-enable sort-keys */
 };
 
-export const styles = {
-  container: css({
+export const styles: StylesMap = {
+  container: {
     backgroundColor: COLORS.LIGHT.OFF_WHITE,
     flex: 1,
     paddingBottom: 20,
@@ -114,38 +120,38 @@ export const styles = {
     [MQ.XL]: {
       paddingTop: NAV_HEIGHT.XL + 40,
     },
-  }),
-  copyContainer: css({
+  },
+  copyContainer: {
     position: 'relative',
     zIndex: 1,
-  }),
-  description: css({
+  },
+  description: {
     color: COLORS.LIGHT.GRAY_70,
     transition: `all 300ms ${EASING.CUBIC_EASE_OUT}`,
     transitionDelay: '100ms',
-  }),
-  eyebrow: css({
+  },
+  eyebrow: {
     alignItems: 'baseline',
     display: 'inline-flex',
     marginBottom: SPACING.SIZE_10,
     transition: `all 400ms ${EASING.CUBIC_EASE_OUT}`,
-  }),
-  scenery: css({
+  },
+  scenery: {
     bottom: 0,
     left: 0,
     position: 'absolute',
     transition: `opacity ${SCENERY_OR_WEATHER_DURATION}ms ${EASING.CUBIC_EASE_OUT}`,
     width: '100%',
-  }),
-  sceneryContainer: css({
+  },
+  sceneryContainer: {
     bottom: 0,
     left: 0,
     position: 'absolute',
     transition: `opacity 500ms ${EASING.CUBIC_EASE_OUT}`,
     transitionDelay: '200ms',
     width: '100%',
-  }),
-  title: css({
+  },
+  title: {
     marginBottom: SPACING.SIZE_10,
 
     [MQ.M]: {
@@ -158,15 +164,15 @@ export const styles = {
 
     transition: `all 300ms ${EASING.CUBIC_EASE_OUT}`,
     transitionDelay: '50ms',
-  }),
-  vehicle: css({
+  },
+  vehicle: {
     bottom: 0,
     position: 'absolute',
     right: 0,
     transition: `all ${CAR_ROTATION_DURATION}ms ${EASING.CUBIC_EASE_OUT}`,
     willTransform: 'opacity',
-  }),
-  vehicleContainer: css({
+  },
+  vehicleContainer: {
     bottom: 0,
     fontSize: 0,
     position: 'absolute',
@@ -184,15 +190,15 @@ export const styles = {
     [MQ.XL]: {
       right: GRID_MARGIN.XL,
     },
-  }),
-  vehicleContainerWithoutAnimation: css({
+  },
+  vehicleContainerWithoutAnimation: {
     transition: 'none',
-  }),
-  weather: css({
+  },
+  weather: {
     left: 0,
     position: 'absolute',
     top: 0,
     transition: `opacity 400ms ${EASING.CUBIC_EASE_OUT}`,
     width: '100%',
-  }),
+  },
 };

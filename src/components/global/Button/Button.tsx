@@ -10,7 +10,7 @@ import {
 import { disableGlobalFocus } from '~/styles/document/accessibility.styles';
 
 import BaseLink from '../Link/BaseLink';
-import styles from './Button.styles';
+import styles, { buttonStyle, toggle } from './Button.styles';
 
 interface Props {
   as?: LINK_TYPE;
@@ -46,13 +46,13 @@ function Button({
   ...rest
 }: ButtonProps) {
   const toggleStyles = isToggleActive
-    ? styles.toggle.active[theme]
-    : styles.toggle.inactive[theme];
+    ? toggle.active[theme]
+    : toggle.inactive[theme];
 
   const buttonStyles = [
     disableGlobalFocus,
     styles.root,
-    isToggle && toggleStyles ? toggleStyles : styles[style][theme],
+    isToggle && toggleStyles ? toggleStyles : buttonStyle[style][theme],
     isDisabled && styles.disabled,
   ];
   const isAnchor = as === LINK_TYPES.A;

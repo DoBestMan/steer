@@ -1,42 +1,47 @@
-import { css } from '@emotion/core';
-
-import { BORDERS, COLORS, MQ, RADIUS, SPACING } from '~/lib/constants';
+import {
+  BORDERS,
+  COLORS,
+  MQ,
+  RADIUS,
+  SPACING,
+  StylesMap,
+} from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const ITEM_HEIGHT = 60;
 
-const styles = {
-  content: css({
+const styles: StylesMap = {
+  content: {
     display: 'flex',
     justifyContent: 'space-between',
-  }),
-  cta: css({
+  },
+  cta: {
     [MQ.S]: {
       padding: `0 ${SPACING.SIZE_40}px`,
     },
     [MQ.L]: {
       padding: `0 ${SPACING.SIZE_40}px 0 0`,
     },
-  }),
-  icon: css({
+  },
+  icon: {
     display: 'inline-flex',
-  }),
-  image: css({
+  },
+  image: {
     alignItems: 'center',
     display: 'flex',
     height: '100%',
     span: {
       maxWidth: 30, // targets svg icon
     },
-  }),
-  imageContainer: css({
+  },
+  imageContainer: {
     alignItems: 'flex-end',
     bottom: 0,
     display: 'flex',
     height: '100%',
     right: 0,
-  }),
-  imageVehicle: css({
+  },
+  imageVehicle: {
     span: {
       bottom: 0,
       display: 'inline-flex',
@@ -45,13 +50,13 @@ const styles = {
       position: 'absolute',
       right: SPACING.SIZE_30,
     },
-  }),
-  list: css({
+  },
+  list: {
     marginBottom: SPACING.SIZE_40,
-  }),
+  },
   listItem: [
     typography.smallCopy,
-    css({
+    {
       borderBottom: BORDERS.SOLID_GRAY_90_1PX,
       color: COLORS.GLOBAL.WHITE,
       display: 'flex',
@@ -68,11 +73,11 @@ const styles = {
       [MQ.L]: {
         padding: `${SPACING.SIZE_20}px ${SPACING.SIZE_40}px ${SPACING.SIZE_20}px 0`,
       },
-    }),
+    },
   ],
   root: [
     typography.jumboHeadline,
-    css({
+    {
       backgroundColor: COLORS.DARK.GRAY_90,
       borderRadius: RADIUS.RADIUS_15,
       [MQ.S]: {
@@ -81,11 +86,11 @@ const styles = {
       [MQ.L]: {
         padding: `${SPACING.SIZE_60}px 0 ${SPACING.SIZE_60}px ${SPACING.SIZE_50}px`,
       },
-    }),
+    },
   ],
   title: [
     typography.primaryHeadline,
-    css({
+    {
       color: COLORS.GLOBAL.ORANGE,
       display: 'flex',
       [MQ.S]: {
@@ -98,7 +103,7 @@ const styles = {
         marginTop: -5, // line height causes misalignemnt to right column content
         padding: 0,
       },
-    }),
+    },
   ],
 };
 

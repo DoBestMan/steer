@@ -1,7 +1,7 @@
-import { css } from '@emotion/core';
+import { StylesMap } from '~/lib/constants';
 
-const styles = {
-  root: css({}),
+const styles: StylesMap = {
+  root: {},
 };
 
 export default styles;
