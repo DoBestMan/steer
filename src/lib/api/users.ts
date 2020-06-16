@@ -42,9 +42,9 @@ export async function apiAddUserSearchHistory(item: UserHistorySearchItem) {
   });
 }
 
-export async function apiDeletetUserSearchHistory() {
+export async function apiDeleteUserSearchHistory() {
   return await fetch<null>({
-    endpoint: '/users/me/history/search/all',
+    endpoint: '/users/me/history/search',
     includeAuthorization: true,
     method: 'delete',
   });

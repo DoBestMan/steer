@@ -1,5 +1,7 @@
 import { RefObject, useCallback, useState } from 'react';
 
+import { SiteSearchResultGroup } from '~/data/models/SiteSearchResultGroup';
+import { SiteSearchResultImageItem } from '~/data/models/SiteSearchResultImageItem';
 import { SiteSearchResultTextItem } from '~/data/models/SiteSearchResultTextItem';
 import { SearchDataParams } from '~/lib/api/search';
 import { TIME } from '~/lib/constants';
@@ -19,22 +21,26 @@ import SearchAutocomplete from './SearchAutocomplete';
 import SearchSupport from './SearchSupport';
 
 interface Props {
+  addPastSearch: (
+    item: SiteSearchResultTextItem | SiteSearchResultImageItem,
+  ) => void;
   forwardedRef?: RefObject<HTMLDivElement>;
   isCustomerServiceEnabled: boolean;
   onClearSearchesClick: () => void;
   onCloseSearchClick: () => void;
   onSearchQuery: ({ queryText, queryType }: SearchDataParams) => void;
-  pastSearches: SiteSearchResultTextItem[];
+  pastSearches: SiteSearchResultGroup;
   results: Results;
 }
 
 function Search({
-  onSearchQuery,
+  addPastSearch,
+  forwardedRef,
   isCustomerServiceEnabled,
   onClearSearchesClick,
   onCloseSearchClick,
+  onSearchQuery,
   pastSearches,
-  forwardedRef,
   results,
 }: Props) {
   const [queryText, setQueryText] = useState('');
@@ -100,6 +106,8 @@ function Search({
       }
 
       handleSearchQuery(searchResult);
+    } else if (action.type === SearchActionType.LINK) {
+      addPastSearch(searchResult);
     }
   };
 
@@ -125,7 +133,6 @@ function Search({
     }
   };
 
-  const handlePastSearchClick = () => {};
   const handleSupportClick = () => {};
 
   const handleInputFocus = (inputType: SearchInputEnum) => {
@@ -159,7 +166,7 @@ function Search({
       {shouldShowInitialSearch && (
         <InitialSearch
           onClearSearchesClick={handleClearSearchesClick}
-          onPastSearchClick={handlePastSearchClick}
+          onPastSearchClick={handleValueSelection}
           onSearchCategoryClick={handleSearchCategoryClick}
           pastSearches={pastSearches}
         />

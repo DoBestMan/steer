@@ -12,6 +12,7 @@ import {
 } from './AdditionalInfoModal/AdditionalInfoModal.constants';
 import Search from './Search';
 import {
+  emptySiteSearchResultGroup,
   noResultsWithSuggestions,
   noSearchResults,
   partNumberResults,
@@ -46,6 +47,7 @@ function getCategoryResults(category: string) {
   }
 }
 
+const handleAddPastSearch = action('Add past search');
 const handleCloseSearchClick = action('Close search');
 const handleClearSearchesClick = action('Clear searches');
 const handleSearchQuery = action('Search for query');
@@ -54,11 +56,12 @@ export function PastSearchResults() {
   const [pastSearches, setPastSearches] = useState(pastSearchResults);
 
   const clearSearches = function () {
-    setPastSearches([]);
+    setPastSearches(emptySiteSearchResultGroup);
   };
 
   return (
     <Search
+      addPastSearch={handleAddPastSearch}
       isCustomerServiceEnabled={boolean('Is Business Hours', true)}
       onClearSearchesClick={clearSearches}
       onCloseSearchClick={handleCloseSearchClick}
@@ -72,11 +75,12 @@ export function PastSearchResults() {
 export function SearchResultsRegular() {
   return (
     <Search
+      addPastSearch={handleAddPastSearch}
       isCustomerServiceEnabled={boolean('Is Business Hours', true)}
       onClearSearchesClick={handleClearSearchesClick}
       onCloseSearchClick={handleCloseSearchClick}
       onSearchQuery={handleSearchQuery}
-      pastSearches={[]}
+      pastSearches={emptySiteSearchResultGroup}
       results={simpleSearchResults}
     />
   );
@@ -85,11 +89,12 @@ export function SearchResultsRegular() {
 export function SearchResultsPartNumber() {
   return (
     <Search
+      addPastSearch={handleAddPastSearch}
       isCustomerServiceEnabled={boolean('Is Business Hours', true)}
       onClearSearchesClick={handleClearSearchesClick}
       onCloseSearchClick={handleCloseSearchClick}
       onSearchQuery={handleSearchQuery}
-      pastSearches={[]}
+      pastSearches={emptySiteSearchResultGroup}
       results={partNumberResults}
     />
   );
@@ -98,11 +103,12 @@ export function SearchResultsPartNumber() {
 export function SearchResultsTireSize() {
   return (
     <Search
+      addPastSearch={handleAddPastSearch}
       isCustomerServiceEnabled={boolean('Is Business Hours', true)}
       onClearSearchesClick={handleClearSearchesClick}
       onCloseSearchClick={handleCloseSearchClick}
       onSearchQuery={handleSearchQuery}
-      pastSearches={[]}
+      pastSearches={emptySiteSearchResultGroup}
       results={tireSizeResults}
     />
   );
@@ -117,11 +123,12 @@ export function SearchBy() {
 
   return (
     <Search
+      addPastSearch={handleAddPastSearch}
       isCustomerServiceEnabled={boolean('Is Business Hours', true)}
       onClearSearchesClick={handleClearSearchesClick}
       onCloseSearchClick={handleCloseSearchClick}
       onSearchQuery={searchQuery}
-      pastSearches={[]}
+      pastSearches={emptySiteSearchResultGroup}
       results={results}
     />
   );
@@ -166,11 +173,12 @@ export function VehicleTrimModal() {
 export function NoResultsNoSuggestions() {
   return (
     <Search
+      addPastSearch={handleAddPastSearch}
       isCustomerServiceEnabled={boolean('Is Business Hours', true)}
       onClearSearchesClick={handleClearSearchesClick}
       onCloseSearchClick={handleCloseSearchClick}
       onSearchQuery={handleSearchQuery}
-      pastSearches={[]}
+      pastSearches={emptySiteSearchResultGroup}
       results={noSearchResults}
     />
   );
@@ -179,11 +187,12 @@ export function NoResultsNoSuggestions() {
 export function NoResultsWithSuggestions() {
   return (
     <Search
+      addPastSearch={handleAddPastSearch}
       isCustomerServiceEnabled={boolean('Is Business Hours', true)}
       onClearSearchesClick={handleClearSearchesClick}
       onCloseSearchClick={handleCloseSearchClick}
       onSearchQuery={handleSearchQuery}
-      pastSearches={[]}
+      pastSearches={emptySiteSearchResultGroup}
       results={noResultsWithSuggestions}
     />
   );

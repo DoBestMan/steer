@@ -54,6 +54,7 @@ function SearchCarousel({
                     css={styles.carouselButton}
                     href={href}
                     isExternal={isExternal}
+                    onClick={handleClick(item)}
                     onFocus={onFocus(index)}
                   >
                     <Image

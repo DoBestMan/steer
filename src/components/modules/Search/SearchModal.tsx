@@ -1,5 +1,5 @@
 import { clearAllBodyScrollLocks, disableBodyScroll } from 'body-scroll-lock';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 import Modal from '~/components/global/Modal/Modal';
 import { useSearchContext } from '~/components/modules/Search/Search.context';
@@ -7,20 +7,28 @@ import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
 import { MODAL_THEME } from '~/lib/constants';
 
 import Search from './Search';
-import { pastSearchResults } from './Search.mocks';
 
 function SearchModal() {
-  const [pastSearches, setPastSearches] = useState(pastSearchResults);
   const {
+    addPastSearch,
+    deletePastSearches,
+    getPastSearches,
     isSearchOpen,
+    pastSearches,
     searchQuery,
     searchResults,
     toggleIsSearchOpen,
   } = useSearchContext();
   const { customerServiceEnabled } = useSiteGlobalsContext();
   const handleClearSearchesClick = function () {
-    setPastSearches([]);
+    deletePastSearches();
   };
+
+  useEffect(() => {
+    if (isSearchOpen) {
+      getPastSearches();
+    }
+  }, [isSearchOpen, getPastSearches]);
 
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -46,6 +54,7 @@ function SearchModal() {
       isOpen={isSearchOpen}
     >
       <Search
+        addPastSearch={addPastSearch}
         isCustomerServiceEnabled={customerServiceEnabled}
         forwardedRef={contentRef}
         onClearSearchesClick={handleClearSearchesClick}

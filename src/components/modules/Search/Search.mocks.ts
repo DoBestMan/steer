@@ -1,10 +1,16 @@
 import { SiteSearchResultActionQuery } from '~/data/models/SiteSearchResultActionQuery';
+import { SiteSearchResultGroup } from '~/data/models/SiteSearchResultGroup';
 import { SiteSearchResultImageItem } from '~/data/models/SiteSearchResultImageItem';
 import { SiteSearchResultTextItem } from '~/data/models/SiteSearchResultTextItem';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import { Results } from './Search.types';
+
+export const emptySiteSearchResultGroup: SiteSearchResultGroup = {
+  label: '',
+  siteSearchResultList: [],
+};
 
 export const supportResultMock = {
   action: {
@@ -18,88 +24,91 @@ export const supportResultMock = {
   type: 'SiteSearchResultTextItem',
 } as SiteSearchResultTextItem;
 
-export const pastSearchResults = [
-  {
-    action: {
-      queryText: 'Mini Cooper 2018 Hardtop',
-      queryType: 'makeModel',
-      type: 'SiteSearchResultActionQuery',
-    } as SiteSearchResultActionQuery,
-    detailLabel: null,
-    label: 'Mini Cooper 2018 Hardtop',
-    labelSegments: [
-      {
-        label: 'Mini Cooper 2018 Hardtop',
-        matches: false,
-      },
-    ],
-    type: 'SiteSearchResultTextItem',
-  } as SiteSearchResultTextItem,
-  {
-    action: {
-      queryText: 'Honda Civic 2016 EX-L',
-      queryType: 'makeModel',
-      type: 'SiteSearchResultActionQuery',
-    } as SiteSearchResultActionQuery,
-    detailLabel: null,
-    label: 'Honda Civic 2016 EX-L',
-    labelSegments: [
-      {
-        label: 'Honda Civic 2016 EX-L',
-        matches: false,
-      },
-    ],
-    type: 'SiteSearchResultTextItem',
-  } as SiteSearchResultTextItem,
-  {
-    action: {
-      queryText: '215/50R16',
-      queryType: 'makeModel',
-      type: 'SiteSearchResultActionQuery',
-    } as SiteSearchResultActionQuery,
-    detailLabel: null,
-    label: '215/50R16',
-    labelSegments: [
-      {
-        label: '215/50R16',
-        matches: false,
-      },
-    ],
-    type: 'SiteSearchResultTextItem',
-  } as SiteSearchResultTextItem,
-  {
-    action: {
-      queryText: 'Toyota Sienna 2018 LE',
-      queryType: 'makeModel',
-      type: 'SiteSearchResultActionQuery',
-    } as SiteSearchResultActionQuery,
-    detailLabel: null,
-    label: 'Toyota Sienna 2018 LE',
-    labelSegments: [
-      {
-        label: 'Toyota Sienna 2018 LE',
-        matches: false,
-      },
-    ],
-    type: 'SiteSearchResultTextItem',
-  } as SiteSearchResultTextItem,
-  {
-    action: {
-      queryText: 'Hankook Kinergy PT',
-      queryType: 'makeModel',
-      type: 'SiteSearchResultActionQuery',
-    } as SiteSearchResultActionQuery,
-    detailLabel: null,
-    label: 'Hankook Kinergy PT',
-    labelSegments: [
-      {
-        label: 'Hankook Kinergy PT',
-        matches: false,
-      },
-    ],
-    type: 'SiteSearchResultTextItem',
-  } as SiteSearchResultTextItem,
-];
+export const pastSearchResults: SiteSearchResultGroup = {
+  label: '',
+  siteSearchResultList: [
+    {
+      action: {
+        queryText: 'Mini Cooper 2018 Hardtop',
+        queryType: 'makeModel',
+        type: 'SiteSearchResultActionQuery',
+      } as SiteSearchResultActionQuery,
+      detailLabel: null,
+      label: 'Mini Cooper 2018 Hardtop',
+      labelSegments: [
+        {
+          label: 'Mini Cooper 2018 Hardtop',
+          matches: false,
+        },
+      ],
+      type: 'SiteSearchResultTextItem',
+    } as SiteSearchResultTextItem,
+    {
+      action: {
+        queryText: 'Honda Civic 2016 EX-L',
+        queryType: 'makeModel',
+        type: 'SiteSearchResultActionQuery',
+      } as SiteSearchResultActionQuery,
+      detailLabel: null,
+      label: 'Honda Civic 2016 EX-L',
+      labelSegments: [
+        {
+          label: 'Honda Civic 2016 EX-L',
+          matches: false,
+        },
+      ],
+      type: 'SiteSearchResultTextItem',
+    } as SiteSearchResultTextItem,
+    {
+      action: {
+        queryText: '215/50R16',
+        queryType: 'makeModel',
+        type: 'SiteSearchResultActionQuery',
+      } as SiteSearchResultActionQuery,
+      detailLabel: null,
+      label: '215/50R16',
+      labelSegments: [
+        {
+          label: '215/50R16',
+          matches: false,
+        },
+      ],
+      type: 'SiteSearchResultTextItem',
+    } as SiteSearchResultTextItem,
+    {
+      action: {
+        queryText: 'Toyota Sienna 2018 LE',
+        queryType: 'makeModel',
+        type: 'SiteSearchResultActionQuery',
+      } as SiteSearchResultActionQuery,
+      detailLabel: null,
+      label: 'Toyota Sienna 2018 LE',
+      labelSegments: [
+        {
+          label: 'Toyota Sienna 2018 LE',
+          matches: false,
+        },
+      ],
+      type: 'SiteSearchResultTextItem',
+    } as SiteSearchResultTextItem,
+    {
+      action: {
+        queryText: 'Hankook Kinergy PT',
+        queryType: 'makeModel',
+        type: 'SiteSearchResultActionQuery',
+      } as SiteSearchResultActionQuery,
+      detailLabel: null,
+      label: 'Hankook Kinergy PT',
+      labelSegments: [
+        {
+          label: 'Hankook Kinergy PT',
+          matches: false,
+        },
+      ],
+      type: 'SiteSearchResultTextItem',
+    } as SiteSearchResultTextItem,
+  ],
+};
 
 export const initialSearchCategories = [
   {

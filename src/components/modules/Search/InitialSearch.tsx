@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Transition } from 'react-transition-group';
 import { TransitionStatus } from 'react-transition-group/Transition';
 
 import Link from '~/components/global/Link/Link';
+import { SiteSearchResultGroup } from '~/data/models/SiteSearchResultGroup';
 import { SiteSearchResultTextItem } from '~/data/models/SiteSearchResultTextItem';
 import { LINK_TYPES, THEME, TIME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
@@ -10,13 +11,14 @@ import { typography } from '~/styles/typography.styles';
 
 import { initialSearchCategories } from './Search.mocks';
 import styles from './Search.styles';
+import { SearchResult, SearchResultEnum } from './Search.types';
 import SearchSection from './SearchSection';
 
 interface Props {
   onClearSearchesClick: () => void;
-  onPastSearchClick: () => void;
+  onPastSearchClick: (value: SearchResult) => void;
   onSearchCategoryClick: (searchResult: SiteSearchResultTextItem) => void;
-  pastSearches: SiteSearchResultTextItem[];
+  pastSearches: SiteSearchResultGroup;
 }
 
 function InitialSearch({
@@ -25,7 +27,11 @@ function InitialSearch({
   onSearchCategoryClick,
   pastSearches,
 }: Props) {
-  const [visiblePastSearches] = useState(pastSearches);
+  const [visiblePastSearches, setVisiblePastSearches] = useState(pastSearches);
+
+  useEffect(() => {
+    setVisiblePastSearches(pastSearches);
+  }, [pastSearches]);
 
   const pastSearchesEyebrow = (
     <div css={styles.clearPastSearchesWrapper}>
@@ -42,6 +48,13 @@ function InitialSearch({
     </div>
   );
 
+  const siteSearchResultTextList: SiteSearchResultTextItem[] = [];
+  visiblePastSearches.siteSearchResultList.forEach((siteSearchResult) => {
+    if (siteSearchResult.type === SearchResultEnum.TEXT) {
+      siteSearchResultTextList.push(siteSearchResult);
+    }
+  });
+
   return (
     <>
       <div css={styles.searchSectionWrapper}>
@@ -55,7 +68,7 @@ function InitialSearch({
         appear
         mountOnEnter
         unmountOnExit
-        in={pastSearches.length > 0}
+        in={pastSearches.siteSearchResultList.length > 0}
         timeout={TIME.MS300}
       >
         {(searchTransitionState: TransitionStatus) => {
@@ -69,7 +82,7 @@ function InitialSearch({
               <SearchSection
                 label={pastSearchesEyebrow}
                 onClick={onPastSearchClick}
-                siteSearchResultList={visiblePastSearches}
+                siteSearchResultList={siteSearchResultTextList}
               />
             </div>
           );

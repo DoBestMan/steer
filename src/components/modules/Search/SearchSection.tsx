@@ -39,25 +39,27 @@ function SearchSection({
 
             const innerContent = (
               <>
-                {item.labelSegments.map((segment) => (
-                  <span
-                    key={segment.label}
-                    css={[segment.matches && styles.searchQuery]}
-                  >
-                    {segment.label}
-                  </span>
-                ))}
+                {item.labelSegments.length > 0 ? (
+                  item.labelSegments.map((segment, i) => (
+                    <span key={i} css={[segment.matches && styles.searchQuery]}>
+                      {segment.label}
+                    </span>
+                  ))
+                ) : (
+                  <span>{item.label}</span>
+                )}
               </>
             );
 
             if (item.action.type === SearchActionType.LINK) {
               const { href, isExternal } = item.action.link;
               return (
-                <li css={styles.listItem} key={item.label} ref={pushRefToArray}>
+                <li css={styles.listItem} key={index} ref={pushRefToArray}>
                   <BaseLink
                     css={[styles.itemButton, isSelected && styles.isSelected]}
                     href={href}
                     isExternal={isExternal}
+                    onClick={handleClick(item)}
                     onFocus={onFocus(index)}
                   >
                     {innerContent}
@@ -72,7 +74,7 @@ function SearchSection({
             }
 
             return (
-              <li css={styles.listItem} key={item.label} ref={pushRefToArray}>
+              <li css={styles.listItem} key={index} ref={pushRefToArray}>
                 <button
                   css={[styles.itemButton, isSelected && styles.isSelected]}
                   onClick={handleClick(item)}
