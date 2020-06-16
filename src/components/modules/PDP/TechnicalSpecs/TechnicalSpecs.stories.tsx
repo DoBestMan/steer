@@ -11,8 +11,9 @@ export default {
   title: 'PDP/Technical Specs',
 };
 
-export function TechnicalSpecsCarousel() {
+export function TechnicalSpecsWithKnobs() {
   const isCustomerServiceEnabled = boolean('Is Business Hours', true);
+
   return (
     <Grid css={{ backgroundColor: COLORS.GLOBAL.BLACK }}>
       <TechnicalSpecs

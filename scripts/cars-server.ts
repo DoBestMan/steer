@@ -164,7 +164,15 @@ import { createFile, lineBreak } from './utils';
     const importTypes = 'import { CarDetail } from "./Car.types";';
     const importEnums = 'import { Cars } from "./Car.enums";';
 
-    const carsConstant = `${lineBreak}export const CARS: Record<string, string> = { ${Object.keys(
+    const carsKeys = `${lineBreak}export enum CARS_KEYS { ${Object.keys(
+      carDetailsOrdered,
+    ).map((key) => {
+      // generate CONSTANT_NAME
+      const keyStr = key.replace('car--', '').replace(/-/g, '_').toUpperCase();
+      return `${keyStr} = '${keyStr}'`;
+    })} }`;
+
+    const carsConstant = `${lineBreak}export const CARS: Record<CARS_KEYS, string> = { ${Object.keys(
       carDetailsOrdered,
     ).map((key) => {
       // generate CONSTANT_NAME
@@ -176,7 +184,7 @@ import { createFile, lineBreak } from './utils';
       carDetailsOrdered,
     )}`;
 
-    return `${fileDescription}${lineBreak}${lineBreak}${importTypes}${lineBreak}${importEnums}${lineBreak}${lineBreak}${carsConstant}${lineBreak}${lineBreak}${carsDetailsConstant}${lineBreak}${lineBreak}${lineBreak}${lineBreak}${lineBreak}${fileDescription}${lineBreak}`;
+    return `${fileDescription}${lineBreak}${lineBreak}${importTypes}${lineBreak}${importEnums}${lineBreak}${lineBreak}${carsKeys}${lineBreak}${carsConstant}${lineBreak}${lineBreak}${carsDetailsConstant}${lineBreak}${lineBreak}${lineBreak}${lineBreak}${lineBreak}${fileDescription}${lineBreak}`;
   };
 
   const getCarsEnumContent = (): string => {

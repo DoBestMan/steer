@@ -27,6 +27,7 @@ export type Icon =
   | 'geolocation'
   | 'grip'
   | 'instagram'
+  | 'keys'
   | 'lightning'
   | 'linkedin'
   | 'local-business'

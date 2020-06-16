@@ -58,7 +58,11 @@ module.exports = {
     ],
     curly: 'error',
     'typescript-sort-keys/interface': 'error',
-    'typescript-sort-keys/string-enum': 'error',
+    'typescript-sort-keys/string-enum': [
+      'error',
+      'asc',
+      { caseSensitive: false, natural: true },
+    ],
     quotes: ['error', 'single', { avoidEscape: true }],
   },
   settings: {

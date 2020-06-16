@@ -18,6 +18,8 @@ export const WHEEL_WIDTH: Record<Breakpoint, number> = {
   XL: 230,
 };
 
+export const STROKE_WIDTH = 2;
+
 export const DEFAULT_SCALE_VECTOR: Record<Breakpoint, number> = {
   S: 1,
   M: 1.5,

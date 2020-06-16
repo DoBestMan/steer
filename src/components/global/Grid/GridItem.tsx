@@ -17,6 +17,11 @@ interface ContainerProps {
   gridColumnM?: string;
   gridColumnS?: string;
   gridColumnXL?: string;
+  gridRow?: string;
+  gridRowL?: string;
+  gridRowM?: string;
+  gridRowS?: string;
+  gridRowXL?: string;
   isGrid?: boolean;
 }
 
@@ -73,6 +78,16 @@ function gridColumnProperty(value = 'start/end'): object {
   };
 }
 
+function gridRowProperty(value?: string): object {
+  if (!value) {
+    return {};
+  }
+
+  return {
+    gridRow: value,
+  };
+}
+
 function styledContainer(props: ContainerProps) {
   const {
     gridColumn = 'start/end',
@@ -80,6 +95,11 @@ function styledContainer(props: ContainerProps) {
     gridColumnM,
     gridColumnL,
     gridColumnXL,
+    gridRow,
+    gridRowS,
+    gridRowM,
+    gridRowL,
+    gridRowXL,
     isGrid,
   } = props;
 
@@ -91,21 +111,26 @@ function styledContainer(props: ContainerProps) {
   return {
     ...(isGrid && getSubgridTemplate(BREAKPOINT_SIZES.S, gridColumn)),
     ...gridColumnProperty(gridColumn),
+    ...gridRowProperty(gridRow),
 
     [MQ.S]: {
       ...(gridColumnS && gridColumnProperty(gridColumnS)),
+      ...(gridRowS && gridRowProperty(gridRowS)),
       ...(isGrid && getSubgridTemplate(BREAKPOINT_SIZES.S, gridColumnSForGrid)),
     },
     [MQ.M]: {
       ...(gridColumnM && gridColumnProperty(gridColumnM)),
+      ...(gridRowM && gridRowProperty(gridRowM)),
       ...(isGrid && getSubgridTemplate(BREAKPOINT_SIZES.M, gridColumnMForGrid)),
     },
     [MQ.L]: {
       ...(gridColumnL && gridColumnProperty(gridColumnL)),
+      ...(gridRowL && gridRowProperty(gridRowL)),
       ...(isGrid && getSubgridTemplate(BREAKPOINT_SIZES.L, gridColumnLForGrid)),
     },
     [MQ.XL]: {
       ...(gridColumnXL && gridColumnProperty(gridColumnXL)),
+      ...(gridRowXL && gridRowProperty(gridRowXL)),
       ...(isGrid &&
         getSubgridTemplate(BREAKPOINT_SIZES.XL, gridColumnXLForGrid)),
     },
@@ -125,6 +150,11 @@ function GridItem(props: Props) {
     fullbleedXL,
     isGrid = false,
     children,
+    gridRow,
+    gridRowS,
+    gridRowM,
+    gridRowL,
+    gridRowXL,
   } = props;
 
   let {
@@ -168,6 +198,11 @@ function GridItem(props: Props) {
       gridColumnM={gridColumnM}
       gridColumnL={gridColumnL}
       gridColumnXL={gridColumnXL}
+      gridRow={gridRow}
+      gridRowS={gridRowS}
+      gridRowM={gridRowM}
+      gridRowL={gridRowL}
+      gridRowXL={gridRowXL}
       isGrid={isGrid}
       {...props}
     >

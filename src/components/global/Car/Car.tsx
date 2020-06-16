@@ -11,12 +11,15 @@ type Props = {
   // supports string in case wrong id is given, still renders a default car
   animateWheel?: boolean;
   carId: Cars | string;
+  scale?: number;
   scaleAcrossBreakpoints?: boolean;
   solid?: boolean;
+  solidColor?: string;
+  strokeWidth?: number;
 };
 
 function styledCarContainer(props: Props) {
-  const { carId } = props;
+  const { carId, solidColor, strokeWidth } = props;
 
   const carDetail = CAR_DETAILS[carId as Cars];
 
@@ -29,6 +32,18 @@ function styledCarContainer(props: Props) {
       '.front-wheel': {
         transformOrigin: `${carDetail.frontWheelCenterPos.x}px ${carDetail.frontWheelCenterPos.y}px`,
       },
+
+      ...(strokeWidth && {
+        '.body-car line, .body-car path, .body-car polyline': {
+          strokeWidth,
+        },
+      }),
+
+      ...(solidColor && {
+        '.solid-body-background path': {
+          fill: solidColor,
+        },
+      }),
     },
   };
 
@@ -40,6 +55,7 @@ const CarContainer = styled('span')<Props>(styledCarContainer);
 function Car({
   carId,
   solid,
+  scale,
   scaleAcrossBreakpoints,
   animateWheel,
   ...rest
@@ -56,7 +72,10 @@ function Car({
         styles.container,
         solid && styles.solid,
         animateWheel && styles.animateWheel,
-        scaleAcrossBreakpoints && styles.scaleAcrossBreakpoints,
+        !scale && scaleAcrossBreakpoints && styles.scaleAcrossBreakpoints,
+        scale && {
+          transform: `scale3d(${scale}, ${scale}, ${scale})`,
+        },
       ]}
       {...rest}
     >
