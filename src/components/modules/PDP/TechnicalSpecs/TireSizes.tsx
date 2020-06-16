@@ -23,7 +23,7 @@ function Sizes({ options }: Props) {
             </Link>
             <p css={styles.price}>{item.price}</p>
           </div>
-          <table>
+          <table css={styles.specsTable}>
             <thead css={styles.screenReadersVisibleOnly}>
               <tr>
                 <th css={styles.specHeaderCell} scope="col">

@@ -29,6 +29,7 @@ const styles: StylesMap = {
     minWidth: SPACING.SIZE_90,
     paddingRight: SPACING.SIZE_20,
   },
+  specsTable: typography.smallCopyTight,
   specsTableHeader: {
     minHeight: 0,
     visibility: 'hidden',

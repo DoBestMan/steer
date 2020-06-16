@@ -15,9 +15,12 @@ const styles: StylesMap = {
       gridRow: 2,
     },
   },
-  findMyTireSizeLabel: {
-    marginTop: SPACING.SIZE_20,
-  },
+  findMyTireSizeLabel: [
+    typography.smallCopyTight,
+    {
+      marginTop: SPACING.SIZE_20,
+    },
+  ],
   header: {
     paddingBottom: SPACING.SIZE_40,
   },

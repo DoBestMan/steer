@@ -64,34 +64,41 @@ function Accordion({
   }, [items, itemsToShow]);
 
   return (
-    <>
+    <div>
       {items
         .slice(0, shouldShowAll ? undefined : itemsToShow)
-        .map((item, idx, array) => (
-          <div
-            key={idx}
-            ref={itemsRefs[idx]}
-            css={idx < array.length - 1 && styles.itemContainerBorder}
-          >
-            <AccordionItem
-              label={item.label}
-              value={item.value}
-              id={`accordion-item-${item.id}-${idx}`}
-              content={item.content}
-              onToggle={toggleItemHandler(idx)}
-              isExpanded={expandedItems.includes(idx)}
+        .map((item, idx) => {
+          const isExpanded = expandedItems.includes(idx);
+
+          return (
+            <div
+              key={idx}
+              ref={itemsRefs[idx]}
+              css={[
+                styles.itemContainer,
+                isExpanded && styles.itemContainerActive,
+              ]}
             >
-              {children && Children.toArray(children)[idx]}
-            </AccordionItem>
-          </div>
-        ))}
+              <AccordionItem
+                label={item.label}
+                value={item.value}
+                id={`accordion-item-${item.id}-${idx}`}
+                content={item.content}
+                onToggle={toggleItemHandler(idx)}
+                isExpanded={isExpanded}
+              >
+                {children && Children.toArray(children)[idx]}
+              </AccordionItem>
+            </div>
+          );
+        })}
       {!shouldShowAll && (
         <button onClick={showAllHandler} css={styles.showAll}>
           <span>{showAllLabel}</span>
           <Icon name={ICONS.CHEVRON_DOWN} css={styles.showAllIcon} />
         </button>
       )}
-    </>
+    </div>
   );
 }
 

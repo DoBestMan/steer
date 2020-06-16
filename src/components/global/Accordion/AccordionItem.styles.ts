@@ -64,15 +64,15 @@ const styles: StylesMap = {
     typography.bodyCopyTight,
     {
       '&[aria-hidden="false"]': {
-        marginBottom: SPACING.SIZE_20,
         opacity: 1,
+        paddingBottom: SPACING.SIZE_20,
         visibility: 'visible',
       },
       color: COLORS.DARK.GRAY_40,
-      marginBottom: 0,
       maxHeight: 0,
       opacity: 0,
       overflow: 'hidden',
+      paddingBottom: 0,
       transition: `opacity ${TIME.MS200}ms ${EASING.CIRC_EASE_OUT}, max-height ${TIME.MS400}ms ${EASING.CIRC_EASE_OUT}`,
       visibility: 'hidden',
     },

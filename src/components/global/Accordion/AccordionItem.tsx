@@ -5,7 +5,7 @@ import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Markdown from '~/components/global/Markdown/Markdown';
 import { useWindowSize } from '~/hooks/useWindowSize';
-import { KEYCODES } from '~/lib/constants';
+import { KEYCODES, SPACING } from '~/lib/constants';
 
 import styles from './AccordionItem.styles';
 
@@ -100,7 +100,7 @@ function AccordionItem({
         role="region"
         css={[
           styles.contentContainer,
-          isExpanded && { maxHeight: containerHeight },
+          isExpanded && { maxHeight: containerHeight + SPACING.SIZE_20 },
         ]}
       >
         <div ref={innerElement} css={styles.contentInnerContent}>

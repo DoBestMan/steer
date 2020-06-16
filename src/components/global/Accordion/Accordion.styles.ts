@@ -33,8 +33,15 @@ const styles: StylesMap = {
       padding: SPACING.SIZE_05,
     },
   },
-  itemContainerBorder: {
-    borderBottom: BORDERS.SOLID_GRAY_80_1PX,
+  itemContainer: {
+    '&:not(:first-child)': {
+      borderTop: BORDERS.SOLID_GRAY_80_1PX,
+    },
+  },
+  itemContainerActive: {
+    '&:not(:first-child)': {
+      borderTopColor: COLORS.GLOBAL.WHITE,
+    },
   },
 };
 
