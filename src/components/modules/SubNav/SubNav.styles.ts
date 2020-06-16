@@ -133,16 +133,19 @@ const styles: StylesMap = {
     transition: `all ${TIME.MS400}ms ${EASING.CUBIC_EASE_IN} 400ms`, // fade in content after subnav open animation
   },
   navContent: {
+    backgroundColor: COLORS.GLOBAL.WHITE,
     display: 'flex',
     flexDirection: 'column',
     height: '100%',
     overflow: 'auto',
     position: 'relative',
     zIndex: Z_INDEX.TOP + 1,
+    [MQ.M]: {
+      backgroundColor: 'transparent',
+    },
   },
   navContentNested: {
     display: 'flex',
-    flexBasis: 'auto',
     flexGrow: 1,
     width: '100%',
   },

@@ -15,7 +15,6 @@ const styles: CSSObject = {
     },
   },
   categoryContent: {
-    background: COLORS.GLOBAL.WHITE,
     height: '100%',
     width: '100%',
     [MQ.S]: {
