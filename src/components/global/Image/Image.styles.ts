@@ -30,6 +30,7 @@ const styles: StylesMap = {
     display: 'block',
     objectFit: 'contain',
     transition: `backgroundColor ${TIME.MS100}ms ease-in-out`,
+    width: '100%',
   },
 };
 

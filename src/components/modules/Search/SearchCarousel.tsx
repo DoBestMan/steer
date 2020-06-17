@@ -25,7 +25,7 @@ function SearchCarousel({
     onClick(searchResult);
   };
 
-  const widths = [50, 100];
+  const widths = [90, 120, 140];
 
   return (
     <Grid>
@@ -59,9 +59,10 @@ function SearchCarousel({
                   >
                     <Image
                       altText={item.image.altText}
+                      height={item.image.height}
+                      responsive
                       src={item.image.src}
                       width={item.image.width || 50} // TODO: with real data, "|| 50" should be useless
-                      height={item.image.height}
                       widths={widths}
                     />
                   </BaseLink>

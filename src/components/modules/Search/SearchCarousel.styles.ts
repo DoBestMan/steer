@@ -61,18 +61,18 @@ const styles: StylesMap = {
     '&.swiper-slide': {
       width: 'initial',
     },
-    '&:first-child': {
+    '&:first-of-type': {
       marginLeft: GRID_MARGIN.S,
     },
     paddingRight: SPACING.SIZE_15,
     [MQ.M]: {
-      '&:first-child': {
+      '&:first-of-type': {
         marginLeft: GRID_MARGIN.M,
       },
       paddingRight: SPACING.SIZE_20,
     },
     [MQ.L]: {
-      '&:first-child': {
+      '&:first-of-type': {
         marginLeft: `calc(${PADDING_LEFT_L})`,
       },
       paddingRight: SPACING.SIZE_30,
