@@ -30,8 +30,9 @@ function Installation({
       <Grid>
         <GridItem
           as="h2"
+          gridColumnM="start/6"
           gridColumnL="3/8"
-          gridColumnXL="3/7"
+          gridColumnXL="3/8"
           gridRowL="1"
           css={styles.headline}
         >
@@ -39,8 +40,9 @@ function Installation({
         </GridItem>
         <GridItem
           as="h3"
+          gridColumnM="start/6"
           gridColumnL="3/8"
-          gridColumnXL="3/7"
+          gridColumnXL="3/8"
           gridRowL="2/5"
           css={styles.title}
         >
@@ -57,7 +59,7 @@ function Installation({
         </GridItem>
         <GridItem
           as="h4"
-          gridColumnM="2/6"
+          gridColumnM="start/6"
           gridColumnL="8/12"
           gridColumnXL="8/11"
           gridRowL="3"
@@ -68,7 +70,7 @@ function Installation({
         </GridItem>
         <GridItem
           as="p"
-          gridColumnM="2/6"
+          gridColumnM="start/6"
           gridColumnL="8/12"
           gridColumnXL="8/11"
           gridRowL="4"
