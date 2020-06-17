@@ -22,6 +22,9 @@
       "close": "Close notification"
     }
   },
+  "accordion": {
+    "showAllDefaultLabel": "See all"
+  },
   "catalog": {
     "filters": {
       "max": "maximum",
@@ -167,7 +170,8 @@
       "verifiedCustomer": "Verified Customer"
     },
     "faq": {
-      "showAllDefaultLabel": "See all"
+      "title": "Have a question?",
+      "showAllLabel": "See all {{total}} questions"
     },
     "technicalSpecs": {
       "imageAlt": "Close-up of tire",

@@ -35,7 +35,7 @@ interface Props {
   specs: Item[];
 }
 
-const technicalSpecsitemsToShow = 8;
+const TECH_SPECS_ITEMS_TO_SHOW = 8;
 
 const headerImage = {
   sm: '/static/assets/pdp/closeup-tire-sm.png',
@@ -99,7 +99,7 @@ function TechnicalSpecs({ isCustomerServiceEnabled, specs, sizes }: Props) {
         >
           <Accordion
             items={specs}
-            itemsToShow={technicalSpecsitemsToShow}
+            itemsToShow={TECH_SPECS_ITEMS_TO_SHOW}
             itemsToShowLabel={ui(
               'pdp.technicalSpecs.technicalSpecs.showAllLabel',
             )}

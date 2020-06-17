@@ -12,6 +12,7 @@ export interface Props {
 function PhoneSupport({
   isCustomerServiceEnabled,
   theme = THEME.LIGHT,
+  ...rest
 }: Props) {
   const supportContent = isCustomerServiceEnabled
     ? data.isBusinessHours
@@ -22,6 +23,7 @@ function PhoneSupport({
       theme={theme}
       icon={ICONS.PHONE}
       href={supportContent.sales.action}
+      {...rest}
     >
       {supportContent.sales.text}
     </IconCTA>

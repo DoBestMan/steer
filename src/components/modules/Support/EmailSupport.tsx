@@ -12,6 +12,7 @@ export interface Props {
 function EmailSupport({
   isCustomerServiceEnabled,
   theme = THEME.LIGHT,
+  ...rest
 }: Props) {
   const supportContent = isCustomerServiceEnabled
     ? data.isBusinessHours
@@ -22,6 +23,7 @@ function EmailSupport({
       theme={theme}
       icon={ICONS.MAIL}
       href={supportContent.support.action}
+      {...rest}
     >
       {supportContent.support.text}
     </IconCTA>

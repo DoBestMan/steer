@@ -38,7 +38,7 @@ function Accordion({
   children,
   items,
   itemsToShow,
-  itemsToShowLabel = ui('pdp.faq.showAllDefaultLabel'),
+  itemsToShowLabel = ui('pdp.accordion.showAllDefaultLabel'),
   singleItemExpandable,
 }: Props) {
   const [shouldShowAll, setShouldShowAll] = useState(
