@@ -10,28 +10,21 @@ import {
   mapUnitToAriaFormatter,
   mapUnitToLabelFormatter,
 } from '../Filters.constants';
-import { FiltersContextProps } from '../Filters.context';
+import { useFiltersContext } from '../Filters.context';
 import FilterPopup from '../Popup/FilterPopup';
 import styles from './SubFilters.styles';
 
-interface Props
-  extends Pick<FiltersContextProps, 'activeFilters' | 'selectingFilter'> {
+interface Props {
   isAdvancedView?: boolean;
-  onClose: FiltersContextProps['clearSelectingFilter'];
-  onOpen: FiltersContextProps['createOpenFilterHandler'];
   priceFilter: CatalogFilterRange;
   resultsCount: number;
   sortFilter: CatalogFilterSort;
 }
 
 export default function SubFilters({
-  activeFilters,
   resultsCount,
   sortFilter,
-  onClose,
-  onOpen,
   priceFilter,
-  selectingFilter,
 }: Props) {
   const {
     currentMax,
@@ -42,6 +35,12 @@ export default function SubFilters({
     step,
     unit,
   } = priceFilter;
+  const {
+    activeFilters,
+    clearSelectingFilter,
+    createOpenFilterHandler,
+    selectingFilter,
+  } = useFiltersContext();
   const min = currentMin || minValue;
   const max = currentMax || maxValue;
   const { lessThan } = useBreakpoints();
@@ -62,7 +61,7 @@ export default function SubFilters({
       <Link
         theme={THEME.LIGHT}
         as="button"
-        onClick={onOpen(priceFilter.label)}
+        onClick={createOpenFilterHandler(priceFilter.label)}
         css={[styles.range, styles.smallShow]}
       >
         {ui('catalog.filters.priceRange', {
@@ -73,7 +72,7 @@ export default function SubFilters({
       {lessThan.L ? (
         <FilterPopup
           isOpen={sortFilter.label === selectingFilter}
-          onClose={onClose}
+          onClose={clearSelectingFilter}
           filter={sortFilter}
         />
       ) : (
@@ -98,14 +97,14 @@ export default function SubFilters({
       <Link
         theme={THEME.LIGHT}
         as="button"
-        onClick={onOpen(sortFilter.label)}
+        onClick={createOpenFilterHandler(sortFilter.label)}
         css={styles.sort}
       >
         {(sortItem && sortItem.title) || sortFilter.items[0].title}
       </Link>
       <FilterPopup
         isOpen={sortFilter.label === selectingFilter}
-        onClose={onClose}
+        onClose={clearSelectingFilter}
         filter={sortFilter}
       />
     </div>

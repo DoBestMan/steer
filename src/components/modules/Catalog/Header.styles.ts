@@ -25,6 +25,13 @@ const styles: StylesMap = {
     alignItems: 'center',
     display: 'flex',
   },
+  filterLabel: [
+    typography.labelCopyTight,
+    {
+      color: COLORS.GLOBAL.BLACK,
+      marginBottom: SPACING.SIZE_15,
+    },
+  ],
   header: {
     marginBottom: SPACING.SIZE_40,
   },

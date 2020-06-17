@@ -1,4 +1,4 @@
-import { ReactNode, useCallback, useState } from 'react';
+import { MouseEvent, ReactNode, useCallback, useState } from 'react';
 
 import { createContext } from '~/lib/utils/context';
 
@@ -39,7 +39,7 @@ export interface FiltersContextProps {
   applyFilters: () => void;
   cancelApplyFilters: () => void;
   clearSelectingFilter: () => void;
-  createOpenFilterHandler: (label: string) => () => void;
+  createOpenFilterHandler: (label: string) => (e?: MouseEvent) => void;
   createResetFiltersHandler: (label: string) => () => void;
   createToggleFilterHandler: (filter: ToggleFilterArgs) => () => void;
   createUpdateFilterGroup: (filter: UpdateFilterArgs) => () => void;
@@ -97,7 +97,14 @@ export function useFiltersContextSetup({ onApplyFilters }: ContextArgs) {
       setFiltersToApply(activeFilters);
     },
     clearSelectingFilter: () => setSelectingFilter(''),
-    createOpenFilterHandler: (label: string) => () => setSelectingFilter(label),
+    createOpenFilterHandler: (label: string) => (e?: MouseEvent) => {
+      setSelectingFilter(label);
+      if (e?.target instanceof HTMLButtonElement) {
+        // force focus, document.activeElement isn't updated if you click
+        // a filter button while another filter dropdown is open
+        e.target.focus();
+      }
+    },
     createResetFiltersHandler(group: string) {
       return () => {
         setFiltersToApply((prevState) => ({

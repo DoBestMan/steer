@@ -225,9 +225,7 @@ export function FilterButtonDropdownWithKnobs() {
         isDropdownOpen={isDropdownOpen}
         onClick={handleButtonClick}
         theme={theme}
-      >
-        {isDropdownOpen && <div css={styles.popup}>Popup content</div>}
-      </FilterButton>
+      />
     </ButtonContainer>
   );
 }
@@ -314,9 +312,7 @@ export function OrangeFilterButtonWithDropdownActive() {
         onClick={handleButtonClick}
         theme={THEME.ORANGE}
         label={text('Label', 'Button Label')}
-      >
-        <div css={styles.popup}>Popup content</div>
-      </FilterButton>
+      />
     </ButtonContainer>
   );
 }
@@ -340,9 +336,7 @@ export function FilterButtonWithDropdownState() {
         }}
         theme={theme}
         label={text('Label', 'Button Label')}
-      >
-        {isActive && <div css={styles.popup}>Popup content</div>}
-      </FilterButton>
+      />
     </ButtonContainer>
   );
 }

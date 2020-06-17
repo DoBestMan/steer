@@ -1,44 +1,28 @@
-/*
- * Dropdown is fixed position to overcome list container height and overflow hidden in main filters list
- * Utils help position dropdown relative to parent element (button or link containing dropdown)
- */
-
-import { CSSProperties, MutableRefObject } from 'react';
-
-interface Args {
-  dropdownEl: MutableRefObject<HTMLDivElement | null>;
-}
+import { CSSProperties } from 'react';
 
 /**
- * Get y position of parent element to use as y position (+ parent height) for dropdown
+ * Get x position of opened button el to use as x position for dropdown
+ * Defaults to left position but flips dropdown (right position)
+ * if button el is in last third of window width for visibility
+ * @returns {} | { left: xPos } | { right: xPos }
  */
-export function getParentY({ dropdownEl }: Args) {
-  const buttonElBounds = dropdownEl.current?.previousElementSibling?.getBoundingClientRect();
-  if (!buttonElBounds) {
-    return 0;
-  }
-  return buttonElBounds.top + buttonElBounds.height;
-}
+export function getPosition(): CSSProperties {
+  const containerEl = document.getElementsByClassName('filters-wrapper')[0];
+  const childrenArr = Array.from(containerEl.children);
+  const selectedButton = childrenArr.find(
+    (node: Element) => node.getAttribute('aria-expanded') === 'true',
+  );
+  const buttonElBounds = selectedButton?.getBoundingClientRect();
 
-/**
- * Get x position of parent element to use as x position for dropdown
- * Flips dropdown if parent el is positioned in last third of window width for full visibility
- */
-export function getParentX({ dropdownEl }: Args): CSSProperties {
-  const parentEl = dropdownEl.current?.previousElementSibling;
-  const buttonElBounds = parentEl?.getBoundingClientRect();
-  if (!buttonElBounds || !(parentEl instanceof HTMLElement)) {
+  if (!buttonElBounds || !selectedButton) {
     return {};
   }
 
   const lastThird = window.innerWidth - window.innerWidth / 3;
   if (buttonElBounds.x > lastThird) {
-    const scrollbarWidth = window.innerWidth - document.body.offsetWidth;
     return {
       right:
-        window.innerWidth -
-        (buttonElBounds.left + parentEl.clientWidth) -
-        scrollbarWidth,
+        window.innerWidth - (buttonElBounds.left + selectedButton.clientWidth),
     };
   }
   return { left: buttonElBounds.x };

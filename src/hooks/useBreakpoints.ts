@@ -10,6 +10,7 @@ type UseBreakpointsProps = {
   is: {
     [key: string]: boolean;
   };
+  isLoading: boolean;
   isMobile: boolean;
   lessThan: { [key: string]: boolean };
 };
@@ -17,8 +18,14 @@ type UseBreakpointsProps = {
 export function useBreakpoints(): UseBreakpointsProps {
   const windowSize = useWindowSize();
   const [bk, setBK] = useState<Breakpoint>(BREAKPOINT_SIZES.S);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
   useEffect(() => {
+    if (!windowSize.width) {
+      return;
+    }
     setBK(getBreakpoint(windowSize.width));
+    setIsLoading(false);
   }, [windowSize]);
 
   return {
@@ -34,6 +41,7 @@ export function useBreakpoints(): UseBreakpointsProps {
       L: bk === BREAKPOINT_SIZES.L,
       XL: bk === BREAKPOINT_SIZES.XL,
     },
+    isLoading,
     isMobile: bk === BREAKPOINT_SIZES.S,
     lessThan: {
       M: BREAKPOINTS[bk] < BREAKPOINTS[BREAKPOINT_SIZES.M],

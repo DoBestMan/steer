@@ -1,12 +1,12 @@
-import { ReactNode, useEffect, useRef, useState } from 'react';
+import { CSSProperties, ReactNode, useEffect, useRef, useState } from 'react';
 
 import FocusTrap from '~/components/global/FocusTrap/FocusTrap';
-import { useScroll } from '~/hooks/useScroll';
+import { useWindowSize } from '~/hooks/useWindowSize';
 import { KEYCODES } from '~/lib/constants';
 
 import ActionBar from './ActionBar';
 import styles from './Dropdown.styles';
-import { getParentX, getParentY } from './Dropdown.utils';
+import { getPosition } from './Dropdown.utils';
 
 interface Props {
   children: ReactNode;
@@ -25,13 +25,9 @@ export default function FilterDropdown({
   onClose,
   onResetFilters,
 }: Props) {
-  const dropdownEl = useRef<HTMLDivElement | null>(null);
-
-  useScroll(() => setYPos(getParentY({ dropdownEl })));
-
-  const [yPos, setYPos] = useState(getParentY({ dropdownEl }));
-  const [xPos, setXPos] = useState(getParentX({ dropdownEl }));
-
+  const dropdownEl = useRef<HTMLDivElement>(null);
+  const [positionStyle, setPosition] = useState<CSSProperties | null>(null);
+  const { width } = useWindowSize();
   useEffect(() => {
     // click/mouse handlers to close dropdown, click outside + escape
     function onKeypress(e: KeyboardEvent) {
@@ -49,19 +45,26 @@ export default function FilterDropdown({
       }
     }
 
-    document.addEventListener('mouseup', onClick);
+    document.addEventListener('mousedown', onClick);
     document.addEventListener('keydown', onKeypress);
     return () => {
-      document.removeEventListener('mouseup', onClick);
+      document.removeEventListener('mousedown', onClick);
       document.removeEventListener('keydown', onKeypress);
     };
   }, [isOpen, onClose]);
 
   useEffect(() => {
-    // update x/y position on open
-    setYPos(getParentY({ dropdownEl }));
-    setXPos(getParentX({ dropdownEl }));
-  }, [isOpen]);
+    // don't update positioning if dropdown isn't open yet
+    if (!isOpen) {
+      return;
+    }
+
+    setPosition(getPosition());
+  }, [isOpen, width]);
+
+  if (!positionStyle) {
+    return null;
+  }
 
   return (
     <FocusTrap active={isOpen} ref={dropdownEl}>
@@ -73,7 +76,7 @@ export default function FilterDropdown({
           isOpen && styles.open,
           hasActionBar && styles.actionBar,
         ]}
-        style={{ ...xPos, top: yPos }}
+        style={positionStyle}
       >
         {/* focus trap and dropdown wrapper need to be in dom to update positioning
         and focus but wait to render children until it's open */}

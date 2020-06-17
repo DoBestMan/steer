@@ -31,7 +31,6 @@ const styles: StylesMap = {
     backgroundColor: COLORS.DARK.GRAY_80,
     borderColor: COLORS.GLOBAL.WHITE,
     color: COLORS.GLOBAL.WHITE,
-    pointerEvents: 'none',
   },
   filterIcon: {
     marginLeft: CONSTANTS.ICON_SPACING,
@@ -48,6 +47,7 @@ const styles: StylesMap = {
       height: CONSTANTS.SIZE,
       padding: `0 ${SPACING.SIZE_25}px`,
       transition: `all ${TIME.MS100}ms ease`,
+      width: 'auto',
     },
   ],
 };

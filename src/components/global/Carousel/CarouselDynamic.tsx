@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react';
-import Swiper, { ReactIdSwiperChildren, SwiperInstance } from 'react-id-swiper';
+import Swiper, {
+  ReactIdSwiperChildren,
+  ReactIdSwiperProps,
+  SwiperInstance,
+} from 'react-id-swiper';
 
-export interface Props {
+export interface Props extends ReactIdSwiperProps {
   activeSlide?: number;
   centerActiveSlide?: boolean;
   children: ReactIdSwiperChildren;

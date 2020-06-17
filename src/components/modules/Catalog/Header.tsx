@@ -1,9 +1,12 @@
 import { useTheme } from 'emotion-theming';
 import { ReactNode } from 'react';
 
-import Filters from './Filters/Filters';
-import { useFiltersContext } from './Filters/Filters.context';
-import { filterRange, filterSort } from './Filters/Filters.mocks';
+import { useBreakpoints } from '~/hooks/useBreakpoints';
+import { ui } from '~/lib/utils/ui-dictionary';
+
+import FilterButtonsCarousel from './Filters/FilterButtonsCarousel';
+import mockFilters, { filterRange, filterSort } from './Filters/Filters.mocks';
+import { getGroupedFilters } from './Filters/Filters.utils';
 import SubFilters from './Filters/SubFilters/SubFilters';
 import styles from './Header.styles';
 import HeaderInfo from './HeaderInfo/HeaderInfo';
@@ -26,20 +29,12 @@ export default function Header({
   ...rest
 }: Props) {
   const { header } = useTheme();
-  const {
-    activeFilters,
-    clearSelectingFilter,
-    createOpenFilterHandler,
-    createToggleFilterHandler,
-    selectingFilter,
-  } = useFiltersContext();
+  const { greaterThan, isLoading } = useBreakpoints();
+  const groupedFilters = greaterThan.M && getGroupedFilters(mockFilters);
+  const filtersToMap = groupedFilters
+    ? groupedFilters.otherFilters
+    : mockFilters;
 
-  const commonProps = {
-    activeFilters,
-    onClose: clearSelectingFilter,
-    onOpen: createOpenFilterHandler,
-    selectingFilter,
-  };
   return (
     <>
       <div css={[styles.root, header.background]}>
@@ -48,16 +43,20 @@ export default function Header({
           isAdvancedView={isAdvancedView}
           {...rest}
         />
-        <Filters
-          {...commonProps}
-          createToggleFilterHandler={createToggleFilterHandler}
-        />
+        <p css={[styles.filterLabel, header.text]}>
+          {ui('catalog.header.filterLabel')}:
+        </p>
+        {!isLoading && (
+          <FilterButtonsCarousel
+            popularFilters={groupedFilters ? groupedFilters.popularFilters : []}
+            filters={filtersToMap}
+          />
+        )}
       </div>
       <SubFilters
         resultsCount={resultsCount}
         priceFilter={filterRange}
         sortFilter={filterSort}
-        {...commonProps}
       />
     </>
   );
