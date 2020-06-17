@@ -3,13 +3,7 @@ import { SiteCatalogPromotionList } from '~/data/models/SiteCatalogPromotionList
 import { SiteImage } from '~/data/models/SiteImage';
 import { SiteLink } from '~/data/models/SiteLink';
 import { SitePrice } from '~/data/models/SitePrice';
-
-export enum PRODUCT_IMAGE_TYPES {
-  SIDETREAD = 'sidetread',
-  SIDEWALL = 'sidewall',
-  TREADFULL = 'treadfull',
-  TREADONLY = 'treadonly',
-}
+import { PRODUCT_IMAGE_TYPES } from '~/lib/constants/productImage.types';
 
 export interface ProductListingProps {
   activeFilterPropertyList?: string[];
@@ -23,7 +17,7 @@ export interface ProductListingProps {
   }[];
   isHighlighted?: boolean;
   link: SiteLink;
-  loadSpeedRating: string;
+  loadSpeedRating?: string;
   name: string;
   priceList: {
     label: string | null;

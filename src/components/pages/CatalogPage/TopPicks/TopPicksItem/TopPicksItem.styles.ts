@@ -72,6 +72,7 @@ export const styles: StylesMap = {
     },
   },
   brand: {
+    color: COLORS.GLOBAL.WHITE,
     display: 'block',
   },
   brandWithImage: {

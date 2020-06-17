@@ -8,8 +8,8 @@ import styles, { dStyles, tStyles } from './RatingsBar.styles';
 export interface Props {
   display?: RATINGS_DISPLAY;
   label: string;
-  rating: number;
   theme?: RATINGS_THEME;
+  value: number;
 }
 
 const CONSTANTS = {
@@ -19,12 +19,12 @@ const CONSTANTS = {
 function RatingsBar({
   display = RATINGS_DISPLAY.DEFAULT,
   label,
-  rating,
+  value,
   theme = RATINGS_THEME.DARK,
 }: Props) {
-  const isRatingHighlighted = rating >= CONSTANTS.RATING_HIGHLIGHT_THRESHOLD;
-  const formattedRating = numberWithDecimal(rating);
-  const barWidth = `${percentageFromNumber(rating, RATINGS.MAX_RATING)}%`;
+  const isRatingHighlighted = value >= CONSTANTS.RATING_HIGHLIGHT_THRESHOLD;
+  const formattedRating = numberWithDecimal(value);
+  const barWidth = `${percentageFromNumber(value, RATINGS.MAX_RATING)}%`;
   const a11yLabel = ` ${ui('common.ratings.outOf')} ${RATINGS.MAX_RATING}`;
   const highlightedClasses = [
     dStyles[display].emphasized,

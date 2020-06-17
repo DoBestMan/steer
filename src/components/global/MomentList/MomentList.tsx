@@ -3,6 +3,7 @@ import { RATINGS_DISPLAY, RATINGS_THEME } from '~/lib/constants';
 import styles, { dStyles, tStyles } from './MomentList.styles';
 
 export interface MomentListItem {
+  concise?: string;
   label: string;
   value: string;
 }
@@ -20,8 +21,9 @@ export function MomentList({
 }: Props) {
   return (
     <ul css={[styles.container, tStyles[theme].container]}>
-      {data.map(({ label, value }) => (
+      {data.map(({ label, value, concise }) => (
         <li css={[styles.item, dStyles[display].item]} key={label}>
+          {concise && <span css={dStyles[display].concise}>{concise}</span>}
           <span css={dStyles[display].label}>{label}</span>
           <span css={[dStyles[display].value, tStyles[theme].value]}>
             {value}

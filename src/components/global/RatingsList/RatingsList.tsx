@@ -16,12 +16,12 @@ export function RatingsList({
 }: Props) {
   return (
     <ul>
-      {ratings.map(({ label, rating }) => (
+      {ratings.map(({ label, value }) => (
         <RatingsBar
           display={display}
           key={label}
           label={label}
-          rating={rating}
+          value={value}
           theme={theme}
         ></RatingsBar>
       ))}

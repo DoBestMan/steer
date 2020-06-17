@@ -7,6 +7,7 @@ import { screenReaderText } from '~/styles/document/accessibility.styles';
 import styles from './Stars.styles';
 
 function StarsWithRating({
+  bgColor,
   color = COLORS.GLOBAL.ORANGE,
   isSmall,
   number,
@@ -16,7 +17,12 @@ function StarsWithRating({
 
   return (
     <div css={styles.ratingContainer}>
-      <Stars color={color} isSmall={isSmall} number={number} />
+      <Stars
+        color={color}
+        isSmall={isSmall}
+        number={number}
+        bgColor={bgColor}
+      />
       <div css={[styles.rating, isSmall && styles.ratingSmall, { color }]}>
         {formattedRating}
       </div>

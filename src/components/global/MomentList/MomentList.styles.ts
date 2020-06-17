@@ -1,5 +1,6 @@
 import {
   COLORS,
+  MQ,
   RATINGS_DISPLAY,
   RATINGS_THEME,
   SPACING,
@@ -8,9 +9,6 @@ import {
 import { typography } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
-  container: {
-    paddingBottom: SPACING.SIZE_40,
-  },
   item: {
     alignItems: 'center',
     display: 'flex',
@@ -35,21 +33,52 @@ export const tStyles = {
     container: {
       color: COLORS.LIGHT.GRAY_70,
     },
+    concise: {
+      color: COLORS.LIGHT.GRAY_70,
+    },
   },
 };
 
 // Display styles
 export const dStyles = {
   [RATINGS_DISPLAY.COMPACT]: {
+    concise: [
+      typography.smallCopyTight,
+      {
+        [MQ.XL]: { display: 'none' },
+      },
+    ],
     item: {
+      justifyContent: 'flex-end',
+      [MQ.XL]: {
+        justifyContent: 'start',
+      },
       '&:not(:last-child)': {
         marginBottom: SPACING.SIZE_05,
       },
     },
-    label: typography.smallCopyTight,
-    value: typography.secondarySubhead,
+    label: [
+      typography.smallCopyTight,
+      {
+        display: 'none',
+        [MQ.XL]: {
+          display: 'inline',
+          minWidth: SPACING.SIZE_70,
+        },
+      },
+    ],
+    value: [
+      typography.secondarySubhead,
+      {
+        display: 'none',
+        [MQ.XL]: {
+          display: 'inline',
+        },
+      },
+    ],
   },
   [RATINGS_DISPLAY.DEFAULT]: {
+    concise: typography.smallCopyTight,
     item: {
       '&:not(:last-child)': {
         marginBottom: SPACING.SIZE_10,

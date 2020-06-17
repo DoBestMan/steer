@@ -13,31 +13,31 @@ export const mockTireRatings = {
   ratings: [
     {
       label: 'Overall',
-      rating: 4.6,
+      value: 4.6,
     },
     {
       label: 'Dry',
-      rating: 5.0,
+      value: 5.0,
     },
     {
       label: 'Wet',
-      rating: 5.0,
+      value: 5.0,
     },
     {
       label: 'Winter',
-      rating: 2.7,
+      value: 2.7,
     },
     {
       label: 'Comfort',
-      rating: 4.8,
+      value: 4.8,
     },
     {
       label: 'Noise',
-      rating: 3.5,
+      value: 3.5,
     },
     {
       label: 'Treadwear',
-      rating: 3.7,
+      value: 3.7,
     },
   ],
   videoId: 'test',

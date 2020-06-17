@@ -3,8 +3,6 @@ import { SiteCatalogBrand } from '~/data/models/SiteCatalogBrand';
 import { SiteImageExtended } from '~/data/models/SiteImageExtended';
 import { typography } from '~/styles/typography.styles';
 
-import { styles } from './BrandLogoOrLabel.styles';
-
 // Provide extra props for <Image>
 interface Props extends SiteImageExtended {
   brand: SiteCatalogBrand;
@@ -18,9 +16,7 @@ function BrandLogoOrLabel(props: Props) {
       {brand.image ? (
         <Image {...brand.image} as={'span'} widths={widths} />
       ) : (
-        <span css={[styles.label, typography.secondaryHeadline]}>
-          {brand.label}
-        </span>
+        <span css={typography.secondaryHeadline}>{brand.label}</span>
       )}
     </>
   );

@@ -48,7 +48,8 @@
       "size": "Size {{tireSize}}"
     },
     "productListing": {
-      "morePromos": "+ {{number}} other deals"
+      "morePromos": "+ {{number}} other deals",
+      "customerReviews": "{{number}} customer reviews"
     },
     "topPicks": {
       "addVehicleText": "Add your vehicle info to find your original tire and get even better recommendations",

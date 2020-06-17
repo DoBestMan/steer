@@ -7,9 +7,9 @@ import { PROMO_STYLES } from '~/components/global/PromoTag/PromoTag.types';
 import { SiteIcon } from '~/data/models/SiteIcon';
 import { SiteImage } from '~/data/models/SiteImage';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
+import { PRODUCT_IMAGE_TYPES } from '~/lib/constants/productImage.types';
 
 import ProductListing from './ProductListing';
-import { PRODUCT_IMAGE_TYPES } from './ProductListing.types';
 
 export default {
   component: ProductListing,

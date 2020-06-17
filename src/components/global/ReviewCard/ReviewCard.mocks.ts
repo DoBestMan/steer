@@ -16,31 +16,31 @@ const momentList = [
 const ratings = [
   {
     label: 'Overall',
-    rating: 4.8,
+    value: 4.8,
   },
   {
     label: 'Dry',
-    rating: 5,
+    value: 5,
   },
   {
     label: 'Wet',
-    rating: 5,
+    value: 5,
   },
   {
     label: 'Winter',
-    rating: 2.7,
+    value: 2.7,
   },
   {
     label: 'Comfort',
-    rating: 4.8,
+    value: 4.8,
   },
   {
     label: 'Noise',
-    rating: 3.5,
+    value: 3.5,
   },
   {
     label: 'Treadwear',
-    rating: 3.7,
+    value: 3.7,
   },
 ];
 
