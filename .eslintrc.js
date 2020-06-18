@@ -14,6 +14,9 @@ module.exports = {
     browser: true,
     node: true,
   },
+  globals: {
+    globalThis: false,
+  },
   parserOptions: {
     ecmaVersion: 2020,
     sourceType: 'module',

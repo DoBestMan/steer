@@ -1,5 +1,3 @@
-import nativeFetch from 'isomorphic-unfetch';
-
 import { UserPersonalization } from '~/data/models/UserPersonalization';
 
 import { FetchError, FetchErrorCodes } from './FetchError';
@@ -57,6 +55,7 @@ export async function fetch<T, U = never>({
   params?: Record<string, string>;
   query?: Record<string, string>;
 }): Promise<T> {
+  const global = typeof globalThis !== undefined ? globalThis : window;
   if (urlBase === '') {
     throw new FetchError(
       FetchErrorCodes.UrlBaseNotConfigured,
@@ -102,7 +101,7 @@ export async function fetch<T, U = never>({
   let response: Response;
   try {
     const url = buildUrl(`${urlBase}${endpoint}`, params, query);
-    response = await nativeFetch(url, {
+    response = await global.fetch(url, {
       body,
       headers,
       method,

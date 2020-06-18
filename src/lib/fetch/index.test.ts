@@ -1,7 +1,3 @@
-jest.mock('isomorphic-unfetch');
-
-import nativeFetch from 'isomorphic-unfetch';
-import { FetchError } from 'node-fetch';
 import { mocked } from 'ts-jest/utils';
 
 import { FetchErrorCodes } from './FetchError';
@@ -16,6 +12,8 @@ import {
 
 describe('fetch', () => {
   beforeEach(() => {
+    jest.spyOn(globalThis, 'fetch');
+
     fetchSetUrlBase('http://test/');
     fetchSetUserPersonalization({
       gaClientId: null,
@@ -24,19 +22,19 @@ describe('fetch', () => {
   });
 
   afterEach(() => {
-    mocked(nativeFetch).mockRestore();
+    mocked(globalThis.fetch).mockRestore();
   });
 
   it('fetches using GET and gets a successful response', async () => {
     const response = new Response('{"test":true}');
-    mocked(nativeFetch).mockResolvedValue(response);
+    mocked(globalThis.fetch).mockResolvedValue(response);
 
     const result = await fetch<{ test: boolean }>({
       endpoint: '/v1/test-get',
       method: 'get',
     });
 
-    expect(nativeFetch).toHaveBeenCalledWith(
+    expect(globalThis.fetch).toHaveBeenCalledWith(
       expect.stringContaining('test-get'),
       expect.objectContaining({
         body: undefined,
@@ -50,7 +48,7 @@ describe('fetch', () => {
 
   it('fetches using POST and gets a successful response', async () => {
     const response = new Response('{"test":true}');
-    mocked(nativeFetch).mockResolvedValue(response);
+    mocked(globalThis.fetch).mockResolvedValue(response);
 
     const result = await fetch<{ test: boolean }, { testBody: string }>({
       endpoint: '/v1/test-post',
@@ -60,7 +58,7 @@ describe('fetch', () => {
       method: 'post',
     });
 
-    expect(nativeFetch).toHaveBeenCalledWith(
+    expect(globalThis.fetch).toHaveBeenCalledWith(
       expect.stringContaining('test-post'),
       expect.objectContaining({
         body: '{"testBody":"1"}',
@@ -76,14 +74,14 @@ describe('fetch', () => {
     const response = new Response(null, {
       status: 204,
     });
-    mocked(nativeFetch).mockResolvedValue(response);
+    mocked(globalThis.fetch).mockResolvedValue(response);
 
     const result = await fetch<null>({
       endpoint: '/v1/test-delete',
       method: 'delete',
     });
 
-    expect(nativeFetch).toHaveBeenCalledWith(
+    expect(globalThis.fetch).toHaveBeenCalledWith(
       expect.stringContaining('test-delete'),
       expect.objectContaining({
         method: 'delete',
@@ -95,7 +93,7 @@ describe('fetch', () => {
 
   it('calls authorization function', async () => {
     const response = new Response('{"test":true}');
-    mocked(nativeFetch).mockResolvedValue(response);
+    mocked(globalThis.fetch).mockResolvedValue(response);
 
     const token = '1234';
     const authorizationFunction = jest.fn().mockImplementation(() => {
@@ -111,7 +109,7 @@ describe('fetch', () => {
 
     expect(authorizationFunction).toHaveBeenCalled();
 
-    const headers = mocked(nativeFetch).mock.calls[0][1]?.headers;
+    const headers = mocked(globalThis.fetch).mock.calls[0][1]?.headers;
 
     expect(
       headers && 'Authorization' in headers && headers.Authorization,
@@ -120,7 +118,7 @@ describe('fetch', () => {
 
   it('calls authorization function when token is expired', async () => {
     const response = new Response('{"test":true}');
-    mocked(nativeFetch).mockResolvedValue(response);
+    mocked(globalThis.fetch).mockResolvedValue(response);
 
     const authorizationHeader = 'test 5678';
     fetchSetAuthorizationHeader(authorizationHeader);
@@ -145,7 +143,7 @@ describe('fetch', () => {
 
     expect(authorizationFunction).toHaveBeenCalled();
 
-    const headers = mocked(nativeFetch).mock.calls[0][1]?.headers;
+    const headers = mocked(globalThis.fetch).mock.calls[0][1]?.headers;
 
     expect(
       headers && 'Authorization' in headers && headers.Authorization,
@@ -154,7 +152,7 @@ describe('fetch', () => {
 
   it("doesn't call authorization function when token is not expired", async () => {
     const response = new Response('{"test":true}');
-    mocked(nativeFetch).mockResolvedValue(response);
+    mocked(globalThis.fetch).mockResolvedValue(response);
 
     const authorizationHeader = 'test 5678';
     fetchSetAuthorizationHeader(authorizationHeader);
@@ -179,7 +177,7 @@ describe('fetch', () => {
 
     expect(authorizationFunction).not.toHaveBeenCalled();
 
-    const headers = mocked(nativeFetch).mock.calls[0][1]?.headers;
+    const headers = mocked(globalThis.fetch).mock.calls[0][1]?.headers;
 
     expect(
       headers && 'Authorization' in headers && headers.Authorization,
@@ -188,7 +186,7 @@ describe('fetch', () => {
 
   it('includes authorization header', async () => {
     const response = new Response('{"test":true}');
-    mocked(nativeFetch).mockResolvedValue(response);
+    mocked(globalThis.fetch).mockResolvedValue(response);
 
     const authorization = 'test 1234';
     fetchSetAuthorizationHeader(authorization);
@@ -199,9 +197,9 @@ describe('fetch', () => {
       method: 'get',
     });
 
-    expect(nativeFetch).toHaveBeenCalled();
+    expect(globalThis.fetch).toHaveBeenCalled();
 
-    const headers = mocked(nativeFetch).mock.calls[0][1]?.headers;
+    const headers = mocked(globalThis.fetch).mock.calls[0][1]?.headers;
 
     expect(
       headers && 'Authorization' in headers && headers.Authorization,
@@ -210,7 +208,7 @@ describe('fetch', () => {
 
   it('includes authorization token', async () => {
     const response = new Response('{"test":true}');
-    mocked(nativeFetch).mockResolvedValue(response);
+    mocked(globalThis.fetch).mockResolvedValue(response);
 
     const token = '1234';
     fetchSetAuthorizationToken(token, null);
@@ -221,9 +219,9 @@ describe('fetch', () => {
       method: 'get',
     });
 
-    expect(nativeFetch).toHaveBeenCalled();
+    expect(globalThis.fetch).toHaveBeenCalled();
 
-    const headers = mocked(nativeFetch).mock.calls[0][1]?.headers;
+    const headers = mocked(globalThis.fetch).mock.calls[0][1]?.headers;
 
     expect(
       headers && 'Authorization' in headers && headers.Authorization,
@@ -232,7 +230,7 @@ describe('fetch', () => {
 
   it('skips authorization token', async () => {
     const response = new Response('{"test":true}');
-    mocked(nativeFetch).mockResolvedValue(response);
+    mocked(globalThis.fetch).mockResolvedValue(response);
 
     const token = '1234';
     fetchSetAuthorizationToken(token, null);
@@ -242,9 +240,9 @@ describe('fetch', () => {
       method: 'get',
     });
 
-    expect(nativeFetch).toHaveBeenCalled();
+    expect(globalThis.fetch).toHaveBeenCalled();
 
-    const headers = mocked(nativeFetch).mock.calls[0][1]?.headers;
+    const headers = mocked(globalThis.fetch).mock.calls[0][1]?.headers;
 
     expect(
       headers && 'Authorization' in headers && headers.Authorization,
@@ -253,7 +251,7 @@ describe('fetch', () => {
 
   it('includes personalization data', async () => {
     const response = new Response('{"test":true}');
-    mocked(nativeFetch).mockResolvedValue(response);
+    mocked(globalThis.fetch).mockResolvedValue(response);
 
     fetchSetUserPersonalization({
       gaClientId: null,
@@ -272,8 +270,8 @@ describe('fetch', () => {
       method: 'get',
     });
 
-    expect(mocked(nativeFetch).mock.calls[0][0]).toContain('99999');
-    expect(mocked(nativeFetch).mock.calls[0][0]).toContain('12345');
+    expect(mocked(globalThis.fetch).mock.calls[0][0]).toContain('99999');
+    expect(mocked(globalThis.fetch).mock.calls[0][0]).toContain('12345');
   });
 
   it('rejects when apiBaseUrl is not initialized', async () => {
@@ -293,12 +291,7 @@ describe('fetch', () => {
 
   it('rejects when there is a network issue', async () => {
     jest.spyOn(console, 'error').mockImplementation();
-    mocked(nativeFetch).mockRejectedValue(
-      new FetchError(
-        'request to http://test/test-get failed, reason: getaddrinfo ENOTFOUND test',
-        'system',
-      ),
-    );
+    mocked(globalThis.fetch).mockRejectedValue(new Error());
 
     const promise = fetch<{ test: boolean }, { testBody: string }>({
       endpoint: '/v1/test-get',
@@ -317,7 +310,7 @@ describe('fetch', () => {
   it('rejects when there is an issue decoding JSON', async () => {
     jest.spyOn(console, 'error').mockImplementation();
     const response = new Response('Invalid JSON :(');
-    mocked(nativeFetch).mockResolvedValue(response);
+    mocked(globalThis.fetch).mockResolvedValue(response);
 
     const promise = fetch<{ test: boolean }, { testBody: string }>({
       endpoint: '/v1/test-get',
@@ -347,7 +340,7 @@ describe('fetch', () => {
       const response = new Response('{"test":true}', {
         status: statusCode,
       });
-      mocked(nativeFetch).mockResolvedValue(response);
+      mocked(globalThis.fetch).mockResolvedValue(response);
 
       const promise = fetch<{ test: boolean }, { testBody: string }>({
         endpoint: '/v1/test-get',
