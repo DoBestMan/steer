@@ -94,7 +94,8 @@ export function handleMouseDown(props: Props, e: MouseEvent) {
       return;
     }
 
-    const diffX = e.pageX - railEl.current.offsetLeft;
+    const railElBounds = railEl.current.getBoundingClientRect();
+    const diffX = e.pageX - railElBounds.left;
     const currentValue =
       railMin.current +
       ((railMax.current - railMin.current) * diffX) / railWidth.current;
