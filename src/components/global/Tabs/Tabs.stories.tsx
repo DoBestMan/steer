@@ -20,7 +20,7 @@ export function TabsWithKnobs() {
 
   return (
     <div css={{ backgroundColor: COLORS.GLOBAL.BLACK, minHeight: '100vh' }}>
-      <Tabs tabsLabels={tabsLabels}>
+      <Tabs tabsLabels={tabsLabels} id="storybook">
         {tabsLabels.map((label, idx) => (
           <div
             key={idx}

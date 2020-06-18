@@ -51,6 +51,7 @@ export function AccordionWithKnobs() {
   return (
     <div css={{ backgroundColor: COLORS.GLOBAL.BLACK, minHeight: '100vh' }}>
       <Accordion
+        id="storybook"
         items={items}
         itemsToShow={itemsToShow}
         itemsToShowLabel={
@@ -80,7 +81,7 @@ export function AccordionWithChildrenComponents() {
 
   return (
     <div css={{ backgroundColor: COLORS.GLOBAL.BLACK, minHeight: '100vh' }}>
-      <Accordion items={items}>
+      <Accordion id="storybook" items={items}>
         {items.map((item, idx) => (
           <div
             key={idx}

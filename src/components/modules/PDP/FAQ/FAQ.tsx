@@ -35,6 +35,7 @@ function FAQ({ questions, isCustomerServiceEnabled }: Props) {
             css={styles.questionsContainer}
           >
             <Accordion
+              id="faq"
               items={questions}
               itemsToShow={ITEMS_TO_SHOW}
               itemsToShowLabel={ui('pdp.faq.showAllLabel')}

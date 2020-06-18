@@ -5,6 +5,7 @@ import {
   Breakpoint,
   BREAKPOINT_SIZES,
   GAP_COLUMNS,
+  GRID_MARGIN,
   MQ,
   NB_COLUMNS,
 } from '~/lib/constants';
@@ -35,10 +36,21 @@ interface Props extends ContainerProps {
   fullbleedXL?: boolean;
 }
 
-function gridColumnByMQ(mq: Breakpoint, nbColumn: number): object {
+function gridColumnByMQ(
+  mq: Breakpoint,
+  nbColumn: number,
+  isWrapperStart: boolean,
+  isWrapperEnd: boolean,
+): object {
+  const fullbleedStart = isWrapperStart
+    ? `[wrapper-start] ${GRID_MARGIN[mq] - GAP_COLUMNS[mq]}px`
+    : '';
+  const fullbleedEnd = isWrapperEnd
+    ? `${GRID_MARGIN[mq] - GAP_COLUMNS[mq]}px [wrapper-end]`
+    : '';
   return {
     gridColumnGap: `${GAP_COLUMNS[mq]}px`,
-    gridTemplateColumns: `[start] repeat(${nbColumn}, 1fr) [end]`,
+    gridTemplateColumns: `${fullbleedStart} [start] repeat(${nbColumn}, 1fr) [end] ${fullbleedEnd}`,
   };
 }
 
@@ -50,17 +62,23 @@ function getSubgridTemplate(mq: Breakpoint, gridColumn: string) {
    * The number of clumn of that subgrid should be equal to the "width" the current <GridItem>
    * Therefore, we're also converting '[start]' and '[end]' to actual column index for calculation.
    */
-
   // Extract current grid-column value
   const aGridColumn = gridColumn && gridColumn.split('/');
   const gridColumnStartStr = aGridColumn && aGridColumn[0].replace(/ /g, '');
   const gridColumnEndStr = aGridColumn && aGridColumn[1].replace(/ /g, '');
 
+  // Gets start and end
+  const isWrapperStart = gridColumnStartStr === 'wrapper-start';
+  const isWrapperEnd = gridColumnEndStr === 'wrapper-end';
+  const isStart = gridColumnStartStr === 'start';
+  const isEnd = gridColumnEndStr === 'end';
+
   // Converts it to column index if needed
-  const gridColumnStart =
-    gridColumnStartStr === 'start' ? 0 : +gridColumnStartStr;
+  const gridColumnStart = isStart || isWrapperStart ? 0 : +gridColumnStartStr;
   const gridColumnEnd =
-    gridColumnEndStr === 'end' ? NB_COLUMNS[mq] : +gridColumnEndStr;
+    isEnd || gridColumnEndStr === 'wrapper-end'
+      ? NB_COLUMNS[mq]
+      : +gridColumnEndStr;
 
   // Calculate the number of column, for the grid-template property for the current <GridItem>
   const nbColumn = gridColumnEnd - gridColumnStart;
@@ -68,7 +86,7 @@ function getSubgridTemplate(mq: Breakpoint, gridColumn: string) {
     display: 'grid',
     gridTemplateRows: 'auto',
     width: '100%',
-    ...gridColumnByMQ(mq, nbColumn),
+    ...gridColumnByMQ(mq, nbColumn, isWrapperStart, isWrapperEnd),
   };
 }
 

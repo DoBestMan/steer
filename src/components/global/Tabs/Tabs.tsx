@@ -14,11 +14,12 @@ import styles from './Tabs.styles';
 
 interface Props {
   children: ReactNode;
+  id: string; // To prevent duplicated ids (a11y)
   label?: string;
   tabsLabels: string[];
 }
 
-function Tabs({ tabsLabels, label, children }: Props) {
+function Tabs({ tabsLabels, label, children, id }: Props) {
   const [currentTab, setCurrentTab] = useState(0);
   const [focusTab, setFocusTab] = useState(0);
   const [tabsRefs, setTabsRefs] = useState<RefObject<HTMLButtonElement>[]>([]);
@@ -86,39 +87,52 @@ function Tabs({ tabsLabels, label, children }: Props) {
     setTabsRefs(Array.from(Array(tabsLabels.length)).map(() => createRef()));
   }, [tabsLabels]);
 
+  const getIds = (idx: number) => ({
+    buttonId: `tab-button-${id}-${idx}`,
+    panelId: `tab-panel-${id}-${idx}`,
+  });
+
   return (
     <>
       <div role="tablist" aria-label={label} css={styles.tabs}>
-        {tabsLabels.map((label, idx) => (
-          <button
-            key={idx}
-            ref={tabsRefs[idx]}
-            role="tab"
-            aria-selected={currentTab === idx}
-            aria-controls={`tab-panel-${idx}-${label}`}
-            id={`tab-button-${idx}-${label}`}
-            tabIndex={currentTab === idx ? undefined : -1}
-            onMouseDown={mouseDownHandler(idx)}
-            onKeyUp={keyUpHandler(idx)}
-            onFocus={focusHandler(idx)}
-            css={styles.tabButton}
-          >
-            {label}
-          </button>
-        ))}
+        {tabsLabels.map((label, idx) => {
+          const { buttonId, panelId } = getIds(idx);
+
+          return (
+            <button
+              key={idx}
+              ref={tabsRefs[idx]}
+              role="tab"
+              aria-selected={currentTab === idx}
+              aria-controls={panelId}
+              id={buttonId}
+              tabIndex={currentTab === idx ? undefined : -1}
+              onMouseDown={mouseDownHandler(idx)}
+              onKeyUp={keyUpHandler(idx)}
+              onFocus={focusHandler(idx)}
+              css={styles.tabButton}
+            >
+              {label}
+            </button>
+          );
+        })}
       </div>
-      {Children.map(children, (child, idx) => (
-        <div
-          key={idx}
-          role="tabpanel"
-          id={`tab-panel-${idx}-${label}`}
-          aria-labelledby={`tab-button-${idx}-${label}`}
-          aria-hidden={currentTab !== idx}
-          css={styles.panel}
-        >
-          {child}
-        </div>
-      ))}
+      {Children.map(children, (child, idx) => {
+        const { buttonId, panelId } = getIds(idx);
+
+        return (
+          <div
+            key={idx}
+            role="tabpanel"
+            id={panelId}
+            aria-labelledby={buttonId}
+            aria-hidden={currentTab !== idx}
+            css={styles.panel}
+          >
+            {child}
+          </div>
+        );
+      })}
     </>
   );
 }

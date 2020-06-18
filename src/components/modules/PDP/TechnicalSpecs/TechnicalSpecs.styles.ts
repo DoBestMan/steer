@@ -1,4 +1,12 @@
-import { COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
+import {
+  BORDERS,
+  COLORS,
+  EASING,
+  MQ,
+  SPACING,
+  StylesMap,
+  TIME,
+} from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
@@ -8,13 +16,6 @@ const styles: StylesMap = {
       color: COLORS.DARK.GRAY_40,
     },
   ],
-  descriptionContainer: {
-    gridRow: 3,
-
-    [MQ.L]: {
-      gridRow: 2,
-    },
-  },
   findMyTireSizeLabel: [
     typography.smallCopyTight,
     {
@@ -22,29 +23,78 @@ const styles: StylesMap = {
     },
   ],
   header: {
+    alignContent: 'flex-start',
     paddingBottom: SPACING.SIZE_40,
   },
-  imageContainer: {
-    gridRow: 2,
+  image: {
     marginBottom: SPACING.SIZE_40,
+  },
+  markdown: [
+    typography.bodyCopy,
+    {
+      a: {
+        borderBottom: BORDERS.DOTTED_GRAY_40_2PX,
+        transition: `all ${TIME.MS100}ms ${EASING.CIRC_EASE_OUT}`,
 
-    [MQ.L]: {
-      gridRow: '1/4',
-      marginBottom: 0,
+        '&:hover': {
+          color: COLORS.GLOBAL.WHITE,
+          borderColor: COLORS.GLOBAL.WHITE,
+        },
+      },
+
+      p: {
+        '&:not(:last-child)': {
+          marginBottom: '1em',
+        },
+      },
+    },
+  ],
+  moreDescription: {
+    display: 'none',
+    marginTop: '1em',
+
+    '&[aria-hidden="false"]': {
+      display: 'block',
+    },
+  },
+  showFullDescription: [
+    typography.primarySubhead,
+    {
+      '&:hover, &:focus:not(:active)': {
+        color: COLORS.GLOBAL.WHITE,
+      },
+
+      alignItems: 'center',
+      color: COLORS.DARK.GRAY_40,
+      display: 'flex',
+      marginTop: SPACING.SIZE_05,
+      transition: `color ${TIME.MS100}ms ${EASING.CIRC_EASE_OUT}`,
+    },
+  ],
+  showFullDescriptionIcon: {
+    marginTop: 2,
+
+    svg: {
+      display: 'block',
+      height: 5,
+      padding: SPACING.SIZE_05,
     },
   },
   title: [
     typography.primaryHeadline,
     {
       color: COLORS.GLOBAL.WHITE,
+      marginBottom: SPACING.SIZE_40,
+
+      [MQ.L]: {
+        marginBottom: SPACING.SIZE_15,
+      },
     },
   ],
   titleContainer: {
-    gridRow: 1,
     marginBottom: SPACING.SIZE_40,
 
     [MQ.L]: {
-      gridRow: 1,
       marginBottom: SPACING.SIZE_15,
     },
   },

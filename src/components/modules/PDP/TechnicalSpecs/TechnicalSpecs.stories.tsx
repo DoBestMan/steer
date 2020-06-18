@@ -1,6 +1,5 @@
 import { boolean } from '@storybook/addon-knobs';
 
-import Grid from '~/components/global/Grid/Grid';
 import { COLORS } from '~/lib/constants';
 
 import TechnicalSpecs from './TechnicalSpecs';
@@ -15,12 +14,12 @@ export function TechnicalSpecsWithKnobs() {
   const isCustomerServiceEnabled = boolean('Is Business Hours', true);
 
   return (
-    <Grid css={{ backgroundColor: COLORS.GLOBAL.BLACK }}>
+    <div css={{ backgroundColor: COLORS.GLOBAL.BLACK }}>
       <TechnicalSpecs
         specs={specList}
         sizes={sizesList}
         isCustomerServiceEnabled={isCustomerServiceEnabled}
       />
-    </Grid>
+    </div>
   );
 }

@@ -17,6 +17,7 @@ export interface Item {
 
 export interface Props {
   children?: ReactNode;
+  id: string; // To prevent duplicated ids (a11y)
   items: Item[];
   itemsToShow?: number;
   itemsToShowLabel?: string;
@@ -36,6 +37,7 @@ const parseShouldShowAll = ({
 
 function Accordion({
   children,
+  id,
   items,
   itemsToShow,
   itemsToShowLabel = ui('pdp.accordion.showAllDefaultLabel'),
@@ -82,7 +84,7 @@ function Accordion({
               <AccordionItem
                 label={item.label}
                 value={item.value}
-                id={`accordion-item-${item.id}-${idx}`}
+                id={`${id}-${idx}`}
                 content={item.content}
                 onToggle={toggleItemHandler(idx)}
                 isExpanded={isExpanded}
