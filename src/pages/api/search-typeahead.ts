@@ -14,13 +14,18 @@ export default async (
 ) => {
   backendBootstrap({ request });
 
-  const { queryText, queryType } = request.query;
+  const { additionalQueryText, queryText, queryType } = request.query;
 
-  if (typeof queryText !== 'string' || typeof queryType !== 'string') {
-    throw new Error('queryText and queryType must be a string');
+  if (
+    typeof queryText !== 'string' ||
+    typeof queryType !== 'string' ||
+    typeof additionalQueryText !== 'string'
+  ) {
+    throw new Error('All search paramaters must be a string');
   }
 
   const siteSearch = await backendGetSiteSearch({
+    additionalQueryText,
     queryText,
     queryType,
   });

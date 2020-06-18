@@ -24,6 +24,7 @@ import AdditionalInfoModals from './AdditionalInfoModals';
 import CloseSearchButton from './CloseSearchButton';
 import { useAutocompleteSelectedItem } from './Search.hooks';
 import {
+  SearchActionType,
   SearchInputEnum,
   SearchModalEnum,
   SearchResult,
@@ -141,7 +142,20 @@ function SearchAutocomplete({
 
   const handleValueSelection = (searchResult: SearchResult) => {
     onValueSelection(searchResult);
-    focusOnInput();
+
+    const { action } = searchResult;
+    if (action.type === SearchActionType.QUERY) {
+      const isInitialRearTireState =
+        !action.queryText &&
+        !!action.additionalQueryText &&
+        action.queryType === SearchStateEnum.REAR_TIRE;
+
+      if (isInitialRearTireState) {
+        secondaryInput?.current?.focus();
+      } else {
+        focusOnInput();
+      }
+    }
   };
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {

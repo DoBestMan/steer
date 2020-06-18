@@ -20,6 +20,11 @@ import {
 import SearchAutocomplete from './SearchAutocomplete';
 import SearchSupport from './SearchSupport';
 
+interface InputQuery {
+  queryText: string;
+  queryType: string;
+}
+
 interface Props {
   addPastSearch: (
     item: SiteSearchResultTextItem | SiteSearchResultImageItem,
@@ -43,9 +48,15 @@ function Search({
   pastSearches,
   results,
 }: Props) {
-  const [queryText, setQueryText] = useState('');
-  const [secondaryQueryText, setSecondaryQueryText] = useState('');
-  const [queryType, setQueryType] = useState('');
+  const [primaryQuery, setPrimaryQuery] = useState<InputQuery>({
+    queryText: '',
+    queryType: '',
+  });
+  const [secondaryQuery, setSecondaryQuery] = useState<InputQuery>({
+    queryText: '',
+    queryType: SearchStateEnum.REAR_TIRE,
+  });
+
   const [searchState, setSearchState] = useState('');
   const [activeInputType, setActiveInputType] = useState(
     SearchInputEnum.PRIMARY,
@@ -60,6 +71,19 @@ function Search({
   const { resultMetadata, siteSearchResultGroupList } = results;
   const { noExactMatch } = resultMetadata;
 
+  const getCurrentInputQuery = () =>
+    activeInputType === SearchInputEnum.PRIMARY ? primaryQuery : secondaryQuery;
+  const setCurrentInputQuery = (query: {
+    queryText?: string;
+    queryType?: string;
+  }) => {
+    if (activeInputType === SearchInputEnum.PRIMARY) {
+      setPrimaryQuery({ ...primaryQuery, ...query });
+    } else if (activeInputType === SearchInputEnum.SECONDARY) {
+      setSecondaryQuery({ ...secondaryQuery, ...query });
+    }
+  };
+
   const handleClearSearchesClick = () => {
     onClearSearchesClick();
 
@@ -69,16 +93,15 @@ function Search({
   };
 
   const onInputChange = (input: string) => {
-    if (activeInputType === SearchInputEnum.PRIMARY) {
-      setQueryText(input);
-    } else if (activeInputType === SearchInputEnum.SECONDARY) {
-      setSecondaryQueryText(input);
-    }
+    setCurrentInputQuery({ queryText: input });
 
+    const { queryType } = getCurrentInputQuery();
     delayedSearch({ queryText: input, queryType });
   };
 
   const onCancelSelection = () => {
+    const { queryText } = getCurrentInputQuery();
+
     // Reset the search category when search cleared with no query.
     if (!queryText) {
       setSearchState('');
@@ -88,10 +111,30 @@ function Search({
   const onToggleRearTire = (isShowing: boolean) => {
     if (isShowing) {
       setSearchState(SearchStateEnum.REAR_TIRE);
+
+      // Switch from tireSize to frontTireSize when rear tire input is visible
+      setPrimaryQuery({
+        ...primaryQuery,
+        queryType: SearchStateEnum.FRONT_TIRE,
+      });
+
+      onSearchQuery({
+        queryText: primaryQuery.queryText,
+        queryType: SearchStateEnum.FRONT_TIRE,
+      });
     } else {
       setSearchState(SearchStateEnum.TIRE_SIZE);
       setActiveInputType(SearchInputEnum.PRIMARY);
-      setSecondaryQueryText('');
+      setPrimaryQuery({
+        ...primaryQuery,
+        queryType: SearchStateEnum.TIRE_SIZE,
+      });
+      setSecondaryQuery({ ...secondaryQuery, queryText: '' });
+
+      onSearchQuery({
+        queryText: primaryQuery.queryText,
+        queryType: SearchStateEnum.TIRE_SIZE,
+      });
     }
   };
 
@@ -99,33 +142,48 @@ function Search({
     const { action } = searchResult;
 
     if (action.type === SearchActionType.QUERY) {
-      if (activeInputType === SearchInputEnum.PRIMARY) {
-        setQueryText(action.queryText);
-      } else if (activeInputType === SearchInputEnum.SECONDARY) {
-        setSecondaryQueryText(action.queryText);
+      const isInitialRearTireState =
+        !action.queryText &&
+        !!action.additionalQueryText &&
+        action.queryType === SearchStateEnum.REAR_TIRE;
+      const isCurrentRearTireSearch =
+        action.queryType === SearchStateEnum.REAR_TIRE ||
+        SearchStateEnum.REAR_TIRE_WIDTH;
+
+      const { queryText } = getCurrentInputQuery();
+      let additionalQueryText = isCurrentRearTireSearch ? queryText : '';
+
+      if (isInitialRearTireState) {
+        setPrimaryQuery({
+          ...primaryQuery,
+          queryText: action.additionalQueryText || '',
+        });
+        additionalQueryText = action.additionalQueryText || '';
+      } else {
+        setCurrentInputQuery({
+          queryType: action.queryType,
+          queryText: action.queryText,
+        });
       }
 
-      handleSearchQuery(searchResult);
+      onSearchQuery({
+        additionalQueryText,
+        queryText: action.queryText,
+        queryType: action.queryType,
+      });
     } else if (action.type === SearchActionType.LINK) {
       addPastSearch(searchResult);
     }
   };
 
   const handleSearchCategoryClick = (searchResult: SearchResult) => {
-    const category =
-      searchResult.action.type === SearchActionType.QUERY
-        ? searchResult.action.queryType
-        : '';
-    setSearchState(category);
-
-    handleSearchQuery(searchResult);
-  };
-
-  const handleSearchQuery = (searchResult: SearchResult) => {
     const { action } = searchResult;
 
+    const category =
+      action.type === SearchActionType.QUERY ? action.queryType : '';
+    setSearchState(category);
+
     if (action.type === SearchActionType.QUERY) {
-      setQueryType(action.queryType);
       onSearchQuery({
         queryText: action.queryText,
         queryType: action.queryType,
@@ -137,8 +195,30 @@ function Search({
 
   const handleInputFocus = (inputType: SearchInputEnum) => {
     setActiveInputType(inputType);
+
+    // Only make an additional search query in front/rear tire state
+    if (
+      searchState === SearchStateEnum.REAR_TIRE &&
+      inputType !== activeInputType
+    ) {
+      const query =
+        inputType === SearchInputEnum.PRIMARY
+          ? {
+              additionalQueryText: secondaryQuery.queryText,
+              queryText: primaryQuery.queryText,
+              queryType: primaryQuery.queryType,
+            }
+          : {
+              additionalQueryText: primaryQuery.queryText,
+              queryText: secondaryQuery.queryText,
+              queryType: secondaryQuery.queryType,
+            };
+
+      onSearchQuery(query);
+    }
   };
 
+  const { queryText } = getCurrentInputQuery();
   const isInputEmpty = queryText.length < 1;
   const hasResults = siteSearchResultGroupList.length > 0;
   const shouldShowSearchSupport = noExactMatch && !hasResults && !isInputEmpty;
@@ -159,9 +239,9 @@ function Search({
         onToggleRearTire={onToggleRearTire}
         onValueSelection={handleValueSelection}
         results={siteSearchResultGroupList}
-        queryText={queryText}
+        queryText={primaryQuery.queryText}
         searchState={searchState}
-        secondaryQueryText={secondaryQueryText}
+        secondaryQueryText={secondaryQuery.queryText}
       />
       {shouldShowInitialSearch && (
         <InitialSearch

@@ -4,9 +4,11 @@ import { SiteSearchResultGroup } from '~/data/models/SiteSearchResultGroup';
 import { fetch } from '../fetch';
 
 export async function backendGetSiteSearch({
+  additionalQueryText,
   queryText,
   queryType,
 }: {
+  additionalQueryText: string;
   queryText: string;
   queryType: string;
 }) {
@@ -16,6 +18,7 @@ export async function backendGetSiteSearch({
   }>({
     endpoint: '/v1/site/search',
     query: {
+      additionalQueryText,
       queryText,
       queryType,
     },

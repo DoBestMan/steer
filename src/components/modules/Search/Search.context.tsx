@@ -75,10 +75,12 @@ function useContextSetup() {
   });
 
   const searchQuery = useCallback(async function ({
+    additionalQueryText,
     queryText,
     queryType,
   }: SearchDataParams) {
     const apiSearchResults = await apiGetSearchTypeahead({
+      additionalQueryText,
       queryText,
       queryType,
     });

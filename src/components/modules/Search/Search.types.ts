@@ -28,8 +28,10 @@ export enum SearchActionType {
 export enum SearchStateEnum {
   BRAND = 'brand',
   FREE_SEARCH = '',
+  FRONT_TIRE = 'frontTireSize',
   POPULAR = 'mostPopularProductLine',
-  REAR_TIRE = 'rearTire',
+  REAR_TIRE = 'rearTireSize',
+  REAR_TIRE_WIDTH = 'rearWidthRatio',
   TIRE_SIZE = 'tireSize',
   VEHICLE = 'makeModel',
 }
