@@ -206,3 +206,23 @@ now --prod
 `build-prod` will create a Next.js build. `build-ci` will create a Next.js build containing storybook at the `/storybook` route.
 
 Note: Builds from other branches (eg staging) that are promoted to production will still contain a visible `/storybook` route.
+
+### Deploying from one branch to another
+
+If you do this from `dev`:
+
+```
+gco -b my-new-branch
+gp -u origin my-new-branch
+```
+
+This will not kick off a new deploy from Vercel. This is because there is already a build for the latest commit of the `dev` branch.
+
+One shortcut to convince Vercel to create a new build is to run `yarn version` on your branch;
+
+```
+yarn version
+$ info Current version: 1.2.3
+$ question New version: 1.2.3-new-version
+git push
+```

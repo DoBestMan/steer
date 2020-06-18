@@ -8,6 +8,8 @@ on:
       - "int-*"
       - dev
       - staging
+      - dev-st
+      - qa-st
 
 jobs:
   deploy-against-mock:
