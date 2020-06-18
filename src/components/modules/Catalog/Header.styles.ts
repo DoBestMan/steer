@@ -54,14 +54,17 @@ const styles: StylesMap = {
   location: {
     color: COLORS.GLOBAL.BLACK,
   },
+  navOffset: {
+    [MQ.S]: {
+      paddingTop: 150,
+    },
+  },
   root: {
     color: COLORS.GLOBAL.WHITE,
+    padding: SPACING.SIZE_20,
     position: 'relative',
     transition: `all ${TIME.MS300}ms ease`,
     width: '100%',
-    [MQ.S]: {
-      padding: SPACING.SIZE_20,
-    },
     [MQ.M]: {
       padding: SPACING.SIZE_40,
     },

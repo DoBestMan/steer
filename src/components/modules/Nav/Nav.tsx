@@ -1,3 +1,4 @@
+import { useTheme } from 'emotion-theming';
 import { useRouter } from 'next/dist/client/router';
 import { useEffect, useState } from 'react';
 import { Transition } from 'react-transition-group';
@@ -28,6 +29,7 @@ const CONSTANTS = {
 
 function Nav({ isHomepage }: Props) {
   const { links, toggleSubNav, createSelectLinkHandler } = useNavContext();
+  const { textColor, linkTheme, logoUrl } = useTheme();
   const router = useRouter();
 
   const [path, setPath] = useState(router?.pathname);
@@ -44,6 +46,7 @@ function Nav({ isHomepage }: Props) {
       {(containerTransitionState: TransitionStatus) => {
         const rootStyles = [
           styles.root,
+          textColor,
           animations[`root_${containerTransitionState}`],
         ];
 
@@ -60,7 +63,7 @@ function Nav({ isHomepage }: Props) {
                 <Image
                   altText={CONSTANTS.LOGO_ALT_TEXT}
                   css={styles.logo}
-                  src="/static/assets/logo.svg"
+                  src={logoUrl}
                 />
               </BaseLink>
             </GridItem>
@@ -88,6 +91,7 @@ function Nav({ isHomepage }: Props) {
                   <NavLink
                     isActive={false}
                     onClick={createSelectLinkHandler(link)}
+                    theme={linkTheme}
                     {...link}
                   />
                 </li>

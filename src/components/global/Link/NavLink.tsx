@@ -8,6 +8,7 @@ import { navLink } from './Link.styles';
 interface Props {
   isActive?: boolean;
   label?: string;
+  theme?: THEME.LIGHT | THEME.ORANGE;
 }
 
 type NavLinkAnchor = LinkType & AnchorProps;
@@ -17,16 +18,15 @@ function NavLink({
   isActive = false,
   label,
   text,
+  theme = THEME.LIGHT,
   ...rest
 }: (NavLinkAnchor | NavLinkButton) & Props) {
+  const activeStyles = isActive ? navLink[theme].selected : navLink[theme].root;
   if ('href' in rest) {
     return (
       <Link
-        theme={THEME.LIGHT}
-        css={[
-          typography.primarySubhead,
-          isActive ? navLink.selected : navLink.root,
-        ]}
+        theme={theme}
+        css={[typography.primarySubhead, activeStyles]}
         iconPosition={LINK_ICON_POSITION.LEFT}
         aria-label={label || text}
         {...rest}
@@ -39,11 +39,8 @@ function NavLink({
     return (
       <Link
         as="button"
-        theme={THEME.LIGHT}
-        css={[
-          typography.primarySubhead,
-          isActive ? navLink.selected : navLink.root,
-        ]}
+        theme={theme}
+        css={[typography.primarySubhead, activeStyles]}
         iconPosition={LINK_ICON_POSITION.LEFT}
         aria-label={label || text}
         {...rest}

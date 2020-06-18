@@ -17,6 +17,7 @@ export default {
 };
 
 const defaultProps = {
+  hasTopPicks: true,
   isAdvancedView: false,
   isInternal: false,
   location: 'Portland, OR',
@@ -67,11 +68,12 @@ export function HeaderInfoWithKnobs() {
   const tireSize = text('Tire size', defaultProps.tireSize);
   const rearTireSize = text('Rear tire size', defaultProps.tireSize);
   const location = text('Location', defaultProps.location);
-
+  const hasTopPicks = boolean('Has top picks', true);
   return (
     <HeaderContainer isAdvancedView={isAdvancedView}>
       <HeaderInfo
         {...{
+          hasTopPicks,
           isAdvancedView,
           location,
           onToggleView: () => setIsAdvancedView(!isAdvancedView),

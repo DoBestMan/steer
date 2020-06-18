@@ -12,6 +12,7 @@ import styles from './Header.styles';
 import HeaderInfo from './HeaderInfo/HeaderInfo';
 
 interface Props {
+  hasTopPicks: boolean;
   isAdvancedView?: boolean;
   isInternal?: boolean;
   location: string;
@@ -23,6 +24,7 @@ interface Props {
 }
 
 export default function Header({
+  hasTopPicks,
   isAdvancedView = false,
   isInternal = false,
   resultsCount,
@@ -37,10 +39,13 @@ export default function Header({
 
   return (
     <>
-      <div css={[styles.root, header.background]}>
+      <div
+        css={[styles.root, header.background, !hasTopPicks && styles.navOffset]}
+      >
         <HeaderInfo
           isInternal={isInternal}
           isAdvancedView={isAdvancedView}
+          hasTopPicks={hasTopPicks}
           {...rest}
         />
         <p css={[styles.filterLabel, header.text]}>

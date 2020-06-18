@@ -15,7 +15,6 @@ import FilterPopup from '../Popup/FilterPopup';
 import styles from './SubFilters.styles';
 
 interface Props {
-  isAdvancedView?: boolean;
   priceFilter: CatalogFilterRange;
   resultsCount: number;
   sortFilter: CatalogFilterSort;

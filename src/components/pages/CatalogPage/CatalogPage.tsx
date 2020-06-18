@@ -71,19 +71,25 @@ function CatalogPage() {
     numberOfProducts = 0;
   }
 
+  // TODO: determine if has top picks
+  const hasTopPicks = false;
+
   return (
     <ThemeProvider
       theme={{ ...defaultTheme, ...(isAdvancedView && headerAdvanced) }}
     >
       <div css={styles.root}>
-        <CatalogSummaryContextProvider
-          catalogSummaryResponse={catalogSummaryResponse}
-          isSearch={isSearch === 'true'}
-          numberOfProducts={numberOfProducts}
-        >
-          <CatalogSummary />
-        </CatalogSummaryContextProvider>
+        {hasTopPicks && (
+          <CatalogSummaryContextProvider
+            catalogSummaryResponse={catalogSummaryResponse}
+            isSearch={isSearch === 'true'}
+            numberOfProducts={numberOfProducts}
+          >
+            <CatalogSummary />
+          </CatalogSummaryContextProvider>
+        )}
         <HeaderContainer
+          hasTopPicks={hasTopPicks}
           toggleView={toggleView}
           isAdvancedView={isAdvancedView}
         />

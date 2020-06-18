@@ -72,6 +72,7 @@ export function useNavContextSetup() {
   const { links, linksMobile } = useMemo(() => buildLinks({ locationString }), [
     locationString,
   ]);
+
   return {
     activeCategory,
     activeLink,

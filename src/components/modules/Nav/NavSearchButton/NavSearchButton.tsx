@@ -1,3 +1,5 @@
+import { useTheme } from 'emotion-theming';
+
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import { useSearchContext } from '~/components/modules/Search/Search.context';
@@ -9,6 +11,7 @@ import { typography } from '~/styles/typography.styles';
 import styles from './NavSearchButton.styles';
 
 function NavSearchButton() {
+  const { border, iconColor, textColor } = useTheme();
   const { toggleIsSearchOpen } = useSearchContext();
   function handleToggleSearch() {
     toggleIsSearchOpen();
@@ -17,11 +20,15 @@ function NavSearchButton() {
   return (
     <button
       aria-label={ui('common.modal.open', { moduleName: 'search' })}
-      css={[typography.primarySubhead, styles.button]}
+      css={[typography.primarySubhead, styles.button, textColor, border]}
       onClick={handleToggleSearch}
       type="button"
     >
-      <Icon css={styles.icon} name={ICONS.SEARCH} aria-hidden="true" />
+      <Icon
+        css={[styles.icon, iconColor]}
+        name={ICONS.SEARCH}
+        aria-hidden="true"
+      />
       <SearchLabel fullLabelAt={BREAKPOINT_SIZES.XL} hideOnSmallMedium />
     </button>
   );

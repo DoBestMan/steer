@@ -4,6 +4,7 @@ import { useUserPersonalizationContext } from '~/context/UserPersonalization.con
 import Header from './Header';
 
 interface Props {
+  hasTopPicks: boolean;
   isAdvancedView: boolean;
   isInternal?: boolean;
   toggleView: () => void;
@@ -21,7 +22,11 @@ const titlePlaceholder = (
   </>
 );
 
-export default function HeaderContainer({ isAdvancedView, toggleView }: Props) {
+export default function HeaderContainer({
+  hasTopPicks,
+  isAdvancedView,
+  toggleView,
+}: Props) {
   const { locationString } = useUserPersonalizationContext();
 
   // TODO: hook up metadata
@@ -29,6 +34,7 @@ export default function HeaderContainer({ isAdvancedView, toggleView }: Props) {
   return (
     <FiltersContextProvider onApplyFilters={onSearchWithFilters}>
       <Header
+        hasTopPicks={hasTopPicks}
         isAdvancedView={isAdvancedView}
         isInternal={false}
         title={titlePlaceholder}

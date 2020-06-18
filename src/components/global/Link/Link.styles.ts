@@ -120,25 +120,50 @@ export const footerLink = {
 };
 
 export const navLink = {
-  root: {
-    '&:hover': { color: COLORS.GLOBAL.BLACK },
-    // eslint-disable-next-line sort-keys
-    '&:active, &:focus': { color: COLORS.LIGHT.GRAY_70 },
-    color: COLORS.LIGHT.GRAY_70,
-    span: {
-      borderColor: 'transparent',
+  [THEME.LIGHT]: {
+    root: {
+      '&:hover': { color: COLORS.GLOBAL.BLACK },
+      // eslint-disable-next-line sort-keys
+      '&:active, &:focus': { color: COLORS.LIGHT.GRAY_70 },
+      color: COLORS.LIGHT.GRAY_70,
+      span: {
+        borderColor: 'transparent',
+      },
+      [MQ.M]: typography.tertiaryHeadline,
+      [MQ.L]: typography.primarySubhead,
     },
-    [MQ.M]: typography.tertiaryHeadline,
-    [MQ.L]: typography.primarySubhead,
+    selected: {
+      '&:hover, &:focus, &:active': {
+        span: { color: COLORS.GLOBAL.ORANGE },
+      },
+      color: COLORS.GLOBAL.ORANGE,
+      span: {
+        borderColor: COLORS.GLOBAL.ORANGE,
+        transition: `border-color ${TIME.MS100}ms ease`,
+      },
+    },
   },
-  selected: {
-    '&:hover, &:focus, &:active': {
-      span: { color: COLORS.GLOBAL.ORANGE },
+  [THEME.ORANGE]: {
+    root: {
+      '&:hover': { color: COLORS.GLOBAL.WHITE },
+      // eslint-disable-next-line sort-keys
+      '&:active, &:focus': { color: COLORS.ORANGE.TINT_70 },
+      color: COLORS.GLOBAL.WHITE,
+      span: {
+        borderColor: 'transparent',
+      },
+      [MQ.M]: typography.tertiaryHeadline,
+      [MQ.L]: typography.primarySubhead,
     },
-    color: COLORS.GLOBAL.ORANGE,
-    span: {
-      borderColor: COLORS.GLOBAL.ORANGE,
-      transition: `border-color ${TIME.MS100}ms ease`,
+    selected: {
+      '&:hover, &:focus, &:active': {
+        span: { color: COLORS.GLOBAL.ORANGE },
+      },
+      color: COLORS.GLOBAL.WHITE,
+      span: {
+        borderColor: COLORS.GLOBAL.ORANGE,
+        transition: `border-color ${TIME.MS100}ms ease`,
+      },
     },
   },
 };

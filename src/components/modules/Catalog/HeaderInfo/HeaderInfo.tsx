@@ -10,6 +10,7 @@ import { ui } from '~/lib/utils/ui-dictionary';
 import styles from '../Header.styles';
 
 interface Props {
+  hasTopPicks: boolean;
   isAdvancedView?: boolean;
   isInternal?: boolean;
   location: string;
@@ -20,6 +21,7 @@ interface Props {
 }
 
 export default function HeaderInfo({
+  hasTopPicks,
   isAdvancedView = false,
   isInternal = false,
   location,
@@ -69,7 +71,7 @@ export default function HeaderInfo({
   return (
     <>
       <div css={styles.header}>
-        {backEl}
+        {hasTopPicks && backEl}
         <h1 css={styles.title}>{title}</h1>
         {!isInternal && (
           <>

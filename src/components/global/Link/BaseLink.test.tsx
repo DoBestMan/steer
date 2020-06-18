@@ -105,7 +105,7 @@ describe('BaseLink', () => {
         data-test-as="/drupal-tires/tractors"
       >
         <a
-          href="/[brandName]-tires/[categoryOrType]"
+          href="/[brandName]/[categoryOrType]"
         >
           Click here
         </a>
