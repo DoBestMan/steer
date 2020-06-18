@@ -1,4 +1,4 @@
-import { COLORS, RADIUS, SPACING, StylesMap } from '~/lib/constants';
+import { BORDERS, COLORS, RADIUS, SPACING, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 import { RANGE_SLIDER_SIZE } from './Range.constants';
@@ -79,7 +79,7 @@ const styles: StylesMap = {
   },
   [RANGE_SLIDER_SIZE.SMALL]: {
     background: COLORS.GLOBAL.WHITE,
-    border: `2px solid ${COLORS.GLOBAL.ORANGE}`,
+    border: BORDERS.SOLID_ORANGE_2PX,
     height: INDICATOR_SIZE[RANGE_SLIDER_SIZE.SMALL],
     top: -3,
     width: INDICATOR_SIZE[RANGE_SLIDER_SIZE.SMALL],

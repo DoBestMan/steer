@@ -9,4 +9,5 @@ export const BORDERS = {
   SOLID_GRAY_20_1PX: `1px solid ${COLORS.LIGHT.GRAY_20}`,
   SOLID_GRAY_80_1PX: `1px solid ${COLORS.DARK.GRAY_80}`,
   SOLID_GRAY_90_1PX: `1px solid ${COLORS.DARK.GRAY_90}`,
+  SOLID_ORANGE_2PX: `2px solid ${COLORS.GLOBAL.ORANGE}`,
 };

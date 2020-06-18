@@ -170,6 +170,17 @@
       "readMore": "Read more",
       "verifiedCustomer": "Verified Customer"
     },
+    "roadHazard": {
+      "headerCopy": "Most tire failure are punctures or bruises that manufacturer's warranty typically doesn't cover.",
+      "headerSubtitle": "Save up to 100% of the tire cost if you need a replacement in 3 years",
+      "removeLabel": "Remove coverage",
+      "coverageLabel": "Road Hazard Coverage included",
+      "coverageLink": "Learn more",
+      "copy": "Protection for 3 years\n\nReplacement up to 100% of the tire cost",
+      "copyHeader": "Recommended",
+      "price": "{{price}}/tire",
+      "title": "PRO tip"
+    },
     "faq": {
       "title": "Have a question?",
       "showAllLabel": "See all {{total}} questions"

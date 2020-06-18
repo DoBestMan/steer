@@ -44,6 +44,7 @@ export function QuantitySelectorDefault() {
   const [secondaryQuantity, setSecondaryQuantity] = useState(2);
 
   const hasIcon = boolean('Display Icon', true);
+
   const handleInterceptAction = action('number-picker-selection');
   const shouldIntercept = boolean('Display Intercept', false);
   const quantityToIntercep = number('Quantity to Intercept', 3);

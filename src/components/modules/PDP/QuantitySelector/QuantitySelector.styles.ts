@@ -1,5 +1,4 @@
-import { BORDERS, COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
-import { typography } from '~/styles/typography.styles';
+import { BORDERS, MQ, SPACING, StylesMap } from '~/lib/constants';
 
 import { getResponsiveModalStyles } from './QuantitySelector.utils';
 
@@ -23,16 +22,6 @@ const styles: StylesMap = {
       paddingTop: SPACING.SIZE_60,
     },
   },
-  copy: [
-    typography.smallCopy,
-    {
-      [MQ.L]: {
-        br: {
-          display: 'none',
-        },
-      },
-    },
-  ],
   copyConfirmation: {
     marginBottom: SPACING.SIZE_50,
   },
@@ -68,11 +57,6 @@ const styles: StylesMap = {
       fontSize: 8,
     },
   },
-  icon: {
-    color: COLORS.GLOBAL.ORANGE,
-    justifyContent: 'center',
-    marginBottom: SPACING.SIZE_10,
-  },
   modalContentStyles: {
     height: '100%',
   },
@@ -81,25 +65,6 @@ const styles: StylesMap = {
     marginTop: SPACING.SIZE_30,
     padding: `${SPACING.SIZE_30}px 0 ${SPACING.SIZE_40}px`,
   },
-  subtitle: [
-    typography.secondaryHeadline,
-    {
-      marginBottom: SPACING.SIZE_05,
-
-      [MQ.L]: {
-        br: {
-          display: 'none',
-        },
-      },
-    },
-  ],
-  title: [
-    typography.secondaryHeadline,
-    {
-      color: COLORS.GLOBAL.ORANGE,
-      marginBottom: SPACING.SIZE_30,
-    },
-  ],
 };
 
 export default styles;

@@ -1,7 +1,7 @@
 import { BORDERS, COLORS, RADIUS, StylesMap } from '~/lib/constants';
 
 const RADIO_SIZE = 25;
-const RADIO_BORDER = `2px solid ${COLORS.GLOBAL.ORANGE}`;
+const RADIO_BORDER = BORDERS.SOLID_ORANGE_2PX;
 const INNER_SIZE = 13;
 
 const styles: StylesMap = {

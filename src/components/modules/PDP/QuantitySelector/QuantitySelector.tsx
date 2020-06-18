@@ -1,13 +1,12 @@
 import { ReactNode } from 'react';
 
 import Button from '~/components/global/Button/Button';
-import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
-import Markdown from '~/components/global/Markdown/Markdown';
 import BottomCardModal from '~/components/global/Modal/BottomCardModal';
 import { BUTTON_STYLE, THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
+import PDPModalHeader from '../PDPModalHeader/PDPModalHeader';
 import styles from './QuantitySelector.styles';
 
 interface Props {
@@ -24,7 +23,6 @@ interface Props {
 
 function QuantitySelector({
   children,
-  hasIcon = true,
   isButtonDisabled = false,
   isIntercept = false,
   isOpen,
@@ -33,7 +31,7 @@ function QuantitySelector({
   onConfirm,
   quantityToIntercept,
 }: Props) {
-  const cta = isIntercept
+  const subtitle = isIntercept
     ? ui('pdp.quantitySelector.confirmationSubtitle')
     : ui('pdp.quantitySelector.subtitle');
   const copy = isIntercept
@@ -56,15 +54,13 @@ function QuantitySelector({
       onClose={onClose}
     >
       <div css={styles.container}>
-        {hasIcon && <Icon name={icon} css={styles.icon} />}
-        <h2 css={styles.title}>{ui('pdp.quantitySelector.title')}</h2>
-
-        <h3 css={styles.subtitle}>
-          <Markdown renderers={{ paragraph: 'span' }}>{cta}</Markdown>
-        </h3>
-        <div css={[styles.copy, isIntercept && styles.copyConfirmation]}>
-          <Markdown>{copy}</Markdown>
-        </div>
+        <PDPModalHeader
+          copy={copy}
+          customCopyStyles={isIntercept ? styles.copyConfirmation : undefined}
+          icon={icon}
+          title={ui('pdp.quantitySelector.title')}
+          subtitle={subtitle}
+        />
 
         {!isIntercept && <div css={styles.pickerContainer}>{children}</div>}
 
