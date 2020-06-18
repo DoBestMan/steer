@@ -22,8 +22,7 @@ export interface AdditionalInfoModalContainerProps {
   alternateSearch: AlternateSearch;
   eyebrow: string;
   imageAlt: string;
-  imageSrcLg: string;
-  imageSrcSm: string;
+  imageSrc: string;
   isOpen: boolean;
   modalLabel: string;
   onClose: () => void;
@@ -39,8 +38,7 @@ function AdditionalInfoModal({
   alternateSearch,
   eyebrow,
   imageAlt,
-  imageSrcLg,
-  imageSrcSm,
+  imageSrc,
   isCustomerServiceEnabled,
   isOpen,
   modalLabel,
@@ -48,7 +46,7 @@ function AdditionalInfoModal({
   steps,
   title,
 }: Props) {
-  const { is, lessThan } = useBreakpoints();
+  const { lessThan } = useBreakpoints();
 
   return (
     <Modal
@@ -69,11 +67,7 @@ function AdditionalInfoModal({
           ))}
         </ol>
         <div css={styles.imageWrapper}>
-          <Image
-            css={styles.image}
-            src={is.M ? imageSrcLg : imageSrcSm}
-            altText={imageAlt}
-          />
+          <Image css={styles.image} src={imageSrc} altText={imageAlt} />
         </div>
         <div css={styles.alternateSearch}>
           <h3 css={styles.alternateSearchTitle}>{alternateSearch.title}</h3>
