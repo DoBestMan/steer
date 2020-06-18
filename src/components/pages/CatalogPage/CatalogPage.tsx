@@ -57,7 +57,7 @@ function CatalogPage() {
   }
   // TEMP: use route params for testing flows
   const router = useRouter();
-  const { flow, isSearch } = router.query;
+  const { flow, isSearch, showTopPicks } = router.query;
 
   // SiteCatalogSummary response
   let catalogSummaryResponse = vehiclesNoOeWithSize;
@@ -71,8 +71,7 @@ function CatalogPage() {
     numberOfProducts = 0;
   }
 
-  // TODO: determine if has top picks
-  const hasTopPicks = false;
+  const hasTopPicks = showTopPicks !== 'false';
 
   return (
     <ThemeProvider
