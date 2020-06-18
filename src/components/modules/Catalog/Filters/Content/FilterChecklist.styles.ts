@@ -1,4 +1,4 @@
-import { COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
+import { BORDERS, COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
@@ -52,14 +52,28 @@ const styles: StylesMap = {
       marginRight: SPACING.SIZE_05,
     },
   ],
+  labelContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    marginBottom: SPACING.SIZE_40,
+    [MQ.L]: { display: 'none' },
+  },
   root: {
     minWidth: 200,
   },
-  title: [
-    typography.eyebrow,
+  title: typography.eyebrow,
+  tooltip: [
+    typography.smallCopyTight,
     {
-      marginBottom: SPACING.SIZE_40,
-      [MQ.L]: { display: 'none' },
+      borderBottom: BORDERS.DOTTED_GRAY_40_2PX,
+      borderColor: COLORS.LIGHT.GRAY_70,
+      color: COLORS.LIGHT.GRAY_70,
+      cursor: 'pointer',
+      marginRight: SPACING.SIZE_30,
+      width: 'fit-content',
+      [MQ.L]: {
+        marginRight: 0,
+      },
     },
   ],
 };

@@ -15,6 +15,7 @@ export default function FilterChecklist({
   filtersToApply,
   label,
   onChange,
+  tooltip,
   type,
 }: (CatalogFilterChecklist | CatalogFilterChecklistLarge) &
   Pick<ChildProps, 'onChange' | 'filtersToApply'>) {
@@ -30,7 +31,10 @@ export default function FilterChecklist({
   }
   return (
     <div css={styles.root}>
-      <h2 css={lgStyles.title}>{label}</h2>
+      <div css={styles.labelContainer}>
+        <h2 css={lgStyles.title}>{label}</h2>
+        {!greaterThan.M && tooltip && <p css={styles.tooltip}>{tooltip}</p>}
+      </div>
       {filterGroups?.map(({ id, items, title }) => (
         <div css={lgStyles.group} key={id}>
           <h3 css={lgStyles.groupTitle}>{title}</h3>
@@ -53,6 +57,7 @@ export default function FilterChecklist({
           ))}
         </div>
       ))}
+      {greaterThan.M && tooltip && <p css={styles.tooltip}>{tooltip}</p>}
     </div>
   );
 }

@@ -19,6 +19,7 @@ import {
   slideFadeInLeft,
   slideFadeOutLeft,
 } from '~/styles/animations.styles';
+import { hideScrollbar } from '~/styles/document/accessibility.styles';
 
 const OVERLAY_BOX_SHADOW = '0px 4px 4px rgba(0, 0, 0, 0.25)';
 const OVERLAY_PANEL_WIDTH = 425;
@@ -70,16 +71,17 @@ const styles: StylesMap = {
   close: {
     color: COLORS.LIGHT.GRAY_70,
     position: 'absolute',
-    top: SPACING.SIZE_20 + 1,
+    top: SPACING.SIZE_20 + 4,
     [MQ.S]: {
       right: SPACING.SIZE_15,
     },
     [MQ.M]: {
       right: SPACING.SIZE_35,
+      top: 34,
     },
   },
   content: {
-    overflowY: 'auto',
+    position: 'relative',
     [MQ.S]: {
       padding: `${SPACING.SIZE_30}px ${CONTENT_LATERAL_PADDING.S}px`,
     },
@@ -90,45 +92,43 @@ const styles: StylesMap = {
       padding: `${SPACING.SIZE_40}px ${CONTENT_LATERAL_PADDING.L}px`,
     },
   },
-  root: {
-    background: COLORS.GLOBAL.WHITE,
-    boxShadow: OVERLAY_BOX_SHADOW,
-    color: COLORS.GLOBAL.BLACK,
-    overflowY: 'auto',
-    [MQ.S]: {
-      borderRadius: `${RADIUS.RADIUS_15} ${RADIUS.RADIUS_15} 0 0`,
-      bottom: 0,
-      position: 'absolute',
-      width: '100%',
+  root: [
+    hideScrollbar,
+    {
+      background: COLORS.GLOBAL.WHITE,
+      boxShadow: OVERLAY_BOX_SHADOW,
+      color: COLORS.GLOBAL.BLACK,
+      overflowY: 'auto',
+      [MQ.S]: {
+        borderRadius: `${RADIUS.RADIUS_15} ${RADIUS.RADIUS_15} 0 0`,
+        bottom: 0,
+        maxHeight: '100%',
+        position: 'absolute',
+        width: '100%',
+      },
+      [MQ.M]: {
+        borderRadius: RADIUS.RADIUS_15,
+        margin: 'auto',
+        maxHeight: `calc(100vh - ${GRID_MARGIN.M}px)`,
+        maxWidth: OVERLAY_PANEL_WIDTH,
+        minWidth: 400,
+        position: 'relative',
+        top: '50%',
+        transform: 'translateY(-50%)',
+      },
+      [MQ.L]: {
+        borderRadius: 0,
+        bottom: 0,
+        height: '100%',
+        maxHeight: 'none',
+        position: 'absolute',
+        right: 0,
+        top: 0,
+        transform: 'none',
+        width: OVERLAY_PANEL_WIDTH,
+      },
     },
-    [MQ.M]: {
-      borderRadius: RADIUS.RADIUS_15,
-      margin: 'auto',
-      maxHeight: `calc(100vh - ${GRID_MARGIN.M}px)`,
-      maxWidth: OVERLAY_PANEL_WIDTH,
-      minWidth: 400,
-      position: 'relative',
-      top: '50%',
-      transform: 'translateY(-50%)',
-      width: 'fit-content',
-    },
-    [MQ.L]: {
-      borderRadius: 0,
-      bottom: 0,
-      height: '100%',
-      maxHeight: 'unset',
-      position: 'absolute',
-      right: 0,
-      top: 0,
-      transform: 'unset',
-      width: OVERLAY_PANEL_WIDTH,
-    },
-  },
-  scrollContainer: {
-    height: '100%',
-    overflowY: 'auto',
-    position: 'relative',
-  },
+  ],
 };
 
 export default styles;

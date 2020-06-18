@@ -140,13 +140,13 @@ export const buttonStyle: Record<BUTTON_STYLE, ThemeStyles> = {
     [THEME.ORANGE]: {
       '&:active': {
         backgroundColor: COLORS.ORANGE.TINT_70,
-        borderColor: '#B94A12', // TODO: var
+        borderColor: COLORS.ORANGE.SHADE_30_SOLID,
       },
       '&:focus:not(:active)': {
         borderColor: COLORS.GLOBAL.BLACK,
       },
       '&:hover:not(:active)': {
-        borderColor: '#B94A12', // TODO: var
+        borderColor: COLORS.ORANGE.SHADE_30_SOLID,
       },
       backgroundColor: COLORS.GLOBAL.WHITE,
       color: COLORS.GLOBAL.ORANGE,
@@ -192,7 +192,6 @@ export const toggle: { [classname: string]: ThemeStyles } = {
     },
     [THEME.ORANGE]: {
       '&:focus': {
-        backgroundColor: COLORS.ORANGE.TINT_70,
         borderColor: COLORS.GLOBAL.BLACK,
       },
       '&:hover': {
@@ -200,8 +199,7 @@ export const toggle: { [classname: string]: ThemeStyles } = {
         // under the border. Required for semi-transparent border
         // colors to be rendered correctly.
         backgroundClip: 'padding-box',
-        backgroundColor: COLORS.ORANGE.TINT_70,
-        borderColor: COLORS.ORANGE.TINT_70,
+        borderColor: COLORS.ORANGE.SHADE_30_SOLID,
       },
       backgroundColor: COLORS.GLOBAL.WHITE,
       borderColor: COLORS.GLOBAL.WHITE,

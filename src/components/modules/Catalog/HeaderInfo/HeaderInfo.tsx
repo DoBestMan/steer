@@ -67,7 +67,7 @@ export default function HeaderInfo({
     thirdItem = null;
   }
   return (
-    <div>
+    <>
       <div css={styles.header}>
         {backEl}
         <h1 css={styles.title}>{title}</h1>
@@ -84,13 +84,15 @@ export default function HeaderInfo({
         )}
       </div>
       <div css={styles.toggle}>
-        <span css={styles.label}>{ui('catalog.header.advancedViewLabel')}</span>
+        <span css={[styles.label, header.advancedLabel]}>
+          {ui('catalog.header.advancedViewLabel')}
+        </span>
         <Toggle
           name={ui('catalog.header.advancedViewLabel')}
           onToggle={onToggleView}
           defaultChecked={isAdvancedView}
         />
       </div>
-    </div>
+    </>
   );
 }

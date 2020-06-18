@@ -18,6 +18,7 @@ export const COLORS = {
   ORANGE: {
     SHADE_15: 'rgba(24, 24, 24, 0.15)',
     SHADE_30: 'rgba(24, 24, 24, 0.3)',
+    SHADE_30_SOLID: '#B94A12',
     SHADE_85: 'rgba(24, 24, 24, 0.85)',
     TINT_30: 'rgba(255, 255, 255, 0.3)',
     TINT_70: 'rgba(255, 255, 255, 0.7)',

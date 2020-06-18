@@ -32,12 +32,14 @@ interface FilterSortItem {
 export interface CatalogFilterChecklist {
   filterGroups: FilterGroup[];
   label: string;
+  tooltip: string | null;
   type: FilterContentTypes.CatalogFilterChecklist;
 }
 
 export interface CatalogFilterChecklistLarge {
   filterGroups: FilterGroup[];
   label: string;
+  tooltip: string | null;
   type: FilterContentTypes.CatalogFilterChecklistLarge;
 }
 

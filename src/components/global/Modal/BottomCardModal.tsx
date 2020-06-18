@@ -49,19 +49,17 @@ function BottomCardModal({
         isOpen && overlayBkStyles[bk].open,
       ]}
     >
-      <div css={styles.scrollContainer}>
-        <div css={[styles.content, customContentStyles]}>
-          <Link
-            as="button"
-            icon={ICONS.CLOSE}
-            aria-label={`${ui('modal.close')} ${contentLabel}`}
-            onClick={onClose}
-            theme={THEME.LIGHT}
-            // this will allow modal content to start where padding begins rather than pushed down from actions bar
-            css={styles.close}
-          />
-          {children}
-        </div>
+      <div css={[styles.content, customContentStyles]}>
+        <Link
+          as="button"
+          icon={ICONS.CLOSE}
+          aria-label={`${ui('modal.close')} ${contentLabel}`}
+          onClick={onClose}
+          theme={THEME.LIGHT}
+          // this will allow modal content to start where padding begins rather than pushed down from actions bar
+          css={styles.close}
+        />
+        {children}
       </div>
     </ReactModal>
   );

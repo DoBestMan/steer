@@ -22,6 +22,9 @@ export const defaultTheme = {
     loadingTheme: THEME.DARK,
   },
   header: {
+    advancedLabel: {
+      color: COLORS.LIGHT.GRAY_70,
+    },
     background: {
       background: COLORS.GLOBAL.ORANGE,
     },
@@ -34,6 +37,9 @@ export const defaultTheme = {
 
 export const headerAdvanced = {
   header: {
+    advancedLabel: {
+      color: COLORS.GLOBAL.WHITE,
+    },
     background: {
       background: COLORS.GLOBAL.BLACK,
     },

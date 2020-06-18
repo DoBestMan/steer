@@ -18,7 +18,12 @@ const styles: StylesMap = {
   open: {
     display: 'block',
   },
-  reset: [typography.primarySubhead],
+  reset: [
+    typography.primarySubhead,
+    {
+      color: COLORS.LIGHT.GRAY_70,
+    },
+  ],
   root: {
     alignItems: 'center',
     background: COLORS.GLOBAL.WHITE,
@@ -29,7 +34,7 @@ const styles: StylesMap = {
     display: 'flex',
     justifyContent: 'space-between',
     left: 0,
-    position: 'absolute',
+    position: 'fixed',
     right: 0,
     [MQ.S]: {
       height: ACTION_BAR_HEIGHT.SM,
@@ -38,6 +43,7 @@ const styles: StylesMap = {
     [MQ.M]: {
       height: ACTION_BAR_HEIGHT.MED,
       padding: `${SPACING.SIZE_25}px ${SPACING.SIZE_40}px`,
+      position: 'absolute',
     },
     [MQ.L]: {
       height: ACTION_BAR_HEIGHT.LG,

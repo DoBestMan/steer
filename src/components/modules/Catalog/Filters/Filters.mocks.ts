@@ -111,6 +111,7 @@ export const filterTypeMap: Record<
   },
   [FilterContentTypes.CatalogFilterChecklist]: {
     label: 'Brand',
+    tooltip: 'Learn more',
     type: FilterContentTypes.CatalogFilterChecklist,
     filterGroups: [
       {
@@ -193,6 +194,7 @@ export const filterTypeMap: Record<
   },
   [FilterContentTypes.CatalogFilterChecklistLarge]: {
     label: 'More filters',
+    tooltip: null,
     type: FilterContentTypes.CatalogFilterChecklistLarge,
     filterGroups: [
       {
