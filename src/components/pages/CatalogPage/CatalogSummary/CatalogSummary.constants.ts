@@ -12,21 +12,86 @@ export enum STAGES {
   TOP_PICKS = 'topPicks',
 }
 
-export const shouldScaleVehicleMap: { [key in STAGES]: boolean } = {
-  [STAGES.DATA_MOMENT]: true,
-  [STAGES.BUILD_IN]: false,
-  [STAGES.LOADING]: false,
-  [STAGES.NO_RESULTS]: false,
-  [STAGES.TOP_PICKS]: true,
-};
+const overlayIn = 600;
+const stageTransition = 800;
 
-// TODO: make enter 0 (or close to) for all steps so that
-// all transition timings can be done in CSS. Right now CSS
-// timing has to factor in the `enter` duration.
 export const stageToMessageTimeout = {
   [STAGES.LOADING]: { enter: 0, exit: 0 },
-  [STAGES.BUILD_IN]: { enter: 600, exit: 600 },
-  [STAGES.DATA_MOMENT]: { enter: 600, exit: 600 },
-  [STAGES.TOP_PICKS]: { enter: 600, exit: 600 },
-  [STAGES.NO_RESULTS]: { enter: 300, exit: 600 },
+  [STAGES.BUILD_IN]: { enter: overlayIn, exit: stageTransition / 2 },
+  [STAGES.DATA_MOMENT]: {
+    enter: stageTransition / 2,
+    exit: stageTransition / 2,
+  },
+  [STAGES.TOP_PICKS]: { enter: stageTransition / 2, exit: stageTransition / 2 },
+  [STAGES.NO_RESULTS]: { enter: overlayIn, exit: stageTransition / 2 },
+};
+
+export const TIMINGS = {
+  CONTENT_IN_OUT: 200,
+  OVERLAY_IN: overlayIn,
+  STAGE_TRANSITION: stageTransition,
+  WHEEL_IN_OUT: 200,
+};
+
+export const MEASUREMENTS = {
+  [STAGES.LOADING]: {
+    CONTENT_MIN_HEIGHT: {
+      S: '100vh',
+      M: '100vh',
+      L: '100vh',
+    },
+    CONTENT_TOP: {
+      S: 0,
+      M: 0,
+      L: 0,
+    },
+  },
+  [STAGES.BUILD_IN]: {
+    CONTENT_MIN_HEIGHT: {
+      S: '40vh',
+      M: '35vh',
+      L: '33.33vh',
+    },
+    CONTENT_TOP: {
+      S: 'max(60vh, 385px)',
+      M: 'max(65vh, 517px)',
+      L: 'max(66.6vh, 308px)',
+    },
+  },
+  [STAGES.DATA_MOMENT]: {
+    CONTENT_MIN_HEIGHT: {
+      S: '40vh',
+      M: '35vh',
+      L: '33.33vh',
+    },
+    CONTENT_TOP: {
+      S: 'max(60vh, 260px)',
+      M: 'max(65vh, 425px)',
+      L: 'max(66.6vh, 408px)',
+    },
+  },
+  [STAGES.TOP_PICKS]: {
+    CONTENT_MIN_HEIGHT: {
+      S: '40vh',
+      M: '35vh',
+      L: '33.33vh',
+    },
+    CONTENT_TOP: {
+      S: 'max(60vh, 385px)',
+      M: 'max(65vh, 517px)',
+      L: 'max(66.6vh, 538px)',
+    },
+  },
+  [STAGES.NO_RESULTS]: {
+    CONTENT_MIN_HEIGHT: {
+      S: '60vh',
+      M: '65vh',
+      L: '66.66vh',
+    },
+    CONTENT_TOP: {
+      S: 'max(40vh, 255px)',
+      M: 'max(35vh, 350px)',
+      L: 'max(33.3vh, 350px)',
+    },
+  },
 };

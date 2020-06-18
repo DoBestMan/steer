@@ -1,13 +1,11 @@
 import { ReactNode, useEffect, useState } from 'react';
 
+import { PAGE_TRANSITION_DURATION } from '~/components/modules/App/App.constants';
 import { STAGES } from '~/components/pages/CatalogPage/CatalogSummary/CatalogSummary.constants';
 import { SiteCatalogSummary } from '~/data/models/SiteCatalogSummary';
 import { createContext } from '~/lib/utils/context';
 
-const CONSTANTS = {
-  DATA_MOMENT_PAUSE: 5000,
-  CONFIRM_TIRE_SIZE_PAUSE: 3500,
-};
+const BUILD_IN_PAUSE = 4000;
 
 async function pause(pauseTime = 2000) {
   await new Promise((resolve) => setTimeout(resolve, pauseTime));
@@ -16,11 +14,11 @@ async function pause(pauseTime = 2000) {
 export interface CatalogSummaryContextProps {
   catalogSummary: SiteCatalogSummary;
   contentStage: STAGES;
-  isSearch: boolean; // TODO: remove?
+  isSearch: boolean;
   setNewContent(): void;
   setStage(stage: STAGES): void;
+  showLoadingInterstitial: boolean;
   stage: STAGES;
-  useTransitions: boolean;
 }
 
 const CatalogSummaryContext = createContext<CatalogSummaryContextProps>();
@@ -29,33 +27,6 @@ interface SetupProps {
   catalogSummaryResponse: SiteCatalogSummary;
   isSearch: boolean;
   numberOfProducts: number;
-}
-
-// TODO: tests
-function getDefaults({
-  hasResults,
-  isSearch,
-}: {
-  hasResults: boolean;
-  isSearch: boolean;
-}): {
-  defaultStage: STAGES;
-  defaultUseTransitions: boolean;
-} {
-  // default to LOADING (fetching local data)
-  let defaultStage = STAGES.LOADING;
-  let defaultUseTransitions = false;
-
-  // if we have local data already, go staight into relevant stage
-  if (isSearch) {
-    defaultStage = hasResults ? STAGES.BUILD_IN : STAGES.NO_RESULTS;
-    defaultUseTransitions = hasResults ? true : false;
-  }
-
-  return {
-    defaultStage,
-    defaultUseTransitions,
-  };
 }
 
 // TODO: Exported for testing only
@@ -67,27 +38,42 @@ export function useContextSetup({
   const hasResults = numberOfProducts > 0;
   const mustShowPrompt =
     catalogSummaryResponse.siteCatalogSummaryPrompt?.mustShow;
-  const { defaultStage, defaultUseTransitions } = getDefaults({
-    hasResults,
-    isSearch,
-  });
 
-  const [stage, setStage] = useState<STAGES>(defaultStage);
+  /**
+   * The `stage` state is used to determine which content to display.
+   * The `contentStage` matches the `stage` state but on a delay which
+   * allows for the Content component to fade out/back in during the
+   * transition of the vehicle svg.
+   */
+  const [stage, setStage] = useState<STAGES>(STAGES.LOADING);
   const [contentStage, setContentStage] = useState<STAGES>(stage);
 
-  const [useTransitions] = useState<boolean>(defaultUseTransitions);
+  // If deep-linking in, or the local data has no results, we skip
+  // the loading interstitial and show the relevant stage without
+  // CSS transitions.
+  const [showLoadingInterstitial] = useState<boolean>(isSearch && hasResults);
 
-  const [isLoadingData, setIsLoadingData] = useState<boolean>(
-    stage === STAGES.LOADING,
-  );
+  // If local data does not exist, show loading indicator
+  const [isLoadingData, setIsLoadingData] = useState<boolean>(!isSearch);
 
-  // TEMP: pause to retrieve local data
+  /**
+   * There will always be a LOADING stage when the user lands on the
+   * Catalog page.
+   * - If local data does not exist, show the LOADING stage until
+   *   local data has been fetched. In this use case, we then skip the
+   *   loading interstitial and the page loads at the relevant step.
+   * - If local data does exist (e.g. the user is coming from the
+   *   Search), show the LOADING stage for the duration of the global
+   *   page transition (e.g. until the Nav has transitioned back
+   *   into place).
+   */
   useEffect(() => {
-    if (!isLoadingData) {
+    if (stage !== STAGES.LOADING) {
       return;
     }
 
     const getLocalData = async () => {
+      // TEMP: pause to retrieve local data
       await pause();
       // Once we have local results, jump to relevant step
       if (mustShowPrompt) {
@@ -98,22 +84,40 @@ export function useContextSetup({
       setIsLoadingData(false);
     };
 
-    getLocalData();
-  }, [hasResults, mustShowPrompt, isLoadingData]);
+    let loadingTimeout: ReturnType<typeof setTimeout> | null = null;
 
-  // Pause on the build-in screen to show the casino animation,
-  // before transitioning to the data moment
+    if (isLoadingData) {
+      getLocalData();
+    } else {
+      loadingTimeout = setTimeout(
+        () => {
+          setStage(hasResults ? STAGES.BUILD_IN : STAGES.NO_RESULTS);
+        },
+        // TODO: adjust this duration based on transition from Search
+        PAGE_TRANSITION_DURATION * 2,
+      );
+    }
+
+    return () => {
+      if (loadingTimeout) {
+        clearTimeout(loadingTimeout);
+      }
+    };
+  }, [hasResults, mustShowPrompt, isLoadingData, stage]);
+
+  /**
+   * During the BUILD_IN stage, the animation is paused to
+   * show the build-in content (e.g. the Casino animation).
+   * After the pause, the user is transitioned to the DATA_MOMENT.
+   */
   useEffect(() => {
     if (stage !== STAGES.BUILD_IN) {
       return;
     }
 
-    const pauseLength = mustShowPrompt
-      ? CONSTANTS.CONFIRM_TIRE_SIZE_PAUSE
-      : CONSTANTS.DATA_MOMENT_PAUSE;
     const timeout = setTimeout(() => {
       setStage(STAGES.DATA_MOMENT);
-    }, pauseLength);
+    }, BUILD_IN_PAUSE);
 
     return () => {
       clearTimeout(timeout);
@@ -126,12 +130,13 @@ export function useContextSetup({
     isSearch,
     numberOfProducts,
     setNewContent: () => {
-      // Called after the previous content message exit transition
+      // Called after the previous content message exit transition.
+      // Brings `contentStage` back in alignment with `stage`.
       setContentStage(stage);
     },
     setStage,
+    showLoadingInterstitial,
     stage,
-    useTransitions,
   };
 }
 

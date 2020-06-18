@@ -3,6 +3,7 @@ import { Transition } from 'react-transition-group';
 import { TransitionStatus } from 'react-transition-group/Transition';
 
 import Button from '~/components/global/Button/Button';
+import Casino from '~/components/global/Casino/Casino';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import Image from '~/components/global/Image/Image';
@@ -10,7 +11,6 @@ import BaseLink from '~/components/global/Link/BaseLink';
 import Loading from '~/components/global/Loading/Loading';
 import Markdown from '~/components/global/Markdown/Markdown';
 import { useCatalogSummaryContext } from '~/context/CatalogSummary.context';
-import { SiteCatalogSummary } from '~/data/models/SiteCatalogSummary';
 import { SiteCatalogSummaryBuildIn } from '~/data/models/SiteCatalogSummaryBuildIn';
 import { SiteCatalogSummaryPrompt } from '~/data/models/SiteCatalogSummaryPrompt';
 import { LINK_TYPES } from '~/lib/constants';
@@ -37,38 +37,69 @@ interface BuildInMessageProps {
 export function BuildInMessage({
   siteCatalogSummaryBuildIn,
 }: BuildInMessageProps) {
-  return (
-    siteCatalogSummaryBuildIn && (
-      <Grid css={styles.container}>
-        <GridItem css={styles.containerInner}>
-          {/* TODO: check heading hierarchy */}
-          <h2 css={styles.heading}>{siteCatalogSummaryBuildIn.title}</h2>
-          {siteCatalogSummaryBuildIn.brandList && (
-            <ul css={styles.list}>
-              {siteCatalogSummaryBuildIn.brandList.map(({ image, label }) => {
-                if (!image) {
-                  return;
-                }
-                const id = label.replace(/\s+/g, '').toLowerCase();
-                // TODO: test with actual assets
-                const imageStyles = styles[`logo_${id}`];
+  if (!siteCatalogSummaryBuildIn) {
+    return null;
+  }
 
-                return (
-                  <li key={id}>
-                    <Image
-                      altText={label}
-                      src={image.src}
-                      css={imageStyles}
-                      widths={[100, 200, 500]}
-                    />
-                  </li>
-                );
-              })}
-            </ul>
+  /**
+   * Split the title by digits, and render the Casino component
+   * instead of the digit string.
+   */
+  const digitsRegex = /(\d+)/;
+  const splitTitle = siteCatalogSummaryBuildIn.title
+    // split by digits
+    .split(digitsRegex)
+    // remove empty strings
+    .filter((s) => s.length)
+    // convert digits to number
+    .map((s) =>
+      digitsRegex.test(s) ? (
+        <Casino animate numberDisplayed={parseInt(s, 10)} />
+      ) : (
+        s
+      ),
+    );
+
+  return (
+    <Grid css={styles.container}>
+      <GridItem css={styles.containerInner}>
+        {/* TODO: check heading hierarchy */}
+        <h2 aria-label={siteCatalogSummaryBuildIn.title} css={styles.heading}>
+          {splitTitle.length > 1 ? (
+            <span aria-hidden>
+              {splitTitle.map((s) => (
+                <>{s}</>
+              ))}
+            </span>
+          ) : (
+            siteCatalogSummaryBuildIn.title
           )}
-        </GridItem>
-      </Grid>
-    )
+        </h2>
+        {siteCatalogSummaryBuildIn.brandList && (
+          <ul css={styles.list}>
+            {siteCatalogSummaryBuildIn.brandList.map(({ image, label }) => {
+              if (!image) {
+                return;
+              }
+              const id = label.replace(/\s+/g, '').toLowerCase();
+              // TODO: test with actual assets
+              const imageStyles = styles[`logo_${id}`];
+
+              return (
+                <li key={id}>
+                  <Image
+                    altText={label}
+                    src={image.src}
+                    css={imageStyles}
+                    widths={[100, 200, 500]}
+                  />
+                </li>
+              );
+            })}
+          </ul>
+        )}
+      </GridItem>
+    </Grid>
   );
 }
 
@@ -153,25 +184,24 @@ interface NoResultsMessageProps {
 }
 
 export function NoResultsMessage({
-  onSearchBy,
   siteCatalogSummaryPrompt,
 }: NoResultsMessageProps) {
   const searchByOptions = [
     {
-      id: 'vehicle',
       labelId: 'catalog.summary.noResultsVehicleLabel',
+      href: '/vehicles/acura-tires/rsx/2005?tireSize=23540R1891W',
     },
     {
-      id: 'size',
       labelId: 'catalog.summary.noResultsSizeLabel',
+      href: '/vehicles/acura-tires/rsx/2005?tireSize=23540R1891W',
     },
     {
-      id: 'brand',
       labelId: 'catalog.summary.noResultsBrandLabel',
+      href: '/vehicles/acura-tires/rsx/2005?tireSize=23540R1891W',
     },
     {
-      id: 'popular',
       labelId: 'catalog.summary.noResultsPopularLabel',
+      href: '/vehicles/acura-tires/rsx/2005?tireSize=23540R1891W',
     },
   ];
 
@@ -196,7 +226,7 @@ export function NoResultsMessage({
               {ui('catalog.summary.noResultsContactDesc')}
               <BaseLink
                 href="tel:+18884100604"
-                css={styles.noResultsButton}
+                css={styles.noResultsLink}
                 isExternal
               >
                 {/* TODO: get number from Global API: https://simpletire.atlassian.net/browse/WCS-482 */}
@@ -207,15 +237,10 @@ export function NoResultsMessage({
             <dd>
               <ul>
                 {searchByOptions.map((option) => (
-                  <li css={styles.noResultsButtonWrapper} key={option.id}>
-                    <button
-                      css={styles.noResultsButton}
-                      onClick={function () {
-                        onSearchBy && onSearchBy(option.id);
-                      }}
-                    >
+                  <li css={styles.noResultsLinkWrapper} key={option.labelId}>
+                    <BaseLink css={styles.noResultsLink} href={option.href}>
                       {ui(option.labelId)}
-                    </button>
+                    </BaseLink>
                   </li>
                 ))}
               </ul>
@@ -235,16 +260,14 @@ const mapMessageToStage = {
   [STAGES.NO_RESULTS]: NoResultsMessage,
 };
 
-interface Props {
-  catalogSummary: SiteCatalogSummary;
-}
-
-function CatalogMessage({ catalogSummary }: Props) {
+function CatalogMessage() {
   const {
-    setStage,
-    stage,
+    catalogSummary,
     contentStage,
     setNewContent,
+    setStage,
+    showLoadingInterstitial,
+    stage,
   } = useCatalogSummaryContext();
 
   const MessageComponent = mapMessageToStage[contentStage];
@@ -258,6 +281,7 @@ function CatalogMessage({ catalogSummary }: Props) {
     >
       {(transitionStatus: TransitionStatus) => (
         <MessageContainer
+          showLoadingInterstitial={showLoadingInterstitial}
           stage={contentStage}
           transitionStatus={transitionStatus}
         >

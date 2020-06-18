@@ -1,23 +1,23 @@
 import styled from '@emotion/styled';
 
 import { WHEEL_WIDTH } from '~/components/global/Car/Car.constants';
-import { CSSStyles, GRID_MARGIN, MQ } from '~/lib/constants';
-import { fadeIn } from '~/styles/animations.styles';
+import { CSSStyles, EASING, GRID_MARGIN, MQ } from '~/lib/constants';
 
-import { STAGES } from '../CatalogSummary.constants';
-import { CONSTANTS } from '../CatalogSummary.styles';
+import { STAGES, TIMINGS } from '../CatalogSummary.constants';
 
 type Props = {
+  showLoadingInterstitial: boolean;
   stage: STAGES;
-  useTransitions: boolean;
 };
 
-function styledVehicleContainer({ useTransitions, stage }: Props) {
+function styledVehicleContainer({ showLoadingInterstitial, stage }: Props) {
   const base: CSSStyles = {
     bottom: '100%',
     fontSize: 0, // fix for bottom space under image
+    opacity: 1,
     position: 'absolute',
     right: GRID_MARGIN.S,
+    transform: 'translate3d(0, 0, 0)',
 
     [MQ.M]: {
       right: GRID_MARGIN.M,
@@ -29,12 +29,12 @@ function styledVehicleContainer({ useTransitions, stage }: Props) {
   };
 
   const stageStyles: CSSStyles = {
+    [STAGES.LOADING]: {
+      opacity: 0,
+    },
     [STAGES.BUILD_IN]: {
       // Fade in vehicle as build-in screen slides down
-      animation: `${fadeIn} ${
-        CONSTANTS[STAGES.BUILD_IN].VEHICLE_IN_DURATION
-      }ms ${CONSTANTS.EASING}`,
-      opacity: 1,
+      transition: `opacity ${TIMINGS.OVERLAY_IN}ms ${EASING.CUBIC_EASE_IN_OUT}`,
     },
     [STAGES.TOP_PICKS]: {
       // TODO: integrate into Car component transition
@@ -42,9 +42,9 @@ function styledVehicleContainer({ useTransitions, stage }: Props) {
       transform: `translate3d(calc(${GRID_MARGIN.S}px - 50vw + ${
         WHEEL_WIDTH.S / 2
       }px), 0, 0)`,
-      transition: useTransitions
-        ? 'transform 1200ms cubic-bezier(0.645,0.045,0.355,1.000)'
-        : 'none',
+      transition: showLoadingInterstitial
+        ? `transform ${TIMINGS.STAGE_TRANSITION}ms ${EASING.CUBIC_EASE_IN_OUT}`
+        : `opacity ${TIMINGS.OVERLAY_IN}ms ${EASING.CUBIC_EASE_IN_OUT}`,
 
       [MQ.M]: {
         transform: `translate3d(calc(${GRID_MARGIN.M}px - 50vw + ${
@@ -60,10 +60,7 @@ function styledVehicleContainer({ useTransitions, stage }: Props) {
     },
     [STAGES.NO_RESULTS]: {
       // Fade in vehicle as no results screen slides down
-      animation: `${fadeIn} ${
-        CONSTANTS[STAGES.NO_RESULTS].VEHICLE_IN_DURATION
-      }ms ${CONSTANTS.EASING}`,
-      opacity: 1,
+      transition: `opacity ${TIMINGS.OVERLAY_IN}ms ${EASING.CUBIC_EASE_IN_OUT}`,
     },
   };
 

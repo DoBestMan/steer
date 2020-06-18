@@ -70,7 +70,7 @@ const styles: StylesMap = {
     marginBottom: SPACING.SIZE_10,
 
     [MQ.M]: {
-      marginTop: SPACING.SIZE_20,
+      marginBottom: SPACING.SIZE_20,
     },
   },
 
@@ -171,7 +171,15 @@ const styles: StylesMap = {
   },
   /* eslint-enable @typescript-eslint/camelcase */
 
-  noResultsButton: [
+  noResultsHeading: {
+    marginBottom: SPACING.SIZE_40,
+
+    [MQ.M]: {
+      marginBottom: SPACING.SIZE_60,
+    },
+  },
+
+  noResultsLink: [
     disableGlobalFocus,
     {
       '&:active': {
@@ -186,17 +194,9 @@ const styles: StylesMap = {
     },
   ],
 
-  noResultsButtonWrapper: {
+  noResultsLinkWrapper: {
     '&:not(:last-child)': {
       marginBottom: SPACING.SIZE_15,
-    },
-  },
-
-  noResultsHeading: {
-    marginBottom: SPACING.SIZE_40,
-
-    [MQ.M]: {
-      marginBottom: SPACING.SIZE_60,
     },
   },
 

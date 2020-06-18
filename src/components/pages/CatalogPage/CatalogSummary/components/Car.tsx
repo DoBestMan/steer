@@ -8,19 +8,23 @@ import {
 import { Cars } from '~/components/global/Car/Car.enums';
 import { getScaleVector } from '~/components/global/Car/Car.utils';
 import { CAR_DETAILS } from '~/components/global/Car/CarDetails.constants';
-import { Breakpoint, CSSStyles, MQ } from '~/lib/constants';
+import { Breakpoint, CSSStyles, EASING, MQ } from '~/lib/constants';
 
-import { STAGES } from '../CatalogSummary.constants';
-import { CONSTANTS } from '../CatalogSummary.styles';
+import { STAGES, TIMINGS } from '../CatalogSummary.constants';
 
 type Props = {
   bk: Breakpoint;
   carId: Cars;
+  showLoadingInterstitial: boolean;
   stage: STAGES;
-  useTransitions: boolean;
 };
 
-function styledCarContainer({ bk, carId, stage, useTransitions }: Props) {
+function styledCarContainer({
+  bk,
+  carId,
+  showLoadingInterstitial,
+  stage,
+}: Props) {
   const carDetails = CAR_DETAILS[carId];
   const distanceFrontToRearWheel =
     carDetails.width -
@@ -49,17 +53,11 @@ function styledCarContainer({ bk, carId, stage, useTransitions }: Props) {
       },
     },
 
-    svg: {
-      '.solid-body-background *': {
-        fill: '#FFF',
-      },
-    },
-
     // By default, the "small" Car scales up on MD + LG brakpoints
     transform: `scale3d(${DEFAULT_SCALE_VECTOR[bk]}, ${DEFAULT_SCALE_VECTOR[bk]}, ${DEFAULT_SCALE_VECTOR[bk]})`,
     transformOrigin: '100% 100%',
-    transition: useTransitions
-      ? 'transform 1200ms cubic-bezier(0.645,0.045,0.355,1.000)'
+    transition: showLoadingInterstitial
+      ? `transform ${TIMINGS.STAGE_TRANSITION}ms ${EASING.CUBIC_EASE_IN_OUT}`
       : 'none',
     willChange: 'transform',
   };
@@ -68,28 +66,26 @@ function styledCarContainer({ bk, carId, stage, useTransitions }: Props) {
     [STAGES.DATA_MOMENT]: {
       '~ .back-wheel-img': {
         opacity: 1,
-        transition: useTransitions
-          ? `opacity 300ms ${CONSTANTS.EASING} 1200ms`
+        transition: showLoadingInterstitial
+          ? `opacity ${TIMINGS.WHEEL_IN_OUT}ms ${EASING.CUBIC_EASE_IN_OUT} ${TIMINGS.STAGE_TRANSITION}ms`
           : 'none',
       },
       'svg .back-wheel': {
         opacity: 0,
-        transition: useTransitions
-          ? `opacity 300ms ${CONSTANTS.EASING}`
+        transition: showLoadingInterstitial
+          ? `opacity ${TIMINGS.WHEEL_IN_OUT}ms ${EASING.CUBIC_EASE_IN_OUT}`
           : 'none',
       },
       'svg .body-car': {
         opacity: 0.13,
-        transition: useTransitions
-          ? `opacity ${CONSTANTS[STAGES.DATA_MOMENT].DURATION}ms ${
-              CONSTANTS.EASING
-            }`
+        transition: showLoadingInterstitial
+          ? `opacity ${TIMINGS.STAGE_TRANSITION}ms ${EASING.CUBIC_EASE_IN_OUT}`
           : 'none',
       },
       'svg .front-wheel': {
         opacity: 0,
-        transition: useTransitions
-          ? `opacity 300ms ${CONSTANTS.EASING}`
+        transition: showLoadingInterstitial
+          ? `opacity ${TIMINGS.WHEEL_IN_OUT}ms ${EASING.CUBIC_EASE_IN_OUT}`
           : 'none',
       },
 
@@ -102,8 +98,8 @@ function styledCarContainer({ bk, carId, stage, useTransitions }: Props) {
           scaleUpVector *
           (distanceFrontToRearWheel - carDetails.distanceFrontToFrontWheel)
         }px, 0, 0)`,
-        transition: useTransitions
-          ? 'transform 1200ms cubic-bezier(0.645,0.045,0.355,1.000)'
+        transition: showLoadingInterstitial
+          ? `transform ${TIMINGS.STAGE_TRANSITION}ms ${EASING.CUBIC_EASE_IN_OUT}`
           : 'none',
       },
       'svg .back-wheel': {

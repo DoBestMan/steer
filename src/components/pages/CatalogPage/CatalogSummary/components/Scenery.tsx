@@ -1,10 +1,9 @@
 import styled from '@emotion/styled';
 
 import Scenery from '~/components/global/Scenery/Scenery';
-import { CSSStyles, MQ, TIME } from '~/lib/constants';
+import { CSSStyles, EASING, MQ } from '~/lib/constants';
 
-import { STAGES } from '../CatalogSummary.constants';
-import { CONSTANTS } from '../CatalogSummary.styles';
+import { MEASUREMENTS, STAGES, TIMINGS } from '../CatalogSummary.constants';
 
 type Props = {
   stage: STAGES;
@@ -13,31 +12,34 @@ type Props = {
 function styledSceneryContainer({ stage }: Props) {
   const base: CSSStyles = {
     backgroundPosition: '0 100%',
-    height: CONSTANTS[stage].CONTENT_TOP.S,
+    height: MEASUREMENTS[stage].CONTENT_TOP.S,
     left: 0,
-    opacity: 0,
+    opacity: 1,
     position: 'absolute',
     top: 0,
     width: '100%',
 
     [MQ.M]: {
-      height: CONSTANTS[stage].CONTENT_TOP.M,
+      height: MEASUREMENTS[stage].CONTENT_TOP.M,
     },
 
     [MQ.L]: {
-      height: CONSTANTS[stage].CONTENT_TOP.L,
+      height: MEASUREMENTS[stage].CONTENT_TOP.L,
     },
   };
 
   const stageStyles: CSSStyles = {
     [STAGES.LOADING]: {
-      display: 'none',
+      opacity: 0,
     },
     [STAGES.BUILD_IN]: {
-      opacity: 1,
+      transition: `opacity ${TIMINGS.OVERLAY_IN}ms ${EASING.CUBIC_EASE_IN_OUT}`,
     },
     [STAGES.DATA_MOMENT]: {
-      transition: `opacity ${TIME.MS300}ms ease`,
+      transition: `opacity ${TIMINGS.STAGE_TRANSITION / 2}ms ${
+        EASING.CUBIC_EASE_IN_OUT
+      }`,
+      opacity: 0,
     },
     [STAGES.TOP_PICKS]: {
       // There is no transition from a stage with scenery background
@@ -45,8 +47,8 @@ function styledSceneryContainer({ stage }: Props) {
       display: 'none',
     },
     [STAGES.NO_RESULTS]: {
-      opacity: 1,
       position: 'relative',
+      transition: `opacity ${TIMINGS.OVERLAY_IN}ms ${EASING.CUBIC_EASE_IN_OUT}`,
     },
   };
 

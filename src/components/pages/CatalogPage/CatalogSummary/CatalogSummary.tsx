@@ -14,8 +14,8 @@ function CatalogSummary() {
   const {
     catalogSummary,
     contentStage,
+    showLoadingInterstitial,
     stage,
-    useTransitions,
   } = useCatalogSummaryContext();
 
   const { bk } = useBreakpoints();
@@ -36,14 +36,14 @@ function CatalogSummary() {
         <Overlay data-component="Overlay" stage={stage}>
           <VehicleContainer
             data-component="VehicleContainer"
-            useTransitions={useTransitions}
+            showLoadingInterstitial={showLoadingInterstitial}
             stage={stage}
           >
             <Car
               bk={bk}
               carId={carId}
               data-component="Car"
-              useTransitions={useTransitions}
+              showLoadingInterstitial={showLoadingInterstitial}
               solid
               stage={stage}
             />
@@ -55,11 +55,9 @@ function CatalogSummary() {
           </VehicleContainer>
         </Overlay>
       </Background>
+
       <Content data-component="Content" stage={contentStage}>
-        <CatalogMessage
-          data-component="MessageContainer"
-          catalogSummary={catalogSummary}
-        />
+        <CatalogMessage data-component="MessageContainer" />
       </Content>
     </>
   );

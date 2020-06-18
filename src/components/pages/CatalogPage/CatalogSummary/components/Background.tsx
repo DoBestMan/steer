@@ -1,9 +1,10 @@
 import styled from '@emotion/styled';
 
-import { CSSStyles } from '~/lib/constants';
+import { COLORS, CSSStyles } from '~/lib/constants';
 
 function styledBackgroundContainer() {
   const base: CSSStyles = {
+    backgroundColor: COLORS.LIGHT.OFF_WHITE,
     height: '100vh',
     left: 0,
     overflow: 'hidden',
