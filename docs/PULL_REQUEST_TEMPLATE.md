@@ -1,12 +1,12 @@
 ## Ticket
 
-[{id}](https://simpletire.atlassian.net/browse/{id})
+WCS-
 
-## Storybook link
+## Testing link
 
-<!-- If applicable, link to the story in Storybook once your branch deploys. Deploy will begin after opening your PR. -->
+<!-- If applicable, link to the story in Storybook or relevant page once your branch deploys. Deploy will begin after opening your PR. -->
 
-[Story]({link})
+[Link](url)
 
 ---
 
