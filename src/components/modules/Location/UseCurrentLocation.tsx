@@ -12,9 +12,16 @@ interface Props {
   onCurrentLocationSuccess: (result: AutocompleteResult) => void;
 }
 
-const getBrowserLocation = (callback: PositionCallback) => {
+const getBrowserLocation = (
+  callback: PositionCallback,
+  onLocationDenied: () => void,
+) => {
   if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(callback);
+    navigator.geolocation.getCurrentPosition(callback, function (error) {
+      if (error.code == error.PERMISSION_DENIED) {
+        onLocationDenied();
+      }
+    });
   } else {
     alert(ui('location.locationSupportError'));
   }
@@ -35,16 +42,19 @@ function UseCurrentLocation({
 
   const handleOnClick = () => {
     setIsWaiting(true);
-    getBrowserLocation((e) => {
-      const { coords } = e;
+    getBrowserLocation(
+      (e) => {
+        const { coords } = e;
 
-      const newCoords: google.maps.LatLngLiteral = {
-        lat: coords.latitude,
-        lng: coords.longitude,
-      };
+        const newCoords: google.maps.LatLngLiteral = {
+          lat: coords.latitude,
+          lng: coords.longitude,
+        };
 
-      setLatlng(newCoords);
-    });
+        setLatlng(newCoords);
+      },
+      () => setIsWaiting(false),
+    );
   };
 
   const getGeoCodeLocation = useCallback(
