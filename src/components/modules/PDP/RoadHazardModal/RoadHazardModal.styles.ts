@@ -1,7 +1,14 @@
-import { COLORS, SPACING, StylesMap } from '~/lib/constants';
+import { COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
+  button: {
+    display: 'block',
+    width: '100%',
+    [MQ.L]: {
+      marginTop: 'auto',
+    },
+  },
   copy: [
     typography.bodyCopyTight,
     {

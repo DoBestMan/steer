@@ -2,10 +2,10 @@ import { useState } from 'react';
 
 import Button from '~/components/global/Button/Button';
 
-import RoadHazardModal from './RoadHazardModal';
+import RoadHazardModalContainer from './RoadHazardModal.container';
 
 export default {
-  component: RoadHazardModal,
+  component: RoadHazardModalContainer,
   title: 'PDP/Road Hazard Modal',
 };
 
@@ -18,7 +18,7 @@ export function RoadHazardModalDefault() {
   return (
     <>
       <Button onClick={toggleModal}>Open Modal</Button>
-      <RoadHazardModal isOpen={isOpen} onClose={toggleModal} />
+      <RoadHazardModalContainer isOpen={isOpen} onClose={toggleModal} />
     </>
   );
 }

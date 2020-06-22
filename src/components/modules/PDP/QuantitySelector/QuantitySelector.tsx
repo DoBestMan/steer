@@ -3,6 +3,7 @@ import { ReactNode } from 'react';
 import Button from '~/components/global/Button/Button';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import BottomCardModal from '~/components/global/Modal/BottomCardModal';
+import { modalContainerStyles } from '~/components/global/Modal/BottomCardModal.styles';
 import { BUTTON_STYLE, THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
@@ -49,11 +50,11 @@ function QuantitySelector({
   return (
     <BottomCardModal
       contentLabel={ui('pdp.quantitySelector.modalLabel')}
-      customContentStyles={styles.modalContentStyles}
+      customContentStyles={modalContainerStyles.content}
       isOpen={isOpen}
       onClose={onClose}
     >
-      <div css={styles.container}>
+      <div css={modalContainerStyles.container}>
         <PDPModalHeader
           copy={copy}
           customCopyStyles={isIntercept ? styles.copyConfirmation : undefined}
@@ -64,7 +65,7 @@ function QuantitySelector({
 
         {!isIntercept && <div css={styles.pickerContainer}>{children}</div>}
 
-        <div css={styles.cta}>
+        <div css={modalContainerStyles.ctaGroup}>
           {isIntercept && quantityToIntercept ? (
             <>
               <Button

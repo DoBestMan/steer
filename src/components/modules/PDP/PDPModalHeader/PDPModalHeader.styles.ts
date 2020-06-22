@@ -7,7 +7,17 @@ const styles: CSSObject = {
   container: {
     textAlign: 'center',
   },
-  copy: typography.smallCopy,
+  copy: [
+    typography.smallCopy,
+    {
+      color: COLORS.LIGHT.GRAY_70,
+      [MQ.L]: {
+        br: {
+          display: 'none',
+        },
+      },
+    },
+  ],
   icon: {
     color: COLORS.GLOBAL.ORANGE,
     justifyContent: 'center',

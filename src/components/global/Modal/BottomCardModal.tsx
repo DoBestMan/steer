@@ -17,6 +17,7 @@ interface Props {
   contentLabel: string;
   customContentStyles?: CSSStyles;
   isOpen: boolean;
+  onBack?: () => void;
   onClose: () => void;
 }
 
@@ -25,6 +26,7 @@ function BottomCardModal({
   contentLabel,
   customContentStyles,
   isOpen,
+  onBack,
   onClose,
 }: Props) {
   const { bk } = useBreakpoints();
@@ -50,15 +52,27 @@ function BottomCardModal({
       ]}
     >
       <div css={[styles.content, customContentStyles]}>
-        <Link
-          as="button"
-          icon={ICONS.CLOSE}
-          aria-label={`${ui('modal.close')} ${contentLabel}`}
-          onClick={onClose}
-          theme={THEME.LIGHT}
-          // this will allow modal content to start where padding begins rather than pushed down from actions bar
-          css={styles.close}
-        />
+        <div css={styles.actions}>
+          {onBack && (
+            <Link
+              as="button"
+              aria-label={ui('modal.back')}
+              onClick={onBack}
+              icon={ICONS.CHEVRON_LEFT}
+              theme={THEME.LIGHT}
+            />
+          )}
+
+          <Link
+            as="button"
+            icon={ICONS.CLOSE}
+            aria-label={ui('modal.close', { contentLabel })}
+            onClick={onClose}
+            theme={THEME.LIGHT}
+            // this will allow modal content to start where padding begins rather than pushed down from actions bar
+            css={!onBack && styles.close}
+          />
+        </div>
         {children}
       </div>
     </ReactModal>

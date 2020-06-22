@@ -171,7 +171,9 @@
       "verifiedCustomer": "Verified Customer"
     },
     "roadHazard": {
+      "interceptCopy": "Most tire failure are punctures or bruises that manufacturer's warranty typically doesn't cover.\n\n**Get coverage for up to 3 years by $13.02/tire.**",
       "headerCopy": "Most tire failure are punctures or bruises that manufacturer's warranty typically doesn't cover.",
+      "interceptSubtitle": "Did you know? Road Hazard Coverage is common in your location",
       "headerSubtitle": "Save up to 100% of the tire cost if you need a replacement in 3 years",
       "removeLabel": "Remove coverage",
       "coverageLabel": "Road Hazard Coverage included",

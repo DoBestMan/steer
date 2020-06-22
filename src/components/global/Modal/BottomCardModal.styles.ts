@@ -66,8 +66,56 @@ export const CONTENT_LATERAL_PADDING: { [key: string]: number } = {
   L: SPACING.SIZE_60,
 };
 
+// Common rules that help style the modal's vertical layout
+export const modalContainerStyles: StylesMap = {
+  container: {
+    paddingTop: SPACING.SIZE_30,
+
+    [MQ.L]: {
+      display: 'flex',
+      flexDirection: 'column',
+      height: '100%',
+      paddingBottom: SPACING.SIZE_20,
+      paddingTop: SPACING.SIZE_60,
+    },
+  },
+  content: {
+    height: '100%',
+  },
+  ctaGroup: {
+    display: 'flex',
+    flexDirection: 'row-reverse',
+    justifyContent: 'center',
+
+    /* eslint-disable sort-keys */
+    '> :only-child': {
+      width: '100%',
+      display: 'block',
+    },
+    '> :not(:only-child):first-of-type': {
+      marginLeft: SPACING.SIZE_10,
+
+      [MQ.L]: {
+        marginLeft: 0,
+        marginBottom: SPACING.SIZE_10,
+      },
+    },
+    /* eslint-enable sort-keys */
+
+    [MQ.L]: {
+      display: 'block',
+      marginTop: 'auto',
+    },
+  },
+};
+
 const styles: StylesMap = {
   [MODAL_ANIMATION.FADE]: FADE,
+  actions: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    margin: `0 ${-SPACING.SIZE_10}px`,
+  },
   close: {
     color: COLORS.LIGHT.GRAY_70,
     position: 'absolute',
