@@ -1,4 +1,8 @@
 import { action } from '@storybook/addon-actions';
+import { ThemeProvider } from 'emotion-theming';
+import { ReactNode } from 'react';
+
+import { defaultTheme } from '~/components/pages/CatalogPage/CatalogPage';
 
 import {
   vehiclesDisambiguation,
@@ -14,6 +18,10 @@ import {
 export default {
   title: 'Catalog/Loading Interstitial/Message',
 };
+
+function CatalogMessageContainer({ children }: { children: ReactNode }) {
+  return <ThemeProvider theme={defaultTheme}>{children}</ThemeProvider>;
+}
 
 export function CatalogBuildInNoOeMessage() {
   return (
@@ -35,17 +43,23 @@ export function CatalogBuildInDisambiguationMessage() {
 
 export function CatalogDataMomentNoOeMessage() {
   return (
-    <DataMomentMessage
-      siteCatalogSummaryPrompt={vehiclesNoOeWithSize.siteCatalogSummaryPrompt}
-    />
+    <CatalogMessageContainer>
+      <DataMomentMessage
+        siteCatalogSummaryPrompt={vehiclesNoOeWithSize.siteCatalogSummaryPrompt}
+      />
+    </CatalogMessageContainer>
   );
 }
 
 export function CatalogDataMomentDisambiguationMessage() {
   return (
-    <DataMomentMessage
-      siteCatalogSummaryPrompt={vehiclesDisambiguation.siteCatalogSummaryPrompt}
-    />
+    <CatalogMessageContainer>
+      <DataMomentMessage
+        siteCatalogSummaryPrompt={
+          vehiclesDisambiguation.siteCatalogSummaryPrompt
+        }
+      />
+    </CatalogMessageContainer>
   );
 }
 
