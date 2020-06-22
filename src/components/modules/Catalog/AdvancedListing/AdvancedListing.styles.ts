@@ -18,6 +18,9 @@ const styles: CSSObject = {
       maxWidth: 130,
     },
   },
+  image: {
+    maxWidth: 300,
+  },
   imageWrapper: {
     alignItems: 'flex-end',
     backgroundColor: COLORS.LIGHT.GRAY_10,

@@ -45,8 +45,12 @@ function AdvancedListing({
 
   return (
     <Grid css={styles.root}>
-      <GridItem gridColumnM="2 / 5" gridColumnL="2 / 7">
-        <div css={styles.imageWrapper}>
+      <GridItem
+        css={styles.imageWrapper}
+        gridColumnM="2 / 5"
+        gridColumnL="2 / 7"
+      >
+        <div css={styles.image}>
           {highlight && (
             <div css={styles.sticker}>
               <Sticker isSmall label={highlight} />
