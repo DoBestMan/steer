@@ -126,7 +126,6 @@ function SearchAutocomplete({
   }, [focusOnInput, searchState]);
 
   const handleCancelSelection = () => {
-    onInputChange(CONSTANTS.DEFAULT_VALUE);
     setSelectedItemIndex([0, -1]);
     focusOnInput();
 

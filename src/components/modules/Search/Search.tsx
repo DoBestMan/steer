@@ -99,7 +99,7 @@ function Search({
 
     const { queryType } = getCurrentInputQuery();
 
-    if (queryType || input) {
+    if ((queryType && searchState) || input) {
       delayedSearch({ queryText: input, queryType });
     } else {
       // No need to hit the API when there's no queryType or queryText
@@ -108,12 +108,26 @@ function Search({
   };
 
   const onCancelSelection = () => {
-    const { queryText } = getCurrentInputQuery();
+    const { queryText, queryType } = getCurrentInputQuery();
+
+    const resetQuery = {
+      queryText: '',
+      queryType,
+    };
 
     // Reset the search category when search cleared with no query.
     if (!queryText) {
       setSearchState('');
+      resetQuery.queryType = '';
+    } else if (searchState) {
+      onSearchQuery({ queryText: '', queryType });
     }
+
+    if (!searchState || !queryText) {
+      clearSearchResults();
+    }
+
+    setCurrentInputQuery(resetQuery);
   };
 
   const onToggleRearTire = (isShowing: boolean) => {
@@ -192,6 +206,11 @@ function Search({
     setSearchState(category);
 
     if (action.type === SearchActionType.QUERY) {
+      setCurrentInputQuery({
+        queryText: action.queryText,
+        queryType: action.queryType,
+      });
+
       onSearchQuery({
         queryText: action.queryText,
         queryType: action.queryType,
