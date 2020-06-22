@@ -1,6 +1,5 @@
+import { CONTENT_LATERAL_PADDING } from '~/components/global/Modal/BottomCardModal.styles';
 import { BORDERS, MQ, SPACING, StylesMap } from '~/lib/constants';
-
-import { getResponsiveModalStyles } from './QuantitySelector.utils';
 
 const styles: StylesMap = {
   button: {
@@ -9,7 +8,38 @@ const styles: StylesMap = {
       display: 'block',
     },
   },
-  carouselStyles: getResponsiveModalStyles(),
+  carouselStyles: [
+    {
+      margin: `0 -${CONTENT_LATERAL_PADDING.S}px`,
+      [MQ.M]: {
+        margin: `0 -${CONTENT_LATERAL_PADDING.M}px`,
+      },
+      [MQ.L]: {
+        margin: `0 -${CONTENT_LATERAL_PADDING.L}px`,
+      },
+      /* eslint-disable sort-keys */
+      '.swiper-slide:first-of-type': {
+        marginLeft: CONTENT_LATERAL_PADDING.S,
+        [MQ.M]: {
+          marginLeft: CONTENT_LATERAL_PADDING.M,
+        },
+        [MQ.L]: {
+          marginLeft: CONTENT_LATERAL_PADDING.L,
+        },
+      },
+
+      '.swiper-slide:last-of-type': {
+        marginRight: CONTENT_LATERAL_PADDING.S,
+        [MQ.M]: {
+          marginRight: CONTENT_LATERAL_PADDING.M,
+        },
+        [MQ.L]: {
+          marginRight: CONTENT_LATERAL_PADDING.L,
+        },
+      },
+      /* eslint-enable sort-keys */
+    },
+  ],
   container: {
     paddingTop: SPACING.SIZE_30,
     textAlign: 'center',
