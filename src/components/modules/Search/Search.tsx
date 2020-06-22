@@ -29,9 +29,10 @@ interface Props {
   addPastSearch: (
     item: SiteSearchResultTextItem | SiteSearchResultImageItem,
   ) => void;
+  clearSearchResults: () => void;
+  deletePastSearches: () => void;
   forwardedRef?: RefObject<HTMLDivElement>;
   isCustomerServiceEnabled: boolean;
-  onClearSearchesClick: () => void;
   onCloseSearchClick: () => void;
   onSearchQuery: ({ queryText, queryType }: SearchDataParams) => void;
   pastSearches: SiteSearchResultGroup;
@@ -40,9 +41,10 @@ interface Props {
 
 function Search({
   addPastSearch,
+  clearSearchResults,
+  deletePastSearches,
   forwardedRef,
   isCustomerServiceEnabled,
-  onClearSearchesClick,
   onCloseSearchClick,
   onSearchQuery,
   pastSearches,
@@ -84,8 +86,8 @@ function Search({
     }
   };
 
-  const handleClearSearchesClick = () => {
-    onClearSearchesClick();
+  const handleClearPastSearchesClick = () => {
+    deletePastSearches();
 
     setTimeout(() => {
       scrollTo(0, TIME.MS400 / 1000);
@@ -96,7 +98,13 @@ function Search({
     setCurrentInputQuery({ queryText: input });
 
     const { queryType } = getCurrentInputQuery();
-    delayedSearch({ queryText: input, queryType });
+
+    if (queryType || input) {
+      delayedSearch({ queryText: input, queryType });
+    } else {
+      // No need to hit the API when there's no queryType or queryText
+      clearSearchResults();
+    }
   };
 
   const onCancelSelection = () => {
@@ -223,7 +231,7 @@ function Search({
   const hasResults = siteSearchResultGroupList.length > 0;
   const shouldShowSearchSupport = noExactMatch && !hasResults && !isInputEmpty;
   const shouldShowInitialSearch =
-    (shouldShowSearchSupport || isInputEmpty) && !searchState;
+    (shouldShowSearchSupport || isInputEmpty) && !searchState && !hasResults;
 
   return (
     <div css={styles.container} ref={forwardedRef}>
@@ -245,7 +253,7 @@ function Search({
       />
       {shouldShowInitialSearch && (
         <InitialSearch
-          onClearSearchesClick={handleClearSearchesClick}
+          onClearPastSearchesClick={handleClearPastSearchesClick}
           onPastSearchClick={handleValueSelection}
           onSearchCategoryClick={handleSearchCategoryClick}
           pastSearches={pastSearches}

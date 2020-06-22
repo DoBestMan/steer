@@ -11,6 +11,7 @@ import Search from './Search';
 function SearchModal() {
   const {
     addPastSearch,
+    clearSearchResults,
     deletePastSearches,
     getPastSearches,
     isSearchOpen,
@@ -20,9 +21,6 @@ function SearchModal() {
     toggleIsSearchOpen,
   } = useSearchContext();
   const { customerServiceEnabled } = useSiteGlobalsContext();
-  const handleClearSearchesClick = function () {
-    deletePastSearches();
-  };
 
   useEffect(() => {
     if (isSearchOpen) {
@@ -55,9 +53,10 @@ function SearchModal() {
     >
       <Search
         addPastSearch={addPastSearch}
+        clearSearchResults={clearSearchResults}
         isCustomerServiceEnabled={customerServiceEnabled}
         forwardedRef={contentRef}
-        onClearSearchesClick={handleClearSearchesClick}
+        deletePastSearches={deletePastSearches}
         onCloseSearchClick={toggleIsSearchOpen}
         onSearchQuery={searchQuery}
         pastSearches={pastSearches}

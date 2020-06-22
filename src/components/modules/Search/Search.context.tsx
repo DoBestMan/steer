@@ -14,7 +14,7 @@ import {
 } from '~/lib/api/users';
 import { createContext } from '~/lib/utils/context';
 
-import { emptySiteSearchResultGroup } from './Search.mocks';
+import { emptyResult, emptySiteSearchResultGroup } from './Search.mocks';
 
 interface Props {
   children: ReactNode;
@@ -24,6 +24,7 @@ interface SearchContextProps {
   addPastSearch: (
     item: SiteSearchResultTextItem | SiteSearchResultImageItem,
   ) => void;
+  clearSearchResults: () => void;
   deletePastSearches: () => void;
   getPastSearches: () => void;
   isSearchOpen: boolean;
@@ -69,10 +70,7 @@ function useContextSetup() {
   },
   []);
 
-  const [searchResults, setSearchResults] = useState<Results>({
-    resultMetadata: {},
-    siteSearchResultGroupList: [],
-  });
+  const [searchResults, setSearchResults] = useState<Results>(emptyResult);
 
   const searchQuery = useCallback(async function ({
     additionalQueryText,
@@ -89,6 +87,13 @@ function useContextSetup() {
   },
   []);
 
+  const clearSearchResults = useCallback(
+    function () {
+      setSearchResults(emptyResult);
+    },
+    [setSearchResults],
+  );
+
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const toggleIsSearchOpen = (callback?: () => void) => {
     setIsSearchOpen(!isSearchOpen);
@@ -100,6 +105,7 @@ function useContextSetup() {
 
   return {
     addPastSearch,
+    clearSearchResults,
     deletePastSearches,
     getPastSearches,
     isSearchOpen,

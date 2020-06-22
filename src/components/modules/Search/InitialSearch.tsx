@@ -15,14 +15,14 @@ import { SearchResult, SearchResultEnum } from './Search.types';
 import SearchSection from './SearchSection';
 
 interface Props {
-  onClearSearchesClick: () => void;
+  onClearPastSearchesClick: () => void;
   onPastSearchClick: (value: SearchResult) => void;
   onSearchCategoryClick: (searchResult: SiteSearchResultTextItem) => void;
   pastSearches: SiteSearchResultGroup;
 }
 
 function InitialSearch({
-  onClearSearchesClick,
+  onClearPastSearchesClick,
   onPastSearchClick,
   onSearchCategoryClick,
   pastSearches,
@@ -40,7 +40,7 @@ function InitialSearch({
       <Link
         as={LINK_TYPES.BUTTON}
         css={[typography.smallCopy, styles.clearPastSearchesButton]}
-        onClick={onClearSearchesClick}
+        onClick={onClearPastSearchesClick}
         theme={THEME.LIGHT}
       >
         {ui('search.clearPastSearchesButtonLabel')}

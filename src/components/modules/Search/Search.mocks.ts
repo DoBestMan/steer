@@ -7,6 +7,11 @@ import { ui } from '~/lib/utils/ui-dictionary';
 
 import { Results } from './Search.types';
 
+export const emptyResult: Results = {
+  resultMetadata: {},
+  siteSearchResultGroupList: [],
+};
+
 export const emptySiteSearchResultGroup: SiteSearchResultGroup = {
   label: '',
   siteSearchResultList: [],
