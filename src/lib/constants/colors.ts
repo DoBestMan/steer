@@ -17,10 +17,14 @@ export const COLORS = {
   },
   ORANGE: {
     SHADE_15: 'rgba(24, 24, 24, 0.15)',
+    SHADE_15_SOLID: '#dc5411',
     SHADE_30: 'rgba(24, 24, 24, 0.3)',
     SHADE_30_SOLID: '#B94A12',
     SHADE_85: 'rgba(24, 24, 24, 0.85)',
+    SHADE_85_SOLID: '#3B2317',
     TINT_30: 'rgba(255, 255, 255, 0.3)',
+    TINT_30_SOLID: '#FE8F58',
     TINT_70: 'rgba(255, 255, 255, 0.7)',
+    TINT_70_SOLID: '#FFCFB7',
   },
 };
