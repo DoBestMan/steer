@@ -7,6 +7,7 @@ export const COLORS = {
   GLOBAL: {
     BLACK: '#181818',
     ORANGE: '#FE5F10',
+    RED: '#EE3131',
     WHITE: '#FFF',
   },
   LIGHT: {
@@ -14,6 +15,7 @@ export const COLORS = {
     GRAY_20: 'rgba(24, 24, 24, 0.13)',
     GRAY_70: 'rgba(24, 24, 24, 0.7)',
     OFF_WHITE: '#ECEBE1',
+    RED_05: 'rgba(238, 49, 49, 0.05)',
   },
   ORANGE: {
     SHADE_15: 'rgba(24, 24, 24, 0.15)',

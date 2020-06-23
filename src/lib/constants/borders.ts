@@ -11,4 +11,5 @@ export const BORDERS = {
   SOLID_GRAY_90_1PX: `1px solid ${COLORS.DARK.GRAY_90}`,
   SOLID_ORANGE_2PX: `2px solid ${COLORS.GLOBAL.ORANGE}`,
   SOLID_ORANGE_SHADE_15_1PX: `1px solid ${COLORS.ORANGE.SHADE_15}`,
+  SOLID_TRANSPARENT_2PX: '2px solid transparent',
 };

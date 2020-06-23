@@ -70,7 +70,8 @@ export const reset = `
   label,
   legend,
   button,
-  input {
+  input,
+  textarea {
     border: 0 none;
     color: inherit;
     font-family: inherit;
