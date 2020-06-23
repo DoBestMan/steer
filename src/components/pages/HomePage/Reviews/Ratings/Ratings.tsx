@@ -13,8 +13,11 @@ interface Props {
 
 function Ratings({ ratingLabel, ratingLabelIcon, ratingStars }: Props) {
   return (
-    <div css={styles.container}>
-      <StarsWithRating number={ratingStars} />
+    <div css={[typography.primaryHeadline, styles.container]}>
+      <StarsWithRating
+        number={ratingStars}
+        typographyStyle={typography.primaryHeadline}
+      />
       <div css={[typography.bodyCopy, styles.ratingLabel]}>
         {ratingLabel}
         {ratingLabelIcon && (

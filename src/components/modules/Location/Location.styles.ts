@@ -58,7 +58,7 @@ export const styles: StylesMap = {
     marginTop: 'auto',
   },
   useCurrentLocationButton: [
-    typography.locationHeadline,
+    typography.labelHeadlineLarge,
     layout.container,
     {
       alignItems: 'baseline',

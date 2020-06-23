@@ -8,6 +8,7 @@ import ReviewCard, {
 import StarsWithRating from '~/components/global/Stars/StarsWithRating';
 import { SiteLink } from '~/data/models/SiteLink';
 import { ui } from '~/lib/utils/ui-dictionary';
+import { typography } from '~/styles/typography.styles';
 
 import styles from './Reviews.styles';
 
@@ -50,7 +51,12 @@ function Reviews({
           </div>
 
           <div css={styles.ratingContainer}>
-            {!!ratingStars && <StarsWithRating number={ratingStars} />}
+            {!!ratingStars && (
+              <StarsWithRating
+                number={ratingStars}
+                typographyStyle={typography.labelHeadlineLarge}
+              />
+            )}
             <Link
               css={styles.cta}
               href={writeReviewLink.href}

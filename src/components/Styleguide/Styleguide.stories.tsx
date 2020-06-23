@@ -24,9 +24,9 @@ export function Text() {
         <p css={typography.jumboHeadline}>Jumbo Headline</p>
         <p css={typography.modalHeadline}>Modal Headline</p>
         <p css={typography.primaryHeadline}>Primary Headline</p>
-        <p css={typography.locationHeadline}>Location Headline</p>
         <p css={typography.secondaryHeadline}>Secondary Headline</p>
         <p css={typography.tertiaryHeadline}>Tertiary Headline</p>
+        <p css={typography.labelHeadlineLarge}>Label Headline Large</p>
         <p css={typography.labelHeadline}>LabelHeadline</p>
         <p css={typography.primarySubhead}>Primary Subhead</p>
         <p css={typography.secondarySubhead}>Secondary Subhead</p>

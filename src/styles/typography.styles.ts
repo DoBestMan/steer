@@ -99,18 +99,18 @@ export const typography: { [className: string]: CSSObject[] } = {
       [MQ.M]: fontStyles(15, 20),
     },
   ],
-  largeCopy: [
-    fontStyles(18, 25),
-    {
-      letterSpacing: '-0.01em',
-    },
-  ],
-  locationHeadline: [
-    fontStyles(20, 25),
+  labelHeadlineLarge: [
+    fontStyles(25, 30),
     {
       fontWeight: 'bold',
       [MQ.M]: fontStyles(35, 40),
       [MQ.XL]: fontStyles(28, 30),
+    },
+  ],
+  largeCopy: [
+    fontStyles(18, 25),
+    {
+      letterSpacing: '-0.01em',
     },
   ],
   modalHeadline: [

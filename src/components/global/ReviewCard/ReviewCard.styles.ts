@@ -79,6 +79,7 @@ const styles: StylesMap = {
     },
   },
   readMore: {
+    fontWeight: 'bold',
     marginTop: SPACING.SIZE_05,
   },
   title: [

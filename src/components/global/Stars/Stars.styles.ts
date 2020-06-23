@@ -1,5 +1,4 @@
 import { SPACING } from '~/lib/constants';
-import { typography } from '~/styles/typography.styles';
 
 const styles = {
   container: {
@@ -7,17 +6,15 @@ const styles = {
     display: 'flex',
     marginRight: SPACING.SIZE_05,
   },
-  rating: [
-    typography.secondaryHeadline,
-    {
-      marginLeft: SPACING.SIZE_10,
-    },
-  ],
+  rating: {
+    fontSize: 'inherit',
+    lineHeight: 'inherit',
+    marginLeft: SPACING.SIZE_10,
+  },
   ratingContainer: {
     alignItems: 'center',
     display: 'flex',
   },
-  ratingSmall: typography.tertiaryHeadline,
   stars: {
     svg: {
       fill: 'var(--rating-gradient-id)',
