@@ -39,6 +39,7 @@ export type Icon =
   | 'money-back'
   | 'performance'
   | 'phone'
+  | 'play'
   | 'quantity-selector-car'
   | 'quantity-selector-car-tilted'
   | 'rebate'

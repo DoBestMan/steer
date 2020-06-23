@@ -12,6 +12,7 @@ import { getMinimalQuery, getSrcset } from './Image.utils';
 interface Props extends SiteImageExtended {
   altText: string;
   as?: ReactType;
+  customStyles?: CSSStyles;
   height?: string | number;
   src: string;
   width?: string | number;
@@ -20,6 +21,7 @@ interface Props extends SiteImageExtended {
 function Image({
   altText,
   as = 'div',
+  customStyles,
   responsive,
   height,
   loading = LOADING_OPTIONS.LAZY,
@@ -104,6 +106,7 @@ function Image({
         styles.root,
         isLazyAndNotLoaded && styles.placeholder,
         { ...style },
+        customStyles,
       ]}
     >
       {finalSrcSet && (

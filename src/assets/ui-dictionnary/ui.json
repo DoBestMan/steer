@@ -20,6 +20,9 @@
     },
     "toast": {
       "close": "Close notification"
+    },
+    "video": {
+      "play": "Play video"
     }
   },
   "accordion": {

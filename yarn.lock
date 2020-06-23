@@ -2792,6 +2792,11 @@
   dependencies:
     "@types/node" "*"
 
+"@types/youtube@^0.0.39":
+  version "0.0.39"
+  resolved "https://registry.yarnpkg.com/@types/youtube/-/youtube-0.0.39.tgz#1c80e882d339a4d89da16b10acc411ceadc26955"
+  integrity sha512-naVjyTZT/CoNwEQW3+mf9E/x6sgB7QIPbRDtVlPUpHlmuQTk+j6gQBy0T5CRkV8oC0GYQjMgfr3VdueTSVLTjw==
+
 "@typescript-eslint/eslint-plugin@^2.27.0":
   version "2.27.0"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/eslint-plugin/-/eslint-plugin-2.27.0.tgz#e479cdc4c9cf46f96b4c287755733311b0d0ba4b"
