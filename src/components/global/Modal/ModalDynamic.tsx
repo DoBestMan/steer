@@ -24,6 +24,7 @@ function Modal({
   children,
   contentLabel,
   hasCloseButton = true,
+  hasDefaultPadding = true,
   isFullscreen = false,
   isOpen,
   onBack,
@@ -60,6 +61,7 @@ function Modal({
         styles[rootStyles],
         styles[theme],
         animationStyles.default,
+        hasDefaultPadding && fullscreen && styles.fullScreenPadding,
         isOpen && animationStyles.open,
       ]}
     >

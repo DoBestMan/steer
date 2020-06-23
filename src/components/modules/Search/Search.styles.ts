@@ -46,7 +46,8 @@ const styles: StylesMap = {
   },
   container: {
     backgroundColor: COLORS.GLOBAL.ORANGE,
-    minHeight: '100vh',
+    height: '100vh',
+    overflowY: 'auto',
     paddingBottom: SPACING.SIZE_50,
     width: '100%',
     zIndex: Z_INDEX.TOP,

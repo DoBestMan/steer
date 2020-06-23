@@ -6,6 +6,7 @@ export interface Props {
   children: ReactNode;
   contentLabel: string;
   hasCloseButton?: boolean;
+  hasDefaultPadding?: boolean;
   isFullscreen?: boolean;
   isOpen: boolean;
   onBack?: () => void;

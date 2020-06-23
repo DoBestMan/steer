@@ -75,7 +75,6 @@ const styles: StylesMap = {
     height: '100%',
     left: 0,
     overflowY: 'scroll',
-    padding: `${SPACING.SIZE_10}px ${SPACING.SIZE_20}px ${SPACING.SIZE_60}px`,
     position: 'relative',
     right: 0,
     top: 0,
@@ -102,6 +101,9 @@ const styles: StylesMap = {
     position: 'absolute',
     right: SPACING.SIZE_10,
     top: SPACING.SIZE_10,
+  },
+  fullScreenPadding: {
+    padding: `${SPACING.SIZE_10}px ${SPACING.SIZE_20}px ${SPACING.SIZE_60}px`,
   },
 };
 

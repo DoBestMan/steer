@@ -44,12 +44,13 @@ function SearchModal() {
 
   return (
     <Modal
-      isFullscreen
       contentLabel="Modal"
       hasCloseButton={false}
-      theme={MODAL_THEME.ORANGE}
-      onClose={toggleIsSearchOpen}
+      hasDefaultPadding={false}
+      isFullscreen
       isOpen={isSearchOpen}
+      onClose={toggleIsSearchOpen}
+      theme={MODAL_THEME.ORANGE}
     >
       <Search
         addPastSearch={addPastSearch}
