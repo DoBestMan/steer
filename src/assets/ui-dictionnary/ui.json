@@ -255,7 +255,6 @@
     "support": "Need support?",
     "findTireSize": {
       "alternateSearchCopy": "If you know your vehicle year, make, model, and trim, we can match the size for you.",
-      "alternateSearchLink": "Search by vehicle",
       "alternateSearchTitle": "Can’t look at your vehicle now?",
       "eyebrow": "How to",
       "imageAlt": "Close-up of tire",
@@ -267,7 +266,6 @@
     },
     "identifyTrim": {
       "alternateSearchCopy": "We can also identify the tires you need by size.  Find the number on the sidewall of your tire, owner’s manual or placard on the driver-side door.",
-      "alternateSearchLink": "Search by tire size",
       "alternateSearchTitle": "Can’t find your trim?",
       "eyebrow": "How to",
       "imageAlt": "Rear of car",

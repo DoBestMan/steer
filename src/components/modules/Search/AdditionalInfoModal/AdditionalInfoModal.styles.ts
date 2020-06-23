@@ -10,7 +10,6 @@ const styles: StylesMap = {
     typography.bodyCopy,
     {
       color: COLORS.DARK.GRAY_40,
-      paddingBottom: SPACING.SIZE_20,
     },
   ],
   alternateSearchLink: {

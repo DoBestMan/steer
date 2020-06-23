@@ -1,5 +1,4 @@
 import Image from '~/components/global/Image/Image';
-import Link from '~/components/global/Link/Link';
 import Modal from '~/components/global/Modal/Modal';
 import EmailSupport from '~/components/modules/Support/EmailSupport';
 import PhoneSupport from '~/components/modules/Support/PhoneSupport';
@@ -9,17 +8,10 @@ import { ui } from '~/lib/utils/ui-dictionary';
 
 import styles from './AdditionalInfoModal.styles';
 
-interface AlternateSearch {
-  copy: string;
-  linkText: string;
-  linkURL: string;
-  title: string;
-}
-
 type Step = JSX.Element | string;
 
 export interface AdditionalInfoModalContainerProps {
-  alternateSearch: AlternateSearch;
+  alternateSearch: { copy: string; title: string };
   eyebrow: string;
   imageAlt: string;
   imageSrc: string;
@@ -72,15 +64,6 @@ function AdditionalInfoModal({
         <div css={styles.alternateSearch}>
           <h3 css={styles.alternateSearchTitle}>{alternateSearch.title}</h3>
           <p css={styles.alternateSearchCopy}>{alternateSearch.copy}</p>
-          <div css={styles.alternateSearchLinkWrapper}>
-            <Link
-              href={alternateSearch.linkURL}
-              css={styles.alternateSearchLink}
-              theme={THEME.DARK}
-            >
-              {alternateSearch.linkText}
-            </Link>
-          </div>
         </div>
         <div css={styles.supportPrompt}>
           <h3 css={styles.supportPromptTitle}>{ui('search.support')}</h3>
