@@ -156,7 +156,7 @@ const styles: CSSObject = {
     },
   },
   title: [
-    typography.primarySubhead,
+    typography.labelHeadline,
     {
       color: COLORS.LIGHT.GRAY_70,
     },
