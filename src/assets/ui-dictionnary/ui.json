@@ -61,6 +61,7 @@
       "callNumberLabel": "Call (888) 410-0604",
       "callNumber": "(888)410-0604",
       "ctaLabelFallback": "Select",
+      "exploreMoreCTALabel": "Explore more tires",
       "frontLabel": "Front",
       "noPrice": "Price available upon request",
       "oeModal": {

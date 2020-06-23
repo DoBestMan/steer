@@ -10,6 +10,8 @@ export interface Props extends ReactIdSwiperProps {
   centerActiveSlide?: boolean;
   children: ReactIdSwiperChildren;
   freeScroll?: boolean;
+  getSwiper?: (swiper: SwiperInstance) => void;
+  params?: {};
 }
 
 function Carousel({
@@ -17,18 +19,24 @@ function Carousel({
   children,
   centerActiveSlide = false,
   freeScroll = false,
+  getSwiper,
+  params = {},
   ...rest
 }: Props) {
   const [swiper, setSwiper] = useState<SwiperInstance>(null);
 
-  const params = {
-    centeredSlides: centerActiveSlide,
-    centeredSlidesBounds: centerActiveSlide,
-    freeMode: freeScroll,
-    grabCursor: true,
-    mousewheel: freeScroll,
-    slidesPerView: 'auto',
-  };
+  const finalParams = Object.assign(
+    {},
+    {
+      centeredSlides: centerActiveSlide,
+      centeredSlidesBounds: centerActiveSlide,
+      freeMode: freeScroll,
+      grabCursor: true,
+      mousewheel: freeScroll,
+      slidesPerView: 'auto',
+    },
+    params,
+  );
 
   useEffect(() => {
     if (!centerActiveSlide) {
@@ -40,8 +48,14 @@ function Carousel({
     }
   }, [activeSlide, centerActiveSlide, swiper]);
 
+  useEffect(() => {
+    if (getSwiper) {
+      getSwiper(swiper);
+    }
+  }, [swiper, getSwiper]);
+
   return (
-    <Swiper getSwiper={setSwiper} {...params} {...rest}>
+    <Swiper getSwiper={setSwiper} {...finalParams} {...rest}>
       {children}
     </Swiper>
   );

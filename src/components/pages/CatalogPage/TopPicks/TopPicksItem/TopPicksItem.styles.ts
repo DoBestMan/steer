@@ -1,4 +1,5 @@
 import { WHEEL_WIDTH } from '~/components/global/Car/Car.constants';
+import { NAV_HEIGHT } from '~/components/modules/Nav/Nav.styles';
 import { COLORS, EASING, MQ, SPACING, StylesMap, TIME } from '~/lib/constants';
 
 const ASSET_MARGIN_TOP = {
@@ -22,13 +23,20 @@ export const styles: StylesMap = {
     width: '78.66666667%',
 
     [MQ.M]: {
-      maxWidth: 425,
+      maxWidth: 350,
       width: '55.33854167%',
     },
 
     [MQ.L]: {
       opacity: 0,
+      width: '100%',
     },
+  },
+  asset: {
+    display: 'block',
+    opacity: 0,
+    transform: 'translate3d(50px, 0, 0) rotate(45deg)',
+    transition: `all ${TIME.MS400}ms ${EASING.CUBIC_EASE_OUT}`,
   },
   assetContainer: {
     display: 'block',
@@ -50,23 +58,26 @@ export const styles: StylesMap = {
       width: WHEEL_WIDTH.L,
     },
   },
+  assetShow: {
+    opacity: 1,
+    transform: 'translate3d(0, 0, 0) rotate(0deg)',
+  },
   bottomContent: {
     alignItems: 'center',
-    backgroundColor: COLORS.GLOBAL.ORANGE,
     display: 'flex',
     flexDirection: 'column',
-    minHeight: '40vh',
+    minHeight: `calc(40vh - ${NAV_HEIGHT.S}px)`,
     paddingBottom: SPACING.SIZE_25,
     paddingTop: SPACING.SIZE_25,
 
     [MQ.M]: {
-      minHeight: '35vh',
+      minHeight: `calc(35vh - ${NAV_HEIGHT.S}px)`,
       paddingBottom: SPACING.SIZE_40,
       paddingTop: SPACING.SIZE_40,
     },
 
     [MQ.L]: {
-      minHeight: '33.333333vh',
+      minHeight: `calc(33.333333vh - ${NAV_HEIGHT.S}px)`,
       paddingBottom: SPACING.SIZE_25,
       paddingTop: SPACING.SIZE_25,
     },
@@ -96,11 +107,16 @@ export const styles: StylesMap = {
     opacity: 0,
     transform: `translate3d(0, ${SPACING.SIZE_20}px, 0)`,
     transition: `all ${TIME.MS300}ms ${EASING.CUBIC_EASE_OUT}`,
+    visibility: 'hidden',
+  },
+  ctaItem: {
+    pointerEvents: 'all',
   },
   ctaShow: {
     opacity: 1,
     transform: 'translate3d(0, 0, 0)',
     transitionDelay: '100ms',
+    visibility: 'visible',
   },
   description: {
     display: 'block',
@@ -124,19 +140,30 @@ export const styles: StylesMap = {
     display: 'flex',
     flexDirection: 'column',
     opacity: 0,
+    pointerEvents: 'all',
     transform: `translate3d(0, calc(50% - ${HEIGHT_BUTTON / 2}px), 0)`,
     transition: `all ${TIME.MS300}ms ${EASING.CUBIC_EASE_OUT}`,
+    visibility: 'hidden',
 
     [MQ.L]: {
-      opacity: 0.5,
+      opacity: 0,
+      visibility: 'visible',
     },
   },
-  linkContainerShow: {
+  linkContainerIsCurrent: {
     opacity: 1,
     transform: 'translate3d(0, 0, 0)',
+    visibility: 'visible',
 
     [MQ.L]: {
       opacity: 1,
+    },
+  },
+  linkContainerShow: {
+    [MQ.L]: {
+      opacity: 1,
+      transform: 'translate3d(0, 0, 0)',
+      visibility: 'visible',
     },
   },
   modalButton: {
@@ -178,15 +205,45 @@ export const styles: StylesMap = {
     justifyContent: 'center',
     marginTop: SPACING.SIZE_02,
   },
+  root: {
+    margin: '0 auto',
+    width: 250,
+
+    [MQ.M]: {
+      width: 400,
+    },
+
+    [MQ.L]: {
+      width: 500,
+    },
+
+    [MQ.XL]: {
+      width: 350,
+    },
+  },
+  rootHovered: {
+    opacity: 1,
+  },
+  rootNotHovered: {
+    opacity: 0.3,
+  },
   sticker: {
     left: -SPACING.SIZE_15,
+    opacity: 0,
     position: 'absolute',
     top: -SPACING.SIZE_15,
+    transform: 'scale3d(1.1, 1.1, 1.1)',
+    transition: `all ${TIME.MS300}ms ${EASING.CUBIC_EASE_OUT}`,
 
     [MQ.L]: {
       left: -SPACING.SIZE_10,
       top: -SPACING.SIZE_10,
     },
+  },
+  stickerShow: {
+    opacity: 1,
+    transform: 'scale3d(1, 1, 1)',
+    transitionDelay: '100ms',
   },
   subcopy: {
     color: COLORS.LIGHT.GRAY_70,
@@ -208,6 +265,7 @@ export const styles: StylesMap = {
   titleContainer: {
     display: 'block',
     flex: '1 1 auto',
+    pointerEvents: 'none',
     position: 'relative',
     width: '100%',
   },
@@ -218,12 +276,22 @@ export const styles: StylesMap = {
     position: 'absolute',
     width: '100%',
 
-    // moe room, no need to fix to the bottom
+    // more room, no need to fix to the bottom
+    // also extending so the title takes the whole screen
     [MQ.M]: {
       bottom: 'auto',
       top: '50%',
       transform: 'translate3d(0, -50%, 0)',
     },
+
+    [MQ.L]: {
+      left: '50%',
+      transform: 'translate3d(-50%, -50%, 0)',
+      width: '100vw',
+    },
+  },
+  titleContainerIsCurrent: {
+    pointerEvents: 'all',
   },
   titleShow: {
     opacity: 1,
@@ -231,18 +299,21 @@ export const styles: StylesMap = {
   },
   topContent: {
     display: 'block',
-    height: '60vh',
+    height: `calc(60vh - ${NAV_HEIGHT.S}px)`,
     minHeight: 385,
+    paddingTop: NAV_HEIGHT.S,
     width: '100%',
 
     [MQ.M]: {
-      height: '65vh',
+      height: `calc(65vh - ${NAV_HEIGHT.M}px)`,
       minHeight: 517,
+      paddingTop: NAV_HEIGHT.M,
     },
 
     [MQ.L]: {
-      height: '66.6666666vh',
+      height: `calc(66.6666666vh - ${NAV_HEIGHT.L}px)`,
       minHeight: 538,
+      paddingTop: NAV_HEIGHT.L,
     },
   },
   topContentInner: {
@@ -267,7 +338,11 @@ export const styles: StylesMap = {
     width: '100%',
   },
   viewMoreContentContainer: {
-    marginTop: SPACING.SIZE_35,
+    marginTop: SPACING.SIZE_20,
+
+    [MQ.L]: {
+      marginTop: SPACING.SIZE_25,
+    },
 
     [MQ.L]: {
       transform: 'translate3d(0, 0, 0)',

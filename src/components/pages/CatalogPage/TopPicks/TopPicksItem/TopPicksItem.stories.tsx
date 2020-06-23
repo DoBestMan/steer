@@ -6,6 +6,7 @@ import { SiteImage } from '~/data/models/SiteImage';
 import { SitePrice } from '~/data/models/SitePrice';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 
+import { styles } from '../TopPick.storiesStyles';
 import TopPicksItem from './TopPicksItem';
 
 export default {
@@ -107,7 +108,15 @@ export function TopPicksItemWithKnobs() {
     /* eslint-enable sort-keys */
   };
 
-  return <TopPicksItem {...data} />;
+  return (
+    <div css={styles.root}>
+      <div css={styles.fakeBackground}>
+        <div css={styles.topContent}></div>
+        <div css={styles.bottomContent}></div>
+      </div>
+      <TopPicksItem show {...data} />
+    </div>
+  );
 }
 
 export function TopPicksItemWithFrontAndRearAndPill() {
@@ -180,7 +189,15 @@ export function TopPicksItemWithFrontAndRearAndPill() {
     /* eslint-enable sort-keys */
   };
 
-  return <TopPicksItem {...data} />;
+  return (
+    <div css={styles.root}>
+      <div css={styles.fakeBackground}>
+        <div css={styles.topContent}></div>
+        <div css={styles.bottomContent}></div>
+      </div>
+      <TopPicksItem show {...data} />
+    </div>
+  );
 }
 
 export function TopPicksItemWithNoPriceAndNoBrandImage() {
@@ -229,7 +246,15 @@ export function TopPicksItemWithNoPriceAndNoBrandImage() {
     /* eslint-enable sort-keys */
   };
 
-  return <TopPicksItem {...data} />;
+  return (
+    <div css={styles.root}>
+      <div css={styles.fakeBackground}>
+        <div css={styles.topContent}></div>
+        <div css={styles.bottomContent}></div>
+      </div>
+      <TopPicksItem show {...data} />
+    </div>
+  );
 }
 
 export function TopPicksItemWithViewMore() {
@@ -257,5 +282,13 @@ export function TopPicksItemWithViewMore() {
     /* eslint-enable sort-keys */
   };
 
-  return <TopPicksItem {...data} />;
+  return (
+    <div css={styles.root}>
+      <div css={styles.fakeBackground}>
+        <div css={styles.topContent}></div>
+        <div css={styles.bottomContent}></div>
+      </div>
+      <TopPicksItem show {...data} />
+    </div>
+  );
 }

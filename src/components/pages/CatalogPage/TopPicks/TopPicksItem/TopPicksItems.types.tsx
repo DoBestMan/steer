@@ -14,31 +14,35 @@ export interface TopPickItemsHeader {
 
 export interface TopPickItemsProps {
   addVehicleInfo?: boolean;
-  asset?: SiteImage;
-  brand?: SiteCatalogBrand;
-  ctaLabel?: string;
+  asset?: SiteImage | null;
+  brand?: SiteCatalogBrand | null;
+  ctaLabel?: string | null;
   deliveryInfo?: {
     isFeatured?: boolean;
     value: string;
-  };
+  } | null;
   exploreMore?: () => void;
   header?: TopPickItemsHeader;
-  index: number;
+  index?: number;
+  indexHovered?: number | null;
   isCurrent?: boolean;
   location?: string;
-  oeModal?: SiteCatalogSummaryTopPickItemAdditionalInfo;
+  oeModal?: SiteCatalogSummaryTopPickItemAdditionalInfo | null;
+  onItemMouseEnter?: (index: number) => void;
+  onItemMouseLeave?: () => void;
   openSearch?: () => void;
-  priceList?: {
+  priceList?: Array<{
     label: string | null;
     price: SitePrice;
-  }[];
-  productFeature?: string;
-  productName?: string;
+  }> | null;
+  productFeature?: string | null;
+  productName?: string | null;
   rating?: {
     quantity: number;
     value: number;
-  };
+  } | null;
+  show?: boolean;
   totalResult?: number | string;
-  url?: string;
-  viewMoreData?: SiteCatalogSummaryTopPicksMore;
+  url?: string | null;
+  viewMoreData?: SiteCatalogSummaryTopPicksMore | null;
 }

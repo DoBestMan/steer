@@ -9,10 +9,10 @@ import styles from './Prices.styles';
 interface Props {
   isLarge?: boolean;
   isLight?: boolean;
-  priceList?: {
+  priceList?: Array<{
     label: string | null;
     price: SitePrice;
-  }[];
+  }> | null;
 }
 
 function Prices({ priceList, isLarge, isLight }: Props) {

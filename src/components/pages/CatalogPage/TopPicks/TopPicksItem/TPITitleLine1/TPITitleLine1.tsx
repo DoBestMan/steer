@@ -11,7 +11,7 @@ export default function TPITitleLine1({ viewMoreDataTitle, header }: Props) {
   }
 
   if (header) {
-    return <>{`${header.titleLine1}${header.titleLine2 && ': '}`}</>;
+    return <>{`${header.titleLine1}${header.titleLine2 ? ': ' : ''}`}</>;
   }
 
   return null;

@@ -1,0 +1,50 @@
+import { PRODUCT_IMAGE_TYPES } from '~/lib/constants/productImage.types';
+
+import { SiteCatalogBrand } from './SiteCatalogBrand';
+import { SiteCatalogPromotionList } from './SiteCatalogPromotionList';
+import { SiteIcon } from './SiteIcon';
+import { SiteImage } from './SiteImage';
+import { SiteLink } from './SiteLink';
+import { SitePrice } from './SitePrice';
+
+export interface SiteCatalogProductItem {
+  activeFilterValueList: Array<string> | null;
+  brand: SiteCatalogBrand;
+  dataMomentList: Array<{
+    icon: SiteIcon;
+    label: string;
+  }> | null;
+  deliveryInfo: {
+    isFeatured: boolean;
+    value: string;
+  } | null;
+  gridAttribute: string | null;
+  highlight: string | null;
+  imageList: Array<{
+    image: SiteImage;
+    productImageType: PRODUCT_IMAGE_TYPES;
+  }>;
+  link: SiteLink;
+  loadSpeedRating: string | null;
+  name: string;
+  performanceRatingList: Array<{
+    label: string;
+    value: number;
+  }>;
+  priceList: Array<{
+    label: string | null;
+    price: SitePrice;
+  }> | null;
+  rating: {
+    quantity: number;
+    value: number;
+  } | null;
+  siteCatalogPromotionInfo: SiteCatalogPromotionList | null;
+  size: string;
+  specList: Array<{
+    concise: string;
+    label: string;
+    value: string;
+  }> | null;
+  topPicksAttribute: string | null;
+}

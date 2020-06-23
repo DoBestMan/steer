@@ -9,7 +9,7 @@ import { TopPickItemsHeader } from '../TopPicksItems.types';
 
 interface Props {
   header: TopPickItemsHeader;
-  oeModal: SiteCatalogSummaryTopPickItemAdditionalInfo | undefined;
+  oeModal?: SiteCatalogSummaryTopPickItemAdditionalInfo | null;
   openModal: () => void;
 }
 
