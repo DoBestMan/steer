@@ -1,10 +1,12 @@
+import { action } from '@storybook/addon-actions';
 import { boolean, select, text } from '@storybook/addon-knobs';
 
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 
-import PromoTag from './PromoTag';
+import PromoTag, { PromoTagProps } from './PromoTag';
 import { PROMO_STYLES } from './PromoTag.types';
+import PromoTagCarouselComponent from './PromoTagCarousel';
 
 export default {
   component: PromoTag,
@@ -27,6 +29,8 @@ const iconOptions = {
   Wrench: ICONS.WRENCH,
 };
 
+const handleClick = action('click-promo-tag');
+
 export function PromoTagWithKnobs() {
   return (
     <PromoTag
@@ -37,6 +41,7 @@ export function PromoTagWithKnobs() {
         type: ICON_IMAGE_TYPE.ICON,
       }}
       label={text('Label', 'Spring Sale')}
+      handleClick={boolean('Clickable?', false) ? handleClick : undefined}
     />
   );
 }
@@ -75,4 +80,43 @@ export function OrangePillPromoTag() {
       label="Instant Rebate"
     />
   );
+}
+
+export function PromoTagCarousel() {
+  const tags: PromoTagProps[] = [
+    {
+      style: PROMO_STYLES.DEFAULT,
+      icon: {
+        svgId: ICONS.TAG,
+        type: ICON_IMAGE_TYPE.ICON,
+      },
+      label: 'Spring Sale',
+    },
+    {
+      style: PROMO_STYLES.WHITE_PILL,
+      icon: {
+        svgId: ICONS.REBATE,
+        type: ICON_IMAGE_TYPE.ICON,
+      },
+      label: '$70 Rebate',
+    },
+    {
+      style: PROMO_STYLES.ORANGE_PILL,
+      icon: {
+        svgId: ICONS.WRENCH,
+        type: ICON_IMAGE_TYPE.ICON,
+      },
+      label: 'Free installation',
+    },
+    {
+      style: PROMO_STYLES.BLACK_PILL,
+      icon: {
+        svgId: ICONS.LIGHTNING,
+        type: ICON_IMAGE_TYPE.ICON,
+      },
+      label: 'Black Friday',
+    },
+  ];
+
+  return <PromoTagCarouselComponent tags={tags} />;
 }
