@@ -55,7 +55,7 @@ function AdvancedListing({
         <div css={styles.image}>
           {highlight && (
             <div css={styles.sticker}>
-              <Sticker isSmall label={highlight} />
+              <Sticker label={highlight} />
             </div>
           )}
           <Image {...displayedImage.image} altText={name} />

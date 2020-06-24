@@ -210,7 +210,7 @@ function TopPicksItem(props: TopPickItemsProps) {
             {/* Sticker (1st, 2nd...) */}
             {asset && typeof index !== 'undefined' && (
               <span css={[styles.sticker, show && styles.stickerShow]}>
-                <Sticker label={ordinalSuffixOf(index + 1)} />
+                <Sticker isLarge label={ordinalSuffixOf(index + 1)} />
               </span>
             )}
 

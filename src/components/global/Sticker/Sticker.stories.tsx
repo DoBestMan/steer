@@ -1,4 +1,4 @@
-import { text } from '@storybook/addon-knobs';
+import { boolean, text } from '@storybook/addon-knobs';
 
 import Sticker from './Sticker';
 
@@ -14,5 +14,6 @@ export default {
 
 export function StickerWithKnobs() {
   const label = text('Label', '20% off');
-  return <Sticker label={label} />;
+  const isLarge = boolean('Is large? (for Top Picks Stickers)', false);
+  return <Sticker label={label} isLarge={isLarge} />;
 }

@@ -1,9 +1,18 @@
-import { COLORS, MQ, StylesMap } from '~/lib/constants';
+import { COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
 
 const SIZES = {
-  SMALL: 55,
-  MEDIUM: 65,
-  LARGE: 75,
+  DEFAULT: {
+    S: 44,
+    M: 44,
+    L: 44,
+    XL: 50,
+  },
+  LARGE: {
+    S: 55,
+    M: 75,
+    L: 65,
+    XL: 65,
+  },
 };
 
 export const styles: StylesMap = {
@@ -14,32 +23,49 @@ export const styles: StylesMap = {
     color: COLORS.GLOBAL.WHITE,
     display: 'flex',
     fontWeight: 'normal',
-    height: SIZES.SMALL,
+    height: SIZES.DEFAULT.S,
     justifyContent: 'center',
-    padding: 3,
+    lineHeight: '100%', // not great but closer from design
+    padding: SPACING.SIZE_05,
     textAlign: 'center',
-    width: SIZES.SMALL,
+    width: SIZES.DEFAULT.S,
 
     [MQ.M]: {
-      height: SIZES.LARGE,
-      padding: 5,
-      width: SIZES.LARGE,
+      height: SIZES.DEFAULT.M,
+      width: SIZES.DEFAULT.M,
     },
 
     [MQ.L]: {
-      height: SIZES.MEDIUM,
-      width: SIZES.MEDIUM,
+      height: SIZES.DEFAULT.L,
+      width: SIZES.DEFAULT.L,
+    },
+
+    [MQ.XL]: {
+      height: SIZES.DEFAULT.XL,
+      width: SIZES.DEFAULT.XL,
     },
   },
 
-  small: {
+  large: {
+    height: SIZES.LARGE.S,
+    padding: 3,
+    width: SIZES.LARGE.S,
+
     [MQ.M]: {
-      height: SIZES.SMALL,
-      width: SIZES.SMALL,
+      height: SIZES.LARGE.M,
+      padding: 13,
+      width: SIZES.LARGE.M,
     },
+
     [MQ.L]: {
-      height: SIZES.MEDIUM,
-      width: SIZES.MEDIUM,
+      height: SIZES.LARGE.L,
+      padding: SPACING.SIZE_10,
+      width: SIZES.LARGE.L,
+    },
+
+    [MQ.XL]: {
+      height: SIZES.LARGE.XL,
+      width: SIZES.LARGE.XL,
     },
   },
 };
