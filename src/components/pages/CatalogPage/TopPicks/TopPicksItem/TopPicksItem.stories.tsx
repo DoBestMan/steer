@@ -231,6 +231,7 @@ export function TopPicksItemWithNoPriceAndNoBrandImage() {
     },
     location: 'Brooklyn, NY',
 
+    priceList: null,
     productName: 'ProContact',
     productFeature: '65k mile warranty',
 
@@ -262,6 +263,7 @@ export function TopPicksItemWithViewMore() {
     /* eslint-disable sort-keys */
     index: 0,
     isCurrent: boolean('Is current', true),
+    priceList: null,
 
     viewMoreData: {
       header: {

@@ -145,11 +145,11 @@ export function AdvancedListingWithKnobs() {
         name={text('Name', 'FT140')}
         performanceRatingList={mockRatingList}
         priceList={mockPriceList}
-        promotionList={{
+        siteCatalogPromotionInfo={{
           count: promosToRender,
           list: mockPromotions.slice(0, promosToRender),
         }}
-        images={mockImages}
+        imageList={mockImages}
         link={{ href: '/', isExternal: false }}
         rating={
           showRatings

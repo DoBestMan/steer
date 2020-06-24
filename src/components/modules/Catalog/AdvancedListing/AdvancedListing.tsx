@@ -23,12 +23,12 @@ const MAX_PROMOS = 2;
 function AdvancedListing({
   brand,
   name,
-  images,
+  imageList,
   dataMomentList,
   defaultImage,
   highlight,
   link,
-  promotionList,
+  siteCatalogPromotionInfo,
   size,
   performanceRatingList,
   priceList,
@@ -37,11 +37,13 @@ function AdvancedListing({
 }: AdvancedListingProps) {
   const { bk } = useBreakpoints();
   const displayedImage =
-    images.find((image) => image.productImageType === defaultImage) ||
-    images[0];
+    imageList.find((image) => image.productImageType === defaultImage) ||
+    imageList[0];
 
-  const noOfPromosToDisplay = promotionList.count > MAX_PROMOS ? 1 : MAX_PROMOS;
-  const displayedPromos = promotionList.list.slice(0, noOfPromosToDisplay);
+  const numberOfPromosToDisplay =
+    siteCatalogPromotionInfo && siteCatalogPromotionInfo.count > MAX_PROMOS
+      ? 1
+      : MAX_PROMOS;
 
   return (
     <Grid css={styles.root}>
@@ -84,19 +86,21 @@ function AdvancedListing({
             <div css={styles.title}>{size}</div>
           </div>
           <ul css={styles.momentList}>
-            {displayedPromos.map((item) => (
-              <li css={[styles.moment, styles.momentPromo]} key={item.label}>
-                {item.icon && (
-                  <Icon css={styles.momentIcon} name={item.icon.svgId} />
-                )}
-                {item.label}{' '}
-                {promotionList.count > MAX_PROMOS &&
-                  ui('catalog.productListing.morePromos', {
-                    number: promotionList.count - 1,
-                  })}
-              </li>
-            ))}
-            {dataMomentList.map((item) => (
+            {siteCatalogPromotionInfo?.list
+              .slice(0, numberOfPromosToDisplay)
+              .map((item) => (
+                <li css={[styles.moment, styles.momentPromo]} key={item.label}>
+                  {item.icon && (
+                    <Icon css={styles.momentIcon} name={item.icon.svgId} />
+                  )}
+                  {item.label}{' '}
+                  {siteCatalogPromotionInfo.count > MAX_PROMOS &&
+                    ui('catalog.productListing.morePromos', {
+                      number: siteCatalogPromotionInfo.count - 1,
+                    })}
+                </li>
+              ))}
+            {dataMomentList?.map((item) => (
               <li css={styles.moment} key={item.label}>
                 <Icon css={styles.momentIcon} name={item.icon.svgId} />
                 {item.label}

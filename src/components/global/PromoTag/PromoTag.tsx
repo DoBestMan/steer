@@ -1,5 +1,5 @@
 import Icon from '~/components/global/Icon/Icon';
-import { SiteCatalogPromotion } from '~/data/models/SiteCatalogPromotionList';
+import { SiteCatalogPromotion } from '~/data/models/SiteCatalogPromotionInfo';
 
 import styles from './PromoTag.styles';
 

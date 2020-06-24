@@ -92,8 +92,8 @@ export function ProductListingWithKnobs() {
         gridColumnL={isHighlighted ? '2 / 8' : '2 / 5'}
       >
         <ProductListing
-          activeFilterPropertyList={showFilters ? mockFilters : []}
-          attribute={text('Attribute', 'Original tire')}
+          activeFilterValueList={showFilters ? mockFilters : []}
+          gridAttribute={text('Attribute', 'Original tire')}
           brand={{
             image: showBrandLogo ? mockLogo : undefined,
             label: 'Firestone',
@@ -104,11 +104,11 @@ export function ProductListingWithKnobs() {
           loadSpeedRating={text('Load/Speed rating', '91H')}
           name={text('Name', 'FT140')}
           priceList={mockPriceList}
-          promotionList={{
+          siteCatalogPromotionInfo={{
             count: promosToRender,
             list: mockPromotions.slice(0, promosToRender),
           }}
-          images={mockImages}
+          imageList={mockImages}
           isHighlighted={isHighlighted}
           rating={
             showRatings
@@ -133,18 +133,20 @@ export function FilteredProductListing() {
         gridColumnL={'2 / 5'}
       >
         <ProductListing
-          activeFilterPropertyList={mockFilters}
+          activeFilterValueList={mockFilters}
           brand={{
             image: mockLogo,
             label: 'Firestone',
           }}
           defaultImage={PRODUCT_IMAGE_TYPES.SIDEWALL}
+          gridAttribute={null}
+          highlight={null}
           link={{ href: '/', isExternal: false }}
           loadSpeedRating="91H"
           name="FT140"
-          promotionList={{ count: 0, list: [] }}
+          siteCatalogPromotionInfo={{ count: 0, list: [] }}
           priceList={mockPriceList}
-          images={mockImages}
+          imageList={mockImages}
           rating={{
             quantity: 113,
             value: 4.3,
@@ -164,17 +166,20 @@ export function HighlightedProductListing() {
         gridColumnL={'2 / 8'}
       >
         <ProductListing
+          activeFilterValueList={null}
           brand={{
             image: mockLogo,
             label: 'Firestone',
           }}
           defaultImage={PRODUCT_IMAGE_TYPES.SIDEWALL}
+          gridAttribute={null}
+          highlight={null}
           link={{ href: '/', isExternal: false }}
           loadSpeedRating="91H"
           name="FT140"
-          promotionList={{ count: 0, list: [] }}
+          siteCatalogPromotionInfo={{ count: 0, list: [] }}
           priceList={mockPriceList}
-          images={mockImages}
+          imageList={mockImages}
           isHighlighted
           rating={{
             quantity: 113,

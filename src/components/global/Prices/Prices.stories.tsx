@@ -139,7 +139,7 @@ export function NoPrices() {
         backgroundColor: COLORS.GLOBAL.ORANGE,
       }}
     >
-      <Prices />
+      <Prices priceList={null} />
     </div>
   );
 }

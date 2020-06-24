@@ -1,7 +1,7 @@
 import { PRODUCT_IMAGE_TYPES } from '~/lib/constants/productImage.types';
 
 import { SiteCatalogBrand } from './SiteCatalogBrand';
-import { SiteCatalogPromotionList } from './SiteCatalogPromotionList';
+import { SiteCatalogPromotionInfo } from './SiteCatalogPromotionInfo';
 import { SiteIcon } from './SiteIcon';
 import { SiteImage } from './SiteImage';
 import { SiteLink } from './SiteLink';
@@ -39,12 +39,12 @@ export interface SiteCatalogProductItem {
     quantity: number;
     value: number;
   } | null;
-  siteCatalogPromotionInfo: SiteCatalogPromotionList | null;
+  siteCatalogPromotionInfo: SiteCatalogPromotionInfo | null;
   size: string;
   specList: Array<{
     concise: string;
     label: string;
     value: string;
-  }> | null;
+  }>;
   topPicksAttribute: string | null;
 }

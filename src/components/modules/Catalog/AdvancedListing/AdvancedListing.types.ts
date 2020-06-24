@@ -1,21 +1,13 @@
-import { SiteIcon } from '~/data/models/SiteIcon';
+import { SiteCatalogProductItem } from '~/data/models/SiteCatalogProductItem';
+import { PRODUCT_IMAGE_TYPES } from '~/lib/constants/productImage.types';
 
-import { ProductListingProps } from '../ProductListing/ProductListing.types';
-
-export interface AdvancedListingProps extends ProductListingProps {
-  dataMomentList: {
-    icon: SiteIcon;
-    label: string;
-  }[];
-  highlight?: string;
-  performanceRatingList: {
-    label: string;
-    value: number;
-  }[];
-  size: string;
-  specList: {
-    concise: string;
-    label: string;
-    value: string;
-  }[];
-}
+export type AdvancedListingProps = Omit<
+  SiteCatalogProductItem,
+  | 'activeFilterValueList'
+  | 'deliveryInfo'
+  | 'gridAttribute'
+  | 'loadSpeedRating'
+  | 'topPicksAttribute'
+> & {
+  defaultImage?: PRODUCT_IMAGE_TYPES;
+};

@@ -9,7 +9,7 @@ export interface SiteCatalogPromotion {
   style: PROMO_STYLES;
 }
 
-export interface SiteCatalogPromotionList {
+export interface SiteCatalogPromotionInfo {
   count: number;
   list: SiteCatalogPromotion[];
 }
