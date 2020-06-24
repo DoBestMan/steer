@@ -23,6 +23,10 @@
     },
     "video": {
       "play": "Play video"
+    },
+    "headerDetailPage": {
+      "hideFullDescriptionLinkLabel": "Read less",
+      "showFullDescriptionLinkLabel": "Read more"
     }
   },
   "accordion": {
