@@ -15,8 +15,7 @@ interface Props {
   isInternal?: boolean;
   location: string;
   onToggleView: () => void;
-  rearTireSize?: string;
-  tireSize: string;
+  sizeList?: string[];
   title: string | ReactNode;
 }
 
@@ -26,8 +25,7 @@ export default function HeaderInfo({
   isInternal = false,
   location,
   onToggleView,
-  rearTireSize,
-  tireSize,
+  sizeList = [],
   title,
 }: Props) {
   const { header } = useTheme();
@@ -50,7 +48,7 @@ export default function HeaderInfo({
   );
 
   const locationEl = (
-    <div css={[infoStyles, rearTireSize && styles.wrappedLocation]}>
+    <div css={[infoStyles, sizeList[1] && styles.wrappedLocation]}>
       {ui('catalog.header.dealsFor')}
       {/* TODO: location redirect or modal open */}
       <Link css={[styles.link, infoStyles]} href="/">
@@ -61,8 +59,8 @@ export default function HeaderInfo({
   );
 
   let secondItem, thirdItem;
-  if (rearTireSize) {
-    secondItem = ui('catalog.header.rear', { rearTireSize });
+  if (sizeList[1]) {
+    secondItem = sizeList[1];
     thirdItem = locationEl;
   } else {
     secondItem = locationEl;
@@ -76,9 +74,7 @@ export default function HeaderInfo({
         {!isInternal && (
           <>
             <div css={infoStyles}>
-              <p css={styles.decorator}>
-                {ui('catalog.header.size', { tireSize })}
-              </p>
+              <p css={styles.decorator}>{sizeList[0]}</p>
               {secondItem}
             </div>
             {thirdItem}

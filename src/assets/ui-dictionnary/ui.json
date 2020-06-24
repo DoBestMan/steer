@@ -46,9 +46,7 @@
       "advancedViewLabel": "Advanced view",
       "back": "Back",
       "dealsFor": "Deals for",
-      "filterLabel": "Filter by",
-      "rear": "Rear {{rearTireSize}}",
-      "size": "Size {{tireSize}}"
+      "filterLabel": "Filter by"
     },
     "productListing": {
       "morePromos": "+ {{number}} other deals",

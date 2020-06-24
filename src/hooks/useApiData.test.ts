@@ -30,13 +30,14 @@ describe('useApiData', () => {
         includeAuthorization: false,
         includeUserRegion: true,
         includeUserZip: false,
-        params: { sortBy: 'price' },
+        params: {},
+        query: { sortBy: 'price' },
       }),
     );
 
     // it calls useSWR
     expect(mocked(useSWR)).toHaveBeenCalledWith(
-      ['/test-endpoint', '{"sortBy":"price"}'],
+      ['/test-endpoint', '{}'],
       expect.any(Function),
       {},
     );
@@ -55,7 +56,8 @@ describe('useApiData', () => {
       includeUserRegion: true,
       includeUserZip: false,
       method: 'get',
-      params: {
+      params: {},
+      query: {
         sortBy: 'price',
       },
     });

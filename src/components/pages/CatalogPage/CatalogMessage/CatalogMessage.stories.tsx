@@ -2,7 +2,7 @@ import { action } from '@storybook/addon-actions';
 import { ThemeProvider } from 'emotion-theming';
 import { ReactNode } from 'react';
 
-import { defaultTheme } from '~/components/pages/CatalogPage/CatalogPage';
+import { defaultTheme } from '~/components/pages/CatalogPage/CatalogPage.theme';
 
 import {
   vehiclesDisambiguation,

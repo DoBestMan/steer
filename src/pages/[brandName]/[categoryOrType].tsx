@@ -1,9 +1,9 @@
 // final structure should be something like `/firestone-tires/winter`
 
-import { COLORS } from '~/lib/constants';
+import CatalogPage from '~/components/pages/CatalogPage/CatalogPage';
 
 function BrandCategory() {
-  return <div css={{ background: COLORS.GLOBAL.ORANGE, paddingTop: 200 }} />;
+  return <CatalogPage hasTopPicks={false} />;
 }
 
 export default BrandCategory;

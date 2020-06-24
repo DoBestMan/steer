@@ -52,6 +52,7 @@ describe('useApiData', () => {
       includeUserZip: false,
       options: {},
       params: {},
+      query: {},
     });
 
     // it returns expected result

@@ -7,6 +7,7 @@ interface Props {
   hasTopPicks: boolean;
   isAdvancedView: boolean;
   isInternal?: boolean;
+  sizeList?: string[];
   toggleView: () => void;
 }
 
@@ -25,12 +26,10 @@ const titlePlaceholder = (
 export default function HeaderContainer({
   hasTopPicks,
   isAdvancedView,
+  sizeList,
   toggleView,
 }: Props) {
   const { locationString } = useUserPersonalizationContext();
-
-  // TODO: hook up metadata
-
   return (
     <FiltersContextProvider onApplyFilters={onSearchWithFilters}>
       <Header
@@ -38,8 +37,7 @@ export default function HeaderContainer({
         isAdvancedView={isAdvancedView}
         isInternal={false}
         title={titlePlaceholder}
-        tireSize="255/30 R20"
-        rearTireSize="355/25 R21"
+        sizeList={sizeList}
         resultsCount={232}
         onToggleView={toggleView}
         location={locationString}

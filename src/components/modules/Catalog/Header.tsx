@@ -17,9 +17,8 @@ interface Props {
   isInternal?: boolean;
   location: string;
   onToggleView: () => void;
-  rearTireSize?: string;
   resultsCount: number;
-  tireSize: string;
+  sizeList?: string[];
   title: string | ReactNode;
 }
 

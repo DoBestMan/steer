@@ -5,7 +5,7 @@ import { ReactNode, useState } from 'react';
 import {
   defaultTheme,
   headerAdvanced,
-} from '~/components/pages/CatalogPage/CatalogPage';
+} from '~/components/pages/CatalogPage/CatalogPage.theme';
 import { COLORS } from '~/lib/constants';
 
 import styles from '../Header.styles';
@@ -21,8 +21,7 @@ const defaultProps = {
   isAdvancedView: false,
   isInternal: false,
   location: 'Portland, OR',
-  rearTireSize: '355/25 R21',
-  tireSize: '255/30 R20',
+  sizeList: ['Size 255/30 R20', 'Rear 355/25 R21'],
 };
 const defaultTitle = (
   <>
@@ -65,8 +64,8 @@ export function HeaderInfoWithKnobs() {
       {car}
     </>
   );
-  const tireSize = text('Tire size', defaultProps.tireSize);
-  const rearTireSize = text('Rear tire size', defaultProps.tireSize);
+  const tireSize = text('Tire size', defaultProps.sizeList[0]);
+  const rearTireSize = text('Rear tire size', defaultProps.sizeList[1]);
   const location = text('Location', defaultProps.location);
   const hasTopPicks = boolean('Has top picks', true);
   return (
@@ -77,8 +76,7 @@ export function HeaderInfoWithKnobs() {
           isAdvancedView,
           location,
           onToggleView: () => setIsAdvancedView(!isAdvancedView),
-          rearTireSize,
-          tireSize,
+          sizeList: [tireSize, rearTireSize],
           title: titleEl,
         }}
       />
@@ -118,7 +116,7 @@ export function HeaderInfoWithoutRearTireSize() {
         {...defaultProps}
         onToggleView={toggleView}
         title={defaultTitle}
-        rearTireSize={undefined}
+        sizeList={['Size 255/30 R20']}
       />
     </HeaderContainer>
   );

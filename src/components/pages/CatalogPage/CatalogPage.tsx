@@ -4,9 +4,10 @@ import { useState } from 'react';
 
 import HeaderContainer from '~/components/modules/Catalog/Header.container';
 import { CatalogSummaryContextProvider } from '~/context/CatalogSummary.context';
-import { BUTTON_STYLE, COLORS, THEME } from '~/lib/constants';
+import { SiteCatalogSummary } from '~/data/models/SiteCatalogSummary';
 
 import styles from './CatalogPage.styles';
+import { defaultTheme, headerAdvanced } from './CatalogPage.theme';
 import CatalogSummary from './CatalogSummary/CatalogSummary';
 import {
   vehiclesDisambiguation,
@@ -14,50 +15,20 @@ import {
   vehiclesNoResultWithTrim,
 } from './CatalogSummary/CatalogSummary.mocks';
 
-// exported for storybook
-export const defaultTheme = {
-  message: {
-    buttonStyle: BUTTON_STYLE.OUTLINED,
-    buttonTheme: THEME.ORANGE,
-    loadingTheme: THEME.DARK,
-  },
-  header: {
-    advancedLabel: {
-      color: COLORS.LIGHT.GRAY_70,
-    },
-    background: {
-      background: COLORS.GLOBAL.ORANGE,
-    },
-    buttonTheme: THEME.ORANGE,
-    text: {
-      color: COLORS.GLOBAL.BLACK,
-    },
-  },
-};
+interface Props {
+  hasTopPicks?: boolean;
+  siteCatalogSummary?: SiteCatalogSummary;
+}
 
-export const headerAdvanced = {
-  header: {
-    advancedLabel: {
-      color: COLORS.GLOBAL.WHITE,
-    },
-    background: {
-      background: COLORS.GLOBAL.BLACK,
-    },
-    buttonTheme: THEME.DARK,
-    text: {
-      color: COLORS.DARK.GRAY_40,
-    },
-  },
-};
-
-function CatalogPage() {
+function CatalogPage({ hasTopPicks = true, siteCatalogSummary }: Props) {
   const [isAdvancedView, setIsAdvancedView] = useState(false);
   function toggleView() {
     setIsAdvancedView(!isAdvancedView);
   }
+
   // TEMP: use route params for testing flows
   const router = useRouter();
-  const { flow, isSearch, showTopPicks } = router.query;
+  const { flow, isSearch } = router.query;
 
   // SiteCatalogSummary response
   let catalogSummaryResponse = vehiclesNoOeWithSize;
@@ -71,8 +42,6 @@ function CatalogPage() {
     numberOfProducts = 0;
   }
 
-  const hasTopPicks = showTopPicks !== 'false';
-
   return (
     <ThemeProvider
       theme={{ ...defaultTheme, ...(isAdvancedView && headerAdvanced) }}
@@ -80,7 +49,9 @@ function CatalogPage() {
       <div css={styles.root}>
         {hasTopPicks && (
           <CatalogSummaryContextProvider
-            catalogSummaryResponse={catalogSummaryResponse}
+            catalogSummaryResponse={
+              siteCatalogSummary || catalogSummaryResponse
+            }
             isSearch={isSearch === 'true'}
             numberOfProducts={numberOfProducts}
           >
@@ -88,6 +59,7 @@ function CatalogPage() {
           </CatalogSummaryContextProvider>
         )}
         <HeaderContainer
+          sizeList={siteCatalogSummary?.siteCatalogSummaryMeta?.sizeList}
           hasTopPicks={hasTopPicks}
           toggleView={toggleView}
           isAdvancedView={isAdvancedView}

@@ -23,6 +23,7 @@ export interface UseApiDataParams {
   includeUserZip?: boolean;
   options?: ConfigInterface;
   params?: Record<string, string>;
+  query?: Record<string, string>;
   revalidateEmitter?: Emitter<null>;
 }
 
@@ -32,6 +33,7 @@ export function useApiData<T>({
   includeUserRegion = false,
   includeUserZip = false,
   params = {},
+  query = {},
   revalidateEmitter,
   options = {},
 }: UseApiDataParams): UseApiData<T> {
@@ -47,6 +49,7 @@ export function useApiData<T>({
         includeUserZip,
         method: 'get',
         params,
+        query,
       });
     },
     options,
