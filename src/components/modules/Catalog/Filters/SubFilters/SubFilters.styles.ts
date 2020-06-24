@@ -1,4 +1,4 @@
-import { COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
+import { BORDERS, COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
@@ -58,15 +58,19 @@ const styles: StylesMap = {
   root: {
     alignItems: 'baseline',
     background: COLORS.GLOBAL.WHITE,
+    borderBottom: BORDERS.SOLID_GRAY_20_1PX,
     display: 'flex',
     [MQ.S]: {
-      padding: `${SPACING.SIZE_20}px ${SPACING.SIZE_20}px`,
+      margin: `0 ${SPACING.SIZE_20}px`,
+      padding: `${SPACING.SIZE_20}px 0`,
     },
     [MQ.M]: {
-      padding: `${SPACING.SIZE_30}px ${SPACING.SIZE_40}px`,
+      margin: `0 ${SPACING.SIZE_40}px`,
+      padding: `${SPACING.SIZE_30}px 0`,
     },
     [MQ.L]: {
-      padding: `${SPACING.SIZE_30}px ${SPACING.SIZE_60}px`,
+      margin: `0 ${SPACING.SIZE_60}px`,
+      padding: `${SPACING.SIZE_30}px 0`,
     },
   },
   slider: {

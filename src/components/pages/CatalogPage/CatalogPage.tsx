@@ -8,6 +8,12 @@ import { SiteCatalogSummary } from '~/data/models/SiteCatalogSummary';
 
 import styles from './CatalogPage.styles';
 import { defaultTheme, headerAdvanced } from './CatalogPage.theme';
+import CatalogProductGrid from './CatalogProductGrid/CatalogProductGrid';
+import CatalogProductGroups from './CatalogProductGroups/CatalogProductGroups';
+import {
+  productGroupList,
+  products,
+} from './CatalogProductGroups/CatalogProductGroups.mocks';
 import CatalogSummary from './CatalogSummary/CatalogSummary';
 import {
   vehiclesDisambiguation,
@@ -42,6 +48,9 @@ function CatalogPage({ hasTopPicks = true, siteCatalogSummary }: Props) {
     numberOfProducts = 0;
   }
 
+  // TODO: logic of grouped vs. grid views — for now we only use grid for advanced view
+  const isGroupedProducts = !isAdvancedView;
+
   return (
     <ThemeProvider
       theme={{ ...defaultTheme, ...(isAdvancedView && headerAdvanced) }}
@@ -64,6 +73,14 @@ function CatalogPage({ hasTopPicks = true, siteCatalogSummary }: Props) {
           toggleView={toggleView}
           isAdvancedView={isAdvancedView}
         />
+        {isGroupedProducts ? (
+          <CatalogProductGroups productGroupList={productGroupList} />
+        ) : (
+          <CatalogProductGrid
+            productList={products}
+            isAdvancedView={isAdvancedView}
+          />
+        )}
       </div>
     </ThemeProvider>
   );
