@@ -18,6 +18,7 @@
       "close": "Close {{moduleName}}",
       "open": "open {{moduleName}}"
     },
+    "originalPricePrefix": "was ",
     "toast": {
       "close": "Close notification"
     },
@@ -142,6 +143,21 @@
     }
   },
   "pdp": {
+    "productInfo": {
+      "callForPrice": "Call for pricing",
+      "callForPriceTel": "(888) 410 0604",
+      "callForPriceDescription": "Please call us so we can help you buy these tires",
+      "changeSizeLabel": "Select another size",
+      "crossSellTitle": "{{results}} other tires are available on this size:",
+      "crossSellButtonLabel": "View all {{size}} tires",
+      "outOfStock": "Out of stock",
+      "outOfStockDescription": "Check back soon or view other tires",
+      "discount": "{{discount}} off!",
+      "itemsLeft": "{{itemsLeft}} left at this price!",
+      "selectSizeButton": "{{availableSizes}} sizes available",
+      "selectSizeLabel": "Select a size",
+      "selectSingleSizeButton": "1 size available"
+    },
     "insights": {
       "fitting": {
         "true": "Fits your {{vehicle}}",
@@ -233,8 +249,9 @@
   },
   "ratings": {
     "fullRating": "{{rating}} out of {{maxRating}} stars",
-    "outOf": "out of",
-    "ratings": "ratings"
+    "fullRatingWithReviews": "{{rating}} out of {{maxRating}} stars based on {{reviews}} reviews",
+    "ratings": "ratings",
+    "outOf": "out of"
   },
   "search": {
     "addRearTire": "Add different rear size",

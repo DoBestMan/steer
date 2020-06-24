@@ -14,6 +14,7 @@ import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { BREAKPOINT_SIZES, COLORS } from '~/lib/constants';
 import { RATINGS_DISPLAY, RATINGS_THEME } from '~/lib/constants/ratings.types';
 import { ui } from '~/lib/utils/ui-dictionary';
+import { typography } from '~/styles/typography.styles';
 
 import styles from './AdvancedListing.styles';
 import { AdvancedListingProps } from './AdvancedListing.types';
@@ -77,7 +78,10 @@ function AdvancedListing({
             <div css={styles.brand}>
               <BrandLogoOrLabel brand={brand} widths={[200, 400, 600]} />
             </div>
-            <Prices isLarge priceList={priceList} />
+            <Prices
+              currentPriceCSS={typography.secondaryHeadline}
+              priceList={priceList}
+            />
             <h3 css={styles.title}>
               <BaseLink css={styles.linkText} href={link.href}>
                 {name} <Icon css={styles.linkIcon} name={ICONS.CHEVRON_RIGHT} />

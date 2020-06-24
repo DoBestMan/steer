@@ -1,6 +1,7 @@
-import { boolean, text } from '@storybook/addon-knobs';
+import { boolean, select, text } from '@storybook/addon-knobs';
 
 import { COLORS } from '~/lib/constants';
+import { typography } from '~/styles/typography.styles';
 
 import Prices from './Prices';
 
@@ -9,12 +10,23 @@ export default {
   title: 'Global/Prices',
 };
 
+const mapPriceTypographyToCSS = {
+  Primary: typography.primaryHeadline,
+  Secondary: typography.secondaryHeadline,
+  Default: null,
+};
+
 export function PricesWithKnobs() {
   const isLight = boolean('isLight', false);
-  const isLarge = boolean('isLarge', false);
+  const currentPriceTypography = select(
+    'Current price typography',
+    ['Primary', 'Secondary', 'Default'],
+    'Default',
+  );
   const showMultiple = boolean('Show multiple prices', false);
   const currentInCents = text('Current price (cents)', '15975');
   const originalInCents = text('Original price (cents)', '13296');
+  const originalPrefix = text('Original price prefix', '');
 
   const priceList = [
     {
@@ -42,7 +54,14 @@ export function PricesWithKnobs() {
         backgroundColor: isLight ? COLORS.GLOBAL.ORANGE : 'transparent',
       }}
     >
-      <Prices isLight={isLight} isLarge={isLarge} priceList={priceList} />
+      <Prices
+        isLight={isLight}
+        currentPriceCSS={
+          mapPriceTypographyToCSS[currentPriceTypography] || undefined
+        }
+        priceList={priceList}
+        originalPrefix={originalPrefix}
+      />
     </div>
   );
 }
@@ -129,7 +148,12 @@ export function LargePrices() {
     },
   ];
 
-  return <Prices isLarge priceList={priceList} />;
+  return (
+    <Prices
+      currentPriceCSS={typography.secondaryHeadline}
+      priceList={priceList}
+    />
+  );
 }
 
 export function NoPrices() {

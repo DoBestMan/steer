@@ -1,5 +1,5 @@
 import { SitePrice } from '~/data/models/SitePrice';
-import { COLORS } from '~/lib/constants';
+import { COLORS, CSSStyles } from '~/lib/constants';
 import { formatDollars } from '~/lib/utils/string';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
@@ -7,15 +7,21 @@ import { typography } from '~/styles/typography.styles';
 import styles from './Prices.styles';
 
 interface Props {
-  isLarge?: boolean;
+  currentPriceCSS?: CSSStyles;
   isLight?: boolean;
+  originalPrefix?: string;
   priceList?: Array<{
-    label: string | null;
+    label?: string | null;
     price: SitePrice;
   }> | null;
 }
 
-function Prices({ priceList, isLarge, isLight }: Props) {
+function Prices({
+  currentPriceCSS,
+  priceList,
+  isLight,
+  originalPrefix,
+}: Props) {
   return (
     <>
       {priceList ? (
@@ -25,9 +31,8 @@ function Prices({ priceList, isLarge, isLight }: Props) {
               css={[
                 price.originalInCents && { color: COLORS.GLOBAL.ORANGE },
                 isLight && { color: COLORS.GLOBAL.WHITE },
-                isLarge
-                  ? typography.secondaryHeadline
-                  : typography.topPicksPrice,
+                typography.topPicksPrice,
+                currentPriceCSS,
               ]}
             >
               {label && <span css={styles.label}>{label} </span>}
@@ -38,9 +43,16 @@ function Prices({ priceList, isLarge, isLight }: Props) {
                 css={[
                   styles.originalValue,
                   isLight && { color: COLORS.ORANGE.TINT_70 },
+                  originalPrefix && styles.originalValuePrefixed,
                 ]}
+                aria-label={`${ui('common.originalPricePrefix')}${formatDollars(
+                  price.originalInCents,
+                )}`}
               >
-                {formatDollars(price.originalInCents)}
+                <span aria-hidden>
+                  {originalPrefix}
+                  {formatDollars(price.originalInCents)}
+                </span>
               </span>
             )}
           </div>

@@ -38,3 +38,6 @@ export const truncateText = (
   }
   return str;
 };
+
+export const numbersOnly = (text: string): string =>
+  text.match(/\d+/g)?.join('') || '';

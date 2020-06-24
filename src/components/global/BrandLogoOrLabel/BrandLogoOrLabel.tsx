@@ -14,7 +14,12 @@ function BrandLogoOrLabel(props: Props) {
   return (
     <>
       {brand.image ? (
-        <Image {...brand.image} as={'span'} widths={widths} />
+        <Image
+          {...brand.image}
+          as={'span'}
+          widths={widths}
+          aria-label={brand.label}
+        />
       ) : (
         <span css={typography.secondaryHeadline}>{brand.label}</span>
       )}

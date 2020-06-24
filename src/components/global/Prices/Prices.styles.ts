@@ -2,6 +2,9 @@ import { COLORS, SPACING, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
+  currentBlock: {
+    display: 'block',
+  },
   label: {
     fontWeight: 'normal',
   },
@@ -17,6 +20,11 @@ const styles: StylesMap = {
       color: COLORS.LIGHT.GRAY_70,
     },
   ],
+  originalValuePrefixed: {
+    display: 'block',
+    marginLeft: 0,
+    textDecoration: 'none',
+  },
 };
 
 export default styles;
