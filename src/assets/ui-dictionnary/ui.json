@@ -232,7 +232,9 @@
     }
   },
   "ratings": {
-    "outOf": "out of"
+    "fullRating": "{{rating}} out of {{maxRating}} stars",
+    "outOf": "out of",
+    "ratings": "ratings"
   },
   "search": {
     "addRearTire": "Add different rear size",
@@ -278,5 +280,11 @@
       "stepThree": "Contact your manufacturer",
       "title": "Identify your vehicle trim"
     }
+  },
+  "tireReviews": {
+    "more": "See more",
+    "numRatingsHeader": "# of ratings",
+    "ratingHeader": "Rating",
+    "tireHeader": "Tire"
   }
 }
