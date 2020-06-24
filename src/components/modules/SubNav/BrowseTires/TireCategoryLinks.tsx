@@ -1,8 +1,10 @@
 import GridItem from '~/components/global/Grid/GridItem';
-import IconOrImage from '~/components/global/IconOrImage/IconOrImage';
-import { useNavContext } from '~/context/Nav.context';
+import { ICONS } from '~/components/global/Icon/Icon.constants';
+import Link from '~/components/global/Link/Link';
+import { dealsLink, useNavContext } from '~/context/Nav.context';
 import { SiteMenu } from '~/data/models/SiteMenu';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
+import { THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import styles from './BrowseTires.styles';
@@ -19,7 +21,7 @@ function TireCategoryLinks({
           ? ui('nav.browseTires.mobileHeader')
           : ui('nav.browseTires.header')}
       </div>
-      {siteMenuBrowseList.map(({ title, icon }) => {
+      {siteMenuBrowseList.map(({ title }) => {
         const isSelected = activeCategory === title;
         return (
           <span
@@ -34,11 +36,23 @@ function TireCategoryLinks({
               onClick={createSelectCategoryHandler(title)}
             >
               {title}
-              {icon && <IconOrImage css={styles.flair} {...icon} />}
             </button>
           </span>
         );
       })}
+      {isMobile && (
+        <span css={styles.container}>
+          <Link
+            css={styles.label}
+            icon={ICONS.FIRE}
+            href={dealsLink.href}
+            isExternal={dealsLink.isExternal}
+            theme={THEME.LIGHT}
+          >
+            {dealsLink.text}
+          </Link>
+        </span>
+      )}
     </GridItem>
   );
 }

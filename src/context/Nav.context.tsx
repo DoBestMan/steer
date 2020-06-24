@@ -31,6 +31,8 @@ export interface NavContextProps {
 
 const NavContext = createContext<NavContextProps>();
 
+export const dealsLink = { href: '/', isExternal: false, text: 'Deals' };
+
 function buildLinks({
   locationString,
 }: {
@@ -39,19 +41,23 @@ function buildLinks({
   return {
     links: [
       { target: NAV_TARGETS.BROWSE_TIRES, text: 'Browse tires' },
+      dealsLink,
       { target: NAV_TARGETS.LEARN, text: 'Learn' },
-      { href: '/', isExternal: true, text: 'Find a Shop' },
       {
         icon: ICONS.LOCATION,
         label: 'Select location',
         target: NAV_TARGETS.LOCATION,
         text: locationString,
       },
-      { href: '/', icon: ICONS.ACCOUNT, isExternal: true, label: 'Account' },
+      {
+        icon: ICONS.ACCOUNT,
+        label: 'Account',
+        target: NAV_TARGETS.ACCOUNT,
+      },
     ],
     linksMobile: [
       { target: NAV_TARGETS.LEARN, text: 'Learn' },
-      { href: '/', isExternal: true, text: 'Find a Shop' },
+      { href: '/', isExternal: true, text: 'Account' },
       { href: '/', isExternal: true, text: 'Track your order' },
       {
         icon: ICONS.LOCATION,

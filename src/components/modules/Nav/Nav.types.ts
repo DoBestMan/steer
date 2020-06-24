@@ -15,6 +15,7 @@ export interface ActionType {
 }
 
 export enum NAV_TARGETS {
+  ACCOUNT = 'ACCOUNT',
   BROWSE_TIRES = 'BROWSE TIRES',
   LEARN = 'LEARN',
   LOCATION = 'LOCATION',

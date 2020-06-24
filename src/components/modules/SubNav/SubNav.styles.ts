@@ -85,7 +85,9 @@ const styles: StylesMap = {
   linkSection: {
     height: NAV_CONTENT_HEIGHT,
     li: {
+      marginBottom: SPACING.SIZE_02,
       marginRight: SPACING.SIZE_30,
+      padding: `${SPACING.SIZE_02}px 0`,
     },
     // overrides nav link sizes
     span: [
@@ -235,7 +237,7 @@ const styles: StylesMap = {
       flexDirection: 'column',
       flexGrow: 1,
       justifyContent: 'space-between',
-      marginBottom: SPACING.SIZE_40,
+      margin: `${SPACING.SIZE_30}px 0 ${SPACING.SIZE_40}px`,
       width: '100%',
 
       [MQ.M]: {
@@ -243,7 +245,7 @@ const styles: StylesMap = {
         flexGrow: 0,
         height: 'auto',
         justifyContent: 'space-between',
-        marginBottom: 'unset',
+        margin: 'unset',
         paddingBottom: SPACING.SIZE_80,
         paddingTop: SPACING.SIZE_60,
         svg: {

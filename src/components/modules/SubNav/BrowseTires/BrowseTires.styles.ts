@@ -35,6 +35,11 @@ const styles: StylesMap = {
     display: 'flex',
     marginBottom: SPACING.SIZE_10,
     position: 'relative',
+
+    svg: {
+      color: COLORS.GLOBAL.ORANGE,
+      marginLeft: SPACING.SIZE_05,
+    },
   },
   decoration: {
     [MQ.M]: {
