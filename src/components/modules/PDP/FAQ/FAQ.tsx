@@ -39,7 +39,6 @@ function FAQ({ questions, isCustomerServiceEnabled }: Props) {
               items={questions}
               itemsToShow={ITEMS_TO_SHOW}
               itemsToShowLabel={ui('pdp.faq.showAllLabel')}
-              singleItemExpandable
             />
           </GridItem>
         </>
