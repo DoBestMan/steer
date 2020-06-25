@@ -79,8 +79,8 @@ export function ButtonAndLabelWithKnobs() {
   const theme = select('Theme', [THEME.ORANGE, THEME.DARK], THEME.DARK);
 
   const primaryLabel = text('Primary Label', 'Starting at $79.90');
-  const secondaryLabel = text('Secondary Label', 'Find your size');
-  const primaryButtonLabel = text('Secondary Label', 'Add to cart - $531.84');
+  const secondaryLabel = text('Secondary Label', '38 sizes available');
+  const primaryButtonLabel = text('Primary Button', 'Find your size');
   const logoKey = select('Logo', logoKeys, logoKeys[0]);
   const logo = logos.find((logo) => logo.altText === logoKey);
   const handlePrimaryButtonClick = action('primary-button-click');
