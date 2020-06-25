@@ -23,7 +23,7 @@ const styles: StylesMap = {
           color: COLORS.GLOBAL.WHITE,
         },
       ],
-      alignItems: 'center',
+      alignItems: 'flex-start',
       color: COLORS.DARK.GRAY_40,
       display: 'flex',
       justifyContent: 'space-between',
@@ -35,6 +35,7 @@ const styles: StylesMap = {
     },
   ],
   buttonIcon: {
+    marginTop: SPACING.SIZE_02,
     transition: `transform ${TIME.MS100}ms ${EASING.CIRC_EASE_OUT}`,
 
     svg: {
@@ -49,12 +50,13 @@ const styles: StylesMap = {
   buttonLabel: {
     flexGrow: 1,
     textAlign: 'left',
+    whiteSpace: 'pre-line',
   },
   buttonValue: {
     fontWeight: 'bold',
     marginLeft: SPACING.SIZE_05,
     marginRight: SPACING.SIZE_15,
-    whiteSpace: 'nowrap',
+    whiteSpace: 'pre',
 
     [MQ.M]: {
       marginRight: SPACING.SIZE_25,

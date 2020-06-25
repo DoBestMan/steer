@@ -21,6 +21,12 @@ export const mockListOfItems: Item[] = [
       'For more than 140 years Continental have building tires: small ones, thin ones, big ones, fast ones.',
   },
   {
+    label: 'Max speed',
+    value: 'Front 91H (120mph)\nRear 91H (130mph)',
+    id: '10',
+    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+  },
+  {
     label: 'Is it more silent than Michelin?',
     id: '4',
     content: 'Yes.',
