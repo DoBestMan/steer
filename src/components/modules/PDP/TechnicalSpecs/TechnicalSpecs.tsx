@@ -34,6 +34,7 @@ export interface Size {
   options: SizeOption[];
 }
 interface Props {
+  customerServiceNumber: { display: string; value: string };
   isCustomerServiceEnabled?: boolean;
   sizes: Size[];
   specs: Item[];
@@ -57,7 +58,12 @@ const markdownAllowedTypes: NodeType[] = [
   'link',
 ];
 
-function TechnicalSpecs({ isCustomerServiceEnabled, specs, sizes }: Props) {
+function TechnicalSpecs({
+  customerServiceNumber,
+  isCustomerServiceEnabled,
+  specs,
+  sizes,
+}: Props) {
   const [isTireSizeModalOpen, setIsTireSizeModalOpen] = useState(false);
   const [showFullDescription, setShowFullDescription] = useState(false);
   const { lessThan, greaterThan, is } = useBreakpoints();
@@ -213,6 +219,7 @@ function TechnicalSpecs({ isCustomerServiceEnabled, specs, sizes }: Props) {
         </Tabs>
       </GridItem>
       <AdditionalInfoModal
+        customerServiceNumber={customerServiceNumber}
         isCustomerServiceEnabled={!!isCustomerServiceEnabled}
         isOpen={isTireSizeModalOpen}
         onClose={toggleTireSizeModal}

@@ -14,10 +14,11 @@ import FooterLinkList from './FooterLinkList/FooterLinkList';
 import FooterMailingList from './FooterMailingList/FooterMailingList';
 
 export interface Props {
+  customerServiceNumber: { display: string; value: string };
   isCustomerServiceEnabled?: boolean;
 }
 
-function Footer({ isCustomerServiceEnabled }: Props) {
+function Footer({ customerServiceNumber, isCustomerServiceEnabled }: Props) {
   return (
     <Grid as="footer" css={styles.container}>
       <GridItem
@@ -46,7 +47,10 @@ function Footer({ isCustomerServiceEnabled }: Props) {
           as="li"
           css={styles.supportButton}
         >
-          <PhoneSupport isCustomerServiceEnabled={isCustomerServiceEnabled} />
+          <PhoneSupport
+            customerServiceNumber={customerServiceNumber}
+            isCustomerServiceEnabled={isCustomerServiceEnabled}
+          />
         </GridItem>
         <GridItem
           gridColumnM="4/7"

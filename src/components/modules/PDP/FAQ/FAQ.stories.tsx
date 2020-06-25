@@ -10,6 +10,11 @@ export default {
   title: 'PDP/FAQ',
 };
 
+const customerServiceNumber = {
+  display: '(888) 410 0604',
+  value: '18884100604',
+};
+
 export function FAQWithKnobs() {
   const isCustomerServiceEnabled = boolean('Is Business Hours?', true);
   const hasQuestions = boolean('Show FAQ?', true);
@@ -17,6 +22,7 @@ export function FAQWithKnobs() {
   return (
     <div css={{ backgroundColor: COLORS.GLOBAL.BLACK, minHeight: '100vh' }}>
       <FAQ
+        customerServiceNumber={customerServiceNumber}
         questions={hasQuestions ? mockQuestions : undefined}
         isCustomerServiceEnabled={isCustomerServiceEnabled}
       />

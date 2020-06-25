@@ -46,6 +46,7 @@ const CONSTANTS = {
 
 export interface Props {
   activeInputType: SearchInputEnum;
+  customerServiceNumber: { display: string; value: string };
   focusOnMount?: boolean;
   inputValue?: string;
   isCustomerServiceEnabled: boolean;
@@ -65,6 +66,7 @@ export interface Props {
 
 function SearchAutocomplete({
   activeInputType,
+  customerServiceNumber,
   focusOnMount = false,
   inputValue = CONSTANTS.DEFAULT_VALUE,
   isCustomerServiceEnabled,
@@ -421,6 +423,7 @@ function SearchAutocomplete({
       </div>
       <AdditionalInfoModals
         activeModal={activeModal}
+        customerServiceNumber={customerServiceNumber}
         isCustomerServiceEnabled={isCustomerServiceEnabled}
         onClose={handleSetActiveModal(null)}
       />

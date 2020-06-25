@@ -10,12 +10,18 @@ export default {
   title: 'PDP/Technical Specs',
 };
 
+const customerServiceNumber = {
+  display: '(888) 410 0604',
+  value: '18884100604',
+};
+
 export function TechnicalSpecsWithKnobs() {
   const isCustomerServiceEnabled = boolean('Is Business Hours', true);
 
   return (
     <div css={{ backgroundColor: COLORS.GLOBAL.BLACK }}>
       <TechnicalSpecs
+        customerServiceNumber={customerServiceNumber}
         specs={specList}
         sizes={sizesList}
         isCustomerServiceEnabled={isCustomerServiceEnabled}

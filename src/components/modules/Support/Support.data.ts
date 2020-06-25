@@ -3,7 +3,7 @@ export const data = {
     sales: {
       action: '/',
       icon: 'phone',
-      text: 'Sales (888) 410 0604',
+      text: 'Sales',
     },
     support: {
       action: '/',
@@ -13,7 +13,7 @@ export const data = {
   },
   isNotBusinessHours: {
     sales: {
-      action: '/',
+      action: '/contact',
       icon: 'phone',
       text: 'Sales',
     },

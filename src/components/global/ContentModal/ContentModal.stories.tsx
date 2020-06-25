@@ -27,6 +27,11 @@ const modalLink = {
   },
 };
 
+const customerServiceNumber = {
+  display: '(888) 410 0604',
+  value: '18884100604',
+};
+
 export function ConentModalWithProps() {
   const [isOpen, setIsOpen] = useState(true);
 
@@ -47,6 +52,7 @@ export function ConentModalWithProps() {
           subtitle: 'Tires shipped for free to anywhere in the U.S.',
         })}
         isOpen={isOpen}
+        customerServiceNumber={customerServiceNumber}
         isCustomerServiceEnabled
         showSupportSection={boolean('Show Support Section', true)}
         onClose={toggleModal}

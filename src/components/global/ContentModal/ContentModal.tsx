@@ -28,6 +28,7 @@ export interface ModalContentProps {
 }
 
 export interface Props extends ModalContentProps {
+  customerServiceNumber: { display: string; value: string };
   isCustomerServiceEnabled: boolean;
   isOpen: boolean;
   onClose: () => void;
@@ -36,6 +37,7 @@ export interface Props extends ModalContentProps {
 
 function ContentModal({
   content,
+  customerServiceNumber,
   image,
   isCustomerServiceEnabled,
   isOpen,
@@ -87,6 +89,7 @@ function ContentModal({
             />
             <div css={styles.phoneSupport}>
               <PhoneSupport
+                customerServiceNumber={customerServiceNumber}
                 isCustomerServiceEnabled={isCustomerServiceEnabled}
               />
             </div>

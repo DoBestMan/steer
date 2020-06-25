@@ -9,24 +9,27 @@ import styles, { iconCTA } from './Link.styles';
 
 interface Props extends Pick<AnchorProps, 'theme' | 'href' | 'children'> {
   icon: IconType;
+  useBaseLink?: boolean;
 }
 function IconLink({
+  useBaseLink = true,
   children,
   href,
   icon,
   theme = THEME.DARK,
   ...rest
 }: Props) {
+  const Container = useBaseLink ? BaseLink : 'a';
   return (
     <div css={iconCTA.root}>
-      <BaseLink
+      <Container
         href={href}
         css={[typography.primarySubhead, styles.root, styles[theme]]}
         {...rest}
       >
         <Icon name={icon} css={iconCTA.icon} />
         <span css={styles.link}>{children}</span>
-      </BaseLink>
+      </Container>
     </div>
   );
 }

@@ -23,11 +23,13 @@ export interface AdditionalInfoModalContainerProps {
 }
 
 interface Props extends AdditionalInfoModalContainerProps {
+  customerServiceNumber: { display: string; value: string };
   isCustomerServiceEnabled: boolean;
 }
 
 function AdditionalInfoModal({
   alternateSearch,
+  customerServiceNumber,
   eyebrow,
   imageAlt,
   imageSrc,
@@ -39,6 +41,10 @@ function AdditionalInfoModal({
   title,
 }: Props) {
   const { lessThan } = useBreakpoints();
+
+  const supportHeading = isCustomerServiceEnabled
+    ? ui('support.enabled')
+    : ui('support.disabled');
 
   return (
     <Modal
@@ -66,9 +72,10 @@ function AdditionalInfoModal({
           <p css={styles.alternateSearchCopy}>{alternateSearch.copy}</p>
         </div>
         <div css={styles.supportPrompt}>
-          <h3 css={styles.supportPromptTitle}>{ui('search.support')}</h3>
+          <h3 css={styles.supportPromptTitle}>{supportHeading}</h3>
           <div css={styles.supportPromptButton}>
             <PhoneSupport
+              customerServiceNumber={customerServiceNumber}
               isCustomerServiceEnabled={isCustomerServiceEnabled}
               theme={THEME.DARK}
             />

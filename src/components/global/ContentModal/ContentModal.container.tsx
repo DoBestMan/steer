@@ -1,4 +1,4 @@
-// import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
+import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
 
 import ContentModal, { Props as ContentModalProps } from './ContentModal';
 
@@ -11,14 +11,18 @@ function ContentModalContainer({
   showSupportSection = true,
   subtitle,
   title,
-}: ContentModalProps) {
-  // TODO use customerServiceEnabled from useSiteGlobals when we
-  // integrate this component with the PDP
-  // const { customerServiceEnabled } = useSiteGlobalsContext();
-  const customerServiceEnabled = true;
+}: Omit<
+  ContentModalProps,
+  'isCustomerServiceEnabled' | 'customerServiceNumber'
+>) {
+  const {
+    customerServiceEnabled,
+    customerServiceNumber,
+  } = useSiteGlobalsContext();
 
   return (
     <ContentModal
+      customerServiceNumber={customerServiceNumber}
       content={content}
       image={image}
       isOpen={isOpen}

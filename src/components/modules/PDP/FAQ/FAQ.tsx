@@ -10,13 +10,18 @@ import SupportHeading from '../../Support/SupportHeading';
 import styles from './FAQ.styles';
 
 interface Props {
+  customerServiceNumber: { display: string; value: string };
   isCustomerServiceEnabled?: boolean;
   questions?: Item[];
 }
 
 const ITEMS_TO_SHOW = 4;
 
-function FAQ({ questions, isCustomerServiceEnabled }: Props) {
+function FAQ({
+  customerServiceNumber,
+  questions,
+  isCustomerServiceEnabled,
+}: Props) {
   return (
     <Grid>
       {questions?.length && (
@@ -55,6 +60,7 @@ function FAQ({ questions, isCustomerServiceEnabled }: Props) {
         <div css={styles.supportOptions}>
           <div css={styles.supportItem}>
             <PhoneSupport
+              customerServiceNumber={customerServiceNumber}
               theme={THEME.DARK}
               isCustomerServiceEnabled={isCustomerServiceEnabled}
             />

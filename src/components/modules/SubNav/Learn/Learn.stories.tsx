@@ -10,10 +10,16 @@ export default {
   title: 'Nav/Learn Subnav Section',
 };
 
+const customerServiceNumber = {
+  display: '(888) 410 0604',
+  value: '18884100604',
+};
+
 export function LearnWithCustomerSupport() {
   const { isMobile } = useBreakpoints();
   return (
     <Learn
+      customerServiceNumber={customerServiceNumber}
       isOpen
       isMobile={isMobile}
       isCustomerServiceEnabled
@@ -28,6 +34,7 @@ export function LearnWithoutCustomerSupport() {
   const { isMobile } = useBreakpoints();
   return (
     <Learn
+      customerServiceNumber={customerServiceNumber}
       isOpen
       isMobile={isMobile}
       isCustomerServiceEnabled={false}

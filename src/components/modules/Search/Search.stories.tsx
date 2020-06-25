@@ -53,14 +53,19 @@ const handleCloseSearchClick = action('Close search');
 const handleClearSearchResults = action('Clear search results');
 const handleClearPastSearchesClick = action('Clear past searches');
 const handleSearchQuery = action('Search for query');
+const customerServiceNumber = {
+  display: '(888) 410 0604',
+  value: '18884100604',
+};
 
 export function SearchResultsInitialState() {
   return (
     <Search
       addPastSearch={handleAddPastSearch}
       clearSearchResults={handleClearSearchResults}
-      isCustomerServiceEnabled={boolean('Is Business Hours', true)}
+      customerServiceNumber={customerServiceNumber}
       deletePastSearches={handleClearPastSearchesClick}
+      isCustomerServiceEnabled={boolean('Is Business Hours', true)}
       onCloseSearchClick={handleCloseSearchClick}
       onSearchQuery={handleSearchQuery}
       pastSearches={emptySiteSearchResultGroup}
@@ -80,8 +85,9 @@ export function PastSearchResults() {
     <Search
       addPastSearch={handleAddPastSearch}
       clearSearchResults={handleClearSearchResults}
-      isCustomerServiceEnabled={boolean('Is Business Hours', true)}
+      customerServiceNumber={customerServiceNumber}
       deletePastSearches={clearPastSearches}
+      isCustomerServiceEnabled={boolean('Is Business Hours', true)}
       onCloseSearchClick={handleCloseSearchClick}
       onSearchQuery={handleSearchQuery}
       pastSearches={pastSearches}
@@ -95,8 +101,9 @@ export function SearchResultsRegular() {
     <Search
       addPastSearch={handleAddPastSearch}
       clearSearchResults={handleClearSearchResults}
-      isCustomerServiceEnabled={boolean('Is Business Hours', true)}
+      customerServiceNumber={customerServiceNumber}
       deletePastSearches={handleClearPastSearchesClick}
+      isCustomerServiceEnabled={boolean('Is Business Hours', true)}
       onCloseSearchClick={handleCloseSearchClick}
       onSearchQuery={handleSearchQuery}
       pastSearches={emptySiteSearchResultGroup}
@@ -110,8 +117,9 @@ export function SearchResultsPartNumber() {
     <Search
       addPastSearch={handleAddPastSearch}
       clearSearchResults={handleClearSearchResults}
-      isCustomerServiceEnabled={boolean('Is Business Hours', true)}
+      customerServiceNumber={customerServiceNumber}
       deletePastSearches={handleClearPastSearchesClick}
+      isCustomerServiceEnabled={boolean('Is Business Hours', true)}
       onCloseSearchClick={handleCloseSearchClick}
       onSearchQuery={handleSearchQuery}
       pastSearches={emptySiteSearchResultGroup}
@@ -125,8 +133,9 @@ export function SearchResultsTireSize() {
     <Search
       addPastSearch={handleAddPastSearch}
       clearSearchResults={handleClearSearchResults}
-      isCustomerServiceEnabled={boolean('Is Business Hours', true)}
+      customerServiceNumber={customerServiceNumber}
       deletePastSearches={handleClearPastSearchesClick}
+      isCustomerServiceEnabled={boolean('Is Business Hours', true)}
       onCloseSearchClick={handleCloseSearchClick}
       onSearchQuery={handleSearchQuery}
       pastSearches={emptySiteSearchResultGroup}
@@ -146,8 +155,9 @@ export function SearchBy() {
     <Search
       addPastSearch={handleAddPastSearch}
       clearSearchResults={handleClearSearchResults}
-      isCustomerServiceEnabled={boolean('Is Business Hours', true)}
+      customerServiceNumber={customerServiceNumber}
       deletePastSearches={handleClearPastSearchesClick}
+      isCustomerServiceEnabled={boolean('Is Business Hours', true)}
       onCloseSearchClick={handleCloseSearchClick}
       onSearchQuery={searchQuery}
       pastSearches={emptySiteSearchResultGroup}
@@ -165,6 +175,7 @@ export function TireSizeModal() {
     <>
       <Button onClick={toggleModal}>Open modal</Button>
       <AdditionalInfoModal
+        customerServiceNumber={customerServiceNumber}
         isCustomerServiceEnabled={boolean('Is Business Hours', true)}
         isOpen={isOpen}
         onClose={toggleModal}
@@ -183,6 +194,7 @@ export function VehicleTrimModal() {
     <>
       <Button onClick={toggleModal}>Open modal</Button>
       <AdditionalInfoModal
+        customerServiceNumber={customerServiceNumber}
         isCustomerServiceEnabled={boolean('Is Business Hours', true)}
         isOpen={isOpen}
         onClose={toggleModal}
@@ -197,8 +209,9 @@ export function NoResultsNoSuggestions() {
     <Search
       addPastSearch={handleAddPastSearch}
       clearSearchResults={handleClearSearchResults}
-      isCustomerServiceEnabled={boolean('Is Business Hours', true)}
+      customerServiceNumber={customerServiceNumber}
       deletePastSearches={handleClearPastSearchesClick}
+      isCustomerServiceEnabled={boolean('Is Business Hours', true)}
       onCloseSearchClick={handleCloseSearchClick}
       onSearchQuery={handleSearchQuery}
       pastSearches={emptySiteSearchResultGroup}
@@ -212,8 +225,9 @@ export function NoResultsWithSuggestions() {
     <Search
       addPastSearch={handleAddPastSearch}
       clearSearchResults={handleClearSearchResults}
-      isCustomerServiceEnabled={boolean('Is Business Hours', true)}
+      customerServiceNumber={customerServiceNumber}
       deletePastSearches={handleClearPastSearchesClick}
+      isCustomerServiceEnabled={boolean('Is Business Hours', true)}
       onCloseSearchClick={handleCloseSearchClick}
       onSearchQuery={handleSearchQuery}
       pastSearches={emptySiteSearchResultGroup}

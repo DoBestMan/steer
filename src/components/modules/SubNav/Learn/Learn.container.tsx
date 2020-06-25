@@ -6,10 +6,14 @@ import Learn, { LearnProps } from './Learn';
 type Props = Pick<LearnProps, 'siteMenuLearn' | 'isMobile' | 'isOpen'>;
 
 function LearnContainer({ isMobile, isOpen, siteMenuLearn }: Props) {
-  const { customerServiceEnabled } = useSiteGlobalsContext();
+  const {
+    customerServiceEnabled,
+    customerServiceNumber,
+  } = useSiteGlobalsContext();
   const { handleClearLink, handleCloseSubNav } = useNavContext();
   return (
     <Learn
+      customerServiceNumber={customerServiceNumber}
       isCustomerServiceEnabled={customerServiceEnabled}
       siteMenuLearn={siteMenuLearn}
       isOpen={isOpen}

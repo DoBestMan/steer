@@ -20,7 +20,10 @@ function SearchModal() {
     searchResults,
     toggleIsSearchOpen,
   } = useSearchContext();
-  const { customerServiceEnabled } = useSiteGlobalsContext();
+  const {
+    customerServiceEnabled,
+    customerServiceNumber,
+  } = useSiteGlobalsContext();
 
   useEffect(() => {
     if (isSearchOpen) {
@@ -55,9 +58,10 @@ function SearchModal() {
       <Search
         addPastSearch={addPastSearch}
         clearSearchResults={clearSearchResults}
-        isCustomerServiceEnabled={customerServiceEnabled}
-        forwardedRef={contentRef}
+        customerServiceNumber={customerServiceNumber}
         deletePastSearches={deletePastSearches}
+        forwardedRef={contentRef}
+        isCustomerServiceEnabled={customerServiceEnabled}
         onCloseSearchClick={toggleIsSearchOpen}
         onSearchQuery={searchQuery}
         pastSearches={pastSearches}

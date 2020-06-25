@@ -15,6 +15,7 @@ import { steps } from './Learn.data';
 import styles from './Learn.styles';
 
 export interface LearnProps extends Pick<SiteMenu, 'siteMenuLearn'> {
+  customerServiceNumber: { display: string; value: string };
   handleClearLink: NavContextProps['handleClearLink'];
   handleCloseSubNav: NavContextProps['handleCloseSubNav'];
   isCustomerServiceEnabled: boolean;
@@ -23,6 +24,7 @@ export interface LearnProps extends Pick<SiteMenu, 'siteMenuLearn'> {
 }
 
 function Learn({
+  customerServiceNumber,
   handleClearLink,
   handleCloseSubNav,
   isCustomerServiceEnabled,
@@ -64,7 +66,9 @@ function Learn({
           css={styles.supportTitle}
         />
         <span css={styles.support}>
-          <PhoneSupport {...{ isCustomerServiceEnabled }} />
+          <PhoneSupport
+            {...{ customerServiceNumber, isCustomerServiceEnabled }}
+          />
           <EmailSupport {...{ isCustomerServiceEnabled }} />
         </span>
       </GridItem>

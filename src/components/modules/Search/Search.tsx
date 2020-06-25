@@ -30,6 +30,7 @@ interface Props {
     item: SiteSearchResultTextItem | SiteSearchResultImageItem,
   ) => void;
   clearSearchResults: () => void;
+  customerServiceNumber: { display: string; value: string };
   deletePastSearches: () => void;
   forwardedRef?: RefObject<HTMLDivElement>;
   isCustomerServiceEnabled: boolean;
@@ -42,6 +43,7 @@ interface Props {
 function Search({
   addPastSearch,
   clearSearchResults,
+  customerServiceNumber,
   deletePastSearches,
   forwardedRef,
   isCustomerServiceEnabled,
@@ -256,6 +258,7 @@ function Search({
     <div css={styles.container} ref={forwardedRef}>
       <SearchAutocomplete
         activeInputType={activeInputType}
+        customerServiceNumber={customerServiceNumber}
         focusOnMount
         isCustomerServiceEnabled={isCustomerServiceEnabled}
         noExactMatch={noExactMatch}

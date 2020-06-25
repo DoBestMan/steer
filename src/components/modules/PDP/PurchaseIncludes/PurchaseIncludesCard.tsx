@@ -50,7 +50,6 @@ function PurchaseIncludesCard({
       <ContentModalContainer
         {...modalData}
         isOpen={isOpen}
-        isCustomerServiceEnabled
         onClose={toggleModal}
       />
     </>
