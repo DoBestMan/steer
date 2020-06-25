@@ -53,7 +53,7 @@ function SubNavLinks({
               as="button"
               icon={ICONS.CLOSE}
               theme={THEME.LIGHT}
-              aria-label={ui('nav.close')}
+              aria-label={`${ui('nav.close')} ${activeLink}`}
               onClick={handleCloseSubNav}
               css={styles.closeSubNav}
             />

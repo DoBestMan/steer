@@ -110,6 +110,12 @@ function Autocomplete({
     }
   };
 
+  const blurOnSelection = () => {
+    if (textInput.current) {
+      textInput.current.blur();
+    }
+  };
+
   useEffect(() => {
     if (focusOnMount) {
       setTimeout(() => {
@@ -215,6 +221,7 @@ function Autocomplete({
     }
 
     onValueSelectionSuccess(results[index]);
+    blurOnSelection();
   };
 
   const shouldShowError = isInvalidInput && errorLabel;

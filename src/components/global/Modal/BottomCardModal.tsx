@@ -56,7 +56,7 @@ function BottomCardModal({
           {onBack && (
             <Link
               as="button"
-              aria-label={ui('modal.back')}
+              aria-label={ui('common.modal.back')}
               onClick={onBack}
               icon={ICONS.CHEVRON_LEFT}
               theme={THEME.LIGHT}
@@ -66,7 +66,7 @@ function BottomCardModal({
           <Link
             as="button"
             icon={ICONS.CLOSE}
-            aria-label={ui('modal.close', { contentLabel })}
+            aria-label={ui('common.modal.close', { contentLabel })}
             onClick={onClose}
             theme={THEME.LIGHT}
             // this will allow modal content to start where padding begins rather than pushed down from actions bar

@@ -23,7 +23,7 @@
     },
     "modal": {
       "back": "Return to {{moduleName}}",
-      "close": "Close {{moduleName}}",
+      "close": "Close {{contentLabel}}",
       "open": "open {{moduleName}}"
     },
     "originalPricePrefix": "was ",

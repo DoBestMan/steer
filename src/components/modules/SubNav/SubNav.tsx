@@ -90,23 +90,26 @@ function SubNav({ siteMenuBrowseList, siteMenuLearn }: SiteMenu) {
           gridColumnXL="8/15"
           css={styles.subnav}
         >
-          <button
-            aria-label={ui('nav.close')}
-            css={[styles.action, styles.close]}
-            onClick={handleCloseSubNav}
-          >
-            <Icon name={ICONS.CLOSE} />
-          </button>
-          <div css={styles.borderMobile} />
-          <div
-            css={[
-              styles.smallShow,
-              styles.mobileLinks,
-              isSubNavOpen && styles.mobileLinksOpen,
-            ]}
-          >
-            <SubNavLinks siteMenuBrowseList={siteMenuBrowseList} />
-          </div>
+          {isMobile && (
+            <>
+              <button
+                aria-label={ui('nav.close')}
+                css={[styles.action, styles.close]}
+                onClick={handleCloseSubNav}
+              >
+                <Icon name={ICONS.CLOSE} />
+              </button>
+              <div css={styles.borderMobile} />
+              <div
+                css={[
+                  styles.mobileLinks,
+                  isSubNavOpen && styles.mobileLinksOpen,
+                ]}
+              >
+                <SubNavLinks siteMenuBrowseList={siteMenuBrowseList} />
+              </div>
+            </>
+          )}
           <GridItem
             isGrid
             fullbleedS

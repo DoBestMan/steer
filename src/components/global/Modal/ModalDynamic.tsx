@@ -80,7 +80,7 @@ function Modal({
             <Link
               as="button"
               icon={ICONS.CLOSE}
-              aria-label={ui('modal.close', { contentLabel })}
+              aria-label={ui('common.modal.close', { contentLabel })}
               onClick={onClose}
               theme={linkTheme}
               // this will allow modal content to start where padding begins rather than pushed down from actions bar

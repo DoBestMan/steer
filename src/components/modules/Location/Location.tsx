@@ -5,6 +5,7 @@ import { AutocompleteResult } from '~/components/global/Autocomplete/Autocomplet
 import GridItem from '~/components/global/Grid/GridItem';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Markdown from '~/components/global/Markdown/Markdown';
+import { NAV_TARGETS } from '~/components/modules/Nav/Nav.types';
 import { UserPersonalizationUpdate } from '~/data/models/UserPersonalizationUpdate';
 import { onlyNumbers } from '~/lib/utils/regex';
 import { ui } from '~/lib/utils/ui-dictionary';
@@ -115,6 +116,14 @@ function Location({
 
   const hasResults = results.length > 0;
 
+  const contentLabel = ui('location.contentLabel');
+  const closeButtonModal = document.querySelector(
+    `[aria-label="${ui('common.modal.close', { contentLabel })}"]`,
+  ) as HTMLElement;
+  const closeButtonSubNav = document.querySelector(
+    `[aria-label="${ui('nav.close')} ${NAV_TARGETS.LOCATION}"`,
+  ) as HTMLElement;
+
   async function onValueSelectionSuccess(result: AutocompleteResult) {
     try {
       await onLocationChangeSuccess({
@@ -124,6 +133,12 @@ function Location({
       setToastMessage(TOAST_TYPE.SUCCESS);
     } catch (error) {
       handleCurrentLocationError(error.code);
+    }
+
+    if (closeButtonModal) {
+      closeButtonModal.focus();
+    } else if (closeButtonSubNav) {
+      closeButtonSubNav.focus();
     }
   }
 

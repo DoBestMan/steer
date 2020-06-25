@@ -100,7 +100,7 @@ function SubNavModal({
                       <Icon name={ICONS.CHEVRON_LEFT} />
                     </button>
                     <button
-                      aria-label={ui('modal.close', { contentLabel })}
+                      aria-label={ui('common.modal.close', { contentLabel })}
                       onClick={onClose}
                       css={styles.action}
                     >
