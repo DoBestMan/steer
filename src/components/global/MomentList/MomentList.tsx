@@ -1,4 +1,4 @@
-import { RATINGS_DISPLAY, RATINGS_THEME } from '~/lib/constants';
+import { RATINGS_DISPLAY, THEME } from '~/lib/constants';
 
 import styles, { dStyles, tStyles } from './MomentList.styles';
 
@@ -11,12 +11,12 @@ export interface MomentListItem {
 interface Props {
   data: Array<MomentListItem>;
   display?: RATINGS_DISPLAY;
-  theme?: RATINGS_THEME;
+  theme?: THEME.DARK | THEME.LIGHT;
 }
 
 export function MomentList({
   data,
-  theme = RATINGS_THEME.DARK,
+  theme = THEME.DARK,
   display = RATINGS_DISPLAY.DEFAULT,
 }: Props) {
   return (

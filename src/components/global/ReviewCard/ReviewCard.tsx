@@ -10,11 +10,12 @@ import MomentList, {
 import { Props as RatingsListItem } from '~/components/global/RatingsList/RatingsBar/RatingsBar';
 import RatingsList from '~/components/global/RatingsList/RatingsList';
 import Stars from '~/components/global/Stars/Stars';
+import { THEME } from '~/lib/constants';
 import { truncateText } from '~/lib/utils/string';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { layout } from '~/styles/layout.styles';
 
-import styles from './ReviewCard.styles';
+import styles, { themeStyles } from './ReviewCard.styles';
 
 export interface ReviewCardProps {
   body: string;
@@ -26,6 +27,7 @@ export interface ReviewCardProps {
   momentList?: Array<MomentListItem>;
   ratingStars: number;
   ratings?: Array<RatingsListItem>;
+  theme?: THEME.DARK | THEME.LIGHT;
   title: string;
 }
 
@@ -38,6 +40,7 @@ function ReviewCard({
   momentList,
   ratings,
   ratingStars,
+  theme = THEME.DARK,
   title,
 }: ReviewCardProps) {
   const [isCollapsed, setIsCollapsed] = useState(true);
@@ -51,11 +54,12 @@ function ReviewCard({
   }
 
   return (
-    <article css={styles.container}>
+    <article css={[styles.container, themeStyles[theme].container]}>
       <div css={styles.ratingTopContainer}>
-        <span css={styles.title}>{title}</span>
+        <span css={[styles.title, themeStyles[theme].title]}>{title}</span>
         <Stars number={ratingStars} isSmall />
       </div>
+
       <div css={[layout.container, layout.centeredHorizontal]}>
         <div css={styles.customerInfo}>
           {!!car && <span>{car}</span>}
@@ -73,25 +77,33 @@ function ReviewCard({
         <span css={styles.date}>{date}</span>
       </div>
 
-      <div css={styles.body}>
-        <Markdown>{formattedBody}</Markdown>
-      </div>
-
-      {isCollapsed ? (
-        <Link
-          as="button"
-          icon={ICONS.CHEVRON_DOWN}
-          css={styles.readMore}
-          onClick={toggleCollapsed}
-        >
-          {ui('pdp.reviews.readMore')}
-        </Link>
-      ) : (
-        <div css={styles.additionalContentContainer}>
-          {!!momentList && <MomentList data={momentList} />}
-          {!!ratings && <RatingsList ratings={ratings} />}
+      <div css={styles.content}>
+        <div css={styles.body}>
+          <Markdown>{formattedBody}</Markdown>
         </div>
-      )}
+
+        {isCollapsed ? (
+          <Link
+            as="button"
+            icon={ICONS.CHEVRON_DOWN}
+            css={[styles.readMore, themeStyles[theme].readMore]}
+            onClick={toggleCollapsed}
+            theme={theme}
+          >
+            {ui('pdp.reviews.readMore')}
+          </Link>
+        ) : (
+          <div css={styles.additionalContentContainer}>
+            {!!momentList && <MomentList data={momentList} theme={theme} />}
+            {!!ratings && (
+              <RatingsList
+                ratings={ratings}
+                theme={theme === THEME.LIGHT ? THEME.ORANGE : THEME.DARK}
+              />
+            )}
+          </div>
+        )}
+      </div>
     </article>
   );
 }

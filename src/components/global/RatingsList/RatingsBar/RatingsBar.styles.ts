@@ -2,9 +2,9 @@ import {
   COLORS,
   RADIUS,
   RATINGS_DISPLAY,
-  RATINGS_THEME,
   SPACING,
   StylesMap,
+  THEME,
 } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
@@ -51,7 +51,7 @@ const styles: StylesMap = {
 
 // Theme styles
 export const tStyles = {
-  [RATINGS_THEME.DARK]: {
+  [THEME.DARK]: {
     barFull: {
       backgroundColor: COLORS.DARK.GRAY_80,
     },
@@ -65,12 +65,26 @@ export const tStyles = {
       color: COLORS.GLOBAL.WHITE,
     },
   },
-  [RATINGS_THEME.LIGHT]: {
+  [THEME.LIGHT]: {
     barFull: {
       backgroundColor: COLORS.LIGHT.OFF_WHITE,
     },
     barProgress: {
       backgroundColor: COLORS.LIGHT.GRAY_70,
+    },
+    container: {
+      color: COLORS.LIGHT.GRAY_70,
+    },
+    emphasized: {
+      color: COLORS.LIGHT.GRAY_70,
+    },
+  },
+  [THEME.ORANGE]: {
+    barFull: {
+      backgroundColor: COLORS.LIGHT.GRAY_20,
+    },
+    barProgress: {
+      backgroundColor: COLORS.GLOBAL.ORANGE,
     },
     container: {
       color: COLORS.LIGHT.GRAY_70,

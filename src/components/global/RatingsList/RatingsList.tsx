@@ -1,18 +1,18 @@
 import RatingsBar, {
   Props as RatingsListItem,
 } from '~/components/global/RatingsList/RatingsBar/RatingsBar';
-import { RATINGS_DISPLAY, RATINGS_THEME } from '~/lib/constants';
+import { RATINGS_DISPLAY, THEME } from '~/lib/constants';
 
 interface Props {
   display?: RATINGS_DISPLAY;
   ratings: Array<RatingsListItem>;
-  theme?: RATINGS_THEME;
+  theme?: THEME;
 }
 
 export function RatingsList({
   display = RATINGS_DISPLAY.DEFAULT,
   ratings,
-  theme = RATINGS_THEME.DARK,
+  theme = THEME.DARK,
 }: Props) {
   return (
     <ul>

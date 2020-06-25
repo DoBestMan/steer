@@ -2,9 +2,9 @@ import {
   COLORS,
   MQ,
   RATINGS_DISPLAY,
-  RATINGS_THEME,
   SPACING,
   StylesMap,
+  THEME,
 } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
@@ -18,7 +18,7 @@ const styles: StylesMap = {
 
 // Theme styles
 export const tStyles = {
-  [RATINGS_THEME.DARK]: {
+  [THEME.DARK]: {
     value: {
       color: COLORS.GLOBAL.WHITE,
     },
@@ -26,7 +26,7 @@ export const tStyles = {
       color: COLORS.DARK.GRAY_40,
     },
   },
-  [RATINGS_THEME.LIGHT]: {
+  [THEME.LIGHT]: {
     value: {
       color: COLORS.LIGHT.GRAY_70,
     },

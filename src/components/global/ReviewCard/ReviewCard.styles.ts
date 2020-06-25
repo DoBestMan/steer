@@ -1,7 +1,9 @@
-import { COLORS, MQ, RADIUS, SPACING, StylesMap } from '~/lib/constants';
+import { COLORS, MQ, RADIUS, SPACING, StylesMap, THEME } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const CONSTANTS = {
+  CONTENT_MAX_WIDTH_M: 480,
+  CONTENT_MAX_WIDTH_XL: 605,
   DATE_MIN_WIDTH: 80,
   SEPARATOR: '"•"',
   SEPARATOR_EMPTY: '""',
@@ -25,9 +27,7 @@ const styles: StylesMap = {
     ':not(:last-of-type)': {
       marginBottom: SPACING.SIZE_20,
     },
-    backgroundColor: COLORS.DARK.GRAY_90,
     borderRadius: RADIUS.RADIUS_15,
-    color: COLORS.DARK.GRAY_40,
     padding: `${SPACING.SIZE_30}px ${SPACING.SIZE_25}px`,
     [MQ.M]: {
       padding: SPACING.SIZE_30,
@@ -37,6 +37,14 @@ const styles: StylesMap = {
     },
     [MQ.XL]: {
       padding: `${SPACING.SIZE_30}px ${SPACING.SIZE_40}px`,
+    },
+  },
+  content: {
+    [MQ.M]: {
+      maxWidth: CONSTANTS.CONTENT_MAX_WIDTH_M,
+    },
+    [MQ.L]: {
+      maxWidth: CONSTANTS.CONTENT_MAX_WIDTH_XL,
     },
   },
   customerInfo: [
@@ -85,7 +93,6 @@ const styles: StylesMap = {
   title: [
     typography.primarySubhead,
     {
-      color: COLORS.GLOBAL.WHITE,
       marginBottom: SPACING.SIZE_02,
     },
   ],
@@ -98,4 +105,33 @@ const styles: StylesMap = {
     marginLeft: SPACING.SIZE_05,
   },
 };
+
+export const themeStyles = {
+  [THEME.LIGHT]: {
+    container: {
+      backgroundColor: COLORS.LIGHT.GRAY_10,
+      color: COLORS.LIGHT.GRAY_70,
+    },
+    readMore: {
+      color: COLORS.LIGHT.GRAY_70,
+    },
+    title: {
+      color: COLORS.GLOBAL.BLACK,
+    },
+  },
+
+  [THEME.DARK]: {
+    container: {
+      backgroundColor: COLORS.DARK.GRAY_90,
+      color: COLORS.DARK.GRAY_40,
+    },
+    readMore: {
+      color: 'inherit',
+    },
+    title: {
+      color: COLORS.GLOBAL.WHITE,
+    },
+  },
+};
+
 export default styles;

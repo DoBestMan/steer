@@ -1,9 +1,9 @@
-import { boolean } from '@storybook/addon-knobs';
+import { boolean, select } from '@storybook/addon-knobs';
 import { ReactNode } from 'react';
 
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
-import { COLORS } from '~/lib/constants';
+import { COLORS, THEME } from '~/lib/constants';
 
 import ReviewCard from './ReviewCard';
 import { mockReviews } from './ReviewCard.mocks';
@@ -13,12 +13,20 @@ export default {
   title: 'global/ReviewCard',
 };
 
-function Container({ children }: { children: ReactNode }) {
-  return (
-    <Grid css={{ backgroundColor: COLORS.GLOBAL.BLACK }}>
-      <GridItem gridColumnL="2/7">{children}</GridItem>
-    </Grid>
-  );
+function Container({
+  children,
+  theme = THEME.DARK,
+}: {
+  children: ReactNode;
+  theme: THEME.DARK | THEME.LIGHT;
+}) {
+  const themeMap = {
+    [THEME.LIGHT]: COLORS.GLOBAL.WHITE,
+    [THEME.DARK]: COLORS.GLOBAL.BLACK,
+  };
+  const backgroundColor = themeMap[theme];
+
+  return <Grid css={{ backgroundColor }}>{children}</Grid>;
 }
 
 export function ReviewWithKnobs() {
@@ -30,6 +38,7 @@ export function ReviewWithKnobs() {
     ratings,
     ...rest
   } = mockReviews[0];
+  const theme = select('Theme', [THEME.LIGHT, THEME.DARK], THEME.DARK);
   const hasCar = boolean('Has car', true);
   const hasLocation = boolean('Has location', true);
   const hasVerification = boolean('Is verified', true);
@@ -37,25 +46,46 @@ export function ReviewWithKnobs() {
   const hasRatingsList = boolean('Has ratings list', true);
 
   return (
-    <Container>
-      <ReviewCard
-        car={(hasCar && car) || undefined}
-        location={(hasLocation && location) || undefined}
-        isVerified={(hasVerification && isVerified) || false}
-        momentList={(hasMomentList && momentList) || []}
-        ratings={(hasRatingsList && ratings) || []}
-        {...rest}
-      />
+    <Container theme={theme}>
+      <GridItem gridColumnL="2/7">
+        <ReviewCard
+          car={(hasCar && car) || undefined}
+          location={(hasLocation && location) || undefined}
+          isVerified={(hasVerification && isVerified) || false}
+          momentList={(hasMomentList && momentList) || []}
+          ratings={(hasRatingsList && ratings) || []}
+          theme={theme}
+          {...rest}
+        />
+      </GridItem>
     </Container>
   );
 }
 
 export function MultipleReviews() {
+  const theme = select('Theme', [THEME.LIGHT, THEME.DARK], THEME.DARK);
+
   return (
-    <Container>
-      {mockReviews.map((review) => {
-        return <ReviewCard key={review.id} {...review} />;
-      })}
+    <Container theme={theme}>
+      <GridItem gridColumnL="2/7">
+        {mockReviews.map((review) => {
+          return <ReviewCard key={review.id} theme={theme} {...review} />;
+        })}
+      </GridItem>
+    </Container>
+  );
+}
+
+export function MultipleReviewsWide() {
+  const theme = select('Theme', [THEME.LIGHT, THEME.DARK], THEME.LIGHT);
+
+  return (
+    <Container theme={theme}>
+      <GridItem gridColumnL="3/13" gridColumnXL="4/12">
+        {mockReviews.map((review) => {
+          return <ReviewCard key={review.id} {...review} theme={theme} />;
+        })}
+      </GridItem>
     </Container>
   );
 }

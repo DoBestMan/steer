@@ -1,4 +1,4 @@
-import { RATINGS, RATINGS_DISPLAY, RATINGS_THEME } from '~/lib/constants';
+import { RATINGS, RATINGS_DISPLAY, THEME } from '~/lib/constants';
 import { numberWithDecimal, percentageFromNumber } from '~/lib/utils/number';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { screenReaderText } from '~/styles/document/accessibility.styles';
@@ -8,7 +8,7 @@ import styles, { dStyles, tStyles } from './RatingsBar.styles';
 export interface Props {
   display?: RATINGS_DISPLAY;
   label: string;
-  theme?: RATINGS_THEME;
+  theme?: THEME;
   value: number;
 }
 
@@ -20,7 +20,7 @@ function RatingsBar({
   display = RATINGS_DISPLAY.DEFAULT,
   label,
   value,
-  theme = RATINGS_THEME.DARK,
+  theme = THEME.DARK,
 }: Props) {
   const isRatingHighlighted = value >= CONSTANTS.RATING_HIGHLIGHT_THRESHOLD;
   const formattedRating = numberWithDecimal(value);

@@ -11,8 +11,12 @@ import RatingsList from '~/components/global/RatingsList/RatingsList';
 import Stars from '~/components/global/Stars/Stars';
 import Sticker from '~/components/global/Sticker/Sticker';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
-import { BREAKPOINT_SIZES, COLORS } from '~/lib/constants';
-import { RATINGS_DISPLAY, RATINGS_THEME } from '~/lib/constants/ratings.types';
+import {
+  BREAKPOINT_SIZES,
+  COLORS,
+  RATINGS_DISPLAY,
+  THEME,
+} from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
 
@@ -147,7 +151,7 @@ function AdvancedListing({
             <div css={styles.specList}>
               <MomentList
                 data={specList}
-                theme={RATINGS_THEME.LIGHT}
+                theme={THEME.LIGHT}
                 display={RATINGS_DISPLAY.COMPACT}
               />
             </div>
@@ -157,7 +161,7 @@ function AdvancedListing({
               <RatingsList
                 ratings={performanceRatingList}
                 display={RATINGS_DISPLAY.COMPACT}
-                theme={RATINGS_THEME.LIGHT}
+                theme={THEME.LIGHT}
               />
             </div>
           </div>
