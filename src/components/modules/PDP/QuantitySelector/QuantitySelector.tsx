@@ -50,7 +50,6 @@ function QuantitySelector({
   return (
     <BottomCardModal
       contentLabel={ui('pdp.quantitySelector.modalLabel')}
-      customContentStyles={modalContainerStyles.content}
       isOpen={isOpen}
       onClose={onClose}
     >

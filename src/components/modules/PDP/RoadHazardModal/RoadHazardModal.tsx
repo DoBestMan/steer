@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import Button from '~/components/global/Button/Button';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Link from '~/components/global/Link/Link';
@@ -64,13 +66,21 @@ function RoadHazardModal({
     onConfirm();
   }
 
+  useEffect(() => {
+    if (
+      !shouldDisplayOptions &&
+      document.activeElement instanceof HTMLElement
+    ) {
+      document.activeElement.blur();
+    }
+  }, [shouldDisplayOptions]);
+
   return (
     <BottomCardModal
       contentLabel="Road Hazard"
       isOpen={isOpen}
       onClose={onClose}
       onBack={onBack}
-      customContentStyles={modalContainerStyles.content}
     >
       <div css={modalContainerStyles.container}>
         <PDPModalHeader
@@ -125,7 +135,7 @@ function RoadHazardModal({
               }}
               theme={THEME.LIGHT}
             >
-              {ui('pdp.quantitySelector.confirmButtonLabel')}
+              {ui('pdp.roadHazard.continueButtonLabel')}
             </Button>
           ) : (
             <>
@@ -136,7 +146,7 @@ function RoadHazardModal({
                 }}
                 theme={THEME.LIGHT}
               >
-                Keep Coverage
+                {ui('pdp.roadHazard.keepCoverageButtonLabel')}
               </Button>
               <Button
                 css={styles.button}
@@ -146,7 +156,7 @@ function RoadHazardModal({
                 style={BUTTON_STYLE.OUTLINED}
                 theme={THEME.LIGHT}
               >
-                No Thanks
+                {ui('pdp.roadHazard.noThanksButtonLabel')}
               </Button>
             </>
           )}

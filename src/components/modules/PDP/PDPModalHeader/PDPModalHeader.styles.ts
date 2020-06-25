@@ -33,6 +33,10 @@ const styles: CSSObject = {
           display: 'none',
         },
       },
+
+      span: {
+        display: 'block',
+      },
     },
   ],
   title: [

@@ -79,9 +79,6 @@ export const modalContainerStyles: StylesMap = {
       paddingTop: SPACING.SIZE_60,
     },
   },
-  content: {
-    height: '100%',
-  },
   ctaGroup: {
     display: 'flex',
     flexDirection: 'row-reverse',
