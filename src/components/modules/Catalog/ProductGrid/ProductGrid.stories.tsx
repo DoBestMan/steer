@@ -1,22 +1,14 @@
-import { boolean, text } from '@storybook/addon-knobs';
-
 import { SiteCatalogProductItem } from '~/data/models/SiteCatalogProductItem';
 import { SiteImage } from '~/data/models/SiteImage';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 import { PRODUCT_IMAGE_TYPES } from '~/lib/constants/productImage.types';
 
-import ProductGroupList from './ProductGroupList';
+import ProductGrid from './ProductGrid';
 
 export default {
-  component: ProductGroupList,
-  title: 'Catalog/Grid/Product Group List',
+  component: ProductGrid,
+  title: 'Catalog/Grid/Product Grid',
 };
-
-const mockLogo = {
-  altText: '45x45 image',
-  src: 'https://via.placeholder.com/45x45',
-  type: ICON_IMAGE_TYPE.IMAGE,
-} as SiteImage;
 
 const mockProduct = {
   activeFilterValueList: null,
@@ -65,21 +57,6 @@ const mockProduct = {
   topPicksAttribute: null,
 } as SiteCatalogProductItem;
 
-export function ProductGroupListWithKnobs() {
-  const isLinked = boolean('Is linked', false);
-  const hasIcon = boolean('Has icon', false);
-
-  return (
-    <ProductGroupList
-      name={text('Title', 'Most popular in Brooklyn')}
-      icon={hasIcon ? mockLogo : null}
-      description={text(
-        'Description',
-        'Top choices from Civic drivers near you.',
-      )}
-      productList={Array(10).fill(mockProduct)}
-      siteQueryParams={isLinked ? { group: 'curatedGroup1' } : null}
-      id="curatedGroup1"
-    />
-  );
+export function ProductGridWithKnobs() {
+  return <ProductGrid productList={Array(35).fill(mockProduct)} />;
 }

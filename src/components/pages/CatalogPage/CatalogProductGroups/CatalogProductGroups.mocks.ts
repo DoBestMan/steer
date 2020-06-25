@@ -53,7 +53,7 @@ const specList = [
 
 const siteCatalogPromotionInfo = [
   {
-    style: PROMO_STYLES.DEFAULT,
+    style: PROMO_STYLES.WHITE_PILL,
     label: 'Spring Sale',
     icon: { svgId: ICONS.TAG, type: ICON_IMAGE_TYPE.ICON } as SiteIcon,
   },
@@ -131,18 +131,7 @@ const product: SiteCatalogProductItem = {
   topPicksAttribute: null,
 };
 
-export const products: SiteCatalogProductItem[] = [
-  product,
-  product,
-  product,
-  product,
-  product,
-  product,
-  product,
-  product,
-  product,
-  product,
-];
+export const products: SiteCatalogProductItem[] = Array(35).fill(product);
 
 export const productGroupList: SiteCatalogProductGroupList = [
   {

@@ -1,4 +1,5 @@
 import AdvancedListing from '~/components/modules/Catalog/AdvancedListing/AdvancedListing';
+import ProductGrid from '~/components/modules/Catalog/ProductGrid/ProductGrid';
 import { SiteCatalogProductItem } from '~/data/models/SiteCatalogProductItem';
 
 import styles from './CatalogProductGrid.styles';
@@ -18,7 +19,7 @@ function CatalogProductGrid({ productList, isAdvancedView }: Props) {
           </div>
         ))
       ) : (
-        <div>Grid view to go here</div>
+        <ProductGrid productList={productList} />
       )}
     </div>
   );

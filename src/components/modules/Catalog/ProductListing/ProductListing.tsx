@@ -25,6 +25,7 @@ function ProductListing({
   loadSpeedRating,
   name,
   rating,
+  ...props
 }: ProductListingProps) {
   const displayedImage =
     imageList.find((image) => image.productImageType === defaultImage) ||
@@ -36,7 +37,10 @@ function ProductListing({
       : MAX_PROMOS;
 
   return (
-    <div css={[styles.root, isHighlighted && styles.rootHighlighted]}>
+    <div
+      {...props}
+      css={[styles.root, isHighlighted && styles.rootHighlighted]}
+    >
       <div css={styles.imageWrapper}>
         {highlight && <div css={styles.promoDisc}>{highlight}</div>}
         <Image
