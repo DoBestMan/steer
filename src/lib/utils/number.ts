@@ -14,3 +14,13 @@ export function ratioToPercentage(ratio: string) {
 
   return aspectRatioAsPercentage;
 }
+
+export function getWidthFromMaxHeight(
+  width: number,
+  height: number,
+  maxHeight: number,
+) {
+  const ratio = width / height;
+
+  return maxHeight * ratio;
+}

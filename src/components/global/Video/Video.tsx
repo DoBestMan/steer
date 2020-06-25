@@ -12,14 +12,21 @@ import { ui } from '~/lib/utils/ui-dictionary';
 import { useYoutubeApi } from './Video.hooks';
 import styles, { activeVideoStyles } from './Video.styles';
 
-interface Props {
+export interface Props {
   aspectRatio?: string;
+  customStyles?: CSSStyles;
   posterFrame: string;
   sizes: number[];
   youtubeId: string;
 }
 
-function Video({ aspectRatio = '16/9', posterFrame, sizes, youtubeId }: Props) {
+function Video({
+  customStyles,
+  aspectRatio = '16/9',
+  posterFrame,
+  sizes,
+  youtubeId,
+}: Props) {
   const [videoId] = useState(`${randomString(10)}-video`);
 
   const { hasPlayedVideo, isLoading, setIsLoading } = useYoutubeApi({
@@ -34,7 +41,7 @@ function Video({ aspectRatio = '16/9', posterFrame, sizes, youtubeId }: Props) {
   const containerBottomPadding = `${ratioToPercentage(aspectRatio)}%`;
 
   return (
-    <div>
+    <div css={customStyles}>
       <div css={[styles.container, { paddingBottom: containerBottomPadding }]}>
         <button
           aria-label={ui('common.video.play')}
