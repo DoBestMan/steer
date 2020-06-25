@@ -17,7 +17,10 @@ interface Props {
   isTextArea?: boolean;
   label: string;
   onChange: (value: string) => void;
+  onKeyDown?: (event: React.KeyboardEvent) => void;
   required?: boolean;
+  type?: string;
+  validationFn?: (value: string) => void;
   value?: string;
 }
 
@@ -29,7 +32,10 @@ function Input({
   isTextArea,
   label,
   onChange,
+  onKeyDown,
   required,
+  type,
+  validationFn,
   value,
   ...rest
 }: Props) {
@@ -37,6 +43,7 @@ function Input({
 
   const [inputId, setInputId] = useState(id);
   const [isFocused, setIsFocused] = useState(false);
+  const [isTouched, setIsTouched] = useState(false);
 
   useEffect(() => {
     if (!id) {
@@ -50,6 +57,16 @@ function Input({
 
   function handleOnBlur() {
     setIsFocused(false);
+
+    if (value) {
+      setIsTouched(true);
+
+      if (validationFn) {
+        validationFn(value);
+      }
+    } else {
+      setIsTouched(false);
+    }
   }
 
   function handleOnChange(
@@ -57,9 +74,16 @@ function Input({
   ) {
     const { value } = event.target;
     onChange(value);
+
+    if (validationFn && isTouched && value.length > 0) {
+      validationFn(value);
+    }
   }
 
   const InputEl = isTextArea ? 'textarea' : 'input';
+
+  // We should only show the validation error when the input has been touched
+  const showErrorState = hasError && isTouched;
 
   return (
     <span
@@ -68,7 +92,7 @@ function Input({
         isFocused && focusStyles.container,
         disabled && styles.disabled,
         isTextArea && textAreaStyles.container,
-        hasError && !disabled && errorStyles.container,
+        showErrorState && !disabled && errorStyles.container,
       ]}
     >
       <label
@@ -93,12 +117,14 @@ function Input({
         placeholder={contextualLabel}
         value={value}
         onBlur={handleOnBlur}
-        onFocus={handleOnFocus}
         onChange={handleOnChange}
+        onFocus={handleOnFocus}
+        onKeyDown={onKeyDown}
         required={required}
+        type={type}
         {...rest}
       />
-      {hasError && errorMessage && (
+      {showErrorState && errorMessage && (
         <span role="alert" css={errorStyles.errorMessage}>
           {errorMessage}
         </span>

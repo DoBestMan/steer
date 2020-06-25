@@ -68,11 +68,9 @@ const styles: StylesMap = {
   label: [
     typography.bodyCopy,
     {
-      '-webkit-box-orient': 'vertical',
-      '-webkit-line-clamp': '2',
-      display: '-webkit-box',
       left: SPACING.SIZE_20,
       marginRight: SPACING.SIZE_20,
+      maxWidth: `calc(100% - (${SPACING.SIZE_20}px + ${SPACING.SIZE_20}px))`,
       overflow: 'hidden',
       position: 'absolute',
       textOverflow: 'ellipsis',
@@ -80,8 +78,10 @@ const styles: StylesMap = {
       transform: 'translateY(-50%)',
       transformOrigin: 0,
       transition: `color ${TIME.MS100}ms ease, transform ${TIME.MS100}ms ease`,
+      whiteSpace: 'nowrap',
       [MQ.M]: {
         left: SPACING.SIZE_30,
+        maxWidth: `calc(100% - (${SPACING.SIZE_30}px + ${SPACING.SIZE_20}px))`,
       },
     },
   ],

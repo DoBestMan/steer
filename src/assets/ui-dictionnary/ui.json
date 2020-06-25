@@ -10,6 +10,14 @@
       "contact": "Contact us",
       "giveFeedback": "Give feedback"
     },
+    "error": {
+      "email": "Please enter a valid email"
+    },
+    "form": {
+      "email": "Email",
+      "emailError": "Please enter a valid email",
+      "yourEmail": "Your email address"
+    },
     "loading": {
       "label": "Loading"
     },

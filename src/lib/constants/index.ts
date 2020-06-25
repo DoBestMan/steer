@@ -9,6 +9,7 @@ export * from './easing';
 export * from './grid';
 export * from './image.types';
 export * from './image';
+export * from './input.types';
 export * from './keycodes';
 export * from './links.types';
 export * from './links';
