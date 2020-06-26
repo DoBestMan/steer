@@ -7,6 +7,7 @@ import {
   NAV_TARGETS,
 } from '~/components/modules/Nav/Nav.types';
 import { createContext } from '~/lib/utils/context';
+import { ui } from '~/lib/utils/ui-dictionary';
 
 import {
   UserPersonalizationProps,
@@ -31,7 +32,15 @@ export interface NavContextProps {
 
 const NavContext = createContext<NavContextProps>();
 
-export const dealsLink = { href: '/', isExternal: false, text: 'Deals' };
+export const dealsLink = {
+  href: '/',
+  isExternal: false,
+  text: ui('nav.links.deals'),
+};
+export const accountLinks = [
+  { href: '/', isExternal: true, text: ui('nav.links.account') },
+  { href: '/', isExternal: true, text: ui('nav.links.trackOrder') },
+];
 
 function buildLinks({
   locationString,
@@ -40,28 +49,27 @@ function buildLinks({
 }) {
   return {
     links: [
-      { target: NAV_TARGETS.BROWSE_TIRES, text: 'Browse tires' },
+      { target: NAV_TARGETS.BROWSE_TIRES, text: ui('nav.links.browseTires') },
       dealsLink,
-      { target: NAV_TARGETS.LEARN, text: 'Learn' },
+      { target: NAV_TARGETS.LEARN, text: ui('nav.links.learn') },
       {
         icon: ICONS.LOCATION,
-        label: 'Select location',
+        label: ui('nav.links.location'),
         target: NAV_TARGETS.LOCATION,
         text: locationString,
       },
       {
         icon: ICONS.ACCOUNT,
-        label: 'Account',
+        label: ui('nav.links.account'),
         target: NAV_TARGETS.ACCOUNT,
       },
     ],
     linksMobile: [
-      { target: NAV_TARGETS.LEARN, text: 'Learn' },
-      { href: '/', isExternal: true, text: 'Account' },
-      { href: '/', isExternal: true, text: 'Track your order' },
+      { target: NAV_TARGETS.LEARN, text: ui('nav.links.learn') },
+      ...accountLinks,
       {
         icon: ICONS.LOCATION,
-        label: 'Select location',
+        label: ui('nav.links.location'),
         target: NAV_TARGETS.LOCATION,
         text: locationString,
       },

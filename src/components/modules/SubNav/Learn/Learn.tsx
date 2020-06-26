@@ -8,6 +8,7 @@ import SupportHeading from '~/components/modules/Support/SupportHeading';
 import { NavContextProps } from '~/context/Nav.context';
 import { SiteMenu } from '~/data/models/SiteMenu';
 import { THEME } from '~/lib/constants';
+import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
 
 import SubNavContentWrapper from '../SubNavContentWrapper';
@@ -38,7 +39,7 @@ function Learn({
       onBack={handleClearLink}
       onClose={handleCloseSubNav}
       isOpen={isOpen}
-      contentLabel="Learn more"
+      contentLabel={ui('nav.learn.contentLabel')}
     >
       <GridItem css={styles.root}>
         <Icon css={styles.icon} name={ICONS.SMILEY} />

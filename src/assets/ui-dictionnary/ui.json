@@ -154,9 +154,10 @@
       "title": "Replacing tires in 5 steps."
     },
     "links": {
+      "account": "Account",
       "browseTires": "Browse tires",
+      "deals": "Deals",
       "learn": "Learn",
-      "findShop": "Find a Shop",
       "location": "Select location",
       "trackOrder": "Track your order"
     },

@@ -35,9 +35,17 @@ const styles: StylesMap = {
     display: 'flex',
     marginBottom: SPACING.SIZE_10,
     position: 'relative',
+  },
+  dealsLink: {
+    '&:hover:not(:active)': {
+      color: COLORS.ORANGE.SHADE_15_SOLID,
 
+      span: {
+        borderColor: 'transparent',
+      },
+    },
+    color: COLORS.GLOBAL.ORANGE,
     svg: {
-      color: COLORS.GLOBAL.ORANGE,
       marginLeft: SPACING.SIZE_05,
     },
   },

@@ -14,6 +14,7 @@ import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { Animation } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
+import Account from './Account/Account';
 import LearnContainer from './Learn/Learn.container';
 import styles, { fade, SUBNAV_TIME_FADE_OPEN } from './SubNav.styles';
 import SubNavLinks from './SubNavLinks';
@@ -147,6 +148,7 @@ function SubNav({ siteMenuBrowseList, siteMenuLearn }: SiteMenu) {
               siteMenuLearn={siteMenuLearn}
             />
             <LocationContainer isMobile={isMobile} />
+            <Account isOpen={activeLink === NAV_TARGETS.ACCOUNT} />
           </GridItem>
         </GridItem>
       </Grid>

@@ -4,7 +4,6 @@ import Link from '~/components/global/Link/Link';
 import { dealsLink, useNavContext } from '~/context/Nav.context';
 import { SiteMenu } from '~/data/models/SiteMenu';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
-import { THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import styles from './BrowseTires.styles';
@@ -43,11 +42,10 @@ function TireCategoryLinks({
       {isMobile && (
         <span css={styles.container}>
           <Link
-            css={styles.label}
+            css={[styles.label, styles.dealsLink]}
             icon={ICONS.FIRE}
             href={dealsLink.href}
             isExternal={dealsLink.isExternal}
-            theme={THEME.LIGHT}
           >
             {dealsLink.text}
           </Link>
