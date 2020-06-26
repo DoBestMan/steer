@@ -4,6 +4,14 @@ import { COLORS, MQ, SPACING } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const styles: CSSObject = {
+  action: [
+    typography.secondarySubhead,
+    {
+      display: 'inline-flex',
+      margin: '0 auto',
+      paddingTop: SPACING.SIZE_20,
+    },
+  ],
   container: {
     textAlign: 'center',
   },
@@ -11,19 +19,22 @@ const styles: CSSObject = {
     typography.smallCopy,
     {
       color: COLORS.LIGHT.GRAY_70,
-      [MQ.L]: {
-        br: {
-          display: 'none',
-        },
-      },
+    },
+  ],
+  featureDescription: [
+    typography.secondaryHeadline,
+    {
+      color: COLORS.GLOBAL.ORANGE,
+      marginBottom: SPACING.SIZE_30,
     },
   ],
   icon: {
     color: COLORS.GLOBAL.ORANGE,
     justifyContent: 'center',
-    marginBottom: SPACING.SIZE_10,
+    marginBottom: SPACING.SIZE_20,
+    minHeight: 35,
   },
-  subtitle: [
+  title: [
     typography.secondaryHeadline,
     {
       marginBottom: SPACING.SIZE_05,
@@ -37,13 +48,6 @@ const styles: CSSObject = {
       span: {
         display: 'block',
       },
-    },
-  ],
-  title: [
-    typography.secondaryHeadline,
-    {
-      color: COLORS.GLOBAL.ORANGE,
-      marginBottom: SPACING.SIZE_30,
     },
   ],
 };

@@ -12,6 +12,7 @@ import { data } from './Footer.data';
 import styles from './Footer.styles';
 import FooterLinkList from './FooterLinkList/FooterLinkList';
 import FooterMailingList from './FooterMailingList/FooterMailingList';
+import FooterPromotions from './FooterPromotions/FooterPromotions';
 
 export interface Props {
   customerServiceNumber: { display: string; value: string };
@@ -21,6 +22,15 @@ export interface Props {
 function Footer({ customerServiceNumber, isCustomerServiceEnabled }: Props) {
   return (
     <Grid as="footer" css={styles.container}>
+      <GridItem
+        css={styles.promotions}
+        gridColumnS="2/6"
+        gridColumnM="2/8"
+        gridColumnL="2/14"
+        isGrid
+      >
+        <FooterPromotions />
+      </GridItem>
       <GridItem
         gridColumnS="2/6"
         gridColumnM="2/8"

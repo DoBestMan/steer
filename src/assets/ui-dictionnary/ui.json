@@ -96,6 +96,20 @@
       "heading": "Join our mailing list",
       "description": "Subscribe for updates and promotions."
     },
+    "promotions": {
+      "freeShippingCopy": "Fast, free shipping on <br />every tire we sell.",
+      "freeShippingTitle": "Free shipping",
+      "freeShippingAction": "Learn more",
+      "giftCardCopy": "Give up to 20% to a friend, <br />get $10 back.",
+      "giftCardTitle": "$10 gift card",
+      "giftCardAction": "Refer a friend",
+      "militaryDiscountCopy": "We proudly offer 5% off <br />for our U.S. military.",
+      "militaryDiscountTitle": "Military discount",
+      "militaryDiscountAction": "How to redeem",
+      "signUpCopy": "Save by signing up for <br />emails and text.",
+      "signUpTitle": "Up to 20% off",
+      "signUpAction": "Get the discount"
+    },
     "social": "Social",
     "tires": "Tires 101"
   },
@@ -205,15 +219,15 @@
       "modalLabel": "Select a quantity",
       "confirmButtonLabel": "Confirm",
       "copy": "Most drivers replace 4 tires. <br />If you had a flat tire, replace at least two.",
-      "copyConfirmation": "Having tires with the same wear on the axle guarantees a <br />safer and more efficient performance.",
-      "confirmationSubtitle": "Are you sure? <br />Replacing 4 is better for safety",
-      "subtitle": "Replace tires in pairs for better <br />traction and braking",
+      "copyConfirmation": "Having tires with the same wear on the axle guarantees <br />a safer and more efficient performance.",
+      "confirmationTitle": "Are you sure? <br />Replacing 4 is better for safety",
+      "title": "Replace tires in pairs for better <br />traction and braking",
       "singleTireQtyTitle": "Select tire quantity",
       "totalPrice": "Total price",
       "changeQuantity": "Change to {{quantity}} tires",
       "keepQuantity": "Keep {{quantity}} tires",
       "cta": "Replace tires in pairs for better <br />traction and braking",
-      "title": "PRO tip"
+      "featureDescription": "PRO tip"
     },
     "reviews": {
       "none": "No reviews yet",
@@ -223,8 +237,8 @@
     "roadHazard": {
       "interceptCopy": "Most tire failure are punctures or bruises that manufacturer's warranty typically doesn't cover.\n\n**Get coverage for up to 3 years by $13.02/tire.**",
       "headerCopy": "Most tire failure are punctures or bruises that manufacturer's warranty typically doesn't cover.",
-      "interceptSubtitle": "Did you know?\n\nRoad Hazard Coverage is common in your location",
-      "headerSubtitle": "Save up to 100% of the tire cost if you need a replacement in 3 years",
+      "interceptTitle": "Did you know?\n\nRoad Hazard Coverage is common in your location",
+      "headerTitle": "Save up to 100% of the tire cost if you need a replacement in 3 years",
       "removeLabel": "Remove coverage",
       "continueButtonLabel": "Continue",
       "keepCoverageButtonLabel": "Keep Coverage",
@@ -234,7 +248,7 @@
       "copy": "Protection for 3 years\n\nReplacement up to 100% of the tire cost",
       "copyHeader": "Recommended",
       "price": "{{price}}/tire",
-      "title": "PRO tip"
+      "featureDescription": "PRO tip"
     },
     "faq": {
       "title": "Have a question?",

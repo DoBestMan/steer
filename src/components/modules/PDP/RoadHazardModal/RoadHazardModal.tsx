@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 
 import Button from '~/components/global/Button/Button';
+import FeaturedInfoModule from '~/components/global/FeaturedInfoModule/FeaturedInfoModule';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Link from '~/components/global/Link/Link';
 import Markdown from '~/components/global/Markdown/Markdown';
@@ -10,7 +11,6 @@ import RadioSelector from '~/components/global/RadioSelector/RadioSelector';
 import { BUTTON_STYLE, LINK_TYPES, THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
-import PDPModalHeader from '../PDPModalHeader/PDPModalHeader';
 import styles from './RoadHazardModal.styles';
 
 export const CONSTANTS = {
@@ -33,7 +33,7 @@ interface Props {
   onConfirm: (goToCheckout?: boolean) => void;
   setHasCoverage: (value: string) => void;
   shouldDisplayOptions?: boolean;
-  subtitle: string;
+  title: string;
 }
 
 function LearnMoreLink() {
@@ -59,7 +59,7 @@ function RoadHazardModal({
   onConfirm,
   setHasCoverage,
   shouldDisplayOptions,
-  subtitle,
+  title,
 }: Props) {
   function handleIntercepAction(value: string) {
     setHasCoverage(value);
@@ -83,12 +83,12 @@ function RoadHazardModal({
       onBack={onBack}
     >
       <div css={modalContainerStyles.container}>
-        <PDPModalHeader
+        <FeaturedInfoModule
           copy={copy}
           customCopyStyles={styles.modalHeaderStyles}
           icon={ICONS.SMILEY_WINK}
-          title={ui('pdp.roadHazard.title')}
-          subtitle={subtitle}
+          featureDescription={ui('pdp.roadHazard.featureDescription')}
+          title={title}
         />
 
         {shouldDisplayOptions && (

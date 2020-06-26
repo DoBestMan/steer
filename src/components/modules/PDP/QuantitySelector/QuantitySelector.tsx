@@ -1,13 +1,13 @@
 import { ReactNode } from 'react';
 
 import Button from '~/components/global/Button/Button';
+import FeaturedInfoModule from '~/components/global/FeaturedInfoModule/FeaturedInfoModule';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import BottomCardModal from '~/components/global/Modal/BottomCardModal';
 import { modalContainerStyles } from '~/components/global/Modal/BottomCardModal.styles';
 import { BUTTON_STYLE, THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
-import PDPModalHeader from '../PDPModalHeader/PDPModalHeader';
 import styles from './QuantitySelector.styles';
 
 interface Props {
@@ -32,9 +32,9 @@ function QuantitySelector({
   onConfirm,
   quantityToIntercept,
 }: Props) {
-  const subtitle = isIntercept
-    ? ui('pdp.quantitySelector.confirmationSubtitle')
-    : ui('pdp.quantitySelector.subtitle');
+  const title = isIntercept
+    ? ui('pdp.quantitySelector.confirmationTitle')
+    : ui('pdp.quantitySelector.title');
   const copy = isIntercept
     ? ui('pdp.quantitySelector.copyConfirmation')
     : ui('pdp.quantitySelector.copy');
@@ -54,12 +54,12 @@ function QuantitySelector({
       onClose={onClose}
     >
       <div css={modalContainerStyles.container}>
-        <PDPModalHeader
+        <FeaturedInfoModule
           copy={copy}
           customCopyStyles={isIntercept ? styles.copyConfirmation : undefined}
           icon={icon}
-          title={ui('pdp.quantitySelector.title')}
-          subtitle={subtitle}
+          featureDescription={ui('pdp.quantitySelector.featureDescription')}
+          title={title}
         />
 
         {!isIntercept && <div css={styles.pickerContainer}>{children}</div>}

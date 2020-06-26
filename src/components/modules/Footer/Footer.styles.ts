@@ -25,25 +25,52 @@ const styles: StylesMap = {
 
   container: {
     backgroundColor: COLORS.GLOBAL.WHITE,
-    padding: `${SPACING.SIZE_40}px 0`,
-
-    [MQ.XL]: {
-      padding: `${SPACING.SIZE_60}px 0`,
-    },
   },
 
   copyrightSection: {
     order: 8,
-    paddingTop: SPACING.SIZE_20,
+    padding: `${SPACING.SIZE_20}px 0 ${SPACING.SIZE_40}px`,
 
     [MQ.XL]: [
       borderTop,
       {
         marginTop: SPACING.SIZE_60,
-        paddingTop: SPACING.SIZE_60,
+        padding: `${SPACING.SIZE_60}px 0`,
       },
     ],
   },
+
+  featuredInfoModule: {
+    '&:not(:last-of-type)': {
+      '&::after': {
+        backgroundColor: COLORS.LIGHT.GRAY_20,
+        content: '""',
+        height: '100%',
+        position: 'absolute',
+        right: -10,
+        top: 0,
+        width: 1,
+      },
+    },
+    padding: `${SPACING.SIZE_20}px 0`,
+    position: 'relative',
+    [MQ.M]: {
+      '&:not(:last-of-type)': {
+        '&::after': {
+          content: 'none',
+        },
+      },
+      padding: 0,
+    },
+  },
+
+  featuredInfoTitle: [
+    typography.primarySubhead,
+    {
+      [MQ.M]: typography.primarySubhead,
+      [MQ.XL]: typography.primarySubhead,
+    },
+  ],
 
   linksHeading: [
     typography.secondaryHeadline,
@@ -94,6 +121,19 @@ const styles: StylesMap = {
 
       [MQ.XL]: {
         order: 7,
+      },
+    },
+  ],
+
+  promotions: [
+    borderBottom,
+    {
+      padding: `${SPACING.SIZE_20}px 0`,
+      [MQ.M]: {
+        padding: `${SPACING.SIZE_40}px 0`,
+      },
+      [MQ.L]: {
+        padding: `${SPACING.SIZE_60}px 0`,
       },
     },
   ],
@@ -180,7 +220,7 @@ const styles: StylesMap = {
     layout.centeredHorizontal,
     {
       order: 1,
-      paddingBottom: SPACING.SIZE_20,
+      padding: `${SPACING.SIZE_40}px 0 ${SPACING.SIZE_20}px`,
 
       [MQ.M]: {
         paddingBottom: SPACING.SIZE_30,
@@ -190,7 +230,7 @@ const styles: StylesMap = {
         borderBottomWithGap,
         {
           marginBottom: SPACING.SIZE_60,
-          paddingBottom: SPACING.SIZE_60,
+          padding: `${SPACING.SIZE_60}px 0`,
         },
       ],
     },
@@ -209,7 +249,7 @@ const styles: StylesMap = {
       borderBottom,
       {
         marginBottom: SPACING.SIZE_60,
-        paddingBottom: SPACING.SIZE_60,
+        padding: `${SPACING.SIZE_60}px 0`,
       },
     ],
   },

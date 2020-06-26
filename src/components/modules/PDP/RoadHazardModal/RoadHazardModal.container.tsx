@@ -33,9 +33,9 @@ function RoadHazardModalContainer({ isOpen, onClose }: Props) {
   const copy = shouldIntercept
     ? ui('pdp.roadHazard.interceptCopy')
     : ui('pdp.roadHazard.headerCopy');
-  const subtitle = shouldIntercept
-    ? ui('pdp.roadHazard.interceptSubtitle')
-    : ui('pdp.roadHazard.headerSubtitle');
+  const title = shouldIntercept
+    ? ui('pdp.roadHazard.interceptTitle')
+    : ui('pdp.roadHazard.headerTitle');
 
   return (
     <RoadHazardModal
@@ -43,11 +43,11 @@ function RoadHazardModalContainer({ isOpen, onClose }: Props) {
       hasCoverage={hasCoverage}
       setHasCoverage={setHasCoverage}
       isOpen={isOpen}
-      subtitle={subtitle}
       onClose={onClose}
       onConfirm={handleConfirm}
       onBack={shouldIntercept ? handleOnBack : undefined}
       shouldDisplayOptions={!shouldIntercept}
+      title={title}
     />
   );
 }
