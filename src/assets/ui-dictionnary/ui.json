@@ -279,6 +279,13 @@
     "ratings": "ratings",
     "outOf": "out of"
   },
+  "reviews": {
+    "numReviews": "{{quantity}} reviews",
+    "seeAll": "See all customer reviews",
+    "tireReviews": "{{tire}} Reviews",
+    "viewTire": "View tire",
+    "writeReview": "Write a  review"
+  },
   "search": {
     "addRearTire": "Add different rear size",
     "callUs": "Call us at (888) 410-0604",

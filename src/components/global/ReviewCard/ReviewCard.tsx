@@ -84,6 +84,7 @@ function ReviewCard({
 
         {isCollapsed ? (
           <Link
+            aria-expanded="false"
             as="button"
             icon={ICONS.CHEVRON_DOWN}
             css={[styles.readMore, themeStyles[theme].readMore]}
