@@ -56,6 +56,7 @@ const styles: StylesMap = {
     fontWeight: 'bold',
     marginLeft: SPACING.SIZE_05,
     marginRight: SPACING.SIZE_15,
+    textAlign: 'right',
     whiteSpace: 'pre',
 
     [MQ.M]: {
