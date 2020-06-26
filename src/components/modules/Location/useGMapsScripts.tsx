@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 const CONSTANTS = {
-  API_KEY: 'AIzaSyBvMeJJOTIcPWeZiaLjnf0bTfo4Se7koFY', // TODO: Move to env variable with app implementation
+  API_KEY: process.env.GOOGLE_API_KEY || process.env.STORYBOOK_GOOGLE_API_KEY,
   SCRIPT_ID: 'google-maps-apis',
   /* The AutocompletePrediction API returns smart results based on the user's location.
    * That isn't ideal for our purposes since it may lead to false negatives. For example,
