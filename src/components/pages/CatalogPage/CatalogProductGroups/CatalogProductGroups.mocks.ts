@@ -139,7 +139,7 @@ export const productGroupList: SiteCatalogProductGroupList = [
     icon: null,
     id: 'curatedGroup1',
     name: 'Special deals',
-    productList: products,
+    productList: Array(10).fill(product),
     siteQueryParams: { group: 'curatedGroup1' },
   },
   {
@@ -148,7 +148,7 @@ export const productGroupList: SiteCatalogProductGroupList = [
     icon: null,
     id: 'curatedGroup2',
     name: 'Fuel Efficient Tires',
-    productList: products,
+    productList: Array(10).fill(product),
     siteQueryParams: null,
   },
   {
@@ -156,7 +156,7 @@ export const productGroupList: SiteCatalogProductGroupList = [
     icon: null,
     id: 'curatedGroup3',
     name: 'Best rated under $100',
-    productList: products,
+    productList: Array(10).fill(product),
     siteQueryParams: null,
   },
 ];
