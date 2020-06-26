@@ -4,9 +4,6 @@ import ProductListing from '~/components/modules/Catalog/ProductListing/ProductL
 import { SiteCatalogProductItem } from '~/data/models/SiteCatalogProductItem';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { BREAKPOINT_SIZES } from '~/lib/constants';
-
-import styles from './ProductGrid.styles';
-
 interface Props {
   productList: SiteCatalogProductItem[];
 }
@@ -45,11 +42,7 @@ function ProductGrid({ productList }: Props) {
               gridColumnL={isHighlighted ? 'span 6' : 'span 3'}
               key={`${product.name}-${i}`}
             >
-              <ProductListing
-                css={styles.product}
-                {...product}
-                isHighlighted={isHighlighted}
-              />
+              <ProductListing {...product} isHighlighted={isHighlighted} />
             </GridItem>
           );
         })}

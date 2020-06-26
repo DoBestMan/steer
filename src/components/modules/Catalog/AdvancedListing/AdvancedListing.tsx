@@ -52,11 +52,7 @@ function AdvancedListing({
 
   return (
     <Grid css={styles.root}>
-      <GridItem
-        css={styles.imageWrapper}
-        gridColumnM="2 / 5"
-        gridColumnL="2 / 7"
-      >
+      <GridItem css={styles.imageWrapper} gridColumnM="2/5" gridColumnL="2/7">
         <div css={styles.image}>
           {highlight && (
             <div css={styles.sticker}>
@@ -66,15 +62,10 @@ function AdvancedListing({
           <Image {...displayedImage.image} altText={name} />
         </div>
       </GridItem>
-      <GridItem
-        css={styles.info}
-        isGrid
-        gridColumnM="5 / 8"
-        gridColumnL="7 / 14"
-      >
+      <GridItem css={styles.info} isGrid gridColumnM="5/8" gridColumnL="7/14">
         <GridItem
           css={styles.leftSection}
-          gridColumnS="1 / 3"
+          gridColumnS="1/3"
           gridColumnM="1/3"
           gridColumnL="1/4"
         >
@@ -118,7 +109,7 @@ function AdvancedListing({
         </GridItem>
         <GridItem
           css={styles.rightSection}
-          gridColumnS="3 / 5"
+          gridColumnS="3/5"
           gridColumnM="3/4"
           gridColumnL="4/8"
         >

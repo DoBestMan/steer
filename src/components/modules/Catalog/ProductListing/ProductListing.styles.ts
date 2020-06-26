@@ -101,6 +101,7 @@ const styles: StylesMap = {
     borderBottom: BORDERS.SOLID_GRAY_20_1PX,
     display: 'flex',
     flexDirection: 'column',
+    height: '100%',
     padding: `${SPACING.SIZE_20}px ${SPACING.SIZE_10}px`,
     position: 'relative',
 
