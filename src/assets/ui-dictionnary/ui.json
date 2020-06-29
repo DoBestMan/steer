@@ -27,6 +27,7 @@
       "open": "open {{moduleName}}"
     },
     "originalPricePrefix": "was ",
+    "startingAtPrice": "Start at",
     "toast": {
       "close": "Close notification"
     },

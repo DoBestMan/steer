@@ -1,4 +1,4 @@
-import ProductGroupList from '~/components/modules/Catalog/ProductGroupList/ProductGroupList';
+import ProductGroupList from '~/components/global/ProductGroupList/ProductGroupList';
 import { SiteCatalogProductGroupList } from '~/data/models/SiteCatalogProductGroupList';
 
 import styles from './CatalogProductGroups.styles';

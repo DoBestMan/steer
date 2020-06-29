@@ -9,6 +9,7 @@ import styles from './Prices.styles';
 interface Props {
   currentPriceCSS?: CSSStyles;
   isLight?: boolean;
+  isStartingAtPrice?: boolean;
   originalPrefix?: string;
   priceList?: Array<{
     label?: string | null;
@@ -20,6 +21,7 @@ function Prices({
   currentPriceCSS,
   priceList,
   isLight,
+  isStartingAtPrice,
   originalPrefix,
 }: Props) {
   return (
@@ -29,16 +31,21 @@ function Prices({
           <div key={price.currentInCents}>
             <span
               css={[
-                price.originalInCents && { color: COLORS.GLOBAL.ORANGE },
+                (price.originalInCents || isStartingAtPrice) && {
+                  color: COLORS.GLOBAL.ORANGE,
+                },
                 isLight && { color: COLORS.GLOBAL.WHITE },
                 typography.topPicksPrice,
                 currentPriceCSS,
               ]}
             >
               {label && <span css={styles.label}>{label} </span>}
+              {isStartingAtPrice && (
+                <span css={styles.label}>{ui('common.startingAtPrice')} </span>
+              )}
               {formatDollars(price.currentInCents)}
             </span>
-            {price.originalInCents && (
+            {price.originalInCents && !isStartingAtPrice && (
               <span
                 css={[
                   styles.originalValue,

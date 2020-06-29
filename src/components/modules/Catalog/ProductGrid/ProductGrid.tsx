@@ -1,6 +1,6 @@
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
-import ProductListing from '~/components/modules/Catalog/ProductListing/ProductListing';
+import ProductListing from '~/components/global/ProductListing/ProductListing';
 import { SiteCatalogProductItem } from '~/data/models/SiteCatalogProductItem';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { BREAKPOINT_SIZES } from '~/lib/constants';

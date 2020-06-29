@@ -76,6 +76,7 @@ function AdvancedListing({
             <Prices
               currentPriceCSS={typography.secondaryHeadline}
               priceList={priceList}
+              isStartingAtPrice={!size}
             />
             <h3 css={styles.title}>
               <BaseLink css={styles.linkText} href={link.href}>

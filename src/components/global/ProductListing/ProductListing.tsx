@@ -25,6 +25,7 @@ function ProductListing({
   loadSpeedRating,
   name,
   rating,
+  size,
 }: ProductListingProps) {
   const displayedImage =
     imageList.find((image) => image.productImageType === defaultImage) ||
@@ -50,7 +51,7 @@ function ProductListing({
         ) : (
           <span css={[styles.brand, styles.brandLabel]}>{brand.label}</span>
         )}
-        <Prices priceList={priceList} />
+        <Prices priceList={priceList} isStartingAtPrice={!size} />
         {gridAttribute && <span css={styles.attribute}>{gridAttribute}</span>}
         <h3 css={styles.subcopy}>
           <BaseLink css={styles.linkText} href={link.href}>

@@ -13,7 +13,7 @@ import ProductListing from './ProductListing';
 
 export default {
   component: ProductListing,
-  title: 'Catalog/Grid/Product Listing',
+  title: 'Global/Product Listing',
 };
 
 const mockPriceList = [
@@ -104,6 +104,7 @@ export function ProductListingWithKnobs() {
           loadSpeedRating={text('Load/Speed rating', '91H')}
           name={text('Name', 'FT140')}
           priceList={mockPriceList}
+          size={null}
           siteCatalogPromotionInfo={{
             count: promosToRender,
             list: mockPromotions.slice(0, promosToRender),
@@ -144,6 +145,7 @@ export function FilteredProductListing() {
           link={{ href: '/', isExternal: false }}
           loadSpeedRating="91H"
           name="FT140"
+          size={null}
           siteCatalogPromotionInfo={{ count: 0, list: [] }}
           priceList={mockPriceList}
           imageList={mockImages}
@@ -177,6 +179,7 @@ export function HighlightedProductListing() {
           link={{ href: '/', isExternal: false }}
           loadSpeedRating="91H"
           name="FT140"
+          size={null}
           siteCatalogPromotionInfo={{ count: 0, list: [] }}
           priceList={mockPriceList}
           imageList={mockImages}

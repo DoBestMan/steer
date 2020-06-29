@@ -17,7 +17,8 @@ const mapPriceTypographyToCSS = {
 };
 
 export function PricesWithKnobs() {
-  const isLight = boolean('isLight', false);
+  const isLight = boolean('Light theme?', false);
+  const isStartingAtPrice = boolean('Is starting at price?', false);
   const currentPriceTypography = select(
     'Current price typography',
     ['Primary', 'Secondary', 'Default'],
@@ -56,6 +57,7 @@ export function PricesWithKnobs() {
     >
       <Prices
         isLight={isLight}
+        isStartingAtPrice={isStartingAtPrice}
         currentPriceCSS={
           mapPriceTypographyToCSS[currentPriceTypography] || undefined
         }
@@ -166,4 +168,18 @@ export function NoPrices() {
       <Prices priceList={null} />
     </div>
   );
+}
+
+export function StartAtPrice() {
+  const priceList = [
+    {
+      label: null,
+      price: {
+        currentInCents: '15975',
+        originalInCents: '',
+      },
+    },
+  ];
+
+  return <Prices priceList={priceList} isStartingAtPrice />;
 }

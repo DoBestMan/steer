@@ -40,7 +40,7 @@ export interface SiteCatalogProductItem {
     value: number;
   } | null;
   siteCatalogPromotionInfo: SiteCatalogPromotionInfo | null;
-  size: string;
+  size: string | null;
   specList: Array<{
     concise: string;
     label: string;

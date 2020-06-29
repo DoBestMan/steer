@@ -9,7 +9,7 @@ import ProductGroupList from './ProductGroupList';
 
 export default {
   component: ProductGroupList,
-  title: 'Catalog/Grid/Product Group List',
+  title: 'Global/Product Group List',
 };
 
 const mockLogo = {
@@ -68,6 +68,7 @@ const mockProduct = {
 export function ProductGroupListWithKnobs() {
   const isLinked = boolean('Is linked', false);
   const hasIcon = boolean('Has icon', false);
+  const productList = Array(10).fill(mockProduct);
 
   return (
     <ProductGroupList
@@ -77,9 +78,27 @@ export function ProductGroupListWithKnobs() {
         'Description',
         'Top choices from Civic drivers near you.',
       )}
-      productList={Array(10).fill(mockProduct)}
+      productList={productList}
       siteQueryParams={isLinked ? { group: 'curatedGroup1' } : null}
       id="curatedGroup1"
+    />
+  );
+}
+
+export function ProductGroupListStartAtPrices() {
+  const productList = Array(10).fill({
+    ...mockProduct,
+    size: null,
+  });
+
+  return (
+    <ProductGroupList
+      name="Most popular in Brooklyn"
+      description="Top choices from Civic drivers near you."
+      productList={productList}
+      id="curatedGroup1"
+      icon={null}
+      siteQueryParams={null}
     />
   );
 }
