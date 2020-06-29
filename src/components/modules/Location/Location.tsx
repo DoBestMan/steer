@@ -5,6 +5,7 @@ import { AutocompleteResult } from '~/components/global/Autocomplete/Autocomplet
 import GridItem from '~/components/global/Grid/GridItem';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Markdown from '~/components/global/Markdown/Markdown';
+import { TOAST_TYPE } from '~/components/global/Toast/Toast';
 import { NAV_TARGETS } from '~/components/modules/Nav/Nav.types';
 import { UserPersonalizationUpdate } from '~/data/models/UserPersonalizationUpdate';
 import { onlyNumbers } from '~/lib/utils/regex';
@@ -13,7 +14,7 @@ import { ui } from '~/lib/utils/ui-dictionary';
 import AutocompleteResultItemLocation from './AutocompleteResultItemLocation';
 import { styles } from './Location.styles';
 import LocationInfo from './LocationInfo';
-import LocationToast, { TOAST_TYPE } from './LocationToast';
+import LocationToast from './LocationToast';
 import UseCurrentLocation from './UseCurrentLocation';
 import { useGMapsScripts } from './useGMapsScripts';
 

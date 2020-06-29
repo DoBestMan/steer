@@ -94,7 +94,9 @@
     "company": "Company",
     "mailingList": {
       "heading": "Join our mailing list",
-      "description": "Subscribe for updates and promotions."
+      "description": "Subscribe for updates and promotions.",
+      "success": "Thanks for subscribing! <br />We look forward to being in touch.",
+      "error": "Oops, something went wrong! <br />Please try again."
     },
     "promotions": {
       "freeShippingCopy": "Fast, free shipping on <br />every tire we sell.",

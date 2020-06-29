@@ -42,6 +42,11 @@ const styles: StylesMap = {
       marginBottom: SPACING.SIZE_20,
     },
   ],
+  toast: {
+    [MQ.L]: {
+      marginTop: SPACING.SIZE_20,
+    },
+  },
 };
 
 export default styles;

@@ -1,13 +1,8 @@
 import { SetStateAction } from 'react';
 
-import Toast from '~/components/global/Toast/Toast';
+import Toast, { TOAST_TYPE } from '~/components/global/Toast/Toast';
 
 import { styles } from './Location.styles';
-
-export enum TOAST_TYPE {
-  ERROR = 'error',
-  SUCCESS = 'success',
-}
 
 interface Props {
   message: JSX.Element | string;

@@ -1,4 +1,10 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import {
+  ChangeEvent,
+  forwardRef,
+  MutableRefObject,
+  useEffect,
+  useState,
+} from 'react';
 
 import { randomString } from '~/lib/utils/string';
 
@@ -7,6 +13,11 @@ import styles, {
   focusStyles,
   textAreaStyles,
 } from './Input.styles';
+
+type RefType =
+  | ((instance: HTMLInputElement | HTMLTextAreaElement | null) => void)
+  | MutableRefObject<HTMLInputElement | HTMLTextAreaElement | null>
+  | null;
 
 interface Props {
   contextualLabel?: string;
@@ -24,21 +35,22 @@ interface Props {
   value?: string;
 }
 
-function Input({
-  contextualLabel,
-  disabled,
-  error = { hasError: false },
-  id,
-  isTextArea,
-  label,
-  onChange,
-  onKeyDown,
-  required,
-  type,
-  validationFn,
-  value,
-  ...rest
-}: Props) {
+function Input(props: Props, ref: RefType) {
+  const {
+    contextualLabel,
+    disabled,
+    error = { hasError: false },
+    id,
+    isTextArea,
+    label,
+    onChange,
+    onKeyDown,
+    required,
+    type,
+    validationFn,
+    value,
+    ...rest
+  } = props;
   const { hasError, errorMessage } = error;
 
   const [inputId, setInputId] = useState(id);
@@ -50,6 +62,13 @@ function Input({
       setInputId(`${randomString(10)}-input`);
     }
   }, [id]);
+
+  useEffect(() => {
+    // Reset isTouched if there's no value.
+    if (!value) {
+      setIsTouched(false);
+    }
+  }, [value]);
 
   function handleOnFocus() {
     setIsFocused(true);
@@ -80,7 +99,18 @@ function Input({
     }
   }
 
-  const InputEl = isTextArea ? 'textarea' : 'input';
+  const commonProps = {
+    'aria-required': required,
+    disabled,
+    id: inputId,
+    onBlur: handleOnBlur,
+    onChange: handleOnChange,
+    onFocus: handleOnFocus,
+    onKeyDown,
+    placeholder: contextualLabel,
+    required,
+    value,
+  };
 
   // We should only show the validation error when the input has been touched
   const showErrorState = hasError && isTouched;
@@ -105,25 +135,26 @@ function Input({
       >
         {label}
       </label>
-      <InputEl
-        aria-required={required}
-        disabled={disabled}
-        css={[
-          styles.input,
-          isTextArea && textAreaStyles.input,
-          isFocused && focusStyles.input,
-        ]}
-        id={inputId}
-        placeholder={contextualLabel}
-        value={value}
-        onBlur={handleOnBlur}
-        onChange={handleOnChange}
-        onFocus={handleOnFocus}
-        onKeyDown={onKeyDown}
-        required={required}
-        type={type}
-        {...rest}
-      />
+      {isTextArea ? (
+        <textarea
+          css={[
+            styles.input,
+            isTextArea && textAreaStyles.input,
+            isFocused && focusStyles.input,
+          ]}
+          ref={ref as MutableRefObject<HTMLTextAreaElement>}
+          {...commonProps}
+          {...rest}
+        />
+      ) : (
+        <input
+          css={[styles.input, isFocused && focusStyles.input]}
+          ref={ref as MutableRefObject<HTMLInputElement>}
+          type={type}
+          {...commonProps}
+          {...rest}
+        />
+      )}
       {showErrorState && errorMessage && (
         <span role="alert" css={errorStyles.errorMessage}>
           {errorMessage}
@@ -133,4 +164,4 @@ function Input({
   );
 }
 
-export default Input;
+export default forwardRef(Input);

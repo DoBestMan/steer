@@ -7,6 +7,11 @@ import { ui } from '~/lib/utils/ui-dictionary';
 
 import styles from './Toast.styles';
 
+export enum TOAST_TYPE {
+  ERROR = 'error',
+  SUCCESS = 'success',
+}
+
 interface Props {
   autoDismiss?: boolean; // There should be no use cases with auto dismiss disabled, this prop is for testing
   children: ReactChild;
