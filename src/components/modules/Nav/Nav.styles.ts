@@ -42,8 +42,8 @@ export const navigationPaddingTop: CSSStyles = {
 };
 
 const CONSTANTS = {
-  LOGO_SIZE: 130,
-  LOGO_SIZE_SMALL: 108,
+  LOGO_SIZE: 123,
+  LOGO_SIZE_SMALL: 105,
 };
 
 export const animations = {
@@ -68,6 +68,16 @@ export const animations = {
 };
 
 export const styles: StylesMap = {
+  cart: {
+    order: -1,
+    [MQ.L]: {
+      marginLeft: SPACING.SIZE_20,
+      order: 0,
+    },
+    [MQ.XL]: {
+      marginLeft: SPACING.SIZE_30,
+    },
+  },
   container: {
     height: NAV_CONTENT_HEIGHT,
   },
@@ -93,14 +103,12 @@ export const styles: StylesMap = {
     },
     alignItems: 'center',
     display: 'none',
-    marginLeft: SPACING.SIZE_40,
+    marginLeft: SPACING.SIZE_20,
     [MQ.L]: {
       display: 'inline-flex',
     },
-  },
-  listItemNotHomepage: {
-    [MQ.L]: {
-      marginLeft: SPACING.SIZE_20,
+    [MQ.XL]: {
+      marginLeft: SPACING.SIZE_30,
     },
   },
   logo: {
@@ -129,11 +137,13 @@ export const styles: StylesMap = {
     },
   },
   searchButton: {
+    marginLeft: SPACING.SIZE_30,
+
     [MQ.L]: {
+      marginLeft: 0,
       marginRight: 'auto',
       width: 200,
     },
-
     [MQ.XL]: {
       maxWidth: 420,
       width: '35%',

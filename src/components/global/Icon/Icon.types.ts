@@ -65,6 +65,7 @@ export type Icon =
   | 'trending'
   | 'twitter'
   | 'unknown'
+  | 'vehicle-cart'
   | 'vehicle-commercial'
   | 'vehicle-farm'
   | 'vehicle-industrial'

@@ -16,6 +16,7 @@ import { ui } from '~/lib/utils/ui-dictionary';
 import { layout } from '~/styles/layout.styles';
 
 import { animations, styles } from './Nav.styles';
+import NavCart from './NavCarButton/NavCart';
 import NavSearchButton from './NavSearchButton/NavSearchButton';
 
 interface Props {
@@ -83,7 +84,6 @@ function Nav({ isHomepage }: Props) {
                 <li
                   css={[
                     styles.listItem,
-                    !isHomepage && styles.listItemNotHomepage,
                     idx === links.length - 1 && styles.lastItem,
                   ]}
                   key={idx}
@@ -96,6 +96,9 @@ function Nav({ isHomepage }: Props) {
                   />
                 </li>
               ))}
+              <li css={styles.cart}>
+                <NavCart />
+              </li>
               <li css={[styles.listItem, styles.hamburger]}>
                 <button
                   aria-label={CONSTANTS.MOBILE_MENU_ARIA_LABEL}

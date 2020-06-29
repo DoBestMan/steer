@@ -139,6 +139,12 @@
     "alt": "Simple Tire"
   },
   "nav": {
+    "cart": {
+      "contentLabel": "You have {{items}} in your cart",
+      "oneItem": "{{quantity}} item",
+      "multipleItems": "{{quantity}} items",
+      "moreThanLimitItems": "more than {{quantity}} items"
+    },
     "close": "Close navigation modal",
     "contentLabel": "Navigation",
     "browseTires": {
