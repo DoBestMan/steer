@@ -27,6 +27,7 @@ function FooterPromotions() {
       >
         <FeaturedInfoModule
           {...PROMOTIONS.signUp}
+          dataVendor={'attentive'}
           action={{
             as: LINK_TYPES.BUTTON,
             onClick: handleSignUpClick,

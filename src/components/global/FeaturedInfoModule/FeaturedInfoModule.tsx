@@ -16,6 +16,7 @@ export interface FeaturedInfoModuleProps {
   copy: string;
   customCopyStyles?: CSSStyles;
   customTitleStyles?: CSSStyles;
+  dataVendor?: string;
   featureDescription?: string;
   icon?: IconType;
   title: string;
@@ -26,6 +27,7 @@ function FeaturedInfoModule({
   copy,
   customCopyStyles,
   customTitleStyles,
+  dataVendor,
   featureDescription,
   icon,
   title,
@@ -44,7 +46,12 @@ function FeaturedInfoModule({
         <Markdown>{copy}</Markdown>
       </div>
       {action && (
-        <Link css={styles.action} {...action} theme={THEME.LIGHT}>
+        <Link
+          css={styles.action}
+          {...action}
+          theme={THEME.LIGHT}
+          data-vendor={dataVendor}
+        >
           {action.text}
         </Link>
       )}
