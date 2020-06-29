@@ -7,7 +7,7 @@ import Link from '~/components/global/Link/Link';
 import Markdown from '~/components/global/Markdown/Markdown';
 import BottomCardModal from '~/components/global/Modal/BottomCardModal';
 import { modalContainerStyles } from '~/components/global/Modal/BottomCardModal.styles';
-import RadioSelector from '~/components/global/RadioSelector/RadioSelector';
+import RadioSelector from '~/components/global/Radio/RadioSelector';
 import { BUTTON_STYLE, LINK_TYPES, THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 

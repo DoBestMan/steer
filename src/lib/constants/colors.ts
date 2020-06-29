@@ -3,6 +3,7 @@ export const COLORS = {
     GRAY_40: 'rgba(255, 255, 255, 0.6)',
     GRAY_80: 'rgba(255, 255, 255, 0.2)',
     GRAY_90: 'rgba(255, 255, 255, 0.1)',
+    GRAY_DARK_SOLID: '#2D2D2D',
   },
   GLOBAL: {
     BLACK: '#181818',
@@ -14,6 +15,7 @@ export const COLORS = {
     GRAY_10: 'rgba(24, 24, 24, 0.06)',
     GRAY_20: 'rgba(24, 24, 24, 0.13)',
     GRAY_70: 'rgba(24, 24, 24, 0.7)',
+    GRAY_LIGHT_SOLID: '#929292',
     OFF_WHITE: '#ECEBE1',
     RED_05: 'rgba(238, 49, 49, 0.05)',
   },

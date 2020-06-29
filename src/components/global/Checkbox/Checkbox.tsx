@@ -1,54 +1,52 @@
-import { ReactNode, useEffect, useState } from 'react';
+import { InputHTMLAttributes } from 'react';
 
-import Icon from '../Icon/Icon';
-import { ICONS } from '../Icon/Icon.constants';
+import Icon from '~/components/global/Icon/Icon';
+import { ICONS } from '~/components/global/Icon/Icon.constants';
+
 import styles from './Checkbox.styles';
 
-interface Props {
-  checked?: boolean;
-  children?: ReactNode;
+interface Props  // use custom on change
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
   defaultChecked?: boolean;
-  onChange?: (value: boolean) => void;
+  isDisabled?: boolean;
+  onChange?: () => void;
 }
 
 export default function Checkbox({
-  children,
+  checked,
   defaultChecked = false,
+  isDisabled = false,
   onChange,
   ...rest
 }: Props) {
-  const [isChecked, setIsChecked] = useState(defaultChecked);
-  function handleChange() {
-    if (onChange) {
-      onChange(!isChecked);
-    }
-    setIsChecked(!isChecked);
-  }
-
-  useEffect(() => {
-    setIsChecked(defaultChecked);
-  }, [defaultChecked]);
   return (
-    <label css={[styles.root, isChecked && styles.rootChecked]}>
-      {children}
+    <>
       <input
-        aria-checked={isChecked}
-        checked={isChecked}
+        aria-checked={checked}
+        aria-disabled={isDisabled}
+        checked={checked}
         css={styles.input}
-        onChange={handleChange}
         role="checkbox"
         type="checkbox"
         defaultChecked={defaultChecked}
+        disabled={isDisabled}
+        onChange={onChange}
         {...rest}
       />
-      <span css={styles.container}>
+      <span
+        css={[
+          styles.container,
+          checked && styles.containerChecked,
+          isDisabled && styles.disabledIndicator,
+        ]}
+      >
         <span
           aria-hidden
-          css={[styles.indicator, isChecked && styles.indicatorChecked]}
+          css={[styles.indicator, checked && styles.indicatorChecked]}
         >
           <Icon name={ICONS.CHECKMARK} />
         </span>
       </span>
-    </label>
+    </>
   );
 }

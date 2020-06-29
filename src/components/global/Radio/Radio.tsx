@@ -1,10 +1,10 @@
-import { ReactNode } from 'react';
+import { InputHTMLAttributes } from 'react';
 
 import styles from './Radio.styles';
 
-interface Props {
+interface Props  // use custom on change
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
   activeValue?: string;
-  children?: ReactNode;
   isDisabled?: boolean;
   name: string;
   onChange: (value: string) => void;
@@ -12,38 +12,40 @@ interface Props {
 }
 
 export default function Radio({
-  children,
+  activeValue,
   isDisabled,
   onChange,
   value,
-  activeValue,
   ...rest
 }: Props) {
-  const isActive = activeValue === value;
   function handleChange() {
     onChange(value);
   }
+  const isActive = activeValue === value;
   return (
-    <label css={[styles.root, isActive && styles.rootActive]} {...rest}>
-      {children}
+    <>
       <input
         aria-checked={isActive}
         aria-disabled={isDisabled}
         aria-label={value}
         css={styles.input}
         disabled={isDisabled}
-        name={name}
         onClick={handleChange}
         role="radio"
         type="radio"
         value={value}
+        {...rest}
       />
       <span
         aria-hidden
-        css={[styles.indicator, isActive && styles.indicatorActive]}
+        css={[
+          styles.indicator,
+          isActive && styles.indicatorActive,
+          isDisabled && styles.disabledIndicator,
+        ]}
       >
         {isActive && <span css={styles.innerRadio} />}
       </span>
-    </label>
+    </>
   );
 }

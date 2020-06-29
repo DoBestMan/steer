@@ -1,19 +1,35 @@
-import { BORDERS, COLORS, RADIUS, StylesMap } from '~/lib/constants';
+import { BORDERS, COLORS, RADIUS, SPACING, StylesMap } from '~/lib/constants';
+import { typography } from '~/styles/typography.styles';
 
-const RADIO_SIZE = 25;
-const RADIO_BORDER = BORDERS.SOLID_ORANGE_2PX;
-const INNER_SIZE = 13;
+const RADIO_BORDER = BORDERS.SOLID_ORANGE_1PX;
+const INPUT_HEIGHT = 20;
+const INNER_SIZE = INPUT_HEIGHT / 2;
 
-const styles: StylesMap = {
+export const styles: StylesMap = {
+  copyLabel: [
+    typography.bodyCopy,
+    {
+      color: COLORS.LIGHT.GRAY_70,
+      marginLeft: SPACING.SIZE_10,
+    },
+  ],
+  copyRoot: {
+    display: 'flex',
+  },
+  disabledIndicator: {
+    opacity: 0.2,
+  },
+  disabledLabel: {
+    opacity: 0.1,
+  },
   indicator: {
-    background: COLORS.LIGHT.GRAY_20,
     border: RADIO_BORDER,
-    borderColor: 'transparent',
+    borderColor: COLORS.LIGHT.GRAY_LIGHT_SOLID,
     borderRadius: RADIUS.CIRCLE,
-    height: RADIO_SIZE,
+    height: INPUT_HEIGHT,
     overflow: 'hidden',
     position: 'relative',
-    width: RADIO_SIZE,
+    width: INPUT_HEIGHT,
   },
   indicatorActive: {
     alignItems: 'center',
@@ -38,11 +54,18 @@ const styles: StylesMap = {
       },
     },
   },
-  root: {
+  rootActive: { color: COLORS.GLOBAL.ORANGE },
+  rootHover: {
+    ':hover': {
+      span: {
+        borderColor: COLORS.DARK.GRAY_DARK_SOLID,
+      },
+    },
+  },
+  titleRoot: {
     display: 'flex',
     justifyContent: 'space-between',
   },
-  rootActive: { color: COLORS.GLOBAL.ORANGE },
 };
 
 export default styles;

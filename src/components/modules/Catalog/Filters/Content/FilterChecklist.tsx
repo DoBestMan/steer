@@ -1,4 +1,4 @@
-import Checkbox from '~/components/global/Checkbox/Checkbox';
+import TitleCheckbox from '~/components/global/Checkbox/TitleCheckbox';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 
 import {
@@ -12,7 +12,6 @@ import largeStyles from './FilterChecklistLarge.styles';
 
 export default function FilterChecklist({
   filterGroups,
-  filtersToApply,
   label,
   onChange,
   tooltip,
@@ -20,14 +19,13 @@ export default function FilterChecklist({
 }: (CatalogFilterChecklist | CatalogFilterChecklistLarge) &
   Pick<ChildProps, 'onChange' | 'filtersToApply'>) {
   const { greaterThan } = useBreakpoints();
-  const filterGroup = filtersToApply[label];
   const lgStyles =
     greaterThan.M && type === FilterContentTypes.CatalogFilterChecklistLarge
       ? largeStyles
       : styles;
 
   function handleChange(id: string) {
-    return (value: boolean) => onChange({ group: label, id, value })();
+    return () => onChange({ group: label, id, value: '' })();
   }
   return (
     <div css={styles.root}>
@@ -38,21 +36,15 @@ export default function FilterChecklist({
       {filterGroups?.map(({ id, items, title }) => (
         <div css={lgStyles.group} key={id}>
           <h3 css={lgStyles.groupTitle}>{title}</h3>
-          {items.map(({ count, description, id, isSelected, flair, title }) => (
+          {items.map(({ count, description, id, flair, title }) => (
             <div css={styles.container} key={id}>
-              <Checkbox
-                onChange={handleChange(id)}
-                defaultChecked={filterGroup ? !!filterGroup[id] : isSelected}
-              >
-                <span css={styles.checkboxLabel}>
-                  <span css={styles.containerLabel}>
-                    <p css={lgStyles.label}>{title}</p>
-                    <p css={styles.count}>({count})</p>
-                    {flair && <p css={styles.flair}>{flair}</p>}
-                  </span>
-                  <p css={styles.description}>{description}</p>
-                </span>
-              </Checkbox>
+              <TitleCheckbox
+                label={title}
+                description={description}
+                count={count}
+                flair={flair}
+                handleChange={handleChange('')}
+              />
             </div>
           ))}
         </div>
