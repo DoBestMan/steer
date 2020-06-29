@@ -1,8 +1,15 @@
 import { Cars } from '~/components/global/Car/Car.enums';
 import { SCENERIES } from '~/components/global/Scenery/Scenery.constants';
+import { SiteImage } from '~/data/models/SiteImage';
 
 export const DEFAULT_VEHICLE = Cars['car--sedan'];
 export const DEFAULT_SCENERY = SCENERIES.RURAL;
+export const DEFAULT_IMAGE = {
+  altText: '',
+  height: 300,
+  src: '/images/default-tire.svg',
+  width: 300,
+} as SiteImage;
 
 export enum STAGES {
   BUILD_IN = 'buildIn', // the build-in animation

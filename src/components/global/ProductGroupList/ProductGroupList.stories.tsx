@@ -50,8 +50,8 @@ const mockProduct = {
     {
       label: null,
       price: {
-        currentInCents: '7699',
-        originalInCents: '12000',
+        salePriceInCents: '7699',
+        estimatedRetailPriceInCents: '12000',
       },
     },
   ],

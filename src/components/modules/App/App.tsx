@@ -2,6 +2,7 @@ import dynamic from 'next/dynamic';
 import { ReactNode } from 'react';
 
 import SearchModal from '~/components/modules/Search/SearchModal';
+import { NavContextProvider } from '~/context/Nav.context';
 import { ROUTE_MAP, ROUTES } from '~/lib/constants';
 
 import FooterContainer from '../Footer/Footer.container';
@@ -21,8 +22,10 @@ function App({ children, route }: Props) {
 
   return (
     <div css={[styles.root, isHomepage && styles.rootWithOffWhiteBg]}>
-      <NavContainer isHomepage={isHomepage} />
-      {children}
+      <NavContextProvider>
+        <NavContainer isHomepage={isHomepage} />
+        {children}
+      </NavContextProvider>
       <FooterContainer />
       <SearchModal />
     </div>

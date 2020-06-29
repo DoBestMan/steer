@@ -31,7 +31,7 @@ export function TopPicksItemWithKnobs() {
         'Additional info label (original tire button)',
         'original tire',
       ),
-      titleLine1: text('Title Top', "Civic's 1st pick"),
+      titleLine1: text('Title Top', "Civic's 1st pick:"),
       titleLine2: text('Title Bottom', 'Keep original tire'),
       subtitle: text(
         'description',
@@ -63,8 +63,11 @@ export function TopPicksItemWithKnobs() {
       {
         label: null,
         price: {
-          currentInCents: text('Current price, in cents', '13296'),
-          originalInCents: text('Original price, in cents', '15900'),
+          salePriceInCents: text('Current price, in cents', '13296'),
+          estimatedRetailPriceInCents: text(
+            'Original price, in cents',
+            '15900',
+          ),
         } as SitePrice,
       },
     ],
@@ -126,7 +129,7 @@ export function TopPicksItemWithFrontAndRearAndPill() {
     isCurrent: true,
 
     header: {
-      titleLine1: "Civic's 1st pick",
+      titleLine1: "Civic's 1st pick:",
       titleLine2: 'Keep original tire',
       pill: '20% off',
     },
@@ -155,15 +158,21 @@ export function TopPicksItemWithFrontAndRearAndPill() {
       {
         label: 'Front',
         price: {
-          currentInCents: text('Current price, in cents', '13296'),
-          originalInCents: text('Original price, in cents', '15900'),
+          salePriceInCents: text('Current price, in cents', '13296'),
+          estimatedRetailPriceInCents: text(
+            'Original price, in cents',
+            '15900',
+          ),
         } as SitePrice,
       },
       {
         label: 'Back',
         price: {
-          currentInCents: text('Current price, in cents', '17659'),
-          originalInCents: text('Original price, in cents', '12399'),
+          salePriceInCents: text('Current price, in cents', '17659'),
+          estimatedRetailPriceInCents: text(
+            'Original price, in cents',
+            '12399',
+          ),
         } as SitePrice,
       },
     ],
@@ -207,7 +216,7 @@ export function TopPicksItemWithNoPriceAndNoBrandImage() {
     isCurrent: true,
 
     header: {
-      titleLine1: "Civic's 1st pick",
+      titleLine1: "Civic's 1st pick:",
       titleLine2: 'Keep original tire',
       subtitle: 'That came with your Honda from the factory',
     },

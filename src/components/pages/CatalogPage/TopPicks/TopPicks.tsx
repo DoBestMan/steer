@@ -7,7 +7,9 @@ import { SiteCatalogSummaryTopPickItem } from '~/data/models/SiteCatalogSummaryT
 import { SiteCatalogSummaryTopPicksMore } from '~/data/models/SiteCatalogSummaryTopPicksMore';
 import { BREAKPOINTS, TIME } from '~/lib/constants';
 import { PRODUCT_IMAGE_TYPES } from '~/lib/constants/productImage.types';
+import { getScroll, subscribeScroll } from '~/lib/helpers/scroll';
 import { resetTranslateInstance, setTranslate } from '~/lib/helpers/translate';
+import { map } from '~/lib/utils/interpolation';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
 
@@ -17,24 +19,32 @@ import TopPicksItem from './TopPicksItem/TopPicksItem';
 import { TopPickItemsHeader } from './TopPicksItem/TopPicksItems.types';
 
 interface Props {
+  exploreMore: () => void;
   location?: string;
+  openSearch: () => void;
   picks: Array<SiteCatalogSummaryTopPickItem>;
   totalResult: number;
   viewMoreData: SiteCatalogSummaryTopPicksMore | null;
 }
 
-function TopPicks({ picks, totalResult, location, viewMoreData }: Props) {
+const OFFSET_STARTING_ALPHA_INTERPOLATION = 100;
+
+function TopPicks({
+  exploreMore,
+  openSearch,
+  picks,
+  totalResult,
+  location,
+  viewMoreData,
+}: Props) {
   const [swiper, setSwiper] = useState<SwiperInstance>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [show, setShow] = useState(false);
-  const [isStatic, setIsStatic] = useState(true);
+  const [rootHeight, setRootHeight] = useState(0);
   const [indexHovered, setIndexHovered] = useState<number | undefined>(
     undefined,
   );
   const rootRef = useRef<HTMLDivElement | null>(null);
-  const exploreButtonRef = useRef<HTMLButtonElement | null>(null);
-
-  const exploreMore = () => {};
 
   // Swiper events
   useEffect(() => {
@@ -68,6 +78,57 @@ function TopPicks({ picks, totalResult, location, viewMoreData }: Props) {
     };
   }, []);
 
+  // Get topPicks offsetTop on resize
+  useEffect(() => {
+    if (!rootRef || !rootRef.current) {
+      return;
+    }
+
+    const resize = () => {
+      if (!rootRef || !rootRef.current) {
+        return;
+      }
+      setRootHeight(rootRef.current.clientHeight);
+    };
+    resize();
+
+    window.addEventListener('resize', resize, false);
+
+    return () => {
+      window.removeEventListener('resize', resize, false);
+    };
+  }, [rootRef]);
+
+  // On scroll
+  useEffect(() => {
+    if (!rootRef || !rootRef.current) {
+      return;
+    }
+
+    const scroll = () => {
+      if (!rootRef || !rootRef.current) {
+        return;
+      }
+
+      const y = getScroll().y;
+      const alpha = map(
+        y,
+        OFFSET_STARTING_ALPHA_INTERPOLATION,
+        OFFSET_STARTING_ALPHA_INTERPOLATION + rootHeight * 0.5,
+        1,
+        0,
+      );
+
+      // Directly changing the style to avoid re-render loop
+      rootRef.current.style.opacity = String(alpha);
+    };
+    const subscription = subscribeScroll(scroll);
+
+    return () => {
+      subscription();
+    };
+  }, [rootRef, rootHeight]);
+
   const onItemMouseEnter = (index: number) => {
     setIndexHovered(index);
   };
@@ -75,39 +136,6 @@ function TopPicks({ picks, totalResult, location, viewMoreData }: Props) {
   const onItemMouseLeave = () => {
     setIndexHovered(undefined);
   };
-
-  // Explore button position
-  useEffect(() => {
-    if (
-      !rootRef ||
-      !rootRef.current ||
-      !exploreButtonRef ||
-      !exploreButtonRef.current ||
-      !swiper
-    ) {
-      return;
-    }
-
-    const resize = () => {
-      const height = window.innerHeight;
-      const boundsRoot = rootRef.current?.getBoundingClientRect();
-      const boundsButton = exploreButtonRef.current?.getBoundingClientRect();
-
-      if (!boundsRoot || !boundsButton) {
-        return;
-      }
-
-      const isStatic = height - boundsButton.height < boundsRoot.bottom;
-      setIsStatic(isStatic);
-    };
-
-    window.addEventListener('resize', resize, false);
-    resize();
-
-    return () => {
-      window.removeEventListener('resize', resize, false);
-    };
-  }, [rootRef, exploreButtonRef, swiper]);
 
   const params = {
     // Could use slidesPerView: NB_SLIDES_PER_BP[bp.bk], but seems better this way
@@ -174,8 +202,8 @@ function TopPicks({ picks, totalResult, location, viewMoreData }: Props) {
   };
 
   return (
-    <div>
-      <div ref={rootRef} css={styles.root}>
+    <div ref={rootRef}>
+      <div css={styles.root}>
         <Carousel params={params} getSwiper={setSwiper}>
           {picks.map((pick, i) => {
             const {
@@ -200,7 +228,7 @@ function TopPicks({ picks, totalResult, location, viewMoreData }: Props) {
               asset =
                 product.imageList.filter(
                   (img) =>
-                    img.productImageType === PRODUCT_IMAGE_TYPES.SIDETREAD,
+                    img.productImageType === PRODUCT_IMAGE_TYPES.SIDEWALL,
                 )[0]?.image || product.imageList[0].image;
 
               brand = product.brand;
@@ -214,8 +242,10 @@ function TopPicks({ picks, totalResult, location, viewMoreData }: Props) {
               asset = fallbackImage;
             }
 
+            const key = `${header.titleLine1}-${product?.name}`;
+
             return (
-              <div css={styles.pick} key={product?.name || header.titleLine1}>
+              <div css={styles.pick} key={key}>
                 <TopPicksItem
                   addVehicleInfo={addVehicleInfo}
                   brand={brand}
@@ -237,6 +267,7 @@ function TopPicks({ picks, totalResult, location, viewMoreData }: Props) {
                   indexHovered={indexHovered}
                   onItemMouseEnter={onItemMouseEnter}
                   onItemMouseLeave={onItemMouseLeave}
+                  openSearch={openSearch}
                 />
               </div>
             );
@@ -254,12 +285,7 @@ function TopPicks({ picks, totalResult, location, viewMoreData }: Props) {
           </div>
         </Carousel>
       </div>
-      <button
-        type="button"
-        css={[styles.exploreButton, isStatic && styles.isStatic]}
-        ref={exploreButtonRef}
-        onClick={exploreMore}
-      >
+      <button type="button" css={styles.exploreButton} onClick={exploreMore}>
         <span css={typography.tertiaryHeadline}>
           {ui('catalog.topPicks.exploreMoreCTALabel')}
         </span>

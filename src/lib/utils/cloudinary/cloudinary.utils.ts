@@ -14,6 +14,7 @@ export function isTransformations(
       arg.aspectRatio ||
       arg.background ||
       arg.border ||
+      arg.color ||
       arg.crop ||
       arg.effect ||
       arg.fetchFormat ||

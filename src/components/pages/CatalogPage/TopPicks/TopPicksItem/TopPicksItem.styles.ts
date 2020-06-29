@@ -2,6 +2,8 @@ import { WHEEL_WIDTH } from '~/components/global/Car/Car.constants';
 import { NAV_HEIGHT } from '~/components/modules/Nav/Nav.styles';
 import { COLORS, EASING, MQ, SPACING, StylesMap, TIME } from '~/lib/constants';
 
+import { EXPLORE_BUTTON_HEIGHT } from '../TopPicks.styles';
+
 const ASSET_MARGIN_TOP = {
   /* eslint-disable sort-keys */
   S: 40,
@@ -66,20 +68,24 @@ export const styles: StylesMap = {
     alignItems: 'center',
     display: 'flex',
     flexDirection: 'column',
-    minHeight: `calc(40vh - ${NAV_HEIGHT.S}px)`,
+    minHeight: `calc(40vh - ${EXPLORE_BUTTON_HEIGHT.S}px)`,
     paddingBottom: SPACING.SIZE_25,
     paddingTop: SPACING.SIZE_25,
 
     [MQ.M]: {
-      minHeight: `calc(35vh - ${NAV_HEIGHT.S}px)`,
+      minHeight: `calc(35vh - ${EXPLORE_BUTTON_HEIGHT.S}px)`,
       paddingBottom: SPACING.SIZE_40,
       paddingTop: SPACING.SIZE_40,
     },
 
     [MQ.L]: {
-      minHeight: `calc(33.333333vh - ${NAV_HEIGHT.S}px)`,
+      minHeight: `calc(33.333333vh - ${EXPLORE_BUTTON_HEIGHT.S}px)`,
       paddingBottom: SPACING.SIZE_25,
       paddingTop: SPACING.SIZE_25,
+    },
+
+    [MQ.XL]: {
+      minHeight: `calc(33.333333vh - ${EXPLORE_BUTTON_HEIGHT.XL}px)`,
     },
   },
   brand: {
@@ -87,18 +93,13 @@ export const styles: StylesMap = {
     display: 'block',
   },
   brandWithImage: {
-    maxWidth: WHEEL_WIDTH.S,
+    height: 20,
+    width: '100%',
 
-    [MQ.M]: {
-      maxWidth: WHEEL_WIDTH.M,
-    },
-
-    [MQ.L]: {
-      maxWidth: WHEEL_WIDTH.L,
-    },
-
-    [MQ.XL]: {
-      maxWidth: WHEEL_WIDTH.XL,
+    img: {
+      height: '100%',
+      margin: '0 auto',
+      width: 'auto',
     },
   },
   cta: {
@@ -206,6 +207,7 @@ export const styles: StylesMap = {
     marginTop: SPACING.SIZE_02,
   },
   root: {
+    boxSizing: 'border-box',
     margin: '0 auto',
     width: 250,
 
@@ -263,6 +265,7 @@ export const styles: StylesMap = {
   },
   // Take whatever space's left
   titleContainer: {
+    color: COLORS.GLOBAL.BLACK,
     display: 'block',
     flex: '1 1 auto',
     pointerEvents: 'none',
@@ -299,19 +302,19 @@ export const styles: StylesMap = {
   },
   topContent: {
     display: 'block',
-    height: `calc(60vh - ${NAV_HEIGHT.S}px)`,
+    height: '60vh',
     minHeight: 385,
     paddingTop: NAV_HEIGHT.S,
     width: '100%',
 
     [MQ.M]: {
-      height: `calc(65vh - ${NAV_HEIGHT.M}px)`,
+      height: '65vh',
       minHeight: 517,
       paddingTop: NAV_HEIGHT.M,
     },
 
     [MQ.L]: {
-      height: `calc(66.6666666vh - ${NAV_HEIGHT.L}px)`,
+      height: '66.6666666vh',
       minHeight: 538,
       paddingTop: NAV_HEIGHT.L,
     },

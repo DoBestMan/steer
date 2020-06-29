@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 
-import CatalogPage from '~/components/pages/CatalogPage/CatalogPage';
+import CatalogPageContainer from '~/components/pages/CatalogPage/CatalogPage.container';
 // import { COLORS } from '~/lib/constants';
 import { isRouteDiameterFormat } from '~/lib/utils/routes';
 
@@ -20,7 +20,7 @@ function TireCategory() {
   const dataFn = isDiameterRoute ? fetchDiameter : fetchClassic;
   dataFn(/* api options/params */);
 
-  return <CatalogPage hasTopPicks={false} />;
+  return <CatalogPageContainer hasTopPicks={false} />;
 }
 
 export default TireCategory;

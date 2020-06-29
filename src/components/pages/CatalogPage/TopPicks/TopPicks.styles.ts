@@ -1,25 +1,24 @@
 import { CSSObject } from '@emotion/core';
 
-import { COLORS, EASING, TIME } from '~/lib/constants';
+import { COLORS, EASING, MQ, TIME } from '~/lib/constants';
+
+export const EXPLORE_BUTTON_HEIGHT = {
+  S: 60,
+  XL: 66,
+};
 
 export const styles: CSSObject = {
   exploreButton: {
     alignItems: 'center',
     backgroundColor: COLORS.GLOBAL.ORANGE,
     borderTop: `1px solid ${COLORS.ORANGE.TINT_30}`,
-    bottom: 0,
     boxSizing: 'border-box',
     color: COLORS.GLOBAL.WHITE,
     display: 'flex',
     justifyContent: 'space-between',
-    left: 0,
     padding: 20,
-    position: 'fixed',
     textAlign: 'left',
     width: '100%',
-  },
-  isStatic: {
-    position: 'static',
   },
   pick: {
     position: 'relative',
@@ -45,11 +44,12 @@ export const styles: CSSObject = {
     '.swiper-slide-prev': {
       zIndex: 1,
     },
-    '.swiper-wrapper': {
-      boxSizing: 'border-box',
-    },
 
-    // so the explore more button doesn't jump
-    minHeight: '100vh',
+    // so the explore more button doesn't jump and sticks to the bottom
+    minHeight: `calc(100vh - ${EXPLORE_BUTTON_HEIGHT.S}px)`,
+
+    [MQ.XL]: {
+      minHeight: `calc(100vh - ${EXPLORE_BUTTON_HEIGHT.XL}px)`,
+    },
   },
 };

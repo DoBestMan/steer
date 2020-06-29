@@ -25,18 +25,18 @@ export const styles: CSSObject = {
 
   topContent: {
     flex: '0 1 auto',
-    height: `calc(60vh - ${NAV_HEIGHT.S}px)`,
+    height: '60vh',
     minHeight: 385,
     paddingTop: NAV_HEIGHT.S,
 
     [MQ.M]: {
-      height: `calc(65vh - ${NAV_HEIGHT.M}px)`,
+      height: '65vh',
       minHeight: 517,
       paddingTop: NAV_HEIGHT.M,
     },
 
     [MQ.L]: {
-      height: `calc(66.66666666vh - ${NAV_HEIGHT.L}px)`,
+      height: '66.66666666vh',
       minHeight: 538,
       paddingTop: NAV_HEIGHT.L,
     },

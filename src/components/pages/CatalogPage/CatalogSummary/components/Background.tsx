@@ -7,7 +7,6 @@ function styledBackgroundContainer() {
     backgroundColor: COLORS.LIGHT.OFF_WHITE,
     height: '100vh',
     left: 0,
-    overflow: 'hidden',
     pointerEvents: 'none',
     position: 'absolute',
     top: 0,

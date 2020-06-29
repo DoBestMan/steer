@@ -74,8 +74,12 @@ export function ProductInfoWithKnobs() {
   const ratingQuantity = number('Rating quantity', 113, {}, ratingGroupId);
   const ratingValue = number('Rating', 4.3, ratingOptions, ratingGroupId);
   const price = {
-    currentInCents: text('Current price (cents)', '7699', priceGroupId),
-    originalInCents: text('Original price (cents)', '12000', priceGroupId),
+    salePriceInCents: text('Current price (cents)', '7699', priceGroupId),
+    estimatedRetailPriceInCents: text(
+      'Original price (cents)',
+      '12000',
+      priceGroupId,
+    ),
   };
   const discount = text('Discount', '60%', priceGroupId);
   const itemsLeft = number('Items left', 4, {}, priceGroupId);
@@ -133,8 +137,8 @@ export function ProductInfoDefault() {
       brandURL={mockLogoURL}
       name={mockProductName}
       price={{
-        currentInCents: '13296',
-        originalInCents: '15099',
+        salePriceInCents: '13296',
+        estimatedRetailPriceInCents: '15099',
       }}
       rating={{
         quantity: 115,
@@ -158,8 +162,8 @@ export function ProductInfoPromoTags() {
       brandURL={mockLogoURL}
       name={mockProductName}
       price={{
-        currentInCents: '13296',
-        originalInCents: '15099',
+        salePriceInCents: '13296',
+        estimatedRetailPriceInCents: '15099',
       }}
       rating={{
         quantity: 115,
@@ -208,8 +212,8 @@ export function ProductInfoLongNameNoBrandLogo() {
       availableSizes={32}
       handleChangeSize={action('click-change-size')}
       price={{
-        currentInCents: '13296',
-        originalInCents: '15099',
+        salePriceInCents: '13296',
+        estimatedRetailPriceInCents: '15099',
       }}
       size={mockSizeLabel}
       loadIndex={mockSizeLoadIndex}
@@ -227,8 +231,8 @@ export function ProductInfoDiscountBadge() {
       brandURL={mockLogoURL}
       name={mockProductName}
       price={{
-        currentInCents: '13296',
-        originalInCents: '15099',
+        salePriceInCents: '13296',
+        estimatedRetailPriceInCents: '15099',
       }}
       rating={{
         quantity: 115,
@@ -253,8 +257,8 @@ export function ProductInfoOnly4LeftBadge() {
       brandURL={mockLogoURL}
       name={mockProductName}
       price={{
-        currentInCents: '13296',
-        originalInCents: '15099',
+        salePriceInCents: '13296',
+        estimatedRetailPriceInCents: '15099',
       }}
       rating={{
         quantity: 115,
@@ -279,8 +283,8 @@ export function ProductInfoBothBadges() {
       brandURL={mockLogoURL}
       name={mockProductName}
       price={{
-        currentInCents: '13296',
-        originalInCents: '15099',
+        salePriceInCents: '13296',
+        estimatedRetailPriceInCents: '15099',
       }}
       rating={{
         quantity: 115,
@@ -351,8 +355,8 @@ export function ProductInfoNoReviews() {
       brandURL={mockLogoURL}
       name={mockProductName}
       price={{
-        currentInCents: '13296',
-        originalInCents: '15099',
+        salePriceInCents: '13296',
+        estimatedRetailPriceInCents: '15099',
       }}
       availableSizes={32}
       size={mockSizeLabel}

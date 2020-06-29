@@ -1,4 +1,4 @@
 export interface SitePrice {
-  currentInCents: string;
-  originalInCents: string | null;
+  estimatedRetailPriceInCents: string;
+  salePriceInCents: string;
 }

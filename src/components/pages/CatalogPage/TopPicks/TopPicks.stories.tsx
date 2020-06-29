@@ -24,7 +24,7 @@ export function TopPicksWithKnobs() {
     /* eslint-disable sort-keys */
     {
       header: {
-        titleLine1: "Civic's 1st pick",
+        titleLine1: "Civic's 1st pick:",
         titleLine2: 'Keep original tire',
         subtitle: 'That came with your Honda from the factory',
         pill: null,
@@ -62,8 +62,8 @@ export function TopPicksWithKnobs() {
           {
             label: null,
             price: {
-              currentInCents: '23255',
-              originalInCents: '17800',
+              salePriceInCents: '23255',
+              estimatedRetailPriceInCents: '17800',
             } as SitePrice,
           },
         ],
@@ -105,7 +105,7 @@ export function TopPicksWithKnobs() {
     } as SiteCatalogSummaryTopPickItem,
     {
       header: {
-        titleLine1: '215/50R17 ∙ 2nd pick',
+        titleLine1: '215/50R17 ∙ 2nd pick:',
         titleLine2: 'The best seller',
         subtitle: 'Excellent price and a high-mileage warranty',
         pill: null,
@@ -141,8 +141,8 @@ export function TopPicksWithKnobs() {
           {
             label: null,
             price: {
-              currentInCents: '13296',
-              originalInCents: '15900',
+              salePriceInCents: '13296',
+              estimatedRetailPriceInCents: '15900',
             } as SitePrice,
           },
         ],
@@ -170,7 +170,7 @@ export function TopPicksWithKnobs() {
 
     {
       header: {
-        titleLine1: '215/50R17 ∙ 3rd pick',
+        titleLine1: '215/50R17 ∙ 3rd pick:',
         titleLine2: 'The best match',
         subtitle: null,
         pill: 'best match',
@@ -207,8 +207,8 @@ export function TopPicksWithKnobs() {
           {
             label: null,
             price: {
-              currentInCents: '15299',
-              originalInCents: '17900',
+              salePriceInCents: '15299',
+              estimatedRetailPriceInCents: '17900',
             } as SitePrice,
           },
         ],
@@ -271,6 +271,8 @@ export function TopPicksWithKnobs() {
 
   const totalResult = 232;
   const location = 'Brooklyn, NY';
+  const exploreMore = () => {};
+  const openSearch = () => {};
 
   return (
     <div css={styles.root}>
@@ -279,6 +281,8 @@ export function TopPicksWithKnobs() {
         <div css={styles.bottomContent}></div>
       </div>
       <TopPicks
+        exploreMore={exploreMore}
+        openSearch={openSearch}
         totalResult={totalResult}
         viewMoreData={viewMoreData}
         picks={picks}

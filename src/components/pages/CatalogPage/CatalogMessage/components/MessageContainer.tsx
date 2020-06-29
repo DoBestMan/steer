@@ -103,25 +103,7 @@ function styledMessageContainer({
       return [
         baseStyles,
         {
-          '> *': {
-            opacity: 0,
-            // transition in and out
-            transition: `opacity ${TIMINGS.CONTENT_IN_OUT}ms ${EASING.CUBIC_EASE_IN_OUT}`,
-          },
-        },
-        isEntering && {
-          '> *': {
-            // prevent flash of transition on appear
-            transition: 'none',
-          },
-        },
-        isEntered && {
-          '> *': {
-            opacity: 1,
-            transitionDelay: showLoadingInterstitial
-              ? 0
-              : TIMINGS.STAGE_TRANSITION / 2,
-          },
+          backgroundColor: 'transparent',
         },
       ];
     case STAGES.NO_RESULTS:

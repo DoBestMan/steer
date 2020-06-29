@@ -2,7 +2,7 @@ import { useTheme } from 'emotion-theming';
 import { useRouter } from 'next/dist/client/router';
 import { useEffect, useState } from 'react';
 import { Transition } from 'react-transition-group';
-import { TransitionStatus } from 'react-transition-group/Transition';
+import { EXITED, TransitionStatus } from 'react-transition-group/Transition';
 
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
@@ -29,7 +29,13 @@ const CONSTANTS = {
 };
 
 function Nav({ isHomepage }: Props) {
-  const { links, toggleSubNav, createSelectLinkHandler } = useNavContext();
+  const {
+    links,
+    isHidden,
+    setIsHidden,
+    toggleSubNav,
+    createSelectLinkHandler,
+  } = useNavContext();
   const { textColor, linkTheme, logoUrl } = useTheme();
   const router = useRouter();
 
@@ -39,12 +45,21 @@ function Nav({ isHomepage }: Props) {
     if (!router) {
       return;
     }
+
     setPath(router.pathname);
-  }, [router]);
+
+    // path has changed, the nav can't be hidden!
+    setIsHidden(false);
+  }, [router, setIsHidden]);
 
   return (
     <Transition appear in={router && path === router?.pathname} timeout={400}>
       {(containerTransitionState: TransitionStatus) => {
+        // We force the nav to stay hidden
+        if (isHidden) {
+          containerTransitionState = EXITED;
+        }
+
         const rootStyles = [
           styles.root,
           textColor,

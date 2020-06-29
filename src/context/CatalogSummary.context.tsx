@@ -26,16 +26,16 @@ const CatalogSummaryContext = createContext<CatalogSummaryContextProps>();
 interface SetupProps {
   catalogSummaryResponse: SiteCatalogSummary;
   isSearch: boolean;
-  numberOfProducts: number;
 }
 
 // TODO: Exported for testing only
 export function useContextSetup({
   catalogSummaryResponse,
   isSearch,
-  numberOfProducts,
 }: SetupProps) {
-  const hasResults = numberOfProducts > 0;
+  const totalResult =
+    catalogSummaryResponse.siteCatalogSummaryMeta?.totalResults || 0;
+  const hasResults = totalResult > 0;
   const mustShowPrompt =
     catalogSummaryResponse.siteCatalogSummaryPrompt?.mustShow;
 
@@ -128,7 +128,6 @@ export function useContextSetup({
     catalogSummary: catalogSummaryResponse,
     contentStage,
     isSearch,
-    numberOfProducts,
     setNewContent: () => {
       // Called after the previous content message exit transition.
       // Brings `contentStage` back in alignment with `stage`.
@@ -144,17 +143,14 @@ export function CatalogSummaryContextProvider({
   catalogSummaryResponse,
   children,
   isSearch,
-  numberOfProducts,
 }: {
   catalogSummaryResponse: SiteCatalogSummary;
   children: ReactNode;
   isSearch: boolean;
-  numberOfProducts: number;
 }) {
   const value = useContextSetup({
     catalogSummaryResponse,
     isSearch,
-    numberOfProducts,
   });
   return (
     <CatalogSummaryContext.Provider value={value}>

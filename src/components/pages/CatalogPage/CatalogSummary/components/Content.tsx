@@ -29,7 +29,25 @@ function styledContent(props: Props) {
     },
   };
 
-  return base;
+  switch (stage) {
+    case STAGES.TOP_PICKS:
+      return [
+        base,
+        {
+          paddingTop: 0,
+
+          [MQ.M]: {
+            paddingTop: 0,
+          },
+
+          [MQ.L]: {
+            paddingTop: 0,
+          },
+        },
+      ];
+    default:
+      return base;
+  }
 }
 
 export default styled('div')<Props>(styledContent);

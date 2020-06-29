@@ -4,6 +4,7 @@ import {
 } from './cloudinary.constants';
 import {
   Angle,
+  ColorSpace,
   CropMode,
   Effect,
   FetchFormat,
@@ -69,6 +70,9 @@ export function transformation(
           let effectArray;
           let effectName;
           let effectValue;
+          let colorArray;
+          let colorSpace;
+          let colorValue;
 
           // Can't use a map object because functions have different possible argument types
           switch (key) {
@@ -85,6 +89,20 @@ export function transformation(
               break;
             case 'border':
               transformValue = border(transformation[key] as string);
+              break;
+            case 'color':
+              colorArray = Array.isArray(transformation[key])
+                ? transformation[key]
+                : [transformation[key]];
+
+              if (!colorArray || !colorArray[0]) {
+                break;
+              }
+
+              colorSpace = colorArray[0] as ColorSpace;
+              colorValue = colorArray[1] && (colorArray[1] as string);
+
+              transformValue = color(colorSpace, colorValue);
               break;
             case 'crop':
               transformValue = crop(transformation[key] as CropMode);
@@ -163,12 +181,16 @@ function border(bo: string): string {
   return `bo_${bo}`;
 }
 
+function color(c: ColorSpace, value = ''): string {
+  return `co_${c}:${value}`;
+}
+
 function crop(c: CropMode): string {
   return `c_${c}`;
 }
 
 function effect(e: Effect, value: string | number = ''): string {
-  return `e_${e}${value}`;
+  return `e_${e}:${value}`;
 }
 
 function fetchFormat(f: FetchFormat): string {

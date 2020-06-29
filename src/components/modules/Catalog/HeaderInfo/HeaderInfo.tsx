@@ -5,6 +5,7 @@ import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Link from '~/components/global/Link/Link';
 import Toggle from '~/components/global/Toggle/Toggle';
 import { LINK_ICON_POSITION } from '~/lib/constants';
+import { scrollTo } from '~/lib/helpers/scroll';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import styles from '../Header.styles';
@@ -29,6 +30,11 @@ export default function HeaderInfo({
   title,
 }: Props) {
   const { header } = useTheme();
+
+  const backToTopPicks = () => {
+    scrollTo(0, 1);
+  };
+
   const infoStyles = [styles.info, header.text];
   const backEl = isInternal ? (
     <Link
@@ -43,6 +49,7 @@ export default function HeaderInfo({
     <Link
       css={[styles.action, styles.back]}
       as="button"
+      onClick={backToTopPicks}
       icon={ICONS.ARROW_UP}
     />
   );

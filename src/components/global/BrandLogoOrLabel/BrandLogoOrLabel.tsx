@@ -9,7 +9,7 @@ interface Props extends SiteImageExtended {
 }
 
 function BrandLogoOrLabel(props: Props) {
-  const { brand, widths } = props;
+  const { brand, widths, ...rest } = props;
 
   return (
     <>
@@ -19,6 +19,7 @@ function BrandLogoOrLabel(props: Props) {
           as={'span'}
           widths={widths}
           aria-label={brand.label}
+          {...rest}
         />
       ) : (
         <span css={typography.secondaryHeadline}>{brand.label}</span>

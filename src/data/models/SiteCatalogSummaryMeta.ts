@@ -7,5 +7,6 @@ export interface SiteCatalogSummaryMeta {
   sceneryType: Sceneries;
   sizeList: string[];
   tireImage: SiteImage;
+  totalResults: number;
   vehicleType: Cars;
 }

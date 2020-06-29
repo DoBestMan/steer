@@ -124,20 +124,32 @@ const paramsScrollTo: ParamsScrollTo = {
   y: 0,
 };
 
+let cancelScrollTo = false;
+
 export const scrollTo = (to: number, duration = 1, cb?: () => void) => {
   paramsScrollTo.from = window.scrollY || window.pageYOffset;
   paramsScrollTo.duration = duration;
   paramsScrollTo.to = to;
   paramsScrollTo.cb = cb;
 
+  cancelScrollTo = false;
+
   if (paramsScrollTo.to !== paramsScrollTo.from) {
     window.requestAnimationFrame(scrollToRAF);
   } else if (cb) {
     cb();
   }
+
+  return () => {
+    cancelScrollTo = true;
+  };
 };
 
 const scrollToRAF = () => {
+  if (cancelScrollTo) {
+    return;
+  }
+
   // const deltaValue = paramsScrollTo.to - paramsScrollTo.from;
   const duration = paramsScrollTo.fps * paramsScrollTo.duration;
 

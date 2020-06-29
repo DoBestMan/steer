@@ -35,6 +35,14 @@ const styles: StylesMap = {
   header: {
     marginBottom: SPACING.SIZE_40,
   },
+  headerContainer: {
+    height: '100%',
+    left: 0,
+    position: 'absolute',
+    top: 0,
+    width: '100%',
+    zIndex: -1,
+  },
   info: [
     typography.primarySubhead,
     {

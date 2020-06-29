@@ -1,9 +1,9 @@
 // final structure should be something like `/firestone-tires/winter`
 
-import CatalogPage from '~/components/pages/CatalogPage/CatalogPage';
+import CatalogPageContainer from '~/components/pages/CatalogPage/CatalogPage.container';
 
 function BrandCategory() {
-  return <CatalogPage hasTopPicks={false} />;
+  return <CatalogPageContainer hasTopPicks={false} />;
 }
 
 export default BrandCategory;

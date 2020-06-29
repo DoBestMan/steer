@@ -8,6 +8,7 @@ import FilterButtonsCarousel from './Filters/FilterButtonsCarousel';
 import mockFilters, { filterRange, filterSort } from './Filters/Filters.mocks';
 import { getGroupedFilters } from './Filters/Filters.utils';
 import SubFilters from './Filters/SubFilters/SubFilters';
+import { DATA_COMPONENT_LABEL } from './Header.constants';
 import styles from './Header.styles';
 import HeaderInfo from './HeaderInfo/HeaderInfo';
 
@@ -38,24 +39,30 @@ export default function Header({
 
   return (
     <>
-      <div
-        css={[styles.root, header.background, !hasTopPicks && styles.navOffset]}
-      >
-        <HeaderInfo
-          isInternal={isInternal}
-          isAdvancedView={isAdvancedView}
-          hasTopPicks={hasTopPicks}
-          {...rest}
-        />
-        <p css={[styles.filterLabel, header.text]}>
-          {ui('catalog.header.filterLabel')}:
-        </p>
-        {!isLoading && (
-          <FilterButtonsCarousel
-            popularFilters={groupedFilters ? groupedFilters.popularFilters : []}
-            filters={filtersToMap}
+      <div css={[styles.root, !hasTopPicks && styles.navOffset]}>
+        {/* For opacity animation only (see <CatalogGrid>) */}
+        <div css={[styles.headerContainer, header.background]}></div>
+
+        {/* "data-component" used in <CatalogGrid> */}
+        <div data-component={DATA_COMPONENT_LABEL}>
+          <HeaderInfo
+            isInternal={isInternal}
+            isAdvancedView={isAdvancedView}
+            hasTopPicks={hasTopPicks}
+            {...rest}
           />
-        )}
+          <p css={[styles.filterLabel, header.text]}>
+            {ui('catalog.header.filterLabel')}:
+          </p>
+          {!isLoading && (
+            <FilterButtonsCarousel
+              popularFilters={
+                groupedFilters ? groupedFilters.popularFilters : []
+              }
+              filters={filtersToMap}
+            />
+          )}
+        </div>
       </div>
       <SubFilters
         resultsCount={resultsCount}

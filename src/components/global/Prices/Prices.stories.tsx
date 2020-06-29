@@ -25,16 +25,16 @@ export function PricesWithKnobs() {
     'Default',
   );
   const showMultiple = boolean('Show multiple prices', false);
-  const currentInCents = text('Current price (cents)', '15975');
-  const originalInCents = text('Original price (cents)', '13296');
+  const salePriceInCents = text('Current price (cents)', '15975');
+  const estimatedRetailPriceInCents = text('Original price (cents)', '13296');
   const originalPrefix = text('Original price prefix', '');
 
   const priceList = [
     {
       label: showMultiple ? 'Front' : null,
       price: {
-        currentInCents,
-        originalInCents,
+        salePriceInCents,
+        estimatedRetailPriceInCents,
       },
     },
   ];
@@ -43,8 +43,8 @@ export function PricesWithKnobs() {
     priceList.push({
       label: 'Rear',
       price: {
-        currentInCents,
-        originalInCents,
+        salePriceInCents,
+        estimatedRetailPriceInCents,
       },
     });
   }
@@ -73,15 +73,15 @@ export function MultiplePrices() {
     {
       label: 'Front',
       price: {
-        currentInCents: '15975',
-        originalInCents: null,
+        salePriceInCents: '15975',
+        estimatedRetailPriceInCents: '15975',
       },
     },
     {
       label: 'Rear',
       price: {
-        currentInCents: '11975',
-        originalInCents: null,
+        salePriceInCents: '11975',
+        estimatedRetailPriceInCents: '11975',
       },
     },
   ];
@@ -94,8 +94,8 @@ export function DiscountedPrices() {
     {
       label: null,
       price: {
-        currentInCents: '15975',
-        originalInCents: '13296',
+        salePriceInCents: '15975',
+        estimatedRetailPriceInCents: '13296',
       },
     },
   ];
@@ -108,15 +108,15 @@ export function LightPrices() {
     {
       label: 'Front',
       price: {
-        currentInCents: '15975',
-        originalInCents: '13295',
+        salePriceInCents: '15975',
+        estimatedRetailPriceInCents: '13295',
       },
     },
     {
       label: 'Rear',
       price: {
-        currentInCents: '11975',
-        originalInCents: '15893',
+        salePriceInCents: '11975',
+        estimatedRetailPriceInCents: '15893',
       },
     },
   ];
@@ -137,15 +137,15 @@ export function LargePrices() {
     {
       label: 'Front',
       price: {
-        currentInCents: '15975',
-        originalInCents: '13295',
+        salePriceInCents: '15975',
+        estimatedRetailPriceInCents: '13295',
       },
     },
     {
       label: 'Rear',
       price: {
-        currentInCents: '11975',
-        originalInCents: '15893',
+        salePriceInCents: '11975',
+        estimatedRetailPriceInCents: '15893',
       },
     },
   ];
@@ -175,8 +175,8 @@ export function StartAtPrice() {
     {
       label: null,
       price: {
-        currentInCents: '15975',
-        originalInCents: '',
+        salePriceInCents: '15975',
+        estimatedRetailPriceInCents: '',
       },
     },
   ];

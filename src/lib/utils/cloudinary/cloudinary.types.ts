@@ -15,6 +15,7 @@ export enum AudioCodec {
 
 export enum ColorSpace {
   NO_SMYK = 'no_cmyk',
+  RGB = 'rgb',
   SRGB = 'srgb',
 }
 
@@ -231,6 +232,7 @@ export type Transformations = {
   aspectRatio?: string | number;
   background?: string;
   border?: string;
+  color?: ColorSpace | [ColorSpace, string];
   crop?: CropMode;
   effect?: Effect | [Effect, string | number];
   fetchFormat?: FetchFormat;

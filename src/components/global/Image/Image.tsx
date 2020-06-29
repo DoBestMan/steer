@@ -12,7 +12,6 @@ import { getMinimalQuery, getSrcset } from './Image.utils';
 interface Props extends SiteImageExtended {
   altText: string;
   as?: ReactType;
-  customStyles?: CSSStyles;
   height?: string | number;
   src: string;
   width?: string | number;

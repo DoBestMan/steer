@@ -28,10 +28,10 @@ function Prices({
     <>
       {priceList ? (
         priceList.map(({ label, price }) => (
-          <div key={price.currentInCents}>
+          <div key={price.salePriceInCents}>
             <span
               css={[
-                (price.originalInCents || isStartingAtPrice) && {
+                (price.estimatedRetailPriceInCents || isStartingAtPrice) && {
                   color: COLORS.GLOBAL.ORANGE,
                 },
                 isLight && { color: COLORS.GLOBAL.WHITE },
@@ -43,9 +43,9 @@ function Prices({
               {isStartingAtPrice && (
                 <span css={styles.label}>{ui('common.startingAtPrice')} </span>
               )}
-              {formatDollars(price.currentInCents)}
+              {formatDollars(price.salePriceInCents)}
             </span>
-            {price.originalInCents && !isStartingAtPrice && (
+            {price.estimatedRetailPriceInCents && !isStartingAtPrice && (
               <span
                 css={[
                   styles.originalValue,
@@ -53,12 +53,12 @@ function Prices({
                   originalPrefix && styles.originalValuePrefixed,
                 ]}
                 aria-label={`${ui('common.originalPricePrefix')}${formatDollars(
-                  price.originalInCents,
+                  price.estimatedRetailPriceInCents,
                 )}`}
               >
                 <span aria-hidden>
                   {originalPrefix}
-                  {formatDollars(price.originalInCents)}
+                  {formatDollars(price.estimatedRetailPriceInCents)}
                 </span>
               </span>
             )}

@@ -1,7 +1,7 @@
-import CatalogPage from '~/components/pages/CatalogPage/CatalogPage';
+import CatalogPageContainer from '~/components/pages/CatalogPage/CatalogPage.container';
 
 function Catalog() {
-  return <CatalogPage />;
+  return <CatalogPageContainer />;
 }
 
 export default Catalog;

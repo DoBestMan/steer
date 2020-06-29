@@ -24,9 +24,11 @@ export interface NavContextProps {
   handleClearCategory: () => void;
   handleClearLink: () => void;
   handleCloseSubNav: () => void;
+  isHidden: boolean;
   isSubNavOpen: boolean;
   links: Array<LinkType | ActionType>;
   linksMobile: Array<LinkType | ActionType>;
+  setIsHidden: (isHidden: boolean) => void;
   toggleSubNav: () => void;
 }
 
@@ -84,6 +86,7 @@ function buildLinks({
 
 // Exported for testing only
 export function useNavContextSetup() {
+  const [isHidden, setIsHidden] = useState(false);
   const [isSubNavOpen, setIsSubNavOpen] = useState(false);
   const [activeLink, setActiveLink] = useState('');
   const [activeCategory, setActiveCategory] = useState('');
@@ -120,9 +123,11 @@ export function useNavContextSetup() {
       setActiveCategory('');
       setIsSubNavOpen(false);
     },
+    isHidden,
     isSubNavOpen,
     links,
     linksMobile,
+    setIsHidden,
     toggleSubNav: () => {
       setIsSubNavOpen(!isSubNavOpen);
     },

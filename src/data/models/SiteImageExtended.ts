@@ -1,7 +1,8 @@
-import { Loading } from '~/lib/constants';
+import { CSSStyles, Loading } from '~/lib/constants';
 import { TransformationArgs } from '~/lib/utils/cloudinary/cloudinary.types';
 
 export interface SiteImageExtended {
+  customStyles?: CSSStyles;
   loading?: Loading;
   responsive?: boolean;
   srcSet?: string | null;

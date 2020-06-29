@@ -10,6 +10,7 @@ import Image from '~/components/global/Image/Image';
 import BaseLink from '~/components/global/Link/BaseLink';
 import Loading from '~/components/global/Loading/Loading';
 import Markdown from '~/components/global/Markdown/Markdown';
+import TopPicks from '~/components/pages/CatalogPage/TopPicks/TopPicks.container';
 import { useCatalogSummaryContext } from '~/context/CatalogSummary.context';
 import { SiteCatalogSummaryBuildIn } from '~/data/models/SiteCatalogSummaryBuildIn';
 import { SiteCatalogSummaryPrompt } from '~/data/models/SiteCatalogSummaryPrompt';
@@ -67,8 +68,8 @@ export function BuildInMessage({
         <h2 aria-label={siteCatalogSummaryBuildIn.title} css={styles.heading}>
           {splitTitle.length > 1 ? (
             <span aria-hidden>
-              {splitTitle.map((s) => (
-                <>{s}</>
+              {splitTitle.map((s, i) => (
+                <span key={i}>{s}</span>
               ))}
             </span>
           ) : (
@@ -113,6 +114,7 @@ export function DataMomentMessage({
   siteCatalogSummaryPrompt,
 }: DataMomentMessageProps) {
   const { message } = useTheme();
+
   return (
     siteCatalogSummaryPrompt && (
       <Grid css={styles.container}>
@@ -256,11 +258,15 @@ const mapMessageToStage = {
   [STAGES.LOADING]: LoadingIndicator,
   [STAGES.BUILD_IN]: BuildInMessage,
   [STAGES.DATA_MOMENT]: DataMomentMessage,
-  [STAGES.TOP_PICKS]: null,
+  [STAGES.TOP_PICKS]: TopPicks,
   [STAGES.NO_RESULTS]: NoResultsMessage,
 };
 
-function CatalogMessage() {
+interface CatalogMessageProps {
+  exploreMore: () => void;
+}
+
+function CatalogMessage({ exploreMore }: CatalogMessageProps) {
   const {
     catalogSummary,
     contentStage,
@@ -286,7 +292,13 @@ function CatalogMessage() {
           transitionStatus={transitionStatus}
         >
           {MessageComponent && (
-            <MessageComponent {...catalogSummary} setStage={setStage} />
+            <MessageComponent
+              key={contentStage}
+              {...catalogSummary}
+              setStage={setStage}
+              // used only by top picks
+              exploreMore={exploreMore}
+            />
           )}
         </MessageContainer>
       )}

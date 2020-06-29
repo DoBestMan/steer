@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 
-import CatalogPage from '~/components/pages/CatalogPage/CatalogPage';
+import CatalogPageContainer from '~/components/pages/CatalogPage/CatalogPage.container';
 import { SiteCatalogSummary } from '~/data/models/SiteCatalogSummary';
 import { useApiDataWithDefault } from '~/hooks/useApiDataWithDefault';
 import { eventEmitters } from '~/lib/events/emitters';
@@ -38,7 +38,7 @@ function VehicleCatalogContainer({ serverData }: VehicleCatalogData) {
     console.error(error);
   }
 
-  return <CatalogPage siteCatalogSummary={siteCatalogSummary} />;
+  return <CatalogPageContainer siteCatalogSummary={siteCatalogSummary} />;
 }
 
 export default VehicleCatalogContainer;

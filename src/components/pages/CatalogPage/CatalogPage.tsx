@@ -1,19 +1,14 @@
 import { ThemeProvider } from 'emotion-theming';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useRef } from 'react';
 
-import HeaderContainer from '~/components/modules/Catalog/Header.container';
+import { useCatalogPageContext } from '~/context/CatalogPage.context';
 import { CatalogSummaryContextProvider } from '~/context/CatalogSummary.context';
 import { SiteCatalogSummary } from '~/data/models/SiteCatalogSummary';
 
+import CatalogGrid from './CatalogGrid/CatalogGrid';
 import styles from './CatalogPage.styles';
 import { defaultTheme, headerAdvanced } from './CatalogPage.theme';
-import CatalogProductGrid from './CatalogProductGrid/CatalogProductGrid';
-import CatalogProductGroups from './CatalogProductGroups/CatalogProductGroups';
-import {
-  productGroupList,
-  products,
-} from './CatalogProductGroups/CatalogProductGroups.mocks';
 import CatalogSummary from './CatalogSummary/CatalogSummary';
 import {
   vehiclesDisambiguation,
@@ -22,34 +17,42 @@ import {
 } from './CatalogSummary/CatalogSummary.mocks';
 
 interface Props {
-  hasTopPicks?: boolean;
+  comesFromSearch: boolean;
+  hasTopPicks: boolean;
   siteCatalogSummary?: SiteCatalogSummary;
 }
 
-function CatalogPage({ hasTopPicks = true, siteCatalogSummary }: Props) {
-  const [isAdvancedView, setIsAdvancedView] = useState(false);
-  function toggleView() {
-    setIsAdvancedView(!isAdvancedView);
-  }
-
+function CatalogPage({
+  hasTopPicks,
+  comesFromSearch,
+  siteCatalogSummary,
+}: Props) {
   // TEMP: use route params for testing flows
   const router = useRouter();
-  const { flow, isSearch } = router.query;
+  const catalogGrid = useRef<HTMLDivElement | null>(null);
 
-  // SiteCatalogSummary response
+  const { isAdvancedView, showCatalogGrid } = useCatalogPageContext();
+
+  const { flow } = router.query;
+
+  // TODO: Fake data waiting for mock data: SiteCatalogSummary response
   let catalogSummaryResponse = vehiclesNoOeWithSize;
-  // From the SiteCatalogProducts response
-  let numberOfProducts = 232;
 
   if (flow === 'disambiguation') {
     catalogSummaryResponse = vehiclesDisambiguation;
   } else if (flow === 'noResults') {
     catalogSummaryResponse = vehiclesNoResultWithTrim;
-    numberOfProducts = 0;
   }
 
-  // TODO: logic of grouped vs. grid views — for now we only use grid for advanced view
-  const isGroupedProducts = !isAdvancedView;
+  const totalResult =
+    catalogSummaryResponse.siteCatalogSummaryMeta?.totalResults || 0;
+  const hasResults = totalResult > 0;
+
+  const exploreMore = () => {
+    if (catalogGrid && catalogGrid.current) {
+      catalogGrid.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <ThemeProvider
@@ -61,25 +64,19 @@ function CatalogPage({ hasTopPicks = true, siteCatalogSummary }: Props) {
             catalogSummaryResponse={
               siteCatalogSummary || catalogSummaryResponse
             }
-            isSearch={isSearch === 'true'}
-            numberOfProducts={numberOfProducts}
+            isSearch={comesFromSearch}
           >
-            <CatalogSummary />
+            <CatalogSummary exploreMore={exploreMore} />
           </CatalogSummaryContextProvider>
         )}
-        <HeaderContainer
-          sizeList={siteCatalogSummary?.siteCatalogSummaryMeta?.sizeList}
-          hasTopPicks={hasTopPicks}
-          toggleView={toggleView}
-          isAdvancedView={isAdvancedView}
-        />
-        {isGroupedProducts ? (
-          <CatalogProductGroups productGroupList={productGroupList} />
-        ) : (
-          <CatalogProductGrid
-            productList={products}
-            isAdvancedView={isAdvancedView}
-          />
+        {/* Render when there's result, and not coming from search */}
+        {hasResults && showCatalogGrid && (
+          <div ref={catalogGrid}>
+            <CatalogGrid
+              hasTopPicks={hasTopPicks}
+              siteCatalogSummary={siteCatalogSummary}
+            />
+          </div>
         )}
       </div>
     </ThemeProvider>
