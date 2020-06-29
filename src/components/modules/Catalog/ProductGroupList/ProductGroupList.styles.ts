@@ -11,9 +11,10 @@ const styles: StylesMap = {
     },
   },
   description: [
-    typography.largeCopy,
+    typography.labelHeadline,
     {
       color: COLORS.LIGHT.GRAY_70,
+      fontWeight: 'normal',
       marginTop: SPACING.SIZE_10,
     },
   ],
