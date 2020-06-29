@@ -89,6 +89,10 @@ const styles: StylesMap = {
     },
   },
 
+  logoLink: {
+    display: 'inline-flex',
+  },
+
   logoSection: [
     borderTopWithGapAndSpacing,
     {

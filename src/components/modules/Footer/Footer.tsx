@@ -80,7 +80,7 @@ function Footer({ customerServiceNumber, isCustomerServiceEnabled }: Props) {
         gridColumnXL="2/5"
         css={styles.logoSection}
       >
-        <BaseLink href="/">
+        <BaseLink css={styles.logoLink} href="/">
           <Image
             altText={ui('logo.alt')}
             css={styles.logo}
