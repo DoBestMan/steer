@@ -4,19 +4,19 @@ import { NodeType } from 'react-markdown';
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Markdown from '~/components/global/Markdown/MarkdownDynamic';
+import { HEADER_COLOR, HEADER_SIZE } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
-import styles from './HeaderDetailPage.styles';
+import styles, { sizeStyles } from './HeaderDetailPage.styles';
 
-export type HeaderColor = 'black' | 'white';
-
-interface Props {
+export interface HeaderDetailPageProps {
   description?: string;
   header: string;
   headerAs?: ReactType;
-  headerColor?: HeaderColor;
+  headerColor?: HEADER_COLOR;
   hideFullDescriptionLinkLabel?: string;
   showFullDescriptionLinkLabel?: string;
+  size?: HEADER_SIZE;
   subHeader?: string;
   subHeaderAs?: ReactType;
 }
@@ -34,7 +34,7 @@ const markdownAllowedTypes: NodeType[] = [
 export default function HeaderDetailPage({
   headerAs = 'h1',
   header,
-  headerColor = 'black',
+  headerColor = HEADER_COLOR.BLACK,
   subHeader,
   description,
   showFullDescriptionLinkLabel = ui(
@@ -44,7 +44,8 @@ export default function HeaderDetailPage({
     'common.headerDetailPage.hideFullDescriptionLinkLabel',
   ),
   subHeaderAs = 'div',
-}: Props) {
+  size = HEADER_SIZE.JUMBO,
+}: HeaderDetailPageProps) {
   const HeaderContainer = headerAs;
   const SubHeaderContainer = subHeaderAs;
   const [showFullDescription, setShowFullDescription] = useState(false);
@@ -59,11 +60,11 @@ export default function HeaderDetailPage({
     splitDescription &&
     splitDescription.length > 1 &&
     splitDescription.slice(1).join('\n\n');
-  const showMoreButtton =
+  const showMoreButton =
     briefDescription && splitDescription && splitDescription.length > 1;
   return (
     <header>
-      <HeaderContainer css={[styles.header, { color: headerColor }]}>
+      <HeaderContainer css={[sizeStyles[size].header, { color: headerColor }]}>
         {header}
       </HeaderContainer>
 
@@ -92,7 +93,7 @@ export default function HeaderDetailPage({
           </Markdown>
         </div>
       )}
-      {showMoreButtton && (
+      {showMoreButton && (
         <button
           aria-expanded={showFullDescription}
           aria-labelledby="header-detail-more-description"

@@ -1,5 +1,7 @@
 import { select, text } from '@storybook/addon-knobs';
 
+import { HEADER_COLOR, HEADER_SIZE } from '~/lib/constants';
+
 import HeaderDetailPage from './HeaderDetailPage';
 
 export default {
@@ -23,17 +25,27 @@ const defaultProps = {
 };
 export function HeaderDetailPageWithKnobs() {
   const header = text('Heading', defaultProps.header);
-  const headerColor = select('Header color', ['black', 'white'], 'black');
+  const headerColor = select(
+    'Header color',
+    [HEADER_COLOR.BLACK, HEADER_COLOR.WHITE],
+    HEADER_COLOR.BLACK,
+  );
+  const size = select(
+    'Size',
+    [HEADER_SIZE.JUMBO, HEADER_SIZE.PRIMARY],
+    HEADER_SIZE.JUMBO,
+  );
   const subHeader = text('Sub Header', defaultProps.subHeader);
   const description = text('Description', defaultProps.description);
 
   return (
     <HeaderDetailPage
       {...{
+        description,
         header,
         headerColor,
+        size,
         subHeader,
-        description,
       }}
     />
   );

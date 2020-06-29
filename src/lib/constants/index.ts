@@ -7,6 +7,7 @@ export * from './buttons.types';
 export * from './colors';
 export * from './easing';
 export * from './grid';
+export * from './header.types';
 export * from './image.types';
 export * from './image';
 export * from './input.types';

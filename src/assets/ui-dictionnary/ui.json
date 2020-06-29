@@ -290,6 +290,7 @@
   },
   "reviews": {
     "numReviews": "{{quantity}} reviews",
+    "searchBy": "Search by:",
     "seeAll": "See all customer reviews",
     "tireReviews": "{{tire}} Reviews",
     "viewTire": "View tire",

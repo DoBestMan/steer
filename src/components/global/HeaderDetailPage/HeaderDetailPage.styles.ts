@@ -1,4 +1,11 @@
-import { COLORS, EASING, SPACING, StylesMap, TIME } from '~/lib/constants';
+import {
+  COLORS,
+  EASING,
+  HEADER_SIZE,
+  SPACING,
+  StylesMap,
+  TIME,
+} from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
@@ -6,12 +13,6 @@ const styles: StylesMap = {
     typography.bodyCopy,
     {
       color: COLORS.LIGHT.GRAY_70,
-    },
-  ],
-  header: [
-    typography.jumboHeadline,
-    {
-      marginBottom: SPACING.SIZE_15,
     },
   ],
   markdown: [
@@ -46,8 +47,7 @@ const styles: StylesMap = {
     },
   ],
   showFullDescriptionIcon: {
-    marginTop: 2,
-
+    marginTop: SPACING.SIZE_02,
     svg: {
       display: 'block',
       height: 5,
@@ -61,6 +61,25 @@ const styles: StylesMap = {
       marginBottom: SPACING.SIZE_40,
     },
   ],
+};
+
+export const sizeStyles = {
+  [HEADER_SIZE.JUMBO]: {
+    header: [
+      typography.jumboHeadline,
+      {
+        marginBottom: SPACING.SIZE_15,
+      },
+    ],
+  },
+  [HEADER_SIZE.PRIMARY]: {
+    header: [
+      typography.primaryHeadline,
+      {
+        marginBottom: SPACING.SIZE_20,
+      },
+    ],
+  },
 };
 
 export default styles;
