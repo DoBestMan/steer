@@ -13,6 +13,7 @@ import { SiteMenu } from '~/data/models/SiteMenu';
 import { backendGetSiteGlobals, backendGetSiteMenu } from '~/lib/backend';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
 import { TIME } from '~/lib/constants';
+import GA from '~/lib/helpers/analytics';
 import { global } from '~/styles/document/global.styles';
 
 interface Props extends AppInitialProps {
@@ -33,6 +34,8 @@ class MyApp extends NextApp<Props> {
   render() {
     const { Component, pageProps, route } = this.props;
     const { siteGlobals, siteMenu } = this.state.serverData;
+
+    GA.initialize();
 
     return (
       <AppProviders

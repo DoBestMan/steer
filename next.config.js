@@ -8,6 +8,10 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 module.exports = withBundleAnalyzer({
   env: {
     GOOGLE_API_KEY: process.env.GOOGLE_API_KEY,
+    GTM_ID: process.env.GTM_ID,
+    GTM_AUTH: process.env.GTM_AUTH,
+    GTM_PREVIEW: process.env.GTM_PREVIEW,
+    GTM_COOKIES_WIN: process.env.GTM_COOKIES_WIN,
   },
   webpack: (config) => {
     config.module.rules.push({

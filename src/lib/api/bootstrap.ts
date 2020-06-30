@@ -1,5 +1,7 @@
 import lscache from 'lscache';
 
+import GA from '~/lib/helpers/analytics';
+
 import {
   fetchSetAuthorizationToken,
   fetchSetUrlBase,
@@ -26,6 +28,9 @@ async function asyncApiBootstrap() {
 
   const { userPersonalization, userSessionId } = await apiGetUserSession();
   fetchSetAuthorizationToken(userSessionId, null);
+
+  // Store UserSessionId in GTM
+  GA.userSessionId = userSessionId;
 
   lscache.set(
     SimpleTireSessionKey,
