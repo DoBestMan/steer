@@ -7,10 +7,12 @@ import { typography } from '~/styles/typography.styles';
 import styles from './Price.styles';
 import { ProductInfoProps } from './ProductInfo';
 
-function Price({
-  price,
-  callForPrice,
-}: Pick<ProductInfoProps, 'price' | 'callForPrice'>) {
+type Props = Pick<
+  ProductInfoProps,
+  'price' | 'callForPrice' | 'discount' | 'itemsLeft'
+>;
+
+function Price({ price, callForPrice, discount, itemsLeft }: Props) {
   if (!price && !callForPrice) {
     return (
       <>
@@ -42,11 +44,23 @@ function Price({
   }
 
   return (
-    <Prices
-      originalPrefix={ui('common.originalPricePrefix')}
-      priceList={[{ price }]}
-      currentPriceCSS={typography.primaryHeadline}
-    />
+    <>
+      {discount && (
+        <p css={styles.priceFeature}>
+          {ui('pdp.productInfo.discount', { discount })}
+        </p>
+      )}
+      {itemsLeft && (
+        <p css={styles.priceFeature}>
+          {ui('pdp.productInfo.itemsLeft', { itemsLeft })}
+        </p>
+      )}
+      <Prices
+        originalPrefix={ui('common.originalPricePrefix')}
+        priceList={[{ price }]}
+        currentPriceCSS={typography.primaryHeadline}
+      />
+    </>
   );
 }
 

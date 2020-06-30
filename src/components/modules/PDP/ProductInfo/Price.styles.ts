@@ -13,6 +13,13 @@ const styles: CSSObject = {
       color: COLORS.LIGHT.GRAY_70,
     },
   ],
+  priceFeature: [
+    typography.primarySubhead,
+    {
+      color: COLORS.GLOBAL.ORANGE,
+      whiteSpace: 'nowrap',
+    },
+  ],
   title: [
     typography.tertiaryHeadline,
     {

@@ -188,7 +188,10 @@
       "itemsLeft": "{{itemsLeft}} left at this price!",
       "selectSizeButton": "{{availableSizes}} sizes available",
       "selectSizeLabel": "Select a size",
-      "selectSingleSizeButton": "1 size available"
+      "selectSingleSizeButton": "1 size available",
+      "sizeQuantity": "{{quantity}} tires",
+      "frontTireSize": "Front {{size}}",
+      "rearTireSize": "Rear {{size}}"
     },
     "insights": {
       "fitting": {

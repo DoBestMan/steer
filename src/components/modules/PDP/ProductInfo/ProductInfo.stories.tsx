@@ -34,6 +34,8 @@ const ratingOptions = {
 const mockProductName = 'ProContact';
 const mockSizeLabel = '215/55R16';
 const mockSizeLoadIndex = '91H';
+const mockRearSizeLabel = '215/65R17';
+const mockRearLoadIndex = '91H';
 const mockPromoTags: PromoTagProps[] = [
   {
     style: PROMO_STYLES.BLACK_PILL,
@@ -55,6 +57,11 @@ const mockPromoTags: PromoTagProps[] = [
   },
 ];
 
+const handleChangeQuantity = (position: 'front' | 'rear') =>
+  action(`click-change-position-${position}`);
+
+const handleChangeSize = action('click-change-size');
+
 export function ProductInfoWithKnobs() {
   const tireLineGroupId = 'tire line';
   const priceGroupId = 'price';
@@ -65,10 +72,18 @@ export function ProductInfoWithKnobs() {
   const showBrandLogo = boolean('Show brand logo', true, tireLineGroupId);
   const productName = text('Product name', mockProductName, tireLineGroupId);
 
+  const availableSizes = number(
+    'Available sizes in the tire line',
+    38,
+    {},
+    sizeGroupId,
+  );
   const sizeSelected = boolean('Is size selected?', true, sizeGroupId);
   const sizeLabel = text('Size name', mockSizeLabel, sizeGroupId);
   const loadIndex = text('Load index', mockSizeLoadIndex, sizeGroupId);
-  const availableSizes = number('Available sizes', 38, {}, sizeGroupId);
+  const hasRearSize = boolean('Has rear size?', false, sizeGroupId);
+  const rearSizeLabel = text('Rear size name', mockRearSizeLabel, sizeGroupId);
+  const rearLoadIndex = text('Rear load index', mockRearLoadIndex, sizeGroupId);
 
   const showRatings = boolean('Show ratings', true, ratingGroupId);
   const ratingQuantity = number('Rating quantity', 113, {}, ratingGroupId);
@@ -94,8 +109,6 @@ export function ProductInfoWithKnobs() {
 
   const showPromoTags = boolean('Show promo tags?', false, promoTagsGroupId);
 
-  const handleChangeSize = action('click-change-size');
-
   return (
     <ProductInfo
       brand={{
@@ -104,7 +117,7 @@ export function ProductInfoWithKnobs() {
       }}
       brandURL={mockLogoURL}
       name={productName}
-      price={!callForPrice ? price : undefined}
+      price={!callForPrice && !outOfStock ? price : undefined}
       callForPrice={callForPrice && !outOfStock}
       rating={
         showRatings
@@ -117,6 +130,10 @@ export function ProductInfoWithKnobs() {
       availableSizes={availableSizes}
       size={sizeSelected ? sizeLabel : undefined}
       loadIndex={sizeSelected ? loadIndex : undefined}
+      rearSize={hasRearSize ? rearSizeLabel : undefined}
+      rearLoadIndex={hasRearSize ? rearLoadIndex : undefined}
+      rearPrice={price}
+      handleChangeQuantity={handleChangeQuantity}
       handleChangeSize={handleChangeSize}
       discount={discount ? discount : undefined}
       itemsLeft={itemsLeft ? itemsLeft : undefined}
@@ -147,7 +164,8 @@ export function ProductInfoDefault() {
       availableSizes={32}
       size={mockSizeLabel}
       loadIndex={mockSizeLoadIndex}
-      handleChangeSize={action('click-change-size')}
+      handleChangeQuantity={handleChangeQuantity}
+      handleChangeSize={handleChangeSize}
     />
   );
 }
@@ -172,7 +190,8 @@ export function ProductInfoPromoTags() {
       availableSizes={32}
       size={mockSizeLabel}
       loadIndex={mockSizeLoadIndex}
-      handleChangeSize={action('click-change-size')}
+      handleChangeQuantity={handleChangeQuantity}
+      handleChangeSize={handleChangeSize}
       promoTags={mockPromoTags}
     />
   );
@@ -192,7 +211,8 @@ export function ProductInfoTireLine() {
         value: 4.8,
       }}
       availableSizes={32}
-      handleChangeSize={action('click-change-size')}
+      handleChangeQuantity={handleChangeQuantity}
+      handleChangeSize={handleChangeSize}
     />
   );
 }
@@ -210,7 +230,8 @@ export function ProductInfoLongNameNoBrandLogo() {
         value: 4.8,
       }}
       availableSizes={32}
-      handleChangeSize={action('click-change-size')}
+      handleChangeQuantity={handleChangeQuantity}
+      handleChangeSize={handleChangeSize}
       price={{
         salePriceInCents: '13296',
         estimatedRetailPriceInCents: '15099',
@@ -241,7 +262,8 @@ export function ProductInfoDiscountBadge() {
       availableSizes={32}
       size={mockSizeLabel}
       loadIndex={mockSizeLoadIndex}
-      handleChangeSize={action('click-change-size')}
+      handleChangeQuantity={handleChangeQuantity}
+      handleChangeSize={handleChangeSize}
       discount="60%"
     />
   );
@@ -267,7 +289,8 @@ export function ProductInfoOnly4LeftBadge() {
       availableSizes={32}
       size={mockSizeLabel}
       loadIndex={mockSizeLoadIndex}
-      handleChangeSize={action('click-change-size')}
+      handleChangeQuantity={handleChangeQuantity}
+      handleChangeSize={handleChangeSize}
       itemsLeft={4}
     />
   );
@@ -293,7 +316,8 @@ export function ProductInfoBothBadges() {
       availableSizes={32}
       size={mockSizeLabel}
       loadIndex={mockSizeLoadIndex}
-      handleChangeSize={action('click-change-size')}
+      handleChangeQuantity={handleChangeQuantity}
+      handleChangeSize={handleChangeSize}
       discount="60%"
       itemsLeft={4}
     />
@@ -316,7 +340,8 @@ export function ProductInfoCallForPricing() {
       availableSizes={32}
       size={mockSizeLabel}
       loadIndex={mockSizeLoadIndex}
-      handleChangeSize={action('click-change-size')}
+      handleChangeQuantity={handleChangeQuantity}
+      handleChangeSize={handleChangeSize}
       callForPrice
     />
   );
@@ -338,7 +363,8 @@ export function ProductInfoOutOfStock() {
       availableSizes={32}
       size={mockSizeLabel}
       loadIndex={mockSizeLoadIndex}
-      handleChangeSize={action('click-change-size')}
+      handleChangeQuantity={handleChangeQuantity}
+      handleChangeSize={handleChangeSize}
       sameSizeSearchResults={232}
       sameSizeSearchURL="/"
     />
@@ -361,7 +387,40 @@ export function ProductInfoNoReviews() {
       availableSizes={32}
       size={mockSizeLabel}
       loadIndex={mockSizeLoadIndex}
-      handleChangeSize={action('click-change-size')}
+      handleChangeQuantity={handleChangeQuantity}
+      handleChangeSize={handleChangeSize}
+    />
+  );
+}
+
+export function ProductInfoMultiSize() {
+  return (
+    <ProductInfo
+      brand={{
+        image: mockLogo,
+        label: 'Continental',
+      }}
+      brandURL={mockLogoURL}
+      name={mockProductName}
+      price={{
+        estimatedRetailPriceInCents: '13296',
+        salePriceInCents: '15099',
+      }}
+      rating={{
+        quantity: 115,
+        value: 4.8,
+      }}
+      availableSizes={32}
+      size={mockSizeLabel}
+      loadIndex={mockSizeLoadIndex}
+      rearSize={mockRearSizeLabel}
+      rearLoadIndex={mockRearLoadIndex}
+      rearPrice={{
+        estimatedRetailPriceInCents: '15486',
+        salePriceInCents: '19000',
+      }}
+      handleChangeQuantity={handleChangeQuantity}
+      handleChangeSize={handleChangeSize}
     />
   );
 }

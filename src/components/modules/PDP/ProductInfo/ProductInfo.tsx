@@ -1,15 +1,14 @@
-import BrandLogoOrLabel from '~/components/global/BrandLogoOrLabel/BrandLogoOrLabel';
-import Button from '~/components/global/Button/Button';
 import { PromoTagProps } from '~/components/global/PromoTag/PromoTag';
 import PromoTagCarousel from '~/components/global/PromoTag/PromoTagCarousel';
-import Stars from '~/components/global/Stars/Stars';
 import { SiteCatalogBrand } from '~/data/models/SiteCatalogBrand';
 import { SitePrice } from '~/data/models/SitePrice';
-import { COLORS, RATINGS } from '~/lib/constants';
-import { ui } from '~/lib/utils/ui-dictionary';
 
+import CrossSell from './CrossSell';
+import MultiSizeButton from './MultiSizeButton';
 import Price from './Price';
 import styles from './ProductInfo.styles';
+import ProductLine from './ProductLine';
+import Rating from './Rating';
 import SizeButton from './SizeButton';
 
 export interface ProductInfoProps {
@@ -18,6 +17,7 @@ export interface ProductInfoProps {
   brandURL?: string;
   callForPrice?: boolean;
   discount?: string;
+  handleChangeQuantity: (position: 'front' | 'rear') => () => void;
   handleChangeSize: () => void;
   itemsLeft?: number;
   loadIndex?: string;
@@ -28,6 +28,9 @@ export interface ProductInfoProps {
     quantity: number;
     value: number;
   };
+  rearLoadIndex?: string;
+  rearPrice?: SitePrice;
+  rearSize?: string;
   sameSizeSearchResults?: number;
   sameSizeSearchURL?: string;
   size?: string;
@@ -39,6 +42,7 @@ function ProductInfo({
   brandURL,
   callForPrice,
   discount,
+  handleChangeQuantity,
   handleChangeSize,
   itemsLeft,
   loadIndex,
@@ -46,6 +50,9 @@ function ProductInfo({
   price,
   promoTags,
   rating,
+  rearLoadIndex,
+  rearPrice,
+  rearSize,
   sameSizeSearchResults,
   sameSizeSearchURL,
   size,
@@ -53,20 +60,29 @@ function ProductInfo({
   const shouldShowCrossSell =
     !price && !callForPrice && size && sameSizeSearchResults;
 
+  if (rearSize && rearPrice) {
+    return (
+      <>
+        <ProductLine name={name} brand={brand} brandURL={brandURL} />
+        <Rating rating={rating} />
+        <MultiSizeButton
+          size={size}
+          loadIndex={loadIndex}
+          price={price}
+          rearSize={rearSize}
+          rearLoadIndex={rearLoadIndex}
+          rearPrice={rearPrice}
+          handleChangeQuantity={handleChangeQuantity}
+        />
+      </>
+    );
+  }
+
   return (
     <>
-      <a href={brandURL} css={styles.brand}>
-        <BrandLogoOrLabel brand={brand} widths={[200, 400, 600]} />
-      </a>
       <div css={styles.wrapper}>
         <div css={styles.nameWrapper}>
-          <h1
-            css={[
-              name.length < 16 ? styles.productName : styles.productNameLong,
-            ]}
-          >
-            {name}
-          </h1>
+          <ProductLine name={name} brand={brand} brandURL={brandURL} />
           <div css={!rating && styles.sizeNoRating}>
             <SizeButton
               availableSizes={availableSizes}
@@ -75,49 +91,16 @@ function ProductInfo({
               handleChangeSize={handleChangeSize}
             />
           </div>
-          {rating && (
-            <div
-              css={styles.reviews}
-              aria-label={ui('ratings.fullRatingWithReviews', {
-                rating: rating.value,
-                maxRating: RATINGS.MAX_RATING,
-                reviews: rating.quantity,
-              })}
-            >
-              <>
-                <span aria-hidden>
-                  <Stars
-                    isSmall
-                    bgColor={COLORS.LIGHT.GRAY_20}
-                    color={COLORS.GLOBAL.BLACK}
-                    number={rating.value}
-                  />
-                </span>
-                <span css={styles.ratingValue} aria-hidden>
-                  {rating.value}{' '}
-                  <span css={styles.ratingQuantity}>({rating.quantity})</span>
-                </span>
-              </>
-            </div>
-          )}
+          <Rating rating={rating} />
         </div>
         {size && (
           <div css={styles.pricesWrapper}>
-            {price && (
-              <>
-                {discount && (
-                  <p css={styles.priceFeature}>
-                    {ui('pdp.productInfo.discount', { discount })}
-                  </p>
-                )}
-                {itemsLeft && (
-                  <p css={styles.priceFeature}>
-                    {ui('pdp.productInfo.itemsLeft', { itemsLeft })}
-                  </p>
-                )}
-              </>
-            )}
-            <Price price={price} callForPrice={callForPrice} />
+            <Price
+              price={price}
+              callForPrice={callForPrice}
+              discount={discount}
+              itemsLeft={itemsLeft}
+            />
           </div>
         )}
       </div>
@@ -127,15 +110,12 @@ function ProductInfo({
         </div>
       )}
       {shouldShowCrossSell && (
-        <div css={styles.crossSell}>
-          <p>
-            {ui('pdp.productInfo.crossSellTitle', {
-              results: sameSizeSearchResults?.toString() || '',
-            })}
-          </p>
-          <Button href={sameSizeSearchURL} as="a" css={styles.crossSellButton}>
-            {ui('pdp.productInfo.crossSellButtonLabel', { size: size || '' })}
-          </Button>
+        <div css={styles.crossSellWrapper}>
+          <CrossSell
+            sameSizeSearchResults={sameSizeSearchResults}
+            sameSizeSearchURL={sameSizeSearchURL}
+            size={size}
+          />
         </div>
       )}
     </>

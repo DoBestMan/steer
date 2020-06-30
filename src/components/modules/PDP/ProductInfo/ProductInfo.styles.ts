@@ -1,6 +1,6 @@
 import { CSSObject } from '@emotion/core';
 
-import { BORDERS, COLORS, MQ, SPACING } from '~/lib/constants';
+import { BORDERS, MQ, SPACING } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const CONSTANTS = {
@@ -8,14 +8,7 @@ const CONSTANTS = {
 };
 
 const styles: CSSObject = {
-  brand: {
-    alignItems: 'center',
-    display: 'flex',
-    marginBottom: SPACING.SIZE_05,
-    maxWidth: CONSTANTS.HEADER_MAX_WIDTH,
-    span: typography.tertiaryHeadline,
-  },
-  crossSell: [
+  crossSellWrapper: [
     typography.bodyCopy,
     {
       borderTop: BORDERS.SOLID_GRAY_20_1PX,
@@ -33,20 +26,6 @@ const styles: CSSObject = {
       },
     },
   ],
-  crossSellButton: {
-    justifyContent: 'center',
-    marginTop: SPACING.SIZE_15,
-    width: '100%',
-
-    [MQ.M]: {
-      width: 'auto',
-      marginTop: SPACING.SIZE_25,
-    },
-
-    [MQ.L]: {
-      marginTop: SPACING.SIZE_20,
-    },
-  },
   loadIndex: {
     fontWeight: 'normal',
   },
@@ -56,13 +35,6 @@ const styles: CSSObject = {
   nameWrapper: {
     flex: 0.6,
   },
-  priceFeature: [
-    typography.primarySubhead,
-    {
-      color: COLORS.GLOBAL.ORANGE,
-      whiteSpace: 'nowrap',
-    },
-  ],
   pricesWrapper: {
     flex: 0.4,
     textAlign: 'right',
@@ -73,19 +45,12 @@ const styles: CSSObject = {
       marginTop: SPACING.SIZE_40,
     },
   },
-  productName: typography.primaryHeadline,
-  productNameLong: typography.secondaryHeadline,
   promoTags: {
     marginTop: SPACING.SIZE_25,
 
     [MQ.L]: {
       marginTop: SPACING.SIZE_20,
     },
-  },
-  ratingValue: [typography.smallCopyTight],
-  reviews: {
-    alignItems: 'center',
-    display: 'flex',
   },
   sizeButton: [
     typography.primaryHeadline,
