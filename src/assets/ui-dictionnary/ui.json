@@ -16,7 +16,9 @@
     "form": {
       "email": "Email",
       "emailError": "Please enter a valid email",
-      "yourEmail": "Your email address"
+      "yourEmail": "Your email address",
+      "orderId": "Order ID",
+      "shippingZip": "Shipping ZIP Code"
     },
     "loading": {
       "label": "Loading"
@@ -349,5 +351,10 @@
     "numRatingsHeader": "# of ratings",
     "ratingHeader": "Rating",
     "tireHeader": "Tire"
+  },
+  "tracking": {
+    "orderTrackingDescription": "Enter the Order ID we emailed to you when you made your purchase, or {{login}}",
+    "orderTrackingSubmit": "Find it",
+    "orderTrackingTitle": "Track your order"
   }
 }
