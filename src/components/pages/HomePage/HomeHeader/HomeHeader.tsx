@@ -166,7 +166,7 @@ function HomeHeader({
                   <div css={eyebrowStyles}>
                     <PromoTag
                       label={eyebrow}
-                      style={PROMO_STYLES.BLACK_PILL}
+                      style={PROMO_STYLES.ORANGE_PILL}
                       isUppercase
                     />
                   </div>
