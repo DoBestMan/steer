@@ -1,32 +1,41 @@
 import { useEffect, useRef } from 'react';
 
+import {
+  SiteCatalogFilterListStyle,
+  SiteCatalogFilterTypeEnum,
+} from '~/data/models/SiteCatalogFilters';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
-import { TIME } from '~/lib/constants';
 
 import { CatalogFilterTypes, FilterContentTypes } from '../Filter.types';
 import { useFiltersContext } from '../Filters.context';
+import { getFilterLabel } from '../Filters.utils';
 import FilterDropdown from './Dropdown';
 import FilterModal from './FilterModal';
 import { mapTypeToContent } from './FilterPopup.utils';
 
 interface Props {
   filter: CatalogFilterTypes;
+  hasActionBar?: boolean;
   isOpen: boolean;
   onClose: () => void;
 }
 
-export default function FilterPopup({ filter, isOpen, onClose }: Props) {
+export default function FilterPopup({
+  filter,
+  hasActionBar = true,
+  isOpen,
+  onClose,
+}: Props) {
   const { greaterThan } = useBreakpoints();
   const isLarge = greaterThan.M;
   const {
     applyFilters,
-    cancelApplyFilters,
+    clearFiltersToApply,
+    isLoading,
     createResetFiltersHandler,
     createUpdateFilterGroup,
     filtersToApply,
   } = useFiltersContext();
-  const hasActionBar = filter.type !== FilterContentTypes.CatalogFilterSort;
-
   const prevIsLarge = useRef(isLarge);
   const prevIsOpen = useRef(isOpen);
   useEffect(() => {
@@ -35,20 +44,22 @@ export default function FilterPopup({ filter, isOpen, onClose }: Props) {
       isOpen &&
       !prevIsLarge.current &&
       isLarge &&
-      filter.type === FilterContentTypes.CatalogFilterPopular
+      filter.type === FilterContentTypes.SiteCatalogFilterPopular
     ) {
       onClose();
     }
     prevIsLarge.current = isLarge;
-
     // returns filtersToApply to original state if popup closes without applying
-    if (prevIsOpen.current && !isOpen) {
-      setTimeout(() => cancelApplyFilters(), TIME.MS350);
+    if (prevIsOpen.current && !isOpen && !isLoading) {
+      clearFiltersToApply();
     }
     prevIsOpen.current = isOpen;
-  }, [cancelApplyFilters, isOpen, onClose, filter.type, isLarge]);
+  }, [clearFiltersToApply, isOpen, onClose, filter, isLoading, isLarge]);
 
-  if (filter.type === FilterContentTypes.CatalogFilterToggle) {
+  if (
+    filter.type === SiteCatalogFilterTypeEnum.SiteCatalogFilterToggle ||
+    !mapTypeToContent[filter.type]
+  ) {
     return null;
   }
 
@@ -60,8 +71,12 @@ export default function FilterPopup({ filter, isOpen, onClose }: Props) {
     onChange: createUpdateFilterGroup,
   };
 
+  const label = getFilterLabel(filter);
   if (
-    filter.type !== FilterContentTypes.CatalogFilterChecklistLarge &&
+    !(
+      filter.type === SiteCatalogFilterTypeEnum.SiteCatalogFilterList &&
+      filter.presentationStyle === SiteCatalogFilterListStyle.Large
+    ) &&
     isLarge
   ) {
     return (
@@ -69,7 +84,7 @@ export default function FilterPopup({ filter, isOpen, onClose }: Props) {
         isOpen={isOpen}
         hasActionBar={hasActionBar}
         onApplyFilters={applyFilters}
-        onResetFilters={createResetFiltersHandler(filter.label)}
+        onResetFilters={createResetFiltersHandler(filter)}
         onClose={onClose}
       >
         {mapTypeToContent[filter.type](childProps)}
@@ -82,8 +97,8 @@ export default function FilterPopup({ filter, isOpen, onClose }: Props) {
       isOpen={isOpen}
       hasActionBar={hasActionBar}
       onApplyFilters={applyFilters}
-      onResetFilters={createResetFiltersHandler(filter.label)}
-      contentLabel={filter.label}
+      onResetFilters={createResetFiltersHandler(filter)}
+      contentLabel={label}
       onClose={onClose}
     >
       {mapTypeToContent[filter.type](childProps)}

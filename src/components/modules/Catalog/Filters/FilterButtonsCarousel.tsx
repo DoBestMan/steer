@@ -4,12 +4,14 @@ import { MouseEvent, ReactElement } from 'react';
 import FilterButton from '~/components/global/Button/FilterButton';
 import FilterButtonToggle from '~/components/global/Button/FilterButtonToggle';
 import Carousel from '~/components/global/Carousel/CarouselDynamic';
+import { SiteCatalogFilterTypeEnum } from '~/data/models/SiteCatalogFilters';
 import { ui } from '~/lib/utils/ui-dictionary';
 
-import { CatalogFilterTypes, FilterContentTypes } from './Filter.types';
+import { CatalogFilterTypes } from './Filter.types';
 import FilterPopups from './FilterPopups';
 import { useFiltersContext } from './Filters.context';
 import styles from './Filters.styles';
+import { getFilterLabel, hasActiveValue } from './Filters.utils';
 
 interface Props {
   filters: CatalogFilterTypes[];
@@ -29,12 +31,24 @@ export default function FilterButtonsCarousel({
   } = useFiltersContext();
   const { header } = useTheme();
   function onFilterClick(e: MouseEvent) {
-    createOpenFilterHandler(popularLabel)(e);
+    createOpenFilterHandler(0)(e);
   }
 
+  const isPopularActive = popularFilters.some((filter) => {
+    if ('item' in filter) {
+      return hasActiveValue(filter.item, activeFilters);
+    }
+    return false;
+  });
+
   return (
-    <div css={[styles.listContainer, selectingFilter && styles.disableEvents]}>
-      <Carousel wrapperClass="filters-wrapper" freeScroll>
+    <div
+      css={[
+        styles.listContainer,
+        selectingFilter !== null && styles.disableEvents,
+      ]}
+    >
+      <Carousel slideClass="filter-button" freeScroll>
         <FilterButton
           isVisible={!!popularFilters.length}
           css={[
@@ -42,32 +56,19 @@ export default function FilterButtonsCarousel({
             !popularFilters.length && styles.filterHide,
           ]}
           label={popularLabel}
-          isDropdownOpen={popularLabel === selectingFilter}
-          isActive={
-            !!(
-              activeFilters[popularLabel] &&
-              Object.keys(activeFilters[popularLabel]).length
-            )
-          }
+          isDropdownOpen={selectingFilter === 0}
+          isActive={isPopularActive}
           onClick={onFilterClick}
           theme={header.buttonTheme}
-          aria-expanded={popularLabel === selectingFilter}
+          aria-expanded={selectingFilter === 0}
         />
         {
-          (filters.map(({ label, ...filter }, idx) => {
-            const isDropdownActive = !!(
-              activeFilters[label] && Object.keys(activeFilters[label]).length
-            );
-            const popularFilters =
-              activeFilters[ui('catalog.filters.popularFilters')];
-            const isToggleActive = !!(
-              typeof popularFilters === 'object' &&
-              label in popularFilters &&
-              popularFilters[label]
-            );
-            const isDropdownOpen = label === selectingFilter;
-
-            return filter.type !== FilterContentTypes.CatalogFilterToggle ? (
+          (filters.map((filter, idx) => {
+            const label = getFilterLabel(filter);
+            const isActive = hasActiveValue(filter, activeFilters);
+            const isDropdownOpen = selectingFilter === idx + 1;
+            return filter.type !==
+              SiteCatalogFilterTypeEnum.SiteCatalogFilterToggle ? (
               // filter with dropdown
               <FilterButton
                 css={[
@@ -77,8 +78,8 @@ export default function FilterButtonsCarousel({
                 key={idx}
                 label={label}
                 isDropdownOpen={isDropdownOpen}
-                isActive={isDropdownActive}
-                onClick={createOpenFilterHandler(label)}
+                isActive={isActive}
+                onClick={createOpenFilterHandler(idx + 1)}
                 theme={header.buttonTheme}
                 aria-expanded={isDropdownOpen}
               />
@@ -86,12 +87,8 @@ export default function FilterButtonsCarousel({
               <FilterButtonToggle
                 css={styles.filterButton}
                 key={idx}
-                isActive={isToggleActive}
-                onClick={createToggleFilterHandler({
-                  group: ui('catalog.filters.popularFilters'),
-                  id: label,
-                  value: !isToggleActive,
-                })}
+                isActive={isActive}
+                onClick={createToggleFilterHandler(filter.item.value)}
                 theme={header.buttonTheme}
               >
                 {label}

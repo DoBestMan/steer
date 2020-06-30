@@ -3,14 +3,10 @@ import { action } from '@storybook/addon-actions';
 
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
+import { SiteCatalogFilterList } from '~/data/models/SiteCatalogFilters';
 import { COLORS, MQ } from '~/lib/constants';
 
-import {
-  CatalogFilterChecklist,
-  CatalogFilterChecklistLarge,
-  FilterContentTypes,
-} from '../Filter.types';
-import { filterRange, filterTypeMap } from '../Filters.mocks';
+import { filterChecklist, filterRange } from '../Filters.mocks';
 import FilterChecklist from './FilterChecklist';
 import FilterRange from './FilterRange';
 
@@ -38,25 +34,11 @@ export function FilterContentChecklist() {
     <>
       <Icon css={closeStyles} name={ICONS.CLOSE} />
       <FilterChecklist
-        {...(filterTypeMap[
-          FilterContentTypes.CatalogFilterChecklist
-        ] as CatalogFilterChecklist)}
+        {...(filterChecklist as SiteCatalogFilterList)}
         filtersToApply={{}}
         onChange={onChange()}
       />
     </>
-  );
-}
-
-export function FilterContentChecklistLarge() {
-  return (
-    <FilterChecklist
-      {...(filterTypeMap[
-        FilterContentTypes.CatalogFilterChecklistLarge
-      ] as CatalogFilterChecklistLarge)}
-      filtersToApply={{}}
-      onChange={onChange()}
-    />
   );
 }
 

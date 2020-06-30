@@ -15,11 +15,18 @@ import {
 } from '../CatalogProductGroups/CatalogProductGroups.mocks';
 
 interface Props {
+  handleUpdateResults?: (filters: Record<string, string>) => void;
   hasTopPicks: boolean;
+  siteCatalogProducts: any;
   siteCatalogSummary?: SiteCatalogSummary;
 }
 
-function CatalogGrid({ hasTopPicks, siteCatalogSummary }: Props) {
+function CatalogGrid({
+  hasTopPicks,
+  handleUpdateResults,
+  siteCatalogSummary,
+  siteCatalogProducts,
+}: Props) {
   const { setIsAdvancedView, isAdvancedView } = useCatalogPageContext();
   const catalogGrid = useRef<HTMLDivElement | null>(null);
 
@@ -95,9 +102,11 @@ function CatalogGrid({ hasTopPicks, siteCatalogSummary }: Props) {
   return (
     <div ref={catalogGrid}>
       <HeaderContainer
+        handleUpdateResults={handleUpdateResults}
         sizeList={siteCatalogSummary?.siteCatalogSummaryMeta?.sizeList}
         hasTopPicks={hasTopPicks}
         toggleView={toggleView}
+        siteCatalogFilters={siteCatalogProducts?.siteCatalogFilters}
         isAdvancedView={isAdvancedView}
       />
       {isGroupedProducts ? (

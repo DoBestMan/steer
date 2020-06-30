@@ -1,26 +1,36 @@
 import TitleCheckbox from '~/components/global/Checkbox/TitleCheckbox';
-import { CatalogFilterPopular } from '~/components/modules/Catalog/Filters/Filter.types';
-import { ChildProps } from '~/components/modules/Catalog/Filters/Popup/FilterPopup.utils';
 
+import { SiteCatalogFilterPopular } from '../Filter.types';
+import { hasActiveValue } from '../Filters.utils';
+import { ChildProps } from '../Popup/FilterPopup.utils';
 import styles from './FilterChecklist.styles';
 
 export default function FilterPopular({
+  filtersToApply,
   items,
-  label,
   onChange,
-}: CatalogFilterPopular & Pick<ChildProps, 'onChange' | 'filtersToApply'>) {
-  function handleChange(id: string) {
-    return (value: boolean) => onChange({ group: label, id, value })();
+}: SiteCatalogFilterPopular & Pick<ChildProps, 'onChange' | 'filtersToApply'>) {
+  function handleChange(value: Record<string, string>) {
+    return onChange({ value });
   }
 
   return (
     <div css={styles.root}>
       <div css={styles.group}>
-        {items.map(({ label }, idx) => (
-          <div css={styles.container} key={idx}>
-            <TitleCheckbox label={label} handleChange={handleChange('')} />
-          </div>
-        ))}
+        {items.map((filter, idx) => {
+          if (!('item' in filter)) {
+            return null;
+          }
+          return (
+            <div css={styles.container} key={idx}>
+              <TitleCheckbox
+                label={filter.item.title}
+                handleChange={handleChange(filter.item.value)}
+                defaultChecked={hasActiveValue(filter.item, filtersToApply)}
+              />
+            </div>
+          );
+        })}
       </div>
     </div>
   );

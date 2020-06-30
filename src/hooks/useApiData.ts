@@ -38,7 +38,7 @@ export function useApiData<T>({
   options = {},
 }: UseApiDataParams): UseApiData<T> {
   const { data, error, isValidating, mutate, revalidate } = useSWR<T>(
-    [endpoint, JSON.stringify(params)],
+    [endpoint, JSON.stringify(query)],
     async () => {
       await apiBootstrap();
 

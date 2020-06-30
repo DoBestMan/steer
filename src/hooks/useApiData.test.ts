@@ -37,7 +37,7 @@ describe('useApiData', () => {
 
     // it calls useSWR
     expect(mocked(useSWR)).toHaveBeenCalledWith(
-      ['/test-endpoint', '{}'],
+      ['/test-endpoint', '{"sortBy":"price"}'],
       expect.any(Function),
       {},
     );

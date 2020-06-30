@@ -19,6 +19,7 @@ import styles, { linkBorder } from './Link.styles';
 interface Props {
   as?: LINK_TYPE;
   children?: ReactNode;
+  className?: string;
   icon?: IconType;
   iconPosition?: LINK_ICON_POSITION;
   isDisabled?: boolean;

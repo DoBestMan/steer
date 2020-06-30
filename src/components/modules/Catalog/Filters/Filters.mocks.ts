@@ -1,433 +1,886 @@
+/* eslint-disable sort-keys */
 import {
-  CatalogFilterRange,
-  CatalogFilterSort,
-  CatalogFilterTypes,
-  FilterContentTypes,
-} from './Filter.types';
+  SiteCatalogFilterRange,
+  SiteCatalogFilterTypeEnum,
+  SiteCatalogSortListItem,
+} from '~/data/models/SiteCatalogFilters';
 
-export const filterTypeSelect: FilterContentTypes[] = [
-  FilterContentTypes.CatalogFilterChecklist,
-  FilterContentTypes.CatalogFilterChecklistLarge,
-  FilterContentTypes.CatalogFilterRange,
-  FilterContentTypes.CatalogFilterSort,
-  FilterContentTypes.CatalogFilterToggle,
+export const filterTypeSelect: SiteCatalogFilterTypeEnum[] = [
+  SiteCatalogFilterTypeEnum.SiteCatalogFilterList,
+  SiteCatalogFilterTypeEnum.SiteCatalogFilterRange,
+  SiteCatalogFilterTypeEnum.SiteCatalogFilterToggle,
 ];
 
 export const filterRange = {
-  currentMax: null,
-  currentMin: null,
+  currentMaxValue: null,
+  currentMinValue: null,
+  header: {
+    title: 'Warranty',
+    tooltip: null,
+  },
   id: 'price',
   label: 'Price',
   maxValue: 349,
   minValue: 49,
   step: 1,
-  type: FilterContentTypes.CatalogFilterRange,
+  type: SiteCatalogFilterTypeEnum.SiteCatalogFilterRange,
   unit: 'UnitUSD',
-} as CatalogFilterRange;
+} as SiteCatalogFilterRange;
 
-export const filterSort = {
-  label: 'Sort by',
-  id: 'sort',
-  type: FilterContentTypes.CatalogFilterSort,
-  items: [
+export const mockPriceFilter = {
+  type: 'SiteCatalogFilterRange',
+  id: 'price',
+  header: {
+    title: 'Price',
+    tooltip: null,
+  },
+  minValue: 49,
+  maxValue: 349,
+  currentMinValue: null,
+  currentMaxValue: null,
+  step: 1,
+  unit: 'UnitUSD',
+};
+
+export const filterSort = [
+  {
+    title: 'Best match',
+    description: 'Fastest delivery, best ratings and value',
+    state: 'Normal',
+    value: {
+      sort: 'bestMatch',
+    },
+  },
+  {
+    title: 'Best Value',
+    description: null,
+    state: 'Normal',
+    value: {
+      sort: 'bestValue',
+    },
+  },
+  {
+    title: 'Price: Low to High',
+    description: null,
+    state: 'Normal',
+    value: {
+      sort: 'price',
+      order: 'asc',
+    },
+  },
+  {
+    title: 'Price: High to Low',
+    description: null,
+    state: 'Normal',
+    value: {
+      sort: 'price',
+      order: 'desc',
+    },
+  },
+  {
+    title: 'Best Seller',
+    description: null,
+    state: 'Normal',
+    value: {
+      sort: 'bestSeller',
+    },
+  },
+  {
+    title: 'Brand: A-Z',
+    description: null,
+    state: 'Normal',
+    value: {
+      sort: 'brand',
+      order: 'asc',
+    },
+  },
+  {
+    title: 'Brand: Z-A',
+    description: null,
+    state: 'Normal',
+    value: {
+      sort: 'brand',
+      order: 'desc',
+    },
+  },
+  {
+    title: 'Mileage Warranty',
+    description: null,
+    state: 'Normal',
+    value: {
+      sort: 'warranty',
+    },
+  },
+  {
+    title: 'Highest Rating',
+    description: null,
+    state: 'Normal',
+    value: {
+      sort: 'rating',
+    },
+  },
+] as Array<SiteCatalogSortListItem>;
+
+export const filterChecklist = {
+  type: 'SiteCatalogFilterList',
+  presentationStyle: 'Normal',
+  header: {
+    title: 'Tire type',
+    tooltip: null,
+  },
+  filterGroups: [
     {
-      title: 'Best match',
-      description: 'Fastest delivery, best ratings and value',
-      flair: null,
-      id: 'bestMatch',
+      groupType: 'Checklist',
+      header: {
+        title: 'Tire type',
+        tooltip: null,
+      },
+      items: [
+        {
+          title: 'Industrial',
+          flair: null,
+          description: null,
+          count: 14,
+          state: 'Normal',
+          value: {
+            subtype: 'industrial',
+          },
+        },
+        {
+          title: 'Passenger',
+          flair: null,
+          description: null,
+          count: 80,
+          state: 'Normal',
+          value: {
+            subtype: 'passenger',
+          },
+        },
+      ],
     },
     {
-      title: 'Best Value',
-      description: null,
-      flair: null,
-      id: 'bestValue',
-    },
-    {
-      title: 'Price: Low to High',
-      description: null,
-      flair: null,
-      id: 'priceAsc',
-    },
-    {
-      title: 'Price: High to Low',
-      description: null,
-      flair: null,
-      id: 'priceDesc',
-    },
-    {
-      title: 'Best Seller',
-      description: null,
-      flair: null,
-      id: 'bestSeller',
-    },
-    {
-      title: 'Brand: A-Z',
-      description: null,
-      flair: null,
-      id: 'brandAsc',
-    },
-    {
-      title: 'Brand: Z-A',
-      description: null,
-      flair: null,
-      id: 'brandDesc',
-    },
-    {
-      title: 'Mileage Warranty',
-      description: null,
-      flair: null,
-      id: 'warranty',
-    },
-    {
-      title: 'Highest Rating',
-      description: null,
-      flair: null,
-      id: 'highestRating',
+      groupType: 'Checklist',
+      header: {
+        title: 'Performance',
+        tooltip: null,
+      },
+      items: [
+        {
+          title: 'All season',
+          flair: 'Civic standard',
+          description: 'Most common: Good handle on dry, wet or snow',
+          count: 86,
+          state: 'Normal',
+          value: {
+            category: 'allSeason',
+          },
+        },
+        {
+          title: 'Winter',
+          flair: null,
+          description: 'For snow, ice, and freezing temperatures',
+          count: 12,
+          state: 'Normal',
+          value: {
+            category: 'winter',
+          },
+        },
+        {
+          title: 'Summer',
+          flair: null,
+          description: 'For dry roads and warm, arid climates',
+          count: 8,
+          state: 'Normal',
+          value: {
+            category: 'summer',
+          },
+        },
+        {
+          title: 'Performance',
+          flair: null,
+          description: 'For sport/luxury vehicles and high-speed handling',
+          count: 4,
+          state: 'Normal',
+          value: {
+            category: 'performance',
+          },
+        },
+        {
+          title: 'Racing',
+          flair: null,
+          description: 'Maximum traction for competition',
+          count: 3,
+          state: 'Normal',
+          value: {
+            category: 'racing',
+          },
+        },
+        {
+          title: 'Touring',
+          flair: null,
+          description: 'For durability and smooth long rides',
+          count: 12,
+          state: 'Normal',
+          value: {
+            category: 'touring',
+          },
+        },
+      ],
     },
   ],
-} as CatalogFilterSort;
+};
 
-export const filterTypeMap: Record<
-  FilterContentTypes,
-  CatalogFilterTypes | null
-> = {
-  /* eslint-disable sort-keys */
-  [FilterContentTypes.CatalogFilterToggle]: {
-    label: 'Deals',
-    type: FilterContentTypes.CatalogFilterToggle,
+export const mockSiteCatalogFilters = [
+  {
+    type: 'SiteCatalogFilterToggle',
+    item: {
+      title: 'Deals',
+      flair: null,
+      description: null,
+      count: 135,
+      state: 'Normal',
+      value: {
+        deals: 'true',
+      },
+    },
   },
-  [FilterContentTypes.CatalogFilterPopular]: null,
-  [FilterContentTypes.CatalogFilterSort]: filterSort,
-  [FilterContentTypes.CatalogFilterRange]: {
-    currentMax: null,
-    currentMin: null,
-    id: 'warranty',
-    label: 'Warranty',
-    maxValue: 70_000,
-    minValue: 0,
-    step: 5_000,
-    type: FilterContentTypes.CatalogFilterRange,
-    unit: 'UnitMiles',
+  {
+    type: 'SiteCatalogFilterToggle',
+    item: {
+      title: 'All Season',
+      flair: null,
+      description: null,
+      count: 86,
+      state: 'Normal',
+      value: {
+        category: 'allSeason',
+      },
+    },
   },
-  [FilterContentTypes.CatalogFilterChecklist]: {
-    label: 'Brand',
-    tooltip: 'Learn more',
-    type: FilterContentTypes.CatalogFilterChecklist,
+  {
+    type: 'SiteCatalogFilterToggle',
+    item: {
+      title: 'Free installation',
+      flair: null,
+      description: null,
+      count: 10,
+      state: 'Normal',
+      value: {
+        freeInstall: 'true',
+      },
+    },
+  },
+  {
+    type: 'SiteCatalogFilterToggle',
+    item: {
+      title: '2-day delivery',
+      flair: null,
+      description: null,
+      count: 120,
+      state: 'Normal',
+      value: {
+        twoDayDelivery: 'true',
+      },
+    },
+  },
+  {
+    type: 'SiteCatalogFilterToggle',
+    item: {
+      title: 'Original tires',
+      flair: null,
+      description: null,
+      count: 50,
+      state: 'Normal',
+      value: {
+        originalTire: 'true',
+      },
+    },
+  },
+  {
+    type: 'SiteCatalogFilterList',
+    presentationStyle: 'Normal',
+    header: {
+      title: 'Brand',
+      tooltip: {
+        label: 'Learn more',
+        contentId: 'TBD',
+      },
+    },
     filterGroups: [
       {
-        title: null,
-        id: 'brandCategory',
+        groupType: 'Checklist',
+        header: null,
         items: [
           {
             title: 'Popular brands',
-            id: 'popularBrands',
             flair: null,
-            description: 'Fastest delivery, best ratings and value',
+            description: null,
             count: 86,
-            isSelected: false,
+            state: 'Normal',
+            value: {
+              brandCategory: 'popularBrands',
+            },
           },
           {
             title: 'Highest rated brands',
-            id: 'highestRatedBrands',
             flair: null,
             description: null,
             count: 12,
-            isSelected: false,
+            state: 'Normal',
+            value: {
+              brandCategory: 'highestRatedBrands',
+            },
           },
           {
             title: 'Local brands',
-            id: 'localBrands',
             flair: null,
             description: null,
             count: 8,
-            isSelected: false,
+            state: 'Normal',
+            value: {
+              brandCategory: 'localBrands',
+            },
           },
         ],
       },
       {
-        title: 'Featured',
-        id: 'brandFeatured',
+        groupType: 'Checklist',
+        header: {
+          title: 'Featured',
+          tooltip: null,
+        },
         items: [
           {
             title: 'Firestone',
-            id: 'firestone',
             flair: 'Best seller',
             description: null,
             count: 3,
-            isSelected: false,
+            state: 'Normal',
+            value: {
+              brand: 'firestone',
+            },
           },
           {
             title: 'Goodyear',
-            id: 'goodyear',
             flair: null,
             description: null,
             count: 4,
-            isSelected: false,
+            state: 'Selected',
+            value: {
+              brand: 'goodyear',
+            },
           },
           {
             title: 'Nexen',
-            id: 'nexen',
             flair: null,
             description: null,
             count: 2,
-            isSelected: false,
+            state: 'Normal',
+            value: {
+              brand: 'nexen',
+            },
           },
           {
             title: 'Pirelli',
-            id: 'pirelli',
             flair: 'Top rated',
             description: null,
             count: 9,
-            isSelected: false,
+            state: 'Normal',
+            value: {
+              brand: 'pirelli',
+            },
           },
           {
             title: 'Contintental',
-            id: 'contintental',
             flair: null,
             description: null,
             count: 19,
-            isSelected: false,
+            state: 'Normal',
+            value: {
+              brand: 'contintental',
+            },
           },
         ],
       },
     ],
   },
-  [FilterContentTypes.CatalogFilterChecklistLarge]: {
-    label: 'More filters',
-    tooltip: null,
-    type: FilterContentTypes.CatalogFilterChecklistLarge,
+  {
+    type: 'SiteCatalogFilterList',
+    presentationStyle: 'Normal',
+    header: {
+      title: 'Tire type',
+      tooltip: null,
+    },
     filterGroups: [
       {
-        title: 'Features',
-        id: 'features',
+        groupType: 'Checklist',
+        header: {
+          title: 'Tire type',
+          tooltip: null,
+        },
+        items: [
+          {
+            title: 'Industrial',
+            flair: null,
+            description: null,
+            count: 14,
+            state: 'Normal',
+            value: {
+              subtype: 'industrial',
+            },
+          },
+          {
+            title: 'Passenger',
+            flair: null,
+            description: null,
+            count: 80,
+            state: 'Normal',
+            value: {
+              subtype: 'passenger',
+            },
+          },
+        ],
+      },
+      {
+        groupType: 'Checklist',
+        header: {
+          title: 'Performance',
+          tooltip: null,
+        },
+        items: [
+          {
+            title: 'All season',
+            flair: 'Civic standard',
+            description: 'Most common: Good handle on dry, wet or snow',
+            count: 86,
+            state: 'Normal',
+            value: {
+              category: 'allSeason',
+            },
+          },
+          {
+            title: 'Winter',
+            flair: null,
+            description: 'For snow, ice, and freezing temperatures',
+            count: 12,
+            state: 'Normal',
+            value: {
+              category: 'winter',
+            },
+          },
+          {
+            title: 'Summer',
+            flair: null,
+            description: 'For dry roads and warm, arid climates',
+            count: 8,
+            state: 'Normal',
+            value: {
+              category: 'summer',
+            },
+          },
+          {
+            title: 'Performance',
+            flair: null,
+            description: 'For sport/luxury vehicles and high-speed handling',
+            count: 4,
+            state: 'Normal',
+            value: {
+              category: 'performance',
+            },
+          },
+          {
+            title: 'Racing',
+            flair: null,
+            description: 'Maximum traction for competition',
+            count: 3,
+            state: 'Normal',
+            value: {
+              category: 'racing',
+            },
+          },
+          {
+            title: 'Touring',
+            flair: null,
+            description: 'For durability and smooth long rides',
+            count: 12,
+            state: 'Normal',
+            value: {
+              category: 'touring',
+            },
+          },
+        ],
+      },
+    ],
+  },
+  {
+    type: 'SiteCatalogFilterList',
+    presentationStyle: 'Normal',
+    header: {
+      title: 'Speed',
+      tooltip: null,
+    },
+    filterGroups: [
+      {
+        groupType: 'Checklist',
+        header: null,
+        items: [
+          {
+            title: 'S - 112 mph',
+            flair: 'Civic standard',
+            description: null,
+            count: 123,
+            state: 'Normal',
+            value: {
+              speedrating: 's',
+            },
+          },
+          {
+            title: 'T - 118 mph',
+            flair: null,
+            description: null,
+            count: 50,
+            state: 'Normal',
+            value: {
+              speedrating: 't',
+            },
+          },
+          {
+            title: 'Y - 186 mph',
+            flair: null,
+            description: null,
+            count: 34,
+            state: 'Normal',
+            value: {
+              speedrating: 'y',
+            },
+          },
+        ],
+      },
+    ],
+  },
+  {
+    type: 'SiteCatalogFilterList',
+    presentationStyle: 'Normal',
+    header: {
+      title: 'Load',
+      tooltip: null,
+    },
+    filterGroups: [
+      {
+        groupType: 'Checklist',
+        header: {
+          title: 'Range',
+          tooltip: {
+            label: "What's this?",
+            contentId: 'TBD',
+          },
+        },
+        items: [
+          {
+            title: 'SL - Standard Load',
+            flair: null,
+            description: null,
+            count: 96,
+            state: 'Normal',
+            value: {
+              loadrange: 'sl',
+            },
+          },
+          {
+            title: 'XL - Standard Load',
+            flair: null,
+            description: null,
+            count: 35,
+            state: 'Normal',
+            value: {
+              loadrange: 'xl',
+            },
+          },
+          {
+            title: 'B',
+            flair: null,
+            description: null,
+            count: 98,
+            state: 'Normal',
+            value: {
+              loadrange: 'b',
+            },
+          },
+          {
+            title: 'RE',
+            flair: null,
+            description: null,
+            count: 8,
+            state: 'Normal',
+            value: {
+              loadrange: 're',
+            },
+          },
+        ],
+      },
+      {
+        groupType: 'Checklist',
+        header: {
+          title: 'Index',
+          tooltip: {
+            label: "What's this?",
+            contentId: 'TBD',
+          },
+        },
+        items: [
+          {
+            title: '91 – 1356 lbs',
+            flair: 'Civic standard',
+            description: null,
+            count: 86,
+            state: 'Normal',
+            value: {
+              loadindex: '91_1356',
+            },
+          },
+          {
+            title: '90 - 1323 lbs',
+            flair: null,
+            description: null,
+            count: 12,
+            state: 'Normal',
+            value: {
+              loadindex: '90_1323',
+            },
+          },
+          {
+            title: '87-1201 lbs',
+            flair: null,
+            description: null,
+            count: 22,
+            state: 'Normal',
+            value: {
+              loadindex: '87_1201',
+            },
+          },
+        ],
+      },
+    ],
+  },
+  {
+    type: 'SiteCatalogFilterRange',
+    id: 'warranty',
+    header: {
+      title: 'Warranty',
+      tooltip: {
+        label: 'How to choose?',
+        contentId: 'TBD',
+      },
+    },
+    minValue: 0,
+    maxValue: 70000,
+    currentMinValue: null,
+    currentMaxValue: null,
+    step: 5000,
+    unit: 'UnitMiles',
+  },
+  {
+    type: 'SiteCatalogFilterList',
+    presentationStyle: 'Large',
+    header: {
+      title: 'More filters',
+      tooltip: null,
+    },
+    filterGroups: [
+      {
+        groupType: 'Checklist',
+        header: {
+          title: 'Features',
+          tooltip: null,
+        },
         items: [
           {
             title: 'Fuel efficient',
-            id: 'fuelEfficient',
             flair: null,
             description:
               'Less rolling resistence, requiring less energy to move',
             count: 2,
-            isSelected: false,
-          },
-          {
-            title: 'Run flat',
-            id: 'runFlat',
-            flair: null,
-            description: 'Can run even with a puncture for a limited distance',
-            count: 18,
-            isSelected: false,
-          },
-          {
-            title: 'Studded',
-            id: 'studded',
-            flair: null,
-            description: 'Made with embedded metal studs for traction on ice',
-            count: 58,
-            isSelected: false,
-          },
-          {
-            title: 'Studdable',
-            id: 'studdable',
-            flair: null,
-            description: 'Can accept studs for added winter traction',
-            count: 19,
-            isSelected: false,
+            state: 'Normal',
+            value: {
+              features: 'fuelEfficient',
+            },
           },
         ],
       },
       {
-        title: 'Sidewall types',
-        id: 'sidewall',
+        groupType: 'Checklist',
+        header: {
+          title: 'Sidewall types',
+          tooltip: null,
+        },
         items: [
           {
             title: 'BW - Black sidewall',
-            id: 'bw',
             flair: null,
             description: null,
             count: 2,
-            isSelected: false,
+            state: 'Disabled',
+            value: {
+              sidewall: 'bw',
+            },
           },
           {
             title: 'TL - Tubeless',
-            id: 'tl',
             flair: null,
             description: null,
-            count: 18,
-            isSelected: false,
+            state: 'Normal',
+            value: {
+              sidewall: 'tl',
+            },
           },
           {
             title: 'VSB - Vertical Serrated Band',
-            id: 'vsb',
             flair: null,
             description: null,
             count: 58,
-            isSelected: false,
+            state: 'Normal',
+            value: {
+              sidewall: 'vsb',
+            },
+          },
+        ],
+      },
+      {
+        groupType: 'Radio',
+        header: {
+          title: 'Run flat',
+          tooltip: null,
+        },
+        items: [
+          {
+            title: 'Show only runflat',
+            flair: null,
+            description: 'Can run even with a puncture for a limited distance',
+            count: 18,
+            state: 'Normal',
+            value: {
+              runflat: 'true',
+            },
+          },
+          {
+            title: 'Do not show runflat',
+            flair: null,
+            description: null,
+            count: 18,
+            state: 'Normal',
+            value: {
+              runflat: 'false',
+            },
+          },
+          {
+            title: 'Include runflat',
+            flair: null,
+            description: null,
+            count: 18,
+            state: 'Normal',
+            value: {
+              runFlat: '',
+            },
+          },
+        ],
+      },
+      {
+        groupType: 'Radio',
+        header: {
+          title: 'Smartway',
+          tooltip: null,
+        },
+        items: [
+          {
+            title: 'Show only smartway',
+            flair: null,
+            description: null,
+            count: 18,
+            state: 'Normal',
+            value: {
+              smartway: 'true',
+            },
+          },
+          {
+            title: 'Do not show smartway',
+            flair: null,
+            description: null,
+            count: 18,
+            state: 'Normal',
+            value: {
+              smartway: 'false',
+            },
+          },
+          {
+            title: 'Include smartway',
+            flair: null,
+            description: null,
+            count: 18,
+            state: 'Normal',
+            value: {
+              smartway: '',
+            },
+          },
+        ],
+      },
+      {
+        groupType: 'Radio',
+        header: {
+          title: 'Studded / Studdable',
+          tooltip: null,
+        },
+        items: [
+          {
+            title: 'Show only studded',
+            flair: null,
+            description: 'Made with embedded metal studs for traction on ice',
+            count: 58,
+            state: 'Normal',
+            value: {
+              studded: 'true',
+              studdable: '',
+              studdedStuddable: '',
+            },
+          },
+          {
+            title: 'Show only studdable',
+            flair: null,
+            description: 'Can accept studs for added winter traction',
+            count: 19,
+            state: 'Normal',
+            value: {
+              studded: '',
+              studdable: 'true',
+              studdedStuddable: '',
+            },
+          },
+          {
+            title: 'Show both studded and studdable',
+            flair: null,
+            description: null,
+            count: 19,
+            state: 'Normal',
+            value: {
+              studded: '',
+              studdable: '',
+              studdedStuddable: 'true',
+            },
+          },
+          {
+            title: 'Include studded and studdable',
+            flair: null,
+            description: null,
+            count: 19,
+            state: 'Normal',
+            value: {
+              studded: '',
+              studdable: '',
+              studdedStuddable: '',
+            },
           },
         ],
       },
     ],
   },
-};
-const filters = [
-  filterTypeMap[FilterContentTypes.CatalogFilterRange],
-  filterTypeMap[FilterContentTypes.CatalogFilterToggle],
-  filterTypeMap[FilterContentTypes.CatalogFilterChecklist],
-  {
-    label: 'Free installation',
-    type: FilterContentTypes.CatalogFilterToggle,
-  },
-  {
-    label: 'Fuel efficient',
-    type: FilterContentTypes.CatalogFilterToggle,
-  },
-  {
-    label: 'Tire type',
-    type: 'CatalogFilterChecklist',
-    filterGroups: [
-      {
-        title: null,
-        id: 'tireType',
-        items: [
-          {
-            title: 'All season',
-            id: 'allSeason',
-            flair: 'Civic standard',
-            description: 'Most common: Googlehandle on dry, wet or snow',
-            count: 86,
-            isSelected: false,
-          },
-          {
-            title: 'Winter',
-            id: 'winter',
-            flair: null,
-            description: 'For snow, ice, and freezing temperatures',
-            count: 12,
-            isSelected: false,
-          },
-          {
-            title: 'Summer',
-            id: 'summer',
-            flair: null,
-            description: 'For dry roads and warm, arid climates',
-            count: 8,
-            isSelected: false,
-          },
-          {
-            title: 'Performance',
-            id: 'performance',
-            flair: null,
-            description: 'For sport/luxury vehicles and high-speed handling',
-            count: 4,
-            isSelected: false,
-          },
-          {
-            title: 'Racing',
-            id: 'racing',
-            flair: null,
-            description: 'Maximum traction for competition',
-            count: 3,
-            isSelected: false,
-          },
-          {
-            title: 'Touring',
-            id: 'touring',
-            flair: null,
-            description: 'For durability and smooth long rides',
-            count: 12,
-            isSelected: false,
-          },
-        ],
-      },
-    ],
-  },
-  {
-    label: '2-day Delivery',
-    type: FilterContentTypes.CatalogFilterToggle,
-  },
-  {
-    label: 'Original tires',
-    type: FilterContentTypes.CatalogFilterToggle,
-  },
-  {
-    label: 'All Season',
-    type: FilterContentTypes.CatalogFilterToggle,
-  },
-  {
-    label: 'Load',
-    type: 'CatalogFilterChecklist',
-    filterGroups: [
-      {
-        title: 'Range',
-        id: 'range',
-        items: [
-          {
-            title: 'SL - Standard Load',
-            id: 'sl',
-            flair: null,
-            description: null,
-            count: '96',
-            isSelected: false,
-          },
-          {
-            title: 'XL - Standard Load',
-            id: 'xl',
-            flair: null,
-            description: null,
-            count: '35',
-            isSelected: false,
-          },
-          {
-            title: 'B',
-            id: 'b',
-            flair: null,
-            description: null,
-            count: '98',
-            isSelected: false,
-          },
-          {
-            title: 'RE',
-            id: 're',
-            flair: null,
-            description: null,
-            count: '8',
-            isSelected: false,
-          },
-        ],
-      },
-      {
-        title: 'Index',
-        id: 'index',
-        items: [
-          {
-            title: '91 – 1356 lbs',
-            id: '91_1356',
-            flair: 'Civic standard',
-            description: null,
-            count: 86,
-            isSelected: false,
-          },
-          {
-            title: '90 - 1323 lbs',
-            id: '90_1323',
-            flair: null,
-            description: null,
-            count: 12,
-            isSelected: false,
-          },
-          {
-            title: '87-1201 lbs',
-            id: '87_1201',
-            flair: null,
-            description: null,
-            count: 22,
-            isSelected: false,
-          },
-        ],
-      },
-    ],
-  },
-  filterTypeMap[FilterContentTypes.CatalogFilterChecklistLarge],
+  mockPriceFilter,
 ];
-
-export default filters as CatalogFilterTypes[];

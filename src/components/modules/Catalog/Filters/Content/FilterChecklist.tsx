@@ -1,55 +1,58 @@
 import TitleCheckbox from '~/components/global/Checkbox/TitleCheckbox';
+import {
+  SiteCatalogFilterList,
+  SiteCatalogFilterListStyle,
+} from '~/data/models/SiteCatalogFilters';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 
-import {
-  CatalogFilterChecklist,
-  CatalogFilterChecklistLarge,
-  FilterContentTypes,
-} from '../Filter.types';
+import { hasActiveValue } from '../Filters.utils';
 import { ChildProps } from '../Popup/FilterPopup.utils';
 import styles from './FilterChecklist.styles';
 import largeStyles from './FilterChecklistLarge.styles';
 
 export default function FilterChecklist({
   filterGroups,
-  label,
+  filtersToApply,
+  header,
   onChange,
-  tooltip,
-  type,
-}: (CatalogFilterChecklist | CatalogFilterChecklistLarge) &
-  Pick<ChildProps, 'onChange' | 'filtersToApply'>) {
+  presentationStyle,
+}: SiteCatalogFilterList & Pick<ChildProps, 'onChange' | 'filtersToApply'>) {
+  const label = header?.title;
   const { greaterThan } = useBreakpoints();
   const lgStyles =
-    greaterThan.M && type === FilterContentTypes.CatalogFilterChecklistLarge
+    greaterThan.M && presentationStyle === SiteCatalogFilterListStyle.Large
       ? largeStyles
       : styles;
 
-  function handleChange(id: string) {
-    return () => onChange({ group: label, id, value: '' })();
+  function handleChange(value: Record<string, string>) {
+    return onChange({ value });
   }
+
   return (
     <div css={styles.root}>
       <div css={styles.labelContainer}>
         <h2 css={lgStyles.title}>{label}</h2>
-        {!greaterThan.M && tooltip && <p css={styles.tooltip}>{tooltip}</p>}
+        {header?.tooltip && <p css={styles.tooltip}>{header.tooltip.label}</p>}
       </div>
-      {filterGroups?.map(({ id, items, title }) => (
-        <div css={lgStyles.group} key={id}>
-          <h3 css={lgStyles.groupTitle}>{title}</h3>
-          {items.map(({ count, description, id, flair, title }) => (
-            <div css={styles.container} key={id}>
-              <TitleCheckbox
-                label={title}
-                description={description}
-                count={count}
-                flair={flair}
-                handleChange={handleChange('')}
-              />
-            </div>
-          ))}
+      {filterGroups?.map(({ header, items }, idx) => (
+        <div css={lgStyles.group} key={idx}>
+          {header?.title && <h3 css={lgStyles.groupTitle}>{header.title}</h3>}
+          {items.map((item, idx) => {
+            return (
+              <div css={styles.container} key={idx}>
+                <TitleCheckbox
+                  label={item.title}
+                  description={item.description}
+                  count={item.count}
+                  flair={item.flair}
+                  handleChange={handleChange(item.value)}
+                  defaultChecked={hasActiveValue(item, filtersToApply)}
+                />
+              </div>
+            );
+          })}
         </div>
       ))}
-      {greaterThan.M && tooltip && <p css={styles.tooltip}>{tooltip}</p>}
     </div>
   );
 }

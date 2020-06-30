@@ -1,13 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { SiteCatalogSummary } from '~/data/models/SiteCatalogSummary';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
-import { backendGetVehicleSummary } from '~/lib/backend/catalog/vehicle';
+import { backendGetVehicleProducts } from '~/lib/backend/catalog/vehicle';
 
 export default async (
   request: NextApiRequest,
   response: NextApiResponse<{
-    siteCatalogSummary: SiteCatalogSummary;
+    siteCatalogProducts: any;
   }>,
 ) => {
   backendBootstrap({ request });
@@ -21,11 +20,11 @@ export default async (
     }
   });
 
-  const siteCatalogSummary = await backendGetVehicleSummary({
+  const productsRes = await backendGetVehicleProducts({
     make,
     model,
     year,
     query: params,
   });
-  response.json(siteCatalogSummary);
+  response.json(productsRes);
 };

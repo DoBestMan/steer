@@ -2,168 +2,204 @@ import { MouseEvent, ReactNode, useCallback, useState } from 'react';
 
 import { createContext } from '~/lib/utils/context';
 
-export type FilterValue = number | string | boolean;
-export type FilterObject = { [id: string]: FilterValue };
-export type FilterMap = Record<string, FilterObject>;
-export interface UpdateFilterArgs {
-  group: string;
-  id: string;
-  value: FilterValue;
-}
-export interface ToggleFilterArgs extends UpdateFilterArgs {
-  overwrite?: boolean;
-}
+import { CatalogFilterTypes } from './Filter.types';
+import { getInitialFiltersState, getValueKeys } from './Filters.utils';
 
 interface ContextProviderProps {
   children: ReactNode;
-  onApplyFilters: (filters: FilterMap) => void;
+  onApplyFilters?: (filters: Record<string, string>) => void;
+  siteCatalogFilters: any;
 }
 
 /*
  * Filter context props
  * @activeFilters - currently applied filters (see data structure below)
  * @applyFilters - triggers search with newly added filters (filtersToApply)
- * @cancelApplyFilters - resets filtersToApply if a popup is closed without applying
+ * @clearFiltersToApply - resets to initial state if closing dropdown without resetting or applying
  * @clearSelectingFilter - closes filter dropdown
  * @createOpenFilterHandler - opens filter dropdown
  * @createResetFiltersHandler - resets all selected filters from a group
  * @createToggleFilterHandler - used for filters that are immediately applied on click (toggles/sort) with the option to overwrite all values
  * @createUpdateFilterGroup - updates grouped filters to apply once `Apply` is clicked
  * @filtersToApply - selected filters from a currently open popup (not immediately applied)
- * @selectingFilter - the filter that has an open dropdown
+ * @isLoading - loading state for fetching new results
+ * @isPopularActive - determines if popular filter button has active state
+ * @previewFiltersToApply - previews filters to apply with updated count (does not apply filters globally)
+ * @selectingFilter - the filter index that has an open dropdown
  * Some function props are used in both click event and other scenarios (useEffect or other custom trigger)
  * which is why they might be wrapped with another function
  */
+interface UpdateFilterArgs {
+  overwrite?: boolean;
+  value: Record<string, string>;
+}
 export interface FiltersContextProps {
-  activeFilters: FilterMap;
+  activeFilters: Record<string, string>;
   applyFilters: () => void;
-  cancelApplyFilters: () => void;
+  clearFiltersToApply: () => void;
   clearSelectingFilter: () => void;
-  createOpenFilterHandler: (label: string) => (e?: MouseEvent) => void;
-  createResetFiltersHandler: (label: string) => () => void;
-  createToggleFilterHandler: (filter: ToggleFilterArgs) => () => void;
-  createUpdateFilterGroup: (filter: UpdateFilterArgs) => () => void;
-  filtersToApply: FilterMap;
-  selectingFilter: string;
+  createOpenFilterHandler: (id: number | string) => (e?: MouseEvent) => void;
+  createResetFiltersHandler: (filter: CatalogFilterTypes) => () => void;
+  createToggleFilterHandler: (value: Record<string, string>) => () => void;
+  createUpdateFilterGroup: (args: UpdateFilterArgs) => () => void;
+  filtersToApply: Record<string, string>;
+  isLoading: boolean;
+  isPopularActive: boolean;
+  previewFiltersToApply: () => void;
+  selectingFilter: number | string | null;
 }
 
 const FiltersContext = createContext<FiltersContextProps>();
 
 /*
- * Filters map will parse query params and add these values to the initial state of applied filters
- * As the user applies filters in each group, they will be added to this map so
- * that filters from other groups will persist when we fetch the results
- * Dropdown filters have a nested key value and toggle filters will be top level key/value
+ * Filters map will run through initial results to determine filters that are marked as selected for initialState
+ * As the user applies filters in each group, they will be added to this map and then as query params so they persist
+ * Each filter has a value object that may contain multiple values (eg `sort` and `order` from the sort list)
+ * Sort filters and range filters will need to overwrite the values in state, while toggle filters will either
+ * add the value to the state, or remove it all together if untoggled (if value exists in state already)
+ * List filters will be appended as a comma separated list, and removed altogether if the value is empty
  * An example of what this might look like:
  *    {
- *      sortBy: {
- *        priceDesc: true
- *      },
- *      popular: {
- *        deals: true,
- *        fuelEfficient: true
- *      },
- *      brands: {
- *        firestone: true
- *      },
- *      warranty: {
- *        currentMin: 10000,
- *        currentMax: 25000
- *      }
+ *      sort: 'price',
+ *      order: 'desc',
+ *      deals: 'true',
+ *      brand: 'firestone,goodyear',
+ *      warranty: 0,5000
  *    }
  */
 
 interface ContextArgs {
   onApplyFilters: ContextProviderProps['onApplyFilters'];
+  siteCatalogFilters: any;
 }
 
-export function useFiltersContextSetup({ onApplyFilters }: ContextArgs) {
-  // TODO: parse query params and add to default applied filters
-  const initialState = {};
-  const [activeFilters, setActiveFilters] = useState<FilterMap>(initialState);
-  const [selectingFilter, setSelectingFilter] = useState('');
-  const [filtersToApply, setFiltersToApply] = useState<FilterMap>(
-    activeFilters,
+export function useFiltersContextSetup({
+  siteCatalogFilters,
+  onApplyFilters,
+}: ContextArgs) {
+  const { initialState, isPopularActive } = getInitialFiltersState(
+    siteCatalogFilters?.filtersList,
+    siteCatalogFilters?.sortList,
+  );
+  const [isLoading, setIsLoading] = useState(false);
+  const [selectingFilter, setSelectingFilter] = useState<
+    number | string | null
+  >(null);
+  const [filtersToApply, setFiltersToApply] = useState<Record<string, string>>(
+    initialState,
   );
 
+  const fetchData = async (filters: Record<string, string>) => {
+    setIsLoading(true);
+    onApplyFilters && (await onApplyFilters(filters));
+    setIsLoading(false);
+  };
+
   return {
-    activeFilters,
+    activeFilters: initialState,
     applyFilters: () => {
-      setSelectingFilter('');
-      onApplyFilters(filtersToApply);
-      setActiveFilters(filtersToApply);
+      setSelectingFilter(null);
+      fetchData(filtersToApply);
     },
-    cancelApplyFilters: () => {
-      setFiltersToApply(activeFilters);
+    clearFiltersToApply: () => {
+      setFiltersToApply(initialState);
     },
-    clearSelectingFilter: () => setSelectingFilter(''),
-    createOpenFilterHandler: (label: string) => (e?: MouseEvent) => {
-      setSelectingFilter(label);
+    clearSelectingFilter: () => setSelectingFilter(null),
+    createOpenFilterHandler: (id: number | string) => (e?: MouseEvent) => {
+      setSelectingFilter(id);
       if (e?.target instanceof HTMLButtonElement) {
         // force focus, document.activeElement isn't updated if you click
         // a filter button while another filter dropdown is open
         e.target.focus();
       }
     },
-    createResetFiltersHandler(group: string) {
-      return () => {
-        setFiltersToApply((prevState) => ({
-          ...prevState,
-          [group]: {},
-        }));
-      };
+    createResetFiltersHandler: (filter: CatalogFilterTypes) => () => {
+      const vals = getValueKeys(filter);
+      let newState = { ...filtersToApply };
+      vals.forEach((key) => {
+        if (newState[key]) {
+          const { [key]: _, ...rest } = newState;
+          newState = rest;
+          return;
+        }
+      });
+      setFiltersToApply(newState);
+      // Apply reset filters automatically?
+      // onApplyFilters(newState);
     },
-    createToggleFilterHandler: ({
-      group,
-      id,
-      value,
-      overwrite = false,
-    }: ToggleFilterArgs) => () => {
-      const newFilters = {
-        ...filtersToApply,
-        [group]: {
-          ...(!overwrite && filtersToApply[group]),
-          [id]: value,
-        },
-      };
-      setFiltersToApply(newFilters);
-      setActiveFilters(newFilters);
-      onApplyFilters(newFilters);
+    createToggleFilterHandler: (value: Record<string, string>) => () => {
+      let newState = { ...filtersToApply };
+      Object.keys(value).forEach((key) => {
+        if (newState[key]) {
+          const { [key]: _, ...rest } = newState;
+          newState = rest;
+          return;
+        }
+        newState[key] = value[key];
+      });
+      setFiltersToApply(newState);
+      fetchData(newState);
     },
     createUpdateFilterGroup: useCallback(
-      ({ group, id, value }: UpdateFilterArgs) => () => {
+      ({ value, overwrite = false }: UpdateFilterArgs) => () =>
         setFiltersToApply((prevState) => {
-          if (prevState[group] && prevState[group][id]) {
-            // immutably removes id from group in prevState
-            const { [id]: _, ...rest } = prevState[group];
-            return {
-              ...prevState,
-              [group]: {
-                ...rest,
-              },
-            };
-          }
-          return {
-            ...prevState,
-            [group]: {
-              ...prevState[group],
-              [id]: value,
-            },
-          };
-        });
-      },
+          let newState = { ...prevState };
+
+          Object.entries(value).forEach(([key, value]) => {
+            if (overwrite) {
+              newState[key] = value;
+              return;
+            }
+
+            // key did not exist in state, add it
+            if (!newState[key]) {
+              newState[key] = value;
+              return;
+            }
+
+            // filter key exists, add or remove value
+            // existing key does not include value, append to current val
+            if (!newState[key].includes(value)) {
+              newState[key] = `${newState[key]},${value}`;
+              return;
+            }
+
+            // value exists, remove it
+            const valArr = newState[key].split(',');
+            const filteredVals = valArr.filter((v) => v !== value);
+            const newVal = filteredVals.join(',');
+
+            // value is empty, remove key from state altogether
+            if (!newVal) {
+              const { [key]: _, ...rest } = newState;
+              newState = rest;
+              return;
+            }
+
+            // set newly modified value
+            newState[key] = newVal;
+            return;
+          });
+          return newState;
+        }),
       [],
     ),
     filtersToApply,
+    isLoading,
+    isPopularActive,
+    previewFiltersToApply: () => {
+      // TODO: preview count/updated filter results in open dropdown
+    },
     selectingFilter,
   };
 }
 
 export function FiltersContextProvider({
   children,
+  siteCatalogFilters,
   onApplyFilters,
 }: ContextProviderProps) {
-  const value = useFiltersContextSetup({ onApplyFilters });
+  const value = useFiltersContextSetup({ siteCatalogFilters, onApplyFilters });
   return (
     <FiltersContext.Provider value={value}>{children}</FiltersContext.Provider>
   );

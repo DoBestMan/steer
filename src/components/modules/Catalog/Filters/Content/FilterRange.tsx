@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useState } from 'react';
 
 import Range from '~/components/global/Range/Range';
+import { SiteCatalogFilterRange } from '~/data/models/SiteCatalogFilters';
 import { ui } from '~/lib/utils/ui-dictionary';
 
-import { CatalogFilterRange } from '../Filter.types';
 import {
   mapUnitToAriaFormatter,
   mapUnitToLabelFormatter,
@@ -12,23 +12,35 @@ import { ChildProps } from '../Popup/FilterPopup.utils';
 import styles from './FilterRange.styles';
 
 export default function FilterRange({
-  currentMax = 0,
-  currentMin = 0,
+  currentMaxValue,
+  currentMinValue,
   filtersToApply,
-  label,
+  header,
+  id,
   maxValue,
   minValue,
   onChange,
   step,
   unit,
-}: CatalogFilterRange & Pick<ChildProps, 'onChange' | 'filtersToApply'>) {
+}: SiteCatalogFilterRange & Pick<ChildProps, 'onChange' | 'filtersToApply'>) {
   const [shouldReset, setShouldReset] = useState(false);
-  const filterGroup = filtersToApply[label];
+  const filterGroup = filtersToApply[id];
   const handleChange = useCallback(
     (extrema: string, value: number) => {
-      onChange({ group: label, id: extrema, value })();
+      let val = '';
+      const min = filterGroup?.split(',')[0] || minValue;
+      const max = filterGroup?.split(',')[1] || maxValue;
+
+      if (extrema === 'currentMin') {
+        val = `${value},${max}`;
+      }
+      if (extrema === 'currentMax') {
+        val = `${min},${value}`;
+      }
+
+      onChange({ value: { [id]: val }, overwrite: true })();
     },
-    [label, onChange],
+    [id, filterGroup, maxValue, minValue, onChange],
   );
 
   useEffect(() => {
@@ -37,20 +49,21 @@ export default function FilterRange({
     }
     setShouldReset(false);
   }, [filterGroup]);
+
   return (
     <div css={styles.root}>
-      <h3 css={styles.title}>{label}</h3>
+      {header && <h3 css={styles.title}>{header.title}</h3>}
       <Range
         formatLabel={mapUnitToLabelFormatter[unit]}
         getAriaText={mapUnitToAriaFormatter[unit]}
-        name={ui('catalog.filters.slider', { name: label })}
+        name={ui('catalog.filters.slider', { name: id })}
         interval={step}
         onChange={handleChange}
         max={maxValue}
         shouldReset={shouldReset}
         min={minValue}
-        maxDefault={currentMax || maxValue}
-        minDefault={currentMin || minValue}
+        maxDefault={currentMaxValue || maxValue}
+        minDefault={currentMinValue || minValue}
       />
     </div>
   );

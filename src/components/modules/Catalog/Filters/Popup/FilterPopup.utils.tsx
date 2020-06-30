@@ -1,17 +1,19 @@
+import {
+  SiteCatalogFilterList,
+  SiteCatalogFilterRange,
+} from '~/data/models/SiteCatalogFilters';
+
 import FilterChecklist from '../Content/FilterChecklist';
 import FilterPopular from '../Content/FilterPopular';
 import FilterRange from '../Content/FilterRange';
 import FilterSort from '../Content/FilterSort';
 import {
-  CatalogFilterChecklist,
-  CatalogFilterChecklistLarge,
-  CatalogFilterPopular,
-  CatalogFilterRange,
-  CatalogFilterSort,
   CatalogFilterTypes,
   FilterContentTypes,
+  SiteCatalogFilterPopular,
+  SiteCatalogFilterSort,
 } from '../Filter.types';
-import { FilterMap, FiltersContextProps } from '../Filters.context';
+import { FiltersContextProps } from '../Filters.context';
 
 /*
  * ChildProps interface will be used in the filter content components, and generally use the same props with some exceptions (marked with **)
@@ -23,7 +25,7 @@ import { FilterMap, FiltersContextProps } from '../Filters.context';
 export interface ChildProps {
   applyFilters: () => void;
   filter: CatalogFilterTypes;
-  filtersToApply: FilterMap;
+  filtersToApply: Record<string, string>;
   isLarge?: boolean;
   onChange: FiltersContextProps['createUpdateFilterGroup'];
 }
@@ -36,72 +38,59 @@ export const mapTypeToContent: Record<
   FilterContentTypes,
   (props: ChildProps) => JSX.Element | null
 > = {
-  [FilterContentTypes.CatalogFilterChecklist]({
+  [FilterContentTypes.SiteCatalogFilterList]({
     filter,
     filtersToApply,
     onChange,
   }: ChildProps) {
     return (
       <FilterChecklist
-        {...(filter as CatalogFilterChecklist)}
-        onChange={onChange}
-        filtersToApply={filtersToApply}
-      />
-    );
-  },
-  [FilterContentTypes.CatalogFilterChecklistLarge]({
-    filter,
-    filtersToApply,
-    onChange,
-  }: ChildProps) {
-    return (
-      <FilterChecklist
-        {...(filter as CatalogFilterChecklistLarge)}
+        {...(filter as SiteCatalogFilterList)}
         filtersToApply={filtersToApply}
         onChange={onChange}
       />
     );
   },
-  [FilterContentTypes.CatalogFilterRange]({
+  [FilterContentTypes.SiteCatalogFilterRange]({
     filter,
     filtersToApply,
     onChange,
   }: ChildProps) {
     return (
       <FilterRange
-        {...(filter as CatalogFilterRange)}
+        {...(filter as SiteCatalogFilterRange)}
         onChange={onChange}
         filtersToApply={filtersToApply}
       />
     );
   },
-  [FilterContentTypes.CatalogFilterSort]({
+  [FilterContentTypes.SiteCatalogFilterSort]({
     applyFilters,
     filter,
     ...rest
   }: ChildProps) {
     return (
       <FilterSort
-        {...(filter as CatalogFilterSort)}
+        {...(filter as SiteCatalogFilterSort)}
         {...rest}
         applyFilters={applyFilters}
       />
     );
   },
-  [FilterContentTypes.CatalogFilterPopular]({
+  [FilterContentTypes.SiteCatalogFilterPopular]({
     filter,
     filtersToApply,
     onChange,
   }: ChildProps) {
     return (
       <FilterPopular
-        {...(filter as CatalogFilterPopular)}
+        {...(filter as SiteCatalogFilterPopular)}
         filtersToApply={filtersToApply}
         onChange={onChange}
       />
     );
   },
-  [FilterContentTypes.CatalogFilterToggle]() {
+  [FilterContentTypes.SiteCatalogFilterToggle]() {
     return null;
   },
 };

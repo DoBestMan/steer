@@ -6,7 +6,6 @@ const styles: StylesMap = {
     padding: `${SPACING.SIZE_10}px 0`,
     textAlign: 'left',
   },
-  description: [typography.smallCopyTight, { color: COLORS.LIGHT.GRAY_70 }],
   flair: [
     typography.smallCopyTight,
     {
@@ -17,13 +16,6 @@ const styles: StylesMap = {
         fontSize: 8,
       },
       color: COLORS.GLOBAL.ORANGE,
-    },
-  ],
-  label: [
-    typography.secondaryHeadline,
-    {
-      marginRight: SPACING.SIZE_05,
-      [MQ.L]: typography.primarySubhead,
     },
   ],
   radio: {

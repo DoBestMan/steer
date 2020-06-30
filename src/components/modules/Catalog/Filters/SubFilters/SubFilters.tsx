@@ -1,11 +1,16 @@
 import Link from '~/components/global/Link/Link';
 import Range from '~/components/global/Range/Range';
 import { RANGE_SLIDER_SIZE } from '~/components/global/Range/Range.constants';
+import {
+  SiteCatalogFilterRange,
+  SiteCatalogFilterState,
+  SiteCatalogSortListItem,
+} from '~/data/models/SiteCatalogFilters';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
-import { CatalogFilterRange, CatalogFilterSort } from '../Filter.types';
+import { FilterContentTypes } from '../Filter.types';
 import {
   mapUnitToAriaFormatter,
   mapUnitToLabelFormatter,
@@ -14,41 +19,42 @@ import { useFiltersContext } from '../Filters.context';
 import FilterPopup from '../Popup/FilterPopup';
 import styles from './SubFilters.styles';
 
+const PRICE_ID = 'price';
+const SORT_ID = 'sort';
+
 interface Props {
-  priceFilter: CatalogFilterRange;
+  priceFilter: SiteCatalogFilterRange;
   resultsCount: number;
-  sortFilter: CatalogFilterSort;
+  sortList: SiteCatalogSortListItem[];
 }
 
 export default function SubFilters({
   resultsCount,
-  sortFilter,
+  sortList,
   priceFilter,
 }: Props) {
   const {
-    currentMax,
-    currentMin,
-    label,
+    currentMaxValue,
+    currentMinValue,
+    id,
     maxValue,
     minValue,
     step,
     unit,
   } = priceFilter;
   const {
-    activeFilters,
+    // activeFilters,
     clearSelectingFilter,
     createOpenFilterHandler,
     selectingFilter,
   } = useFiltersContext();
-  const min = currentMin || minValue;
-  const max = currentMax || maxValue;
+  const min = currentMinValue || minValue;
+  const max = currentMaxValue || maxValue;
   const { lessThan } = useBreakpoints();
   const priceFormatter = mapUnitToLabelFormatter[unit];
-  const sortKey =
-    activeFilters[sortFilter.label] &&
-    Object.keys(activeFilters[sortFilter.label])[0];
-  const sortItem =
-    sortKey && sortFilter.items.find((item) => item.id === sortKey);
+  const sortItem = sortList.find(
+    (item) => item.state === SiteCatalogFilterState.Selected,
+  );
   return (
     <div css={styles.root}>
       <p css={[styles.results, !resultsCount && styles.resultsNone]}>
@@ -59,8 +65,9 @@ export default function SubFilters({
       </p>
       <Link
         theme={THEME.LIGHT}
+        className="filter-button"
         as="button"
-        onClick={createOpenFilterHandler(priceFilter.label)}
+        onClick={createOpenFilterHandler(PRICE_ID)}
         css={[styles.range, styles.smallShow]}
       >
         {ui('catalog.filters.priceRange', {
@@ -70,9 +77,9 @@ export default function SubFilters({
       </Link>
       {lessThan.L ? (
         <FilterPopup
-          isOpen={sortFilter.label === selectingFilter}
+          isOpen={selectingFilter === PRICE_ID}
           onClose={clearSelectingFilter}
-          filter={sortFilter}
+          filter={priceFilter}
         />
       ) : (
         <>
@@ -82,7 +89,7 @@ export default function SubFilters({
               size={RANGE_SLIDER_SIZE.SMALL}
               formatLabel={mapUnitToLabelFormatter[unit]}
               getAriaText={mapUnitToAriaFormatter[unit]}
-              name={ui('catalog.filters.slider', { name: label })}
+              name={ui('catalog.filters.slider', { name: id })}
               interval={step}
               max={maxValue}
               min={minValue}
@@ -94,17 +101,23 @@ export default function SubFilters({
       )}
       <p css={styles.sortLabel}>{ui('catalog.filters.sortBy')} </p>
       <Link
+        className="filter-button"
         theme={THEME.LIGHT}
         as="button"
-        onClick={createOpenFilterHandler(sortFilter.label)}
+        onClick={createOpenFilterHandler(SORT_ID)}
         css={styles.sort}
+        aria-expanded={selectingFilter === SORT_ID}
       >
-        {(sortItem && sortItem.title) || sortFilter.items[0].title}
+        {(sortItem && sortItem.title) || sortList[0].title}
       </Link>
       <FilterPopup
-        isOpen={sortFilter.label === selectingFilter}
+        hasActionBar={false}
+        isOpen={selectingFilter === SORT_ID}
         onClose={clearSelectingFilter}
-        filter={sortFilter}
+        filter={{
+          items: sortList,
+          type: FilterContentTypes.SiteCatalogFilterSort,
+        }}
       />
     </div>
   );

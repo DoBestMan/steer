@@ -40,9 +40,6 @@ const styles: StylesMap = {
     display: 'none',
   },
   listContainer: {
-    '.filters-wrapper': {
-      display: 'flex',
-    },
     margin: `0 ${-SPACING.SIZE_20}px`,
     [MQ.M]: {
       margin: `0 ${-SPACING.SIZE_40}px`,

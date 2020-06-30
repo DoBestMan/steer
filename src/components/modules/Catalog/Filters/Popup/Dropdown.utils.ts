@@ -1,5 +1,7 @@
 import { CSSProperties } from 'react';
 
+import { SPACING } from '~/lib/constants';
+
 /**
  * Get x position of opened button el to use as x position for dropdown
  * Defaults to left position but flips dropdown (right position)
@@ -7,22 +9,21 @@ import { CSSProperties } from 'react';
  * @returns {} | { left: xPos } | { right: xPos }
  */
 export function getPosition(): CSSProperties {
-  const containerEl = document.getElementsByClassName('filters-wrapper')[0];
-  const childrenArr = Array.from(containerEl.children);
-  const selectedButton = childrenArr.find(
-    (node: Element) => node.getAttribute('aria-expanded') === 'true',
+  const selectedButton = document.querySelector(
+    '.filter-button[aria-expanded="true"]',
   );
   const buttonElBounds = selectedButton?.getBoundingClientRect();
-
   if (!buttonElBounds || !selectedButton) {
     return {};
   }
 
-  const lastThird = window.innerWidth - window.innerWidth / 3;
-  if (buttonElBounds.x > lastThird) {
+  const lastHalf = window.innerWidth - window.innerWidth / 2;
+  if (buttonElBounds.x > lastHalf) {
     return {
       right:
-        window.innerWidth - (buttonElBounds.left + selectedButton.clientWidth),
+        window.innerWidth -
+        (buttonElBounds.left + buttonElBounds.width) -
+        SPACING.SIZE_20,
     };
   }
   return { left: buttonElBounds.x };

@@ -80,6 +80,7 @@ const styles: StylesMap = {
   titleRoot: {
     display: 'flex',
     justifyContent: 'space-between',
+    width: '100%',
   },
 };
 

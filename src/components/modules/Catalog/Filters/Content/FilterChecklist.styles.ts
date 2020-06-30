@@ -12,30 +12,6 @@ const styles: StylesMap = {
     justifyContent: 'space-between',
     ':not(:last-of-type)': { marginBottom: SPACING.SIZE_15 },
   },
-  containerLabel: {
-    alignItems: 'center',
-    display: 'flex',
-  },
-  count: [
-    typography.smallCopy,
-    {
-      color: COLORS.LIGHT.GRAY_70,
-      paddingTop: SPACING.SIZE_02,
-    },
-  ],
-  description: [typography.smallCopyTight, { color: COLORS.LIGHT.GRAY_70 }],
-  flair: [
-    typography.smallCopyTight,
-    {
-      ':before': {
-        color: COLORS.GLOBAL.BLACK,
-        padding: `0 ${SPACING.SIZE_05}px`,
-        content: '"•"',
-        fontSize: 8,
-      },
-      color: COLORS.GLOBAL.ORANGE,
-    },
-  ],
   group: {
     marginBottom: SPACING.SIZE_40,
   },

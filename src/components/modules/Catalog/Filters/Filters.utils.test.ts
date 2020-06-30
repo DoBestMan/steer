@@ -1,15 +1,17 @@
-import { CatalogFilterTypes, FilterContentTypes } from './Filter.types';
+import { SiteCatalogFilterTypeEnum } from '~/data/models/SiteCatalogFilters';
+
+import { CatalogFilterTypes } from './Filter.types';
 import { getGroupedFilters } from './Filters.utils';
 
 const toggleFilters = [
-  { type: FilterContentTypes.CatalogFilterToggle },
-  { type: FilterContentTypes.CatalogFilterToggle },
+  { type: SiteCatalogFilterTypeEnum.SiteCatalogFilterToggle },
+  { type: SiteCatalogFilterTypeEnum.SiteCatalogFilterToggle },
 ];
 
 const otherFilters = [
-  { type: FilterContentTypes.CatalogFilterRange },
-  { type: FilterContentTypes.CatalogFilterChecklistLarge },
-  { type: FilterContentTypes.CatalogFilterChecklist },
+  { type: SiteCatalogFilterTypeEnum.SiteCatalogFilterRange },
+  { type: SiteCatalogFilterTypeEnum.SiteCatalogFilterList },
+  { type: SiteCatalogFilterTypeEnum.SiteCatalogFilterList },
 ];
 
 describe('getGroupedFilters', () => {
@@ -23,7 +25,7 @@ describe('getGroupedFilters', () => {
       (filter) => filter.type,
     );
     const filteredTypes = popularFilterTypes.filter(
-      (type) => type === FilterContentTypes.CatalogFilterToggle,
+      (type) => type === SiteCatalogFilterTypeEnum.SiteCatalogFilterToggle,
     );
 
     expect(groupedFilters.popularFilters).toHaveLength(2);
@@ -43,7 +45,9 @@ describe('getGroupedFilters', () => {
     expect(groupedFilters.popularFilters).toHaveLength(2);
     expect(groupedFilters.otherFilters).toHaveLength(3);
     expect(
-      otherFilterTypes.includes(FilterContentTypes.CatalogFilterToggle),
+      otherFilterTypes.includes(
+        SiteCatalogFilterTypeEnum.SiteCatalogFilterToggle,
+      ),
     ).toBe(false);
   });
 });

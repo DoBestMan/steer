@@ -4,15 +4,13 @@ import { useUserPersonalizationContext } from '~/context/UserPersonalization.con
 import Header from './Header';
 
 interface Props {
+  handleUpdateResults?: (filters: Record<string, string>) => void;
   hasTopPicks: boolean;
   isAdvancedView: boolean;
   isInternal?: boolean;
+  siteCatalogFilters: any;
   sizeList?: string[];
   toggleView: () => void;
-}
-
-function onSearchWithFilters(_filters: object) {
-  // TODO: run search with new filters
 }
 
 const titlePlaceholder = (
@@ -24,15 +22,21 @@ const titlePlaceholder = (
 );
 
 export default function HeaderContainer({
+  handleUpdateResults,
   hasTopPicks,
   isAdvancedView,
+  siteCatalogFilters,
   sizeList,
   toggleView,
 }: Props) {
   const { locationString } = useUserPersonalizationContext();
   return (
-    <FiltersContextProvider onApplyFilters={onSearchWithFilters}>
+    <FiltersContextProvider
+      siteCatalogFilters={siteCatalogFilters}
+      onApplyFilters={handleUpdateResults}
+    >
       <Header
+        siteCatalogFilters={siteCatalogFilters}
         hasTopPicks={hasTopPicks}
         isAdvancedView={isAdvancedView}
         isInternal={false}

@@ -4,8 +4,13 @@ import { ReactNode } from 'react';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { ui } from '~/lib/utils/ui-dictionary';
 
+import { CatalogFilterTypes } from './Filters/Filter.types';
 import FilterButtonsCarousel from './Filters/FilterButtonsCarousel';
-import mockFilters, { filterRange, filterSort } from './Filters/Filters.mocks';
+import {
+  filterSort,
+  mockPriceFilter,
+  mockSiteCatalogFilters,
+} from './Filters/Filters.mocks';
 import { getGroupedFilters } from './Filters/Filters.utils';
 import SubFilters from './Filters/SubFilters/SubFilters';
 import { DATA_COMPONENT_LABEL } from './Header.constants';
@@ -19,6 +24,7 @@ interface Props {
   location: string;
   onToggleView: () => void;
   resultsCount: number;
+  siteCatalogFilters: any;
   sizeList?: string[];
   title: string | ReactNode;
 }
@@ -28,14 +34,22 @@ export default function Header({
   isAdvancedView = false,
   isInternal = false,
   resultsCount,
+  siteCatalogFilters,
   ...rest
 }: Props) {
   const { header } = useTheme();
   const { greaterThan, isLoading } = useBreakpoints();
-  const groupedFilters = greaterThan.M && getGroupedFilters(mockFilters);
-  const filtersToMap = groupedFilters
-    ? groupedFilters.otherFilters
-    : mockFilters;
+  // TODO: remove mock fallbacks
+  const priceFilter =
+    siteCatalogFilters?.filtersList.find(
+      (f: CatalogFilterTypes) => 'id' in f && f.id === 'price',
+    ) || mockPriceFilter;
+  const filters =
+    siteCatalogFilters?.filtersList.filter(
+      (f: CatalogFilterTypes) => f !== priceFilter,
+    ) || mockSiteCatalogFilters;
+  const groupedFilters = greaterThan.M && getGroupedFilters(filters);
+  const filtersToMap = groupedFilters ? groupedFilters.otherFilters : filters;
 
   return (
     <>
@@ -66,8 +80,9 @@ export default function Header({
       </div>
       <SubFilters
         resultsCount={resultsCount}
-        priceFilter={filterRange}
-        sortFilter={filterSort}
+        priceFilter={priceFilter}
+        // TODO: remove mock fallback
+        sortList={siteCatalogFilters?.sortList || filterSort}
       />
     </>
   );

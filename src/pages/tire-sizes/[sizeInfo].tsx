@@ -20,6 +20,7 @@ function TireCategory() {
   const dataFn = isDiameterRoute ? fetchDiameter : fetchClassic;
   dataFn(/* api options/params */);
 
+  // TODO: add handleUpdateResults prop
   return <CatalogPageContainer hasTopPicks={false} />;
 }
 

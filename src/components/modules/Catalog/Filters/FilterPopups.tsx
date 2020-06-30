@@ -1,4 +1,4 @@
-import { ui } from '~/lib/utils/ui-dictionary';
+import { SiteCatalogFilterTypeEnum } from '~/data/models/SiteCatalogFilters';
 
 import { CatalogFilterTypes, FilterContentTypes } from './Filter.types';
 import { useFiltersContext } from './Filters.context';
@@ -11,28 +11,27 @@ interface Props {
 
 export default function FilterPopups({ filters, popularFilters }: Props) {
   const { clearSelectingFilter, selectingFilter } = useFiltersContext();
-  const popularLabel = ui('catalog.filters.popularFilters');
+
   return (
     <>
       {!!popularFilters.length && (
         <FilterPopup
-          isOpen={popularLabel === selectingFilter}
+          isOpen={selectingFilter === 0}
           onClose={clearSelectingFilter}
           filter={{
-            label: popularLabel,
-            type: FilterContentTypes.CatalogFilterPopular,
+            type: FilterContentTypes.SiteCatalogFilterPopular,
             items: popularFilters,
           }}
         />
       )}
       {filters.map((filter, idx) => {
-        if (filter.type === FilterContentTypes.CatalogFilterToggle) {
+        if (filter.type === SiteCatalogFilterTypeEnum.SiteCatalogFilterToggle) {
           return null;
         }
         return (
           <FilterPopup
             key={idx}
-            isOpen={filter.label === selectingFilter}
+            isOpen={selectingFilter === idx + 1}
             onClose={clearSelectingFilter}
             filter={filter}
           />

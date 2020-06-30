@@ -1,29 +1,24 @@
 import { useEffect, useRef, useState } from 'react';
 
-import Radio from '~/components/global/Radio/Radio';
+import TitleRadio from '~/components/global/Radio/TitleRadio';
+import { SiteCatalogFilterState } from '~/data/models/SiteCatalogFilters';
+import { ui } from '~/lib/utils/ui-dictionary';
 
-import { CatalogFilterSort } from '../Filter.types';
+import { SiteCatalogFilterSort } from '../Filter.types';
 import { useFiltersContext } from '../Filters.context';
 import { ChildProps } from '../Popup/FilterPopup.utils';
 import styles from './FilterSort.styles';
 
 export default function FilterSort({
   applyFilters,
-  isLarge,
   items,
-  label,
-}: CatalogFilterSort & Pick<ChildProps, 'applyFilters' | 'isLarge'>) {
+}: SiteCatalogFilterSort & Pick<ChildProps, 'applyFilters'>) {
   const [activeValue, setActiveValue] = useState('');
   const { createToggleFilterHandler } = useFiltersContext();
-  function updateValue(id: string) {
+  function updateValue(value: Record<string, string>, title: string) {
     return () => {
-      setActiveValue(id);
-      createToggleFilterHandler({
-        group: label,
-        id,
-        value: true,
-        overwrite: true,
-      })();
+      setActiveValue(title);
+      createToggleFilterHandler(value)();
     };
   }
 
@@ -37,35 +32,21 @@ export default function FilterSort({
 
   return (
     <div>
-      <h3 css={styles.title}>{label}</h3>
+      <h3 css={styles.title}>{ui('catalog.filters.sortBy')}</h3>
       <ul>
-        {items.map(({ title, description, flair, id }) => (
-          <li key={id}>
-            {!isLarge ? (
-              <Radio
-                onChange={updateValue(id)}
-                name={title}
-                value={id}
-                activeValue={activeValue}
-                css={styles.radio}
-              >
-                <span>
-                  <span>
-                    <p css={styles.label}>{title}</p>
-                    {flair && <p css={styles.flair}>{flair}</p>}
-                  </span>
-                  <p css={styles.description}>{description}</p>
-                </span>
-              </Radio>
-            ) : (
-              <button onClick={updateValue(id)} css={styles.button}>
-                <span>
-                  <p css={styles.label}>{title}</p>
-                  {flair && <p css={styles.flair}>{flair}</p>}
-                </span>
-                <p css={styles.description}>{description}</p>
-              </button>
-            )}
+        {items.map(({ title, description, state, value }, idx) => (
+          <li key={idx}>
+            <TitleRadio
+              name="sort"
+              onChange={updateValue(value, title)}
+              value={title}
+              description={description}
+              label={title}
+              activeValue={
+                state === SiteCatalogFilterState.Selected ? title : undefined
+              }
+              css={styles.radio}
+            />
           </li>
         ))}
       </ul>

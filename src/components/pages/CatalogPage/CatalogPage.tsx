@@ -18,13 +18,17 @@ import {
 
 interface Props {
   comesFromSearch: boolean;
+  handleUpdateResults?: (filters: Record<string, string>) => void;
   hasTopPicks: boolean;
+  siteCatalogProducts?: any;
   siteCatalogSummary?: SiteCatalogSummary;
 }
 
 function CatalogPage({
   hasTopPicks,
   comesFromSearch,
+  handleUpdateResults,
+  siteCatalogProducts,
   siteCatalogSummary,
 }: Props) {
   // TEMP: use route params for testing flows
@@ -73,6 +77,8 @@ function CatalogPage({
         {hasResults && showCatalogGrid && (
           <div ref={catalogGrid}>
             <CatalogGrid
+              siteCatalogProducts={siteCatalogProducts}
+              handleUpdateResults={handleUpdateResults}
               hasTopPicks={hasTopPicks}
               siteCatalogSummary={siteCatalogSummary}
             />
