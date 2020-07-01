@@ -15,16 +15,23 @@ const STICKY_BAR_HEIGHT = {
 
 export const primaryColumnStyles: StylesMap = {
   primaryButton: {
-    flex: 1,
     justifyContent: 'center',
 
-    '&:only-child': {
+    ':not(:first-of-type):not(:only-child)': {
+      flex: 1,
+    },
+
+    ':only-child': {
       flex: 'inherit',
       width: '100%',
 
       [MQ.L]: {
         width: '90%',
       },
+    },
+
+    [MQ.M]: {
+      flex: 1,
     },
   },
   primaryLabel: [
@@ -133,8 +140,9 @@ const styles: StylesMap = {
   primaryColumn: {
     alignItems: 'center',
     display: 'flex',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     width: '100%',
+
     [MQ.L]: {
       justifyContent: 'flex-end',
       width: '40%',
