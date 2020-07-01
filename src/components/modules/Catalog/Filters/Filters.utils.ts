@@ -13,6 +13,9 @@ interface GroupedFilters {
   popularFilters: CatalogFilterTypes[];
 }
 
+/**
+ * Toggle filters are grouped into `Popular Filters` on large breakpoint
+ */
 export function getGroupedFilters(
   filters: CatalogFilterTypes[],
 ): GroupedFilters {
@@ -32,6 +35,9 @@ export function getGroupedFilters(
   return groupedFilters;
 }
 
+/**
+ * Catch all function to determine the label a filter should use based on filter shape
+ */
 export function getFilterLabel(filter: CatalogFilterTypes) {
   if ('item' in filter) {
     return filter.item.title;
@@ -44,6 +50,17 @@ export function getFilterLabel(filter: CatalogFilterTypes) {
   return '';
 }
 
+/**
+ * Maps over filters returned from the API to determine the initial state.
+ * Most will use the `state` field as reference (value = "Selected") but range filter
+ * will look to `currentMin/MaxValue` for active state
+ * So we don't have to map over all values again to determine the Popular Filters button state,
+ * this function also determines the Popular Filters state if any toggle filters are active
+ * @returns {
+ *    initialState: Record<string, string>
+ *    isPopularActive: boolean
+ * }
+ */
 export function getInitialFiltersState(
   filtersList: CatalogFilterTypes[],
   sortList: SiteCatalogSortListItem[],
@@ -112,6 +129,11 @@ export function getInitialFiltersState(
   };
 }
 
+/**
+ * Unlike other filters that may include a value in state, radio types need to
+ * have a strict match to their value in state
+ * @returns boolean
+ */
 export function strictEqualsValue(
   value: Record<string, string>,
   activeFilters: Record<string, string>,
@@ -119,6 +141,10 @@ export function strictEqualsValue(
   return Object.keys(value).every((key) => activeFilters[key] === value[key]);
 }
 
+/**
+ * Based on the shape of a filter, determines if any values exist in state
+ * @returns boolean
+ */
 export function hasActiveValue(
   filter: CatalogFilterTypes | SiteCatalogFilterItem,
   activeFilters: Record<string, string>,
@@ -150,6 +176,11 @@ export function hasActiveValue(
   return false;
 }
 
+/**
+ * Based on the shape of a filter, returns a deduped list of the filter value keys
+ * Used when resetting a filter; maps over keys to remove from state
+ * @returns string[]
+ */
 export function getValueKeys(filter: CatalogFilterTypes) {
   let valueKeys: string[] = [];
   // toggle filter

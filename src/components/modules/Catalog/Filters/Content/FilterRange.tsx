@@ -52,7 +52,16 @@ export default function FilterRange({
 
   return (
     <div css={styles.root}>
-      {header && <h3 css={styles.title}>{header.title}</h3>}
+      {header && (
+        <div css={styles.header}>
+          <h2 css={styles.title}>{header.title}</h2>
+          {header?.infoLink && (
+            <p css={[styles.infoLink, styles.infoLinkTitle]}>
+              {header.infoLink.label}
+            </p>
+          )}
+        </div>
+      )}
       <Range
         formatLabel={mapUnitToLabelFormatter[unit]}
         getAriaText={mapUnitToAriaFormatter[unit]}

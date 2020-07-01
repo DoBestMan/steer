@@ -19,9 +19,25 @@ const styles: StylesMap = {
     typography.eyebrow,
     {
       color: COLORS.LIGHT.GRAY_70,
-      marginBottom: SPACING.SIZE_15,
     },
   ],
+  header: {
+    marginBottom: SPACING.SIZE_40,
+    [MQ.L]: { display: 'none' },
+  },
+  infoLink: [
+    typography.smallCopyTight,
+    {
+      borderBottom: BORDERS.DOTTED_GRAY_40_2PX,
+      borderColor: COLORS.LIGHT.GRAY_70,
+      color: COLORS.LIGHT.GRAY_70,
+      cursor: 'pointer',
+      width: 'fit-content',
+    },
+  ],
+  infoLinkTitle: {
+    marginRight: SPACING.SIZE_30,
+  },
   label: [
     typography.filterItemLabel,
     {
@@ -31,27 +47,12 @@ const styles: StylesMap = {
   labelContainer: {
     display: 'flex',
     justifyContent: 'space-between',
-    marginBottom: SPACING.SIZE_40,
-    [MQ.L]: { display: 'none' },
+    marginBottom: SPACING.SIZE_15,
   },
   root: {
     minWidth: 200,
   },
   title: typography.eyebrow,
-  tooltip: [
-    typography.smallCopyTight,
-    {
-      borderBottom: BORDERS.DOTTED_GRAY_40_2PX,
-      borderColor: COLORS.LIGHT.GRAY_70,
-      color: COLORS.LIGHT.GRAY_70,
-      cursor: 'pointer',
-      marginRight: SPACING.SIZE_30,
-      width: 'fit-content',
-      [MQ.L]: {
-        marginRight: 0,
-      },
-    },
-  ],
 };
 
 export default styles;

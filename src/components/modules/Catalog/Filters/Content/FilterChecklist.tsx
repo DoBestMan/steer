@@ -94,13 +94,24 @@ export default function FilterChecklist({
 
   return (
     <div css={styles.root}>
-      <div css={styles.labelContainer}>
+      <div css={[styles.header, styles.labelContainer]}>
         <h2 css={lgStyles.title}>{label}</h2>
-        {header?.tooltip && <p css={styles.tooltip}>{header.tooltip.label}</p>}
+        {header?.infoLink && (
+          <p css={[styles.infoLink, styles.infoLinkTitle]}>
+            {header.infoLink.label}
+          </p>
+        )}
       </div>
       {filterGroups?.map((group: SiteCatalogFilterGroup, idx) => (
         <div css={lgStyles.group} key={idx}>
-          {header?.title && <h3 css={lgStyles.groupTitle}>{header.title}</h3>}
+          {group.header && (
+            <div css={styles.labelContainer}>
+              <h3 css={lgStyles.groupTitle}>{group.header.title}</h3>
+              {group.header.infoLink && (
+                <p css={styles.infoLink}>{group.header.infoLink.label}</p>
+              )}
+            </div>
+          )}
           {mapGroupTypeToInput[group.groupType]({
             group,
             handleChange,

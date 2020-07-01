@@ -16,13 +16,16 @@ export enum SiteCatalogFilterTypeEnum {
 }
 
 export interface SiteCatalogFilterHeader {
+  infoLink: {
+    label: string;
+    siteStaticModal: SiteStaticModal;
+  } | null;
   title: string;
-  tooltip: SiteCatalogFilterHeaderTooltip | null;
 }
 
-export interface SiteCatalogFilterHeaderTooltip {
+export interface SiteStaticModal {
   contentId: string;
-  label: string;
+  type: 'SiteStaticModal';
 }
 
 export interface SiteCatalogFilterItem {

@@ -30,7 +30,6 @@ const styles: StylesMap = {
     typography.eyebrow,
     {
       marginBottom: SPACING.SIZE_40,
-      paddingBottom: SPACING.SIZE_25,
       [MQ.L]: {
         display: 'none',
       },

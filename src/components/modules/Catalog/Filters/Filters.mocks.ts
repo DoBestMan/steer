@@ -1,6 +1,9 @@
 /* eslint-disable sort-keys */
 import {
+  SiteCatalogFilterItem,
+  SiteCatalogFilterList,
   SiteCatalogFilterRange,
+  SiteCatalogFilterToggle,
   SiteCatalogFilterTypeEnum,
   SiteCatalogSortListItem,
 } from '~/data/models/SiteCatalogFilters';
@@ -11,20 +14,25 @@ export const filterTypeSelect: SiteCatalogFilterTypeEnum[] = [
   SiteCatalogFilterTypeEnum.SiteCatalogFilterToggle,
 ];
 
-export const filterRange = {
-  currentMaxValue: null,
-  currentMinValue: null,
+export const warrantyFilter = {
+  type: 'SiteCatalogFilterRange',
+  id: 'warranty',
   header: {
     title: 'Warranty',
-    tooltip: null,
+    infoLink: {
+      label: 'How to choose?',
+      siteStaticModal: {
+        contentId: 'TBD',
+        type: 'SiteStaticModal',
+      },
+    },
   },
-  id: 'price',
-  label: 'Price',
-  maxValue: 349,
-  minValue: 49,
-  step: 1,
-  type: SiteCatalogFilterTypeEnum.SiteCatalogFilterRange,
-  unit: 'UnitUSD',
+  minValue: 0,
+  maxValue: 70000,
+  currentMinValue: null,
+  currentMaxValue: null,
+  step: 5000,
+  unit: 'UnitMiles',
 } as SiteCatalogFilterRange;
 
 export const mockPriceFilter = {
@@ -32,7 +40,7 @@ export const mockPriceFilter = {
   id: 'price',
   header: {
     title: 'Price',
-    tooltip: null,
+    infoLink: null,
   },
   minValue: 49,
   maxValue: 349,
@@ -62,7 +70,7 @@ export const filterSort = [
   {
     title: 'Price: Low to High',
     description: null,
-    state: 'Normal',
+    state: 'Selected',
     value: {
       sort: 'price',
       order: 'asc',
@@ -126,14 +134,20 @@ export const filterChecklist = {
   presentationStyle: 'Normal',
   header: {
     title: 'Tire type',
-    tooltip: null,
+    infoLink: {
+      label: 'How to choose?',
+      siteStaticModal: {
+        contentId: 'TBD',
+        type: 'SiteStaticModal',
+      },
+    },
   },
   filterGroups: [
     {
       groupType: 'Checklist',
       header: {
         title: 'Tire type',
-        tooltip: null,
+        infoLink: null,
       },
       items: [
         {
@@ -162,7 +176,13 @@ export const filterChecklist = {
       groupType: 'Checklist',
       header: {
         title: 'Performance',
-        tooltip: null,
+        infoLink: {
+          label: "What's this?",
+          siteStaticModal: {
+            contentId: 'TBD',
+            type: 'SiteStaticModal',
+          },
+        },
       },
       items: [
         {
@@ -228,7 +248,7 @@ export const filterChecklist = {
       ],
     },
   ],
-};
+} as SiteCatalogFilterList;
 
 export const mockSiteCatalogFilters = [
   {
@@ -301,9 +321,12 @@ export const mockSiteCatalogFilters = [
     presentationStyle: 'Normal',
     header: {
       title: 'Brand',
-      tooltip: {
+      infoLink: {
         label: 'Learn more',
-        contentId: 'TBD',
+        siteStaticModal: {
+          contentId: 'TBD',
+          type: 'SiteStaticModal',
+        },
       },
     },
     filterGroups: [
@@ -347,7 +370,7 @@ export const mockSiteCatalogFilters = [
         groupType: 'Checklist',
         header: {
           title: 'Featured',
-          tooltip: null,
+          infoLink: null,
         },
         items: [
           {
@@ -385,7 +408,7 @@ export const mockSiteCatalogFilters = [
             flair: 'Top rated',
             description: null,
             count: 9,
-            state: 'Normal',
+            state: 'Selected',
             value: {
               brand: 'pirelli',
             },
@@ -409,14 +432,14 @@ export const mockSiteCatalogFilters = [
     presentationStyle: 'Normal',
     header: {
       title: 'Tire type',
-      tooltip: null,
+      infoLink: null,
     },
     filterGroups: [
       {
         groupType: 'Checklist',
         header: {
           title: 'Tire type',
-          tooltip: null,
+          infoLink: null,
         },
         items: [
           {
@@ -445,7 +468,7 @@ export const mockSiteCatalogFilters = [
         groupType: 'Checklist',
         header: {
           title: 'Performance',
-          tooltip: null,
+          infoLink: null,
         },
         items: [
           {
@@ -517,7 +540,7 @@ export const mockSiteCatalogFilters = [
     presentationStyle: 'Normal',
     header: {
       title: 'Speed',
-      tooltip: null,
+      infoLink: null,
     },
     filterGroups: [
       {
@@ -563,16 +586,19 @@ export const mockSiteCatalogFilters = [
     presentationStyle: 'Normal',
     header: {
       title: 'Load',
-      tooltip: null,
+      infoLink: null,
     },
     filterGroups: [
       {
         groupType: 'Checklist',
         header: {
           title: 'Range',
-          tooltip: {
+          infoLink: {
             label: "What's this?",
-            contentId: 'TBD',
+            siteStaticModal: {
+              contentId: 'TBD',
+              type: 'SiteStaticModal',
+            },
           },
         },
         items: [
@@ -622,9 +648,12 @@ export const mockSiteCatalogFilters = [
         groupType: 'Checklist',
         header: {
           title: 'Index',
-          tooltip: {
+          infoLink: {
             label: "What's this?",
-            contentId: 'TBD',
+            siteStaticModal: {
+              contentId: 'TBD',
+              type: 'SiteStaticModal',
+            },
           },
         },
         items: [
@@ -662,36 +691,20 @@ export const mockSiteCatalogFilters = [
       },
     ],
   },
-  {
-    type: 'SiteCatalogFilterRange',
-    id: 'warranty',
-    header: {
-      title: 'Warranty',
-      tooltip: {
-        label: 'How to choose?',
-        contentId: 'TBD',
-      },
-    },
-    minValue: 0,
-    maxValue: 70000,
-    currentMinValue: null,
-    currentMaxValue: null,
-    step: 5000,
-    unit: 'UnitMiles',
-  },
+  warrantyFilter,
   {
     type: 'SiteCatalogFilterList',
     presentationStyle: 'Large',
     header: {
       title: 'More filters',
-      tooltip: null,
+      infoLink: null,
     },
     filterGroups: [
       {
         groupType: 'Checklist',
         header: {
           title: 'Features',
-          tooltip: null,
+          infoLink: null,
         },
         items: [
           {
@@ -711,7 +724,7 @@ export const mockSiteCatalogFilters = [
         groupType: 'Checklist',
         header: {
           title: 'Sidewall types',
-          tooltip: null,
+          infoLink: null,
         },
         items: [
           {
@@ -749,7 +762,7 @@ export const mockSiteCatalogFilters = [
         groupType: 'Radio',
         header: {
           title: 'Run flat',
-          tooltip: null,
+          infoLink: null,
         },
         items: [
           {
@@ -788,7 +801,7 @@ export const mockSiteCatalogFilters = [
         groupType: 'Radio',
         header: {
           title: 'Smartway',
-          tooltip: null,
+          infoLink: null,
         },
         items: [
           {
@@ -827,7 +840,7 @@ export const mockSiteCatalogFilters = [
         groupType: 'Radio',
         header: {
           title: 'Studded / Studdable',
-          tooltip: null,
+          infoLink: null,
         },
         items: [
           {
@@ -884,3 +897,35 @@ export const mockSiteCatalogFilters = [
   },
   mockPriceFilter,
 ];
+
+// mocks for Filters.utils.test.ts
+export const mockItem = ({
+  value: { foo: 'bar' },
+} as unknown) as SiteCatalogFilterItem;
+export const mockToggle = ({
+  type: 'SiteCatalogFilterToggle',
+  item: {
+    state: 'Selected',
+    title: 'Toggle Label',
+    value: { foo: 'bar' },
+  },
+} as unknown) as SiteCatalogFilterToggle;
+export const mockList = ({
+  type: 'SiteCatalogFilterList',
+  header: {
+    title: 'List Label',
+  },
+  filterGroups: [
+    {
+      items: [
+        {
+          value: { foo: 'bar', baz: 'foo' },
+        },
+      ],
+    },
+  ],
+} as unknown) as SiteCatalogFilterToggle;
+export const mockRange = {
+  type: 'SiteCatalogFilterRange',
+  id: 'range',
+} as SiteCatalogFilterRange;
