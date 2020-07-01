@@ -74,6 +74,10 @@ export function getInitialFiltersState(
         group.items.forEach((item: SiteCatalogFilterItem) => {
           if (item.state === SiteCatalogFilterState.Selected) {
             Object.keys(item.value).forEach((key) => {
+              if (initialState[key]) {
+                initialState[key] = initialState[key] + ',' + item.value[key];
+                return;
+              }
               initialState[key] = item.value[key];
             });
           }
@@ -106,6 +110,13 @@ export function getInitialFiltersState(
     initialState,
     isPopularActive,
   };
+}
+
+export function strictEqualsValue(
+  value: Record<string, string>,
+  activeFilters: Record<string, string>,
+) {
+  return Object.keys(value).every((key) => activeFilters[key] === value[key]);
 }
 
 export function hasActiveValue(

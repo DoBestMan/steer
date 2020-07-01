@@ -104,7 +104,9 @@ describe('useFiltersContextSetup', () => {
 
     act(() =>
       result.current.createToggleFilterHandler({
-        foo: 'bar',
+        value: {
+          foo: 'bar',
+        },
       })(),
     );
 

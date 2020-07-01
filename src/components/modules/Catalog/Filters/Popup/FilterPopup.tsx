@@ -64,7 +64,6 @@ export default function FilterPopup({
   }
 
   const childProps = {
-    applyFilters,
     filter,
     filtersToApply,
     isLarge,

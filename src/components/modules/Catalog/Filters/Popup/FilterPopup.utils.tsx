@@ -17,13 +17,11 @@ import { FiltersContextProps } from '../Filters.context';
 
 /*
  * ChildProps interface will be used in the filter content components, and generally use the same props with some exceptions (marked with **)
- * @applyFilter - ** used in `FilterSort`, although it uses a popup it is technically a toggle filter and should apply immediately when clicked
  * @filter - the filter the component uses
  * @isLarge - ** if component relies on bk styles, we have to pass from the parent otherwise there will be a flash if used in the child component due to default bk being small
  * @onChange - used to update filter map as user applies filter values (NOT the `Apply` button)
  */
 export interface ChildProps {
-  applyFilters: () => void;
   filter: CatalogFilterTypes;
   filtersToApply: Record<string, string>;
   isLarge?: boolean;
@@ -64,18 +62,8 @@ export const mapTypeToContent: Record<
       />
     );
   },
-  [FilterContentTypes.SiteCatalogFilterSort]({
-    applyFilters,
-    filter,
-    ...rest
-  }: ChildProps) {
-    return (
-      <FilterSort
-        {...(filter as SiteCatalogFilterSort)}
-        {...rest}
-        applyFilters={applyFilters}
-      />
-    );
+  [FilterContentTypes.SiteCatalogFilterSort]({ filter, ...rest }: ChildProps) {
+    return <FilterSort {...(filter as SiteCatalogFilterSort)} {...rest} />;
   },
   [FilterContentTypes.SiteCatalogFilterPopular]({
     filter,

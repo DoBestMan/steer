@@ -1,4 +1,11 @@
-import { MouseEvent, ReactNode, useCallback, useState } from 'react';
+import {
+  MouseEvent,
+  ReactNode,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 
 import { createContext } from '~/lib/utils/context';
 
@@ -40,7 +47,7 @@ export interface FiltersContextProps {
   clearSelectingFilter: () => void;
   createOpenFilterHandler: (id: number | string) => (e?: MouseEvent) => void;
   createResetFiltersHandler: (filter: CatalogFilterTypes) => () => void;
-  createToggleFilterHandler: (value: Record<string, string>) => () => void;
+  createToggleFilterHandler: (args: UpdateFilterArgs) => () => void;
   createUpdateFilterGroup: (args: UpdateFilterArgs) => () => void;
   filtersToApply: Record<string, string>;
   isLoading: boolean;
@@ -77,9 +84,13 @@ export function useFiltersContextSetup({
   siteCatalogFilters,
   onApplyFilters,
 }: ContextArgs) {
-  const { initialState, isPopularActive } = getInitialFiltersState(
-    siteCatalogFilters?.filtersList,
-    siteCatalogFilters?.sortList,
+  const { initialState, isPopularActive } = useMemo(
+    () =>
+      getInitialFiltersState(
+        siteCatalogFilters?.filtersList,
+        siteCatalogFilters?.sortList,
+      ),
+    [siteCatalogFilters],
   );
   const [isLoading, setIsLoading] = useState(false);
   const [selectingFilter, setSelectingFilter] = useState<
@@ -88,6 +99,14 @@ export function useFiltersContextSetup({
   const [filtersToApply, setFiltersToApply] = useState<Record<string, string>>(
     initialState,
   );
+
+  useEffect(() => {
+    const { initialState } = getInitialFiltersState(
+      siteCatalogFilters?.filtersList,
+      siteCatalogFilters?.sortList,
+    );
+    setFiltersToApply(initialState);
+  }, [siteCatalogFilters]);
 
   const fetchData = async (filters: Record<string, string>) => {
     setIsLoading(true);
@@ -127,15 +146,20 @@ export function useFiltersContextSetup({
       // Apply reset filters automatically?
       // onApplyFilters(newState);
     },
-    createToggleFilterHandler: (value: Record<string, string>) => () => {
+    createToggleFilterHandler: ({
+      value,
+      overwrite = false,
+    }: UpdateFilterArgs) => () => {
       let newState = { ...filtersToApply };
       Object.keys(value).forEach((key) => {
-        if (newState[key]) {
-          const { [key]: _, ...rest } = newState;
-          newState = rest;
+        if (overwrite || !newState[key]) {
+          newState[key] = value[key];
           return;
         }
-        newState[key] = value[key];
+
+        const { [key]: _, ...rest } = newState;
+        newState = rest;
+        return;
       });
       setFiltersToApply(newState);
       fetchData(newState);

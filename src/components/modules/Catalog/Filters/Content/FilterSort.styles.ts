@@ -18,9 +18,13 @@ const styles: StylesMap = {
       color: COLORS.GLOBAL.ORANGE,
     },
   ],
+  listItem: { marginBottom: SPACING.SIZE_15 },
   radio: {
     marginBottom: SPACING.SIZE_20,
     width: '100%',
+  },
+  selected: {
+    color: COLORS.GLOBAL.ORANGE,
   },
   title: [
     typography.eyebrow,

@@ -88,7 +88,9 @@ export default function FilterButtonsCarousel({
                 css={styles.filterButton}
                 key={idx}
                 isActive={isActive}
-                onClick={createToggleFilterHandler(filter.item.value)}
+                onClick={createToggleFilterHandler({
+                  value: filter.item.value,
+                })}
                 theme={header.buttonTheme}
               >
                 {label}

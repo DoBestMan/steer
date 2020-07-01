@@ -1,54 +1,56 @@
-import { useEffect, useRef, useState } from 'react';
-
 import TitleRadio from '~/components/global/Radio/TitleRadio';
-import { SiteCatalogFilterState } from '~/data/models/SiteCatalogFilters';
+import TitleSelectorLabel from '~/components/global/TitleSelectorLabel/TitleSelectorLabel';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import { SiteCatalogFilterSort } from '../Filter.types';
 import { useFiltersContext } from '../Filters.context';
+import { strictEqualsValue } from '../Filters.utils';
 import { ChildProps } from '../Popup/FilterPopup.utils';
 import styles from './FilterSort.styles';
 
 export default function FilterSort({
-  applyFilters,
+  filtersToApply,
+  isLarge,
   items,
-}: SiteCatalogFilterSort & Pick<ChildProps, 'applyFilters'>) {
-  const [activeValue, setActiveValue] = useState('');
-  const { createToggleFilterHandler } = useFiltersContext();
-  function updateValue(value: Record<string, string>, title: string) {
+}: SiteCatalogFilterSort & Pick<ChildProps, 'filtersToApply' | 'isLarge'>) {
+  const {
+    createToggleFilterHandler,
+    clearSelectingFilter,
+  } = useFiltersContext();
+  function updateValue(value: Record<string, string>) {
     return () => {
-      setActiveValue(title);
-      createToggleFilterHandler(value)();
+      createToggleFilterHandler({ value, overwrite: true })();
+      clearSelectingFilter();
     };
   }
-
-  const prevActiveFilter = useRef(activeValue);
-  useEffect(() => {
-    if (activeValue !== prevActiveFilter.current) {
-      applyFilters();
-    }
-    prevActiveFilter.current = activeValue;
-  }, [activeValue, applyFilters]);
 
   return (
     <div>
       <h3 css={styles.title}>{ui('catalog.filters.sortBy')}</h3>
       <ul>
-        {items.map(({ title, description, state, value }, idx) => (
-          <li key={idx}>
-            <TitleRadio
-              name="sort"
-              onChange={updateValue(value, title)}
-              value={title}
-              description={description}
-              label={title}
-              activeValue={
-                state === SiteCatalogFilterState.Selected ? title : undefined
-              }
-              css={styles.radio}
-            />
-          </li>
-        ))}
+        {items.map(({ title, description, value }, idx) => {
+          const onUpdate = updateValue(value);
+          const isSelected = strictEqualsValue(value, filtersToApply);
+          return (
+            <li css={styles.listItem} key={idx}>
+              {isLarge ? (
+                <button onClick={onUpdate} css={isSelected && styles.selected}>
+                  <TitleSelectorLabel description={description} label={title} />
+                </button>
+              ) : (
+                <TitleRadio
+                  name="sort"
+                  onChange={onUpdate}
+                  value={title}
+                  description={description}
+                  label={title}
+                  activeValue={isSelected ? title : undefined}
+                  css={styles.radio}
+                />
+              )}
+            </li>
+          );
+        })}
       </ul>
     </div>
   );

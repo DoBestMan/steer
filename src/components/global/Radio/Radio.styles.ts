@@ -48,6 +48,7 @@ export const styles: StylesMap = {
   input: {
     appearance: 'none',
     opacity: 0,
+    position: 'absolute',
     ':focus': {
       '+ span': {
         outline: BORDERS.FOCUS_STATE,
@@ -65,6 +66,7 @@ export const styles: StylesMap = {
   titleRoot: {
     display: 'flex',
     justifyContent: 'space-between',
+    width: '100%',
   },
 };
 

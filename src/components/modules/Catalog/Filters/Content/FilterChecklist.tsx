@@ -1,14 +1,78 @@
 import TitleCheckbox from '~/components/global/Checkbox/TitleCheckbox';
+import TitleRadio from '~/components/global/Radio/TitleRadio';
 import {
+  SiteCatalogFilterGroup,
+  SiteCatalogFilterGroupType,
   SiteCatalogFilterList,
   SiteCatalogFilterListStyle,
+  SiteCatalogFilterState,
 } from '~/data/models/SiteCatalogFilters';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 
-import { hasActiveValue } from '../Filters.utils';
+import { hasActiveValue, strictEqualsValue } from '../Filters.utils';
 import { ChildProps } from '../Popup/FilterPopup.utils';
 import styles from './FilterChecklist.styles';
 import largeStyles from './FilterChecklistLarge.styles';
+
+interface GroupProps {
+  filtersToApply: Record<string, string>;
+  group: SiteCatalogFilterGroup;
+  handleChange: (
+    value: Record<string, string>,
+    overwrite?: boolean,
+  ) => () => void;
+}
+const mapGroupTypeToInput: Record<
+  SiteCatalogFilterGroupType,
+  (props: GroupProps) => JSX.Element[]
+> = {
+  [SiteCatalogFilterGroupType.Checklist]({
+    group,
+    filtersToApply,
+    handleChange,
+  }: GroupProps) {
+    return group.items.map((item, idx) => (
+      <div css={styles.container} key={idx}>
+        <TitleCheckbox
+          key={idx}
+          label={item.title}
+          description={item.description}
+          count={item.count}
+          flair={item.flair}
+          isDisabled={item.state === SiteCatalogFilterState.Disabled}
+          handleChange={handleChange(item.value)}
+          defaultChecked={hasActiveValue(item, filtersToApply)}
+        />
+      </div>
+    ));
+  },
+  [SiteCatalogFilterGroupType.Radio]({
+    group,
+    handleChange,
+    filtersToApply,
+  }: GroupProps) {
+    return group.items.map((item, idx) => (
+      <div css={styles.container} key={idx}>
+        <TitleRadio
+          name={`group-${idx}`}
+          key={idx}
+          label={item.title}
+          description={item.description}
+          count={item.count}
+          flair={item.flair}
+          isDisabled={item.state === SiteCatalogFilterState.Disabled}
+          onChange={handleChange(item.value, true)}
+          value={item.title}
+          activeValue={
+            strictEqualsValue(item.value, filtersToApply)
+              ? item.title
+              : undefined
+          }
+        />
+      </div>
+    ));
+  },
+};
 
 export default function FilterChecklist({
   filterGroups,
@@ -24,8 +88,8 @@ export default function FilterChecklist({
       ? largeStyles
       : styles;
 
-  function handleChange(value: Record<string, string>) {
-    return onChange({ value });
+  function handleChange(value: Record<string, string>, overwrite?: boolean) {
+    return onChange({ value, overwrite });
   }
 
   return (
@@ -34,22 +98,13 @@ export default function FilterChecklist({
         <h2 css={lgStyles.title}>{label}</h2>
         {header?.tooltip && <p css={styles.tooltip}>{header.tooltip.label}</p>}
       </div>
-      {filterGroups?.map(({ header, items }, idx) => (
+      {filterGroups?.map((group: SiteCatalogFilterGroup, idx) => (
         <div css={lgStyles.group} key={idx}>
           {header?.title && <h3 css={lgStyles.groupTitle}>{header.title}</h3>}
-          {items.map((item, idx) => {
-            return (
-              <div css={styles.container} key={idx}>
-                <TitleCheckbox
-                  label={item.title}
-                  description={item.description}
-                  count={item.count}
-                  flair={item.flair}
-                  handleChange={handleChange(item.value)}
-                  defaultChecked={hasActiveValue(item, filtersToApply)}
-                />
-              </div>
-            );
+          {mapGroupTypeToInput[group.groupType]({
+            group,
+            handleChange,
+            filtersToApply,
           })}
         </div>
       ))}
