@@ -43,10 +43,6 @@ function QuantitySelector({
     onInterceptAction(value);
   };
 
-  const icon = isIntercept
-    ? ICONS.QUANTITY_SELECTOR_CAR_TILTED
-    : ICONS.QUANTITY_SELECTOR_CAR;
-
   return (
     <BottomCardModal
       contentLabel={ui('pdp.quantitySelector.modalLabel')}
@@ -57,7 +53,7 @@ function QuantitySelector({
         <FeaturedInfoModule
           copy={copy}
           customCopyStyles={isIntercept ? styles.copyConfirmation : undefined}
-          icon={icon}
+          icon={ICONS.TIP_MECHANIC}
           featureDescription={ui('pdp.quantitySelector.featureDescription')}
           title={title}
         />

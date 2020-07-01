@@ -61,6 +61,7 @@ export type Icon =
   | 'star-outline'
   | 'tag'
   | 'thumbs-up'
+  | 'tip-mechanic'
   | 'tire'
   | 'trending'
   | 'twitter'
