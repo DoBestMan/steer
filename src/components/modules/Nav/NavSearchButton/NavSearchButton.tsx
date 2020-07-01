@@ -1,22 +1,27 @@
-import { useTheme } from 'emotion-theming';
+import { CSSObject } from '@emotion/core';
 
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
-import { useSearchContext } from '~/components/modules/Search/Search.context';
 import SearchLabel from '~/components/modules/Search/SearchLabel/SearchLabel';
-import { BREAKPOINT_SIZES } from '~/lib/constants';
+import { BREAKPOINT_SIZES, CSSObjectType } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
 
 import styles from './NavSearchButton.styles';
 
-function NavSearchButton() {
-  const { border, iconColor, textColor } = useTheme();
-  const { toggleIsSearchOpen } = useSearchContext();
-  function handleToggleSearch() {
-    toggleIsSearchOpen();
-  }
+interface Props {
+  border: CSSObjectType;
+  handleToggleSearch: () => void;
+  iconColor: CSSObjectType;
+  textColor: CSSObject;
+}
 
+function NavSearchButton({
+  border,
+  handleToggleSearch,
+  iconColor,
+  textColor,
+}: Props) {
   return (
     <button
       aria-label={ui('common.modal.open', { moduleName: 'search' })}

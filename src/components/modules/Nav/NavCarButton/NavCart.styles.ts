@@ -1,15 +1,23 @@
-import { COLORS, SPACING, StylesMap } from '~/lib/constants';
+import { COLORS, SPACING, StylesMap, THEME } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 import { NAV_CONTENT_HEIGHT } from '../Nav.styles';
 
 const BADGE_SIZE = 16;
 
+export const badgeColor = {
+  [THEME.LIGHT]: {
+    backgroundColor: COLORS.GLOBAL.ORANGE,
+  },
+  [THEME.ORANGE]: {
+    backgroundColor: COLORS.LIGHT.GRAY_70,
+  },
+};
+
 const styles: StylesMap = {
   badge: [
     typography.eyebrow,
     {
-      backgroundColor: COLORS.GLOBAL.ORANGE,
       border: 'none',
       borderRadius: BADGE_SIZE / 2,
       color: COLORS.GLOBAL.WHITE,

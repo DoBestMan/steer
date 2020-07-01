@@ -6,27 +6,20 @@ import { EXITED, TransitionStatus } from 'react-transition-group/Transition';
 
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
-import Icon from '~/components/global/Icon/Icon';
-import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Image from '~/components/global/Image/Image';
 import BaseLink from '~/components/global/Link/BaseLink';
-import NavLink from '~/components/global/Link/NavLink';
 import { useNavContext } from '~/context/Nav.context';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { layout } from '~/styles/layout.styles';
 
+import { useSearchContext } from '../Search/Search.context';
 import { animations, styles } from './Nav.styles';
-import NavCart from './NavCarButton/NavCart';
-import NavSearchButton from './NavSearchButton/NavSearchButton';
+import { NavThemeObject } from './Nav.theme';
+import NavBar from './NavBar';
 
 interface Props {
   isHomepage?: boolean;
 }
-
-const CONSTANTS = {
-  LOGO_ALT_TEXT: ui('logo.alt'),
-  MOBILE_MENU_ARIA_LABEL: ui('nav.mobile.label'),
-};
 
 function Nav({ isHomepage }: Props) {
   const {
@@ -36,7 +29,8 @@ function Nav({ isHomepage }: Props) {
     toggleSubNav,
     createSelectLinkHandler,
   } = useNavContext();
-  const { textColor, linkTheme, logoUrl } = useTheme();
+  const { toggleIsSearchOpen } = useSearchContext();
+  const theme: NavThemeObject = useTheme();
   const router = useRouter();
 
   const [path, setPath] = useState(router?.pathname);
@@ -62,7 +56,7 @@ function Nav({ isHomepage }: Props) {
 
         const rootStyles = [
           styles.root,
-          textColor,
+          theme.textColor,
           animations[`root_${containerTransitionState}`],
         ];
 
@@ -77,52 +71,22 @@ function Nav({ isHomepage }: Props) {
                 css={[layout.container, layout.centeredVertical]}
               >
                 <Image
-                  altText={CONSTANTS.LOGO_ALT_TEXT}
+                  altText={ui('logo.alt')}
                   css={styles.logo}
-                  src={logoUrl}
+                  src={theme.logoUrl}
                 />
               </BaseLink>
             </GridItem>
-            <GridItem
-              as="ul"
-              css={[styles.nav, styles.container]}
-              gridColumn="4/6"
-              gridColumnM="4/8"
-              gridColumnL="4/14"
-            >
-              {!isHomepage && (
-                <li css={styles.searchButton}>
-                  <NavSearchButton />
-                </li>
-              )}
-              {links.map((link, idx) => (
-                <li
-                  css={[
-                    styles.listItem,
-                    idx === links.length - 1 && styles.lastItem,
-                  ]}
-                  key={idx}
-                >
-                  <NavLink
-                    isActive={false}
-                    onClick={createSelectLinkHandler(link)}
-                    theme={linkTheme}
-                    {...link}
-                  />
-                </li>
-              ))}
-              <li css={styles.cart}>
-                <NavCart />
-              </li>
-              <li css={[styles.listItem, styles.hamburger]}>
-                <button
-                  aria-label={CONSTANTS.MOBILE_MENU_ARIA_LABEL}
-                  onClick={toggleSubNav}
-                >
-                  <Icon name={ICONS.MENU} />
-                </button>
-              </li>
-            </GridItem>
+            <NavBar
+              handleOnNavLinkClick={createSelectLinkHandler}
+              handleOnSearchClick={toggleIsSearchOpen}
+              handleOnSubNavClick={toggleSubNav}
+              isHomepage={isHomepage}
+              links={links}
+              // TODO number to be determined via cookies
+              numberOfCartItems={4}
+              theme={theme}
+            />
           </Grid>
         );
       }}

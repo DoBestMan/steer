@@ -23,7 +23,7 @@ interface Props {
   icon?: IconType;
   iconPosition?: LINK_ICON_POSITION;
   isDisabled?: boolean;
-  theme?: THEME.DARK | THEME.LIGHT | LINK_THEME;
+  theme?: THEME.DARK | THEME.LIGHT | THEME.ORANGE | LINK_THEME;
 }
 
 export interface AnchorProps extends BaseLinkProps, Props {}

@@ -49,7 +49,7 @@ export const accountLinks = [
   { href: '/', isExternal: true, text: ui('nav.links.trackOrder') },
 ];
 
-function buildLinks({
+export function buildLinks({
   locationString,
 }: {
   locationString: UserPersonalizationProps['locationString'];

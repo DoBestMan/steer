@@ -1,10 +1,9 @@
-import { useTheme } from 'emotion-theming';
-
 import Link from '~/components/global/Link/Link';
 import { cartLink } from '~/context/Nav.context';
 import { ui } from '~/lib/utils/ui-dictionary';
 
-import styles from './NavCart.styles';
+import { NavThemeObject } from '../Nav.theme';
+import styles, { badgeColor } from './NavCart.styles';
 
 function getCartString(quantity: number) {
   let items = ui('nav.cart.multipleItems', { quantity });
@@ -26,10 +25,11 @@ function getCartNumber(items: number) {
   return `${items}`;
 }
 
-function NavCart() {
-  const { linkTheme, textColor } = useTheme();
-  // number to be determined via a hook
-  const numberOfCartItems = 4;
+interface Props extends Pick<NavThemeObject, 'linkTheme' | 'textColor'> {
+  numberOfCartItems: number;
+}
+
+function NavCart({ linkTheme, numberOfCartItems, textColor }: Props) {
   const label = ui('nav.cart.contentLabel', getCartString(numberOfCartItems));
   const cartNumber = getCartNumber(numberOfCartItems);
 
@@ -44,7 +44,10 @@ function NavCart() {
       theme={linkTheme}
       aria-label={label}
     >
-      <span css={styles.badge} aria-hidden="true">
+      <span
+        css={[styles.badge, linkTheme && badgeColor[linkTheme]]}
+        aria-hidden="true"
+      >
         {cartNumber}
       </span>
     </Link>

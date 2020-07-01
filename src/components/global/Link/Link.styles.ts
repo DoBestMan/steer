@@ -100,6 +100,8 @@ export const linkBorder = {
   [THEME.LIGHT]: {
     borderColor: COLORS.LIGHT.GRAY_70,
   },
+
+  [THEME.ORANGE]: {},
 };
 
 export const footerLink = {
