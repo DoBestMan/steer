@@ -8,7 +8,7 @@ function CategoryInfo({
 }: NonNullable<SiteMenuBrowseItem['info']>) {
   return (
     <span css={styles.info}>
-      <h4 css={styles.infoTitle}>{title}</h4>
+      <p css={styles.infoTitle}>{title}</p>
       <p>{body}</p>
     </span>
   );

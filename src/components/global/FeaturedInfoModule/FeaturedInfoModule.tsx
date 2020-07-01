@@ -1,3 +1,5 @@
+import { ReactType } from 'react';
+
 import Icon from '~/components/global/Icon/Icon';
 import { Icon as IconType } from '~/components/global/Icon/Icon.types';
 import Link from '~/components/global/Link/Link';
@@ -18,6 +20,7 @@ export interface FeaturedInfoModuleProps {
   customTitleStyles?: CSSStyles;
   dataVendor?: string;
   featureDescription?: string;
+  headerAs?: ReactType;
   icon?: IconType;
   title: string;
 }
@@ -29,22 +32,27 @@ function FeaturedInfoModule({
   customTitleStyles,
   dataVendor,
   featureDescription,
+  headerAs = 'div',
   icon,
   title,
 }: FeaturedInfoModuleProps) {
+  const Header = headerAs;
   return (
     <div css={styles.container}>
       {icon && <Icon name={icon} css={styles.icon} />}
+
       {featureDescription && (
-        <h2 css={styles.featureDescription}>{featureDescription}</h2>
+        <p css={styles.featureDescription}>{featureDescription}</p>
       )}
 
-      <h3 css={[styles.title, customTitleStyles]}>
+      <Header css={[styles.title, customTitleStyles]}>
         <Markdown renderers={{ paragraph: 'span' }}>{title}</Markdown>
-      </h3>
+      </Header>
+
       <div css={[styles.copy, customCopyStyles]}>
         <Markdown>{copy}</Markdown>
       </div>
+
       {action && (
         <Link
           css={styles.action}

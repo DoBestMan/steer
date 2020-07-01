@@ -38,7 +38,10 @@ function Footer({ customerServiceNumber, isCustomerServiceEnabled }: Props) {
         gridColumnXL="2/5"
         css={[typography.secondaryHeadline, styles.supportSection]}
       >
-        <SupportHeading isCustomerServiceEnabled={isCustomerServiceEnabled} />
+        <SupportHeading
+          isCustomerServiceEnabled={isCustomerServiceEnabled}
+          isInFooter
+        />
       </GridItem>
 
       <GridItem

@@ -18,7 +18,7 @@ function ListCard({ items, more, title }: SiteInsightItemList) {
       css={styles.root}
     >
       <GridItem gridColumnL="1/3" gridColumnXL="1/3">
-        <div css={styles.title}>{title}</div>
+        <h2 css={styles.title}>{title}</h2>
       </GridItem>
       <GridItem gridColumnL="3/6" gridColumnXL="3/6">
         <ul css={styles.list}>

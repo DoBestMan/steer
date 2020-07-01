@@ -51,7 +51,7 @@ function Card({
             <Icon name={eyebrowIcon.svgId} css={styles.eyebrowIcon} />
           </div>
         )}
-        <p css={[typography.secondaryHeadline, styles.title]}>{title}</p>
+        <h3 css={[typography.secondaryHeadline, styles.title]}>{title}</h3>
         <p css={[typography.bodyCopy, styles.description]}>{body}</p>
         <Link href={link.href} icon={ICONS.CHEVRON_RIGHT}>
           {linkLabel}

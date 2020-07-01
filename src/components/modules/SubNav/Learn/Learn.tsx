@@ -43,7 +43,7 @@ function Learn({
     >
       <GridItem css={styles.root}>
         <Icon css={styles.icon} name={ICONS.SMILEY} />
-        <h1 css={[typography.primaryHeadline, styles.title]}>{steps.title}</h1>
+        <p css={[typography.primaryHeadline, styles.title]}>{steps.title}</p>
         <ol css={styles.stepList}>
           {steps.list.map((step, idx) => (
             <li css={styles.step} key={step}>

@@ -15,26 +15,23 @@ const styles: StylesMap = {
   },
   description: {
     color: COLORS.DARK.GRAY_40,
-    [MQ.S]: {
-      display: 'none',
-    },
+    marginBottom: SPACING.SIZE_40,
+
     [MQ.M]: {
-      display: 'initial',
       marginBottom: SPACING.SIZE_40,
     },
   },
-  title: {
-    color: COLORS.GLOBAL.WHITE,
-    marginBottom: SPACING.SIZE_20,
-    [MQ.S]: typography.eyebrow,
-    [MQ.M]: [
-      typography.primaryHeadline,
-      {
+  title: [
+    typography.primaryHeadline,
+    {
+      color: COLORS.GLOBAL.WHITE,
+      marginBottom: SPACING.SIZE_20,
+
+      [MQ.M]: {
         marginBottom: SPACING.SIZE_10,
-        textTransform: 'initial',
       },
-    ],
-  },
+    },
+  ],
 };
 
 export default styles;

@@ -22,21 +22,13 @@ function Reviews({
   return (
     <>
       <GridItem gridColumnM="2/5" gridColumnL="3/7">
-        <div
-          css={[layout.hideOnSmall, typography.primaryHeadline, styles.title]}
-        >
-          {title}
-        </div>
+        <h2 css={[typography.primaryHeadline, styles.title]}>{title}</h2>
         <Ratings
           ratingStars={ratingStars}
           ratingLabel={ratingLabel}
           ratingLabelIcon={ratingLabelIcon}
         />
-        <div
-          css={[layout.hideOnSmall, typography.bodyCopy, styles.description]}
-        >
-          {body}
-        </div>
+        <div css={[typography.bodyCopy, styles.description]}>{body}</div>
         <Link
           href={link.href}
           css={[layout.hideOnSmall, styles.link]}

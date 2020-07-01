@@ -57,9 +57,7 @@ function Categories({
         gridColumnXL="4/8"
         css={styles.categoryContent}
       >
-        <h1 css={[typography.jumboHeadline, styles.mobileHeader]}>
-          {category}
-        </h1>
+        <p css={[typography.jumboHeadline, styles.mobileHeader]}>{category}</p>
         {siteMenuBrowseGroupList.map((props, idx) => (
           <BrowseTiresGroupItem
             key={idx}
