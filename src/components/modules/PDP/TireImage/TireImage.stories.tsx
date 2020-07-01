@@ -1,20 +1,16 @@
-import { Props as VideoProps } from '~/components/global/Video/Video';
 import { SiteImage } from '~/data/models/SiteImage';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 import { PRODUCT_IMAGE_TYPES } from '~/lib/constants/productImage.types';
 
 import TireImage from './TireImage';
+import { ImageItemProps } from './TireImageCarouselItem';
 
 export default {
   component: TireImage,
   title: 'PDP/Tire Image',
 };
 
-const imageList: Array<{
-  image?: SiteImage;
-  productImageType?: PRODUCT_IMAGE_TYPES;
-  video?: VideoProps;
-}> = [
+const imageList: ImageItemProps[] = [
   {
     video: {
       posterFrame: 'https://picsum.photos/1920/1080',
@@ -84,6 +80,18 @@ const imageList: Array<{
   },
 ];
 
+const brand = {
+  image: {
+    altText: 'AG-Dura',
+    height: 20,
+    src:
+      'https://images.simpletire.com/image/upload/v1593195319/manf-logos/417b.svg',
+    type: ICON_IMAGE_TYPE.IMAGE,
+    width: 120,
+  } as SiteImage,
+  label: 'AG-Dura',
+};
+
 export function TireImageWithKnobs() {
-  return <TireImage imageList={imageList} />;
+  return <TireImage imageList={imageList} brand={brand} />;
 }

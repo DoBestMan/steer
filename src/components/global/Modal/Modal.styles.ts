@@ -21,6 +21,11 @@ import {
 
 const OVERLAY_BOX_SHADOW = '0px 4px 4px rgba(0, 0, 0, 0.25)';
 const OVERLAY_PANEL_WIDTH = 425;
+export const FULLSCREEN_PADDINGS = {
+  BOTTOM: SPACING.SIZE_60,
+  RIGHT: SPACING.SIZE_20,
+  TOP: SPACING.SIZE_10,
+};
 
 const FADE: CSSObjectType = {
   default: {
@@ -103,7 +108,7 @@ const styles: StylesMap = {
     top: SPACING.SIZE_10,
   },
   fullScreenPadding: {
-    padding: `${SPACING.SIZE_10}px ${SPACING.SIZE_20}px ${SPACING.SIZE_60}px`,
+    padding: `${FULLSCREEN_PADDINGS.TOP}px ${FULLSCREEN_PADDINGS.RIGHT}px ${FULLSCREEN_PADDINGS.BOTTOM}px`,
   },
 };
 

@@ -195,6 +195,11 @@
       "frontTireSize": "Front {{size}}",
       "rearTireSize": "Rear {{size}}"
     },
+    "tireImage": {
+      "modalLabel": "{{label}} image zoom",
+      "imageZoomButton": "Zoom into {{label}}",
+      "thumbAltText": "Slide number {{number}}"
+    },
     "insights": {
       "fitting": {
         "true": "Fits your {{vehicle}}",

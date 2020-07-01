@@ -14,17 +14,19 @@ import styles, { activeVideoStyles } from './Video.styles';
 
 export interface Props {
   aspectRatio?: string;
-  customStyles?: CSSStyles;
+  containerStyles?: CSSStyles;
   posterFrame: string;
   sizes: number[];
+  videoStyles?: CSSStyles;
   youtubeId: string;
 }
 
 function Video({
-  customStyles,
+  containerStyles,
   aspectRatio = '16/9',
   posterFrame,
   sizes,
+  videoStyles,
   youtubeId,
 }: Props) {
   const [videoId] = useState(`${randomString(10)}-video`);
@@ -41,42 +43,52 @@ function Video({
   const containerBottomPadding = `${ratioToPercentage(aspectRatio)}%`;
 
   return (
-    <div css={customStyles}>
-      <div css={[styles.container, { paddingBottom: containerBottomPadding }]}>
-        <button
-          aria-label={ui('common.video.play')}
-          onClick={loadVideo}
-          tabIndex={hasPlayedVideo ? -1 : 0}
-          css={[styles.button, hasPlayedVideo && activeVideoStyles.button]}
-        >
-          <div css={styles.buttonContent}>
-            <span css={styles.posterIcon}>
-              {isLoading ? (
-                <Loading theme={THEME.DARK} />
-              ) : (
-                <Icon name={ICONS.PLAY} />
-              )}
-            </span>
+    <div
+      css={[
+        styles.container,
+        { paddingBottom: containerBottomPadding },
+        containerStyles,
+      ]}
+    >
+      <button
+        aria-label={ui('common.video.play')}
+        onClick={loadVideo}
+        tabIndex={hasPlayedVideo ? -1 : 0}
+        css={[styles.button, hasPlayedVideo && activeVideoStyles.button]}
+      >
+        <div css={styles.buttonContent}>
+          <span css={styles.posterIcon}>
+            {isLoading ? (
+              <Loading theme={THEME.DARK} />
+            ) : (
+              <Icon name={ICONS.PLAY} />
+            )}
+          </span>
 
-            <Image
-              altText=""
-              customStyles={styles.posterFrame as CSSStyles}
-              widths={sizes}
-              src={posterFrame}
-              responsive
-            />
-          </div>
-        </button>
-
-        <div css={[styles.video, hasPlayedVideo && activeVideoStyles.video]}>
-          <div
-            css={[
-              styles.videoIframe,
-              hasPlayedVideo && activeVideoStyles.videoIframe,
-            ]}
-            id={videoId}
-          ></div>
+          <Image
+            altText=""
+            customStyles={styles.posterFrame as CSSStyles}
+            widths={sizes}
+            src={posterFrame}
+            responsive
+          />
         </div>
+      </button>
+
+      <div
+        css={[
+          styles.video,
+          hasPlayedVideo && activeVideoStyles.video,
+          videoStyles,
+        ]}
+      >
+        <div
+          css={[
+            styles.videoIframe,
+            hasPlayedVideo && activeVideoStyles.videoIframe,
+          ]}
+          id={videoId}
+        />
       </div>
     </div>
   );
