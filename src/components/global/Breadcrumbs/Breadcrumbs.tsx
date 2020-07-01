@@ -5,7 +5,7 @@ import Link from '~/components/global/Link/Link';
 import { footerLink } from '~/components/global/Link/Link.styles';
 import { THEME } from '~/lib/constants';
 
-import styles from './Breadcrumbs.styles';
+import styles, { themeStyles } from './Breadcrumbs.styles';
 
 export interface BreadcrumbsItem {
   label: string;
@@ -15,9 +15,14 @@ export interface BreadcrumbsItem {
 interface Props {
   currentPath?: string;
   navigationItems: BreadcrumbsItem[];
+  theme?: THEME;
 }
 
-function Breadcrumbs({ navigationItems, currentPath }: Props) {
+function Breadcrumbs({
+  navigationItems,
+  currentPath,
+  theme = THEME.LIGHT,
+}: Props) {
   return (
     <nav aria-label="Breadcrumbs" css={styles.root}>
       <Carousel
@@ -34,15 +39,18 @@ function Breadcrumbs({ navigationItems, currentPath }: Props) {
             <li key={`${item.label}_${idx}`} css={styles.item}>
               <Link
                 href={item.url}
-                theme={THEME.LIGHT}
-                css={footerLink}
+                css={[footerLink, themeStyles[theme]]}
+                theme={theme === THEME.DARK ? THEME.DARK : THEME.LIGHT}
                 aria-current={isCurrentPath ? 'page' : undefined}
               >
                 {item.label}
               </Link>
               {!isLastItem && (
                 <span aria-hidden>
-                  <Icon name={ICONS.CHEVRON_RIGHT} css={styles.nextItemIcon} />
+                  <Icon
+                    name={ICONS.CHEVRON_RIGHT}
+                    css={[styles.nextItemIcon, themeStyles[theme]]}
+                  />
                 </span>
               )}
             </li>

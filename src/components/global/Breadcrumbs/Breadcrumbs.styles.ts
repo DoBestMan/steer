@@ -1,9 +1,8 @@
-import { COLORS, SPACING, StylesMap } from '~/lib/constants';
+import { COLORS, SPACING, StylesMap, THEME } from '~/lib/constants';
 
 const styles: StylesMap = {
   item: {
     alignItems: 'center',
-    color: COLORS.LIGHT.GRAY_70,
     display: 'flex',
     whiteSpace: 'nowrap',
     width: 'auto',
@@ -19,11 +18,22 @@ const styles: StylesMap = {
     },
   },
   nextItemIcon: {
-    color: COLORS.LIGHT.GRAY_70,
     height: 5,
     marginLeft: SPACING.SIZE_05,
     marginRight: SPACING.SIZE_05,
     width: 3,
+  },
+};
+
+export const themeStyles = {
+  [THEME.LIGHT]: {
+    color: COLORS.LIGHT.GRAY_70,
+  },
+  [THEME.ORANGE]: {
+    color: COLORS.ORANGE.SHADE_85,
+  },
+  [THEME.DARK]: {
+    color: COLORS.DARK.GRAY_40,
   },
 };
 

@@ -1,3 +1,7 @@
+import { select } from '@storybook/addon-knobs';
+
+import { COLORS, THEME } from '~/lib/constants';
+
 import BreadcrumbsComponent, { BreadcrumbsItem } from './Breadcrumbs';
 
 export default {
@@ -29,10 +33,27 @@ const mockNavigationData: BreadcrumbsItem[] = [
 ];
 
 export function Breadcrumbs() {
+  const theme = select(
+    'Theme',
+    [THEME.LIGHT, THEME.DARK, THEME.ORANGE],
+    THEME.LIGHT,
+  );
+
+  const themeMap = {
+    [THEME.DARK]: COLORS.GLOBAL.BLACK,
+    [THEME.LIGHT]: COLORS.GLOBAL.WHITE,
+    [THEME.ORANGE]: COLORS.GLOBAL.ORANGE,
+  };
+
+  const backgroundColor = themeMap[theme];
+
   return (
-    <BreadcrumbsComponent
-      currentPath={mockNavigationData.slice().pop()?.url}
-      navigationItems={mockNavigationData}
-    />
+    <div css={{ backgroundColor, height: '100vh' }}>
+      <BreadcrumbsComponent
+        currentPath={mockNavigationData.slice().pop()?.url}
+        navigationItems={mockNavigationData}
+        theme={theme}
+      />
+    </div>
   );
 }

@@ -6,10 +6,9 @@ import GridItem from '~/components/global/Grid/GridItem';
 import HeaderDetailPage, {
   HeaderDetailPageProps,
 } from '~/components/global/HeaderDetailPage/HeaderDetailPage';
-import Filters, {
-  FilterItem,
-} from '~/components/modules/ReviewListing/Filters/Filters';
-import { HEADER_COLOR, HEADER_SIZE } from '~/lib/constants';
+import Filters from '~/components/modules/ReviewListing/Filters/Filters';
+import { FilterItem } from '~/components/modules/ReviewListing/Filters/Filters.types';
+import { HEADER_SIZE, THEME } from '~/lib/constants';
 
 import styles from './Header.styles';
 
@@ -31,6 +30,7 @@ function Header({
         <Breadcrumbs
           currentPath={breadcrumbs.slice().pop()?.url}
           navigationItems={breadcrumbs}
+          theme={THEME.ORANGE}
         />
       </GridItem>
       <GridItem>
@@ -38,7 +38,7 @@ function Header({
           description={description}
           header={header}
           subHeader={subHeader}
-          headerColor={HEADER_COLOR.WHITE}
+          theme={THEME.ORANGE}
           size={HEADER_SIZE.PRIMARY}
         />
       </GridItem>

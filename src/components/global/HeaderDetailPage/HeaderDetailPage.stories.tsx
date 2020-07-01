@@ -1,6 +1,6 @@
 import { select, text } from '@storybook/addon-knobs';
 
-import { HEADER_COLOR, HEADER_SIZE } from '~/lib/constants';
+import { COLORS, HEADER_SIZE, THEME } from '~/lib/constants';
 
 import HeaderDetailPage from './HeaderDetailPage';
 
@@ -25,11 +25,21 @@ const defaultProps = {
 };
 export function HeaderDetailPageWithKnobs() {
   const header = text('Heading', defaultProps.header);
-  const headerColor = select(
-    'Header color',
-    [HEADER_COLOR.BLACK, HEADER_COLOR.WHITE],
-    HEADER_COLOR.BLACK,
+
+  const theme = select(
+    'Theme',
+    [THEME.LIGHT, THEME.DARK, THEME.ORANGE],
+    THEME.LIGHT,
   );
+
+  const themeMap = {
+    [THEME.DARK]: COLORS.GLOBAL.BLACK,
+    [THEME.LIGHT]: COLORS.GLOBAL.WHITE,
+    [THEME.ORANGE]: COLORS.GLOBAL.ORANGE,
+  };
+
+  const backgroundColor = themeMap[theme];
+
   const size = select(
     'Size',
     [HEADER_SIZE.JUMBO, HEADER_SIZE.PRIMARY],
@@ -39,15 +49,17 @@ export function HeaderDetailPageWithKnobs() {
   const description = text('Description', defaultProps.description);
 
   return (
-    <HeaderDetailPage
-      {...{
-        description,
-        header,
-        headerColor,
-        size,
-        subHeader,
-      }}
-    />
+    <div css={{ backgroundColor, height: '100vh' }}>
+      <HeaderDetailPage
+        {...{
+          description,
+          header,
+          size,
+          subHeader,
+          theme,
+        }}
+      />
+    </div>
   );
 }
 

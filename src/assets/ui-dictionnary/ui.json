@@ -294,6 +294,7 @@
     "outOf": "out of"
   },
   "reviews": {
+    "chooseFilter": "Choose a {{filter}}",
     "numReviews": "{{quantity}} reviews",
     "searchBy": "Search by:",
     "seeAll": "See all customer reviews",

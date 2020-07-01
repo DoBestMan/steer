@@ -4,21 +4,21 @@ import { NodeType } from 'react-markdown';
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Markdown from '~/components/global/Markdown/MarkdownDynamic';
-import { HEADER_COLOR, HEADER_SIZE } from '~/lib/constants';
+import { HEADER_SIZE, THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
-import styles, { sizeStyles } from './HeaderDetailPage.styles';
+import styles, { sizeStyles, themeStyles } from './HeaderDetailPage.styles';
 
 export interface HeaderDetailPageProps {
   description?: string;
   header: string;
   headerAs?: ReactType;
-  headerColor?: HEADER_COLOR;
   hideFullDescriptionLinkLabel?: string;
   showFullDescriptionLinkLabel?: string;
   size?: HEADER_SIZE;
   subHeader?: string;
   subHeaderAs?: ReactType;
+  theme?: THEME;
 }
 // Allow only the simplest markdown to prevent unexpected markups
 const markdownAllowedTypes: NodeType[] = [
@@ -34,7 +34,6 @@ const markdownAllowedTypes: NodeType[] = [
 export default function HeaderDetailPage({
   headerAs = 'h1',
   header,
-  headerColor = HEADER_COLOR.BLACK,
   subHeader,
   description,
   showFullDescriptionLinkLabel = ui(
@@ -45,6 +44,7 @@ export default function HeaderDetailPage({
   ),
   subHeaderAs = 'div',
   size = HEADER_SIZE.JUMBO,
+  theme = THEME.LIGHT,
 }: HeaderDetailPageProps) {
   const HeaderContainer = headerAs;
   const SubHeaderContainer = subHeaderAs;
@@ -63,13 +63,17 @@ export default function HeaderDetailPage({
   const showMoreButton =
     briefDescription && splitDescription && splitDescription.length > 1;
   return (
-    <header>
-      <HeaderContainer css={[sizeStyles[size].header, { color: headerColor }]}>
+    <header css={[styles.container, themeStyles[theme].container]}>
+      <HeaderContainer
+        css={[sizeStyles[size].header, themeStyles[theme].header]}
+      >
         {header}
       </HeaderContainer>
 
       {subHeader && (
-        <SubHeaderContainer css={styles.subHeader}>
+        <SubHeaderContainer
+          css={[styles.subHeader, themeStyles[theme].subHeader]}
+        >
           <Markdown allowedTypes={markdownAllowedTypes} unwrapDisallowed>
             {subHeader}
           </Markdown>
@@ -99,7 +103,7 @@ export default function HeaderDetailPage({
           aria-labelledby="header-detail-more-description"
           aria-controls="header-detail-more-description"
           onClick={toggleFullDescription}
-          css={styles.showFullDescription}
+          css={[styles.showFullDescription, themeStyles[theme].buttonHover]}
         >
           {showFullDescription
             ? hideFullDescriptionLinkLabel

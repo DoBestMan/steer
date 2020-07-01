@@ -13,9 +13,6 @@ const styles: StylesMap = {
   filtersContainer: {
     marginTop: SPACING.SIZE_40,
     marginBottom: SPACING.SIZE_40,
-    '.filters-wrapper': {
-      display: 'flex',
-    },
   },
 };
 

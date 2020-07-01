@@ -4,43 +4,24 @@ import {
   HEADER_SIZE,
   SPACING,
   StylesMap,
+  THEME,
   TIME,
 } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
-  description: [
-    typography.bodyCopy,
-    {
-      color: COLORS.LIGHT.GRAY_70,
+  container: typography.bodyCopy,
+  moreDescription: {
+    display: 'none',
+    marginTop: '1em',
+    '&[aria-hidden="false"]': {
+      display: 'block',
     },
-  ],
-  markdown: [
-    typography.bodyCopy,
-    {
-      color: COLORS.LIGHT.GRAY_70,
-    },
-  ],
-  moreDescription: [
-    typography.bodyCopy,
-    {
-      color: COLORS.LIGHT.GRAY_70,
-      display: 'none',
-      marginTop: '1em',
-
-      '&[aria-hidden="false"]': {
-        display: 'block',
-      },
-    },
-  ],
+  },
   showFullDescription: [
     typography.primarySubhead,
     {
-      '&:hover, &:focus:not(:active)': {
-        color: COLORS.GLOBAL.BLACK,
-      },
       alignItems: 'center',
-      color: COLORS.LIGHT.GRAY_70,
       display: 'flex',
       marginTop: SPACING.SIZE_05,
       transition: `color ${TIME.MS100}ms ${EASING.CIRC_EASE_OUT}`,
@@ -57,7 +38,6 @@ const styles: StylesMap = {
   subHeader: [
     typography.largeCopy,
     {
-      color: COLORS.GLOBAL.BLACK,
       marginBottom: SPACING.SIZE_40,
     },
   ],
@@ -79,6 +59,57 @@ export const sizeStyles = {
         marginBottom: SPACING.SIZE_20,
       },
     ],
+  },
+};
+
+export const themeStyles = {
+  [THEME.LIGHT]: {
+    container: {
+      color: COLORS.LIGHT.GRAY_70,
+    },
+    header: {
+      color: COLORS.GLOBAL.BLACK,
+    },
+    subHeader: {
+      color: COLORS.GLOBAL.BLACK,
+    },
+    buttonHover: {
+      '&:hover, &:focus:not(:active)': {
+        color: COLORS.GLOBAL.BLACK,
+      },
+    },
+  },
+  [THEME.DARK]: {
+    container: {
+      color: COLORS.DARK.GRAY_40,
+    },
+    header: {
+      color: COLORS.GLOBAL.WHITE,
+    },
+    subHeader: {
+      color: COLORS.GLOBAL.WHITE,
+    },
+    buttonHover: {
+      '&:hover, &:focus:not(:active)': {
+        color: COLORS.GLOBAL.WHITE,
+      },
+    },
+  },
+  [THEME.ORANGE]: {
+    container: {
+      color: COLORS.ORANGE.SHADE_85,
+    },
+    header: {
+      color: COLORS.GLOBAL.WHITE,
+    },
+    subHeader: {
+      color: COLORS.GLOBAL.BLACK,
+    },
+    buttonHover: {
+      '&:hover, &:focus:not(:active)': {
+        color: COLORS.GLOBAL.BLACK,
+      },
+    },
   },
 };
 
