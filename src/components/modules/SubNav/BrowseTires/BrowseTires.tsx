@@ -20,8 +20,7 @@ function BrowseTires({
   return (
     <>
       <GridItem
-        gridColumnM="1/3"
-        gridColumnL="1/4"
+        gridColumnM="1/4"
         css={[styles.smallHide, !isOpen && styles.hide]}
       >
         <TireCategoryLinks {...{ siteMenuBrowseList }} />

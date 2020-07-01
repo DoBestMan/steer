@@ -123,7 +123,7 @@ function SubNav({ siteMenuBrowseList, siteMenuLearn }: SiteMenu) {
             ]}
           >
             <GridItem
-              gridColumnM="1/7"
+              gridColumnM="1/8"
               gridColumnL="1/10"
               gridColumnXL="1/8"
               css={styles.smallHide}

@@ -52,7 +52,7 @@ function Categories({
       onBack={handleClearCategory}
     >
       <GridItem
-        gridColumnM="3/7"
+        gridColumnM="4/8"
         gridColumnL="4/10"
         gridColumnXL="4/8"
         css={styles.categoryContent}
