@@ -7,6 +7,10 @@ import { SiteImage } from './SiteImage';
 import { SiteLink } from './SiteLink';
 import { SitePrice } from './SitePrice';
 
+export enum SiteCatalogProductItemEnum {
+  SiteCatalogProductItem = 'SiteCatalogProductItem',
+}
+
 export interface SiteCatalogProductItem {
   activeFilterValueList: Array<string> | null;
   brand: SiteCatalogBrand;
@@ -47,4 +51,5 @@ export interface SiteCatalogProductItem {
     value: string;
   }>;
   topPicksAttribute: string | null;
+  type: SiteCatalogProductItemEnum;
 }

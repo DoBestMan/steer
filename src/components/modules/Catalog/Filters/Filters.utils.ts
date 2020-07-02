@@ -1,10 +1,15 @@
+import { SiteCatalogFilterGroup } from '~/data/models/SiteCatalogFilterGroup';
 import {
-  SiteCatalogFilterGroup,
   SiteCatalogFilterItem,
-  SiteCatalogFilterState,
-  SiteCatalogFilterTypeEnum,
+  SiteCatalogFilterItemStateEnum,
+} from '~/data/models/SiteCatalogFilterItem';
+import { SiteCatalogFilterListTypeEnum } from '~/data/models/SiteCatalogFilterList';
+import { SiteCatalogFilterRangeTypeEnum } from '~/data/models/SiteCatalogFilterRange';
+import { SiteCatalogFilterToggleTypeEnum } from '~/data/models/SiteCatalogFilterToggle';
+import {
   SiteCatalogSortListItem,
-} from '~/data/models/SiteCatalogFilters';
+  SiteCatalogSortListItemStateEnum,
+} from '~/data/models/SiteCatalogSortListItem';
 
 import { CatalogFilterTypes, FilterContentTypes } from './Filter.types';
 
@@ -21,7 +26,9 @@ export function getGroupedFilters(
 ): GroupedFilters {
   const groupedFilters = filters.reduce<GroupedFilters>(
     (acc, filter) => {
-      if (filter.type === SiteCatalogFilterTypeEnum.SiteCatalogFilterToggle) {
+      if (
+        filter.type === SiteCatalogFilterToggleTypeEnum.SiteCatalogFilterToggle
+      ) {
         acc.popularFilters.push(filter);
         return acc;
       }
@@ -76,8 +83,10 @@ export function getInitialFiltersState(
   let isPopularActive = false;
   filtersList.forEach((filter: CatalogFilterTypes) => {
     // toggle filter
-    if (filter.type === SiteCatalogFilterTypeEnum.SiteCatalogFilterToggle) {
-      if (filter.item.state === SiteCatalogFilterState.Selected) {
+    if (
+      filter.type === SiteCatalogFilterToggleTypeEnum.SiteCatalogFilterToggle
+    ) {
+      if (filter.item.state === SiteCatalogFilterItemStateEnum.Selected) {
         isPopularActive = true;
         Object.keys(filter.item.value).forEach((key) => {
           initialState[key] = filter.item.value[key];
@@ -86,10 +95,10 @@ export function getInitialFiltersState(
     }
 
     // list filter
-    if (filter.type === SiteCatalogFilterTypeEnum.SiteCatalogFilterList) {
+    if (filter.type === SiteCatalogFilterListTypeEnum.SiteCatalogFilterList) {
       filter.filterGroups.forEach((group: SiteCatalogFilterGroup) => {
         group.items.forEach((item: SiteCatalogFilterItem) => {
-          if (item.state === SiteCatalogFilterState.Selected) {
+          if (item.state === SiteCatalogFilterItemStateEnum.Selected) {
             Object.keys(item.value).forEach((key) => {
               if (initialState[key]) {
                 initialState[key] = initialState[key] + ',' + item.value[key];
@@ -103,7 +112,7 @@ export function getInitialFiltersState(
     }
 
     // range filter
-    if (filter.type === SiteCatalogFilterTypeEnum.SiteCatalogFilterRange) {
+    if (filter.type === SiteCatalogFilterRangeTypeEnum.SiteCatalogFilterRange) {
       if (!filter.currentMinValue && !filter.currentMaxValue) {
         return;
       }
@@ -115,7 +124,7 @@ export function getInitialFiltersState(
 
   if (sortList) {
     const selectedSort = sortList.find(
-      (item) => item.state === SiteCatalogFilterState.Selected,
+      (item) => item.state === SiteCatalogSortListItemStateEnum.Selected,
     );
     selectedSort &&
       Object.keys(selectedSort.value).forEach(
@@ -155,11 +164,11 @@ export function hasActiveValue(
     );
   }
 
-  if (filter.type === SiteCatalogFilterTypeEnum.SiteCatalogFilterToggle) {
+  if (filter.type === SiteCatalogFilterToggleTypeEnum.SiteCatalogFilterToggle) {
     return Object.keys(filter.item.value).some((key) => !!activeFilters[key]);
   }
 
-  if (filter.type === SiteCatalogFilterTypeEnum.SiteCatalogFilterList) {
+  if (filter.type === SiteCatalogFilterListTypeEnum.SiteCatalogFilterList) {
     let isActive = false;
     filter.filterGroups.forEach((group) =>
       group.items.forEach((item) => {
@@ -169,7 +178,7 @@ export function hasActiveValue(
     return isActive;
   }
 
-  if (filter.type === SiteCatalogFilterTypeEnum.SiteCatalogFilterRange) {
+  if (filter.type === SiteCatalogFilterRangeTypeEnum.SiteCatalogFilterRange) {
     return !!activeFilters[filter.id];
   }
 
@@ -184,12 +193,12 @@ export function hasActiveValue(
 export function getValueKeys(filter: CatalogFilterTypes) {
   let valueKeys: string[] = [];
   // toggle filter
-  if (filter.type === SiteCatalogFilterTypeEnum.SiteCatalogFilterToggle) {
+  if (filter.type === SiteCatalogFilterToggleTypeEnum.SiteCatalogFilterToggle) {
     valueKeys = [...valueKeys, ...Object.keys(filter.item.value)];
   }
 
   // list filter
-  if (filter.type === SiteCatalogFilterTypeEnum.SiteCatalogFilterList) {
+  if (filter.type === SiteCatalogFilterListTypeEnum.SiteCatalogFilterList) {
     filter.filterGroups.forEach((group: SiteCatalogFilterGroup) => {
       group.items.forEach((item: SiteCatalogFilterItem) => {
         valueKeys = [...valueKeys, ...Object.keys(item.value)];
@@ -198,7 +207,7 @@ export function getValueKeys(filter: CatalogFilterTypes) {
   }
 
   // range filter
-  if (filter.type === SiteCatalogFilterTypeEnum.SiteCatalogFilterRange) {
+  if (filter.type === SiteCatalogFilterRangeTypeEnum.SiteCatalogFilterRange) {
     valueKeys = [...valueKeys, filter.id];
   }
 

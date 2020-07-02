@@ -1,4 +1,4 @@
-import { SiteCatalogFilterTypeEnum } from '~/data/models/SiteCatalogFilters';
+import { SiteCatalogFilterToggleTypeEnum } from '~/data/models/SiteCatalogFilterToggle';
 
 import { CatalogFilterTypes, FilterContentTypes } from './Filter.types';
 import { useFiltersContext } from './Filters.context';
@@ -25,7 +25,10 @@ export default function FilterPopups({ filters, popularFilters }: Props) {
         />
       )}
       {filters.map((filter, idx) => {
-        if (filter.type === SiteCatalogFilterTypeEnum.SiteCatalogFilterToggle) {
+        if (
+          filter.type ===
+          SiteCatalogFilterToggleTypeEnum.SiteCatalogFilterToggle
+        ) {
           return null;
         }
         return (

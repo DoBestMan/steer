@@ -1,14 +1,15 @@
 import { FiltersContextProvider } from '~/components/modules/Catalog/Filters/Filters.context';
 import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
+import { SiteCatalogFilters } from '~/data/models/SiteCatalogFilters';
 
 import Header from './Header';
 
 interface Props {
-  handleUpdateResults?: (filters: Record<string, string>) => void;
+  handleUpdateResults: (filters: Record<string, string>) => void;
   hasTopPicks: boolean;
   isAdvancedView: boolean;
   isInternal?: boolean;
-  siteCatalogFilters: any;
+  siteCatalogFilters: SiteCatalogFilters;
   sizeList?: string[];
   toggleView: () => void;
 }

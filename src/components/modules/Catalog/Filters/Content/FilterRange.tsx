@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 
 import Range from '~/components/global/Range/Range';
-import { SiteCatalogFilterRange } from '~/data/models/SiteCatalogFilters';
+import { SiteCatalogFilterRange } from '~/data/models/SiteCatalogFilterRange';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import {

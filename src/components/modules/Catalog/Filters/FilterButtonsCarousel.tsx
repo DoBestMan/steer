@@ -4,7 +4,7 @@ import { MouseEvent, ReactElement } from 'react';
 import FilterButton from '~/components/global/Button/FilterButton';
 import FilterButtonToggle from '~/components/global/Button/FilterButtonToggle';
 import Carousel from '~/components/global/Carousel/CarouselDynamic';
-import { SiteCatalogFilterTypeEnum } from '~/data/models/SiteCatalogFilters';
+import { SiteCatalogFilterToggleTypeEnum } from '~/data/models/SiteCatalogFilterToggle';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import { CatalogFilterTypes } from './Filter.types';
@@ -68,7 +68,7 @@ export default function FilterButtonsCarousel({
             const isActive = hasActiveValue(filter, activeFilters);
             const isDropdownOpen = selectingFilter === idx + 1;
             return filter.type !==
-              SiteCatalogFilterTypeEnum.SiteCatalogFilterToggle ? (
+              SiteCatalogFilterToggleTypeEnum.SiteCatalogFilterToggle ? (
               // filter with dropdown
               <FilterButton
                 css={[

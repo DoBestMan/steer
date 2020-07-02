@@ -2,6 +2,7 @@ import { boolean, number, text } from '@storybook/addon-knobs';
 
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import { PROMO_STYLES } from '~/components/global/PromoTag/PromoTag.types';
+import { SiteCatalogProductItemEnum } from '~/data/models/SiteCatalogProductItem';
 import { SiteIcon } from '~/data/models/SiteIcon';
 import { SiteImage } from '~/data/models/SiteImage';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
@@ -161,6 +162,7 @@ export function AdvancedListingWithKnobs() {
         }
         size={text('Size', '215/50 R17')}
         specList={mockSpecList}
+        type={SiteCatalogProductItemEnum.SiteCatalogProductItem}
       />
     </div>
   );

@@ -3,6 +3,15 @@ import { useEffect, useRef, useState } from 'react';
 import { DATA_COMPONENT_LABEL } from '~/components/modules/Catalog/Header.constants';
 import HeaderContainer from '~/components/modules/Catalog/Header.container';
 import { useCatalogPageContext } from '~/context/CatalogPage.context';
+import {
+  SiteCatalogProductGroup,
+  SiteCatalogProductGroupEnum,
+} from '~/data/models/SiteCatalogProductGroupList';
+import {
+  SiteCatalogProductItem,
+  SiteCatalogProductItemEnum,
+} from '~/data/models/SiteCatalogProductItem';
+import { SiteCatalogProducts } from '~/data/models/SiteCatalogProducts';
 import { SiteCatalogSummary } from '~/data/models/SiteCatalogSummary';
 import { getScroll, subscribeScroll } from '~/lib/helpers/scroll';
 import { map } from '~/lib/utils/interpolation';
@@ -11,9 +20,9 @@ import CatalogProductGrid from '../CatalogProductGrid/CatalogProductGrid';
 import CatalogProductGroups from '../CatalogProductGroups/CatalogProductGroups';
 
 interface Props {
-  handleUpdateResults?: (filters: Record<string, string>) => void;
+  handleUpdateResults: (filters: Record<string, string>) => void;
   hasTopPicks: boolean;
-  siteCatalogProducts: any;
+  siteCatalogProducts: SiteCatalogProducts;
   siteCatalogSummary?: SiteCatalogSummary;
 }
 
@@ -93,8 +102,8 @@ function CatalogGrid({
   }
 
   const isGroupedProducts =
-    siteCatalogProducts?.siteCatalogProductsResultList[0].type ===
-    'SiteCatalogProductGroupItem';
+    siteCatalogProducts.siteCatalogProductsResultList[0].type ===
+    SiteCatalogProductGroupEnum.SiteCatalogProductGroup;
 
   return (
     <div ref={catalogGrid}>
@@ -103,16 +112,23 @@ function CatalogGrid({
         sizeList={siteCatalogSummary?.siteCatalogSummaryMeta?.sizeList}
         hasTopPicks={hasTopPicks}
         toggleView={toggleView}
-        siteCatalogFilters={siteCatalogProducts?.siteCatalogFilters}
+        siteCatalogFilters={siteCatalogProducts.siteCatalogFilters}
         isAdvancedView={isAdvancedView}
       />
       {isGroupedProducts ? (
         <CatalogProductGroups
-          productGroupList={siteCatalogProducts?.siteCatalogProductsResultList}
+          productGroupList={siteCatalogProducts.siteCatalogProductsResultList.filter(
+            (result): result is SiteCatalogProductGroup =>
+              result.type ===
+              SiteCatalogProductGroupEnum.SiteCatalogProductGroup,
+          )}
         />
       ) : (
         <CatalogProductGrid
-          productList={siteCatalogProducts?.siteCatalogProductsResultList}
+          productList={siteCatalogProducts.siteCatalogProductsResultList.filter(
+            (result): result is SiteCatalogProductItem =>
+              result.type === SiteCatalogProductItemEnum.SiteCatalogProductItem,
+          )}
           isAdvancedView={isAdvancedView}
         />
       )}

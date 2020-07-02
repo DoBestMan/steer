@@ -1,7 +1,5 @@
-import {
-  SiteCatalogFilterList,
-  SiteCatalogFilterRange,
-} from '~/data/models/SiteCatalogFilters';
+import { SiteCatalogFilterList } from '~/data/models/SiteCatalogFilterList';
+import { SiteCatalogFilterRange } from '~/data/models/SiteCatalogFilterRange';
 
 import FilterChecklist from '../Content/FilterChecklist';
 import FilterPopular from '../Content/FilterPopular';

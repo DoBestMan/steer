@@ -1,11 +1,11 @@
 import Link from '~/components/global/Link/Link';
 import Range from '~/components/global/Range/Range';
 import { RANGE_SLIDER_SIZE } from '~/components/global/Range/Range.constants';
+import { SiteCatalogFilterRange } from '~/data/models/SiteCatalogFilterRange';
 import {
-  SiteCatalogFilterRange,
-  SiteCatalogFilterState,
   SiteCatalogSortListItem,
-} from '~/data/models/SiteCatalogFilters';
+  SiteCatalogSortListItemStateEnum,
+} from '~/data/models/SiteCatalogSortListItem';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
@@ -53,7 +53,7 @@ export default function SubFilters({
   const { lessThan } = useBreakpoints();
   const priceFormatter = mapUnitToLabelFormatter[unit];
   const sortItem = sortList.find(
-    (item) => item.state === SiteCatalogFilterState.Selected,
+    (item) => item.state === SiteCatalogSortListItemStateEnum.Selected,
   );
   return (
     <div css={styles.root}>

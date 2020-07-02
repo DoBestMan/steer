@@ -2,11 +2,13 @@ import TitleCheckbox from '~/components/global/Checkbox/TitleCheckbox';
 import TitleRadio from '~/components/global/Radio/TitleRadio';
 import {
   SiteCatalogFilterGroup,
-  SiteCatalogFilterGroupType,
+  SiteCatalogFilterGroupGroupTypeEnum,
+} from '~/data/models/SiteCatalogFilterGroup';
+import { SiteCatalogFilterItemStateEnum } from '~/data/models/SiteCatalogFilterItem';
+import {
   SiteCatalogFilterList,
-  SiteCatalogFilterListStyle,
-  SiteCatalogFilterState,
-} from '~/data/models/SiteCatalogFilters';
+  SiteCatalogFilterListPresentationStyleEnum,
+} from '~/data/models/SiteCatalogFilterList';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 
 import { hasActiveValue, strictEqualsValue } from '../Filters.utils';
@@ -23,10 +25,10 @@ interface GroupProps {
   ) => () => void;
 }
 const mapGroupTypeToInput: Record<
-  SiteCatalogFilterGroupType,
+  SiteCatalogFilterGroupGroupTypeEnum,
   (props: GroupProps) => JSX.Element[]
 > = {
-  [SiteCatalogFilterGroupType.Checklist]({
+  [SiteCatalogFilterGroupGroupTypeEnum.Checklist]({
     group,
     filtersToApply,
     handleChange,
@@ -39,14 +41,14 @@ const mapGroupTypeToInput: Record<
           description={item.description}
           count={item.count}
           flair={item.flair}
-          isDisabled={item.state === SiteCatalogFilterState.Disabled}
+          isDisabled={item.state === SiteCatalogFilterItemStateEnum.Disabled}
           handleChange={handleChange(item.value)}
           defaultChecked={hasActiveValue(item, filtersToApply)}
         />
       </div>
     ));
   },
-  [SiteCatalogFilterGroupType.Radio]({
+  [SiteCatalogFilterGroupGroupTypeEnum.Radio]({
     group,
     handleChange,
     filtersToApply,
@@ -60,7 +62,7 @@ const mapGroupTypeToInput: Record<
           description={item.description}
           count={item.count}
           flair={item.flair}
-          isDisabled={item.state === SiteCatalogFilterState.Disabled}
+          isDisabled={item.state === SiteCatalogFilterItemStateEnum.Disabled}
           onChange={handleChange(item.value, true)}
           value={item.title}
           activeValue={
@@ -84,7 +86,8 @@ export default function FilterChecklist({
   const label = header?.title;
   const { greaterThan } = useBreakpoints();
   const lgStyles =
-    greaterThan.M && presentationStyle === SiteCatalogFilterListStyle.Large
+    greaterThan.M &&
+    presentationStyle === SiteCatalogFilterListPresentationStyleEnum.Large
       ? largeStyles
       : styles;
 

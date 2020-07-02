@@ -1,7 +1,5 @@
-import {
-  SiteCatalogFilter,
-  SiteCatalogSortListItem,
-} from '~/data/models/SiteCatalogFilters';
+import { SiteCatalogFilter } from '~/data/models/SiteCatalogFilter';
+import { SiteCatalogSortListItem } from '~/data/models/SiteCatalogSortListItem';
 
 export enum FilterContentTypes {
   SiteCatalogFilterList = 'SiteCatalogFilterList',

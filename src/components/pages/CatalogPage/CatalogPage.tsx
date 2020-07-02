@@ -4,6 +4,7 @@ import { useRef } from 'react';
 
 import { useCatalogPageContext } from '~/context/CatalogPage.context';
 import { CatalogSummaryContextProvider } from '~/context/CatalogSummary.context';
+import { SiteCatalogProducts } from '~/data/models/SiteCatalogProducts';
 import { SiteCatalogSummary } from '~/data/models/SiteCatalogSummary';
 
 import CatalogGrid from './CatalogGrid/CatalogGrid';
@@ -18,9 +19,9 @@ import {
 
 interface Props {
   comesFromSearch: boolean;
-  handleUpdateResults?: (filters: Record<string, string>) => void;
+  handleUpdateResults: (filters: Record<string, string>) => void;
   hasTopPicks: boolean;
-  siteCatalogProducts?: any;
+  siteCatalogProducts: SiteCatalogProducts;
   siteCatalogSummary?: SiteCatalogSummary;
 }
 

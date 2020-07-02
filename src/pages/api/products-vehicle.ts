@@ -1,12 +1,13 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
+import { SiteCatalogProducts } from '~/data/models/SiteCatalogProducts';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
 import { backendGetVehicleProducts } from '~/lib/backend/catalog/vehicle';
 
 export default async (
   request: NextApiRequest,
   response: NextApiResponse<{
-    siteCatalogProducts: any;
+    siteCatalogProducts: SiteCatalogProducts;
   }>,
 ) => {
   backendBootstrap({ request });

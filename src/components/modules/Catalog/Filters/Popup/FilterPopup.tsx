@@ -1,9 +1,10 @@
 import { useEffect, useRef } from 'react';
 
 import {
-  SiteCatalogFilterListStyle,
-  SiteCatalogFilterTypeEnum,
-} from '~/data/models/SiteCatalogFilters';
+  SiteCatalogFilterListPresentationStyleEnum,
+  SiteCatalogFilterListTypeEnum,
+} from '~/data/models/SiteCatalogFilterList';
+import { SiteCatalogFilterToggleTypeEnum } from '~/data/models/SiteCatalogFilterToggle';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 
 import { CatalogFilterTypes, FilterContentTypes } from '../Filter.types';
@@ -57,7 +58,7 @@ export default function FilterPopup({
   }, [clearFiltersToApply, isOpen, onClose, filter, isLoading, isLarge]);
 
   if (
-    filter.type === SiteCatalogFilterTypeEnum.SiteCatalogFilterToggle ||
+    filter.type === SiteCatalogFilterToggleTypeEnum.SiteCatalogFilterToggle ||
     !mapTypeToContent[filter.type]
   ) {
     return null;
@@ -73,8 +74,9 @@ export default function FilterPopup({
   const label = getFilterLabel(filter);
   if (
     !(
-      filter.type === SiteCatalogFilterTypeEnum.SiteCatalogFilterList &&
-      filter.presentationStyle === SiteCatalogFilterListStyle.Large
+      filter.type === SiteCatalogFilterListTypeEnum.SiteCatalogFilterList &&
+      filter.presentationStyle ===
+        SiteCatalogFilterListPresentationStyleEnum.Large
     ) &&
     isLarge
   ) {

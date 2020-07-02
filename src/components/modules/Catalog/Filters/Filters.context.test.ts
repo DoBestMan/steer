@@ -1,7 +1,8 @@
 import { renderHook } from '@testing-library/react-hooks';
 import { act } from 'react-test-renderer';
 
-import { SiteCatalogFilterTypeEnum } from '~/data/models/SiteCatalogFilters';
+import { SiteCatalogFilterListTypeEnum } from '~/data/models/SiteCatalogFilterList';
+import { SiteCatalogFilters } from '~/data/models/SiteCatalogFilters';
 
 import { CatalogFilterTypes } from './Filter.types';
 import { useFiltersContextSetup } from './Filters.context';
@@ -9,7 +10,9 @@ import { mockSiteCatalogFilters } from './Filters.mocks';
 
 const mockArgs = {
   onApplyFilters: jest.fn(),
-  siteCatalogFilters: { filtersList: mockSiteCatalogFilters },
+  siteCatalogFilters: {
+    filtersList: mockSiteCatalogFilters,
+  } as SiteCatalogFilters,
 };
 
 describe('useFiltersContextSetup', () => {
@@ -200,7 +203,7 @@ describe('useFiltersContextSetup', () => {
           { items: [{ value: { foo: 'bar' } }] },
           { items: [{ value: { bar: 'baz' } }] },
         ],
-        type: SiteCatalogFilterTypeEnum.SiteCatalogFilterList,
+        type: SiteCatalogFilterListTypeEnum.SiteCatalogFilterList,
       } as unknown) as CatalogFilterTypes)(),
     );
 

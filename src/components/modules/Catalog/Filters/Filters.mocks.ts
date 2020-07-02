@@ -1,17 +1,23 @@
-/* eslint-disable sort-keys */
+import { SiteCatalogFilterItem } from '~/data/models/SiteCatalogFilterItem';
 import {
-  SiteCatalogFilterItem,
   SiteCatalogFilterList,
+  SiteCatalogFilterListTypeEnum,
+} from '~/data/models/SiteCatalogFilterList';
+import {
   SiteCatalogFilterRange,
+  SiteCatalogFilterRangeTypeEnum,
+} from '~/data/models/SiteCatalogFilterRange';
+import {
   SiteCatalogFilterToggle,
-  SiteCatalogFilterTypeEnum,
-  SiteCatalogSortListItem,
-} from '~/data/models/SiteCatalogFilters';
+  SiteCatalogFilterToggleTypeEnum,
+} from '~/data/models/SiteCatalogFilterToggle';
+import { SiteCatalogSortListItem } from '~/data/models/SiteCatalogSortListItem';
 
-export const filterTypeSelect: SiteCatalogFilterTypeEnum[] = [
-  SiteCatalogFilterTypeEnum.SiteCatalogFilterList,
-  SiteCatalogFilterTypeEnum.SiteCatalogFilterRange,
-  SiteCatalogFilterTypeEnum.SiteCatalogFilterToggle,
+/* eslint-disable sort-keys */
+export const filterTypeSelect = [
+  SiteCatalogFilterListTypeEnum.SiteCatalogFilterList,
+  SiteCatalogFilterRangeTypeEnum.SiteCatalogFilterRange,
+  SiteCatalogFilterToggleTypeEnum.SiteCatalogFilterToggle,
 ];
 
 export const warrantyFilter = {
@@ -48,7 +54,7 @@ export const mockPriceFilter = {
   currentMaxValue: null,
   step: 1,
   unit: 'UnitUSD',
-};
+} as SiteCatalogFilterRange;
 
 export const filterSort = [
   {

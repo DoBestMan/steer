@@ -4,6 +4,7 @@ import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import { PROMO_STYLES } from '~/components/global/PromoTag/PromoTag.types';
+import { SiteCatalogProductItemEnum } from '~/data/models/SiteCatalogProductItem';
 import { SiteIcon } from '~/data/models/SiteIcon';
 import { SiteImage } from '~/data/models/SiteImage';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
@@ -119,6 +120,7 @@ export function ProductListingWithKnobs() {
                 }
               : null
           }
+          type={SiteCatalogProductItemEnum.SiteCatalogProductItem}
         />
       </GridItem>
     </Grid>
@@ -153,6 +155,7 @@ export function FilteredProductListing() {
             quantity: 113,
             value: 4.3,
           }}
+          type={SiteCatalogProductItemEnum.SiteCatalogProductItem}
         />
       </GridItem>
     </Grid>
@@ -188,6 +191,7 @@ export function HighlightedProductListing() {
             quantity: 113,
             value: 4.3,
           }}
+          type={SiteCatalogProductItemEnum.SiteCatalogProductItem}
         />
       </GridItem>
     </Grid>

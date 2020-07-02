@@ -1,16 +1,16 @@
 import { useTheme } from 'emotion-theming';
 import { ReactNode } from 'react';
 
+import {
+  SiteCatalogFilterRange,
+  SiteCatalogFilterRangeTypeEnum,
+} from '~/data/models/SiteCatalogFilterRange';
+import { SiteCatalogFilters } from '~/data/models/SiteCatalogFilters';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import { CatalogFilterTypes } from './Filters/Filter.types';
 import FilterButtonsCarousel from './Filters/FilterButtonsCarousel';
-import {
-  filterSort,
-  mockPriceFilter,
-  mockSiteCatalogFilters,
-} from './Filters/Filters.mocks';
 import { getGroupedFilters } from './Filters/Filters.utils';
 import SubFilters from './Filters/SubFilters/SubFilters';
 import { DATA_COMPONENT_LABEL } from './Header.constants';
@@ -24,7 +24,7 @@ interface Props {
   location: string;
   onToggleView: () => void;
   resultsCount: number;
-  siteCatalogFilters: any;
+  siteCatalogFilters: SiteCatalogFilters;
   sizeList?: string[];
   title: string | ReactNode;
 }
@@ -34,20 +34,21 @@ export default function Header({
   isAdvancedView = false,
   isInternal = false,
   resultsCount,
-  siteCatalogFilters,
+  siteCatalogFilters = { filtersList: [], sortList: [], totalMatches: 0 },
   ...rest
 }: Props) {
   const { header } = useTheme();
   const { greaterThan, isLoading } = useBreakpoints();
-  // TODO: remove mock fallbacks
   const priceFilter =
-    siteCatalogFilters?.filtersList.find(
-      (f: CatalogFilterTypes) => 'id' in f && f.id === 'price',
-    ) || mockPriceFilter;
-  const filters =
-    siteCatalogFilters?.filtersList.filter(
-      (f: CatalogFilterTypes) => f !== priceFilter,
-    ) || mockSiteCatalogFilters;
+    // TODO: have to type cast `SiteCatalogFilterRange` with type check in Array.find?
+    siteCatalogFilters.filtersList.find(
+      (f: CatalogFilterTypes) =>
+        f.type === SiteCatalogFilterRangeTypeEnum.SiteCatalogFilterRange &&
+        f.id === 'price',
+    ) as SiteCatalogFilterRange;
+  const filters = siteCatalogFilters.filtersList.filter(
+    (f: CatalogFilterTypes) => f !== priceFilter,
+  );
   const groupedFilters = greaterThan.M && getGroupedFilters(filters);
   const filtersToMap = groupedFilters ? groupedFilters.otherFilters : filters;
 
@@ -81,8 +82,7 @@ export default function Header({
       <SubFilters
         resultsCount={resultsCount}
         priceFilter={priceFilter}
-        // TODO: remove mock fallback
-        sortList={siteCatalogFilters?.sortList || filterSort}
+        sortList={siteCatalogFilters.sortList}
       />
     </>
   );

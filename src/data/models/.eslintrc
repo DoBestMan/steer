@@ -1,0 +1,6 @@
+
+{
+  "rules": {
+    "typescript-sort-keys/interface": "off"
+  }
+}

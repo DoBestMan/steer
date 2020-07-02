@@ -1,6 +1,10 @@
 import { useRouter } from 'next/router';
 
 import CatalogPageContainer from '~/components/pages/CatalogPage/CatalogPage.container';
+import {
+  emptyCatalogProducts,
+  emptyHandleUpdateResults,
+} from '~/components/pages/CatalogPage/CatalogPage.mocks';
 // import { COLORS } from '~/lib/constants';
 import { isRouteDiameterFormat } from '~/lib/utils/routes';
 
@@ -21,7 +25,13 @@ function TireCategory() {
   dataFn(/* api options/params */);
 
   // TODO: add handleUpdateResults prop
-  return <CatalogPageContainer hasTopPicks={false} />;
+  return (
+    <CatalogPageContainer
+      handleUpdateResults={emptyHandleUpdateResults}
+      siteCatalogProducts={emptyCatalogProducts}
+      hasTopPicks={false}
+    />
+  );
 }
 
 export default TireCategory;

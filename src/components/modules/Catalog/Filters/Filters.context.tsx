@@ -7,6 +7,7 @@ import {
   useState,
 } from 'react';
 
+import { SiteCatalogFilters } from '~/data/models/SiteCatalogFilters';
 import { createContext } from '~/lib/utils/context';
 
 import { CatalogFilterTypes } from './Filter.types';
@@ -14,8 +15,8 @@ import { getInitialFiltersState, getValueKeys } from './Filters.utils';
 
 interface ContextProviderProps {
   children: ReactNode;
-  onApplyFilters?: (filters: Record<string, string>) => void;
-  siteCatalogFilters: any;
+  onApplyFilters: (filters: Record<string, string>) => void;
+  siteCatalogFilters: SiteCatalogFilters;
 }
 
 /*
@@ -77,18 +78,18 @@ const FiltersContext = createContext<FiltersContextProps>();
 
 interface ContextArgs {
   onApplyFilters: ContextProviderProps['onApplyFilters'];
-  siteCatalogFilters: any;
+  siteCatalogFilters: SiteCatalogFilters;
 }
 
 export function useFiltersContextSetup({
-  siteCatalogFilters,
+  siteCatalogFilters = { filtersList: [], sortList: [], totalMatches: 0 },
   onApplyFilters,
 }: ContextArgs) {
   const { initialState, isPopularActive } = useMemo(
     () =>
       getInitialFiltersState(
-        siteCatalogFilters?.filtersList,
-        siteCatalogFilters?.sortList,
+        siteCatalogFilters.filtersList,
+        siteCatalogFilters.sortList,
       ),
     [siteCatalogFilters],
   );
@@ -102,15 +103,15 @@ export function useFiltersContextSetup({
 
   useEffect(() => {
     const { initialState } = getInitialFiltersState(
-      siteCatalogFilters?.filtersList,
-      siteCatalogFilters?.sortList,
+      siteCatalogFilters.filtersList,
+      siteCatalogFilters.sortList,
     );
     setFiltersToApply(initialState);
   }, [siteCatalogFilters]);
 
   const fetchData = async (filters: Record<string, string>) => {
     setIsLoading(true);
-    onApplyFilters && (await onApplyFilters(filters));
+    await onApplyFilters(filters);
     setIsLoading(false);
   };
 

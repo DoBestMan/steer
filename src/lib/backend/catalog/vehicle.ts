@@ -1,3 +1,4 @@
+import { SiteCatalogProducts } from '~/data/models/SiteCatalogProducts';
 import { SiteCatalogSummary } from '~/data/models/SiteCatalogSummary';
 import { fetch } from '~/lib/fetch';
 
@@ -36,8 +37,7 @@ export async function backendGetVehicleProducts({
   year: string | string[];
 }) {
   const response = await fetch<{
-    // TODO: add type
-    siteCatalogProducts: any;
+    siteCatalogProducts: SiteCatalogProducts;
   }>({
     endpoint: `/v1/site/catalog/vehicles/${make}/${model}/${year}/products`,
     query,

@@ -1,8 +1,10 @@
+import { SiteCatalogFilter } from '~/data/models/SiteCatalogFilter';
 import {
-  SiteCatalogFilter,
   SiteCatalogFilterList,
-  SiteCatalogFilterTypeEnum,
-} from '~/data/models/SiteCatalogFilters';
+  SiteCatalogFilterListTypeEnum,
+} from '~/data/models/SiteCatalogFilterList';
+import { SiteCatalogFilterRangeTypeEnum } from '~/data/models/SiteCatalogFilterRange';
+import { SiteCatalogFilterToggleTypeEnum } from '~/data/models/SiteCatalogFilterToggle';
 
 import { CatalogFilterTypes } from './Filter.types';
 import {
@@ -24,14 +26,14 @@ import {
 } from './Filters.utils';
 
 const toggleFilters = [
-  { type: SiteCatalogFilterTypeEnum.SiteCatalogFilterToggle },
-  { type: SiteCatalogFilterTypeEnum.SiteCatalogFilterToggle },
+  { type: SiteCatalogFilterToggleTypeEnum.SiteCatalogFilterToggle },
+  { type: SiteCatalogFilterToggleTypeEnum.SiteCatalogFilterToggle },
 ];
 
 const otherFilters = [
-  { type: SiteCatalogFilterTypeEnum.SiteCatalogFilterRange },
-  { type: SiteCatalogFilterTypeEnum.SiteCatalogFilterList },
-  { type: SiteCatalogFilterTypeEnum.SiteCatalogFilterList },
+  { type: SiteCatalogFilterRangeTypeEnum.SiteCatalogFilterRange },
+  { type: SiteCatalogFilterListTypeEnum.SiteCatalogFilterList },
+  { type: SiteCatalogFilterListTypeEnum.SiteCatalogFilterList },
 ];
 
 describe('Filters.utils', () => {
@@ -46,7 +48,8 @@ describe('Filters.utils', () => {
         (filter) => filter.type,
       );
       const filteredTypes = popularFilterTypes.filter(
-        (type) => type === SiteCatalogFilterTypeEnum.SiteCatalogFilterToggle,
+        (type) =>
+          type === SiteCatalogFilterToggleTypeEnum.SiteCatalogFilterToggle,
       );
 
       expect(groupedFilters.popularFilters).toHaveLength(2);
@@ -67,7 +70,7 @@ describe('Filters.utils', () => {
       expect(groupedFilters.otherFilters).toHaveLength(3);
       expect(
         otherFilterTypes.includes(
-          SiteCatalogFilterTypeEnum.SiteCatalogFilterToggle,
+          SiteCatalogFilterToggleTypeEnum.SiteCatalogFilterToggle,
         ),
       ).toBe(false);
     });

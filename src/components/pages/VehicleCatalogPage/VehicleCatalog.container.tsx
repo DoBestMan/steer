@@ -2,13 +2,14 @@ import { useRouter } from 'next/router';
 import { useCallback, useEffect } from 'react';
 
 import CatalogPageContainer from '~/components/pages/CatalogPage/CatalogPage.container';
+import { SiteCatalogProducts } from '~/data/models/SiteCatalogProducts';
 import { SiteCatalogSummary } from '~/data/models/SiteCatalogSummary';
 import { useApiDataWithDefault } from '~/hooks/useApiDataWithDefault';
 import { eventEmitters } from '~/lib/events/emitters';
 
 export interface VehicleCatalogData {
   serverData: {
-    siteCatalogProducts: any;
+    siteCatalogProducts: SiteCatalogProducts;
     siteCatalogSummary: SiteCatalogSummary;
   };
 }
