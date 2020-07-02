@@ -41,3 +41,17 @@ export const truncateText = (
 
 export const numbersOnly = (text: string): string =>
   text.match(/\d+/g)?.join('') || '';
+
+export const keyToCamel = (text: string): string =>
+  text.replace(/([-_][a-z])/gi, ($1) =>
+    $1.toUpperCase().replace('-', '').replace('_', ''),
+  );
+
+export const keysToCamel = (object: Record<string, any>): Record<string, any> =>
+  Object.keys(object).reduce(
+    (acc, cur) => ({
+      ...acc,
+      [keyToCamel(cur)]: object[cur],
+    }),
+    {},
+  );
