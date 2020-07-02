@@ -1,10 +1,10 @@
 import { Global } from '@emotion/core';
 import NextApp, { AppContext, AppInitialProps } from 'next/app';
-import Head from 'next/head';
 import { Transition, TransitionGroup } from 'react-transition-group';
 import { TransitionStatus } from 'react-transition-group/Transition';
 
 import Layout from '~/components/global/Layout/Layout';
+import Meta from '~/components/global/Meta/Meta';
 import App from '~/components/modules/App/App';
 import { animations, styles } from '~/components/modules/App/App.styles';
 import AppProviders from '~/context/AppProviders';
@@ -42,9 +42,7 @@ class MyApp extends NextApp<Props> {
         siteGlobalsContextValue={siteGlobals}
         siteMenuContextValue={siteMenu}
       >
-        <Head>
-          <title>Simpletire</title>
-        </Head>
+        <Meta />
 
         <Global styles={global} />
 

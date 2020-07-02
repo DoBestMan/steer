@@ -42,6 +42,10 @@ export const truncateText = (
 export const numbersOnly = (text: string): string =>
   text.match(/\d+/g)?.join('') || '';
 
+export const capitalize = (s: string) => {
+  return s.charAt(0).toUpperCase() + s.slice(1);
+};
+
 export const keyToCamel = (text: string): string =>
   text.replace(/([-_][a-z])/gi, ($1) =>
     $1.toUpperCase().replace('-', '').replace('_', ''),

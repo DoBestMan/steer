@@ -1,4 +1,19 @@
 {
+  "meta": {
+    "description": "Fast & Free Delivery! Shop for automotive tires online from over 300+ brands. Have them shipped to and installed at one of our 10,000+ installation centers, making the purchase and installation process painless and simple.",
+    "title": "Buy Automotive Tires Online for Less",
+
+    "vehicles": {
+      "make": {
+        "model": {
+          "year": {
+            "title": "Vehicle {{make}} {{model}} {{year}} Page",
+            "description": "Find the best tires for your {{year}} {{make}} {{model}}, shipped free and direct to you or one of our 10,000+ installation centers. Shop for the best deal on your {{year}} {{make}} {{model}}."
+          }
+        }
+      }
+    }
+  },
   "common": {
     "ellipsis": "...",
     "feedback": {
