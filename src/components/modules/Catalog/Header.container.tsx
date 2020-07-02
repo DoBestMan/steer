@@ -1,6 +1,6 @@
 import { FiltersContextProvider } from '~/components/modules/Catalog/Filters/Filters.context';
 import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
-import { SiteCatalogFilters } from '~/data/models/SiteCatalogFilters';
+import { SiteCatalogProducts } from '~/data/models/SiteCatalogProducts';
 
 import Header from './Header';
 
@@ -9,41 +9,31 @@ interface Props {
   hasTopPicks: boolean;
   isAdvancedView: boolean;
   isInternal?: boolean;
-  siteCatalogFilters: SiteCatalogFilters;
+  siteCatalogProducts: SiteCatalogProducts;
   sizeList?: string[];
   toggleView: () => void;
 }
-
-const titlePlaceholder = (
-  <>
-    232 tires fit your
-    <br />
-    Lamborghini Aventador Roadster 2018
-  </>
-);
 
 export default function HeaderContainer({
   handleUpdateResults,
   hasTopPicks,
   isAdvancedView,
-  siteCatalogFilters,
+  siteCatalogProducts,
   sizeList,
   toggleView,
 }: Props) {
   const { locationString } = useUserPersonalizationContext();
   return (
     <FiltersContextProvider
-      siteCatalogFilters={siteCatalogFilters}
+      siteCatalogFilters={siteCatalogProducts.siteCatalogFilters}
       onApplyFilters={handleUpdateResults}
     >
       <Header
-        siteCatalogFilters={siteCatalogFilters}
+        siteCatalogProducts={siteCatalogProducts}
         hasTopPicks={hasTopPicks}
         isAdvancedView={isAdvancedView}
         isInternal={false}
-        title={titlePlaceholder}
         sizeList={sizeList}
-        resultsCount={232}
         onToggleView={toggleView}
         location={locationString}
       />

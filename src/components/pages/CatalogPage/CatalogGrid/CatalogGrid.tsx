@@ -112,7 +112,7 @@ function CatalogGrid({
         sizeList={siteCatalogSummary?.siteCatalogSummaryMeta?.sizeList}
         hasTopPicks={hasTopPicks}
         toggleView={toggleView}
-        siteCatalogFilters={siteCatalogProducts.siteCatalogFilters}
+        siteCatalogProducts={siteCatalogProducts}
         isAdvancedView={isAdvancedView}
       />
       {isGroupedProducts ? (

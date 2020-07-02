@@ -1,11 +1,10 @@
 import { useTheme } from 'emotion-theming';
-import { ReactNode } from 'react';
 
 import {
   SiteCatalogFilterRange,
   SiteCatalogFilterRangeTypeEnum,
 } from '~/data/models/SiteCatalogFilterRange';
-import { SiteCatalogFilters } from '~/data/models/SiteCatalogFilters';
+import { SiteCatalogProducts } from '~/data/models/SiteCatalogProducts';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { ui } from '~/lib/utils/ui-dictionary';
 
@@ -23,30 +22,26 @@ interface Props {
   isInternal?: boolean;
   location: string;
   onToggleView: () => void;
-  resultsCount: number;
-  siteCatalogFilters: SiteCatalogFilters;
+  siteCatalogProducts: SiteCatalogProducts;
   sizeList?: string[];
-  title: string | ReactNode;
 }
 
 export default function Header({
   hasTopPicks,
   isAdvancedView = false,
   isInternal = false,
-  resultsCount,
-  siteCatalogFilters = { filtersList: [], sortList: [], totalMatches: 0 },
+  siteCatalogProducts,
   ...rest
 }: Props) {
+  const { siteCatalogFilters: catalogFilters } = siteCatalogProducts;
   const { header } = useTheme();
   const { greaterThan, isLoading } = useBreakpoints();
-  const priceFilter =
-    // TODO: have to type cast `SiteCatalogFilterRange` with type check in Array.find?
-    siteCatalogFilters.filtersList.find(
-      (f: CatalogFilterTypes) =>
-        f.type === SiteCatalogFilterRangeTypeEnum.SiteCatalogFilterRange &&
-        f.id === 'price',
-    ) as SiteCatalogFilterRange;
-  const filters = siteCatalogFilters.filtersList.filter(
+  const priceFilter = catalogFilters.filtersList.find(
+    (f): f is SiteCatalogFilterRange =>
+      f.type === SiteCatalogFilterRangeTypeEnum.SiteCatalogFilterRange &&
+      f.id === 'price',
+  );
+  const filters = catalogFilters.filtersList.filter(
     (f: CatalogFilterTypes) => f !== priceFilter,
   );
   const groupedFilters = greaterThan.M && getGroupedFilters(filters);
@@ -57,13 +52,13 @@ export default function Header({
       <div css={[styles.root, !hasTopPicks && styles.navOffset]}>
         {/* For opacity animation only (see <CatalogGrid>) */}
         <div css={[styles.headerContainer, header.background]}></div>
-
         {/* "data-component" used in <CatalogGrid> */}
         <div data-component={DATA_COMPONENT_LABEL}>
           <HeaderInfo
             isInternal={isInternal}
             isAdvancedView={isAdvancedView}
             hasTopPicks={hasTopPicks}
+            title={siteCatalogProducts.siteCatalogProductsMeta.title}
             {...rest}
           />
           <p css={[styles.filterLabel, header.text]}>
@@ -80,9 +75,9 @@ export default function Header({
         </div>
       </div>
       <SubFilters
-        resultsCount={resultsCount}
+        resultsCount={catalogFilters.totalMatches}
         priceFilter={priceFilter}
-        sortList={siteCatalogFilters.sortList}
+        sortList={catalogFilters.sortList}
       />
     </>
   );

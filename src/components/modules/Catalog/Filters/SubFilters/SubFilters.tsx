@@ -1,29 +1,22 @@
 import Link from '~/components/global/Link/Link';
-import Range from '~/components/global/Range/Range';
-import { RANGE_SLIDER_SIZE } from '~/components/global/Range/Range.constants';
 import { SiteCatalogFilterRange } from '~/data/models/SiteCatalogFilterRange';
 import {
   SiteCatalogSortListItem,
   SiteCatalogSortListItemStateEnum,
 } from '~/data/models/SiteCatalogSortListItem';
-import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import { FilterContentTypes } from '../Filter.types';
-import {
-  mapUnitToAriaFormatter,
-  mapUnitToLabelFormatter,
-} from '../Filters.constants';
 import { useFiltersContext } from '../Filters.context';
 import FilterPopup from '../Popup/FilterPopup';
+import PriceFilter from './PriceFilter';
 import styles from './SubFilters.styles';
 
-const PRICE_ID = 'price';
 const SORT_ID = 'sort';
 
 interface Props {
-  priceFilter: SiteCatalogFilterRange;
+  priceFilter?: SiteCatalogFilterRange;
   resultsCount: number;
   sortList: SiteCatalogSortListItem[];
 }
@@ -34,24 +27,10 @@ export default function SubFilters({
   priceFilter,
 }: Props) {
   const {
-    currentMaxValue,
-    currentMinValue,
-    id,
-    maxValue,
-    minValue,
-    step,
-    unit,
-  } = priceFilter;
-  const {
-    // activeFilters,
     clearSelectingFilter,
     createOpenFilterHandler,
     selectingFilter,
   } = useFiltersContext();
-  const min = currentMinValue || minValue;
-  const max = currentMaxValue || maxValue;
-  const { lessThan } = useBreakpoints();
-  const priceFormatter = mapUnitToLabelFormatter[unit];
   const sortItem = sortList.find(
     (item) => item.state === SiteCatalogSortListItemStateEnum.Selected,
   );
@@ -60,44 +39,8 @@ export default function SubFilters({
       <p css={[styles.results, !resultsCount && styles.resultsNone]}>
         {ui('catalog.filters.results', { number: resultsCount })}
       </p>
-      <p css={[styles.rangePrefix, resultsCount && styles.rangePrefixHide]}>
-        {ui('catalog.filters.from')}
-      </p>
-      <Link
-        theme={THEME.LIGHT}
-        className="filter-button"
-        as="button"
-        onClick={createOpenFilterHandler(PRICE_ID)}
-        css={[styles.range, styles.smallShow]}
-      >
-        {ui('catalog.filters.priceRange', {
-          min: priceFormatter(min),
-          max: priceFormatter(max),
-        })}
-      </Link>
-      {lessThan.L ? (
-        <FilterPopup
-          isOpen={selectingFilter === PRICE_ID}
-          onClose={clearSelectingFilter}
-          filter={priceFilter}
-        />
-      ) : (
-        <>
-          <p css={styles.rangeLabel}>{ui('catalog.filters.priceRangeLabel')}</p>
-          <div css={styles.slider}>
-            <Range
-              size={RANGE_SLIDER_SIZE.SMALL}
-              formatLabel={mapUnitToLabelFormatter[unit]}
-              getAriaText={mapUnitToAriaFormatter[unit]}
-              name={ui('catalog.filters.slider', { name: id })}
-              interval={step}
-              max={maxValue}
-              min={minValue}
-              maxDefault={max}
-              minDefault={min}
-            />
-          </div>
-        </>
+      {priceFilter && (
+        <PriceFilter hasResults={!!resultsCount} priceFilter={priceFilter} />
       )}
       <p css={styles.sortLabel}>{ui('catalog.filters.sortBy')} </p>
       <Link
