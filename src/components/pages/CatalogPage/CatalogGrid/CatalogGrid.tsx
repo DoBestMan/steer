@@ -102,7 +102,7 @@ function CatalogGrid({
   }
 
   const isGroupedProducts =
-    siteCatalogProducts.siteCatalogProductsResultList[0].type ===
+    siteCatalogProducts.siteCatalogProductsResultList[0]?.type ===
     SiteCatalogProductGroupEnum.SiteCatalogProductGroup;
 
   return (
