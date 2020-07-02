@@ -1,3 +1,5 @@
+import { mockTireRatings } from '~/components/modules/ReviewListing/RatingsTable/RatingsTable.mocks';
+
 export const mockReviewListing = {
   breadcrumbs: [
     {
@@ -11,7 +13,6 @@ export const mockReviewListing = {
   ],
   description:
     'All-season or winter tires? Goodyear or Bridgestone? Get the answers you need here.\n\n Hidden text here.',
-  header: 'Tire Reviews',
   filters: [
     {
       label: 'Brand',
@@ -317,4 +318,6 @@ export const mockReviewListing = {
       ],
     },
   ],
+  header: 'Tire Reviews',
+  ratings: mockTireRatings,
 };

@@ -1,4 +1,4 @@
-import { COLORS, SPACING, StylesMap } from '~/lib/constants';
+import { COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
 import { borderBottomWithGap } from '~/styles/borders.styles';
 import { typography } from '~/styles/typography.styles';
 
@@ -16,10 +16,11 @@ const styles: StylesMap = {
     paddingBottom: `${SPACING.SIZE_40}px`,
     textAlign: 'left',
     width: '100%',
-
-    // Increase padding when button is removed so the page doesn't shift
-    ':only-child': {
-      paddingBottom: `${SPACING.SIZE_90}px`,
+    [MQ.S]: {
+      paddingTop: SPACING.SIZE_20,
+    },
+    [MQ.L]: {
+      paddingTop: SPACING.SIZE_60,
     },
   },
   headingText: typography.labelHeadline,

@@ -9,6 +9,7 @@ import { ui } from '~/lib/utils/ui-dictionary';
 import { screenReaderText } from '~/styles/document/accessibility.styles';
 
 import styles from './RatingsTable.styles';
+import RatingsTableSort from './RatingsTableSort';
 
 interface Review {
   id: string;
@@ -38,6 +39,7 @@ function Results({ reviews }: Props) {
 
   return (
     <>
+      <RatingsTableSort resultsCount={reviews.length} />
       <table css={styles.container}>
         <thead css={styles.headingText}>
           <Grid as="tr">
