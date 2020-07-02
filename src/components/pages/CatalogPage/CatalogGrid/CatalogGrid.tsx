@@ -9,10 +9,6 @@ import { map } from '~/lib/utils/interpolation';
 
 import CatalogProductGrid from '../CatalogProductGrid/CatalogProductGrid';
 import CatalogProductGroups from '../CatalogProductGroups/CatalogProductGroups';
-import {
-  productGroupList,
-  products,
-} from '../CatalogProductGroups/CatalogProductGroups.mocks';
 
 interface Props {
   handleUpdateResults?: (filters: Record<string, string>) => void;
@@ -96,8 +92,9 @@ function CatalogGrid({
     setIsAdvancedView(!isAdvancedView);
   }
 
-  // TODO: logic of grouped vs. grid views — for now we only use grid for advanced view
-  const isGroupedProducts = !isAdvancedView;
+  const isGroupedProducts =
+    siteCatalogProducts?.siteCatalogProductsResultList[0].type ===
+    'SiteCatalogProductGroupItem';
 
   return (
     <div ref={catalogGrid}>
@@ -110,10 +107,12 @@ function CatalogGrid({
         isAdvancedView={isAdvancedView}
       />
       {isGroupedProducts ? (
-        <CatalogProductGroups productGroupList={productGroupList} />
+        <CatalogProductGroups
+          productGroupList={siteCatalogProducts?.siteCatalogProductsResultList}
+        />
       ) : (
         <CatalogProductGrid
-          productList={products}
+          productList={siteCatalogProducts?.siteCatalogProductsResultList}
           isAdvancedView={isAdvancedView}
         />
       )}

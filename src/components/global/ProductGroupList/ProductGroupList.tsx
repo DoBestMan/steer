@@ -50,13 +50,19 @@ function ProductGroupList({
           <p css={styles.description}>{description}</p>
         </GridItem>
       </Grid>
-      <Carousel params={{ mousewheel: { forceToAxis: true } }} freeScroll>
-        {productList.map((product, i) => (
-          <div key={`${name}-${i}`} css={styles.item}>
-            <ProductListing {...product} />
-          </div>
-        ))}
-      </Carousel>
+      <div css={styles.wrapper}>
+        <Carousel
+          wrapperClass="product-carousel"
+          params={{ mousewheel: { forceToAxis: true } }}
+          freeScroll
+        >
+          {productList.map((product, i) => (
+            <div key={`${name}-${i}`} css={styles.item}>
+              <ProductListing {...product} />
+            </div>
+          ))}
+        </Carousel>
+      </div>
     </>
   );
 }

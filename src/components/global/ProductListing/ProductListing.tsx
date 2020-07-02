@@ -38,16 +38,23 @@ function ProductListing({
 
   return (
     <div css={[styles.root, isHighlighted && styles.rootHighlighted]}>
-      <div css={styles.imageWrapper}>
+      <div css={[styles.image, isHighlighted && styles.imageHighlighted]}>
         {highlight && <div css={styles.promoDisc}>{highlight}</div>}
         <Image
-          css={[styles.image, isHighlighted && styles.imageHighlighted]}
-          {...displayedImage.image}
+          widths={isHighlighted ? [250, 250, 300] : [140, 180, 200]}
+          altText={displayedImage.image.altText}
+          src={displayedImage.image.src}
         />
       </div>
       <div css={[styles.info, isHighlighted && styles.infoHighlighted]}>
         {brand.image ? (
-          <Image css={styles.brand} {...brand.image} />
+          <div css={[styles.brand, styles.brandImage]}>
+            <Image
+              as="span"
+              src={brand.image.src}
+              altText={brand.image.altText}
+            />
+          </div>
         ) : (
           <span css={[styles.brand, styles.brandLabel]}>{brand.label}</span>
         )}

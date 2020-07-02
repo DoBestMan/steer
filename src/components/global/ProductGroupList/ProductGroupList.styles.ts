@@ -35,6 +35,7 @@ const styles: StylesMap = {
       [MQ.L]: { marginRight: GRID_MARGIN.L },
       [MQ.XL]: { marginRight: GRID_MARGIN.XL },
     },
+    height: 'auto',
     width: 150,
   },
   link: {
@@ -55,6 +56,11 @@ const styles: StylesMap = {
       alignItems: 'center',
     },
   ],
+  wrapper: {
+    '.product-carousel': {
+      display: 'flex',
+    },
+  },
 };
 
 export default styles;

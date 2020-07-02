@@ -8,10 +8,17 @@ import {
 } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
-const IMAGE_SIZES = {
-  S: 200,
-  M: 250,
-  L: 300,
+const IMAGE_SIZE = {
+  HIGHLIGHT: {
+    S: 250,
+    M: 250,
+    XL: 300,
+  },
+  DEFAULT: {
+    S: 140,
+    M: 180,
+    XL: 200,
+  },
 };
 
 const DISC_SIZE = 50;
@@ -28,18 +35,33 @@ const styles: StylesMap = {
     marginTop: SPACING.SIZE_10,
     marginBottom: SPACING.SIZE_15,
   },
+  brandImage: {
+    img: {
+      height: 20,
+      margin: '0 auto',
+      width: 'auto',
+    },
+  },
   brandLabel: typography.tertiaryHeadline,
   filterItem: typography.primarySubhead,
   image: {
-    maxWidth: IMAGE_SIZES.S,
-  },
-  imageHighlighted: {
-    maxWidth: IMAGE_SIZES.M,
+    width: IMAGE_SIZE.DEFAULT.S,
+    [MQ.M]: {
+      width: IMAGE_SIZE.DEFAULT.M,
+    },
     [MQ.XL]: {
-      maxWidth: IMAGE_SIZES.L,
+      width: IMAGE_SIZE.DEFAULT.XL,
     },
   },
-  imageWrapper: { position: 'relative' },
+  imageHighlighted: {
+    width: IMAGE_SIZE.HIGHLIGHT.S,
+    [MQ.M]: {
+      width: IMAGE_SIZE.HIGHLIGHT.M,
+    },
+    [MQ.XL]: {
+      width: IMAGE_SIZE.HIGHLIGHT.XL,
+    },
+  },
   info: {
     alignItems: 'center',
     display: 'flex',
