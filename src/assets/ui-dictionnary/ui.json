@@ -374,8 +374,28 @@
     "tireHeader": "Tire"
   },
   "tracking": {
+    "additionalInfoTitle": "Have a doubt?",
+    "additionalInfoLinks": "Check our {{shipping}} or {{faq}}",
+    "cancelledContactServiceEnabled": "Call {{phone}} or {{email}}",
+    "cancelledSendEmail": "Send us an email",
+    "cancelledHelp": "Need help with a new order?",
+    "orderNumber": "Order number #{{number}}",
+    "orderSummary": "Order summary",
     "orderTrackingDescription": "Enter the Order ID we emailed to you when you made your purchase, or {{login}}",
     "orderTrackingSubmit": "Find it",
-    "orderTrackingTitle": "Track your order"
+    "orderTrackingTitle": "Track your order",
+    "pendingStepDescription": "Your tires will ship soon",
+    "shippingAddress": "Shipping address",
+    "statusCancelled": "Order cancelled",
+    "statusDelivered": "Delivered",
+    "statusExpected": "Expected delivery:",
+    "stepDelivered": "Delivered",
+    "stepInTransit": "In Transit",
+    "stepPending": "Pending Carrier Pickup",
+    "stepProcessed": "Order Processed",
+    "tiresOrderedPlural": "{{quantity}} tires ordered",
+    "tiresOrderedSingular": "{{quantity}} tire ordered",
+    "tiresShipped": "Your new tires have shipped",
+    "trackingNumber": "Tracking #:"
   }
 }

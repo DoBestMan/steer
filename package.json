@@ -31,6 +31,7 @@
     "@types/css-font-loading-module": "^0.0.4",
     "@types/youtube": "^0.0.39",
     "body-scroll-lock": "^3.0.2",
+    "date-fns": "^2.14.0",
     "favicons": "^6.1.0",
     "focus-trap": "^5.1.0",
     "intersection-observer": "^0.10.0",
