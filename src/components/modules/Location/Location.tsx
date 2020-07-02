@@ -122,7 +122,7 @@ function Location({
     `[aria-label="${ui('common.modal.close', { contentLabel })}"]`,
   ) as HTMLElement;
   const closeButtonSubNav = document.querySelector(
-    `[aria-label="${ui('nav.close')} ${NAV_TARGETS.LOCATION}"`,
+    `[aria-label="${ui('nav.close')} ${NAV_TARGETS.LOCATION}"]`,
   ) as HTMLElement;
 
   async function onValueSelectionSuccess(result: AutocompleteResult) {
