@@ -14,43 +14,58 @@ interface Props {
 
 function TireImage({ brand, imageList }: Props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [activeSlide, setActiveSlide] = useState<number | undefined>(undefined);
   const { greaterThan } = useBreakpoints();
   const hasThumbs = greaterThan.M;
   const zoomImageList = imageList.filter((item) => item.image);
 
-  function findIndex(index: number) {
-    const selectedItem = imageList[index];
-    const selectedZoomItem = zoomImageList.findIndex(
+  // We need to track the two carousel states separately because
+  // the zoom list doesn't include videos
+  const [currentInlineIndex, setCurrentInlineIndex] = useState(0);
+  const [currentZoomIndex, setCurrentZoomIndex] = useState(0);
+
+  function findIndex(
+    index: number,
+    prevList: Props['imageList'],
+    newList: Props['imageList'],
+  ) {
+    const selectedItem = prevList[index];
+    const selectedZoomItem = newList.findIndex(
       (element) => element === selectedItem,
     );
 
-    setActiveSlide(selectedZoomItem);
+    return selectedZoomItem;
   }
 
   function closeModal() {
+    setCurrentInlineIndex(
+      findIndex(currentZoomIndex, zoomImageList, imageList),
+    );
     setIsModalOpen(false);
   }
 
-  function openModal(index: number) {
-    findIndex(index);
+  function openModal() {
+    setCurrentZoomIndex(
+      findIndex(currentInlineIndex, imageList, zoomImageList),
+    );
     setIsModalOpen(!isModalOpen);
   }
 
   return (
     <>
       <TireImageCarousel
-        activeSlide={activeSlide}
         hasThumbs={hasThumbs}
         imageList={imageList}
         handleClick={openModal}
+        currentIndex={currentInlineIndex}
+        setCurrentIndex={setCurrentInlineIndex}
       />
       <TireImageZoom
-        activeSlide={activeSlide}
         brand={brand}
         handleClose={closeModal}
         imageList={zoomImageList}
         isModalOpen={isModalOpen}
+        currentIndex={currentZoomIndex}
+        setCurrentIndex={setCurrentZoomIndex}
       />
     </>
   );

@@ -10,11 +10,12 @@ import TireImageCarouselItem, { ImageItemProps } from './TireImageCarouselItem';
 import TireImageThumbs from './TireImageThumbs';
 
 interface Props {
-  activeSlide?: number;
+  currentIndex: number;
   handleClick?: (index: number) => void;
   hasThumbs?: boolean;
   imageList: Array<ImageItemProps>;
   isFullscreen?: boolean;
+  setCurrentIndex: (index: number) => void;
 }
 
 const CONSTANTS = {
@@ -39,14 +40,14 @@ const CONSTANTS = {
 };
 
 function TireImageCarousel({
-  activeSlide = 0,
+  currentIndex,
   handleClick,
   hasThumbs,
   imageList,
   isFullscreen,
+  setCurrentIndex,
 }: Props) {
   const [swiper, setSwiper] = useState<SwiperInstance>(null);
-  const [currentIndex, setCurrentIndex] = useState(activeSlide);
   const { is, lessThan } = useBreakpoints();
 
   useEffect(() => {
@@ -57,7 +58,7 @@ function TireImageCarousel({
     swiper.on('slideChange', () => {
       setCurrentIndex(swiper.activeIndex);
     });
-  }, [swiper]);
+  }, [swiper, setCurrentIndex]);
 
   const maxHeight = lessThan.M
     ? MAX_HEIGHT.S
@@ -76,6 +77,7 @@ function TireImageCarousel({
     <div css={[styles.container, isFullscreen && styles.containerFullScreen]}>
       {maxHeight && (
         <Carousel
+          centerActiveSlide
           params={{ ...CONSTANTS.CAROUSEL_PARAMS, initialSlide: currentIndex }}
           getSwiper={setSwiper}
           activeSlide={currentIndex}

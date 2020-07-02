@@ -10,17 +10,20 @@ import styles from './TireImageZoom.styles';
 interface Props {
   activeSlide?: number;
   brand: SiteCatalogBrand;
+  currentIndex: number;
   handleClose: () => void;
   imageList: ImageItemProps[];
   isModalOpen: boolean;
+  setCurrentIndex: (index: number) => void;
 }
 
 function TireImageZoom({
-  activeSlide,
   brand,
+  currentIndex,
   handleClose,
   imageList,
   isModalOpen,
+  setCurrentIndex,
 }: Props) {
   const { image, label } = brand;
 
@@ -44,10 +47,11 @@ function TireImageZoom({
       </h2>
       <div css={styles.imageWrap}>
         <TireImageCarousel
-          activeSlide={activeSlide}
+          currentIndex={currentIndex}
           imageList={imageList}
           hasThumbs
           isFullscreen
+          setCurrentIndex={setCurrentIndex}
         />
       </div>
     </Modal>
