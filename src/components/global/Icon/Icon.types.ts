@@ -69,6 +69,7 @@ export type Icon =
   | 'vehicle-cart'
   | 'vehicle-commercial'
   | 'vehicle-farm'
+  | 'vehicle-heavy-truck'
   | 'vehicle-industrial'
   | 'vehicle-light-truck'
   | 'vehicle-passenger'

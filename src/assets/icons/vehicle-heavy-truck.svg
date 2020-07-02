@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" stroke="currentColor" viewBox="0 0 58.58 30.12">
+    <line x1="46.81" y1="17.9" x2="44.81" y2="17.9" fill="none"  stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"/>
+    <line x1="26.18" y1="26.09" x2="40.6" y2="26.09" fill="none"  stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"/>
+    <path d="M.6,23.72A4.48,4.48,0,0,0,4.72,26h2.9" fill="none"  stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"/>
+    <path d="M41.52,7.3h9c1.45,0,2.46.38,3,1.35C54.11,9.81,58,16.31,58,18.71V25.5h-3" fill="none"  stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"/>
+    <line x1="53.56" y1="15.52" x2="41.52" y2="15.52" fill="none"  stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"/>
+    <path d="M39,20.62V2.44A1.84,1.84,0,0,0,37.2.6H2.44A1.84,1.84,0,0,0,.6,2.44V20.62H6.82" fill="none"  stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"/>
+    <polyline points="57.97 18.51 54.93 18.51 54.93 21.43 57.97 21.43" fill="none"  stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"/>
+    <path d="M48.9,21.09a4.22,4.22,0,1,0,4.21,4.21,4.21,4.21,0,0,0-4.21-4.21Z" fill="none"  stroke-miterlimit="10" stroke-width="1.2"/>
+    <path d="M13.79,21.09A4.22,4.22,0,1,0,18,25.3a4.21,4.21,0,0,0-4.22-4.21Z" fill="none"  stroke-miterlimit="10" stroke-width="1.2"/>
+</svg>
