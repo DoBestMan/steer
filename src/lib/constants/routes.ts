@@ -1,6 +1,8 @@
 // TODO Finalize routes
 // https://simpletire.atlassian.net/browse/WCS-9
 
+import { ui } from '../utils/ui-dictionary';
+
 export enum ROUTES {
   BRAND_CATEGORY = 'brandCategory',
   BRAND_DETAIL = 'brandDetail',
@@ -16,11 +18,22 @@ export enum ROUTES {
 export const ROUTE_MAP: Record<ROUTES, string> = {
   [ROUTES.HOME]: '/',
   [ROUTES.BRAND_LANDING]: '/brands',
-  [ROUTES.BRAND_DETAIL]: '/[brandName]-tires',
-  [ROUTES.BRAND_REVIEWS]: '/[brandName]-tires/reviews',
+  [ROUTES.BRAND_DETAIL]: '/brands/[brandName]',
+  [ROUTES.BRAND_REVIEWS]: '/brands/[brandName]/reviews',
+  [ROUTES.PRODUCT_DETAIL]: '/brands/[brandName]/[productLine]',
+  [ROUTES.PRODUCT_REVIEWS]: '/brands/[brandName]/[productLine]/reviews',
   [ROUTES.BRAND_CATEGORY]: '/[brandName]/[categoryOrType]',
-  [ROUTES.PRODUCT_DETAIL]: '/[brandName]-tires/[productLinkIndividualTire]',
-  [ROUTES.PRODUCT_REVIEWS]:
-    '/[brandName]-tires/[productLinkIndividualTire]/reviews',
-  [ROUTES.TIRE_CATEGORY]: 'tire-sizes/[sizeInfo]',
+  [ROUTES.TIRE_CATEGORY]: '/tire-sizes/[sizeInfo]',
+};
+
+// null for dynamic labels
+export const ROUTE_LABELS: Record<string, string | null> = {
+  [ROUTE_MAP[ROUTES.HOME]]: ui('breadcrumbs.home'),
+  [ROUTE_MAP[ROUTES.BRAND_LANDING]]: ui('breadcrumbs.brands'),
+  [ROUTE_MAP[ROUTES.BRAND_DETAIL]]: null,
+  [ROUTE_MAP[ROUTES.BRAND_REVIEWS]]: ui('breadcrumbs.reviews'),
+  [ROUTE_MAP[ROUTES.PRODUCT_DETAIL]]: null,
+  [ROUTE_MAP[ROUTES.PRODUCT_REVIEWS]]: ui('breadcrumbs.reviews'),
+  [ROUTE_MAP[ROUTES.BRAND_CATEGORY]]: null,
+  [ROUTE_MAP[ROUTES.TIRE_CATEGORY]]: null,
 };

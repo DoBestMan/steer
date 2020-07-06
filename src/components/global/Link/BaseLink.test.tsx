@@ -61,15 +61,15 @@ describe('BaseLink', () => {
 
   test('internal dynamic link', () => {
     const { container } = render(
-      <BaseLink href="/drupal-tires">Click here</BaseLink>,
+      <BaseLink href="/brands/drupal-tires">Click here</BaseLink>,
     );
 
     expect(container.firstChild).toMatchInlineSnapshot(`
       <div
-        data-test-as="/drupal-tires"
+        data-test-as="/brands/drupal-tires"
       >
         <a
-          href="/[brandName]-tires"
+          href="/brands/[brandName]"
         >
           Click here
         </a>
@@ -79,15 +79,15 @@ describe('BaseLink', () => {
 
   test('internal dynamic link - one param', () => {
     const { container } = render(
-      <BaseLink href="/drupal-tires/reviews">Click here</BaseLink>,
+      <BaseLink href="/brands/drupal-tires/reviews">Click here</BaseLink>,
     );
 
     expect(container.firstChild).toMatchInlineSnapshot(`
       <div
-        data-test-as="/drupal-tires/reviews"
+        data-test-as="/brands/drupal-tires/reviews"
       >
         <a
-          href="/[brandName]-tires/reviews"
+          href="/brands/[brandName]/reviews"
         >
           Click here
         </a>
@@ -97,15 +97,15 @@ describe('BaseLink', () => {
 
   test('internal dynamic link - two params', () => {
     const { container } = render(
-      <BaseLink href="/drupal-tires/tractors">Click here</BaseLink>,
+      <BaseLink href="/brands/drupal-tires/tractors">Click here</BaseLink>,
     );
 
     expect(container.firstChild).toMatchInlineSnapshot(`
       <div
-        data-test-as="/drupal-tires/tractors"
+        data-test-as="/brands/drupal-tires/tractors"
       >
         <a
-          href="/[brandName]/[categoryOrType]"
+          href="/brands/[brandName]/[productLine]"
         >
           Click here
         </a>

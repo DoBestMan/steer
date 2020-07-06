@@ -50,7 +50,6 @@ export function Breadcrumbs() {
   return (
     <div css={{ backgroundColor, height: '100vh' }}>
       <BreadcrumbsComponent
-        currentPath={mockNavigationData.slice().pop()?.url}
         navigationItems={mockNavigationData}
         theme={theme}
       />

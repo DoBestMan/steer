@@ -8,21 +8,17 @@ import { THEME } from '~/lib/constants';
 import styles, { themeStyles } from './Breadcrumbs.styles';
 
 export interface BreadcrumbsItem {
+  currentPath?: boolean;
   label: string;
   url: string;
 }
 
 interface Props {
-  currentPath?: string;
   navigationItems: BreadcrumbsItem[];
   theme?: THEME;
 }
 
-function Breadcrumbs({
-  navigationItems,
-  currentPath,
-  theme = THEME.LIGHT,
-}: Props) {
+function Breadcrumbs({ navigationItems, theme = THEME.LIGHT }: Props) {
   return (
     <nav aria-label="Breadcrumbs" css={styles.root}>
       <Carousel
@@ -33,7 +29,6 @@ function Breadcrumbs({
       >
         {navigationItems.map((item, idx, array) => {
           const isLastItem = idx === array.length - 1;
-          const isCurrentPath = currentPath === item.url;
 
           return (
             <li key={`${item.label}_${idx}`} css={styles.item}>
@@ -41,7 +36,7 @@ function Breadcrumbs({
                 href={item.url}
                 css={[footerLink, themeStyles[theme]]}
                 theme={theme === THEME.DARK ? THEME.DARK : THEME.LIGHT}
-                aria-current={isCurrentPath ? 'page' : undefined}
+                aria-current={item.currentPath ? 'page' : undefined}
               >
                 {item.label}
               </Link>

@@ -27,11 +27,7 @@ function Header({
   return (
     <Grid css={styles.container}>
       <GridItem css={styles.breadcrumbs}>
-        <Breadcrumbs
-          currentPath={breadcrumbs.slice().pop()?.url}
-          navigationItems={breadcrumbs}
-          theme={THEME.ORANGE}
-        />
+        <Breadcrumbs navigationItems={breadcrumbs} theme={THEME.ORANGE} />
       </GridItem>
       <GridItem>
         <HeaderDetailPage

@@ -39,10 +39,7 @@ function ReviewsHeader({
   return (
     <Grid as="section" css={styles.container}>
       <GridItem gridColumnL="3/13" gridColumnXL="4/12" css={styles.breadcrumbs}>
-        <Breadcrumbs
-          currentPath={breadcrumbs.slice().pop()?.url}
-          navigationItems={breadcrumbs}
-        />
+        <Breadcrumbs navigationItems={breadcrumbs} />
       </GridItem>
       <GridItem gridColumnM="2/6" gridColumnL="3/9" gridColumnXL="4/9">
         <BaseLink href={brandUrl} css={styles.brand}>

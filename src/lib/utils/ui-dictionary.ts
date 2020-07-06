@@ -1,4 +1,4 @@
-import { doubleBrackets } from './regex';
+import { doubleBraces } from './regex';
 import { sanitizeHTML } from './sanitizer';
 import { InterpolationType, UIData, UIType } from './ui-dictionary.common';
 
@@ -6,7 +6,7 @@ function interpolationFn(
   templateString: string,
   templateVars: InterpolationType,
 ) {
-  return templateString.replace(doubleBrackets, function (n: string): string {
+  return templateString.replace(doubleBraces, function (n: string): string {
     let replaced: string = n;
 
     for (const [key, value] of Object.entries(templateVars)) {

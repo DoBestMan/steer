@@ -7,6 +7,7 @@ export const mockReviewListing = {
       url: '/',
     },
     {
+      currentPath: true,
       label: 'Tire reviews',
       url: '/tire-reviews',
     },

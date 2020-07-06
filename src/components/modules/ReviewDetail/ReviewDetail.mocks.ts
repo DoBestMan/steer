@@ -37,6 +37,7 @@ export const mockReviewDetail = {
       url: '/pirelli/reviews',
     },
     {
+      currentPath: true,
       label: 'Scorpion Verde All Season Plus',
       url: '/pirelli/reviews/scorpion-verde-all-season-plus',
     },
