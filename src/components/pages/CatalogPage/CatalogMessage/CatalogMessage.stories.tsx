@@ -19,6 +19,11 @@ export default {
   title: 'Catalog/Loading Interstitial/Message',
 };
 
+const customerServiceNumber = {
+  display: '(888) 410 0604',
+  value: '18884100604',
+};
+
 function CatalogMessageContainer({ children }: { children: ReactNode }) {
   return <ThemeProvider theme={defaultTheme}>{children}</ThemeProvider>;
 }
@@ -66,6 +71,7 @@ export function CatalogDataMomentDisambiguationMessage() {
 export function CatalogNoResultsMessage() {
   return (
     <NoResultsMessage
+      customerServiceNumber={customerServiceNumber}
       onSearchBy={action('Search by click')}
       siteCatalogSummaryPrompt={
         vehiclesNoResultWithTrim.siteCatalogSummaryPrompt

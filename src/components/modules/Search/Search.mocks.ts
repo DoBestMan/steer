@@ -17,18 +17,6 @@ export const emptySiteSearchResultGroup: SiteSearchResultGroup = {
   siteSearchResultList: [],
 };
 
-export const supportResultMock = {
-  action: {
-    queryText: '',
-    queryType: '',
-    type: 'SiteSearchResultActionQuery',
-  } as SiteSearchResultActionQuery,
-  detailLabel: null,
-  label: ui('search.callUs'),
-  labelSegments: [{ label: ui('search.callUs'), matches: false }],
-  type: 'SiteSearchResultTextItem',
-} as SiteSearchResultTextItem;
-
 export const pastSearchResults: SiteSearchResultGroup = {
   label: '',
   siteSearchResultList: [

@@ -26,6 +26,11 @@ export function TopPicksItemWithKnobs() {
     isCurrent: boolean('Is current', true),
     addVehicleInfo: boolean('Show "Add vechile Info"', false),
 
+    customerServiceNumber: {
+      display: '(888) 410 0604',
+      value: '18884100604',
+    },
+
     header: {
       additionalInfoLabel: text(
         'Additional info label (original tire button)',
@@ -134,6 +139,11 @@ export function TopPicksItemWithFrontAndRearAndPill() {
       pill: '20% off',
     },
 
+    customerServiceNumber: {
+      display: '(888) 410 0604',
+      value: '18884100604',
+    },
+
     asset: {
       altText: '',
       height: 800,
@@ -221,6 +231,11 @@ export function TopPicksItemWithNoPriceAndNoBrandImage() {
       subtitle: 'That came with your Honda from the factory',
     },
 
+    customerServiceNumber: {
+      display: '(888) 410 0604',
+      value: '18884100604',
+    },
+
     asset: {
       altText: '',
       height: 800,
@@ -273,6 +288,11 @@ export function TopPicksItemWithViewMore() {
     index: 0,
     isCurrent: boolean('Is current', true),
     priceList: null,
+
+    customerServiceNumber: {
+      display: '(888) 410 0604',
+      value: '18884100604',
+    },
 
     viewMoreData: {
       header: {

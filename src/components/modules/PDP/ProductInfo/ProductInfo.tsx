@@ -16,6 +16,7 @@ export interface ProductInfoProps {
   brand: SiteCatalogBrand;
   brandURL?: string;
   callForPrice?: boolean;
+  customerServiceNumber: { display: string; value: string };
   discount?: string;
   handleChangeQuantity: (position: 'front' | 'rear') => () => void;
   handleChangeSize: () => void;
@@ -41,6 +42,7 @@ function ProductInfo({
   brand,
   brandURL,
   callForPrice,
+  customerServiceNumber,
   discount,
   handleChangeQuantity,
   handleChangeSize,
@@ -96,6 +98,7 @@ function ProductInfo({
         {size && (
           <div css={styles.pricesWrapper}>
             <Price
+              customerServiceNumber={customerServiceNumber}
               price={price}
               callForPrice={callForPrice}
               discount={discount}

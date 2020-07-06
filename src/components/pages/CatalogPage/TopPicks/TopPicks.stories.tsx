@@ -19,6 +19,11 @@ export default {
   title: 'Catalog/Top Picks/Top Picks',
 };
 
+const customerServiceNumber = {
+  display: '(888) 410 0604',
+  value: '18884100604',
+};
+
 export function TopPicksWithKnobs() {
   const picks = [
     /* eslint-disable sort-keys */
@@ -281,6 +286,7 @@ export function TopPicksWithKnobs() {
         <div css={styles.bottomContent}></div>
       </div>
       <TopPicks
+        customerServiceNumber={customerServiceNumber}
         exploreMore={exploreMore}
         openSearch={openSearch}
         totalResult={totalResult}

@@ -14,6 +14,11 @@ export default {
   title: 'PDP/Product Info',
 };
 
+const customerServiceNumber = {
+  display: '(888) 410 0604',
+  value: '18884100604',
+};
+
 const mockLogo = {
   altText: 'Brand logo',
   src: 'https://via.placeholder.com/140x20',
@@ -116,6 +121,7 @@ export function ProductInfoWithKnobs() {
         label: 'Continental',
       }}
       brandURL={mockLogoURL}
+      customerServiceNumber={customerServiceNumber}
       name={productName}
       price={!callForPrice && !outOfStock ? price : undefined}
       callForPrice={callForPrice && !outOfStock}
@@ -152,6 +158,7 @@ export function ProductInfoDefault() {
         label: 'Continental',
       }}
       brandURL={mockLogoURL}
+      customerServiceNumber={customerServiceNumber}
       name={mockProductName}
       price={{
         salePriceInCents: '13296',
@@ -178,6 +185,7 @@ export function ProductInfoPromoTags() {
         label: 'Continental',
       }}
       brandURL={mockLogoURL}
+      customerServiceNumber={customerServiceNumber}
       name={mockProductName}
       price={{
         salePriceInCents: '13296',
@@ -205,6 +213,7 @@ export function ProductInfoTireLine() {
         label: 'Continental',
       }}
       brandURL={mockLogoURL}
+      customerServiceNumber={customerServiceNumber}
       name={mockProductName}
       rating={{
         quantity: 115,
@@ -224,6 +233,7 @@ export function ProductInfoLongNameNoBrandLogo() {
         label: 'Continental',
       }}
       brandURL={mockLogoURL}
+      customerServiceNumber={customerServiceNumber}
       name="Assurance Comfort Tred Touring Lorem ipsum dolor"
       rating={{
         quantity: 115,
@@ -250,6 +260,7 @@ export function ProductInfoDiscountBadge() {
         label: 'Continental',
       }}
       brandURL={mockLogoURL}
+      customerServiceNumber={customerServiceNumber}
       name={mockProductName}
       price={{
         salePriceInCents: '13296',
@@ -277,6 +288,7 @@ export function ProductInfoOnly4LeftBadge() {
         label: 'Continental',
       }}
       brandURL={mockLogoURL}
+      customerServiceNumber={customerServiceNumber}
       name={mockProductName}
       price={{
         salePriceInCents: '13296',
@@ -304,6 +316,7 @@ export function ProductInfoBothBadges() {
         label: 'Continental',
       }}
       brandURL={mockLogoURL}
+      customerServiceNumber={customerServiceNumber}
       name={mockProductName}
       price={{
         salePriceInCents: '13296',
@@ -332,6 +345,7 @@ export function ProductInfoCallForPricing() {
         label: 'Continental',
       }}
       brandURL={mockLogoURL}
+      customerServiceNumber={customerServiceNumber}
       name={mockProductName}
       rating={{
         quantity: 115,
@@ -355,6 +369,7 @@ export function ProductInfoOutOfStock() {
         label: 'Continental',
       }}
       brandURL={mockLogoURL}
+      customerServiceNumber={customerServiceNumber}
       name={mockProductName}
       rating={{
         quantity: 115,
@@ -379,6 +394,7 @@ export function ProductInfoNoReviews() {
         label: 'Continental',
       }}
       brandURL={mockLogoURL}
+      customerServiceNumber={customerServiceNumber}
       name={mockProductName}
       price={{
         salePriceInCents: '13296',
@@ -401,6 +417,7 @@ export function ProductInfoMultiSize() {
         label: 'Continental',
       }}
       brandURL={mockLogoURL}
+      customerServiceNumber={customerServiceNumber}
       name={mockProductName}
       price={{
         estimatedRetailPriceInCents: '13296',

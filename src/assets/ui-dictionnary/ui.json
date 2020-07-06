@@ -87,8 +87,7 @@
       "addVehicleText": "Add your vehicle info to find your original tire and get even better recommendations",
       "addVehicleCtaLabel": "Add your vehicle",
       "backLabel": "Back",
-      "callNumberLabel": "Call (888) 410-0604",
-      "callNumber": "(888)410-0604",
+      "callNumberLabel": "Call {{number}}",
       "ctaLabelFallback": "Select",
       "exploreMoreCTALabel": "Explore more tires",
       "frontLabel": "Front",
@@ -194,7 +193,6 @@
   "pdp": {
     "productInfo": {
       "callForPrice": "Call for pricing",
-      "callForPriceTel": "(888) 410 0604",
       "callForPriceDescription": "Please call us so we can help you buy these tires",
       "changeSizeLabel": "Select another size",
       "crossSellTitle": "{{results}} other tires are available on this size:",
@@ -324,7 +322,7 @@
   },
   "search": {
     "addRearTire": "Add different rear size",
-    "callUs": "Call us at (888) 410-0604",
+    "callUs": "Call us at {{phone}}",
     "cancelButtonLabel": "Cancel",
     "cancelButtonClear": "Clear",
     "clearPastSearchesButtonLabel": "Clear all",

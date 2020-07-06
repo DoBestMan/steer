@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useSearchContext } from '~/components/modules/Search/Search.context';
 import { STAGES } from '~/components/pages/CatalogPage/CatalogSummary/CatalogSummary.constants';
 import { useCatalogPageContext } from '~/context/CatalogPage.context';
+import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
 import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
 import { SiteCatalogSummaryMeta } from '~/data/models/SiteCatalogSummaryMeta';
 import { SiteCatalogSummaryTopPickItem } from '~/data/models/SiteCatalogSummaryTopPickItem';
@@ -27,6 +28,7 @@ function TopPicksContainer({
   const { locationString } = useUserPersonalizationContext();
   const { setShowCatalogGrid } = useCatalogPageContext();
   const { setIsSearchOpen } = useSearchContext();
+  const { customerServiceNumber } = useSiteGlobalsContext();
 
   const totalResult = siteCatalogSummaryMeta
     ? siteCatalogSummaryMeta.totalResults
@@ -43,6 +45,7 @@ function TopPicksContainer({
 
   return (
     <TopPicks
+      customerServiceNumber={customerServiceNumber}
       exploreMore={exploreMore}
       location={locationString}
       picks={siteCatalogSummaryTopPicksList}

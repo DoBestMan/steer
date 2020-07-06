@@ -181,11 +181,13 @@ export function DataMomentMessage({
 }
 
 interface NoResultsMessageProps {
+  customerServiceNumber: { display: string; value: string };
   onSearchBy?(opt: string): void;
   siteCatalogSummaryPrompt: SiteCatalogSummaryPrompt | null;
 }
 
 export function NoResultsMessage({
+  customerServiceNumber,
   siteCatalogSummaryPrompt,
 }: NoResultsMessageProps) {
   const searchByOptions = [
@@ -227,12 +229,11 @@ export function NoResultsMessage({
             <dd>
               {ui('catalog.summary.noResultsContactDesc')}
               <BaseLink
-                href="tel:+18884100604"
+                href={`tel:${customerServiceNumber.value}`}
                 css={styles.noResultsLink}
                 isExternal
               >
-                {/* TODO: get number from Global API: https://simpletire.atlassian.net/browse/WCS-482 */}
-                (888) 410-0604
+                {customerServiceNumber.display}
               </BaseLink>
             </dd>
             <dt>{ui('catalog.summary.noResultsNewSearchLabel')}</dt>
@@ -263,10 +264,14 @@ const mapMessageToStage = {
 };
 
 interface CatalogMessageProps {
+  customerServiceNumber: { display: string; value: string };
   exploreMore: () => void;
 }
 
-function CatalogMessage({ exploreMore }: CatalogMessageProps) {
+function CatalogMessage({
+  customerServiceNumber,
+  exploreMore,
+}: CatalogMessageProps) {
   const {
     catalogSummary,
     contentStage,
@@ -295,6 +300,7 @@ function CatalogMessage({ exploreMore }: CatalogMessageProps) {
             <MessageComponent
               key={contentStage}
               {...catalogSummary}
+              customerServiceNumber={customerServiceNumber}
               setStage={setStage}
               // used only by top picks
               exploreMore={exploreMore}

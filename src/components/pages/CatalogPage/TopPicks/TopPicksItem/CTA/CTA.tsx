@@ -6,6 +6,7 @@ import { styles } from '../TopPicksItem.styles';
 
 interface Props {
   ctaLabelStr?: string | null;
+  customerServiceNumber: { display: string; value: string };
   hasAddVehicleInfo?: boolean;
   hasPriceList?: boolean;
   onAddInfoVehicleClick: () => void;
@@ -13,6 +14,7 @@ interface Props {
 }
 
 export default function CTA({
+  customerServiceNumber,
   hasAddVehicleInfo,
   hasPriceList,
   ctaLabelStr,
@@ -42,7 +44,7 @@ export default function CTA({
   return (
     <Button
       as="a"
-      href={`tel:${ui('catalog.topPicks.callNumber')}`}
+      href={`tel:${customerServiceNumber.value}`}
       theme={THEME.ORANGE}
       css={styles.ctaItem}
     >

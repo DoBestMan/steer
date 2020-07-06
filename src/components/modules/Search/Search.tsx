@@ -282,7 +282,10 @@ function Search({
         />
       )}
       {shouldShowSearchSupport && (
-        <SearchSupport onClick={handleSupportClick} />
+        <SearchSupport
+          customerServiceNumber={customerServiceNumber}
+          onClick={handleSupportClick}
+        />
       )}
     </div>
   );

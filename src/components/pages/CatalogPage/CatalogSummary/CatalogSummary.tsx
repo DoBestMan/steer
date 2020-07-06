@@ -1,6 +1,7 @@
 import { Cars } from '~/components/global/Car/Car.enums';
 import Image from '~/components/global/Image/Image';
 import { useCatalogSummaryContext } from '~/context/CatalogSummary.context';
+import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 
 import CatalogMessage from '../CatalogMessage/CatalogMessage';
@@ -29,6 +30,7 @@ function CatalogSummary({ exploreMore, testCarId }: Props) {
     showLoadingInterstitial,
     stage,
   } = useCatalogSummaryContext();
+  const { customerServiceNumber } = useSiteGlobalsContext();
 
   const { bk } = useBreakpoints();
 
@@ -75,6 +77,7 @@ function CatalogSummary({ exploreMore, testCarId }: Props) {
 
       <Content data-component="Content" stage={contentStage}>
         <CatalogMessage
+          customerServiceNumber={customerServiceNumber}
           data-component="MessageContainer"
           exploreMore={exploreMore}
         />

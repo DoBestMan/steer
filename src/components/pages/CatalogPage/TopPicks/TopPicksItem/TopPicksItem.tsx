@@ -36,6 +36,7 @@ function TopPicksItem(props: TopPickItemsProps) {
     addVehicleInfo,
     asset,
     ctaLabel = ui('catalog.topPicks.ctaLabelFallback'), // Fallback should never happen, but just in case
+    customerServiceNumber,
     brand,
     deliveryInfo,
     exploreMore,
@@ -133,7 +134,9 @@ function TopPicksItem(props: TopPickItemsProps) {
 
   const ctaLabelStr = priceList
     ? ctaLabel
-    : ui('catalog.topPicks.callNumberLabel');
+    : ui('catalog.topPicks.callNumberLabel', {
+        number: customerServiceNumber.display,
+      });
 
   const hasSubtitle = viewMoreData || header?.subtitle;
 
@@ -413,6 +416,7 @@ function TopPicksItem(props: TopPickItemsProps) {
             ]}
           >
             <CTA
+              customerServiceNumber={customerServiceNumber}
               hasPriceList={priceList !== null}
               hasAddVehicleInfo={addVehicleInfo}
               url={url}

@@ -19,6 +19,7 @@ import TopPicksItem from './TopPicksItem/TopPicksItem';
 import { TopPickItemsHeader } from './TopPicksItem/TopPicksItems.types';
 
 interface Props {
+  customerServiceNumber: { display: string; value: string };
   exploreMore: () => void;
   location?: string;
   openSearch: () => void;
@@ -30,6 +31,7 @@ interface Props {
 const OFFSET_STARTING_ALPHA_INTERPOLATION = 100;
 
 function TopPicks({
+  customerServiceNumber,
   exploreMore,
   openSearch,
   picks,
@@ -250,6 +252,7 @@ function TopPicks({
                   addVehicleInfo={addVehicleInfo}
                   brand={brand}
                   ctaLabel={ctaLabel}
+                  customerServiceNumber={customerServiceNumber}
                   header={header as TopPickItemsHeader}
                   asset={asset}
                   deliveryInfo={deliveryInfo}
@@ -276,6 +279,7 @@ function TopPicks({
           {/* Last one is view more */}
           <div css={styles.pick}>
             <TopPicksItem
+              customerServiceNumber={customerServiceNumber}
               viewMoreData={viewMoreData}
               totalResult={totalResult}
               exploreMore={exploreMore}

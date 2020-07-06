@@ -1,6 +1,5 @@
 import BaseLink from '~/components/global/Link/BaseLink';
 import Prices from '~/components/global/Prices/Prices';
-import { numbersOnly } from '~/lib/utils/string';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
 
@@ -9,10 +8,16 @@ import { ProductInfoProps } from './ProductInfo';
 
 type Props = Pick<
   ProductInfoProps,
-  'price' | 'callForPrice' | 'discount' | 'itemsLeft'
+  'price' | 'callForPrice' | 'discount' | 'itemsLeft' | 'customerServiceNumber'
 >;
 
-function Price({ price, callForPrice, discount, itemsLeft }: Props) {
+function Price({
+  customerServiceNumber,
+  price,
+  callForPrice,
+  discount,
+  itemsLeft,
+}: Props) {
   if (!price && !callForPrice) {
     return (
       <>
@@ -30,10 +35,10 @@ function Price({ price, callForPrice, discount, itemsLeft }: Props) {
         <p css={styles.title}>
           {ui('pdp.productInfo.callForPrice')}{' '}
           <BaseLink
-            href={`tel:${numbersOnly(ui('pdp.productInfo.callForPriceTel'))}`}
+            href={`tel:${customerServiceNumber.value}`}
             css={styles.callingLink}
           >
-            {ui('pdp.productInfo.callForPriceTel')}
+            {customerServiceNumber.display}
           </BaseLink>
         </p>
         <p css={styles.description}>
