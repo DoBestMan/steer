@@ -85,7 +85,13 @@ const styles: StylesMap = {
     alignItems: 'center',
     display: 'flex',
     position: 'absolute',
-    right: SPACING.SIZE_70,
+    right: SPACING.SIZE_20,
+    [MQ.M]: {
+      right: SPACING.SIZE_40,
+    },
+    [MQ.L]: {
+      right: SPACING.SIZE_70,
+    },
   },
   wrappedLocation: {
     paddingTop: SPACING.SIZE_05,
