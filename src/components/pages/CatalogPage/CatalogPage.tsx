@@ -2,6 +2,7 @@ import { ThemeProvider } from 'emotion-theming';
 import { useRouter } from 'next/router';
 import { useRef } from 'react';
 
+import { Cars } from '~/components/global/Car/Car.enums';
 import { useCatalogPageContext } from '~/context/CatalogPage.context';
 import { CatalogSummaryContextProvider } from '~/context/CatalogSummary.context';
 import { SiteCatalogProducts } from '~/data/models/SiteCatalogProducts';
@@ -38,7 +39,7 @@ function CatalogPage({
 
   const { isAdvancedView, showCatalogGrid } = useCatalogPageContext();
 
-  const { flow } = router.query;
+  const { carId, flow } = router.query;
 
   // TODO: Fake data waiting for mock data: SiteCatalogSummary response
   let catalogSummaryResponse = vehiclesNoOeWithSize;
@@ -71,7 +72,10 @@ function CatalogPage({
             }
             isSearch={comesFromSearch}
           >
-            <CatalogSummary exploreMore={exploreMore} />
+            <CatalogSummary
+              testCarId={carId as Cars}
+              exploreMore={exploreMore}
+            />
           </CatalogSummaryContextProvider>
         )}
         {/* Render when there's result, and not coming from search */}

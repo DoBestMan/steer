@@ -2,6 +2,8 @@ import styled from '@emotion/styled';
 
 import Car from '~/components/global/Car/Car';
 import {
+  CAR_DETAILS_TYPES,
+  CAR_TYPES,
   DEFAULT_SCALE_VECTOR,
   WHEEL_WIDTH,
 } from '~/components/global/Car/Car.constants';
@@ -30,6 +32,12 @@ function styledCarContainer({
     carDetails.width -
     carDetails.distanceBackToRearWheel -
     carDetails.wheelWidth;
+
+  const carType = CAR_DETAILS_TYPES[carId];
+  const hideCarBody = carType === CAR_TYPES.VEHICLE_TYPE;
+  // If the body is hidden, fade out immediately, else delay until the
+  // vehicle has transformed it's position
+  const backWheelTPTransitionDelay = hideCarBody ? 0 : TIMINGS.STAGE_TRANSITION;
 
   const scaleUpVector = getScaleVector(carId, bk);
   const scaleUpTransform = `scale3d(${scaleUpVector}, ${scaleUpVector}, ${scaleUpVector})`;
@@ -77,7 +85,7 @@ function styledCarContainer({
           : 'none',
       },
       'svg .body-car': {
-        opacity: 0.13,
+        opacity: hideCarBody ? 0 : 0.13,
         transition: showLoadingInterstitial
           ? `opacity ${TIMINGS.STAGE_TRANSITION}ms ${EASING.CUBIC_EASE_IN_OUT}`
           : 'none',
@@ -93,20 +101,20 @@ function styledCarContainer({
     },
     [STAGES.TOP_PICKS]: {
       '~ .back-wheel-img': {
-        opacity: 1,
+        opacity: 0,
         transform: `translate3d(-${
           scaleUpVector *
           (distanceFrontToRearWheel - carDetails.distanceFrontToFrontWheel)
         }px, 0, 0)`,
         transition: showLoadingInterstitial
-          ? `transform ${TIMINGS.STAGE_TRANSITION}ms ${EASING.CUBIC_EASE_IN_OUT}`
+          ? `transform ${TIMINGS.STAGE_TRANSITION}ms ${EASING.CUBIC_EASE_IN_OUT}, opacity ${TIMINGS.WHEEL_IN_OUT}ms ${EASING.CUBIC_EASE_IN_OUT} ${backWheelTPTransitionDelay}ms`
           : 'none',
       },
       'svg .back-wheel': {
         opacity: 0,
       },
       'svg .body-car': {
-        opacity: 0.13,
+        opacity: hideCarBody ? 0 : 0.13,
       },
       'svg .front-wheel': {
         opacity: 0,

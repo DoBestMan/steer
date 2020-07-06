@@ -1,3 +1,4 @@
+import { Cars } from '~/components/global/Car/Car.enums';
 import Image from '~/components/global/Image/Image';
 import { useCatalogSummaryContext } from '~/context/CatalogSummary.context';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
@@ -18,9 +19,10 @@ import VehicleContainer from './components/VehicleContainer';
 
 interface Props {
   exploreMore: () => void;
+  testCarId: Cars;
 }
 
-function CatalogSummary({ exploreMore }: Props) {
+function CatalogSummary({ exploreMore, testCarId }: Props) {
   const {
     catalogSummary,
     contentStage,
@@ -33,7 +35,8 @@ function CatalogSummary({ exploreMore }: Props) {
   const { siteCatalogSummaryMeta } = catalogSummary;
 
   const sceneryType = siteCatalogSummaryMeta?.sceneryType || DEFAULT_SCENERY;
-  const carId = siteCatalogSummaryMeta?.vehicleType || DEFAULT_VEHICLE;
+  const carId =
+    testCarId || siteCatalogSummaryMeta?.vehicleType || DEFAULT_VEHICLE;
   const image = siteCatalogSummaryMeta?.tireImage || DEFAULT_IMAGE;
 
   return (
