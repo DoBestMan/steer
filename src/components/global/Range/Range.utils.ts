@@ -57,6 +57,7 @@ export function initListeners(props: Props) {
   const { current: sliderNode } = sliderEl;
 
   sliderNode.addEventListener('keydown', (e) => handleKeyDown(props, e));
+  sliderNode.addEventListener('touchstart', (e) => handleMouseDown(props, e));
   sliderNode.addEventListener('mousedown', (e) => handleMouseDown(props, e));
 
   // min/max is set from the sibling's value
@@ -81,21 +82,24 @@ export function initListeners(props: Props) {
  * Adds `mousemove` listener to update the slider position as it's being moved
  * Adds `mouseup` listener to determine when mouse tracking listeners should be removed
  */
-export function handleMouseDown(props: Props, e: MouseEvent) {
+export function handleMouseDown(props: Props, e: MouseEvent | TouchEvent) {
   const { interval, railMax, railMin, railEl, railWidth, sliderEl } = props;
   if (!sliderEl.current || !railEl.current) {
     return;
   }
 
   document.addEventListener('mousemove', handleMouseMove);
+  document.addEventListener('touchmove', handleMouseMove);
   document.addEventListener('mouseup', () => handleMouseUp(props));
-  function handleMouseMove(e: MouseEvent) {
+  document.addEventListener('touchend', () => handleMouseUp(props));
+  function handleMouseMove(e: MouseEvent | TouchEvent) {
     if (!sliderEl.current || !railEl.current) {
       return;
     }
 
+    const pageX = e instanceof TouchEvent ? e.touches[0].pageX : e.pageX;
     const railElBounds = railEl.current.getBoundingClientRect();
-    const diffX = e.pageX - railElBounds.left;
+    const diffX = pageX - railElBounds.left;
     const currentValue =
       railMin.current +
       ((railMax.current - railMin.current) * diffX) / railWidth.current;
@@ -109,7 +113,9 @@ export function handleMouseDown(props: Props, e: MouseEvent) {
 
   function handleMouseUp(props: Props) {
     document.removeEventListener('mousemove', handleMouseMove);
+    document.removeEventListener('touchmove', handleMouseMove);
     document.removeEventListener('mouseup', () => handleMouseUp(props));
+    document.removeEventListener('touchend', () => handleMouseUp(props));
   }
 
   e.preventDefault();

@@ -72,6 +72,9 @@ function useRangeSliderManager({
       sliderEl.current.removeEventListener('mousedown', (e) =>
         handleMouseDown(handlerProps, e),
       );
+      sliderEl.current.removeEventListener('touchstart', (e) =>
+        handleMouseDown(handlerProps, e),
+      );
     };
 
     // originally was going to execute onChange on mouse up, but we would still have to
