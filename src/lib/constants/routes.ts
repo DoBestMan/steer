@@ -18,6 +18,7 @@ export enum ROUTES {
 export const ROUTE_MAP: Record<ROUTES, string> = {
   [ROUTES.HOME]: '/',
   [ROUTES.BRAND_LANDING]: '/brands',
+  [ROUTES.BRAND_CATEGORY]: '/[brandName]/[categoryOrType]',
   [ROUTES.BRAND_DETAIL]: '/brands/[brandName]',
   [ROUTES.BRAND_REVIEWS]: '/brands/[brandName]/reviews',
   [ROUTES.PRODUCT_DETAIL]: '/brands/[brandName]/[productLine]',

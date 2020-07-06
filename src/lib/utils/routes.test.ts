@@ -1,4 +1,4 @@
-import { isRouteDiameterFormat, trimSlash } from './routes';
+import { interpolateRoute, isRouteDiameterFormat, trimSlash } from './routes';
 
 describe('utils/routes', () => {
   describe('trimSlash', () => {
@@ -18,6 +18,17 @@ describe('utils/routes', () => {
       expect(isRouteDiameterFormat('/12-inch-winter-tires/')).toBe(true);
       expect(isRouteDiameterFormat('12-inch-winter-tires')).toBe(true);
       expect(isRouteDiameterFormat('/p195-45r16')).toBe(false);
+    });
+  });
+
+  describe('interpolateRoute', () => {
+    it('returns interpolated route', () => {
+      expect(
+        interpolateRoute('/brands/[brandName]-tires/[productLine]', {
+          brandName: 'continental',
+          productLine: 'pro-contact',
+        }),
+      ).toBe('/brands/continental-tires/pro-contact');
     });
   });
 });

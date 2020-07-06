@@ -8,17 +8,21 @@ import { ProductInfoProps } from './ProductInfo';
 
 type Props = Pick<
   ProductInfoProps,
-  'price' | 'callForPrice' | 'discount' | 'itemsLeft' | 'customerServiceNumber'
+  | 'price'
+  | 'callForPricing'
+  | 'priceLabel'
+  | 'volatileAvailability'
+  | 'customerServiceNumber'
 >;
 
 function Price({
   customerServiceNumber,
   price,
-  callForPrice,
-  discount,
-  itemsLeft,
+  callForPricing,
+  priceLabel,
+  volatileAvailability,
 }: Props) {
-  if (!price && !callForPrice) {
+  if (!price && !callForPricing) {
     return (
       <>
         <p css={styles.title}>{ui('pdp.productInfo.outOfStock')}</p>
@@ -33,7 +37,7 @@ function Price({
     return (
       <>
         <p css={styles.title}>
-          {ui('pdp.productInfo.callForPrice')}{' '}
+          {ui('pdp.productInfo.callForPricing')}{' '}
           <BaseLink
             href={`tel:${customerServiceNumber.value}`}
             css={styles.callingLink}
@@ -42,7 +46,7 @@ function Price({
           </BaseLink>
         </p>
         <p css={styles.description}>
-          {ui('pdp.productInfo.callForPriceDescription')}
+          {ui('pdp.productInfo.callForPricingDescription')}
         </p>
       </>
     );
@@ -50,14 +54,10 @@ function Price({
 
   return (
     <>
-      {discount && (
+      {priceLabel && <p css={styles.priceFeature}>{priceLabel}</p>}
+      {volatileAvailability && (
         <p css={styles.priceFeature}>
-          {ui('pdp.productInfo.discount', { discount })}
-        </p>
-      )}
-      {itemsLeft && (
-        <p css={styles.priceFeature}>
-          {ui('pdp.productInfo.itemsLeft', { itemsLeft })}
+          {ui('pdp.productInfo.volatileAvailability')}
         </p>
       )}
       <Prices

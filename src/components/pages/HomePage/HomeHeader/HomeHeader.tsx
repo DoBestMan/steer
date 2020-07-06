@@ -8,11 +8,11 @@ import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import Markdown from '~/components/global/Markdown/Markdown';
 import PromoTag from '~/components/global/PromoTag/PromoTag';
-import { PROMO_STYLES } from '~/components/global/PromoTag/PromoTag.types';
 import Scenary from '~/components/global/Scenery/Scenery';
 import { Sceneries } from '~/components/global/Scenery/Scenery.types';
 import Weather from '~/components/global/Weather/Weather';
 import { SiteHero } from '~/data/models/SiteHero';
+import { SitePromotionStyleEnum } from '~/data/models/SitePromotion';
 import { usePreferedReduceMotion } from '~/hooks/usePreferedReduceMotion';
 import { TIME } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
@@ -166,7 +166,7 @@ function HomeHeader({
                   <div css={eyebrowStyles}>
                     <PromoTag
                       label={eyebrow}
-                      style={PROMO_STYLES.ORANGE_PILL}
+                      style={SitePromotionStyleEnum.SitePromotionItemOrangePill}
                       isUppercase
                     />
                   </div>

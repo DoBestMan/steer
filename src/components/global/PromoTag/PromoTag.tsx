@@ -1,15 +1,15 @@
 import Icon from '~/components/global/Icon/Icon';
 import { SiteCatalogPromotion } from '~/data/models/SiteCatalogPromotionInfo';
+import { SitePromotionStyleEnum } from '~/data/models/SitePromotion';
 
 import styles, { clickableStyles } from './PromoTag.styles';
-import { PROMO_STYLES } from './PromoTag.types';
 
 export interface PromoTagProps extends SiteCatalogPromotion {
   handleClick?: (event: React.MouseEvent) => void;
 }
 
 function PromoTag({
-  style = PROMO_STYLES.DEFAULT,
+  style = SitePromotionStyleEnum.SitePromotionItemDefault,
   label,
   icon,
   isUppercase,

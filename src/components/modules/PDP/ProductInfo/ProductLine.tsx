@@ -6,17 +6,19 @@ import styles from './ProductLine.styles';
 function ProductLine({
   brandURL,
   brand,
-  name,
-}: Pick<ProductInfoProps, 'brandURL' | 'brand' | 'name'>) {
+  productName,
+}: Pick<ProductInfoProps, 'brandURL' | 'brand' | 'productName'>) {
   return (
     <>
       <a href={brandURL} css={styles.brand}>
         <BrandLogoOrLabel brand={brand} widths={[200, 400, 600]} />
       </a>
       <h1
-        css={[name.length < 16 ? styles.productName : styles.productNameLong]}
+        css={[
+          productName.length < 16 ? styles.productName : styles.productNameLong,
+        ]}
       >
-        {name}
+        {productName}
       </h1>
     </>
   );

@@ -18,7 +18,7 @@ export const NAV_CONTENT_HEIGHT = 20;
 
 export const NAV_HEIGHT = {
   /* eslint-disable sort-keys */
-  S: 120,
+  S: 80,
   M: 110,
   L: 110,
   XL: 110,

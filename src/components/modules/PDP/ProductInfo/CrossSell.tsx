@@ -10,6 +10,10 @@ type Props = Pick<
 >;
 
 function CrossSell({ sameSizeSearchResults, sameSizeSearchURL, size }: Props) {
+  if (!sameSizeSearchResults || !sameSizeSearchURL) {
+    return null;
+  }
+
   return (
     <>
       <p>

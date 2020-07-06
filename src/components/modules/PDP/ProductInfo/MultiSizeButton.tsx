@@ -12,28 +12,28 @@ type Props = Pick<
   ProductInfoProps,
   | 'handleChangeQuantity'
   | 'size'
-  | 'loadIndex'
+  | 'loadSpeedRating'
   | 'price'
   | 'rearSize'
-  | 'rearLoadIndex'
+  | 'rearLoadSpeedRating'
   | 'rearPrice'
 >;
 
 function RenderItem({
-  loadIndex,
+  loadSpeedRating,
   price,
   quantity,
   size,
 }: {
-  loadIndex?: string;
-  price?: SitePrice;
+  loadSpeedRating?: string;
+  price?: SitePrice | null;
   quantity: number;
   size: string;
 }) {
   return (
     <>
       <span css={styles.size}>
-        {size} <span css={styles.loadIndex}>{loadIndex}</span>
+        {size} <span css={styles.loadSpeedRating}>{loadSpeedRating}</span>
       </span>
       <span css={styles.price}>
         <Prices
@@ -51,10 +51,10 @@ function RenderItem({
 
 function MultiSizeButton({
   size,
-  loadIndex,
+  loadSpeedRating,
   price,
   rearSize,
-  rearLoadIndex,
+  rearLoadSpeedRating,
   rearPrice,
   handleChangeQuantity,
 }: Props) {
@@ -64,13 +64,13 @@ function MultiSizeButton({
         <button
           css={styles.button}
           onClick={handleChangeQuantity('front')}
-          aria-label={`${size} ${loadIndex}, ${ui(
+          aria-label={`${size} ${loadSpeedRating}, ${ui(
             'pdp.productInfo.changeSizeLabel',
           )}`}
         >
           <RenderItem
             size={ui('pdp.productInfo.frontTireSize', { size: size || '' })}
-            loadIndex={loadIndex}
+            loadSpeedRating={loadSpeedRating}
             price={price}
             quantity={2}
           />
@@ -80,13 +80,13 @@ function MultiSizeButton({
         <button
           css={styles.button}
           onClick={handleChangeQuantity('rear')}
-          aria-label={`${rearSize} ${rearLoadIndex}, ${ui(
+          aria-label={`${rearSize} ${rearLoadSpeedRating}, ${ui(
             'pdp.productInfo.changeSizeLabel',
           )}`}
         >
           <RenderItem
             size={ui('pdp.productInfo.rearTireSize', { size: rearSize || '' })}
-            loadIndex={rearLoadIndex}
+            loadSpeedRating={rearLoadSpeedRating}
             price={rearPrice}
             quantity={2}
           />

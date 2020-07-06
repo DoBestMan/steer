@@ -15,44 +15,44 @@ export interface ProductInfoProps {
   availableSizes?: number;
   brand: SiteCatalogBrand;
   brandURL?: string;
-  callForPrice?: boolean;
+  callForPricing?: boolean;
   customerServiceNumber: { display: string; value: string };
-  discount?: string;
   handleChangeQuantity: (position: 'front' | 'rear') => () => void;
   handleChangeSize: () => void;
-  itemsLeft?: number;
-  loadIndex?: string;
-  name: string;
-  price?: SitePrice;
+  loadSpeedRating?: string;
+  price?: SitePrice | null;
+  priceLabel?: string | null;
+  productName: string;
   promoTags?: PromoTagProps[];
   rating?: {
     quantity: number;
     value: number;
   };
-  rearLoadIndex?: string;
-  rearPrice?: SitePrice;
+  rearLoadSpeedRating?: string;
+  rearPrice?: SitePrice | null;
   rearSize?: string;
-  sameSizeSearchResults?: number;
-  sameSizeSearchURL?: string;
+  sameSizeSearchResults?: number | null;
+  sameSizeSearchURL?: string | null;
   size?: string;
+  volatileAvailability?: boolean;
 }
 
 function ProductInfo({
   availableSizes,
   brand,
   brandURL,
-  callForPrice,
+  callForPricing,
   customerServiceNumber,
-  discount,
   handleChangeQuantity,
   handleChangeSize,
-  itemsLeft,
-  loadIndex,
-  name,
+  volatileAvailability,
+  loadSpeedRating,
   price,
+  priceLabel,
+  productName,
   promoTags,
   rating,
-  rearLoadIndex,
+  rearLoadSpeedRating,
   rearPrice,
   rearSize,
   sameSizeSearchResults,
@@ -60,19 +60,23 @@ function ProductInfo({
   size,
 }: ProductInfoProps) {
   const shouldShowCrossSell =
-    !price && !callForPrice && size && sameSizeSearchResults;
+    !price && !callForPricing && size && sameSizeSearchResults;
 
   if (rearSize && rearPrice) {
     return (
       <>
-        <ProductLine name={name} brand={brand} brandURL={brandURL} />
+        <ProductLine
+          productName={productName}
+          brand={brand}
+          brandURL={brandURL}
+        />
         <Rating rating={rating} />
         <MultiSizeButton
           size={size}
-          loadIndex={loadIndex}
+          loadSpeedRating={loadSpeedRating}
           price={price}
           rearSize={rearSize}
-          rearLoadIndex={rearLoadIndex}
+          rearLoadSpeedRating={rearLoadSpeedRating}
           rearPrice={rearPrice}
           handleChangeQuantity={handleChangeQuantity}
         />
@@ -84,12 +88,16 @@ function ProductInfo({
     <>
       <div css={styles.wrapper}>
         <div css={styles.nameWrapper}>
-          <ProductLine name={name} brand={brand} brandURL={brandURL} />
+          <ProductLine
+            productName={productName}
+            brand={brand}
+            brandURL={brandURL}
+          />
           <div css={!rating && styles.sizeNoRating}>
             <SizeButton
               availableSizes={availableSizes}
               size={size}
-              loadIndex={loadIndex}
+              loadSpeedRating={loadSpeedRating}
               handleChangeSize={handleChangeSize}
             />
           </div>
@@ -100,9 +108,9 @@ function ProductInfo({
             <Price
               customerServiceNumber={customerServiceNumber}
               price={price}
-              callForPrice={callForPrice}
-              discount={discount}
-              itemsLeft={itemsLeft}
+              priceLabel={priceLabel}
+              callForPricing={callForPricing}
+              volatileAvailability={volatileAvailability}
             />
           </div>
         )}

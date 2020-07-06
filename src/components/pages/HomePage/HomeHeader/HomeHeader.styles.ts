@@ -104,7 +104,7 @@ export const styles: StylesMap = {
     backgroundColor: COLORS.LIGHT.OFF_WHITE,
     flex: 1,
     paddingBottom: 20,
-    paddingTop: NAV_HEIGHT.S + 30,
+    paddingTop: NAV_HEIGHT.S + SPACING.SIZE_70,
     position: 'relative',
 
     [MQ.M]: {

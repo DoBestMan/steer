@@ -1,10 +1,10 @@
 import { boolean, number, text } from '@storybook/addon-knobs';
 
 import { ICONS } from '~/components/global/Icon/Icon.constants';
-import { PROMO_STYLES } from '~/components/global/PromoTag/PromoTag.types';
 import { SiteCatalogProductItemEnum } from '~/data/models/SiteCatalogProductItem';
 import { SiteIcon } from '~/data/models/SiteIcon';
 import { SiteImage } from '~/data/models/SiteImage';
+import { SitePromotionStyleEnum } from '~/data/models/SitePromotion';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 import { PRODUCT_IMAGE_TYPES } from '~/lib/constants/productImage.types';
 
@@ -46,17 +46,17 @@ const mockPriceList = [
 
 const mockPromotions = [
   {
-    style: PROMO_STYLES.DEFAULT,
+    style: SitePromotionStyleEnum.SitePromotionItemDefault,
     label: 'Spring Sale',
     icon: { svgId: ICONS.TAG, type: ICON_IMAGE_TYPE.ICON } as SiteIcon,
   },
   {
-    style: PROMO_STYLES.WHITE_PILL,
+    style: SitePromotionStyleEnum.SitePromotionItemWhitePill,
     label: 'Installation included',
     icon: { svgId: ICONS.WRENCH, type: ICON_IMAGE_TYPE.ICON } as SiteIcon,
   },
   {
-    style: PROMO_STYLES.WHITE_PILL,
+    style: SitePromotionStyleEnum.SitePromotionItemWhitePill,
     label: '$70 rebate',
     icon: { svgId: ICONS.RETURN, type: ICON_IMAGE_TYPE.ICON } as SiteIcon,
   },

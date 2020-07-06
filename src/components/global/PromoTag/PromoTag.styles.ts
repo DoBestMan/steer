@@ -1,7 +1,6 @@
+import { SitePromotionStyleEnum } from '~/data/models/SitePromotion';
 import { COLORS, RADIUS, SPACING, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
-
-import { PROMO_STYLES } from './PromoTag.types';
 
 const ICON_SIZE = 10;
 
@@ -23,19 +22,19 @@ const styles: StylesMap = {
       padding: `${SPACING.SIZE_05}px 7px`,
     },
   ],
-  [PROMO_STYLES.DEFAULT]: {
+  [SitePromotionStyleEnum.SitePromotionItemDefault]: {
     border: 'none',
   },
-  [PROMO_STYLES.BLACK_PILL]: {
+  [SitePromotionStyleEnum.SitePromotionItemBlackPill]: {
     backgroundColor: COLORS.GLOBAL.BLACK,
     borderColor: COLORS.GLOBAL.BLACK,
     color: COLORS.GLOBAL.WHITE,
   },
-  [PROMO_STYLES.WHITE_PILL]: {
+  [SitePromotionStyleEnum.SitePromotionItemWhitePill]: {
     borderColor: COLORS.GLOBAL.ORANGE,
     color: COLORS.GLOBAL.ORANGE,
   },
-  [PROMO_STYLES.ORANGE_PILL]: {
+  [SitePromotionStyleEnum.SitePromotionItemOrangePill]: {
     backgroundColor: COLORS.GLOBAL.ORANGE,
     borderColor: COLORS.GLOBAL.ORANGE,
     color: COLORS.GLOBAL.WHITE,
@@ -46,7 +45,7 @@ const styles: StylesMap = {
 };
 
 export const clickableStyles = {
-  [PROMO_STYLES.DEFAULT]: {
+  [SitePromotionStyleEnum.SitePromotionItemDefault]: {
     ':hover, :focus:not(:active)': {
       color: COLORS.ORANGE.SHADE_15_SOLID,
     },
@@ -54,7 +53,7 @@ export const clickableStyles = {
       color: COLORS.GLOBAL.ORANGE,
     },
   },
-  [PROMO_STYLES.BLACK_PILL]: {
+  [SitePromotionStyleEnum.SitePromotionItemBlackPill]: {
     ':hover, :focus:not(:active)': {
       backgroundColor: COLORS.LIGHT.GRAY_70,
     },
@@ -62,7 +61,7 @@ export const clickableStyles = {
       backgroundColor: COLORS.GLOBAL.BLACK,
     },
   },
-  [PROMO_STYLES.WHITE_PILL]: {
+  [SitePromotionStyleEnum.SitePromotionItemWhitePill]: {
     ':hover, :focus:not(:active)': {
       borderColor: COLORS.ORANGE.SHADE_30_SOLID,
     },
@@ -70,7 +69,7 @@ export const clickableStyles = {
       backgroundColor: COLORS.LIGHT.GRAY_10,
     },
   },
-  [PROMO_STYLES.ORANGE_PILL]: {
+  [SitePromotionStyleEnum.SitePromotionItemOrangePill]: {
     ':hover, :focus:not(:active)': {
       borderColor: COLORS.ORANGE.SHADE_30_SOLID,
     },

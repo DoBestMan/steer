@@ -3,8 +3,8 @@ import { boolean, number, text } from '@storybook/addon-knobs';
 
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import { PromoTagProps } from '~/components/global/PromoTag/PromoTag';
-import { PROMO_STYLES } from '~/components/global/PromoTag/PromoTag.types';
 import { SiteImage } from '~/data/models/SiteImage';
+import { SitePromotionStyleEnum } from '~/data/models/SitePromotion';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 
 import ProductInfo from './ProductInfo';
@@ -38,12 +38,12 @@ const ratingOptions = {
 
 const mockProductName = 'ProContact';
 const mockSizeLabel = '215/55R16';
-const mockSizeLoadIndex = '91H';
+const mockSizeLoadSpeedRating = '91H';
 const mockRearSizeLabel = '215/65R17';
-const mockRearLoadIndex = '91H';
+const mockRearLoadSpeedRating = '91H';
 const mockPromoTags: PromoTagProps[] = [
   {
-    style: PROMO_STYLES.BLACK_PILL,
+    style: SitePromotionStyleEnum.SitePromotionItemBlackPill,
     icon: {
       svgId: ICONS.LIGHTNING,
       type: ICON_IMAGE_TYPE.ICON,
@@ -52,7 +52,7 @@ const mockPromoTags: PromoTagProps[] = [
     handleClick: action('click-black-friday'),
   },
   {
-    style: PROMO_STYLES.WHITE_PILL,
+    style: SitePromotionStyleEnum.SitePromotionItemWhitePill,
     icon: {
       svgId: ICONS.WRENCH,
       type: ICON_IMAGE_TYPE.ICON,
@@ -85,10 +85,18 @@ export function ProductInfoWithKnobs() {
   );
   const sizeSelected = boolean('Is size selected?', true, sizeGroupId);
   const sizeLabel = text('Size name', mockSizeLabel, sizeGroupId);
-  const loadIndex = text('Load index', mockSizeLoadIndex, sizeGroupId);
+  const loadSpeedRating = text(
+    'Load index',
+    mockSizeLoadSpeedRating,
+    sizeGroupId,
+  );
   const hasRearSize = boolean('Has rear size?', false, sizeGroupId);
   const rearSizeLabel = text('Rear size name', mockRearSizeLabel, sizeGroupId);
-  const rearLoadIndex = text('Rear load index', mockRearLoadIndex, sizeGroupId);
+  const rearLoadSpeedRating = text(
+    'Rear load index',
+    mockRearLoadSpeedRating,
+    sizeGroupId,
+  );
 
   const showRatings = boolean('Show ratings', true, ratingGroupId);
   const ratingQuantity = number('Rating quantity', 113, {}, ratingGroupId);
@@ -101,9 +109,13 @@ export function ProductInfoWithKnobs() {
       priceGroupId,
     ),
   };
-  const discount = text('Discount', '60%', priceGroupId);
-  const itemsLeft = number('Items left', 4, {}, priceGroupId);
-  const callForPrice = boolean('Call for price?', false, priceGroupId);
+  const priceLabel = text('Price label', '60% off', priceGroupId);
+  const volatileAvailability = boolean(
+    'Volatile availability (4 items left)',
+    false,
+    priceGroupId,
+  );
+  const callForPricing = boolean('Call for price?', false, priceGroupId);
   const outOfStock = boolean('Out of stock?', false, priceGroupId);
   const sameSizeSearchResults = number(
     'Same size search results (cross-sell)',
@@ -121,10 +133,10 @@ export function ProductInfoWithKnobs() {
         label: 'Continental',
       }}
       brandURL={mockLogoURL}
+      productName={productName}
+      price={!callForPricing && !outOfStock ? price : undefined}
       customerServiceNumber={customerServiceNumber}
-      name={productName}
-      price={!callForPrice && !outOfStock ? price : undefined}
-      callForPrice={callForPrice && !outOfStock}
+      callForPricing={callForPricing && !outOfStock}
       rating={
         showRatings
           ? {
@@ -135,14 +147,14 @@ export function ProductInfoWithKnobs() {
       }
       availableSizes={availableSizes}
       size={sizeSelected ? sizeLabel : undefined}
-      loadIndex={sizeSelected ? loadIndex : undefined}
+      loadSpeedRating={sizeSelected ? loadSpeedRating : undefined}
       rearSize={hasRearSize ? rearSizeLabel : undefined}
-      rearLoadIndex={hasRearSize ? rearLoadIndex : undefined}
+      rearLoadSpeedRating={hasRearSize ? rearLoadSpeedRating : undefined}
       rearPrice={price}
       handleChangeQuantity={handleChangeQuantity}
       handleChangeSize={handleChangeSize}
-      discount={discount ? discount : undefined}
-      itemsLeft={itemsLeft ? itemsLeft : undefined}
+      priceLabel={priceLabel ? priceLabel : undefined}
+      volatileAvailability={volatileAvailability}
       sameSizeSearchResults={sameSizeSearchResults}
       sameSizeSearchURL={mockSameSizeSearchURL}
       promoTags={showPromoTags ? mockPromoTags : undefined}
@@ -159,7 +171,7 @@ export function ProductInfoDefault() {
       }}
       brandURL={mockLogoURL}
       customerServiceNumber={customerServiceNumber}
-      name={mockProductName}
+      productName={mockProductName}
       price={{
         salePriceInCents: '13296',
         estimatedRetailPriceInCents: '15099',
@@ -170,7 +182,7 @@ export function ProductInfoDefault() {
       }}
       availableSizes={32}
       size={mockSizeLabel}
-      loadIndex={mockSizeLoadIndex}
+      loadSpeedRating={mockSizeLoadSpeedRating}
       handleChangeQuantity={handleChangeQuantity}
       handleChangeSize={handleChangeSize}
     />
@@ -186,7 +198,7 @@ export function ProductInfoPromoTags() {
       }}
       brandURL={mockLogoURL}
       customerServiceNumber={customerServiceNumber}
-      name={mockProductName}
+      productName={mockProductName}
       price={{
         salePriceInCents: '13296',
         estimatedRetailPriceInCents: '15099',
@@ -197,7 +209,7 @@ export function ProductInfoPromoTags() {
       }}
       availableSizes={32}
       size={mockSizeLabel}
-      loadIndex={mockSizeLoadIndex}
+      loadSpeedRating={mockSizeLoadSpeedRating}
       handleChangeQuantity={handleChangeQuantity}
       handleChangeSize={handleChangeSize}
       promoTags={mockPromoTags}
@@ -214,7 +226,7 @@ export function ProductInfoTireLine() {
       }}
       brandURL={mockLogoURL}
       customerServiceNumber={customerServiceNumber}
-      name={mockProductName}
+      productName={mockProductName}
       rating={{
         quantity: 115,
         value: 4.8,
@@ -234,7 +246,7 @@ export function ProductInfoLongNameNoBrandLogo() {
       }}
       brandURL={mockLogoURL}
       customerServiceNumber={customerServiceNumber}
-      name="Assurance Comfort Tred Touring Lorem ipsum dolor"
+      productName="Assurance Comfort Tred Touring Lorem ipsum dolor"
       rating={{
         quantity: 115,
         value: 4.8,
@@ -247,7 +259,7 @@ export function ProductInfoLongNameNoBrandLogo() {
         estimatedRetailPriceInCents: '15099',
       }}
       size={mockSizeLabel}
-      loadIndex={mockSizeLoadIndex}
+      loadSpeedRating={mockSizeLoadSpeedRating}
     />
   );
 }
@@ -261,7 +273,7 @@ export function ProductInfoDiscountBadge() {
       }}
       brandURL={mockLogoURL}
       customerServiceNumber={customerServiceNumber}
-      name={mockProductName}
+      productName={mockProductName}
       price={{
         salePriceInCents: '13296',
         estimatedRetailPriceInCents: '15099',
@@ -272,10 +284,10 @@ export function ProductInfoDiscountBadge() {
       }}
       availableSizes={32}
       size={mockSizeLabel}
-      loadIndex={mockSizeLoadIndex}
+      loadSpeedRating={mockSizeLoadSpeedRating}
       handleChangeQuantity={handleChangeQuantity}
       handleChangeSize={handleChangeSize}
-      discount="60%"
+      priceLabel="60% off!"
     />
   );
 }
@@ -289,7 +301,7 @@ export function ProductInfoOnly4LeftBadge() {
       }}
       brandURL={mockLogoURL}
       customerServiceNumber={customerServiceNumber}
-      name={mockProductName}
+      productName={mockProductName}
       price={{
         salePriceInCents: '13296',
         estimatedRetailPriceInCents: '15099',
@@ -300,10 +312,10 @@ export function ProductInfoOnly4LeftBadge() {
       }}
       availableSizes={32}
       size={mockSizeLabel}
-      loadIndex={mockSizeLoadIndex}
+      loadSpeedRating={mockSizeLoadSpeedRating}
       handleChangeQuantity={handleChangeQuantity}
       handleChangeSize={handleChangeSize}
-      itemsLeft={4}
+      volatileAvailability
     />
   );
 }
@@ -317,7 +329,7 @@ export function ProductInfoBothBadges() {
       }}
       brandURL={mockLogoURL}
       customerServiceNumber={customerServiceNumber}
-      name={mockProductName}
+      productName={mockProductName}
       price={{
         salePriceInCents: '13296',
         estimatedRetailPriceInCents: '15099',
@@ -328,11 +340,11 @@ export function ProductInfoBothBadges() {
       }}
       availableSizes={32}
       size={mockSizeLabel}
-      loadIndex={mockSizeLoadIndex}
+      loadSpeedRating={mockSizeLoadSpeedRating}
       handleChangeQuantity={handleChangeQuantity}
       handleChangeSize={handleChangeSize}
-      discount="60%"
-      itemsLeft={4}
+      priceLabel="60% off!"
+      volatileAvailability
     />
   );
 }
@@ -346,17 +358,17 @@ export function ProductInfoCallForPricing() {
       }}
       brandURL={mockLogoURL}
       customerServiceNumber={customerServiceNumber}
-      name={mockProductName}
+      productName={mockProductName}
       rating={{
         quantity: 115,
         value: 4.8,
       }}
       availableSizes={32}
       size={mockSizeLabel}
-      loadIndex={mockSizeLoadIndex}
+      loadSpeedRating={mockSizeLoadSpeedRating}
       handleChangeQuantity={handleChangeQuantity}
       handleChangeSize={handleChangeSize}
-      callForPrice
+      callForPricing
     />
   );
 }
@@ -370,14 +382,14 @@ export function ProductInfoOutOfStock() {
       }}
       brandURL={mockLogoURL}
       customerServiceNumber={customerServiceNumber}
-      name={mockProductName}
+      productName={mockProductName}
       rating={{
         quantity: 115,
         value: 4.8,
       }}
       availableSizes={32}
       size={mockSizeLabel}
-      loadIndex={mockSizeLoadIndex}
+      loadSpeedRating={mockSizeLoadSpeedRating}
       handleChangeQuantity={handleChangeQuantity}
       handleChangeSize={handleChangeSize}
       sameSizeSearchResults={232}
@@ -395,14 +407,14 @@ export function ProductInfoNoReviews() {
       }}
       brandURL={mockLogoURL}
       customerServiceNumber={customerServiceNumber}
-      name={mockProductName}
+      productName={mockProductName}
       price={{
         salePriceInCents: '13296',
         estimatedRetailPriceInCents: '15099',
       }}
       availableSizes={32}
       size={mockSizeLabel}
-      loadIndex={mockSizeLoadIndex}
+      loadSpeedRating={mockSizeLoadSpeedRating}
       handleChangeQuantity={handleChangeQuantity}
       handleChangeSize={handleChangeSize}
     />
@@ -418,7 +430,7 @@ export function ProductInfoMultiSize() {
       }}
       brandURL={mockLogoURL}
       customerServiceNumber={customerServiceNumber}
-      name={mockProductName}
+      productName={mockProductName}
       price={{
         estimatedRetailPriceInCents: '13296',
         salePriceInCents: '15099',
@@ -429,9 +441,9 @@ export function ProductInfoMultiSize() {
       }}
       availableSizes={32}
       size={mockSizeLabel}
-      loadIndex={mockSizeLoadIndex}
+      loadSpeedRating={mockSizeLoadSpeedRating}
       rearSize={mockRearSizeLabel}
-      rearLoadIndex={mockRearLoadIndex}
+      rearLoadSpeedRating={mockRearLoadSpeedRating}
       rearPrice={{
         estimatedRetailPriceInCents: '15486',
         salePriceInCents: '19000',

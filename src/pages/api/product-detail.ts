@@ -1,12 +1,21 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { SiteProduct } from '~/data/models/SiteProduct';
+import { SiteProductReviews } from '~/data/models/SiteProductReviews';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
-import { backendGetProductDetail } from '~/lib/backend/product-detail';
+import {
+  backendGetProductDetail,
+  backendGetProductReviews,
+} from '~/lib/backend/product-detail';
+
+export interface ProductDetailResponse {
+  siteProduct: SiteProduct;
+  siteProductReviews: SiteProductReviews;
+}
 
 export default async (
   request: NextApiRequest,
-  response: NextApiResponse<SiteProduct>,
+  response: NextApiResponse<ProductDetailResponse>,
 ) => {
   backendBootstrap({ request });
 
@@ -20,10 +29,17 @@ export default async (
     }
   });
 
-  const siteProduct = await backendGetProductDetail({
-    brand,
-    productLine,
-    query: params,
-  });
-  response.json(siteProduct);
+  const [siteProduct, siteProductReviews] = await Promise.all([
+    backendGetProductDetail({
+      brand,
+      productLine,
+      query: params,
+    }),
+    backendGetProductReviews({
+      brand,
+      productLine,
+    }),
+  ]);
+
+  response.json({ siteProduct, siteProductReviews });
 };

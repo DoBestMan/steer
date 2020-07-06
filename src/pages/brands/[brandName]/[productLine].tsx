@@ -4,7 +4,10 @@ import ProductDetailContainer, {
   ProductDetailData,
 } from '~/components/pages/ProductDetail/ProductDetail.container';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
-import { backendGetProductDetail } from '~/lib/backend/product-detail';
+import {
+  backendGetProductDetail,
+  backendGetProductReviews,
+} from '~/lib/backend/product-detail';
 
 function ProductLine(props: ProductDetailData) {
   return <ProductDetailContainer {...props} />;
@@ -18,13 +21,19 @@ export const getServerSideProps: GetServerSideProps<ProductDetailData> = async (
 
   const brand = brandName.toString().replace(/-tire/g, '');
 
-  const serverData = await backendGetProductDetail({
-    brand,
-    productLine,
-  });
+  const [siteProduct, siteProductReviews] = await Promise.all([
+    backendGetProductDetail({
+      brand,
+      productLine,
+    }),
+    backendGetProductReviews({
+      brand,
+      productLine,
+    }),
+  ]);
 
   const props: ProductDetailData = {
-    serverData,
+    serverData: { siteProduct, siteProductReviews },
   };
 
   return {

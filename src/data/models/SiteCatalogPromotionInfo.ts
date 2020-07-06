@@ -1,12 +1,11 @@
-import { PROMO_STYLES } from '~/components/global/PromoTag/PromoTag.types';
-
 import { SiteIcon } from './SiteIcon';
+import { SitePromotionStyleEnum } from './SitePromotion';
 
 export interface SiteCatalogPromotion {
   icon?: SiteIcon;
   isUppercase?: boolean;
   label: string;
-  style: PROMO_STYLES;
+  style: SitePromotionStyleEnum;
 }
 
 export interface SiteCatalogPromotionInfo {

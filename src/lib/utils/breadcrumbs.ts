@@ -26,8 +26,8 @@ export function mapPathnameToBreadcrumbs({
   asPath: string;
   labels: { [key: string]: string };
   pathname: string;
-  query: { [key: string]: string };
-  querystringNodeLabel?: string;
+  query: { [key: string]: string | string[] };
+  querystringNodeLabel?: string | null;
 }): BreadcrumbsItem[] {
   const splitPathname = pathname.match(new RegExp(absoluteUrlGroups, 'g'));
   const querystring = asPath.match(/\?(.*)/g)?.pop();

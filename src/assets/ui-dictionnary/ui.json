@@ -196,16 +196,19 @@
     }
   },
   "pdp": {
+    "breadcrumbs": {
+      "home": "Home",
+      "allBrands": "All Brands"
+    },
     "productInfo": {
-      "callForPrice": "Call for pricing",
-      "callForPriceDescription": "Please call us so we can help you buy these tires",
+      "callForPricing": "Call for pricing",
+      "callForPricingDescription": "Please call us so we can help you buy these tires",
       "changeSizeLabel": "Select another size",
       "crossSellTitle": "{{results}} other tires are available on this size:",
       "crossSellButtonLabel": "View all {{size}} tires",
       "outOfStock": "Out of stock",
       "outOfStockDescription": "Check back soon or view other tires",
-      "discount": "{{discount}} off!",
-      "itemsLeft": "{{itemsLeft}} left at this price!",
+      "volatileAvailability": "4 left at this price!",
       "selectSizeButton": "{{availableSizes}} sizes available",
       "selectSizeLabel": "Select a size",
       "selectSingleSizeButton": "1 size available",

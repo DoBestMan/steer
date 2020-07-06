@@ -2,10 +2,10 @@ import { action } from '@storybook/addon-actions';
 import { boolean, select, text } from '@storybook/addon-knobs';
 
 import { ICONS } from '~/components/global/Icon/Icon.constants';
+import { SitePromotionStyleEnum } from '~/data/models/SitePromotion';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 
 import PromoTag, { PromoTagProps } from './PromoTag';
-import { PROMO_STYLES } from './PromoTag.types';
 import PromoTagCarouselComponent from './PromoTagCarousel';
 
 export default {
@@ -14,10 +14,10 @@ export default {
 };
 
 const styleOptions = {
-  Default: PROMO_STYLES.DEFAULT,
-  'Black Pill': PROMO_STYLES.BLACK_PILL,
-  'White Pill': PROMO_STYLES.WHITE_PILL,
-  'Orange Pill': PROMO_STYLES.ORANGE_PILL,
+  Default: SitePromotionStyleEnum.SitePromotionItemDefault,
+  'Black Pill': SitePromotionStyleEnum.SitePromotionItemBlackPill,
+  'White Pill': SitePromotionStyleEnum.SitePromotionItemWhitePill,
+  'Orange Pill': SitePromotionStyleEnum.SitePromotionItemOrangePill,
 };
 
 const iconOptions = {
@@ -34,7 +34,11 @@ const handleClick = action('click-promo-tag');
 export function PromoTagWithKnobs() {
   return (
     <PromoTag
-      style={select('Style', styleOptions, PROMO_STYLES.DEFAULT)}
+      style={select(
+        'Style',
+        styleOptions,
+        SitePromotionStyleEnum.SitePromotionItemDefault,
+      )}
       isUppercase={boolean('Uppercase', false)}
       icon={{
         svgId: select('Icon', iconOptions, ICONS.TAG),
@@ -49,7 +53,7 @@ export function PromoTagWithKnobs() {
 export function BlackPillPromoTag() {
   return (
     <PromoTag
-      style={PROMO_STYLES.BLACK_PILL}
+      style={SitePromotionStyleEnum.SitePromotionItemBlackPill}
       isUppercase
       label="Black Friday"
     />
@@ -59,7 +63,7 @@ export function BlackPillPromoTag() {
 export function WhitePillPromoTag() {
   return (
     <PromoTag
-      style={PROMO_STYLES.WHITE_PILL}
+      style={SitePromotionStyleEnum.SitePromotionItemWhitePill}
       icon={{
         svgId: ICONS.SHIELD,
         type: ICON_IMAGE_TYPE.ICON,
@@ -72,7 +76,7 @@ export function WhitePillPromoTag() {
 export function OrangePillPromoTag() {
   return (
     <PromoTag
-      style={PROMO_STYLES.ORANGE_PILL}
+      style={SitePromotionStyleEnum.SitePromotionItemOrangePill}
       icon={{
         svgId: ICONS.LIGHTNING,
         type: ICON_IMAGE_TYPE.ICON,
@@ -85,7 +89,7 @@ export function OrangePillPromoTag() {
 export function PromoTagCarousel() {
   const tags: PromoTagProps[] = [
     {
-      style: PROMO_STYLES.DEFAULT,
+      style: SitePromotionStyleEnum.SitePromotionItemDefault,
       icon: {
         svgId: ICONS.TAG,
         type: ICON_IMAGE_TYPE.ICON,
@@ -93,7 +97,7 @@ export function PromoTagCarousel() {
       label: 'Spring Sale',
     },
     {
-      style: PROMO_STYLES.WHITE_PILL,
+      style: SitePromotionStyleEnum.SitePromotionItemWhitePill,
       icon: {
         svgId: ICONS.REBATE,
         type: ICON_IMAGE_TYPE.ICON,
@@ -101,7 +105,7 @@ export function PromoTagCarousel() {
       label: '$70 Rebate',
     },
     {
-      style: PROMO_STYLES.ORANGE_PILL,
+      style: SitePromotionStyleEnum.SitePromotionItemOrangePill,
       icon: {
         svgId: ICONS.WRENCH,
         type: ICON_IMAGE_TYPE.ICON,
@@ -109,7 +113,7 @@ export function PromoTagCarousel() {
       label: 'Free installation',
     },
     {
-      style: PROMO_STYLES.BLACK_PILL,
+      style: SitePromotionStyleEnum.SitePromotionItemBlackPill,
       icon: {
         svgId: ICONS.LIGHTNING,
         type: ICON_IMAGE_TYPE.ICON,

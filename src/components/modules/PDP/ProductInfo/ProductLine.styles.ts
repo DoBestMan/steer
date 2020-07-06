@@ -14,6 +14,12 @@ const styles: CSSObject = {
     marginBottom: SPACING.SIZE_05,
     maxWidth: CONSTANTS.HEADER_MAX_WIDTH,
     span: typography.tertiaryHeadline,
+
+    // eslint-disable-next-line sort-keys
+    img: {
+      height: '100%',
+      width: 'auto',
+    },
   },
   productName: typography.primaryHeadline,
   productNameLong: typography.secondaryHeadline,

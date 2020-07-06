@@ -7,9 +7,9 @@ import Image from '~/components/global/Image/Image';
 import BaseLink from '~/components/global/Link/BaseLink';
 import Prices from '~/components/global/Prices/Prices';
 import PromoTag from '~/components/global/PromoTag/PromoTag';
-import { PROMO_STYLES } from '~/components/global/PromoTag/PromoTag.types';
 import Stars from '~/components/global/Stars/Stars';
 import Sticker from '~/components/global/Sticker/Sticker';
+import { SitePromotionStyleEnum } from '~/data/models/SitePromotion';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { COLORS, CSSStyles } from '~/lib/constants';
 import { getTranslate, subscribeTranslate } from '~/lib/helpers/translate';
@@ -231,7 +231,7 @@ function TopPicksItem(props: TopPickItemsProps) {
                 >
                   <PromoTag
                     label={header.pill}
-                    style={PROMO_STYLES.ORANGE_PILL}
+                    style={SitePromotionStyleEnum.SitePromotionItemOrangePill}
                     isUppercase
                   />
                 </span>

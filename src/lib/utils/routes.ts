@@ -1,4 +1,3 @@
-import { ROUTES } from '../constants';
 import { brackets } from './regex';
 
 /**
@@ -18,23 +17,12 @@ export function isRouteDiameterFormat(path: string) {
   return regex.test(path);
 }
 
-export function getRoutesRegex(
-  routeMap: Record<ROUTES, string>,
-): Record<string, RegExp> {
-  return Object.values(routeMap).reduce((acc, route) => {
-    return {
-      ...acc,
-      [route]: new RegExp(`^${route.replace(/\[\w+\]/g, '[\\w-]+')}$`),
-    };
-  }, {});
-}
-
 /*
  * Given a pathname, replace interpolated vars
  */
 export function interpolateRoute(
   route: string,
-  templateVars: { [key: string]: string },
+  templateVars: { [key: string]: string | string[] },
 ): string {
   return route.replace(brackets, function (n: string): string {
     let replaced: string = n;

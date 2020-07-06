@@ -1,3 +1,5 @@
+import { PRODUCT_IMAGE_TYPES } from '~/lib/constants/productImage.types';
+
 import { SiteImage } from './SiteImage';
 
 /**
@@ -17,17 +19,5 @@ export interface SiteCatalogProductImage {
    * @type {string}
    * @memberof SiteCatalogProductImage
    */
-  productImageType: SiteCatalogProductImageProductImageTypeEnum;
-}
-
-/**
- * @export
- * @enum {string}
- */
-export enum SiteCatalogProductImageProductImageTypeEnum {
-  Sidetread = 'sidetread',
-  Sidewall = 'sidewall',
-  Treadfull = 'treadfull',
-  Treadonly = 'treadonly',
-  Unavailable = 'unavailable',
+  productImageType: PRODUCT_IMAGE_TYPES;
 }

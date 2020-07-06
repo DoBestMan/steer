@@ -33,10 +33,11 @@ const styles: CSSObject = {
     display: 'block',
   },
   nameWrapper: {
-    flex: 0.6,
+    [MQ.L]: {
+      flex: 0.6,
+    },
   },
   pricesWrapper: {
-    flex: 0.4,
     textAlign: 'right',
     maxWidth: CONSTANTS.HEADER_MAX_WIDTH,
 

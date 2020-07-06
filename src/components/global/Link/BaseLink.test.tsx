@@ -23,14 +23,12 @@ jest.mock('next/link', () => {
 describe('BaseLink', () => {
   test('internal static link', () => {
     const { container } = render(
-      <BaseLink href="/tire-brands">Click here</BaseLink>,
+      <BaseLink href="/brands">Click here</BaseLink>,
     );
 
     expect(container.firstChild).toMatchInlineSnapshot(`
       <div>
-        <a
-          href="/tire-brands"
-        >
+        <a>
           Click here
         </a>
       </div>
@@ -68,9 +66,7 @@ describe('BaseLink', () => {
       <div
         data-test-as="/brands/drupal-tires"
       >
-        <a
-          href="/brands/[brandName]"
-        >
+        <a>
           Click here
         </a>
       </div>
@@ -86,9 +82,7 @@ describe('BaseLink', () => {
       <div
         data-test-as="/brands/drupal-tires/reviews"
       >
-        <a
-          href="/brands/[brandName]/reviews"
-        >
+        <a>
           Click here
         </a>
       </div>
@@ -104,9 +98,7 @@ describe('BaseLink', () => {
       <div
         data-test-as="/brands/drupal-tires/tractors"
       >
-        <a
-          href="/brands/[brandName]/[productLine]"
-        >
+        <a>
           Click here
         </a>
       </div>

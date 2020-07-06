@@ -24,12 +24,13 @@ export function useBaseLinkProps({ href, isExternal }: UseBaseLinkProps) {
 
   const isAbsolute = absoluteLink.test(href);
   const isSpecial = specialLink.test(href);
+  const isInternal = !isAbsolute && !isSpecial && !isExternal;
 
   let as;
   let finalHref = href;
   let prefetch;
 
-  if (!isAbsolute && !isSpecial && !isExternal) {
+  if (isInternal) {
     // if link destination matches a regex, use an "as"
     Object.keys(dynamicRouteRegexMap).some((route) => {
       const regex = dynamicRouteRegexMap[route];
@@ -52,6 +53,7 @@ export function useBaseLinkProps({ href, isExternal }: UseBaseLinkProps) {
     as,
     externalProps,
     finalHref,
+    isInternal,
     prefetch,
   };
 }
