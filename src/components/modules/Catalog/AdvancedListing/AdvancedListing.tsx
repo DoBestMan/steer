@@ -17,6 +17,7 @@ import {
   RATINGS_DISPLAY,
   THEME,
 } from '~/lib/constants';
+import { getSquareImageTransformations } from '~/lib/utils/cloudinary/cloudinary';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
 
@@ -50,6 +51,8 @@ function AdvancedListing({
       ? 1
       : MAX_PROMOS;
 
+  const imageWidths = [250, 250, 300];
+
   return (
     <Grid css={styles.root}>
       <GridItem css={styles.imageWrapper} gridColumnM="2/5" gridColumnL="2/7">
@@ -59,7 +62,13 @@ function AdvancedListing({
               <Sticker label={highlight} />
             </div>
           )}
-          <Image {...displayedImage.image} altText={name} />
+          <div css={styles.imageContainer}>
+            <Image
+              src={displayedImage.image.src}
+              altText={displayedImage.image.altText}
+              srcTransformationArgs={getSquareImageTransformations(imageWidths)}
+            />
+          </div>
         </div>
       </GridItem>
       <GridItem css={styles.info} isGrid gridColumnM="5/8" gridColumnL="7/14">

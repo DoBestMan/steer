@@ -4,6 +4,7 @@ import Prices from '~/components/global/Prices/Prices';
 import PromoTag from '~/components/global/PromoTag/PromoTag';
 import Stars from '~/components/global/Stars/Stars';
 import { COLORS } from '~/lib/constants';
+import { getSquareImageTransformations } from '~/lib/utils/cloudinary/cloudinary';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import styles from './ProductListing.styles';
@@ -36,14 +37,17 @@ function ProductListing({
       ? 1
       : MAX_PROMOS;
 
+  const imageWidths = isHighlighted ? [250, 250, 300] : [140, 180, 200];
+
   return (
     <div css={[styles.root, isHighlighted && styles.rootHighlighted]}>
       <div css={[styles.image, isHighlighted && styles.imageHighlighted]}>
         {highlight && <div css={styles.promoDisc}>{highlight}</div>}
         <Image
-          widths={isHighlighted ? [250, 250, 300] : [140, 180, 200]}
+          widths={imageWidths}
           altText={displayedImage.image.altText}
           src={displayedImage.image.src}
+          srcTransformationArgs={getSquareImageTransformations(imageWidths)}
         />
       </div>
       <div css={[styles.info, isHighlighted && styles.infoHighlighted]}>

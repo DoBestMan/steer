@@ -3,6 +3,12 @@ import { CSSObject } from '@emotion/core';
 import { BORDERS, COLORS, MQ, RADIUS, SPACING } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
+const IMAGE_SIZE = {
+  S: 250,
+  M: 250,
+  XL: 300,
+};
+
 const styles: CSSObject = {
   bottomSection: {
     alignItems: 'flex-end',
@@ -11,8 +17,14 @@ const styles: CSSObject = {
     [MQ.XL]: { width: '50%' },
   },
   brand: {
-    maxWidth: 90,
+    height: 20,
+    img: {
+      height: '100%',
+      width: 'auto',
+    },
     marginBottom: SPACING.SIZE_05,
+    width: '100%',
+
     [MQ.XL]: {
       marginBottom: SPACING.SIZE_20,
       maxWidth: 130,
@@ -20,6 +32,15 @@ const styles: CSSObject = {
   },
   image: {
     maxWidth: 300,
+  },
+  imageContainer: {
+    width: IMAGE_SIZE.S,
+    [MQ.M]: {
+      width: IMAGE_SIZE.M,
+    },
+    [MQ.XL]: {
+      width: IMAGE_SIZE.XL,
+    },
   },
   imageWrapper: {
     alignItems: 'flex-end',

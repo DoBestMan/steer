@@ -232,3 +232,16 @@ function y(y: number): string {
 function zoom(z: number): string {
   return `z_${z}`;
 }
+
+export function getSquareImageTransformations(sizes: number[]) {
+  return sizes.reduce((object: Record<string, Transformations[]>, size) => {
+    object[`${size}w`] = [
+      {
+        width: size,
+        height: size,
+        crop: CropMode.PAD,
+      },
+    ];
+    return object;
+  }, {});
+}

@@ -97,9 +97,17 @@ function CatalogGrid({
     };
   }, [catalogGridHeaderContainer, catalogGridOffsetTop, hasTopPicks]);
 
-  function toggleView() {
+  const toggleView = async () => {
     setIsAdvancedView(!isAdvancedView);
-  }
+    if (!handleUpdateResults) {
+      return;
+    }
+    if (!isAdvancedView) {
+      await handleUpdateResults({ skipGroups: 'true' });
+    } else {
+      await handleUpdateResults({});
+    }
+  };
 
   const isGroupedProducts =
     siteCatalogProducts.siteCatalogProductsResultList[0]?.type ===
