@@ -380,6 +380,7 @@
     "orderNumber": "Order number #{{number}}",
     "orderSummary": "Order summary",
     "orderTrackingDescription": "Enter the Order ID we emailed to you when you made your purchase, or {{login}}",
+    "orderTrackingError": "Please review. Order ID & ZIP Code do not match.",
     "orderTrackingSubmit": "Find it",
     "orderTrackingTitle": "Track your order",
     "pendingStepDescription": "Your tires will ship soon",
