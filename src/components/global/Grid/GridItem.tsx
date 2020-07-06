@@ -10,8 +10,6 @@ import {
   NB_COLUMNS,
 } from '~/lib/constants';
 
-import { validateColSpan } from './GridItem.utils';
-
 interface ContainerProps {
   gridColumn?: string;
   gridColumnL?: string;
@@ -198,16 +196,6 @@ function GridItem(props: Props) {
   if (fullbleedXL) {
     gridColumnXL = 'wrapper-start/wrapper-end';
   }
-
-  // Doesn't stop the rendering but triggers info in the console if any issue
-  /* eslint sort-keys: 0 */
-  validateColSpan({
-    gridColumn,
-    gridColumnS,
-    gridColumnM,
-    gridColumnL,
-    gridColumnXL,
-  });
 
   return (
     <Container
