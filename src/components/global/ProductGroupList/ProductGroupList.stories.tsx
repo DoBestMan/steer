@@ -1,6 +1,6 @@
 import { boolean, text } from '@storybook/addon-knobs';
 
-import { SiteCatalogProductGroupEnum } from '~/data/models/SiteCatalogProductGroupList';
+import { SiteCatalogProductGroupItemEnum } from '~/data/models/SiteCatalogProductGroupList';
 import { SiteCatalogProductItem } from '~/data/models/SiteCatalogProductItem';
 import { SiteImage } from '~/data/models/SiteImage';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
@@ -82,7 +82,7 @@ export function ProductGroupListWithKnobs() {
       productList={productList}
       siteQueryParams={isLinked ? { group: 'curatedGroup1' } : null}
       id="curatedGroup1"
-      type={SiteCatalogProductGroupEnum.SiteCatalogProductGroup}
+      type={SiteCatalogProductGroupItemEnum.SiteCatalogProductGroupItem}
     />
   );
 }
@@ -100,7 +100,7 @@ export function ProductGroupListStartAtPrices() {
       productList={productList}
       id="curatedGroup1"
       icon={null}
-      type={SiteCatalogProductGroupEnum.SiteCatalogProductGroup}
+      type={SiteCatalogProductGroupItemEnum.SiteCatalogProductGroupItem}
       siteQueryParams={null}
     />
   );

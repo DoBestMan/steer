@@ -4,8 +4,8 @@ import { DATA_COMPONENT_LABEL } from '~/components/modules/Catalog/Header.consta
 import HeaderContainer from '~/components/modules/Catalog/Header.container';
 import { useCatalogPageContext } from '~/context/CatalogPage.context';
 import {
-  SiteCatalogProductGroup,
-  SiteCatalogProductGroupEnum,
+  SiteCatalogProductGroupItem,
+  SiteCatalogProductGroupItemEnum,
 } from '~/data/models/SiteCatalogProductGroupList';
 import {
   SiteCatalogProductItem,
@@ -111,7 +111,7 @@ function CatalogGrid({
 
   const isGroupedProducts =
     siteCatalogProducts.siteCatalogProductsResultList[0]?.type ===
-    SiteCatalogProductGroupEnum.SiteCatalogProductGroup;
+    SiteCatalogProductGroupItemEnum.SiteCatalogProductGroupItem;
 
   return (
     <div ref={catalogGrid}>
@@ -126,9 +126,9 @@ function CatalogGrid({
       {isGroupedProducts ? (
         <CatalogProductGroups
           productGroupList={siteCatalogProducts.siteCatalogProductsResultList.filter(
-            (result): result is SiteCatalogProductGroup =>
+            (result): result is SiteCatalogProductGroupItem =>
               result.type ===
-              SiteCatalogProductGroupEnum.SiteCatalogProductGroup,
+              SiteCatalogProductGroupItemEnum.SiteCatalogProductGroupItem,
           )}
         />
       ) : (

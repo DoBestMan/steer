@@ -6,7 +6,7 @@ import { ICONS } from '~/components/global/Icon/Icon.constants';
 import IconOrImage from '~/components/global/IconOrImage/IconOrImage';
 import BaseLink from '~/components/global/Link/BaseLink';
 import ProductListing from '~/components/global/ProductListing/ProductListing';
-import { SiteCatalogProductGroup } from '~/data/models/SiteCatalogProductGroupList';
+import { SiteCatalogProductGroupItem } from '~/data/models/SiteCatalogProductGroupList';
 
 import styles from './ProductGroupList.styles';
 
@@ -16,7 +16,7 @@ function ProductGroupList({
   productList,
   icon,
   siteQueryParams,
-}: SiteCatalogProductGroup) {
+}: SiteCatalogProductGroupItem) {
   const url =
     siteQueryParams && `?${new URLSearchParams(siteQueryParams).toString()}`;
 

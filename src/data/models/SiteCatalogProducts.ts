@@ -1,6 +1,6 @@
 import { ListResultMetadata } from './ListResultMetadata';
 import { SiteCatalogFilters } from './SiteCatalogFilters';
-import { SiteCatalogProductGroup } from './SiteCatalogProductGroupList';
+import { SiteCatalogProductGroupItem } from './SiteCatalogProductGroupList';
 import { SiteCatalogProductItem } from './SiteCatalogProductItem';
 import { SiteCatalogProductsMeta } from './SiteCatalogProductsMeta';
 
@@ -16,7 +16,7 @@ export interface SiteCatalogProducts {
    * @memberof SiteCatalogProducts
    */
   siteCatalogProductsResultList: Array<
-    SiteCatalogProductGroup | SiteCatalogProductItem
+    SiteCatalogProductGroupItem | SiteCatalogProductItem
   >;
   /**
    *

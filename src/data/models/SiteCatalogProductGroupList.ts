@@ -1,18 +1,18 @@
 import { SiteCatalogProductItem } from './SiteCatalogProductItem';
 import { SiteImage } from './SiteImage';
 
-export enum SiteCatalogProductGroupEnum {
-  SiteCatalogProductGroup = 'SiteCatalogProductGroup',
+export enum SiteCatalogProductGroupItemEnum {
+  SiteCatalogProductGroupItem = 'SiteCatalogProductGroupItem',
 }
 
-export interface SiteCatalogProductGroup {
+export interface SiteCatalogProductGroupItem {
   description: string;
   icon: SiteImage | null;
   id: string;
   name: string;
   productList: SiteCatalogProductItem[];
   siteQueryParams: Record<string, string> | null;
-  type: SiteCatalogProductGroupEnum;
+  type: SiteCatalogProductGroupItemEnum;
 }
 
-export type SiteCatalogProductGroupList = Array<SiteCatalogProductGroup>;
+export type SiteCatalogProductGroupList = Array<SiteCatalogProductGroupItem>;
