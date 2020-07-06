@@ -28,6 +28,7 @@ export default function FilterButtonsCarousel({
     createOpenFilterHandler,
     createToggleFilterHandler,
     selectingFilter,
+    isLoading,
   } = useFiltersContext();
   const { header } = useTheme();
   function onFilterClick(e: MouseEvent) {
@@ -55,6 +56,7 @@ export default function FilterButtonsCarousel({
             styles.filterButton,
             !popularFilters.length && styles.filterHide,
           ]}
+          isDisabled={isLoading}
           label={popularLabel}
           isDropdownOpen={selectingFilter === 0}
           isActive={isPopularActive}
@@ -78,6 +80,7 @@ export default function FilterButtonsCarousel({
                 key={idx}
                 label={label}
                 isDropdownOpen={isDropdownOpen}
+                isDisabled={isLoading}
                 isActive={isActive}
                 onClick={createOpenFilterHandler(idx + 1)}
                 theme={header.buttonTheme}
@@ -85,6 +88,7 @@ export default function FilterButtonsCarousel({
               />
             ) : (
               <FilterButtonToggle
+                isDisabled={isLoading}
                 css={styles.filterButton}
                 key={idx}
                 isActive={isActive}

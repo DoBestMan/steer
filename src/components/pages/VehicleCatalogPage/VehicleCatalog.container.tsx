@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 
 import CatalogPageContainer from '~/components/pages/CatalogPage/CatalogPage.container';
 import { SiteCatalogProducts } from '~/data/models/SiteCatalogProducts';
@@ -44,7 +44,6 @@ function VehicleCatalogContainer({ serverData }: VehicleCatalogData) {
   const {
     data: { siteCatalogSummary },
     error: summaryError,
-    revalidate,
   } = useApiDataWithDefault<VehicleCatalogData['serverData']>({
     ...apiArgs,
     endpoint: '/summary-vehicle',
@@ -53,6 +52,7 @@ function VehicleCatalogContainer({ serverData }: VehicleCatalogData) {
   const {
     data: { siteCatalogProducts },
     error: productsError,
+    revalidate: revalidateProducts,
   } = useApiDataWithDefault<VehicleCatalogData['serverData']>({
     ...apiArgs,
     endpoint: '/products-vehicle',
@@ -64,7 +64,7 @@ function VehicleCatalogContainer({ serverData }: VehicleCatalogData) {
 
   // appends filters to existing URL query params
   const handleUpdateFilters = useCallback(
-    (filters: Record<string, string>) => {
+    async (filters: Record<string, string>) => {
       const route = asPath.split('?');
       const params: Record<string, string> = {};
       Object.keys(queryParams).forEach((k) => {
@@ -81,13 +81,10 @@ function VehicleCatalogContainer({ serverData }: VehicleCatalogData) {
       push(`${pathname}?${searchString}`, `${route[0]}?${searchString}`, {
         shallow: true,
       });
+      await revalidateProducts();
     },
-    [asPath, queryParams, pathname, push],
+    [asPath, queryParams, pathname, push, revalidateProducts],
   );
-
-  useEffect(() => {
-    revalidate();
-  }, [revalidate, asPath]);
 
   return (
     <CatalogPageContainer
