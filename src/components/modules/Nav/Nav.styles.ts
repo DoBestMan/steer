@@ -69,13 +69,14 @@ export const animations = {
 
 export const styles: StylesMap = {
   cart: {
+    marginRight: -SPACING.SIZE_10,
     order: -1,
     [MQ.L]: {
-      marginLeft: SPACING.SIZE_20,
+      marginLeft: SPACING.SIZE_10,
       order: 0,
     },
     [MQ.XL]: {
-      marginLeft: SPACING.SIZE_30,
+      marginLeft: SPACING.SIZE_20,
     },
   },
   container: {

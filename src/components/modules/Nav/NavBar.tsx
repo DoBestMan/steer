@@ -18,7 +18,7 @@ interface Props {
   handleOnSubNavClick: () => void;
   isHomepage?: boolean;
   links: Array<LinkType | ActionType>;
-  numberOfCartItems: number;
+  numberOfCartItems?: number;
   theme: NavThemeObject;
 }
 
@@ -63,11 +63,7 @@ function NavBar({
         </li>
       ))}
       <li css={styles.cart}>
-        <NavCart
-          linkTheme={linkTheme}
-          numberOfCartItems={numberOfCartItems}
-          textColor={textColor}
-        />
+        <NavCart linkTheme={linkTheme} numberOfCartItems={numberOfCartItems} />
       </li>
       <li css={[styles.listItem, styles.hamburger]}>
         <button

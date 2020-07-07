@@ -26,7 +26,7 @@ const styles: StylesMap = {
       minWidth: BADGE_SIZE,
       padding: '2px 4px',
       position: 'absolute',
-      right: -4 + BADGE_SIZE / 2,
+      right: 6 + BADGE_SIZE / 2,
       textAlign: 'center',
       top: -12,
       transform: 'translateX(50%)',
@@ -34,7 +34,7 @@ const styles: StylesMap = {
   ],
   link: {
     height: NAV_CONTENT_HEIGHT,
-    paddingTop: SPACING.SIZE_02,
+    padding: `${SPACING.SIZE_02}px ${SPACING.SIZE_10}px 0`,
     position: 'relative',
   },
 };

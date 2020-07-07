@@ -1,4 +1,5 @@
 import Link from '~/components/global/Link/Link';
+import { navLink } from '~/components/global/Link/Link.styles';
 import { cartLink } from '~/context/Nav.context';
 import { ui } from '~/lib/utils/ui-dictionary';
 
@@ -25,29 +26,26 @@ function getCartNumber(items: number) {
   return `${items}`;
 }
 
-interface Props extends Pick<NavThemeObject, 'linkTheme' | 'textColor'> {
-  numberOfCartItems: number;
+interface Props extends Pick<NavThemeObject, 'linkTheme'> {
+  numberOfCartItems?: number;
 }
 
-function NavCart({ linkTheme, numberOfCartItems, textColor }: Props) {
-  const label = ui('nav.cart.contentLabel', getCartString(numberOfCartItems));
-  const cartNumber = getCartNumber(numberOfCartItems);
-
+function NavCart({ linkTheme, numberOfCartItems }: Props) {
   if (!numberOfCartItems) {
     return null;
   }
 
+  const label = ui('nav.cart.contentLabel', getCartString(numberOfCartItems));
+  const cartNumber = getCartNumber(numberOfCartItems);
+
   return (
     <Link
-      css={[styles.link, textColor]}
+      css={[styles.link, navLink[linkTheme].root]}
       {...cartLink}
       theme={linkTheme}
       aria-label={label}
     >
-      <span
-        css={[styles.badge, linkTheme && badgeColor[linkTheme]]}
-        aria-hidden="true"
-      >
+      <span css={[styles.badge, badgeColor[linkTheme]]} aria-hidden="true">
         {cartNumber}
       </span>
     </Link>

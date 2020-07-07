@@ -5,7 +5,7 @@ import { BORDERS, COLORS, CSSObjectType, MQ, THEME } from '~/lib/constants';
 export interface NavThemeObject {
   border: CSSObjectType;
   iconColor: CSSObjectType;
-  linkTheme?: THEME.LIGHT | THEME.ORANGE;
+  linkTheme: THEME.LIGHT | THEME.ORANGE;
   logoUrl: string;
   textColor: CSSObject;
 }

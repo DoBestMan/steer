@@ -84,7 +84,7 @@ function Nav({ isHomepage }: Props) {
               isHomepage={isHomepage}
               links={links}
               // TODO number to be determined via cookies
-              numberOfCartItems={4}
+              // numberOfCartItems={4}
               theme={theme}
             />
           </Grid>
