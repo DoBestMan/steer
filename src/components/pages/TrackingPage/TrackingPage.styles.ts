@@ -15,7 +15,7 @@ const styles: StylesMap = {
   description: [
     typography.largeCopy,
     {
-      '> a': {
+      '> button': {
         borderBottom: `2px dotted ${COLORS.LIGHT.GRAY_70}`,
         transition: 'border-color 100ms ease',
         '&:hover': {

@@ -18,7 +18,11 @@ function TrackingPage() {
         <h1 css={styles.title}>{ui('tracking.orderTrackingTitle')}</h1>
         <p css={styles.description}>
           {uiJSX('tracking.orderTrackingDescription', {
-            login: <button onClick={handleLoginClick}>Login</button>,
+            login: (
+              <button key="login" onClick={handleLoginClick}>
+                Login
+              </button>
+            ),
           })}
         </p>
       </GridItem>

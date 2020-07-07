@@ -1,16 +1,24 @@
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import Button from '~/components/global/Button/Button';
 import Input from '~/components/global/Input/Input';
-import { apiGetOrderTracking } from '~/lib/api/track-order';
+import { useTrackingContext } from '~/components/pages/TrackingResult/TrackingResult.context';
 import { INPUT_TYPE } from '~/lib/constants';
+import { ROUTE_MAP, ROUTES } from '~/lib/constants/routes';
 import { onlyNumbers } from '~/lib/utils/regex';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import styles from './OrderTrackingForm.styles';
 
 function OrderTrackingForm() {
-  const [hasError, setHasError] = useState(false);
+  const router = useRouter();
+  const {
+    getOrderTracking,
+    isLoadingOrder,
+    hasError,
+    order,
+  } = useTrackingContext();
   const [orderId, setOrderId] = useState('');
   const [shippingZip, setShippingZip] = useState('');
   const [isFormValid, setIsFormValid] = useState(false);
@@ -23,22 +31,25 @@ function OrderTrackingForm() {
     }
   }, [orderId, shippingZip, hasError]);
 
+  useEffect(() => {
+    if (order && !hasError && !isLoadingOrder) {
+      router.push({
+        pathname: ROUTE_MAP[ROUTES.ORDER_TRACKING_RESULT],
+        query: { orderId, zip: shippingZip },
+      });
+    }
+  });
+
   const handleShippingZipChange = (value: string) => {
     const newValue = value.replace(onlyNumbers, '');
     setShippingZip(newValue);
   };
 
   const handleButtonClick = async () => {
-    hasError && setHasError(false);
-
-    try {
-      await apiGetOrderTracking({
-        orderId,
-        zip: shippingZip,
-      });
-    } catch (err) {
-      setHasError(true);
-    }
+    getOrderTracking({
+      orderId,
+      zip: shippingZip,
+    });
   };
 
   return (
