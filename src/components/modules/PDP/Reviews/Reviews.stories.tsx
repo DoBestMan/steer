@@ -10,6 +10,8 @@ export default {
 
 export function ReviewsWithKnobs() {
   const {
+    momentList,
+    ratings,
     ratingStars,
     reviews,
     seeAllReviewsLink,
@@ -25,6 +27,8 @@ export function ReviewsWithKnobs() {
 
   return (
     <Reviews
+      momentList={momentList}
+      ratings={ratings}
       reviews={(hasReviews && reviews) || []}
       ratingStars={ratingStars}
       seeAllReviewsLink={seeAllReviewsLink}

@@ -1,4 +1,4 @@
-import { RATINGS_DISPLAY, THEME } from '~/lib/constants';
+import { CSSStyles, RATINGS_DISPLAY, THEME } from '~/lib/constants';
 
 import styles, { dStyles, tStyles } from './MomentList.styles';
 
@@ -9,18 +9,22 @@ export interface MomentListItem {
 }
 
 interface Props {
+  customContainerStyles?: CSSStyles;
   data: Array<MomentListItem>;
   display?: RATINGS_DISPLAY;
   theme?: THEME.DARK | THEME.LIGHT;
 }
 
 export function MomentList({
+  customContainerStyles,
   data,
   theme = THEME.DARK,
   display = RATINGS_DISPLAY.DEFAULT,
 }: Props) {
   return (
-    <ul css={[styles.container, tStyles[theme].container]}>
+    <ul
+      css={[styles.container, tStyles[theme].container, customContainerStyles]}
+    >
       {data.map(({ label, value, concise }) => (
         <li css={[styles.item, dStyles[display].item]} key={label}>
           {concise && <span css={dStyles[display].concise}>{concise}</span>}

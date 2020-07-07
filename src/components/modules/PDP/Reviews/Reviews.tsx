@@ -2,6 +2,11 @@ import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Link from '~/components/global/Link/Link';
+import MomentList, {
+  MomentListItem,
+} from '~/components/global/MomentList/MomentList';
+import { Props as RatingsListItem } from '~/components/global/RatingsList/RatingsBar/RatingsBar';
+import RatingsList from '~/components/global/RatingsList/RatingsList';
 import ReviewCard, {
   ReviewCardProps,
 } from '~/components/global/ReviewCard/ReviewCard';
@@ -13,7 +18,9 @@ import { typography } from '~/styles/typography.styles';
 import styles from './Reviews.styles';
 
 interface Props {
+  momentList?: Array<MomentListItem>;
   ratingStars?: number;
+  ratings?: Array<RatingsListItem>;
   reviews?: ReviewCardProps[];
   seeAllReviewsLink: SiteLink;
   seeAllReviewsLinkLabel: string;
@@ -24,6 +31,8 @@ interface Props {
 }
 
 function Reviews({
+  momentList,
+  ratings,
   ratingStars,
   reviews,
   sources,
@@ -49,7 +58,6 @@ function Reviews({
               </span>
             )}
           </div>
-
           <div css={styles.ratingContainer}>
             {!!ratingStars && (
               <StarsWithRating
@@ -69,10 +77,21 @@ function Reviews({
       </GridItem>
       {!!reviews && (
         <GridItem gridColumnL="8/13">
+          {!!momentList && (
+            <MomentList
+              customContainerStyles={styles.momentList}
+              data={momentList}
+            />
+          )}
+          {!!ratings && (
+            <RatingsList
+              customContainerStyles={styles.ratingsList}
+              ratings={ratings}
+            />
+          )}
           {reviews.map((review) => (
             <ReviewCard key={review.id} {...review} />
           ))}
-
           <Link
             css={styles.seeAll}
             href={seeAllReviewsLink.href}

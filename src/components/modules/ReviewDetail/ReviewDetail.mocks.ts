@@ -2,7 +2,7 @@ import { mockReviews } from '~/components/global/ReviewCard/ReviewCard.mocks';
 import {
   mockMomentList,
   mockRatings,
-} from '~/components/modules/TireRatings/TireRatings.mocks';
+} from '~/components/modules/PDP/Reviews/Reviews.mocks';
 import { SiteImage } from '~/data/models/SiteImage';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 

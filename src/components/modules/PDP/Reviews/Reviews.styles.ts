@@ -19,6 +19,15 @@ const styles: StylesMap = {
       paddingTop: SPACING.SIZE_10,
     },
   },
+  momentList: {
+    marginBottom: SPACING.SIZE_10,
+    [MQ.M]: {
+      marginBottom: SPACING.SIZE_15,
+    },
+    [MQ.L]: {
+      marginBottom: SPACING.SIZE_40,
+    },
+  },
   ratingContainer: {
     display: 'flex',
     flexDirection: 'column',
@@ -30,11 +39,23 @@ const styles: StylesMap = {
       display: 'block',
     },
   },
+  ratingsList: {
+    marginBottom: SPACING.SIZE_40,
+    [MQ.M]: {
+      marginBottom: SPACING.SIZE_60,
+    },
+    [MQ.L]: {
+      marginBottom: SPACING.SIZE_40,
+    },
+  },
   section: {
     backgroundColor: COLORS.GLOBAL.BLACK,
   },
   seeAll: {
-    paddingTop: SPACING.SIZE_20,
+    marginTop: SPACING.SIZE_20,
+    [MQ.L]: {
+      marginTop: SPACING.SIZE_40,
+    },
   },
   sources: [
     typography.bodyCopy,
@@ -45,6 +66,7 @@ const styles: StylesMap = {
       paddingTop: SPACING.SIZE_02,
     },
   ],
+
   title: [
     typography.primaryHeadline,
     {
