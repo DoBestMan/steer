@@ -5,7 +5,6 @@ import { SiteCatalogProducts } from '~/data/models/SiteCatalogProducts';
 import Header from './Header';
 
 interface Props {
-  handleUpdateResults: (filters: Record<string, string>) => void;
   hasTopPicks: boolean;
   isAdvancedView: boolean;
   isInternal?: boolean;
@@ -15,7 +14,6 @@ interface Props {
 }
 
 export default function HeaderContainer({
-  handleUpdateResults,
   hasTopPicks,
   isAdvancedView,
   siteCatalogProducts,
@@ -26,7 +24,6 @@ export default function HeaderContainer({
   return (
     <FiltersContextProvider
       siteCatalogFilters={siteCatalogProducts.siteCatalogFilters}
-      onApplyFilters={handleUpdateResults}
     >
       <Header
         siteCatalogProducts={siteCatalogProducts}

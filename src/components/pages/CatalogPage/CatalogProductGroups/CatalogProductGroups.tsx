@@ -4,10 +4,14 @@ import { SiteCatalogProductGroupList } from '~/data/models/SiteCatalogProductGro
 import styles from './CatalogProductGroups.styles';
 
 interface Props {
+  isLoading?: boolean;
   productGroupList: SiteCatalogProductGroupList;
 }
 
-function CatalogProductGroups({ productGroupList }: Props) {
+function CatalogProductGroups({ productGroupList, isLoading }: Props) {
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
   return (
     <div css={styles.root}>
       {productGroupList.map((group) => (

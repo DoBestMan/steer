@@ -7,6 +7,7 @@ import {
   useState,
 } from 'react';
 
+import { useCatalogPageContext } from '~/context/CatalogPage.context';
 import { SiteCatalogFilters } from '~/data/models/SiteCatalogFilters';
 import { createContext } from '~/lib/utils/context';
 
@@ -15,7 +16,6 @@ import { getInitialFiltersState, getValueKeys } from './Filters.utils';
 
 interface ContextProviderProps {
   children: ReactNode;
-  onApplyFilters: (filters: Record<string, string>) => void;
   siteCatalogFilters: SiteCatalogFilters;
 }
 
@@ -77,14 +77,13 @@ const FiltersContext = createContext<FiltersContextProps>();
  */
 
 interface ContextArgs {
-  onApplyFilters: ContextProviderProps['onApplyFilters'];
   siteCatalogFilters: SiteCatalogFilters;
 }
 
 export function useFiltersContextSetup({
   siteCatalogFilters = { filtersList: [], sortList: [], totalMatches: 0 },
-  onApplyFilters,
 }: ContextArgs) {
+  const { isLoading, handleUpdateResults } = useCatalogPageContext();
   const { initialState, isPopularActive } = useMemo(
     () =>
       getInitialFiltersState(
@@ -93,7 +92,6 @@ export function useFiltersContextSetup({
       ),
     [siteCatalogFilters],
   );
-  const [isLoading, setIsLoading] = useState(false);
   const [selectingFilter, setSelectingFilter] = useState<
     number | string | null
   >(null);
@@ -109,17 +107,11 @@ export function useFiltersContextSetup({
     setFiltersToApply(initialState);
   }, [siteCatalogFilters]);
 
-  const fetchData = async (filters: Record<string, string>) => {
-    setIsLoading(true);
-    await onApplyFilters(filters);
-    setIsLoading(false);
-  };
-
   return {
     activeFilters: initialState,
     applyFilters: () => {
       setSelectingFilter(null);
-      fetchData(filtersToApply);
+      handleUpdateResults(filtersToApply);
     },
     clearFiltersToApply: () => {
       setFiltersToApply(initialState);
@@ -163,7 +155,7 @@ export function useFiltersContextSetup({
         return;
       });
       setFiltersToApply(newState);
-      fetchData(newState);
+      handleUpdateResults(newState);
     },
     createUpdateFilterGroup: useCallback(
       ({ value, overwrite = false }: UpdateFilterArgs) => () =>
@@ -222,9 +214,8 @@ export function useFiltersContextSetup({
 export function FiltersContextProvider({
   children,
   siteCatalogFilters,
-  onApplyFilters,
 }: ContextProviderProps) {
-  const value = useFiltersContextSetup({ siteCatalogFilters, onApplyFilters });
+  const value = useFiltersContextSetup({ siteCatalogFilters });
   return (
     <FiltersContext.Provider value={value}>{children}</FiltersContext.Provider>
   );

@@ -1,6 +1,8 @@
 import { renderHook } from '@testing-library/react-hooks';
+import { ReactNode } from 'react';
 import { act } from 'react-test-renderer';
 
+import { CatalogPageContextProvider } from '~/context/CatalogPage.context';
 import { SiteCatalogFilterListTypeEnum } from '~/data/models/SiteCatalogFilterList';
 import { SiteCatalogFilters } from '~/data/models/SiteCatalogFilters';
 
@@ -9,15 +11,33 @@ import { useFiltersContextSetup } from './Filters.context';
 import { mockSiteCatalogFilters } from './Filters.mocks';
 
 const mockArgs = {
-  onApplyFilters: jest.fn(),
   siteCatalogFilters: {
     filtersList: mockSiteCatalogFilters,
   } as SiteCatalogFilters,
 };
 
+interface WrapperProps {
+  children?: ReactNode;
+}
+
+const handleUpdateFilters = jest.fn();
+
+function wrapper({ children }: WrapperProps) {
+  return (
+    <CatalogPageContextProvider handleUpdateFilters={handleUpdateFilters}>
+      {children}
+    </CatalogPageContextProvider>
+  );
+}
+
+const renderFiltersContextSetupHook = () =>
+  renderHook(() => useFiltersContextSetup(mockArgs), {
+    wrapper,
+  });
+
 describe('useFiltersContextSetup', () => {
   test('initial state with active filters', () => {
-    const { result } = renderHook(() => useFiltersContextSetup(mockArgs));
+    const { result } = renderFiltersContextSetupHook();
 
     expect(result.current.filtersToApply).toHaveProperty(
       'brand',
@@ -26,7 +46,7 @@ describe('useFiltersContextSetup', () => {
   });
 
   test('applying a group of filters', () => {
-    const { result } = renderHook(() => useFiltersContextSetup(mockArgs));
+    const { result } = renderFiltersContextSetupHook();
 
     act(() => {
       result.current.createUpdateFilterGroup({
@@ -49,7 +69,7 @@ describe('useFiltersContextSetup', () => {
   });
 
   test('applying a filter with multiple values', () => {
-    const { result } = renderHook(() => useFiltersContextSetup(mockArgs));
+    const { result } = renderFiltersContextSetupHook();
 
     act(() =>
       result.current.createUpdateFilterGroup({
@@ -65,7 +85,7 @@ describe('useFiltersContextSetup', () => {
   });
 
   test('overwriting a value', () => {
-    const { result } = renderHook(() => useFiltersContextSetup(mockArgs));
+    const { result } = renderFiltersContextSetupHook();
 
     act(() =>
       result.current.createUpdateFilterGroup({
@@ -87,7 +107,7 @@ describe('useFiltersContextSetup', () => {
   });
 
   test('unchecking the last item in a group removes it from state', () => {
-    const { result } = renderHook(() => useFiltersContextSetup(mockArgs));
+    const { result } = renderFiltersContextSetupHook();
 
     act(() =>
       result.current.createUpdateFilterGroup({
@@ -108,7 +128,7 @@ describe('useFiltersContextSetup', () => {
   });
 
   test('immediately revalidates when toggling a filter', async () => {
-    const { result } = renderHook(() => useFiltersContextSetup(mockArgs));
+    const { result } = renderFiltersContextSetupHook();
 
     await act(async () =>
       result.current.createToggleFilterHandler({
@@ -120,11 +140,11 @@ describe('useFiltersContextSetup', () => {
 
     expect(result.current.filtersToApply).toHaveProperty('foo', 'bar');
     // immediately fetches
-    expect(mockArgs.onApplyFilters).toHaveBeenCalledTimes(1);
+    expect(handleUpdateFilters).toHaveBeenCalledTimes(1);
   });
 
   test('removes toggle filter from state if overwrite is false', async () => {
-    const { result } = renderHook(() => useFiltersContextSetup(mockArgs));
+    const { result } = renderFiltersContextSetupHook();
 
     await act(async () =>
       result.current.createToggleFilterHandler({
@@ -145,7 +165,7 @@ describe('useFiltersContextSetup', () => {
   });
 
   test('overwriting toggle filter', async () => {
-    const { result } = renderHook(() => useFiltersContextSetup(mockArgs));
+    const { result } = renderFiltersContextSetupHook();
 
     await act(async () =>
       result.current.createToggleFilterHandler({
@@ -167,7 +187,7 @@ describe('useFiltersContextSetup', () => {
   });
 
   test('clearing filter dropdown', () => {
-    const { result } = renderHook(() => useFiltersContextSetup(mockArgs));
+    const { result } = renderFiltersContextSetupHook();
 
     act(() => {
       result.current.createOpenFilterHandler(0)();
@@ -178,7 +198,7 @@ describe('useFiltersContextSetup', () => {
   });
 
   test('selecting a filter with a dropdown', () => {
-    const { result } = renderHook(() => useFiltersContextSetup(mockArgs));
+    const { result } = renderFiltersContextSetupHook();
 
     act(() => result.current.createOpenFilterHandler(0)());
 
@@ -186,7 +206,7 @@ describe('useFiltersContextSetup', () => {
   });
 
   test('resetting a group of filters', () => {
-    const { result } = renderHook(() => useFiltersContextSetup(mockArgs));
+    const { result } = renderFiltersContextSetupHook();
 
     act(() => {
       result.current.createUpdateFilterGroup({

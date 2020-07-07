@@ -88,7 +88,7 @@ function VehicleCatalogContainer({ serverData }: VehicleCatalogData) {
 
   return (
     <CatalogPageContainer
-      handleUpdateResults={handleUpdateFilters}
+      handleUpdateFilters={handleUpdateFilters}
       siteCatalogProducts={siteCatalogProducts}
       siteCatalogSummary={siteCatalogSummary}
     />

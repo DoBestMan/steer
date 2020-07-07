@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import CatalogPageContainer from '~/components/pages/CatalogPage/CatalogPage.container';
 import {
   emptyCatalogProducts,
-  emptyHandleUpdateResults,
+  emptyHandleUpdateFilters,
 } from '~/components/pages/CatalogPage/CatalogPage.mocks';
 import { vehiclesNoOeWithSize } from '~/components/pages/CatalogPage/CatalogSummary/CatalogSummary.mocks';
 // import { COLORS } from '~/lib/constants';
@@ -25,10 +25,10 @@ function TireCategory() {
   const dataFn = isDiameterRoute ? fetchDiameter : fetchClassic;
   dataFn(/* api options/params */);
 
-  // TODO: add handleUpdateResults prop
+  // TODO: add handleUpdateFilters prop
   return (
     <CatalogPageContainer
-      handleUpdateResults={emptyHandleUpdateResults}
+      handleUpdateFilters={emptyHandleUpdateFilters}
       siteCatalogProducts={emptyCatalogProducts}
       siteCatalogSummary={vehiclesNoOeWithSize}
       hasTopPicks={false}

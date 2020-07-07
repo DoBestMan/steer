@@ -5,7 +5,7 @@ import {
 import { SiteCatalogFilters } from '~/data/models/SiteCatalogFilters';
 import { SiteCatalogProducts } from '~/data/models/SiteCatalogProducts';
 
-export const emptyHandleUpdateResults = () => {};
+export const emptyHandleUpdateFilters = () => {};
 
 export const emptyCatalogProducts: SiteCatalogProducts = {
   siteCatalogProductsResultList: [],

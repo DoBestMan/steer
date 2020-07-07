@@ -6,10 +6,14 @@ import styles from './CatalogProductGrid.styles';
 
 interface Props {
   isAdvancedView: boolean;
+  isLoading?: boolean;
   productList: SiteCatalogProductItem[];
 }
 
-function CatalogProductGrid({ productList, isAdvancedView }: Props) {
+function CatalogProductGrid({ productList, isAdvancedView, isLoading }: Props) {
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
   return (
     <div css={styles.root}>
       {isAdvancedView ? (

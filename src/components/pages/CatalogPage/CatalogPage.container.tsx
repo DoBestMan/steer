@@ -7,7 +7,7 @@ import { SiteCatalogSummary } from '~/data/models/SiteCatalogSummary';
 import CatalogPage from './CatalogPage';
 
 interface Props {
-  handleUpdateResults: (filters: Record<string, string>) => void;
+  handleUpdateFilters: (filters: Record<string, string>) => void;
   hasTopPicks?: boolean;
   siteCatalogProducts: SiteCatalogProducts;
   siteCatalogSummary: SiteCatalogSummary;
@@ -15,7 +15,7 @@ interface Props {
 
 function CatalogPageContainer({
   hasTopPicks = true,
-  handleUpdateResults,
+  handleUpdateFilters,
   siteCatalogSummary,
   siteCatalogProducts,
 }: Props) {
@@ -24,10 +24,12 @@ function CatalogPageContainer({
   const { isSearch } = router.query;
 
   return (
-    <CatalogPageContextProvider showCatalogGridInit={isSearch !== 'true'}>
+    <CatalogPageContextProvider
+      handleUpdateFilters={handleUpdateFilters}
+      showCatalogGridInit={isSearch !== 'true'}
+    >
       <CatalogPage
         // later will be an context state
-        handleUpdateResults={handleUpdateResults}
         comesFromSearch={isSearch === 'true'}
         hasTopPicks={hasTopPicks}
         siteCatalogProducts={siteCatalogProducts}

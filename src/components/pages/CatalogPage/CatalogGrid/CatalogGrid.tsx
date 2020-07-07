@@ -20,7 +20,6 @@ import CatalogProductGrid from '../CatalogProductGrid/CatalogProductGrid';
 import CatalogProductGroups from '../CatalogProductGroups/CatalogProductGroups';
 
 interface Props {
-  handleUpdateResults: (filters: Record<string, string>) => void;
   hasTopPicks: boolean;
   siteCatalogProducts: SiteCatalogProducts;
   siteCatalogSummary?: SiteCatalogSummary;
@@ -28,11 +27,15 @@ interface Props {
 
 function CatalogGrid({
   hasTopPicks,
-  handleUpdateResults,
   siteCatalogSummary,
   siteCatalogProducts,
 }: Props) {
-  const { setIsAdvancedView, isAdvancedView } = useCatalogPageContext();
+  const {
+    handleUpdateResults,
+    setIsAdvancedView,
+    isAdvancedView,
+    isLoading,
+  } = useCatalogPageContext();
   const catalogGrid = useRef<HTMLDivElement | null>(null);
 
   // Uses a state instead of ref to avoid forwarding refs
@@ -99,9 +102,6 @@ function CatalogGrid({
 
   const toggleView = async () => {
     setIsAdvancedView(!isAdvancedView);
-    if (!handleUpdateResults) {
-      return;
-    }
     if (!isAdvancedView) {
       await handleUpdateResults({ skipGroups: 'true' });
     } else {
@@ -116,7 +116,6 @@ function CatalogGrid({
   return (
     <div ref={catalogGrid}>
       <HeaderContainer
-        handleUpdateResults={handleUpdateResults}
         sizeList={siteCatalogSummary?.siteCatalogSummaryMeta?.sizeList}
         hasTopPicks={hasTopPicks}
         toggleView={toggleView}
@@ -125,6 +124,7 @@ function CatalogGrid({
       />
       {isGroupedProducts ? (
         <CatalogProductGroups
+          isLoading={isLoading}
           productGroupList={siteCatalogProducts.siteCatalogProductsResultList.filter(
             (result): result is SiteCatalogProductGroupItem =>
               result.type ===
@@ -133,6 +133,7 @@ function CatalogGrid({
         />
       ) : (
         <CatalogProductGrid
+          isLoading={isLoading}
           productList={siteCatalogProducts.siteCatalogProductsResultList.filter(
             (result): result is SiteCatalogProductItem =>
               result.type === SiteCatalogProductItemEnum.SiteCatalogProductItem,

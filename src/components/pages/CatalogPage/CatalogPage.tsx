@@ -19,7 +19,6 @@ import {
 
 interface Props {
   comesFromSearch: boolean;
-  handleUpdateResults: (filters: Record<string, string>) => void;
   hasTopPicks: boolean;
   siteCatalogProducts: SiteCatalogProducts;
   siteCatalogSummary: SiteCatalogSummary;
@@ -28,7 +27,6 @@ interface Props {
 function CatalogPage({
   hasTopPicks,
   comesFromSearch,
-  handleUpdateResults,
   siteCatalogProducts,
   siteCatalogSummary,
 }: Props) {
@@ -77,7 +75,6 @@ function CatalogPage({
           <div ref={catalogGrid}>
             <CatalogGrid
               siteCatalogProducts={siteCatalogProducts}
-              handleUpdateResults={handleUpdateResults}
               hasTopPicks={hasTopPicks}
               siteCatalogSummary={siteCatalogSummary}
             />
