@@ -16,11 +16,11 @@ export default {
 export function InstallationWithKnobs() {
   const carKeys = Object.keys(CARS_KEYS);
   const carSelect = select('Car', carKeys, CARS_KEYS.HONDA_CIVIC);
-  const carID = CARS[carSelect as CARS_KEYS];
+  const vehicleType = CARS[carSelect as CARS_KEYS];
 
   const sceneryKeys = Object.keys(SCENERIES_KEYS);
   const scenerySelect = select('Scenery', sceneryKeys, SCENERIES_KEYS.URBAN);
-  const sceneryID = SCENERIES[scenerySelect as SCENERIES_KEYS];
+  const sceneryType = SCENERIES[scenerySelect as SCENERIES_KEYS];
 
-  return <Installation carID={carID} sceneryID={sceneryID} />;
+  return <Installation vehicleType={vehicleType} sceneryType={sceneryType} />;
 }

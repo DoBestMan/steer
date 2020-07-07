@@ -1,3 +1,4 @@
+import { SiteCatalogProductGroupList } from './SiteCatalogProductGroupList';
 import { SiteProductInsights } from './SiteProductInsights';
 import { SiteProductInstallation } from './SiteProductInstallation';
 import { SiteProductLine } from './SiteProductLine';
@@ -53,7 +54,7 @@ export interface SiteProduct {
    * @type {Array<object>}
    * @memberof SiteProduct
    */
-  siteProductRecirculation: Array<object>;
+  siteProductRecirculation: SiteCatalogProductGroupList;
   /**
    * Technical specs for products
    * @type {Array<SiteProductSpecsItem>}

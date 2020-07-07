@@ -7,8 +7,14 @@ import IconOrImage from '~/components/global/IconOrImage/IconOrImage';
 import BaseLink from '~/components/global/Link/BaseLink';
 import ProductListing from '~/components/global/ProductListing/ProductListing';
 import { SiteCatalogProductGroupItem } from '~/data/models/SiteCatalogProductGroupList';
+import { CSSStyles } from '~/lib/constants';
 
 import styles from './ProductGroupList.styles';
+
+interface ProductGroupListProps extends SiteCatalogProductGroupItem {
+  headerCustomStyles?: CSSStyles;
+  itemCustomStyle?: CSSStyles;
+}
 
 function ProductGroupList({
   description,
@@ -16,7 +22,9 @@ function ProductGroupList({
   productList,
   icon,
   siteQueryParams,
-}: SiteCatalogProductGroupItem) {
+  headerCustomStyles,
+  itemCustomStyle,
+}: ProductGroupListProps) {
   const url =
     siteQueryParams && `?${new URLSearchParams(siteQueryParams).toString()}`;
 
@@ -36,7 +44,7 @@ function ProductGroupList({
   return (
     <>
       <Grid>
-        <GridItem>
+        <GridItem css={headerCustomStyles}>
           <h2 css={styles.title}>
             {url ? (
               <BaseLink css={styles.link} href={url}>
@@ -57,7 +65,7 @@ function ProductGroupList({
           freeScroll
         >
           {productList.map((product, i) => (
-            <div key={`${name}-${i}`} css={styles.item}>
+            <div key={`${name}-${i}`} css={[styles.item, itemCustomStyle]}>
               <ProductListing {...product} />
             </div>
           ))}

@@ -3,11 +3,14 @@ import { NextRouter, useRouter } from 'next/router';
 import { BreadcrumbsItem } from '~/components/global/Breadcrumbs/Breadcrumbs';
 import { PromoTagProps } from '~/components/global/PromoTag/PromoTag';
 import { InsightsProps } from '~/components/modules/PDP/Insights/Insights';
+import { InstallationProps } from '~/components/modules/PDP/Installation/Installation';
 import { ProductInfoProps } from '~/components/modules/PDP/ProductInfo/ProductInfo';
 import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
+import { SiteCatalogProductGroupList } from '~/data/models/SiteCatalogProductGroupList';
 import { SiteCatalogProductImage } from '~/data/models/SiteCatalogProductImage';
 import { SiteGlobals } from '~/data/models/SiteGlobals';
 import { SiteProduct } from '~/data/models/SiteProduct';
+import { SiteProductInstallationStatusEnum } from '~/data/models/SiteProductInstallation';
 import { SiteProductLineSizeDetailProductStatusEnum } from '~/data/models/SiteProductLineSizeDetail';
 import { SiteProductReviews } from '~/data/models/SiteProductReviews';
 import { useApiDataWithDefault } from '~/hooks/useApiDataWithDefault';
@@ -29,7 +32,9 @@ interface ResponseProps {
   currentPath: string;
   imageList: SiteCatalogProductImage[];
   insights: InsightsProps;
+  installation: InstallationProps | null;
   productInfo: ProductInfoProps;
+  recirculation: SiteCatalogProductGroupList | null;
 }
 
 const CONSTANTS = {
@@ -189,6 +194,34 @@ function mapDataToInsights({
   };
 }
 
+function mapDataToInstallation({
+  siteProduct: { siteProductInstallation },
+}: {
+  siteProduct: SiteProduct;
+}): InstallationProps | null {
+  const isAvailable =
+    siteProductInstallation?.status ===
+    SiteProductInstallationStatusEnum.SiteProductInstallationAvailable;
+
+  if (!isAvailable || !siteProductInstallation) {
+    return null;
+  }
+
+  return siteProductInstallation.installationMeta;
+}
+
+function mapDataToRecirculation({
+  siteProduct: { siteProductRecirculation },
+}: {
+  siteProduct: SiteProduct;
+}): SiteCatalogProductGroupList | null {
+  if (!siteProductRecirculation?.length) {
+    return null;
+  }
+
+  return siteProductRecirculation;
+}
+
 function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
   const router = useRouter();
   const { query, asPath } = router;
@@ -229,12 +262,14 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
     currentPath: asPath,
     imageList,
     insights: mapDataToInsights({ siteProduct }),
+    installation: mapDataToInstallation({ siteProduct }),
     productInfo: mapDataToProductInfo({
       siteProduct,
       siteProductReviews,
       queryParams,
       globals,
     }),
+    recirculation: mapDataToRecirculation({ siteProduct }),
   };
 }
 

@@ -12,15 +12,15 @@ import { ui } from '~/lib/utils/ui-dictionary';
 import styles from './Installation.styles';
 import InstallationAnimation from './InstallationIllustration';
 
-export interface Props {
-  carID: string;
-  sceneryID: string;
+export interface InstallationProps {
+  sceneryType: string;
+  vehicleType: string;
 }
 
 function Installation({
-  carID = CARS.AUDI_A6,
-  sceneryID = SCENERIES.URBAN,
-}: Props) {
+  vehicleType = CARS.AUDI_A6,
+  sceneryType = SCENERIES.URBAN,
+}: InstallationProps) {
   const { isInViewport, targetRef } = useInViewport({
     shouldUnsubscribeInViewport: true,
   });
@@ -40,9 +40,10 @@ function Installation({
         </GridItem>
         <GridItem
           as="h3"
+          gridColumn="start/5"
           gridColumnM="start/6"
           gridColumnL="3/8"
-          gridColumnXL="3/8"
+          gridColumnXL="3/7"
           gridRowL="2/5"
           css={styles.title}
         >
@@ -51,8 +52,8 @@ function Installation({
         <GridItem css={styles.illustrationContainer} fullbleed>
           <InstallationAnimation
             aria-label={ui('pdp.installation.illustrationAltText')}
-            carID={carID}
-            sceneryID={sceneryID}
+            vehicleType={vehicleType}
+            sceneryType={sceneryType}
             animateIn={isInViewport}
             css={styles.illustration}
           />

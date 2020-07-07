@@ -1,4 +1,6 @@
 import Carousel from '~/components/global/Carousel/Carousel';
+import Grid from '~/components/global/Grid/Grid';
+import GridItem from '~/components/global/Grid/GridItem';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import { everyPurchaseIncludesData } from './PurchaseIncludes.mock';
@@ -9,17 +11,21 @@ import styles from './PurchaseIncludesCard.styles';
 
 function PurchaseIncludes() {
   return (
-    <>
-      <h2 css={styles.title}>{ui('pdp.everyPurchaseIncludes.title')}:</h2>
+    <Grid>
+      <GridItem as="h2" gridColumnL="3/end" css={styles.title}>
+        {ui('pdp.everyPurchaseIncludes.title')}:
+      </GridItem>
 
-      <Carousel>
-        {everyPurchaseIncludesData.map((item: CardType) => (
-          <div css={styles.cardContainer} key={item.title}>
-            <PurchaseIncludesCard {...item} />
-          </div>
-        ))}
-      </Carousel>
-    </>
+      <GridItem fullbleed css={styles.items}>
+        <Carousel>
+          {everyPurchaseIncludesData.map((item: CardType) => (
+            <div css={styles.cardContainer} key={item.title}>
+              <PurchaseIncludesCard {...item} />
+            </div>
+          ))}
+        </Carousel>
+      </GridItem>
+    </Grid>
   );
 }
 

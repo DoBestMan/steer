@@ -5,30 +5,30 @@ import Scenary from '~/components/global/Scenery/Scenery';
 import { SCENERIES } from '~/components/global/Scenery/Scenery.constants';
 import { COLORS } from '~/lib/constants';
 
-import { Props as InputProps } from './Installation';
+import { InstallationProps } from './Installation';
 import styles from './InstallationIllustration.styles';
 
-interface Props extends Pick<InputProps, 'carID' | 'sceneryID'> {
+interface Props extends Pick<InstallationProps, 'vehicleType' | 'sceneryType'> {
   animateIn?: boolean;
 }
 
 const carScale = 0.8;
 
 function InstallationAnimation({
-  carID = CARS.AUDI_A6,
-  sceneryID = SCENERIES.URBAN,
+  vehicleType = CARS.AUDI_A6,
+  sceneryType = SCENERIES.URBAN,
   animateIn,
   ...rest
 }: Props) {
   return (
     <div css={styles.root} {...rest}>
       <Scenary
-        sceneryID={sceneryID}
+        sceneryID={sceneryType}
         css={[styles.scenery, animateIn && styles.sceneryAnimate]}
       />
       <div css={[styles.shop, animateIn && styles.shopAnimate]} />
       <Car
-        carId={carID}
+        carId={vehicleType}
         scale={carScale}
         solid
         solidColor={COLORS.GLOBAL.WHITE}
