@@ -1,14 +1,14 @@
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
-import { Icon as IconType } from '~/components/global/Icon/Icon.types';
-import Image from '~/components/global/Image/Image';
+import IconOrImage from '~/components/global/IconOrImage/IconOrImage';
+import { IconOrImage as IconOrImageProps } from '~/data/models/IconOrImage';
 
 import styles from './InsightsItem.styles';
 
-export interface Props {
+export interface InsightsItemProps {
   hasAction?: boolean;
   highlight?: boolean;
-  icon?: IconType;
+  icon?: IconOrImageProps;
   imageIcon?: string;
   imageIconAlt?: string;
   label: string;
@@ -17,11 +17,9 @@ export interface Props {
 function InsightsItem({
   highlight,
   icon,
-  imageIcon,
-  imageIconAlt,
   label,
   hasAction,
-}: Props) {
+}: InsightsItemProps) {
   return (
     <div
       css={[
@@ -30,18 +28,8 @@ function InsightsItem({
         hasAction && styles.containerAction,
       ]}
     >
-      <span css={styles.icon}>
-        {icon ? (
-          <Icon name={icon} aria-hidden />
-        ) : (
-          imageIcon && (
-            <Image
-              src={imageIcon}
-              altText={imageIconAlt || label}
-              aria-hidden
-            />
-          )
-        )}
+      <span css={styles.icon} aria-hidden>
+        {icon && <IconOrImage {...icon} />}
       </span>
       <span css={styles.label}>{label}</span>
       {hasAction && <Icon name={ICONS.CHEVRON_RIGHT} css={styles.chevron} />}

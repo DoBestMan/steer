@@ -1,11 +1,6 @@
 import { MQ, SPACING, StylesMap } from '~/lib/constants';
 
 const styles: StylesMap = {
-  root: {
-    [MQ.L]: {
-      paddingTop: SPACING.SIZE_80,
-    },
-  },
   breadcrumbs: {
     marginBottom: SPACING.SIZE_20,
 
@@ -17,9 +12,25 @@ const styles: StylesMap = {
       marginBottom: SPACING.SIZE_60,
     },
   },
+  insights: {
+    marginBottom: SPACING.SIZE_30,
+
+    [MQ.M]: {
+      marginBottom: SPACING.SIZE_40,
+    },
+
+    [MQ.L]: {
+      marginTop: SPACING.SIZE_60,
+    },
+  },
   productInfo: {
     [MQ.L]: {
       marginTop: SPACING.SIZE_05,
+    },
+  },
+  root: {
+    [MQ.L]: {
+      paddingTop: SPACING.SIZE_80,
     },
   },
   tireImage: {

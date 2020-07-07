@@ -2,6 +2,7 @@ import { NextRouter, useRouter } from 'next/router';
 
 import { BreadcrumbsItem } from '~/components/global/Breadcrumbs/Breadcrumbs';
 import { PromoTagProps } from '~/components/global/PromoTag/PromoTag';
+import { InsightsProps } from '~/components/modules/PDP/Insights/Insights';
 import { ProductInfoProps } from '~/components/modules/PDP/ProductInfo/ProductInfo';
 import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
 import { SiteCatalogProductImage } from '~/data/models/SiteCatalogProductImage';
@@ -27,8 +28,14 @@ interface ResponseProps {
   breadcrumbs: BreadcrumbsItem[];
   currentPath: string;
   imageList: SiteCatalogProductImage[];
+  insights: InsightsProps;
   productInfo: ProductInfoProps;
 }
+
+const CONSTANTS = {
+  REVIEWS_ANCHOR: 'SiteProductReviews',
+  TECH_SPECS_ANCHOR: 'SiteProductSpecs',
+};
 
 function mapDataToBreadcrumbs({
   data: {
@@ -157,6 +164,31 @@ function mapDataToProductInfo({
   };
 }
 
+function mapDataToInsights({
+  siteProduct: { siteProductInsights },
+}: {
+  siteProduct: SiteProduct;
+}): InsightsProps {
+  // TOOD: Integrate fits your vehicle functionality
+  const doesItFit = false;
+
+  // TODO: Add handlers
+  const handleChangeLocation = () => {};
+  const handleChangeVehicle = () => {};
+  const handleOpenRebate = () => {};
+
+  return {
+    delivery: siteProductInsights.delivery,
+    doesItFit,
+    handleChangeLocation,
+    handleChangeVehicle,
+    handleOpenRebate,
+    insightItems: siteProductInsights.siteProductInsightList,
+    rebateLabel: siteProductInsights.rebate?.label,
+    techSpecsAnchor: CONSTANTS.TECH_SPECS_ANCHOR,
+  };
+}
+
 function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
   const router = useRouter();
   const { query, asPath } = router;
@@ -196,6 +228,7 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
     }),
     currentPath: asPath,
     imageList,
+    insights: mapDataToInsights({ siteProduct }),
     productInfo: mapDataToProductInfo({
       siteProduct,
       siteProductReviews,

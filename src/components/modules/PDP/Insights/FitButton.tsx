@@ -1,10 +1,11 @@
 import { ICONS } from '~/components/global/Icon/Icon.constants';
+import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 import { ui } from '~/lib/utils/ui-dictionary';
 
-import { Props as InputProps } from './Insights';
+import { InsightsProps } from './Insights';
 import InsightsItem from './InsightsItem';
 
-interface Props extends Pick<InputProps, 'doesItFit' | 'vehicle'> {
+interface Props extends Pick<InsightsProps, 'doesItFit' | 'vehicle'> {
   onClickButton: () => void;
 }
 
@@ -22,13 +23,24 @@ function FitButton({ doesItFit, vehicle, onClickButton }: Props) {
     <button onClick={onClickButton} aria-label={buttonLabel}>
       {vehicle ? (
         <InsightsItem
-          icon={doesItFit ? ICONS.THUMBS_UP : ICONS.FORBIDDEN}
+          icon={{
+            svgId: doesItFit ? ICONS.THUMBS_UP : ICONS.FORBIDDEN,
+            type: ICON_IMAGE_TYPE.ICON,
+          }}
           label={label}
           hasAction
           highlight={!doesItFit}
         />
       ) : (
-        <InsightsItem icon={ICONS.UNKNOWN} label={label} hasAction highlight />
+        <InsightsItem
+          icon={{
+            svgId: ICONS.UNKNOWN,
+            type: ICON_IMAGE_TYPE.ICON,
+          }}
+          label={label}
+          hasAction
+          highlight
+        />
       )}
     </button>
   );

@@ -1,5 +1,4 @@
-import { SiteIcon } from './SiteIcon';
-import { SiteImage } from './SiteImage';
+import { IconOrImage } from './IconOrImage';
 
 /**
  *
@@ -18,7 +17,7 @@ export interface SiteProductInsightItem {
    * @type {SiteImage | SiteIcon}
    * @memberof SiteProductInsightItem
    */
-  icon: SiteImage | SiteIcon;
+  icon: IconOrImage;
   /**
    *
    * @type {string}

@@ -1,8 +1,8 @@
 import { useScrollToAnchor } from '~/hooks/useScrollToAnchor';
 
-import InsightsItem, { Props as ItemProps } from './InsightsItem';
+import InsightsItem, { InsightsItemProps } from './InsightsItem';
 
-interface Props extends ItemProps {
+interface Props extends InsightsItemProps {
   target: string;
 }
 

@@ -228,18 +228,8 @@
         "unknown": "Confirm if it fits your vehicle"
       },
       "fittingChangeVehicle": "Change vehicle",
-      "freeShipping": "Free 2-day shipping to {{location}}",
-      "freeShippingChangeLabel": "Change location",
-      "bestSellerFor": "Best seller for {{label}}",
-      "topRatedBy": "Top rated by {{location}} drivers",
-      "recommendedByFactory": "Recommended by {{factory}}",
-      "factoryTire": "Same tire that came from the factory",
-      "warranty": "Great warranty: {{warranty}}",
-      "allSeason": "Use all year: All Season thread",
-      "runFlat": "Run-Flat feature: Never stops",
-      "economy": "Fuel efficient: {{value}}",
-      "technicalSpecs": "See technical details",
-      "similarToOriginal": "Similar to your original tire"
+      "changeLocation": "Change location",
+      "technicalSpecs": "See technical details"
     },
     "everyPurchaseIncludes": {
       "title": "Every purchase includes"

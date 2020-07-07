@@ -2,6 +2,7 @@ import Breadcrumbs from '~/components/global/Breadcrumbs/Breadcrumbs';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import { navigationPaddingTop } from '~/components/modules/Nav/Nav.styles';
+import Insights from '~/components/modules/PDP/Insights/Insights';
 import ProductInfo from '~/components/modules/PDP/ProductInfo/ProductInfo';
 import TireImage from '~/components/modules/PDP/TireImage/TireImage';
 import { ProductDetailResponse } from '~/pages/api/product-detail';
@@ -14,7 +15,7 @@ export interface ProductDetailData {
 }
 
 function ProductDetailContainer({ serverData }: ProductDetailData) {
-  const { breadcrumbs, imageList, productInfo } = useProductDetail({
+  const { breadcrumbs, imageList, productInfo, insights } = useProductDetail({
     serverData,
   });
 
@@ -24,11 +25,19 @@ function ProductDetailContainer({ serverData }: ProductDetailData) {
         <GridItem gridColumnL="start/8" gridRowL="1" css={styles.breadcrumbs}>
           <Breadcrumbs navigationItems={breadcrumbs} />
         </GridItem>
-        <GridItem gridColumnL="start/8" gridRowL="2" css={styles.tireImage}>
+        <GridItem gridColumnL="start/8" gridRowL="2/4" css={styles.tireImage}>
           <TireImage imageList={imageList} brand={productInfo.brand} />
         </GridItem>
-        <GridItem gridColumnL="8/14" gridRowL="1/4" css={styles.productInfo}>
+        <GridItem gridColumnL="8/14" gridRowL="1/3" css={styles.productInfo}>
           <ProductInfo {...productInfo} />
+        </GridItem>
+        <GridItem
+          fullbleed
+          gridColumnL="8/14"
+          gridRowL="3"
+          css={styles.productInfo}
+        >
+          <Insights {...insights} css={styles.insights} />
         </GridItem>
       </Grid>
     </div>
