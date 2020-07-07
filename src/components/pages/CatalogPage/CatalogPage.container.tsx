@@ -10,7 +10,7 @@ interface Props {
   handleUpdateResults: (filters: Record<string, string>) => void;
   hasTopPicks?: boolean;
   siteCatalogProducts: SiteCatalogProducts;
-  siteCatalogSummary?: SiteCatalogSummary;
+  siteCatalogSummary: SiteCatalogSummary;
 }
 
 function CatalogPageContainer({

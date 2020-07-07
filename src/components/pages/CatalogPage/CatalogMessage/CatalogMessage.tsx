@@ -273,11 +273,11 @@ function CatalogMessage({
   exploreMore,
 }: CatalogMessageProps) {
   const {
-    catalogSummary,
     contentStage,
     setNewContent,
     setStage,
     showLoadingInterstitial,
+    siteCatalogSummary,
     stage,
   } = useCatalogSummaryContext();
 
@@ -299,7 +299,7 @@ function CatalogMessage({
           {MessageComponent && (
             <MessageComponent
               key={contentStage}
-              {...catalogSummary}
+              {...siteCatalogSummary}
               customerServiceNumber={customerServiceNumber}
               setStage={setStage}
               // used only by top picks

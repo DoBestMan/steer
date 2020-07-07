@@ -1,4 +1,3 @@
-import { Cars } from '~/components/global/Car/Car.enums';
 import Image from '~/components/global/Image/Image';
 import { useCatalogSummaryContext } from '~/context/CatalogSummary.context';
 import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
@@ -20,25 +19,23 @@ import VehicleContainer from './components/VehicleContainer';
 
 interface Props {
   exploreMore: () => void;
-  testCarId: Cars;
 }
 
-function CatalogSummary({ exploreMore, testCarId }: Props) {
+function CatalogSummary({ exploreMore }: Props) {
   const {
-    catalogSummary,
     contentStage,
     showLoadingInterstitial,
+    siteCatalogSummary,
     stage,
   } = useCatalogSummaryContext();
   const { customerServiceNumber } = useSiteGlobalsContext();
 
   const { bk } = useBreakpoints();
 
-  const { siteCatalogSummaryMeta } = catalogSummary;
+  const { siteCatalogSummaryMeta } = siteCatalogSummary;
 
   const sceneryType = siteCatalogSummaryMeta?.sceneryType || DEFAULT_SCENERY;
-  const carId =
-    testCarId || siteCatalogSummaryMeta?.vehicleType || DEFAULT_VEHICLE;
+  const carId = siteCatalogSummaryMeta?.vehicleType || DEFAULT_VEHICLE;
   const image = siteCatalogSummaryMeta?.tireImage || DEFAULT_IMAGE;
 
   return (

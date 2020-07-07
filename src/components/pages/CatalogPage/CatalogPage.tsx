@@ -2,7 +2,6 @@ import { ThemeProvider } from 'emotion-theming';
 import { useRouter } from 'next/router';
 import { useRef } from 'react';
 
-import { Cars } from '~/components/global/Car/Car.enums';
 import { useCatalogPageContext } from '~/context/CatalogPage.context';
 import { CatalogSummaryContextProvider } from '~/context/CatalogSummary.context';
 import { SiteCatalogProducts } from '~/data/models/SiteCatalogProducts';
@@ -23,7 +22,7 @@ interface Props {
   handleUpdateResults: (filters: Record<string, string>) => void;
   hasTopPicks: boolean;
   siteCatalogProducts: SiteCatalogProducts;
-  siteCatalogSummary?: SiteCatalogSummary;
+  siteCatalogSummary: SiteCatalogSummary;
 }
 
 function CatalogPage({
@@ -39,7 +38,7 @@ function CatalogPage({
 
   const { isAdvancedView, showCatalogGrid } = useCatalogPageContext();
 
-  const { carId, flow } = router.query;
+  const { flow } = router.query;
 
   // TODO: Fake data waiting for mock data: SiteCatalogSummary response
   let catalogSummaryResponse = vehiclesNoOeWithSize;
@@ -67,15 +66,10 @@ function CatalogPage({
       <div css={styles.root}>
         {hasTopPicks && (
           <CatalogSummaryContextProvider
-            catalogSummaryResponse={
-              siteCatalogSummary || catalogSummaryResponse
-            }
-            isSearch={comesFromSearch}
+            isLocalDataByDefault={comesFromSearch}
+            siteCatalogSummary={siteCatalogSummary}
           >
-            <CatalogSummary
-              testCarId={carId as Cars}
-              exploreMore={exploreMore}
-            />
+            <CatalogSummary exploreMore={exploreMore} />
           </CatalogSummaryContextProvider>
         )}
         {/* Render when there's result, and not coming from search */}

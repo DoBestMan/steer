@@ -5,6 +5,7 @@ import {
   emptyCatalogProducts,
   emptyHandleUpdateResults,
 } from '~/components/pages/CatalogPage/CatalogPage.mocks';
+import { vehiclesNoOeWithSize } from '~/components/pages/CatalogPage/CatalogSummary/CatalogSummary.mocks';
 // import { COLORS } from '~/lib/constants';
 import { isRouteDiameterFormat } from '~/lib/utils/routes';
 
@@ -29,6 +30,7 @@ function TireCategory() {
     <CatalogPageContainer
       handleUpdateResults={emptyHandleUpdateResults}
       siteCatalogProducts={emptyCatalogProducts}
+      siteCatalogSummary={vehiclesNoOeWithSize}
       hasTopPicks={false}
     />
   );

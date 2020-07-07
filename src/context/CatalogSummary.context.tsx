@@ -12,32 +12,33 @@ async function pause(pauseTime = 2000) {
 }
 
 export interface CatalogSummaryContextProps {
-  catalogSummary: SiteCatalogSummary;
   contentStage: STAGES;
-  isSearch: boolean;
+  isLocalDataByDefault: boolean;
   setNewContent(): void;
   setStage(stage: STAGES): void;
   showLoadingInterstitial: boolean;
+  siteCatalogSummary: SiteCatalogSummary;
   stage: STAGES;
 }
 
 const CatalogSummaryContext = createContext<CatalogSummaryContextProps>();
 
 interface SetupProps {
-  catalogSummaryResponse: SiteCatalogSummary;
-  isSearch: boolean;
+  isLocalDataByDefault: boolean;
+  siteCatalogSummary: SiteCatalogSummary;
 }
 
 // TODO: Exported for testing only
 export function useContextSetup({
-  catalogSummaryResponse,
-  isSearch,
+  siteCatalogSummary,
+  isLocalDataByDefault,
 }: SetupProps) {
   const totalResult =
-    catalogSummaryResponse.siteCatalogSummaryMeta?.totalResults || 0;
-  const hasResults = totalResult > 0;
-  const mustShowPrompt =
-    catalogSummaryResponse.siteCatalogSummaryPrompt?.mustShow;
+    siteCatalogSummary.siteCatalogSummaryMeta?.totalResults || 0;
+  const mustShowPrompt = siteCatalogSummary.siteCatalogSummaryPrompt?.mustShow;
+  const isDisambiguation = !!siteCatalogSummary.siteCatalogSummaryPrompt
+    ?.ctaList?.length;
+  const hasResults = totalResult > 0 || isDisambiguation;
 
   /**
    * The `stage` state is used to determine which content to display.
@@ -51,10 +52,14 @@ export function useContextSetup({
   // If deep-linking in, or the local data has no results, we skip
   // the loading interstitial and show the relevant stage without
   // CSS transitions.
-  const [showLoadingInterstitial] = useState<boolean>(isSearch && hasResults);
+  const [showLoadingInterstitial] = useState<boolean>(
+    isLocalDataByDefault && hasResults,
+  );
 
   // If local data does not exist, show loading indicator
-  const [isLoadingData, setIsLoadingData] = useState<boolean>(!isSearch);
+  const [isLoadingData, setIsLoadingData] = useState<boolean>(
+    !isLocalDataByDefault,
+  );
 
   /**
    * There will always be a LOADING stage when the user lands on the
@@ -125,9 +130,8 @@ export function useContextSetup({
   }, [mustShowPrompt, stage]);
 
   return {
-    catalogSummary: catalogSummaryResponse,
     contentStage,
-    isSearch,
+    isLocalDataByDefault,
     setNewContent: () => {
       // Called after the previous content message exit transition.
       // Brings `contentStage` back in alignment with `stage`.
@@ -135,22 +139,23 @@ export function useContextSetup({
     },
     setStage,
     showLoadingInterstitial,
+    siteCatalogSummary,
     stage,
   };
 }
 
-export function CatalogSummaryContextProvider({
-  catalogSummaryResponse,
-  children,
-  isSearch,
-}: {
-  catalogSummaryResponse: SiteCatalogSummary;
+interface ProviderProps extends SetupProps {
   children: ReactNode;
-  isSearch: boolean;
-}) {
+}
+
+export function CatalogSummaryContextProvider({
+  children,
+  isLocalDataByDefault,
+  siteCatalogSummary,
+}: ProviderProps) {
   const value = useContextSetup({
-    catalogSummaryResponse,
-    isSearch,
+    isLocalDataByDefault,
+    siteCatalogSummary,
   });
   return (
     <CatalogSummaryContext.Provider value={value}>
