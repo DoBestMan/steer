@@ -1,4 +1,4 @@
-import { COLORS, SPACING, StylesMap } from '~/lib/constants';
+import { COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
@@ -13,11 +13,13 @@ const styles: StylesMap = {
     fontWeight: 'normal',
   },
   originalValue: [
-    typography.smallCopy,
+    typography.smallCopyTight,
     {
       marginLeft: SPACING.SIZE_05,
       textDecoration: 'line-through',
       color: COLORS.LIGHT.GRAY_70,
+
+      [MQ.XL]: typography.bodyCopyTight,
     },
   ],
   originalValuePrefixed: {

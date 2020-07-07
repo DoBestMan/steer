@@ -1,13 +1,11 @@
-import { CSSObject } from '@emotion/core';
-
-import { BORDERS, MQ, SPACING } from '~/lib/constants';
+import { BORDERS, MQ, SPACING, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const CONSTANTS = {
   HEADER_MAX_WIDTH: 140,
 };
 
-const styles: CSSObject = {
+const styles: StylesMap = {
   crossSellWrapper: [
     typography.bodyCopy,
     {
@@ -44,6 +42,7 @@ const styles: CSSObject = {
     [MQ.L]: {
       textAlign: 'left',
       marginTop: SPACING.SIZE_40,
+      maxWidth: '100%',
     },
   },
   promoTags: {

@@ -18,20 +18,13 @@ function Rating({ rating }: Pick<ProductInfoProps, 'rating'>) {
         reviews: rating.quantity,
       })}
     >
-      <>
-        <span aria-hidden>
-          <Stars
-            isSmall
-            bgColor={COLORS.LIGHT.GRAY_20}
-            color={COLORS.GLOBAL.BLACK}
-            number={rating.value}
-          />
-        </span>
-        <span css={styles.ratingValue} aria-hidden>
-          {rating.value}{' '}
-          <span css={styles.ratingQuantity}>({rating.quantity})</span>
-        </span>
-      </>
+      <span aria-hidden>
+        <Stars isSmall color={COLORS.GLOBAL.BLACK} number={rating.value} />
+      </span>
+      <span css={styles.ratingValue} aria-hidden>
+        {rating.value}
+        <span css={styles.ratingQuantity}>({rating.quantity})</span>
+      </span>
     </div>
   );
 }
