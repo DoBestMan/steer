@@ -1,4 +1,4 @@
-import { ReactNode, useCallback, useState } from 'react';
+import { ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 
 import { Results } from '~/components/modules/Search/Search.types';
 import { SiteSearchResultGroup } from '~/data/models/SiteSearchResultGroup';
@@ -71,21 +71,39 @@ function useContextSetup() {
   []);
 
   const [searchResults, setSearchResults] = useState<Results>(emptyResult);
+  const isLoadingResults = useRef(false);
+  const abortController = useRef<AbortController | null>(null);
 
-  const searchQuery = useCallback(async function ({
-    additionalQueryText,
-    queryText,
-    queryType,
-  }: SearchDataParams) {
-    const apiSearchResults = await apiGetSearchTypeahead({
+  useEffect(() => {
+    abortController.current = new AbortController();
+  }, []);
+
+  const searchQuery = useCallback(
+    async function ({
       additionalQueryText,
       queryText,
       queryType,
-    });
+    }: SearchDataParams) {
+      if (isLoadingResults.current) {
+        abortController.current?.abort();
+        abortController.current = new AbortController();
+        isLoadingResults.current = false;
+      }
 
-    setSearchResults(apiSearchResults);
-  },
-  []);
+      isLoadingResults.current = true;
+
+      const apiSearchResults = await apiGetSearchTypeahead({
+        additionalQueryText,
+        queryText,
+        queryType,
+        signal: abortController.current?.signal,
+      });
+
+      setSearchResults(apiSearchResults);
+      isLoadingResults.current = false;
+    },
+    [isLoadingResults],
+  );
 
   const clearSearchResults = useCallback(
     function () {

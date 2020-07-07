@@ -43,6 +43,7 @@ export async function fetch<T, U = never>({
   method,
   params = {},
   query = {},
+  signal,
 }: {
   authorizationFunctionRetriesLeft?: number;
   endpoint: string;
@@ -54,6 +55,7 @@ export async function fetch<T, U = never>({
   method: RequestInit['method'];
   params?: Record<string, string>;
   query?: Record<string, string>;
+  signal?: AbortSignal;
 }): Promise<T> {
   const global = typeof globalThis !== undefined ? globalThis : window;
   if (urlBase === '') {
@@ -105,6 +107,7 @@ export async function fetch<T, U = never>({
       body,
       headers,
       method,
+      signal,
     });
   } catch (error) {
     console.error(error);
@@ -141,6 +144,7 @@ export async function fetch<T, U = never>({
         method,
         params,
         query,
+        signal,
       });
     }
 
