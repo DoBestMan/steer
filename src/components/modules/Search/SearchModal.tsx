@@ -41,6 +41,11 @@ function SearchModal() {
     }
   }, [contentRef, isSearchOpen]);
 
+  const handleCloseSearch = () => {
+    clearSearchResults();
+    toggleIsSearchOpen();
+  };
+
   useEffect(() => {
     requestAnimationFrame(toggleDisableScroll);
   }, [toggleDisableScroll]);
@@ -62,7 +67,7 @@ function SearchModal() {
         deletePastSearches={deletePastSearches}
         forwardedRef={contentRef}
         isCustomerServiceEnabled={customerServiceEnabled}
-        onCloseSearchClick={toggleIsSearchOpen}
+        onCloseSearchClick={handleCloseSearch}
         onSearchQuery={searchQuery}
         pastSearches={pastSearches}
         results={searchResults}
