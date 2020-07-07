@@ -35,11 +35,6 @@ export function Stars() {
     >
       <StarsComponent
         color={color}
-        bgColor={
-          color === COLORS.GLOBAL.ORANGE
-            ? COLORS.DARK.GRAY_40
-            : COLORS.LIGHT.GRAY_20
-        }
         isSmall={boolean('Small', false)}
         number={number('Number', 3.2, starOptions)}
       />

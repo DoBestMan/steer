@@ -7,6 +7,7 @@ export const COLORS = {
   },
   GLOBAL: {
     BLACK: '#181818',
+    GRAY_50: 'rgba(165, 165, 165, 0.5)',
     ORANGE: '#FE5F10',
     RED: '#EE3131',
     WHITE: '#FFF',

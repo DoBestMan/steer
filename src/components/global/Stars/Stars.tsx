@@ -16,7 +16,7 @@ export interface Props {
 }
 
 function Stars({
-  bgColor = COLORS.LIGHT.GRAY_20,
+  bgColor = COLORS.GLOBAL.GRAY_50,
   number,
   color = COLORS.GLOBAL.ORANGE,
   isSmall,
