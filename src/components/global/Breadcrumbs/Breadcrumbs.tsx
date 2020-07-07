@@ -4,6 +4,7 @@ import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Link from '~/components/global/Link/Link';
 import { footerLink } from '~/components/global/Link/Link.styles';
 import { THEME } from '~/lib/constants';
+import { typography } from '~/styles/typography.styles';
 
 import styles, { themeStyles } from './Breadcrumbs.styles';
 
@@ -34,7 +35,11 @@ function Breadcrumbs({ navigationItems, theme = THEME.LIGHT }: Props) {
             <li key={`${item.label}_${idx}`} css={styles.item}>
               <Link
                 href={item.url}
-                css={[footerLink, themeStyles[theme]]}
+                css={[
+                  footerLink,
+                  themeStyles[theme],
+                  typography.smallCopyTight,
+                ]}
                 theme={theme === THEME.DARK ? THEME.DARK : THEME.LIGHT}
                 aria-current={item.currentPath ? 'page' : undefined}
               >
