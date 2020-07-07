@@ -7,7 +7,7 @@ import { THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { uiJSX } from '~/lib/utils/ui-dictionary-jsx';
 
-import styles from './TrackingResult.styles';
+import styles from './OrderTrackingResult.styles';
 
 export enum OrderStatus {
   CANCELLED = 'cancelled',

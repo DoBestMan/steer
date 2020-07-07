@@ -1,6 +1,6 @@
 import { boolean, date, select, text } from '@storybook/addon-knobs';
 
-import { OrderStatus } from '../TrackingResult.utils';
+import { OrderStatus } from '../OrderTrackingResult.utils';
 import OrderHeader from './OrderHeader';
 
 export default {

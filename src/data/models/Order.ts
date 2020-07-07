@@ -1,4 +1,4 @@
-import { OrderStatus } from '~/components/pages/TrackingResult/TrackingResult.utils';
+import { OrderStatus } from '~/components/pages/OrderTrackingResult/OrderTrackingResult.utils';
 
 import { OrderProduct } from './OrderProduct';
 import { SiteLink } from './SiteLink';

@@ -5,9 +5,9 @@ import Scenery from '~/components/global/Scenery/Scenery';
 import { Sceneries } from '~/components/global/Scenery/Scenery.types';
 import { COLORS } from '~/lib/constants';
 
-import styles from './TrackingPage.styles';
+import styles from './OrderTrackingPage.styles';
 
-function TrackingPageIllustration() {
+function OrderTrackingPageIllustration() {
   return (
     <GridItem
       css={styles.illustration}
@@ -26,4 +26,4 @@ function TrackingPageIllustration() {
   );
 }
 
-export default TrackingPageIllustration;
+export default OrderTrackingPageIllustration;

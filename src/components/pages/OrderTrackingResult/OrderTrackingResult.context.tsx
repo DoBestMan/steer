@@ -9,14 +9,14 @@ interface Props {
   children: ReactNode;
 }
 
-export interface TrackingContextProps {
+export interface OrderTrackingContextProps {
   getOrderTracking: ({ orderId, zip }: OrderTrackingInput) => void;
   hasError: boolean;
   isLoadingOrder: boolean;
   order: Order | null;
 }
 
-const TrackingContext = createContext<TrackingContextProps>();
+const OrderTrackingContext = createContext<OrderTrackingContextProps>();
 
 function useContextSetup() {
   const [order, setOrder] = useState<Order | null>(null);
@@ -49,14 +49,14 @@ function useContextSetup() {
   };
 }
 
-export function TrackingContextProvider({ children }: Props) {
+export function OrderTrackingContextProvider({ children }: Props) {
   const value = useContextSetup();
 
   return (
-    <TrackingContext.Provider value={value}>
+    <OrderTrackingContext.Provider value={value}>
       {children}
-    </TrackingContext.Provider>
+    </OrderTrackingContext.Provider>
   );
 }
 
-export const useTrackingContext = TrackingContext.useContext;
+export const useOrderTrackingContext = OrderTrackingContext.useContext;

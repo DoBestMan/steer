@@ -6,10 +6,10 @@ import { OrderTrackingInput } from '~/data/models/OrderTrackingInput';
 import { ROUTE_MAP, ROUTES } from '~/lib/constants';
 
 import OrderLoading from './OrderLoading/OrderLoading';
-import TrackingResult from './TrackingResult';
-import { useTrackingContext } from './TrackingResult.context';
+import OrderTrackingResult from './OrderTrackingResult';
+import { useOrderTrackingContext } from './OrderTrackingResult.context';
 
-function TrackingResultContainer() {
+function OrderTrackingResultContainer() {
   const {
     customerServiceEnabled,
     customerServiceNumber,
@@ -23,7 +23,7 @@ function TrackingResultContainer() {
     hasError,
     isLoadingOrder,
     order,
-  } = useTrackingContext();
+  } = useOrderTrackingContext();
 
   // Get the initial order information when the page loads
   useEffect(() => {
@@ -42,7 +42,7 @@ function TrackingResultContainer() {
   }
 
   return (
-    <TrackingResult
+    <OrderTrackingResult
       {...order}
       isCustomerServiceEnabled={customerServiceEnabled}
       customerServiceNumber={customerServiceNumber}
@@ -50,4 +50,4 @@ function TrackingResultContainer() {
   );
 }
 
-export default TrackingResultContainer;
+export default OrderTrackingResultContainer;

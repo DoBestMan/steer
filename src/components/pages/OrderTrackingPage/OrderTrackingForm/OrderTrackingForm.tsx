@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 import Button from '~/components/global/Button/Button';
 import Input from '~/components/global/Input/Input';
-import { useTrackingContext } from '~/components/pages/TrackingResult/TrackingResult.context';
+import { useOrderTrackingContext } from '~/components/pages/OrderTrackingResult/OrderTrackingResult.context';
 import { INPUT_TYPE } from '~/lib/constants';
 import { ROUTE_MAP, ROUTES } from '~/lib/constants/routes';
 import { onlyNumbers } from '~/lib/utils/regex';
@@ -18,7 +18,7 @@ function OrderTrackingForm() {
     isLoadingOrder,
     hasError,
     order,
-  } = useTrackingContext();
+  } = useOrderTrackingContext();
   const [orderId, setOrderId] = useState('');
   const [shippingZip, setShippingZip] = useState('');
   const [isFormValid, setIsFormValid] = useState(false);

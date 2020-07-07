@@ -1,16 +1,16 @@
 import { boolean, date, number, select, text } from '@storybook/addon-knobs';
 
-import TrackingResult from './TrackingResult';
+import OrderTrackingResult from './OrderTrackingResult';
 import {
   ORDER_ADDRESS,
   ORDER_ITEMS,
   ORDER_TRACKING_LINK,
-} from './TrackingResult.mocks';
-import { OrderStatus } from './TrackingResult.utils';
+} from './OrderTrackingResult.mocks';
+import { OrderStatus } from './OrderTrackingResult.utils';
 
 export default {
-  component: TrackingResult,
-  title: 'Tracking/TrackingResult',
+  component: OrderTrackingResult,
+  title: 'OrderTracking/OrderTrackingResult',
 };
 
 const customerServiceNumber = {
@@ -18,7 +18,7 @@ const customerServiceNumber = {
   value: '18884100604',
 };
 
-export function TrackingResultWithKnobs() {
+export function OrderTrackingResultWithKnobs() {
   const orderId = text('Order ID', '3170272');
   const status = select('Order status', OrderStatus, OrderStatus.DELIVERED);
   const deliveryExpected = text('Delivery Expected Label', 'June 6 - June 12');
@@ -32,7 +32,7 @@ export function TrackingResultWithKnobs() {
   const isBusinessHours = boolean('Is Business Hours', true);
 
   return (
-    <TrackingResult
+    <OrderTrackingResult
       createdAt={new Date(createdAt)}
       customerServiceNumber={customerServiceNumber}
       deliveredAt={new Date(deliveredAt)}

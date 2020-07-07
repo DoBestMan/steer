@@ -5,7 +5,7 @@ import {
   getOrderStatusDate,
   getOrderStatusLabel,
   OrderStatus,
-} from '../TrackingResult.utils';
+} from '../OrderTrackingResult.utils';
 import styles from './OrderHeader.styles';
 
 interface Props {

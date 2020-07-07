@@ -1,11 +1,11 @@
 import { date, select } from '@storybook/addon-knobs';
 
-import { ORDER_TRACKING_LINK } from '../TrackingResult.mocks';
+import { ORDER_TRACKING_LINK } from '../OrderTrackingResult.mocks';
 import {
   getOrderSteps,
   OrderStatus,
   orderStatusHierarchy,
-} from '../TrackingResult.utils';
+} from '../OrderTrackingResult.utils';
 import OrderStep from './OrderStep';
 
 export default {

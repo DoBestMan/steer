@@ -1,27 +1,27 @@
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
-import TrackingPageIllustration from '~/components/pages/TrackingPage/TrackingPageIllustration';
+import OrderTrackingPageIllustration from '~/components/pages/OrderTrackingPage/OrderTrackingPageIllustration';
 import { Order } from '~/data/models/Order';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import OrderHeader from './OrderHeader/OrderHeader';
 import OrderItem from './OrderItem/OrderItem';
 import OrderStep from './OrderStep/OrderStep';
-import styles from './TrackingResult.styles';
+import styles from './OrderTrackingResult.styles';
 import {
   getAdditionalInfoLinks,
   getOrderSteps,
   orderStatusHierarchy,
-} from './TrackingResult.utils';
+} from './OrderTrackingResult.utils';
 
 interface Props {
   customerServiceNumber: { display: string; value: string };
   isCustomerServiceEnabled: boolean;
 }
 
-type TrackingResultProps = Order & Props;
+type OrderTrackingResultProps = Order & Props;
 
-function TrackingResult({
+function OrderTrackingResult({
   createdAt,
   customerServiceNumber,
   deliveredAt,
@@ -33,7 +33,7 @@ function TrackingResult({
   status,
   trackingLabel,
   trackingLink,
-}: TrackingResultProps) {
+}: OrderTrackingResultProps) {
   const address = `${line1} ${line2} ${cityName} ${stateAbbr} ${zip}`;
 
   const orderStatusHierarchyValue = orderStatusHierarchy[status];
@@ -104,9 +104,9 @@ function TrackingResult({
         </div>
       </GridItem>
 
-      <TrackingPageIllustration />
+      <OrderTrackingPageIllustration />
     </Grid>
   );
 }
 
-export default TrackingResult;
+export default OrderTrackingResult;

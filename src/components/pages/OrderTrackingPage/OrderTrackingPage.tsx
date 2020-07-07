@@ -4,10 +4,10 @@ import { ui } from '~/lib/utils/ui-dictionary';
 import { uiJSX } from '~/lib/utils/ui-dictionary-jsx';
 
 import OrderTrackingForm from './OrderTrackingForm/OrderTrackingForm';
-import styles from './TrackingPage.styles';
-import TrackingPageIllustration from './TrackingPageIllustration';
+import styles from './OrderTrackingPage.styles';
+import OrderTrackingPageIllustration from './OrderTrackingPageIllustration';
 
-function TrackingPage() {
+function OrderTrackingPage() {
   const handleLoginClick = () => {
     // TODO open subnav to account modal
   };
@@ -29,9 +29,9 @@ function TrackingPage() {
       <GridItem>
         <OrderTrackingForm />
       </GridItem>
-      <TrackingPageIllustration />
+      <OrderTrackingPageIllustration />
     </Grid>
   );
 }
 
-export default TrackingPage;
+export default OrderTrackingPage;
