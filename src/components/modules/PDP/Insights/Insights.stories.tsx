@@ -1,16 +1,24 @@
 import { action } from '@storybook/addon-actions';
-import { boolean, text } from '@storybook/addon-knobs';
+import { boolean, select, text } from '@storybook/addon-knobs';
+import { useState } from 'react';
 
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import { SiteProductInsightItem } from '~/data/models/SiteProductInsightItem';
 
 import Insights from './Insights';
+import SizeCheckModal from './SizeCheckModal';
 
 export default {
   component: Insights,
   title: 'PDP/Insights',
 };
+
+enum SIZE_CHECK_STATES {
+  CHANGE_SIZE = 'changeSize',
+  SELECT_TIRE = 'selectTire',
+  SIZE_FITS = 'sizeFits',
+}
 
 export function InsightsWithKnobs() {
   const configGroupId = 'Options';
@@ -36,12 +44,7 @@ export function InsightsWithKnobs() {
   const fitVehicleGroupId = 'Fits vehicle';
   const vehicle = text(
     'Vehicle name',
-    'Honda Civic 2018 EX-L',
-    fitVehicleGroupId,
-  );
-  const doesItFit = boolean(
-    'Does it fit to this vehicle?',
-    true,
+    'Honda Civic 2018 EX‑L',
     fitVehicleGroupId,
   );
 
@@ -124,8 +127,67 @@ export function InsightsWithKnobs() {
   ].filter(Boolean) as SiteProductInsightItem[];
 
   const handleOpenRebate = action('click-rebate-button');
-  const handleChangeVehicle = action('click-fits-button');
   const handleChangeLocation = action('click-free-shipping-button');
+  const vehicleModel = text('Vehicle model', 'Civic', fitVehicleGroupId);
+  const handleOpenSearch = action('click-fits-button');
+  const modalAction = action('click-modal-action-button');
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const onModalClose = function () {
+    setIsModalOpen(false);
+  };
+
+  const sizeCheckState = select(
+    'Modal state',
+    SIZE_CHECK_STATES,
+    SIZE_CHECK_STATES['SIZE_FITS'],
+    fitVehicleGroupId,
+  );
+
+  const sizeCheckUpdateItems = {
+    [SIZE_CHECK_STATES.CHANGE_SIZE]: [
+      {
+        label: 'View tires that fit',
+        action: modalAction,
+      },
+      {
+        label: 'Select another vehicle',
+        action: modalAction,
+      },
+    ],
+    [SIZE_CHECK_STATES.SELECT_TIRE]: [
+      {
+        label: 'Change to the size recommended by Honda',
+        action: modalAction,
+      },
+      {
+        label: 'Select another vehicle',
+        action: modalAction,
+      },
+      {
+        label: 'Unselect vehicle',
+        action: modalAction,
+      },
+    ],
+    [SIZE_CHECK_STATES.SIZE_FITS]: [
+      {
+        label: 'Select another vehicle',
+        action: modalAction,
+      },
+      {
+        label: 'Unselect vehicle',
+        action: modalAction,
+      },
+    ],
+  };
+
+  function handleChangeVehicle() {
+    if (!vehicle) {
+      handleOpenSearch();
+    } else {
+      setIsModalOpen(true);
+    }
+  }
 
   return (
     <>
@@ -133,7 +195,7 @@ export function InsightsWithKnobs() {
         insightItems={insightItems}
         rebateLabel={rebateLabel}
         vehicle={vehicle}
-        doesItFit={doesItFit}
+        doesItFit={sizeCheckState === SIZE_CHECK_STATES['SIZE_FITS']}
         delivery={delivery}
         techSpecsAnchor="SiteProductSpecs"
         handleOpenRebate={handleOpenRebate}
@@ -155,6 +217,15 @@ export function InsightsWithKnobs() {
           <Icon name={ICONS.ARROW_UP} />
         </a>
       </section>
+
+      <SizeCheckModal
+        actions={sizeCheckUpdateItems[sizeCheckState]}
+        hasInfoModule={sizeCheckState !== SIZE_CHECK_STATES['SIZE_FITS']}
+        isOpen={isModalOpen}
+        onClose={onModalClose}
+        vehicle={vehicle}
+        vehicleModel={vehicleModel}
+      />
     </>
   );
 }

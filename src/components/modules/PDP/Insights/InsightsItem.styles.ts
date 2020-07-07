@@ -1,4 +1,5 @@
 import {
+  BORDERS,
   COLORS,
   EASING,
   GAP_COLUMNS,
@@ -43,6 +44,19 @@ const styles: StylesMap = {
   containerHighlight: {
     backgroundColor: COLORS.ORANGE.SHADE_15_SOLID,
   },
+  eyebrow: [
+    typography.eyebrow,
+
+    {
+      [MQ.L]: [
+        typography.secondaryHeadline,
+        {
+          display: 'block',
+          marginTop: SPACING.SIZE_50,
+        },
+      ],
+    },
+  ],
   icon: {
     alignItems: 'center',
     display: 'flex',
@@ -71,6 +85,25 @@ const styles: StylesMap = {
       whiteSpace: 'pre-line',
     },
   ],
+  modalButton: [
+    typography.filterItemLabel,
+    {
+      padding: `${SPACING.SIZE_10}px 0`,
+      textAlign: 'left',
+    },
+  ],
+  modalDivider: {
+    borderBottom: BORDERS.SOLID_GRAY_20_1PX,
+    display: 'block',
+    marginBottom: SPACING.SIZE_20,
+    paddingTop: SPACING.SIZE_30,
+  },
+  modalListItem: [typography.filterItemLabel],
+  modalWithEyebrow: {
+    [MQ.L]: {
+      paddingTop: SPACING.SIZE_10,
+    },
+  },
 };
 
 export default styles;
