@@ -4,6 +4,7 @@ import React, { ReactNode } from 'react';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Link from '~/components/global/Link/Link';
 import Toggle from '~/components/global/Toggle/Toggle';
+import { useCatalogPageContext } from '~/context/CatalogPage.context';
 import { LINK_ICON_POSITION } from '~/lib/constants';
 import { scrollTo } from '~/lib/helpers/scroll';
 import { ui } from '~/lib/utils/ui-dictionary';
@@ -12,24 +13,25 @@ import styles from '../Header.styles';
 
 interface Props {
   hasTopPicks: boolean;
-  isAdvancedView?: boolean;
   isInternal?: boolean;
   location: string;
-  onToggleView: () => void;
   sizeList?: string[];
   title: string | ReactNode;
 }
 
 export default function HeaderInfo({
   hasTopPicks,
-  isAdvancedView = false,
   isInternal = false,
   location,
-  onToggleView,
   sizeList = [],
   title,
 }: Props) {
   const { header } = useTheme();
+  const {
+    handleUpdateResults,
+    setIsAdvancedView,
+    isAdvancedView,
+  } = useCatalogPageContext();
 
   const backToTopPicks = () => {
     scrollTo(0, 1);
@@ -73,6 +75,16 @@ export default function HeaderInfo({
     secondItem = locationEl;
     thirdItem = null;
   }
+
+  const onToggleView = async () => {
+    setIsAdvancedView(!isAdvancedView);
+    if (!isAdvancedView) {
+      await handleUpdateResults({ skipGroups: 'true' });
+    } else {
+      await handleUpdateResults({});
+    }
+  };
+
   return (
     <>
       <div css={styles.header}>

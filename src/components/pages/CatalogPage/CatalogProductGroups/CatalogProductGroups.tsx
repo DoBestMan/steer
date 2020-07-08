@@ -1,4 +1,5 @@
 import ProductGroupList from '~/components/global/ProductGroupList/ProductGroupList';
+import ProductGroupListPlaceholder from '~/components/global/ProductGroupList/ProductGroupListPlaceholder';
 import { SiteCatalogProductGroupList } from '~/data/models/SiteCatalogProductGroupList';
 
 import styles from './CatalogProductGroups.styles';
@@ -9,16 +10,21 @@ interface Props {
 }
 
 function CatalogProductGroups({ productGroupList, isLoading }: Props) {
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
   return (
     <div css={styles.root}>
-      {productGroupList.map((group) => (
-        <div key={group.id} css={styles.group}>
-          <ProductGroupList {...group} />
-        </div>
-      ))}
+      {isLoading
+        ? Array(3)
+            .fill({})
+            .map((_, i) => (
+              <div css={styles.group} key={i}>
+                <ProductGroupListPlaceholder />
+              </div>
+            ))
+        : productGroupList.map((group) => (
+            <div key={group.id} css={styles.group}>
+              <ProductGroupList {...group} />
+            </div>
+          ))}
     </div>
   );
 }

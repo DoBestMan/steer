@@ -30,12 +30,7 @@ function CatalogGrid({
   siteCatalogSummary,
   siteCatalogProducts,
 }: Props) {
-  const {
-    handleUpdateResults,
-    setIsAdvancedView,
-    isAdvancedView,
-    isLoading,
-  } = useCatalogPageContext();
+  const { isAdvancedView, isLoading } = useCatalogPageContext();
   const catalogGrid = useRef<HTMLDivElement | null>(null);
 
   // Uses a state instead of ref to avoid forwarding refs
@@ -100,15 +95,6 @@ function CatalogGrid({
     };
   }, [catalogGridHeaderContainer, catalogGridOffsetTop, hasTopPicks]);
 
-  const toggleView = async () => {
-    setIsAdvancedView(!isAdvancedView);
-    if (!isAdvancedView) {
-      await handleUpdateResults({ skipGroups: 'true' });
-    } else {
-      await handleUpdateResults({});
-    }
-  };
-
   const isGroupedProducts =
     siteCatalogProducts.siteCatalogProductsResultList[0]?.type ===
     SiteCatalogProductGroupItemEnum.SiteCatalogProductGroupItem;
@@ -118,9 +104,7 @@ function CatalogGrid({
       <HeaderContainer
         sizeList={siteCatalogSummary?.siteCatalogSummaryMeta?.sizeList}
         hasTopPicks={hasTopPicks}
-        toggleView={toggleView}
         siteCatalogProducts={siteCatalogProducts}
-        isAdvancedView={isAdvancedView}
       />
       {isGroupedProducts ? (
         <CatalogProductGroups

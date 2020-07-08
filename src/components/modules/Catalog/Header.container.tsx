@@ -6,19 +6,15 @@ import Header from './Header';
 
 interface Props {
   hasTopPicks: boolean;
-  isAdvancedView: boolean;
   isInternal?: boolean;
   siteCatalogProducts: SiteCatalogProducts;
   sizeList?: string[];
-  toggleView: () => void;
 }
 
 export default function HeaderContainer({
   hasTopPicks,
-  isAdvancedView,
   siteCatalogProducts,
   sizeList,
-  toggleView,
 }: Props) {
   const { locationString } = useUserPersonalizationContext();
   return (
@@ -28,10 +24,8 @@ export default function HeaderContainer({
       <Header
         siteCatalogProducts={siteCatalogProducts}
         hasTopPicks={hasTopPicks}
-        isAdvancedView={isAdvancedView}
         isInternal={false}
         sizeList={sizeList}
-        onToggleView={toggleView}
         location={locationString}
       />
     </FiltersContextProvider>

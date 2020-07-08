@@ -1,4 +1,5 @@
 import AdvancedListing from '~/components/modules/Catalog/AdvancedListing/AdvancedListing';
+import AdvancedListingPlaceholder from '~/components/modules/Catalog/AdvancedListing/AdvancedListingPlaceholder';
 import ProductGrid from '~/components/modules/Catalog/ProductGrid/ProductGrid';
 import { SiteCatalogProductItem } from '~/data/models/SiteCatalogProductItem';
 
@@ -11,19 +12,26 @@ interface Props {
 }
 
 function CatalogProductGrid({ productList, isAdvancedView, isLoading }: Props) {
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
   return (
     <div css={styles.root}>
       {isAdvancedView ? (
-        productList.map((product, i) => (
-          <div css={styles.advancedListing} key={`${product.name}-${i}`}>
-            <AdvancedListing {...product} />
-          </div>
-        ))
+        isLoading ? (
+          Array(4)
+            .fill({})
+            .map((_, i) => (
+              <div css={styles.advancedListing} key={i}>
+                <AdvancedListingPlaceholder />
+              </div>
+            ))
+        ) : (
+          productList.map((product, i) => (
+            <div css={styles.advancedListing} key={`${product.name}-${i}`}>
+              <AdvancedListing {...product} />
+            </div>
+          ))
+        )
       ) : (
-        <ProductGrid productList={productList} />
+        <ProductGrid isLoading={isLoading} productList={productList} />
       )}
     </div>
   );

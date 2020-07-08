@@ -45,11 +45,14 @@ const styles: StylesMap = {
   brandLabel: typography.tertiaryHeadline,
   filterItem: typography.primarySubhead,
   image: {
+    minHeight: IMAGE_SIZE.DEFAULT.S,
     width: IMAGE_SIZE.DEFAULT.S,
     [MQ.M]: {
+      minHeight: IMAGE_SIZE.DEFAULT.M,
       width: IMAGE_SIZE.DEFAULT.M,
     },
     [MQ.XL]: {
+      minHeight: IMAGE_SIZE.DEFAULT.XL,
       width: IMAGE_SIZE.DEFAULT.XL,
     },
   },

@@ -18,17 +18,14 @@ import HeaderInfo from './HeaderInfo/HeaderInfo';
 
 interface Props {
   hasTopPicks: boolean;
-  isAdvancedView?: boolean;
   isInternal?: boolean;
   location: string;
-  onToggleView: () => void;
   siteCatalogProducts: SiteCatalogProducts;
   sizeList?: string[];
 }
 
 export default function Header({
   hasTopPicks,
-  isAdvancedView = false,
   isInternal = false,
   siteCatalogProducts,
   ...rest
@@ -56,7 +53,6 @@ export default function Header({
         <div data-component={DATA_COMPONENT_LABEL}>
           <HeaderInfo
             isInternal={isInternal}
-            isAdvancedView={isAdvancedView}
             hasTopPicks={hasTopPicks}
             title={siteCatalogProducts.siteCatalogProductsMeta.title}
             {...rest}
