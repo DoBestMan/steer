@@ -73,6 +73,7 @@
       "sortBy": "Sort by",
       "priceRangeLabel": "Price Range",
       "priceRange": "{{min}} to {{max}}",
+      "reset": "Reset filters",
       "results": "{{number}} results",
       "apply": "Apply",
       "popularFilters": "Popular Filters"

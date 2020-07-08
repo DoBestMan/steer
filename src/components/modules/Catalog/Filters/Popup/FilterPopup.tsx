@@ -1,17 +1,17 @@
 import { useEffect, useRef } from 'react';
 
+import Dropdown from '~/components/global/Dropdown/Dropdown';
 import {
   SiteCatalogFilterListPresentationStyleEnum,
   SiteCatalogFilterListTypeEnum,
 } from '~/data/models/SiteCatalogFilterList';
 import { SiteCatalogFilterToggleTypeEnum } from '~/data/models/SiteCatalogFilterToggle';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
+import { ui } from '~/lib/utils/ui-dictionary';
 
 import { CatalogFilterTypes, FilterContentTypes } from '../Filter.types';
 import { useFiltersContext } from '../Filters.context';
 import { getFilterLabel } from '../Filters.utils';
-import FilterDropdown from './Dropdown';
-import FilterModal from './FilterModal';
 import { mapTypeToContent } from './FilterPopup.utils';
 
 interface Props {
@@ -72,37 +72,28 @@ export default function FilterPopup({
   };
 
   const label = getFilterLabel(filter);
-  if (
-    !(
-      filter.type === SiteCatalogFilterListTypeEnum.SiteCatalogFilterList &&
-      filter.presentationStyle ===
-        SiteCatalogFilterListPresentationStyleEnum.Large
-    ) &&
-    isLarge
-  ) {
-    return (
-      <FilterDropdown
-        isOpen={isOpen}
-        hasActionBar={hasActionBar}
-        onApplyFilters={applyFilters}
-        onResetFilters={createResetFiltersHandler(filter)}
-        onClose={onClose}
-      >
-        {mapTypeToContent[filter.type](childProps)}
-      </FilterDropdown>
-    );
-  }
+  const forceModal =
+    filter.type === SiteCatalogFilterListTypeEnum.SiteCatalogFilterList &&
+    filter.presentationStyle ===
+      SiteCatalogFilterListPresentationStyleEnum.Large;
+  const actionBar = hasActionBar
+    ? {
+        onClickPrimary: applyFilters,
+        onClickSecondary: createResetFiltersHandler(filter),
+        primaryLabel: ui('catalog.filters.apply'),
+        secondaryLabel: ui('catalog.filters.reset'),
+      }
+    : null;
 
   return (
-    <FilterModal
-      isOpen={isOpen}
-      hasActionBar={hasActionBar}
-      onApplyFilters={applyFilters}
-      onResetFilters={createResetFiltersHandler(filter)}
+    <Dropdown
+      actionBar={actionBar}
       contentLabel={label}
+      forceModal={forceModal}
+      isOpen={isOpen}
       onClose={onClose}
     >
       {mapTypeToContent[filter.type](childProps)}
-    </FilterModal>
+    </Dropdown>
   );
 }

@@ -3,10 +3,10 @@ import { useState } from 'react';
 import FilterButton from '~/components/global/Button/FilterButton';
 import FiltersCarousel from '~/components/global/FiltersCarousel/FiltersCarousel';
 import styles from '~/components/global/FiltersCarousel/FiltersCarousel.styles';
-import FilterPopup from '~/components/modules/ReviewListing/Filters/FilterPopup';
 import { THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
+import FilterPopup from './FilterPopup';
 import { FilterItem } from './Filters.types';
 
 interface Props {

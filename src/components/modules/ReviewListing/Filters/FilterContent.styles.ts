@@ -1,4 +1,4 @@
-import { COLORS, SPACING, StylesMap } from '~/lib/constants';
+import { COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
@@ -28,6 +28,10 @@ const styles: StylesMap = {
     {
       display: 'inline-block',
       marginBottom: SPACING.SIZE_40,
+
+      [MQ.L]: {
+        display: 'none',
+      },
     },
   ],
 };

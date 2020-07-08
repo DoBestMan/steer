@@ -16,13 +16,24 @@ const styles: StylesMap = {
   open: {
     display: 'block',
   },
-  actionBar: {
+  actionBarDropdown: {
     paddingBottom: ACTION_BAR_HEIGHT.SM + SPACING.SIZE_20,
+    minWidth: 300,
+
     [MQ.M]: {
       paddingBottom: ACTION_BAR_HEIGHT.MED + SPACING.SIZE_20,
     },
     [MQ.L]: {
       paddingBottom: ACTION_BAR_HEIGHT.LG + SPACING.SIZE_20,
+    },
+  },
+  actionBarModal: {
+    paddingBottom: ACTION_BAR_HEIGHT.SM,
+    [MQ.M]: {
+      paddingBottom: ACTION_BAR_HEIGHT.MED,
+    },
+    [MQ.L]: {
+      paddingBottom: ACTION_BAR_HEIGHT.LG,
     },
   },
   root: [

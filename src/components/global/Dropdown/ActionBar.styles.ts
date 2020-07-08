@@ -18,12 +18,15 @@ const styles: StylesMap = {
   open: {
     display: 'block',
   },
-  reset: [
+  secondary: [
     typography.primarySubhead,
     {
       color: COLORS.LIGHT.GRAY_70,
     },
   ],
+  primary: {
+    marginLeft: 'auto',
+  },
   root: {
     alignItems: 'center',
     background: COLORS.GLOBAL.WHITE,

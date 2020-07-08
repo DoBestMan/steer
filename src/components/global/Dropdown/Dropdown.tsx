@@ -1,33 +1,39 @@
 import { CSSProperties, ReactNode, useEffect, useRef, useState } from 'react';
 
 import FocusTrap from '~/components/global/FocusTrap/FocusTrap';
+import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { useWindowSize } from '~/hooks/useWindowSize';
 import { KEYCODES } from '~/lib/constants';
 
-import ActionBar from './ActionBar';
+import BottomCardModal from '../Modal/BottomCardModal';
+import ActionBar, { ActionBarProps } from './ActionBar';
 import styles from './Dropdown.styles';
 import { getPosition } from './Dropdown.utils';
 
 interface Props {
+  actionBar?: ActionBarProps | null;
   children: ReactNode;
-  hasActionBar: boolean;
+  contentLabel: string;
+  forceModal?: boolean;
   isOpen: boolean;
-  onApplyFilters: () => void;
   onClose: () => void;
-  onResetFilters: () => void;
 }
 
-export default function FilterDropdown({
+export default function Dropdown({
+  actionBar,
   children,
-  hasActionBar,
+  contentLabel,
+  forceModal,
   isOpen,
-  onApplyFilters,
   onClose,
-  onResetFilters,
 }: Props) {
+  const { isMobile } = useBreakpoints();
   const dropdownEl = useRef<HTMLDivElement>(null);
   const [positionStyle, setPosition] = useState<CSSProperties | null>(null);
   const { width } = useWindowSize();
+
+  const isModal = isMobile || forceModal;
+
   useEffect(() => {
     // click/mouse handlers to close dropdown, click outside + escape
     function onKeypress(e: KeyboardEvent) {
@@ -66,28 +72,36 @@ export default function FilterDropdown({
     return null;
   }
 
+  if (!isModal) {
+    return (
+      <FocusTrap active={isOpen} ref={dropdownEl}>
+        <div
+          ref={dropdownEl}
+          aria-hidden={!isOpen}
+          css={[
+            styles.root,
+            isOpen && styles.open,
+            actionBar && styles.actionBarDropdown,
+          ]}
+          style={positionStyle}
+        >
+          {/* focus trap and dropdown wrapper need to be in dom to update positioning
+          and focus but wait to render children until it's open */}
+          {isOpen && children}
+          {!!actionBar && <ActionBar {...actionBar} />}
+        </div>
+      </FocusTrap>
+    );
+  }
+
   return (
-    <FocusTrap active={isOpen} ref={dropdownEl}>
-      <div
-        ref={dropdownEl}
-        aria-hidden={!isOpen}
-        css={[
-          styles.root,
-          isOpen && styles.open,
-          hasActionBar && styles.actionBar,
-        ]}
-        style={positionStyle}
-      >
-        {/* focus trap and dropdown wrapper need to be in dom to update positioning
-        and focus but wait to render children until it's open */}
-        {isOpen && children}
-        {hasActionBar && (
-          <ActionBar
-            onResetFilters={onResetFilters}
-            onApplyFilters={onApplyFilters}
-          />
-        )}
-      </div>
-    </FocusTrap>
+    <BottomCardModal
+      contentLabel={contentLabel}
+      isOpen={isOpen}
+      onClose={onClose}
+    >
+      <div css={actionBar && styles.actionBarModal}>{children}</div>
+      {!!actionBar && <ActionBar {...actionBar} />}
+    </BottomCardModal>
   );
 }
