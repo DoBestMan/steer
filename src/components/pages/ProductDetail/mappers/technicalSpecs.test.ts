@@ -1,25 +1,8 @@
-import { siteProductMock } from './ProductDetail.mock';
+import { globalsMock, routerMock, siteProductMock } from './ProductDetail.mock';
 import { mapDataToTechnicalSpecs } from './technicalSpecs';
 
-const globalsMock = {
-  customerServiceEnabled: true,
-  customerServiceNumber: {
-    display: '(888) 123 456',
-    value: '888123456',
-  },
-  siteTheme: 'light',
-} as any;
-
-const routerMock = {
-  pathname: '/brands/[brandName]/[productLine]',
-  query: {
-    brandName: 'continental-tires',
-    productLine: 'dh2',
-  },
-} as any;
-
 describe('pages/ProductDetails/mappers/techinicalSpecs', () => {
-  it('returns parsed Technical Specs props', () => {
+  it('returns parsed technical specs props', () => {
     expect(
       mapDataToTechnicalSpecs({
         siteProduct: siteProductMock,

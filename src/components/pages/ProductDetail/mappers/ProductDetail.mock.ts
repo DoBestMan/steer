@@ -6,9 +6,28 @@ import { SiteImageNullableTypeEnum } from '~/data/models/SiteImageNullable';
 import { SiteProduct } from '~/data/models/SiteProduct';
 import { SiteProductInstallationStatusEnum } from '~/data/models/SiteProductInstallation';
 import { SiteProductLineSizeDetailProductStatusEnum } from '~/data/models/SiteProductLineSizeDetail';
+import { SiteProductReviews } from '~/data/models/SiteProductReviews';
 import { SitePromotionStyleEnum } from '~/data/models/SitePromotion';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 import { PRODUCT_IMAGE_TYPES } from '~/lib/constants/productImage.types';
+
+export const globalsMock = {
+  customerServiceEnabled: true,
+  customerServiceNumber: {
+    display: '(888) 123 456',
+    value: '888123456',
+  },
+  siteTheme: 'light',
+} as any;
+
+export const routerMock = {
+  asPath: '/brands/continental-tires/dh2',
+  pathname: '/brands/[brandName]/[productLine]',
+  query: {
+    brandName: 'continental-tires',
+    productLine: 'dh2',
+  },
+} as any;
 
 export const siteProductMock: SiteProduct = {
   siteProductLine: {
@@ -1183,6 +1202,84 @@ export const siteProductMock: SiteProduct = {
       isSelected: false,
       siteQueryParams: {
         tiresize: '200-40r17',
+      },
+    },
+  ],
+};
+
+export const siteProductReviewsMock: SiteProductReviews = {
+  listResultMetadata: {
+    noExactMatch: false,
+    pagination: { total: 15, resultsPerPage: 10, offset: 0 },
+  },
+  performanceRating: {
+    overall: 4.9,
+    ratingList: [
+      { label: 'Dry', value: 5 },
+      { label: 'Wet', value: 5 },
+      { label: 'Winter', value: 2.7 },
+      { label: 'Comfort', value: 4.8 },
+      { label: 'Noise', value: 3.5 },
+      { label: 'Treadwear', value: 3.7 },
+    ],
+  },
+  reviewsSource: { simpleTire: 115, googleShopping: 72 },
+  dataMomentList: [
+    { label: "Honda Civic's ranking", value: '1st in popularity' },
+    { label: 'Would you buy again', value: '98%' },
+  ],
+  reviewsList: [
+    {
+      purchaseDate: null,
+      name: 'Joe',
+      vehicle: null,
+      address: null,
+      verifiedCustomer: true,
+      additionalComments: null,
+      dataMomentList: [
+        { label: 'Would you buy again', value: 'Yes' },
+        { label: 'Annual mileage', value: '20,000 - 29,000' },
+        { label: 'Driving style', value: 'Cautious' },
+        { label: 'Annual mileage', value: '20,000 - 29,000' },
+        { label: 'Driving location', value: 'Mostly City' },
+      ],
+      performanceRating: {
+        overall: 4.9,
+        ratingList: [
+          { label: 'Dry', value: 5 },
+          { label: 'Wet', value: 5 },
+          { label: 'Winter', value: 2.7 },
+          { label: 'Comfort', value: 4.8 },
+          { label: 'Noise', value: 3.5 },
+          { label: 'Treadwear', value: 3.7 },
+        ],
+      },
+    },
+    {
+      purchaseDate: '01/12/2020',
+      name: 'Victor',
+      vehicle: 'Honda Civic 2015 EX-L',
+      address: 'San Francisco, CA',
+      verifiedCustomer: true,
+      additionalComments:
+        'Excellent tire and great smooth ride and handling ability.',
+      dataMomentList: [
+        { label: 'Would you buy again', value: 'Yes' },
+        { label: 'Annual mileage', value: '20,000 - 29,000' },
+        { label: 'Driving style', value: 'Cautious' },
+        { label: 'Annual mileage', value: '20,000 - 29,000' },
+        { label: 'Driving location', value: 'Mostly City' },
+      ],
+      performanceRating: {
+        overall: 4.9,
+        ratingList: [
+          { label: 'Dry', value: 5 },
+          { label: 'Wet', value: 5 },
+          { label: 'Winter', value: 2.7 },
+          { label: 'Comfort', value: 4.8 },
+          { label: 'Noise', value: 3.5 },
+          { label: 'Treadwear', value: 3.7 },
+        ],
       },
     },
   ],

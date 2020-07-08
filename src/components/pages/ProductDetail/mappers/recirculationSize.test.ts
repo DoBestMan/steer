@@ -10,7 +10,7 @@ const routerMock = {
 } as any;
 
 describe('pages/ProductDetails/mappers/recirculationSize', () => {
-  it('returns null in case of product line page (no size', () => {
+  it('returns null in case of product line page (no size)', () => {
     expect(
       mapDataToRecirculationSize({
         siteProduct: siteProductMock,
