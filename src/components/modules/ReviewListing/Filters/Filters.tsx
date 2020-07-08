@@ -1,12 +1,12 @@
 import { useState } from 'react';
 
 import FilterButton from '~/components/global/Button/FilterButton';
-import Carousel from '~/components/global/Carousel/CarouselDynamic';
+import FiltersCarousel from '~/components/global/FiltersCarousel/FiltersCarousel';
+import styles from '~/components/global/FiltersCarousel/FiltersCarousel.styles';
 import FilterPopup from '~/components/modules/ReviewListing/Filters/FilterPopup';
 import { THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
-import styles from './Filters.styles';
 import { FilterItem } from './Filters.types';
 
 interface Props {
@@ -33,28 +33,29 @@ function Filters({ filters }: Props) {
 
   return (
     <>
-      <span css={styles.label}>{ui('reviews.searchBy')}</span>
-      <div
-        css={[styles.container, activeFilter !== null && styles.disableEvents]}
+      <FiltersCarousel
+        activeFilter={activeFilter}
+        label={ui('reviews.searchBy')}
       >
-        <Carousel slideClass="filter-button" freeScroll>
-          {filters.map(({ label }) => {
-            const isDropdownOpen = activeFilter === label && isOpen;
-            return (
-              <FilterButton
-                key={label}
-                isDropdownOpen={isDropdownOpen}
-                isActive={false}
-                label={label}
-                onClick={handleOnClick(label)}
-                theme={THEME.ORANGE}
-                aria-expanded={isDropdownOpen}
-                css={[styles.button, isDropdownOpen && styles.disableEvents]}
-              />
-            );
-          })}
-        </Carousel>
-      </div>
+        {filters.map(({ label }) => {
+          const isDropdownOpen = activeFilter === label && isOpen;
+          return (
+            <FilterButton
+              key={label}
+              isDropdownOpen={isDropdownOpen}
+              isActive={false}
+              label={label}
+              onClick={handleOnClick(label)}
+              theme={THEME.ORANGE}
+              aria-expanded={isDropdownOpen}
+              css={[
+                styles.filterButton,
+                isDropdownOpen && styles.disableEvents,
+              ]}
+            />
+          );
+        })}
+      </FiltersCarousel>
       {filters.map(({ label, filterGroups }) => (
         <FilterPopup
           key={label}

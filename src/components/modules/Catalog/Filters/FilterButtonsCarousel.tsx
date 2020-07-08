@@ -3,14 +3,14 @@ import { MouseEvent, ReactElement } from 'react';
 
 import FilterButton from '~/components/global/Button/FilterButton';
 import FilterButtonToggle from '~/components/global/Button/FilterButtonToggle';
-import Carousel from '~/components/global/Carousel/CarouselDynamic';
+import FiltersCarousel from '~/components/global/FiltersCarousel/FiltersCarousel';
+import styles from '~/components/global/FiltersCarousel/FiltersCarousel.styles';
 import { SiteCatalogFilterToggleTypeEnum } from '~/data/models/SiteCatalogFilterToggle';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import { CatalogFilterTypes } from './Filter.types';
 import FilterPopups from './FilterPopups';
 import { useFiltersContext } from './Filters.context';
-import styles from './Filters.styles';
 import { getFilterLabel, hasActiveValue } from './Filters.utils';
 
 interface Props {
@@ -43,13 +43,8 @@ export default function FilterButtonsCarousel({
   });
 
   return (
-    <div
-      css={[
-        styles.listContainer,
-        selectingFilter !== null && styles.disableEvents,
-      ]}
-    >
-      <Carousel slideClass="filter-button" freeScroll>
+    <>
+      <FiltersCarousel activeFilter={selectingFilter}>
         <FilterButton
           isVisible={!!popularFilters.length}
           css={[
@@ -102,9 +97,9 @@ export default function FilterButtonsCarousel({
             );
           }) as unknown) as ReactElement
         }
-      </Carousel>
+      </FiltersCarousel>
       {/* TODO: integrate filters */}
       <FilterPopups popularFilters={popularFilters} filters={filters} />
-    </div>
+    </>
   );
 }

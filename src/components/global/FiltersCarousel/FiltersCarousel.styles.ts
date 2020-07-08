@@ -1,4 +1,5 @@
-import { MQ, SPACING, StylesMap } from '~/lib/constants';
+import { COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
+import { typography } from '~/styles/typography.styles';
 
 /*
  * Pointer events are disabled on the filter button whose dropdown is open so when clicking the
@@ -8,6 +9,15 @@ import { MQ, SPACING, StylesMap } from '~/lib/constants';
  */
 
 const styles: StylesMap = {
+  container: {
+    margin: `0 ${-SPACING.SIZE_20}px`,
+    [MQ.M]: {
+      margin: `0 ${-SPACING.SIZE_40}px`,
+    },
+    [MQ.L]: {
+      margin: `0 ${-SPACING.SIZE_60}px`,
+    },
+  },
   disableEvents: {
     pointerEvents: 'none',
   },
@@ -39,15 +49,13 @@ const styles: StylesMap = {
   filterHide: {
     display: 'none',
   },
-  listContainer: {
-    margin: `0 ${-SPACING.SIZE_20}px`,
-    [MQ.M]: {
-      margin: `0 ${-SPACING.SIZE_40}px`,
+  label: [
+    typography.bodyCopy,
+    {
+      color: COLORS.ORANGE.SHADE_85,
+      marginBottom: SPACING.SIZE_10,
     },
-    [MQ.L]: {
-      margin: `0 ${-SPACING.SIZE_60}px`,
-    },
-  },
+  ],
 };
 
 export default styles;
