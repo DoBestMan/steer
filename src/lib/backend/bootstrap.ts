@@ -26,7 +26,8 @@ export function getBackendEnvVariables() {
   let backend = process.env.STEER_BACKEND;
   if (!backend) {
     const isIntegrationDeploy =
-      deployRef && /^dev$|^qa$|^staging$|^dev-st$|^qa-st|^int-/.test(deployRef);
+      deployRef &&
+      /^dev$|^qa$|^staging$|^uat$|^dev-st$|^qa-st|^int-/.test(deployRef);
     backend = isIntegrationDeploy ? 'integration' : 'mock';
   }
 

@@ -1,0 +1,30 @@
+name: Version UAT
+
+on:
+  push:
+    branches:
+      - uat
+
+jobs:
+  version:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: 'uat'
+    - name: Bump version and create tag
+      run: |
+        PACKAGE_VERSION=$(cat package.json \
+          | grep version \
+          | head -1 \
+          | awk -F: '{ print $2 }' \
+          | sed 's/[",]//g' \
+          | tr -d '[[:space:]]')
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        yarn version --new-version $PACKAGE_VERSION-uat
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: 'uat'
