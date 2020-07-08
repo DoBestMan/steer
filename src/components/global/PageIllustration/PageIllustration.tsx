@@ -1,13 +1,16 @@
 import Car from '~/components/global/Car/Car';
-import { Cars } from '~/components/global/Car/Car.enums';
 import GridItem from '~/components/global/Grid/GridItem';
 import Scenery from '~/components/global/Scenery/Scenery';
 import { Sceneries } from '~/components/global/Scenery/Scenery.types';
 import { COLORS } from '~/lib/constants';
 
-import styles from './OrderTrackingPage.styles';
+import styles from './PageIllustration.styles';
 
-function OrderTrackingPageIllustration() {
+interface Props {
+  carId: string;
+}
+
+function PageIllustration({ carId }: Props) {
   return (
     <GridItem
       css={styles.illustration}
@@ -18,7 +21,7 @@ function OrderTrackingPageIllustration() {
       <Scenery css={styles.scenery} sceneryID={Sceneries['scenery--urban']} />
       <Car
         css={styles.car}
-        carId={Cars['car--commercial']}
+        carId={carId}
         solid
         solidColor={COLORS.GLOBAL.WHITE}
       />
@@ -26,4 +29,4 @@ function OrderTrackingPageIllustration() {
   );
 }
 
-export default OrderTrackingPageIllustration;
+export default PageIllustration;

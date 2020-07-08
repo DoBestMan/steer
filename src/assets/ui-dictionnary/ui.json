@@ -112,6 +112,12 @@
       "noResultsPopularLabel": "Popular tires"
     }
   },
+  "error": {
+    "callCopy": "Please call (888) 410-0604 for sales or try to refresh this page.",
+    "homeButtonLabel": "Take me home",
+    "notFoundDescription": "Oops, looks like we took a <br />wrong turn somewhere.",
+    "erroDescription": "Oops, we’re resolving issues <br />with our servers."
+  },
   "footer": {
     "company": "Company",
     "mailingList": {
@@ -224,12 +230,12 @@
     "insights": {
       "fitting": {
         "true": "Fits your {{vehicle}}",
-        "false": "It doesn't fit {{vehicle}}",
+        "false": "It doesn’t fit {{vehicle}}",
         "unknown": "Confirm if it fits your vehicle",
         "modalContentLabel": "Size Check Udpate",
         "modalInfoDescription": "PRO Tip",
         "modalInfoCopy": "Most drivers keep the same size. If you want to change it, make sure you make the proper safety checks. {{link}}",
-        "modalInfoTitle": "This isn't the tire size that came with your {{model}} from the factory"
+        "modalInfoTitle": "This isn’t the tire size that came with your {{model}} from the factory"
       },
       "fittingChangeVehicle": "Change vehicle",
       "changeLocation": "Change location",
@@ -274,8 +280,8 @@
       "verifiedCustomer": "Verified Customer"
     },
     "roadHazard": {
-      "interceptCopy": "Most tire failure are punctures or bruises that manufacturer's warranty typically doesn't cover.\n\n**Get coverage for up to 3 years by $13.02/tire.**",
-      "headerCopy": "Most tire failure are punctures or bruises that manufacturer's warranty typically doesn't cover.",
+      "interceptCopy": "Most tire failure are punctures or bruises that manufacturer’s warranty typically doesn’t cover.\n\n**Get coverage for up to 3 years by $13.02/tire.**",
+      "headerCopy": "Most tire failure are punctures or bruises that manufacturer’s warranty typically doesn’t cover.",
       "interceptTitle": "Did you know?\n\nRoad Hazard Coverage is common in your location",
       "headerTitle": "Save up to 100% of the tire cost if you need a replacement in 3 years",
       "removeLabel": "Remove coverage",

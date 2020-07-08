@@ -1,17 +1,7 @@
-import { BORDERS, COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
+import { COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
-  car: {
-    borderBottom: BORDERS.SOLID_GRAY_20_1PX,
-    bottom: 0,
-    display: 'flex',
-    justifyContent: 'center',
-    left: 0,
-    position: 'absolute',
-    transform: `translate3D(0, ${SPACING.SIZE_20}, 0)`,
-    width: '100%',
-  },
   description: [
     typography.largeCopy,
     {
@@ -36,13 +26,6 @@ const styles: StylesMap = {
     [MQ.XL]: {
       padding: `230px 0 ${SPACING.SIZE_110}px`,
     },
-  },
-  illustration: {
-    position: 'relative',
-  },
-  scenery: {
-    marginBottom: SPACING.SIZE_20,
-    opacity: 0.5,
   },
   title: [
     typography.jumboHeadline,

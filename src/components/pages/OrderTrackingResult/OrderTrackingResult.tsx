@@ -1,6 +1,7 @@
+import { CARS, CARS_KEYS } from '~/components/global/Car/CarDetails.constants';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
-import OrderTrackingPageIllustration from '~/components/pages/OrderTrackingPage/OrderTrackingPageIllustration';
+import PageIllustration from '~/components/global/PageIllustration/PageIllustration';
 import { Order } from '~/data/models/Order';
 import { ui } from '~/lib/utils/ui-dictionary';
 
@@ -104,7 +105,7 @@ function OrderTrackingResult({
         </div>
       </GridItem>
 
-      <OrderTrackingPageIllustration />
+      <PageIllustration carId={CARS[CARS_KEYS.COMMERCIAL]} />
     </Grid>
   );
 }
