@@ -24,6 +24,17 @@ const styles: StylesMap = {
       marginTop: SPACING.SIZE_120,
     },
   },
+  feedback: {
+    marginTop: SPACING.SIZE_60,
+
+    [MQ.M]: {
+      marginTop: SPACING.SIZE_80,
+    },
+
+    [MQ.L]: {
+      marginTop: SPACING.SIZE_120,
+    },
+  },
   insights: {
     marginTop: SPACING.SIZE_10,
 
@@ -52,6 +63,17 @@ const styles: StylesMap = {
 
     [MQ.M]: {
       marginTop: SPACING.SIZE_80,
+    },
+  },
+  recirculation: {
+    marginTop: SPACING.SIZE_60,
+
+    [MQ.M]: {
+      marginTop: SPACING.SIZE_80,
+    },
+
+    [MQ.L]: {
+      marginTop: SPACING.SIZE_120,
     },
   },
   recirculationHeader: {
@@ -110,6 +132,13 @@ const styles: StylesMap = {
           includeContainerMargin: true,
         }),
       },
+    },
+  },
+  recirculationSize: {
+    marginTop: SPACING.SIZE_40,
+
+    [MQ.L]: {
+      marginTop: SPACING.SIZE_60,
     },
   },
   root: {

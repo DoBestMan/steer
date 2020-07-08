@@ -22,6 +22,11 @@ import { interpolateRoute } from '~/lib/utils/routes';
 import { keyToCamel } from '~/lib/utils/string';
 import { ProductDetailResponse } from '~/pages/api/product-detail';
 
+import { mapDataToRecirculation } from './mappers/recirculation';
+import {
+  mapDataToRecirculationSize,
+  RecirculationSize,
+} from './mappers/recirculationSize';
 import { mapDataToTechnicalSpecs } from './mappers/technicalSpecs';
 
 type QueryParams = Record<string, string>;
@@ -38,6 +43,7 @@ interface ResponseProps {
   installation: InstallationProps | null;
   productInfo: ProductInfoProps;
   recirculation: SiteCatalogProductGroupList | null;
+  recirculationSize: RecirculationSize | null;
   technicalSpecs: TechnicalSpecsProps | null;
   technicalSpecsAnchor: string;
 }
@@ -215,18 +221,6 @@ function mapDataToInstallation({
   return siteProductInstallation.installationMeta;
 }
 
-function mapDataToRecirculation({
-  siteProduct: { siteProductRecirculation },
-}: {
-  siteProduct: SiteProduct;
-}): SiteCatalogProductGroupList | null {
-  if (!siteProductRecirculation?.length) {
-    return null;
-  }
-
-  return siteProductRecirculation;
-}
-
 function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
   const router = useRouter();
   const { query, asPath } = router;
@@ -275,6 +269,7 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
       globals,
     }),
     recirculation: mapDataToRecirculation({ siteProduct }),
+    recirculationSize: mapDataToRecirculationSize({ siteProduct, router }),
     technicalSpecs: mapDataToTechnicalSpecs({ siteProduct, globals, router }),
     technicalSpecsAnchor: CONSTANTS.TECH_SPECS_ANCHOR,
   };

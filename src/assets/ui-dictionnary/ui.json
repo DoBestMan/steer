@@ -264,6 +264,10 @@
       "cta": "Replace tires in pairs for better <br />traction and braking",
       "featureDescription": "PRO tip"
     },
+    "recirculation": {
+      "searchForTireSize": "See all tires in the size {{size}}",
+      "searchForTireFrontRear": "See all tires in front {{size}} and rear {{rear}}"
+    },
     "reviews": {
       "none": "No reviews yet",
       "readMore": "Read more",

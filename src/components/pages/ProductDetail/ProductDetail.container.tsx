@@ -1,6 +1,8 @@
 import Breadcrumbs from '~/components/global/Breadcrumbs/Breadcrumbs';
+import Feedback from '~/components/global/Feedback/Feedback';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
+import Link from '~/components/global/Link/Link';
 import ProductGroupList from '~/components/global/ProductGroupList/ProductGroupList';
 import { navigationPaddingTop } from '~/components/modules/Nav/Nav.styles';
 import Insights from '~/components/modules/PDP/Insights/Insights';
@@ -10,6 +12,7 @@ import PurchaseIncludes from '~/components/modules/PDP/PurchaseIncludes/Purchase
 import ShopWithConfidence from '~/components/modules/PDP/ShopWithConfidence/ShopWithConfidence';
 import TechnicalSpecs from '~/components/modules/PDP/TechnicalSpecs/TechnicalSpecs';
 import TireImage from '~/components/modules/PDP/TireImage/TireImage';
+import { THEME } from '~/lib/constants';
 import { ProductDetailResponse } from '~/pages/api/product-detail';
 
 import useProductDetail from './ProductDetail.hooks';
@@ -27,6 +30,7 @@ function ProductDetailContainer({ serverData }: ProductDetailData) {
     installation,
     productInfo,
     recirculation,
+    recirculationSize,
     technicalSpecs,
     technicalSpecsAnchor,
   } = useProductDetail({
@@ -80,6 +84,22 @@ function ProductDetailContainer({ serverData }: ProductDetailData) {
             </div>
           </GridItem>
         )}
+        {recirculation &&
+          recirculation.slice(1).map((item) => (
+            <GridItem fullbleed css={styles.recirculation} key={item.id}>
+              <ProductGroupList {...item} />
+            </GridItem>
+          ))}
+        {recirculationSize && (
+          <GridItem css={styles.recirculationSize}>
+            <Link href={recirculationSize.url} theme={THEME.LIGHT}>
+              {recirculationSize.label}
+            </Link>
+          </GridItem>
+        )}
+        <GridItem fullbleed css={styles.feedback}>
+          <Feedback />
+        </GridItem>
       </Grid>
     </div>
   );

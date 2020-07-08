@@ -91,7 +91,22 @@ export const siteProductMock: SiteProduct = {
       pricePerTireInCents: '1302',
     },
   },
-  siteProductLineRearSizeDetail: null,
+  siteProductLineRearSizeDetail: {
+    size: '215/50 R19',
+    loadSpeedRating: '91J',
+    price: {
+      estimatedRetailPriceInCents: '12099',
+      salePriceInCents: '12099',
+    },
+    priceLabel: null,
+    productStatus:
+      SiteProductLineSizeDetailProductStatusEnum.ProductStatusAvailable,
+    outOfStockTireSizeResultCount: null,
+    roadHazard: {
+      durationLabel: '3 years',
+      pricePerTireInCents: '1900',
+    },
+  },
   siteProductInstallation: {
     status: SiteProductInstallationStatusEnum.SiteProductInstallationAvailable,
     installationMeta: {
