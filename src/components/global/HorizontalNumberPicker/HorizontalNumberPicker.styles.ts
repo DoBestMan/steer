@@ -1,7 +1,18 @@
-import { BORDERS, COLORS, RADIUS, SPACING, StylesMap } from '~/lib/constants';
+import {
+  BORDERS,
+  COLORS,
+  MQ,
+  RADIUS,
+  SPACING,
+  StylesMap,
+} from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
-export const ITEM_SIZE = 75;
+export const ITEM_SIZE = {
+  S: 50,
+  M: 60,
+  L: 75,
+};
 
 const styles: StylesMap = {
   header: {
@@ -24,13 +35,13 @@ const styles: StylesMap = {
     width: 'inherit',
   },
   numberItem: [
-    typography.primaryHeadline,
+    typography.secondaryHeadline,
     {
       '&.swiper-slide': {
         boxSizing: 'border-box',
-        height: ITEM_SIZE,
+        height: ITEM_SIZE.L,
         margin: SPACING.SIZE_01,
-        width: ITEM_SIZE,
+        width: ITEM_SIZE.L,
 
         /* eslint-disable sort-keys */
         ':not(:last-child)': {
@@ -40,6 +51,34 @@ const styles: StylesMap = {
       },
     },
   ],
+  numberItemNoCarousel: {
+    [MQ.S]: [
+      typography.bodyCopy,
+      {
+        ':not(:last-child)': {
+          marginRight: SPACING.SIZE_05,
+        },
+        boxSizing: 'border-box',
+        height: ITEM_SIZE.S,
+        margin: SPACING.SIZE_01,
+        width: ITEM_SIZE.S,
+      },
+    ],
+    [MQ.M]: {
+      height: ITEM_SIZE.M,
+      width: ITEM_SIZE.M,
+      ':not(:last-child)': {
+        marginRight: SPACING.SIZE_10,
+      },
+    },
+    [MQ.L]: [
+      typography.secondaryHeadline,
+      {
+        height: ITEM_SIZE.L,
+        width: ITEM_SIZE.L,
+      },
+    ],
+  },
   selectedItem: {
     border: `3px solid ${COLORS.GLOBAL.ORANGE}`,
     color: COLORS.GLOBAL.ORANGE,

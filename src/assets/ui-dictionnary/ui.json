@@ -318,7 +318,83 @@
     "seeAll": "See all customer reviews",
     "tireReviews": "{{tire}} Reviews",
     "viewTire": "View tire",
-    "writeReview": "Write a  review"
+    "writeReview": "Write a  review",
+    "form": {
+      "title": "Leave a review {{tire}}",
+      "submit": "Complete all fields to submit",
+      "sections": {
+        "ratings": {
+          "rateLabel": "Rate your new tires",
+          "labels": {
+            "one": "Very poor",
+            "two": "Poor",
+            "three": "Fair",
+            "four": "Good",
+            "five": "Excellent",
+            "na": "Not applicable"
+          },
+          "dry": "Dry",
+          "wet": "Wet",
+          "winter": "Winter",
+          "comfort": "Comfort",
+          "noise": "Noise",
+          "treadwear": "Treadwear",
+          "review": "Write your review here",
+          "reviewLabel": "Additional comments (optional)"
+        },
+        "about": {
+          "title": "About you",
+          "description": "This is the information about you that will appear with your review on the SimpleTire site.",
+          "name": "Your name",
+          "email": "Your email",
+          "datePurchased": "Date of purchase (optional)",
+          "datePurchasedContextual": "MM/DD/YYYY"
+        },
+        "vehicle": {
+          "title": "Your vehicle",
+          "description": "Please enter the make, model, year and trim of the vehicle you purchased these tires for.",
+          "vehicleInfo": "Vehicle info"
+        },
+        "miles": {
+          "title": "How many miles will you put on these tires in a year?",
+          "options": {
+            "one": "Less than 5,000",
+            "two": "5,000 – 9,999",
+            "three": "10,000 – 14,999",
+            "four": "15,000 – 19,999",
+            "five": "20,000 – 29,999",
+            "six": "30,000+"
+          }
+        },
+        "drivingStyle": {
+          "title": "What best describes your driving style?",
+          "options": {
+            "one": "Cautious",
+            "two": "Confident",
+            "three": "Aggressive",
+            "four": "Extreme (racing)"
+          }
+        },
+        "whereUsed": {
+          "title": "Where will you usually drive using these tires?",
+          "options": {
+            "one": "All highway",
+            "two": "Mostly city",
+            "three": "Highway & city",
+            "four": "Track & autocross",
+            "five": "Rural roads",
+            "six": "Off-road"
+          }
+        },
+        "buyAgain": {
+          "title": "Would you buy these tires again?",
+          "options": {
+            "one": "Yes",
+            "two": "No"
+          }
+        }
+      }
+    }
   },
   "search": {
     "addRearTire": "Add different rear size",
