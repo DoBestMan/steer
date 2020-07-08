@@ -1,11 +1,11 @@
 import { ReactNode, useCallback, useEffect, useRef, useState } from 'react';
-import { NodeType } from 'react-markdown';
 
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Markdown from '~/components/global/Markdown/Markdown';
 import { useWindowSize } from '~/hooks/useWindowSize';
 import { KEYCODES, SPACING } from '~/lib/constants';
+import { MARKDOWN_PRIMITIVES } from '~/lib/constants/markdown';
 
 import styles from './AccordionItem.styles';
 
@@ -15,20 +15,10 @@ interface Props {
   id: string;
   isExpanded?: boolean;
   label: string;
+  linkTarget?: string;
   onToggle?: () => void;
   value?: string;
 }
-
-// Allow only the simplest markdown to prevent unexpected markups
-const markdownAllowedTypes: NodeType[] = [
-  'root',
-  'text',
-  'break',
-  'paragraph',
-  'strong',
-  'emphasis',
-  'link',
-];
 
 function AccordionItem({
   id,
@@ -38,6 +28,7 @@ function AccordionItem({
   value,
   onToggle,
   isExpanded,
+  linkTarget,
 }: Props) {
   const [containerHeight, setContainerHeight] = useState(0);
   const innerElement = useRef<HTMLDivElement | null>(null);
@@ -76,6 +67,8 @@ function AccordionItem({
     setContainerHeight(innerElement.current.offsetHeight);
   }, [innerElement, setContainerHeight, width, content, isExpanded]);
 
+  const hasContent = content || children;
+
   return (
     <>
       <button
@@ -84,39 +77,42 @@ function AccordionItem({
         id={buttonId}
         onMouseDown={mouseDownHandler}
         onKeyUp={keyUpHandler}
-        css={styles.button}
+        css={[styles.button, !hasContent && styles.buttonNoContent]}
       >
         <span css={styles.buttonLabel}>{label}</span>
         {value && <span css={styles.buttonValue}>{value}</span>}
-        <Icon
-          name={ICONS.CHEVRON_DOWN}
+        <span
           css={[styles.buttonIcon, isExpanded && styles.buttonIconExpanded]}
-        />
+        >
+          {hasContent && <Icon name={ICONS.CHEVRON_DOWN} />}
+        </span>
       </button>
-      <div
-        id={panelId}
-        aria-labelledby={buttonId}
-        aria-hidden={!isExpanded}
-        role="region"
-        css={[
-          styles.contentContainer,
-          isExpanded && { maxHeight: containerHeight + SPACING.SIZE_20 },
-        ]}
-      >
-        <div ref={innerElement} css={styles.contentInnerContent}>
-          {children}
-          {content && (
-            <Markdown
-              css={styles.markdown}
-              linkTarget="_blank"
-              allowedTypes={markdownAllowedTypes}
-              unwrapDisallowed
-            >
-              {content}
-            </Markdown>
-          )}
+      {hasContent && (
+        <div
+          id={panelId}
+          aria-labelledby={buttonId}
+          aria-hidden={!isExpanded}
+          role="region"
+          css={[
+            styles.contentContainer,
+            isExpanded && { maxHeight: containerHeight + SPACING.SIZE_20 },
+          ]}
+        >
+          <div ref={innerElement} css={styles.contentInnerContent}>
+            {children}
+            {content && (
+              <Markdown
+                css={styles.markdown}
+                linkTarget={linkTarget}
+                allowedTypes={MARKDOWN_PRIMITIVES}
+                unwrapDisallowed
+              >
+                {content}
+              </Markdown>
+            )}
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 }

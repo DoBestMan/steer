@@ -5,6 +5,7 @@ import { PromoTagProps } from '~/components/global/PromoTag/PromoTag';
 import { InsightsProps } from '~/components/modules/PDP/Insights/Insights';
 import { InstallationProps } from '~/components/modules/PDP/Installation/Installation';
 import { ProductInfoProps } from '~/components/modules/PDP/ProductInfo/ProductInfo';
+import { TechnicalSpecsProps } from '~/components/modules/PDP/TechnicalSpecs/TechnicalSpecs';
 import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
 import { SiteCatalogProductGroupList } from '~/data/models/SiteCatalogProductGroupList';
 import { SiteCatalogProductImage } from '~/data/models/SiteCatalogProductImage';
@@ -21,6 +22,8 @@ import { interpolateRoute } from '~/lib/utils/routes';
 import { keyToCamel } from '~/lib/utils/string';
 import { ProductDetailResponse } from '~/pages/api/product-detail';
 
+import { mapDataToTechnicalSpecs } from './mappers/technicalSpecs';
+
 type QueryParams = Record<string, string>;
 
 interface ProductDetailData {
@@ -35,6 +38,8 @@ interface ResponseProps {
   installation: InstallationProps | null;
   productInfo: ProductInfoProps;
   recirculation: SiteCatalogProductGroupList | null;
+  technicalSpecs: TechnicalSpecsProps | null;
+  technicalSpecsAnchor: string;
 }
 
 const CONSTANTS = {
@@ -225,6 +230,8 @@ function mapDataToRecirculation({
 function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
   const router = useRouter();
   const { query, asPath } = router;
+  const globals = useSiteGlobalsContext();
+
   const queryParams: QueryParams = {};
 
   Object.entries(query).map(([key, value]) => {
@@ -252,8 +259,6 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
 
   const imageList = siteProductLine.imageList;
 
-  const globals = useSiteGlobalsContext();
-
   return {
     breadcrumbs: mapDataToBreadcrumbs({
       data: siteProduct,
@@ -270,6 +275,8 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
       globals,
     }),
     recirculation: mapDataToRecirculation({ siteProduct }),
+    technicalSpecs: mapDataToTechnicalSpecs({ siteProduct, globals, router }),
+    technicalSpecsAnchor: CONSTANTS.TECH_SPECS_ANCHOR,
   };
 }
 

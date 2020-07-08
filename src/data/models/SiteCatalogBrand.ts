@@ -1,6 +1,6 @@
 import { SiteImage } from './SiteImage';
 
 export interface SiteCatalogBrand {
-  image?: SiteImage;
+  image?: SiteImage | null;
   label: string;
 }

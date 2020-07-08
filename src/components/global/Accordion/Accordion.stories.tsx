@@ -31,11 +31,11 @@ export function AccordionWithKnobs() {
   );
 
   const firstItemGroupId = 'first item';
-  const item1Label = text('Title', firstItem.label, firstItemGroupId);
+  const item1Label = text('Title', firstItem.label as string, firstItemGroupId);
   const item1Value = text('Value', '', firstItemGroupId);
   const item1Content = text(
     'Content',
-    firstItem.content || '',
+    firstItem.content as string,
     firstItemGroupId,
   );
   const items = [

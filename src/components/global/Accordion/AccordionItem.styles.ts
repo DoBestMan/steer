@@ -37,10 +37,11 @@ const styles: StylesMap = {
   buttonIcon: {
     marginTop: SPACING.SIZE_02,
     transition: `transform ${TIME.MS100}ms ${EASING.CIRC_EASE_OUT}`,
+    width: 22,
 
     svg: {
       display: 'block',
-      height: SPACING.SIZE_05,
+      height: 5,
       padding: SPACING.SIZE_05,
     },
   },
@@ -51,6 +52,9 @@ const styles: StylesMap = {
     flexGrow: 1,
     textAlign: 'left',
     whiteSpace: 'pre-line',
+  },
+  buttonNoContent: {
+    pointerEvents: 'none',
   },
   buttonValue: {
     fontWeight: 'bold',

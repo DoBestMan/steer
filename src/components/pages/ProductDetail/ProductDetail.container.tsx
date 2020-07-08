@@ -8,6 +8,7 @@ import Installation from '~/components/modules/PDP/Installation/Installation';
 import ProductInfo from '~/components/modules/PDP/ProductInfo/ProductInfo';
 import PurchaseIncludes from '~/components/modules/PDP/PurchaseIncludes/PurchaseIncludes';
 import ShopWithConfidence from '~/components/modules/PDP/ShopWithConfidence/ShopWithConfidence';
+import TechnicalSpecs from '~/components/modules/PDP/TechnicalSpecs/TechnicalSpecs';
 import TireImage from '~/components/modules/PDP/TireImage/TireImage';
 import { ProductDetailResponse } from '~/pages/api/product-detail';
 
@@ -26,6 +27,8 @@ function ProductDetailContainer({ serverData }: ProductDetailData) {
     installation,
     productInfo,
     recirculation,
+    technicalSpecs,
+    technicalSpecsAnchor,
   } = useProductDetail({
     serverData,
   });
@@ -70,6 +73,13 @@ function ProductDetailContainer({ serverData }: ProductDetailData) {
         <GridItem gridColumnL="3/13" css={styles.shopWithConfidence}>
           <ShopWithConfidence />
         </GridItem>
+        {technicalSpecs && (
+          <GridItem fullbleed css={styles.technicalSpecs}>
+            <div id={technicalSpecsAnchor}>
+              <TechnicalSpecs {...technicalSpecs} />
+            </div>
+          </GridItem>
+        )}
       </Grid>
     </div>
   );

@@ -1,6 +1,20 @@
 import { Item } from '~/components/global/Accordion/Accordion';
+import { SiteImage } from '~/data/models/SiteImage';
+import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 
 import { Size, SizeOption } from './TechnicalSpecs';
+
+export const image: SiteImage = {
+  altText: 'Tire treadonly',
+  height: 800,
+  src:
+    'https://images.simpletire.com/image/upload/v1591705546/line-images/1349/1349-treadonly_pa1oew.png',
+  type: ICON_IMAGE_TYPE.IMAGE,
+  width: 800,
+};
+
+export const description =
+  "The ContiProContact is Continental's Grand Touring All-Season tire originally developed for European sport coupes and sedans sold in North America, and is now available for a wide range of imported and domestic cars.\n\nToday's driver often wants a tire that perform year-round. Consider the ProContact TX from Continental, which features a multidirectional tread design for outstanding grip. Offering drivers precise steering, the ProContact TX's rubber compound is designed to reduce rolling resistance to enhance fuel efficiency.\n\nFeatures a state-of-the-art silica compound that lowers rolling resistance to improve fuel efficiency.";
 
 export const specList: Item[] = [
   {

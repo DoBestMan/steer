@@ -1,10 +1,10 @@
 import { ReactType, useCallback, useState } from 'react';
-import { NodeType } from 'react-markdown';
 
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Markdown from '~/components/global/Markdown/MarkdownDynamic';
 import { HEADER_SIZE, THEME } from '~/lib/constants';
+import { MARKDOWN_PRIMITIVES } from '~/lib/constants/markdown';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import styles, { sizeStyles, themeStyles } from './HeaderDetailPage.styles';
@@ -20,16 +20,6 @@ export interface HeaderDetailPageProps {
   subHeaderAs?: ReactType;
   theme?: THEME;
 }
-// Allow only the simplest markdown to prevent unexpected markups
-const markdownAllowedTypes: NodeType[] = [
-  'root',
-  'text',
-  'break',
-  'paragraph',
-  'strong',
-  'emphasis',
-  'link',
-];
 
 export default function HeaderDetailPage({
   headerAs = 'h1',
@@ -74,14 +64,14 @@ export default function HeaderDetailPage({
         <SubHeaderContainer
           css={[styles.subHeader, themeStyles[theme].subHeader]}
         >
-          <Markdown allowedTypes={markdownAllowedTypes} unwrapDisallowed>
+          <Markdown allowedTypes={MARKDOWN_PRIMITIVES} unwrapDisallowed>
             {subHeader}
           </Markdown>
         </SubHeaderContainer>
       )}
       {briefDescription && (
         <div css={styles.description}>
-          <Markdown allowedTypes={markdownAllowedTypes} unwrapDisallowed>
+          <Markdown allowedTypes={MARKDOWN_PRIMITIVES} unwrapDisallowed>
             {briefDescription}
           </Markdown>
         </div>
@@ -92,7 +82,7 @@ export default function HeaderDetailPage({
           aria-hidden={!showFullDescription}
           id="header-detail-more-description"
         >
-          <Markdown allowedTypes={markdownAllowedTypes} unwrapDisallowed>
+          <Markdown allowedTypes={MARKDOWN_PRIMITIVES} unwrapDisallowed>
             {moreDescription}
           </Markdown>
         </div>

@@ -1,9 +1,9 @@
-import { boolean } from '@storybook/addon-knobs';
+import { boolean, text } from '@storybook/addon-knobs';
 
 import { COLORS } from '~/lib/constants';
 
 import TechnicalSpecs from './TechnicalSpecs';
-import { sizesList, specList } from './TechnicalSpecs.mock';
+import { description, image, sizesList, specList } from './TechnicalSpecs.mock';
 
 export default {
   component: TechnicalSpecs,
@@ -16,12 +16,16 @@ const customerServiceNumber = {
 };
 
 export function TechnicalSpecsWithKnobs() {
+  const descriptionContent = text('Description', description);
   const isCustomerServiceEnabled = boolean('Is Business Hours', true);
+  const hasImage = boolean('Has image?', true);
 
   return (
     <div css={{ backgroundColor: COLORS.GLOBAL.BLACK }}>
       <TechnicalSpecs
         customerServiceNumber={customerServiceNumber}
+        description={descriptionContent}
+        image={hasImage ? image : undefined}
         specs={specList}
         sizes={sizesList}
         isCustomerServiceEnabled={isCustomerServiceEnabled}

@@ -9,10 +9,10 @@ import styles from './Accordion.styles';
 import AccordionItem from './AccordionItem';
 
 export interface Item {
-  content?: string;
-  id?: string;
-  label: string;
-  value?: string;
+  content?: string | string[] | null;
+  id?: string | string[] | null;
+  label: string | string[] | null;
+  value?: string | string[] | null;
 }
 
 export interface Props {
@@ -21,6 +21,7 @@ export interface Props {
   items: Item[];
   itemsToShow?: number;
   itemsToShowLabel?: string;
+  linkTarget?: string;
   singleItemExpandable?: boolean;
 }
 
@@ -42,6 +43,7 @@ function Accordion({
   itemsToShow,
   itemsToShowLabel = ui('pdp.accordion.showAllDefaultLabel'),
   singleItemExpandable,
+  linkTarget = '_blank',
 }: Props) {
   const [shouldShowAll, setShouldShowAll] = useState(
     parseShouldShowAll({ items, itemsToShow }),
@@ -82,12 +84,13 @@ function Accordion({
               ]}
             >
               <AccordionItem
-                label={item.label}
-                value={item.value}
+                label={item.label?.toString() || ''}
+                value={item.value?.toString() || ''}
                 id={`${id}-${idx}`}
-                content={item.content}
+                content={item.content?.toString() || ''}
                 onToggle={toggleItemHandler(idx)}
                 isExpanded={isExpanded}
+                linkTarget={linkTarget}
               >
                 {children && Children.toArray(children)[idx]}
               </AccordionItem>

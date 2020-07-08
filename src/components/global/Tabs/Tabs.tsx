@@ -93,7 +93,7 @@ function Tabs({ tabsLabels, label, children, id }: Props) {
   });
 
   return (
-    <>
+    <div>
       <div role="tablist" aria-label={label} css={styles.tabs}>
         {tabsLabels.map((label, idx) => {
           const { buttonId, panelId } = getIds(idx);
@@ -133,7 +133,7 @@ function Tabs({ tabsLabels, label, children, id }: Props) {
           </div>
         );
       })}
-    </>
+    </div>
   );
 }
 

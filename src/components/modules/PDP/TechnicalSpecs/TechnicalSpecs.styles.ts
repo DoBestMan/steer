@@ -1,15 +1,15 @@
-import {
-  BORDERS,
-  COLORS,
-  EASING,
-  MQ,
-  SPACING,
-  StylesMap,
-  TIME,
-} from '~/lib/constants';
+import { COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
+import { ratioToPercentage } from '~/lib/utils/number';
 import { typography } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
+  dataContainer: {
+    marginTop: SPACING.SIZE_40,
+
+    [MQ.L]: {
+      marginTop: 0,
+    },
+  },
   description: [
     typography.bodyCopy,
     {
@@ -22,62 +22,28 @@ const styles: StylesMap = {
       marginTop: SPACING.SIZE_20,
     },
   ],
-  header: {
-    alignContent: 'flex-start',
-    paddingBottom: SPACING.SIZE_40,
-  },
-  image: {
+  imageContainer: {
+    alignItems: 'center',
+    display: 'flex',
+    height: 0,
+    justifyContent: 'center',
     marginBottom: SPACING.SIZE_40,
-  },
-  markdown: [
-    typography.bodyCopy,
-    {
-      a: {
-        borderBottom: BORDERS.DOTTED_GRAY_40_2PX,
-        transition: `all ${TIME.MS100}ms ${EASING.CIRC_EASE_OUT}`,
+    overflow: 'hidden',
+    paddingBottom: `${ratioToPercentage('16/9')}%`,
+    position: 'relative',
+    width: '100%',
 
-        '&:hover': {
-          color: COLORS.GLOBAL.WHITE,
-          borderColor: COLORS.GLOBAL.WHITE,
-        },
-      },
-
-      p: {
-        '&:not(:last-child)': {
-          marginBottom: '1em',
-        },
-      },
+    [MQ.L]: {
+      borderRadius: 15,
     },
-  ],
-  moreDescription: {
-    display: 'none',
-    marginTop: '1em',
 
-    '&[aria-hidden="false"]': {
-      display: 'block',
-    },
-  },
-  showFullDescription: [
-    typography.primarySubhead,
-    {
-      '&:hover, &:focus:not(:active)': {
-        color: COLORS.GLOBAL.WHITE,
-      },
-
-      alignItems: 'center',
-      color: COLORS.DARK.GRAY_40,
-      display: 'flex',
-      marginTop: SPACING.SIZE_05,
-      transition: `color ${TIME.MS100}ms ${EASING.CIRC_EASE_OUT}`,
-    },
-  ],
-  showFullDescriptionIcon: {
-    marginTop: 2,
-
-    svg: {
-      display: 'block',
-      height: 5,
-      padding: SPACING.SIZE_05,
+    // eslint-disable-next-line sort-keys
+    '> div': {
+      left: 0,
+      position: 'absolute',
+      right: 0,
+      top: '50%',
+      transform: 'translateY(-50%)',
     },
   },
   title: [

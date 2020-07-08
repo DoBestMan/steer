@@ -34,12 +34,12 @@ const styles: StylesMap = {
     },
   },
   itemContainer: {
-    '&:not(:first-child)': {
+    '&:not(:first-of-type)': {
       borderTop: BORDERS.SOLID_GRAY_80_1PX,
     },
   },
   itemContainerActive: {
-    '&:not(:first-child)': {
+    '&:not(:first-of-type)': {
       borderTopColor: COLORS.GLOBAL.WHITE,
     },
   },

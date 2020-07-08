@@ -41,11 +41,17 @@ export interface SiteProductLineAvailableSizeItem {
    * @type {number}
    * @memberof SiteProductLineAvailableSizeItem
    */
-  radius: number;
+  rim: number;
   /**
    * Object containing query params for front-end to append to current URL as a link destination
    * @type {{ [key: string]: string; }}
    * @memberof SiteProductLineAvailableSizeItem
    */
   siteQueryParams: { [key: string]: string };
+  /**
+   * Indicates this size matches the front or rear tire of the current product
+   * @type {boolean}
+   * @memberof SiteProductLineAvailableSizeItem
+   */
+  isSelected: boolean;
 }

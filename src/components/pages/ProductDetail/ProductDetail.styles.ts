@@ -1,4 +1,4 @@
-import { MQ, SPACING, StylesMap } from '~/lib/constants';
+import { COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
 import { getColumnsCalc } from '~/lib/utils/grid';
 
 const styles: StylesMap = {
@@ -126,6 +126,24 @@ const styles: StylesMap = {
 
     [MQ.L]: {
       marginTop: SPACING.SIZE_120,
+    },
+  },
+  technicalSpecs: {
+    backgroundColor: COLORS.GLOBAL.BLACK,
+    marginTop: SPACING.SIZE_60,
+    paddingBottom: SPACING.SIZE_60,
+    paddingTop: SPACING.SIZE_60,
+
+    [MQ.M]: {
+      marginTop: SPACING.SIZE_80,
+      paddingBottom: SPACING.SIZE_120,
+      paddingTop: SPACING.SIZE_80,
+    },
+
+    [MQ.L]: {
+      marginTop: SPACING.SIZE_120,
+      paddingBottom: SPACING.SIZE_120,
+      paddingTop: SPACING.SIZE_120,
     },
   },
   tireImage: {
