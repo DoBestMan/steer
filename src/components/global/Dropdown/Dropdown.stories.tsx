@@ -46,7 +46,11 @@ export function DropdownWithKnobs() {
 
   return (
     <div css={{ padding: 10 }}>
-      <Button onClick={toggleIsOpen} isDisabled={isOpen}>
+      <Button
+        onClick={toggleIsOpen}
+        aria-expanded={isOpen}
+        className="dropdown-button"
+      >
         {isOpen ? 'Dropdown opened' : 'Open dropdown'}
       </Button>
       <Dropdown

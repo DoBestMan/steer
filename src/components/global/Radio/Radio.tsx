@@ -27,7 +27,6 @@ export default function Radio({
       <input
         aria-checked={isActive}
         aria-disabled={isDisabled}
-        aria-label={value}
         css={styles.input}
         disabled={isDisabled}
         onClick={handleChange}

@@ -15,6 +15,7 @@ import styles, { buttonStyle, toggle } from './Button.styles';
 interface Props {
   as?: LINK_TYPE;
   children: ReactNode;
+  className?: string;
   isDisabled?: boolean;
   isExternal?: boolean;
   isToggle?: boolean;

@@ -21,7 +21,7 @@ function FiltersCarousel({ activeFilter, children, label }: Props) {
           activeFilter !== null && [styles.disableScroll, styles.disableEvents],
         ]}
       >
-        <Carousel slideClass="filter-button" freeScroll>
+        <Carousel slideClass="dropdown-button" freeScroll>
           {children}
         </Carousel>
       </div>

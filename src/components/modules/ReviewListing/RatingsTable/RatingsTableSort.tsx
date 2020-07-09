@@ -20,7 +20,7 @@ export default function RatingsTableSort({ resultsCount }: Props) {
       <div css={styles.sort}>
         <p css={styles.sortLabel}>{ui('catalog.filters.sortBy')} </p>
         <Link
-          className="filter-button"
+          className="dropdown-button"
           theme={THEME.LIGHT}
           as="button"
           aria-expanded={false}

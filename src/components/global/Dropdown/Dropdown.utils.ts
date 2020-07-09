@@ -10,7 +10,7 @@ import { SPACING } from '~/lib/constants';
  */
 export function getPosition(): CSSProperties {
   const selectedButton = document.querySelector(
-    '.filter-button[aria-expanded="true"]',
+    '.dropdown-button[aria-expanded="true"]',
   );
   const buttonElBounds = selectedButton?.getBoundingClientRect();
   if (!buttonElBounds || !selectedButton) {
@@ -24,6 +24,7 @@ export function getPosition(): CSSProperties {
         window.innerWidth -
         (buttonElBounds.left + buttonElBounds.width) -
         SPACING.SIZE_20,
+      minWidth: buttonElBounds.width + SPACING.SIZE_10,
     };
   }
   return { left: buttonElBounds.x };

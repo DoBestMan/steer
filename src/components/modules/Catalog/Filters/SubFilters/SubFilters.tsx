@@ -44,7 +44,7 @@ export default function SubFilters({
       )}
       <p css={styles.sortLabel}>{ui('catalog.filters.sortBy')} </p>
       <Link
-        className="filter-button"
+        className="dropdown-button"
         theme={THEME.LIGHT}
         as="button"
         onClick={createOpenFilterHandler(SORT_ID)}

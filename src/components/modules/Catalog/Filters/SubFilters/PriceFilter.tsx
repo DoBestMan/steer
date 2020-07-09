@@ -48,7 +48,7 @@ export default function PriceFilter({ hasResults, priceFilter }: Props) {
       </p>
       <Link
         theme={THEME.LIGHT}
-        className="filter-button"
+        className="dropdown-button"
         as="button"
         onClick={createOpenFilterHandler(PRICE_ID)}
         css={[styles.range, styles.smallShow]}
