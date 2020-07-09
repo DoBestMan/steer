@@ -14,6 +14,7 @@ export enum ROUTES {
   PRODUCT_DETAIL = 'productDetail',
   PRODUCT_REVIEWS = 'productReviews',
   TIRE_CATEGORY = 'tireCategory',
+  TIRE_REVIEWS = 'tireReviews',
   VEHICLES_CATEGORY = 'vehiclesCategory',
 }
 
@@ -28,6 +29,7 @@ export const ROUTE_MAP: Record<ROUTES, string> = {
   [ROUTES.PRODUCT_DETAIL]: '/brands/[brandName]/[productLine]',
   [ROUTES.PRODUCT_REVIEWS]: '/brands/[brandName]/[productLine]/reviews',
   [ROUTES.TIRE_CATEGORY]: '/tire-sizes/[sizeInfo]',
+  [ROUTES.TIRE_REVIEWS]: '/tire-reviews',
   [ROUTES.VEHICLES_CATEGORY]: '/vehicles/[make]/[model]/[year]',
   [ROUTES.BRAND_CATEGORY]: '/[brandName]/[categoryOrType]',
 };
