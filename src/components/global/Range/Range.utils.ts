@@ -11,7 +11,8 @@ interface Props {
   interval: number;
   maxEl: MutableRefObject<Element | null>;
   minEl: MutableRefObject<Element | null>;
-  onChange: (value: number) => void;
+  onChange: (value: number) => void; // updates local value
+  onMouseUp?: () => void; // updates parent value
   railEl: MutableRefObject<HTMLDivElement | null>;
   railMax: MutableRefObject<number>;
   railMin: MutableRefObject<number>;
@@ -56,9 +57,9 @@ export function initListeners(props: Props) {
   }
   const { current: sliderNode } = sliderEl;
 
-  sliderNode.addEventListener('keydown', (e) => handleKeyDown(props, e));
-  sliderNode.addEventListener('touchstart', (e) => handleMouseDown(props, e));
-  sliderNode.addEventListener('mousedown', (e) => handleMouseDown(props, e));
+  sliderNode.addEventListener('keydown', handleKeyDown.bind(null, props));
+  sliderNode.addEventListener('touchstart', handleMouseDown.bind(null, props));
+  sliderNode.addEventListener('mousedown', handleMouseDown.bind(null, props));
 
   // min/max is set from the sibling's value
   // if previous element sibling exists, this is max slider
@@ -90,8 +91,8 @@ export function handleMouseDown(props: Props, e: MouseEvent | TouchEvent) {
 
   document.addEventListener('mousemove', handleMouseMove);
   document.addEventListener('touchmove', handleMouseMove);
-  document.addEventListener('mouseup', () => handleMouseUp(props));
-  document.addEventListener('touchend', () => handleMouseUp(props));
+  document.addEventListener('mouseup', handleMouseUp);
+  document.addEventListener('touchend', handleMouseUp);
   function handleMouseMove(e: MouseEvent | TouchEvent) {
     if (!sliderEl.current || !railEl.current) {
       return;
@@ -111,11 +112,12 @@ export function handleMouseDown(props: Props, e: MouseEvent | TouchEvent) {
     e.stopPropagation();
   }
 
-  function handleMouseUp(props: Props) {
+  function handleMouseUp() {
+    props.onMouseUp && props.onMouseUp();
     document.removeEventListener('mousemove', handleMouseMove);
     document.removeEventListener('touchmove', handleMouseMove);
-    document.removeEventListener('mouseup', () => handleMouseUp(props));
-    document.removeEventListener('touchend', () => handleMouseUp(props));
+    document.removeEventListener('mouseup', handleMouseUp);
+    document.removeEventListener('touchend', handleMouseUp);
   }
 
   e.preventDefault();

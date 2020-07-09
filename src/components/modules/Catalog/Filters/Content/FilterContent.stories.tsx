@@ -1,5 +1,6 @@
 import { CSSObject } from '@emotion/core';
 import { action } from '@storybook/addon-actions';
+import { boolean } from '@storybook/addon-knobs';
 
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
@@ -34,6 +35,7 @@ export function FilterContentChecklist() {
       <Icon css={closeStyles} name={ICONS.CLOSE} />
       <FilterChecklist
         {...filterChecklist}
+        isPreviewLoading={boolean('Loading', false)}
         filtersToApply={{}}
         onChange={onChange()}
       />
@@ -45,6 +47,7 @@ export function FilterContentRange() {
   return (
     <FilterRange
       {...warrantyFilter}
+      isPreviewLoading={boolean('Loading', false)}
       filtersToApply={{}}
       onChange={onChange()}
     />

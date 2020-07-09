@@ -4,6 +4,7 @@ import { useRef } from 'react';
 
 import { useCatalogPageContext } from '~/context/CatalogPage.context';
 import { CatalogSummaryContextProvider } from '~/context/CatalogSummary.context';
+import { SiteCatalogFilters } from '~/data/models/SiteCatalogFilters';
 import { SiteCatalogProducts } from '~/data/models/SiteCatalogProducts';
 import { SiteCatalogSummary } from '~/data/models/SiteCatalogSummary';
 
@@ -20,6 +21,8 @@ import {
 interface Props {
   comesFromSearch: boolean;
   hasTopPicks: boolean;
+  onPreviewFilters: (filters: Record<string, string>) => Promise<void>;
+  previewFiltersData: SiteCatalogFilters;
   siteCatalogProducts: SiteCatalogProducts;
   siteCatalogSummary: SiteCatalogSummary;
 }
@@ -29,6 +32,8 @@ function CatalogPage({
   comesFromSearch,
   siteCatalogProducts,
   siteCatalogSummary,
+  onPreviewFilters,
+  previewFiltersData,
 }: Props) {
   // TEMP: use route params for testing flows
   const router = useRouter();
@@ -74,6 +79,8 @@ function CatalogPage({
         {hasResults && showCatalogGrid && (
           <div ref={catalogGrid}>
             <CatalogGrid
+              previewFiltersData={previewFiltersData}
+              onPreviewFilters={onPreviewFilters}
               siteCatalogProducts={siteCatalogProducts}
               hasTopPicks={hasTopPicks}
               siteCatalogSummary={siteCatalogSummary}

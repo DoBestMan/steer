@@ -10,6 +10,7 @@ import {
   SiteCatalogSortListItem,
   SiteCatalogSortListItemStateEnum,
 } from '~/data/models/SiteCatalogSortListItem';
+import { minMaxify } from '~/lib/utils/string';
 
 import { CatalogFilterTypes, FilterContentTypes } from './Filter.types';
 
@@ -113,12 +114,13 @@ export function getInitialFiltersState(
 
     // range filter
     if (filter.type === SiteCatalogFilterRangeTypeEnum.SiteCatalogFilterRange) {
-      if (!filter.currentMinValue && !filter.currentMaxValue) {
+      if (!filter.currentMinValue || !filter.currentMaxValue) {
         return;
       }
-      initialState[filter.id] = `${filter.currentMinValue || filter.minValue},${
-        filter.currentMaxValue || filter.maxValue
-      }`;
+      initialState[filter.id] = minMaxify(
+        filter.currentMinValue,
+        filter.currentMaxValue,
+      );
     }
   });
 

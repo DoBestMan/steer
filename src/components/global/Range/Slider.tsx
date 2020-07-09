@@ -15,6 +15,7 @@ interface Props {
   min: number;
   onAriaTextChange: (value: number) => string;
   onChange: (value: number) => void;
+  onMouseUp?: () => void;
   railEl: MutableRefObject<HTMLDivElement | null>;
   shouldReset?: boolean;
   size: RANGE_SLIDER_SIZE;

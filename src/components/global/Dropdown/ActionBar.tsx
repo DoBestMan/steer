@@ -1,15 +1,19 @@
+import { ReactNode } from 'react';
+
 import Button from '~/components/global/Button/Button';
 
 import styles from './ActionBar.styles';
 
 export interface ActionBarProps {
+  isDisabled?: boolean;
   onClickPrimary: () => void;
   onClickSecondary?: () => void;
-  primaryLabel: string;
+  primaryLabel: string | ReactNode;
   secondaryLabel?: string;
 }
 
 function ActionBar({
+  isDisabled = false,
   primaryLabel,
   onClickPrimary,
   secondaryLabel,
@@ -18,11 +22,19 @@ function ActionBar({
   return (
     <div css={styles.root}>
       {secondaryLabel && (
-        <button type="button" css={styles.secondary} onClick={onClickSecondary}>
+        <button
+          type="button"
+          css={[styles.secondary, isDisabled && styles.disabled]}
+          onClick={onClickSecondary}
+        >
           {secondaryLabel}
         </button>
       )}
-      <Button css={styles.primary} onClick={onClickPrimary}>
+      <Button
+        isDisabled={isDisabled}
+        css={styles.primary}
+        onClick={onClickPrimary}
+      >
         {primaryLabel}
       </Button>
     </div>

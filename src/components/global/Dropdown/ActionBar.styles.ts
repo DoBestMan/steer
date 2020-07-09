@@ -15,15 +15,13 @@ export const ACTION_BAR_HEIGHT = {
 };
 
 const styles: StylesMap = {
+  disabled: {
+    opacity: 0.4,
+    pointerEvents: 'none',
+  },
   open: {
     display: 'block',
   },
-  secondary: [
-    typography.primarySubhead,
-    {
-      color: COLORS.LIGHT.GRAY_70,
-    },
-  ],
   primary: {
     marginLeft: 'auto',
   },
@@ -53,6 +51,12 @@ const styles: StylesMap = {
       padding: `${SPACING.SIZE_15}px ${SPACING.SIZE_30}px`,
     },
   },
+  secondary: [
+    typography.primarySubhead,
+    {
+      color: COLORS.LIGHT.GRAY_70,
+    },
+  ],
 };
 
 export default styles;

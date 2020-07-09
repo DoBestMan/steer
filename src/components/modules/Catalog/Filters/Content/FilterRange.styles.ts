@@ -18,7 +18,6 @@ const styles: StylesMap = {
       borderColor: COLORS.LIGHT.GRAY_70,
       color: COLORS.LIGHT.GRAY_70,
       cursor: 'pointer',
-      marginRight: SPACING.SIZE_30,
       width: 'fit-content',
     },
   ],

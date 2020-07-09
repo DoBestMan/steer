@@ -7,6 +7,7 @@ export interface CatalogPageContextProps {
   isAdvancedView: boolean;
   isLoading: boolean;
   setIsAdvancedView(isAdvancedView: boolean): void;
+  setIsLoading(isLoading: boolean): void;
   setShowCatalogGrid(showCatalogGrid: boolean): void;
   showCatalogGrid: boolean;
 }
@@ -37,6 +38,7 @@ function useContextSetup({
     isAdvancedView,
     isLoading,
     setIsAdvancedView,
+    setIsLoading,
     setShowCatalogGrid,
     showCatalogGrid,
   };

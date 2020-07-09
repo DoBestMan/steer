@@ -28,6 +28,9 @@ const styles: StylesMap = {
   copyRoot: {
     display: 'flex',
   },
+  disabled: {
+    pointerEvents: 'none',
+  },
   disabledIndicator: {
     opacity: 0.2,
   },
@@ -71,7 +74,7 @@ const styles: StylesMap = {
     color: COLORS.GLOBAL.ORANGE,
   },
   rootHover: {
-    ':hover': {
+    ':hover&:not(:disabled)': {
       span: {
         borderColor: COLORS.DARK.GRAY_DARK_SOLID,
       },

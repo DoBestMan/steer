@@ -37,13 +37,20 @@ export default function Dropdown({
   useEffect(() => {
     // click/mouse handlers to close dropdown, click outside + escape
     function onKeypress(e: KeyboardEvent) {
+      if (isModal) {
+        return;
+      }
+
       if (e.keyCode === KEYCODES.ESCAPE) {
         onClose();
       }
     }
     function onClick(e: Event) {
+      if (isModal || !isOpen) {
+        return;
+      }
+
       if (
-        isOpen &&
         e.target instanceof HTMLElement &&
         !dropdownEl.current?.contains(e.target)
       ) {
@@ -57,7 +64,7 @@ export default function Dropdown({
       document.removeEventListener('mousedown', onClick);
       document.removeEventListener('keydown', onKeypress);
     };
-  }, [isOpen, onClose]);
+  }, [isOpen, onClose, isModal]);
 
   useEffect(() => {
     // don't update positioning if dropdown isn't open yet

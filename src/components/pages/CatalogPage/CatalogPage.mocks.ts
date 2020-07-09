@@ -7,6 +7,8 @@ import { SiteCatalogProducts } from '~/data/models/SiteCatalogProducts';
 
 export const emptyHandleUpdateFilters = () => {};
 
+export const emptyOnPreviewResults = () => Promise.resolve();
+
 export const emptyCatalogProducts: SiteCatalogProducts = {
   siteCatalogProductsResultList: [],
   listResultMetadata: {},

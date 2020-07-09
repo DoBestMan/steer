@@ -4,6 +4,7 @@ import CatalogPageContainer from '~/components/pages/CatalogPage/CatalogPage.con
 import {
   emptyCatalogProducts,
   emptyHandleUpdateFilters,
+  emptyOnPreviewResults,
 } from '~/components/pages/CatalogPage/CatalogPage.mocks';
 import { vehiclesNoOeWithSize } from '~/components/pages/CatalogPage/CatalogSummary/CatalogSummary.mocks';
 // import { COLORS } from '~/lib/constants';
@@ -29,9 +30,11 @@ function TireCategory() {
   return (
     <CatalogPageContainer
       handleUpdateFilters={emptyHandleUpdateFilters}
+      onPreviewFilters={emptyOnPreviewResults}
       siteCatalogProducts={emptyCatalogProducts}
       siteCatalogSummary={vehiclesNoOeWithSize}
       hasTopPicks={false}
+      previewFiltersData={emptyCatalogProducts.siteCatalogFilters}
     />
   );
 }

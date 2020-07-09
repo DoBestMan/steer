@@ -10,12 +10,15 @@ import {
 import { useCatalogPageContext } from '~/context/CatalogPage.context';
 import { SiteCatalogFilters } from '~/data/models/SiteCatalogFilters';
 import { createContext } from '~/lib/utils/context';
+import { isObjectEqual } from '~/lib/utils/object';
 
 import { CatalogFilterTypes } from './Filter.types';
 import { getInitialFiltersState, getValueKeys } from './Filters.utils';
 
 interface ContextProviderProps {
   children: ReactNode;
+  onPreviewFilters: (filters: Record<string, string>) => Promise<void>;
+  previewFiltersData: SiteCatalogFilters;
   siteCatalogFilters: SiteCatalogFilters;
 }
 
@@ -30,10 +33,11 @@ interface ContextProviderProps {
  * @createToggleFilterHandler - used for filters that are immediately applied on click (toggles/sort) with the option to overwrite all values
  * @createUpdateFilterGroup - updates grouped filters to apply once `Apply` is clicked
  * @filtersToApply - selected filters from a currently open popup (not immediately applied)
- * @isLoading - loading state for fetching new results
  * @isPopularActive - determines if popular filter button has active state
- * @previewFiltersToApply - previews filters to apply with updated count (does not apply filters globally)
+ * @isPreviewLoading - loading state for fetching new results
+ * @previewFiltersData - used to reflect new data for filters in open popup (eg count, disabled states, etc)
  * @selectingFilter - the filter index that has an open dropdown
+ * @totalMatches - matching results with filters applied
  * Some function props are used in both click event and other scenarios (useEffect or other custom trigger)
  * which is why they might be wrapped with another function
  */
@@ -51,10 +55,11 @@ export interface FiltersContextProps {
   createToggleFilterHandler: (args: UpdateFilterArgs) => () => void;
   createUpdateFilterGroup: (args: UpdateFilterArgs) => () => void;
   filtersToApply: Record<string, string>;
-  isLoading: boolean;
   isPopularActive: boolean;
-  previewFiltersToApply: () => void;
+  isPreviewLoading: boolean;
+  previewFiltersData: SiteCatalogFilters;
   selectingFilter: number | string | null;
+  totalMatches: number;
 }
 
 const FiltersContext = createContext<FiltersContextProps>();
@@ -77,13 +82,18 @@ const FiltersContext = createContext<FiltersContextProps>();
  */
 
 interface ContextArgs {
+  onPreviewFilters: ContextProviderProps['onPreviewFilters'];
+  previewFiltersData: ContextProviderProps['previewFiltersData'];
   siteCatalogFilters: SiteCatalogFilters;
 }
 
 export function useFiltersContextSetup({
+  onPreviewFilters,
+  previewFiltersData,
   siteCatalogFilters = { filtersList: [], sortList: [], totalMatches: 0 },
 }: ContextArgs) {
-  const { isLoading, handleUpdateResults } = useCatalogPageContext();
+  const { handleUpdateResults } = useCatalogPageContext();
+  const [isPreviewLoading, setIsPreviewLoading] = useState(false);
   const { initialState, isPopularActive } = useMemo(
     () =>
       getInitialFiltersState(
@@ -100,10 +110,28 @@ export function useFiltersContextSetup({
   );
 
   useEffect(() => {
+    if (!selectingFilter || isObjectEqual(initialState, filtersToApply)) {
+      return;
+    }
+
+    setIsPreviewLoading(true);
+    onPreviewFilters(filtersToApply).then(() => {
+      setIsPreviewLoading(false);
+    });
+  }, [
+    selectingFilter,
+    setIsPreviewLoading,
+    filtersToApply,
+    initialState,
+    onPreviewFilters,
+  ]);
+
+  useEffect(() => {
     const { initialState } = getInitialFiltersState(
       siteCatalogFilters.filtersList,
       siteCatalogFilters.sortList,
     );
+
     setFiltersToApply(initialState);
   }, [siteCatalogFilters]);
 
@@ -202,20 +230,25 @@ export function useFiltersContextSetup({
       [],
     ),
     filtersToApply,
-    isLoading,
     isPopularActive,
-    previewFiltersToApply: () => {
-      // TODO: preview count/updated filter results in open dropdown
-    },
+    isPreviewLoading,
+    previewFiltersData,
     selectingFilter,
+    totalMatches: siteCatalogFilters.totalMatches,
   };
 }
 
 export function FiltersContextProvider({
   children,
   siteCatalogFilters,
+  onPreviewFilters,
+  previewFiltersData,
 }: ContextProviderProps) {
-  const value = useFiltersContextSetup({ siteCatalogFilters });
+  const value = useFiltersContextSetup({
+    previewFiltersData,
+    siteCatalogFilters,
+    onPreviewFilters,
+  });
   return (
     <FiltersContext.Provider value={value}>{children}</FiltersContext.Provider>
   );

@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { DATA_COMPONENT_LABEL } from '~/components/modules/Catalog/Header.constants';
 import HeaderContainer from '~/components/modules/Catalog/Header.container';
 import { useCatalogPageContext } from '~/context/CatalogPage.context';
+import { SiteCatalogFilters } from '~/data/models/SiteCatalogFilters';
 import {
   SiteCatalogProductGroupItem,
   SiteCatalogProductGroupItemEnum,
@@ -21,6 +22,8 @@ import CatalogProductGroups from '../CatalogProductGroups/CatalogProductGroups';
 
 interface Props {
   hasTopPicks: boolean;
+  onPreviewFilters: (filters: Record<string, string>) => Promise<void>;
+  previewFiltersData: SiteCatalogFilters;
   siteCatalogProducts: SiteCatalogProducts;
   siteCatalogSummary?: SiteCatalogSummary;
 }
@@ -29,6 +32,8 @@ function CatalogGrid({
   hasTopPicks,
   siteCatalogSummary,
   siteCatalogProducts,
+  onPreviewFilters,
+  previewFiltersData,
 }: Props) {
   const { isAdvancedView, isLoading } = useCatalogPageContext();
   const catalogGrid = useRef<HTMLDivElement | null>(null);
@@ -102,6 +107,8 @@ function CatalogGrid({
   return (
     <div ref={catalogGrid}>
       <HeaderContainer
+        previewFiltersData={previewFiltersData}
+        onPreviewFilters={onPreviewFilters}
         sizeList={siteCatalogSummary?.siteCatalogSummaryMeta?.sizeList}
         hasTopPicks={hasTopPicks}
         siteCatalogProducts={siteCatalogProducts}

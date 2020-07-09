@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import Range from '~/components/global/Range/Range';
 import { SiteCatalogFilterRange } from '~/data/models/SiteCatalogFilterRange';
@@ -22,31 +22,25 @@ export default function FilterRange({
   onChange,
   step,
   unit,
-}: SiteCatalogFilterRange & Pick<ChildProps, 'onChange' | 'filtersToApply'>) {
-  const [shouldReset, setShouldReset] = useState(false);
+}: SiteCatalogFilterRange &
+  Pick<ChildProps, 'isPreviewLoading' | 'onChange' | 'filtersToApply'>) {
   const filterGroup = filtersToApply[id];
+  const [shouldReset, setShouldReset] = useState(!filtersToApply[id]);
   const handleChange = useCallback(
-    (extrema: string, value: number) => {
-      let val = '';
-      const min = filterGroup?.split(',')[0] || minValue;
-      const max = filterGroup?.split(',')[1] || maxValue;
-
-      if (extrema === 'currentMin') {
-        val = `${value},${max}`;
-      }
-      if (extrema === 'currentMax') {
-        val = `${min},${value}`;
-      }
-
-      onChange({ value: { [id]: val }, overwrite: true })();
+    (value: string) => {
+      onChange({ value: { [id]: value }, overwrite: true })();
     },
-    [id, filterGroup, maxValue, minValue, onChange],
+    [id, onChange],
   );
 
+  const prevFilterGroup = useRef(filterGroup);
   useEffect(() => {
-    if (!filterGroup) {
-      return setShouldReset(true);
+    if (prevFilterGroup.current && !filterGroup) {
+      setShouldReset(true);
     }
+
+    prevFilterGroup.current = filterGroup;
+
     setShouldReset(false);
   }, [filterGroup]);
 
@@ -67,7 +61,7 @@ export default function FilterRange({
         getAriaText={mapUnitToAriaFormatter[unit]}
         name={ui('catalog.filters.slider', { name: id })}
         interval={step}
-        onChange={handleChange}
+        onUpdate={handleChange}
         max={maxValue}
         shouldReset={shouldReset}
         min={minValue}

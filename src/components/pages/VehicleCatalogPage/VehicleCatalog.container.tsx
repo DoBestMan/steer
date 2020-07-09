@@ -1,11 +1,12 @@
 import { useRouter } from 'next/router';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 
 import CatalogPageContainer from '~/components/pages/CatalogPage/CatalogPage.container';
 import { SiteCatalogProducts } from '~/data/models/SiteCatalogProducts';
 import { SiteCatalogSummary } from '~/data/models/SiteCatalogSummary';
 import { useApiDataWithDefault } from '~/hooks/useApiDataWithDefault';
 import { eventEmitters } from '~/lib/events/emitters';
+import { fetch } from '~/lib/fetch';
 
 export interface VehicleCatalogData {
   serverData: {
@@ -20,6 +21,8 @@ export const VEHICLE_PARAMS = [
   'loadIndex',
   'speedRating',
   'oem',
+  'group',
+  'skipGroups',
 ];
 
 function VehicleCatalogContainer({ serverData }: VehicleCatalogData) {
@@ -86,11 +89,30 @@ function VehicleCatalogContainer({ serverData }: VehicleCatalogData) {
     [asPath, queryParams, pathname, push, revalidateProducts],
   );
 
+  const [previewFiltersData, setPreviewFiltersData] = useState(
+    siteCatalogProducts.siteCatalogFilters,
+  );
+  const onPreviewFilters = useCallback(
+    async (filters: Record<string, string>) => {
+      const { siteCatalogProducts } = await fetch({
+        endpoint: '/products-vehicle',
+        includeUserRegion: true,
+        includeUserZip: true,
+        method: 'get',
+        query: filters,
+      });
+      setPreviewFiltersData(siteCatalogProducts.siteCatalogFilters);
+    },
+    [],
+  );
+
   return (
     <CatalogPageContainer
+      onPreviewFilters={onPreviewFilters}
       handleUpdateFilters={handleUpdateFilters}
       siteCatalogProducts={siteCatalogProducts}
       siteCatalogSummary={siteCatalogSummary}
+      previewFiltersData={previewFiltersData}
     />
   );
 }

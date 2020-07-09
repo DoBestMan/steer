@@ -15,7 +15,11 @@ function FiltersCarousel({ activeFilter, children, label }: Props) {
     <>
       <p css={styles.label}>{label}</p>
       <div
-        css={[styles.container, activeFilter !== null && styles.disableEvents]}
+        css={[
+          styles.container,
+          // `disableEvents` used on buttons elsewhere
+          activeFilter !== null && [styles.disableScroll, styles.disableEvents],
+        ]}
       >
         <Carousel slideClass="filter-button" freeScroll>
           {children}

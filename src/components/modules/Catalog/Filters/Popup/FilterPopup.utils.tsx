@@ -23,6 +23,7 @@ export interface ChildProps {
   filter: CatalogFilterTypes;
   filtersToApply: Record<string, string>;
   isLarge?: boolean;
+  isPreviewLoading: boolean;
   onChange: FiltersContextProps['createUpdateFilterGroup'];
 }
 
@@ -37,6 +38,7 @@ export const mapTypeToContent: Record<
   [FilterContentTypes.SiteCatalogFilterList]({
     filter,
     filtersToApply,
+    isPreviewLoading,
     onChange,
   }: ChildProps) {
     return (
@@ -44,18 +46,21 @@ export const mapTypeToContent: Record<
         {...(filter as SiteCatalogFilterList)}
         filtersToApply={filtersToApply}
         onChange={onChange}
+        isPreviewLoading={isPreviewLoading}
       />
     );
   },
   [FilterContentTypes.SiteCatalogFilterRange]({
     filter,
     filtersToApply,
+    isPreviewLoading,
     onChange,
   }: ChildProps) {
     return (
       <FilterRange
         {...(filter as SiteCatalogFilterRange)}
         onChange={onChange}
+        isPreviewLoading={isPreviewLoading}
         filtersToApply={filtersToApply}
       />
     );
@@ -66,6 +71,7 @@ export const mapTypeToContent: Record<
   [FilterContentTypes.SiteCatalogFilterPopular]({
     filter,
     filtersToApply,
+    isPreviewLoading,
     onChange,
   }: ChildProps) {
     return (
@@ -73,6 +79,7 @@ export const mapTypeToContent: Record<
         {...(filter as SiteCatalogFilterPopular)}
         filtersToApply={filtersToApply}
         onChange={onChange}
+        isPreviewLoading={isPreviewLoading}
       />
     );
   },

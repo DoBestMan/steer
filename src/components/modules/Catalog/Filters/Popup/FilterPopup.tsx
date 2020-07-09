@@ -1,12 +1,14 @@
 import { useEffect, useRef } from 'react';
 
 import Dropdown from '~/components/global/Dropdown/Dropdown';
+import Loading from '~/components/global/Loading/Loading';
 import {
   SiteCatalogFilterListPresentationStyleEnum,
   SiteCatalogFilterListTypeEnum,
 } from '~/data/models/SiteCatalogFilterList';
 import { SiteCatalogFilterToggleTypeEnum } from '~/data/models/SiteCatalogFilterToggle';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
+import { THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import { CatalogFilterTypes, FilterContentTypes } from '../Filter.types';
@@ -32,10 +34,11 @@ export default function FilterPopup({
   const {
     applyFilters,
     clearFiltersToApply,
-    isLoading,
+    isPreviewLoading,
     createResetFiltersHandler,
     createUpdateFilterGroup,
     filtersToApply,
+    totalMatches,
   } = useFiltersContext();
   const prevIsLarge = useRef(isLarge);
   const prevIsOpen = useRef(isOpen);
@@ -51,11 +54,11 @@ export default function FilterPopup({
     }
     prevIsLarge.current = isLarge;
     // returns filtersToApply to original state if popup closes without applying
-    if (prevIsOpen.current && !isOpen && !isLoading) {
+    if (prevIsOpen.current && !isOpen && !isPreviewLoading) {
       clearFiltersToApply();
     }
     prevIsOpen.current = isOpen;
-  }, [clearFiltersToApply, isOpen, onClose, filter, isLoading, isLarge]);
+  }, [clearFiltersToApply, isOpen, onClose, filter, isPreviewLoading, isLarge]);
 
   if (
     filter.type === SiteCatalogFilterToggleTypeEnum.SiteCatalogFilterToggle ||
@@ -68,6 +71,7 @@ export default function FilterPopup({
     filter,
     filtersToApply,
     isLarge,
+    isPreviewLoading,
     onChange: createUpdateFilterGroup,
   };
 
@@ -78,9 +82,14 @@ export default function FilterPopup({
       SiteCatalogFilterListPresentationStyleEnum.Large;
   const actionBar = hasActionBar
     ? {
+        isDisabled: isPreviewLoading,
         onClickPrimary: applyFilters,
         onClickSecondary: createResetFiltersHandler(filter),
-        primaryLabel: ui('catalog.filters.apply'),
+        primaryLabel: isPreviewLoading ? (
+          <Loading theme={THEME.DARK} />
+        ) : (
+          ui('catalog.filters.viewResults', { number: totalMatches })
+        ),
         secondaryLabel: ui('catalog.filters.reset'),
       }
     : null;

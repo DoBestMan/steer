@@ -23,25 +23,29 @@ interface GroupProps {
     value: Record<string, string>,
     overwrite?: boolean,
   ) => () => void;
+  isPreviewLoading: boolean;
 }
 const mapGroupTypeToInput: Record<
   SiteCatalogFilterGroupGroupTypeEnum,
   (props: GroupProps) => JSX.Element[]
 > = {
   [SiteCatalogFilterGroupGroupTypeEnum.Checklist]({
-    group,
     filtersToApply,
+    group,
     handleChange,
+    isPreviewLoading,
   }: GroupProps) {
     return group.items.map((item, idx) => (
       <div css={styles.container} key={idx}>
         <TitleCheckbox
-          key={idx}
           label={item.title}
           description={item.description}
           count={item.count}
           flair={item.flair}
-          isDisabled={item.state === SiteCatalogFilterItemStateEnum.Disabled}
+          isDisabled={
+            item.state === SiteCatalogFilterItemStateEnum.Disabled ||
+            isPreviewLoading
+          }
           handleChange={handleChange(item.value)}
           defaultChecked={hasActiveValue(item, filtersToApply)}
         />
@@ -49,20 +53,23 @@ const mapGroupTypeToInput: Record<
     ));
   },
   [SiteCatalogFilterGroupGroupTypeEnum.Radio]({
+    filtersToApply,
     group,
     handleChange,
-    filtersToApply,
+    isPreviewLoading,
   }: GroupProps) {
     return group.items.map((item, idx) => (
       <div css={styles.container} key={idx}>
         <TitleRadio
           name={`group-${idx}`}
-          key={idx}
           label={item.title}
           description={item.description}
           count={item.count}
           flair={item.flair}
-          isDisabled={item.state === SiteCatalogFilterItemStateEnum.Disabled}
+          isDisabled={
+            item.state === SiteCatalogFilterItemStateEnum.Disabled ||
+            isPreviewLoading
+          }
           onChange={handleChange(item.value, true)}
           value={item.title}
           activeValue={
@@ -80,9 +87,11 @@ export default function FilterChecklist({
   filterGroups,
   filtersToApply,
   header,
+  isPreviewLoading,
   onChange,
   presentationStyle,
-}: SiteCatalogFilterList & Pick<ChildProps, 'onChange' | 'filtersToApply'>) {
+}: SiteCatalogFilterList &
+  Pick<ChildProps, 'isPreviewLoading' | 'onChange' | 'filtersToApply'>) {
   const label = header?.title;
   const { greaterThan } = useBreakpoints();
   const lgStyles =
@@ -119,6 +128,7 @@ export default function FilterChecklist({
             group,
             handleChange,
             filtersToApply,
+            isPreviewLoading,
           })}
         </div>
       ))}

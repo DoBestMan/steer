@@ -75,7 +75,7 @@
       "priceRange": "{{min}} to {{max}}",
       "reset": "Reset filters",
       "results": "{{number}} results",
-      "apply": "Apply",
+      "viewResults": "View {{number}} tires",
       "popularFilters": "Popular Filters"
     },
     "header": {

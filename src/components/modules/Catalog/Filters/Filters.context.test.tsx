@@ -2,6 +2,7 @@ import { renderHook } from '@testing-library/react-hooks';
 import { ReactNode } from 'react';
 import { act } from 'react-test-renderer';
 
+import { emptyCatalogProducts } from '~/components/pages/CatalogPage/CatalogPage.mocks';
 import { CatalogPageContextProvider } from '~/context/CatalogPage.context';
 import { SiteCatalogFilterListTypeEnum } from '~/data/models/SiteCatalogFilterList';
 import { SiteCatalogFilters } from '~/data/models/SiteCatalogFilters';
@@ -14,6 +15,8 @@ const mockArgs = {
   siteCatalogFilters: {
     filtersList: mockSiteCatalogFilters,
   } as SiteCatalogFilters,
+  onPreviewFilters: jest.fn(),
+  previewFiltersData: emptyCatalogProducts.siteCatalogFilters as SiteCatalogFilters,
 };
 
 interface WrapperProps {

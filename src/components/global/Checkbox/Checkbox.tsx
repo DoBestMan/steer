@@ -24,8 +24,7 @@ export default function Checkbox({
       <input
         aria-checked={checked}
         aria-disabled={isDisabled}
-        checked={checked}
-        css={styles.input}
+        css={[styles.input, isDisabled && styles.disabled]}
         role="checkbox"
         type="checkbox"
         defaultChecked={defaultChecked}

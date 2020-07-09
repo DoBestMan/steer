@@ -5,6 +5,7 @@ import FilterButton from '~/components/global/Button/FilterButton';
 import FilterButtonToggle from '~/components/global/Button/FilterButtonToggle';
 import FiltersCarousel from '~/components/global/FiltersCarousel/FiltersCarousel';
 import styles from '~/components/global/FiltersCarousel/FiltersCarousel.styles';
+import { useCatalogPageContext } from '~/context/CatalogPage.context';
 import { SiteCatalogFilterToggleTypeEnum } from '~/data/models/SiteCatalogFilterToggle';
 import { ui } from '~/lib/utils/ui-dictionary';
 
@@ -12,6 +13,8 @@ import { CatalogFilterTypes } from './Filter.types';
 import FilterPopups from './FilterPopups';
 import { useFiltersContext } from './Filters.context';
 import { getFilterLabel, hasActiveValue } from './Filters.utils';
+
+export const POPULAR_ID = 'popular';
 
 interface Props {
   filters: CatalogFilterTypes[];
@@ -28,11 +31,11 @@ export default function FilterButtonsCarousel({
     createOpenFilterHandler,
     createToggleFilterHandler,
     selectingFilter,
-    isLoading,
   } = useFiltersContext();
+  const { isLoading } = useCatalogPageContext();
   const { header } = useTheme();
-  function onFilterClick(e: MouseEvent) {
-    createOpenFilterHandler(0)(e);
+  function onPopularFilterClick(e: MouseEvent) {
+    createOpenFilterHandler(POPULAR_ID)(e);
   }
 
   const isPopularActive = popularFilters.some((filter) => {
@@ -53,11 +56,11 @@ export default function FilterButtonsCarousel({
           ]}
           isDisabled={isLoading}
           label={popularLabel}
-          isDropdownOpen={selectingFilter === 0}
+          isDropdownOpen={selectingFilter === POPULAR_ID}
           isActive={isPopularActive}
-          onClick={onFilterClick}
+          onClick={onPopularFilterClick}
           theme={header.buttonTheme}
-          aria-expanded={selectingFilter === 0}
+          aria-expanded={selectingFilter === POPULAR_ID}
         />
         {
           (filters.map((filter, idx) => {
@@ -98,7 +101,6 @@ export default function FilterButtonsCarousel({
           }) as unknown) as ReactElement
         }
       </FiltersCarousel>
-      {/* TODO: integrate filters */}
       <FilterPopups popularFilters={popularFilters} filters={filters} />
     </>
   );

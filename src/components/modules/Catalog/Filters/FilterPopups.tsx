@@ -1,6 +1,7 @@
 import { SiteCatalogFilterToggleTypeEnum } from '~/data/models/SiteCatalogFilterToggle';
 
 import { CatalogFilterTypes, FilterContentTypes } from './Filter.types';
+import { POPULAR_ID } from './FilterButtonsCarousel';
 import { useFiltersContext } from './Filters.context';
 import FilterPopup from './Popup/FilterPopup';
 
@@ -16,7 +17,7 @@ export default function FilterPopups({ filters, popularFilters }: Props) {
     <>
       {!!popularFilters.length && (
         <FilterPopup
-          isOpen={selectingFilter === 0}
+          isOpen={selectingFilter === POPULAR_ID}
           onClose={clearSelectingFilter}
           filter={{
             type: FilterContentTypes.SiteCatalogFilterPopular,

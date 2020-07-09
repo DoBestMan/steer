@@ -7,9 +7,11 @@ import styles from './FilterChecklist.styles';
 
 export default function FilterPopular({
   filtersToApply,
+  isPreviewLoading,
   items,
   onChange,
-}: SiteCatalogFilterPopular & Pick<ChildProps, 'onChange' | 'filtersToApply'>) {
+}: SiteCatalogFilterPopular &
+  Pick<ChildProps, 'isPreviewLoading' | 'onChange' | 'filtersToApply'>) {
   function handleChange(value: Record<string, string>) {
     return onChange({ value });
   }
@@ -24,6 +26,7 @@ export default function FilterPopular({
           return (
             <div css={styles.container} key={idx}>
               <TitleCheckbox
+                isDisabled={isPreviewLoading}
                 label={filter.item.title}
                 handleChange={handleChange(filter.item.value)}
                 defaultChecked={hasActiveValue(filter.item, filtersToApply)}

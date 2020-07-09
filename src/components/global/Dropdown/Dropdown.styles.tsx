@@ -12,14 +12,15 @@ import { typography } from '~/styles/typography.styles';
 
 import { ACTION_BAR_HEIGHT } from './ActionBar.styles';
 
+const DROPDOWN_MIN_WIDTH = 325;
+
 const styles: StylesMap = {
   open: {
     display: 'block',
   },
   actionBarDropdown: {
     paddingBottom: ACTION_BAR_HEIGHT.SM + SPACING.SIZE_20,
-    minWidth: 300,
-
+    minWidth: DROPDOWN_MIN_WIDTH,
     [MQ.M]: {
       paddingBottom: ACTION_BAR_HEIGHT.MED + SPACING.SIZE_20,
     },
@@ -56,6 +57,7 @@ const styles: StylesMap = {
       color: COLORS.GLOBAL.BLACK,
       display: 'none',
       marginTop: SPACING.SIZE_05 + 3, // allows border bottom to display for link buttons
+      minWidth: DROPDOWN_MIN_WIDTH,
       pointerEvents: 'auto',
       position: 'absolute',
       zIndex: Z_INDEX.TOP,

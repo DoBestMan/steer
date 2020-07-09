@@ -15,6 +15,7 @@ interface SliderArgs {
   max?: number;
   min?: number;
   onChange: (value: number) => void;
+  onMouseUp?: () => void;
   railEl: MutableRefObject<HTMLDivElement | null>;
   shouldReset?: boolean;
   sliderEl: MutableRefObject<HTMLDivElement | null>;
@@ -45,6 +46,9 @@ function useRangeSliderManager({
     valueNow,
   };
   useEffect(() => {
+    if (!shouldReset) {
+      return;
+    }
     valueNow.current = defaultValue;
     setNodeStyle(handlerProps);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -66,14 +70,17 @@ function useRangeSliderManager({
       if (!sliderEl.current) {
         return;
       }
-      sliderEl.current.removeEventListener('keydown', (e) =>
-        handleKeyDown(handlerProps, e),
+      sliderEl.current.removeEventListener(
+        'keydown',
+        handleKeyDown.bind(null, handlerProps),
       );
-      sliderEl.current.removeEventListener('mousedown', (e) =>
-        handleMouseDown(handlerProps, e),
+      sliderEl.current.removeEventListener(
+        'mousedown',
+        handleMouseDown.bind(null, handlerProps),
       );
-      sliderEl.current.removeEventListener('touchstart', (e) =>
-        handleMouseDown(handlerProps, e),
+      sliderEl.current.removeEventListener(
+        'touchstart',
+        handleMouseDown.bind(null, handlerProps),
       );
     };
 

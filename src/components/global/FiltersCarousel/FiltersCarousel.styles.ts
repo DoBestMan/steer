@@ -21,6 +21,9 @@ const styles: StylesMap = {
   disableEvents: {
     pointerEvents: 'none',
   },
+  disableScroll: {
+    overflow: 'hidden',
+  },
   filterButton: {
     pointerEvents: 'auto',
     // order matters to override when dropdown is open

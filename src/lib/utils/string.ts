@@ -59,3 +59,5 @@ export const keysToCamel = (object: Record<string, any>): Record<string, any> =>
     }),
     {},
   );
+
+export const minMaxify = (min: number, max: number) => `${min},${max}`;

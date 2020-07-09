@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
 import { useWindowSize } from '~/hooks/useWindowSize';
+import { minMaxify } from '~/lib/utils/string';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import { RANGE_SLIDER_SIZE } from './Range.constants';
@@ -19,7 +20,7 @@ interface Props {
   minDefault?: number;
   minLabel?: string;
   name: string;
-  onChange?: (extrema: string, value: number) => void;
+  onUpdate?: (value: string) => void;
   shouldReset?: boolean;
   size?: RANGE_SLIDER_SIZE;
 }
@@ -34,7 +35,7 @@ export default function Range({
   minDefault,
   name,
   shouldReset,
-  onChange,
+  onUpdate,
   size = RANGE_SLIDER_SIZE.REGULAR,
 }: Props) {
   const isSmall = size === RANGE_SLIDER_SIZE.SMALL;
@@ -45,7 +46,7 @@ export default function Range({
   const maxLabel = (formatLabel && formatLabel(maxCurrent)) || maxCurrent;
   const minLabel = (formatLabel && formatLabel(minCurrent)) || minCurrent;
   const { width } = useWindowSize(); // update fill color width if window is resized
-
+  const minMax = useRef(minMaxify(minCurrent, maxCurrent));
   function handleMaxChange(value: number) {
     setMaxCurrent(value);
   }
@@ -54,6 +55,9 @@ export default function Range({
   }
   function announceTextChange(value: number) {
     return (getAriaText && getAriaText(value)) || value.toString();
+  }
+  function onMouseUp() {
+    onUpdate && onUpdate(minMax.current);
   }
 
   useEffect(() => {
@@ -72,13 +76,6 @@ export default function Range({
   ]);
 
   useEffect(() => {
-    onChange && onChange('currentMax', maxCurrent);
-  }, [maxCurrent, onChange]);
-  useEffect(() => {
-    onChange && onChange('currentMin', minCurrent);
-  }, [minCurrent, onChange]);
-
-  useEffect(() => {
     if (!railEl.current) {
       return;
     }
@@ -94,6 +91,10 @@ export default function Range({
     }
   }, [minCurrent, maxCurrent, size, width]);
 
+  useEffect(() => {
+    minMax.current = minMaxify(minCurrent, maxCurrent);
+  }, [minCurrent, maxCurrent]);
+
   return (
     <div css={isSmall && styles.rootSmall}>
       {isSmall && <p css={styles.labelSm}>{minLabel}</p>}
@@ -107,6 +108,7 @@ export default function Range({
             interval={interval}
             max={max}
             onChange={handleMinChange}
+            onMouseUp={onMouseUp}
             shouldReset={shouldReset}
             defaultValue={minDefault || min}
             label={`${name} ${ui('catalog.filters.min')}`}
@@ -120,6 +122,7 @@ export default function Range({
             max={max}
             shouldReset={shouldReset}
             interval={interval}
+            onMouseUp={onMouseUp}
             onChange={handleMaxChange}
             defaultValue={maxDefault || max}
             label={`${name} ${ui('catalog.filters.max')}`}

@@ -4,6 +4,7 @@ import CatalogPageContainer from '~/components/pages/CatalogPage/CatalogPage.con
 import {
   emptyCatalogProducts,
   emptyHandleUpdateFilters,
+  emptyOnPreviewResults,
 } from '~/components/pages/CatalogPage/CatalogPage.mocks';
 import { vehiclesNoOeWithSize } from '~/components/pages/CatalogPage/CatalogSummary/CatalogSummary.mocks';
 
@@ -16,6 +17,8 @@ function BrandCategory() {
       hasTopPicks={false}
       siteCatalogProducts={emptyCatalogProducts}
       siteCatalogSummary={vehiclesNoOeWithSize}
+      onPreviewFilters={emptyOnPreviewResults}
+      previewFiltersData={emptyCatalogProducts.siteCatalogFilters}
     />
   );
 }
