@@ -40,9 +40,7 @@ function Prices({
               ]}
             >
               {label && <span css={styles.label}>{label} </span>}
-              {isStartingAtPrice && (
-                <span css={styles.label}>{ui('common.startingAtPrice')} </span>
-              )}
+              {isStartingAtPrice && ui('common.startingAtPrice') + ' '}
               {formatDollars(price.salePriceInCents)}
             </span>
             {price.estimatedRetailPriceInCents && !isStartingAtPrice && (
