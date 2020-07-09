@@ -4,8 +4,8 @@ import { THEME } from '~/lib/constants';
 import { uiJSX } from '~/lib/utils/ui-dictionary-jsx';
 import { typography } from '~/styles/typography.styles';
 
-import { styles } from '../TopPicksItem.styles';
-import { TopPickItemsHeader } from '../TopPicksItems.types';
+import { styles } from '../../TopPicksItem/TopPicksItem.styles';
+import { TopPickItemsHeader } from '../../TopPicksItem/TopPicksItems.types';
 
 interface Props {
   header: TopPickItemsHeader;

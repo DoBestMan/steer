@@ -1,7 +1,7 @@
-import { TopPickItemsHeader } from '../TopPicksItems.types';
+import { TopPickItemsHeader } from '../../TopPicksItem/TopPicksItems.types';
 
 interface Props {
-  header?: TopPickItemsHeader;
+  header?: TopPickItemsHeader | null;
   viewMoreDataTitle?: string | null;
 }
 

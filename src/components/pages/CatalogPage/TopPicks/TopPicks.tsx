@@ -13,6 +13,8 @@ import { map } from '~/lib/utils/interpolation';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
 
+import OEModal from './OEModal/OEModal';
+import Title from './Title/Title';
 import { NB_SLIDES_PER_BP } from './TopPicks.constants';
 import { styles } from './TopPicks.styles';
 import TopPicksItem from './TopPicksItem/TopPicksItem';
@@ -43,6 +45,8 @@ function TopPicks({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [show, setShow] = useState(false);
   const [rootHeight, setRootHeight] = useState(0);
+  const [modalOpened, setModalOpened] = useState(false);
+  const [showTitle, setShowTitle] = useState(true);
   const [indexHovered, setIndexHovered] = useState<number | undefined>(
     undefined,
   );
@@ -64,10 +68,20 @@ function TopPicks({
       setTranslate({ x: translate });
     });
 
+    swiper.on('sliderMove', () => {
+      setShowTitle(false);
+    });
+
+    swiper.on('touchEnd', () => {
+      setShowTitle(true);
+    });
+
     return () => {
       resetTranslateInstance();
       swiper.off('slideChange');
       swiper.off('setTranslate');
+      swiper.off('sliderMove');
+      swiper.off('touchEnd');
     };
   }, [swiper]);
 
@@ -139,11 +153,27 @@ function TopPicks({
     setIndexHovered(undefined);
   };
 
+  const openModal = () => {
+    setModalOpened(true);
+  };
+
+  const closeModal = () => {
+    setModalOpened(false);
+  };
+
   const params = {
     // Could use slidesPerView: NB_SLIDES_PER_BP[bp.bk], but seems better this way
     // Adding  bunch of "extra" breakpoint because `spaceBetween` needs a fixed width
     breakpoints: {
       [BREAKPOINTS.S]: {
+        slidesPerView: NB_SLIDES_PER_BP.S,
+        spaceBetween: -150,
+      },
+      [320]: {
+        slidesPerView: NB_SLIDES_PER_BP.S,
+        spaceBetween: -100,
+      },
+      [375]: {
         slidesPerView: NB_SLIDES_PER_BP.S,
         spaceBetween: -150,
       },
@@ -200,12 +230,62 @@ function TopPicks({
     mousewheel: {
       forceToAxis: true,
     },
+    on: {
+      init() {
+        // give manually role attributes
+        const carouselContainerEl = document.querySelector(
+          '#top-picks-carousel .swiper-wrapper',
+        );
+        if (carouselContainerEl) {
+          carouselContainerEl.setAttribute('role', 'menubar');
+        }
+
+        const carouselSlideEls = document.querySelectorAll(
+          '#top-picks-carousel .swiper-slide',
+        );
+        for (let i = 0; i < carouselSlideEls.length; i++) {
+          carouselSlideEls[i].setAttribute('role', 'menuitem');
+        }
+      },
+    },
     slideToClickedSlide: true,
   };
 
+  const currentOeModal = picks[currentIndex]
+    ? picks[currentIndex].siteCatalogSummaryTopPickItemAdditionalInfo
+    : null;
+
+  const showMoreData = currentIndex === picks.length;
+
   return (
     <div ref={rootRef}>
-      <div css={styles.root}>
+      <div
+        css={[styles.titleContainer, showTitle && styles.titleContainerShow]}
+      >
+        {picks.map((pick, i) => {
+          return (
+            <Title
+              currentIndex={i}
+              pick={pick}
+              key={`_index_${i}`}
+              isCurrent={
+                (indexHovered && indexHovered === i) ||
+                (typeof indexHovered === 'undefined' && i === currentIndex)
+              }
+              openModal={openModal}
+            />
+          );
+        })}
+        <Title
+          currentIndex={picks.length}
+          viewMoreData={viewMoreData}
+          isCurrent={
+            (indexHovered && indexHovered === picks.length) || showMoreData
+          }
+        />
+      </div>
+
+      <div css={styles.root} id="top-picks-carousel">
         <Carousel params={params} getSwiper={setSwiper}>
           {picks.map((pick, i) => {
             const {
@@ -249,6 +329,7 @@ function TopPicks({
             return (
               <div css={styles.pick} key={key}>
                 <TopPicksItem
+                  currentIndex={i}
                   addVehicleInfo={addVehicleInfo}
                   brand={brand}
                   ctaLabel={ctaLabel}
@@ -279,12 +360,17 @@ function TopPicks({
           {/* Last one is view more */}
           <div css={styles.pick}>
             <TopPicksItem
+              currentIndex={picks.length}
               customerServiceNumber={customerServiceNumber}
               viewMoreData={viewMoreData}
               totalResult={totalResult}
               exploreMore={exploreMore}
-              isCurrent={picks.length === currentIndex}
+              index={picks.length}
+              isCurrent={showMoreData}
               show={show}
+              indexHovered={indexHovered}
+              onItemMouseEnter={onItemMouseEnter}
+              onItemMouseLeave={onItemMouseLeave}
             />
           </div>
         </Carousel>
@@ -293,8 +379,15 @@ function TopPicks({
         <span css={typography.tertiaryHeadline}>
           {ui('catalog.topPicks.exploreMoreCTALabel')}
         </span>
-        <Icon name="arrow-down" />
+        <Icon name="arrow-down" css={styles.exploreButtonIcon} />
       </button>
+      {currentOeModal && (
+        <OEModal
+          isOpen={modalOpened}
+          onClose={closeModal}
+          content={currentOeModal}
+        />
+      )}
     </div>
   );
 }

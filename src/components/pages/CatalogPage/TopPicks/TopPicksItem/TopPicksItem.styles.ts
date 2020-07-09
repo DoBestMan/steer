@@ -2,15 +2,11 @@ import { WHEEL_WIDTH } from '~/components/global/Car/Car.constants';
 import { NAV_HEIGHT } from '~/components/modules/Nav/Nav.styles';
 import { COLORS, EASING, MQ, SPACING, StylesMap, TIME } from '~/lib/constants';
 
-import { EXPLORE_BUTTON_HEIGHT } from '../TopPicks.styles';
-
-const ASSET_MARGIN_TOP = {
-  /* eslint-disable sort-keys */
-  S: 40,
-  M: 50,
-  L: 30,
-  /* eslint-enable sort-keys */
-};
+import {
+  ASSET_MARGIN_TOP,
+  EXPLORE_BUTTON_HEIGHT,
+  TOP_CONTENT_HEIGHT,
+} from '../TopPicks.styles';
 
 const HEIGHT_BUTTON = 50;
 
@@ -73,13 +69,13 @@ export const styles: StylesMap = {
     paddingTop: SPACING.SIZE_25,
 
     [MQ.M]: {
-      minHeight: `calc(35vh - ${EXPLORE_BUTTON_HEIGHT.S}px)`,
+      minHeight: `calc(35vh - ${EXPLORE_BUTTON_HEIGHT.M}px)`,
       paddingBottom: SPACING.SIZE_40,
       paddingTop: SPACING.SIZE_40,
     },
 
     [MQ.L]: {
-      minHeight: `calc(33.333333vh - ${EXPLORE_BUTTON_HEIGHT.S}px)`,
+      minHeight: `calc(33.333333vh - ${EXPLORE_BUTTON_HEIGHT.L}px)`,
       paddingBottom: SPACING.SIZE_25,
       paddingTop: SPACING.SIZE_25,
     },
@@ -119,19 +115,8 @@ export const styles: StylesMap = {
     transitionDelay: '100ms',
     visibility: 'visible',
   },
-  description: {
-    display: 'block',
-    marginTop: SPACING.SIZE_10,
-    opacity: 0,
-    transform: 'translate3d(0, 10px, 0)',
-    transition: `all ${TIME.MS300}ms ${EASING.CUBIC_EASE_OUT}`,
-  },
-  descriptionShow: {
-    opacity: 1,
-    transform: 'translate3d(0, 0, 0)',
-    transitionDelay: `${TIME.MS50}ms`,
-  },
   infoContainer: {
+    color: COLORS.GLOBAL.BLACK,
     display: 'block',
     marginTop: SPACING.SIZE_10,
     textAlign: 'center',
@@ -250,71 +235,21 @@ export const styles: StylesMap = {
   subcopy: {
     color: COLORS.LIGHT.GRAY_70,
   },
-  title: {
-    display: 'block',
-    opacity: 0,
-    transform: `translate3d(0, ${SPACING.SIZE_15}px, 0)`,
-    transition: `all ${TIME.MS300}ms ${EASING.CUBIC_EASE_OUT}`,
-  },
-  titleBottom: {
-    display: 'block',
-
-    [MQ.L]: {
-      display: 'inline',
-    },
-  },
-  // Take whatever space's left
-  titleContainer: {
-    color: COLORS.GLOBAL.BLACK,
-    display: 'block',
-    flex: '1 1 auto',
-    pointerEvents: 'none',
-    position: 'relative',
-    width: '100%',
-  },
-  titleContainerInner: {
-    bottom: 0,
-    display: 'block',
-    left: 0,
-    position: 'absolute',
-    width: '100%',
-
-    // more room, no need to fix to the bottom
-    // also extending so the title takes the whole screen
-    [MQ.M]: {
-      bottom: 'auto',
-      top: '50%',
-      transform: 'translate3d(0, -50%, 0)',
-    },
-
-    [MQ.L]: {
-      left: '50%',
-      transform: 'translate3d(-50%, -50%, 0)',
-      width: '100vw',
-    },
-  },
-  titleContainerIsCurrent: {
-    pointerEvents: 'all',
-  },
-  titleShow: {
-    opacity: 1,
-    transform: 'translate3d(0, 0, 0)',
-  },
   topContent: {
     display: 'block',
-    height: '60vh',
+    height: TOP_CONTENT_HEIGHT.S,
     minHeight: 385,
     paddingTop: NAV_HEIGHT.S,
     width: '100%',
 
     [MQ.M]: {
-      height: '65vh',
+      height: TOP_CONTENT_HEIGHT.M,
       minHeight: 517,
       paddingTop: NAV_HEIGHT.M,
     },
 
     [MQ.L]: {
-      height: '66.6666666vh',
+      height: TOP_CONTENT_HEIGHT.L,
       minHeight: 538,
       paddingTop: NAV_HEIGHT.L,
     },

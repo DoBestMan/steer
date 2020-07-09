@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 import BrandLogoOrLabel from '~/components/global/BrandLogoOrLabel/BrandLogoOrLabel';
 import Icon from '~/components/global/Icon/Icon';
@@ -6,10 +6,8 @@ import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Image from '~/components/global/Image/Image';
 import BaseLink from '~/components/global/Link/BaseLink';
 import Prices from '~/components/global/Prices/Prices';
-import PromoTag from '~/components/global/PromoTag/PromoTag';
 import Stars from '~/components/global/Stars/Stars';
 import Sticker from '~/components/global/Sticker/Sticker';
-import { SitePromotionStyleEnum } from '~/data/models/SitePromotion';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { COLORS, CSSStyles } from '~/lib/constants';
 import { getTranslate, subscribeTranslate } from '~/lib/helpers/translate';
@@ -22,30 +20,25 @@ import { ordinalSuffixOf } from '~/lib/utils/string';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
 
-import OEModal from '../OEModal/OEModal';
 import { SPEED_PER_BP } from '../TopPicks.constants';
 import CTA from './CTA/CTA';
 import { styles } from './TopPicksItem.styles';
 import { TopPickItemsProps } from './TopPicksItems.types';
-import Subtitle from './TPISubtitle/TPISubtitle';
-import TitleLine1 from './TPITitleLine1/TPITitleLine1';
-import TitleLine2 from './TPITitleLine2/TPITitleLine2';
 
 function TopPicksItem(props: TopPickItemsProps) {
   const {
     addVehicleInfo,
     asset,
     ctaLabel = ui('catalog.topPicks.ctaLabelFallback'), // Fallback should never happen, but just in case
+    currentIndex,
     customerServiceNumber,
     brand,
     deliveryInfo,
     exploreMore,
-    header,
     index,
     isCurrent = true,
     indexHovered,
     location,
-    oeModal,
     onItemMouseEnter,
     onItemMouseLeave,
     openSearch,
@@ -61,9 +54,15 @@ function TopPicksItem(props: TopPickItemsProps) {
 
   const rootRef = useRef<HTMLDivElement | null>(null);
   const assetRef = useRef<HTMLSpanElement | null>(null);
-  const [modalOpened, setModalOpened] = useState(false);
   const breakpoints = useBreakpoints();
-  const isHovered = typeof index !== 'undefined' && indexHovered === index;
+  const isHovered =
+    typeof indexHovered !== 'undefined' && indexHovered === index;
+
+  // A hover is happening on another item than the current
+  const isCurrentNotHovered =
+    typeof indexHovered !== 'undefined' && indexHovered !== index && isCurrent;
+
+  const idForAriaLabbeledBy = `toppick-title-${currentIndex}`;
 
   // When current, focus on first focusable element
   // Has to have swipped at least once
@@ -124,26 +123,22 @@ function TopPicksItem(props: TopPickItemsProps) {
     onItemMouseLeave && onItemMouseLeave();
   };
 
-  const openModal = () => {
-    setModalOpened(true);
-  };
-
-  const closeModal = () => {
-    setModalOpened(false);
-  };
-
-  const ctaLabelStr = priceList
-    ? ctaLabel
-    : ui('catalog.topPicks.callNumberLabel', {
-        number: customerServiceNumber.display,
-      });
-
-  const hasSubtitle = viewMoreData || header?.subtitle;
+  const ctaLabelStr =
+    priceList && priceList.length > 0
+      ? ctaLabel
+      : ui('catalog.topPicks.callNumberLabel', {
+          number: customerServiceNumber.display,
+        });
 
   const rootStyles = [styles.root];
   if (typeof indexHovered !== 'undefined') {
     rootStyles.push(isHovered ? styles.rootHovered : styles.rootNotHovered);
   }
+
+  const showCta =
+    (isCurrent || (breakpoints.greaterThan.M && isHovered)) &&
+    !isCurrentNotHovered &&
+    show;
 
   // custom transformation to turn brand icon to white
   const brandSrcTransformationArgs: Record<string, Transformations[]> = {
@@ -176,69 +171,10 @@ function TopPicksItem(props: TopPickItemsProps) {
       ref={rootRef}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
+      aria-labelledby={idForAriaLabbeledBy}
     >
       <span css={styles.topContent}>
         <span css={styles.topContentInner}>
-          <span
-            css={[
-              styles.titleContainer,
-              isCurrent && styles.titleContainerIsCurrent,
-            ]}
-          >
-            <span css={styles.titleContainerInner}>
-              {/* Title */}
-              <span css={[styles.title, isCurrent && show && styles.titleShow]}>
-                <span css={typography.primaryHeadline}>
-                  <TitleLine1
-                    viewMoreDataTitle={viewMoreData?.header.title}
-                    header={header}
-                  />
-                </span>
-                {header?.titleLine2 && (
-                  <span css={[styles.titleBottom, typography.primaryHeadline]}>
-                    <TitleLine2
-                      oeModal={oeModal}
-                      header={header}
-                      openModal={openModal}
-                    />
-                  </span>
-                )}
-              </span>
-
-              {/* Description (optional) */}
-              {hasSubtitle && (
-                <span
-                  css={[
-                    styles.description,
-                    typography.smallCopyTight,
-                    isCurrent && show && styles.descriptionShow,
-                  ]}
-                >
-                  <Subtitle
-                    viewMoreDataHeader={viewMoreData?.header.subtitle}
-                    basicHeader={header?.subtitle}
-                  />
-                </span>
-              )}
-
-              {/* Pill (optional) */}
-              {header?.pill && (
-                <span
-                  css={[
-                    styles.description,
-                    isCurrent && show && styles.descriptionShow,
-                  ]}
-                >
-                  <PromoTag
-                    label={header.pill}
-                    style={SitePromotionStyleEnum.SitePromotionItemOrangePill}
-                    isUppercase
-                  />
-                </span>
-              )}
-            </span>
-          </span>
-
           <span css={styles.assetContainer}>
             {/* Sticker (1st, 2nd...) */}
             {asset && typeof index !== 'undefined' && (
@@ -317,7 +253,6 @@ function TopPicksItem(props: TopPickItemsProps) {
               <span css={[styles.brand, brand.image && styles.brandWithImage]}>
                 <BrandLogoOrLabel
                   brand={brand}
-                  // widths={[200, 400, 600]}
                   srcTransformationArgs={brandSrcTransformationArgs}
                   customStyles={{ width: '100%' }}
                 />
@@ -407,17 +342,10 @@ function TopPicksItem(props: TopPickItemsProps) {
 
         {/* CTA */}
         {!viewMoreData && (
-          <span
-            css={[
-              styles.cta,
-              (isCurrent || (breakpoints.greaterThan.M && isHovered)) &&
-                show &&
-                styles.ctaShow,
-            ]}
-          >
+          <span css={[styles.cta, showCta && styles.ctaShow]}>
             <CTA
               customerServiceNumber={customerServiceNumber}
-              hasPriceList={priceList !== null}
+              hasPriceList={priceList ? priceList.length > 0 : false}
               hasAddVehicleInfo={addVehicleInfo}
               url={url}
               onAddInfoVehicleClick={onAddInfoVehicleClick}
@@ -426,10 +354,6 @@ function TopPicksItem(props: TopPickItemsProps) {
           </span>
         )}
       </span>
-
-      {oeModal && (
-        <OEModal isOpen={modalOpened} onClose={closeModal} content={oeModal} />
-      )}
     </div>
   );
 }

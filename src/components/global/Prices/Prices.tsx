@@ -26,7 +26,7 @@ function Prices({
 }: Props) {
   return (
     <>
-      {priceList ? (
+      {priceList && priceList.length > 0 ? (
         priceList.map(({ label, price }) => (
           <div key={price.salePriceInCents}>
             <span

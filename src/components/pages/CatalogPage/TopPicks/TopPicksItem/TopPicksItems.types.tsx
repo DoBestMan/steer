@@ -17,6 +17,7 @@ export interface TopPickItemsProps {
   asset?: SiteImage | null;
   brand?: SiteCatalogBrand | null;
   ctaLabel?: string | null;
+  currentIndex: number;
   customerServiceNumber: { display: string; value: string };
   deliveryInfo?: {
     isFeatured?: boolean;

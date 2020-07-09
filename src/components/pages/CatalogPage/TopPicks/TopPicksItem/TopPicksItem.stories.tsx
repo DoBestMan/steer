@@ -122,7 +122,7 @@ export function TopPicksItemWithKnobs() {
         <div css={styles.topContent}></div>
         <div css={styles.bottomContent}></div>
       </div>
-      <TopPicksItem show {...data} />
+      <TopPicksItem show {...data} currentIndex={0} />
     </div>
   );
 }
@@ -214,7 +214,7 @@ export function TopPicksItemWithFrontAndRearAndPill() {
         <div css={styles.topContent}></div>
         <div css={styles.bottomContent}></div>
       </div>
-      <TopPicksItem show {...data} />
+      <TopPicksItem show {...data} currentIndex={0} />
     </div>
   );
 }
@@ -277,7 +277,7 @@ export function TopPicksItemWithNoPriceAndNoBrandImage() {
         <div css={styles.topContent}></div>
         <div css={styles.bottomContent}></div>
       </div>
-      <TopPicksItem show {...data} />
+      <TopPicksItem show {...data} currentIndex={0} />
     </div>
   );
 }
@@ -319,7 +319,7 @@ export function TopPicksItemWithViewMore() {
         <div css={styles.topContent}></div>
         <div css={styles.bottomContent}></div>
       </div>
-      <TopPicksItem show {...data} />
+      <TopPicksItem show {...data} currentIndex={0} />
     </div>
   );
 }
