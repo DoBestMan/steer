@@ -3,6 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { SiteCatalogProducts } from '~/data/models/SiteCatalogProducts';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
 import { backendGetVehicleProducts } from '~/lib/backend/catalog/vehicle';
+import { getParam, getStringifiedParams } from '~/lib/utils/routes';
 
 export default async (
   request: NextApiRequest,
@@ -11,21 +12,17 @@ export default async (
   }>,
 ) => {
   backendBootstrap({ request });
-
   const { make, model, year, ...rest } = request.query;
 
-  const params: Record<string, string> = {};
-  Object.entries(rest).map(([key, value]) => {
-    if (typeof value === 'string') {
-      params[key] = value;
-    }
-  });
+  if (!make || !model || !year) {
+    console.warn('Make, model, and year are required');
+  }
 
   const productsRes = await backendGetVehicleProducts({
-    make,
+    make: getParam(make).replace('-tires', ''),
     model,
     year,
-    query: params,
+    query: getStringifiedParams(rest),
   });
   response.json(productsRes);
 };

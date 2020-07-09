@@ -3,6 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { SiteCatalogSummary } from '~/data/models/SiteCatalogSummary';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
 import { backendGetVehicleSummary } from '~/lib/backend/catalog/vehicle';
+import { getStringifiedParams } from '~/lib/utils/routes';
 
 export default async (
   request: NextApiRequest,
@@ -14,18 +15,15 @@ export default async (
 
   const { make, model, year, ...rest } = request.query;
 
-  const params: Record<string, string> = {};
-  Object.entries(rest).map(([key, value]) => {
-    if (typeof value === 'string') {
-      params[key] = value;
-    }
-  });
+  if (!make || !model || !year) {
+    console.warn('Make, model, and year are required');
+  }
 
   const siteCatalogSummary = await backendGetVehicleSummary({
     make,
     model,
     year,
-    query: params,
+    query: getStringifiedParams(rest),
   });
   response.json(siteCatalogSummary);
 };

@@ -1,13 +1,8 @@
 import { useRouter } from 'next/router';
 
 import CatalogPageContainer from '~/components/pages/CatalogPage/CatalogPage.container';
-import {
-  emptyCatalogProducts,
-  emptyHandleUpdateFilters,
-  emptyOnPreviewResults,
-} from '~/components/pages/CatalogPage/CatalogPage.mocks';
+import { emptyCatalogProducts } from '~/components/pages/CatalogPage/CatalogPage.mocks';
 import { vehiclesNoOeWithSize } from '~/components/pages/CatalogPage/CatalogSummary/CatalogSummary.mocks';
-// import { COLORS } from '~/lib/constants';
 import { isRouteDiameterFormat } from '~/lib/utils/routes';
 
 // params will include diameter and category or type
@@ -26,15 +21,18 @@ function TireCategory() {
   const dataFn = isDiameterRoute ? fetchDiameter : fetchClassic;
   dataFn(/* api options/params */);
 
-  // TODO: add handleUpdateFilters prop
   return (
     <CatalogPageContainer
-      handleUpdateFilters={emptyHandleUpdateFilters}
-      onPreviewFilters={emptyOnPreviewResults}
-      siteCatalogProducts={emptyCatalogProducts}
-      siteCatalogSummary={vehiclesNoOeWithSize}
+      serverData={{
+        siteCatalogProducts: emptyCatalogProducts,
+        siteCatalogSummary: vehiclesNoOeWithSize,
+      }}
+      //  TODO: update endpoints
+      endpoints={{
+        summary: '/summary-vehicle',
+        products: '/products-vehicle',
+      }}
       hasTopPicks={false}
-      previewFiltersData={emptyCatalogProducts.siteCatalogFilters}
     />
   );
 }

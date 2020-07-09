@@ -36,3 +36,27 @@ export function interpolateRoute(
     return replaced;
   });
 }
+
+/*
+ * Return stringified query param
+ */
+export function getParam(param: string | string[]): string {
+  if (typeof param !== 'string') {
+    return '';
+  }
+
+  return param;
+}
+
+/*
+ * Return stringified query param
+ */
+export function getStringifiedParams(
+  params: Record<string, string | string[]>,
+): Record<string, string> {
+  const queryParams: Record<string, string> = {};
+  Object.entries(params).map(([key, value]) => {
+    queryParams[key] = getParam(value);
+  });
+  return queryParams;
+}

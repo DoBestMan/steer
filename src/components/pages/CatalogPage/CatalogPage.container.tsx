@@ -1,32 +1,134 @@
 import { useRouter } from 'next/router';
+import { useCallback, useState } from 'react';
 
 import { CatalogPageContextProvider } from '~/context/CatalogPage.context';
-import { SiteCatalogFilters } from '~/data/models/SiteCatalogFilters';
 import { SiteCatalogProducts } from '~/data/models/SiteCatalogProducts';
 import { SiteCatalogSummary } from '~/data/models/SiteCatalogSummary';
+import { useApiDataWithDefault } from '~/hooks/useApiDataWithDefault';
+import { eventEmitters } from '~/lib/events/emitters';
+import { fetch } from '~/lib/fetch';
+import { getStringifiedParams } from '~/lib/utils/routes';
 
 import CatalogPage from './CatalogPage';
 
-interface Props {
-  handleUpdateFilters: (filters: Record<string, string>) => void;
+export const CATALOG_PARAMS = ['group', 'skipGroups'];
+
+export interface CatalogPageData {
+  serverData: {
+    siteCatalogProducts: SiteCatalogProducts;
+    siteCatalogSummary: SiteCatalogSummary;
+  };
+}
+
+interface Props extends CatalogPageData {
+  allowedParams?: string[];
+  endpoints: {
+    products: string;
+    summary: string;
+  };
   hasTopPicks?: boolean;
-  onPreviewFilters: (filters: Record<string, string>) => Promise<void>;
-  previewFiltersData: SiteCatalogFilters;
-  siteCatalogProducts: SiteCatalogProducts;
-  siteCatalogSummary: SiteCatalogSummary;
+  pageParams?: Record<string, string>;
 }
 
 function CatalogPageContainer({
+  allowedParams = [],
+  endpoints,
   hasTopPicks = true,
-  handleUpdateFilters,
-  siteCatalogSummary,
-  siteCatalogProducts,
-  onPreviewFilters,
-  previewFiltersData,
+  serverData,
+  pageParams,
 }: Props) {
   // TEMP: use route params for testing flows
-  const router = useRouter();
-  const { isSearch } = router.query;
+  const { query, push, pathname, asPath } = useRouter();
+  const { isSearch } = query;
+
+  // begin fetching data from /summary and /products
+  const queryParams = getStringifiedParams({ ...query, ...pageParams });
+  const apiArgs = {
+    defaultData: serverData,
+    includeUserRegion: true,
+    includeUserZip: true,
+    query: queryParams,
+    revalidateEmitter: eventEmitters.userPersonalizationLocationUpdate,
+  };
+
+  // fetch site catalog summary
+  const {
+    data: { siteCatalogSummary },
+    error: summaryError,
+  } = useApiDataWithDefault<CatalogPageData['serverData']>({
+    ...apiArgs,
+    endpoint: endpoints.summary,
+  });
+
+  // fetch site catalog products
+  const {
+    data: { siteCatalogProducts },
+    error: productsError,
+    revalidate: revalidateProducts,
+  } = useApiDataWithDefault<CatalogPageData['serverData']>({
+    ...apiArgs,
+    endpoint: endpoints.products,
+  });
+
+  if (summaryError || productsError) {
+    console.error(summaryError || productsError);
+  }
+
+  // appends filters to existing URL query params
+  const handleUpdateFilters = useCallback(
+    async (filters: Record<string, string>) => {
+      const route = asPath.split('?');
+      const params: Record<string, string> = {};
+      Object.keys(queryParams).forEach((k) => {
+        if (
+          allowedParams.concat(CATALOG_PARAMS).includes(k) ||
+          (pageParams && pageParams[k])
+        ) {
+          // filter out stale filter keys if they have been removed but keep page params
+          params[k] = queryParams[k];
+        }
+      });
+      const searchString = new URLSearchParams({
+        ...params,
+        ...filters,
+      }).toString();
+
+      push(`${pathname}?${searchString}`, `${route[0]}?${searchString}`, {
+        shallow: true,
+      });
+
+      // revalidate with newly applied filters
+      await revalidateProducts();
+    },
+    [
+      asPath,
+      queryParams,
+      pathname,
+      push,
+      revalidateProducts,
+      pageParams,
+      allowedParams,
+    ],
+  );
+
+  // preview data and handler for open filter dropdowns
+  const [previewFiltersData, setPreviewFiltersData] = useState(
+    siteCatalogProducts.siteCatalogFilters,
+  );
+
+  const onPreviewFilters = useCallback(
+    async (filters: Record<string, string>) => {
+      const { siteCatalogProducts } = await fetch({
+        endpoint: endpoints.products,
+        includeUserRegion: true,
+        includeUserZip: true,
+        method: 'get',
+        query: { ...filters, ...pageParams },
+      });
+      setPreviewFiltersData(siteCatalogProducts.siteCatalogFilters);
+    },
+    [endpoints.products, pageParams],
+  );
 
   return (
     <CatalogPageContextProvider
@@ -34,7 +136,6 @@ function CatalogPageContainer({
       showCatalogGridInit={isSearch !== 'true'}
     >
       <CatalogPage
-        // later will be an context state
         onPreviewFilters={onPreviewFilters}
         comesFromSearch={isSearch === 'true'}
         hasTopPicks={hasTopPicks}
