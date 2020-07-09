@@ -14,21 +14,22 @@ export enum ROUTES {
   PRODUCT_DETAIL = 'productDetail',
   PRODUCT_REVIEWS = 'productReviews',
   TIRE_CATEGORY = 'tireCategory',
+  VEHICLES_CATEGORY = 'vehiclesCategory',
 }
 
 // Order is important here
 export const ROUTE_MAP: Record<ROUTES, string> = {
   [ROUTES.HOME]: '/',
   [ROUTES.BRAND_LANDING]: '/brands',
-  [ROUTES.BRAND_CATEGORY]: '/[brandName]/[categoryOrType]',
   [ROUTES.BRAND_DETAIL]: '/brands/[brandName]',
   [ROUTES.BRAND_REVIEWS]: '/brands/[brandName]/reviews',
   [ROUTES.ORDER_TRACKING]: '/track-your-order',
   [ROUTES.ORDER_TRACKING_RESULT]: '/track-your-order/result',
   [ROUTES.PRODUCT_DETAIL]: '/brands/[brandName]/[productLine]',
   [ROUTES.PRODUCT_REVIEWS]: '/brands/[brandName]/[productLine]/reviews',
-  [ROUTES.BRAND_CATEGORY]: '/[brandName]/[categoryOrType]',
   [ROUTES.TIRE_CATEGORY]: '/tire-sizes/[sizeInfo]',
+  [ROUTES.VEHICLES_CATEGORY]: '/vehicles/[make]/[model]/[year]',
+  [ROUTES.BRAND_CATEGORY]: '/[brandName]/[categoryOrType]',
 };
 
 // null for dynamic labels
@@ -41,4 +42,5 @@ export const ROUTE_LABELS: Record<string, string | null> = {
   [ROUTE_MAP[ROUTES.PRODUCT_REVIEWS]]: ui('breadcrumbs.reviews'),
   [ROUTE_MAP[ROUTES.BRAND_CATEGORY]]: null,
   [ROUTE_MAP[ROUTES.TIRE_CATEGORY]]: null,
+  [ROUTE_MAP[ROUTES.VEHICLES_CATEGORY]]: null,
 };

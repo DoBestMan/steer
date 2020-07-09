@@ -105,6 +105,22 @@ describe('BaseLink', () => {
     `);
   });
 
+  test('internal dynamic link with query params', () => {
+    const { container } = render(
+      <BaseLink href="/brands/drupal-tires?trim=LX">Click here</BaseLink>,
+    );
+
+    expect(container.firstChild).toMatchInlineSnapshot(`
+      <div
+        data-test-as="/brands/drupal-tires?trim=LX"
+      >
+        <a>
+          Click here
+        </a>
+      </div>
+    `);
+  });
+
   test('internal absolute link', () => {
     const { container } = render(
       <BaseLink href="http://www.google.com">Click here</BaseLink>,

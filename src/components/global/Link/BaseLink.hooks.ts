@@ -34,7 +34,10 @@ export function useBaseLinkProps({ href, isExternal }: UseBaseLinkProps) {
     // if link destination matches a regex, use an "as"
     Object.keys(dynamicRouteRegexMap).some((route) => {
       const regex = dynamicRouteRegexMap[route];
-      const match = href.match(regex);
+      // For urls with query params, only use the path to
+      // match against the regex
+      const [path] = href.split('?');
+      const match = path.match(regex);
       if (match) {
         as = href;
         finalHref = route;
