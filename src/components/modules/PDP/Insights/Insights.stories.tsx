@@ -154,6 +154,10 @@ export function InsightsWithKnobs() {
         label: 'Select another vehicle',
         action: modalAction,
       },
+      {
+        label: 'Unselect vehicle',
+        action: modalAction,
+      },
     ],
     [SIZE_CHECK_STATES.SELECT_TIRE]: [
       {
