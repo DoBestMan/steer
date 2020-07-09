@@ -36,6 +36,7 @@ export const mapTypeToContent: Record<
   (props: ChildProps) => JSX.Element | null
 > = {
   [FilterContentTypes.SiteCatalogFilterList]({
+    isLarge,
     filter,
     filtersToApply,
     isPreviewLoading,
@@ -46,6 +47,7 @@ export const mapTypeToContent: Record<
         {...(filter as SiteCatalogFilterList)}
         filtersToApply={filtersToApply}
         onChange={onChange}
+        isLarge={isLarge}
         isPreviewLoading={isPreviewLoading}
       />
     );
@@ -53,6 +55,7 @@ export const mapTypeToContent: Record<
   [FilterContentTypes.SiteCatalogFilterRange]({
     filter,
     filtersToApply,
+    isLarge,
     isPreviewLoading,
     onChange,
   }: ChildProps) {
@@ -60,6 +63,7 @@ export const mapTypeToContent: Record<
       <FilterRange
         {...(filter as SiteCatalogFilterRange)}
         onChange={onChange}
+        isLarge={isLarge}
         isPreviewLoading={isPreviewLoading}
         filtersToApply={filtersToApply}
       />

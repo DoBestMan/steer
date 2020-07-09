@@ -77,9 +77,10 @@ export default function FilterPopup({
 
   const label = getFilterLabel(filter);
   const forceModal =
-    filter.type === SiteCatalogFilterListTypeEnum.SiteCatalogFilterList &&
-    filter.presentationStyle ===
-      SiteCatalogFilterListPresentationStyleEnum.Large;
+    !isLarge ||
+    (filter.type === SiteCatalogFilterListTypeEnum.SiteCatalogFilterList &&
+      filter.presentationStyle ===
+        SiteCatalogFilterListPresentationStyleEnum.Large);
   const actionBar = hasActionBar
     ? {
         isDisabled: isPreviewLoading,

@@ -87,12 +87,16 @@ export default function FilterChecklist({
   filterGroups,
   filtersToApply,
   header,
+  isLarge,
   isPreviewLoading,
   onChange,
   presentationStyle,
 }: SiteCatalogFilterList &
-  Pick<ChildProps, 'isPreviewLoading' | 'onChange' | 'filtersToApply'>) {
-  const label = header?.title;
+  Pick<
+    ChildProps,
+    'isPreviewLoading' | 'isLarge' | 'onChange' | 'filtersToApply'
+  >) {
+  const showHeader = ((isLarge && header?.infoLink) || !isLarge) && header;
   const { greaterThan } = useBreakpoints();
   const lgStyles =
     greaterThan.M &&
@@ -106,14 +110,16 @@ export default function FilterChecklist({
 
   return (
     <div css={styles.root}>
-      <div css={[styles.header, styles.labelContainer]}>
-        <h2 css={lgStyles.title}>{label}</h2>
-        {header?.infoLink && (
-          <p css={[styles.infoLink, styles.infoLinkTitle]}>
-            {header.infoLink.label}
-          </p>
-        )}
-      </div>
+      {showHeader && (
+        <div css={[styles.header, styles.labelContainer]}>
+          <h2 css={lgStyles.title}>{header?.title}</h2>
+          {header?.infoLink && (
+            <p css={[styles.infoLink, !isLarge && styles.infoLinkTitle]}>
+              {header.infoLink.label}
+            </p>
+          )}
+        </div>
+      )}
       {filterGroups?.map((group: SiteCatalogFilterGroup, idx) => (
         <div css={lgStyles.group} key={idx}>
           {group.header && (

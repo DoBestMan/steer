@@ -17,13 +17,18 @@ export default function FilterRange({
   filtersToApply,
   header,
   id,
+  isLarge,
   maxValue,
   minValue,
   onChange,
   step,
   unit,
 }: SiteCatalogFilterRange &
-  Pick<ChildProps, 'isPreviewLoading' | 'onChange' | 'filtersToApply'>) {
+  Pick<
+    ChildProps,
+    'isPreviewLoading' | 'isLarge' | 'onChange' | 'filtersToApply'
+  >) {
+  const showHeader = ((isLarge && header?.infoLink) || !isLarge) && header;
   const filterGroup = filtersToApply[id];
   const [shouldReset, setShouldReset] = useState(!filtersToApply[id]);
   const handleChange = useCallback(
@@ -46,11 +51,11 @@ export default function FilterRange({
 
   return (
     <div css={styles.root}>
-      {header && (
+      {showHeader && (
         <div css={styles.header}>
-          <h2 css={styles.title}>{header.title}</h2>
+          <h2 css={styles.title}>{header?.title}</h2>
           {header?.infoLink && (
-            <p css={[styles.infoLink, styles.infoLinkTitle]}>
+            <p css={[styles.infoLink, !isLarge && styles.infoLinkTitle]}>
               {header.infoLink.label}
             </p>
           )}

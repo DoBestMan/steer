@@ -21,6 +21,9 @@ const styles: StylesMap = {
       width: 'fit-content',
     },
   ],
+  infoLinkTitle: {
+    marginRight: SPACING.SIZE_30,
+  },
   root: {
     [MQ.L]: { minWidth: 400 },
   },

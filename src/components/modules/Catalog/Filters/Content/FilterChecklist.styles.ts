@@ -1,4 +1,4 @@
-import { BORDERS, COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
+import { BORDERS, COLORS, SPACING, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
@@ -23,7 +23,6 @@ const styles: StylesMap = {
   ],
   header: {
     marginBottom: SPACING.SIZE_40,
-    [MQ.L]: { display: 'none' },
   },
   infoLink: [
     typography.smallCopyTight,
