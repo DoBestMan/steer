@@ -1,6 +1,6 @@
-import { Item } from '~/components/global/Accordion/Accordion';
+import { AccordionItem } from '~/components/global/Accordion/Accordion';
 
-export const mockQuestions: Item[] = [
+export const mockQuestions: AccordionItem[] = [
   {
     id: '0',
     label: 'How long it lasts?',

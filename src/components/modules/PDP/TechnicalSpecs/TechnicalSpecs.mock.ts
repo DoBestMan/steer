@@ -1,4 +1,4 @@
-import { Item } from '~/components/global/Accordion/Accordion';
+import { AccordionItem } from '~/components/global/Accordion/Accordion';
 import { SiteImage } from '~/data/models/SiteImage';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 
@@ -16,7 +16,7 @@ export const image: SiteImage = {
 export const description =
   "The ContiProContact is Continental's Grand Touring All-Season tire originally developed for European sport coupes and sedans sold in North America, and is now available for a wide range of imported and domestic cars.\n\nToday's driver often wants a tire that perform year-round. Consider the ProContact TX from Continental, which features a multidirectional tread design for outstanding grip. Offering drivers precise steering, the ProContact TX's rubber compound is designed to reduce rolling resistance to enhance fuel efficiency.\n\nFeatures a state-of-the-art silica compound that lowers rolling resistance to improve fuel efficiency.";
 
-export const specList: Item[] = [
+export const specList: AccordionItem[] = [
   {
     label: 'Type',
     value: 'Passenger',

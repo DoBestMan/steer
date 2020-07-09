@@ -17,16 +17,20 @@ import { layout } from '~/styles/layout.styles';
 
 import styles, { themeStyles } from './ReviewCard.styles';
 
+const CONSTANTS = {
+  TRUNCATE_TEXT_LENGTH: 140,
+};
+
 export interface ReviewCardProps {
-  body: string;
-  car?: string;
-  date: string;
+  body?: string | null;
+  car?: string | null;
+  date?: string | null;
   id: string;
   isVerified?: boolean;
-  location?: string;
-  momentList?: Array<MomentListItem>;
+  location?: string | null;
+  momentList?: MomentListItem[] | null;
   ratingStars: number;
-  ratings?: Array<RatingsListItem>;
+  ratings?: RatingsListItem[] | null;
   theme?: THEME.DARK | THEME.LIGHT;
   title: string;
 }
@@ -45,9 +49,14 @@ function ReviewCard({
 }: ReviewCardProps) {
   const [isCollapsed, setIsCollapsed] = useState(true);
 
-  const formattedBody = isCollapsed
-    ? truncateText(body, 140, ui('common.ellipsis'))
-    : body;
+  const formattedBody =
+    body && isCollapsed
+      ? truncateText(
+          body,
+          CONSTANTS.TRUNCATE_TEXT_LENGTH,
+          ui('common.ellipsis'),
+        )
+      : body;
 
   function toggleCollapsed() {
     setIsCollapsed((prev) => !prev);
@@ -66,7 +75,7 @@ function ReviewCard({
           {!!location && <span>{location}</span>}
           {isVerified && (
             <span css={styles.verifiedCustomer}>
-              {ui('pdp.reviews.verifiedCustomer')}
+              {ui('reviews.verifiedCustomer')}
               <Icon
                 css={styles.verifiedCustomerIcon}
                 name={ICONS.REVIEWS_VERIFIED}
@@ -74,13 +83,15 @@ function ReviewCard({
             </span>
           )}
         </div>
-        <span css={styles.date}>{date}</span>
+        {date && <span css={styles.date}>{date}</span>}
       </div>
 
       <div css={styles.content}>
-        <div css={styles.body}>
-          <Markdown>{formattedBody}</Markdown>
-        </div>
+        {formattedBody && (
+          <div css={styles.body}>
+            <Markdown>{formattedBody}</Markdown>
+          </div>
+        )}
 
         {isCollapsed ? (
           <Link
@@ -91,7 +102,7 @@ function ReviewCard({
             onClick={toggleCollapsed}
             theme={theme}
           >
-            {ui('pdp.reviews.readMore')}
+            {ui('reviews.readMore')}
           </Link>
         ) : (
           <div css={styles.additionalContentContainer}>

@@ -28,7 +28,7 @@ function Reviews({ reviews, sources }: Props) {
     ? ui('reviews.numReviews', {
         quantity: numReviews,
       })
-    : ui('pdp.reviews.none');
+    : ui('reviews.noReviews');
 
   const [numVisibleReviews, setNumVisibleReviews] = useState(
     CONSTANTS.NUM_REVIEWS_TO_DISPLAY_ON_LOAD,

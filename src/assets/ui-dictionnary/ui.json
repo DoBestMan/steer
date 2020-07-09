@@ -274,11 +274,6 @@
       "searchForTireSize": "See all tires in the size {{size}}",
       "searchForTireFrontRear": "See all tires in front {{size}} and rear {{rear}}"
     },
-    "reviews": {
-      "none": "No reviews yet",
-      "readMore": "Read more",
-      "verifiedCustomer": "Verified Customer"
-    },
     "roadHazard": {
       "interceptCopy": "Most tire failure are punctures or bruises that manufacturer’s warranty typically doesn’t cover.\n\n**Get coverage for up to 3 years by $13.02/tire.**",
       "headerCopy": "Most tire failure are punctures or bruises that manufacturer’s warranty typically doesn’t cover.",
@@ -323,13 +318,18 @@
     "outOf": "out of"
   },
   "reviews": {
+    "noReviews": "No reviews yet",
     "chooseFilter": "Choose a {{filter}}",
     "numReviews": "{{quantity}} reviews",
+    "readMore": "Read more",
     "searchBy": "Search by:",
+    "verifiedCustomer": "Verified Customer",
     "seeAll": "See all customer reviews",
     "tireReviews": "{{tire}} Reviews",
     "viewTire": "View tire",
-    "writeReview": "Write a  review",
+    "writeReview": "Write a review",
+    "reviewsFromGoogle": "{{number}} from Google Shopping",
+    "reviewsOnSimpleTire": "{{number}} on SimpleTire",
     "form": {
       "title": "Leave a review {{tire}}",
       "submit": "Complete all fields to submit",

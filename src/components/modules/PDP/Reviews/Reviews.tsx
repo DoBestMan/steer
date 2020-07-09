@@ -17,17 +17,17 @@ import { typography } from '~/styles/typography.styles';
 
 import styles from './Reviews.styles';
 
-interface Props {
-  momentList?: Array<MomentListItem>;
+export interface ReviewsProps {
+  momentList?: MomentListItem[];
   ratingStars?: number;
-  ratings?: Array<RatingsListItem>;
+  ratings?: RatingsListItem[];
   reviews?: ReviewCardProps[];
   seeAllReviewsLink: SiteLink;
-  seeAllReviewsLinkLabel: string;
+  seeAllReviewsLinkLabel?: string;
   sources?: string[];
   title?: string;
   writeReviewLink: SiteLink;
-  writeReviewLinkLabel: string;
+  writeReviewLinkLabel?: string;
 }
 
 function Reviews({
@@ -37,11 +37,11 @@ function Reviews({
   reviews,
   sources,
   seeAllReviewsLink,
-  seeAllReviewsLinkLabel,
-  title = ui('pdp.reviews.none'),
+  seeAllReviewsLinkLabel = ui('reviews.seeAll'),
+  title = ui('reviews.noReviews'),
   writeReviewLink,
-  writeReviewLinkLabel,
-}: Props) {
+  writeReviewLinkLabel = ui('reviews.writeReview'),
+}: ReviewsProps) {
   return (
     <Grid as="section" css={styles.section}>
       <GridItem gridColumnL="3/7">
@@ -65,13 +65,15 @@ function Reviews({
                 typographyStyle={typography.labelHeadlineLarge}
               />
             )}
-            <Link
-              css={styles.cta}
-              href={writeReviewLink.href}
-              isExternal={writeReviewLink.isExternal}
-            >
-              {writeReviewLinkLabel}
-            </Link>
+            {writeReviewLink && (
+              <Link
+                css={styles.cta}
+                href={writeReviewLink.href}
+                isExternal={writeReviewLink.isExternal}
+              >
+                {writeReviewLinkLabel}
+              </Link>
+            )}
           </div>
         </div>
       </GridItem>
@@ -92,14 +94,16 @@ function Reviews({
           {reviews.map((review) => (
             <ReviewCard key={review.id} {...review} />
           ))}
-          <Link
-            css={styles.seeAll}
-            href={seeAllReviewsLink.href}
-            isExternal={seeAllReviewsLink.isExternal}
-            icon={ICONS.CHEVRON_RIGHT}
-          >
-            {seeAllReviewsLinkLabel}
-          </Link>
+          {seeAllReviewsLink && (
+            <Link
+              css={styles.seeAll}
+              href={seeAllReviewsLink.href}
+              isExternal={seeAllReviewsLink.isExternal}
+              icon={ICONS.CHEVRON_RIGHT}
+            >
+              {seeAllReviewsLinkLabel}
+            </Link>
+          )}
         </GridItem>
       )}
     </Grid>

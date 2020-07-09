@@ -1,13 +1,13 @@
-import { Item } from './Accordion';
+import { AccordionItem } from './Accordion';
 
-export const firstItem: Item = {
+export const firstItem: AccordionItem = {
   id: '0',
   label: 'How long it lasts?',
   content:
     "Continental includes either a **60,000** or **80,000** mile tread _life warranty_ depending on the tire's speed rating. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tempor id eu nisl nunc mi ipsum. Id porta nibh venenatis cras sed.\n\nAdipiscing enim eu turpis egestas pretium aenean pharetra. Malesuada proin libero nunc consequat interdum varius.\n\n[Learn more](#)",
 };
 
-export const mockListOfItems: Item[] = [
+export const mockListOfItems: AccordionItem[] = [
   {
     label: 'Are they good in snow?',
     id: '2',

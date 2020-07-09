@@ -1,4 +1,6 @@
-import Accordion, { Item } from '~/components/global/Accordion/Accordion';
+import Accordion, {
+  AccordionItem,
+} from '~/components/global/Accordion/Accordion';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import { THEME } from '~/lib/constants';
@@ -9,10 +11,10 @@ import PhoneSupport from '../../Support/PhoneSupport';
 import SupportHeading from '../../Support/SupportHeading';
 import styles from './FAQ.styles';
 
-interface Props {
+export interface FAQProps {
   customerServiceNumber: { display: string; value: string };
   isCustomerServiceEnabled?: boolean;
-  questions?: Item[];
+  questions?: AccordionItem[];
 }
 
 const ITEMS_TO_SHOW = 4;
@@ -21,9 +23,9 @@ function FAQ({
   customerServiceNumber,
   questions,
   isCustomerServiceEnabled,
-}: Props) {
+}: FAQProps) {
   return (
-    <Grid>
+    <Grid css={styles.root}>
       {questions?.length && (
         <>
           <GridItem

@@ -5,10 +5,12 @@ import GridItem from '~/components/global/Grid/GridItem';
 import Link from '~/components/global/Link/Link';
 import ProductGroupList from '~/components/global/ProductGroupList/ProductGroupList';
 import { navigationPaddingTop } from '~/components/modules/Nav/Nav.styles';
+import FAQ from '~/components/modules/PDP/FAQ/FAQ';
 import Insights from '~/components/modules/PDP/Insights/Insights';
 import Installation from '~/components/modules/PDP/Installation/Installation';
 import ProductInfo from '~/components/modules/PDP/ProductInfo/ProductInfo';
 import PurchaseIncludes from '~/components/modules/PDP/PurchaseIncludes/PurchaseIncludes';
+import Reviews from '~/components/modules/PDP/Reviews/Reviews';
 import ShopWithConfidence from '~/components/modules/PDP/ShopWithConfidence/ShopWithConfidence';
 import TechnicalSpecs from '~/components/modules/PDP/TechnicalSpecs/TechnicalSpecs';
 import TireImage from '~/components/modules/PDP/TireImage/TireImage';
@@ -25,12 +27,15 @@ export interface ProductDetailData {
 function ProductDetailContainer({ serverData }: ProductDetailData) {
   const {
     breadcrumbs,
+    faq,
     imageList,
     insights,
     installation,
     productInfo,
     recirculation,
     recirculationSize,
+    reviews,
+    reviewsAnchor,
     technicalSpecs,
     technicalSpecsAnchor,
   } = useProductDetail({
@@ -77,13 +82,23 @@ function ProductDetailContainer({ serverData }: ProductDetailData) {
         <GridItem gridColumnL="3/13" css={styles.shopWithConfidence}>
           <ShopWithConfidence />
         </GridItem>
-        {technicalSpecs && (
-          <GridItem fullbleed css={styles.technicalSpecs}>
+        <GridItem fullbleed css={styles.detailsSection}>
+          {reviews && (
+            <div id={reviewsAnchor}>
+              <Reviews {...reviews} />
+            </div>
+          )}
+          {technicalSpecs && (
             <div id={technicalSpecsAnchor}>
               <TechnicalSpecs {...technicalSpecs} />
             </div>
-          </GridItem>
-        )}
+          )}
+          {faq && (
+            <div>
+              <FAQ {...faq} />
+            </div>
+          )}
+        </GridItem>
         {recirculation &&
           recirculation.slice(1).map((item) => (
             <GridItem fullbleed css={styles.recirculation} key={item.id}>

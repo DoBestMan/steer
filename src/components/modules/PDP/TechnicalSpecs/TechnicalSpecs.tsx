@@ -1,6 +1,8 @@
 import { useCallback, useState } from 'react';
 
-import Accordion, { Item } from '~/components/global/Accordion/Accordion';
+import Accordion, {
+  AccordionItem,
+} from '~/components/global/Accordion/Accordion';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import Image from '~/components/global/Image/Image';
@@ -36,7 +38,7 @@ export interface TechnicalSpecsProps {
   image?: SiteImage;
   isCustomerServiceEnabled?: boolean;
   sizes: Size[];
-  specs: Item[];
+  specs: AccordionItem[];
 }
 
 const TECH_SPECS_ITEMS_TO_SHOW = 5;

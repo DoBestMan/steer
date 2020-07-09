@@ -1,9 +1,11 @@
 import { useRouter } from 'next/router';
 
 import { BreadcrumbsItem } from '~/components/global/Breadcrumbs/Breadcrumbs';
+import { FAQProps } from '~/components/modules/PDP/FAQ/FAQ';
 import { InsightsProps } from '~/components/modules/PDP/Insights/Insights';
 import { InstallationProps } from '~/components/modules/PDP/Installation/Installation';
 import { ProductInfoProps } from '~/components/modules/PDP/ProductInfo/ProductInfo';
+import { ReviewsProps } from '~/components/modules/PDP/Reviews/Reviews';
 import { TechnicalSpecsProps } from '~/components/modules/PDP/TechnicalSpecs/TechnicalSpecs';
 import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
 import { SiteCatalogProductGroupList } from '~/data/models/SiteCatalogProductGroupList';
@@ -14,6 +16,7 @@ import { keyToCamel } from '~/lib/utils/string';
 import { ProductDetailResponse } from '~/pages/api/product-detail';
 
 import { mapDataToBreadcrumbs } from './mappers/breadcrumbs';
+import { mapDataToFAQ } from './mappers/faq';
 import { mapDataToInsights } from './mappers/insights';
 import { mapDataToInstallation } from './mappers/installation';
 import { mapDataToProductInfo } from './mappers/productInfo';
@@ -22,6 +25,7 @@ import {
   mapDataToRecirculationSize,
   RecirculationSize,
 } from './mappers/recirculationSize';
+import { mapDataToReviews } from './mappers/reviews';
 import { mapDataToTechnicalSpecs } from './mappers/technicalSpecs';
 
 export type QueryParams = Record<string, string>;
@@ -33,12 +37,15 @@ interface ProductDetailData {
 interface ResponseProps {
   breadcrumbs: BreadcrumbsItem[];
   currentPath: string;
+  faq: FAQProps | null;
   imageList: SiteCatalogProductImage[];
   insights: InsightsProps;
   installation: InstallationProps | null;
   productInfo: ProductInfoProps;
   recirculation: SiteCatalogProductGroupList | null;
   recirculationSize: RecirculationSize | null;
+  reviews: ReviewsProps;
+  reviewsAnchor: string;
   technicalSpecs: TechnicalSpecsProps | null;
   technicalSpecsAnchor: string;
 }
@@ -86,6 +93,7 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
       router,
     }),
     currentPath: asPath,
+    faq: mapDataToFAQ({ siteProduct, globals }),
     imageList,
     insights: mapDataToInsights({ siteProduct }),
     installation: mapDataToInstallation({ siteProduct }),
@@ -97,6 +105,8 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
     }),
     recirculation: mapDataToRecirculation({ siteProduct }),
     recirculationSize: mapDataToRecirculationSize({ siteProduct, router }),
+    reviews: mapDataToReviews({ siteProductReviews, router }),
+    reviewsAnchor: CONSTANTS.REVIEWS_ANCHOR,
     technicalSpecs: mapDataToTechnicalSpecs({ siteProduct, globals, router }),
     technicalSpecsAnchor: CONSTANTS.TECH_SPECS_ANCHOR,
   };

@@ -8,7 +8,7 @@ import useAccordion from './Accordion.hooks';
 import styles from './Accordion.styles';
 import AccordionItem from './AccordionItem';
 
-export interface Item {
+export interface AccordionItem {
   content?: string | string[] | null;
   id?: string | string[] | null;
   label: string | string[] | null;
@@ -18,7 +18,7 @@ export interface Item {
 export interface Props {
   children?: ReactNode;
   id: string; // To prevent duplicated ids (a11y)
-  items: Item[];
+  items: AccordionItem[];
   itemsToShow?: number;
   itemsToShowLabel?: string;
   linkTarget?: string;
