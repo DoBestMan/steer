@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef } from 'react';
 import Modal from '~/components/global/Modal/Modal';
 import { useSearchContext } from '~/components/modules/Search/Search.context';
 import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
+import { useRouter } from '~/hooks/useRouter';
 import { MODAL_THEME } from '~/lib/constants';
 
 import Search from './Search';
@@ -45,6 +46,9 @@ function SearchModal() {
     clearSearchResults();
     toggleIsSearchOpen();
   };
+
+  // Close the search modal on route change
+  useRouter({ onRouteChange: isSearchOpen ? handleCloseSearch : undefined });
 
   useEffect(() => {
     requestAnimationFrame(toggleDisableScroll);

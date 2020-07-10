@@ -1,18 +1,14 @@
 import { Global } from '@emotion/core';
 import NextApp, { AppContext, AppInitialProps } from 'next/app';
-import { Transition, TransitionGroup } from 'react-transition-group';
-import { TransitionStatus } from 'react-transition-group/Transition';
 
 import Layout from '~/components/global/Layout/Layout';
 import Meta from '~/components/global/Meta/Meta';
 import App from '~/components/modules/App/App';
-import { animations, styles } from '~/components/modules/App/App.styles';
 import AppProviders from '~/context/AppProviders';
 import { SiteGlobals } from '~/data/models/SiteGlobals';
 import { SiteMenu } from '~/data/models/SiteMenu';
 import { backendGetSiteGlobals, backendGetSiteMenu } from '~/lib/backend';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
-import { TIME } from '~/lib/constants';
 import GA from '~/lib/helpers/analytics';
 import { global } from '~/styles/document/global.styles';
 
@@ -47,23 +43,8 @@ class MyApp extends NextApp<Props> {
         <Global styles={global} />
 
         <App route={route}>
-          <Layout>
-            <TransitionGroup>
-              <Transition appear key={route} timeout={TIME.MS400}>
-                {(containerTransitionState: TransitionStatus) => {
-                  const appStyles = [
-                    styles.component,
-                    animations[`component_${containerTransitionState}`],
-                  ];
-
-                  return (
-                    <div css={appStyles}>
-                      <Component {...pageProps} />
-                    </div>
-                  );
-                }}
-              </Transition>
-            </TransitionGroup>
+          <Layout route={route}>
+            <Component {...pageProps} />
           </Layout>
         </App>
       </AppProviders>
