@@ -39,7 +39,7 @@ interface ResponseProps {
   currentPath: string;
   faq: FAQProps | null;
   imageList: SiteCatalogProductImage[];
-  insights: InsightsProps;
+  insights: Omit<InsightsProps, 'handleChangeLocation'>;
   installation: InstallationProps | null;
   productInfo: ProductInfoProps;
   recirculation: SiteCatalogProductGroupList | null;

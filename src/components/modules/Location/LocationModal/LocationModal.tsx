@@ -2,6 +2,7 @@ import GridItem from '~/components/global/Grid/GridItem';
 import Modal from '~/components/global/Modal/Modal';
 import Location from '~/components/modules/Location/Location';
 import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
+import { ui } from '~/lib/utils/ui-dictionary';
 
 import styles from './LocationModal.styles';
 
@@ -17,7 +18,7 @@ function LocationModal({ isOpen, onClose }: Props) {
   } = useUserPersonalizationContext();
   return (
     <Modal
-      contentLabel="Change Location"
+      contentLabel={ui('location.contentLabel')}
       isHalfscreen
       hasCloseButton
       onClose={onClose}

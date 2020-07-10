@@ -7,19 +7,17 @@ export function mapDataToInsights({
   siteProduct: { siteProductInsights },
 }: {
   siteProduct: SiteProduct;
-}): InsightsProps {
+}): Omit<InsightsProps, 'handleChangeLocation'> {
   // TOOD: Integrate fits your vehicle functionality
   const doesItFit = false;
 
   // TODO: Add handlers
-  const handleChangeLocation = () => {};
   const handleChangeVehicle = () => {};
   const handleOpenRebate = () => {};
 
   return {
     delivery: siteProductInsights.delivery,
     doesItFit,
-    handleChangeLocation,
     handleChangeVehicle,
     handleOpenRebate,
     insightItems: siteProductInsights.siteProductInsightList,
