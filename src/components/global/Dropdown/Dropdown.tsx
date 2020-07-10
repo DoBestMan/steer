@@ -60,14 +60,17 @@ export default function Dropdown({
 
     if (isOpen) {
       document.addEventListener('mousedown', onClick);
+      document.addEventListener('touchstart', onClick);
       document.addEventListener('keydown', onKeypress);
     } else {
       document.removeEventListener('mousedown', onClick);
+      document.removeEventListener('touchstart', onClick);
       document.removeEventListener('keydown', onKeypress);
     }
 
     return () => {
       document.removeEventListener('mousedown', onClick);
+      document.removeEventListener('touchstart', onClick);
       document.removeEventListener('keydown', onKeypress);
     };
   }, [isOpen, onClose, isModal]);
