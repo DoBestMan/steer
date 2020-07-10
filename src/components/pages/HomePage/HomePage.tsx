@@ -132,7 +132,8 @@ function HomePage({
           <Grid
             css={[
               styles.contentContainer,
-              isContentVisible && styles.contentVisible,
+              thresholdCrossed && styles.contentFull,
+              !isContentVisible && styles.contentHidden,
             ]}
           >
             <DriverInsights {...siteInsights} />

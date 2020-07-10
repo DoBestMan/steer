@@ -9,7 +9,7 @@ import {
 
 export const CONSTANTS = {
   CONTENT_PEEKING_AMOUNT: {
-    S: 50,
+    S: 130,
     M: 30,
   },
   ICON_SIZE_L: 34,

@@ -16,8 +16,9 @@ export const CONTENT_PADDING = {
 
 const styles: StylesMap = {
   contentContainer: {
-    opacity: 0,
+    opacity: 0.3,
     paddingBottom: CONTENT_PADDING.S,
+    transition: `opacity ${TIME.MS600}ms ${EASING.CUBIC_EASE_OUT}`,
 
     [MQ.M]: {
       paddingBottom: CONTENT_PADDING.M,
@@ -26,6 +27,12 @@ const styles: StylesMap = {
     [MQ.XL]: {
       paddingBottom: CONTENT_PADDING.XL,
     },
+  },
+  contentFull: {
+    opacity: 1,
+  },
+  contentHidden: {
+    opacity: 0,
   },
   contentSpacer: {
     display: 'block',
@@ -36,16 +43,12 @@ const styles: StylesMap = {
       paddingBottom: 60,
     },
   },
-  contentVisible: {
-    opacity: 1,
-    transition: `opacity ${TIME.MS600}ms ${EASING.CUBIC_EASE_OUT}`,
-  },
   root: {
     background: COLORS.LIGHT.OFF_WHITE,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    minHeight: '66.666vh',
+    minHeight: '60vh',
     overflow: 'hidden',
   },
   scrollColorContainer: {

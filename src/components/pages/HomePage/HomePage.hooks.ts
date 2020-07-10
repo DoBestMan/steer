@@ -70,7 +70,7 @@ export function useButtonHeight({
     const buttonHeight = supportsPositionSticky ? buttonRect.height : 0;
 
     setButtonHeight({
-      minHeight: `calc(33.333vh - ${CONTENT_PEEKING_AMOUNT + buttonHeight}px)`,
+      minHeight: `calc(40vh - ${CONTENT_PEEKING_AMOUNT + buttonHeight}px)`,
     });
   }, [buttonRef, CONTENT_PEEKING_AMOUNT, isMobile, supportsPositionSticky]);
 
