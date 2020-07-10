@@ -93,7 +93,7 @@ export default function HeaderInfo({
         {!isInternal && (
           <>
             <div css={infoStyles}>
-              <p css={styles.decorator}>{sizeList[0]}</p>
+              {sizeList[0] && <p css={styles.decorator}>{sizeList[0]}</p>}
               {secondItem}
             </div>
             {thirdItem}
