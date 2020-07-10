@@ -17,7 +17,7 @@ export const getServerSideProps: GetServerSideProps<ReviewListingServerData> = a
   const queryParams: Record<string, string> = {};
   const { ...params } = context.query;
 
-  // Tire reviews accept params for sort, order and page
+  // Category tire reviews accept params for category, sort, order and page
   Object.entries(params).map(([key, value]) => {
     if (typeof value === 'string') {
       queryParams[key] = value;

@@ -2,9 +2,14 @@ import { SiteProductReviewsListing } from '~/data/models/SiteProductReviewsListi
 
 import { fetch } from '../fetch';
 
-export async function backendGetReviewListing() {
+export async function backendGetReviewListing({
+  query,
+}: {
+  query?: Record<string, string>;
+}) {
   const response = await fetch<SiteProductReviewsListing>({
     endpoint: '/v1/site/tire-reviews',
+    query,
     includeAuthorization: true,
     method: 'get',
   });
