@@ -5,6 +5,7 @@ import {
   RADIUS,
   SPACING,
   StylesMap,
+  Z_INDEX,
 } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
@@ -46,6 +47,7 @@ const styles: StylesMap = {
   filterItem: typography.primarySubhead,
   image: {
     minHeight: IMAGE_SIZE.DEFAULT.S,
+    position: 'relative',
     width: IMAGE_SIZE.DEFAULT.S,
     [MQ.M]: {
       minHeight: IMAGE_SIZE.DEFAULT.M,
@@ -144,6 +146,37 @@ const styles: StylesMap = {
     [MQ.XL]: {
       justifyContent: 'start',
       maxWidth: 'initial',
+    },
+  },
+  shadow: {
+    bottom: -SPACING.SIZE_25,
+    left: 0,
+    pointerEvents: 'none',
+    position: 'absolute',
+    width: '100%',
+    zIndex: Z_INDEX.BEHIND,
+
+    [MQ.M]: {
+      bottom: -SPACING.SIZE_30,
+    },
+
+    [MQ.XL]: {
+      bottom: -SPACING.SIZE_35,
+    },
+  },
+  shadowHighlighted: {
+    bottom: -SPACING.SIZE_45,
+
+    [MQ.M]: {
+      bottom: -SPACING.SIZE_45,
+    },
+
+    [MQ.L]: {
+      bottom: -SPACING.SIZE_45,
+    },
+
+    [MQ.XL]: {
+      bottom: -52,
     },
   },
   subcopy: [

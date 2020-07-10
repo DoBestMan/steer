@@ -4,6 +4,7 @@ import Prices from '~/components/global/Prices/Prices';
 import PromoTag from '~/components/global/PromoTag/PromoTag';
 import Stars from '~/components/global/Stars/Stars';
 import { COLORS } from '~/lib/constants';
+import { SHADOW_SRC } from '~/lib/constants/image';
 import { getSquareImageTransformations } from '~/lib/utils/cloudinary/cloudinary';
 import { ui } from '~/lib/utils/ui-dictionary';
 
@@ -49,6 +50,17 @@ function ProductListing({
           src={displayedImage.image.src}
           srcTransformationArgs={getSquareImageTransformations(imageWidths)}
         />
+        <div css={[styles.shadow, isHighlighted && styles.shadowHighlighted]}>
+          <Image
+            width={1400}
+            height={800}
+            widths={imageWidths}
+            altText={''}
+            responsive
+            aria-hidden
+            src={SHADOW_SRC}
+          />
+        </div>
       </div>
       <div css={[styles.info, isHighlighted && styles.infoHighlighted]}>
         {brand.image ? (
