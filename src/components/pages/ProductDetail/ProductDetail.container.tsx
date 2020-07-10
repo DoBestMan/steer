@@ -1,9 +1,12 @@
+import { useState } from 'react';
+
 import Breadcrumbs from '~/components/global/Breadcrumbs/Breadcrumbs';
 import Feedback from '~/components/global/Feedback/Feedback';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import Link from '~/components/global/Link/Link';
 import ProductGroupList from '~/components/global/ProductGroupList/ProductGroupList';
+import LocationModal from '~/components/modules/Location/LocationModal/LocationModal';
 import { navigationPaddingTop } from '~/components/modules/Nav/Nav.styles';
 import FAQ from '~/components/modules/PDP/FAQ/FAQ';
 import Insights from '~/components/modules/PDP/Insights/Insights';
@@ -42,6 +45,11 @@ function ProductDetailContainer({ serverData }: ProductDetailData) {
     serverData,
   });
 
+  const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
+  function toggleModal() {
+    setIsLocationModalOpen(!isLocationModalOpen);
+  }
+
   return (
     <div css={styles.root}>
       <Grid css={navigationPaddingTop}>
@@ -60,7 +68,11 @@ function ProductDetailContainer({ serverData }: ProductDetailData) {
           gridRowL="3"
           css={styles.productInfo}
         >
-          <Insights {...insights} css={styles.insights} />
+          <Insights
+            {...insights}
+            handleChangeLocation={toggleModal}
+            css={styles.insights}
+          />
         </GridItem>
         {installation && (
           <GridItem fullbleed css={styles.installation}>
@@ -116,6 +128,8 @@ function ProductDetailContainer({ serverData }: ProductDetailData) {
           <Feedback />
         </GridItem>
       </Grid>
+
+      <LocationModal isOpen={isLocationModalOpen} onClose={toggleModal} />
     </div>
   );
 }

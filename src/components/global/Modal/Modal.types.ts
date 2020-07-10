@@ -8,6 +8,7 @@ export interface Props {
   hasCloseButton?: boolean;
   hasDefaultPadding?: boolean;
   isFullscreen?: boolean;
+  isHalfscreen?: boolean;
   isOpen: boolean;
   onBack?: () => void;
   onClose: () => void;

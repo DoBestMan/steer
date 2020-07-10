@@ -3,9 +3,11 @@ import {
   COLORS,
   CSSObjectType,
   EASING,
+  GAP_COLUMNS,
   MODAL_ANIMATION,
   MODAL_THEME,
   MODAL_TYPE,
+  MQ,
   SPACING,
   StylesMap,
   TIME,
@@ -109,6 +111,14 @@ const styles: StylesMap = {
   },
   fullScreenPadding: {
     padding: `${FULLSCREEN_PADDINGS.TOP}px ${FULLSCREEN_PADDINGS.RIGHT}px ${FULLSCREEN_PADDINGS.BOTTOM}px`,
+  },
+  halfscreen: {
+    [MQ.L]: {
+      width: `calc(50vw - ${GAP_COLUMNS.L / 2}px)`,
+    },
+    [MQ.XL]: {
+      width: `calc(50vw - ${GAP_COLUMNS.XL / 2}px)`,
+    },
   },
 };
 

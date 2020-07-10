@@ -44,6 +44,7 @@ export function ModalWithKnobs() {
           MODAL_THEME.LIGHT,
         )}
         isFullscreen={boolean('Is fullscreen', false)}
+        isHalfscreen={boolean('Is halfscreen', false)}
         hasCloseButton={boolean('Has close button', true)}
         onClose={toggleModal}
         isOpen={isOpen}

@@ -26,6 +26,7 @@ function Modal({
   hasCloseButton = true,
   hasDefaultPadding = true,
   isFullscreen = false,
+  isHalfscreen,
   isOpen,
   onBack,
   onClose,
@@ -60,6 +61,7 @@ function Modal({
       css={[
         styles[rootStyles],
         styles[theme],
+        !fullscreen && isHalfscreen && styles.halfscreen,
         animationStyles.default,
         hasDefaultPadding && fullscreen && styles.fullScreenPadding,
         isOpen && animationStyles.open,
