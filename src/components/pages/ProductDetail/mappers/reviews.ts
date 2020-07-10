@@ -45,18 +45,8 @@ export function mapDataToReviews({
     (acc: number, cur) => acc + (cur || 0),
     0,
   );
-  const sources = numberOfReviews
-    ? [
-        reviewsSource.googleShopping &&
-          ui('reviews.reviewsFromGoogle', {
-            number: reviewsSource.googleShopping,
-          }),
-        reviewsSource.simpleTire &&
-          ui('reviews.reviewsOnSimpleTire', {
-            number: reviewsSource.simpleTire,
-          }),
-      ].filter((e): e is string => !!e)
-    : undefined;
+
+  const sources = reviewsSource;
   const title = numberOfReviews
     ? ui('reviews.tireReviews', { tire: numberOfReviews })
     : undefined;

@@ -57,6 +57,14 @@ const styles: StylesMap = {
       marginTop: SPACING.SIZE_40,
     },
   },
+  source: {
+    '.preposition': {
+      display: 'none',
+      [MQ.M]: {
+        display: 'inline-block',
+      },
+    },
+  },
   sources: [
     typography.bodyCopy,
     {
@@ -66,7 +74,6 @@ const styles: StylesMap = {
       paddingTop: SPACING.SIZE_02,
     },
   ],
-
   title: [
     typography.primaryHeadline,
     {

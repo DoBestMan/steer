@@ -13,9 +13,15 @@ import ReviewCard, {
 import StarsWithRating from '~/components/global/Stars/StarsWithRating';
 import { SiteLink } from '~/data/models/SiteLink';
 import { ui } from '~/lib/utils/ui-dictionary';
+import { uiJSX } from '~/lib/utils/ui-dictionary-jsx';
 import { typography } from '~/styles/typography.styles';
 
 import styles from './Reviews.styles';
+
+interface Sources {
+  googleShopping?: number | null;
+  simpleTire?: number | null;
+}
 
 export interface ReviewsProps {
   momentList?: MomentListItem[];
@@ -24,7 +30,7 @@ export interface ReviewsProps {
   reviews?: ReviewCardProps[];
   seeAllReviewsLink: SiteLink;
   seeAllReviewsLinkLabel?: string;
-  sources?: string[];
+  sources?: Sources;
   title?: string;
   writeReviewLink: SiteLink;
   writeReviewLinkLabel?: string;
@@ -42,19 +48,40 @@ function Reviews({
   writeReviewLink,
   writeReviewLinkLabel = ui('reviews.writeReview'),
 }: ReviewsProps) {
+  const hasSources = sources?.simpleTire || sources?.googleShopping;
+
   return (
     <Grid as="section" css={styles.section}>
       <GridItem gridColumnL="3/7">
         <div css={styles.container}>
           <div css={styles.titleContainer}>
             <div css={styles.title}>{title}</div>
-            {!!sources && (
+            {hasSources && (
               <span css={styles.sources}>
-                {sources.map((source) => (
-                  <span css={styles.source} key={source}>
-                    {source}
+                {sources?.simpleTire && (
+                  <span css={styles.source}>
+                    {uiJSX('reviews.simpleTire.name', {
+                      number: sources.simpleTire,
+                      preposition: (
+                        <span className="preposition">
+                          {ui('reviews.simpleTire.preposition')}
+                        </span>
+                      ),
+                    })}
                   </span>
-                ))}
+                )}
+                {sources?.googleShopping && (
+                  <span css={styles.source}>
+                    {uiJSX('reviews.google.name', {
+                      number: sources?.googleShopping,
+                      preposition: (
+                        <span className="preposition">
+                          {ui('reviews.google.preposition')}
+                        </span>
+                      ),
+                    })}
+                  </span>
+                )}
               </span>
             )}
           </div>

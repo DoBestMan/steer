@@ -78,7 +78,7 @@ describe('pages/ProductDetails/mappers/reviews', () => {
         href: '/brands/continental-tires/reviews',
         isExternal: false,
       },
-      sources: ['72 from Google Shopping', '115 on SimpleTire'],
+      sources: { googleShopping: 72, simpleTire: 115 },
       title: '187 Reviews',
       writeReviewLink: { href: '/', isExternal: false },
     });

@@ -328,8 +328,14 @@
     "tireReviews": "{{tire}} Reviews",
     "viewTire": "View tire",
     "writeReview": "Write a review",
-    "reviewsFromGoogle": "{{number}} from Google Shopping",
-    "reviewsOnSimpleTire": "{{number}} on SimpleTire",
+    "google": {
+      "name": "{{number}} {{preposition}} Google Shopping",
+      "preposition": "from"
+    },
+    "simpleTire": {
+      "name": "{{number}} {{preposition}} SimpleTire",
+      "preposition": "on"
+    },
     "form": {
       "title": "Leave a review {{tire}}",
       "submit": "Complete all fields to submit",

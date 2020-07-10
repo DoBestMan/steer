@@ -48,7 +48,7 @@ export const mockReviewData = {
     isExternal: false,
   },
   seeAllReviewsLinkLabel: 'See all customer reviews',
-  sources: ['115 on SimpleTire', '72 from Google Shopping'],
+  sources: { simpleTire: 115, googleShopping: 72 },
   title: '115 reviews',
   writeReviewLink: {
     href: '/',

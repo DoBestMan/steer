@@ -33,7 +33,7 @@ export function ReviewsWithKnobs() {
       ratingStars={ratingStars}
       seeAllReviewsLink={seeAllReviewsLink}
       seeAllReviewsLinkLabel={seeAllReviewsLinkLabel}
-      sources={(hasSources && sources) || []}
+      sources={(hasSources && sources) || {}}
       title={title}
       writeReviewLink={writeReviewLink}
       writeReviewLinkLabel={writeReviewLinkLabel}
