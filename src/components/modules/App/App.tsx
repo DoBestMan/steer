@@ -1,12 +1,16 @@
 import dynamic from 'next/dynamic';
 import { ReactNode } from 'react';
+import { Transition, TransitionGroup } from 'react-transition-group';
+import { TransitionStatus } from 'react-transition-group/Transition';
 
+import Layout from '~/components/global/Layout/Layout';
 import SearchModal from '~/components/modules/Search/SearchModal';
 import { NavContextProvider } from '~/context/Nav.context';
-import { ROUTE_MAP, ROUTES } from '~/lib/constants';
+import { ROUTE_MAP, ROUTES, TIME } from '~/lib/constants';
 
 import FooterContainer from '../Footer/Footer.container';
-import { styles } from './App.styles';
+import { useSearchContext } from '../Search/Search.context';
+import { animations, styles } from './App.styles';
 
 interface Props {
   children: ReactNode;
@@ -18,13 +22,37 @@ const NavContainer = dynamic(() =>
 );
 
 function App({ children, route }: Props) {
+  const { isSearchOpen } = useSearchContext();
+
+  // If page transition (fade out/in) is not desired, add use case here
+  const skipPageTransition = isSearchOpen;
   const isHomepage = route === ROUTE_MAP[ROUTES.HOME];
 
   return (
     <div css={[styles.root, isHomepage && styles.rootWithOffWhiteBg]}>
       <NavContextProvider>
         <NavContainer isHomepage={isHomepage} />
-        {children}
+        <TransitionGroup>
+          <Transition
+            appear
+            key={route}
+            timeout={skipPageTransition ? 0 : TIME.MS400}
+          >
+            {(containerTransitionState: TransitionStatus) => {
+              const appStyles = [
+                styles.component,
+                !skipPageTransition &&
+                  animations[`component_${containerTransitionState}`],
+              ];
+
+              return (
+                <div css={appStyles}>
+                  <Layout>{children}</Layout>
+                </div>
+              );
+            }}
+          </Transition>
+        </TransitionGroup>
       </NavContextProvider>
       <FooterContainer />
       <SearchModal />

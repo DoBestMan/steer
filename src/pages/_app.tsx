@@ -1,7 +1,6 @@
 import { Global } from '@emotion/core';
 import NextApp, { AppContext, AppInitialProps } from 'next/app';
 
-import Layout from '~/components/global/Layout/Layout';
 import Meta from '~/components/global/Meta/Meta';
 import App from '~/components/modules/App/App';
 import AppProviders from '~/context/AppProviders';
@@ -43,9 +42,7 @@ class MyApp extends NextApp<Props> {
         <Global styles={global} />
 
         <App route={route}>
-          <Layout route={route}>
-            <Component {...pageProps} />
-          </Layout>
+          <Component {...pageProps} />
         </App>
       </AppProviders>
     );

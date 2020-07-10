@@ -1,18 +1,13 @@
 import { ReactNode, useEffect, useState } from 'react';
 import SVGInline from 'react-svg-inline';
-import { Transition, TransitionGroup } from 'react-transition-group';
-import { TransitionStatus } from 'react-transition-group/Transition';
 
 import GridHelper from '~/components/global/GridHelper/GridHelper';
-import { useSearchContext } from '~/components/modules/Search/Search.context';
-import { TIME } from '~/lib/constants';
 import { ScrollObject, setScroll } from '~/lib/helpers/scroll';
 
-import styles, { animations } from './Layout.styles';
+import styles from './Layout.styles';
 
 interface Props {
   children: ReactNode;
-  route: string;
 }
 
 function Layout(props: Props) {
@@ -69,40 +64,16 @@ function Layout(props: Props) {
     getSVG();
   }, [SVGString]);
 
-  const { isSearchOpen } = useSearchContext();
-
-  // If page transition (fade out/in) is not desired, add use case here
-  const skipPageTransition = isSearchOpen;
-
   return (
-    <TransitionGroup>
-      <Transition
-        appear
-        key={props.route}
-        timeout={skipPageTransition ? 0 : TIME.MS400}
-      >
-        {(containerTransitionState: TransitionStatus) => {
-          const appStyles = [
-            styles.component,
-            animations[`component_${containerTransitionState}`],
-          ];
-
-          return (
-            <div css={appStyles}>
-              <div css={styles.container}>
-                <span css={styles.SVGSpriteContainer}>
-                  {SVGString && <SVGInline svg={SVGString} />}
-                </span>
-                <GridHelper />
-                <main role="main" css={styles.mainContent}>
-                  {props.children}
-                </main>
-              </div>
-            </div>
-          );
-        }}
-      </Transition>
-    </TransitionGroup>
+    <div css={styles.container}>
+      <span css={styles.SVGSpriteContainer}>
+        {SVGString && <SVGInline svg={SVGString} />}
+      </span>
+      <GridHelper />
+      <main role="main" css={styles.mainContent}>
+        {props.children}
+      </main>
+    </div>
   );
 }
 
