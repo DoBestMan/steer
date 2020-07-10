@@ -21,7 +21,6 @@ export interface CatalogPageData {
 }
 
 interface Props extends CatalogPageData {
-  allowedParams?: string[];
   endpoints: {
     products: string;
     summary: string;
@@ -31,7 +30,6 @@ interface Props extends CatalogPageData {
 }
 
 function CatalogPageContainer({
-  allowedParams = [],
   endpoints,
   hasTopPicks = true,
   serverData,
@@ -79,15 +77,6 @@ function CatalogPageContainer({
     async (filters: Record<string, string>) => {
       const route = asPath.split('?');
       const params: Record<string, string> = {};
-      Object.keys(queryParams).forEach((k) => {
-        if (
-          allowedParams.concat(CATALOG_PARAMS).includes(k) ||
-          (pageParams && pageParams[k])
-        ) {
-          // filter out stale filter keys if they have been removed but keep page params
-          params[k] = queryParams[k];
-        }
-      });
       const searchString = new URLSearchParams({
         ...params,
         ...filters,
@@ -100,15 +89,7 @@ function CatalogPageContainer({
       // revalidate with newly applied filters
       await revalidateProducts();
     },
-    [
-      asPath,
-      queryParams,
-      pathname,
-      push,
-      revalidateProducts,
-      pageParams,
-      allowedParams,
-    ],
+    [asPath, pathname, push, revalidateProducts],
   );
 
   // preview data and handler for open filter dropdowns

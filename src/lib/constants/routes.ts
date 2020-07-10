@@ -8,6 +8,7 @@ export enum ROUTES {
   BRAND_DETAIL = 'brandDetail',
   BRAND_LANDING = 'brandLanding',
   BRAND_REVIEWS = 'brandReviews',
+  BRAND_TYPE = 'brandType',
   HOME = 'home',
   ORDER_TRACKING = 'orderTracking',
   ORDER_TRACKING_RESULT = 'orderTrackingResult',
@@ -28,10 +29,11 @@ export const ROUTE_MAP: Record<ROUTES, string> = {
   [ROUTES.ORDER_TRACKING_RESULT]: '/track-your-order/result',
   [ROUTES.PRODUCT_DETAIL]: '/brands/[brandName]/[productLine]',
   [ROUTES.PRODUCT_REVIEWS]: '/brands/[brandName]/[productLine]/reviews',
-  [ROUTES.TIRE_CATEGORY]: '/tire-sizes/[sizeInfo]',
   [ROUTES.TIRE_REVIEWS]: '/tire-reviews',
   [ROUTES.VEHICLES_CATEGORY]: '/vehicles/[make]/[model]/[year]',
-  [ROUTES.BRAND_CATEGORY]: '/[brandName]/[categoryOrType]',
+  [ROUTES.BRAND_TYPE]: '/brands/[brandName]/types/[categoryOrType]',
+  [ROUTES.BRAND_CATEGORY]: '/brands/[brandName]/categories/[categoryOrType]',
+  [ROUTES.TIRE_CATEGORY]: '/tire-sizes/[size]',
 };
 
 // null for dynamic labels

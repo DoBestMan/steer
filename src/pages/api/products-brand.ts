@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 import { SiteCatalogProducts } from '~/data/models/SiteCatalogProducts';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
-import { backendGetVehicleProducts } from '~/lib/backend/catalog/vehicle';
+import { backendGetBrandProducts } from '~/lib/backend/catalog/brand';
 import { getStringifiedParams } from '~/lib/utils/routes';
 
 export default async (
@@ -12,16 +12,15 @@ export default async (
   }>,
 ) => {
   backendBootstrap({ request });
-  const { make, model, year, ...rest } = request.query;
+  const { brand, categoryOrType, ...rest } = request.query;
 
-  if (!make || !model || !year) {
-    console.warn('Make, model, and year are required');
+  if (!brand || !categoryOrType) {
+    console.warn('Brand name and category or type are required');
   }
 
-  const productsRes = await backendGetVehicleProducts({
-    make,
-    model,
-    year,
+  const productsRes = await backendGetBrandProducts({
+    brand,
+    category: categoryOrType,
     query: getStringifiedParams(rest),
   });
   response.json(productsRes);

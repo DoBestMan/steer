@@ -31,7 +31,7 @@ export function mapDataToRecirculationSize({
         size: siteProductLineSizeDetail.size,
       }),
       url: interpolateRoute(ROUTE_MAP[ROUTES.TIRE_CATEGORY], {
-        sizeInfo: tireSize,
+        size: tireSize,
       }),
     };
   }
@@ -42,7 +42,7 @@ export function mapDataToRecirculationSize({
       rear: siteProductLineRearSizeDetail.size,
     }),
     url: `${interpolateRoute(ROUTE_MAP[ROUTES.TIRE_CATEGORY], {
-      sizeInfo: tireSize,
+      size: tireSize,
     })}?rear=${rearSize}`,
   };
 }

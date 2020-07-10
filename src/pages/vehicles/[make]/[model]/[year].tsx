@@ -13,14 +13,6 @@ import { getParam, getStringifiedParams } from '~/lib/utils/routes';
 import { capitalize } from '~/lib/utils/string';
 import { ui } from '~/lib/utils/ui-dictionary';
 
-export const VEHICLE_PARAMS = [
-  'trim',
-  'tireSize',
-  'loadIndex',
-  'speedRating',
-  'oem',
-];
-
 interface Props extends CatalogPageData {
   make: string;
   model: string;
@@ -40,7 +32,6 @@ function VehicleCatalog({ serverData, make, model, year }: Props) {
     <>
       <Meta title={title} description={description} />
       <CatalogPageContainer
-        allowedParams={VEHICLE_PARAMS}
         serverData={serverData}
         endpoints={{
           summary: '/summary-vehicle',

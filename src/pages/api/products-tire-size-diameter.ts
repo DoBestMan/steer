@@ -1,8 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
+import { getDiameterCategory } from '~/components/pages/CatalogPage/CatalogPage.utils';
 import { SiteCatalogProducts } from '~/data/models/SiteCatalogProducts';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
-import { backendGetVehicleProducts } from '~/lib/backend/catalog/vehicle';
+import { backendGetTireSizeDiameterProducts } from '~/lib/backend/catalog/size-diameter';
 import { getStringifiedParams } from '~/lib/utils/routes';
 
 export default async (
@@ -12,17 +13,19 @@ export default async (
   }>,
 ) => {
   backendBootstrap({ request });
-  const { make, model, year, ...rest } = request.query;
 
-  if (!make || !model || !year) {
-    console.warn('Make, model, and year are required');
+  const { size, ...rest } = request.query;
+  const { category, diameter } = getDiameterCategory(size);
+
+  if (!category || !diameter) {
+    console.warn('Category and diameter are required');
+    return;
   }
 
-  const productsRes = await backendGetVehicleProducts({
-    make,
-    model,
-    year,
+  const productsRes = await backendGetTireSizeDiameterProducts({
     query: getStringifiedParams(rest),
+    category,
+    diameter,
   });
   response.json(productsRes);
 };

@@ -71,11 +71,11 @@ export function mapDataToProductInfo({
   };
 
   // TODO: use tire size parsed name from API
-  const parsedSizeInfo = `p${size?.replace(' ', '-').replace('/', '-')}`;
+  const parsedSize = `p${size?.replace(' ', '-').replace('/', '-')}`;
   const sameSizeSearchResults =
     siteProductLineSizeDetail?.outOfStockTireSizeResultCount;
   const sameSizeSearchURL = interpolateRoute(ROUTE_MAP[ROUTES.TIRE_CATEGORY], {
-    sizeInfo: parsedSizeInfo,
+    size: parsedSize,
   });
 
   // TODO: Implement tire and quantity changers

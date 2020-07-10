@@ -4,13 +4,13 @@ import {
   useCallback,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from 'react';
 
 import { useCatalogPageContext } from '~/context/CatalogPage.context';
 import { SiteCatalogFilters } from '~/data/models/SiteCatalogFilters';
 import { createContext } from '~/lib/utils/context';
-import { isObjectEqual } from '~/lib/utils/object';
 
 import { CatalogFilterTypes } from './Filter.types';
 import { getInitialFiltersState, getValueKeys } from './Filters.utils';
@@ -109,8 +109,16 @@ export function useFiltersContextSetup({
     initialState,
   );
 
+  const firstRun = useRef(true);
   useEffect(() => {
-    if (!selectingFilter || isObjectEqual(initialState, filtersToApply)) {
+    if (!selectingFilter) {
+      firstRun.current = true;
+      return;
+    }
+
+    // don't preview filters upon opening a dropdown
+    if (firstRun.current) {
+      firstRun.current = false;
       return;
     }
 
@@ -234,7 +242,7 @@ export function useFiltersContextSetup({
     isPreviewLoading,
     previewFiltersData,
     selectingFilter,
-    totalMatches: siteCatalogFilters.totalMatches,
+    totalMatches: previewFiltersData.totalMatches,
   };
 }
 
