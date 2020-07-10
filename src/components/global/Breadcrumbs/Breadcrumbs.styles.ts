@@ -1,4 +1,5 @@
-import { COLORS, SPACING, StylesMap, THEME } from '~/lib/constants';
+import { COLORS, MQ, SPACING, StylesMap, THEME } from '~/lib/constants';
+import { typography } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
   item: {
@@ -7,10 +8,13 @@ const styles: StylesMap = {
     whiteSpace: 'nowrap',
     width: 'auto',
   },
-  link: {
-    alignItems: 'center',
-    display: 'flex',
-  },
+  link: [
+    typography.smallCopyTight,
+    /* overwrite the XL style from footerLink */
+    {
+      [MQ.XL]: typography.smallCopyTight,
+    },
+  ],
   root: {
     '.breadcrumbs-wrapper': {
       alignItems: 'center',
