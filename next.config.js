@@ -12,6 +12,7 @@ module.exports = withBundleAnalyzer({
     GTM_AUTH: process.env.GTM_AUTH,
     GTM_PREVIEW: process.env.GTM_PREVIEW,
     GTM_COOKIES_WIN: process.env.GTM_COOKIES_WIN,
+    RECAPTCHA_SITE_KEY: process.env.RECAPTCHA_SITE_KEY,
   },
   webpack: (config) => {
     config.module.rules.push({
