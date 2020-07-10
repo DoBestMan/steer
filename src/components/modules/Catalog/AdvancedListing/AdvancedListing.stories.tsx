@@ -48,7 +48,7 @@ const mockPromotions = [
   {
     style: SitePromotionStyleEnum.SitePromotionItemDefault,
     label: 'Spring Sale',
-    icon: { svgId: ICONS.TAG, type: ICON_IMAGE_TYPE.ICON } as SiteIcon,
+    icon: { svgId: ICONS.TAG_SMALL, type: ICON_IMAGE_TYPE.ICON } as SiteIcon,
   },
   {
     style: SitePromotionStyleEnum.SitePromotionItemWhitePill,
@@ -58,7 +58,7 @@ const mockPromotions = [
   {
     style: SitePromotionStyleEnum.SitePromotionItemWhitePill,
     label: '$70 rebate',
-    icon: { svgId: ICONS.RETURN, type: ICON_IMAGE_TYPE.ICON } as SiteIcon,
+    icon: { svgId: ICONS.REBATE_SMALL, type: ICON_IMAGE_TYPE.ICON } as SiteIcon,
   },
 ];
 

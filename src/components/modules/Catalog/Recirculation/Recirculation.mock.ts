@@ -9,7 +9,10 @@ export const recirculationData: SiteCatalogSummaryRecirculation = {
     {
       label: 'Winter tires',
       description: 'For snow, ice and freezing temperatures.',
-      icon: { type: ICON_IMAGE_TYPE.ICON, svgId: ICONS.WINTER } as SiteIcon,
+      icon: {
+        type: ICON_IMAGE_TYPE.ICON,
+        svgId: ICONS.TIRETYPE_WINTER,
+      } as SiteIcon,
       link: {
         href: '/',
         isExternal: false,
@@ -18,7 +21,7 @@ export const recirculationData: SiteCatalogSummaryRecirculation = {
     {
       label: 'Tires with long warranty',
       description: 'Very common ask for drivers.',
-      icon: { type: ICON_IMAGE_TYPE.ICON, svgId: ICONS.SHIELD } as SiteIcon,
+      icon: { type: ICON_IMAGE_TYPE.ICON, svgId: ICONS.WARRANTY } as SiteIcon,
       link: {
         href: '/',
         isExternal: false,
@@ -36,7 +39,10 @@ export const recirculationData: SiteCatalogSummaryRecirculation = {
     {
       label: 'Tires with Run-Flat',
       description: 'Common feature in Brooklyn.',
-      icon: { type: ICON_IMAGE_TYPE.ICON, svgId: ICONS.ECONOMY } as SiteIcon,
+      icon: {
+        type: ICON_IMAGE_TYPE.ICON,
+        svgId: ICONS.FUEL_ECONOMY,
+      } as SiteIcon,
       link: {
         href: '#',
         isExternal: false,

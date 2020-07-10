@@ -22,10 +22,10 @@ const styleOptions = {
 
 const iconOptions = {
   Fire: ICONS.FIRE,
-  Lightning: ICONS.LIGHTNING,
-  Return: ICONS.RETURN,
-  Shield: ICONS.SHIELD,
-  Tag: ICONS.TAG,
+  Lightning: ICONS.LIGHTNING_SMALL,
+  Return: ICONS.REBATE_SMALL,
+  Shield: ICONS.WARRANTY,
+  Tag: ICONS.TAG_SMALL,
   Wrench: ICONS.WRENCH,
 };
 
@@ -41,7 +41,7 @@ export function PromoTagWithKnobs() {
       )}
       isUppercase={boolean('Uppercase', false)}
       icon={{
-        svgId: select('Icon', iconOptions, ICONS.TAG),
+        svgId: select('Icon', iconOptions, ICONS.TAG_SMALL),
         type: ICON_IMAGE_TYPE.ICON,
       }}
       label={text('Label', 'Spring Sale')}
@@ -65,7 +65,7 @@ export function WhitePillPromoTag() {
     <PromoTag
       style={SitePromotionStyleEnum.SitePromotionItemWhitePill}
       icon={{
-        svgId: ICONS.SHIELD,
+        svgId: ICONS.WARRANTY,
         type: ICON_IMAGE_TYPE.ICON,
       }}
       label="Includes Road Hazard"
@@ -78,7 +78,7 @@ export function OrangePillPromoTag() {
     <PromoTag
       style={SitePromotionStyleEnum.SitePromotionItemOrangePill}
       icon={{
-        svgId: ICONS.LIGHTNING,
+        svgId: ICONS.LIGHTNING_SMALL,
         type: ICON_IMAGE_TYPE.ICON,
       }}
       label="Instant Rebate"
@@ -91,7 +91,7 @@ export function PromoTagCarousel() {
     {
       style: SitePromotionStyleEnum.SitePromotionItemDefault,
       icon: {
-        svgId: ICONS.TAG,
+        svgId: ICONS.TAG_SMALL,
         type: ICON_IMAGE_TYPE.ICON,
       },
       label: 'Spring Sale',
@@ -115,7 +115,7 @@ export function PromoTagCarousel() {
     {
       style: SitePromotionStyleEnum.SitePromotionItemBlackPill,
       icon: {
-        svgId: ICONS.LIGHTNING,
+        svgId: ICONS.LIGHTNING_SMALL,
         type: ICON_IMAGE_TYPE.ICON,
       },
       label: 'Black Friday',

@@ -96,7 +96,7 @@ export function InsightsWithKnobs() {
       label: 'Great warranty: 65,000 miles',
       icon: {
         type: 'SiteIcon',
-        svgId: ICONS.SHIELD,
+        svgId: ICONS.WARRANTY,
       },
       sectionAnchor: 'SiteProductSpecs',
     },
@@ -104,7 +104,7 @@ export function InsightsWithKnobs() {
       label: 'Fuel efficient: Save up to 10%',
       icon: {
         type: 'SiteIcon',
-        svgId: ICONS.ECONOMY,
+        svgId: ICONS.FUEL_ECONOMY,
       },
       sectionAnchor: null,
     },
@@ -112,7 +112,7 @@ export function InsightsWithKnobs() {
       label: 'Run-Flat feature: Never stops',
       icon: {
         type: 'SiteIcon',
-        svgId: ICONS.ECONOMY,
+        svgId: ICONS.FUEL_ECONOMY,
       },
       sectionAnchor: null,
     },

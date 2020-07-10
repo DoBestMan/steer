@@ -1,0 +1,16 @@
+<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M15.2242 15.2865C15.2242 19.089 15.2242 22.1716 15.2242 22.1716C11.4217 22.1716 8.33911 19.089 8.33911 15.2865C8.33911 11.4839 11.4217 8.40137 15.2242 8.40137C15.2242 8.40137 15.2242 11.4839 15.2242 15.2865Z" fill="currentColor"/>
+<line x1="14.8022" y1="6.34009" x2="14.8022" y2="3.25001" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="10.2378" y1="7.52131" x2="8.71279" y2="4.83377" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="6.80754" y1="10.8419" x2="4.06761" y2="9.41318" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="6.98533" y1="19.7943" x2="4.2445" y2="21.2213" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="10.1406" y1="23.2974" x2="8.4611" y2="25.8912" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="14.6697" y1="24.8064" x2="14.6678" y2="27.8965" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="6.27734" y1="15.375" x2="3.18727" y2="15.375" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+<path d="M14.7653 15.2865C14.7653 19.089 14.7653 22.1716 14.7653 22.1716C18.5678 22.1716 21.6504 19.089 21.6504 15.2865C21.6504 11.4839 18.5678 8.40137 14.7653 8.40137C14.7653 8.40137 14.7653 11.4839 14.7653 15.2865Z" fill="currentColor"/>
+<line x1="0.75" y1="-0.75" x2="3.84008" y2="-0.75" transform="matrix(0.493523 -0.869733 -0.869733 -0.493523 18.7292 7.80347)" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="0.75" y1="-0.75" x2="3.84007" y2="-0.75" transform="matrix(0.886689 -0.462366 -0.462366 -0.886689 22.1702 10.5237)" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="0.75" y1="-0.75" x2="3.84008" y2="-0.75" transform="matrix(0.886977 0.461814 0.461814 -0.886977 22.6853 18.7827)" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="0.75" y1="-0.75" x2="3.84007" y2="-0.75" transform="matrix(0.543517 0.839398 0.839398 -0.543517 20.0708 22.2603)" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="0.75" y1="-0.75" x2="3.84008" y2="-0.75" transform="matrix(1 0 0 -1 22.9622 14.625)" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+</svg>

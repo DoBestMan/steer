@@ -32,8 +32,8 @@ function FilterButton({
     return null;
   }
   const iconName = isDropdownOpen
-    ? ICONS.SMALL_CHEVRON_UP
-    : ICONS.SMALL_CHEVRON_DOWN;
+    ? ICONS.CHEVRON_SMALL_UP
+    : ICONS.CHEVRON_SMALL_DOWN;
 
   return (
     <Button

@@ -21,7 +21,7 @@ export const brands: SiteCatalogSummary = {
         description: 'For snow, ice and freezing temperatures.',
         icon: {
           type: ICON_IMAGE_TYPE.ICON,
-          svgId: 'winter',
+          svgId: 'tiretype-winter',
         },
         link: {
           href: '/current-url-here?type=winterTires',
@@ -144,7 +144,7 @@ export const vehiclesNoOeWithSize: SiteCatalogSummary = {
         description: 'For snow, ice and freezing temperatures.',
         icon: {
           type: ICON_IMAGE_TYPE.ICON,
-          svgId: 'winter',
+          svgId: 'tiretype-winter',
         },
         link: {
           href: '/current-url-here?type=winterTires',

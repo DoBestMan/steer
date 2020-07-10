@@ -45,7 +45,7 @@ const mockPromoTags: PromoTagProps[] = [
   {
     style: SitePromotionStyleEnum.SitePromotionItemBlackPill,
     icon: {
-      svgId: ICONS.LIGHTNING,
+      svgId: ICONS.LIGHTNING_SMALL,
       type: ICON_IMAGE_TYPE.ICON,
     },
     label: 'Black Friday',

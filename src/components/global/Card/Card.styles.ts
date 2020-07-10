@@ -8,8 +8,8 @@ import {
 } from '~/lib/constants';
 
 const ICON_SIZE = {
-  H: 50,
-  W: 50,
+  STANDARD: 50,
+  XL: 70,
 };
 const styles: StylesMap = {
   decorator: {
@@ -29,12 +29,15 @@ const styles: StylesMap = {
         left: -SPACING.SIZE_50,
         zIndex: Z_INDEX.ZERO,
       },
-      height: ICON_SIZE.H,
+      height: ICON_SIZE.STANDARD,
       position: 'relative',
-      width: ICON_SIZE.W,
+      width: ICON_SIZE.STANDARD,
     },
-    height: ICON_SIZE.H,
+    height: ICON_SIZE.STANDARD,
     position: 'relative',
+    svg: {
+      height: '100%',
+    },
     width: '100%',
     zIndex: Z_INDEX.ZERO,
     [MQ.S]: {
@@ -50,6 +53,7 @@ const styles: StylesMap = {
     [MQ.XL]: {
       // exception for jumbo headline, should be 60px on XL for card decorator
       fontSize: '6.0rem',
+      height: ICON_SIZE.XL,
       letterSpacing: '-0.04em',
       lineHeight: 60 / 60, // '60px',
     },

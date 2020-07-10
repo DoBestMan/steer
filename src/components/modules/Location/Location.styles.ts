@@ -2,6 +2,12 @@ import { COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
 import { layout } from '~/styles/layout.styles';
 import { typography } from '~/styles/typography.styles';
 
+const GEOLOCATION_ICON_SIZE = {
+  S: 16,
+  M: 26,
+  XL: 24,
+};
+
 export const styles: StylesMap = {
   container: {
     width: '100%',
@@ -70,13 +76,19 @@ export const styles: StylesMap = {
   useCurrentLocationIcon: {
     marginLeft: SPACING.SIZE_10,
     svg: {
-      height: 18,
-      width: 18,
+      height: GEOLOCATION_ICON_SIZE.S,
+      width: GEOLOCATION_ICON_SIZE.S,
     },
     [MQ.M]: {
       svg: {
-        height: 25,
-        width: 25,
+        height: GEOLOCATION_ICON_SIZE.M,
+        width: GEOLOCATION_ICON_SIZE.M,
+      },
+    },
+    [MQ.XL]: {
+      svg: {
+        height: GEOLOCATION_ICON_SIZE.XL,
+        width: GEOLOCATION_ICON_SIZE.XL,
       },
     },
   },
