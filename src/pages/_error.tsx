@@ -12,7 +12,7 @@ function Error({ statusCode }: Props) {
   const description = is404
     ? ui('error.notFoundDescription')
     : ui('error.erroDescription');
-  const copy = is404 ? ui('error.callCopy') : undefined;
+  const copy = !is404 ? ui('error.callCopy') : undefined;
 
   return (
     <ErrorPage
