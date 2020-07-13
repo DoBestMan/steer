@@ -1,3 +1,5 @@
+import { randomString } from '~/lib/utils/string';
+
 export const GTM_CONSTANTS = {
   GTM_ID: process.env.GTM_ID || '',
   GTM_AUTH: process.env.GTM_AUTH,
@@ -5,6 +7,14 @@ export const GTM_CONSTANTS = {
   GTM_COOKIES_WIN: process.env.GTM_COOKIES_WIN,
 };
 
+type ExperimentCallback = {
+  callback: (response: boolean, originalAnswer?: string) => void;
+  experimentID: string;
+};
+
+const TOTAL_TRIALS = 5;
+
+// Injects GTM + Full Story + Optimize
 class GoogleAnalytics {
   name = 'Google Analytics';
 
@@ -12,9 +22,11 @@ class GoogleAnalytics {
 
   scriptInjected = false;
 
-  config: GTMConfig = {};
-
   _userSessionId: string | null = null;
+
+  experimentCallbacks: Record<string, ExperimentCallback> = {};
+
+  trials = 0;
 
   set userSessionId(userSessionId: string) {
     this._userSessionId = userSessionId;
@@ -27,78 +39,120 @@ class GoogleAnalytics {
       window.dataLayer.push({ userSessionId: this._userSessionId });
   }
 
-  initialize(location?: GTMLocation) {
+  initialize() {
     if (this.init || typeof window === 'undefined') {
       return;
     }
 
     this.init = true;
-    this.injectScript(location);
+    this.injectScript();
   }
 
-  injectScript(_location?: GTMLocation) {
+  // Inject GTM, which itself inject FullStory and Google Optimize
+  injectScript() {
     if (typeof document === 'undefined') {
       return;
     }
 
     window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({
-      'gtm.start': new Date().getTime(),
-      event: 'gtm.js',
-    });
+
+    window.dataLayer &&
+      window.dataLayer.push({
+        'gtm.start': new Date().getTime(),
+        event: 'gtm.js',
+      });
 
     const script = document.createElement('script');
     script.type = 'text/javascript';
     script.async = true;
     script.onload = () => {
       // remote script has loaded
-      this.scriptInjected = true;
+      this.onScriptLoaded();
     };
-    script.src = `https://www.googletagmanager.com/gtm.js?id=${GTM_CONSTANTS.GTM_ID}&gtm_auth=${GTM_CONSTANTS.GTM_AUTH}&gtm_preview=${GTM_CONSTANTS.GTM_PREVIEW}&gtm_cookies_win=${GTM_CONSTANTS.GTM_COOKIES_WIN}`;
+
+    script.src = `https://www.googletagmanager.com/gtm.js?id=${GTM_CONSTANTS.GTM_ID}`;
     document.getElementsByTagName('head')[0].appendChild(script);
   }
 
-  // validate if 'ga' is defined
-  checkGa() {
-    this.checkInit();
+  onScriptLoaded() {
+    this.scriptInjected = true;
 
+    // No experiment registered, no need
+    if (!Object.keys(this.experimentCallbacks).length) {
+      return;
+    }
+
+    // Already ready, all good
+    if (this.isGoogleOptimizeReady()) {
+      this.callExperiments();
+      return;
+    }
+
+    // Try to see if Optimize is ready
+    const intervalId = setInterval(() => {
+      // Failed after TOTAL_TRIALS times
+      if (this.trials >= TOTAL_TRIALS) {
+        clearInterval(intervalId);
+      }
+
+      if (this.isGoogleOptimizeReady()) {
+        this.callExperiments();
+        clearInterval(intervalId);
+      }
+
+      this.trials++;
+    }, 100);
+  }
+
+  callExperiments() {
+    for (const key in this.experimentCallbacks) {
+      if (this.experimentCallbacks[key]) {
+        this.getExperimentAnswer(this.experimentCallbacks[key]);
+      }
+    }
+
+    // reset
+    this.experimentCallbacks = { ...{} };
+  }
+
+  isGoogleOptimizeReady() {
     return (
       typeof window !== 'undefined' &&
-      'gtag' in window &&
-      typeof window.gtag !== 'undefined' &&
-      this.scriptInjected
+      window.google_optimize &&
+      window.google_optimize.get
     );
   }
 
-  checkInit() {
-    if (!this.init) {
-      this.initialize();
+  getExperiment({ experimentID, callback }: ExperimentCallback): () => void {
+    const id = randomString();
+
+    if (!this.isGoogleOptimizeReady()) {
+      // register for later
+      this.experimentCallbacks[id] = { experimentID, callback };
+    } else {
+      // script ready
+      this.getExperimentAnswer({ experimentID, callback });
     }
+
+    // return dispose function
+    return () => {
+      if (this.experimentCallbacks[id]) {
+        delete this.experimentCallbacks[id];
+      }
+    };
   }
 
-  pageView(location: GTMLocation) {
-    // ga track
-    if (!this.checkGa()) {
+  getExperimentAnswer({ experimentID, callback }: ExperimentCallback) {
+    if (!this.isGoogleOptimizeReady()) {
       return;
     }
 
-    const { pathname } = location;
+    const originalAnswer =
+      window.google_optimize && window.google_optimize.get(experimentID);
+    const answer = typeof originalAnswer === 'undefined' ? '0' : originalAnswer; // default
 
-    const config: GTMConfig = Object.assign({}, this.config);
-    /* eslint-disable  @typescript-eslint/camelcase*/
-    config.page_path = pathname;
-    /* eslint-enable  @typescript-eslint/camelcase*/
-
-    window.gtag && window.gtag('config', GTM_CONSTANTS.GTM_ID, config);
-  }
-
-  // /* https://developers.google.com/analytics/devguides/collection/gtagjs/events */
-  eventTrack(action: string, params: GTMParams = {}) {
-    if (!this.checkGa()) {
-      return;
-    }
-
-    window.gtag && window.gtag('event', action, params);
+    // Default returns '0', so false
+    callback(answer !== '0', originalAnswer);
   }
 }
 

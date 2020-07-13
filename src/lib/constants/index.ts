@@ -6,6 +6,7 @@ export * from './breakpoints';
 export * from './buttons.types';
 export * from './colors';
 export * from './easing';
+export * from './experiments';
 export * from './grid';
 export * from './header.types';
 export * from './image.types';
