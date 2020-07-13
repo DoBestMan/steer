@@ -8,12 +8,12 @@ describe('breadcrumbs', () => {
         mapPathnameToBreadcrumbs({
           asPath: '/brands/continental-tires/surecontact-rx',
           labels: {
-            brandName: 'Continental',
+            brand: 'Continental',
             productLine: 'Surecontact RX',
           },
-          pathname: '/brands/[brandName]/[productLine]',
+          pathname: '/brands/[brand]/[productLine]',
           query: {
-            brandName: 'continental-tires',
+            brand: 'continental-tires',
             productLine: 'surecontact-rx',
           },
         }),
@@ -43,12 +43,12 @@ describe('breadcrumbs', () => {
         mapPathnameToBreadcrumbs({
           asPath: '/brands/continental-tires/surecontact-rx?query=123',
           labels: {
-            brandName: 'Continental',
+            brand: 'Continental',
             productLine: 'Surecontact RX',
           },
-          pathname: '/brands/[brandName]/[productLine]',
+          pathname: '/brands/[brand]/[productLine]',
           query: {
-            brandName: 'continental-tires',
+            brand: 'continental-tires',
             productLine: 'surecontact-rx',
           },
         }),
@@ -78,13 +78,13 @@ describe('breadcrumbs', () => {
         mapPathnameToBreadcrumbs({
           asPath: '/brands/continental-tires/surecontact-rx?tireSize=100R1891W',
           labels: {
-            brandName: 'Continental',
+            brand: 'Continental',
             productLine: 'Surecontact RX',
             tireSize: '100/50 R18 91H',
           },
-          pathname: '/brands/[brandName]/[productLine]',
+          pathname: '/brands/[brand]/[productLine]',
           query: {
-            brandName: 'continental-tires',
+            brand: 'continental-tires',
             productLine: 'surecontact-rx',
             tireSize: '100R1891W,',
           },
@@ -119,7 +119,7 @@ describe('breadcrumbs', () => {
   describe('mapArrayToBreadcrumbs', () => {
     it('should return breadcrumbs based on array', () => {
       const query = {
-        brandName: 'continental-tires',
+        brand: 'continental-tires',
         productLine: 'surecontact-rx',
       };
 

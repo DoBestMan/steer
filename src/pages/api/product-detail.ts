@@ -19,8 +19,8 @@ export default async (
 ) => {
   backendBootstrap({ request });
 
-  const { brandName, productLine, ...rest } = request.query;
-  const brand = brandName.toString().replace(/-tire/g, '');
+  const { brand, productLine, ...rest } = request.query;
+  const brandName = brand.toString().replace(/-tires/g, '');
 
   const params: Record<string, string> = {};
   Object.entries(rest).map(([key, value]) => {
@@ -31,12 +31,12 @@ export default async (
 
   const [siteProduct, siteProductReviews] = await Promise.all([
     backendGetProductDetail({
-      brand,
+      brand: brandName,
       productLine,
       query: params,
     }),
     backendGetProductReviews({
-      brand,
+      brand: brandName,
       productLine,
     }),
   ]);

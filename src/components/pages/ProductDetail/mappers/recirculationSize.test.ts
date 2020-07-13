@@ -2,9 +2,9 @@ import { siteProductMock } from './ProductDetail.mock';
 import { mapDataToRecirculationSize } from './recirculationSize';
 
 const routerMock = {
-  pathname: '/brands/[brandName]/[productLine]',
+  pathname: '/brands/[brand]/[productLine]',
   query: {
-    brandName: 'continental-tires',
+    brand: 'continental-tires',
     productLine: 'dh2',
   },
 } as any;

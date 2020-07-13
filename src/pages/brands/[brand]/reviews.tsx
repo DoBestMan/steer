@@ -15,8 +15,8 @@ export const getServerSideProps: GetServerSideProps<ReviewListingServerData> = a
 ) => {
   backendBootstrap({ request: context.req });
   const queryParams: Record<string, string> = {};
-  const { brandName, ...params } = context.query;
-  const brandFormatted = brandName.toString().replace(/-tire/g, '');
+  const { brand, ...params } = context.query;
+  const brandFormatted = brand.toString().replace(/-tire/g, '');
 
   // Brand tire reviews accept params for sort, order and page
   Object.entries(params).map(([key, value]) => {

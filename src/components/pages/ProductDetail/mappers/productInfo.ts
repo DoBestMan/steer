@@ -20,7 +20,7 @@ export function mapDataToProductInfo({
   },
   siteProductReviews: { performanceRating, reviewsSource },
   router: {
-    query: { brandName },
+    query: { brand },
   },
 }: {
   globals: SiteGlobals;
@@ -28,9 +28,9 @@ export function mapDataToProductInfo({
   siteProduct: SiteProduct;
   siteProductReviews: SiteProductReviews;
 }): ProductInfoProps {
-  const brand = siteProductLine.brand;
+  const brandName = siteProductLine.brand;
   const brandURL = interpolateRoute(ROUTE_MAP[ROUTES.BRAND_DETAIL], {
-    brandName,
+    brand,
   });
   const productName = siteProductLine.name;
 
@@ -84,7 +84,7 @@ export function mapDataToProductInfo({
 
   return {
     availableSizes,
-    brand,
+    brand: brandName,
     brandURL,
     callForPricing,
     customerServiceNumber,

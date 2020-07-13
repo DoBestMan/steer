@@ -24,8 +24,8 @@ describe('utils/routes', () => {
   describe('interpolateRoute', () => {
     it('returns interpolated route', () => {
       expect(
-        interpolateRoute('/brands/[brandName]-tires/[productLine]', {
-          brandName: 'continental',
+        interpolateRoute('/brands/[brand]/[productLine]', {
+          brand: 'continental-tires',
           productLine: 'pro-contact',
         }),
       ).toBe('/brands/continental-tires/pro-contact');

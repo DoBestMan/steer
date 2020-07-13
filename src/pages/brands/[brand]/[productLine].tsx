@@ -17,17 +17,17 @@ export const getServerSideProps: GetServerSideProps<ProductDetailData> = async (
   context,
 ) => {
   backendBootstrap({ request: context.req });
-  const { brandName, productLine } = context.query;
+  const { brand, productLine } = context.query;
 
-  const brand = brandName.toString().replace(/-tire/g, '');
+  const brandName = brand.toString().replace(/-tires/g, '');
 
   const [siteProduct, siteProductReviews] = await Promise.all([
     backendGetProductDetail({
-      brand,
+      brand: brandName,
       productLine,
     }),
     backendGetProductReviews({
-      brand,
+      brand: brandName,
       productLine,
     }),
   ]);

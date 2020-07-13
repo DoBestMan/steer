@@ -21,7 +21,7 @@ export function mapDataToReviews({
   siteProductReviews: SiteProductReviews;
 }): ReviewsProps {
   const {
-    query: { brandName },
+    query: { brand },
   } = router;
 
   const momentList = dataMomentList;
@@ -52,7 +52,7 @@ export function mapDataToReviews({
     : undefined;
   const seeAllReviewsLink = {
     href: interpolateRoute(ROUTE_MAP[ROUTES.BRAND_REVIEWS], {
-      brandName,
+      brand,
     }),
     isExternal: false,
   };

@@ -28,9 +28,9 @@ export function mapDataToTechnicalSpecs({
 }): TechnicalSpecsProps | null {
   const {
     pathname,
-    query: { brandName, productLine, ...queryParams },
+    query: { brand, productLine, ...queryParams },
   } = router;
-  const baseLink = interpolateRoute(pathname, { brandName, productLine });
+  const baseLink = interpolateRoute(pathname, { brand, productLine });
   const {
     customerServiceNumber,
     customerServiceEnabled: isCustomerServiceEnabled,

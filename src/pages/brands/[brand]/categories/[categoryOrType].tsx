@@ -15,7 +15,7 @@ interface Props extends CatalogPageData {
   categoryOrType: string;
 }
 
-function BrandTypeCatalog({ brand, categoryOrType, serverData }: Props) {
+function BrandCategory({ brand, categoryOrType, serverData }: Props) {
   return (
     <CatalogPageContainer
       serverData={serverData}
@@ -25,7 +25,7 @@ function BrandTypeCatalog({ brand, categoryOrType, serverData }: Props) {
       }}
       hasTopPicks={false}
       pageParams={{
-        brandName: brand,
+        brand,
         categoryOrType,
       }}
     />
@@ -36,8 +36,8 @@ export const getServerSideProps: GetServerSideProps<CatalogPageData> = async (
   context,
 ) => {
   backendBootstrap({ request: context.req });
-  const { brandName, categoryOrType, ...vehicleParams } = context.query;
-  const formattedBrand = getParam(brandName).replace('-tires', '');
+  const { brand, categoryOrType, ...vehicleParams } = context.query;
+  const formattedBrand = getParam(brand).replace('-tires', '');
   const apiArgs = {
     brand: formattedBrand,
     category: categoryOrType,
@@ -55,4 +55,4 @@ export const getServerSideProps: GetServerSideProps<CatalogPageData> = async (
   };
 };
 
-export default BrandTypeCatalog;
+export default BrandCategory;
