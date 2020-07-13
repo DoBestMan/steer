@@ -7,6 +7,7 @@ import {
   backendGetProductDetail,
   backendGetProductReviews,
 } from '~/lib/backend/product-detail';
+import { removeTireFromQueryParam } from '~/lib/utils/string';
 
 export interface ProductDetailResponse {
   siteProduct: SiteProduct;
@@ -20,7 +21,7 @@ export default async (
   backendBootstrap({ request });
 
   const { brand, productLine, ...rest } = request.query;
-  const brandName = brand.toString().replace(/-tires/g, '');
+  const brandName = removeTireFromQueryParam(brand);
 
   const params: Record<string, string> = {};
   Object.entries(rest).map(([key, value]) => {

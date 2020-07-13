@@ -8,7 +8,8 @@ import {
   backendGetBrandProducts,
   backendGetBrandSummary,
 } from '~/lib/backend/catalog/brand';
-import { getParam, getStringifiedParams } from '~/lib/utils/routes';
+import { getStringifiedParams } from '~/lib/utils/routes';
+import { removeTireFromQueryParam } from '~/lib/utils/string';
 
 interface Props extends CatalogPageData {
   brand: string;
@@ -37,9 +38,10 @@ export const getServerSideProps: GetServerSideProps<CatalogPageData> = async (
 ) => {
   backendBootstrap({ request: context.req });
   const { brand, categoryOrType, ...vehicleParams } = context.query;
-  const formattedBrand = getParam(brand).replace('-tires', '');
+  const brandName = removeTireFromQueryParam(brand);
+
   const apiArgs = {
-    brand: formattedBrand,
+    brand: brandName,
     category: categoryOrType,
     query: getStringifiedParams(vehicleParams),
   };
@@ -48,7 +50,7 @@ export const getServerSideProps: GetServerSideProps<CatalogPageData> = async (
 
   return {
     props: {
-      brand: formattedBrand,
+      brand: brandName,
       categoryOrType,
       serverData: { siteCatalogSummary, siteCatalogProducts },
     },

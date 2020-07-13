@@ -17,8 +17,10 @@ const styles: StylesMap = {
   header: {
     paddingBottom: SPACING.SIZE_40,
   },
-  seeAll: {
+  seeMore: {
     marginTop: SPACING.SIZE_20,
+    textAlign: 'center',
+    marginBottom: SPACING.SIZE_100,
   },
   sources: [
     typography.bodyCopy,

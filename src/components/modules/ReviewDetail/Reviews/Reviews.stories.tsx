@@ -8,7 +8,7 @@ export default {
 };
 
 export function ReviewsWithKnobs() {
-  const { reviews, sources } = mockReviewDetail;
+  const { reviews, sources, title } = mockReviewDetail;
 
-  return <Reviews reviews={reviews} sources={sources} />;
+  return <Reviews reviews={reviews} sources={sources} title={title} />;
 }

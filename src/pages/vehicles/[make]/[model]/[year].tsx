@@ -9,8 +9,8 @@ import {
   backendGetVehicleProducts,
   backendGetVehicleSummary,
 } from '~/lib/backend/catalog/vehicle';
-import { getParam, getStringifiedParams } from '~/lib/utils/routes';
-import { capitalize } from '~/lib/utils/string';
+import { getStringifiedParams } from '~/lib/utils/routes';
+import { capitalize, removeTireFromQueryParam } from '~/lib/utils/string';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 interface Props extends CatalogPageData {
@@ -52,8 +52,7 @@ export const getServerSideProps: GetServerSideProps<CatalogPageData> = async (
 ) => {
   backendBootstrap({ request: context.req });
   const { make, model, year, ...vehicleParams } = context.query;
-
-  const formattedMake = getParam(make).replace('-tires', '');
+  const formattedMake = removeTireFromQueryParam(make);
 
   const apiArgs = {
     make: formattedMake,

@@ -1,8 +1,7 @@
 import { GetServerSideProps } from 'next';
 
-import ProductDetailContainer, {
-  ProductDetailData,
-} from '~/components/pages/ProductDetail/ProductDetail.container';
+import { ProductDetailData } from '~/components/pages/ProductDetail/ProductDetail.container';
+import ReviewDetailPage from '~/components/pages/ReviewDetailPage/ReviewDetailPage';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
 import {
   backendGetProductDetail,
@@ -10,8 +9,8 @@ import {
 } from '~/lib/backend/product-detail';
 import { removeTireFromQueryParam } from '~/lib/utils/string';
 
-function ProductLine(props: ProductDetailData) {
-  return <ProductDetailContainer {...props} />;
+function Reviews(props: ProductDetailData) {
+  return <ReviewDetailPage {...props} />;
 }
 
 export const getServerSideProps: GetServerSideProps<ProductDetailData> = async (
@@ -41,4 +40,4 @@ export const getServerSideProps: GetServerSideProps<ProductDetailData> = async (
   };
 };
 
-export default ProductLine;
+export default Reviews;

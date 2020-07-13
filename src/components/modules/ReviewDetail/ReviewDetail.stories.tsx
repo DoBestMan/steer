@@ -32,6 +32,7 @@ export function FullPage() {
     sources,
     stats,
     tire,
+    title,
   } = mockReviewDetail;
 
   return (
@@ -45,7 +46,7 @@ export function FullPage() {
         ratingStars={ratingStars}
         tire={tire}
       />
-      <Reviews reviews={reviews} sources={sources} />
+      <Reviews reviews={reviews} sources={sources} title={title} />
       <StickyBar
         isStickyBottom
         theme={THEME.ORANGE}

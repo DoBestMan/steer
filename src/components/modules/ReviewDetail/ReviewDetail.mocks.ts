@@ -45,7 +45,8 @@ export const mockReviewDetail = {
   ratings: mockRatings,
   ratingStars: 4.8,
   reviews: [].concat(...Array(15).fill(mockReviews)),
-  sources: ['115 on SimpleTire', '72 from Google Shopping'],
+  sources: { simpleTire: 115, googleShopping: 72 },
   stats: [mockMomentList[1]],
   tire: 'Scorpion Verde All Season Plus Tire',
+  title: '187 reviews',
 };

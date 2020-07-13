@@ -1,34 +1,33 @@
 import { useState } from 'react';
 
+import Button from '~/components/global/Button/Button';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
-import { ICONS } from '~/components/global/Icon/Icon.constants';
-import Link from '~/components/global/Link/Link';
 import ReviewCard, {
   ReviewCardProps,
 } from '~/components/global/ReviewCard/ReviewCard';
+import { ListResultMetadata } from '~/data/models/ListResultMetadata';
 import { THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import styles from './Reviews.styles';
 
-interface Props {
-  reviews?: ReviewCardProps[];
-  sources?: string[];
+export interface ReviewsProps {
+  listResultMetadata?: ListResultMetadata;
+  reviews?: ReviewCardProps[] | null;
+  sources?: {
+    googleShopping?: number | null;
+    simpleTire?: number | null;
+  };
+  title: string;
 }
 
 const CONSTANTS = {
   NUM_REVIEWS_TO_DISPLAY_ON_LOAD: 5,
 };
 
-function Reviews({ reviews, sources }: Props) {
+function Reviews({ reviews, sources, title }: ReviewsProps) {
   const numReviews = !!reviews && reviews.length;
-
-  const title = numReviews
-    ? ui('reviews.numReviews', {
-        quantity: numReviews,
-      })
-    : ui('reviews.noReviews');
 
   const [numVisibleReviews, setNumVisibleReviews] = useState(
     CONSTANTS.NUM_REVIEWS_TO_DISPLAY_ON_LOAD,
@@ -36,9 +35,14 @@ function Reviews({ reviews, sources }: Props) {
 
   const hasMoreReviews = numReviews > numVisibleReviews;
 
-  function handleButtonClick() {
-    setNumVisibleReviews(numReviews || 0);
+  // TODO: Integrate pagination from listResultMetadata WCS-881
+  function handleSeeMoreClick() {
+    setNumVisibleReviews(
+      (prev) => (prev += CONSTANTS.NUM_REVIEWS_TO_DISPLAY_ON_LOAD),
+    );
   }
+
+  const hasSources = sources?.simpleTire || sources?.googleShopping;
 
   return (
     <Grid as="section">
@@ -46,13 +50,24 @@ function Reviews({ reviews, sources }: Props) {
         <div css={styles.header}>
           <div css={styles.titleContainer}>
             <div css={styles.title}>{title}</div>
-            {!!sources && (
+            {hasSources && (
               <span css={styles.sources}>
-                {sources.map((source) => (
-                  <span css={styles.source} key={source}>
-                    {source}
+                {sources?.simpleTire && (
+                  <span css={styles.source}>
+                    {ui('reviews.simpleTire.name', {
+                      number: sources.simpleTire,
+                      preposition: ui('reviews.simpleTire.preposition'),
+                    })}
                   </span>
-                ))}
+                )}
+                {sources?.googleShopping && (
+                  <span css={styles.source}>
+                    {ui('reviews.google.name', {
+                      number: sources?.googleShopping,
+                      preposition: ui('reviews.google.preposition'),
+                    })}
+                  </span>
+                )}
               </span>
             )}
           </div>
@@ -69,16 +84,11 @@ function Reviews({ reviews, sources }: Props) {
             <GridItem
               gridColumnL="3/13"
               gridColumnXL="4/12"
-              css={styles.seeAll}
+              css={styles.seeMore}
             >
-              <Link
-                as="button"
-                theme={THEME.LIGHT}
-                icon={ICONS.CHEVRON_RIGHT}
-                onClick={handleButtonClick}
-              >
-                {ui('reviews.seeAll')}
-              </Link>
+              <Button onClick={handleSeeMoreClick}>
+                {ui('tireReviews.more')}
+              </Button>
             </GridItem>
           )}
         </>

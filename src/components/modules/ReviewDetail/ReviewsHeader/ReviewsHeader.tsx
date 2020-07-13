@@ -13,11 +13,12 @@ import RatingsList from '~/components/global/RatingsList/RatingsList';
 import StarsWithRating from '~/components/global/Stars/StarsWithRating';
 import { SiteCatalogBrand } from '~/data/models/SiteCatalogBrand';
 import { THEME } from '~/lib/constants';
+import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
 
 import styles from './ReviewsHeader.styles';
 
-interface Props {
+export interface ReviewsHeaderProps {
   brand: SiteCatalogBrand;
   brandUrl: string;
   breadcrumbs: BreadcrumbsItem[];
@@ -35,7 +36,7 @@ function ReviewsHeader({
   ratings,
   stats,
   tire,
-}: Props) {
+}: ReviewsHeaderProps) {
   return (
     <Grid as="section" css={styles.container}>
       <GridItem gridColumnL="3/13" gridColumnXL="4/12" css={styles.breadcrumbs}>
@@ -45,7 +46,7 @@ function ReviewsHeader({
         <BaseLink href={brandUrl} css={styles.brand}>
           <BrandLogoOrLabel brand={brand} />
         </BaseLink>
-        <p css={styles.title}>{tire}</p>
+        <p css={styles.title}>{ui('reviews.tireReviews', { tire })}</p>
         <StarsWithRating
           number={ratingStars}
           typographyStyle={typography.labelHeadlineLarge}
