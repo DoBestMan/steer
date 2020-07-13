@@ -1094,10 +1094,10 @@ export const siteProductMock: SiteProduct = {
     rebate: {
       label: 'Save $80 instantly: Use coupon AS23RJ',
       siteDynamicModal: {
-        title: 'Risk-Free Guarantee',
-        subtitle: 'Only from SimpleTire',
+        title: '$80 Rebate',
+        subtitle: 'Get up to $80 back with code AS23RJ',
         content:
-          "Our goal is your complete satisfaction! We stand behind the products we sell and are dedicated to providing you with the best online tire shopping experience. You're guaranteed to find the right tires that fit your needs and vehicle.\n\nSafety and dependability are of the utmost importance when it comes to tires, which is why we only offer high-quality, new tires on our secure site. Each tire is housed in a climate-controlled facility and has never been mounted on a vehicle.\n\n* Every tire\n * Free shipping\n* Fast delivery",
+          "* Valid for April 3 thru May 31, 2020.\n* Credit received on a VISA Prepaid Card\n\nWhen you purchase a set of four (4) select Hankook tires you may be eligible to receive up to a $80 VISA Prepaid Card after online rebate.  Available only on purchases from SimpleTire's in-stock inventory between 12:00 a.m. EDT April 3, 2020 and 11:59 p.m. EDT March 31, 2020.",
         image: {
           src: 'https://dummyimage.com/1600x900/000/f00.jpg',
           width: 1600,

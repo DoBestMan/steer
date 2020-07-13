@@ -17,7 +17,12 @@ describe('pages/ProductDetails/mappers/insights', () => {
           sectionAnchor: null,
         },
       ],
-      rebateLabel: 'Save $80 instantly: Use coupon AS23RJ',
+      rebate: {
+        label: 'Save $80 instantly: Use coupon AS23RJ',
+        siteDynamicModal: expect.objectContaining({
+          title: '$80 Rebate',
+        }),
+      },
       techSpecsAnchor: 'SiteProductSpecs',
     });
   });

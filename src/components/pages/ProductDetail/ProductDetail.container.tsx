@@ -17,6 +17,7 @@ import Reviews from '~/components/modules/PDP/Reviews/Reviews';
 import ShopWithConfidence from '~/components/modules/PDP/ShopWithConfidence/ShopWithConfidence';
 import TechnicalSpecs from '~/components/modules/PDP/TechnicalSpecs/TechnicalSpecs';
 import TireImage from '~/components/modules/PDP/TireImage/TireImage';
+import { useModalContext } from '~/context/Modal.context';
 import { THEME } from '~/lib/constants';
 import { ProductDetailResponse } from '~/pages/api/product-detail';
 
@@ -44,6 +45,7 @@ function ProductDetailContainer({ serverData }: ProductDetailData) {
   } = useProductDetail({
     serverData,
   });
+  const { openStaticModal, openDynamicModal } = useModalContext();
 
   const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
   function toggleModal() {
@@ -71,6 +73,7 @@ function ProductDetailContainer({ serverData }: ProductDetailData) {
           <Insights
             {...insights}
             handleChangeLocation={toggleModal}
+            openDynamicModal={openDynamicModal}
             css={styles.insights}
           />
         </GridItem>
@@ -80,7 +83,7 @@ function ProductDetailContainer({ serverData }: ProductDetailData) {
           </GridItem>
         )}
         <GridItem fullbleed css={styles.purchaseIncludes}>
-          <PurchaseIncludes />
+          <PurchaseIncludes openStaticModal={openStaticModal} />
         </GridItem>
         {recirculation && (
           <GridItem fullbleed css={styles.featuredRecirculation}>

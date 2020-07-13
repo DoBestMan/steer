@@ -1,8 +1,10 @@
 import { ReactNode } from 'react';
 
+import { ModalContentProps } from '~/components/global/ContentModal/ContentModal';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import { Icon as IconType } from '~/components/global/Icon/Icon.types';
 import { SiteProductInsightItem } from '~/data/models/SiteProductInsightItem';
+import { SiteProductInsightsRebate } from '~/data/models/SiteProductInsightsRebate';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 import { ui } from '~/lib/utils/ui-dictionary';
 
@@ -29,11 +31,15 @@ export interface InsightsProps {
   doesItFit?: boolean;
   handleChangeLocation: () => void;
   handleChangeVehicle: () => void;
-  handleOpenRebate: () => void;
   insightItems: SiteProductInsightItem[];
-  rebateLabel?: string;
+
+  rebate: SiteProductInsightsRebate | null;
   techSpecsAnchor: string;
   vehicle?: string;
+}
+
+interface Props extends InsightsProps {
+  openDynamicModal: (modalData: ModalContentProps) => void;
 }
 
 function RenderItem({ children }: { children: ReactNode }) {
@@ -45,25 +51,30 @@ function Insights({
   doesItFit,
   handleChangeLocation,
   handleChangeVehicle,
-  handleOpenRebate,
   insightItems = [],
-  rebateLabel,
+  openDynamicModal,
+  rebate,
   techSpecsAnchor,
   vehicle,
   ...rest
-}: InsightsProps) {
+}: Props) {
+  function handleOpenRebate() {
+    if (rebate?.siteDynamicModal) {
+      openDynamicModal(rebate.siteDynamicModal);
+    }
+  }
   return (
     <ul css={styles.container} {...rest}>
-      {rebateLabel && (
+      {rebate && (
         <RenderItem>
-          <button onClick={handleOpenRebate} aria-label={rebateLabel}>
+          <button onClick={handleOpenRebate} aria-label={rebate.label}>
             <InsightsItem
               highlight
               icon={{
                 svgId: ICONS.REBATE,
                 type: ICON_IMAGE_TYPE.ICON,
               }}
-              label={rebateLabel}
+              label={rebate.label}
               hasAction
             />
           </button>

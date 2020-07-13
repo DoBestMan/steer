@@ -1,3 +1,5 @@
+import { action } from '@storybook/addon-actions';
+
 import PurchaseIncludes from './PurchaseIncludes';
 
 export default {
@@ -6,5 +8,5 @@ export default {
 };
 
 export function PurchaseIncludesCarousel() {
-  return <PurchaseIncludes />;
+  return <PurchaseIncludes openStaticModal={action('openStaticModal')} />;
 }

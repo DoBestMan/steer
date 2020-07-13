@@ -1,6 +1,7 @@
 import Carousel from '~/components/global/Carousel/Carousel';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
+import { ModalContextProps } from '~/context/Modal.context';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import { everyPurchaseIncludesData } from './PurchaseIncludes.mock';
@@ -9,7 +10,9 @@ import PurchaseIncludesCard, {
 } from './PurchaseIncludesCard';
 import styles from './PurchaseIncludesCard.styles';
 
-function PurchaseIncludes() {
+function PurchaseIncludes({
+  openStaticModal,
+}: Pick<ModalContextProps, 'openStaticModal'>) {
   return (
     <Grid>
       <GridItem as="h2" gridColumnL="3/end" css={styles.title}>
@@ -20,7 +23,10 @@ function PurchaseIncludes() {
         <Carousel>
           {everyPurchaseIncludesData.map((item: CardType) => (
             <div css={styles.cardContainer} key={item.title}>
-              <PurchaseIncludesCard {...item} />
+              <PurchaseIncludesCard
+                openStaticModal={openStaticModal}
+                {...item}
+              />
             </div>
           ))}
         </Carousel>

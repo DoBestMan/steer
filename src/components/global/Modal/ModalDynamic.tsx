@@ -29,6 +29,7 @@ function Modal({
   isHalfscreen,
   isOpen,
   onBack,
+  onAfterClose,
   onClose,
   theme = MODAL_THEME.LIGHT,
 }: Props) {
@@ -43,6 +44,7 @@ function Modal({
     <ReactModal
       contentLabel={contentLabel}
       isOpen={isOpen}
+      onAfterClose={onAfterClose}
       onRequestClose={onClose}
       closeTimeoutMS={TIME.MS350}
       style={{

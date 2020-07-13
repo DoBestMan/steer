@@ -4,6 +4,7 @@ import { SearchContextProvider } from '~/components/modules/Search/Search.contex
 import { SiteGlobals } from '~/data/models/SiteGlobals';
 import { SiteMenu } from '~/data/models/SiteMenu';
 
+import { ModalContextProvider } from './Modal.context';
 import { SiteGlobalsContextProvider } from './SiteGlobals.context';
 import { SiteMenuContextProvider } from './SiteMenu.context';
 import { UserPersonalizationContextProvider } from './UserPersonalization.context';
@@ -25,7 +26,9 @@ function AppProviders({
     <SiteGlobalsContextProvider value={siteGlobalsContextValue}>
       <SiteMenuContextProvider value={siteMenuContextValue}>
         <UserPersonalizationContextProvider>
-          <SearchContextProvider>{children}</SearchContextProvider>
+          <SearchContextProvider>
+            <ModalContextProvider>{children}</ModalContextProvider>
+          </SearchContextProvider>
         </UserPersonalizationContextProvider>
       </SiteMenuContextProvider>
     </SiteGlobalsContextProvider>

@@ -1,37 +1,32 @@
+import { useModalContext } from '~/context/Modal.context';
 import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
 
-import ContentModal, { Props as ContentModalProps } from './ContentModal';
+import ContentModal from './ContentModal';
 
-function ContentModalContainer({
-  content,
-  image,
-  isOpen,
-  link,
-  onClose,
-  showSupportSection = true,
-  subtitle,
-  title,
-}: Omit<
-  ContentModalProps,
-  'isCustomerServiceEnabled' | 'customerServiceNumber'
->) {
+function ContentModalContainer() {
   const {
     customerServiceEnabled,
     customerServiceNumber,
   } = useSiteGlobalsContext();
+  const {
+    currentContentModalData,
+    resetModal,
+    isModalOpen,
+    closeModal,
+  } = useModalContext();
+
+  if (!currentContentModalData) {
+    return null;
+  }
 
   return (
     <ContentModal
       customerServiceNumber={customerServiceNumber}
-      content={content}
-      image={image}
-      isOpen={isOpen}
-      link={link}
-      onClose={onClose}
-      showSupportSection={showSupportSection}
-      subtitle={subtitle}
-      title={title}
+      isOpen={isModalOpen}
+      onAfterClose={resetModal}
+      onClose={closeModal}
       isCustomerServiceEnabled={customerServiceEnabled}
+      {...currentContentModalData}
     />
   );
 }

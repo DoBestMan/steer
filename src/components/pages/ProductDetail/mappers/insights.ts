@@ -13,15 +13,13 @@ export function mapDataToInsights({
 
   // TODO: Add handlers
   const handleChangeVehicle = () => {};
-  const handleOpenRebate = () => {};
 
   return {
     delivery: siteProductInsights.delivery,
     doesItFit,
     handleChangeVehicle,
-    handleOpenRebate,
     insightItems: siteProductInsights.siteProductInsightList,
-    rebateLabel: siteProductInsights.rebate?.label,
+    rebate: siteProductInsights.rebate,
     techSpecsAnchor: CONSTANTS.TECH_SPECS_ANCHOR,
   };
 }

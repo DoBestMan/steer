@@ -52,9 +52,20 @@ export function InsightsWithKnobs() {
     ? 'Free 2-day shipping to Brooklyn, NY'
     : undefined;
 
-  const rebateLabel = rebate
-    ? 'Save $80 instantly: Use coupon AS23RJ'
-    : undefined;
+  const rebateData = rebate
+    ? {
+        label: 'Save $80 instantly: Use coupon AS23RJ',
+        siteDynamicModal: {
+          content: 'Content',
+          image: null,
+          link: null,
+          showSupportSection: false,
+          subtitle: null,
+          title: 'Title',
+          type: 'SiteDynamicModal',
+        },
+      }
+    : null;
 
   const insightItems = [
     bestSeller && {
@@ -126,7 +137,6 @@ export function InsightsWithKnobs() {
     },
   ].filter(Boolean) as SiteProductInsightItem[];
 
-  const handleOpenRebate = action('click-rebate-button');
   const handleChangeLocation = action('click-free-shipping-button');
   const vehicleModel = text('Vehicle model', 'Civic', fitVehicleGroupId);
   const handleOpenSearch = action('click-fits-button');
@@ -197,12 +207,12 @@ export function InsightsWithKnobs() {
     <>
       <Insights
         insightItems={insightItems}
-        rebateLabel={rebateLabel}
+        rebate={rebateData}
         vehicle={vehicle}
         doesItFit={sizeCheckState === SIZE_CHECK_STATES['SIZE_FITS']}
         delivery={delivery}
         techSpecsAnchor="SiteProductSpecs"
-        handleOpenRebate={handleOpenRebate}
+        openDynamicModal={action('openDynamicModal')}
         handleChangeVehicle={handleChangeVehicle}
         handleChangeLocation={handleChangeLocation}
       />

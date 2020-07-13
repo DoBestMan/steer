@@ -1,11 +1,9 @@
-import { useState } from 'react';
-
-import { ModalContentProps } from '~/components/global/ContentModal/ContentModal';
-import ContentModalContainer from '~/components/global/ContentModal/ContentModal.container';
 import Icon from '~/components/global/Icon/Icon';
 import { Icon as IconType } from '~/components/global/Icon/Icon.types';
 import Link from '~/components/global/Link/Link';
+import { ModalContextProps } from '~/context/Modal.context';
 import { THEME } from '~/lib/constants';
+import { STATIC_MODAL_IDS } from '~/lib/constants/staticModals';
 import { typography } from '~/styles/typography.styles';
 
 import styles from './PurchaseIncludesCard.styles';
@@ -14,7 +12,7 @@ export interface Props {
   description: string;
   icon: IconType;
   linkLabel: string;
-  modalData: ModalContentProps;
+  modalId: STATIC_MODAL_IDS;
   title: string;
 }
 
@@ -22,13 +20,12 @@ function PurchaseIncludesCard({
   description,
   icon,
   linkLabel,
-  modalData,
+  modalId,
+  openStaticModal,
   title,
-}: Props) {
-  const [isOpen, setIsOpen] = useState(false);
-
-  function toggleModal() {
-    setIsOpen(!isOpen);
+}: Props & Pick<ModalContextProps, 'openStaticModal'>) {
+  function openModal() {
+    openStaticModal(modalId);
   }
 
   return (
@@ -40,18 +37,12 @@ function PurchaseIncludesCard({
       </div>
       <Link
         as="button"
-        onClick={toggleModal}
+        onClick={openModal}
         theme={THEME.LIGHT}
         css={styles.cardLink}
       >
         {linkLabel}
       </Link>
-
-      <ContentModalContainer
-        {...modalData}
-        isOpen={isOpen}
-        onClose={toggleModal}
-      />
     </>
   );
 }
