@@ -86,7 +86,8 @@
     },
     "productListing": {
       "morePromos": "+ {{number}} other deals",
-      "customerReviews": "{{number}} customer reviews"
+      "customerReviews": "{{number}} customer reviews",
+      "loadMore": "See more"
     },
     "topPicks": {
       "addVehicleText": "Add your vehicle info to find your original tire and get even better recommendations",

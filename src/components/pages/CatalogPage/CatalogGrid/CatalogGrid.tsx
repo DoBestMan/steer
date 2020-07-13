@@ -35,7 +35,7 @@ function CatalogGrid({
   onPreviewFilters,
   previewFiltersData,
 }: Props) {
-  const { isAdvancedView, isLoading } = useCatalogPageContext();
+  const { isLoading } = useCatalogPageContext();
   const catalogGrid = useRef<HTMLDivElement | null>(null);
 
   // Uses a state instead of ref to avoid forwarding refs
@@ -124,12 +124,11 @@ function CatalogGrid({
         />
       ) : (
         <CatalogProductGrid
-          isLoading={isLoading}
+          pagination={siteCatalogProducts.listResultMetadata.pagination}
           productList={siteCatalogProducts.siteCatalogProductsResultList.filter(
             (result): result is SiteCatalogProductItem =>
               result.type === SiteCatalogProductItemEnum.SiteCatalogProductItem,
           )}
-          isAdvancedView={isAdvancedView}
         />
       )}
     </div>

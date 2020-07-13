@@ -7,6 +7,11 @@ const styles: StylesMap = {
   root: {
     paddingTop: SPACING.SIZE_40,
   },
+  loadMoreButton: {
+    marginTop: SPACING.SIZE_60,
+    display: 'flex',
+    justifyContent: 'center',
+  },
 };
 
 export default styles;
