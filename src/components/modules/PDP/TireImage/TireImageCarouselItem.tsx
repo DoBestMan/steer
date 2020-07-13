@@ -20,6 +20,8 @@ interface Props {
   index: number;
   isFullscreen?: boolean;
   maxHeight: number;
+  setShouldStopVideo?: (shouldStopVideo: boolean) => void;
+  shouldStopVideo?: boolean;
 }
 
 function TireImageCarouselItem({
@@ -29,6 +31,8 @@ function TireImageCarouselItem({
   index,
   isFullscreen,
   maxHeight,
+  shouldStopVideo,
+  setShouldStopVideo,
 }: Props) {
   const { image, video } = imageItem;
   const imageWidth =
@@ -56,7 +60,9 @@ function TireImageCarouselItem({
           videoStyles={styles.videoStyles}
           posterFrame={video.posterFrame}
           sizes={video.sizes}
+          shouldStopVideo={shouldStopVideo}
           youtubeId={video.youtubeId}
+          setShouldStopVideo={setShouldStopVideo}
         />
       )}
     </>

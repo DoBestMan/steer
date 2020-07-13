@@ -14,6 +14,7 @@ interface Props {
 interface Player {
   destroy: () => void;
   playVideo: () => void;
+  stopVideo: () => void;
 }
 
 const CONSTANTS = {
@@ -52,6 +53,14 @@ export function useYoutubeApi({ videoId, youtubeId }: Props) {
 
     setHasPlayedVideo(true);
     player.playVideo();
+  }
+
+  function stopVideo() {
+    if (!player) {
+      return;
+    }
+
+    player.stopVideo();
   }
 
   function cleanupPlayer() {
@@ -94,5 +103,5 @@ export function useYoutubeApi({ videoId, youtubeId }: Props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading, hasPlayedVideo]);
 
-  return { isLoading, setIsLoading, hasPlayedVideo };
+  return { isLoading, setIsLoading, hasPlayedVideo, stopVideo };
 }

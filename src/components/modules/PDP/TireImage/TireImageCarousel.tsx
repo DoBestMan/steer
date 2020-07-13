@@ -49,6 +49,7 @@ function TireImageCarousel({
 }: Props) {
   const [swiper, setSwiper] = useState<SwiperInstance>(null);
   const { is, lessThan } = useBreakpoints();
+  const [shouldStopVideo, setShouldStopVideo] = useState(false);
 
   useEffect(() => {
     if (!swiper) {
@@ -57,6 +58,7 @@ function TireImageCarousel({
 
     swiper.on('slideChange', () => {
       setCurrentIndex(swiper.activeIndex);
+      setShouldStopVideo(true);
     });
   }, [swiper, setCurrentIndex]);
 
@@ -91,6 +93,8 @@ function TireImageCarousel({
                 index={index}
                 isFullscreen={isFullscreen}
                 maxHeight={maxHeight}
+                shouldStopVideo={imageItem.video ? shouldStopVideo : undefined}
+                setShouldStopVideo={imageItem.video && setShouldStopVideo}
               />
             </div>
           ))}

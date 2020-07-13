@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
@@ -16,6 +16,8 @@ export interface Props {
   aspectRatio?: string;
   containerStyles?: CSSStyles;
   posterFrame: string;
+  setShouldStopVideo?: (shouldStopVideo: boolean) => void;
+  shouldStopVideo?: boolean;
   sizes: number[];
   videoStyles?: CSSStyles;
   youtubeId: string;
@@ -28,10 +30,12 @@ function Video({
   sizes,
   videoStyles,
   youtubeId,
+  shouldStopVideo,
+  setShouldStopVideo,
 }: Props) {
   const [videoId] = useState(`${randomString(10)}-video`);
 
-  const { hasPlayedVideo, isLoading, setIsLoading } = useYoutubeApi({
+  const { hasPlayedVideo, isLoading, setIsLoading, stopVideo } = useYoutubeApi({
     youtubeId,
     videoId,
   });
@@ -41,6 +45,20 @@ function Video({
   }, [setIsLoading]);
 
   const containerBottomPadding = `${ratioToPercentage(aspectRatio)}%`;
+
+  const handleStopVideo = useCallback(() => {
+    if (hasPlayedVideo) {
+      stopVideo();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hasPlayedVideo]);
+
+  useEffect(() => {
+    if (shouldStopVideo && setShouldStopVideo) {
+      handleStopVideo();
+      setShouldStopVideo(false);
+    }
+  }, [handleStopVideo, setShouldStopVideo, shouldStopVideo, stopVideo]);
 
   return (
     <div
