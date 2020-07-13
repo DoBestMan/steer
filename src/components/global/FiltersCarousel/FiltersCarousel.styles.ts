@@ -10,6 +10,9 @@ import { typography } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
   container: {
+    '.dropdown-button': {
+      transitionProperty: 'transform',
+    },
     margin: `0 ${-SPACING.SIZE_20}px`,
     [MQ.M]: {
       margin: `0 ${-SPACING.SIZE_40}px`,
