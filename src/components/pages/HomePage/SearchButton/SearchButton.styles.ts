@@ -12,10 +12,11 @@ export const CONSTANTS = {
     S: 130,
     M: 30,
   },
-  ICON_SIZE_L: 34,
+  ICON_SIZE: { M: 29, L: 34 },
   PADDING: {
-    S: '25px 0',
-    M: '50px 0',
+    S: '22.5px 0',
+    M: '30px 0',
+    XL: '32.5px 0',
   },
   SEARCH_LABEL_HEIGHT: {
     S: 35,
@@ -42,10 +43,13 @@ const styles: StylesMap = {
       padding: CONSTANTS.PADDING.M,
       transition: `background-color ${TIME.MS100}ms ease`,
     },
+    [MQ.XL]: {
+      padding: CONSTANTS.PADDING.XL,
+    },
   },
   buttonContainer: {
     '&::after': {
-      backgroundColor: COLORS.DARK.GRAY_40,
+      backgroundColor: COLORS.ORANGE.TINT_30,
       content: '""',
       display: 'block',
       height: 1,
@@ -77,8 +81,12 @@ const styles: StylesMap = {
       fill: COLORS.GLOBAL.WHITE,
 
       [MQ.M]: {
-        height: CONSTANTS.ICON_SIZE_L,
-        width: CONSTANTS.ICON_SIZE_L,
+        height: CONSTANTS.ICON_SIZE.M,
+        width: CONSTANTS.ICON_SIZE.M,
+      },
+      [MQ.L]: {
+        height: CONSTANTS.ICON_SIZE.L,
+        width: CONSTANTS.ICON_SIZE.L,
       },
     },
   },

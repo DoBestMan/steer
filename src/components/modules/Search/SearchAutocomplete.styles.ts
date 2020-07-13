@@ -47,7 +47,10 @@ const styles: StylesMap = {
     padding: `${SPACING.SIZE_25}px ${SPACING.SIZE_50}px ${SPACING.SIZE_25}px 0`,
     position: 'relative',
     [MQ.M]: {
-      padding: `${SPACING.SIZE_50}px ${SPACING.SIZE_80}px ${SPACING.SIZE_50}px 0`,
+      padding: `${SPACING.SIZE_30}px ${SPACING.SIZE_80}px ${SPACING.SIZE_30}px 0`,
+    },
+    [MQ.XL]: {
+      padding: `${SPACING.SIZE_35}px ${SPACING.SIZE_80}px ${SPACING.SIZE_35}px 0`,
     },
   },
   autocompleteGridItemRearTireState: {
@@ -118,14 +121,14 @@ const styles: StylesMap = {
     top: 27,
     [MQ.M]: {
       right: GRID_MARGIN.M,
-      top: 60,
+      top: SPACING.SIZE_40,
     },
     [MQ.L]: {
       right: GRID_MARGIN.L,
     },
     [MQ.XL]: {
       right: GRID_MARGIN.XL,
-      top: 65,
+      top: SPACING.SIZE_45,
     },
   },
   errorLabel: [
@@ -171,7 +174,10 @@ const styles: StylesMap = {
     justifyContent: 'center',
     [MQ.L]: {
       display: 'block',
-      padding: `${SPACING.SIZE_50}px 0`,
+      padding: `${SPACING.SIZE_30}px 0`,
+    },
+    [MQ.XL]: {
+      padding: `${SPACING.SIZE_35}px 0`,
     },
   },
   searchIconGridRearTire: {

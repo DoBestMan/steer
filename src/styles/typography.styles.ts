@@ -13,7 +13,7 @@ export const typographyStyles: {
   primaryHeadline: {
     base: {
       ...fontStyles(25, 30),
-      fontWeight: 'bold',
+      fontWeight: 500,
       letterSpacing: '-0.02em',
     },
     M: fontStyles(35, 40),
