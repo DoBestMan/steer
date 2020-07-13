@@ -1,18 +1,29 @@
 import { NextPageContext } from 'next';
 
 import ErrorPage from '~/components/pages/ErrorPage/ErrorPage';
+import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
 import { ui } from '~/lib/utils/ui-dictionary';
+import { uiJSX } from '~/lib/utils/ui-dictionary-jsx';
 
 interface Props {
   statusCode: number;
 }
-
 function Error({ statusCode }: Props) {
+  const { customerServiceNumber } = useSiteGlobalsContext();
+
   const is404 = statusCode === 404;
   const description = is404
     ? ui('error.notFoundDescription')
     : ui('error.erroDescription');
-  const copy = !is404 ? ui('error.callCopy') : undefined;
+
+  const callCopy = uiJSX('error.callCopy', {
+    number: (
+      <a href={`tel:${customerServiceNumber.value}`}>
+        {customerServiceNumber.display}
+      </a>
+    ),
+  });
+  const copy = !is404 ? callCopy : undefined;
 
   return (
     <ErrorPage

@@ -114,7 +114,7 @@
     }
   },
   "error": {
-    "callCopy": "Please call (888) 410-0604 for sales or try to refresh this page.",
+    "callCopy": "Please call {{number}} for sales or try to refresh this page.",
     "homeButtonLabel": "Take me home",
     "notFoundDescription": "Oops, looks like we took a <br />wrong turn somewhere.",
     "erroDescription": "Oops, we’re resolving issues <br />with our servers."

@@ -11,7 +11,7 @@ import { ui } from '~/lib/utils/ui-dictionary';
 import { styles } from './ErrorPage.styles';
 
 interface Props {
-  copy?: string;
+  copy?: string | JSX.Element;
   description: string;
   errorCode: string | number;
   hasHomeButton?: boolean;
@@ -35,11 +35,7 @@ function ErrorPage({ copy, description, errorCode, hasHomeButton }: Props) {
               </Markdown>
             </p>
 
-            {copy && (
-              <p css={styles.copy}>
-                <Markdown renderers={{ paragraph: 'span' }}>{copy}</Markdown>
-              </p>
-            )}
+            {copy && <p css={styles.copy}>{copy}</p>}
 
             {hasHomeButton && (
               <Button
