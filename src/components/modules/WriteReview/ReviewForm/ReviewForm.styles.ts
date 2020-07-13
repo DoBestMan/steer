@@ -7,10 +7,20 @@ const PICKER_MAX_WIDTH = {
 };
 
 const styles: StylesMap = {
+  centeredOnMobile: {
+    textAlign: 'center',
+    [MQ.L]: {
+      textAlign: 'left',
+    },
+  },
   group: {
     borderBottom: BORDERS.SOLID_GRAY_20_1PX,
-    paddingBottom: SPACING.SIZE_80,
-    paddingTop: SPACING.SIZE_80,
+    paddingBottom: SPACING.SIZE_40,
+    paddingTop: SPACING.SIZE_40,
+    [MQ.L]: {
+      paddingBottom: SPACING.SIZE_80,
+      paddingTop: SPACING.SIZE_80,
+    },
   },
   groupDescription: [
     typography.bodyCopy,
@@ -53,7 +63,10 @@ const styles: StylesMap = {
     },
   },
   radioGroup: {
-    marginTop: SPACING.SIZE_40,
+    marginTop: SPACING.SIZE_20,
+    [MQ.L]: {
+      marginTop: SPACING.SIZE_40,
+    },
     'label:not(:last-of-type)': {
       marginBottom: SPACING.SIZE_20,
     },
@@ -64,7 +77,10 @@ const styles: StylesMap = {
   title: [
     typography.primaryHeadline,
     {
-      paddingBottom: SPACING.SIZE_80,
+      paddingBottom: SPACING.SIZE_40,
+      [MQ.L]: {
+        paddingBottom: SPACING.SIZE_80,
+      },
     },
   ],
   titleTire: {

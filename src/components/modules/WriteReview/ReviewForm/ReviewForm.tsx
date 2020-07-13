@@ -319,7 +319,7 @@ function ReviewForm({ tire }: Props) {
             </div>
           </fieldset>
 
-          <div css={styles.group}>
+          <div css={[styles.group, styles.centeredOnMobile]}>
             {/* TODO: implement captcha - WCS-797 */}
             <Button
               css={styles.submitButton}
