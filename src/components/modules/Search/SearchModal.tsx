@@ -15,10 +15,13 @@ function SearchModal() {
     clearSearchResults,
     deletePastSearches,
     getPastSearches,
+    hasLockedSearchState,
     isSearchOpen,
     pastSearches,
     searchQuery,
+    searchState,
     searchResults,
+    setSearchState,
     toggleIsSearchOpen,
   } = useSearchContext();
   const {
@@ -43,7 +46,10 @@ function SearchModal() {
   }, [contentRef, isSearchOpen]);
 
   const handleCloseSearch = () => {
+    // Clear search results and state when the modal closes
     clearSearchResults();
+    setSearchState('');
+
     toggleIsSearchOpen();
   };
 
@@ -70,11 +76,14 @@ function SearchModal() {
         customerServiceNumber={customerServiceNumber}
         deletePastSearches={deletePastSearches}
         forwardedRef={contentRef}
+        hasLockedSearchState={hasLockedSearchState}
         isCustomerServiceEnabled={customerServiceEnabled}
         onCloseSearchClick={handleCloseSearch}
         onSearchQuery={searchQuery}
+        onSetSearchState={setSearchState}
         pastSearches={pastSearches}
         results={searchResults}
+        searchState={searchState}
       />
     </Modal>
   );

@@ -1,3 +1,4 @@
+import lscache from 'lscache';
 import { RefObject, useCallback, useState } from 'react';
 
 import { SiteSearchResultGroup } from '~/data/models/SiteSearchResultGroup';
@@ -5,6 +6,7 @@ import { SiteSearchResultImageItem } from '~/data/models/SiteSearchResultImageIt
 import { SiteSearchResultTextItem } from '~/data/models/SiteSearchResultTextItem';
 import { SearchDataParams } from '~/lib/api/search';
 import { TIME } from '~/lib/constants';
+import { LOCAL_STORAGE, PROPERTIES } from '~/lib/constants/localStorage';
 import { scrollTo } from '~/lib/helpers/scroll';
 import debounce from '~/lib/utils/debounce';
 
@@ -33,11 +35,14 @@ interface Props {
   customerServiceNumber: { display: string; value: string };
   deletePastSearches: () => void;
   forwardedRef?: RefObject<HTMLDivElement>;
+  hasLockedSearchState: boolean;
   isCustomerServiceEnabled: boolean;
   onCloseSearchClick: () => void;
   onSearchQuery: ({ queryText, queryType }: SearchDataParams) => void;
+  onSetSearchState: (searchState: string) => void;
   pastSearches: SiteSearchResultGroup;
   results: Results;
+  searchState: string;
 }
 
 function Search({
@@ -46,11 +51,14 @@ function Search({
   customerServiceNumber,
   deletePastSearches,
   forwardedRef,
+  hasLockedSearchState,
   isCustomerServiceEnabled,
   onCloseSearchClick,
   onSearchQuery,
+  onSetSearchState,
   pastSearches,
   results,
+  searchState,
 }: Props) {
   const [primaryQuery, setPrimaryQuery] = useState<InputQuery>({
     queryText: '',
@@ -60,8 +68,6 @@ function Search({
     queryText: '',
     queryType: SearchStateEnum.REAR_TIRE,
   });
-
-  const [searchState, setSearchState] = useState('');
   const [activeInputType, setActiveInputType] = useState(
     SearchInputEnum.PRIMARY,
   );
@@ -117,9 +123,17 @@ function Search({
       queryType,
     };
 
-    // Reset the search category when search cleared with no query.
+    if (hasLockedSearchState) {
+      if (queryText) {
+        onSearchQuery({ queryText: '', queryType });
+      }
+      setCurrentInputQuery(resetQuery);
+      return;
+    }
+
     if (!queryText) {
-      setSearchState('');
+      // Reset the search category when search cleared with no query
+      onSetSearchState('');
       resetQuery.queryType = '';
     } else if (searchState) {
       onSearchQuery({ queryText: '', queryType });
@@ -134,7 +148,7 @@ function Search({
 
   const onToggleRearTire = (isShowing: boolean) => {
     if (isShowing) {
-      setSearchState(SearchStateEnum.REAR_TIRE);
+      onSetSearchState(SearchStateEnum.REAR_TIRE);
 
       // Switch from tireSize to frontTireSize when rear tire input is visible
       setPrimaryQuery({
@@ -147,7 +161,7 @@ function Search({
         queryType: SearchStateEnum.FRONT_TIRE,
       });
     } else {
-      setSearchState(SearchStateEnum.TIRE_SIZE);
+      onSetSearchState(SearchStateEnum.TIRE_SIZE);
       setActiveInputType(SearchInputEnum.PRIMARY);
       setPrimaryQuery({
         ...primaryQuery,
@@ -196,6 +210,13 @@ function Search({
         queryType: action.queryType,
       });
     } else if (action.type === SearchActionType.LINK) {
+      if (action.vehicleMetadata) {
+        lscache.set(
+          LOCAL_STORAGE[PROPERTIES.VEHICLE_METADATA],
+          action.vehicleMetadata,
+        );
+      }
+
       addPastSearch(searchResult);
     }
   };
@@ -205,7 +226,7 @@ function Search({
 
     const category =
       action.type === SearchActionType.QUERY ? action.queryType : '';
-    setSearchState(category);
+    onSetSearchState(category);
 
     if (action.type === SearchActionType.QUERY) {
       setCurrentInputQuery({

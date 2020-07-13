@@ -1,6 +1,10 @@
 import { ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 
-import { Results } from '~/components/modules/Search/Search.types';
+import {
+  Results,
+  SearchStateEnum,
+} from '~/components/modules/Search/Search.types';
+import { SiteSearchResultActionQuery } from '~/data/models/SiteSearchResultActionQuery';
 import { SiteSearchResultGroup } from '~/data/models/SiteSearchResultGroup';
 import { SiteSearchResultImageItem } from '~/data/models/SiteSearchResultImageItem';
 import { SiteSearchResultTextItem } from '~/data/models/SiteSearchResultTextItem';
@@ -14,7 +18,11 @@ import {
 } from '~/lib/api/users';
 import { createContext } from '~/lib/utils/context';
 
-import { emptyResult, emptySiteSearchResultGroup } from './Search.mocks';
+import {
+  emptyResult,
+  emptySiteSearchResultGroup,
+  initialSearchVehicle,
+} from './Search.mocks';
 
 interface Props {
   children: ReactNode;
@@ -27,17 +35,23 @@ interface SearchContextProps {
   clearSearchResults: () => void;
   deletePastSearches: () => void;
   getPastSearches: () => void;
+  hasLockedSearchState: boolean;
   isSearchOpen: boolean;
+  lockSearchStateToVehicle: () => void;
   pastSearches: SiteSearchResultGroup;
   searchQuery: ({ queryText, queryType }: SearchDataParams) => void;
   searchResults: Results;
+  searchState: string;
+  setHasLockedSearchState: (hasLockedSearchState: boolean) => void;
   setIsSearchOpen: (isSearchOpen: boolean) => void;
+  setSearchState: (searchState: string) => void;
   toggleIsSearchOpen: (callback?: () => void) => void;
 }
 
 const SearchContext = createContext<SearchContextProps>();
 
 function useContextSetup() {
+  /* Past Searches */
   const [pastSearches, setPastSearches] = useState<SiteSearchResultGroup>(
     emptySiteSearchResultGroup,
   );
@@ -70,6 +84,7 @@ function useContextSetup() {
   },
   []);
 
+  /* Search results and query */
   const [searchResults, setSearchResults] = useState<Results>(emptyResult);
   const isLoadingResults = useRef(false);
   const abortController = useRef<AbortController | null>(null);
@@ -121,16 +136,38 @@ function useContextSetup() {
     }
   };
 
+  /* Search state */
+  const [searchState, setSearchState] = useState('');
+  const [hasLockedSearchState, setHasLockedSearchState] = useState(false);
+
+  const lockSearchStateToVehicle = () => {
+    const {
+      queryText,
+      queryType,
+    } = initialSearchVehicle.action as SiteSearchResultActionQuery;
+    setSearchState(SearchStateEnum.VEHICLE);
+    searchQuery({
+      queryText,
+      queryType,
+    });
+    setHasLockedSearchState(true);
+  };
+
   return {
     addPastSearch,
     clearSearchResults,
     deletePastSearches,
     getPastSearches,
+    hasLockedSearchState,
     isSearchOpen,
+    lockSearchStateToVehicle,
     pastSearches,
     searchQuery,
     searchResults,
+    searchState,
+    setHasLockedSearchState,
     setIsSearchOpen,
+    setSearchState,
     toggleIsSearchOpen,
   };
 }

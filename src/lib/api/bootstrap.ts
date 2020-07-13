@@ -1,5 +1,6 @@
 import lscache from 'lscache';
 
+import { LOCAL_STORAGE, PROPERTIES } from '~/lib/constants/localStorage';
 import GA from '~/lib/helpers/analytics';
 
 import {
@@ -11,13 +12,14 @@ import { apiGetUserSession } from './session';
 
 let apiBootstrapPromise: Promise<void> | null = null;
 
-const SimpleTireSessionKey = 'ST_SESSION';
 const SimpleTireSessionKeyExpireInMinutes = 60;
 
 async function asyncApiBootstrap() {
   lscache.flushExpired();
 
-  const cachedAuthorizationToken = lscache.get(SimpleTireSessionKey);
+  const cachedAuthorizationToken = lscache.get(
+    LOCAL_STORAGE[PROPERTIES.SESSION],
+  );
   const isCachedAuthorizationTokenValid =
     typeof cachedAuthorizationToken === 'string';
   if (isCachedAuthorizationTokenValid) {
@@ -33,7 +35,7 @@ async function asyncApiBootstrap() {
   GA.userSessionId = userSessionId;
 
   lscache.set(
-    SimpleTireSessionKey,
+    LOCAL_STORAGE[PROPERTIES.SESSION],
     userSessionId,
     SimpleTireSessionKeyExpireInMinutes,
   );

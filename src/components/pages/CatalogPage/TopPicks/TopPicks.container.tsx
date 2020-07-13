@@ -27,7 +27,7 @@ function TopPicksContainer({
 }: Props) {
   const { locationString } = useUserPersonalizationContext();
   const { setShowCatalogGrid } = useCatalogPageContext();
-  const { setIsSearchOpen } = useSearchContext();
+  const { lockSearchStateToVehicle, setIsSearchOpen } = useSearchContext();
   const { customerServiceNumber } = useSiteGlobalsContext();
 
   const totalResult = siteCatalogSummaryMeta
@@ -35,6 +35,7 @@ function TopPicksContainer({
     : 0;
 
   const openSearch = () => {
+    lockSearchStateToVehicle();
     setIsSearchOpen(true);
   };
 
