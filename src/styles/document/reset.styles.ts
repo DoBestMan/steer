@@ -88,6 +88,7 @@ export const reset = `
   html {
     box-sizing: border-box;
     font-size: 62.5%;
+    -webkit-font-smoothing: antialiased;
   }
 
   a,
