@@ -1,4 +1,6 @@
 import { useRouter } from 'next/router';
+import queryString from 'query-string';
+import { useCallback, useState } from 'react';
 
 import { BreadcrumbsItem } from '~/components/global/Breadcrumbs/Breadcrumbs';
 import { FAQProps } from '~/components/modules/PDP/FAQ/FAQ';
@@ -6,13 +8,15 @@ import { InsightsProps } from '~/components/modules/PDP/Insights/Insights';
 import { InstallationProps } from '~/components/modules/PDP/Installation/Installation';
 import { ProductInfoProps } from '~/components/modules/PDP/ProductInfo/ProductInfo';
 import { ReviewsProps } from '~/components/modules/PDP/Reviews/Reviews';
+import { SizeFinderProps } from '~/components/modules/PDP/SizeFinder/SizeFinder';
 import { TechnicalSpecsProps } from '~/components/modules/PDP/TechnicalSpecs/TechnicalSpecs';
 import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
 import { SiteCatalogProductGroupList } from '~/data/models/SiteCatalogProductGroupList';
 import { SiteCatalogProductImage } from '~/data/models/SiteCatalogProductImage';
 import { useApiDataWithDefault } from '~/hooks/useApiDataWithDefault';
 import { eventEmitters } from '~/lib/events/emitters';
-import { keyToCamel } from '~/lib/utils/string';
+import { omit } from '~/lib/utils/object';
+import { interpolateRoute } from '~/lib/utils/routes';
 import { ProductDetailResponse } from '~/pages/api/product-detail';
 
 import { mapDataToBreadcrumbs } from './mappers/breadcrumbs';
@@ -26,6 +30,7 @@ import {
   RecirculationSize,
 } from './mappers/recirculationSize';
 import { mapDataToReviews } from './mappers/reviews';
+import { mapDataToSizeFinder } from './mappers/sizeFinder';
 import { mapDataToTechnicalSpecs } from './mappers/technicalSpecs';
 
 export type QueryParams = Record<string, string>;
@@ -34,18 +39,38 @@ interface ProductDetailData {
   serverData: ProductDetailResponse;
 }
 
+export type ParsedProductInfoProps = Omit<
+  ProductInfoProps,
+  | 'onChangeSize'
+  | 'onClickChangeQuantity'
+  | 'onClickChangeSize'
+  | 'onCloseSizeSelector'
+  | 'handleChangeSize'
+  | 'sizeFinder'
+  | 'isSizeSelectorOpen'
+>;
+
+export type ParsedSizeFinderProps = Omit<SizeFinderProps, 'onChange'>;
+
 interface ResponseProps {
   breadcrumbs: BreadcrumbsItem[];
+  closeSizeSelector: () => void;
   currentPath: string;
   faq: FAQProps | null;
   imageList: SiteCatalogProductImage[];
   insights: Omit<InsightsProps, 'handleChangeLocation'>;
   installation: InstallationProps | null;
-  productInfo: ProductInfoProps;
+  isSizeSelectorOpen: boolean;
+  onChangeSize: (value: string) => void;
+  onClickChangeQuantity: (position: 'front' | 'rear') => () => void;
+  onClickChangeSize: () => void;
+  onCloseSizeSelector: () => void;
+  productInfo: ParsedProductInfoProps;
   recirculation: SiteCatalogProductGroupList | null;
   recirculationSize: RecirculationSize | null;
   reviews: ReviewsProps;
   reviewsAnchor: string;
+  sizeFinder: ParsedSizeFinderProps | null;
   technicalSpecs: TechnicalSpecsProps | null;
   technicalSpecsAnchor: string;
 }
@@ -57,14 +82,15 @@ export const CONSTANTS = {
 
 function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
   const router = useRouter();
-  const { query, asPath } = router;
+  const { query, asPath, pathname } = router;
   const globals = useSiteGlobalsContext();
+  const [isSizeSelectorOpen, setIsSizeSelectorOpen] = useState(false);
 
   const queryParams: QueryParams = {};
 
   Object.entries(query).map(([key, value]) => {
     if (typeof value === 'string') {
-      queryParams[keyToCamel(key)] = value;
+      queryParams[key] = value;
     }
   });
 
@@ -87,16 +113,60 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
 
   const imageList = siteProductLine.imageList;
 
+  // Size selector
+  const toggleSizeSelector = useCallback(() => {
+    setIsSizeSelectorOpen(!isSizeSelectorOpen);
+  }, [isSizeSelectorOpen, setIsSizeSelectorOpen]);
+
+  const closeSizeSelector = useCallback(() => {
+    setIsSizeSelectorOpen(false);
+  }, [setIsSizeSelectorOpen]);
+
+  const handleClickChangeQuantity = (_: 'front' | 'rear') => () => {};
+  const handleClickChangeSize = () => {
+    toggleSizeSelector();
+  };
+
+  const handleChangeSize = useCallback(
+    (value) => {
+      const querystring = queryString.stringify({
+        ...omit(queryParams, ['brandName', 'productLine']),
+        tireSize: value,
+      });
+      const interpolatedRoute = interpolateRoute(router.pathname, query);
+
+      router.push(
+        `${pathname}?${querystring}`,
+        `${interpolatedRoute}?${querystring}`,
+        {
+          shallow: true,
+        },
+      );
+      closeSizeSelector();
+    },
+    [query, queryParams, pathname, router, closeSizeSelector],
+  );
+
+  const handleCloseSizeSelector = useCallback(() => {
+    closeSizeSelector();
+  }, [closeSizeSelector]);
+
   return {
     breadcrumbs: mapDataToBreadcrumbs({
       siteProduct,
       router,
     }),
+    closeSizeSelector,
     currentPath: asPath,
     faq: mapDataToFAQ({ siteProduct, globals }),
     imageList,
     insights: mapDataToInsights({ siteProduct }),
     installation: mapDataToInstallation({ siteProduct }),
+    isSizeSelectorOpen,
+    onChangeSize: handleChangeSize,
+    onClickChangeQuantity: handleClickChangeQuantity,
+    onClickChangeSize: handleClickChangeSize,
+    onCloseSizeSelector: handleCloseSizeSelector,
     productInfo: mapDataToProductInfo({
       siteProduct,
       siteProductReviews,
@@ -107,6 +177,10 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
     recirculationSize: mapDataToRecirculationSize({ siteProduct, router }),
     reviews: mapDataToReviews({ siteProductReviews, router }),
     reviewsAnchor: CONSTANTS.REVIEWS_ANCHOR,
+    sizeFinder: mapDataToSizeFinder({
+      siteProduct,
+      router,
+    }),
     technicalSpecs: mapDataToTechnicalSpecs({ siteProduct, globals, router }),
     technicalSpecsAnchor: CONSTANTS.TECH_SPECS_ANCHOR,
   };

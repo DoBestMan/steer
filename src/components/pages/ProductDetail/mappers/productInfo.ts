@@ -27,7 +27,16 @@ export function mapDataToProductInfo({
   router: NextRouter;
   siteProduct: SiteProduct;
   siteProductReviews: SiteProductReviews;
-}): ProductInfoProps {
+}): Omit<
+  ProductInfoProps,
+  | 'onChangeSize'
+  | 'onClickChangeQuantity'
+  | 'onClickChangeSize'
+  | 'onCloseSizeSelector'
+  | 'handleChangeSize'
+  | 'sizeFinder'
+  | 'isSizeSelectorOpen'
+> {
   const brandName = siteProductLine.brand;
   const brandURL = interpolateRoute(ROUTE_MAP[ROUTES.BRAND_DETAIL], {
     brand,
@@ -78,18 +87,12 @@ export function mapDataToProductInfo({
     size: parsedSize,
   });
 
-  // TODO: Implement tire and quantity changers
-  const handleChangeQuantity = (_: 'front' | 'rear') => () => {};
-  const handleChangeSize = () => {};
-
   return {
     availableSizes,
     brand: brandName,
     brandURL,
     callForPricing,
     customerServiceNumber,
-    handleChangeQuantity,
-    handleChangeSize,
     loadSpeedRating,
     price,
     priceLabel,

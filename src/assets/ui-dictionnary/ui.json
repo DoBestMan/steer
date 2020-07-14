@@ -213,15 +213,19 @@
       "changeSizeLabel": "Select another size",
       "crossSellTitle": "{{results}} other tires are available on this size:",
       "crossSellButtonLabel": "View all {{size}} tires",
+      "findMyTireSizeLabel": "How to find my size",
       "outOfStock": "Out of stock",
       "outOfStockDescription": "Check back soon or view other tires",
       "volatileAvailability": "4 left at this price!",
       "selectSizeButton": "{{availableSizes}} sizes available",
-      "selectSizeLabel": "Select a size",
+      "selectSizeLabel": "Select size",
       "selectSingleSizeButton": "1 size available",
       "sizeQuantity": "{{quantity}} tires",
       "frontTireSize": "Front {{size}}",
       "rearTireSize": "Rear {{size}}"
+    },
+    "sizeFinder": {
+      "fits": "Fits your {{vehicle}}"
     },
     "tireImage": {
       "modalLabel": "{{label}} image zoom",

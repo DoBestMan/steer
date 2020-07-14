@@ -1151,7 +1151,7 @@ export const siteProductMock: SiteProduct = {
       isFitForCurrentVehicle: false,
       isSelected: false,
       siteQueryParams: {
-        tiresize: '100-40r15',
+        tireSize: '100-40r15',
       },
     },
     {
@@ -1176,7 +1176,7 @@ export const siteProductMock: SiteProduct = {
       isFitForCurrentVehicle: false,
       isSelected: false,
       siteQueryParams: {
-        tiresize: '100-40r17',
+        tireSize: '100-40r17',
       },
     },
     {
@@ -1201,7 +1201,7 @@ export const siteProductMock: SiteProduct = {
       isFitForCurrentVehicle: false,
       isSelected: false,
       siteQueryParams: {
-        tiresize: '200-40r17',
+        tireSize: '200-40r17',
       },
     },
   ],

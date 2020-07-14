@@ -31,7 +31,7 @@ describe('pages/ProductDetails/mappers/techinicalSpecs', () => {
           options: [
             {
               label: '100/40R15 89H',
-              link: '/brands/continental-tires/dh2?tiresize=100-40r15',
+              link: '/brands/continental-tires/dh2?tireSize=100-40r15',
               price: '$59.99',
               specs: [
                 {
@@ -55,7 +55,7 @@ describe('pages/ProductDetails/mappers/techinicalSpecs', () => {
           options: [
             {
               label: '100/40R17 89H',
-              link: '/brands/continental-tires/dh2?tiresize=100-40r17',
+              link: '/brands/continental-tires/dh2?tireSize=100-40r17',
               price: '$59.99',
               specs: [
                 {
@@ -74,7 +74,7 @@ describe('pages/ProductDetails/mappers/techinicalSpecs', () => {
             },
             {
               label: '200/40R17 89H',
-              link: '/brands/continental-tires/dh2?tiresize=200-40r17',
+              link: '/brands/continental-tires/dh2?tireSize=200-40r17',
               price: '$59.99',
               specs: [
                 {

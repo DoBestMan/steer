@@ -62,10 +62,14 @@ const mockPromoTags: PromoTagProps[] = [
   },
 ];
 
-const handleChangeQuantity = (position: 'front' | 'rear') =>
+const onClickChangeQuantity = (position: 'front' | 'rear') =>
   action(`click-change-position-${position}`);
 
-const handleChangeSize = action('click-change-size');
+const onClickChangeSize = action('click-change-size');
+
+const onCloseSizeSelector = action('close-selector');
+
+const onChangeSize = action('change-size');
 
 export function ProductInfoWithKnobs() {
   const tireLineGroupId = 'tire line';
@@ -151,8 +155,10 @@ export function ProductInfoWithKnobs() {
       rearSize={hasRearSize ? rearSizeLabel : undefined}
       rearLoadSpeedRating={hasRearSize ? rearLoadSpeedRating : undefined}
       rearPrice={price}
-      handleChangeQuantity={handleChangeQuantity}
-      handleChangeSize={handleChangeSize}
+      onClickChangeQuantity={onClickChangeQuantity}
+      onClickChangeSize={onClickChangeSize}
+      onCloseSizeSelector={onCloseSizeSelector}
+      onChangeSize={onChangeSize}
       priceLabel={priceLabel ? priceLabel : undefined}
       volatileAvailability={volatileAvailability}
       sameSizeSearchResults={sameSizeSearchResults}
@@ -183,8 +189,10 @@ export function ProductInfoDefault() {
       availableSizes={32}
       size={mockSizeLabel}
       loadSpeedRating={mockSizeLoadSpeedRating}
-      handleChangeQuantity={handleChangeQuantity}
-      handleChangeSize={handleChangeSize}
+      onClickChangeQuantity={onClickChangeQuantity}
+      onClickChangeSize={onClickChangeSize}
+      onCloseSizeSelector={onCloseSizeSelector}
+      onChangeSize={onChangeSize}
     />
   );
 }
@@ -210,8 +218,10 @@ export function ProductInfoPromoTags() {
       availableSizes={32}
       size={mockSizeLabel}
       loadSpeedRating={mockSizeLoadSpeedRating}
-      handleChangeQuantity={handleChangeQuantity}
-      handleChangeSize={handleChangeSize}
+      onClickChangeQuantity={onClickChangeQuantity}
+      onClickChangeSize={onClickChangeSize}
+      onCloseSizeSelector={onCloseSizeSelector}
+      onChangeSize={onChangeSize}
       promoTags={mockPromoTags}
     />
   );
@@ -232,8 +242,10 @@ export function ProductInfoTireLine() {
         value: 4.8,
       }}
       availableSizes={32}
-      handleChangeQuantity={handleChangeQuantity}
-      handleChangeSize={handleChangeSize}
+      onClickChangeQuantity={onClickChangeQuantity}
+      onClickChangeSize={onClickChangeSize}
+      onCloseSizeSelector={onCloseSizeSelector}
+      onChangeSize={onChangeSize}
     />
   );
 }
@@ -252,8 +264,10 @@ export function ProductInfoLongNameNoBrandLogo() {
         value: 4.8,
       }}
       availableSizes={32}
-      handleChangeQuantity={handleChangeQuantity}
-      handleChangeSize={handleChangeSize}
+      onClickChangeQuantity={onClickChangeQuantity}
+      onClickChangeSize={onClickChangeSize}
+      onCloseSizeSelector={onCloseSizeSelector}
+      onChangeSize={onChangeSize}
       price={{
         salePriceInCents: '13296',
         estimatedRetailPriceInCents: '15099',
@@ -285,8 +299,10 @@ export function ProductInfoDiscountBadge() {
       availableSizes={32}
       size={mockSizeLabel}
       loadSpeedRating={mockSizeLoadSpeedRating}
-      handleChangeQuantity={handleChangeQuantity}
-      handleChangeSize={handleChangeSize}
+      onClickChangeQuantity={onClickChangeQuantity}
+      onClickChangeSize={onClickChangeSize}
+      onCloseSizeSelector={onCloseSizeSelector}
+      onChangeSize={onChangeSize}
       priceLabel="60% off!"
     />
   );
@@ -313,8 +329,10 @@ export function ProductInfoOnly4LeftBadge() {
       availableSizes={32}
       size={mockSizeLabel}
       loadSpeedRating={mockSizeLoadSpeedRating}
-      handleChangeQuantity={handleChangeQuantity}
-      handleChangeSize={handleChangeSize}
+      onClickChangeQuantity={onClickChangeQuantity}
+      onClickChangeSize={onClickChangeSize}
+      onCloseSizeSelector={onCloseSizeSelector}
+      onChangeSize={onChangeSize}
       volatileAvailability
     />
   );
@@ -341,8 +359,10 @@ export function ProductInfoBothBadges() {
       availableSizes={32}
       size={mockSizeLabel}
       loadSpeedRating={mockSizeLoadSpeedRating}
-      handleChangeQuantity={handleChangeQuantity}
-      handleChangeSize={handleChangeSize}
+      onClickChangeQuantity={onClickChangeQuantity}
+      onClickChangeSize={onClickChangeSize}
+      onCloseSizeSelector={onCloseSizeSelector}
+      onChangeSize={onChangeSize}
       priceLabel="60% off!"
       volatileAvailability
     />
@@ -366,8 +386,10 @@ export function ProductInfoCallForPricing() {
       availableSizes={32}
       size={mockSizeLabel}
       loadSpeedRating={mockSizeLoadSpeedRating}
-      handleChangeQuantity={handleChangeQuantity}
-      handleChangeSize={handleChangeSize}
+      onClickChangeQuantity={onClickChangeQuantity}
+      onClickChangeSize={onClickChangeSize}
+      onCloseSizeSelector={onCloseSizeSelector}
+      onChangeSize={onChangeSize}
       callForPricing
     />
   );
@@ -390,8 +412,10 @@ export function ProductInfoOutOfStock() {
       availableSizes={32}
       size={mockSizeLabel}
       loadSpeedRating={mockSizeLoadSpeedRating}
-      handleChangeQuantity={handleChangeQuantity}
-      handleChangeSize={handleChangeSize}
+      onClickChangeQuantity={onClickChangeQuantity}
+      onClickChangeSize={onClickChangeSize}
+      onCloseSizeSelector={onCloseSizeSelector}
+      onChangeSize={onChangeSize}
       sameSizeSearchResults={232}
       sameSizeSearchURL="/"
     />
@@ -415,8 +439,10 @@ export function ProductInfoNoReviews() {
       availableSizes={32}
       size={mockSizeLabel}
       loadSpeedRating={mockSizeLoadSpeedRating}
-      handleChangeQuantity={handleChangeQuantity}
-      handleChangeSize={handleChangeSize}
+      onClickChangeQuantity={onClickChangeQuantity}
+      onClickChangeSize={onClickChangeSize}
+      onCloseSizeSelector={onCloseSizeSelector}
+      onChangeSize={onChangeSize}
     />
   );
 }
@@ -448,8 +474,10 @@ export function ProductInfoMultiSize() {
         estimatedRetailPriceInCents: '15486',
         salePriceInCents: '19000',
       }}
-      handleChangeQuantity={handleChangeQuantity}
-      handleChangeSize={handleChangeSize}
+      onClickChangeQuantity={onClickChangeQuantity}
+      onClickChangeSize={onClickChangeSize}
+      onCloseSizeSelector={onCloseSizeSelector}
+      onChangeSize={onChangeSize}
     />
   );
 }

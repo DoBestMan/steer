@@ -10,7 +10,7 @@ import { ProductInfoProps } from './ProductInfo';
 
 type Props = Pick<
   ProductInfoProps,
-  | 'handleChangeQuantity'
+  | 'onClickChangeQuantity'
   | 'size'
   | 'loadSpeedRating'
   | 'price'
@@ -56,14 +56,14 @@ function MultiSizeButton({
   rearSize,
   rearLoadSpeedRating,
   rearPrice,
-  handleChangeQuantity,
+  onClickChangeQuantity,
 }: Props) {
   return (
     <ul css={styles.root}>
       <li>
         <button
           css={styles.button}
-          onClick={handleChangeQuantity('front')}
+          onClick={onClickChangeQuantity('front')}
           aria-label={`${size} ${loadSpeedRating}, ${ui(
             'pdp.productInfo.changeSizeLabel',
           )}`}
@@ -79,7 +79,7 @@ function MultiSizeButton({
       <li>
         <button
           css={styles.button}
-          onClick={handleChangeQuantity('rear')}
+          onClick={onClickChangeQuantity('rear')}
           aria-label={`${rearSize} ${rearLoadSpeedRating}, ${ui(
             'pdp.productInfo.changeSizeLabel',
           )}`}

@@ -3,6 +3,7 @@ import PromoTagCarousel from '~/components/global/PromoTag/PromoTagCarousel';
 import { SiteCatalogBrand } from '~/data/models/SiteCatalogBrand';
 import { SitePrice } from '~/data/models/SitePrice';
 
+import { SizeFinderProps } from '../SizeFinder/SizeFinder';
 import CrossSell from './CrossSell';
 import MultiSizeButton from './MultiSizeButton';
 import Price from './Price';
@@ -17,9 +18,12 @@ export interface ProductInfoProps {
   brandURL?: string;
   callForPricing?: boolean;
   customerServiceNumber: { display: string; value: string };
-  handleChangeQuantity: (position: 'front' | 'rear') => () => void;
-  handleChangeSize: () => void;
+  isSizeSelectorOpen?: boolean;
   loadSpeedRating?: string;
+  onChangeSize: (value: string) => void;
+  onClickChangeQuantity: (position: 'front' | 'rear') => () => void;
+  onClickChangeSize: () => void;
+  onCloseSizeSelector: () => void;
   price?: SitePrice | null;
   priceLabel?: string | null;
   productName: string;
@@ -34,6 +38,7 @@ export interface ProductInfoProps {
   sameSizeSearchResults?: number | null;
   sameSizeSearchURL?: string | null;
   size?: string;
+  sizeFinder?: Omit<SizeFinderProps, 'onChange'> | null;
   volatileAvailability?: boolean;
 }
 
@@ -43,10 +48,12 @@ function ProductInfo({
   brandURL,
   callForPricing,
   customerServiceNumber,
-  handleChangeQuantity,
-  handleChangeSize,
   volatileAvailability,
+  isSizeSelectorOpen,
   loadSpeedRating,
+  onChangeSize,
+  onClickChangeQuantity,
+  onClickChangeSize,
   price,
   priceLabel,
   productName,
@@ -58,6 +65,7 @@ function ProductInfo({
   sameSizeSearchResults,
   sameSizeSearchURL,
   size,
+  sizeFinder,
 }: ProductInfoProps) {
   const shouldShowCrossSell =
     !price && !callForPricing && size && sameSizeSearchResults;
@@ -78,7 +86,7 @@ function ProductInfo({
           rearSize={rearSize}
           rearLoadSpeedRating={rearLoadSpeedRating}
           rearPrice={rearPrice}
-          handleChangeQuantity={handleChangeQuantity}
+          onClickChangeQuantity={onClickChangeQuantity}
         />
       </>
     );
@@ -98,7 +106,10 @@ function ProductInfo({
               availableSizes={availableSizes}
               size={size}
               loadSpeedRating={loadSpeedRating}
-              handleChangeSize={handleChangeSize}
+              isSizeSelectorOpen={isSizeSelectorOpen}
+              sizeFinder={sizeFinder}
+              onChangeSize={onChangeSize}
+              onClickChangeSize={onClickChangeSize}
             />
           </div>
           <Rating rating={rating} />

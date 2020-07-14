@@ -35,11 +35,17 @@ function ProductDetailContainer({ serverData }: ProductDetailData) {
     imageList,
     insights,
     installation,
+    isSizeSelectorOpen,
+    onChangeSize,
+    onClickChangeQuantity,
+    onClickChangeSize,
+    onCloseSizeSelector,
     productInfo,
     recirculation,
     recirculationSize,
     reviews,
     reviewsAnchor,
+    sizeFinder,
     technicalSpecs,
     technicalSpecsAnchor,
   } = useProductDetail({
@@ -62,7 +68,15 @@ function ProductDetailContainer({ serverData }: ProductDetailData) {
           <TireImage imageList={imageList} brand={productInfo.brand} />
         </GridItem>
         <GridItem gridColumnL="8/14" gridRowL="1/3" css={styles.productInfo}>
-          <ProductInfo {...productInfo} />
+          <ProductInfo
+            sizeFinder={sizeFinder}
+            isSizeSelectorOpen={isSizeSelectorOpen}
+            onChangeSize={onChangeSize}
+            onClickChangeQuantity={onClickChangeQuantity}
+            onClickChangeSize={onClickChangeSize}
+            onCloseSizeSelector={onCloseSizeSelector}
+            {...productInfo}
+          />
         </GridItem>
         <GridItem
           fullbleed
