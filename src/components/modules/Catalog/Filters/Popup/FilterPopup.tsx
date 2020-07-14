@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 
 import Dropdown from '~/components/global/Dropdown/Dropdown';
 import Loading from '~/components/global/Loading/Loading';
+import { useModalContext } from '~/context/Modal.context';
 import {
   SiteCatalogFilterListPresentationStyleEnum,
   SiteCatalogFilterListTypeEnum,
@@ -40,6 +41,7 @@ export default function FilterPopup({
     filtersToApply,
     totalMatches,
   } = useFiltersContext();
+  const { openStaticModal, isModalOpen } = useModalContext();
   const prevIsLarge = useRef(isLarge);
   const prevIsOpen = useRef(isOpen);
   useEffect(() => {
@@ -73,6 +75,7 @@ export default function FilterPopup({
     isLarge,
     isPreviewLoading,
     onChange: createUpdateFilterGroup,
+    openStaticModal,
   };
 
   const label = getFilterLabel(filter);
@@ -97,6 +100,7 @@ export default function FilterPopup({
 
   return (
     <Dropdown
+      shouldActivateListeners={!isModalOpen}
       actionBar={actionBar}
       contentLabel={label}
       forceModal={forceModal}

@@ -1,4 +1,4 @@
-import { BORDERS, COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
+import { COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
@@ -10,19 +10,6 @@ const styles: StylesMap = {
       color: COLORS.LIGHT.GRAY_70,
       marginBottom: SPACING.SIZE_15,
     },
-  },
-  infoLink: [
-    typography.smallCopyTight,
-    {
-      borderBottom: BORDERS.DOTTED_GRAY_40_2PX,
-      borderColor: COLORS.LIGHT.GRAY_70,
-      color: COLORS.LIGHT.GRAY_70,
-      cursor: 'pointer',
-      width: 'fit-content',
-    },
-  ],
-  infoLinkTitle: {
-    marginRight: SPACING.SIZE_30,
   },
   root: {
     [MQ.L]: { minWidth: 400 },

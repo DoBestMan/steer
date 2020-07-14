@@ -17,6 +17,7 @@ interface Props {
   forceModal?: boolean;
   isOpen: boolean;
   onClose: () => void;
+  shouldActivateListeners?: boolean;
 }
 
 export default function Dropdown({
@@ -26,6 +27,7 @@ export default function Dropdown({
   forceModal,
   isOpen,
   onClose,
+  shouldActivateListeners = true,
 }: Props) {
   const { isMobile } = useBreakpoints();
   const dropdownEl = useRef<HTMLDivElement>(null);
@@ -46,7 +48,7 @@ export default function Dropdown({
       }
     }
     function onClick(e: Event) {
-      if (isModal || !isOpen) {
+      if (isModal || !isOpen || !shouldActivateListeners) {
         return;
       }
 
@@ -73,7 +75,7 @@ export default function Dropdown({
       document.removeEventListener('touchstart', onClick);
       document.removeEventListener('keydown', onKeypress);
     };
-  }, [isOpen, onClose, isModal]);
+  }, [isOpen, onClose, isModal, shouldActivateListeners]);
 
   useEffect(() => {
     // don't update positioning if dropdown isn't open yet
@@ -90,7 +92,7 @@ export default function Dropdown({
 
   if (!isModal) {
     return (
-      <FocusTrap active={isOpen} ref={dropdownEl}>
+      <FocusTrap active={isOpen && shouldActivateListeners} ref={dropdownEl}>
         <div
           ref={dropdownEl}
           aria-hidden={!isOpen}

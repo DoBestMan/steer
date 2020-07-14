@@ -2,7 +2,7 @@ import { ReactNode, useState } from 'react';
 
 import { ModalContentProps } from '~/components/global/ContentModal/ContentModal';
 import ContentModalContainer from '~/components/global/ContentModal/ContentModal.container';
-import STATIC_MODALS, { STATIC_MODAL_IDS } from '~/lib/constants/staticModals';
+import STATIC_MODALS from '~/lib/constants/staticModals';
 import { createContext } from '~/lib/utils/context';
 
 /*
@@ -22,7 +22,7 @@ export interface ModalContextProps {
   currentContentModalData: ModalContentProps | null;
   isModalOpen: boolean;
   openDynamicModal: (data: ModalContentProps) => void;
-  openStaticModal: (id: STATIC_MODAL_IDS) => void;
+  openStaticModal: (id: string) => void;
   resetModal: () => void;
 }
 
@@ -42,7 +42,7 @@ export function useModalContextSetup() {
   }
 
   // Fetch modal content from ID and open it
-  function openStaticModal(modalId: STATIC_MODAL_IDS) {
+  function openStaticModal(modalId: string) {
     openModal(STATIC_MODALS[modalId]);
   }
 

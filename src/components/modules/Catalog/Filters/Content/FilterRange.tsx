@@ -9,6 +9,7 @@ import {
   mapUnitToLabelFormatter,
 } from '../Filters.constants';
 import { ChildProps } from '../Popup/FilterPopup.utils';
+import FilterHeader from './FilterHeader';
 import styles from './FilterRange.styles';
 
 export default function FilterRange({
@@ -21,14 +22,18 @@ export default function FilterRange({
   maxValue,
   minValue,
   onChange,
+  openStaticModal,
   step,
   unit,
 }: SiteCatalogFilterRange &
   Pick<
     ChildProps,
-    'isPreviewLoading' | 'isLarge' | 'onChange' | 'filtersToApply'
+    | 'isPreviewLoading'
+    | 'isLarge'
+    | 'onChange'
+    | 'filtersToApply'
+    | 'openStaticModal'
   >) {
-  const showHeader = ((isLarge && header?.infoLink) || !isLarge) && header;
   const filterGroup = filtersToApply[id];
   const [shouldReset, setShouldReset] = useState(!filtersToApply[id]);
   const handleChange = useCallback(
@@ -51,16 +56,13 @@ export default function FilterRange({
 
   return (
     <div css={styles.root}>
-      {showHeader && (
-        <div css={styles.header}>
-          <h2 css={styles.title}>{header?.title}</h2>
-          {header?.infoLink && (
-            <p css={[styles.infoLink, !isLarge && styles.infoLinkTitle]}>
-              {header.infoLink.label}
-            </p>
-          )}
-        </div>
-      )}
+      <FilterHeader
+        headerStyles={styles.header}
+        header={header}
+        title={<h2 css={styles.title}>{header?.title}</h2>}
+        isLarge={isLarge}
+        openStaticModal={openStaticModal}
+      />
       <Range
         formatLabel={mapUnitToLabelFormatter[unit]}
         getAriaText={mapUnitToAriaFormatter[unit]}

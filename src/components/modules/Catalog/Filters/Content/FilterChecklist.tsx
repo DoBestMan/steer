@@ -15,6 +15,7 @@ import { hasActiveValue, strictEqualsValue } from '../Filters.utils';
 import { ChildProps } from '../Popup/FilterPopup.utils';
 import styles from './FilterChecklist.styles';
 import largeStyles from './FilterChecklistLarge.styles';
+import FilterHeader from './FilterHeader';
 
 interface GroupProps {
   filtersToApply: Record<string, string>;
@@ -90,13 +91,17 @@ export default function FilterChecklist({
   isLarge,
   isPreviewLoading,
   onChange,
+  openStaticModal,
   presentationStyle,
 }: SiteCatalogFilterList &
   Pick<
     ChildProps,
-    'isPreviewLoading' | 'isLarge' | 'onChange' | 'filtersToApply'
+    | 'isPreviewLoading'
+    | 'isLarge'
+    | 'onChange'
+    | 'filtersToApply'
+    | 'openStaticModal'
   >) {
-  const showHeader = ((isLarge && header?.infoLink) || !isLarge) && header;
   const { greaterThan } = useBreakpoints();
   const lgStyles =
     greaterThan.M &&
@@ -110,26 +115,23 @@ export default function FilterChecklist({
 
   return (
     <div css={styles.root}>
-      {showHeader && (
-        <div css={[styles.header, styles.labelContainer]}>
-          <h2 css={lgStyles.title}>{header?.title}</h2>
-          {header?.infoLink && (
-            <p css={[styles.infoLink, !isLarge && styles.infoLinkTitle]}>
-              {header.infoLink.label}
-            </p>
-          )}
-        </div>
-      )}
+      <FilterHeader
+        headerStyles={[styles.header, styles.labelContainer]}
+        header={header}
+        title={<h2 css={lgStyles.title}>{header?.title}</h2>}
+        isLarge={isLarge}
+        openStaticModal={openStaticModal}
+      />
       {filterGroups?.map((group: SiteCatalogFilterGroup, idx) => (
         <div css={lgStyles.group} key={idx}>
-          {group.header && (
-            <div css={styles.labelContainer}>
-              <h3 css={lgStyles.groupTitle}>{group.header.title}</h3>
-              {group.header.infoLink && (
-                <p css={styles.infoLink}>{group.header.infoLink.label}</p>
-              )}
-            </div>
-          )}
+          <FilterHeader
+            headerStyles={styles.labelContainer}
+            header={group.header}
+            title={<h3 css={lgStyles.groupTitle}>{group.header?.title}</h3>}
+            isGroupHeader
+            isLarge={isLarge}
+            openStaticModal={openStaticModal}
+          />
           {mapGroupTypeToInput[group.groupType]({
             group,
             handleChange,

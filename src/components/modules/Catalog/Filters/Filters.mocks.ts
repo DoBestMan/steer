@@ -25,13 +25,7 @@ export const warrantyFilter = {
   id: 'warranty',
   header: {
     title: 'Warranty',
-    infoLink: {
-      label: 'How to choose?',
-      siteStaticModal: {
-        contentId: 'TBD',
-        type: 'SiteStaticModal',
-      },
-    },
+    infoLink: null,
   },
   minValue: 0,
   maxValue: 70000,
@@ -140,13 +134,7 @@ export const filterChecklist = {
   presentationStyle: 'Normal',
   header: {
     title: 'Tire type',
-    infoLink: {
-      label: 'How to choose?',
-      siteStaticModal: {
-        contentId: 'TBD',
-        type: 'SiteStaticModal',
-      },
-    },
+    infoLink: null,
   },
   filterGroups: [
     {
@@ -182,13 +170,7 @@ export const filterChecklist = {
       groupType: 'Checklist',
       header: {
         title: 'Performance',
-        infoLink: {
-          label: "What's this?",
-          siteStaticModal: {
-            contentId: 'TBD',
-            type: 'SiteStaticModal',
-          },
-        },
+        infoLink: null,
       },
       items: [
         {
@@ -327,13 +309,7 @@ export const mockSiteCatalogFilters = [
     presentationStyle: 'Normal',
     header: {
       title: 'Brand',
-      infoLink: {
-        label: 'Learn more',
-        siteStaticModal: {
-          contentId: 'TBD',
-          type: 'SiteStaticModal',
-        },
-      },
+      infoLink: null,
     },
     filterGroups: [
       {
@@ -599,13 +575,7 @@ export const mockSiteCatalogFilters = [
         groupType: 'Checklist',
         header: {
           title: 'Range',
-          infoLink: {
-            label: "What's this?",
-            siteStaticModal: {
-              contentId: 'TBD',
-              type: 'SiteStaticModal',
-            },
-          },
+          infoLink: null,
         },
         items: [
           {
@@ -654,13 +624,7 @@ export const mockSiteCatalogFilters = [
         groupType: 'Checklist',
         header: {
           title: 'Index',
-          infoLink: {
-            label: "What's this?",
-            siteStaticModal: {
-              contentId: 'TBD',
-              type: 'SiteStaticModal',
-            },
-          },
+          infoLink: null,
         },
         items: [
           {

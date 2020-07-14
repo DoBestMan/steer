@@ -38,6 +38,7 @@ export function FilterContentChecklist() {
         isPreviewLoading={boolean('Loading', false)}
         filtersToApply={{}}
         onChange={onChange()}
+        openStaticModal={action('Open static modal')}
       />
     </>
   );
@@ -50,6 +51,7 @@ export function FilterContentRange() {
       isPreviewLoading={boolean('Loading', false)}
       filtersToApply={{}}
       onChange={onChange()}
+      openStaticModal={action('Open static modal')}
     />
   );
 }

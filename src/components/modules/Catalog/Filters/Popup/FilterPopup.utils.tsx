@@ -1,3 +1,4 @@
+import { ModalContextProps } from '~/context/Modal.context';
 import { SiteCatalogFilterList } from '~/data/models/SiteCatalogFilterList';
 import { SiteCatalogFilterRange } from '~/data/models/SiteCatalogFilterRange';
 
@@ -25,6 +26,7 @@ export interface ChildProps {
   isLarge?: boolean;
   isPreviewLoading: boolean;
   onChange: FiltersContextProps['createUpdateFilterGroup'];
+  openStaticModal: ModalContextProps['openStaticModal'];
 }
 
 /*
@@ -41,12 +43,14 @@ export const mapTypeToContent: Record<
     filtersToApply,
     isPreviewLoading,
     onChange,
+    openStaticModal,
   }: ChildProps) {
     return (
       <FilterChecklist
         {...(filter as SiteCatalogFilterList)}
         filtersToApply={filtersToApply}
         onChange={onChange}
+        openStaticModal={openStaticModal}
         isLarge={isLarge}
         isPreviewLoading={isPreviewLoading}
       />
@@ -58,11 +62,13 @@ export const mapTypeToContent: Record<
     isLarge,
     isPreviewLoading,
     onChange,
+    openStaticModal,
   }: ChildProps) {
     return (
       <FilterRange
         {...(filter as SiteCatalogFilterRange)}
         onChange={onChange}
+        openStaticModal={openStaticModal}
         isLarge={isLarge}
         isPreviewLoading={isPreviewLoading}
         filtersToApply={filtersToApply}
