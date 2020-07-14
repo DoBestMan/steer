@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import Rain from './all/Rain';
 import Snow from './all/Snow';
+import Storm from './all/Storm/Storm';
 import { WEATHERS } from './Weather.constants';
 import { styles } from './Weather.styles';
 import { Weathers } from './Weather.types';
@@ -53,6 +54,14 @@ function Weather({ weatherID, animate, ...rest }: Props) {
 
       {elementSize.width > 0 && weatherID === WEATHERS.RAINING && (
         <Rain
+          width={elementSize.width}
+          height={elementSize.height}
+          animate={animate}
+        />
+      )}
+
+      {elementSize.width > 0 && weatherID === WEATHERS.STORMING && (
+        <Storm
           width={elementSize.width}
           height={elementSize.height}
           animate={animate}

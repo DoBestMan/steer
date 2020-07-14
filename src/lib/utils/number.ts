@@ -24,3 +24,19 @@ export function getWidthFromMaxHeight(
 
   return maxHeight * ratio;
 }
+
+export function getRandomMinMax(min: number, max: number) {
+  return Math.random() * (max - min) + min;
+}
+
+export function mapNumberToRange(
+  mappedNumber: number,
+  inRange: [number, number],
+  outRange: [number, number],
+): number {
+  return (
+    ((mappedNumber - inRange[0]) * (outRange[1] - outRange[0])) /
+      (inRange[1] - inRange[0]) +
+    outRange[0]
+  );
+}
