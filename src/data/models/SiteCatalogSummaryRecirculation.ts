@@ -1,19 +1,18 @@
 import { SiteIcon } from './SiteIcon';
-import { SiteLink } from './SiteLink';
 
-interface RecirculationItem {
+export interface SiteRecirculationItem {
   description: string;
-  icon: SiteIcon;
+  icon?: SiteIcon;
   label: string;
-  link: SiteLink;
+  siteQueryParams: { [key: string]: string };
 }
 
 export interface SiteCatalogSummaryRecirculation {
-  items: RecirculationItem[];
+  items: SiteRecirculationItem[];
   more: {
     description: string;
     label: string;
-    link: SiteLink;
+    siteQueryParams: { [key: string]: string };
   };
   title: string;
 }

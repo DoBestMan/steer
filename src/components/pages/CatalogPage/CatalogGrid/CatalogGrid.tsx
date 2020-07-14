@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import { DATA_COMPONENT_LABEL } from '~/components/modules/Catalog/Header.constants';
 import HeaderContainer from '~/components/modules/Catalog/Header.container';
+import Recirculation from '~/components/modules/Catalog/Recirculation/Recirculation';
 import { useCatalogPageContext } from '~/context/CatalogPage.context';
 import { SiteCatalogFilters } from '~/data/models/SiteCatalogFilters';
 import {
@@ -35,7 +36,7 @@ function CatalogGrid({
   onPreviewFilters,
   previewFiltersData,
 }: Props) {
-  const { isLoading } = useCatalogPageContext();
+  const { isLoading, handleUpdateResults } = useCatalogPageContext();
   const catalogGrid = useRef<HTMLDivElement | null>(null);
 
   // Uses a state instead of ref to avoid forwarding refs
@@ -114,14 +115,22 @@ function CatalogGrid({
         siteCatalogProducts={siteCatalogProducts}
       />
       {isGroupedProducts ? (
-        <CatalogProductGroups
-          isLoading={isLoading}
-          productGroupList={siteCatalogProducts.siteCatalogProductsResultList.filter(
-            (result): result is SiteCatalogProductGroupItem =>
-              result.type ===
-              SiteCatalogProductGroupItemEnum.SiteCatalogProductGroupItem,
+        <>
+          <CatalogProductGroups
+            isLoading={isLoading}
+            productGroupList={siteCatalogProducts.siteCatalogProductsResultList.filter(
+              (result): result is SiteCatalogProductGroupItem =>
+                result.type ===
+                SiteCatalogProductGroupItemEnum.SiteCatalogProductGroupItem,
+            )}
+          />
+          {siteCatalogSummary?.siteCatalogSummaryRecirculation && (
+            <Recirculation
+              handleUpdateResults={handleUpdateResults}
+              {...siteCatalogSummary.siteCatalogSummaryRecirculation}
+            />
           )}
-        />
+        </>
       ) : (
         <CatalogProductGrid
           pagination={siteCatalogProducts.listResultMetadata.pagination}

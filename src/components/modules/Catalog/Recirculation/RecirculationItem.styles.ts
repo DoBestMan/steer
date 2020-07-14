@@ -41,6 +41,8 @@ const styles: StylesMap = {
     display: 'flex',
     justifyContent: 'space-between',
     padding: `${SPACING.SIZE_20}px 0`,
+    textAlign: 'left',
+    width: '100%',
 
     [MQ.M]: {
       padding: `${SPACING.SIZE_30}px 0`,

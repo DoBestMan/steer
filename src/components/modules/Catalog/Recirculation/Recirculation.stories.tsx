@@ -1,3 +1,4 @@
+import { action } from '@storybook/addon-actions';
 import { text } from '@storybook/addon-knobs';
 
 import { default as RecirculationComponent } from './Recirculation';
@@ -14,6 +15,7 @@ export function Recirculation() {
       title={text('Title', recirculationData.title)}
       items={recirculationData.items}
       more={recirculationData.more}
+      handleUpdateResults={action('Clicked item')}
     />
   );
 }

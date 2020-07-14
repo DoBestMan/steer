@@ -1,27 +1,32 @@
 import Icon from '~/components/global/Icon/Icon';
-import BaseLink from '~/components/global/Link/BaseLink';
-import { SiteIcon } from '~/data/models/SiteIcon';
-import { SiteLink } from '~/data/models/SiteLink';
+import { SiteRecirculationItem } from '~/data/models/SiteCatalogSummaryRecirculation';
 
 import styles from './RecirculationItem.styles';
 
-export interface ItemProps {
-  description: string;
-  icon?: SiteIcon;
-  label: string;
-  link: SiteLink;
+interface Props {
+  handleUpdateResults: (filters: Record<string, string>) => void;
 }
 
-function RecirculationItem({ description, icon, label, link }: ItemProps) {
+function RecirculationItem({
+  description,
+  icon,
+  label,
+  siteQueryParams,
+  handleUpdateResults,
+}: Props & SiteRecirculationItem) {
+  function handleClick() {
+    handleUpdateResults(siteQueryParams);
+  }
+
   return (
     <li css={styles.item}>
-      <BaseLink css={styles.link} href={link.href} isExternal={link.isExternal}>
+      <button type="button" onClick={handleClick} css={styles.link}>
         <div>
           <h3 css={styles.title}>{label}</h3>
           <p css={styles.description}>{description}</p>
         </div>
         {icon && <Icon css={styles.icon} name={icon.svgId} />}
-      </BaseLink>
+      </button>
     </li>
   );
 }

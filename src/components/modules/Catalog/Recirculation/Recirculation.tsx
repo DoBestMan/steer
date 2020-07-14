@@ -5,11 +5,16 @@ import { SiteCatalogSummaryRecirculation } from '~/data/models/SiteCatalogSummar
 import styles from './Recirculation.styles';
 import RecirculationItem from './RecirculationItem';
 
+interface Props {
+  handleUpdateResults: (filters: Record<string, string>) => void;
+}
+
 function Recirculation({
   items,
   title,
   more,
-}: SiteCatalogSummaryRecirculation) {
+  handleUpdateResults,
+}: Props & SiteCatalogSummaryRecirculation) {
   return (
     <Grid>
       <GridItem gridColumnS="2/5" gridColumnM="2/5" gridColumnL="2/6">
@@ -18,9 +23,16 @@ function Recirculation({
       <GridItem gridColumnM="5/8" gridColumnL="7/14">
         <ul>
           {items.map((item) => (
-            <RecirculationItem key={item.label} {...item} />
+            <RecirculationItem
+              handleUpdateResults={handleUpdateResults}
+              key={item.label}
+              {...item}
+            />
           ))}
-          <RecirculationItem {...more} />
+          <RecirculationItem
+            handleUpdateResults={handleUpdateResults}
+            {...more}
+          />
         </ul>
       </GridItem>
     </Grid>

@@ -13,27 +13,24 @@ export const recirculationData: SiteCatalogSummaryRecirculation = {
         type: ICON_IMAGE_TYPE.ICON,
         svgId: ICONS.TIRETYPE_WINTER,
       } as SiteIcon,
-      link: {
-        href: '/',
-        isExternal: false,
+      siteQueryParams: {
+        type: 'winter',
       },
     },
     {
       label: 'Tires with long warranty',
       description: 'Very common ask for drivers.',
       icon: { type: ICON_IMAGE_TYPE.ICON, svgId: ICONS.WARRANTY } as SiteIcon,
-      link: {
-        href: '/',
-        isExternal: false,
+      siteQueryParams: {
+        type: 'winter',
       },
     },
     {
       label: 'Best rated tires',
       description: 'Based on 20,438 ratings',
       icon: { type: ICON_IMAGE_TYPE.ICON, svgId: ICONS.STAR } as SiteIcon,
-      link: {
-        href: '/',
-        isExternal: false,
+      siteQueryParams: {
+        type: 'winter',
       },
     },
     {
@@ -43,15 +40,16 @@ export const recirculationData: SiteCatalogSummaryRecirculation = {
         type: ICON_IMAGE_TYPE.ICON,
         svgId: ICONS.FUEL_ECONOMY,
       } as SiteIcon,
-      link: {
-        href: '#',
-        isExternal: false,
+      siteQueryParams: {
+        type: 'winter',
       },
     },
   ],
   more: {
     label: 'See all 253 tires',
     description: 'All of our catalog',
-    link: { href: '/', isExternal: false },
+    siteQueryParams: {
+      skipGroups: 'true',
+    },
   },
 };

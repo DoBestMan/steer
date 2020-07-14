@@ -23,18 +23,16 @@ export const brands: SiteCatalogSummary = {
           type: ICON_IMAGE_TYPE.ICON,
           svgId: 'tiretype-winter',
         },
-        link: {
-          href: '/current-url-here?type=winterTires',
-          isExternal: false,
+        siteQueryParams: {
+          type: 'winter',
         },
       },
     ],
     more: {
       label: 'See all 253 tires',
       description: 'All of our catalog',
-      link: {
-        href: '/current-url-here?seeAll=true',
-        isExternal: false,
+      siteQueryParams: {
+        skipGroups: 'true',
       },
     },
   },
@@ -146,18 +144,16 @@ export const vehiclesNoOeWithSize: SiteCatalogSummary = {
           type: ICON_IMAGE_TYPE.ICON,
           svgId: 'tiretype-winter',
         },
-        link: {
-          href: '/current-url-here?type=winterTires',
-          isExternal: false,
+        siteQueryParams: {
+          type: 'winter',
         },
       },
     ],
     more: {
       label: 'See all 253 tires',
       description: 'All of our catalog',
-      link: {
-        href: '/current-url-here?seeAll=true',
-        isExternal: false,
+      siteQueryParams: {
+        skipGroups: 'true',
       },
     },
   },
