@@ -114,6 +114,27 @@ describe('Filters.utils', () => {
       expect(initialState).toEqual(mockInitialState);
     });
 
+    it('does not append identical filters', () => {
+      const mockFilterList = ([
+        {
+          type: SiteCatalogFilterToggleTypeEnum.SiteCatalogFilterToggle,
+          item: {
+            state: 'Selected',
+            value: {
+              category: 'allSeason',
+            },
+          },
+        },
+      ] as unknown) as SiteCatalogFilter[];
+
+      const { initialState } = getInitialFiltersState(
+        mockFilterList,
+        filterSort,
+      );
+
+      expect(initialState.category).toEqual('allSeason');
+    });
+
     it('checks the status of toggle filters to determine if the popular filters button is active', () => {
       const {
         isPopularActive: mockPopularActiveFalse,

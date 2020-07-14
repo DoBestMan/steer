@@ -19,7 +19,7 @@ export default function FilterSort({
   } = useFiltersContext();
   function updateValue(value: Record<string, string>) {
     return () => {
-      createToggleFilterHandler({ value, overwrite: true })();
+      createToggleFilterHandler(value)();
       clearSelectingFilter();
     };
   }

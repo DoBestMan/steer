@@ -109,7 +109,7 @@ describe('useFiltersContextSetup', () => {
     expect(result.current.filtersToApply).toHaveProperty('foo', 'baz');
   });
 
-  test('unchecking the last item in a group removes it from state', () => {
+  test('unchecking the last item in a group sets empty value in state', () => {
     const { result } = renderFiltersContextSetupHook();
 
     act(() =>
@@ -127,18 +127,14 @@ describe('useFiltersContextSetup', () => {
       })(),
     );
 
-    expect(result.current.filtersToApply).not.toHaveProperty('foo');
+    expect(result.current.filtersToApply.foo).toEqual('');
   });
 
   test('immediately revalidates when toggling a filter', async () => {
     const { result } = renderFiltersContextSetupHook();
 
     await act(async () =>
-      result.current.createToggleFilterHandler({
-        value: {
-          foo: 'bar',
-        },
-      })(),
+      result.current.createToggleFilterHandler({ foo: 'bar' })(),
     );
 
     expect(result.current.filtersToApply).toHaveProperty('foo', 'bar');
@@ -146,47 +142,24 @@ describe('useFiltersContextSetup', () => {
     expect(handleUpdateFilters).toHaveBeenCalledTimes(1);
   });
 
-  test('removes toggle filter from state if overwrite is false', async () => {
+  test('toggle filter', async () => {
     const { result } = renderFiltersContextSetupHook();
 
     await act(async () =>
       result.current.createToggleFilterHandler({
-        value: {
-          foo: 'bar',
-        },
-      })(),
-    );
-    await act(async () =>
-      result.current.createToggleFilterHandler({
-        value: {
-          foo: 'baz',
-        },
+        foo: 'true',
       })(),
     );
 
-    expect(result.current.filtersToApply).not.toHaveProperty('foo');
-  });
-
-  test('overwriting toggle filter', async () => {
-    const { result } = renderFiltersContextSetupHook();
+    expect(result.current.filtersToApply).toHaveProperty('foo', 'true');
 
     await act(async () =>
       result.current.createToggleFilterHandler({
-        value: {
-          foo: 'bar',
-        },
-      })(),
-    );
-    await act(async () =>
-      result.current.createToggleFilterHandler({
-        value: {
-          foo: 'baz',
-        },
-        overwrite: true,
+        foo: 'false',
       })(),
     );
 
-    expect(result.current.filtersToApply).toHaveProperty('foo', 'baz');
+    expect(result.current.filtersToApply).toHaveProperty('foo', 'false');
   });
 
   test('clearing filter dropdown', () => {

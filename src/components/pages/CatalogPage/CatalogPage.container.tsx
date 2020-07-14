@@ -7,7 +7,7 @@ import { SiteCatalogSummary } from '~/data/models/SiteCatalogSummary';
 import { useApiDataWithDefault } from '~/hooks/useApiDataWithDefault';
 import { eventEmitters } from '~/lib/events/emitters';
 import { fetch } from '~/lib/fetch';
-import { getStringifiedParams } from '~/lib/utils/routes';
+import { getParam, getStringifiedParams } from '~/lib/utils/routes';
 
 import CatalogPage from './CatalogPage';
 
@@ -33,7 +33,7 @@ function CatalogPageContainer({
   endpoints,
   hasTopPicks = true,
   serverData,
-  pageParams,
+  pageParams = {},
 }: Props) {
   // TEMP: use route params for testing flows
   const { query, push, pathname, asPath } = useRouter();
@@ -77,11 +77,15 @@ function CatalogPageContainer({
     async (filters: Record<string, string>) => {
       const route = asPath.split('?');
       const params: Record<string, string> = {};
-      const searchString = new URLSearchParams({
-        ...params,
-        ...filters,
-      }).toString();
 
+      Object.entries({ ...query, ...filters }).forEach(([k, v]) => {
+        const stringifiedVal = getParam(v);
+        if (!!stringifiedVal && !pageParams[k]) {
+          params[k] = stringifiedVal;
+        }
+      });
+
+      const searchString = new URLSearchParams(params).toString();
       push(`${pathname}?${searchString}`, `${route[0]}?${searchString}`, {
         shallow: true,
       });
@@ -89,7 +93,7 @@ function CatalogPageContainer({
       // revalidate with newly applied filters
       await revalidateProducts();
     },
-    [asPath, pathname, push, revalidateProducts],
+    [asPath, pathname, query, pageParams, push, revalidateProducts],
   );
 
   // preview data and handler for open filter dropdowns

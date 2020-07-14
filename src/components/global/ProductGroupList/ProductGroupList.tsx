@@ -4,16 +4,17 @@ import GridItem from '~/components/global/Grid/GridItem';
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import IconOrImage from '~/components/global/IconOrImage/IconOrImage';
-import BaseLink from '~/components/global/Link/BaseLink';
 import ProductListing from '~/components/global/ProductListing/ProductListing';
 import { SiteCatalogProductGroupItem } from '~/data/models/SiteCatalogProductGroupList';
 import { CSSStyles } from '~/lib/constants';
 
+import BaseLink from '../Link/BaseLink';
 import styles from './ProductGroupList.styles';
 
 interface ProductGroupListProps extends SiteCatalogProductGroupItem {
   headerCustomStyles?: CSSStyles;
   itemCustomStyle?: CSSStyles;
+  onClick?: (params: Record<string, string>) => void;
 }
 
 function ProductGroupList({
@@ -23,10 +24,14 @@ function ProductGroupList({
   icon,
   siteQueryParams,
   headerCustomStyles,
+  onClick,
   itemCustomStyle,
 }: ProductGroupListProps) {
-  const url =
-    siteQueryParams && `?${new URLSearchParams(siteQueryParams).toString()}`;
+  const isHeadingButton = onClick && siteQueryParams;
+  const HeadingEl = isHeadingButton ? 'button' : BaseLink;
+  function handleHeadingClick(filters: Record<string, string>) {
+    return () => onClick && onClick(filters);
+  }
 
   function Heading() {
     return (
@@ -46,11 +51,15 @@ function ProductGroupList({
       <Grid>
         <GridItem css={headerCustomStyles}>
           <h2 css={styles.title}>
-            {url ? (
-              <BaseLink css={styles.link} href={url}>
+            {siteQueryParams ? (
+              <HeadingEl
+                href={`?${new URLSearchParams(siteQueryParams).toString()}`}
+                onClick={handleHeadingClick(siteQueryParams)}
+                css={styles.link}
+              >
                 {<Heading />}
                 <Icon css={styles.linkIcon} name={ICONS.CHEVRON_RIGHT} />
-              </BaseLink>
+              </HeadingEl>
             ) : (
               <Heading />
             )}

@@ -101,7 +101,7 @@ export function getInitialFiltersState(
         group.items.forEach((item: SiteCatalogFilterItem) => {
           if (item.state === SiteCatalogFilterItemStateEnum.Selected) {
             Object.keys(item.value).forEach((key) => {
-              if (initialState[key]) {
+              if (initialState[key] && initialState[key] !== item.value[key]) {
                 initialState[key] = initialState[key] + ',' + item.value[key];
                 return;
               }

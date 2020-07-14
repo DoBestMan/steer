@@ -1,3 +1,4 @@
+import { action } from '@storybook/addon-actions';
 import { boolean, text } from '@storybook/addon-knobs';
 
 import { SiteCatalogProductGroupItemEnum } from '~/data/models/SiteCatalogProductGroupList';
@@ -70,9 +71,12 @@ export function ProductGroupListWithKnobs() {
   const isLinked = boolean('Is linked', false);
   const hasIcon = boolean('Has icon', false);
   const productList = Array(10).fill(mockProduct);
-
+  function onClick() {
+    return () => action('Heading click');
+  }
   return (
     <ProductGroupList
+      onClick={onClick}
       name={text('Title', 'Most popular in Brooklyn')}
       icon={hasIcon ? mockLogo : null}
       description={text(
@@ -92,9 +96,12 @@ export function ProductGroupListStartAtPrices() {
     ...mockProduct,
     size: null,
   });
-
+  function onClick() {
+    return () => action('Heading click');
+  }
   return (
     <ProductGroupList
+      onClick={onClick}
       name="Most popular in Brooklyn"
       description="Top choices from Civic drivers near you."
       productList={productList}

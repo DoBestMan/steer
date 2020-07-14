@@ -39,6 +39,7 @@ const styles: StylesMap = {
     width: 150,
   },
   link: {
+    alignItems: 'center',
     display: 'inline-flex',
   },
   linkIcon: {

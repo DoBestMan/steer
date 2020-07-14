@@ -52,7 +52,7 @@ export interface FiltersContextProps {
   clearSelectingFilter: () => void;
   createOpenFilterHandler: (id: number | string) => (e?: MouseEvent) => void;
   createResetFiltersHandler: (filter: CatalogFilterTypes) => () => void;
-  createToggleFilterHandler: (args: UpdateFilterArgs) => () => void;
+  createToggleFilterHandler: (value: Record<string, string>) => () => void;
   createUpdateFilterGroup: (args: UpdateFilterArgs) => () => void;
   filtersToApply: Record<string, string>;
   isPopularActive: boolean;
@@ -175,20 +175,10 @@ export function useFiltersContextSetup({
       // Apply reset filters automatically?
       // onApplyFilters(newState);
     },
-    createToggleFilterHandler: ({
-      value,
-      overwrite = false,
-    }: UpdateFilterArgs) => () => {
-      let newState = { ...filtersToApply };
+    createToggleFilterHandler: (value: Record<string, string>) => () => {
+      const newState = { ...filtersToApply };
       Object.keys(value).forEach((key) => {
-        if (overwrite || !newState[key]) {
-          newState[key] = value[key];
-          return;
-        }
-
-        const { [key]: _, ...rest } = newState;
-        newState = rest;
-        return;
+        newState[key] = value[key];
       });
       setFiltersToApply(newState);
       handleUpdateResults(newState);
@@ -196,7 +186,7 @@ export function useFiltersContextSetup({
     createUpdateFilterGroup: useCallback(
       ({ value, overwrite = false }: UpdateFilterArgs) => () =>
         setFiltersToApply((prevState) => {
-          let newState = { ...prevState };
+          const newState = { ...prevState };
 
           Object.entries(value).forEach(([key, value]) => {
             if (overwrite) {
@@ -221,13 +211,6 @@ export function useFiltersContextSetup({
             const valArr = newState[key].split(',');
             const filteredVals = valArr.filter((v) => v !== value);
             const newVal = filteredVals.join(',');
-
-            // value is empty, remove key from state altogether
-            if (!newVal) {
-              const { [key]: _, ...rest } = newState;
-              newState = rest;
-              return;
-            }
 
             // set newly modified value
             newState[key] = newVal;
