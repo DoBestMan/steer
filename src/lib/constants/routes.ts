@@ -20,6 +20,7 @@ export enum ROUTES {
   TIRE_REVIEWS = 'tireReviews',
   TYPE_REVIEWS = 'typeReviews',
   VEHICLES_CATEGORY = 'vehiclesCategory',
+  WRITE_REVIEW = 'writeReview',
 }
 
 // Order is important here
@@ -41,6 +42,7 @@ export const ROUTE_MAP: Record<ROUTES, string> = {
   [ROUTES.ORDER_TRACKING_RESULT]: '/track-your-order/result',
   [ROUTES.TIRE_CATEGORY]: '/tire-sizes/[size]',
   [ROUTES.PRODUCT_DETAIL_PLA]: '/paid',
+  [ROUTES.WRITE_REVIEW]: '/brands/[brand]/[productLine]/write-a-review',
 };
 
 // null for dynamic labels
