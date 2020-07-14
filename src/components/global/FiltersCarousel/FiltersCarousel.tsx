@@ -1,8 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
-import { ReactIdSwiperChildren } from 'react-id-swiper';
+import { useEffect, useState } from 'react';
+import { ReactIdSwiperChildren, SwiperInstance } from 'react-id-swiper';
 
 import Carousel from '~/components/global/Carousel/CarouselDynamic';
-import { useBreakpoints } from '~/hooks/useBreakpoints';
 
 import styles from './FiltersCarousel.styles';
 
@@ -13,30 +12,36 @@ interface Props {
 }
 
 function FiltersCarousel({ activeFilter, children, label }: Props) {
-  const [shouldUpdate, setShouldUpdate] = useState(false);
-  const prevActiveFilter = useRef(activeFilter);
-  const { greaterThan } = useBreakpoints();
+  const [swiper, setSwiper] = useState<SwiperInstance>(null);
   useEffect(() => {
-    if (activeFilter !== prevActiveFilter.current && greaterThan.M) {
-      setShouldUpdate(true);
+    if (activeFilter === null) {
+      return;
     }
-    setShouldUpdate(false);
-  }, [activeFilter, greaterThan]);
+
+    function stopScroll(e: Event) {
+      e.stopPropagation();
+    }
+    if (!swiper.wrapperEl) {
+      return;
+    }
+
+    swiper.wrapperEl.addEventListener('wheel', stopScroll);
+    return () => {
+      swiper.wrapperEl.removeEventListener('wheel', stopScroll);
+    };
+  }, [swiper, activeFilter]);
+
   return (
     <>
       <p css={styles.label}>{label}</p>
       <div
-        css={[
-          styles.container,
-          // `disableEvents` used on buttons elsewhere
-          activeFilter !== null && styles.disableEvents,
-        ]}
+        css={[styles.container, activeFilter !== null && styles.disableEvents]}
       >
         <Carousel
+          getSwiper={setSwiper}
+          wrapperClass="filters-carousel"
           slideClass="dropdown-button"
-          shouldSwiperUpdate={shouldUpdate}
-          rebuildOnUpdate // needed to disable scroll when dropdown is open
-          freeScroll={!activeFilter}
+          freeScroll
         >
           {children}
         </Carousel>

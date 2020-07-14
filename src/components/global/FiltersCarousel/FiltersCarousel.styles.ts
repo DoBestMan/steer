@@ -13,6 +13,9 @@ const styles: StylesMap = {
     '.dropdown-button': {
       transitionProperty: 'transform',
     },
+    '.filters-carousel': {
+      display: 'flex',
+    },
     margin: `0 ${-SPACING.SIZE_20}px`,
     [MQ.M]: {
       margin: `0 ${-SPACING.SIZE_40}px`,
