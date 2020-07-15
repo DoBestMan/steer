@@ -181,12 +181,14 @@ export function DataMomentMessage({
 }
 
 interface NoResultsMessageProps {
+  customerServiceEnabled?: boolean;
   customerServiceNumber: { display: string; value: string };
   onSearchBy?(opt: string): void;
   siteCatalogSummaryPrompt: SiteCatalogSummaryPrompt | null;
 }
 
 export function NoResultsMessage({
+  customerServiceEnabled,
   customerServiceNumber,
   siteCatalogSummaryPrompt,
 }: NoResultsMessageProps) {
@@ -225,17 +227,21 @@ export function NoResultsMessage({
             {siteCatalogSummaryPrompt.title}
           </Markdown>
           <dl css={styles.noResultsSection}>
-            <dt>{ui('catalog.summary.noResultsContactLabel')}</dt>
-            <dd>
-              {ui('catalog.summary.noResultsContactDesc')}
-              <BaseLink
-                href={`tel:${customerServiceNumber.value}`}
-                css={styles.noResultsLink}
-                isExternal
-              >
-                {customerServiceNumber.display}
-              </BaseLink>
-            </dd>
+            {customerServiceEnabled && (
+              <>
+                <dt>{ui('catalog.summary.noResultsContactLabel')}</dt>
+                <dd>
+                  {ui('catalog.summary.noResultsContactDesc')}
+                  <BaseLink
+                    href={`tel:${customerServiceNumber.value}`}
+                    css={styles.noResultsLink}
+                    isExternal
+                  >
+                    {customerServiceNumber.display}
+                  </BaseLink>
+                </dd>
+              </>
+            )}
             <dt>{ui('catalog.summary.noResultsNewSearchLabel')}</dt>
             <dd>
               <ul>
@@ -264,12 +270,14 @@ const mapMessageToStage = {
 };
 
 interface CatalogMessageProps {
+  customerServiceEnabled?: boolean;
   customerServiceNumber: { display: string; value: string };
   exploreMore: () => void;
 }
 
 function CatalogMessage({
   customerServiceNumber,
+  customerServiceEnabled,
   exploreMore,
 }: CatalogMessageProps) {
   const {
@@ -301,6 +309,7 @@ function CatalogMessage({
               key={contentStage}
               {...siteCatalogSummary}
               customerServiceNumber={customerServiceNumber}
+              customerServiceEnabled={customerServiceEnabled}
               setStage={setStage}
               // used only by top picks
               exploreMore={exploreMore}

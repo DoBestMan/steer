@@ -28,7 +28,10 @@ function CatalogSummary({ exploreMore }: Props) {
     siteCatalogSummary,
     stage,
   } = useCatalogSummaryContext();
-  const { customerServiceNumber } = useSiteGlobalsContext();
+  const {
+    customerServiceNumber,
+    customerServiceEnabled,
+  } = useSiteGlobalsContext();
 
   const { bk } = useBreakpoints();
 
@@ -75,6 +78,7 @@ function CatalogSummary({ exploreMore }: Props) {
       <Content data-component="Content" stage={contentStage}>
         <CatalogMessage
           customerServiceNumber={customerServiceNumber}
+          customerServiceEnabled={customerServiceEnabled}
           data-component="MessageContainer"
           exploreMore={exploreMore}
         />
