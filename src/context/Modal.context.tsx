@@ -1,7 +1,11 @@
 import { ReactNode, useState } from 'react';
 
-import { ModalContentProps } from '~/components/global/ContentModal/ContentModal';
-import ContentModalContainer from '~/components/global/ContentModal/ContentModal.container';
+import ModalContainer from '~/components/global/Modal/Modal.container';
+import {
+  ContentModalProps,
+  ModalData,
+} from '~/components/global/Modal/Modal.types';
+import { MODAL_DATA_TYPES } from '~/lib/constants';
 import STATIC_MODALS from '~/lib/constants/staticModals';
 import { createContext } from '~/lib/utils/context';
 
@@ -13,15 +17,19 @@ import { createContext } from '~/lib/utils/context';
 
   Only one such modal can be open at a time.
 
+  Modals in this system can use one of two components:
+  - ContentModal - Simple structure used for Static and Dynamic
+  - HowToModal - More sophisticated structure for some instructional Static modals
+
   Note: The app contains some other uses of React Modal
   that are separate from this system because of their added complexity.
 */
 
 export interface ModalContextProps {
   closeModal: () => void;
-  currentContentModalData: ModalContentProps | null;
+  currentModalData: ModalData | null;
   isModalOpen: boolean;
-  openDynamicModal: (data: ModalContentProps) => void;
+  openDynamicModal: (data: ContentModalProps) => void;
   openStaticModal: (id: string) => void;
   resetModal: () => void;
 }
@@ -29,21 +37,29 @@ export interface ModalContextProps {
 const ModalContext = createContext<ModalContextProps>();
 
 export function useModalContextSetup() {
-  const [currentContentModalData, setCurrentContentModalData] = useState<
-    ModalContextProps['currentContentModalData']
+  const [currentModalData, setCurrentModalData] = useState<
+    ModalContextProps['currentModalData']
   >(null);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Update current modal data and set status to open
-  function openModal(data: ModalContentProps) {
-    setCurrentContentModalData(data);
+  function openModal(modalData: ModalData) {
+    setCurrentModalData(modalData);
     setIsModalOpen(true);
   }
 
   // Fetch modal content from ID and open it
   function openStaticModal(modalId: string) {
     openModal(STATIC_MODALS[modalId]);
+  }
+
+  // Open a Content modal with dynamic content from the API
+  function openDynamicModal(props: ContentModalProps) {
+    openModal({
+      props,
+      type: MODAL_DATA_TYPES.CONTENT,
+    });
   }
 
   // Set modal to closed
@@ -55,13 +71,13 @@ export function useModalContextSetup() {
   // (Called after close,
   // so data is still visible during closing transition)
   function resetModal() {
-    setCurrentContentModalData(null);
+    setCurrentModalData(null);
   }
   return {
     closeModal,
-    currentContentModalData,
+    currentModalData,
     isModalOpen,
-    openDynamicModal: openModal,
+    openDynamicModal,
     openStaticModal,
     resetModal,
   };
@@ -72,7 +88,7 @@ export function ModalContextProvider({ children }: { children: ReactNode }) {
   return (
     <ModalContext.Provider value={value}>
       {children}
-      <ContentModalContainer />
+      <ModalContainer />
     </ModalContext.Provider>
   );
 }

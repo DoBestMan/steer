@@ -214,7 +214,7 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
       router,
     }),
     stickyBar: mapDataToStickyBar({ siteProduct }),
-    technicalSpecs: mapDataToTechnicalSpecs({ siteProduct, globals, router }),
+    technicalSpecs: mapDataToTechnicalSpecs({ siteProduct, router }),
     technicalSpecsAnchor: CONSTANTS.TECH_SPECS_ANCHOR,
   };
 }

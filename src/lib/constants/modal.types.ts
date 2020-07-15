@@ -14,3 +14,8 @@ export enum MODAL_ANIMATION {
   SLIDE_LEFT = 'SLIDE_LEFT',
   SLIDE_UP = 'SLIDE_UP',
 }
+
+export enum MODAL_DATA_TYPES {
+  CONTENT = 'CONTENT',
+  HOW_TO = 'HOW_TO',
+}

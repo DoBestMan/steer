@@ -6,28 +6,18 @@ import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { MODAL_THEME, THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
-import styles from './AdditionalInfoModal.styles';
+import styles from './HowToModal.styles';
+import { HowToModalProps } from './Modal.types';
 
-type Step = JSX.Element | string;
-
-export interface AdditionalInfoModalContainerProps {
-  alternateSearch: { copy: string; title: string };
-  eyebrow: string;
-  imageAlt: string;
-  imageSrc: string;
-  isOpen: boolean;
-  modalLabel: string;
-  onClose: () => void;
-  steps: Step[];
-  title: string;
-}
-
-interface Props extends AdditionalInfoModalContainerProps {
+interface Props extends HowToModalProps {
   customerServiceNumber: { display: string; value: string };
   isCustomerServiceEnabled: boolean;
+  isOpen: boolean;
+  onAfterClose: () => void;
+  onClose: () => void;
 }
 
-function AdditionalInfoModal({
+function HowToModal({
   alternateSearch,
   customerServiceNumber,
   eyebrow,
@@ -37,6 +27,7 @@ function AdditionalInfoModal({
   isOpen,
   modalLabel,
   onClose,
+  onAfterClose,
   steps,
   title,
 }: Props) {
@@ -52,6 +43,7 @@ function AdditionalInfoModal({
       theme={MODAL_THEME.DARK}
       isFullscreen={lessThan.L}
       onClose={onClose}
+      onAfterClose={onAfterClose}
       isOpen={isOpen}
     >
       <div css={styles.container}>
@@ -92,4 +84,4 @@ function AdditionalInfoModal({
   );
 }
 
-export default AdditionalInfoModal;
+export default HowToModal;

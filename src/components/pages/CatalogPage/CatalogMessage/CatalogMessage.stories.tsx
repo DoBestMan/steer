@@ -51,6 +51,7 @@ export function CatalogDataMomentNoOeMessage() {
     <CatalogMessageContainer>
       <DataMomentMessage
         siteCatalogSummaryPrompt={vehiclesNoOeWithSize.siteCatalogSummaryPrompt}
+        openStaticModal={action('Open modal')}
       />
     </CatalogMessageContainer>
   );
@@ -63,6 +64,7 @@ export function CatalogDataMomentDisambiguationMessage() {
         siteCatalogSummaryPrompt={
           vehiclesDisambiguation.siteCatalogSummaryPrompt
         }
+        openStaticModal={action('Open modal')}
       />
     </CatalogMessageContainer>
   );

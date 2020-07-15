@@ -2,6 +2,7 @@ import { renderHook } from '@testing-library/react-hooks';
 import { act } from 'react-test-renderer';
 
 import { SiteImageNullableTypeEnum } from '~/data/models/SiteImageNullable';
+import { MODAL_DATA_TYPES } from '~/lib/constants';
 import STATIC_MODALS, { STATIC_MODAL_IDS } from '~/lib/constants/staticModals';
 
 import { useModalContextSetup } from './Modal.context';
@@ -12,7 +13,7 @@ describe('useModalContextSetup', () => {
 
     expect(result.current).toEqual(
       expect.objectContaining({
-        currentContentModalData: null,
+        currentModalData: null,
         isModalOpen: false,
       }),
     );
@@ -52,7 +53,10 @@ describe('useModalContextSetup', () => {
     // it opens modal with dynamic content
     expect(result.current).toEqual(
       expect.objectContaining({
-        currentContentModalData: testModal,
+        currentModalData: {
+          props: testModal,
+          type: MODAL_DATA_TYPES.CONTENT,
+        },
         isModalOpen: true,
       }),
     );
@@ -64,7 +68,10 @@ describe('useModalContextSetup', () => {
     // it closes modal but keeps content stored
     expect(result.current).toEqual(
       expect.objectContaining({
-        currentContentModalData: testModal,
+        currentModalData: {
+          props: testModal,
+          type: MODAL_DATA_TYPES.CONTENT,
+        },
         isModalOpen: false,
       }),
     );
@@ -76,7 +83,7 @@ describe('useModalContextSetup', () => {
     // it resets modal contnet
     expect(result.current).toEqual(
       expect.objectContaining({
-        currentContentModalData: null,
+        currentModalData: null,
         isModalOpen: false,
       }),
     );
@@ -93,7 +100,7 @@ describe('useModalContextSetup', () => {
 
     expect(result.current).toEqual(
       expect.objectContaining({
-        currentContentModalData:
+        currentModalData:
           STATIC_MODALS[STATIC_MODAL_IDS.GLOBAL_BEST_PRICE_GUARANTEE],
         isModalOpen: true,
       }),

@@ -13,6 +13,7 @@ import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
+import { useModalContext } from '~/context/Modal.context';
 import { SiteSearchResultGroup } from '~/data/models/SiteSearchResultGroup';
 import { SiteSearchResultImageItem } from '~/data/models/SiteSearchResultImageItem';
 import { SiteSearchResultTextItem } from '~/data/models/SiteSearchResultTextItem';
@@ -20,13 +21,11 @@ import { ARIA_LIVE, KEYCODES } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
 
-import AdditionalInfoModals from './AdditionalInfoModals';
 import CloseSearchButton from './CloseSearchButton';
 import { useAutocompleteSelectedItem } from './Search.hooks';
 import {
   SearchActionType,
   SearchInputEnum,
-  SearchModalEnum,
   SearchResult,
   SearchResultEnum,
   SearchStateCopy,
@@ -66,10 +65,8 @@ export interface Props {
 
 function SearchAutocomplete({
   activeInputType,
-  customerServiceNumber,
   focusOnMount = false,
   inputValue = CONSTANTS.DEFAULT_VALUE,
-  isCustomerServiceEnabled,
   isLoadingResults,
   noExactMatch,
   onCancelSelection,
@@ -84,7 +81,6 @@ function SearchAutocomplete({
   secondaryQueryText,
 }: Props) {
   const [shouldShowListbox, setShouldShowListbox] = useState(false);
-  const [activeModal, setActiveModal] = useState<SearchModalEnum | null>(null);
   const primaryInput = useRef<HTMLInputElement>(null);
   const secondaryInput = useRef<HTMLInputElement>(null);
   const {
@@ -93,6 +89,7 @@ function SearchAutocomplete({
     selectedItemIndex,
     setSelectedItemIndex,
   } = useAutocompleteSelectedItem(results);
+  const { openStaticModal } = useModalContext();
 
   const isInputEmpty = queryText.length < 1;
   const hasResults = results.length > 0;
@@ -180,8 +177,8 @@ function SearchAutocomplete({
     onToggleRearTire(true);
   };
 
-  const handleSetActiveModal = (modalType: SearchModalEnum | null) => () => {
-    setActiveModal(modalType);
+  const handleSetActiveModal = (modalId: string) => () => {
+    openStaticModal(modalId);
   };
 
   useEffect(() => {
@@ -421,12 +418,6 @@ function SearchAutocomplete({
           }}
         </Transition>
       </div>
-      <AdditionalInfoModals
-        activeModal={activeModal}
-        customerServiceNumber={customerServiceNumber}
-        isCustomerServiceEnabled={isCustomerServiceEnabled}
-        onClose={handleSetActiveModal(null)}
-      />
     </div>
   );
 }

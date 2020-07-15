@@ -12,9 +12,11 @@ import Loading from '~/components/global/Loading/Loading';
 import Markdown from '~/components/global/Markdown/Markdown';
 import TopPicks from '~/components/pages/CatalogPage/TopPicks/TopPicks.container';
 import { useCatalogSummaryContext } from '~/context/CatalogSummary.context';
+import { useModalContext } from '~/context/Modal.context';
 import { SiteCatalogSummaryBuildIn } from '~/data/models/SiteCatalogSummaryBuildIn';
 import { SiteCatalogSummaryPrompt } from '~/data/models/SiteCatalogSummaryPrompt';
 import { LINK_TYPES } from '~/lib/constants';
+import { isValidStaticModal } from '~/lib/utils/modal';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import { STAGES } from '../CatalogPage.constants';
@@ -105,6 +107,7 @@ export function BuildInMessage({
 }
 
 interface DataMomentMessageProps {
+  openStaticModal: (modalId: string) => void;
   setStage?(stage: STAGES): void;
   siteCatalogSummaryPrompt: SiteCatalogSummaryPrompt | null;
 }
@@ -112,8 +115,18 @@ interface DataMomentMessageProps {
 export function DataMomentMessage({
   setStage,
   siteCatalogSummaryPrompt,
+  openStaticModal,
 }: DataMomentMessageProps) {
   const { message } = useTheme();
+
+  const id =
+    siteCatalogSummaryPrompt && siteCatalogSummaryPrompt.infoLink?.contentId;
+  const isValid = id && isValidStaticModal(id);
+  function openModal() {
+    if (id) {
+      openStaticModal(id);
+    }
+  }
 
   return (
     siteCatalogSummaryPrompt && (
@@ -164,13 +177,8 @@ export function DataMomentMessage({
               })}
             </div>
           )}
-          {siteCatalogSummaryPrompt.infoLink && (
-            <button
-              css={styles.dataMomentHelp}
-              onClick={function () {
-                // TODO: Handle "Not sure?" click
-              }}
-            >
+          {siteCatalogSummaryPrompt.infoLink && isValid && (
+            <button css={styles.dataMomentHelp} onClick={openModal}>
               {siteCatalogSummaryPrompt.infoLink.label}
             </button>
           )}
@@ -288,6 +296,7 @@ function CatalogMessage({
     siteCatalogSummary,
     stage,
   } = useCatalogSummaryContext();
+  const { openStaticModal } = useModalContext();
 
   const MessageComponent = mapMessageToStage[contentStage];
 
@@ -313,6 +322,8 @@ function CatalogMessage({
               setStage={setStage}
               // used only by top picks
               exploreMore={exploreMore}
+              // used by DataMomentMessage
+              openStaticModal={openStaticModal}
             />
           )}
         </MessageContainer>

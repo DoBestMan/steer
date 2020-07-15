@@ -1,14 +1,13 @@
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 
 import Link from '~/components/global/Link/Link';
 import TitleRadio from '~/components/global/Radio/TitleRadio';
-import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
+import { useModalContext } from '~/context/Modal.context';
 import { SiteProductLineAvailableSizeItem } from '~/data/models/SiteProductLineAvailableSizeItem';
 import { THEME } from '~/lib/constants';
+import { STATIC_MODAL_IDS } from '~/lib/constants/staticModals';
 import { ui } from '~/lib/utils/ui-dictionary';
 
-import AdditionalInfoModal from '../../Search/AdditionalInfoModal/AdditionalInfoModal';
-import { TIRE_SEARCH_MODAL_DATA } from '../../Search/AdditionalInfoModal/AdditionalInfoModal.constants';
 import styles from './SizeFinder.styles';
 
 export interface SizeFinderProps {
@@ -24,22 +23,16 @@ export default function SizeFinder({
   vehicle,
   onChange,
 }: SizeFinderProps) {
-  const [isTireSizeModalOpen, setIsTireSizeModalOpen] = useState(false);
-  const {
-    customerServiceNumber,
-    customerServiceEnabled,
-  } = useSiteGlobalsContext();
-
-  const toggleTireSizeModal = useCallback(() => {
-    setIsTireSizeModalOpen(!isTireSizeModalOpen);
-  }, [isTireSizeModalOpen, setIsTireSizeModalOpen]);
-
   const handleChange = useCallback(
     (size: string) => {
       return onChange(size);
     },
     [onChange],
   );
+  const { openStaticModal } = useModalContext();
+  function openTireSizeModal() {
+    openStaticModal(STATIC_MODAL_IDS.HOW_TO_FIND_YOUR_SIZE);
+  }
 
   return (
     <>
@@ -49,7 +42,7 @@ export default function SizeFinder({
           <Link
             theme={THEME.LIGHT}
             as="button"
-            onClick={toggleTireSizeModal}
+            onClick={openTireSizeModal}
             css={styles.findMyTireSizeLabel}
           >
             {ui('pdp.productInfo.findMyTireSizeLabel')}
@@ -74,15 +67,6 @@ export default function SizeFinder({
           </div>
         ))}
       </div>
-      {isTireSizeModalOpen && (
-        <AdditionalInfoModal
-          customerServiceNumber={customerServiceNumber}
-          isCustomerServiceEnabled={customerServiceEnabled}
-          isOpen={isTireSizeModalOpen}
-          onClose={toggleTireSizeModal}
-          {...TIRE_SEARCH_MODAL_DATA}
-        />
-      )}
     </>
   );
 }

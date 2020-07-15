@@ -1,4 +1,4 @@
-import { globalsMock, routerMock, siteProductMock } from './ProductDetail.mock';
+import { routerMock, siteProductMock } from './ProductDetail.mock';
 import { mapDataToTechnicalSpecs } from './technicalSpecs';
 
 describe('pages/ProductDetails/mappers/techinicalSpecs', () => {
@@ -6,14 +6,9 @@ describe('pages/ProductDetails/mappers/techinicalSpecs', () => {
     expect(
       mapDataToTechnicalSpecs({
         siteProduct: siteProductMock,
-        globals: globalsMock,
         router: routerMock,
       }),
     ).toStrictEqual({
-      customerServiceNumber: {
-        display: '(888) 123 456',
-        value: '888123456',
-      },
       description:
         "The ContiProContact is Continental's Grand Touring All-Season tire originally developed for European sport coupes and sedans sold in North America, and is now available for a wide range of imported and domestic cars.",
       image: {
@@ -24,7 +19,6 @@ describe('pages/ProductDetails/mappers/techinicalSpecs', () => {
         type: 'SiteImage',
         width: 800,
       },
-      isCustomerServiceEnabled: true,
       sizes: [
         {
           label: "15''",

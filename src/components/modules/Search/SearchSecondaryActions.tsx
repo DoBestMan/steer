@@ -1,14 +1,15 @@
 import Link from '~/components/global/Link/Link';
 import { LINK_TYPES, THEME } from '~/lib/constants';
+import { STATIC_MODAL_IDS } from '~/lib/constants/staticModals';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
 
-import { SearchModalEnum, SearchStateEnum } from './Search.types';
+import { SearchStateEnum } from './Search.types';
 import styles from './SearchAutocomplete.styles';
 
 interface Props {
   onAddRearTire: () => void;
-  onSetActiveModal: (modalType: SearchModalEnum | null) => () => void;
+  onSetActiveModal: (modalId: string) => () => void;
   searchState: string;
 }
 
@@ -20,13 +21,14 @@ function SearchSecondaryActions({
   const isVehicleState = searchState === SearchStateEnum.VEHICLE;
   const isTireSizeState = searchState === SearchStateEnum.TIRE_SIZE;
   const isRearTireState = searchState === SearchStateEnum.REAR_TIRE;
+
   return (
     <div css={styles.secondaryActionWrapper}>
       {(isTireSizeState || isRearTireState) && (
         <Link
           as={LINK_TYPES.BUTTON}
           css={[typography.smallCopy, styles.secondaryActionButton]}
-          onClick={onSetActiveModal(SearchModalEnum.TIRE_SIZE)}
+          onClick={onSetActiveModal(STATIC_MODAL_IDS.HOW_TO_FIND_YOUR_SIZE)}
           theme={THEME.LIGHT}
         >
           {ui('search.notSure')}
@@ -46,7 +48,7 @@ function SearchSecondaryActions({
         <Link
           as={LINK_TYPES.BUTTON}
           css={[typography.smallCopy, styles.secondaryActionButton]}
-          onClick={onSetActiveModal(SearchModalEnum.VEHICLE_TRIM)}
+          onClick={onSetActiveModal(STATIC_MODAL_IDS.HOW_TO_FIND_VEHICLE_TRIM)}
           theme={THEME.LIGHT}
         >
           {ui('search.notSure')}

@@ -5,7 +5,6 @@ import {
   Size,
   TechnicalSpecsProps,
 } from '~/components/modules/PDP/TechnicalSpecs/TechnicalSpecs';
-import { SiteGlobals } from '~/data/models/SiteGlobals';
 import { SiteProduct } from '~/data/models/SiteProduct';
 import { PRODUCT_IMAGE_TYPES } from '~/lib/constants/productImage.types';
 import { interpolateRoute } from '~/lib/utils/routes';
@@ -19,10 +18,8 @@ export function mapDataToTechnicalSpecs({
     siteProductSpecs,
     siteProductLineAvailableSizeList,
   },
-  globals,
   router,
 }: {
-  globals: SiteGlobals;
   router: NextRouter;
   siteProduct: SiteProduct;
 }): TechnicalSpecsProps | null {
@@ -31,10 +28,6 @@ export function mapDataToTechnicalSpecs({
     query: { brand, productLine, ...queryParams },
   } = router;
   const baseLink = interpolateRoute(pathname, { brand, productLine });
-  const {
-    customerServiceNumber,
-    customerServiceEnabled: isCustomerServiceEnabled,
-  } = globals;
 
   const description = siteProductLine.overview || '';
 
@@ -88,10 +81,8 @@ export function mapDataToTechnicalSpecs({
   }
 
   return {
-    customerServiceNumber,
     description,
     image: treadOnlyImage && treadOnlyImage.image,
-    isCustomerServiceEnabled,
     sizes,
     specs,
   };

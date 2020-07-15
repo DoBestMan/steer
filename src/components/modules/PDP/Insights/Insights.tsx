@@ -1,8 +1,8 @@
 import { ReactNode } from 'react';
 
-import { ModalContentProps } from '~/components/global/ContentModal/ContentModal';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import { Icon as IconType } from '~/components/global/Icon/Icon.types';
+import { ContentModalProps } from '~/components/global/Modal/Modal.types';
 import { SiteProductInsightItem } from '~/data/models/SiteProductInsightItem';
 import { SiteProductInsightsRebate } from '~/data/models/SiteProductInsightsRebate';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
@@ -39,7 +39,7 @@ export interface InsightsProps {
 }
 
 interface Props extends InsightsProps {
-  openDynamicModal: (modalData: ModalContentProps) => void;
+  openDynamicModal: (modalData: ContentModalProps) => void;
 }
 
 function RenderItem({ children }: { children: ReactNode }) {

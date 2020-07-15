@@ -132,7 +132,10 @@ function ProductDetailContainer({ serverData }: ProductDetailData) {
             )}
             {technicalSpecs && (
               <div id={technicalSpecsAnchor}>
-                <TechnicalSpecs {...technicalSpecs} />
+                <TechnicalSpecs
+                  openStaticModal={openStaticModal}
+                  {...technicalSpecs}
+                />
               </div>
             )}
             {faq && (

@@ -1,5 +1,3 @@
-import { useCallback, useState } from 'react';
-
 import Accordion, {
   AccordionItem,
 } from '~/components/global/Accordion/Accordion';
@@ -8,12 +6,11 @@ import GridItem from '~/components/global/Grid/GridItem';
 import Image from '~/components/global/Image/Image';
 import Link from '~/components/global/Link/Link';
 import Tabs from '~/components/global/Tabs/Tabs';
-import AdditionalInfoModal from '~/components/modules/Search/AdditionalInfoModal/AdditionalInfoModal';
 import { SiteImage } from '~/data/models/SiteImage';
 import { THEME } from '~/lib/constants';
+import { STATIC_MODAL_IDS } from '~/lib/constants/staticModals';
 import { ui } from '~/lib/utils/ui-dictionary';
 
-import { TIRE_SEARCH_MODAL_DATA } from '../../Search/AdditionalInfoModal/AdditionalInfoModal.constants';
 import Description from './Description';
 import styles from './TechnicalSpecs.styles';
 import TireSizes from './TireSizes';
@@ -33,29 +30,28 @@ export interface Size {
   options: SizeOption[];
 }
 export interface TechnicalSpecsProps {
-  customerServiceNumber: { display: string; value: string };
   description: string;
   image?: SiteImage;
-  isCustomerServiceEnabled?: boolean;
   sizes: Size[];
   specs: AccordionItem[];
+}
+
+interface Props extends TechnicalSpecsProps {
+  openStaticModal: (modalId: string) => void;
 }
 
 const TECH_SPECS_ITEMS_TO_SHOW = 5;
 
 function TechnicalSpecs({
-  customerServiceNumber,
   description,
-  isCustomerServiceEnabled,
   image,
   specs,
   sizes,
-}: TechnicalSpecsProps) {
-  const [isTireSizeModalOpen, setIsTireSizeModalOpen] = useState(false);
-
-  const toggleTireSizeModal = useCallback(() => {
-    setIsTireSizeModalOpen(!isTireSizeModalOpen);
-  }, [isTireSizeModalOpen, setIsTireSizeModalOpen]);
+  openStaticModal,
+}: Props) {
+  function openTireSizeModal() {
+    openStaticModal(STATIC_MODAL_IDS.HOW_TO_FIND_YOUR_SIZE);
+  }
 
   return (
     <Grid>
@@ -121,7 +117,7 @@ function TechnicalSpecs({
             <Link
               theme={THEME.DARK}
               as="button"
-              onClick={toggleTireSizeModal}
+              onClick={openTireSizeModal}
               css={styles.findMyTireSizeLabel}
             >
               {ui('pdp.technicalSpecs.tireSizes.findMyTireSizeLabel')}
@@ -129,13 +125,6 @@ function TechnicalSpecs({
           </>
         </Tabs>
       </GridItem>
-      <AdditionalInfoModal
-        customerServiceNumber={customerServiceNumber}
-        isCustomerServiceEnabled={!!isCustomerServiceEnabled}
-        isOpen={isTireSizeModalOpen}
-        onClose={toggleTireSizeModal}
-        {...TIRE_SEARCH_MODAL_DATA}
-      />
     </Grid>
   );
 }

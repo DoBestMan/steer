@@ -5,14 +5,12 @@ import Modal from '~/components/global/Modal/Modal';
 import EmailSupport from '~/components/modules/Support/EmailSupport';
 import PhoneSupport from '~/components/modules/Support/PhoneSupport';
 import SupportHeading from '~/components/modules/Support/SupportHeading';
-import { SiteDynamicModal } from '~/data/models/SiteDynamicModal';
 import { MODAL_THEME, THEME } from '~/lib/constants';
 
 import styles from './ContentModal.styles';
+import { ContentModalProps } from './Modal.types';
 
-export type ModalContentProps = Omit<SiteDynamicModal, 'type'>;
-
-export interface Props extends ModalContentProps {
+export interface Props extends ContentModalProps {
   customerServiceNumber: { display: string; value: string };
   isCustomerServiceEnabled: boolean;
   isOpen: boolean;
