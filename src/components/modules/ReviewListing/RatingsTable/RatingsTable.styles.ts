@@ -48,6 +48,9 @@ const styles: StylesMap = {
       top: 0,
     },
   },
+  root: {
+    backgroundColor: COLORS.GLOBAL.WHITE,
+  },
   row: {
     color: COLORS.LIGHT.GRAY_70,
     position: 'relative',

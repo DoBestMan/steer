@@ -14,6 +14,7 @@ export function FullPage() {
     description,
     filters,
     header,
+    listResultMetadata,
     ratings,
   } = mockReviewListing;
 
@@ -25,7 +26,7 @@ export function FullPage() {
         header={header}
         filters={filters}
       />
-      <RatingsTable reviews={ratings} />
+      <RatingsTable reviews={ratings} listResultMetadata={listResultMetadata} />
     </div>
   );
 }

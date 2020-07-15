@@ -16,7 +16,10 @@
   "breadcrumbs": {
     "home": "Home",
     "brands": "All brands",
-    "reviews": "Reviews"
+    "categories": "All categories",
+    "types": "All types",
+    "reviews": "Reviews",
+    "tireReviews": "Tire Reviews"
   },
   "common": {
     "ellipsis": "...",

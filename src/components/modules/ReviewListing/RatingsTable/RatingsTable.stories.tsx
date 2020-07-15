@@ -1,5 +1,5 @@
 import { default as RatingsComponent } from './RatingsTable';
-import { mockTireRatings } from './RatingsTable.mocks';
+import { mockListResultMetadata, mockTireRatings } from './RatingsTable.mocks';
 
 export default {
   component: RatingsComponent,
@@ -7,5 +7,10 @@ export default {
 };
 
 export function RatingsTable() {
-  return <RatingsComponent reviews={mockTireRatings} />;
+  return (
+    <RatingsComponent
+      reviews={mockTireRatings}
+      listResultMetadata={mockListResultMetadata}
+    />
+  );
 }

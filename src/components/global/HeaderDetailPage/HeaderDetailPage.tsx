@@ -10,7 +10,7 @@ import { ui } from '~/lib/utils/ui-dictionary';
 import styles, { sizeStyles, themeStyles } from './HeaderDetailPage.styles';
 
 export interface HeaderDetailPageProps {
-  description?: string;
+  description?: string | null;
   header: string;
   headerAs?: ReactType;
   hideFullDescriptionLinkLabel?: string;

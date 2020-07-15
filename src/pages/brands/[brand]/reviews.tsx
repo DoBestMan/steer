@@ -27,7 +27,7 @@ export const getServerSideProps: GetServerSideProps<ReviewListingServerData> = a
   });
 
   // Brand acts as a query param for the tire reviews end point so add it to the query params
-  queryParams['brand'] = brandName;
+  queryParams.brand = brandName;
 
   const tireReviews = await backendGetReviewListing({ query: queryParams });
 

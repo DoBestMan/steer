@@ -23,6 +23,9 @@ const styles: StylesMap = {
     display: 'inline-block',
     width: '100%',
   },
+  linkSelected: {
+    color: COLORS.GLOBAL.ORANGE,
+  },
   title: [
     typography.eyebrow,
     {

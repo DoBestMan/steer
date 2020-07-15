@@ -24,6 +24,12 @@ export interface SiteProductReviewsListingFilterItem {
   description: string | null;
   /**
    *
+   * @type {boolean}
+   * @memberof SiteProductReviewsListingFilterItem
+   */
+  isSelected: boolean;
+  /**
+   *
    * @type {number}
    * @memberof SiteProductReviewsListingFilterItem
    */

@@ -1,3 +1,5 @@
+import { Fragment } from 'react';
+
 import BaseLink from '~/components/global/Link/BaseLink';
 import TitleSelectorLabel from '~/components/global/TitleSelectorLabel/TitleSelectorLabel';
 
@@ -14,29 +16,34 @@ function FilterContent({ filterGroups, contentLabel }: Props) {
     <>
       {!!contentLabel && <span css={styles.title}>{contentLabel}</span>}
       <div>
-        {filterGroups.map(({ title, id, items }) => (
-          <>
+        {filterGroups.map(({ title, items }, filterGroupIdx) => (
+          <Fragment key={filterGroupIdx}>
             {/* TODO: Semantics pass for this heading */}
-            {!!title && <p css={styles.label}>{title}</p>}
-            <ul key={id} css={styles.filterGroup}>
-              {items.map(({ count, description, flair, id, link, title }) => (
-                <li key={id} css={styles.item}>
-                  <BaseLink
-                    href={link.href}
-                    isExternal={link.isExternal}
-                    css={styles.link}
-                  >
-                    <TitleSelectorLabel
-                      count={count}
-                      description={description}
-                      flair={flair}
-                      label={title}
-                    />
-                  </BaseLink>
-                </li>
-              ))}
+            {title && <p css={styles.label}>{title}</p>}
+            <ul css={styles.filterGroup}>
+              {items.map(
+                (
+                  { link, count, description, isSelected, flair, title },
+                  filterGroupItemIdx,
+                ) => (
+                  <li key={filterGroupItemIdx} css={styles.item}>
+                    <BaseLink
+                      href={link.href}
+                      isExternal={link.isExternal}
+                      css={[styles.link, isSelected && styles.linkSelected]}
+                    >
+                      <TitleSelectorLabel
+                        count={count}
+                        description={description}
+                        flair={flair}
+                        label={title}
+                      />
+                    </BaseLink>
+                  </li>
+                ),
+              )}
             </ul>
-          </>
+          </Fragment>
         ))}
       </div>
     </>

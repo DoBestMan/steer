@@ -12,7 +12,7 @@ import { HEADER_SIZE, THEME } from '~/lib/constants';
 
 import styles from './Header.styles';
 
-interface Props extends HeaderDetailPageProps {
+export interface ReviewListingHeaderProps extends HeaderDetailPageProps {
   breadcrumbs: BreadcrumbsItem[];
   filters: FilterItem[];
 }
@@ -23,7 +23,7 @@ function Header({
   filters,
   header,
   subHeader,
-}: Props) {
+}: ReviewListingHeaderProps) {
   return (
     <Grid css={styles.container}>
       <GridItem css={styles.breadcrumbs}>

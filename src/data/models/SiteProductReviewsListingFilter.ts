@@ -9,20 +9,30 @@ import { SiteProductReviewsListingFilterGroup } from './SiteProductReviewsListin
 export interface SiteProductReviewsListingFilter {
   /**
    *
-   * @type string
+   * @type SiteProductLineReviewsListingFilterType
    * @memberof SiteProductReviewsListingFilter
    */
-  id: string;
+  id: SiteProductLineReviewsListingFilterType;
   /**
    *
    * @type {SiteCatalogFilterHeaderNullable}
    * @memberof SiteProductReviewsListingFilter
    */
-  header: SiteCatalogFilterHeaderNullable | null;
+  header: SiteCatalogFilterHeaderNullable;
   /**
    *
    * @type {Array<SiteProductReviewsListingFilterGroup>}
    * @memberof SiteProductReviewsListingFilter
    */
   filterGroups: Array<SiteProductReviewsListingFilterGroup>;
+}
+
+/**
+ * @export
+ * @enum {string}
+ */
+export enum SiteProductLineReviewsListingFilterType {
+  Brand = 'brand',
+  TireCategory = 'tireCategory',
+  TireType = 'tireType',
 }

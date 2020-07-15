@@ -37,13 +37,13 @@ function Filters({ filters }: Props) {
         activeFilter={activeFilter}
         label={ui('reviews.searchBy')}
       >
-        {filters.map(({ label }) => {
+        {filters.map(({ label, isActive = false }) => {
           const isDropdownOpen = activeFilter === label && isOpen;
           return (
             <FilterButton
               key={label}
               isDropdownOpen={isDropdownOpen}
-              isActive={false}
+              isActive={isActive}
               label={label}
               onClick={handleOnClick(label)}
               theme={THEME.ORANGE}

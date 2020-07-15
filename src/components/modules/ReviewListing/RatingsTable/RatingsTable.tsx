@@ -5,6 +5,8 @@ import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import BaseLink from '~/components/global/Link/BaseLink';
 import Stars from '~/components/global/Stars/Stars';
+import { ListResultMetadata } from '~/data/models/ListResultMetadata';
+import { SiteLink } from '~/data/models/SiteLink';
 import { RATINGS } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { screenReaderText } from '~/styles/document/accessibility.styles';
@@ -12,35 +14,41 @@ import { screenReaderText } from '~/styles/document/accessibility.styles';
 import styles from './RatingsTable.styles';
 import RatingsTableSort from './RatingsTableSort';
 
-interface Review {
-  id: string;
+export interface Rating {
+  id: string | number;
+  link: SiteLink;
   rating: number;
   ratingsQuantity: number;
   tire: string;
 }
 
-interface Props {
-  reviews: Review[];
+export interface RatingsTableProps {
+  listResultMetadata: ListResultMetadata;
+  reviews: Rating[];
 }
 
 const CONSTANTS = {
   MAX_REVIEWS_TO_DISPLAY: 20,
 };
 
-function Results({ reviews }: Props) {
+function RatingsTable({ reviews, listResultMetadata }: RatingsTableProps) {
   const [numVisibleReviews, setNumVisibleReviews] = useState(
     CONSTANTS.MAX_REVIEWS_TO_DISPLAY,
   );
 
+  const { pagination } = listResultMetadata;
+
   const hasMoreReviews = reviews.length > numVisibleReviews;
 
+  // TODO: implement pagination WCS-881
   function handleSeeMoreClick() {
     setNumVisibleReviews((prev) => (prev += CONSTANTS.MAX_REVIEWS_TO_DISPLAY));
   }
 
   return (
-    <>
-      <RatingsTableSort resultsCount={reviews.length} />
+    <div css={styles.root}>
+      {/* TODO: Implement sort functionality WCS-881 */}
+      <RatingsTableSort resultsCount={pagination?.total || 0} />
       <table css={styles.container}>
         <Grid as="thead" css={styles.headingText}>
           <GridItem
@@ -67,7 +75,7 @@ function Results({ reviews }: Props) {
               gridColumnS="3/4"
               gridColumnM="4/6"
               gridColumnL="7/9"
-              gridColumnXL="6/8"
+              gridColumnXL="6/7"
             >
               {ui('tireReviews.ratingHeader')}
             </GridItem>
@@ -76,7 +84,7 @@ function Results({ reviews }: Props) {
               gridColumnS="4/5"
               gridColumnM="6/7"
               gridColumnL="9/11"
-              gridColumnXL="8/9"
+              gridColumnXL="7/9"
               css={[styles.column, styles.lastColumn]}
             >
               {ui('tireReviews.numRatingsHeader')}
@@ -109,7 +117,11 @@ function Results({ reviews }: Props) {
                   gridColumnL="1/7"
                   gridColumnXL="1/6"
                 >
-                  <BaseLink css={styles.link} href="/">
+                  <BaseLink
+                    css={styles.link}
+                    href={review.link.href}
+                    isExternal={review.link.isExternal}
+                  >
                     {review.tire}
                   </BaseLink>
                 </GridItem>
@@ -119,7 +131,7 @@ function Results({ reviews }: Props) {
                   gridColumnS="3/4"
                   gridColumnM="4/6"
                   gridColumnL="7/9"
-                  gridColumnXL="6/8"
+                  gridColumnXL="6/7"
                 >
                   <span>
                     <Stars isSmall number={review.rating} />
@@ -132,7 +144,7 @@ function Results({ reviews }: Props) {
                   gridColumnS="4/5"
                   gridColumnM="6/7"
                   gridColumnL="9/11"
-                  gridColumnXL="8/9"
+                  gridColumnXL="7/9"
                 >
                   {review.ratingsQuantity}
                   <span css={screenReaderText}>{ui('ratings.ratings')}</span>
@@ -148,8 +160,8 @@ function Results({ reviews }: Props) {
           <Button onClick={handleSeeMoreClick}>{ui('tireReviews.more')}</Button>
         </div>
       )}
-    </>
+    </div>
   );
 }
 
-export default Results;
+export default RatingsTable;

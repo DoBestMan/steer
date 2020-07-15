@@ -16,6 +16,10 @@ interface Props {
 const ALTERNATE_THEME_ROUTES: string[] = [
   trimSlash(ROUTE_MAP[ROUTES.BRAND_CATEGORY]),
   trimSlash(ROUTE_MAP[ROUTES.TIRE_CATEGORY]),
+  trimSlash(ROUTE_MAP[ROUTES.TIRE_REVIEWS]),
+  trimSlash(ROUTE_MAP[ROUTES.BRAND_REVIEWS]),
+  trimSlash(ROUTE_MAP[ROUTES.CATEGORY_REVIEWS]),
+  trimSlash(ROUTE_MAP[ROUTES.TYPE_REVIEWS]),
 ];
 
 function NavContainer({ isHomepage = false }: Props) {

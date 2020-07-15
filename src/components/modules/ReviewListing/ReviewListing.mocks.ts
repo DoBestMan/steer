@@ -1,4 +1,7 @@
-import { mockTireRatings } from '~/components/modules/ReviewListing/RatingsTable/RatingsTable.mocks';
+import {
+  mockListResultMetadata,
+  mockTireRatings,
+} from '~/components/modules/ReviewListing/RatingsTable/RatingsTable.mocks';
 
 export const mockReviewListing = {
   breadcrumbs: [
@@ -17,6 +20,7 @@ export const mockReviewListing = {
   filters: [
     {
       label: 'Brand',
+      id: 'brand',
       filterGroups: [
         {
           title: 'Featured',
@@ -153,6 +157,7 @@ export const mockReviewListing = {
       ],
     },
     {
+      id: 'tireType',
       label: 'Tire Type',
       filterGroups: [
         {
@@ -236,6 +241,7 @@ export const mockReviewListing = {
       ],
     },
     {
+      id: 'tireCategory',
       label: 'Tire Category',
       filterGroups: [
         {
@@ -320,5 +326,6 @@ export const mockReviewListing = {
     },
   ],
   header: 'Tire Reviews',
+  listResultMetadata: mockListResultMetadata,
   ratings: mockTireRatings,
 };
