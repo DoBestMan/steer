@@ -1,6 +1,5 @@
 import { ThemeProvider } from 'emotion-theming';
 import { useRouter } from 'next/router';
-import { useRef } from 'react';
 
 import { useCatalogPageContext } from '~/context/CatalogPage.context';
 import { CatalogSummaryContextProvider } from '~/context/CatalogSummary.context';
@@ -19,15 +18,19 @@ import {
 } from './CatalogSummary/CatalogSummary.mocks';
 
 interface Props {
+  catalogGridRef: React.Ref<HTMLDivElement>;
   comesFromSearch: boolean;
   hasTopPicks: boolean;
   onPreviewFilters: (filters: Record<string, string>) => Promise<void>;
   previewFiltersData: SiteCatalogFilters;
+  scrollToGrid: () => void;
   siteCatalogProducts: SiteCatalogProducts;
   siteCatalogSummary: SiteCatalogSummary;
 }
 
 function CatalogPage({
+  scrollToGrid,
+  catalogGridRef,
   hasTopPicks,
   comesFromSearch,
   siteCatalogProducts,
@@ -37,7 +40,6 @@ function CatalogPage({
 }: Props) {
   // TEMP: use route params for testing flows
   const router = useRouter();
-  const catalogGrid = useRef<HTMLDivElement | null>(null);
 
   const { isAdvancedView, showCatalogGrid } = useCatalogPageContext();
 
@@ -56,12 +58,6 @@ function CatalogPage({
     catalogSummaryResponse.siteCatalogSummaryMeta?.totalResults || 0;
   const hasResults = totalResult > 0;
 
-  const exploreMore = () => {
-    if (catalogGrid && catalogGrid.current) {
-      catalogGrid.current.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
     <ThemeProvider
       theme={{ ...defaultTheme, ...(isAdvancedView && headerAdvanced) }}
@@ -72,12 +68,12 @@ function CatalogPage({
             isLocalDataByDefault={comesFromSearch}
             siteCatalogSummary={siteCatalogSummary}
           >
-            <CatalogSummary exploreMore={exploreMore} />
+            <CatalogSummary exploreMore={scrollToGrid} />
           </CatalogSummaryContextProvider>
         )}
         {/* Render when there's result, and not coming from search */}
         {hasResults && showCatalogGrid && (
-          <div ref={catalogGrid}>
+          <div ref={catalogGridRef}>
             <CatalogGrid
               previewFiltersData={previewFiltersData}
               onPreviewFilters={onPreviewFilters}

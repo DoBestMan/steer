@@ -1,10 +1,11 @@
 import { useRouter } from 'next/router';
-import { useCallback, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 
 import { CatalogPageContextProvider } from '~/context/CatalogPage.context';
 import { SiteCatalogProducts } from '~/data/models/SiteCatalogProducts';
 import { SiteCatalogSummary } from '~/data/models/SiteCatalogSummary';
 import { useApiDataWithDefault } from '~/hooks/useApiDataWithDefault';
+import { TIME } from '~/lib/constants';
 import { eventEmitters } from '~/lib/events/emitters';
 import { fetch } from '~/lib/fetch';
 import { getParam, getStringifiedParams } from '~/lib/utils/routes';
@@ -39,6 +40,8 @@ function CatalogPageContainer({
   const { query, push, pathname, asPath } = useRouter();
   const { isSearch } = query;
 
+  const catalogGridRef = useRef<HTMLDivElement | null>(null);
+
   // begin fetching data from /summary and /products
   const queryParams = getStringifiedParams({ ...query, ...pageParams });
   const apiArgs = {
@@ -72,9 +75,15 @@ function CatalogPageContainer({
     console.error(summaryError || productsError);
   }
 
+  const scrollToGrid = () => {
+    if (catalogGridRef && catalogGridRef.current) {
+      catalogGridRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   // appends filters to existing URL query params
   const handleUpdateFilters = useCallback(
-    async (filters: Record<string, string>) => {
+    async (filters: Record<string, string>, withoutScroll) => {
       const route = asPath.split('?');
       const params: Record<string, string> = {};
 
@@ -92,6 +101,9 @@ function CatalogPageContainer({
 
       // revalidate with newly applied filters
       await revalidateProducts();
+      if (!withoutScroll) {
+        setTimeout(scrollToGrid, TIME.MS350);
+      }
     },
     [asPath, pathname, query, pageParams, push, revalidateProducts],
   );
@@ -127,6 +139,8 @@ function CatalogPageContainer({
         siteCatalogProducts={siteCatalogProducts}
         siteCatalogSummary={siteCatalogSummary}
         previewFiltersData={previewFiltersData}
+        scrollToGrid={scrollToGrid}
+        catalogGridRef={catalogGridRef}
       />
     </CatalogPageContextProvider>
   );

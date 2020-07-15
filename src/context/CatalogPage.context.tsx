@@ -3,7 +3,10 @@ import { ReactNode, useState } from 'react';
 import { createContext } from '~/lib/utils/context';
 
 export interface CatalogPageContextProps {
-  handleUpdateResults: (filters: Record<string, string>) => void;
+  handleUpdateResults: (
+    filters: Record<string, string>,
+    withoutScroll?: boolean,
+  ) => void;
   isAdvancedView: boolean;
   isLoading: boolean;
   setIsAdvancedView(isAdvancedView: boolean): void;
@@ -13,7 +16,10 @@ export interface CatalogPageContextProps {
 }
 
 interface SetupProps {
-  handleUpdateFilters: (filters: Record<string, string>) => void;
+  handleUpdateFilters: (
+    filters: Record<string, string>,
+    withoutScroll?: boolean,
+  ) => void;
   showCatalogGridInit?: boolean;
 }
 
@@ -27,9 +33,12 @@ function useContextSetup({
   const [isAdvancedView, setIsAdvancedView] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleUpdateResults = async (filters: Record<string, string>) => {
+  const handleUpdateResults = async (
+    filters: Record<string, string>,
+    withoutScroll?: boolean,
+  ) => {
     setIsLoading(true);
-    await handleUpdateFilters(filters);
+    await handleUpdateFilters(filters, withoutScroll);
     setIsLoading(false);
   };
 
@@ -46,7 +55,10 @@ function useContextSetup({
 
 interface Props {
   children: ReactNode;
-  handleUpdateFilters: (filters: Record<string, string>) => void;
+  handleUpdateFilters: (
+    filters: Record<string, string>,
+    withoutScroll?: boolean,
+  ) => void;
   showCatalogGridInit?: boolean;
 }
 

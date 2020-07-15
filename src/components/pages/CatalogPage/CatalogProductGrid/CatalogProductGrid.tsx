@@ -52,7 +52,7 @@ function CatalogProductGrid({
 
   const handleLoadMore = () => {
     const newPage = currentPage + 1;
-    handleUpdateResults({ page: `${newPage}` });
+    handleUpdateResults({ page: `${newPage}` }, true);
     setCurrentPage(newPage);
   };
 
