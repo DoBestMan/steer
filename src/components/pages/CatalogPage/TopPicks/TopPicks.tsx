@@ -258,34 +258,36 @@ function TopPicks({
   const showMoreData = currentIndex === picks.length;
 
   return (
-    <div ref={rootRef}>
-      <div
-        css={[styles.titleContainer, showTitle && styles.titleContainerShow]}
-      >
-        {picks.map((pick, i) => {
-          return (
-            <Title
-              currentIndex={i}
-              pick={pick}
-              key={`_index_${i}`}
-              isCurrent={
-                (indexHovered && indexHovered === i) ||
-                (typeof indexHovered === 'undefined' && i === currentIndex)
-              }
-              openModal={openModal}
-            />
-          );
-        })}
-        <Title
-          currentIndex={picks.length}
-          viewMoreData={viewMoreData}
-          isCurrent={
-            (indexHovered && indexHovered === picks.length) || showMoreData
-          }
-        />
+    <div ref={rootRef} css={[styles.root, styles.rootIos]}>
+      <div css={styles.titlesContainer}>
+        <div
+          css={[styles.titleContainer, showTitle && styles.titleContainerShow]}
+        >
+          {picks.map((pick, i) => {
+            return (
+              <Title
+                currentIndex={i}
+                pick={pick}
+                key={`_index_${i}`}
+                isCurrent={
+                  (indexHovered && indexHovered === i) ||
+                  (typeof indexHovered === 'undefined' && i === currentIndex)
+                }
+                openModal={openModal}
+              />
+            );
+          })}
+          <Title
+            currentIndex={picks.length}
+            viewMoreData={viewMoreData}
+            isCurrent={
+              (indexHovered && indexHovered === picks.length) || showMoreData
+            }
+          />
+        </div>
       </div>
 
-      <div css={styles.root} id="top-picks-carousel">
+      <div css={styles.carousel} id="top-picks-carousel">
         <Carousel params={params} getSwiper={setSwiper}>
           {picks.map((pick, i) => {
             const {

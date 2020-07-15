@@ -9,6 +9,7 @@ import {
   DEFAULT_SCENERY,
   DEFAULT_VEHICLE,
 } from './CatalogSummary.constants';
+import { styles } from './CatalogSummary.styles';
 import Background from './components/Background';
 import Car from './components/Car';
 import Content from './components/Content';
@@ -43,37 +44,39 @@ function CatalogSummary({ exploreMore }: Props) {
 
   return (
     <Root>
-      <Background aria-hidden data-component="Background">
-        <Scenery
-          data-component="Scenery"
-          sceneryID={sceneryType}
-          stage={stage}
-        />
-        <Overlay data-component="Overlay" stage={stage}>
-          <VehicleContainer
-            data-component="VehicleContainer"
-            showLoadingInterstitial={showLoadingInterstitial}
+      <div css={[styles.backgroundContainer, styles.iosBackgroundContainer]}>
+        <Background stage={stage} aria-hidden data-component="Background">
+          <Scenery
+            data-component="Scenery"
+            sceneryID={sceneryType}
             stage={stage}
-          >
-            <Car
-              bk={bk}
-              carId={carId}
-              data-component="Car"
+          />
+          <Overlay data-component="Overlay" stage={stage}>
+            <VehicleContainer
+              data-component="VehicleContainer"
               showLoadingInterstitial={showLoadingInterstitial}
-              solid
               stage={stage}
-            />
-            <div className="back-wheel-img">
-              <Image
-                {...image}
-                aria-hidden
-                responsive
-                widths={[175, 260, 230]}
+            >
+              <Car
+                bk={bk}
+                carId={carId}
+                data-component="Car"
+                showLoadingInterstitial={showLoadingInterstitial}
+                solid
+                stage={stage}
               />
-            </div>
-          </VehicleContainer>
-        </Overlay>
-      </Background>
+              <div className="back-wheel-img">
+                <Image
+                  {...image}
+                  aria-hidden
+                  responsive
+                  widths={[175, 260, 230]}
+                />
+              </div>
+            </VehicleContainer>
+          </Overlay>
+        </Background>
+      </div>
 
       <Content data-component="Content" stage={contentStage}>
         <CatalogMessage

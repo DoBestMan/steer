@@ -79,14 +79,14 @@ export const MEASUREMENTS = {
   },
   [STAGES.TOP_PICKS]: {
     CONTENT_MIN_HEIGHT: {
-      S: '40vh',
-      M: '35vh',
-      L: '33.33vh',
+      S: '40%',
+      M: '35%',
+      L: '33.33%',
     },
     CONTENT_TOP: {
-      S: 'max(60vh, 385px)',
-      M: 'max(65vh, 517px)',
-      L: 'max(66.6vh, 538px)',
+      S: 'max(60%, 385px)',
+      M: 'max(65%, 517px)',
+      L: 'max(66.666666%, 538px)',
     },
   },
   [STAGES.NO_RESULTS]: {

@@ -1,10 +1,8 @@
 import { WHEEL_WIDTH } from '~/components/global/Car/Car.constants';
-import { NAV_HEIGHT } from '~/components/modules/Nav/Nav.styles';
 import { COLORS, EASING, MQ, SPACING, StylesMap, TIME } from '~/lib/constants';
 
 import {
-  ASSET_MARGIN_TOP,
-  EXPLORE_BUTTON_HEIGHT,
+  TOP_CONTAINER_MIN_HEIGHT,
   TOP_CONTENT_HEIGHT,
 } from '../TopPicks.styles';
 
@@ -37,22 +35,21 @@ export const styles: StylesMap = {
     transition: `all ${TIME.MS400}ms ${EASING.CUBIC_EASE_OUT}`,
   },
   assetContainer: {
+    bottom: 0,
     display: 'block',
-    flex: '0 1 auto',
     height: WHEEL_WIDTH.S,
-    marginTop: ASSET_MARGIN_TOP.S,
-    position: 'relative',
+    left: '50%',
+    position: 'absolute',
+    transform: 'translate3d(-50%, 0, 0)',
     width: WHEEL_WIDTH.S,
 
     [MQ.M]: {
       height: WHEEL_WIDTH.M,
-      marginTop: ASSET_MARGIN_TOP.M,
       width: WHEEL_WIDTH.M,
     },
 
     [MQ.L]: {
       height: WHEEL_WIDTH.L,
-      marginTop: ASSET_MARGIN_TOP.L,
       width: WHEEL_WIDTH.L,
     },
   },
@@ -64,24 +61,20 @@ export const styles: StylesMap = {
     alignItems: 'center',
     display: 'flex',
     flexDirection: 'column',
-    minHeight: `calc(40vh - ${EXPLORE_BUTTON_HEIGHT.S}px)`,
+    minHeight: '40%',
     paddingBottom: SPACING.SIZE_25,
     paddingTop: SPACING.SIZE_25,
 
     [MQ.M]: {
-      minHeight: `calc(35vh - ${EXPLORE_BUTTON_HEIGHT.M}px)`,
+      minHeight: '35%',
       paddingBottom: SPACING.SIZE_40,
       paddingTop: SPACING.SIZE_40,
     },
 
     [MQ.L]: {
-      minHeight: `calc(33.333333vh - ${EXPLORE_BUTTON_HEIGHT.L}px)`,
+      minHeight: '33.333333%',
       paddingBottom: SPACING.SIZE_25,
       paddingTop: SPACING.SIZE_25,
-    },
-
-    [MQ.XL]: {
-      minHeight: `calc(33.333333vh - ${EXPLORE_BUTTON_HEIGHT.XL}px)`,
     },
   },
   brand: {
@@ -193,6 +186,7 @@ export const styles: StylesMap = {
   },
   root: {
     boxSizing: 'border-box',
+    height: '100%',
     margin: '0 auto',
     width: 250,
 
@@ -238,30 +232,22 @@ export const styles: StylesMap = {
   topContent: {
     display: 'block',
     height: TOP_CONTENT_HEIGHT.S,
-    minHeight: 385,
-    paddingTop: NAV_HEIGHT.S,
+    minHeight: TOP_CONTAINER_MIN_HEIGHT.S,
+    position: 'relative',
     width: '100%',
 
     [MQ.M]: {
       height: TOP_CONTENT_HEIGHT.M,
-      minHeight: 517,
-      paddingTop: NAV_HEIGHT.M,
+      minHeight: TOP_CONTAINER_MIN_HEIGHT.M,
     },
 
     [MQ.L]: {
       height: TOP_CONTENT_HEIGHT.L,
-      minHeight: 538,
-      paddingTop: NAV_HEIGHT.L,
+      minHeight: TOP_CONTAINER_MIN_HEIGHT.L,
     },
   },
   topContentInner: {
-    alignItems: 'center',
-    display: 'flex',
-    flexDirection: 'column',
     height: '100%',
-    justifyContent: 'flex-end',
-    position: 'relative',
-    textAlign: 'center',
     width: '100%',
   },
   viewMoreContainer: {

@@ -2,7 +2,7 @@ import { CSSObject } from '@emotion/core';
 
 import { WHEEL_WIDTH } from '~/components/global/Car/Car.constants';
 import { NAV_HEIGHT } from '~/components/modules/Nav/Nav.styles';
-import { COLORS, EASING, MQ, SPACING, TIME } from '~/lib/constants';
+import { COLORS, EASING, MQ, SPACING, TIME, Z_INDEX } from '~/lib/constants';
 
 export const EXPLORE_BUTTON_HEIGHT = {
   S: 60,
@@ -18,18 +18,44 @@ export const ASSET_MARGIN_TOP = {
 };
 
 export const TOP_CONTENT_HEIGHT = {
-  S: '60vh',
-  M: '65vh',
-  L: '66.6666666vh',
+  S: '60%',
+  M: '65%',
+  L: '66.6666666%',
 };
 
-const TOP_CONTAINER_MIN_HEIGHT = {
+export const TOP_CONTAINER_MIN_HEIGHT = {
   S: 385,
   M: 517,
   L: 538,
 };
 
 export const styles: CSSObject = {
+  carousel: {
+    '&:hover': {
+      '.swiper-slide-active': {
+        zIndex: Z_INDEX.TOP,
+      },
+    },
+
+    // remove any pointer events because each slide takes 100% viewport width.
+    '.swiper-slide': {
+      height: '100%',
+      pointerEvents: 'none',
+
+      '> *': {
+        pointerEvents: 'all',
+        transition: `opacity ${TIME.MS300}ms ${EASING.CUBIC_EASE_OUT}`,
+      },
+    },
+    // above current or next so we can click on it
+    '.swiper-slide-prev': {
+      zIndex: Z_INDEX.FRONT,
+    },
+
+    display: 'flex',
+    flex: 1,
+    position: 'relative',
+  },
   description: {
     display: 'block',
     marginTop: SPACING.SIZE_10,
@@ -77,45 +103,14 @@ export const styles: CSSObject = {
   },
 
   root: {
-    '&:hover': {
-      '.swiper-slide-active': {
-        zIndex: 2,
-      },
-    },
+    display: 'flex',
+    flexDirection: 'column',
+    minHeight: '100vh',
+  },
 
-    // Need some re-adjustements
-    '.swiper-container': {
-      marginLeft: SPACING.SIZE_05,
-    },
-
-    // remove any pointer events because each slide takes 100% viewport width.
-    '.swiper-slide': {
-      pointerEvents: 'none',
-
-      '> *': {
-        pointerEvents: 'all',
-        transition: `opacity ${TIME.MS300}ms ${EASING.CUBIC_EASE_OUT}`,
-      },
-    },
-    // above current or next so we can click on it
-    '.swiper-slide-prev': {
-      zIndex: 1,
-    },
-
-    // so the explore more button doesn't jump and sticks to the bottom
-    minHeight: `calc(100vh - ${EXPLORE_BUTTON_HEIGHT.S}px)`,
-
-    [MQ.M]: {
-      minHeight: `calc(100vh - ${EXPLORE_BUTTON_HEIGHT.M}px)`,
-    },
-
-    [MQ.L]: {
-      minHeight: `calc(100vh - ${EXPLORE_BUTTON_HEIGHT.L}px)`,
-    },
-
-    [MQ.XL]: {
-      minHeight: `calc(100vh - ${EXPLORE_BUTTON_HEIGHT.XL}px)`,
-    },
+  rootIos: {
+    // Thanks, Apple
+    minHeight: '-webkit-fill-available',
   },
 
   title: {
@@ -137,16 +132,10 @@ export const styles: CSSObject = {
   titleContainer: {
     color: COLORS.GLOBAL.BLACK,
     display: 'block',
-    flex: '1 1 auto',
     height: `calc(${TOP_CONTENT_HEIGHT.S} - ${
       WHEEL_WIDTH.S + ASSET_MARGIN_TOP.S + NAV_HEIGHT.S
     }px)`,
     marginTop: NAV_HEIGHT.S,
-    minHeight:
-      TOP_CONTAINER_MIN_HEIGHT.S -
-      WHEEL_WIDTH.S -
-      ASSET_MARGIN_TOP.S -
-      NAV_HEIGHT.S,
     opacity: 0,
     pointerEvents: 'none',
     position: 'absolute',
@@ -158,11 +147,6 @@ export const styles: CSSObject = {
       height: `calc(${TOP_CONTENT_HEIGHT.M} - ${
         WHEEL_WIDTH.M + ASSET_MARGIN_TOP.M + NAV_HEIGHT.M
       }px)`,
-      minHeight:
-        TOP_CONTAINER_MIN_HEIGHT.M -
-        WHEEL_WIDTH.M -
-        ASSET_MARGIN_TOP.M -
-        NAV_HEIGHT.M,
       marginTop: NAV_HEIGHT.M,
     },
 
@@ -170,31 +154,19 @@ export const styles: CSSObject = {
       height: `calc(${TOP_CONTENT_HEIGHT.L} - ${
         WHEEL_WIDTH.L + ASSET_MARGIN_TOP.L + NAV_HEIGHT.L
       }px)`,
-      minHeight:
-        TOP_CONTAINER_MIN_HEIGHT.L -
-        WHEEL_WIDTH.L -
-        ASSET_MARGIN_TOP.L -
-        NAV_HEIGHT.L,
       marginTop: NAV_HEIGHT.L,
     },
   },
 
   titleContainerInner: {
-    bottom: 0,
     display: 'block',
     left: 0,
     pointerEvents: 'none',
     position: 'absolute',
     textAlign: 'center',
+    top: '50%',
+    transform: 'translate3d(0, -50%, 0)',
     width: '100%',
-
-    // more room, no need to fix to the bottom
-    // also extending so the title takes the whole screen
-    [MQ.M]: {
-      bottom: 'auto',
-      top: '50%',
-      transform: 'translate3d(0, -50%, 0)',
-    },
 
     [MQ.L]: {
       left: '50%',
@@ -209,6 +181,14 @@ export const styles: CSSObject = {
   titleContainerShow: {
     opacity: 1,
     pointerEvents: 'all',
+  },
+
+  titlesContainer: {
+    height: `calc(100% - ${EXPLORE_BUTTON_HEIGHT.S}px)`,
+    left: 0,
+    position: 'absolute',
+    top: 0,
+    width: '100%',
   },
 
   titleShow: {
