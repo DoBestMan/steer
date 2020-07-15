@@ -1,15 +1,10 @@
 import { ReactNode, useEffect, useState } from 'react';
 
-import { PAGE_TRANSITION_DURATION } from '~/components/modules/App/App.constants';
 import { STAGES } from '~/components/pages/CatalogPage/CatalogSummary/CatalogSummary.constants';
 import { SiteCatalogSummary } from '~/data/models/SiteCatalogSummary';
 import { createContext } from '~/lib/utils/context';
 
 const BUILD_IN_PAUSE = 4000;
-
-async function pause(pauseTime = 2000) {
-  await new Promise((resolve) => setTimeout(resolve, pauseTime));
-}
 
 export interface CatalogSummaryContextProps {
   contentStage: STAGES;
@@ -24,21 +19,29 @@ export interface CatalogSummaryContextProps {
 const CatalogSummaryContext = createContext<CatalogSummaryContextProps>();
 
 interface SetupProps {
-  isLocalDataByDefault: boolean;
+  comesFromSearch: boolean;
+  hasLocalData: boolean;
   siteCatalogSummary: SiteCatalogSummary;
 }
 
 // TODO: Exported for testing only
 export function useContextSetup({
+  hasLocalData,
   siteCatalogSummary,
-  isLocalDataByDefault,
+  comesFromSearch,
 }: SetupProps) {
   const totalResult =
     siteCatalogSummary.siteCatalogSummaryMeta?.totalResults || 0;
-  const mustShowPrompt = siteCatalogSummary.siteCatalogSummaryPrompt?.mustShow;
-  const isDisambiguation = !!siteCatalogSummary.siteCatalogSummaryPrompt
+  const hasPromptMustShow =
+    siteCatalogSummary.siteCatalogSummaryPrompt?.mustShow;
+  const hasPromptCTAList = !!siteCatalogSummary.siteCatalogSummaryPrompt
     ?.ctaList?.length;
-  const hasResults = totalResult > 0 || isDisambiguation;
+  /**
+   * Disambiguation response also has 0 results, but user should see the
+   * loading interstitial. Therefore, only show the NO_RESULTS stage if
+   * there are no CTA objects are present in the `ctaList`
+   */
+  const hasNoResults = totalResult === 0 && !hasPromptCTAList;
 
   /**
    * The `stage` state is used to determine which content to display.
@@ -49,16 +52,13 @@ export function useContextSetup({
   const [stage, setStage] = useState<STAGES>(STAGES.LOADING);
   const [contentStage, setContentStage] = useState<STAGES>(stage);
 
+  const [isLocalDataByDefault] = useState<boolean>(comesFromSearch);
+
   // If deep-linking in, or the local data has no results, we skip
   // the loading interstitial and show the relevant stage without
   // CSS transitions.
   const [showLoadingInterstitial] = useState<boolean>(
-    isLocalDataByDefault && hasResults,
-  );
-
-  // If local data does not exist, show loading indicator
-  const [isLoadingData, setIsLoadingData] = useState<boolean>(
-    !isLocalDataByDefault,
+    isLocalDataByDefault && !hasNoResults,
   );
 
   /**
@@ -77,38 +77,28 @@ export function useContextSetup({
       return;
     }
 
-    const getLocalData = async () => {
-      // TEMP: pause to retrieve local data
-      await pause();
-      // Once we have local results, jump to relevant step
-      if (mustShowPrompt) {
-        setStage(hasResults ? STAGES.DATA_MOMENT : STAGES.NO_RESULTS);
+    // TODO: when coming from search, should account for both use cases
+    // of having local data immediately (use timeout), and having to load
+    // local data
+    if (isLocalDataByDefault && hasLocalData) {
+      setStage(hasNoResults ? STAGES.NO_RESULTS : STAGES.BUILD_IN);
+    }
+
+    // Local data has been fetched
+    if (!isLocalDataByDefault && hasLocalData) {
+      if (hasPromptMustShow) {
+        setStage(hasNoResults ? STAGES.NO_RESULTS : STAGES.DATA_MOMENT);
       } else {
         setStage(STAGES.TOP_PICKS);
       }
-      setIsLoadingData(false);
-    };
-
-    let loadingTimeout: ReturnType<typeof setTimeout> | null = null;
-
-    if (isLoadingData) {
-      getLocalData();
-    } else {
-      loadingTimeout = setTimeout(
-        () => {
-          setStage(hasResults ? STAGES.BUILD_IN : STAGES.NO_RESULTS);
-        },
-        // TODO: adjust this duration based on transition from Search
-        PAGE_TRANSITION_DURATION * 2,
-      );
     }
-
-    return () => {
-      if (loadingTimeout) {
-        clearTimeout(loadingTimeout);
-      }
-    };
-  }, [hasResults, mustShowPrompt, isLoadingData, stage]);
+  }, [
+    hasLocalData,
+    hasNoResults,
+    hasPromptMustShow,
+    isLocalDataByDefault,
+    stage,
+  ]);
 
   /**
    * During the BUILD_IN stage, the animation is paused to
@@ -127,7 +117,7 @@ export function useContextSetup({
     return () => {
       clearTimeout(timeout);
     };
-  }, [mustShowPrompt, stage]);
+  }, [stage]);
 
   return {
     contentStage,
@@ -150,11 +140,13 @@ interface ProviderProps extends SetupProps {
 
 export function CatalogSummaryContextProvider({
   children,
-  isLocalDataByDefault,
+  comesFromSearch,
+  hasLocalData,
   siteCatalogSummary,
 }: ProviderProps) {
   const value = useContextSetup({
-    isLocalDataByDefault,
+    comesFromSearch,
+    hasLocalData,
     siteCatalogSummary,
   });
   return (

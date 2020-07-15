@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { useCallback, useRef, useState } from 'react';
 
+import { useSearchContext } from '~/components/modules/Search/Search.context';
 import { CatalogPageContextProvider } from '~/context/CatalogPage.context';
 import { SiteCatalogProducts } from '~/data/models/SiteCatalogProducts';
 import { SiteCatalogSummary } from '~/data/models/SiteCatalogSummary';
@@ -36,9 +37,8 @@ function CatalogPageContainer({
   serverData,
   pageParams = {},
 }: Props) {
-  // TEMP: use route params for testing flows
   const { query, push, pathname, asPath } = useRouter();
-  const { isSearch } = query;
+  const { isSearchOpen } = useSearchContext();
 
   const catalogGridRef = useRef<HTMLDivElement | null>(null);
 
@@ -56,6 +56,7 @@ function CatalogPageContainer({
   const {
     data: { siteCatalogSummary },
     error: summaryError,
+    hasLocalData,
   } = useApiDataWithDefault<CatalogPageData['serverData']>({
     ...apiArgs,
     endpoint: endpoints.summary,
@@ -130,11 +131,12 @@ function CatalogPageContainer({
   return (
     <CatalogPageContextProvider
       handleUpdateFilters={handleUpdateFilters}
-      showCatalogGridInit={isSearch !== 'true'}
+      showCatalogGridInit={isSearchOpen}
     >
       <CatalogPage
         onPreviewFilters={onPreviewFilters}
-        comesFromSearch={isSearch === 'true'}
+        comesFromSearch={isSearchOpen}
+        hasLocalData={hasLocalData}
         hasTopPicks={hasTopPicks}
         siteCatalogProducts={siteCatalogProducts}
         siteCatalogSummary={siteCatalogSummary}

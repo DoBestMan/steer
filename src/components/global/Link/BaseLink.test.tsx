@@ -3,6 +3,7 @@ import { LinkProps } from 'next/link';
 import { ReactNode } from 'react';
 
 import BaseLink from './BaseLink';
+import { useBaseLinkProps } from './BaseLink.hooks';
 
 // Mock of next/link to make sure we're passing the proper
 // `as` and `prefetch` values
@@ -20,6 +21,7 @@ jest.mock('next/link', () => {
   };
 });
 
+// Test component logic (for external or internal absolute links)
 describe('BaseLink', () => {
   test('internal static link', () => {
     const { container } = render(
@@ -51,70 +53,6 @@ describe('BaseLink', () => {
           rel="noopener noreferrer"
           target="_blank"
         >
-          Click here
-        </a>
-      </div>
-    `);
-  });
-
-  test('internal dynamic link', () => {
-    const { container } = render(
-      <BaseLink href="/brands/drupal-tires">Click here</BaseLink>,
-    );
-
-    expect(container.firstChild).toMatchInlineSnapshot(`
-      <div
-        data-test-as="/brands/drupal-tires"
-      >
-        <a>
-          Click here
-        </a>
-      </div>
-    `);
-  });
-
-  test('internal dynamic link - one param', () => {
-    const { container } = render(
-      <BaseLink href="/brands/drupal-tires/reviews">Click here</BaseLink>,
-    );
-
-    expect(container.firstChild).toMatchInlineSnapshot(`
-      <div
-        data-test-as="/brands/drupal-tires/reviews"
-      >
-        <a>
-          Click here
-        </a>
-      </div>
-    `);
-  });
-
-  test('internal dynamic link - two params', () => {
-    const { container } = render(
-      <BaseLink href="/brands/drupal-tires/tractors">Click here</BaseLink>,
-    );
-
-    expect(container.firstChild).toMatchInlineSnapshot(`
-      <div
-        data-test-as="/brands/drupal-tires/tractors"
-      >
-        <a>
-          Click here
-        </a>
-      </div>
-    `);
-  });
-
-  test('internal dynamic link with query params', () => {
-    const { container } = render(
-      <BaseLink href="/brands/drupal-tires?trim=LX">Click here</BaseLink>,
-    );
-
-    expect(container.firstChild).toMatchInlineSnapshot(`
-      <div
-        data-test-as="/brands/drupal-tires?trim=LX"
-      >
-        <a>
           Click here
         </a>
       </div>
@@ -195,5 +133,92 @@ describe('BaseLink', () => {
         </a>
       </div>
     `);
+  });
+});
+
+// Test hook logic (for internal dynamic links)
+describe('BaseLink hook', () => {
+  test('internal dynamic link', () => {
+    expect(
+      useBaseLinkProps({
+        href: '/brands/drupal-tires',
+      }),
+    ).toEqual({
+      as: {
+        pathname: '/brands/drupal-tires',
+        query: {},
+      },
+      externalProps: {},
+      finalHref: {
+        pathname: '/brands/[brand]',
+        query: {},
+      },
+      isInternal: true,
+      prefetch: undefined,
+    });
+  });
+
+  test('internal dynamic link - one param', () => {
+    expect(
+      useBaseLinkProps({
+        href: '/brands/drupal-tires/reviews',
+      }),
+    ).toEqual({
+      as: {
+        pathname: '/brands/drupal-tires/reviews',
+        query: {},
+      },
+      externalProps: {},
+      finalHref: {
+        pathname: '/brands/[brand]/reviews',
+        query: {},
+      },
+      isInternal: true,
+      prefetch: undefined,
+    });
+  });
+});
+
+test('internal dynamic link - two params', () => {
+  expect(
+    useBaseLinkProps({
+      href: '/brands/drupal-tires/tractors',
+    }),
+  ).toEqual({
+    as: {
+      pathname: '/brands/drupal-tires/tractors',
+      query: {},
+    },
+    externalProps: {},
+    finalHref: {
+      pathname: '/brands/[brand]/[productLine]',
+      query: {},
+    },
+    isInternal: true,
+    prefetch: undefined,
+  });
+});
+
+test('internal dynamic link - with query params', () => {
+  expect(
+    useBaseLinkProps({
+      href: '/brands/drupal-tires?trim=LX',
+    }),
+  ).toEqual({
+    as: {
+      pathname: '/brands/drupal-tires',
+      query: {
+        trim: 'LX',
+      },
+    },
+    externalProps: {},
+    finalHref: {
+      pathname: '/brands/[brand]',
+      query: {
+        trim: 'LX',
+      },
+    },
+    isInternal: true,
+    prefetch: undefined,
   });
 });

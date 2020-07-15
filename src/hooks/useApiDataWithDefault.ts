@@ -15,7 +15,14 @@ export function useApiDataWithDefault<T, U = T>({
 }): UseApiData<U> & {
   data: T & (U | undefined);
 } {
-  const { data, error, isValidating, mutate, revalidate } = useApiData<U>({
+  const {
+    data,
+    error,
+    hasLocalData,
+    isValidating,
+    mutate,
+    revalidate,
+  } = useApiData<U>({
     endpoint,
     includeAuthorization,
     includeUserRegion,
@@ -29,6 +36,7 @@ export function useApiDataWithDefault<T, U = T>({
   return {
     data: { ...defaultData, ...data },
     error,
+    hasLocalData,
     isValidating,
     mutate,
     revalidate,

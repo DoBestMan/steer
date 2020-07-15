@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import useSWR, { ConfigInterface } from 'swr';
 
 import { apiBootstrap } from '~/lib/api/bootstrap';
@@ -8,6 +8,7 @@ import { Emitter } from '~/lib/utils/Emitter';
 export interface UseApiData<T> {
   data: T | undefined;
   error?: Error;
+  hasLocalData: boolean;
   isValidating: boolean;
   mutate: (
     data?: T | Promise<T> | ((currentValue: T) => T),
@@ -37,12 +38,14 @@ export function useApiData<T>({
   revalidateEmitter,
   options = {},
 }: UseApiDataParams): UseApiData<T> {
+  const [hasLocalData, setHasLocalData] = useState(false);
+
   const { data, error, isValidating, mutate, revalidate } = useSWR<T>(
     [endpoint, JSON.stringify(query)],
     async () => {
       await apiBootstrap();
 
-      return fetch<T>({
+      const response = await fetch<T>({
         endpoint,
         includeAuthorization,
         includeUserRegion,
@@ -51,6 +54,10 @@ export function useApiData<T>({
         params,
         query,
       });
+
+      setHasLocalData(true);
+
+      return response;
     },
     options,
   );
@@ -72,6 +79,7 @@ export function useApiData<T>({
   return {
     data,
     error,
+    hasLocalData,
     isValidating,
     mutate,
     revalidate,

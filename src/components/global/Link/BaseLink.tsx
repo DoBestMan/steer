@@ -24,11 +24,7 @@ function BaseLink({ children, href, isExternal, ...rest }: BaseLinkProps) {
   });
   return (
     <Link href={finalHref} as={as} prefetch={prefetch} passHref>
-      <a
-        href={!isInternal ? finalHref : undefined}
-        {...externalProps}
-        {...rest}
-      >
+      <a href={!isInternal ? href : undefined} {...externalProps} {...rest}>
         {children}
       </a>
     </Link>

@@ -1,4 +1,9 @@
+import queryString from 'query-string';
+import { UrlObject } from 'url';
+
 import { brackets } from './regex';
+
+export type Url = string | UrlObject;
 
 /**
  * Static build has trailing `/` in routes
@@ -63,3 +68,8 @@ export function getStringifiedParams(
   });
   return queryParams;
 }
+
+export const getUrlObject = (pathname: string, query: string): Url => ({
+  pathname,
+  query: queryString.parse(query),
+});

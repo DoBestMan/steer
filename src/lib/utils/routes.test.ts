@@ -1,4 +1,9 @@
-import { interpolateRoute, isRouteDiameterFormat, trimSlash } from './routes';
+import {
+  getUrlObject,
+  interpolateRoute,
+  isRouteDiameterFormat,
+  trimSlash,
+} from './routes';
 
 describe('utils/routes', () => {
   describe('trimSlash', () => {
@@ -29,6 +34,22 @@ describe('utils/routes', () => {
           productLine: 'pro-contact',
         }),
       ).toBe('/brands/continental-tires/pro-contact');
+    });
+  });
+
+  describe('getUrlObject', () => {
+    it('returns url object', () => {
+      expect(
+        getUrlObject(
+          '/vehicles/honda-tires/civic/2019',
+          'trim=Sport%20Sedan%20%26%20Coupe',
+        ),
+      ).toEqual({
+        pathname: '/vehicles/honda-tires/civic/2019',
+        query: {
+          trim: 'Sport Sedan & Coupe',
+        },
+      });
     });
   });
 });
