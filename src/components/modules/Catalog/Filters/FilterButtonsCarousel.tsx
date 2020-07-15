@@ -1,5 +1,5 @@
 import { useTheme } from 'emotion-theming';
-import { MouseEvent, ReactElement } from 'react';
+import { ReactElement } from 'react';
 
 import FilterButton from '~/components/global/Button/FilterButton';
 import FilterButtonToggle from '~/components/global/Button/FilterButtonToggle';
@@ -34,10 +34,7 @@ export default function FilterButtonsCarousel({
   } = useFiltersContext();
   const { isLoading } = useCatalogPageContext();
   const { header } = useTheme();
-  function onPopularFilterClick(e: MouseEvent) {
-    createOpenFilterHandler(POPULAR_ID)(e);
-  }
-
+  const isPopularDropdownOpen = selectingFilter === POPULAR_ID;
   const isPopularActive = popularFilters.some((filter) => {
     if ('item' in filter) {
       return hasActiveValue(filter.item, activeFilters);
@@ -53,14 +50,15 @@ export default function FilterButtonsCarousel({
           css={[
             styles.filterButton,
             !popularFilters.length && styles.filterHide,
+            isPopularDropdownOpen && styles.disableEvents,
           ]}
           isDisabled={isLoading}
           label={popularLabel}
-          isDropdownOpen={selectingFilter === POPULAR_ID}
+          isDropdownOpen={isPopularDropdownOpen}
           isActive={isPopularActive}
-          onClick={onPopularFilterClick}
+          onClick={createOpenFilterHandler(POPULAR_ID)}
           theme={header.buttonTheme}
-          aria-expanded={selectingFilter === POPULAR_ID}
+          aria-expanded={isPopularDropdownOpen}
         />
         {
           (filters.map((filter, idx) => {
