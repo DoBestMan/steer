@@ -1,4 +1,4 @@
-import { COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
+import { COLORS, MQ, SPACING, StylesMap, Z_INDEX } from '~/lib/constants';
 import { getColumnsCalc } from '~/lib/utils/grid';
 
 const styles: StylesMap = {
@@ -60,19 +60,8 @@ const styles: StylesMap = {
       marginTop: SPACING.SIZE_120,
     },
   },
-  feedback: {
-    marginTop: SPACING.SIZE_60,
-
-    [MQ.M]: {
-      marginTop: SPACING.SIZE_80,
-    },
-
-    [MQ.L]: {
-      marginTop: SPACING.SIZE_120,
-    },
-  },
   insights: {
-    marginTop: SPACING.SIZE_10,
+    marginTop: SPACING.SIZE_20,
 
     [MQ.L]: {
       marginTop: SPACING.SIZE_40,
@@ -184,6 +173,20 @@ const styles: StylesMap = {
   },
   shopWithConfidence: {
     marginTop: SPACING.SIZE_60,
+
+    [MQ.M]: {
+      marginTop: SPACING.SIZE_80,
+    },
+
+    [MQ.L]: {
+      marginTop: SPACING.SIZE_120,
+    },
+  },
+  stickyBar: {
+    bottom: 0,
+    marginTop: SPACING.SIZE_60,
+    position: 'sticky',
+    zIndex: Z_INDEX.FRONT,
 
     [MQ.M]: {
       marginTop: SPACING.SIZE_80,

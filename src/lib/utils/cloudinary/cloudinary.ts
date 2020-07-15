@@ -245,3 +245,16 @@ export function getSquareImageTransformations(sizes: number[]) {
     return object;
   }, {});
 }
+
+export function getInvertedImageTransformations(sizes: number[]) {
+  return sizes.reduce((object: Record<string, Transformations[]>, size) => {
+    object[`${size}w`] = [
+      {
+        color: ['rgb' as ColorSpace, 'FFFFFF'],
+        effect: ['colorize' as Effect, '100'],
+        width: size,
+      },
+    ];
+    return object;
+  }, {});
+}

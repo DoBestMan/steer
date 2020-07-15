@@ -6,6 +6,13 @@ const CONSTANTS = {
 };
 
 const styles: StylesMap = {
+  actionBar: {
+    display: 'none',
+
+    [MQ.L]: {
+      display: 'block',
+    },
+  },
   crossSellWrapper: [
     typography.bodyCopy,
     {
@@ -32,7 +39,12 @@ const styles: StylesMap = {
   },
   nameWrapper: {
     [MQ.L]: {
-      flex: 0.6,
+      flexBasis: '100%',
+    },
+  },
+  nameWrapperTireLine: {
+    [MQ.L]: {
+      flexBasis: 'auto',
     },
   },
   pricesWrapper: {
@@ -72,12 +84,11 @@ const styles: StylesMap = {
   wrapper: {
     alignItems: 'flex-end',
     display: 'flex',
+    flexWrap: 'wrap',
     justifyContent: 'space-between',
 
     [MQ.L]: {
-      alignItems: 'flex-start',
-      flexDirection: 'column',
-      justifyContent: 'flex-start',
+      flexFlow: 'row wrap',
     },
   },
 };

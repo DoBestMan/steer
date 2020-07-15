@@ -1,4 +1,12 @@
-import { COLORS, MQ, SPACING, StylesMap, THEME } from '~/lib/constants';
+import {
+  BORDERS,
+  COLORS,
+  MQ,
+  SPACING,
+  StylesMap,
+  THEME,
+  TIME,
+} from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const SIDE_MARGIN = {
@@ -7,7 +15,7 @@ const SIDE_MARGIN = {
   L: SPACING.SIZE_60,
 };
 
-const STICKY_BAR_HEIGHT = {
+export const STICKY_BAR_HEIGHT = {
   S: 105,
   M: 90,
   L: 100,
@@ -105,10 +113,12 @@ export const stickyContentOffset: StylesMap = {
 
 const styles: StylesMap = {
   container: {
+    borderTop: BORDERS.SOLID_BLACK_1PX,
     display: 'flex',
     height: STICKY_BAR_HEIGHT.S,
     justifyContent: 'space-between',
     padding: `0 ${SIDE_MARGIN.S}px ${SPACING.SIZE_15}px`,
+    transition: `background-color ${TIME.MS400}ms ease`,
 
     [MQ.M]: {
       alignItems: 'center',
@@ -133,8 +143,8 @@ const styles: StylesMap = {
     },
   },
   logo: {
-    maxHeight: 50,
-    marginRight: SPACING.SIZE_50,
+    maxHeight: 16,
+    marginRight: SPACING.SIZE_40,
     width: 'auto',
   },
   primaryColumn: {
@@ -175,9 +185,11 @@ const styles: StylesMap = {
   },
   [THEME.DARK]: {
     background: COLORS.GLOBAL.BLACK,
+    borderTopColor: COLORS.DARK.GRAY_90,
   },
   [THEME.ORANGE]: {
     background: COLORS.GLOBAL.ORANGE,
+    borderTopColor: COLORS.ORANGE.SHADE_15,
   },
 };
 

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 import Breadcrumbs from '~/components/global/Breadcrumbs/Breadcrumbs';
 import Feedback from '~/components/global/Feedback/Feedback';
@@ -15,6 +15,7 @@ import ProductInfo from '~/components/modules/PDP/ProductInfo/ProductInfo';
 import PurchaseIncludes from '~/components/modules/PDP/PurchaseIncludes/PurchaseIncludes';
 import Reviews from '~/components/modules/PDP/Reviews/Reviews';
 import ShopWithConfidence from '~/components/modules/PDP/ShopWithConfidence/ShopWithConfidence';
+import PDPStickyBar from '~/components/modules/PDP/StickyBar/StickyBar';
 import TechnicalSpecs from '~/components/modules/PDP/TechnicalSpecs/TechnicalSpecs';
 import TireImage from '~/components/modules/PDP/TireImage/TireImage';
 import { useModalContext } from '~/context/Modal.context';
@@ -37,8 +38,10 @@ function ProductDetailContainer({ serverData }: ProductDetailData) {
     installation,
     isSizeSelectorOpen,
     onChangeSize,
+    onClickAddToCart,
     onClickChangeQuantity,
     onClickChangeSize,
+    onClickFindYourSize,
     onCloseSizeSelector,
     productInfo,
     recirculation,
@@ -46,12 +49,15 @@ function ProductDetailContainer({ serverData }: ProductDetailData) {
     reviews,
     reviewsAnchor,
     sizeFinder,
+    stickyBar,
     technicalSpecs,
     technicalSpecsAnchor,
   } = useProductDetail({
     serverData,
   });
   const { openStaticModal, openDynamicModal } = useModalContext();
+  const stickyBarAvoidSection = useRef<HTMLDivElement>(null);
+  const stickyBarDarkSection = useRef<HTMLDivElement>(null);
 
   const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
   function toggleModal() {
@@ -64,32 +70,38 @@ function ProductDetailContainer({ serverData }: ProductDetailData) {
         <GridItem gridColumnL="start/8" gridRowL="1" css={styles.breadcrumbs}>
           <Breadcrumbs navigationItems={breadcrumbs} />
         </GridItem>
-        <GridItem gridColumnL="start/8" gridRowL="2/4" css={styles.tireImage}>
+        <GridItem gridColumnL="start/8" gridRowL="2/3" css={styles.tireImage}>
           <TireImage imageList={imageList} brand={productInfo.brand} />
-        </GridItem>
-        <GridItem gridColumnL="8/14" gridRowL="1/3" css={styles.productInfo}>
-          <ProductInfo
-            sizeFinder={sizeFinder}
-            isSizeSelectorOpen={isSizeSelectorOpen}
-            onChangeSize={onChangeSize}
-            onClickChangeQuantity={onClickChangeQuantity}
-            onClickChangeSize={onClickChangeSize}
-            onCloseSizeSelector={onCloseSizeSelector}
-            {...productInfo}
-          />
         </GridItem>
         <GridItem
           fullbleed
           gridColumnL="8/14"
-          gridRowL="3"
+          gridRowL="1/3"
           css={styles.productInfo}
         >
-          <Insights
-            {...insights}
-            handleChangeLocation={toggleModal}
-            openDynamicModal={openDynamicModal}
-            css={styles.insights}
-          />
+          <div ref={stickyBarAvoidSection}>
+            <Grid>
+              <GridItem fullbleedL>
+                <ProductInfo
+                  sizeFinder={sizeFinder}
+                  isSizeSelectorOpen={isSizeSelectorOpen}
+                  onChangeSize={onChangeSize}
+                  onClickChangeQuantity={onClickChangeQuantity}
+                  onClickChangeSize={onClickChangeSize}
+                  onCloseSizeSelector={onCloseSizeSelector}
+                  {...productInfo}
+                />
+              </GridItem>
+              <GridItem fullbleed css={styles.insights}>
+                <Insights
+                  {...insights}
+                  handleChangeLocation={toggleModal}
+                  openDynamicModal={openDynamicModal}
+                  css={styles.insights}
+                />
+              </GridItem>
+            </Grid>
+          </div>
         </GridItem>
         {installation && (
           <GridItem fullbleed css={styles.installation}>
@@ -111,22 +123,24 @@ function ProductDetailContainer({ serverData }: ProductDetailData) {
         <GridItem gridColumnL="3/13" css={styles.shopWithConfidence}>
           <ShopWithConfidence />
         </GridItem>
-        <GridItem fullbleed css={styles.detailsSection}>
-          {reviews && (
-            <div id={reviewsAnchor}>
-              <Reviews {...reviews} />
-            </div>
-          )}
-          {technicalSpecs && (
-            <div id={technicalSpecsAnchor}>
-              <TechnicalSpecs {...technicalSpecs} />
-            </div>
-          )}
-          {faq && (
-            <div>
-              <FAQ {...faq} />
-            </div>
-          )}
+        <GridItem fullbleed>
+          <div ref={stickyBarDarkSection} css={styles.detailsSection}>
+            {reviews && (
+              <div id={reviewsAnchor}>
+                <Reviews {...reviews} />
+              </div>
+            )}
+            {technicalSpecs && (
+              <div id={technicalSpecsAnchor}>
+                <TechnicalSpecs {...technicalSpecs} />
+              </div>
+            )}
+            {faq && (
+              <div>
+                <FAQ {...faq} />
+              </div>
+            )}
+          </div>
         </GridItem>
         {recirculation &&
           recirculation.slice(1).map((item) => (
@@ -141,10 +155,20 @@ function ProductDetailContainer({ serverData }: ProductDetailData) {
             </Link>
           </GridItem>
         )}
-        <GridItem fullbleed css={styles.feedback}>
-          <Feedback />
-        </GridItem>
+        {stickyBar && (
+          <GridItem fullbleed css={styles.stickyBar}>
+            <PDPStickyBar
+              avoidSection={stickyBarAvoidSection}
+              darkSection={stickyBarDarkSection}
+              onClickAddToCart={onClickAddToCart}
+              onClickChangeQuantity={onClickChangeQuantity}
+              onClickFindYourSize={onClickFindYourSize}
+              {...stickyBar}
+            />
+          </GridItem>
+        )}
       </Grid>
+      <Feedback />
 
       <LocationModal isOpen={isLocationModalOpen} onClose={toggleModal} />
     </div>

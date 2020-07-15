@@ -37,6 +37,7 @@ const ratingOptions = {
 };
 
 const mockProductName = 'ProContact';
+const mockStartingPrice = '7999';
 const mockSizeLabel = '215/55R16';
 const mockSizeLoadSpeedRating = '91H';
 const mockRearSizeLabel = '215/65R17';
@@ -159,6 +160,7 @@ export function ProductInfoWithKnobs() {
       onClickChangeSize={onClickChangeSize}
       onCloseSizeSelector={onCloseSizeSelector}
       onChangeSize={onChangeSize}
+      startingPrice={mockStartingPrice}
       priceLabel={priceLabel ? priceLabel : undefined}
       volatileAvailability={volatileAvailability}
       sameSizeSearchResults={sameSizeSearchResults}
@@ -188,6 +190,7 @@ export function ProductInfoDefault() {
       }}
       availableSizes={32}
       size={mockSizeLabel}
+      startingPrice={mockStartingPrice}
       loadSpeedRating={mockSizeLoadSpeedRating}
       onClickChangeQuantity={onClickChangeQuantity}
       onClickChangeSize={onClickChangeSize}
@@ -217,6 +220,7 @@ export function ProductInfoPromoTags() {
       }}
       availableSizes={32}
       size={mockSizeLabel}
+      startingPrice={mockStartingPrice}
       loadSpeedRating={mockSizeLoadSpeedRating}
       onClickChangeQuantity={onClickChangeQuantity}
       onClickChangeSize={onClickChangeSize}
@@ -246,6 +250,7 @@ export function ProductInfoTireLine() {
       onClickChangeSize={onClickChangeSize}
       onCloseSizeSelector={onCloseSizeSelector}
       onChangeSize={onChangeSize}
+      startingPrice={mockStartingPrice}
     />
   );
 }
@@ -273,6 +278,7 @@ export function ProductInfoLongNameNoBrandLogo() {
         estimatedRetailPriceInCents: '15099',
       }}
       size={mockSizeLabel}
+      startingPrice={mockStartingPrice}
       loadSpeedRating={mockSizeLoadSpeedRating}
     />
   );
@@ -298,6 +304,7 @@ export function ProductInfoDiscountBadge() {
       }}
       availableSizes={32}
       size={mockSizeLabel}
+      startingPrice={mockStartingPrice}
       loadSpeedRating={mockSizeLoadSpeedRating}
       onClickChangeQuantity={onClickChangeQuantity}
       onClickChangeSize={onClickChangeSize}
@@ -328,6 +335,7 @@ export function ProductInfoOnly4LeftBadge() {
       }}
       availableSizes={32}
       size={mockSizeLabel}
+      startingPrice={mockStartingPrice}
       loadSpeedRating={mockSizeLoadSpeedRating}
       onClickChangeQuantity={onClickChangeQuantity}
       onClickChangeSize={onClickChangeSize}
@@ -358,6 +366,7 @@ export function ProductInfoBothBadges() {
       }}
       availableSizes={32}
       size={mockSizeLabel}
+      startingPrice={mockStartingPrice}
       loadSpeedRating={mockSizeLoadSpeedRating}
       onClickChangeQuantity={onClickChangeQuantity}
       onClickChangeSize={onClickChangeSize}
@@ -385,6 +394,7 @@ export function ProductInfoCallForPricing() {
       }}
       availableSizes={32}
       size={mockSizeLabel}
+      startingPrice={mockStartingPrice}
       loadSpeedRating={mockSizeLoadSpeedRating}
       onClickChangeQuantity={onClickChangeQuantity}
       onClickChangeSize={onClickChangeSize}
@@ -411,6 +421,7 @@ export function ProductInfoOutOfStock() {
       }}
       availableSizes={32}
       size={mockSizeLabel}
+      startingPrice={mockStartingPrice}
       loadSpeedRating={mockSizeLoadSpeedRating}
       onClickChangeQuantity={onClickChangeQuantity}
       onClickChangeSize={onClickChangeSize}
@@ -438,6 +449,7 @@ export function ProductInfoNoReviews() {
       }}
       availableSizes={32}
       size={mockSizeLabel}
+      startingPrice={mockStartingPrice}
       loadSpeedRating={mockSizeLoadSpeedRating}
       onClickChangeQuantity={onClickChangeQuantity}
       onClickChangeSize={onClickChangeSize}
@@ -467,6 +479,7 @@ export function ProductInfoMultiSize() {
       }}
       availableSizes={32}
       size={mockSizeLabel}
+      startingPrice={mockStartingPrice}
       loadSpeedRating={mockSizeLoadSpeedRating}
       rearSize={mockRearSizeLabel}
       rearLoadSpeedRating={mockRearLoadSpeedRating}

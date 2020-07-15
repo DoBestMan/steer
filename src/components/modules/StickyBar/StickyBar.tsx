@@ -5,6 +5,7 @@ import { Icon as IconType } from '~/components/global/Icon/Icon.types';
 import Image from '~/components/global/Image/Image';
 import { SiteImage } from '~/data/models/SiteImage';
 import { CSSStyles, THEME } from '~/lib/constants';
+import { getInvertedImageTransformations } from '~/lib/utils/cloudinary/cloudinary';
 
 import styles from './StickyBar.styles';
 
@@ -13,7 +14,7 @@ interface Props {
   icon?: IconType;
   isStickyBottom?: boolean;
   isStickyTop?: boolean;
-  logo?: SiteImage;
+  logo?: SiteImage | null;
   primaryColumnCustomStyles?: CSSStyles;
   secondaryLabel?: string;
   theme: THEME;
@@ -29,6 +30,8 @@ function StickyBar({
   secondaryLabel,
   theme,
 }: Props) {
+  const brandSrcTransformationArgs = getInvertedImageTransformations([200]);
+
   return (
     <div
       css={[
@@ -48,6 +51,7 @@ function StickyBar({
                   css={styles.logo}
                   altText={logo.altText}
                   src={logo.src}
+                  srcTransformationArgs={brandSrcTransformationArgs}
                 />
               </div>
             )}

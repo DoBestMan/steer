@@ -9,6 +9,7 @@ import { InstallationProps } from '~/components/modules/PDP/Installation/Install
 import { ProductInfoProps } from '~/components/modules/PDP/ProductInfo/ProductInfo';
 import { ReviewsProps } from '~/components/modules/PDP/Reviews/Reviews';
 import { SizeFinderProps } from '~/components/modules/PDP/SizeFinder/SizeFinder';
+import { PDPStickyBarProps } from '~/components/modules/PDP/StickyBar/StickyBar';
 import { TechnicalSpecsProps } from '~/components/modules/PDP/TechnicalSpecs/TechnicalSpecs';
 import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
 import { SiteCatalogProductGroupList } from '~/data/models/SiteCatalogProductGroupList';
@@ -31,6 +32,7 @@ import {
 } from './mappers/recirculationSize';
 import { mapDataToReviews } from './mappers/reviews';
 import { mapDataToSizeFinder } from './mappers/sizeFinder';
+import { mapDataToStickyBar } from './mappers/stickyBar';
 import { mapDataToTechnicalSpecs } from './mappers/technicalSpecs';
 
 export type QueryParams = Record<string, string>;
@@ -52,6 +54,15 @@ export type ParsedProductInfoProps = Omit<
 
 export type ParsedSizeFinderProps = Omit<SizeFinderProps, 'onChange'>;
 
+export type ParsedStickyBarProps = Omit<
+  PDPStickyBarProps,
+  | 'avoidSection'
+  | 'darkSection'
+  | 'onClickAddToCart'
+  | 'onClickChangeQuantity'
+  | 'onClickFindYourSize'
+>;
+
 interface ResponseProps {
   breadcrumbs: BreadcrumbsItem[];
   closeSizeSelector: () => void;
@@ -62,8 +73,10 @@ interface ResponseProps {
   installation: InstallationProps | null;
   isSizeSelectorOpen: boolean;
   onChangeSize: (value: string) => void;
+  onClickAddToCart: () => void;
   onClickChangeQuantity: (position: 'front' | 'rear') => () => void;
   onClickChangeSize: () => void;
+  onClickFindYourSize: () => void;
   onCloseSizeSelector: () => void;
   productInfo: ParsedProductInfoProps;
   recirculation: SiteCatalogProductGroupList | null;
@@ -71,6 +84,7 @@ interface ResponseProps {
   reviews: ReviewsProps;
   reviewsAnchor: string;
   sizeFinder: ParsedSizeFinderProps | null;
+  stickyBar: ParsedStickyBarProps | null;
   technicalSpecs: TechnicalSpecsProps | null;
   technicalSpecsAnchor: string;
 }
@@ -151,6 +165,10 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
     closeSizeSelector();
   }, [closeSizeSelector]);
 
+  // TODO: Integrate sticky bar
+  const handleClickAddToCart = () => {};
+  const handleClickFindYourSize = () => {};
+
   return {
     breadcrumbs: mapDataToBreadcrumbs({
       siteProduct,
@@ -164,8 +182,10 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
     installation: mapDataToInstallation({ siteProduct }),
     isSizeSelectorOpen,
     onChangeSize: handleChangeSize,
+    onClickAddToCart: handleClickAddToCart,
     onClickChangeQuantity: handleClickChangeQuantity,
     onClickChangeSize: handleClickChangeSize,
+    onClickFindYourSize: handleClickFindYourSize,
     onCloseSizeSelector: handleCloseSizeSelector,
     productInfo: mapDataToProductInfo({
       siteProduct,
@@ -181,6 +201,7 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
       siteProduct,
       router,
     }),
+    stickyBar: mapDataToStickyBar({ siteProduct }),
     technicalSpecs: mapDataToTechnicalSpecs({ siteProduct, globals, router }),
     technicalSpecsAnchor: CONSTANTS.TECH_SPECS_ANCHOR,
   };

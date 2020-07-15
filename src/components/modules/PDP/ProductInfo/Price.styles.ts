@@ -1,6 +1,6 @@
 import { CSSObject } from '@emotion/core';
 
-import { COLORS, SPACING } from '~/lib/constants';
+import { COLORS, MQ, SPACING } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const styles: CSSObject = {
@@ -18,6 +18,24 @@ const styles: CSSObject = {
     {
       color: COLORS.GLOBAL.ORANGE,
       whiteSpace: 'nowrap',
+    },
+  ],
+  startingPrice: [
+    typography.primarySubhead,
+    {
+      color: COLORS.LIGHT.GRAY_70,
+      display: 'none',
+
+      span: [
+        typography.primaryHeadline,
+        {
+          display: 'block',
+        },
+      ],
+
+      [MQ.L]: {
+        display: 'block',
+      },
     },
   ],
   title: [

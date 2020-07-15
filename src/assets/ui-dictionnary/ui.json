@@ -222,7 +222,8 @@
       "selectSingleSizeButton": "1 size available",
       "sizeQuantity": "{{quantity}} tires",
       "frontTireSize": "Front {{size}}",
-      "rearTireSize": "Rear {{size}}"
+      "rearTireSize": "Rear {{size}}",
+      "startingAtLabel": "Starting at {{value}}"
     },
     "sizeFinder": {
       "fits": "Fits your {{vehicle}}"
@@ -294,6 +295,17 @@
       "copyHeader": "Recommended",
       "price": "{{price}}/tire",
       "featureDescription": "PRO tip"
+    },
+    "stickyBar": {
+      "label": {
+        "productLine": "{{productLine}}  ∙  {{sizesAvailable}} sizes available",
+        "tireSize": "{{productLine}} {{tireSize}}",
+        "frontRearSize": "{{productLine}}  ∙  {{tireSize}} + {{rearSize}}"
+      },
+      "changeQuantity": "{{quantity}} tires",
+      "findYourSize": "Find your size",
+      "addToCart": "Add to cart  ∙  {{value}}",
+      "startingAtLabel": "Starting at {{value}}"
     },
     "faq": {
       "title": "Have a question?",

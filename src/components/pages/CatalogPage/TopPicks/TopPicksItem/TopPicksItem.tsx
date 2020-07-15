@@ -11,11 +11,7 @@ import Sticker from '~/components/global/Sticker/Sticker';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { COLORS, CSSStyles } from '~/lib/constants';
 import { getTranslate, subscribeTranslate } from '~/lib/helpers/translate';
-import {
-  ColorSpace,
-  Effect,
-  Transformations,
-} from '~/lib/utils/cloudinary/cloudinary.types';
+import { getInvertedImageTransformations } from '~/lib/utils/cloudinary/cloudinary';
 import { ordinalSuffixOf } from '~/lib/utils/string';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
@@ -141,29 +137,11 @@ function TopPicksItem(props: TopPickItemsProps) {
     show;
 
   // custom transformation to turn brand icon to white
-  const brandSrcTransformationArgs: Record<string, Transformations[]> = {
-    '200w': [
-      {
-        color: ['rgb' as ColorSpace, 'FFFFFF'],
-        effect: ['colorize' as Effect, '100'],
-        width: 200,
-      },
-    ],
-    '400w': [
-      {
-        color: ['rgb' as ColorSpace, 'FFFFFF'],
-        effect: ['colorize' as Effect, '100'],
-        width: 400,
-      },
-    ],
-    '600w': [
-      {
-        color: ['rgb' as ColorSpace, 'FFFFFF'],
-        effect: ['colorize' as Effect, '100'],
-        width: 600,
-      },
-    ],
-  };
+  const brandSrcTransformationArgs = getInvertedImageTransformations([
+    200,
+    400,
+    600,
+  ]);
 
   return (
     <div

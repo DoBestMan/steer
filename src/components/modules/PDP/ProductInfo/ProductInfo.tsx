@@ -2,7 +2,9 @@ import { PromoTagProps } from '~/components/global/PromoTag/PromoTag';
 import PromoTagCarousel from '~/components/global/PromoTag/PromoTagCarousel';
 import { SiteCatalogBrand } from '~/data/models/SiteCatalogBrand';
 import { SitePrice } from '~/data/models/SitePrice';
+import { THEME } from '~/lib/constants';
 
+import PDPActionBar from '../ActionBar/ActionBar';
 import { SizeFinderProps } from '../SizeFinder/SizeFinder';
 import CrossSell from './CrossSell';
 import MultiSizeButton from './MultiSizeButton';
@@ -39,6 +41,7 @@ export interface ProductInfoProps {
   sameSizeSearchURL?: string | null;
   size?: string;
   sizeFinder?: Omit<SizeFinderProps, 'onChange'> | null;
+  startingPrice?: string | null;
   volatileAvailability?: boolean;
 }
 
@@ -66,9 +69,12 @@ function ProductInfo({
   sameSizeSearchURL,
   size,
   sizeFinder,
+  startingPrice,
 }: ProductInfoProps) {
   const shouldShowCrossSell =
     !price && !callForPricing && size && sameSizeSearchResults;
+  const isAvailableSingleSize = size && !!price;
+  const isTireLine = !size;
 
   if (rearSize && rearPrice) {
     return (
@@ -114,14 +120,22 @@ function ProductInfo({
           </div>
           <Rating rating={rating} />
         </div>
-        {size && (
-          <div css={styles.pricesWrapper}>
-            <Price
-              customerServiceNumber={customerServiceNumber}
-              price={price}
-              priceLabel={priceLabel}
-              callForPricing={callForPricing}
-              volatileAvailability={volatileAvailability}
+        <div css={styles.pricesWrapper}>
+          <Price
+            customerServiceNumber={customerServiceNumber}
+            price={price}
+            priceLabel={priceLabel}
+            startingPrice={isTireLine ? startingPrice : undefined}
+            callForPricing={callForPricing}
+            volatileAvailability={volatileAvailability}
+          />
+        </div>
+        {(isAvailableSingleSize || isTireLine) && (
+          <div css={styles.actionBar}>
+            <PDPActionBar
+              theme={THEME.LIGHT}
+              tirePrice={price?.salePriceInCents}
+              tireSize={size}
             />
           </div>
         )}

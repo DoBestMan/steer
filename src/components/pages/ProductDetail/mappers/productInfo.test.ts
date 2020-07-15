@@ -55,6 +55,7 @@ describe('pages/ProductDetails/mappers/breadcrumbs', () => {
       sameSizeSearchResults: null,
       sameSizeSearchURL: '/tire-sizes/p215-50-R17',
       size: '215/50 R17',
+      startingPrice: '12345',
       volatileAvailability: false,
     });
   });

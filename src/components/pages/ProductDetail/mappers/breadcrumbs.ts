@@ -34,6 +34,6 @@ export function mapDataToBreadcrumbs({
     query,
     querystringNodeLabel:
       tireSizeLabel &&
-      [tireSizeLabel, rearSizeLabel].filter(Boolean).join(' & '),
+      [tireSizeLabel, rearSizeLabel].filter(Boolean).join(' + '),
   });
 }
