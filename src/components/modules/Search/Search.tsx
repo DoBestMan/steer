@@ -79,7 +79,6 @@ function Search({
   );
 
   const { resultMetadata, siteSearchResultGroupList } = results;
-  const { noExactMatch } = resultMetadata;
 
   const getCurrentInputQuery = () =>
     activeInputType === SearchInputEnum.PRIMARY ? primaryQuery : secondaryQuery;
@@ -270,8 +269,9 @@ function Search({
 
   const { queryText } = getCurrentInputQuery();
   const isInputEmpty = queryText.length < 1;
-  const hasResults = siteSearchResultGroupList.length > 0;
-  const shouldShowSearchSupport = noExactMatch && !hasResults && !isInputEmpty;
+  const hasResults = siteSearchResultGroupList?.length > 0;
+  const shouldShowSearchSupport =
+    resultMetadata?.noExactMatch && !hasResults && !isInputEmpty;
   const shouldShowInitialSearch =
     (shouldShowSearchSupport || isInputEmpty) && !searchState && !hasResults;
 
@@ -282,7 +282,7 @@ function Search({
         customerServiceNumber={customerServiceNumber}
         focusOnMount
         isCustomerServiceEnabled={isCustomerServiceEnabled}
-        noExactMatch={noExactMatch}
+        noExactMatch={resultMetadata?.noExactMatch}
         onCancelSelection={onCancelSelection}
         onInputChange={onInputChange}
         onCloseSearchClick={onCloseSearchClick}

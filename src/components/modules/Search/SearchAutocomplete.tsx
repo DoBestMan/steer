@@ -79,7 +79,7 @@ function SearchAutocomplete({
   onToggleRearTire,
   onValueSelection,
   queryText,
-  results,
+  results = [],
   searchState,
   secondaryQueryText,
 }: Props) {

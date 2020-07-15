@@ -56,19 +56,27 @@ function useContextSetup() {
     emptySiteSearchResultGroup,
   );
   const getPastSearches = useCallback(async function () {
-    const apiPastSearches = await apiGetUserSearchHistory();
+    try {
+      const apiPastSearches = await apiGetUserSearchHistory();
 
-    const transformedResults = fromUserHistorySearchToSiteSearchResultGroup(
-      apiPastSearches,
-    );
+      const transformedResults = fromUserHistorySearchToSiteSearchResultGroup(
+        apiPastSearches,
+      );
 
-    setPastSearches(transformedResults);
+      setPastSearches(transformedResults);
+    } catch (err) {
+      console.error(err);
+    }
   }, []);
 
   const deletePastSearches = useCallback(async function () {
-    await apiDeleteUserSearchHistory();
+    try {
+      await apiDeleteUserSearchHistory();
 
-    setPastSearches(emptySiteSearchResultGroup);
+      setPastSearches(emptySiteSearchResultGroup);
+    } catch (err) {
+      console.error(err);
+    }
   }, []);
 
   const addPastSearch = useCallback(async function (
@@ -79,7 +87,11 @@ function useContextSetup() {
     );
 
     if (pastSearchItem) {
-      await apiAddUserSearchHistory(pastSearchItem);
+      try {
+        await apiAddUserSearchHistory(pastSearchItem);
+      } catch (err) {
+        console.error(err);
+      }
     }
   },
   []);
@@ -107,14 +119,19 @@ function useContextSetup() {
 
       isLoadingResults.current = true;
 
-      const apiSearchResults = await apiGetSearchTypeahead({
-        additionalQueryText,
-        queryText,
-        queryType,
-        signal: abortController.current?.signal,
-      });
+      try {
+        const apiSearchResults = await apiGetSearchTypeahead({
+          additionalQueryText,
+          queryText,
+          queryType,
+          signal: abortController.current?.signal,
+        });
 
-      setSearchResults(apiSearchResults);
+        setSearchResults(apiSearchResults);
+      } catch (err) {
+        console.error(err);
+      }
+
       isLoadingResults.current = false;
     },
     [isLoadingResults],
