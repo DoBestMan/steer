@@ -28,14 +28,14 @@ export interface Item {
 
 export interface InsightsProps {
   delivery?: string | null;
-  doesItFit?: boolean;
+  doesItFit?: boolean | null;
   handleChangeLocation: () => void;
   handleChangeVehicle: () => void;
   insightItems: SiteProductInsightItem[];
-
   rebate: SiteProductInsightsRebate | null;
+  showFitBar?: boolean;
   techSpecsAnchor: string;
-  vehicle?: string;
+  vehicle?: string | null;
 }
 
 interface Props extends InsightsProps {
@@ -54,6 +54,7 @@ function Insights({
   insightItems = [],
   openDynamicModal,
   rebate,
+  showFitBar,
   techSpecsAnchor,
   vehicle,
   ...rest
@@ -80,13 +81,15 @@ function Insights({
           </button>
         </RenderItem>
       )}
-      <RenderItem>
-        <FitButton
-          vehicle={vehicle}
-          doesItFit={doesItFit}
-          onClickButton={handleChangeVehicle}
-        />
-      </RenderItem>
+      {showFitBar && (
+        <RenderItem>
+          <FitButton
+            vehicle={vehicle}
+            doesItFit={doesItFit}
+            onClickButton={handleChangeVehicle}
+          />
+        </RenderItem>
+      )}
       {delivery && (
         <RenderItem>
           <button

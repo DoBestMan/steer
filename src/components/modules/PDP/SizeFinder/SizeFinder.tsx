@@ -64,7 +64,7 @@ export default function SizeFinder({
               flair={
                 (item.isFitForCurrentVehicle &&
                   vehicle &&
-                  ui('pdp.sizeFinder.fits', { vehicle })) ||
+                  ui('pdp.sizeFinder.fits')) ||
                 undefined
               }
               onChange={handleChange}

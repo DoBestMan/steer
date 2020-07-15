@@ -29,6 +29,16 @@ export const routerMock = {
   },
 } as any;
 
+export const routerWithTireSizeMock = {
+  asPath: '/brands/continental-tires/dh2',
+  pathname: '/brands/[brand]/[productLine]',
+  query: {
+    brand: 'continental-tires',
+    productLine: 'dh2',
+    tireSize: '100-40r15',
+  },
+} as any;
+
 export const siteProductMock: SiteProduct = {
   siteProductLine: {
     name: 'DH2',
@@ -1173,7 +1183,7 @@ export const siteProductMock: SiteProduct = {
       ],
       priceInCents: '5999',
       rim: 17,
-      isFitForCurrentVehicle: false,
+      isFitForCurrentVehicle: true,
       isSelected: false,
       siteQueryParams: {
         tireSize: '100-40r17',

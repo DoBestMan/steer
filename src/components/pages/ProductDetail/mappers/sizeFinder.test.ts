@@ -39,7 +39,7 @@ describe('pages/ProductDetails/mappers/sizeFinder', () => {
           ],
         },
         {
-          isFitForCurrentVehicle: false,
+          isFitForCurrentVehicle: true,
           isSelected: false,
           loadSpeedRating: '89H',
           priceInCents: '5999',

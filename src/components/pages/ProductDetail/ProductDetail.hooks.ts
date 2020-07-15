@@ -1,3 +1,4 @@
+import lscache from 'lscache';
 import { useRouter } from 'next/router';
 import queryString from 'query-string';
 import { useCallback, useState } from 'react';
@@ -15,6 +16,7 @@ import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
 import { SiteCatalogProductGroupList } from '~/data/models/SiteCatalogProductGroupList';
 import { SiteCatalogProductImage } from '~/data/models/SiteCatalogProductImage';
 import { useApiDataWithDefault } from '~/hooks/useApiDataWithDefault';
+import { LOCAL_STORAGE, PROPERTIES } from '~/lib/constants/localStorage';
 import { eventEmitters } from '~/lib/events/emitters';
 import { omit } from '~/lib/utils/object';
 import { interpolateRoute } from '~/lib/utils/routes';
@@ -99,6 +101,9 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
   const { query, asPath, pathname } = router;
   const globals = useSiteGlobalsContext();
   const [isSizeSelectorOpen, setIsSizeSelectorOpen] = useState(false);
+  const vehicleMetadata = lscache.get(
+    LOCAL_STORAGE[PROPERTIES.VEHICLE_METADATA],
+  );
 
   const queryParams: QueryParams = {};
 
@@ -107,6 +112,13 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
       queryParams[key] = value;
     }
   });
+
+  vehicleMetadata &&
+    Object.entries(vehicleMetadata).map(([key, value]) => {
+      if (typeof value === 'string') {
+        queryParams[key] = value;
+      }
+    });
 
   const { data, error } = useApiDataWithDefault<ProductDetailResponse>({
     defaultData: serverData,
@@ -178,7 +190,7 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
     currentPath: asPath,
     faq: mapDataToFAQ({ siteProduct, globals }),
     imageList,
-    insights: mapDataToInsights({ siteProduct }),
+    insights: mapDataToInsights({ siteProduct, vehicleMetadata, router }),
     installation: mapDataToInstallation({ siteProduct }),
     isSizeSelectorOpen,
     onChangeSize: handleChangeSize,

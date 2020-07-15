@@ -1,15 +1,35 @@
+import { NextRouter } from 'next/router';
+
 import { InsightsProps } from '~/components/modules/PDP/Insights/Insights';
 import { SiteProduct } from '~/data/models/SiteProduct';
+import { VehicleMetadata } from '~/data/models/VehicleMetadata';
 
 import { CONSTANTS } from '../ProductDetail.hooks';
 
 export function mapDataToInsights({
-  siteProduct: { siteProductInsights },
+  router: { query },
+  siteProduct: { siteProductInsights, siteProductLineAvailableSizeList },
+  vehicleMetadata,
 }: {
+  router: NextRouter;
   siteProduct: SiteProduct;
+  vehicleMetadata?: VehicleMetadata;
 }): Omit<InsightsProps, 'handleChangeLocation'> {
-  // TOOD: Integrate fits your vehicle functionality
-  const doesItFit = false;
+  const tireSize = query?.tireSize;
+  const rearSize = query?.rearSize;
+  const showFitBar = !!tireSize;
+  const sizeProps = tireSize
+    ? siteProductLineAvailableSizeList.find(
+        (item) => item.siteQueryParams.tireSize === tireSize,
+      )
+    : null;
+  const rearProps = rearSize
+    ? siteProductLineAvailableSizeList.find((item) => item.size === rearSize)
+    : null;
+  const doesItFit = sizeProps
+    ? sizeProps.isFitForCurrentVehicle &&
+      (!rearProps || rearProps?.isFitForCurrentVehicle)
+    : null;
 
   // TODO: Add handlers
   const handleChangeVehicle = () => {};
@@ -20,6 +40,10 @@ export function mapDataToInsights({
     handleChangeVehicle,
     insightItems: siteProductInsights.siteProductInsightList,
     rebate: siteProductInsights.rebate,
+    showFitBar,
     techSpecsAnchor: CONSTANTS.TECH_SPECS_ANCHOR,
+    vehicle: vehicleMetadata
+      ? `${vehicleMetadata.vehicleMake} ${vehicleMetadata.vehicleModel} ${vehicleMetadata.vehicleYear} ${vehicleMetadata.vehicleTrim}`
+      : null,
   };
 }

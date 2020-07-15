@@ -1,6 +1,7 @@
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import IconOrImage from '~/components/global/IconOrImage/IconOrImage';
+import Markdown from '~/components/global/Markdown/MarkdownDynamic';
 import { IconOrImage as IconOrImageProps } from '~/data/models/IconOrImage';
 
 import styles from './InsightsItem.styles';
@@ -31,7 +32,9 @@ function InsightsItem({
       <span css={styles.icon} aria-hidden>
         {icon && <IconOrImage {...icon} />}
       </span>
-      <span css={styles.label}>{label}</span>
+      <Markdown renderers={{ paragraph: 'span' }} css={styles.label}>
+        {label}
+      </Markdown>
       {hasAction && <Icon name={ICONS.CHEVRON_RIGHT} css={styles.chevron} />}
     </div>
   );

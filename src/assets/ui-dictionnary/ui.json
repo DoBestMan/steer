@@ -226,7 +226,7 @@
       "startingAtLabel": "Starting at {{value}}"
     },
     "sizeFinder": {
-      "fits": "Fits your {{vehicle}}"
+      "fits": "Fits your vehicle"
     },
     "tireImage": {
       "modalLabel": "{{label}} image zoom",

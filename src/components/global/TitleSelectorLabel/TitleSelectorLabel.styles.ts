@@ -21,11 +21,15 @@ const styles: StylesMap = {
     {
       ':before': {
         color: COLORS.LIGHT.GRAY_70,
-        padding: `0 ${SPACING.SIZE_05}px`,
         content: '"•"',
+        display: 'inline-block',
         fontSize: 8,
+        padding: `0 ${SPACING.SIZE_05}px`,
+        position: 'relative',
+        top: -SPACING.SIZE_02,
       },
       color: COLORS.GLOBAL.ORANGE,
+      paddingRight: SPACING.SIZE_20,
     },
   ],
   label: [

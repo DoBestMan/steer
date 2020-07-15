@@ -1,7 +1,8 @@
 import { SiteLink } from './SiteLink';
+import { VehicleMetadata } from './VehicleMetadata';
 
 export interface SiteSearchResultActionLink {
   link: SiteLink;
   type: 'SiteSearchResultActionLink';
-  vehicleMetadata?: { [key: string]: string };
+  vehicleMetadata?: VehicleMetadata;
 }
