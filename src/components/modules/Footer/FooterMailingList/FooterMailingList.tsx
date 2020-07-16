@@ -35,8 +35,13 @@ function FooterMailingList() {
   };
 
   const handleKeyDown = (event: React.KeyboardEvent) => {
-    if (event.keyCode === KEYCODES.ENTER && isInputValid) {
-      handleSubmit();
+    if (event.keyCode === KEYCODES.ENTER) {
+      inputEl.current?.blur();
+      inputEl.current?.focus();
+
+      if (isInputValid) {
+        handleSubmit();
+      }
     }
   };
 
