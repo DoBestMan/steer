@@ -10,6 +10,8 @@ import Image from '~/components/global/Image/Image';
 import BaseLink from '~/components/global/Link/BaseLink';
 import Loading from '~/components/global/Loading/Loading';
 import Markdown from '~/components/global/Markdown/Markdown';
+import { useSearchContext } from '~/components/modules/Search/Search.context';
+import { SearchStateEnum } from '~/components/modules/Search/Search.types';
 import TopPicks from '~/components/pages/CatalogPage/TopPicks/TopPicks.container';
 import { useCatalogSummaryContext } from '~/context/CatalogSummary.context';
 import { useModalContext } from '~/context/Modal.context';
@@ -203,24 +205,32 @@ export function NoResultsMessage({
   customerServiceNumber,
   siteCatalogSummaryPrompt,
 }: NoResultsMessageProps) {
+  const { setIsSearchOpen, setSearchState, searchQuery } = useSearchContext();
+
   const searchByOptions = [
     {
       labelId: 'catalog.summary.noResultsVehicleLabel',
-      href: '/vehicles/acura-tires/rsx/2005?tireSize=23540R1891W',
+      searchCategory: SearchStateEnum.VEHICLE,
     },
     {
       labelId: 'catalog.summary.noResultsSizeLabel',
-      href: '/vehicles/acura-tires/rsx/2005?tireSize=23540R1891W',
+      searchCategory: SearchStateEnum.TIRE_SIZE,
     },
     {
       labelId: 'catalog.summary.noResultsBrandLabel',
-      href: '/vehicles/acura-tires/rsx/2005?tireSize=23540R1891W',
+      searchCategory: SearchStateEnum.BRAND,
     },
     {
       labelId: 'catalog.summary.noResultsPopularLabel',
-      href: '/vehicles/acura-tires/rsx/2005?tireSize=23540R1891W',
+      searchCategory: SearchStateEnum.POPULAR,
     },
   ];
+
+  const onSearchClick = (category: SearchStateEnum) => () => {
+    setSearchState(category);
+    searchQuery({ queryText: '', queryType: category });
+    setIsSearchOpen(true);
+  };
 
   return (
     siteCatalogSummaryPrompt && (
@@ -258,9 +268,13 @@ export function NoResultsMessage({
               <ul>
                 {searchByOptions.map((option) => (
                   <li css={styles.noResultsLinkWrapper} key={option.labelId}>
-                    <BaseLink css={styles.noResultsLink} href={option.href}>
+                    <button
+                      type="button"
+                      css={styles.noResultsLink}
+                      onClick={onSearchClick(option.searchCategory)}
+                    >
                       {ui(option.labelId)}
-                    </BaseLink>
+                    </button>
                   </li>
                 ))}
               </ul>
