@@ -11,6 +11,14 @@ import { disableGlobalFocus } from '~/styles/document/accessibility.styles';
 import { typography, typographyStyles } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
+  brandImage: {
+    width: 100,
+    img: {
+      height: 20,
+      float: 'right',
+      width: 'auto',
+    },
+  },
   container: {
     backgroundColor: COLORS.GLOBAL.ORANGE,
     color: COLORS.GLOBAL.WHITE,
@@ -131,46 +139,6 @@ const styles: StylesMap = {
     top: 0,
     width: '100%',
   },
-
-  /* eslint-disable @typescript-eslint/camelcase */
-  logo_bridgestone: {
-    height: 11,
-    width: 73,
-
-    [MQ.M]: {
-      height: 13,
-      width: 87,
-    },
-  },
-  logo_continental: {
-    height: 14,
-    width: 70,
-
-    [MQ.M]: {
-      height: 17,
-      width: 84,
-    },
-  },
-  logo_michelin: {
-    height: 16,
-    width: 80,
-
-    [MQ.M]: {
-      height: 19,
-      width: 95,
-    },
-  },
-  logo_pirelli: {
-    height: 12,
-    width: 48,
-
-    [MQ.M]: {
-      height: 14,
-      width: 57,
-    },
-  },
-  /* eslint-enable @typescript-eslint/camelcase */
-
   noResultsHeading: {
     marginBottom: SPACING.SIZE_40,
 

@@ -16,6 +16,7 @@ import { useModalContext } from '~/context/Modal.context';
 import { SiteCatalogSummaryBuildIn } from '~/data/models/SiteCatalogSummaryBuildIn';
 import { SiteCatalogSummaryPrompt } from '~/data/models/SiteCatalogSummaryPrompt';
 import { LINK_TYPES } from '~/lib/constants';
+import { getInvertedImageTransformations } from '~/lib/utils/cloudinary/cloudinary';
 import { isValidStaticModal } from '~/lib/utils/modal';
 import { ui } from '~/lib/utils/ui-dictionary';
 
@@ -85,17 +86,19 @@ export function BuildInMessage({
                 return;
               }
               const id = label.replace(/\s+/g, '').toLowerCase();
-              // TODO: test with actual assets
-              const imageStyles = styles[`logo_${id}`];
+              const widths = [100, 200];
 
               return (
                 <li key={id}>
-                  <Image
-                    altText={label}
-                    src={image.src}
-                    css={imageStyles}
-                    widths={[100, 200, 500]}
-                  />
+                  <div css={styles.brandImage}>
+                    <Image
+                      altText={label}
+                      src={image.src}
+                      srcTransformationArgs={getInvertedImageTransformations(
+                        widths,
+                      )}
+                    />
+                  </div>
                 </li>
               );
             })}
