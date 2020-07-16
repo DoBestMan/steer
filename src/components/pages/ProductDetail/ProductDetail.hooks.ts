@@ -14,7 +14,7 @@ import { PDPStickyBarProps } from '~/components/modules/PDP/StickyBar/StickyBar'
 import { TechnicalSpecsProps } from '~/components/modules/PDP/TechnicalSpecs/TechnicalSpecs';
 import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
 import { SiteCatalogProductGroupList } from '~/data/models/SiteCatalogProductGroupList';
-import { SiteCatalogProductImage } from '~/data/models/SiteCatalogProductImage';
+import { SiteProductLine } from '~/data/models/SiteProductLine';
 import { useApiDataWithDefault } from '~/hooks/useApiDataWithDefault';
 import { LOCAL_STORAGE, PROPERTIES } from '~/lib/constants/localStorage';
 import { eventEmitters } from '~/lib/events/emitters';
@@ -65,12 +65,11 @@ export type ParsedStickyBarProps = Omit<
   | 'onClickFindYourSize'
 >;
 
-interface ResponseProps {
+interface ResponseProps extends Pick<SiteProductLine, 'assetList'> {
   breadcrumbs: BreadcrumbsItem[];
   closeSizeSelector: () => void;
   currentPath: string;
   faq: FAQProps | null;
-  imageList: SiteCatalogProductImage[];
   insights: Omit<InsightsProps, 'handleChangeLocation'>;
   installation: InstallationProps | null;
   isSizeSelectorOpen: boolean;
@@ -137,7 +136,7 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
 
   const { siteProductLine } = siteProduct;
 
-  const imageList = siteProductLine.imageList;
+  const assetList = siteProductLine.assetList;
 
   // Size selector
   const toggleSizeSelector = useCallback(() => {
@@ -182,6 +181,7 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
   const handleClickFindYourSize = () => {};
 
   return {
+    assetList,
     breadcrumbs: mapDataToBreadcrumbs({
       siteProduct,
       router,
@@ -189,7 +189,6 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
     closeSizeSelector,
     currentPath: asPath,
     faq: mapDataToFAQ({ siteProduct, globals }),
-    imageList,
     insights: mapDataToInsights({ siteProduct, vehicleMetadata, router }),
     installation: mapDataToInstallation({ siteProduct }),
     isSizeSelectorOpen,

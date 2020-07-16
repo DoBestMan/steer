@@ -63,7 +63,7 @@ function Reviews({
                     {uiJSX('reviews.simpleTire.name', {
                       number: sources.simpleTire,
                       preposition: (
-                        <span className="preposition">
+                        <span className="preposition" key="st-preposition">
                           {ui('reviews.simpleTire.preposition')}
                         </span>
                       ),
@@ -75,7 +75,7 @@ function Reviews({
                     {uiJSX('reviews.google.name', {
                       number: sources?.googleShopping,
                       preposition: (
-                        <span className="preposition">
+                        <span className="preposition" key="google-preposition">
                           {ui('reviews.google.preposition')}
                         </span>
                       ),

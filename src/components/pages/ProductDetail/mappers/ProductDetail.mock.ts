@@ -1,6 +1,11 @@
 /* eslint-disable sort-keys */
 
 import { SiteCatalogProductGroupItemEnum } from '~/data/models/SiteCatalogProductGroupList';
+import {
+  SiteCatalogProductImage,
+  SiteCatalogProductImageProductImageTypeEnum,
+  SiteCatalogProductImageTypeEnum,
+} from '~/data/models/SiteCatalogProductImage';
 import { SiteCatalogProductItemEnum } from '~/data/models/SiteCatalogProductItem';
 import { SiteImageNullableTypeEnum } from '~/data/models/SiteImageNullable';
 import { SiteProduct } from '~/data/models/SiteProduct';
@@ -53,7 +58,7 @@ export const siteProductMock: SiteProduct = {
       },
       label: 'Achilles',
     },
-    imageList: [
+    assetList: [
       {
         image: {
           type: ICON_IMAGE_TYPE.IMAGE,
@@ -63,8 +68,9 @@ export const siteProductMock: SiteProduct = {
           width: 800,
           height: 800,
         },
-        productImageType: PRODUCT_IMAGE_TYPES.SIDEWALL,
-      },
+        productImageType: SiteCatalogProductImageProductImageTypeEnum.Sidewall,
+        type: SiteCatalogProductImageTypeEnum.SiteCatalogProductImage,
+      } as SiteCatalogProductImage,
       {
         image: {
           type: ICON_IMAGE_TYPE.IMAGE,
@@ -74,8 +80,9 @@ export const siteProductMock: SiteProduct = {
           width: 562,
           height: 800,
         },
-        productImageType: PRODUCT_IMAGE_TYPES.SIDETREAD,
-      },
+        productImageType: SiteCatalogProductImageProductImageTypeEnum.Sidetread,
+        type: SiteCatalogProductImageTypeEnum.SiteCatalogProductImage,
+      } as SiteCatalogProductImage,
       {
         image: {
           type: ICON_IMAGE_TYPE.IMAGE,
@@ -85,8 +92,9 @@ export const siteProductMock: SiteProduct = {
           width: 800,
           height: 800,
         },
-        productImageType: PRODUCT_IMAGE_TYPES.TREADONLY,
-      },
+        productImageType: SiteCatalogProductImageProductImageTypeEnum.Treadonly,
+        type: SiteCatalogProductImageTypeEnum.SiteCatalogProductImage,
+      } as SiteCatalogProductImage,
     ],
     startingPriceInCents: '12345',
     overview:

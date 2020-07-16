@@ -2,18 +2,19 @@ import { useEffect, useState } from 'react';
 import { SwiperInstance } from 'react-id-swiper';
 
 import Carousel from '~/components/global/Carousel/Carousel';
+import { SiteProductLine } from '~/data/models/SiteProductLine';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { BREAKPOINTS } from '~/lib/constants';
 
 import styles, { MAX_HEIGHT } from './TireImage.styles';
-import TireImageCarouselItem, { ImageItemProps } from './TireImageCarouselItem';
+import TireImageCarouselItem from './TireImageCarouselItem';
 import TireImageThumbs from './TireImageThumbs';
 
 interface Props {
+  assetList: SiteProductLine['assetList'];
   currentIndex: number;
   handleClick?: (index: number) => void;
   hasThumbs?: boolean;
-  imageList: Array<ImageItemProps>;
   isFullscreen?: boolean;
   setCurrentIndex: (index: number) => void;
 }
@@ -43,7 +44,7 @@ function TireImageCarousel({
   currentIndex,
   handleClick,
   hasThumbs,
-  imageList,
+  assetList,
   isFullscreen,
   setCurrentIndex,
 }: Props) {
@@ -84,7 +85,7 @@ function TireImageCarousel({
           getSwiper={setSwiper}
           activeSlide={currentIndex}
         >
-          {imageList.map((imageItem, index) => (
+          {assetList.map((imageItem, index) => (
             <div key={`tire-image-${index}`}>
               <TireImageCarouselItem
                 handleClick={handleClick}
@@ -93,8 +94,8 @@ function TireImageCarousel({
                 index={index}
                 isFullscreen={isFullscreen}
                 maxHeight={maxHeight}
-                shouldStopVideo={imageItem.video ? shouldStopVideo : undefined}
-                setShouldStopVideo={imageItem.video && setShouldStopVideo}
+                shouldStopVideo={shouldStopVideo}
+                setShouldStopVideo={setShouldStopVideo}
               />
             </div>
           ))}
@@ -104,7 +105,7 @@ function TireImageCarousel({
       {hasThumbs && (
         <TireImageThumbs
           currentIndex={currentIndex}
-          imageList={imageList}
+          assetList={assetList}
           isFullscreen={isFullscreen}
           swiper={swiper}
         />

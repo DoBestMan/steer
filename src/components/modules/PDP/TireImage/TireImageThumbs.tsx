@@ -1,21 +1,23 @@
 import { SwiperInstance } from 'react-id-swiper';
 
 import Image from '~/components/global/Image/Image';
+import { SiteCatalogProductImageTypeEnum } from '~/data/models/SiteCatalogProductImage';
+import { SiteProductLine } from '~/data/models/SiteProductLine';
+import { SiteYouTubeVideoTypeEnum } from '~/data/models/SiteYouTubeVideo';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import styles from './TireImage.styles';
-import { ImageItemProps } from './TireImageCarouselItem';
 
 interface Props {
+  assetList: SiteProductLine['assetList'];
   currentIndex: number;
-  imageList: ImageItemProps[];
   isFullscreen?: boolean;
   swiper: SwiperInstance;
 }
 
 function TireImageThumbs({
   currentIndex,
-  imageList,
+  assetList,
   isFullscreen,
   swiper,
 }: Props) {
@@ -30,24 +32,38 @@ function TireImageThumbs({
         isFullscreen && styles.thumbsContainerFullScreen,
       ]}
     >
-      {imageList.map((imageItem, index) => {
-        const { image, video } = imageItem;
-        const imageSrc = image?.src || video?.posterFrame || '';
+      {assetList.map((imageItem, index) => {
+        const fallbackAlt = ui('pdp.tireImage.thumbAltText', {
+          number: index + 1,
+        });
+
+        const src =
+          imageItem.type === SiteYouTubeVideoTypeEnum.SiteYouTubeVideo
+            ? imageItem.poster.src
+            : imageItem.image.src;
+
         const altText =
-          image?.altText ||
-          ui('pdp.tireImage.thumbAltText', { number: index + 1 });
+          imageItem.type === SiteYouTubeVideoTypeEnum.SiteYouTubeVideo
+            ? imageItem.poster.altText
+            : imageItem.image.altText;
 
         return (
           <button
             css={[
               styles.thumb,
               index === currentIndex && styles.thumbActive,
-              image && styles.imageThumb,
+              imageItem.type ===
+                SiteCatalogProductImageTypeEnum.SiteCatalogProductImage &&
+                styles.imageThumb,
             ]}
             key={`tire-image-thumb-${index}`}
             onClick={handleClick(index)}
           >
-            <Image altText={altText} responsive src={imageSrc} />
+            <Image
+              altText={altText || fallbackAlt}
+              responsive
+              src={src || ''}
+            />
           </button>
         );
       })}

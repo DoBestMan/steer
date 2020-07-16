@@ -1,22 +1,25 @@
 import { useState } from 'react';
 
 import { SiteCatalogBrand } from '~/data/models/SiteCatalogBrand';
+import { SiteCatalogProductImageTypeEnum } from '~/data/models/SiteCatalogProductImage';
+import { SiteProductLine } from '~/data/models/SiteProductLine';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 
 import TireImageCarousel from './TireImageCarousel';
-import { ImageItemProps } from './TireImageCarouselItem';
 import TireImageZoom from './TireImageZoom';
 
-interface Props {
+interface Props extends Pick<SiteProductLine, 'assetList'> {
   brand: SiteCatalogBrand;
-  imageList: ImageItemProps[];
 }
 
-function TireImage({ brand, imageList }: Props) {
+function TireImage({ brand, assetList }: Props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { greaterThan } = useBreakpoints();
   const hasThumbs = greaterThan.M;
-  const zoomImageList = imageList.filter((item) => item.image);
+  const zoomImageList = assetList.filter(
+    (item) =>
+      item.type === SiteCatalogProductImageTypeEnum.SiteCatalogProductImage,
+  );
 
   // We need to track the two carousel states separately because
   // the zoom list doesn't include videos
@@ -25,8 +28,8 @@ function TireImage({ brand, imageList }: Props) {
 
   function findIndex(
     index: number,
-    prevList: Props['imageList'],
-    newList: Props['imageList'],
+    prevList: Props['assetList'],
+    newList: Props['assetList'],
   ) {
     const selectedItem = prevList[index];
     const selectedZoomItem = newList.findIndex(
@@ -38,14 +41,14 @@ function TireImage({ brand, imageList }: Props) {
 
   function closeModal() {
     setCurrentInlineIndex(
-      findIndex(currentZoomIndex, zoomImageList, imageList),
+      findIndex(currentZoomIndex, zoomImageList, assetList),
     );
     setIsModalOpen(false);
   }
 
   function openModal() {
     setCurrentZoomIndex(
-      findIndex(currentInlineIndex, imageList, zoomImageList),
+      findIndex(currentInlineIndex, assetList, zoomImageList),
     );
     setIsModalOpen(!isModalOpen);
   }
@@ -54,7 +57,7 @@ function TireImage({ brand, imageList }: Props) {
     <>
       <TireImageCarousel
         hasThumbs={hasThumbs}
-        imageList={imageList}
+        assetList={assetList}
         handleClick={openModal}
         currentIndex={currentInlineIndex}
         setCurrentIndex={setCurrentInlineIndex}
@@ -62,7 +65,7 @@ function TireImage({ brand, imageList }: Props) {
       <TireImageZoom
         brand={brand}
         handleClose={closeModal}
-        imageList={zoomImageList}
+        assetList={zoomImageList}
         isModalOpen={isModalOpen}
         currentIndex={currentZoomIndex}
         setCurrentIndex={setCurrentZoomIndex}

@@ -5,8 +5,12 @@ import {
   Size,
   TechnicalSpecsProps,
 } from '~/components/modules/PDP/TechnicalSpecs/TechnicalSpecs';
+import {
+  SiteCatalogProductImage,
+  SiteCatalogProductImageProductImageTypeEnum,
+  SiteCatalogProductImageTypeEnum,
+} from '~/data/models/SiteCatalogProductImage';
 import { SiteProduct } from '~/data/models/SiteProduct';
-import { PRODUCT_IMAGE_TYPES } from '~/lib/constants/productImage.types';
 import { interpolateRoute } from '~/lib/utils/routes';
 import { formatDollars, keyToCamel } from '~/lib/utils/string';
 
@@ -31,9 +35,12 @@ export function mapDataToTechnicalSpecs({
 
   const description = siteProductLine.overview || '';
 
-  const treadOnlyImage = siteProductLine.imageList.find(
-    (item) => item.productImageType === PRODUCT_IMAGE_TYPES.TREADONLY,
-  );
+  const treadOnlyImage = siteProductLine.assetList.find(
+    (item) =>
+      item.type === SiteCatalogProductImageTypeEnum.SiteCatalogProductImage &&
+      item.productImageType ===
+        SiteCatalogProductImageProductImageTypeEnum.Treadonly,
+  ) as SiteCatalogProductImage;
 
   const specs = siteProductSpecs.map((item) => ({
     label: item.name,

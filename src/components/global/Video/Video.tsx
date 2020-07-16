@@ -1,9 +1,11 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Image from '~/components/global/Image/Image';
 import Loading from '~/components/global/Loading/Loading';
+import { SiteImage } from '~/data/models/SiteImage';
+import { SiteYouTubeVideoVideo } from '~/data/models/SiteYouTubeVideoVideo';
 import { CSSStyles, THEME } from '~/lib/constants';
 import { ratioToPercentage } from '~/lib/utils/number';
 import { randomString } from '~/lib/utils/string';
@@ -15,28 +17,28 @@ import styles, { activeVideoStyles } from './Video.styles';
 export interface Props {
   aspectRatio?: string;
   containerStyles?: CSSStyles;
-  posterFrame: string;
+  poster: SiteImage;
   setShouldStopVideo?: (shouldStopVideo: boolean) => void;
   shouldStopVideo?: boolean;
   sizes: number[];
+  video: SiteYouTubeVideoVideo;
   videoStyles?: CSSStyles;
-  youtubeId: string;
 }
 
 function Video({
   containerStyles,
   aspectRatio = '16/9',
-  posterFrame,
+  poster,
   sizes,
   videoStyles,
-  youtubeId,
+  video,
   shouldStopVideo,
   setShouldStopVideo,
 }: Props) {
-  const [videoId] = useState(`${randomString(10)}-video`);
+  const videoId = `${randomString(10)}-video`;
 
   const { hasPlayedVideo, isLoading, setIsLoading, stopVideo } = useYoutubeApi({
-    youtubeId,
+    youtubeId: video.youtubeId,
     videoId,
   });
 
@@ -84,11 +86,10 @@ function Video({
           </span>
 
           <Image
-            altText=""
             customStyles={styles.posterFrame as CSSStyles}
             widths={sizes}
-            src={posterFrame}
             responsive
+            {...poster}
           />
         </div>
       </button>

@@ -1,7 +1,7 @@
 import { SiteCatalogBrand } from './SiteCatalogBrand';
 import { SiteCatalogProductImage } from './SiteCatalogProductImage';
 import { SiteProductLineFaqList } from './SiteProductLineFaqList';
-
+import { SiteYouTubeVideo } from './SiteYouTubeVideo';
 /**
  * Data for product line (not specific to a size)
  * @export
@@ -22,10 +22,10 @@ export interface SiteProductLine {
   brand: SiteCatalogBrand;
   /**
    *
-   * @type {Array<SiteCatalogProductImage>}
+   * @type {Array<SiteCatalogProductImage | SiteYouTubeVideo>}
    * @memberof SiteProductLine
    */
-  imageList: Array<SiteCatalogProductImage>;
+  assetList: Array<SiteCatalogProductImage | SiteYouTubeVideo>;
   /**
    * Starting price of product line
    * @type {string}
@@ -44,4 +44,10 @@ export interface SiteProductLine {
    * @memberof SiteProductLine
    */
   faqList: Array<SiteProductLineFaqList>;
+  /**
+   * Has been renamed to assetList
+   * @type {Array<object>}
+   * @memberof SiteProductLine
+   */
+  imageList?: Array<object>;
 }

@@ -41,11 +41,6 @@ export function useYoutubeApi({ videoId, youtubeId }: Props) {
 
   let player: Player;
 
-  // This automatically gets run when the Youtube script has successfully loaded
-  window.onYouTubeIframeAPIReady = function () {
-    createVideo();
-  };
-
   function playVideo() {
     if (!player) {
       return;
@@ -87,6 +82,10 @@ export function useYoutubeApi({ videoId, youtubeId }: Props) {
   }
 
   useEffect(() => {
+    window.onYouTubeIframeAPIReady = function () {
+      createVideo();
+    };
+
     // If script has already been loaded, skip to creating the video
     if (document.querySelector(`#${CONSTANTS.SCRIPT_ID}`) && isLoading) {
       createVideo();

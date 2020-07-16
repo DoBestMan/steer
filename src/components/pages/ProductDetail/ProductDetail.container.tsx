@@ -33,7 +33,7 @@ function ProductDetailContainer({ serverData }: ProductDetailData) {
   const {
     breadcrumbs,
     faq,
-    imageList,
+    assetList,
     insights,
     installation,
     isSizeSelectorOpen,
@@ -71,7 +71,7 @@ function ProductDetailContainer({ serverData }: ProductDetailData) {
           <Breadcrumbs navigationItems={breadcrumbs} />
         </GridItem>
         <GridItem gridColumnL="start/8" gridRowL="2/3" css={styles.tireImage}>
-          <TireImage imageList={imageList} brand={productInfo.brand} />
+          <TireImage assetList={assetList} brand={productInfo.brand} />
         </GridItem>
         <GridItem
           fullbleed
