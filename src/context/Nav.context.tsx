@@ -125,8 +125,6 @@ export function useNavContextSetup() {
       setActiveLink('');
     },
     handleCloseSubNav: () => {
-      setActiveLink('');
-      setActiveCategory('');
       setIsSubNavOpen(false);
     },
     isHidden,

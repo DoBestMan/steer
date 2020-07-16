@@ -20,10 +20,8 @@ import { typography } from '~/styles/typography.styles';
 
 import { NAV_CONTENT_HEIGHT } from '../Nav/Nav.styles';
 
-export const SUBNAV_TIME_SLIDE_OPEN = TIME.MS400;
-export const SUBNAV_TIME_SLIDE_CLOSE = TIME.MS3000;
-export const SUBNAV_TIME_FADE_OPEN = TIME.MS400;
-export const SUBNAV_TIME_FADE_CLOSE = TIME.MS600;
+export const SUBNAV_TIME_OPEN = TIME.MS750;
+export const SUBNAV_TIME_CLOSE = TIME.MS500;
 
 const styles: StylesMap = {
   action: {
@@ -67,6 +65,12 @@ const styles: StylesMap = {
     [MQ.M]: {
       display: 'flex',
     },
+  },
+  disableEvents: {
+    pointerEvents: 'none',
+  },
+  enableEvents: {
+    pointerEvents: 'auto',
   },
   focusHide: {
     // removes phantom height in parent modal
@@ -127,13 +131,6 @@ const styles: StylesMap = {
       position: 'initial',
     },
   },
-  mobileLinks: {
-    opacity: 0,
-  },
-  mobileLinksOpen: {
-    opacity: 1,
-    transition: `all ${TIME.MS400}ms ${EASING.CUBIC_EASE_IN} 400ms`, // fade in content after subnav open animation
-  },
   navContent: {
     backgroundColor: COLORS.GLOBAL.WHITE,
     display: 'flex',
@@ -160,23 +157,25 @@ const styles: StylesMap = {
     width: '100%',
   },
   overlay: {
+    display: 'none',
     [MQ.L]: {
       background: COLORS.LIGHT.GRAY_70,
+      display: 'initial',
       height: '100%',
-      left: 0,
-      position: 'absolute',
-      top: 0,
+      position: 'fixed',
       width: '100%',
       zIndex: Z_INDEX.TOP,
     },
   },
-  overlayContainer: {
-    display: 'none',
+  overlayHitbox: {
     height: '100%',
-    position: 'relative',
-    width: `calc(100% + ${GAP_COLUMNS.L}px)`,
+    width: '100%',
+  },
+  psuedoOverlay: {
+    display: 'none',
     [MQ.L]: {
       display: 'initial',
+      width: `calc(100% + ${GAP_COLUMNS.L}px)`,
     },
   },
   root: {
@@ -227,9 +226,6 @@ const styles: StylesMap = {
       position: 'initial',
     },
   },
-  subnavInnerGridOpen: {
-    pointerEvents: 'auto',
-  },
   subnavLinkList: [
     typography.bodyCopy,
     {
@@ -263,7 +259,7 @@ const styles: StylesMap = {
   ],
 };
 
-export const subNavContainer = {
+export const visibility = {
   /* eslint-disable sort-keys */
   [ENTERING]: {
     pointerEvents: 'auto',
@@ -294,11 +290,11 @@ export const slideLeft = {
   },
   [ENTERED]: {
     transform: 'translate3d(0, 0, 0)',
-    transition: `all ${SUBNAV_TIME_SLIDE_OPEN}ms ${EASING.CUBIC_EASE_OUT}`,
+    transition: `transform ${SUBNAV_TIME_OPEN}ms ${EASING.CUBIC_EASE_OUT}`,
   },
   [EXITING]: {
     transform: 'translate3d(100%, 0, 0)',
-    transition: `all ${SUBNAV_TIME_SLIDE_CLOSE}ms ${EASING.EXPO_EASE_OUT}`,
+    transition: `transform ${SUBNAV_TIME_CLOSE}ms ${EASING.CUBIC_EASE_IN}`,
   },
   [EXITED]: {
     transform: 'translate3d(100%, 0, 0)',
@@ -312,11 +308,11 @@ export const fade = {
   },
   [ENTERED]: {
     opacity: 1,
-    transition: `all ${SUBNAV_TIME_FADE_OPEN}ms ${EASING.CUBIC_EASE_OUT}`,
+    transition: `opacity ${SUBNAV_TIME_OPEN}ms ${EASING.CUBIC_EASE_OUT}`,
   },
   [EXITING]: {
     opacity: 0,
-    transition: `all ${SUBNAV_TIME_FADE_CLOSE}ms ${EASING.EXPO_EASE_OUT}`,
+    transition: `opacity ${SUBNAV_TIME_CLOSE}ms ${EASING.CUBIC_EASE_IN}`,
   },
   [EXITED]: {
     opacity: 0,

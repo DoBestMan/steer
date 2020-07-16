@@ -6,10 +6,17 @@ import { ENTERED, EXITED } from 'react-transition-group/Transition';
 import FocusTrap from '~/components/global/FocusTrap/FocusTrap';
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
-import { Animation, KEYCODES, TIME } from '~/lib/constants';
+import { Animation, KEYCODES } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
-import styles, { fade, slideLeft, subNavContainer } from './SubNav.styles';
+import styles, {
+  fade,
+  slideLeft,
+  SUBNAV_TIME_CLOSE,
+  visibility,
+} from './SubNav.styles';
+
+export const SUBNAV_TIMEOUT = { enter: 0, exit: SUBNAV_TIME_CLOSE };
 
 interface Props {
   animation?: Animation;
@@ -19,6 +26,7 @@ interface Props {
   mountOnEnter?: boolean;
   onBack?: () => void;
   onClose: () => void;
+  onExited?: () => void;
   unlockOnClose?: boolean;
   unmountOnExit?: boolean;
 }
@@ -31,6 +39,7 @@ function SubNavModal({
   mountOnEnter = false,
   onBack,
   onClose,
+  onExited,
   unlockOnClose,
   unmountOnExit = false,
 }: Props) {
@@ -67,57 +76,56 @@ function SubNavModal({
       unmountOnExit={unmountOnExit}
       mountOnEnter={mountOnEnter}
       in={isOpen}
-      timeout={{ enter: 0, exit: TIME.MS400 }}
+      timeout={SUBNAV_TIMEOUT}
+      onExited={onExited}
     >
-      {(state) => {
-        return (
-          <FocusTrap
-            css={state === EXITED && styles.focusHide}
-            active={isOpen && state === ENTERED}
+      {(state) => (
+        <FocusTrap
+          css={state === EXITED && styles.focusHide}
+          active={isOpen && state === ENTERED}
+          ref={navRef}
+        >
+          <nav
             ref={navRef}
+            css={[
+              styles.navModalContainer,
+              animationStyles[state],
+              visibility[state],
+            ]}
           >
-            <nav
-              ref={navRef}
-              css={[
-                styles.navModalContainer,
-                animationStyles[state],
-                subNavContainer[state],
-              ]}
+            <div
+              ref={contentRef}
+              css={[styles.navContent, animationStyles[state]]}
             >
-              <div
-                ref={contentRef}
-                css={[styles.navContent, animationStyles[state]]}
-              >
-                {onBack && (
-                  <div css={styles.actions}>
-                    <button
-                      aria-label={ui('modal.back', {
-                        moduleName: ui('nav.contentLabel'),
-                      })}
-                      onClick={onBack}
-                      css={styles.action}
-                    >
-                      <Icon name={ICONS.CHEVRON_LEFT} />
-                    </button>
-                    <button
-                      aria-label={ui('common.modal.close', { contentLabel })}
-                      onClick={onClose}
-                      css={styles.action}
-                    >
-                      <Icon name={ICONS.CLOSE} />
-                    </button>
-                  </div>
-                )}
-                {onBack ? (
-                  <div css={styles.navContentNested}>{children}</div>
-                ) : (
-                  children
-                )}
-              </div>
-            </nav>
-          </FocusTrap>
-        );
-      }}
+              {onBack && (
+                <div css={styles.actions}>
+                  <button
+                    aria-label={ui('modal.back', {
+                      moduleName: ui('nav.contentLabel'),
+                    })}
+                    onClick={onBack}
+                    css={styles.action}
+                  >
+                    <Icon name={ICONS.CHEVRON_LEFT} />
+                  </button>
+                  <button
+                    aria-label={ui('common.modal.close', { contentLabel })}
+                    onClick={onClose}
+                    css={styles.action}
+                  >
+                    <Icon name={ICONS.CLOSE} />
+                  </button>
+                </div>
+              )}
+              {onBack ? (
+                <div css={styles.navContentNested}>{children}</div>
+              ) : (
+                children
+              )}
+            </div>
+          </nav>
+        </FocusTrap>
+      )}
     </CSSTransition>
   );
 }

@@ -66,7 +66,9 @@ describe('useNavContextSetup', () => {
   });
 
   test('closing subnav clears link and category', () => {
-    const { result } = renderHook(() => useNavContextSetup());
+    const { result, waitForNextUpdate } = renderHook(() =>
+      useNavContextSetup(),
+    );
 
     act(() => {
       const handler = result.current.createSelectLinkHandler({
@@ -77,9 +79,8 @@ describe('useNavContextSetup', () => {
       result.current.createSelectCategoryHandler('category')();
       result.current.handleCloseSubNav();
     });
+    waitForNextUpdate();
 
-    expect(result.current.activeCategory).toEqual('');
-    expect(result.current.activeLink).toEqual('');
     expect(result.current.isSubNavOpen).toEqual(false);
   });
 

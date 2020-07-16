@@ -83,6 +83,9 @@ export const styles: StylesMap = {
     height: NAV_CONTENT_HEIGHT,
   },
   hamburger: {
+    button: {
+      padding: SPACING.SIZE_10,
+    },
     display: 'inline-flex',
     marginLeft: SPACING.SIZE_10,
     [MQ.L]: {
@@ -122,6 +125,7 @@ export const styles: StylesMap = {
     alignContent: 'center',
     display: 'flex',
     justifyContent: 'flex-end',
+    width: `calc(100% + ${SPACING.SIZE_10}px)`, // offset padding on hamburger menu icon
   },
   root: {
     position: 'absolute',
