@@ -1,4 +1,3 @@
-import lscache from 'lscache';
 import { useRouter } from 'next/router';
 import queryString from 'query-string';
 import { useCallback, useState } from 'react';
@@ -12,14 +11,15 @@ import { ReviewsProps } from '~/components/modules/PDP/Reviews/Reviews';
 import { SizeFinderProps } from '~/components/modules/PDP/SizeFinder/SizeFinder';
 import { PDPStickyBarProps } from '~/components/modules/PDP/StickyBar/StickyBar';
 import { TechnicalSpecsProps } from '~/components/modules/PDP/TechnicalSpecs/TechnicalSpecs';
+import { useSearchContext } from '~/components/modules/Search/Search.context';
 import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
+import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
 import { SiteCatalogProductGroupList } from '~/data/models/SiteCatalogProductGroupList';
 import { SiteProductLine } from '~/data/models/SiteProductLine';
 import { useApiDataWithDefault } from '~/hooks/useApiDataWithDefault';
-import { LOCAL_STORAGE, PROPERTIES } from '~/lib/constants/localStorage';
 import { eventEmitters } from '~/lib/events/emitters';
 import { omit } from '~/lib/utils/object';
-import { interpolateRoute } from '~/lib/utils/routes';
+import { getStringifiedParams, interpolateRoute } from '~/lib/utils/routes';
 import { ProductDetailResponse } from '~/pages/api/product-detail';
 
 import { mapDataToBreadcrumbs } from './mappers/breadcrumbs';
@@ -98,26 +98,12 @@ export const CONSTANTS = {
 function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
   const router = useRouter();
   const { query, asPath, pathname } = router;
+  const search = useSearchContext();
+  const userPersonalization = useUserPersonalizationContext();
+  const { vehicle } = userPersonalization;
   const globals = useSiteGlobalsContext();
   const [isSizeSelectorOpen, setIsSizeSelectorOpen] = useState(false);
-  const vehicleMetadata = lscache.get(
-    LOCAL_STORAGE[PROPERTIES.VEHICLE_METADATA],
-  );
-
-  const queryParams: QueryParams = {};
-
-  Object.entries(query).map(([key, value]) => {
-    if (typeof value === 'string') {
-      queryParams[key] = value;
-    }
-  });
-
-  vehicleMetadata &&
-    Object.entries(vehicleMetadata).map(([key, value]) => {
-      if (typeof value === 'string') {
-        queryParams[key] = value;
-      }
-    });
+  const queryParams = getStringifiedParams(Object.assign(query, vehicle));
 
   const { data, error } = useApiDataWithDefault<ProductDetailResponse>({
     defaultData: serverData,
@@ -189,7 +175,12 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
     closeSizeSelector,
     currentPath: asPath,
     faq: mapDataToFAQ({ siteProduct, globals }),
-    insights: mapDataToInsights({ siteProduct, vehicleMetadata, router }),
+    insights: mapDataToInsights({
+      siteProduct,
+      userPersonalization,
+      router,
+      search,
+    }),
     installation: mapDataToInstallation({ siteProduct }),
     isSizeSelectorOpen,
     onChangeSize: handleChangeSize,

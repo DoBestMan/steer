@@ -3,6 +3,7 @@ import { useCallback } from 'react';
 import Link from '~/components/global/Link/Link';
 import TitleRadio from '~/components/global/Radio/TitleRadio';
 import { useModalContext } from '~/context/Modal.context';
+import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
 import { SiteProductLineAvailableSizeItem } from '~/data/models/SiteProductLineAvailableSizeItem';
 import { THEME } from '~/lib/constants';
 import { STATIC_MODAL_IDS } from '~/lib/constants/staticModals';
@@ -14,15 +15,15 @@ export interface SizeFinderProps {
   onChange: (size: string) => void;
   sizes: SiteProductLineAvailableSizeItem[];
   value?: string;
-  vehicle?: string;
 }
 
 export default function SizeFinder({
   sizes,
   value,
-  vehicle,
   onChange,
 }: SizeFinderProps) {
+  const { vehicle } = useUserPersonalizationContext();
+
   const handleChange = useCallback(
     (size: string) => {
       return onChange(size);
@@ -57,7 +58,7 @@ export default function SizeFinder({
               flair={
                 (item.isFitForCurrentVehicle &&
                   vehicle &&
-                  ui('pdp.sizeFinder.fits')) ||
+                  ui('pdp.sizeFinder.fits', { make: vehicle?.vehicleMake })) ||
                 undefined
               }
               onChange={handleChange}

@@ -1,16 +1,15 @@
+import { SIZE_CHECK_STATES } from '~/components/modules/PDP/Insights/Insights.types';
+
 import { mapDataToInsights } from './insights';
 import {
   routerMock,
   routerWithTireSizeMock,
+  searchContextMock,
   siteProductMock,
+  userPersonalizationContextMock,
 } from './ProductDetail.mock';
 
-const vehicleMetadata = {
-  vehicleYear: '2019',
-  vehicleMake: 'Honda',
-  vehicleModel: 'Civic',
-  vehicleTrim: 'Sport Sedan & Coupe',
-};
+const { vehicle } = userPersonalizationContextMock;
 
 describe('pages/ProductDetails/mappers/insights', () => {
   it('returns parsed insights props', () => {
@@ -18,6 +17,8 @@ describe('pages/ProductDetails/mappers/insights', () => {
       mapDataToInsights({
         siteProduct: siteProductMock,
         router: routerWithTireSizeMock,
+        userPersonalization: userPersonalizationContextMock,
+        search: searchContextMock,
       }),
     ).toMatchObject({
       delivery: 'Free 2-day shipping to Brooklyn, NY',
@@ -46,9 +47,14 @@ describe('pages/ProductDetails/mappers/insights', () => {
           siteProductLineSizeDetail: null,
         },
         router: routerMock,
+        userPersonalization: {
+          ...userPersonalizationContextMock,
+          vehicle: null,
+        },
+        search: searchContextMock,
       }),
     ).toMatchObject({
-      doesItFit: null,
+      sizeCheckState: SIZE_CHECK_STATES.UNKNOWN,
       vehicle: null,
       showFitBar: false,
     });
@@ -59,9 +65,14 @@ describe('pages/ProductDetails/mappers/insights', () => {
       mapDataToInsights({
         siteProduct: siteProductMock,
         router: routerWithTireSizeMock,
+        userPersonalization: {
+          ...userPersonalizationContextMock,
+          vehicle: null,
+        },
+        search: searchContextMock,
       }),
     ).toMatchObject({
-      doesItFit: false,
+      sizeCheckState: SIZE_CHECK_STATES.UNKNOWN,
       vehicle: null,
       showFitBar: true,
     });
@@ -72,17 +83,13 @@ describe('pages/ProductDetails/mappers/insights', () => {
       mapDataToInsights({
         siteProduct: siteProductMock,
         router: routerWithTireSizeMock,
-        vehicleMetadata: {
-          vehicleYear: '2019',
-          vehicleMake: 'Honda',
-          vehicleModel: 'Civic',
-          vehicleTrim: 'Sport Sedan & Coupe',
-        },
+        userPersonalization: userPersonalizationContextMock,
+        search: searchContextMock,
       }),
     ).toMatchObject({
+      sizeCheckState: SIZE_CHECK_STATES.DOES_NOT_FIT,
       showFitBar: true,
-      doesItFit: false,
-      vehicle: `${vehicleMetadata.vehicleMake} ${vehicleMetadata.vehicleModel} ${vehicleMetadata.vehicleYear} ${vehicleMetadata.vehicleTrim}`,
+      vehicle: `${vehicle?.vehicleMake} ${vehicle?.vehicleModel} ${vehicle?.vehicleYear} ${vehicle?.vehicleTrim}`,
     });
   });
 
@@ -97,17 +104,13 @@ describe('pages/ProductDetails/mappers/insights', () => {
             tireSize: '100-40r17',
           },
         },
-        vehicleMetadata: {
-          vehicleYear: '2019',
-          vehicleMake: 'Honda',
-          vehicleModel: 'Civic',
-          vehicleTrim: 'Sport Sedan & Coupe',
-        },
+        userPersonalization: userPersonalizationContextMock,
+        search: searchContextMock,
       }),
     ).toMatchObject({
+      sizeCheckState: SIZE_CHECK_STATES.SIZE_FITS,
       showFitBar: true,
-      doesItFit: true,
-      vehicle: `${vehicleMetadata.vehicleMake} ${vehicleMetadata.vehicleModel} ${vehicleMetadata.vehicleYear} ${vehicleMetadata.vehicleTrim}`,
+      vehicle: `${vehicle?.vehicleMake} ${vehicle?.vehicleModel} ${vehicle?.vehicleYear} ${vehicle?.vehicleTrim}`,
     });
   });
 });

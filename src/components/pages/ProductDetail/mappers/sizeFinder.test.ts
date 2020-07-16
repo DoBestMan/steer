@@ -68,7 +68,6 @@ describe('pages/ProductDetails/mappers/sizeFinder', () => {
         },
       ],
       value: 'p195-45r16',
-      vehicle: 'Honda Civic',
     });
   });
 });

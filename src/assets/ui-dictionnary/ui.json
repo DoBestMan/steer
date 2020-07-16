@@ -231,7 +231,7 @@
       "startingAtLabel": "Starting at {{value}}"
     },
     "sizeFinder": {
-      "fits": "Fits your vehicle"
+      "fits": "Fits your {{make}}"
     },
     "tireImage": {
       "modalLabel": "{{label}} image zoom",
@@ -246,7 +246,11 @@
         "modalContentLabel": "Size Check Udpate",
         "modalInfoDescription": "PRO Tip",
         "modalInfoCopy": "Most drivers keep the same size. If you want to change it, make sure you make the proper safety checks. {{link}}",
-        "modalInfoTitle": "This isn’t the tire size that came with your {{model}} from the factory"
+        "modalInfoTitle": "This isn’t the tire size that came with your {{model}} from the factory",
+        "selectAFittingSize": "Change to the size recommended by {{make}}",
+        "selectAnotherVehicle": "Select another vehicle",
+        "unselectVehicle": "Unselect vehicle",
+        "viewTiresThatFit": "View tires that fit"
       },
       "fittingChangeVehicle": "Change vehicle",
       "changeLocation": "Change location",

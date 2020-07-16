@@ -1,12 +1,11 @@
-import lscache from 'lscache';
 import { RefObject, useCallback, useState } from 'react';
 
+import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
 import { SiteSearchResultGroup } from '~/data/models/SiteSearchResultGroup';
 import { SiteSearchResultImageItem } from '~/data/models/SiteSearchResultImageItem';
 import { SiteSearchResultTextItem } from '~/data/models/SiteSearchResultTextItem';
 import { SearchDataParams } from '~/lib/api/search';
 import { TIME } from '~/lib/constants';
-import { LOCAL_STORAGE, PROPERTIES } from '~/lib/constants/localStorage';
 import { scrollTo } from '~/lib/helpers/scroll';
 import debounce from '~/lib/utils/debounce';
 
@@ -43,6 +42,7 @@ interface Props {
   pastSearches: SiteSearchResultGroup;
   results: Results;
   searchState: string;
+  shouldPreventLinkNavigation: boolean;
 }
 
 function Search({
@@ -59,6 +59,7 @@ function Search({
   pastSearches,
   results,
   searchState,
+  shouldPreventLinkNavigation,
 }: Props) {
   const [primaryQuery, setPrimaryQuery] = useState<InputQuery>({
     queryText: '',
@@ -77,6 +78,7 @@ function Search({
     }, 200),
     [],
   );
+  const { selectVehicle } = useUserPersonalizationContext();
 
   const { resultMetadata, siteSearchResultGroupList } = results;
 
@@ -210,13 +212,14 @@ function Search({
       });
     } else if (action.type === SearchActionType.LINK) {
       if (action.vehicleMetadata) {
-        lscache.set(
-          LOCAL_STORAGE[PROPERTIES.VEHICLE_METADATA],
-          action.vehicleMetadata,
-        );
+        selectVehicle(action.vehicleMetadata);
       }
 
       addPastSearch(searchResult);
+
+      if (shouldPreventLinkNavigation) {
+        onCloseSearchClick();
+      }
     }
   };
 

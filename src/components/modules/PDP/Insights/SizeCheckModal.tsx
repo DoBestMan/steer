@@ -11,8 +11,8 @@ interface Props {
   hasInfoModule?: boolean;
   isOpen: boolean;
   onClose: () => void;
-  vehicle?: string;
-  vehicleModel: string;
+  vehicle?: string | null;
+  vehicleModel?: string | null;
 }
 
 function SizeCheckModal({
@@ -50,7 +50,7 @@ function SizeCheckModal({
                 'pdp.insights.fitting.modalInfoDescription',
               )}
               title={ui('pdp.insights.fitting.modalInfoTitle', {
-                model: vehicleModel,
+                model: vehicleModel || '',
               })}
             />
 

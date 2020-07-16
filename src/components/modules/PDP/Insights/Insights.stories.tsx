@@ -1,24 +1,17 @@
 import { action } from '@storybook/addon-actions';
 import { boolean, select, text } from '@storybook/addon-knobs';
-import { useState } from 'react';
 
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import { SiteProductInsightItem } from '~/data/models/SiteProductInsightItem';
 
 import Insights from './Insights';
-import SizeCheckModal from './SizeCheckModal';
+import { SIZE_CHECK_STATES } from './Insights.types';
 
 export default {
   component: Insights,
   title: 'PDP/Insights',
 };
-
-enum SIZE_CHECK_STATES {
-  CHANGE_SIZE = 'changeSize',
-  SELECT_TIRE = 'selectTire',
-  SIZE_FITS = 'sizeFits',
-}
 
 export function InsightsWithKnobs() {
   const configGroupId = 'Options';
@@ -42,11 +35,6 @@ export function InsightsWithKnobs() {
   const topRatedBy = boolean('Top rated by drivers?', true, configGroupId);
 
   const fitVehicleGroupId = 'Fits vehicle';
-  const vehicle = text(
-    'Vehicle name',
-    'Honda Civic 2018 EX‑L',
-    fitVehicleGroupId,
-  );
 
   const delivery = freeShipping
     ? 'Free 2-day shipping to Brooklyn, NY'
@@ -138,82 +126,36 @@ export function InsightsWithKnobs() {
   ].filter(Boolean) as SiteProductInsightItem[];
 
   const handleChangeLocation = action('click-free-shipping-button');
-  const vehicleModel = text('Vehicle model', 'Civic', fitVehicleGroupId);
-  const handleOpenSearch = action('click-fits-button');
-  const modalAction = action('click-modal-action-button');
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const onModalClose = function () {
-    setIsModalOpen(false);
-  };
+  const make = text('Vehicle brand', 'Honda', fitVehicleGroupId);
+  const vehicle = text(
+    'Vehicle model',
+    'Honda Civic 2018 LXT',
+    fitVehicleGroupId,
+  );
+  const onSearchVehicle = action('search-for-vehicle');
+  const onUnselectVehicle = action('unselect-vehicle');
 
   const sizeCheckState = select(
     'Modal state',
-    SIZE_CHECK_STATES,
-    SIZE_CHECK_STATES['SIZE_FITS'],
+    Object.values(SIZE_CHECK_STATES),
+    SIZE_CHECK_STATES.SIZE_FITS,
     fitVehicleGroupId,
   );
-
-  const sizeCheckUpdateItems = {
-    [SIZE_CHECK_STATES.CHANGE_SIZE]: [
-      {
-        label: 'View tires that fit',
-        action: modalAction,
-      },
-      {
-        label: 'Select another vehicle',
-        action: modalAction,
-      },
-      {
-        label: 'Unselect vehicle',
-        action: modalAction,
-      },
-    ],
-    [SIZE_CHECK_STATES.SELECT_TIRE]: [
-      {
-        label: 'Change to the size recommended by Honda',
-        action: modalAction,
-      },
-      {
-        label: 'Select another vehicle',
-        action: modalAction,
-      },
-      {
-        label: 'Unselect vehicle',
-        action: modalAction,
-      },
-    ],
-    [SIZE_CHECK_STATES.SIZE_FITS]: [
-      {
-        label: 'Select another vehicle',
-        action: modalAction,
-      },
-      {
-        label: 'Unselect vehicle',
-        action: modalAction,
-      },
-    ],
-  };
-
-  function handleChangeVehicle() {
-    if (!vehicle) {
-      handleOpenSearch();
-    } else {
-      setIsModalOpen(true);
-    }
-  }
 
   return (
     <>
       <Insights
+        showFitBar
+        make={make}
         insightItems={insightItems}
         rebate={rebateData}
         vehicle={vehicle}
-        doesItFit={sizeCheckState === SIZE_CHECK_STATES['SIZE_FITS']}
         delivery={delivery}
+        sizeCheckState={sizeCheckState as SIZE_CHECK_STATES}
         techSpecsAnchor="SiteProductSpecs"
         openDynamicModal={action('openDynamicModal')}
-        handleChangeVehicle={handleChangeVehicle}
+        onSearchVehicle={onSearchVehicle}
+        onUnselectVehicle={onUnselectVehicle}
         handleChangeLocation={handleChangeLocation}
       />
       <section
@@ -231,15 +173,6 @@ export function InsightsWithKnobs() {
           <Icon name={ICONS.ARROW_UP} />
         </a>
       </section>
-
-      <SizeCheckModal
-        actions={sizeCheckUpdateItems[sizeCheckState]}
-        hasInfoModule={sizeCheckState !== SIZE_CHECK_STATES['SIZE_FITS']}
-        isOpen={isModalOpen}
-        onClose={onModalClose}
-        vehicle={vehicle}
-        vehicleModel={vehicleModel}
-      />
     </>
   );
 }

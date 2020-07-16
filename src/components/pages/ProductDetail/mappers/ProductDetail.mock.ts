@@ -1,5 +1,7 @@
 /* eslint-disable sort-keys */
 
+import { SearchContextProps } from '~/components/modules/Search/Search.context';
+import { UserPersonalizationProps } from '~/context/UserPersonalization.context';
 import { SiteCatalogProductGroupItemEnum } from '~/data/models/SiteCatalogProductGroupList';
 import {
   SiteCatalogProductImage,
@@ -43,6 +45,50 @@ export const routerWithTireSizeMock = {
     tireSize: '100-40r15',
   },
 } as any;
+
+export const userPersonalizationContextMock: UserPersonalizationProps = {
+  locationString: 'Brooklyn, NY',
+  userPersonalizationData: {
+    gaClientId: 'GoogleAnalyticsClientId',
+    userLocation: {
+      cityName: 'Brooklyn',
+      region: 5,
+      stateAbbr: 'NY',
+      zip: '11201',
+    },
+  },
+  vehicle: {
+    vehicleYear: '2019',
+    vehicleMake: 'Honda',
+    vehicleModel: 'Civic',
+    vehicleTrim: 'LX Sedan & Coupe',
+  },
+
+  selectVehicle: () => {},
+  unselectVehicle: () => {},
+  updateLocation: () => {},
+};
+
+export const searchContextMock: SearchContextProps = {
+  hasLockedSearchState: false,
+  isSearchOpen: false,
+  pastSearches: { label: '', siteSearchResultList: [] },
+  searchResults: { resultMetadata: {}, siteSearchResultGroupList: [] },
+  searchState: '',
+  shouldPreventLinkNavigation: false,
+
+  addPastSearch: () => {},
+  clearSearchResults: () => {},
+  deletePastSearches: () => {},
+  getPastSearches: () => {},
+  lockSearchStateToVehicle: () => {},
+  searchQuery: () => {},
+  setHasLockedSearchState: () => {},
+  setIsSearchOpen: () => {},
+  setSearchState: () => {},
+  setShouldPreventLinkNavigation: () => {},
+  toggleIsSearchOpen: () => {},
+};
 
 export const siteProductMock: SiteProduct = {
   siteProductLine: {

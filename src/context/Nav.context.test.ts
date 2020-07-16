@@ -13,8 +13,11 @@ describe('useNavContextSetup', () => {
       .spyOn(UserPersonalizationContextUtils, 'useUserPersonalizationContext')
       .mockReturnValue({
         locationString: '',
+        selectVehicle() {},
+        unselectVehicle() {},
         updateLocation() {},
         userPersonalizationData: null,
+        vehicle: null,
       });
   });
 
@@ -114,6 +117,8 @@ describe('useNavContextSetup', () => {
       UserPersonalizationContextUtils.useUserPersonalizationContext,
     ).mockReturnValue({
       locationString: 'Portland, OR',
+      selectVehicle() {},
+      unselectVehicle() {},
       updateLocation() {},
       userPersonalizationData: {
         gaClientId: '123',
@@ -124,6 +129,7 @@ describe('useNavContextSetup', () => {
           zip: '12345',
         },
       },
+      vehicle: null,
     });
     const { result } = renderHook(() => useNavContextSetup());
 

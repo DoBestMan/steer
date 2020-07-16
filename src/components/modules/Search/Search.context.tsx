@@ -28,7 +28,7 @@ interface Props {
   children: ReactNode;
 }
 
-interface SearchContextProps {
+export interface SearchContextProps {
   addPastSearch: (
     item: SiteSearchResultTextItem | SiteSearchResultImageItem,
   ) => void;
@@ -45,6 +45,8 @@ interface SearchContextProps {
   setHasLockedSearchState: (hasLockedSearchState: boolean) => void;
   setIsSearchOpen: (isSearchOpen: boolean) => void;
   setSearchState: (searchState: string) => void;
+  setShouldPreventLinkNavigation: (value: boolean) => void;
+  shouldPreventLinkNavigation: boolean;
   toggleIsSearchOpen: (callback?: () => void) => void;
 }
 
@@ -156,6 +158,10 @@ function useContextSetup() {
   /* Search state */
   const [searchState, setSearchState] = useState('');
   const [hasLockedSearchState, setHasLockedSearchState] = useState(false);
+  const [
+    shouldPreventLinkNavigation,
+    setShouldPreventLinkNavigation,
+  ] = useState(false);
 
   const lockSearchStateToVehicle = () => {
     const {
@@ -185,6 +191,8 @@ function useContextSetup() {
     setHasLockedSearchState,
     setIsSearchOpen,
     setSearchState,
+    setShouldPreventLinkNavigation,
+    shouldPreventLinkNavigation,
     toggleIsSearchOpen,
   };
 }

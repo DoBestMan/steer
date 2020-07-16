@@ -24,6 +24,8 @@ function SearchModal() {
     searchResults,
     setSearchState,
     toggleIsSearchOpen,
+    setShouldPreventLinkNavigation,
+    shouldPreventLinkNavigation,
   } = useSearchContext();
   const {
     customerServiceEnabled,
@@ -51,7 +53,7 @@ function SearchModal() {
     // Clear search results and state when the modal closes
     clearSearchResults();
     setSearchState('');
-
+    setShouldPreventLinkNavigation(false);
     toggleIsSearchOpen();
   };
 
@@ -96,6 +98,7 @@ function SearchModal() {
         pastSearches={pastSearches}
         results={searchResults}
         searchState={searchState}
+        shouldPreventLinkNavigation={shouldPreventLinkNavigation}
       />
     </Modal>
   );

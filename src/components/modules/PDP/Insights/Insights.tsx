@@ -1,7 +1,6 @@
 import { ReactNode } from 'react';
 
 import { ICONS } from '~/components/global/Icon/Icon.constants';
-import { Icon as IconType } from '~/components/global/Icon/Icon.types';
 import { ContentModalProps } from '~/components/global/Modal/Modal.types';
 import { SiteProductInsightItem } from '~/data/models/SiteProductInsightItem';
 import { SiteProductInsightsRebate } from '~/data/models/SiteProductInsightsRebate';
@@ -11,29 +10,19 @@ import { ui } from '~/lib/utils/ui-dictionary';
 import AnchorButton from './AnchorButton';
 import FitButton from './FitButton';
 import styles from './Insights.styles';
+import { SIZE_CHECK_STATES } from './Insights.types';
 import InsightsItem from './InsightsItem';
-
-export enum LinkType {
-  ANCHOR = 'anchor',
-  LINK = 'link',
-  MODAL = 'modal',
-}
-
-export interface Item {
-  icon?: IconType;
-  label: string;
-  linkType?: LinkType;
-  target?: string;
-}
 
 export interface InsightsProps {
   delivery?: string | null;
-  doesItFit?: boolean | null;
   handleChangeLocation: () => void;
-  handleChangeVehicle: () => void;
   insightItems: SiteProductInsightItem[];
+  make?: string | null;
+  onSearchVehicle: () => void;
+  onUnselectVehicle: () => void;
   rebate: SiteProductInsightsRebate | null;
   showFitBar?: boolean;
+  sizeCheckState: SIZE_CHECK_STATES;
   techSpecsAnchor: string;
   vehicle?: string | null;
 }
@@ -47,13 +36,15 @@ function RenderItem({ children }: { children: ReactNode }) {
 }
 
 function Insights({
+  make,
   delivery,
-  doesItFit,
   handleChangeLocation,
-  handleChangeVehicle,
+  onSearchVehicle,
+  onUnselectVehicle,
   insightItems = [],
   openDynamicModal,
   rebate,
+  sizeCheckState,
   showFitBar,
   techSpecsAnchor,
   vehicle,
@@ -84,9 +75,11 @@ function Insights({
       {showFitBar && (
         <RenderItem>
           <FitButton
+            make={make}
             vehicle={vehicle}
-            doesItFit={doesItFit}
-            onClickButton={handleChangeVehicle}
+            sizeCheckState={sizeCheckState}
+            onSearchVehicle={onSearchVehicle}
+            onUnselectVehicle={onUnselectVehicle}
           />
         </RenderItem>
       )}

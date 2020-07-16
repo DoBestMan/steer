@@ -23,12 +23,8 @@ export function mapDataToSizeFinder({
     return null;
   }
 
-  // TODO: Integrate with localStorage
-  const vehicle = 'Honda Civic';
-
   return {
     sizes,
     value: tireSize?.toString(),
-    vehicle,
   };
 }
