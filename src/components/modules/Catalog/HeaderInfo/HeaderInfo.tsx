@@ -1,14 +1,15 @@
 import { useTheme } from 'emotion-theming';
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useState } from 'react';
 
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Link from '~/components/global/Link/Link';
 import Toggle from '~/components/global/Toggle/Toggle';
 import { useCatalogPageContext } from '~/context/CatalogPage.context';
-import { LINK_ICON_POSITION } from '~/lib/constants';
+import { LINK_ICON_POSITION, LINK_TYPES } from '~/lib/constants';
 import { scrollTo } from '~/lib/helpers/scroll';
 import { ui } from '~/lib/utils/ui-dictionary';
 
+import LocationModal from '../../Location/LocationModal/LocationModal';
 import styles from '../Header.styles';
 
 interface Props {
@@ -26,6 +27,10 @@ export default function HeaderInfo({
   sizeList = [],
   title,
 }: Props) {
+  const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
+  function toggleLocation() {
+    setIsLocationModalOpen(!isLocationModalOpen);
+  }
   const { header } = useTheme();
   const {
     handleUpdateResults,
@@ -58,10 +63,13 @@ export default function HeaderInfo({
 
   const locationEl = (
     <div css={[infoStyles, sizeList[1] && styles.wrappedLocation]}>
-      {ui('catalog.header.dealsFor')}
+      {ui('catalog.header.dealsFor')}{' '}
       {/* TODO: location redirect or modal open */}
-      <Link css={[styles.link, infoStyles]} href="/">
-        {' '}
+      <Link
+        onClick={toggleLocation}
+        as={LINK_TYPES.BUTTON}
+        css={[styles.link, infoStyles]}
+      >
         {location}
       </Link>
     </div>
@@ -110,6 +118,7 @@ export default function HeaderInfo({
           defaultChecked={isAdvancedView}
         />
       </div>
+      <LocationModal isOpen={isLocationModalOpen} onClose={toggleLocation} />
     </>
   );
 }
