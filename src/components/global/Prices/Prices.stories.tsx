@@ -95,7 +95,7 @@ export function DiscountedPrices() {
       label: null,
       price: {
         salePriceInCents: '15975',
-        estimatedRetailPriceInCents: '13296',
+        estimatedRetailPriceInCents: '18296',
       },
     },
   ];

@@ -27,41 +27,48 @@ function Prices({
   return (
     <>
       {priceList && priceList.length > 0 ? (
-        priceList.map(({ label, price }) => (
-          <div key={price.salePriceInCents}>
-            <span
-              css={[
-                (price.estimatedRetailPriceInCents || isStartingAtPrice) && {
-                  color: COLORS.GLOBAL.ORANGE,
-                },
-                isLight && { color: COLORS.GLOBAL.WHITE },
-                typography.topPicksPrice,
-                currentPriceCSS,
-              ]}
-            >
-              {label && <span css={styles.label}>{label} </span>}
-              {isStartingAtPrice && ui('common.startingAtPrice') + ' '}
-              {formatDollars(price.salePriceInCents)}
-            </span>
-            {price.estimatedRetailPriceInCents && !isStartingAtPrice && (
+        priceList.map(({ label, price }) => {
+          const isSalePrice =
+            parseInt(price.salePriceInCents, 10) <
+            parseInt(price.estimatedRetailPriceInCents, 10);
+          return (
+            <div key={price.salePriceInCents}>
               <span
                 css={[
-                  styles.originalValue,
-                  isLight && { color: COLORS.ORANGE.TINT_70 },
-                  originalPrefix && styles.originalValuePrefixed,
+                  (price.estimatedRetailPriceInCents || isStartingAtPrice) && {
+                    color: COLORS.GLOBAL.ORANGE,
+                  },
+                  isLight && { color: COLORS.GLOBAL.WHITE },
+                  typography.topPicksPrice,
+                  currentPriceCSS,
                 ]}
-                aria-label={`${ui('common.originalPricePrefix')}${formatDollars(
-                  price.estimatedRetailPriceInCents,
-                )}`}
               >
-                <span aria-hidden>
-                  {originalPrefix}
-                  {formatDollars(price.estimatedRetailPriceInCents)}
-                </span>
+                {label && <span css={styles.label}>{label} </span>}
+                {isStartingAtPrice && ui('common.startingAtPrice') + ' '}
+                {formatDollars(price.salePriceInCents)}
               </span>
-            )}
-          </div>
-        ))
+              {price.estimatedRetailPriceInCents &&
+                !isStartingAtPrice &&
+                isSalePrice && (
+                  <span
+                    css={[
+                      styles.originalValue,
+                      isLight && { color: COLORS.ORANGE.TINT_70 },
+                      originalPrefix && styles.originalValuePrefixed,
+                    ]}
+                    aria-label={`${ui(
+                      'common.originalPricePrefix',
+                    )}${formatDollars(price.estimatedRetailPriceInCents)}`}
+                  >
+                    <span aria-hidden>
+                      {originalPrefix}
+                      {formatDollars(price.estimatedRetailPriceInCents)}
+                    </span>
+                  </span>
+                )}
+            </div>
+          );
+        })
       ) : (
         <span css={[typography.topPicksPrice, styles.noPrice]}>
           {ui('catalog.topPicks.noPrice')}
