@@ -3,6 +3,7 @@ import { useCallback, useEffect, useRef } from 'react';
 
 import Modal from '~/components/global/Modal/Modal';
 import { useSearchContext } from '~/components/modules/Search/Search.context';
+import { useModalContext } from '~/context/Modal.context';
 import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
 import { useRouter } from '~/hooks/useRouter';
 import { MODAL_THEME } from '~/lib/constants';
@@ -28,6 +29,7 @@ function SearchModal() {
     customerServiceEnabled,
     customerServiceNumber,
   } = useSiteGlobalsContext();
+  const { isModalOpen } = useModalContext();
 
   useEffect(() => {
     if (isSearchOpen) {
@@ -59,6 +61,16 @@ function SearchModal() {
   useEffect(() => {
     requestAnimationFrame(toggleDisableScroll);
   }, [toggleDisableScroll]);
+
+  // Remove the scroll lock when another modal is opened when search is open.
+  // Without this, the nested modal would not be able to scroll.
+  useEffect(() => {
+    if (isSearchOpen && isModalOpen) {
+      clearAllBodyScrollLocks();
+    } else if (isSearchOpen && contentRef.current) {
+      disableBodyScroll(contentRef.current);
+    }
+  }, [isModalOpen, isSearchOpen]);
 
   return (
     <Modal
