@@ -9,14 +9,14 @@ export const NB_COLUMNS: Record<Breakpoint, number> = {
 
 export const GRID_MARGIN: Record<Breakpoint, number> = {
   S: 20,
-  M: 20,
+  M: 40,
   L: 60,
   XL: 60,
 };
 
 export const GAP_COLUMNS: Record<Breakpoint, number> = {
   S: 20,
-  M: 20,
+  M: 40,
   L: 30,
   XL: 30,
 };
