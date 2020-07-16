@@ -14,9 +14,9 @@ export const CONSTANTS = {
   },
   ICON_SIZE: { M: 29, L: 34 },
   PADDING: {
-    S: '22.5px 0',
+    S: `${45 / 2}px 0`,
     M: '30px 0',
-    XL: '32.5px 0',
+    XL: `${65 / 2}px 0`,
   },
   SEARCH_LABEL_HEIGHT: {
     S: 35,
@@ -28,7 +28,6 @@ const styles: StylesMap = {
   button: {
     alignItems: 'center',
     boxSizing: 'border-box',
-    color: COLORS.GLOBAL.WHITE,
     display: 'flex',
     justifyContent: 'space-between',
     padding: CONSTANTS.PADDING.S,

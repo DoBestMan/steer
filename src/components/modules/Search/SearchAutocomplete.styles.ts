@@ -34,6 +34,9 @@ const animationStyles = {
   },
 };
 
+// To mirror padding in SerachButton.styles
+const SEARCH_PADDING_XL = 65 / 2;
+
 const styles: StylesMap = {
   autocompleteGrid: {
     backgroundColor: COLORS.GLOBAL.ORANGE,
@@ -50,7 +53,7 @@ const styles: StylesMap = {
       padding: `${SPACING.SIZE_30}px ${SPACING.SIZE_80}px ${SPACING.SIZE_30}px 0`,
     },
     [MQ.XL]: {
-      padding: `${SPACING.SIZE_35}px ${SPACING.SIZE_80}px ${SPACING.SIZE_35}px 0`,
+      padding: `${SEARCH_PADDING_XL}px ${SPACING.SIZE_80}px ${SEARCH_PADDING_XL}px 0`,
     },
   },
   autocompleteGridItemRearTireState: {
@@ -177,7 +180,7 @@ const styles: StylesMap = {
       padding: `${SPACING.SIZE_30}px 0`,
     },
     [MQ.XL]: {
-      padding: `${SPACING.SIZE_35}px 0`,
+      padding: `${SEARCH_PADDING_XL}px 0`,
     },
   },
   searchIconGridRearTire: {

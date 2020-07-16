@@ -20,7 +20,10 @@ import {
   useIsFallbackSticky,
 } from './HomePage.hooks';
 import styles from './HomePage.styles';
-import { getColorFromScrollState } from './HomePage.utils';
+import {
+  getBgColorFromScrollState,
+  getTextColorFromScrollState,
+} from './HomePage.utils';
 import SearchButton from './SearchButton/SearchButton';
 import { CONSTANTS as BUTTON_CONSTANTS } from './SearchButton/SearchButton.styles';
 
@@ -64,7 +67,9 @@ function HomePage({
 
   const backgroundColor =
     (siteTheme && THEME_COLOR_MAP[siteTheme]) ||
-    getColorFromScrollState(thresholdCrossed);
+    getBgColorFromScrollState(thresholdCrossed);
+
+  const color = getTextColorFromScrollState(thresholdCrossed);
 
   const { isSearchOpen, toggleIsSearchOpen } = useSearchContext();
 
@@ -104,7 +109,7 @@ function HomePage({
   });
 
   const searchButtonContainerStyles = [
-    { backgroundColor },
+    { backgroundColor, color },
     styles.searchButtonContainer,
     supportsPositionSticky && styles.searchButtonStickySupport,
     !supportsPositionSticky && styles.searchButtonStickyFallback,

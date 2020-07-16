@@ -42,12 +42,14 @@ export const typography: { [className: string]: CSSObject[] } = {
   bodyCopy: [
     fontStyles(15, 22),
     {
+      fontWeight: 'normal',
       letterSpacing: '-0.01em',
     },
   ],
   bodyCopyTight: [
     fontStyles(15, 20),
     {
+      fontWeight: 'normal',
       letterSpacing: '-0.01em',
     },
   ],
@@ -83,12 +85,14 @@ export const typography: { [className: string]: CSSObject[] } = {
   labelCopy: [
     fontStyles(12, 20),
     {
+      fontWeight: 'normal',
       [MQ.M]: fontStyles(15, 22),
     },
   ],
   labelCopyTight: [
     fontStyles(12, 15),
     {
+      fontWeight: 'normal',
       [MQ.M]: fontStyles(15, 20),
     },
   ],
@@ -110,6 +114,7 @@ export const typography: { [className: string]: CSSObject[] } = {
   largeCopy: [
     fontStyles(18, 25),
     {
+      fontWeight: 'normal',
       letterSpacing: '-0.01em',
     },
   ],
@@ -148,8 +153,8 @@ export const typography: { [className: string]: CSSObject[] } = {
       fontWeight: 'bold',
     },
   ],
-  smallCopy: [fontStyles(12, 20)],
-  smallCopyTight: [fontStyles(12, 15)],
+  smallCopy: [fontStyles(12, 20), { fontWeight: 'normal' }],
+  smallCopyTight: [fontStyles(12, 15), { fontWeight: 'normal' }],
   tertiaryHeadline: [
     typographyStyles.tertiaryHeadline.base,
     {
