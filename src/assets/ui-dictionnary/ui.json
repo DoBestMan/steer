@@ -19,7 +19,8 @@
     "categories": "All categories",
     "types": "All types",
     "reviews": "Reviews",
-    "tireReviews": "Tire Reviews"
+    "tireReviews": "Tire reviews",
+    "tireReviewsTemp": "{{section}} reviews"
   },
   "common": {
     "ellipsis": "...",
