@@ -18,7 +18,7 @@ import {
   SearchResult,
   SearchStateEnum,
 } from './Search.types';
-import SearchAutocomplete from './SearchAutocomplete';
+import SearchAutocomplete from './SearchAutocomplete/SearchAutocomplete';
 import SearchSupport from './SearchSupport';
 
 interface InputQuery {

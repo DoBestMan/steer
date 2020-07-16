@@ -4,7 +4,7 @@ import { STATIC_MODAL_IDS } from '~/lib/constants/staticModals';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
 
-import { SearchStateEnum } from './Search.types';
+import { SearchStateEnum } from '../Search.types';
 import styles from './SearchAutocomplete.styles';
 
 interface Props {

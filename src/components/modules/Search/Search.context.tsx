@@ -22,7 +22,7 @@ import {
   emptyResult,
   emptySiteSearchResultGroup,
   initialSearchVehicle,
-} from './Search.mocks';
+} from './Search.data';
 
 interface Props {
   children: ReactNode;

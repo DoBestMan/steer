@@ -3,9 +3,9 @@ import GridItem from '~/components/global/Grid/GridItem';
 import BaseLink from '~/components/global/Link/BaseLink';
 import { SiteSearchResultTextItem } from '~/data/models/SiteSearchResultTextItem';
 
-import { useSearchContext } from './Search.context';
-import { useFocusScrollIntoView } from './Search.hooks';
-import { SearchActionType } from './Search.types';
+import { useSearchContext } from '../Search.context';
+import { useFocusScrollIntoView } from '../Search.hooks';
+import { SearchActionType } from '../Search.types';
 import styles from './SearchSection.styles';
 
 export interface SearchSectionProps {

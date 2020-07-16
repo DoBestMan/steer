@@ -21,8 +21,7 @@ import { ARIA_LIVE, KEYCODES } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
 
-import CloseSearchButton from './CloseSearchButton';
-import { useAutocompleteSelectedItem } from './Search.hooks';
+import { useAutocompleteSelectedItem } from '../Search.hooks';
 import {
   SearchActionType,
   SearchInputEnum,
@@ -30,13 +29,14 @@ import {
   SearchResultEnum,
   SearchStateCopy,
   SearchStateEnum,
-} from './Search.types';
+} from '../Search.types';
+import SearchCarousel from '../SearchCarousel/SearchCarousel';
+import SearchInput from '../SearchInput/SearchInput';
+import SearchLabel from '../SearchLabel/SearchLabel';
+import SearchSection from '../SearchSection/SearchSection';
+import CloseSearchButton from './CloseSearchButton';
 import styles from './SearchAutocomplete.styles';
-import SearchCarousel from './SearchCarousel';
-import SearchInput from './SearchInput';
-import SearchLabel from './SearchLabel/SearchLabel';
 import SearchSecondaryActions from './SearchSecondaryActions';
-import SearchSection from './SearchSection';
 
 const CONSTANTS = {
   DEFAULT_SELECTED_ITEM_INDEX: [0, -1],

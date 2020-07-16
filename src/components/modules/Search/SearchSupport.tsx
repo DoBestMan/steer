@@ -4,7 +4,7 @@ import { SiteSearchResultTextItem } from '~/data/models/SiteSearchResultTextItem
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import styles from './Search.styles';
-import SearchSection from './SearchSection';
+import SearchSection from './SearchSection/SearchSection';
 
 const getSupportResultMock = (customerServiceNumber: {
   display: string;

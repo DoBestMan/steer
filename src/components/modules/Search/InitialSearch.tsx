@@ -9,10 +9,10 @@ import { LINK_TYPES, THEME, TIME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
 
-import { initialSearchCategories } from './Search.mocks';
+import { initialSearchCategories } from './Search.data';
 import styles from './Search.styles';
 import { SearchResult, SearchResultEnum } from './Search.types';
-import SearchSection from './SearchSection';
+import SearchSection from './SearchSection/SearchSection';
 
 interface Props {
   onClearPastSearchesClick: () => void;

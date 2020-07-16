@@ -5,8 +5,8 @@ import Image from '~/components/global/Image/Image';
 import BaseLink from '~/components/global/Link/BaseLink';
 import { SiteSearchResultImageItem } from '~/data/models/SiteSearchResultImageItem';
 
-import { useFocusScrollIntoView } from './Search.hooks';
-import { SearchActionType } from './Search.types';
+import { useFocusScrollIntoView } from '../Search.hooks';
+import { SearchActionType } from '../Search.types';
 import styles from './SearchCarousel.styles';
 
 export interface SearchCarouselProps {
