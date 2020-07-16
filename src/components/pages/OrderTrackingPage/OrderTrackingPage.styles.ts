@@ -2,6 +2,9 @@ import { COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
+  container: {
+    backgroundColor: COLORS.GLOBAL.WHITE,
+  },
   description: [
     typography.largeCopy,
     {

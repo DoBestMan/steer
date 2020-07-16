@@ -6,6 +6,7 @@ import {
   LinkType,
   NAV_TARGETS,
 } from '~/components/modules/Nav/Nav.types';
+import { ROUTE_MAP, ROUTES } from '~/lib/constants';
 import { createContext } from '~/lib/utils/context';
 import { ui } from '~/lib/utils/ui-dictionary';
 
@@ -28,6 +29,7 @@ export interface NavContextProps {
   isSubNavOpen: boolean;
   links: Array<LinkType | ActionType>;
   linksMobile: Array<LinkType | ActionType>;
+  setActiveLink: (link: string) => void;
   setIsHidden: (isHidden: boolean) => void;
   toggleSubNav: () => void;
 }
@@ -46,7 +48,11 @@ export const dealsLink = {
 };
 export const accountLinks = [
   { href: '/', isExternal: true, text: ui('nav.links.account') },
-  { href: '/', isExternal: true, text: ui('nav.links.trackOrder') },
+  {
+    href: ROUTE_MAP[ROUTES.ORDER_TRACKING],
+    isExternal: false,
+    text: ui('nav.links.trackOrder'),
+  },
 ];
 
 export function buildLinks({
@@ -127,6 +133,7 @@ export function useNavContextSetup() {
     isSubNavOpen,
     links,
     linksMobile,
+    setActiveLink,
     setIsHidden,
     toggleSubNav: () => {
       setIsSubNavOpen(!isSubNavOpen);
