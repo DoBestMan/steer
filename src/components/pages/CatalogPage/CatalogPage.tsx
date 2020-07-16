@@ -1,5 +1,6 @@
 import { ThemeProvider } from 'emotion-theming';
 
+import Feedback from '~/components/global/Feedback/Feedback';
 import { useCatalogPageContext } from '~/context/CatalogPage.context';
 import { CatalogSummaryContextProvider } from '~/context/CatalogSummary.context';
 import { SiteCatalogFilters } from '~/data/models/SiteCatalogFilters';
@@ -39,24 +40,23 @@ function CatalogPage({
   const totalResult =
     siteCatalogSummary.siteCatalogSummaryMeta?.totalResults || 0;
   const hasResults = totalResult > 0;
-
   return (
     <ThemeProvider
       theme={{ ...defaultTheme, ...(isAdvancedView && headerAdvanced) }}
     >
-      <div css={styles.root}>
-        {hasTopPicks && (
-          <CatalogSummaryContextProvider
-            comesFromSearch={comesFromSearch}
-            hasLocalData={hasLocalData}
-            siteCatalogSummary={siteCatalogSummary}
-          >
-            <CatalogSummary exploreMore={scrollToGrid} />
-          </CatalogSummaryContextProvider>
-        )}
-        {/* Render when there's result, and not coming from search */}
-        {hasResults && showCatalogGrid && (
-          <div ref={catalogGridRef}>
+      {hasTopPicks && (
+        <CatalogSummaryContextProvider
+          comesFromSearch={comesFromSearch}
+          hasLocalData={hasLocalData}
+          siteCatalogSummary={siteCatalogSummary}
+        >
+          <CatalogSummary exploreMore={scrollToGrid} />
+        </CatalogSummaryContextProvider>
+      )}
+      {/* Render when there's result, and not coming from search */}
+      {hasResults && showCatalogGrid && (
+        <>
+          <div css={styles.grid} ref={catalogGridRef}>
             <CatalogGrid
               previewFiltersData={previewFiltersData}
               onPreviewFilters={onPreviewFilters}
@@ -65,8 +65,9 @@ function CatalogPage({
               siteCatalogSummary={siteCatalogSummary}
             />
           </div>
-        )}
-      </div>
+          <Feedback />
+        </>
+      )}
     </ThemeProvider>
   );
 }

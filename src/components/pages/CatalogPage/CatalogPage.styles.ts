@@ -1,7 +1,9 @@
-import { StylesMap } from '~/lib/constants';
+import { SPACING, StylesMap } from '~/lib/constants';
 
 const styles: StylesMap = {
-  root: {},
+  grid: {
+    marginBottom: SPACING.SIZE_30,
+  },
 };
 
 export default styles;
