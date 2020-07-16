@@ -40,7 +40,8 @@
       "emailError": "Please enter a valid email",
       "yourEmail": "Your email address",
       "orderId": "Order ID",
-      "shippingZip": "Shipping ZIP Code"
+      "shippingZip": "Shipping ZIP Code",
+      "submit": "Submit"
     },
     "loading": {
       "label": "Loading"

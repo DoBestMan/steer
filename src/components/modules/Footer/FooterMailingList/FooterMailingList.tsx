@@ -83,7 +83,11 @@ function FooterMailingList() {
           value={emailVal}
         />
         {isInputValid && (
-          <button css={styles.submitButton} onClick={handleSubmit}>
+          <button
+            aria-label={ui('common.form.submit')}
+            css={styles.submitButton}
+            onClick={handleSubmit}
+          >
             <Icon name={ICONS.ARROW_RIGHT} />
           </button>
         )}
