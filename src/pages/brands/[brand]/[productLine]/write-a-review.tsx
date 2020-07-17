@@ -24,7 +24,10 @@ export const getServerSideProps: GetServerSideProps<WriteAReviewServerData> = as
   });
 
   const props: WriteAReviewServerData = {
-    serverData: { tire: siteProduct.siteProductLine.name },
+    serverData: {
+      tire: siteProduct.siteProductLine.name,
+      brand: siteProduct.siteProductLine.brand.label,
+    },
   };
 
   return {

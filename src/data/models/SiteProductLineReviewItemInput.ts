@@ -15,37 +15,37 @@ export interface SiteProductLineReviewItemInput {
      * @type {number}
      * @memberof SiteProductPerformanceRatingObject
      */
-    dry: string | null;
+    dry: number | null;
     /**
      *
      * @type {number}
      * @memberof SiteProductPerformanceRatingObject
      */
-    wet: string | null;
+    wet: number | null;
     /**
      *
      * @type {number}
      * @memberof SiteProductPerformanceRatingObject
      */
-    winter: string | null;
+    winter: number | null;
     /**
      *
      * @type {number}
      * @memberof SiteProductPerformanceRatingObject
      */
-    comfort: string | null;
+    comfort: number | null;
     /**
      *
      * @type {number}
      * @memberof SiteProductPerformanceRatingObject
      */
-    noise: string | null;
+    noise: number | null;
     /**
      *
      * @type {number}
      * @memberof SiteProductPerformanceRatingObject
      */
-    treadwear: string | null;
+    treadwear: number | null;
   };
   /**
    *
@@ -101,6 +101,12 @@ export interface SiteProductLineReviewItemInput {
    * @memberof SiteProductLineReviewItemInput
    */
   wouldBuyAgain: boolean;
+  /**
+   *
+   * @type {string}
+   * @memberof SiteProductLineReviewItemInput
+   */
+  token: string;
 }
 
 /**

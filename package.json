@@ -29,6 +29,7 @@
     "@emotion/styled": "^10.0.27",
     "@next/bundle-analyzer": "^9.4.2",
     "@types/css-font-loading-module": "^0.0.4",
+    "@types/grecaptcha": "^3.0.1",
     "@types/youtube": "^0.0.39",
     "body-scroll-lock": "^3.0.2",
     "date-fns": "^2.14.0",

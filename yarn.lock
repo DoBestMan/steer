@@ -2841,6 +2841,11 @@
   resolved "https://registry.yarnpkg.com/@types/googlemaps/-/googlemaps-3.39.3.tgz#8664e424f335802c8aa46a94676666b0a0f31d97"
   integrity sha512-L8O9HAVFZj0TuiS8h5ORthiMsrrhjxTC8XUusp5k47oXCst4VTm+qWKvrAvmYMybZVokbp4Udco1mNwJrTNZPQ==
 
+"@types/grecaptcha@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@types/grecaptcha/-/grecaptcha-3.0.1.tgz#359c46be0baeac15ae4021f002d1c0c9374ae3e4"
+  integrity sha512-eMA/2quQoxwSe8oOBB1H6KNXNqginzt9BHAt2vVVUoQswZNct2QwSAmEMsN/VHj/XSNxM3p+Py15B7omEaAC9w==
+
 "@types/history@*":
   version "4.7.5"
   resolved "https://registry.yarnpkg.com/@types/history/-/history-4.7.5.tgz#527d20ef68571a4af02ed74350164e7a67544860"

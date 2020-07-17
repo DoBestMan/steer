@@ -20,7 +20,8 @@
     "types": "All types",
     "reviews": "Reviews",
     "tireReviews": "Tire reviews",
-    "tireReviewsTemp": "{{section}} reviews"
+    "tireReviewsTemp": "{{section}} reviews",
+    "writeReview": "Write a review"
   },
   "common": {
     "ellipsis": "...",
@@ -370,6 +371,8 @@
     "form": {
       "title": "Leave a review {{tire}}",
       "submit": "Complete all fields to submit",
+      "success": "Thank you for your review!",
+      "error": "Oops, something went wrong! <br />Please try again.",
       "sections": {
         "ratings": {
           "rateLabel": "Rate your new tires",
@@ -437,8 +440,8 @@
         "buyAgain": {
           "title": "Would you buy these tires again?",
           "options": {
-            "one": "Yes",
-            "two": "No"
+            "yes": "Yes",
+            "no": "No"
           }
         }
       }

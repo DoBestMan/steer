@@ -5,7 +5,17 @@ import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import HorizontalNumberPicker from '~/components/global/HorizontalNumberPicker/HorizontalPickerNoCarousel';
 import Input from '~/components/global/Input/Input';
+import Markdown from '~/components/global/Markdown/Markdown';
 import TitleRadio from '~/components/global/Radio/TitleRadio';
+import Toast, { TOAST_TYPE } from '~/components/global/Toast/Toast';
+import { SiteProductLineReviewItemInput } from '~/data/models/SiteProductLineReviewItemInput';
+import { apiPostReview } from '~/lib/api/write-review';
+import {
+  email,
+  numberSlashNumber,
+  onlyNumbersAndForwardSlash,
+} from '~/lib/utils/regex';
+import { removeTireFromQueryParam } from '~/lib/utils/string';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { uiJSX } from '~/lib/utils/ui-dictionary-jsx';
 
@@ -13,69 +23,234 @@ import {
   FIELDS,
   RADIO_GROUPS,
   RATING_LABELS,
+  RATING_NOT_APPLICABLE,
   RATING_OPTIONS,
 } from './ReviewForm.constants';
 import styles from './ReviewForm.styles';
 
 interface Props {
+  queryParams: {
+    [name: string]: string | string[];
+  };
   tire: string;
 }
 
-// Revisit this type during integration - having trouble getting it to work
-interface FormValues {
-  [name: string]: any;
+interface RootFormValue {
+  [FIELDS.ADDITIONAL_COMMENTS]: string | null;
+  [FIELDS.NAME]: string;
+  [FIELDS.EMAIL]: string;
+  [FIELDS.PURCHASE_DATE]: string | null;
+  [FIELDS.VEHICLE]: string;
+  [FIELDS.AVERAGE_MILES_DRIVEN]: string;
+  [FIELDS.DRIVING_STYLE]: string;
+  [FIELDS.DRIVING_LOCATION]: string;
+  [FIELDS.WOULD_BUY_AGAIN]: string;
+  [FIELDS.TOKEN]: string;
 }
 
-interface FormFieldKey {
-  [name: string]: string;
+interface FormValues extends Partial<RootFormValue> {
+  performanceRating: Partial<{
+    [FIELDS.DRY]: number | null;
+    [FIELDS.COMFORT]: number | null;
+    [FIELDS.NOISE]: number | null;
+    [FIELDS.TREADWEAR]: number | null;
+    [FIELDS.WET]: number | null;
+    [FIELDS.WINTER]: number | null;
+  }>;
 }
 
-function ReviewForm({ tire }: Props) {
-  const [formValues, setFormValues] = useState<FormValues>({});
+interface PickerLabels {
+  [name: string]: string | number;
+}
+
+const toastMessages: {
+  [key in TOAST_TYPE | string]: JSX.Element | string;
+} = {
+  [TOAST_TYPE.SUCCESS]: <Markdown>{ui('reviews.form.success')}</Markdown>,
+  [TOAST_TYPE.ERROR]: <Markdown>{ui('reviews.form.error')}</Markdown>,
+};
+
+const unselectedPicker = -1;
+
+const initialState = {
+  [FIELDS.ADDITIONAL_COMMENTS]: '',
+  [FIELDS.NAME]: '',
+  [FIELDS.EMAIL]: '',
+  [FIELDS.VEHICLE]: '',
+  [FIELDS.PURCHASE_DATE]: null,
+  performanceRating: {
+    [FIELDS.DRY]: unselectedPicker,
+    [FIELDS.COMFORT]: unselectedPicker,
+    [FIELDS.NOISE]: unselectedPicker,
+    [FIELDS.TREADWEAR]: unselectedPicker,
+    [FIELDS.WET]: unselectedPicker,
+    [FIELDS.WINTER]: unselectedPicker,
+  },
+};
+
+function ReviewForm({ tire, queryParams }: Props) {
+  const [formValues, setFormValues] = useState<FormValues>(initialState);
+  const [pickerLabels, setPickerLabels] = useState<PickerLabels>({});
   const [isFormValid, setIsFormValid] = useState<boolean>(false);
+  const [toastMessage, setToastMessage] = useState<TOAST_TYPE | string>('');
+
+  const brandName = removeTireFromQueryParam(queryParams.brand);
 
   const hasRequiredFieldsFilled =
-    formValues[FIELDS.DRY.VALUE] !== undefined &&
-    formValues[FIELDS.WET.VALUE] !== undefined &&
-    formValues[FIELDS.WINTER.VALUE] !== undefined &&
-    formValues[FIELDS.COMFORT.VALUE] !== undefined &&
-    formValues[FIELDS.NOISE.VALUE] !== undefined &&
-    formValues[FIELDS.TREADWEAR.VALUE] !== undefined &&
-    formValues[FIELDS.NAME.VALUE] &&
-    formValues[FIELDS.EMAIL.VALUE] &&
-    formValues[FIELDS.VEHICLE.VALUE] &&
-    formValues[FIELDS.MILES.VALUE] &&
-    formValues[FIELDS.DRIVING_STYLE.VALUE] &&
-    formValues[FIELDS.WHERE_USED.VALUE] &&
-    formValues[FIELDS.BUY_AGAIN.VALUE];
+    formValues.performanceRating &&
+    formValues.performanceRating[FIELDS.DRY] !== unselectedPicker &&
+    formValues.performanceRating[FIELDS.WET] !== unselectedPicker &&
+    formValues.performanceRating[FIELDS.WINTER] !== unselectedPicker &&
+    formValues.performanceRating[FIELDS.COMFORT] !== unselectedPicker &&
+    formValues.performanceRating[FIELDS.NOISE] !== unselectedPicker &&
+    formValues.performanceRating[FIELDS.TREADWEAR] !== unselectedPicker &&
+    formValues[FIELDS.NAME] &&
+    formValues[FIELDS.EMAIL] &&
+    formValues[FIELDS.VEHICLE] &&
+    formValues[FIELDS.AVERAGE_MILES_DRIVEN] &&
+    formValues[FIELDS.DRIVING_STYLE] &&
+    formValues[FIELDS.DRIVING_LOCATION] &&
+    formValues[FIELDS.WOULD_BUY_AGAIN];
+
+  const hasValidFields =
+    email.test(formValues[FIELDS.EMAIL] || '') &&
+    (numberSlashNumber.test(formValues[FIELDS.PURCHASE_DATE] || '') ||
+      formValues[FIELDS.PURCHASE_DATE] === null);
 
   useEffect(() => {
-    if (hasRequiredFieldsFilled) {
+    if (hasRequiredFieldsFilled && hasValidFields) {
       setIsFormValid(true);
     } else {
       setIsFormValid(false);
     }
-  }, [formValues, hasRequiredFieldsFilled]);
+  }, [formValues, hasRequiredFieldsFilled, hasValidFields]);
 
-  function handleFormSubmit() {
-    // TODO: Integrate form
+  const handleFormSubmit = async () => {
+    const reformattedDataForSubmission = {
+      ...formValues,
+      [FIELDS.WOULD_BUY_AGAIN]:
+        formValues[FIELDS.WOULD_BUY_AGAIN] ===
+        ui('reviews.form.sections.buyAgain.options.yes')
+          ? true
+          : false,
+      performanceRating: {
+        [FIELDS.DRY]: reformatPickerValue(
+          formValues.performanceRating[FIELDS.DRY] as number,
+        ),
+        [FIELDS.WET]: reformatPickerValue(
+          formValues.performanceRating[FIELDS.WET] as number,
+        ),
+        [FIELDS.WINTER]: reformatPickerValue(
+          formValues.performanceRating[FIELDS.WINTER] as number,
+        ),
+        [FIELDS.COMFORT]: reformatPickerValue(
+          formValues.performanceRating[FIELDS.COMFORT] as number,
+        ),
+        [FIELDS.NOISE]: reformatPickerValue(
+          formValues.performanceRating[FIELDS.NOISE] as number,
+        ),
+        [FIELDS.TREADWEAR]: reformatPickerValue(
+          formValues.performanceRating[FIELDS.TREADWEAR] as number,
+        ),
+      },
+    };
+
+    // Generate recaptcha3 token
+    if (typeof window.grecaptcha !== 'undefined') {
+      window.grecaptcha.ready(function () {
+        try {
+          window.grecaptcha
+            .execute(process.env.RECAPTCHA_SITE_KEY || '', { action: 'submit' })
+            .then(function (token: string) {
+              reformattedDataForSubmission[FIELDS.TOKEN] = token;
+              postFormData(
+                reformattedDataForSubmission as SiteProductLineReviewItemInput,
+              );
+            });
+        } catch (error) {
+          console.info(error);
+          setToastMessage(TOAST_TYPE.ERROR);
+        }
+      });
+    } else {
+      console.info('Could not find recaptcha3 in the window');
+      setToastMessage(TOAST_TYPE.ERROR);
+    }
+  };
+
+  const reformatPickerValue = (index: number) => {
+    // We need to do this because the picker keeps track of the selected option
+    // with the index. The index controls which one is selected and if we change
+    // this value in state, it affects which option is selected
+    // Set the last option (N/A) to 0 and increment all others by 1
+    const incrementPickerValue =
+      index === RATING_OPTIONS.indexOf(RATING_NOT_APPLICABLE) ? 0 : index + 1;
+    const pickerValue =
+      index !== unselectedPicker ? incrementPickerValue : unselectedPicker;
+
+    return pickerValue;
+  };
+
+  const postFormData = async (
+    reformattedDataForSubmission: SiteProductLineReviewItemInput,
+  ) => {
+    try {
+      await apiPostReview(
+        brandName,
+        queryParams.productLine.toString(),
+        reformattedDataForSubmission,
+      );
+      setToastMessage(TOAST_TYPE.SUCCESS);
+      setFormValues(initialState);
+      setPickerLabels({});
+      setIsFormValid(false);
+    } catch (error) {
+      setToastMessage(TOAST_TYPE.ERROR);
+    }
+  };
+
+  function handleDismiss() {
+    setToastMessage('');
   }
 
-  const handleSelectPickerOption = (field: FormFieldKey) => (
+  const handleSelectPickerOption = (field: string) => (
     _value: number | string,
     index: number,
   ) => {
     setFormValues({
       ...formValues,
-      [field.VALUE]: index,
-      [field.RATING_LABEL]: RATING_LABELS[index],
+      performanceRating: {
+        ...formValues.performanceRating,
+        [field]: index,
+      },
+    });
+    setPickerLabels({
+      ...pickerLabels,
+      [field]: RATING_LABELS[index],
     });
   };
 
-  const handleSetFormFieldValue = (field: FormFieldKey) => (value: string) => {
+  const handleSetFormFieldValue = (field: string) => (value: string) => {
     setFormValues({
       ...formValues,
-      [field.VALUE]: value,
+      [field]: value,
+    });
+  };
+
+  const handleSetDateFormField = (field: string) => (value: string) => {
+    let formattedValue = value
+      .substring(0, 10)
+      .replace(onlyNumbersAndForwardSlash, '');
+    const numChars = formattedValue.length;
+
+    // Automatically append slashes to date field
+    if (numChars === 2 || numChars === 5) {
+      formattedValue += '/';
+    }
+
+    setFormValues({
+      ...formValues,
+      [field]: formattedValue,
     });
   };
 
@@ -101,12 +276,10 @@ function ReviewForm({ tire }: Props) {
             customContainerStyles={styles.pickerContainer}
             numbers={RATING_OPTIONS}
             onSelect={handleSelectPickerOption(FIELDS.DRY)}
-            selectedIndex={formValues[FIELDS.DRY.VALUE]}
+            selectedIndex={formValues.performanceRating[FIELDS.DRY] as number}
             title={ui('reviews.form.sections.ratings.dry')}
             subTitle={
-              <span css={styles.subTitle}>
-                {formValues[FIELDS.DRY.RATING_LABEL]}
-              </span>
+              <span css={styles.subTitle}>{pickerLabels[FIELDS.DRY]}</span>
             }
           />
         </div>
@@ -115,12 +288,10 @@ function ReviewForm({ tire }: Props) {
             customContainerStyles={styles.pickerContainer}
             numbers={RATING_OPTIONS}
             onSelect={handleSelectPickerOption(FIELDS.WET)}
-            selectedIndex={formValues[FIELDS.WET.VALUE]}
+            selectedIndex={formValues.performanceRating[FIELDS.WET] as number}
             title={ui('reviews.form.sections.ratings.wet')}
             subTitle={
-              <span css={styles.subTitle}>
-                {formValues[FIELDS.WET.RATING_LABEL]}
-              </span>
+              <span css={styles.subTitle}>{pickerLabels[FIELDS.WET]}</span>
             }
           />
         </div>
@@ -129,12 +300,12 @@ function ReviewForm({ tire }: Props) {
             customContainerStyles={styles.pickerContainer}
             numbers={RATING_OPTIONS}
             onSelect={handleSelectPickerOption(FIELDS.WINTER)}
-            selectedIndex={formValues[FIELDS.WINTER.VALUE]}
+            selectedIndex={
+              formValues.performanceRating[FIELDS.WINTER] as number
+            }
             title={ui('reviews.form.sections.ratings.winter')}
             subTitle={
-              <span css={styles.subTitle}>
-                {formValues[FIELDS.WINTER.RATING_LABEL]}
-              </span>
+              <span css={styles.subTitle}>{pickerLabels[FIELDS.WINTER]}</span>
             }
           />
         </div>
@@ -143,12 +314,12 @@ function ReviewForm({ tire }: Props) {
             customContainerStyles={styles.pickerContainer}
             numbers={RATING_OPTIONS}
             onSelect={handleSelectPickerOption(FIELDS.COMFORT)}
-            selectedIndex={formValues[FIELDS.COMFORT.VALUE]}
+            selectedIndex={
+              formValues.performanceRating[FIELDS.COMFORT] as number
+            }
             title={ui('reviews.form.sections.ratings.comfort')}
             subTitle={
-              <span css={styles.subTitle}>
-                {formValues[FIELDS.COMFORT.RATING_LABEL]}
-              </span>
+              <span css={styles.subTitle}>{pickerLabels[FIELDS.COMFORT]}</span>
             }
           />
         </div>
@@ -157,12 +328,10 @@ function ReviewForm({ tire }: Props) {
             customContainerStyles={styles.pickerContainer}
             numbers={RATING_OPTIONS}
             onSelect={handleSelectPickerOption(FIELDS.NOISE)}
-            selectedIndex={formValues[FIELDS.NOISE.VALUE]}
+            selectedIndex={formValues.performanceRating[FIELDS.NOISE] as number}
             title={ui('reviews.form.sections.ratings.noise')}
             subTitle={
-              <span css={styles.subTitle}>
-                {formValues[FIELDS.NOISE.RATING_LABEL]}
-              </span>
+              <span css={styles.subTitle}>{pickerLabels[FIELDS.NOISE]}</span>
             }
           />
         </div>
@@ -171,11 +340,13 @@ function ReviewForm({ tire }: Props) {
             customContainerStyles={styles.pickerContainer}
             numbers={RATING_OPTIONS}
             onSelect={handleSelectPickerOption(FIELDS.TREADWEAR)}
-            selectedIndex={formValues[FIELDS.TREADWEAR.VALUE]}
+            selectedIndex={
+              formValues.performanceRating[FIELDS.TREADWEAR] as number
+            }
             title={ui('reviews.form.sections.ratings.treadwear')}
             subTitle={
               <span css={styles.subTitle}>
-                {formValues[FIELDS.TREADWEAR.RATING_LABEL]}
+                {pickerLabels[FIELDS.TREADWEAR]}
               </span>
             }
           />
@@ -189,7 +360,7 @@ function ReviewForm({ tire }: Props) {
             <Input
               id="review"
               isTextArea
-              value={formValues[FIELDS.ADDITIONAL_COMMENTS.VALUE]}
+              value={formValues[FIELDS.ADDITIONAL_COMMENTS] as string}
               onChange={handleSetFormFieldValue(FIELDS.ADDITIONAL_COMMENTS)}
               label={ui('reviews.form.sections.ratings.review')}
             />
@@ -204,7 +375,7 @@ function ReviewForm({ tire }: Props) {
             <div css={styles.input}>
               <Input
                 id="name"
-                value={formValues[FIELDS.NAME.VALUE]}
+                value={formValues[FIELDS.NAME]}
                 onChange={handleSetFormFieldValue(FIELDS.NAME)}
                 label={ui('reviews.form.sections.about.name')}
               />
@@ -212,7 +383,7 @@ function ReviewForm({ tire }: Props) {
             <div css={styles.input}>
               <Input
                 id="email"
-                value={formValues[FIELDS.EMAIL.VALUE]}
+                value={formValues[FIELDS.EMAIL]}
                 onChange={handleSetFormFieldValue(FIELDS.EMAIL)}
                 label={ui('reviews.form.sections.about.email')}
               />
@@ -220,8 +391,8 @@ function ReviewForm({ tire }: Props) {
             <div css={styles.input}>
               <Input
                 id="datePurchased"
-                value={formValues[FIELDS.DATE_PURCHASED.VALUE]}
-                onChange={handleSetFormFieldValue(FIELDS.DATE_PURCHASED)}
+                value={formValues[FIELDS.PURCHASE_DATE] as string}
+                onChange={handleSetDateFormField(FIELDS.PURCHASE_DATE)}
                 label={ui('reviews.form.sections.about.datePurchased')}
                 contextualLabel={ui(
                   'reviews.form.sections.about.datePurchasedContextual',
@@ -229,6 +400,8 @@ function ReviewForm({ tire }: Props) {
               />
             </div>
           </fieldset>
+
+          {/* TODO: Implement vehicle modal WCS-1013 */}
           <fieldset css={styles.group}>
             <h2 css={styles.groupTitle}>
               {ui('reviews.form.sections.vehicle.title')}
@@ -240,7 +413,7 @@ function ReviewForm({ tire }: Props) {
               {/* TODO: hook input up to vehicle search during integration */}
               <Input
                 id="vehicle"
-                value={formValues[FIELDS.VEHICLE.VALUE]}
+                value={formValues[FIELDS.VEHICLE]}
                 onChange={handleSetFormFieldValue(FIELDS.VEHICLE)}
                 label={ui('reviews.form.sections.vehicle.vehicleInfo')}
               />
@@ -248,20 +421,26 @@ function ReviewForm({ tire }: Props) {
           </fieldset>
 
           <fieldset css={styles.group}>
-            <h2 css={styles.groupTitle}>{RADIO_GROUPS.MILES.title}</h2>
+            <h2 css={styles.groupTitle}>
+              {RADIO_GROUPS.AVERAGE_MILES_DRIVEN.title}
+            </h2>
             <div css={styles.radioGroup}>
-              {RADIO_GROUPS.MILES.options.map(({ label, value }) => {
-                return (
-                  <TitleRadio
-                    activeValue={formValues[FIELDS.MILES.VALUE]}
-                    label={label}
-                    name="miles"
-                    onChange={handleSetFormFieldValue(FIELDS.MILES)}
-                    value={value}
-                    key={value}
-                  />
-                );
-              })}
+              {RADIO_GROUPS.AVERAGE_MILES_DRIVEN.options.map(
+                ({ label, value }) => {
+                  return (
+                    <TitleRadio
+                      activeValue={formValues[FIELDS.AVERAGE_MILES_DRIVEN]}
+                      label={label}
+                      name="miles"
+                      onChange={handleSetFormFieldValue(
+                        FIELDS.AVERAGE_MILES_DRIVEN,
+                      )}
+                      value={value}
+                      key={value}
+                    />
+                  );
+                },
+              )}
             </div>
           </fieldset>
 
@@ -271,7 +450,7 @@ function ReviewForm({ tire }: Props) {
               {RADIO_GROUPS.DRIVING_STYLE.options.map(({ label, value }) => {
                 return (
                   <TitleRadio
-                    activeValue={formValues[FIELDS.DRIVING_STYLE.VALUE]}
+                    activeValue={formValues[FIELDS.DRIVING_STYLE]}
                     label={label}
                     name="drivingStyle"
                     onChange={handleSetFormFieldValue(FIELDS.DRIVING_STYLE)}
@@ -284,15 +463,17 @@ function ReviewForm({ tire }: Props) {
           </fieldset>
 
           <fieldset css={styles.group}>
-            <h2 css={styles.groupTitle}>{RADIO_GROUPS.WHERE_USED.title}</h2>
+            <h2 css={styles.groupTitle}>
+              {RADIO_GROUPS.DRIVING_LOCATION.title}
+            </h2>
             <div css={styles.radioGroup}>
-              {RADIO_GROUPS.WHERE_USED.options.map(({ label, value }) => {
+              {RADIO_GROUPS.DRIVING_LOCATION.options.map(({ label, value }) => {
                 return (
                   <TitleRadio
-                    activeValue={formValues[FIELDS.WHERE_USED.VALUE]}
+                    activeValue={formValues[FIELDS.DRIVING_LOCATION]}
                     label={label}
                     name="whereUsed"
-                    onChange={handleSetFormFieldValue(FIELDS.WHERE_USED)}
+                    onChange={handleSetFormFieldValue(FIELDS.DRIVING_LOCATION)}
                     value={value}
                     key={value}
                   />
@@ -307,10 +488,10 @@ function ReviewForm({ tire }: Props) {
               {RADIO_GROUPS.BUY_AGAIN.options.map(({ label, value }) => {
                 return (
                   <TitleRadio
-                    activeValue={formValues[FIELDS.BUY_AGAIN.VALUE]}
+                    activeValue={formValues[FIELDS.WOULD_BUY_AGAIN]}
                     label={label}
                     name="wouldBuyAgain"
-                    onChange={handleSetFormFieldValue(FIELDS.BUY_AGAIN)}
+                    onChange={handleSetFormFieldValue(FIELDS.WOULD_BUY_AGAIN)}
                     value={value}
                     key={value}
                   />
@@ -319,7 +500,7 @@ function ReviewForm({ tire }: Props) {
             </div>
           </fieldset>
 
-          <div css={[styles.group, styles.centeredOnMobile]}>
+          <div css={[styles.group, styles.buttonGroup]}>
             {/* TODO: implement captcha - WCS-797 */}
             <Button
               css={styles.submitButton}
@@ -331,6 +512,15 @@ function ReviewForm({ tire }: Props) {
             </Button>
           </div>
         </form>
+        {toastMessage && (
+          <Toast
+            customStyles={styles.toast}
+            isOpen={!!toastMessage}
+            onDismiss={handleDismiss}
+          >
+            {toastMessages[toastMessage]}
+          </Toast>
+        )}
       </GridItem>
     </Grid>
   );

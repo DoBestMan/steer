@@ -7,7 +7,8 @@ const PICKER_MAX_WIDTH = {
 };
 
 const styles: StylesMap = {
-  centeredOnMobile: {
+  buttonGroup: {
+    border: 'none',
     textAlign: 'center',
     [MQ.L]: {
       textAlign: 'left',

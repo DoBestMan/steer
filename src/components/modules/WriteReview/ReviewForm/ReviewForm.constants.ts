@@ -1,6 +1,12 @@
+import {
+  SiteProductLineReviewItemInputAverageMilesDriven,
+  SiteProductLineReviewItemInputDrivingLocation,
+  SiteProductLineReviewItemInputDrivingStyle,
+} from '~/data/models/SiteProductLineReviewItemInput';
 import { ui } from '~/lib/utils/ui-dictionary';
 
-export const RATING_OPTIONS = [1, 2, 3, 4, 5, 'NA'];
+export const RATING_NOT_APPLICABLE = 'NA';
+export const RATING_OPTIONS = [1, 2, 3, 4, 5, RATING_NOT_APPLICABLE];
 
 export const RATING_LABELS = [
   ui('reviews.form.sections.ratings.labels.one'),
@@ -11,33 +17,52 @@ export const RATING_LABELS = [
   ui('reviews.form.sections.ratings.labels.na'),
 ];
 
+export enum FIELDS {
+  ADDITIONAL_COMMENTS = 'additionalComments',
+  AVERAGE_MILES_DRIVEN = 'averageMilesDriven',
+  COMFORT = 'comfort',
+  DRIVING_LOCATION = 'drivingLocation',
+  DRIVING_STYLE = 'drivingStyle',
+  DRY = 'dry',
+  EMAIL = 'email',
+  NAME = 'name',
+  NOISE = 'noise',
+  PURCHASE_DATE = 'purchaseDate',
+  TOKEN = 'token',
+  TREADWEAR = 'treadwear',
+  VEHICLE = 'vehicle',
+  WET = 'wet',
+  WINTER = 'winter',
+  WOULD_BUY_AGAIN = 'wouldBuyAgain',
+}
+
 export const RADIO_GROUPS = {
-  MILES: {
+  AVERAGE_MILES_DRIVEN: {
     title: ui('reviews.form.sections.miles.title'),
     options: [
       {
         label: ui('reviews.form.sections.miles.options.one'),
-        value: ui('reviews.form.sections.miles.options.one'),
+        value: SiteProductLineReviewItemInputAverageMilesDriven.Miles5000,
       },
       {
         label: ui('reviews.form.sections.miles.options.two'),
-        value: ui('reviews.form.sections.miles.options.two'),
+        value: SiteProductLineReviewItemInputAverageMilesDriven.Miles9999,
       },
       {
         label: ui('reviews.form.sections.miles.options.three'),
-        value: ui('reviews.form.sections.miles.options.three'),
+        value: SiteProductLineReviewItemInputAverageMilesDriven.Miles14999,
       },
       {
         label: ui('reviews.form.sections.miles.options.four'),
-        value: ui('reviews.form.sections.miles.options.four'),
+        value: SiteProductLineReviewItemInputAverageMilesDriven.Miles19999,
       },
       {
         label: ui('reviews.form.sections.miles.options.five'),
-        value: ui('reviews.form.sections.miles.options.five'),
+        value: SiteProductLineReviewItemInputAverageMilesDriven.Miles29999,
       },
       {
         label: ui('reviews.form.sections.miles.options.six'),
-        value: ui('reviews.form.sections.miles.options.six'),
+        value: SiteProductLineReviewItemInputAverageMilesDriven.Miles39999,
       },
     ],
   },
@@ -46,48 +71,49 @@ export const RADIO_GROUPS = {
     options: [
       {
         label: ui('reviews.form.sections.drivingStyle.options.one'),
-        value: ui('reviews.form.sections.drivingStyle.options.one'),
+        value: SiteProductLineReviewItemInputDrivingStyle.Cautious,
       },
       {
         label: ui('reviews.form.sections.drivingStyle.options.two'),
-        value: ui('reviews.form.sections.drivingStyle.options.two'),
+        value: SiteProductLineReviewItemInputDrivingStyle.Confident,
       },
       {
         label: ui('reviews.form.sections.drivingStyle.options.three'),
-        value: ui('reviews.form.sections.drivingStyle.options.three'),
+        value: SiteProductLineReviewItemInputDrivingStyle.Aggressive,
       },
       {
         label: ui('reviews.form.sections.drivingStyle.options.four'),
-        value: ui('reviews.form.sections.drivingStyle.options.four'),
+        value: SiteProductLineReviewItemInputDrivingStyle.Extreme,
       },
     ],
   },
-  WHERE_USED: {
+  DRIVING_LOCATION: {
     title: ui('reviews.form.sections.whereUsed.title'),
     options: [
       {
         label: ui('reviews.form.sections.whereUsed.options.one'),
-        value: ui('reviews.form.sections.whereUsed.options.one'),
+        value: SiteProductLineReviewItemInputDrivingLocation.AllHighway,
       },
       {
         label: ui('reviews.form.sections.whereUsed.options.two'),
-        value: ui('reviews.form.sections.whereUsed.options.two'),
+        value: SiteProductLineReviewItemInputDrivingLocation.MostlyCity,
       },
       {
         label: ui('reviews.form.sections.whereUsed.options.three'),
-        value: ui('reviews.form.sections.whereUsed.options.three'),
+        value:
+          SiteProductLineReviewItemInputDrivingLocation.CombinedHighwayCity,
       },
       {
         label: ui('reviews.form.sections.whereUsed.options.four'),
-        value: ui('reviews.form.sections.whereUsed.options.four'),
+        value: SiteProductLineReviewItemInputDrivingLocation.TrackAutocross,
       },
       {
         label: ui('reviews.form.sections.whereUsed.options.five'),
-        value: ui('reviews.form.sections.whereUsed.options.five'),
+        value: SiteProductLineReviewItemInputDrivingLocation.RuralRoads,
       },
       {
         label: ui('reviews.form.sections.whereUsed.options.six'),
-        value: ui('reviews.form.sections.whereUsed.options.six'),
+        value: SiteProductLineReviewItemInputDrivingLocation.OffRoad,
       },
     ],
   },
@@ -95,67 +121,13 @@ export const RADIO_GROUPS = {
     title: ui('reviews.form.sections.buyAgain.title'),
     options: [
       {
-        label: ui('reviews.form.sections.buyAgain.options.one'),
-        value: ui('reviews.form.sections.buyAgain.options.one'),
+        label: ui('reviews.form.sections.buyAgain.options.yes'),
+        value: ui('reviews.form.sections.buyAgain.options.yes'),
       },
       {
-        label: ui('reviews.form.sections.buyAgain.options.two'),
-        value: ui('reviews.form.sections.buyAgain.options.two'),
+        label: ui('reviews.form.sections.buyAgain.options.no'),
+        value: ui('reviews.form.sections.buyAgain.options.no'),
       },
     ],
-  },
-};
-
-export const FIELDS = {
-  ADDITIONAL_COMMENTS: {
-    VALUE: 'ADDITIONAL_COMMENTS_VALUE',
-  },
-  BUY_AGAIN: {
-    VALUE: 'BUY_AGAIN_VALUE',
-  },
-  COMFORT: {
-    VALUE: 'COMFORT_VALUE',
-    RATING_LABEL: 'COMFORT_RATING_LABEL',
-  },
-  DATE_PURCHASED: {
-    VALUE: 'DATE_PURCHASED_VALUE',
-  },
-  DRIVING_STYLE: {
-    VALUE: 'DRIVING_STYLE_VALUE',
-  },
-  DRY: {
-    VALUE: 'DRY_VALUE',
-    RATING_LABEL: 'DRY_RATING_LABEL',
-  },
-  EMAIL: {
-    VALUE: 'EMAIL_VALUE',
-  },
-  MILES: {
-    VALUE: 'MILES_VALUE',
-  },
-  NAME: {
-    VALUE: 'NAME_VALUE',
-  },
-  NOISE: {
-    VALUE: 'NOISE_VALUE',
-    RATING_LABEL: 'NOISE_RATING_LABEL',
-  },
-  TREADWEAR: {
-    VALUE: 'TREADWEAR_VALUE',
-    RATING_LABEL: 'TREADWEAR_RATING_LABEL',
-  },
-  VEHICLE: {
-    VALUE: 'VEHICLE_VALUE',
-  },
-  WET: {
-    VALUE: 'WET_VALUE',
-    RATING_LABEL: 'WET_RATING_LABEL',
-  },
-  WHERE_USED: {
-    VALUE: 'WHERE_USED_VALUE',
-  },
-  WINTER: {
-    VALUE: 'WINTER_VALUE',
-    RATING_LABEL: 'WINTER_RATING_LABEL',
   },
 };

@@ -10,7 +10,13 @@ export default {
 export function Form() {
   return (
     <div css={{ backgroundColor: COLORS.GLOBAL.WHITE }}>
-      <ReviewForm tire="Continental PureContact LS" />
+      <ReviewForm
+        tire="Continental PureContact LS"
+        queryParams={{
+          brand: 'continental-tires',
+          productLine: 'surecontact-rx',
+        }}
+      />
     </div>
   );
 }
