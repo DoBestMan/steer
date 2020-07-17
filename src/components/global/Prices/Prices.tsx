@@ -35,7 +35,7 @@ function Prices({
             <div key={price.salePriceInCents}>
               <span
                 css={[
-                  (price.estimatedRetailPriceInCents || isStartingAtPrice) && {
+                  (isSalePrice || isStartingAtPrice) && {
                     color: COLORS.GLOBAL.ORANGE,
                   },
                   isLight && { color: COLORS.GLOBAL.WHITE },
@@ -47,25 +47,23 @@ function Prices({
                 {isStartingAtPrice && ui('common.startingAtPrice') + ' '}
                 {formatDollars(price.salePriceInCents)}
               </span>
-              {price.estimatedRetailPriceInCents &&
-                !isStartingAtPrice &&
-                isSalePrice && (
-                  <span
-                    css={[
-                      styles.originalValue,
-                      isLight && { color: COLORS.ORANGE.TINT_70 },
-                      originalPrefix && styles.originalValuePrefixed,
-                    ]}
-                    aria-label={`${ui(
-                      'common.originalPricePrefix',
-                    )}${formatDollars(price.estimatedRetailPriceInCents)}`}
-                  >
-                    <span aria-hidden>
-                      {originalPrefix}
-                      {formatDollars(price.estimatedRetailPriceInCents)}
-                    </span>
+              {!isStartingAtPrice && isSalePrice && (
+                <span
+                  css={[
+                    styles.originalValue,
+                    isLight && { color: COLORS.ORANGE.TINT_70 },
+                    originalPrefix && styles.originalValuePrefixed,
+                  ]}
+                  aria-label={`${ui(
+                    'common.originalPricePrefix',
+                  )}${formatDollars(price.estimatedRetailPriceInCents)}`}
+                >
+                  <span aria-hidden>
+                    {originalPrefix}
+                    {formatDollars(price.estimatedRetailPriceInCents)}
                   </span>
-                )}
+                </span>
+              )}
             </div>
           );
         })
