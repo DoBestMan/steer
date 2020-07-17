@@ -6,6 +6,7 @@ import { CatalogSummaryContextProvider } from '~/context/CatalogSummary.context'
 import { SiteCatalogFilters } from '~/data/models/SiteCatalogFilters';
 import { SiteCatalogProducts } from '~/data/models/SiteCatalogProducts';
 import { SiteCatalogSummary } from '~/data/models/SiteCatalogSummary';
+import { SiteQueryParams } from '~/data/models/SiteQueryParams';
 
 import CatalogGrid from './CatalogGrid/CatalogGrid';
 import styles from './CatalogPage.styles';
@@ -15,6 +16,7 @@ import CatalogSummary from './CatalogSummary/CatalogSummary';
 interface Props {
   catalogGridRef: React.Ref<HTMLDivElement>;
   comesFromSearch: boolean;
+  handleUpdateSummary: (siteQueryParams: SiteQueryParams) => void;
   hasLocalData: boolean;
   hasTopPicks: boolean;
   onPreviewFilters: (filters: Record<string, string>) => Promise<void>;
@@ -28,6 +30,7 @@ function CatalogPage({
   scrollToGrid,
   catalogGridRef,
   comesFromSearch,
+  handleUpdateSummary,
   hasLocalData,
   hasTopPicks,
   siteCatalogProducts,
@@ -47,6 +50,7 @@ function CatalogPage({
       {hasTopPicks && (
         <CatalogSummaryContextProvider
           comesFromSearch={comesFromSearch}
+          handleUpdateSummary={handleUpdateSummary}
           hasLocalData={hasLocalData}
           siteCatalogSummary={siteCatalogSummary}
         >

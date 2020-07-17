@@ -1,14 +1,14 @@
 import { ReactNode, useEffect, useState } from 'react';
 
+import { PAGE_TRANSITION_DURATION } from '~/components/modules/App/App.constants';
 import { STAGES } from '~/components/pages/CatalogPage/CatalogSummary/CatalogSummary.constants';
 import { SiteCatalogSummary } from '~/data/models/SiteCatalogSummary';
+import { SiteQueryParams } from '~/data/models/SiteQueryParams';
 import { createContext } from '~/lib/utils/context';
-
-const BUILD_IN_PAUSE = 4000;
 
 export interface CatalogSummaryContextProps {
   contentStage: STAGES;
-  isLocalDataByDefault: boolean;
+  onNewSearchQueryClick(siteQueryParams: SiteQueryParams): void;
   setNewContent(): void;
   setStage(stage: STAGES): void;
   showLoadingInterstitial: boolean;
@@ -20,84 +20,137 @@ const CatalogSummaryContext = createContext<CatalogSummaryContextProps>();
 
 interface SetupProps {
   comesFromSearch: boolean;
+  handleUpdateSummary(
+    siteQueryParams: SiteQueryParams,
+    replaceHistory?: boolean,
+  ): void;
   hasLocalData: boolean;
   siteCatalogSummary: SiteCatalogSummary;
 }
 
+enum LOADING_STATUS {
+  LOADED = 'LOADED',
+  LOADING = 'LOADING',
+}
+
+interface CatalogSummaryState {
+  contentStage: STAGES;
+  dataLoadingStatus: LOADING_STATUS | null;
+  showLoadingInterstitial: boolean;
+  stage: STAGES;
+}
+
+/**
+ * @param {STAGES} contentStage - Matches the `stage` state but on a delay
+ * which allows for the Content component to fade out/back in during the
+ * transition of the vehicle svg.
+ * @param {LOADING_STATUS} dataLoadingStatus - Local data loading status.
+ * @param {boolean} showLoadingInterstitial - If deep-linking in, or the
+ * local data has no results, we skip the loading interstitial and show
+ * the relevant stage without CSS transitions.
+ * @param {STAGES} stage - Used to determine which content to display.
+ */
+const INITIAL_STATE: CatalogSummaryState = {
+  contentStage: STAGES.LOADING,
+  dataLoadingStatus: null,
+  showLoadingInterstitial: false,
+  stage: STAGES.LOADING,
+};
+
+const BUILD_IN_PAUSE = 4000;
+
 // TODO: Exported for testing only
 export function useContextSetup({
+  comesFromSearch,
+  handleUpdateSummary,
   hasLocalData,
   siteCatalogSummary,
-  comesFromSearch,
-}: SetupProps) {
-  const totalResult =
-    siteCatalogSummary.siteCatalogSummaryMeta?.totalResults || 0;
-  const hasPromptMustShow =
-    siteCatalogSummary.siteCatalogSummaryPrompt?.mustShow;
-  const hasPromptCTAList = !!siteCatalogSummary.siteCatalogSummaryPrompt
-    ?.ctaList?.length;
-  /**
-   * Disambiguation response also has 0 results, but user should see the
-   * loading interstitial. Therefore, only show the NO_RESULTS stage if
-   * there are no CTA objects are present in the `ctaList`
-   */
-  const hasNoResults = totalResult === 0 && !hasPromptCTAList;
-
-  /**
-   * The `stage` state is used to determine which content to display.
-   * The `contentStage` matches the `stage` state but on a delay which
-   * allows for the Content component to fade out/back in during the
-   * transition of the vehicle svg.
-   */
-  const [stage, setStage] = useState<STAGES>(STAGES.LOADING);
-  const [contentStage, setContentStage] = useState<STAGES>(stage);
-
-  const [isLocalDataByDefault] = useState<boolean>(comesFromSearch);
-
-  // If deep-linking in, or the local data has no results, we skip
-  // the loading interstitial and show the relevant stage without
-  // CSS transitions.
-  const [showLoadingInterstitial] = useState<boolean>(
-    isLocalDataByDefault && !hasNoResults,
-  );
+}: SetupProps): CatalogSummaryContextProps {
+  const [state, setState] = useState<CatalogSummaryState>({
+    ...INITIAL_STATE,
+    showLoadingInterstitial: comesFromSearch,
+  });
+  const {
+    contentStage,
+    dataLoadingStatus,
+    showLoadingInterstitial,
+    stage,
+  } = state;
 
   /**
    * There will always be a LOADING stage when the user lands on the
    * Catalog page.
-   * - If local data does not exist, show the LOADING stage until
-   *   local data has been fetched. In this use case, we then skip the
-   *   loading interstitial and the page loads at the relevant step.
-   * - If local data does exist (e.g. the user is coming from the
-   *   Search), show the LOADING stage for the duration of the global
-   *   page transition (e.g. until the Nav has transitioned back
-   *   into place).
+   * - If local data is not available on load, wait until local data has
+   *   been fetched.
+   * - Whether local data is available on load, set a timer for the duration
+   *   of the global page transition (e.g. until the Nav has transitioned
+   *   back into place).
+   * - Only set the next stage once local data is available, and the timer
+   *   has finished.
    */
   useEffect(() => {
-    if (stage !== STAGES.LOADING) {
+    if (stage !== STAGES.LOADING || dataLoadingStatus) {
       return;
     }
 
-    // TODO: when coming from search, should account for both use cases
-    // of having local data immediately (use timeout), and having to load
-    // local data
-    if (isLocalDataByDefault && hasLocalData) {
-      setStage(hasNoResults ? STAGES.NO_RESULTS : STAGES.BUILD_IN);
+    setState({ ...state, dataLoadingStatus: LOADING_STATUS.LOADING });
+
+    const timeout = setTimeout(() => {
+      setState({ ...state, dataLoadingStatus: LOADING_STATUS.LOADED });
+    }, PAGE_TRANSITION_DURATION * 2);
+
+    return () => {
+      clearTimeout(timeout);
+    };
+    // Prevent hook from being called every time `dataLoadingStatus` changes,
+    // otherwise the timeout is cleared when status is set to
+    // `LOADING_STATUS.LOADING`
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [stage]);
+
+  useEffect(() => {
+    // Local data has been fetched and minimum loading period over
+    const dataReady =
+      hasLocalData && dataLoadingStatus === LOADING_STATUS.LOADED;
+
+    if (stage !== STAGES.LOADING || !dataReady) {
+      return;
     }
 
-    // Local data has been fetched
-    if (!isLocalDataByDefault && hasLocalData) {
-      if (hasPromptMustShow) {
-        setStage(hasNoResults ? STAGES.NO_RESULTS : STAGES.DATA_MOMENT);
-      } else {
-        setStage(STAGES.TOP_PICKS);
-      }
+    const totalResult =
+      siteCatalogSummary.siteCatalogSummaryMeta?.totalResults || 0;
+    const hasPromptMustShow =
+      siteCatalogSummary.siteCatalogSummaryPrompt?.mustShow;
+    const hasPromptCTAList = !!siteCatalogSummary.siteCatalogSummaryPrompt
+      ?.ctaList?.length;
+
+    /**
+     * Disambiguation response also has 0 results, but user should see the
+     * loading interstitial. Therefore, only show the NO_RESULTS stage if
+     * there are no CTA objects are present in the `ctaList`
+     */
+    const hasNoResults = totalResult === 0 && !hasPromptCTAList;
+
+    if (showLoadingInterstitial) {
+      setState({
+        ...state,
+        stage: hasNoResults ? STAGES.NO_RESULTS : STAGES.BUILD_IN,
+      });
+    } else if (hasPromptMustShow) {
+      setState({
+        ...state,
+        stage: hasNoResults ? STAGES.NO_RESULTS : STAGES.DATA_MOMENT,
+      });
+    } else {
+      setState({ ...state, stage: STAGES.TOP_PICKS });
     }
   }, [
+    dataLoadingStatus,
     hasLocalData,
-    hasNoResults,
-    hasPromptMustShow,
-    isLocalDataByDefault,
+    showLoadingInterstitial,
+    siteCatalogSummary,
     stage,
+    state,
   ]);
 
   /**
@@ -111,23 +164,34 @@ export function useContextSetup({
     }
 
     const timeout = setTimeout(() => {
-      setStage(STAGES.DATA_MOMENT);
+      setState({ ...state, stage: STAGES.DATA_MOMENT });
     }, BUILD_IN_PAUSE);
 
     return () => {
       clearTimeout(timeout);
     };
-  }, [stage]);
+  }, [stage, state]);
+
+  const handleNewSearchQuery = (siteQueryParams: SiteQueryParams) => {
+    // Reset state
+    setState(INITIAL_STATE);
+    // Fetch new data. Replaces current route in the browser history as
+    // we don't want the user to be able to go back to the disambiguation
+    // flow on browser back button click
+    handleUpdateSummary(siteQueryParams, true);
+  };
 
   return {
     contentStage,
-    isLocalDataByDefault,
+    onNewSearchQueryClick: handleNewSearchQuery,
     setNewContent: () => {
       // Called after the previous content message exit transition.
       // Brings `contentStage` back in alignment with `stage`.
-      setContentStage(stage);
+      setState({ ...state, contentStage: stage });
     },
-    setStage,
+    setStage: (newStage: STAGES) => {
+      setState({ ...state, stage: newStage });
+    },
     showLoadingInterstitial,
     siteCatalogSummary,
     stage,
@@ -141,11 +205,13 @@ interface ProviderProps extends SetupProps {
 export function CatalogSummaryContextProvider({
   children,
   comesFromSearch,
+  handleUpdateSummary,
   hasLocalData,
   siteCatalogSummary,
 }: ProviderProps) {
   const value = useContextSetup({
     comesFromSearch,
+    handleUpdateSummary,
     hasLocalData,
     siteCatalogSummary,
   });

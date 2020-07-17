@@ -64,18 +64,14 @@ export const vehiclesDisambiguation: SiteCatalogSummary = {
     ctaList: [
       {
         label: '235/40R18 91W',
-        link: {
-          href:
-            'https://simpletire.com/vehicles/acura-tires/rsx/2005?tireSize=23540R1891W',
-          isExternal: false,
+        siteQueryParams: {
+          tireSize: '23540R1891W',
         },
       },
       {
         label: '235/40R18 95Y XL',
-        link: {
-          href:
-            'https://simpletire.com/vehicles/acura-tires/rsx/2005?tireSize=235/40R1895YXL',
-          isExternal: false,
+        siteQueryParams: {
+          tireSize: '23540R1895YXL',
         },
       },
     ],
@@ -127,7 +123,7 @@ export const vehiclesNoOeWithSize: SiteCatalogSummary = {
     ctaList: [
       {
         label: 'Ok, continue',
-        link: null,
+        siteQueryParams: null,
       },
     ],
     infoLink: null,

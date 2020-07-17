@@ -15,6 +15,7 @@ export interface UseApiData<T> {
     shouldRevalidate?: boolean,
   ) => Promise<T | undefined>;
   revalidate: () => Promise<boolean>;
+  setHasLocalData: (hasLocalData: boolean) => void;
 }
 
 export interface UseApiDataParams {
@@ -83,5 +84,6 @@ export function useApiData<T>({
     isValidating,
     mutate,
     revalidate,
+    setHasLocalData,
   };
 }

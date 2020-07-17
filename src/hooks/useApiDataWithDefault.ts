@@ -22,6 +22,7 @@ export function useApiDataWithDefault<T, U = T>({
     isValidating,
     mutate,
     revalidate,
+    setHasLocalData,
   } = useApiData<U>({
     endpoint,
     includeAuthorization,
@@ -40,5 +41,6 @@ export function useApiDataWithDefault<T, U = T>({
     isValidating,
     mutate,
     revalidate,
+    setHasLocalData,
   };
 }

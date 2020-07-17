@@ -17,7 +17,7 @@ import { useCatalogSummaryContext } from '~/context/CatalogSummary.context';
 import { useModalContext } from '~/context/Modal.context';
 import { SiteCatalogSummaryBuildIn } from '~/data/models/SiteCatalogSummaryBuildIn';
 import { SiteCatalogSummaryPrompt } from '~/data/models/SiteCatalogSummaryPrompt';
-import { LINK_TYPES } from '~/lib/constants';
+import { SiteQueryParams } from '~/data/models/SiteQueryParams';
 import { getInvertedImageTransformations } from '~/lib/utils/cloudinary/cloudinary';
 import { isValidStaticModal } from '~/lib/utils/modal';
 import { ui } from '~/lib/utils/ui-dictionary';
@@ -112,12 +112,14 @@ export function BuildInMessage({
 }
 
 interface DataMomentMessageProps {
+  onNewSearchQueryClick?(siteQueryParams: SiteQueryParams): void;
   openStaticModal: (modalId: string) => void;
   setStage?(stage: STAGES): void;
   siteCatalogSummaryPrompt: SiteCatalogSummaryPrompt | null;
 }
 
 export function DataMomentMessage({
+  onNewSearchQueryClick,
   setStage,
   siteCatalogSummaryPrompt,
   openStaticModal,
@@ -155,31 +157,35 @@ export function DataMomentMessage({
           )}
           {siteCatalogSummaryPrompt.ctaList && (
             <div css={styles.dataMomentCtaWrapper}>
-              {siteCatalogSummaryPrompt.ctaList.map(({ label, link }) => {
-                const id = label.replace(/\s+/g, '').toLowerCase();
-                return link ? (
-                  <Button
-                    key={id}
-                    as={LINK_TYPES.A}
-                    href={link.href}
-                    style={message.buttonStyle}
-                    theme={message.buttonTheme}
-                  >
-                    {label}
-                  </Button>
-                ) : (
-                  <Button
-                    key={id}
-                    onClick={function () {
-                      setStage && setStage(STAGES.TOP_PICKS);
-                    }}
-                    style={message.buttonStyle}
-                    theme={message.buttonTheme}
-                  >
-                    {label}
-                  </Button>
-                );
-              })}
+              {siteCatalogSummaryPrompt.ctaList.map(
+                ({ label, siteQueryParams }) => {
+                  const id = label.replace(/\s+/g, '').toLowerCase();
+                  return siteQueryParams ? (
+                    <Button
+                      key={id}
+                      onClick={function () {
+                        onNewSearchQueryClick &&
+                          onNewSearchQueryClick(siteQueryParams);
+                      }}
+                      style={message.buttonStyle}
+                      theme={message.buttonTheme}
+                    >
+                      {label}
+                    </Button>
+                  ) : (
+                    <Button
+                      key={id}
+                      onClick={function () {
+                        setStage && setStage(STAGES.TOP_PICKS);
+                      }}
+                      style={message.buttonStyle}
+                      theme={message.buttonTheme}
+                    >
+                      {label}
+                    </Button>
+                  );
+                },
+              )}
             </div>
           )}
           {siteCatalogSummaryPrompt.infoLink && isValid && (
@@ -307,6 +313,7 @@ function CatalogMessage({
 }: CatalogMessageProps) {
   const {
     contentStage,
+    onNewSearchQueryClick,
     setNewContent,
     setStage,
     showLoadingInterstitial,
@@ -336,6 +343,7 @@ function CatalogMessage({
               {...siteCatalogSummary}
               customerServiceNumber={customerServiceNumber}
               customerServiceEnabled={customerServiceEnabled}
+              onNewSearchQueryClick={onNewSearchQueryClick}
               setStage={setStage}
               // used only by top picks
               exploreMore={exploreMore}

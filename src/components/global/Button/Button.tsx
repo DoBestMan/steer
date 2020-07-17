@@ -60,9 +60,11 @@ function Button({
   const Container = as;
 
   if (isAnchor && 'href' in rest) {
-    <BaseLink css={buttonStyles} {...rest}>
-      {children}
-    </BaseLink>;
+    return (
+      <BaseLink css={buttonStyles} {...rest}>
+        {children}
+      </BaseLink>
+    );
   }
 
   return (

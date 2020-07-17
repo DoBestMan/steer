@@ -5,6 +5,7 @@ import { useSearchContext } from '~/components/modules/Search/Search.context';
 import { CatalogPageContextProvider } from '~/context/CatalogPage.context';
 import { SiteCatalogProducts } from '~/data/models/SiteCatalogProducts';
 import { SiteCatalogSummary } from '~/data/models/SiteCatalogSummary';
+import { SiteQueryParams } from '~/data/models/SiteQueryParams';
 import { useApiDataWithDefault } from '~/hooks/useApiDataWithDefault';
 import { TIME } from '~/lib/constants';
 import { eventEmitters } from '~/lib/events/emitters';
@@ -37,7 +38,7 @@ function CatalogPageContainer({
   serverData,
   pageParams = {},
 }: Props) {
-  const { query, push, pathname, asPath } = useRouter();
+  const { query, push, pathname, replace, asPath } = useRouter();
   const { isSearchOpen } = useSearchContext();
 
   const catalogGridRef = useRef<HTMLDivElement | null>(null);
@@ -57,10 +58,50 @@ function CatalogPageContainer({
     data: { siteCatalogSummary },
     error: summaryError,
     hasLocalData,
+    revalidate: revalidateSummary,
+    setHasLocalData,
   } = useApiDataWithDefault<CatalogPageData['serverData']>({
     ...apiArgs,
     endpoint: endpoints.summary,
   });
+
+  const handleUpdateSummary = useCallback(
+    async (siteQueryParams: SiteQueryParams, replaceHistory = false) => {
+      setHasLocalData(false);
+
+      const route = asPath.split('?');
+      const params: Record<string, string> = {};
+
+      Object.entries({ ...query, ...siteQueryParams }).forEach(([k, v]) => {
+        const stringifiedVal = getParam(v);
+        if (!!stringifiedVal && !pageParams[k]) {
+          params[k] = stringifiedVal;
+        }
+      });
+
+      const searchString = new URLSearchParams(params).toString();
+      if (replaceHistory) {
+        replace(`${pathname}?${searchString}`, `${route[0]}?${searchString}`);
+      } else {
+        push(`${pathname}?${searchString}`, `${route[0]}?${searchString}`);
+      }
+
+      // revalidate with newly applied query params
+      await revalidateSummary();
+
+      window.scrollTo(0, 0);
+    },
+    [
+      asPath,
+      pathname,
+      query,
+      pageParams,
+      push,
+      replace,
+      revalidateSummary,
+      setHasLocalData,
+    ],
+  );
 
   // fetch site catalog products
   const {
@@ -136,6 +177,7 @@ function CatalogPageContainer({
       <CatalogPage
         onPreviewFilters={onPreviewFilters}
         comesFromSearch={isSearchOpen}
+        handleUpdateSummary={handleUpdateSummary}
         hasLocalData={hasLocalData}
         hasTopPicks={hasTopPicks}
         siteCatalogProducts={siteCatalogProducts}

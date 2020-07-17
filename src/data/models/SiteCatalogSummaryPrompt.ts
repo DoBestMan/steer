@@ -1,8 +1,8 @@
-import { SiteLink } from './SiteLink';
+import { SiteQueryParams } from './SiteQueryParams';
 
 interface CTA {
   label: string;
-  link: SiteLink | null;
+  siteQueryParams: SiteQueryParams | null;
 }
 
 interface InfoLink {
