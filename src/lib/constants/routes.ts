@@ -38,6 +38,7 @@ export const ROUTE_MAP: Record<ROUTES, string> = {
   [ROUTES.BRAND_CATEGORY]: '/brands/[brand]/categories/[categoryOrType]',
   [ROUTES.PRODUCT_DETAIL]: '/brands/[brand]/[productLine]',
   [ROUTES.PRODUCT_REVIEWS]: '/brands/[brand]/[productLine]/reviews',
+  [ROUTES.WRITE_REVIEW]: '/brands/[brand]/[productLine]/write-a-review',
   [ROUTES.CATEGORY_LANDING]: '/categories',
   [ROUTES.CATEGORY_DETAIL]: '/categories/[category]',
   [ROUTES.CATEGORY_REVIEWS]: '/categories/[category]/reviews',
@@ -52,7 +53,6 @@ export const ROUTE_MAP: Record<ROUTES, string> = {
   [ROUTES.ORDER_TRACKING_RESULT]: '/track-your-order/result',
   [ROUTES.TIRE_CATEGORY]: '/tire-sizes/[size]',
   [ROUTES.PRODUCT_DETAIL_PLA]: '/paid',
-  [ROUTES.WRITE_REVIEW]: '/brands/[brand]/[productLine]/write-a-review',
 };
 
 // null for dynamic labels

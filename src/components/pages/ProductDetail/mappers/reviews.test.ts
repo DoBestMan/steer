@@ -75,12 +75,15 @@ describe('pages/ProductDetails/mappers/reviews', () => {
         },
       ],
       seeAllReviewsLink: {
-        href: '/brands/continental-tires/reviews',
+        href: '/brands/continental-tires/dh2/reviews',
         isExternal: false,
       },
       sources: { googleShopping: 72, simpleTire: 115 },
       title: '187 Reviews',
-      writeReviewLink: { href: '/', isExternal: false },
+      writeReviewLink: {
+        href: '/brands/continental-tires/dh2/write-a-review',
+        isExternal: false,
+      },
     });
   });
 });

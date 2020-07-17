@@ -21,7 +21,7 @@ export function mapDataToReviews({
   siteProductReviews: SiteProductReviews;
 }): ReviewsProps {
   const {
-    query: { brand },
+    query: { brand, productLine },
   } = router;
 
   const momentList = dataMomentList;
@@ -51,15 +51,18 @@ export function mapDataToReviews({
     ? ui('reviews.tireReviews', { tire: numberOfReviews })
     : undefined;
   const seeAllReviewsLink = {
-    href: interpolateRoute(ROUTE_MAP[ROUTES.BRAND_REVIEWS], {
+    href: interpolateRoute(ROUTE_MAP[ROUTES.PRODUCT_REVIEWS], {
       brand,
+      productLine,
     }),
     isExternal: false,
   };
 
-  // TODO: Implement write a review functionality
   const writeReviewLink = {
-    href: '/',
+    href: interpolateRoute(ROUTE_MAP[ROUTES.WRITE_REVIEW], {
+      brand,
+      productLine,
+    }),
     isExternal: false,
   };
 
