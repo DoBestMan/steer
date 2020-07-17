@@ -160,10 +160,20 @@ const styles: StylesMap = {
     },
   },
   recirculationSize: {
+    marginBottom: SPACING.SIZE_40,
     marginTop: SPACING.SIZE_40,
 
     [MQ.L]: {
+      marginBottom: SPACING.SIZE_60,
       marginTop: SPACING.SIZE_60,
+    },
+
+    '&:empty': {
+      marginTop: 0,
+
+      [MQ.L]: {
+        marginTop: 0,
+      },
     },
   },
   root: {
@@ -184,17 +194,8 @@ const styles: StylesMap = {
   },
   stickyBar: {
     bottom: 0,
-    marginTop: SPACING.SIZE_60,
     position: 'sticky',
     zIndex: Z_INDEX.FRONT,
-
-    [MQ.M]: {
-      marginTop: SPACING.SIZE_80,
-    },
-
-    [MQ.L]: {
-      marginTop: SPACING.SIZE_120,
-    },
   },
   tireImage: {
     marginBottom: SPACING.SIZE_10,

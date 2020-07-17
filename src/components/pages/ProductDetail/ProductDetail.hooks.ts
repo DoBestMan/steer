@@ -19,6 +19,7 @@ import { useUserPersonalizationContext } from '~/context/UserPersonalization.con
 import { SiteCatalogProductGroupList } from '~/data/models/SiteCatalogProductGroupList';
 import { SiteProductLine } from '~/data/models/SiteProductLine';
 import { useApiDataWithDefault } from '~/hooks/useApiDataWithDefault';
+import { ROUTE_MAP, ROUTES } from '~/lib/constants';
 import { eventEmitters } from '~/lib/events/emitters';
 import { omit } from '~/lib/utils/object';
 import { getStringifiedParams, interpolateRoute } from '~/lib/utils/routes';
@@ -75,6 +76,7 @@ interface ResponseProps extends Pick<SiteProductLine, 'assetList'> {
   faq: FAQProps | null;
   insights: Omit<InsightsProps, 'handleChangeLocation'>;
   installation: InstallationProps | null;
+  isPLA: boolean;
   isSizeSelectorOpen: boolean;
   linkingData: ProductLinkingData | null;
   onChangeSize: (value: string) => void;
@@ -109,6 +111,7 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
   const [isSizeSelectorOpen, setIsSizeSelectorOpen] = useState(false);
   const queryParams = getStringifiedParams(Object.assign(query, vehicle));
   const { hostUrl } = useGlobalsContext();
+  const isPLA = !!router.route.match(ROUTE_MAP[ROUTES.PRODUCT_DETAIL_PLA]);
 
   const { data, error } = useApiDataWithDefault<ProductDetailResponse>({
     defaultData: serverData,
@@ -187,6 +190,7 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
       search,
     }),
     installation: mapDataToInstallation({ siteProduct }),
+    isPLA,
     isSizeSelectorOpen,
     linkingData: mapDataToLinkingData({
       hostUrl,

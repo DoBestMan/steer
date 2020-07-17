@@ -37,6 +37,7 @@ function ProductDetailContainer({ serverData }: ProductDetailData) {
     assetList,
     insights,
     installation,
+    isPLA,
     isSizeSelectorOpen,
     linkingData,
     onChangeSize,
@@ -114,18 +115,20 @@ function ProductDetailContainer({ serverData }: ProductDetailData) {
         <GridItem fullbleed css={styles.purchaseIncludes}>
           <PurchaseIncludes openStaticModal={openStaticModal} />
         </GridItem>
-        {recirculation && (
-          <GridItem fullbleed css={styles.featuredRecirculation}>
-            <ProductGroupList
-              headerCustomStyles={styles.recirculationHeader}
-              itemCustomStyle={styles.recirculationItem}
-              {...recirculation[0]}
-            />
-          </GridItem>
-        )}
         <GridItem gridColumnL="3/13" css={styles.shopWithConfidence}>
           <ShopWithConfidence />
         </GridItem>
+        {isPLA && recirculation && (
+          <>
+            <GridItem fullbleed css={styles.featuredRecirculation}>
+              <ProductGroupList
+                headerCustomStyles={styles.recirculationHeader}
+                itemCustomStyle={styles.recirculationItem}
+                {...recirculation[0]}
+              />
+            </GridItem>
+          </>
+        )}
         <GridItem fullbleed>
           <div ref={stickyBarDarkSection} css={styles.detailsSection}>
             {reviews && (
@@ -149,18 +152,18 @@ function ProductDetailContainer({ serverData }: ProductDetailData) {
           </div>
         </GridItem>
         {recirculation &&
-          recirculation.slice(1).map((item) => (
+          recirculation.slice(isPLA ? 1 : 0).map((item) => (
             <GridItem fullbleed css={styles.recirculation} key={item.id}>
               <ProductGroupList {...item} />
             </GridItem>
           ))}
-        {recirculationSize && (
-          <GridItem css={styles.recirculationSize}>
+        <GridItem css={styles.recirculationSize}>
+          {recirculationSize && (
             <Link href={recirculationSize.url} theme={THEME.LIGHT}>
               {recirculationSize.label}
             </Link>
-          </GridItem>
-        )}
+          )}
+        </GridItem>
         {stickyBar && (
           <GridItem fullbleed css={styles.stickyBar}>
             <PDPStickyBar
