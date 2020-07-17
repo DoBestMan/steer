@@ -2,6 +2,7 @@ import { COLORS } from '~/lib/constants/colors';
 
 export const BORDERS = {
   DOTTED_GRAY_40_2PX: `2px dotted ${COLORS.DARK.GRAY_40}`,
+  DOTTED_GRAY_70_2PX: `2px dotted ${COLORS.LIGHT.GRAY_70}`,
   DOTTED_TRANSPARENT_2PX: '2px dotted transparent',
   FOCUS_STATE: '1px dotted #666',
   SOLID_BLACK_1PX: `1px solid ${COLORS.GLOBAL.BLACK}`,

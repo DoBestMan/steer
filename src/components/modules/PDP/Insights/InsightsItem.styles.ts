@@ -88,7 +88,13 @@ const styles: StylesMap = {
   modalButton: [
     typography.filterItemLabel,
     {
-      padding: `${SPACING.SIZE_10}px 0`,
+      ':hover': {
+        borderColor: 'inherit',
+      },
+
+      borderBottom: BORDERS.DOTTED_TRANSPARENT_2PX,
+      marginBottom: SPACING.SIZE_10,
+      paddingTop: SPACING.SIZE_10,
       textAlign: 'left',
     },
   ],

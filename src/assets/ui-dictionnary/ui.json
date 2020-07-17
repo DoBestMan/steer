@@ -245,7 +245,7 @@
         "unknown": "Confirm if it fits your vehicle",
         "modalContentLabel": "Size Check Udpate",
         "modalInfoDescription": "PRO Tip",
-        "modalInfoCopy": "Most drivers keep the same size. If you want to change it, make sure you make the proper safety checks. {{link}}",
+        "modalInfoCopy": "Most drivers keep the same size. If you want to change it, make sure you make the proper safety checks. \n\n{{link}}",
         "modalInfoTitle": "This isn’t the tire size that came with your {{model}} from the factory",
         "selectAFittingSize": "Change to the size recommended by {{make}}",
         "selectAnotherVehicle": "Select another vehicle",

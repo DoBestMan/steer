@@ -1,6 +1,6 @@
 import { CSSObject } from '@emotion/core';
 
-import { COLORS, MQ, SPACING } from '~/lib/constants';
+import { BORDERS, COLORS, MQ, SPACING } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const styles: CSSObject = {
@@ -19,6 +19,10 @@ const styles: CSSObject = {
     typography.smallCopy,
     {
       color: COLORS.LIGHT.GRAY_70,
+
+      a: {
+        borderBottom: BORDERS.DOTTED_GRAY_70_2PX,
+      },
     },
   ],
   featureDescription: [
