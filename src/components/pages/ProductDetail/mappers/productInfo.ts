@@ -42,7 +42,11 @@ export function mapDataToProductInfo({
     brand,
   });
   const productName = siteProductLine.name;
-  const startingPrice = siteProductLine.startingPriceInCents;
+  const startingPrice = Math.min(
+    ...siteProductLineAvailableSizeList.map((item) =>
+      parseInt(item.priceInCents),
+    ),
+  ).toString();
 
   const volatileAvailability =
     siteProductLineSizeDetail?.productStatus ===

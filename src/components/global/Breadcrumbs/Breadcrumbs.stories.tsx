@@ -1,5 +1,6 @@
 import { select } from '@storybook/addon-knobs';
 
+import { GlobalsContextProvider } from '~/context/Globals.context';
 import { COLORS, THEME } from '~/lib/constants';
 
 import BreadcrumbsComponent, { BreadcrumbsItem } from './Breadcrumbs';
@@ -48,11 +49,13 @@ export function Breadcrumbs() {
   const backgroundColor = themeMap[theme];
 
   return (
-    <div css={{ backgroundColor, height: '100vh' }}>
-      <BreadcrumbsComponent
-        navigationItems={mockNavigationData}
-        theme={theme}
-      />
-    </div>
+    <GlobalsContextProvider value={{ hostUrl: null }}>
+      <div css={{ backgroundColor, height: '100vh' }}>
+        <BreadcrumbsComponent
+          navigationItems={mockNavigationData}
+          theme={theme}
+        />
+      </div>
+    </GlobalsContextProvider>
   );
 }

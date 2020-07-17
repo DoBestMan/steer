@@ -12,6 +12,7 @@ import GA from '~/lib/helpers/analytics';
 import { global } from '~/styles/document/global.styles';
 
 interface Props extends AppInitialProps {
+  hostUrl?: string | null;
   route: string;
   serverData: {
     siteGlobals: SiteGlobals;
@@ -27,13 +28,14 @@ class MyApp extends NextApp<Props> {
   };
 
   render() {
-    const { Component, pageProps, route } = this.props;
+    const { Component, pageProps, route, hostUrl } = this.props;
     const { siteGlobals, siteMenu } = this.state.serverData;
 
     GA.initialize();
 
     return (
       <AppProviders
+        hostUrl={hostUrl}
         siteGlobalsContextValue={siteGlobals}
         siteMenuContextValue={siteMenu}
       >
@@ -58,6 +60,7 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
   const isClient = typeof window !== 'undefined';
   if (isClient) {
     return {
+      hostUrl: `${window.location.protocol}//${window.location.hostname}`,
       route: appContext.router.route,
       ...appProps,
     };
@@ -65,10 +68,16 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
 
   backendBootstrap();
 
+  const {
+    ctx: { req },
+  } = appContext;
   const { siteGlobals } = await backendGetSiteGlobals();
   const siteMenu = await backendGetSiteMenu();
 
+  const hostUrl = req?.headers ? `https://${req.headers.host}` : '';
+
   const finalProps: Props = {
+    hostUrl,
     route: appContext.router.route,
     ...appProps,
     serverData: {

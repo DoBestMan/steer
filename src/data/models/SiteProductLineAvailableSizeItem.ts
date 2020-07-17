@@ -54,4 +54,10 @@ export interface SiteProductLineAvailableSizeItem {
    * @memberof SiteProductLineAvailableSizeItem
    */
   isSelected: boolean;
+  /**
+   *
+   * @type {string}
+   * @memberof SiteProductLineAvailableSizeItem
+   */
+  partNumber: string;
 }

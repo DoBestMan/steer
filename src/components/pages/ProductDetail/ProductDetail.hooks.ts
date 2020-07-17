@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import queryString from 'query-string';
 import { useCallback, useState } from 'react';
+import { Product as ProductLinkingData } from 'schema-dts';
 
 import { BreadcrumbsItem } from '~/components/global/Breadcrumbs/Breadcrumbs';
 import { FAQProps } from '~/components/modules/PDP/FAQ/FAQ';
@@ -12,6 +13,7 @@ import { SizeFinderProps } from '~/components/modules/PDP/SizeFinder/SizeFinder'
 import { PDPStickyBarProps } from '~/components/modules/PDP/StickyBar/StickyBar';
 import { TechnicalSpecsProps } from '~/components/modules/PDP/TechnicalSpecs/TechnicalSpecs';
 import { useSearchContext } from '~/components/modules/Search/Search.context';
+import { useGlobalsContext } from '~/context/Globals.context';
 import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
 import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
 import { SiteCatalogProductGroupList } from '~/data/models/SiteCatalogProductGroupList';
@@ -26,6 +28,7 @@ import { mapDataToBreadcrumbs } from './mappers/breadcrumbs';
 import { mapDataToFAQ } from './mappers/faq';
 import { mapDataToInsights } from './mappers/insights';
 import { mapDataToInstallation } from './mappers/installation';
+import { mapDataToLinkingData } from './mappers/linkingData';
 import { mapDataToProductInfo } from './mappers/productInfo';
 import { mapDataToRecirculation } from './mappers/recirculation';
 import {
@@ -73,6 +76,7 @@ interface ResponseProps extends Pick<SiteProductLine, 'assetList'> {
   insights: Omit<InsightsProps, 'handleChangeLocation'>;
   installation: InstallationProps | null;
   isSizeSelectorOpen: boolean;
+  linkingData: ProductLinkingData | null;
   onChangeSize: (value: string) => void;
   onClickAddToCart: () => void;
   onClickChangeQuantity: (position: 'front' | 'rear') => () => void;
@@ -104,6 +108,7 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
   const globals = useSiteGlobalsContext();
   const [isSizeSelectorOpen, setIsSizeSelectorOpen] = useState(false);
   const queryParams = getStringifiedParams(Object.assign(query, vehicle));
+  const { hostUrl } = useGlobalsContext();
 
   const { data, error } = useApiDataWithDefault<ProductDetailResponse>({
     defaultData: serverData,
@@ -183,6 +188,12 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
     }),
     installation: mapDataToInstallation({ siteProduct }),
     isSizeSelectorOpen,
+    linkingData: mapDataToLinkingData({
+      hostUrl,
+      router,
+      siteProduct,
+      siteProductReviews,
+    }),
     onChangeSize: handleChangeSize,
     onClickAddToCart: handleClickAddToCart,
     onClickChangeQuantity: handleClickChangeQuantity,

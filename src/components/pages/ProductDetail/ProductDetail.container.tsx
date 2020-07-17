@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 
 import Breadcrumbs from '~/components/global/Breadcrumbs/Breadcrumbs';
+import DataStructure from '~/components/global/DataStructure/DataStructure';
 import Feedback from '~/components/global/Feedback/Feedback';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
@@ -37,6 +38,7 @@ function ProductDetailContainer({ serverData }: ProductDetailData) {
     insights,
     installation,
     isSizeSelectorOpen,
+    linkingData,
     onChangeSize,
     onClickAddToCart,
     onClickChangeQuantity,
@@ -66,6 +68,7 @@ function ProductDetailContainer({ serverData }: ProductDetailData) {
 
   return (
     <div css={styles.root}>
+      {linkingData && <DataStructure jsonLD={linkingData} />}
       <Grid css={navigationPaddingTop}>
         <GridItem gridColumnL="start/8" gridRowL="1" css={styles.breadcrumbs}>
           <Breadcrumbs navigationItems={breadcrumbs} />

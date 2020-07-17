@@ -4,7 +4,6 @@ import { SearchContextProps } from '~/components/modules/Search/Search.context';
 import { UserPersonalizationProps } from '~/context/UserPersonalization.context';
 import { SiteCatalogProductGroupItemEnum } from '~/data/models/SiteCatalogProductGroupList';
 import {
-  SiteCatalogProductImage,
   SiteCatalogProductImageProductImageTypeEnum,
   SiteCatalogProductImageTypeEnum,
 } from '~/data/models/SiteCatalogProductImage';
@@ -15,6 +14,7 @@ import { SiteProductInstallationStatusEnum } from '~/data/models/SiteProductInst
 import { SiteProductLineSizeDetailProductStatusEnum } from '~/data/models/SiteProductLineSizeDetail';
 import { SiteProductReviews } from '~/data/models/SiteProductReviews';
 import { SitePromotionStyleEnum } from '~/data/models/SitePromotion';
+import { SiteYouTubeVideoTypeEnum } from '~/data/models/SiteYouTubeVideo';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 import { PRODUCT_IMAGE_TYPES } from '~/lib/constants/productImage.types';
 
@@ -109,26 +109,38 @@ export const siteProductMock: SiteProduct = {
         image: {
           type: ICON_IMAGE_TYPE.IMAGE,
           src:
-            'https://images.simpletire.com/image/upload/v1590590461/playground/mich-sidewall-v1_hpb7aj.png',
+            'https://images.simpletire.com/image/upload/v1591705545/line-images/1349/1349-sidewall_kri3pe.png',
           altText: 'Tire sidewall',
           width: 800,
           height: 800,
         },
         productImageType: SiteCatalogProductImageProductImageTypeEnum.Sidewall,
         type: SiteCatalogProductImageTypeEnum.SiteCatalogProductImage,
-      } as SiteCatalogProductImage,
+      },
       {
         image: {
           type: ICON_IMAGE_TYPE.IMAGE,
           src:
-            'https://images.simpletire.com/image/upload/v1590590461/playground/mich-sidetread-v1_cimzv0.png',
+            'https://images.simpletire.com/image/upload/v1591705545/line-images/1349/1349-sidetread_f24ld3.png',
           altText: 'Tire sidetread',
-          width: 562,
+          width: 543,
           height: 800,
         },
         productImageType: SiteCatalogProductImageProductImageTypeEnum.Sidetread,
         type: SiteCatalogProductImageTypeEnum.SiteCatalogProductImage,
-      } as SiteCatalogProductImage,
+      },
+      {
+        image: {
+          type: ICON_IMAGE_TYPE.IMAGE,
+          src:
+            'https://images.simpletire.com/image/upload/v1591705545/line-images/1349/1349-treadfull_xpitvf.png',
+          altText: 'Tire treadfull',
+          width: 272,
+          height: 800,
+        },
+        productImageType: SiteCatalogProductImageProductImageTypeEnum.Treadfull,
+        type: SiteCatalogProductImageTypeEnum.SiteCatalogProductImage,
+      },
       {
         image: {
           type: ICON_IMAGE_TYPE.IMAGE,
@@ -140,9 +152,22 @@ export const siteProductMock: SiteProduct = {
         },
         productImageType: SiteCatalogProductImageProductImageTypeEnum.Treadonly,
         type: SiteCatalogProductImageTypeEnum.SiteCatalogProductImage,
-      } as SiteCatalogProductImage,
+      },
+      {
+        poster: {
+          altText: 'Video poster',
+          height: 1080,
+          src: 'https://picsum.photos/1920/1080',
+          width: 1920,
+          type: ICON_IMAGE_TYPE.IMAGE,
+        },
+        video: {
+          youtubeId: 'iQdV2fDR9RY',
+        },
+        type: SiteYouTubeVideoTypeEnum.SiteYouTubeVideo,
+      },
     ],
-    startingPriceInCents: '12345',
+    startingPriceInCents: '5999',
     overview:
       "The ContiProContact is Continental's Grand Touring All-Season tire originally developed for European sport coupes and sedans sold in North America, and is now available for a wide range of imported and domestic cars.",
     faqList: [
@@ -1214,6 +1239,7 @@ export const siteProductMock: SiteProduct = {
       rim: 15,
       isFitForCurrentVehicle: false,
       isSelected: false,
+      partNumber: '00000000',
       siteQueryParams: {
         tireSize: '100-40r15',
       },
@@ -1235,10 +1261,11 @@ export const siteProductMock: SiteProduct = {
           value: '15498150000',
         },
       ],
-      priceInCents: '5999',
+      priceInCents: '6999',
       rim: 17,
       isFitForCurrentVehicle: true,
       isSelected: false,
+      partNumber: '11111111',
       siteQueryParams: {
         tireSize: '100-40r17',
       },
@@ -1260,10 +1287,11 @@ export const siteProductMock: SiteProduct = {
           value: '15498150000',
         },
       ],
-      priceInCents: '5999',
+      priceInCents: '4999',
       rim: 17,
       isFitForCurrentVehicle: false,
       isSelected: false,
+      partNumber: '12345678',
       siteQueryParams: {
         tireSize: '200-40r17',
       },

@@ -36,11 +36,11 @@ const APPLE_TOUCH_ICON_SIZES = [
 
 function Meta({
   canonical,
+  description = ui('meta.description'),
   // TODO: For MVP, no pages are indexable
   robot = 'no follow',
-  title = ui('meta.title'),
-  description = ui('meta.description'),
   shareImage = DEFAULT_SHARE_IMAGE,
+  title = ui('meta.title'),
 }: Props) {
   const router = useRouter();
 

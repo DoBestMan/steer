@@ -76,8 +76,12 @@ function Reviews({ reviews, sources, title }: ReviewsProps) {
       {!!reviews && (
         <>
           <GridItem gridColumnL="3/13" gridColumnXL="4/12">
-            {reviews.slice(0, numVisibleReviews).map((review) => (
-              <ReviewCard key={review.id} theme={THEME.LIGHT} {...review} />
+            {reviews.slice(0, numVisibleReviews).map((review, idx) => (
+              <ReviewCard
+                key={`${review.id}_${idx}`}
+                theme={THEME.LIGHT}
+                {...review}
+              />
             ))}
           </GridItem>
           {hasMoreReviews && (

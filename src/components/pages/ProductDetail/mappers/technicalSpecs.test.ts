@@ -50,7 +50,7 @@ describe('pages/ProductDetails/mappers/techinicalSpecs', () => {
             {
               label: '100/40R17 89H',
               link: '/brands/continental-tires/dh2?tireSize=100-40r17',
-              price: '$59.99',
+              price: '$69.99',
               specs: [
                 {
                   label: 'UTQG',
@@ -69,7 +69,7 @@ describe('pages/ProductDetails/mappers/techinicalSpecs', () => {
             {
               label: '200/40R17 89H',
               link: '/brands/continental-tires/dh2?tireSize=200-40r17',
-              price: '$59.99',
+              price: '$49.99',
               specs: [
                 {
                   label: 'UTQG',

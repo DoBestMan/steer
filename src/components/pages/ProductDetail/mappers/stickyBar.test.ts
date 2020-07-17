@@ -24,7 +24,7 @@ describe('pages/ProductDetails/mappers/stickyBar', () => {
       rearPrice: null,
       rearSize: null,
       sizesAvailable: 3,
-      startingPrice: '12345',
+      startingPrice: '4999',
       tirePrice: null,
       tireSize: null,
     });
@@ -51,7 +51,7 @@ describe('pages/ProductDetails/mappers/stickyBar', () => {
       rearPrice: null,
       rearSize: null,
       sizesAvailable: 3,
-      startingPrice: '12345',
+      startingPrice: '4999',
       tirePrice: '13296',
       tireSize: '215/50 R17 91H',
     });
@@ -75,7 +75,7 @@ describe('pages/ProductDetails/mappers/stickyBar', () => {
       rearPrice: '12099',
       rearSize: '215/50 R19 91J',
       sizesAvailable: 3,
-      startingPrice: '12345',
+      startingPrice: '4999',
       tirePrice: '13296',
       tireSize: '215/50 R17 91H',
     });

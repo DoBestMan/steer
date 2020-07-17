@@ -2,6 +2,7 @@ import { SiteCatalogBrand } from './SiteCatalogBrand';
 import { SiteCatalogProductImage } from './SiteCatalogProductImage';
 import { SiteProductLineFaqList } from './SiteProductLineFaqList';
 import { SiteYouTubeVideo } from './SiteYouTubeVideo';
+
 /**
  * Data for product line (not specific to a size)
  * @export

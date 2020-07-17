@@ -4,6 +4,7 @@ import { SearchContextProvider } from '~/components/modules/Search/Search.contex
 import { SiteGlobals } from '~/data/models/SiteGlobals';
 import { SiteMenu } from '~/data/models/SiteMenu';
 
+import { GlobalsContextProvider } from './Globals.context';
 import { ModalContextProvider } from './Modal.context';
 import { SiteGlobalsContextProvider } from './SiteGlobals.context';
 import { SiteMenuContextProvider } from './SiteMenu.context';
@@ -11,6 +12,7 @@ import { UserPersonalizationContextProvider } from './UserPersonalization.contex
 
 interface Props {
   children: ReactNode;
+  hostUrl?: string | null;
   siteGlobalsContextValue: SiteGlobals;
   siteMenuContextValue: SiteMenu;
 }
@@ -19,19 +21,22 @@ interface Props {
 // Not all providers need to go here; only ones used throughout the app
 function AppProviders({
   children,
+  hostUrl,
   siteGlobalsContextValue,
   siteMenuContextValue,
 }: Props) {
   return (
-    <SiteGlobalsContextProvider value={siteGlobalsContextValue}>
-      <SiteMenuContextProvider value={siteMenuContextValue}>
-        <UserPersonalizationContextProvider>
-          <SearchContextProvider>
-            <ModalContextProvider>{children}</ModalContextProvider>
-          </SearchContextProvider>
-        </UserPersonalizationContextProvider>
-      </SiteMenuContextProvider>
-    </SiteGlobalsContextProvider>
+    <GlobalsContextProvider value={{ hostUrl }}>
+      <SiteGlobalsContextProvider value={siteGlobalsContextValue}>
+        <SiteMenuContextProvider value={siteMenuContextValue}>
+          <UserPersonalizationContextProvider>
+            <SearchContextProvider>
+              <ModalContextProvider>{children}</ModalContextProvider>
+            </SearchContextProvider>
+          </UserPersonalizationContextProvider>
+        </SiteMenuContextProvider>
+      </SiteGlobalsContextProvider>
+    </GlobalsContextProvider>
   );
 }
 

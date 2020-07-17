@@ -1,5 +1,5 @@
-import { SiteImage } from '~/data/models/SiteImage';
-import { SiteYouTubeVideoVideo } from '~/data/models/SiteYouTubeVideoVideo';
+import { SiteImage } from './SiteImage';
+import { SiteYouTubeVideoVideo } from './SiteYouTubeVideoVideo';
 
 /**
  *

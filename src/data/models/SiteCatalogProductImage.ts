@@ -37,6 +37,7 @@ export enum SiteCatalogProductImageProductImageTypeEnum {
   Treadonly = 'treadonly',
   Unavailable = 'unavailable',
 }
+
 /**
  * @export
  * @enum {string}
