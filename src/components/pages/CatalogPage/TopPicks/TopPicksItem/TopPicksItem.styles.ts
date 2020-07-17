@@ -250,6 +250,9 @@ export const styles: StylesMap = {
     height: '100%',
     width: '100%',
   },
+  unclickable: {
+    pointerEvents: 'none',
+  },
   viewMoreContainer: {
     alignItems: 'center',
     backgroundColor: COLORS.GLOBAL.BLACK,

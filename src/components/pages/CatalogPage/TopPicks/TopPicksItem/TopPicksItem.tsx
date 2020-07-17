@@ -179,7 +179,13 @@ function TopPicksItem(props: TopPickItemsProps) {
 
             {/* View More */}
             {viewMoreData && exploreMore && (
-              <button css={styles.viewMoreContainer} onClick={exploreMore}>
+              <button
+                css={[
+                  styles.viewMoreContainer,
+                  !isCurrent && styles.unclickable,
+                ]}
+                onClick={exploreMore}
+              >
                 <span
                   css={[typography.secondaryHeadline, styles.viewMoreTitle]}
                 >
