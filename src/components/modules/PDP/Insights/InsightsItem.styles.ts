@@ -32,14 +32,14 @@ const styles: StylesMap = {
       paddingLeft: SPACING.SIZE_40,
       paddingRight: SPACING.SIZE_40,
     },
+  },
+  containerAction: {
+    cursor: 'pointer',
 
     // eslint-disable-next-line sort-keys
     ':hover, :focus': {
       backgroundColor: COLORS.ORANGE.SHADE_30_SOLID,
     },
-  },
-  containerAction: {
-    cursor: 'pointer',
   },
   containerHighlight: {
     backgroundColor: COLORS.ORANGE.SHADE_15_SOLID,
