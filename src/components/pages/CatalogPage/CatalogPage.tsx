@@ -40,9 +40,12 @@ function CatalogPage({
 }: Props) {
   const { isAdvancedView, showCatalogGrid } = useCatalogPageContext();
 
-  const totalResult =
-    siteCatalogSummary.siteCatalogSummaryMeta?.totalResults || 0;
+  const totalResult = siteCatalogProducts.siteCatalogFilters?.totalMatches || 0;
   const hasResults = totalResult > 0;
+  // page has no top picks and does not come from search OR `showCatalogGrid` is true
+  // `showCatalogGrid` is set within top picks
+  const isGridVisible = (!hasTopPicks && !showCatalogGrid) || showCatalogGrid;
+
   return (
     <ThemeProvider
       theme={{ ...defaultTheme, ...(isAdvancedView && headerAdvanced) }}
@@ -57,11 +60,11 @@ function CatalogPage({
           <CatalogSummary exploreMore={scrollToGrid} />
         </CatalogSummaryContextProvider>
       )}
-      {/* Render when there's result, and not coming from search */}
-      {hasResults && showCatalogGrid && (
+      {isGridVisible && (
         <>
           <div css={styles.grid} ref={catalogGridRef}>
             <CatalogGrid
+              hasResults={hasResults}
               previewFiltersData={previewFiltersData}
               onPreviewFilters={onPreviewFilters}
               siteCatalogProducts={siteCatalogProducts}
@@ -69,7 +72,7 @@ function CatalogPage({
               siteCatalogSummary={siteCatalogSummary}
             />
           </div>
-          <Feedback />
+          {hasResults && <Feedback />}
         </>
       )}
     </ThemeProvider>

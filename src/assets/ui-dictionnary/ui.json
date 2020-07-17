@@ -83,6 +83,11 @@
       "viewResults": "View {{number}} tires",
       "popularFilters": "Popular Filters"
     },
+    "noResults": {
+      "title": "No matching results",
+      "info": "There are no results that match the selected filters.",
+      "adjustSelection": "Please adjust your selections."
+    },
     "header": {
       "advancedViewLabel": "Advanced view",
       "back": "Back",

@@ -20,8 +20,10 @@ import { map } from '~/lib/utils/interpolation';
 
 import CatalogProductGrid from '../CatalogProductGrid/CatalogProductGrid';
 import CatalogProductGroups from '../CatalogProductGroups/CatalogProductGroups';
+import NoResultsGrid from './NoResultsGrid';
 
 interface Props {
+  hasResults: boolean;
   hasTopPicks: boolean;
   onPreviewFilters: (filters: Record<string, string>) => Promise<void>;
   previewFiltersData: SiteCatalogFilters;
@@ -31,6 +33,7 @@ interface Props {
 
 function CatalogGrid({
   hasTopPicks,
+  hasResults,
   siteCatalogSummary,
   siteCatalogProducts,
   onPreviewFilters,
@@ -104,7 +107,6 @@ function CatalogGrid({
   const isGroupedProducts =
     siteCatalogProducts.siteCatalogProductsResultList[0]?.type ===
     SiteCatalogProductGroupItemEnum.SiteCatalogProductGroupItem;
-
   return (
     <div ref={catalogGrid}>
       <HeaderContainer
@@ -114,31 +116,37 @@ function CatalogGrid({
         hasTopPicks={hasTopPicks}
         siteCatalogProducts={siteCatalogProducts}
       />
-      {isGroupedProducts ? (
+      {!hasResults && <NoResultsGrid />}
+      {hasResults && (
         <>
-          <CatalogProductGroups
-            isLoading={isLoading}
-            productGroupList={siteCatalogProducts.siteCatalogProductsResultList.filter(
-              (result): result is SiteCatalogProductGroupItem =>
-                result.type ===
-                SiteCatalogProductGroupItemEnum.SiteCatalogProductGroupItem,
-            )}
-          />
-          {siteCatalogSummary?.siteCatalogSummaryRecirculation && (
-            <Recirculation
-              handleUpdateResults={handleUpdateResults}
-              {...siteCatalogSummary.siteCatalogSummaryRecirculation}
+          {isGroupedProducts ? (
+            <>
+              <CatalogProductGroups
+                isLoading={isLoading}
+                productGroupList={siteCatalogProducts.siteCatalogProductsResultList.filter(
+                  (result): result is SiteCatalogProductGroupItem =>
+                    result.type ===
+                    SiteCatalogProductGroupItemEnum.SiteCatalogProductGroupItem,
+                )}
+              />
+              {siteCatalogSummary?.siteCatalogSummaryRecirculation && (
+                <Recirculation
+                  handleUpdateResults={handleUpdateResults}
+                  {...siteCatalogSummary.siteCatalogSummaryRecirculation}
+                />
+              )}
+            </>
+          ) : (
+            <CatalogProductGrid
+              pagination={siteCatalogProducts.listResultMetadata.pagination}
+              productList={siteCatalogProducts.siteCatalogProductsResultList.filter(
+                (result): result is SiteCatalogProductItem =>
+                  result.type ===
+                  SiteCatalogProductItemEnum.SiteCatalogProductItem,
+              )}
             />
           )}
         </>
-      ) : (
-        <CatalogProductGrid
-          pagination={siteCatalogProducts.listResultMetadata.pagination}
-          productList={siteCatalogProducts.siteCatalogProductsResultList.filter(
-            (result): result is SiteCatalogProductItem =>
-              result.type === SiteCatalogProductItemEnum.SiteCatalogProductItem,
-          )}
-        />
       )}
     </div>
   );
