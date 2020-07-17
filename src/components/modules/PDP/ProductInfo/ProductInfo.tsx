@@ -73,7 +73,6 @@ function ProductInfo({
 }: ProductInfoProps) {
   const shouldShowCrossSell =
     !price && !callForPricing && size && sameSizeSearchResults;
-  const isAvailableSingleSize = size && !!price;
   const isTireLine = !size;
 
   if (rearSize && rearPrice) {
@@ -94,6 +93,15 @@ function ProductInfo({
           rearPrice={rearPrice}
           onClickChangeQuantity={onClickChangeQuantity}
         />
+        <div css={[styles.actionBar, styles.actionBarMultiple]}>
+          <PDPActionBar
+            theme={THEME.LIGHT}
+            tirePrice={price?.salePriceInCents}
+            tireSize={size}
+            rearSize={rearSize}
+            rearPrice={rearPrice?.salePriceInCents}
+          />
+        </div>
       </>
     );
   }
@@ -130,15 +138,13 @@ function ProductInfo({
             volatileAvailability={volatileAvailability}
           />
         </div>
-        {(isAvailableSingleSize || isTireLine) && (
-          <div css={styles.actionBar}>
-            <PDPActionBar
-              theme={THEME.LIGHT}
-              tirePrice={price?.salePriceInCents}
-              tireSize={size}
-            />
-          </div>
-        )}
+        <div css={styles.actionBar}>
+          <PDPActionBar
+            theme={THEME.LIGHT}
+            tirePrice={price?.salePriceInCents}
+            tireSize={size}
+          />
+        </div>
       </div>
       {promoTags && (
         <div css={styles.promoTags}>

@@ -13,6 +13,16 @@ const styles: StylesMap = {
       display: 'block',
     },
   },
+  actionBarMultiple: {
+    button: {
+      flex: 'none',
+      marginLeft: 0,
+      marginRight: 'auto',
+      marginTop: SPACING.SIZE_20,
+      paddingLeft: SPACING.SIZE_80,
+      paddingRight: SPACING.SIZE_80,
+    },
+  },
   crossSellWrapper: [
     typography.bodyCopy,
     {
