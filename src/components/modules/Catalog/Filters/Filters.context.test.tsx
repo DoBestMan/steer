@@ -155,11 +155,11 @@ describe('useFiltersContextSetup', () => {
 
     await act(async () =>
       result.current.createToggleFilterHandler({
-        foo: 'false',
+        foo: '',
       })(),
     );
 
-    expect(result.current.filtersToApply).toHaveProperty('foo', 'false');
+    expect(result.current.filtersToApply).toHaveProperty('foo', '');
   });
 
   test('clearing filter dropdown', () => {
