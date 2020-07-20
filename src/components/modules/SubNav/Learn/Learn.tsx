@@ -66,8 +66,12 @@ function Learn({
         <span css={styles.support}>
           <PhoneSupport
             {...{ customerServiceNumber, isCustomerServiceEnabled }}
+            css={typography.bodyCopyTight}
           />
-          <EmailSupport {...{ isCustomerServiceEnabled }} />
+          <EmailSupport
+            {...{ isCustomerServiceEnabled }}
+            css={typography.bodyCopyTight}
+          />
         </span>
       </GridItem>
     </SubNavContentWrapper>
