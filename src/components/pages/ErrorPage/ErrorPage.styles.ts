@@ -1,4 +1,4 @@
-import { BORDERS, COLORS, MQ, SPACING, StylesMap, TIME } from '~/lib/constants';
+import { BORDERS, COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 export const styles: StylesMap = {
@@ -30,12 +30,7 @@ export const styles: StylesMap = {
       },
 
       a: {
-        borderBottom: BORDERS.DOTTED_TRANSPARENT_2PX,
-        transition: `border-color ${TIME.MS100} ease`,
-
-        '&:hover': {
-          borderColor: 'inherit',
-        },
+        borderBottom: BORDERS.DOTTED_GRAY_70_2PX,
       },
     },
   ],
