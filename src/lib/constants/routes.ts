@@ -42,7 +42,6 @@ export const ROUTE_MAP: Record<ROUTES, string> = {
   [ROUTES.CATEGORY_LANDING]: '/categories',
   [ROUTES.CATEGORY_DETAIL]: '/categories/[category]',
   [ROUTES.CATEGORY_REVIEWS]: '/categories/[category]/reviews',
-  [ROUTES.TIRE_CATEGORY]: '/tire-sizes/[sizeInfo]',
   [ROUTES.TIRE_REVIEWS]: '/tire-reviews',
   [ROUTES.TIRE_REVIEWS_TEMP]: '/tire-reviews/[section]',
   [ROUTES.TYPE_LANDING]: '/types',

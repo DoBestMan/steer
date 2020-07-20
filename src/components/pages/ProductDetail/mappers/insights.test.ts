@@ -15,10 +15,11 @@ describe('pages/ProductDetails/mappers/insights', () => {
   it('returns parsed insights props', () => {
     expect(
       mapDataToInsights({
-        siteProduct: siteProductMock,
+        handleChangeSize: () => {},
         router: routerWithTireSizeMock,
-        userPersonalization: userPersonalizationContextMock,
         search: searchContextMock,
+        siteProduct: siteProductMock,
+        userPersonalization: userPersonalizationContextMock,
       }),
     ).toMatchObject({
       delivery: 'Free 2-day shipping to Brooklyn, NY',
@@ -42,16 +43,17 @@ describe('pages/ProductDetails/mappers/insights', () => {
   it('returns insights props with no fitting information', () => {
     expect(
       mapDataToInsights({
+        handleChangeSize: () => {},
+        router: routerMock,
+        search: searchContextMock,
         siteProduct: {
           ...siteProductMock,
           siteProductLineSizeDetail: null,
         },
-        router: routerMock,
         userPersonalization: {
           ...userPersonalizationContextMock,
           vehicle: null,
         },
-        search: searchContextMock,
       }),
     ).toMatchObject({
       sizeCheckState: SIZE_CHECK_STATES.UNKNOWN,
@@ -63,13 +65,14 @@ describe('pages/ProductDetails/mappers/insights', () => {
   it('returns insights props with no vehicle information', () => {
     expect(
       mapDataToInsights({
-        siteProduct: siteProductMock,
+        handleChangeSize: () => {},
         router: routerWithTireSizeMock,
+        search: searchContextMock,
+        siteProduct: siteProductMock,
         userPersonalization: {
           ...userPersonalizationContextMock,
           vehicle: null,
         },
-        search: searchContextMock,
       }),
     ).toMatchObject({
       sizeCheckState: SIZE_CHECK_STATES.UNKNOWN,
@@ -81,10 +84,11 @@ describe('pages/ProductDetails/mappers/insights', () => {
   it('returns insights props that does not fit the vehicle', () => {
     expect(
       mapDataToInsights({
-        siteProduct: siteProductMock,
+        handleChangeSize: () => {},
         router: routerWithTireSizeMock,
-        userPersonalization: userPersonalizationContextMock,
         search: searchContextMock,
+        siteProduct: siteProductMock,
+        userPersonalization: userPersonalizationContextMock,
       }),
     ).toMatchObject({
       sizeCheckState: SIZE_CHECK_STATES.DOES_NOT_FIT,
@@ -96,7 +100,7 @@ describe('pages/ProductDetails/mappers/insights', () => {
   it('returns insights props that fits the vehicle', () => {
     expect(
       mapDataToInsights({
-        siteProduct: siteProductMock,
+        handleChangeSize: () => {},
         router: {
           ...routerWithTireSizeMock,
           query: {
@@ -104,8 +108,9 @@ describe('pages/ProductDetails/mappers/insights', () => {
             tireSize: '100-40r17',
           },
         },
-        userPersonalization: userPersonalizationContextMock,
         search: searchContextMock,
+        siteProduct: siteProductMock,
+        userPersonalization: userPersonalizationContextMock,
       }),
     ).toMatchObject({
       sizeCheckState: SIZE_CHECK_STATES.SIZE_FITS,

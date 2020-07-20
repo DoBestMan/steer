@@ -246,8 +246,8 @@
     },
     "insights": {
       "fitting": {
-        "true": "Fits your {{vehicle}}",
-        "false": "It doesn’t fit {{vehicle}}",
+        "sizeFits": "Fits your {{vehicle}}",
+        "doesNotFit": "It doesn’t fit {{vehicle}}",
         "unknown": "Confirm if it fits your vehicle",
         "modalContentLabel": "Size Check Udpate",
         "modalInfoDescription": "PRO Tip",

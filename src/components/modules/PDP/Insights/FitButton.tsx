@@ -15,7 +15,9 @@ type Props = Pick<
   | 'sizeCheckState'
   | 'vehicle'
   | 'make'
+  | 'onFindTiresThatFit'
   | 'onSearchVehicle'
+  | 'onSelectAvailableOption'
   | 'onUnselectVehicle'
 >;
 
@@ -26,9 +28,9 @@ interface Action {
 
 const mapStatusToLabel: Record<SIZE_CHECK_STATES, string> = {
   [SIZE_CHECK_STATES.UNKNOWN]: 'pdp.insights.fitting.unknown',
-  [SIZE_CHECK_STATES.SIZE_FITS]: 'pdp.insights.fitting.true',
-  [SIZE_CHECK_STATES.TIRE_LINE_DOES_NOT_FIT]: 'pdp.insights.fitting.false',
-  [SIZE_CHECK_STATES.DOES_NOT_FIT]: 'pdp.insights.fitting.false',
+  [SIZE_CHECK_STATES.SIZE_FITS]: 'pdp.insights.fitting.sizeFits',
+  [SIZE_CHECK_STATES.TIRE_LINE_DOES_NOT_FIT]: 'pdp.insights.fitting.doesNotFit',
+  [SIZE_CHECK_STATES.DOES_NOT_FIT]: 'pdp.insights.fitting.doesNotFit',
 };
 
 const mapStatusToIcon: Record<SIZE_CHECK_STATES, IconType> = {
@@ -41,17 +43,21 @@ const mapStatusToIcon: Record<SIZE_CHECK_STATES, IconType> = {
 function mapStatusToActions({
   sizeCheckState,
   make,
+  handleFindTiresThatFit,
   handleSearchVehicle,
+  handleSelectAvailableSize,
   handleUnselectVehicle,
 }: Pick<Props, 'sizeCheckState' | 'make'> & {
+  handleFindTiresThatFit: () => void;
   handleSearchVehicle: () => void;
+  handleSelectAvailableSize: () => void;
   handleUnselectVehicle: () => void;
 }): Action[] {
   if (sizeCheckState === SIZE_CHECK_STATES.TIRE_LINE_DOES_NOT_FIT) {
     return [
       {
         label: ui('pdp.insights.fitting.viewTiresThatFit'),
-        action: () => {},
+        action: handleFindTiresThatFit,
       },
       {
         label: ui('pdp.insights.fitting.selectAnotherVehicle'),
@@ -70,7 +76,7 @@ function mapStatusToActions({
         label: ui('pdp.insights.fitting.selectAFittingSize', {
           make: make || '',
         }),
-        action: () => {},
+        action: handleSelectAvailableSize,
       },
       {
         label: ui('pdp.insights.fitting.selectAnotherVehicle'),
@@ -99,7 +105,9 @@ function FitButton({
   sizeCheckState,
   make,
   vehicle,
+  onFindTiresThatFit,
   onSearchVehicle,
+  onSelectAvailableOption,
   onUnselectVehicle,
 }: Props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -112,21 +120,33 @@ function FitButton({
 
   const icon = mapStatusToIcon[sizeCheckState];
 
-  const handleSearchVehicle = () => {
+  const handleFindTiresThatFit = () => {
+    onFindTiresThatFit && onFindTiresThatFit();
     setIsModalOpen(false);
+  };
+
+  const handleSearchVehicle = () => {
     onSearchVehicle && onSearchVehicle();
+    setIsModalOpen(false);
   };
 
   const handleUnselectVehicle = () => {
-    setIsModalOpen(false);
     onUnselectVehicle && onUnselectVehicle();
+    setIsModalOpen(false);
+  };
+
+  const handleSelectAvailableSize = () => {
+    onSelectAvailableOption && onSelectAvailableOption();
+    setIsModalOpen(false);
   };
 
   const actions = mapStatusToActions({
-    sizeCheckState,
-    make,
+    handleFindTiresThatFit,
     handleSearchVehicle,
+    handleSelectAvailableSize,
     handleUnselectVehicle,
+    make,
+    sizeCheckState,
   });
 
   const handleCloseModal = () => {

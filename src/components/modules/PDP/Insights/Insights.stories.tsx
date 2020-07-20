@@ -132,6 +132,8 @@ export function InsightsWithKnobs() {
     'Honda Civic 2018 LXT',
     fitVehicleGroupId,
   );
+  const onFindTiresThatFit = action('find-tires-that-fit');
+  const onSelectAvailableOption = action('select-available-option');
   const onSearchVehicle = action('search-for-vehicle');
   const onUnselectVehicle = action('unselect-vehicle');
 
@@ -154,6 +156,8 @@ export function InsightsWithKnobs() {
         sizeCheckState={sizeCheckState as SIZE_CHECK_STATES}
         techSpecsAnchor="SiteProductSpecs"
         openDynamicModal={action('openDynamicModal')}
+        onFindTiresThatFit={onFindTiresThatFit}
+        onSelectAvailableOption={onSelectAvailableOption}
         onSearchVehicle={onSearchVehicle}
         onUnselectVehicle={onUnselectVehicle}
         handleChangeLocation={handleChangeLocation}

@@ -184,10 +184,11 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
     currentPath: asPath,
     faq: mapDataToFAQ({ siteProduct, globals }),
     insights: mapDataToInsights({
-      siteProduct,
-      userPersonalization,
+      handleChangeSize,
       router,
       search,
+      siteProduct,
+      userPersonalization,
     }),
     installation: mapDataToInstallation({ siteProduct }),
     isPLA,

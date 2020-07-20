@@ -7,6 +7,8 @@ import { UserPersonalizationProps } from '~/context/UserPersonalization.context'
 import { SiteProduct } from '~/data/models/SiteProduct';
 import { SiteProductLineAvailableSizeItem } from '~/data/models/SiteProductLineAvailableSizeItem';
 import { VehicleMetadata } from '~/data/models/VehicleMetadata';
+import { ROUTE_MAP, ROUTES } from '~/lib/constants';
+import { interpolateRoute } from '~/lib/utils/routes';
 
 import { CONSTANTS } from '../ProductDetail.hooks';
 
@@ -54,7 +56,8 @@ function getSizeCheckState({
 }
 
 export function mapDataToInsights({
-  router: { query },
+  handleChangeSize,
+  router,
   search: {
     lockSearchStateToVehicle,
     setIsSearchOpen,
@@ -67,12 +70,14 @@ export function mapDataToInsights({
   },
   userPersonalization,
 }: {
+  handleChangeSize: (tireSize: string) => void;
   router: NextRouter;
   search: SearchContextProps;
   siteProduct: SiteProduct;
   userPersonalization: UserPersonalizationProps;
 }): Omit<InsightsProps, 'handleChangeLocation'> {
   const { vehicle, unselectVehicle } = userPersonalization;
+  const { query } = router;
   const tireSize = query?.tireSize;
   const rearSize = query?.rearSize;
   const showFitBar = !!tireSize && !!siteProductLineSizeDetail;
@@ -90,10 +95,45 @@ export function mapDataToInsights({
     setIsSearchOpen(true);
   };
 
+  const onSelectAvailableOption = () => {
+    const firstAvailableSize = siteProductLineAvailableSizeList.find(
+      (item) => item.isFitForCurrentVehicle,
+    );
+
+    if (!firstAvailableSize) {
+      return;
+    }
+
+    handleChangeSize(firstAvailableSize.siteQueryParams.tireSize);
+  };
+
+  const onFindTiresThatFit = () => {
+    if (!vehicle) {
+      return;
+    }
+
+    const interpolatedRoute = interpolateRoute(
+      ROUTE_MAP[ROUTES.VEHICLES_CATEGORY],
+      {
+        make: vehicle.vehicleMake,
+        model: vehicle.vehicleModel,
+        year: vehicle.vehicleYear,
+      },
+    );
+
+    router.push(
+      ROUTE_MAP[ROUTES.VEHICLES_CATEGORY],
+      `${interpolatedRoute}?trim=${vehicle.vehicleTrim}`,
+    );
+  };
+
   return {
     delivery: siteProductInsights.delivery,
     insightItems: siteProductInsights.siteProductInsightList,
+    make: vehicle?.vehicleMake,
+    onFindTiresThatFit,
     onSearchVehicle,
+    onSelectAvailableOption,
     onUnselectVehicle: unselectVehicle,
     rebate: siteProductInsights.rebate,
     showFitBar,

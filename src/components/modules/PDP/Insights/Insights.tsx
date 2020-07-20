@@ -18,7 +18,9 @@ export interface InsightsProps {
   handleChangeLocation: () => void;
   insightItems: SiteProductInsightItem[];
   make?: string | null;
+  onFindTiresThatFit: () => void;
   onSearchVehicle: () => void;
+  onSelectAvailableOption: () => void;
   onUnselectVehicle: () => void;
   rebate: SiteProductInsightsRebate | null;
   showFitBar?: boolean;
@@ -39,7 +41,9 @@ function Insights({
   make,
   delivery,
   handleChangeLocation,
+  onFindTiresThatFit,
   onSearchVehicle,
+  onSelectAvailableOption,
   onUnselectVehicle,
   insightItems = [],
   openDynamicModal,
@@ -78,7 +82,9 @@ function Insights({
             make={make}
             vehicle={vehicle}
             sizeCheckState={sizeCheckState}
+            onFindTiresThatFit={onFindTiresThatFit}
             onSearchVehicle={onSearchVehicle}
+            onSelectAvailableOption={onSelectAvailableOption}
             onUnselectVehicle={onUnselectVehicle}
           />
         </RenderItem>
