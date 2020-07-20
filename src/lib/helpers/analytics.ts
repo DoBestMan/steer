@@ -1,3 +1,5 @@
+import Cookie from 'js-cookie';
+
 import { randomString } from '~/lib/utils/string';
 
 export const GTM_CONSTANTS = {
@@ -12,6 +14,11 @@ type ExperimentCallback = {
   experimentID: string;
 };
 
+type DataLayerItem = {
+  key: string;
+  value: string;
+};
+
 const TOTAL_TRIALS = 5;
 
 // Injects GTM + Full Story + Optimize
@@ -22,21 +29,16 @@ class GoogleAnalytics {
 
   scriptInjected = false;
 
-  _userSessionId: string | null = null;
-
   experimentCallbacks: Record<string, ExperimentCallback> = {};
 
   trials = 0;
 
-  set userSessionId(userSessionId: string) {
-    this._userSessionId = userSessionId;
-
+  addToDataLayer(dataLayerItem: DataLayerItem) {
     if (typeof document === 'undefined') {
       return;
     }
 
-    window.dataLayer &&
-      window.dataLayer.push({ userSessionId: this._userSessionId });
+    window.dataLayer && window.dataLayer.push(dataLayerItem);
   }
 
   initialize() {
@@ -76,6 +78,12 @@ class GoogleAnalytics {
 
   onScriptLoaded() {
     this.scriptInjected = true;
+
+    // Try to set the simple cookie in the dataLayer[] (user ID)
+    const simple = Cookie.get('simple');
+    if (simple) {
+      window.dataLayer && window.dataLayer.push({ simple });
+    }
 
     // No experiment registered, no need
     if (!Object.keys(this.experimentCallbacks).length) {

@@ -2,6 +2,8 @@ import FeaturedInfoModule from '~/components/global/FeaturedInfoModule/FeaturedI
 import GridItem from '~/components/global/Grid/GridItem';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { LINK_TYPES } from '~/lib/constants';
+import { openAttentiveModal } from '~/lib/helpers/attentive';
+import { openReferAFriendModal } from '~/lib/helpers/refer-a-friend';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import styles from '../Footer.styles';
@@ -9,14 +11,6 @@ import { PROMOTIONS } from './FooterPromotions.constants';
 
 function FooterPromotions() {
   const { greaterThan } = useBreakpoints();
-
-  const handleSignUpClick = () => {
-    // TODO open sign up promo modal (WCS-432)
-  };
-
-  const handleGiftCardClick = () => {
-    // TODO open gift card promo modal (WCS-432)
-  };
 
   return (
     <>
@@ -30,7 +24,7 @@ function FooterPromotions() {
           dataVendor={'attentive'}
           action={{
             as: LINK_TYPES.BUTTON,
-            onClick: handleSignUpClick,
+            onClick: openAttentiveModal,
             text: ui('footer.promotions.signUpAction'),
           }}
           customTitleStyles={styles.featuredInfoTitle}
@@ -45,7 +39,7 @@ function FooterPromotions() {
           {...PROMOTIONS.giftCard}
           action={{
             as: LINK_TYPES.BUTTON,
-            onClick: handleGiftCardClick,
+            onClick: openReferAFriendModal,
             text: ui('footer.promotions.giftCardAction'),
           }}
           customTitleStyles={styles.featuredInfoTitle}

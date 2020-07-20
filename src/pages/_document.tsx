@@ -11,7 +11,7 @@ class MyDocument extends Document {
           {/* Google Tag Manager (noscript) */}
           <noscript>
             <iframe
-              src={`https://www.googletagmanager.com/ns.html?id=${GTM_CONSTANTS.GTM_ID}&gtm_auth=${GTM_CONSTANTS.GTM_AUTH}&gtm_preview=${GTM_CONSTANTS.GTM_PREVIEW}&gtm_cookies_win=${GTM_CONSTANTS.GTM_COOKIES_WIN}`}
+              src={`https://www.googletagmanager.com/ns.html?id=${GTM_CONSTANTS.GTM_ID}`}
               height="0"
               width="0"
               style={{ display: 'none', visibility: 'hidden' }}
@@ -20,6 +20,8 @@ class MyDocument extends Document {
 
           <Main />
           <NextScript />
+
+          {/* Recaptcha */}
           <script
             async
             src={`https://www.google.com/recaptcha/api.js?render=${process.env.RECAPTCHA_SITE_KEY}`}

@@ -7,6 +7,9 @@ interface FocusTrapInstance {
 }
 
 interface Window {
+  __attentive?: any;
+  _talkableq?: object[];
   dataLayer?: object[];
   google_optimize?: { get: (experimentID: string) => string | undefined };
+  showTalkablePopup?: () => void;
 }

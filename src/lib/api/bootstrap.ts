@@ -32,7 +32,9 @@ async function asyncApiBootstrap() {
   fetchSetAuthorizationToken(userSessionId, null);
 
   // Store UserSessionId in GTM
-  GA.userSessionId = userSessionId;
+  GA.addToDataLayer({ key: 'userSessionId', value: userSessionId });
+  // TODO: add email, first_name, last_name and traffic_source for refer a friend
+  // API would provide the values
 
   lscache.set(
     LOCAL_STORAGE[PROPERTIES.SESSION],
