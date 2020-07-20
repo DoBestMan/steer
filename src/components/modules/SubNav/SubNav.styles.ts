@@ -80,9 +80,16 @@ const styles: StylesMap = {
     typography.bodyCopy,
     {
       alignContent: 'center',
-      color: COLORS.LIGHT.GRAY_70,
       display: 'flex',
+      span: {
+        color: COLORS.GLOBAL.BLACK,
+      },
       whiteSpace: 'nowrap',
+      [MQ.M]: {
+        span: {
+          color: 'unset',
+        },
+      },
       [MQ.XL]: typography.smallCopy,
     },
   ],
