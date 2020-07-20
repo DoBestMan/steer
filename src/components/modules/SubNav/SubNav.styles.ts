@@ -32,7 +32,7 @@ const styles: StylesMap = {
     background: COLORS.GLOBAL.WHITE,
     display: 'flex',
     justifyContent: 'space-between',
-    padding: `${SPACING.SIZE_30}px ${SPACING.SIZE_10}px`,
+    padding: `${SPACING.SIZE_20}px ${SPACING.SIZE_10}px`,
     width: '100%',
     [MQ.M]: {
       display: 'none',

@@ -173,7 +173,7 @@ const styles: StylesMap = {
     display: 'flex',
     height: ITEM_HEIGHT,
     justifyContent: 'space-between',
-    padding: `${SPACING.SIZE_20}px 0`,
+    padding: `${SPACING.SIZE_25}px 0`,
     position: 'relative',
     span: {
       borderColor: 'transparent',
