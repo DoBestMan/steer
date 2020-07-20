@@ -117,7 +117,7 @@ export const styles: StylesMap = {
   },
   logo: {
     width: CONSTANTS.LOGO_SIZE_SMALL,
-    [MQ.M]: {
+    [MQ.L]: {
       width: CONSTANTS.LOGO_SIZE,
     },
   },
