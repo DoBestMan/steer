@@ -3,7 +3,7 @@ import { keyframes } from '@emotion/core';
 import { COLORS, RADIUS, StylesMap, THEME, TIME } from '~/lib/constants';
 
 const CONSTANTS = {
-  ANIMATION_STEP: TIME.MS300,
+  ANIMATION_STEP: TIME.MS200,
   CIRCLE_MARGIN: 5,
   CIRCLE_SIZE: 6,
   DARK_ACTIVE: COLORS.DARK.GRAY_40,
