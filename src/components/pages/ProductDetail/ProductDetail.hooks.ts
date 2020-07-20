@@ -73,7 +73,7 @@ interface ResponseProps extends Pick<SiteProductLine, 'assetList'> {
   breadcrumbs: BreadcrumbsItem[];
   closeSizeSelector: () => void;
   currentPath: string;
-  faq: FAQProps | null;
+  faq: FAQProps;
   insights: Omit<InsightsProps, 'handleChangeLocation'>;
   installation: InstallationProps | null;
   isPLA: boolean;

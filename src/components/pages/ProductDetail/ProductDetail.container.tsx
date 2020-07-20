@@ -144,11 +144,7 @@ function ProductDetailContainer({ serverData }: ProductDetailData) {
                 />
               </div>
             )}
-            {faq && (
-              <div>
-                <FAQ {...faq} />
-              </div>
-            )}
+            <FAQ {...faq} />
           </div>
         </GridItem>
         {recirculation &&

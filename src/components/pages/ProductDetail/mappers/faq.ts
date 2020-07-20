@@ -11,16 +11,12 @@ export function mapDataToFAQ({
 }: {
   globals: SiteGlobals;
   siteProduct: SiteProduct;
-}): FAQProps | null {
-  if (!faqList?.length) {
-    return null;
-  }
-
+}): FAQProps {
   const {
     customerServiceEnabled: isCustomerServiceEnabled,
     customerServiceNumber,
   } = globals;
-  const questions: AccordionItem[] = faqList;
+  const questions: AccordionItem[] = faqList || null;
 
   return {
     isCustomerServiceEnabled,
