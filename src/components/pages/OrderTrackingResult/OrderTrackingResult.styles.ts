@@ -20,9 +20,18 @@ const styles: StylesMap = {
       },
       color: COLORS.LIGHT.GRAY_70,
       display: 'block',
+      gridColumn: '2/5',
+      [MQ.L]: {
+        gridColumn: '2/4',
+      },
+      [MQ.XL]: {
+        gridColumn: '2/5',
+      },
     },
   ],
   additionalInfoWrapper: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(4, 1fr)',
     paddingBottom: SPACING.SIZE_80,
     [MQ.M]: {
       '> span': {
