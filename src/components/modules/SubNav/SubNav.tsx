@@ -96,7 +96,7 @@ function SubNav({ siteMenuBrowseList, siteMenuLearn }: SiteMenu) {
               css={[styles.subnavInnerGrid, activeLink && styles.enableEvents]}
             >
               <GridItem
-                gridColumnM="1/8"
+                gridColumnM="1/9"
                 gridColumnL="1/10"
                 gridColumnXL="1/8"
                 css={styles.smallHide}
