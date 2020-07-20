@@ -14,7 +14,7 @@ function Flair(props: FlairType) {
   }
   return (
     <div css={styles.flairSeparator}>
-      <p css={[typography.smallCopy, styles.flair]}>{props.value}</p>
+      <p css={[typography.secondarySubhead, styles.flair]}>{props.value}</p>
     </div>
   );
 }
