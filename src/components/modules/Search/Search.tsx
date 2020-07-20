@@ -35,7 +35,8 @@ interface Props {
   deletePastSearches: () => void;
   forwardedRef?: RefObject<HTMLDivElement>;
   hasLockedSearchState: boolean;
-  isCustomerServiceEnabled: boolean;
+  hasSearchResultsError: boolean;
+  isLoadingResults: boolean;
   onCloseSearchClick: () => void;
   onSearchQuery: ({ queryText, queryType }: SearchDataParams) => void;
   onSetSearchState: (searchState: string) => void;
@@ -52,7 +53,8 @@ function Search({
   deletePastSearches,
   forwardedRef,
   hasLockedSearchState,
-  isCustomerServiceEnabled,
+  hasSearchResultsError,
+  isLoadingResults,
   onCloseSearchClick,
   onSearchQuery,
   onSetSearchState,
@@ -276,15 +278,19 @@ function Search({
   const shouldShowSearchSupport =
     resultMetadata?.noExactMatch && !hasResults && !isInputEmpty;
   const shouldShowInitialSearch =
-    (shouldShowSearchSupport || isInputEmpty) && !searchState && !hasResults;
+    (shouldShowSearchSupport || isInputEmpty) &&
+    !searchState &&
+    !hasResults &&
+    !hasSearchResultsError;
+  const shouldShowError = hasSearchResultsError && !isInputEmpty;
 
   return (
     <div css={styles.container} ref={forwardedRef}>
       <SearchAutocomplete
         activeInputType={activeInputType}
-        customerServiceNumber={customerServiceNumber}
         focusOnMount
-        isCustomerServiceEnabled={isCustomerServiceEnabled}
+        hasSearchResultsError={shouldShowError}
+        isLoadingResults={isLoadingResults}
         noExactMatch={resultMetadata?.noExactMatch}
         onCancelSelection={onCancelSelection}
         onInputChange={onInputChange}

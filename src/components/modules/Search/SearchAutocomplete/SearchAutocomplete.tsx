@@ -13,11 +13,12 @@ import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
+import Loading from '~/components/global/Loading/Loading';
 import { useModalContext } from '~/context/Modal.context';
 import { SiteSearchResultGroup } from '~/data/models/SiteSearchResultGroup';
 import { SiteSearchResultImageItem } from '~/data/models/SiteSearchResultImageItem';
 import { SiteSearchResultTextItem } from '~/data/models/SiteSearchResultTextItem';
-import { ARIA_LIVE, KEYCODES } from '~/lib/constants';
+import { ARIA_LIVE, KEYCODES, THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
 
@@ -41,14 +42,14 @@ import SearchSecondaryActions from './SearchSecondaryActions';
 const CONSTANTS = {
   DEFAULT_SELECTED_ITEM_INDEX: [0, -1],
   DEFAULT_VALUE: '',
+  SHOW_LOADING_TIMEOUT: 500,
 };
 
 export interface Props {
   activeInputType: SearchInputEnum;
-  customerServiceNumber: { display: string; value: string };
   focusOnMount?: boolean;
+  hasSearchResultsError: boolean;
   inputValue?: string;
-  isCustomerServiceEnabled: boolean;
   isLoadingResults?: boolean;
   noExactMatch?: boolean;
   onCancelSelection: () => void;
@@ -66,6 +67,7 @@ export interface Props {
 function SearchAutocomplete({
   activeInputType,
   focusOnMount = false,
+  hasSearchResultsError,
   inputValue = CONSTANTS.DEFAULT_VALUE,
   isLoadingResults,
   noExactMatch,
@@ -81,6 +83,8 @@ function SearchAutocomplete({
   secondaryQueryText,
 }: Props) {
   const [shouldShowListbox, setShouldShowListbox] = useState(false);
+  const [shouldShowLoading, setShouldShowLoading] = useState(false);
+  const loadingTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const primaryInput = useRef<HTMLInputElement>(null);
   const secondaryInput = useRef<HTMLInputElement>(null);
   const {
@@ -117,12 +121,30 @@ function SearchAutocomplete({
   }, [focusOnMount, focusOnInput]);
 
   useEffect(() => {
-    setShouldShowListbox(hasResults && (!isInputEmpty || !!searchState));
-  }, [hasResults, isInputEmpty, results, searchState]);
+    setShouldShowListbox(
+      hasResults && (!isInputEmpty || !!searchState) && !shouldShowLoading,
+    );
+  }, [hasResults, isInputEmpty, results, searchState, shouldShowLoading]);
 
   useEffect(() => {
     focusOnInput();
   }, [focusOnInput, searchState]);
+
+  useEffect(() => {
+    if (!loadingTimeout.current) {
+      loadingTimeout.current = setTimeout(() => {
+        setShouldShowLoading(true);
+      }, CONSTANTS.SHOW_LOADING_TIMEOUT);
+    }
+
+    if (!isLoadingResults) {
+      if (loadingTimeout.current) {
+        clearTimeout(loadingTimeout.current);
+        loadingTimeout.current = null;
+      }
+      setShouldShowLoading(false);
+    }
+  }, [isLoadingResults]);
 
   const handleCancelSelection = () => {
     setSelectedItemIndex([0, -1]);
@@ -346,7 +368,7 @@ function SearchAutocomplete({
           isRearTireState && styles.searchResultsGridRearTire,
         ]}
       >
-        {hasNoMatchingResults && (
+        {(hasNoMatchingResults || hasSearchResultsError) && (
           <Grid>
             <GridItem
               gridColumnS="2/6"
@@ -355,8 +377,24 @@ function SearchAutocomplete({
               gridColumnXL="3/14"
             >
               <div css={styles.errorMessage}>
-                <span css={styles.errorLabel}>{ui('search.searchError')}</span>
+                <span css={styles.errorLabel}>
+                  {hasSearchResultsError
+                    ? ui('search.searchError')
+                    : ui('search.searchNoResults')}
+                </span>
               </div>
+            </GridItem>
+          </Grid>
+        )}
+        {shouldShowLoading && (
+          <Grid>
+            <GridItem
+              gridColumnS="2/6"
+              gridColumnM="2/8"
+              gridColumnL="3/14"
+              gridColumnXL="3/14"
+            >
+              <Loading customStyles={styles.loading} theme={THEME.DARK} />
             </GridItem>
           </Grid>
         )}

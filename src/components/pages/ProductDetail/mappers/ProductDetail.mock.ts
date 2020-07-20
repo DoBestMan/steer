@@ -71,6 +71,8 @@ export const userPersonalizationContextMock: UserPersonalizationProps = {
 
 export const searchContextMock: SearchContextProps = {
   hasLockedSearchState: false,
+  hasSearchResultsError: false,
+  isLoadingResults: false,
   isSearchOpen: false,
   pastSearches: { label: '', siteSearchResultList: [] },
   searchResults: { resultMetadata: {}, siteSearchResultGroupList: [] },

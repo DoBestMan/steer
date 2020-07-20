@@ -17,6 +17,8 @@ function SearchModal() {
     deletePastSearches,
     getPastSearches,
     hasLockedSearchState,
+    hasSearchResultsError,
+    isLoadingResults,
     isSearchOpen,
     pastSearches,
     searchQuery,
@@ -27,10 +29,7 @@ function SearchModal() {
     setShouldPreventLinkNavigation,
     shouldPreventLinkNavigation,
   } = useSearchContext();
-  const {
-    customerServiceEnabled,
-    customerServiceNumber,
-  } = useSiteGlobalsContext();
+  const { customerServiceNumber } = useSiteGlobalsContext();
   const { isModalOpen } = useModalContext();
 
   useEffect(() => {
@@ -91,7 +90,8 @@ function SearchModal() {
         deletePastSearches={deletePastSearches}
         forwardedRef={contentRef}
         hasLockedSearchState={hasLockedSearchState}
-        isCustomerServiceEnabled={customerServiceEnabled}
+        hasSearchResultsError={hasSearchResultsError}
+        isLoadingResults={isLoadingResults}
         onCloseSearchClick={handleCloseSearch}
         onSearchQuery={searchQuery}
         onSetSearchState={setSearchState}

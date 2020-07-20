@@ -459,7 +459,8 @@
       "brand": "Brand",
       "popular": "Popular tires"
     },
-    "searchError": "Sorry, no matching results found.",
+    "searchNoResults": "Sorry, no matching results found.",
+    "searchError": "Sorry, something went wrong.",
     "support": "Need support?",
     "findTireSize": {
       "alternateSearchCopy": "If you know your vehicle year, make, model, and trim, we can match the size for you.",

@@ -36,6 +36,8 @@ export interface SearchContextProps {
   deletePastSearches: () => void;
   getPastSearches: () => void;
   hasLockedSearchState: boolean;
+  hasSearchResultsError: boolean;
+  isLoadingResults: boolean;
   isSearchOpen: boolean;
   lockSearchStateToVehicle: () => void;
   pastSearches: SiteSearchResultGroup;
@@ -100,7 +102,9 @@ function useContextSetup() {
 
   /* Search results and query */
   const [searchResults, setSearchResults] = useState<Results>(emptyResult);
-  const isLoadingResults = useRef(false);
+  const isRequestInProgress = useRef(false);
+  const [isLoadingResults, setIsLoadingResults] = useState(false);
+  const [hasSearchResultsError, setHasSearchResultsError] = useState(false);
   const abortController = useRef<AbortController | null>(null);
 
   useEffect(() => {
@@ -113,13 +117,15 @@ function useContextSetup() {
       queryText,
       queryType,
     }: SearchDataParams) {
-      if (isLoadingResults.current) {
+      if (isRequestInProgress.current) {
         abortController.current?.abort();
         abortController.current = new AbortController();
-        isLoadingResults.current = false;
+        isRequestInProgress.current = false;
       }
 
-      isLoadingResults.current = true;
+      setHasSearchResultsError(false);
+      isRequestInProgress.current = true;
+      setIsLoadingResults(true);
 
       try {
         const apiSearchResults = await apiGetSearchTypeahead({
@@ -132,11 +138,13 @@ function useContextSetup() {
         setSearchResults(apiSearchResults);
       } catch (err) {
         console.error(err);
+        setHasSearchResultsError(true);
       }
 
-      isLoadingResults.current = false;
+      isRequestInProgress.current = false;
+      setIsLoadingResults(false);
     },
-    [isLoadingResults],
+    [isRequestInProgress],
   );
 
   const clearSearchResults = useCallback(
@@ -182,6 +190,8 @@ function useContextSetup() {
     deletePastSearches,
     getPastSearches,
     hasLockedSearchState,
+    hasSearchResultsError,
+    isLoadingResults,
     isSearchOpen,
     lockSearchStateToVehicle,
     pastSearches,

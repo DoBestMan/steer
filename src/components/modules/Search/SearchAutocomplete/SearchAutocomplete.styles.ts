@@ -164,6 +164,15 @@ const styles: StylesMap = {
     listStyle: 'none',
     transition: `opacity ${TIME.MS600}ms ease, transform ${TIME.MS300}ms ease`,
   },
+  loading: {
+    padding: `${SPACING.SIZE_15}px 0 ${SPACING.SIZE_25}px`,
+    [MQ.M]: {
+      padding: `${SPACING.SIZE_30}px 0`,
+    },
+    [MQ.L]: {
+      padding: `${SPACING.SIZE_70}px 0 ${SPACING.SIZE_10}px`,
+    },
+  },
   searchIcon: {
     '> svg': {
       height: 34,

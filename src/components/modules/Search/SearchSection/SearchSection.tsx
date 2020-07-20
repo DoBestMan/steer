@@ -10,7 +10,7 @@ import styles from './SearchSection.styles';
 
 export interface SearchSectionProps {
   label?: string | JSX.Element;
-  onClick: (searchResult: SiteSearchResultTextItem) => void;
+  onClick?: (searchResult: SiteSearchResultTextItem) => void;
   preventLinkNavigation?: boolean;
   sectionIndex?: number;
   selectedItemIndex?: [number, number];
@@ -27,7 +27,9 @@ function SearchSection({
   const { onFocus, pushRefToArray } = useFocusScrollIntoView({});
   const { shouldPreventLinkNavigation } = useSearchContext();
   const handleClick = (searchResult: SiteSearchResultTextItem) => () => {
-    onClick(searchResult);
+    if (onClick) {
+      onClick(searchResult);
+    }
   };
 
   return (
