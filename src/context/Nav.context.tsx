@@ -42,16 +42,16 @@ export const cartLink = {
   isExternal: false,
 };
 export const dealsLink = {
-  href: '/',
+  href: ROUTE_MAP[ROUTES.DEALS],
   isExternal: false,
-  text: ui('nav.links.deals'),
+  text: ui('links.deals'),
 };
 export const accountLinks = [
-  { href: '/', isExternal: true, text: ui('nav.links.account') },
+  { href: '/', isExternal: true, text: ui('links.account') },
   {
     href: ROUTE_MAP[ROUTES.ORDER_TRACKING],
     isExternal: false,
-    text: ui('nav.links.trackOrder'),
+    text: ui('links.orderTracking'),
   },
 ];
 
@@ -62,27 +62,27 @@ export function buildLinks({
 }) {
   return {
     links: [
-      { target: NAV_TARGETS.BROWSE_TIRES, text: ui('nav.links.browseTires') },
+      { target: NAV_TARGETS.BROWSE_TIRES, text: ui('links.browseTires') },
       dealsLink,
-      { target: NAV_TARGETS.LEARN, text: ui('nav.links.learn') },
+      { target: NAV_TARGETS.LEARN, text: ui('links.learn') },
       {
         icon: ICONS.LOCATION,
-        label: ui('nav.links.location'),
+        label: ui('links.location'),
         target: NAV_TARGETS.LOCATION,
         text: locationString,
       },
       {
         icon: ICONS.ACCOUNT,
-        label: ui('nav.links.account'),
+        label: ui('links.account'),
         target: NAV_TARGETS.ACCOUNT,
       },
     ],
     linksMobile: [
-      { target: NAV_TARGETS.LEARN, text: ui('nav.links.learn') },
+      { target: NAV_TARGETS.LEARN, text: ui('links.learn') },
       ...accountLinks,
       {
         icon: ICONS.LOCATION,
-        label: ui('nav.links.location'),
+        label: ui('links.location'),
         target: NAV_TARGETS.LOCATION,
         text: locationString,
       },

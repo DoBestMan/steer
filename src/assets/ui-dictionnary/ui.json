@@ -201,14 +201,6 @@
       },
       "title": "Replacing tires in 5 steps."
     },
-    "links": {
-      "account": "Account",
-      "browseTires": "Browse tires",
-      "deals": "Deals",
-      "learn": "Learn",
-      "location": "Select location",
-      "trackOrder": "Track your order"
-    },
     "mobile": {
       "label": "Mobile Menu"
     }
@@ -523,5 +515,30 @@
     "tiresOrderedSingular": "{{quantity}} tire ordered",
     "tiresShipped": "Your new tires have shipped",
     "trackingNumber": "Tracking #:"
+  },
+  "links": {
+    "account": "Account",
+    "browseTires": "Browse tires",
+    "deals": "Deals",
+    "learn": "Learn",
+    "location": "Select location",
+    "about": "About us",
+    "apply": "Join our team",
+    "blog": "Blog",
+    "customerSupport": "Contact us",
+    "facebook": "Facebook",
+    "faqs": "FAQs",
+    "financing": "Financing",
+    "instagram": "Instagram",
+    "linkedin": "LinkedIn",
+    "orderTracking": "Track your order",
+    "privacy": "Privacy policy",
+    "registerTires": "Register your tires",
+    "returns": "Return / refund policy",
+    "terms": "Terms & conditions",
+    "tireBuyingGuide": "Tire buying guide",
+    "tireReviews": "Tire Reviews",
+    "twitter": "Twitter",
+    "youtube": "YouTube"
   }
 }

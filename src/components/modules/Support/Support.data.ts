@@ -1,3 +1,5 @@
+import { ROUTE_MAP, ROUTES } from '~/lib/constants';
+
 export const data = {
   isBusinessHours: {
     sales: {
@@ -6,7 +8,7 @@ export const data = {
       text: 'Sales',
     },
     support: {
-      action: '/',
+      action: ROUTE_MAP[ROUTES.CUSTOMER_SUPPORT],
       icon: 'mail',
       text: 'Customer Support',
     },
@@ -18,7 +20,7 @@ export const data = {
       text: 'Sales',
     },
     support: {
-      action: '/',
+      action: ROUTE_MAP[ROUTES.CUSTOMER_SUPPORT],
       icon: 'mail',
       text: 'Customer Support',
     },

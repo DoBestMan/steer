@@ -18,7 +18,7 @@ function Account({ isOpen }: Props) {
     <SubNavContentWrapper
       onClose={handleCloseSubNav}
       isOpen={isOpen}
-      contentLabel={ui('nav.links.account')}
+      contentLabel={ui('links.account')}
     >
       <GridItem css={layout.hideOnSmall}>
         <ul css={styles.list}>
