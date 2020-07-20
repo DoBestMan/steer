@@ -53,7 +53,7 @@ function Categories({
     >
       <GridItem
         gridColumnM="4/8"
-        gridColumnL="4/10"
+        gridColumnL="5/10"
         gridColumnXL="4/8"
         css={styles.categoryContent}
       >
