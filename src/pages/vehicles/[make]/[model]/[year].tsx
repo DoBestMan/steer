@@ -37,9 +37,6 @@ function VehicleCatalog({ serverData, make, model, year }: Props) {
           summary: '/summary-vehicle',
           products: '/products-vehicle',
         }}
-        hasTopPicks={
-          !!serverData.siteCatalogSummary.siteCatalogSummaryTopPicksList.length
-        }
         pageParams={{
           make,
           model,
