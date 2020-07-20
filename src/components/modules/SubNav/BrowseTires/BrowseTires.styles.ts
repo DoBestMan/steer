@@ -138,6 +138,7 @@ const styles: StylesMap = {
   ],
   infoTitle: {
     fontWeight: 'bold',
+    marginBottom: SPACING.SIZE_05,
   },
   label: {
     alignItems: 'center',
