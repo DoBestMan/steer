@@ -80,7 +80,7 @@ function ProductDetailContainer({ serverData }: ProductDetailData) {
         <GridItem
           fullbleed
           gridColumnL="8/14"
-          gridRowL="1/3"
+          gridRowL="1/4"
           css={styles.productInfo}
         >
           <div ref={stickyBarAvoidSection}>
