@@ -1,6 +1,4 @@
 import GridItem from '~/components/global/Grid/GridItem';
-import Icon from '~/components/global/Icon/Icon';
-import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Link from '~/components/global/Link/Link';
 import EmailSupport from '~/components/modules/Support/EmailSupport';
 import PhoneSupport from '~/components/modules/Support/PhoneSupport';
@@ -42,7 +40,6 @@ function Learn({
       contentLabel={ui('nav.learn.contentLabel')}
     >
       <GridItem css={styles.root}>
-        <Icon css={styles.icon} name={ICONS.SMILEY} />
         <p css={[typography.primaryHeadline, styles.title]}>{steps.title}</p>
         <ol css={styles.stepList}>
           {steps.list.map((step, idx) => (
