@@ -18,6 +18,9 @@ const styles: StylesMap = {
     padding: `${SPACING.SIZE_10}px 0`,
     width: '100%',
   },
+  disable: {
+    pointerEvents: 'none',
+  },
   fillColor: {
     backgroundColor: COLORS.GLOBAL.ORANGE,
     height: RAIL_HEIGHT,

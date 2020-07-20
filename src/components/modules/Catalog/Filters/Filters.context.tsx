@@ -92,7 +92,7 @@ export function useFiltersContextSetup({
   previewFiltersData,
   siteCatalogFilters = { filtersList: [], sortList: [], totalMatches: 0 },
 }: ContextArgs) {
-  const { handleUpdateResults } = useCatalogPageContext();
+  const { isLoading, handleUpdateResults } = useCatalogPageContext();
   const [isPreviewLoading, setIsPreviewLoading] = useState(false);
   const { initialState, isPopularActive } = useMemo(
     () =>
@@ -135,18 +135,22 @@ export function useFiltersContextSetup({
   ]);
 
   useEffect(() => {
+    // wait until new results have come in to rehydrate initial state
+    if (isLoading) {
+      return;
+    }
+
     const { initialState } = getInitialFiltersState(
       siteCatalogFilters.filtersList,
       siteCatalogFilters.sortList,
     );
-
     setFiltersToApply(initialState);
-  }, [siteCatalogFilters]);
+  }, [isLoading, siteCatalogFilters]);
 
   return {
     activeFilters: initialState,
     applyFilters: () => {
-      setSelectingFilter(null);
+      selectingFilter && setSelectingFilter(null);
       handleUpdateResults(filtersToApply);
     },
     clearFiltersToApply: () => {

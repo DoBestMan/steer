@@ -1,3 +1,5 @@
+import { useEffect, useRef } from 'react';
+
 import Link from '~/components/global/Link/Link';
 import { SiteCatalogFilterRange } from '~/data/models/SiteCatalogFilterRange';
 import {
@@ -27,20 +29,42 @@ export default function SubFilters({
   priceFilter,
 }: Props) {
   const {
+    filtersToApply,
+    applyFilters,
     clearSelectingFilter,
     createOpenFilterHandler,
     selectingFilter,
+    createUpdateFilterGroup,
   } = useFiltersContext();
   const sortItem = sortList.find(
     (item) => item.state === SiteCatalogSortListItemStateEnum.Selected,
   );
+
+  // refetch results if price changes
+  const prevPriceFilter = useRef(priceFilter && filtersToApply[priceFilter.id]);
+  useEffect(() => {
+    if (
+      !priceFilter ||
+      prevPriceFilter.current === filtersToApply[priceFilter.id]
+    ) {
+      return;
+    }
+
+    prevPriceFilter.current = filtersToApply[priceFilter.id];
+    applyFilters();
+  }, [applyFilters, prevPriceFilter, priceFilter, filtersToApply]);
+
   return (
     <div css={styles.root}>
       <p css={[styles.results, !resultsCount && styles.resultsNone]}>
         {ui('catalog.filters.results', { number: resultsCount })}
       </p>
       {priceFilter && (
-        <PriceFilter hasResults={!!resultsCount} priceFilter={priceFilter} />
+        <PriceFilter
+          onChange={createUpdateFilterGroup}
+          hasResults={!!resultsCount}
+          priceFilter={priceFilter}
+        />
       )}
       <p css={styles.sortLabel}>{ui('catalog.filters.sortBy')} </p>
       <Link

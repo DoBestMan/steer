@@ -137,9 +137,15 @@ describe('useFiltersContextSetup', () => {
       result.current.createToggleFilterHandler({ foo: 'bar' })(),
     );
 
-    expect(result.current.filtersToApply).toHaveProperty('foo', 'bar');
     // immediately fetches
     expect(handleUpdateFilters).toHaveBeenCalledTimes(1);
+    expect(handleUpdateFilters).toHaveBeenCalledWith(
+      {
+        brand: 'goodyear,pirelli',
+        foo: 'bar',
+      },
+      undefined, // optional `withoutScroll`
+    );
   });
 
   test('toggle filter', async () => {
@@ -151,7 +157,13 @@ describe('useFiltersContextSetup', () => {
       })(),
     );
 
-    expect(result.current.filtersToApply).toHaveProperty('foo', 'true');
+    expect(handleUpdateFilters).toHaveBeenCalledWith(
+      {
+        brand: 'goodyear,pirelli',
+        foo: 'true',
+      },
+      undefined,
+    );
 
     await act(async () =>
       result.current.createToggleFilterHandler({
@@ -159,7 +171,13 @@ describe('useFiltersContextSetup', () => {
       })(),
     );
 
-    expect(result.current.filtersToApply).toHaveProperty('foo', '');
+    expect(handleUpdateFilters).toHaveBeenCalledWith(
+      {
+        brand: 'goodyear,pirelli',
+        foo: '',
+      },
+      undefined,
+    );
   });
 
   test('clearing filter dropdown', () => {

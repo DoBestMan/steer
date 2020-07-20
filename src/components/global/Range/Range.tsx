@@ -13,6 +13,7 @@ interface Props {
   formatLabel?: (value: number) => string;
   getAriaText?: (value: number) => string;
   interval?: number;
+  isDisabled?: boolean;
   max: number;
   maxDefault?: number;
   maxLabel?: string;
@@ -29,6 +30,7 @@ export default function Range({
   formatLabel,
   getAriaText,
   interval = 1,
+  isDisabled,
   max,
   maxDefault,
   min,
@@ -96,7 +98,7 @@ export default function Range({
   }, [minCurrent, maxCurrent]);
 
   return (
-    <div css={isSmall && styles.rootSmall}>
+    <div css={[isSmall && styles.rootSmall, isDisabled && styles.disable]}>
       {isSmall && <p css={styles.labelSm}>{minLabel}</p>}
       <div css={styles.container}>
         <div css={[styles.fillColor, fillStyles]} />

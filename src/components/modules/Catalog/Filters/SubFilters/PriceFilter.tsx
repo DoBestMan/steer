@@ -10,7 +10,7 @@ import {
   mapUnitToAriaFormatter,
   mapUnitToLabelFormatter,
 } from '../Filters.constants';
-import { useFiltersContext } from '../Filters.context';
+import { FiltersContextProps, useFiltersContext } from '../Filters.context';
 import FilterPopup from '../Popup/FilterPopup';
 import styles from './SubFilters.styles';
 
@@ -18,10 +18,15 @@ const PRICE_ID = 'price';
 
 interface Props {
   hasResults: boolean;
+  onChange: FiltersContextProps['createUpdateFilterGroup'];
   priceFilter: SiteCatalogFilterRange;
 }
 
-export default function PriceFilter({ hasResults, priceFilter }: Props) {
+export default function PriceFilter({
+  hasResults,
+  onChange,
+  priceFilter,
+}: Props) {
   const {
     currentMaxValue,
     currentMinValue,
@@ -40,7 +45,12 @@ export default function PriceFilter({ hasResults, priceFilter }: Props) {
   const max = currentMaxValue || maxValue;
   const { lessThan } = useBreakpoints();
   const priceFormatter = mapUnitToLabelFormatter[unit];
-
+  const handlePriceChange = (value: string) => {
+    onChange({
+      value: { [id]: value },
+      overwrite: true,
+    })();
+  };
   return (
     <>
       <p css={[styles.rangePrefix, hasResults && styles.rangePrefixHide]}>
@@ -69,6 +79,7 @@ export default function PriceFilter({ hasResults, priceFilter }: Props) {
           <p css={styles.rangeLabel}>{ui('catalog.filters.priceRangeLabel')}</p>
           <div css={styles.slider}>
             <Range
+              onUpdate={handlePriceChange}
               size={RANGE_SLIDER_SIZE.SMALL}
               formatLabel={mapUnitToLabelFormatter[unit]}
               getAriaText={mapUnitToAriaFormatter[unit]}
