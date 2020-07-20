@@ -281,7 +281,8 @@ function TopPicks({
             currentIndex={picks.length}
             viewMoreData={viewMoreData}
             isCurrent={
-              (indexHovered && indexHovered === picks.length) || showMoreData
+              (indexHovered && indexHovered === picks.length) ||
+              (showMoreData && indexHovered === undefined)
             }
           />
         </div>
