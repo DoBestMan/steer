@@ -1,4 +1,11 @@
-import { BORDERS, COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
+import {
+  BORDERS,
+  COLORS,
+  MQ,
+  SPACING,
+  StylesMap,
+  Z_INDEX,
+} from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
@@ -20,7 +27,6 @@ const styles: StylesMap = {
   seeMore: {
     marginTop: SPACING.SIZE_20,
     textAlign: 'center',
-    marginBottom: SPACING.SIZE_100,
   },
   sources: [
     typography.bodyCopy,
@@ -31,6 +37,16 @@ const styles: StylesMap = {
       paddingTop: SPACING.SIZE_02,
     },
   ],
+  stickyBar: {
+    bottom: 0,
+    marginTop: SPACING.SIZE_60,
+    position: 'sticky',
+    zIndex: Z_INDEX.FRONT,
+
+    [MQ.L]: {
+      marginTop: SPACING.SIZE_80,
+    },
+  },
   title: [
     typography.primaryHeadline,
     {

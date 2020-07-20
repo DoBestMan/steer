@@ -6,6 +6,7 @@ import {
   StylesMap,
   THEME,
   TIME,
+  Z_INDEX,
 } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
@@ -119,6 +120,7 @@ const styles: StylesMap = {
     justifyContent: 'space-between',
     padding: `0 ${SIDE_MARGIN.S}px ${SPACING.SIZE_15}px`,
     transition: `background-color ${TIME.MS400}ms ease`,
+    zIndex: Z_INDEX.FRONT,
 
     [MQ.M]: {
       alignItems: 'center',

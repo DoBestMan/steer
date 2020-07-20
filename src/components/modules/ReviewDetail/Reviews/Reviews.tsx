@@ -6,6 +6,8 @@ import GridItem from '~/components/global/Grid/GridItem';
 import ReviewCard, {
   ReviewCardProps,
 } from '~/components/global/ReviewCard/ReviewCard';
+import StickyBar from '~/components/modules/StickyBar/StickyBar';
+import { primaryColumnStyles } from '~/components/modules/StickyBar/StickyBar.styles';
 import { ListResultMetadata } from '~/data/models/ListResultMetadata';
 import { THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
@@ -20,13 +22,21 @@ export interface ReviewsProps {
     simpleTire?: number | null;
   };
   title: string;
+  viewTireUrl?: string;
+  writeReviewUrl?: string;
 }
 
 const CONSTANTS = {
   NUM_REVIEWS_TO_DISPLAY_ON_LOAD: 5,
 };
 
-function Reviews({ reviews, sources, title }: ReviewsProps) {
+function Reviews({
+  reviews,
+  sources,
+  title,
+  viewTireUrl,
+  writeReviewUrl,
+}: ReviewsProps) {
   const numReviews = !!reviews && reviews.length;
 
   const [numVisibleReviews, setNumVisibleReviews] = useState(
@@ -43,6 +53,7 @@ function Reviews({ reviews, sources, title }: ReviewsProps) {
   }
 
   const hasSources = sources?.simpleTire || sources?.googleShopping;
+  const hasStickyBar = viewTireUrl && writeReviewUrl;
 
   return (
     <Grid as="section">
@@ -96,6 +107,32 @@ function Reviews({ reviews, sources, title }: ReviewsProps) {
             </GridItem>
           )}
         </>
+      )}
+      {hasStickyBar && (
+        <GridItem fullbleed css={styles.stickyBar}>
+          <StickyBar
+            theme={THEME.ORANGE}
+            primaryColumnCustomStyles={primaryColumnStyles.rightAlign}
+          >
+            <>
+              <Button
+                css={primaryColumnStyles.secondaryButton}
+                as="a"
+                href={writeReviewUrl}
+              >
+                {ui('reviews.writeReview')}
+              </Button>
+              <Button
+                css={primaryColumnStyles.primaryButton}
+                as="a"
+                href={viewTireUrl}
+                theme={THEME.ORANGE}
+              >
+                {ui('reviews.viewTire')}
+              </Button>
+            </>
+          </StickyBar>
+        </GridItem>
       )}
     </Grid>
   );
