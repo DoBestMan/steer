@@ -24,7 +24,9 @@ function BrandCategory({ brand, categoryOrType, serverData }: Props) {
         summary: '/summary-brand',
         products: '/products-brand',
       }}
-      hasTopPicks={false}
+      hasTopPicks={
+        !!serverData.siteCatalogSummary.siteCatalogSummaryTopPicksList.length
+      }
       pageParams={{
         brand,
         categoryOrType,

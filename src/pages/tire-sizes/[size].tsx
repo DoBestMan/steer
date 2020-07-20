@@ -35,7 +35,9 @@ function TireCategory({ size, serverData }: Props) {
         summary: `/summary-tire-size-${sizeTypeSuffix}`,
         products: `/products-tire-size-${sizeTypeSuffix}`,
       }}
-      hasTopPicks={!isDiameterRoute}
+      hasTopPicks={
+        !!serverData.siteCatalogSummary.siteCatalogSummaryTopPicksList.length
+      }
       pageParams={{ size }}
     />
   );
