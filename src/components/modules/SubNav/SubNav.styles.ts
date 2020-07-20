@@ -60,6 +60,9 @@ const styles: StylesMap = {
     },
   },
   closeSubNav: {
+    ':hover': {
+      color: COLORS.GLOBAL.BLACK,
+    },
     color: COLORS.LIGHT.GRAY_70,
     display: 'none',
     [MQ.M]: {
