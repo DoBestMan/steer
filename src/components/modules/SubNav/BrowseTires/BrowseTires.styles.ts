@@ -106,6 +106,7 @@ const styles: StylesMap = {
   },
   image: {
     alignItems: 'center',
+    color: COLORS.GLOBAL.BLACK,
     display: 'flex',
     height: '100%',
     span: {
