@@ -1,49 +1,49 @@
 import { GetServerSideProps } from 'next';
 
-import Meta from '~/components/global/Meta/Meta';
 import CatalogPageContainer, {
   CatalogPageData,
 } from '~/components/pages/CatalogPage/CatalogPage.container';
+import { SearchBy } from '~/components/pages/CatalogPage/mapppers/meta';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
 import {
   backendGetVehicleProducts,
   backendGetVehicleSummary,
 } from '~/lib/backend/catalog/vehicle';
 import { getStringifiedParams } from '~/lib/utils/routes';
-import { capitalize, removeTireFromQueryParam } from '~/lib/utils/string';
-import { ui } from '~/lib/utils/ui-dictionary';
+import { removeTireFromQueryParam } from '~/lib/utils/string';
 
 interface Props extends CatalogPageData {
   make: string;
   model: string;
+  query?: Record<string, string>;
   year: string;
 }
 
-function VehicleCatalog({ serverData, make, model, year }: Props) {
-  const meta = {
-    make: capitalize(make),
-    model: capitalize(model),
-    year: capitalize(year),
+function VehicleCatalog({ serverData, make, model, query, year }: Props) {
+  const searchBy = SearchBy.vehicle;
+  const searchByParams = {
+    make,
+    model,
+    tireSize: query && query.tireSize ? query.tireSize : undefined,
+    trim: query && query.trim ? query.trim : undefined,
+    year,
   };
-  const title = ui('meta.vehicles.make.model.year.title', meta);
-  const description = ui('meta.vehicles.make.model.year.description', meta);
 
   return (
-    <>
-      <Meta title={title} description={description} />
-      <CatalogPageContainer
-        serverData={serverData}
-        endpoints={{
-          summary: '/summary-vehicle',
-          products: '/products-vehicle',
-        }}
-        pageParams={{
-          make,
-          model,
-          year,
-        }}
-      />
-    </>
+    <CatalogPageContainer
+      serverData={serverData}
+      endpoints={{
+        summary: '/summary-vehicle',
+        products: '/products-vehicle',
+      }}
+      pageParams={{
+        make,
+        model,
+        year,
+      }}
+      searchBy={searchBy}
+      searchByParams={searchByParams}
+    />
   );
 }
 
@@ -67,6 +67,7 @@ export const getServerSideProps: GetServerSideProps<CatalogPageData> = async (
     props: {
       make: formattedMake,
       model,
+      query: getStringifiedParams(vehicleParams),
       serverData: { siteCatalogSummary, siteCatalogProducts },
       year,
     },

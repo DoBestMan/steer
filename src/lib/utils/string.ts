@@ -1,3 +1,5 @@
+import { diameterFormat } from './regex';
+
 export const randomString = (maxLength?: number): string =>
   `_${Math.random().toString(36).substring(2, maxLength)}`;
 
@@ -64,3 +66,43 @@ export const minMaxify = (min: number, max: number) => `${min},${max}`;
 
 export const removeTireFromQueryParam = (str: string | string[]): string =>
   str.toString().replace(/-tires/g, '');
+
+export const tireSizeQueryToTireSize = (s?: string) => {
+  if (!s || !s.length) {
+    return '';
+  }
+  return s.replace(/-/, '/').toUpperCase();
+};
+
+export const unSlugify = (s: string) => {
+  return capitalize(s.replace(/-/, ' '));
+};
+
+export function extractFromDiameterFormat(
+  s?: string,
+): { categoryOrType: string; size: string } | null {
+  if (!s) {
+    return null;
+  }
+
+  const matches = s.match(diameterFormat);
+
+  if (!matches || !matches.length || matches.length < 5) {
+    return null;
+  }
+
+  const size = `${matches[1]} inch`;
+  let categoryOrType = '';
+
+  for (let i = 3; i < matches.length - 1; i++) {
+    categoryOrType += matches[i] + ' ';
+  }
+
+  // remove last space + capitalize
+  categoryOrType = categoryOrType.substr(0, categoryOrType.length - 1);
+
+  return {
+    categoryOrType,
+    size,
+  };
+}

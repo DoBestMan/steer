@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 
+import Meta from '~/components/global/Meta/Meta';
 import { navigationPaddingTop } from '~/components/modules/Nav/Nav.styles';
 import Reviews from '~/components/modules/ReviewDetail/Reviews/Reviews';
 import ReviewsHeader from '~/components/modules/ReviewDetail/ReviewsHeader/ReviewsHeader';
@@ -8,6 +9,7 @@ import { interpolateRoute } from '~/lib/utils/routes';
 import { ProductDetailResponse } from '~/pages/api/product-detail';
 
 import { mapDataToHeader } from './mappers/header';
+import { mapDataToMeta } from './mappers/meta';
 import { mapDataToReviews } from './mappers/reviews';
 
 export interface ProductDetailData {
@@ -20,6 +22,7 @@ function ReviewDetailPage({ serverData }: ProductDetailData) {
 
   const header = mapDataToHeader({ siteProduct, siteProductReviews, router });
   const siteReviews = mapDataToReviews({ siteProductReviews });
+  const meta = mapDataToMeta({ siteProduct });
 
   const { listResultMetadata, reviews, sources, title } = siteReviews;
   const {
@@ -44,6 +47,7 @@ function ReviewDetailPage({ serverData }: ProductDetailData) {
 
   return (
     <div css={navigationPaddingTop}>
+      <Meta {...meta} />
       <ReviewsHeader
         brand={brand}
         brandUrl={brandUrl}

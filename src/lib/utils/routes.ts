@@ -1,7 +1,7 @@
 import queryString from 'query-string';
 import { UrlObject } from 'url';
 
-import { brackets } from './regex';
+import { brackets, diameterFormat } from './regex';
 
 export type Url = string | UrlObject;
 
@@ -21,8 +21,7 @@ export function isRouteDiameterFormat(path?: string) {
   if (!path) {
     return false;
   }
-  const regex = /[\d]*-(inch)-[a-zA-Z]*-(tires)/;
-  return regex.test(path);
+  return diameterFormat.test(path);
 }
 
 /*

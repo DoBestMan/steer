@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { useCallback, useRef, useState } from 'react';
 
+import Meta from '~/components/global/Meta/Meta';
 import { useSearchContext } from '~/components/modules/Search/Search.context';
 import { CatalogPageContextProvider } from '~/context/CatalogPage.context';
 import { SiteCatalogProducts } from '~/data/models/SiteCatalogProducts';
@@ -13,6 +14,7 @@ import { fetch } from '~/lib/fetch';
 import { getParam, getStringifiedParams } from '~/lib/utils/routes';
 
 import CatalogPage from './CatalogPage';
+import { mapDataToMeta, SearchBy, SearchByParams } from './mapppers/meta';
 
 export const CATALOG_PARAMS = ['group', 'skipGroups'];
 
@@ -30,6 +32,8 @@ interface Props extends CatalogPageData {
   };
   hasTopPicks?: boolean;
   pageParams?: Record<string, string>;
+  searchBy: SearchBy;
+  searchByParams: SearchByParams;
 }
 
 function CatalogPageContainer({
@@ -37,9 +41,12 @@ function CatalogPageContainer({
   hasTopPicks = true,
   serverData,
   pageParams = {},
+  searchBy,
+  searchByParams,
 }: Props) {
   const { query, push, pathname, replace, asPath } = useRouter();
   const { isSearchOpen } = useSearchContext();
+  const meta = mapDataToMeta({ searchBy, searchByParams });
 
   const catalogGridRef = useRef<HTMLDivElement | null>(null);
 
@@ -170,23 +177,26 @@ function CatalogPageContainer({
   );
 
   return (
-    <CatalogPageContextProvider
-      handleUpdateFilters={handleUpdateFilters}
-      showCatalogGridInit={isSearchOpen}
-    >
-      <CatalogPage
-        onPreviewFilters={onPreviewFilters}
-        comesFromSearch={isSearchOpen}
-        handleUpdateSummary={handleUpdateSummary}
-        hasLocalData={hasLocalData}
-        hasTopPicks={hasTopPicks}
-        siteCatalogProducts={siteCatalogProducts}
-        siteCatalogSummary={siteCatalogSummary}
-        previewFiltersData={previewFiltersData}
-        scrollToGrid={scrollToGrid}
-        catalogGridRef={catalogGridRef}
-      />
-    </CatalogPageContextProvider>
+    <>
+      {meta && <Meta {...meta} />}
+      <CatalogPageContextProvider
+        handleUpdateFilters={handleUpdateFilters}
+        showCatalogGridInit={isSearchOpen}
+      >
+        <CatalogPage
+          onPreviewFilters={onPreviewFilters}
+          comesFromSearch={isSearchOpen}
+          handleUpdateSummary={handleUpdateSummary}
+          hasLocalData={hasLocalData}
+          hasTopPicks={hasTopPicks}
+          siteCatalogProducts={siteCatalogProducts}
+          siteCatalogSummary={siteCatalogSummary}
+          previewFiltersData={previewFiltersData}
+          scrollToGrid={scrollToGrid}
+          catalogGridRef={catalogGridRef}
+        />
+      </CatalogPageContextProvider>
+    </>
   );
 }
 

@@ -4,6 +4,7 @@ import { useCallback, useState } from 'react';
 import { Product as ProductLinkingData } from 'schema-dts';
 
 import { BreadcrumbsItem } from '~/components/global/Breadcrumbs/Breadcrumbs';
+import { MetaProps } from '~/components/global/Meta/Meta';
 import { FAQProps } from '~/components/modules/PDP/FAQ/FAQ';
 import { InsightsProps } from '~/components/modules/PDP/Insights/Insights';
 import { InstallationProps } from '~/components/modules/PDP/Installation/Installation';
@@ -30,6 +31,7 @@ import { mapDataToFAQ } from './mappers/faq';
 import { mapDataToInsights } from './mappers/insights';
 import { mapDataToInstallation } from './mappers/installation';
 import { mapDataToLinkingData } from './mappers/linkingData';
+import { mapDataToMeta } from './mappers/meta';
 import { mapDataToProductInfo } from './mappers/productInfo';
 import { mapDataToRecirculation } from './mappers/recirculation';
 import {
@@ -79,6 +81,7 @@ interface ResponseProps extends Pick<SiteProductLine, 'assetList'> {
   isPLA: boolean;
   isSizeSelectorOpen: boolean;
   linkingData: ProductLinkingData | null;
+  meta: MetaProps;
   onChangeSize: (value: string) => void;
   onClickAddToCart: () => void;
   onClickChangeQuantity: (position: 'front' | 'rear') => () => void;
@@ -174,6 +177,13 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
   const handleClickAddToCart = () => {};
   const handleClickFindYourSize = () => {};
 
+  const productInfo = mapDataToProductInfo({
+    siteProduct,
+    siteProductReviews,
+    router,
+    globals,
+  });
+
   return {
     assetList,
     breadcrumbs: mapDataToBreadcrumbs({
@@ -199,18 +209,18 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
       siteProduct,
       siteProductReviews,
     }),
+    meta: mapDataToMeta({
+      brand: productInfo.brand.label,
+      productLine: productInfo.productName,
+      tireSize: productInfo.size,
+    }),
     onChangeSize: handleChangeSize,
     onClickAddToCart: handleClickAddToCart,
     onClickChangeQuantity: handleClickChangeQuantity,
     onClickChangeSize: handleClickChangeSize,
     onClickFindYourSize: handleClickFindYourSize,
     onCloseSizeSelector: handleCloseSizeSelector,
-    productInfo: mapDataToProductInfo({
-      siteProduct,
-      siteProductReviews,
-      router,
-      globals,
-    }),
+    productInfo,
     recirculation: mapDataToRecirculation({ siteProduct }),
     recirculationSize: mapDataToRecirculationSize({ siteProduct, router }),
     reviews: mapDataToReviews({ siteProductReviews, router }),

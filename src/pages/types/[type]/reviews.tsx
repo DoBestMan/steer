@@ -33,6 +33,7 @@ export const getServerSideProps: GetServerSideProps<ReviewListingServerData> = a
     serverData: {
       tireReviews,
     },
+    type: queryParams.tireType,
   };
 
   return {

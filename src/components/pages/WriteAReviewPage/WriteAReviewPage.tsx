@@ -3,10 +3,12 @@ import { useRouter } from 'next/router';
 import Breadcrumbs from '~/components/global/Breadcrumbs/Breadcrumbs';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
+import Meta from '~/components/global/Meta/Meta';
 import { navigationPaddingTop } from '~/components/modules/Nav/Nav.styles';
 import ReviewForm from '~/components/modules/WriteReview/ReviewForm/ReviewForm';
 import { mapPathnameToBreadcrumbs } from '~/lib/utils/breadcrumbs';
 
+import { mapDataToMeta } from './mappers/meta';
 import styles from './WriteAReviewPage.styles';
 
 export interface WriteAReviewServerData {
@@ -32,8 +34,11 @@ function WriteAReviewPage({
     query,
   });
 
+  const meta = mapDataToMeta({ brand, productLine: tire });
+
   return (
     <div css={navigationPaddingTop}>
+      <Meta {...meta} />
       <Grid>
         <GridItem
           gridColumnL="3/13"

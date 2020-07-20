@@ -3,6 +3,7 @@ import { GetServerSideProps } from 'next';
 import CatalogPageContainer, {
   CatalogPageData,
 } from '~/components/pages/CatalogPage/CatalogPage.container';
+import { SearchBy } from '~/components/pages/CatalogPage/mapppers/meta';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
 import {
   backendGetBrandProducts,
@@ -17,6 +18,12 @@ interface Props extends CatalogPageData {
 }
 
 function BrandTypeCatalog({ brand, categoryOrType, serverData }: Props) {
+  const searchBy = SearchBy.brandAndCategoryOrType;
+  const searchByParams = {
+    brand,
+    categoryOrType,
+  };
+
   return (
     <CatalogPageContainer
       serverData={serverData}
@@ -29,6 +36,8 @@ function BrandTypeCatalog({ brand, categoryOrType, serverData }: Props) {
         brand,
         categoryOrType,
       }}
+      searchBy={searchBy}
+      searchByParams={searchByParams}
     />
   );
 }

@@ -6,7 +6,7 @@ import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 import { COLORS } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
-interface Props {
+export interface MetaProps {
   canonical?: string;
   description?: string;
   robot?: string;
@@ -38,15 +38,18 @@ function Meta({
   canonical,
   description = ui('meta.description'),
   // TODO: For MVP, no pages are indexable
-  robot = 'no follow',
+  robot = 'no index, no follow',
   shareImage = DEFAULT_SHARE_IMAGE,
   title = ui('meta.title'),
-}: Props) {
+}: MetaProps) {
   const router = useRouter();
 
   const url = canonical ? canonical : router.asPath.split('?')[0];
 
   title = `${title} | SimpleTire`;
+
+  title = title.replace(/&amp;/g, '&');
+  description = description.replace(/&amp;/g, '&');
 
   return (
     <Head>
@@ -98,7 +101,11 @@ function Meta({
       {/* Socials */}
       <meta property="og:site_name" content="SimpleTire" />
       <meta property="og:title" content={title} key={'og:title'} />
-      <meta property="og:description" content={description} />
+      <meta
+        property="og:description"
+        content={description}
+        key={'og:description'}
+      />
       <meta property="og:type" content="website" />
       <meta property="og:url" content={url} />
       <meta property="og:image" content={shareImage.src} />

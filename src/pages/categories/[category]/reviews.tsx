@@ -30,6 +30,7 @@ export const getServerSideProps: GetServerSideProps<ReviewListingServerData> = a
   const tireReviews = await backendGetReviewListing({ query: queryParams });
 
   const props: ReviewListingServerData = {
+    category: queryParams.tireCategory,
     serverData: {
       tireReviews,
     },

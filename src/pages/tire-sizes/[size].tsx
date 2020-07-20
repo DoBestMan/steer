@@ -5,6 +5,7 @@ import CatalogPageContainer, {
   CatalogPageData,
 } from '~/components/pages/CatalogPage/CatalogPage.container';
 import { getDiameterCategory } from '~/components/pages/CatalogPage/CatalogPage.utils';
+import { SearchBy } from '~/components/pages/CatalogPage/mapppers/meta';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
 import {
   backendGetTireSizeClassicProducts,
@@ -28,6 +29,12 @@ function TireCategory({ size, serverData }: Props) {
   const isDiameterRoute = isRouteDiameterFormat(asPath);
   const sizeTypeSuffix = isDiameterRoute ? 'diameter' : 'classic';
 
+  const searchBy = SearchBy.tireSize;
+  const searchByParams = {
+    isDiameterRoute,
+    tireSize: size,
+  };
+
   return (
     <CatalogPageContainer
       serverData={serverData}
@@ -37,6 +44,8 @@ function TireCategory({ size, serverData }: Props) {
       }}
       hasTopPicks={!isDiameterRoute}
       pageParams={{ size }}
+      searchBy={searchBy}
+      searchByParams={searchByParams}
     />
   );
 }

@@ -6,6 +6,7 @@ import Feedback from '~/components/global/Feedback/Feedback';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import Link from '~/components/global/Link/Link';
+import Meta from '~/components/global/Meta/Meta';
 import ProductGroupList from '~/components/global/ProductGroupList/ProductGroupList';
 import LocationModal from '~/components/modules/Location/LocationModal/LocationModal';
 import { navigationPaddingTop } from '~/components/modules/Nav/Nav.styles';
@@ -40,6 +41,7 @@ function ProductDetailContainer({ serverData }: ProductDetailData) {
     isPLA,
     isSizeSelectorOpen,
     linkingData,
+    meta,
     onChangeSize,
     onClickAddToCart,
     onClickChangeQuantity,
@@ -69,6 +71,7 @@ function ProductDetailContainer({ serverData }: ProductDetailData) {
 
   return (
     <div css={styles.root}>
+      <Meta {...meta} />
       {linkingData && <DataStructure jsonLD={linkingData} />}
       <Grid css={navigationPaddingTop}>
         <GridItem gridColumnL="start/8" gridRowL="1" css={styles.breadcrumbs}>

@@ -2,12 +2,56 @@
   "meta": {
     "description": "Fast & Free Delivery! Shop for automotive tires online from over 300+ brands. Have them shipped to and installed at one of our 10,000+ installation centers, making the purchase and installation process painless and simple.",
     "title": "Buy Automotive Tires Online for Less",
+    "brands": {
+      "brand": {
+        "categoriesOrTypes": {
+          "title": "Buy {{brand}} {{categoryOrType}} Tires | Free Shipping, Fast Install",
+          "description": "SimpleTire offers fast, free delivery on {{brand}} {{categoryOrType}} tires, as well as easy installation and setup. Purchase new tires at SimpleTire.com and schedule your new tire installation today."
+        },
+        "productLine": {
+          "title": "Buy {{brand}} {{productLine}} Tires Online",
+          "description": "Buy new {{brand}} {{productLine}} tires from SimpleTire at the lowest cost and get them delivered directly to you, or one of our 10,000+ installation centers in days. Schedule an installation with your preferred mechanic to make tire buying a painless and simple process.",
+          "pdp": {
+            "title": "Buy {{brand}} {{productLine}} {{tireSize}} Tires",
+            "description": "Buy {{brand}} {{productLine}} tires in the size you need at a low cost with free shipping direct, to you or one of our 10,000+ installation centers."
+          },
+          "reviews": {
+            "title": "{{brand}} {{productLine}} Tire Reviews & Ratings",
+            "description": "Read real reviews and tire quality ratings from actual customers for {{brand}} {{productLine}} tires, or help others find the best tires for their vehicle by submitting a {{brand}} {{productLine}} tire review of your own."
+          },
+          "writeAReview": {
+            "title": "Write a Review: {{brand}} {{productLine}}",
+            "description": "Write a review for {{brand}} {{productLine}} tires at SimpleTire.com"
+          }
+        }
+      }
+    },
+    "reviewListingPages": {
+      "title": "Reviews & Ratings for Tire Brands, Types & Categories",
+      "description": "Search for reviews and tire quality ratings from actual consumers across tire brands, types, and categories to get first-hand feedback from people like you on the tires you need.",
+      "brandOrCategoryOrType": {
+        "title": "{{brandOrCategoryOrType}} Tire Reviews & Ratings from Real Customers",
+        "description": "Read real reviews and tire quality ratings from actual customers for {{brandOrCategoryOrType}} tires, or help others find the best tires for their vehicle by submitting a {{brandOrCategoryOrType}} tire review of your own. "
+      }
+    },
+    "tireSizes": {
+      "title": "Shop for {{tireSize}} Tires for Your Vehicle",
+      "description": "Find the largest selection of {{tireSize}} tires you need with SimpleTire. Look for the size you need across tire types, brands, performance categories and more with fast, free shipping.",
+      "categoriesOrTypes": {
+        "title": "Shop for {{tireSize}} {{categoryOrType}} Tires for Your Vehicle",
+        "description": "Shop for the best {{categoryOrType}} tires in the size you need at a low-cost with fast and free shipping direct to you or the installer of your choice."
+      }
+    },
     "vehicles": {
       "make": {
         "model": {
           "year": {
-            "title": "Vehicle {{make}} {{model}} {{year}} Page",
-            "description": "Find the best tires for your {{year}} {{make}} {{model}}, shipped free and direct to you or one of our 10,000+ installation centers. Shop for the best deal on your {{year}} {{make}} {{model}}."
+            "title": "Shop {{year}} {{make}} {{model}} Tires",
+            "description": "Find the best tires for your {{year}} {{make}} {{model}}, shipped free and direct to you or one of our 10,000+ installation centers. Shop for the best deal on your {{year}} {{make}} {{model}}.",
+            "tireSize": {
+              "title": "Buy {{make}} {{model}} {{trim}} {{tireSize}} Tires",
+              "description": "Find the best {{tireSize}} tires for your {{make}} {{model}} {{trim}} and have them shipped for free directly to you, or to one of our 10,000+ installation centers making the tire buying process painless and simple."
+            }
           }
         }
       }
