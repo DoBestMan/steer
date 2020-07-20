@@ -13,10 +13,12 @@ import {
   MQ,
   SPACING,
   StylesMap,
+  TIME,
 } from '~/lib/constants';
 
 export const CAR_ROTATION_DURATION = 400;
 export const SCENERY_OR_WEATHER_DURATION = 400;
+const VEHICLE_CONTAINER_DURATION = 2300;
 
 export const animations = {
   /* eslint-disable sort-keys */
@@ -122,19 +124,19 @@ export const styles: StylesMap = {
     },
   },
   copyContainer: {
+    color: COLORS.GLOBAL.BLACK,
     position: 'relative',
     zIndex: 1,
   },
   description: {
-    color: COLORS.LIGHT.GRAY_70,
-    transition: `all 300ms ${EASING.CUBIC_EASE_OUT}`,
-    transitionDelay: '100ms',
+    transition: `all ${TIME.MS300}ms ${EASING.CUBIC_EASE_OUT}`,
+    transitionDelay: `${TIME.MS100}ms`,
   },
   eyebrow: {
     alignItems: 'baseline',
     display: 'inline-flex',
     marginBottom: SPACING.SIZE_10,
-    transition: `all 400ms ${EASING.CUBIC_EASE_OUT}`,
+    transition: `all ${TIME.MS400}ms ${EASING.CUBIC_EASE_OUT}`,
   },
   scenery: {
     bottom: 0,
@@ -147,8 +149,8 @@ export const styles: StylesMap = {
     bottom: 0,
     left: 0,
     position: 'absolute',
-    transition: `opacity 500ms ${EASING.CUBIC_EASE_OUT}`,
-    transitionDelay: '200ms',
+    transition: `opacity ${TIME.MS500}ms ${EASING.CUBIC_EASE_OUT}`,
+    transitionDelay: `${TIME.MS200}ms`,
     width: '100%',
   },
   title: {
@@ -162,8 +164,8 @@ export const styles: StylesMap = {
       color: COLORS.GLOBAL.ORANGE,
     },
 
-    transition: `all 300ms ${EASING.CUBIC_EASE_OUT}`,
-    transitionDelay: '50ms',
+    transition: `all ${TIME.MS300}ms ${EASING.CUBIC_EASE_OUT}`,
+    transitionDelay: `${TIME.MS50}ms`,
   },
   vehicle: {
     bottom: 0,
@@ -177,7 +179,7 @@ export const styles: StylesMap = {
     fontSize: 0,
     position: 'absolute',
     right: GRID_MARGIN.S,
-    transition: `all 2300ms ${EASING.CUBIC_EASE_OUT}`,
+    transition: `all ${VEHICLE_CONTAINER_DURATION}ms ${EASING.CUBIC_EASE_OUT}`,
     width: '100%',
     willTransform: 'translate',
 
@@ -198,7 +200,7 @@ export const styles: StylesMap = {
     left: 0,
     position: 'absolute',
     top: 0,
-    transition: `opacity 400ms ${EASING.CUBIC_EASE_OUT}`,
+    transition: `opacity ${TIME.MS400}ms ${EASING.CUBIC_EASE_OUT}`,
     width: '100%',
   },
 };
