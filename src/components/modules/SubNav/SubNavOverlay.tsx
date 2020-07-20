@@ -1,6 +1,7 @@
 import { CSSTransition } from 'react-transition-group';
 
 import GridItem from '~/components/global/Grid/GridItem';
+import { TIME } from '~/lib/constants';
 
 import styles, { fade, visibility } from './SubNav.styles';
 import { SUBNAV_TIMEOUT } from './SubNavModal';
@@ -15,7 +16,10 @@ import { SUBNAV_TIMEOUT } from './SubNavModal';
 
 export function SubNavOverlay({ isVisible }: { isVisible: boolean }) {
   return (
-    <CSSTransition timeout={SUBNAV_TIMEOUT} in={isVisible}>
+    <CSSTransition
+      timeout={{ ...SUBNAV_TIMEOUT, enter: TIME.MS200 }}
+      in={isVisible}
+    >
       {(state) => (
         <span css={[styles.overlay, visibility[state], fade[state]]} />
       )}

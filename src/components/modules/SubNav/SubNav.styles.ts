@@ -158,7 +158,7 @@ const styles: StylesMap = {
   },
   overlay: {
     display: 'none',
-    [MQ.L]: {
+    [MQ.M]: {
       background: COLORS.LIGHT.GRAY_70,
       display: 'initial',
       height: '100%',
