@@ -55,9 +55,10 @@ export function useContextSetup() {
   }
 
   const location = userPersonalizationData?.userLocation;
-  const locationString = location
-    ? `${location.cityName}, ${location.stateAbbr}`
-    : '';
+  const locationString =
+    location && location.cityName && location.stateAbbr
+      ? `${location.cityName}, ${location.stateAbbr}`
+      : '';
 
   const selectVehicle = useCallback(
     (vehicleMetadata: VehicleMetadata) => {
