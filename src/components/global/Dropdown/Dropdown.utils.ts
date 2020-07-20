@@ -8,7 +8,7 @@ import { SPACING } from '~/lib/constants';
  * if button el is in last third of window width for visibility
  * @returns {} | { left: xPos } | { right: xPos }
  */
-export function getPosition(): CSSProperties {
+export function getPosition(insideCarousel?: boolean): CSSProperties {
   const selectedButton = document.querySelector(
     '.dropdown-button[aria-expanded="true"]',
   );
@@ -17,8 +17,8 @@ export function getPosition(): CSSProperties {
     return {};
   }
 
-  const lastHalf = window.innerWidth - window.innerWidth / 2;
-  if (buttonElBounds.x > lastHalf) {
+  const lastHalf = window.innerWidth / 2;
+  if (buttonElBounds.x > lastHalf && insideCarousel) {
     return {
       right:
         window.innerWidth -
@@ -27,5 +27,9 @@ export function getPosition(): CSSProperties {
       minWidth: buttonElBounds.width + SPACING.SIZE_10,
     };
   }
-  return { left: buttonElBounds.x };
+
+  return {
+    left: buttonElBounds.x - SPACING.SIZE_20,
+    minWidth: buttonElBounds.width + SPACING.SIZE_40,
+  };
 }

@@ -33,7 +33,12 @@ export default function FilterPopup({
   }, [isOpen, onClose, isLarge]);
 
   return (
-    <Dropdown contentLabel={contentLabel} isOpen={isOpen} onClose={onClose}>
+    <Dropdown
+      contentLabel={contentLabel}
+      insideCarousel
+      isOpen={isOpen}
+      onClose={onClose}
+    >
       <FilterContent filterGroups={filterGroups} contentLabel={contentLabel} />
     </Dropdown>
   );

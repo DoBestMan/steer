@@ -15,6 +15,7 @@ interface Props {
   children: ReactNode;
   contentLabel: string;
   forceModal?: boolean;
+  insideCarousel?: boolean;
   isOpen: boolean;
   onClose: () => void;
   shouldActivateListeners?: boolean;
@@ -25,16 +26,17 @@ export default function Dropdown({
   children,
   contentLabel,
   forceModal,
+  insideCarousel,
   isOpen,
   onClose,
   shouldActivateListeners = true,
 }: Props) {
-  const { isMobile } = useBreakpoints();
+  const { greaterThan } = useBreakpoints();
   const dropdownEl = useRef<HTMLDivElement>(null);
   const [positionStyle, setPosition] = useState<CSSProperties | null>(null);
   const { width } = useWindowSize();
 
-  const isModal = isMobile || forceModal;
+  const isModal = !greaterThan.M || forceModal;
 
   useEffect(() => {
     // click/mouse handlers to close dropdown, click outside + escape
@@ -83,8 +85,8 @@ export default function Dropdown({
       return;
     }
 
-    setPosition(getPosition());
-  }, [isOpen, width]);
+    setPosition(getPosition(insideCarousel));
+  }, [isOpen, insideCarousel, width]);
 
   if (!positionStyle) {
     return null;

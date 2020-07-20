@@ -2,6 +2,7 @@ import Dropdown from '~/components/global/Dropdown/Dropdown';
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import SizeFinder from '~/components/modules/PDP/SizeFinder/SizeFinder';
+import { useModalContext } from '~/context/Modal.context';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import { ProductInfoProps } from './ProductInfo';
@@ -29,12 +30,15 @@ function RenderSizeFinder({
   onChangeSize,
   sizeFinder,
 }: RenderSizeFinderProps) {
+  const { isModalOpen } = useModalContext();
+
   if (!sizeFinder) {
     return null;
   }
 
   return (
     <Dropdown
+      shouldActivateListeners={!isModalOpen}
       contentLabel={ui('pdp.productInfo.selectSizeLabel')}
       isOpen={!!isSizeSelectorOpen}
       onClose={onClickChangeSize}

@@ -1,7 +1,8 @@
 import { NextRouter } from 'next/router';
 
-import { SizeFinderProps } from '~/components/modules/PDP/SizeFinder/SizeFinder';
 import { SiteProduct } from '~/data/models/SiteProduct';
+
+import { ParsedSizeFinderProps } from '../ProductDetail.hooks';
 
 export function mapDataToSizeFinder({
   siteProduct: { siteProductLineAvailableSizeList },
@@ -9,7 +10,7 @@ export function mapDataToSizeFinder({
 }: {
   router: NextRouter;
   siteProduct: SiteProduct;
-}): Omit<SizeFinderProps, 'onChange'> | null {
+}): ParsedSizeFinderProps | null {
   const { query } = router;
   const { tireSize, rearSize } = query;
 

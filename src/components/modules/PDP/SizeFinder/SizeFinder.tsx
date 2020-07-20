@@ -23,6 +23,7 @@ export default function SizeFinder({
   onChange,
 }: SizeFinderProps) {
   const { vehicle } = useUserPersonalizationContext();
+  const { openStaticModal } = useModalContext();
 
   const handleChange = useCallback(
     (size: string) => {
@@ -30,7 +31,7 @@ export default function SizeFinder({
     },
     [onChange],
   );
-  const { openStaticModal } = useModalContext();
+
   function openTireSizeModal() {
     openStaticModal(STATIC_MODAL_IDS.HOW_TO_FIND_YOUR_SIZE);
   }

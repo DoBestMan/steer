@@ -19,10 +19,10 @@ const styles: StylesMap = {
     },
   ],
   header: {
-    marginBottom: SPACING.SIZE_40,
+    paddingBottom: SPACING.SIZE_15,
     marginRight: SPACING.SIZE_40,
 
-    [MQ.M]: {
+    [MQ.L]: {
       marginRight: 0,
     },
   },
