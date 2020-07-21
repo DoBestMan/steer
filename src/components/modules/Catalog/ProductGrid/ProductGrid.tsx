@@ -30,13 +30,25 @@ const HIGHLIGHT_PATTERNS = {
   },
 };
 
-function ProductGrid({ productList, isLoading, placeholders = 8 }: Props) {
+function ProductGrid({ productList }: Props) {
   const { bk } = useBreakpoints();
 
   return (
     <Grid>
       <GridItem gridColumn="start/end" isGrid>
         {productList.map((product, i) => {
+          if (product === null) {
+            return (
+              <GridItem
+                gridColumn={'span 2'}
+                gridColumnM={'span 2'}
+                gridColumnL={'span 3'}
+                key={i}
+              >
+                <ProductListingPlaceholder />
+              </GridItem>
+            );
+          }
           const pattern = HIGHLIGHT_PATTERNS[bk];
           const isHighlighted = (i - pattern.OFFSET) % pattern.MULTIPLIER === 0;
           return (
@@ -50,19 +62,6 @@ function ProductGrid({ productList, isLoading, placeholders = 8 }: Props) {
             </GridItem>
           );
         })}
-        {isLoading &&
-          Array(placeholders)
-            .fill({})
-            .map((_, i) => (
-              <GridItem
-                gridColumn={'span 2'}
-                gridColumnM={'span 2'}
-                gridColumnL={'span 3'}
-                key={i}
-              >
-                <ProductListingPlaceholder />
-              </GridItem>
-            ))}
       </GridItem>
     </Grid>
   );

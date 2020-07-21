@@ -27,15 +27,27 @@ function CatalogProductGrid({
   const [currentPage, setCurrentPage] = useState(1);
   const [displayedProducts, setDisplayedProducts] = useState(productList);
   const [nextProducts, setNextProducts] = useState(pagination?.resultsPerPage);
+  const [scrollPosition, setScrollPosition] = useState(0);
 
   useEffect(() => {
     if (!pagination?.offset) {
       return;
     }
-    if (displayedProducts.length === pagination.offset) {
-      setDisplayedProducts([...displayedProducts, ...productList]);
+
+    const genuineProducts = displayedProducts.filter(
+      (product) => product !== null,
+    );
+
+    const shouldRenderNextPage = genuineProducts.length === pagination.offset;
+
+    if (shouldRenderNextPage) {
+      setDisplayedProducts([...genuineProducts, ...productList]);
     }
   }, [displayedProducts, productList, pagination]);
+
+  useEffect(() => {
+    window.scrollTo(0, scrollPosition);
+  }, [scrollPosition]);
 
   useEffect(() => {
     if (!pagination?.resultsPerPage || !pagination.offset) {
@@ -52,34 +64,36 @@ function CatalogProductGrid({
 
   const handleLoadMore = () => {
     const newPage = currentPage + 1;
-    handleUpdateResults({ page: `${newPage}` }, true);
     setCurrentPage(newPage);
+    setScrollPosition(window.scrollY || window.pageYOffset);
+    setDisplayedProducts([
+      ...displayedProducts,
+      ...Array(nextProducts).fill(null),
+    ]);
+    handleUpdateResults({ page: `${newPage}` }, true);
   };
 
   return (
     <div css={styles.root}>
       {isAdvancedView ? (
         <>
-          {displayedProducts.map((product, i) => (
-            <div css={styles.advancedListing} key={`${product.name}-${i}`}>
-              <AdvancedListing {...product} />
-            </div>
-          ))}
-          {isLoading &&
-            Array(nextProducts)
-              .fill({})
-              .map((_, i) => (
+          {displayedProducts.map((product, i) => {
+            if (product === null) {
+              return (
                 <div css={styles.advancedListing} key={i}>
                   <AdvancedListingPlaceholder />
                 </div>
-              ))}
+              );
+            }
+            return (
+              <div css={styles.advancedListing} key={`${product.name}-${i}`}>
+                <AdvancedListing {...product} />
+              </div>
+            );
+          })}
         </>
       ) : (
-        <ProductGrid
-          isLoading={isLoading}
-          productList={displayedProducts}
-          placeholders={nextProducts}
-        />
+        <ProductGrid productList={displayedProducts} />
       )}
       {pagination && displayedProducts.length < pagination?.total && (
         <div css={styles.loadMoreButton}>
