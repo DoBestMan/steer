@@ -97,9 +97,8 @@ export const styles: StylesMap = {
   lastItem: {
     [MQ.L]: {
       // Should be the account logo
-      // Change it to button if it becomes a button
-      a: {
-        minWidth: 'auto',
+      button: {
+        margin: `0 -${SPACING.SIZE_10}px`,
       },
     },
   },
