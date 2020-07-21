@@ -87,9 +87,12 @@ export function mapDataToProductInfo({
   const parsedSize = `p${size?.replace(' ', '-').replace('/', '-')}`;
   const sameSizeSearchResults =
     siteProductLineSizeDetail?.outOfStockTireSizeResultCount;
-  const sameSizeSearchURL = interpolateRoute(ROUTE_MAP[ROUTES.TIRE_CATEGORY], {
-    size: parsedSize,
-  });
+  const sameSizeSearchURL = interpolateRoute(
+    ROUTE_MAP[ROUTES.TIRE_SIZE_CATALOG_OR_CATEGORY],
+    {
+      size: parsedSize,
+    },
+  );
 
   return {
     availableSizes,

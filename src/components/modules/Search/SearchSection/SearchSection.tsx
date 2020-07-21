@@ -25,7 +25,10 @@ function SearchSection({
   selectedItemIndex = [0, -1],
 }: SearchSectionProps) {
   const { onFocus, pushRefToArray } = useFocusScrollIntoView({});
-  const { shouldPreventLinkNavigation } = useSearchContext();
+  const {
+    shouldPreventLinkNavigation,
+    routeQueryParamOptions,
+  } = useSearchContext();
   const handleClick = (searchResult: SiteSearchResultTextItem) => () => {
     if (onClick) {
       onClick(searchResult);
@@ -69,6 +72,7 @@ function SearchSection({
                     isExternal={isExternal}
                     onClick={handleClick(item)}
                     onFocus={onFocus(index)}
+                    routeQueryParamOptions={routeQueryParamOptions}
                   >
                     {innerContent}
                   </BaseLink>

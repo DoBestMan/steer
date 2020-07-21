@@ -2,6 +2,8 @@ import { render } from '@testing-library/react';
 import { LinkProps } from 'next/link';
 import { ReactNode } from 'react';
 
+import { ROUTE_MAP, ROUTES } from '~/lib/constants';
+
 import BaseLink from './BaseLink';
 import { useBaseLinkProps } from './BaseLink.hooks';
 
@@ -177,48 +179,105 @@ describe('BaseLink hook', () => {
       prefetch: undefined,
     });
   });
-});
 
-test('internal dynamic link - two params', () => {
-  expect(
-    useBaseLinkProps({
-      href: '/brands/drupal-tires/tractors',
-    }),
-  ).toEqual({
-    as: {
-      pathname: '/brands/drupal-tires/tractors',
-      query: {},
-    },
-    externalProps: {},
-    finalHref: {
-      pathname: '/brands/[brand]/[productLine]',
-      query: {},
-    },
-    isInternal: true,
-    prefetch: undefined,
+  test('internal dynamic link - two params', () => {
+    expect(
+      useBaseLinkProps({
+        href: '/brands/drupal-tires/tractors',
+      }),
+    ).toEqual({
+      as: {
+        pathname: '/brands/drupal-tires/tractors',
+        query: {},
+      },
+      externalProps: {},
+      finalHref: {
+        pathname: '/brands/[brand]/[productLine]',
+        query: {},
+      },
+      isInternal: true,
+      prefetch: undefined,
+    });
   });
-});
 
-test('internal dynamic link - with query params', () => {
-  expect(
-    useBaseLinkProps({
-      href: '/brands/drupal-tires?trim=LX',
-    }),
-  ).toEqual({
-    as: {
-      pathname: '/brands/drupal-tires',
-      query: {
-        trim: 'LX',
+  test('internal dynamic link - with query params', () => {
+    expect(
+      useBaseLinkProps({
+        href: '/brands/drupal-tires?trim=LX',
+      }),
+    ).toEqual({
+      as: {
+        pathname: '/brands/drupal-tires',
+        query: {
+          trim: 'LX',
+        },
       },
-    },
-    externalProps: {},
-    finalHref: {
-      pathname: '/brands/[brand]',
-      query: {
-        trim: 'LX',
+      externalProps: {},
+      finalHref: {
+        pathname: '/brands/[brand]',
+        query: {
+          trim: 'LX',
+        },
       },
-    },
-    isInternal: true,
-    prefetch: undefined,
+      isInternal: true,
+      prefetch: undefined,
+    });
+  });
+
+  describe('internal dynamic link with special route params', () => {
+    const routeQueryParamOptions = {
+      routes: [ROUTE_MAP[ROUTES.VEHICLE_CATALOG]],
+      params: {
+        brand: 'continental',
+      },
+    };
+
+    it('appends specified params when route matches list', () => {
+      expect(
+        useBaseLinkProps({
+          href: '/vehicles/honda/civic/2019?trim=LX',
+          routeQueryParamOptions,
+        }),
+      ).toEqual({
+        as: {
+          pathname: '/vehicles/honda/civic/2019',
+          query: {
+            brand: 'continental',
+            trim: 'LX',
+          },
+        },
+        externalProps: {},
+        finalHref: {
+          pathname: '/vehicles/[make]/[model]/[year]',
+          query: {
+            brand: 'continental',
+            trim: 'LX',
+          },
+        },
+        isInternal: true,
+        prefetch: undefined,
+      });
+    });
+
+    test('does not append params if route is not a match', () => {
+      expect(
+        useBaseLinkProps({
+          href: '/brands/drupal-tires',
+          routeQueryParamOptions,
+        }),
+      ).toEqual({
+        as: {
+          pathname: '/brands/drupal-tires',
+          query: {},
+        },
+        externalProps: {},
+        finalHref: {
+          pathname: '/brands/[brand]',
+          query: {},
+        },
+        isInternal: true,
+        prefetch: undefined,
+      });
+    });
   });
 });

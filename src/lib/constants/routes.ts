@@ -28,13 +28,13 @@ export enum ROUTES {
   RETURNS = 'returns',
   TERMS = 'terms',
   TIRE_BUYING_GUIDE = 'tireBuyingGuide',
-  TIRE_CATEGORY = 'tireCategory',
   TIRE_REVIEWS = 'tireReviews',
   TIRE_REVIEWS_TEMP = 'tireReviewsTempBrandOrCategoryOrType',
+  TIRE_SIZE_CATALOG_OR_CATEGORY = 'tireSizeCatalogOrCategory',
   TYPE_DETAIL = 'typeDetail',
   TYPE_LANDING = 'typeLanding',
   TYPE_REVIEWS = 'typeReviews',
-  VEHICLES_CATEGORY = 'vehiclesCategory',
+  VEHICLE_CATALOG = 'vehicleCatalog',
   WRITE_REVIEW = 'writeReview',
 }
 
@@ -57,8 +57,8 @@ export const ROUTE_MAP: Record<ROUTES, string> = {
   [ROUTES.TYPE_LANDING]: '/types',
   [ROUTES.TYPE_DETAIL]: '/types/[type]',
   [ROUTES.TYPE_REVIEWS]: '/types/[type]/reviews',
-  [ROUTES.VEHICLES_CATEGORY]: '/vehicles/[make]/[model]/[year]',
-  [ROUTES.TIRE_CATEGORY]: '/tire-sizes/[size]',
+  [ROUTES.VEHICLE_CATALOG]: '/vehicles/[make]/[model]/[year]',
+  [ROUTES.TIRE_SIZE_CATALOG_OR_CATEGORY]: '/tire-sizes/[size]',
   [ROUTES.ABOUT]: '/about',
   [ROUTES.CUSTOMER_SUPPORT]: '/customer-support',
   [ROUTES.DEALS]: '/tire-deals',
@@ -76,8 +76,8 @@ export const ROUTE_MAP: Record<ROUTES, string> = {
 
 export const CATALOG_ROUTES = [
   ROUTE_MAP[ROUTES.BRAND_CATEGORY],
-  ROUTE_MAP[ROUTES.VEHICLES_CATEGORY],
-  ROUTE_MAP[ROUTES.TIRE_CATEGORY],
+  ROUTE_MAP[ROUTES.VEHICLE_CATALOG],
+  ROUTE_MAP[ROUTES.TIRE_SIZE_CATALOG_OR_CATEGORY],
 ];
 
 // null for dynamic labels
@@ -93,12 +93,12 @@ export const ROUTE_LABELS: Record<string, string | null> = {
   [ROUTE_MAP[ROUTES.PRODUCT_DETAIL_PLA]]: null,
   [ROUTE_MAP[ROUTES.PRODUCT_REVIEWS]]: ui('breadcrumbs.reviews'),
   [ROUTE_MAP[ROUTES.BRAND_CATEGORY]]: null,
-  [ROUTE_MAP[ROUTES.TIRE_CATEGORY]]: null,
+  [ROUTE_MAP[ROUTES.TIRE_SIZE_CATALOG_OR_CATEGORY]]: null,
   [ROUTE_MAP[ROUTES.TIRE_REVIEWS]]: ui('breadcrumbs.tireReviews'),
   [ROUTE_MAP[ROUTES.TIRE_REVIEWS_TEMP]]: null,
   [ROUTE_MAP[ROUTES.TYPE_LANDING]]: ui('breadcrumbs.types'),
   [ROUTE_MAP[ROUTES.TYPE_DETAIL]]: null,
   [ROUTE_MAP[ROUTES.TYPE_REVIEWS]]: ui('breadcrumbs.reviews'),
-  [ROUTE_MAP[ROUTES.VEHICLES_CATEGORY]]: null,
+  [ROUTE_MAP[ROUTES.VEHICLE_CATALOG]]: null,
   [ROUTE_MAP[ROUTES.WRITE_REVIEW]]: ui('breadcrumbs.writeReview'),
 };

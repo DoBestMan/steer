@@ -26,6 +26,7 @@ function SearchModal() {
     searchResults,
     setSearchState,
     toggleIsSearchOpen,
+    setRouteQueryParamOptions,
     setShouldPreventLinkNavigation,
     shouldPreventLinkNavigation,
   } = useSearchContext();
@@ -53,6 +54,7 @@ function SearchModal() {
     clearSearchResults();
     setSearchState('');
     setShouldPreventLinkNavigation(false);
+    setRouteQueryParamOptions();
     toggleIsSearchOpen();
   };
 

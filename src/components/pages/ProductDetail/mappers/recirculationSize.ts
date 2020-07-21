@@ -30,7 +30,7 @@ export function mapDataToRecirculationSize({
       label: ui('pdp.recirculation.searchForTireSize', {
         size: siteProductLineSizeDetail.size,
       }),
-      url: interpolateRoute(ROUTE_MAP[ROUTES.TIRE_CATEGORY], {
+      url: interpolateRoute(ROUTE_MAP[ROUTES.TIRE_SIZE_CATALOG_OR_CATEGORY], {
         size: tireSize,
       }),
     };
@@ -41,7 +41,7 @@ export function mapDataToRecirculationSize({
       size: siteProductLineSizeDetail.size,
       rear: siteProductLineRearSizeDetail.size,
     }),
-    url: `${interpolateRoute(ROUTE_MAP[ROUTES.TIRE_CATEGORY], {
+    url: `${interpolateRoute(ROUTE_MAP[ROUTES.TIRE_SIZE_CATALOG_OR_CATEGORY], {
       size: tireSize,
     })}?rear=${rearSize}`,
   };

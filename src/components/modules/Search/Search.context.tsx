@@ -1,5 +1,6 @@
 import { ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 
+import { RouteQueryParamOptions } from '~/components/global/Link/BaseLink.hooks';
 import {
   Results,
   SearchStateEnum,
@@ -41,11 +42,15 @@ export interface SearchContextProps {
   isSearchOpen: boolean;
   lockSearchStateToVehicle: () => void;
   pastSearches: SiteSearchResultGroup;
+  routeQueryParamOptions?: RouteQueryParamOptions;
   searchQuery: ({ queryText, queryType }: SearchDataParams) => void;
   searchResults: Results;
   searchState: string;
   setHasLockedSearchState: (hasLockedSearchState: boolean) => void;
   setIsSearchOpen: (isSearchOpen: boolean) => void;
+  setRouteQueryParamOptions: (
+    routeQueryParamOptions?: RouteQueryParamOptions,
+  ) => void;
   setSearchState: (searchState: string) => void;
   setShouldPreventLinkNavigation: (value: boolean) => void;
   shouldPreventLinkNavigation: boolean;
@@ -170,6 +175,9 @@ function useContextSetup(): SearchContextProps {
     shouldPreventLinkNavigation,
     setShouldPreventLinkNavigation,
   ] = useState(false);
+  const [routeQueryParamOptions, setRouteQueryParamOptions] = useState<
+    RouteQueryParamOptions | undefined
+  >();
 
   const lockSearchStateToVehicle = () => {
     const {
@@ -195,11 +203,13 @@ function useContextSetup(): SearchContextProps {
     isSearchOpen,
     lockSearchStateToVehicle,
     pastSearches,
+    routeQueryParamOptions,
     searchQuery,
     searchResults,
     searchState,
     setHasLockedSearchState,
     setIsSearchOpen,
+    setRouteQueryParamOptions,
     setSearchState,
     setShouldPreventLinkNavigation,
     shouldPreventLinkNavigation,

@@ -113,7 +113,7 @@ export function mapDataToInsights({
     }
 
     const interpolatedRoute = interpolateRoute(
-      ROUTE_MAP[ROUTES.VEHICLES_CATEGORY],
+      ROUTE_MAP[ROUTES.VEHICLE_CATALOG],
       {
         make: vehicle.vehicleMake,
         model: vehicle.vehicleModel,
@@ -122,7 +122,7 @@ export function mapDataToInsights({
     );
 
     router.push(
-      ROUTE_MAP[ROUTES.VEHICLES_CATEGORY],
+      ROUTE_MAP[ROUTES.VEHICLE_CATALOG],
       `${interpolatedRoute}?trim=${vehicle.vehicleTrim}`,
     );
   };

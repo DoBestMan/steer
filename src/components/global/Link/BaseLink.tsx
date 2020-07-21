@@ -11,7 +11,13 @@ export interface BaseLinkProps extends UseBaseLinkProps {
 
 // Wrapper for Next's Link component to parse various combinations
 // of absolute, relative, external, and internal links
-function BaseLink({ children, href, isExternal, ...rest }: BaseLinkProps) {
+function BaseLink({
+  children,
+  href,
+  isExternal,
+  routeQueryParamOptions,
+  ...rest
+}: BaseLinkProps) {
   const {
     as,
     externalProps,
@@ -21,6 +27,7 @@ function BaseLink({ children, href, isExternal, ...rest }: BaseLinkProps) {
   } = useBaseLinkProps({
     href,
     isExternal,
+    routeQueryParamOptions,
   });
   return (
     <Link href={finalHref} as={as} prefetch={prefetch} passHref>

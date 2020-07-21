@@ -2,7 +2,7 @@ import { LinkProps } from 'next/link';
 
 import { ROUTE_MAP } from '~/lib/constants';
 import { absoluteLink, specialLink } from '~/lib/utils/regex';
-import { getUrlObject, Url } from '~/lib/utils/routes';
+import { getUrlObject, SimpleUrlObject, Url } from '~/lib/utils/routes';
 
 // Turn links into regular expressions we can use to match routes from the API
 const dynamicRouteRegexMap: Record<string, RegExp> = {};
@@ -15,9 +15,50 @@ Object.values(ROUTE_MAP).forEach((route) => {
   }
 });
 
+/*
+  BaseLink accepts an optional routeQueryParamOptions prop in this format:
+  {
+    routes: [route1, route2],
+    params: {
+      promotion: 'ABC',
+    },
+  };
+
+  In this function:
+  - Check if routes list contains finalHref route
+  - If so, append the specified params to query objects
+
+  Example use case: Apply a promotion filter to all search result links
+  that lead to Vehicle/Tire Size catalog pages.
+*/
+function applyRouteQueryParamOptions(
+  finalHref: SimpleUrlObject,
+  as: SimpleUrlObject,
+  routeQueryParamOptions?: RouteQueryParamOptions,
+) {
+  if (
+    routeQueryParamOptions &&
+    routeQueryParamOptions.routes.includes(finalHref.pathname)
+  ) {
+    const finalQuery = {
+      ...finalHref.query,
+      ...routeQueryParamOptions.params,
+    };
+
+    as.query = finalQuery;
+    finalHref.query = finalQuery;
+  }
+}
+
+export interface RouteQueryParamOptions {
+  params: Record<string, string>;
+  routes: string[];
+}
+
 export interface UseBaseLinkProps {
   href: string;
   isExternal?: boolean;
+  routeQueryParamOptions?: RouteQueryParamOptions;
 }
 
 interface ExternalProps {
@@ -35,6 +76,7 @@ export interface UseBaseLinkReturnProps
 export function useBaseLinkProps({
   href,
   isExternal,
+  routeQueryParamOptions,
 }: UseBaseLinkProps): UseBaseLinkReturnProps {
   const externalProps = isExternal
     ? { rel: 'noopener noreferrer', target: '_blank' }
@@ -60,6 +102,8 @@ export function useBaseLinkProps({
       if (match) {
         as = getUrlObject(pathname, query);
         finalHref = getUrlObject(route, query);
+        applyRouteQueryParamOptions(finalHref, as, routeQueryParamOptions);
+
         return true;
       }
       return false;

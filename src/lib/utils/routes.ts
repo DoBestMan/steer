@@ -1,11 +1,15 @@
-import queryString from 'query-string';
-import { UrlObject } from 'url';
+import queryString, { ParsedQuery } from 'query-string';
 
 import { SiteQueryParams } from '~/data/models/SiteQueryParams';
 
 import { brackets, diameterFormat } from './regex';
 
-export type Url = string | UrlObject;
+export interface SimpleUrlObject {
+  pathname: string;
+  query: ParsedQuery;
+}
+
+export type Url = string | SimpleUrlObject;
 
 /**
  * Static build has trailing `/` in routes
@@ -70,7 +74,10 @@ export function getStringifiedParams(
   return queryParams;
 }
 
-export const getUrlObject = (pathname: string, query: string): Url => ({
+export const getUrlObject = (
+  pathname: string,
+  query: string,
+): SimpleUrlObject => ({
   pathname,
   query: queryString.parse(query),
 });
