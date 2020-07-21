@@ -145,8 +145,6 @@ function Autocomplete({
     setActivedescendant(
       isInvalidInput ? ids.invalidID : CONSTANTS.DEFAULT_VALUE,
     );
-
-    setSelectedIndex(0);
   }, [hasResults, isInputEmpty, ids.invalidID, isInvalidInput, results]);
 
   const cancelSelection = () => {
@@ -165,6 +163,9 @@ function Autocomplete({
 
     onChange(targetValue);
     setValue(targetValue);
+    if (selectedIndex !== CONSTANTS.DEFAULT_SELECTED_INDEX) {
+      setSelectedIndex(CONSTANTS.DEFAULT_SELECTED_INDEX);
+    }
   };
 
   useEffect(() => {
@@ -176,10 +177,8 @@ function Autocomplete({
   }, [inputValue, onChange]);
 
   const selectIndex = (index: number) => {
-    if (selectedIndex !== CONSTANTS.DEFAULT_SELECTED_INDEX) {
-      setActivedescendant(getItemDOMId(ids.listboxItemID, results[index].main));
-      setSelectedIndex(index);
-    }
+    setActivedescendant(getItemDOMId(ids.listboxItemID, results[index].main));
+    setSelectedIndex(index);
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
