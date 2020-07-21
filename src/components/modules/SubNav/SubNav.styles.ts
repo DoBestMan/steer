@@ -252,7 +252,7 @@ const styles: StylesMap = {
         height: 'auto',
         justifyContent: 'space-between',
         margin: 'unset',
-        paddingBottom: SPACING.SIZE_80,
+        paddingBottom: SPACING.SIZE_90,
         paddingTop: SPACING.SIZE_60,
         svg: {
           width: 20,

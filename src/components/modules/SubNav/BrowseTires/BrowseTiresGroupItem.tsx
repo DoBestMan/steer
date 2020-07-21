@@ -14,7 +14,7 @@ interface Props extends SiteMenuBrowseGroupItem {
 
 function BrowseTiresGroupItem({ header, items, more, focusRef }: Props) {
   return (
-    <div css={styles.categoryList}>
+    <div css={[styles.categoryList, header?.icon && styles.iconOffset]}>
       {header && (
         <div css={[typography.eyebrow, styles.listTitle]}>
           {header.title}

@@ -2,6 +2,7 @@ import { BORDERS, COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const ITEM_HEIGHT = 60;
+const ICON_OFFSET = -8;
 const DECORATOR_CONTENT = {
   content: '"•"',
 };
@@ -98,10 +99,20 @@ const styles: StylesMap = {
         paddingTop: 'unset',
       },
     ],
+    [MQ.L]: {
+      marginBottom: SPACING.SIZE_15,
+    },
   },
   hide: {
     [MQ.M]: {
       display: 'none',
+    },
+  },
+  iconOffset: {
+    [MQ.M]: {
+      ':first-of-type': {
+        marginTop: ICON_OFFSET,
+      },
     },
   },
   image: {
@@ -187,9 +198,7 @@ const styles: StylesMap = {
     display: 'flex',
     justifyContent: 'space-between',
     marginBottom: SPACING.SIZE_15,
-    [MQ.S]: {
-      marginTop: SPACING.SIZE_20,
-    },
+    marginTop: SPACING.SIZE_20,
     [MQ.M]: {
       marginTop: 0,
     },
