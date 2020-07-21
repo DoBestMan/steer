@@ -9,14 +9,20 @@ import { SiteCatalogFilterToggleTypeEnum } from '~/data/models/SiteCatalogFilter
 import { CatalogFilterTypes } from './Filter.types';
 import {
   filterSort,
+  mockDupeMultipleValSelected,
+  mockDupeSelected,
   mockItem,
   mockList,
+  mockListSelected,
+  mockMultipleValSelected,
   mockRange,
   mockSiteCatalogFilters,
   mockToggle,
+  mockUniqueSelected,
   warrantyFilter,
 } from './Filters.mocks';
 import {
+  getAppliedCount,
   getFilterLabel,
   getGroupedFilters,
   getInitialFiltersState,
@@ -73,6 +79,20 @@ describe('Filters.utils', () => {
           SiteCatalogFilterToggleTypeEnum.SiteCatalogFilterToggle,
         ),
       ).toBe(false);
+    });
+  });
+
+  describe('getFilterCount', () => {
+    it('returns a count of applied filters', () => {
+      expect(getAppliedCount(mockListSelected)).toEqual(1);
+      expect(getAppliedCount(mockList)).toEqual(0);
+      expect(getAppliedCount(mockUniqueSelected)).toEqual(2);
+      expect(getAppliedCount(mockMultipleValSelected)).toEqual(2);
+      expect(getAppliedCount(mockDupeMultipleValSelected)).toEqual(1);
+    });
+
+    it('does not count duplicates', () => {
+      expect(getAppliedCount(mockDupeSelected)).toEqual(1);
     });
   });
 

@@ -872,6 +872,7 @@ export const mockSiteCatalogFilters = [
 export const mockItem = ({
   value: { foo: 'bar' },
 } as unknown) as SiteCatalogFilterItem;
+
 export const mockToggle = ({
   type: 'SiteCatalogFilterToggle',
   item: {
@@ -880,6 +881,7 @@ export const mockToggle = ({
     value: { foo: 'bar' },
   },
 } as unknown) as SiteCatalogFilterToggle;
+
 export const mockList = ({
   type: 'SiteCatalogFilterList',
   header: {
@@ -894,8 +896,110 @@ export const mockList = ({
       ],
     },
   ],
-} as unknown) as SiteCatalogFilterToggle;
+} as unknown) as SiteCatalogFilterList;
+
 export const mockRange = {
   type: 'SiteCatalogFilterRange',
   id: 'range',
 } as SiteCatalogFilterRange;
+
+export const mockDupeSelected = ({
+  type: 'SiteCatalogFilterList',
+  header: {
+    title: 'List Label',
+  },
+  filterGroups: [
+    {
+      items: [
+        {
+          state: 'Selected',
+          value: { foo: 'bar' },
+        },
+        {
+          state: 'Selected',
+          value: { foo: 'bar' },
+        },
+      ],
+    },
+  ],
+} as unknown) as SiteCatalogFilterList;
+
+export const mockDupeMultipleValSelected = ({
+  type: 'SiteCatalogFilterList',
+  header: {
+    title: 'List Label',
+  },
+  filterGroups: [
+    {
+      items: [
+        {
+          state: 'Selected',
+          value: { foo: 'bar', bar: 'baz' },
+        },
+        {
+          state: 'Selected',
+          value: { foo: 'bar', bar: 'baz' },
+        },
+      ],
+    },
+  ],
+} as unknown) as SiteCatalogFilterList;
+
+export const mockListSelected = ({
+  type: 'SiteCatalogFilterList',
+  header: {
+    title: 'List Label',
+  },
+  filterGroups: [
+    {
+      items: [
+        {
+          state: 'Selected',
+          value: { foo: 'bar' },
+        },
+      ],
+    },
+  ],
+} as unknown) as SiteCatalogFilterList;
+
+export const mockUniqueSelected = ({
+  type: 'SiteCatalogFilterList',
+  header: {
+    title: 'List Label',
+  },
+  filterGroups: [
+    {
+      items: [
+        {
+          state: 'Selected',
+          value: { foo: 'baz' },
+        },
+        {
+          state: 'Selected',
+          value: { foo: 'bar' },
+        },
+      ],
+    },
+  ],
+} as unknown) as SiteCatalogFilterList;
+
+export const mockMultipleValSelected = ({
+  type: 'SiteCatalogFilterList',
+  header: {
+    title: 'List Label',
+  },
+  filterGroups: [
+    {
+      items: [
+        {
+          state: 'Selected',
+          value: { foo: 'baz', baz: 'bar' },
+        },
+        {
+          state: 'Selected',
+          value: { foo: 'bar' },
+        },
+      ],
+    },
+  ],
+} as unknown) as SiteCatalogFilterList;

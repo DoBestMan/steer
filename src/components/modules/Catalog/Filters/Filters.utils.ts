@@ -26,16 +26,24 @@ export function getAppliedCount(filter: CatalogFilterTypes) {
   if (filter.type !== SiteCatalogFilterListTypeEnum.SiteCatalogFilterList) {
     return;
   }
-  let count = 0;
+  const vals: string[] = []; // used to dedupe count
   filter.filterGroups.forEach((group: SiteCatalogFilterGroup) => {
     group.items.forEach((item: SiteCatalogFilterItem) => {
       if (item.state === SiteCatalogFilterItemStateEnum.Selected) {
-        count += 1;
+        // all values must match another filter to be a duplicate, and all
+        // values have to be grouped as one string, which will count as one selected filter
+        let concatKeyVals = '';
+        Object.entries(item.value).forEach(([k, v]) => {
+          concatKeyVals += k + v;
+        });
+        if (vals.indexOf(concatKeyVals) < 0) {
+          vals.push(concatKeyVals);
+        }
       }
     });
   });
 
-  return count;
+  return vals.length;
 }
 
 /**
