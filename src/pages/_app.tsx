@@ -1,5 +1,6 @@
 import { Global } from '@emotion/core';
 import NextApp, { AppContext, AppInitialProps } from 'next/app';
+import { SWRConfig } from 'swr';
 
 import Meta from '~/components/global/Meta/Meta';
 import App from '~/components/modules/App/App';
@@ -34,19 +35,21 @@ class MyApp extends NextApp<Props> {
     GA.initialize();
 
     return (
-      <AppProviders
-        hostUrl={hostUrl}
-        siteGlobalsContextValue={siteGlobals}
-        siteMenuContextValue={siteMenu}
-      >
-        <Meta />
+      <SWRConfig value={{ revalidateOnFocus: false }}>
+        <AppProviders
+          hostUrl={hostUrl}
+          siteGlobalsContextValue={siteGlobals}
+          siteMenuContextValue={siteMenu}
+        >
+          <Meta />
 
-        <Global styles={global} />
+          <Global styles={global} />
 
-        <App route={route}>
-          <Component {...pageProps} />
-        </App>
-      </AppProviders>
+          <App route={route}>
+            <Component {...pageProps} />
+          </App>
+        </AppProviders>
+      </SWRConfig>
     );
   }
 }
