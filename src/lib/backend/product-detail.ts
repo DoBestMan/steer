@@ -25,13 +25,16 @@ export async function backendGetProductDetail({
 export async function backendGetProductReviews({
   brand,
   productLine,
+  query,
 }: {
   brand: string | string[];
   productLine: string | string[];
+  query?: Record<string, string>;
 }) {
   const response = await fetch<SiteProductReviews>({
     endpoint: `/v1/site/products/${brand}/${productLine}/reviews`,
     includeAuthorization: true,
+    query,
     method: 'get',
   });
 

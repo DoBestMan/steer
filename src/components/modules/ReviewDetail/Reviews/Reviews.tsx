@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import Button from '~/components/global/Button/Button';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
@@ -8,50 +6,34 @@ import ReviewCard, {
 } from '~/components/global/ReviewCard/ReviewCard';
 import StickyBar from '~/components/modules/StickyBar/StickyBar';
 import { primaryColumnStyles } from '~/components/modules/StickyBar/StickyBar.styles';
-import { ListResultMetadata } from '~/data/models/ListResultMetadata';
 import { THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import styles from './Reviews.styles';
 
 export interface ReviewsProps {
-  listResultMetadata?: ListResultMetadata;
-  reviews?: ReviewCardProps[] | null;
+  onSeeMoreClick?: () => void;
+  reviews: ReviewCardProps[];
   sources?: {
     googleShopping?: number | null;
     simpleTire?: number | null;
   };
   title: string;
+  total?: number;
   viewTireUrl?: string;
   writeReviewUrl?: string;
 }
 
-const CONSTANTS = {
-  NUM_REVIEWS_TO_DISPLAY_ON_LOAD: 5,
-};
-
 function Reviews({
+  onSeeMoreClick,
   reviews,
   sources,
   title,
   viewTireUrl,
   writeReviewUrl,
+  total = 0,
 }: ReviewsProps) {
-  const numReviews = !!reviews && reviews.length;
-
-  const [numVisibleReviews, setNumVisibleReviews] = useState(
-    CONSTANTS.NUM_REVIEWS_TO_DISPLAY_ON_LOAD,
-  );
-
-  const hasMoreReviews = numReviews > numVisibleReviews;
-
-  // TODO: Integrate pagination from listResultMetadata WCS-881
-  function handleSeeMoreClick() {
-    setNumVisibleReviews(
-      (prev) => (prev += CONSTANTS.NUM_REVIEWS_TO_DISPLAY_ON_LOAD),
-    );
-  }
-
+  const hasMoreReviews = reviews.length < total;
   const hasSources = sources?.simpleTire || sources?.googleShopping;
   const hasStickyBar = viewTireUrl && writeReviewUrl;
 
@@ -84,10 +66,10 @@ function Reviews({
           </div>
         </div>
       </GridItem>
-      {!!reviews && (
+      {reviews && (
         <>
           <GridItem gridColumnL="3/13" gridColumnXL="4/12">
-            {reviews.slice(0, numVisibleReviews).map((review, idx) => (
+            {reviews.map((review, idx) => (
               <ReviewCard
                 key={`${review.id}_${idx}`}
                 theme={THEME.LIGHT}
@@ -101,9 +83,7 @@ function Reviews({
               gridColumnXL="4/12"
               css={styles.seeMore}
             >
-              <Button onClick={handleSeeMoreClick}>
-                {ui('tireReviews.more')}
-              </Button>
+              <Button onClick={onSeeMoreClick}>{ui('tireReviews.more')}</Button>
             </GridItem>
           )}
         </>

@@ -6,17 +6,19 @@ import Reviews from '~/components/modules/ReviewDetail/Reviews/Reviews';
 import ReviewsHeader from '~/components/modules/ReviewDetail/ReviewsHeader/ReviewsHeader';
 import { ROUTE_MAP, ROUTES } from '~/lib/constants';
 import { interpolateRoute } from '~/lib/utils/routes';
+import { removeTireFromQueryParam } from '~/lib/utils/string';
 import { ProductDetailResponse } from '~/pages/api/product-detail';
 
 import { mapDataToHeader } from './mappers/header';
 import { mapDataToMeta } from './mappers/meta';
 import { mapDataToReviews } from './mappers/reviews';
+import usePagination from './ReviewDetailPage.hooks';
 
-export interface ProductDetailData {
+export interface ProductDetailReviewsData {
   serverData: ProductDetailResponse;
 }
 
-function ReviewDetailPage({ serverData }: ProductDetailData) {
+function ReviewDetailPage({ serverData }: ProductDetailReviewsData) {
   const router = useRouter();
   const { siteProductReviews, siteProduct } = serverData;
 
@@ -24,9 +26,9 @@ function ReviewDetailPage({ serverData }: ProductDetailData) {
   const siteReviews = mapDataToReviews({ siteProductReviews });
   const meta = mapDataToMeta({ siteProduct });
 
-  const { listResultMetadata, reviews, sources, title } = siteReviews;
+  const { total, reviews, sources, title } = siteReviews;
   const {
-    brand,
+    brand: brandObj,
     brandUrl,
     breadcrumbs,
     ratings,
@@ -35,21 +37,30 @@ function ReviewDetailPage({ serverData }: ProductDetailData) {
     tire,
   } = header;
 
+  const { brand, productLine } = router.query;
+  const brandName = removeTireFromQueryParam(brand);
+
   const writeReviewUrl = interpolateRoute(ROUTE_MAP[ROUTES.WRITE_REVIEW], {
-    brand: router.query.brand,
-    productLine: router.query.productLine,
+    brand,
+    productLine,
   });
 
   const viewTireUrl = interpolateRoute(ROUTE_MAP[ROUTES.PRODUCT_DETAIL], {
-    brand: router.query.brand,
-    productLine: router.query.productLine,
+    brand,
+    productLine,
   });
+
+  const { displayedReviews, handleSeeMoreClick } = usePagination(
+    brandName,
+    productLine.toString(),
+    reviews,
+  );
 
   return (
     <div css={navigationPaddingTop}>
       <Meta {...meta} />
       <ReviewsHeader
-        brand={brand}
+        brand={brandObj}
         brandUrl={brandUrl}
         breadcrumbs={breadcrumbs}
         ratings={ratings}
@@ -58,12 +69,13 @@ function ReviewDetailPage({ serverData }: ProductDetailData) {
         tire={tire}
       />
       <Reviews
-        reviews={reviews}
+        reviews={displayedReviews}
+        total={total}
         sources={sources}
         title={title}
-        listResultMetadata={listResultMetadata}
         viewTireUrl={viewTireUrl}
         writeReviewUrl={writeReviewUrl}
+        onSeeMoreClick={handleSeeMoreClick}
       />
     </div>
   );

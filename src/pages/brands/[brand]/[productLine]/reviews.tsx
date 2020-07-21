@@ -1,7 +1,8 @@
 import { GetServerSideProps } from 'next';
 
-import { ProductDetailData } from '~/components/pages/ProductDetail/ProductDetail.container';
-import ReviewDetailPage from '~/components/pages/ReviewDetailPage/ReviewDetailPage';
+import ReviewDetailPage, {
+  ProductDetailReviewsData,
+} from '~/components/pages/ReviewDetailPage/ReviewDetailPage.container';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
 import {
   backendGetProductDetail,
@@ -9,11 +10,11 @@ import {
 } from '~/lib/backend/product-detail';
 import { removeTireFromQueryParam } from '~/lib/utils/string';
 
-function Reviews(props: ProductDetailData) {
+function Reviews(props: ProductDetailReviewsData) {
   return <ReviewDetailPage {...props} />;
 }
 
-export const getServerSideProps: GetServerSideProps<ProductDetailData> = async (
+export const getServerSideProps: GetServerSideProps<ProductDetailReviewsData> = async (
   context,
 ) => {
   backendBootstrap({ request: context.req });
@@ -31,7 +32,7 @@ export const getServerSideProps: GetServerSideProps<ProductDetailData> = async (
     }),
   ]);
 
-  const props: ProductDetailData = {
+  const props: ProductDetailReviewsData = {
     serverData: { siteProduct, siteProductReviews },
   };
 
