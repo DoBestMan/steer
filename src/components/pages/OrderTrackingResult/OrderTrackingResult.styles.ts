@@ -13,12 +13,9 @@ const styles: StylesMap = {
     typography.bodyCopy,
     {
       a: {
-        borderBottom: `2px dotted ${COLORS.LIGHT.GRAY_70}`,
-        ':hover': {
-          borderColor: COLORS.GLOBAL.BLACK,
-        },
+        display: 'inline-flex',
       },
-      color: COLORS.LIGHT.GRAY_70,
+      color: COLORS.GLOBAL.BLACK,
       display: 'block',
       gridColumn: '2/5',
       [MQ.L]: {

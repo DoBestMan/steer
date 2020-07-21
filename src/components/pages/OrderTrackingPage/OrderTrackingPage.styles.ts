@@ -8,13 +8,12 @@ const styles: StylesMap = {
   description: [
     typography.largeCopy,
     {
-      '> button': {
-        borderBottom: `2px dotted ${COLORS.LIGHT.GRAY_70}`,
-        transition: 'border-color 100ms ease',
-        '&:hover': {
-          borderColor: COLORS.GLOBAL.BLACK,
+      '> button': [
+        typography.largeCopy,
+        {
+          display: 'inline-flex',
         },
-      },
+      ],
       textAlign: 'center',
     },
   ],

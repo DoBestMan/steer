@@ -11,12 +11,12 @@ const styles: StylesMap = {
         fontWeight: 'normal',
       },
     ],
-    a: {
-      borderBottom: `2px dotted ${COLORS.LIGHT.GRAY_70}`,
-      ':hover': {
-        borderColor: COLORS.GLOBAL.BLACK,
+    a: [
+      typography.largeCopy,
+      {
+        display: 'inline-flex',
       },
-    },
+    ],
     display: 'block',
     marginTop: SPACING.SIZE_20,
     textAlign: 'center',

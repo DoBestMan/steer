@@ -1,6 +1,5 @@
 import format from 'date-fns/format';
 
-import BaseLink from '~/components/global/Link/BaseLink';
 import Link from '~/components/global/Link/Link';
 import { SiteLink } from '~/data/models/SiteLink';
 import { THEME } from '~/lib/constants';
@@ -123,22 +122,22 @@ export function getCancelledContactCopy({
 }) {
   if (!isCustomerServiceEnabled) {
     return (
-      <BaseLink href={CUSTOMER_SERVICE_LINK} isExternal>
+      <Link theme={THEME.LIGHT} href={CUSTOMER_SERVICE_LINK} isExternal>
         {ui('tracking.cancelledSendEmail')}
-      </BaseLink>
+      </Link>
     );
   }
 
   return uiJSX('tracking.cancelledContactServiceEnabled', {
     phone: (
-      <BaseLink href={`tel:${customerServiceNumber.value}`}>
+      <Link theme={THEME.LIGHT} href={`tel:${customerServiceNumber.value}`}>
         {customerServiceNumber.display}
-      </BaseLink>
+      </Link>
     ),
     email: (
-      <BaseLink href={CUSTOMER_SERVICE_LINK} isExternal>
+      <Link theme={THEME.LIGHT} href={CUSTOMER_SERVICE_LINK} isExternal>
         send an email
-      </BaseLink>
+      </Link>
     ),
   });
 }
@@ -146,14 +145,14 @@ export function getCancelledContactCopy({
 export function getAdditionalInfoLinks() {
   return uiJSX('tracking.additionalInfoLinks', {
     shipping: (
-      <BaseLink key="shipping-link" href="/">
+      <Link theme={THEME.LIGHT} key="shipping-link" href="/">
         Shipping Policy
-      </BaseLink>
+      </Link>
     ),
     faq: (
-      <BaseLink key="faq-link" href="/">
+      <Link theme={THEME.LIGHT} key="faq-link" href="/">
         FAQ
-      </BaseLink>
+      </Link>
     ),
   });
 }
