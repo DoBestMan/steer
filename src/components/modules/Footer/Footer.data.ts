@@ -8,7 +8,10 @@ export const data = {
   company: {
     links: [
       { action: ROUTE_MAP[ROUTES.ABOUT], text: ui('links.about') },
-      { action: ROUTE_MAP[ROUTES.LEARN], text: ui('links.blog') },
+      {
+        action: ROUTE_MAP[ROUTES.LEARN],
+        text: ui('links.learnAboutTires'),
+      },
       { action: LINK_MAP[LINKS.APPLY], text: ui('links.apply') },
       {
         action: ROUTE_MAP[ROUTES.CUSTOMER_SUPPORT],
@@ -78,7 +81,10 @@ export const data = {
         action: ROUTE_MAP[ROUTES.RETURNS],
         text: ui('links.returns'),
       },
-      { action: ROUTE_MAP[ROUTES.FINANCING], text: ui('links.financing') },
+      {
+        action: ROUTE_MAP[ROUTES.FINANCING],
+        text: ui('links.financing'),
+      },
       {
         action: LINK_MAP[LINKS.REGISTER_TIRES],
         text: ui('links.registerTires'),
