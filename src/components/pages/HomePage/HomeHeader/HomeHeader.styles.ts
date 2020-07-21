@@ -19,7 +19,7 @@ import { typography } from '~/styles/typography.styles';
 
 export const CAR_ROTATION_DURATION = 400;
 export const SCENERY_OR_WEATHER_DURATION = 400;
-const VEHICLE_CONTAINER_DURATION = 2300;
+const VEHICLE_CONTAINER_DURATION = 6000;
 
 export const animations = {
   /* eslint-disable sort-keys */

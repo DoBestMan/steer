@@ -25,7 +25,7 @@ import {
 } from './HomeHeader.styles';
 
 const ANIMATION_DURATION = TIME.MS2000;
-const INTERVAL_CAR_ROTATION = TIME.MS5000;
+const INTERVAL_CAR_ROTATION = TIME.MS8000;
 
 function HomeHeader({
   body,
