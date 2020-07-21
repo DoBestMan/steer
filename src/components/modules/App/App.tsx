@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
 import { Transition, TransitionGroup } from 'react-transition-group';
 import { TransitionStatus } from 'react-transition-group/Transition';
@@ -21,8 +22,10 @@ const NavContainer = dynamic(() =>
   import('~/components/modules/Nav/Nav.container'),
 );
 
-function App({ children, route }: Props) {
+function App({ children, ...rest }: Props) {
   const { isSearchOpen } = useSearchContext();
+  const router = useRouter();
+  const route = router.route || rest.route;
 
   // If page transition (fade out/in) is not desired, add use case here
   const skipPageTransition = isSearchOpen;
