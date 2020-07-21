@@ -1,5 +1,3 @@
-import { useCallback } from 'react';
-
 import GridItem from '~/components/global/Grid/GridItem';
 import SubNavContentWrapper from '~/components/modules/SubNav/SubNavContentWrapper';
 import { useNavContext } from '~/context/Nav.context';
@@ -16,7 +14,6 @@ interface Props {
   info: SiteMenuBrowseItem['info'];
   isMobile: boolean;
   isOpen: boolean;
-  shouldSetFocus: boolean;
   siteMenuBrowseGroupList: SiteMenuBrowseGroupItem[];
 }
 
@@ -25,7 +22,6 @@ function Categories({
   info,
   isOpen,
   isMobile,
-  shouldSetFocus,
   siteMenuBrowseGroupList,
 }: Props) {
   const {
@@ -34,15 +30,6 @@ function Categories({
     handleCloseSubNav,
   } = useNavContext();
   const isSelected = activeCategory === category;
-  const focusRef = useCallback(
-    (node) => {
-      if (isSelected && shouldSetFocus && node !== null) {
-        // focus on the first list item element when category is selected
-        node.firstChild.focus();
-      }
-    },
-    [isSelected, shouldSetFocus],
-  );
   return (
     <SubNavContentWrapper
       isMobile={isMobile}
@@ -59,11 +46,7 @@ function Categories({
       >
         <p css={[typography.jumboHeadline, styles.mobileHeader]}>{category}</p>
         {siteMenuBrowseGroupList.map((props, idx) => (
-          <BrowseTiresGroupItem
-            key={idx}
-            focusRef={idx === 0 ? focusRef : undefined}
-            {...props}
-          />
+          <BrowseTiresGroupItem key={idx} {...props} />
         ))}
         {info && <CategoryInfo {...info} />}
       </GridItem>

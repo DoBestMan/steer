@@ -10,12 +10,15 @@ import Image from '~/components/global/Image/Image';
 import BaseLink from '~/components/global/Link/BaseLink';
 import { useNavContext } from '~/context/Nav.context';
 import { ui } from '~/lib/utils/ui-dictionary';
+import { disableGlobalFocus } from '~/styles/document/accessibility.styles';
 import { layout } from '~/styles/layout.styles';
 
 import { useSearchContext } from '../Search/Search.context';
 import { animations, styles } from './Nav.styles';
 import { NavThemeObject } from './Nav.theme';
 import NavBar from './NavBar';
+
+export const NAV_ID = 'main-navigation';
 
 interface Props {
   isHomepage?: boolean;
@@ -61,33 +64,35 @@ function Nav({ isHomepage }: Props) {
         ];
 
         return (
-          <Grid as="nav" css={rootStyles}>
-            <GridItem
-              css={[layout.container, styles.container]}
-              gridColumn="2/4"
-            >
-              <BaseLink
-                href="/"
-                css={[layout.container, layout.centeredVertical]}
+          <div id={NAV_ID} tabIndex={0} css={disableGlobalFocus}>
+            <Grid as="nav" css={rootStyles}>
+              <GridItem
+                css={[layout.container, styles.container]}
+                gridColumn="2/4"
               >
-                <Image
-                  altText={ui('logo.alt')}
-                  css={styles.logo}
-                  src={theme.logoUrl}
-                />
-              </BaseLink>
-            </GridItem>
-            <NavBar
-              handleOnNavLinkClick={createSelectLinkHandler}
-              handleOnSearchClick={toggleIsSearchOpen}
-              handleOnSubNavClick={toggleSubNav}
-              isHomepage={isHomepage}
-              links={links}
-              // TODO number to be determined via cookies
-              // numberOfCartItems={4}
-              theme={theme}
-            />
-          </Grid>
+                <BaseLink
+                  href="/"
+                  css={[layout.container, layout.centeredVertical]}
+                >
+                  <Image
+                    altText={ui('logo.alt')}
+                    css={styles.logo}
+                    src={theme.logoUrl}
+                  />
+                </BaseLink>
+              </GridItem>
+              <NavBar
+                handleOnNavLinkClick={createSelectLinkHandler}
+                handleOnSearchClick={toggleIsSearchOpen}
+                handleOnSubNavClick={toggleSubNav}
+                isHomepage={isHomepage}
+                links={links}
+                // TODO number to be determined via cookies
+                // numberOfCartItems={4}
+                theme={theme}
+              />
+            </Grid>
+          </div>
         );
       }}
     </Transition>

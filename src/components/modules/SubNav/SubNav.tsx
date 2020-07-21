@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
@@ -28,7 +28,6 @@ function SubNav({ siteMenuBrowseList, siteMenuLearn }: SiteMenu) {
   } = useNavContext();
   const { isMobile } = useBreakpoints();
 
-  const prevCategory = useRef(activeCategory);
   useEffect(() => {
     if (!isSubNavOpen) {
       return;
@@ -44,7 +43,6 @@ function SubNav({ siteMenuBrowseList, siteMenuLearn }: SiteMenu) {
       handleClearLink();
       createSelectCategoryHandler('')();
     }
-    prevCategory.current = activeCategory;
   }, [
     activeCategory,
     activeLink,
@@ -54,11 +52,6 @@ function SubNav({ siteMenuBrowseList, siteMenuLearn }: SiteMenu) {
     isMobile,
     siteMenuBrowseList,
   ]);
-
-  // focus shifts only if subnav is already open and user selects new tire category
-  const shouldSetFocus = !!(
-    prevCategory.current && prevCategory?.current !== activeCategory
-  );
 
   return (
     <>
@@ -106,7 +99,6 @@ function SubNav({ siteMenuBrowseList, siteMenuLearn }: SiteMenu) {
               <SubNavContent
                 siteMenuBrowseList={siteMenuBrowseList}
                 activeLink={activeLink}
-                shouldSetFocus={shouldSetFocus}
                 siteMenuLearn={siteMenuLearn}
               />
             </GridItem>

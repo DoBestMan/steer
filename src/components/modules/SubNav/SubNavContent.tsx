@@ -9,11 +9,10 @@ import LearnContainer from './Learn/Learn.container';
 
 interface Props extends SiteMenu {
   activeLink: string;
-  shouldSetFocus: boolean;
 }
+
 export default function SubNavContent({
   activeLink,
-  shouldSetFocus,
   siteMenuLearn,
   siteMenuBrowseList,
 }: Props) {
@@ -23,7 +22,6 @@ export default function SubNavContent({
       <BrowseTires
         isOpen={activeLink === NAV_TARGETS.BROWSE_TIRES}
         isMobile={isMobile}
-        shouldSetFocus={shouldSetFocus}
         siteMenuBrowseList={siteMenuBrowseList}
       />
       <LearnContainer

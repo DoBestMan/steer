@@ -81,6 +81,8 @@ function SubNavModal({
     >
       {(state) => (
         <FocusTrap
+          shouldFocusOnOpen={false}
+          shouldReturnFocus={false}
           css={state === EXITED && styles.focusHide}
           active={isOpen && state === ENTERED}
           ref={navRef}
