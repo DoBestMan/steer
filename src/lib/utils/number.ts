@@ -29,6 +29,10 @@ export function getRandomMinMax(min: number, max: number) {
   return Math.random() * (max - min) + min;
 }
 
+export function getRandomInteger(min: number, max: number) {
+  return Math.floor(getRandomMinMax(min, max));
+}
+
 export function mapNumberToRange(
   mappedNumber: number,
   inRange: [number, number],

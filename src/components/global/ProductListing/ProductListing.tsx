@@ -1,3 +1,5 @@
+import { useRef, useState } from 'react';
+
 import Image from '~/components/global/Image/Image';
 import BaseLink from '~/components/global/Link/BaseLink';
 import Prices from '~/components/global/Prices/Prices';
@@ -19,6 +21,7 @@ function ProductListing({
   brand,
   defaultImage,
   highlight,
+  hoverImage,
   priceList,
   siteCatalogPromotionInfo,
   imageList,
@@ -29,9 +32,20 @@ function ProductListing({
   rating,
   size,
 }: ProductListingProps) {
-  const displayedImage =
+  const [isHovered, setIsHovered] = useState(false);
+  const standardImage = useRef(
     imageList.find((image) => image.productImageType === defaultImage) ||
-    imageList[0];
+      imageList[0],
+  );
+  const hoveredImage = useRef(
+    imageList.find((image) => image.productImageType === hoverImage) ||
+      imageList[1] ||
+      imageList[0],
+  );
+
+  const displayedImage = isHovered
+    ? hoveredImage.current
+    : standardImage.current;
 
   const numberOfPromosToDisplay =
     siteCatalogPromotionInfo && siteCatalogPromotionInfo.count > MAX_PROMOS
@@ -40,8 +54,20 @@ function ProductListing({
 
   const imageWidths = isHighlighted ? [250, 250, 300] : [140, 180, 200];
 
+  function handleMouseEnter() {
+    setIsHovered(true);
+  }
+
+  function handleMouseLeave() {
+    setIsHovered(false);
+  }
+
   return (
-    <div css={[styles.root, isHighlighted && styles.rootHighlighted]}>
+    <div
+      css={[styles.root, isHighlighted && styles.rootHighlighted]}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       <div css={[styles.image, isHighlighted && styles.imageHighlighted]}>
         {highlight && <div css={styles.promoDisc}>{highlight}</div>}
         <Image

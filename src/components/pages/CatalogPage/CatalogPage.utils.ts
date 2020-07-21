@@ -1,3 +1,7 @@
+import { SiteImage } from '~/data/models/SiteImage';
+import { PRODUCT_IMAGE_TYPES } from '~/lib/constants/productImage.types';
+import { getRandomInteger } from '~/lib/utils/number';
+
 /*
  * Splits diameter/category string at second `-` to get content on either side
  * eg: size: `12-inch-winter-tires`
@@ -19,5 +23,23 @@ export function getDiameterCategory(size: string | string[]) {
   return {
     category: regexArr[3],
     diameter: regexArr[1],
+  };
+}
+
+/*
+ * Selects a random image type to use as the default, and an alternative to be used on hover
+ */
+export function getProductDisplayImages(
+  imageList: Array<{
+    image: SiteImage;
+    productImageType: PRODUCT_IMAGE_TYPES;
+  }>,
+) {
+  const imageTypes = imageList.map((image) => image.productImageType);
+  const randomImageType = imageTypes[getRandomInteger(0, imageTypes.length)];
+  const hoverImageType = imageTypes.find((type) => type !== randomImageType);
+  return {
+    default: randomImageType,
+    hover: hoverImageType,
   };
 }

@@ -2,9 +2,11 @@ import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import ProductListing from '~/components/global/ProductListing/ProductListing';
 import ProductListingPlaceholder from '~/components/global/ProductListing/ProductListingPlaceholder';
+import { getProductDisplayImages } from '~/components/pages/CatalogPage/CatalogPage.utils';
 import { SiteCatalogProductItem } from '~/data/models/SiteCatalogProductItem';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { BREAKPOINT_SIZES } from '~/lib/constants';
+
 interface Props {
   isLoading?: boolean;
   placeholders?: number;
@@ -51,6 +53,7 @@ function ProductGrid({ productList }: Props) {
           }
           const pattern = HIGHLIGHT_PATTERNS[bk];
           const isHighlighted = (i - pattern.OFFSET) % pattern.MULTIPLIER === 0;
+          const displayImages = getProductDisplayImages(product.imageList);
           return (
             <GridItem
               gridColumn={isHighlighted ? 'span 4' : 'span 2'}
@@ -58,7 +61,12 @@ function ProductGrid({ productList }: Props) {
               gridColumnL={isHighlighted ? 'span 6' : 'span 3'}
               key={`${product.name}-${i}`}
             >
-              <ProductListing {...product} isHighlighted={isHighlighted} />
+              <ProductListing
+                {...product}
+                isHighlighted={isHighlighted}
+                defaultImage={displayImages.default}
+                hoverImage={displayImages.hover}
+              />
             </GridItem>
           );
         })}

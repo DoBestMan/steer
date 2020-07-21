@@ -10,5 +10,6 @@ export type ProductListingProps = Omit<
   | 'topPicksAttribute'
 > & {
   defaultImage?: PRODUCT_IMAGE_TYPES;
+  hoverImage?: PRODUCT_IMAGE_TYPES;
   isHighlighted?: boolean;
 };
