@@ -14,7 +14,6 @@ import StarsWithRating from '~/components/global/Stars/StarsWithRating';
 import { SiteCatalogBrand } from '~/data/models/SiteCatalogBrand';
 import { THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
-import { typography } from '~/styles/typography.styles';
 
 import styles from './ReviewsHeader.styles';
 
@@ -47,10 +46,7 @@ function ReviewsHeader({
           <BrandLogoOrLabel brand={brand} />
         </BaseLink>
         <p css={styles.title}>{ui('reviews.tireReviews', { tire })}</p>
-        <StarsWithRating
-          number={ratingStars}
-          typographyStyle={typography.labelHeadlineLarge}
-        />
+        <StarsWithRating number={ratingStars} />
       </GridItem>
       <GridItem
         gridColumnL="3/13"

@@ -4,12 +4,12 @@ import { SiteReviews } from '~/data/models/SiteReviews';
 import { layout } from '~/styles/layout.styles';
 import { typography } from '~/styles/typography.styles';
 
+import HomeRatings from './HomeRatings/HomeRatings';
+import styles from './HomeReviews.styles';
 import Press from './Press/Press';
-import Ratings from './Ratings/Ratings';
-import styles from './Reviews.styles';
 import UserReview from './UserReview/UserReview';
 
-function Reviews({
+function HomeReviews({
   body,
   link,
   linkLabel,
@@ -23,7 +23,7 @@ function Reviews({
     <>
       <GridItem gridColumnM="2/5" gridColumnL="3/7">
         <h2 css={[typography.primaryHeadline, styles.title]}>{title}</h2>
-        <Ratings
+        <HomeRatings
           ratingStars={ratingStars}
           ratingLabel={ratingLabel}
           ratingLabelIcon={ratingLabelIcon}
@@ -31,7 +31,7 @@ function Reviews({
         <div css={[typography.bodyCopy, styles.description]}>{body}</div>
         <Link
           href={link.href}
-          css={[layout.hideOnSmall, styles.link]}
+          css={[typography.primarySubhead, layout.hideOnSmall, styles.link]}
           isExternal={link.isExternal}
         >
           {linkLabel}
@@ -47,4 +47,4 @@ function Reviews({
   );
 }
 
-export default Reviews;
+export default HomeReviews;

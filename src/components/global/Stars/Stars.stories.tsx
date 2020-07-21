@@ -2,7 +2,6 @@ import { boolean, number, select } from '@storybook/addon-knobs';
 
 import Grid from '~/components/global/Grid/Grid';
 import { COLORS } from '~/lib/constants';
-import { typography } from '~/styles/typography.styles';
 
 import { default as StarsComponent } from './Stars';
 import { default as StarsWithRatingComponent } from './StarsWithRating';
@@ -55,7 +54,6 @@ export function StarsWithRating() {
         color={color}
         isSmall={boolean('Small', false)}
         number={number('Number', 4.8, starOptions)}
-        typographyStyle={typography.labelHeadlineLarge}
       />
     </Grid>
   );

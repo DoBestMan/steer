@@ -22,7 +22,7 @@ function UserReview({ authorImage, authorName, body, title }: SiteReviewItem) {
         gridColumnL="1/4"
         css={[typography.bodyCopy, styles.review]}
       >
-        <div css={styles.title}>{title}</div>
+        <div css={[typography.primarySubhead, styles.title]}>{title}</div>
         {body}
         <br />
         {authorName}

@@ -14,7 +14,6 @@ import StarsWithRating from '~/components/global/Stars/StarsWithRating';
 import { SiteLink } from '~/data/models/SiteLink';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { uiJSX } from '~/lib/utils/ui-dictionary-jsx';
-import { typography } from '~/styles/typography.styles';
 
 import styles from './Reviews.styles';
 
@@ -86,12 +85,7 @@ function Reviews({
             )}
           </div>
           <div css={styles.ratingContainer}>
-            {!!ratingStars && (
-              <StarsWithRating
-                number={ratingStars}
-                typographyStyle={typography.labelHeadlineLarge}
-              />
-            )}
+            {!!ratingStars && <StarsWithRating number={ratingStars} />}
             {writeReviewLink && (
               <Link
                 css={styles.cta}

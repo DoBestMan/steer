@@ -3,11 +3,11 @@ import { number } from '@storybook/addon-knobs';
 import Grid from '~/components/global/Grid/Grid';
 import { COLORS } from '~/lib/constants';
 
-import Reviews from './Reviews';
-import { mockReviews } from './Reviews.mocks';
+import HomeReviews from './HomeReviews';
+import { mockReviews } from './HomeReviews.mocks';
 
 export default {
-  component: Reviews,
+  component: HomeReviews,
   title: 'Homepage/Reviews',
 };
 
@@ -21,7 +21,7 @@ const ratingOptions = {
 export function ReviewsWithKnobs() {
   return (
     <Grid css={{ backgroundColor: COLORS.GLOBAL.BLACK }}>
-      <Reviews
+      <HomeReviews
         {...mockReviews}
         ratingStars={number('Rating', mockReviews.ratingStars, ratingOptions)}
       />

@@ -4,7 +4,7 @@ import Grid from '~/components/global/Grid/Grid';
 import { useSearchContext } from '~/components/modules/Search/Search.context';
 import DriverInsights from '~/components/pages/HomePage/DriverInsights/DriverInsights';
 import HomeHeader from '~/components/pages/HomePage/HomeHeader/HomeHeader';
-import Reviews from '~/components/pages/HomePage/Reviews/Reviews';
+import HomeReviews from '~/components/pages/HomePage/HomeReviews/HomeReviews';
 import { SiteGlobals } from '~/data/models/SiteGlobals';
 import { SiteHero } from '~/data/models/SiteHero';
 import { SiteInsights } from '~/data/models/SiteInsights';
@@ -142,7 +142,7 @@ function HomePage({
             ]}
           >
             <DriverInsights {...siteInsights} />
-            <Reviews {...siteReviews} />
+            <HomeReviews {...siteReviews} />
           </Grid>
         </div>
       </div>

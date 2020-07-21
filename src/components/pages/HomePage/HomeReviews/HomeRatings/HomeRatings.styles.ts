@@ -1,5 +1,7 @@
 import { COLORS, MQ, SPACING } from '~/lib/constants';
 
+export const homeRatingGradientID = 'homepage-rating';
+
 const styles = {
   container: {
     margin: `0 0 ${SPACING.SIZE_40}px`,
@@ -15,6 +17,18 @@ const styles = {
   ratingLabel: {
     alignItems: 'center',
     color: COLORS.DARK.GRAY_40,
+    display: 'flex',
+  },
+  stars: {
+    svg: {
+      height: 26,
+      fill: `url(#${homeRatingGradientID})`,
+      width: 'auto',
+    },
+    marginRight: SPACING.SIZE_15,
+  },
+  starsContainer: {
+    color: COLORS.GLOBAL.ORANGE,
     display: 'flex',
   },
   title: {
