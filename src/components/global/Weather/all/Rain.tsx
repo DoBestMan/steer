@@ -30,9 +30,9 @@ class Rain {
 }
 
 const RAIN_WIDTH = 1;
-const WIND = 4;
+const WIND = -4;
 const RAIN_COLOR = '#c9c9c9';
-const SPEED = 25;
+const SPEED = 15;
 
 function Snow(props: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -54,7 +54,7 @@ function Snow(props: Props) {
     const dpr = 1;
 
     const ctx = canvasRef.current.getContext('2d');
-    let mp = Math.round(width / 10); //max particles
+    let mp = Math.round(width / 18); //max particles
     if (mp < 10) {
       mp = 10;
     }
