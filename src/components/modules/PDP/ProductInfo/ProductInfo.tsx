@@ -1,3 +1,4 @@
+import { ContentModalProps } from '~/components/global/Modal/Modal.types';
 import { PromoTagProps } from '~/components/global/PromoTag/PromoTag';
 import PromoTagCarousel from '~/components/global/PromoTag/PromoTagCarousel';
 import { SiteCatalogBrand } from '~/data/models/SiteCatalogBrand';
@@ -45,6 +46,10 @@ export interface ProductInfoProps {
   volatileAvailability?: boolean;
 }
 
+interface Props extends ProductInfoProps {
+  openDynamicModal: (modalData: ContentModalProps) => void;
+}
+
 function ProductInfo({
   availableSizes,
   brand,
@@ -57,6 +62,7 @@ function ProductInfo({
   onChangeSize,
   onClickChangeQuantity,
   onClickChangeSize,
+  openDynamicModal,
   price,
   priceLabel,
   productName,
@@ -70,7 +76,7 @@ function ProductInfo({
   size,
   sizeFinder,
   startingPrice,
-}: ProductInfoProps) {
+}: Props) {
   const shouldShowCrossSell =
     !price && !callForPricing && size && sameSizeSearchResults;
   const isTireLine = !size;
@@ -148,7 +154,10 @@ function ProductInfo({
       </div>
       {promoTags && (
         <div css={styles.promoTags}>
-          <PromoTagCarousel tags={promoTags} />
+          <PromoTagCarousel
+            tags={promoTags}
+            openDynamicModal={openDynamicModal}
+          />
         </div>
       )}
       {shouldShowCrossSell && (

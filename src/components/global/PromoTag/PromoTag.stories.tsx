@@ -30,6 +30,7 @@ const iconOptions = {
 };
 
 const handleClick = action('click-promo-tag');
+const mockOpenDynamicModal = action('open-dynamic-modal');
 
 export function PromoTagWithKnobs() {
   return (
@@ -122,5 +123,10 @@ export function PromoTagCarousel() {
     },
   ];
 
-  return <PromoTagCarouselComponent tags={tags} />;
+  return (
+    <PromoTagCarouselComponent
+      openDynamicModal={mockOpenDynamicModal}
+      tags={tags}
+    />
+  );
 }

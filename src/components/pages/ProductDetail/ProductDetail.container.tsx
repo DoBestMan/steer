@@ -96,6 +96,7 @@ function ProductDetailContainer({ serverData }: ProductDetailData) {
                   onClickChangeQuantity={onClickChangeQuantity}
                   onClickChangeSize={onClickChangeSize}
                   onCloseSizeSelector={onCloseSizeSelector}
+                  openDynamicModal={openDynamicModal}
                   {...productInfo}
                 />
               </GridItem>

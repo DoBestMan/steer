@@ -1,11 +1,13 @@
 import Icon from '~/components/global/Icon/Icon';
 import { SiteCatalogPromotion } from '~/data/models/SiteCatalogPromotionInfo';
+import { SiteDynamicModal } from '~/data/models/SiteDynamicModal';
 import { SitePromotionStyleEnum } from '~/data/models/SitePromotion';
 
 import styles, { clickableStyles } from './PromoTag.styles';
 
 export interface PromoTagProps extends SiteCatalogPromotion {
   handleClick?: (event: React.MouseEvent) => void;
+  siteDynamicModal?: SiteDynamicModal;
 }
 
 function PromoTag({

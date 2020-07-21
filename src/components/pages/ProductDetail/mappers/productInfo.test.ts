@@ -10,10 +10,10 @@ describe('pages/ProductDetails/mappers/breadcrumbs', () => {
   it('returns parsed product info props', () => {
     expect(
       mapDataToProductInfo({
+        globals: globalsMock,
+        router: routerMock,
         siteProduct: siteProductMock,
         siteProductReviews: siteProductReviewsMock,
-        router: routerMock,
-        globals: globalsMock,
       }),
     ).toMatchObject({
       availableSizes: 3,

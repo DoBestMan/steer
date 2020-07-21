@@ -71,10 +71,10 @@ export function mapDataToProductInfo({
 
   const availableSizes = siteProductLineAvailableSizeList?.length;
 
-  // TODO: Add modals handlers
   const promoTags: PromoTagProps[] = siteProductPromotions.map((item) => ({
-    label: item.sitePromotion.label,
     icon: item.sitePromotion.icon,
+    label: item.sitePromotion.label,
+    siteDynamicModal: item.siteDynamicModal,
     style: item.sitePromotion.style,
   }));
 
