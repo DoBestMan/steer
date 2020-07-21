@@ -4,6 +4,8 @@ import Button from '~/components/global/Button/Button';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import HorizontalNumberPicker from '~/components/global/HorizontalNumberPicker/HorizontalPickerNoCarousel';
+import Icon from '~/components/global/Icon/Icon';
+import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Input from '~/components/global/Input/Input';
 import Markdown from '~/components/global/Markdown/Markdown';
 import TitleRadio from '~/components/global/Radio/TitleRadio';
@@ -29,10 +31,12 @@ import {
 import styles from './ReviewForm.styles';
 
 interface Props {
+  onSearchVehicle?: (event: React.MouseEvent) => void;
   queryParams: {
     [name: string]: string | string[];
   };
   tire: string;
+  vehicle?: string | null;
 }
 
 interface RootFormValue {
@@ -88,11 +92,20 @@ const initialState = {
   },
 };
 
-function ReviewForm({ tire, queryParams }: Props) {
+function ReviewForm({ tire, queryParams, vehicle, onSearchVehicle }: Props) {
   const [formValues, setFormValues] = useState<FormValues>(initialState);
   const [pickerLabels, setPickerLabels] = useState<PickerLabels>({});
   const [isFormValid, setIsFormValid] = useState<boolean>(false);
   const [toastMessage, setToastMessage] = useState<TOAST_TYPE | string>('');
+
+  useEffect(() => {
+    if (vehicle) {
+      setFormValues((prev) => ({
+        ...prev,
+        [FIELDS.VEHICLE]: vehicle,
+      }));
+    }
+  }, [vehicle]);
 
   const brandName = removeTireFromQueryParam(queryParams.brand);
 
@@ -254,6 +267,14 @@ function ReviewForm({ tire, queryParams }: Props) {
     });
   };
 
+  const handleClearVehicle = (event: React.MouseEvent) => {
+    event.preventDefault();
+    setFormValues((prev) => ({
+      ...prev,
+      [FIELDS.VEHICLE]: '',
+    }));
+  };
+
   return (
     <Grid>
       <GridItem gridColumnM="3/7" gridColumnL="3/12" gridColumnXL="4/11">
@@ -399,7 +420,6 @@ function ReviewForm({ tire, queryParams }: Props) {
             </div>
           </fieldset>
 
-          {/* TODO: Implement vehicle modal WCS-1013 */}
           <fieldset css={styles.group}>
             <h2 css={styles.groupTitle}>
               {ui('reviews.form.sections.vehicle.title')}
@@ -408,13 +428,30 @@ function ReviewForm({ tire, queryParams }: Props) {
               {ui('reviews.form.sections.vehicle.description')}
             </p>
             <div css={styles.input}>
-              {/* TODO: hook input up to vehicle search during integration */}
-              <Input
-                id="vehicle"
-                value={formValues[FIELDS.VEHICLE]}
-                onChange={handleSetFormFieldValue(FIELDS.VEHICLE)}
-                label={ui('reviews.form.sections.vehicle.vehicleInfo')}
-              />
+              <div css={styles.vehicleInput}>
+                <Input
+                  aria-label={ui('reviews.form.sections.vehicle.search')}
+                  id="vehicle"
+                  readonly
+                  value={formValues[FIELDS.VEHICLE]}
+                  onChange={handleSetFormFieldValue(FIELDS.VEHICLE)}
+                  label={ui('reviews.form.sections.vehicle.label')}
+                />
+                {onSearchVehicle && (
+                  <button
+                    onClick={onSearchVehicle}
+                    css={styles.vehicleSearchButton}
+                  >
+                    <Icon name={ICONS.CHEVRON_RIGHT} />
+                  </button>
+                )}
+              </div>
+              <button
+                onClick={handleClearVehicle}
+                css={styles.vehicleClearSearch}
+              >
+                {ui('reviews.form.sections.vehicle.clear')}
+              </button>
             </div>
           </fieldset>
 
@@ -499,7 +536,6 @@ function ReviewForm({ tire, queryParams }: Props) {
           </fieldset>
 
           <div css={[styles.group, styles.buttonGroup]}>
-            {/* TODO: implement captcha - WCS-797 */}
             <Button
               css={styles.submitButton}
               isDisabled={!isFormValid}

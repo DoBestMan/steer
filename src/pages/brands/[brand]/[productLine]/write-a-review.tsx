@@ -2,7 +2,7 @@ import { GetServerSideProps } from 'next';
 
 import WriteAReviewPage, {
   WriteAReviewServerData,
-} from '~/components/pages/WriteAReviewPage/WriteAReviewPage';
+} from '~/components/pages/WriteAReviewPage/WriteAReviewPage.container';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
 import { backendGetProductDetail } from '~/lib/backend/product-detail';
 import { removeTireFromQueryParam } from '~/lib/utils/string';

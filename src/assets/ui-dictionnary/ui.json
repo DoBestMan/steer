@@ -444,7 +444,9 @@
         "vehicle": {
           "title": "Your vehicle",
           "description": "Please enter the make, model, year and trim of the vehicle you purchased these tires for.",
-          "vehicleInfo": "Vehicle info"
+          "label": "Vehicle info",
+          "search": "Search for your vehicle",
+          "clear": "Clear info"
         },
         "miles": {
           "title": "How many miles will you put on these tires in a year?",

@@ -29,6 +29,7 @@ interface Props {
   label: string;
   onChange: (value: string) => void;
   onKeyDown?: (event: React.KeyboardEvent) => void;
+  readonly?: boolean;
   required?: boolean;
   type?: string;
   validationFn?: (value: string) => void;
@@ -45,6 +46,7 @@ function Input(props: Props, ref: RefType) {
     label,
     onChange,
     onKeyDown,
+    readonly,
     required,
     type,
     validationFn,
@@ -101,7 +103,7 @@ function Input(props: Props, ref: RefType) {
 
   const commonProps = {
     'aria-required': required,
-    disabled,
+    disabled: disabled || readonly,
     id: inputId,
     onBlur: handleOnBlur,
     onChange: handleOnChange,
@@ -120,7 +122,7 @@ function Input(props: Props, ref: RefType) {
       css={[
         styles.container,
         isFocused && focusStyles.container,
-        disabled && styles.disabled,
+        disabled && !readonly && styles.disabled,
         isTextArea && textAreaStyles.container,
         showErrorState && !disabled && errorStyles.container,
       ]}

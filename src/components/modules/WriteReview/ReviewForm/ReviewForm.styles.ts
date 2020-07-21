@@ -1,9 +1,23 @@
-import { BORDERS, COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
+import {
+  BORDERS,
+  COLORS,
+  MQ,
+  RADIUS,
+  SPACING,
+  StylesMap,
+} from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const PICKER_MAX_WIDTH = {
   M: 420,
   L: 510,
+};
+
+// These height and widths need to subtract the border to
+// prevent some whitespace from showing through
+const VEHICLE_BUTTON = {
+  HEIGHT: `calc(100% - ${SPACING.SIZE_02}px)`,
+  WIDTH: `calc(100% - ${SPACING.SIZE_20}px - ${SPACING.SIZE_02}px)`,
 };
 
 const styles: StylesMap = {
@@ -84,9 +98,38 @@ const styles: StylesMap = {
       },
     },
   ],
+
   titleTire: {
     color: COLORS.GLOBAL.ORANGE,
     display: 'block',
+  },
+  vehicleClearSearch: [
+    typography.smallCopyTight,
+    {
+      color: COLORS.LIGHT.GRAY_70,
+      marginTop: SPACING.SIZE_15,
+    },
+  ],
+  vehicleInput: {
+    position: 'relative',
+  },
+  vehicleSearchButton: {
+    alignItems: 'center',
+    border: BORDERS.SOLID_TRANSPARENT_2PX,
+    borderRadius: RADIUS.RADIUS_15,
+    display: 'flex',
+    height: VEHICLE_BUTTON.HEIGHT,
+    justifyContent: 'flex-end',
+    outline: 0,
+    paddingRight: SPACING.SIZE_20,
+    position: 'absolute',
+    textAlign: 'right',
+    top: 0,
+    width: VEHICLE_BUTTON.WIDTH,
+    // eslint-disable-next-line sort-keys
+    '&:focus': {
+      borderColor: COLORS.GLOBAL.ORANGE,
+    },
   },
 };
 
