@@ -15,6 +15,7 @@ import {
   StylesMap,
   TIME,
 } from '~/lib/constants';
+import { typography } from '~/styles/typography.styles';
 
 export const CAR_ROTATION_DURATION = 400;
 export const SCENERY_OR_WEATHER_DURATION = 400;
@@ -131,7 +132,10 @@ export const styles: StylesMap = {
   description: {
     transition: `all ${TIME.MS300}ms ${EASING.CUBIC_EASE_OUT}`,
     transitionDelay: `${TIME.MS100}ms`,
+
+    [MQ.XL]: typography.largeCopy,
   },
+
   eyebrow: {
     alignItems: 'baseline',
     display: 'inline-flex',
