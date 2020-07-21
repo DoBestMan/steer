@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import queryString from 'query-string';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Product as ProductLinkingData } from 'schema-dts';
 
 import { BreadcrumbsItem } from '~/components/global/Breadcrumbs/Breadcrumbs';
@@ -42,6 +42,7 @@ import { mapDataToReviews } from './mappers/reviews';
 import { mapDataToSizeFinder } from './mappers/sizeFinder';
 import { mapDataToStickyBar } from './mappers/stickyBar';
 import { mapDataToTechnicalSpecs } from './mappers/technicalSpecs';
+import { useProductDetailContext } from './ProductDetail.context';
 
 export type QueryParams = Record<string, string>;
 
@@ -52,7 +53,6 @@ interface ProductDetailData {
 export type ParsedProductInfoProps = Omit<
   ProductInfoProps,
   | 'onChangeSize'
-  | 'onClickChangeQuantity'
   | 'onClickChangeSize'
   | 'onCloseSizeSelector'
   | 'handleChangeSize'
@@ -64,11 +64,7 @@ export type ParsedSizeFinderProps = Omit<SizeFinderProps, 'onChange'>;
 
 export type ParsedStickyBarProps = Omit<
   PDPStickyBarProps,
-  | 'avoidSection'
-  | 'darkSection'
-  | 'onClickAddToCart'
-  | 'onClickChangeQuantity'
-  | 'onClickFindYourSize'
+  'avoidSection' | 'darkSection' | 'onClickAddToCart' | 'onClickFindYourSize'
 >;
 
 interface ResponseProps extends Pick<SiteProductLine, 'assetList'> {
@@ -84,7 +80,6 @@ interface ResponseProps extends Pick<SiteProductLine, 'assetList'> {
   meta: MetaProps;
   onChangeSize: (value: string) => void;
   onClickAddToCart: () => void;
-  onClickChangeQuantity: (position: 'front' | 'rear') => () => void;
   onClickChangeSize: () => void;
   onClickFindYourSize: () => void;
   onCloseSizeSelector: () => void;
@@ -100,11 +95,14 @@ interface ResponseProps extends Pick<SiteProductLine, 'assetList'> {
 }
 
 export const CONSTANTS = {
+  DEFAULT_QUANTITY: 4,
+  DEFAULT_FRONT_AND_REAR_QUANTITY: 2,
   REVIEWS_ANCHOR: 'SiteProductReviews',
   TECH_SPECS_ANCHOR: 'SiteProductSpecs',
 };
 
 function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
+  const { quantity, setQuantity } = useProductDetailContext();
   const router = useRouter();
   const { query, asPath, pathname } = router;
   const search = useSearchContext();
@@ -135,6 +133,24 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
 
   const assetList = siteProductLine.assetList;
 
+  useEffect(() => {
+    if (!query.tireSize || quantity.front) {
+      return;
+    }
+
+    if (query.rearSize) {
+      setQuantity({
+        front: CONSTANTS.DEFAULT_FRONT_AND_REAR_QUANTITY,
+        rear: CONSTANTS.DEFAULT_FRONT_AND_REAR_QUANTITY,
+      });
+      return;
+    }
+
+    setQuantity({
+      front: CONSTANTS.DEFAULT_QUANTITY,
+    });
+  }, [quantity, query, setQuantity]);
+
   // Size selector
   const toggleSizeSelector = useCallback(() => {
     setIsSizeSelectorOpen(!isSizeSelectorOpen);
@@ -144,7 +160,6 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
     setIsSizeSelectorOpen(false);
   }, [setIsSizeSelectorOpen]);
 
-  const handleClickChangeQuantity = (_: 'front' | 'rear') => () => {};
   const handleClickChangeSize = () => {
     toggleSizeSelector();
   };
@@ -216,7 +231,6 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
     }),
     onChangeSize: handleChangeSize,
     onClickAddToCart: handleClickAddToCart,
-    onClickChangeQuantity: handleClickChangeQuantity,
     onClickChangeSize: handleClickChangeSize,
     onClickFindYourSize: handleClickFindYourSize,
     onCloseSizeSelector: handleCloseSizeSelector,

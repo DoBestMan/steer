@@ -1,16 +1,19 @@
+import { useState } from 'react';
+
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Prices from '~/components/global/Prices/Prices';
+import { useProductDetailContext } from '~/components/pages/ProductDetail/ProductDetail.context';
 import { SitePrice } from '~/data/models/SitePrice';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
 
+import QuantitySelectorContainer from '../QuantitySelector/QuantitySelector.container';
 import styles from './MultiSizeButton.styles';
 import { ProductInfoProps } from './ProductInfo';
 
 type Props = Pick<
   ProductInfoProps,
-  | 'onClickChangeQuantity'
   | 'size'
   | 'loadSpeedRating'
   | 'price'
@@ -42,7 +45,12 @@ function RenderItem({
         />
       </span>
       <span css={styles.quantity}>
-        {ui('pdp.productInfo.sizeQuantity', { quantity })}
+        {ui(
+          quantity === 1
+            ? 'pdp.productInfo.sizeQuantity'
+            : 'pdp.productInfo.sizeQuantityPlural',
+          { quantity },
+        )}
       </span>
       <Icon name={ICONS.CHEVRON_DOWN} css={styles.icon} />
     </>
@@ -56,43 +64,79 @@ function MultiSizeButton({
   rearSize,
   rearLoadSpeedRating,
   rearPrice,
-  onClickChangeQuantity,
 }: Props) {
+  const [isOpen, setIsOpen] = useState(false);
+  const { quantity, setQuantity } = useProductDetailContext();
+
+  function toggleQuantitySelector() {
+    setIsOpen((isOpen) => !isOpen);
+  }
+
+  function openQuantitySelector() {
+    setIsOpen(true);
+  }
+
+  function handleChangeQuantity({
+    front,
+    rear,
+  }: {
+    front: number;
+    rear?: number;
+  }) {
+    setQuantity({ front, rear });
+  }
+
   return (
-    <ul css={styles.root}>
-      <li>
-        <button
-          css={styles.button}
-          onClick={onClickChangeQuantity('front')}
-          aria-label={`${size} ${loadSpeedRating}, ${ui(
-            'pdp.productInfo.changeSizeLabel',
-          )}`}
-        >
-          <RenderItem
-            size={ui('pdp.productInfo.frontTireSize', { size: size || '' })}
-            loadSpeedRating={loadSpeedRating}
-            price={price}
-            quantity={2}
-          />
-        </button>
-      </li>
-      <li>
-        <button
-          css={styles.button}
-          onClick={onClickChangeQuantity('rear')}
-          aria-label={`${rearSize} ${rearLoadSpeedRating}, ${ui(
-            'pdp.productInfo.changeSizeLabel',
-          )}`}
-        >
-          <RenderItem
-            size={ui('pdp.productInfo.rearTireSize', { size: rearSize || '' })}
-            loadSpeedRating={rearLoadSpeedRating}
-            price={rearPrice}
-            quantity={2}
-          />
-        </button>
-      </li>
-    </ul>
+    <>
+      <ul css={styles.root}>
+        <li>
+          <button
+            css={styles.button}
+            aria-label={`${size} ${loadSpeedRating}, ${ui(
+              'pdp.productInfo.changeSizeLabel',
+            )}`}
+            type="button"
+            onClick={openQuantitySelector}
+          >
+            <RenderItem
+              size={ui('pdp.productInfo.frontTireSize', { size: size || '' })}
+              loadSpeedRating={loadSpeedRating}
+              price={price}
+              quantity={quantity.front}
+            />
+          </button>
+        </li>
+        <li>
+          <button
+            css={styles.button}
+            aria-label={`${rearSize} ${rearLoadSpeedRating}, ${ui(
+              'pdp.productInfo.changeSizeLabel',
+            )}`}
+            type="button"
+            onClick={openQuantitySelector}
+          >
+            <RenderItem
+              size={ui('pdp.productInfo.rearTireSize', {
+                size: rearSize || '',
+              })}
+              loadSpeedRating={rearLoadSpeedRating}
+              price={rearPrice}
+              quantity={quantity.rear || 0}
+            />
+          </button>
+        </li>
+      </ul>
+      {price && (
+        <QuantitySelectorContainer
+          isOpen={isOpen}
+          isFrontAndRear
+          onChangeQuantity={handleChangeQuantity}
+          toggleModal={toggleQuantitySelector}
+          tirePrice={price.salePriceInCents}
+          rearPrice={rearPrice?.salePriceInCents}
+        />
+      )}
+    </>
   );
 }
 

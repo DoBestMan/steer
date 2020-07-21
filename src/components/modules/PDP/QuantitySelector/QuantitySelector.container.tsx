@@ -1,21 +1,19 @@
-import { useState } from 'react';
-
 import HorizontalNumberPicker from '~/components/global/HorizontalNumberPicker/HorizontalNumberPicker';
 import { SPACING } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import QuantitySelector from './QuantitySelector';
+import useQuantitySelectorContainer from './QuantitySelector.hooks';
 import styles from './QuantitySelector.styles';
 
 interface Props {
+  isFrontAndRear?: boolean;
   isOpen: boolean;
+  onChangeQuantity: (values: { front: number; rear?: number }) => void;
+  rearPrice?: string;
+  tirePrice: string;
   toggleModal: () => void;
 }
-
-export const CONSTANTS = {
-  PICKER_NUMBERS: Array.from(Array(17).keys()),
-  QUANTITIES_TO_INTERCEPT: [1, 3],
-};
 
 interface SubtitleProps {
   price?: string;
@@ -30,64 +28,62 @@ function Subtitle({ price }: SubtitleProps) {
   );
 }
 
-function QuantitySelectorContainer({ isOpen, toggleModal }: Props) {
-  const [shouldIntercept, setShouldIntercept] = useState(false);
-  const [selectedPrimaryIndex, setSelectedPrimaryIndex] = useState(-1);
-
-  // TODO wire up to API
-  function handleSelectPrimaryPicker(value: number) {
-    setSelectedPrimaryIndex(value);
-    if (!CONSTANTS.QUANTITIES_TO_INTERCEPT.includes(value)) {
-      return;
-    }
-
-    setShouldIntercept(true);
-  }
-
-  // TODO wire up to API
-  function handleSelectSecondaryPicker() {
-    console.info('Handle select');
-  }
-
-  // TODO wire up to API
-  function handleInterceptAction(value: number) {
-    setShouldIntercept(false);
-
-    setSelectedPrimaryIndex(value);
-  }
-
-  // TODO wire up to API
-  const isFrontAndRear = false;
-  const primaryPrice = '$205.38';
-  const secondaryPrice = '$205.38';
+function QuantitySelectorContainer({
+  isFrontAndRear,
+  isOpen,
+  onChangeQuantity,
+  rearPrice,
+  tirePrice,
+  toggleModal,
+}: Props) {
+  const {
+    finalPrice,
+    numbers,
+    onConfirm,
+    onInterceptAction,
+    onSelectFrontPicker,
+    onSelectRearPicker,
+    quantity,
+    recommendedQuantity,
+    selectedFrontIndex,
+    selectedRearIndex,
+  } = useQuantitySelectorContainer({
+    isFrontAndRear,
+    onChangeQuantity,
+    rearPrice,
+    tirePrice,
+    toggleModal,
+  });
 
   return (
     <QuantitySelector
-      isIntercept={shouldIntercept}
+      isIntercept={!!recommendedQuantity}
       isOpen={isOpen}
+      quantity={quantity}
       onClose={toggleModal}
-      onConfirm={toggleModal}
-      onInterceptAction={handleInterceptAction}
-      quantityToIntercept={selectedPrimaryIndex}
+      onConfirm={onConfirm}
+      onInterceptAction={onInterceptAction}
+      recommendedQuantity={recommendedQuantity}
     >
       <HorizontalNumberPicker
-        selectedIndex={selectedPrimaryIndex}
+        initialIndex={selectedFrontIndex}
         customCarouselStyles={styles.carouselStyles}
         {...(isFrontAndRear && {
           customContainerStyles: { marginBottom: SPACING.SIZE_30 },
         })}
-        numbers={CONSTANTS.PICKER_NUMBERS}
-        onSelect={handleSelectPrimaryPicker}
-        subTitle={primaryPrice && <Subtitle price={primaryPrice} />}
+        numbers={numbers}
+        onSelect={onSelectFrontPicker}
+        subTitle={finalPrice.front && <Subtitle price={finalPrice.front} />}
         title={ui('pdp.quantitySelector.singleTireQtyTitle')}
       />
 
       {isFrontAndRear && (
         <HorizontalNumberPicker
+          initialIndex={selectedRearIndex}
           customCarouselStyles={styles.carouselStyles}
-          numbers={CONSTANTS.PICKER_NUMBERS}
-          onSelect={handleSelectSecondaryPicker}
-          subTitle={secondaryPrice && <Subtitle price={secondaryPrice} />}
+          numbers={numbers}
+          onSelect={onSelectRearPicker}
+          subTitle={finalPrice.rear && <Subtitle price={finalPrice.rear} />}
           title={ui('pdp.quantitySelector.singleTireQtyTitle')}
         />
       )}

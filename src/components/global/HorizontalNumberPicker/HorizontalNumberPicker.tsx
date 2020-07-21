@@ -8,9 +8,9 @@ import styles from './HorizontalNumberPicker.styles';
 interface Props {
   customCarouselStyles?: CSSStyles;
   customContainerStyles?: CSSStyles;
+  initialIndex?: number;
   numbers: number[];
   onSelect?: (value: number, index: number) => void;
-  selectedIndex?: number;
   subTitle?: string | JSX.Element;
   title: string;
 }
@@ -19,26 +19,28 @@ function HorizontalNumberPicker({
   customCarouselStyles,
   customContainerStyles,
   numbers,
+  initialIndex,
   onSelect,
-  selectedIndex,
   subTitle,
   title,
 }: Props) {
-  const [selectedItemIndex, setSelectedItemIndex] = useState<number>(-1);
+  const [selectedItemIndex, setSelectedItemIndex] = useState<number>(
+    initialIndex === undefined ? -1 : initialIndex,
+  );
+
+  useEffect(() => {
+    if (initialIndex === undefined) {
+      return;
+    }
+
+    setSelectedItemIndex(initialIndex === undefined ? -1 : initialIndex);
+  }, [numbers, initialIndex]);
 
   useEffect(() => {
     if (onSelect) {
       onSelect(numbers[selectedItemIndex], selectedItemIndex);
     }
   }, [numbers, onSelect, selectedItemIndex]);
-
-  useEffect(() => {
-    if (selectedIndex === undefined) {
-      return;
-    }
-
-    setSelectedItemIndex(selectedIndex);
-  }, [numbers, selectedIndex]);
 
   const handleClick = (index: number) => () => {
     setSelectedItemIndex(index);

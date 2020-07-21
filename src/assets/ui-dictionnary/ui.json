@@ -267,7 +267,8 @@
       "selectSizeButton": "{{availableSizes}} sizes available",
       "selectSizeLabel": "Select size",
       "selectSingleSizeButton": "1 size available",
-      "sizeQuantity": "{{quantity}} tires",
+      "sizeQuantity": "{{quantity}} tire",
+      "sizeQuantityPlural": "{{quantity}} tires",
       "frontTireSize": "Front {{size}}",
       "rearTireSize": "Rear {{size}}",
       "startingAtLabel": "Starting at {{value}}"
@@ -318,12 +319,14 @@
       "confirmButtonLabel": "Confirm",
       "copy": "Most drivers replace 4 tires. <br />If you had a flat tire, replace at least two.",
       "copyConfirmation": "Having tires with the same wear on the axle guarantees <br />a safer and more efficient performance.",
-      "confirmationTitle": "Are you sure? <br />Replacing 4 is better for safety",
+      "confirmationTitle": "Are you sure? <br />Replacing {{quantity}} is better for safety",
       "title": "Replace tires in pairs for better <br />traction and braking",
       "singleTireQtyTitle": "Select tire quantity",
       "totalPrice": "Total price",
-      "changeQuantity": "Change to {{quantity}} tires",
-      "keepQuantity": "Keep {{quantity}} tires",
+      "changeQuantity": "Change to {{quantity}} tire",
+      "changeQuantityPlural": "Change to {{quantity}} tires",
+      "keepQuantity": "Keep {{quantity}} tire",
+      "keepQuantityPlural": "Keep {{quantity}} tires",
       "cta": "Replace tires in pairs for better <br />traction and braking",
       "featureDescription": "PRO tip"
     },
@@ -353,7 +356,8 @@
         "tireSize": "{{productLine}} {{tireSize}}",
         "frontRearSize": "{{productLine}}  ∙  {{tireSize}} + {{rearSize}}"
       },
-      "changeQuantity": "{{quantity}} tires",
+      "changeQuantity": "{{quantity}} tire",
+      "changeQuantityPlural": "{{quantity}} tires",
       "findYourSize": "Find your size",
       "addToCart": "Add to cart  ∙  {{value}}",
       "startingAtLabel": "Starting at {{value}}"

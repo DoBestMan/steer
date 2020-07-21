@@ -8,15 +8,15 @@ import { SPACING } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import QuantitySelector from './QuantitySelector';
-import QuantitySelectorContainer, {
-  CONSTANTS as QUANTITY_SELECTOR_CONSTANTS,
-} from './QuantitySelector.container';
+import QuantitySelectorContainer from './QuantitySelector.container';
 import styles from './QuantitySelector.styles';
 
 export default {
   component: QuantitySelectorContainer,
   title: 'PDP/Quantity Selector',
 };
+
+const PICKER_NUMBERS = Array.from(Array(16).keys()).map((item) => item + 1);
 
 interface SubtitleProps {
   price?: string;
@@ -47,7 +47,7 @@ export function QuantitySelectorDefault() {
 
   const handleInterceptAction = action('number-picker-selection');
   const shouldIntercept = boolean('Display Intercept', false);
-  const quantityToIntercep = number('Quantity to Intercept', 3);
+  const recommendedQuantity = number('Recommended quantity', 4);
 
   const handleSelectSecondaryPicker = (value: number, index: number) => {
     setSecondaryPrice(String(value * 100));
@@ -61,16 +61,17 @@ export function QuantitySelectorDefault() {
   const shouldDisableButton = primaryQuantity === 0 && secondaryQuantity === 0;
 
   useEffect(() => {
-    setDefaultSelectedIndex(isFrontAndRear ? 2 : 4);
+    setinitialIndex(isFrontAndRear ? 2 : 4);
   }, [isFrontAndRear]);
 
-  const [defaultSelectedIndex, setDefaultSelectedIndex] = useState(2);
+  const [initialIndex, setinitialIndex] = useState(2);
 
   return (
     <>
       <Button onClick={toggleModal}>Open Modal</Button>
 
       <QuantitySelector
+        quantity={primaryQuantity}
         hasIcon={hasIcon}
         isButtonDisabled={shouldDisableButton}
         isIntercept={shouldIntercept}
@@ -78,15 +79,15 @@ export function QuantitySelectorDefault() {
         onClose={toggleModal}
         onConfirm={toggleModal}
         onInterceptAction={handleInterceptAction}
-        quantityToIntercept={quantityToIntercep}
+        recommendedQuantity={recommendedQuantity}
       >
         <HorizontalNumberPicker
-          selectedIndex={defaultSelectedIndex}
+          initialIndex={initialIndex}
           customCarouselStyles={styles.carouselStyles}
           {...(isFrontAndRear && {
             customContainerStyles: { marginBottom: SPACING.SIZE_30 },
           })}
-          numbers={QUANTITY_SELECTOR_CONSTANTS.PICKER_NUMBERS}
+          numbers={PICKER_NUMBERS}
           onSelect={handleSelectPrimaryPicker}
           subTitle={
             primaryPrice && primaryPrice !== '0' ? (
@@ -98,9 +99,9 @@ export function QuantitySelectorDefault() {
 
         {isFrontAndRear && (
           <HorizontalNumberPicker
-            selectedIndex={defaultSelectedIndex}
+            initialIndex={initialIndex}
             customCarouselStyles={styles.carouselStyles}
-            numbers={QUANTITY_SELECTOR_CONSTANTS.PICKER_NUMBERS}
+            numbers={PICKER_NUMBERS}
             onSelect={handleSelectSecondaryPicker}
             subTitle={
               secondaryPrice && secondaryPrice !== '0' ? (

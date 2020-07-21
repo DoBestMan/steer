@@ -32,9 +32,6 @@ export function StickyBarWithKnobs() {
 
   const onClickAddToCart = action('click-add-to-cart');
   const onClickFindYourSize = action('click-find-your-size');
-  function onClickChangeQuantity(position: 'front' | 'rear') {
-    return action(`click-change-quantity-${position}`);
-  }
 
   return (
     <PDPStickyBar
@@ -48,7 +45,6 @@ export function StickyBarWithKnobs() {
       tireSize={hasTireSize ? tireSize : undefined}
       tirePrice={hasTireSize ? tirePrice : undefined}
       onClickAddToCart={onClickAddToCart}
-      onClickChangeQuantity={onClickChangeQuantity}
       onClickFindYourSize={onClickFindYourSize}
     />
   );

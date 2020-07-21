@@ -19,7 +19,8 @@ interface Props {
   onClose: () => void;
   onConfirm: () => void;
   onInterceptAction: (value: number) => void;
-  quantityToIntercept?: number;
+  quantity?: number;
+  recommendedQuantity?: number;
 }
 
 function QuantitySelector({
@@ -30,10 +31,13 @@ function QuantitySelector({
   onClose,
   onInterceptAction,
   onConfirm,
-  quantityToIntercept,
+  quantity,
+  recommendedQuantity = 0,
 }: Props) {
   const title = isIntercept
-    ? ui('pdp.quantitySelector.confirmationTitle')
+    ? ui('pdp.quantitySelector.confirmationTitle', {
+        quantity: recommendedQuantity,
+      })
     : ui('pdp.quantitySelector.title');
   const copy = isIntercept
     ? ui('pdp.quantitySelector.copyConfirmation')
@@ -61,26 +65,36 @@ function QuantitySelector({
         {!isIntercept && <div css={styles.pickerContainer}>{children}</div>}
 
         <div css={modalContainerStyles.ctaGroup}>
-          {isIntercept && quantityToIntercept ? (
+          {isIntercept ? (
             <>
               <Button
                 css={styles.button}
-                onClick={handleInterceptAction(quantityToIntercept + 1)}
+                onClick={handleInterceptAction(recommendedQuantity)}
                 theme={THEME.LIGHT}
               >
-                {ui('pdp.quantitySelector.changeQuantity', {
-                  quantity: quantityToIntercept + 1,
-                })}
+                {ui(
+                  recommendedQuantity === 1
+                    ? 'pdp.quantitySelector.changeQuantity'
+                    : 'pdp.quantitySelector.changeQuantityPlural',
+                  {
+                    quantity: recommendedQuantity,
+                  },
+                )}
               </Button>
               <Button
                 css={styles.button}
-                onClick={handleInterceptAction(quantityToIntercept)}
+                onClick={handleInterceptAction(quantity || 0)}
                 style={BUTTON_STYLE.OUTLINED}
                 theme={THEME.LIGHT}
               >
-                {ui('pdp.quantitySelector.keepQuantity', {
-                  quantity: quantityToIntercept,
-                })}
+                {ui(
+                  quantity === 1
+                    ? 'pdp.quantitySelector.keepQuantity'
+                    : 'pdp.quantitySelector.keepQuantityPlural',
+                  {
+                    quantity: quantity || '',
+                  },
+                )}
               </Button>
             </>
           ) : (

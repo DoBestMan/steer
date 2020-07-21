@@ -276,7 +276,7 @@ function ReviewForm({ tire, queryParams }: Props) {
             customContainerStyles={styles.pickerContainer}
             numbers={RATING_OPTIONS}
             onSelect={handleSelectPickerOption(FIELDS.DRY)}
-            selectedIndex={formValues.performanceRating[FIELDS.DRY] as number}
+            initialIndex={formValues.performanceRating[FIELDS.DRY] as number}
             title={ui('reviews.form.sections.ratings.dry')}
             subTitle={
               <span css={styles.subTitle}>{pickerLabels[FIELDS.DRY]}</span>
@@ -288,7 +288,7 @@ function ReviewForm({ tire, queryParams }: Props) {
             customContainerStyles={styles.pickerContainer}
             numbers={RATING_OPTIONS}
             onSelect={handleSelectPickerOption(FIELDS.WET)}
-            selectedIndex={formValues.performanceRating[FIELDS.WET] as number}
+            initialIndex={formValues.performanceRating[FIELDS.WET] as number}
             title={ui('reviews.form.sections.ratings.wet')}
             subTitle={
               <span css={styles.subTitle}>{pickerLabels[FIELDS.WET]}</span>
@@ -300,9 +300,7 @@ function ReviewForm({ tire, queryParams }: Props) {
             customContainerStyles={styles.pickerContainer}
             numbers={RATING_OPTIONS}
             onSelect={handleSelectPickerOption(FIELDS.WINTER)}
-            selectedIndex={
-              formValues.performanceRating[FIELDS.WINTER] as number
-            }
+            initialIndex={formValues.performanceRating[FIELDS.WINTER] as number}
             title={ui('reviews.form.sections.ratings.winter')}
             subTitle={
               <span css={styles.subTitle}>{pickerLabels[FIELDS.WINTER]}</span>
@@ -314,7 +312,7 @@ function ReviewForm({ tire, queryParams }: Props) {
             customContainerStyles={styles.pickerContainer}
             numbers={RATING_OPTIONS}
             onSelect={handleSelectPickerOption(FIELDS.COMFORT)}
-            selectedIndex={
+            initialIndex={
               formValues.performanceRating[FIELDS.COMFORT] as number
             }
             title={ui('reviews.form.sections.ratings.comfort')}
@@ -328,7 +326,7 @@ function ReviewForm({ tire, queryParams }: Props) {
             customContainerStyles={styles.pickerContainer}
             numbers={RATING_OPTIONS}
             onSelect={handleSelectPickerOption(FIELDS.NOISE)}
-            selectedIndex={formValues.performanceRating[FIELDS.NOISE] as number}
+            initialIndex={formValues.performanceRating[FIELDS.NOISE] as number}
             title={ui('reviews.form.sections.ratings.noise')}
             subTitle={
               <span css={styles.subTitle}>{pickerLabels[FIELDS.NOISE]}</span>
@@ -340,7 +338,7 @@ function ReviewForm({ tire, queryParams }: Props) {
             customContainerStyles={styles.pickerContainer}
             numbers={RATING_OPTIONS}
             onSelect={handleSelectPickerOption(FIELDS.TREADWEAR)}
-            selectedIndex={
+            initialIndex={
               formValues.performanceRating[FIELDS.TREADWEAR] as number
             }
             title={ui('reviews.form.sections.ratings.treadwear')}

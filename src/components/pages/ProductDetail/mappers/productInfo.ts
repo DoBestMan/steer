@@ -30,7 +30,6 @@ export function mapDataToProductInfo({
 }): Omit<
   ProductInfoProps,
   | 'onChangeSize'
-  | 'onClickChangeQuantity'
   | 'onClickChangeSize'
   | 'onCloseSizeSelector'
   | 'handleChangeSize'

@@ -26,14 +26,14 @@ function SubTitle() {
 
 export function HorizontalNumberPickerWithKnobs() {
   const handleSelect = action('number-picker-selection');
-  const selectedIndex = number('Selected Index', -1);
+  const initialIndex = number('Initial Index', -1);
   const title = text('Title', 'SELECT TIRE QUANTITY');
 
   return (
     <HorizontalNumberPicker
       numbers={Array.from(Array(10).keys())}
       onSelect={handleSelect}
-      selectedIndex={selectedIndex}
+      initialIndex={initialIndex}
       subTitle={<SubTitle />}
       title={title}
     />

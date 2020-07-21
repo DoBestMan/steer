@@ -15,7 +15,6 @@ export interface PDPStickyBarProps {
   brandLogo: SiteImage | null;
   darkSection?: RefObject<HTMLDivElement>;
   onClickAddToCart: () => void;
-  onClickChangeQuantity: (position: 'front' | 'rear') => () => void;
   onClickFindYourSize: () => void;
   productLine: string;
   rearPrice?: string | null;
@@ -58,7 +57,6 @@ function PDPStickyBar({
   brandLogo,
   darkSection,
   onClickAddToCart,
-  onClickChangeQuantity,
   onClickFindYourSize,
   productLine,
   rearPrice,
@@ -126,7 +124,6 @@ function PDPStickyBar({
       <StickyBar theme={theme} logo={brandLogo} secondaryLabel={secondaryLabel}>
         <ActionBar
           onClickAddToCart={onClickAddToCart}
-          onClickChangeQuantity={onClickChangeQuantity('front')}
           onClickFindYourSize={onClickFindYourSize}
           rearPrice={rearPrice}
           rearSize={rearSize}

@@ -6,30 +6,32 @@ import styles from './HorizontalNumberPicker.styles';
 
 interface Props {
   customContainerStyles?: CSSStyles;
+  initialIndex?: number;
   numbers: (number | string)[];
   onSelect?: (value: number | string, index: number) => void;
-  selectedIndex?: number;
   subTitle?: string | JSX.Element;
   title: string;
 }
 
 function HorizontalPickerNoCarousel({
   customContainerStyles,
+  initialIndex,
   numbers,
   onSelect,
-  selectedIndex,
   subTitle,
   title,
 }: Props) {
-  const [selectedItemIndex, setSelectedItemIndex] = useState<number>(-1);
+  const [selectedItemIndex, setSelectedItemIndex] = useState<number>(
+    initialIndex === undefined ? -1 : initialIndex,
+  );
 
   useEffect(() => {
-    if (selectedIndex === undefined) {
+    if (initialIndex === undefined) {
       return;
     }
 
-    setSelectedItemIndex(selectedIndex);
-  }, [numbers, selectedIndex]);
+    setSelectedItemIndex(initialIndex === undefined ? -1 : initialIndex);
+  }, [numbers, initialIndex]);
 
   const handleClick = (index: number) => () => {
     setSelectedItemIndex(index);

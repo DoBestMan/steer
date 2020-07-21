@@ -21,7 +21,6 @@ export function StickyBarWithKnobs() {
   const hasRearSize = boolean('Has rear tire size?', false);
 
   const onClickAddToCart = action('click-add-to-cart');
-  const onClickChangeQuantity = action('click-change-quantity');
   const onClickFindYourSize = action('click-find-your-size');
 
   return (
@@ -34,7 +33,6 @@ export function StickyBarWithKnobs() {
         tireSize={hasTireSize ? tireSize : undefined}
         tirePrice={hasTireSize ? tirePrice : undefined}
         onClickAddToCart={onClickAddToCart}
-        onClickChangeQuantity={onClickChangeQuantity}
         onClickFindYourSize={onClickFindYourSize}
       />
     </div>

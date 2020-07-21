@@ -24,7 +24,6 @@ export interface ProductInfoProps {
   isSizeSelectorOpen?: boolean;
   loadSpeedRating?: string;
   onChangeSize: (value: string) => void;
-  onClickChangeQuantity: (position: 'front' | 'rear') => () => void;
   onClickChangeSize: () => void;
   onCloseSizeSelector: () => void;
   price?: SitePrice | null;
@@ -60,7 +59,6 @@ function ProductInfo({
   isSizeSelectorOpen,
   loadSpeedRating,
   onChangeSize,
-  onClickChangeQuantity,
   onClickChangeSize,
   openDynamicModal,
   price,
@@ -97,7 +95,6 @@ function ProductInfo({
           rearSize={rearSize}
           rearLoadSpeedRating={rearLoadSpeedRating}
           rearPrice={rearPrice}
-          onClickChangeQuantity={onClickChangeQuantity}
         />
         <div css={[styles.actionBar, styles.actionBarMultiple]}>
           <PDPActionBar

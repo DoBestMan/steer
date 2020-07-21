@@ -63,9 +63,6 @@ const mockPromoTags: PromoTagProps[] = [
   },
 ];
 
-const onClickChangeQuantity = (position: 'front' | 'rear') =>
-  action(`click-change-position-${position}`);
-
 const onClickChangeSize = action('click-change-size');
 
 const onCloseSizeSelector = action('close-selector');
@@ -159,7 +156,6 @@ export function ProductInfoWithKnobs() {
       rearSize={hasRearSize ? rearSizeLabel : undefined}
       rearLoadSpeedRating={hasRearSize ? rearLoadSpeedRating : undefined}
       rearPrice={price}
-      onClickChangeQuantity={onClickChangeQuantity}
       onClickChangeSize={onClickChangeSize}
       onCloseSizeSelector={onCloseSizeSelector}
       onChangeSize={onChangeSize}
@@ -196,7 +192,6 @@ export function ProductInfoDefault() {
       startingPrice={mockStartingPrice}
       loadSpeedRating={mockSizeLoadSpeedRating}
       openDynamicModal={onOpenDynamicModal}
-      onClickChangeQuantity={onClickChangeQuantity}
       onClickChangeSize={onClickChangeSize}
       onCloseSizeSelector={onCloseSizeSelector}
       onChangeSize={onChangeSize}
@@ -227,7 +222,6 @@ export function ProductInfoPromoTags() {
       startingPrice={mockStartingPrice}
       loadSpeedRating={mockSizeLoadSpeedRating}
       openDynamicModal={onOpenDynamicModal}
-      onClickChangeQuantity={onClickChangeQuantity}
       onClickChangeSize={onClickChangeSize}
       onCloseSizeSelector={onCloseSizeSelector}
       onChangeSize={onChangeSize}
@@ -252,7 +246,6 @@ export function ProductInfoTireLine() {
       }}
       availableSizes={32}
       openDynamicModal={onOpenDynamicModal}
-      onClickChangeQuantity={onClickChangeQuantity}
       onClickChangeSize={onClickChangeSize}
       onCloseSizeSelector={onCloseSizeSelector}
       onChangeSize={onChangeSize}
@@ -276,7 +269,6 @@ export function ProductInfoLongNameNoBrandLogo() {
       }}
       availableSizes={32}
       openDynamicModal={onOpenDynamicModal}
-      onClickChangeQuantity={onClickChangeQuantity}
       onClickChangeSize={onClickChangeSize}
       onCloseSizeSelector={onCloseSizeSelector}
       onChangeSize={onChangeSize}
@@ -314,7 +306,6 @@ export function ProductInfoDiscountBadge() {
       startingPrice={mockStartingPrice}
       loadSpeedRating={mockSizeLoadSpeedRating}
       openDynamicModal={onOpenDynamicModal}
-      onClickChangeQuantity={onClickChangeQuantity}
       onClickChangeSize={onClickChangeSize}
       onCloseSizeSelector={onCloseSizeSelector}
       onChangeSize={onChangeSize}
@@ -346,7 +337,6 @@ export function ProductInfoOnly4LeftBadge() {
       startingPrice={mockStartingPrice}
       loadSpeedRating={mockSizeLoadSpeedRating}
       openDynamicModal={onOpenDynamicModal}
-      onClickChangeQuantity={onClickChangeQuantity}
       onClickChangeSize={onClickChangeSize}
       onCloseSizeSelector={onCloseSizeSelector}
       onChangeSize={onChangeSize}
@@ -378,7 +368,6 @@ export function ProductInfoBothBadges() {
       startingPrice={mockStartingPrice}
       loadSpeedRating={mockSizeLoadSpeedRating}
       openDynamicModal={onOpenDynamicModal}
-      onClickChangeQuantity={onClickChangeQuantity}
       onClickChangeSize={onClickChangeSize}
       onCloseSizeSelector={onCloseSizeSelector}
       onChangeSize={onChangeSize}
@@ -407,7 +396,6 @@ export function ProductInfoCallForPricing() {
       startingPrice={mockStartingPrice}
       loadSpeedRating={mockSizeLoadSpeedRating}
       openDynamicModal={onOpenDynamicModal}
-      onClickChangeQuantity={onClickChangeQuantity}
       onClickChangeSize={onClickChangeSize}
       onCloseSizeSelector={onCloseSizeSelector}
       onChangeSize={onChangeSize}
@@ -435,7 +423,6 @@ export function ProductInfoOutOfStock() {
       startingPrice={mockStartingPrice}
       loadSpeedRating={mockSizeLoadSpeedRating}
       openDynamicModal={onOpenDynamicModal}
-      onClickChangeQuantity={onClickChangeQuantity}
       onClickChangeSize={onClickChangeSize}
       onCloseSizeSelector={onCloseSizeSelector}
       onChangeSize={onChangeSize}
@@ -464,7 +451,6 @@ export function ProductInfoNoReviews() {
       startingPrice={mockStartingPrice}
       loadSpeedRating={mockSizeLoadSpeedRating}
       openDynamicModal={onOpenDynamicModal}
-      onClickChangeQuantity={onClickChangeQuantity}
       onClickChangeSize={onClickChangeSize}
       onCloseSizeSelector={onCloseSizeSelector}
       onChangeSize={onChangeSize}
@@ -501,7 +487,6 @@ export function ProductInfoMultiSize() {
         estimatedRetailPriceInCents: '15486',
         salePriceInCents: '19000',
       }}
-      onClickChangeQuantity={onClickChangeQuantity}
       onClickChangeSize={onClickChangeSize}
       onCloseSizeSelector={onCloseSizeSelector}
       onChangeSize={onChangeSize}
