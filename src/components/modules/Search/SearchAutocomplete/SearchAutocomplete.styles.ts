@@ -207,18 +207,18 @@ const styles: StylesMap = {
     marginTop: SPACING.SIZE_05,
   },
   searchResultsGrid: {
-    paddingTop: SPACING.SIZE_80,
+    paddingTop: 75,
     [MQ.M]: {
-      paddingTop: 145,
+      paddingTop: SPACING.SIZE_100,
     },
   },
   searchResultsGridItem: {
-    padding: `${SPACING.SIZE_15}px 0 ${SPACING.SIZE_25}px`,
+    padding: `${SPACING.SIZE_20}px 0`,
     [MQ.M]: {
       padding: `${SPACING.SIZE_30}px 0`,
     },
     [MQ.L]: {
-      padding: `${SPACING.SIZE_70}px 0 ${SPACING.SIZE_10}px`,
+      padding: `${SPACING.SIZE_60}px 0 ${SPACING.SIZE_20}px`,
     },
   },
   searchResultsGridRearTire: {
