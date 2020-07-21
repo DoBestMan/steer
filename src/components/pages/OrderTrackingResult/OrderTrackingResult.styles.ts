@@ -57,6 +57,7 @@ const styles: StylesMap = {
     typography.bodyCopyTight,
     {
       color: COLORS.LIGHT.GRAY_70,
+      paddingBottom: SPACING.SIZE_40,
       [MQ.M]: {
         paddingBottom: SPACING.SIZE_60,
       },
