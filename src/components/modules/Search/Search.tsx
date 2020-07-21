@@ -6,6 +6,7 @@ import { SiteSearchResultImageItem } from '~/data/models/SiteSearchResultImageIt
 import { SiteSearchResultTextItem } from '~/data/models/SiteSearchResultTextItem';
 import { SearchDataParams } from '~/lib/api/search';
 import { TIME } from '~/lib/constants';
+import { eventEmitters } from '~/lib/events/emitters';
 import { scrollTo } from '~/lib/helpers/scroll';
 import debounce from '~/lib/utils/debounce';
 
@@ -222,6 +223,9 @@ function Search({
       if (shouldPreventLinkNavigation) {
         onCloseSearchClick();
       }
+
+      // Resets the catalog when creating a new search from a catalog page
+      eventEmitters.newCatalogSearchQuery.emit({ comesFromSearch: true });
     }
   };
 

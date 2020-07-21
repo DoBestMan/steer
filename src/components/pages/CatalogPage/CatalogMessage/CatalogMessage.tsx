@@ -1,4 +1,5 @@
 import { useTheme } from 'emotion-theming';
+import { useRouter } from 'next/router';
 import { Transition } from 'react-transition-group';
 import { TransitionStatus } from 'react-transition-group/Transition';
 
@@ -17,9 +18,11 @@ import { useCatalogSummaryContext } from '~/context/CatalogSummary.context';
 import { useModalContext } from '~/context/Modal.context';
 import { SiteCatalogSummaryBuildIn } from '~/data/models/SiteCatalogSummaryBuildIn';
 import { SiteCatalogSummaryPrompt } from '~/data/models/SiteCatalogSummaryPrompt';
-import { SiteQueryParams } from '~/data/models/SiteQueryParams';
+import { LINK_TYPES } from '~/lib/constants';
+import { eventEmitters } from '~/lib/events/emitters';
 import { getInvertedImageTransformations } from '~/lib/utils/cloudinary/cloudinary';
 import { isValidStaticModal } from '~/lib/utils/modal';
+import { getHrefWithParams } from '~/lib/utils/routes';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import { STAGES } from '../CatalogPage.constants';
@@ -112,19 +115,18 @@ export function BuildInMessage({
 }
 
 interface DataMomentMessageProps {
-  onNewSearchQueryClick?(siteQueryParams: SiteQueryParams): void;
   openStaticModal: (modalId: string) => void;
   setStage?(stage: STAGES): void;
   siteCatalogSummaryPrompt: SiteCatalogSummaryPrompt | null;
 }
 
 export function DataMomentMessage({
-  onNewSearchQueryClick,
   setStage,
   siteCatalogSummaryPrompt,
   openStaticModal,
 }: DataMomentMessageProps) {
   const { message } = useTheme();
+  const { asPath } = useRouter();
 
   const id =
     siteCatalogSummaryPrompt && siteCatalogSummaryPrompt.infoLink?.contentId;
@@ -134,6 +136,10 @@ export function DataMomentMessage({
       openStaticModal(id);
     }
   }
+
+  const handleNewSearchQuery = () => {
+    eventEmitters.newCatalogSearchQuery.emit({ comesFromSearch: false });
+  };
 
   return (
     siteCatalogSummaryPrompt && (
@@ -160,13 +166,13 @@ export function DataMomentMessage({
               {siteCatalogSummaryPrompt.ctaList.map(
                 ({ label, siteQueryParams }) => {
                   const id = label.replace(/\s+/g, '').toLowerCase();
+                  const href = getHrefWithParams(asPath, siteQueryParams);
                   return siteQueryParams ? (
                     <Button
                       key={id}
-                      onClick={function () {
-                        onNewSearchQueryClick &&
-                          onNewSearchQueryClick(siteQueryParams);
-                      }}
+                      as={LINK_TYPES.A}
+                      href={href}
+                      onClick={handleNewSearchQuery}
                       style={message.buttonStyle}
                       theme={message.buttonTheme}
                     >
@@ -313,7 +319,6 @@ function CatalogMessage({
 }: CatalogMessageProps) {
   const {
     contentStage,
-    onNewSearchQueryClick,
     setNewContent,
     setStage,
     showLoadingInterstitial,
@@ -343,7 +348,6 @@ function CatalogMessage({
               {...siteCatalogSummary}
               customerServiceNumber={customerServiceNumber}
               customerServiceEnabled={customerServiceEnabled}
-              onNewSearchQueryClick={onNewSearchQueryClick}
               setStage={setStage}
               // used only by top picks
               exploreMore={exploreMore}

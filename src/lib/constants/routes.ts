@@ -74,6 +74,12 @@ export const ROUTE_MAP: Record<ROUTES, string> = {
   [ROUTES.TIRE_BUYING_GUIDE]: '/tire-buying-guide',
 };
 
+export const CATALOG_ROUTES = [
+  ROUTE_MAP[ROUTES.BRAND_CATEGORY],
+  ROUTE_MAP[ROUTES.VEHICLES_CATEGORY],
+  ROUTE_MAP[ROUTES.TIRE_CATEGORY],
+];
+
 // null for dynamic labels
 export const ROUTE_LABELS: Record<string, string | null> = {
   [ROUTE_MAP[ROUTES.HOME]]: ui('breadcrumbs.home'),

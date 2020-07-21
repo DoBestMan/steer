@@ -1,13 +1,15 @@
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
 import { Transition, TransitionGroup } from 'react-transition-group';
 import { TransitionStatus } from 'react-transition-group/Transition';
 
 import Layout from '~/components/global/Layout/Layout';
 import SearchModal from '~/components/modules/Search/SearchModal';
 import { NavContextProvider } from '~/context/Nav.context';
-import { ROUTE_MAP, ROUTES, TIME } from '~/lib/constants';
+import { CATALOG_ROUTES, ROUTE_MAP, ROUTES, TIME } from '~/lib/constants';
+import { eventEmitters } from '~/lib/events/emitters';
+import { isInRouteList } from '~/lib/utils/routes';
 
 import FooterContainer from '../Footer/Footer.container';
 import { useSearchContext } from '../Search/Search.context';
@@ -27,9 +29,27 @@ function App({ children, ...rest }: Props) {
   const router = useRouter();
   const route = router.route || rest.route;
 
+  const isHomepage = route === ROUTE_MAP[ROUTES.HOME];
+
   // If page transition (fade out/in) is not desired, add use case here
   const skipPageTransition = isSearchOpen;
-  const isHomepage = route === ROUTE_MAP[ROUTES.HOME];
+
+  useEffect(() => {
+    // Callback when traversing the `history` stack
+    router.beforePopState(({ url, options }) => {
+      // Reset Catalog Search state
+      // Ignore `shallow` route changes, as these signify non-Search route
+      // updates, e.g. filter changes or pagination
+      if (isInRouteList(url, CATALOG_ROUTES) && !options.shallow) {
+        eventEmitters.newCatalogSearchQuery.emit({ comesFromSearch: false });
+      }
+      return true;
+    });
+
+    return () => {
+      router.beforePopState(() => true);
+    };
+  });
 
   return (
     <div css={[styles.root, isHomepage && styles.rootWithOffWhiteBg]}>

@@ -1,6 +1,8 @@
 import queryString from 'query-string';
 import { UrlObject } from 'url';
 
+import { SiteQueryParams } from '~/data/models/SiteQueryParams';
+
 import { brackets, diameterFormat } from './regex';
 
 export type Url = string | UrlObject;
@@ -72,3 +74,29 @@ export const getUrlObject = (pathname: string, query: string): Url => ({
   pathname,
   query: queryString.parse(query),
 });
+
+/**
+ * Build a new url string with additional query params
+ */
+export const getHrefWithParams = (
+  currentPath: string,
+  siteQueryParams: SiteQueryParams | null,
+): string => {
+  let href = currentPath;
+
+  if (!siteQueryParams) {
+    return href;
+  }
+
+  href = href.includes('?') ? `${href}&` : `${href}?`;
+
+  const newParams = Object.keys(siteQueryParams).map(
+    (key) => `${key}=${siteQueryParams[key]}`,
+  );
+  href = `${href}${newParams.join('&')}`;
+
+  return href;
+};
+
+export const isInRouteList = (route: string, routeList: string[]) =>
+  routeList.includes(route.split('?')[0]);

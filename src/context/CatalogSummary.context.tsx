@@ -3,12 +3,11 @@ import { ReactNode, useEffect, useState } from 'react';
 import { PAGE_TRANSITION_DURATION } from '~/components/modules/App/App.constants';
 import { STAGES } from '~/components/pages/CatalogPage/CatalogSummary/CatalogSummary.constants';
 import { SiteCatalogSummary } from '~/data/models/SiteCatalogSummary';
-import { SiteQueryParams } from '~/data/models/SiteQueryParams';
+import { eventEmitters } from '~/lib/events/emitters';
 import { createContext } from '~/lib/utils/context';
 
 export interface CatalogSummaryContextProps {
   contentStage: STAGES;
-  onNewSearchQueryClick(siteQueryParams: SiteQueryParams): void;
   setNewContent(): void;
   setStage(stage: STAGES): void;
   showLoadingInterstitial: boolean;
@@ -20,10 +19,6 @@ const CatalogSummaryContext = createContext<CatalogSummaryContextProps>();
 
 interface SetupProps {
   comesFromSearch: boolean;
-  handleUpdateSummary(
-    siteQueryParams: SiteQueryParams,
-    replaceHistory?: boolean,
-  ): void;
   hasLocalData: boolean;
   siteCatalogSummary: SiteCatalogSummary;
 }
@@ -62,7 +57,6 @@ const BUILD_IN_PAUSE = 4000;
 // TODO: Exported for testing only
 export function useContextSetup({
   comesFromSearch,
-  handleUpdateSummary,
   hasLocalData,
   siteCatalogSummary,
 }: SetupProps): CatalogSummaryContextProps {
@@ -172,18 +166,28 @@ export function useContextSetup({
     };
   }, [stage, state]);
 
-  const handleNewSearchQuery = (siteQueryParams: SiteQueryParams) => {
+  const handleNewSearchQuery = ({
+    comesFromSearch,
+  }: {
+    comesFromSearch: boolean;
+  }) => {
     // Reset state
-    setState(INITIAL_STATE);
-    // Fetch new data. Replaces current route in the browser history as
-    // we don't want the user to be able to go back to the disambiguation
-    // flow on browser back button click
-    handleUpdateSummary(siteQueryParams, true);
+    setState({
+      ...INITIAL_STATE,
+      showLoadingInterstitial: comesFromSearch,
+    });
   };
+
+  useEffect(() => {
+    eventEmitters.newCatalogSearchQuery.on(handleNewSearchQuery);
+
+    return () => {
+      eventEmitters.newCatalogSearchQuery.off(handleNewSearchQuery);
+    };
+  });
 
   return {
     contentStage,
-    onNewSearchQueryClick: handleNewSearchQuery,
     setNewContent: () => {
       // Called after the previous content message exit transition.
       // Brings `contentStage` back in alignment with `stage`.
@@ -205,13 +209,11 @@ interface ProviderProps extends SetupProps {
 export function CatalogSummaryContextProvider({
   children,
   comesFromSearch,
-  handleUpdateSummary,
   hasLocalData,
   siteCatalogSummary,
 }: ProviderProps) {
   const value = useContextSetup({
     comesFromSearch,
-    handleUpdateSummary,
     hasLocalData,
     siteCatalogSummary,
   });

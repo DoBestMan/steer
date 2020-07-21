@@ -54,7 +54,7 @@ export interface SearchContextProps {
 
 const SearchContext = createContext<SearchContextProps>();
 
-function useContextSetup() {
+function useContextSetup(): SearchContextProps {
   /* Past Searches */
   const [pastSearches, setPastSearches] = useState<SiteSearchResultGroup>(
     emptySiteSearchResultGroup,

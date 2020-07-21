@@ -1,6 +1,9 @@
+import { CATALOG_ROUTES } from '~/lib/constants';
+
 import {
   getUrlObject,
   interpolateRoute,
+  isInRouteList,
   isRouteDiameterFormat,
   trimSlash,
 } from './routes';
@@ -50,6 +53,21 @@ describe('utils/routes', () => {
           trim: 'Sport Sedan & Coupe',
         },
       });
+    });
+  });
+
+  describe('isInRouteList', () => {
+    it('returns true if given route is a given list of routes', () => {
+      expect(isInRouteList('/', CATALOG_ROUTES)).toBe(false);
+      expect(
+        isInRouteList('/vehicles/[make]/[model]/[year]', CATALOG_ROUTES),
+      ).toBe(true);
+      expect(
+        isInRouteList(
+          '/vehicles/[make]/[model]/[year]?trim=Sport%20Sedan%20%26%20Coupe',
+          CATALOG_ROUTES,
+        ),
+      ).toBe(true);
     });
   });
 });
