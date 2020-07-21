@@ -45,15 +45,21 @@ function OrderTrackingForm() {
     setShippingZip(newValue);
   };
 
-  const handleButtonClick = async () => {
+  const handleSubmit = async () => {
     getOrderTracking({
       orderId,
       zip: shippingZip,
     });
   };
 
+  const handleSubmitBtnClick = (event: React.MouseEvent) => {
+    event.preventDefault();
+
+    handleSubmit();
+  };
+
   return (
-    <form css={styles.root}>
+    <form css={styles.root} onSubmit={handleSubmit}>
       <div css={styles.input}>
         <Input
           error={{ hasError }}
@@ -79,8 +85,8 @@ function OrderTrackingForm() {
         <Button
           css={styles.submitButton}
           isDisabled={!isFormValid}
-          onClick={handleButtonClick}
-          type="button"
+          onClick={handleSubmitBtnClick}
+          type="submit"
         >
           {ui('tracking.orderTrackingSubmit')}
         </Button>
