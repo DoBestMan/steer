@@ -20,6 +20,25 @@ interface GroupedFilters {
 }
 
 /**
+ * Gets number of applied filters for a given filter list
+ */
+export function getAppliedCount(filter: CatalogFilterTypes) {
+  if (filter.type !== SiteCatalogFilterListTypeEnum.SiteCatalogFilterList) {
+    return;
+  }
+  let count = 0;
+  filter.filterGroups.forEach((group: SiteCatalogFilterGroup) => {
+    group.items.forEach((item: SiteCatalogFilterItem) => {
+      if (item.state === SiteCatalogFilterItemStateEnum.Selected) {
+        count += 1;
+      }
+    });
+  });
+
+  return count;
+}
+
+/**
  * Toggle filters are grouped into `Popular Filters` on large breakpoint
  */
 export function getGroupedFilters(
@@ -52,7 +71,8 @@ export function getFilterLabel(filter: CatalogFilterTypes) {
   }
 
   if ('header' in filter && filter.header) {
-    return filter.header.title;
+    const count = getAppliedCount(filter);
+    return filter.header.title + (count ? ` (${count})` : '');
   }
 
   return '';
