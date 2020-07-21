@@ -150,12 +150,19 @@ export const styles: StylesMap = {
     width: '100%',
   },
   sceneryContainer: {
-    bottom: 0,
+    bottom: 30,
     left: 0,
     position: 'absolute',
     transition: `opacity ${TIME.MS500}ms ${EASING.CUBIC_EASE_OUT}`,
     transitionDelay: `${TIME.MS200}ms`,
     width: '100%',
+
+    [MQ.M]: {
+      bottom: 60,
+    },
+    [MQ.L]: {
+      bottom: 64,
+    },
   },
   title: {
     marginBottom: SPACING.SIZE_10,
