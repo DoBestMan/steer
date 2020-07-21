@@ -1,4 +1,4 @@
-import { COLORS, SPACING, StylesMap, THEME } from '~/lib/constants';
+import { COLORS, MQ, SPACING, StylesMap, THEME } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 import { NAV_CONTENT_HEIGHT } from '../Nav.styles';
@@ -36,6 +36,14 @@ const styles: StylesMap = {
     height: NAV_CONTENT_HEIGHT,
     padding: `${SPACING.SIZE_02}px ${SPACING.SIZE_10}px 0`,
     position: 'relative',
+
+    svg: {
+      color: COLORS.GLOBAL.BLACK,
+
+      [MQ.L]: {
+        color: 'unset',
+      },
+    },
   },
 };
 

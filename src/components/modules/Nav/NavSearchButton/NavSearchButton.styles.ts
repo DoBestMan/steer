@@ -1,4 +1,4 @@
-import { MQ, SPACING, StylesMap } from '~/lib/constants';
+import { COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
 
 import { NAV_CONTENT_HEIGHT } from '../Nav.styles';
 
@@ -14,6 +14,7 @@ const styles: StylesMap = {
     },
   },
   icon: {
+    color: COLORS.GLOBAL.BLACK,
     [MQ.L]: {
       marginRight: SPACING.SIZE_10,
     },

@@ -6,6 +6,7 @@ import {
 } from 'react-transition-group/Transition';
 
 import {
+  COLORS,
   CSSStyles,
   EASING,
   MQ,
@@ -86,6 +87,7 @@ export const styles: StylesMap = {
     button: {
       padding: SPACING.SIZE_10,
     },
+    color: COLORS.GLOBAL.BLACK,
     display: 'inline-flex',
     marginLeft: SPACING.SIZE_10,
     [MQ.L]: {
