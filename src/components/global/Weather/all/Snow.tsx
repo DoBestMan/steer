@@ -71,7 +71,7 @@ function Snow(props: Props) {
     let frame = 0;
 
     const ctx = canvasRef.current.getContext('2d');
-    let mp = Math.round(width / 50); //max particles
+    let mp = Math.round(width / 90); //max particles
     if (mp < 10) {
       mp = 10;
     }
@@ -97,7 +97,7 @@ function Snow(props: Props) {
         //We will add 1 to the cos function to prevent negative values which will lead flakes to move upwards
         //Every particle has its own density which can be used to make the downward movement different for each flake
         //Lets make it more random by adding in the radius
-        p.y += Math.cos(angle + p.d) + 1 + p.r / 2;
+        p.y += Math.cos(angle + p.d) + 1 + p.r / 4;
         p.x += Math.sin(angle) * 2;
 
         //Sending flakes back from the top when it exits
