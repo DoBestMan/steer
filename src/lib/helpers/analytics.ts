@@ -10,7 +10,7 @@ export const GTM_CONSTANTS = {
 };
 
 type ExperimentCallback = {
-  callback: (response: boolean, originalAnswer?: string) => void;
+  callback: (response: string | undefined) => void;
   experimentID: string;
 };
 
@@ -155,12 +155,11 @@ class GoogleAnalytics {
       return;
     }
 
-    const originalAnswer =
+    const response =
       window.google_optimize && window.google_optimize.get(experimentID);
-    const answer = typeof originalAnswer === 'undefined' ? '0' : originalAnswer; // default
 
     // Default returns '0', so false
-    callback(answer !== '0', originalAnswer);
+    callback(response);
   }
 }
 

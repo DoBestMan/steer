@@ -15,8 +15,8 @@ import Optimize from '~/lib/helpers/analytics';
 // Once the client has rendered,
 // Get experiment value
 useEffect(() => {
-    const callback = (answer: boolean, _originalAnswer?: string) => {
-      // answer is `true` if Variant, `false` if experiment not found (_originalAnswer === undefined) or default.
+    const callback = (response?: string) => {
+      // response is a string, containing the variant number ("0", "1"...)
       setExperimentState(answer);
     };
 
