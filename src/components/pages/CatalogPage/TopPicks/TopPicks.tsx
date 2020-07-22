@@ -270,7 +270,7 @@ function TopPicks({
                 pick={pick}
                 key={`_index_${i}`}
                 isCurrent={
-                  (indexHovered && indexHovered === i) ||
+                  (indexHovered !== undefined && indexHovered === i) ||
                   (typeof indexHovered === 'undefined' && i === currentIndex)
                 }
                 openModal={openModal}
