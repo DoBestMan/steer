@@ -6,6 +6,7 @@ import {
   useState,
 } from 'react';
 
+import { CSSStyles } from '~/lib/constants';
 import { randomString } from '~/lib/utils/string';
 
 import styles, {
@@ -20,6 +21,7 @@ type RefType =
   | null;
 
 interface Props {
+  containerStyles?: CSSStyles;
   contextualLabel?: string;
   disabled?: boolean;
   error?: { errorMessage?: string; hasError: boolean };
@@ -38,6 +40,7 @@ interface Props {
 
 function Input(props: Props, ref: RefType) {
   const {
+    containerStyles,
     contextualLabel,
     disabled,
     error = { hasError: false },
@@ -125,6 +128,7 @@ function Input(props: Props, ref: RefType) {
         disabled && !readonly && styles.disabled,
         isTextArea && textAreaStyles.container,
         showErrorState && !disabled && errorStyles.container,
+        containerStyles,
       ]}
     >
       <label

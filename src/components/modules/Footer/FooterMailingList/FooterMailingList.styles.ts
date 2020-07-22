@@ -4,11 +4,10 @@ import { typography } from '~/styles/typography.styles';
 const CONSTANTS = {
   SUBMIT_ICON_HEIGHT: 12,
   SUBMIT_ICON_WIDTH: 15,
+  EMAIL_INPUT_HEIGHT: 60,
 };
 
 const styles: StylesMap = {
-  // TODO: build mailing list component
-  container: {},
   emailInput: {
     paddingRight: SPACING.SIZE_40,
     [MQ.M]: {
@@ -24,6 +23,9 @@ const styles: StylesMap = {
   ],
   inputContainer: {
     position: 'relative',
+  },
+  inputHeight: {
+    height: CONSTANTS.EMAIL_INPUT_HEIGHT,
   },
   submitButton: {
     padding: SPACING.SIZE_05,

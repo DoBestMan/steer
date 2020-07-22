@@ -68,11 +68,12 @@ function FooterMailingList() {
   };
 
   return (
-    <div css={styles.container}>
+    <>
       <p css={styles.heading}>{ui('footer.mailingList.heading')}</p>
       <p css={styles.text}>{ui('footer.mailingList.description')}</p>
       <div css={styles.inputContainer}>
         <Input
+          containerStyles={styles.inputHeight}
           contextualLabel={ui('common.form.yourEmail')}
           css={styles.emailInput}
           error={{
@@ -106,7 +107,7 @@ function FooterMailingList() {
           {toastMessages[toastMessage]}
         </Toast>
       )}
-    </div>
+    </>
   );
 }
 
