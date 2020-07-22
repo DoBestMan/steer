@@ -33,7 +33,7 @@ export enum SearchStateEnum {
   REAR_TIRE = 'rearTireSize',
   REAR_TIRE_WIDTH = 'rearWidthRatio',
   TIRE_SIZE = 'tireSize',
-  VEHICLE = 'makeModel',
+  VEHICLE = 'vehicle',
 }
 
 export type SearchStateType =

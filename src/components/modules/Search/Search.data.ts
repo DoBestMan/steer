@@ -104,7 +104,7 @@ export const pastSearchResults: SiteSearchResultGroup = {
 export const initialSearchVehicle = {
   action: {
     queryText: '',
-    queryType: 'makeModel',
+    queryType: 'vehicle',
     type: 'SiteSearchResultActionQuery',
   } as SiteSearchResultActionQuery,
   detailLabel: null,
