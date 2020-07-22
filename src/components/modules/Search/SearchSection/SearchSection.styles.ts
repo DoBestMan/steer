@@ -36,7 +36,7 @@ const styles: StylesMap = {
   ],
   listItem: {
     '&:not(:last-child)': {
-      paddingBottom: SPACING.SIZE_15,
+      paddingBottom: SPACING.SIZE_10,
     },
   },
   searchQuery: {
@@ -46,7 +46,7 @@ const styles: StylesMap = {
     typography.smallCopyTight,
     {
       color: COLORS.ORANGE.SHADE_85,
-      marginTop: SPACING.SIZE_10,
+      marginTop: SPACING.SIZE_05,
       [MQ.M]: typography.bodyCopyTight,
     },
   ],
