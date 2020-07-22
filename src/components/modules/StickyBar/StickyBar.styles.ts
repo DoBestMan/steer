@@ -187,7 +187,7 @@ const styles: StylesMap = {
   },
   [THEME.DARK]: {
     background: COLORS.GLOBAL.BLACK,
-    borderTopColor: COLORS.DARK.GRAY_90,
+    borderTopColor: COLORS.DARK.GRAY_95,
   },
   [THEME.ORANGE]: {
     background: COLORS.GLOBAL.ORANGE,

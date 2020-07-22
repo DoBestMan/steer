@@ -59,7 +59,7 @@ export const buttonStyle: Record<BUTTON_STYLE, ThemeStyles> = {
     // Outlined Dark
     [THEME.DARK]: {
       '&:active': {
-        backgroundColor: COLORS.DARK.GRAY_90,
+        backgroundColor: COLORS.DARK.GRAY_95,
         borderColor: COLORS.DARK.GRAY_40,
       },
       '&:focus:not(:active)': {

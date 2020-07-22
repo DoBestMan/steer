@@ -70,7 +70,7 @@ const styles: StylesMap = {
     paddingLeft: 8,
   },
   root: {
-    backgroundColor: COLORS.DARK.GRAY_90,
+    backgroundColor: COLORS.DARK.GRAY_95,
     borderRadius: RADIUS.RADIUS_15,
     [MQ.S]: {
       padding: SPACING.SIZE_40,

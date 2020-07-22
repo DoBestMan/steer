@@ -2,7 +2,7 @@ export const COLORS = {
   DARK: {
     GRAY_40: 'rgba(255, 255, 255, 0.6)',
     GRAY_80: 'rgba(255, 255, 255, 0.2)',
-    GRAY_90: 'rgba(255, 255, 255, 0.1)',
+    GRAY_95: 'rgba(255, 255, 255, 0.05)',
     GRAY_DARK_SOLID: '#2D2D2D',
   },
   GLOBAL: {

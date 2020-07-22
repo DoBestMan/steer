@@ -122,7 +122,7 @@ export const themeStyles = {
 
   [THEME.DARK]: {
     container: {
-      backgroundColor: COLORS.DARK.GRAY_90,
+      backgroundColor: COLORS.DARK.GRAY_95,
       color: COLORS.DARK.GRAY_40,
     },
     readMore: {
