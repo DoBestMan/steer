@@ -264,13 +264,15 @@ const styles: StylesMap = {
     bottom: SPACING.SIZE_20,
     display: 'flex',
     position: 'fixed',
-    right: GRID_MARGIN.S,
+    right: SPACING.SIZE_20,
     zIndex: Z_INDEX.TOP,
     [MQ.M]: {
-      right: GRID_MARGIN.M,
+      bottom: SPACING.SIZE_45,
+      right: SPACING.SIZE_40,
     },
     [MQ.L]: {
-      right: SPACING.SIZE_90,
+      bottom: SPACING.SIZE_60,
+      right: SPACING.SIZE_60,
     },
   },
   tireSizeHeader: {
