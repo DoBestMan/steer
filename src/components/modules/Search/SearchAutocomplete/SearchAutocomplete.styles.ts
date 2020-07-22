@@ -15,7 +15,7 @@ import {
   TIME,
   Z_INDEX,
 } from '~/lib/constants';
-import { typography, typographyStyles } from '~/styles/typography.styles';
+import { typography } from '~/styles/typography.styles';
 
 const animationStyles = {
   [`listbox_${ENTERING}`]: {
@@ -89,18 +89,20 @@ const styles: StylesMap = {
   clearSearchButton: {
     flexShrink: 0,
   },
-  clearSecondaryInput: {
-    color: COLORS.GLOBAL.BLACK,
-    [MQ.M]: typography.bodyCopy,
-  },
-  closeSearchButton: {
-    span: {
-      borderBottom: BORDERS.DOTTED_TRANSPARENT_2PX,
+  clearSecondaryInput: [
+    typography.labelCopyTight,
+    {
+      color: COLORS.GLOBAL.BLACK,
     },
-    [MQ.M]: {
-      span: typographyStyles.bodyCopy,
+  ],
+  closeSearchButton: [
+    typography.labelCopyTight,
+    {
+      span: {
+        borderBottom: BORDERS.DOTTED_TRANSPARENT_2PX,
+      },
     },
-  },
+  ],
   closeSearchButtonRearTire: {
     '&:focus > span': {
       color: COLORS.GLOBAL.ORANGE,

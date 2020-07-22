@@ -20,7 +20,6 @@ import { SiteSearchResultImageItem } from '~/data/models/SiteSearchResultImageIt
 import { SiteSearchResultTextItem } from '~/data/models/SiteSearchResultTextItem';
 import { ARIA_LIVE, KEYCODES, THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
-import { typography } from '~/styles/typography.styles';
 
 import { useAutocompleteSelectedItem } from '../Search.hooks';
 import {
@@ -254,9 +253,7 @@ function SearchAutocomplete({
   );
 
   const clearSecondaryInputComponent = (
-    <div css={[typography.smallCopyTight, styles.clearSecondaryInput]}>
-      {ui('search.removeRearTire')}
-    </div>
+    <div css={styles.clearSecondaryInput}>{ui('search.removeRearTire')}</div>
   );
 
   return (

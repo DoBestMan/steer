@@ -1,7 +1,6 @@
 import Link from '~/components/global/Link/Link';
 import { LINK_TYPES, THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
-import { typography } from '~/styles/typography.styles';
 
 import styles from './SearchAutocomplete.styles';
 
@@ -21,7 +20,6 @@ function CloseSearchButton({ isRearTireState, onCloseSearchClick }: Props) {
       <Link
         as={LINK_TYPES.BUTTON}
         css={[
-          typography.smallCopy,
           styles.closeSearchButton,
           isRearTireState && styles.closeSearchButtonRearTire,
         ]}
