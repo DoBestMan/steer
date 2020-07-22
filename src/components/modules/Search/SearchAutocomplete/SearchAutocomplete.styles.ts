@@ -279,7 +279,7 @@ const styles: StylesMap = {
   },
   tireSizeHeader: {
     alignItems: 'center',
-    backgroundColor: COLORS.GLOBAL.BLACK,
+    backgroundColor: COLORS.ORANGE.SHADE_85_SOLID,
     height: 60,
     [MQ.M]: {
       height: 80,
