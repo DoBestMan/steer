@@ -17,7 +17,7 @@ import {
 } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
-export const CAR_ROTATION_DURATION = 400;
+export const CAR_ROTATION_DURATION = 200;
 export const SCENERY_OR_WEATHER_DURATION = 400;
 const VEHICLE_CONTAINER_DURATION = 6000;
 
