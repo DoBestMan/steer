@@ -282,6 +282,8 @@ function SearchAutocomplete({
             css={[
               styles.searchIconGridItem,
               isRearTireState && styles.searchIconGridRearTire,
+              activeInputType === SearchInputEnum.SECONDARY &&
+                styles.searchIconSecondaryInput,
             ]}
           >
             <div css={styles.searchIconWrapper}>

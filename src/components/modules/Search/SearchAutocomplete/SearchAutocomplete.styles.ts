@@ -191,7 +191,7 @@ const styles: StylesMap = {
     display: 'none',
     justifyContent: 'center',
     [MQ.L]: {
-      display: 'block',
+      display: 'flex',
       padding: `${SPACING.SIZE_30}px 0`,
     },
     [MQ.XL]: {
@@ -205,6 +205,9 @@ const styles: StylesMap = {
     [MQ.XL]: {
       padding: `${SPACING.SIZE_50}px 0 ${SPACING.SIZE_30}px`,
     },
+  },
+  searchIconSecondaryInput: {
+    gridRow: 2,
   },
   searchIconWrapper: {
     alignItems: 'flex-start',
