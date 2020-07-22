@@ -44,7 +44,6 @@ function ProductDetail({ serverData }: ProductDetailData) {
     meta,
     onChangeSize,
     onClickChangeSize,
-    onClickFindYourSize,
     onCloseSizeSelector,
     productInfo,
     recirculation,
@@ -166,7 +165,6 @@ function ProductDetail({ serverData }: ProductDetailData) {
             <PDPStickyBar
               avoidSection={stickyBarAvoidSection}
               darkSection={stickyBarDarkSection}
-              onClickFindYourSize={onClickFindYourSize}
               {...stickyBar}
             />
           </GridItem>

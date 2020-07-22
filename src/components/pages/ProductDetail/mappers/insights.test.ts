@@ -4,7 +4,6 @@ import { mapDataToInsights } from './insights';
 import {
   routerMock,
   routerWithTireSizeMock,
-  searchContextMock,
   siteProductMock,
   userPersonalizationContextMock,
 } from './ProductDetail.mock';
@@ -16,8 +15,8 @@ describe('pages/ProductDetails/mappers/insights', () => {
     expect(
       mapDataToInsights({
         handleChangeSize: () => {},
+        isLoadingData: false,
         router: routerWithTireSizeMock,
-        search: searchContextMock,
         siteProduct: siteProductMock,
         userPersonalization: userPersonalizationContextMock,
       }),
@@ -44,8 +43,14 @@ describe('pages/ProductDetails/mappers/insights', () => {
     expect(
       mapDataToInsights({
         handleChangeSize: () => {},
-        router: routerMock,
-        search: searchContextMock,
+        isLoadingData: false,
+        router: {
+          ...routerMock,
+          query: {
+            ...routerMock.query,
+            tireSize: '100-40r17',
+          },
+        },
         siteProduct: {
           ...siteProductMock,
           siteProductLineSizeDetail: null,
@@ -66,8 +71,8 @@ describe('pages/ProductDetails/mappers/insights', () => {
     expect(
       mapDataToInsights({
         handleChangeSize: () => {},
+        isLoadingData: false,
         router: routerWithTireSizeMock,
-        search: searchContextMock,
         siteProduct: siteProductMock,
         userPersonalization: {
           ...userPersonalizationContextMock,
@@ -85,8 +90,8 @@ describe('pages/ProductDetails/mappers/insights', () => {
     expect(
       mapDataToInsights({
         handleChangeSize: () => {},
+        isLoadingData: false,
         router: routerWithTireSizeMock,
-        search: searchContextMock,
         siteProduct: siteProductMock,
         userPersonalization: userPersonalizationContextMock,
       }),
@@ -101,6 +106,7 @@ describe('pages/ProductDetails/mappers/insights', () => {
     expect(
       mapDataToInsights({
         handleChangeSize: () => {},
+        isLoadingData: false,
         router: {
           ...routerWithTireSizeMock,
           query: {
@@ -108,12 +114,51 @@ describe('pages/ProductDetails/mappers/insights', () => {
             tireSize: '100-40r17',
           },
         },
-        search: searchContextMock,
         siteProduct: siteProductMock,
         userPersonalization: userPersonalizationContextMock,
       }),
     ).toMatchObject({
       sizeCheckState: SIZE_CHECK_STATES.SIZE_FITS,
+      showFitBar: true,
+      vehicle: `${vehicle?.vehicleMake} ${vehicle?.vehicleModel} ${vehicle?.vehicleYear} ${vehicle?.vehicleTrim}`,
+    });
+  });
+
+  it('returns insights props that fits the tire line', () => {
+    expect(
+      mapDataToInsights({
+        handleChangeSize: () => {},
+        isLoadingData: false,
+        router: routerMock,
+        siteProduct: siteProductMock,
+        userPersonalization: userPersonalizationContextMock,
+      }),
+    ).toMatchObject({
+      sizeCheckState: SIZE_CHECK_STATES.TIRE_LINE_FITS,
+      showFitBar: true,
+      vehicle: `${vehicle?.vehicleMake} ${vehicle?.vehicleModel} ${vehicle?.vehicleYear} ${vehicle?.vehicleTrim}`,
+    });
+  });
+
+  it('returns insights props that does not fit the tire line', () => {
+    expect(
+      mapDataToInsights({
+        handleChangeSize: () => {},
+        isLoadingData: false,
+        router: routerMock,
+        siteProduct: {
+          ...siteProductMock,
+          siteProductLineAvailableSizeList: siteProductMock.siteProductLineAvailableSizeList.map(
+            (item) => ({
+              ...item,
+              isFitForCurrentVehicle: false,
+            }),
+          ),
+        },
+        userPersonalization: userPersonalizationContextMock,
+      }),
+    ).toMatchObject({
+      sizeCheckState: SIZE_CHECK_STATES.TIRE_LINE_DOES_NOT_FIT,
       showFitBar: true,
       vehicle: `${vehicle?.vehicleMake} ${vehicle?.vehicleModel} ${vehicle?.vehicleYear} ${vehicle?.vehicleTrim}`,
     });

@@ -13,7 +13,6 @@ import { ReviewsProps } from '~/components/modules/PDP/Reviews/Reviews';
 import { SizeFinderProps } from '~/components/modules/PDP/SizeFinder/SizeFinder';
 import { PDPStickyBarProps } from '~/components/modules/PDP/StickyBar/StickyBar';
 import { TechnicalSpecsProps } from '~/components/modules/PDP/TechnicalSpecs/TechnicalSpecs';
-import { useSearchContext } from '~/components/modules/Search/Search.context';
 import { useGlobalsContext } from '~/context/Globals.context';
 import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
 import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
@@ -104,7 +103,6 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
   const { quantity, setQuantity } = useProductDetailContext();
   const router = useRouter();
   const { query, asPath, pathname } = router;
-  const search = useSearchContext();
   const userPersonalization = useUserPersonalizationContext();
   const { vehicle } = userPersonalization;
   const globals = useSiteGlobalsContext();
@@ -113,7 +111,9 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
   const { hostUrl } = useGlobalsContext();
   const isPLA = !!router.route.match(ROUTE_MAP[ROUTES.PRODUCT_DETAIL_PLA]);
 
-  const { data, error } = useApiDataWithDefault<ProductDetailResponse>({
+  const { data, error, isValidating } = useApiDataWithDefault<
+    ProductDetailResponse
+  >({
     defaultData: serverData,
     endpoint: '/product-detail',
     includeUserRegion: true,
@@ -208,8 +208,8 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
     faq: mapDataToFAQ({ siteProduct, globals }),
     insights: mapDataToInsights({
       handleChangeSize,
+      isLoadingData: isValidating,
       router,
-      search,
       siteProduct,
       userPersonalization,
     }),

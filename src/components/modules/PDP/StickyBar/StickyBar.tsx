@@ -15,7 +15,6 @@ export interface PDPStickyBarProps {
   avoidSection?: RefObject<HTMLDivElement>;
   brandLogo: SiteImage | null;
   darkSection?: RefObject<HTMLDivElement>;
-  onClickFindYourSize: () => void;
   productLine: string;
   rearPrice?: string | null;
   rearSize?: string | null;
@@ -57,7 +56,6 @@ function PDPStickyBar({
   avoidSection,
   brandLogo,
   darkSection,
-  onClickFindYourSize,
   productLine,
   rearPrice,
   rearSize,
@@ -124,7 +122,6 @@ function PDPStickyBar({
     <div aria-hidden={!isActive && !lessThan.L} css={styles.root}>
       <StickyBar theme={theme} logo={brandLogo} secondaryLabel={secondaryLabel}>
         <ActionBar
-          onClickFindYourSize={onClickFindYourSize}
           rearPrice={rearPrice}
           rearSize={rearSize}
           roadHazard={roadHazard}

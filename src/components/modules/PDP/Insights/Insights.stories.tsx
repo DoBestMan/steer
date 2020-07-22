@@ -134,7 +134,6 @@ export function InsightsWithKnobs() {
   );
   const onFindTiresThatFit = action('find-tires-that-fit');
   const onSelectAvailableOption = action('select-available-option');
-  const onSearchVehicle = action('search-for-vehicle');
   const onUnselectVehicle = action('unselect-vehicle');
 
   const sizeCheckState = select(
@@ -158,7 +157,6 @@ export function InsightsWithKnobs() {
         openDynamicModal={action('openDynamicModal')}
         onFindTiresThatFit={onFindTiresThatFit}
         onSelectAvailableOption={onSelectAvailableOption}
-        onSearchVehicle={onSearchVehicle}
         onUnselectVehicle={onUnselectVehicle}
         handleChangeLocation={handleChangeLocation}
       />

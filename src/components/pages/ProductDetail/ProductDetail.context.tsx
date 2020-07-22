@@ -1,5 +1,6 @@
-import { ReactNode, useState } from 'react';
+import { ReactNode, useCallback, useState } from 'react';
 
+import { useSearchContext } from '~/components/modules/Search/Search.context';
 import { createContext } from '~/lib/utils/context';
 
 interface Props {
@@ -12,6 +13,7 @@ export interface ProductDetailContextProps {
     front: number;
     rear?: number;
   };
+  searchForVehicle: () => void;
   setQuantity: (values: { front: number; rear?: number }) => void;
 }
 
@@ -22,6 +24,21 @@ function useContextSetup(): ProductDetailContextProps {
     front: 0,
     rear: 0,
   });
+  const {
+    lockSearchStateToVehicle,
+    setShouldPreventLinkNavigation,
+    setIsSearchOpen,
+  } = useSearchContext();
+
+  const searchForVehicle = useCallback(() => {
+    lockSearchStateToVehicle();
+    setShouldPreventLinkNavigation(true);
+    setIsSearchOpen(true);
+  }, [
+    lockSearchStateToVehicle,
+    setShouldPreventLinkNavigation,
+    setIsSearchOpen,
+  ]);
 
   function addToCart({ shouldAddCoverage }: { shouldAddCoverage: boolean }) {
     // TODO: Integrate [WCS-1014]
@@ -31,6 +48,7 @@ function useContextSetup(): ProductDetailContextProps {
   return {
     addToCart,
     quantity,
+    searchForVehicle,
     setQuantity,
   };
 }

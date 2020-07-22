@@ -4,6 +4,7 @@ import Button from '~/components/global/Button/Button';
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import { useProductDetailContext } from '~/components/pages/ProductDetail/ProductDetail.context';
+import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
 import { SiteProductLineSizeDetailRoadHazard } from '~/data/models/SiteProductLineSizeDetailRoadHazard';
 import { THEME } from '~/lib/constants';
 import { formatDollars } from '~/lib/utils/string';
@@ -14,7 +15,6 @@ import RoadHazardModalContainer from '../RoadHazardModal/RoadHazardModal.contain
 import styles from './ActionBar.styles';
 
 export interface PDPActionBarProps {
-  onClickFindYourSize?: () => void;
   rearPrice?: string | null;
   rearSize?: string | null;
   roadHazard: SiteProductLineSizeDetailRoadHazard | null;
@@ -25,7 +25,6 @@ export interface PDPActionBarProps {
 }
 
 function PDPActionBar({
-  onClickFindYourSize,
   rearPrice,
   rearSize,
   roadHazard,
@@ -37,7 +36,13 @@ function PDPActionBar({
   const [isQuantitySelectorOpen, setIsQuantitySelectorOpen] = useState(false);
   const [isRoadHazardOpen, setIsRoadHazardOpen] = useState(false);
   const [price, setPrice] = useState(0);
-  const { addToCart, quantity, setQuantity } = useProductDetailContext();
+  const {
+    addToCart,
+    quantity,
+    searchForVehicle,
+    setQuantity,
+  } = useProductDetailContext();
+  const { vehicle } = useUserPersonalizationContext();
 
   const isTireLine = !tireSize && !rearSize;
   const isSingleTireSize = tireSize && !rearSize;
@@ -86,9 +91,11 @@ function PDPActionBar({
             })}
           </p>
         )}
-        <Button onClick={onClickFindYourSize} theme={theme}>
-          {ui('pdp.stickyBar.findYourSize')}
-        </Button>
+        {!vehicle && (
+          <Button onClick={searchForVehicle} theme={theme}>
+            {ui('pdp.stickyBar.findYourSize')}
+          </Button>
+        )}
       </div>
     );
   }

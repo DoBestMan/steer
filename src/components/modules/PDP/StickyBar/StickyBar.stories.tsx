@@ -1,4 +1,3 @@
-import { action } from '@storybook/addon-actions';
 import { boolean } from '@storybook/addon-knobs';
 import { useRef } from 'react';
 
@@ -30,8 +29,6 @@ export function StickyBarWithKnobs() {
   const hasTireSize = boolean('Has tire size?', false);
   const hasRearSize = boolean('Has rear tire size?', false);
 
-  const onClickFindYourSize = action('click-find-your-size');
-
   return (
     <PDPStickyBar
       brandLogo={logoMock}
@@ -44,7 +41,6 @@ export function StickyBarWithKnobs() {
       sizesAvailable={sizesAvailable}
       tireSize={hasTireSize ? tireSize : undefined}
       tirePrice={hasTireSize ? tirePrice : undefined}
-      onClickFindYourSize={onClickFindYourSize}
     />
   );
 }

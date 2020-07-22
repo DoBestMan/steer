@@ -19,7 +19,6 @@ export interface InsightsProps {
   insightItems: SiteProductInsightItem[];
   make?: string | null;
   onFindTiresThatFit: () => void;
-  onSearchVehicle: () => void;
   onSelectAvailableOption: () => void;
   onUnselectVehicle: () => void;
   rebate: SiteProductInsightsRebate | null;
@@ -42,7 +41,6 @@ function Insights({
   delivery,
   handleChangeLocation,
   onFindTiresThatFit,
-  onSearchVehicle,
   onSelectAvailableOption,
   onUnselectVehicle,
   insightItems = [],
@@ -83,7 +81,6 @@ function Insights({
             vehicle={vehicle}
             sizeCheckState={sizeCheckState}
             onFindTiresThatFit={onFindTiresThatFit}
-            onSearchVehicle={onSearchVehicle}
             onSelectAvailableOption={onSelectAvailableOption}
             onUnselectVehicle={onUnselectVehicle}
           />

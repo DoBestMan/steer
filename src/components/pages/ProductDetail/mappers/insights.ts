@@ -2,7 +2,6 @@ import { NextRouter } from 'next/router';
 
 import { InsightsProps } from '~/components/modules/PDP/Insights/Insights';
 import { SIZE_CHECK_STATES } from '~/components/modules/PDP/Insights/Insights.types';
-import { SearchContextProps } from '~/components/modules/Search/Search.context';
 import { UserPersonalizationProps } from '~/context/UserPersonalization.context';
 import { SiteProduct } from '~/data/models/SiteProduct';
 import { SiteProductLineAvailableSizeItem } from '~/data/models/SiteProductLineAvailableSizeItem';
@@ -23,6 +22,11 @@ function getSizeCheckState({
   tireSize?: string | string[];
   vehicle?: VehicleMetadata | null;
 }) {
+  const doesFitTireLine =
+    !!vehicle &&
+    siteProductLineAvailableSizeList.some(
+      (item) => item.isFitForCurrentVehicle,
+    );
   const sizeProps = tireSize
     ? siteProductLineAvailableSizeList.find(
         (item) => item.siteQueryParams.tireSize === tireSize,
@@ -32,8 +36,16 @@ function getSizeCheckState({
     ? siteProductLineAvailableSizeList.find((item) => item.size === rearSize)
     : null;
 
-  if (!tireSize || !vehicle) {
+  if (tireSize && !vehicle) {
     return SIZE_CHECK_STATES.UNKNOWN;
+  }
+
+  if (!tireSize && doesFitTireLine) {
+    return SIZE_CHECK_STATES.TIRE_LINE_FITS;
+  }
+
+  if (!tireSize && !doesFitTireLine) {
+    return SIZE_CHECK_STATES.TIRE_LINE_DOES_NOT_FIT;
   }
 
   const doesItFit =
@@ -44,11 +56,7 @@ function getSizeCheckState({
     return SIZE_CHECK_STATES.SIZE_FITS;
   }
 
-  const hasSizeThatFits = siteProductLineAvailableSizeList.some(
-    (item) => item.isFitForCurrentVehicle,
-  );
-
-  if (!hasSizeThatFits) {
+  if (!doesFitTireLine) {
     return SIZE_CHECK_STATES.TIRE_LINE_DOES_NOT_FIT;
   }
 
@@ -57,12 +65,8 @@ function getSizeCheckState({
 
 export function mapDataToInsights({
   handleChangeSize,
+  isLoadingData,
   router,
-  search: {
-    lockSearchStateToVehicle,
-    setIsSearchOpen,
-    setShouldPreventLinkNavigation,
-  },
   siteProduct: {
     siteProductInsights,
     siteProductLineAvailableSizeList,
@@ -71,8 +75,8 @@ export function mapDataToInsights({
   userPersonalization,
 }: {
   handleChangeSize: (tireSize: string) => void;
+  isLoadingData: boolean;
   router: NextRouter;
-  search: SearchContextProps;
   siteProduct: SiteProduct;
   userPersonalization: UserPersonalizationProps;
 }): Omit<InsightsProps, 'handleChangeLocation'> {
@@ -80,20 +84,15 @@ export function mapDataToInsights({
   const { query } = router;
   const tireSize = query?.tireSize;
   const rearSize = query?.rearSize;
-  const showFitBar = !!tireSize && !!siteProductLineSizeDetail;
+  const showFitBar =
+    (!!tireSize && !!siteProductLineSizeDetail) ||
+    (!!vehicle && !isLoadingData);
   const sizeCheckState = getSizeCheckState({
     rearSize,
     siteProductLineAvailableSizeList,
     tireSize,
     vehicle,
   });
-
-  const onSearchVehicle = () => {
-    lockSearchStateToVehicle();
-    setShouldPreventLinkNavigation(true);
-
-    setIsSearchOpen(true);
-  };
 
   const onSelectAvailableOption = () => {
     const firstAvailableSize = siteProductLineAvailableSizeList.find(
@@ -132,7 +131,6 @@ export function mapDataToInsights({
     insightItems: siteProductInsights.siteProductInsightList,
     make: vehicle?.vehicleMake,
     onFindTiresThatFit,
-    onSearchVehicle,
     onSelectAvailableOption,
     onUnselectVehicle: unselectVehicle,
     rebate: siteProductInsights.rebate,

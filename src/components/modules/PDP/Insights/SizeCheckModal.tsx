@@ -4,27 +4,33 @@ import BottomCardModal from '~/components/global/Modal/BottomCardModal';
 import { modalContainerStyles } from '~/components/global/Modal/BottomCardModal.styles';
 import { ui } from '~/lib/utils/ui-dictionary';
 
+import { SIZE_CHECK_STATES } from './Insights.types';
 import styles from './InsightsItem.styles';
 
 interface Props {
   actions: { action: () => void; label: string }[] | null;
-  hasInfoModule?: boolean;
   isOpen: boolean;
   onClose: () => void;
+  sizeCheckState: SIZE_CHECK_STATES;
   vehicle?: string | null;
   vehicleModel?: string | null;
 }
 
 function SizeCheckModal({
   actions,
-  hasInfoModule,
   isOpen,
   onClose,
+  sizeCheckState,
   vehicle,
   vehicleModel,
 }: Props) {
   const learnMoreLink = '[Learn more](#)';
-  const eyebrow = hasInfoModule ? undefined : vehicle;
+  const doesFit =
+    sizeCheckState === SIZE_CHECK_STATES.SIZE_FITS ||
+    sizeCheckState === SIZE_CHECK_STATES.TIRE_LINE_FITS;
+  const tireLineDoesNotFit =
+    sizeCheckState === SIZE_CHECK_STATES.TIRE_LINE_DOES_NOT_FIT;
+  const eyebrow = doesFit ? vehicle : undefined;
 
   return (
     <BottomCardModal
@@ -39,7 +45,7 @@ function SizeCheckModal({
           eyebrow ? styles.modalWithEyebrow : undefined,
         ]}
       >
-        {hasInfoModule && (
+        {!doesFit && (
           <>
             <FeaturedInfoModule
               copy={ui('pdp.insights.fitting.modalInfoCopy', {
@@ -49,9 +55,14 @@ function SizeCheckModal({
               featureDescription={ui(
                 'pdp.insights.fitting.modalInfoDescription',
               )}
-              title={ui('pdp.insights.fitting.modalInfoTitle', {
-                model: vehicleModel || '',
-              })}
+              title={ui(
+                tireLineDoesNotFit
+                  ? 'pdp.insights.fitting.modalInfoTitleTireLine'
+                  : 'pdp.insights.fitting.modalInfoTitle',
+                {
+                  model: vehicleModel || '',
+                },
+              )}
             />
 
             <span css={styles.modalDivider} />

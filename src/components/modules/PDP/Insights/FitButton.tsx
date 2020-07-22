@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import { Icon as IconType } from '~/components/global/Icon/Icon.types';
+import { useProductDetailContext } from '~/components/pages/ProductDetail/ProductDetail.context';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 import { ui } from '~/lib/utils/ui-dictionary';
 
@@ -16,7 +17,6 @@ type Props = Pick<
   | 'vehicle'
   | 'make'
   | 'onFindTiresThatFit'
-  | 'onSearchVehicle'
   | 'onSelectAvailableOption'
   | 'onUnselectVehicle'
 >;
@@ -29,13 +29,16 @@ interface Action {
 const mapStatusToLabel: Record<SIZE_CHECK_STATES, string> = {
   [SIZE_CHECK_STATES.UNKNOWN]: 'pdp.insights.fitting.unknown',
   [SIZE_CHECK_STATES.SIZE_FITS]: 'pdp.insights.fitting.sizeFits',
-  [SIZE_CHECK_STATES.TIRE_LINE_DOES_NOT_FIT]: 'pdp.insights.fitting.doesNotFit',
+  [SIZE_CHECK_STATES.TIRE_LINE_DOES_NOT_FIT]:
+    'pdp.insights.fitting.tireLineDoesNotFit',
+  [SIZE_CHECK_STATES.TIRE_LINE_FITS]: 'pdp.insights.fitting.sizeFits',
   [SIZE_CHECK_STATES.DOES_NOT_FIT]: 'pdp.insights.fitting.doesNotFit',
 };
 
 const mapStatusToIcon: Record<SIZE_CHECK_STATES, IconType> = {
   [SIZE_CHECK_STATES.UNKNOWN]: ICONS.UNKNOWN,
   [SIZE_CHECK_STATES.SIZE_FITS]: ICONS.THUMBS_UP,
+  [SIZE_CHECK_STATES.TIRE_LINE_FITS]: ICONS.THUMBS_UP,
   [SIZE_CHECK_STATES.TIRE_LINE_DOES_NOT_FIT]: ICONS.FORBIDDEN,
   [SIZE_CHECK_STATES.DOES_NOT_FIT]: ICONS.FORBIDDEN,
 };
@@ -53,52 +56,70 @@ function mapStatusToActions({
   handleSelectAvailableSize: () => void;
   handleUnselectVehicle: () => void;
 }): Action[] {
-  if (sizeCheckState === SIZE_CHECK_STATES.TIRE_LINE_DOES_NOT_FIT) {
-    return [
-      {
-        label: ui('pdp.insights.fitting.viewTiresThatFit'),
-        action: handleFindTiresThatFit,
-      },
-      {
-        label: ui('pdp.insights.fitting.selectAnotherVehicle'),
-        action: handleSearchVehicle,
-      },
-      {
-        label: ui('pdp.insights.fitting.unselectVehicle'),
-        action: handleUnselectVehicle,
-      },
-    ];
+  switch (sizeCheckState) {
+    case SIZE_CHECK_STATES.TIRE_LINE_DOES_NOT_FIT:
+      return [
+        {
+          label: ui('pdp.insights.fitting.viewTiresThatFit'),
+          action: handleFindTiresThatFit,
+        },
+        {
+          label: ui('pdp.insights.fitting.selectAnotherVehicle'),
+          action: handleSearchVehicle,
+        },
+        {
+          label: ui('pdp.insights.fitting.unselectVehicle'),
+          action: handleUnselectVehicle,
+        },
+      ];
+    case SIZE_CHECK_STATES.DOES_NOT_FIT:
+      return [
+        {
+          label: ui('pdp.insights.fitting.selectAFittingSize', {
+            make: make || '',
+          }),
+          action: handleSelectAvailableSize,
+        },
+        {
+          label: ui('pdp.insights.fitting.selectAnotherVehicle'),
+          action: handleSearchVehicle,
+        },
+        {
+          label: ui('pdp.insights.fitting.unselectVehicle'),
+          action: handleUnselectVehicle,
+        },
+      ];
+    case SIZE_CHECK_STATES.SIZE_FITS:
+      return [
+        {
+          label: ui('pdp.insights.fitting.selectAnotherVehicle'),
+          action: handleSearchVehicle,
+        },
+        {
+          label: ui('pdp.insights.fitting.unselectVehicle'),
+          action: handleUnselectVehicle,
+        },
+      ];
+    case SIZE_CHECK_STATES.TIRE_LINE_FITS:
+      return [
+        {
+          label: ui('pdp.insights.fitting.selectAFittingSize', {
+            make: make || '',
+          }),
+          action: handleSelectAvailableSize,
+        },
+        {
+          label: ui('pdp.insights.fitting.selectAnotherVehicle'),
+          action: handleSearchVehicle,
+        },
+        {
+          label: ui('pdp.insights.fitting.unselectVehicle'),
+          action: handleUnselectVehicle,
+        },
+      ];
+    default:
+      return [];
   }
-
-  if (sizeCheckState === SIZE_CHECK_STATES.DOES_NOT_FIT) {
-    return [
-      {
-        label: ui('pdp.insights.fitting.selectAFittingSize', {
-          make: make || '',
-        }),
-        action: handleSelectAvailableSize,
-      },
-      {
-        label: ui('pdp.insights.fitting.selectAnotherVehicle'),
-        action: handleSearchVehicle,
-      },
-      {
-        label: ui('pdp.insights.fitting.unselectVehicle'),
-        action: handleUnselectVehicle,
-      },
-    ];
-  }
-
-  return [
-    {
-      label: ui('pdp.insights.fitting.selectAnotherVehicle'),
-      action: handleSearchVehicle,
-    },
-    {
-      label: ui('pdp.insights.fitting.unselectVehicle'),
-      action: handleUnselectVehicle,
-    },
-  ];
 }
 
 function FitButton({
@@ -106,13 +127,15 @@ function FitButton({
   make,
   vehicle,
   onFindTiresThatFit,
-  onSearchVehicle,
   onSelectAvailableOption,
   onUnselectVehicle,
 }: Props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { searchForVehicle } = useProductDetailContext();
   const isUnknown = sizeCheckState === SIZE_CHECK_STATES.UNKNOWN;
-  const doesItFit = sizeCheckState === SIZE_CHECK_STATES.SIZE_FITS;
+  const doesItFit =
+    sizeCheckState === SIZE_CHECK_STATES.SIZE_FITS ||
+    sizeCheckState === SIZE_CHECK_STATES.TIRE_LINE_FITS;
 
   const label = ui(mapStatusToLabel[sizeCheckState], {
     vehicle: vehicle || '',
@@ -126,7 +149,7 @@ function FitButton({
   };
 
   const handleSearchVehicle = () => {
-    onSearchVehicle && onSearchVehicle();
+    searchForVehicle();
     setIsModalOpen(false);
   };
 
@@ -177,9 +200,9 @@ function FitButton({
 
       <SizeCheckModal
         actions={actions}
-        hasInfoModule={!doesItFit}
         isOpen={isModalOpen}
         onClose={handleCloseModal}
+        sizeCheckState={sizeCheckState}
         vehicle={vehicle}
         vehicleModel={vehicle}
       />

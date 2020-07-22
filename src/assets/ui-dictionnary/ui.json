@@ -284,12 +284,14 @@
     "insights": {
       "fitting": {
         "sizeFits": "Fits your {{vehicle}}",
+        "tireLineDoesNotFit": "This tire does not fit your {{vehicle}}",
         "doesNotFit": "It doesn’t fit {{vehicle}}",
         "unknown": "Confirm if it fits your vehicle",
         "modalContentLabel": "Size Check Udpate",
         "modalInfoDescription": "PRO Tip",
         "modalInfoCopy": "Most drivers keep the same size. If you want to change it, make sure you make the proper safety checks. \n\n{{link}}",
         "modalInfoTitle": "This isn’t the tire size that came with your {{model}} from the factory",
+        "modalInfoTitleTireLine": "This tire doesn’t have an option of the same size that came with your {{model}} from the factory",
         "selectAFittingSize": "Change to the size recommended by {{make}}",
         "selectAnotherVehicle": "Select another vehicle",
         "unselectVehicle": "Unselect vehicle",
