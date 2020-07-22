@@ -17,10 +17,10 @@ const styles: StylesMap = {
   },
   cta: {
     [MQ.S]: {
-      padding: `0 ${SPACING.SIZE_40}px`,
+      padding: `${SPACING.SIZE_40}px ${SPACING.SIZE_40}px 0 ${SPACING.SIZE_40}px`,
     },
     [MQ.L]: {
-      padding: `0 ${SPACING.SIZE_40}px 0 0`,
+      padding: `${SPACING.SIZE_40}px ${SPACING.SIZE_40}px 0 0`,
     },
   },
   icon: {
@@ -50,9 +50,6 @@ const styles: StylesMap = {
       position: 'absolute',
       right: SPACING.SIZE_30,
     },
-  },
-  list: {
-    marginBottom: SPACING.SIZE_40,
   },
   listItem: [
     typography.smallCopy,

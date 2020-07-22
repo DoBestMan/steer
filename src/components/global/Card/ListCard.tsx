@@ -21,7 +21,7 @@ function ListCard({ items, more, title }: SiteInsightItemList) {
         <h2 css={styles.title}>{title}</h2>
       </GridItem>
       <GridItem gridColumnL="3/6" gridColumnXL="3/6">
-        <ul css={styles.list}>
+        <ul>
           {items.map(({ icon, label, link }) => (
             <li css={styles.listItem} key={label}>
               <Link href={link.href}>
