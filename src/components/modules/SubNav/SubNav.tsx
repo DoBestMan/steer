@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 import Grid from '~/components/global/Grid/Grid';
@@ -27,6 +28,9 @@ function SubNav({ siteMenuBrowseList, siteMenuLearn }: SiteMenu) {
     activeLink,
   } = useNavContext();
   const { isMobile } = useBreakpoints();
+
+  const router = useRouter();
+  router.events?.on('routeChangeStart', handleCloseSubNav); // always close subnav when we change routes
 
   useEffect(() => {
     if (!isSubNavOpen) {
