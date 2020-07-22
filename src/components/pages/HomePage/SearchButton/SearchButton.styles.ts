@@ -35,24 +35,24 @@ const styles: StylesMap = {
     width: '100%',
 
     [MQ.M]: {
-      '&:hover': {
-        backgroundColor: COLORS.DARK.GRAY_90,
-      },
-
       padding: CONSTANTS.PADDING.M,
-      transition: `background-color ${TIME.MS100}ms ease`,
     },
     [MQ.XL]: {
       padding: CONSTANTS.PADDING.XL,
     },
   },
   buttonContainer: {
-    '&::after': {
+    '&:hover:after': {
+      backgroundColor: COLORS.GLOBAL.WHITE,
+    },
+
+    '&:after': {
       backgroundColor: COLORS.ORANGE.TINT_30,
       content: '""',
       display: 'block',
       height: 1,
       margin: `0 ${GRID_MARGIN.S}px`,
+      transition: `background-color ${TIME.MS100}ms ease`,
 
       [MQ.M]: {
         margin: `0 ${GRID_MARGIN.M}px`,
