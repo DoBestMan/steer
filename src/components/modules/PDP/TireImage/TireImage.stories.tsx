@@ -1,5 +1,6 @@
 import {
   SiteCatalogProductImage,
+  SiteCatalogProductImageProductImageTypeEnum,
   SiteCatalogProductImageTypeEnum,
 } from '~/data/models/SiteCatalogProductImage';
 import { SiteImage } from '~/data/models/SiteImage';
@@ -93,6 +94,25 @@ const brand = {
   label: 'AG-Dura',
 };
 
-export function TireImageWithKnobs() {
+const unavailableAssetList: SiteProductLine['assetList'] = [
+  {
+    image: {
+      altText: 'Image not available',
+      height: 986,
+      src:
+        'https://images.simpletire.com/image/upload/v1593202327/steer/pdp/image-unavailable.jpg',
+      type: ICON_IMAGE_TYPE.IMAGE,
+      width: 709,
+    },
+    productImageType: SiteCatalogProductImageProductImageTypeEnum.Unavailable,
+    type: SiteCatalogProductImageTypeEnum.SiteCatalogProductImage,
+  },
+];
+
+export function TireImageCarousel() {
   return <TireImage assetList={assetList} brand={brand} />;
+}
+
+export function UnavailableTireImage() {
+  return <TireImage assetList={unavailableAssetList} brand={brand} />;
 }
