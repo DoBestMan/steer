@@ -17,6 +17,7 @@ export interface FeaturedInfoModuleProps {
   };
   copy: string;
   customCopyStyles?: CSSStyles;
+  customLinkStyles?: CSSStyles;
   customTitleStyles?: CSSStyles;
   dataVendor?: string;
   featureDescription?: string;
@@ -29,6 +30,7 @@ function FeaturedInfoModule({
   action,
   copy,
   customCopyStyles,
+  customLinkStyles,
   customTitleStyles,
   dataVendor,
   featureDescription,
@@ -55,7 +57,7 @@ function FeaturedInfoModule({
 
       {action && (
         <Link
-          css={styles.action}
+          css={[styles.action, customLinkStyles]}
           {...action}
           theme={THEME.LIGHT}
           data-vendor={dataVendor}

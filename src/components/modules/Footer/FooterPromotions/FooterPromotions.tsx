@@ -5,6 +5,7 @@ import { LINK_TYPES } from '~/lib/constants';
 import { openAttentiveModal } from '~/lib/helpers/attentive';
 import { openReferAFriendModal } from '~/lib/helpers/refer-a-friend';
 import { ui } from '~/lib/utils/ui-dictionary';
+import { typography } from '~/styles/typography.styles';
 
 import styles from '../Footer.styles';
 import { PROMOTIONS } from './FooterPromotions.constants';
@@ -28,6 +29,8 @@ function FooterPromotions() {
             text: ui('footer.promotions.signUpAction'),
           }}
           customTitleStyles={styles.featuredInfoTitle}
+          customCopyStyles={typography.bodyCopy}
+          customLinkStyles={styles.featuredInfoLink}
         />
       </GridItem>
       <GridItem
@@ -43,6 +46,8 @@ function FooterPromotions() {
             text: ui('footer.promotions.giftCardAction'),
           }}
           customTitleStyles={styles.featuredInfoTitle}
+          customCopyStyles={typography.bodyCopy}
+          customLinkStyles={styles.featuredInfoLink}
         />
       </GridItem>
       {greaterThan.S && (
@@ -50,6 +55,8 @@ function FooterPromotions() {
           <FeaturedInfoModule
             {...PROMOTIONS.militaryDiscount}
             customTitleStyles={styles.featuredInfoTitle}
+            customCopyStyles={typography.bodyCopy}
+            customLinkStyles={styles.featuredInfoLink}
           />
         </GridItem>
       )}
@@ -58,6 +65,8 @@ function FooterPromotions() {
           <FeaturedInfoModule
             {...PROMOTIONS.freeShipping}
             customTitleStyles={styles.featuredInfoTitle}
+            customCopyStyles={typography.bodyCopy}
+            customLinkStyles={styles.featuredInfoLink}
           />
         </GridItem>
       )}

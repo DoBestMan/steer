@@ -40,6 +40,16 @@ const styles: StylesMap = {
     ],
   },
 
+  featuredInfoLink: [
+    typography.primarySubhead,
+    {
+      '&:focus, &:hover': {
+        span: { color: COLORS.GLOBAL.BLACK },
+      },
+      color: COLORS.LIGHT.GRAY_70,
+    },
+  ],
+
   featuredInfoModule: {
     '&:not(:last-of-type)': {
       '&::after': {
