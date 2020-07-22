@@ -4,18 +4,20 @@ import Button from '~/components/global/Button/Button';
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import { useProductDetailContext } from '~/components/pages/ProductDetail/ProductDetail.context';
+import { SiteProductLineSizeDetailRoadHazard } from '~/data/models/SiteProductLineSizeDetailRoadHazard';
 import { THEME } from '~/lib/constants';
 import { formatDollars } from '~/lib/utils/string';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import QuantitySelectorContainer from '../QuantitySelector/QuantitySelector.container';
+import RoadHazardModalContainer from '../RoadHazardModal/RoadHazardModal.container';
 import styles from './ActionBar.styles';
 
 export interface PDPActionBarProps {
-  onClickAddToCart?: () => void;
   onClickFindYourSize?: () => void;
   rearPrice?: string | null;
   rearSize?: string | null;
+  roadHazard: SiteProductLineSizeDetailRoadHazard | null;
   startingPrice?: string | null;
   theme: THEME;
   tirePrice?: string | null;
@@ -23,19 +25,19 @@ export interface PDPActionBarProps {
 }
 
 function PDPActionBar({
-  onClickAddToCart,
   onClickFindYourSize,
   rearPrice,
   rearSize,
+  roadHazard,
   startingPrice,
   theme,
   tirePrice,
   tireSize,
 }: PDPActionBarProps) {
-  const [isDropdownOpen] = useState(false);
   const [isQuantitySelectorOpen, setIsQuantitySelectorOpen] = useState(false);
+  const [isRoadHazardOpen, setIsRoadHazardOpen] = useState(false);
   const [price, setPrice] = useState(0);
-  const { quantity, setQuantity } = useProductDetailContext();
+  const { addToCart, quantity, setQuantity } = useProductDetailContext();
 
   const isTireLine = !tireSize && !rearSize;
   const isSingleTireSize = tireSize && !rearSize;
@@ -50,11 +52,24 @@ function PDPActionBar({
   }, [quantity, setPrice, isSingleTireSize, tirePrice, rearPrice]);
 
   function toggleQuantitySelector() {
-    setIsQuantitySelectorOpen(!isQuantitySelectorOpen);
+    setIsQuantitySelectorOpen((isOpen) => !isOpen);
+  }
+
+  function toggleRoadHazard() {
+    setIsRoadHazardOpen((isOpen) => !isOpen);
   }
 
   function openQuantitySelector() {
     setIsQuantitySelectorOpen(true);
+  }
+
+  function handleClickAddToCart() {
+    if (!roadHazard) {
+      addToCart({ shouldAddCoverage: false });
+      return;
+    }
+
+    setIsRoadHazardOpen(true);
   }
 
   function handleChangeQuantity({ front }: { front: number }) {
@@ -82,12 +97,7 @@ function PDPActionBar({
     return (
       <>
         <div css={styles.root}>
-          <Button
-            isToggleActive={isDropdownOpen}
-            isToggle
-            onClick={openQuantitySelector}
-            theme={theme}
-          >
+          <Button isToggle onClick={openQuantitySelector} theme={theme}>
             {ui(
               quantity.front === 1
                 ? 'pdp.stickyBar.changeQuantity'
@@ -97,7 +107,7 @@ function PDPActionBar({
             <Icon name={ICONS.CHEVRON_DOWN} css={styles.dropdownIcon} />
           </Button>
           <Button
-            onClick={onClickAddToCart}
+            onClick={handleClickAddToCart}
             theme={theme}
             css={styles.addToCart}
           >
@@ -113,18 +123,42 @@ function PDPActionBar({
           toggleModal={toggleQuantitySelector}
           tirePrice={tirePrice}
         />
+
+        {!!roadHazard && (
+          <RoadHazardModalContainer
+            isOpen={isRoadHazardOpen}
+            onClose={toggleRoadHazard}
+            durationLabel={roadHazard?.durationLabel}
+            pricePerTire={roadHazard?.pricePerTireInCents}
+          />
+        )}
       </>
     );
   }
 
   return (
-    <div css={styles.root}>
-      <Button onClick={onClickAddToCart} theme={theme} css={styles.addToCart}>
-        {ui('pdp.stickyBar.addToCart', {
-          value: formatDollars(price),
-        })}
-      </Button>
-    </div>
+    <>
+      <div css={styles.root}>
+        <Button
+          onClick={handleClickAddToCart}
+          theme={theme}
+          css={styles.addToCart}
+        >
+          {ui('pdp.stickyBar.addToCart', {
+            value: formatDollars(price),
+          })}
+        </Button>
+      </div>
+
+      {!!roadHazard && (
+        <RoadHazardModalContainer
+          isOpen={isRoadHazardOpen}
+          onClose={toggleRoadHazard}
+          durationLabel={roadHazard?.durationLabel}
+          pricePerTire={roadHazard?.pricePerTireInCents}
+        />
+      )}
+    </>
   );
 }
 

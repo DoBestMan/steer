@@ -7,6 +7,7 @@ interface Props {
 }
 
 export interface ProductDetailContextProps {
+  addToCart: ({ shouldAddCoverage }: { shouldAddCoverage: boolean }) => void;
   quantity: {
     front: number;
     rear?: number;
@@ -16,13 +17,19 @@ export interface ProductDetailContextProps {
 
 const ProductDetailContext = createContext<ProductDetailContextProps>();
 
-function useContextSetup() {
+function useContextSetup(): ProductDetailContextProps {
   const [quantity, setQuantity] = useState<{ front: number; rear?: number }>({
     front: 0,
     rear: 0,
   });
 
+  function addToCart({ shouldAddCoverage }: { shouldAddCoverage: boolean }) {
+    // TODO: Integrate [WCS-1014]
+    alert(`Add to cart: Coverage? ${shouldAddCoverage.toString()}`);
+  }
+
   return {
+    addToCart,
     quantity,
     setQuantity,
   };

@@ -335,19 +335,19 @@
       "searchForTireFrontRear": "See all tires in front {{size}} and rear {{rear}}"
     },
     "roadHazard": {
-      "interceptCopy": "Most tire failure are punctures or bruises that manufacturer’s warranty typically doesn’t cover.\n\n**Get coverage for up to 3 years by $13.02/tire.**",
+      "interceptCopy": "Most tire failure are punctures or bruises that manufacturer’s warranty typically doesn’t cover.\n\n**Get coverage for up to  {{durationLabel}} by  {{pricePerTire}}/tire.**",
       "headerCopy": "Most tire failure are punctures or bruises that manufacturer’s warranty typically doesn’t cover.",
       "interceptTitle": "Did you know?\n\nRoad Hazard Coverage is common in your location",
-      "headerTitle": "Save up to 100% of the tire cost if you need a replacement in 3 years",
+      "headerTitle": "Save up to 100% of the tire cost if you need a replacement in {{durationLabel}}",
       "removeLabel": "Remove coverage",
       "continueButtonLabel": "Continue",
       "keepCoverageButtonLabel": "Keep Coverage",
       "noThanksButtonLabel": "No, thanks",
       "coverageLabel": "Road Hazard Coverage included",
       "coverageLink": "Learn more",
-      "copy": "Protection for 3 years\n\nReplacement up to 100% of the tire cost",
+      "copy": "Protection for {{durationLabel}}\n\nReplacement up to 100% of the tire cost",
       "copyHeader": "Recommended",
-      "price": "{{price}}/tire",
+      "price": "{{pricePerTire}}/tire",
       "featureDescription": "PRO tip"
     },
     "stickyBar": {
@@ -488,6 +488,13 @@
         }
       }
     }
+  },
+  "roadHazard": {
+    "content": "- Protection for 3 years\n- Replacement up to 100% of the tire cost\n- Repairs reimbursed up to $25 per tire, per ocurrence\n\nMost tire failure are punctures or bruises that manufacturer's warranty typically doesn't cover. Our Road Hazard Coverage provides coverage for 36 months from the date of  purchase. It covers up to $400 during the first year, up to $200 on year two and $100 on year three.",
+    "title": "Road Hazard Coverage",
+    "subtitle": "Get protected for when a tire fails as a result of a puncture, bruise or impact.",
+    "imageAlt": "Mechanics in shop replacing tires",
+    "linkLabel": "Learn more about it"
   },
   "search": {
     "addRearTire": "Add different rear size",

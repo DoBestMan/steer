@@ -64,7 +64,7 @@ export type ParsedSizeFinderProps = Omit<SizeFinderProps, 'onChange'>;
 
 export type ParsedStickyBarProps = Omit<
   PDPStickyBarProps,
-  'avoidSection' | 'darkSection' | 'onClickAddToCart' | 'onClickFindYourSize'
+  'avoidSection' | 'darkSection' | 'onClickFindYourSize'
 >;
 
 interface ResponseProps extends Pick<SiteProductLine, 'assetList'> {
@@ -79,7 +79,6 @@ interface ResponseProps extends Pick<SiteProductLine, 'assetList'> {
   linkingData: ProductLinkingData | null;
   meta: MetaProps;
   onChangeSize: (value: string) => void;
-  onClickAddToCart: () => void;
   onClickChangeSize: () => void;
   onClickFindYourSize: () => void;
   onCloseSizeSelector: () => void;
@@ -189,7 +188,6 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
   }, [closeSizeSelector]);
 
   // TODO: Integrate sticky bar
-  const handleClickAddToCart = () => {};
   const handleClickFindYourSize = () => {};
 
   const productInfo = mapDataToProductInfo({
@@ -230,7 +228,6 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
       tireSize: productInfo.size,
     }),
     onChangeSize: handleChangeSize,
-    onClickAddToCart: handleClickAddToCart,
     onClickChangeSize: handleClickChangeSize,
     onClickFindYourSize: handleClickFindYourSize,
     onCloseSizeSelector: handleCloseSizeSelector,

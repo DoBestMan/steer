@@ -94,6 +94,9 @@ export function mapDataToProductInfo({
     },
   );
 
+  const roadHazard =
+    (!rearSize && siteProductLineSizeDetail?.roadHazard) || null;
+
   return {
     availableSizes,
     brand: brandName,
@@ -109,6 +112,7 @@ export function mapDataToProductInfo({
     rearLoadSpeedRating,
     rearPrice,
     rearSize,
+    roadHazard,
     sameSizeSearchResults,
     sameSizeSearchURL,
     size,

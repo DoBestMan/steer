@@ -20,7 +20,6 @@ export function StickyBarWithKnobs() {
   const hasTireSize = boolean('Has tire size?', false);
   const hasRearSize = boolean('Has rear tire size?', false);
 
-  const onClickAddToCart = action('click-add-to-cart');
   const onClickFindYourSize = action('click-find-your-size');
 
   return (
@@ -28,11 +27,11 @@ export function StickyBarWithKnobs() {
       <PDPActionBar
         rearSize={hasRearSize ? rearSize : undefined}
         rearPrice={hasRearSize ? rearPrice : undefined}
+        roadHazard={null}
         startingPrice={startingPrice}
         theme={THEME.ORANGE}
         tireSize={hasTireSize ? tireSize : undefined}
         tirePrice={hasTireSize ? tirePrice : undefined}
-        onClickAddToCart={onClickAddToCart}
         onClickFindYourSize={onClickFindYourSize}
       />
     </div>

@@ -3,6 +3,7 @@ import { RefObject, useEffect, useState } from 'react';
 import ActionBar from '~/components/modules/PDP/ActionBar/ActionBar';
 import StickyBar from '~/components/modules/StickyBar/StickyBar';
 import { SiteImage } from '~/data/models/SiteImage';
+import { SiteProductLineSizeDetailRoadHazard } from '~/data/models/SiteProductLineSizeDetailRoadHazard';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
@@ -14,11 +15,11 @@ export interface PDPStickyBarProps {
   avoidSection?: RefObject<HTMLDivElement>;
   brandLogo: SiteImage | null;
   darkSection?: RefObject<HTMLDivElement>;
-  onClickAddToCart: () => void;
   onClickFindYourSize: () => void;
   productLine: string;
   rearPrice?: string | null;
   rearSize?: string | null;
+  roadHazard: SiteProductLineSizeDetailRoadHazard | null;
   sizesAvailable: number;
   startingPrice?: string | null;
   tirePrice?: string | null;
@@ -56,11 +57,11 @@ function PDPStickyBar({
   avoidSection,
   brandLogo,
   darkSection,
-  onClickAddToCart,
   onClickFindYourSize,
   productLine,
   rearPrice,
   rearSize,
+  roadHazard,
   sizesAvailable,
   startingPrice,
   tirePrice,
@@ -123,10 +124,10 @@ function PDPStickyBar({
     <div aria-hidden={!isActive && !lessThan.L} css={styles.root}>
       <StickyBar theme={theme} logo={brandLogo} secondaryLabel={secondaryLabel}>
         <ActionBar
-          onClickAddToCart={onClickAddToCart}
           onClickFindYourSize={onClickFindYourSize}
           rearPrice={rearPrice}
           rearSize={rearSize}
+          roadHazard={roadHazard}
           startingPrice={startingPrice}
           theme={theme}
           tirePrice={tirePrice}

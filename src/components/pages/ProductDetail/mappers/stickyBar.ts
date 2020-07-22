@@ -47,11 +47,15 @@ export function mapDataToStickyBar({
     `${siteProductLineSizeDetail.size} ${siteProductLineSizeDetail.loadSpeedRating}`;
   const tirePrice = siteProductLineSizeDetail?.price?.salePriceInCents || null;
 
+  const roadHazard =
+    (!rearSize && siteProductLineSizeDetail?.roadHazard) || null;
+
   return {
     brandLogo,
     productLine,
     rearPrice,
     rearSize,
+    roadHazard,
     sizesAvailable,
     startingPrice,
     tirePrice,

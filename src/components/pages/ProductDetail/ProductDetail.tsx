@@ -43,7 +43,6 @@ function ProductDetail({ serverData }: ProductDetailData) {
     linkingData,
     meta,
     onChangeSize,
-    onClickAddToCart,
     onClickChangeSize,
     onClickFindYourSize,
     onCloseSizeSelector,
@@ -167,7 +166,6 @@ function ProductDetail({ serverData }: ProductDetailData) {
             <PDPStickyBar
               avoidSection={stickyBarAvoidSection}
               darkSection={stickyBarDarkSection}
-              onClickAddToCart={onClickAddToCart}
               onClickFindYourSize={onClickFindYourSize}
               {...stickyBar}
             />

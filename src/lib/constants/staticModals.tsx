@@ -25,6 +25,7 @@ export enum STATIC_MODAL_IDS {
   HOW_TO_FIND_VEHICLE_TRIM = 'how-to-find-vehicle-trim',
   // TODO update mock data with consistent naming
   HOW_TO_FIND_YOUR_SIZE = 'findYourTireSize',
+  ROAD_HAZARD_COVERAGE = 'road-hazard-coverage',
 }
 
 // TODO Implement final content WCS-858
@@ -253,6 +254,29 @@ const STATIC_MODALS: Record<string, ModalData> = {
       title: ui('search.identifyTrim.title'),
     },
     type: MODAL_DATA_TYPES.HOW_TO,
+  },
+  [STATIC_MODAL_IDS.ROAD_HAZARD_COVERAGE]: {
+    props: {
+      content: ui('roadHazard.content'),
+      title: ui('roadHazard.title'),
+      subtitle: ui('roadHazard.subtitle'),
+      image: {
+        src: '/static/assets/road-hazard/modal-image.jpg',
+        altText: ui('roadHazard.imageAlt'),
+        type: SiteImageNullableTypeEnum.SiteImage,
+        width: 768,
+        height: 436,
+      },
+      link: {
+        label: ui('roadHazard.linkLabel'),
+        link: {
+          href: '/road_hazard',
+          isExternal: true,
+        },
+      },
+      showSupportSection: false,
+    },
+    type: MODAL_DATA_TYPES.CONTENT,
   },
 };
 /* eslint-enable sort-keys */

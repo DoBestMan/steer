@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import Button from '~/components/global/Button/Button';
 import FeaturedInfoModule from '~/components/global/FeaturedInfoModule/FeaturedInfoModule';
@@ -8,7 +8,10 @@ import Markdown from '~/components/global/Markdown/Markdown';
 import BottomCardModal from '~/components/global/Modal/BottomCardModal';
 import { modalContainerStyles } from '~/components/global/Modal/BottomCardModal.styles';
 import RadioSelector from '~/components/global/Radio/RadioSelector';
+import { useModalContext } from '~/context/Modal.context';
 import { BUTTON_STYLE, LINK_TYPES, THEME } from '~/lib/constants';
+import { STATIC_MODAL_IDS } from '~/lib/constants/staticModals';
+import { formatDollars } from '~/lib/utils/string';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import styles from './RoadHazardModal.styles';
@@ -19,31 +22,29 @@ export const CONSTANTS = {
   NO_COVERAGE: 'no-coverage',
 };
 
-const mapCoverageToState = {
-  [CONSTANTS.HAS_COVERAGE]: true,
-  [CONSTANTS.NO_COVERAGE]: false,
-};
-
 interface Props {
-  copy: string;
-  hasCoverage: string;
+  durationLabel: string;
   isOpen: boolean;
-  onBack?: () => void;
   onClose: () => void;
-  onConfirm: (goToCheckout?: boolean) => void;
-  setHasCoverage: (value: string) => void;
-  shouldDisplayOptions?: boolean;
-  title: string;
+  onConfirm: (hasCoverage: boolean) => void;
+  pricePerTire: string;
 }
 
-function LearnMoreLink() {
+function LearnMoreLink({
+  openStaticModal,
+}: {
+  openStaticModal: (id: string) => void;
+}) {
+  function handleClick() {
+    openStaticModal(STATIC_MODAL_IDS.ROAD_HAZARD_COVERAGE);
+  }
+
   return (
     <Link
       as={LINK_TYPES.BUTTON}
       css={styles.link}
       theme={THEME.LIGHT}
-      // TODO wire up link url
-      href="/"
+      onClick={handleClick}
     >
       {ui('pdp.roadHazard.coverageLink')}
     </Link>
@@ -51,88 +52,114 @@ function LearnMoreLink() {
 }
 
 function RoadHazardModal({
-  copy,
-  hasCoverage,
+  durationLabel,
   isOpen,
   onClose,
-  onBack,
   onConfirm,
-  setHasCoverage,
-  shouldDisplayOptions,
-  title,
+  pricePerTire,
 }: Props) {
-  function handleIntercepAction(value: string) {
-    setHasCoverage(value);
-    onConfirm();
+  const { openStaticModal } = useModalContext();
+  const [value, setValue] = useState(CONSTANTS.HAS_COVERAGE);
+  const [shouldIntercept, setShouldIntercept] = useState(false);
+
+  function handleBack() {
+    setShouldIntercept(false);
+  }
+
+  function handleConfirm() {
+    if (value === CONSTANTS.NO_COVERAGE) {
+      setShouldIntercept(true);
+      return;
+    }
+
+    onConfirm(value === CONSTANTS.HAS_COVERAGE);
+  }
+
+  function handleIntercepAction(_value: string) {
+    onConfirm(_value === CONSTANTS.HAS_COVERAGE);
   }
 
   useEffect(() => {
-    if (
-      !shouldDisplayOptions &&
-      document.activeElement instanceof HTMLElement
-    ) {
+    if (shouldIntercept && document.activeElement instanceof HTMLElement) {
       document.activeElement.blur();
     }
-  }, [shouldDisplayOptions]);
+  }, [shouldIntercept]);
 
   return (
     <BottomCardModal
       contentLabel="Road Hazard"
       isOpen={isOpen}
       onClose={onClose}
-      onBack={onBack}
+      onBack={shouldIntercept ? handleBack : undefined}
     >
       <div css={modalContainerStyles.container}>
         <FeaturedInfoModule
-          copy={copy}
+          copy={ui(
+            shouldIntercept
+              ? 'pdp.roadHazard.interceptCopy'
+              : 'pdp.roadHazard.headerCopy',
+            {
+              durationLabel,
+              pricePerTire: formatDollars(pricePerTire),
+            },
+          )}
           customCopyStyles={styles.modalHeaderStyles}
           icon={ICONS.SMILEY_WINK}
           featureDescription={ui('pdp.roadHazard.featureDescription')}
-          title={title}
+          title={ui(
+            shouldIntercept
+              ? 'pdp.roadHazard.interceptTitle'
+              : 'pdp.roadHazard.headerTitle',
+            {
+              durationLabel,
+              pricePerTire: formatDollars(pricePerTire),
+            },
+          )}
         />
 
-        {shouldDisplayOptions && (
+        {!shouldIntercept && (
           <div>
             <RadioSelector
-              activeValue={hasCoverage}
+              activeValue={value}
               css={styles.roadHazardRadio}
               label={ui('pdp.roadHazard.coverageLabel')}
               name={CONSTANTS.RADIO_NAME}
-              onChange={setHasCoverage}
-              outerContent={<LearnMoreLink />}
+              onChange={setValue}
+              outerContent={<LearnMoreLink openStaticModal={openStaticModal} />}
               value={CONSTANTS.HAS_COVERAGE}
             >
               <>
                 <p css={styles.price}>
-                  {/* TODO wire up price */}
-                  {ui('pdp.roadHazard.price', { price: '$13.02' })}
+                  {ui('pdp.roadHazard.price', {
+                    pricePerTire: formatDollars(pricePerTire),
+                  })}
                 </p>
                 <p css={styles.copyHeader}>{ui('pdp.roadHazard.copyHeader')}</p>
                 <p css={styles.copy}>
                   <Markdown renderers={{ paragraph: 'span' }}>
-                    {ui('pdp.roadHazard.copy')}
+                    {ui('pdp.roadHazard.copy', {
+                      durationLabel,
+                    })}
                   </Markdown>
                 </p>
               </>
             </RadioSelector>
             <RadioSelector
-              activeValue={hasCoverage}
+              activeValue={value}
               css={styles.removeCoverageRadio}
               label={ui('pdp.roadHazard.removeLabel')}
               name={CONSTANTS.RADIO_NAME}
-              onChange={setHasCoverage}
+              onChange={setValue}
               value={CONSTANTS.NO_COVERAGE}
             />
           </div>
         )}
 
         <div css={modalContainerStyles.ctaGroup}>
-          {shouldDisplayOptions ? (
+          {!shouldIntercept ? (
             <Button
               css={styles.button}
-              onClick={function () {
-                onConfirm(mapCoverageToState[hasCoverage]);
-              }}
+              onClick={handleConfirm}
               theme={THEME.LIGHT}
             >
               {ui('pdp.roadHazard.continueButtonLabel')}

@@ -156,6 +156,7 @@ export function ProductInfoWithKnobs() {
       rearSize={hasRearSize ? rearSizeLabel : undefined}
       rearLoadSpeedRating={hasRearSize ? rearLoadSpeedRating : undefined}
       rearPrice={price}
+      roadHazard={null}
       onClickChangeSize={onClickChangeSize}
       onCloseSizeSelector={onCloseSizeSelector}
       onChangeSize={onChangeSize}
@@ -188,6 +189,7 @@ export function ProductInfoDefault() {
         value: 4.8,
       }}
       availableSizes={32}
+      roadHazard={null}
       size={mockSizeLabel}
       startingPrice={mockStartingPrice}
       loadSpeedRating={mockSizeLoadSpeedRating}
@@ -217,6 +219,7 @@ export function ProductInfoPromoTags() {
         quantity: 115,
         value: 4.8,
       }}
+      roadHazard={null}
       availableSizes={32}
       size={mockSizeLabel}
       startingPrice={mockStartingPrice}
@@ -244,6 +247,7 @@ export function ProductInfoTireLine() {
         quantity: 115,
         value: 4.8,
       }}
+      roadHazard={null}
       availableSizes={32}
       openDynamicModal={onOpenDynamicModal}
       onClickChangeSize={onClickChangeSize}
@@ -267,6 +271,7 @@ export function ProductInfoLongNameNoBrandLogo() {
         quantity: 115,
         value: 4.8,
       }}
+      roadHazard={null}
       availableSizes={32}
       openDynamicModal={onOpenDynamicModal}
       onClickChangeSize={onClickChangeSize}
@@ -301,6 +306,7 @@ export function ProductInfoDiscountBadge() {
         quantity: 115,
         value: 4.8,
       }}
+      roadHazard={null}
       availableSizes={32}
       size={mockSizeLabel}
       startingPrice={mockStartingPrice}
@@ -332,6 +338,7 @@ export function ProductInfoOnly4LeftBadge() {
         quantity: 115,
         value: 4.8,
       }}
+      roadHazard={null}
       availableSizes={32}
       size={mockSizeLabel}
       startingPrice={mockStartingPrice}
@@ -363,6 +370,7 @@ export function ProductInfoBothBadges() {
         quantity: 115,
         value: 4.8,
       }}
+      roadHazard={null}
       availableSizes={32}
       size={mockSizeLabel}
       startingPrice={mockStartingPrice}
@@ -391,6 +399,7 @@ export function ProductInfoCallForPricing() {
         quantity: 115,
         value: 4.8,
       }}
+      roadHazard={null}
       availableSizes={32}
       size={mockSizeLabel}
       startingPrice={mockStartingPrice}
@@ -418,6 +427,7 @@ export function ProductInfoOutOfStock() {
         quantity: 115,
         value: 4.8,
       }}
+      roadHazard={null}
       availableSizes={32}
       size={mockSizeLabel}
       startingPrice={mockStartingPrice}
@@ -446,6 +456,7 @@ export function ProductInfoNoReviews() {
         salePriceInCents: '13296',
         estimatedRetailPriceInCents: '15099',
       }}
+      roadHazard={null}
       availableSizes={32}
       size={mockSizeLabel}
       startingPrice={mockStartingPrice}
@@ -476,6 +487,7 @@ export function ProductInfoMultiSize() {
         quantity: 115,
         value: 4.8,
       }}
+      roadHazard={null}
       availableSizes={32}
       size={mockSizeLabel}
       startingPrice={mockStartingPrice}

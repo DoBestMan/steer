@@ -3,6 +3,7 @@ import { PromoTagProps } from '~/components/global/PromoTag/PromoTag';
 import PromoTagCarousel from '~/components/global/PromoTag/PromoTagCarousel';
 import { SiteCatalogBrand } from '~/data/models/SiteCatalogBrand';
 import { SitePrice } from '~/data/models/SitePrice';
+import { SiteProductLineSizeDetailRoadHazard } from '~/data/models/SiteProductLineSizeDetailRoadHazard';
 import { THEME } from '~/lib/constants';
 
 import PDPActionBar from '../ActionBar/ActionBar';
@@ -37,6 +38,7 @@ export interface ProductInfoProps {
   rearLoadSpeedRating?: string;
   rearPrice?: SitePrice | null;
   rearSize?: string;
+  roadHazard: SiteProductLineSizeDetailRoadHazard | null;
   sameSizeSearchResults?: number | null;
   sameSizeSearchURL?: string | null;
   size?: string;
@@ -69,6 +71,7 @@ function ProductInfo({
   rearLoadSpeedRating,
   rearPrice,
   rearSize,
+  roadHazard,
   sameSizeSearchResults,
   sameSizeSearchURL,
   size,
@@ -98,6 +101,7 @@ function ProductInfo({
         />
         <div css={[styles.actionBar, styles.actionBarMultiple]}>
           <PDPActionBar
+            roadHazard={roadHazard}
             theme={THEME.LIGHT}
             tirePrice={price?.salePriceInCents}
             tireSize={size}
@@ -143,6 +147,7 @@ function ProductInfo({
         </div>
         <div css={styles.actionBar}>
           <PDPActionBar
+            roadHazard={roadHazard}
             theme={THEME.LIGHT}
             tirePrice={price?.salePriceInCents}
             tireSize={size}

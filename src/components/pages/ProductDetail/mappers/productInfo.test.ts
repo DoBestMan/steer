@@ -52,6 +52,7 @@ describe('pages/ProductDetails/mappers/breadcrumbs', () => {
         salePriceInCents: '12099',
       },
       rearSize: '215/50 R19',
+      roadHazard: null,
       sameSizeSearchResults: null,
       sameSizeSearchURL: '/tire-sizes/p215-50-R17',
       size: '215/50 R17',

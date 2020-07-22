@@ -1,53 +1,33 @@
-import { useState } from 'react';
+import { useProductDetailContext } from '~/components/pages/ProductDetail/ProductDetail.context';
 
-import { ui } from '~/lib/utils/ui-dictionary';
-
-import RoadHazardModal, { CONSTANTS } from './RoadHazardModal';
+import RoadHazardModal from './RoadHazardModal';
 
 interface Props {
+  durationLabel: string;
   isOpen: boolean;
   onClose: () => void;
+  pricePerTire: string;
 }
 
-function RoadHazardModalContainer({ isOpen, onClose }: Props) {
-  const [shouldIntercept, setShouldIntercept] = useState(false);
-  const [hasCoverage, setHasCoverage] = useState(CONSTANTS.HAS_COVERAGE);
+function RoadHazardModalContainer({
+  durationLabel,
+  isOpen,
+  pricePerTire,
+  onClose,
+}: Props) {
+  const { addToCart } = useProductDetailContext();
 
-  // TODO wire up API call and/or route change
-  function goToCheckout() {
-    console.info('Go to Checkout');
+  function handleConfirm(hasCoverage: boolean) {
+    addToCart({ shouldAddCoverage: hasCoverage });
   }
-
-  function handleConfirm(shouldGoToCheckout = true) {
-    if (shouldGoToCheckout) {
-      goToCheckout();
-    } else {
-      setShouldIntercept(true);
-    }
-  }
-
-  function handleOnBack() {
-    setShouldIntercept(false);
-  }
-
-  const copy = shouldIntercept
-    ? ui('pdp.roadHazard.interceptCopy')
-    : ui('pdp.roadHazard.headerCopy');
-  const title = shouldIntercept
-    ? ui('pdp.roadHazard.interceptTitle')
-    : ui('pdp.roadHazard.headerTitle');
 
   return (
     <RoadHazardModal
-      copy={copy}
-      hasCoverage={hasCoverage}
-      setHasCoverage={setHasCoverage}
+      durationLabel={durationLabel}
       isOpen={isOpen}
       onClose={onClose}
       onConfirm={handleConfirm}
-      onBack={shouldIntercept ? handleOnBack : undefined}
-      shouldDisplayOptions={!shouldIntercept}
-      title={title}
+      pricePerTire={pricePerTire}
     />
   );
 }
