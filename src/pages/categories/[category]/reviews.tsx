@@ -2,7 +2,7 @@ import { GetServerSideProps } from 'next';
 
 import ReviewListingPage, {
   ReviewListingServerData,
-} from '~/components/pages/ReviewListingPage/ReviewListingPage';
+} from '~/components/pages/ReviewListingPage/ReviewListingPage.container';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
 import { backendGetReviewListing } from '~/lib/backend/review-listing';
 

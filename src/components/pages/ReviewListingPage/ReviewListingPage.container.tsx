@@ -9,6 +9,7 @@ import { SiteProductReviewsListing } from '~/data/models/SiteProductReviewsListi
 import { mapDataToHeader } from './mappers/header';
 import { mapDataToMeta } from './mappers/meta';
 import { mapDataToRatingsTable } from './mappers/ratingsTable';
+import usePagination from './ReviewListingPage.hooks';
 import styles from './ReviewListingPage.styles';
 
 export interface ReviewListingServerData {
@@ -34,8 +35,13 @@ function ReviewListingPage({
     reviewsList,
   } = serverData.tireReviews;
 
-  const ratingsTable = mapDataToRatingsTable({
+  const { displayedRatings, handleSeeMoreClick } = usePagination(
+    router.query,
     reviewsList,
+  );
+
+  const ratingsTable = mapDataToRatingsTable({
+    reviewsList: displayedRatings,
     listResultMetadata,
   });
 
@@ -61,6 +67,7 @@ function ReviewListingPage({
       <RatingsTable
         reviews={ratingsTable.reviews}
         listResultMetadata={ratingsTable.listResultMetadata}
+        onSeeMoreClick={handleSeeMoreClick}
       />
     </div>
   );

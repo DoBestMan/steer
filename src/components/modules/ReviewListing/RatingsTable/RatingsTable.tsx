@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import Button from '~/components/global/Button/Button';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
@@ -24,26 +22,19 @@ export interface Rating {
 
 export interface RatingsTableProps {
   listResultMetadata: ListResultMetadata;
+  onSeeMoreClick?: () => void;
   reviews: Rating[];
 }
 
-const CONSTANTS = {
-  MAX_REVIEWS_TO_DISPLAY: 20,
-};
-
-function RatingsTable({ reviews, listResultMetadata }: RatingsTableProps) {
-  const [numVisibleReviews, setNumVisibleReviews] = useState(
-    CONSTANTS.MAX_REVIEWS_TO_DISPLAY,
-  );
-
+function RatingsTable({
+  reviews,
+  listResultMetadata,
+  onSeeMoreClick,
+}: RatingsTableProps) {
   const { pagination } = listResultMetadata;
 
-  const hasMoreReviews = reviews.length > numVisibleReviews;
-
-  // TODO: implement pagination WCS-881
-  function handleSeeMoreClick() {
-    setNumVisibleReviews((prev) => (prev += CONSTANTS.MAX_REVIEWS_TO_DISPLAY));
-  }
+  const hasMoreReviews =
+    pagination && reviews.length < pagination.total && onSeeMoreClick;
 
   return (
     <div css={styles.root}>
@@ -92,7 +83,7 @@ function RatingsTable({ reviews, listResultMetadata }: RatingsTableProps) {
           </GridItem>
         </Grid>
         <Grid as="tbody">
-          {reviews.slice(0, numVisibleReviews).map((review) => {
+          {reviews.map((review) => {
             const a11yLabel = ui('ratings.fullRating', {
               rating: review.rating,
               maxRating: RATINGS.MAX_RATING,
@@ -154,10 +145,9 @@ function RatingsTable({ reviews, listResultMetadata }: RatingsTableProps) {
           })}
         </Grid>
       </table>
-
       {hasMoreReviews && (
         <div css={styles.buttonContainer}>
-          <Button onClick={handleSeeMoreClick}>{ui('tireReviews.more')}</Button>
+          <Button onClick={onSeeMoreClick}>{ui('tireReviews.more')}</Button>
         </div>
       )}
     </div>
