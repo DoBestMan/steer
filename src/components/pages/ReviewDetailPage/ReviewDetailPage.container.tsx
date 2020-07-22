@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 
+import DataStructure from '~/components/global/DataStructure/DataStructure';
 import Meta from '~/components/global/Meta/Meta';
 import { navigationPaddingTop } from '~/components/modules/Nav/Nav.styles';
 import Reviews from '~/components/modules/ReviewDetail/Reviews/Reviews';
@@ -10,6 +11,7 @@ import { removeTireFromQueryParam } from '~/lib/utils/string';
 import { ProductDetailResponse } from '~/pages/api/product-detail';
 
 import { mapDataToHeader } from './mappers/header';
+import { mapDataToLinkingData } from './mappers/linkingData';
 import { mapDataToMeta } from './mappers/meta';
 import { mapDataToReviews } from './mappers/reviews';
 import usePagination from './ReviewDetailPage.hooks';
@@ -24,6 +26,10 @@ function ReviewDetailPage({ serverData }: ProductDetailReviewsData) {
 
   const header = mapDataToHeader({ siteProduct, siteProductReviews, router });
   const siteReviews = mapDataToReviews({ siteProductReviews });
+  const ratingsDataStructure = mapDataToLinkingData({
+    siteProductReviews,
+    siteProduct,
+  });
   const meta = mapDataToMeta({ siteProduct });
 
   const { total, reviews, sources, title } = siteReviews;
@@ -58,6 +64,7 @@ function ReviewDetailPage({ serverData }: ProductDetailReviewsData) {
 
   return (
     <div css={navigationPaddingTop}>
+      <DataStructure jsonLD={ratingsDataStructure} />
       <Meta {...meta} />
       <ReviewsHeader
         brand={brandObj}

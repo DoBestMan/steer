@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 
+import DataStructure from '~/components/global/DataStructure/DataStructure';
 import Meta from '~/components/global/Meta/Meta';
 import { navigationPaddingTop } from '~/components/modules/Nav/Nav.styles';
 import Header from '~/components/modules/ReviewListing/Header/Header';
@@ -7,6 +8,7 @@ import RatingsTable from '~/components/modules/ReviewListing/RatingsTable/Rating
 import { SiteProductReviewsListing } from '~/data/models/SiteProductReviewsListing';
 
 import { mapDataToHeader } from './mappers/header';
+import { mapDataToLinkingData } from './mappers/linkingData';
 import { mapDataToMeta } from './mappers/meta';
 import { mapDataToRatingsTable } from './mappers/ratingsTable';
 import usePagination from './ReviewListingPage.hooks';
@@ -45,6 +47,10 @@ function ReviewListingPage({
     listResultMetadata,
   });
 
+  const ratingsDataStructure = mapDataToLinkingData({
+    reviewsList,
+  });
+
   const header = mapDataToHeader({
     siteInfo,
     siteProductReviewsFilters,
@@ -57,6 +63,9 @@ function ReviewListingPage({
 
   return (
     <div css={[navigationPaddingTop, styles.root]}>
+      {ratingsDataStructure.products.map((product, i) => (
+        <DataStructure key={i} jsonLD={product} />
+      ))}
       <Meta {...meta} />
       <Header
         breadcrumbs={header.breadcrumbs}

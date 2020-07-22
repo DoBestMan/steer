@@ -6,7 +6,7 @@ import { Offer, Product, Review } from 'schema-dts';
 import { SiteCatalogProductImage } from '~/data/models/SiteCatalogProductImage';
 import { SiteProduct } from '~/data/models/SiteProduct';
 import { SiteProductReviews } from '~/data/models/SiteProductReviews';
-import { ROUTE_MAP, ROUTES } from '~/lib/constants';
+import { RATINGS, ROUTE_MAP, ROUTES } from '~/lib/constants';
 import { interpolateRoute } from '~/lib/utils/routes';
 import { formatDollars } from '~/lib/utils/string';
 
@@ -36,8 +36,8 @@ export function mapDataToLinkingData({
     reviewRating: {
       '@type': 'Rating',
       ratingValue: item.performanceRating.overall,
-      bestRating: 5,
-      worstRating: 1,
+      bestRating: RATINGS.MAX_RATING,
+      worstRating: RATINGS.MIN_RATING,
     },
     author: {
       '@type': 'Person',
