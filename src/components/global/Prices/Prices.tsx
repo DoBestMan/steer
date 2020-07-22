@@ -68,7 +68,13 @@ function Prices({
           );
         })
       ) : (
-        <span css={[typography.topPicksPrice, styles.noPrice]}>
+        <span
+          css={[
+            typography.topPicksPrice,
+            styles.noPrice,
+            isLight && { color: COLORS.GLOBAL.WHITE },
+          ]}
+        >
           {ui('catalog.topPicks.noPrice')}
         </span>
       )}

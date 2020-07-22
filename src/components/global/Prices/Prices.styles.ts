@@ -9,7 +9,6 @@ const styles: StylesMap = {
     fontWeight: 'normal',
   },
   noPrice: {
-    color: COLORS.GLOBAL.WHITE,
     fontWeight: 'normal',
   },
   originalValue: [
