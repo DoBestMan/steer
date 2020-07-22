@@ -1,3 +1,5 @@
+import 'focus-visible';
+
 import { Global } from '@emotion/core';
 import NextApp, { AppContext, AppInitialProps } from 'next/app';
 import { SWRConfig } from 'swr';

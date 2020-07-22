@@ -11,6 +11,10 @@ export const reset = `
     outline: ${BORDERS.FOCUS_STATE};
   }
 
+  :focus:not(.focus-visible) {
+    outline: none;
+  }
+
   html,
   body,
   div,
