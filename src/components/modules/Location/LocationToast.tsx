@@ -17,10 +17,6 @@ function LocationToast({
   onDismiss,
   setToastMessage,
 }: Props) {
-  if (!toastMessage) {
-    return null;
-  }
-
   const handleOnDismiss = () => {
     setToastMessage('');
 

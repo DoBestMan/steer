@@ -98,15 +98,13 @@ function FooterMailingList() {
           </button>
         )}
       </div>
-      {toastMessage && (
-        <Toast
-          customStyles={styles.toast}
-          isOpen={!!toastMessage}
-          onDismiss={handleDismiss}
-        >
-          {toastMessages[toastMessage]}
-        </Toast>
-      )}
+      <Toast
+        customStyles={styles.toast}
+        isOpen={!!toastMessage}
+        onDismiss={handleDismiss}
+      >
+        {toastMessages[toastMessage]}
+      </Toast>
     </>
   );
 }
