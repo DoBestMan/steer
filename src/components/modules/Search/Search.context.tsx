@@ -22,6 +22,8 @@ import { createContext } from '~/lib/utils/context';
 import {
   emptyResult,
   emptySiteSearchResultGroup,
+  initialSearchBrand,
+  initialSearchTireSize,
   initialSearchVehicle,
 } from './Search.data';
 
@@ -40,6 +42,8 @@ export interface SearchContextProps {
   hasSearchResultsError: boolean;
   isLoadingResults: boolean;
   isSearchOpen: boolean;
+  lockSearchStateToBrand: () => void;
+  lockSearchStateToTireSize: () => void;
   lockSearchStateToVehicle: () => void;
   pastSearches: SiteSearchResultGroup;
   routeQueryParamOptions?: RouteQueryParamOptions;
@@ -192,6 +196,32 @@ function useContextSetup(): SearchContextProps {
     setHasLockedSearchState(true);
   };
 
+  const lockSearchStateToTireSize = () => {
+    const {
+      queryText,
+      queryType,
+    } = initialSearchTireSize.action as SiteSearchResultActionQuery;
+    setSearchState(SearchStateEnum.TIRE_SIZE);
+    searchQuery({
+      queryText,
+      queryType,
+    });
+    setHasLockedSearchState(true);
+  };
+
+  const lockSearchStateToBrand = () => {
+    const {
+      queryText,
+      queryType,
+    } = initialSearchBrand.action as SiteSearchResultActionQuery;
+    setSearchState(SearchStateEnum.BRAND);
+    searchQuery({
+      queryText,
+      queryType,
+    });
+    setHasLockedSearchState(true);
+  };
+
   return {
     addPastSearch,
     clearSearchResults,
@@ -201,6 +231,8 @@ function useContextSetup(): SearchContextProps {
     hasSearchResultsError,
     isLoadingResults,
     isSearchOpen,
+    lockSearchStateToBrand,
+    lockSearchStateToTireSize,
     lockSearchStateToVehicle,
     pastSearches,
     routeQueryParamOptions,
