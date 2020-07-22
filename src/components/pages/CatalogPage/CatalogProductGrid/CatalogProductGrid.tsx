@@ -27,7 +27,7 @@ function CatalogProductGrid({
   const [currentPage, setCurrentPage] = useState(1);
   const [displayedProducts, setDisplayedProducts] = useState(productList);
   const [nextProducts, setNextProducts] = useState(pagination?.resultsPerPage);
-  const [scrollPosition, setScrollPosition] = useState(0);
+  const [scrollPosition, setScrollPosition] = useState<number>();
 
   useEffect(() => {
     if (!pagination?.offset) {
@@ -46,7 +46,9 @@ function CatalogProductGrid({
   }, [displayedProducts, productList, pagination]);
 
   useEffect(() => {
-    window.scrollTo(0, scrollPosition);
+    if (scrollPosition) {
+      window.scrollTo(0, scrollPosition);
+    }
   }, [scrollPosition]);
 
   useEffect(() => {
