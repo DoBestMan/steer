@@ -34,6 +34,10 @@ const animationStyles = {
   },
 };
 
+const CONSTANTS = {
+  CLEAR_BUTTON_SIZE: 20,
+};
+
 // To mirror padding in SerachButton.styles
 const SEARCH_PADDING_XL = 65 / 2;
 
@@ -77,8 +81,8 @@ const styles: StylesMap = {
     marginLeft: SPACING.SIZE_15,
     [MQ.M]: {
       svg: {
-        height: 24,
-        width: 24,
+        height: CONSTANTS.CLEAR_BUTTON_SIZE,
+        width: CONSTANTS.CLEAR_BUTTON_SIZE,
       },
     },
   },
