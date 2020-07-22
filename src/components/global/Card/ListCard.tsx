@@ -12,16 +12,16 @@ function ListCard({ items, more, title }: SiteInsightItemList) {
     <GridItem
       gridColumnS="2/5"
       gridColumnM="2/5"
-      gridColumnL="2/7"
+      gridColumnL="2/9"
       gridColumnXL="2/7"
       isGrid
       css={styles.root}
     >
-      <GridItem gridColumnL="1/3" gridColumnXL="1/3">
+      <GridItem gridColumnL="1/4" gridColumnXL="1/3">
         <h2 css={styles.title}>{title}</h2>
       </GridItem>
-      <GridItem gridColumnL="3/6" gridColumnXL="3/6">
-        <ul>
+      <GridItem gridColumnL="4/8" gridColumnXL="3/6" css={styles.cardContent}>
+        <ul css={styles.list}>
           {items.map(({ icon, label, link }) => (
             <li css={styles.listItem} key={label}>
               <Link href={link.href}>

@@ -34,17 +34,17 @@ function Card({
     <GridItem
       gridColumnS="2/5"
       gridColumnM="2/5"
-      gridColumnL="2/7"
+      gridColumnL="2/9"
       gridColumnXL="2/7"
       isGrid
       css={[typography.jumboHeadline, styles.root]}
     >
-      <GridItem gridColumnL="1/3" gridColumnXL="1/3">
+      <GridItem gridColumnL="1/4" gridColumnXL="1/3">
         <div css={[typography.jumboHeadline, styles.decorator]}>
           {decorators}
         </div>
       </GridItem>
-      <GridItem gridColumnL="3/6" gridColumnXL="3/6">
+      <GridItem css={styles.cardContent} gridColumnL="4/8" gridColumnXL="3/6">
         {eyebrow && eyebrowIcon && (
           <div css={[typography.secondaryHeadline, styles.eyebrow]}>
             <span>{eyebrow}</span>

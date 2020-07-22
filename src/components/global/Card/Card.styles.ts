@@ -1,5 +1,7 @@
 import {
   COLORS,
+  GAP_COLUMNS,
+  GRID_MARGIN,
   MQ,
   RADIUS,
   SPACING,
@@ -12,6 +14,16 @@ const ICON_SIZE = {
   XL: 70,
 };
 const styles: StylesMap = {
+  cardContent: {
+    paddingRight: GRID_MARGIN.S,
+    [MQ.M]: {
+      paddingRight: GRID_MARGIN.M,
+    },
+    [MQ.L]: {
+      marginLeft: `-${GAP_COLUMNS.L}px`,
+      paddingRight: GRID_MARGIN.L,
+    },
+  },
   decorator: {
     color: COLORS.GLOBAL.ORANGE,
     display: 'flex',
@@ -34,15 +46,13 @@ const styles: StylesMap = {
       width: ICON_SIZE.STANDARD,
     },
     height: ICON_SIZE.STANDARD,
+    marginBottom: SPACING.SIZE_40,
     position: 'relative',
     svg: {
       height: '100%',
     },
     width: '100%',
     zIndex: Z_INDEX.ZERO,
-    [MQ.S]: {
-      marginBottom: SPACING.SIZE_40,
-    },
     [MQ.L]: {
       justifyContent: 'center',
       marginBottom: 0,
@@ -56,6 +66,7 @@ const styles: StylesMap = {
       height: ICON_SIZE.XL,
       letterSpacing: '-0.04em',
       lineHeight: 60 / 60, // '60px',
+      paddingLeft: SPACING.SIZE_40,
     },
   },
   description: {
@@ -72,11 +83,12 @@ const styles: StylesMap = {
   root: {
     backgroundColor: COLORS.DARK.GRAY_95,
     borderRadius: RADIUS.RADIUS_15,
-    [MQ.S]: {
-      padding: SPACING.SIZE_40,
+    padding: SPACING.SIZE_40,
+    [MQ.L]: {
+      padding: `${SPACING.SIZE_40}px 0`,
     },
     [MQ.XL]: {
-      padding: SPACING.SIZE_60,
+      padding: `${SPACING.SIZE_60}px 0`,
     },
   },
   title: {

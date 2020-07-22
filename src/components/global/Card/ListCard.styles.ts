@@ -1,6 +1,8 @@
 import {
   BORDERS,
   COLORS,
+  GAP_COLUMNS,
+  GRID_MARGIN,
   MQ,
   RADIUS,
   SPACING,
@@ -11,6 +13,12 @@ import { typography } from '~/styles/typography.styles';
 const ITEM_HEIGHT = 60;
 
 const styles: StylesMap = {
+  cardContent: {
+    [MQ.L]: {
+      marginLeft: `-${GAP_COLUMNS.L}px`,
+      paddingRight: GRID_MARGIN.L,
+    },
+  },
   content: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -51,6 +59,9 @@ const styles: StylesMap = {
       right: SPACING.SIZE_30,
     },
   },
+  list: {
+    marginTop: -SPACING.SIZE_20, // offset padding of first item
+  },
   listItem: [
     typography.smallCopy,
     {
@@ -59,14 +70,12 @@ const styles: StylesMap = {
       display: 'flex',
       height: ITEM_HEIGHT,
       justifyContent: 'space-between',
+      padding: `${SPACING.SIZE_20}px ${SPACING.SIZE_40}px`,
       position: 'relative',
       span: {
         borderColor: 'transparent',
       },
       width: '100%',
-      [MQ.S]: {
-        padding: `${SPACING.SIZE_20}px ${SPACING.SIZE_40}px`,
-      },
       [MQ.L]: {
         padding: `${SPACING.SIZE_20}px ${SPACING.SIZE_40}px ${SPACING.SIZE_20}px 0`,
       },
@@ -77,11 +86,9 @@ const styles: StylesMap = {
     {
       backgroundColor: COLORS.DARK.GRAY_95,
       borderRadius: RADIUS.RADIUS_15,
-      [MQ.S]: {
-        padding: `${SPACING.SIZE_40}px 0`,
-      },
-      [MQ.L]: {
-        padding: `${SPACING.SIZE_60}px 0 ${SPACING.SIZE_60}px ${SPACING.SIZE_50}px`,
+      padding: `${SPACING.SIZE_40}px 0`,
+      [MQ.XL]: {
+        padding: `${SPACING.SIZE_60}px 0`,
       },
     },
   ],
@@ -90,15 +97,14 @@ const styles: StylesMap = {
     {
       color: COLORS.GLOBAL.ORANGE,
       display: 'flex',
-      [MQ.S]: {
-        marginBottom: SPACING.SIZE_20,
-        padding: `0 ${SPACING.SIZE_40}px`,
-      },
+      marginBottom: SPACING.SIZE_25,
+      padding: `0 ${SPACING.SIZE_40}px`,
+      [MQ.M]: typography.secondaryHeadline,
       [MQ.L]: {
         justifyContent: 'center',
         marginBottom: 0,
-        marginTop: -5, // line height causes misalignemnt to right column content
-        padding: 0,
+        marginTop: -SPACING.SIZE_05, // line height causes misalignment to right column content
+        padding: `0 ${SPACING.SIZE_20}px 0 ${SPACING.SIZE_50}px`,
       },
     },
   ],
