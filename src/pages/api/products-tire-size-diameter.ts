@@ -5,6 +5,10 @@ import { SiteCatalogProducts } from '~/data/models/SiteCatalogProducts';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
 import { backendGetTireSizeDiameterProducts } from '~/lib/backend/catalog/size-diameter';
 import { getStringifiedParams } from '~/lib/utils/routes';
+import {
+  removeInchFromQueryParam,
+  removeTireFromQueryParam,
+} from '~/lib/utils/string';
 
 export default async (
   request: NextApiRequest,
@@ -24,8 +28,8 @@ export default async (
 
   const productsRes = await backendGetTireSizeDiameterProducts({
     query: getStringifiedParams(rest),
-    category,
-    diameter,
+    category: removeTireFromQueryParam(category),
+    diameter: removeInchFromQueryParam(diameter),
   });
   response.json(productsRes);
 };

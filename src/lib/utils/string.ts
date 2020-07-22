@@ -64,6 +64,9 @@ export const keysToCamel = (object: Record<string, any>): Record<string, any> =>
 
 export const minMaxify = (min: number, max: number) => `${min},${max}`;
 
+export const removeInchFromQueryParam = (str: string) =>
+  str.replace('-inch', '');
+
 export const removeTireFromQueryParam = (str: string | string[]): string =>
   str.toString().replace(/-tires/g, '');
 
