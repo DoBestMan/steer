@@ -11,9 +11,10 @@ import {
 } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
-const BUTTON_SIZE_S = 90;
-const BUTTON_SIZE_M = 120;
-const BUTTON_SIZE_L = 140;
+const BORDER_OFFSET = 6; // 3px border on both sides;
+const BUTTON_SIZE_S = 90 - BORDER_OFFSET;
+const BUTTON_SIZE_M = 120 - BORDER_OFFSET;
+const BUTTON_SIZE_L = 140 - BORDER_OFFSET;
 
 // To find paddingLeft:
 // Width of one grid column + left grid margin + one gutter.
@@ -52,7 +53,7 @@ const styles: StylesMap = {
       height: BUTTON_SIZE_M,
       width: BUTTON_SIZE_M,
     },
-    [MQ.M]: {
+    [MQ.L]: {
       height: BUTTON_SIZE_L,
       width: BUTTON_SIZE_L,
     },
