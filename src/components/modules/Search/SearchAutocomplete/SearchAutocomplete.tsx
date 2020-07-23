@@ -18,7 +18,8 @@ import { useModalContext } from '~/context/Modal.context';
 import { SiteSearchResultGroup } from '~/data/models/SiteSearchResultGroup';
 import { SiteSearchResultImageItem } from '~/data/models/SiteSearchResultImageItem';
 import { SiteSearchResultTextItem } from '~/data/models/SiteSearchResultTextItem';
-import { ARIA_LIVE, KEYCODES, THEME } from '~/lib/constants';
+import { useBreakpoints } from '~/hooks/useBreakpoints';
+import { ARIA_LIVE, COLORS, KEYCODES, THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import { useAutocompleteSelectedItem } from '../Search.hooks';
@@ -86,6 +87,8 @@ function SearchAutocomplete({
   const loadingTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const primaryInput = useRef<HTMLInputElement>(null);
   const secondaryInput = useRef<HTMLInputElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
   const {
     selectNextItemIndex,
     selectPrevItemIndex,
@@ -256,9 +259,32 @@ function SearchAutocomplete({
     <div css={styles.clearSecondaryInput}>{ui('search.removeRearTire')}</div>
   );
 
+  const { lessThan } = useBreakpoints();
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!lessThan.L || !headerRef.current) {
+          return;
+        } else if (entry.intersectionRatio === 0) {
+          headerRef.current.style.borderColor = COLORS.DARK.GRAY_80;
+        } else if (entry.intersectionRatio === 1) {
+          headerRef.current.style.borderColor = 'transparent';
+        }
+      });
+    });
+
+    if (scrollRef.current) {
+      observer.observe(scrollRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [lessThan]);
+
   return (
     <div>
-      <div css={styles.header}>
+      <div css={styles.header} ref={headerRef}>
         {isRearTireState && (
           <Grid css={styles.tireSizeHeader}>
             <GridItem css={styles.tireSizeHeaderCopy} gridColumnS={'start/end'}>
@@ -367,6 +393,7 @@ function SearchAutocomplete({
           isRearTireState && styles.searchResultsGridRearTire,
         ]}
       >
+        <span css={styles.scrollTrigger} ref={scrollRef} />
         {(hasNoMatchingResults || hasSearchResultsError) && (
           <Grid>
             <GridItem

@@ -160,9 +160,11 @@ const styles: StylesMap = {
     },
   ],
   header: {
+    borderBottom: BORDERS.SOLID_TRANSPARENT_1PX,
     left: 0,
     position: 'fixed',
     top: 0,
+    transition: `border-color ${TIME.MS150}ms ease`,
     width: '100%',
     zIndex: Z_INDEX.FRONT,
   },
@@ -178,6 +180,12 @@ const styles: StylesMap = {
     [MQ.L]: {
       padding: `${SPACING.SIZE_70}px 0 ${SPACING.SIZE_10}px`,
     },
+  },
+  scrollTrigger: {
+    height: 10,
+    opacity: 0,
+    position: 'absolute',
+    top: 0,
   },
   searchIcon: {
     '> svg': {
@@ -217,6 +225,7 @@ const styles: StylesMap = {
   },
   searchResultsGrid: {
     paddingTop: 75,
+    position: 'relative',
     [MQ.M]: {
       paddingTop: SPACING.SIZE_100,
     },
