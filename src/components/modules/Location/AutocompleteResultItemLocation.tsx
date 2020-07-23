@@ -30,7 +30,7 @@ function AutocompleteResultItemLocation({
       <button
         tabIndex={-1}
         onClick={handleItemClicked}
-        css={[isSelected && styles.listboxItemSelected]}
+        css={[styles.listBoxButton, isSelected && styles.listboxItemSelected]}
       >
         <span css={styles.listboxItemHighlight}>{inputValue}</span>
         {main.replace(inputValue, '')}{' '}

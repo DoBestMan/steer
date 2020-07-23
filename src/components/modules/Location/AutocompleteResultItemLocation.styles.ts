@@ -1,20 +1,23 @@
-import { BORDERS, COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
+import { BORDERS, COLORS, SPACING, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
+  listBoxButton: {
+    alignItems: 'baseline',
+    color: COLORS.GLOBAL.BLACK,
+    display: 'flex',
+    padding: `${SPACING.SIZE_02}px 0`,
+  },
   listboxItem: [
-    typography.primaryHeadline,
-
+    typography.secondaryHeadline,
     {
-      lineHeight: 1.68,
       position: 'relative',
-      [MQ.M]: { lineHeight: 1.68 },
     },
   ],
   listboxItemHighlight: {
     color: COLORS.LIGHT.GRAY_70,
   },
-  listboxItemSecondary: [typography.bodyCopy, { marginLeft: SPACING.SIZE_10 }],
+  listboxItemSecondary: [typography.largeCopy, { marginLeft: SPACING.SIZE_10 }],
   listboxItemSelected: {
     outline: BORDERS.FOCUS_STATE,
   },

@@ -34,7 +34,7 @@ const styles: StylesMap = {
   },
   errorMessage: typography.primaryHeadline,
   input: [
-    typography.labelHeadlineLarge,
+    typography.secondaryHeadline,
     disableGlobalFocus,
     {
       backgroundColor: 'inherit',
