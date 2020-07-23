@@ -206,7 +206,9 @@ function TopPicksItem(props: TopPickItemsProps) {
         </span>
       </span>
 
-      <span css={styles.bottomContent}>
+      <span
+        css={[styles.bottomContent, showCta && styles.bottomContentCurrent]}
+      >
         {/* Need vehicle info */}
         {addVehicleInfo && (
           <span

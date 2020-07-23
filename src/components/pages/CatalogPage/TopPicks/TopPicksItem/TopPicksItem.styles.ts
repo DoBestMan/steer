@@ -72,11 +72,20 @@ export const styles: StylesMap = {
     },
 
     [MQ.L]: {
+      marginTop: SPACING.SIZE_25,
       minHeight: '33.333333%',
       paddingBottom: SPACING.SIZE_25,
       paddingTop: SPACING.SIZE_25,
+      transition: `margin-top ${TIME.MS300}ms ${EASING.CUBIC_EASE_OUT}`,
     },
   },
+
+  bottomContentCurrent: {
+    [MQ.L]: {
+      marginTop: 0,
+    },
+  },
+
   brand: {
     color: COLORS.GLOBAL.WHITE,
     display: 'block',
