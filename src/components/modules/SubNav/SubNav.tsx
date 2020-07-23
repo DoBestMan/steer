@@ -88,9 +88,9 @@ function SubNav({ siteMenuBrowseList, siteMenuLearn }: SiteMenu) {
               isGrid
               fullbleedS
               fullbleedM
-              gridColumnL="6/15"
-              gridColumnXL="8/15"
               css={[styles.subnavInnerGrid, activeLink && styles.enableEvents]}
+              gridColumnL="4/wrapper-end"
+              gridColumnXL="6/wrapper-end"
             >
               <GridItem
                 gridColumnM="1/9"

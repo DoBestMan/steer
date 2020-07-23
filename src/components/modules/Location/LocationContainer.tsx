@@ -5,6 +5,7 @@ import { ui } from '~/lib/utils/ui-dictionary';
 import { NAV_TARGETS } from '../Nav/Nav.types';
 import SubNavContentWrapper from '../SubNav/SubNavContentWrapper';
 import Location from './Location';
+import { styles } from './Location.styles';
 
 interface Props {
   isMobile: boolean;
@@ -32,6 +33,7 @@ function LocationContainer({ isMobile }: Props) {
         currentLocation={userPersonalizationData?.userLocation ?? null}
         onLocationChangeSuccess={updateLocation}
         focusInputOnMount
+        css={styles.locationSubNav}
       />
     </SubNavContentWrapper>
   );

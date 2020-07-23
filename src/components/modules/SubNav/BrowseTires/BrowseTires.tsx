@@ -15,7 +15,7 @@ function BrowseTires({ isOpen, isMobile, siteMenuBrowseList }: Props) {
     <>
       <GridItem
         gridColumnM="1/4"
-        css={[styles.smallHide, !isOpen && styles.hide]}
+        css={[styles.smallHide, !isOpen && styles.hide, styles.mainLinks]}
       >
         <TireCategoryLinks {...{ siteMenuBrowseList }} />
       </GridItem>

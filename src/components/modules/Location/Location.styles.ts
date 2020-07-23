@@ -60,6 +60,11 @@ export const styles: StylesMap = {
       [MQ.XL]: typography.bodyCopyTight,
     },
   ],
+  locationSubNav: {
+    [MQ.L]: {
+      paddingLeft: SPACING.SIZE_60,
+    },
+  },
   toast: {
     marginTop: 'auto',
   },

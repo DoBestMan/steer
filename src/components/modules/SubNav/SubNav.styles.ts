@@ -141,6 +141,9 @@ const styles: StylesMap = {
       position: 'initial',
     },
   },
+  mobileLinks: {
+    padding: `${SPACING.SIZE_70}px ${SPACING.SIZE_20}px 0 ${SPACING.SIZE_20}px`,
+  },
   navContent: {
     backgroundColor: COLORS.GLOBAL.WHITE,
     display: 'flex',
@@ -209,15 +212,10 @@ const styles: StylesMap = {
     height: '100%',
     minHeight: 500,
     overflowY: 'auto',
-    padding: `${SPACING.SIZE_70}px ${SPACING.SIZE_20}px 0 ${SPACING.SIZE_20}px`,
     position: 'relative',
     zIndex: Z_INDEX.FRONT,
     [MQ.M]: {
       backgroundColor: COLORS.GLOBAL.WHITE,
-      padding: `0 ${SPACING.SIZE_40}px`,
-    },
-    [MQ.L]: {
-      padding: `0 ${SPACING.SIZE_60}px`,
     },
   },
   subnavContent: {
@@ -252,15 +250,20 @@ const styles: StylesMap = {
         height: 'auto',
         justifyContent: 'space-between',
         margin: 'unset',
-        paddingBottom: SPACING.SIZE_90,
-        paddingTop: SPACING.SIZE_60,
+        padding: `${SPACING.SIZE_60}px
+        ${SPACING.SIZE_40}px
+        ${SPACING.SIZE_80}px
+        ${SPACING.SIZE_40}px`,
         svg: {
           width: 20,
         },
       },
       [MQ.L]: {
-        // accommodates spacing top from designs to align with header behind
-        paddingTop: SPACING.SIZE_60 + 2,
+        // +2 accommodates spacing top from designs to align with header behind
+        padding: `${SPACING.SIZE_60 + 2}px
+          ${SPACING.SIZE_60}px
+          ${SPACING.SIZE_90}px
+          ${SPACING.SIZE_60}px`,
         svg: {
           marginTop: -2,
         },

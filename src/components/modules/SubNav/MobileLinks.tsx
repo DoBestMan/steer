@@ -26,7 +26,7 @@ export default function MobileLinks({
       in={isOpen}
     >
       {(state) => (
-        <div css={fade[state]}>
+        <div css={[styles.mobileLinks, fade[state]]}>
           <button
             aria-label={ui('nav.close')}
             css={[styles.action, styles.close]}

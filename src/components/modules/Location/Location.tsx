@@ -56,6 +56,7 @@ function Location({
   focusInputOnMount,
   onCurrentLocationError,
   onLocationChangeSuccess,
+  ...rest
 }: Props) {
   const [results, setResults] = useState<Array<AutocompleteResult>>([]);
   const { autocomplete, latLng } = useGMapsScripts();
@@ -171,7 +172,7 @@ function Location({
   }
 
   return (
-    <GridItem css={styles.container}>
+    <GridItem css={styles.container} {...rest}>
       <div css={styles.content}>
         <Autocomplete
           icon={ICONS.SEARCH}

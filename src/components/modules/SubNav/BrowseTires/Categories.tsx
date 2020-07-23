@@ -39,9 +39,9 @@ function Categories({
       onBack={handleClearCategory}
     >
       <GridItem
-        gridColumnM="4/9"
-        gridColumnL="5/10"
-        gridColumnXL="4/8"
+        gridColumnM="4/8"
+        gridColumnL="5/9"
+        gridColumnXL="4/7"
         css={styles.categoryContent}
       >
         <p css={[typography.jumboHeadline, styles.mobileHeader]}>{category}</p>

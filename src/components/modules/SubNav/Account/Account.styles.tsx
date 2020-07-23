@@ -1,4 +1,4 @@
-import { COLORS, SPACING, StylesMap } from '~/lib/constants';
+import { COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
 
 const styles: StylesMap = {
   link: {
@@ -13,6 +13,9 @@ const styles: StylesMap = {
   list: {
     display: 'flex',
     flexDirection: 'column',
+    [MQ.L]: {
+      padding: `0 ${SPACING.SIZE_60}px`,
+    },
   },
 };
 

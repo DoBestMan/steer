@@ -203,6 +203,14 @@ const styles: StylesMap = {
       marginTop: 0,
     },
   },
+  mainLinks: {
+    [MQ.M]: {
+      paddingLeft: SPACING.SIZE_40,
+    },
+    [MQ.L]: {
+      paddingLeft: SPACING.SIZE_60,
+    },
+  },
   mobileHeader: {
     [MQ.S]: {
       marginBottom: SPACING.SIZE_20,
