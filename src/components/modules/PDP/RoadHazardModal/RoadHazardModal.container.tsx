@@ -6,13 +6,13 @@ interface Props {
   durationLabel: string;
   isOpen: boolean;
   onClose: () => void;
-  pricePerTire: string;
+  price: string;
 }
 
 function RoadHazardModalContainer({
   durationLabel,
   isOpen,
-  pricePerTire,
+  price,
   onClose,
 }: Props) {
   const { addToCart } = useProductDetailContext();
@@ -27,7 +27,7 @@ function RoadHazardModalContainer({
       isOpen={isOpen}
       onClose={onClose}
       onConfirm={handleConfirm}
-      pricePerTire={pricePerTire}
+      price={price}
     />
   );
 }

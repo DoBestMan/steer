@@ -3,7 +3,6 @@ import { PromoTagProps } from '~/components/global/PromoTag/PromoTag';
 import PromoTagCarousel from '~/components/global/PromoTag/PromoTagCarousel';
 import { SiteCatalogBrand } from '~/data/models/SiteCatalogBrand';
 import { SitePrice } from '~/data/models/SitePrice';
-import { SiteProductLineSizeDetailRoadHazard } from '~/data/models/SiteProductLineSizeDetailRoadHazard';
 import { THEME } from '~/lib/constants';
 
 import PDPActionBar from '../ActionBar/ActionBar';
@@ -38,7 +37,10 @@ export interface ProductInfoProps {
   rearLoadSpeedRating?: string;
   rearPrice?: SitePrice | null;
   rearSize?: string;
-  roadHazard: SiteProductLineSizeDetailRoadHazard | null;
+  roadHazard: {
+    durationLabel: string;
+    price: string;
+  } | null;
   sameSizeSearchResults?: number | null;
   sameSizeSearchURL?: string | null;
   size?: string;

@@ -5,7 +5,6 @@ import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import { useProductDetailContext } from '~/components/pages/ProductDetail/ProductDetail.context';
 import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
-import { SiteProductLineSizeDetailRoadHazard } from '~/data/models/SiteProductLineSizeDetailRoadHazard';
 import { THEME } from '~/lib/constants';
 import { formatDollars } from '~/lib/utils/string';
 import { ui } from '~/lib/utils/ui-dictionary';
@@ -17,7 +16,10 @@ import styles from './ActionBar.styles';
 export interface PDPActionBarProps {
   rearPrice?: string | null;
   rearSize?: string | null;
-  roadHazard: SiteProductLineSizeDetailRoadHazard | null;
+  roadHazard: {
+    durationLabel: string;
+    price: string;
+  } | null;
   startingPrice?: string | null;
   theme: THEME;
   tirePrice?: string | null;
@@ -136,7 +138,7 @@ function PDPActionBar({
             isOpen={isRoadHazardOpen}
             onClose={toggleRoadHazard}
             durationLabel={roadHazard?.durationLabel}
-            pricePerTire={roadHazard?.pricePerTireInCents}
+            price={roadHazard?.price}
           />
         )}
       </>
@@ -162,7 +164,7 @@ function PDPActionBar({
           isOpen={isRoadHazardOpen}
           onClose={toggleRoadHazard}
           durationLabel={roadHazard?.durationLabel}
-          pricePerTire={roadHazard?.pricePerTireInCents}
+          price={roadHazard?.price}
         />
       )}
     </>

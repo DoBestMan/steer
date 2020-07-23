@@ -2,17 +2,21 @@ import { SiteProduct } from '~/data/models/SiteProduct';
 import { SiteProductLineSizeDetailProductStatusEnum } from '~/data/models/SiteProductLineSizeDetail';
 
 import { ParsedStickyBarProps } from '../ProductDetail.hooks';
+import { mapDataToRoadHazard } from './roadHazard';
 
 export function mapDataToStickyBar({
-  siteProduct: {
+  quantity,
+  siteProduct,
+}: {
+  quantity: { front: number; rear?: number };
+  siteProduct: SiteProduct;
+}): ParsedStickyBarProps | null {
+  const {
     siteProductLine,
     siteProductLineSizeDetail,
     siteProductLineRearSizeDetail,
     siteProductLineAvailableSizeList,
-  },
-}: {
-  siteProduct: SiteProduct;
-}): ParsedStickyBarProps | null {
+  } = siteProduct;
   const outOfStock =
     siteProductLineSizeDetail?.productStatus ===
       SiteProductLineSizeDetailProductStatusEnum.ProductStatusOutOfStock ||
@@ -47,8 +51,10 @@ export function mapDataToStickyBar({
     `${siteProductLineSizeDetail.size} ${siteProductLineSizeDetail.loadSpeedRating}`;
   const tirePrice = siteProductLineSizeDetail?.price?.salePriceInCents || null;
 
-  const roadHazard =
-    (!rearSize && siteProductLineSizeDetail?.roadHazard) || null;
+  const roadHazard = mapDataToRoadHazard({
+    siteProduct,
+    quantity,
+  });
 
   return {
     brandLogo,

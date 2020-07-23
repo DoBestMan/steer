@@ -3,7 +3,6 @@ import { RefObject, useEffect, useState } from 'react';
 import ActionBar from '~/components/modules/PDP/ActionBar/ActionBar';
 import StickyBar from '~/components/modules/StickyBar/StickyBar';
 import { SiteImage } from '~/data/models/SiteImage';
-import { SiteProductLineSizeDetailRoadHazard } from '~/data/models/SiteProductLineSizeDetailRoadHazard';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
@@ -18,7 +17,10 @@ export interface PDPStickyBarProps {
   productLine: string;
   rearPrice?: string | null;
   rearSize?: string | null;
-  roadHazard: SiteProductLineSizeDetailRoadHazard | null;
+  roadHazard: {
+    durationLabel: string;
+    price: string;
+  } | null;
   sizesAvailable: number;
   startingPrice?: string | null;
   tirePrice?: string | null;

@@ -27,7 +27,7 @@ interface Props {
   isOpen: boolean;
   onClose: () => void;
   onConfirm: (hasCoverage: boolean) => void;
-  pricePerTire: string;
+  price: string;
 }
 
 function LearnMoreLink({
@@ -56,7 +56,7 @@ function RoadHazardModal({
   isOpen,
   onClose,
   onConfirm,
-  pricePerTire,
+  price,
 }: Props) {
   const { openStaticModal } = useModalContext();
   const [value, setValue] = useState(CONSTANTS.HAS_COVERAGE);
@@ -100,7 +100,7 @@ function RoadHazardModal({
               : 'pdp.roadHazard.headerCopy',
             {
               durationLabel,
-              pricePerTire: formatDollars(pricePerTire),
+              price: formatDollars(price),
             },
           )}
           customCopyStyles={styles.modalHeaderStyles}
@@ -112,7 +112,7 @@ function RoadHazardModal({
               : 'pdp.roadHazard.headerTitle',
             {
               durationLabel,
-              pricePerTire: formatDollars(pricePerTire),
+              price: formatDollars(price),
             },
           )}
         />
@@ -129,11 +129,7 @@ function RoadHazardModal({
               value={CONSTANTS.HAS_COVERAGE}
             >
               <>
-                <p css={styles.price}>
-                  {ui('pdp.roadHazard.price', {
-                    pricePerTire: formatDollars(pricePerTire),
-                  })}
-                </p>
+                <p css={styles.price}>{formatDollars(price)}</p>
                 <p css={styles.copyHeader}>{ui('pdp.roadHazard.copyHeader')}</p>
                 <p css={styles.copy}>
                   <Markdown renderers={{ paragraph: 'span' }}>

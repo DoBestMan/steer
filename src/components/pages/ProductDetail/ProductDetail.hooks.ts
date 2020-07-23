@@ -191,10 +191,11 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
   const handleClickFindYourSize = () => {};
 
   const productInfo = mapDataToProductInfo({
+    globals,
+    quantity,
+    router,
     siteProduct,
     siteProductReviews,
-    router,
-    globals,
   });
 
   return {
@@ -240,7 +241,7 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
       siteProduct,
       router,
     }),
-    stickyBar: mapDataToStickyBar({ siteProduct }),
+    stickyBar: mapDataToStickyBar({ quantity, siteProduct }),
     technicalSpecs: mapDataToTechnicalSpecs({ siteProduct, router }),
     technicalSpecsAnchor: CONSTANTS.TECH_SPECS_ANCHOR,
   };

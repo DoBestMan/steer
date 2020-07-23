@@ -339,7 +339,7 @@
       "searchForTireFrontRear": "See all tires in front {{size}} and rear {{rear}}"
     },
     "roadHazard": {
-      "interceptCopy": "Most tire failure are punctures or bruises that manufacturer’s warranty typically doesn’t cover.\n\n**Get coverage for up to  {{durationLabel}} by  {{pricePerTire}}/tire.**",
+      "interceptCopy": "Most tire failure are punctures or bruises that manufacturer’s warranty typically doesn’t cover.\n\n**Get coverage for up to  {{durationLabel}} by  {{price}}.**",
       "headerCopy": "Most tire failure are punctures or bruises that manufacturer’s warranty typically doesn’t cover.",
       "interceptTitle": "Did you know?\n\nRoad Hazard Coverage is common in your location",
       "headerTitle": "Save up to 100% of the tire cost if you need a replacement in {{durationLabel}}",
@@ -351,7 +351,6 @@
       "coverageLink": "Learn more",
       "copy": "Protection for {{durationLabel}}\n\nReplacement up to 100% of the tire cost",
       "copyHeader": "Recommended",
-      "price": "{{pricePerTire}}/tire",
       "featureDescription": "PRO tip"
     },
     "stickyBar": {

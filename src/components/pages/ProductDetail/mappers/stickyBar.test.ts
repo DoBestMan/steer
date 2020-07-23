@@ -5,6 +5,7 @@ describe('pages/ProductDetails/mappers/stickyBar', () => {
   it('returns parsed sticky bar props for tire line', () => {
     expect(
       mapDataToStickyBar({
+        quantity: { front: 4 },
         siteProduct: {
           ...siteProductMock,
           siteProductLineSizeDetail: null,
@@ -34,6 +35,7 @@ describe('pages/ProductDetails/mappers/stickyBar', () => {
   it('returns parsed sticky bar props for front size only', () => {
     expect(
       mapDataToStickyBar({
+        quantity: { front: 4 },
         siteProduct: {
           ...siteProductMock,
           siteProductLineRearSizeDetail: null,
@@ -53,7 +55,7 @@ describe('pages/ProductDetails/mappers/stickyBar', () => {
       rearSize: null,
       roadHazard: {
         durationLabel: '3 years',
-        pricePerTireInCents: '1302',
+        price: '5208',
       },
       sizesAvailable: 3,
       startingPrice: '4999',
@@ -65,6 +67,7 @@ describe('pages/ProductDetails/mappers/stickyBar', () => {
   it('returns parsed sticky bar props for front and rear', () => {
     expect(
       mapDataToStickyBar({
+        quantity: { front: 4 },
         siteProduct: siteProductMock,
       }),
     ).toStrictEqual({
@@ -79,7 +82,10 @@ describe('pages/ProductDetails/mappers/stickyBar', () => {
       productLine: 'DH2',
       rearPrice: '12099',
       rearSize: '215/50 R19 91J',
-      roadHazard: null,
+      roadHazard: {
+        durationLabel: '3 years',
+        price: '5208',
+      },
       sizesAvailable: 3,
       startingPrice: '4999',
       tirePrice: '13296',

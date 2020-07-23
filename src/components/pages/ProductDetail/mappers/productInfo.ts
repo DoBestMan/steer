@@ -9,21 +9,19 @@ import { SiteProductReviews } from '~/data/models/SiteProductReviews';
 import { ROUTE_MAP, ROUTES } from '~/lib/constants';
 import { interpolateRoute } from '~/lib/utils/routes';
 
+import { mapDataToRoadHazard } from './roadHazard';
+
 export function mapDataToProductInfo({
   globals: { customerServiceNumber },
-  siteProduct: {
-    siteProductLine,
-    siteProductLineSizeDetail,
-    siteProductLineRearSizeDetail,
-    siteProductLineAvailableSizeList,
-    siteProductPromotions,
-  },
+  quantity,
+  siteProduct,
   siteProductReviews: { performanceRating, reviewsSource },
   router: {
     query: { brand },
   },
 }: {
   globals: SiteGlobals;
+  quantity: { front: number; rear?: number };
   router: NextRouter;
   siteProduct: SiteProduct;
   siteProductReviews: SiteProductReviews;
@@ -36,6 +34,13 @@ export function mapDataToProductInfo({
   | 'sizeFinder'
   | 'isSizeSelectorOpen'
 > {
+  const {
+    siteProductLine,
+    siteProductLineSizeDetail,
+    siteProductLineRearSizeDetail,
+    siteProductLineAvailableSizeList,
+    siteProductPromotions,
+  } = siteProduct;
   const brandName = siteProductLine.brand;
   const brandURL = interpolateRoute(ROUTE_MAP[ROUTES.BRAND_DETAIL], {
     brand,
@@ -94,8 +99,10 @@ export function mapDataToProductInfo({
     },
   );
 
-  const roadHazard =
-    (!rearSize && siteProductLineSizeDetail?.roadHazard) || null;
+  const roadHazard = mapDataToRoadHazard({
+    siteProduct,
+    quantity,
+  });
 
   return {
     availableSizes,

@@ -1,3 +1,6 @@
+import { SiteProductLineSizeDetail } from '~/data/models/SiteProductLineSizeDetail';
+import { SiteProductLineSizeDetailRoadHazard } from '~/data/models/SiteProductLineSizeDetailRoadHazard';
+
 import {
   globalsMock,
   routerMock,
@@ -11,6 +14,7 @@ describe('pages/ProductDetails/mappers/breadcrumbs', () => {
     expect(
       mapDataToProductInfo({
         globals: globalsMock,
+        quantity: { front: 4 },
         router: routerMock,
         siteProduct: siteProductMock,
         siteProductReviews: siteProductReviewsMock,
@@ -52,12 +56,137 @@ describe('pages/ProductDetails/mappers/breadcrumbs', () => {
         salePriceInCents: '12099',
       },
       rearSize: '215/50 R19',
-      roadHazard: null,
       sameSizeSearchResults: null,
       sameSizeSearchURL: '/tire-sizes/p215-50-R17',
       size: '215/50 R17',
       startingPrice: '4999',
       volatileAvailability: false,
+    });
+  });
+
+  it('returns road hazard information for single available size', () => {
+    expect(
+      mapDataToProductInfo({
+        globals: globalsMock,
+        quantity: { front: 4 },
+        router: routerMock,
+        siteProduct: siteProductMock,
+        siteProductReviews: siteProductReviewsMock,
+      }),
+    ).toMatchObject({
+      roadHazard: {
+        durationLabel: '3 years',
+        price: '5208',
+      },
+    });
+  });
+
+  it('returns null road hazard for single unavailable size', () => {
+    expect(
+      mapDataToProductInfo({
+        globals: globalsMock,
+        quantity: { front: 4 },
+        router: routerMock,
+        siteProduct: {
+          ...siteProductMock,
+          siteProductLineSizeDetail: {
+            ...(siteProductMock.siteProductLineSizeDetail as SiteProductLineSizeDetail),
+            roadHazard: null,
+          },
+        },
+        siteProductReviews: siteProductReviewsMock,
+      }),
+    ).toMatchObject({
+      roadHazard: null,
+    });
+  });
+
+  it('returns road hazard for front + rear available sizes', () => {
+    expect(
+      mapDataToProductInfo({
+        globals: globalsMock,
+        quantity: { front: 2, rear: 2 },
+        router: routerMock,
+        siteProduct: siteProductMock,
+        siteProductReviews: siteProductReviewsMock,
+      }),
+    ).toMatchObject({
+      roadHazard: {
+        durationLabel: '3 years',
+        price: '6404',
+      },
+    });
+  });
+
+  it('returns null road hazard for front available + rear unavailable sizes', () => {
+    expect(
+      mapDataToProductInfo({
+        globals: globalsMock,
+        quantity: { front: 2, rear: 2 },
+        router: routerMock,
+        siteProduct: {
+          ...siteProductMock,
+          siteProductLineRearSizeDetail: {
+            ...(siteProductMock.siteProductLineRearSizeDetail as SiteProductLineSizeDetail),
+            roadHazard: null,
+          },
+        },
+        siteProductReviews: siteProductReviewsMock,
+      }),
+    ).toMatchObject({
+      roadHazard: null,
+    });
+  });
+
+  it('returns null road hazard for front unavailable + rear available sizes', () => {
+    expect(
+      mapDataToProductInfo({
+        globals: globalsMock,
+        quantity: { front: 2, rear: 2 },
+        router: routerMock,
+        siteProduct: {
+          ...siteProductMock,
+          siteProductLineSizeDetail: {
+            ...(siteProductMock.siteProductLineSizeDetail as SiteProductLineSizeDetail),
+            roadHazard: null,
+          },
+        },
+        siteProductReviews: siteProductReviewsMock,
+      }),
+    ).toMatchObject({
+      roadHazard: null,
+    });
+  });
+
+  it('returns null road hazard for front + rear available sizes with different durations', () => {
+    expect(
+      mapDataToProductInfo({
+        globals: globalsMock,
+        quantity: { front: 2, rear: 2 },
+        router: routerMock,
+        siteProduct: {
+          ...siteProductMock,
+          siteProductLineSizeDetail: {
+            ...(siteProductMock.siteProductLineSizeDetail as SiteProductLineSizeDetail),
+            roadHazard: {
+              ...((siteProductMock.siteProductLineSizeDetail as SiteProductLineSizeDetail)
+                .roadHazard as SiteProductLineSizeDetailRoadHazard),
+              durationLabel: '3 years',
+            },
+          },
+          siteProductLineRearSizeDetail: {
+            ...(siteProductMock.siteProductLineRearSizeDetail as SiteProductLineSizeDetail),
+            roadHazard: {
+              ...((siteProductMock.siteProductLineRearSizeDetail as SiteProductLineSizeDetail)
+                .roadHazard as SiteProductLineSizeDetailRoadHazard),
+              durationLabel: '2 years',
+            },
+          },
+        },
+        siteProductReviews: siteProductReviewsMock,
+      }),
+    ).toMatchObject({
+      roadHazard: null,
     });
   });
 });
