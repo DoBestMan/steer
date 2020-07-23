@@ -47,7 +47,13 @@ const styles: StylesMap = {
     disableGlobalFocus,
     {
       '&::placeholder': {
+        // label placeholder hidden until focused
         color: COLORS.LIGHT.GRAY_70,
+        opacity: 0,
+        transition: `opacity ${TIME.MS100}ms ease`,
+      },
+      ':focus::placeholder': {
+        // actual placeholder hidden on focus
         opacity: 0,
         transition: `opacity ${TIME.MS100}ms ease`,
       },

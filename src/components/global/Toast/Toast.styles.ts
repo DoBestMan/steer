@@ -43,9 +43,11 @@ const styles: StylesMap = {
     alignSelf: 'flex-start',
     color: COLORS.GLOBAL.WHITE,
     [MQ.L]: {
+      ':hover': {
+        color: COLORS.GLOBAL.WHITE,
+      },
       color: COLORS.ORANGE.TINT_70,
-      paddingLeft: SPACING.SIZE_15,
-      paddingTop: 3,
+      marginTop: -SPACING.SIZE_05,
     },
   },
 

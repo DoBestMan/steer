@@ -5,6 +5,7 @@ import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Input from '~/components/global/Input/Input';
 import Markdown from '~/components/global/Markdown/Markdown';
 import Toast, { TOAST_TYPE } from '~/components/global/Toast/Toast';
+import { useToastManager } from '~/components/global/Toast/Toast.hooks';
 import { apiSubscribeToNewsletter } from '~/lib/api/subscribe-newsletter';
 import { INPUT_TYPE, KEYCODES } from '~/lib/constants';
 import { email } from '~/lib/utils/regex';
@@ -22,12 +23,14 @@ const toastMessages: {
 function FooterMailingList() {
   const [isInputValid, setIsInputValid] = useState(false);
   const [emailVal, setEmailVal] = useState('');
-  const [toastMessage, setToastMessage] = useState<TOAST_TYPE | string>('');
+  const {
+    toastMessage,
+    setToastMessage,
+    handleClearMessage,
+    isOpen,
+    handleDismiss,
+  } = useToastManager();
   const inputEl = useRef<HTMLInputElement | null>(null);
-
-  function handleDismiss() {
-    setToastMessage('');
-  }
 
   const handleInputChange = (value: string) => {
     setEmailVal(value);
@@ -100,8 +103,9 @@ function FooterMailingList() {
       </div>
       <Toast
         customStyles={styles.toast}
-        isOpen={!!toastMessage}
+        isOpen={isOpen}
         onDismiss={handleDismiss}
+        handleClearMessage={handleClearMessage}
       >
         {toastMessages[toastMessage]}
       </Toast>

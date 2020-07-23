@@ -10,6 +10,7 @@ import Input from '~/components/global/Input/Input';
 import Markdown from '~/components/global/Markdown/Markdown';
 import TitleRadio from '~/components/global/Radio/TitleRadio';
 import Toast, { TOAST_TYPE } from '~/components/global/Toast/Toast';
+import { useToastManager } from '~/components/global/Toast/Toast.hooks';
 import { SiteProductLineReviewItemInput } from '~/data/models/SiteProductLineReviewItemInput';
 import { apiPostReview } from '~/lib/api/write-review';
 import {
@@ -96,8 +97,13 @@ function ReviewForm({ tire, queryParams, vehicle, onSearchVehicle }: Props) {
   const [formValues, setFormValues] = useState<FormValues>(initialState);
   const [pickerLabels, setPickerLabels] = useState<PickerLabels>({});
   const [isFormValid, setIsFormValid] = useState<boolean>(false);
-  const [toastMessage, setToastMessage] = useState<TOAST_TYPE | string>('');
-
+  const {
+    toastMessage,
+    setToastMessage,
+    handleClearMessage,
+    isOpen,
+    handleDismiss,
+  } = useToastManager();
   useEffect(() => {
     if (vehicle) {
       setFormValues((prev) => ({
@@ -221,10 +227,6 @@ function ReviewForm({ tire, queryParams, vehicle, onSearchVehicle }: Props) {
       setToastMessage(TOAST_TYPE.ERROR);
     }
   };
-
-  function handleDismiss() {
-    setToastMessage('');
-  }
 
   const handleSelectPickerOption = (field: string) => (
     _value: number | string,
@@ -548,7 +550,8 @@ function ReviewForm({ tire, queryParams, vehicle, onSearchVehicle }: Props) {
         </form>
         <Toast
           customStyles={styles.toast}
-          isOpen={!!toastMessage}
+          isOpen={isOpen}
+          handleClearMessage={handleClearMessage}
           onDismiss={handleDismiss}
         >
           {toastMessages[toastMessage]}

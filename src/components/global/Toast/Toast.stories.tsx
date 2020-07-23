@@ -1,3 +1,4 @@
+import { action } from '@storybook/addon-actions';
 import { boolean, text } from '@storybook/addon-knobs';
 import { ReactChild, useState } from 'react';
 
@@ -56,6 +57,7 @@ export function ToastNoAutoDismiss() {
         autoDismiss={false}
         isOpen={boolean('Visible', isVisible)}
         onDismiss={handleDismiss}
+        handleClearMessage={action('clear message')}
       >
         {text('Toast Message', 'Your location has been updated!')}
       </Toast>
@@ -81,7 +83,11 @@ export function ToastToggleable() {
       >
         Toggle toast
       </Link>
-      <Toast isOpen={isVisible} onDismiss={handleToggleToast}>
+      <Toast
+        handleClearMessage={action('clear message')}
+        isOpen={isVisible}
+        onDismiss={handleToggleToast}
+      >
         <p>
           Thanks for subscribing!
           <br />
@@ -114,6 +120,7 @@ export function ToastToggleableNoAutoDismiss() {
         Toggle toast
       </Link>
       <Toast
+        handleClearMessage={action('clear message')}
         isOpen={isVisible}
         autoDismiss={false}
         onDismiss={handleToggleToast}

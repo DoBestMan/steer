@@ -5,7 +5,8 @@ import { AutocompleteResult } from '~/components/global/Autocomplete/Autocomplet
 import GridItem from '~/components/global/Grid/GridItem';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Markdown from '~/components/global/Markdown/Markdown';
-import { TOAST_TYPE } from '~/components/global/Toast/Toast';
+import Toast, { TOAST_TYPE } from '~/components/global/Toast/Toast';
+import { useToastManager } from '~/components/global/Toast/Toast.hooks';
 import { NAV_TARGETS } from '~/components/modules/Nav/Nav.types';
 import { UserPersonalizationUpdate } from '~/data/models/UserPersonalizationUpdate';
 import { onlyNumbers } from '~/lib/utils/regex';
@@ -14,7 +15,6 @@ import { ui } from '~/lib/utils/ui-dictionary';
 import AutocompleteResultItemLocation from './AutocompleteResultItemLocation';
 import { styles } from './Location.styles';
 import LocationInfo from './LocationInfo';
-import LocationToast from './LocationToast';
 import UseCurrentLocation from './UseCurrentLocation';
 import { useGMapsScripts } from './useGMapsScripts';
 
@@ -63,10 +63,13 @@ function Location({
   const [search, setSearch] = useState('');
   const [isLoadingLocation, setIsLoadingLocation] = useState(false);
   const [hasInvalidInput, setHasInvalidInput] = useState(false);
-  const [toastMessage, setToastMessage] = useState<TOAST_TYPE | string>('');
-  function onDismiss() {
-    setToastMessage('');
-  }
+  const {
+    toastMessage,
+    setToastMessage,
+    handleClearMessage,
+    isOpen,
+    handleDismiss,
+  } = useToastManager();
   const onChange = useCallback(
     (input: string) => {
       // We need to clear the results when the input is empty to
@@ -205,12 +208,14 @@ function Location({
           </>
         )}
 
-        <LocationToast
-          toastMessage={toastMessage}
-          message={toastMessages[toastMessage]}
-          onDismiss={onDismiss}
-          setToastMessage={setToastMessage}
-        />
+        <Toast
+          handleClearMessage={handleClearMessage}
+          customStyles={styles.toast}
+          isOpen={isOpen}
+          onDismiss={handleDismiss}
+        >
+          {toastMessages[toastMessage]}
+        </Toast>
       </div>
     </GridItem>
   );

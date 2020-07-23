@@ -106,10 +106,13 @@ const styles: StylesMap = {
   logoSection: [
     borderTopWithGapAndSpacing,
     {
+      alignItems: 'flex-end',
+      display: 'flex',
       order: 6,
       paddingBottom: 0,
 
       [MQ.XL]: {
+        alignItems: 'flex-start',
         border: 'none',
         margin: 0,
         order: 3,
@@ -167,20 +170,22 @@ const styles: StylesMap = {
       order: 7,
       paddingBottom: 0,
       ul: {
+        alignItems: 'flex-end',
+        display: 'flex',
+        justifyContent: 'flex-end',
         li: {
           '&:not(:last-child)': {
-            marginBottom: SPACING.SIZE_15,
+            marginBottom: 'unset',
           },
+          display: 'flex',
+          justifyContent: 'center',
 
-          display: 'inline',
           marginLeft: SPACING.SIZE_15,
 
           // the first span is the icon
           'span:nth-of-type(1)': {
             paddingRight: 0, // Remove padding from base footer links
             [MQ.L]: {
-              display: 'flex',
-              justifyContent: 'center',
               width: CONSTANTS.ICON_WIDTH,
             },
             [MQ.XL]: {
@@ -199,14 +204,16 @@ const styles: StylesMap = {
           },
 
           [MQ.XL]: {
+            '&:not(:last-child)': {
+              marginBottom: SPACING.SIZE_15,
+            },
             display: 'block',
             marginLeft: 0,
           },
         },
 
-        textAlign: 'right',
-
         [MQ.XL]: {
+          display: 'inline',
           textAlign: 'left',
         },
       },

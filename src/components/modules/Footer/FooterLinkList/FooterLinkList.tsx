@@ -25,7 +25,7 @@ function FooterLinkList(props: Props) {
         return (
           <li css={styles.listItem} key={text}>
             <Link
-              css={typography.smallCopy}
+              css={typography.bodyCopyTight}
               href={action}
               icon={icon}
               iconPosition={LINK_ICON_POSITION.LEFT}

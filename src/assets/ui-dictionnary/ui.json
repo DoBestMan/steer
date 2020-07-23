@@ -82,7 +82,7 @@
       "email": "Please enter a valid email"
     },
     "form": {
-      "email": "Email",
+      "email": "Your email address",
       "emailError": "Please enter a valid email",
       "yourEmail": "Your email address",
       "orderId": "Order ID",

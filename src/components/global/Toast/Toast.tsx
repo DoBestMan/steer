@@ -17,6 +17,7 @@ interface Props {
   autoDismiss?: boolean; // There should be no use cases with auto dismiss disabled, this prop is for testing
   children: ReactChild;
   customStyles?: CSSStyles;
+  handleClearMessage: () => void;
   isOpen?: boolean;
   onDismiss: () => void;
 }
@@ -25,6 +26,7 @@ function Toast({
   children,
   customStyles,
   autoDismiss = true,
+  handleClearMessage,
   isOpen = false,
   onDismiss,
 }: Props) {
@@ -39,6 +41,7 @@ function Toast({
   return (
     <CSSTransition
       unmountOnExit
+      onExited={handleClearMessage}
       in={isOpen}
       timeout={{ enter: 0, exit: TIME.MS400 }}
     >
