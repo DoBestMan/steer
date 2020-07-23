@@ -45,11 +45,14 @@ const styles: StylesMap = {
       position: 'relative',
       width: ICON_SIZE.STANDARD,
     },
-    height: ICON_SIZE.STANDARD,
     marginBottom: SPACING.SIZE_40,
     position: 'relative',
     svg: {
-      height: '100%',
+      height: ICON_SIZE.STANDARD,
+      width: 'auto',
+      [MQ.XL]: {
+        height: ICON_SIZE.XL,
+      },
     },
     width: '100%',
     zIndex: Z_INDEX.ZERO,
@@ -63,7 +66,6 @@ const styles: StylesMap = {
     [MQ.XL]: {
       // exception for jumbo headline, should be 60px on XL for card decorator
       fontSize: '6.0rem',
-      height: ICON_SIZE.XL,
       letterSpacing: '-0.04em',
       lineHeight: 60 / 60, // '60px',
       paddingLeft: SPACING.SIZE_40,
