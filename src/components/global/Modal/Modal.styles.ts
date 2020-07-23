@@ -106,8 +106,11 @@ const styles: StylesMap = {
   },
   close: {
     position: 'absolute',
-    right: SPACING.SIZE_10,
-    top: SPACING.SIZE_10,
+    right: SPACING.SIZE_20,
+    top: SPACING.SIZE_20,
+    [MQ.M]: {
+      top: SPACING.SIZE_35,
+    },
   },
   fullScreenPadding: {
     padding: `${FULLSCREEN_PADDINGS.TOP}px ${FULLSCREEN_PADDINGS.RIGHT}px ${FULLSCREEN_PADDINGS.BOTTOM}px`,
