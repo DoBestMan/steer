@@ -19,25 +19,22 @@ import { typography } from '~/styles/typography.styles';
 
 export const CAR_ROTATION_DURATION = 200;
 export const SCENERY_OR_WEATHER_DURATION = 400;
+export const TITLE_DURATION = TIME.MS300;
 const VEHICLE_CONTAINER_DURATION = 6000;
 
 export const animations = {
   /* eslint-disable sort-keys */
-  [`copyElement_${ENTERING}`]: {
+  [`title_${ENTERING}`]: {
     opacity: 0,
-    transform: 'translate3d(0, 20px, 0)',
   },
-  [`copyElement_${ENTERED}`]: {
+  [`title_${ENTERED}`]: {
     opacity: 1,
-    transform: 'translate3d(0, 0, 0)',
   },
-  [`copyElement_${EXITING}`]: {
+  [`title_${EXITING}`]: {
     opacity: 1,
-    transform: 'translate3d(0, 0, 0)',
   },
-  [`copyElement_${EXITED}`]: {
+  [`title_${EXITED}`]: {
     opacity: 0,
-    transform: 'translate3d(0, 20px, 0)',
   },
   [`scenery_${ENTERING}`]: {
     opacity: 0,
@@ -129,18 +126,20 @@ export const styles: StylesMap = {
     position: 'relative',
     zIndex: 1,
   },
-  description: {
-    transition: `all ${TIME.MS300}ms ${EASING.CUBIC_EASE_OUT}`,
-    transitionDelay: `${TIME.MS100}ms`,
-
-    [MQ.XL]: typography.largeCopy,
-  },
+  description: [
+    typography.bodyCopy,
+    {
+      transition: `opacity ${TITLE_DURATION + 100}ms ${EASING.CUBIC_EASE_OUT}`,
+      [MQ.XL]: typography.largeCopy,
+    },
+  ],
 
   eyebrow: {
+    transition: `opacity ${TITLE_DURATION}ms ${EASING.CUBIC_EASE_OUT}`,
+
     alignItems: 'baseline',
     display: 'inline-flex',
     marginBottom: SPACING.SIZE_10,
-    transition: `all ${TIME.MS400}ms ${EASING.CUBIC_EASE_OUT}`,
   },
   scenery: {
     bottom: 0,
@@ -164,20 +163,21 @@ export const styles: StylesMap = {
       bottom: 64,
     },
   },
-  title: {
-    marginBottom: SPACING.SIZE_10,
+  title: [
+    typography.jumboHeadline,
+    {
+      marginBottom: SPACING.SIZE_10,
+      transition: `opacity ${TITLE_DURATION}ms ${EASING.CUBIC_EASE_OUT}`,
 
-    [MQ.M]: {
-      marginBottom: SPACING.SIZE_20,
+      [MQ.M]: {
+        marginBottom: SPACING.SIZE_20,
+      },
+
+      strong: {
+        color: COLORS.GLOBAL.ORANGE,
+      },
     },
-
-    strong: {
-      color: COLORS.GLOBAL.ORANGE,
-    },
-
-    transition: `all ${TIME.MS300}ms ${EASING.CUBIC_EASE_OUT}`,
-    transitionDelay: `${TIME.MS50}ms`,
-  },
+  ],
   vehicle: {
     bottom: 0,
     position: 'absolute',
