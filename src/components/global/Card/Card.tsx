@@ -46,12 +46,12 @@ function Card({
       </GridItem>
       <GridItem css={styles.cardContent} gridColumnL="4/8" gridColumnXL="3/6">
         {eyebrow && eyebrowIcon && (
-          <div css={[typography.secondaryHeadline, styles.eyebrow]}>
+          <div css={styles.eyebrow}>
             <span>{eyebrow}</span>
             <Icon name={eyebrowIcon.svgId} css={styles.eyebrowIcon} />
           </div>
         )}
-        <h3 css={[typography.secondaryHeadline, styles.title]}>{title}</h3>
+        <h3 css={styles.title}>{title}</h3>
         <p css={[typography.bodyCopy, styles.description]}>{body}</p>
         <Link href={link.href} icon={ICONS.CHEVRON_RIGHT}>
           {linkLabel}

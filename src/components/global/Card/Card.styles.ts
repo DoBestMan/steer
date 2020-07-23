@@ -8,6 +8,7 @@ import {
   StylesMap,
   Z_INDEX,
 } from '~/lib/constants';
+import { typography } from '~/styles/typography.styles';
 
 const ICON_SIZE = {
   STANDARD: 50,
@@ -27,6 +28,7 @@ const styles: StylesMap = {
   decorator: {
     color: COLORS.GLOBAL.ORANGE,
     display: 'flex',
+    // image
     div: {
       // overlap brand images
       ':nth-of-type(1)': {
@@ -47,14 +49,16 @@ const styles: StylesMap = {
     },
     marginBottom: SPACING.SIZE_40,
     position: 'relative',
-    svg: {
+    // icon
+    span: {
+      color: COLORS.GLOBAL.WHITE,
       height: ICON_SIZE.STANDARD,
-      width: 'auto',
-      [MQ.XL]: {
-        height: ICON_SIZE.XL,
+      width: ICON_SIZE.STANDARD,
+      svg: {
+        height: '100%',
+        width: '100%',
       },
     },
-    width: '100%',
     zIndex: Z_INDEX.ZERO,
     [MQ.L]: {
       justifyContent: 'center',
@@ -69,16 +73,24 @@ const styles: StylesMap = {
       letterSpacing: '-0.04em',
       lineHeight: 60 / 60, // '60px',
       paddingLeft: SPACING.SIZE_40,
+      span: {
+        height: ICON_SIZE.XL,
+        width: ICON_SIZE.XL,
+      },
     },
   },
   description: {
     color: COLORS.DARK.GRAY_40,
     marginBottom: SPACING.SIZE_40,
   },
-  eyebrow: {
-    color: COLORS.GLOBAL.ORANGE,
-    display: 'flex',
-  },
+  eyebrow: [
+    typography.primaryHeadline,
+    {
+      [MQ.M]: typography.secondaryHeadline,
+      color: COLORS.GLOBAL.ORANGE,
+      display: 'flex',
+    },
+  ],
   eyebrowIcon: {
     paddingLeft: 8,
   },
@@ -93,10 +105,14 @@ const styles: StylesMap = {
       padding: `${SPACING.SIZE_60}px 0`,
     },
   },
-  title: {
-    color: COLORS.GLOBAL.WHITE,
-    marginBottom: SPACING.SIZE_10,
-  },
+  title: [
+    typography.primaryHeadline,
+    {
+      [MQ.M]: typography.secondaryHeadline,
+      color: COLORS.GLOBAL.WHITE,
+      marginBottom: SPACING.SIZE_10,
+    },
+  ],
 };
 
 export default styles;

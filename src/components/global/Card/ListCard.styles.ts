@@ -74,6 +74,7 @@ const styles: StylesMap = {
       position: 'relative',
       span: {
         borderColor: 'transparent',
+        color: COLORS.GLOBAL.WHITE,
       },
       width: '100%',
       [MQ.L]: {

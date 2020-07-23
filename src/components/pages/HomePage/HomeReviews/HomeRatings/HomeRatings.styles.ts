@@ -1,4 +1,5 @@
 import { COLORS, MQ, SPACING } from '~/lib/constants';
+import { typography } from '~/styles/typography.styles';
 
 export const homeRatingGradientID = 'homepage-rating';
 
@@ -14,11 +15,14 @@ const styles = {
     height: 19,
     marginLeft: 4,
   },
-  ratingLabel: {
-    alignItems: 'center',
-    color: COLORS.DARK.GRAY_40,
-    display: 'flex',
-  },
+  ratingLabel: [
+    typography.bodyCopy,
+    {
+      alignItems: 'center',
+      color: COLORS.DARK.GRAY_40,
+      display: 'flex',
+    },
+  ],
   stars: {
     svg: {
       height: 20,
@@ -33,6 +37,7 @@ const styles = {
   starsContainer: {
     color: COLORS.GLOBAL.ORANGE,
     display: 'flex',
+    marginBottom: SPACING.SIZE_05,
   },
   title: {
     color: COLORS.GLOBAL.WHITE,
