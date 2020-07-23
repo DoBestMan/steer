@@ -2,6 +2,7 @@ import { BORDERS, COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const ITEM_HEIGHT = 60;
+const MAX_IMAGE_HEIGHT = 45;
 const ICON_OFFSET = -8;
 const DECORATOR_CONTENT = {
   content: '"•"',
@@ -120,6 +121,9 @@ const styles: StylesMap = {
     color: COLORS.GLOBAL.BLACK,
     display: 'flex',
     height: '100%',
+    img: {
+      maxHeight: MAX_IMAGE_HEIGHT,
+    },
     span: {
       maxWidth: 30, // targets svg icon
     },
