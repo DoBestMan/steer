@@ -1,26 +1,19 @@
 import Image from '~/components/global/Image/Image';
 import { SiteImage } from '~/data/models/SiteImage';
-import { CSSStyles } from '~/lib/constants';
-
-import styles from './TireImage.styles';
 
 interface CarouselImageProps {
+  height?: number;
   image: SiteImage;
-  isFullscreen?: boolean;
+  width?: number;
 }
 
-function CarouselImage({ image, isFullscreen }: CarouselImageProps) {
+function CarouselImage({ image, width, height }: CarouselImageProps) {
   return (
     <Image
       altText={image.altText}
-      customStyles={
-        [
-          styles.imageCustomStyles,
-          isFullscreen && styles.imageFullscreen,
-        ] as CSSStyles
-      }
+      width={width}
+      height={height}
       src={image.src}
-      css={styles.imageStyles}
       responsive
     />
   );

@@ -18,6 +18,20 @@ export default {
   title: 'PDP/Tire Image',
 };
 
+const video = {
+  poster: {
+    altText: 'Video poster',
+    height: 1080,
+    src: 'https://picsum.photos/1920/1080',
+    type: 'SiteImage',
+    width: 1920,
+  },
+  type: SiteYouTubeVideoTypeEnum.SiteYouTubeVideo,
+  video: {
+    youtubeId: 'iQdV2fDR9RY',
+  },
+};
+
 const assetList: SiteProductLine['assetList'] = [
   {
     image: {
@@ -67,19 +81,6 @@ const assetList: SiteProductLine['assetList'] = [
     productImageType: 'treadonly',
     type: SiteCatalogProductImageTypeEnum.SiteCatalogProductImage,
   } as SiteCatalogProductImage,
-  {
-    poster: {
-      altText: 'Video poster',
-      height: 1080,
-      src: 'https://picsum.photos/1920/1080',
-      type: 'SiteImage',
-      width: 1920,
-    },
-    type: SiteYouTubeVideoTypeEnum.SiteYouTubeVideo,
-    video: {
-      youtubeId: 'iQdV2fDR9RY',
-    },
-  } as SiteYouTubeVideo,
 ];
 
 const brand = {
@@ -108,11 +109,19 @@ const unavailableAssetList: SiteProductLine['assetList'] = [
     type: SiteCatalogProductImageTypeEnum.SiteCatalogProductImage,
   },
 ];
-
 export function TireImageCarousel() {
   return <TireImage assetList={assetList} brand={brand} />;
 }
 
 export function UnavailableTireImage() {
   return <TireImage assetList={unavailableAssetList} brand={brand} />;
+}
+
+export function TireImagesWithVideo() {
+  return (
+    <TireImage
+      assetList={[...assetList, video as SiteYouTubeVideo]}
+      brand={brand}
+    />
+  );
 }

@@ -277,6 +277,8 @@
       "fits": "Fits your {{make}}"
     },
     "tireImage": {
+      "nextButtonLabel": "Next",
+      "previousButtonLabel": "Previous",
       "modalLabel": "{{label}} image zoom",
       "imageZoomButton": "Zoom into {{label}}",
       "thumbAltText": "Slide number {{number}}"

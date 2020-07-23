@@ -7,7 +7,7 @@ import {
   SiteYouTubeVideo,
   SiteYouTubeVideoTypeEnum,
 } from '~/data/models/SiteYouTubeVideo';
-import { getWidthFromMaxHeight } from '~/lib/utils/number';
+import { CSSStyles } from '~/lib/constants';
 
 import CarouselImage from './CarouselImage';
 import CarouselImageButton from './CarouselImageButton';
@@ -16,35 +16,26 @@ import styles from './TireImage.styles';
 interface Props {
   handleClick?: (index: number) => void;
   handleImageClick: (index: number) => () => void;
+  height?: number;
   imageItem: SiteCatalogProductImage | SiteYouTubeVideo;
   index: number;
-  isFullscreen?: boolean;
-  maxHeight: number;
+  isActive?: boolean;
   setShouldStopVideo?: (shouldStopVideo: boolean) => void;
   shouldStopVideo?: boolean;
+  width?: number;
 }
 
 function TireImageCarouselItem({
+  isActive,
   handleClick,
   handleImageClick,
+  height,
   imageItem,
   index,
-  isFullscreen,
-  maxHeight,
   shouldStopVideo,
   setShouldStopVideo,
+  width,
 }: Props) {
-  const imageWidth =
-    imageItem.type === SiteCatalogProductImageTypeEnum.SiteCatalogProductImage
-      ? imageItem.image?.width &&
-        imageItem.image?.height &&
-        getWidthFromMaxHeight(
-          imageItem.image.width,
-          imageItem.image.height,
-          maxHeight,
-        )
-      : undefined;
-
   return (
     <>
       {imageItem.type ===
@@ -53,17 +44,29 @@ function TireImageCarouselItem({
           <CarouselImageButton
             handleClick={handleImageClick(index)}
             image={imageItem.image}
-            maxHeight={maxHeight}
-            imageWidth={imageWidth}
+            height={height}
+            width={width}
           />
         ) : (
-          <CarouselImage image={imageItem.image} isFullscreen={isFullscreen} />
+          <div css={[styles.fullscreenContainer, { height, width }]}>
+            <CarouselImage
+              image={imageItem.image}
+              height={height}
+              width={width}
+            />
+          </div>
         ))}
 
       {imageItem.type === SiteYouTubeVideoTypeEnum.SiteYouTubeVideo && (
         <Video
-          containerStyles={styles.videoContainerStyles}
-          videoStyles={styles.videoStyles}
+          containerStyles={
+            [
+              styles.videoContainerStyles,
+              // Width of video follows 16/9 aspect ratio
+              { height, width: height && height * (16 / 9) },
+            ] as CSSStyles
+          }
+          isButtonFocusable={isActive}
           poster={imageItem.poster}
           sizes={[300, 700]}
           shouldStopVideo={shouldStopVideo}

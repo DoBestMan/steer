@@ -29,7 +29,6 @@ function Carousel({
     {},
     {
       centeredSlides: centerActiveSlide,
-      centeredSlidesBounds: centerActiveSlide,
       freeMode: freeScroll,
       grabCursor: true,
       mousewheel: freeScroll,

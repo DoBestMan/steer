@@ -2,13 +2,45 @@ import { useEffect, useState } from 'react';
 import { SwiperInstance } from 'react-id-swiper';
 
 import Carousel from '~/components/global/Carousel/Carousel';
+import Icon from '~/components/global/Icon/Icon';
+import { ICONS } from '~/components/global/Icon/Icon.constants';
+import {
+  SiteCatalogProductImage,
+  SiteCatalogProductImageTypeEnum,
+} from '~/data/models/SiteCatalogProductImage';
 import { SiteProductLine } from '~/data/models/SiteProductLine';
+import { SiteYouTubeVideo } from '~/data/models/SiteYouTubeVideo';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
-import { BREAKPOINTS } from '~/lib/constants';
+import { getWidthFromMaxHeight } from '~/lib/utils/number';
+import { ui } from '~/lib/utils/ui-dictionary';
 
-import styles, { MAX_HEIGHT } from './TireImage.styles';
+import styles from './TireImage.styles';
 import TireImageCarouselItem from './TireImageCarouselItem';
 import TireImageThumbs from './TireImageThumbs';
+
+function getItemWidth(
+  imageItem: SiteCatalogProductImage | SiteYouTubeVideo,
+  clientRect: ClientRect | null,
+) {
+  if (
+    imageItem.type !==
+      SiteCatalogProductImageTypeEnum.SiteCatalogProductImage ||
+    !imageItem.image.width ||
+    !imageItem.image.height ||
+    !clientRect ||
+    !clientRect.height
+  ) {
+    return undefined;
+  }
+
+  return Math.round(
+    getWidthFromMaxHeight(
+      imageItem.image.width,
+      imageItem.image.height,
+      clientRect.height,
+    ),
+  );
+}
 
 interface Props {
   assetList: SiteProductLine['assetList'];
@@ -19,26 +51,27 @@ interface Props {
   setCurrentIndex: (index: number) => void;
 }
 
-const CONSTANTS = {
-  CAROUSEL_PARAMS: {
-    centeredSlides: true,
+function NextButton() {
+  return (
+    <button
+      className="swiper-button-prev"
+      aria-label={ui('pdp.tireImage.previousButtonLabel')}
+    >
+      <Icon name={ICONS.CHEVRON_LEFT} />
+    </button>
+  );
+}
 
-    breakpoints: {
-      [BREAKPOINTS.S]: {
-        spaceBetween: 60,
-        slidesPerView: 'auto',
-      },
-      [BREAKPOINTS.M]: {
-        spaceBetween: 170,
-        slidesPerView: 'auto',
-      },
-      [BREAKPOINTS.L]: {
-        spaceBetween: 0,
-        slidesPerView: 1,
-      },
-    },
-  },
-};
+function PrevButton() {
+  return (
+    <button
+      className="swiper-button-next"
+      aria-label={ui('pdp.tireImage.nextButtonLabel')}
+    >
+      <Icon name={ICONS.CHEVRON_RIGHT} />
+    </button>
+  );
+}
 
 function TireImageCarousel({
   currentIndex,
@@ -49,25 +82,55 @@ function TireImageCarousel({
   setCurrentIndex,
 }: Props) {
   const [swiper, setSwiper] = useState<SwiperInstance>(null);
-  const { is, lessThan } = useBreakpoints();
+  const { bk, windowHeight } = useBreakpoints();
   const [shouldStopVideo, setShouldStopVideo] = useState(false);
+  const [wrapperRect, setWrapperRect] = useState<ClientRect | null>(null);
+
+  const pagination = !isFullscreen
+    ? {
+        pagination: {
+          el: '.tire-image-pagination',
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+      }
+    : null;
+
+  const navigation = !isFullscreen
+    ? {
+        renderPrevButton: PrevButton,
+        renderNextButton: NextButton,
+      }
+    : null;
+
+  const params = {
+    centeredSlides: true,
+    shouldSwiperUpdate: true,
+    slidesPerView: 1,
+  };
+
+  // We need to update the slide dimensions when the window size changes
+  useEffect(() => {
+    if (!swiper) {
+      return;
+    }
+    setWrapperRect(swiper.wrapperEl.getBoundingClientRect());
+  }, [bk, swiper, windowHeight]);
 
   useEffect(() => {
     if (!swiper) {
       return;
     }
 
+    setWrapperRect(swiper.wrapperEl.getBoundingClientRect());
+
     swiper.on('slideChange', () => {
       setCurrentIndex(swiper.activeIndex);
       setShouldStopVideo(true);
     });
   }, [swiper, setCurrentIndex]);
-
-  const maxHeight = lessThan.M
-    ? MAX_HEIGHT.S
-    : is.M
-    ? MAX_HEIGHT.M
-    : MAX_HEIGHT.L;
 
   const handleImageClick = (index: number) => () => {
     if (!handleClick) {
@@ -76,31 +139,46 @@ function TireImageCarousel({
     return handleClick(index);
   };
 
+  const defaultItemWidth = wrapperRect
+    ? Math.round(wrapperRect?.height * 1.125)
+    : undefined;
+
   return (
     <div css={[styles.container, isFullscreen && styles.containerFullScreen]}>
-      {maxHeight && (
-        <Carousel
-          centerActiveSlide
-          params={{ ...CONSTANTS.CAROUSEL_PARAMS, initialSlide: currentIndex }}
-          getSwiper={setSwiper}
-          activeSlide={currentIndex}
-        >
-          {assetList.map((imageItem, index) => (
-            <div key={`tire-image-${index}`}>
+      <Carousel
+        centerActiveSlide
+        params={{
+          ...params,
+          initialSlide: currentIndex,
+          ...pagination,
+          ...navigation,
+        }}
+        getSwiper={setSwiper}
+        activeSlide={currentIndex}
+      >
+        {assetList.map((imageItem, index) => {
+          const imageWidth =
+            // If it's video or there's something wrong with image's dimensions
+            // use the default width
+            getItemWidth(imageItem, wrapperRect) || defaultItemWidth;
+
+          return (
+            <div key={`tire-image-${index}`} css={styles.slide}>
               <TireImageCarouselItem
                 handleClick={handleClick}
                 handleImageClick={handleImageClick}
                 imageItem={imageItem}
                 index={index}
-                isFullscreen={isFullscreen}
-                maxHeight={maxHeight}
+                isActive={index === currentIndex}
                 shouldStopVideo={shouldStopVideo}
                 setShouldStopVideo={setShouldStopVideo}
+                height={wrapperRect?.height}
+                width={imageWidth}
               />
             </div>
-          ))}
-        </Carousel>
-      )}
+          );
+        })}
+      </Carousel>
 
       {hasThumbs && (
         <TireImageThumbs

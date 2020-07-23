@@ -17,6 +17,7 @@ import styles, { activeVideoStyles } from './Video.styles';
 export interface Props {
   aspectRatio?: string;
   containerStyles?: CSSStyles;
+  isButtonFocusable?: boolean;
   poster: SiteImage;
   setShouldStopVideo?: (shouldStopVideo: boolean) => void;
   shouldStopVideo?: boolean;
@@ -28,6 +29,7 @@ export interface Props {
 function Video({
   containerStyles,
   aspectRatio = '16/9',
+  isButtonFocusable = true,
   poster,
   sizes,
   videoStyles,
@@ -73,7 +75,7 @@ function Video({
       <button
         aria-label={ui('common.video.play')}
         onClick={loadVideo}
-        tabIndex={hasPlayedVideo ? -1 : 0}
+        tabIndex={hasPlayedVideo || !isButtonFocusable ? -1 : 0}
         css={[styles.button, hasPlayedVideo && activeVideoStyles.button]}
       >
         <div css={styles.buttonContent}>

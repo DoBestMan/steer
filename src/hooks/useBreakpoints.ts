@@ -13,6 +13,7 @@ type UseBreakpointsProps = {
   isLoading: boolean;
   isMobile: boolean;
   lessThan: { [key: string]: boolean };
+  windowHeight: number;
 };
 
 export function useBreakpoints(): UseBreakpointsProps {
@@ -48,5 +49,6 @@ export function useBreakpoints(): UseBreakpointsProps {
       L: BREAKPOINTS[bk] < BREAKPOINTS[BREAKPOINT_SIZES.L],
       XL: BREAKPOINTS[bk] < BREAKPOINTS[BREAKPOINT_SIZES.XL],
     },
+    windowHeight: windowSize.height,
   };
 }

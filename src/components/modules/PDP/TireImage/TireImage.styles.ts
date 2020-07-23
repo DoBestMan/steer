@@ -32,6 +32,17 @@ export const MAX_HEIGHT = {
 
 const styles: StylesMap = {
   container: {
+    /* eslint-disable sort-keys */
+    marginBottom: SPACING.SIZE_15,
+
+    [MQ.M]: {
+      marginBottom: SPACING.SIZE_20,
+    },
+
+    [MQ.L]: {
+      marginBottom: 0,
+    },
+
     '.swiper-wrapper': {
       alignItems: 'center',
       height: MAX_HEIGHT.S,
@@ -52,6 +63,47 @@ const styles: StylesMap = {
         marginBottom: CONSTANTS.THUMB_MARGIN,
       },
     },
+
+    '.tire-image-pagination': {
+      [MQ.L]: {
+        display: 'none',
+      },
+
+      '.swiper-pagination-bullet': {
+        background: COLORS.LIGHT.GRAY_20,
+        borderRadius: 5,
+        height: 2,
+        margin: `0 ${SPACING.SIZE_02}px 0 0`,
+        opacity: 1,
+        width: 8,
+      },
+      '.swiper-pagination-bullet-active': {
+        background: COLORS.LIGHT.GRAY_70,
+      },
+    },
+
+    '.swiper-button-prev, .swiper-button-next': {
+      '&.swiper-button-disabled': {
+        opacity: 0,
+      },
+
+      ':after': {
+        content: 'none',
+      },
+
+      ':hover svg': {
+        color: COLORS.GLOBAL.BLACK,
+      },
+
+      svg: {
+        color: COLORS.GLOBAL.GRAY_50,
+      },
+
+      [MQ.L]: {
+        display: 'none',
+      },
+    },
+    /* eslint-enable sort-keys */
   },
   containerFullScreen: {
     height: `calc(100vh -  ${CONSTANTS.HEADER_HEIGHT}px - ${MODAL_PADDINGS.BOTTOM}px - ${MODAL_PADDINGS.TOP}px)`,
@@ -74,19 +126,11 @@ const styles: StylesMap = {
     },
     /* eslint-enable sort-keys */
   },
-  imageButton: {
-    display: 'block',
+  fullscreenContainer: {
+    display: 'flex',
     margin: '0 auto',
     maxHeight: '100%',
-  },
-  imageCustomStyles: {
-    height: '100%',
-    margin: '0 auto',
-  },
-  imageFullscreen: {
-    alignItems: 'center',
-    display: 'flex',
-    maxWidth: '90%',
+    maxWidth: '100%',
   },
   imageStyles: {
     maxHeight: '100%',
@@ -107,6 +151,9 @@ const styles: StylesMap = {
         maxWidth: CONSTANTS.THUMB_SIZES.L,
       },
     },
+  },
+  slide: {
+    textAlign: 'center',
   },
   thumb: {
     '&:not(:last-of-type)': {
@@ -155,42 +202,16 @@ const styles: StylesMap = {
     },
   },
   videoContainerStyles: {
-    height: MAX_HEIGHT.S,
-    maxHeight: '100%',
-    paddingBottom: '0',
-
-    [MQ.M]: {
-      height: MAX_HEIGHT.M,
-    },
-
-    [MQ.L]: {
-      height: MAX_HEIGHT.L,
-      margin: '0 auto',
-      maxWidth: MAX_HEIGHT.L * CONSTANTS.VIDEO_RATIO,
-    },
+    boxSizing: 'border-box',
+    margin: '0 auto',
+    maxWidth: '75vw',
+    paddingBottom: 0,
 
     /* eslint-disable sort-keys */
-    img: {
-      height: '100%',
-      margin: '0 auto',
-      maxWidth: CONSTANTS.VIDEO_MAX_WIDTH, // Adds drag area to move to another slide
-      width: '100%',
-    },
-    /* eslint-enable sort-keys */
-  },
-  videoStyles: {
-    margin: '0 auto',
-    maxHeight: '100vh',
-    maxWidth: CONSTANTS.VIDEO_MAX_WIDTH, // Adds drag area to move to another slide
-    width: '100%',
-
-    [MQ.L]: {
-      maxHeight: `calc(100vh - ${
-        CONSTANTS.THUMB_MARGIN +
-        CONSTANTS.THUMB_SIZES.L +
-        CONSTANTS.THUMB_INNER_PADDINGS.L +
-        1 // 1px border
-      }px)`,
+    'button div': {
+      height: 'inherit',
+      padding: 0,
+      width: 'inherit',
     },
   },
 };

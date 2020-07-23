@@ -15,16 +15,6 @@ export function ratioToPercentage(ratio: string) {
   return aspectRatioAsPercentage;
 }
 
-export function getWidthFromMaxHeight(
-  width: number,
-  height: number,
-  maxHeight: number,
-) {
-  const ratio = width / height;
-
-  return maxHeight * ratio;
-}
-
 export function getRandomMinMax(min: number, max: number) {
   return Math.random() * (max - min) + min;
 }
@@ -43,4 +33,14 @@ export function mapNumberToRange(
       (inRange[1] - inRange[0]) +
     outRange[0]
   );
+}
+
+export function getWidthFromMaxHeight(
+  width: number,
+  height: number,
+  maxHeight: number,
+) {
+  const ratio = width / height;
+
+  return maxHeight * ratio;
 }
