@@ -30,6 +30,8 @@ describe('FilterHeader', () => {
     expect(container.firstChild).toMatchInlineSnapshot(`
       <div
         class="FilterHeader"
+        data-component="FilterHeader"
+        data-source-file="FilterHeader.tsx"
       >
         Test filter
         <button
@@ -69,6 +71,8 @@ describe('FilterHeader', () => {
     expect(container.firstChild).toMatchInlineSnapshot(`
       <div
         class="FilterHeader"
+        data-component="FilterHeader"
+        data-source-file="FilterHeader.tsx"
       >
         Test filter
       </div>
@@ -122,6 +126,8 @@ describe('FilterHeader', () => {
     expect(container.firstChild).toMatchInlineSnapshot(`
       <div
         class="FilterHeader"
+        data-component="FilterHeader"
+        data-source-file="FilterHeader.tsx"
       >
         Test filter
       </div>

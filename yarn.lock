@@ -1649,6 +1649,11 @@
   resolved "https://registry.yarnpkg.com/@emotion/weak-memoize/-/weak-memoize-0.2.5.tgz#8eed982e2ee6f7f4e44c253e12962980791efd46"
   integrity sha512-6U71C2Wp7r5XtFtQzYrW5iKFT67OixrSxjI4MptCHzdSVlgabczzqLe0ZSgnub/5Kp4hSbpDB1tMytZY9pwxxA==
 
+"@fullstory/babel-plugin-annotate-react@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@fullstory/babel-plugin-annotate-react/-/babel-plugin-annotate-react-1.0.2.tgz#4b2ea184603ec693fdd9e5cf2d48ea00d412eea3"
+  integrity sha512-zJgwVKvCBmaCsUWpv0QTK8ROGKaAslxnDjGgVwem8UDuxZYI9DFbwiZAjuYjmjXeLb+pSseGcX7TpjNWXjtybQ==
+
 "@icons/material@^0.2.4":
   version "0.2.4"
   resolved "https://registry.yarnpkg.com/@icons/material/-/material-0.2.4.tgz#e90c9f71768b3736e76d7dd6783fc6c2afa88bc8"
