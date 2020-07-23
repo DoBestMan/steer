@@ -2,7 +2,7 @@ import { ThemeProvider } from 'emotion-theming';
 
 import Feedback from '~/components/global/Feedback/Feedback';
 import { useCatalogPageContext } from '~/context/CatalogPage.context';
-import { CatalogSummaryContextProvider } from '~/context/CatalogSummary.context';
+import { useCatalogSummaryContext } from '~/context/CatalogSummary.context';
 import { SiteCatalogFilters } from '~/data/models/SiteCatalogFilters';
 import { SiteCatalogProducts } from '~/data/models/SiteCatalogProducts';
 import { SiteCatalogSummary } from '~/data/models/SiteCatalogSummary';
@@ -14,9 +14,6 @@ import CatalogSummary from './CatalogSummary/CatalogSummary';
 
 interface Props {
   catalogGridRef: React.Ref<HTMLDivElement>;
-  comesFromSearch: boolean;
-  hasLocalData: boolean;
-  hasTopPicks: boolean;
   onPreviewFilters: (filters: Record<string, string>) => Promise<void>;
   previewFiltersData: SiteCatalogFilters;
   scrollToGrid: () => void;
@@ -27,35 +24,27 @@ interface Props {
 function CatalogPage({
   scrollToGrid,
   catalogGridRef,
-  comesFromSearch,
-  hasLocalData,
-  hasTopPicks,
   siteCatalogProducts,
   siteCatalogSummary,
   onPreviewFilters,
   previewFiltersData,
 }: Props) {
   const { isAdvancedView, showCatalogGrid } = useCatalogPageContext();
+  const { showSummary } = useCatalogSummaryContext();
 
   const totalResult = siteCatalogProducts.siteCatalogFilters?.totalMatches || 0;
   const hasResults = totalResult > 0;
+  // TODO: use CatalogSummary `stage` to determine if Grid should be visible
   // page has no top picks and does not come from search OR `showCatalogGrid` is true
+  // TODO: grid must be shown on first render for SEO reasons
   // `showCatalogGrid` is set within top picks
-  const isGridVisible = (!hasTopPicks && !showCatalogGrid) || showCatalogGrid;
+  const isGridVisible = (!showSummary && !showCatalogGrid) || showCatalogGrid;
 
   return (
     <ThemeProvider
       theme={{ ...defaultTheme, ...(isAdvancedView && headerAdvanced) }}
     >
-      {hasTopPicks && (
-        <CatalogSummaryContextProvider
-          comesFromSearch={comesFromSearch}
-          hasLocalData={hasLocalData}
-          siteCatalogSummary={siteCatalogSummary}
-        >
-          <CatalogSummary exploreMore={scrollToGrid} />
-        </CatalogSummaryContextProvider>
-      )}
+      {showSummary && <CatalogSummary exploreMore={scrollToGrid} />}
       {isGridVisible && (
         <>
           <div css={styles.grid} ref={catalogGridRef}>
@@ -64,7 +53,7 @@ function CatalogPage({
               previewFiltersData={previewFiltersData}
               onPreviewFilters={onPreviewFilters}
               siteCatalogProducts={siteCatalogProducts}
-              hasTopPicks={hasTopPicks}
+              hasTopPicks={showSummary}
               siteCatalogSummary={siteCatalogSummary}
             />
           </div>

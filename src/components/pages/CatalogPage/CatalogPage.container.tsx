@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import Meta from '~/components/global/Meta/Meta';
 import { useSearchContext } from '~/components/modules/Search/Search.context';
 import { CatalogPageContextProvider } from '~/context/CatalogPage.context';
+import { CatalogSummaryContextProvider } from '~/context/CatalogSummary.context';
 import { SiteCatalogProducts } from '~/data/models/SiteCatalogProducts';
 import { SiteCatalogSummary } from '~/data/models/SiteCatalogSummary';
 import { useApiDataWithDefault } from '~/hooks/useApiDataWithDefault';
@@ -29,7 +30,6 @@ interface Props extends CatalogPageData {
     products: string;
     summary: string;
   };
-  hasTopPicks?: boolean;
   pageParams?: Record<string, string>;
   searchBy: SearchBy;
   searchByParams: SearchByParams;
@@ -37,7 +37,6 @@ interface Props extends CatalogPageData {
 
 function CatalogPageContainer({
   endpoints,
-  hasTopPicks = true,
   serverData,
   pageParams = {},
   searchBy,
@@ -84,7 +83,7 @@ function CatalogPageContainer({
     return () => {
       eventEmitters.newCatalogSearchQuery.off(handleResetSummary);
     };
-  });
+  }, [setHasLocalData]);
 
   // fetch site catalog products
   const {
@@ -152,6 +151,14 @@ function CatalogPageContainer({
     [endpoints.products, pageParams],
   );
 
+  /**
+   * TODO:
+   * - Combine CatalogPageContextProvider & CatalogSummaryContextProvider
+   *   into a single context instance
+   * - Move CatalogSummary loading screen up to the CatalogPage component
+   * - `TOP_PICKS` should be the default stage in CatalogSummary context,
+   *   so that it shows on first render (for SEO reasons)
+   */
   return (
     <>
       {meta && <Meta {...meta} />}
@@ -159,17 +166,20 @@ function CatalogPageContainer({
         handleUpdateFilters={handleUpdateFilters}
         showCatalogGridInit={isSearchOpen}
       >
-        <CatalogPage
-          onPreviewFilters={onPreviewFilters}
+        <CatalogSummaryContextProvider
           comesFromSearch={isSearchOpen}
           hasLocalData={hasLocalData}
-          hasTopPicks={hasTopPicks}
-          siteCatalogProducts={siteCatalogProducts}
           siteCatalogSummary={siteCatalogSummary}
-          previewFiltersData={previewFiltersData}
-          scrollToGrid={scrollToGrid}
-          catalogGridRef={catalogGridRef}
-        />
+        >
+          <CatalogPage
+            onPreviewFilters={onPreviewFilters}
+            siteCatalogProducts={siteCatalogProducts}
+            siteCatalogSummary={siteCatalogSummary}
+            previewFiltersData={previewFiltersData}
+            scrollToGrid={scrollToGrid}
+            catalogGridRef={catalogGridRef}
+          />
+        </CatalogSummaryContextProvider>
       </CatalogPageContextProvider>
     </>
   );

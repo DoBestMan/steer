@@ -28,7 +28,11 @@ function Card({
       );
     }
 
-    return figure.value;
+    if ('value' in figure) {
+      return figure.value;
+    }
+
+    return;
   });
   return (
     <GridItem

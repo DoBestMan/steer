@@ -11,6 +11,7 @@ export interface CatalogSummaryContextProps {
   setNewContent(): void;
   setStage(stage: STAGES): void;
   showLoadingInterstitial: boolean;
+  showSummary: boolean;
   siteCatalogSummary: SiteCatalogSummary;
   stage: STAGES;
 }
@@ -32,6 +33,7 @@ interface CatalogSummaryState {
   contentStage: STAGES;
   dataLoadingStatus: LOADING_STATUS | null;
   showLoadingInterstitial: boolean;
+  showSummary: boolean;
   stage: STAGES;
 }
 
@@ -43,12 +45,15 @@ interface CatalogSummaryState {
  * @param {boolean} showLoadingInterstitial - If deep-linking in, or the
  * local data has no results, we skip the loading interstitial and show
  * the relevant stage without CSS transitions.
+ * @param {boolean} showSummary - If there are results but no Top Picks, then
+ * the `CatalogSummary` section is hidden.
  * @param {STAGES} stage - Used to determine which content to display.
  */
 const INITIAL_STATE: CatalogSummaryState = {
   contentStage: STAGES.LOADING,
   dataLoadingStatus: null,
   showLoadingInterstitial: false,
+  showSummary: true,
   stage: STAGES.LOADING,
 };
 
@@ -68,6 +73,7 @@ export function useContextSetup({
     contentStage,
     dataLoadingStatus,
     showLoadingInterstitial,
+    showSummary,
     stage,
   } = state;
 
@@ -117,6 +123,8 @@ export function useContextSetup({
       siteCatalogSummary.siteCatalogSummaryPrompt?.mustShow;
     const hasPromptCTAList = !!siteCatalogSummary.siteCatalogSummaryPrompt
       ?.ctaList?.length;
+    const hasTopPicks = !!siteCatalogSummary.siteCatalogSummaryTopPicksList
+      .length;
 
     /**
      * Disambiguation response also has 0 results, but user should see the
@@ -125,10 +133,10 @@ export function useContextSetup({
      */
     const hasNoResults = totalResult === 0 && !hasPromptCTAList;
 
-    if (showLoadingInterstitial) {
+    if (showLoadingInterstitial && hasPromptCTAList) {
       setState({
         ...state,
-        stage: hasNoResults ? STAGES.NO_RESULTS : STAGES.BUILD_IN,
+        stage: STAGES.BUILD_IN,
       });
     } else if (hasPromptMustShow) {
       setState({
@@ -136,7 +144,11 @@ export function useContextSetup({
         stage: hasNoResults ? STAGES.NO_RESULTS : STAGES.DATA_MOMENT,
       });
     } else {
-      setState({ ...state, stage: STAGES.TOP_PICKS });
+      setState({
+        ...state,
+        showSummary: hasTopPicks,
+        stage: STAGES.TOP_PICKS,
+      });
     }
   }, [
     dataLoadingStatus,
@@ -197,6 +209,7 @@ export function useContextSetup({
       setState({ ...state, stage: newStage });
     },
     showLoadingInterstitial,
+    showSummary,
     siteCatalogSummary,
     stage,
   };

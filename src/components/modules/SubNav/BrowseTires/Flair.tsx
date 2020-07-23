@@ -12,11 +12,16 @@ function Flair(props: FlairType) {
   ) {
     return <IconOrImage css={[styles.flair, styles.flairIcon]} {...props} />;
   }
-  return (
-    <div css={styles.flairSeparator}>
-      <p css={[typography.secondarySubhead, styles.flair]}>{props.value}</p>
-    </div>
-  );
+
+  if ('value' in props) {
+    return (
+      <div css={styles.flairSeparator}>
+        <p css={[typography.secondarySubhead, styles.flair]}>{props.value}</p>
+      </div>
+    );
+  }
+
+  return null;
 }
 
 export default Flair;
