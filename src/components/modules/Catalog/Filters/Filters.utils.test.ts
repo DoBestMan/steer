@@ -5,6 +5,7 @@ import {
 } from '~/data/models/SiteCatalogFilterList';
 import { SiteCatalogFilterRangeTypeEnum } from '~/data/models/SiteCatalogFilterRange';
 import { SiteCatalogFilterToggleTypeEnum } from '~/data/models/SiteCatalogFilterToggle';
+import { isObjectEqual } from '~/lib/utils/object';
 
 import { CatalogFilterTypes } from './Filter.types';
 import {
@@ -28,7 +29,6 @@ import {
   getInitialFiltersState,
   getValueKeys,
   hasActiveValue,
-  strictEqualsValue,
 } from './Filters.utils';
 
 const toggleFilters = [
@@ -173,17 +173,14 @@ describe('Filters.utils', () => {
       expect(mockPopularActiveTrue).toEqual(true);
     });
 
-    describe('strictEqualsValue', () => {
-      it('checks if all filter values strictly equals corresponding filter state key', () => {
+    describe('isObjectEqual', () => {
+      it('checks if all filter values equals corresponding filter state key', () => {
         expect(
-          strictEqualsValue(
-            { foo: 'bar', bar: 'baz' },
-            { foo: 'bar', bar: 'baz' },
-          ),
+          isObjectEqual({ foo: 'bar', bar: 'baz' }, { foo: 'bar', bar: 'baz' }),
         ).toBe(true);
-        expect(
-          strictEqualsValue({ foo: 'bar', bar: 'baz' }, { foo: 'bar' }),
-        ).toBe(false);
+        expect(isObjectEqual({ foo: 'bar', bar: 'baz' }, { foo: 'bar' })).toBe(
+          false,
+        );
       });
 
       describe('hasActiveValue', () => {

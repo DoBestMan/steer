@@ -5,7 +5,7 @@ import { SiteCatalogFilterRange } from '~/data/models/SiteCatalogFilterRange';
 import FilterChecklist from '../Content/FilterChecklist';
 import FilterPopular from '../Content/FilterPopular';
 import FilterRange from '../Content/FilterRange';
-import FilterSort from '../Content/FilterSort';
+import FilterSort from '../Content/FilterSortCatalog';
 import {
   CatalogFilterTypes,
   FilterContentTypes,

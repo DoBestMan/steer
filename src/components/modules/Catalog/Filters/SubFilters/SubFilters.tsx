@@ -42,6 +42,9 @@ export default function SubFilters({
 
   // refetch results if price changes
   const prevPriceFilter = useRef(priceFilter && filtersToApply[priceFilter.id]);
+
+  const isOpen = selectingFilter === SORT_ID;
+
   useEffect(() => {
     if (
       !priceFilter ||
@@ -72,14 +75,14 @@ export default function SubFilters({
         theme={THEME.LIGHT}
         as="button"
         onClick={createOpenFilterHandler(SORT_ID)}
-        css={styles.sort}
-        aria-expanded={selectingFilter === SORT_ID}
+        css={[styles.sort, isOpen && styles.disableEvents]}
+        aria-expanded={isOpen}
       >
         {(sortItem && sortItem.title) || sortList[0].title}
       </Link>
       <FilterPopup
         hasActionBar={false}
-        isOpen={selectingFilter === SORT_ID}
+        isOpen={isOpen}
         onClose={clearSelectingFilter}
         filter={{
           items: sortList,

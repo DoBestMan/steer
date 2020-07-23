@@ -11,7 +11,7 @@ import { mapDataToHeader } from './mappers/header';
 import { mapDataToLinkingData } from './mappers/linkingData';
 import { mapDataToMeta } from './mappers/meta';
 import { mapDataToRatingsTable } from './mappers/ratingsTable';
-import usePagination from './ReviewListingPage.hooks';
+import usePaginationAndSort from './ReviewListingPage.hooks';
 import styles from './ReviewListingPage.styles';
 
 export interface ReviewListingServerData {
@@ -37,9 +37,15 @@ function ReviewListingPage({
     reviewsList,
   } = serverData.tireReviews;
 
-  const { displayedRatings, handleSeeMoreClick } = usePagination(
+  const {
+    displayedRatings,
+    handleSeeMoreClick,
+    handleSortClick,
+    sortList,
+  } = usePaginationAndSort(
     router.query,
     reviewsList,
+    siteProductReviewsFilters.sortList,
   );
 
   const ratingsTable = mapDataToRatingsTable({
@@ -61,6 +67,10 @@ function ReviewListingPage({
     brandOrCategoryOrType: brand || category || type,
   });
 
+  const handleSortResults = (value: Record<string, string>) => () => {
+    handleSortClick(value);
+  };
+
   return (
     <div css={[navigationPaddingTop, styles.root]}>
       {ratingsDataStructure.products.map((product, i) => (
@@ -77,6 +87,8 @@ function ReviewListingPage({
         reviews={ratingsTable.reviews}
         listResultMetadata={ratingsTable.listResultMetadata}
         onSeeMoreClick={handleSeeMoreClick}
+        sortList={sortList}
+        onSortResults={handleSortResults}
       />
     </div>
   );

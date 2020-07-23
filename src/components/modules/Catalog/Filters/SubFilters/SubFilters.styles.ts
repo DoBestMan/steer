@@ -2,6 +2,9 @@ import { BORDERS, COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
+  disableEvents: {
+    pointerEvents: 'none',
+  },
   range: [
     typography.labelCopyTight,
     {

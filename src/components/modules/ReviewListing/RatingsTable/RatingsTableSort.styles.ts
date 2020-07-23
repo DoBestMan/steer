@@ -3,9 +3,13 @@ import { typography } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
   button: typography.labelCopy,
+  disableEvents: {
+    pointerEvents: 'none',
+  },
   results: [
     typography.labelHeadline,
     {
+      flexGrow: 1,
       alignItems: 'center',
       display: 'flex',
     },

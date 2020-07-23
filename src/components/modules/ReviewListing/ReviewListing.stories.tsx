@@ -1,3 +1,4 @@
+import { filterSort } from '~/components/modules/Catalog/Filters/Filters.mocks';
 import Header from '~/components/modules/ReviewListing/Header/Header';
 import RatingsTable from '~/components/modules/ReviewListing/RatingsTable/RatingsTable';
 
@@ -26,7 +27,11 @@ export function FullPage() {
         header={header}
         filters={filters}
       />
-      <RatingsTable reviews={ratings} listResultMetadata={listResultMetadata} />
+      <RatingsTable
+        reviews={ratings}
+        listResultMetadata={listResultMetadata}
+        sortList={filterSort}
+      />
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import { SiteCatalogSortListItem } from '~/data/models/SiteCatalogSortListItem';
 import { SiteProductReviewsListingItem } from '~/data/models/SiteProductReviewsListingItem';
 import { apiGetReviewListing } from '~/lib/api/review-listing';
 import { removeTireFromQueryParam } from '~/lib/utils/string';
@@ -7,29 +8,36 @@ import { removeTireFromQueryParam } from '~/lib/utils/string';
 interface ResponseProps {
   displayedRatings: SiteProductReviewsListingItem[];
   handleSeeMoreClick: () => void;
+  handleSortClick: (value: Record<string, string>) => void;
+  sortList: SiteCatalogSortListItem[];
 }
 
-function usePagination(
+function usePaginationAndSort(
   queryParams: {
     [name: string]: string | string[];
   },
   reviewsList: SiteProductReviewsListingItem[],
+  sortList: SiteCatalogSortListItem[],
 ): ResponseProps {
   const [displayedRatings, setDisplayedRatings] = useState<
     SiteProductReviewsListingItem[]
   >(reviewsList);
+  const [sort, setSort] = useState<SiteCatalogSortListItem[]>(sortList);
   const [currentPage, setCurrentPage] = useState(1);
+  const { brand, type, category } = queryParams;
+
+  const formattedParams = {
+    brand: (brand && removeTireFromQueryParam(brand)) || '',
+    tireCategory: (category && removeTireFromQueryParam(category)) || '',
+    tireType: (type && removeTireFromQueryParam(type)) || '',
+  };
 
   const handleSeeMoreClick = async () => {
     const newPage = currentPage + 1;
 
-    const { brand, type, category } = queryParams;
-
     const moreReviews = await apiGetReviewListing({
-      brand: (brand && removeTireFromQueryParam(brand)) || '',
       page: newPage.toString(),
-      tireCategory: (category && removeTireFromQueryParam(category)) || '',
-      tireType: (type && removeTireFromQueryParam(type)) || '',
+      ...formattedParams,
     });
 
     setCurrentPage(newPage);
@@ -37,10 +45,22 @@ function usePagination(
     setDisplayedRatings([...displayedRatings, ...formattedReviews]);
   };
 
+  const handleSortClick = async (value: Record<string, string>) => {
+    const moreReviews = await apiGetReviewListing({
+      ...formattedParams,
+      ...value,
+    });
+
+    setDisplayedRatings(moreReviews.reviewsList);
+    setSort(moreReviews.siteProductReviewsFilters.sortList);
+  };
+
   return {
     displayedRatings,
     handleSeeMoreClick,
+    handleSortClick,
+    sortList: sort,
   };
 }
 
-export default usePagination;
+export default usePaginationAndSort;

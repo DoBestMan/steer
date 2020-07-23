@@ -18,5 +18,5 @@ export interface SiteProductReviewsListingFilters {
    * @type {Array<SiteCatalogSortListItem>}
    * @memberof SiteProductReviewsListingFilters
    */
-  sortList: SiteCatalogSortListItem;
+  sortList: Array<SiteCatalogSortListItem>;
 }

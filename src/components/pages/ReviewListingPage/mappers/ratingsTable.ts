@@ -11,7 +11,7 @@ export function mapDataToRatingsTable({
 }: {
   listResultMetadata: ListResultMetadata;
   reviewsList: SiteProductReviewsListingItem[];
-}): RatingsTableProps {
+}): Omit<RatingsTableProps, 'sortList'> {
   const reviews: Rating[] = reviewsList.map(
     ({ link, overallRating, ratingsCount, label }, idx) => ({
       id: idx,

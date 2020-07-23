@@ -4,6 +4,7 @@ import GridItem from '~/components/global/Grid/GridItem';
 import BaseLink from '~/components/global/Link/BaseLink';
 import Stars from '~/components/global/Stars/Stars';
 import { ListResultMetadata } from '~/data/models/ListResultMetadata';
+import { SiteCatalogSortListItem } from '~/data/models/SiteCatalogSortListItem';
 import { SiteLink } from '~/data/models/SiteLink';
 import { RATINGS } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
@@ -23,23 +24,30 @@ export interface Rating {
 export interface RatingsTableProps {
   listResultMetadata: ListResultMetadata;
   onSeeMoreClick?: () => void;
+  onSortResults?: (value: Record<string, string>) => () => void;
   reviews: Rating[];
+  sortList: SiteCatalogSortListItem[];
 }
 
 function RatingsTable({
   reviews,
   listResultMetadata,
   onSeeMoreClick,
+  onSortResults,
+  sortList,
 }: RatingsTableProps) {
   const { pagination } = listResultMetadata;
+  const total = (pagination && pagination.total) || 0;
 
-  const hasMoreReviews =
-    pagination && reviews.length < pagination.total && onSeeMoreClick;
+  const hasMoreReviews = reviews.length < total && onSeeMoreClick;
 
   return (
     <div css={styles.root}>
-      {/* TODO: Implement sort functionality WCS-881 */}
-      <RatingsTableSort resultsCount={pagination?.total || 0} />
+      <RatingsTableSort
+        sortList={sortList}
+        resultsCount={total}
+        onSortResults={onSortResults}
+      />
       <table css={styles.container}>
         <Grid as="thead" css={styles.headingText}>
           <GridItem

@@ -10,8 +10,9 @@ import {
   SiteCatalogFilterListPresentationStyleEnum,
 } from '~/data/models/SiteCatalogFilterList';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
+import { isObjectEqual } from '~/lib/utils/object';
 
-import { hasActiveValue, strictEqualsValue } from '../Filters.utils';
+import { hasActiveValue } from '../Filters.utils';
 import { ChildProps } from '../Popup/FilterPopup.utils';
 import styles from './FilterChecklist.styles';
 import largeStyles from './FilterChecklistLarge.styles';
@@ -74,9 +75,7 @@ const mapGroupTypeToInput: Record<
           onChange={handleChange(item.value, true)}
           value={item.title}
           activeValue={
-            strictEqualsValue(item.value, filtersToApply)
-              ? item.title
-              : undefined
+            isObjectEqual(item.value, filtersToApply) ? item.title : undefined
           }
         />
       </div>
