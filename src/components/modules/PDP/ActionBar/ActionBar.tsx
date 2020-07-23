@@ -13,7 +13,7 @@ import QuantitySelectorContainer from '../QuantitySelector/QuantitySelector.cont
 import RoadHazardModalContainer from '../RoadHazardModal/RoadHazardModal.container';
 import styles from './ActionBar.styles';
 
-export interface PDPActionBarProps {
+interface PDPActionBarProps {
   rearPrice?: string | null;
   rearSize?: string | null;
   roadHazard: {
@@ -147,17 +147,19 @@ function PDPActionBar({
 
   return (
     <>
-      <div css={styles.root}>
-        <Button
-          onClick={handleClickAddToCart}
-          theme={theme}
-          css={styles.addToCart}
-        >
-          {ui('pdp.stickyBar.addToCart', {
-            value: formatDollars(price),
-          })}
-        </Button>
-      </div>
+      {!!price && (
+        <div css={styles.root}>
+          <Button
+            onClick={handleClickAddToCart}
+            theme={theme}
+            css={styles.addToCart}
+          >
+            {ui('pdp.stickyBar.addToCart', {
+              value: formatDollars(price),
+            })}
+          </Button>
+        </div>
+      )}
 
       {!!roadHazard && (
         <RoadHazardModalContainer
