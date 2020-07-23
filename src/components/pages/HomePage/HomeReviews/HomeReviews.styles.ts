@@ -16,6 +16,10 @@ const styles: StylesMap = {
   },
   title: {
     color: COLORS.GLOBAL.WHITE,
+    display: 'none',
+    [MQ.M]: {
+      display: 'block',
+    },
   },
 };
 

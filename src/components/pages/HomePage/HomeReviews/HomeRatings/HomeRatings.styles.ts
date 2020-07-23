@@ -21,9 +21,12 @@ const styles = {
   },
   stars: {
     svg: {
-      height: 26,
+      height: 20,
       fill: `url(#${homeRatingGradientID})`,
       width: 'auto',
+      [MQ.M]: {
+        height: 26,
+      },
     },
     marginRight: SPACING.SIZE_15,
   },

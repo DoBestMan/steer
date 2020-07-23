@@ -47,7 +47,7 @@ function HomeRatings({ ratingLabel, ratingLabelIcon, ratingStars }: Props) {
         <Icon css={styles.stars} name={ICONS.FIVE_STARS} />
         {formattedRating}
       </div>
-      <div css={[typography.primarySubhead, styles.ratingLabel]}>
+      <div css={[typography.bodyCopy, styles.ratingLabel]}>
         {ratingLabel}
         {ratingLabelIcon && (
           <Icon css={styles.iconVerified} name={ratingLabelIcon.svgId} />
