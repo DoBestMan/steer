@@ -43,7 +43,11 @@ function Card({
       isGrid
       css={[typography.jumboHeadline, styles.root]}
     >
-      <GridItem gridColumnL="1/4" gridColumnXL="1/3">
+      <GridItem
+        css={styles.decoratorContainer}
+        gridColumnL="1/4"
+        gridColumnXL="1/3"
+      >
         <div css={[typography.jumboHeadline, styles.decorator]}>
           {decorators}
         </div>

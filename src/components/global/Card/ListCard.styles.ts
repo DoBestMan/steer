@@ -1,8 +1,6 @@
 import {
   BORDERS,
   COLORS,
-  GAP_COLUMNS,
-  GRID_MARGIN,
   MQ,
   RADIUS,
   SPACING,
@@ -13,12 +11,6 @@ import { typography } from '~/styles/typography.styles';
 const ITEM_HEIGHT = 60;
 
 const styles: StylesMap = {
-  cardContent: {
-    [MQ.L]: {
-      marginLeft: `-${GAP_COLUMNS.L}px`,
-      paddingRight: GRID_MARGIN.L,
-    },
-  },
   content: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -102,10 +94,10 @@ const styles: StylesMap = {
       padding: `0 ${SPACING.SIZE_40}px`,
       [MQ.M]: typography.secondaryHeadline,
       [MQ.L]: {
-        justifyContent: 'center',
         marginBottom: 0,
         marginTop: -SPACING.SIZE_05, // line height causes misalignment to right column content
-        padding: `0 ${SPACING.SIZE_20}px 0 ${SPACING.SIZE_50}px`,
+        paddingLeft: SPACING.SIZE_50,
+        paddingRight: 'unset',
       },
     },
   ],
