@@ -21,8 +21,7 @@ import {
 } from '~/styles/animations.styles';
 import { hideScrollbar } from '~/styles/document/accessibility.styles';
 
-const OVERLAY_BOX_SHADOW = '0px 4px 4px rgba(0, 0, 0, 0.25)';
-const OVERLAY_PANEL_WIDTH = 425;
+import { OVERLAY_BOX_SHADOW, OVERLAY_PANEL_WIDTH } from './Modal.styles';
 
 const FADE: CSSObjectType = {
   default: {

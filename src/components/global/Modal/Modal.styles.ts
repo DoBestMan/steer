@@ -21,8 +21,8 @@ import {
   slideFadeOutLeft,
 } from '~/styles/animations.styles';
 
-const OVERLAY_BOX_SHADOW = '0px 4px 4px rgba(0, 0, 0, 0.25)';
-const OVERLAY_PANEL_WIDTH = 425;
+export const OVERLAY_BOX_SHADOW = '0px 4px 4px rgba(0, 0, 0, 0.25)';
+export const OVERLAY_PANEL_WIDTH = 480;
 export const FULLSCREEN_PADDINGS = {
   BOTTOM: SPACING.SIZE_60,
   RIGHT: SPACING.SIZE_20,
