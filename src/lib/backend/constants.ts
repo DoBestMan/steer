@@ -9,6 +9,9 @@ export const BackendEndpoints = {
     apiBaseUrl: 'https://master-services.jenkins.simpletire.com',
   },
   mainApiProduction: {
-    apiBaseUrl: 'https://services.simpletire.com',
+    apiBaseUrl: 'https://master-services.jenkins.simpletire.com',
+    // TODO SWITCH TO PRODUCTION API
+    // https://simpletire.atlassian.net/browse/WCS-1140
+    // apiBaseUrl: 'https://services.simpletire.com',
   },
 };
