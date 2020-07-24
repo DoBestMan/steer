@@ -60,7 +60,7 @@ function TopPicks({
 
     resetTranslateInstance();
 
-    swiper.on('slideChange', () => {
+    swiper.on('slideChangeTransitionEnd', () => {
       setCurrentIndex(swiper.activeIndex);
     });
 
