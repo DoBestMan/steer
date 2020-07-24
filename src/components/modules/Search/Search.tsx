@@ -190,7 +190,7 @@ function Search({
         action.queryType === SearchStateEnum.REAR_TIRE;
       const isCurrentRearTireSearch =
         action.queryType === SearchStateEnum.REAR_TIRE ||
-        SearchStateEnum.REAR_TIRE_WIDTH;
+        action.queryType === SearchStateEnum.REAR_TIRE_WIDTH;
 
       const { queryText } = getCurrentInputQuery();
       let additionalQueryText = isCurrentRearTireSearch ? queryText : '';
