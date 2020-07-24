@@ -1,31 +1,18 @@
-import { ReactNode, useCallback, useEffect, useRef, useState } from 'react';
+import { ReactNode, useState } from 'react';
 
 import { RouteQueryParamOptions } from '~/components/global/Link/BaseLink.hooks';
-import {
-  Results,
-  SearchStateEnum,
-} from '~/components/modules/Search/Search.types';
-import { SiteSearchResultActionQuery } from '~/data/models/SiteSearchResultActionQuery';
+import { Results } from '~/components/modules/Search/Search.types';
 import { SiteSearchResultGroup } from '~/data/models/SiteSearchResultGroup';
 import { SiteSearchResultImageItem } from '~/data/models/SiteSearchResultImageItem';
 import { SiteSearchResultTextItem } from '~/data/models/SiteSearchResultTextItem';
-import { fromUserHistorySearchToSiteSearchResultGroup } from '~/data/models/UserHistorySearch';
-import { fromSiteSearchResultTextItemToUserHistorySearchItem } from '~/data/models/UserHistorySearchItem';
-import { apiGetSearchTypeahead, SearchDataParams } from '~/lib/api/search';
-import {
-  apiAddUserSearchHistory,
-  apiDeleteUserSearchHistory,
-  apiGetUserSearchHistory,
-} from '~/lib/api/users';
+import { SearchDataParams } from '~/lib/api/search';
 import { createContext } from '~/lib/utils/context';
 
 import {
-  emptyResult,
-  emptySiteSearchResultGroup,
-  initialSearchBrand,
-  initialSearchTireSize,
-  initialSearchVehicle,
-} from './Search.data';
+  usePastSearches,
+  useSearchResults,
+  useSearchState,
+} from './Search.hooks';
 
 interface Props {
   children: ReactNode;
@@ -50,7 +37,6 @@ export interface SearchContextProps {
   searchQuery: ({ queryText, queryType }: SearchDataParams) => void;
   searchResults: Results;
   searchState: string;
-  setHasLockedSearchState: (hasLockedSearchState: boolean) => void;
   setIsSearchOpen: (isSearchOpen: boolean) => void;
   setRouteQueryParamOptions: (
     routeQueryParamOptions?: RouteQueryParamOptions,
@@ -64,104 +50,29 @@ export interface SearchContextProps {
 const SearchContext = createContext<SearchContextProps>();
 
 function useContextSetup(): SearchContextProps {
-  /* Past Searches */
-  const [pastSearches, setPastSearches] = useState<SiteSearchResultGroup>(
-    emptySiteSearchResultGroup,
-  );
-  const getPastSearches = useCallback(async function () {
-    try {
-      const apiPastSearches = await apiGetUserSearchHistory();
+  const {
+    addPastSearch,
+    deletePastSearches,
+    getPastSearches,
+    pastSearches,
+  } = usePastSearches();
 
-      const transformedResults = fromUserHistorySearchToSiteSearchResultGroup(
-        apiPastSearches,
-      );
+  const {
+    clearSearchResults,
+    hasSearchResultsError,
+    isLoadingResults,
+    searchQuery,
+    searchResults,
+  } = useSearchResults();
 
-      setPastSearches(transformedResults);
-    } catch (err) {
-      console.error(err);
-    }
-  }, []);
-
-  const deletePastSearches = useCallback(async function () {
-    try {
-      await apiDeleteUserSearchHistory();
-
-      setPastSearches(emptySiteSearchResultGroup);
-    } catch (err) {
-      console.error(err);
-    }
-  }, []);
-
-  const addPastSearch = useCallback(async function (
-    item: SiteSearchResultTextItem | SiteSearchResultImageItem,
-  ) {
-    const pastSearchItem = fromSiteSearchResultTextItemToUserHistorySearchItem(
-      item,
-    );
-
-    if (pastSearchItem) {
-      try {
-        await apiAddUserSearchHistory(pastSearchItem);
-      } catch (err) {
-        console.error(err);
-      }
-    }
-  },
-  []);
-
-  /* Search results and query */
-  const [searchResults, setSearchResults] = useState<Results>(emptyResult);
-  const isRequestInProgress = useRef(false);
-  const [isLoadingResults, setIsLoadingResults] = useState(false);
-  const [hasSearchResultsError, setHasSearchResultsError] = useState(false);
-  const abortController = useRef<AbortController | null>(null);
-
-  useEffect(() => {
-    abortController.current = new AbortController();
-  }, []);
-
-  const searchQuery = useCallback(
-    async function ({
-      additionalQueryText,
-      queryText,
-      queryType,
-    }: SearchDataParams) {
-      if (isRequestInProgress.current) {
-        abortController.current?.abort();
-        abortController.current = new AbortController();
-        isRequestInProgress.current = false;
-      }
-
-      setHasSearchResultsError(false);
-      isRequestInProgress.current = true;
-      setIsLoadingResults(true);
-
-      try {
-        const apiSearchResults = await apiGetSearchTypeahead({
-          additionalQueryText,
-          queryText,
-          queryType,
-          signal: abortController.current?.signal,
-        });
-
-        setSearchResults(apiSearchResults);
-      } catch (err) {
-        console.error(err);
-        setHasSearchResultsError(true);
-      }
-
-      isRequestInProgress.current = false;
-      setIsLoadingResults(false);
-    },
-    [isRequestInProgress],
-  );
-
-  const clearSearchResults = useCallback(
-    function () {
-      setSearchResults(emptyResult);
-    },
-    [setSearchResults],
-  );
+  const {
+    hasLockedSearchState,
+    lockSearchStateToBrand,
+    lockSearchStateToTireSize,
+    lockSearchStateToVehicle,
+    searchState,
+    setSearchState,
+  } = useSearchState({ searchQuery });
 
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const toggleIsSearchOpen = (callback?: () => void) => {
@@ -172,9 +83,6 @@ function useContextSetup(): SearchContextProps {
     }
   };
 
-  /* Search state */
-  const [searchState, setSearchState] = useState('');
-  const [hasLockedSearchState, setHasLockedSearchState] = useState(false);
   const [
     shouldPreventLinkNavigation,
     setShouldPreventLinkNavigation,
@@ -182,45 +90,6 @@ function useContextSetup(): SearchContextProps {
   const [routeQueryParamOptions, setRouteQueryParamOptions] = useState<
     RouteQueryParamOptions | undefined
   >();
-
-  const lockSearchStateToVehicle = () => {
-    const {
-      queryText,
-      queryType,
-    } = initialSearchVehicle.action as SiteSearchResultActionQuery;
-    setSearchState(SearchStateEnum.VEHICLE);
-    searchQuery({
-      queryText,
-      queryType,
-    });
-    setHasLockedSearchState(true);
-  };
-
-  const lockSearchStateToTireSize = () => {
-    const {
-      queryText,
-      queryType,
-    } = initialSearchTireSize.action as SiteSearchResultActionQuery;
-    setSearchState(SearchStateEnum.TIRE_SIZE);
-    searchQuery({
-      queryText,
-      queryType,
-    });
-    setHasLockedSearchState(true);
-  };
-
-  const lockSearchStateToBrand = () => {
-    const {
-      queryText,
-      queryType,
-    } = initialSearchBrand.action as SiteSearchResultActionQuery;
-    setSearchState(SearchStateEnum.BRAND);
-    searchQuery({
-      queryText,
-      queryType,
-    });
-    setHasLockedSearchState(true);
-  };
 
   return {
     addPastSearch,
@@ -239,7 +108,6 @@ function useContextSetup(): SearchContextProps {
     searchQuery,
     searchResults,
     searchState,
-    setHasLockedSearchState,
     setIsSearchOpen,
     setRouteQueryParamOptions,
     setSearchState,

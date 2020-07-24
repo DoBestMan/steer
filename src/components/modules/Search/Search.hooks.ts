@@ -1,7 +1,30 @@
-import { useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
+import {
+  Results,
+  SearchStateEnum,
+} from '~/components/modules/Search/Search.types';
+import { SiteSearchResultActionQuery } from '~/data/models/SiteSearchResultActionQuery';
 import { SiteSearchResultGroup } from '~/data/models/SiteSearchResultGroup';
+import { SiteSearchResultImageItem } from '~/data/models/SiteSearchResultImageItem';
+import { SiteSearchResultTextItem } from '~/data/models/SiteSearchResultTextItem';
+import { fromUserHistorySearchToSiteSearchResultGroup } from '~/data/models/UserHistorySearch';
+import { fromSiteSearchResultTextItemToUserHistorySearchItem } from '~/data/models/UserHistorySearchItem';
+import { apiGetSearchTypeahead, SearchDataParams } from '~/lib/api/search';
+import {
+  apiAddUserSearchHistory,
+  apiDeleteUserSearchHistory,
+  apiGetUserSearchHistory,
+} from '~/lib/api/users';
 import { scrollIntoViewIfNeeded } from '~/lib/utils/accessibility';
+
+import {
+  emptyResult,
+  emptySiteSearchResultGroup,
+  initialSearchBrand,
+  initialSearchTireSize,
+  initialSearchVehicle,
+} from './Search.data';
 
 const DEFAULT_CLEARANCE = {
   bottom: 0,
@@ -86,5 +109,178 @@ export function useFocusScrollIntoView({
   return {
     onFocus,
     pushRefToArray,
+  };
+}
+
+export function usePastSearches() {
+  const [pastSearches, setPastSearches] = useState<SiteSearchResultGroup>(
+    emptySiteSearchResultGroup,
+  );
+  const getPastSearches = useCallback(async function () {
+    try {
+      const apiPastSearches = await apiGetUserSearchHistory();
+
+      const transformedResults = fromUserHistorySearchToSiteSearchResultGroup(
+        apiPastSearches,
+      );
+
+      setPastSearches(transformedResults);
+    } catch (err) {
+      console.error(err);
+    }
+  }, []);
+
+  const deletePastSearches = useCallback(async function () {
+    try {
+      await apiDeleteUserSearchHistory();
+
+      setPastSearches(emptySiteSearchResultGroup);
+    } catch (err) {
+      console.error(err);
+    }
+  }, []);
+
+  const addPastSearch = useCallback(async function (
+    item: SiteSearchResultTextItem | SiteSearchResultImageItem,
+  ) {
+    const pastSearchItem = fromSiteSearchResultTextItemToUserHistorySearchItem(
+      item,
+    );
+
+    if (pastSearchItem) {
+      try {
+        await apiAddUserSearchHistory(pastSearchItem);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+  },
+  []);
+
+  return {
+    addPastSearch,
+    deletePastSearches,
+    getPastSearches,
+    pastSearches,
+  };
+}
+
+export function useSearchResults() {
+  const [searchResults, setSearchResults] = useState<Results>(emptyResult);
+  const isRequestInProgress = useRef(false);
+  const [isLoadingResults, setIsLoadingResults] = useState(false);
+  const [hasSearchResultsError, setHasSearchResultsError] = useState(false);
+  const abortController = useRef<AbortController | null>(null);
+
+  useEffect(() => {
+    abortController.current = new AbortController();
+  }, []);
+
+  const searchQuery = useCallback(
+    async function ({
+      additionalQueryText,
+      queryText,
+      queryType,
+    }: SearchDataParams) {
+      if (isRequestInProgress.current) {
+        abortController.current?.abort();
+        abortController.current = new AbortController();
+        isRequestInProgress.current = false;
+      }
+
+      setHasSearchResultsError(false);
+      isRequestInProgress.current = true;
+      setIsLoadingResults(true);
+
+      try {
+        const apiSearchResults = await apiGetSearchTypeahead({
+          additionalQueryText,
+          queryText,
+          queryType,
+          signal: abortController.current?.signal,
+        });
+
+        setSearchResults(apiSearchResults);
+      } catch (err) {
+        console.error(err);
+        setHasSearchResultsError(true);
+      }
+
+      isRequestInProgress.current = false;
+      setIsLoadingResults(false);
+    },
+    [isRequestInProgress],
+  );
+
+  const clearSearchResults = useCallback(
+    function () {
+      setSearchResults(emptyResult);
+    },
+    [setSearchResults],
+  );
+
+  return {
+    clearSearchResults,
+    hasSearchResultsError,
+    isLoadingResults,
+    searchQuery,
+    searchResults,
+  };
+}
+
+export function useSearchState({
+  searchQuery,
+}: {
+  searchQuery: ({ queryText, queryType }: SearchDataParams) => void;
+}) {
+  const [searchState, setSearchState] = useState('');
+  const [hasLockedSearchState, setHasLockedSearchState] = useState(false);
+
+  const lockSearchStateToVehicle = () => {
+    const {
+      queryText,
+      queryType,
+    } = initialSearchVehicle.action as SiteSearchResultActionQuery;
+    setSearchState(SearchStateEnum.VEHICLE);
+    searchQuery({
+      queryText,
+      queryType,
+    });
+    setHasLockedSearchState(true);
+  };
+
+  const lockSearchStateToTireSize = () => {
+    const {
+      queryText,
+      queryType,
+    } = initialSearchTireSize.action as SiteSearchResultActionQuery;
+    setSearchState(SearchStateEnum.TIRE_SIZE);
+    searchQuery({
+      queryText,
+      queryType,
+    });
+    setHasLockedSearchState(true);
+  };
+
+  const lockSearchStateToBrand = () => {
+    const {
+      queryText,
+      queryType,
+    } = initialSearchBrand.action as SiteSearchResultActionQuery;
+    setSearchState(SearchStateEnum.BRAND);
+    searchQuery({
+      queryText,
+      queryType,
+    });
+    setHasLockedSearchState(true);
+  };
+
+  return {
+    hasLockedSearchState,
+    lockSearchStateToBrand,
+    lockSearchStateToTireSize,
+    lockSearchStateToVehicle,
+    searchState,
+    setSearchState,
   };
 }
