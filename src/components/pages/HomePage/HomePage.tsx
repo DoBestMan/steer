@@ -12,14 +12,14 @@ import { SiteReviews } from '~/data/models/SiteReviews';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { useSupportsPositionSticky } from '~/hooks/useSupportsPositionSticky';
 import { COLORS, TIME } from '~/lib/constants';
-import { scrollToRef } from '~/lib/helpers/scroll';
+import { getScroll, scrollTo, scrollToRef } from '~/lib/helpers/scroll';
 
 import {
   useButtonHeight,
   useChangeBackgroundColor,
   useIsFallbackSticky,
 } from './HomePage.hooks';
-import styles from './HomePage.styles';
+import styles, { CONTENT_TRANSITION } from './HomePage.styles';
 import {
   getBgColorFromScrollState,
   getTextColorFromScrollState,
@@ -52,6 +52,7 @@ function HomePage({
 
   const [isContentVisible, setIsContentVisible] = useState(false);
   const [shouldCancelColorChange, setShouldCancelColorChange] = useState(false);
+  const [searchButtonYPos, setSearchButtonYPos] = useState(0);
 
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -74,6 +75,10 @@ function HomePage({
   const { isSearchOpen, toggleIsSearchOpen } = useSearchContext();
 
   function handleOpenModal() {
+    // Store the current y pos to return to later
+    // when the modal closes
+    setSearchButtonYPos(getScroll().y);
+
     const scrollToCallback = () =>
       toggleIsSearchOpen(() => setShouldCancelColorChange(true));
 
@@ -84,10 +89,14 @@ function HomePage({
   // Display hidden content after search modal is closed
   useEffect(() => {
     if (!isSearchOpen && shouldCancelColorChange) {
-      setShouldCancelColorChange(false);
       setIsContentVisible(true);
+      setShouldCancelColorChange(false);
+
+      setTimeout(() => {
+        scrollTo(searchButtonYPos, TIME.MS400 / 1000);
+      }, CONTENT_TRANSITION);
     }
-  }, [isSearchOpen, shouldCancelColorChange]);
+  }, [isSearchOpen, searchButtonYPos, shouldCancelColorChange]);
 
   useEffect(() => {
     // Hiding the content and preventing the scroll color

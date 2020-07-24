@@ -14,11 +14,13 @@ export const CONTENT_PADDING = {
   XL: SPACING.SIZE_120,
 };
 
+export const CONTENT_TRANSITION = TIME.MS600;
+
 const styles: StylesMap = {
   contentContainer: {
     opacity: 0.3,
     paddingBottom: CONTENT_PADDING.S,
-    transition: `opacity ${TIME.MS600}ms ${EASING.CUBIC_EASE_OUT}`,
+    transition: `opacity ${CONTENT_TRANSITION}ms ${EASING.CUBIC_EASE_OUT}`,
 
     [MQ.M]: {
       paddingBottom: CONTENT_PADDING.M,
