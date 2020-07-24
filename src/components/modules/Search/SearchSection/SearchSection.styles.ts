@@ -36,7 +36,12 @@ const styles: StylesMap = {
   ],
   listItem: {
     '&:not(:last-child)': {
-      paddingBottom: SPACING.SIZE_10,
+      paddingBottom: SPACING.SIZE_15,
+    },
+    [MQ.L]: {
+      '&:not(:last-child)': {
+        paddingBottom: SPACING.SIZE_10,
+      },
     },
   },
   searchQuery: {
