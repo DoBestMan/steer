@@ -287,6 +287,8 @@ function Search({
     !hasResults &&
     !hasSearchResultsError;
   const shouldShowError = hasSearchResultsError && !isInputEmpty;
+  const shouldShowPastSearches =
+    pastSearches.siteSearchResultList.length > 0 && !shouldShowSearchSupport;
 
   return (
     <div css={styles.container} ref={forwardedRef}>
@@ -313,6 +315,7 @@ function Search({
           onPastSearchClick={handleValueSelection}
           onSearchCategoryClick={handleSearchCategoryClick}
           pastSearches={pastSearches}
+          shouldShowPastSearches={shouldShowPastSearches}
         />
       )}
       {shouldShowSearchSupport && (

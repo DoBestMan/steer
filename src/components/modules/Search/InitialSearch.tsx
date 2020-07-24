@@ -19,6 +19,7 @@ interface Props {
   onPastSearchClick: (value: SearchResult) => void;
   onSearchCategoryClick: (searchResult: SiteSearchResultTextItem) => void;
   pastSearches: SiteSearchResultGroup;
+  shouldShowPastSearches: boolean;
 }
 
 function InitialSearch({
@@ -26,6 +27,7 @@ function InitialSearch({
   onPastSearchClick,
   onSearchCategoryClick,
   pastSearches,
+  shouldShowPastSearches,
 }: Props) {
   const [visiblePastSearches, setVisiblePastSearches] = useState(pastSearches);
 
@@ -68,7 +70,7 @@ function InitialSearch({
         appear
         mountOnEnter
         unmountOnExit
-        in={pastSearches.siteSearchResultList.length > 0}
+        in={shouldShowPastSearches}
         timeout={TIME.MS300}
       >
         {(searchTransitionState: TransitionStatus) => {
