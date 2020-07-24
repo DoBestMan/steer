@@ -9,7 +9,11 @@ import {
   backendGetBrandProducts,
   backendGetBrandSummary,
 } from '~/lib/backend/catalog/brand';
-import { getStringifiedParams } from '~/lib/utils/routes';
+import { validBrandQuery } from '~/lib/utils/regex';
+import {
+  getStringifiedParams,
+  validateOrRedirectToNotFound,
+} from '~/lib/utils/routes';
 import { removeTireFromQueryParam } from '~/lib/utils/string';
 
 interface Props extends CatalogPageData {
@@ -46,6 +50,13 @@ export const getServerSideProps: GetServerSideProps<CatalogPageData> = async (
 ) => {
   backendBootstrap({ request: context.req });
   const { brand, categoryOrType, ...vehicleParams } = context.query;
+
+  validateOrRedirectToNotFound({
+    param: brand,
+    pattern: validBrandQuery,
+    response: context.res,
+  });
+
   const brandName = removeTireFromQueryParam(brand);
 
   const apiArgs = {

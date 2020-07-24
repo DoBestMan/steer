@@ -1,11 +1,13 @@
 import { CATALOG_ROUTES } from '~/lib/constants';
 
+import { validBrandQuery } from './regex';
 import {
   getUrlObject,
   interpolateRoute,
   isInRouteList,
   isRouteDiameterFormat,
   trimSlash,
+  validateOrRedirectToNotFound,
 } from './routes';
 
 describe('utils/routes', () => {
@@ -68,6 +70,54 @@ describe('utils/routes', () => {
           CATALOG_ROUTES,
         ),
       ).toBe(true);
+    });
+  });
+
+  describe('validateOrRedirectToNotFound', () => {
+    let mockSetHeader: any;
+    let mockResponse: any;
+
+    beforeEach(() => {
+      mockSetHeader = jest.fn(() => {});
+      mockResponse = {
+        setHeader: mockSetHeader,
+        statusCode: 200,
+        end: () => {},
+      };
+    });
+
+    it('returns undefined for validated brand routes', () => {
+      validateOrRedirectToNotFound({
+        param: 'continental-tires',
+        pattern: validBrandQuery,
+        response: mockResponse,
+      });
+
+      expect(mockSetHeader.mock.calls.length).toBe(0);
+      expect(mockResponse.statusCode).toBe(200);
+    });
+
+    it('changes response header redirecting to 404 in case of bad brand param', () => {
+      validateOrRedirectToNotFound({
+        param: 'continental',
+        pattern: validBrandQuery,
+        response: mockResponse,
+      });
+
+      validateOrRedirectToNotFound({
+        param: '-tires',
+        pattern: validBrandQuery,
+        response: mockResponse,
+      });
+
+      validateOrRedirectToNotFound({
+        param: 'continental-tires-abc',
+        pattern: validBrandQuery,
+        response: mockResponse,
+      });
+
+      expect(mockSetHeader.mock.calls.length).toBe(3);
+      expect(mockResponse.statusCode).toBe(302);
     });
   });
 });

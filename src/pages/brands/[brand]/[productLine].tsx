@@ -8,6 +8,8 @@ import {
   backendGetProductDetail,
   backendGetProductReviews,
 } from '~/lib/backend/product-detail';
+import { validBrandQuery } from '~/lib/utils/regex';
+import { validateOrRedirectToNotFound } from '~/lib/utils/routes';
 import { removeTireFromQueryParam } from '~/lib/utils/string';
 
 function ProductLine(props: ProductDetailData) {
@@ -19,6 +21,13 @@ export const getServerSideProps: GetServerSideProps<ProductDetailData> = async (
 ) => {
   backendBootstrap({ request: context.req });
   const { brand, productLine } = context.query;
+
+  validateOrRedirectToNotFound({
+    param: brand,
+    pattern: validBrandQuery,
+    response: context.res,
+  });
+
   const brandName = removeTireFromQueryParam(brand);
 
   const [siteProduct, siteProductReviews] = await Promise.all([

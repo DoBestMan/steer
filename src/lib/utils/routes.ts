@@ -1,3 +1,4 @@
+import { ServerResponse } from 'http';
 import queryString, { ParsedQuery } from 'query-string';
 
 import { SiteQueryParams } from '~/data/models/SiteQueryParams';
@@ -107,3 +108,21 @@ export const getHrefWithParams = (
 
 export const isInRouteList = (route: string, routeList: string[]) =>
   routeList.includes(route.split('?')[0]);
+
+export function validateOrRedirectToNotFound({
+  param,
+  pattern,
+  response,
+}: {
+  param: string | string[];
+  pattern: RegExp;
+  response: ServerResponse;
+}) {
+  if (pattern.test(param.toString())) {
+    return;
+  }
+
+  response.setHeader('location', '/404');
+  response.statusCode = 302;
+  response.end();
+}

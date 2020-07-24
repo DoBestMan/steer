@@ -5,6 +5,8 @@ import ReviewListingPage, {
 } from '~/components/pages/ReviewListingPage/ReviewListingPage.container';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
 import { backendGetReviewListing } from '~/lib/backend/review-listing';
+import { validBrandQuery } from '~/lib/utils/regex';
+import { validateOrRedirectToNotFound } from '~/lib/utils/routes';
 import { removeTireFromQueryParam } from '~/lib/utils/string';
 
 function Reviews(props: ReviewListingServerData) {
@@ -17,6 +19,13 @@ export const getServerSideProps: GetServerSideProps<ReviewListingServerData> = a
   backendBootstrap({ request: context.req });
   const queryParams: Record<string, string> = {};
   const { brand, ...params } = context.query;
+
+  validateOrRedirectToNotFound({
+    param: brand,
+    pattern: validBrandQuery,
+    response: context.res,
+  });
+
   const brandName = removeTireFromQueryParam(brand);
 
   // Brand tire reviews accept params for sort, order and page
