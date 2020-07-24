@@ -10,35 +10,37 @@ export const everyPurchaseIncludesData = [
     title: 'Free Shipping',
   },
   {
-    description: 'Found a better price after you bought? We match it.',
+    description: 'Price changed after you paid? We’ll refund the difference.',
     icon: ICONS.BEST_PRICE,
     linkLabel: '30 day guarantee',
     modalId: STATIC_MODAL_IDS.GLOBAL_BEST_PRICE_GUARANTEE,
     title: 'Best price guarantee',
   },
   {
-    description: 'Buy from local distributores, install in local stores.',
+    description:
+      'Buy from local distributors, install at local service centers.',
     icon: ICONS.LOCAL_BUSINESS,
     linkLabel: 'How it works',
     modalId: STATIC_MODAL_IDS.GLOBAL_SUPPORT_LOCAL_BUSINESS,
-    title: 'Support to local business',
+    title: 'Support local businesses',
   },
   {
-    description: "Don't like it? Unmounted tires can be sent back.",
+    description:
+      'Sometimes things don’t go as planned. That’s why we accept returns of unmounted tires for up to 30 days.',
     icon: ICONS.FREE_RETURNS,
     linkLabel: '30 day free return',
     modalId: STATIC_MODAL_IDS.GLOBAL_EASY_RETURN,
     title: 'Free, easy returns',
   },
   {
-    description: 'Unmounted tires will be refunded in full.',
+    description: 'No hidden fees for returned tires.',
     icon: ICONS.MONEY_BACK,
     linkLabel: 'How it works',
     modalId: STATIC_MODAL_IDS.GLOBAL_MONEY_BACK_GUARANTEE,
     title: 'Money-back guarantee',
   },
   {
-    description: 'Tire specialists are here to assist you with any doubt.',
+    description: 'Have questions? Live tire specialists are here to help.',
     icon: ICONS.CUSTOMER_SUPPORT,
     linkLabel: 'Contact us',
     modalId: STATIC_MODAL_IDS.GLOBAL_LIVE_CUSTOMER_SUPPORT,

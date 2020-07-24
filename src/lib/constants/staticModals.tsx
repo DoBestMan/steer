@@ -123,7 +123,7 @@ const STATIC_MODALS: Record<string, ModalData> = {
   [STATIC_MODAL_IDS.GLOBAL_FREE_SHIPPING]: {
     props: {
       content:
-        'Placeholder content for global-free-shipping\n\n* Estimated delivery in 2-4 business days\n\n * Tires delivered by Fedex, UPS & Local Drivers\n\nAt SimpleTire, keeping our customers and employees safe is a top priority. As an e-commerce company we’ve taken measures to protect against the spread of COVID-19 (Coronavirus) and ensure that we’re 100% operational and so are our suppliers and distributors.\n\nThere has been no impact to our supply and we’re also delivering almost 100% of our orders in 2-4 days to our customers.',
+        'Placeholder content for global-free-shipping\n\n* Estimated delivery in 2-4 business days\n* Tires delivered by Fedex, UPS & Local Drivers\n\nAt SimpleTire, keeping our customers and employees safe is a top priority. As an e-commerce company we’ve taken measures to protect against the spread of COVID-19 (Coronavirus) and ensure that we’re 100% operational and so are our suppliers and distributors.\n\nThere has been no impact to our supply and we’re also delivering almost 100% of our orders in 2-4 days to our customers.',
       image: {
         src: 'https://dummyimage.com/1600x900/000/f00.jpg',
         altText: 'Free shipping',
@@ -146,8 +146,9 @@ const STATIC_MODALS: Record<string, ModalData> = {
   },
   [STATIC_MODAL_IDS.GLOBAL_BEST_PRICE_GUARANTEE]: {
     props: {
-      content: 'Placeholder content for global-best-price-guarantee.',
-      title: 'Best price guarantee',
+      content:
+        'If the price of your tires drops within 30 days of you buying them, we’ll refund the difference up to $100! Just use the **Norton Shopping Guarantee**, fill out the requested data, and wait for your refund!\n* Free with every purchase\n* Automatic protection for 30 days from your order date\n\nWe’ve done our best to protect you from spending more than you should have to on your tires. Tires are a big purchase and we know it so we’re proud to offer the Low Price Guarantee to all of our customers, absolutely free of any additional charge!',
+      title: 'Low Price Guarantee',
       subtitle: null,
       image: null,
       link: null,
@@ -157,8 +158,9 @@ const STATIC_MODALS: Record<string, ModalData> = {
   },
   [STATIC_MODAL_IDS.GLOBAL_SUPPORT_LOCAL_BUSINESS]: {
     props: {
-      content: 'Placeholder content for global-support-to-local-business',
-      title: 'Support to local business',
+      content:
+        'Your neighbors are our partners; From the tire distributor to the installer, we work with businesses in your area to promote local economies while making your shopping experience simple.\n* We show you tires in your area so we can ship them to you quickly while bringing your business to local distributors\n* We’ll find local service centers near you and you schedule your installation, all during the checkout process\n\nWe started out as a local business and haven’t forgotten where we came from. With our national network of distributors, wholesalers, and retailers we raise up together by getting you exactly what you need quickly.',
+      title: 'Support Local Businesses',
       subtitle: null,
       image: null,
       link: null,
@@ -168,8 +170,9 @@ const STATIC_MODALS: Record<string, ModalData> = {
   },
   [STATIC_MODAL_IDS.GLOBAL_EASY_RETURN]: {
     props: {
-      content: 'Placeholder content for global-easy-return',
-      title: 'Easy return',
+      content:
+        'We know that sometimes things don’t go as planned so we’ll accept returns of unmounted tires for up to 30 days.\n* 30 day returns on unmounted, unused tires\n* Return labels sent to your email\n\nWe accept returns of unmounted, unused tires no matter what size or type they are. If  circumstances have changed and you don’t need the tires or you no longer want them, then we give you 30 days to send them back to us for a full refund minus $15 for return shipping. Return shipping is free if you need to place another order or if we shipped the wrong tire.',
+      title: 'Easy Returns',
       subtitle: null,
       image: null,
       link: null,
@@ -179,8 +182,9 @@ const STATIC_MODALS: Record<string, ModalData> = {
   },
   [STATIC_MODAL_IDS.GLOBAL_MONEY_BACK_GUARANTEE]: {
     props: {
-      content: 'Placeholder content for global-money-back-guarantee',
-      title: 'Money back guarantee',
+      content:
+        'If you’re not happy with your order, we’ll take the tires back and refund you in full without any hidden fees.\n* Returns accepted for any reason\n* Real refunds, no hidden fees\n\nIf you ordered the wrong tires or they aren’t quite what you expected, we’ll take them back. As long as they haven’t been mounted you’ll get a refund, no restocking fees. Refunds will be in full minus $15 for the cost of shipping.',
+      title: 'Money Back Guarantee',
       subtitle: null,
       image: null,
       link: null,
@@ -190,8 +194,9 @@ const STATIC_MODALS: Record<string, ModalData> = {
   },
   [STATIC_MODAL_IDS.GLOBAL_LIVE_CUSTOMER_SUPPORT]: {
     props: {
-      content: 'Placeholder content for global-live-customer-support',
-      title: 'Live customer support',
+      content:
+        'We’re here to answer any questions you may have and keep your tire buying experience simple.\n* Real people, real answers, in real time\n* Support available by phone or email\n\nCheck our FAQ section for answers to our most common questions. If you can’t find an answer to your question then fill out the contact form below and we’ll answer you as soon as possible.',
+      title: 'Live Customer Support',
       subtitle: null,
       image: null,
       link: null,
