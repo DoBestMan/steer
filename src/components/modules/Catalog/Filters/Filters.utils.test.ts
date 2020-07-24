@@ -1,3 +1,5 @@
+import isStrictEqual from 'fast-deep-equal';
+
 import { SiteCatalogFilter } from '~/data/models/SiteCatalogFilter';
 import {
   SiteCatalogFilterList,
@@ -5,7 +7,6 @@ import {
 } from '~/data/models/SiteCatalogFilterList';
 import { SiteCatalogFilterRangeTypeEnum } from '~/data/models/SiteCatalogFilterRange';
 import { SiteCatalogFilterToggleTypeEnum } from '~/data/models/SiteCatalogFilterToggle';
-import { isObjectEqual } from '~/lib/utils/object';
 
 import { CatalogFilterTypes } from './Filter.types';
 import {
@@ -173,12 +174,12 @@ describe('Filters.utils', () => {
       expect(mockPopularActiveTrue).toEqual(true);
     });
 
-    describe('isObjectEqual', () => {
+    describe('isStrictEqual', () => {
       it('checks if all filter values equals corresponding filter state key', () => {
         expect(
-          isObjectEqual({ foo: 'bar', bar: 'baz' }, { foo: 'bar', bar: 'baz' }),
+          isStrictEqual({ foo: 'bar', bar: 'baz' }, { foo: 'bar', bar: 'baz' }),
         ).toBe(true);
-        expect(isObjectEqual({ foo: 'bar', bar: 'baz' }, { foo: 'bar' })).toBe(
+        expect(isStrictEqual({ foo: 'bar', bar: 'baz' }, { foo: 'bar' })).toBe(
           false,
         );
       });

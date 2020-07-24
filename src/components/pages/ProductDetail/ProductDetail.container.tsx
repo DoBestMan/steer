@@ -9,7 +9,7 @@ export interface ProductDetailData {
 
 function ProductDetailContainer({ serverData }: ProductDetailData) {
   return (
-    <ProductDetailContextProvider>
+    <ProductDetailContextProvider serverData={serverData}>
       <ProductDetail serverData={serverData} />
     </ProductDetailContextProvider>
   );

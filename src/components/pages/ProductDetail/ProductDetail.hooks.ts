@@ -1,3 +1,4 @@
+import isStrictEqual from 'fast-deep-equal';
 import { useRouter } from 'next/router';
 import queryString from 'query-string';
 import { useCallback, useEffect, useState } from 'react';
@@ -100,7 +101,12 @@ export const CONSTANTS = {
 };
 
 function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
-  const { quantity, setQuantity } = useProductDetailContext();
+  const {
+    data: contextData,
+    quantity,
+    setData,
+    setQuantity,
+  } = useProductDetailContext();
   const router = useRouter();
   const { query, asPath, pathname } = router;
   const userPersonalization = useUserPersonalizationContext();
@@ -149,6 +155,14 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
       front: CONSTANTS.DEFAULT_QUANTITY,
     });
   }, [quantity, query, setQuantity]);
+
+  useEffect(() => {
+    if (isStrictEqual(data, contextData)) {
+      return;
+    }
+
+    setData(data);
+  }, [data, contextData, setData]);
 
   // Size selector
   const toggleSizeSelector = useCallback(() => {

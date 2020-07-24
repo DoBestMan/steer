@@ -1,7 +1,8 @@
+import isStrictEqual from 'fast-deep-equal';
+
 import TitleRadio from '~/components/global/Radio/TitleRadio';
 import TitleSelectorLabel from '~/components/global/TitleSelectorLabel/TitleSelectorLabel';
 import { SiteCatalogSortListItem } from '~/data/models/SiteCatalogSortListItem';
-import { isObjectEqual } from '~/lib/utils/object';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import styles from './FilterSort.styles';
@@ -23,7 +24,7 @@ export default function FilterSort({
       <h3 css={styles.title}>{ui('catalog.filters.sortBy')}</h3>
       <ul>
         {items.map(({ title, description, value }, idx) => {
-          const isSelected = isObjectEqual(value, filtersToApply);
+          const isSelected = isStrictEqual(value, filtersToApply);
           return (
             <li css={styles.listItem} key={idx}>
               {isLarge ? (

@@ -1,6 +1,7 @@
 import { IncomingMessage } from 'http';
 
 import { UserPersonalization } from '~/data/models/UserPersonalization';
+import { URLS } from '~/lib/constants/urls';
 
 import {
   fetchSetAuthorizationFunction,
@@ -8,16 +9,19 @@ import {
   fetchSetUrlBase,
   fetchSetUserPersonalization,
 } from '../fetch';
-import { BackendEndpoints } from './constants';
 import { backendOauthToken } from './oauth';
 
-export function getBackendEnvVariables() {
+export function getBackendEnvVariables(): {
+  backendEndpoint: string;
+  clientId?: string;
+  clientSecret?: string;
+} {
   const deployRef = process.env.NOW_GITHUB_COMMIT_REF;
   const isProductionDeploy = deployRef === 'master';
 
   if (isProductionDeploy) {
     return {
-      backendEndpoint: BackendEndpoints.mainApiProduction,
+      backendEndpoint: URLS.MAIN_API_PRODUCTION,
       clientId: process.env.STEER_CLIENT_ID,
       clientSecret: process.env.STEER_CLIENT_SECRET,
     };
@@ -33,20 +37,20 @@ export function getBackendEnvVariables() {
 
   if (backend === 'local') {
     return {
-      backendEndpoint: BackendEndpoints.mainApiLocal,
+      backendEndpoint: URLS.MAIN_API_LOCAL,
       clientId: process.env.STEER_CLIENT_ID_MOCK,
       clientSecret: process.env.STEER_CLIENT_SECRET_MOCK,
     };
   } else if (backend === 'mock') {
     return {
-      backendEndpoint: BackendEndpoints.mainApiMock,
+      backendEndpoint: URLS.MAIN_API_MOCK,
       clientId: process.env.STEER_CLIENT_ID_MOCK,
       clientSecret: process.env.STEER_CLIENT_SECRET_MOCK,
     };
   }
 
   return {
-    backendEndpoint: BackendEndpoints.mainApiIntegration,
+    backendEndpoint: URLS.MAIN_API_STAGING,
     clientId: process.env.STEER_CLIENT_ID_INTEGRATION,
     clientSecret: process.env.STEER_CLIENT_SECRET_INTEGRATION,
   };
@@ -73,7 +77,7 @@ export function backendBootstrap({
   request?: IncomingMessage & { query?: Record<string, string | string[]> };
 } = {}) {
   fetchSetAuthorizationFunction(authorizationFunction);
-  fetchSetUrlBase(backendEndpoint.apiBaseUrl);
+  fetchSetUrlBase(backendEndpoint);
 
   if (request && request.query) {
     const userRegion = request.query.userRegion

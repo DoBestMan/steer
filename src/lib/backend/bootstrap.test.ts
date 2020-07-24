@@ -1,9 +1,10 @@
 import { IncomingMessage } from 'http';
 import { Socket } from 'net';
 
+import { URLS } from '~/lib/constants/urls';
+
 import * as FetchModule from '../fetch';
 import { backendBootstrap, getBackendEnvVariables } from './bootstrap';
-import { BackendEndpoints } from './constants';
 
 function createFakeRequest() {
   const fakeIncomingMessage = new IncomingMessage(new Socket());
@@ -67,7 +68,7 @@ describe('getBackendEnvVariables', () => {
     process.env.NOW_GITHUB_COMMIT_REF = 'master';
 
     expect(getBackendEnvVariables()).toEqual({
-      backendEndpoint: BackendEndpoints.mainApiProduction,
+      backendEndpoint: URLS.MAIN_API_PRODUCTION,
       clientId: 'prodId',
       clientSecret: 'prodSecret',
     });
@@ -79,7 +80,7 @@ describe('getBackendEnvVariables', () => {
       process.env.NOW_GITHUB_COMMIT_REF = branch;
 
       expect(getBackendEnvVariables()).toEqual({
-        backendEndpoint: BackendEndpoints.mainApiIntegration,
+        backendEndpoint: URLS.MAIN_API_STAGING,
         clientId: 'integrationId',
         clientSecret: 'integrationSecret',
       });
@@ -92,7 +93,7 @@ describe('getBackendEnvVariables', () => {
       process.env.NOW_GITHUB_COMMIT_REF = branch;
 
       expect(getBackendEnvVariables()).toEqual({
-        backendEndpoint: BackendEndpoints.mainApiMock,
+        backendEndpoint: URLS.MAIN_API_MOCK,
         clientId: 'mockId',
         clientSecret: 'mockSecret',
       });
@@ -103,7 +104,7 @@ describe('getBackendEnvVariables', () => {
     process.env.STEER_BACKEND = 'local';
 
     expect(getBackendEnvVariables()).toEqual({
-      backendEndpoint: BackendEndpoints.mainApiLocal,
+      backendEndpoint: URLS.MAIN_API_LOCAL,
       clientId: 'mockId',
       clientSecret: 'mockSecret',
     });
@@ -113,7 +114,7 @@ describe('getBackendEnvVariables', () => {
     process.env.STEER_BACKEND = 'integration';
 
     expect(getBackendEnvVariables()).toEqual({
-      backendEndpoint: BackendEndpoints.mainApiIntegration,
+      backendEndpoint: URLS.MAIN_API_STAGING,
       clientId: 'integrationId',
       clientSecret: 'integrationSecret',
     });
@@ -123,7 +124,7 @@ describe('getBackendEnvVariables', () => {
     process.env.STEER_BACKEND = 'mock';
 
     expect(getBackendEnvVariables()).toEqual({
-      backendEndpoint: BackendEndpoints.mainApiMock,
+      backendEndpoint: URLS.MAIN_API_MOCK,
       clientId: 'mockId',
       clientSecret: 'mockSecret',
     });
@@ -133,7 +134,7 @@ describe('getBackendEnvVariables', () => {
     process.env.STEER_BACKEND = undefined;
 
     expect(getBackendEnvVariables()).toEqual({
-      backendEndpoint: BackendEndpoints.mainApiMock,
+      backendEndpoint: URLS.MAIN_API_MOCK,
       clientId: 'mockId',
       clientSecret: 'mockSecret',
     });
