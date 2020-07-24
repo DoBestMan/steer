@@ -13,6 +13,7 @@ interface Props extends SiteImageExtended {
   altText: string;
   as?: ReactType;
   height?: string | number;
+  noPlaceholder?: boolean;
   src: string;
   width?: string | number;
 }
@@ -29,6 +30,7 @@ function Image({
   srcTransformationArgs,
   width,
   widths,
+  noPlaceholder,
   ...rest
 }: Props) {
   const imgRef = useRef<HTMLDivElement>(null);
@@ -103,7 +105,7 @@ function Image({
       ref={imgRef}
       css={[
         styles.root,
-        isLazyAndNotLoaded && styles.placeholder,
+        isLazyAndNotLoaded && !noPlaceholder && styles.placeholder,
         { ...style },
         customStyles,
       ]}

@@ -75,6 +75,7 @@ function ProductListing({
           altText={displayedImage.image.altText}
           src={displayedImage.image.src}
           srcTransformationArgs={getSquareImageTransformations(imageWidths)}
+          noPlaceholder
         />
         <div css={[styles.shadow, isHighlighted && styles.shadowHighlighted]}>
           <Image
@@ -85,6 +86,7 @@ function ProductListing({
             responsive
             aria-hidden
             src={SHADOW_SRC}
+            noPlaceholder
           />
         </div>
       </div>

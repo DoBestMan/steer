@@ -67,6 +67,7 @@ function AdvancedListing({
               src={displayedImage.image.src}
               altText={displayedImage.image.altText}
               srcTransformationArgs={getSquareImageTransformations(imageWidths)}
+              noPlaceholder
             />
           </div>
         </div>

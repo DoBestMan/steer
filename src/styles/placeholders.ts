@@ -10,6 +10,7 @@ const placeholders = {
     borderRadius: RADIUS.RADIUS_15,
     backgroundColor: COLORS.LIGHT.GRAY_20,
     marginBottom: SPACING.SIZE_25,
+    width: '100%',
   },
 };
 
