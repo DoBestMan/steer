@@ -61,7 +61,7 @@ const styles: StylesMap = {
     },
   },
   autocompleteGridItemRearTireState: {
-    borderBottom: `1px solid ${COLORS.ORANGE.SHADE_30}`,
+    borderBottom: `1px solid ${COLORS.DARK.GRAY_80}`,
     padding: `${SPACING.SIZE_25}px 0 ${SPACING.SIZE_25}px 0`,
     [MQ.M]: {
       padding: `${SPACING.SIZE_40}px 0 ${SPACING.SIZE_20}px 0`,
