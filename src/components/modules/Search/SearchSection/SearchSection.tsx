@@ -35,6 +35,16 @@ function SearchSection({
     }
   };
 
+  const handleTouchStart = (searchResult: SiteSearchResultTextItem) => (
+    event: React.TouchEvent,
+  ) => {
+    event.preventDefault();
+
+    if (onClick) {
+      onClick(searchResult);
+    }
+  };
+
   return (
     <Grid>
       <GridItem gridColumnS="2/6" gridColumnM="2/8" gridColumnL="3/14">
@@ -72,6 +82,7 @@ function SearchSection({
                     isExternal={isExternal}
                     onClick={handleClick(item)}
                     onFocus={onFocus(index)}
+                    onTouchStart={handleTouchStart(item)}
                     routeQueryParamOptions={routeQueryParamOptions}
                   >
                     {innerContent}
@@ -91,6 +102,7 @@ function SearchSection({
                   css={[styles.itemButton, isSelected && styles.isSelected]}
                   onClick={handleClick(item)}
                   onFocus={onFocus(index)}
+                  onTouchStart={handleTouchStart(item)}
                 >
                   {innerContent}
                 </button>

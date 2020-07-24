@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { MouseEventHandler, ReactNode } from 'react';
+import { MouseEventHandler, ReactNode, TouchEventHandler } from 'react';
 
 import { useBaseLinkProps, UseBaseLinkProps } from './BaseLink.hooks';
 
@@ -7,6 +7,7 @@ export interface BaseLinkProps extends UseBaseLinkProps {
   children?: ReactNode;
   onClick?: MouseEventHandler;
   onFocus?: () => void;
+  onTouchStart?: TouchEventHandler;
 }
 
 // Wrapper for Next's Link component to parse various combinations
