@@ -45,7 +45,7 @@ function Reviews({
             <div css={styles.title}>{title}</div>
             {hasSources && (
               <span css={styles.sources}>
-                {sources?.simpleTire && (
+                {!!sources?.simpleTire && (
                   <span css={styles.source}>
                     {ui('reviews.simpleTire.name', {
                       number: sources.simpleTire,
@@ -53,7 +53,7 @@ function Reviews({
                     })}
                   </span>
                 )}
-                {sources?.googleShopping && (
+                {!!sources?.googleShopping && (
                   <span css={styles.source}>
                     {ui('reviews.google.name', {
                       number: sources?.googleShopping,

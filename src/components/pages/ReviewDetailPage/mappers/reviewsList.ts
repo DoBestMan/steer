@@ -8,13 +8,13 @@ export function mapDataToReviewsList(
 ): ReviewCardProps[] {
   const reviews: ReviewCardProps[] = reviewsList.map((item, idx) => ({
     body: item.additionalComments,
-    car: item.vehicle || undefined,
+    car: item.vehicle && item.vehicle.trim() !== '' ? item.vehicle : null,
     date: item.purchaseDate
       ? format(new Date(item.purchaseDate), 'MMM d, yyyy')
       : null,
     id: idx.toString(),
     isVerified: item.verifiedCustomer,
-    location: item.address,
+    location: item.address && item.address.trim() !== '' ? item.address : null,
     momentList: item.dataMomentList,
     ratings: item.performanceRating.ratingList,
     ratingStars: item.performanceRating.overall,

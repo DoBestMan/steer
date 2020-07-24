@@ -61,7 +61,6 @@ function ReviewCard({
   function toggleCollapsed() {
     setIsCollapsed((prev) => !prev);
   }
-
   return (
     <article css={[styles.container, themeStyles[theme].container]}>
       <div css={styles.ratingTopContainer}>
@@ -71,8 +70,8 @@ function ReviewCard({
 
       <div css={[layout.container, layout.centeredHorizontal]}>
         <div css={styles.customerInfo}>
-          {!!car && <span>{car}</span>}
-          {!!location && <span>{location}</span>}
+          {car && <span>{car}</span>}
+          {location && <span>{location}</span>}
           {isVerified && (
             <span css={styles.verifiedCustomer}>
               {ui('reviews.verifiedCustomer')}
