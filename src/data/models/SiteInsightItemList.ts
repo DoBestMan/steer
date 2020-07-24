@@ -19,9 +19,8 @@ export interface SiteInsightItemList {
 
   more: {
     label: string;
-
     link: SiteLink;
-  };
+  } | null;
 
   title: string;
 

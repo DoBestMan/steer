@@ -106,6 +106,7 @@ const mockSvg = {
 } as SiteIcon;
 
 export function CardWithList() {
+  const cta = text('CTA Text', 'See more');
   const mockListItems = [
     {
       icon: mockImagePlaceholder,
@@ -140,10 +141,14 @@ export function CardWithList() {
         id="5"
         title={text('Title', 'Find any tire.')}
         items={mockListItems}
-        more={{
-          label: text('CTA Text', 'See more'),
-          link: { href: '/', isExternal: false },
-        }}
+        more={
+          cta
+            ? {
+                label: cta,
+                link: { href: '/', isExternal: false },
+              }
+            : null
+        }
         type={INSIGHT_TYPE.LIST}
       />
     </CardContainer>
