@@ -8,7 +8,7 @@ import { KEYCODES } from '~/lib/constants';
 import BottomCardModal from '../Modal/BottomCardModal';
 import ActionBar, { ActionBarProps } from './ActionBar';
 import styles from './Dropdown.styles';
-import { getPosition } from './Dropdown.utils';
+import { getMinWidth, getPosition } from './Dropdown.utils';
 
 interface Props {
   actionBar?: ActionBarProps | null;
@@ -33,7 +33,10 @@ export default function Dropdown({
 }: Props) {
   const { greaterThan } = useBreakpoints();
   const dropdownEl = useRef<HTMLDivElement>(null);
-  const [positionStyle, setPosition] = useState<CSSProperties | null>(null);
+  const [
+    calculatedStyles,
+    setCalculatedStyles,
+  ] = useState<CSSProperties | null>(null);
   const { width } = useWindowSize();
 
   const isModal = !greaterThan.M || forceModal;
@@ -85,10 +88,13 @@ export default function Dropdown({
       return;
     }
 
-    setPosition(getPosition(insideCarousel));
+    // non-carousel dropdowns don't need special positioning because they will not be scrolled
+    // but will need custom min width to ensure they are not smaller than the parent button
+    const stylesFn = insideCarousel ? getPosition : getMinWidth;
+    setCalculatedStyles(stylesFn());
   }, [isOpen, insideCarousel, width]);
 
-  if (!positionStyle) {
+  if (!calculatedStyles) {
     return null;
   }
 
@@ -102,8 +108,9 @@ export default function Dropdown({
             styles.root,
             isOpen && styles.open,
             actionBar && styles.actionBarDropdown,
+            !insideCarousel ? styles.defaultDropdown : styles.carouselDropdown,
           ]}
-          style={positionStyle}
+          style={calculatedStyles || {}}
         >
           {/* focus trap and dropdown wrapper need to be in dom to update positioning
           and focus but wait to render children until it's open */}

@@ -55,6 +55,9 @@ export const styles: StylesMap = {
       },
     },
   },
+  label: {
+    paddingRight: SPACING.SIZE_10,
+  },
   rootActive: { color: COLORS.GLOBAL.ORANGE },
   rootHover: {
     ':hover': {

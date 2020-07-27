@@ -39,6 +39,7 @@ export default function TitleCheckbox({
         flair={flair}
         label={label}
         isDisabled={isDisabled}
+        css={styles.label}
       />
       <Checkbox
         onChange={onChange}

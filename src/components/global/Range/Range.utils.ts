@@ -98,7 +98,7 @@ export function handleMouseDown(props: Props, e: MouseEvent | TouchEvent) {
       return;
     }
 
-    const pageX = e instanceof TouchEvent ? e.touches[0].pageX : e.pageX;
+    const pageX = e instanceof MouseEvent ? e.pageX : e.touches[0].pageX;
     const railElBounds = railEl.current.getBoundingClientRect();
     const diffX = pageX - railElBounds.left;
     const currentValue =

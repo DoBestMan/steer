@@ -14,9 +14,10 @@ export default function TitleSelectorLabel({
   description,
   flair,
   label,
+  ...rest
 }: Props) {
   return (
-    <span css={isDisabled && styles.disabled}>
+    <span css={isDisabled && styles.disabled} {...rest}>
       <span css={styles.containerLabel}>
         <p css={styles.label}>{label}</p>
         <span css={styles.tags}>

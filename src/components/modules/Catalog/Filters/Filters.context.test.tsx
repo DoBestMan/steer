@@ -221,7 +221,7 @@ describe('useFiltersContextSetup', () => {
       } as unknown) as CatalogFilterTypes)(),
     );
 
-    expect(result.current.filtersToApply).not.toHaveProperty('foo');
-    expect(result.current.filtersToApply).not.toHaveProperty('bar');
+    expect(result.current.filtersToApply).toHaveProperty('foo', '');
+    expect(result.current.filtersToApply).toHaveProperty('bar', '');
   });
 });

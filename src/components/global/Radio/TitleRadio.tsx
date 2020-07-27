@@ -35,6 +35,7 @@ export default function TitleRadio({
         flair={flair}
         label={label}
         isDisabled={isDisabled}
+        css={styles.label}
       />
       <Radio name={name} isDisabled={isDisabled} {...rest} />
     </label>

@@ -13,11 +13,9 @@ import { typography } from '~/styles/typography.styles';
 import { ACTION_BAR_HEIGHT } from './ActionBar.styles';
 
 const DROPDOWN_MIN_WIDTH = 325;
+const DROPDOWN_MAX_WIDTH = 400;
 
 const styles: StylesMap = {
-  open: {
-    display: 'block',
-  },
   actionBarDropdown: {
     paddingBottom: ACTION_BAR_HEIGHT.SM + SPACING.SIZE_20,
     minWidth: DROPDOWN_MIN_WIDTH,
@@ -36,6 +34,17 @@ const styles: StylesMap = {
     [MQ.L]: {
       paddingBottom: ACTION_BAR_HEIGHT.LG,
     },
+  },
+  carouselDropdown: {
+    marginTop: SPACING.SIZE_05 + 3, // allows border bottom to display for link buttons
+    maxWidth: DROPDOWN_MAX_WIDTH,
+    minWidth: DROPDOWN_MIN_WIDTH,
+  },
+  defaultDropdown: {
+    marginLeft: -SPACING.SIZE_10,
+  },
+  open: {
+    display: 'block',
   },
   root: [
     typography.primarySubhead,
@@ -56,8 +65,6 @@ const styles: StylesMap = {
       boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
       color: COLORS.GLOBAL.BLACK,
       display: 'none',
-      marginTop: SPACING.SIZE_05 + 3, // allows border bottom to display for link buttons
-      minWidth: DROPDOWN_MIN_WIDTH,
       pointerEvents: 'auto',
       position: 'absolute',
       zIndex: Z_INDEX.TOP,

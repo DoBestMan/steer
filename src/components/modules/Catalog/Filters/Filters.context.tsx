@@ -167,12 +167,10 @@ export function useFiltersContextSetup({
     },
     createResetFiltersHandler: (filter: CatalogFilterTypes) => () => {
       const vals = getValueKeys(filter);
-      let newState = { ...filtersToApply };
+      const newState = { ...filtersToApply };
       vals.forEach((key) => {
         if (newState[key]) {
-          const { [key]: _, ...rest } = newState;
-          newState = rest;
-          return;
+          newState[key] = '';
         }
       });
       setFiltersToApply(newState);
