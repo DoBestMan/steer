@@ -201,3 +201,15 @@ Examples:
 ### Add a break whithin the same HTML element
 
 Use `<br />` to insert a line break inside the same HTML element without splitting into two. For example this `"# Oops.<br />Please enter a valid ZIP code."` will render a "Oops. <br /> Please enter a valid ZIP code." inside a single `h1` tag.
+
+## Routing
+
+### Scrolling back to the top
+
+Next.js’ `Router.push` event doesn’t automatically scroll the window to the op on route change as `<Link>` does. To force this behavior the following can be added to the `Router.push` promise on each case that requires it: `.then(() => window.scrollTo(0, 0));`
+
+Example:
+
+```
+ router.push([params]).then(() => window.scrollTo(0, 0));
+```
