@@ -77,7 +77,7 @@ function ReviewCard({
               {ui('reviews.verifiedCustomer')}
               <Icon
                 css={styles.verifiedCustomerIcon}
-                name={ICONS.REVIEWS_VERIFIED}
+                name={ICONS.REVIEW_VERIFIED}
               />
             </span>
           )}

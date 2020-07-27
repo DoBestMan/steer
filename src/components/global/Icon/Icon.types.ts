@@ -55,7 +55,7 @@ export type Icon =
   | 'rebate'
   | 'rebate-small'
   | 'returns-big'
-  | 'reviews-verified'
+  | 'review-verified'
   | 'run-flat'
   | 'run-flat-big'
   | 'search'

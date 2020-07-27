@@ -12,7 +12,7 @@ export const mockReviews: SiteReviews = {
   linkLabel: 'See all reviews',
   ratingLabel: 'Rated by 52,135 verified customers',
   ratingLabelIcon: {
-    svgId: ICONS.REVIEWS_VERIFIED,
+    svgId: ICONS.REVIEW_VERIFIED,
     type: ICON_IMAGE_TYPE.ICON,
   },
   ratingStars: 4.8,
