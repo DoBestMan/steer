@@ -51,13 +51,6 @@ const styles: StylesMap = {
       },
     },
   ],
-  resultsNone: {
-    display: 'none',
-    [MQ.L]: {
-      display: 'unset',
-      visibility: 'hidden',
-    },
-  },
   root: {
     alignItems: 'baseline',
     background: COLORS.GLOBAL.WHITE,
