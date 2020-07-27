@@ -8,14 +8,12 @@ import { MODAL_DATA_TYPES } from './modal.types';
 // Static modals associated with IDs that can be references from the API
 
 export enum STATIC_MODAL_IDS {
-  CATALOG_FILTER_BRAND = 'catalog-filter-brand',
   CATALOG_FILTER_LOAD_INDEX = 'catalog-filter-load-index',
   CATALOG_FILTER_LOAD_RANGE = 'catalog-filter-load-range',
   CATALOG_FILTER_MILEAGE_WARRANTY = 'catalog-filter-mileage-warranty',
-  CATALOG_FILTER_PRICE_RANGE = 'catalog-filter-price-range',
   CATALOG_FILTER_SPEED_RATING = 'catalog-filter-speed-rating',
   CATALOG_FILTER_TIRE_TYPE_CATEGORY = 'catalog-filter-tire-type-category',
-  CATALOG_FILTER_TIRE_TYPE_GLOBAL = 'catalog-filter-tire-type-global',
+  CATALOG_FILTER_TIRE_TYPE_VEHICLE = 'catalog-filter-tire-type-vehicle',
   GLOBAL_BEST_PRICE_GUARANTEE = 'global-best-price-guarantee',
   GLOBAL_EASY_RETURN = 'global-easy-return',
   GLOBAL_FREE_SHIPPING = 'global-free-shipping',
@@ -32,20 +30,10 @@ export enum STATIC_MODAL_IDS {
 
 /* eslint-disable sort-keys */
 const STATIC_MODALS: Record<string, ModalData> = {
-  [STATIC_MODAL_IDS.CATALOG_FILTER_BRAND]: {
-    props: {
-      content: 'Placeholder content for CATALOG_FILTER_BRAND',
-      title: 'About this filter',
-      subtitle: null,
-      image: null,
-      link: null,
-      showSupportSection: true,
-    },
-    type: MODAL_DATA_TYPES.CONTENT,
-  },
   [STATIC_MODAL_IDS.CATALOG_FILTER_LOAD_INDEX]: {
     props: {
-      content: 'Placeholder content for CATALOG_FILTER_LOAD_INDEX',
+      content:
+        'A numerical value assigned to a tire that designates its load carrying capacity.',
       title: 'About this filter',
       subtitle: null,
       image: null,
@@ -56,7 +44,8 @@ const STATIC_MODALS: Record<string, ModalData> = {
   },
   [STATIC_MODAL_IDS.CATALOG_FILTER_LOAD_RANGE]: {
     props: {
-      content: 'Placeholder content for CATALOG_FILTER_LOAD_RANGE',
+      content:
+        'A letter value that determines the construction and ply rating of a tire. SL, XL, and LL are typical for a Passenger Tire, whereas Light Truck ranges from B (4 ply) - G (14 ply).',
       title: 'About this filter',
       subtitle: null,
       image: null,
@@ -67,18 +56,8 @@ const STATIC_MODALS: Record<string, ModalData> = {
   },
   [STATIC_MODAL_IDS.CATALOG_FILTER_MILEAGE_WARRANTY]: {
     props: {
-      content: 'Placeholder content for CATALOG_FILTER_MILEAGE_WARRANTY',
-      title: 'About this filter',
-      subtitle: null,
-      image: null,
-      link: null,
-      showSupportSection: true,
-    },
-    type: MODAL_DATA_TYPES.CONTENT,
-  },
-  [STATIC_MODAL_IDS.CATALOG_FILTER_PRICE_RANGE]: {
-    props: {
-      content: 'Placeholder content for CATALOG_FILTER_PRICE_RANGE',
+      content:
+        'The manufacturers warranty based on the number of miles that can be driven (with proper tire maintence) before needing to replace tires again.',
       title: 'About this filter',
       subtitle: null,
       image: null,
@@ -89,7 +68,8 @@ const STATIC_MODALS: Record<string, ModalData> = {
   },
   [STATIC_MODAL_IDS.CATALOG_FILTER_SPEED_RATING]: {
     props: {
-      content: 'Placeholder content for CATALOG_FILTER_SPEED_RATING',
+      content:
+        'A letter value that determines the top speed a tire can safely drive on.',
       title: 'About this filter',
       subtitle: null,
       image: null,
@@ -100,8 +80,9 @@ const STATIC_MODALS: Record<string, ModalData> = {
   },
   [STATIC_MODAL_IDS.CATALOG_FILTER_TIRE_TYPE_CATEGORY]: {
     props: {
-      content: 'Placeholder content for CATALOG_FILTER_TIRE_TYPE_CATEGORY',
-      title: 'About this filter',
+      content:
+        'Select the type of tire that best fits your driving and weather needs.',
+      title: 'Category type',
       subtitle: null,
       image: null,
       link: null,
@@ -109,10 +90,11 @@ const STATIC_MODALS: Record<string, ModalData> = {
     },
     type: MODAL_DATA_TYPES.CONTENT,
   },
-  [STATIC_MODAL_IDS.CATALOG_FILTER_TIRE_TYPE_GLOBAL]: {
+  [STATIC_MODAL_IDS.CATALOG_FILTER_TIRE_TYPE_VEHICLE]: {
     props: {
-      content: 'Placeholder content for CATALOG_FILTER_TIRE_TYPE_GLOBAL',
-      title: 'About this filter',
+      content:
+        'Select the type of vehicle application for your tire needs. Example: if you drive a Ford F-150 choose Light Truck.',
+      title: 'Vehicle type',
       subtitle: null,
       image: null,
       link: null,
