@@ -20,6 +20,7 @@ import { map } from '~/lib/utils/interpolation';
 
 import CatalogProductGrid from '../CatalogProductGrid/CatalogProductGrid';
 import CatalogProductGroups from '../CatalogProductGroups/CatalogProductGroups';
+import useExperimentSkipCurationView from './experiments/useExperimentSkipCurationView';
 import NoResultsGrid from './NoResultsGrid';
 
 interface Props {
@@ -49,6 +50,14 @@ function CatalogGrid({
   ] = useState<HTMLDivElement | null>(null);
 
   const [catalogGridOffsetTop, setCatalogGridOffsetTop] = useState(0);
+
+  // Experiment
+  useExperimentSkipCurationView({
+    isLoading,
+    skipCurationView: () => {
+      handleUpdateResults({ skipGroups: 'true' }, true);
+    },
+  });
 
   // Animation based on scroll
   // Step #1: Get catalogGrid offsetTop on resize

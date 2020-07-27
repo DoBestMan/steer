@@ -24,6 +24,7 @@ import { useModalContext } from '~/context/Modal.context';
 import { THEME } from '~/lib/constants';
 import { ProductDetailResponse } from '~/pages/api/product-detail';
 
+import useExperimentPLA from './experiments/useExperimentPLA';
 import useProductDetail from './ProductDetail.hooks';
 import styles from './ProductDetail.styles';
 
@@ -54,6 +55,14 @@ function ProductDetail({ serverData }: ProductDetailData) {
     serverData,
   });
   const { openStaticModal, openDynamicModal } = useModalContext();
+  const {
+    positionCuration0,
+    positionCuration1,
+    positionCuration2,
+  } = useExperimentPLA({
+    isPLA,
+    hasRecirculation: isPLA && recirculation && recirculation.length > 0,
+  });
   const stickyBarAvoidSection = useRef<HTMLDivElement>(null);
   const stickyBarDarkSection = useRef<HTMLDivElement>(null);
 
@@ -99,10 +108,32 @@ function ProductDetail({ serverData }: ProductDetailData) {
             </Grid>
           </div>
         </GridItem>
+        {positionCuration1 && recirculation && (
+          <>
+            <GridItem fullbleed css={styles.featuredRecirculation}>
+              <ProductGroupList
+                headerCustomStyles={styles.recirculationHeader}
+                itemCustomStyle={styles.recirculationItem}
+                {...recirculation[0]}
+              />
+            </GridItem>
+          </>
+        )}
         {installation && (
           <GridItem fullbleed css={styles.installation}>
             <Installation {...installation} />
           </GridItem>
+        )}
+        {positionCuration2 && recirculation && (
+          <>
+            <GridItem fullbleed css={styles.featuredRecirculation}>
+              <ProductGroupList
+                headerCustomStyles={styles.recirculationHeader}
+                itemCustomStyle={styles.recirculationItem}
+                {...recirculation[0]}
+              />
+            </GridItem>
+          </>
         )}
         <GridItem fullbleed css={styles.purchaseIncludes}>
           <PurchaseIncludes openStaticModal={openStaticModal} />
@@ -110,7 +141,7 @@ function ProductDetail({ serverData }: ProductDetailData) {
         <GridItem gridColumnL="3/13" css={styles.shopWithConfidence}>
           <ShopWithConfidence />
         </GridItem>
-        {isPLA && recirculation?.length && (
+        {positionCuration0 && recirculation && (
           <>
             <GridItem fullbleed css={styles.featuredRecirculation}>
               <ProductGroupList

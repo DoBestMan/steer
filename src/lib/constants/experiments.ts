@@ -1,8 +1,8 @@
 export const EXPERIMENTS = {
   CATALOG: {
-    ADVANCED_VIEW_TOGGLED: 'rkGTw2mQQ3ODHbKDpr-Wwg',
+    SKIP_CURATION_VIEW: '_aw54RdZRAK1H2dPmWgUSg',
   },
   PLA: {
-    ORDER_CHANGED: 'tsYvHbQPTY-zd4y5XWRT1g',
+    ORDER_CHANGED: '9Kh6cgJPQ_SVRvVnaJiarg',
   },
 };
