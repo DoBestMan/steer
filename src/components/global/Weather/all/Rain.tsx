@@ -16,7 +16,7 @@ class Rain {
   z: number;
 
   constructor() {
-    this.height = 30 + Math.random() * 10;
+    this.height = 20 + Math.random() * 10;
     this.x = 0;
     this.y = 0;
     this.z = 0;
