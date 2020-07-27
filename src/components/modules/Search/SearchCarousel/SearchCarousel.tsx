@@ -48,7 +48,7 @@ function SearchCarousel({
                 <div
                   css={styles.carouselItem}
                   key={item.image.altText}
-                  ref={pushRefToArray}
+                  ref={pushRefToArray(index)}
                 >
                   <BaseLink
                     css={styles.carouselButton}
@@ -74,7 +74,7 @@ function SearchCarousel({
               <div
                 css={styles.carouselItem}
                 key={item.image.altText}
-                ref={pushRefToArray}
+                ref={pushRefToArray(index)}
               >
                 <button
                   css={styles.carouselButton}

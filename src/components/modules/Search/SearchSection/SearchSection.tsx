@@ -75,7 +75,11 @@ function SearchSection({
             ) {
               const { href, isExternal } = item.action.link;
               return (
-                <li css={styles.listItem} key={index} ref={pushRefToArray}>
+                <li
+                  css={styles.listItem}
+                  key={index}
+                  ref={pushRefToArray(index)}
+                >
                   <BaseLink
                     css={[styles.itemButton, isSelected && styles.isSelected]}
                     href={href}
@@ -97,7 +101,7 @@ function SearchSection({
             }
 
             return (
-              <li css={styles.listItem} key={index} ref={pushRefToArray}>
+              <li css={styles.listItem} key={index} ref={pushRefToArray(index)}>
                 <button
                   css={[styles.itemButton, isSelected && styles.isSelected]}
                   onClick={handleClick(item)}
