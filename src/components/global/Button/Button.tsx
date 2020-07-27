@@ -1,4 +1,9 @@
-import { MouseEventHandler, ReactNode } from 'react';
+import {
+  forwardRef,
+  MouseEventHandler,
+  MutableRefObject,
+  ReactNode,
+} from 'react';
 
 import {
   BUTTON_STYLE,
@@ -26,6 +31,11 @@ interface Props {
   theme?: THEME.DARK | THEME.LIGHT | THEME.ORANGE;
 }
 
+type RefType =
+  | ((instance: HTMLAnchorElement | HTMLButtonElement | null) => void)
+  | MutableRefObject<HTMLAnchorElement | HTMLButtonElement | null>
+  | null;
+
 export interface AnchorProps extends Props {
   href: string;
 }
@@ -36,16 +46,19 @@ export interface ButtonElementProps extends Props {
 
 export type ButtonProps = AnchorProps | ButtonElementProps;
 
-function Button({
-  as = LINK_TYPES.BUTTON,
-  children,
-  isDisabled,
-  isToggle = false,
-  isToggleActive = false,
-  style = BUTTON_STYLE.SOLID,
-  theme = THEME.LIGHT,
-  ...rest
-}: ButtonProps) {
+function Button(
+  {
+    as = LINK_TYPES.BUTTON,
+    children,
+    isDisabled,
+    isToggle = false,
+    isToggleActive = false,
+    style = BUTTON_STYLE.SOLID,
+    theme = THEME.LIGHT,
+    ...rest
+  }: ButtonProps,
+  ref: RefType,
+) {
   const toggleStyles = isToggleActive
     ? toggle.active[theme]
     : toggle.inactive[theme];
@@ -57,21 +70,28 @@ function Button({
     isDisabled && styles.disabled,
   ];
   const isAnchor = as === LINK_TYPES.A;
-  const Container = as;
 
   if (isAnchor && 'href' in rest) {
     return (
-      <BaseLink css={buttonStyles} {...rest}>
+      <BaseLink
+        css={buttonStyles}
+        {...rest}
+        ref={ref as MutableRefObject<HTMLAnchorElement>}
+      >
         {children}
       </BaseLink>
     );
   }
 
   return (
-    <Container css={buttonStyles} {...rest}>
+    <button
+      css={buttonStyles}
+      {...rest}
+      ref={ref as MutableRefObject<HTMLButtonElement>}
+    >
       {children}
-    </Container>
+    </button>
   );
 }
 
-export default Button;
+export default forwardRef(Button);

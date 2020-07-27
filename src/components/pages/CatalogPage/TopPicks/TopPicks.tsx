@@ -52,6 +52,10 @@ function TopPicks({
   );
   const rootRef = useRef<HTMLDivElement | null>(null);
 
+  const slideTo = (index: number) => {
+    swiper && swiper.slideTo(index);
+  };
+
   // Swiper events
   useEffect(() => {
     if (!swiper) {
@@ -355,6 +359,7 @@ function TopPicks({
                   onItemMouseEnter={onItemMouseEnter}
                   onItemMouseLeave={onItemMouseLeave}
                   openSearch={openSearch}
+                  slideTo={slideTo}
                 />
               </div>
             );
@@ -374,6 +379,7 @@ function TopPicks({
               indexHovered={indexHovered}
               onItemMouseEnter={onItemMouseEnter}
               onItemMouseLeave={onItemMouseLeave}
+              slideTo={slideTo}
             />
           </div>
         </Carousel>

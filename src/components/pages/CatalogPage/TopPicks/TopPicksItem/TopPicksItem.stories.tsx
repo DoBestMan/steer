@@ -116,13 +116,15 @@ export function TopPicksItemWithKnobs() {
     /* eslint-enable sort-keys */
   };
 
+  function slideTo() {}
+
   return (
     <div css={styles.root}>
       <div css={styles.fakeBackground}>
         <div css={styles.topContent}></div>
         <div css={styles.bottomContent}></div>
       </div>
-      <TopPicksItem show {...data} currentIndex={0} />
+      <TopPicksItem show {...data} currentIndex={0} slideTo={slideTo} />
     </div>
   );
 }
@@ -208,13 +210,15 @@ export function TopPicksItemWithFrontAndRearAndPill() {
     /* eslint-enable sort-keys */
   };
 
+  function slideTo() {}
+
   return (
     <div css={styles.root}>
       <div css={styles.fakeBackground}>
         <div css={styles.topContent}></div>
         <div css={styles.bottomContent}></div>
       </div>
-      <TopPicksItem show {...data} currentIndex={0} />
+      <TopPicksItem show {...data} currentIndex={0} slideTo={slideTo} />
     </div>
   );
 }
@@ -271,13 +275,15 @@ export function TopPicksItemWithNoPriceAndNoBrandImage() {
     /* eslint-enable sort-keys */
   };
 
+  function slideTo() {}
+
   return (
     <div css={styles.root}>
       <div css={styles.fakeBackground}>
         <div css={styles.topContent}></div>
         <div css={styles.bottomContent}></div>
       </div>
-      <TopPicksItem show {...data} currentIndex={0} />
+      <TopPicksItem show {...data} currentIndex={0} slideTo={slideTo} />
     </div>
   );
 }
@@ -313,13 +319,15 @@ export function TopPicksItemWithViewMore() {
     /* eslint-enable sort-keys */
   };
 
+  function slideTo() {}
+
   return (
     <div css={styles.root}>
       <div css={styles.fakeBackground}>
         <div css={styles.topContent}></div>
         <div css={styles.bottomContent}></div>
       </div>
-      <TopPicksItem show {...data} currentIndex={0} />
+      <TopPicksItem show {...data} currentIndex={0} slideTo={slideTo} />
     </div>
   );
 }

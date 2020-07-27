@@ -44,6 +44,7 @@ export interface TopPickItemsProps {
     value: number;
   } | null;
   show?: boolean;
+  slideTo: (index: number) => void;
   totalResult?: number | string;
   url?: string | null;
   viewMoreData?: SiteCatalogSummaryTopPicksMore | null;

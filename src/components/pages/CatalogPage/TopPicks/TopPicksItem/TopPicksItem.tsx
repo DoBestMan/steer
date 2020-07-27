@@ -46,10 +46,14 @@ function TopPicksItem(props: TopPickItemsProps) {
     totalResult,
     url,
     viewMoreData,
+    slideTo,
   } = props;
 
   const rootRef = useRef<HTMLDivElement | null>(null);
   const assetRef = useRef<HTMLSpanElement | null>(null);
+  const contentRef = useRef<HTMLAnchorElement | null>(null);
+  const viewMoreRef = useRef<HTMLButtonElement | null>(null);
+  const ctaRef = useRef<HTMLAnchorElement | HTMLButtonElement | null>(null);
   const breakpoints = useBreakpoints();
   const isHovered =
     typeof indexHovered !== 'undefined' && indexHovered === index;
@@ -143,12 +147,42 @@ function TopPicksItem(props: TopPickItemsProps) {
     600,
   ]);
 
+  // This is meant to be for Voice over, during item navigation
+  // When a user selects an item and PRESS, we want the carousel to move and to put the focus on the link with description
+  const onClick = () => {
+    // Move the carousel
+    typeof index !== 'undefined' && slideTo(index);
+
+    /* put focus on best */
+
+    // If view More item
+    if (viewMoreData && viewMoreRef && viewMoreRef.current) {
+      viewMoreRef.current.focus();
+      return;
+    }
+
+    // If no price, or add more vehicle, put the focus on CTA
+    if (
+      !viewMoreData &&
+      (addVehicleInfo || !priceList) &&
+      ctaRef &&
+      ctaRef.current
+    ) {
+      ctaRef.current.focus();
+      return;
+    }
+
+    // Finally, focus on description link by default
+    contentRef && contentRef.current && contentRef.current.focus();
+  };
+
   return (
     <div
       css={rootStyles}
       ref={rootRef}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
+      onClick={onClick}
       aria-labelledby={idForAriaLabbeledBy}
     >
       <span css={styles.topContent}>
@@ -185,6 +219,7 @@ function TopPicksItem(props: TopPickItemsProps) {
                   !isCurrent && styles.unclickable,
                 ]}
                 onClick={exploreMore}
+                ref={viewMoreRef}
               >
                 <span
                   css={[typography.secondaryHeadline, styles.viewMoreTitle]}
@@ -228,6 +263,7 @@ function TopPicksItem(props: TopPickItemsProps) {
         {!addVehicleInfo && url && (
           <BaseLink
             href={url}
+            ref={contentRef}
             css={[
               styles.linkContainer,
               isCurrent && show && styles.linkContainerIsCurrent,
@@ -330,6 +366,7 @@ function TopPicksItem(props: TopPickItemsProps) {
         {!viewMoreData && (
           <span css={[styles.cta, showCta && styles.ctaShow]}>
             <CTA
+              ref={ctaRef}
               customerServiceNumber={customerServiceNumber}
               hasPriceList={priceList ? priceList.length > 0 : false}
               hasAddVehicleInfo={addVehicleInfo}
