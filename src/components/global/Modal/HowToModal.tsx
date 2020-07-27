@@ -59,10 +59,12 @@ function HowToModal({
         <div css={styles.imageWrapper}>
           <Image css={styles.image} src={imageSrc} altText={imageAlt} />
         </div>
-        <div css={styles.alternateSearch}>
-          <h3 css={styles.alternateSearchTitle}>{alternateSearch.title}</h3>
-          <p css={styles.alternateSearchCopy}>{alternateSearch.copy}</p>
-        </div>
+        {alternateSearch && (
+          <div css={styles.alternateSearch}>
+            <h3 css={styles.alternateSearchTitle}>{alternateSearch.title}</h3>
+            <p css={styles.alternateSearchCopy}>{alternateSearch.copy}</p>
+          </div>
+        )}
         <div css={styles.supportPrompt}>
           <h3 css={styles.supportPromptTitle}>{supportHeading}</h3>
           <div css={styles.supportPromptButton}>

@@ -20,7 +20,7 @@ export interface Props {
 export type ContentModalProps = Omit<SiteDynamicModal, 'type'>;
 
 export interface HowToModalProps {
-  alternateSearch: { copy: string; title: string };
+  alternateSearch?: { copy: string; title: string };
   eyebrow: string;
   imageAlt: string;
   imageSrc: string;

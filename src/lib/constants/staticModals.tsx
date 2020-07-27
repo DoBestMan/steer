@@ -206,10 +206,6 @@ const STATIC_MODALS: Record<string, ModalData> = {
   },
   [STATIC_MODAL_IDS.HOW_TO_FIND_YOUR_SIZE]: {
     props: {
-      alternateSearch: {
-        title: ui('search.findTireSize.alternateSearchTitle'),
-        copy: ui('search.findTireSize.alternateSearchCopy'),
-      },
       eyebrow: ui('search.findTireSize.eyebrow'),
       imageAlt: ui('search.findTireSize.imageAlt'),
       imageSrc: '/static/assets/search/find-tire-size.jpg',
