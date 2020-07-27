@@ -109,6 +109,12 @@ export const getHrefWithParams = (
 export const isInRouteList = (route: string, routeList: string[]) =>
   routeList.includes(route.split('?')[0]);
 
+export function redirectToNotFound(response: ServerResponse) {
+  response.setHeader('location', '/not-found');
+  response.statusCode = 302;
+  response.end();
+}
+
 export function validateOrRedirectToNotFound({
   param,
   pattern,
@@ -122,7 +128,5 @@ export function validateOrRedirectToNotFound({
     return;
   }
 
-  response.setHeader('location', '/404');
-  response.statusCode = 302;
-  response.end();
+  redirectToNotFound(response);
 }
