@@ -20,7 +20,11 @@ import { typography } from '~/styles/typography.styles';
 export const CAR_ROTATION_DURATION = 200;
 export const SCENERY_OR_WEATHER_DURATION = 400;
 export const TITLE_DURATION = TIME.MS300;
-const VEHICLE_CONTAINER_DURATION = 6000;
+const VEHICLE_CONTAINER_DURATION = {
+  S: 3000,
+  M: 4000,
+  XL: 5000,
+};
 
 export const animations = {
   /* eslint-disable sort-keys */
@@ -190,17 +194,19 @@ export const styles: StylesMap = {
     fontSize: 0,
     position: 'absolute',
     right: GRID_MARGIN.S,
-    transition: `all ${VEHICLE_CONTAINER_DURATION}ms ${EASING.CUBIC_EASE_OUT}`,
+    transition: `transform ${VEHICLE_CONTAINER_DURATION.S}ms ${EASING.CUBIC_EASE_OUT}`,
     width: '100%',
     willTransform: 'translate',
 
     [MQ.M]: {
       right: GRID_MARGIN.M,
+      transition: `transform ${VEHICLE_CONTAINER_DURATION.M}ms ${EASING.CUBIC_EASE_OUT}`,
     },
     [MQ.L]: {
       right: GRID_MARGIN.L,
     },
     [MQ.XL]: {
+      transition: `transform ${VEHICLE_CONTAINER_DURATION.XL}ms ${EASING.CUBIC_EASE_OUT}`,
       right: GRID_MARGIN.XL,
     },
   },
