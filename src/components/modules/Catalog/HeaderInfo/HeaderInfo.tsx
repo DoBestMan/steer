@@ -56,6 +56,7 @@ export default function HeaderInfo({
     <Link
       css={[styles.action, styles.back]}
       as="button"
+      aria-label={ui('catalog.header.returnToTopPicks')}
       onClick={backToTopPicks}
       icon={ICONS.ARROW_UP}
     />

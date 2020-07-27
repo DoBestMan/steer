@@ -134,6 +134,7 @@
       "adjustSelection": "Please adjust your selections."
     },
     "header": {
+      "returnToTopPicks": "Return to top picks",
       "advancedViewLabel": "Advanced view",
       "back": "Back",
       "dealsFor": "Deals for",
