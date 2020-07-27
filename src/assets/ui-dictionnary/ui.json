@@ -161,7 +161,8 @@
     "summary": {
       "noResultsContactLabel": "Let us help you",
       "noResultsContactDesc": "Call us at ",
-      "noResultsNewSearchLabel": "Or try new search by:",
+      "noResultsNewSearchLabel": "Or try a new search by:",
+      "noResultsNewSearchLabelAlt": "Try a new search by:",
       "noResultsVehicleLabel": "Vehicle",
       "noResultsSizeLabel": "Tire size",
       "noResultsBrandLabel": "Brand",

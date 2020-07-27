@@ -275,7 +275,13 @@ export function NoResultsMessage({
                 </dd>
               </>
             )}
-            <dt>{ui('catalog.summary.noResultsNewSearchLabel')}</dt>
+            <dt>
+              {ui(
+                customerServiceEnabled
+                  ? 'catalog.summary.noResultsNewSearchLabel'
+                  : 'catalog.summary.noResultsNewSearchLabelAlt',
+              )}
+            </dt>
             <dd>
               <ul>
                 {searchByOptions.map((option) => (
