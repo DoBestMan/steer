@@ -281,6 +281,7 @@ export function useSearchState({
     lockSearchStateToTireSize,
     lockSearchStateToVehicle,
     searchState,
+    setHasLockedSearchState,
     setSearchState,
   };
 }

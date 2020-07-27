@@ -88,6 +88,7 @@ export const searchContextMock: SearchContextProps = {
   lockSearchStateToTireSize: () => {},
   lockSearchStateToVehicle: () => {},
   searchQuery: () => {},
+  setHasLockedSearchState: () => {},
   setIsSearchOpen: () => {},
   setRouteQueryParamOptions: () => {},
   setSearchState: () => {},

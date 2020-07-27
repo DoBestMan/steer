@@ -37,6 +37,7 @@ export interface SearchContextProps {
   searchQuery: ({ queryText, queryType }: SearchDataParams) => void;
   searchResults: Results;
   searchState: string;
+  setHasLockedSearchState: (hasLockedSearchState: boolean) => void;
   setIsSearchOpen: (isSearchOpen: boolean) => void;
   setRouteQueryParamOptions: (
     routeQueryParamOptions?: RouteQueryParamOptions,
@@ -71,6 +72,7 @@ function useContextSetup(): SearchContextProps {
     lockSearchStateToTireSize,
     lockSearchStateToVehicle,
     searchState,
+    setHasLockedSearchState,
     setSearchState,
   } = useSearchState({ searchQuery });
 
@@ -108,6 +110,7 @@ function useContextSetup(): SearchContextProps {
     searchQuery,
     searchResults,
     searchState,
+    setHasLockedSearchState,
     setIsSearchOpen,
     setRouteQueryParamOptions,
     setSearchState,

@@ -24,6 +24,7 @@ function SearchModal() {
     searchQuery,
     searchState,
     searchResults,
+    setHasLockedSearchState,
     setSearchState,
     toggleIsSearchOpen,
     setRouteQueryParamOptions,
@@ -53,6 +54,7 @@ function SearchModal() {
     // Clear search results and state when the modal closes
     clearSearchResults();
     setSearchState('');
+    setHasLockedSearchState(false);
     setShouldPreventLinkNavigation(false);
     setRouteQueryParamOptions();
     toggleIsSearchOpen();
