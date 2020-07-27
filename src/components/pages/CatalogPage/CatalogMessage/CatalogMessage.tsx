@@ -9,7 +9,6 @@ import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import Image from '~/components/global/Image/Image';
 import BaseLink from '~/components/global/Link/BaseLink';
-import Loading from '~/components/global/Loading/Loading';
 import Markdown from '~/components/global/Markdown/Markdown';
 import { useSearchContext } from '~/components/modules/Search/Search.context';
 import { SearchStateEnum } from '~/components/modules/Search/Search.types';
@@ -29,15 +28,6 @@ import { STAGES } from '../CatalogPage.constants';
 import { stageToMessageTimeout } from '../CatalogSummary/CatalogSummary.constants';
 import styles from './CatalogMessage.styles';
 import MessageContainer from './components/MessageContainer';
-
-export function LoadingIndicator() {
-  const { message } = useTheme();
-  return (
-    <div css={styles.loadingContainer}>
-      <Loading theme={message.loadingTheme} />
-    </div>
-  );
-}
 
 interface BuildInMessageProps {
   siteCatalogSummaryBuildIn: SiteCatalogSummaryBuildIn | null;
@@ -182,7 +172,7 @@ export function DataMomentMessage({
                     <Button
                       key={id}
                       onClick={function () {
-                        setStage && setStage(STAGES.TOP_PICKS);
+                        setStage && setStage(STAGES.RESULTS);
                       }}
                       style={message.buttonStyle}
                       theme={message.buttonTheme}
@@ -305,10 +295,10 @@ export function NoResultsMessage({
 }
 
 const mapMessageToStage = {
-  [STAGES.LOADING]: LoadingIndicator,
+  [STAGES.LOADING]: null,
   [STAGES.BUILD_IN]: BuildInMessage,
   [STAGES.DATA_MOMENT]: DataMomentMessage,
-  [STAGES.TOP_PICKS]: TopPicks,
+  [STAGES.RESULTS]: TopPicks,
   [STAGES.NO_RESULTS]: NoResultsMessage,
 };
 
@@ -354,11 +344,10 @@ function CatalogMessage({
               {...siteCatalogSummary}
               customerServiceNumber={customerServiceNumber}
               customerServiceEnabled={customerServiceEnabled}
+              openStaticModal={openStaticModal}
               setStage={setStage}
               // used only by top picks
               exploreMore={exploreMore}
-              // used by DataMomentMessage
-              openStaticModal={openStaticModal}
             />
           )}
         </MessageContainer>

@@ -99,7 +99,7 @@ function styledCarContainer({
 
       transform: `${scaleUpTransform} translate3d(${distanceFrontToRearWheel}px, 0, 0)`,
     },
-    [STAGES.TOP_PICKS]: {
+    [STAGES.RESULTS]: {
       '~ .back-wheel-img': {
         opacity: 0,
         transform: `translate3d(-${

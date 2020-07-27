@@ -128,17 +128,6 @@ const styles: StylesMap = {
     padding: 0,
   },
 
-  loadingContainer: {
-    alignItems: 'center',
-    color: COLORS.GLOBAL.WHITE,
-    display: 'flex',
-    height: '100%',
-    justifyContent: 'center',
-    left: 0,
-    position: 'absolute',
-    top: 0,
-    width: '100%',
-  },
   noResultsHeading: {
     marginBottom: SPACING.SIZE_40,
 

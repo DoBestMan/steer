@@ -11,8 +11,6 @@ export interface CatalogPageContextProps {
   isLoading: boolean;
   setIsAdvancedView(isAdvancedView: boolean): void;
   setIsLoading(isLoading: boolean): void;
-  setShowCatalogGrid(showCatalogGrid: boolean): void;
-  showCatalogGrid: boolean;
 }
 
 interface SetupProps {
@@ -20,16 +18,11 @@ interface SetupProps {
     filters: Record<string, string>,
     withoutScroll?: boolean,
   ) => void;
-  showCatalogGridInit?: boolean;
 }
 
 const CatalogPageContext = createContext<CatalogPageContextProps>();
 
-function useContextSetup({
-  showCatalogGridInit = false,
-  handleUpdateFilters,
-}: SetupProps) {
-  const [showCatalogGrid, setShowCatalogGrid] = useState(showCatalogGridInit);
+function useContextSetup({ handleUpdateFilters }: SetupProps) {
   const [isAdvancedView, setIsAdvancedView] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -48,8 +41,6 @@ function useContextSetup({
     isLoading,
     setIsAdvancedView,
     setIsLoading,
-    setShowCatalogGrid,
-    showCatalogGrid,
   };
 }
 
@@ -59,17 +50,14 @@ interface Props {
     filters: Record<string, string>,
     withoutScroll?: boolean,
   ) => void;
-  showCatalogGridInit?: boolean;
 }
 
 export function CatalogPageContextProvider({
   children,
   handleUpdateFilters,
-  showCatalogGridInit,
 }: Props) {
   const value = useContextSetup({
     handleUpdateFilters,
-    showCatalogGridInit,
   });
 
   return (

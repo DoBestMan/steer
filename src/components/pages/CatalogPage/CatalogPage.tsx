@@ -1,6 +1,7 @@
-import { ThemeProvider } from 'emotion-theming';
+import { ThemeProvider, useTheme } from 'emotion-theming';
 
 import Feedback from '~/components/global/Feedback/Feedback';
+import Loading from '~/components/global/Loading/Loading';
 import { useCatalogPageContext } from '~/context/CatalogPage.context';
 import { useCatalogSummaryContext } from '~/context/CatalogSummary.context';
 import { SiteCatalogFilters } from '~/data/models/SiteCatalogFilters';
@@ -11,6 +12,16 @@ import CatalogGrid from './CatalogGrid/CatalogGrid';
 import styles from './CatalogPage.styles';
 import { defaultTheme, headerAdvanced } from './CatalogPage.theme';
 import CatalogSummary from './CatalogSummary/CatalogSummary';
+import { STAGES } from './CatalogSummary/CatalogSummary.constants';
+
+function LoadingIndicator() {
+  const { message } = useTheme();
+  return (
+    <div css={styles.loadingContainer}>
+      <Loading theme={message.loadingTheme} />
+    </div>
+  );
+}
 
 interface Props {
   catalogGridRef: React.Ref<HTMLDivElement>;
@@ -29,23 +40,27 @@ function CatalogPage({
   onPreviewFilters,
   previewFiltersData,
 }: Props) {
-  const { isAdvancedView, showCatalogGrid } = useCatalogPageContext();
-  const { showSummary } = useCatalogSummaryContext();
+  const { isAdvancedView } = useCatalogPageContext();
+  const { contentStage, showSummary, stage } = useCatalogSummaryContext();
 
   const totalResult = siteCatalogProducts.siteCatalogFilters?.totalMatches || 0;
   const hasResults = totalResult > 0;
-  // TODO: use CatalogSummary `stage` to determine if Grid should be visible
-  // page has no top picks and does not come from search OR `showCatalogGrid` is true
-  // TODO: grid must be shown on first render for SEO reasons
-  // `showCatalogGrid` is set within top picks
-  const isGridVisible = (!showSummary && !showCatalogGrid) || showCatalogGrid;
+
+  const showLoadingIndicator = stage === STAGES.LOADING;
+
+  /**
+   * Grid should be visible when `contentStage` is set to `RESULTS`
+   * - on first render, for SEO purposes
+   * - once user transitions into Top Picks from the loading interstitial
+   */
+  const showGrid = contentStage === STAGES.RESULTS;
 
   return (
     <ThemeProvider
       theme={{ ...defaultTheme, ...(isAdvancedView && headerAdvanced) }}
     >
       {showSummary && <CatalogSummary exploreMore={scrollToGrid} />}
-      {isGridVisible && (
+      {showGrid && (
         <>
           <div css={styles.grid} ref={catalogGridRef}>
             <CatalogGrid
@@ -60,6 +75,7 @@ function CatalogPage({
           {hasResults && <Feedback />}
         </>
       )}
+      {showLoadingIndicator && <LoadingIndicator />}
     </ThemeProvider>
   );
 }

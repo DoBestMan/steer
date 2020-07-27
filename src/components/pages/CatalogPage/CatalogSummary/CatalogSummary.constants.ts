@@ -16,7 +16,7 @@ export enum STAGES {
   DATA_MOMENT = 'dataMoment', // continue, or choose tire size
   LOADING = 'loading', // display loading indicator
   NO_RESULTS = 'noResults',
-  TOP_PICKS = 'topPicks',
+  RESULTS = 'results',
 }
 
 const overlayIn = 600;
@@ -29,7 +29,7 @@ export const stageToMessageTimeout = {
     enter: stageTransition / 2,
     exit: stageTransition / 2,
   },
-  [STAGES.TOP_PICKS]: { enter: stageTransition / 2, exit: stageTransition / 2 },
+  [STAGES.RESULTS]: { enter: stageTransition / 2, exit: stageTransition / 2 },
   [STAGES.NO_RESULTS]: { enter: overlayIn, exit: stageTransition / 2 },
 };
 
@@ -77,7 +77,7 @@ export const MEASUREMENTS = {
       L: 'max(66.6vh, 408px)',
     },
   },
-  [STAGES.TOP_PICKS]: {
+  [STAGES.RESULTS]: {
     CONTENT_MIN_HEIGHT: {
       S: '40%',
       M: '35%',

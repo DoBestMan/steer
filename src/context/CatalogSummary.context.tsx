@@ -67,6 +67,8 @@ export function useContextSetup({
 }: SetupProps): CatalogSummaryContextProps {
   const [state, setState] = useState<CatalogSummaryState>({
     ...INITIAL_STATE,
+    // Top Picks must be in the DOM on first render for SEO purposes
+    contentStage: STAGES.RESULTS,
     showLoadingInterstitial: comesFromSearch,
   });
   const {
@@ -93,7 +95,12 @@ export function useContextSetup({
       return;
     }
 
-    setState({ ...state, dataLoadingStatus: LOADING_STATUS.LOADING });
+    setState({
+      ...state,
+      // Reset contentStage to LOADING after first render
+      contentStage: STAGES.LOADING,
+      dataLoadingStatus: LOADING_STATUS.LOADING,
+    });
 
     const timeout = setTimeout(() => {
       setState({ ...state, dataLoadingStatus: LOADING_STATUS.LOADED });
@@ -136,18 +143,22 @@ export function useContextSetup({
     if (showLoadingInterstitial && hasPromptCTAList) {
       setState({
         ...state,
+        contentStage: STAGES.BUILD_IN,
         stage: STAGES.BUILD_IN,
       });
     } else if (hasPromptMustShow) {
+      const newStage = hasNoResults ? STAGES.NO_RESULTS : STAGES.DATA_MOMENT;
       setState({
         ...state,
-        stage: hasNoResults ? STAGES.NO_RESULTS : STAGES.DATA_MOMENT,
+        contentStage: newStage,
+        stage: newStage,
       });
     } else {
       setState({
         ...state,
+        contentStage: STAGES.RESULTS,
         showSummary: hasTopPicks,
-        stage: STAGES.TOP_PICKS,
+        stage: STAGES.RESULTS,
       });
     }
   }, [

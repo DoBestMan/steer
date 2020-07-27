@@ -30,7 +30,7 @@ function styledContent(props: Props) {
   };
 
   switch (stage) {
-    case STAGES.TOP_PICKS:
+    case STAGES.RESULTS:
       return [
         base,
         {

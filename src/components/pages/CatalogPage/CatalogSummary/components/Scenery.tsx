@@ -41,7 +41,7 @@ function styledSceneryContainer({ stage }: Props) {
       }`,
       opacity: 0,
     },
-    [STAGES.TOP_PICKS]: {
+    [STAGES.RESULTS]: {
       // There is no transition from a stage with scenery background
       // to Top Picks
       display: 'none',

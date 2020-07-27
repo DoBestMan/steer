@@ -99,7 +99,7 @@ function styledMessageContainer({
           },
         },
       ];
-    case STAGES.TOP_PICKS:
+    case STAGES.RESULTS:
       return [
         baseStyles,
         {

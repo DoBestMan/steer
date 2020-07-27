@@ -36,7 +36,7 @@ function styledVehicleContainer({ showLoadingInterstitial, stage }: Props) {
       // Fade in vehicle as build-in screen slides down
       transition: `opacity ${TIMINGS.OVERLAY_IN}ms ${EASING.CUBIC_EASE_IN_OUT}`,
     },
-    [STAGES.TOP_PICKS]: {
+    [STAGES.RESULTS]: {
       // TODO: integrate into Car component transition
       // Centers the front wheel
       transform: `translate3d(calc(${GRID_MARGIN.S}px - 50vw + ${

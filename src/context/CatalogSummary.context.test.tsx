@@ -107,6 +107,10 @@ describe('useCatalogSummaryContextSetup', () => {
       }),
     );
 
+    // TODO: `contentStage` should be `STAGES.RESULTS` in the
+    // initial state, but the equality check is not done until
+    // the `contentStage` has been reset by a `setState` call in the
+    // context hook.
     expect(result.current).toEqual(
       expect.objectContaining({
         contentStage: STAGES.LOADING,
@@ -141,7 +145,7 @@ describe('useCatalogSummaryContextSetup', () => {
           comesFromSearch: false,
         },
         expected: {
-          stage: STAGES.TOP_PICKS,
+          stage: STAGES.RESULTS,
           showSummary: true,
         },
       },
@@ -154,7 +158,7 @@ describe('useCatalogSummaryContextSetup', () => {
           comesFromSearch: true,
         },
         expected: {
-          stage: STAGES.TOP_PICKS,
+          stage: STAGES.RESULTS,
           showSummary: false,
         },
       },
@@ -167,7 +171,7 @@ describe('useCatalogSummaryContextSetup', () => {
           comesFromSearch: false,
         },
         expected: {
-          stage: STAGES.TOP_PICKS,
+          stage: STAGES.RESULTS,
           showSummary: false,
         },
       },

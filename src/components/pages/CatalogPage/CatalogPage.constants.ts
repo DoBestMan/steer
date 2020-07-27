@@ -3,5 +3,5 @@ export enum STAGES {
   DATA_MOMENT = 'dataMoment',
   LOADING = 'loading',
   NO_RESULTS = 'noResults',
-  TOP_PICKS = 'topPicks',
+  RESULTS = 'results',
 }

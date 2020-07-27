@@ -155,17 +155,11 @@ function CatalogPageContainer({
    * TODO:
    * - Combine CatalogPageContextProvider & CatalogSummaryContextProvider
    *   into a single context instance
-   * - Move CatalogSummary loading screen up to the CatalogPage component
-   * - `TOP_PICKS` should be the default stage in CatalogSummary context,
-   *   so that it shows on first render (for SEO reasons)
    */
   return (
     <>
       {meta && <Meta {...meta} />}
-      <CatalogPageContextProvider
-        handleUpdateFilters={handleUpdateFilters}
-        showCatalogGridInit={isSearchOpen}
-      >
+      <CatalogPageContextProvider handleUpdateFilters={handleUpdateFilters}>
         <CatalogSummaryContextProvider
           comesFromSearch={isSearchOpen}
           hasLocalData={hasLocalData}

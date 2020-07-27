@@ -11,7 +11,7 @@ interface Props {
 function styledBackgroundContainer({ stage }: Props) {
   const base: CSSStyles = {
     height:
-      stage === STAGES.TOP_PICKS
+      stage === STAGES.RESULTS
         ? `calc(100% - ${EXPLORE_BUTTON_HEIGHT.S}px)`
         : '100%',
     left: 0,
@@ -21,14 +21,14 @@ function styledBackgroundContainer({ stage }: Props) {
 
     [MQ.M]: {
       height:
-        stage === STAGES.TOP_PICKS
+        stage === STAGES.RESULTS
           ? `calc(100% - ${EXPLORE_BUTTON_HEIGHT.M}px)`
           : '100%',
     },
 
     [MQ.L]: {
       height:
-        stage === STAGES.TOP_PICKS
+        stage === STAGES.RESULTS
           ? `calc(100% - ${EXPLORE_BUTTON_HEIGHT.L}px)`
           : '100%',
     },

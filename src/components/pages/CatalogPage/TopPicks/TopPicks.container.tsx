@@ -1,8 +1,4 @@
-import { useEffect } from 'react';
-
 import { useSearchContext } from '~/components/modules/Search/Search.context';
-import { STAGES } from '~/components/pages/CatalogPage/CatalogSummary/CatalogSummary.constants';
-import { useCatalogPageContext } from '~/context/CatalogPage.context';
 import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
 import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
 import { SiteCatalogSummaryMeta } from '~/data/models/SiteCatalogSummaryMeta';
@@ -13,7 +9,6 @@ import TopPicks from './TopPicks';
 
 interface Props {
   exploreMore: () => void;
-  setStage(stage: STAGES): void;
   siteCatalogSummaryMeta: SiteCatalogSummaryMeta | null;
   siteCatalogSummaryTopPicksList: Array<SiteCatalogSummaryTopPickItem>;
   siteCatalogSummaryTopPicksMore: SiteCatalogSummaryTopPicksMore | null;
@@ -26,7 +21,6 @@ function TopPicksContainer({
   siteCatalogSummaryTopPicksMore,
 }: Props) {
   const { locationString } = useUserPersonalizationContext();
-  const { setShowCatalogGrid } = useCatalogPageContext();
   const { lockSearchStateToVehicle, setIsSearchOpen } = useSearchContext();
   const { customerServiceNumber } = useSiteGlobalsContext();
 
@@ -38,11 +32,6 @@ function TopPicksContainer({
     lockSearchStateToVehicle();
     setIsSearchOpen(true);
   };
-
-  // show catalog grid anyway
-  useEffect(() => {
-    setShowCatalogGrid(true);
-  });
 
   return (
     <TopPicks
