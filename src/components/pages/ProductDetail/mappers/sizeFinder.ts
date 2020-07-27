@@ -1,19 +1,16 @@
-import { NextRouter } from 'next/router';
-
 import { SiteProduct } from '~/data/models/SiteProduct';
 
 import { ParsedSizeFinderProps } from '../ProductDetail.hooks';
 
 export function mapDataToSizeFinder({
+  rearSize,
   siteProduct: { siteProductLineAvailableSizeList },
-  router,
+  tireSize,
 }: {
-  router: NextRouter;
+  rearSize?: string;
   siteProduct: SiteProduct;
+  tireSize?: string;
 }): ParsedSizeFinderProps | null {
-  const { query } = router;
-  const { tireSize, rearSize } = query;
-
   if (rearSize) {
     return null;
   }

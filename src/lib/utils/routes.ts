@@ -66,10 +66,14 @@ export function getParam(param: string | string[]): string {
  * Return stringified query param
  */
 export function getStringifiedParams(
-  params: Record<string, string | string[]>,
+  params: Record<string, string | string[] | null | undefined>,
 ): Record<string, string> {
   const queryParams: Record<string, string> = {};
   Object.entries(params).map(([key, value]) => {
+    if (value === null || value === undefined) {
+      return;
+    }
+
     queryParams[key] = getParam(value);
   });
   return queryParams;
@@ -129,4 +133,25 @@ export function validateOrRedirectToNotFound({
   }
 
   redirectToNotFound(response);
+}
+
+export function getParsedHash(path: string): ParsedQuery | null {
+  if (!path.includes('#')) {
+    return null;
+  }
+
+  const [hash] = path.match(/[^#]*$/g) || [];
+  if (!hash) {
+    return null;
+  }
+
+  const parsedHash = queryString.parse(hash);
+
+  if (!Object.values(parsedHash).some((item) => item !== null)) {
+    return {
+      anchor: Object.keys(parsedHash)[0].toString(),
+    };
+  }
+
+  return queryString.parse(hash);
 }

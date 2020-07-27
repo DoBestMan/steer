@@ -21,11 +21,7 @@ export interface ProductInfoProps {
   brandURL?: string;
   callForPricing?: boolean;
   customerServiceNumber: { display: string; value: string };
-  isSizeSelectorOpen?: boolean;
   loadSpeedRating?: string;
-  onChangeSize: (value: string) => void;
-  onClickChangeSize: () => void;
-  onCloseSizeSelector: () => void;
   price?: SitePrice | null;
   priceLabel?: string | null;
   productName: string;
@@ -60,10 +56,7 @@ function ProductInfo({
   callForPricing,
   customerServiceNumber,
   volatileAvailability,
-  isSizeSelectorOpen,
   loadSpeedRating,
-  onChangeSize,
-  onClickChangeSize,
   openDynamicModal,
   price,
   priceLabel,
@@ -129,10 +122,7 @@ function ProductInfo({
               availableSizes={availableSizes}
               size={size}
               loadSpeedRating={loadSpeedRating}
-              isSizeSelectorOpen={isSizeSelectorOpen}
               sizeFinder={sizeFinder}
-              onChangeSize={onChangeSize}
-              onClickChangeSize={onClickChangeSize}
             />
           </div>
           <Rating rating={rating} />

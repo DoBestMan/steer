@@ -1,5 +1,3 @@
-import { NextRouter } from 'next/router';
-
 import { SiteProduct } from '~/data/models/SiteProduct';
 import { ROUTE_MAP, ROUTES } from '~/lib/constants';
 import { interpolateRoute } from '~/lib/utils/routes';
@@ -12,15 +10,13 @@ export interface RecirculationSize {
 
 export function mapDataToRecirculationSize({
   siteProduct: { siteProductLineSizeDetail, siteProductLineRearSizeDetail },
-  router,
+  tireSize,
+  rearSize,
 }: {
-  router: NextRouter;
+  rearSize?: string;
   siteProduct: SiteProduct;
+  tireSize?: string;
 }): RecirculationSize | null {
-  const {
-    query: { tireSize, rearSize },
-  } = router;
-
   if (!tireSize || !siteProductLineSizeDetail) {
     return null;
   }

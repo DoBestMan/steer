@@ -1,20 +1,11 @@
 import { siteProductMock } from './ProductDetail.mock';
 import { mapDataToRecirculationSize } from './recirculationSize';
 
-const routerMock = {
-  pathname: '/brands/[brand]/[productLine]',
-  query: {
-    brand: 'continental-tires',
-    productLine: 'dh2',
-  },
-} as any;
-
 describe('pages/ProductDetails/mappers/recirculationSize', () => {
   it('returns null in case of product line page (no size)', () => {
     expect(
       mapDataToRecirculationSize({
         siteProduct: siteProductMock,
-        router: routerMock,
       }),
     ).toBeNull();
   });
@@ -23,13 +14,7 @@ describe('pages/ProductDetails/mappers/recirculationSize', () => {
     expect(
       mapDataToRecirculationSize({
         siteProduct: siteProductMock,
-        router: {
-          ...routerMock,
-          query: {
-            ...routerMock.query,
-            tireSize: 'p195-45r16',
-          },
-        },
+        tireSize: 'p195-45r16',
       }),
     ).toStrictEqual({
       label: 'See all tires in the size 215/50 R17',
@@ -41,14 +26,8 @@ describe('pages/ProductDetails/mappers/recirculationSize', () => {
     expect(
       mapDataToRecirculationSize({
         siteProduct: siteProductMock,
-        router: {
-          ...routerMock,
-          query: {
-            ...routerMock.query,
-            tireSize: 'p195-45r16',
-            rearSize: 'p195-45r19',
-          },
-        },
+        rearSize: 'p195-45r19',
+        tireSize: 'p195-45r16',
       }),
     ).toStrictEqual({
       label: 'See all tires in front 215/50 R17 and rear 215/50 R19',

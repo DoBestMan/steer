@@ -2,6 +2,7 @@ import { CATALOG_ROUTES } from '~/lib/constants';
 
 import { validBrandQuery } from './regex';
 import {
+  getParsedHash,
   getUrlObject,
   interpolateRoute,
   isInRouteList,
@@ -118,6 +119,59 @@ describe('utils/routes', () => {
 
       expect(mockSetHeader.mock.calls.length).toBe(3);
       expect(mockResponse.statusCode).toBe(302);
+    });
+  });
+
+  describe('getParsedHash', () => {
+    it('returns null in case of missing hash', () => {
+      expect(
+        getParsedHash('/brands/continental-tires/surecontact-rx'),
+      ).toBeNull();
+      expect(
+        getParsedHash(
+          '/brands/continental-tires/surecontact-rx?tireSize=200-r14',
+        ),
+      ).toBeNull();
+    });
+
+    it('returns null in case of regular/anchor hash (no hashstring)', () => {
+      expect(
+        getParsedHash(
+          '/brands/continental-tires/surecontact-rx#section-to-anchor',
+        ),
+      ).toEqual({ anchor: 'section-to-anchor' });
+    });
+
+    it('returns parsed single hash', () => {
+      expect(
+        getParsedHash(
+          '/brands/continental-tires/surecontact-rx#tireSize=200-r14',
+        ),
+      ).toEqual({
+        tireSize: '200-r14',
+      });
+    });
+
+    it('returns parsed multiple hash', () => {
+      expect(
+        getParsedHash(
+          '/brands/continental-tires/surecontact-rx#tireSize=200-r14&rearSize=200-r15',
+        ),
+      ).toEqual({
+        tireSize: '200-r14',
+        rearSize: '200-r15',
+      });
+    });
+
+    it('returns parsed multiple hash with possible empty value', () => {
+      expect(
+        getParsedHash(
+          '/brands/continental-tires/surecontact-rx#tireSize=&rearSize=200-r15',
+        ),
+      ).toEqual({
+        tireSize: '',
+        rearSize: '200-r15',
+      });
     });
   });
 });

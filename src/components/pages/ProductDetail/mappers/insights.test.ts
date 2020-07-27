@@ -2,8 +2,8 @@ import { SIZE_CHECK_STATES } from '~/components/modules/PDP/Insights/Insights.ty
 
 import { mapDataToInsights } from './insights';
 import {
+  productDetailContextMock,
   routerMock,
-  routerWithTireSizeMock,
   siteProductMock,
   userPersonalizationContextMock,
 } from './ProductDetail.mock';
@@ -14,10 +14,11 @@ describe('pages/ProductDetails/mappers/insights', () => {
   it('returns parsed insights props', () => {
     expect(
       mapDataToInsights({
-        handleChangeSize: () => {},
         isLoadingData: false,
-        router: routerWithTireSizeMock,
+        productDetail: productDetailContextMock,
+        router: routerMock,
         siteProduct: siteProductMock,
+        tireSize: '100-40r15',
         userPersonalization: userPersonalizationContextMock,
       }),
     ).toMatchObject({
@@ -42,19 +43,14 @@ describe('pages/ProductDetails/mappers/insights', () => {
   it('returns insights props with no fitting information', () => {
     expect(
       mapDataToInsights({
-        handleChangeSize: () => {},
         isLoadingData: false,
-        router: {
-          ...routerMock,
-          query: {
-            ...routerMock.query,
-            tireSize: '100-40r17',
-          },
-        },
+        productDetail: productDetailContextMock,
+        router: routerMock,
         siteProduct: {
           ...siteProductMock,
           siteProductLineSizeDetail: null,
         },
+        tireSize: '100-40r17',
         userPersonalization: {
           ...userPersonalizationContextMock,
           vehicle: null,
@@ -70,10 +66,11 @@ describe('pages/ProductDetails/mappers/insights', () => {
   it('returns insights props with no vehicle information', () => {
     expect(
       mapDataToInsights({
-        handleChangeSize: () => {},
         isLoadingData: false,
-        router: routerWithTireSizeMock,
+        productDetail: productDetailContextMock,
+        router: routerMock,
         siteProduct: siteProductMock,
+        tireSize: '100-40r15',
         userPersonalization: {
           ...userPersonalizationContextMock,
           vehicle: null,
@@ -89,10 +86,11 @@ describe('pages/ProductDetails/mappers/insights', () => {
   it('returns insights props that does not fit the vehicle', () => {
     expect(
       mapDataToInsights({
-        handleChangeSize: () => {},
         isLoadingData: false,
-        router: routerWithTireSizeMock,
+        productDetail: productDetailContextMock,
+        router: routerMock,
         siteProduct: siteProductMock,
+        tireSize: '100-40r15',
         userPersonalization: userPersonalizationContextMock,
       }),
     ).toMatchObject({
@@ -105,16 +103,11 @@ describe('pages/ProductDetails/mappers/insights', () => {
   it('returns insights props that fits the vehicle', () => {
     expect(
       mapDataToInsights({
-        handleChangeSize: () => {},
         isLoadingData: false,
-        router: {
-          ...routerWithTireSizeMock,
-          query: {
-            ...routerWithTireSizeMock.query,
-            tireSize: '100-40r17',
-          },
-        },
+        productDetail: productDetailContextMock,
+        router: routerMock,
         siteProduct: siteProductMock,
+        tireSize: '100-40r17',
         userPersonalization: userPersonalizationContextMock,
       }),
     ).toMatchObject({
@@ -127,8 +120,8 @@ describe('pages/ProductDetails/mappers/insights', () => {
   it('returns insights props that fits the tire line', () => {
     expect(
       mapDataToInsights({
-        handleChangeSize: () => {},
         isLoadingData: false,
+        productDetail: productDetailContextMock,
         router: routerMock,
         siteProduct: siteProductMock,
         userPersonalization: userPersonalizationContextMock,
@@ -143,8 +136,8 @@ describe('pages/ProductDetails/mappers/insights', () => {
   it('returns insights props that does not fit the tire line', () => {
     expect(
       mapDataToInsights({
-        handleChangeSize: () => {},
         isLoadingData: false,
+        productDetail: productDetailContextMock,
         router: routerMock,
         siteProduct: {
           ...siteProductMock,

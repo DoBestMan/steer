@@ -39,12 +39,8 @@ function ProductDetail({ serverData }: ProductDetailData) {
     insights,
     installation,
     isPLA,
-    isSizeSelectorOpen,
     linkingData,
     meta,
-    onChangeSize,
-    onClickChangeSize,
-    onCloseSizeSelector,
     productInfo,
     recirculation,
     recirculationSize,
@@ -88,10 +84,6 @@ function ProductDetail({ serverData }: ProductDetailData) {
               <GridItem fullbleedL>
                 <ProductInfo
                   sizeFinder={sizeFinder}
-                  isSizeSelectorOpen={isSizeSelectorOpen}
-                  onChangeSize={onChangeSize}
-                  onClickChangeSize={onClickChangeSize}
-                  onCloseSizeSelector={onCloseSizeSelector}
                   openDynamicModal={openDynamicModal}
                   {...productInfo}
                 />

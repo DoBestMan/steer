@@ -53,7 +53,7 @@ export function useApiData<T>({
         includeUserZip,
         method: 'get',
         params,
-        query,
+        query: { ...query }, // Clones the object to prevent mutation issues
       });
 
       setHasLocalData(true);

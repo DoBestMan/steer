@@ -25,15 +25,7 @@ export function mapDataToProductInfo({
   router: NextRouter;
   siteProduct: SiteProduct;
   siteProductReviews: SiteProductReviews;
-}): Omit<
-  ProductInfoProps,
-  | 'onChangeSize'
-  | 'onClickChangeSize'
-  | 'onCloseSizeSelector'
-  | 'handleChangeSize'
-  | 'sizeFinder'
-  | 'isSizeSelectorOpen'
-> {
+}): Omit<ProductInfoProps, 'sizeFinder'> {
   const {
     siteProductLine,
     siteProductLineSizeDetail,

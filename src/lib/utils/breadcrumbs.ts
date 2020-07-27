@@ -30,7 +30,7 @@ export function mapPathnameToBreadcrumbs({
   querystringNodeLabel?: string | null;
 }): BreadcrumbsItem[] {
   const splitPathname = pathname.match(new RegExp(absoluteUrlGroups, 'g'));
-  const querystring = asPath.match(/\?(.*)/g)?.pop();
+  const [querystring] = asPath.match(/[^(#?)]*$/g) || [];
 
   const intermediaryBreadcrumbs = splitPathname?.reduce<
     BreadcrumbsItemWithPath[]

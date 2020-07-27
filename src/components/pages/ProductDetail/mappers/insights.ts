@@ -9,6 +9,7 @@ import { VehicleMetadata } from '~/data/models/VehicleMetadata';
 import { ROUTE_MAP, ROUTES } from '~/lib/constants';
 import { interpolateRoute } from '~/lib/utils/routes';
 
+import { ProductDetailContextProps } from '../ProductDetail.context';
 import { CONSTANTS } from '../ProductDetail.hooks';
 
 function getSizeCheckState({
@@ -64,26 +65,28 @@ function getSizeCheckState({
 }
 
 export function mapDataToInsights({
-  handleChangeSize,
   isLoadingData,
+  productDetail,
+  rearSize,
   router,
   siteProduct: {
     siteProductInsights,
     siteProductLineAvailableSizeList,
     siteProductLineSizeDetail,
   },
+  tireSize,
   userPersonalization,
 }: {
-  handleChangeSize: (tireSize: string) => void;
   isLoadingData: boolean;
+  productDetail: ProductDetailContextProps;
+  rearSize?: string;
   router: NextRouter;
   siteProduct: SiteProduct;
+  tireSize?: string;
   userPersonalization: UserPersonalizationProps;
 }): Omit<InsightsProps, 'handleChangeLocation'> {
+  const { changeSize } = productDetail;
   const { vehicle, unselectVehicle } = userPersonalization;
-  const { query } = router;
-  const tireSize = query?.tireSize;
-  const rearSize = query?.rearSize;
   const showFitBar =
     (!!tireSize && !!siteProductLineSizeDetail) ||
     (!!vehicle && !isLoadingData);
@@ -103,7 +106,7 @@ export function mapDataToInsights({
       return;
     }
 
-    handleChangeSize(firstAvailableSize.siteQueryParams.tireSize);
+    changeSize(firstAvailableSize.siteQueryParams.tireSize);
   };
 
   const onFindTiresThatFit = () => {

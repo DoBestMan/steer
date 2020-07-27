@@ -1,7 +1,10 @@
+import { useState } from 'react';
+
 import Dropdown from '~/components/global/Dropdown/Dropdown';
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import SizeFinder from '~/components/modules/PDP/SizeFinder/SizeFinder';
+import { useProductDetailContext } from '~/components/pages/ProductDetail/ProductDetail.context';
 import { useModalContext } from '~/context/Modal.context';
 import { ui } from '~/lib/utils/ui-dictionary';
 
@@ -10,27 +13,27 @@ import styles from './SizeButton.styles';
 
 type Props = Pick<
   ProductInfoProps,
-  | 'size'
-  | 'loadSpeedRating'
-  | 'availableSizes'
-  | 'onClickChangeSize'
-  | 'onChangeSize'
-  | 'isSizeSelectorOpen'
-  | 'sizeFinder'
+  'size' | 'loadSpeedRating' | 'availableSizes' | 'sizeFinder'
 >;
 
-type RenderSizeFinderProps = Pick<
-  Props,
-  'isSizeSelectorOpen' | 'onClickChangeSize' | 'onChangeSize' | 'sizeFinder'
->;
+type RenderSizeFinderProps = Pick<Props, 'sizeFinder'> & {
+  isOpen: boolean;
+  onClose: () => void;
+};
 
 function RenderSizeFinder({
-  isSizeSelectorOpen,
-  onClickChangeSize,
-  onChangeSize,
   sizeFinder,
+  isOpen,
+  onClose,
 }: RenderSizeFinderProps) {
   const { isModalOpen } = useModalContext();
+
+  const { changeSize } = useProductDetailContext();
+
+  function handleChangeSize(value: string) {
+    changeSize(value);
+    onClose();
+  }
 
   if (!sizeFinder) {
     return null;
@@ -40,10 +43,10 @@ function RenderSizeFinder({
     <Dropdown
       shouldActivateListeners={!isModalOpen}
       contentLabel={ui('pdp.productInfo.selectSizeLabel')}
-      isOpen={!!isSizeSelectorOpen}
-      onClose={onClickChangeSize}
+      isOpen={!!isOpen}
+      onClose={onClose}
     >
-      <SizeFinder onChange={onChangeSize} {...sizeFinder} />
+      <SizeFinder onChange={handleChangeSize} {...sizeFinder} />
     </Dropdown>
   );
 }
@@ -52,11 +55,18 @@ function SizeButton({
   availableSizes,
   size,
   loadSpeedRating,
-  onChangeSize,
-  onClickChangeSize,
-  isSizeSelectorOpen,
   sizeFinder,
 }: Props) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  function handleClickButton() {
+    setIsOpen((isOpen) => !isOpen);
+  }
+
+  function handleClose() {
+    setIsOpen(false);
+  }
+
   if (!availableSizes) {
     return null;
   }
@@ -79,20 +89,19 @@ function SizeButton({
     return (
       <>
         <button
-          aria-expanded={isSizeSelectorOpen}
+          aria-expanded={isOpen}
           className="dropdown-button"
           type="button"
           css={[styles.root, styles.rootNoSizeSelected]}
-          onClick={onClickChangeSize}
+          onClick={handleClickButton}
           aria-label={`${label}, ${ui('pdp.productInfo.selectSizeLabel')}`}
         >
           {label}
           <Icon name={ICONS.CHEVRON_DOWN} css={styles.icon} />
         </button>
         <RenderSizeFinder
-          isSizeSelectorOpen={isSizeSelectorOpen}
-          onClickChangeSize={onClickChangeSize}
-          onChangeSize={onChangeSize}
+          isOpen={isOpen}
+          onClose={handleClose}
           sizeFinder={sizeFinder}
         />
       </>
@@ -102,11 +111,11 @@ function SizeButton({
   return (
     <>
       <button
-        aria-expanded={isSizeSelectorOpen}
+        aria-expanded={isOpen}
         className="dropdown-button"
         type="button"
         css={styles.root}
-        onClick={onClickChangeSize}
+        onClick={handleClickButton}
         aria-label={`${size} ${loadSpeedRating}, ${ui(
           'pdp.productInfo.changeSizeLabel',
         )}`}
@@ -117,9 +126,8 @@ function SizeButton({
         <Icon name={ICONS.CHEVRON_DOWN} css={styles.icon} />
       </button>
       <RenderSizeFinder
-        isSizeSelectorOpen={isSizeSelectorOpen}
-        onClickChangeSize={onClickChangeSize}
-        onChangeSize={onChangeSize}
+        isOpen={isOpen}
+        onClose={handleClose}
         sizeFinder={sizeFinder}
       />
     </>

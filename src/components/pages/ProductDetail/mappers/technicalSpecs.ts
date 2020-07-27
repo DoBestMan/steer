@@ -71,7 +71,7 @@ export function mapDataToTechnicalSpecs({
         const querystring = queryString.stringify(
           Object.assign(queryParams, itemQueryParams),
         );
-        const link = `${baseLink}?${querystring}`;
+        const link = `${baseLink}#${querystring}`;
 
         return {
           label: `${item.size} ${item.loadSpeedRating}`,

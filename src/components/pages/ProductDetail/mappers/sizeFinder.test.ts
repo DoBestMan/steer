@@ -1,26 +1,12 @@
 import { siteProductMock } from './ProductDetail.mock';
 import { mapDataToSizeFinder } from './sizeFinder';
 
-const routerMock = {
-  pathname: '/brands/[brandName]/[productLine]',
-  query: {
-    brandName: 'continental-tires',
-    productLine: 'dh2',
-  },
-} as any;
-
 describe('pages/ProductDetails/mappers/sizeFinder', () => {
   it('returns parsed size finder props', () => {
     expect(
       mapDataToSizeFinder({
         siteProduct: siteProductMock,
-        router: {
-          ...routerMock,
-          query: {
-            ...routerMock.query,
-            tireSize: 'p195-45r16',
-          },
-        },
+        tireSize: 'p195-45r16',
       }),
     ).toMatchObject({
       sizes: [

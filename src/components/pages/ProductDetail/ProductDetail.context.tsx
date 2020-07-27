@@ -1,9 +1,18 @@
-import { ReactNode, useCallback, useState } from 'react';
+import Router, { useRouter } from 'next/router';
+import queryString, { ParsedQuery } from 'query-string';
+import { ParsedUrlQuery } from 'querystring';
+import { ReactNode, useCallback, useEffect, useState } from 'react';
 
 import { useSearchContext } from '~/components/modules/Search/Search.context';
 import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
+import { VehicleMetadata } from '~/data/models/VehicleMetadata';
 import { createContext } from '~/lib/utils/context';
 import { getLegacyCheckoutURL } from '~/lib/utils/legacy-routes';
+import {
+  getParsedHash,
+  getStringifiedParams,
+  interpolateRoute,
+} from '~/lib/utils/routes';
 import { ProductDetailResponse } from '~/pages/api/product-detail';
 
 interface Props {
@@ -18,14 +27,32 @@ interface Quantity {
 
 export interface ProductDetailContextProps {
   addToCart: ({ shouldAddCoverage }: { shouldAddCoverage: boolean }) => void;
+  changeSize: (value: string) => void;
   data: ProductDetailResponse | null;
   quantity: Quantity;
+  queryParams: Record<string, string>;
   searchForVehicle: () => void;
   setData: (_: ProductDetailResponse) => void;
   setQuantity: (_: Quantity) => void;
 }
 
 const ProductDetailContext = createContext<ProductDetailContextProps>();
+
+function getQueryParams({
+  hashParams,
+  queryParams,
+  vehicle,
+}: {
+  hashParams: ParsedQuery | null;
+  queryParams: ParsedUrlQuery;
+  vehicle: VehicleMetadata | null;
+}) {
+  return getStringifiedParams({
+    ...queryParams,
+    ...hashParams,
+    ...vehicle,
+  });
+}
 
 function useContextSetup({
   serverData,
@@ -34,10 +61,20 @@ function useContextSetup({
 }): ProductDetailContextProps {
   const { userPersonalizationData } = useUserPersonalizationContext();
   const [data, setData] = useState<ProductDetailResponse | null>(serverData);
-  const [quantity, setQuantity] = useState<Quantity>({
+  const router = useRouter();
+  const { vehicle } = useUserPersonalizationContext();
+  const { query, asPath } = router;
+  const [quantity, setQuantity] = useState<{ front: number; rear?: number }>({
     front: 0,
     rear: 0,
   });
+  const [hashParams, setHashParams] = useState(getParsedHash(asPath));
+  const queryParams = getQueryParams({
+    hashParams,
+    queryParams: query,
+    vehicle,
+  });
+
   const {
     lockSearchStateToVehicle,
     setShouldPreventLinkNavigation,
@@ -53,6 +90,30 @@ function useContextSetup({
     setShouldPreventLinkNavigation,
     setIsSearchOpen,
   ]);
+
+  const onHashChange = useCallback(
+    (url) => {
+      const newHashParams = getParsedHash(url);
+      setHashParams(newHashParams);
+
+      window.scrollTo({
+        top: 0,
+      });
+    },
+    [setHashParams],
+  );
+
+  useEffect(() => {
+    Router.events.on('hashChangeComplete', onHashChange);
+
+    return () => {
+      Router.events.off('hashChangeComplete', onHashChange);
+    };
+  }, [onHashChange]);
+
+  useEffect(() => {
+    setHashParams(getParsedHash(asPath));
+  }, [asPath]);
 
   const addToCart = useCallback(
     ({ shouldAddCoverage }: { shouldAddCoverage: boolean }) => {
@@ -76,10 +137,29 @@ function useContextSetup({
     [data, quantity, userPersonalizationData],
   );
 
+  const changeSize = useCallback(
+    (value) => {
+      const interpolatedRoute = interpolateRoute(router.pathname, queryParams);
+      const querystring = queryString.stringify({
+        ...hashParams,
+        tireSize: value,
+        rearSize: undefined,
+      });
+
+      router.push(
+        `${router.pathname}#${querystring}`,
+        `${interpolatedRoute}#${querystring}`,
+      );
+    },
+    [queryParams, router, hashParams],
+  );
+
   return {
     addToCart,
+    changeSize,
     data,
     quantity,
+    queryParams,
     searchForVehicle,
     setData,
     setQuantity,

@@ -18,6 +18,8 @@ import { SiteYouTubeVideoTypeEnum } from '~/data/models/SiteYouTubeVideo';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 import { PRODUCT_IMAGE_TYPES } from '~/lib/constants/productImage.types';
 
+import { ProductDetailContextProps } from '../ProductDetail.context';
+
 export const globalsMock = {
   customerServiceEnabled: true,
   customerServiceNumber: {
@@ -88,11 +90,11 @@ export const searchContextMock: SearchContextProps = {
   lockSearchStateToTireSize: () => {},
   lockSearchStateToVehicle: () => {},
   searchQuery: () => {},
-  setHasLockedSearchState: () => {},
   setIsSearchOpen: () => {},
   setRouteQueryParamOptions: () => {},
   setSearchState: () => {},
   setShouldPreventLinkNavigation: () => {},
+  setHasLockedSearchState: () => {},
   toggleIsSearchOpen: () => {},
 };
 
@@ -1381,4 +1383,21 @@ export const siteProductReviewsMock: SiteProductReviews = {
       },
     },
   ],
+};
+
+export const productDetailContextMock: ProductDetailContextProps = {
+  addToCart: () => {},
+  changeSize: () => {},
+  data: {
+    siteProduct: siteProductMock,
+    siteProductReviews: siteProductReviewsMock,
+  },
+  queryParams: {
+    rearSize: '200-r15',
+    tireSize: '200-r14',
+  },
+  quantity: { front: 2, rear: 2 },
+  searchForVehicle: () => {},
+  setData: () => {},
+  setQuantity: () => {},
 };

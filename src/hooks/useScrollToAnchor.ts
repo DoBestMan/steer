@@ -1,6 +1,11 @@
 import { useCallback } from 'react';
 
 import { isBrowser } from '~/lib/utils/browser';
+import { getParsedHash } from '~/lib/utils/routes';
+
+const CONSTANTS = {
+  SCROLL_OFFSET: -60,
+};
 
 interface UseScrollToAnchor {
   offset?: number;
@@ -19,7 +24,13 @@ export function useScrollToAnchor({
         return;
       }
 
-      const targetId = e.currentTarget.getAttribute('href')?.slice(1);
+      const href = e.currentTarget.getAttribute('href');
+      const parsedHash = getParsedHash(href || '');
+      const targetId = parsedHash?.anchor?.toString();
+
+      if (!targetId) {
+        return;
+      }
       const elementToScroll = targetId && document.getElementById(targetId);
 
       if (!targetId || !elementToScroll) {
@@ -29,14 +40,16 @@ export function useScrollToAnchor({
       e.preventDefault();
 
       const elementOffset =
-        elementToScroll.getBoundingClientRect().top + window.pageYOffset;
+        elementToScroll.getBoundingClientRect().top +
+        window.pageYOffset +
+        CONSTANTS.SCROLL_OFFSET;
 
       window.scroll({
         top: elementOffset - offset,
         behavior: 'smooth',
       });
 
-      history.pushState(null, '', `#${targetId}`);
+      history.pushState(null, '', href);
     },
     [offset],
   );

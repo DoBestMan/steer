@@ -63,12 +63,6 @@ const mockPromoTags: PromoTagProps[] = [
   },
 ];
 
-const onClickChangeSize = action('click-change-size');
-
-const onCloseSizeSelector = action('close-selector');
-
-const onChangeSize = action('change-size');
-
 const onOpenDynamicModal = action('open-dynamic-modal');
 
 export function ProductInfoWithKnobs() {
@@ -157,9 +151,6 @@ export function ProductInfoWithKnobs() {
       rearLoadSpeedRating={hasRearSize ? rearLoadSpeedRating : undefined}
       rearPrice={price}
       roadHazard={null}
-      onClickChangeSize={onClickChangeSize}
-      onCloseSizeSelector={onCloseSizeSelector}
-      onChangeSize={onChangeSize}
       startingPrice={mockStartingPrice}
       priceLabel={priceLabel ? priceLabel : undefined}
       volatileAvailability={volatileAvailability}
@@ -194,9 +185,6 @@ export function ProductInfoDefault() {
       startingPrice={mockStartingPrice}
       loadSpeedRating={mockSizeLoadSpeedRating}
       openDynamicModal={onOpenDynamicModal}
-      onClickChangeSize={onClickChangeSize}
-      onCloseSizeSelector={onCloseSizeSelector}
-      onChangeSize={onChangeSize}
     />
   );
 }
@@ -225,9 +213,6 @@ export function ProductInfoPromoTags() {
       startingPrice={mockStartingPrice}
       loadSpeedRating={mockSizeLoadSpeedRating}
       openDynamicModal={onOpenDynamicModal}
-      onClickChangeSize={onClickChangeSize}
-      onCloseSizeSelector={onCloseSizeSelector}
-      onChangeSize={onChangeSize}
       promoTags={mockPromoTags}
     />
   );
@@ -250,9 +235,6 @@ export function ProductInfoTireLine() {
       roadHazard={null}
       availableSizes={32}
       openDynamicModal={onOpenDynamicModal}
-      onClickChangeSize={onClickChangeSize}
-      onCloseSizeSelector={onCloseSizeSelector}
-      onChangeSize={onChangeSize}
       startingPrice={mockStartingPrice}
     />
   );
@@ -274,9 +256,6 @@ export function ProductInfoLongNameNoBrandLogo() {
       roadHazard={null}
       availableSizes={32}
       openDynamicModal={onOpenDynamicModal}
-      onClickChangeSize={onClickChangeSize}
-      onCloseSizeSelector={onCloseSizeSelector}
-      onChangeSize={onChangeSize}
       price={{
         salePriceInCents: '13296',
         estimatedRetailPriceInCents: '15099',
@@ -312,9 +291,6 @@ export function ProductInfoDiscountBadge() {
       startingPrice={mockStartingPrice}
       loadSpeedRating={mockSizeLoadSpeedRating}
       openDynamicModal={onOpenDynamicModal}
-      onClickChangeSize={onClickChangeSize}
-      onCloseSizeSelector={onCloseSizeSelector}
-      onChangeSize={onChangeSize}
       priceLabel="60% off!"
     />
   );
@@ -344,9 +320,6 @@ export function ProductInfoOnly4LeftBadge() {
       startingPrice={mockStartingPrice}
       loadSpeedRating={mockSizeLoadSpeedRating}
       openDynamicModal={onOpenDynamicModal}
-      onClickChangeSize={onClickChangeSize}
-      onCloseSizeSelector={onCloseSizeSelector}
-      onChangeSize={onChangeSize}
       volatileAvailability
     />
   );
@@ -376,9 +349,6 @@ export function ProductInfoBothBadges() {
       startingPrice={mockStartingPrice}
       loadSpeedRating={mockSizeLoadSpeedRating}
       openDynamicModal={onOpenDynamicModal}
-      onClickChangeSize={onClickChangeSize}
-      onCloseSizeSelector={onCloseSizeSelector}
-      onChangeSize={onChangeSize}
       priceLabel="60% off!"
       volatileAvailability
     />
@@ -405,9 +375,6 @@ export function ProductInfoCallForPricing() {
       startingPrice={mockStartingPrice}
       loadSpeedRating={mockSizeLoadSpeedRating}
       openDynamicModal={onOpenDynamicModal}
-      onClickChangeSize={onClickChangeSize}
-      onCloseSizeSelector={onCloseSizeSelector}
-      onChangeSize={onChangeSize}
       callForPricing
     />
   );
@@ -433,9 +400,6 @@ export function ProductInfoOutOfStock() {
       startingPrice={mockStartingPrice}
       loadSpeedRating={mockSizeLoadSpeedRating}
       openDynamicModal={onOpenDynamicModal}
-      onClickChangeSize={onClickChangeSize}
-      onCloseSizeSelector={onCloseSizeSelector}
-      onChangeSize={onChangeSize}
       sameSizeSearchResults={232}
       sameSizeSearchURL="/"
     />
@@ -462,9 +426,6 @@ export function ProductInfoNoReviews() {
       startingPrice={mockStartingPrice}
       loadSpeedRating={mockSizeLoadSpeedRating}
       openDynamicModal={onOpenDynamicModal}
-      onClickChangeSize={onClickChangeSize}
-      onCloseSizeSelector={onCloseSizeSelector}
-      onChangeSize={onChangeSize}
     />
   );
 }
@@ -499,9 +460,6 @@ export function ProductInfoMultiSize() {
         estimatedRetailPriceInCents: '15486',
         salePriceInCents: '19000',
       }}
-      onClickChangeSize={onClickChangeSize}
-      onCloseSizeSelector={onCloseSizeSelector}
-      onChangeSize={onChangeSize}
     />
   );
 }

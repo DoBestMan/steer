@@ -1,7 +1,6 @@
 import isStrictEqual from 'fast-deep-equal';
 import { useRouter } from 'next/router';
-import queryString from 'query-string';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Product as ProductLinkingData } from 'schema-dts';
 
 import { BreadcrumbsItem } from '~/components/global/Breadcrumbs/Breadcrumbs';
@@ -22,8 +21,7 @@ import { SiteProductLine } from '~/data/models/SiteProductLine';
 import { useApiDataWithDefault } from '~/hooks/useApiDataWithDefault';
 import { ROUTE_MAP, ROUTES } from '~/lib/constants';
 import { eventEmitters } from '~/lib/events/emitters';
-import { omit } from '~/lib/utils/object';
-import { getStringifiedParams, interpolateRoute } from '~/lib/utils/routes';
+import { interpolateRoute } from '~/lib/utils/routes';
 import { ProductDetailResponse } from '~/pages/api/product-detail';
 
 import { mapDataToBreadcrumbs } from './mappers/breadcrumbs';
@@ -50,38 +48,24 @@ interface ProductDetailData {
   serverData: ProductDetailResponse;
 }
 
-export type ParsedProductInfoProps = Omit<
-  ProductInfoProps,
-  | 'onChangeSize'
-  | 'onClickChangeSize'
-  | 'onCloseSizeSelector'
-  | 'handleChangeSize'
-  | 'sizeFinder'
-  | 'isSizeSelectorOpen'
->;
+export type ParsedProductInfoProps = Omit<ProductInfoProps, 'sizeFinder'>;
 
 export type ParsedSizeFinderProps = Omit<SizeFinderProps, 'onChange'>;
 
 export type ParsedStickyBarProps = Omit<
   PDPStickyBarProps,
-  'avoidSection' | 'darkSection' | 'onClickFindYourSize'
+  'avoidSection' | 'darkSection'
 >;
 
 interface ResponseProps extends Pick<SiteProductLine, 'assetList'> {
   breadcrumbs: BreadcrumbsItem[];
-  closeSizeSelector: () => void;
   currentPath: string;
   faq: FAQProps;
   insights: Omit<InsightsProps, 'handleChangeLocation'>;
   installation: InstallationProps | null;
   isPLA: boolean;
-  isSizeSelectorOpen: boolean;
   linkingData: ProductLinkingData | null;
   meta: MetaProps;
-  onChangeSize: (value: string) => void;
-  onClickChangeSize: () => void;
-  onClickFindYourSize: () => void;
-  onCloseSizeSelector: () => void;
   productInfo: ParsedProductInfoProps;
   recirculation: SiteCatalogProductGroupList | null;
   recirculationSize: RecirculationSize | null;
@@ -101,19 +85,19 @@ export const CONSTANTS = {
 };
 
 function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
+  const productDetail = useProductDetailContext();
   const {
     data: contextData,
     quantity,
+    queryParams,
     setData,
     setQuantity,
-  } = useProductDetailContext();
+  } = productDetail;
   const router = useRouter();
-  const { query, asPath, pathname } = router;
+  const { asPath } = router;
   const userPersonalization = useUserPersonalizationContext();
-  const { vehicle } = userPersonalization;
   const globals = useSiteGlobalsContext();
-  const [isSizeSelectorOpen, setIsSizeSelectorOpen] = useState(false);
-  const queryParams = getStringifiedParams(Object.assign(query, vehicle));
+
   const { hostUrl } = useGlobalsContext();
   const isPLA = !!router.route.match(ROUTE_MAP[ROUTES.PRODUCT_DETAIL_PLA]);
 
@@ -139,11 +123,11 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
   const assetList = siteProductLine.assetList;
 
   useEffect(() => {
-    if (!query.tireSize || quantity.front) {
+    if (!queryParams.tireSize || quantity.front) {
       return;
     }
 
-    if (query.rearSize) {
+    if (queryParams.rearSize) {
       setQuantity({
         front: CONSTANTS.DEFAULT_FRONT_AND_REAR_QUANTITY,
         rear: CONSTANTS.DEFAULT_FRONT_AND_REAR_QUANTITY,
@@ -154,7 +138,7 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
     setQuantity({
       front: CONSTANTS.DEFAULT_QUANTITY,
     });
-  }, [quantity, query, setQuantity]);
+  }, [quantity, queryParams, setQuantity]);
 
   useEffect(() => {
     if (isStrictEqual(data, contextData)) {
@@ -164,45 +148,25 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
     setData(data);
   }, [data, contextData, setData]);
 
-  // Size selector
-  const toggleSizeSelector = useCallback(() => {
-    setIsSizeSelectorOpen(!isSizeSelectorOpen);
-  }, [isSizeSelectorOpen, setIsSizeSelectorOpen]);
+  /**
+   * Reroute query parameters to hash parameters on the front-end
+   * `?tireSize=235-40r15` => `#tireSize=235-40r15`
+   */
+  useEffect(() => {
+    if (!asPath.includes('?')) {
+      return;
+    }
+    const interpolatedRoute = interpolateRoute(router.pathname, queryParams);
+    const [queryFromPath] = asPath.match(/[^?]*$/g) || [];
 
-  const closeSizeSelector = useCallback(() => {
-    setIsSizeSelectorOpen(false);
-  }, [setIsSizeSelectorOpen]);
-
-  const handleClickChangeSize = () => {
-    toggleSizeSelector();
-  };
-
-  const handleChangeSize = useCallback(
-    (value) => {
-      const querystring = queryString.stringify({
-        ...omit(queryParams, ['brandName', 'productLine']),
-        tireSize: value,
-      });
-      const interpolatedRoute = interpolateRoute(router.pathname, query);
-
-      router.push(
-        `${pathname}?${querystring}`,
-        `${interpolatedRoute}?${querystring}`,
-        {
-          shallow: true,
-        },
-      );
-      closeSizeSelector();
-    },
-    [query, queryParams, pathname, router, closeSizeSelector],
-  );
-
-  const handleCloseSizeSelector = useCallback(() => {
-    closeSizeSelector();
-  }, [closeSizeSelector]);
-
-  // TODO: Integrate sticky bar
-  const handleClickFindYourSize = () => {};
+    router.replace(
+      `${router.pathname}#${queryFromPath}`,
+      `${interpolatedRoute}#${queryFromPath}`,
+      {
+        shallow: true,
+      },
+    );
+  }, [asPath, router, queryParams]);
 
   const productInfo = mapDataToProductInfo({
     globals,
@@ -218,19 +182,19 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
       siteProduct,
       router,
     }),
-    closeSizeSelector,
     currentPath: asPath,
     faq: mapDataToFAQ({ siteProduct, globals }),
     insights: mapDataToInsights({
-      handleChangeSize,
       isLoadingData: isValidating,
+      productDetail,
+      rearSize: queryParams.rearSize,
       router,
       siteProduct,
+      tireSize: queryParams.tireSize,
       userPersonalization,
     }),
     installation: mapDataToInstallation({ siteProduct }),
     isPLA,
-    isSizeSelectorOpen,
     linkingData: mapDataToLinkingData({
       hostUrl,
       router,
@@ -242,18 +206,19 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
       productLine: productInfo.productName,
       tireSize: productInfo.size,
     }),
-    onChangeSize: handleChangeSize,
-    onClickChangeSize: handleClickChangeSize,
-    onClickFindYourSize: handleClickFindYourSize,
-    onCloseSizeSelector: handleCloseSizeSelector,
     productInfo,
     recirculation: mapDataToRecirculation({ siteProduct }),
-    recirculationSize: mapDataToRecirculationSize({ siteProduct, router }),
+    recirculationSize: mapDataToRecirculationSize({
+      siteProduct,
+      rearSize: queryParams.rearSize,
+      tireSize: queryParams.tireSize,
+    }),
     reviews: mapDataToReviews({ siteProductReviews, router }),
     reviewsAnchor: CONSTANTS.REVIEWS_ANCHOR,
     sizeFinder: mapDataToSizeFinder({
       siteProduct,
-      router,
+      rearSize: queryParams.rearSize,
+      tireSize: queryParams.tireSize,
     }),
     stickyBar: mapDataToStickyBar({ quantity, siteProduct }),
     technicalSpecs: mapDataToTechnicalSpecs({ siteProduct, router }),

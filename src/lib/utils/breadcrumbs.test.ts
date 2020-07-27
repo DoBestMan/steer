@@ -114,6 +114,48 @@ describe('breadcrumbs', () => {
         },
       ]);
     });
+
+    it('should include hashstring current path', () => {
+      expect(
+        mapPathnameToBreadcrumbs({
+          asPath: '/brands/continental-tires/surecontact-rx#tireSize=100R1891W',
+          labels: {
+            brand: 'Continental',
+            productLine: 'Surecontact RX',
+            tireSize: '100/50 R18 91H',
+          },
+          pathname: '/brands/[brand]/[productLine]',
+          query: {
+            brand: 'continental-tires',
+            productLine: 'surecontact-rx',
+            tireSize: '100R1891W,',
+          },
+          querystringNodeLabel: '100/50 R18 91H',
+        }),
+      ).toStrictEqual([
+        {
+          label: 'Home',
+          url: '/',
+        },
+        {
+          label: 'All brands',
+          url: '/brands',
+        },
+        {
+          label: 'Continental',
+          url: '/brands/continental-tires',
+        },
+        {
+          label: 'Surecontact RX',
+          url: '/brands/continental-tires/surecontact-rx',
+        },
+        {
+          currentPath: true,
+          label: '100/50 R18 91H',
+          url: '/brands/continental-tires/surecontact-rx#tireSize=100R1891W',
+        },
+      ]);
+    });
   });
 
   describe('mapArrayToBreadcrumbs', () => {
