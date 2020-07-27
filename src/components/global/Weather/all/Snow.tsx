@@ -89,20 +89,30 @@ function Snow(props: Props) {
 
     /* Inspired from https://designers.hubspot.com/blog/how-to-implement-an-animated-snow-effect-using-html5-canvas-and-javascript */
     function moveSnowflakes() {
-      angle += 0.01;
+      angle += 0.005;
       for (let i = 0; i < mp; i++) {
         const p = particles[i];
 
-        //Updating X and Y coordinates
+        //Updating X coordinates
         //We will add 1 to the cos function to prevent negative values which will lead flakes to move upwards
         //Every particle has its own density which can be used to make the downward movement different for each flake
         //Lets make it more random by adding in the radius
-        p.y += Math.cos(angle + p.d) + 1 + p.r / 4;
-        p.x += Math.sin(angle) * 2;
+        const vx = Math.cos(angle + p.d) + 1 + p.r / 4;
+        p.y += vx;
+
+        // Update Y coordinates
+        // Add the density to sin to make each flake's interval random
+        // Subtract 2 so that the flake moves to the left most of the time.
+        const vy = Math.sin(angle + p.d) - 2;
+        p.x += vy;
 
         //Sending flakes back from the top when it exits
         //Lets make it a bit more organic and let flakes enter from the left and right also.
-        if (p.x > width + 5 || p.x < -5 || p.y > height) {
+        if (
+          p.x > width + SNOWFLAKE_WIDTH ||
+          p.x < SNOWFLAKE_WIDTH * -1 ||
+          p.y > height
+        ) {
           if (i % 3 > 0) {
             //66.67% of the flakes
             particles[i] = {
@@ -113,7 +123,7 @@ function Snow(props: Props) {
             };
           } else {
             //If the flake is exitting from the right
-            if (Math.sin(angle) > 0) {
+            if (vy > 0) {
               //Enter from the left
               particles[i] = {
                 d: p.d,
