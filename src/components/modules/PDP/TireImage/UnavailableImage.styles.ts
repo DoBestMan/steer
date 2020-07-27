@@ -15,7 +15,7 @@ const styles: StylesMap = {
       marginBottom: SPACING.SIZE_05,
       marginLeft: -SPACING.SIZE_05,
       maxWidth: 80,
-      zIndex: Z_INDEX.OVERLAY,
+      zIndex: Z_INDEX.FRONT,
 
       [MQ.M]: {
         marginBottom: SPACING.SIZE_20,
