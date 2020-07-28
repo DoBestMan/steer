@@ -17,7 +17,7 @@ const styles: StylesMap = {
     maxWidth: CONSTANTS.ROOT_MAX_WIDTH,
     paddingBottom: SPACING.SIZE_50,
     [MQ.M]: {
-      paddingBottom: SPACING.SIZE_110,
+      paddingBottom: SPACING.SIZE_100,
     },
   },
   submitButton: {

@@ -553,7 +553,7 @@
     "tireHeader": "Tire"
   },
   "tracking": {
-    "additionalInfoTitle": "Have a doubt?",
+    "additionalInfoTitle": "Have any questions?",
     "additionalInfoLinks": "Check our {{shipping}} or {{faq}}",
     "cancelledContactServiceEnabled": "Call {{phone}} or {{email}}",
     "cancelledSendEmail": "Send us an email",
@@ -562,7 +562,7 @@
     "orderSummary": "Order summary",
     "orderTrackingDescription": "Enter the Order ID we emailed to you when you made your purchase, or {{login}}",
     "orderTrackingError": "Please review. Order ID & ZIP Code do not match.",
-    "orderTrackingSubmit": "Find it",
+    "orderTrackingSubmit": "Track order",
     "orderTrackingTitle": "Track your order",
     "pendingStepDescription": "Your tires will ship soon",
     "shippingAddress": "Shipping address",

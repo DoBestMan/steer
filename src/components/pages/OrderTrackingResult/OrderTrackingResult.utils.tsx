@@ -43,7 +43,7 @@ export function getOrderSteps({
   trackingLabel: string | null;
   trackingLink: SiteLink | null;
 }) {
-  const createdAtDate = format(new Date(createdAt), 'EEEE MMMM d');
+  const createdAtDate = format(new Date(createdAt), 'EEEE, MMMM d');
 
   return [
     {

@@ -52,7 +52,7 @@ const styles: StylesMap = {
     },
   ],
   label: [
-    typography.tertiaryHeadline,
+    typography.primarySubhead,
     {
       color: COLORS.LIGHT.GRAY_70,
     },

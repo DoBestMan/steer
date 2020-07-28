@@ -20,13 +20,13 @@ const styles: StylesMap = {
   header: {
     padding: `${SPACING.SIZE_110}px 0 ${SPACING.SIZE_40}px`,
     [MQ.M]: {
-      padding: `${SPACING.SIZE_160}px 0 ${SPACING.SIZE_90}px`,
+      padding: `${SPACING.SIZE_160}px 0 ${SPACING.SIZE_60}px`,
     },
     [MQ.L]: {
-      padding: `200px 0 ${SPACING.SIZE_100}px`,
+      padding: `200px 0 ${SPACING.SIZE_80}px`,
     },
     [MQ.XL]: {
-      padding: `230px 0 ${SPACING.SIZE_110}px`,
+      padding: `230px 0 ${SPACING.SIZE_80}px`,
     },
   },
   title: [
