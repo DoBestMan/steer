@@ -74,10 +74,10 @@ const styles: StylesMap = {
     transition: `all ${TIME.MS300}ms ease`,
     width: '100%',
     [MQ.M]: {
-      padding: SPACING.SIZE_40,
+      padding: `${SPACING.SIZE_40}px ${SPACING.SIZE_40}px ${SPACING.SIZE_30}px`,
     },
     [MQ.L]: {
-      padding: SPACING.SIZE_60,
+      padding: `${SPACING.SIZE_60}px ${SPACING.SIZE_60}px ${SPACING.SIZE_30}px`,
     },
   },
   title: [typography.primaryHeadline, { marginBottom: SPACING.SIZE_10 }],
