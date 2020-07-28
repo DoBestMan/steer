@@ -1,4 +1,5 @@
-export const FetchErrorCodes = {
+export const FetchErrorCodes: { [key: string]: string } = {
+  AbortError: 'AbortError',
   BadRequest: 'BadRequest',
   Forbidden: 'Forbidden',
   InvalidJson: 'InvalidJson',

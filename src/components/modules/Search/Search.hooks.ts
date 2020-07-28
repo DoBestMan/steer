@@ -16,6 +16,7 @@ import {
   apiDeleteUserSearchHistory,
   apiGetUserSearchHistory,
 } from '~/lib/api/users';
+import { FetchErrorCodes } from '~/lib/fetch/FetchError';
 import { scrollIntoViewIfNeeded } from '~/lib/utils/accessibility';
 
 import {
@@ -203,9 +204,12 @@ export function useSearchResults() {
         });
 
         setSearchResults(apiSearchResults);
-      } catch (err) {
-        console.error(err);
-        setHasSearchResultsError(true);
+      } catch (error) {
+        console.error(error);
+
+        if (error.code !== FetchErrorCodes.AbortError) {
+          setHasSearchResultsError(true);
+        }
       }
 
       isRequestInProgress.current = false;

@@ -111,7 +111,11 @@ export async function fetch<T, U = never>({
     });
   } catch (error) {
     console.error(error);
-    throw new FetchError(FetchErrorCodes.NetworkError, error);
+
+    throw new FetchError(
+      FetchErrorCodes[error.name] || FetchErrorCodes.NetworkError,
+      error,
+    );
   }
 
   let data: T | null = null;
