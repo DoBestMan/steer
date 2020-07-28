@@ -7,8 +7,8 @@ import { THEME } from '~/lib/constants';
 
 import PDPActionBar from '../ActionBar/ActionBar';
 import { SizeFinderProps } from '../SizeFinder/SizeFinder';
-import CrossSell from './CrossSell';
 import MultiSizeButton from './MultiSizeButton';
+import OutOfStock from './OutOfStock';
 import Price from './Price';
 import styles from './ProductInfo.styles';
 import ProductLine from './ProductLine';
@@ -20,7 +20,6 @@ export interface ProductInfoProps {
   brand: SiteCatalogBrand;
   brandURL?: string;
   callForPricing?: boolean;
-  customerServiceNumber: { display: string; value: string };
   loadSpeedRating?: string;
   price?: SitePrice | null;
   priceLabel?: string | null;
@@ -54,7 +53,6 @@ function ProductInfo({
   brand,
   brandURL,
   callForPricing,
-  customerServiceNumber,
   volatileAvailability,
   loadSpeedRating,
   openDynamicModal,
@@ -73,8 +71,7 @@ function ProductInfo({
   sizeFinder,
   startingPrice,
 }: Props) {
-  const shouldShowCrossSell =
-    !price && !callForPricing && size && sameSizeSearchResults;
+  const isOutOfStock = (!price || callForPricing) && size;
   const isTireLine = !size;
 
   if (rearSize && rearPrice) {
@@ -127,16 +124,16 @@ function ProductInfo({
           </div>
           <Rating rating={rating} />
         </div>
-        <div css={styles.pricesWrapper}>
-          <Price
-            customerServiceNumber={customerServiceNumber}
-            price={price}
-            priceLabel={priceLabel}
-            startingPrice={isTireLine ? startingPrice : undefined}
-            callForPricing={callForPricing}
-            volatileAvailability={volatileAvailability}
-          />
-        </div>
+        {!isOutOfStock && (
+          <div css={styles.pricesWrapper}>
+            <Price
+              price={price}
+              priceLabel={priceLabel}
+              startingPrice={isTireLine ? startingPrice : undefined}
+              volatileAvailability={volatileAvailability}
+            />
+          </div>
+        )}
         <div css={styles.actionBar}>
           <PDPActionBar
             roadHazard={roadHazard}
@@ -146,7 +143,7 @@ function ProductInfo({
           />
         </div>
       </div>
-      {promoTags && (
+      {!!promoTags?.length && (
         <div css={styles.promoTags}>
           <PromoTagCarousel
             tags={promoTags}
@@ -154,9 +151,10 @@ function ProductInfo({
           />
         </div>
       )}
-      {shouldShowCrossSell && (
+      {isOutOfStock && (
         <div css={styles.crossSellWrapper}>
-          <CrossSell
+          <OutOfStock
+            callForPricing={callForPricing}
             sameSizeSearchResults={sameSizeSearchResults}
             sameSizeSearchURL={sameSizeSearchURL}
             size={size}

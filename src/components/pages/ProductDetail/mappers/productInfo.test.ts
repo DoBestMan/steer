@@ -2,7 +2,6 @@ import { SiteProductLineSizeDetail } from '~/data/models/SiteProductLineSizeDeta
 import { SiteProductLineSizeDetailRoadHazard } from '~/data/models/SiteProductLineSizeDetailRoadHazard';
 
 import {
-  globalsMock,
   routerMock,
   siteProductMock,
   siteProductReviewsMock,
@@ -13,7 +12,6 @@ describe('pages/ProductDetails/mappers/breadcrumbs', () => {
   it('returns parsed product info props', () => {
     expect(
       mapDataToProductInfo({
-        globals: globalsMock,
         quantity: { front: 4 },
         router: routerMock,
         siteProduct: siteProductMock,
@@ -34,7 +32,6 @@ describe('pages/ProductDetails/mappers/breadcrumbs', () => {
       },
       brandURL: '/brands/continental-tires',
       callForPricing: false,
-      customerServiceNumber: { display: '(888) 123 456', value: '888123456' },
       loadSpeedRating: '91H',
       price: {
         estimatedRetailPriceInCents: '15975',
@@ -67,7 +64,6 @@ describe('pages/ProductDetails/mappers/breadcrumbs', () => {
   it('returns road hazard information for single available size', () => {
     expect(
       mapDataToProductInfo({
-        globals: globalsMock,
         quantity: { front: 4 },
         router: routerMock,
         siteProduct: siteProductMock,
@@ -84,7 +80,6 @@ describe('pages/ProductDetails/mappers/breadcrumbs', () => {
   it('returns null road hazard for single unavailable size', () => {
     expect(
       mapDataToProductInfo({
-        globals: globalsMock,
         quantity: { front: 4 },
         router: routerMock,
         siteProduct: {
@@ -104,7 +99,6 @@ describe('pages/ProductDetails/mappers/breadcrumbs', () => {
   it('returns road hazard for front + rear available sizes', () => {
     expect(
       mapDataToProductInfo({
-        globals: globalsMock,
         quantity: { front: 2, rear: 2 },
         router: routerMock,
         siteProduct: siteProductMock,
@@ -121,7 +115,6 @@ describe('pages/ProductDetails/mappers/breadcrumbs', () => {
   it('returns null road hazard for front available + rear unavailable sizes', () => {
     expect(
       mapDataToProductInfo({
-        globals: globalsMock,
         quantity: { front: 2, rear: 2 },
         router: routerMock,
         siteProduct: {
@@ -141,7 +134,6 @@ describe('pages/ProductDetails/mappers/breadcrumbs', () => {
   it('returns null road hazard for front unavailable + rear available sizes', () => {
     expect(
       mapDataToProductInfo({
-        globals: globalsMock,
         quantity: { front: 2, rear: 2 },
         router: routerMock,
         siteProduct: {
@@ -161,7 +153,6 @@ describe('pages/ProductDetails/mappers/breadcrumbs', () => {
   it('returns null road hazard for front + rear available sizes with different durations', () => {
     expect(
       mapDataToProductInfo({
-        globals: globalsMock,
         quantity: { front: 2, rear: 2 },
         router: routerMock,
         siteProduct: {

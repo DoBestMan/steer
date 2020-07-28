@@ -169,7 +169,6 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
   }, [asPath, router, queryParams]);
 
   const productInfo = mapDataToProductInfo({
-    globals,
     quantity,
     router,
     siteProduct,

@@ -2,7 +2,6 @@ import { NextRouter } from 'next/router';
 
 import { PromoTagProps } from '~/components/global/PromoTag/PromoTag';
 import { ProductInfoProps } from '~/components/modules/PDP/ProductInfo/ProductInfo';
-import { SiteGlobals } from '~/data/models/SiteGlobals';
 import { SiteProduct } from '~/data/models/SiteProduct';
 import { SiteProductLineSizeDetailProductStatusEnum } from '~/data/models/SiteProductLineSizeDetail';
 import { SiteProductReviews } from '~/data/models/SiteProductReviews';
@@ -12,7 +11,6 @@ import { interpolateRoute } from '~/lib/utils/routes';
 import { mapDataToRoadHazard } from './roadHazard';
 
 export function mapDataToProductInfo({
-  globals: { customerServiceNumber },
   quantity,
   siteProduct,
   siteProductReviews: { performanceRating, reviewsSource },
@@ -20,7 +18,6 @@ export function mapDataToProductInfo({
     query: { brand },
   },
 }: {
-  globals: SiteGlobals;
   quantity: { front: number; rear?: number };
   router: NextRouter;
   siteProduct: SiteProduct;
@@ -101,7 +98,6 @@ export function mapDataToProductInfo({
     brand: brandName,
     brandURL,
     callForPricing,
-    customerServiceNumber,
     loadSpeedRating,
     price,
     priceLabel,
