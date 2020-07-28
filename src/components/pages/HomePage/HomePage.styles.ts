@@ -21,7 +21,7 @@ const styles: StylesMap = {
     opacity: 0.3,
     paddingBottom: CONTENT_PADDING.S,
     transition: `opacity ${CONTENT_TRANSITION}ms ${EASING.CUBIC_EASE_OUT}`,
-
+    willChange: 'opacity',
     [MQ.M]: {
       paddingBottom: CONTENT_PADDING.M,
     },
