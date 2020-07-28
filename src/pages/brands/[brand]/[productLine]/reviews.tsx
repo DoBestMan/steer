@@ -9,7 +9,10 @@ import {
   backendGetProductReviews,
 } from '~/lib/backend/product-detail';
 import { validBrandQuery } from '~/lib/utils/regex';
-import { validateOrRedirectToNotFound } from '~/lib/utils/routes';
+import {
+  redirectToNotFound,
+  validateOrRedirectToNotFound,
+} from '~/lib/utils/routes';
 import { removeTireFromQueryParam } from '~/lib/utils/string';
 
 function Reviews(props: ProductDetailReviewsData) {
@@ -41,6 +44,9 @@ export const getServerSideProps: GetServerSideProps<ProductDetailReviewsData> = 
     }),
   ]);
 
+  if (!siteProductReviews.reviewsList.length) {
+    redirectToNotFound(context.res);
+  }
   const props: ProductDetailReviewsData = {
     serverData: { siteProduct, siteProductReviews },
   };
