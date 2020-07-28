@@ -2,7 +2,6 @@ import { ModalData } from '~/components/global/Modal/Modal.types';
 import { SiteImageNullableTypeEnum } from '~/data/models/SiteImageNullable';
 
 import { ui } from '../utils/ui-dictionary';
-import { uiJSX } from '../utils/ui-dictionary-jsx';
 import { MODAL_DATA_TYPES } from './modal.types';
 
 // Static modals associated with IDs that can be references from the API
@@ -193,27 +192,9 @@ const STATIC_MODALS: Record<string, ModalData> = {
       imageSrc: '/static/assets/search/find-tire-size.jpg',
       modalLabel: ui('search.findTireSize.modalLabel'),
       steps: [
-        uiJSX('search.findTireSize.stepOne', {
-          link: (
-            <a href="#" key="step-1">
-              the sidewall
-            </a>
-          ),
-        }),
-        uiJSX('search.findTireSize.stepTwo', {
-          link: (
-            <a href="#" key="step-2">
-              inside the frame
-            </a>
-          ),
-        }),
-        uiJSX('search.findTireSize.stepThree', {
-          link: (
-            <a href="#" key="step-3">
-              the owner&apos;s manual
-            </a>
-          ),
-        }),
+        ui('search.findTireSize.stepOne'),
+        ui('search.findTireSize.stepTwo'),
+        ui('search.findTireSize.stepThree'),
       ],
       title: ui('search.findTireSize.title'),
     },

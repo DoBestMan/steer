@@ -529,9 +529,9 @@
       "eyebrow": "How to",
       "imageAlt": "Close-up of tire",
       "modalLabel": "How to find your tire size",
-      "stepOne": "Check {{link}} of your tire",
-      "stepTwo": "View {{link}} of the driver’s door",
-      "stepThree": "Check {{link}}",
+      "stepOne": "Check the sidewall of your tire",
+      "stepTwo": "View inside the frame of the driver’s door",
+      "stepThree": "Check the owner's manual",
       "title": "Find your tire size"
     },
     "identifyTrim": {
