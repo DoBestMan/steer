@@ -127,7 +127,7 @@ const styles: StylesMap = {
     justifyContent: 'flex-end',
     position: 'absolute',
     right: GRID_MARGIN.S,
-    top: 27,
+    top: SPACING.SIZE_30,
     [MQ.M]: {
       right: GRID_MARGIN.M,
       top: SPACING.SIZE_40,
