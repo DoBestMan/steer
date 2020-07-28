@@ -20,7 +20,7 @@ const styles: StylesMap = {
     ':after': {
       content: '"•"',
       fontSize: 10,
-      padding: SPACING.SIZE_10,
+      padding: `0 ${SPACING.SIZE_10}px`,
     },
     alignItems: 'center',
     display: 'flex',
@@ -94,7 +94,7 @@ const styles: StylesMap = {
     },
   },
   wrappedLocation: {
-    paddingTop: SPACING.SIZE_05,
+    marginTop: SPACING.SIZE_02,
   },
 };
 
