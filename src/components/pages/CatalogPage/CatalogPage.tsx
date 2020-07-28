@@ -1,9 +1,12 @@
 import { ThemeProvider, useTheme } from 'emotion-theming';
+import { useEffect } from 'react';
 
 import Feedback from '~/components/global/Feedback/Feedback';
 import Loading from '~/components/global/Loading/Loading';
+import { NAV_THEME } from '~/components/modules/Nav/Nav.theme';
 import { useCatalogPageContext } from '~/context/CatalogPage.context';
 import { useCatalogSummaryContext } from '~/context/CatalogSummary.context';
+import { useNavContext } from '~/context/Nav.context';
 import { SiteCatalogFilters } from '~/data/models/SiteCatalogFilters';
 import { SiteCatalogProducts } from '~/data/models/SiteCatalogProducts';
 import { SiteCatalogSummary } from '~/data/models/SiteCatalogSummary';
@@ -40,6 +43,7 @@ function CatalogPage({
   onPreviewFilters,
   previewFiltersData,
 }: Props) {
+  const { setNavTheme, theme: navTheme } = useNavContext();
   const { isAdvancedView } = useCatalogPageContext();
   const { contentStage, showSummary, stage } = useCatalogSummaryContext();
 
@@ -54,6 +58,18 @@ function CatalogPage({
    * - once user transitions into Top Picks from the loading interstitial
    */
   const showGrid = contentStage === STAGES.RESULTS;
+
+  useEffect(() => {
+    // When the Catalog Summary is hidden, update Nav theme to `ALTERNATE`
+    // for display on an orange background.
+    const newTheme = showSummary ? NAV_THEME.DEFAULT : NAV_THEME.ALTERNATE;
+
+    if (newTheme !== navTheme) {
+      setNavTheme(newTheme);
+    }
+    // This hook should not be called when `navTheme` is updated elsewhere
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [setNavTheme, showSummary]);
 
   return (
     <ThemeProvider

@@ -1,6 +1,7 @@
 import { ReactNode, useMemo, useState } from 'react';
 
 import { ICONS } from '~/components/global/Icon/Icon.constants';
+import { NAV_THEME } from '~/components/modules/Nav/Nav.theme';
 import {
   ActionType,
   LinkType,
@@ -31,6 +32,8 @@ export interface NavContextProps {
   linksMobile: Array<LinkType | ActionType>;
   setActiveLink: (link: string) => void;
   setIsHidden: (isHidden: boolean) => void;
+  setNavTheme: (theme: NAV_THEME) => void;
+  theme: NAV_THEME;
   toggleSubNav: () => void;
 }
 
@@ -91,11 +94,12 @@ export function buildLinks({
 }
 
 // Exported for testing only
-export function useNavContextSetup() {
+export function useNavContextSetup(): NavContextProps {
   const [isHidden, setIsHidden] = useState(false);
   const [isSubNavOpen, setIsSubNavOpen] = useState(false);
   const [activeLink, setActiveLink] = useState('');
   const [activeCategory, setActiveCategory] = useState('');
+  const [theme, setNavTheme] = useState(NAV_THEME.DEFAULT);
   const { locationString } = useUserPersonalizationContext();
   const { links, linksMobile } = useMemo(() => buildLinks({ locationString }), [
     locationString,
@@ -133,6 +137,8 @@ export function useNavContextSetup() {
     linksMobile,
     setActiveLink,
     setIsHidden,
+    setNavTheme,
+    theme,
     toggleSubNav: () => {
       setIsSubNavOpen(!isSubNavOpen);
     },

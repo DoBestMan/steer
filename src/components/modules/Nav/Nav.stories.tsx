@@ -10,7 +10,7 @@ import { ui } from '~/lib/utils/ui-dictionary';
 import { layout } from '~/styles/layout.styles';
 
 import { styles } from './Nav.styles';
-import { alternateTheme, defaultTheme } from './Nav.theme';
+import { NAV_THEME, themes } from './Nav.theme';
 import NavBar from './NavBar';
 
 export default {
@@ -20,15 +20,13 @@ export default {
 
 const { links } = buildLinks({ locationString: 'Brooklyn, NY' });
 
-const themes = {
-  default: 'defaultTheme',
-  alternate: 'alternateTheme',
-};
-
 const themesMap = {
-  [themes.default]: { props: defaultTheme, bgColor: 'transparent' },
-  [themes.alternate]: {
-    props: alternateTheme,
+  [NAV_THEME.DEFAULT]: {
+    props: themes[NAV_THEME.DEFAULT],
+    bgColor: 'transparent',
+  },
+  [NAV_THEME.ALTERNATE]: {
+    props: themes[NAV_THEME.ALTERNATE],
     bgColor: COLORS.GLOBAL.ORANGE,
   },
 };
@@ -43,7 +41,7 @@ const options = {
 const fakeHandleNavClick = () => action('click-toggle-nav');
 
 export function NavWithKnobs() {
-  const theme = select('Theme', themes, themes.default);
+  const theme = select('Theme', NAV_THEME, NAV_THEME.ALTERNATE);
 
   return (
     <Grid css={[styles.root, { backgroundColor: themesMap[theme].bgColor }]}>
