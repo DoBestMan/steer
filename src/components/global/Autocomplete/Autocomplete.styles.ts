@@ -32,7 +32,7 @@ const styles: StylesMap = {
   comboboxWrapper: {
     width: '100%',
   },
-  errorMessage: typography.primaryHeadline,
+  errorMessage: typography.labelHeadlineLarge,
   input: [
     typography.secondaryHeadline,
     disableGlobalFocus,
