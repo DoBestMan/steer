@@ -16,6 +16,9 @@ const styles: StylesMap = {
     disableGlobalFocus,
     {
       width: '100%',
+      [MQ.XL]: {
+        paddingTop: SPACING.SIZE_05,
+      },
     },
   ],
   inputContainer: {
