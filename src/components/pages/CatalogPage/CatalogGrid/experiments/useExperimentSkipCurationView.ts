@@ -18,13 +18,17 @@ export default function useExperimentSkipCurationView({
   skipCurationView: () => void;
 }) {
   const [hasMounted, setHasMounted] = useState(false);
+  const [hasLaunched, setHasLaunched] = useState(false);
 
   useEffect(() => {
-    if (!hasMounted || isLoading) {
+    if (!hasMounted || isLoading || hasLaunched) {
       return;
     }
 
     const callback = (response?: string) => {
+      // Only once
+      setHasLaunched(true);
+
       if (response && response === '1') {
         skipCurationView();
       }
@@ -36,7 +40,7 @@ export default function useExperimentSkipCurationView({
     return () => {
       removeCall();
     };
-  }, [skipCurationView, hasMounted, isLoading]);
+  }, [skipCurationView, hasMounted, hasLaunched, isLoading]);
 
   useEffect(() => {
     setHasMounted(true);
