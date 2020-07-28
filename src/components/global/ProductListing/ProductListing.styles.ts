@@ -29,7 +29,6 @@ const styles: StylesMap = {
     typography.primarySubhead,
     {
       color: COLORS.GLOBAL.ORANGE,
-      marginBottom: SPACING.SIZE_05,
     },
   ],
   brand: {
@@ -45,6 +44,9 @@ const styles: StylesMap = {
   },
   brandLabel: typography.tertiaryHeadline,
   filterItem: typography.primarySubhead,
+  filterItemContainer: {
+    marginBottom: 7,
+  },
   image: {
     marginBottom: SPACING.SIZE_30,
     minHeight: IMAGE_SIZE.DEFAULT.S,
@@ -95,6 +97,7 @@ const styles: StylesMap = {
     typography.secondarySubhead,
     {
       color: COLORS.GLOBAL.ORANGE,
+      marginTop: 5,
     },
   ],
   promoDisc: [
@@ -115,6 +118,13 @@ const styles: StylesMap = {
       width: DISC_SIZE,
     },
   ],
+  promos: {
+    marginBottom: -8,
+
+    'div:first-of-type:not(:only-child)': {
+      marginBottom: -1,
+    },
+  },
   rating: {
     display: 'flex',
     alignItems: 'center',
@@ -184,6 +194,8 @@ const styles: StylesMap = {
     typography.smallCopyTight,
     {
       color: COLORS.LIGHT.GRAY_70,
+      marginBottom: 3,
+      marginTop: 6,
     },
   ],
 };

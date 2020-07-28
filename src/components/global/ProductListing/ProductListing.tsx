@@ -115,24 +115,31 @@ function ProductListing({
             <span css={styles.subcopy}>({rating.quantity})</span>
           </div>
         )}
-        {activeFilterValueList?.map((filter) => (
-          <div css={styles.filterItem} key={filter}>
-            {filter}
+
+        {!!activeFilterValueList?.length && (
+          <div css={styles.filterItemContainer}>
+            {activeFilterValueList?.map((filter) => (
+              <div css={styles.filterItem} key={filter}>
+                {filter}
+              </div>
+            ))}
           </div>
-        ))}
+        )}
 
         {siteCatalogPromotionInfo && siteCatalogPromotionInfo.count > 0 && (
           <>
-            {siteCatalogPromotionInfo.list
-              .slice(0, numberOfPromosToDisplay)
-              .map((promo) => (
-                <PromoTag
-                  key={promo.label}
-                  icon={promo.icon}
-                  label={promo.label}
-                  style={promo.style}
-                />
-              ))}
+            <span css={styles.promos}>
+              {siteCatalogPromotionInfo.list
+                .slice(0, numberOfPromosToDisplay)
+                .map((promo) => (
+                  <PromoTag
+                    key={promo.label}
+                    icon={promo.icon}
+                    label={promo.label}
+                    style={promo.style}
+                  />
+                ))}
+            </span>
             {siteCatalogPromotionInfo.count > MAX_PROMOS && (
               <span css={styles.morePromos}>
                 {ui('catalog.productListing.morePromos', {
