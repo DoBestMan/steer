@@ -1,0 +1,16 @@
+name: Force UAT Deploy
+
+on:
+  push:
+    branches:
+      - uat
+
+jobs:
+  force-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Force deploy
+      shell: bash
+      run: |
+        curl -X POST https://api.vercel.com/v1/integrations/deploy/QmSHouX1dmctB8H8s3iaSxE1YG7WkAtPdAMMt1rkdRGfzA/cWFWo3YO6d
+

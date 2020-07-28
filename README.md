@@ -207,22 +207,30 @@ now --prod
 
 Note: Builds from other branches (eg staging) that are promoted to production will still contain a visible `/storybook` route.
 
-### Deploying from one branch to another
+### Deduplication
 
-If you do this from `dev`:
+Vercel uses [deduplication](https://vercel.com/docs/v2/platform/deployments#deduplication) to only rebuild when a change in files/settings is detected. This can cause some issues in this codebase because we use the branch name to determine which API to connect to.
 
-```
-gco -b my-new-branch
-gp -u origin my-new-branch
-```
+We have a few solutions to this in the codebase:
 
-This will not kick off a new deploy from Vercel. This is because there is already a build for the latest commit of the `dev` branch.
+**Deploy Hooks**
 
-One shortcut to convince Vercel to create a new build is to run `yarn version` on your branch;
+The `dev`, `dev-st`, and `uat` branches have GitHub actions that will trigger deploy hooks when they are merged.
 
-```
-yarn version
-$ info Current version: 1.2.3
-$ question New version: 1.2.3-new-version
-git push
-```
+Among other things, this solves the use case where `my-feature-branch` (built against the mock API) is merged into `dev` and we need to kick off a new deploy against the staging API.
+
+See `force-dev-deploy.yml` for an example.
+
+**New Files**
+
+Creating a new file will always trick Vercel into creating a build, but this should only be used for branches whose git history will never be merged back into the rest of our code.
+
+Thus, this is a great solution for our `mock-dev`, `mock-qa`, etc. branches; these get rebuilt against the mock API anytime there is an update to the corresponding branch (eg `dev`, `qa`).
+
+See `deploy-against-mock.yml` for more.
+
+**Releases**
+
+A release via `yarn version` will also kick off a new deploy because it changes the version number in `package.json`. This ensures that QA always rebuilds in the `release-qa.yml` and `version-qa.yml` actions.
+
+**More notes on environments on [Dropbox Paper](https://paper.dropbox.com/doc/ST-Development-Links--AyCKb2pePbiZFUsXW8ShbtBfAg-Y33jYGKY0lmgt8ViSFxaq).**
