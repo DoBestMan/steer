@@ -54,10 +54,10 @@ const styles: StylesMap = {
     padding: `${SPACING.SIZE_25}px ${SPACING.SIZE_50}px ${SPACING.SIZE_25}px 0`,
     position: 'relative',
     [MQ.M]: {
-      padding: `${SPACING.SIZE_30}px ${SPACING.SIZE_80}px ${SPACING.SIZE_30}px 0`,
+      padding: `${SPACING.SIZE_30}px 65px ${SPACING.SIZE_30}px 0`,
     },
     [MQ.XL]: {
-      padding: `${SEARCH_PADDING_XL}px ${SPACING.SIZE_80}px ${SEARCH_PADDING_XL}px 0`,
+      padding: `${SEARCH_PADDING_XL}px 65px ${SEARCH_PADDING_XL}px 0`,
     },
   },
   autocompleteGridItemRearTireState: {
