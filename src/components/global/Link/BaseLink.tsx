@@ -13,6 +13,7 @@ export interface BaseLinkProps extends UseBaseLinkProps {
   children?: ReactNode;
   onClick?: MouseEventHandler;
   onFocus?: () => void;
+  onTouchEnd?: TouchEventHandler;
   onTouchStart?: TouchEventHandler;
 }
 

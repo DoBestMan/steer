@@ -45,6 +45,10 @@ function SearchSection({
     }
   };
 
+  const handleTouchEnd = (event: React.TouchEvent) => {
+    event.preventDefault();
+  };
+
   return (
     <Grid>
       <GridItem gridColumnS="2/6" gridColumnM="2/8" gridColumnL="3/14">
@@ -87,6 +91,7 @@ function SearchSection({
                     onClick={handleClick(item)}
                     onFocus={onFocus(index)}
                     onTouchStart={handleTouchStart(item)}
+                    onTouchEnd={handleTouchEnd}
                     routeQueryParamOptions={routeQueryParamOptions}
                   >
                     {innerContent}
@@ -107,6 +112,7 @@ function SearchSection({
                   onClick={handleClick(item)}
                   onFocus={onFocus(index)}
                   onTouchStart={handleTouchStart(item)}
+                  onTouchEnd={handleTouchEnd}
                 >
                   {innerContent}
                 </button>
