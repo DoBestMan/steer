@@ -1,8 +1,7 @@
-import format from 'date-fns/format';
-
 import Link from '~/components/global/Link/Link';
 import { SiteLink } from '~/data/models/SiteLink';
 import { THEME } from '~/lib/constants';
+import { formatOrNull } from '~/lib/utils/date';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { uiJSX } from '~/lib/utils/ui-dictionary-jsx';
 
@@ -43,11 +42,9 @@ export function getOrderSteps({
   trackingLabel: string | null;
   trackingLink: SiteLink | null;
 }) {
-  const createdAtDate = format(new Date(createdAt), 'EEEE, MMMM d');
-
   return [
     {
-      descriptionComponent: <span>{createdAtDate}</span>,
+      descriptionComponent: <span>{formatOrNull(createdAt)}</span>,
       hierarchyNum: 0,
       label: ui('tracking.stepProcessed'),
     },
@@ -79,7 +76,7 @@ export function getOrderSteps({
     },
     {
       descriptionComponent: deliveredAt ? (
-        <span>{format(new Date(deliveredAt), 'EEEE, MMMM d yyyy')}</span>
+        <span>{formatOrNull(deliveredAt, 'EEEE, MMMM d yyyy')}</span>
       ) : null,
       hierarchyNum: 3,
       label: ui('tracking.stepDelivered'),
@@ -107,7 +104,7 @@ export function getOrderStatusDate({
     case OrderStatus.CANCELLED:
       return null;
     case OrderStatus.DELIVERED:
-      return deliveredAt && format(new Date(deliveredAt), 'MMMM d');
+      return deliveredAt && formatOrNull(deliveredAt, 'MMMM d');
     default:
       return deliveryExpectedLabel;
   }

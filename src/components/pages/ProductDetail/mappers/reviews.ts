@@ -1,10 +1,10 @@
-import format from 'date-fns/format';
 import { NextRouter } from 'next/router';
 
 import { ReviewCardProps } from '~/components/global/ReviewCard/ReviewCard';
 import { ReviewsProps } from '~/components/modules/PDP/Reviews/Reviews';
 import { SiteProductReviews } from '~/data/models/SiteProductReviews';
 import { ROUTE_MAP, ROUTES } from '~/lib/constants';
+import { formatOrNull } from '~/lib/utils/date';
 import { interpolateRoute } from '~/lib/utils/routes';
 import { ui } from '~/lib/utils/ui-dictionary';
 
@@ -30,9 +30,7 @@ export function mapDataToReviews({
   const reviews: ReviewCardProps[] = reviewsList.map((item, idx) => ({
     body: item.additionalComments,
     car: item.vehicle || undefined,
-    date: item.purchaseDate
-      ? format(new Date(item.purchaseDate), 'EEEE MMMM d')
-      : null,
+    date: item.purchaseDate ? formatOrNull(item.purchaseDate) : null,
     id: idx.toString(),
     isVerified: item.verifiedCustomer,
     location: item.address,
