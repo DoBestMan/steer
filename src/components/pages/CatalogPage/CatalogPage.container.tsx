@@ -58,21 +58,44 @@ function CatalogPageContainer({
     revalidateEmitter: eventEmitters.userPersonalizationLocationUpdate,
   };
 
-  // fetch site catalog summary
-  const {
-    data: { siteCatalogSummary },
-    error: summaryError,
-    hasLocalData,
-    setHasLocalData,
-  } = useApiDataWithDefault<CatalogPageData['serverData']>({
+  /**
+   * Combine the `hasLocalData` and data states, so that they can be
+   * set simultaneously on fetch success.
+   */
+  const [{ hasLocalData, siteCatalogSummary }, setSummaryState] = useState({
+    hasLocalData: false,
+    siteCatalogSummary: serverData.siteCatalogSummary,
+  });
+
+  /**
+   * Fetch site catalog summary
+   * Note that unusually this hook does not return the data directly,
+   * but sets it to local state via the `onSuccess` callback. This was
+   * done to solve an issue where the downstream components were
+   * receiving the `hasLocalData: true` prop before the updated data.
+   */
+  const { error: summaryError } = useApiDataWithDefault<
+    CatalogPageData['serverData']
+  >({
     ...apiArgs,
     endpoint: endpoints.summary,
+    options: {
+      onSuccess: (data) => {
+        setSummaryState({
+          hasLocalData: true,
+          siteCatalogSummary: data.siteCatalogSummary,
+        });
+      },
+    },
   });
 
   useEffect(() => {
     const handleResetSummary = () => {
       // Reset hasLocalData state on `useApiData` hook
-      setHasLocalData(false);
+      setSummaryState((summaryState) => ({
+        ...summaryState,
+        hasLocalData: false,
+      }));
 
       // Reset scroll position to top
       window.scrollTo(0, 0);
@@ -83,7 +106,7 @@ function CatalogPageContainer({
     return () => {
       eventEmitters.newCatalogSearchQuery.off(handleResetSummary);
     };
-  }, [setHasLocalData]);
+  }, []);
 
   // fetch site catalog products
   const {

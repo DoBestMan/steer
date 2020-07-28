@@ -22,11 +22,9 @@ describe('useApiData', () => {
     const useApiDataReturn = {
       data: { testData: true },
       error: undefined,
-      hasLocalData: true,
       isValidating: true,
       mutate: jest.fn(),
       revalidate: jest.fn(),
-      setHasLocalData: jest.fn(),
     };
 
     const useApiDataWithDefaultReturn = {

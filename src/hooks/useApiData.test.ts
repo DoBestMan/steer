@@ -17,11 +17,9 @@ describe('useApiData', () => {
     const swrMockReturn = {
       data: { testData: true },
       error: undefined,
-      hasLocalData: true,
       isValidating: true,
       mutate: jest.fn(),
       revalidate: jest.fn(),
-      setHasLocalData: expect.any(Function),
     };
 
     mocked(useSWR).mockReturnValue(swrMockReturn);
