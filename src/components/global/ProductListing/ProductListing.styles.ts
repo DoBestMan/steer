@@ -46,6 +46,7 @@ const styles: StylesMap = {
   brandLabel: typography.tertiaryHeadline,
   filterItem: typography.primarySubhead,
   image: {
+    marginBottom: SPACING.SIZE_30,
     minHeight: IMAGE_SIZE.DEFAULT.S,
     position: 'relative',
     width: IMAGE_SIZE.DEFAULT.S,
