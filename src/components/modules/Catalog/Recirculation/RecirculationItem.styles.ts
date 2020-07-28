@@ -26,7 +26,7 @@ const styles: StylesMap = {
     },
   },
   item: {
-    ':first-of-type a': {
+    ':first-of-type button': {
       paddingTop: 0,
       borderTop: 0,
     },
