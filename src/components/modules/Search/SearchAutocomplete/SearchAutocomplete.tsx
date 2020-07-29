@@ -313,7 +313,13 @@ function SearchAutocomplete({
             ]}
           >
             <div css={styles.searchIconWrapper}>
-              <Icon name={ICONS.MAIN_SEARCH} css={styles.searchIcon} />
+              <Icon
+                name={ICONS.MAIN_SEARCH}
+                css={[
+                  styles.searchIcon,
+                  !!queryText && styles.searchIconActive,
+                ]}
+              />
             </div>
           </GridItem>
           <GridItem

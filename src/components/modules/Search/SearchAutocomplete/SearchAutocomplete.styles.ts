@@ -193,6 +193,10 @@ const styles: StylesMap = {
       width: 34,
     },
     color: COLORS.ORANGE.TINT_70,
+    transition: `color ${TIME.MS150}ms ease`,
+  },
+  searchIconActive: {
+    color: COLORS.GLOBAL.WHITE,
   },
   searchIconGridItem: {
     alignItems: 'center',
