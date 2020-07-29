@@ -16,9 +16,6 @@ const styles: StylesMap = {
     disableGlobalFocus,
     {
       width: '100%',
-      [MQ.XL]: {
-        paddingTop: SPACING.SIZE_05,
-      },
     },
   ],
   inputContainer: {
@@ -36,12 +33,7 @@ const styles: StylesMap = {
       backgroundColor: 'inherit',
       border: 'none',
       padding: 0,
-      [MQ.M]: [
-        typographyStyles.primaryHeadline.M,
-        {
-          height: 40,
-        },
-      ],
+      [MQ.M]: typographyStyles.primaryHeadline.M,
       [MQ.XL]: typographyStyles.primaryHeadline.XL,
     },
   ],
