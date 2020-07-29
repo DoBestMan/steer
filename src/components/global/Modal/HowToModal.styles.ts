@@ -29,12 +29,12 @@ const styles: StylesMap = {
     },
   ],
   container: {
-    padding: `${SPACING.SIZE_40}px 0 0`,
+    padding: `${SPACING.SIZE_50}px 0 ${SPACING.SIZE_60}px`,
     [MQ.M]: {
-      padding: `${SPACING.SIZE_70}px 0 0`,
+      padding: `${SPACING.SIZE_80}px 0 ${SPACING.SIZE_60}px`,
     },
     [MQ.L]: {
-      padding: `${SPACING.SIZE_40}px 0 ${SPACING.SIZE_20}px`,
+      padding: `${SPACING.SIZE_50}px 0 ${SPACING.SIZE_60}px`,
     },
   },
   eyebrow: [
