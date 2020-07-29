@@ -4,8 +4,12 @@ import { ReactNode, useEffect } from 'react';
 import { Transition, TransitionGroup } from 'react-transition-group';
 import { TransitionStatus } from 'react-transition-group/Transition';
 
+import Grid from '~/components/global/Grid/Grid';
+import GridItem from '~/components/global/Grid/GridItem';
 import Layout from '~/components/global/Layout/Layout';
+import Toast from '~/components/global/Toast/Toast';
 import SearchModal from '~/components/modules/Search/SearchModal';
+import { useGlobalToastContext } from '~/context/GlobalToast.context';
 import { NavContextProvider } from '~/context/Nav.context';
 import { CATALOG_ROUTES, ROUTE_MAP, ROUTES, TIME } from '~/lib/constants';
 import { eventEmitters } from '~/lib/events/emitters';
@@ -33,6 +37,13 @@ function App({ children, ...rest }: Props) {
 
   // If page transition (fade out/in) is not desired, add use case here
   const skipPageTransition = isSearchOpen;
+
+  const {
+    globalToastMessage,
+    handleGlobalToastDismiss,
+    handleClearGlobalToastMessage,
+    isGlobalToastOpen,
+  } = useGlobalToastContext();
 
   useEffect(() => {
     // Callback when traversing the `history` stack
@@ -70,6 +81,19 @@ function App({ children, ...rest }: Props) {
 
               return (
                 <div css={appStyles}>
+                  {globalToastMessage && (
+                    <Grid css={styles.globalToast}>
+                      <GridItem gridColumnL="10/14" gridColumnXL="11/14">
+                        <Toast
+                          isOpen={isGlobalToastOpen}
+                          handleClearMessage={handleClearGlobalToastMessage}
+                          onDismiss={handleGlobalToastDismiss}
+                        >
+                          {globalToastMessage}
+                        </Toast>
+                      </GridItem>
+                    </Grid>
+                  )}
                   <Layout>{children}</Layout>
                 </div>
               );

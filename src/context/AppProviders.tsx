@@ -5,7 +5,9 @@ import { SiteGlobals } from '~/data/models/SiteGlobals';
 import { SiteMenu } from '~/data/models/SiteMenu';
 
 import { GlobalsContextProvider } from './Globals.context';
+import { GlobalToastContextProvider } from './GlobalToast.context';
 import { ModalContextProvider } from './Modal.context';
+import { RouterContextProvider } from './Router.context';
 import { SiteGlobalsContextProvider } from './SiteGlobals.context';
 import { SiteMenuContextProvider } from './SiteMenu.context';
 import { UserPersonalizationContextProvider } from './UserPersonalization.context';
@@ -31,7 +33,11 @@ function AppProviders({
         <SiteMenuContextProvider value={siteMenuContextValue}>
           <UserPersonalizationContextProvider>
             <SearchContextProvider>
-              <ModalContextProvider>{children}</ModalContextProvider>
+              <GlobalToastContextProvider>
+                <RouterContextProvider>
+                  <ModalContextProvider>{children}</ModalContextProvider>
+                </RouterContextProvider>
+              </GlobalToastContextProvider>
             </SearchContextProvider>
           </UserPersonalizationContextProvider>
         </SiteMenuContextProvider>

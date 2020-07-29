@@ -9,8 +9,9 @@ import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Input from '~/components/global/Input/Input';
 import Markdown from '~/components/global/Markdown/Markdown';
 import TitleRadio from '~/components/global/Radio/TitleRadio';
-import Toast, { TOAST_TYPE } from '~/components/global/Toast/Toast';
-import { useToastManager } from '~/components/global/Toast/Toast.hooks';
+import { TOAST_TYPE } from '~/components/global/Toast/Toast';
+import { useGlobalToastContext } from '~/context/GlobalToast.context';
+import { useRouterContext } from '~/context/Router.context';
 import { SiteProductLineReviewItemInput } from '~/data/models/SiteProductLineReviewItemInput';
 import { apiPostReview } from '~/lib/api/write-review';
 import {
@@ -82,7 +83,7 @@ const initialState = {
   [FIELDS.NAME]: '',
   [FIELDS.EMAIL]: '',
   [FIELDS.VEHICLE]: '',
-  [FIELDS.PURCHASE_DATE]: null,
+  [FIELDS.PURCHASE_DATE]: '',
   performanceRating: {
     [FIELDS.DRY]: unselectedPicker,
     [FIELDS.COMFORT]: unselectedPicker,
@@ -97,13 +98,8 @@ function ReviewForm({ tire, queryParams, vehicle, onSearchVehicle }: Props) {
   const [formValues, setFormValues] = useState<FormValues>(initialState);
   const [pickerLabels, setPickerLabels] = useState<PickerLabels>({});
   const [isFormValid, setIsFormValid] = useState<boolean>(false);
-  const {
-    toastMessage,
-    setToastMessage,
-    handleClearMessage,
-    isOpen,
-    handleDismiss,
-  } = useToastManager();
+  const { prevUrl, prevRoute, router } = useRouterContext();
+
   useEffect(() => {
     if (vehicle) {
       setFormValues((prev) => ({
@@ -113,7 +109,12 @@ function ReviewForm({ tire, queryParams, vehicle, onSearchVehicle }: Props) {
     }
   }, [vehicle]);
 
-  const brandName = removeTireFromQueryParam(queryParams.brand);
+  const {
+    setGlobalToastMessage,
+    handleShowTostOnNextPage,
+  } = useGlobalToastContext();
+  const brandName =
+    queryParams.brand && removeTireFromQueryParam(queryParams.brand);
 
   const hasRequiredFieldsFilled =
     formValues.performanceRating &&
@@ -134,7 +135,7 @@ function ReviewForm({ tire, queryParams, vehicle, onSearchVehicle }: Props) {
   const hasValidFields =
     email.test(formValues[FIELDS.EMAIL] || '') &&
     (numberSlashNumber.test(formValues[FIELDS.PURCHASE_DATE] || '') ||
-      formValues[FIELDS.PURCHASE_DATE] === null);
+      formValues[FIELDS.PURCHASE_DATE] === '');
 
   useEffect(() => {
     if (hasRequiredFieldsFilled && hasValidFields) {
@@ -147,6 +148,10 @@ function ReviewForm({ tire, queryParams, vehicle, onSearchVehicle }: Props) {
   const handleFormSubmit = async () => {
     const reformattedDataForSubmission = {
       ...formValues,
+      [FIELDS.PURCHASE_DATE]:
+        formValues[FIELDS.WOULD_BUY_AGAIN] === ''
+          ? null
+          : formValues[FIELDS.WOULD_BUY_AGAIN],
       [FIELDS.WOULD_BUY_AGAIN]:
         formValues[FIELDS.WOULD_BUY_AGAIN] ===
         ui('reviews.form.sections.buyAgain.options.yes')
@@ -188,12 +193,12 @@ function ReviewForm({ tire, queryParams, vehicle, onSearchVehicle }: Props) {
             });
         } catch (error) {
           console.info(error);
-          setToastMessage(TOAST_TYPE.ERROR);
+          setGlobalToastMessage(toastMessages[TOAST_TYPE.ERROR]);
         }
       });
     } else {
       console.info('Could not find recaptcha3 in the window');
-      setToastMessage(TOAST_TYPE.ERROR);
+      setGlobalToastMessage(toastMessages[TOAST_TYPE.ERROR]);
     }
   };
 
@@ -219,12 +224,17 @@ function ReviewForm({ tire, queryParams, vehicle, onSearchVehicle }: Props) {
         queryParams.productLine.toString(),
         reformattedDataForSubmission,
       );
-      setToastMessage(TOAST_TYPE.SUCCESS);
+
+      setIsFormValid(false);
       setFormValues(initialState);
       setPickerLabels({});
-      setIsFormValid(false);
+
+      handleShowTostOnNextPage();
+      setGlobalToastMessage(toastMessages[TOAST_TYPE.SUCCESS]);
+
+      router.push(prevRoute, prevUrl);
     } catch (error) {
-      setToastMessage(TOAST_TYPE.ERROR);
+      setGlobalToastMessage(toastMessages[TOAST_TYPE.ERROR]);
     }
   };
 
@@ -548,14 +558,6 @@ function ReviewForm({ tire, queryParams, vehicle, onSearchVehicle }: Props) {
             </Button>
           </div>
         </form>
-        <Toast
-          customStyles={styles.toast}
-          isOpen={isOpen}
-          handleClearMessage={handleClearMessage}
-          onDismiss={handleDismiss}
-        >
-          {toastMessages[toastMessage]}
-        </Toast>
       </GridItem>
     </Grid>
   );

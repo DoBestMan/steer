@@ -5,7 +5,7 @@ import {
   EXITING,
 } from 'react-transition-group/Transition';
 
-import { COLORS, EASING, StylesMap } from '~/lib/constants';
+import { COLORS, EASING, SPACING, StylesMap, Z_INDEX } from '~/lib/constants';
 
 import { PAGE_TRANSITION_DURATION } from './App.constants';
 
@@ -29,6 +29,13 @@ export const animations = {
 export const styles: StylesMap = {
   component: {
     transition: `all ${PAGE_TRANSITION_DURATION}ms ${EASING.CUBIC_EASE_OUT}`,
+  },
+  globalToast: {
+    bottom: 0,
+    marginBottom: SPACING.SIZE_60,
+    position: 'fixed',
+    right: 0,
+    zIndex: Z_INDEX.OVERLAY,
   },
   root: {
     backgroundColor: 'transparent',
