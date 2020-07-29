@@ -39,7 +39,7 @@ function Prices({
                     color: COLORS.GLOBAL.ORANGE,
                   },
                   isLight && { color: COLORS.GLOBAL.WHITE },
-                  typography.topPicksPrice,
+                  typography.tertiaryHeadline,
                   currentPriceCSS,
                 ]}
               >
@@ -70,7 +70,7 @@ function Prices({
       ) : (
         <span
           css={[
-            typography.topPicksPrice,
+            typography.tertiaryHeadline,
             styles.noPrice,
             isLight && { color: COLORS.GLOBAL.WHITE },
           ]}

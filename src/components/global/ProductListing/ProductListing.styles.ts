@@ -43,7 +43,7 @@ const styles: StylesMap = {
     },
   },
   brandLabel: typography.tertiaryHeadline,
-  filterItem: typography.primarySubhead,
+  filterItem: typography.secondarySubhead,
   filterItemContainer: {
     marginBottom: 7,
   },
