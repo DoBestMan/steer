@@ -111,7 +111,7 @@ function ProductListing({
         </h3>
         {rating && (
           <div css={styles.rating}>
-            <Stars isSmall color={COLORS.GLOBAL.BLACK} number={rating.value} />
+            <Stars isSmall color={COLORS.LIGHT.GRAY_70} number={rating.value} />
             <span css={styles.subcopy}>({rating.quantity})</span>
           </div>
         )}
