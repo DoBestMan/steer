@@ -66,9 +66,6 @@ const styles: StylesMap = {
       textOverflow: 'ellipsis',
       whiteSpace: 'nowrap',
       width: '100%',
-      [MQ.M]: {
-        padding: `${SPACING.SIZE_30}px ${SPACING.SIZE_30}px ${CONSTANTS.INPUT_BOTTOM_PADDING}px`,
-      },
     },
   ],
   label: [
@@ -85,10 +82,6 @@ const styles: StylesMap = {
       transformOrigin: 0,
       transition: `color ${TIME.MS100}ms ease, transform ${TIME.MS100}ms ease`,
       whiteSpace: 'nowrap',
-      [MQ.M]: {
-        left: SPACING.SIZE_30,
-        maxWidth: `calc(100% - (${SPACING.SIZE_30}px + ${SPACING.SIZE_20}px))`,
-      },
     },
   ],
 };
@@ -106,9 +99,7 @@ export const textAreaStyles: StylesMap = {
     whiteSpace: 'normal',
     width: `calc(100% - ${SPACING.SIZE_20 * 2}px)`,
     [MQ.M]: {
-      margin: `${SPACING.SIZE_30}px ${SPACING.SIZE_30}px ${CONSTANTS.INPUT_BOTTOM_PADDING}px`,
       padding: 0,
-      width: `calc(100% - ${SPACING.SIZE_30 * 2}px)`,
     },
   },
   label: {
