@@ -70,6 +70,9 @@ export const removeInchFromQueryParam = (str: string) =>
 export const removeTireFromQueryParam = (str: string | string[]): string =>
   str.toString().replace(/-tires/g, '');
 
+export const appendTiresToString = (str: string | string[]): string =>
+  `${str.toString()}-tires`;
+
 export const tireSizeQueryToTireSize = (s?: string) => {
   if (!s || !s.length) {
     return '';

@@ -12,6 +12,7 @@ import { SiteProductReviewsListingInfo } from '~/data/models/SiteProductReviewsL
 import { ROUTE_MAP, ROUTES } from '~/lib/constants';
 import { mapPathnameToBreadcrumbs } from '~/lib/utils/breadcrumbs';
 import { interpolateRoute } from '~/lib/utils/routes';
+import { appendTiresToString } from '~/lib/utils/string';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 export function mapDataToHeader({
@@ -40,17 +41,17 @@ export function mapDataToHeader({
             switch (filterItem.id) {
               case SiteProductLineReviewsListingFilterType.Brand:
                 href = interpolateRoute(ROUTE_MAP[ROUTES.BRAND_REVIEWS], {
-                  brand: filterGroupItem.value,
+                  brand: appendTiresToString(filterGroupItem.value),
                 });
                 break;
               case SiteProductLineReviewsListingFilterType.TireType:
                 href = interpolateRoute(ROUTE_MAP[ROUTES.TYPE_REVIEWS], {
-                  type: filterGroupItem.value,
+                  type: appendTiresToString(filterGroupItem.value),
                 });
                 break;
               case SiteProductLineReviewsListingFilterType.TireCategory:
                 href = interpolateRoute(ROUTE_MAP[ROUTES.CATEGORY_REVIEWS], {
-                  category: filterGroupItem.value,
+                  category: appendTiresToString(filterGroupItem.value),
                 });
                 break;
               default:

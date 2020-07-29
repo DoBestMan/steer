@@ -5,6 +5,12 @@ import ReviewListingPage, {
 } from '~/components/pages/ReviewListingPage/ReviewListingPage.container';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
 import { backendGetReviewListing } from '~/lib/backend/review-listing';
+import { validBrandQuery as validTiresQuery } from '~/lib/utils/regex';
+import {
+  redirectToNotFound,
+  validateOrRedirectToNotFound,
+} from '~/lib/utils/routes';
+import { removeTireFromQueryParam } from '~/lib/utils/string';
 
 function Reviews(props: ReviewListingServerData) {
   return <ReviewListingPage {...props} />;
@@ -17,6 +23,12 @@ export const getServerSideProps: GetServerSideProps<ReviewListingServerData> = a
   const queryParams: Record<string, string> = {};
   const { category, ...params } = context.query;
 
+  validateOrRedirectToNotFound({
+    param: category,
+    pattern: validTiresQuery,
+    response: context.res,
+  });
+
   // Category tire reviews accept params for sort, order and page
   Object.entries(params).map(([key, value]) => {
     if (typeof value === 'string') {
@@ -25,9 +37,13 @@ export const getServerSideProps: GetServerSideProps<ReviewListingServerData> = a
   });
 
   // tireCategory acts as a query param for the tire reviews end point so add it to the query params
-  queryParams.tireCategory = category.toString();
+  queryParams.tireCategory = removeTireFromQueryParam(category);
 
   const tireReviews = await backendGetReviewListing({ query: queryParams });
+
+  if (!tireReviews.reviewsList.length) {
+    redirectToNotFound(context.res);
+  }
 
   const props: ReviewListingServerData = {
     category: queryParams.tireCategory,

@@ -6,7 +6,10 @@ import ReviewListingPage, {
 import { backendBootstrap } from '~/lib/backend/bootstrap';
 import { backendGetReviewListing } from '~/lib/backend/review-listing';
 import { validBrandQuery } from '~/lib/utils/regex';
-import { validateOrRedirectToNotFound } from '~/lib/utils/routes';
+import {
+  redirectToNotFound,
+  validateOrRedirectToNotFound,
+} from '~/lib/utils/routes';
 import { removeTireFromQueryParam } from '~/lib/utils/string';
 
 function Reviews(props: ReviewListingServerData) {
@@ -39,6 +42,10 @@ export const getServerSideProps: GetServerSideProps<ReviewListingServerData> = a
   queryParams.brand = brandName;
 
   const tireReviews = await backendGetReviewListing({ query: queryParams });
+
+  if (!tireReviews.reviewsList.length) {
+    redirectToNotFound(context.res);
+  }
 
   const props: ReviewListingServerData = {
     brand: brandName,
