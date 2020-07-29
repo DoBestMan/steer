@@ -12,6 +12,7 @@ export type Icon =
   | 'best-price'
   | 'calendar'
   | 'checkmark'
+  | 'checkmark-big'
   | 'chevron-down'
   | 'chevron-left'
   | 'chevron-right'
