@@ -73,13 +73,13 @@ function ReviewCard({
           {car && <span>{car}</span>}
           {location && <span>{location}</span>}
           {isVerified && (
-            <span css={styles.verifiedCustomer}>
-              {ui('reviews.verifiedCustomer')}
+            <div css={styles.verifiedCustomer}>
+              <span>{ui('reviews.verifiedCustomer')}</span>
               <Icon
                 css={styles.verifiedCustomerIcon}
                 name={ICONS.REVIEW_VERIFIED}
               />
-            </span>
+            </div>
           )}
         </div>
         {date && <span css={styles.date}>{date}</span>}

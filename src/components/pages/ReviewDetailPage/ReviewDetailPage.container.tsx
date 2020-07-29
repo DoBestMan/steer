@@ -44,7 +44,7 @@ function ReviewDetailPage({ serverData }: ProductDetailReviewsData) {
   } = header;
 
   const { brand, productLine } = router.query;
-  const brandName = removeTireFromQueryParam(brand);
+  const brandName = brand && removeTireFromQueryParam(brand);
 
   const writeReviewUrl = interpolateRoute(ROUTE_MAP[ROUTES.WRITE_REVIEW], {
     brand,
@@ -58,7 +58,7 @@ function ReviewDetailPage({ serverData }: ProductDetailReviewsData) {
 
   const { displayedReviews, handleSeeMoreClick } = usePagination(
     brandName,
-    productLine.toString(),
+    productLine && productLine.toString(),
     reviews,
   );
 

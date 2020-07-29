@@ -50,12 +50,14 @@ const styles: StylesMap = {
   customerInfo: [
     typography.smallCopyTight,
     {
+      display: 'flex',
+      flexDirection: 'column',
+      flexWrap: 'wrap',
+      [MQ.M]: {
+        flexDirection: 'row',
+      },
+      // eslint-disable-next-line sort-keys
       '> span:not(:last-child)': {
-        display: 'block',
-        [MQ.M]: {
-          display: 'inline-flex',
-        },
-        // eslint-disable-next-line sort-keys
         ':after': {
           alignItems: 'center',
           content: CONSTANTS.SEPARATOR_EMPTY,
@@ -70,6 +72,7 @@ const styles: StylesMap = {
       },
     },
   ],
+
   date: [
     typography.smallCopyTight,
     {
@@ -97,11 +100,10 @@ const styles: StylesMap = {
     },
   ],
   verifiedCustomer: {
-    display: 'inline-flex',
     alignItems: 'center',
+    display: 'flex',
   },
   verifiedCustomerIcon: {
-    alignItems: 'center',
     marginLeft: SPACING.SIZE_05,
   },
 };
