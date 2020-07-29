@@ -89,6 +89,10 @@ export const reset = `
     vertical-align: baseline;
   }
 
+  body {
+    overscroll-behavior-x: none;
+  }
+
   html {
     box-sizing: border-box;
     font-size: 62.5%;
