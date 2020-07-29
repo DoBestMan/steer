@@ -116,6 +116,7 @@ const styles: StylesMap = {
       textAlign: 'center',
       top: SPACING.SIZE_10,
       width: DISC_SIZE,
+      zIndex: Z_INDEX.FRONT,
     },
   ],
   promos: {

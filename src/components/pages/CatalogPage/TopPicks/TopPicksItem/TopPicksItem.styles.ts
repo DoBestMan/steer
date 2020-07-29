@@ -1,5 +1,13 @@
 import { WHEEL_WIDTH } from '~/components/global/Car/Car.constants';
-import { COLORS, EASING, MQ, SPACING, StylesMap, TIME } from '~/lib/constants';
+import {
+  COLORS,
+  EASING,
+  MQ,
+  SPACING,
+  StylesMap,
+  TIME,
+  Z_INDEX,
+} from '~/lib/constants';
 
 import {
   TOP_CONTAINER_MIN_HEIGHT,
@@ -224,6 +232,7 @@ export const styles: StylesMap = {
     top: -SPACING.SIZE_15,
     transform: 'scale3d(1.1, 1.1, 1.1)',
     transition: `all ${TIME.MS300}ms ${EASING.CUBIC_EASE_OUT}`,
+    zIndex: Z_INDEX.BEHIND,
 
     [MQ.L]: {
       left: -SPACING.SIZE_10,
