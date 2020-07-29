@@ -25,7 +25,10 @@ function OrderHeader({
   isCustomerServiceEnabled,
   orderStatus,
 }: Props) {
-  const orderStatusLabel = getOrderStatusLabel(orderStatus);
+  const orderStatusLabel = getOrderStatusLabel(
+    orderStatus,
+    deliveryExpectedLabel,
+  );
   const orderStatusDate = getOrderStatusDate({
     orderStatus,
     deliveredAt,
@@ -46,7 +49,7 @@ function OrderHeader({
           isExpectingDelivery && styles.expectingDelivery,
         ]}
       >
-        <span>{orderStatusLabel} </span>
+        {orderStatusLabel && <span>{orderStatusLabel} </span>}
         {orderStatusDate && <span>{orderStatusDate}</span>}
       </h1>
       {orderStatus === OrderStatus.CANCELLED && (

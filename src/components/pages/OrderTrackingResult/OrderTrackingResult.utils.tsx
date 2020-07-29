@@ -84,14 +84,17 @@ export function getOrderSteps({
   ];
 }
 
-export function getOrderStatusLabel(orderStatus: OrderStatus) {
+export function getOrderStatusLabel(
+  orderStatus: OrderStatus,
+  deliveryExpectedLabel?: string | null,
+) {
   switch (orderStatus) {
     case OrderStatus.CANCELLED:
       return ui('tracking.statusCancelled');
     case OrderStatus.DELIVERED:
       return ui('tracking.statusDelivered');
     default:
-      return ui('tracking.statusExpected');
+      return deliveryExpectedLabel && ui('tracking.statusExpected');
   }
 }
 
