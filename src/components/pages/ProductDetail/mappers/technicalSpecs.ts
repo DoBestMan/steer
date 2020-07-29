@@ -11,8 +11,13 @@ import {
   SiteCatalogProductImageTypeEnum,
 } from '~/data/models/SiteCatalogProductImage';
 import { SiteProduct } from '~/data/models/SiteProduct';
+import { ROUTE_MAP, ROUTES } from '~/lib/constants';
 import { interpolateRoute } from '~/lib/utils/routes';
-import { formatDollars, keyToCamel } from '~/lib/utils/string';
+import {
+  appendTiresToString,
+  formatDollars,
+  keyToCamel,
+} from '~/lib/utils/string';
 
 type QueryParams = Record<string, string>;
 
@@ -28,10 +33,13 @@ export function mapDataToTechnicalSpecs({
   siteProduct: SiteProduct;
 }): TechnicalSpecsProps | null {
   const {
-    pathname,
     query: { brand, productLine, ...queryParams },
   } = router;
-  const baseLink = interpolateRoute(pathname, { brand, productLine });
+  const isPLA = !!router.pathname.match(ROUTE_MAP[ROUTES.PRODUCT_DETAIL_PLA]);
+  const baseLink = interpolateRoute(ROUTE_MAP[ROUTES.PRODUCT_DETAIL], {
+    brand: isPLA ? appendTiresToString(brand) : brand,
+    productLine,
+  });
 
   const description = siteProductLine.overview || '';
 

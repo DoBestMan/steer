@@ -6,6 +6,7 @@ import { ReactNode, useCallback, useEffect, useState } from 'react';
 import { useSearchContext } from '~/components/modules/Search/Search.context';
 import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
 import { VehicleMetadata } from '~/data/models/VehicleMetadata';
+import { ROUTE_MAP, ROUTES } from '~/lib/constants';
 import { createContext } from '~/lib/utils/context';
 import { getLegacyCheckoutURL } from '~/lib/utils/legacy-routes';
 import {
@@ -13,7 +14,13 @@ import {
   getStringifiedParams,
   interpolateRoute,
 } from '~/lib/utils/routes';
+import { appendTiresToString } from '~/lib/utils/string';
 import { ProductDetailResponse } from '~/pages/api/product-detail';
+
+const CONSTANTS = {
+  PRODUCT_DETAIL_ROUTE: ROUTE_MAP[ROUTES.PRODUCT_DETAIL],
+  PLA_ROUTE: ROUTE_MAP[ROUTES.PRODUCT_DETAIL_PLA],
+};
 
 interface Props {
   children: ReactNode;
@@ -74,6 +81,7 @@ function useContextSetup({
     queryParams: query,
     vehicle,
   });
+  const isPLA = !!router.pathname.match(CONSTANTS.PLA_ROUTE);
 
   const {
     lockSearchStateToVehicle,
@@ -139,7 +147,13 @@ function useContextSetup({
 
   const changeSize = useCallback(
     (value) => {
-      const interpolatedRoute = interpolateRoute(router.pathname, queryParams);
+      const interpolatedRoute = interpolateRoute(
+        CONSTANTS.PRODUCT_DETAIL_ROUTE,
+        {
+          ...queryParams,
+          ...(isPLA && { brand: appendTiresToString(router.query.brand) }),
+        },
+      );
       const querystring = queryString.stringify({
         ...hashParams,
         tireSize: value,
@@ -147,11 +161,11 @@ function useContextSetup({
       });
 
       router.push(
-        `${router.pathname}#${querystring}`,
+        `${CONSTANTS.PRODUCT_DETAIL_ROUTE}#${querystring}`,
         `${interpolatedRoute}#${querystring}`,
       );
     },
-    [queryParams, router, hashParams],
+    [isPLA, queryParams, router, hashParams],
   );
 
   return {

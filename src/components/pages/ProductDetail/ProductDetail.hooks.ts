@@ -99,7 +99,7 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
   const globals = useSiteGlobalsContext();
 
   const { hostUrl } = useGlobalsContext();
-  const isPLA = !!router.route.match(ROUTE_MAP[ROUTES.PRODUCT_DETAIL_PLA]);
+  const isPLA = !!router.pathname.match(ROUTE_MAP[ROUTES.PRODUCT_DETAIL_PLA]);
 
   const { data, error, isValidating } = useApiDataWithDefault<
     ProductDetailResponse
@@ -153,7 +153,7 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
    * `?tireSize=235-40r15` => `#tireSize=235-40r15`
    */
   useEffect(() => {
-    if (!asPath.includes('?')) {
+    if (isPLA || !asPath.includes('?')) {
       return;
     }
     const interpolatedRoute = interpolateRoute(router.pathname, queryParams);
@@ -166,7 +166,7 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
         shallow: true,
       },
     );
-  }, [asPath, router, queryParams]);
+  }, [asPath, isPLA, router, queryParams]);
 
   const productInfo = mapDataToProductInfo({
     quantity,
