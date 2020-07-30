@@ -39,7 +39,11 @@ export default function FilterPopup({
       isOpen={isOpen}
       onClose={onClose}
     >
-      <FilterContent filterGroups={filterGroups} contentLabel={contentLabel} />
+      <FilterContent
+        filterGroups={filterGroups}
+        contentLabel={contentLabel}
+        handleCloseDropdown={onClose}
+      />
     </Dropdown>
   );
 }

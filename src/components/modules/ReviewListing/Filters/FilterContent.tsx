@@ -9,9 +9,14 @@ import { FilterGroup } from './Filters.types';
 interface Props {
   contentLabel?: string;
   filterGroups: FilterGroup[];
+  handleCloseDropdown: () => void;
 }
 
-function FilterContent({ filterGroups, contentLabel }: Props) {
+function FilterContent({
+  filterGroups,
+  contentLabel,
+  handleCloseDropdown,
+}: Props) {
   return (
     <>
       {!!contentLabel && <span css={styles.title}>{contentLabel}</span>}
@@ -29,6 +34,7 @@ function FilterContent({ filterGroups, contentLabel }: Props) {
                   <li key={filterGroupItemIdx} css={styles.item}>
                     <BaseLink
                       href={link.href}
+                      onClick={handleCloseDropdown}
                       isExternal={link.isExternal}
                       css={[styles.link, isSelected && styles.linkSelected]}
                     >

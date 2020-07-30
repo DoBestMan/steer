@@ -18,7 +18,11 @@ const styles: StylesMap = {
       color: COLORS.GLOBAL.ORANGE,
     },
   ],
-  listItem: { marginBottom: SPACING.SIZE_15 },
+  listItem: {
+    ':not(:last-of-type)': {
+      marginBottom: SPACING.SIZE_15,
+    },
+  },
   radio: {
     marginBottom: SPACING.SIZE_20,
     width: '100%',
