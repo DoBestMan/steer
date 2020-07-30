@@ -14,19 +14,13 @@ describe('IconOrImage', () => {
     expect(container.firstChild).toMatchInlineSnapshot(`
       <span
         class="Icon"
-        data-component="Icon"
-        data-source-file="Icon.tsx"
       >
         <svg
-          data-element="svg"
-          data-source-file="Icon.tsx"
           height="12"
           viewBox="0 0 14 12"
           width="14"
         >
           <use
-            data-element="use"
-            data-source-file="Icon.tsx"
             xlink:href="#steer--arrow-right"
           />
         </svg>
@@ -46,9 +40,6 @@ describe('IconOrImage', () => {
     expect(container.firstChild).toMatchInlineSnapshot(`
       <div
         class="Image"
-        data-component="Image"
-        data-element="Container"
-        data-source-file="Image.tsx"
       />
     `);
   });
