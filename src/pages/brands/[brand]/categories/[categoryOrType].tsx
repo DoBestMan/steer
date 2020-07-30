@@ -63,8 +63,10 @@ export const getServerSideProps: GetServerSideProps<CatalogPageData> = async (
     category: categoryOrType,
     query: getStringifiedParams(vehicleParams),
   };
-  const { siteCatalogSummary } = await backendGetBrandSummary(apiArgs);
-  const { siteCatalogProducts } = await backendGetBrandProducts(apiArgs);
+  const [{ siteCatalogSummary }, { siteCatalogProducts }] = await Promise.all([
+    backendGetBrandSummary(apiArgs),
+    backendGetBrandProducts(apiArgs),
+  ]);
 
   return {
     props: {

@@ -63,12 +63,13 @@ export const getServerSideProps: GetServerSideProps<CatalogPageData> = async (
       query: getStringifiedParams(vehicleParams),
     };
 
-    const { siteCatalogSummary } = await backendGetTireSizeDiameterSummary(
-      diameterApiArgs,
-    );
-    const { siteCatalogProducts } = await backendGetTireSizeDiameterProducts(
-      diameterApiArgs,
-    );
+    const [
+      { siteCatalogSummary },
+      { siteCatalogProducts },
+    ] = await Promise.all([
+      backendGetTireSizeDiameterSummary(diameterApiArgs),
+      backendGetTireSizeDiameterProducts(diameterApiArgs),
+    ]);
 
     return {
       props: {
@@ -82,12 +83,11 @@ export const getServerSideProps: GetServerSideProps<CatalogPageData> = async (
     size,
     query: getStringifiedParams(vehicleParams),
   };
-  const { siteCatalogSummary } = await backendGetTireSizeClassicSummary(
-    classicApiArgs,
-  );
-  const { siteCatalogProducts } = await backendGetTireSizeClassicProducts(
-    classicApiArgs,
-  );
+
+  const [{ siteCatalogSummary }, { siteCatalogProducts }] = await Promise.all([
+    backendGetTireSizeClassicSummary(classicApiArgs),
+    backendGetTireSizeClassicProducts(classicApiArgs),
+  ]);
 
   return {
     props: {

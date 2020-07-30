@@ -16,8 +16,10 @@ export const getServerSideProps: GetServerSideProps<HomeServeData> = async (cont
 }) => {
   backendBootstrap({ request: context.req });
 
-  const { siteHero, siteInsights } = await backendGetSiteHome();
-  const { siteReviews } = await backendGetSiteReviews();
+  const [{ siteHero, siteInsights }, { siteReviews }] = await Promise.all([
+    backendGetSiteHome(),
+    backendGetSiteReviews(),
+  ]);
 
   const props: HomeServeData = {
     serverData: {

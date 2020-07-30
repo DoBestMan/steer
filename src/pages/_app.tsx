@@ -76,8 +76,11 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
   const {
     ctx: { req },
   } = appContext;
-  const { siteGlobals } = await backendGetSiteGlobals();
-  const siteMenu = await backendGetSiteMenu();
+
+  const [{ siteGlobals }, siteMenu] = await Promise.all([
+    backendGetSiteGlobals(),
+    backendGetSiteMenu(),
+  ]);
 
   const hostUrl = req?.headers ? `https://${req.headers.host}` : '';
 
