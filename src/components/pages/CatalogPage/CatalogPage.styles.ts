@@ -1,9 +1,16 @@
-import { COLORS, SPACING, StylesMap, Z_INDEX } from '~/lib/constants';
+import { COLORS, MQ, SPACING, StylesMap, Z_INDEX } from '~/lib/constants';
 
 const styles: StylesMap = {
   grid: {
-    marginBottom: SPACING.SIZE_30,
+    marginBottom: SPACING.SIZE_60,
     minHeight: '100vh',
+
+    [MQ.M]: {
+      marginBottom: SPACING.SIZE_50,
+    },
+    [MQ.L]: {
+      marginBottom: 74,
+    },
   },
 
   loadingContainer: {
