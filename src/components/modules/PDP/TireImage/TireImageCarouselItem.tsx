@@ -7,7 +7,7 @@ import {
   SiteYouTubeVideo,
   SiteYouTubeVideoTypeEnum,
 } from '~/data/models/SiteYouTubeVideo';
-import { CSSStyles } from '~/lib/constants';
+import { CSSStyles, LOADING_OPTIONS } from '~/lib/constants';
 
 import CarouselImage from './CarouselImage';
 import CarouselImageButton from './CarouselImageButton';
@@ -66,6 +66,7 @@ function TireImageCarouselItem({
               { height, width: height && height * (16 / 9) },
             ] as CSSStyles
           }
+          imageLoading={LOADING_OPTIONS.EAGER}
           isButtonFocusable={isActive}
           poster={imageItem.poster}
           sizes={[300, 700]}

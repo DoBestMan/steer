@@ -1,5 +1,6 @@
 import Image from '~/components/global/Image/Image';
 import { SiteImage } from '~/data/models/SiteImage';
+import { LOADING_OPTIONS } from '~/lib/constants';
 
 interface CarouselImageProps {
   height?: number;
@@ -10,6 +11,7 @@ interface CarouselImageProps {
 function CarouselImage({ image, width, height }: CarouselImageProps) {
   return (
     <Image
+      loading={LOADING_OPTIONS.EAGER}
       altText={image.altText}
       width={width}
       height={height}

@@ -6,7 +6,7 @@ import Image from '~/components/global/Image/Image';
 import Loading from '~/components/global/Loading/Loading';
 import { SiteImage } from '~/data/models/SiteImage';
 import { SiteYouTubeVideoVideo } from '~/data/models/SiteYouTubeVideoVideo';
-import { CSSStyles, THEME } from '~/lib/constants';
+import { CSSStyles, Loading as ImageLoading, THEME } from '~/lib/constants';
 import { ratioToPercentage } from '~/lib/utils/number';
 import { randomString } from '~/lib/utils/string';
 import { ui } from '~/lib/utils/ui-dictionary';
@@ -17,6 +17,7 @@ import styles, { activeVideoStyles } from './Video.styles';
 export interface Props {
   aspectRatio?: string;
   containerStyles?: CSSStyles;
+  imageLoading?: ImageLoading;
   isButtonFocusable?: boolean;
   poster: SiteImage;
   setShouldStopVideo?: (shouldStopVideo: boolean) => void;
@@ -29,6 +30,7 @@ export interface Props {
 function Video({
   containerStyles,
   aspectRatio = '16/9',
+  imageLoading,
   isButtonFocusable = true,
   poster,
   sizes,
@@ -88,6 +90,7 @@ function Video({
           </span>
 
           <Image
+            loading={imageLoading}
             customStyles={styles.posterFrame as CSSStyles}
             widths={sizes}
             responsive
