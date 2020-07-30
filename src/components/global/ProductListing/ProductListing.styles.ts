@@ -32,7 +32,6 @@ const styles: StylesMap = {
     },
   ],
   brand: {
-    marginTop: SPACING.SIZE_10,
     marginBottom: SPACING.SIZE_15,
   },
   brandImage: {
@@ -48,11 +47,12 @@ const styles: StylesMap = {
     marginBottom: 7,
   },
   image: {
-    marginBottom: SPACING.SIZE_30,
+    marginBottom: SPACING.SIZE_25,
     minHeight: IMAGE_SIZE.DEFAULT.S,
     position: 'relative',
     width: IMAGE_SIZE.DEFAULT.S,
     [MQ.M]: {
+      marginBottom: SPACING.SIZE_30,
       minHeight: IMAGE_SIZE.DEFAULT.M,
       width: IMAGE_SIZE.DEFAULT.M,
     },
