@@ -96,7 +96,7 @@ const styles: StylesMap = {
       },
 
       svg: {
-        color: COLORS.GLOBAL.GRAY_50,
+        color: COLORS.LIGHT.GRAY_70,
       },
 
       [MQ.L]: {
