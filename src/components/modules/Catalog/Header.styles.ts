@@ -5,7 +5,10 @@ const styles: StylesMap = {
   action: {
     alignItems: 'baseline',
     color: COLORS.GLOBAL.WHITE,
-    marginBottom: SPACING.SIZE_15,
+    marginBottom: SPACING.SIZE_10,
+    [MQ.M]: {
+      marginBottom: SPACING.SIZE_15,
+    },
   },
   back: {
     alignItems: 'center',
