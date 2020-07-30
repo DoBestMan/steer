@@ -12,7 +12,11 @@ export const data = {
         action: ROUTE_MAP[ROUTES.LEARN],
         text: ui('links.learnAboutTires'),
       },
-      { action: LINK_MAP[LINKS.APPLY], text: ui('links.apply') },
+      {
+        action: LINK_MAP[LINKS.APPLY],
+        isExternal: true,
+        text: ui('links.apply'),
+      },
       {
         action: ROUTE_MAP[ROUTES.CUSTOMER_SUPPORT],
         text: ui('links.customerSupport'),
@@ -37,26 +41,31 @@ export const data = {
       {
         action: LINK_MAP[LINKS.FACEBOOK],
         icon: ICONS.FACEBOOK,
+        isExternal: true,
         text: ui('links.facebook'),
       },
       {
         action: LINK_MAP[LINKS.TWITTER],
         icon: ICONS.TWITTER,
+        isExternal: true,
         text: ui('links.twitter'),
       },
       {
         action: LINK_MAP[LINKS.INSTAGRAM],
         icon: ICONS.INSTAGRAM,
+        isExternal: true,
         text: ui('links.instagram'),
       },
       {
         action: LINK_MAP[LINKS.YOUTUBE],
         icon: ICONS.YOUTUBE,
+        isExternal: true,
         text: ui('links.youtube'),
       },
       {
         action: LINK_MAP[LINKS.LINKEDIN],
         icon: ICONS.LINKEDIN,
+        isExternal: true,
         text: ui('links.linkedin'),
       },
     ],
@@ -87,6 +96,7 @@ export const data = {
       },
       {
         action: LINK_MAP[LINKS.REGISTER_TIRES],
+        isExternal: true,
         text: ui('links.registerTires'),
       },
     ],

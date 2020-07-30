@@ -8,6 +8,7 @@ import styles from './FooterLinkList.styles';
 interface Link {
   action: string;
   icon?: Icon;
+  isExternal?: boolean;
   text: string;
 }
 
@@ -21,7 +22,7 @@ function FooterLinkList(props: Props) {
   return (
     <ul>
       {links.map((item: Link) => {
-        const { action, icon, text } = item;
+        const { action, icon, isExternal, text } = item;
         return (
           <li css={styles.listItem} key={text}>
             <Link
@@ -29,6 +30,7 @@ function FooterLinkList(props: Props) {
               href={action}
               icon={icon}
               iconPosition={LINK_ICON_POSITION.LEFT}
+              isExternal={isExternal}
             >
               {text}
             </Link>
