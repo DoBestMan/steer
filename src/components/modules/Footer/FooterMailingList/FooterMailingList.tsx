@@ -77,7 +77,6 @@ function FooterMailingList() {
       <div css={styles.inputContainer}>
         <Input
           containerStyles={styles.inputHeight}
-          contextualLabel={ui('common.form.yourEmail')}
           css={styles.emailInput}
           error={{
             hasError: !isInputValid,

@@ -54,8 +54,8 @@ const styles: StylesMap = {
         transition: `opacity ${TIME.MS100}ms ease`,
       },
       ':focus::placeholder': {
-        // actual placeholder hidden on focus
-        opacity: 0,
+        // actual placeholder displayed on focus
+        opacity: 1,
         transition: `opacity ${TIME.MS100}ms ease`,
       },
       backgroundColor: 'transparent',

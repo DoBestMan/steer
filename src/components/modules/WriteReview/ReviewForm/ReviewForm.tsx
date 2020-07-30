@@ -14,11 +14,8 @@ import { useGlobalToastContext } from '~/context/GlobalToast.context';
 import { useRouterContext } from '~/context/Router.context';
 import { SiteProductLineReviewItemInput } from '~/data/models/SiteProductLineReviewItemInput';
 import { apiPostReview } from '~/lib/api/write-review';
-import {
-  email,
-  numberSlashNumber,
-  onlyNumbersAndForwardSlash,
-} from '~/lib/utils/regex';
+import { isValidPurchaseDate } from '~/lib/utils/date';
+import { email, onlyNumbersAndForwardSlash } from '~/lib/utils/regex';
 import { removeTireFromQueryParam } from '~/lib/utils/string';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { uiJSX } from '~/lib/utils/ui-dictionary-jsx';
@@ -76,7 +73,10 @@ const toastMessages: {
   [TOAST_TYPE.ERROR]: <Markdown>{ui('reviews.form.error')}</Markdown>,
 };
 
-const unselectedPicker = -1;
+const CONSTANTS = {
+  DATE_MAX_LENGTH: 10,
+  UNSELECTED_PICKER: -1,
+};
 
 const initialState = {
   [FIELDS.ADDITIONAL_COMMENTS]: '',
@@ -85,12 +85,12 @@ const initialState = {
   [FIELDS.VEHICLE]: '',
   [FIELDS.PURCHASE_DATE]: '',
   performanceRating: {
-    [FIELDS.DRY]: unselectedPicker,
-    [FIELDS.COMFORT]: unselectedPicker,
-    [FIELDS.NOISE]: unselectedPicker,
-    [FIELDS.TREADWEAR]: unselectedPicker,
-    [FIELDS.WET]: unselectedPicker,
-    [FIELDS.WINTER]: unselectedPicker,
+    [FIELDS.DRY]: CONSTANTS.UNSELECTED_PICKER,
+    [FIELDS.COMFORT]: CONSTANTS.UNSELECTED_PICKER,
+    [FIELDS.NOISE]: CONSTANTS.UNSELECTED_PICKER,
+    [FIELDS.TREADWEAR]: CONSTANTS.UNSELECTED_PICKER,
+    [FIELDS.WET]: CONSTANTS.UNSELECTED_PICKER,
+    [FIELDS.WINTER]: CONSTANTS.UNSELECTED_PICKER,
   },
 };
 
@@ -118,12 +118,16 @@ function ReviewForm({ tire, queryParams, vehicle, onSearchVehicle }: Props) {
 
   const hasRequiredFieldsFilled =
     formValues.performanceRating &&
-    formValues.performanceRating[FIELDS.DRY] !== unselectedPicker &&
-    formValues.performanceRating[FIELDS.WET] !== unselectedPicker &&
-    formValues.performanceRating[FIELDS.WINTER] !== unselectedPicker &&
-    formValues.performanceRating[FIELDS.COMFORT] !== unselectedPicker &&
-    formValues.performanceRating[FIELDS.NOISE] !== unselectedPicker &&
-    formValues.performanceRating[FIELDS.TREADWEAR] !== unselectedPicker &&
+    formValues.performanceRating[FIELDS.DRY] !== CONSTANTS.UNSELECTED_PICKER &&
+    formValues.performanceRating[FIELDS.WET] !== CONSTANTS.UNSELECTED_PICKER &&
+    formValues.performanceRating[FIELDS.WINTER] !==
+      CONSTANTS.UNSELECTED_PICKER &&
+    formValues.performanceRating[FIELDS.COMFORT] !==
+      CONSTANTS.UNSELECTED_PICKER &&
+    formValues.performanceRating[FIELDS.NOISE] !==
+      CONSTANTS.UNSELECTED_PICKER &&
+    formValues.performanceRating[FIELDS.TREADWEAR] !==
+      CONSTANTS.UNSELECTED_PICKER &&
     formValues[FIELDS.NAME] &&
     formValues[FIELDS.EMAIL] &&
     formValues[FIELDS.VEHICLE] &&
@@ -132,10 +136,15 @@ function ReviewForm({ tire, queryParams, vehicle, onSearchVehicle }: Props) {
     formValues[FIELDS.DRIVING_LOCATION] &&
     formValues[FIELDS.WOULD_BUY_AGAIN];
 
+  const isValidDate = isValidPurchaseDate(
+    formValues[FIELDS.PURCHASE_DATE] || '',
+  );
+
+  // Date is valid if empty or valid date
+  const hasValidDate = formValues[FIELDS.PURCHASE_DATE] === '' || isValidDate;
+
   const hasValidFields =
-    email.test(formValues[FIELDS.EMAIL] || '') &&
-    (numberSlashNumber.test(formValues[FIELDS.PURCHASE_DATE] || '') ||
-      formValues[FIELDS.PURCHASE_DATE] === '');
+    email.test(formValues[FIELDS.EMAIL] || '') && hasValidDate;
 
   useEffect(() => {
     if (hasRequiredFieldsFilled && hasValidFields) {
@@ -210,7 +219,9 @@ function ReviewForm({ tire, queryParams, vehicle, onSearchVehicle }: Props) {
     const incrementPickerValue =
       index === RATING_OPTIONS.indexOf(RATING_NOT_APPLICABLE) ? 0 : index + 1;
     const pickerValue =
-      index !== unselectedPicker ? incrementPickerValue : unselectedPicker;
+      index !== CONSTANTS.UNSELECTED_PICKER
+        ? incrementPickerValue
+        : CONSTANTS.UNSELECTED_PICKER;
 
     return pickerValue;
   };
@@ -256,23 +267,12 @@ function ReviewForm({ tire, queryParams, vehicle, onSearchVehicle }: Props) {
   };
 
   const handleSetFormFieldValue = (field: string) => (value: string) => {
-    setFormValues({
-      ...formValues,
-      [field]: value,
-    });
-  };
-
-  const handleSetDateFormField = (field: string) => (value: string) => {
-    let formattedValue = value
-      .substring(0, 10)
-      .replace(onlyNumbersAndForwardSlash, '');
-    const numChars = formattedValue.length;
-
-    // Automatically append slashes to date field
-    if (numChars === 2 || numChars === 5) {
-      formattedValue += '/';
+    let formattedValue = value;
+    if (field === FIELDS.PURCHASE_DATE) {
+      formattedValue = value
+        .substring(0, CONSTANTS.DATE_MAX_LENGTH)
+        .replace(onlyNumbersAndForwardSlash, '');
     }
-
     setFormValues({
       ...formValues,
       [field]: formattedValue,
@@ -423,7 +423,7 @@ function ReviewForm({ tire, queryParams, vehicle, onSearchVehicle }: Props) {
               <Input
                 id="datePurchased"
                 value={formValues[FIELDS.PURCHASE_DATE] as string}
-                onChange={handleSetDateFormField(FIELDS.PURCHASE_DATE)}
+                onChange={handleSetFormFieldValue(FIELDS.PURCHASE_DATE)}
                 label={ui('reviews.form.sections.about.datePurchased')}
                 contextualLabel={ui(
                   'reviews.form.sections.about.datePurchasedContextual',
