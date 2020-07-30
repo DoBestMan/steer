@@ -28,6 +28,7 @@ function LoadingIndicator() {
 
 interface Props {
   catalogGridRef: React.Ref<HTMLDivElement>;
+  fetchNewProducts: (page: number) => Promise<SiteCatalogProducts>;
   onPreviewFilters: (filters: Record<string, string>) => Promise<void>;
   previewFiltersData: SiteCatalogFilters;
   scrollToGrid: () => void;
@@ -42,6 +43,7 @@ function CatalogPage({
   siteCatalogSummary,
   onPreviewFilters,
   previewFiltersData,
+  fetchNewProducts,
 }: Props) {
   const { setNavTheme, theme: navTheme } = useNavContext();
   const { isAdvancedView } = useCatalogPageContext();
@@ -86,6 +88,7 @@ function CatalogPage({
               siteCatalogProducts={siteCatalogProducts}
               hasTopPicks={showSummary}
               siteCatalogSummary={siteCatalogSummary}
+              fetchNewProducts={fetchNewProducts}
             />
           </div>
           {hasResults && <Feedback />}

@@ -49,7 +49,11 @@ function CatalogPageContainer({
   const catalogGridRef = useRef<HTMLDivElement | null>(null);
 
   // begin fetching data from /summary and /products
-  const queryParams = getStringifiedParams({ ...query, ...pageParams });
+  const queryParams = getStringifiedParams({
+    ...query,
+    ...pageParams,
+    page: '1',
+  });
   const apiArgs = {
     defaultData: serverData,
     includeUserRegion: true,
@@ -174,6 +178,25 @@ function CatalogPageContainer({
     [endpoints.products, pageParams],
   );
 
+  const fetchNewProducts = useCallback(
+    async (page) => {
+      const queryParams = getStringifiedParams({
+        ...query,
+        ...pageParams,
+      });
+
+      const { siteCatalogProducts } = await fetch({
+        endpoint: endpoints.products,
+        includeUserRegion: true,
+        includeUserZip: true,
+        method: 'get',
+        query: { ...queryParams, page },
+      });
+      return siteCatalogProducts;
+    },
+    [pageParams, endpoints.products, query],
+  );
+
   /**
    * TODO:
    * - Combine CatalogPageContextProvider & CatalogSummaryContextProvider
@@ -195,6 +218,7 @@ function CatalogPageContainer({
             previewFiltersData={previewFiltersData}
             scrollToGrid={scrollToGrid}
             catalogGridRef={catalogGridRef}
+            fetchNewProducts={fetchNewProducts}
           />
         </CatalogSummaryContextProvider>
       </CatalogPageContextProvider>

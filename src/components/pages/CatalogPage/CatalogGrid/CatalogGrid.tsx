@@ -24,6 +24,7 @@ import useExperimentSkipCurationView from './experiments/useExperimentSkipCurati
 import NoResultsGrid from './NoResultsGrid';
 
 interface Props {
+  fetchNewProducts: (page: number) => Promise<SiteCatalogProducts>;
   hasResults: boolean;
   hasTopPicks: boolean;
   onPreviewFilters: (filters: Record<string, string>) => Promise<void>;
@@ -39,6 +40,7 @@ function CatalogGrid({
   siteCatalogProducts,
   onPreviewFilters,
   previewFiltersData,
+  fetchNewProducts,
 }: Props) {
   const { isLoading, handleUpdateResults } = useCatalogPageContext();
   const catalogGrid = useRef<HTMLDivElement | null>(null);
@@ -148,6 +150,7 @@ function CatalogGrid({
           ) : (
             <CatalogProductGrid
               pagination={siteCatalogProducts.listResultMetadata.pagination}
+              fetchNewProducts={fetchNewProducts}
               productList={siteCatalogProducts.siteCatalogProductsResultList.filter(
                 (result): result is SiteCatalogProductItem =>
                   result.type ===
