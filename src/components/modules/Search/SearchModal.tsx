@@ -1,11 +1,11 @@
 import { clearAllBodyScrollLocks, disableBodyScroll } from 'body-scroll-lock';
+import { useRouter } from 'next/router';
 import { useCallback, useEffect, useRef } from 'react';
 
 import Modal from '~/components/global/Modal/Modal';
 import { useSearchContext } from '~/components/modules/Search/Search.context';
 import { useModalContext } from '~/context/Modal.context';
 import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
-import { useRouter } from '~/hooks/useRouter';
 import { MODAL_THEME } from '~/lib/constants';
 
 import Search from './Search';
@@ -51,6 +51,10 @@ function SearchModal() {
   }, [contentRef, isSearchOpen]);
 
   const handleCloseSearch = () => {
+    if (!isSearchOpen) {
+      return;
+    }
+
     // Clear search results and state when the modal closes
     clearSearchResults();
     setSearchState('');
@@ -60,8 +64,17 @@ function SearchModal() {
     toggleIsSearchOpen();
   };
 
-  // Close the search modal on route change
-  useRouter({ onRouteChange: isSearchOpen ? handleCloseSearch : undefined });
+  const router = useRouter();
+
+  // Close the search modal on route change complete
+  // Allows for seamless transition into Category Loading Interstitial
+  useEffect(() => {
+    router.events.on('routeChangeComplete', handleCloseSearch);
+
+    return () => {
+      router.events.off('routeChangeComplete', handleCloseSearch);
+    };
+  });
 
   useEffect(() => {
     requestAnimationFrame(toggleDisableScroll);

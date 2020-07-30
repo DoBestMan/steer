@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { RefObject, useCallback, useState } from 'react';
 
 import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
@@ -64,6 +65,7 @@ function Search({
   searchState,
   shouldPreventLinkNavigation,
 }: Props) {
+  const router = useRouter();
   const [primaryQuery, setPrimaryQuery] = useState<InputQuery>({
     queryText: '',
     queryType: '',
@@ -224,8 +226,14 @@ function Search({
         onCloseSearchClick();
       }
 
-      // Resets the catalog when creating a new search from a catalog page
-      eventEmitters.newCatalogSearchQuery.emit({ comesFromSearch: true });
+      // If user clicks on the same search query, just close the modal
+      const isNewSearchQuery = action.link.href !== router.asPath;
+      if (isNewSearchQuery) {
+        // Resets the catalog when creating a new search from a catalog page
+        eventEmitters.newCatalogSearchQuery.emit({ comesFromSearch: true });
+      } else {
+        onCloseSearchClick();
+      }
     }
   };
 
