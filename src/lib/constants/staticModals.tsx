@@ -56,7 +56,7 @@ const STATIC_MODALS: Record<string, ModalData> = {
   [STATIC_MODAL_IDS.CATALOG_FILTER_MILEAGE_WARRANTY]: {
     props: {
       content:
-        'The manufacturers warranty based on the number of miles that can be driven (with proper tire maintence) before needing to replace tires again.',
+        'The manufacturers warranty based on the number of miles that can be driven (with proper tire maintenance) before needing to replace tires again.',
       title: 'About this filter',
       subtitle: null,
       image: null,
