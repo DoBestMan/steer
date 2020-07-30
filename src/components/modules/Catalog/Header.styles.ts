@@ -97,7 +97,7 @@ const styles: StylesMap = {
     },
   },
   wrappedLocation: {
-    marginTop: SPACING.SIZE_02,
+    marginTop: SPACING.SIZE_05,
   },
 };
 
