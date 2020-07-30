@@ -33,6 +33,16 @@ describe('pages/ProductDetails/mappers/linkingData', () => {
       review: [
         {
           '@type': 'Review',
+          reviewRating: {
+            '@type': 'Rating',
+            ratingValue: 4.9,
+            bestRating: 5,
+            worstRating: 1,
+          },
+          author: { '@type': 'Person', name: 'Joe' },
+        },
+        {
+          '@type': 'Review',
           reviewBody:
             'Excellent tire and great smooth ride and handling ability.',
           reviewRating: {
@@ -42,16 +52,6 @@ describe('pages/ProductDetails/mappers/linkingData', () => {
             worstRating: 1,
           },
           author: { '@type': 'Person', name: 'Victor' },
-        },
-        {
-          '@type': 'Review',
-          reviewRating: {
-            '@type': 'Rating',
-            ratingValue: 4.9,
-            bestRating: 5,
-            worstRating: 1,
-          },
-          author: { '@type': 'Person', name: 'Joe' },
         },
       ],
       aggregateRating: {

@@ -23,22 +23,20 @@ export function mapDataToLinkingData({
     (siteProductReviews.reviewsSource.simpleTire || 0) +
     (siteProductReviews.reviewsSource.googleShopping || 0);
 
-  const reviews: Review[] = siteProductReviews.reviewsList
-    .reverse()
-    .map((item) => ({
-      '@type': 'Review',
-      reviewRating: {
-        '@type': 'Rating',
-        ratingValue: item.performanceRating.overall,
-        bestRating: RATINGS.MAX_RATING,
-        worstRating: RATINGS.MIN_RATING,
-      },
-      author: {
-        '@type': 'Person',
-        name: item.name,
-      },
-      ...(item.additionalComments && { reviewBody: item.additionalComments }),
-    }));
+  const reviews: Review[] = siteProductReviews.reviewsList.map((item) => ({
+    '@type': 'Review',
+    reviewRating: {
+      '@type': 'Rating',
+      ratingValue: item.performanceRating.overall,
+      bestRating: RATINGS.MAX_RATING,
+      worstRating: RATINGS.MIN_RATING,
+    },
+    author: {
+      '@type': 'Person',
+      name: item.name,
+    },
+    ...(item.additionalComments && { reviewBody: item.additionalComments }),
+  }));
 
   return {
     '@type': 'Product',

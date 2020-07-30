@@ -31,7 +31,7 @@ export function mapDataToLinkingData({
   const reviewCount =
     (reviewsSource.simpleTire || 0) + (reviewsSource.googleShopping || 0);
 
-  const reviews: Review[] = reviewsList.reverse().map((item) => ({
+  const reviews: Review[] = reviewsList.map((item) => ({
     '@type': 'Review',
     reviewRating: {
       '@type': 'Rating',
