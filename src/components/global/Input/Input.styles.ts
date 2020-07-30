@@ -32,6 +32,8 @@ const styles: StylesMap = {
     borderRadius: RADIUS.RADIUS_15,
     color: COLORS.LIGHT.GRAY_70,
     display: 'flex',
+    // To avoid scaling on input focus on iOS devices, set container font-size to 16px.
+    fontSize: '1.6rem',
     height: CONSTANTS.INPUT_HEIGHT,
     position: 'relative',
     transition: `background-color ${TIME.MS100}ms ease, border-color ${TIME.MS100}ms ease`,
@@ -43,7 +45,6 @@ const styles: StylesMap = {
     color: COLORS.LIGHT.GRAY_20,
   },
   input: [
-    typography.bodyCopy,
     disableGlobalFocus,
     {
       '&::placeholder': {
@@ -60,6 +61,9 @@ const styles: StylesMap = {
       backgroundColor: 'transparent',
       border: 0,
       color: COLORS.GLOBAL.BLACK,
+      // With parent font-size at 16px, we can use a percentage here to achieve desired font-size of 15px
+      // Adapted from the second solution here https://www.warrenchandler.com/2019/04/02/stop-iphones-from-zooming-in-on-form-fields/
+      fontSize: `${(15 / 16) * 100}%`,
       height: '100%',
       overflow: 'hidden',
       padding: `${SPACING.SIZE_30}px ${SPACING.SIZE_20}px ${CONSTANTS.INPUT_BOTTOM_PADDING}px`,

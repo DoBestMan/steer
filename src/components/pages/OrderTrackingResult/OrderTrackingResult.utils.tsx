@@ -1,6 +1,6 @@
 import Link from '~/components/global/Link/Link';
 import { SiteLink } from '~/data/models/SiteLink';
-import { THEME } from '~/lib/constants';
+import { ROUTE_MAP, ROUTES, THEME } from '~/lib/constants';
 import { formatOrNull } from '~/lib/utils/date';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { uiJSX } from '~/lib/utils/ui-dictionary-jsx';
@@ -145,13 +145,17 @@ export function getCancelledContactCopy({
 export function getAdditionalInfoLinks() {
   return uiJSX('tracking.additionalInfoLinks', {
     shipping: (
-      <Link theme={THEME.LIGHT} key="shipping-link" href="/">
-        Shipping Policy
+      <Link
+        theme={THEME.LIGHT}
+        key="shipping-link"
+        href={ROUTE_MAP[ROUTES.FREE_SHIPPING]}
+      >
+        {ui('links.shippingPolicy')}
       </Link>
     ),
     faq: (
-      <Link theme={THEME.LIGHT} key="faq-link" href="/">
-        FAQ
+      <Link theme={THEME.LIGHT} key="faq-link" href={ROUTE_MAP[ROUTES.FAQS]}>
+        {ui('links.faqs')}
       </Link>
     ),
   });

@@ -51,7 +51,7 @@ describe('pages/ProductDetails/mappers/reviews', () => {
         {
           body: 'Excellent tire and great smooth ride and handling ability.',
           car: 'Honda Civic 2015 EX-L',
-          date: 'Sunday January 12',
+          date: 'Sunday, January 12',
           id: '1',
           isVerified: true,
           location: 'San Francisco, CA',

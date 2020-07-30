@@ -1,4 +1,4 @@
-import { BORDERS, SPACING, StylesMap } from '~/lib/constants';
+import { BORDERS, StylesMap } from '~/lib/constants';
 
 const styles: StylesMap = {
   car: {
@@ -8,14 +8,17 @@ const styles: StylesMap = {
     justifyContent: 'center',
     left: 0,
     position: 'absolute',
-    transform: `translate3D(0, ${SPACING.SIZE_20}, 0)`,
     width: '100%',
+    // eslint-disable-next-line sort-keys
+    svg: {
+      transform: 'scale(0.9) translateY(5%)',
+    },
   },
   illustration: {
     position: 'relative',
   },
   scenery: {
-    marginBottom: SPACING.SIZE_20,
+    backgroundSize: 'auto 80%',
     opacity: 0.5,
   },
 };

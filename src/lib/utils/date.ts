@@ -6,7 +6,7 @@ export function getCurrentYear() {
 
 export function formatOrNull(
   value: string | number | Date,
-  template = 'EEEE MMMM d',
+  template = 'EEEE, MMMM d',
 ) {
   try {
     return format(new Date(value), template);
