@@ -30,7 +30,6 @@ const styles: StylesMap = {
     display: 'flex',
     height: 'inherit',
     justifyContent: 'center',
-    margin: SPACING.SIZE_01, // Helps make the focus state visible
     padding: SPACING.SIZE_02,
     width: 'inherit',
   },
