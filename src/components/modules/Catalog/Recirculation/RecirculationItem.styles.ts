@@ -48,7 +48,12 @@ const styles: StylesMap = {
       padding: `${SPACING.SIZE_30}px 0`,
     },
   },
-  title: [typography.secondaryHeadline],
+  title: [
+    typography.secondaryHeadline,
+    {
+      marginBottom: 3,
+    },
+  ],
 };
 
 export default styles;
