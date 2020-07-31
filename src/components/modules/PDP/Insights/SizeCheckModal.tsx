@@ -1,7 +1,9 @@
 import FeaturedInfoModule from '~/components/global/FeaturedInfoModule/FeaturedInfoModule';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
+import Link from '~/components/global/Link/Link';
 import BottomCardModal from '~/components/global/Modal/BottomCardModal';
 import { modalContainerStyles } from '~/components/global/Modal/BottomCardModal.styles';
+import { LINK_THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import { SIZE_CHECK_STATES } from './Insights.types';
@@ -73,9 +75,15 @@ function SizeCheckModal({
           <ul>
             {actions.map(({ label, action }) => (
               <li key={label} css={styles.modalListItem}>
-                <button type="button" onClick={action} css={styles.modalButton}>
+                <Link
+                  borderless
+                  type="button"
+                  onClick={action}
+                  css={styles.modalButton}
+                  theme={LINK_THEME.LIGHT_HIGHLIGHTED}
+                >
                   {label}
-                </button>
+                </Link>
               </li>
             ))}
           </ul>

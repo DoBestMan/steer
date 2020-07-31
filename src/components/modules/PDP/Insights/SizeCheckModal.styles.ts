@@ -8,7 +8,6 @@ import {
   StylesMap,
   TIME,
 } from '~/lib/constants';
-import { links } from '~/styles/links.styles';
 import { typography } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
@@ -49,8 +48,6 @@ const styles: StylesMap = {
   ],
   modalButton: [
     typography.filterItemLabel,
-    links.lightHighlighted,
-    links.borderless,
     {
       marginBottom: SPACING.SIZE_10,
       paddingTop: SPACING.SIZE_10,

@@ -24,8 +24,11 @@ const helpers: StylesMap = {
     borderBottom: '2px dotted',
     borderBottomColor: 'inherit',
   },
+  inheritBorderColor: {
+    borderBottomColor: 'inherit',
+  },
   inheritFocusBorder: {
-    border: '2px dotted transparent',
+    borderBottom: '2px dotted transparent',
 
     '&:hover, &:focus, &:active': {
       borderBottomColor: 'inherit',
@@ -55,6 +58,7 @@ const styles: StylesMap = {
   },
   link: helpers.inheritBorder,
   linkBorderless: helpers.inheritFocusBorder,
+  linkContainer: helpers.inheritBorderColor,
   root: {
     alignItems: 'center',
     display: 'flex',
@@ -138,8 +142,8 @@ export const themedIconCTA: Record<THEME | LINK_THEME, CSSStyles[] | null> = {
 };
 
 export const footerLink = {
-  '&:hover:not(:active), &:focus:not(:active)': {
-    borderColor: 'inherit',
+  '&:hover:not(:active) span, &:focus:not(:active) span': {
+    borderBottomColor: 'inherit',
     color: COLORS.GLOBAL.BLACK,
   },
   'span svg': {
@@ -149,7 +153,7 @@ export const footerLink = {
   color: COLORS.LIGHT.GRAY_70,
   display: 'inline-flex',
   span: {
-    borderColor: 'transparent',
+    borderBottomColor: 'transparent',
   },
   svg: {
     color: COLORS.GLOBAL.BLACK,
@@ -162,7 +166,7 @@ export const navLink = {
     root: {
       '&:hover:not(:active), &:focus:not(:active)': {
         span: {
-          borderColor: COLORS.GLOBAL.BLACK,
+          borderBottomColor: COLORS.GLOBAL.BLACK,
           color: COLORS.GLOBAL.BLACK,
         },
       },
@@ -174,7 +178,7 @@ export const navLink = {
       },
       color: COLORS.LIGHT.GRAY_70,
       span: {
-        borderColor: 'transparent',
+        borderBottomColor: 'transparent',
         transition: `border-color ${TIME.MS100}ms ease, color ${TIME.MS100}ms ease`,
       },
       [MQ.M]: typography.tertiaryHeadline,
@@ -183,7 +187,7 @@ export const navLink = {
     selected: {
       '&:hover:not(:active), &:focus:not(:active)': {
         span: {
-          borderColor: COLORS.ORANGE.SHADE_15_SOLID,
+          borderBottomColor: COLORS.ORANGE.SHADE_15_SOLID,
           color: COLORS.ORANGE.SHADE_15_SOLID,
         },
       },
@@ -194,7 +198,7 @@ export const navLink = {
       },
       color: COLORS.GLOBAL.ORANGE,
       span: {
-        borderColor: COLORS.GLOBAL.ORANGE,
+        borderBottomColor: COLORS.GLOBAL.ORANGE,
         transition: `border-color ${TIME.MS100}ms ease, color ${TIME.MS100}ms ease`,
       },
     },
@@ -206,7 +210,7 @@ export const navLink = {
       '&:active, &:focus': { color: COLORS.ORANGE.TINT_70 },
       color: COLORS.GLOBAL.WHITE,
       span: {
-        borderColor: 'transparent',
+        borderBottomColor: 'transparent',
       },
       [MQ.M]: typography.tertiaryHeadline,
       [MQ.L]: typography.primarySubhead,
@@ -217,7 +221,7 @@ export const navLink = {
       },
       color: COLORS.GLOBAL.WHITE,
       span: {
-        borderColor: COLORS.GLOBAL.ORANGE,
+        borderBottomColor: COLORS.GLOBAL.ORANGE,
         transition: `border-color ${TIME.MS100}ms ease`,
       },
     },
