@@ -158,9 +158,9 @@ function ReviewForm({ tire, queryParams, vehicle, onSearchVehicle }: Props) {
     const reformattedDataForSubmission = {
       ...formValues,
       [FIELDS.PURCHASE_DATE]:
-        formValues[FIELDS.WOULD_BUY_AGAIN] === ''
+        formValues[FIELDS.PURCHASE_DATE] === ''
           ? null
-          : formValues[FIELDS.WOULD_BUY_AGAIN],
+          : formValues[FIELDS.PURCHASE_DATE],
       [FIELDS.WOULD_BUY_AGAIN]:
         formValues[FIELDS.WOULD_BUY_AGAIN] ===
         ui('reviews.form.sections.buyAgain.options.yes')
@@ -196,6 +196,7 @@ function ReviewForm({ tire, queryParams, vehicle, onSearchVehicle }: Props) {
             .execute(process.env.RECAPTCHA_SITE_KEY || '', { action: 'submit' })
             .then(function (token: string) {
               reformattedDataForSubmission[FIELDS.TOKEN] = token;
+
               postFormData(
                 reformattedDataForSubmission as SiteProductLineReviewItemInput,
               );
@@ -215,9 +216,11 @@ function ReviewForm({ tire, queryParams, vehicle, onSearchVehicle }: Props) {
     // We need to do this because the picker keeps track of the selected option
     // with the index. The index controls which one is selected and if we change
     // this value in state, it affects which option is selected
-    // Set the last option (N/A) to 0 and increment all others by 1
+    // Set the last option (N/A) to null and increment all others by 1
     const incrementPickerValue =
-      index === RATING_OPTIONS.indexOf(RATING_NOT_APPLICABLE) ? 0 : index + 1;
+      index === RATING_OPTIONS.indexOf(RATING_NOT_APPLICABLE)
+        ? null
+        : index + 1;
     const pickerValue =
       index !== CONSTANTS.UNSELECTED_PICKER
         ? incrementPickerValue
