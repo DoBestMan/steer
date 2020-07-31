@@ -1,4 +1,11 @@
-import { COLORS, GRID_MARGIN, MQ, SPACING, StylesMap } from '~/lib/constants';
+import {
+  COLORS,
+  GRID_MARGIN,
+  MQ,
+  SPACING,
+  StylesMap,
+  Z_INDEX,
+} from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
@@ -60,6 +67,10 @@ const styles: StylesMap = {
   wrapper: {
     '.product-carousel': {
       display: 'flex',
+    },
+
+    '.swiper-container': {
+      zIndex: Z_INDEX.BEHIND,
     },
   },
 };
