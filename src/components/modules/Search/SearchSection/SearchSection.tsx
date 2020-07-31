@@ -90,8 +90,6 @@ function SearchSection({
                     isExternal={isExternal}
                     onClick={handleClick(item)}
                     onFocus={onFocus(index)}
-                    onTouchStart={handleTouchStart(item)}
-                    onTouchEnd={handleTouchEnd}
                     routeQueryParamOptions={routeQueryParamOptions}
                   >
                     {innerContent}

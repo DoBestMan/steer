@@ -175,7 +175,7 @@ function SearchAutocomplete({
       if (isInitialRearTireState) {
         secondaryInput?.current?.focus();
       } else {
-        focusOnInput();
+        primaryInput?.current?.blur();
       }
     }
   };
@@ -208,7 +208,6 @@ function SearchAutocomplete({
   useEffect(() => {
     if (inputValue) {
       onInputChange(inputValue);
-      focusOnInput();
     }
   }, [inputValue, onInputChange, focusOnInput]);
 
