@@ -30,15 +30,19 @@ export const animations = {
   /* eslint-disable sort-keys */
   [`title_${ENTERING}`]: {
     opacity: 0,
+    transform: 'translate3d(0, 20px, 0)',
   },
   [`title_${ENTERED}`]: {
     opacity: 1,
+    transform: 'translate3d(0, 0, 0)',
   },
   [`title_${EXITING}`]: {
     opacity: 1,
+    transform: 'translate3d(0, 0, 0)',
   },
   [`title_${EXITED}`]: {
     opacity: 0,
+    transform: 'translate3d(0, 20px, 0)',
   },
   [`scenery_${ENTERING}`]: {
     opacity: 0,
@@ -133,17 +137,16 @@ export const styles: StylesMap = {
   description: [
     typography.bodyCopy,
     {
-      transition: `opacity ${TITLE_DURATION + 100}ms ${EASING.CUBIC_EASE_OUT}`,
+      transition: `all ${TIME.MS300}ms ${EASING.CUBIC_EASE_OUT} ${TIME.MS100}ms`,
       [MQ.XL]: typography.largeCopy,
     },
   ],
 
   eyebrow: {
-    transition: `opacity ${TITLE_DURATION}ms ${EASING.CUBIC_EASE_OUT}`,
-
     alignItems: 'baseline',
     display: 'inline-flex',
     marginBottom: SPACING.SIZE_10,
+    transition: `all ${TIME.MS400}ms ${EASING.CUBIC_EASE_OUT}`,
   },
   scenery: {
     bottom: 0,
@@ -156,8 +159,7 @@ export const styles: StylesMap = {
     bottom: 30,
     left: 0,
     position: 'absolute',
-    transition: `opacity ${TIME.MS500}ms ${EASING.CUBIC_EASE_OUT}`,
-    transitionDelay: `${TIME.MS200}ms`,
+    transition: `opacity ${TIME.MS500}ms ${EASING.CUBIC_EASE_OUT} ${TIME.MS200}ms`,
     width: '100%',
 
     [MQ.M]: {
@@ -171,15 +173,17 @@ export const styles: StylesMap = {
     typography.jumboHeadline,
     {
       marginBottom: SPACING.SIZE_10,
-      transition: `opacity ${TITLE_DURATION}ms ${EASING.CUBIC_EASE_OUT}`,
+      transition: `all ${TIME.MS300}ms ${EASING.CUBIC_EASE_OUT} ${TIME.MS50}ms`,
 
       [MQ.M]: {
         marginBottom: SPACING.SIZE_20,
       },
 
+      /* eslint-disable sort-keys */
       strong: {
         color: COLORS.GLOBAL.ORANGE,
       },
+      /* eslint-enable sort-keys */
     },
   ],
   vehicle: {

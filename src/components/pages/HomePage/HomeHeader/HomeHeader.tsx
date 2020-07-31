@@ -4,10 +4,15 @@ import { TransitionStatus } from 'react-transition-group/Transition';
 
 import Car from '~/components/global/Car/Car';
 import { Cars } from '~/components/global/Car/Car.enums';
+import Grid from '~/components/global/Grid/Grid';
+import GridItem from '~/components/global/Grid/GridItem';
+import Markdown from '~/components/global/Markdown/Markdown';
+import PromoTag from '~/components/global/PromoTag/PromoTag';
 import Scenary from '~/components/global/Scenery/Scenery';
 import { Sceneries } from '~/components/global/Scenery/Scenery.types';
 import Weather from '~/components/global/Weather/Weather';
 import { SiteHero } from '~/data/models/SiteHero';
+import { SitePromotionStyleEnum } from '~/data/models/SitePromotion';
 import { usePreferedReduceMotion } from '~/hooks/usePreferedReduceMotion';
 import { TIME } from '~/lib/constants';
 
@@ -17,7 +22,6 @@ import {
   SCENERY_OR_WEATHER_DURATION,
   styles,
 } from './HomeHeader.styles';
-import HomeHeaderTitle from './HomeHeaderTitle';
 
 const ANIMATION_DURATION = TIME.MS2000;
 const INTERVAL_CAR_ROTATION = TIME.MS8000;
@@ -118,6 +122,21 @@ function HomeHeader({
       onEntered={onEntered}
     >
       {(containerTransitionState: TransitionStatus) => {
+        const eyebrowStyles = [
+          styles.eyebrow,
+          hasMotion && animations[`title_${containerTransitionState}`],
+        ];
+
+        const titleStyles = [
+          styles.title,
+          hasMotion && animations[`title_${containerTransitionState}`],
+        ];
+
+        const descriptionStyles = [
+          styles.description,
+          hasMotion && animations[`title_${containerTransitionState}`],
+        ];
+
         const vehicleContainerStyles = [
           styles.vehicleContainer,
           !hasMotion && styles.vehicleContainerWithoutAnimation,
@@ -138,12 +157,26 @@ function HomeHeader({
 
         return (
           <div css={styles.container}>
-            <HomeHeaderTitle
-              body={body}
-              eyebrow={eyebrow}
-              hasMotion={hasMotion}
-              title={title}
-            />
+            <Grid css={styles.copyContainer}>
+              <GridItem gridColumnS="2/6" gridColumnM="2/8" gridColumnXL="2/8">
+                {eyebrow && (
+                  <div css={eyebrowStyles}>
+                    <PromoTag
+                      label={eyebrow}
+                      style={SitePromotionStyleEnum.SitePromotionItemOrangePill}
+                      isUppercase
+                    />
+                  </div>
+                )}
+                <h1 css={titleStyles}>
+                  <Markdown renderers={{ paragraph: 'span' }}>{title}</Markdown>
+                </h1>
+
+                <div css={descriptionStyles}>
+                  <Markdown>{body}</Markdown>
+                </div>
+              </GridItem>
+            </Grid>
 
             <Weather
               weatherID={internalWeatherType}
