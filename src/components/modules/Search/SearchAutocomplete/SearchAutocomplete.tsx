@@ -317,7 +317,7 @@ function SearchAutocomplete({
                 name={ICONS.MAIN_SEARCH}
                 css={[
                   styles.searchIcon,
-                  !!queryText && styles.searchIconActive,
+                  (!!queryText || searchState) && styles.searchIconActive,
                 ]}
               />
             </div>
