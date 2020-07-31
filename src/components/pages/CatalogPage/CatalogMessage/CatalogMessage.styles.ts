@@ -54,10 +54,6 @@ const styles: StylesMap = {
   dataMomentCtaWrapper: {
     '> *:not(:last-child)': {
       marginBottom: SPACING.SIZE_10,
-
-      [MQ.M]: {
-        marginBottom: 0,
-      },
     },
 
     '> *:not(:first-of-type)': {
