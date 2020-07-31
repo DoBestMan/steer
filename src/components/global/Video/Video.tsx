@@ -20,8 +20,8 @@ export interface Props {
   imageLoading?: ImageLoading;
   isButtonFocusable?: boolean;
   poster: SiteImage;
-  setShouldStopVideo?: (shouldStopVideo: boolean) => void;
-  shouldStopVideo?: boolean;
+  setShouldPauseVideo?: (shouldPauseVideo: boolean) => void;
+  shouldPauseVideo?: boolean;
   sizes: number[];
   video: SiteYouTubeVideoVideo;
   videoStyles?: CSSStyles;
@@ -36,15 +36,17 @@ function Video({
   sizes,
   videoStyles,
   video,
-  shouldStopVideo,
-  setShouldStopVideo,
+  shouldPauseVideo,
+  setShouldPauseVideo,
 }: Props) {
   const videoId = `${randomString(10)}-video`;
 
-  const { hasPlayedVideo, isLoading, setIsLoading, stopVideo } = useYoutubeApi({
-    youtubeId: video.youtubeId,
-    videoId,
-  });
+  const { hasPlayedVideo, isLoading, setIsLoading, pauseVideo } = useYoutubeApi(
+    {
+      youtubeId: video.youtubeId,
+      videoId,
+    },
+  );
 
   const loadVideo = useCallback(() => {
     setIsLoading(true);
@@ -52,19 +54,17 @@ function Video({
 
   const containerBottomPadding = `${ratioToPercentage(aspectRatio)}%`;
 
-  const handleStopVideo = useCallback(() => {
-    if (hasPlayedVideo) {
-      stopVideo();
-    }
+  const handlePauseVideo = useCallback(() => {
+    pauseVideo();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hasPlayedVideo]);
 
   useEffect(() => {
-    if (shouldStopVideo && setShouldStopVideo) {
-      handleStopVideo();
-      setShouldStopVideo(false);
+    if (shouldPauseVideo && setShouldPauseVideo) {
+      handlePauseVideo();
+      setShouldPauseVideo(false);
     }
-  }, [handleStopVideo, setShouldStopVideo, shouldStopVideo, stopVideo]);
+  }, [handlePauseVideo, setShouldPauseVideo, shouldPauseVideo, pauseVideo]);
 
   return (
     <div

@@ -20,16 +20,16 @@ const poster = {
 } as SiteImage;
 
 export function VideoWithKnobs() {
-  const [shouldStopVideo, setShouldStopVideo] = useState(false);
-  button('Stop Video', () => setShouldStopVideo(true));
+  const [shouldPauseVideo, setShouldPauseVideo] = useState(false);
+  button('Stop Video', () => setShouldPauseVideo(true));
 
   return (
     <Grid css={{ backgroundColor: COLORS.GLOBAL.BLACK, height: '100vh' }}>
       <GridItem gridColumnM="2/5" gridColumnL="2/10">
         <Video
           poster={poster}
-          setShouldStopVideo={setShouldStopVideo}
-          shouldStopVideo={shouldStopVideo}
+          setShouldPauseVideo={setShouldPauseVideo}
+          shouldPauseVideo={shouldPauseVideo}
           sizes={[960]}
           video={{ youtubeId: 'iQdV2fDR9RY' }}
         />

@@ -20,8 +20,8 @@ interface Props {
   imageItem: SiteCatalogProductImage | SiteYouTubeVideo;
   index: number;
   isActive?: boolean;
-  setShouldStopVideo?: (shouldStopVideo: boolean) => void;
-  shouldStopVideo?: boolean;
+  setShouldPauseVideo?: (shouldPauseVideo: boolean) => void;
+  shouldPauseVideo?: boolean;
   width?: number;
 }
 
@@ -32,8 +32,8 @@ function TireImageCarouselItem({
   height,
   imageItem,
   index,
-  shouldStopVideo,
-  setShouldStopVideo,
+  shouldPauseVideo,
+  setShouldPauseVideo,
   width,
 }: Props) {
   return (
@@ -70,9 +70,9 @@ function TireImageCarouselItem({
           isButtonFocusable={isActive}
           poster={imageItem.poster}
           sizes={[300, 700]}
-          shouldStopVideo={shouldStopVideo}
+          shouldPauseVideo={shouldPauseVideo}
           video={imageItem.video}
-          setShouldStopVideo={setShouldStopVideo}
+          setShouldPauseVideo={setShouldPauseVideo}
         />
       )}
     </>

@@ -13,8 +13,8 @@ interface Props {
 
 interface Player {
   destroy: () => void;
+  pauseVideo: () => void;
   playVideo: () => void;
-  stopVideo: () => void;
 }
 
 const CONSTANTS = {
@@ -38,24 +38,42 @@ const appendYoutubeApiScript = (onLoadCallBack: () => void) => {
 export function useYoutubeApi({ videoId, youtubeId }: Props) {
   const [isLoading, setIsLoading] = useState(false);
   const [hasPlayedVideo, setHasPlayedVideo] = useState(false);
+  const [cancelled, setCancelled] = useState(false);
 
   let player: Player;
 
   function playVideo() {
-    if (!player) {
+    if (!player || cancelled) {
+      setIsLoading(false);
       return;
     }
 
-    setHasPlayedVideo(true);
     player.playVideo();
+    setHasPlayedVideo(true);
   }
 
-  function stopVideo() {
-    if (!player) {
+  function onChange(event: YT.OnStateChangeEvent) {
+    const { data, target } = event;
+
+    // Cannot use the YT.PlayerState enum because it was declared using
+    // const which isn't allowed with our currect TS configuration ('--isolatedModules' = false)
+    if (data === 3 && cancelled) {
+      setCancelled(false);
+
+      // We don't have access to our video instance yet
+      // so we're using the one provided by the event
+      target.pauseVideo();
+    }
+  }
+
+  function pauseVideo() {
+    setCancelled(true);
+
+    if (!player || !player.pauseVideo) {
       return;
     }
 
-    player.stopVideo();
+    player.pauseVideo();
   }
 
   function cleanupPlayer() {
@@ -73,6 +91,7 @@ export function useYoutubeApi({ videoId, youtubeId }: Props) {
     player = new window.YT.Player(videoId, {
       events: {
         onReady: playVideo,
+        onStateChange: onChange,
       },
       playerVars: {
         rel: 0,
@@ -102,5 +121,5 @@ export function useYoutubeApi({ videoId, youtubeId }: Props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading, hasPlayedVideo]);
 
-  return { isLoading, setIsLoading, hasPlayedVideo, stopVideo };
+  return { isLoading, setIsLoading, hasPlayedVideo, pauseVideo };
 }

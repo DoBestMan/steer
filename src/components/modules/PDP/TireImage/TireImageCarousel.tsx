@@ -9,7 +9,10 @@ import {
   SiteCatalogProductImageTypeEnum,
 } from '~/data/models/SiteCatalogProductImage';
 import { SiteProductLine } from '~/data/models/SiteProductLine';
-import { SiteYouTubeVideo } from '~/data/models/SiteYouTubeVideo';
+import {
+  SiteYouTubeVideo,
+  SiteYouTubeVideoTypeEnum,
+} from '~/data/models/SiteYouTubeVideo';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { getWidthFromMaxHeight } from '~/lib/utils/number';
 import { ui } from '~/lib/utils/ui-dictionary';
@@ -83,7 +86,7 @@ function TireImageCarousel({
 }: Props) {
   const [swiper, setSwiper] = useState<SwiperInstance>(null);
   const { bk, windowHeight } = useBreakpoints();
-  const [shouldStopVideo, setShouldStopVideo] = useState(false);
+  const [shouldPauseVideo, setShouldPauseVideo] = useState(false);
   const [wrapperRect, setWrapperRect] = useState<ClientRect | null>(null);
 
   const pagination = !isFullscreen
@@ -128,8 +131,15 @@ function TireImageCarousel({
 
     swiper.on('slideChange', () => {
       setCurrentIndex(swiper.activeIndex);
-      setShouldStopVideo(true);
+
+      // Only pause when slide is not a video
+      const isVideoType =
+        assetList[swiper.activeIndex].type ===
+        SiteYouTubeVideoTypeEnum.SiteYouTubeVideo;
+
+      setShouldPauseVideo(!isVideoType);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [swiper, setCurrentIndex]);
 
   const handleImageClick = (index: number) => () => {
@@ -170,8 +180,8 @@ function TireImageCarousel({
                 imageItem={imageItem}
                 index={index}
                 isActive={index === currentIndex}
-                shouldStopVideo={shouldStopVideo}
-                setShouldStopVideo={setShouldStopVideo}
+                shouldPauseVideo={shouldPauseVideo}
+                setShouldPauseVideo={setShouldPauseVideo}
                 height={wrapperRect?.height}
                 width={imageWidth}
               />
