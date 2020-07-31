@@ -46,7 +46,6 @@ const styles: StylesMap = {
     },
   ],
   imageWrapper: {
-    margin: `0 -${SPACING.SIZE_20}px`,
     [MQ.L]: {
       margin: `0 -${SPACING.SIZE_60}px`,
     },
