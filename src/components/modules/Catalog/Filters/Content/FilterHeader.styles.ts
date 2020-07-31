@@ -1,13 +1,12 @@
-import { BORDERS, COLORS, SPACING, StylesMap } from '~/lib/constants';
+import { SPACING, StylesMap } from '~/lib/constants';
+import { links } from '~/styles/links.styles';
 import { typography } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
   infoLink: [
     typography.smallCopyTight,
+    links.light,
     {
-      borderBottom: BORDERS.DOTTED_GRAY_40_2PX,
-      borderColor: COLORS.LIGHT.GRAY_70,
-      color: COLORS.LIGHT.GRAY_70,
       cursor: 'pointer',
       width: 'fit-content',
     },

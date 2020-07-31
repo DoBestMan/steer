@@ -7,13 +7,13 @@ import { data } from './Support.data';
 export interface Props {
   customerServiceNumber: { display: string; value: string };
   isCustomerServiceEnabled?: boolean;
-  theme?: THEME.DARK | THEME.LIGHT | LINK_THEME.DARK_HIGHLIGHTED;
+  theme?: THEME.DARK | THEME.LIGHT | LINK_THEME;
 }
 
 function PhoneSupport({
   customerServiceNumber: { value, display },
   isCustomerServiceEnabled,
-  theme = THEME.LIGHT,
+  theme = LINK_THEME.LIGHT_HIGHLIGHTED,
   ...rest
 }: Props) {
   const supportContent = isCustomerServiceEnabled

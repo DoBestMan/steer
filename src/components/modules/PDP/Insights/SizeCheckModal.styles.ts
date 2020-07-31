@@ -1,4 +1,5 @@
 import {
+  BORDERS,
   COLORS,
   EASING,
   GAP_COLUMNS,
@@ -7,6 +8,7 @@ import {
   StylesMap,
   TIME,
 } from '~/lib/constants';
+import { links } from '~/styles/links.styles';
 import { typography } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
@@ -32,45 +34,41 @@ const styles: StylesMap = {
       paddingRight: SPACING.SIZE_40,
     },
   },
-  containerAction: {
-    cursor: 'pointer',
+  eyebrow: [
+    typography.eyebrow,
 
-    // eslint-disable-next-line sort-keys
-    ':hover, :focus': {
-      backgroundColor: COLORS.ORANGE.SHADE_30_SOLID,
-    },
-  },
-  containerHighlight: {
-    backgroundColor: COLORS.ORANGE.SHADE_15_SOLID,
-  },
-  icon: {
-    alignItems: 'center',
-    display: 'flex',
-    height: 24,
-    justifyContent: 'center',
-    width: 26,
-
-    // eslint-disable-next-line sort-keys
-    span: {
-      height: 20,
-      width: 26,
-    },
-
-    svg: {
-      height: 'auto',
-      maxHeight: '100%',
-      width: '100%',
-    },
-  },
-  label: [
-    typography.primarySubhead,
     {
-      flexGrow: 1,
-      paddingLeft: SPACING.SIZE_25,
-      paddingRight: SPACING.SIZE_25,
-      whiteSpace: 'pre-line',
+      [MQ.L]: [
+        typography.secondaryHeadline,
+        {
+          display: 'block',
+          marginTop: SPACING.SIZE_50,
+        },
+      ],
     },
   ],
+  modalButton: [
+    typography.filterItemLabel,
+    links.lightHighlighted,
+    links.borderless,
+    {
+      marginBottom: SPACING.SIZE_10,
+      paddingTop: SPACING.SIZE_10,
+      textAlign: 'left',
+    },
+  ],
+  modalDivider: {
+    borderBottom: BORDERS.SOLID_GRAY_20_1PX,
+    display: 'block',
+    marginBottom: SPACING.SIZE_20,
+    paddingTop: SPACING.SIZE_30,
+  },
+  modalListItem: [typography.filterItemLabel],
+  modalWithEyebrow: {
+    [MQ.L]: {
+      paddingTop: SPACING.SIZE_10,
+    },
+  },
 };
 
 export default styles;

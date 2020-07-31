@@ -3,7 +3,7 @@ import Accordion, {
 } from '~/components/global/Accordion/Accordion';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
-import { THEME } from '~/lib/constants';
+import { LINK_THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import EmailSupport from '../../Support/EmailSupport';
@@ -63,13 +63,13 @@ function FAQ({
           <div css={styles.supportItem}>
             <PhoneSupport
               customerServiceNumber={customerServiceNumber}
-              theme={THEME.DARK}
+              theme={LINK_THEME.DARK_HIGHLIGHTED}
               isCustomerServiceEnabled={isCustomerServiceEnabled}
             />
           </div>
           <div css={styles.supportItem}>
             <EmailSupport
-              theme={THEME.DARK}
+              theme={LINK_THEME.DARK_HIGHLIGHTED}
               isCustomerServiceEnabled={isCustomerServiceEnabled}
               css={styles.supportItem}
             />

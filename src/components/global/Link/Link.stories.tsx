@@ -7,6 +7,7 @@ import { NAV_TARGETS } from '~/components/modules/Nav/Nav.types';
 import {
   COLORS,
   LINK_ICON_POSITION,
+  LINK_THEME,
   LINK_TYPES,
   StylesMap,
   THEME,
@@ -191,7 +192,7 @@ export function LinkNavActive() {
 export function IconCTALight() {
   return (
     <LinkContainer theme={THEME.LIGHT}>
-      <IconCTA theme={THEME.LIGHT} icon={ICONS.PHONE} href="/">
+      <IconCTA theme={LINK_THEME.LIGHT_HIGHLIGHTED} icon={ICONS.PHONE} href="/">
         Link Example
       </IconCTA>
     </LinkContainer>
@@ -201,7 +202,7 @@ export function IconCTALight() {
 export function IconCTADark() {
   return (
     <LinkContainer theme={THEME.DARK}>
-      <IconCTA icon={ICONS.PHONE} href="/">
+      <IconCTA theme={LINK_THEME.DARK_HIGHLIGHTED} icon={ICONS.PHONE} href="/">
         Link Example
       </IconCTA>
     </LinkContainer>

@@ -1,12 +1,5 @@
-import {
-  BORDERS,
-  COLORS,
-  EASING,
-  MQ,
-  SPACING,
-  StylesMap,
-  TIME,
-} from '~/lib/constants';
+import { COLORS, EASING, MQ, SPACING, StylesMap, TIME } from '~/lib/constants';
+import { links } from '~/styles/links.styles';
 import { typography } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
@@ -88,16 +81,7 @@ const styles: StylesMap = {
     paddingBottom: 2,
   },
   markdown: {
-    a: {
-      borderBottom: BORDERS.DOTTED_GRAY_40_2PX,
-      transition: `all ${TIME.MS100}ms ${EASING.CIRC_EASE_OUT}`,
-
-      '&:hover': {
-        color: COLORS.GLOBAL.WHITE,
-        borderColor: COLORS.GLOBAL.WHITE,
-      },
-    },
-
+    a: links.dark,
     p: {
       '&:not(:last-child)': {
         marginBottom: '1em',

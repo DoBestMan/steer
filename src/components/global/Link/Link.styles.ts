@@ -1,6 +1,6 @@
 import {
-  BORDERS,
   COLORS,
+  CSSStyles,
   LINK_ICON_POSITION,
   LINK_THEME,
   MQ,
@@ -10,12 +10,36 @@ import {
   THEME,
   TIME,
 } from '~/lib/constants';
+import { links } from '~/styles/links.styles';
 import { typography } from '~/styles/typography.styles';
 
 const CONSTANTS = {
   OPACITY_ACTIVE: 0.8,
   OPACITY_DISABLED: 0.4,
   SIZE: 50,
+};
+
+const helpers: StylesMap = {
+  inheritBorder: {
+    borderBottom: '2px dotted',
+    borderBottomColor: 'inherit',
+  },
+  inheritFocusBorder: {
+    border: '2px dotted transparent',
+
+    '&:hover, &:focus, &:active': {
+      borderBottomColor: 'inherit',
+    },
+  },
+  inheritLastSpanFocusBorder: {
+    'span:last-of-type': {
+      borderBottom: '2px dotted transparent',
+    },
+
+    '&:hover span:last-of-type, &:focus span:last-of-type, &:active span:last-of-type': {
+      borderBottomColor: 'inherit',
+    },
+  },
 };
 
 const styles: StylesMap = {
@@ -29,16 +53,12 @@ const styles: StylesMap = {
     minHeight: 30,
     minWidth: 30,
   },
-  link: {
-    borderBottom: BORDERS.DOTTED_TRANSPARENT_2PX,
-    transition: `border-color ${TIME.MS100}ms ease`,
-  },
+  link: helpers.inheritBorder,
+  linkBorderless: helpers.inheritFocusBorder,
   root: {
-    '&:hover span, &:focus span': {
-      borderColor: 'inherit',
-    },
     alignItems: 'center',
     display: 'flex',
+    borderBottomWidth: 0,
   },
 
   // conditional styles
@@ -48,25 +68,24 @@ const styles: StylesMap = {
   [LINK_ICON_POSITION.RIGHT]: {
     paddingLeft: 5,
   },
+};
 
-  [THEME.DARK]: {
-    '&:hover:not(:active), &:focus:not(:active)': {
-      color: COLORS.GLOBAL.WHITE,
-    },
-    color: COLORS.DARK.GRAY_40,
-  },
+export const themedStyles: StylesMap = {
+  [THEME.DARK]: links.dark,
 
-  [LINK_THEME.DARK_HIGHLIGHTED]: {
-    color: COLORS.GLOBAL.WHITE,
-  },
+  [LINK_THEME.DARK_HIGHLIGHTED]: [links.dark, links.darkHighlighted],
 
-  [THEME.LIGHT]: {
-    '&:active span, &:focus span': { color: COLORS.LIGHT.GRAY_70 },
-    color: COLORS.GLOBAL.BLACK,
-  },
+  [LINK_THEME.LIGHT_HIGHLIGHTED]: [links.light, links.lightHighlighted],
+
+  [THEME.LIGHT]: links.light,
 };
 
 export const iconCTA = {
+  container: {
+    alignItems: 'center',
+    display: 'flex',
+    borderBottomWidth: 0,
+  },
   icon: {
     alignItems: 'center',
     backgroundColor: COLORS.GLOBAL.ORANGE,
@@ -86,26 +105,43 @@ export const iconCTA = {
   },
 };
 
-export const linkBorder = {
-  [THEME.DARK]: {
-    borderColor: 'inherit',
-  },
+export const themedIconCTA: Record<THEME | LINK_THEME, CSSStyles[] | null> = {
+  [THEME.DARK]: [
+    {
+      'span:last-of-type': links.dark,
+    },
+    helpers.inheritLastSpanFocusBorder,
+  ],
 
-  [LINK_THEME.DARK_HIGHLIGHTED]: {
-    borderColor: COLORS.DARK.GRAY_40,
+  [LINK_THEME.DARK_HIGHLIGHTED]: [
+    {
+      'span:last-of-type': [links.dark, links.darkHighlighted],
+    },
+    helpers.inheritLastSpanFocusBorder,
+  ],
 
-    '&:hover, &:focus': { borderColor: COLORS.GLOBAL.WHITE },
-  },
+  [THEME.LIGHT]: [
+    {
+      'span:last-of-type': links.light,
+    },
+    helpers.inheritLastSpanFocusBorder,
+  ],
 
-  [THEME.LIGHT]: {
-    borderColor: COLORS.LIGHT.GRAY_70,
-  },
+  [LINK_THEME.LIGHT_HIGHLIGHTED]: [
+    {
+      'span:last-of-type': [links.light, links.lightHighlighted],
+    },
+    helpers.inheritLastSpanFocusBorder,
+  ],
 
-  [THEME.ORANGE]: {},
+  [THEME.ORANGE]: null,
 };
 
 export const footerLink = {
-  '&:hover, &:focus': { borderColor: 'inherit', color: COLORS.GLOBAL.BLACK },
+  '&:hover:not(:active), &:focus:not(:active)': {
+    borderColor: 'inherit',
+    color: COLORS.GLOBAL.BLACK,
+  },
   'span svg': {
     color: COLORS.GLOBAL.BLACK,
   },
@@ -124,24 +160,42 @@ export const footerLink = {
 export const navLink = {
   [THEME.LIGHT]: {
     root: {
-      '&:hover': { color: COLORS.GLOBAL.BLACK },
+      '&:hover:not(:active), &:focus:not(:active)': {
+        span: {
+          borderColor: COLORS.GLOBAL.BLACK,
+          color: COLORS.GLOBAL.BLACK,
+        },
+      },
       // eslint-disable-next-line sort-keys
-      '&:active, &:focus': { color: COLORS.LIGHT.GRAY_70 },
+      '&:active': {
+        span: {
+          color: COLORS.LIGHT.GRAY_70,
+        },
+      },
       color: COLORS.LIGHT.GRAY_70,
       span: {
         borderColor: 'transparent',
+        transition: `border-color ${TIME.MS100}ms ease, color ${TIME.MS100}ms ease`,
       },
       [MQ.M]: typography.tertiaryHeadline,
       [MQ.L]: typography.primarySubhead,
     },
     selected: {
-      '&:hover, &:focus, &:active': {
-        span: { color: COLORS.GLOBAL.ORANGE },
+      '&:hover:not(:active), &:focus:not(:active)': {
+        span: {
+          borderColor: COLORS.ORANGE.SHADE_15_SOLID,
+          color: COLORS.ORANGE.SHADE_15_SOLID,
+        },
+      },
+      '&:active': {
+        span: {
+          color: COLORS.GLOBAL.ORANGE,
+        },
       },
       color: COLORS.GLOBAL.ORANGE,
       span: {
         borderColor: COLORS.GLOBAL.ORANGE,
-        transition: `border-color ${TIME.MS100}ms ease`,
+        transition: `border-color ${TIME.MS100}ms ease, color ${TIME.MS100}ms ease`,
       },
     },
   },

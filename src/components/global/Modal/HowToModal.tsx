@@ -5,7 +5,7 @@ import Modal from '~/components/global/Modal/Modal';
 import EmailSupport from '~/components/modules/Support/EmailSupport';
 import PhoneSupport from '~/components/modules/Support/PhoneSupport';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
-import { MODAL_THEME, THEME } from '~/lib/constants';
+import { LINK_THEME, MODAL_THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import styles from './HowToModal.styles';
@@ -79,13 +79,13 @@ function HowToModal({
               <PhoneSupport
                 customerServiceNumber={customerServiceNumber}
                 isCustomerServiceEnabled={isCustomerServiceEnabled}
-                theme={THEME.DARK}
+                theme={LINK_THEME.DARK_HIGHLIGHTED}
               />
             </div>
             <div css={styles.supportPromptButton}>
               <EmailSupport
                 isCustomerServiceEnabled={isCustomerServiceEnabled}
-                theme={THEME.DARK}
+                theme={LINK_THEME.DARK_HIGHLIGHTED}
               />
             </div>
           </div>

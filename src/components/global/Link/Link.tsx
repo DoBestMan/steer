@@ -14,10 +14,11 @@ import { disableGlobalFocus } from '~/styles/document/accessibility.styles';
 import { typography } from '~/styles/typography.styles';
 
 import BaseLink, { BaseLinkProps } from './BaseLink';
-import styles, { linkBorder } from './Link.styles';
+import styles, { themedStyles } from './Link.styles';
 
 interface Props {
   as?: LINK_TYPE;
+  borderless?: boolean;
   children?: ReactNode;
   className?: string;
   icon?: IconType;
@@ -37,6 +38,7 @@ export type LinkProps = AnchorProps | ButtonProps;
 
 function Link({
   as = LINK_TYPES.A,
+  borderless,
   children,
   icon,
   iconPosition = LINK_ICON_POSITION.RIGHT,
@@ -48,8 +50,8 @@ function Link({
     typography.bodyCopy,
     !!children && disableGlobalFocus,
     !children && icon && styles.iconOnly,
+    themedStyles[theme],
     styles.root,
-    styles[theme],
     isDisabled && styles.disabled,
   ];
   const isAnchor = as === LINK_TYPES.A;
@@ -65,7 +67,9 @@ function Link({
 
   const leftIcon = iconPosition === LINK_ICON_POSITION.LEFT && inlineIcon;
   const linkText = children && (
-    <span css={[styles.link, !icon && linkBorder[theme]]}>{children}</span>
+    <span css={[styles.link, (borderless || icon) && styles.linkBorderless]}>
+      {children}
+    </span>
   );
   const rightIcon = iconPosition === LINK_ICON_POSITION.RIGHT && inlineIcon;
 

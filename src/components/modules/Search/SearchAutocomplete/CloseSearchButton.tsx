@@ -19,6 +19,7 @@ function CloseSearchButton({ isRearTireState, onCloseSearchClick }: Props) {
     >
       <Link
         as={LINK_TYPES.BUTTON}
+        borderless
         css={[
           styles.closeSearchButton,
           isRearTireState && styles.closeSearchButtonRearTire,

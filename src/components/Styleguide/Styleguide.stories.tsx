@@ -1,8 +1,9 @@
-import { ReactChild } from 'react';
+import { ReactNode } from 'react';
 
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
-import { COLORS } from '~/lib/constants';
+import { COLORS, SPACING } from '~/lib/constants';
+import { links } from '~/styles/links.styles';
 import { typography } from '~/styles/typography.styles';
 
 import { styles } from './styleguide.styles';
@@ -55,12 +56,19 @@ function ColorContainer({
   theme,
   children,
 }: {
-  children: ReactChild[];
+  children: ReactNode;
   theme: Theme;
 }) {
   const backgroundColor = COLORS.GLOBAL[theme];
   return (
-    <div css={[styles.colors, { backgroundColor }]}>
+    <div
+      css={[
+        {
+          backgroundColor,
+          padding: SPACING.SIZE_50,
+        },
+      ]}
+    >
       <div css={styles.colorsContainer}>{children}</div>
     </div>
   );
@@ -112,5 +120,61 @@ export function ColorsOrange() {
         <div css={{ backgroundColor }} key={backgroundColor} />
       ))}
     </ColorContainer>
+  );
+}
+
+export function Links() {
+  const baseCSS = [
+    typography.primarySubhead,
+    { '&:not(:last-of-type)': { marginBottom: 30 } },
+  ];
+
+  return (
+    <>
+      <ColorContainer theme={Theme.WHITE}>
+        <div
+          css={{
+            alignItems: 'flex-start',
+            display: 'flex',
+            flexDirection: 'column',
+          }}
+        >
+          <a href="/" css={[baseCSS, links.light]}>
+            Light
+          </a>
+          <a href="/" css={[baseCSS, links.lightHighlighted]}>
+            Light Hightlighted
+          </a>
+          <a href="/" css={[baseCSS, links.light, links.borderless]}>
+            Light Borderless
+          </a>
+          <a href="/" css={[baseCSS, links.lightHighlighted, links.borderless]}>
+            Light Highlighted Borderless
+          </a>
+        </div>
+      </ColorContainer>
+      <ColorContainer theme={Theme.BLACK}>
+        <div
+          css={{
+            alignItems: 'flex-start',
+            display: 'flex',
+            flexDirection: 'column',
+          }}
+        >
+          <a href="/" css={[baseCSS, links.dark]}>
+            Dark
+          </a>
+          <a href="/" css={[baseCSS, links.darkHighlighted]}>
+            Dark Hightlighted
+          </a>
+          <a href="/" css={[baseCSS, links.dark, links.borderless]}>
+            Dark Borderless
+          </a>
+          <a href="/" css={[baseCSS, links.darkHighlighted, links.borderless]}>
+            Dark Highlighted Borderless
+          </a>
+        </div>
+      </ColorContainer>
+    </>
   );
 }

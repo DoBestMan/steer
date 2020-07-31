@@ -14,6 +14,7 @@ import {
   TIME,
   Z_INDEX,
 } from '~/lib/constants';
+import { typography } from '~/styles/typography.styles';
 
 const animationStyles: CSSObjectType = {
   [`searchSectionWrapper_${ENTERING}`]: {
@@ -31,11 +32,7 @@ const animationStyles: CSSObjectType = {
 };
 
 const styles: StylesMap = {
-  clearPastSearchesButton: {
-    span: {
-      borderBottom: `2px dotted ${COLORS.LIGHT.GRAY_70}`,
-    },
-  },
+  clearPastSearchesButton: typography.smallCopy,
   clearPastSearchesWrapper: {
     alignItems: 'baseline',
     display: 'flex',

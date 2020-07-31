@@ -1,13 +1,6 @@
-import {
-  BORDERS,
-  COLORS,
-  GAP_COLUMNS,
-  MQ,
-  SPACING,
-  StylesMap,
-  TIME,
-} from '~/lib/constants';
+import { COLORS, GAP_COLUMNS, MQ, SPACING, StylesMap } from '~/lib/constants';
 import { disableGlobalFocus } from '~/styles/document/accessibility.styles';
+import { links } from '~/styles/links.styles';
 import { typography, typographyStyles } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
@@ -85,18 +78,8 @@ const styles: StylesMap = {
   dataMomentHelp: [
     disableGlobalFocus,
     typography.smallCopyTight,
-    {
-      '&:active': {
-        borderColor: COLORS.ORANGE.SHADE_30,
-        color: COLORS.ORANGE.SHADE_30,
-      },
-      '&:hover:not(:active), &:focus:not(:active)': {
-        borderColor: COLORS.ORANGE.SHADE_85,
-      },
-      borderBottom: BORDERS.DOTTED_TRANSPARENT_2PX,
-      color: COLORS.ORANGE.SHADE_85,
-      transition: `border-color ${TIME.MS100}ms ease, color ${TIME.MS100}ms ease`,
-    },
+    links.light,
+    links.borderless,
   ],
 
   heading: [
@@ -136,20 +119,7 @@ const styles: StylesMap = {
     },
   },
 
-  noResultsLink: [
-    disableGlobalFocus,
-    {
-      '&:active': {
-        borderColor: COLORS.ORANGE.TINT_70,
-        color: COLORS.ORANGE.TINT_70,
-      },
-      '&:hover:not(:active), &:focus:not(:active)': {
-        borderColor: COLORS.GLOBAL.WHITE,
-      },
-      borderBottom: BORDERS.DOTTED_TRANSPARENT_2PX,
-      transition: `border-color ${TIME.MS100}ms ease, color ${TIME.MS100}ms ease`,
-    },
-  ],
+  noResultsLink: [disableGlobalFocus, links.darkHighlighted, links.borderless],
 
   noResultsLinkWrapper: {
     '&:not(:last-child)': {

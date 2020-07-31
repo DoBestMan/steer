@@ -1,6 +1,6 @@
 import Link from '~/components/global/Link/Link';
 import { SiteLink } from '~/data/models/SiteLink';
-import { ROUTE_MAP, ROUTES, THEME } from '~/lib/constants';
+import { LINK_THEME, ROUTE_MAP, ROUTES } from '~/lib/constants';
 import { formatOrNull } from '~/lib/utils/date';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { uiJSX } from '~/lib/utils/ui-dictionary-jsx';
@@ -65,7 +65,7 @@ export function getOrderSteps({
           <Link
             href={trackingLink?.href || '/'}
             isExternal={trackingLink?.isExternal}
-            theme={THEME.LIGHT}
+            theme={LINK_THEME.LIGHT_HIGHLIGHTED}
           >
             {trackingLabel}
           </Link>
@@ -122,7 +122,11 @@ export function getCancelledContactCopy({
 }) {
   if (!isCustomerServiceEnabled) {
     return (
-      <Link theme={THEME.LIGHT} href={CUSTOMER_SERVICE_LINK} isExternal>
+      <Link
+        theme={LINK_THEME.LIGHT_HIGHLIGHTED}
+        href={CUSTOMER_SERVICE_LINK}
+        isExternal
+      >
         {ui('tracking.cancelledSendEmail')}
       </Link>
     );
@@ -130,12 +134,19 @@ export function getCancelledContactCopy({
 
   return uiJSX('tracking.cancelledContactServiceEnabled', {
     phone: (
-      <Link theme={THEME.LIGHT} href={`tel:${customerServiceNumber.value}`}>
+      <Link
+        theme={LINK_THEME.LIGHT_HIGHLIGHTED}
+        href={`tel:${customerServiceNumber.value}`}
+      >
         {customerServiceNumber.display}
       </Link>
     ),
     email: (
-      <Link theme={THEME.LIGHT} href={CUSTOMER_SERVICE_LINK} isExternal>
+      <Link
+        theme={LINK_THEME.LIGHT_HIGHLIGHTED}
+        href={CUSTOMER_SERVICE_LINK}
+        isExternal
+      >
         send an email
       </Link>
     ),
@@ -146,7 +157,7 @@ export function getAdditionalInfoLinks() {
   return uiJSX('tracking.additionalInfoLinks', {
     shipping: (
       <Link
-        theme={THEME.LIGHT}
+        theme={LINK_THEME.LIGHT_HIGHLIGHTED}
         key="shipping-link"
         href={ROUTE_MAP[ROUTES.FREE_SHIPPING]}
       >
@@ -154,7 +165,11 @@ export function getAdditionalInfoLinks() {
       </Link>
     ),
     faq: (
-      <Link theme={THEME.LIGHT} key="faq-link" href={ROUTE_MAP[ROUTES.FAQS]}>
+      <Link
+        theme={LINK_THEME.LIGHT_HIGHLIGHTED}
+        key="faq-link"
+        href={ROUTE_MAP[ROUTES.FAQS]}
+      >
         {ui('links.faqs')}
       </Link>
     ),

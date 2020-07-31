@@ -7,7 +7,6 @@ import { SiteSearchResultGroup } from '~/data/models/SiteSearchResultGroup';
 import { SiteSearchResultTextItem } from '~/data/models/SiteSearchResultTextItem';
 import { LINK_TYPES, THEME, TIME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
-import { typography } from '~/styles/typography.styles';
 
 import { initialSearchCategories } from './Search.data';
 import styles from './Search.styles';
@@ -41,7 +40,7 @@ function InitialSearch({
       <span css={styles.pastSearchBullet}>&bull;</span>
       <Link
         as={LINK_TYPES.BUTTON}
-        css={[typography.smallCopy, styles.clearPastSearchesButton]}
+        css={styles.clearPastSearchesButton}
         onClick={onClearPastSearchesClick}
         theme={THEME.LIGHT}
       >

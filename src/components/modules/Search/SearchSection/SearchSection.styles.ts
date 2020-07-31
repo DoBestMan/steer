@@ -1,5 +1,6 @@
-import { BORDERS, COLORS, MQ, SPACING, StylesMap, TIME } from '~/lib/constants';
+import { COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
 import { disableGlobalFocus } from '~/styles/document/accessibility.styles';
+import { links } from '~/styles/links.styles';
 import { typography } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
@@ -19,18 +20,9 @@ const styles: StylesMap = {
   itemButton: [
     disableGlobalFocus,
     typography.secondaryHeadline,
+    links.darkHighlighted,
+    links.borderless,
     {
-      '&:active': {
-        borderColor: COLORS.ORANGE.TINT_70,
-        color: COLORS.ORANGE.TINT_70,
-      },
-      '&:hover:not(:active), &:focus:not(:active)': {
-        borderColor: COLORS.GLOBAL.WHITE,
-      },
-      borderBottom: BORDERS.DOTTED_TRANSPARENT_2PX,
-      color: COLORS.GLOBAL.WHITE,
-      textAlign: 'left',
-      transition: `border-color ${TIME.MS100}ms ease, color ${TIME.MS100}ms ease`,
       [MQ.M]: typography.primaryHeadline,
     },
   ],

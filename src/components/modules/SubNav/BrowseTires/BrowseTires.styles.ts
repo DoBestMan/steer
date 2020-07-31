@@ -41,14 +41,15 @@ const styles: StylesMap = {
   dealsLink: {
     '&:hover:not(:active)': {
       color: COLORS.ORANGE.SHADE_15_SOLID,
-
-      span: {
-        borderColor: 'transparent',
-      },
     },
     color: COLORS.GLOBAL.ORANGE,
+
     svg: {
       marginLeft: SPACING.SIZE_05,
+    },
+
+    span: {
+      borderBottom: 'none !important',
     },
   },
   decoration: {

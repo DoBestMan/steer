@@ -5,7 +5,7 @@ import { modalContainerStyles } from '~/components/global/Modal/BottomCardModal.
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import { SIZE_CHECK_STATES } from './Insights.types';
-import styles from './InsightsItem.styles';
+import styles from './SizeCheckModal.styles';
 
 interface Props {
   actions: { action: () => void; label: string }[] | null;

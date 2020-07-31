@@ -11,7 +11,7 @@ export interface Props {
 
 function EmailSupport({
   isCustomerServiceEnabled,
-  theme = THEME.LIGHT,
+  theme = LINK_THEME.LIGHT_HIGHLIGHTED,
   ...rest
 }: Props) {
   const supportContent = isCustomerServiceEnabled

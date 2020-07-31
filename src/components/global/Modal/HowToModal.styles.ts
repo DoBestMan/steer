@@ -1,4 +1,5 @@
 import { BORDERS, COLORS, MQ, SPACING, StylesMap, TIME } from '~/lib/constants';
+import { links } from '~/styles/links.styles';
 import { typography, typographyStyles } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
@@ -56,14 +57,7 @@ const styles: StylesMap = {
       '&:not(:last-child)': {
         paddingBottom: SPACING.SIZE_20,
       },
-      a: {
-        '&:hover': {
-          borderColor: COLORS.GLOBAL.WHITE,
-          color: COLORS.GLOBAL.WHITE,
-        },
-        borderBottom: BORDERS.DOTTED_GRAY_40_2PX,
-        transition: `border-color ${TIME.MS100}ms ease, color ${TIME.MS100}ms ease`,
-      },
+      a: links.dark,
       color: COLORS.DARK.GRAY_40,
       listStyleType: 'inherit',
     },

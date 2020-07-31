@@ -5,7 +5,7 @@ import { typography } from '~/styles/typography.styles';
 
 import BaseLink from './BaseLink';
 import { AnchorProps } from './Link';
-import styles, { iconCTA } from './Link.styles';
+import { iconCTA, themedIconCTA } from './Link.styles';
 
 interface Props extends Pick<AnchorProps, 'theme' | 'href' | 'children'> {
   icon: IconType;
@@ -24,11 +24,15 @@ function IconLink({
     <div css={iconCTA.root}>
       <Container
         href={href}
-        css={[typography.primarySubhead, styles.root, styles[theme]]}
+        css={[
+          typography.primarySubhead,
+          themedIconCTA[theme],
+          iconCTA.container,
+        ]}
         {...rest}
       >
         <Icon name={icon} css={iconCTA.icon} />
-        <span css={styles.link}>{children}</span>
+        <span>{children}</span>
       </Container>
     </div>
   );

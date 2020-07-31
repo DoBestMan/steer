@@ -95,14 +95,7 @@ const styles: StylesMap = {
       color: COLORS.GLOBAL.BLACK,
     },
   ],
-  closeSearchButton: [
-    typography.labelCopyTight,
-    {
-      span: {
-        borderBottom: BORDERS.DOTTED_TRANSPARENT_2PX,
-      },
-    },
-  ],
+  closeSearchButton: [typography.labelCopyTight],
   closeSearchButtonRearTire: {
     '&:focus > span': {
       color: COLORS.GLOBAL.ORANGE,

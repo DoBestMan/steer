@@ -1,6 +1,7 @@
 import { CSSObject } from '@emotion/core';
 
-import { BORDERS, COLORS, MQ, SPACING } from '~/lib/constants';
+import { COLORS, MQ, SPACING } from '~/lib/constants';
+import { links } from '~/styles/links.styles';
 import { typography } from '~/styles/typography.styles';
 
 const styles: CSSObject = {
@@ -20,9 +21,7 @@ const styles: CSSObject = {
     {
       color: COLORS.LIGHT.GRAY_70,
 
-      a: {
-        borderBottom: BORDERS.DOTTED_GRAY_70_2PX,
-      },
+      a: links.light,
     },
   ],
   featureDescription: [

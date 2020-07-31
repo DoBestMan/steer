@@ -5,6 +5,7 @@ export enum LINK_ICON_POSITION {
 
 export enum LINK_THEME {
   DARK_HIGHLIGHTED = 'darkHighlighted',
+  LIGHT_HIGHLIGHTED = 'lightHighlighted',
 }
 
 export type LINK_TYPE = 'a' | 'button';

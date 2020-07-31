@@ -1,4 +1,5 @@
-import { BORDERS, COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
+import { COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
+import { links } from '~/styles/links.styles';
 import { typography } from '~/styles/typography.styles';
 
 export const styles: StylesMap = {
@@ -29,9 +30,7 @@ export const styles: StylesMap = {
         marginTop: SPACING.SIZE_15,
       },
 
-      a: {
-        borderBottom: BORDERS.DOTTED_GRAY_70_2PX,
-      },
+      a: links.light,
     },
   ],
   description: [typography.primaryHeadline, {}],
