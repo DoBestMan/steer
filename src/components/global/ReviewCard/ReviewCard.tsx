@@ -96,12 +96,12 @@ function ReviewCard({
           <Link
             aria-expanded="false"
             as="button"
-            icon={ICONS.CHEVRON_DOWN}
+            icon={ICONS.CHEVRON_SMALL_DOWN}
             css={[styles.readMore, themeStyles[theme].readMore]}
             onClick={toggleCollapsed}
             theme={theme}
           >
-            {ui('reviews.readMore')}
+            {ui('reviews.viewMore')}
           </Link>
         ) : (
           <div css={styles.additionalContentContainer}>

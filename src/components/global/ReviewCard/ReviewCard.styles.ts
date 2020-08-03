@@ -13,7 +13,7 @@ const CONSTANTS = {
 const styles: StylesMap = {
   additionalContentContainer: {
     ul: {
-      paddingTop: SPACING.SIZE_30,
+      paddingTop: SPACING.SIZE_20,
       paddingBottom: 0, // Override default padding from component
     },
   },
@@ -36,7 +36,7 @@ const styles: StylesMap = {
       padding: `${SPACING.SIZE_30}px ${SPACING.SIZE_25}px`,
     },
     [MQ.XL]: {
-      padding: `${SPACING.SIZE_30}px ${SPACING.SIZE_40}px`,
+      padding: SPACING.SIZE_40,
     },
   },
   content: {
@@ -91,12 +91,12 @@ const styles: StylesMap = {
   },
   readMore: {
     fontWeight: 'bold',
-    marginTop: SPACING.SIZE_05,
+    marginTop: SPACING.SIZE_20,
   },
   title: [
     typography.primarySubhead,
     {
-      marginBottom: SPACING.SIZE_02,
+      marginBottom: SPACING.SIZE_05,
     },
   ],
   verifiedCustomer: {
