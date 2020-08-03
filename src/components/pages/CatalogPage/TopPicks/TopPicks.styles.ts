@@ -114,8 +114,10 @@ export const styles: CSSObject = {
   },
 
   rootIos: {
-    // Thanks, Apple
     minHeight: '-webkit-fill-available',
+    [MQ.M]: {
+      minHeight: '100vh',
+    },
   },
 
   title: {

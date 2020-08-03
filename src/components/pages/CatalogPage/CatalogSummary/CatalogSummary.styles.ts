@@ -1,6 +1,6 @@
 import { CSSObject } from '@emotion/core';
 
-import { COLORS } from '~/lib/constants';
+import { COLORS, MQ } from '~/lib/constants';
 
 export const styles: CSSObject = {
   backgroundContainer: {
@@ -14,5 +14,8 @@ export const styles: CSSObject = {
   },
   iosBackgroundContainer: {
     height: '-webkit-fill-available',
+    [MQ.M]: {
+      height: '100vh',
+    },
   },
 };
