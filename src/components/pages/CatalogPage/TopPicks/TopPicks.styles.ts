@@ -37,6 +37,11 @@ export const styles: CSSObject = {
       },
     },
 
+    // Ensure carousel spans the width of the container
+    '.swiper-container': {
+      width: '100%',
+    },
+
     // remove any pointer events because each slide takes 100% viewport width.
     '.swiper-slide': {
       height: '100%',
