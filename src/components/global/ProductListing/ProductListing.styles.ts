@@ -11,14 +11,14 @@ import { typography } from '~/styles/typography.styles';
 
 const IMAGE_SIZE = {
   HIGHLIGHT: {
-    S: 250,
-    M: 250,
-    XL: 300,
+    S: 210,
+    M: 240,
+    XL: 280,
   },
   DEFAULT: {
-    S: 140,
-    M: 180,
-    XL: 200,
+    S: 120,
+    M: 155,
+    XL: 180,
   },
 };
 
@@ -169,7 +169,7 @@ const styles: StylesMap = {
     },
   },
   shadow: {
-    bottom: -SPACING.SIZE_25,
+    bottom: -21,
     left: 0,
     pointerEvents: 'none',
     position: 'absolute',
@@ -177,26 +177,26 @@ const styles: StylesMap = {
     zIndex: Z_INDEX.BEHIND,
 
     [MQ.M]: {
-      bottom: -SPACING.SIZE_30,
+      bottom: -27,
     },
 
     [MQ.XL]: {
-      bottom: -SPACING.SIZE_35,
+      bottom: -32,
     },
   },
   shadowHighlighted: {
-    bottom: -SPACING.SIZE_45,
+    bottom: -36,
 
     [MQ.M]: {
-      bottom: -SPACING.SIZE_45,
+      bottom: -42,
     },
 
     [MQ.L]: {
-      bottom: -SPACING.SIZE_45,
+      bottom: -42,
     },
 
     [MQ.XL]: {
-      bottom: -52,
+      bottom: -48,
     },
   },
   subcopy: [
