@@ -547,8 +547,8 @@ export const CAR_DETAILS: Record<Cars, CarDetail> = {
   'car--truck': {
     backWheelCenterPos: { x: 42.50266742706299, y: 55.2664213180542 },
     distanceBackToRearWheel: 30.00347328186035,
-    distanceFrontToFrontWheel: 0,
-    frontWheelCenterPos: { x: 0, y: 0 },
+    distanceFrontToFrontWheel: 15.6343994140625,
+    frontWheelCenterPos: { x: 149.22577667236328, y: 55.266441345214844 },
     height: 67.765625,
     wheelWidth: 24.998388290405273,
     width: 177.359375,
