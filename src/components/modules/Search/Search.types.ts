@@ -36,14 +36,6 @@ export enum SearchStateEnum {
   VEHICLE = 'vehicle',
 }
 
-export type SearchStateType =
-  | 'brand'
-  | 'free-search'
-  | 'popular'
-  | 'tire-size'
-  | 'vehicle'
-  | 'rear-tire';
-
 export const SearchStateCopy: Record<string, string> = {
   [SearchStateEnum.BRAND]: ui('search.searchCategories.brand'),
   [SearchStateEnum.POPULAR]: ui('search.searchCategories.popular'),
@@ -51,13 +43,14 @@ export const SearchStateCopy: Record<string, string> = {
   [SearchStateEnum.VEHICLE]: ui('search.searchCategories.vehicle'),
 };
 
-export const SearchState: Record<string, SearchStateType> = {
-  [SearchStateCopy[SearchStateEnum.BRAND]]: 'brand',
-  [SearchStateCopy[SearchStateEnum.FREE_SEARCH]]: 'free-search',
-  [SearchStateCopy[SearchStateEnum.POPULAR]]: 'popular',
-  [SearchStateCopy[SearchStateEnum.REAR_TIRE]]: 'rear-tire',
-  [SearchStateCopy[SearchStateEnum.TIRE_SIZE]]: 'tire-size',
-  [SearchStateCopy[SearchStateEnum.VEHICLE]]: 'vehicle',
+export const SearchStateQueryType: Record<string, string> = {
+  [SearchStateEnum.BRAND]: 'brand',
+  [SearchStateEnum.FRONT_TIRE]: 'frontTireSize',
+  [SearchStateEnum.POPULAR]: 'mostPopularProductLine',
+  [SearchStateEnum.REAR_TIRE]: 'rearTireSize',
+  [SearchStateEnum.REAR_TIRE_WIDTH]: 'rearWidthRatio',
+  [SearchStateEnum.TIRE_SIZE]: 'tireSize',
+  [SearchStateEnum.VEHICLE]: 'vehicle',
 };
 
 export enum SearchInputEnum {

@@ -19,6 +19,7 @@ import {
   SearchInputEnum,
   SearchResult,
   SearchStateEnum,
+  SearchStateQueryType,
 } from './Search.types';
 import SearchAutocomplete from './SearchAutocomplete/SearchAutocomplete';
 import SearchSupport from './SearchSupport';
@@ -109,12 +110,23 @@ function Search({
   };
 
   const onInputChange = (input: string) => {
-    setCurrentInputQuery({ queryText: input });
-
     const { queryType } = getCurrentInputQuery();
+    let currentInputQueryType = queryType;
+
+    // Reset queryType if input is empty
+    if (input.length === 0) {
+      currentInputQueryType = searchState
+        ? SearchStateQueryType[searchState]
+        : '';
+    }
+
+    setCurrentInputQuery({
+      queryText: input,
+      queryType: currentInputQueryType,
+    });
 
     if ((queryType && searchState) || input) {
-      delayedSearch({ queryText: input, queryType });
+      delayedSearch({ queryText: input, queryType: currentInputQueryType });
     } else {
       // No need to hit the API when there's no queryType or queryText
       clearSearchResults();
@@ -126,7 +138,7 @@ function Search({
 
     const resetQuery = {
       queryText: '',
-      queryType,
+      queryType: searchState ? SearchStateQueryType[searchState] : '',
     };
 
     if (hasLockedSearchState) {
@@ -142,7 +154,7 @@ function Search({
       onSetSearchState('');
       resetQuery.queryType = '';
     } else if (searchState) {
-      onSearchQuery({ queryText: '', queryType });
+      onSearchQuery(resetQuery);
     }
 
     if (!searchState || !queryText) {
@@ -292,7 +304,6 @@ function Search({
   const shouldShowInitialSearch =
     (shouldShowSearchSupport || isInputEmpty) &&
     !searchState &&
-    !hasResults &&
     !hasSearchResultsError;
   const shouldShowError = hasSearchResultsError && !isInputEmpty;
   const shouldShowPastSearches =
