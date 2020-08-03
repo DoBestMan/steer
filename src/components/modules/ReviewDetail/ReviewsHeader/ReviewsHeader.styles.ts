@@ -13,7 +13,7 @@ const styles: StylesMap = {
     maxWidth: CONSTANTS.BRAND_WIDTH,
   },
   breadcrumbs: {
-    marginBottom: SPACING.SIZE_50,
+    marginBottom: SPACING.SIZE_40,
     [MQ.M]: {
       marginBottom: SPACING.SIZE_80,
     },

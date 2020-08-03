@@ -1,13 +1,17 @@
 import { useRouter } from 'next/router';
 
+import Button from '~/components/global/Button/Button';
 import DataStructure from '~/components/global/DataStructure/DataStructure';
 import Meta from '~/components/global/Meta/Meta';
 import { navigationPaddingTop } from '~/components/modules/Nav/Nav.styles';
 import Reviews from '~/components/modules/ReviewDetail/Reviews/Reviews';
 import ReviewsHeader from '~/components/modules/ReviewDetail/ReviewsHeader/ReviewsHeader';
-import { ROUTE_MAP, ROUTES } from '~/lib/constants';
+import StickyBar from '~/components/modules/StickyBar/StickyBar';
+import { primaryColumnStyles } from '~/components/modules/StickyBar/StickyBar.styles';
+import { ROUTE_MAP, ROUTES, THEME } from '~/lib/constants';
 import { interpolateRoute } from '~/lib/utils/routes';
 import { removeTireFromQueryParam } from '~/lib/utils/string';
+import { ui } from '~/lib/utils/ui-dictionary';
 import { ProductDetailResponse } from '~/pages/api/product-detail';
 
 import { mapDataToHeader } from './mappers/header';
@@ -15,6 +19,7 @@ import { mapDataToLinkingData } from './mappers/linkingData';
 import { mapDataToMeta } from './mappers/meta';
 import { mapDataToReviews } from './mappers/reviews';
 import usePagination from './ReviewDetailPage.hooks';
+import styles from './ReviewDetailPage.styles';
 
 export interface ProductDetailReviewsData {
   serverData: ProductDetailResponse;
@@ -80,10 +85,32 @@ function ReviewDetailPage({ serverData }: ProductDetailReviewsData) {
         total={total}
         sources={sources}
         title={title}
-        viewTireUrl={viewTireUrl}
-        writeReviewUrl={writeReviewUrl}
         onSeeMoreClick={handleSeeMoreClick}
       />
+      <div css={styles.stickyBar}>
+        <StickyBar
+          theme={THEME.ORANGE}
+          primaryColumnCustomStyles={primaryColumnStyles.rightAlign}
+        >
+          <>
+            <Button
+              css={primaryColumnStyles.secondaryButton}
+              as="a"
+              href={writeReviewUrl}
+            >
+              {ui('reviews.writeReview')}
+            </Button>
+            <Button
+              css={primaryColumnStyles.primaryButton}
+              as="a"
+              href={viewTireUrl}
+              theme={THEME.ORANGE}
+            >
+              {ui('reviews.viewTire')}
+            </Button>
+          </>
+        </StickyBar>
+      </div>
     </div>
   );
 }

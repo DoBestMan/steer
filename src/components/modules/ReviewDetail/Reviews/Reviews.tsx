@@ -4,8 +4,6 @@ import GridItem from '~/components/global/Grid/GridItem';
 import ReviewCard, {
   ReviewCardProps,
 } from '~/components/global/ReviewCard/ReviewCard';
-import StickyBar from '~/components/modules/StickyBar/StickyBar';
-import { primaryColumnStyles } from '~/components/modules/StickyBar/StickyBar.styles';
 import { THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
@@ -20,8 +18,6 @@ export interface ReviewsProps {
   };
   title: string;
   total?: number;
-  viewTireUrl?: string;
-  writeReviewUrl?: string;
 }
 
 function Reviews({
@@ -29,13 +25,10 @@ function Reviews({
   reviews,
   sources,
   title,
-  viewTireUrl,
-  writeReviewUrl,
   total = 0,
 }: ReviewsProps) {
   const hasMoreReviews = reviews.length < total;
   const hasSources = sources?.simpleTire || sources?.googleShopping;
-  const hasStickyBar = viewTireUrl && writeReviewUrl;
 
   return (
     <Grid as="section">
@@ -87,32 +80,6 @@ function Reviews({
             </GridItem>
           )}
         </>
-      )}
-      {hasStickyBar && (
-        <GridItem fullbleed css={styles.stickyBar}>
-          <StickyBar
-            theme={THEME.ORANGE}
-            primaryColumnCustomStyles={primaryColumnStyles.rightAlign}
-          >
-            <>
-              <Button
-                css={primaryColumnStyles.secondaryButton}
-                as="a"
-                href={writeReviewUrl}
-              >
-                {ui('reviews.writeReview')}
-              </Button>
-              <Button
-                css={primaryColumnStyles.primaryButton}
-                as="a"
-                href={viewTireUrl}
-                theme={THEME.ORANGE}
-              >
-                {ui('reviews.viewTire')}
-              </Button>
-            </>
-          </StickyBar>
-        </GridItem>
       )}
     </Grid>
   );
