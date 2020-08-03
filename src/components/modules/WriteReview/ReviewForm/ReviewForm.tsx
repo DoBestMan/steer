@@ -30,6 +30,7 @@ import {
 import styles from './ReviewForm.styles';
 
 interface Props {
+  brand: string;
   onSearchVehicle?: (event: React.MouseEvent) => void;
   queryParams: {
     [name: string]: string | string[];
@@ -94,7 +95,13 @@ const initialState = {
   },
 };
 
-function ReviewForm({ tire, queryParams, vehicle, onSearchVehicle }: Props) {
+function ReviewForm({
+  brand,
+  tire,
+  queryParams,
+  vehicle,
+  onSearchVehicle,
+}: Props) {
   const [formValues, setFormValues] = useState<FormValues>(initialState);
   const [pickerLabels, setPickerLabels] = useState<PickerLabels>({});
   const [isFormValid, setIsFormValid] = useState<boolean>(false);
@@ -301,7 +308,7 @@ function ReviewForm({ tire, queryParams, vehicle, onSearchVehicle }: Props) {
           {uiJSX('reviews.form.title', {
             tire: (
               <span key={tire} css={styles.titleTire}>
-                {tire}
+                {brand} {tire}
               </span>
             ),
           })}

@@ -64,6 +64,7 @@ function WriteAReviewPage({
       </Grid>
       <ReviewForm
         tire={tire}
+        brand={brand}
         queryParams={query}
         vehicle={vehicleFromContext}
         onSearchVehicle={onSearchVehicle}
