@@ -1,12 +1,4 @@
-import {
-  BORDERS,
-  COLORS,
-  MQ,
-  RADIUS,
-  SPACING,
-  StylesMap,
-  TIME,
-} from '~/lib/constants';
+import { COLORS, MQ, RADIUS, SPACING, StylesMap, TIME } from '~/lib/constants';
 import {
   fadeInUp,
   fadeInUp20px,
@@ -20,8 +12,7 @@ const styles: StylesMap = {
     typography.secondaryHeadline,
     {
       animation: `${fadeInUp} ${TIME.MS350}ms ease-in`,
-      backgroundColor: COLORS.GLOBAL.ORANGE,
-      borderTop: BORDERS.SOLID_ORANGE_TINT_30_2PX,
+      backgroundColor: COLORS.ORANGE.SHADE_15_SOLID,
       bottom: 0,
       color: COLORS.GLOBAL.WHITE,
       display: 'flex',
@@ -39,7 +30,6 @@ const styles: StylesMap = {
         {
           alignItems: 'center',
           animation: `${fadeInUp20px} ${TIME.MS200}ms ease-in`,
-          border: BORDERS.SOLID_ORANGE_TINT_30_2PX,
           borderRadius: RADIUS.RADIUS_15,
           minHeight: 'auto',
           padding: SPACING.SIZE_20,
