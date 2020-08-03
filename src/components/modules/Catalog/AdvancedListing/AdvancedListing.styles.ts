@@ -144,6 +144,7 @@ const styles: CSSObject = {
   reviewsCount: [
     typography.smallCopy,
     {
+      color: COLORS.LIGHT.GRAY_70,
       display: 'none',
       [MQ.XL]: {
         display: 'block',
