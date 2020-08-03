@@ -7,6 +7,21 @@ import {
 } from '~/styles/animations.styles';
 import { typography } from '~/styles/typography.styles';
 
+const CLOSE_ICON_POS = {
+  S: {
+    right: 11,
+    top: 15,
+  },
+  M: {
+    right: 31,
+    top: 36,
+  },
+  L: {
+    right: 11,
+    top: 15,
+  },
+};
+
 const styles: StylesMap = {
   root: [
     typography.secondaryHeadline,
@@ -39,17 +54,23 @@ const styles: StylesMap = {
     },
   ],
 
-  icon: {
-    alignSelf: 'flex-start',
-    color: COLORS.GLOBAL.WHITE,
-    [MQ.L]: {
-      ':hover': {
-        color: COLORS.GLOBAL.WHITE,
+  icon: [
+    {
+      alignSelf: 'flex-start',
+      color: COLORS.GLOBAL.WHITE,
+      position: 'absolute',
+      [MQ.L]: {
+        ':hover': {
+          color: COLORS.GLOBAL.WHITE,
+        },
       },
-      color: COLORS.ORANGE.TINT_70,
-      marginTop: -SPACING.SIZE_05,
     },
-  },
+    {
+      [MQ.S]: CLOSE_ICON_POS.S,
+      [MQ.M]: CLOSE_ICON_POS.M,
+      [MQ.L]: CLOSE_ICON_POS.L,
+    },
+  ],
 
   isDismissed: {
     pointerEvents: 'none',
