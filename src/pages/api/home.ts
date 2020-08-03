@@ -14,10 +14,7 @@ export default async (
 ) => {
   backendBootstrap({ request });
 
-  response.setHeader(
-    'Cache-control',
-    's-maxage=3600, stale-while-revalidate=60',
-  );
+  response.setHeader('Cache-control', 'stale-while-revalidate=60');
 
   const siteHome = await backendGetSiteHome();
   response.json(siteHome);
