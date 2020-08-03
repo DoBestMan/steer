@@ -146,6 +146,10 @@ function ReviewForm({ tire, queryParams, vehicle, onSearchVehicle }: Props) {
   const hasValidFields =
     email.test(formValues[FIELDS.EMAIL] || '') && hasValidDate;
 
+  const submitText = isFormValid
+    ? ui('reviews.form.submit.valid')
+    : ui('reviews.form.submit.invalid');
+
   useEffect(() => {
     if (hasRequiredFieldsFilled && hasValidFields) {
       setIsFormValid(true);
@@ -557,7 +561,7 @@ function ReviewForm({ tire, queryParams, vehicle, onSearchVehicle }: Props) {
               onClick={handleFormSubmit}
               type="button"
             >
-              {ui('reviews.form.submit')}
+              {submitText}
             </Button>
           </div>
         </form>

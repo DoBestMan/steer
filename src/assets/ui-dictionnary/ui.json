@@ -416,7 +416,10 @@
     },
     "form": {
       "title": "Leave a review {{tire}}",
-      "submit": "Complete all fields to submit",
+      "submit": {
+        "invalid": "Complete all fields to submit",
+        "valid": "Submit review"
+      },
       "success": "Thank you for your review!",
       "error": "Oops, something went wrong! <br />Please try again.",
       "sections": {
