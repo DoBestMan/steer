@@ -20,7 +20,16 @@ module.exports = withBundleAnalyzer({
         test: /\.(js|ts)x?$/,
       },
       test: /\.svg$/,
-      use: ['raw-loader'],
+      use: [
+        {
+          loader: '@svgr/webpack',
+          options: {
+            svgoConfig: {
+              plugins: [{ removeViewBox: false }],
+            },
+          },
+        },
+      ],
     });
 
     // Alias

@@ -144,13 +144,19 @@ yarn storybook
 
 ## (Re)building the icon library
 
-We're generating and using an SVG Sprite in the application. If you need to add more icons, please:
+The icon library is split in two types of icons:
 
-- add your SVG icon in `/src/assets/icons`. Make sure the filename is respecting the kebab-case format.
+- common: the icons that are common to most of the pages, or used by common layout such as the header
+- others: all the other icons
+
+We're generating and using an SVG Sprite in the application for the common icons. If you need to add more icons, please:
+
+- add your SVG icon in `/src/assets/icons/common` if the icon is supposed to be heavily used, or `/src/assets/icons/others` otherwise. Make sure the filename is respecting the kebab-case format.
 - run `yarn generate-svg-sprite`.
 - You're all set, commit your change and voilà!
 
-Note: make sure that every SVG file used has a `viewBox` attribute.
+Note: make sure that every SVG file used has a `viewBox` attribute, as well as a `width` and `height` attributes.
+Note (bis): It's rare an icon qualifies to be a `common` icon.
 
 List of assets [here](https://docs.google.com/spreadsheets/d/1kjsrjn0Y-dQAo_ahsUV-jxhk58JpxPmHUNkiwCI-lw8/edit#gid=0)
 

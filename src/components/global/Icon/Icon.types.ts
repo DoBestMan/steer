@@ -109,7 +109,9 @@ export type Icon =
   | 'wrench'
   | 'youtube';
 
-export type IconSize = { h: number; w: number };
+export type IconType = 'COMMON' | 'OTHER';
+
+export type IconObject = { h: number; type: IconType; w: number };
 
 // DO NOT MANUALLY EDIT THIS FILE, this file is auto-generated.
 // To add new icons place svg file in /src/assets/icons

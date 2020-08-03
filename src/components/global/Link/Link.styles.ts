@@ -35,11 +35,11 @@ const helpers: StylesMap = {
     },
   },
   inheritLastSpanFocusBorder: {
-    'span:last-of-type': {
+    'span:not(.SVGInline):last-of-type': {
       borderBottom: '2px dotted transparent',
     },
 
-    '&:hover span:last-of-type, &:focus span:last-of-type, &:active span:last-of-type': {
+    '&:hover span:not(.SVGInline):last-of-type, &:focus span:not(.SVGInline):last-of-type, &:active span:not(.SVGInline):last-of-type': {
       borderBottomColor: 'inherit',
     },
   },
@@ -112,28 +112,31 @@ export const iconCTA = {
 export const themedIconCTA: Record<THEME | LINK_THEME, CSSStyles[] | null> = {
   [THEME.DARK]: [
     {
-      'span:last-of-type': links.dark,
+      'span:not(.SVGInline):last-of-type': links.dark,
     },
     helpers.inheritLastSpanFocusBorder,
   ],
 
   [LINK_THEME.DARK_HIGHLIGHTED]: [
     {
-      'span:last-of-type': [links.dark, links.darkHighlighted],
+      'span:not(.SVGInline):last-of-type': [links.dark, links.darkHighlighted],
     },
     helpers.inheritLastSpanFocusBorder,
   ],
 
   [THEME.LIGHT]: [
     {
-      'span:last-of-type': links.light,
+      'span:not(.SVGInline):last-of-type': links.light,
     },
     helpers.inheritLastSpanFocusBorder,
   ],
 
   [LINK_THEME.LIGHT_HIGHLIGHTED]: [
     {
-      'span:last-of-type': [links.light, links.lightHighlighted],
+      'span:not(.SVGInline):last-of-type': [
+        links.light,
+        links.lightHighlighted,
+      ],
     },
     helpers.inheritLastSpanFocusBorder,
   ],

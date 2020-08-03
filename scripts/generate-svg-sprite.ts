@@ -3,7 +3,12 @@ import mkdirp from 'mkdirp';
 import path from 'path';
 import SVGSpriter from 'svg-sprite';
 
-import { createFile, lineBreak } from './utils';
+import {
+  compareIconsArray,
+  createFile,
+  getSVGContent,
+  lineBreak,
+} from './utils';
 
 // Remove sorting key to keep config consistant with online documentation
 /* eslint sort-keys: 0 */
@@ -58,66 +63,151 @@ const config = {
 const spriter = new SVGSpriter(config);
 
 /* eslint no-undef: 0 */
-const iconsSrc = path.resolve(__dirname, '../src/assets/icons');
+
+const iconsCommonSrc = path.resolve(__dirname, '../src/assets/icons/common');
+const iconsOthersSrc = path.resolve(__dirname, '../src/assets/icons/others');
 const iconNameArray = [];
 
-fs.readdirSync(iconsSrc).forEach((file: string): void => {
-  if (file.indexOf('.svg') > -1) {
-    const iconSrc = path.resolve(iconsSrc, file);
+/*
+ * Step 1: Get SVGs, make sure they are valid, copy over the "other" icons
+ */
 
-    const content = fs.readFileSync(iconSrc, { encoding: 'utf-8' });
-    const viewBox = content.match(/viewBox\=\"([\d*\.?\d* ]*)\"/g);
+console.log(
+  'Step 1 - Get SVGs, make sure they are valid, copy over the "other" icons',
+);
 
-    if (!viewBox) {
-      console.error(
-        '/!/ WARNING -  No viewBox found in:',
-        file,
-        ', therefore not added to the sprite. ',
-      );
-    } else {
-      spriter.add(iconSrc, file, content);
-      iconNameArray.push(file.replace('.svg', ''));
-    }
+// Common icons
+fs.readdirSync(iconsCommonSrc).forEach((file: string): void => {
+  const filepath = path.resolve(iconsCommonSrc, file);
+  const { content, constName, hasViewbox, key, name, size } = getSVGContent(
+    file,
+    filepath,
+  );
+
+  if (hasViewbox) {
+    // Common icons go to Sprite
+    spriter.add(filepath, null, content);
+
+    const SVGObject = {
+      constName,
+      key,
+      name,
+      size,
+      type: 'COMMON',
+    };
+
+    iconNameArray.push(SVGObject);
   }
 });
 
-iconNameArray.sort();
+// Other icons
+fs.readdirSync(iconsOthersSrc).forEach((file: string): void => {
+  const filepath = path.resolve(iconsOthersSrc, file);
+  const { content, constName, hasViewbox, key, name, size } = getSVGContent(
+    file,
+    filepath,
+  );
 
-const getIconTypesContent = (): string => {
+  if (hasViewbox) {
+    // const destination = `${iconsPublicOthersPath}/${file}`;
+
+    const SVGObject = {
+      content,
+      constName,
+      // filepath: destination,
+      key,
+      name,
+      size,
+      type: 'OTHER',
+    };
+
+    iconNameArray.push(SVGObject);
+
+    // Rewrite others icon to "clean" them (likely add width/height attr)
+    fs.writeFileSync(filepath, content, { encoding: 'utf8' });
+  }
+});
+
+// Sort array, make them object already "sorted"
+iconNameArray.sort(compareIconsArray);
+
+const icons = {};
+
+iconNameArray.forEach((icon) => {
+  icons[icon.key] = { h: icon.size.h, type: icon.type, w: icon.size.w };
+});
+
+function getIconTypesContent(): string {
   const doNotEditWarning = 'DO NOT MANUALLY EDIT THIS FILE';
   const fileDescription = `// ${doNotEditWarning}, this file is auto-generated.${lineBreak}// To add new icons place svg file in /src/assets/icons${lineBreak}// and run 'yarn run generate-svg-sprite'`;
 
   const iconsType = `export type Icon = ${iconNameArray
-    .map((icon) => `'${icon.toLowerCase()}'`)
+    .map((icon) => `'${icon.name.toLowerCase()}'`)
     .join(' | ')};`;
 
-  const size = 'export type IconSize = { h: number, w: number };';
+  const type = "export type IconType = 'COMMON' | 'OTHER';";
+  const size =
+    'export type IconObject = { h: number, type: IconType, w: number };';
 
-  return `${fileDescription}${lineBreak}${lineBreak}${iconsType}${lineBreak}${lineBreak}${size}${lineBreak}${lineBreak}${lineBreak}${fileDescription}${lineBreak}`;
-};
+  return `${fileDescription}${lineBreak}${lineBreak}${iconsType}${lineBreak}${lineBreak}${type}${lineBreak}${lineBreak}${size}${lineBreak}${lineBreak}${lineBreak}${fileDescription}${lineBreak}`;
+}
 
-const getIconConstantsContent = (sizes): string => {
+function getIconConstantsContent(): string {
   const doNotEditWarning = 'DO NOT MANUALLY EDIT THIS FILE';
   const fileDescription = `// ${doNotEditWarning}, this file is auto-generated.${lineBreak}// To add new icons place svg file in /src/assets/icons${lineBreak}// and run 'yarn run generate-svg-sprite'`;
 
-  const importTypes = 'import { IconSize, Icon } from "./Icon.types";';
+  const importTypes = 'import { IconObject, Icon } from "./Icon.types";';
 
   const iconsConstant = `${lineBreak}export const ICONS: Record<string, Icon> = ${JSON.stringify(
     iconNameArray.reduce((obj, icon) => {
-      const key = icon.toUpperCase().replace(/-/g, '_');
-      obj[key] = icon.toLowerCase();
+      const key = icon.key;
+      obj[key] = icon.name;
       return obj;
     }, {}),
   )}`;
 
-  const iconSizes = `${lineBreak}export const ICON_SIZES: Record<string, IconSize> = ${JSON.stringify(
-    sizes,
+  const iconSizes = `${lineBreak}export const ICON_SIZES: Record<string, IconObject> = ${JSON.stringify(
+    icons,
   )}`;
 
-  return `${fileDescription}${lineBreak}${lineBreak}${importTypes}${lineBreak}${lineBreak}${iconsConstant}${lineBreak}${lineBreak}${iconSizes}${lineBreak}${lineBreak}${lineBreak}${lineBreak}${lineBreak}${fileDescription}${lineBreak}`;
-};
+  const iconsTypes = `${lineBreak}export const ICON_TYPES = { COMMON: 'COMMON', OTHER:'OTHER'};`;
+  const publicIconsPath = `${lineBreak}export const PUBLIC_ICONS_PATH = '/static/assets/icons-others';`;
 
-spriter.compile((error: string, result: object) => {
+  return `${fileDescription}${lineBreak}${lineBreak}${importTypes}${lineBreak}${lineBreak}${iconsConstant}${lineBreak}${lineBreak}${iconSizes}${lineBreak}${lineBreak}${iconsTypes}${lineBreak}${lineBreak}${publicIconsPath}${lineBreak}${lineBreak}${lineBreak}${lineBreak}${lineBreak}${fileDescription}${lineBreak}`;
+}
+
+function getIconOthersContent(): string {
+  const doNotEditWarning = 'DO NOT MANUALLY EDIT THIS FILE';
+  const fileDescription = `// ${doNotEditWarning}, this file is auto-generated.${lineBreak}// To add new icons place svg file in /src/assets/icons${lineBreak}// and run 'yarn run generate-svg-sprite'`;
+
+  const importTypes =
+    'import dynamic from "next/dynamic"; import { ReactElement } from "react";';
+
+  let dynamicImports = '';
+
+  iconNameArray
+    .filter((icon) => icon.type === 'OTHER')
+    .forEach((icon) => {
+      dynamicImports += `const ${icon.constName} = dynamic(() => import('~/assets/icons/others/${icon.name}.svg'), { ssr: false });`;
+    });
+
+  const iconsConstant = `${lineBreak}export const ICONS_OTHER_MAP: Record<string, ReactElement> = { ${iconNameArray
+    .filter((icon) => icon.type === 'OTHER')
+    .map((icon) => {
+      return `${icon.key}: <${icon.constName} />`;
+    })} }`;
+
+  return `${fileDescription}${lineBreak}${lineBreak}${importTypes}${lineBreak}${lineBreak}${dynamicImports}${lineBreak}${lineBreak}${iconsConstant}${lineBreak}${lineBreak}${lineBreak}${lineBreak}${lineBreak}${fileDescription}${lineBreak}`;
+}
+
+/*
+ * Step 2: Compile Sprite
+ */
+
+/* eslint no-console: 0 */
+console.log('Step 2: Compile Sprite');
+
+spriter.compile((_error: string, result: object) => {
   /* Write `result` files to disk */
   for (const mode in result) {
     for (const resource in result[mode]) {
@@ -129,42 +219,12 @@ spriter.compile((error: string, result: object) => {
     }
   }
 
-  const contents = fs.readFileSync(
-    path.resolve(
-      __dirname,
-      '../public/static/assets/svg-sprite/symbol/svg/sprite.symbol.svg',
-    ),
-    'utf8',
-  );
+  /*
+   * Step 3: Write contants/type files
+   */
 
-  // Extract viewport to get original size for each SVG
-  /* eslint no-useless-escape: 0 */
-  const viewBoxes = contents
-    .match(/viewBox\=\"([\d*\.?\d* ]*)\"/g)
-    .map((viewBox) =>
-      viewBox.replace('viewBox="', '').replace('"', '').substr(4),
-    );
+  console.log('Step 3: Write contants/type files');
 
-  if (viewBoxes.length !== iconNameArray.length) {
-    console.error(
-      '/!/ ERROR - An issue occured when mappping viewboxes to the list of icon - Please Make sure you have valid SVG icon files, with valid viewbox attributes',
-    );
-    return;
-  }
-
-  const sizes = {};
-
-  viewBoxes.forEach((viewBox, i) => {
-    const name = iconNameArray[i];
-    const key = name.toUpperCase().replace(/-/g, '_');
-    const aSize = viewBox.split(' ');
-    sizes[key] = {
-      h: +aSize[1],
-      w: +aSize[0],
-    };
-  });
-
-  // Finally, create files
   createFile(
     'src/components/global/Icon/',
     'Icon.types.ts',
@@ -174,6 +234,15 @@ spriter.compile((error: string, result: object) => {
   createFile(
     'src/components/global/Icon/',
     'Icon.constants.ts',
-    getIconConstantsContent(sizes),
+    getIconConstantsContent(),
   );
+
+  createFile(
+    'src/components/global/Icon/',
+    'Icon.others.tsx',
+    getIconOthersContent(),
+  );
+
+  console.log('All done!');
+  process.exit(0);
 });
