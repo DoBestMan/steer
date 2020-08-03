@@ -52,15 +52,27 @@ const styles: StylesMap = {
   ],
 
   dataMomentCtaWrapper: {
-    '> *:not(:last-child)': {
+    '> *': {
       marginBottom: SPACING.SIZE_10,
     },
-
+    // eslint-disable-next-line sort-keys
     '> *:not(:first-of-type)': {
       marginLeft: SPACING.SIZE_10,
     },
 
-    marginBottom: SPACING.SIZE_25,
+    a: {
+      width: 'fit-content',
+    },
+    alignItems: 'flex-end',
+    display: 'flex',
+    flexDirection: 'column',
+    flexWrap: 'wrap',
+    justifyContent: 'flex-end',
+    marginBottom: SPACING.SIZE_15,
+
+    [MQ.M]: {
+      flexDirection: 'row',
+    },
   },
 
   dataMomentHeading: {
@@ -71,12 +83,7 @@ const styles: StylesMap = {
     },
   },
 
-  dataMomentHelp: [
-    disableGlobalFocus,
-    typography.smallCopyTight,
-    links.light,
-    links.borderless,
-  ],
+  dataMomentHelp: [disableGlobalFocus, typography.smallCopyTight, links.light],
 
   heading: [
     typography.primaryHeadline,

@@ -17,7 +17,7 @@ import { useCatalogSummaryContext } from '~/context/CatalogSummary.context';
 import { useModalContext } from '~/context/Modal.context';
 import { SiteCatalogSummaryBuildIn } from '~/data/models/SiteCatalogSummaryBuildIn';
 import { SiteCatalogSummaryPrompt } from '~/data/models/SiteCatalogSummaryPrompt';
-import { LINK_TYPES } from '~/lib/constants';
+import { BUTTON_STYLE, LINK_TYPES } from '~/lib/constants';
 import { eventEmitters } from '~/lib/events/emitters';
 import { getInvertedImageTransformations } from '~/lib/utils/cloudinary/cloudinary';
 import { isValidStaticModal } from '~/lib/utils/modal';
@@ -131,6 +131,10 @@ export function DataMomentMessage({
     eventEmitters.newCatalogSearchQuery.emit({ comesFromSearch: false });
   };
 
+  const hasMultipleCtas =
+    siteCatalogSummaryPrompt?.ctaList &&
+    siteCatalogSummaryPrompt.ctaList.length > 1;
+
   return (
     siteCatalogSummaryPrompt && (
       <Grid css={styles.container}>
@@ -155,6 +159,9 @@ export function DataMomentMessage({
             <div css={styles.dataMomentCtaWrapper}>
               {siteCatalogSummaryPrompt.ctaList.map(
                 ({ label, siteQueryParams }) => {
+                  const buttonStyle = hasMultipleCtas
+                    ? message.buttonStyle
+                    : BUTTON_STYLE.SOLID;
                   const id = label.replace(/\s+/g, '').toLowerCase();
                   const href = getHrefWithParams(asPath, siteQueryParams);
                   return siteQueryParams ? (
@@ -163,7 +170,7 @@ export function DataMomentMessage({
                       as={LINK_TYPES.A}
                       href={href}
                       onClick={handleNewSearchQuery}
-                      style={message.buttonStyle}
+                      style={buttonStyle}
                       theme={message.buttonTheme}
                     >
                       {label}
@@ -174,7 +181,7 @@ export function DataMomentMessage({
                       onClick={function () {
                         setStage && setStage(STAGES.RESULTS);
                       }}
-                      style={message.buttonStyle}
+                      style={buttonStyle}
                       theme={message.buttonTheme}
                     >
                       {label}
