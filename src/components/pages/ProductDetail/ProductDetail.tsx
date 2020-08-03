@@ -9,7 +9,6 @@ import Link from '~/components/global/Link/Link';
 import Meta from '~/components/global/Meta/Meta';
 import ProductGroupList from '~/components/global/ProductGroupList/ProductGroupList';
 import LocationModal from '~/components/modules/Location/LocationModal/LocationModal';
-import { navigationPaddingTop } from '~/components/modules/Nav/Nav.styles';
 import FAQ from '~/components/modules/PDP/FAQ/FAQ';
 import Insights from '~/components/modules/PDP/Insights/Insights';
 import Installation from '~/components/modules/PDP/Installation/Installation';
@@ -72,10 +71,10 @@ function ProductDetail({ serverData }: ProductDetailData) {
   }
 
   return (
-    <div css={styles.root}>
+    <>
       <Meta {...meta} />
       {linkingData && <DataStructure jsonLD={linkingData} />}
-      <Grid css={navigationPaddingTop}>
+      <Grid css={styles.root}>
         <GridItem gridColumnL="start/8" gridRowL="1" css={styles.breadcrumbs}>
           <Breadcrumbs navigationItems={breadcrumbs} />
         </GridItem>
@@ -102,7 +101,6 @@ function ProductDetail({ serverData }: ProductDetailData) {
                   {...insights}
                   handleChangeLocation={toggleModal}
                   openDynamicModal={openDynamicModal}
-                  css={styles.insights}
                 />
               </GridItem>
             </Grid>
@@ -196,7 +194,7 @@ function ProductDetail({ serverData }: ProductDetailData) {
       <Feedback />
 
       <LocationModal isOpen={isLocationModalOpen} onClose={toggleModal} />
-    </div>
+    </>
   );
 }
 

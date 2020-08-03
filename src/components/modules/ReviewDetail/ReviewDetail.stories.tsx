@@ -3,10 +3,7 @@ import { mockReviewDetail } from '~/components/modules/ReviewDetail/ReviewDetail
 import Reviews from '~/components/modules/ReviewDetail/Reviews/Reviews';
 import ReviewsHeader from '~/components/modules/ReviewDetail/ReviewsHeader/ReviewsHeader';
 import StickyBar from '~/components/modules/StickyBar/StickyBar';
-import {
-  primaryColumnStyles,
-  stickyContentOffset,
-} from '~/components/modules/StickyBar/StickyBar.styles';
+import { primaryColumnStyles } from '~/components/modules/StickyBar/StickyBar.styles';
 import { SPACING, StylesMap, THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
@@ -36,7 +33,7 @@ export function FullPage() {
   } = mockReviewDetail;
 
   return (
-    <div css={[styles.container, stickyContentOffset.bottom]}>
+    <div css={styles.container}>
       <ReviewsHeader
         brand={brand}
         brandUrl={brandUrl}

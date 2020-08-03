@@ -1,3 +1,4 @@
+import { NAV_HEIGHT } from '~/components/modules/Nav/Nav.styles';
 import { COLORS, MQ, SPACING, StylesMap, Z_INDEX } from '~/lib/constants';
 import { getColumnsCalc } from '~/lib/utils/grid';
 
@@ -61,10 +62,14 @@ const styles: StylesMap = {
     },
   },
   insights: {
-    marginTop: SPACING.SIZE_20,
+    marginTop: SPACING.SIZE_25,
+
+    [MQ.M]: {
+      marginTop: SPACING.SIZE_40,
+    },
 
     [MQ.L]: {
-      marginTop: SPACING.SIZE_40,
+      marginTop: SPACING.SIZE_60,
     },
   },
   installation: {
@@ -177,8 +182,18 @@ const styles: StylesMap = {
     },
   },
   root: {
+    paddingTop: NAV_HEIGHT.S - 10,
+
+    [MQ.M]: {
+      paddingTop: NAV_HEIGHT.M + 20,
+    },
+
     [MQ.L]: {
-      paddingTop: SPACING.SIZE_80,
+      paddingTop: NAV_HEIGHT.L + 65,
+    },
+
+    [MQ.XL]: {
+      paddingTop: NAV_HEIGHT.XL + 65,
     },
   },
   shopWithConfidence: {

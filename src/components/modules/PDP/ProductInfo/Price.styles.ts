@@ -17,6 +17,7 @@ const styles: CSSObject = {
     typography.primarySubhead,
     {
       color: COLORS.GLOBAL.ORANGE,
+      marginBottom: 3,
       whiteSpace: 'nowrap',
     },
   ],

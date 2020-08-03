@@ -15,6 +15,7 @@ const styles: StylesMap = {
     typography.smallCopyTight,
     {
       marginLeft: SPACING.SIZE_05,
+      marginTop: 3,
       textDecoration: 'line-through',
       color: COLORS.LIGHT.GRAY_70,
     },

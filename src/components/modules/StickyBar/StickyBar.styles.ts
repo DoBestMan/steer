@@ -17,7 +17,7 @@ const SIDE_MARGIN = {
 };
 
 export const STICKY_BAR_HEIGHT = {
-  S: 105,
+  S: 90,
   M: 90,
   L: 100,
 };
@@ -87,38 +87,15 @@ export const primaryColumnStyles: StylesMap = {
   },
 };
 
-// If the bar is sticky, offset the top or bottom margin appropriately
-// so content is not covered.
-export const stickyContentOffset: StylesMap = {
-  bottom: {
-    marginBottom: STICKY_BAR_HEIGHT.S,
-
-    [MQ.M]: {
-      marginBottom: STICKY_BAR_HEIGHT.M,
-    },
-    [MQ.L]: {
-      marginBottom: STICKY_BAR_HEIGHT.L,
-    },
-  },
-  top: {
-    marginTop: STICKY_BAR_HEIGHT.S,
-
-    [MQ.M]: {
-      marginTop: STICKY_BAR_HEIGHT.M,
-    },
-    [MQ.L]: {
-      marginTop: STICKY_BAR_HEIGHT.L,
-    },
-  },
-};
-
 const styles: StylesMap = {
   container: {
     borderTop: BORDERS.SOLID_BLACK_1PX,
     display: 'flex',
-    height: STICKY_BAR_HEIGHT.S,
     justifyContent: 'space-between',
-    padding: `0 ${SIDE_MARGIN.S}px ${SPACING.SIZE_15}px`,
+    paddingBottom: `calc(${SIDE_MARGIN.S}px + env(safe-area-inset-bottom) / 2)`,
+    paddingLeft: SIDE_MARGIN.S,
+    paddingRight: SIDE_MARGIN.S,
+    paddingTop: SIDE_MARGIN.S,
     transition: `background-color ${TIME.MS400}ms ease`,
     zIndex: Z_INDEX.FRONT,
 

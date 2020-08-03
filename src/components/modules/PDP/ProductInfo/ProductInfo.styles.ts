@@ -59,15 +59,18 @@ const styles: StylesMap = {
   },
   pricesWrapper: {
     textAlign: 'right',
+    marginBottom: SPACING.SIZE_02,
     maxWidth: CONSTANTS.HEADER_MAX_WIDTH,
 
     [MQ.L]: {
       textAlign: 'left',
+      marginBottom: 0,
       marginTop: SPACING.SIZE_40,
       maxWidth: '100%',
     },
   },
   promoTags: {
+    marginBottom: -SPACING.SIZE_05,
     marginTop: SPACING.SIZE_25,
 
     [MQ.L]: {

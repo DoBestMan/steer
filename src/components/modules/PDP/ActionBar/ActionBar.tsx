@@ -149,11 +149,7 @@ function PDPActionBar({
     <>
       {!!price && (
         <div css={styles.root}>
-          <Button
-            onClick={handleClickAddToCart}
-            theme={theme}
-            css={styles.addToCart}
-          >
+          <Button onClick={handleClickAddToCart} theme={theme}>
             {ui('pdp.stickyBar.addToCart', {
               value: formatDollars(price),
             })}

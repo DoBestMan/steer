@@ -5,9 +5,6 @@ const styles: StylesMap = {
   addToCart: {
     marginLeft: SPACING.SIZE_20,
   },
-  button: {
-    flex: 1,
-  },
   dropdownIcon: {
     height: 5,
     marginLeft: SPACING.SIZE_05,
@@ -26,10 +23,32 @@ const styles: StylesMap = {
     },
 
     // eslint-disable-next-line sort-keys
-    '> p, > button': {
+    '> button': {
       display: 'flex',
-      flex: 1,
+      flex: 0.5,
       justifyContent: 'center',
+      whiteSpace: 'nowrap',
+
+      [MQ.L]: {
+        display: 'flex',
+        flex: 'auto',
+      },
+    },
+
+    // eslint-disable-next-line sort-keys
+    '> button:last-of-type': {
+      flex: 1,
+
+      [MQ.L]: {
+        flex: 'auto',
+      },
+    },
+
+    // eslint-disable-next-line sort-keys
+    '> p': {
+      display: 'flex',
+      flex: 0.5,
+      justifyContent: 'flex-start',
       whiteSpace: 'nowrap',
 
       [MQ.L]: {
