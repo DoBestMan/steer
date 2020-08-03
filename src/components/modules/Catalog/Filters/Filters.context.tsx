@@ -144,6 +144,7 @@ export function useFiltersContextSetup({
       siteCatalogFilters.filtersList,
       siteCatalogFilters.sortList,
     );
+
     setFiltersToApply(initialState);
   }, [isLoading, siteCatalogFilters]);
 

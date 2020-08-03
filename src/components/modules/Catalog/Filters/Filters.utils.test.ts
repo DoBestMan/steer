@@ -154,6 +154,25 @@ describe('Filters.utils', () => {
       );
 
       expect(initialState.category).toEqual('allSeason');
+
+      const mockFilterListMultiple = ([
+        {
+          type: SiteCatalogFilterToggleTypeEnum.SiteCatalogFilterToggle,
+          item: {
+            state: 'Selected',
+            value: {
+              category: 'allSeason,winter',
+            },
+          },
+        },
+      ] as unknown) as SiteCatalogFilter[];
+
+      const { initialState: initialStateMultiple } = getInitialFiltersState(
+        mockFilterListMultiple,
+        filterSort,
+      );
+
+      expect(initialStateMultiple.category).toEqual('allSeason,winter');
     });
 
     it('checks the status of toggle filters to determine if the popular filters button is active', () => {
@@ -172,6 +191,41 @@ describe('Filters.utils', () => {
       );
 
       expect(mockPopularActiveTrue).toEqual(true);
+    });
+
+    it('handles min/max on range types', () => {
+      const mockFilterRange = [
+        { ...warrantyFilter, currentMinValue: 0, currentMaxValue: 20000 },
+      ] as SiteCatalogFilter[];
+
+      const { initialState } = getInitialFiltersState(
+        mockFilterRange,
+        filterSort,
+      );
+
+      expect(initialState).toHaveProperty('warranty', '0,20000');
+
+      const mockFilterRangeNull = [
+        { ...warrantyFilter, currentMinValue: null, currentMaxValue: null },
+      ] as SiteCatalogFilter[];
+
+      const { initialState: initialStateNull } = getInitialFiltersState(
+        mockFilterRangeNull,
+        filterSort,
+      );
+
+      expect(initialStateNull).not.toHaveProperty('warranty');
+
+      const mockFilterRangeSingle = [
+        { ...warrantyFilter, currentMinValue: null, currentMaxValue: 25000 },
+      ] as SiteCatalogFilter[];
+
+      const { initialState: initialStateSingle } = getInitialFiltersState(
+        mockFilterRangeSingle,
+        filterSort,
+      );
+
+      expect(initialStateSingle).toHaveProperty('warranty', '0,25000');
     });
 
     describe('isStrictEqual', () => {
@@ -200,6 +254,31 @@ describe('Filters.utils', () => {
           expect(hasActiveValue(mockList, mockState)).toBe(true);
           // range filter
           expect(hasActiveValue(mockRange, mockState)).toBe(true);
+        });
+
+        it('does not update isActive value in list if already true', () => {
+          const mockState = {
+            foo: 'bar,baz',
+            bar: 'qux',
+            range: '0,60',
+          };
+
+          // first group has active val, second group does not
+          const mockListDupe = {
+            ...mockList,
+            filterGroups: [
+              ...mockList.filterGroups,
+              {
+                items: [
+                  {
+                    value: { qux: 'baz' },
+                  },
+                ],
+              },
+            ],
+          } as SiteCatalogFilterList;
+
+          expect(hasActiveValue(mockListDupe, mockState)).toBe(true);
         });
       });
 

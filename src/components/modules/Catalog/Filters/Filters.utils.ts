@@ -129,7 +129,10 @@ export function getInitialFiltersState(
         group.items.forEach((item: SiteCatalogFilterItem) => {
           if (item.state === SiteCatalogFilterItemStateEnum.Selected) {
             Object.keys(item.value).forEach((key) => {
-              if (initialState[key] && initialState[key] !== item.value[key]) {
+              if (
+                initialState[key] &&
+                !initialState[key].includes(item.value[key])
+              ) {
                 initialState[key] = initialState[key] + ',' + item.value[key];
                 return;
               }
@@ -142,12 +145,12 @@ export function getInitialFiltersState(
 
     // range filter
     if (filter.type === SiteCatalogFilterRangeTypeEnum.SiteCatalogFilterRange) {
-      if (!filter.currentMinValue || !filter.currentMaxValue) {
+      if (!filter.currentMinValue && !filter.currentMaxValue) {
         return;
       }
       initialState[filter.id] = minMaxify(
-        filter.currentMinValue,
-        filter.currentMaxValue,
+        filter.currentMinValue || 0,
+        filter.currentMaxValue || 0,
       );
     }
   });
@@ -190,6 +193,9 @@ export function hasActiveValue(
     let isActive = false;
     filter.filterGroups.forEach((group) =>
       group.items.forEach((item) => {
+        if (isActive) {
+          return;
+        }
         isActive = Object.keys(item.value).some((key) => !!activeFilters[key]);
       }),
     );
