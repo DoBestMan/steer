@@ -26,7 +26,7 @@ const DISC_SIZE = 50;
 
 const styles: StylesMap = {
   attribute: [
-    typography.primarySubhead,
+    typography.tertiaryHeadline,
     {
       color: COLORS.GLOBAL.ORANGE,
     },
@@ -44,7 +44,7 @@ const styles: StylesMap = {
   brandLabel: typography.tertiaryHeadline,
   filterItem: typography.secondarySubhead,
   filterItemContainer: {
-    marginBottom: 7,
+    marginBottom: SPACING.SIZE_10,
   },
   image: {
     marginBottom: SPACING.SIZE_25,
@@ -127,10 +127,17 @@ const styles: StylesMap = {
     },
   },
   rating: {
+    alignItems: 'flex-end',
     display: 'flex',
-    alignItems: 'center',
     marginBottom: SPACING.SIZE_10,
   },
+  ratingQuantity: [
+    typography.smallCopyTight,
+    {
+      color: COLORS.LIGHT.GRAY_70,
+      marginBottom: 3,
+    },
+  ],
   root: {
     '&:hover': {
       borderColor: COLORS.GLOBAL.ORANGE,
@@ -196,8 +203,8 @@ const styles: StylesMap = {
     typography.smallCopyTight,
     {
       color: COLORS.LIGHT.GRAY_70,
-      marginBottom: 3,
-      marginTop: 6,
+      marginBottom: SPACING.SIZE_02,
+      marginTop: SPACING.SIZE_02,
     },
   ],
 };

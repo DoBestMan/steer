@@ -112,7 +112,7 @@ function ProductListing({
         {rating && (
           <div css={styles.rating}>
             <Stars isSmall color={COLORS.LIGHT.GRAY_70} number={rating.value} />
-            <span css={styles.subcopy}>({rating.quantity})</span>
+            <span css={styles.ratingQuantity}>({rating.quantity})</span>
           </div>
         )}
 
