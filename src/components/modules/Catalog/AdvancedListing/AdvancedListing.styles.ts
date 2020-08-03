@@ -16,6 +16,9 @@ const styles: CSSObject = {
     width: '100%',
     [MQ.XL]: { width: '50%' },
   },
+  bottomSectionTop: {
+    alignItems: 'flex-start',
+  },
   brand: {
     height: 20,
     img: {

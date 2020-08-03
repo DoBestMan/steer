@@ -53,6 +53,11 @@ function AdvancedListing({
 
   const imageWidths = [250, 250, 300];
 
+  const hasNoPromos =
+    !siteCatalogPromotionInfo || siteCatalogPromotionInfo.count === 0;
+
+  const shouldAlignTop = hasNoPromos && !rating;
+
   return (
     <Grid css={styles.root}>
       <GridItem css={styles.imageWrapper} gridColumnM="2/5" gridColumnL="2/7">
@@ -149,7 +154,12 @@ function AdvancedListing({
               </div>
             </div>
           )}
-          <div css={styles.bottomSection}>
+          <div
+            css={[
+              styles.bottomSection,
+              shouldAlignTop && styles.bottomSectionTop,
+            ]}
+          >
             <div css={styles.specList}>
               <MomentList
                 data={specList}
@@ -158,7 +168,13 @@ function AdvancedListing({
               />
             </div>
           </div>
-          <div css={[styles.bottomSection, styles.ratingBarsSection]}>
+          <div
+            css={[
+              styles.bottomSection,
+              styles.ratingBarsSection,
+              shouldAlignTop && styles.bottomSectionTop,
+            ]}
+          >
             <div css={styles.ratingBars}>
               <RatingsList
                 ratings={performanceRatingList}
