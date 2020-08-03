@@ -9,7 +9,7 @@ import Prices from '~/components/global/Prices/Prices';
 import Stars from '~/components/global/Stars/Stars';
 import Sticker from '~/components/global/Sticker/Sticker';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
-import { COLORS, CSSStyles } from '~/lib/constants';
+import { COLORS } from '~/lib/constants';
 import { getTranslate, subscribeTranslate } from '~/lib/helpers/translate';
 import { getInvertedImageTransformations } from '~/lib/utils/cloudinary/cloudinary';
 import { ordinalSuffixOf } from '~/lib/utils/string';
@@ -206,7 +206,7 @@ function TopPicksItem(props: TopPickItemsProps) {
                   responsive
                   as={'span'}
                   widths={[300, 450, 600]}
-                  customStyles={{ backgroundColor: 'transparent' } as CSSStyles}
+                  customContainerStyles={{ backgroundColor: 'transparent' }}
                 />
               </span>
             )}
@@ -276,7 +276,7 @@ function TopPicksItem(props: TopPickItemsProps) {
                 <BrandLogoOrLabel
                   brand={brand}
                   srcTransformationArgs={brandSrcTransformationArgs}
-                  customStyles={{ width: '100%' }}
+                  customContainerStyles={{ width: '100%' }}
                 />
               </span>
             )}

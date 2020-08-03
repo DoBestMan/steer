@@ -45,7 +45,7 @@ function Price({
       <Prices
         originalPrefix={ui('common.originalPricePrefix')}
         priceList={[{ price }]}
-        currentPriceCSS={typography.primaryHeadline}
+        customPriceStyles={typography.primaryHeadline}
       />
     </>
   );

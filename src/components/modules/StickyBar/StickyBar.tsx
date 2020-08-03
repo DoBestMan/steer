@@ -4,18 +4,18 @@ import Icon from '~/components/global/Icon/Icon';
 import { Icon as IconType } from '~/components/global/Icon/Icon.types';
 import Image from '~/components/global/Image/Image';
 import { SiteImage } from '~/data/models/SiteImage';
-import { CSSStyles, THEME } from '~/lib/constants';
+import { CSSStylesProp, THEME } from '~/lib/constants';
 import { getInvertedImageTransformations } from '~/lib/utils/cloudinary/cloudinary';
 
 import styles from './StickyBar.styles';
 
 interface Props {
   children: ReactNode;
+  customPrimaryColStyles?: CSSStylesProp;
   icon?: IconType;
   isStickyBottom?: boolean;
   isStickyTop?: boolean;
   logo?: SiteImage | null;
-  primaryColumnCustomStyles?: CSSStyles;
   secondaryLabel?: string;
   theme: THEME;
 }
@@ -26,7 +26,7 @@ function StickyBar({
   isStickyBottom,
   isStickyTop,
   logo,
-  primaryColumnCustomStyles,
+  customPrimaryColStyles,
   secondaryLabel,
   theme,
 }: Props) {
@@ -63,9 +63,7 @@ function StickyBar({
         </>
       )}
 
-      <div css={[styles.primaryColumn, primaryColumnCustomStyles]}>
-        {children}
-      </div>
+      <div css={[styles.primaryColumn, customPrimaryColStyles]}>{children}</div>
     </div>
   );
 }

@@ -90,7 +90,7 @@ function AdvancedListing({
             </div>
             <div css={styles.pricesContainer}>
               <Prices
-                currentPriceCSS={[typography.secondaryHeadline]}
+                customPriceStyles={[typography.secondaryHeadline]}
                 priceList={priceList}
                 isStartingAtPrice={!size}
               />

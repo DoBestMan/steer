@@ -1,7 +1,7 @@
 import { ReactType, useRef, useState } from 'react';
 
 import { SiteImageExtended } from '~/data/models/SiteImageExtended';
-import { CSSStyles, LOADING_OPTIONS } from '~/lib/constants';
+import { CSSStylesProp, LOADING_OPTIONS } from '~/lib/constants';
 import { Transformations } from '~/lib/utils/cloudinary/cloudinary.types';
 import { percentageFromNumber } from '~/lib/utils/number';
 
@@ -21,7 +21,7 @@ interface Props extends SiteImageExtended {
 function Image({
   altText,
   as = 'div',
-  customStyles,
+  customContainerStyles,
   responsive,
   height,
   loading = LOADING_OPTIONS.LAZY,
@@ -82,7 +82,7 @@ function Image({
     ratio = percentageFromNumber(h, w);
   }
 
-  const style: CSSStyles = {};
+  const style: CSSStylesProp = {};
 
   if (ratio && responsive) {
     style.position = 'relative';
@@ -107,7 +107,7 @@ function Image({
         styles.root,
         isLazyAndNotLoaded && !noPlaceholder && styles.placeholder,
         { ...style },
-        customStyles,
+        customContainerStyles,
       ]}
     >
       {finalSrcSet && (

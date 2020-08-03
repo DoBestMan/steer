@@ -1,11 +1,11 @@
 import { useBreakpoints } from '~/hooks/useBreakpoints';
-import { Breakpoint, BREAKPOINT_SIZES, CSSStyles } from '~/lib/constants';
+import { Breakpoint, BREAKPOINT_SIZES, CSSStylesProp } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import styles from './SearchLabel.styles';
 
 interface Props {
-  customContainerStyles?: CSSStyles;
+  customContainerStyles?: CSSStylesProp;
   fullLabelAt?: Breakpoint;
   hideOnSmallMedium?: boolean;
 }

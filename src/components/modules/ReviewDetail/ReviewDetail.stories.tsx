@@ -50,7 +50,7 @@ export function FullPage() {
       <StickyBar
         isStickyBottom
         theme={THEME.ORANGE}
-        primaryColumnCustomStyles={primaryColumnStyles.rightAlign}
+        customPrimaryColStyles={primaryColumnStyles.rightAlign}
       >
         <>
           <Button css={primaryColumnStyles.secondaryButton}>

@@ -76,7 +76,7 @@ function FooterMailingList() {
       <p css={styles.text}>{ui('footer.mailingList.description')}</p>
       <div css={styles.inputContainer}>
         <Input
-          containerStyles={styles.inputHeight}
+          customContainerStyles={styles.inputHeight}
           css={styles.emailInput}
           error={{
             hasError: !isInputValid,
@@ -101,7 +101,7 @@ function FooterMailingList() {
         )}
       </div>
       <Toast
-        customStyles={styles.toast}
+        customContainerStyles={styles.toast}
         isOpen={isOpen}
         onDismiss={handleDismiss}
         handleClearMessage={handleClearMessage}

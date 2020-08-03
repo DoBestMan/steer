@@ -90,7 +90,7 @@ function ReviewDetailPage({ serverData }: ProductDetailReviewsData) {
       <div css={styles.stickyBar}>
         <StickyBar
           theme={THEME.ORANGE}
-          primaryColumnCustomStyles={primaryColumnStyles.rightAlign}
+          customPrimaryColStyles={primaryColumnStyles.rightAlign}
         >
           <>
             <Button

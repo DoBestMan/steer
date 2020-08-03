@@ -13,7 +13,7 @@ function UnavailableImage({ image }: UnavailableImageProps) {
       <Image
         altText={image.altText}
         src={image.src}
-        customStyles={styles.image}
+        customContainerStyles={styles.image}
         css={styles.image}
         responsive
       />

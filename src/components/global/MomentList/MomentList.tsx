@@ -1,4 +1,4 @@
-import { CSSStyles, RATINGS_DISPLAY, THEME } from '~/lib/constants';
+import { CSSStylesProp, RATINGS_DISPLAY, THEME } from '~/lib/constants';
 
 import styles, { dStyles, tStyles } from './MomentList.styles';
 
@@ -9,7 +9,7 @@ export interface MomentListItem {
 }
 
 interface Props {
-  customContainerStyles?: CSSStyles;
+  customContainerStyles?: CSSStylesProp;
   data: Array<MomentListItem>;
   display?: RATINGS_DISPLAY;
   theme?: THEME.DARK | THEME.LIGHT;

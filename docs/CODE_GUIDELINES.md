@@ -73,6 +73,8 @@ import { StylesMap } from '@emotion/core';
 
 - Composed styles should generally be composed within the component
 - Typing with `StylesMap` helps us avoid issues with "type widening" (ie: things like `{ borderTopStyle: 'solid' as 'solid' }`). Read more about it [here](https://github.com/emotion-js/emotion/pull/1129#issuecomment-452376242)
+- When passing unique custom styles to a component from a parent, the type should reference `CSSStylesProp`, a catch-all for varying types that emotion handles.
+  - Nomenclature for styles props should be as follows: `custom[Type]Styles`. `Type` references the item to which the styles are being applied. e.g., `customImageStyles`, `customContainerStyles`, `customTitleStyles` and so on.
 
 ```
 css={[styles.root, styles.other]}

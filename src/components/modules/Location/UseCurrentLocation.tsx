@@ -105,7 +105,7 @@ function UseCurrentLocation({
     <div css={styles.useCurrentLocationContainer}>
       {isWaiting ? (
         <Loading
-          customStyles={styles.userCurrentLocationLoader}
+          customContainerStyles={styles.userCurrentLocationLoader}
           label={ui('location.loadingCurrentLocationLabel')}
         />
       ) : (

@@ -210,7 +210,7 @@ function Location({
 
         <Toast
           handleClearMessage={handleClearMessage}
-          customStyles={styles.toast}
+          customContainerStyles={styles.toast}
           isOpen={isOpen}
           onDismiss={handleDismiss}
         >

@@ -13,7 +13,7 @@ function OrderItem({ image, name, quantity }: OrderProduct) {
     <div css={styles.wrapper}>
       <Image
         css={styles.image}
-        customStyles={styles.imageWrapper}
+        customContainerStyles={styles.imageWrapper}
         responsive
         {...image}
       />

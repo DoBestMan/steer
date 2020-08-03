@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 
 import Carousel from '~/components/global/Carousel/Carousel';
-import { CSSStyles } from '~/lib/constants';
+import { CSSStylesProp } from '~/lib/constants';
 
 import styles from './HorizontalNumberPicker.styles';
 
 interface Props {
-  customCarouselStyles?: CSSStyles;
-  customContainerStyles?: CSSStyles;
+  customCarouselStyles?: CSSStylesProp;
+  customContainerStyles?: CSSStylesProp;
   initialIndex?: number;
   numbers: number[];
   onSelect?: (value: number, index: number) => void;

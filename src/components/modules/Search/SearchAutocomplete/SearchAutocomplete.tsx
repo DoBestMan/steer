@@ -425,7 +425,10 @@ function SearchAutocomplete({
               gridColumnL="3/14"
               gridColumnXL="3/14"
             >
-              <Loading customStyles={styles.loading} theme={THEME.DARK} />
+              <Loading
+                customContainerStyles={styles.loading}
+                theme={THEME.DARK}
+              />
             </GridItem>
           </Grid>
         )}

@@ -7,7 +7,7 @@ import {
   SiteYouTubeVideo,
   SiteYouTubeVideoTypeEnum,
 } from '~/data/models/SiteYouTubeVideo';
-import { CSSStyles, LOADING_OPTIONS } from '~/lib/constants';
+import { LOADING_OPTIONS } from '~/lib/constants';
 
 import CarouselImage from './CarouselImage';
 import CarouselImageButton from './CarouselImageButton';
@@ -59,13 +59,11 @@ function TireImageCarouselItem({
 
       {imageItem.type === SiteYouTubeVideoTypeEnum.SiteYouTubeVideo && (
         <Video
-          containerStyles={
-            [
-              styles.videoContainerStyles,
-              // Width of video follows 16/9 aspect ratio
-              { height, width: height && height * (16 / 9) },
-            ] as CSSStyles
-          }
+          customContainerStyles={[
+            styles.videoContainerStyles,
+            // Width of video follows 16/9 aspect ratio
+            { height, width: height && height * (16 / 9) },
+          ]}
           imageLoading={LOADING_OPTIONS.EAGER}
           isButtonFocusable={isActive}
           poster={imageItem.poster}

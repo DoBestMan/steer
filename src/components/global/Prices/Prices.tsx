@@ -1,5 +1,5 @@
 import { SitePrice } from '~/data/models/SitePrice';
-import { COLORS, CSSStyles } from '~/lib/constants';
+import { COLORS, CSSStylesProp } from '~/lib/constants';
 import { formatDollars } from '~/lib/utils/string';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
@@ -7,7 +7,7 @@ import { typography } from '~/styles/typography.styles';
 import styles from './Prices.styles';
 
 interface Props {
-  currentPriceCSS?: CSSStyles;
+  customPriceStyles?: CSSStylesProp;
   isLight?: boolean;
   isStartingAtPrice?: boolean;
   originalPrefix?: string;
@@ -18,7 +18,7 @@ interface Props {
 }
 
 function Prices({
-  currentPriceCSS,
+  customPriceStyles,
   priceList,
   isLight,
   isStartingAtPrice,
@@ -40,7 +40,7 @@ function Prices({
                   },
                   isLight && { color: COLORS.GLOBAL.WHITE },
                   typography.tertiaryHeadline,
-                  currentPriceCSS,
+                  customPriceStyles,
                 ]}
               >
                 {label && <span css={styles.label}>{label} </span>}

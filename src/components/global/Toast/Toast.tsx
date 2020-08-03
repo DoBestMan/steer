@@ -3,7 +3,7 @@ import { CSSTransition } from 'react-transition-group';
 
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Link from '~/components/global/Link/Link';
-import { ARIA_LIVE, CSSStyles, LINK_TYPES, TIME } from '~/lib/constants';
+import { ARIA_LIVE, CSSStylesProp, LINK_TYPES, TIME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import styles from './Toast.styles';
@@ -16,7 +16,7 @@ export enum TOAST_TYPE {
 interface Props {
   autoDismiss?: boolean; // There should be no use cases with auto dismiss disabled, this prop is for testing
   children: ReactChild;
-  customStyles?: CSSStyles;
+  customContainerStyles?: CSSStylesProp;
   handleClearMessage: () => void;
   isOpen?: boolean;
   onDismiss: () => void;
@@ -24,7 +24,7 @@ interface Props {
 
 function Toast({
   children,
-  customStyles,
+  customContainerStyles,
   autoDismiss = true,
   handleClearMessage,
   isOpen = false,
@@ -47,7 +47,11 @@ function Toast({
     >
       <div
         aria-live={ARIA_LIVE.ASSERTIVE}
-        css={[styles.root, !isOpen && styles.isDismissed, customStyles]}
+        css={[
+          styles.root,
+          !isOpen && styles.isDismissed,
+          customContainerStyles,
+        ]}
         role="alert"
       >
         <span>{children}</span>

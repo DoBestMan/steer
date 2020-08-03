@@ -7,14 +7,14 @@ import IconOrImage from '~/components/global/IconOrImage/IconOrImage';
 import ProductListing from '~/components/global/ProductListing/ProductListing';
 import { getProductDisplayImages } from '~/components/pages/CatalogPage/CatalogPage.utils';
 import { SiteCatalogProductGroupItem } from '~/data/models/SiteCatalogProductGroupList';
-import { CSSStyles } from '~/lib/constants';
+import { CSSStylesProp } from '~/lib/constants';
 
 import BaseLink from '../Link/BaseLink';
 import styles from './ProductGroupList.styles';
 
 interface ProductGroupListProps extends SiteCatalogProductGroupItem {
-  headerCustomStyles?: CSSStyles;
-  itemCustomStyle?: CSSStyles;
+  customHeaderStyles?: CSSStylesProp;
+  customItemStyles?: CSSStylesProp;
   onClick?: (params: Record<string, string>) => void;
 }
 
@@ -24,9 +24,9 @@ function ProductGroupList({
   productList,
   icon,
   siteQueryParams,
-  headerCustomStyles,
+  customHeaderStyles,
   onClick,
-  itemCustomStyle,
+  customItemStyles,
 }: ProductGroupListProps) {
   const isHeadingButton = onClick && siteQueryParams;
   const HeadingEl = isHeadingButton ? 'button' : BaseLink;
@@ -50,7 +50,7 @@ function ProductGroupList({
   return (
     <>
       <Grid>
-        <GridItem css={headerCustomStyles}>
+        <GridItem css={customHeaderStyles}>
           <h2 css={styles.title}>
             {siteQueryParams ? (
               <HeadingEl
@@ -77,7 +77,7 @@ function ProductGroupList({
           {productList.map((product, i) => {
             const displayImages = getProductDisplayImages(product.imageList);
             return (
-              <div key={`${name}-${i}`} css={[styles.item, itemCustomStyle]}>
+              <div key={`${name}-${i}`} css={[styles.item, customItemStyles]}>
                 <ProductListing
                   {...product}
                   defaultImage={displayImages.default}

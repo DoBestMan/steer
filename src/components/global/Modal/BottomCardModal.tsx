@@ -4,7 +4,7 @@ import ReactModal from 'react-modal';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Link from '~/components/global/Link/Link';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
-import { COLORS, CSSStyles, THEME, TIME, Z_INDEX } from '~/lib/constants';
+import { COLORS, CSSStylesProp, THEME, TIME, Z_INDEX } from '~/lib/constants';
 import { bindAppElement } from '~/lib/utils/modal';
 import { ui } from '~/lib/utils/ui-dictionary';
 
@@ -15,7 +15,7 @@ bindAppElement();
 interface Props {
   children: ReactNode;
   contentLabel: string;
-  customContentStyles?: CSSStyles;
+  customContentStyles?: CSSStylesProp;
   isOpen: boolean;
   onBack?: () => void;
   onClose: () => void;

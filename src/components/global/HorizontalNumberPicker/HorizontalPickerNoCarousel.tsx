@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 
-import { CSSStyles } from '~/lib/constants';
+import { CSSStylesProp } from '~/lib/constants';
 
 import styles from './HorizontalNumberPicker.styles';
 
 interface Props {
-  customContainerStyles?: CSSStyles;
+  customContainerStyles?: CSSStylesProp;
   initialIndex?: number;
   numbers: (number | string)[];
   onSelect?: (value: number | string, index: number) => void;

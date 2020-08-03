@@ -112,8 +112,8 @@ function ProductDetail({ serverData }: ProductDetailData) {
           <>
             <GridItem fullbleed css={styles.featuredRecirculation}>
               <ProductGroupList
-                headerCustomStyles={styles.recirculationHeader}
-                itemCustomStyle={styles.recirculationItem}
+                customHeaderStyles={styles.recirculationHeader}
+                customItemStyles={styles.recirculationItem}
                 {...recirculation[0]}
               />
             </GridItem>
@@ -128,8 +128,8 @@ function ProductDetail({ serverData }: ProductDetailData) {
           <>
             <GridItem fullbleed css={styles.featuredRecirculation}>
               <ProductGroupList
-                headerCustomStyles={styles.recirculationHeader}
-                itemCustomStyle={styles.recirculationItem}
+                customHeaderStyles={styles.recirculationHeader}
+                customItemStyles={styles.recirculationItem}
                 {...recirculation[0]}
               />
             </GridItem>
@@ -145,8 +145,8 @@ function ProductDetail({ serverData }: ProductDetailData) {
           <>
             <GridItem fullbleed css={styles.featuredRecirculation}>
               <ProductGroupList
-                headerCustomStyles={styles.recirculationHeader}
-                itemCustomStyle={styles.recirculationItem}
+                customHeaderStyles={styles.recirculationHeader}
+                customItemStyles={styles.recirculationItem}
                 {...recirculation[0]}
               />
             </GridItem>

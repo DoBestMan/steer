@@ -6,7 +6,7 @@ import Image from '~/components/global/Image/Image';
 import Loading from '~/components/global/Loading/Loading';
 import { SiteImage } from '~/data/models/SiteImage';
 import { SiteYouTubeVideoVideo } from '~/data/models/SiteYouTubeVideoVideo';
-import { CSSStyles, Loading as ImageLoading, THEME } from '~/lib/constants';
+import { CSSStylesProp, Loading as ImageLoading, THEME } from '~/lib/constants';
 import { ratioToPercentage } from '~/lib/utils/number';
 import { randomString } from '~/lib/utils/string';
 import { ui } from '~/lib/utils/ui-dictionary';
@@ -16,7 +16,8 @@ import styles, { activeVideoStyles } from './Video.styles';
 
 export interface Props {
   aspectRatio?: string;
-  containerStyles?: CSSStyles;
+  customContainerStyles?: CSSStylesProp;
+  customVideoStyles?: CSSStylesProp;
   imageLoading?: ImageLoading;
   isButtonFocusable?: boolean;
   poster: SiteImage;
@@ -24,19 +25,18 @@ export interface Props {
   shouldPauseVideo?: boolean;
   sizes: number[];
   video: SiteYouTubeVideoVideo;
-  videoStyles?: CSSStyles;
 }
 
 function Video({
-  containerStyles,
   aspectRatio = '16/9',
+  customContainerStyles,
+  customVideoStyles,
   imageLoading,
   isButtonFocusable = true,
   poster,
-  sizes,
-  videoStyles,
-  video,
   shouldPauseVideo,
+  sizes,
+  video,
   setShouldPauseVideo,
 }: Props) {
   const videoId = `${randomString(10)}-video`;
@@ -71,7 +71,7 @@ function Video({
       css={[
         styles.container,
         { paddingBottom: containerBottomPadding },
-        containerStyles,
+        customContainerStyles,
       ]}
     >
       <button
@@ -91,7 +91,7 @@ function Video({
 
           <Image
             loading={imageLoading}
-            customStyles={styles.posterFrame as CSSStyles}
+            customContainerStyles={styles.posterFrame}
             widths={sizes}
             responsive
             {...poster}
@@ -103,7 +103,7 @@ function Video({
         css={[
           styles.video,
           hasPlayedVideo && activeVideoStyles.video,
-          videoStyles,
+          customVideoStyles,
         ]}
       >
         <div

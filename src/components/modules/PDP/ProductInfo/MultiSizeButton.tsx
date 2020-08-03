@@ -41,7 +41,7 @@ function RenderItem({
       <span css={styles.price}>
         <Prices
           priceList={[{ price: price as SitePrice }]}
-          currentPriceCSS={typography.primarySubhead}
+          customPriceStyles={typography.primarySubhead}
         />
       </span>
       <span css={styles.quantity}>

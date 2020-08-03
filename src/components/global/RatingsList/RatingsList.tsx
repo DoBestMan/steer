@@ -1,10 +1,10 @@
 import RatingsBar, {
   Props as RatingsListItem,
 } from '~/components/global/RatingsList/RatingsBar/RatingsBar';
-import { CSSStyles, RATINGS_DISPLAY, THEME } from '~/lib/constants';
+import { CSSStylesProp, RATINGS_DISPLAY, THEME } from '~/lib/constants';
 
 interface Props {
-  customContainerStyles?: CSSStyles;
+  customContainerStyles?: CSSStylesProp;
   display?: RATINGS_DISPLAY;
   ratings: Array<RatingsListItem>;
   theme?: THEME;

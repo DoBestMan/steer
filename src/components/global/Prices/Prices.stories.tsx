@@ -58,7 +58,7 @@ export function PricesWithKnobs() {
       <Prices
         isLight={isLight}
         isStartingAtPrice={isStartingAtPrice}
-        currentPriceCSS={
+        customPriceStyles={
           mapPriceTypographyToCSS[currentPriceTypography] || undefined
         }
         priceList={priceList}
@@ -152,7 +152,7 @@ export function LargePrices() {
 
   return (
     <Prices
-      currentPriceCSS={typography.secondaryHeadline}
+      customPriceStyles={typography.secondaryHeadline}
       priceList={priceList}
     />
   );

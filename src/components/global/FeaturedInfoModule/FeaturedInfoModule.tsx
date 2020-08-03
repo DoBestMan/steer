@@ -4,7 +4,7 @@ import Icon from '~/components/global/Icon/Icon';
 import { Icon as IconType } from '~/components/global/Icon/Icon.types';
 import Link from '~/components/global/Link/Link';
 import Markdown from '~/components/global/Markdown/Markdown';
-import { CSSStyles, LINK_TYPE, THEME } from '~/lib/constants';
+import { CSSStylesProp, LINK_TYPE, THEME } from '~/lib/constants';
 
 import styles from './FeaturedInfoModule.styles';
 
@@ -16,9 +16,9 @@ export interface FeaturedInfoModuleProps {
     text: string;
   };
   copy: string;
-  customCopyStyles?: CSSStyles;
-  customLinkStyles?: CSSStyles;
-  customTitleStyles?: CSSStyles;
+  customCopyStyles?: CSSStylesProp;
+  customLinkStyles?: CSSStylesProp;
+  customTitleStyles?: CSSStylesProp;
   dataVendor?: string;
   featureDescription?: string;
   headerAs?: ReactType;

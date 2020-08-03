@@ -1,8 +1,6 @@
-import { CSSObject } from '@emotion/core';
+import { COLORS, StylesMap, TIME, Z_INDEX } from '~/lib/constants';
 
-import { COLORS, TIME, Z_INDEX } from '~/lib/constants';
-
-const styles: CSSObject = {
+const styles: StylesMap = {
   button: {
     bottom: 0,
     display: 'block',
@@ -59,7 +57,7 @@ const styles: CSSObject = {
   },
 };
 
-export const activeVideoStyles: CSSObject = {
+export const activeVideoStyles: StylesMap = {
   video: {
     zIndex: Z_INDEX.FRONT,
   },

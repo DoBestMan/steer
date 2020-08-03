@@ -116,7 +116,7 @@ export default function FilterChecklist({
   return (
     <div css={styles.root}>
       <FilterHeader
-        headerStyles={[styles.header, styles.labelContainer]}
+        customHeaderStyles={[styles.header, styles.labelContainer]}
         header={header}
         title={<h2 css={lgStyles.title}>{header?.title}</h2>}
         isLarge={isLarge}
@@ -125,7 +125,7 @@ export default function FilterChecklist({
       {filterGroups?.map((group: SiteCatalogFilterGroup, idx) => (
         <div css={lgStyles.group} key={idx}>
           <FilterHeader
-            headerStyles={styles.labelContainer}
+            customHeaderStyles={styles.labelContainer}
             header={group.header}
             title={<h3 css={lgStyles.groupTitle}>{group.header?.title}</h3>}
             isGroupHeader

@@ -57,7 +57,7 @@ export default function FilterRange({
   return (
     <div css={styles.root}>
       <FilterHeader
-        headerStyles={styles.header}
+        customHeaderStyles={styles.header}
         header={header}
         title={<h2 css={styles.title}>{header?.title}</h2>}
         isLarge={isLarge}

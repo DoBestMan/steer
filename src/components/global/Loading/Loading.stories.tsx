@@ -62,7 +62,7 @@ export function LoadingHide() {
 
   return (
     <div css={styles.interactionContainer}>
-      {isLoading && <Loading customStyles={styles.loading} />}
+      {isLoading && <Loading customContainerStyles={styles.loading} />}
 
       <div css={[styles.buttonContainer, isLoading && styles.buttonHidden]}>
         <Button onClick={handleClick}>Click Me</Button>
@@ -88,7 +88,7 @@ export function LoadingHideAndShow() {
 
   return (
     <div css={styles.interactionContainer}>
-      {isLoading && <Loading customStyles={styles.loading} />}
+      {isLoading && <Loading customContainerStyles={styles.loading} />}
 
       <div css={[styles.buttonContainer, isLoading && styles.buttonHidden]}>
         <Button onClick={handleClick}>Click Me</Button>

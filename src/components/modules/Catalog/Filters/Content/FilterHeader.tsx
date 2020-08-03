@@ -1,21 +1,21 @@
 import { ReactNode, useMemo } from 'react';
 
 import { SiteCatalogFilterList } from '~/data/models/SiteCatalogFilterList';
-import { CSSStyles } from '~/lib/constants';
+import { CSSStylesProp } from '~/lib/constants';
 import { isValidStaticModal } from '~/lib/utils/modal';
 
 import { ChildProps } from '../Popup/FilterPopup.utils';
 import styles from './FilterHeader.styles';
 
 type Props = {
-  headerStyles?: CSSStyles | CSSStyles[];
+  customHeaderStyles?: CSSStylesProp;
   isGroupHeader?: boolean;
   title: ReactNode;
 } & Pick<SiteCatalogFilterList, 'header'> &
   Pick<ChildProps, 'isLarge' | 'openStaticModal'>;
 
 function FilterHeader({
-  headerStyles,
+  customHeaderStyles,
   header,
   isLarge = false,
   isGroupHeader = false,
@@ -40,7 +40,7 @@ function FilterHeader({
   }
 
   return (
-    <div css={headerStyles}>
+    <div css={customHeaderStyles}>
       {title}
       {hasValidInfoLink && (
         <button
