@@ -13,6 +13,7 @@ import { NAV_THEME, themes } from './Nav.theme';
 
 interface Props {
   isHomepage?: boolean;
+  isLoading?: boolean;
 }
 
 const ALTERNATE_THEME_ROUTES: string[] = [
@@ -22,7 +23,7 @@ const ALTERNATE_THEME_ROUTES: string[] = [
   trimSlash(ROUTE_MAP[ROUTES.TYPE_REVIEWS]),
 ];
 
-function NavContainer({ isHomepage = false }: Props) {
+function NavContainer({ isHomepage = false, isLoading = false }: Props) {
   const { pathname } = useRouter();
   const { setNavTheme, theme } = useNavContext();
   const siteMenu = useSiteMenuContext();
@@ -42,7 +43,7 @@ function NavContainer({ isHomepage = false }: Props) {
 
   return (
     <ThemeProvider theme={themes[theme]}>
-      <Nav isHomepage={isHomepage} />
+      <Nav isHomepage={isHomepage} isLoading={isLoading} />
       <SubNav {...siteMenu} />
     </ThemeProvider>
   );

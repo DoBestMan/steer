@@ -12,6 +12,7 @@ export const EASING = {
   EXPO_EASE_IN: 'cubic-bezier(0.950, 0.050, 0.795, 0.035)',
   EXPO_EASE_IN_OUT: 'cubic-bezier(1.000, 0.000, 0.000, 1.000)',
   EXPO_EASE_OUT: 'cubic-bezier(0.190, 1.000, 0.220, 1.000)',
+  LINEAR: 'linear',
   QUAD_EASE_IN: 'cubic-bezier(0.550, 0.085, 0.680, 0.530)',
   QUAD_EASE_IN_OUT: 'cubic-bezier(0.455, 0.030, 0.515, 0.955)',
   QUAD_EASE_OUT: 'cubic-bezier(0.250, 0.460, 0.450, 0.940)',

@@ -1,6 +1,6 @@
 import { useTheme } from 'emotion-theming';
 import { useRouter } from 'next/dist/client/router';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Transition } from 'react-transition-group';
 import { EXITED, TransitionStatus } from 'react-transition-group/Transition';
 
@@ -22,9 +22,10 @@ export const NAV_ID = 'main-navigation';
 
 interface Props {
   isHomepage?: boolean;
+  isLoading?: boolean;
 }
 
-function Nav({ isHomepage }: Props) {
+function Nav({ isHomepage, isLoading }: Props) {
   const {
     links,
     isHidden,
@@ -36,21 +37,17 @@ function Nav({ isHomepage }: Props) {
   const theme: NavThemeObject = useTheme();
   const router = useRouter();
 
-  const [path, setPath] = useState(router?.pathname);
-
   useEffect(() => {
     if (!router) {
       return;
     }
-
-    setPath(router.pathname);
 
     // path has changed, the nav can't be hidden!
     setIsHidden(false);
   }, [router, setIsHidden]);
 
   return (
-    <Transition appear in={router && path === router?.pathname} timeout={400}>
+    <Transition appear in={!isLoading} timeout={400}>
       {(containerTransitionState: TransitionStatus) => {
         // We force the nav to stay hidden
         if (isHidden) {
