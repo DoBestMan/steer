@@ -104,6 +104,9 @@ const styles: CSSObject = {
   momentPromo: {
     color: COLORS.GLOBAL.ORANGE,
   },
+  pricesContainer: {
+    marginBottom: SPACING.SIZE_05,
+  },
   rating: {
     display: 'flex',
     alignItems: 'center',

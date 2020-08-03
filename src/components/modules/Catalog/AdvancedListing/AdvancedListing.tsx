@@ -88,11 +88,13 @@ function AdvancedListing({
             <div css={styles.brand}>
               <BrandLogoOrLabel brand={brand} widths={[200, 400, 600]} />
             </div>
-            <Prices
-              currentPriceCSS={typography.secondaryHeadline}
-              priceList={priceList}
-              isStartingAtPrice={!size}
-            />
+            <div css={styles.pricesContainer}>
+              <Prices
+                currentPriceCSS={[typography.secondaryHeadline]}
+                priceList={priceList}
+                isStartingAtPrice={!size}
+              />
+            </div>
             <h3 css={styles.title}>
               <BaseLink css={styles.linkText} href={link.href}>
                 {name} <Icon css={styles.linkIcon} name={ICONS.CHEVRON_RIGHT} />
