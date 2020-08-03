@@ -110,7 +110,8 @@ import { createFile, lineBreak } from './utils';
       return;
     }
 
-    const wheelWidth = backWheel.width; // assuming front = rear, or no front;
+    const backWheelWidth = backWheel.width;
+    const frontWheelWidth = frontWheel?.width;
 
     // Only if we have a front wheel
     let distanceFrontToFrontWheel = 0;
@@ -121,19 +122,19 @@ import { createFile, lineBreak } from './utils';
 
     carDetails[asset] = {
       backWheelCenterPos: {
-        x: backWheel.x + wheelWidth / 2,
-        y: backWheel.y + wheelWidth / 2,
+        x: backWheel.x + backWheelWidth / 2,
+        y: backWheel.y + backWheelWidth / 2,
       },
       distanceBackToRearWheel: backWheel.x,
       distanceFrontToFrontWheel,
       frontWheelCenterPos: frontWheel
         ? {
-            x: frontWheel.x + wheelWidth / 2,
-            y: frontWheel.y + wheelWidth / 2,
+            x: frontWheel.x + frontWheelWidth / 2,
+            y: frontWheel.y + frontWheelWidth / 2,
           }
         : { x: 0, y: 0 },
       height: dimensions.height,
-      wheelWidth,
+      wheelWidth: backWheelWidth, // assuming front = rear, or no front;
       width: dimensions.width,
     };
   });
