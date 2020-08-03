@@ -12,8 +12,6 @@ import { apiGetUserSession } from './session';
 
 let apiBootstrapPromise: Promise<void> | null = null;
 
-const SimpleTireSessionKeyExpireInMinutes = 60;
-
 async function asyncApiBootstrap() {
   lscache.flushExpired();
 
@@ -36,11 +34,7 @@ async function asyncApiBootstrap() {
   // TODO: add email, first_name, last_name and traffic_source for refer a friend
   // API would provide the values
 
-  lscache.set(
-    LOCAL_STORAGE[PROPERTIES.SESSION],
-    userSessionId,
-    SimpleTireSessionKeyExpireInMinutes,
-  );
+  lscache.set(LOCAL_STORAGE[PROPERTIES.SESSION], userSessionId);
 
   fetchSetUserPersonalization(userPersonalization);
 }

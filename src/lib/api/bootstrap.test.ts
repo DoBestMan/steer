@@ -51,7 +51,7 @@ describe('apiBootstrap', () => {
       null,
     );
     expect(Fetch.fetchSetAuthorizationToken).toHaveBeenCalledTimes(1);
-    expect(lscache.set).toHaveBeenCalledWith('ST_SESSION', userSessionId, 60);
+    expect(lscache.set).toHaveBeenCalledWith('ST_SESSION', userSessionId);
   });
 
   it('configures the API correctly for existing users', async () => {
@@ -71,7 +71,7 @@ describe('apiBootstrap', () => {
       null,
     );
     expect(Fetch.fetchSetAuthorizationToken).toHaveBeenCalledTimes(2);
-    expect(lscache.set).toHaveBeenCalledWith('ST_SESSION', userSessionId, 60);
+    expect(lscache.set).toHaveBeenCalledWith('ST_SESSION', userSessionId);
   });
 
   it('returns the same promise when called the second time', async () => {
