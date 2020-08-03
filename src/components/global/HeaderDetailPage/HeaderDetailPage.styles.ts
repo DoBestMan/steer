@@ -56,7 +56,7 @@ export const sizeStyles = {
     header: [
       typography.primaryHeadline,
       {
-        marginBottom: SPACING.SIZE_20,
+        marginBottom: SPACING.SIZE_10,
       },
     ],
   },

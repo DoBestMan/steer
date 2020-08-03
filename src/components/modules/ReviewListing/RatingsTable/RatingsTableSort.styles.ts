@@ -19,15 +19,9 @@ const styles: StylesMap = {
     borderBottom: BORDERS.SOLID_GRAY_20_1PX,
     display: 'flex',
     justifyContent: 'space-between',
-    padding: `${SPACING.SIZE_30}px 0`,
-    [MQ.S]: {
-      margin: `0 ${SPACING.SIZE_20}px`,
-    },
+    padding: `${SPACING.SIZE_20}px 0`,
     [MQ.M]: {
-      margin: `0 ${SPACING.SIZE_20}px`,
-    },
-    [MQ.L]: {
-      margin: `0 ${SPACING.SIZE_60}px`,
+      padding: `${SPACING.SIZE_30}px 0`,
     },
   },
   sort: {

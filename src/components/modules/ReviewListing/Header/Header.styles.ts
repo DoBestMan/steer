@@ -13,7 +13,10 @@ const styles: StylesMap = {
   },
   filtersContainer: {
     marginTop: SPACING.SIZE_40,
-    marginBottom: SPACING.SIZE_40,
+    marginBottom: SPACING.SIZE_20,
+    [MQ.M]: {
+      marginBottom: SPACING.SIZE_30,
+    },
   },
 };
 

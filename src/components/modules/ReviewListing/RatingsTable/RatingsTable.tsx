@@ -49,7 +49,7 @@ function RatingsTable({
         onSortResults={onSortResults}
       />
       <table css={styles.container}>
-        <Grid as="thead" css={styles.headingText}>
+        <Grid as="thead">
           <GridItem
             gridColumnS="2/6"
             gridColumnM="2/8"
@@ -57,6 +57,7 @@ function RatingsTable({
             gridColumnXL="4/12"
             isGrid
             as="tr"
+            css={styles.headingText}
           >
             <GridItem
               as="th"
@@ -72,7 +73,7 @@ function RatingsTable({
               as="th"
               css={styles.column}
               gridColumnS="3/4"
-              gridColumnM="4/6"
+              gridColumnM="4/5"
               gridColumnL="7/9"
               gridColumnXL="6/7"
             >
@@ -81,7 +82,7 @@ function RatingsTable({
             <GridItem
               as="th"
               gridColumnS="4/5"
-              gridColumnM="6/7"
+              gridColumnM="5/7"
               gridColumnL="9/11"
               gridColumnXL="7/9"
               css={[styles.column, styles.lastColumn]}
@@ -105,19 +106,19 @@ function RatingsTable({
                 gridColumnL="3/13"
                 gridColumnXL="4/12"
                 as="tr"
-                css={styles.row}
+                css={[styles.row, styles.text]}
                 key={review.id}
               >
                 <GridItem
                   as="td"
-                  css={[styles.column, styles.bordered, styles.headingText]}
+                  css={[styles.column, styles.bordered]}
                   gridColumnS="1/3"
                   gridColumnM="1/4"
                   gridColumnL="1/7"
                   gridColumnXL="1/6"
                 >
                   <BaseLink
-                    css={styles.link}
+                    css={[styles.link, styles.headingText]}
                     href={review.link.href}
                     isExternal={review.link.isExternal}
                   >
@@ -128,7 +129,7 @@ function RatingsTable({
                   as="td"
                   css={[styles.column, styles.bordered]}
                   gridColumnS="3/4"
-                  gridColumnM="4/6"
+                  gridColumnM="4/5"
                   gridColumnL="7/9"
                   gridColumnXL="6/7"
                 >
@@ -141,7 +142,7 @@ function RatingsTable({
                   as="td"
                   css={[styles.column, styles.bordered, styles.lastColumn]}
                   gridColumnS="4/5"
-                  gridColumnM="6/7"
+                  gridColumnM="5/7"
                   gridColumnL="9/11"
                   gridColumnXL="7/9"
                 >

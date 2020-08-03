@@ -10,9 +10,14 @@ export const borderBottom = {
 
 const borderGapFix = {
   marginRight: -GAP_COLUMNS.S,
-
+  [MQ.M]: {
+    marginRight: -GAP_COLUMNS.M,
+  },
   [MQ.L]: {
     marginRight: -GAP_COLUMNS.L,
+  },
+  [MQ.XL]: {
+    marginRight: -GAP_COLUMNS.XL,
   },
 };
 

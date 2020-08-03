@@ -56,10 +56,11 @@ const styles: StylesMap = {
     display: 'none',
   },
   label: [
-    typography.bodyCopy,
+    typography.smallCopy,
     {
       color: COLORS.ORANGE.SHADE_85,
       marginBottom: SPACING.SIZE_10,
+      [MQ.M]: typography.bodyCopy,
     },
   ],
 };

@@ -2,6 +2,8 @@ import { useState } from 'react';
 
 import Dropdown from '~/components/global/Dropdown/Dropdown';
 import FilterSort from '~/components/global/FilterSort/FilterSort';
+import Grid from '~/components/global/Grid/Grid';
+import GridItem from '~/components/global/Grid/GridItem';
 import Link from '~/components/global/Link/Link';
 import {
   SiteCatalogSortListItem,
@@ -50,38 +52,40 @@ export default function RatingsTableSort({
   };
 
   return (
-    <div css={styles.root}>
-      <p css={styles.results}>
-        {ui('catalog.filters.results', { number: resultsCount })}
-      </p>
-      {sortList && (
-        <>
-          <p css={styles.sortLabel}>{ui('catalog.filters.sortBy')} </p>
-          <Link
-            className="dropdown-button"
-            theme={THEME.LIGHT}
-            as="button"
-            onClick={openFilterDropdown}
-            aria-expanded={isOpen}
-            css={[styles.button, isOpen && styles.disableEvents]}
-          >
-            {currentSortItem.title}
-          </Link>
-          <Dropdown
-            contentLabel={ui('catalog.filters.sortBy')}
-            isOpen={isOpen}
-            insideCarousel
-            onClose={closeFilterDropdown}
-          >
-            <FilterSort
-              items={sortList}
-              isLarge={isLarge}
-              filtersToApply={activeSort}
-              onUpdate={sortData}
-            />
-          </Dropdown>
-        </>
-      )}
-    </div>
+    <Grid>
+      <GridItem css={styles.root}>
+        <p css={styles.results}>
+          {ui('catalog.filters.results', { number: resultsCount })}
+        </p>
+        {sortList && (
+          <>
+            <p css={styles.sortLabel}>{ui('catalog.filters.sortBy')} </p>
+            <Link
+              className="dropdown-button"
+              theme={THEME.LIGHT}
+              as="button"
+              onClick={openFilterDropdown}
+              aria-expanded={isOpen}
+              css={[styles.button, isOpen && styles.disableEvents]}
+            >
+              {currentSortItem.title}
+            </Link>
+            <Dropdown
+              contentLabel={ui('catalog.filters.sortBy')}
+              isOpen={isOpen}
+              insideCarousel
+              onClose={closeFilterDropdown}
+            >
+              <FilterSort
+                items={sortList}
+                isLarge={isLarge}
+                filtersToApply={activeSort}
+                onUpdate={sortData}
+              />
+            </Dropdown>
+          </>
+        )}
+      </GridItem>
+    </Grid>
   );
 }
