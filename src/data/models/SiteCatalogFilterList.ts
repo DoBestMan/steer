@@ -1,3 +1,5 @@
+import { FilterContentTypes } from '~/components/modules/Catalog/Filters/Filter.types';
+
 import { SiteCatalogFilterGroup } from './SiteCatalogFilterGroup';
 import { SiteCatalogFilterHeaderNullable } from './SiteCatalogFilterHeaderNullable';
 
@@ -12,7 +14,7 @@ export interface SiteCatalogFilterList {
    * @type {string}
    * @memberof SiteCatalogFilterList
    */
-  type: SiteCatalogFilterListTypeEnum;
+  type: FilterContentTypes.SiteCatalogFilterList;
   /**
    *
    * @type {SiteCatalogFilterHeaderNullable}
@@ -37,9 +39,7 @@ export interface SiteCatalogFilterList {
  * @export
  * @enum {string}
  */
-export enum SiteCatalogFilterListTypeEnum {
-  SiteCatalogFilterList = 'SiteCatalogFilterList',
-}
+
 /**
  * @export
  * @enum {string}

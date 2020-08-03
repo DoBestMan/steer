@@ -1,14 +1,11 @@
 import { useTheme } from 'emotion-theming';
 
-import {
-  SiteCatalogFilterRange,
-  SiteCatalogFilterRangeTypeEnum,
-} from '~/data/models/SiteCatalogFilterRange';
+import { SiteCatalogFilterRange } from '~/data/models/SiteCatalogFilterRange';
 import { SiteCatalogProducts } from '~/data/models/SiteCatalogProducts';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { ui } from '~/lib/utils/ui-dictionary';
 
-import { CatalogFilterTypes } from './Filters/Filter.types';
+import { CatalogFilterTypes, FilterContentTypes } from './Filters/Filter.types';
 import FilterButtonsCarousel from './Filters/FilterButtonsCarousel';
 import { getGroupedFilters } from './Filters/Filters.utils';
 import SubFilters from './Filters/SubFilters/SubFilters';
@@ -35,8 +32,7 @@ export default function Header({
   const { greaterThan, isLoading } = useBreakpoints();
   const priceFilter = catalogFilters.filtersList.find(
     (f): f is SiteCatalogFilterRange =>
-      f.type === SiteCatalogFilterRangeTypeEnum.SiteCatalogFilterRange &&
-      f.id === 'price',
+      f.type === FilterContentTypes.SiteCatalogFilterRange && f.id === 'price',
   );
   const filters = catalogFilters.filtersList.filter(
     (f: CatalogFilterTypes) => f !== priceFilter,

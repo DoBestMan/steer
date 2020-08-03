@@ -1,23 +1,16 @@
 import { SiteCatalogFilterItem } from '~/data/models/SiteCatalogFilterItem';
-import {
-  SiteCatalogFilterList,
-  SiteCatalogFilterListTypeEnum,
-} from '~/data/models/SiteCatalogFilterList';
-import {
-  SiteCatalogFilterRange,
-  SiteCatalogFilterRangeTypeEnum,
-} from '~/data/models/SiteCatalogFilterRange';
-import {
-  SiteCatalogFilterToggle,
-  SiteCatalogFilterToggleTypeEnum,
-} from '~/data/models/SiteCatalogFilterToggle';
+import { SiteCatalogFilterList } from '~/data/models/SiteCatalogFilterList';
+import { SiteCatalogFilterRange } from '~/data/models/SiteCatalogFilterRange';
+import { SiteCatalogFilterToggle } from '~/data/models/SiteCatalogFilterToggle';
 import { SiteCatalogSortListItem } from '~/data/models/SiteCatalogSortListItem';
+
+import { FilterContentTypes } from './Filter.types';
 
 /* eslint-disable sort-keys */
 export const filterTypeSelect = [
-  SiteCatalogFilterListTypeEnum.SiteCatalogFilterList,
-  SiteCatalogFilterRangeTypeEnum.SiteCatalogFilterRange,
-  SiteCatalogFilterToggleTypeEnum.SiteCatalogFilterToggle,
+  FilterContentTypes.SiteCatalogFilterList,
+  FilterContentTypes.SiteCatalogFilterRange,
+  FilterContentTypes.SiteCatalogFilterToggle,
 ];
 
 export const warrantyFilter = {

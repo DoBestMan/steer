@@ -1,3 +1,5 @@
+import { FilterContentTypes } from '~/components/modules/Catalog/Filters/Filter.types';
+
 import { SiteCatalogFilterHeaderNullable } from './SiteCatalogFilterHeaderNullable';
 
 /**
@@ -11,7 +13,7 @@ export interface SiteCatalogFilterRange {
    * @type {string}
    * @memberof SiteCatalogFilterRange
    */
-  type: SiteCatalogFilterRangeTypeEnum;
+  type: FilterContentTypes.SiteCatalogFilterRange;
   /**
    * Values for param name on query
    * @type {string}
@@ -66,9 +68,7 @@ export interface SiteCatalogFilterRange {
  * @export
  * @enum {string}
  */
-export enum SiteCatalogFilterRangeTypeEnum {
-  SiteCatalogFilterRange = 'SiteCatalogFilterRange',
-}
+
 /**
  * @export
  * @enum {string}

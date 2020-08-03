@@ -6,10 +6,9 @@ import FilterButtonToggle from '~/components/global/Button/FilterButtonToggle';
 import FiltersCarousel from '~/components/global/FiltersCarousel/FiltersCarousel';
 import styles from '~/components/global/FiltersCarousel/FiltersCarousel.styles';
 import { useCatalogPageContext } from '~/context/CatalogPage.context';
-import { SiteCatalogFilterToggleTypeEnum } from '~/data/models/SiteCatalogFilterToggle';
 import { ui } from '~/lib/utils/ui-dictionary';
 
-import { CatalogFilterTypes } from './Filter.types';
+import { CatalogFilterTypes, FilterContentTypes } from './Filter.types';
 import FilterPopups from './FilterPopups';
 import { useFiltersContext } from './Filters.context';
 import { getFilterLabel, hasActiveValue } from './Filters.utils';
@@ -36,7 +35,7 @@ export default function FilterButtonsCarousel({
   const { header } = useTheme();
   const isPopularDropdownOpen = selectingFilter === POPULAR_ID;
   const isPopularActive = popularFilters.some((filter) => {
-    if ('item' in filter) {
+    if (filter.type === FilterContentTypes.SiteCatalogFilterToggle) {
       return hasActiveValue(filter.item, activeFilters);
     }
     return false;
@@ -66,7 +65,7 @@ export default function FilterButtonsCarousel({
             const isActive = hasActiveValue(filter, activeFilters);
             const isDropdownOpen = selectingFilter === idx + 1;
             return filter.type !==
-              SiteCatalogFilterToggleTypeEnum.SiteCatalogFilterToggle ? (
+              FilterContentTypes.SiteCatalogFilterToggle ? (
               // filter with dropdown
               <FilterButton
                 css={[

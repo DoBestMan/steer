@@ -4,10 +4,9 @@ import { act } from 'react-test-renderer';
 
 import { emptyCatalogProducts } from '~/components/pages/CatalogPage/CatalogPage.mocks';
 import { CatalogPageContextProvider } from '~/context/CatalogPage.context';
-import { SiteCatalogFilterListTypeEnum } from '~/data/models/SiteCatalogFilterList';
 import { SiteCatalogFilters } from '~/data/models/SiteCatalogFilters';
 
-import { CatalogFilterTypes } from './Filter.types';
+import { CatalogFilterTypes, FilterContentTypes } from './Filter.types';
 import { useFiltersContextSetup } from './Filters.context';
 import { mockSiteCatalogFilters } from './Filters.mocks';
 
@@ -220,7 +219,7 @@ describe('useFiltersContextSetup', () => {
           { items: [{ value: { foo: 'bar' } }] },
           { items: [{ value: { bar: 'baz' } }] },
         ],
-        type: SiteCatalogFilterListTypeEnum.SiteCatalogFilterList,
+        type: FilterContentTypes.SiteCatalogFilterList,
       } as unknown) as CatalogFilterTypes)(),
     );
 

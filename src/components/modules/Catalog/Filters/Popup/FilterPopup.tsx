@@ -3,11 +3,7 @@ import { useEffect, useRef } from 'react';
 import Dropdown from '~/components/global/Dropdown/Dropdown';
 import Loading from '~/components/global/Loading/Loading';
 import { useModalContext } from '~/context/Modal.context';
-import {
-  SiteCatalogFilterListPresentationStyleEnum,
-  SiteCatalogFilterListTypeEnum,
-} from '~/data/models/SiteCatalogFilterList';
-import { SiteCatalogFilterToggleTypeEnum } from '~/data/models/SiteCatalogFilterToggle';
+import { SiteCatalogFilterListPresentationStyleEnum } from '~/data/models/SiteCatalogFilterList';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
@@ -63,7 +59,7 @@ export default function FilterPopup({
   }, [clearFiltersToApply, isOpen, onClose, filter, isPreviewLoading, isLarge]);
 
   if (
-    filter.type === SiteCatalogFilterToggleTypeEnum.SiteCatalogFilterToggle ||
+    filter.type === FilterContentTypes.SiteCatalogFilterToggle ||
     !mapTypeToContent[filter.type]
   ) {
     return null;
@@ -80,7 +76,7 @@ export default function FilterPopup({
 
   const label = getFilterLabel(filter);
   const forceModal =
-    filter.type === SiteCatalogFilterListTypeEnum.SiteCatalogFilterList &&
+    filter.type === FilterContentTypes.SiteCatalogFilterList &&
     filter.presentationStyle ===
       SiteCatalogFilterListPresentationStyleEnum.Large;
   const actionBar = hasActionBar

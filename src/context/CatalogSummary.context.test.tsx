@@ -3,6 +3,7 @@ import { cleanup, renderHook } from '@testing-library/react-hooks';
 import { Cars } from '~/components/global/Car/Car.enums';
 import { Sceneries } from '~/components/global/Scenery/Scenery.types';
 import { STAGES } from '~/components/pages/CatalogPage/CatalogSummary/CatalogSummary.constants';
+import { SiteCatalogSummary } from '~/data/models/SiteCatalogSummary';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 
 import { useContextSetup } from './CatalogSummary.context';
@@ -103,7 +104,7 @@ describe('useCatalogSummaryContextSetup', () => {
       useContextSetup({
         comesFromSearch,
         hasLocalData: false,
-        siteCatalogSummary: resultsSummary,
+        siteCatalogSummary: resultsSummary as SiteCatalogSummary,
       }),
     );
 
@@ -236,7 +237,7 @@ describe('useCatalogSummaryContextSetup', () => {
           comesFromSearch,
           // Set hasLocalData by default
           hasLocalData: true,
-          siteCatalogSummary,
+          siteCatalogSummary: siteCatalogSummary as SiteCatalogSummary,
         }),
       );
 

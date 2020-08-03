@@ -24,8 +24,8 @@ function SubNavLinks({
   } = useNavContext();
   const { isMobile } = useBreakpoints();
   const navLinks = isMobile ? linksMobile : links;
-  const iconLinks = navLinks.filter((link) => 'icon' in link && link.icon);
-  const textLinks = navLinks.filter((link) => !('icon' in link && link.icon));
+  const iconLinks = navLinks.filter((link) => !!link.icon);
+  const textLinks = navLinks.filter((link) => !link.icon);
 
   function renderLink(link: LinkType | ActionType, idx: number) {
     return (

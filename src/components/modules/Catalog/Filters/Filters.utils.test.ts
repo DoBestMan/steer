@@ -1,14 +1,9 @@
 import isStrictEqual from 'fast-deep-equal';
 
 import { SiteCatalogFilter } from '~/data/models/SiteCatalogFilter';
-import {
-  SiteCatalogFilterList,
-  SiteCatalogFilterListTypeEnum,
-} from '~/data/models/SiteCatalogFilterList';
-import { SiteCatalogFilterRangeTypeEnum } from '~/data/models/SiteCatalogFilterRange';
-import { SiteCatalogFilterToggleTypeEnum } from '~/data/models/SiteCatalogFilterToggle';
+import { SiteCatalogFilterList } from '~/data/models/SiteCatalogFilterList';
 
-import { CatalogFilterTypes } from './Filter.types';
+import { CatalogFilterTypes, FilterContentTypes } from './Filter.types';
 import {
   filterSort,
   mockDupeMultipleValSelected,
@@ -33,14 +28,14 @@ import {
 } from './Filters.utils';
 
 const toggleFilters = [
-  { type: SiteCatalogFilterToggleTypeEnum.SiteCatalogFilterToggle },
-  { type: SiteCatalogFilterToggleTypeEnum.SiteCatalogFilterToggle },
+  { type: FilterContentTypes.SiteCatalogFilterToggle },
+  { type: FilterContentTypes.SiteCatalogFilterToggle },
 ];
 
 const otherFilters = [
-  { type: SiteCatalogFilterRangeTypeEnum.SiteCatalogFilterRange },
-  { type: SiteCatalogFilterListTypeEnum.SiteCatalogFilterList },
-  { type: SiteCatalogFilterListTypeEnum.SiteCatalogFilterList },
+  { type: FilterContentTypes.SiteCatalogFilterRange },
+  { type: FilterContentTypes.SiteCatalogFilterList },
+  { type: FilterContentTypes.SiteCatalogFilterList },
 ];
 
 describe('Filters.utils', () => {
@@ -55,8 +50,7 @@ describe('Filters.utils', () => {
         (filter) => filter.type,
       );
       const filteredTypes = popularFilterTypes.filter(
-        (type) =>
-          type === SiteCatalogFilterToggleTypeEnum.SiteCatalogFilterToggle,
+        (type) => type === FilterContentTypes.SiteCatalogFilterToggle,
       );
 
       expect(groupedFilters.popularFilters).toHaveLength(2);
@@ -76,9 +70,7 @@ describe('Filters.utils', () => {
       expect(groupedFilters.popularFilters).toHaveLength(2);
       expect(groupedFilters.otherFilters).toHaveLength(3);
       expect(
-        otherFilterTypes.includes(
-          SiteCatalogFilterToggleTypeEnum.SiteCatalogFilterToggle,
-        ),
+        otherFilterTypes.includes(FilterContentTypes.SiteCatalogFilterToggle),
       ).toBe(false);
     });
   });
@@ -138,7 +130,7 @@ describe('Filters.utils', () => {
     it('does not append identical filters', () => {
       const mockFilterList = ([
         {
-          type: SiteCatalogFilterToggleTypeEnum.SiteCatalogFilterToggle,
+          type: FilterContentTypes.SiteCatalogFilterToggle,
           item: {
             state: 'Selected',
             value: {
@@ -157,7 +149,7 @@ describe('Filters.utils', () => {
 
       const mockFilterListMultiple = ([
         {
-          type: SiteCatalogFilterToggleTypeEnum.SiteCatalogFilterToggle,
+          type: FilterContentTypes.SiteCatalogFilterToggle,
           item: {
             state: 'Selected',
             value: {
@@ -285,11 +277,20 @@ describe('Filters.utils', () => {
       describe('getValueKeys', () => {
         it('returns a deduped list of value keys from a filter', () => {
           const mockPopularFilters = ({
-            type: 'SiteCatalogFilterPopular',
+            type: FilterContentTypes.SiteCatalogFilterPopular,
             items: [
-              { item: { value: { foo: 'bar' } } },
-              { item: { value: { foo: 'quz' } } },
-              { item: { value: { qux: 'baz' } } },
+              {
+                type: FilterContentTypes.SiteCatalogFilterToggle,
+                item: { value: { foo: 'bar' } },
+              },
+              {
+                type: FilterContentTypes.SiteCatalogFilterToggle,
+                item: { value: { foo: 'quz' } },
+              },
+              {
+                type: FilterContentTypes.SiteCatalogFilterToggle,
+                item: { value: { qux: 'baz' } },
+              },
             ],
           } as unknown) as CatalogFilterTypes;
 

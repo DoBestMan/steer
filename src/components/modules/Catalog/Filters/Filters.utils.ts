@@ -3,9 +3,6 @@ import {
   SiteCatalogFilterItem,
   SiteCatalogFilterItemStateEnum,
 } from '~/data/models/SiteCatalogFilterItem';
-import { SiteCatalogFilterListTypeEnum } from '~/data/models/SiteCatalogFilterList';
-import { SiteCatalogFilterRangeTypeEnum } from '~/data/models/SiteCatalogFilterRange';
-import { SiteCatalogFilterToggleTypeEnum } from '~/data/models/SiteCatalogFilterToggle';
 import {
   SiteCatalogSortListItem,
   SiteCatalogSortListItemStateEnum,
@@ -23,7 +20,7 @@ interface GroupedFilters {
  * Gets number of applied filters for a given filter list
  */
 export function getAppliedCount(filter: CatalogFilterTypes) {
-  if (filter.type !== SiteCatalogFilterListTypeEnum.SiteCatalogFilterList) {
+  if (filter.type !== FilterContentTypes.SiteCatalogFilterList) {
     return;
   }
   const vals: string[] = []; // used to dedupe count
@@ -54,9 +51,7 @@ export function getGroupedFilters(
 ): GroupedFilters {
   const groupedFilters = filters.reduce<GroupedFilters>(
     (acc, filter) => {
-      if (
-        filter.type === SiteCatalogFilterToggleTypeEnum.SiteCatalogFilterToggle
-      ) {
+      if (filter.type === FilterContentTypes.SiteCatalogFilterToggle) {
         acc.popularFilters.push(filter);
         return acc;
       }
@@ -74,7 +69,7 @@ export function getGroupedFilters(
  * Catch all function to determine the label a filter should use based on filter shape
  */
 export function getFilterLabel(filter: CatalogFilterTypes) {
-  if ('item' in filter) {
+  if (filter.type === FilterContentTypes.SiteCatalogFilterToggle) {
     return filter.item.title;
   }
 
@@ -112,9 +107,7 @@ export function getInitialFiltersState(
   let isPopularActive = false;
   filtersList.forEach((filter: CatalogFilterTypes) => {
     // toggle filter
-    if (
-      filter.type === SiteCatalogFilterToggleTypeEnum.SiteCatalogFilterToggle
-    ) {
+    if (filter.type === FilterContentTypes.SiteCatalogFilterToggle) {
       if (filter.item.state === SiteCatalogFilterItemStateEnum.Selected) {
         isPopularActive = true;
         Object.keys(filter.item.value).forEach((key) => {
@@ -124,7 +117,7 @@ export function getInitialFiltersState(
     }
 
     // list filter
-    if (filter.type === SiteCatalogFilterListTypeEnum.SiteCatalogFilterList) {
+    if (filter.type === FilterContentTypes.SiteCatalogFilterList) {
       filter.filterGroups.forEach((group: SiteCatalogFilterGroup) => {
         group.items.forEach((item: SiteCatalogFilterItem) => {
           if (item.state === SiteCatalogFilterItemStateEnum.Selected) {
@@ -144,7 +137,7 @@ export function getInitialFiltersState(
     }
 
     // range filter
-    if (filter.type === SiteCatalogFilterRangeTypeEnum.SiteCatalogFilterRange) {
+    if (filter.type === FilterContentTypes.SiteCatalogFilterRange) {
       if (!filter.currentMinValue && !filter.currentMaxValue) {
         return;
       }
@@ -179,17 +172,18 @@ export function hasActiveValue(
   filter: CatalogFilterTypes | SiteCatalogFilterItem,
   activeFilters: Record<string, string>,
 ): boolean {
+  // SiteCatalogFilterItem
   if ('value' in filter) {
     return Object.keys(filter.value).some(
       (key) => !!activeFilters[key]?.includes(filter.value[key]),
     );
   }
 
-  if (filter.type === SiteCatalogFilterToggleTypeEnum.SiteCatalogFilterToggle) {
+  if (filter.type === FilterContentTypes.SiteCatalogFilterToggle) {
     return Object.keys(filter.item.value).some((key) => !!activeFilters[key]);
   }
 
-  if (filter.type === SiteCatalogFilterListTypeEnum.SiteCatalogFilterList) {
+  if (filter.type === FilterContentTypes.SiteCatalogFilterList) {
     let isActive = false;
     filter.filterGroups.forEach((group) =>
       group.items.forEach((item) => {
@@ -202,7 +196,7 @@ export function hasActiveValue(
     return isActive;
   }
 
-  if (filter.type === SiteCatalogFilterRangeTypeEnum.SiteCatalogFilterRange) {
+  if (filter.type === FilterContentTypes.SiteCatalogFilterRange) {
     return !!activeFilters[filter.id];
   }
 
@@ -217,12 +211,12 @@ export function hasActiveValue(
 export function getValueKeys(filter: CatalogFilterTypes) {
   let valueKeys: string[] = [];
   // toggle filter
-  if (filter.type === SiteCatalogFilterToggleTypeEnum.SiteCatalogFilterToggle) {
+  if (filter.type === FilterContentTypes.SiteCatalogFilterToggle) {
     valueKeys = [...valueKeys, ...Object.keys(filter.item.value)];
   }
 
   // list filter
-  if (filter.type === SiteCatalogFilterListTypeEnum.SiteCatalogFilterList) {
+  if (filter.type === FilterContentTypes.SiteCatalogFilterList) {
     filter.filterGroups.forEach((group: SiteCatalogFilterGroup) => {
       group.items.forEach((item: SiteCatalogFilterItem) => {
         valueKeys = [...valueKeys, ...Object.keys(item.value)];
@@ -231,14 +225,14 @@ export function getValueKeys(filter: CatalogFilterTypes) {
   }
 
   // range filter
-  if (filter.type === SiteCatalogFilterRangeTypeEnum.SiteCatalogFilterRange) {
+  if (filter.type === FilterContentTypes.SiteCatalogFilterRange) {
     valueKeys = [...valueKeys, filter.id];
   }
 
   // popular filter
   if (filter.type === FilterContentTypes.SiteCatalogFilterPopular) {
     filter.items.forEach((filterItem) => {
-      if ('item' in filterItem) {
+      if (filterItem.type === FilterContentTypes.SiteCatalogFilterToggle) {
         valueKeys = [...valueKeys, ...Object.keys(filterItem.item.value)];
       }
     });

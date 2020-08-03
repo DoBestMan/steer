@@ -28,12 +28,9 @@ function Card({
       );
     }
 
-    if ('value' in figure) {
-      return figure.value;
-    }
-
-    return;
+    return figure.value;
   });
+
   return (
     <GridItem
       gridColumnS="2/5"

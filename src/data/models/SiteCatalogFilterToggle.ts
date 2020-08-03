@@ -1,3 +1,5 @@
+import { FilterContentTypes } from '~/components/modules/Catalog/Filters/Filter.types';
+
 import { SiteCatalogFilterItem } from './SiteCatalogFilterItem';
 
 /**
@@ -11,7 +13,7 @@ export interface SiteCatalogFilterToggle {
    * @type {string}
    * @memberof SiteCatalogFilterToggle
    */
-  type: SiteCatalogFilterToggleTypeEnum;
+  type: FilterContentTypes.SiteCatalogFilterToggle;
   /**
    *
    * @type {SiteCatalogFilterItem}
@@ -24,6 +26,3 @@ export interface SiteCatalogFilterToggle {
  * @export
  * @enum {string}
  */
-export enum SiteCatalogFilterToggleTypeEnum {
-  SiteCatalogFilterToggle = 'SiteCatalogFilterToggle',
-}

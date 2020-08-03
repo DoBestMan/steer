@@ -1,5 +1,3 @@
-import { SiteCatalogFilterToggleTypeEnum } from '~/data/models/SiteCatalogFilterToggle';
-
 import { CatalogFilterTypes, FilterContentTypes } from './Filter.types';
 import { POPULAR_ID } from './FilterButtonsCarousel';
 import { useFiltersContext } from './Filters.context';
@@ -26,10 +24,7 @@ export default function FilterPopups({ filters, popularFilters }: Props) {
         />
       )}
       {filters.map((filter, idx) => {
-        if (
-          filter.type ===
-          SiteCatalogFilterToggleTypeEnum.SiteCatalogFilterToggle
-        ) {
+        if (filter.type === FilterContentTypes.SiteCatalogFilterToggle) {
           return null;
         }
         return (

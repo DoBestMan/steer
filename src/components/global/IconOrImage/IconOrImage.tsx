@@ -5,7 +5,7 @@ import Icon from '../Icon/Icon';
 import Image from '../Image/Image';
 
 function IconOrImage(props: IconOrImageProps) {
-  if (props.type === ICON_IMAGE_TYPE.ICON && 'svgId' in props) {
+  if (props.type === ICON_IMAGE_TYPE.ICON) {
     const { svgId, type: _type, ...rest } = props;
     return <Icon name={svgId} {...rest} />;
   }
