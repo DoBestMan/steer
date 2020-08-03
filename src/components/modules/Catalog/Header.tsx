@@ -71,7 +71,9 @@ export default function Header({
         </div>
       </div>
       <SubFilters
-        resultsCount={catalogFilters.totalMatches}
+        resultsCount={
+          siteCatalogProducts.listResultMetadata.pagination?.total || 0
+        }
         priceFilter={priceFilter}
         sortList={catalogFilters.sortList}
       />

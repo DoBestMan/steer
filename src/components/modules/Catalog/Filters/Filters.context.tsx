@@ -18,7 +18,7 @@ import { getInitialFiltersState, getValueKeys } from './Filters.utils';
 interface ContextProviderProps {
   children: ReactNode;
   onPreviewFilters: (filters: Record<string, string>) => Promise<void>;
-  previewFiltersData: SiteCatalogFilters;
+  previewFiltersData: { filters: SiteCatalogFilters; totalMatches: number };
   siteCatalogFilters: SiteCatalogFilters;
 }
 
@@ -90,7 +90,7 @@ interface ContextArgs {
 export function useFiltersContextSetup({
   onPreviewFilters,
   previewFiltersData,
-  siteCatalogFilters = { filtersList: [], sortList: [], totalMatches: 0 },
+  siteCatalogFilters = { filtersList: [], sortList: [] },
 }: ContextArgs) {
   const { isLoading, handleUpdateResults } = useCatalogPageContext();
   const [isPreviewLoading, setIsPreviewLoading] = useState(false);
@@ -230,7 +230,7 @@ export function useFiltersContextSetup({
     filtersToApply,
     isPopularActive,
     isPreviewLoading,
-    previewFiltersData,
+    previewFiltersData: previewFiltersData.filters,
     selectingFilter,
     totalMatches: previewFiltersData.totalMatches,
   };

@@ -160,9 +160,10 @@ function CatalogPageContainer({
   );
 
   // preview data and handler for open filter dropdowns
-  const [previewFiltersData, setPreviewFiltersData] = useState(
-    siteCatalogProducts.siteCatalogFilters,
-  );
+  const [previewFiltersData, setPreviewFiltersData] = useState({
+    totalMatches: siteCatalogProducts.listResultMetadata.pagination?.total || 0,
+    filters: siteCatalogProducts.siteCatalogFilters,
+  });
 
   const onPreviewFilters = useCallback(
     async (filters: Record<string, string>) => {
@@ -173,7 +174,11 @@ function CatalogPageContainer({
         method: 'get',
         query: { ...filters, ...pageParams },
       });
-      setPreviewFiltersData(siteCatalogProducts.siteCatalogFilters);
+      setPreviewFiltersData({
+        totalMatches:
+          siteCatalogProducts.listResultMetadata.pagination?.total || 0,
+        filters: siteCatalogProducts.siteCatalogFilters,
+      });
     },
     [endpoints.products, pageParams],
   );

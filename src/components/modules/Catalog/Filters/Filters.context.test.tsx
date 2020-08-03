@@ -16,7 +16,10 @@ const mockArgs = {
     filtersList: mockSiteCatalogFilters,
   } as SiteCatalogFilters,
   onPreviewFilters: jest.fn(),
-  previewFiltersData: emptyCatalogProducts.siteCatalogFilters as SiteCatalogFilters,
+  previewFiltersData: {
+    filters: emptyCatalogProducts.siteCatalogFilters as SiteCatalogFilters,
+    totalMatches: 0,
+  },
 };
 
 interface WrapperProps {

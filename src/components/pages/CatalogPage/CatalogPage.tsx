@@ -30,7 +30,7 @@ interface Props {
   catalogGridRef: React.Ref<HTMLDivElement>;
   fetchNewProducts: (page: number) => Promise<SiteCatalogProducts>;
   onPreviewFilters: (filters: Record<string, string>) => Promise<void>;
-  previewFiltersData: SiteCatalogFilters;
+  previewFiltersData: { filters: SiteCatalogFilters; totalMatches: number };
   scrollToGrid: () => void;
   siteCatalogProducts: SiteCatalogProducts;
   siteCatalogSummary: SiteCatalogSummary;
@@ -49,7 +49,8 @@ function CatalogPage({
   const { isAdvancedView } = useCatalogPageContext();
   const { contentStage, showSummary, stage } = useCatalogSummaryContext();
 
-  const totalResult = siteCatalogProducts.siteCatalogFilters?.totalMatches || 0;
+  const totalResult =
+    siteCatalogProducts.listResultMetadata.pagination?.total || 0;
   const hasResults = totalResult > 0;
 
   const showLoadingIndicator = stage === STAGES.LOADING;

@@ -19,10 +19,4 @@ export interface SiteCatalogFilters {
    * @memberof SiteCatalogFilters
    */
   sortList: Array<SiteCatalogSortListItem>;
-  /**
-   * Number of items matched with this filter
-   * @type {number}
-   * @memberof SiteCatalogFilters
-   */
-  totalMatches: number;
 }

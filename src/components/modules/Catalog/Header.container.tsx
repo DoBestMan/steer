@@ -9,7 +9,7 @@ interface Props {
   hasTopPicks: boolean;
   isInternal?: boolean;
   onPreviewFilters: (filters: Record<string, string>) => Promise<void>;
-  previewFiltersData: SiteCatalogFilters;
+  previewFiltersData: { filters: SiteCatalogFilters; totalMatches: number };
   siteCatalogProducts: SiteCatalogProducts;
   sizeList?: string[];
 }

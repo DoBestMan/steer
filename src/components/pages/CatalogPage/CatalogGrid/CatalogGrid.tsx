@@ -28,7 +28,7 @@ interface Props {
   hasResults: boolean;
   hasTopPicks: boolean;
   onPreviewFilters: (filters: Record<string, string>) => Promise<void>;
-  previewFiltersData: SiteCatalogFilters;
+  previewFiltersData: { filters: SiteCatalogFilters; totalMatches: number };
   siteCatalogProducts: SiteCatalogProducts;
   siteCatalogSummary?: SiteCatalogSummary;
 }

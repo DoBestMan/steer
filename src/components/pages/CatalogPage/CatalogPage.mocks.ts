@@ -16,6 +16,5 @@ export const emptyCatalogProducts: SiteCatalogProducts = {
   siteCatalogFilters: {
     filtersList: mockSiteCatalogFilters as SiteCatalogFilters['filtersList'],
     sortList: filterSort,
-    totalMatches: 0,
   },
 };
