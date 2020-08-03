@@ -7,6 +7,7 @@ import {
   backendGetProductDetail,
   backendGetProductReviews,
 } from '~/lib/backend/product-detail';
+import { RESULTS_PER_PAGE_PDP } from '~/lib/constants';
 import { removeTireFromQueryParam } from '~/lib/utils/string';
 
 export interface ProductDetailResponse {
@@ -39,6 +40,9 @@ export default async (
     backendGetProductReviews({
       brand: brandName,
       productLine,
+      query: {
+        resultsPerPage: RESULTS_PER_PAGE_PDP.toString(),
+      },
     }),
   ]);
 

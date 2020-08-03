@@ -8,6 +8,7 @@ import {
   backendGetProductDetail,
   backendGetProductReviews,
 } from '~/lib/backend/product-detail';
+import { RESULTS_PER_PAGE_PDP } from '~/lib/constants';
 import { validBrandQuery } from '~/lib/utils/regex';
 import { validateOrRedirectToNotFound } from '~/lib/utils/routes';
 import { removeTireFromQueryParam } from '~/lib/utils/string';
@@ -38,6 +39,9 @@ export const getServerSideProps: GetServerSideProps<ProductDetailData> = async (
     backendGetProductReviews({
       brand: brandName,
       productLine,
+      query: {
+        resultsPerPage: RESULTS_PER_PAGE_PDP.toString(),
+      },
     }),
   ]);
 

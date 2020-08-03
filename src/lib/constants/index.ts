@@ -19,6 +19,7 @@ export * from './modal.types';
 export * from './radius';
 export * from './ratings';
 export * from './ratings.types';
+export * from './reviews';
 export * from './routes';
 export * from './spacing';
 export * from './storybook';

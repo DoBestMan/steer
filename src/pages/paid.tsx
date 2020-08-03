@@ -8,6 +8,7 @@ import {
   backendGetProductDetail,
   backendGetProductReviews,
 } from '~/lib/backend/product-detail';
+import { RESULTS_PER_PAGE_PDP } from '~/lib/constants';
 import { redirectToNotFound } from '~/lib/utils/routes';
 
 function ProductLine(props: ProductDetailData) {
@@ -32,6 +33,9 @@ export const getServerSideProps: GetServerSideProps<ProductDetailData> = async (
     backendGetProductReviews({
       brand,
       productLine,
+      query: {
+        resultsPerPage: RESULTS_PER_PAGE_PDP.toString(),
+      },
     }),
   ]);
 
