@@ -51,6 +51,7 @@
     "react-modal": "^3.11.2",
     "react-transition-group": "^4.4.1",
     "schema-dts": "^0.6.0",
+    "smoothscroll-polyfill": "^0.4.4",
     "svg-sprite": "^1.5.0",
     "swiper": "^5.4.2",
     "swr": "^0.2.0"
@@ -85,6 +86,7 @@
     "@types/react-svg-inline": "^2.1.1",
     "@types/react-transition-group": "^4.2.4",
     "@types/youtube": "^0.0.39",
+    "@types/smoothscroll-polyfill": "^0.3.1",
     "@typescript-eslint/eslint-plugin": "^2.27.0",
     "@typescript-eslint/parser": "^2.27.0",
     "add": "^2.0.6",

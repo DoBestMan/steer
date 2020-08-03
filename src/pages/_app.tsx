@@ -2,6 +2,7 @@ import 'focus-visible';
 
 import { Global } from '@emotion/core';
 import NextApp, { AppContext, AppInitialProps } from 'next/app';
+import smoothscroll from 'smoothscroll-polyfill';
 import { SWRConfig } from 'swr';
 
 import Meta from '~/components/global/Meta/Meta';
@@ -13,6 +14,9 @@ import { backendGetSiteGlobals, backendGetSiteMenu } from '~/lib/backend';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
 import GA from '~/lib/helpers/analytics';
 import { global } from '~/styles/document/global.styles';
+
+// Add polyfill for smooth scrolling on Safari
+typeof window !== 'undefined' && smoothscroll.polyfill();
 
 interface Props extends AppInitialProps {
   hostUrl?: string | null;
