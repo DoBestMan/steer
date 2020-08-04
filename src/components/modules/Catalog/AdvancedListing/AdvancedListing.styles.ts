@@ -186,7 +186,7 @@ const styles: CSSObject = {
   title: [
     typography.labelHeadline,
     {
-      color: COLORS.LIGHT.GRAY_70,
+      color: COLORS.GLOBAL.BLACK,
     },
   ],
 };
