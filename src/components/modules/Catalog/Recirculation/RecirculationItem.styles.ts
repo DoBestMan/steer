@@ -3,8 +3,8 @@ import { typography } from '~/styles/typography.styles';
 
 const ICON_SIZE = {
   S: 25,
-  M: 32,
-  L: 50,
+  M: 30,
+  XL: 60,
 };
 
 const styles: StylesMap = {
@@ -15,14 +15,24 @@ const styles: StylesMap = {
     },
   ],
   icon: {
+    '> svg': {
+      height: '100%',
+      width: '100%',
+    },
+
+    height: ICON_SIZE.S,
+    marginRight: SPACING.SIZE_05,
     width: ICON_SIZE.S,
 
     [MQ.M]: {
+      height: ICON_SIZE.M,
       width: ICON_SIZE.M,
     },
 
-    [MQ.L]: {
-      width: ICON_SIZE.L,
+    [MQ.XL]: {
+      height: ICON_SIZE.XL,
+      marginRight: SPACING.SIZE_10,
+      width: ICON_SIZE.XL,
     },
   },
   item: {
@@ -46,6 +56,10 @@ const styles: StylesMap = {
 
     [MQ.M]: {
       padding: `${SPACING.SIZE_30}px 0`,
+    },
+
+    [MQ.XL]: {
+      padding: `${SPACING.SIZE_40}px 0`,
     },
   },
   title: [
