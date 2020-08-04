@@ -258,3 +258,22 @@ export function getInvertedImageTransformations(sizes: number[]) {
     return object;
   }, {});
 }
+
+export function getCroppedImageTransformations(
+  sizes: {
+    height: number;
+    width: number;
+  }[],
+) {
+  return sizes.reduce((object: Record<string, Transformations[]>, size) => {
+    object[`${size.width}w`] = [
+      {
+        crop: CropMode.FILL,
+        gravity: Gravity.NORTH,
+        height: size.height,
+        width: size.width,
+      },
+    ];
+    return object;
+  }, {});
+}

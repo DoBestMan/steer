@@ -3,10 +3,12 @@ import { CSSObject } from '@emotion/core';
 import { BORDERS, COLORS, MQ, RADIUS, SPACING } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
-const IMAGE_SIZE = {
-  S: 250,
-  M: 250,
-  XL: 300,
+import { IMAGE_SIZES } from './AdvancedListing.constants';
+
+const WRAPPER_HEIGHT = {
+  S: 195,
+  M: 215,
+  XL: 260,
 };
 
 const styles: CSSObject = {
@@ -33,16 +35,13 @@ const styles: CSSObject = {
       maxWidth: 130,
     },
   },
-  image: {
-    maxWidth: 300,
-  },
   imageContainer: {
-    width: IMAGE_SIZE.S,
+    width: IMAGE_SIZES[0].width,
     [MQ.M]: {
-      width: IMAGE_SIZE.M,
+      width: IMAGE_SIZES[1].width,
     },
     [MQ.XL]: {
-      width: IMAGE_SIZE.XL,
+      width: IMAGE_SIZES[2].width,
     },
   },
   imageWrapper: {
@@ -50,9 +49,17 @@ const styles: CSSObject = {
     backgroundColor: COLORS.LIGHT.GRAY_10,
     borderRadius: RADIUS.RADIUS_10,
     display: 'flex',
-    height: '100%',
+    height: WRAPPER_HEIGHT.S,
     justifyContent: 'center',
+    minHeight: '100%',
     position: 'relative',
+
+    [MQ.M]: {
+      height: WRAPPER_HEIGHT.M,
+    },
+    [MQ.XL]: {
+      height: WRAPPER_HEIGHT.XL,
+    },
   },
   info: {
     borderBottom: BORDERS.SOLID_GRAY_20_1PX,

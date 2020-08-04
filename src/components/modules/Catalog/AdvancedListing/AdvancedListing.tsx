@@ -17,21 +17,20 @@ import {
   RATINGS_DISPLAY,
   THEME,
 } from '~/lib/constants';
-import { getSquareImageTransformations } from '~/lib/utils/cloudinary/cloudinary';
+import { PRODUCT_IMAGE_TYPES } from '~/lib/constants/productImage.types';
+import { getCroppedImageTransformations } from '~/lib/utils/cloudinary/cloudinary';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
 
+import { IMAGE_SIZES, MAX_PROMOS } from './AdvancedListing.constants';
 import styles from './AdvancedListing.styles';
 import { AdvancedListingProps } from './AdvancedListing.types';
-
-const MAX_PROMOS = 2;
 
 function AdvancedListing({
   brand,
   name,
   imageList,
   dataMomentList,
-  defaultImage,
   highlight,
   link,
   siteCatalogPromotionInfo,
@@ -43,15 +42,14 @@ function AdvancedListing({
 }: AdvancedListingProps) {
   const { bk } = useBreakpoints();
   const displayedImage =
-    imageList.find((image) => image.productImageType === defaultImage) ||
-    imageList[0];
+    imageList.find(
+      (image) => image.productImageType === PRODUCT_IMAGE_TYPES.SIDETREAD,
+    ) || imageList[0];
 
   const numberOfPromosToDisplay =
     siteCatalogPromotionInfo && siteCatalogPromotionInfo.count > MAX_PROMOS
       ? 1
       : MAX_PROMOS;
-
-  const imageWidths = [250, 250, 300];
 
   const hasNoPromos =
     !siteCatalogPromotionInfo || siteCatalogPromotionInfo.count === 0;
@@ -71,7 +69,9 @@ function AdvancedListing({
             <Image
               src={displayedImage.image.src}
               altText={displayedImage.image.altText}
-              srcTransformationArgs={getSquareImageTransformations(imageWidths)}
+              srcTransformationArgs={getCroppedImageTransformations(
+                IMAGE_SIZES,
+              )}
               noPlaceholder
             />
           </div>
