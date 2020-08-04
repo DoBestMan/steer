@@ -22,6 +22,7 @@ import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { ARIA_LIVE, COLORS, KEYCODES, THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
+import { InputQuery } from '../Search';
 import { useAutocompleteSelectedItem } from '../Search.hooks';
 import {
   SearchActionType,
@@ -56,6 +57,7 @@ export interface Props {
   onCloseSearchClick: () => void;
   onInputChange: (value: string) => void;
   onInputFocus: (inputType: SearchInputEnum) => void;
+  onSetInputQuery: (inputType: SearchInputEnum, query: InputQuery) => void;
   onToggleRearTire: (isShowing: boolean) => void;
   onValueSelection: (value: SearchResult) => void;
   queryText: string;
@@ -75,6 +77,7 @@ function SearchAutocomplete({
   onCloseSearchClick,
   onInputChange,
   onInputFocus,
+  onSetInputQuery,
   onToggleRearTire,
   onValueSelection,
   queryText,
@@ -84,6 +87,7 @@ function SearchAutocomplete({
 }: Props) {
   const [shouldShowListbox, setShouldShowListbox] = useState(false);
   const [shouldShowLoading, setShouldShowLoading] = useState(false);
+  const [isFrontTireComplete, setIsFrontTireComplete] = useState(false);
   const loadingTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const primaryInput = useRef<HTMLInputElement>(null);
   const secondaryInput = useRef<HTMLInputElement>(null);
@@ -133,6 +137,12 @@ function SearchAutocomplete({
   }, [focusOnInput, searchState]);
 
   useEffect(() => {
+    if (isFrontTireComplete) {
+      secondaryInput?.current?.focus();
+    }
+  }, [isFrontTireComplete]);
+
+  useEffect(() => {
     if (!loadingTimeout.current) {
       loadingTimeout.current = setTimeout(() => {
         setShouldShowLoading(true);
@@ -173,7 +183,7 @@ function SearchAutocomplete({
         action.queryType === SearchStateEnum.REAR_TIRE;
 
       if (isInitialRearTireState) {
-        secondaryInput?.current?.focus();
+        setIsFrontTireComplete(true);
       } else {
         primaryInput?.current?.blur();
       }
@@ -190,6 +200,15 @@ function SearchAutocomplete({
   const handleBackspace = () => {
     if (hasActiveSearchState && !queryText && !isRearTireState) {
       handleCancelSelection();
+    }
+
+    // If we've changed the front tire input we need to reset the rear tire query
+    if (isFrontTireComplete && activeInputType === SearchInputEnum.PRIMARY) {
+      setIsFrontTireComplete(false);
+      onSetInputQuery(SearchInputEnum.SECONDARY, {
+        queryText: '',
+        queryType: SearchStateEnum.REAR_TIRE,
+      });
     }
   };
 
@@ -363,6 +382,7 @@ function SearchAutocomplete({
               <SearchInput
                 activeInputType={activeInputType}
                 clearInputComponent={clearSecondaryInputComponent}
+                isDisabled={!isFrontTireComplete}
                 onChange={handleOnChange}
                 onClearInputClick={handleRemoveSecondaryInput}
                 onFocus={onInputFocus}

@@ -24,7 +24,7 @@ import {
 import SearchAutocomplete from './SearchAutocomplete/SearchAutocomplete';
 import SearchSupport from './SearchSupport';
 
-interface InputQuery {
+export interface InputQuery {
   queryText: string;
   queryType: string;
 }
@@ -100,6 +100,13 @@ function Search({
       setSecondaryQuery({ ...secondaryQuery, ...query });
     }
   };
+  const setInputQuery = (inputType: SearchInputEnum, query: InputQuery) => {
+    if (inputType === SearchInputEnum.PRIMARY) {
+      setPrimaryQuery({ ...primaryQuery, ...query });
+    } else if (inputType === SearchInputEnum.SECONDARY) {
+      setSecondaryQuery({ ...secondaryQuery, ...query });
+    }
+  };
 
   const handleClearPastSearchesClick = () => {
     deletePastSearches();
@@ -115,9 +122,16 @@ function Search({
 
     // Reset queryType if input is empty
     if (input.length === 0) {
-      currentInputQueryType = searchState
-        ? SearchStateQueryType[searchState]
-        : '';
+      if (searchState === SearchStateEnum.REAR_TIRE) {
+        currentInputQueryType =
+          activeInputType === SearchInputEnum.PRIMARY
+            ? SearchStateQueryType[SearchStateEnum.FRONT_TIRE]
+            : SearchStateQueryType[SearchStateEnum.REAR_TIRE];
+      } else if (searchState) {
+        currentInputQueryType = SearchStateQueryType[searchState];
+      } else {
+        currentInputQueryType = '';
+      }
     }
 
     setCurrentInputQuery({
@@ -321,6 +335,7 @@ function Search({
         onInputChange={onInputChange}
         onCloseSearchClick={onCloseSearchClick}
         onInputFocus={handleInputFocus}
+        onSetInputQuery={setInputQuery}
         onToggleRearTire={onToggleRearTire}
         onValueSelection={handleValueSelection}
         results={siteSearchResultGroupList}

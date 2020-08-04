@@ -15,6 +15,7 @@ import styles from './SearchInput.styles';
 interface AutocompleteInputProps {
   activeInputType: SearchInputEnum;
   clearInputComponent?: string | JSX.Element;
+  isDisabled?: boolean;
   label?: ReactNode;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   onClearInputClick?: () => void;
@@ -30,6 +31,7 @@ const SearchInput = forwardRef<HTMLInputElement, AutocompleteInputProps>(
     {
       activeInputType,
       clearInputComponent,
+      isDisabled,
       label,
       onChange,
       onClearInputClick,
@@ -73,6 +75,7 @@ const SearchInput = forwardRef<HTMLInputElement, AutocompleteInputProps>(
           <input
             aria-labelledby={labelID}
             css={[styles.input, styles.inputText]}
+            disabled={isDisabled}
             onChange={onChange}
             onFocus={handleFocus(type)}
             onKeyDown={onKeyDown}
