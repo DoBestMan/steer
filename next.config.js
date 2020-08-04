@@ -16,9 +16,7 @@ module.exports = withBundleAnalyzer({
   },
   webpack: (config) => {
     config.module.rules.push({
-      issuer: {
-        test: /\.(js|ts)x?$/,
-      },
+      issuer: /\.(js|ts)x?$/,
       test: /\.svg$/,
       use: [
         {

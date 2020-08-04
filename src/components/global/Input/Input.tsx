@@ -20,7 +20,7 @@ type RefType =
   | MutableRefObject<HTMLInputElement | HTMLTextAreaElement | null>
   | null;
 
-interface Props {
+export interface Props {
   contextualLabel?: string;
   customContainerStyles?: CSSStylesProp;
   disabled?: boolean;

@@ -35,10 +35,9 @@ export const getStaticProps: GetServerSideProps<HomeServeData> = async (context:
     // Next.js will attempt to re-generate the page:
     // - When a request comes in
     // - At most once every second
-    // See https://nextjs.org/blog/next-9-4#incremental-static-regeneration-beta
-    // TODO: use `revalidate` instead when switching to next > 9.5.x
+    // See https://nextjs.org/blog/next-9-5#stable-incremental-static-regeneration
     // eslint-disable-next-line @typescript-eslint/camelcase
-    unstable_revalidate: 60, // In seconds
+    revalidate: 60, // In seconds
   };
 };
 
