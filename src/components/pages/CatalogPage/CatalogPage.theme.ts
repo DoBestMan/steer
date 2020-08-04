@@ -23,7 +23,7 @@ export const defaultTheme = {
 export const headerAdvanced = {
   header: {
     advancedLabel: {
-      color: COLORS.GLOBAL.WHITE,
+      color: COLORS.DARK.GRAY_40,
     },
     background: {
       background: COLORS.GLOBAL.BLACK,
