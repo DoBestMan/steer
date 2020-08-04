@@ -1,4 +1,4 @@
-import { COLORS, MQ, SPACING, StylesMap, Z_INDEX } from '~/lib/constants';
+import { COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 import { MAX_HEIGHT } from './TireImage.styles';
@@ -6,33 +6,35 @@ import { MAX_HEIGHT } from './TireImage.styles';
 const styles: StylesMap = {
   image: {
     height: '100%',
+    marginLeft: 'auto',
+    marginRight: 'auto',
     width: 'auto',
   },
   label: [
     typography.smallCopyTight,
     {
+      bottom: 0,
       color: COLORS.LIGHT.GRAY_70,
+      left: '50%',
       marginBottom: SPACING.SIZE_05,
-      marginLeft: -SPACING.SIZE_05,
+      marginLeft: SPACING.SIZE_60,
       maxWidth: 80,
-      zIndex: Z_INDEX.FRONT,
+      position: 'absolute',
+      textTransform: 'lowercase',
 
       [MQ.M]: {
         marginBottom: SPACING.SIZE_20,
-        marginLeft: -SPACING.SIZE_20,
+        marginLeft: SPACING.SIZE_100,
       },
 
       [MQ.L]: {
         marginBottom: SPACING.SIZE_30,
-        marginLeft: -SPACING.SIZE_30,
+        marginLeft: SPACING.SIZE_140,
       },
     },
   ],
   root: {
-    alignItems: 'flex-end',
-    display: 'flex',
     height: MAX_HEIGHT.S,
-    justifyContent: 'center',
     position: 'relative',
 
     [MQ.M]: {

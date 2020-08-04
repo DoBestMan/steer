@@ -18,5 +18,6 @@ export const SPACING = {
   SIZE_100: 100,
   SIZE_110: 110,
   SIZE_120: 120,
+  SIZE_140: 140,
   SIZE_160: 160,
 };

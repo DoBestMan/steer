@@ -284,7 +284,8 @@
       "previousButtonLabel": "Previous",
       "modalLabel": "{{label}} image zoom",
       "imageZoomButton": "Zoom into {{label}}",
-      "thumbAltText": "Slide number {{number}}"
+      "thumbAltText": "Slide number {{number}}",
+      "unavailableImage": "Image unavailable"
     },
     "insights": {
       "fitting": {

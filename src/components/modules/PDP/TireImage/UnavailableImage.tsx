@@ -1,5 +1,6 @@
 import Image from '~/components/global/Image/Image';
 import { SiteImage } from '~/data/models/SiteImage';
+import { ui } from '~/lib/utils/ui-dictionary';
 
 import styles from './UnavailableImage.styles';
 
@@ -8,16 +9,18 @@ interface UnavailableImageProps {
 }
 
 function UnavailableImage({ image }: UnavailableImageProps) {
+  const label = ui('pdp.tireImage.unavailableImage');
+
   return (
     <div css={styles.root}>
       <Image
-        altText={image.altText}
+        altText={label}
         src={image.src}
         customContainerStyles={styles.image}
         css={styles.image}
         responsive
       />
-      <span css={styles.label}>{image.altText}</span>
+      <span css={styles.label}>{label}</span>
     </div>
   );
 }
