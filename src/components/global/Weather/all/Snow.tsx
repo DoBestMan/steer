@@ -1,7 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 
-import Snowflake from '~/assets/weather/snowflake.svg';
-
 import { styles } from '../Weather.styles';
 
 type Props = {
@@ -23,6 +21,7 @@ const SNOWFLAKE_HEIGHT = 11.93;
 function Snow(props: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [snowflakeData, setSnowflakeData] = useState<ImageData>();
+  const [SVGString, setSVGString] = useState<string | null>(null);
   const { animate = true, height, width } = props;
 
   useEffect(() => {
@@ -36,32 +35,46 @@ function Snow(props: Props) {
 
     if (!snowflakeData) {
       // Load image and store imageData for optim once
-      const DOMURL = window.URL || window.webkitURL || window;
-      const snowflakeImg = new Image();
-      const svg = new Blob([Snowflake], { type: 'image/svg+xml' });
-      const url = DOMURL.createObjectURL(svg);
+      const snowSVGURL = '/static/assets/weather/snowflake.svg';
+      const getSVG = async () => {
+        const data = await fetch(snowSVGURL)
+          .then((response) => response.text())
+          .then((data) => data);
 
-      snowflakeImg.onload = function () {
-        DOMURL.revokeObjectURL(url);
-
-        const canvasOffScreen = document.createElement('canvas');
-        const ctxOffScreen = canvasOffScreen.getContext('2d');
-
-        if (ctxOffScreen) {
-          ctxOffScreen.drawImage(snowflakeImg, 0, 0);
-          const imageData = ctxOffScreen.getImageData(
-            0,
-            0,
-            SNOWFLAKE_WIDTH,
-            SNOWFLAKE_HEIGHT,
-          );
-
-          setSnowflakeData(imageData);
-        }
+        setSVGString(data);
       };
-      snowflakeImg.src = url;
 
-      return;
+      getSVG();
+
+      if (SVGString) {
+        const DOMURL = window.URL || window.webkitURL || window;
+        const snowflakeImg = new Image();
+        const svg = new Blob([SVGString], { type: 'image/svg+xml' });
+        const url = DOMURL.createObjectURL(svg);
+
+        snowflakeImg.onload = function () {
+          DOMURL.revokeObjectURL(url);
+
+          const canvasOffScreen = document.createElement('canvas');
+          const ctxOffScreen = canvasOffScreen.getContext('2d');
+
+          if (ctxOffScreen) {
+            ctxOffScreen.drawImage(snowflakeImg, 0, 0);
+            const imageData = ctxOffScreen.getImageData(
+              0,
+              0,
+              SNOWFLAKE_WIDTH,
+              SNOWFLAKE_HEIGHT,
+            );
+
+            setSnowflakeData(imageData);
+          }
+        };
+
+        snowflakeImg.src = url;
+
+        return;
+      }
     }
 
     // We have everything, we can start the animation
@@ -173,7 +186,7 @@ function Snow(props: Props) {
     return () => {
       cancelAnimationFrame(frame);
     };
-  }, [canvasRef, width, height, snowflakeData, animate]);
+  }, [canvasRef, width, height, snowflakeData, animate, SVGString]);
 
   return (
     <canvas
