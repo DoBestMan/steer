@@ -1,16 +1,14 @@
 import { MQ, SPACING, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
-const CONSTANTS = {
-  BRAND_WIDTH: 85,
-};
-
 const styles: StylesMap = {
   brand: {
-    alignItems: 'center',
-    display: 'flex',
+    display: 'inline-block',
     marginBottom: SPACING.SIZE_20,
-    maxWidth: CONSTANTS.BRAND_WIDTH,
+    img: {
+      height: '100%',
+      width: 'auto',
+    },
   },
   breadcrumbs: {
     marginBottom: SPACING.SIZE_40,

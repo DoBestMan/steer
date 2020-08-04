@@ -18,8 +18,11 @@ const styles: StylesMap = {
     paddingBottom: SPACING.SIZE_40,
   },
   seeMore: {
-    marginTop: SPACING.SIZE_20,
+    marginTop: SPACING.SIZE_40,
     textAlign: 'center',
+    [MQ.L]: {
+      marginTop: SPACING.SIZE_60,
+    },
   },
   sources: [
     typography.bodyCopy,
