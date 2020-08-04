@@ -29,21 +29,27 @@ module.exports = {
       return rule;
     });
 
-    // Add custom one
     config.module.rules.push({
+      issuer: /\.(js|ts)x?$/,
       test: /\.svg$/,
-      issuer: {
-        test: /\.(js|ts)x?$/,
-      },
-      use: ['raw-loader'],
+      use: [
+        {
+          loader: '@svgr/webpack',
+          options: {
+            svgoConfig: {
+              plugins: [{ removeViewBox: false }],
+            },
+          },
+        },
+      ],
     });
 
     // Alias
     config.resolve.alias['~'] = path.resolve(__dirname + '/../src');
 
     config.performance = {
-      hints: false
-    }
+      hints: false,
+    };
 
     return config;
   },
