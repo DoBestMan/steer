@@ -150,7 +150,6 @@ const styles: StylesMap = {
     height: '100%',
     padding: `${SPACING.SIZE_20}px ${SPACING.SIZE_10}px`,
     position: 'relative',
-    zIndex: Z_INDEX.BEHIND,
 
     [MQ.M]: {
       padding: `${SPACING.SIZE_30}px ${SPACING.SIZE_20}px`,

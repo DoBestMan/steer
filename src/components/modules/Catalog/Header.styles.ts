@@ -1,4 +1,4 @@
-import { COLORS, MQ, SPACING, StylesMap, TIME } from '~/lib/constants';
+import { COLORS, MQ, SPACING, StylesMap, TIME, Z_INDEX } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
@@ -76,6 +76,7 @@ const styles: StylesMap = {
     position: 'relative',
     transition: `all ${TIME.MS300}ms ease`,
     width: '100%',
+    zIndex: Z_INDEX.TOP,
     [MQ.M]: {
       padding: `${SPACING.SIZE_30}px ${SPACING.SIZE_40}px ${SPACING.SIZE_30}px`,
     },
