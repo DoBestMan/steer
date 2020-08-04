@@ -7,17 +7,17 @@ import { openReferAFriendModal } from '~/lib/helpers/refer-a-friend';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
 
-import styles from '../Footer.styles';
 import { PROMOTIONS } from './FooterPromotions.constants';
+import styles from './FooterPromotions.styles';
 
 function FooterPromotions() {
-  const { greaterThan } = useBreakpoints();
-
+  const { lessThan } = useBreakpoints();
   return (
     <>
       <GridItem
-        css={styles.featuredInfoModule}
+        css={[styles.featuredInfoModule, styles.verticalDivider]}
         gridColumnS="1/3"
+        gridColumnM="1/4"
         gridColumnL="1/4"
       >
         <FeaturedInfoModule
@@ -33,9 +33,11 @@ function FooterPromotions() {
           customLinkStyles={styles.featuredInfoLink}
         />
       </GridItem>
+
       <GridItem
         css={styles.featuredInfoModule}
         gridColumnS="3/5"
+        gridColumnM="4/7"
         gridColumnL="4/7"
       >
         <FeaturedInfoModule
@@ -50,26 +52,38 @@ function FooterPromotions() {
           customLinkStyles={styles.featuredInfoLink}
         />
       </GridItem>
-      {greaterThan.S && (
-        <GridItem gridColumnS="5/7" gridColumnL="7/10">
-          <FeaturedInfoModule
-            {...PROMOTIONS.militaryDiscount}
-            customTitleStyles={styles.featuredInfoTitle}
-            customCopyStyles={typography.bodyCopy}
-            customLinkStyles={styles.featuredInfoLink}
-          />
-        </GridItem>
+
+      {lessThan.L && (
+        <GridItem css={styles.horizontalDivider} gridColumn="start/end" />
       )}
-      {greaterThan.M && (
-        <GridItem gridColumnS="3/5" gridColumnL="10/13">
-          <FeaturedInfoModule
-            {...PROMOTIONS.freeShipping}
-            customTitleStyles={styles.featuredInfoTitle}
-            customCopyStyles={typography.bodyCopy}
-            customLinkStyles={styles.featuredInfoLink}
-          />
-        </GridItem>
-      )}
+
+      <GridItem
+        css={[styles.featuredInfoModule, styles.verticalDivider]}
+        gridColumnS="1/3"
+        gridColumnM="1/4"
+        gridColumnL="7/10"
+      >
+        <FeaturedInfoModule
+          {...PROMOTIONS.militaryDiscount}
+          customTitleStyles={styles.featuredInfoTitle}
+          customCopyStyles={typography.bodyCopy}
+          customLinkStyles={styles.featuredInfoLink}
+        />
+      </GridItem>
+
+      <GridItem
+        css={styles.featuredInfoModule}
+        gridColumnS="3/5"
+        gridColumnM="4/7"
+        gridColumnL="10/13"
+      >
+        <FeaturedInfoModule
+          {...PROMOTIONS.freeShipping}
+          customTitleStyles={styles.featuredInfoTitle}
+          customCopyStyles={typography.bodyCopy}
+          customLinkStyles={styles.featuredInfoLink}
+        />
+      </GridItem>
     </>
   );
 }
