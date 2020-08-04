@@ -9,8 +9,13 @@ import styles from './HomeReviews.styles';
 import Press from './Press/Press';
 import UserReview from './UserReview/UserReview';
 
+interface Props extends SiteReviews {
+  isEditorialModule?: boolean;
+}
+
 function HomeReviews({
   body,
+  isEditorialModule,
   link,
   linkLabel,
   ratingStars,
@@ -18,7 +23,7 @@ function HomeReviews({
   ratingLabelIcon,
   siteReviewList,
   title,
-}: SiteReviews) {
+}: Props) {
   return (
     <>
       <GridItem gridColumnM="2/5" gridColumnL="3/7">
@@ -37,7 +42,12 @@ function HomeReviews({
           {linkLabel}
         </Link>
       </GridItem>
-      <GridItem as="div" gridColumnM="5/8" gridColumnL="8/13">
+      <GridItem
+        as="div"
+        gridColumnM="5/8"
+        gridColumnL="8/13"
+        css={isEditorialModule && styles.isEditorialModule}
+      >
         {siteReviewList.map((review) => (
           <UserReview {...review} key={review.id} />
         ))}

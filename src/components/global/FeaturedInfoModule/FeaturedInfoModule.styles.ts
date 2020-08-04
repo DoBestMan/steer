@@ -53,6 +53,11 @@ const styles: CSSObject = {
       },
     },
   ],
+  twoColumnSpacing: {
+    [MQ.L]: {
+      padding: `0 ${SPACING.SIZE_50}px`,
+    },
+  },
 };
 
 export default styles;

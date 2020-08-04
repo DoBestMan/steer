@@ -1,4 +1,12 @@
-import { COLORS, EASING, MQ, SPACING, StylesMap, TIME } from '~/lib/constants';
+import {
+  COLORS,
+  EASING,
+  MQ,
+  SPACING,
+  StylesMap,
+  THEME,
+  TIME,
+} from '~/lib/constants';
 import { links } from '~/styles/links.styles';
 import { typography } from '~/styles/typography.styles';
 
@@ -6,18 +14,7 @@ const styles: StylesMap = {
   button: [
     typography.bodyCopyTight,
     {
-      '&:hover, &:focus, &:active': {
-        color: COLORS.GLOBAL.WHITE,
-      },
-
-      '&[aria-expanded="true"]': [
-        typography.primarySubhead,
-        {
-          color: COLORS.GLOBAL.WHITE,
-        },
-      ],
       alignItems: 'flex-start',
-      color: COLORS.DARK.GRAY_40,
       display: 'flex',
       justifyContent: 'space-between',
       overflow: 'hidden',
@@ -68,7 +65,6 @@ const styles: StylesMap = {
         paddingBottom: SPACING.SIZE_20,
         visibility: 'visible',
       },
-      color: COLORS.DARK.GRAY_40,
       maxHeight: 0,
       opacity: 0,
       overflow: 'hidden',
@@ -86,6 +82,51 @@ const styles: StylesMap = {
       '&:not(:last-child)': {
         marginBottom: '1em',
       },
+    },
+  },
+};
+
+export const tStyles = {
+  [THEME.LIGHT]: {
+    button: {
+      color: COLORS.LIGHT.GRAY_70,
+      '&:hover, &:focus, &:active': {
+        color: COLORS.GLOBAL.BLACK,
+      },
+
+      '&[aria-expanded="true"]': [
+        typography.primarySubhead,
+        {
+          color: COLORS.GLOBAL.BLACK,
+        },
+      ],
+    },
+    markdown: {
+      a: links.light,
+    },
+    contentContainer: {
+      color: COLORS.LIGHT.GRAY_70,
+    },
+  },
+  [THEME.DARK]: {
+    button: {
+      color: COLORS.DARK.GRAY_40,
+      '&:hover, &:focus, &:active': {
+        color: COLORS.GLOBAL.WHITE,
+      },
+
+      '&[aria-expanded="true"]': [
+        typography.primarySubhead,
+        {
+          color: COLORS.GLOBAL.WHITE,
+        },
+      ],
+    },
+    markdown: {
+      a: links.dark,
+    },
+    contentContainer: {
+      color: COLORS.DARK.GRAY_40,
     },
   },
 };

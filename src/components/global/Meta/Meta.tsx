@@ -9,7 +9,7 @@ import { ui } from '~/lib/utils/ui-dictionary';
 export interface MetaProps {
   canonical?: string;
   description?: string;
-  robot?: string;
+  robots?: string;
   shareImage?: SiteImage;
   title?: string;
 }
@@ -37,19 +37,28 @@ const APPLE_TOUCH_ICON_SIZES = [
 function Meta({
   canonical,
   description = ui('meta.description'),
-  // TODO: For MVP, no pages are indexable
-  robot = 'no index, no follow',
-  shareImage = DEFAULT_SHARE_IMAGE,
+  robots = 'index, follow',
+  shareImage,
   title = ui('meta.title'),
 }: MetaProps) {
   const router = useRouter();
 
+  // Share Image
+  if (!shareImage) {
+    shareImage = DEFAULT_SHARE_IMAGE;
+  }
+
+  // Canonical
   const url = canonical ? canonical : router.asPath.split('?')[0];
 
+  // Title + description
   title = `${title} | SimpleTire`;
-
   title = title.replace(/&amp;/g, '&');
   description = description.replace(/&amp;/g, '&');
+
+  // Robots
+  // TODO: For MVP, no pages are indexable
+  robots = 'no index, no follow';
 
   return (
     <Head>
@@ -61,7 +70,7 @@ function Meta({
         content="width=device-width,initial-scale=1.0,user-scalable=yes"
       />
       <meta name="description" content={description} />
-      <meta name="robots" content={robot} />
+      <meta name="robots" content={robots} />
       {canonical && <link rel="canonical" href={canonical} />}
       <link
         rel="manifest"

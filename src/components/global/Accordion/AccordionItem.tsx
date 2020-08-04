@@ -4,10 +4,10 @@ import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Markdown from '~/components/global/Markdown/Markdown';
 import { useWindowSize } from '~/hooks/useWindowSize';
-import { KEYCODES, SPACING } from '~/lib/constants';
+import { KEYCODES, SPACING, THEME } from '~/lib/constants';
 import { MARKDOWN_PRIMITIVES } from '~/lib/constants/markdown';
 
-import styles from './AccordionItem.styles';
+import styles, { tStyles } from './AccordionItem.styles';
 
 interface Props {
   children?: ReactNode;
@@ -17,6 +17,7 @@ interface Props {
   label: string;
   linkTarget?: string;
   onToggle?: () => void;
+  theme?: THEME.LIGHT | THEME.DARK;
   value?: string;
 }
 
@@ -29,6 +30,7 @@ function AccordionItem({
   onToggle,
   isExpanded,
   linkTarget,
+  theme = THEME.DARK,
 }: Props) {
   const [containerHeight, setContainerHeight] = useState(0);
   const innerElement = useRef<HTMLDivElement | null>(null);
@@ -77,7 +79,11 @@ function AccordionItem({
         id={buttonId}
         onMouseDown={mouseDownHandler}
         onKeyUp={keyUpHandler}
-        css={[styles.button, !hasContent && styles.buttonNoContent]}
+        css={[
+          styles.button,
+          tStyles[theme].button,
+          !hasContent && styles.buttonNoContent,
+        ]}
       >
         <span css={styles.buttonLabel}>{label}</span>
         {value && <span css={styles.buttonValue}>{value}</span>}
@@ -95,6 +101,7 @@ function AccordionItem({
           role="region"
           css={[
             styles.contentContainer,
+            tStyles[theme].contentContainer,
             isExpanded && { maxHeight: containerHeight + SPACING.SIZE_20 },
           ]}
         >
@@ -102,7 +109,7 @@ function AccordionItem({
             {children}
             {content && (
               <Markdown
-                css={styles.markdown}
+                css={[styles.markdown, tStyles[theme].markdown]}
                 linkTarget={linkTarget}
                 allowedTypes={MARKDOWN_PRIMITIVES}
                 unwrapDisallowed

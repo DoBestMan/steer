@@ -1,0 +1,15 @@
+export type SiteModuleTypes =
+  | 'SiteImage'
+  | 'SiteModuleAccordion'
+  | 'SiteModuleArticleListWithFeatured'
+  | 'SiteModuleFeedback'
+  | 'SiteModuleGraphicGrid'
+  | 'SiteModuleLinkList'
+  | 'SiteLinkWithLabel'
+  | 'SiteModuleMarkdown'
+  | 'SiteModuleQuote'
+  | 'SiteModuleReview'
+  | 'SiteModuleSeparator'
+  | 'SiteModuleTextList'
+  | 'SiteModuleTireSearchBillboard'
+  | 'SiteYouTubeVideo';

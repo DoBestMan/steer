@@ -106,7 +106,7 @@ export function mapDataToHeader({
 
   /*
     TEMPORARY BREADCRUMBS
-    Replace this section with above comments when SEO landing pages for 
+    Replace this section with above comments when SEO landing pages for
     types/[type] and categories[category] are created
    */
   // There's only ever one section selected so the section key will be set once
@@ -134,8 +134,8 @@ export function mapDataToHeader({
 
   return {
     breadcrumbs,
-    header: title,
-    description,
+    body: description,
+    title,
     filters,
   };
 }

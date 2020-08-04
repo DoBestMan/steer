@@ -4,20 +4,43 @@ import {
   EASING,
   SPACING,
   StylesMap,
+  THEME,
   TIME,
 } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
+export const tStyles = {
+  [THEME.DARK]: {
+    itemContainer: {
+      '&:not(:first-of-type)': {
+        borderTop: BORDERS.SOLID_GRAY_80_1PX,
+      },
+    },
+    itemContainerActive: {
+      '&:not(:first-of-type)': {
+        borderTopColor: COLORS.GLOBAL.WHITE,
+      },
+    },
+  },
+  [THEME.LIGHT]: {
+    itemContainer: {
+      '&:not(:first-of-type)': {
+        borderTop: BORDERS.SOLID_GRAY_LIGHT_1PX,
+      },
+    },
+    itemContainerActive: {
+      '&:not(:first-of-type)': {
+        borderTopColor: COLORS.GLOBAL.BLACK,
+      },
+    },
+  },
+};
 const styles: StylesMap = {
   showAll: [
     typography.primarySubhead,
     {
-      '&:hover, &:focus, &:active': {
-        color: COLORS.GLOBAL.WHITE,
-      },
       alignItems: 'center',
       borderTop: BORDERS.SOLID_GRAY_80_1PX,
-      color: COLORS.DARK.GRAY_40,
       display: 'flex',
       justifyContent: 'space-between',
       paddingBottom: SPACING.SIZE_20,
@@ -33,15 +56,17 @@ const styles: StylesMap = {
       padding: SPACING.SIZE_05,
     },
   },
-  itemContainer: {
-    '&:not(:first-of-type)': {
-      borderTop: BORDERS.SOLID_GRAY_80_1PX,
+  [THEME.DARK]: {
+    '&:hover, &:focus, &:active': {
+      color: COLORS.GLOBAL.WHITE,
     },
+    color: COLORS.DARK.GRAY_40,
   },
-  itemContainerActive: {
-    '&:not(:first-of-type)': {
-      borderTopColor: COLORS.GLOBAL.WHITE,
+  [THEME.LIGHT]: {
+    '&:hover, &:focus, &:active': {
+      color: COLORS.GLOBAL.BLACK,
     },
+    borderTop: BORDERS.SOLID_GRAY_LIGHT_1PX,
   },
 };
 

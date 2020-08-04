@@ -1,6 +1,6 @@
 import { boolean, number, text } from '@storybook/addon-knobs';
 
-import { COLORS } from '~/lib/constants';
+import { COLORS, THEME } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 import Accordion from './Accordion';
@@ -18,6 +18,7 @@ export function AccordionWithKnobs() {
     false,
     optionsGroupId,
   );
+  const isDark = boolean('The dark or light theme?', false);
   const itemsToShow = number('Items to show', 4, {}, optionsGroupId);
   const itemsToShowLabel = text(
     'Items to show label',
@@ -49,7 +50,12 @@ export function AccordionWithKnobs() {
   ];
 
   return (
-    <div css={{ backgroundColor: COLORS.GLOBAL.BLACK, minHeight: '100vh' }}>
+    <div
+      css={{
+        backgroundColor: isDark ? COLORS.GLOBAL.BLACK : COLORS.GLOBAL.WHITE,
+        minHeight: '100vh',
+      }}
+    >
       <Accordion
         id="storybook"
         items={items}
@@ -58,6 +64,7 @@ export function AccordionWithKnobs() {
           defaultItemsToShowLabel ? undefined : itemsToShowLabel
         }
         singleItemExpandable={singleItemExpandable}
+        theme={isDark ? THEME.DARK : THEME.LIGHT}
       />
     </div>
   );

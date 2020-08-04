@@ -8,13 +8,13 @@ export default {
 };
 
 export function Header() {
-  const { breadcrumbs, description, filters, header } = mockReviewListing;
+  const { breadcrumbs, body, filters, title } = mockReviewListing;
 
   return (
     <HeaderComponent
       breadcrumbs={breadcrumbs}
-      description={description}
-      header={header}
+      body={body}
+      title={title}
       filters={filters}
     />
   );

@@ -79,8 +79,8 @@ function ReviewListingPage({
       <Meta {...meta} />
       <Header
         breadcrumbs={header.breadcrumbs}
-        header={header.header}
-        description={header.description}
+        title={header.title}
+        body={header.body}
         filters={header.filters}
       />
       <RatingsTable

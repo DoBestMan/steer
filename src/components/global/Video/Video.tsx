@@ -8,13 +8,12 @@ import { SiteImage } from '~/data/models/SiteImage';
 import { SiteYouTubeVideoVideo } from '~/data/models/SiteYouTubeVideoVideo';
 import { CSSStylesProp, Loading as ImageLoading, THEME } from '~/lib/constants';
 import { ratioToPercentage } from '~/lib/utils/number';
-import { randomString } from '~/lib/utils/string';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import { useYoutubeApi } from './Video.hooks';
 import styles, { activeVideoStyles } from './Video.styles';
 
-export interface Props {
+export interface VideoProps {
   aspectRatio?: string;
   customContainerStyles?: CSSStylesProp;
   customVideoStyles?: CSSStylesProp;
@@ -38,8 +37,8 @@ function Video({
   sizes,
   video,
   setShouldPauseVideo,
-}: Props) {
-  const videoId = `${randomString(10)}-video`;
+}: VideoProps) {
+  const videoId = `video-${video.youtubeId}`;
 
   const { hasPlayedVideo, isLoading, setIsLoading, pauseVideo } = useYoutubeApi(
     {

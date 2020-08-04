@@ -12,3 +12,7 @@ export interface SiteIcon {
    */
   type: ICON_IMAGE_TYPE.ICON;
 }
+
+export function isSiteIcon(arg: SiteIcon): arg is SiteIcon {
+  return arg && typeof arg === 'object' && !!arg.svgId;
+}

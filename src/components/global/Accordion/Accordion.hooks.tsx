@@ -2,7 +2,7 @@ import { createRef, RefObject, useCallback, useEffect, useState } from 'react';
 
 import { TIME } from '~/lib/constants';
 
-import { Props as InputProps } from './Accordion';
+import { AccordionProps } from './Accordion';
 
 export interface Item {
   content?: string;
@@ -11,7 +11,7 @@ export interface Item {
   value?: string;
 }
 
-type Props = Pick<InputProps, 'items' | 'singleItemExpandable'>;
+type Props = Pick<AccordionProps, 'items' | 'singleItemExpandable'>;
 const useAccordion = ({ items, singleItemExpandable }: Props) => {
   const [expandedItems, setExpandedItems] = useState<number[]>([]);
   const [itemsRefs, setItemsRefs] = useState<RefObject<HTMLDivElement>[]>([]);

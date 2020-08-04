@@ -2,10 +2,11 @@ import { Children, ReactNode, useCallback, useEffect, useState } from 'react';
 
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
+import { THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import useAccordion from './Accordion.hooks';
-import styles from './Accordion.styles';
+import styles, { tStyles } from './Accordion.styles';
 import AccordionItem from './AccordionItem';
 
 export interface AccordionItem {
@@ -15,7 +16,7 @@ export interface AccordionItem {
   value?: string | string[] | null;
 }
 
-export interface Props {
+export interface AccordionProps {
   children?: ReactNode;
   id: string; // To prevent duplicated ids (a11y)
   items: AccordionItem[];
@@ -23,12 +24,13 @@ export interface Props {
   itemsToShowLabel?: string;
   linkTarget?: string;
   singleItemExpandable?: boolean;
+  theme?: THEME.DARK | THEME.LIGHT;
 }
 
 const parseShouldShowAll = ({
   items,
   itemsToShow,
-}: Pick<Props, 'items' | 'itemsToShow'>) => {
+}: Pick<AccordionProps, 'items' | 'itemsToShow'>) => {
   if (!itemsToShow) {
     return true;
   }
@@ -44,7 +46,8 @@ function Accordion({
   itemsToShowLabel = ui('pdp.accordion.showAllDefaultLabel'),
   singleItemExpandable,
   linkTarget = '_blank',
-}: Props) {
+  theme = THEME.DARK,
+}: AccordionProps) {
   const [shouldShowAll, setShouldShowAll] = useState(
     parseShouldShowAll({ items, itemsToShow }),
   );
@@ -79,8 +82,8 @@ function Accordion({
               key={idx}
               ref={itemsRefs[idx]}
               css={[
-                styles.itemContainer,
-                isExpanded && styles.itemContainerActive,
+                tStyles[theme].itemContainer,
+                isExpanded && [tStyles[theme].itemContainerActive],
               ]}
             >
               <AccordionItem
@@ -91,6 +94,7 @@ function Accordion({
                 onToggle={toggleItemHandler(idx)}
                 isExpanded={isExpanded}
                 linkTarget={linkTarget}
+                theme={theme}
               >
                 {children && Children.toArray(children)[idx]}
               </AccordionItem>
@@ -98,7 +102,7 @@ function Accordion({
           );
         })}
       {!shouldShowAll && (
-        <button onClick={showAllHandler} css={styles.showAll}>
+        <button onClick={showAllHandler} css={[styles.showAll, styles[theme]]}>
           <span>{showAllLabel}</span>
           <Icon name={ICONS.CHEVRON_DOWN} css={styles.showAllIcon} />
         </button>

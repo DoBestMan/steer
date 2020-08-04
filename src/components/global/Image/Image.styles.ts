@@ -20,6 +20,7 @@ const styles: StylesMap = {
   responsive: {
     height: '100%',
     left: 0,
+    objectFit: 'cover',
     position: 'absolute',
     top: 0,
     width: '100%',

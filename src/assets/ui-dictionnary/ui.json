@@ -65,7 +65,8 @@
     "reviews": "Reviews",
     "tireReviews": "Tire reviews",
     "tireReviewsTemp": "{{section}} reviews",
-    "writeReview": "Write a review"
+    "writeReview": "Write a review",
+    "contact": "Customer support"
   },
   "common": {
     "ellipsis": "...",
@@ -105,13 +106,18 @@
     "video": {
       "play": "Play video"
     },
-    "headerDetailPage": {
-      "hideFullDescriptionLinkLabel": "Read less",
-      "showFullDescriptionLinkLabel": "Read more"
+    "headerLandingPage": {
+      "collapseBodyCTALabel": "Read less",
+      "expandBodyCTALabel": "Read more"
     }
   },
   "accordion": {
     "showAllDefaultLabel": "See all"
+  },
+  "billboard": {
+    "vehicle": "Vehicle",
+    "tireSize": "Tire size",
+    "brand": "Brand"
   },
   "catalog": {
     "filters": {
@@ -205,6 +211,17 @@
   "support": {
     "enabled": "Need live support?",
     "disabled": "Need support?"
+  },
+  "deals": {
+    "pageHeader": "Tire coupons, deals & rebates",
+    "referAFriendAction": "Refer a friend",
+    "downloadRebateFormAction": "Download rebate form",
+    "viewTirePromotionAction": "View tires on promotion",
+    "dealsSignUp": {
+      "heading": "Get exclusive deals",
+      "description": "Sign up for emails and access exclusive content and savings"
+    },
+    "seoBodyCopy": "At SimpleTire, we care about your bottom line, which is why we carry top quality tires at the cheapest prices possible with fast, free shipping on every tire we sell! To help make your next tire purchase even more affordable, choose from our selection of the best tire deals available including tire coupons, discounts and rebates.\n\nThroughout the year, here you will find some of the best tire sales in the business - from military discounts to cash back offers and even Black Friday tire deals when the time comes.\n\nNot sure when you’ll need to purchase a new set of tires next? Sign up for emails to receive exclusive tire savings and content."
   },
   "location": {
     "loadingCurrentLocationLabel": "Getting current location from your browser.",
@@ -607,5 +624,32 @@
     "tireReviews": "Tire reviews",
     "twitter": "Twitter",
     "youtube": "YouTube"
+  },
+  "contactPage": {
+    "message": {
+      "title": "Get support",
+      "messageTitle": "What can we help with?",
+      "placeholders": {
+        "firstName": "First name",
+        "lastName": "Last name",
+        "email": "Email address",
+        "phoneNumber": "Phone number",
+        "orderNumber": "Order number (optional)",
+        "message": "Write your message here"
+      },
+      "attach": "Attach a file",
+      "submitButton": "Submit",
+      "success": "Thank you for sending the message!",
+      "error": "Oops, something went wrong! <br />Please try again."
+    }
+  },
+  "seoPage": {
+    "brandHubPage": {
+      "header": "Shop by tire brand",
+      "subHeader": "Search the largest selection of tires anywhere and find the right tires for your vehicle.",
+      "popularBrandsHeaderCopy": "Popular Brands",
+      "allBrandsHeaderCopy": "All Brands",
+      "searchInputPlaceholder": "Search brands"
+    }
   }
 }

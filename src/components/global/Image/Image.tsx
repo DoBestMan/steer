@@ -9,7 +9,7 @@ import { useImageProps } from './Image.hooks';
 import styles from './Image.styles';
 import { getMinimalQuery, getSrcset } from './Image.utils';
 
-interface Props extends SiteImageExtended {
+export interface ImageProps extends SiteImageExtended {
   altText: string;
   as?: ReactType;
   height?: string | number;
@@ -32,7 +32,7 @@ function Image({
   widths,
   noPlaceholder,
   ...rest
-}: Props) {
+}: ImageProps) {
   const imgRef = useRef<HTMLDivElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
 

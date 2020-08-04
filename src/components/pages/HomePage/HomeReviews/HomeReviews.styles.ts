@@ -9,6 +9,9 @@ const styles: StylesMap = {
       marginBottom: 0,
     },
   },
+  isEditorialModule: {
+    marginTop: SPACING.SIZE_40,
+  },
   link: {
     marginTop: SPACING.SIZE_40,
 

@@ -4,6 +4,8 @@ import {
 } from '~/components/modules/ReviewListing/RatingsTable/RatingsTable.mocks';
 
 export const mockReviewListing = {
+  body:
+    'All-season or winter tires? Goodyear or Bridgestone? Get the answers you need here.\n\n Hidden text here.',
   breadcrumbs: [
     {
       label: 'Home',
@@ -15,8 +17,6 @@ export const mockReviewListing = {
       url: '/tire-reviews',
     },
   ],
-  description:
-    'All-season or winter tires? Goodyear or Bridgestone? Get the answers you need here.\n\n Hidden text here.',
   filters: [
     {
       label: 'Brand',
@@ -325,7 +325,7 @@ export const mockReviewListing = {
       ],
     },
   ],
-  header: 'Tire Reviews',
   listResultMetadata: mockListResultMetadata,
   ratings: mockTireRatings,
+  title: 'Tire Reviews',
 };

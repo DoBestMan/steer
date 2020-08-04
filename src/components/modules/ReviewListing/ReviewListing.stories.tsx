@@ -12,19 +12,19 @@ export default {
 export function FullPage() {
   const {
     breadcrumbs,
-    description,
+    body,
     filters,
-    header,
-    listResultMetadata,
+    title,
     ratings,
+    listResultMetadata,
   } = mockReviewListing;
 
   return (
     <div>
       <Header
         breadcrumbs={breadcrumbs}
-        description={description}
-        header={header}
+        body={body}
+        title={title}
         filters={filters}
       />
       <RatingsTable

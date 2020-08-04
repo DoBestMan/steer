@@ -1,3 +1,4 @@
+import { SiteDeals } from '~/data/models/SiteDeals';
 import { SiteGlobals } from '~/data/models/SiteGlobals';
 import { SiteHero } from '~/data/models/SiteHero';
 import { SiteInsights } from '~/data/models/SiteInsights';
@@ -53,5 +54,14 @@ export async function backendGetSiteReviews() {
     method: 'get',
   });
 
+  return response;
+}
+
+export async function backendGetSiteDeals() {
+  const response = await fetch<SiteDeals>({
+    endpoint: '/v1/site/deals',
+    includeAuthorization: true,
+    method: 'get',
+  });
   return response;
 }

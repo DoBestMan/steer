@@ -3,26 +3,26 @@ import Breadcrumbs, {
 } from '~/components/global/Breadcrumbs/Breadcrumbs';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
-import HeaderDetailPage, {
-  HeaderDetailPageProps,
-} from '~/components/global/HeaderDetailPage/HeaderDetailPage';
+import HeaderLandingPage, {
+  HeaderLandingPageProps,
+} from '~/components/global/HeaderLandingPage/HeaderLandingPage';
 import Filters from '~/components/modules/ReviewListing/Filters/Filters';
 import { FilterItem } from '~/components/modules/ReviewListing/Filters/Filters.types';
 import { HEADER_SIZE, THEME } from '~/lib/constants';
 
 import styles from './Header.styles';
 
-export interface ReviewListingHeaderProps extends HeaderDetailPageProps {
+export interface ReviewListingHeaderProps extends HeaderLandingPageProps {
   breadcrumbs: BreadcrumbsItem[];
   filters: FilterItem[];
 }
 
 function Header({
   breadcrumbs,
-  description,
+  body,
   filters,
-  header,
-  subHeader,
+  title,
+  subTitle,
 }: ReviewListingHeaderProps) {
   return (
     <Grid css={styles.container}>
@@ -30,12 +30,12 @@ function Header({
         <Breadcrumbs navigationItems={breadcrumbs} theme={THEME.ORANGE} />
       </GridItem>
       <GridItem>
-        <HeaderDetailPage
-          description={description}
-          header={header}
-          subHeader={subHeader}
+        <HeaderLandingPage
+          body={body}
+          title={title}
+          subTitle={subTitle}
           theme={THEME.ORANGE}
-          size={HEADER_SIZE.PRIMARY}
+          titleSize={HEADER_SIZE.PRIMARY}
         />
       </GridItem>
       <GridItem css={styles.filtersContainer}>
