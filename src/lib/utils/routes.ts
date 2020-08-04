@@ -155,3 +155,18 @@ export function getParsedHash(path: string): ParsedQuery | null {
 
   return queryString.parse(hash);
 }
+
+/*
+ * Using `getStaticProp()` + `unstable_revalidate` seems to have introduced a bug:
+ * When the homepage is rebuild a few second after the initial build, the `router.asPath` value is `/index` instead of `/`.
+ * An issue has been opened on the nextJS repo, but meanwhile this fix is specifically aimed at this issue.
+ * Issue: https://github.com/vercel/next.js/issues/15845
+ */
+
+export function fixHomepageRoute(path: string): string {
+  if (path === '/index') {
+    return '/';
+  }
+
+  return path;
+}

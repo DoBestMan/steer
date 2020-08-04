@@ -13,6 +13,7 @@ import { useGlobalToastContext } from '~/context/GlobalToast.context';
 import { NavContextProvider } from '~/context/Nav.context';
 import { useRouterContext } from '~/context/Router.context';
 import { ROUTE_MAP, ROUTES, TIME } from '~/lib/constants';
+import { fixHomepageRoute } from '~/lib/utils/routes';
 
 import FooterContainer from '../Footer/Footer.container';
 import { animations, styles } from './App.styles';
@@ -40,7 +41,7 @@ function App({ children, ...rest }: Props) {
     isGlobalToastOpen,
   } = useGlobalToastContext();
 
-  const route = router.asPath || rest.route;
+  const route = fixHomepageRoute(router.asPath || rest.route);
 
   const isHomepage = route === ROUTE_MAP[ROUTES.HOME];
 
