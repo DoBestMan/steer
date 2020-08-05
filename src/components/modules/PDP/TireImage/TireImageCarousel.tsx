@@ -54,24 +54,48 @@ interface Props {
   setCurrentIndex: (index: number) => void;
 }
 
-function NextButton() {
+function NextButton({
+  disabled,
+  swiper,
+}: {
+  disabled: boolean;
+  swiper: SwiperInstance;
+}) {
+  function handleClick() {
+    swiper.slideNext();
+  }
+
   return (
     <button
-      className="swiper-button-prev"
+      disabled={disabled}
+      onClick={handleClick}
       aria-label={ui('pdp.tireImage.previousButtonLabel')}
+      css={[styles.navigationButton, styles.navigationNext]}
     >
-      <Icon name={ICONS.CHEVRON_LEFT} />
+      <Icon name={ICONS.CHEVRON_RIGHT} />
     </button>
   );
 }
 
-function PrevButton() {
+function PrevButton({
+  disabled,
+  swiper,
+}: {
+  disabled: boolean;
+  swiper: SwiperInstance;
+}) {
+  function handleClick() {
+    swiper.slidePrev();
+  }
+
   return (
     <button
-      className="swiper-button-next"
+      disabled={disabled}
+      onClick={handleClick}
       aria-label={ui('pdp.tireImage.nextButtonLabel')}
+      css={[styles.navigationButton, styles.navigationPrev]}
     >
-      <Icon name={ICONS.CHEVRON_RIGHT} />
+      <Icon name={ICONS.CHEVRON_LEFT} />
     </button>
   );
 }
@@ -98,13 +122,6 @@ function TireImageCarousel({
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev',
         },
-      }
-    : null;
-
-  const navigation = !isFullscreen
-    ? {
-        renderPrevButton: PrevButton,
-        renderNextButton: NextButton,
       }
     : null;
 
@@ -161,7 +178,8 @@ function TireImageCarousel({
           ...params,
           initialSlide: currentIndex,
           ...pagination,
-          ...navigation,
+          renderNextButton: null,
+          renderPrevButton: null,
         }}
         getSwiper={setSwiper}
         activeSlide={currentIndex}
@@ -190,13 +208,21 @@ function TireImageCarousel({
         })}
       </Carousel>
 
-      {hasThumbs && (
+      {hasThumbs ? (
         <TireImageThumbs
           currentIndex={currentIndex}
           assetList={assetList}
           isFullscreen={isFullscreen}
           swiper={swiper}
         />
+      ) : (
+        <>
+          <PrevButton swiper={swiper} disabled={currentIndex === 0} />
+          <NextButton
+            swiper={swiper}
+            disabled={currentIndex === assetList.length - 1}
+          />
+        </>
       )}
     </div>
   );

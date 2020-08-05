@@ -1,5 +1,13 @@
 import { FULLSCREEN_PADDINGS as MODAL_PADDINGS } from '~/components/global/Modal/Modal.styles';
-import { BORDERS, COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
+import {
+  BORDERS,
+  COLORS,
+  GRID_MARGIN,
+  MQ,
+  SPACING,
+  StylesMap,
+  Z_INDEX,
+} from '~/lib/constants';
 import { ratioToPercentage } from '~/lib/utils/number';
 
 const CONSTANTS = {
@@ -34,6 +42,7 @@ const styles: StylesMap = {
   container: {
     /* eslint-disable sort-keys */
     marginBottom: SPACING.SIZE_15,
+    position: 'relative',
 
     [MQ.M]: {
       marginBottom: SPACING.SIZE_20,
@@ -65,6 +74,13 @@ const styles: StylesMap = {
     },
 
     '.tire-image-pagination': {
+      marginLeft: GRID_MARGIN.S,
+      marginTop: SPACING.SIZE_10,
+
+      [MQ.M]: {
+        marginLeft: GRID_MARGIN.M,
+      },
+
       [MQ.L]: {
         display: 'none',
       },
@@ -79,28 +95,6 @@ const styles: StylesMap = {
       },
       '.swiper-pagination-bullet-active': {
         background: COLORS.LIGHT.GRAY_70,
-      },
-    },
-
-    '.swiper-button-prev, .swiper-button-next': {
-      '&.swiper-button-disabled': {
-        opacity: 0,
-      },
-
-      ':after': {
-        content: 'none',
-      },
-
-      ':hover svg': {
-        color: COLORS.GLOBAL.BLACK,
-      },
-
-      svg: {
-        color: COLORS.LIGHT.GRAY_70,
-      },
-
-      [MQ.L]: {
-        display: 'none',
       },
     },
     /* eslint-enable sort-keys */
@@ -150,6 +144,66 @@ const styles: StylesMap = {
         maxHeight: CONSTANTS.THUMB_SIZES.L,
         maxWidth: CONSTANTS.THUMB_SIZES.L,
       },
+    },
+  },
+  navigation: {
+    alignItems: 'center',
+    bottom: 0,
+    display: 'flex',
+    justifyContent: 'space-between',
+    left: 0,
+    position: 'absolute',
+    right: 0,
+    top: 0,
+
+    [MQ.L]: {
+      display: 'none',
+    },
+  },
+  navigationButton: {
+    marginTop: -SPACING.SIZE_40,
+    padding: SPACING.SIZE_20,
+    position: 'absolute',
+    top: '50%',
+    zIndex: Z_INDEX.FRONT,
+
+    [MQ.M]: {
+      marginTop: -SPACING.SIZE_40,
+    },
+
+    // eslint-disable-next-line
+    svg: {
+      color: COLORS.LIGHT.GRAY_70,
+    },
+
+    // eslint-disable-next-line
+    '&:hover svg': {
+      color: COLORS.GLOBAL.BLACK,
+    },
+
+    // eslint-disable-next-line
+    '&:disabled ': {
+      pointerEvents: 'none',
+
+      svg: {
+        color: COLORS.LIGHT.GRAY_20,
+      },
+    },
+  },
+  navigationNext: {
+    right: 0,
+    padding: SPACING.SIZE_20,
+
+    [MQ.M]: {
+      right: SPACING.SIZE_20,
+    },
+  },
+  navigationPrev: {
+    left: 0,
+    padding: SPACING.SIZE_20,
+
+    [MQ.M]: {
+      left: SPACING.SIZE_20,
     },
   },
   slide: {

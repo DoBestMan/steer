@@ -78,7 +78,12 @@ function ProductDetail({ serverData }: ProductDetailData) {
         <GridItem gridColumnL="start/8" gridRowL="1" css={styles.breadcrumbs}>
           <Breadcrumbs navigationItems={breadcrumbs} />
         </GridItem>
-        <GridItem gridColumnL="start/8" gridRowL="2/3" css={styles.tireImage}>
+        <GridItem
+          fullbleed
+          gridColumnL="start/8"
+          gridRowL="2/3"
+          css={styles.tireImage}
+        >
           <TireImage assetList={assetList} brand={productInfo.brand} />
         </GridItem>
         <GridItem
