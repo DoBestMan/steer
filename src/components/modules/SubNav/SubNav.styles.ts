@@ -177,7 +177,7 @@ const styles: StylesMap = {
       height: '100%',
       position: 'fixed',
       width: '100%',
-      zIndex: Z_INDEX.TOP,
+      zIndex: Z_INDEX.ABOVE,
     },
   },
   overlayHitbox: {

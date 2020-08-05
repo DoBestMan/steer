@@ -14,6 +14,7 @@ import {
   SPACING,
   StylesMap,
   TIME,
+  Z_INDEX,
 } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
@@ -132,7 +133,7 @@ export const styles: StylesMap = {
   copyContainer: {
     color: COLORS.GLOBAL.BLACK,
     position: 'relative',
-    zIndex: 1,
+    zIndex: Z_INDEX.FRONT,
   },
   description: [
     typography.bodyCopy,

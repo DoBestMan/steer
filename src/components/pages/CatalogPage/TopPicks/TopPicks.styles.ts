@@ -148,7 +148,7 @@ export const styles: CSSObject = {
     position: 'absolute',
     transition: `all ${TIME.MS300}ms ${EASING.CUBIC_EASE_OUT}`,
     width: '100%',
-    zIndex: 2,
+    zIndex: Z_INDEX.TOP,
 
     [MQ.M]: {
       height: `calc(${TOP_CONTENT_HEIGHT.M} - ${

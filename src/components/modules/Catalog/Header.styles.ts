@@ -44,7 +44,7 @@ const styles: StylesMap = {
     position: 'absolute',
     top: 0,
     width: '100%',
-    zIndex: -1,
+    zIndex: Z_INDEX.BEHIND,
   },
   info: [
     typography.primarySubhead,
