@@ -7,7 +7,7 @@ import {
   LinkType,
   NAV_TARGETS,
 } from '~/components/modules/Nav/Nav.types';
-import { ROUTE_MAP, ROUTES } from '~/lib/constants';
+import { ACCOUNT_ROUTE, ROUTE_MAP, ROUTES } from '~/lib/constants';
 import { createContext } from '~/lib/utils/context';
 import { ui } from '~/lib/utils/ui-dictionary';
 
@@ -50,7 +50,11 @@ export const dealsLink = {
   text: ui('links.deals'),
 };
 export const accountLinks = [
-  { href: '/', isExternal: true, text: ui('links.account') },
+  {
+    href: ACCOUNT_ROUTE,
+    isExternal: true,
+    text: ui('links.account'),
+  },
   {
     href: ROUTE_MAP[ROUTES.ORDER_TRACKING],
     isExternal: false,
