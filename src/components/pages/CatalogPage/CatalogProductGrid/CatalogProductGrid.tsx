@@ -25,9 +25,13 @@ function CatalogProductGrid({
   pagination,
   fetchNewProducts,
 }: Props & Pick<ListResultMetadata, 'pagination'>) {
+  const {
+    isAdvancedView,
+    isLoading,
+    displayedProducts,
+    setDisplayedProducts,
+  } = useCatalogPageContext();
   const [currentPage, setCurrentPage] = useState(1);
-  const { isAdvancedView, isLoading } = useCatalogPageContext();
-  const [displayedProducts, setDisplayedProducts] = useState(productList);
   const [nextProducts, setNextProducts] = useState(pagination?.resultsPerPage);
   const [scrollPosition, setScrollPosition] = useState<number>();
 
@@ -38,12 +42,13 @@ function CatalogProductGrid({
   }, [scrollPosition]);
 
   useEffect(() => {
-    // Reset listing if productList changes (e.g. filters are applied)
-    setCurrentPage(1);
-    setDisplayedProducts(productList);
-    setNextProducts(pagination?.resultsPerPage);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [productList]);
+    // Reset listing if displayedProducts has been reset (e.g. filters are applied)
+    if (displayedProducts.length === 0) {
+      setDisplayedProducts(productList);
+      setCurrentPage(1);
+      setNextProducts(pagination?.resultsPerPage);
+    }
+  }, [displayedProducts, productList, setDisplayedProducts, pagination]);
 
   const handleLoadMore = async () => {
     const newPage = currentPage + 1;
