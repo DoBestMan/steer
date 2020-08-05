@@ -5,7 +5,7 @@ import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Link from '~/components/global/Link/Link';
 import Toggle from '~/components/global/Toggle/Toggle';
 import { useCatalogPageContext } from '~/context/CatalogPage.context';
-import { LINK_ICON_POSITION, LINK_TYPES } from '~/lib/constants';
+import { LINK_ICON_POSITION, LINK_TYPES, THEME } from '~/lib/constants';
 import { scrollTo } from '~/lib/helpers/scroll';
 import { ui } from '~/lib/utils/ui-dictionary';
 
@@ -70,6 +70,7 @@ export default function HeaderInfo({
         onClick={toggleLocation}
         as={LINK_TYPES.BUTTON}
         css={[styles.link, infoStyles]}
+        theme={THEME.ORANGE}
       >
         {location}
       </Link>

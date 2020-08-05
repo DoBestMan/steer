@@ -82,6 +82,8 @@ export const themedStyles: StylesMap = {
   [LINK_THEME.LIGHT_HIGHLIGHTED]: [links.light, links.lightHighlighted],
 
   [THEME.LIGHT]: links.light,
+
+  [THEME.ORANGE]: links.light,
 };
 
 export const iconCTA = {
