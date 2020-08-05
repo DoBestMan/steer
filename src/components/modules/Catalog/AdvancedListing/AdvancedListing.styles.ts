@@ -27,8 +27,12 @@ const styles: CSSObject = {
       height: '100%',
       width: 'auto',
     },
-    marginBottom: SPACING.SIZE_05,
+    marginBottom: SPACING.SIZE_10,
     width: '100%',
+
+    [MQ.M]: {
+      marginBottom: SPACING.SIZE_15,
+    },
 
     [MQ.XL]: {
       marginBottom: SPACING.SIZE_20,
@@ -62,10 +66,12 @@ const styles: CSSObject = {
     },
   },
   info: {
-    borderBottom: BORDERS.SOLID_GRAY_20_1PX,
-    padding: `${SPACING.SIZE_20}px 0`,
-    [MQ.M]: { padding: `0 0 ${SPACING.SIZE_20}px 0` },
-    [MQ.XL]: { padding: `0 0 ${SPACING.SIZE_30}px 0` },
+    padding: `${SPACING.SIZE_25}px 0 0`,
+    [MQ.M]: {
+      borderBottom: BORDERS.SOLID_GRAY_20_1PX,
+      padding: `${SPACING.SIZE_15}px 0 ${SPACING.SIZE_20}px 0`,
+    },
+    [MQ.XL]: { padding: `${SPACING.SIZE_20}px 0 ${SPACING.SIZE_30}px 0` },
   },
   leftSection: {
     display: 'flex',
@@ -73,13 +79,14 @@ const styles: CSSObject = {
     flexDirection: 'column',
   },
   linkIcon: {
-    marginLeft: 5,
-    width: 5,
+    display: 'inline-flex',
     height: 9,
+    marginLeft: 5,
+    position: 'relative',
+    top: 1,
+    width: 5,
   },
   linkText: {
-    alignItems: 'center',
-    display: 'flex',
     '&::after': {
       content: '""',
       height: '100%',
@@ -92,10 +99,9 @@ const styles: CSSObject = {
   moment: [
     typography.secondarySubhead,
     {
-      alignItems: 'center',
       color: COLORS.LIGHT.GRAY_70,
       display: 'flex',
-      marginBottom: SPACING.SIZE_02,
+      margin: `${SPACING.SIZE_01}px 0 ${SPACING.SIZE_05}px`,
       [MQ.XL]: { lineHeight: '20px' },
     },
   ],
@@ -191,9 +197,10 @@ const styles: CSSObject = {
     },
   },
   title: [
-    typography.labelHeadline,
+    typography.secondarySubhead,
     {
       color: COLORS.GLOBAL.BLACK,
+      [MQ.L]: typography.primarySubhead,
     },
   ],
 };

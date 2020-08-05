@@ -15,7 +15,7 @@ export const defaultTheme = {
     },
     buttonTheme: THEME.ORANGE,
     text: {
-      color: COLORS.GLOBAL.BLACK,
+      color: COLORS.ORANGE.SHADE_85,
     },
   },
 };

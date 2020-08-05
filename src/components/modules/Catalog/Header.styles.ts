@@ -62,9 +62,6 @@ const styles: StylesMap = {
   link: {
     marginLeft: SPACING.SIZE_05,
   },
-  location: {
-    color: COLORS.GLOBAL.BLACK,
-  },
   navOffset: {
     [MQ.S]: {
       paddingTop: 150,
