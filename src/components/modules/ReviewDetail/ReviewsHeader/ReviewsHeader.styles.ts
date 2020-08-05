@@ -42,6 +42,6 @@ const styles: StylesMap = {
   statsContainer: {
     marginTop: SPACING.SIZE_40,
   },
-  title: [typography.primaryHeadline, { marginBottom: SPACING.SIZE_10 }],
+  title: typography.primaryHeadline,
 };
 export default styles;

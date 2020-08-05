@@ -7,7 +7,6 @@ const styles = {
     marginRight: SPACING.SIZE_05,
   },
   rating: {
-    fontSize: 'inherit',
     lineHeight: 'inherit',
     marginLeft: SPACING.SIZE_10,
   },
