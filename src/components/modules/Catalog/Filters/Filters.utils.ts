@@ -122,6 +122,11 @@ export function getInitialFiltersState(
         group.items.forEach((item: SiteCatalogFilterItem) => {
           if (item.state === SiteCatalogFilterItemStateEnum.Selected) {
             Object.keys(item.value).forEach((key) => {
+              if (!initialState[key]) {
+                initialState[key] = item.value[key];
+                return;
+              }
+
               if (
                 initialState[key] &&
                 !initialState[key].includes(item.value[key])
@@ -129,7 +134,6 @@ export function getInitialFiltersState(
                 initialState[key] = initialState[key] + ',' + item.value[key];
                 return;
               }
-              initialState[key] = item.value[key];
             });
           }
         });

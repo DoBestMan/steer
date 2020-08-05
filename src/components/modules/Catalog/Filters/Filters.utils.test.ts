@@ -167,6 +167,48 @@ describe('Filters.utils', () => {
       expect(initialStateMultiple.category).toEqual('allSeason,winter');
     });
 
+    it('does not add identical filters from other groups that exist in state (unique to list)', () => {
+      // first group has active val, second group does not
+      const mockListDupe = {
+        ...mockList,
+        filterGroups: [
+          ...mockList.filterGroups,
+          {
+            items: [
+              {
+                value: {
+                  state: 'Selected',
+                  foo: 'bar',
+                },
+              },
+            ],
+          },
+          {
+            items: [
+              {
+                state: 'Selected',
+                value: {
+                  foo: 'baz',
+                },
+              },
+            ],
+          },
+          {
+            items: [
+              {
+                state: 'Selected',
+                value: { foo: 'bar' }, // repeat
+              },
+            ],
+          },
+        ],
+      } as SiteCatalogFilterList;
+
+      const { initialState } = getInitialFiltersState([mockListDupe], []);
+
+      expect(initialState).toHaveProperty('foo', 'baz,bar');
+    });
+
     it('checks the status of toggle filters to determine if the popular filters button is active', () => {
       const {
         isPopularActive: mockPopularActiveFalse,
