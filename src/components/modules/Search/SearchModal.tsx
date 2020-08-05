@@ -1,4 +1,5 @@
 import { clearAllBodyScrollLocks, disableBodyScroll } from 'body-scroll-lock';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useRef } from 'react';
 
@@ -8,7 +9,7 @@ import { useModalContext } from '~/context/Modal.context';
 import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
 import { MODAL_THEME } from '~/lib/constants';
 
-import Search from './Search';
+const Search = dynamic(() => import('./Search'));
 
 function SearchModal() {
   const {
