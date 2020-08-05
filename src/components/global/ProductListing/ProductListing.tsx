@@ -4,7 +4,7 @@ import Image from '~/components/global/Image/Image';
 import BaseLink from '~/components/global/Link/BaseLink';
 import Prices from '~/components/global/Prices/Prices';
 import PromoTag from '~/components/global/PromoTag/PromoTag';
-import Stars from '~/components/global/Stars/Stars';
+import Stars, { HALF_WIDTH_STARS } from '~/components/global/Stars/Stars';
 import { COLORS } from '~/lib/constants';
 import { SHADOW_SRC } from '~/lib/constants/image';
 import { getSquareImageTransformations } from '~/lib/utils/cloudinary/cloudinary';
@@ -116,7 +116,11 @@ function ProductListing({
         </h3>
         {rating && (
           <div css={styles.rating}>
-            <Stars isSmall color={COLORS.LIGHT.GRAY_70} number={rating.value} />
+            <Stars
+              color={COLORS.LIGHT.GRAY_70}
+              number={rating.value}
+              width={HALF_WIDTH_STARS}
+            />
             <span css={styles.ratingQuantity}>({rating.quantity})</span>
           </div>
         )}

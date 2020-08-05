@@ -10,20 +10,15 @@ import styles from './Stars.styles';
 function StarsWithRating({
   bgColor,
   color = COLORS.GLOBAL.ORANGE,
-  isSmall,
   number,
+  width,
 }: StarsProps) {
   const formattedRating = numberWithDecimal(number);
   const a11yLabel = ` ${ui('common.ratings.outOf')} ${RATINGS.MAX_RATING}`;
 
   return (
     <div css={styles.ratingContainer}>
-      <Stars
-        color={color}
-        isSmall={isSmall}
-        number={number}
-        bgColor={bgColor}
-      />
+      <Stars color={color} number={number} bgColor={bgColor} width={width} />
       <div css={[typography.labelHeadlineLarge, styles.rating, { color }]}>
         {formattedRating}
       </div>

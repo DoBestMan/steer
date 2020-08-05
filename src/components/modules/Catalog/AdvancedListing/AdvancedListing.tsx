@@ -19,6 +19,7 @@ import {
 } from '~/lib/constants';
 import { PRODUCT_IMAGE_TYPES } from '~/lib/constants/productImage.types';
 import { getCroppedImageTransformations } from '~/lib/utils/cloudinary/cloudinary';
+import { numberWithDecimal } from '~/lib/utils/number';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
 
@@ -133,26 +134,28 @@ function AdvancedListing({
         >
           {rating && (
             <div css={styles.reviews}>
-              <div css={styles.rating}>
-                <Stars
-                  isSmall={bk !== BREAKPOINT_SIZES.XL}
-                  bgColor={COLORS.LIGHT.OFF_WHITE}
-                  color={
-                    bk === BREAKPOINT_SIZES.XL
-                      ? COLORS.GLOBAL.ORANGE
-                      : COLORS.GLOBAL.BLACK
-                  }
-                  number={rating.value}
-                />
-                <span css={styles.ratingValue}>
-                  {rating.value}{' '}
-                  <span css={styles.ratingQuantity}>({rating.quantity})</span>
-                </span>
-              </div>
-              <div css={styles.reviewsCount}>
-                {ui('catalog.productListing.customerReviews', {
-                  number: rating.quantity,
-                })}
+              <div>
+                <div css={styles.rating}>
+                  <Stars
+                    bgColor={COLORS.LIGHT.OFF_WHITE}
+                    color={
+                      bk === BREAKPOINT_SIZES.XL
+                        ? COLORS.GLOBAL.ORANGE
+                        : COLORS.GLOBAL.BLACK
+                    }
+                    number={rating.value}
+                    width={bk !== BREAKPOINT_SIZES.XL ? 65 : 78}
+                  />
+                  <span css={styles.ratingValue}>
+                    {numberWithDecimal(rating.value)}{' '}
+                    <span css={styles.ratingQuantity}>({rating.quantity})</span>
+                  </span>
+                </div>
+                <div css={styles.reviewsCount}>
+                  {ui('catalog.productListing.customerReviews', {
+                    number: rating.quantity,
+                  })}
+                </div>
               </div>
             </div>
           )}

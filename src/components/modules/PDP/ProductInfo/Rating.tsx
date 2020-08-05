@@ -1,4 +1,4 @@
-import Stars from '~/components/global/Stars/Stars';
+import Stars, { HALF_WIDTH_STARS } from '~/components/global/Stars/Stars';
 import { COLORS, RATINGS } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
@@ -19,7 +19,11 @@ function Rating({ rating }: Pick<ProductInfoProps, 'rating'>) {
       })}
     >
       <span aria-hidden>
-        <Stars isSmall color={COLORS.GLOBAL.BLACK} number={rating.value} />
+        <Stars
+          color={COLORS.GLOBAL.BLACK}
+          number={rating.value}
+          width={HALF_WIDTH_STARS}
+        />
       </span>
       <span css={styles.ratingValue} aria-hidden>
         {rating.value}

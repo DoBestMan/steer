@@ -8,18 +8,20 @@ import { randomString } from '~/lib/utils/string';
 
 import styles from './Stars.styles';
 
+export const HALF_WIDTH_STARS = ICON_SIZES.FIVE_STARS.w / 2;
+
 export interface Props {
   bgColor?: string;
   color?: string;
-  isSmall?: boolean;
   number: number;
+  width?: number;
 }
 
 function Stars({
   bgColor = COLORS.GLOBAL.GRAY_50,
   number,
   color = COLORS.GLOBAL.ORANGE,
-  isSmall,
+  width,
 }: Props) {
   const [ratingGradientId, setRatingGradientId] = useState<string>();
   const ratingFillWidth = percentageFromNumber(number, RATINGS.MAX_RATING);
@@ -29,12 +31,7 @@ function Stars({
   }, []);
 
   return (
-    <div
-      css={[
-        styles.container,
-        { width: isSmall ? ICON_SIZES.FIVE_STARS.w / 2 : 'auto' },
-      ]}
-    >
+    <div css={[styles.container, { width: width ? width : 'auto' }]}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
@@ -60,7 +57,7 @@ function Stars({
         css={[
           {
             '--rating-gradient-id': `url(#${ratingGradientId})`,
-            width: isSmall ? ICON_SIZES.FIVE_STARS.w / 2 : 'auto',
+            width: width ? width : 'auto',
           },
           styles.stars,
         ]}

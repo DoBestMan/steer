@@ -1,9 +1,9 @@
-import { boolean, number, select } from '@storybook/addon-knobs';
+import { number, select } from '@storybook/addon-knobs';
 
 import Grid from '~/components/global/Grid/Grid';
 import { COLORS } from '~/lib/constants';
 
-import { default as StarsComponent } from './Stars';
+import { default as StarsComponent, HALF_WIDTH_STARS } from './Stars';
 import { default as StarsWithRatingComponent } from './StarsWithRating';
 
 export default {
@@ -25,6 +25,7 @@ const colorOptions = {
 
 export function Stars() {
   const color = select('Color', colorOptions, COLORS.GLOBAL.ORANGE);
+
   return (
     <Grid
       css={{
@@ -34,8 +35,8 @@ export function Stars() {
     >
       <StarsComponent
         color={color}
-        isSmall={boolean('Small', false)}
         number={number('Number', 3.2, starOptions)}
+        width={number('Width', HALF_WIDTH_STARS)}
       />
     </Grid>
   );
@@ -43,6 +44,7 @@ export function Stars() {
 
 export function StarsWithRating() {
   const color = select('Color', colorOptions, COLORS.GLOBAL.ORANGE);
+
   return (
     <Grid
       css={{
@@ -52,8 +54,8 @@ export function StarsWithRating() {
     >
       <StarsWithRatingComponent
         color={color}
-        isSmall={boolean('Small', false)}
         number={number('Number', 4.8, starOptions)}
+        width={number('Width', HALF_WIDTH_STARS)}
       />
     </Grid>
   );

@@ -2,7 +2,7 @@ import Button from '~/components/global/Button/Button';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import BaseLink from '~/components/global/Link/BaseLink';
-import Stars from '~/components/global/Stars/Stars';
+import Stars, { HALF_WIDTH_STARS } from '~/components/global/Stars/Stars';
 import { ListResultMetadata } from '~/data/models/ListResultMetadata';
 import { SiteCatalogSortListItem } from '~/data/models/SiteCatalogSortListItem';
 import { SiteLink } from '~/data/models/SiteLink';
@@ -134,7 +134,7 @@ function RatingsTable({
                   gridColumnXL="6/7"
                 >
                   <span>
-                    <Stars isSmall number={review.rating} />
+                    <Stars number={review.rating} width={HALF_WIDTH_STARS} />
                     <span css={screenReaderText}>{a11yLabel}</span>
                   </span>
                 </GridItem>

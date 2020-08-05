@@ -9,7 +9,7 @@ import MomentList, {
 } from '~/components/global/MomentList/MomentList';
 import { Props as RatingsListItem } from '~/components/global/RatingsList/RatingsBar/RatingsBar';
 import RatingsList from '~/components/global/RatingsList/RatingsList';
-import Stars from '~/components/global/Stars/Stars';
+import Stars, { HALF_WIDTH_STARS } from '~/components/global/Stars/Stars';
 import { THEME } from '~/lib/constants';
 import { truncateText } from '~/lib/utils/string';
 import { ui } from '~/lib/utils/ui-dictionary';
@@ -65,7 +65,7 @@ function ReviewCard({
     <article css={[styles.container, themeStyles[theme].container]}>
       <div css={styles.ratingTopContainer}>
         <span css={[styles.title, themeStyles[theme].title]}>{title}</span>
-        <Stars number={ratingStars} isSmall />
+        <Stars number={ratingStars} width={HALF_WIDTH_STARS} />
       </div>
 
       <div css={[layout.container, layout.centeredHorizontal]}>

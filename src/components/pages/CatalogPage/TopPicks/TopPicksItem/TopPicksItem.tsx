@@ -6,7 +6,7 @@ import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Image from '~/components/global/Image/Image';
 import BaseLink from '~/components/global/Link/BaseLink';
 import Prices from '~/components/global/Prices/Prices';
-import Stars from '~/components/global/Stars/Stars';
+import Stars, { HALF_WIDTH_STARS } from '~/components/global/Stars/Stars';
 import Sticker from '~/components/global/Sticker/Sticker';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { COLORS } from '~/lib/constants';
@@ -313,9 +313,9 @@ function TopPicksItem(props: TopPickItemsProps) {
               {rating && (
                 <div css={styles.rating}>
                   <Stars
-                    isSmall
                     color={COLORS.GLOBAL.BLACK}
                     number={rating.value}
+                    width={HALF_WIDTH_STARS}
                   />
                   <span css={[styles.subcopy, typography.smallCopyTight]}>
                     ({rating.quantity})
