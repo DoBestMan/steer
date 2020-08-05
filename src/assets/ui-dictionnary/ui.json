@@ -66,7 +66,8 @@
     "tireReviews": "Tire reviews",
     "tireReviewsTemp": "{{section}} reviews",
     "writeReview": "Write a review",
-    "contact": "Customer support"
+    "contact": "Customer support",
+    "sitemap": "Sitemap"
   },
   "common": {
     "ellipsis": "...",

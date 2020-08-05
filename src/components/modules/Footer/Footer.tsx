@@ -17,9 +17,14 @@ import FooterPromotions from './FooterPromotions/FooterPromotions';
 export interface Props {
   customerServiceNumber: { display: string; value: string };
   isCustomerServiceEnabled?: boolean;
+  showPromotions?: boolean;
 }
 
-function Footer({ customerServiceNumber, isCustomerServiceEnabled }: Props) {
+function Footer({
+  customerServiceNumber,
+  isCustomerServiceEnabled,
+  showPromotions = true,
+}: Props) {
   return (
     <Grid as="footer" css={styles.container}>
       <GridItem
@@ -29,7 +34,7 @@ function Footer({ customerServiceNumber, isCustomerServiceEnabled }: Props) {
         gridColumnL="2/14"
         isGrid
       >
-        <FooterPromotions />
+        {showPromotions && <FooterPromotions />}
       </GridItem>
       <GridItem
         gridColumnS="2/6"

@@ -26,6 +26,7 @@ export enum ROUTES {
   PRODUCT_DETAIL_PLA = 'productDetailPla',
   PRODUCT_REVIEWS = 'productReviews',
   RETURNS = 'returns',
+  SITEMAP = 'sitemap',
   TERMS = 'terms',
   TIRE_BUYING_GUIDE = 'tireBuyingGuide',
   TIRE_REVIEWS = 'tireReviews',
@@ -71,6 +72,7 @@ export const ROUTE_MAP: Record<ROUTES, string> = {
   [ROUTES.ORDER_TRACKING]: '/track-your-order',
   [ROUTES.PRODUCT_DETAIL_PLA]: '/paid',
   [ROUTES.RETURNS]: '/returns',
+  [ROUTES.SITEMAP]: '/sitemap',
   [ROUTES.TERMS]: '/terms',
   [ROUTES.TIRE_BUYING_GUIDE]: '/tire-buying-guide',
 };
@@ -100,6 +102,7 @@ export const ROUTE_LABELS: Record<string, string | null> = {
   [ROUTE_MAP[ROUTES.TYPE_LANDING]]: ui('breadcrumbs.types'),
   [ROUTE_MAP[ROUTES.TYPE_DETAIL]]: null,
   [ROUTE_MAP[ROUTES.TYPE_REVIEWS]]: ui('breadcrumbs.reviews'),
+  [ROUTE_MAP[ROUTES.SITEMAP]]: ui('breadcrumbs.sitemap'),
   [ROUTE_MAP[ROUTES.VEHICLE_CATALOG]]: null,
   [ROUTE_MAP[ROUTES.WRITE_REVIEW]]: ui('breadcrumbs.writeReview'),
 };
