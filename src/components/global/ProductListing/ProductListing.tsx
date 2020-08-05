@@ -31,6 +31,7 @@ function ProductListing({
   name,
   rating,
   size,
+  isGrouped,
 }: ProductListingProps) {
   const [isHovered, setIsHovered] = useState(false);
   const standardImage = useRef(
@@ -64,7 +65,11 @@ function ProductListing({
 
   return (
     <div
-      css={[styles.root, isHighlighted && styles.rootHighlighted]}
+      css={[
+        styles.root,
+        isHighlighted && styles.rootHighlighted,
+        isGrouped && styles.rootGrouped,
+      ]}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >

@@ -82,6 +82,7 @@ function ProductGroupList({
                   {...product}
                   defaultImage={displayImages.default}
                   hoverImage={displayImages.hover}
+                  isGrouped
                 />
               </div>
             );

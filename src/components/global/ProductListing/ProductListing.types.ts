@@ -11,5 +11,6 @@ export type ProductListingProps = Omit<
 > & {
   defaultImage?: PRODUCT_IMAGE_TYPES;
   hoverImage?: PRODUCT_IMAGE_TYPES;
+  isGrouped?: boolean;
   isHighlighted?: boolean;
 };

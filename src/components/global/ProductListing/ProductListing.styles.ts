@@ -152,7 +152,22 @@ const styles: StylesMap = {
     position: 'relative',
 
     [MQ.M]: {
-      padding: `${SPACING.SIZE_30}px ${SPACING.SIZE_20}px`,
+      padding: `${SPACING.SIZE_40}px ${SPACING.SIZE_20}px ${SPACING.SIZE_30}px ${SPACING.SIZE_20}px`,
+    },
+
+    [MQ.XL]: {
+      padding: `${SPACING.SIZE_80}px ${SPACING.SIZE_20}px ${SPACING.SIZE_40}px ${SPACING.SIZE_20}px`,
+    },
+  },
+  rootGrouped: {
+    paddingTop: SPACING.SIZE_30,
+
+    [MQ.M]: {
+      paddingTop: SPACING.SIZE_30,
+    },
+
+    [MQ.XL]: {
+      paddingTop: SPACING.SIZE_40,
     },
   },
   rootHighlighted: {
