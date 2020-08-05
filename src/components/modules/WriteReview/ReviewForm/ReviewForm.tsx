@@ -105,6 +105,9 @@ function ReviewForm({
   const [formValues, setFormValues] = useState<FormValues>(initialState);
   const [pickerLabels, setPickerLabels] = useState<PickerLabels>({});
   const [isFormValid, setIsFormValid] = useState<boolean>(false);
+  const [hasSubmittedSuccessfully, setHasSubmittedSuccessfully] = useState<
+    boolean
+  >(false);
   const { prevUrl, prevRoute, router } = useRouterContext();
 
   useEffect(() => {
@@ -153,9 +156,10 @@ function ReviewForm({
   const hasValidFields =
     email.test(formValues[FIELDS.EMAIL] || '') && hasValidDate;
 
-  const submitText = isFormValid
-    ? ui('reviews.form.submit.valid')
-    : ui('reviews.form.submit.invalid');
+  const submitText =
+    isFormValid || hasSubmittedSuccessfully
+      ? ui('reviews.form.submit.valid')
+      : ui('reviews.form.submit.invalid');
 
   useEffect(() => {
     if (hasRequiredFieldsFilled && hasValidFields) {
@@ -250,6 +254,7 @@ function ReviewForm({
         reformattedDataForSubmission,
       );
 
+      setHasSubmittedSuccessfully(true);
       setIsFormValid(false);
       setFormValues(initialState);
       setPickerLabels({});
