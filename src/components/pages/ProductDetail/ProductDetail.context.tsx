@@ -36,10 +36,12 @@ export interface ProductDetailContextProps {
   addToCart: ({ shouldAddCoverage }: { shouldAddCoverage: boolean }) => void;
   changeSize: (value: string) => void;
   data: ProductDetailResponse | null;
+  isLoading: boolean;
   quantity: Quantity;
   queryParams: Record<string, string>;
   searchForVehicle: () => void;
   setData: (_: ProductDetailResponse) => void;
+  setIsLoading: (_: boolean) => void;
   setQuantity: (_: Quantity) => void;
 }
 
@@ -75,6 +77,7 @@ function useContextSetup({
     front: 0,
     rear: 0,
   });
+  const [isLoading, setIsLoading] = useState(true);
   const [hashParams, setHashParams] = useState(getParsedHash(asPath));
   const queryParams = getQueryParams({
     hashParams,
@@ -147,6 +150,7 @@ function useContextSetup({
 
   const changeSize = useCallback(
     (value) => {
+      setIsLoading(true);
       const interpolatedRoute = interpolateRoute(
         CONSTANTS.PRODUCT_DETAIL_ROUTE,
         {
@@ -165,17 +169,19 @@ function useContextSetup({
         `${interpolatedRoute}#${querystring}`,
       );
     },
-    [isPLA, queryParams, router, hashParams],
+    [isPLA, queryParams, router, hashParams, setIsLoading],
   );
 
   return {
     addToCart,
     changeSize,
     data,
+    isLoading,
     quantity,
     queryParams,
     searchForVehicle,
     setData,
+    setIsLoading,
     setQuantity,
   };
 }

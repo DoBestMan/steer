@@ -1,6 +1,7 @@
 import { ContentModalProps } from '~/components/global/Modal/Modal.types';
 import { PromoTagProps } from '~/components/global/PromoTag/PromoTag';
 import PromoTagCarousel from '~/components/global/PromoTag/PromoTagCarousel';
+import { useProductDetailContext } from '~/components/pages/ProductDetail/ProductDetail.context';
 import { SiteCatalogBrand } from '~/data/models/SiteCatalogBrand';
 import { SitePrice } from '~/data/models/SitePrice';
 import { THEME } from '~/lib/constants';
@@ -71,6 +72,7 @@ function ProductInfo({
   sizeFinder,
   startingPrice,
 }: Props) {
+  const { isLoading } = useProductDetailContext();
   const isOutOfStock = (!price || callForPricing) && size;
   const isTireLine = !size;
 
@@ -124,26 +126,32 @@ function ProductInfo({
           </div>
           <Rating rating={rating} />
         </div>
-        {!isOutOfStock && (
-          <div css={styles.pricesWrapper}>
-            <Price
-              price={price}
-              priceLabel={priceLabel}
-              startingPrice={isTireLine ? startingPrice : undefined}
-              volatileAvailability={volatileAvailability}
-            />
-          </div>
+        {isLoading && !isTireLine ? (
+          <div css={styles.loading} />
+        ) : (
+          <>
+            {!isOutOfStock && (
+              <div css={styles.pricesWrapper}>
+                <Price
+                  price={price}
+                  priceLabel={priceLabel}
+                  startingPrice={isTireLine ? startingPrice : undefined}
+                  volatileAvailability={volatileAvailability}
+                />
+              </div>
+            )}
+            <div css={styles.actionBar}>
+              <PDPActionBar
+                roadHazard={roadHazard}
+                theme={THEME.LIGHT}
+                tirePrice={price?.salePriceInCents}
+                tireSize={size}
+              />
+            </div>
+          </>
         )}
-        <div css={styles.actionBar}>
-          <PDPActionBar
-            roadHazard={roadHazard}
-            theme={THEME.LIGHT}
-            tirePrice={price?.salePriceInCents}
-            tireSize={size}
-          />
-        </div>
       </div>
-      {!!promoTags?.length && (
+      {!isLoading && !!promoTags?.length && (
         <div css={styles.promoTags}>
           <PromoTagCarousel
             tags={promoTags}
@@ -151,7 +159,7 @@ function ProductInfo({
           />
         </div>
       )}
-      {isOutOfStock && (
+      {!isLoading && isOutOfStock && (
         <div css={styles.crossSellWrapper}>
           <OutOfStock
             callForPricing={callForPricing}

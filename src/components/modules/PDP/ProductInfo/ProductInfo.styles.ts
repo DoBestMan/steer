@@ -1,7 +1,9 @@
-import { BORDERS, MQ, SPACING, StylesMap } from '~/lib/constants';
+import { BORDERS, COLORS, MQ, SPACING, StylesMap, TIME } from '~/lib/constants';
+import { fadeIn } from '~/styles/animations.styles';
 import { typography } from '~/styles/typography.styles';
 
 const CONSTANTS = {
+  FADE_IN_ANIMATION: `${fadeIn} ${TIME.MS200}ms ease`,
   HEADER_MAX_WIDTH: 140,
 };
 
@@ -10,6 +12,7 @@ const styles: StylesMap = {
     display: 'none',
 
     [MQ.L]: {
+      animation: CONSTANTS.FADE_IN_ANIMATION,
       display: 'block',
     },
   },
@@ -26,6 +29,7 @@ const styles: StylesMap = {
   crossSellWrapper: [
     typography.bodyCopy,
     {
+      animation: CONSTANTS.FADE_IN_ANIMATION,
       borderTop: BORDERS.SOLID_GRAY_20_1PX,
       marginTop: SPACING.SIZE_20,
       paddingTop: SPACING.SIZE_25,
@@ -44,6 +48,25 @@ const styles: StylesMap = {
   loadIndex: {
     fontWeight: 'normal',
   },
+  loading: {
+    backgroundColor: COLORS.LIGHT.GRAY_10,
+    height: 25,
+    marginBottom: SPACING.SIZE_20,
+    marginTop: SPACING.SIZE_40,
+    paddingTop: SPACING.SIZE_20,
+    width: 70,
+
+    [MQ.M]: {
+      height: 40,
+      width: 120,
+    },
+
+    [MQ.L]: {
+      height: 45,
+      marginBottom: 0,
+      width: 195,
+    },
+  },
   name: {
     display: 'block',
   },
@@ -58,9 +81,10 @@ const styles: StylesMap = {
     },
   },
   pricesWrapper: {
-    textAlign: 'right',
+    animation: CONSTANTS.FADE_IN_ANIMATION,
     marginBottom: SPACING.SIZE_02,
     maxWidth: CONSTANTS.HEADER_MAX_WIDTH,
+    textAlign: 'right',
 
     [MQ.L]: {
       textAlign: 'left',
@@ -70,6 +94,7 @@ const styles: StylesMap = {
     },
   },
   promoTags: {
+    animation: CONSTANTS.FADE_IN_ANIMATION,
     marginBottom: -SPACING.SIZE_05,
     marginTop: SPACING.SIZE_25,
 

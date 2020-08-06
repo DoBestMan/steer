@@ -3,6 +3,7 @@ import { NextRouter } from 'next/router';
 import { PromoTagProps } from '~/components/global/PromoTag/PromoTag';
 import { ProductInfoProps } from '~/components/modules/PDP/ProductInfo/ProductInfo';
 import { SiteProduct } from '~/data/models/SiteProduct';
+import { SiteProductLineAvailableSizeItem } from '~/data/models/SiteProductLineAvailableSizeItem';
 import { SiteProductLineSizeDetailProductStatusEnum } from '~/data/models/SiteProductLineSizeDetail';
 import { SiteProductReviews } from '~/data/models/SiteProductReviews';
 import { ROUTE_MAP, ROUTES } from '~/lib/constants';
@@ -14,14 +15,18 @@ export function mapDataToProductInfo({
   quantity,
   siteProduct,
   siteProductReviews: { performanceRating, reviewsSource },
+  rearSize,
   router: {
     query: { brand },
   },
+  tireSize,
 }: {
   quantity: { front: number; rear?: number };
+  rearSize?: string;
   router: NextRouter;
   siteProduct: SiteProduct;
   siteProductReviews: SiteProductReviews;
+  tireSize?: string;
 }): Omit<ProductInfoProps, 'sizeFinder'> {
   const {
     siteProductLine,
@@ -51,15 +56,27 @@ export function mapDataToProductInfo({
     siteProductLineSizeDetail?.productStatus ===
     SiteProductLineSizeDetailProductStatusEnum.ProductStatusCallForPricing;
 
-  const size = siteProductLineSizeDetail?.size;
-  const loadSpeedRating = siteProductLineSizeDetail?.loadSpeedRating;
+  const listingSize: SiteProductLineAvailableSizeItem | null =
+    (tireSize &&
+      siteProductLineAvailableSizeList.find(
+        (item) => item.siteQueryParams.tireSize === tireSize,
+      )) ||
+    null;
+  const tireSizeLabel = listingSize?.size;
+  const loadSpeedRating = listingSize?.loadSpeedRating;
   const price =
     (!outOfStock && !callForPricing && siteProductLineSizeDetail?.price) ||
     null;
   const priceLabel = siteProductLineSizeDetail?.priceLabel;
 
-  const rearSize = siteProductLineRearSizeDetail?.size;
-  const rearLoadSpeedRating = siteProductLineRearSizeDetail?.loadSpeedRating;
+  const listingRear: SiteProductLineAvailableSizeItem | null =
+    (rearSize &&
+      siteProductLineAvailableSizeList.find(
+        (item) => item.siteQueryParams.tireSize === rearSize,
+      )) ||
+    null;
+  const rearSizeLabel = listingRear?.size;
+  const rearLoadSpeedRating = listingRear?.loadSpeedRating;
   const rearPrice = siteProductLineRearSizeDetail?.price;
 
   const availableSizes = siteProductLineAvailableSizeList?.length;
@@ -77,14 +94,12 @@ export function mapDataToProductInfo({
     value: performanceRating.overall,
   };
 
-  // TODO: use tire size parsed name from API
-  const parsedSize = `p${size?.replace(' ', '-').replace('/', '-')}`;
   const sameSizeSearchResults =
     siteProductLineSizeDetail?.outOfStockTireSizeResultCount;
   const sameSizeSearchURL = interpolateRoute(
     ROUTE_MAP[ROUTES.TIRE_SIZE_CATALOG_OR_CATEGORY],
     {
-      size: parsedSize,
+      size: tireSize || '',
     },
   );
 
@@ -106,11 +121,11 @@ export function mapDataToProductInfo({
     rating,
     rearLoadSpeedRating,
     rearPrice,
-    rearSize,
+    rearSize: rearSizeLabel,
     roadHazard,
     sameSizeSearchResults,
     sameSizeSearchURL,
-    size,
+    size: tireSizeLabel,
     startingPrice,
     volatileAvailability,
   };

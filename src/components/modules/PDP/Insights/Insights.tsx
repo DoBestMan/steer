@@ -1,7 +1,10 @@
 import { ReactNode } from 'react';
+import { Transition } from 'react-transition-group';
+import { ENTERED, TransitionStatus } from 'react-transition-group/Transition';
 
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import { ContentModalProps } from '~/components/global/Modal/Modal.types';
+import { useProductDetailContext } from '~/components/pages/ProductDetail/ProductDetail.context';
 import { SiteProductInsightItem } from '~/data/models/SiteProductInsightItem';
 import { SiteProductInsightsRebate } from '~/data/models/SiteProductInsightsRebate';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
@@ -52,78 +55,97 @@ function Insights({
   vehicle,
   ...rest
 }: Props) {
+  const { isLoading } = useProductDetailContext();
+
   function handleOpenRebate() {
     if (rebate?.siteDynamicModal) {
       openDynamicModal(rebate.siteDynamicModal);
     }
   }
+
   return (
-    <ul css={styles.container} {...rest}>
-      {rebate && (
-        <RenderItem>
-          <button onClick={handleOpenRebate} aria-label={rebate.label}>
-            <InsightsItem
-              highlight
-              icon={{
-                svgId: ICONS.REBATE,
-                type: ICON_IMAGE_TYPE.ICON,
-              }}
-              label={rebate.label}
-              hasAction
-            />
-          </button>
-        </RenderItem>
-      )}
-      {showFitBar && (
-        <RenderItem>
-          <FitButton
-            make={make}
-            vehicle={vehicle}
-            sizeCheckState={sizeCheckState}
-            onFindTiresThatFit={onFindTiresThatFit}
-            onSelectAvailableOption={onSelectAvailableOption}
-            onUnselectVehicle={onUnselectVehicle}
-          />
-        </RenderItem>
-      )}
-      {delivery && (
-        <RenderItem>
-          <button
-            type="button"
-            onClick={handleChangeLocation}
-            aria-label={`${delivery}: ${ui('pdp.insights.changeLocation')}`}
+    <Transition appear in={!isLoading} timeout={0}>
+      {(containerTransitionState: TransitionStatus) => (
+        <div css={styles.root}>
+          <ul
+            css={styles.container}
+            aria-hidden={containerTransitionState !== ENTERED}
+            {...rest}
           >
-            <InsightsItem
-              icon={{
-                svgId: ICONS.SHIPPING_TRUCK_OUTLINE,
-                type: ICON_IMAGE_TYPE.ICON,
-              }}
-              label={delivery}
-              hasAction
-            />
-          </button>
-        </RenderItem>
+            {rebate && (
+              <RenderItem>
+                <button onClick={handleOpenRebate} aria-label={rebate.label}>
+                  <InsightsItem
+                    highlight
+                    icon={{
+                      svgId: ICONS.REBATE,
+                      type: ICON_IMAGE_TYPE.ICON,
+                    }}
+                    label={rebate.label}
+                    hasAction
+                  />
+                </button>
+              </RenderItem>
+            )}
+            {showFitBar && (
+              <RenderItem>
+                <FitButton
+                  make={make}
+                  vehicle={vehicle}
+                  sizeCheckState={sizeCheckState}
+                  onFindTiresThatFit={onFindTiresThatFit}
+                  onSelectAvailableOption={onSelectAvailableOption}
+                  onUnselectVehicle={onUnselectVehicle}
+                />
+              </RenderItem>
+            )}
+            {delivery && (
+              <RenderItem>
+                <button
+                  type="button"
+                  onClick={handleChangeLocation}
+                  aria-label={`${delivery}: ${ui(
+                    'pdp.insights.changeLocation',
+                  )}`}
+                >
+                  <InsightsItem
+                    icon={{
+                      svgId: ICONS.SHIPPING_TRUCK_OUTLINE,
+                      type: ICON_IMAGE_TYPE.ICON,
+                    }}
+                    label={delivery}
+                    hasAction
+                  />
+                </button>
+              </RenderItem>
+            )}
+            {insightItems.map((item, index) => (
+              <RenderItem key={`${item.label}_${index}`}>
+                {item.sectionAnchor ? (
+                  <AnchorButton
+                    label={item.label}
+                    icon={item.icon}
+                    target={item.sectionAnchor}
+                  />
+                ) : (
+                  <InsightsItem label={item.label} icon={item.icon} />
+                )}
+              </RenderItem>
+            ))}
+            <RenderItem>
+              <AnchorButton
+                label={ui('pdp.insights.technicalSpecs')}
+                target={techSpecsAnchor}
+              />
+            </RenderItem>
+          </ul>
+          <div
+            css={styles.loading}
+            aria-hidden={containerTransitionState === ENTERED}
+          />
+        </div>
       )}
-      {insightItems.map((item, index) => (
-        <RenderItem key={`${item.label}_${index}`}>
-          {item.sectionAnchor ? (
-            <AnchorButton
-              label={item.label}
-              icon={item.icon}
-              target={item.sectionAnchor}
-            />
-          ) : (
-            <InsightsItem label={item.label} icon={item.icon} />
-          )}
-        </RenderItem>
-      ))}
-      <RenderItem>
-        <AnchorButton
-          label={ui('pdp.insights.technicalSpecs')}
-          target={techSpecsAnchor}
-        />
-      </RenderItem>
-    </ul>
+    </Transition>
   );
 }
 

@@ -13,9 +13,11 @@ describe('pages/ProductDetails/mappers/breadcrumbs', () => {
     expect(
       mapDataToProductInfo({
         quantity: { front: 4 },
+        rearSize: '100-40r17',
         router: routerMock,
         siteProduct: siteProductMock,
         siteProductReviews: siteProductReviewsMock,
+        tireSize: '200-40r17',
       }),
     ).toMatchObject({
       availableSizes: 3,
@@ -32,7 +34,7 @@ describe('pages/ProductDetails/mappers/breadcrumbs', () => {
       },
       brandURL: '/brands/continental-tires',
       callForPricing: false,
-      loadSpeedRating: '91H',
+      loadSpeedRating: '89H',
       price: {
         estimatedRetailPriceInCents: '15975',
         salePriceInCents: '13296',
@@ -47,15 +49,15 @@ describe('pages/ProductDetails/mappers/breadcrumbs', () => {
         },
       ],
       rating: { quantity: 187, value: 4.9 },
-      rearLoadSpeedRating: '91J',
+      rearLoadSpeedRating: '89H',
       rearPrice: {
         estimatedRetailPriceInCents: '12099',
         salePriceInCents: '12099',
       },
-      rearSize: '215/50 R19',
+      rearSize: '100/40R17',
       sameSizeSearchResults: null,
-      sameSizeSearchURL: '/tire-sizes/p215-50-R17',
-      size: '215/50 R17',
+      sameSizeSearchURL: '/tire-sizes/200-40r17',
+      size: '200/40R17',
       startingPrice: '4999',
       volatileAvailability: false,
     });
@@ -68,6 +70,7 @@ describe('pages/ProductDetails/mappers/breadcrumbs', () => {
         router: routerMock,
         siteProduct: siteProductMock,
         siteProductReviews: siteProductReviewsMock,
+        tireSize: '200-40r17',
       }),
     ).toMatchObject({
       roadHazard: {
@@ -90,6 +93,7 @@ describe('pages/ProductDetails/mappers/breadcrumbs', () => {
           },
         },
         siteProductReviews: siteProductReviewsMock,
+        tireSize: '200-40r17',
       }),
     ).toMatchObject({
       roadHazard: null,
@@ -103,6 +107,7 @@ describe('pages/ProductDetails/mappers/breadcrumbs', () => {
         router: routerMock,
         siteProduct: siteProductMock,
         siteProductReviews: siteProductReviewsMock,
+        tireSize: '200-40r17',
       }),
     ).toMatchObject({
       roadHazard: {
@@ -125,6 +130,7 @@ describe('pages/ProductDetails/mappers/breadcrumbs', () => {
           },
         },
         siteProductReviews: siteProductReviewsMock,
+        tireSize: '200-40r17',
       }),
     ).toMatchObject({
       roadHazard: null,
@@ -144,6 +150,7 @@ describe('pages/ProductDetails/mappers/breadcrumbs', () => {
           },
         },
         siteProductReviews: siteProductReviewsMock,
+        tireSize: '200-40r17',
       }),
     ).toMatchObject({
       roadHazard: null,
@@ -154,6 +161,7 @@ describe('pages/ProductDetails/mappers/breadcrumbs', () => {
     expect(
       mapDataToProductInfo({
         quantity: { front: 2, rear: 2 },
+        rearSize: '100-40r17',
         router: routerMock,
         siteProduct: {
           ...siteProductMock,
@@ -175,6 +183,7 @@ describe('pages/ProductDetails/mappers/breadcrumbs', () => {
           },
         },
         siteProductReviews: siteProductReviewsMock,
+        tireSize: '200-40r17',
       }),
     ).toMatchObject({
       roadHazard: null,

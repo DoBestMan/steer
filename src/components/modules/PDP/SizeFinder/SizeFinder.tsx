@@ -27,7 +27,7 @@ export default function SizeFinder({
 
   const handleChange = useCallback(
     (size: string) => {
-      return onChange(size);
+      onChange(size);
     },
     [onChange],
   );

@@ -63,6 +63,7 @@ interface ResponseProps extends Pick<SiteProductLine, 'assetList'> {
   faq: FAQProps;
   insights: Omit<InsightsProps, 'handleChangeLocation'>;
   installation: InstallationProps | null;
+  isLoading: boolean;
   isPLA: boolean;
   linkingData: ProductLinkingData | null;
   meta: MetaProps;
@@ -90,8 +91,10 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
     data: contextData,
     quantity,
     queryParams,
+    isLoading,
     setData,
     setQuantity,
+    setIsLoading,
   } = productDetail;
   const router = useRouter();
   const { asPath } = router;
@@ -104,7 +107,7 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
   const { data, error, isValidating } = useApiDataWithDefault<
     ProductDetailResponse
   >({
-    defaultData: serverData,
+    defaultData: contextData || serverData,
     endpoint: '/product-detail',
     includeUserRegion: true,
     includeUserZip: true,
@@ -141,12 +144,20 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
   }, [quantity, queryParams, setQuantity]);
 
   useEffect(() => {
+    if (isValidating) {
+      return;
+    }
+
     if (isStrictEqual(data, contextData)) {
       return;
     }
 
     setData(data);
-  }, [data, contextData, setData]);
+  }, [data, contextData, setData, isValidating]);
+
+  useEffect(() => {
+    setIsLoading(isValidating);
+  }, [isValidating, setIsLoading]);
 
   /**
    * Reroute query parameters to hash parameters on the front-end
@@ -170,9 +181,11 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
 
   const productInfo = mapDataToProductInfo({
     quantity,
+    rearSize: queryParams.rearSize,
     router,
     siteProduct,
     siteProductReviews,
+    tireSize: queryParams.tireSize,
   });
 
   return {
@@ -193,6 +206,7 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
       userPersonalization,
     }),
     installation: mapDataToInstallation({ siteProduct }),
+    isLoading,
     isPLA,
     linkingData: mapDataToLinkingData({
       hostUrl,

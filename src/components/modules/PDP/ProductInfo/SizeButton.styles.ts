@@ -4,6 +4,9 @@ import { COLORS, SPACING } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const styles: CSSObject = {
+  icon: {
+    marginLeft: SPACING.SIZE_05,
+  },
   loadIndex: {
     fontWeight: 'normal',
   },
@@ -14,11 +17,11 @@ const styles: CSSObject = {
       display: 'flex',
     },
   ],
-  rootNoSizeSelected: {
+  selectSize: {
     color: COLORS.GLOBAL.ORANGE,
   },
-  icon: {
-    marginLeft: SPACING.SIZE_05,
+  size: {
+    color: COLORS.GLOBAL.BLACK,
   },
 };
 

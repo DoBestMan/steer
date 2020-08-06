@@ -1,4 +1,12 @@
-import { BORDERS, GAP_COLUMNS, MQ, StylesMap } from '~/lib/constants';
+import {
+  BORDERS,
+  COLORS,
+  GAP_COLUMNS,
+  MQ,
+  StylesMap,
+  TIME,
+  Z_INDEX,
+} from '~/lib/constants';
 
 const styles: StylesMap = {
   container: {
@@ -27,6 +35,26 @@ const styles: StylesMap = {
       textAlign: 'left',
       width: '100%',
     },
+  },
+  loading: {
+    backgroundColor: COLORS.LIGHT.GRAY_10_SOLID,
+    bottom: 0,
+    left: 0,
+    pointerEvents: 'none',
+    position: 'absolute',
+    right: 0,
+    top: 0,
+    zIndex: Z_INDEX.FRONT,
+
+    // eslint-disable-next-line sort-keys
+    '&[aria-hidden="true"]': {
+      opacity: 0,
+      visibility: 'hidden',
+      transition: `opacity ${TIME.MS200}ms ease, visibility 0s linear ${TIME.MS100}ms`,
+    },
+  },
+  root: {
+    position: 'relative',
   },
 };
 

@@ -14,6 +14,7 @@ export const COLORS = {
   },
   LIGHT: {
     GRAY_10: 'rgba(24, 24, 24, 0.06)',
+    GRAY_10_SOLID: '#F1F1F1',
     GRAY_20: 'rgba(24, 24, 24, 0.13)',
     GRAY_70: 'rgba(24, 24, 24, 0.7)',
     GRAY_LIGHT_SOLID: '#929292',

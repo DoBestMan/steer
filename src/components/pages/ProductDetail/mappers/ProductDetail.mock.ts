@@ -1400,12 +1400,14 @@ export const productDetailContextMock: ProductDetailContextProps = {
     siteProduct: siteProductMock,
     siteProductReviews: siteProductReviewsMock,
   },
+  isLoading: false,
+  quantity: { front: 2, rear: 2 },
   queryParams: {
     rearSize: '200-r15',
     tireSize: '200-r14',
   },
-  quantity: { front: 2, rear: 2 },
   searchForVehicle: () => {},
   setData: () => {},
+  setIsLoading: () => {},
   setQuantity: () => {},
 };
