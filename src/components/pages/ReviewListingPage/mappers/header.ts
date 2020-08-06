@@ -6,13 +6,10 @@ import {
   FilterItem,
 } from '~/components/modules/ReviewListing/Filters/Filters.types';
 import { ReviewListingHeaderProps } from '~/components/modules/ReviewListing/Header/Header';
-import { SiteProductLineReviewsListingFilterType } from '~/data/models/SiteProductReviewsListingFilter';
 import { SiteProductReviewsListingFilters } from '~/data/models/SiteProductReviewsListingFilters';
 import { SiteProductReviewsListingInfo } from '~/data/models/SiteProductReviewsListingInfo';
 import { ROUTE_MAP, ROUTES } from '~/lib/constants';
 import { mapPathnameToBreadcrumbs } from '~/lib/utils/breadcrumbs';
-import { interpolateRoute } from '~/lib/utils/routes';
-import { appendTiresToString } from '~/lib/utils/string';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 export function mapDataToHeader({
@@ -32,53 +29,29 @@ export function mapDataToHeader({
     const filterGroups: FilterGroup[] = filterItem.filterGroups.map(
       (filterGroup) => {
         const items: FilterGroupItem[] = filterGroup.items.map(
-          (filterGroupItem) => {
-            if (filterGroupItem.isSelected) {
-              activeFilters[filterItem.id] = filterGroupItem.title;
-            }
-
-            let href = '/';
-            switch (filterItem.id) {
-              case SiteProductLineReviewsListingFilterType.Brand:
-                href = interpolateRoute(ROUTE_MAP[ROUTES.BRAND_REVIEWS], {
-                  brand: appendTiresToString(filterGroupItem.value),
-                });
-                break;
-              case SiteProductLineReviewsListingFilterType.TireType:
-                href = interpolateRoute(ROUTE_MAP[ROUTES.TYPE_REVIEWS], {
-                  type: appendTiresToString(filterGroupItem.value),
-                });
-                break;
-              case SiteProductLineReviewsListingFilterType.TireCategory:
-                href = interpolateRoute(ROUTE_MAP[ROUTES.CATEGORY_REVIEWS], {
-                  category: appendTiresToString(filterGroupItem.value),
-                });
-                break;
-              default:
-                break;
+          ({ count, description, flair, isSelected, link, title }) => {
+            if (isSelected) {
+              activeFilters[filterItem.id] = title;
             }
 
             return {
-              count: filterGroupItem.count,
-              description: filterGroupItem.description,
-              flair: filterGroupItem.flair,
-              isSelected: filterGroupItem.isSelected,
-              link: {
-                href,
-                isExternal: false,
-              },
-              title: filterGroupItem.title,
+              count,
+              description,
+              flair,
+              isSelected,
+              link,
+              title,
             };
           },
         );
-        // FilterGroups
+
         return {
           title: filterGroup.header?.title,
           items,
         };
       },
     );
-    // Filters
+
     return {
       label: filterItem.header.title,
       id: filterItem.id,

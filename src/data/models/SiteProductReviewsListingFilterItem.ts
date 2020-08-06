@@ -1,3 +1,5 @@
+import { SiteLink } from './SiteLink';
+
 /**
  * Review listing filter item
  * @export
@@ -40,4 +42,10 @@ export interface SiteProductReviewsListingFilterItem {
    * @memberof SiteCatalogFilterItem
    */
   value: string;
+  /**
+   *
+   * @type {SiteLink}
+   * @memberof SiteCatalogFilterItem
+   */
+  link: SiteLink;
 }
