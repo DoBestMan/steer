@@ -100,7 +100,7 @@ export const textAreaStyles: StylesMap = {
     overflowY: 'auto',
     padding: '0',
     resize: 'none',
-    whiteSpace: 'normal',
+    whiteSpace: 'pre-wrap',
     width: `calc(100% - ${SPACING.SIZE_20 * 2}px)`,
     [MQ.M]: {
       padding: 0,
