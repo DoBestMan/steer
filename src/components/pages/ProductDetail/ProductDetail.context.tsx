@@ -15,7 +15,8 @@ import {
   interpolateRoute,
 } from '~/lib/utils/routes';
 import { appendTiresToString } from '~/lib/utils/string';
-import { ProductDetailResponse } from '~/pages/api/product-detail';
+
+import { ProductDetailResponse } from './ProductDetail.container';
 
 const CONSTANTS = {
   PRODUCT_DETAIL_ROUTE: ROUTE_MAP[ROUTES.PRODUCT_DETAIL],

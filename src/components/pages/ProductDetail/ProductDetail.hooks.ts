@@ -17,12 +17,12 @@ import { useGlobalsContext } from '~/context/Globals.context';
 import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
 import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
 import { SiteCatalogProductGroupList } from '~/data/models/SiteCatalogProductGroupList';
+import { SiteProduct } from '~/data/models/SiteProduct';
 import { SiteProductLine } from '~/data/models/SiteProductLine';
 import { useApiDataWithDefault } from '~/hooks/useApiDataWithDefault';
 import { ROUTE_MAP, ROUTES } from '~/lib/constants';
 import { eventEmitters } from '~/lib/events/emitters';
 import { interpolateRoute } from '~/lib/utils/routes';
-import { ProductDetailResponse } from '~/pages/api/product-detail';
 
 import { mapDataToBreadcrumbs } from './mappers/breadcrumbs';
 import { mapDataToFAQ } from './mappers/faq';
@@ -40,13 +40,10 @@ import { mapDataToReviews } from './mappers/reviews';
 import { mapDataToSizeFinder } from './mappers/sizeFinder';
 import { mapDataToStickyBar } from './mappers/stickyBar';
 import { mapDataToTechnicalSpecs } from './mappers/technicalSpecs';
+import { ProductDetailData } from './ProductDetail.container';
 import { useProductDetailContext } from './ProductDetail.context';
 
 export type QueryParams = Record<string, string>;
-
-interface ProductDetailData {
-  serverData: ProductDetailResponse;
-}
 
 export type ParsedProductInfoProps = Omit<ProductInfoProps, 'sizeFinder'>;
 
@@ -104,10 +101,10 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
   const { hostUrl } = useGlobalsContext();
   const isPLA = !!router.pathname.match(ROUTE_MAP[ROUTES.PRODUCT_DETAIL_PLA]);
 
-  const { data, error, isValidating } = useApiDataWithDefault<
-    ProductDetailResponse
+  const { data: siteProduct, error, isValidating } = useApiDataWithDefault<
+    SiteProduct
   >({
-    defaultData: contextData || serverData,
+    defaultData: contextData?.siteProduct || serverData.siteProduct,
     endpoint: '/product-detail',
     includeUserRegion: true,
     includeUserZip: true,
@@ -119,7 +116,7 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
     console.error(error);
   }
 
-  const { siteProduct, siteProductReviews } = data;
+  const { siteProductReviews } = serverData;
 
   const { siteProductLine } = siteProduct;
 
@@ -148,19 +145,19 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
       return;
     }
 
-    if (isStrictEqual(data, contextData)) {
+    if (isStrictEqual({ siteProduct, siteProductReviews }, contextData)) {
       return;
     }
 
-    setData(data);
-  }, [data, contextData, setData, isValidating]);
+    setData({ siteProduct, siteProductReviews });
+  }, [isValidating, siteProduct, siteProductReviews, contextData, setData]);
 
   useEffect(() => {
     setIsLoading(isValidating);
   }, [isValidating, setIsLoading]);
 
   /**
-   * Reroute query parameters to hash parameters on the front-end
+   * Reroute query parameters to hash parameters on the client
    * `?tireSize=235-40r15` => `#tireSize=235-40r15`
    */
   useEffect(() => {

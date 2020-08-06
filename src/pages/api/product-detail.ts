@@ -1,23 +1,13 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { SiteProduct } from '~/data/models/SiteProduct';
-import { SiteProductReviews } from '~/data/models/SiteProductReviews';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
-import {
-  backendGetProductDetail,
-  backendGetProductReviews,
-} from '~/lib/backend/product-detail';
-import { RESULTS_PER_PAGE_PDP } from '~/lib/constants';
+import { backendGetProductDetail } from '~/lib/backend/product-detail';
 import { removeTireFromQueryParam } from '~/lib/utils/string';
-
-export interface ProductDetailResponse {
-  siteProduct: SiteProduct;
-  siteProductReviews: SiteProductReviews;
-}
 
 export default async (
   request: NextApiRequest,
-  response: NextApiResponse<ProductDetailResponse>,
+  response: NextApiResponse<SiteProduct>,
 ) => {
   backendBootstrap({ request });
 
@@ -31,20 +21,11 @@ export default async (
     }
   });
 
-  const [siteProduct, siteProductReviews] = await Promise.all([
-    backendGetProductDetail({
-      brand: brandName,
-      productLine,
-      query: params,
-    }),
-    backendGetProductReviews({
-      brand: brandName,
-      productLine,
-      query: {
-        resultsPerPage: RESULTS_PER_PAGE_PDP.toString(),
-      },
-    }),
-  ]);
+  const siteProduct = await backendGetProductDetail({
+    brand: brandName,
+    productLine,
+    query: params,
+  });
 
-  response.json({ siteProduct, siteProductReviews });
+  response.json(siteProduct);
 };

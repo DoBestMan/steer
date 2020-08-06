@@ -21,9 +21,9 @@ import TechnicalSpecs from '~/components/modules/PDP/TechnicalSpecs/TechnicalSpe
 import TireImage from '~/components/modules/PDP/TireImage/TireImage';
 import { useModalContext } from '~/context/Modal.context';
 import { THEME } from '~/lib/constants';
-import { ProductDetailResponse } from '~/pages/api/product-detail';
 
 import useExperimentPLA from './experiments/useExperimentPLA';
+import { ProductDetailResponse } from './ProductDetail.container';
 import useProductDetail from './ProductDetail.hooks';
 import styles from './ProductDetail.styles';
 

@@ -8,11 +8,12 @@ import Reviews from '~/components/modules/ReviewDetail/Reviews/Reviews';
 import ReviewsHeader from '~/components/modules/ReviewDetail/ReviewsHeader/ReviewsHeader';
 import StickyBar from '~/components/modules/StickyBar/StickyBar';
 import { primaryColumnStyles } from '~/components/modules/StickyBar/StickyBar.styles';
+import { SiteProduct } from '~/data/models/SiteProduct';
+import { SiteProductReviews } from '~/data/models/SiteProductReviews';
 import { ROUTE_MAP, ROUTES, THEME } from '~/lib/constants';
 import { interpolateRoute } from '~/lib/utils/routes';
 import { removeTireFromQueryParam } from '~/lib/utils/string';
 import { ui } from '~/lib/utils/ui-dictionary';
-import { ProductDetailResponse } from '~/pages/api/product-detail';
 
 import { mapDataToHeader } from './mappers/header';
 import { mapDataToLinkingData } from './mappers/linkingData';
@@ -20,6 +21,11 @@ import { mapDataToMeta } from './mappers/meta';
 import { mapDataToReviews } from './mappers/reviews';
 import usePagination from './ReviewDetailPage.hooks';
 import styles from './ReviewDetailPage.styles';
+
+interface ProductDetailResponse {
+  siteProduct: SiteProduct;
+  siteProductReviews: SiteProductReviews;
+}
 
 export interface ProductDetailReviewsData {
   serverData: ProductDetailResponse;
