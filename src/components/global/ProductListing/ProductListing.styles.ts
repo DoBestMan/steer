@@ -22,6 +22,8 @@ const IMAGE_SIZE = {
   },
 };
 
+const BRAND_IMAGE_HEIGHT = 20;
+
 const DISC_SIZE = 50;
 
 const styles: StylesMap = {
@@ -36,12 +38,23 @@ const styles: StylesMap = {
   },
   brandImage: {
     img: {
-      height: 20,
+      height: BRAND_IMAGE_HEIGHT,
       margin: '0 auto',
       width: 'auto',
     },
   },
-  brandLabel: typography.tertiaryHeadline,
+  brandLabel: [
+    typography.largeCopy,
+
+    {
+      fontWeight: 'bold',
+      lineHeight: `${BRAND_IMAGE_HEIGHT}px`,
+
+      [MQ.XL]: {
+        fontSize: `${22 / 10}rem`,
+      },
+    },
+  ],
   filterItem: typography.secondarySubhead,
   filterItemContainer: {
     marginBottom: SPACING.SIZE_10,
