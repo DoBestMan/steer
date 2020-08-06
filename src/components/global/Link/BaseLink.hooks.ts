@@ -1,18 +1,15 @@
 import { LinkProps } from 'next/link';
 
-import { ROUTE_MAP } from '~/lib/constants';
+import { ROUTE_TYPE_MAP } from '~/lib/constants';
 import { absoluteLink, specialLink } from '~/lib/utils/regex';
 import { getUrlObject, SimpleUrlObject, Url } from '~/lib/utils/routes';
 
 // Turn links into regular expressions we can use to match routes from the API
-const dynamicRouteRegexMap: Record<string, RegExp> = {};
-Object.values(ROUTE_MAP).forEach((route) => {
-  const isDynamicRoute = route.includes('[');
-  if (isDynamicRoute) {
-    dynamicRouteRegexMap[route] = new RegExp(
-      `^${route.replace(/\[\w+\]/g, '[\\w-]+')}$`,
-    );
-  }
+const routeRegexMap: Record<string, RegExp> = {};
+Object.values(ROUTE_TYPE_MAP).forEach((route) => {
+  routeRegexMap[route] = new RegExp(
+    `^${route.replace(/\[\w+\]/g, '[\\w-]+')}$`,
+  );
 });
 
 /*
@@ -91,19 +88,25 @@ export function useBaseLinkProps({
   let prefetch;
 
   if (isInternal) {
-    // if link destination matches a regex, use an "as"
-    Object.keys(dynamicRouteRegexMap).some((route) => {
-      const regex = dynamicRouteRegexMap[route];
+    Object.keys(routeRegexMap).some((route) => {
+      const regex = routeRegexMap[route];
       // For urls with query params, only use the path to
       // match against the regex
       const [pathname, query] = href.split('?');
       const match = pathname.match(regex);
 
       if (match) {
-        as = getUrlObject(pathname, query);
-        finalHref = getUrlObject(route, query);
-        applyRouteQueryParamOptions(finalHref, as, routeQueryParamOptions);
+        const isDynamic = route.includes('[');
+        if (isDynamic) {
+          // if link matches a dynamic route, use an "as"
+          as = getUrlObject(pathname, query);
+          finalHref = getUrlObject(route, query);
+          applyRouteQueryParamOptions(finalHref, as, routeQueryParamOptions);
+        }
 
+        // If we found a match, end the search,
+        // whether the match was a dynamic route (eg /[slug])
+        // or a static route (eg /track-your-order)
         return true;
       }
       return false;

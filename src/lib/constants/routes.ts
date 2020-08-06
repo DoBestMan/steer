@@ -20,6 +20,7 @@ export enum ROUTES {
   FREE_SHIPPING = 'freeShipping',
   HOME = 'home',
   LEARN = 'learn',
+  OPEN_TEMPLATE = 'openTemplate',
   ORDER_TRACKING = 'orderTracking',
   ORDER_TRACKING_RESULT = 'orderTrackingResult',
   PRODUCT_DETAIL = 'productDetail',
@@ -39,8 +40,15 @@ export enum ROUTES {
   WRITE_REVIEW = 'writeReview',
 }
 
-// Order is important here
-export const ROUTE_MAP: Record<ROUTES, string> = {
+// This list includes:
+// - Dynamic routes (with [] brackets)
+// - Static routes
+
+// Adding a route to ROUTE_TYPE_MAP will make sure the
+// BaseLink component avoids refreshing the app for internal link
+
+// Order is important!
+export const ROUTE_TYPE_MAP: { [routeName: string]: string } = {
   [ROUTES.HOME]: '/',
   [ROUTES.BRAND_LANDING]: '/brands',
   [ROUTES.BRAND_DETAIL]: '/brands/[brand]',
@@ -60,20 +68,31 @@ export const ROUTE_MAP: Record<ROUTES, string> = {
   [ROUTES.TYPE_REVIEWS]: '/types/[type]/reviews',
   [ROUTES.VEHICLE_CATALOG]: '/vehicles/[make]/[model]/[year]',
   [ROUTES.TIRE_SIZE_CATALOG_OR_CATEGORY]: '/tire-sizes/[size]',
-  // Order does not matter starting here
-  [ROUTES.ABOUT]: '/about',
   [ROUTES.CUSTOMER_SUPPORT]: '/customer-support',
   [ROUTES.DEALS]: '/tire-deals',
-  [ROUTES.FAQS]: '/faqs',
-  [ROUTES.FREE_SHIPPING]: '/free-shipping',
-  [ROUTES.FINANCING]: '/financing',
-  [ROUTES.LEARN]: '/learn',
   [ROUTES.ORDER_TRACKING_RESULT]: '/track-your-order/result',
   [ROUTES.ORDER_TRACKING]: '/track-your-order',
   [ROUTES.PRODUCT_DETAIL_PLA]: '/paid',
-  [ROUTES.RETURNS]: '/returns',
   [ROUTES.SITEMAP]: '/sitemap',
+  [ROUTES.OPEN_TEMPLATE]: '/[slug]',
+};
+
+// This is a master list of all routes
+
+// This list includes known instances of dynamic routes above.
+// For example, we have `/terms`, and instance of `/[slug]`.
+
+// Adding a route to ROUTE_MAP does not affect any logic in BaseLink
+// It just stores our known routes as constants for links in the footer, etc.
+export const ROUTE_MAP: { [routeName: string]: string } = {
+  ...ROUTE_TYPE_MAP,
+  [ROUTES.FINANCING]: '/financing',
   [ROUTES.TERMS]: '/terms',
+  [ROUTES.ABOUT]: '/about',
+  [ROUTES.FAQS]: '/faqs',
+  [ROUTES.FREE_SHIPPING]: '/free-shipping',
+  [ROUTES.LEARN]: '/learn',
+  [ROUTES.RETURNS]: '/returns',
   [ROUTES.TIRE_BUYING_GUIDE]: '/tire-buying-guide',
 };
 

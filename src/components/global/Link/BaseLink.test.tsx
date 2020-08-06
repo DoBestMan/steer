@@ -224,6 +224,41 @@ describe('BaseLink hook', () => {
     });
   });
 
+  it('obeys order of ROUTE_TYPE_MAP so static links beat matching dynamic paths ', () => {
+    expect(
+      useBaseLinkProps({
+        // matches /[slug], but /track-your-order has priority
+        href: '/track-your-order',
+      }),
+    ).toEqual({
+      as: undefined,
+      externalProps: {},
+      finalHref: '/track-your-order',
+      isInternal: true,
+      prefetch: undefined,
+    });
+  });
+
+  test('open template slug', () => {
+    expect(
+      useBaseLinkProps({
+        href: '/my-open-template',
+      }),
+    ).toEqual({
+      as: {
+        pathname: '/my-open-template',
+        query: {},
+      },
+      externalProps: {},
+      finalHref: {
+        pathname: '/[slug]',
+        query: {},
+      },
+      isInternal: true,
+      prefetch: undefined,
+    });
+  });
+
   describe('internal dynamic link with special route params', () => {
     const routeQueryParamOptions = {
       routes: [ROUTE_MAP[ROUTES.VEHICLE_CATALOG]],
@@ -259,7 +294,7 @@ describe('BaseLink hook', () => {
       });
     });
 
-    test('does not append params if route is not a match', () => {
+    it('does not append params if route is not a match', () => {
       expect(
         useBaseLinkProps({
           href: '/brands/drupal-tires',
