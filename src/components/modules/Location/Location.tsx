@@ -175,7 +175,7 @@ function Location({
   }
 
   return (
-    <GridItem css={styles.container} {...rest}>
+    <GridItem gridColumnL="1/14" css={styles.container} {...rest}>
       <div css={styles.content}>
         <Autocomplete
           icon={ICONS.SEARCH}
