@@ -174,6 +174,12 @@ function Location({
     }
   }
 
+  const shouldDisplayCurrenctLocation =
+    currentLocation &&
+    currentLocation.cityName &&
+    currentLocation.stateAbbr &&
+    currentLocation.zip;
+
   return (
     <GridItem gridColumnL="1/14" css={styles.container} {...rest}>
       <div css={styles.content}>
@@ -194,10 +200,10 @@ function Location({
         />
         {!hasResults && !toastMessage && !hasInvalidInput && (
           <>
-            {currentLocation && (
+            {shouldDisplayCurrenctLocation && (
               <span css={styles.currentLocation}>
-                {currentLocation.cityName}, {currentLocation.stateAbbr}{' '}
-                {currentLocation.zip}
+                {currentLocation?.cityName}, {currentLocation?.stateAbbr}{' '}
+                {currentLocation?.zip}
               </span>
             )}
             <UseCurrentLocation
