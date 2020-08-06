@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
 import { Transition, TransitionGroup } from 'react-transition-group';
 import { TransitionStatus } from 'react-transition-group/Transition';
@@ -10,7 +11,6 @@ import Markdown from '~/components/global/Markdown/Markdown';
 import PromoTag from '~/components/global/PromoTag/PromoTag';
 import Scenary from '~/components/global/Scenery/Scenery';
 import { Sceneries } from '~/components/global/Scenery/Scenery.types';
-import Weather from '~/components/global/Weather/Weather';
 import { SiteHero } from '~/data/models/SiteHero';
 import { SitePromotionStyleEnum } from '~/data/models/SitePromotion';
 import { usePreferedReduceMotion } from '~/hooks/usePreferedReduceMotion';
@@ -22,6 +22,10 @@ import {
   SCENERY_OR_WEATHER_DURATION,
   styles,
 } from './HomeHeader.styles';
+
+const Weather = dynamic(() => import('~/components/global/Weather/Weather'), {
+  ssr: false,
+});
 
 const ANIMATION_DURATION = TIME.MS2000;
 const INTERVAL_CAR_ROTATION = TIME.MS8000;
@@ -178,11 +182,13 @@ function HomeHeader({
               </GridItem>
             </Grid>
 
-            <Weather
-              weatherID={internalWeatherType}
-              css={weatherStyles}
-              animate={hasMotion}
-            />
+            {internalWeatherType && (
+              <Weather
+                weatherID={internalWeatherType}
+                css={weatherStyles}
+                animate={hasMotion}
+              />
+            )}
 
             {/* If Scenery changes, nice fade in / fade out */}
             {internalSceneryType && (
