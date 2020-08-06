@@ -87,14 +87,18 @@ export function mapDataToInsights({
 }): Omit<InsightsProps, 'handleChangeLocation'> {
   const { changeSize } = productDetail;
   const { vehicle, unselectVehicle } = userPersonalization;
+  const hasVehicle =
+    !!vehicle &&
+    !!Object.keys(vehicle)?.length &&
+    vehicle.constructor === Object;
   const showFitBar =
     (!!tireSize && !!siteProductLineSizeDetail) ||
-    (!!vehicle && !isLoadingData);
+    (hasVehicle && !isLoadingData);
   const sizeCheckState = getSizeCheckState({
     rearSize,
     siteProductLineAvailableSizeList,
     tireSize,
-    vehicle,
+    vehicle: hasVehicle ? vehicle : null,
   });
   const insightItems = siteProductInsights.siteProductInsightList.map(
     (item) => ({
@@ -148,8 +152,8 @@ export function mapDataToInsights({
     showFitBar,
     sizeCheckState,
     techSpecsAnchor: CONSTANTS.TECH_SPECS_ANCHOR,
-    vehicle: vehicle
-      ? `${vehicle.vehicleMake} ${vehicle.vehicleModel} ${vehicle.vehicleYear} ${vehicle.vehicleTrim}`
+    vehicle: hasVehicle
+      ? `${vehicle?.vehicleMake} ${vehicle?.vehicleModel} ${vehicle?.vehicleYear} ${vehicle?.vehicleTrim}`
       : null,
   };
 }

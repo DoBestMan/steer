@@ -88,6 +88,26 @@ describe('pages/ProductDetails/mappers/insights', () => {
     });
   });
 
+  it('returns insights props with empty vehicle information object', () => {
+    expect(
+      mapDataToInsights({
+        isLoadingData: false,
+        productDetail: productDetailContextMock,
+        router: routerMock,
+        siteProduct: siteProductMock,
+        tireSize: '100-40r15',
+        userPersonalization: {
+          ...userPersonalizationContextMock,
+          vehicle: {} as any,
+        },
+      }),
+    ).toMatchObject({
+      sizeCheckState: SIZE_CHECK_STATES.UNKNOWN,
+      vehicle: null,
+      showFitBar: true,
+    });
+  });
+
   it('returns insights props that does not fit the vehicle', () => {
     expect(
       mapDataToInsights({
