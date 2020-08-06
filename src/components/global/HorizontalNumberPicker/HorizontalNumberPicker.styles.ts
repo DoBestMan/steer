@@ -55,11 +55,10 @@ const styles: StylesMap = {
       typography.bodyCopy,
       {
         ':not(:last-child)': {
-          marginRight: SPACING.SIZE_05,
+          marginRight: 4,
         },
         boxSizing: 'border-box',
         height: ITEM_SIZE.S,
-        margin: SPACING.SIZE_01,
         width: ITEM_SIZE.S,
       },
     ],
