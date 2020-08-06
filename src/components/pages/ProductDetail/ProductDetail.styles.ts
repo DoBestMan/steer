@@ -185,7 +185,7 @@ const styles: StylesMap = {
     paddingTop: NAV_HEIGHT.S - 10,
 
     [MQ.M]: {
-      paddingTop: NAV_HEIGHT.M + 20,
+      paddingTop: NAV_HEIGHT.M,
     },
 
     [MQ.L]: {
