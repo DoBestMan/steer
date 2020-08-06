@@ -21,11 +21,11 @@ const ErrorByStatus: Record<number, string> = {
 
 function buildUrl(
   path: string,
-  params: Record<string, string>,
+  params: Record<string, string | string[]>,
   query: Record<string, string>,
 ) {
   const pathWithParams = path.replace(/\{([^}]+)\}/g, (_, key: string) => {
-    return params[key];
+    return params[key].toString();
   });
 
   const searchParams = new URLSearchParams(query).toString();
@@ -53,7 +53,7 @@ export async function fetch<T, U = never>({
   includeUserZip?: boolean;
   jsonBody?: U;
   method: RequestInit['method'];
-  params?: Record<string, string>;
+  params?: Record<string, string | string[]>;
   query?: Record<string, string>;
   signal?: AbortSignal;
 }): Promise<T> {

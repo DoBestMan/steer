@@ -14,10 +14,15 @@ export async function backendGetTireSizeDiameterSummary({
   const response = await fetch<{
     siteCatalogSummary: SiteCatalogSummary;
   }>({
-    endpoint: `/v1/site/catalog/tire-sizes-landing/${diameter}/${category}/summary`,
-    query,
+    endpoint:
+      '/v1/site/catalog/tire-sizes-landing/{diameter}/{category}/summary',
     includeAuthorization: true,
     method: 'get',
+    params: {
+      category,
+      diameter,
+    },
+    query,
   });
 
   return response;
@@ -35,10 +40,15 @@ export async function backendGetTireSizeDiameterProducts({
   const response = await fetch<{
     siteCatalogProducts: SiteCatalogProducts;
   }>({
-    endpoint: `/v1/site/catalog/tire-sizes-landing/${diameter}/${category}/products`,
-    query,
+    endpoint:
+      '/v1/site/catalog/tire-sizes-landing/{diameter}/{category}/products',
     includeAuthorization: true,
     method: 'get',
+    params: {
+      category,
+      diameter,
+    },
+    query,
   });
 
   return response;

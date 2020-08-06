@@ -12,10 +12,14 @@ export async function backendPostProductReview({
   productLine: string | string[];
 }) {
   const response = await fetch<null, SiteProductLineReviewItemInput>({
-    endpoint: `/v1/site/products/${brand}/${productLine}/reviews`,
+    endpoint: '/v1/site/products/{brand}/{productLine}/reviews',
     includeAuthorization: true,
     jsonBody: input,
     method: 'post',
+    params: {
+      brand,
+      productLine,
+    },
   });
 
   return response;

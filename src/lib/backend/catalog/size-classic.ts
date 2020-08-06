@@ -12,10 +12,13 @@ export async function backendGetTireSizeClassicSummary({
   const response = await fetch<{
     siteCatalogSummary: SiteCatalogSummary;
   }>({
-    endpoint: `/v1/site/catalog/tire-sizes/${size}/summary`,
-    query,
+    endpoint: '/v1/site/catalog/tire-sizes/{size}/summary',
     includeAuthorization: true,
     method: 'get',
+    params: {
+      size,
+    },
+    query,
   });
 
   return response;
@@ -31,10 +34,13 @@ export async function backendGetTireSizeClassicProducts({
   const response = await fetch<{
     siteCatalogProducts: SiteCatalogProducts;
   }>({
-    endpoint: `/v1/site/catalog/tire-sizes/${size}/products`,
-    query,
+    endpoint: '/v1/site/catalog/tire-sizes/{size}/products',
     includeAuthorization: true,
     method: 'get',
+    params: {
+      size,
+    },
+    query,
   });
 
   return response;

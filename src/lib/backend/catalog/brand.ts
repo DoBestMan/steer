@@ -14,10 +14,14 @@ export async function backendGetBrandSummary({
   const response = await fetch<{
     siteCatalogSummary: SiteCatalogSummary;
   }>({
-    endpoint: `/v1/site/catalog/brands/${brand}/${category}/summary`,
-    query,
+    endpoint: '/v1/site/catalog/brands/{brand}/{category}/summary',
     includeAuthorization: true,
     method: 'get',
+    params: {
+      brand,
+      category,
+    },
+    query,
   });
 
   return response;
@@ -35,10 +39,14 @@ export async function backendGetBrandProducts({
   const response = await fetch<{
     siteCatalogProducts: SiteCatalogProducts;
   }>({
-    endpoint: `/v1/site/catalog/brands/${brand}/${category}/products`,
-    query,
+    endpoint: '/v1/site/catalog/brands/{brand}/{category}/products',
     includeAuthorization: true,
     method: 'get',
+    params: {
+      brand,
+      category,
+    },
+    query,
   });
 
   return response;

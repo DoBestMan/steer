@@ -16,10 +16,15 @@ export async function backendGetVehicleSummary({
   const response = await fetch<{
     siteCatalogSummary: SiteCatalogSummary;
   }>({
-    endpoint: `/v1/site/catalog/vehicles/${make}/${model}/${year}/summary`,
-    query,
+    endpoint: '/v1/site/catalog/vehicles/{make}/{model}/{year}/summary',
     includeAuthorization: true,
     method: 'get',
+    params: {
+      make,
+      model,
+      year,
+    },
+    query,
   });
 
   return response;
@@ -39,10 +44,15 @@ export async function backendGetVehicleProducts({
   const response = await fetch<{
     siteCatalogProducts: SiteCatalogProducts;
   }>({
-    endpoint: `/v1/site/catalog/vehicles/${make}/${model}/${year}/products`,
-    query,
+    endpoint: '/v1/site/catalog/vehicles/{make}/{model}/{year}/products',
     includeAuthorization: true,
     method: 'get',
+    params: {
+      make,
+      model,
+      year,
+    },
+    query,
   });
 
   return response;

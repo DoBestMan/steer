@@ -13,10 +13,14 @@ export async function backendGetProductDetail({
   query?: Record<string, string>;
 }) {
   const response = await fetch<SiteProduct>({
-    endpoint: `/v1/site/products/${brand}/${productLine}`,
-    query,
+    endpoint: '/v1/site/products/{brand}/{productLine}',
     includeAuthorization: true,
     method: 'get',
+    params: {
+      brand,
+      productLine,
+    },
+    query,
   });
 
   return response;
@@ -32,10 +36,14 @@ export async function backendGetProductReviews({
   query?: Record<string, string>;
 }) {
   const response = await fetch<SiteProductReviews>({
-    endpoint: `/v1/site/products/${brand}/${productLine}/reviews`,
+    endpoint: '/v1/site/products/{brand}/{productLine}/reviews',
     includeAuthorization: true,
-    query,
     method: 'get',
+    params: {
+      brand,
+      productLine,
+    },
+    query,
   });
 
   return response;
