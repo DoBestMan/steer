@@ -1216,7 +1216,15 @@ export const siteProductMock: SiteProduct = {
     delivery: 'Free 2-day shipping to Brooklyn, NY',
     siteProductInsightList: [
       {
-        label: 'Best seller for Honda Civic',
+        label: 'Best seller for Honda Civic \nNew line',
+        icon: {
+          type: ICON_IMAGE_TYPE.ICON,
+          svgId: 'fire',
+        },
+        sectionAnchor: null,
+      },
+      {
+        label: 'Best seller for Porsche Carrera GT ↵New line',
         icon: {
           type: ICON_IMAGE_TYPE.ICON,
           svgId: 'fire',

@@ -25,7 +25,12 @@ describe('pages/ProductDetails/mappers/insights', () => {
       delivery: 'Free 2-day shipping to Brooklyn, NY',
       insightItems: [
         {
-          label: 'Best seller for Honda Civic',
+          label: 'Best seller for Honda Civic \nNew line',
+          icon: { type: 'SiteIcon', svgId: 'fire' },
+          sectionAnchor: null,
+        },
+        {
+          label: 'Best seller for Porsche Carrera GT \nNew line',
           icon: { type: 'SiteIcon', svgId: 'fire' },
           sectionAnchor: null,
         },

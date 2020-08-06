@@ -96,6 +96,12 @@ export function mapDataToInsights({
     tireSize,
     vehicle,
   });
+  const insightItems = siteProductInsights.siteProductInsightList.map(
+    (item) => ({
+      ...item,
+      label: item.label.replace(/([\\]+n)|↵/g, '\n'),
+    }),
+  );
 
   const onSelectAvailableOption = () => {
     const firstAvailableSize = siteProductLineAvailableSizeList.find(
@@ -133,7 +139,7 @@ export function mapDataToInsights({
 
   return {
     delivery: siteProductInsights.delivery,
-    insightItems: siteProductInsights.siteProductInsightList,
+    insightItems,
     make: vehicle?.vehicleMake,
     onFindTiresThatFit,
     onSelectAvailableOption,
