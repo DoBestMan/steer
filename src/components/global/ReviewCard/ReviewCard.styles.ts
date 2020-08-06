@@ -20,7 +20,7 @@ const styles: StylesMap = {
   body: [
     typography.bodyCopy,
     {
-      marginTop: SPACING.SIZE_15,
+      marginTop: SPACING.SIZE_20,
     },
   ],
   container: {

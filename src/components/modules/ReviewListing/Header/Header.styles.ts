@@ -9,7 +9,9 @@ const styles: StylesMap = {
   },
   container: {
     backgroundColor: COLORS.GLOBAL.ORANGE,
-    marginTop: SPACING.SIZE_30,
+    [MQ.L]: {
+      marginTop: SPACING.SIZE_30,
+    },
   },
   filtersContainer: {
     marginTop: SPACING.SIZE_40,
