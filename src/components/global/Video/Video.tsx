@@ -84,7 +84,7 @@ function Video({
             {isLoading ? (
               <Loading theme={THEME.DARK} />
             ) : (
-              <Icon name={ICONS.PLAY} />
+              <Icon name={ICONS.PLAY} css={styles.buttonIcon} />
             )}
           </span>
 
