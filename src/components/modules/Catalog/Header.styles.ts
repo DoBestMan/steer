@@ -1,6 +1,12 @@
 import { COLORS, MQ, SPACING, StylesMap, TIME, Z_INDEX } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
+const NAV_OFFSET = {
+  S: 85,
+  M: 120,
+  L: 150,
+};
+
 const styles: StylesMap = {
   action: {
     alignItems: 'baseline',
@@ -63,8 +69,12 @@ const styles: StylesMap = {
     marginLeft: SPACING.SIZE_05,
   },
   navOffset: {
-    [MQ.S]: {
-      paddingTop: 150,
+    paddingTop: NAV_OFFSET.S,
+    [MQ.M]: {
+      paddingTop: NAV_OFFSET.M,
+    },
+    [MQ.L]: {
+      paddingTop: NAV_OFFSET.L,
     },
   },
   root: {
