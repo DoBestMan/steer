@@ -124,6 +124,9 @@ export function useContextSetup({
       return;
     }
 
+    // Show the nav once loading stage is over
+    eventEmitters.setNavVisibility.emit({ isVisible: true });
+
     const totalResult =
       siteCatalogSummary.siteCatalogSummaryMeta?.totalResults || 0;
     const hasPromptMustShow =

@@ -48,7 +48,7 @@ function App({ children, ...rest }: Props) {
   return (
     <div css={[styles.root, isHomepage && styles.rootWithOffWhiteBg]}>
       <NavContextProvider>
-        <NavContainer isHomepage={isHomepage} isLoading={isInRouteTransition} />
+        <NavContainer isHomepage={isHomepage} />
         <Layout>
           <Transition appear in={!isInRouteTransition} timeout={TIME.MS400}>
             {(containerTransitionState: TransitionStatus) => {

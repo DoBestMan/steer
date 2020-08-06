@@ -9,7 +9,7 @@ export enum NAV_THEME {
 
 export interface NavThemeObject {
   border: CSSObjectType;
-  iconColor: CSSObjectType;
+  iconColor: CSSObject | CSSObjectType;
   linkTheme: THEME.LIGHT | THEME.ORANGE;
   logoUrl: string;
   textColor: CSSObject;
@@ -25,7 +25,7 @@ export const themes: { [key in NAV_THEME]: NavThemeObject } = {
   },
   [NAV_THEME.ALTERNATE]: {
     border: { [MQ.L]: { borderBottom: BORDERS.SOLID_GRAY_80_1PX } },
-    iconColor: { [MQ.L]: { color: COLORS.GLOBAL.WHITE } },
+    iconColor: { color: COLORS.GLOBAL.WHITE },
     linkTheme: THEME.ORANGE,
     logoUrl: '/static/assets/logo-white.svg',
     textColor: { color: COLORS.GLOBAL.WHITE },

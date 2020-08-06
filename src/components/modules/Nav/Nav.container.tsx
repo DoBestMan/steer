@@ -13,7 +13,6 @@ import { NAV_THEME, themes } from './Nav.theme';
 
 interface Props {
   isHomepage?: boolean;
-  isLoading?: boolean;
 }
 
 const ALTERNATE_THEME_ROUTES: string[] = [
@@ -23,11 +22,18 @@ const ALTERNATE_THEME_ROUTES: string[] = [
   trimSlash(ROUTE_MAP[ROUTES.TYPE_REVIEWS]),
 ];
 
-function NavContainer({ isHomepage = false, isLoading = false }: Props) {
+function NavContainer({ isHomepage = false }: Props) {
   const { pathname } = useRouter();
   const { setNavTheme, theme } = useNavContext();
   const siteMenu = useSiteMenuContext();
 
+  /**
+   * Change the nav theme based on the route.
+   * This is the primary way we manage the Nav theme. However, on Catalog pages
+   * we also depend on the API response (if results but no Top Picks, the Nav
+   * appears on an orange background). This is managed in the `CatalogPage`
+   * component.
+   */
   useEffect(() => {
     const isAlternateTheme = ALTERNATE_THEME_ROUTES.includes(
       trimSlash(pathname),
@@ -43,7 +49,7 @@ function NavContainer({ isHomepage = false, isLoading = false }: Props) {
 
   return (
     <ThemeProvider theme={themes[theme]}>
-      <Nav isHomepage={isHomepage} isLoading={isLoading} />
+      <Nav isHomepage={isHomepage} />
       <SubNav {...siteMenu} />
     </ThemeProvider>
   );

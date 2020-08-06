@@ -12,7 +12,7 @@ import styles from './NavSearchButton.styles';
 interface Props {
   border: CSSObjectType;
   handleToggleSearch: () => void;
-  iconColor: CSSObjectType;
+  iconColor: CSSObject | CSSObjectType;
   textColor: CSSObject;
 }
 

@@ -30,10 +30,27 @@ function useRouterContextSetup() {
   const [isRouteLoading, setIsRouteLoading] = useState(false);
   const [skipPageTransition, setSkipPageTransition] = useState(false);
 
+  // For now, the only scenario where the page transition is skipped is
+  // the transition into and between Catalog pages
+  const isCatalogTransition = skipPageTransition;
+
   const savePrevUrl = useCallback(() => {
     setPrevUrl(router.asPath);
     setPrevRoute(router.pathname);
   }, [router, setPrevUrl, setPrevRoute]);
+
+  const handleBeforeHistoryChange = useCallback(() => {
+    // Next route has loaded, hide the loading bar
+    setIsRouteLoading(false);
+
+    // Show the nav (unless it's a Catalog transition)
+    if (!isCatalogTransition) {
+      eventEmitters.setNavVisibility.emit({ isVisible: true });
+    }
+
+    // Save the previous url and route
+    savePrevUrl();
+  }, [isCatalogTransition, savePrevUrl]);
 
   useEffect(() => {
     const handleRouteChangeStart = (url: string) => {
@@ -42,13 +59,9 @@ function useRouterContextSetup() {
 
       // Update next url. This causes the page transition to start.
       setNextUrl(url);
-    };
-    const handleBeforeHistoryChange = () => {
-      // Next route has loaded, hide the loading bar
-      setIsRouteLoading(false);
 
-      // Save the previous url and route
-      savePrevUrl();
+      // Hide the nav
+      eventEmitters.setNavVisibility.emit({ isVisible: false });
     };
     const handleRouteChangeComplete = () => {
       // Route change complete, reset the skipPageTransition state
@@ -57,6 +70,9 @@ function useRouterContextSetup() {
     const handleRouteChangeError = () => {
       // If there is an error, hide the loading bar
       setIsRouteLoading(false);
+
+      // Make sure Nav is visible
+      eventEmitters.setNavVisibility.emit({ isVisible: true });
     };
 
     router.events.on('routeChangeStart', handleRouteChangeStart);

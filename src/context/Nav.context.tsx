@@ -1,4 +1,4 @@
-import { ReactNode, useMemo, useState } from 'react';
+import { ReactNode, useEffect, useMemo, useState } from 'react';
 
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import { NAV_THEME } from '~/components/modules/Nav/Nav.theme';
@@ -8,6 +8,7 @@ import {
   NAV_TARGETS,
 } from '~/components/modules/Nav/Nav.types';
 import { ACCOUNT_ROUTE, ROUTE_MAP, ROUTES } from '~/lib/constants';
+import { eventEmitters } from '~/lib/events/emitters';
 import { createContext } from '~/lib/utils/context';
 import { ui } from '~/lib/utils/ui-dictionary';
 
@@ -26,12 +27,11 @@ export interface NavContextProps {
   handleClearCategory: () => void;
   handleClearLink: () => void;
   handleCloseSubNav: () => void;
-  isHidden: boolean;
   isSubNavOpen: boolean;
+  isVisible: boolean;
   links: Array<LinkType | ActionType>;
   linksMobile: Array<LinkType | ActionType>;
   setActiveLink: (link: string) => void;
-  setIsHidden: (isHidden: boolean) => void;
   setNavTheme: (theme: NAV_THEME) => void;
   theme: NAV_THEME;
   toggleSubNav: () => void;
@@ -99,7 +99,7 @@ export function buildLinks({
 
 // Exported for testing only
 export function useNavContextSetup(): NavContextProps {
-  const [isHidden, setIsHidden] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const [isSubNavOpen, setIsSubNavOpen] = useState(false);
   const [activeLink, setActiveLink] = useState('');
   const [activeCategory, setActiveCategory] = useState('');
@@ -108,6 +108,22 @@ export function useNavContextSetup(): NavContextProps {
   const { links, linksMobile } = useMemo(() => buildLinks({ locationString }), [
     locationString,
   ]);
+
+  useEffect(() => {
+    const handleNavVisibilityChange = ({
+      isVisible,
+    }: {
+      isVisible: boolean;
+    }) => {
+      setIsVisible(isVisible);
+    };
+
+    eventEmitters.setNavVisibility.on(handleNavVisibilityChange);
+
+    return () => {
+      eventEmitters.setNavVisibility.off(handleNavVisibilityChange);
+    };
+  });
 
   return {
     activeCategory,
@@ -135,12 +151,11 @@ export function useNavContextSetup(): NavContextProps {
     handleCloseSubNav: () => {
       setIsSubNavOpen(false);
     },
-    isHidden,
     isSubNavOpen,
+    isVisible,
     links,
     linksMobile,
     setActiveLink,
-    setIsHidden,
     setNavTheme,
     theme,
     toggleSubNav: () => {

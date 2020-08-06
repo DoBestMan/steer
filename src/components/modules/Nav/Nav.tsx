@@ -1,8 +1,6 @@
 import { useTheme } from 'emotion-theming';
-import { useRouter } from 'next/dist/client/router';
-import { useEffect } from 'react';
 import { Transition } from 'react-transition-group';
-import { EXITED, TransitionStatus } from 'react-transition-group/Transition';
+import { TransitionStatus } from 'react-transition-group/Transition';
 
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
@@ -22,38 +20,21 @@ export const NAV_ID = 'main-navigation';
 
 interface Props {
   isHomepage?: boolean;
-  isLoading?: boolean;
 }
 
-function Nav({ isHomepage, isLoading }: Props) {
+function Nav({ isHomepage }: Props) {
   const {
     links,
-    isHidden,
-    setIsHidden,
+    isVisible,
     toggleSubNav,
     createSelectLinkHandler,
   } = useNavContext();
   const { toggleIsSearchOpen } = useSearchContext();
   const theme: NavThemeObject = useTheme();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (!router) {
-      return;
-    }
-
-    // path has changed, the nav can't be hidden!
-    setIsHidden(false);
-  }, [router, setIsHidden]);
 
   return (
-    <Transition appear in={!isLoading} timeout={400}>
+    <Transition appear in={isVisible} timeout={400}>
       {(containerTransitionState: TransitionStatus) => {
-        // We force the nav to stay hidden
-        if (isHidden) {
-          containerTransitionState = EXITED;
-        }
-
         const rootStyles = [
           styles.root,
           theme.textColor,
