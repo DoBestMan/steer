@@ -2,8 +2,8 @@ import { BORDERS, COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const ICON_SIZE = {
-  S: 25,
-  M: 30,
+  S: 35,
+  M: 45,
   XL: 60,
 };
 
@@ -21,7 +21,7 @@ const styles: StylesMap = {
     },
 
     height: ICON_SIZE.S,
-    marginRight: SPACING.SIZE_05,
+    margin: `0 ${SPACING.SIZE_05}px 0 ${SPACING.SIZE_10}px`,
     width: ICON_SIZE.S,
 
     [MQ.M]: {
@@ -31,7 +31,7 @@ const styles: StylesMap = {
 
     [MQ.XL]: {
       height: ICON_SIZE.XL,
-      marginRight: SPACING.SIZE_10,
+      margin: `0 ${SPACING.SIZE_10}px 0 ${SPACING.SIZE_15}px`,
       width: ICON_SIZE.XL,
     },
   },
