@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Button from '~/components/global/Button/Button';
 import Icon from '~/components/global/Icon/Icon';
@@ -14,7 +14,7 @@ import {
   FeedbackStatesProps,
   STATES,
 } from './Feedback.types';
-import { injectFeedbackifyScript } from './Feedback.utils';
+import { injectFeedbackifyScript, showFeedbackIframe } from './Feedback.utils';
 
 const FEEDBACK_STATE: { [name: string]: FeedbackStatesProps } = {
   [STATES.DEFAULT]: {
@@ -65,8 +65,12 @@ function Feedback() {
   const events: { [name: string]: () => void } = {
     [ACTIONS.GO_TO_YES]: () => setState(STATES.POSITIVE),
     [ACTIONS.GO_TO_NO]: () => setState(STATES.NEGATIVE),
-    [ACTIONS.OPEN_FEEDBACK]: injectFeedbackifyScript,
+    [ACTIONS.OPEN_FEEDBACK]: showFeedbackIframe,
   };
+
+  useEffect(() => {
+    injectFeedbackifyScript();
+  }, []);
 
   return (
     <div css={styles.container}>

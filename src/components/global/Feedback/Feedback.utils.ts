@@ -9,7 +9,7 @@ const CONSTANTS = {
   fbySource: '//cdn.feedbackify.com/f.js',
 };
 
-function showFeedbackIframe() {
+export function showFeedbackIframe() {
   if (!window.fby) {
     return;
   }
@@ -25,11 +25,5 @@ export function injectFeedbackifyScript() {
     script.async = true;
     script.src = CONSTANTS.fbySource;
     document.getElementsByTagName('head')[0].appendChild(script);
-
-    script.onload = function () {
-      showFeedbackIframe();
-    };
-  } else {
-    showFeedbackIframe();
   }
 }
