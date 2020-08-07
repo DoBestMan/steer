@@ -25,6 +25,10 @@ export const data = {
         action: ROUTE_MAP[ROUTES.TERMS],
         text: ui('links.terms'),
       },
+      {
+        action: ROUTE_MAP[ROUTES.SITEMAP],
+        text: ui('links.sitemap'),
+      },
     ],
   },
 
