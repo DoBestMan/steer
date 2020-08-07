@@ -3,7 +3,14 @@ import { typography } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
   addToCart: {
-    marginLeft: SPACING.SIZE_20,
+    marginLeft: SPACING.SIZE_10,
+
+    [MQ.M]: {
+      marginLeft: SPACING.SIZE_20,
+    },
+    [MQ.XL]: {
+      marginLeft: SPACING.SIZE_10,
+    },
   },
   dropdownIcon: {
     height: 5,
