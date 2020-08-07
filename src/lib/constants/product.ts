@@ -1,0 +1,4 @@
+export const PRODUCT = {
+  BRAND_IMAGE_HEIGHT: 20,
+  NAME_MAX_LENGTH: 16,
+};

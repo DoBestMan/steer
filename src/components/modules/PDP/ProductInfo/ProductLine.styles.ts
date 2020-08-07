@@ -1,13 +1,11 @@
-import { CSSObject } from '@emotion/core';
-
-import { SPACING } from '~/lib/constants';
+import { PRODUCT, SPACING, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const CONSTANTS = {
   HEADER_MAX_WIDTH: 140,
 };
 
-const styles: CSSObject = {
+const styles: StylesMap = {
   brand: {
     alignItems: 'center',
     display: 'flex',
@@ -20,6 +18,9 @@ const styles: CSSObject = {
       height: '100%',
       width: 'auto',
     },
+  },
+  brandImage: {
+    height: PRODUCT.BRAND_IMAGE_HEIGHT,
   },
   productName: typography.primaryHeadline,
   productNameLong: typography.secondaryHeadline,

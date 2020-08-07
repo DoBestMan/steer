@@ -43,7 +43,11 @@ function ReviewsHeader({
       </GridItem>
       <GridItem gridColumnM="2/6" gridColumnL="3/9" gridColumnXL="4/9">
         <BaseLink href={brandUrl} css={styles.brand}>
-          <BrandLogoOrLabel brand={brand} />
+          <BrandLogoOrLabel
+            brand={brand}
+            customContainerStyles={styles.brandImage}
+            widths={[200, 400, 600]}
+          />
         </BaseLink>
         <p css={styles.title}>{ui('reviews.tireReviews', { tire })}</p>
         <StarsWithRating number={ratingStars} />

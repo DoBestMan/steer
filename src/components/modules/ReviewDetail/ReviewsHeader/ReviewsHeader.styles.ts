@@ -1,4 +1,4 @@
-import { MQ, SPACING, StylesMap } from '~/lib/constants';
+import { MQ, PRODUCT, SPACING, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
@@ -9,6 +9,9 @@ const styles: StylesMap = {
       height: '100%',
       width: 'auto',
     },
+  },
+  brandImage: {
+    height: PRODUCT.BRAND_IMAGE_HEIGHT,
   },
   breadcrumbs: {
     marginBottom: SPACING.SIZE_40,

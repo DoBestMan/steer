@@ -16,6 +16,7 @@ export * from './keycodes';
 export * from './links.types';
 export * from './links';
 export * from './modal.types';
+export * from './product';
 export * from './radius';
 export * from './ratings';
 export * from './ratings.types';

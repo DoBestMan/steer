@@ -1,4 +1,5 @@
 import BrandLogoOrLabel from '~/components/global/BrandLogoOrLabel/BrandLogoOrLabel';
+import { PRODUCT } from '~/lib/constants';
 
 import { ProductInfoProps } from './ProductInfo';
 import styles from './ProductLine.styles';
@@ -11,11 +12,17 @@ function ProductLine({
   return (
     <>
       <a href={brandURL} css={styles.brand}>
-        <BrandLogoOrLabel brand={brand} widths={[200, 400, 600]} />
+        <BrandLogoOrLabel
+          brand={brand}
+          customContainerStyles={styles.brandImage}
+          widths={[200, 400, 600]}
+        />
       </a>
       <h1
         css={[
-          productName.length < 16 ? styles.productName : styles.productNameLong,
+          productName.length < PRODUCT.NAME_MAX_LENGTH
+            ? styles.productName
+            : styles.productNameLong,
         ]}
       >
         {productName}
