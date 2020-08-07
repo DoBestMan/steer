@@ -4,6 +4,7 @@ import {
   COLORS,
   GRID_MARGIN,
   MQ,
+  RADIUS,
   SPACING,
   StylesMap,
   Z_INDEX,
@@ -87,7 +88,7 @@ const styles: StylesMap = {
 
       '.swiper-pagination-bullet': {
         background: COLORS.LIGHT.GRAY_20,
-        borderRadius: 5,
+        borderRadius: RADIUS.RADIUS_5,
         height: 2,
         margin: `0 ${SPACING.SIZE_02}px 0 0`,
         opacity: 1,
@@ -231,6 +232,11 @@ const styles: StylesMap = {
       height: CONSTANTS.THUMB_SIZES.L,
       paddingBottom: CONSTANTS.THUMB_INNER_PADDINGS.L,
       width: CONSTANTS.THUMB_SIZES.L,
+    },
+
+    // eslint-disable-next-line sort-keys
+    img: {
+      borderRadius: RADIUS.RADIUS_5,
     },
   },
   thumbActive: {
