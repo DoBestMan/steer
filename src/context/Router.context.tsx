@@ -94,6 +94,7 @@ function useRouterContextSetup() {
     // Skip page transitions in the Catalog (has it's own loading state)
     const handleSkipPageTransition = () => setSkipPageTransition(true);
     eventEmitters.newCatalogSearchQuery.on(handleSkipPageTransition);
+    eventEmitters.skipPageTransition.on(handleSkipPageTransition);
 
     return () => {
       router.beforePopState(() => true);
@@ -102,6 +103,7 @@ function useRouterContextSetup() {
       router.events.off('routeChangeComplete', handleRouteChangeComplete);
       router.events.off('routeChangeError', handleRouteChangeError);
       eventEmitters.newCatalogSearchQuery.off(handleSkipPageTransition);
+      eventEmitters.skipPageTransition.off(handleSkipPageTransition);
     };
   });
 

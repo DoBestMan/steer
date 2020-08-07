@@ -138,6 +138,9 @@ function CatalogPageContainer({
       const route = asPath.split('?');
       const params: Record<string, string> = {};
 
+      // Skip page transition when updating filters
+      eventEmitters.skipPageTransition.emit(null);
+
       Object.entries({ ...query, ...filters }).forEach(([k, v]) => {
         const stringifiedVal = getParam(v);
         if (!!stringifiedVal && !pageParams[k]) {
