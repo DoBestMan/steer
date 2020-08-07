@@ -7,14 +7,12 @@ import styles from './Checkbox.styles';
 
 interface Props  // use custom on change
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
-  defaultChecked?: boolean;
   isDisabled?: boolean;
   onChange?: () => void;
 }
 
 export default function Checkbox({
   checked,
-  defaultChecked = false,
   isDisabled = false,
   onChange,
   ...rest
@@ -25,9 +23,8 @@ export default function Checkbox({
         aria-checked={checked}
         aria-disabled={isDisabled}
         css={[styles.input, isDisabled && styles.disabled]}
-        role="checkbox"
         type="checkbox"
-        defaultChecked={defaultChecked}
+        checked={checked}
         disabled={isDisabled}
         onChange={onChange}
         {...rest}

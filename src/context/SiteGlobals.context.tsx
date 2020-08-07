@@ -4,7 +4,8 @@ import { SiteGlobals } from '~/data/models/SiteGlobals';
 import { useApiDataWithDefault } from '~/hooks/useApiDataWithDefault';
 import { createContext } from '~/lib/utils/context';
 
-const SiteGlobalsContext = createContext<SiteGlobals>();
+// exported for testing
+export const SiteGlobalsContext = createContext<SiteGlobals>();
 
 const REFRESH_INTERVAL = 600_000; // 10 minutes
 

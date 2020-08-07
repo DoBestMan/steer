@@ -23,6 +23,7 @@ function ActionBar({
     <div css={styles.root}>
       {secondaryLabel && (
         <button
+          data-testid="secondary-button"
           type="button"
           css={[styles.secondary, isDisabled && styles.disabled]}
           onClick={onClickSecondary}
@@ -31,6 +32,7 @@ function ActionBar({
         </button>
       )}
       <Button
+        data-testid="primary-button"
         isDisabled={isDisabled}
         css={styles.primary}
         onClick={onClickPrimary}

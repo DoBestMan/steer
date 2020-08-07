@@ -1,4 +1,8 @@
-import { SiteCatalogFilterItem } from '~/data/models/SiteCatalogFilterItem';
+import { SiteCatalogFilterGroupGroupTypeEnum } from '~/data/models/SiteCatalogFilterGroup';
+import {
+  SiteCatalogFilterItem,
+  SiteCatalogFilterItemStateEnum,
+} from '~/data/models/SiteCatalogFilterItem';
 import { SiteCatalogFilterList } from '~/data/models/SiteCatalogFilterList';
 import { SiteCatalogFilterRange } from '~/data/models/SiteCatalogFilterRange';
 import { SiteCatalogFilterToggle } from '~/data/models/SiteCatalogFilterToggle';
@@ -876,14 +880,17 @@ export const mockToggle = ({
 } as unknown) as SiteCatalogFilterToggle;
 
 export const mockList = ({
-  type: 'SiteCatalogFilterList',
+  type: FilterContentTypes.SiteCatalogFilterList,
   header: {
     title: 'List Label',
   },
   filterGroups: [
     {
+      groupType: SiteCatalogFilterGroupGroupTypeEnum.Checklist,
       items: [
         {
+          state: SiteCatalogFilterItemStateEnum.Normal,
+          title: 'Test title',
           value: { foo: 'bar', baz: 'foo' },
         },
       ],
@@ -945,6 +952,7 @@ export const mockListSelected = ({
   },
   filterGroups: [
     {
+      groupType: SiteCatalogFilterGroupGroupTypeEnum.Checklist,
       items: [
         {
           state: 'Selected',

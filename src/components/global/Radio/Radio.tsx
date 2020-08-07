@@ -30,7 +30,6 @@ export default function Radio({
         css={styles.input}
         disabled={isDisabled}
         onClick={handleChange}
-        role="radio"
         type="radio"
         value={value}
         {...rest}

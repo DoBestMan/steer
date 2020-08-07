@@ -9,7 +9,6 @@ import {
   SiteCatalogFilterList,
   SiteCatalogFilterListPresentationStyleEnum,
 } from '~/data/models/SiteCatalogFilterList';
-import { useBreakpoints } from '~/hooks/useBreakpoints';
 
 import { hasActiveValue, strictEqualsFilterValue } from '../Filters.utils';
 import { ChildProps } from '../Popup/FilterPopup.utils';
@@ -102,9 +101,8 @@ export default function FilterChecklist({
     | 'filtersToApply'
     | 'openStaticModal'
   >) {
-  const { greaterThan } = useBreakpoints();
   const lgStyles =
-    greaterThan.M &&
+    isLarge &&
     presentationStyle === SiteCatalogFilterListPresentationStyleEnum.Large
       ? largeStyles
       : styles;
