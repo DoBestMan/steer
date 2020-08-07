@@ -1,5 +1,3 @@
-import isStrictEqual from 'fast-deep-equal';
-
 import TitleCheckbox from '~/components/global/Checkbox/TitleCheckbox';
 import TitleRadio from '~/components/global/Radio/TitleRadio';
 import {
@@ -13,7 +11,7 @@ import {
 } from '~/data/models/SiteCatalogFilterList';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 
-import { hasActiveValue } from '../Filters.utils';
+import { hasActiveValue, strictEqualsFilterValue } from '../Filters.utils';
 import { ChildProps } from '../Popup/FilterPopup.utils';
 import styles from './FilterChecklist.styles';
 import largeStyles from './FilterChecklistLarge.styles';
@@ -76,7 +74,9 @@ const mapGroupTypeToInput: Record<
           onChange={handleChange(item.value, true)}
           value={item.title}
           activeValue={
-            isStrictEqual(item.value, filtersToApply) ? item.title : undefined
+            strictEqualsFilterValue(item.value, filtersToApply)
+              ? item.title
+              : undefined
           }
         />
       </div>

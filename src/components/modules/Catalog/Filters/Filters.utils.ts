@@ -169,6 +169,18 @@ export function getInitialFiltersState(
 }
 
 /**
+ * Unlike other filters that may include a value in state, radio types need to
+ * have a strict match to their value in state
+ * @returns boolean
+ */
+export function strictEqualsFilterValue(
+  value: Record<string, string>,
+  activeFilters: Record<string, string>,
+) {
+  return Object.keys(value).every((key) => activeFilters[key] === value[key]);
+}
+
+/**
  * Based on the shape of a filter, determines if any values exist in state
  * @returns boolean
  */

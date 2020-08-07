@@ -25,6 +25,7 @@ import {
   getInitialFiltersState,
   getValueKeys,
   hasActiveValue,
+  strictEqualsFilterValue,
 } from './Filters.utils';
 
 const toggleFilters = [
@@ -313,6 +314,20 @@ describe('Filters.utils', () => {
           } as SiteCatalogFilterList;
 
           expect(hasActiveValue(mockListDupe, mockState)).toBe(true);
+        });
+      });
+
+      describe('strictEqualsFilterValue', () => {
+        it('checks if all filter values equals corresponding filter state key', () => {
+          expect(
+            strictEqualsFilterValue(
+              { foo: 'bar', bar: 'baz' },
+              { foo: 'bar', bar: 'baz' },
+            ),
+          ).toBe(true);
+          expect(
+            strictEqualsFilterValue({ foo: 'bar', bar: 'baz' }, { foo: 'bar' }),
+          ).toBe(false);
         });
       });
 
