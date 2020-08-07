@@ -1,21 +1,23 @@
 import { typography } from '~/styles/typography.styles';
 
-import { styles } from './Sticker.styles';
+import { STICKER_SIZES, styles } from './Sticker.styles';
 
 interface Props {
-  isLarge?: boolean;
   label: string;
+  size?: STICKER_SIZES;
 }
 
 function Sticker(props: Props) {
-  const { label, isLarge } = props;
+  const { label, size = STICKER_SIZES.SMALL } = props;
 
   return (
     <span
       css={[
-        isLarge ? typography.tertiaryHeadline : typography.smallCopyTight,
+        size === STICKER_SIZES.SMALL
+          ? typography.secondarySubhead
+          : typography.tertiaryHeadline,
         styles.root,
-        isLarge && styles.large,
+        size && styles[STICKER_SIZES[size]],
       ]}
     >
       {label}

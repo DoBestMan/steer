@@ -2,7 +2,6 @@ import {
   BORDERS,
   COLORS,
   MQ,
-  RADIUS,
   SPACING,
   StylesMap,
   Z_INDEX,
@@ -23,8 +22,6 @@ const IMAGE_SIZE = {
 };
 
 const BRAND_IMAGE_HEIGHT = 20;
-
-const DISC_SIZE = 50;
 
 const styles: StylesMap = {
   attribute: [
@@ -111,25 +108,6 @@ const styles: StylesMap = {
     {
       color: COLORS.GLOBAL.ORANGE,
       marginTop: 5,
-    },
-  ],
-  promoDisc: [
-    typography.smallCopyTight,
-    {
-      alignItems: 'center',
-      backgroundColor: COLORS.GLOBAL.ORANGE,
-      borderRadius: RADIUS.CIRCLE,
-      color: COLORS.GLOBAL.WHITE,
-      display: 'flex',
-      height: DISC_SIZE,
-      justifyContent: 'center',
-      left: SPACING.SIZE_20,
-      lineHeight: 0.9,
-      position: 'absolute',
-      textAlign: 'center',
-      top: SPACING.SIZE_10,
-      width: DISC_SIZE,
-      zIndex: Z_INDEX.FRONT,
     },
   ],
   promos: {
@@ -225,6 +203,40 @@ const styles: StylesMap = {
     [MQ.XL]: {
       bottom: -48,
     },
+  },
+  sticker: {
+    left: -SPACING.SIZE_10,
+    position: 'absolute',
+    textTransform: 'lowercase',
+    top: -SPACING.SIZE_05,
+
+    [MQ.M]: {
+      left: SPACING.SIZE_05,
+    },
+    [MQ.XL]: {
+      left: SPACING.SIZE_15,
+    },
+  },
+  stickerHighlighted: {
+    left: SPACING.SIZE_05,
+    top: -SPACING.SIZE_10,
+
+    [MQ.M]: {
+      left: SPACING.SIZE_15,
+      top: -SPACING.SIZE_05,
+    },
+    [MQ.XL]: {
+      left: SPACING.SIZE_35,
+    },
+
+    /* eslint-disable sort-keys */
+    span: {
+      fontSize: `${12 / 10}rem`,
+      [MQ.XL]: {
+        fontSize: `${15 / 10}rem`,
+      },
+    },
+    /* eslint-enable sort-keys */
   },
   subcopy: [
     typography.smallCopyTight,

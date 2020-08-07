@@ -183,18 +183,24 @@ const styles: CSSObject = {
     },
   },
   sticker: {
-    left: -SPACING.SIZE_05,
+    left: -SPACING.SIZE_10,
     position: 'absolute',
+    textTransform: 'lowercase',
     top: -SPACING.SIZE_15,
 
     [MQ.M]: {
-      left: -SPACING.SIZE_10,
-      top: -SPACING.SIZE_15,
+      left: -SPACING.SIZE_15,
+      top: -SPACING.SIZE_10,
     },
-    [MQ.XL]: {
-      left: -SPACING.SIZE_20,
-      top: -SPACING.SIZE_20,
+
+    /* eslint-disable sort-keys */
+    span: {
+      fontSize: `${12 / 10}rem`,
+      [MQ.XL]: {
+        fontSize: `${15 / 10}rem`,
+      },
     },
+    /* eslint-enable sort-keys */
   },
   title: [
     typography.secondarySubhead,

@@ -8,6 +8,7 @@ import BaseLink from '~/components/global/Link/BaseLink';
 import Prices from '~/components/global/Prices/Prices';
 import Stars, { HALF_WIDTH_STARS } from '~/components/global/Stars/Stars';
 import Sticker from '~/components/global/Sticker/Sticker';
+import { STICKER_SIZES } from '~/components/global/Sticker/Sticker.styles';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { COLORS } from '~/lib/constants';
 import { getTranslate, subscribeTranslate } from '~/lib/helpers/translate';
@@ -191,7 +192,10 @@ function TopPicksItem(props: TopPickItemsProps) {
             {/* Sticker (1st, 2nd...) */}
             {asset && typeof index !== 'undefined' && (
               <span css={[styles.sticker, show && styles.stickerShow]}>
-                <Sticker isLarge label={ordinalSuffixOf(index + 1)} />
+                <Sticker
+                  label={ordinalSuffixOf(index + 1)}
+                  size={STICKER_SIZES.MEDIUM}
+                />
               </span>
             )}
 

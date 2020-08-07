@@ -5,6 +5,8 @@ import BaseLink from '~/components/global/Link/BaseLink';
 import Prices from '~/components/global/Prices/Prices';
 import PromoTag from '~/components/global/PromoTag/PromoTag';
 import Stars, { HALF_WIDTH_STARS } from '~/components/global/Stars/Stars';
+import Sticker from '~/components/global/Sticker/Sticker';
+import { STICKER_SIZES } from '~/components/global/Sticker/Sticker.styles';
 import { COLORS } from '~/lib/constants';
 import { SHADOW_SRC } from '~/lib/constants/image';
 import { getSquareImageTransformations } from '~/lib/utils/cloudinary/cloudinary';
@@ -74,7 +76,16 @@ function ProductListing({
       onMouseLeave={handleMouseLeave}
     >
       <div css={[styles.image, isHighlighted && styles.imageHighlighted]}>
-        {highlight && <div css={styles.promoDisc}>{highlight}</div>}
+        {highlight && (
+          <div
+            css={[styles.sticker, isHighlighted && styles.stickerHighlighted]}
+          >
+            <Sticker
+              label={highlight}
+              size={isHighlighted ? STICKER_SIZES.X_LARGE : STICKER_SIZES.SMALL}
+            />
+          </div>
+        )}
         <Image
           widths={imageWidths}
           altText={displayedImage.image.altText}

@@ -1,19 +1,32 @@
 import { COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
 
-const SIZES = {
-  DEFAULT: {
-    S: 44,
-    M: 44,
-    L: 44,
+export enum STICKER_SIZES {
+  LARGE = 'LARGE',
+  MEDIUM = 'MEDIUM',
+  SMALL = 'SMALL',
+  X_LARGE = 'X_LARGE',
+}
+
+export const SIZES = {
+  [STICKER_SIZES.SMALL]: {
+    S: 46,
     XL: 50,
   },
-  LARGE: {
+  [STICKER_SIZES.MEDIUM]: {
     S: 55,
-    M: 75,
-    L: 65,
+    XL: 60,
+  },
+  [STICKER_SIZES.LARGE]: {
+    S: 55,
+    XL: 65,
+  },
+  [STICKER_SIZES.X_LARGE]: {
+    S: 60,
     XL: 65,
   },
 };
+
+const ROOT_LINE_HEIGHT = 0.95; // not great but closer from design
 
 export const styles: StylesMap = {
   root: {
@@ -22,50 +35,78 @@ export const styles: StylesMap = {
     borderRadius: '100%',
     color: COLORS.GLOBAL.WHITE,
     display: 'flex',
-    fontWeight: 'normal',
-    height: SIZES.DEFAULT.S,
     justifyContent: 'center',
-    lineHeight: '100%', // not great but closer from design
-    padding: SPACING.SIZE_05,
+    lineHeight: ROOT_LINE_HEIGHT,
     textAlign: 'center',
-    width: SIZES.DEFAULT.S,
+    [MQ.M]: { lineHeight: ROOT_LINE_HEIGHT },
+    [MQ.L]: { lineHeight: ROOT_LINE_HEIGHT },
+    [MQ.XL]: { lineHeight: ROOT_LINE_HEIGHT },
+  },
 
-    [MQ.M]: {
-      height: SIZES.DEFAULT.M,
-      width: SIZES.DEFAULT.M,
-    },
-
-    [MQ.L]: {
-      height: SIZES.DEFAULT.L,
-      width: SIZES.DEFAULT.L,
-    },
+  [STICKER_SIZES.SMALL]: {
+    height: SIZES[STICKER_SIZES.SMALL].S,
+    padding: SPACING.SIZE_05,
+    width: SIZES[STICKER_SIZES.SMALL].S,
 
     [MQ.XL]: {
-      height: SIZES.DEFAULT.XL,
-      width: SIZES.DEFAULT.XL,
+      height: SIZES[STICKER_SIZES.SMALL].XL,
+      width: SIZES[STICKER_SIZES.SMALL].XL,
     },
   },
 
-  large: {
-    height: SIZES.LARGE.S,
+  [STICKER_SIZES.MEDIUM]: {
+    height: SIZES[STICKER_SIZES.MEDIUM].S,
     padding: 3,
-    width: SIZES.LARGE.S,
+    width: SIZES[STICKER_SIZES.MEDIUM].S,
 
     [MQ.M]: {
-      height: SIZES.LARGE.M,
       padding: 13,
-      width: SIZES.LARGE.M,
     },
 
     [MQ.L]: {
-      height: SIZES.LARGE.L,
       padding: SPACING.SIZE_10,
-      width: SIZES.LARGE.L,
     },
 
     [MQ.XL]: {
-      height: SIZES.LARGE.XL,
-      width: SIZES.LARGE.XL,
+      height: SIZES[STICKER_SIZES.MEDIUM].XL,
+      width: SIZES[STICKER_SIZES.MEDIUM].XL,
+    },
+  },
+
+  [STICKER_SIZES.LARGE]: {
+    height: SIZES[STICKER_SIZES.LARGE].S,
+    padding: 3,
+    width: SIZES[STICKER_SIZES.LARGE].S,
+
+    [MQ.M]: {
+      padding: 13,
+    },
+
+    [MQ.L]: {
+      padding: SPACING.SIZE_10,
+    },
+
+    [MQ.XL]: {
+      height: SIZES[STICKER_SIZES.LARGE].XL,
+      width: SIZES[STICKER_SIZES.LARGE].XL,
+    },
+  },
+  [STICKER_SIZES.X_LARGE]: {
+    height: SIZES[STICKER_SIZES.X_LARGE].S,
+    padding: 3,
+    width: SIZES[STICKER_SIZES.X_LARGE].S,
+
+    [MQ.M]: {
+      padding: 13,
+    },
+
+    [MQ.L]: {
+      padding: SPACING.SIZE_10,
+    },
+
+    [MQ.XL]: {
+      height: SIZES[STICKER_SIZES.X_LARGE].XL,
+      width: SIZES[STICKER_SIZES.X_LARGE].XL,
     },
   },
 };

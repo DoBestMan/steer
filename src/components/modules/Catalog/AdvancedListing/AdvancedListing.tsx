@@ -10,6 +10,7 @@ import Prices from '~/components/global/Prices/Prices';
 import RatingsList from '~/components/global/RatingsList/RatingsList';
 import Stars from '~/components/global/Stars/Stars';
 import Sticker from '~/components/global/Sticker/Sticker';
+import { STICKER_SIZES } from '~/components/global/Sticker/Sticker.styles';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import {
   BREAKPOINT_SIZES,
@@ -63,7 +64,7 @@ function AdvancedListing({
         <div css={styles.image}>
           {highlight && (
             <div css={styles.sticker}>
-              <Sticker label={highlight} />
+              <Sticker label={highlight} size={STICKER_SIZES.LARGE} />
             </div>
           )}
           <div css={styles.imageContainer}>
