@@ -8,8 +8,8 @@ export async function backendGetProductDetail({
   productLine,
   query,
 }: {
-  brand: string | string[];
-  productLine: string | string[];
+  brand: string;
+  productLine: string;
   query?: Record<string, string>;
 }) {
   const response = await fetch<SiteProduct>({
@@ -31,8 +31,8 @@ export async function backendGetProductReviews({
   productLine,
   query,
 }: {
-  brand: string | string[];
-  productLine: string | string[];
+  brand: string;
+  productLine: string;
   query?: Record<string, string>;
 }) {
   const response = await fetch<SiteProductReviews>({

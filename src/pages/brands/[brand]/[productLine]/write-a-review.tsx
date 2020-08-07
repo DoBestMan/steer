@@ -6,7 +6,10 @@ import WriteAReviewPage, {
 import { backendBootstrap } from '~/lib/backend/bootstrap';
 import { backendGetProductDetail } from '~/lib/backend/product-detail';
 import { validBrandQuery } from '~/lib/utils/regex';
-import { validateOrRedirectToNotFound } from '~/lib/utils/routes';
+import {
+  getStringifiedParams,
+  validateOrRedirectToNotFound,
+} from '~/lib/utils/routes';
 import { removeTireFromQueryParam } from '~/lib/utils/string';
 
 function WriteAReview(props: WriteAReviewServerData) {
@@ -17,7 +20,7 @@ export const getServerSideProps: GetServerSideProps<WriteAReviewServerData> = as
   context,
 ) => {
   backendBootstrap({ request: context.req });
-  const { brand, productLine } = context.query;
+  const { brand, productLine } = getStringifiedParams(context.query);
 
   validateOrRedirectToNotFound({
     param: brand,

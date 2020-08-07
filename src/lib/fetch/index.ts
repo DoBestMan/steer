@@ -25,7 +25,7 @@ function buildUrl(
   query: Record<string, string>,
 ) {
   const pathWithParams = path.replace(/\{([^}]+)\}/g, (_, key: string) => {
-    return params[key].toString();
+    return encodeURIComponent(params[key].toString());
   });
 
   const searchParams = new URLSearchParams(query).toString();

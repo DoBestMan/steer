@@ -63,7 +63,8 @@ export function getParam(param: string | string[]): string {
 }
 
 /*
- * Return stringified query param
+ * Sanitizes route parameters to transform null, undefined and
+ * multiple (string[]) into an empty string value
  */
 export function getStringifiedParams(
   params: Record<string, string | string[] | null | undefined>,

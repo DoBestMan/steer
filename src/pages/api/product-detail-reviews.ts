@@ -12,12 +12,12 @@ export default async (
 ) => {
   backendBootstrap({ request });
 
-  const { brand, productLine, ...rest } = request.query;
+  const { brand, productLine, ...rest } = getStringifiedParams(request.query);
   const brandName = removeTireFromQueryParam(brand);
 
   const siteProductReviews = await backendGetProductReviews({
     brand: brandName,
-    query: getStringifiedParams(rest),
+    query: rest,
     productLine,
   });
 

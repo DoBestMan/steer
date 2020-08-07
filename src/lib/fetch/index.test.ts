@@ -46,6 +46,54 @@ describe('fetch', () => {
     expect(result.test).toEqual(true);
   });
 
+  it('interpolates URL params into a URL template', async () => {
+    const response = new Response('{"test":true}');
+    mocked(globalThis.fetch).mockResolvedValue(response);
+
+    const result = await fetch<{ test: boolean }>({
+      endpoint: '/v1/test-get/{paramKey}',
+      method: 'get',
+      params: {
+        paramKey: 'paramValue',
+      },
+    });
+
+    expect(globalThis.fetch).toHaveBeenCalledWith(
+      expect.stringContaining('test-get/paramValue'),
+      expect.objectContaining({
+        body: undefined,
+        method: 'get',
+      }),
+    );
+
+    expect(result).toBeTruthy();
+    expect(result.test).toEqual(true);
+  });
+
+  it('encodes params when interpolating in a URL template', async () => {
+    const response = new Response('{"test":true}');
+    mocked(globalThis.fetch).mockResolvedValue(response);
+
+    const result = await fetch<{ test: boolean }>({
+      endpoint: '/v1/test-get/{paramKey}',
+      method: 'get',
+      params: {
+        paramKey: 'encode this/please',
+      },
+    });
+
+    expect(globalThis.fetch).toHaveBeenCalledWith(
+      expect.stringContaining('test-get/encode%20this%2Fplease'),
+      expect.objectContaining({
+        body: undefined,
+        method: 'get',
+      }),
+    );
+
+    expect(result).toBeTruthy();
+    expect(result.test).toEqual(true);
+  });
+
   it('fetches using POST and gets a successful response', async () => {
     const response = new Response('{"test":true}');
     mocked(globalThis.fetch).mockResolvedValue(response);

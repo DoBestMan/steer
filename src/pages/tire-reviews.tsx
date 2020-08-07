@@ -5,6 +5,7 @@ import ReviewListingPage, {
 } from '~/components/pages/ReviewListingPage/ReviewListingPage.container';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
 import { backendGetReviewListing } from '~/lib/backend/review-listing';
+import { getStringifiedParams } from '~/lib/utils/routes';
 
 function Reviews(props: ReviewListingServerData) {
   return <ReviewListingPage {...props} />;
@@ -14,17 +15,11 @@ export const getServerSideProps: GetServerSideProps<ReviewListingServerData> = a
   context,
 ) => {
   backendBootstrap({ request: context.req });
-  const queryParams: Record<string, string> = {};
   const { ...params } = context.query;
 
-  // Tire reviews accept params for sort, order and page
-  Object.entries(params).map(([key, value]) => {
-    if (typeof value === 'string') {
-      queryParams[key] = value;
-    }
+  const tireReviews = await backendGetReviewListing({
+    query: getStringifiedParams(params),
   });
-
-  const tireReviews = await backendGetReviewListing({ query: queryParams });
 
   const props: ReviewListingServerData = {
     serverData: {

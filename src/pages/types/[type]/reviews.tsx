@@ -7,6 +7,7 @@ import { backendBootstrap } from '~/lib/backend/bootstrap';
 import { backendGetReviewListing } from '~/lib/backend/review-listing';
 import { validBrandQuery as validTiresQuery } from '~/lib/utils/regex';
 import {
+  getStringifiedParams,
   redirectToNotFound,
   validateOrRedirectToNotFound,
 } from '~/lib/utils/routes';
@@ -20,7 +21,6 @@ export const getServerSideProps: GetServerSideProps<ReviewListingServerData> = a
   context,
 ) => {
   backendBootstrap({ request: context.req });
-  const queryParams: Record<string, string> = {};
   const { type, ...params } = context.query;
 
   validateOrRedirectToNotFound({
@@ -30,11 +30,7 @@ export const getServerSideProps: GetServerSideProps<ReviewListingServerData> = a
   });
 
   // Type tire reviews accept params for sort, order and page
-  Object.entries(params).map(([key, value]) => {
-    if (typeof value === 'string') {
-      queryParams[key] = value;
-    }
-  });
+  const queryParams = getStringifiedParams(params);
 
   // tireType acts as a query param for the tire reviews end point so add it to the query params
   queryParams.tireType = removeTireFromQueryParam(type);

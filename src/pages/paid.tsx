@@ -9,7 +9,7 @@ import {
   backendGetProductReviews,
 } from '~/lib/backend/product-detail';
 import { RESULTS_PER_PAGE_PDP } from '~/lib/constants';
-import { redirectToNotFound } from '~/lib/utils/routes';
+import { getStringifiedParams, redirectToNotFound } from '~/lib/utils/routes';
 
 function ProductLine(props: ProductDetailData) {
   return <ProductDetailContainer {...props} />;
@@ -19,7 +19,7 @@ export const getServerSideProps: GetServerSideProps<ProductDetailData> = async (
   context,
 ) => {
   backendBootstrap({ request: context.req });
-  const { brand, productLine, tireSize } = context.query;
+  const { brand, productLine, tireSize } = getStringifiedParams(context.query);
 
   if (!brand || !productLine || !tireSize) {
     redirectToNotFound(context.res);

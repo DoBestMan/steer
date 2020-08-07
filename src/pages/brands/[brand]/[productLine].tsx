@@ -10,7 +10,10 @@ import {
 } from '~/lib/backend/product-detail';
 import { RESULTS_PER_PAGE_PDP } from '~/lib/constants';
 import { validBrandQuery } from '~/lib/utils/regex';
-import { validateOrRedirectToNotFound } from '~/lib/utils/routes';
+import {
+  getStringifiedParams,
+  validateOrRedirectToNotFound,
+} from '~/lib/utils/routes';
 import { removeTireFromQueryParam } from '~/lib/utils/string';
 
 function ProductLine(props: ProductDetailData) {
@@ -21,7 +24,7 @@ export const getServerSideProps: GetServerSideProps<ProductDetailData> = async (
   context,
 ) => {
   backendBootstrap({ request: context.req });
-  const { brand, productLine } = context.query;
+  const { brand, productLine } = getStringifiedParams(context.query);
 
   validateOrRedirectToNotFound({
     param: brand,

@@ -10,6 +10,7 @@ import {
 } from '~/lib/backend/product-detail';
 import { validBrandQuery } from '~/lib/utils/regex';
 import {
+  getStringifiedParams,
   redirectToNotFound,
   validateOrRedirectToNotFound,
 } from '~/lib/utils/routes';
@@ -23,7 +24,7 @@ export const getServerSideProps: GetServerSideProps<ProductDetailReviewsData> = 
   context,
 ) => {
   backendBootstrap({ request: context.req });
-  const { brand, productLine } = context.query;
+  const { brand, productLine } = getStringifiedParams(context.query);
 
   validateOrRedirectToNotFound({
     param: brand,
