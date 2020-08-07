@@ -41,8 +41,8 @@ export function BuildInMessage({
   }
 
   /**
-   * Split the title by digits, and render the Casino component
-   * instead of the digit string.
+   * Split the title by digits, and render the Casino component instead
+   * of the digit string (has to be the first word in the string).
    */
   const digitsRegex = /(\d+)/;
   const splitTitle = siteCatalogSummaryBuildIn.title
@@ -50,9 +50,9 @@ export function BuildInMessage({
     .split(digitsRegex)
     // remove empty strings
     .filter((s) => s.length)
-    // convert digits to number
-    .map((s) =>
-      digitsRegex.test(s) ? (
+    // convert opening digits to number
+    .map((s, i) =>
+      i === 0 && digitsRegex.test(s) ? (
         <Casino animate numberDisplayed={parseInt(s, 10)} />
       ) : (
         s
