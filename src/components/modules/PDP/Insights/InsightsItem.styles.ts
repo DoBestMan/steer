@@ -15,7 +15,7 @@ const styles: StylesMap = {
     backgroundColor: COLORS.GLOBAL.ORANGE,
     color: COLORS.GLOBAL.WHITE,
     display: 'flex',
-    paddingBottom: SPACING.SIZE_30,
+    paddingBottom: SPACING.SIZE_25,
     paddingLeft: GAP_COLUMNS.S,
     paddingRight: GAP_COLUMNS.S,
     paddingTop: SPACING.SIZE_30,
