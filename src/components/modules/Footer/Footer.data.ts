@@ -22,6 +22,10 @@ export const data = {
         text: ui('links.customerSupport'),
       },
       {
+        action: ROUTE_MAP[ROUTES.PRIVACY],
+        text: ui('links.privacy'),
+      },
+      {
         action: ROUTE_MAP[ROUTES.TERMS],
         text: ui('links.terms'),
       },

@@ -23,6 +23,7 @@ export enum ROUTES {
   OPEN_TEMPLATE = 'openTemplate',
   ORDER_TRACKING = 'orderTracking',
   ORDER_TRACKING_RESULT = 'orderTrackingResult',
+  PRIVACY = 'privacy',
   PRODUCT_DETAIL = 'productDetail',
   PRODUCT_DETAIL_PLA = 'productDetailPla',
   PRODUCT_REVIEWS = 'productReviews',
@@ -73,6 +74,7 @@ export const ROUTE_TYPE_MAP: { [routeName: string]: string } = {
   [ROUTES.ORDER_TRACKING_RESULT]: '/track-your-order/result',
   [ROUTES.ORDER_TRACKING]: '/track-your-order',
   [ROUTES.PRODUCT_DETAIL_PLA]: '/paid',
+  [ROUTES.PRIVACY]: '/privacy',
   [ROUTES.SITEMAP]: '/sitemap',
   [ROUTES.OPEN_TEMPLATE]: '/[slug]',
 };
