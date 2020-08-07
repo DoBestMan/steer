@@ -74,7 +74,7 @@ describe('getBackendEnvVariables', () => {
     });
   });
 
-  test.each(['dev', 'qa', 'staging', 'int-my-branch'])(
+  test.each(['dev', 'qa', 'int-my-branch'])(
     'integration deploy - %s',
     (branch) => {
       process.env.NOW_GITHUB_COMMIT_REF = branch;
@@ -87,7 +87,7 @@ describe('getBackendEnvVariables', () => {
     },
   );
 
-  test.each(['mock-dev', 'mock-qa', 'mock-staging', 'my-branch'])(
+  test.each(['mock-dev', 'mock-qa', 'my-branch'])(
     'mock deploy - %s',
     (branch) => {
       process.env.NOW_GITHUB_COMMIT_REF = branch;

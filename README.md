@@ -216,8 +216,6 @@ now --prod
 
 `build-prod` will create a Next.js build. `build-ci` will create a Next.js build containing storybook at the `/storybook` route.
 
-Note: Builds from other branches (eg staging) that are promoted to production will still contain a visible `/storybook` route.
-
 ### Deduplication
 
 Vercel uses [deduplication](https://vercel.com/docs/v2/platform/deployments#deduplication) to only rebuild when a change in files/settings is detected. This can cause some issues in this codebase because we use the branch name to determine which API to connect to.
