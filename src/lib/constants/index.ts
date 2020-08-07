@@ -22,6 +22,7 @@ export * from './ratings.types';
 export * from './reviews';
 export * from './routes';
 export * from './spacing';
+export * from './static-generation';
 export * from './storybook';
 export * from './styles.types';
 export * from './time';

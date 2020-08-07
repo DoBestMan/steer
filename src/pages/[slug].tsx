@@ -4,6 +4,9 @@ import OpenTemplatePage from '~/components/pages/OpenTemplatePage/OpenTemplatePa
 import { PageData } from '~/data/models/SiteOpenTemplate';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
 import { backendGetPageSlug } from '~/lib/backend/page-slug';
+import { backendGetPageSlugList } from '~/lib/backend/page-slug-list';
+import { REVALIDATE } from '~/lib/constants';
+import { redirectToNotFound } from '~/lib/utils/routes';
 
 type OpenTemplatePageProps = {
   pageData: PageData;
@@ -12,18 +15,42 @@ type OpenTemplatePageProps = {
 function OpenTemplate({ pageData }: OpenTemplatePageProps) {
   return <OpenTemplatePage pageData={pageData} />;
 }
-export const getServerSideProps: GetServerSideProps<OpenTemplatePageProps> = async (
+
+export async function getStaticPaths() {
+  backendBootstrap();
+  const pageListData = await backendGetPageSlugList();
+
+  const paths = pageListData.slugs.map((data) => ({
+    params: {
+      ...data,
+    },
+  }));
+
+  return {
+    paths,
+    fallback: false, // fallback is false so a wrong slug leads to a 404
+  };
+}
+
+export const getStaticProps: GetServerSideProps<OpenTemplatePageProps> = async (
   context,
 ) => {
   backendBootstrap({ request: context.req });
-  const { slug } = context && context.query;
+  const slug =
+    context && context.params && context.params.slug
+      ? context.params.slug
+      : null;
+
+  if (!slug) {
+    redirectToNotFound(context.res);
+    return {} as GetServerSidePropsResult<OpenTemplatePageProps>;
+  }
+
   try {
     const pageData = await backendGetPageSlug(slug);
 
     if (!pageData) {
-      context.res.setHeader('location', '/not-found');
-      context.res.statusCode = 302;
-      context.res.end;
+      redirectToNotFound(context.res);
       return {} as GetServerSidePropsResult<OpenTemplatePageProps>;
     }
 
@@ -31,11 +58,10 @@ export const getServerSideProps: GetServerSideProps<OpenTemplatePageProps> = asy
       props: {
         pageData,
       },
+      revalidate: REVALIDATE.EVERY_MINUTE,
     };
   } catch (error) {
-    context.res.setHeader('location', '/not-found');
-    context.res.statusCode = 302;
-    context.res.end;
+    redirectToNotFound(context.res);
     return {} as GetServerSidePropsResult<OpenTemplatePageProps>;
   }
 };

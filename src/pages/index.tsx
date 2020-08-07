@@ -6,6 +6,7 @@ import HomePageContainer, {
 } from '~/components/pages/HomePage/HomePage.container';
 import { backendGetSiteHome, backendGetSiteReviews } from '~/lib/backend';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
+import { REVALIDATE } from '~/lib/constants';
 
 function Home(props: HomeServeData) {
   return <HomePageContainer {...props} />;
@@ -34,10 +35,9 @@ export const getStaticProps: GetServerSideProps<HomeServeData> = async (context:
     props,
     // Next.js will attempt to re-generate the page:
     // - When a request comes in
-    // - At most once every second
+    // - At most once every minute
     // See https://nextjs.org/blog/next-9-5#stable-incremental-static-regeneration
-    // eslint-disable-next-line @typescript-eslint/camelcase
-    revalidate: 60, // In seconds
+    revalidate: REVALIDATE.EVERY_MINUTE,
   };
 };
 
