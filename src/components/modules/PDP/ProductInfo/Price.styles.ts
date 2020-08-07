@@ -1,9 +1,7 @@
-import { CSSObject } from '@emotion/core';
-
-import { COLORS, MQ, SPACING } from '~/lib/constants';
+import { COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
-const styles: CSSObject = {
+const styles: StylesMap = {
   callingLink: {
     display: 'block',
   },
@@ -13,13 +11,24 @@ const styles: CSSObject = {
       color: COLORS.LIGHT.GRAY_70,
     },
   ],
+  originalPrice: {
+    [MQ.XL]: typography.bodyCopyTight,
+  },
   priceFeature: [
     typography.primarySubhead,
     {
       color: COLORS.GLOBAL.ORANGE,
       marginBottom: 3,
       whiteSpace: 'nowrap',
+
+      [MQ.L]: {
+        marginBottom: 6,
+      },
     },
+  ],
+  prices: [
+    typography.primaryHeadline,
+    { display: 'block', marginBottom: SPACING.SIZE_05 },
   ],
   startingPrice: [
     typography.primarySubhead,

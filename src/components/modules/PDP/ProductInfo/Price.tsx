@@ -2,7 +2,6 @@ import Prices from '~/components/global/Prices/Prices';
 import { formatDollars } from '~/lib/utils/string';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { uiJSX } from '~/lib/utils/ui-dictionary-jsx';
-import { typography } from '~/styles/typography.styles';
 
 import styles from './Price.styles';
 import { ProductInfoProps } from './ProductInfo';
@@ -45,7 +44,8 @@ function Price({
       <Prices
         originalPrefix={ui('common.originalPricePrefix')}
         priceList={[{ price }]}
-        customPriceStyles={typography.primaryHeadline}
+        customPriceStyles={styles.prices}
+        customOriginalStyles={styles.originalPrice}
       />
     </>
   );

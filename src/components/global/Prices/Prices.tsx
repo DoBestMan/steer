@@ -7,6 +7,7 @@ import { typography } from '~/styles/typography.styles';
 import styles from './Prices.styles';
 
 interface Props {
+  customOriginalStyles?: CSSStylesProp;
   customPriceStyles?: CSSStylesProp;
   isLight?: boolean;
   isStartingAtPrice?: boolean;
@@ -18,6 +19,7 @@ interface Props {
 }
 
 function Prices({
+  customOriginalStyles,
   customPriceStyles,
   priceList,
   isLight,
@@ -53,6 +55,7 @@ function Prices({
                     styles.originalValue,
                     isLight && { color: COLORS.ORANGE.TINT_70 },
                     originalPrefix && styles.originalValuePrefixed,
+                    customOriginalStyles,
                   ]}
                   aria-label={`${ui(
                     'common.originalPricePrefix',
