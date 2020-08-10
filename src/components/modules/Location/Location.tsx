@@ -181,7 +181,7 @@ function Location({
     currentLocation.zip;
 
   return (
-    <GridItem gridColumnL="1/14" css={styles.container} {...rest}>
+    <GridItem css={styles.container} {...rest}>
       <div css={styles.content}>
         <Autocomplete
           icon={ICONS.SEARCH}

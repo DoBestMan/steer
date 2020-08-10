@@ -18,10 +18,10 @@ export const styles: StylesMap = {
     flexDirection: 'column',
     height: '100%',
     paddingBottom: SPACING.SIZE_60,
-    [MQ.S]: {
+    [MQ.M]: {
       padding: `0 ${SPACING.SIZE_20}px ${SPACING.SIZE_50}px ${SPACING.SIZE_20}px`,
     },
-    [MQ.M]: {
+    [MQ.L]: {
       padding: `0 0 ${SPACING.SIZE_50}px 0`,
     },
   },
@@ -61,6 +61,10 @@ export const styles: StylesMap = {
     },
   ],
   locationSubNav: {
+    padding: `0 ${SPACING.SIZE_20}px ${SPACING.SIZE_50}px ${SPACING.SIZE_20}px`,
+    [MQ.M]: {
+      padding: 0,
+    },
     [MQ.L]: {
       paddingLeft: SPACING.SIZE_60,
     },

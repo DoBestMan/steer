@@ -1,4 +1,4 @@
-import Grid from '~/components/global/Grid/Grid';
+import GridItem from '~/components/global/Grid/GridItem';
 import Modal from '~/components/global/Modal/Modal';
 import Location from '~/components/modules/Location/Location';
 import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
@@ -24,13 +24,13 @@ function LocationModal({ isOpen, onClose }: Props) {
       onClose={onClose}
       isOpen={isOpen}
     >
-      <Grid css={styles.container}>
+      <GridItem isGrid css={styles.container}>
         <Location
           currentLocation={userPersonalizationData?.userLocation ?? null}
           onLocationChangeSuccess={updateLocation}
           focusInputOnMount
         />
-      </Grid>
+      </GridItem>
     </Modal>
   );
 }
