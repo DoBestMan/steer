@@ -62,11 +62,19 @@ function SearchSection({
             const innerContent = (
               <>
                 {item.labelSegments.length > 0 ? (
-                  item.labelSegments.map((segment, i) => (
-                    <span key={i} css={[segment.matches && styles.searchQuery]}>
-                      {segment.label}
-                    </span>
-                  ))
+                  item.labelSegments.map((segment, i) => {
+                    // [WCS-1409] Hyphens will break the text if the first character
+                    // Convert to non-breaking hyphens if this happens.
+                    if (segment.label[0] === '-') {
+                      segment.label = segment.label.replace('-', '‑');
+                    }
+
+                    return (
+                      <span key={i} css={segment.matches && styles.searchQuery}>
+                        {segment.label}
+                      </span>
+                    );
+                  })
                 ) : (
                   <span>{item.label}</span>
                 )}
