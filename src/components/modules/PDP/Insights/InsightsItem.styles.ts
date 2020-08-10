@@ -18,7 +18,7 @@ const styles: StylesMap = {
     paddingBottom: SPACING.SIZE_25,
     paddingLeft: GAP_COLUMNS.S,
     paddingRight: GAP_COLUMNS.S,
-    paddingTop: SPACING.SIZE_30,
+    paddingTop: SPACING.SIZE_25,
     position: 'relative',
     transition: `background-color ${TIME.MS100}ms ${EASING.QUAD_EASE_OUT}`,
 
