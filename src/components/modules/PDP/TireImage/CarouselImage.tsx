@@ -2,6 +2,8 @@ import Image from '~/components/global/Image/Image';
 import { SiteImage } from '~/data/models/SiteImage';
 import { LOADING_OPTIONS } from '~/lib/constants';
 
+import styles from './TireImage.styles';
+
 interface CarouselImageProps {
   height?: number;
   image: SiteImage;
@@ -11,12 +13,12 @@ interface CarouselImageProps {
 function CarouselImage({ image, width, height }: CarouselImageProps) {
   return (
     <Image
-      loading={LOADING_OPTIONS.EAGER}
       altText={image.altText}
-      width={width}
+      customContainerStyles={styles.imageComponentContainer}
       height={height}
+      loading={LOADING_OPTIONS.EAGER}
       src={image.src}
-      responsive
+      width={width}
     />
   );
 }

@@ -19,11 +19,6 @@ const CONSTANTS = {
     L: SPACING.SIZE_15,
   },
   THUMB_MARGIN: SPACING.SIZE_50,
-  THUMB_POSITIONS: {
-    S: SPACING.SIZE_20,
-    M: SPACING.SIZE_40,
-    L: SPACING.SIZE_60,
-  },
   THUMB_SIZES: {
     S: 40,
     M: 50,
@@ -126,6 +121,9 @@ const styles: StylesMap = {
     margin: '0 auto',
     maxHeight: '100%',
     maxWidth: '100%',
+  },
+  imageComponentContainer: {
+    display: 'flex',
   },
   imageStyles: {
     maxHeight: '100%',
@@ -247,19 +245,11 @@ const styles: StylesMap = {
     justifyContent: 'center',
   },
   thumbsContainerFullScreen: {
-    bottom: CONSTANTS.THUMB_POSITIONS.S,
+    bottom: 0,
     left: '0',
     margin: '0 auto',
     position: 'absolute',
     right: '0',
-
-    [MQ.M]: {
-      bottom: CONSTANTS.THUMB_POSITIONS.M,
-    },
-
-    [MQ.L]: {
-      bottom: CONSTANTS.THUMB_POSITIONS.L,
-    },
   },
   videoContainerStyles: {
     boxSizing: 'border-box',
