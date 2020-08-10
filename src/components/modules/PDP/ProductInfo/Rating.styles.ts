@@ -2,7 +2,7 @@ import { MQ, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
-  ratingQuantity: { marginLeft: '1ch' },
+  ratingQuantity: { marginLeft: '0.5ch' },
   ratingValue: [
     typography.smallCopyTight,
     {
