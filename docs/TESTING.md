@@ -108,7 +108,12 @@ SearchBar/
 
 ### Mock context
 
-Some contexts interact with the whole app system, adding some complexity that might be hard for testing engines to simulate; others can fetch data to fulfill its requirements, which is something we want tests to avoid. For those reasons it's recommended to mock all context and set their handlers and values manually.
+Some contexts interact with the whole app system, adding some complexity that might be hard for testing engines to simulate; others can fetch data to fulfill its requirements, which is something we want tests to avoid.
+
+If you run into a context error on a test, you have two options:
+
+1. Consider testing a component lower down in the tree that does not connect to context directly.
+2. If this is not possible, mock the contexts used by the component and/or its children, setting their handlers and values manually. See the instructions below.
 
 Since this project's contexts providers are all abstracted, we only need to mock their "use(\*)Context" implementations. For example:
 
