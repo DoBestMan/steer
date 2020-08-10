@@ -1,7 +1,7 @@
+import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
 
 import Button from '~/components/global/Button/Button';
-import AdvancedListing from '~/components/modules/Catalog/AdvancedListing/AdvancedListing';
 import AdvancedListingPlaceholder from '~/components/modules/Catalog/AdvancedListing/AdvancedListingPlaceholder';
 import ProductGrid from '~/components/modules/Catalog/ProductGrid/ProductGrid';
 import { useCatalogPageContext } from '~/context/CatalogPage.context';
@@ -14,6 +14,11 @@ import { SiteCatalogProducts } from '~/data/models/SiteCatalogProducts';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import styles from './CatalogProductGrid.styles';
+
+const Advancedlisting = dynamic(
+  () => import('~/components/modules/Catalog/AdvancedListing/AdvancedListing'),
+  { loading: AdvancedListingPlaceholder },
+);
 
 interface Props {
   fetchNewProducts: (page: number) => Promise<SiteCatalogProducts>;
@@ -101,7 +106,7 @@ function CatalogProductGrid({
             }
             return (
               <div css={styles.advancedListing} key={`${product.name}-${i}`}>
-                <AdvancedListing {...product} />
+                <Advancedlisting {...product} />
               </div>
             );
           })}

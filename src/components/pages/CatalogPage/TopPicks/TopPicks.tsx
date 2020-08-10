@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic';
 import { useEffect, useRef, useState } from 'react';
 import { SwiperInstance } from 'react-id-swiper';
 
@@ -13,12 +14,13 @@ import { map } from '~/lib/utils/interpolation';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
 
-import OEModal from './OEModal/OEModal';
 import Title from './Title/Title';
 import { NB_SLIDES_PER_BP } from './TopPicks.constants';
 import { styles } from './TopPicks.styles';
 import TopPicksItem from './TopPicksItem/TopPicksItem';
 import { TopPickItemsHeader } from './TopPicksItem/TopPicksItems.types';
+
+const OEModal = dynamic(() => import('./OEModal/OEModal'));
 
 interface Props {
   customerServiceNumber: { display: string; value: string };

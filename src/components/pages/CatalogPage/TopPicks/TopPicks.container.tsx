@@ -1,3 +1,5 @@
+import dynamic from 'next/dynamic';
+
 import { useSearchContext } from '~/components/modules/Search/Search.context';
 import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
 import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
@@ -5,7 +7,7 @@ import { SiteCatalogSummaryMeta } from '~/data/models/SiteCatalogSummaryMeta';
 import { SiteCatalogSummaryTopPickItem } from '~/data/models/SiteCatalogSummaryTopPickItem';
 import { SiteCatalogSummaryTopPicksMore } from '~/data/models/SiteCatalogSummaryTopPicksMore';
 
-import TopPicks from './TopPicks';
+const TopPicks = dynamic(() => import('./TopPicks'));
 
 interface Props {
   exploreMore: () => void;
@@ -32,6 +34,10 @@ function TopPicksContainer({
     lockSearchStateToVehicle();
     setIsSearchOpen(true);
   };
+
+  if (siteCatalogSummaryTopPicksList.length === 0) {
+    return null;
+  }
 
   return (
     <TopPicks
