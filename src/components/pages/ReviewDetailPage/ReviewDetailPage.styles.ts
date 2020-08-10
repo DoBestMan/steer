@@ -5,6 +5,7 @@ const styles: StylesMap = {
     bottom: 0,
     marginTop: SPACING.SIZE_60,
     position: 'sticky',
+    top: 0,
     zIndex: Z_INDEX.FRONT,
 
     [MQ.L]: {

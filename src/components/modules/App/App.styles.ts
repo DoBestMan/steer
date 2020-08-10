@@ -40,7 +40,6 @@ export const styles: StylesMap = {
   root: {
     backgroundColor: 'transparent',
     transition: `backgroundColor ${PAGE_TRANSITION_DURATION}ms ${EASING.CUBIC_EASE_OUT}`,
-    overflowX: 'hidden',
   },
   rootWithOffWhiteBg: {
     backgroundColor: COLORS.LIGHT.OFF_WHITE,
