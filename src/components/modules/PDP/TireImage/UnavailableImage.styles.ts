@@ -35,12 +35,12 @@ const styles: StylesMap = {
   ],
   root: {
     height: MAX_HEIGHT.S,
-    marginBottom: SPACING.SIZE_20,
+    marginBottom: SPACING.SIZE_10,
     position: 'relative',
 
     [MQ.M]: {
       height: MAX_HEIGHT.M,
-      marginBottom: SPACING.SIZE_40,
+      marginBottom: SPACING.SIZE_35,
     },
 
     [MQ.L]: {
