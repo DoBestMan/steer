@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import Button from '~/components/global/Button/Button';
 import DataStructure from '~/components/global/DataStructure/DataStructure';
 import Meta from '~/components/global/Meta/Meta';
-import { navigationPaddingTop } from '~/components/modules/Nav/Nav.styles';
+import { navigationBreadcrumbPaddingTop } from '~/components/modules/Nav/Nav.styles';
 import Reviews from '~/components/modules/ReviewDetail/Reviews/Reviews';
 import ReviewsHeader from '~/components/modules/ReviewDetail/ReviewsHeader/ReviewsHeader';
 import StickyBar from '~/components/modules/StickyBar/StickyBar';
@@ -74,7 +74,7 @@ function ReviewDetailPage({ serverData }: ProductDetailReviewsData) {
   );
 
   return (
-    <div css={navigationPaddingTop}>
+    <div css={navigationBreadcrumbPaddingTop}>
       <DataStructure jsonLD={ratingsDataStructure} />
       <Meta {...meta} />
       <ReviewsHeader

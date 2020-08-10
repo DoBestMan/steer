@@ -1,4 +1,3 @@
-import { NAV_HEIGHT } from '~/components/modules/Nav/Nav.styles';
 import { COLORS, MQ, SPACING, StylesMap, TIME, Z_INDEX } from '~/lib/constants';
 import { getColumnsCalc } from '~/lib/utils/grid';
 
@@ -183,20 +182,7 @@ const styles: StylesMap = {
   },
   root: {
     opacity: 1,
-    paddingTop: NAV_HEIGHT.S - 10,
     transition: `opacity ${TIME.MS300}ms ease`,
-
-    [MQ.M]: {
-      paddingTop: NAV_HEIGHT.M,
-    },
-
-    [MQ.L]: {
-      paddingTop: NAV_HEIGHT.L + 65,
-    },
-
-    [MQ.XL]: {
-      paddingTop: NAV_HEIGHT.XL + 65,
-    },
   },
   rootLoading: {
     opacity: 1,

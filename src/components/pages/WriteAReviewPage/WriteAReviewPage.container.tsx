@@ -4,7 +4,7 @@ import Breadcrumbs from '~/components/global/Breadcrumbs/Breadcrumbs';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import Meta from '~/components/global/Meta/Meta';
-import { navigationPaddingTop } from '~/components/modules/Nav/Nav.styles';
+import { navigationBreadcrumbPaddingTop } from '~/components/modules/Nav/Nav.styles';
 import { useSearchContext } from '~/components/modules/Search/Search.context';
 import { useSearchModalContext } from '~/components/modules/Search/SearchModal.context';
 import ReviewForm from '~/components/modules/WriteReview/ReviewForm/ReviewForm';
@@ -56,7 +56,7 @@ function WriteAReviewPage({
   const meta = mapDataToMeta({ brand, productLine: tire });
 
   return (
-    <div css={navigationPaddingTop}>
+    <div css={navigationBreadcrumbPaddingTop}>
       <Meta {...meta} />
       <Grid>
         <GridItem

@@ -42,6 +42,19 @@ export const navigationPaddingTop: CSSStyles = {
   },
 };
 
+export const navigationBreadcrumbPaddingTop: CSSStyles = {
+  paddingTop: NAV_HEIGHT.S - 10,
+  [MQ.M]: {
+    paddingTop: NAV_HEIGHT.M,
+  },
+  [MQ.L]: {
+    paddingTop: NAV_HEIGHT.L + 65,
+  },
+  [MQ.XL]: {
+    paddingTop: NAV_HEIGHT.XL + 65,
+  },
+};
+
 const CONSTANTS = {
   LOGO_SIZE: 123,
   LOGO_SIZE_SMALL: 105,

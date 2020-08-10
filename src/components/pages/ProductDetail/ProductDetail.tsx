@@ -9,6 +9,7 @@ import Link from '~/components/global/Link/Link';
 import Meta from '~/components/global/Meta/Meta';
 import ProductGroupList from '~/components/global/ProductGroupList/ProductGroupList';
 import LocationModal from '~/components/modules/Location/LocationModal/LocationModal';
+import { navigationBreadcrumbPaddingTop } from '~/components/modules/Nav/Nav.styles';
 import FAQ from '~/components/modules/PDP/FAQ/FAQ';
 import Insights from '~/components/modules/PDP/Insights/Insights';
 import Installation from '~/components/modules/PDP/Installation/Installation';
@@ -74,7 +75,7 @@ function ProductDetail({ serverData }: ProductDetailData) {
     <>
       <Meta {...meta} />
       {linkingData && <DataStructure jsonLD={linkingData} />}
-      <Grid css={styles.root}>
+      <Grid css={[navigationBreadcrumbPaddingTop, styles.root]}>
         <GridItem gridColumnL="start/8" gridRowL="1" css={styles.breadcrumbs}>
           <Breadcrumbs navigationItems={breadcrumbs} />
         </GridItem>

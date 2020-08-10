@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 
 import DataStructure from '~/components/global/DataStructure/DataStructure';
 import Meta from '~/components/global/Meta/Meta';
-import { navigationPaddingTop } from '~/components/modules/Nav/Nav.styles';
+import { navigationBreadcrumbPaddingTop } from '~/components/modules/Nav/Nav.styles';
 import Header from '~/components/modules/ReviewListing/Header/Header';
 import RatingsTable from '~/components/modules/ReviewListing/RatingsTable/RatingsTable';
 import { SiteProductReviewsListing } from '~/data/models/SiteProductReviewsListing';
@@ -72,7 +72,7 @@ function ReviewListingPage({
   };
 
   return (
-    <div css={[navigationPaddingTop, styles.root]}>
+    <div css={[navigationBreadcrumbPaddingTop, styles.root]}>
       {ratingsDataStructure.products.map((product, i) => (
         <DataStructure key={i} jsonLD={product} />
       ))}
