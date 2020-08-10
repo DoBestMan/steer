@@ -6,6 +6,7 @@ import GridItem from '~/components/global/Grid/GridItem';
 import Meta from '~/components/global/Meta/Meta';
 import { navigationPaddingTop } from '~/components/modules/Nav/Nav.styles';
 import { useSearchContext } from '~/components/modules/Search/Search.context';
+import { useSearchModalContext } from '~/components/modules/Search/SearchModal.context';
 import ReviewForm from '~/components/modules/WriteReview/ReviewForm/ReviewForm';
 import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
 import { mapPathnameToBreadcrumbs } from '~/lib/utils/breadcrumbs';
@@ -26,7 +27,11 @@ function WriteAReviewPage({
   const router = useRouter();
   const { query, asPath, pathname } = router;
   const { vehicle } = useUserPersonalizationContext();
-  const search = useSearchContext();
+  const {
+    lockSearchStateToVehicle,
+    setShouldPreventLinkNavigation,
+  } = useSearchContext();
+  const { setIsSearchOpen } = useSearchModalContext();
 
   const breadcrumbs = mapPathnameToBreadcrumbs({
     asPath,
@@ -43,9 +48,9 @@ function WriteAReviewPage({
 
   const onSearchVehicle = (event: React.MouseEvent) => {
     event.preventDefault();
-    search.lockSearchStateToVehicle();
-    search.setShouldPreventLinkNavigation(true);
-    search.setIsSearchOpen(true);
+    lockSearchStateToVehicle();
+    setShouldPreventLinkNavigation(true);
+    setIsSearchOpen(true);
   };
 
   const meta = mapDataToMeta({ brand, productLine: tire });

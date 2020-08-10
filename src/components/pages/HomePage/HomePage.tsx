@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
 import Grid from '~/components/global/Grid/Grid';
-import { useSearchContext } from '~/components/modules/Search/Search.context';
+import { useSearchModalContext } from '~/components/modules/Search/SearchModal.context';
 import DriverInsights from '~/components/pages/HomePage/DriverInsights/DriverInsights';
 import HomeHeader from '~/components/pages/HomePage/HomeHeader/HomeHeader';
 import HomeReviews from '~/components/pages/HomePage/HomeReviews/HomeReviews';
@@ -72,7 +72,7 @@ function HomePage({
 
   const color = getTextColorFromScrollState(thresholdCrossed);
 
-  const { isSearchOpen, toggleIsSearchOpen } = useSearchContext();
+  const { isSearchOpen, toggleIsSearchOpen } = useSearchModalContext();
 
   function handleOpenModal() {
     // Store the current y pos to return to later

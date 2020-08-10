@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import Meta from '~/components/global/Meta/Meta';
-import { useSearchContext } from '~/components/modules/Search/Search.context';
+import { useSearchModalContext } from '~/components/modules/Search/SearchModal.context';
 import { CatalogPageContextProvider } from '~/context/CatalogPage.context';
 import { CatalogSummaryContextProvider } from '~/context/CatalogSummary.context';
 import { SiteCatalogProducts } from '~/data/models/SiteCatalogProducts';
@@ -43,7 +43,7 @@ function CatalogPageContainer({
   searchByParams,
 }: Props) {
   const { query, push, pathname, asPath } = useRouter();
-  const { isSearchOpen } = useSearchContext();
+  const { isSearchOpen } = useSearchModalContext();
   const meta = mapDataToMeta({ searchBy, searchByParams });
 
   const catalogGridRef = useRef<HTMLDivElement | null>(null);

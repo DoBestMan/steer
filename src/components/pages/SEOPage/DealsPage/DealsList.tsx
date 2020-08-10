@@ -5,6 +5,7 @@ import PromotionCard, {
 } from '~/components/global/PromotionCard/PromotionCard';
 import Separator from '~/components/global/Separator/Separator';
 import { useSearchContext } from '~/components/modules/Search/Search.context';
+import { useSearchModalContext } from '~/components/modules/Search/SearchModal.context';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { BREAKPOINT_SIZES, ROUTE_MAP, ROUTES } from '~/lib/constants';
 import { openReferAFriendModal } from '~/lib/helpers/refer-a-friend';
@@ -35,7 +36,8 @@ export function DealsList({ title, items }: Props) {
   let currentGridColumnPosition = 0;
   const { bk } = useBreakpoints();
   const nbItemsInARow = bk === BREAKPOINT_SIZES.S ? 1 : 2;
-  const { setIsSearchOpen, setRouteQueryParamOptions } = useSearchContext();
+  const { setRouteQueryParamOptions } = useSearchContext();
+  const { setIsSearchOpen } = useSearchModalContext();
   function handlePromotionClick(params: Record<string, string>) {
     setRouteQueryParamOptions({
       routes: [

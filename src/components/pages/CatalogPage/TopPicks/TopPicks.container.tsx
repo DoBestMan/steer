@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 
 import { useSearchContext } from '~/components/modules/Search/Search.context';
+import { useSearchModalContext } from '~/components/modules/Search/SearchModal.context';
 import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
 import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
 import { SiteCatalogSummaryMeta } from '~/data/models/SiteCatalogSummaryMeta';
@@ -23,7 +24,8 @@ function TopPicksContainer({
   siteCatalogSummaryTopPicksMore,
 }: Props) {
   const { locationString } = useUserPersonalizationContext();
-  const { lockSearchStateToVehicle, setIsSearchOpen } = useSearchContext();
+  const { lockSearchStateToVehicle } = useSearchContext();
+  const { setIsSearchOpen } = useSearchModalContext();
   const { customerServiceNumber } = useSiteGlobalsContext();
 
   const totalResult = siteCatalogSummaryMeta

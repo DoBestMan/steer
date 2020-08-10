@@ -4,6 +4,7 @@ import { ParsedUrlQuery } from 'querystring';
 import { ReactNode, useCallback, useEffect, useState } from 'react';
 
 import { useSearchContext } from '~/components/modules/Search/Search.context';
+import { useSearchModalContext } from '~/components/modules/Search/SearchModal.context';
 import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
 import { VehicleMetadata } from '~/data/models/VehicleMetadata';
 import { ROUTE_MAP, ROUTES } from '~/lib/constants';
@@ -90,8 +91,8 @@ function useContextSetup({
   const {
     lockSearchStateToVehicle,
     setShouldPreventLinkNavigation,
-    setIsSearchOpen,
   } = useSearchContext();
+  const { setIsSearchOpen } = useSearchModalContext();
 
   const searchForVehicle = useCallback(() => {
     lockSearchStateToVehicle();

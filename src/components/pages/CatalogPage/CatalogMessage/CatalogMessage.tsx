@@ -12,6 +12,7 @@ import BaseLink from '~/components/global/Link/BaseLink';
 import Markdown from '~/components/global/Markdown/Markdown';
 import { useSearchContext } from '~/components/modules/Search/Search.context';
 import { SearchStateEnum } from '~/components/modules/Search/Search.types';
+import { useSearchModalContext } from '~/components/modules/Search/SearchModal.context';
 import TopPicks from '~/components/pages/CatalogPage/TopPicks/TopPicks.container';
 import { useCatalogSummaryContext } from '~/context/CatalogSummary.context';
 import { useModalContext } from '~/context/Modal.context';
@@ -214,7 +215,8 @@ export function NoResultsMessage({
   customerServiceNumber,
   siteCatalogSummaryPrompt,
 }: NoResultsMessageProps) {
-  const { setIsSearchOpen, setSearchState, searchQuery } = useSearchContext();
+  const { setSearchState, searchQuery } = useSearchContext();
+  const { setIsSearchOpen } = useSearchModalContext();
 
   const searchByOptions = [
     {

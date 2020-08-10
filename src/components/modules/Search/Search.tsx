@@ -49,6 +49,10 @@ interface Props {
   shouldPreventLinkNavigation: boolean;
 }
 
+const CONSTANTS = {
+  DEBOUNCE_DELAY: 400,
+};
+
 function Search({
   addPastSearch,
   clearSearchResults,
@@ -81,7 +85,7 @@ function Search({
   const delayedSearch = useCallback(
     debounce(({ queryText, queryType }) => {
       onSearchQuery({ queryText, queryType });
-    }, 200),
+    }, CONSTANTS.DEBOUNCE_DELAY),
     [],
   );
   const { selectVehicle } = useUserPersonalizationContext();

@@ -5,6 +5,7 @@ import { useCallback, useEffect, useRef } from 'react';
 
 import Modal from '~/components/global/Modal/Modal';
 import { useSearchContext } from '~/components/modules/Search/Search.context';
+import { useSearchModalContext } from '~/components/modules/Search/SearchModal.context';
 import { useModalContext } from '~/context/Modal.context';
 import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
 import { MODAL_THEME } from '~/lib/constants';
@@ -12,6 +13,7 @@ import { MODAL_THEME } from '~/lib/constants';
 const Search = dynamic(() => import('./Search'));
 
 function SearchModal() {
+  const { isSearchOpen, toggleIsSearchOpen } = useSearchModalContext();
   const {
     addPastSearch,
     clearSearchResults,
@@ -20,14 +22,12 @@ function SearchModal() {
     hasLockedSearchState,
     hasSearchResultsError,
     isLoadingResults,
-    isSearchOpen,
     pastSearches,
     searchQuery,
     searchState,
     searchResults,
     setHasLockedSearchState,
     setSearchState,
-    toggleIsSearchOpen,
     setRouteQueryParamOptions,
     setShouldPreventLinkNavigation,
     shouldPreventLinkNavigation,

@@ -43,14 +43,13 @@ import SearchSecondaryActions from './SearchSecondaryActions';
 const CONSTANTS = {
   DEFAULT_SELECTED_ITEM_INDEX: [0, -1],
   DEFAULT_VALUE: '',
-  SHOW_LOADING_TIMEOUT: 500,
+  SHOW_LOADING_TIMEOUT: 800,
 };
 
 export interface Props {
   activeInputType: SearchInputEnum;
   focusOnMount?: boolean;
   hasSearchResultsError: boolean;
-  inputValue?: string;
   isLoadingResults?: boolean;
   noExactMatch?: boolean;
   onCancelSelection: () => void;
@@ -70,7 +69,6 @@ function SearchAutocomplete({
   activeInputType,
   focusOnMount = false,
   hasSearchResultsError,
-  inputValue = CONSTANTS.DEFAULT_VALUE,
   isLoadingResults,
   noExactMatch,
   onCancelSelection,
@@ -172,23 +170,26 @@ function SearchAutocomplete({
     onValueSelection(selectedItem);
   };
 
-  const handleValueSelection = (searchResult: SearchResult) => {
-    onValueSelection(searchResult);
+  const handleValueSelection = useCallback(
+    (searchResult: SearchResult) => {
+      onValueSelection(searchResult);
 
-    const { action } = searchResult;
-    if (action.type === SearchActionType.QUERY) {
-      const isInitialRearTireState =
-        !action.queryText &&
-        !!action.additionalQueryText &&
-        action.queryType === SearchStateEnum.REAR_TIRE;
+      const { action } = searchResult;
+      if (action.type === SearchActionType.QUERY) {
+        const isInitialRearTireState =
+          !action.queryText &&
+          !!action.additionalQueryText &&
+          action.queryType === SearchStateEnum.REAR_TIRE;
 
-      if (isInitialRearTireState) {
-        setIsFrontTireComplete(true);
-      } else {
-        primaryInput?.current?.blur();
+        if (isInitialRearTireState) {
+          setIsFrontTireComplete(true);
+        } else {
+          primaryInput?.current?.blur();
+        }
       }
-    }
-  };
+    },
+    [onValueSelection],
+  );
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     const targetValue = e.currentTarget.value;
@@ -223,12 +224,6 @@ function SearchAutocomplete({
   const handleSetActiveModal = (modalId: string) => () => {
     openStaticModal(modalId);
   };
-
-  useEffect(() => {
-    if (inputValue) {
-      onInputChange(inputValue);
-    }
-  }, [inputValue, onInputChange, focusOnInput]);
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     switch (e.keyCode) {
@@ -463,40 +458,34 @@ function SearchAutocomplete({
             const animationStyles = [
               styles.listboxRoot,
               hasActiveSearchState &&
+                queryText.length === 0 &&
                 styles[`listbox_${searchTransitionState}`],
             ];
 
             return (
               <ul css={animationStyles}>
                 {results.map((searchGroup: SiteSearchResultGroup, index) => {
-                  // We need to be explicit about which types are in each array.
-                  const siteSearchResultImageList: SiteSearchResultImageItem[] = [];
-                  const siteSearchResultTextList: SiteSearchResultTextItem[] = [];
-
-                  searchGroup.siteSearchResultList.forEach(
-                    (siteSearchResult) => {
-                      if (siteSearchResult.type === SearchResultEnum.IMAGE) {
-                        siteSearchResultImageList.push(siteSearchResult);
-                      } else if (
-                        siteSearchResult.type === SearchResultEnum.TEXT
-                      ) {
-                        siteSearchResultTextList.push(siteSearchResult);
-                      }
-                    },
-                  );
+                  // We can assume that all items in the list have the same type.
+                  const isCarousel =
+                    searchGroup.siteSearchResultList[0].type ===
+                    SearchResultEnum.IMAGE;
 
                   return (
                     <li css={styles.searchResultsGridItem} key={index}>
-                      {siteSearchResultImageList.length > 0 ? (
+                      {isCarousel ? (
                         <SearchCarousel
                           label={searchGroup.label}
-                          siteSearchResultList={siteSearchResultImageList}
+                          siteSearchResultList={
+                            searchGroup.siteSearchResultList as SiteSearchResultImageItem[]
+                          }
                           onClick={handleValueSelection}
                         />
                       ) : (
                         <SearchSection
                           label={searchGroup.label}
-                          siteSearchResultList={siteSearchResultTextList}
+                          siteSearchResultList={
+                            searchGroup.siteSearchResultList as SiteSearchResultTextItem[]
+                          }
                           onClick={handleValueSelection}
                           sectionIndex={index}
                           selectedItemIndex={selectedItemIndex}

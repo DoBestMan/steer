@@ -75,7 +75,6 @@ export const searchContextMock: SearchContextProps = {
   hasLockedSearchState: false,
   hasSearchResultsError: false,
   isLoadingResults: false,
-  isSearchOpen: false,
   routeQueryParamOptions: undefined,
   pastSearches: { label: '', siteSearchResultList: [] },
   searchResults: { resultMetadata: {}, siteSearchResultGroupList: [] },
@@ -90,12 +89,10 @@ export const searchContextMock: SearchContextProps = {
   lockSearchStateToTireSize: () => {},
   lockSearchStateToVehicle: () => {},
   searchQuery: () => {},
-  setIsSearchOpen: () => {},
   setRouteQueryParamOptions: () => {},
   setSearchState: () => {},
   setShouldPreventLinkNavigation: () => {},
   setHasLockedSearchState: () => {},
-  toggleIsSearchOpen: () => {},
 };
 
 export const siteProductMock: SiteProduct = {

@@ -50,7 +50,7 @@ function SearchSection({
   };
 
   return (
-    <Grid>
+    <Grid css={styles.container}>
       <GridItem gridColumnS="2/6" gridColumnM="2/8" gridColumnL="3/14">
         {label && <h5 css={styles.eyebrow}>{label}</h5>}
         <ul>
@@ -80,12 +80,12 @@ function SearchSection({
               const { href, isExternal } = item.action.link;
               return (
                 <li
-                  css={styles.listItem}
+                  className="listItem"
                   key={index}
                   ref={pushRefToArray(index)}
                 >
                   <BaseLink
-                    css={[styles.itemButton, isSelected && styles.isSelected]}
+                    className={`itemButton ${isSelected ? 'isSelected' : ''}`}
                     href={href}
                     isExternal={isExternal}
                     onClick={handleClick(item)}
@@ -95,7 +95,7 @@ function SearchSection({
                     {innerContent}
                   </BaseLink>
                   {item.detailLabel && (
-                    <div css={styles.secondaryItemDisplay}>
+                    <div className="secondaryItemDisplay">
                       {item.detailLabel}
                     </div>
                   )}
@@ -104,9 +104,9 @@ function SearchSection({
             }
 
             return (
-              <li css={styles.listItem} key={index} ref={pushRefToArray(index)}>
+              <li className="listItem" key={index} ref={pushRefToArray(index)}>
                 <button
-                  css={[styles.itemButton, isSelected && styles.isSelected]}
+                  className={`itemButton ${isSelected ? 'isSelected' : ''}`}
                   onClick={handleClick(item)}
                   onFocus={onFocus(index)}
                   onTouchStart={handleTouchStart(item)}
@@ -115,9 +115,7 @@ function SearchSection({
                   {innerContent}
                 </button>
                 {item.detailLabel && (
-                  <div css={styles.secondaryItemDisplay}>
-                    {item.detailLabel}
-                  </div>
+                  <div className="secondaryItemDisplay">{item.detailLabel}</div>
                 )}
               </li>
             );

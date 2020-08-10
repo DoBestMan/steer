@@ -28,7 +28,6 @@ export interface SearchContextProps {
   hasLockedSearchState: boolean;
   hasSearchResultsError: boolean;
   isLoadingResults: boolean;
-  isSearchOpen: boolean;
   lockSearchStateToBrand: () => void;
   lockSearchStateToTireSize: () => void;
   lockSearchStateToVehicle: () => void;
@@ -38,14 +37,12 @@ export interface SearchContextProps {
   searchResults: Results;
   searchState: string;
   setHasLockedSearchState: (hasLockedSearchState: boolean) => void;
-  setIsSearchOpen: (isSearchOpen: boolean) => void;
   setRouteQueryParamOptions: (
     routeQueryParamOptions?: RouteQueryParamOptions,
   ) => void;
   setSearchState: (searchState: string) => void;
   setShouldPreventLinkNavigation: (value: boolean) => void;
   shouldPreventLinkNavigation: boolean;
-  toggleIsSearchOpen: (callback?: () => void) => void;
 }
 
 const SearchContext = createContext<SearchContextProps>();
@@ -76,15 +73,6 @@ function useContextSetup(): SearchContextProps {
     setSearchState,
   } = useSearchState({ searchQuery });
 
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const toggleIsSearchOpen = (callback?: () => void) => {
-    setIsSearchOpen(!isSearchOpen);
-
-    if (callback && typeof callback === 'function') {
-      callback();
-    }
-  };
-
   const [
     shouldPreventLinkNavigation,
     setShouldPreventLinkNavigation,
@@ -101,7 +89,6 @@ function useContextSetup(): SearchContextProps {
     hasLockedSearchState,
     hasSearchResultsError,
     isLoadingResults,
-    isSearchOpen,
     lockSearchStateToBrand,
     lockSearchStateToTireSize,
     lockSearchStateToVehicle,
@@ -111,12 +98,10 @@ function useContextSetup(): SearchContextProps {
     searchResults,
     searchState,
     setHasLockedSearchState,
-    setIsSearchOpen,
     setRouteQueryParamOptions,
     setSearchState,
     setShouldPreventLinkNavigation,
     shouldPreventLinkNavigation,
-    toggleIsSearchOpen,
   };
 }
 

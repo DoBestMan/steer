@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 
 import { SearchContextProvider } from '~/components/modules/Search/Search.context';
+import { SearchModalContextProvider } from '~/components/modules/Search/SearchModal.context';
 import { SiteGlobals } from '~/data/models/SiteGlobals';
 import { SiteMenu } from '~/data/models/SiteMenu';
 
@@ -33,11 +34,13 @@ function AppProviders({
         <SiteMenuContextProvider value={siteMenuContextValue}>
           <UserPersonalizationContextProvider>
             <SearchContextProvider>
-              <GlobalToastContextProvider>
-                <RouterContextProvider>
-                  <ModalContextProvider>{children}</ModalContextProvider>
-                </RouterContextProvider>
-              </GlobalToastContextProvider>
+              <SearchModalContextProvider>
+                <GlobalToastContextProvider>
+                  <RouterContextProvider>
+                    <ModalContextProvider>{children}</ModalContextProvider>
+                  </RouterContextProvider>
+                </GlobalToastContextProvider>
+              </SearchModalContextProvider>
             </SearchContextProvider>
           </UserPersonalizationContextProvider>
         </SiteMenuContextProvider>

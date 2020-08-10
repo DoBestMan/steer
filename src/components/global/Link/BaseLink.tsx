@@ -11,6 +11,7 @@ import { useBaseLinkProps, UseBaseLinkProps } from './BaseLink.hooks';
 
 export interface BaseLinkProps extends UseBaseLinkProps {
   children?: ReactNode;
+  className?: string;
   onClick?: MouseEventHandler;
   onFocus?: () => void;
   onTouchEnd?: TouchEventHandler;

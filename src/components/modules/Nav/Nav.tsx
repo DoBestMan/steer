@@ -11,7 +11,7 @@ import { ui } from '~/lib/utils/ui-dictionary';
 import { disableGlobalFocus } from '~/styles/document/accessibility.styles';
 import { layout } from '~/styles/layout.styles';
 
-import { useSearchContext } from '../Search/Search.context';
+import { useSearchModalContext } from '../Search/SearchModal.context';
 import { animations, styles } from './Nav.styles';
 import { NavThemeObject } from './Nav.theme';
 import NavBar from './NavBar';
@@ -29,7 +29,7 @@ function Nav({ isHomepage }: Props) {
     toggleSubNav,
     createSelectLinkHandler,
   } = useNavContext();
-  const { toggleIsSearchOpen } = useSearchContext();
+  const { toggleIsSearchOpen } = useSearchModalContext();
   const theme: NavThemeObject = useTheme();
 
   return (

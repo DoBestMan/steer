@@ -1,4 +1,5 @@
 import { useSearchContext } from '~/components/modules/Search/Search.context';
+import { useSearchModalContext } from '~/components/modules/Search/SearchModal.context';
 import { SiteIcon } from '~/data/models/SiteIcon';
 
 import BillBoard from './BillBoard';
@@ -14,8 +15,8 @@ export default function BillBoardContainer(props: BillboardProps) {
     lockSearchStateToBrand,
     lockSearchStateToTireSize,
     lockSearchStateToVehicle,
-    setIsSearchOpen,
   } = useSearchContext();
+  const { setIsSearchOpen } = useSearchModalContext();
 
   const onVehicleCTAClick = () => {
     lockSearchStateToVehicle();
