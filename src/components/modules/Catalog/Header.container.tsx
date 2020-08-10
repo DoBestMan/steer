@@ -8,7 +8,7 @@ import Header from './Header';
 interface Props {
   hasTopPicks: boolean;
   isInternal?: boolean;
-  onPreviewFilters: (filters: Record<string, string>) => Promise<void>;
+  onPreviewFilters: (filters?: Record<string, string>) => Promise<void>;
   previewFiltersData: { filters: SiteCatalogFilters; totalMatches: number };
   siteCatalogProducts: SiteCatalogProducts;
   sizeList?: string[];

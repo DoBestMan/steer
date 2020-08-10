@@ -172,8 +172,17 @@ function CatalogPageContainer({
   });
 
   const onPreviewFilters = useCallback(
-    async (filters: Record<string, string>) => {
-      const { siteCatalogProducts } = await fetch({
+    async (filters?: Record<string, string>) => {
+      // data was previewed but closed before applying - reset to initial state
+      if (!filters) {
+        setPreviewFiltersData({
+          totalMatches:
+            siteCatalogProducts.listResultMetadata.pagination?.total || 0,
+          filters: siteCatalogProducts.siteCatalogFilters,
+        });
+      }
+
+      const { siteCatalogProducts: previewedData } = await fetch({
         endpoint: endpoints.products,
         includeUserRegion: true,
         includeUserZip: true,
@@ -181,12 +190,11 @@ function CatalogPageContainer({
         query: { ...filters, ...pageParams },
       });
       setPreviewFiltersData({
-        totalMatches:
-          siteCatalogProducts.listResultMetadata.pagination?.total || 0,
-        filters: siteCatalogProducts.siteCatalogFilters,
+        totalMatches: previewedData.listResultMetadata.pagination?.total || 0,
+        filters: previewedData.siteCatalogFilters,
       });
     },
-    [endpoints.products, pageParams],
+    [siteCatalogProducts, endpoints.products, pageParams],
   );
 
   const fetchNewProducts = useCallback(

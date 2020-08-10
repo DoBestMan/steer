@@ -29,7 +29,7 @@ function LoadingIndicator() {
 interface Props {
   catalogGridRef: React.Ref<HTMLDivElement>;
   fetchNewProducts: (page: number) => Promise<SiteCatalogProducts>;
-  onPreviewFilters: (filters: Record<string, string>) => Promise<void>;
+  onPreviewFilters: (filters?: Record<string, string>) => Promise<void>;
   previewFiltersData: { filters: SiteCatalogFilters; totalMatches: number };
   scrollToGrid: () => void;
   siteCatalogProducts: SiteCatalogProducts;

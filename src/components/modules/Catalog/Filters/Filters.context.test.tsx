@@ -14,7 +14,7 @@ const mockArgs = {
   siteCatalogFilters: {
     filtersList: mockSiteCatalogFilters,
   } as SiteCatalogFilters,
-  onPreviewFilters: jest.fn(),
+  onPreviewFilters: jest.fn(() => Promise.resolve()),
   previewFiltersData: {
     filters: emptyCatalogProducts.siteCatalogFilters as SiteCatalogFilters,
     totalMatches: 0,
@@ -41,6 +41,10 @@ const renderFiltersContextSetupHook = () =>
   });
 
 describe('useFiltersContextSetup', () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   test('initial state with active filters', () => {
     const { result } = renderFiltersContextSetupHook();
 
@@ -48,6 +52,46 @@ describe('useFiltersContextSetup', () => {
       'brand',
       'goodyear,pirelli',
     );
+  });
+
+  test('does not preview filters upon opening', () => {
+    const { result } = renderFiltersContextSetupHook();
+
+    act(() => result.current.createOpenFilterHandler(1)());
+
+    expect(mockArgs.onPreviewFilters).not.toBeCalled();
+  });
+
+  test('previews filters if filters state changes after opening', async () => {
+    const { result } = renderFiltersContextSetupHook();
+    act(() => result.current.createOpenFilterHandler(1)());
+    await act(async () =>
+      result.current.createUpdateFilterGroup({
+        value: {
+          foo: 'bar',
+        },
+      })(),
+    );
+
+    expect(mockArgs.onPreviewFilters).toBeCalledWith({
+      brand: 'goodyear,pirelli',
+      foo: 'bar',
+    });
+  });
+
+  test('toggling dropdown closed after previewing should not preview on next open', async () => {
+    const { result } = renderFiltersContextSetupHook();
+    act(() => result.current.createOpenFilterHandler(1)());
+    await act(async () =>
+      result.current.createUpdateFilterGroup({
+        value: {
+          foo: 'bar',
+        },
+      })(),
+    );
+    act(() => result.current.createOpenFilterHandler(1)());
+
+    expect(mockArgs.onPreviewFilters).toBeCalledTimes(1);
   });
 
   test('applying a group of filters', () => {
@@ -225,5 +269,22 @@ describe('useFiltersContextSetup', () => {
 
     expect(result.current.filtersToApply).toHaveProperty('foo', '');
     expect(result.current.filtersToApply).toHaveProperty('bar', '');
+  });
+
+  test('clearing filters to apply should reset data', () => {
+    const { result } = renderFiltersContextSetupHook();
+
+    act(() => {
+      result.current.createUpdateFilterGroup({
+        value: { bar: 'baz' },
+      })();
+    });
+
+    expect(result.current.filtersToApply).toHaveProperty('bar', 'baz');
+
+    act(() => result.current.clearFiltersToApply());
+
+    expect(result.current.filtersToApply).not.toHaveProperty('bar');
+    expect(mockArgs.onPreviewFilters).toBeCalledTimes(1);
   });
 });

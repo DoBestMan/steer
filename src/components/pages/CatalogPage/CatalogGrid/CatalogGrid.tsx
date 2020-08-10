@@ -27,7 +27,7 @@ interface Props {
   fetchNewProducts: (page: number) => Promise<SiteCatalogProducts>;
   hasResults: boolean;
   hasTopPicks: boolean;
-  onPreviewFilters: (filters: Record<string, string>) => Promise<void>;
+  onPreviewFilters: (filters?: Record<string, string>) => Promise<void>;
   previewFiltersData: { filters: SiteCatalogFilters; totalMatches: number };
   siteCatalogProducts: SiteCatalogProducts;
   siteCatalogSummary?: SiteCatalogSummary;

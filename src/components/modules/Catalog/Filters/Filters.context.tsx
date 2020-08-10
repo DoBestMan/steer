@@ -17,7 +17,7 @@ import { getInitialFiltersState, getValueKeys } from './Filters.utils';
 
 interface ContextProviderProps {
   children: ReactNode;
-  onPreviewFilters: (filters: Record<string, string>) => Promise<void>;
+  onPreviewFilters: (filters?: Record<string, string>) => Promise<void>;
   previewFiltersData: { filters: SiteCatalogFilters; totalMatches: number };
   siteCatalogFilters: SiteCatalogFilters;
 }
@@ -156,6 +156,7 @@ export function useFiltersContextSetup({
     },
     clearFiltersToApply: () => {
       setFiltersToApply(initialState);
+      onPreviewFilters();
     },
     clearSelectingFilter: () => setSelectingFilter(null),
     createOpenFilterHandler: (id: number | string) => (e?: MouseEvent) => {
