@@ -81,18 +81,17 @@ describe('getUsername', () => {
   });
 
   it('returns user name for logged in user', async () => {
-     mocked(UserApi.fetchUser).mockResolveValue({ username: 'Mr. Test' });
-     const result = await getUsername();
-     expect(result).toBe('Mr. Test');
+    mocked(UserApi.fetchUser).mockResolveValue({ username: 'Mr. Test' });
+    const result = await getUsername();
+    expect(result).toBe('Mr. Test');
   });
 
   it('returns undefined otherwise', async () => {
-     mocked(UserApi.fetchUser).mockResolveValue(null);
-     const result = await getUsername();
-     expect(result).toBeUndefined();
+    mocked(UserApi.fetchUser).mockResolveValue(null);
+    const result = await getUsername();
+    expect(result).toBeUndefined();
   });
 });
-
 ```
 
 ### Mock Data
@@ -105,4 +104,49 @@ SearchBar/
     SearchBar.mock.ts
   SearchBar.tsx
   SearchBar.test.tsx
+```
+
+### Mock context
+
+Some contexts interact with the whole app system, adding some complexity that might be hard for testing engines to simulate; others can fetch data to fulfill its requirements, which is something we want tests to avoid. For those reasons it's recommended to mock all context and set their handlers and values manually.
+
+Since this project's contexts providers are all abstracted, we only need to mock their "use(\*)Context" implementations. For example:
+
+```js
+import * as SiteGlobalsContext from '~/context/SiteGlobals.context';
+...
+SiteGlobalsContext.useSiteGlobalsContext = jest.fn(() => ({
+  customerServiceEnabled: true,
+  customerServiceNumber: {
+    display: '(888) 123 4567',
+    value: '8881234567'
+  },
+  siteTheme: null,
+}));
+```
+
+We can even mock handlers to test if they were called. For example:
+
+```js
+import * as ModalContext from '~/context/Modal.context';
+...
+const openStaticModal = jest.fn();
+describe('test', () => {
+  beforeAll(() => {
+    ModalContext.useModalContext = jest.fn(() => ({
+      openStaticModal,
+    }));
+  });
+
+  it('opens a modal', () => {
+    ...
+    expect(openStaticModal).toHaveBeenCalledWith('modal-id');
+  });
+});
+```
+
+Since 'use(\*)Context' are read-only properties, we must force typescript to ignore that rule. One way to do it is to "anyfy" their contexts:
+
+```js
+  (ModalContext as any).useModalContext = jest.fn();
 ```

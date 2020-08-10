@@ -42,6 +42,7 @@ export default function SizeFinder({
         <div css={[styles.header, styles.labelContainer]}>
           <h2 css={styles.title}>{ui('pdp.productInfo.selectSizeLabel')}</h2>
           <Link
+            data-testid="find-my-tire-size"
             theme={THEME.LIGHT}
             as="button"
             onClick={openTireSizeModal}
