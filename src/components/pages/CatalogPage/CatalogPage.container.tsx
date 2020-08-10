@@ -128,7 +128,10 @@ function CatalogPageContainer({
 
   const scrollToGrid = () => {
     if (catalogGridRef && catalogGridRef.current) {
-      catalogGridRef.current.scrollIntoView({ behavior: 'smooth' });
+      window.scrollTo({
+        behavior: 'smooth',
+        top: catalogGridRef.current.offsetTop,
+      });
     }
   };
 
