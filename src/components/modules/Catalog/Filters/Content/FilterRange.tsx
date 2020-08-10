@@ -49,9 +49,11 @@ export default function FilterRange({
       setShouldReset(true);
     }
 
-    prevFilterGroup.current = filterGroup;
+    if (!prevFilterGroup.current && filterGroup) {
+      setShouldReset(false);
+    }
 
-    setShouldReset(false);
+    prevFilterGroup.current = filterGroup;
   }, [filterGroup]);
 
   return (
