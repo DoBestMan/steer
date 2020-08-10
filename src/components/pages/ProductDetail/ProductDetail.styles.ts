@@ -208,7 +208,7 @@ const styles: StylesMap = {
     width: '100%',
 
     [MQ.M]: {
-      marginBottom: SPACING.SIZE_05,
+      marginBottom: SPACING.SIZE_15,
     },
 
     [MQ.L]: {
