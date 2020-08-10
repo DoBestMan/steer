@@ -12,6 +12,8 @@ import { SHADOW_SRC } from '~/lib/constants/image';
 import { getSquareImageTransformations } from '~/lib/utils/cloudinary/cloudinary';
 import { ui } from '~/lib/utils/ui-dictionary';
 
+import Icon from '../Icon/Icon';
+import { ICONS } from '../Icon/Icon.constants';
 import styles from './ProductListing.styles';
 import { ProductListingProps } from './ProductListing.types';
 
@@ -21,6 +23,8 @@ function ProductListing({
   activeFilterValueList,
   gridAttribute,
   brand,
+  deliveryInfo,
+  dataMomentList,
   defaultImage,
   highlight,
   hoverImage,
@@ -125,6 +129,16 @@ function ProductListing({
             {name} {loadSpeedRating}
           </BaseLink>
         </h3>
+        {deliveryInfo && (
+          <span
+            css={[
+              styles.subcopy,
+              isHighlighted && styles.deliveryInfoHighlighted,
+            ]}
+          >
+            {deliveryInfo.value}
+          </span>
+        )}
         {rating && (
           <div css={styles.rating}>
             <Stars
@@ -144,6 +158,25 @@ function ProductListing({
               </div>
             ))}
           </div>
+        )}
+        {isHighlighted && (dataMomentList || deliveryInfo) && (
+          <ul css={styles.momentList}>
+            {deliveryInfo && (
+              <li css={styles.moment}>
+                <Icon
+                  css={[styles.momentIcon, styles.deliveryIcon]}
+                  name={ICONS.SHIPPING_TRUCK}
+                />
+                {deliveryInfo.value}
+              </li>
+            )}
+            {dataMomentList?.map((item) => (
+              <li css={styles.moment} key={item.label}>
+                <Icon css={styles.momentIcon} name={item.icon.svgId} />
+                {item.label}
+              </li>
+            ))}
+          </ul>
         )}
 
         {siteCatalogPromotionInfo && siteCatalogPromotionInfo.count > 0 && (

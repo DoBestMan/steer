@@ -99,6 +99,11 @@ export function ProductListingWithKnobs() {
             image: showBrandLogo ? mockLogo : undefined,
             label: 'Firestone',
           }}
+          dataMomentList={null}
+          deliveryInfo={{
+            value: text('Delivery info', '2-day free delivery'),
+            isFeatured: false,
+          }}
           defaultImage={PRODUCT_IMAGE_TYPES.SIDEWALL}
           highlight={text('Highlight', 'best seller')}
           link={{ href: '/', isExternal: false }}
@@ -141,6 +146,8 @@ export function FilteredProductListing() {
             image: mockLogo,
             label: 'Firestone',
           }}
+          dataMomentList={null}
+          deliveryInfo={null}
           defaultImage={PRODUCT_IMAGE_TYPES.SIDEWALL}
           gridAttribute={null}
           highlight={null}
@@ -177,6 +184,8 @@ export function HighlightedProductListing() {
             label: 'Firestone',
           }}
           defaultImage={PRODUCT_IMAGE_TYPES.SIDEWALL}
+          dataMomentList={null}
+          deliveryInfo={null}
           gridAttribute={null}
           highlight={null}
           link={{ href: '/', isExternal: false }}

@@ -125,6 +125,10 @@ export function AdvancedListingWithKnobs() {
           image: showBrandLogo ? mockLogo : undefined,
           label: 'Firestone',
         }}
+        deliveryInfo={{
+          value: text('Delivery info', '2-day free delivery'),
+          isFeatured: false,
+        }}
         dataMomentList={[
           {
             icon: {

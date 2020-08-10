@@ -52,6 +52,16 @@ const styles: StylesMap = {
       },
     },
   ],
+  deliveryIcon: {
+    position: 'relative',
+    left: -3,
+    top: 2,
+  },
+  deliveryInfoHighlighted: {
+    [MQ.M]: {
+      display: 'none',
+    },
+  },
   filterItem: typography.secondarySubhead,
   filterItemContainer: {
     marginBottom: SPACING.SIZE_10,
@@ -102,6 +112,31 @@ const styles: StylesMap = {
       top: 0,
       width: '100%',
     },
+  },
+  moment: [
+    typography.secondarySubhead,
+    {
+      color: COLORS.LIGHT.GRAY_70,
+      display: 'flex',
+      [MQ.XL]: { lineHeight: '20px' },
+    },
+  ],
+  momentIcon: {
+    width: 16,
+    height: 14,
+
+    svg: {
+      height: '100%',
+      width: 'auto',
+    },
+  },
+  momentList: {
+    display: 'none',
+    [MQ.M]: {
+      display: 'block',
+      margin: `${SPACING.SIZE_05}px 0 ${SPACING.SIZE_05}px`,
+    },
+    [MQ.XL]: { margin: `${SPACING.SIZE_05}px 0 ${SPACING.SIZE_15}px` },
   },
   morePromos: [
     typography.secondarySubhead,

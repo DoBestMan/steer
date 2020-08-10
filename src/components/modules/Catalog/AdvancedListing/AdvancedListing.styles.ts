@@ -39,6 +39,11 @@ const styles: CSSObject = {
       maxWidth: 130,
     },
   },
+  deliveryIcon: {
+    position: 'relative',
+    left: -4,
+    top: 2,
+  },
   imageContainer: {
     width: IMAGE_SIZES[0].width,
     [MQ.M]: {
@@ -106,9 +111,13 @@ const styles: CSSObject = {
     },
   ],
   momentIcon: {
-    width: 12,
-    height: 12,
-    marginRight: SPACING.SIZE_05,
+    width: 16,
+    height: 14,
+
+    svg: {
+      height: '100%',
+      width: 'auto',
+    },
   },
   momentList: {
     marginTop: SPACING.SIZE_20,

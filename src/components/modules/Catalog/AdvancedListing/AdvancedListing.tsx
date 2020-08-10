@@ -33,6 +33,7 @@ function AdvancedListing({
   name,
   imageList,
   dataMomentList,
+  deliveryInfo,
   highlight,
   link,
   siteCatalogPromotionInfo,
@@ -119,6 +120,15 @@ function AdvancedListing({
                     })}
                 </li>
               ))}
+            {deliveryInfo && (
+              <li css={styles.moment}>
+                <Icon
+                  css={[styles.momentIcon, styles.deliveryIcon]}
+                  name={ICONS.SHIPPING_TRUCK}
+                />
+                {deliveryInfo.value}
+              </li>
+            )}
             {dataMomentList?.map((item) => (
               <li css={styles.moment} key={item.label}>
                 <Icon css={styles.momentIcon} name={item.icon.svgId} />
