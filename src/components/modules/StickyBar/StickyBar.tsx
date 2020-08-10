@@ -5,7 +5,7 @@ import { Icon as IconType } from '~/components/global/Icon/Icon.types';
 import Image from '~/components/global/Image/Image';
 import { SiteImage } from '~/data/models/SiteImage';
 import { CSSStylesProp, THEME } from '~/lib/constants';
-import { getInvertedImageTransformations } from '~/lib/utils/cloudinary/cloudinary';
+import { transformSrcLogoToWhite } from '~/lib/utils/cloudinary/cloudinary';
 
 import styles from './StickyBar.styles';
 
@@ -20,6 +20,8 @@ interface Props {
   theme: THEME;
 }
 
+const BRAND_LOGO_SIZES = [200];
+
 function StickyBar({
   children,
   icon,
@@ -30,7 +32,9 @@ function StickyBar({
   secondaryLabel,
   theme,
 }: Props) {
-  const brandSrcTransformationArgs = getInvertedImageTransformations([200]);
+  if (logo && logo.src) {
+    logo.src = transformSrcLogoToWhite(logo.src);
+  }
 
   return (
     <div
@@ -51,7 +55,7 @@ function StickyBar({
                   css={styles.logo}
                   altText={logo.altText}
                   src={logo.src}
-                  srcTransformationArgs={brandSrcTransformationArgs}
+                  widths={BRAND_LOGO_SIZES}
                 />
               </div>
             )}

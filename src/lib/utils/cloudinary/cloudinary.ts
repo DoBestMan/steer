@@ -1,6 +1,10 @@
+import { replaceAt } from '~/lib/utils/string';
+
 import {
+  CLOUDINARY_BLACK_BRAND_LOGO,
   CLOUDINARY_SRC_REGEX,
   CLOUDINARY_ST_SRC_REGEX,
+  CLOUDINARY_WHITE_BRAND_LOGO,
 } from './cloudinary.constants';
 import {
   Angle,
@@ -246,6 +250,7 @@ export function getSquareImageTransformations(sizes: number[]) {
   }, {});
 }
 
+// This should not be used anymore, but we keep it just in case we have to
 export function getInvertedImageTransformations(sizes: number[]) {
   return sizes.reduce((object: Record<string, Transformations[]>, size) => {
     object[`${size}w`] = [
@@ -276,4 +281,88 @@ export function getCroppedImageTransformations(
     ];
     return object;
   }, {});
+}
+
+export function getWidthsTransformations(sizes: number[]) {
+  return sizes.reduce((object: Record<string, Transformations[]>, size) => {
+    object[`${size}w`] = [
+      {
+        width: size,
+      },
+    ];
+    return object;
+  }, {});
+}
+
+/*
+ * Based on a brand src:
+ * - tries to switch b -> w if the provided logo is black and should be white, or
+ * - tries to switch w -> b if the provided logo is white and should be black
+ */
+function getTransformedSrcLogo({
+  src,
+  shouldBeWhite = false,
+}: {
+  shouldBeWhite?: boolean;
+  src: string;
+}): string {
+  let srcFinal = src;
+
+  const matchIsBlack = CLOUDINARY_BLACK_BRAND_LOGO.exec(src);
+  const matchIsWhite = CLOUDINARY_WHITE_BRAND_LOGO.exec(src);
+
+  // No match, we just return the current result
+  if (!matchIsBlack && !matchIsWhite) {
+    return srcFinal;
+  }
+
+  let match = null;
+
+  if (!shouldBeWhite && matchIsWhite) {
+    match = matchIsWhite;
+  }
+
+  if (shouldBeWhite && matchIsBlack) {
+    match = matchIsBlack;
+  }
+
+  // No match, we just return the current result
+  if (!match) {
+    return srcFinal;
+  }
+
+  const matched = match[0];
+  let indexBOrW = 0;
+
+  // because matched would be <number><b|w>... , we need to get the exact index for b or w by "removing" the numbers.
+  while (matched[indexBOrW] !== undefined) {
+    if (matched[indexBOrW] === 'b' || matched[indexBOrW] === 'w') {
+      break;
+    }
+    indexBOrW++;
+  }
+
+  indexBOrW += match.index;
+
+  // If the url provided is black and it's supposed to be white
+  // and if we've found the correct index, we switch the later to 'w'
+  if (src[indexBOrW] === 'b' && shouldBeWhite) {
+    srcFinal = replaceAt(src, indexBOrW, 'w');
+  }
+
+  // If the url provided is whie and it's supposed to be black
+  // and if we've found the correct index, we switch the later to 'b'
+  if (src[indexBOrW] === 'w' && !shouldBeWhite) {
+    srcFinal = replaceAt(src, indexBOrW, 'b');
+  }
+
+  return srcFinal;
+}
+
+export function transformSrcLogoToWhite(src: string): string {
+  return getTransformedSrcLogo({ src, shouldBeWhite: true });
+}
+
+export function transformSrcLogoToBlack(src: string): string {
+  return getTransformedSrcLogo({ src, shouldBeWhite: false });
 }

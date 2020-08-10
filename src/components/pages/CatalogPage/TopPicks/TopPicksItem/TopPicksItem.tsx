@@ -12,7 +12,7 @@ import { STICKER_SIZES } from '~/components/global/Sticker/Sticker.styles';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { COLORS } from '~/lib/constants';
 import { getTranslate, subscribeTranslate } from '~/lib/helpers/translate';
-import { getInvertedImageTransformations } from '~/lib/utils/cloudinary/cloudinary';
+import { transformSrcLogoToWhite } from '~/lib/utils/cloudinary/cloudinary';
 import { ordinalSuffixOf } from '~/lib/utils/string';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
@@ -22,14 +22,16 @@ import CTA from './CTA/CTA';
 import { styles } from './TopPicksItem.styles';
 import { TopPickItemsProps } from './TopPicksItems.types';
 
+const BRAND_LOGO_SIZES = [200, 400, 600];
+
 function TopPicksItem(props: TopPickItemsProps) {
   const {
     addVehicleInfo,
+    brand,
     asset,
     ctaLabel = ui('catalog.topPicks.ctaLabelFallback'), // Fallback should never happen, but just in case
     currentIndex,
     customerServiceNumber,
-    brand,
     deliveryInfo,
     exploreMore,
     index,
@@ -49,6 +51,10 @@ function TopPicksItem(props: TopPickItemsProps) {
     viewMoreData,
     slideTo,
   } = props;
+
+  if (brand?.image?.src) {
+    brand.image.src = transformSrcLogoToWhite(brand.image.src);
+  }
 
   const rootRef = useRef<HTMLDivElement | null>(null);
   const assetRef = useRef<HTMLSpanElement | null>(null);
@@ -140,13 +146,6 @@ function TopPicksItem(props: TopPickItemsProps) {
     (isCurrent || (breakpoints.greaterThan.M && isHovered)) &&
     !isCurrentNotHovered &&
     show;
-
-  // custom transformation to turn brand icon to white
-  const brandSrcTransformationArgs = getInvertedImageTransformations([
-    200,
-    400,
-    600,
-  ]);
 
   // This is meant to be for Voice over, during item navigation
   // When a user selects an item and PRESS, we want the carousel to move and to put the focus on the link with description
@@ -279,7 +278,7 @@ function TopPicksItem(props: TopPickItemsProps) {
               <span css={[styles.brand, brand.image && styles.brandWithImage]}>
                 <BrandLogoOrLabel
                   brand={brand}
-                  srcTransformationArgs={brandSrcTransformationArgs}
+                  widths={BRAND_LOGO_SIZES}
                   customContainerStyles={{ width: '100%' }}
                 />
               </span>

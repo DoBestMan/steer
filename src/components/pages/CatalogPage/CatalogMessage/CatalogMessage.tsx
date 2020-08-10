@@ -20,7 +20,7 @@ import { SiteCatalogSummaryBuildIn } from '~/data/models/SiteCatalogSummaryBuild
 import { SiteCatalogSummaryPrompt } from '~/data/models/SiteCatalogSummaryPrompt';
 import { BUTTON_STYLE, LINK_TYPES } from '~/lib/constants';
 import { eventEmitters } from '~/lib/events/emitters';
-import { getInvertedImageTransformations } from '~/lib/utils/cloudinary/cloudinary';
+import { transformSrcLogoToWhite } from '~/lib/utils/cloudinary/cloudinary';
 import { isValidStaticModal } from '~/lib/utils/modal';
 import { getHrefWithParams } from '~/lib/utils/routes';
 import { ui } from '~/lib/utils/ui-dictionary';
@@ -33,6 +33,8 @@ import MessageContainer from './components/MessageContainer';
 interface BuildInMessageProps {
   siteCatalogSummaryBuildIn: SiteCatalogSummaryBuildIn | null;
 }
+
+const BRAND_LOGO_SIZES = [100, 200];
 
 export function BuildInMessage({
   siteCatalogSummaryBuildIn,
@@ -82,7 +84,8 @@ export function BuildInMessage({
                 return;
               }
               const id = label.replace(/\s+/g, '').toLowerCase();
-              const widths = [100, 200];
+
+              image.src = transformSrcLogoToWhite(image.src);
 
               return (
                 <li key={id}>
@@ -90,9 +93,7 @@ export function BuildInMessage({
                     <Image
                       altText={label}
                       src={image.src}
-                      srcTransformationArgs={getInvertedImageTransformations(
-                        widths,
-                      )}
+                      widths={BRAND_LOGO_SIZES}
                     />
                   </div>
                 </li>
