@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import Button from '~/components/global/Button/Button';
 import { CARS, CARS_KEYS } from '~/components/global/Car/CarDetails.constants';
 import Grid from '~/components/global/Grid/Grid';
@@ -6,6 +8,7 @@ import Markdown from '~/components/global/Markdown/Markdown';
 import PageIllustration from '~/components/global/PageIllustration/PageIllustration';
 import { navigationPaddingTop } from '~/components/modules/Nav/Nav.styles';
 import { BUTTON_STYLE, LINK_TYPES } from '~/lib/constants';
+import GA from '~/lib/helpers/analytics';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import { styles } from './ErrorPage.styles';
@@ -18,6 +21,16 @@ interface Props {
 }
 
 function ErrorPage({ copy, description, errorCode, hasHomeButton }: Props) {
+  // Push event to GA dataLayer if 404
+  useEffect(() => {
+    if (errorCode === 404 || errorCode === '404') {
+      GA.addToDataLayer({
+        event: 'is404',
+        page: document.location.pathname,
+      });
+    }
+  }, [errorCode]);
+
   return (
     <div css={[styles.root, navigationPaddingTop]}>
       <Grid>

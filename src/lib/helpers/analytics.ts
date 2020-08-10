@@ -9,15 +9,14 @@ export const GTM_CONSTANTS = {
   GTM_COOKIES_WIN: process.env.GTM_COOKIES_WIN,
 };
 
-type ExperimentCallback = {
+interface ExperimentCallback {
   callback: (response: string | undefined) => void;
   experimentID: string;
-};
+}
 
-type DataLayerItem = {
-  key: string;
-  value: string;
-};
+interface DataLayerItem {
+  [key: string]: string;
+}
 
 const TOTAL_TRIALS = 5;
 
