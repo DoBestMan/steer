@@ -1,14 +1,15 @@
-import { IncomingMessage } from 'http';
-import { GetServerSideProps } from 'next';
+import { GetStaticProps } from 'next';
 
 import DealsPage from '~/components/pages/SEOPage/DealsPage/DealsPage';
 import { SiteDeals } from '~/data/models/SiteDeals';
 import { backendGetSiteDeals } from '~/lib/backend';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
+import { REVALIDATE } from '~/lib/constants';
 
 interface DealsServeData {
   serverData: SiteDeals;
 }
+
 function TireDeals(props: DealsServeData) {
   return (
     <DealsPage
@@ -18,10 +19,8 @@ function TireDeals(props: DealsServeData) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps<DealsServeData> = async (context: {
-  req: IncomingMessage;
-}) => {
-  backendBootstrap({ request: context.req });
+export const getStaticProps: GetStaticProps<DealsServeData> = async () => {
+  backendBootstrap();
 
   const siteDeals = await backendGetSiteDeals();
 
@@ -34,6 +33,7 @@ export const getServerSideProps: GetServerSideProps<DealsServeData> = async (con
 
   return {
     props,
+    revalidate: REVALIDATE.EVERY_MINUTE,
   };
 };
 export default TireDeals;

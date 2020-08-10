@@ -1,5 +1,4 @@
-import { IncomingMessage } from 'http';
-import { GetServerSideProps } from 'next';
+import { GetStaticProps } from 'next';
 
 import HomePageContainer, {
   HomeServeData,
@@ -13,10 +12,8 @@ function Home(props: HomeServeData) {
 }
 
 // This function runs at build time on the build server
-export const getStaticProps: GetServerSideProps<HomeServeData> = async (context: {
-  req: IncomingMessage;
-}) => {
-  backendBootstrap({ request: context.req });
+export const getStaticProps: GetStaticProps<HomeServeData> = async () => {
+  backendBootstrap();
 
   const [{ siteHero, siteInsights }, { siteReviews }] = await Promise.all([
     backendGetSiteHome(),

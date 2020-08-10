@@ -1,25 +1,20 @@
-import { GetServerSideProps } from 'next';
+import { GetStaticProps } from 'next';
 
 import ReviewListingPage, {
   ReviewListingServerData,
 } from '~/components/pages/ReviewListingPage/ReviewListingPage.container';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
 import { backendGetReviewListing } from '~/lib/backend/review-listing';
-import { getStringifiedParams } from '~/lib/utils/routes';
+import { REVALIDATE } from '~/lib/constants';
 
 function Reviews(props: ReviewListingServerData) {
   return <ReviewListingPage {...props} />;
 }
 
-export const getServerSideProps: GetServerSideProps<ReviewListingServerData> = async (
-  context,
-) => {
-  backendBootstrap({ request: context.req });
-  const { ...params } = context.query;
+export const getStaticProps: GetStaticProps<ReviewListingServerData> = async () => {
+  backendBootstrap();
 
-  const tireReviews = await backendGetReviewListing({
-    query: getStringifiedParams(params),
-  });
+  const tireReviews = await backendGetReviewListing({});
 
   const props: ReviewListingServerData = {
     serverData: {
@@ -29,6 +24,7 @@ export const getServerSideProps: GetServerSideProps<ReviewListingServerData> = a
 
   return {
     props,
+    revalidate: REVALIDATE.EVERY_MINUTE,
   };
 };
 

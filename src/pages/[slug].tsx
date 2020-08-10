@@ -1,4 +1,4 @@
-import { GetServerSideProps, GetServerSidePropsResult } from 'next';
+import { GetServerSidePropsResult, GetStaticProps } from 'next';
 
 import OpenTemplatePage from '~/components/pages/OpenTemplatePage/OpenTemplatePage';
 import { PageData } from '~/data/models/SiteOpenTemplate';
@@ -6,7 +6,6 @@ import { backendBootstrap } from '~/lib/backend/bootstrap';
 import { backendGetPageSlug } from '~/lib/backend/page-slug';
 import { backendGetPageSlugList } from '~/lib/backend/page-slug-list';
 import { REVALIDATE } from '~/lib/constants';
-import { redirectToNotFound } from '~/lib/utils/routes';
 
 type OpenTemplatePageProps = {
   pageData: PageData;
@@ -32,17 +31,17 @@ export async function getStaticPaths() {
   };
 }
 
-export const getStaticProps: GetServerSideProps<OpenTemplatePageProps> = async (
+export const getStaticProps: GetStaticProps<OpenTemplatePageProps> = async (
   context,
 ) => {
-  backendBootstrap({ request: context.req });
+  backendBootstrap();
   const slug =
     context && context.params && context.params.slug
       ? context.params.slug
       : null;
 
   if (!slug) {
-    redirectToNotFound(context.res);
+    // Return 404?
     return {} as GetServerSidePropsResult<OpenTemplatePageProps>;
   }
 
@@ -50,7 +49,7 @@ export const getStaticProps: GetServerSideProps<OpenTemplatePageProps> = async (
     const pageData = await backendGetPageSlug(slug);
 
     if (!pageData) {
-      redirectToNotFound(context.res);
+      // Return 404?
       return {} as GetServerSidePropsResult<OpenTemplatePageProps>;
     }
 
@@ -61,7 +60,7 @@ export const getStaticProps: GetServerSideProps<OpenTemplatePageProps> = async (
       revalidate: REVALIDATE.EVERY_MINUTE,
     };
   } catch (error) {
-    redirectToNotFound(context.res);
+    // Return 404?
     return {} as GetServerSidePropsResult<OpenTemplatePageProps>;
   }
 };
