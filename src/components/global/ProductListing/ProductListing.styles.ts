@@ -174,7 +174,7 @@ const styles: StylesMap = {
     display: 'flex',
     flexDirection: 'column',
     height: '100%',
-    padding: `${SPACING.SIZE_20}px ${SPACING.SIZE_10}px`,
+    padding: `${SPACING.SIZE_25}px ${SPACING.SIZE_10}px`,
     position: 'relative',
 
     [MQ.M]: {
