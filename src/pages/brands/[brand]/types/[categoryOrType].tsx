@@ -21,6 +21,9 @@ interface Props extends CatalogPageData {
   categoryOrType: string;
 }
 
+// MVP solution for differentiating between category v type pages
+const PAGE_TYPE = 'types';
+
 function BrandTypeCatalog({ brand, categoryOrType, serverData }: Props) {
   const searchBy = SearchBy.brandAndCategoryOrType;
   const searchByParams = {
@@ -38,6 +41,7 @@ function BrandTypeCatalog({ brand, categoryOrType, serverData }: Props) {
       pageParams={{
         brand,
         categoryOrType,
+        pageType: PAGE_TYPE,
       }}
       searchBy={searchBy}
       searchByParams={searchByParams}
@@ -73,6 +77,7 @@ export const getServerSideProps: GetServerSideProps<CatalogPageData> = async (
     props: {
       brand: brandName,
       categoryOrType,
+      pageType: PAGE_TYPE,
       serverData: { siteCatalogSummary, siteCatalogProducts },
     },
   };
