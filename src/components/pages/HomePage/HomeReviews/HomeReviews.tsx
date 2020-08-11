@@ -1,7 +1,6 @@
 import GridItem from '~/components/global/Grid/GridItem';
 import Link from '~/components/global/Link/Link';
 import { SiteReviews } from '~/data/models/SiteReviews';
-import { layout } from '~/styles/layout.styles';
 import { typography } from '~/styles/typography.styles';
 
 import HomeRatings from './HomeRatings/HomeRatings';
@@ -36,7 +35,7 @@ function HomeReviews({
         <div css={[typography.bodyCopy, styles.description]}>{body}</div>
         <Link
           href={link.href}
-          css={[typography.primarySubhead, layout.hideOnSmall, styles.link]}
+          css={[typography.primarySubhead, styles.link]}
           isExternal={link.isExternal}
         >
           {linkLabel}

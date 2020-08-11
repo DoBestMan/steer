@@ -13,16 +13,11 @@ const styles: StylesMap = {
     marginTop: SPACING.SIZE_40,
   },
   link: {
-    marginTop: SPACING.SIZE_40,
-
+    margin: `${SPACING.SIZE_40}px 0`,
     span: { borderBottomColor: 'currentColor' },
   },
   title: {
     color: COLORS.GLOBAL.WHITE,
-    display: 'none',
-    [MQ.M]: {
-      display: 'block',
-    },
   },
 };
 
