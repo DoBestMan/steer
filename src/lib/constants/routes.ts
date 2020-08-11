@@ -20,6 +20,7 @@ export enum ROUTES {
   FREE_SHIPPING = 'freeShipping',
   HOME = 'home',
   LEARN = 'learn',
+  MILITARY_DISCOUNT = 'militaryDiscount',
   OPEN_TEMPLATE = 'openTemplate',
   ORDER_TRACKING = 'orderTracking',
   ORDER_TRACKING_RESULT = 'orderTrackingResult',
@@ -69,12 +70,12 @@ export const ROUTE_TYPE_MAP: { [routeName: string]: string } = {
   [ROUTES.TYPE_REVIEWS]: '/types/[type]/reviews',
   [ROUTES.VEHICLE_CATALOG]: '/vehicles/[make]/[model]/[year]',
   [ROUTES.TIRE_SIZE_CATALOG_OR_CATEGORY]: '/tire-sizes/[size]',
-  [ROUTES.CUSTOMER_SUPPORT]: '/customer-support',
+  [ROUTES.CUSTOMER_SUPPORT]: '/contact',
   [ROUTES.DEALS]: '/tire-deals',
   [ROUTES.ORDER_TRACKING_RESULT]: '/track-your-order/result',
   [ROUTES.ORDER_TRACKING]: '/track-your-order',
   [ROUTES.PRODUCT_DETAIL_PLA]: '/paid',
-  [ROUTES.PRIVACY]: '/privacy',
+  [ROUTES.PRIVACY]: '/privacy-policy',
   [ROUTES.SITEMAP]: '/sitemap',
   [ROUTES.OPEN_TEMPLATE]: '/[slug]',
 };
@@ -94,7 +95,8 @@ export const ROUTE_MAP: { [routeName: string]: string } = {
   [ROUTES.FAQS]: '/faqs',
   [ROUTES.FREE_SHIPPING]: '/free-shipping',
   [ROUTES.LEARN]: '/learn',
-  [ROUTES.RETURNS]: '/returns',
+  [ROUTES.MILITARY_DISCOUNT]: '/military-discount',
+  [ROUTES.RETURNS]: '/returns-and-refunds',
   [ROUTES.TIRE_BUYING_GUIDE]: '/tire-buying-guide',
 };
 

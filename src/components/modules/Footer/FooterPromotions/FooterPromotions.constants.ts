@@ -1,6 +1,6 @@
 import { FeaturedInfoModuleProps } from '~/components/global/FeaturedInfoModule/FeaturedInfoModule';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
-import { LINK_TYPES } from '~/lib/constants';
+import { LINK_TYPES, ROUTE_MAP, ROUTES } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 export const PROMOTIONS: { [key: string]: FeaturedInfoModuleProps } = {
@@ -17,7 +17,7 @@ export const PROMOTIONS: { [key: string]: FeaturedInfoModuleProps } = {
   militaryDiscount: {
     action: {
       as: LINK_TYPES.A,
-      href: '/military-discounts',
+      href: ROUTE_MAP[ROUTES.MILITARY_DISCOUNT],
       text: ui('footer.promotions.militaryDiscountAction'),
     },
     copy: ui('footer.promotions.militaryDiscountCopy'),
@@ -27,7 +27,7 @@ export const PROMOTIONS: { [key: string]: FeaturedInfoModuleProps } = {
   freeShipping: {
     action: {
       as: LINK_TYPES.A,
-      href: '/free-shipping',
+      href: ROUTE_MAP[ROUTES.FREE_SHIPPING],
       text: ui('footer.promotions.freeShippingAction'),
     },
     copy: ui('footer.promotions.freeShippingCopy'),

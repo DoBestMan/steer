@@ -29,8 +29,6 @@ export const orderStatusHierarchy = {
   [OrderStatus.SHIPPED]: 2,
 };
 
-const CUSTOMER_SERVICE_LINK = 'https://simpletire.com/customer-support';
-
 export function getOrderSteps({
   createdAt,
   deliveredAt,
@@ -124,7 +122,7 @@ export function getCancelledContactCopy({
     return (
       <Link
         theme={LINK_THEME.LIGHT_HIGHLIGHTED}
-        href={CUSTOMER_SERVICE_LINK}
+        href={ROUTE_MAP[ROUTES.CUSTOMER_SUPPORT]}
         isExternal
       >
         {ui('tracking.cancelledSendEmail')}
@@ -144,7 +142,7 @@ export function getCancelledContactCopy({
     email: (
       <Link
         theme={LINK_THEME.LIGHT_HIGHLIGHTED}
-        href={CUSTOMER_SERVICE_LINK}
+        href={ROUTE_MAP[ROUTES.CUSTOMER_SUPPORT]}
         isExternal
       >
         send an email
