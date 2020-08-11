@@ -117,11 +117,16 @@ export const styles: StylesMap = {
   },
   listItem: {
     ':last-of-type': {
-      marginLeft: SPACING.SIZE_30,
+      marginLeft: SPACING.SIZE_20,
     },
     alignItems: 'center',
     display: 'none',
     marginLeft: SPACING.SIZE_20,
+    [MQ.M]: {
+      ':last-of-type': {
+        marginLeft: SPACING.SIZE_30,
+      },
+    },
     [MQ.L]: {
       display: 'inline-flex',
     },
