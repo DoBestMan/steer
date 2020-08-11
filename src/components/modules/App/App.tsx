@@ -3,6 +3,7 @@ import { ReactNode } from 'react';
 import { Transition } from 'react-transition-group';
 import { TransitionStatus } from 'react-transition-group/Transition';
 
+import FeedbackDynamic from '~/components/global/Feedback/FeedbackDynamic';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import Layout from '~/components/global/Layout/Layout';
@@ -76,8 +77,13 @@ function App({ children, ...rest }: Props) {
           )}
         </Layout>
       </NavContextProvider>
+
+      {!isHomepage && <FeedbackDynamic />}
+
       <FooterContainer />
+
       <SearchModal />
+
       <LoadingBar isLoading={isRouteLoading} />
     </div>
   );

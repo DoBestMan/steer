@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import Button from '~/components/global/Button/Button';
@@ -71,6 +72,10 @@ function Feedback() {
   useEffect(() => {
     injectFeedbackifyScript();
   }, []);
+
+  // Reset the feedback state when the route changes
+  const router = useRouter();
+  router.events?.on('routeChangeComplete', () => setState(STATES.DEFAULT));
 
   return (
     <div css={styles.container}>

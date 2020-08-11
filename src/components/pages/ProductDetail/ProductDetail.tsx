@@ -3,7 +3,6 @@ import { useRef, useState } from 'react';
 
 import Breadcrumbs from '~/components/global/Breadcrumbs/Breadcrumbs';
 import DataStructure from '~/components/global/DataStructure/DataStructure';
-import Feedback from '~/components/global/Feedback/Feedback';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import Link from '~/components/global/Link/Link';
@@ -205,7 +204,6 @@ function ProductDetail({ serverData }: ProductDetailData) {
           </GridItem>
         )}
       </Grid>
-      <Feedback />
 
       <LocationModal isOpen={isLocationModalOpen} onClose={toggleModal} />
     </>

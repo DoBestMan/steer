@@ -1,7 +1,6 @@
 import { ThemeProvider, useTheme } from 'emotion-theming';
 import { useEffect } from 'react';
 
-import Feedback from '~/components/global/Feedback/Feedback';
 import Loading from '~/components/global/Loading/Loading';
 import { NAV_THEME } from '~/components/modules/Nav/Nav.theme';
 import { useCatalogPageContext } from '~/context/CatalogPage.context';
@@ -92,7 +91,6 @@ function CatalogPage({
               fetchNewProducts={fetchNewProducts}
             />
           </div>
-          {hasResults && <Feedback />}
         </>
       )}
       {showLoadingIndicator && <LoadingIndicator />}
