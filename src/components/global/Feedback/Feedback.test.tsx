@@ -8,7 +8,10 @@ import { ui } from '~/lib/utils/ui-dictionary';
 
 import Feedback from './Feedback';
 
-describe.skip('Feedback', () => {
+// Mock icons since jest-next-dynamic does not support svgx
+jest.mock('~/components/global/Icon/Icon', () => () => 'Icon');
+
+describe('Feedback', () => {
   beforeAll(async () => {
     await preloadAll();
   });
