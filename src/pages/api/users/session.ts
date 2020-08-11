@@ -65,7 +65,11 @@ export default async (
   response.setHeader('Cache-control', 'no-cache');
 
   if (hasAuthorizationHeader(request)) {
-    await getUserSession(request, response);
+    try {
+      await getUserSession(request, response);
+    } catch (e) {
+      await createUserSession(request, response);
+    }
   } else {
     await createUserSession(request, response);
   }
