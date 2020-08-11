@@ -1,11 +1,4 @@
-import {
-  COLORS,
-  GRID_MARGIN,
-  MQ,
-  SPACING,
-  StylesMap,
-  TIME,
-} from '~/lib/constants';
+import { COLORS, GRID_MARGIN, MQ, StylesMap, TIME } from '~/lib/constants';
 
 export const CONSTANTS = {
   CONTENT_PEEKING_AMOUNT: {
@@ -71,8 +64,12 @@ const styles: StylesMap = {
 
     [MQ.L]: {
       alignItems: 'unset',
-      marginTop: SPACING.SIZE_05,
+      marginTop: 6,
       justifyContent: 'center',
+    },
+
+    [MQ.XL]: {
+      marginTop: 9,
     },
 
     svg: {
