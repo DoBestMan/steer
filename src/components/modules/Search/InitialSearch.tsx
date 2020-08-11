@@ -49,12 +49,13 @@ function InitialSearch({
     </div>
   );
 
-  const siteSearchResultTextList: SiteSearchResultTextItem[] = [];
+  let siteSearchResultTextList: SiteSearchResultTextItem[] = [];
   visiblePastSearches.siteSearchResultList.forEach((siteSearchResult) => {
     if (siteSearchResult.type === SearchResultEnum.TEXT) {
       siteSearchResultTextList.push(siteSearchResult);
     }
   });
+  siteSearchResultTextList = siteSearchResultTextList.slice(0, 5); // we only want the first 5 results
 
   return (
     <>
