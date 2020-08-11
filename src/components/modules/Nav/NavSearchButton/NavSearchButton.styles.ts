@@ -12,6 +12,9 @@ const styles: StylesMap = {
       textAlign: 'left',
       width: '100%',
     },
+    [MQ.XL]: {
+      marginTop: SPACING.SIZE_01,
+    },
   },
   icon: {
     color: COLORS.GLOBAL.BLACK,
