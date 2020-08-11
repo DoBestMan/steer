@@ -6,7 +6,7 @@ const styles: StylesMap = {
     marginBottom: SPACING.SIZE_20,
 
     [MQ.M]: {
-      marginBottom: SPACING.SIZE_30,
+      marginBottom: SPACING.SIZE_40,
     },
 
     [MQ.L]: {

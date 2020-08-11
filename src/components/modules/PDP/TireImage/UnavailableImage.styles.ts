@@ -40,7 +40,7 @@ const styles: StylesMap = {
 
     [MQ.M]: {
       height: MAX_HEIGHT.M,
-      marginBottom: SPACING.SIZE_35,
+      marginBottom: SPACING.SIZE_25,
     },
 
     [MQ.L]: {
