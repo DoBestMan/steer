@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import Image from '~/components/global/Image/Image';
 import BaseLink from '~/components/global/Link/BaseLink';
@@ -7,6 +7,7 @@ import PromoTag from '~/components/global/PromoTag/PromoTag';
 import Stars, { HALF_WIDTH_STARS } from '~/components/global/Stars/Stars';
 import Sticker from '~/components/global/Sticker/Sticker';
 import { STICKER_SIZES } from '~/components/global/Sticker/Sticker.styles';
+import { getProductDisplayImages } from '~/components/pages/CatalogPage/CatalogPage.utils';
 import { COLORS } from '~/lib/constants';
 import { SHADOW_SRC } from '~/lib/constants/image';
 import { getSquareImageTransformations } from '~/lib/utils/cloudinary/cloudinary';
@@ -25,9 +26,7 @@ function ProductListing({
   brand,
   deliveryInfo,
   dataMomentList,
-  defaultImage,
   highlight,
-  hoverImage,
   priceList,
   siteCatalogPromotionInfo,
   imageList,
@@ -40,26 +39,35 @@ function ProductListing({
   isGrouped,
 }: ProductListingProps) {
   const [isHovered, setIsHovered] = useState(false);
-  const standardImage = useRef(
-    imageList.find((image) => image.productImageType === defaultImage) ||
-      imageList[0],
-  );
-  const hoveredImage = useRef(
-    imageList.find((image) => image.productImageType === hoverImage) ||
-      imageList[1] ||
-      imageList[0],
-  );
+  const displayImages = useMemo(() => getProductDisplayImages(imageList), [
+    imageList,
+  ]);
+  const standardImage =
+    imageList.find(
+      (image) => image.productImageType === displayImages.default,
+    ) || imageList[0];
 
-  const displayedImage = isHovered
-    ? hoveredImage.current
-    : standardImage.current;
+  const hoveredImage =
+    imageList.find((image) => image.productImageType === displayImages.hover) ||
+    imageList[1] ||
+    imageList[0];
+
+  const displayedImage = isHovered ? hoveredImage : standardImage;
 
   const numberOfPromosToDisplay =
     siteCatalogPromotionInfo && siteCatalogPromotionInfo.count > MAX_PROMOS
       ? 1
       : MAX_PROMOS;
 
-  const imageWidths = isHighlighted ? [250, 250, 300] : [140, 180, 200];
+  const imageWidths = useMemo(
+    () => (isHighlighted ? [250, 250, 300] : [140, 180, 200]),
+    [isHighlighted],
+  );
+
+  const imageTransformations = useMemo(
+    () => getSquareImageTransformations(imageWidths),
+    [imageWidths],
+  );
 
   function handleMouseEnter() {
     setIsHovered(true);
@@ -94,7 +102,7 @@ function ProductListing({
           widths={imageWidths}
           altText={displayedImage.image.altText}
           src={displayedImage.image.src}
-          srcTransformationArgs={getSquareImageTransformations(imageWidths)}
+          srcTransformationArgs={imageTransformations}
           noPlaceholder
         />
         <div css={[styles.shadow, isHighlighted && styles.shadowHighlighted]}>

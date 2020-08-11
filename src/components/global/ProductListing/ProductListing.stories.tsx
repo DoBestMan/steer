@@ -104,7 +104,6 @@ export function ProductListingWithKnobs() {
             value: text('Delivery info', '2-day free delivery'),
             isFeatured: false,
           }}
-          defaultImage={PRODUCT_IMAGE_TYPES.SIDEWALL}
           highlight={text('Highlight', 'best seller')}
           link={{ href: '/', isExternal: false }}
           loadSpeedRating={text('Load/Speed rating', '91H')}
@@ -148,7 +147,6 @@ export function FilteredProductListing() {
           }}
           dataMomentList={null}
           deliveryInfo={null}
-          defaultImage={PRODUCT_IMAGE_TYPES.SIDEWALL}
           gridAttribute={null}
           highlight={null}
           link={{ href: '/', isExternal: false }}
@@ -183,7 +181,6 @@ export function HighlightedProductListing() {
             image: mockLogo,
             label: 'Firestone',
           }}
-          defaultImage={PRODUCT_IMAGE_TYPES.SIDEWALL}
           dataMomentList={null}
           deliveryInfo={null}
           gridAttribute={null}

@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { SwiperInstance } from 'react-id-swiper';
 
 import Carousel from '~/components/global/Carousel/Carousel';
@@ -54,9 +54,12 @@ function TopPicks({
   );
   const rootRef = useRef<HTMLDivElement | null>(null);
 
-  const slideTo = (index: number) => {
-    swiper && swiper.slideTo(index);
-  };
+  const slideTo = useCallback(
+    (index: number) => {
+      swiper && swiper.slideTo(index);
+    },
+    [swiper],
+  );
 
   // Swiper events
   useEffect(() => {
@@ -151,21 +154,24 @@ function TopPicks({
     };
   }, [rootRef, rootHeight]);
 
-  const onItemMouseEnter = (index: number) => {
-    setIndexHovered(index);
-  };
+  const onItemMouseEnter = useCallback(
+    (index: number) => {
+      setIndexHovered(index);
+    },
+    [setIndexHovered],
+  );
 
-  const onItemMouseLeave = () => {
+  const onItemMouseLeave = useCallback(() => {
     setIndexHovered(undefined);
-  };
+  }, [setIndexHovered]);
 
-  const openModal = () => {
+  const openModal = useCallback(() => {
     setModalOpened(true);
-  };
+  }, [setModalOpened]);
 
-  const closeModal = () => {
+  const closeModal = useCallback(() => {
     setModalOpened(false);
-  };
+  }, [setModalOpened]);
 
   const params = {
     // Could use slidesPerView: NB_SLIDES_PER_BP[bp.bk], but seems better this way

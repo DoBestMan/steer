@@ -5,7 +5,6 @@ import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import IconOrImage from '~/components/global/IconOrImage/IconOrImage';
 import ProductListing from '~/components/global/ProductListing/ProductListing';
-import { getProductDisplayImages } from '~/components/pages/CatalogPage/CatalogPage.utils';
 import { SiteCatalogProductGroupItem } from '~/data/models/SiteCatalogProductGroupList';
 import { CSSStylesProp } from '~/lib/constants';
 
@@ -75,15 +74,9 @@ function ProductGroupList({
           freeScroll
         >
           {productList.map((product, i) => {
-            const displayImages = getProductDisplayImages(product.imageList);
             return (
               <div key={`${name}-${i}`} css={[styles.item, customItemStyles]}>
-                <ProductListing
-                  {...product}
-                  defaultImage={displayImages.default}
-                  hoverImage={displayImages.hover}
-                  isGrouped
-                />
+                <ProductListing {...product} isGrouped />
               </div>
             );
           })}

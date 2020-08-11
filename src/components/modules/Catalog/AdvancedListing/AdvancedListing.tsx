@@ -1,3 +1,5 @@
+import { useRef } from 'react';
+
 import BrandLogoOrLabel from '~/components/global/BrandLogoOrLabel/BrandLogoOrLabel';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
@@ -59,6 +61,10 @@ function AdvancedListing({
 
   const shouldAlignTop = hasNoPromos && !rating;
 
+  const imageTransformations = useRef(
+    getCroppedImageTransformations(IMAGE_SIZES),
+  );
+
   return (
     <Grid css={styles.root}>
       <GridItem css={styles.imageWrapper} gridColumnM="2/5" gridColumnL="2/7">
@@ -72,9 +78,7 @@ function AdvancedListing({
             <Image
               src={displayedImage.image.src}
               altText={displayedImage.image.altText}
-              srcTransformationArgs={getCroppedImageTransformations(
-                IMAGE_SIZES,
-              )}
+              srcTransformationArgs={imageTransformations.current}
               noPlaceholder
             />
           </div>

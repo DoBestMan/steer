@@ -126,14 +126,14 @@ function CatalogPageContainer({
     console.error(summaryError || productsError);
   }
 
-  const scrollToGrid = () => {
+  const scrollToGrid = useCallback(() => {
     if (catalogGridRef && catalogGridRef.current) {
       window.scrollTo({
         behavior: 'smooth',
         top: catalogGridRef.current.offsetTop,
       });
     }
-  };
+  }, [catalogGridRef]);
 
   // appends filters to existing URL query params
   const handleUpdateFilters = useCallback(
@@ -162,7 +162,15 @@ function CatalogPageContainer({
         setTimeout(scrollToGrid, TIME.MS350);
       }
     },
-    [asPath, pathname, query, pageParams, push, revalidateProducts],
+    [
+      asPath,
+      pathname,
+      query,
+      pageParams,
+      push,
+      revalidateProducts,
+      scrollToGrid,
+    ],
   );
 
   // preview data and handler for open filter dropdowns

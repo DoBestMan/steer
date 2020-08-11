@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic';
+import { useCallback } from 'react';
 
 import { useSearchContext } from '~/components/modules/Search/Search.context';
 import { useSearchModalContext } from '~/components/modules/Search/SearchModal.context';
@@ -32,10 +33,10 @@ function TopPicksContainer({
     ? siteCatalogSummaryMeta.totalResults
     : 0;
 
-  const openSearch = () => {
+  const openSearch = useCallback(() => {
     lockSearchStateToVehicle();
     setIsSearchOpen(true);
-  };
+  }, [lockSearchStateToVehicle, setIsSearchOpen]);
 
   if (siteCatalogSummaryTopPicksList.length === 0) {
     return null;
