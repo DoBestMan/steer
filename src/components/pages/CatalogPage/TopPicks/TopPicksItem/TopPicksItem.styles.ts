@@ -16,6 +16,10 @@ import {
 
 const HEIGHT_BUTTON = 50;
 
+const BRAND_IMAGE_HEIGHT = 20;
+
+const BRAND_LABEL_FONT_SIZE = `${18 / 10}rem`;
+
 export const styles: StylesMap = {
   addVehicleContainer: {
     color: COLORS.GLOBAL.WHITE,
@@ -97,6 +101,20 @@ export const styles: StylesMap = {
   brand: {
     color: COLORS.GLOBAL.WHITE,
     display: 'block',
+  },
+  brandLabel: {
+    fontSize: BRAND_LABEL_FONT_SIZE,
+    fontWeight: 'bold',
+    lineHeight: `${BRAND_IMAGE_HEIGHT}px`,
+    [MQ.M]: {
+      fontSize: BRAND_LABEL_FONT_SIZE,
+    },
+    [MQ.L]: {
+      fontSize: BRAND_LABEL_FONT_SIZE,
+    },
+    [MQ.XL]: {
+      fontSize: `${22 / 10}rem`,
+    },
   },
   brandWithImage: {
     height: 20,

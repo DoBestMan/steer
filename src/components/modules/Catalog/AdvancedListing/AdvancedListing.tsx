@@ -93,7 +93,11 @@ function AdvancedListing({
         >
           <div>
             <div css={styles.brand}>
-              <BrandLogoOrLabel brand={brand} widths={[200, 400, 600]} />
+              <BrandLogoOrLabel
+                brand={brand}
+                customLabelStyles={styles.brandLabel}
+                widths={[200, 400, 600]}
+              />
             </div>
             <div css={styles.pricesContainer}>
               <Prices

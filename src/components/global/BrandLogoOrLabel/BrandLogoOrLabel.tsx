@@ -1,15 +1,17 @@
 import Image from '~/components/global/Image/Image';
 import { SiteCatalogBrand } from '~/data/models/SiteCatalogBrand';
 import { SiteImageExtended } from '~/data/models/SiteImageExtended';
+import { CSSStylesProp } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 // Provide extra props for <Image>
 interface Props extends SiteImageExtended {
   brand: SiteCatalogBrand;
+  customLabelStyles?: CSSStylesProp;
 }
 
 function BrandLogoOrLabel(props: Props) {
-  const { brand, widths, ...rest } = props;
+  const { brand, customLabelStyles, widths, ...rest } = props;
 
   return (
     <>
@@ -22,7 +24,9 @@ function BrandLogoOrLabel(props: Props) {
           {...rest}
         />
       ) : (
-        <span css={typography.secondaryHeadline}>{brand.label}</span>
+        <span css={[typography.secondaryHeadline, customLabelStyles]}>
+          {brand.label}
+        </span>
       )}
     </>
   );

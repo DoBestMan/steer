@@ -280,6 +280,7 @@ function TopPicksItem(props: TopPickItemsProps) {
                   brand={brand}
                   widths={BRAND_LOGO_SIZES}
                   customContainerStyles={{ width: '100%' }}
+                  customLabelStyles={styles.brandLabel}
                 />
               </span>
             )}

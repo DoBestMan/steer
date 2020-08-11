@@ -1,6 +1,11 @@
-import { CSSObject } from '@emotion/core';
-
-import { BORDERS, COLORS, MQ, RADIUS, SPACING } from '~/lib/constants';
+import {
+  BORDERS,
+  COLORS,
+  MQ,
+  RADIUS,
+  SPACING,
+  StylesMap,
+} from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 import { IMAGE_SIZES } from './AdvancedListing.constants';
@@ -11,7 +16,11 @@ const WRAPPER_HEIGHT = {
   XL: 260,
 };
 
-const styles: CSSObject = {
+const BRAND_IMAGE_HEIGHT = 20;
+
+const BRAND_LABEL_FONT_SIZE = `${18 / 10}rem`;
+
+const styles: StylesMap = {
   bottomSection: {
     alignItems: 'flex-end',
     display: 'flex',
@@ -22,7 +31,7 @@ const styles: CSSObject = {
     alignItems: 'flex-start',
   },
   brand: {
-    height: 20,
+    height: BRAND_IMAGE_HEIGHT,
     img: {
       height: '100%',
       width: 'auto',
@@ -35,8 +44,23 @@ const styles: CSSObject = {
     },
 
     [MQ.XL]: {
+      fontSize: `${10 / 10}rem`,
       marginBottom: SPACING.SIZE_20,
       maxWidth: 130,
+    },
+  },
+  brandLabel: {
+    fontSize: BRAND_LABEL_FONT_SIZE,
+    fontWeight: 'bold',
+    lineHeight: `${BRAND_IMAGE_HEIGHT}px`,
+    [MQ.M]: {
+      fontSize: BRAND_LABEL_FONT_SIZE,
+    },
+    [MQ.L]: {
+      fontSize: BRAND_LABEL_FONT_SIZE,
+    },
+    [MQ.XL]: {
+      fontSize: `${22 / 10}rem`,
     },
   },
   deliveryIcon: {
