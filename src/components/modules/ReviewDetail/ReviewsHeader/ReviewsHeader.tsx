@@ -4,6 +4,7 @@ import Breadcrumbs, {
 } from '~/components/global/Breadcrumbs/Breadcrumbs';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
+import { ICON_SIZES } from '~/components/global/Icon/Icon.constants';
 import BaseLink from '~/components/global/Link/BaseLink';
 import MomentList, {
   MomentListItem,
@@ -12,6 +13,7 @@ import { Props as RatingsListItem } from '~/components/global/RatingsList/Rating
 import RatingsList from '~/components/global/RatingsList/RatingsList';
 import StarsWithRating from '~/components/global/Stars/StarsWithRating';
 import { SiteCatalogBrand } from '~/data/models/SiteCatalogBrand';
+import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
@@ -36,6 +38,9 @@ function ReviewsHeader({
   stats,
   tire,
 }: ReviewsHeaderProps) {
+  const { isMobile } = useBreakpoints();
+  const starsWidth = ICON_SIZES.FIVE_STARS.w;
+
   return (
     <Grid as="section" css={styles.container}>
       <GridItem gridColumnL="3/13" gridColumnXL="4/12" css={styles.breadcrumbs}>
@@ -50,7 +55,10 @@ function ReviewsHeader({
           />
         </BaseLink>
         <p css={styles.title}>{ui('reviews.tireReviews', { tire })}</p>
-        <StarsWithRating number={ratingStars} />
+        <StarsWithRating
+          number={ratingStars}
+          width={isMobile ? starsWidth * 0.75 : starsWidth}
+        />
       </GridItem>
       <GridItem
         gridColumnL="3/13"

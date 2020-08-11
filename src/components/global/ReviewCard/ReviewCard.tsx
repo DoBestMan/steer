@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import Icon from '~/components/global/Icon/Icon';
-import { ICONS } from '~/components/global/Icon/Icon.constants';
+import { ICON_SIZES, ICONS } from '~/components/global/Icon/Icon.constants';
 import Link from '~/components/global/Link/Link';
 import Markdown from '~/components/global/Markdown/Markdown';
 import MomentList, {
@@ -9,7 +9,7 @@ import MomentList, {
 } from '~/components/global/MomentList/MomentList';
 import { Props as RatingsListItem } from '~/components/global/RatingsList/RatingsBar/RatingsBar';
 import RatingsList from '~/components/global/RatingsList/RatingsList';
-import Stars, { HALF_WIDTH_STARS } from '~/components/global/Stars/Stars';
+import Stars from '~/components/global/Stars/Stars';
 import { THEME } from '~/lib/constants';
 import { truncateText } from '~/lib/utils/string';
 import { ui } from '~/lib/utils/ui-dictionary';
@@ -65,7 +65,10 @@ function ReviewCard({
     <article css={[styles.container, themeStyles[theme].container]}>
       <div css={styles.ratingTopContainer}>
         <span css={[styles.title, themeStyles[theme].title]}>{title}</span>
-        <Stars number={ratingStars} width={HALF_WIDTH_STARS} />
+        <Stars
+          number={ratingStars}
+          width={ICON_SIZES.FIVE_STARS.w * (12 / 20)}
+        />
       </div>
 
       <div css={[layout.container, layout.centeredHorizontal]}>
