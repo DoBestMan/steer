@@ -37,7 +37,7 @@ export interface SiteCatalogProductItem {
   }>;
   priceList: Array<{
     label: string | null;
-    price: SitePrice;
+    price: SitePrice | null;
   }> | null;
   rating: {
     quantity: number;

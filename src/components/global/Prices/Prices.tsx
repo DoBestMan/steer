@@ -4,6 +4,7 @@ import { formatDollars } from '~/lib/utils/string';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
 
+import CallForPricing from './CallForPricing';
 import styles from './Prices.styles';
 
 interface Props {
@@ -14,7 +15,7 @@ interface Props {
   originalPrefix?: string;
   priceList?: Array<{
     label?: string | null;
-    price: SitePrice;
+    price: SitePrice | null;
   }> | null;
 }
 
@@ -30,6 +31,10 @@ function Prices({
     <>
       {priceList && priceList.length > 0 ? (
         priceList.map(({ label, price }) => {
+          if (!price) {
+            return <CallForPricing isLight={isLight} />;
+          }
+
           const isSalePrice =
             parseInt(price.salePriceInCents, 10) <
             parseInt(price.estimatedRetailPriceInCents, 10);
@@ -71,15 +76,7 @@ function Prices({
           );
         })
       ) : (
-        <span
-          css={[
-            typography.tertiaryHeadline,
-            styles.noPrice,
-            isLight && { color: COLORS.GLOBAL.WHITE },
-          ]}
-        >
-          {ui('catalog.topPicks.noPrice')}
-        </span>
+        <CallForPricing isLight={isLight} />
       )}
     </>
   );

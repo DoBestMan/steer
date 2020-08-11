@@ -35,7 +35,7 @@ export interface TopPickItemsProps {
   openSearch?: () => void;
   priceList?: Array<{
     label: string | null;
-    price: SitePrice;
+    price: SitePrice | null;
   }> | null;
   productFeature?: string | null;
   productName?: string | null;
