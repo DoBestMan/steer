@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic';
 import { CSSProperties, ReactNode, useEffect, useRef, useState } from 'react';
 
 import FocusTrap from '~/components/global/FocusTrap/FocusTrap';
@@ -6,9 +7,11 @@ import { useWindowSize } from '~/hooks/useWindowSize';
 import { KEYCODES } from '~/lib/constants';
 
 import BottomCardModal from '../Modal/BottomCardModal';
-import ActionBar, { ActionBarProps } from './ActionBar';
+import { ActionBarProps } from './ActionBar';
 import styles from './Dropdown.styles';
 import { getMinWidth, getPosition } from './Dropdown.utils';
+
+const DynamicActionBar = dynamic(() => import('./ActionBar'));
 
 interface Props {
   actionBar?: ActionBarProps | null;
@@ -116,7 +119,7 @@ export default function Dropdown({
           {/* focus trap and dropdown wrapper need to be in dom to update positioning
           and focus but wait to render children until it's open */}
           {isOpen && children}
-          {!!actionBar && <ActionBar {...actionBar} />}
+          {!!actionBar && <DynamicActionBar {...actionBar} />}
         </div>
       </FocusTrap>
     );
@@ -129,7 +132,7 @@ export default function Dropdown({
       onClose={onClose}
     >
       <div css={actionBar && styles.actionBarModal}>{children}</div>
-      {!!actionBar && <ActionBar {...actionBar} />}
+      {!!actionBar && <DynamicActionBar {...actionBar} />}
     </BottomCardModal>
   );
 }

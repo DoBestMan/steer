@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import preloadAll from 'jest-next-dynamic';
 import ReactModal from 'react-modal';
 
 import { emptyCatalogProducts } from '~/components/pages/CatalogPage/CatalogPage.mocks';
@@ -58,6 +59,10 @@ const tree = (
 );
 
 describe('FilterPopup', () => {
+  beforeAll(async () => {
+    await preloadAll();
+  });
+
   afterEach(() => {
     jest.clearAllMocks();
   });

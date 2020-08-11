@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic';
 import { ReactNode } from 'react';
 import { Transition } from 'react-transition-group';
 import { ENTERED, TransitionStatus } from 'react-transition-group/Transition';
@@ -11,10 +12,11 @@ import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import AnchorButton from './AnchorButton';
-import FitButton from './FitButton';
 import styles from './Insights.styles';
 import { SIZE_CHECK_STATES } from './Insights.types';
 import InsightsItem from './InsightsItem';
+
+const DynamicFitButton = dynamic(() => import('./FitButton'));
 
 export interface InsightsProps {
   delivery?: string | null;
@@ -89,7 +91,7 @@ function Insights({
             )}
             {showFitBar && (
               <RenderItem>
-                <FitButton
+                <DynamicFitButton
                   make={make}
                   vehicle={vehicle}
                   sizeCheckState={sizeCheckState}

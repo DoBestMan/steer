@@ -1,3 +1,5 @@
+import dynamic from 'next/dynamic';
+
 import { ContentModalProps } from '~/components/global/Modal/Modal.types';
 import { PromoTagProps } from '~/components/global/PromoTag/PromoTag';
 import PromoTagCarousel from '~/components/global/PromoTag/PromoTagCarousel';
@@ -6,15 +8,16 @@ import { SiteCatalogBrand } from '~/data/models/SiteCatalogBrand';
 import { SitePrice } from '~/data/models/SitePrice';
 import { THEME } from '~/lib/constants';
 
-import PDPActionBar from '../ActionBar/ActionBar';
 import { SizeFinderProps } from '../SizeFinder/SizeFinder';
-import MultiSizeButton from './MultiSizeButton';
 import OutOfStock from './OutOfStock';
 import Price from './Price';
 import styles from './ProductInfo.styles';
 import ProductLine from './ProductLine';
 import Rating from './Rating';
-import SizeButton from './SizeButton';
+
+const DynamicPDPActionBar = dynamic(() => import('../ActionBar/ActionBar'));
+const DynamicSizeButton = dynamic(() => import('./SizeButton'));
+const DynamicMultiSizeButton = dynamic(() => import('./MultiSizeButton'));
 
 export interface ProductInfoProps {
   availableSizes?: number;
@@ -85,7 +88,7 @@ function ProductInfo({
           brandURL={brandURL}
         />
         <Rating rating={rating} />
-        <MultiSizeButton
+        <DynamicMultiSizeButton
           size={size}
           loadSpeedRating={loadSpeedRating}
           price={price}
@@ -94,7 +97,7 @@ function ProductInfo({
           rearPrice={rearPrice}
         />
         <div css={[styles.actionBar, styles.actionBarMultiple]}>
-          <PDPActionBar
+          <DynamicPDPActionBar
             roadHazard={roadHazard}
             theme={THEME.LIGHT}
             tirePrice={price?.salePriceInCents}
@@ -117,7 +120,7 @@ function ProductInfo({
             brandURL={brandURL}
           />
           <div css={!rating && styles.sizeNoRating}>
-            <SizeButton
+            <DynamicSizeButton
               availableSizes={availableSizes}
               size={size}
               loadSpeedRating={loadSpeedRating}
@@ -141,7 +144,7 @@ function ProductInfo({
               </div>
             )}
             <div css={styles.actionBar}>
-              <PDPActionBar
+              <DynamicPDPActionBar
                 roadHazard={roadHazard}
                 theme={THEME.LIGHT}
                 tirePrice={price?.salePriceInCents}

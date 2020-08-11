@@ -1,15 +1,18 @@
+import dynamic from 'next/dynamic';
 import { useState } from 'react';
 
 import Dropdown from '~/components/global/Dropdown/Dropdown';
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
-import SizeFinder from '~/components/modules/PDP/SizeFinder/SizeFinder';
 import { useProductDetailContext } from '~/components/pages/ProductDetail/ProductDetail.context';
-import { useModalContext } from '~/context/Modal.context';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import { ProductInfoProps } from './ProductInfo';
 import styles from './SizeButton.styles';
+
+const DynamicSizeFinder = dynamic(() =>
+  import('~/components/modules/PDP/SizeFinder/SizeFinder'),
+);
 
 type Props = Pick<
   ProductInfoProps,
@@ -26,8 +29,6 @@ function RenderSizeFinder({
   isOpen,
   onClose,
 }: RenderSizeFinderProps) {
-  const { isModalOpen } = useModalContext();
-
   const { changeSize } = useProductDetailContext();
 
   function handleChangeSize(value: string) {
@@ -41,12 +42,12 @@ function RenderSizeFinder({
 
   return (
     <Dropdown
-      shouldActivateListeners={!isModalOpen}
+      shouldActivateListeners={false}
       contentLabel={ui('pdp.productInfo.selectSizeLabel')}
       isOpen={!!isOpen}
       onClose={onClose}
     >
-      <SizeFinder onChange={handleChangeSize} {...sizeFinder} />
+      <DynamicSizeFinder onChange={handleChangeSize} {...sizeFinder} />
     </Dropdown>
   );
 }

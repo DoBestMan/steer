@@ -2,12 +2,17 @@
 // the react-markdown plugin
 
 import { fireEvent, render, screen } from '@testing-library/react';
+import preloadAll from 'jest-next-dynamic';
 
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import Feedback from './Feedback';
 
 describe('Feedback', () => {
+  beforeAll(async () => {
+    await preloadAll();
+  });
+
   it('expected initial render', () => {
     render(<Feedback />);
 

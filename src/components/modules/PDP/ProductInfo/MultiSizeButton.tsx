@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic';
 import { useState } from 'react';
 
 import Icon from '~/components/global/Icon/Icon';
@@ -8,9 +9,12 @@ import { SitePrice } from '~/data/models/SitePrice';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
 
-import QuantitySelectorContainer from '../QuantitySelector/QuantitySelector.container';
 import styles from './MultiSizeButton.styles';
 import { ProductInfoProps } from './ProductInfo';
+
+const DynamicQuantitySelector = dynamic(() =>
+  import('../QuantitySelector/QuantitySelector.container'),
+);
 
 type Props = Pick<
   ProductInfoProps,
@@ -127,7 +131,7 @@ function MultiSizeButton({
         </li>
       </ul>
       {price && (
-        <QuantitySelectorContainer
+        <DynamicQuantitySelector
           isOpen={isOpen}
           isFrontAndRear
           onChangeQuantity={handleChangeQuantity}

@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { fireEvent, render, screen } from '@testing-library/react';
+import preloadAll from 'jest-next-dynamic';
 import * as NextRouter from 'next/router';
 import ReactModal from 'react-modal';
 
@@ -35,7 +36,8 @@ const changeSize = jest.fn();
 const openStaticModal = jest.fn();
 
 describe('modules/PDP/SizeButton', () => {
-  beforeAll(() => {
+  beforeAll(async () => {
+    await preloadAll();
     (SiteGlobalsContext as any).useSiteGlobalsContext = jest.fn(() => ({}));
     (UserPersonalizationContext as any).useUserPersonalizationContext = jest.fn(
       () => ({}),

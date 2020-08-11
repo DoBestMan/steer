@@ -1,5 +1,6 @@
 declare module '*.svg';
 declare module 'focus-trap';
+declare module 'jest-next-dynamic';
 
 interface FocusTrapInstance {
   activate: function;

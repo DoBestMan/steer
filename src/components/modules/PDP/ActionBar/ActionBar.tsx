@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
 
 import Button from '~/components/global/Button/Button';
@@ -9,9 +10,14 @@ import { THEME } from '~/lib/constants';
 import { formatDollars } from '~/lib/utils/string';
 import { ui } from '~/lib/utils/ui-dictionary';
 
-import QuantitySelectorContainer from '../QuantitySelector/QuantitySelector.container';
-import RoadHazardModalContainer from '../RoadHazardModal/RoadHazardModal.container';
 import styles from './ActionBar.styles';
+
+const DynamicQuantitySelector = dynamic(() =>
+  import('../QuantitySelector/QuantitySelector.container'),
+);
+const DynamicRoadHazardModal = dynamic(() =>
+  import('../RoadHazardModal/RoadHazardModal.container'),
+);
 
 interface PDPActionBarProps {
   rearPrice?: string | null;
@@ -126,7 +132,7 @@ function PDPActionBar({
           </Button>
         </div>
 
-        <QuantitySelectorContainer
+        <DynamicQuantitySelector
           isOpen={isQuantitySelectorOpen}
           onChangeQuantity={handleChangeQuantity}
           toggleModal={toggleQuantitySelector}
@@ -134,7 +140,7 @@ function PDPActionBar({
         />
 
         {!!roadHazard && (
-          <RoadHazardModalContainer
+          <DynamicRoadHazardModal
             isOpen={isRoadHazardOpen}
             onClose={toggleRoadHazard}
             durationLabel={roadHazard?.durationLabel}
@@ -158,7 +164,7 @@ function PDPActionBar({
       )}
 
       {!!roadHazard && (
-        <RoadHazardModalContainer
+        <DynamicRoadHazardModal
           isOpen={isRoadHazardOpen}
           onClose={toggleRoadHazard}
           durationLabel={roadHazard?.durationLabel}

@@ -1,4 +1,5 @@
 import { renderHook } from '@testing-library/react-hooks';
+import preloadAll from 'jest-next-dynamic';
 import { act } from 'react-test-renderer';
 
 import { SiteImageNullableTypeEnum } from '~/data/models/SiteImageNullable';
@@ -8,6 +9,10 @@ import STATIC_MODALS, { STATIC_MODAL_IDS } from '~/lib/constants/staticModals';
 import { useModalContextSetup } from './Modal.context';
 
 describe('useModalContextSetup', () => {
+  beforeAll(async () => {
+    await preloadAll();
+  });
+
   test('initial state', () => {
     const { result } = renderHook(() => useModalContextSetup());
 

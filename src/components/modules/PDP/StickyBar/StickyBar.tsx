@@ -1,6 +1,6 @@
+import dynamic from 'next/dynamic';
 import { RefObject, useEffect, useState } from 'react';
 
-import ActionBar from '~/components/modules/PDP/ActionBar/ActionBar';
 import StickyBar from '~/components/modules/StickyBar/StickyBar';
 import { SiteImage } from '~/data/models/SiteImage';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
@@ -9,6 +9,10 @@ import { ui } from '~/lib/utils/ui-dictionary';
 
 import { STICKY_BAR_HEIGHT } from '../../StickyBar/StickyBar.styles';
 import styles from './StickyBar.styles';
+
+const DynamicActionBar = dynamic(() =>
+  import('~/components/modules/PDP/ActionBar/ActionBar'),
+);
 
 export interface PDPStickyBarProps {
   avoidSection?: RefObject<HTMLDivElement>;
@@ -123,7 +127,7 @@ function PDPStickyBar({
   return (
     <div aria-hidden={!isActive && !lessThan.L} css={styles.root}>
       <StickyBar theme={theme} logo={brandLogo} secondaryLabel={secondaryLabel}>
-        <ActionBar
+        <DynamicActionBar
           rearPrice={rearPrice}
           rearSize={rearSize}
           roadHazard={roadHazard}

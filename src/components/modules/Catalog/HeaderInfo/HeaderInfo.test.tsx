@@ -1,4 +1,5 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import preloadAll from 'jest-next-dynamic';
 
 import { CatalogPageContextProvider } from '~/context/CatalogPage.context';
 import { UserPersonalizationContextProvider } from '~/context/UserPersonalization.context';
@@ -39,6 +40,10 @@ const tree = (
 );
 
 describe('HeaderInfo', () => {
+  beforeAll(async () => {
+    await preloadAll();
+  });
+
   beforeEach(() => {
     jest.spyOn(bootstrap, 'apiBootstrap').mockResolvedValue();
     jest.spyOn(fetch, 'fetchGetUserPersonalization');

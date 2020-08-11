@@ -2,6 +2,9 @@
   "presets": [["next/babel"], "@emotion/babel-preset-css-prop"],
   "plugins": ["emotion"],
   "env": {
+    "test": {
+      "plugins": ["dynamic-import-node"]
+    },
     "production": {
       "plugins": ["@fullstory/babel-plugin-annotate-react"]
     }

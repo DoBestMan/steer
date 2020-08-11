@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic';
 import { useRef, useState } from 'react';
 
 import Breadcrumbs from '~/components/global/Breadcrumbs/Breadcrumbs';
@@ -7,18 +8,13 @@ import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import Link from '~/components/global/Link/Link';
 import Meta from '~/components/global/Meta/Meta';
-import ProductGroupList from '~/components/global/ProductGroupList/ProductGroupList';
 import LocationModal from '~/components/modules/Location/LocationModal/LocationModal';
 import { navigationBreadcrumbPaddingTop } from '~/components/modules/Nav/Nav.styles';
 import FAQ from '~/components/modules/PDP/FAQ/FAQ';
 import Insights from '~/components/modules/PDP/Insights/Insights';
-import Installation from '~/components/modules/PDP/Installation/Installation';
 import ProductInfo from '~/components/modules/PDP/ProductInfo/ProductInfo';
 import PurchaseIncludes from '~/components/modules/PDP/PurchaseIncludes/PurchaseIncludes';
-import Reviews from '~/components/modules/PDP/Reviews/Reviews';
 import ShopWithConfidence from '~/components/modules/PDP/ShopWithConfidence/ShopWithConfidence';
-import PDPStickyBar from '~/components/modules/PDP/StickyBar/StickyBar';
-import TechnicalSpecs from '~/components/modules/PDP/TechnicalSpecs/TechnicalSpecs';
 import TireImage from '~/components/modules/PDP/TireImage/TireImage';
 import { useModalContext } from '~/context/Modal.context';
 import { THEME } from '~/lib/constants';
@@ -27,6 +23,22 @@ import useExperimentPLA from './experiments/useExperimentPLA';
 import { ProductDetailResponse } from './ProductDetail.container';
 import useProductDetail from './ProductDetail.hooks';
 import styles from './ProductDetail.styles';
+
+const DynamicProductGroupList = dynamic(() =>
+  import('~/components/global/ProductGroupList/ProductGroupList'),
+);
+const DynamicInstallation = dynamic(() =>
+  import('~/components/modules/PDP/Installation/Installation'),
+);
+const DynamicReviews = dynamic(() =>
+  import('~/components/modules/PDP/Reviews/Reviews'),
+);
+const DynamicTechnicalSpecs = dynamic(() =>
+  import('~/components/modules/PDP/TechnicalSpecs/TechnicalSpecs'),
+);
+const DynamicPDPStickyBar = dynamic(() =>
+  import('~/components/modules/PDP/StickyBar/StickyBar'),
+);
 
 export interface ProductDetailData {
   serverData: ProductDetailResponse;
@@ -115,7 +127,7 @@ function ProductDetail({ serverData }: ProductDetailData) {
         {positionCuration1 && recirculation && (
           <>
             <GridItem fullbleed css={styles.featuredRecirculation}>
-              <ProductGroupList
+              <DynamicProductGroupList
                 customHeaderStyles={styles.recirculationHeader}
                 customItemStyles={styles.recirculationItem}
                 {...recirculation[0]}
@@ -125,13 +137,13 @@ function ProductDetail({ serverData }: ProductDetailData) {
         )}
         {installation && (
           <GridItem fullbleed css={styles.installation}>
-            <Installation {...installation} />
+            <DynamicInstallation {...installation} />
           </GridItem>
         )}
         {positionCuration2 && recirculation && (
           <>
             <GridItem fullbleed css={styles.featuredRecirculation}>
-              <ProductGroupList
+              <DynamicProductGroupList
                 customHeaderStyles={styles.recirculationHeader}
                 customItemStyles={styles.recirculationItem}
                 {...recirculation[0]}
@@ -148,7 +160,7 @@ function ProductDetail({ serverData }: ProductDetailData) {
         {positionCuration0 && recirculation && (
           <>
             <GridItem fullbleed css={styles.featuredRecirculation}>
-              <ProductGroupList
+              <DynamicProductGroupList
                 customHeaderStyles={styles.recirculationHeader}
                 customItemStyles={styles.recirculationItem}
                 {...recirculation[0]}
@@ -160,12 +172,12 @@ function ProductDetail({ serverData }: ProductDetailData) {
           <div ref={stickyBarDarkSection} css={styles.detailsSection}>
             {reviews && (
               <div id={reviewsAnchor}>
-                <Reviews {...reviews} />
+                <DynamicReviews {...reviews} />
               </div>
             )}
             {technicalSpecs && (
               <div id={technicalSpecsAnchor}>
-                <TechnicalSpecs
+                <DynamicTechnicalSpecs
                   openStaticModal={openStaticModal}
                   {...technicalSpecs}
                 />
@@ -177,7 +189,7 @@ function ProductDetail({ serverData }: ProductDetailData) {
         {recirculation?.length &&
           recirculation.slice(isPLA ? 1 : 0).map((item) => (
             <GridItem fullbleed css={styles.recirculation} key={item.id}>
-              <ProductGroupList {...item} />
+              <DynamicProductGroupList {...item} />
             </GridItem>
           ))}
         <GridItem css={styles.recirculationSize}>
@@ -189,7 +201,7 @@ function ProductDetail({ serverData }: ProductDetailData) {
         </GridItem>
         {stickyBar && (
           <GridItem fullbleed css={styles.stickyBar}>
-            <PDPStickyBar
+            <DynamicPDPStickyBar
               avoidSection={stickyBarAvoidSection}
               darkSection={stickyBarDarkSection}
               {...stickyBar}
