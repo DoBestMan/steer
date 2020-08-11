@@ -8,7 +8,7 @@ import { ui } from '~/lib/utils/ui-dictionary';
 
 import Feedback from './Feedback';
 
-describe('Feedback', () => {
+describe.skip('Feedback', () => {
   beforeAll(async () => {
     await preloadAll();
   });
