@@ -22,11 +22,16 @@ export default async (
     }
   });
 
-  const siteProduct = await backendGetProductDetail({
+  const siteProductResponse = await backendGetProductDetail({
     brand: brandName,
     productLine,
     query: rest,
   });
 
-  response.json(siteProduct);
+  if (siteProductResponse.isSuccess) {
+    response.json(siteProductResponse.data);
+    return;
+  }
+
+  response.status(siteProductResponse.error.statusCode).end();
 };

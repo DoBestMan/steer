@@ -17,7 +17,7 @@ import {
 } from '~/lib/utils/routes';
 import { appendTiresToString } from '~/lib/utils/string';
 
-import { ProductDetailResponse } from './ProductDetail.container';
+import { ProductDetailResponse } from './ProductDetail.types';
 
 const CONSTANTS = {
   PRODUCT_DETAIL_ROUTE: ROUTE_MAP[ROUTES.PRODUCT_DETAIL],

@@ -15,11 +15,16 @@ export default async (
   const { brand, productLine, ...rest } = getStringifiedParams(request.query);
   const brandName = removeTireFromQueryParam(brand);
 
-  const siteProductReviews = await backendGetProductReviews({
+  const siteProductReviewsResponse = await backendGetProductReviews({
     brand: brandName,
     query: rest,
     productLine,
   });
 
-  response.json(siteProductReviews);
+  if (siteProductReviewsResponse.isSuccess) {
+    response.json(siteProductReviewsResponse.data);
+    return;
+  }
+
+  response.status(siteProductReviewsResponse.error.statusCode).end();
 };

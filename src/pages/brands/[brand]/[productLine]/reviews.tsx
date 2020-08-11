@@ -1,8 +1,10 @@
 import { GetServerSideProps } from 'next';
 
-import ReviewDetailPage, {
-  ProductDetailReviewsData,
-} from '~/components/pages/ReviewDetailPage/ReviewDetailPage.container';
+import { ProductDetailData } from '~/components/pages/ProductDetail/ProductDetail.types';
+import ReviewDetailPage from '~/components/pages/ReviewDetailPage/ReviewDetailPage.container';
+import WithErrorPageHandling, {
+  PageResponse,
+} from '~/hocs/WithPageErrorHandling';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
 import {
   backendGetProductDetail,
@@ -11,18 +13,15 @@ import {
 import { validBrandQuery } from '~/lib/utils/regex';
 import {
   getStringifiedParams,
-  redirectToNotFound,
   validateOrRedirectToNotFound,
 } from '~/lib/utils/routes';
 import { removeTireFromQueryParam } from '~/lib/utils/string';
 
-function Reviews(props: ProductDetailReviewsData) {
-  return <ReviewDetailPage {...props} />;
-}
+const Reviews = WithErrorPageHandling(ReviewDetailPage);
 
-export const getServerSideProps: GetServerSideProps<ProductDetailReviewsData> = async (
-  context,
-) => {
+export const getServerSideProps: GetServerSideProps<PageResponse<
+  ProductDetailData
+>> = async (context) => {
   backendBootstrap({ request: context.req });
   const { brand, productLine } = getStringifiedParams(context.query);
 
@@ -45,15 +44,32 @@ export const getServerSideProps: GetServerSideProps<ProductDetailReviewsData> = 
     }),
   ]);
 
-  if (!siteProductReviews.reviewsList.length) {
-    redirectToNotFound(context.res);
+  if (
+    siteProductReviews.isSuccess &&
+    !siteProductReviews.data.reviewsList.length
+  ) {
+    return { props: { errorStatusCode: 404 } };
   }
-  const props: ProductDetailReviewsData = {
-    serverData: { siteProduct, siteProductReviews },
-  };
+
+  if (!siteProduct.isSuccess) {
+    const errorStatusCode = siteProduct.error.statusCode;
+    context.res.statusCode = errorStatusCode;
+    return { props: { errorStatusCode } };
+  }
+
+  if (!siteProductReviews.isSuccess) {
+    const errorStatusCode = siteProductReviews.error.statusCode;
+    context.res.statusCode = errorStatusCode;
+    return { props: { errorStatusCode } };
+  }
 
   return {
-    props,
+    props: {
+      serverData: {
+        siteProduct: siteProduct.data,
+        siteProductReviews: siteProductReviews.data,
+      },
+    },
   };
 };
 

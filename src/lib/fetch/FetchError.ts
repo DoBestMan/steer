@@ -16,4 +16,6 @@ export class FetchError extends Error {
   }
 
   data: unknown;
+
+  statusCode?: number;
 }

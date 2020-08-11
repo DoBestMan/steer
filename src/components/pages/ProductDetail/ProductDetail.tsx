@@ -20,9 +20,9 @@ import { useModalContext } from '~/context/Modal.context';
 import { THEME } from '~/lib/constants';
 
 import useExperimentPLA from './experiments/useExperimentPLA';
-import { ProductDetailResponse } from './ProductDetail.container';
 import useProductDetail from './ProductDetail.hooks';
 import styles from './ProductDetail.styles';
+import { ProductDetailData } from './ProductDetail.types';
 
 const DynamicProductGroupList = dynamic(() =>
   import('~/components/global/ProductGroupList/ProductGroupList'),
@@ -39,10 +39,6 @@ const DynamicTechnicalSpecs = dynamic(() =>
 const DynamicPDPStickyBar = dynamic(() =>
   import('~/components/modules/PDP/StickyBar/StickyBar'),
 );
-
-export interface ProductDetailData {
-  serverData: ProductDetailResponse;
-}
 
 function ProductDetail({ serverData }: ProductDetailData) {
   const {

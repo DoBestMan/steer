@@ -14,7 +14,7 @@ import { mapPathnameToBreadcrumbs } from '~/lib/utils/breadcrumbs';
 import { mapDataToMeta } from './mappers/meta';
 import styles from './WriteAReviewPage.styles';
 
-export interface WriteAReviewServerData {
+export interface WriteAReviewPageProps {
   serverData: {
     brand: string;
     tire: string;
@@ -23,7 +23,7 @@ export interface WriteAReviewServerData {
 
 function WriteAReviewPage({
   serverData: { tire, brand },
-}: WriteAReviewServerData) {
+}: WriteAReviewPageProps) {
   const router = useRouter();
   const { query, asPath, pathname } = router;
   const { vehicle } = useUserPersonalizationContext();

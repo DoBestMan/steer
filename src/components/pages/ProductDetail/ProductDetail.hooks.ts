@@ -40,8 +40,8 @@ import { mapDataToReviews } from './mappers/reviews';
 import { mapDataToSizeFinder } from './mappers/sizeFinder';
 import { mapDataToStickyBar } from './mappers/stickyBar';
 import { mapDataToTechnicalSpecs } from './mappers/technicalSpecs';
-import { ProductDetailData } from './ProductDetail.container';
 import { useProductDetailContext } from './ProductDetail.context';
+import { ProductDetailData } from './ProductDetail.types';
 
 export type QueryParams = Record<string, string>;
 

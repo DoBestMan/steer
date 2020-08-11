@@ -1,6 +1,7 @@
 import { UserPersonalization } from '~/data/models/UserPersonalization';
 
 import { FetchError, FetchErrorCodes } from './FetchError';
+import { AsyncResponse } from './index.types';
 
 let authorizationExpiration: Date | null = null;
 let authorizationHeader: string | null = null;
@@ -32,6 +33,20 @@ function buildUrl(
   return pathWithParams + (searchParams ? `?${searchParams}` : '');
 }
 
+interface FetchProps<U> {
+  authorizationFunctionRetriesLeft?: number;
+  endpoint: string;
+  formBody?: Record<string, string>;
+  includeAuthorization?: boolean;
+  includeUserRegion?: boolean;
+  includeUserZip?: boolean;
+  jsonBody?: U;
+  method: RequestInit['method'];
+  params?: Record<string, string | string[]>;
+  query?: Record<string, string>;
+  signal?: AbortSignal;
+}
+
 export async function fetch<T, U = never>({
   authorizationFunctionRetriesLeft = 1,
   jsonBody,
@@ -44,19 +59,7 @@ export async function fetch<T, U = never>({
   params = {},
   query = {},
   signal,
-}: {
-  authorizationFunctionRetriesLeft?: number;
-  endpoint: string;
-  formBody?: Record<string, string>;
-  includeAuthorization?: boolean;
-  includeUserRegion?: boolean;
-  includeUserZip?: boolean;
-  jsonBody?: U;
-  method: RequestInit['method'];
-  params?: Record<string, string | string[]>;
-  query?: Record<string, string>;
-  signal?: AbortSignal;
-}): Promise<T> {
+}: FetchProps<U>): Promise<T> {
   const global = typeof globalThis !== undefined ? globalThis : window;
   if (urlBase === '') {
     throw new FetchError(
@@ -119,10 +122,10 @@ export async function fetch<T, U = never>({
   }
 
   let data: T | null = null;
-  if (response.status !== 204) {
-    try {
-      data = (await response.json()) as T;
-    } catch (error) {
+  try {
+    data = (await response.json()) as T;
+  } catch (error) {
+    if (response.status !== 204 && response.status !== 404) {
       console.error(error);
       throw new FetchError(FetchErrorCodes.InvalidJson, error);
     }
@@ -157,11 +160,33 @@ export async function fetch<T, U = never>({
       `Invalid response status ${response.status}`,
     );
     error.data = data;
+    error.statusCode = response.status;
     console.error(error);
     throw error;
   }
 
   return data as T;
+}
+
+export async function fetchWithErrorHandling<T, U = never>(
+  props: FetchProps<U>,
+): Promise<AsyncResponse<T>> {
+  try {
+    const data = await fetch<T, U>(props);
+    return {
+      data,
+      isSuccess: true,
+    };
+  } catch (e) {
+    return {
+      error: {
+        code: e.code,
+        message: e.message,
+        statusCode: e.statusCode || 500,
+      },
+      isSuccess: false,
+    };
+  }
 }
 
 export function fetchGetUserPersonalization() {

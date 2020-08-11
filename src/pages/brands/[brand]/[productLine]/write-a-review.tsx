@@ -1,8 +1,11 @@
 import { GetServerSideProps } from 'next';
 
 import WriteAReviewPage, {
-  WriteAReviewServerData,
+  WriteAReviewPageProps,
 } from '~/components/pages/WriteAReviewPage/WriteAReviewPage.container';
+import WithErrorPageHandling, {
+  PageResponse,
+} from '~/hocs/WithPageErrorHandling';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
 import { backendGetProductDetail } from '~/lib/backend/product-detail';
 import { validBrandQuery } from '~/lib/utils/regex';
@@ -12,13 +15,11 @@ import {
 } from '~/lib/utils/routes';
 import { removeTireFromQueryParam } from '~/lib/utils/string';
 
-function WriteAReview(props: WriteAReviewServerData) {
-  return <WriteAReviewPage {...props} />;
-}
+const WriteAReview = WithErrorPageHandling(WriteAReviewPage);
 
-export const getServerSideProps: GetServerSideProps<WriteAReviewServerData> = async (
-  context,
-) => {
+export const getServerSideProps: GetServerSideProps<PageResponse<
+  WriteAReviewPageProps
+>> = async (context) => {
   backendBootstrap({ request: context.req });
   const { brand, productLine } = getStringifiedParams(context.query);
 
@@ -35,15 +36,23 @@ export const getServerSideProps: GetServerSideProps<WriteAReviewServerData> = as
     productLine,
   });
 
-  const props: WriteAReviewServerData = {
-    serverData: {
-      tire: siteProduct.siteProductLine.name,
-      brand: siteProduct.siteProductLine.brand.label,
-    },
-  };
+  if (!siteProduct.isSuccess) {
+    const errorStatusCode = siteProduct.error.statusCode;
+    context.res.statusCode = errorStatusCode;
+    return { props: { errorStatusCode } };
+  }
+
+  const {
+    data: { siteProductLine },
+  } = siteProduct;
 
   return {
-    props,
+    props: {
+      serverData: {
+        tire: siteProductLine.name,
+        brand: siteProductLine.brand.label,
+      },
+    },
   };
 };
 

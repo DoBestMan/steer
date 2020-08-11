@@ -1,7 +1,7 @@
 import { SiteProduct } from '~/data/models/SiteProduct';
 import { SiteProductReviews } from '~/data/models/SiteProductReviews';
 
-import { fetch } from '../fetch';
+import { fetchWithErrorHandling } from '../fetch';
 
 export async function backendGetProductDetail({
   brand,
@@ -12,7 +12,7 @@ export async function backendGetProductDetail({
   productLine: string;
   query?: Record<string, string>;
 }) {
-  const response = await fetch<SiteProduct>({
+  const response = await fetchWithErrorHandling<SiteProduct>({
     endpoint: '/v1/site/products/{brand}/{productLine}',
     includeAuthorization: true,
     method: 'get',
@@ -35,7 +35,7 @@ export async function backendGetProductReviews({
   productLine: string;
   query?: Record<string, string>;
 }) {
-  const response = await fetch<SiteProductReviews>({
+  const response = await fetchWithErrorHandling<SiteProductReviews>({
     endpoint: '/v1/site/products/{brand}/{productLine}/reviews',
     includeAuthorization: true,
     method: 'get',

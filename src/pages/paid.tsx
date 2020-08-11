@@ -1,8 +1,10 @@
 import { GetServerSideProps } from 'next';
 
-import ProductDetailContainer, {
-  ProductDetailData,
-} from '~/components/pages/ProductDetail/ProductDetail.container';
+import ProductDetailContainer from '~/components/pages/ProductDetail/ProductDetail.container';
+import { ProductDetailData } from '~/components/pages/ProductDetail/ProductDetail.types';
+import WithErrorPageHandling, {
+  PageResponse,
+} from '~/hocs/WithPageErrorHandling';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
 import {
   backendGetProductDetail,
@@ -11,13 +13,11 @@ import {
 import { RESULTS_PER_PAGE_PDP } from '~/lib/constants';
 import { getStringifiedParams, redirectToNotFound } from '~/lib/utils/routes';
 
-function ProductLine(props: ProductDetailData) {
-  return <ProductDetailContainer {...props} />;
-}
+const ProductLine = WithErrorPageHandling(ProductDetailContainer);
 
-export const getServerSideProps: GetServerSideProps<ProductDetailData> = async (
-  context,
-) => {
+export const getServerSideProps: GetServerSideProps<PageResponse<
+  ProductDetailData
+>> = async (context) => {
   backendBootstrap({ request: context.req });
   const { brand, productLine, tireSize } = getStringifiedParams(context.query);
 
@@ -39,12 +39,25 @@ export const getServerSideProps: GetServerSideProps<ProductDetailData> = async (
     }),
   ]);
 
-  const props: ProductDetailData = {
-    serverData: { siteProduct, siteProductReviews },
-  };
+  if (!siteProduct.isSuccess) {
+    const errorStatusCode = siteProduct.error.statusCode;
+    context.res.statusCode = errorStatusCode;
+    return { props: { errorStatusCode } };
+  }
+
+  if (!siteProductReviews.isSuccess) {
+    const errorStatusCode = siteProductReviews.error.statusCode;
+    context.res.statusCode = errorStatusCode;
+    return { props: { errorStatusCode } };
+  }
 
   return {
-    props,
+    props: {
+      serverData: {
+        siteProduct: siteProduct.data,
+        siteProductReviews: siteProductReviews.data,
+      },
+    },
   };
 };
 
