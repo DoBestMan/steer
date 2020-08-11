@@ -2,6 +2,7 @@ import { IncomingMessage } from 'http';
 
 import { UserPersonalization } from '~/data/models/UserPersonalization';
 import { URLS } from '~/lib/constants/urls';
+import { isIntegrationDeploy, isProductionDeploy } from '~/lib/utils/deploy';
 
 import {
   fetchSetAuthorizationFunction,
@@ -16,10 +17,7 @@ export function getBackendEnvVariables(): {
   clientId?: string;
   clientSecret?: string;
 } {
-  const deployRef = process.env.NOW_GITHUB_COMMIT_REF;
-  const isProductionDeploy = deployRef === 'master';
-
-  if (isProductionDeploy) {
+  if (isProductionDeploy()) {
     return {
       backendEndpoint: URLS.MAIN_API_PRODUCTION,
       clientId: process.env.STEER_CLIENT_ID,
@@ -29,9 +27,7 @@ export function getBackendEnvVariables(): {
 
   let backend = process.env.STEER_BACKEND;
   if (!backend) {
-    const isIntegrationDeploy =
-      deployRef && /^dev$|^qa$|^uat$|^dev-st$|^int-/.test(deployRef);
-    backend = isIntegrationDeploy ? 'integration' : 'mock';
+    backend = isIntegrationDeploy() ? 'integration' : 'mock';
   }
 
   if (backend === 'local') {

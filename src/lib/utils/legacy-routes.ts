@@ -2,6 +2,7 @@ import queryString from 'query-string';
 
 import { LEGACY_ROUTE_MAP, LEGACY_ROUTES } from '../constants/legacy-routes';
 import { URLS } from '../constants/urls';
+import { isProductionDeploy } from './deploy';
 import { interpolateRoute } from './routes';
 
 export function getLegacyCheckoutURL({
@@ -17,8 +18,6 @@ export function getLegacyCheckoutURL({
   roadHazard?: boolean;
   userZip?: string;
 }): string {
-  const deployRef = process.env.NOW_GITHUB_COMMIT_REF;
-  const isProduction = deployRef === 'master';
   const isStaggered = front && rear && quantity.front && quantity.rear;
 
   const baseRoute = interpolateRoute(
@@ -46,7 +45,7 @@ export function getLegacyCheckoutURL({
 
   const hasQuery = Object.values(query).some((item) => item !== undefined);
 
-  const baseUrl = isProduction
+  const baseUrl = isProductionDeploy()
     ? URLS.CHECKOUT_PRODUCTION
     : URLS.CHECKOUT_STAGING;
 
