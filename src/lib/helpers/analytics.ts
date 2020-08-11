@@ -1,4 +1,4 @@
-import Cookie from 'js-cookie';
+import { Cookies } from 'react-cookie';
 
 import { randomString } from '~/lib/utils/string';
 
@@ -79,7 +79,8 @@ class GoogleAnalytics {
     this.scriptInjected = true;
 
     // Try to set the simple cookie in the dataLayer[] (user ID)
-    const simple = Cookie.get('simple');
+    const cookies = new Cookies();
+    const simple = cookies.get('simple');
     if (simple) {
       window.dataLayer && window.dataLayer.push({ simple });
     }
