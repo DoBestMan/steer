@@ -17,6 +17,7 @@ import {
   apiGetUserSearchHistory,
 } from '~/lib/api/users';
 import { FetchErrorCodes } from '~/lib/fetch/FetchError';
+import GA from '~/lib/helpers/analytics';
 import { scrollIntoViewIfNeeded } from '~/lib/utils/accessibility';
 
 import {
@@ -203,6 +204,15 @@ export function useSearchResults() {
           queryText,
           queryType,
           signal: abortController.current?.signal,
+        });
+
+        GA.addToDataLayer({
+          additionalQueryText,
+          event: 'isSiteSearch',
+          page: document && document.location.pathname,
+          queryText,
+          queryType,
+          resultTotal: apiSearchResults.resultMetadata.pagination?.total,
         });
 
         setSearchResults(apiSearchResults);

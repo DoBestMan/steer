@@ -15,7 +15,7 @@ interface ExperimentCallback {
 }
 
 interface DataLayerItem {
-  [key: string]: string;
+  [key: string]: string | number | null | undefined;
 }
 
 const TOTAL_TRIALS = 5;
