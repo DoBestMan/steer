@@ -5,16 +5,9 @@ export const everyPurchaseIncludesData = [
   {
     description: 'Fast, free shipping on every tire we sell.',
     icon: ICONS.FREE_SHIPPING,
-    linkLabel: '2 days to Brooklyn, NY',
+    linkLabel: 'Learn more',
     modalId: STATIC_MODAL_IDS.GLOBAL_FREE_SHIPPING,
     title: 'Free Shipping',
-  },
-  {
-    description: 'Price changed after you paid? We’ll refund the difference.',
-    icon: ICONS.BEST_PRICE,
-    linkLabel: '30 day guarantee',
-    modalId: STATIC_MODAL_IDS.GLOBAL_BEST_PRICE_GUARANTEE,
-    title: 'Best price guarantee',
   },
   {
     description:
@@ -28,16 +21,9 @@ export const everyPurchaseIncludesData = [
     description:
       'Sometimes things don’t go as planned. That’s why we accept returns of unmounted tires for up to 30 days.',
     icon: ICONS.FREE_RETURNS,
-    linkLabel: '30 day free return',
+    linkLabel: '30 day returns',
     modalId: STATIC_MODAL_IDS.GLOBAL_EASY_RETURN,
-    title: 'Free, easy returns',
-  },
-  {
-    description: 'No hidden fees for returned tires.',
-    icon: ICONS.MONEY_BACK,
-    linkLabel: 'How it works',
-    modalId: STATIC_MODAL_IDS.GLOBAL_MONEY_BACK_GUARANTEE,
-    title: 'Money-back guarantee',
+    title: 'Easy returns',
   },
   {
     description: 'Have questions? Live tire specialists are here to help.',

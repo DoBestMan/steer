@@ -98,15 +98,12 @@ describe('useModalContextSetup', () => {
     const { result } = renderHook(() => useModalContextSetup());
 
     act(() => {
-      result.current.openStaticModal(
-        STATIC_MODAL_IDS.GLOBAL_BEST_PRICE_GUARANTEE,
-      );
+      result.current.openStaticModal(STATIC_MODAL_IDS.GLOBAL_FREE_SHIPPING);
     });
 
     expect(result.current).toEqual(
       expect.objectContaining({
-        currentModalData:
-          STATIC_MODALS[STATIC_MODAL_IDS.GLOBAL_BEST_PRICE_GUARANTEE],
+        currentModalData: STATIC_MODALS[STATIC_MODAL_IDS.GLOBAL_FREE_SHIPPING],
         isModalOpen: true,
       }),
     );
