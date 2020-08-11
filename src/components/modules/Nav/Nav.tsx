@@ -1,4 +1,5 @@
 import { useTheme } from 'emotion-theming';
+import { useCookies } from 'react-cookie';
 import { Transition } from 'react-transition-group';
 import { TransitionStatus } from 'react-transition-group/Transition';
 
@@ -7,6 +8,7 @@ import GridItem from '~/components/global/Grid/GridItem';
 import Image from '~/components/global/Image/Image';
 import BaseLink from '~/components/global/Link/BaseLink';
 import { useNavContext } from '~/context/Nav.context';
+import { COOKIES } from '~/lib/constants/cookies';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { disableGlobalFocus } from '~/styles/document/accessibility.styles';
 import { layout } from '~/styles/layout.styles';
@@ -31,6 +33,9 @@ function Nav({ isHomepage }: Props) {
   } = useNavContext();
   const { toggleIsSearchOpen } = useSearchModalContext();
   const theme: NavThemeObject = useTheme();
+
+  const [cookies] = useCookies([COOKIES.CART_QTY]);
+  const cartQty = cookies[COOKIES.CART_QTY];
 
   return (
     <Transition appear in={isVisible} timeout={400}>
@@ -65,8 +70,7 @@ function Nav({ isHomepage }: Props) {
                 handleOnSubNavClick={toggleSubNav}
                 isHomepage={isHomepage}
                 links={links}
-                // TODO number to be determined via cookies
-                // numberOfCartItems={4}
+                numberOfCartItems={cartQty}
                 theme={theme}
               />
             </Grid>

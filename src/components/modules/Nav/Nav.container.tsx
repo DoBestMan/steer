@@ -1,6 +1,7 @@
 import { ThemeProvider } from 'emotion-theming';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
+import { CookiesProvider } from 'react-cookie';
 
 import SubNav from '~/components/modules/SubNav/SubNav';
 import { useNavContext } from '~/context/Nav.context';
@@ -48,10 +49,12 @@ function NavContainer({ isHomepage = false }: Props) {
   }, [pathname, setNavTheme]);
 
   return (
-    <ThemeProvider theme={themes[theme]}>
-      <Nav isHomepage={isHomepage} />
-      <SubNav {...siteMenu} />
-    </ThemeProvider>
+    <CookiesProvider>
+      <ThemeProvider theme={themes[theme]}>
+        <Nav isHomepage={isHomepage} />
+        <SubNav {...siteMenu} />
+      </ThemeProvider>
+    </CookiesProvider>
   );
 }
 

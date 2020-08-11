@@ -31,7 +31,7 @@ interface Props extends Pick<NavThemeObject, 'linkTheme'> {
 }
 
 function NavCart({ linkTheme, numberOfCartItems }: Props) {
-  if (!numberOfCartItems) {
+  if (!numberOfCartItems || numberOfCartItems < 1) {
     return null;
   }
 
