@@ -45,7 +45,7 @@ export function getBackendEnvVariables(): {
   }
 
   return {
-    backendEndpoint: URLS.MAIN_API_STAGING,
+    backendEndpoint: URLS.MAIN_API_INTEGRATION,
     clientId: process.env.STEER_CLIENT_ID_INTEGRATION,
     clientSecret: process.env.STEER_CLIENT_SECRET_INTEGRATION,
   };

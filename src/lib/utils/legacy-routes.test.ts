@@ -9,7 +9,7 @@ describe('utils/legacy-routes', () => {
           front: '12345',
           quantity: { front: 4 },
         }),
-      ).toBe(`${URLS.CHECKOUT_STAGING}/MyCart/add/12345/4`);
+      ).toBe(`${URLS.CHECKOUT_INTEGRATION}/MyCart/add/12345/4`);
     });
 
     it('returns URL for checking out a single size tire (rear)', () => {
@@ -19,7 +19,7 @@ describe('utils/legacy-routes', () => {
           rear: '09876',
           quantity: { front: 0, rear: 4 },
         }),
-      ).toBe(`${URLS.CHECKOUT_STAGING}/MyCart/add/09876/4`);
+      ).toBe(`${URLS.CHECKOUT_INTEGRATION}/MyCart/add/09876/4`);
     });
 
     it('returns URL for checking out both front and rear', () => {
@@ -29,7 +29,9 @@ describe('utils/legacy-routes', () => {
           rear: '09876',
           quantity: { front: 1, rear: 2 },
         }),
-      ).toBe(`${URLS.CHECKOUT_STAGING}/MyCart/addstaggered/12345/1/09876/2`);
+      ).toBe(
+        `${URLS.CHECKOUT_INTEGRATION}/MyCart/addstaggered/12345/1/09876/2`,
+      );
     });
 
     it('returns URL for checking out with road hazard', () => {
@@ -41,7 +43,7 @@ describe('utils/legacy-routes', () => {
           roadHazard: true,
         }),
       ).toBe(
-        `${URLS.CHECKOUT_STAGING}/MyCart/addstaggered/12345/1/09876/2?rh=1`,
+        `${URLS.CHECKOUT_INTEGRATION}/MyCart/addstaggered/12345/1/09876/2?rh=1`,
       );
     });
 
@@ -55,7 +57,7 @@ describe('utils/legacy-routes', () => {
           userZip: '11201',
         }),
       ).toBe(
-        `${URLS.CHECKOUT_STAGING}/MyCart/addstaggered/12345/1/09876/2?zipCode=11201`,
+        `${URLS.CHECKOUT_INTEGRATION}/MyCart/addstaggered/12345/1/09876/2?zipCode=11201`,
       );
     });
 
@@ -69,7 +71,7 @@ describe('utils/legacy-routes', () => {
           userZip: '11201',
         }),
       ).toBe(
-        `${URLS.CHECKOUT_STAGING}/MyCart/addstaggered/12345/1/09876/2?rh=1&zipCode=11201`,
+        `${URLS.CHECKOUT_INTEGRATION}/MyCart/addstaggered/12345/1/09876/2?rh=1&zipCode=11201`,
       );
     });
   });

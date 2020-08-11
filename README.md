@@ -226,7 +226,7 @@ We have a few solutions to this in the codebase:
 
 The `dev`, `dev-st`, and `uat` branches have GitHub actions that will trigger deploy hooks when they are merged.
 
-Among other things, this solves the use case where `my-feature-branch` (built against the mock API) is merged into `dev` and we need to kick off a new deploy against the staging API.
+Among other things, this solves the use case where `my-feature-branch` (built against the mock API) is merged into `dev` and we need to kick off a new deploy against the integration API.
 
 See `force-dev-deploy.yml` for an example.
 

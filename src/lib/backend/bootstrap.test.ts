@@ -80,7 +80,7 @@ describe('getBackendEnvVariables', () => {
       process.env.NOW_GITHUB_COMMIT_REF = branch;
 
       expect(getBackendEnvVariables()).toEqual({
-        backendEndpoint: URLS.MAIN_API_STAGING,
+        backendEndpoint: URLS.MAIN_API_INTEGRATION,
         clientId: 'integrationId',
         clientSecret: 'integrationSecret',
       });
@@ -114,7 +114,7 @@ describe('getBackendEnvVariables', () => {
     process.env.STEER_BACKEND = 'integration';
 
     expect(getBackendEnvVariables()).toEqual({
-      backendEndpoint: URLS.MAIN_API_STAGING,
+      backendEndpoint: URLS.MAIN_API_INTEGRATION,
       clientId: 'integrationId',
       clientSecret: 'integrationSecret',
     });

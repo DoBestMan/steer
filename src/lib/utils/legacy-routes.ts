@@ -47,7 +47,7 @@ export function getLegacyCheckoutURL({
 
   const baseUrl = isProductionDeploy()
     ? URLS.CHECKOUT_PRODUCTION
-    : URLS.CHECKOUT_STAGING;
+    : URLS.CHECKOUT_INTEGRATION;
 
   return `${baseUrl}${parsedBaseRoute}${
     hasQuery ? `?${queryString.stringify(query)}` : ''
