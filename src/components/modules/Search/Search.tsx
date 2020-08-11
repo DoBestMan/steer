@@ -224,8 +224,9 @@ function Search({
         action.queryType === SearchStateEnum.REAR_TIRE ||
         action.queryType === SearchStateEnum.REAR_TIRE_WIDTH;
 
-      const { queryText } = getCurrentInputQuery();
-      let additionalQueryText = isCurrentRearTireSearch ? queryText : '';
+      let additionalQueryText = isCurrentRearTireSearch
+        ? action.additionalQueryText
+        : '';
 
       if (isInitialRearTireState) {
         setPrimaryQuery({
@@ -241,7 +242,7 @@ function Search({
       }
 
       onSearchQuery({
-        additionalQueryText,
+        additionalQueryText: additionalQueryText || '',
         queryText: action.queryText,
         queryType: action.queryType,
       });
