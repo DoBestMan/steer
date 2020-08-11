@@ -70,7 +70,6 @@ const styles: StylesMap = {
     },
   },
   slider: {
-    marginRight: SPACING.SIZE_40,
     width: 200,
   },
   smallHide: {
@@ -87,6 +86,10 @@ const styles: StylesMap = {
     },
   },
   sort: typography.labelCopy,
+  sortBy: {
+    display: 'flex',
+    marginLeft: SPACING.SIZE_40,
+  },
   sortLabel: [
     typography.labelCopy,
     {
