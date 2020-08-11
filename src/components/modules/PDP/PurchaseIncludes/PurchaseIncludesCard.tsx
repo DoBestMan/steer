@@ -4,7 +4,6 @@ import Link from '~/components/global/Link/Link';
 import { ModalContextProps } from '~/context/Modal.context';
 import { THEME } from '~/lib/constants';
 import { STATIC_MODAL_IDS } from '~/lib/constants/staticModals';
-import { typography } from '~/styles/typography.styles';
 
 import styles from './PurchaseIncludesCard.styles';
 
@@ -33,7 +32,7 @@ function PurchaseIncludesCard({
       <Icon name={icon} css={styles.cardIcon} />
       <div>
         <h2 css={styles.cardTitle}>{title}</h2>
-        <p css={typography.bodyCopy}>{description}</p>
+        <p css={styles.cardCopy}>{description}</p>
       </div>
       <Link
         as="button"

@@ -71,8 +71,9 @@ const styles: StylesMap = {
           marginRight: SPACING.SIZE_30,
         },
       },
-      backgroundColor: COLORS.LIGHT.OFF_WHITE,
+      backgroundColor: COLORS.LIGHT.OFF_WHITE_40,
       borderRadius: RADIUS.RADIUS_15,
+      boxSizing: 'border-box',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'space-between',
@@ -87,11 +88,18 @@ const styles: StylesMap = {
       },
     },
   },
+  cardCopy: [
+    typography.bodyCopy,
+    {
+      color: COLORS.LIGHT.GRAY_70,
+    },
+  ],
   cardIcon: {
     alignItems: 'flex-start',
     color: COLORS.GLOBAL.ORANGE,
     display: 'flex',
     height: 34,
+    marginBottom: SPACING.SIZE_10,
   },
   cardLink: [
     typography.primarySubhead,
