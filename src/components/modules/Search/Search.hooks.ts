@@ -106,7 +106,9 @@ export function useFocusScrollIntoView({
   };
 
   const onFocus = (index: number) => () => {
-    scrollIntoViewIfNeeded(itemRefs.current[index], clearance);
+    if (itemRefs.current[index]) {
+      scrollIntoViewIfNeeded(itemRefs.current[index], clearance);
+    }
   };
 
   return {

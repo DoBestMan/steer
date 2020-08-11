@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import BaseLink from '~/components/global/Link/BaseLink';
@@ -48,6 +50,10 @@ function SearchSection({
   const handleTouchEnd = (event: React.TouchEvent) => {
     event.preventDefault();
   };
+
+  useEffect(() => {
+    onFocus(selectedItemIndex[1])();
+  }, [onFocus, selectedItemIndex]);
 
   return (
     <Grid css={styles.container}>
