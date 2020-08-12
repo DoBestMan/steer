@@ -20,12 +20,6 @@ class MyDocument extends Document {
 
           <Main />
           <NextScript />
-
-          {/* Recaptcha */}
-          <script
-            async
-            src={`https://www.google.com/recaptcha/api.js?render=${process.env.RECAPTCHA_SITE_KEY}`}
-          ></script>
         </body>
       </Html>
     );
