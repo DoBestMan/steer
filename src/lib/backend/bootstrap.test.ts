@@ -50,12 +50,10 @@ describe('getBackendEnvVariables', () => {
     /* eslint-disable sort-keys */
     process.env = {
       ...OLD_ENV,
-      STEER_CLIENT_ID_MOCK: 'mockId',
+      STEER_CLIENT_ID: 'sharedId',
       STEER_CLIENT_SECRET_MOCK: 'mockSecret',
-      STEER_CLIENT_ID_INTEGRATION: 'integrationId',
       STEER_CLIENT_SECRET_INTEGRATION: 'integrationSecret',
-      STEER_CLIENT_ID: 'prodId',
-      STEER_CLIENT_SECRET: 'prodSecret',
+      STEER_CLIENT_SECRET_PROD: 'prodSecret',
     };
     /* eslint-enable sort-keys */
   });
@@ -69,19 +67,19 @@ describe('getBackendEnvVariables', () => {
 
     expect(getBackendEnvVariables()).toEqual({
       backendEndpoint: URLS.MAIN_API_PRODUCTION,
-      clientId: 'prodId',
+      clientId: 'sharedId',
       clientSecret: 'prodSecret',
     });
   });
 
-  test.each(['dev', 'qa', 'int-my-branch'])(
+  test.each(['dev', 'qa', 'uat', 'int-my-branch'])(
     'integration deploy - %s',
     (branch) => {
       process.env.NOW_GITHUB_COMMIT_REF = branch;
 
       expect(getBackendEnvVariables()).toEqual({
         backendEndpoint: URLS.MAIN_API_INTEGRATION,
-        clientId: 'integrationId',
+        clientId: 'sharedId',
         clientSecret: 'integrationSecret',
       });
     },
@@ -94,7 +92,7 @@ describe('getBackendEnvVariables', () => {
 
       expect(getBackendEnvVariables()).toEqual({
         backendEndpoint: URLS.MAIN_API_MOCK,
-        clientId: 'mockId',
+        clientId: 'sharedId',
         clientSecret: 'mockSecret',
       });
     },
@@ -105,7 +103,7 @@ describe('getBackendEnvVariables', () => {
 
     expect(getBackendEnvVariables()).toEqual({
       backendEndpoint: URLS.MAIN_API_LOCAL,
-      clientId: 'mockId',
+      clientId: 'sharedId',
       clientSecret: 'mockSecret',
     });
   });
@@ -115,7 +113,7 @@ describe('getBackendEnvVariables', () => {
 
     expect(getBackendEnvVariables()).toEqual({
       backendEndpoint: URLS.MAIN_API_INTEGRATION,
-      clientId: 'integrationId',
+      clientId: 'sharedId',
       clientSecret: 'integrationSecret',
     });
   });
@@ -125,7 +123,7 @@ describe('getBackendEnvVariables', () => {
 
     expect(getBackendEnvVariables()).toEqual({
       backendEndpoint: URLS.MAIN_API_MOCK,
-      clientId: 'mockId',
+      clientId: 'sharedId',
       clientSecret: 'mockSecret',
     });
   });
@@ -135,7 +133,7 @@ describe('getBackendEnvVariables', () => {
 
     expect(getBackendEnvVariables()).toEqual({
       backendEndpoint: URLS.MAIN_API_MOCK,
-      clientId: 'mockId',
+      clientId: 'sharedId',
       clientSecret: 'mockSecret',
     });
   });

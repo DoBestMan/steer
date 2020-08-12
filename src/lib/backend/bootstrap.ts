@@ -21,7 +21,7 @@ export function getBackendEnvVariables(): {
     return {
       backendEndpoint: URLS.MAIN_API_PRODUCTION,
       clientId: process.env.STEER_CLIENT_ID,
-      clientSecret: process.env.STEER_CLIENT_SECRET,
+      clientSecret: process.env.STEER_CLIENT_SECRET_PROD,
     };
   }
 
@@ -33,20 +33,20 @@ export function getBackendEnvVariables(): {
   if (backend === 'local') {
     return {
       backendEndpoint: URLS.MAIN_API_LOCAL,
-      clientId: process.env.STEER_CLIENT_ID_MOCK,
+      clientId: process.env.STEER_CLIENT_ID,
       clientSecret: process.env.STEER_CLIENT_SECRET_MOCK,
     };
   } else if (backend === 'mock') {
     return {
       backendEndpoint: URLS.MAIN_API_MOCK,
-      clientId: process.env.STEER_CLIENT_ID_MOCK,
+      clientId: process.env.STEER_CLIENT_ID,
       clientSecret: process.env.STEER_CLIENT_SECRET_MOCK,
     };
   }
 
   return {
     backendEndpoint: URLS.MAIN_API_INTEGRATION,
-    clientId: process.env.STEER_CLIENT_ID_INTEGRATION,
+    clientId: process.env.STEER_CLIENT_ID,
     clientSecret: process.env.STEER_CLIENT_SECRET_INTEGRATION,
   };
 }
