@@ -3,7 +3,7 @@ import { GetServerSideProps } from 'next';
 import CatalogPageContainer, {
   CatalogPageData,
 } from '~/components/pages/CatalogPage/CatalogPage.container';
-import { shouldDisplayProductsError } from '~/components/pages/CatalogPage/CatalogPage.utils';
+import { shouldReturnServerError } from '~/components/pages/CatalogPage/CatalogPage.utils';
 import { SearchBy } from '~/components/pages/CatalogPage/mapppers/meta';
 import WithErrorPageHandling, {
   PageResponse,
@@ -69,11 +69,10 @@ export const getServerSideProps: GetServerSideProps<PageResponse<
     backendGetVehicleProducts(apiArgs),
   ]);
 
-  if (
-    !productsRes.isSuccess &&
-    shouldDisplayProductsError(siteCatalogSummary)
-  ) {
-    const errorStatusCode = productsRes.error.statusCode;
+  if (shouldReturnServerError(productsRes, siteCatalogSummary)) {
+    const errorStatusCode = !productsRes.isSuccess
+      ? productsRes.error.statusCode
+      : 500;
     context.res.statusCode = errorStatusCode;
     return { props: { errorStatusCode } };
   }

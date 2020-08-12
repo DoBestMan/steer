@@ -1,6 +1,8 @@
+import { SiteCatalogProducts } from '~/data/models/SiteCatalogProducts';
 import { SiteCatalogSummary } from '~/data/models/SiteCatalogSummary';
 import { SiteImage } from '~/data/models/SiteImage';
 import { PRODUCT_IMAGE_TYPES } from '~/lib/constants/productImage.types';
+import { AsyncResponse } from '~/lib/fetch/index.types';
 import { getRandomInteger } from '~/lib/utils/number';
 
 /*
@@ -56,4 +58,18 @@ export function shouldDisplayProductsError(
   siteCatalogSummary: SiteCatalogSummary,
 ) {
   return (siteCatalogSummary.siteCatalogSummaryMeta?.totalResults || 0) > 0;
+}
+
+export function shouldReturnServerError(
+  productsRes: AsyncResponse<{
+    siteCatalogProducts: SiteCatalogProducts;
+  }>,
+  siteCatalogSummary: SiteCatalogSummary,
+) {
+  // handles successful response but null/undefined data (show 500)
+  const hasData = productsRes.isSuccess && productsRes.data;
+  return (
+    shouldDisplayProductsError(siteCatalogSummary) &&
+    (!productsRes.isSuccess || !hasData)
+  );
 }

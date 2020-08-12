@@ -120,18 +120,28 @@ function CatalogPageContainer({
     data: { siteCatalogProducts },
     error: productsError,
     revalidate: revalidateProducts,
+    isValidating,
   } = useApiDataWithDefault<CatalogPageData['serverData']>({
     ...apiArgs,
     endpoint: endpoints.products,
   });
 
   if (productsError) {
-    if (shouldDisplayProductsError(siteCatalogSummary)) {
-      throw new Error(productsError.message);
-    }
     console.error(productsError);
-  } else if (summaryError) {
+  }
+  if (summaryError) {
     console.error(summaryError);
+  }
+  if (
+    shouldDisplayProductsError(siteCatalogSummary) &&
+    !siteCatalogProducts &&
+    !isValidating
+  ) {
+    throw new Error(
+      productsError
+        ? productsError.message
+        : 'An error occurred while fetching products',
+    );
   }
 
   const scrollToGrid = useCallback(() => {

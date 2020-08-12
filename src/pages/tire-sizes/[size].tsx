@@ -6,7 +6,7 @@ import CatalogPageContainer, {
 } from '~/components/pages/CatalogPage/CatalogPage.container';
 import {
   getDiameterCategory,
-  shouldDisplayProductsError,
+  shouldReturnServerError,
 } from '~/components/pages/CatalogPage/CatalogPage.utils';
 import { SearchBy } from '~/components/pages/CatalogPage/mapppers/meta';
 import WithErrorPageHandling, {
@@ -98,11 +98,10 @@ export const getServerSideProps: GetServerSideProps<PageResponse<
     backendGetTireSizeClassicProducts(classicApiArgs),
   ]);
 
-  if (
-    !productsRes.isSuccess &&
-    shouldDisplayProductsError(siteCatalogSummary)
-  ) {
-    const errorStatusCode = productsRes.error.statusCode;
+  if (shouldReturnServerError(productsRes, siteCatalogSummary)) {
+    const errorStatusCode = !productsRes.isSuccess
+      ? productsRes.error.statusCode
+      : 500;
     context.res.statusCode = errorStatusCode;
     return { props: { errorStatusCode } };
   }
