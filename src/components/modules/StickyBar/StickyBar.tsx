@@ -32,8 +32,10 @@ function StickyBar({
   secondaryLabel,
   theme,
 }: Props) {
+  // Logo should be immutable, so we create a `src` constant instead of overriding logo.src
+  let src = logo?.src;
   if (logo && logo.src) {
-    logo.src = transformSrcLogoToWhite(logo.src);
+    src = transformSrcLogoToWhite(logo.src);
   }
 
   return (
@@ -49,12 +51,12 @@ function StickyBar({
         <>
           {icon && <Icon name={icon} css={styles.icon} />}
           <div css={styles.secondaryColumn}>
-            {logo && (
+            {logo && src && (
               <div>
                 <Image
                   css={styles.logo}
                   altText={logo.altText}
-                  src={logo.src}
+                  src={src}
                   widths={BRAND_LOGO_SIZES}
                 />
               </div>

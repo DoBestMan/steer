@@ -85,14 +85,15 @@ export function BuildInMessage({
               }
               const id = label.replace(/\s+/g, '').toLowerCase();
 
-              image.src = transformSrcLogoToWhite(image.src);
+              // image.src should be immutable
+              const src = transformSrcLogoToWhite(image.src);
 
               return (
                 <li key={id}>
                   <div css={styles.brandImage}>
                     <Image
                       altText={label}
-                      src={image.src}
+                      src={src}
                       widths={BRAND_LOGO_SIZES}
                     />
                   </div>
