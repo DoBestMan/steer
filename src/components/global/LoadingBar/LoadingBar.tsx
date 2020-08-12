@@ -25,7 +25,7 @@ function LoadingBar({ isLoading }: Props) {
    */
   return (
     <Transition
-      in={!isFinished}
+      in={!isFinished && !!progress}
       mountOnEnter
       unmountOnExit
       timeout={{
