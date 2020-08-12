@@ -168,7 +168,11 @@ function TireImageCarousel({
   };
 
   const defaultItemWidth = wrapperRect
-    ? Math.round(wrapperRect?.height * 1.125)
+    ? Math.round(wrapperRect?.height * 1.12)
+    : undefined;
+
+  const videoItemWidth = wrapperRect
+    ? Math.round(wrapperRect?.width)
     : undefined;
 
   // Can't use 100vh in this calculation as it doesn't take into
@@ -199,7 +203,9 @@ function TireImageCarousel({
           const imageWidth =
             // If it's video or there's something wrong with image's dimensions
             // use the default width
-            getItemWidth(imageItem, wrapperRect) || defaultItemWidth;
+            getItemWidth(imageItem, wrapperRect) ||
+            videoItemWidth ||
+            defaultItemWidth;
 
           return (
             <div key={`tire-image-${index}`} css={styles.slide}>

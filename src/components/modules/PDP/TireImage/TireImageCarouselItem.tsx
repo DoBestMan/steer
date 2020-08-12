@@ -36,6 +36,7 @@ function TireImageCarouselItem({
   setShouldPauseVideo,
   width,
 }: Props) {
+  const videoHeight = width && width * (9 / 16);
   return (
     <>
       {imageItem.type ===
@@ -61,8 +62,12 @@ function TireImageCarouselItem({
         <Video
           customContainerStyles={[
             styles.videoContainerStyles,
-            // Width of video follows 16/9 aspect ratio
-            { height, width: height && height * (16 / 9) },
+            // Height of video follows 16/9 aspect ratio
+            {
+              width,
+              height: videoHeight,
+              top: videoHeight ? `calc(50% - ${videoHeight / 2}px)` : 0,
+            },
           ]}
           imageLoading={LOADING_OPTIONS.EAGER}
           isButtonFocusable={isActive}

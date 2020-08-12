@@ -121,6 +121,7 @@ const styles: StylesMap = {
   },
   imageComponentContainer: {
     display: 'flex',
+    maxWidth: '100%',
   },
   imageStyles: {
     maxHeight: '100%',
@@ -253,6 +254,10 @@ const styles: StylesMap = {
     margin: '0 auto',
     maxWidth: '75vw',
     paddingBottom: 0,
+
+    [MQ.L]: {
+      maxWidth: '100%',
+    },
 
     /* eslint-disable sort-keys */
     'button div': {
