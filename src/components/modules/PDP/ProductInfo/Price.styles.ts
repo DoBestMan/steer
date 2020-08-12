@@ -20,10 +20,6 @@ const styles: StylesMap = {
       color: COLORS.GLOBAL.ORANGE,
       marginBottom: 3,
       whiteSpace: 'nowrap',
-
-      [MQ.L]: {
-        marginBottom: 6,
-      },
     },
   ],
   prices: [
