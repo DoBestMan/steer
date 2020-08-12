@@ -21,7 +21,7 @@ interface SubtitleProps {
 
 function Subtitle({ price }: SubtitleProps) {
   return (
-    <p>
+    <p css={styles.subtitle}>
       {ui('pdp.quantitySelector.totalPrice')} <span css={styles.decorator} />{' '}
       {price}
     </p>

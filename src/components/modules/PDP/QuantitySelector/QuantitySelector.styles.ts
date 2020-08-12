@@ -10,12 +10,12 @@ const styles: StylesMap = {
   },
   carouselStyles: [
     {
-      margin: `0 -${CONTENT_LATERAL_PADDING.S}px`,
+      margin: `${SPACING.SIZE_25}px -${CONTENT_LATERAL_PADDING.S}px 0`,
       [MQ.M]: {
-        margin: `0 -${CONTENT_LATERAL_PADDING.M}px`,
+        margin: `${SPACING.SIZE_25}px -${CONTENT_LATERAL_PADDING.M}px 0`,
       },
       [MQ.L]: {
-        margin: `0 -${CONTENT_LATERAL_PADDING.L}px`,
+        margin: `${SPACING.SIZE_25}px -${CONTENT_LATERAL_PADDING.L}px 0`,
       },
       /* eslint-disable sort-keys */
       '.swiper-slide:first-of-type': {
@@ -41,31 +41,46 @@ const styles: StylesMap = {
     },
   ],
   container: {
-    paddingTop: SPACING.SIZE_30,
-    textAlign: 'center',
+    paddingBottom: SPACING.SIZE_10,
 
-    [MQ.L]: {
-      display: 'flex',
-      flexDirection: 'column',
-      height: '100%',
-      paddingBottom: SPACING.SIZE_20,
-      paddingTop: SPACING.SIZE_60,
+    [MQ.M]: {
+      paddingBottom: 0,
     },
   },
   copyConfirmation: {
-    marginBottom: SPACING.SIZE_50,
+    marginBottom: SPACING.SIZE_40,
+
+    [MQ.L]: {
+      marginBottom: SPACING.SIZE_50,
+    },
   },
   decorator: {
     ':before': {
-      padding: `0 ${SPACING.SIZE_02}px`,
+      padding: `0 ${SPACING.SIZE_05}px`,
       content: '"•"',
       fontSize: 8,
+    },
+
+    alignItems: 'center',
+    display: 'flex',
+  },
+  modalContent: {
+    [MQ.L]: {
+      height: '100%',
     },
   },
   pickerContainer: {
     borderTop: BORDERS.SOLID_GRAY_20_1PX,
     marginTop: SPACING.SIZE_30,
     padding: `${SPACING.SIZE_30}px 0 ${SPACING.SIZE_40}px`,
+
+    [MQ.L]: {
+      marginTop: SPACING.SIZE_40,
+      padding: `${SPACING.SIZE_40}px 0 ${SPACING.SIZE_40}px`,
+    },
+  },
+  subtitle: {
+    display: 'flex',
   },
 };
 

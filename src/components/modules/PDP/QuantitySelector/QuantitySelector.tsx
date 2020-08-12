@@ -50,10 +50,11 @@ function QuantitySelector({
   return (
     <BottomCardModal
       contentLabel={ui('pdp.quantitySelector.modalLabel')}
+      customContentStyles={styles.modalContent}
       isOpen={isOpen}
       onClose={onClose}
     >
-      <div css={modalContainerStyles.container}>
+      <div css={[modalContainerStyles.container, styles.container]}>
         <FeaturedInfoModule
           copy={copy}
           customCopyStyles={isIntercept ? styles.copyConfirmation : undefined}

@@ -28,19 +28,19 @@ const styles: CSSObject = {
     typography.secondaryHeadline,
     {
       color: COLORS.GLOBAL.ORANGE,
-      marginBottom: SPACING.SIZE_30,
+      marginBottom: SPACING.SIZE_20,
     },
   ],
   icon: {
     color: COLORS.GLOBAL.ORANGE,
     justifyContent: 'center',
-    marginBottom: SPACING.SIZE_20,
+    marginBottom: SPACING.SIZE_10,
     minHeight: 35,
   },
   title: [
     typography.secondaryHeadline,
     {
-      marginBottom: SPACING.SIZE_05,
+      marginBottom: SPACING.SIZE_10,
 
       [MQ.L]: {
         br: {
