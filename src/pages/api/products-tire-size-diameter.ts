@@ -1,7 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { getDiameterCategory } from '~/components/pages/CatalogPage/CatalogPage.utils';
-import { SiteCatalogProducts } from '~/data/models/SiteCatalogProducts';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
 import { backendGetTireSizeDiameterProducts } from '~/lib/backend/catalog/size-diameter';
 import { isProductionDeploy } from '~/lib/utils/deploy';
@@ -11,12 +10,7 @@ import {
   removeTireFromQueryParam,
 } from '~/lib/utils/string';
 
-export default async (
-  request: NextApiRequest,
-  response: NextApiResponse<{
-    siteCatalogProducts: SiteCatalogProducts;
-  }>,
-) => {
+export default async (request: NextApiRequest, response: NextApiResponse) => {
   backendBootstrap({ request });
 
   const { size, ...rest } = request.query;

@@ -14,13 +14,15 @@ import { fetch } from '~/lib/fetch';
 import { getParam, getStringifiedParams } from '~/lib/utils/routes';
 
 import CatalogPage from './CatalogPage';
+import { shouldDisplayProductsError } from './CatalogPage.utils';
 import { mapDataToMeta, SearchBy, SearchByParams } from './mapppers/meta';
 
 export const CATALOG_PARAMS = ['group', 'skipGroups'];
+const EMPTY_FILTERS = { filtersList: [], sortList: [] };
 
 export interface CatalogPageData {
   serverData: {
-    siteCatalogProducts: SiteCatalogProducts;
+    siteCatalogProducts: SiteCatalogProducts | null;
     siteCatalogSummary: SiteCatalogSummary;
   };
 }
@@ -122,8 +124,13 @@ function CatalogPageContainer({
     endpoint: endpoints.products,
   });
 
-  if (summaryError || productsError) {
-    console.error(summaryError || productsError);
+  if (productsError) {
+    if (shouldDisplayProductsError(siteCatalogSummary)) {
+      throw new Error(productsError.message);
+    }
+    console.error(productsError);
+  } else if (summaryError) {
+    console.error(summaryError);
   }
 
   const scrollToGrid = useCallback(() => {
@@ -175,8 +182,9 @@ function CatalogPageContainer({
 
   // preview data and handler for open filter dropdowns
   const [previewFiltersData, setPreviewFiltersData] = useState({
-    totalMatches: siteCatalogProducts.listResultMetadata.pagination?.total || 0,
-    filters: siteCatalogProducts.siteCatalogFilters,
+    totalMatches:
+      siteCatalogProducts?.listResultMetadata.pagination?.total || 0,
+    filters: siteCatalogProducts?.siteCatalogFilters || EMPTY_FILTERS,
   });
 
   const onPreviewFilters = useCallback(
@@ -185,8 +193,8 @@ function CatalogPageContainer({
       if (!filters) {
         setPreviewFiltersData({
           totalMatches:
-            siteCatalogProducts.listResultMetadata.pagination?.total || 0,
-          filters: siteCatalogProducts.siteCatalogFilters,
+            siteCatalogProducts?.listResultMetadata.pagination?.total || 0,
+          filters: siteCatalogProducts?.siteCatalogFilters || EMPTY_FILTERS,
         });
       }
 

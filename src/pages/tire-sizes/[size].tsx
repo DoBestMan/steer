@@ -4,8 +4,14 @@ import { useRouter } from 'next/router';
 import CatalogPageContainer, {
   CatalogPageData,
 } from '~/components/pages/CatalogPage/CatalogPage.container';
-import { getDiameterCategory } from '~/components/pages/CatalogPage/CatalogPage.utils';
+import {
+  getDiameterCategory,
+  shouldDisplayProductsError,
+} from '~/components/pages/CatalogPage/CatalogPage.utils';
 import { SearchBy } from '~/components/pages/CatalogPage/mapppers/meta';
+import WithErrorPageHandling, {
+  PageResponse,
+} from '~/hocs/WithPageErrorHandling';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
 import {
   backendGetTireSizeClassicProducts,
@@ -49,9 +55,9 @@ function TireCategory({ size, serverData }: Props) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps<CatalogPageData> = async (
-  context,
-) => {
+export const getServerSideProps: GetServerSideProps<PageResponse<
+  CatalogPageData
+>> = async (context) => {
   backendBootstrap({ request: context.req });
   const { size, ...vehicleParams } = context.query;
 
@@ -63,10 +69,7 @@ export const getServerSideProps: GetServerSideProps<CatalogPageData> = async (
       query: getStringifiedParams(vehicleParams),
     };
 
-    const [
-      { siteCatalogSummary },
-      { siteCatalogProducts },
-    ] = await Promise.all([
+    const [{ siteCatalogSummary }, productsRes] = await Promise.all([
       backendGetTireSizeDiameterSummary(diameterApiArgs),
       backendGetTireSizeDiameterProducts(diameterApiArgs),
     ]);
@@ -74,7 +77,13 @@ export const getServerSideProps: GetServerSideProps<CatalogPageData> = async (
     return {
       props: {
         size,
-        serverData: { siteCatalogSummary, siteCatalogProducts },
+        serverData: {
+          siteCatalogSummary,
+          siteCatalogProducts:
+            productsRes.isSuccess && productsRes.data
+              ? productsRes.data.siteCatalogProducts
+              : null,
+        },
       },
     };
   }
@@ -84,17 +93,32 @@ export const getServerSideProps: GetServerSideProps<CatalogPageData> = async (
     query: getStringifiedParams(vehicleParams),
   };
 
-  const [{ siteCatalogSummary }, { siteCatalogProducts }] = await Promise.all([
+  const [{ siteCatalogSummary }, productsRes] = await Promise.all([
     backendGetTireSizeClassicSummary(classicApiArgs),
     backendGetTireSizeClassicProducts(classicApiArgs),
   ]);
 
+  if (
+    !productsRes.isSuccess &&
+    shouldDisplayProductsError(siteCatalogSummary)
+  ) {
+    const errorStatusCode = productsRes.error.statusCode;
+    context.res.statusCode = errorStatusCode;
+    return { props: { errorStatusCode } };
+  }
+
   return {
     props: {
       size,
-      serverData: { siteCatalogSummary, siteCatalogProducts },
+      serverData: {
+        siteCatalogSummary,
+        siteCatalogProducts:
+          productsRes.isSuccess && productsRes.data
+            ? productsRes.data.siteCatalogProducts
+            : null,
+      },
     },
   };
 };
 
-export default TireCategory;
+export default WithErrorPageHandling(TireCategory);

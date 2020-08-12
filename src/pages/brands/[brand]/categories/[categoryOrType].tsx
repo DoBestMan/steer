@@ -3,7 +3,11 @@ import { GetServerSideProps } from 'next';
 import CatalogPageContainer, {
   CatalogPageData,
 } from '~/components/pages/CatalogPage/CatalogPage.container';
+import { shouldDisplayProductsError } from '~/components/pages/CatalogPage/CatalogPage.utils';
 import { SearchBy } from '~/components/pages/CatalogPage/mapppers/meta';
+import WithErrorPageHandling, {
+  PageResponse,
+} from '~/hocs/WithPageErrorHandling';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
 import {
   backendGetBrandProducts,
@@ -49,9 +53,9 @@ function BrandCategory({ brand, categoryOrType, serverData }: Props) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps<CatalogPageData> = async (
-  context,
-) => {
+export const getServerSideProps: GetServerSideProps<PageResponse<
+  CatalogPageData
+>> = async (context) => {
   backendBootstrap({ request: context.req });
   const { brand, categoryOrType, ...vehicleParams } = context.query;
 
@@ -67,19 +71,34 @@ export const getServerSideProps: GetServerSideProps<CatalogPageData> = async (
     category: categoryOrType,
     query: getStringifiedParams(vehicleParams),
   };
-  const [{ siteCatalogSummary }, { siteCatalogProducts }] = await Promise.all([
+  const [{ siteCatalogSummary }, productsRes] = await Promise.all([
     backendGetBrandSummary(apiArgs),
     backendGetBrandProducts(apiArgs),
   ]);
+
+  if (
+    !productsRes.isSuccess &&
+    shouldDisplayProductsError(siteCatalogSummary)
+  ) {
+    const errorStatusCode = productsRes.error.statusCode;
+    context.res.statusCode = errorStatusCode;
+    return { props: { errorStatusCode } };
+  }
 
   return {
     props: {
       brand: brandName,
       categoryOrType,
       pageType: PAGE_TYPE,
-      serverData: { siteCatalogSummary, siteCatalogProducts },
+      serverData: {
+        siteCatalogSummary,
+        siteCatalogProducts:
+          productsRes.isSuccess && productsRes.data
+            ? productsRes.data.siteCatalogProducts
+            : null,
+      },
     },
   };
 };
 
-export default BrandCategory;
+export default WithErrorPageHandling(BrandCategory);

@@ -31,7 +31,7 @@ interface Props {
   onPreviewFilters: (filters?: Record<string, string>) => Promise<void>;
   previewFiltersData: { filters: SiteCatalogFilters; totalMatches: number };
   scrollToGrid: () => void;
-  siteCatalogProducts: SiteCatalogProducts;
+  siteCatalogProducts: SiteCatalogProducts | null;
   siteCatalogSummary: SiteCatalogSummary;
 }
 
@@ -49,7 +49,7 @@ function CatalogPage({
   const { contentStage, showSummary, stage } = useCatalogSummaryContext();
 
   const totalResult =
-    siteCatalogProducts.listResultMetadata.pagination?.total || 0;
+    siteCatalogProducts?.listResultMetadata.pagination?.total || 0;
   const hasResults = totalResult > 0;
 
   const showLoadingIndicator = stage === STAGES.LOADING;
@@ -78,7 +78,7 @@ function CatalogPage({
       theme={{ ...defaultTheme, ...(isAdvancedView && headerAdvanced) }}
     >
       {showSummary && <CatalogSummary exploreMore={scrollToGrid} />}
-      {showGrid && (
+      {showGrid && siteCatalogProducts && previewFiltersData && (
         <>
           <div css={styles.grid} ref={catalogGridRef}>
             <CatalogGrid

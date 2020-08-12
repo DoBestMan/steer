@@ -1,3 +1,4 @@
+import { SiteCatalogSummary } from '~/data/models/SiteCatalogSummary';
 import { SiteImage } from '~/data/models/SiteImage';
 import { PRODUCT_IMAGE_TYPES } from '~/lib/constants/productImage.types';
 import { getRandomInteger } from '~/lib/utils/number';
@@ -48,4 +49,11 @@ export function getProductDisplayImages(
     default: randomImageType,
     hover: hoverImageType,
   };
+}
+
+// The determining factor for displaying products error is if `totalResults` from /summary is > 0
+export function shouldDisplayProductsError(
+  siteCatalogSummary: SiteCatalogSummary,
+) {
+  return (siteCatalogSummary.siteCatalogSummaryMeta?.totalResults || 0) > 0;
 }

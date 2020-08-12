@@ -1,17 +1,11 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { SiteCatalogProducts } from '~/data/models/SiteCatalogProducts';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
 import { backendGetVehicleProducts } from '~/lib/backend/catalog/vehicle';
 import { isProductionDeploy } from '~/lib/utils/deploy';
 import { getStringifiedParams } from '~/lib/utils/routes';
 
-export default async (
-  request: NextApiRequest,
-  response: NextApiResponse<{
-    siteCatalogProducts: SiteCatalogProducts;
-  }>,
-) => {
+export default async (request: NextApiRequest, response: NextApiResponse) => {
   backendBootstrap({ request });
   const { make, model, year, ...rest } = request.query;
 
