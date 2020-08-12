@@ -260,7 +260,7 @@ function TopPicks({
         }
       },
     },
-    slideToClickedSlide: true,
+    shortSwipes: false,
   };
 
   const currentOeModal = picks[currentIndex]
