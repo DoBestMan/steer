@@ -36,7 +36,7 @@ function Reviews({
         <div css={styles.header}>
           <div css={styles.titleContainer}>
             <div css={styles.title}>{title}</div>
-            {hasSources && (
+            {!!hasSources && (
               <span css={styles.sources}>
                 {!!sources?.simpleTire && (
                   <span css={styles.source}>

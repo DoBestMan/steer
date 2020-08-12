@@ -55,9 +55,9 @@ function Reviews({
         <div css={styles.container}>
           <div css={styles.titleContainer}>
             <div css={styles.title}>{title}</div>
-            {hasSources && (
+            {!!hasSources && (
               <span css={styles.sources}>
-                {sources?.simpleTire && (
+                {!!sources?.simpleTire && (
                   <span css={styles.source}>
                     {uiJSX('reviews.simpleTire.name', {
                       number: sources.simpleTire,
@@ -69,7 +69,7 @@ function Reviews({
                     })}
                   </span>
                 )}
-                {sources?.googleShopping && (
+                {!!sources?.googleShopping && (
                   <span css={styles.source}>
                     {uiJSX('reviews.google.name', {
                       number: sources?.googleShopping,
