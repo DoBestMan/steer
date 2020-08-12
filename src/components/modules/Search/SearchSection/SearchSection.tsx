@@ -52,8 +52,10 @@ function SearchSection({
   };
 
   useEffect(() => {
-    onFocus(selectedItemIndex[1])();
-  }, [onFocus, selectedItemIndex]);
+    if (sectionIndex === selectedItemIndex[0]) {
+      onFocus(selectedItemIndex[1])();
+    }
+  }, [onFocus, sectionIndex, selectedItemIndex]);
 
   return (
     <Grid css={styles.container}>
