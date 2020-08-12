@@ -35,7 +35,13 @@ export function getProductDisplayImages(
     productImageType: PRODUCT_IMAGE_TYPES;
   }>,
 ) {
-  const imageTypes = imageList.map((image) => image.productImageType);
+  const imageTypes = imageList
+    .map((image) => image.productImageType)
+    .filter(
+      (imageType) =>
+        imageType === PRODUCT_IMAGE_TYPES.SIDETREAD ||
+        imageType === PRODUCT_IMAGE_TYPES.SIDEWALL,
+    );
   const randomImageType = imageTypes[getRandomInteger(0, imageTypes.length)];
   const hoverImageType = imageTypes.find((type) => type !== randomImageType);
   return {

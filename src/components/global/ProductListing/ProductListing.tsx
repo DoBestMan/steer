@@ -49,8 +49,7 @@ function ProductListing({
 
   const hoveredImage =
     imageList.find((image) => image.productImageType === displayImages.hover) ||
-    imageList[1] ||
-    imageList[0];
+    standardImage;
 
   const displayedImage = isHovered ? hoveredImage : standardImage;
 

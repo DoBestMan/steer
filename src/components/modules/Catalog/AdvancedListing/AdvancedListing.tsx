@@ -95,6 +95,7 @@ function AdvancedListing({
             <div css={styles.brand}>
               <BrandLogoOrLabel
                 brand={brand}
+                customContainerStyles={{ width: '100%', height: '100%' }}
                 customLabelStyles={styles.brandLabel}
                 widths={[200, 400, 600]}
               />
