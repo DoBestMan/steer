@@ -4,6 +4,7 @@ import { getDiameterCategory } from '~/components/pages/CatalogPage/CatalogPage.
 import { SiteCatalogProducts } from '~/data/models/SiteCatalogProducts';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
 import { backendGetTireSizeDiameterProducts } from '~/lib/backend/catalog/size-diameter';
+import { isProductionDeploy } from '~/lib/utils/deploy';
 import { getStringifiedParams } from '~/lib/utils/routes';
 import {
   removeInchFromQueryParam,
@@ -31,5 +32,10 @@ export default async (
     category: removeTireFromQueryParam(category),
     diameter: removeInchFromQueryParam(diameter),
   });
+
+  if (isProductionDeploy()) {
+    response.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
+  }
+
   response.json(productsRes);
 };

@@ -3,6 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { SiteCatalogSummary } from '~/data/models/SiteCatalogSummary';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
 import { backendGetTireSizeClassicSummary } from '~/lib/backend/catalog/size-classic';
+import { isProductionDeploy } from '~/lib/utils/deploy';
 import { getStringifiedParams } from '~/lib/utils/routes';
 
 export default async (
@@ -24,5 +25,10 @@ export default async (
     query: getStringifiedParams(rest),
     size,
   });
+
+  if (isProductionDeploy()) {
+    response.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
+  }
+
   response.json(summaryRes);
 };

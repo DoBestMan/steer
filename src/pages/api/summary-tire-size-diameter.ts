@@ -4,6 +4,7 @@ import { getDiameterCategory } from '~/components/pages/CatalogPage/CatalogPage.
 import { SiteCatalogSummary } from '~/data/models/SiteCatalogSummary';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
 import { backendGetTireSizeDiameterSummary } from '~/lib/backend/catalog/size-diameter';
+import { isProductionDeploy } from '~/lib/utils/deploy';
 import { getStringifiedParams } from '~/lib/utils/routes';
 
 export default async (
@@ -27,5 +28,10 @@ export default async (
     category,
     diameter,
   });
+
+  if (isProductionDeploy()) {
+    response.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
+  }
+
   response.json(summaryRes);
 };

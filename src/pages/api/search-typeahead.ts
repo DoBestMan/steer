@@ -4,6 +4,7 @@ import { ListResultMetadata } from '~/data/models/ListResultMetadata';
 import { SiteSearchResultGroup } from '~/data/models/SiteSearchResultGroup';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
 import { backendGetSiteSearch } from '~/lib/backend/site-search';
+import { isProductionDeploy } from '~/lib/utils/deploy';
 
 export default async (
   request: NextApiRequest,
@@ -30,10 +31,9 @@ export default async (
     queryType,
   });
 
-  response.setHeader(
-    'Cache-Control',
-    'public, s-maxage=60, stale-while-revalidate',
-  );
+  if (isProductionDeploy()) {
+    response.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate');
+  }
 
   response.json(siteSearch);
 };

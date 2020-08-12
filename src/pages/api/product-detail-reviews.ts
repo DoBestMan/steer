@@ -3,6 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { SiteProductReviews } from '~/data/models/SiteProductReviews';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
 import { backendGetProductReviews } from '~/lib/backend/product-detail';
+import { isProductionDeploy } from '~/lib/utils/deploy';
 import { getStringifiedParams } from '~/lib/utils/routes';
 import { removeTireFromQueryParam } from '~/lib/utils/string';
 
@@ -22,6 +23,10 @@ export default async (
   });
 
   if (siteProductReviewsResponse.isSuccess) {
+    if (isProductionDeploy()) {
+      response.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
+    }
+
     response.json(siteProductReviewsResponse.data);
     return;
   }
