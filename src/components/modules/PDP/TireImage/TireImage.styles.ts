@@ -1,4 +1,3 @@
-import { FULLSCREEN_PADDINGS as MODAL_PADDINGS } from '~/components/global/Modal/Modal.styles';
 import {
   BORDERS,
   COLORS,
@@ -11,7 +10,7 @@ import {
 } from '~/lib/constants';
 import { ratioToPercentage } from '~/lib/utils/number';
 
-const CONSTANTS = {
+export const CONSTANTS = {
   HEADER_HEIGHT: 75,
   THUMB_INNER_PADDINGS: {
     S: SPACING.SIZE_05,
@@ -96,8 +95,6 @@ const styles: StylesMap = {
     /* eslint-enable sort-keys */
   },
   containerFullScreen: {
-    height: `calc(100vh -  ${CONSTANTS.HEADER_HEIGHT}px - ${MODAL_PADDINGS.BOTTOM}px - ${MODAL_PADDINGS.TOP}px)`,
-
     /* eslint-disable sort-keys */
     '.swiper-container': {
       height: `calc(100% - ${CONSTANTS.THUMB_MARGIN}px - ${CONSTANTS.THUMB_SIZES.S}px)`,

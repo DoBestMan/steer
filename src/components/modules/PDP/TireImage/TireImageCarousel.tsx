@@ -4,6 +4,7 @@ import { SwiperInstance } from 'react-id-swiper';
 import Carousel from '~/components/global/Carousel/Carousel';
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
+import { FULLSCREEN_PADDINGS as MODAL_PADDINGS } from '~/components/global/Modal/Modal.styles';
 import {
   SiteCatalogProductImage,
   SiteCatalogProductImageTypeEnum,
@@ -17,7 +18,7 @@ import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { getWidthFromMaxHeight } from '~/lib/utils/number';
 import { ui } from '~/lib/utils/ui-dictionary';
 
-import styles from './TireImage.styles';
+import styles, { CONSTANTS } from './TireImage.styles';
 import TireImageCarouselItem from './TireImageCarouselItem';
 import TireImageThumbs from './TireImageThumbs';
 
@@ -170,8 +171,18 @@ function TireImageCarousel({
     ? Math.round(wrapperRect?.height * 1.125)
     : undefined;
 
+  // Can't use 100vh in this calculation as it doesn't take into
+  // account the bottom bar in mobile Safari.
+  const containerHeight = `calc(${windowHeight}px -  ${CONSTANTS.HEADER_HEIGHT}px - ${MODAL_PADDINGS.BOTTOM}px - ${MODAL_PADDINGS.TOP}px)`;
+
   return (
-    <div css={[styles.container, isFullscreen && styles.containerFullScreen]}>
+    <div
+      css={[
+        styles.container,
+        isFullscreen && { height: containerHeight },
+        isFullscreen && styles.containerFullScreen,
+      ]}
+    >
       <Carousel
         centerActiveSlide
         params={{
