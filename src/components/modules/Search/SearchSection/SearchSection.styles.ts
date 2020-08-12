@@ -21,6 +21,7 @@ const styles: StylesMap = {
       links.darkHighlighted,
       links.borderless,
       {
+        display: 'inline-block',
         [MQ.M]: typography.primaryHeadline,
       },
     ],
