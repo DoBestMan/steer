@@ -182,6 +182,12 @@ export function useSearchResults() {
     abortController.current = new AbortController();
   }, []);
 
+  const abortSearchRequest = () => {
+    abortController.current?.abort();
+    abortController.current = new AbortController();
+    isRequestInProgress.current = false;
+  };
+
   const searchQuery = useCallback(
     async function ({
       additionalQueryText,
@@ -189,9 +195,7 @@ export function useSearchResults() {
       queryType,
     }: SearchDataParams) {
       if (isRequestInProgress.current) {
-        abortController.current?.abort();
-        abortController.current = new AbortController();
-        isRequestInProgress.current = false;
+        abortSearchRequest();
       }
 
       setHasSearchResultsError(false);
@@ -232,6 +236,7 @@ export function useSearchResults() {
 
   const clearSearchResults = useCallback(
     function () {
+      abortSearchRequest();
       setSearchResults(emptyResult);
     },
     [setSearchResults],

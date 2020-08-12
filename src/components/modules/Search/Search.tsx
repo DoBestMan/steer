@@ -147,7 +147,10 @@ function Search({
       delayedSearch({ queryText: input, queryType: currentInputQueryType });
     } else {
       // No need to hit the API when there's no queryType or queryText
-      clearSearchResults();
+      // Delay it so that the timing aligns with delayedSearch
+      setTimeout(() => {
+        clearSearchResults();
+      }, CONSTANTS.DEBOUNCE_DELAY);
     }
   };
 
