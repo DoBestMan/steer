@@ -11,6 +11,7 @@ import { useApiDataWithDefault } from '~/hooks/useApiDataWithDefault';
 import { TIME } from '~/lib/constants';
 import { eventEmitters } from '~/lib/events/emitters';
 import { fetch } from '~/lib/fetch';
+import { AsyncResponse } from '~/lib/fetch/index.types';
 import { getParam, getStringifiedParams } from '~/lib/utils/routes';
 
 import CatalogPage from './CatalogPage';
@@ -198,17 +199,23 @@ function CatalogPageContainer({
         });
       }
 
-      const { siteCatalogProducts: previewedData } = await fetch({
+      const previewedRes: AsyncResponse<{
+        siteCatalogProducts: SiteCatalogProducts;
+      }> = await fetch({
         endpoint: endpoints.products,
         includeUserRegion: true,
         includeUserZip: true,
         method: 'get',
         query: { ...filters, ...pageParams },
       });
-      setPreviewFiltersData({
-        totalMatches: previewedData.listResultMetadata.pagination?.total || 0,
-        filters: previewedData.siteCatalogFilters,
-      });
+      if (previewedRes.isSuccess) {
+        setPreviewFiltersData({
+          totalMatches:
+            previewedRes.data.siteCatalogProducts.listResultMetadata.pagination
+              ?.total || 0,
+          filters: previewedRes.data.siteCatalogProducts.siteCatalogFilters,
+        });
+      }
     },
     [siteCatalogProducts, endpoints.products, pageParams],
   );
