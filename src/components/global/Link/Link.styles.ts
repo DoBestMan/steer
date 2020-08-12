@@ -56,7 +56,10 @@ const styles: StylesMap = {
     minHeight: 30,
     minWidth: 30,
   },
-  link: helpers.inheritBorder,
+  link: {
+    ...helpers.inheritBorder,
+    display: 'inline-block',
+  },
   linkBorderless: helpers.inheritFocusBorder,
   linkContainer: helpers.inheritBorderColor,
   root: {
