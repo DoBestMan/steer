@@ -6,6 +6,7 @@
 - [Data Fetching](./docs/DATA_FETCHING.md)
 - [Storybook](./docs/STORYBOOK.md)
 - [Testing](./docs/TESTING.md)
+- [Error Handling](./docs/ERROR_HANDLING.md)
 
 ## Installation
 
