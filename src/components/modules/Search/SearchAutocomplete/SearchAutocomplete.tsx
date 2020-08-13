@@ -91,6 +91,7 @@ function SearchAutocomplete({
   const secondaryInput = useRef<HTMLInputElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
+  const listRef = useRef<HTMLUListElement>(null);
   const {
     selectNextItemIndex,
     selectPrevItemIndex,
@@ -168,6 +169,20 @@ function SearchAutocomplete({
     const selectedItem =
       results[currentResultIndex].siteSearchResultList[currentResultItemIndex];
     onValueSelection(selectedItem);
+
+    const { action } = selectedItem;
+    if (action.type === SearchActionType.LINK && listRef.current) {
+      // This is gross, but we need to simulate a "click" on BaseLink so that
+      // the proper transition occurs.
+      const searchResultList = listRef.current.children[
+        currentResultIndex
+      ].querySelector('ul');
+      const searchResultItem = searchResultList?.children[
+        currentResultItemIndex
+      ].querySelector('a');
+
+      searchResultItem?.click();
+    }
   };
 
   const handleValueSelection = useCallback(
@@ -463,7 +478,7 @@ function SearchAutocomplete({
             ];
 
             return (
-              <ul css={animationStyles}>
+              <ul css={animationStyles} ref={listRef}>
                 {results.map((searchGroup: SiteSearchResultGroup, index) => {
                   // We can assume that all items in the list have the same type.
                   const isCarousel =
