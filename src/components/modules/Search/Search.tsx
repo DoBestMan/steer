@@ -159,7 +159,7 @@ function Search({
 
     const resetQuery = {
       queryText: '',
-      queryType: searchState ? SearchStateQueryType[searchState] : '',
+      queryType: '',
     };
 
     if (hasLockedSearchState) {
@@ -170,18 +170,8 @@ function Search({
       return;
     }
 
-    if (!queryText) {
-      // Reset the search category when search cleared with no query
-      onSetSearchState('');
-      resetQuery.queryType = '';
-    } else if (searchState) {
-      onSearchQuery(resetQuery);
-    }
-
-    if (!searchState || !queryText) {
-      clearSearchResults();
-    }
-
+    clearSearchResults();
+    onSetSearchState('');
     setCurrentInputQuery(resetQuery);
   };
 
