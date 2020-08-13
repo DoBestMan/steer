@@ -5,8 +5,6 @@ import Swiper, {
   SwiperInstance,
 } from 'react-id-swiper';
 
-import SwiperStyles from '~/components/global/Carousel/SwiperStyles';
-
 export interface Props extends ReactIdSwiperProps {
   activeSlide?: number;
   centerActiveSlide?: boolean;
@@ -56,12 +54,9 @@ function Carousel({
   }, [swiper, getSwiper]);
 
   return (
-    <>
-      <SwiperStyles />
-      <Swiper getSwiper={setSwiper} {...finalParams} {...rest}>
-        {children}
-      </Swiper>
-    </>
+    <Swiper getSwiper={setSwiper} {...finalParams} {...rest}>
+      {children}
+    </Swiper>
   );
 }
 
