@@ -122,6 +122,7 @@ function PDPActionBar({
             <Icon name={ICONS.CHEVRON_DOWN} css={styles.dropdownIcon} />
           </Button>
           <Button
+            data-testid="add-to-cart"
             onClick={handleClickAddToCart}
             theme={theme}
             css={styles.addToCart}
@@ -155,7 +156,11 @@ function PDPActionBar({
     <>
       {!!price && (
         <div css={styles.root}>
-          <Button onClick={handleClickAddToCart} theme={theme}>
+          <Button
+            data-testid="add-to-cart"
+            onClick={handleClickAddToCart}
+            theme={theme}
+          >
             {ui('pdp.stickyBar.addToCart', {
               value: formatDollars(price),
             })}

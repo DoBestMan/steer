@@ -92,7 +92,7 @@ function RoadHazardModal({
       onClose={onClose}
       onBack={shouldIntercept ? handleBack : undefined}
     >
-      <div css={modalContainerStyles.container}>
+      <div data-testid="road-hazard-modal" css={modalContainerStyles.container}>
         <FeaturedInfoModule
           copy={ui(
             shouldIntercept
@@ -155,6 +155,7 @@ function RoadHazardModal({
           {!shouldIntercept ? (
             <Button
               css={styles.button}
+              data-testid="road-hazard-continue"
               onClick={handleConfirm}
               theme={THEME.LIGHT}
             >
@@ -164,6 +165,7 @@ function RoadHazardModal({
             <>
               <Button
                 css={styles.button}
+                data-testid="add-coverage"
                 onClick={function () {
                   handleIntercepAction(CONSTANTS.HAS_COVERAGE);
                 }}
@@ -173,6 +175,7 @@ function RoadHazardModal({
               </Button>
               <Button
                 css={styles.button}
+                data-testid="no-coverage"
                 onClick={function () {
                   handleIntercepAction(CONSTANTS.NO_COVERAGE);
                 }}
