@@ -89,4 +89,12 @@ function MySimplePage(props: Props) {
 - On **initial visit**, the server calls `MyApp.getInitialProps`.\*
 - On **client-side navigation**, the client calls `MyApp.getInitialProps`. We can check for this and avoid fetching data.
 
-\*⚠️ Without `MyApp.getInitialProps`, this page would have been automatically statically optimized. But that's OK, because we can manually make pages static by exporting a `getStaticProps` function (even an empty one!).
+\*⚠️ Without `MyApp.getInitialProps`, this page would have been automatically statically optimized. But that's OK, because we can manually make pages static by exporting a `getStaticProps` function (even an empty one!):
+
+```javascript
+export function getStaticProps() {
+  return {
+    props: {},
+  };
+}
+```

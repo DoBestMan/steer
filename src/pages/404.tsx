@@ -11,4 +11,12 @@ function NotFoundPage() {
   );
 }
 
+// Empty `getStaticProps` forces this page to be static
+// https://github.com/SimpleTire/steer/blob/dev/docs/DATA_FETCHING.md#pages-without-fetches
+export function getStaticProps() {
+  return {
+    props: {},
+  };
+}
+
 export default NotFoundPage;
