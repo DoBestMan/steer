@@ -5,6 +5,7 @@ import { ui } from '../utils/ui-dictionary';
 
 export enum ROUTES {
   ABOUT = 'about',
+  ADVOCATE_DASHBOARD = 'advocateDashboard',
   BRAND_CATEGORY = 'brandCategory',
   BRAND_DETAIL = 'brandDetail',
   BRAND_LANDING = 'brandLanding',
@@ -19,6 +20,7 @@ export enum ROUTES {
   FINANCING = 'financing',
   FREE_SHIPPING = 'freeShipping',
   HOME = 'home',
+  INVITE = 'invite',
   LEARN = 'learn',
   MILITARY_DISCOUNT = 'militaryDiscount',
   OPEN_TEMPLATE = 'openTemplate',
@@ -70,7 +72,9 @@ export const ROUTE_TYPE_MAP: { [routeName: string]: string } = {
   [ROUTES.TYPE_REVIEWS]: '/types/[type]/reviews',
   [ROUTES.VEHICLE_CATALOG]: '/vehicles/[make]/[model]/[year]',
   [ROUTES.TIRE_SIZE_CATALOG_OR_CATEGORY]: '/tire-sizes/[size]',
+  [ROUTES.ADVOCATE_DASHBOARD]: '/advocate-dashboard',
   [ROUTES.CUSTOMER_SUPPORT]: '/contact',
+  [ROUTES.INVITE]: '/invite',
   [ROUTES.DEALS]: '/tire-deals',
   [ROUTES.ORDER_TRACKING_RESULT]: '/track-your-order/result',
   [ROUTES.ORDER_TRACKING]: '/track-your-order',
