@@ -16,4 +16,4 @@ export const email = /\b[\w.-]+@[\w.-]+\.\w{2,4}\b/;
 export const absoluteUrlGroups = /\/([\w\-.[\]]*)/;
 export const diameterFormat = /([\d]*)-(inch)-([a-zA-Z]*)-(tires)/;
 
-export const validBrandQuery = /^[\w-]+(-tires)$/;
+export const validBrandQuery = /^.+(-tires)$/;

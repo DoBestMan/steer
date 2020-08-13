@@ -94,6 +94,24 @@ describe('utils/routes', () => {
         response: mockResponse,
       });
 
+      validateOrRedirectToNotFound({
+        param: 'jk-tyre-tires',
+        pattern: validBrandQuery,
+        response: mockResponse,
+      });
+
+      validateOrRedirectToNotFound({
+        param: 'friendly-tires-tires',
+        pattern: validBrandQuery,
+        response: mockResponse,
+      });
+
+      validateOrRedirectToNotFound({
+        param: 'special-character%20 +.~-tires',
+        pattern: validBrandQuery,
+        response: mockResponse,
+      });
+
       expect(mockSetHeader.mock.calls.length).toBe(0);
       expect(mockResponse.statusCode).toBe(200);
     });
