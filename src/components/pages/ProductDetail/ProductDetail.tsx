@@ -5,6 +5,7 @@ import Breadcrumbs from '~/components/global/Breadcrumbs/Breadcrumbs';
 import DataStructure from '~/components/global/DataStructure/DataStructure';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
+import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Link from '~/components/global/Link/Link';
 import Meta from '~/components/global/Meta/Meta';
 import LocationModal from '~/components/modules/Location/LocationModal/LocationModal';
@@ -16,7 +17,7 @@ import PurchaseIncludes from '~/components/modules/PDP/PurchaseIncludes/Purchase
 import ShopWithConfidence from '~/components/modules/PDP/ShopWithConfidence/ShopWithConfidence';
 import TireImage from '~/components/modules/PDP/TireImage/TireImage';
 import { useModalContext } from '~/context/Modal.context';
-import { THEME } from '~/lib/constants';
+import { LINK_THEME } from '~/lib/constants';
 
 import useExperimentPLA from './experiments/useExperimentPLA';
 import useProductDetail from './ProductDetail.hooks';
@@ -100,24 +101,24 @@ function ProductDetail({ serverData }: ProductDetailData) {
           gridRowL="1/4"
           css={styles.productInfo}
         >
-          <div ref={stickyBarAvoidSection}>
-            <Grid>
-              <GridItem fullbleedL>
+          <Grid>
+            <GridItem fullbleedL>
+              <div ref={stickyBarAvoidSection}>
                 <ProductInfo
                   sizeFinder={sizeFinder}
                   openDynamicModal={openDynamicModal}
                   {...productInfo}
                 />
-              </GridItem>
-              <GridItem fullbleed css={styles.insights}>
-                <Insights
-                  {...insights}
-                  handleChangeLocation={toggleModal}
-                  openDynamicModal={openDynamicModal}
-                />
-              </GridItem>
-            </Grid>
-          </div>
+              </div>
+            </GridItem>
+            <GridItem fullbleed css={styles.insights}>
+              <Insights
+                {...insights}
+                handleChangeLocation={toggleModal}
+                openDynamicModal={openDynamicModal}
+              />
+            </GridItem>
+          </Grid>
         </GridItem>
         {positionCuration1 && recirculation && (
           <>
@@ -181,19 +182,6 @@ function ProductDetail({ serverData }: ProductDetailData) {
             <FAQ {...faq} />
           </div>
         </GridItem>
-        {recirculation?.length &&
-          recirculation.slice(isPLA ? 1 : 0).map((item) => (
-            <GridItem fullbleed css={styles.recirculation} key={item.id}>
-              <DynamicProductGroupList {...item} />
-            </GridItem>
-          ))}
-        <GridItem css={styles.recirculationSize}>
-          {recirculationSize && (
-            <Link href={recirculationSize.url} theme={THEME.LIGHT}>
-              {recirculationSize.label}
-            </Link>
-          )}
-        </GridItem>
         {stickyBar && (
           <GridItem fullbleed css={styles.stickyBar}>
             <DynamicPDPStickyBar
@@ -204,6 +192,27 @@ function ProductDetail({ serverData }: ProductDetailData) {
           </GridItem>
         )}
       </Grid>
+      {recirculation?.length && (
+        <Grid css={styles.recirculationContainer}>
+          {recirculation.slice(isPLA ? 1 : 0).map((item) => (
+            <GridItem fullbleed css={styles.recirculation} key={item.id}>
+              <DynamicProductGroupList {...item} />
+            </GridItem>
+          ))}
+          {recirculationSize && (
+            <GridItem css={styles.recirculationSize}>
+              <Link
+                css={styles.recirculationSizeLink}
+                href={recirculationSize.url}
+                theme={LINK_THEME.LIGHT_HIGHLIGHTED}
+                icon={ICONS.CHEVRON_RIGHT}
+              >
+                {recirculationSize.label}
+              </Link>
+            </GridItem>
+          )}
+        </Grid>
+      )}
 
       <LocationModal isOpen={isLocationModalOpen} onClose={toggleModal} />
     </>

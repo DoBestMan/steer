@@ -91,6 +91,7 @@ const styles: StylesMap = {
   container: {
     borderTop: BORDERS.SOLID_BLACK_1PX,
     display: 'flex',
+    height: STICKY_BAR_HEIGHT.S,
     justifyContent: 'space-between',
     paddingBottom: `calc(${SIDE_MARGIN.S}px + env(safe-area-inset-bottom) / 2)`,
     paddingLeft: SIDE_MARGIN.S,

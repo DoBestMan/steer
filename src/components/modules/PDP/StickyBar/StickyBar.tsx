@@ -113,7 +113,7 @@ function PDPStickyBar({
       },
       {
         threshold: [0, 1],
-        rootMargin: `-100% 0% ${STICKY_BAR_HEIGHT.L}px 0%`,
+        rootMargin: `100% 0% -${STICKY_BAR_HEIGHT.L}px 0%`,
       },
     );
 
