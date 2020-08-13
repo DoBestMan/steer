@@ -1,22 +1,31 @@
 import Carousel from '~/components/global/Carousel/Carousel';
+import Grid from '~/components/global/Grid/Grid';
+import GridItem from '~/components/global/Grid/GridItem';
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Link from '~/components/global/Link/Link';
 import Markdown from '~/components/global/Markdown/Markdown';
-import { THEME } from '~/lib/constants';
+import { BREAKPOINTS, THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import { statsMock } from './ShopWithConfidence.mock';
 import styles from './ShopWithConfidence.styles';
 
 const carouselParams = {
-  spaceBetween: 30,
+  breakpoints: {
+    [BREAKPOINTS.S]: {
+      spaceBetween: 40,
+    },
+    [BREAKPOINTS.M]: {
+      spaceBetween: 60,
+    },
+  },
 };
 
 function ShopWithConfidence() {
   return (
-    <div>
-      <div css={styles.heading}>
+    <Grid>
+      <GridItem gridColumnL="3/end" css={styles.heading}>
         <h3 css={styles.title}>
           {ui('pdp.shopWithConfidence.title')}
 
@@ -32,9 +41,9 @@ function ShopWithConfidence() {
         >
           {ui('pdp.shopWithConfidence.linkLabel')}
         </Link>
-      </div>
+      </GridItem>
 
-      <div css={styles.carouselContainer}>
+      <GridItem fullbleed css={styles.carouselContainer}>
         <Carousel {...carouselParams}>
           {statsMock.map((item) => (
             <div key={item.heading}>
@@ -47,8 +56,8 @@ function ShopWithConfidence() {
             </div>
           ))}
         </Carousel>
-      </div>
-    </div>
+      </GridItem>
+    </Grid>
   );
 }
 

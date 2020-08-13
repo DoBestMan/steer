@@ -1,17 +1,72 @@
-import { COLORS, MQ, RADIUS, SPACING, StylesMap } from '~/lib/constants';
+import {
+  COLORS,
+  GRID_MARGIN,
+  MQ,
+  RADIUS,
+  SPACING,
+  StylesMap,
+} from '~/lib/constants';
+import { getColumnsCalc } from '~/lib/utils/grid';
 import { typography } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
   carouselContainer: {
     '.swiper-slide': {
-      flex: '0 1 auto',
-      minWidth: 'auto',
+      '&:first-of-type': {
+        marginLeft: GRID_MARGIN.S,
 
-      [MQ.L]: {
-        '&:not(:last-of-type)': {
-          marginRight: SPACING.SIZE_90,
+        [MQ.M]: {
+          maxWidth: 'none',
+          marginLeft: GRID_MARGIN.M,
+        },
+
+        [MQ.L]: {
+          marginLeft: getColumnsCalc({
+            breakpoint: 'L',
+            columns: 1,
+            includeExtraGutter: true,
+            includeContainerMargin: true,
+          }),
+        },
+
+        [MQ.XL]: {
+          marginLeft: getColumnsCalc({
+            breakpoint: 'XL',
+            columns: 1,
+            includeExtraGutter: true,
+            includeContainerMargin: true,
+          }),
         },
       },
+
+      '&:last-of-type': {
+        marginRight: GRID_MARGIN.S,
+
+        [MQ.M]: {
+          marginRight: GRID_MARGIN.M,
+        },
+
+        [MQ.L]: {
+          marginRight: getColumnsCalc({
+            breakpoint: 'L',
+            columns: 1,
+            includeExtraGutter: true,
+            includeContainerMargin: true,
+          }),
+        },
+
+        [MQ.XL]: {
+          marginRight: getColumnsCalc({
+            breakpoint: 'XL',
+            columns: 1,
+            includeExtraGutter: true,
+            includeContainerMargin: true,
+          }),
+        },
+      },
+
+      maxWidth: 150,
+      width: 'unset',
     },
   },
   checkmark: {
@@ -55,7 +110,6 @@ const styles: StylesMap = {
       color: COLORS.LIGHT.GRAY_70,
       display: 'block',
       lineHeight: 1.25,
-      whiteSpace: 'nowrap',
 
       [MQ.L]: typography.bodyCopyTight,
     },

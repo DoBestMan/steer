@@ -150,7 +150,7 @@ function ProductDetail({ serverData }: ProductDetailData) {
         <GridItem fullbleed css={styles.purchaseIncludes}>
           <PurchaseIncludes openStaticModal={openStaticModal} />
         </GridItem>
-        <GridItem gridColumnL="3/13" css={styles.shopWithConfidence}>
+        <GridItem fullbleed css={styles.shopWithConfidence}>
           <ShopWithConfidence />
         </GridItem>
         {positionCuration0 && recirculation && (

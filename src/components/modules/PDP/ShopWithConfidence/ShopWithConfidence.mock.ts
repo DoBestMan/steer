@@ -1,22 +1,22 @@
 export const statsMock = [
   {
     heading: '98%',
-    detail: 'of customers<br />approve',
+    detail: 'of customers approve',
   },
   {
     heading: 'Top 500',
-    detail: 'fastest growing <br /> company in US',
+    detail: 'fastest growing company in US',
   },
   {
     heading: '10,000+',
-    detail: 'certified<br />installers',
+    detail: 'certified installers',
   },
   {
     heading: '7,000+',
-    detail: 'local<br />distributors',
+    detail: 'local distributors',
   },
   {
-    heading: '5,000,000+',
-    detail: 'customers<br />served',
+    heading: '5M+',
+    detail: 'customers served',
   },
 ];
