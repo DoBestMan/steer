@@ -9,20 +9,20 @@ import { useSiteMenuContext } from '~/context/SiteMenu.context';
 import { SiteMenu } from '~/data/models/SiteMenu';
 import { ROUTE_MAP, ROUTES, THEME } from '~/lib/constants';
 import { mapPathnameToBreadcrumbs } from '~/lib/utils/breadcrumbs';
+import { getLegacyAccountURL } from '~/lib/utils/legacy-routes';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import styles from './Sitemap.styles';
 
 interface LinkShape {
   action: string;
+  isExternal?: boolean;
   text: string;
 }
 interface LinkList {
   links: LinkShape[];
   text: string;
 }
-
-const ST_BASE_URL = 'https://simpletire.com/';
 
 function getGlobalNavLinks(siteMenu: SiteMenu): Array<LinkList | LinkShape> {
   const learnLinks = siteMenu.siteMenuLearn.list.map((listItem) => ({
@@ -60,7 +60,8 @@ function getGlobalNavLinks(siteMenu: SiteMenu): Array<LinkList | LinkShape> {
     },
     {
       text: ui('links.account'),
-      action: `${ST_BASE_URL}/MyCustomers/account`,
+      action: getLegacyAccountURL(),
+      isExternal: true,
     },
     {
       text: ui('links.orderTracking'),
@@ -107,6 +108,7 @@ function Sitemap() {
                 </h2>
                 {sitemapLink.links.map((link, linkIdx) => (
                   <Link
+                    isExternal={link.isExternal}
                     css={styles.link}
                     theme={THEME.LIGHT}
                     key={linkIdx}
@@ -125,6 +127,7 @@ function Sitemap() {
                 css={styles.linkHeading}
                 theme={THEME.LIGHT}
                 href={sitemapLink.action}
+                isExternal={sitemapLink.isExternal}
               >
                 {sitemapLink.text}
               </Link>
