@@ -15,7 +15,7 @@ interface Props {
 
 function SearchSecondaryActions({
   onSetActiveModal,
-  onAddRearTire,
+  // onAddRearTire,
   searchState,
 }: Props) {
   const isVehicleState = searchState === SearchStateEnum.VEHICLE;
@@ -34,7 +34,8 @@ function SearchSecondaryActions({
           {ui('search.notSure')}
         </Link>
       )}
-      {isTireSizeState && (
+      {/* Note: temporaily removing this for ST MVP launch. */}
+      {/* {isTireSizeState && (
         <Link
           as={LINK_TYPES.BUTTON}
           css={[typography.smallCopy, styles.secondaryActionButton]}
@@ -43,7 +44,7 @@ function SearchSecondaryActions({
         >
           {ui('search.addRearTire')}
         </Link>
-      )}
+      )} */}
       {isVehicleState && (
         <Link
           as={LINK_TYPES.BUTTON}
