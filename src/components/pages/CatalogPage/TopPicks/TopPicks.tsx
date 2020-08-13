@@ -269,6 +269,97 @@ function TopPicks({
 
   const showMoreData = currentIndex === picks.length;
 
+  const carouselItems = picks.map((pick, i) => {
+    const {
+      product,
+      ctaLabel,
+      header,
+      fallbackImage,
+      siteCatalogSummaryTopPickItemAdditionalInfo,
+    } = pick;
+    const addVehicleInfo = product === null;
+
+    let asset = null,
+      brand = null,
+      deliveryInfo = null,
+      productFeature = null,
+      productName = null,
+      rating = null,
+      url = null,
+      priceList = null;
+
+    if (product) {
+      asset =
+        product.imageList.filter(
+          (img) => img.productImageType === PRODUCT_IMAGE_TYPES.SIDEWALL,
+        )[0]?.image || product.imageList[0].image;
+
+      brand = product.brand;
+      deliveryInfo = product.deliveryInfo;
+      priceList = product.priceList;
+      productFeature = product.topPicksAttribute;
+      productName = product.name;
+      rating = product.rating;
+      url = product.link.href;
+    } else if (fallbackImage) {
+      asset = fallbackImage;
+    }
+
+    const key = `${header.titleLine1}-${product?.name}`;
+
+    return (
+      <div css={styles.pick} key={key}>
+        <TopPicksItem
+          currentIndex={i}
+          addVehicleInfo={addVehicleInfo}
+          brand={brand}
+          ctaLabel={ctaLabel}
+          customerServiceNumber={customerServiceNumber}
+          header={header as TopPickItemsHeader}
+          asset={asset}
+          deliveryInfo={deliveryInfo}
+          index={i}
+          isCurrent={i === currentIndex}
+          location={location}
+          oeModal={siteCatalogSummaryTopPickItemAdditionalInfo}
+          priceList={priceList}
+          productFeature={productFeature}
+          productName={productName}
+          rating={rating}
+          totalResult={totalResult}
+          url={url}
+          show={show}
+          indexHovered={indexHovered}
+          onItemMouseEnter={onItemMouseEnter}
+          onItemMouseLeave={onItemMouseLeave}
+          openSearch={openSearch}
+          slideTo={slideTo}
+        />
+      </div>
+    );
+  });
+
+  if (viewMoreData) {
+    carouselItems.push(
+      <div css={styles.pick} key="view-more-pick">
+        <TopPicksItem
+          currentIndex={picks.length}
+          customerServiceNumber={customerServiceNumber}
+          viewMoreData={viewMoreData}
+          totalResult={totalResult}
+          exploreMore={exploreMore}
+          index={picks.length}
+          isCurrent={showMoreData}
+          show={show}
+          indexHovered={indexHovered}
+          onItemMouseEnter={onItemMouseEnter}
+          onItemMouseLeave={onItemMouseLeave}
+          slideTo={slideTo}
+        />
+      </div>,
+    );
+  }
+
   return (
     <div ref={rootRef} css={[styles.root, styles.rootIos]}>
       <div css={styles.titlesContainer}>
@@ -289,107 +380,22 @@ function TopPicks({
               />
             );
           })}
-          <Title
-            currentIndex={picks.length}
-            viewMoreData={viewMoreData}
-            isCurrent={
-              (indexHovered && indexHovered === picks.length) ||
-              (showMoreData && indexHovered === undefined)
-            }
-          />
+          {viewMoreData && (
+            <Title
+              currentIndex={picks.length}
+              viewMoreData={viewMoreData}
+              isCurrent={
+                (indexHovered && indexHovered === picks.length) ||
+                (showMoreData && indexHovered === undefined)
+              }
+            />
+          )}
         </div>
       </div>
 
       <div css={styles.carousel} id="top-picks-carousel">
         <Carousel params={params} getSwiper={setSwiper}>
-          {picks.map((pick, i) => {
-            const {
-              product,
-              ctaLabel,
-              header,
-              fallbackImage,
-              siteCatalogSummaryTopPickItemAdditionalInfo,
-            } = pick;
-            const addVehicleInfo = product === null;
-
-            let asset = null,
-              brand = null,
-              deliveryInfo = null,
-              productFeature = null,
-              productName = null,
-              rating = null,
-              url = null,
-              priceList = null;
-
-            if (product) {
-              asset =
-                product.imageList.filter(
-                  (img) =>
-                    img.productImageType === PRODUCT_IMAGE_TYPES.SIDEWALL,
-                )[0]?.image || product.imageList[0].image;
-
-              brand = product.brand;
-              deliveryInfo = product.deliveryInfo;
-              priceList = product.priceList;
-              productFeature = product.topPicksAttribute;
-              productName = product.name;
-              rating = product.rating;
-              url = product.link.href;
-            } else if (fallbackImage) {
-              asset = fallbackImage;
-            }
-
-            const key = `${header.titleLine1}-${product?.name}`;
-
-            return (
-              <div css={styles.pick} key={key}>
-                <TopPicksItem
-                  currentIndex={i}
-                  addVehicleInfo={addVehicleInfo}
-                  brand={brand}
-                  ctaLabel={ctaLabel}
-                  customerServiceNumber={customerServiceNumber}
-                  header={header as TopPickItemsHeader}
-                  asset={asset}
-                  deliveryInfo={deliveryInfo}
-                  index={i}
-                  isCurrent={i === currentIndex}
-                  location={location}
-                  oeModal={siteCatalogSummaryTopPickItemAdditionalInfo}
-                  priceList={priceList}
-                  productFeature={productFeature}
-                  productName={productName}
-                  rating={rating}
-                  totalResult={totalResult}
-                  url={url}
-                  show={show}
-                  indexHovered={indexHovered}
-                  onItemMouseEnter={onItemMouseEnter}
-                  onItemMouseLeave={onItemMouseLeave}
-                  openSearch={openSearch}
-                  slideTo={slideTo}
-                />
-              </div>
-            );
-          })}
-
-          {/* Last one is view more */}
-          <div css={styles.pick}>
-            <TopPicksItem
-              currentIndex={picks.length}
-              customerServiceNumber={customerServiceNumber}
-              viewMoreData={viewMoreData}
-              totalResult={totalResult}
-              exploreMore={exploreMore}
-              index={picks.length}
-              isCurrent={showMoreData}
-              show={show}
-              indexHovered={indexHovered}
-              onItemMouseEnter={onItemMouseEnter}
-              onItemMouseLeave={onItemMouseLeave}
-              slideTo={slideTo}
-            />
-          </div>
+          {carouselItems}
         </Carousel>
       </div>
       <button type="button" css={styles.exploreButton} onClick={exploreMore}>
