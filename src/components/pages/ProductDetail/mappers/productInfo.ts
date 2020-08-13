@@ -7,6 +7,7 @@ import { SiteProductLineAvailableSizeItem } from '~/data/models/SiteProductLineA
 import { SiteProductLineSizeDetailProductStatusEnum } from '~/data/models/SiteProductLineSizeDetail';
 import { SiteProductReviews } from '~/data/models/SiteProductReviews';
 import { ROUTE_MAP, ROUTES } from '~/lib/constants';
+import { transformSrcLogoToBlack } from '~/lib/utils/cloudinary/cloudinary';
 import { interpolateRoute } from '~/lib/utils/routes';
 
 import { mapDataToRoadHazard } from './roadHazard';
@@ -110,7 +111,15 @@ export function mapDataToProductInfo({
 
   return {
     availableSizes,
-    brand: brandName,
+    brand: {
+      image:
+        (brandName.image && {
+          ...brandName.image,
+          src: transformSrcLogoToBlack(brandName.image.src),
+        }) ||
+        null,
+      label: brandName.label,
+    },
     brandURL,
     callForPricing,
     loadSpeedRating,

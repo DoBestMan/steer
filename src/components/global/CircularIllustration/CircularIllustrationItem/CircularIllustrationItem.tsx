@@ -37,7 +37,13 @@ function CircularIllustrationItem({
           </div>
         )}
         <div css={styles.circle}>
-          {brand && <BrandLogoOrLabel brand={brand} widths={[150, 200, 250]} />}
+          {brand && (
+            <BrandLogoOrLabel
+              brand={brand}
+              customContainerStyles={styles.logo}
+              widths={[150, 200, 250]}
+            />
+          )}
           {carId && !brand && <Car carId={carId} css={styles.car} />}
         </div>
       </div>

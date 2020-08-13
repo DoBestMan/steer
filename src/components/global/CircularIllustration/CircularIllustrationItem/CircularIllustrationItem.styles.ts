@@ -7,6 +7,8 @@ const CIRCLE_SIZES = {
   LARGE: 174,
 };
 
+const LOGO_WIDTH = 120;
+
 export const styles: StylesMap = {
   car: {
     '.SVGInline-svg': {
@@ -57,6 +59,9 @@ export const styles: StylesMap = {
       minHeight: 174,
       width: 195,
     },
+  },
+  logo: {
+    width: LOGO_WIDTH,
   },
   root: {
     position: 'relative',

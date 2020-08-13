@@ -2,6 +2,7 @@ import {
   BORDERS,
   COLORS,
   MQ,
+  PRODUCT,
   SPACING,
   StylesMap,
   Z_INDEX,
@@ -21,8 +22,6 @@ const IMAGE_SIZE = {
   },
 };
 
-const BRAND_IMAGE_HEIGHT = 20;
-
 const styles: StylesMap = {
   attribute: [
     typography.tertiaryHeadline,
@@ -33,19 +32,11 @@ const styles: StylesMap = {
   brand: {
     marginBottom: SPACING.SIZE_15,
   },
-  brandImage: {
-    img: {
-      height: BRAND_IMAGE_HEIGHT,
-      margin: '0 auto',
-      width: 'auto',
-    },
-  },
   brandLabel: [
     typography.largeCopy,
-
     {
       fontWeight: 'bold',
-      lineHeight: `${BRAND_IMAGE_HEIGHT}px`,
+      lineHeight: `${PRODUCT.BRAND_IMAGE_HEIGHT}px`,
 
       [MQ.XL]: {
         fontSize: `${22 / 10}rem`,

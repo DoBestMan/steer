@@ -3,6 +3,7 @@ import {
   COLORS,
   EASING,
   MQ,
+  PRODUCT,
   SPACING,
   StylesMap,
   TIME,
@@ -15,8 +16,6 @@ import {
 } from '../TopPicks.styles';
 
 const HEIGHT_BUTTON = 50;
-
-const BRAND_IMAGE_HEIGHT = 20;
 
 const BRAND_LABEL_FONT_SIZE = `${18 / 10}rem`;
 
@@ -91,21 +90,19 @@ export const styles: StylesMap = {
       transition: `margin-top ${TIME.MS300}ms ${EASING.CUBIC_EASE_OUT}`,
     },
   },
-
   bottomContentCurrent: {
     [MQ.L]: {
       marginTop: 0,
     },
   },
-
   brand: {
     color: COLORS.GLOBAL.WHITE,
-    display: 'block',
+    marginBottom: SPACING.SIZE_20,
   },
   brandLabel: {
     fontSize: BRAND_LABEL_FONT_SIZE,
     fontWeight: 'bold',
-    lineHeight: `${BRAND_IMAGE_HEIGHT}px`,
+    lineHeight: `${PRODUCT.BRAND_IMAGE_HEIGHT}px`,
     [MQ.M]: {
       fontSize: BRAND_LABEL_FONT_SIZE,
     },
@@ -114,16 +111,6 @@ export const styles: StylesMap = {
     },
     [MQ.XL]: {
       fontSize: `${22 / 10}rem`,
-    },
-  },
-  brandWithImage: {
-    height: 20,
-    width: '100%',
-
-    img: {
-      height: '100%',
-      margin: '0 auto',
-      width: 'auto',
     },
   },
   cta: {

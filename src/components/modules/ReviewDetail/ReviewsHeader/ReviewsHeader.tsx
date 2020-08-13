@@ -14,7 +14,7 @@ import RatingsList from '~/components/global/RatingsList/RatingsList';
 import StarsWithRating from '~/components/global/Stars/StarsWithRating';
 import { SiteCatalogBrand } from '~/data/models/SiteCatalogBrand';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
-import { THEME } from '~/lib/constants';
+import { PRODUCT, THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import styles from './ReviewsHeader.styles';
@@ -48,11 +48,7 @@ function ReviewsHeader({
       </GridItem>
       <GridItem gridColumnM="2/6" gridColumnL="3/9" gridColumnXL="4/9">
         <BaseLink href={brandUrl} css={styles.brand}>
-          <BrandLogoOrLabel
-            brand={brand}
-            customContainerStyles={styles.brandImage}
-            widths={[200, 400, 600]}
-          />
+          <BrandLogoOrLabel brand={brand} widths={PRODUCT.BRAND_IMAGE_WIDTHS} />
         </BaseLink>
         <p css={styles.title}>{ui('reviews.tireReviews', { tire })}</p>
         <StarsWithRating

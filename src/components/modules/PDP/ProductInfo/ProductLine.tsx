@@ -12,11 +12,7 @@ function ProductLine({
   return (
     <>
       <a href={brandURL} css={styles.brand}>
-        <BrandLogoOrLabel
-          brand={brand}
-          customContainerStyles={styles.brandImage}
-          widths={[200, 400, 600]}
-        />
+        <BrandLogoOrLabel brand={brand} widths={PRODUCT.BRAND_IMAGE_WIDTHS} />
       </a>
       <h1
         css={[

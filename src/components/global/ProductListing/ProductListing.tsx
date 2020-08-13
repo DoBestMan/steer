@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 
+import BrandLogoOrLabel from '~/components/global/BrandLogoOrLabel/BrandLogoOrLabel';
 import Image from '~/components/global/Image/Image';
 import BaseLink from '~/components/global/Link/BaseLink';
 import Prices from '~/components/global/Prices/Prices';
@@ -8,7 +9,7 @@ import Stars, { HALF_WIDTH_STARS } from '~/components/global/Stars/Stars';
 import Sticker from '~/components/global/Sticker/Sticker';
 import { STICKER_SIZES } from '~/components/global/Sticker/Sticker.styles';
 import { getProductDisplayImages } from '~/components/pages/CatalogPage/CatalogPage.utils';
-import { COLORS } from '~/lib/constants';
+import { COLORS, PRODUCT } from '~/lib/constants';
 import { SHADOW_SRC } from '~/lib/constants/image';
 import { getSquareImageTransformations } from '~/lib/utils/cloudinary/cloudinary';
 import { ui } from '~/lib/utils/ui-dictionary';
@@ -118,16 +119,15 @@ function ProductListing({
         </div>
       </div>
       <div css={[styles.info, isHighlighted && styles.infoHighlighted]}>
-        {brand.image ? (
-          <div css={[styles.brand, styles.brandImage]}>
-            <Image
-              as="span"
-              src={brand.image.src}
-              altText={brand.image.altText}
+        {brand && (
+          <span css={[styles.brand]}>
+            <BrandLogoOrLabel
+              brand={brand}
+              widths={PRODUCT.BRAND_IMAGE_WIDTHS}
+              isCentered={!isHighlighted}
+              customLabelStyles={styles.brandLabel}
             />
-          </div>
-        ) : (
-          <span css={[styles.brand, styles.brandLabel]}>{brand.label}</span>
+          </span>
         )}
         <Prices priceList={priceList} isStartingAtPrice={!size} />
         {gridAttribute && <span css={styles.attribute}>{gridAttribute}</span>}

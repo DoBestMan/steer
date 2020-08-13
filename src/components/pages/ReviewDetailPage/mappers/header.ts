@@ -5,6 +5,7 @@ import { SiteProduct } from '~/data/models/SiteProduct';
 import { SiteProductReviews } from '~/data/models/SiteProductReviews';
 import { ROUTE_MAP, ROUTES } from '~/lib/constants';
 import { mapPathnameToBreadcrumbs } from '~/lib/utils/breadcrumbs';
+import { transformSrcLogoToBlack } from '~/lib/utils/cloudinary/cloudinary';
 import { interpolateRoute } from '~/lib/utils/routes';
 
 export function mapDataToHeader({
@@ -35,7 +36,15 @@ export function mapDataToHeader({
   });
 
   return {
-    brand,
+    brand: {
+      image:
+        (brand.image && {
+          ...brand.image,
+          src: transformSrcLogoToBlack(brand.image.src),
+        }) ||
+        null,
+      label: brand.label,
+    },
     brandUrl,
     breadcrumbs,
     ratings: performanceRating.ratingList,

@@ -4,14 +4,24 @@ import { SiteImageExtended } from '~/data/models/SiteImageExtended';
 import { CSSStylesProp } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
+import { styles } from './BrandLogoOrLabel.styles';
+
 // Provide extra props for <Image>
 interface Props extends SiteImageExtended {
   brand: SiteCatalogBrand;
   customLabelStyles?: CSSStylesProp;
+  isCentered?: boolean;
 }
 
 function BrandLogoOrLabel(props: Props) {
-  const { brand, customLabelStyles, widths, ...rest } = props;
+  const {
+    brand,
+    customContainerStyles,
+    customLabelStyles,
+    isCentered = false,
+    widths,
+    ...rest
+  } = props;
 
   return (
     <>
@@ -21,6 +31,8 @@ function BrandLogoOrLabel(props: Props) {
           as={'span'}
           widths={widths}
           aria-label={brand.label}
+          css={isCentered && styles.centered}
+          customContainerStyles={customContainerStyles || styles.brandImage}
           {...rest}
         />
       ) : (

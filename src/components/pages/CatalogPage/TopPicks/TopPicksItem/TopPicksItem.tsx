@@ -10,7 +10,7 @@ import Stars, { HALF_WIDTH_STARS } from '~/components/global/Stars/Stars';
 import Sticker from '~/components/global/Sticker/Sticker';
 import { STICKER_SIZES } from '~/components/global/Sticker/Sticker.styles';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
-import { COLORS } from '~/lib/constants';
+import { COLORS, PRODUCT } from '~/lib/constants';
 import { getTranslate, subscribeTranslate } from '~/lib/helpers/translate';
 import { transformSrcLogoToWhite } from '~/lib/utils/cloudinary/cloudinary';
 import { ordinalSuffixOf } from '~/lib/utils/string';
@@ -21,8 +21,6 @@ import { SPEED_PER_BP } from '../TopPicks.constants';
 import CTA from './CTA/CTA';
 import { styles } from './TopPicksItem.styles';
 import { TopPickItemsProps } from './TopPicksItems.types';
-
-const BRAND_LOGO_SIZES = [200, 400, 600];
 
 function TopPicksItem(props: TopPickItemsProps) {
   const {
@@ -275,12 +273,12 @@ function TopPicksItem(props: TopPickItemsProps) {
           >
             {/* Brand logo or brand label if no logo */}
             {brand && (
-              <span css={[styles.brand, brand.image && styles.brandWithImage]}>
+              <span css={styles.brand}>
                 <BrandLogoOrLabel
                   brand={brand}
-                  widths={BRAND_LOGO_SIZES}
-                  customContainerStyles={{ width: '100%' }}
+                  widths={PRODUCT.BRAND_IMAGE_WIDTHS}
                   customLabelStyles={styles.brandLabel}
+                  isCentered
                 />
               </span>
             )}

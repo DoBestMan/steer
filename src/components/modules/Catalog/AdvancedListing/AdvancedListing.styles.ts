@@ -31,22 +31,13 @@ const styles: StylesMap = {
     alignItems: 'flex-start',
   },
   brand: {
-    height: BRAND_IMAGE_HEIGHT,
-    img: {
-      height: '100%',
-      width: 'auto',
-    },
     marginBottom: SPACING.SIZE_10,
-    width: '100%',
-
     [MQ.M]: {
       marginBottom: SPACING.SIZE_15,
     },
-
     [MQ.XL]: {
       fontSize: `${10 / 10}rem`,
       marginBottom: SPACING.SIZE_20,
-      maxWidth: 130,
     },
   },
   brandLabel: {
