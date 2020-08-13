@@ -239,6 +239,8 @@ function TopPicks({
       enabled: true,
       onlyInViewport: false,
     },
+    longSwipesMs: 50,
+    longSwipesRatio: 0.1,
     mousewheel: {
       forceToAxis: true,
     },
