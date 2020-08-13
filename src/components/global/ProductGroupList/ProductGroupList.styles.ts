@@ -44,10 +44,13 @@ const styles: StylesMap = {
   },
   linkIcon: {
     marginLeft: SPACING.SIZE_10,
-    marginTop: SPACING.SIZE_10,
+    marginTop: 1,
     svg: {
       width: 10,
       height: 15,
+    },
+    [MQ.M]: {
+      marginTop: 6,
     },
   },
   title: [
