@@ -76,7 +76,8 @@ const styles: StylesMap = {
       boxSizing: 'border-box',
       display: 'flex',
       flexDirection: 'column',
-      justifyContent: 'space-between',
+      height: 'unset',
+      justifyContent: 'flex-start',
       minHeight: 240,
       padding: SPACING.SIZE_25,
       width: 250,
@@ -99,12 +100,13 @@ const styles: StylesMap = {
     color: COLORS.GLOBAL.ORANGE,
     display: 'flex',
     height: 34,
-    marginBottom: SPACING.SIZE_10,
+    marginBottom: SPACING.SIZE_40,
   },
   cardLink: [
     typography.primarySubhead,
     {
       color: COLORS.LIGHT.GRAY_70,
+      marginTop: 'auto',
       span: {
         borderColor: COLORS.LIGHT.GRAY_70,
       },
@@ -122,6 +124,9 @@ const styles: StylesMap = {
       marginBottom: SPACING.SIZE_10,
     },
   ],
+  content: {
+    marginBottom: SPACING.SIZE_20,
+  },
   title: [
     typography.tertiaryHeadline,
     {

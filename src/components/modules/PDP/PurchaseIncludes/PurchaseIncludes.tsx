@@ -19,7 +19,7 @@ function PurchaseIncludes({
         {ui('pdp.everyPurchaseIncludes.title')}:
       </GridItem>
 
-      <GridItem fullbleed css={styles.items}>
+      <GridItem fullbleed>
         <Carousel>
           {everyPurchaseIncludesData.map((item: CardType) => (
             <div css={styles.cardContainer} key={item.title}>

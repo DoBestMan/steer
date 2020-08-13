@@ -30,7 +30,7 @@ function PurchaseIncludesCard({
   return (
     <>
       <Icon name={icon} css={styles.cardIcon} />
-      <div>
+      <div css={styles.content}>
         <h2 css={styles.cardTitle}>{title}</h2>
         <p css={styles.cardCopy}>{description}</p>
       </div>
