@@ -2,7 +2,6 @@ import queryString from 'query-string';
 
 import { LEGACY_ROUTE_MAP, LEGACY_ROUTES } from '../constants/legacy-routes';
 import { URLS } from '../constants/urls';
-import { isProductionDeploy } from './deploy';
 import { interpolateRoute } from './routes';
 
 export function getLegacyCheckoutURL({
@@ -45,9 +44,7 @@ export function getLegacyCheckoutURL({
 
   const hasQuery = Object.values(query).some((item) => item !== undefined);
 
-  const baseUrl = isProductionDeploy()
-    ? URLS.CHECKOUT_PRODUCTION
-    : URLS.CHECKOUT_INTEGRATION;
+  const baseUrl = URLS.CHECKOUT;
 
   return `${baseUrl}${parsedBaseRoute}${
     hasQuery ? `?${queryString.stringify(query)}` : ''
