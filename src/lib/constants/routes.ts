@@ -110,9 +110,6 @@ export const CATALOG_ROUTES = [
   ROUTE_MAP[ROUTES.TIRE_SIZE_CATALOG_OR_CATEGORY],
 ];
 
-export const ACCOUNT_ROUTE =
-  'https://checkout.simpletire.com/my_customers/login';
-
 // null for dynamic labels
 export const ROUTE_LABELS: Record<string, string | null> = {
   [ROUTE_MAP[ROUTES.HOME]]: ui('breadcrumbs.home'),

@@ -7,9 +7,10 @@ import {
   LinkType,
   NAV_TARGETS,
 } from '~/components/modules/Nav/Nav.types';
-import { ACCOUNT_ROUTE, ROUTE_MAP, ROUTES } from '~/lib/constants';
+import { ROUTE_MAP, ROUTES } from '~/lib/constants';
 import { eventEmitters } from '~/lib/events/emitters';
 import { createContext } from '~/lib/utils/context';
+import { getLegacyAccountURL } from '~/lib/utils/legacy-routes';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import {
@@ -51,7 +52,7 @@ export const dealsLink = {
 };
 export const accountLinks = [
   {
-    href: ACCOUNT_ROUTE,
+    href: getLegacyAccountURL(),
     isExternal: true,
     text: ui('links.account'),
   },

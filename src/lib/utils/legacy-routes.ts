@@ -4,6 +4,13 @@ import { LEGACY_ROUTE_MAP, LEGACY_ROUTES } from '../constants/legacy-routes';
 import { URLS } from '../constants/urls';
 import { interpolateRoute } from './routes';
 
+export function getLegacyAccountURL(): string {
+  // This function will allow for different URLs in different environments
+  // in the future. For now, we're keepping it simple and, just like checkout,
+  // all Steer environments point to the production account URL.
+  return URLS.ACCOUNT;
+}
+
 export function getLegacyCheckoutURL({
   front,
   quantity,
