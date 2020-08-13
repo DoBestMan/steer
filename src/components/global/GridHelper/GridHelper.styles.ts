@@ -8,7 +8,7 @@ const styles: StylesMap = {
     position: 'fixed',
     top: 0,
     width: '100%',
-    zIndex: Z_INDEX.OVERLAY,
+    zIndex: Z_INDEX.GRID_HELPER,
   },
   grid: {
     height: '100%',

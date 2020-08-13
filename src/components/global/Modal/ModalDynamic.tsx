@@ -54,7 +54,7 @@ function Modal({
             (!fullscreen && COLORS.LIGHT.GRAY_70) || 'transparent', // removes overlay flash for fullscreen
           opacity: isOpen ? 1 : 0,
           transition: `opacity ${TIME.MS350}ms ease-in-out ${TIME.MS100}ms`,
-          zIndex: Z_INDEX.OVERLAY,
+          zIndex: Z_INDEX.MODAL,
         },
         content: {
           overflow: 'auto',

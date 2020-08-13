@@ -35,7 +35,7 @@ export const styles: StylesMap = {
     marginBottom: SPACING.SIZE_60,
     position: 'fixed',
     right: 0,
-    zIndex: Z_INDEX.OVERLAY,
+    zIndex: Z_INDEX.GLOBAL_TOAST,
   },
   root: {
     backgroundColor: 'transparent',

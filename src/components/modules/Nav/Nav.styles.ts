@@ -150,7 +150,7 @@ export const styles: StylesMap = {
     position: 'absolute',
     transition: `all 400ms ${EASING.CUBIC_EASE_OUT}`,
     width: '100%',
-    zIndex: Z_INDEX.ABOVE,
+    zIndex: Z_INDEX.NAV,
 
     [MQ.S]: {
       paddingTop: SPACING.SIZE_30,

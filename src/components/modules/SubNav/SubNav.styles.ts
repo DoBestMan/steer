@@ -150,8 +150,6 @@ const styles: StylesMap = {
     flexDirection: 'column',
     height: '100%',
     overflow: 'auto',
-    position: 'relative',
-    zIndex: Z_INDEX.TOP + 1,
     [MQ.M]: {
       backgroundColor: 'transparent',
     },
@@ -177,7 +175,7 @@ const styles: StylesMap = {
       height: '100%',
       position: 'fixed',
       width: '100%',
-      zIndex: Z_INDEX.ABOVE,
+      zIndex: Z_INDEX.MODAL,
     },
   },
   overlayHitbox: {
@@ -229,7 +227,7 @@ const styles: StylesMap = {
     left: 0,
     pointerEvents: 'none',
     position: 'absolute',
-    zIndex: Z_INDEX.OVERLAY,
+    zIndex: Z_INDEX.FRONT, // Above the `mobileLinks`
     [MQ.M]: {
       position: 'initial',
     },
@@ -277,17 +275,17 @@ export const visibility = {
   [ENTERING]: {
     pointerEvents: 'auto',
     visibility: 'visible',
-    zIndex: Z_INDEX.OVERLAY,
+    zIndex: Z_INDEX.MODAL,
   },
   [ENTERED]: {
     pointerEvents: 'auto',
     visibility: 'visible',
-    zIndex: Z_INDEX.OVERLAY,
+    zIndex: Z_INDEX.MODAL,
   },
   [EXITING]: {
     pointerEvents: 'auto',
     visibility: 'visible',
-    zIndex: Z_INDEX.OVERLAY,
+    zIndex: Z_INDEX.MODAL,
   },
   [EXITED]: {
     pointerEvents: 'none',
