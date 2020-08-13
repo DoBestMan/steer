@@ -126,7 +126,13 @@ export const dStyles = {
         marginBottom: CONSTANTS.DEFAULT.RATINGS_BOTTOM_MARGIN,
       },
     },
-    emphasized: typography.primarySubhead,
+    emphasized: [
+      typography.primarySubhead,
+      {
+        // Override line height to align baselines
+        lineHeight: 22 / 15,
+      },
+    ],
     label: [
       typography.bodyCopy,
       {

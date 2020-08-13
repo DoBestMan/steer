@@ -6,7 +6,6 @@ const styles: StylesMap = {
     display: 'flex',
     justifyContent: 'space-between',
     paddingBottom: SPACING.SIZE_40,
-
     [MQ.L]: {
       display: 'block',
       paddingBottom: 0,
@@ -31,9 +30,6 @@ const styles: StylesMap = {
   ratingContainer: {
     display: 'flex',
     flexDirection: 'column',
-    [MQ.M]: {
-      paddingTop: SPACING.SIZE_05,
-    },
     [MQ.L]: {
       paddingTop: SPACING.SIZE_10,
       display: 'block',
@@ -41,12 +37,6 @@ const styles: StylesMap = {
   },
   ratingsList: {
     marginBottom: SPACING.SIZE_40,
-    [MQ.M]: {
-      marginBottom: SPACING.SIZE_60,
-    },
-    [MQ.L]: {
-      marginBottom: SPACING.SIZE_40,
-    },
   },
   section: {
     backgroundColor: COLORS.GLOBAL.BLACK,
@@ -71,7 +61,7 @@ const styles: StylesMap = {
       color: COLORS.DARK.GRAY_40,
       display: 'flex',
       flexDirection: 'column',
-      paddingTop: SPACING.SIZE_02,
+      paddingTop: SPACING.SIZE_05,
     },
   ],
   title: [

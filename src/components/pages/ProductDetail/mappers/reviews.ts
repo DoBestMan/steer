@@ -27,18 +27,23 @@ export function mapDataToReviews({
   const momentList = dataMomentList;
   const ratingStars = performanceRating.overall;
   const ratings = performanceRating.ratingList;
-  const reviews: ReviewCardProps[] = reviewsList.map((item, idx) => ({
-    body: item.additionalComments,
-    car: item.vehicle || undefined,
-    date: item.purchaseDate ? formatOrNull(item.purchaseDate) : null,
-    id: idx.toString(),
-    isVerified: item.verifiedCustomer,
-    location: item.address,
-    momentList: item.dataMomentList,
-    ratings: item.performanceRating.ratingList,
-    ratingStars: item.performanceRating.overall,
-    title: item.name,
-  }));
+  const reviews: ReviewCardProps[] = reviewsList.map((item, idx) => {
+    return {
+      body: item.additionalComments,
+      car: item.vehicle || undefined,
+      date: item.purchaseDate
+        ? formatOrNull(item.purchaseDate, 'MMM d, yyyy')
+        : null,
+      id: idx.toString(),
+      isVerified: item.verifiedCustomer,
+      location: item.address,
+      momentList: item.dataMomentList,
+      ratings: item.performanceRating.ratingList,
+      ratingStars: item.performanceRating.overall,
+      title: item.name,
+    };
+  });
+
   const numberOfReviews = Object.values(reviewsSource).reduce(
     (acc: number, cur) => acc + (cur || 0),
     0,

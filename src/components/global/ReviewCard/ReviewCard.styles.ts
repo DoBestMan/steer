@@ -13,7 +13,7 @@ const CONSTANTS = {
 const styles: StylesMap = {
   additionalContentContainer: {
     ul: {
-      paddingTop: SPACING.SIZE_20,
+      paddingTop: SPACING.SIZE_30,
       paddingBottom: 0, // Override default padding from component
     },
   },

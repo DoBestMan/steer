@@ -85,7 +85,13 @@ export const dStyles = {
       },
     },
     label: typography.bodyCopy,
-    value: typography.primarySubhead,
+    value: [
+      typography.primarySubhead,
+      {
+        // Override line height to align baselines
+        lineHeight: 22 / 15,
+      },
+    ],
   },
 };
 
