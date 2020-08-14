@@ -35,7 +35,7 @@ const sceneryEntrance = keyframes({
     backgroundPosition: '0 0',
   },
   '100%': {
-    backgroundPosition: '-50vw 0',
+    backgroundPosition: '-25vw 0',
   },
 });
 
@@ -44,7 +44,7 @@ const sceneryEntranceM = keyframes({
     backgroundPosition: '0 0',
   },
   '100%': {
-    backgroundPosition: '-30vw 0',
+    backgroundPosition: '-15vw 0',
   },
 });
 
