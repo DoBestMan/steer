@@ -98,7 +98,7 @@ function Reviews({
           </div>
         </div>
       </GridItem>
-      {reviews?.length && (
+      {!!reviews?.length && (
         <GridItem gridColumnL="8/13">
           {!!momentList && (
             <MomentList

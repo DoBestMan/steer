@@ -59,7 +59,7 @@ function Reviews({
           </div>
         </div>
       </GridItem>
-      {reviews && (
+      {!!reviews?.length && (
         <>
           <GridItem gridColumnL="3/13" gridColumnXL="4/12">
             {reviews.map((review, idx) => (
