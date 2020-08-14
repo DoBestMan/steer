@@ -275,6 +275,7 @@ function TopPicks({
       },
     },
     shortSwipes: false,
+    shouldSwiperUpdate: true,
   };
 
   const currentOeModal = picks[currentIndex]
