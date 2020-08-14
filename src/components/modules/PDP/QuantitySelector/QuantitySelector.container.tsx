@@ -74,7 +74,11 @@ function QuantitySelectorContainer({
         numbers={numbers}
         onSelect={onSelectFrontPicker}
         subTitle={finalPrice.front && <Subtitle price={finalPrice.front} />}
-        title={ui('pdp.quantitySelector.singleTireQtyTitle')}
+        title={ui(
+          isFrontAndRear
+            ? 'pdp.quantitySelector.frontTireQtyTitle'
+            : 'pdp.quantitySelector.singleTireQtyTitle',
+        )}
       />
 
       {isFrontAndRear && (
@@ -84,7 +88,7 @@ function QuantitySelectorContainer({
           numbers={numbers}
           onSelect={onSelectRearPicker}
           subTitle={finalPrice.rear && <Subtitle price={finalPrice.rear} />}
-          title={ui('pdp.quantitySelector.singleTireQtyTitle')}
+          title={ui('pdp.quantitySelector.rearTireQtyTitle')}
         />
       )}
     </QuantitySelector>
