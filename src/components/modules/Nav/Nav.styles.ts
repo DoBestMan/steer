@@ -20,7 +20,7 @@ export const NAV_CONTENT_HEIGHT = 20;
 export const NAV_HEIGHT = {
   /* eslint-disable sort-keys */
   S: 80,
-  M: 110,
+  M: 90,
   L: 110,
   XL: 110,
   /* eslint-enable sort-keys */
@@ -157,6 +157,9 @@ export const styles: StylesMap = {
     },
     [MQ.M]: {
       paddingBottom: SPACING.SIZE_30,
+      paddingTop: SPACING.SIZE_40,
+    },
+    [MQ.L]: {
       paddingTop: SPACING.SIZE_60,
     },
   },

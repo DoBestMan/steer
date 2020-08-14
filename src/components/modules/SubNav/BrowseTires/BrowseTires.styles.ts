@@ -122,8 +122,15 @@ const styles: StylesMap = {
     color: COLORS.GLOBAL.BLACK,
     display: 'flex',
     height: '100%',
-    img: {
+
+    // eslint-disable-next-line sort-keys
+    div: {
       maxHeight: MAX_IMAGE_HEIGHT,
+
+      img: {
+        objectFit: 'contain',
+        maxHeight: '100%',
+      },
     },
     span: {
       maxWidth: 30, // targets svg icon

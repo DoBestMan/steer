@@ -248,10 +248,9 @@ const styles: StylesMap = {
         height: 'auto',
         justifyContent: 'space-between',
         margin: 'unset',
-        padding: `${SPACING.SIZE_60}px
+        padding: `${SPACING.SIZE_40}px
         ${SPACING.SIZE_40}px
-        ${SPACING.SIZE_80}px
-        ${SPACING.SIZE_40}px`,
+        ${SPACING.SIZE_80}px`,
         svg: {
           width: 20,
         },
