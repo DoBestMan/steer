@@ -13,6 +13,7 @@ module.exports = withBundleAnalyzer({
     GTM_PREVIEW: process.env.GTM_PREVIEW,
     GTM_COOKIES_WIN: process.env.GTM_COOKIES_WIN,
     RECAPTCHA_SITE_KEY: process.env.RECAPTCHA_SITE_KEY,
+    SHOW_FEEDBACK_TAB: process.env.SHOW_FEEDBACK_TAB,
   },
   webpack: (config) => {
     config.module.rules.push({

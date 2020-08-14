@@ -3,6 +3,10 @@ import { ReactNode, useEffect, useRef } from 'react';
 import { Transition } from 'react-transition-group';
 import { TransitionStatus } from 'react-transition-group/Transition';
 
+import {
+  CONSTANTS as FEEDBACK_CONSTANTS,
+  injectFeedbackifyScript,
+} from '~/components/global/Feedback/Feedback.utils';
 import FeedbackDynamic from '~/components/global/Feedback/FeedbackDynamic';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
@@ -55,6 +59,15 @@ function App({ children, ...rest }: Props) {
   const route = fixHomepageRoute(router.asPath || rest.route);
 
   const isHomepage = route === ROUTE_MAP[ROUTES.HOME];
+
+  // TODO WCS-1512: temp bring back the feedback tab
+  useEffect(() => {
+    // Feedback component on every page injects the script already
+    // so it needs to be injected on the homepage
+    if (isHomepage && FEEDBACK_CONSTANTS.showFeedbackTab) {
+      injectFeedbackifyScript();
+    }
+  }, [isHomepage]);
 
   return (
     <div
