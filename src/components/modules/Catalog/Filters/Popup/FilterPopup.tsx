@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 
 import Dropdown from '~/components/global/Dropdown/Dropdown';
 import Loading from '~/components/global/Loading/Loading';
+import { useCatalogPageContext } from '~/context/CatalogPage.context';
 import { useModalContext } from '~/context/Modal.context';
 import { SiteCatalogFilterListPresentationStyleEnum } from '~/data/models/SiteCatalogFilterList';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
@@ -37,6 +38,7 @@ export default function FilterPopup({
     filtersToApply,
     totalMatches,
   } = useFiltersContext();
+  const { isLoading } = useCatalogPageContext();
   const { openStaticModal, isModalOpen } = useModalContext();
   const prevIsLarge = useRef(isLarge);
   const prevIsOpen = useRef(isOpen);
@@ -52,11 +54,11 @@ export default function FilterPopup({
     }
     prevIsLarge.current = isLarge;
     // returns filtersToApply to original state if popup closes without applying
-    if (prevIsOpen.current && !isOpen && !isPreviewLoading) {
+    if (prevIsOpen.current && !isOpen && !isLoading) {
       clearFiltersToApply();
     }
     prevIsOpen.current = isOpen;
-  }, [clearFiltersToApply, isOpen, onClose, filter, isPreviewLoading, isLarge]);
+  }, [clearFiltersToApply, isOpen, onClose, filter, isLoading, isLarge]);
 
   if (
     filter.type === FilterContentTypes.SiteCatalogFilterToggle ||

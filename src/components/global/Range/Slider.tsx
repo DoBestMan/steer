@@ -19,6 +19,7 @@ interface Props {
   railEl: MutableRefObject<HTMLDivElement | null>;
   shouldReset?: boolean;
   size: RANGE_SLIDER_SIZE;
+  value?: number;
 }
 
 export default function Slider({

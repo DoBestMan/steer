@@ -64,18 +64,10 @@ export default function Range({
 
   useEffect(() => {
     if (shouldReset) {
-      setMinCurrent(minDefault || min);
-      setMaxCurrent(maxDefault || max);
+      setMinCurrent(min);
+      setMaxCurrent(max);
     }
-  }, [
-    maxDefault,
-    minDefault,
-    min,
-    max,
-    setMaxCurrent,
-    setMinCurrent,
-    shouldReset,
-  ]);
+  }, [min, max, setMaxCurrent, setMinCurrent, shouldReset]);
 
   useEffect(() => {
     if (!railEl.current) {
@@ -112,10 +104,11 @@ export default function Range({
             onChange={handleMinChange}
             onMouseUp={onMouseUp}
             shouldReset={shouldReset}
-            defaultValue={minDefault || min}
+            defaultValue={min}
             label={`${name} ${ui('catalog.filters.min')}`}
             css={styles.minIndicator}
             size={size}
+            value={minCurrent}
           />
           <Slider
             onAriaTextChange={announceTextChange}
@@ -126,10 +119,11 @@ export default function Range({
             interval={interval}
             onMouseUp={onMouseUp}
             onChange={handleMaxChange}
-            defaultValue={maxDefault || max}
+            defaultValue={max}
             label={`${name} ${ui('catalog.filters.max')}`}
             css={styles.maxIndicator}
             size={size}
+            value={maxCurrent}
           />
         </div>
       </div>

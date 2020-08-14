@@ -10,7 +10,7 @@ import {
 } from './Range.utils';
 
 interface SliderArgs {
-  defaultValue?: number;
+  defaultValue: number;
   interval: number;
   max?: number;
   min?: number;
@@ -19,6 +19,7 @@ interface SliderArgs {
   railEl: MutableRefObject<HTMLDivElement | null>;
   shouldReset?: boolean;
   sliderEl: MutableRefObject<HTMLDivElement | null>;
+  value?: number;
 }
 function useRangeSliderManager({
   defaultValue = 0,
@@ -26,6 +27,7 @@ function useRangeSliderManager({
   min = 0,
   shouldReset,
   sliderEl,
+  value,
   ...rest
 }: SliderArgs) {
   const minEl = useRef<Element | null>(null);
@@ -33,7 +35,7 @@ function useRangeSliderManager({
   const railMin = useRef(min);
   const railMax = useRef(max);
   const railWidth = useRef<number>(0);
-  const valueNow = useRef<number>(defaultValue);
+  const valueNow = useRef<number>(value || defaultValue);
   const { width } = useWindowSize();
   const handlerProps = {
     ...rest,
