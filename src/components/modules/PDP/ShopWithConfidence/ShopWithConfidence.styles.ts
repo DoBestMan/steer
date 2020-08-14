@@ -16,7 +16,6 @@ const styles: StylesMap = {
         marginLeft: GRID_MARGIN.S,
 
         [MQ.M]: {
-          maxWidth: 'none',
           marginLeft: GRID_MARGIN.M,
         },
 
@@ -65,8 +64,18 @@ const styles: StylesMap = {
         },
       },
 
-      maxWidth: 150,
+      marginRight: SPACING.SIZE_30,
+      maxWidth: 100,
       width: 'unset',
+
+      [MQ.M]: {
+        marginRight: SPACING.SIZE_60,
+        maxWidth: 180,
+      },
+
+      [MQ.XL]: {
+        marginRight: SPACING.SIZE_80,
+      },
     },
   },
   checkmark: {

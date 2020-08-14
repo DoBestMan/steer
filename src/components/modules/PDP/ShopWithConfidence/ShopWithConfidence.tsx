@@ -5,22 +5,11 @@ import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Link from '~/components/global/Link/Link';
 import Markdown from '~/components/global/Markdown/Markdown';
-import { BREAKPOINTS, THEME } from '~/lib/constants';
+import { THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import { statsMock } from './ShopWithConfidence.mock';
 import styles from './ShopWithConfidence.styles';
-
-const carouselParams = {
-  breakpoints: {
-    [BREAKPOINTS.S]: {
-      spaceBetween: 40,
-    },
-    [BREAKPOINTS.M]: {
-      spaceBetween: 60,
-    },
-  },
-};
 
 function ShopWithConfidence() {
   return (
@@ -44,7 +33,7 @@ function ShopWithConfidence() {
       </GridItem>
 
       <GridItem fullbleed css={styles.carouselContainer}>
-        <Carousel {...carouselParams}>
+        <Carousel>
           {statsMock.map((item) => (
             <div key={item.heading}>
               <span css={styles.statHeading}>{item.heading}</span>
