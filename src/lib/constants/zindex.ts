@@ -25,4 +25,5 @@ export enum Z_INDEX {
   MODAL = zIndexBase['9'],
   GRID_HELPER = zIndexBase['10'],
   LOADING_BAR = zIndexBase['10'],
+  SKIP_LINK = zIndexBase['10'],
 }

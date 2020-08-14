@@ -50,6 +50,8 @@ export function CatalogDataMomentNoOeMessage() {
   return (
     <CatalogMessageContainer>
       <DataMomentMessage
+        setStage={action('set-stage')}
+        showLoadingInterstitial={false}
         siteCatalogSummaryPrompt={vehiclesNoOeWithSize.siteCatalogSummaryPrompt}
         openStaticModal={action('Open modal')}
       />
@@ -61,6 +63,8 @@ export function CatalogDataMomentDisambiguationMessage() {
   return (
     <CatalogMessageContainer>
       <DataMomentMessage
+        setStage={action('set-stage')}
+        showLoadingInterstitial={false}
         siteCatalogSummaryPrompt={
           vehiclesDisambiguation.siteCatalogSummaryPrompt
         }
@@ -73,6 +77,7 @@ export function CatalogDataMomentDisambiguationMessage() {
 export function CatalogNoResultsMessage() {
   return (
     <NoResultsMessage
+      showLoadingInterstitial={false}
       customerServiceNumber={customerServiceNumber}
       onSearchBy={action('Search by click')}
       siteCatalogSummaryPrompt={

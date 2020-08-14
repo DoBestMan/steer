@@ -12,6 +12,7 @@ export interface RouterContextProps {
   prevRoute: string;
   prevUrl: string;
   router: NextRouter;
+  setContainerEl(containerEl: HTMLDivElement): void;
   skipPageTransition: boolean;
 }
 
@@ -23,6 +24,8 @@ function useRouterContextSetup() {
 
   const [prevUrl, setPrevUrl] = useState<string>(ROUTE_MAP[ROUTES.HOME]);
   const [prevRoute, setPrevRoute] = useState<string>(ROUTE_MAP[ROUTES.HOME]);
+
+  const [containerEl, setContainerEl] = useState<HTMLDivElement | null>(null);
 
   // The url of the next page that is loading
   const [nextUrl, setNextUrl] = useState(asPath);
@@ -52,6 +55,16 @@ function useRouterContextSetup() {
     savePrevUrl();
   }, [isCatalogTransition, savePrevUrl]);
 
+  const handleRouteChangeComplete = useCallback(() => {
+    // Route change complete, reset the skipPageTransition state
+    setSkipPageTransition(false);
+
+    // Programmatically set focus to app container
+    if (!isCatalogTransition) {
+      containerEl?.focus();
+    }
+  }, [containerEl, isCatalogTransition, setSkipPageTransition]);
+
   useEffect(() => {
     const handleRouteChangeStart = (url: string) => {
       // Route change has begun. Show the loading bar
@@ -62,10 +75,6 @@ function useRouterContextSetup() {
 
       // Hide the nav
       eventEmitters.setNavVisibility.emit({ isVisible: false });
-    };
-    const handleRouteChangeComplete = () => {
-      // Route change complete, reset the skipPageTransition state
-      setSkipPageTransition(false);
     };
     const handleRouteChangeError = () => {
       // If there is an error, hide the loading bar
@@ -113,6 +122,7 @@ function useRouterContextSetup() {
     prevRoute,
     prevUrl,
     router,
+    setContainerEl,
     skipPageTransition,
   };
 }

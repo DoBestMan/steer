@@ -57,6 +57,9 @@
       }
     }
   },
+  "a11y": {
+    "skipToMain": "Skip to main content"
+  },
   "breadcrumbs": {
     "home": "Home",
     "brands": "All brands",

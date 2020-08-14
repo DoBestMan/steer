@@ -1,5 +1,6 @@
 import { useTheme } from 'emotion-theming';
 import { useRouter } from 'next/router';
+import { useEffect, useRef } from 'react';
 import { Transition } from 'react-transition-group';
 import { TransitionStatus } from 'react-transition-group/Transition';
 
@@ -66,7 +67,11 @@ export function BuildInMessage({
     <Grid css={styles.container}>
       <GridItem css={styles.containerInner}>
         {/* TODO: check heading hierarchy */}
-        <h2 aria-label={siteCatalogSummaryBuildIn.title} css={styles.heading}>
+        <h1
+          aria-label={siteCatalogSummaryBuildIn.title}
+          aria-live="polite"
+          css={styles.heading}
+        >
           {splitTitle.length > 1 ? (
             <span aria-hidden>
               {splitTitle.map((s, i) => (
@@ -76,7 +81,7 @@ export function BuildInMessage({
           ) : (
             siteCatalogSummaryBuildIn.title
           )}
-        </h2>
+        </h1>
         {siteCatalogSummaryBuildIn.brandList && (
           <ul css={styles.list}>
             {siteCatalogSummaryBuildIn.brandList.map(({ image, label }) => {
@@ -109,17 +114,29 @@ export function BuildInMessage({
 
 interface DataMomentMessageProps {
   openStaticModal: (modalId: string) => void;
-  setStage?(stage: STAGES): void;
+  setStage(stage: STAGES): void;
+  showLoadingInterstitial: boolean;
   siteCatalogSummaryPrompt: SiteCatalogSummaryPrompt | null;
 }
 
 export function DataMomentMessage({
   setStage,
+  showLoadingInterstitial,
   siteCatalogSummaryPrompt,
   openStaticModal,
 }: DataMomentMessageProps) {
   const { message } = useTheme();
   const { asPath } = useRouter();
+
+  /**
+   * If coming from Search, set programmatic focus to the message content
+   */
+  const titleRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (showLoadingInterstitial && titleRef && titleRef.current) {
+      titleRef.current.focus();
+    }
+  }, [titleRef, showLoadingInterstitial]);
 
   const id =
     siteCatalogSummaryPrompt && siteCatalogSummaryPrompt.infoLink?.contentId;
@@ -146,13 +163,14 @@ export function DataMomentMessage({
           gridColumnM="4/end"
           gridColumnL="8/end"
         >
-          {/* TODO: check heading hierarchy */}
-          <Markdown
-            css={[styles.heading, styles.dataMomentHeading]}
-            renderers={{ paragraph: 'h2' }}
-          >
-            {siteCatalogSummaryPrompt.title}
-          </Markdown>
+          <div ref={titleRef} tabIndex={-1}>
+            <Markdown
+              css={[styles.heading, styles.dataMomentHeading]}
+              renderers={{ paragraph: 'h1' }}
+            >
+              {siteCatalogSummaryPrompt.title}
+            </Markdown>
+          </div>
           {siteCatalogSummaryPrompt.body && (
             <Markdown css={styles.dataMomentCopy}>
               {siteCatalogSummaryPrompt.body}
@@ -211,16 +229,28 @@ interface NoResultsMessageProps {
   customerServiceEnabled?: boolean;
   customerServiceNumber: { display: string; value: string };
   onSearchBy?(opt: string): void;
+  showLoadingInterstitial: boolean;
   siteCatalogSummaryPrompt: SiteCatalogSummaryPrompt | null;
 }
 
 export function NoResultsMessage({
   customerServiceEnabled,
   customerServiceNumber,
+  showLoadingInterstitial,
   siteCatalogSummaryPrompt,
 }: NoResultsMessageProps) {
   const { setSearchState, searchQuery } = useSearchContext();
   const { setIsSearchOpen } = useSearchModalContext();
+
+  /**
+   * If coming from Search, set programmatic focus to the message content.
+   */
+  const titleRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (showLoadingInterstitial && titleRef && titleRef.current) {
+      titleRef.current.focus();
+    }
+  }, [titleRef, showLoadingInterstitial]);
 
   const searchByOptions = [
     {
@@ -255,13 +285,14 @@ export function NoResultsMessage({
           gridColumnM="start/7"
           gridColumnL="3/9"
         >
-          {/* TODO: check heading hierarchy */}
-          <Markdown
-            css={[styles.heading, styles.noResultsHeading]}
-            renderers={{ paragraph: 'h2' }}
-          >
-            {siteCatalogSummaryPrompt.title}
-          </Markdown>
+          <div ref={titleRef} tabIndex={-1}>
+            <Markdown
+              css={[styles.heading, styles.noResultsHeading]}
+              renderers={{ paragraph: 'h1' }}
+            >
+              {siteCatalogSummaryPrompt.title}
+            </Markdown>
+          </div>
           <dl css={styles.noResultsSection}>
             {customerServiceEnabled && (
               <>
@@ -359,6 +390,7 @@ function CatalogMessage({
               customerServiceEnabled={customerServiceEnabled}
               openStaticModal={openStaticModal}
               setStage={setStage}
+              showLoadingInterstitial={showLoadingInterstitial}
               // used only by top picks
               exploreMore={exploreMore}
             />

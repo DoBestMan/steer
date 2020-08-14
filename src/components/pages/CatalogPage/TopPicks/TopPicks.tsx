@@ -28,6 +28,7 @@ interface Props {
   location?: string;
   openSearch: () => void;
   picks: Array<SiteCatalogSummaryTopPickItem>;
+  showLoadingInterstitial: boolean;
   totalResult: number;
   viewMoreData: SiteCatalogSummaryTopPicksMore | null;
 }
@@ -39,6 +40,7 @@ function TopPicks({
   exploreMore,
   openSearch,
   picks,
+  showLoadingInterstitial,
   totalResult,
   location,
   viewMoreData,
@@ -53,6 +55,16 @@ function TopPicks({
     undefined,
   );
   const rootRef = useRef<HTMLDivElement | null>(null);
+
+  /**
+   * If coming from Search, set programmatic focus to the TP title
+   */
+  const titleRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (showLoadingInterstitial && titleRef && titleRef.current) {
+      titleRef.current.focus();
+    }
+  }, [titleRef, showLoadingInterstitial]);
 
   const slideTo = useCallback(
     (index: number) => {
@@ -367,6 +379,8 @@ function TopPicks({
       <div css={styles.titlesContainer}>
         <div
           css={[styles.titleContainer, showTitle && styles.titleContainerShow]}
+          ref={titleRef}
+          tabIndex={-1}
         >
           {picks.map((pick, i) => {
             return (

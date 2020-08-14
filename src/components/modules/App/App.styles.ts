@@ -5,7 +5,16 @@ import {
   EXITING,
 } from 'react-transition-group/Transition';
 
-import { COLORS, EASING, SPACING, StylesMap, Z_INDEX } from '~/lib/constants';
+import {
+  COLORS,
+  EASING,
+  MQ,
+  SPACING,
+  StylesMap,
+  TIME,
+  Z_INDEX,
+} from '~/lib/constants';
+import { typography } from '~/styles/typography.styles';
 
 import { PAGE_TRANSITION_DURATION } from './App.constants';
 
@@ -44,4 +53,28 @@ export const styles: StylesMap = {
   rootWithOffWhiteBg: {
     backgroundColor: COLORS.LIGHT.OFF_WHITE,
   },
+  skipToContent: [
+    typography.bodyCopyTight,
+    {
+      alignItems: 'center',
+      backgroundColor: COLORS.GLOBAL.BLACK,
+      color: COLORS.GLOBAL.WHITE,
+      display: 'flex',
+      height: 50,
+      justifyContent: 'center',
+      left: 0,
+      position: 'fixed',
+      top: 0,
+      transform: 'translate3d(0, -50px, 0)',
+      transition: `transform ${TIME.MS150} ${EASING.CUBIC_EASE_IN_OUT}`,
+      width: '100%',
+      zIndex: Z_INDEX.SKIP_LINK,
+
+      [MQ.M]: {
+        '&:focus': {
+          transform: 'translate3d(0, 0, 0)',
+        },
+      },
+    },
+  ],
 };

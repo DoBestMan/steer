@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-import { ReactNode } from 'react';
+import { ReactNode, useEffect, useRef } from 'react';
 import { Transition } from 'react-transition-group';
 import { TransitionStatus } from 'react-transition-group/Transition';
 
@@ -15,6 +15,7 @@ import { NavContextProvider } from '~/context/Nav.context';
 import { useRouterContext } from '~/context/Router.context';
 import { ROUTE_MAP, ROUTES, TIME } from '~/lib/constants';
 import { fixHomepageRoute } from '~/lib/utils/routes';
+import { ui } from '~/lib/utils/ui-dictionary';
 
 import FooterContainer from '../Footer/Footer.container';
 import { animations, styles } from './App.styles';
@@ -33,6 +34,7 @@ function App({ children, ...rest }: Props) {
     isInRouteTransition,
     isRouteLoading,
     router,
+    setContainerEl,
     skipPageTransition,
   } = useRouterContext();
   const {
@@ -42,12 +44,27 @@ function App({ children, ...rest }: Props) {
     isGlobalToastOpen,
   } = useGlobalToastContext();
 
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (containerRef && containerRef.current) {
+      setContainerEl(containerRef.current);
+    }
+  }, [containerRef, setContainerEl]);
+
   const route = fixHomepageRoute(router.asPath || rest.route);
 
   const isHomepage = route === ROUTE_MAP[ROUTES.HOME];
 
   return (
-    <div css={[styles.root, isHomepage && styles.rootWithOffWhiteBg]}>
+    <div
+      css={[styles.root, isHomepage && styles.rootWithOffWhiteBg]}
+      ref={containerRef}
+      tabIndex={-1}
+    >
+      <a css={styles.skipToContent} href="#main">
+        {ui('a11y.skipToMain')}
+      </a>
       <NavContextProvider>
         <NavContainer isHomepage={isHomepage} />
         <Layout>

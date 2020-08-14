@@ -13,6 +13,7 @@ const TopPicks = dynamic(() => import('./TopPicks'));
 
 interface Props {
   exploreMore: () => void;
+  showLoadingInterstitial?: boolean;
   siteCatalogSummaryMeta: SiteCatalogSummaryMeta | null;
   siteCatalogSummaryTopPicksList: Array<SiteCatalogSummaryTopPickItem>;
   siteCatalogSummaryTopPicksMore: SiteCatalogSummaryTopPicksMore | null;
@@ -20,6 +21,7 @@ interface Props {
 
 function TopPicksContainer({
   exploreMore,
+  showLoadingInterstitial = false,
   siteCatalogSummaryMeta,
   siteCatalogSummaryTopPicksList,
   siteCatalogSummaryTopPicksMore,
@@ -51,6 +53,7 @@ function TopPicksContainer({
       totalResult={totalResult}
       viewMoreData={siteCatalogSummaryTopPicksMore}
       openSearch={openSearch}
+      showLoadingInterstitial={showLoadingInterstitial}
     />
   );
 }

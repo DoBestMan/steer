@@ -70,7 +70,7 @@ function Layout(props: Props) {
         {SVGString && <SVGInline svg={SVGString} />}
       </span>
       <GridHelper />
-      <main role="main" css={styles.mainContent}>
+      <main id="main" role="main" css={styles.mainContent}>
         {props.children}
       </main>
     </div>

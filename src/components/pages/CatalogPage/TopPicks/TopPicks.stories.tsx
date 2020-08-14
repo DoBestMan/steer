@@ -293,6 +293,7 @@ export function TopPicksWithKnobs() {
         viewMoreData={viewMoreData}
         picks={picks}
         location={location}
+        showLoadingInterstitial={false}
       />
     </div>
   );
