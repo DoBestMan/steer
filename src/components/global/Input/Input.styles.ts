@@ -32,7 +32,7 @@ const styles: StylesMap = {
     borderRadius: RADIUS.RADIUS_15,
     color: COLORS.LIGHT.GRAY_70,
     display: 'flex',
-    // To avoid scaling on input focus on iOS devices, set container font-size to 16px.
+    // To avoid scaling on input focus on iOS devices, set font-size to 16px.
     fontSize: '1.6rem',
     height: CONSTANTS.INPUT_HEIGHT,
     position: 'relative',
@@ -61,9 +61,6 @@ const styles: StylesMap = {
       backgroundColor: 'transparent',
       border: 0,
       color: COLORS.GLOBAL.BLACK,
-      // With parent font-size at 16px, we can use a percentage here to achieve desired font-size of 15px
-      // Adapted from the second solution here https://www.warrenchandler.com/2019/04/02/stop-iphones-from-zooming-in-on-form-fields/
-      fontSize: `${(15 / 16) * 100}%`,
       height: '100%',
       overflow: 'hidden',
       padding: `${SPACING.SIZE_30}px ${SPACING.SIZE_20}px ${CONSTANTS.INPUT_BOTTOM_PADDING}px`,
@@ -72,22 +69,19 @@ const styles: StylesMap = {
       width: '100%',
     },
   ],
-  label: [
-    typography.bodyCopy,
-    {
-      left: SPACING.SIZE_20,
-      marginRight: SPACING.SIZE_20,
-      maxWidth: `calc(100% - (${SPACING.SIZE_20}px + ${SPACING.SIZE_20}px))`,
-      overflow: 'hidden',
-      position: 'absolute',
-      textOverflow: 'ellipsis',
-      top: '50%',
-      transform: 'translateY(-50%)',
-      transformOrigin: 0,
-      transition: `color ${TIME.MS100}ms ease, transform ${TIME.MS100}ms ease`,
-      whiteSpace: 'nowrap',
-    },
-  ],
+  label: {
+    left: SPACING.SIZE_20,
+    marginRight: SPACING.SIZE_20,
+    maxWidth: `calc(100% - (${SPACING.SIZE_20}px + ${SPACING.SIZE_20}px))`,
+    overflow: 'hidden',
+    position: 'absolute',
+    textOverflow: 'ellipsis',
+    top: '50%',
+    transform: 'translateY(-50%)',
+    transformOrigin: 0,
+    transition: `color ${TIME.MS100}ms ease, transform ${TIME.MS100}ms ease`,
+    whiteSpace: 'nowrap',
+  },
 };
 
 export const textAreaStyles: StylesMap = {
