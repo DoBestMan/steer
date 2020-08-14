@@ -1,7 +1,6 @@
-import { ThemeProvider, useTheme } from 'emotion-theming';
+import { ThemeProvider } from 'emotion-theming';
 import { useEffect } from 'react';
 
-import Loading from '~/components/global/Loading/Loading';
 import { NAV_THEME } from '~/components/modules/Nav/Nav.theme';
 import { useCatalogPageContext } from '~/context/CatalogPage.context';
 import { useCatalogSummaryContext } from '~/context/CatalogSummary.context';
@@ -11,19 +10,11 @@ import { SiteCatalogProducts } from '~/data/models/SiteCatalogProducts';
 import { SiteCatalogSummary } from '~/data/models/SiteCatalogSummary';
 
 import CatalogGrid from './CatalogGrid/CatalogGrid';
+import CatalogLoading from './CatalogLoading/CatalogLoading';
 import styles from './CatalogPage.styles';
 import { defaultTheme, headerAdvanced } from './CatalogPage.theme';
 import CatalogSummary from './CatalogSummary/CatalogSummary';
 import { STAGES } from './CatalogSummary/CatalogSummary.constants';
-
-function LoadingIndicator() {
-  const { message } = useTheme();
-  return (
-    <div css={styles.loadingContainer}>
-      <Loading theme={message.loadingTheme} />
-    </div>
-  );
-}
 
 interface Props {
   catalogGridRef: React.Ref<HTMLDivElement>;
@@ -93,7 +84,7 @@ function CatalogPage({
           </div>
         </>
       )}
-      {showLoadingIndicator && <LoadingIndicator />}
+      {showLoadingIndicator && <CatalogLoading />}
     </ThemeProvider>
   );
 }

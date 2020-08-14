@@ -104,6 +104,9 @@ function styledMessageContainer({
         baseStyles,
         {
           backgroundColor: 'transparent',
+          // Make sure the Content component fills the screen while
+          // the TopPicks component loads dynamically
+          minHeight: '100vh !important',
         },
       ];
     case STAGES.NO_RESULTS:

@@ -183,6 +183,8 @@ export function DataMomentMessage({
                       key={id}
                       onClick={function () {
                         setStage && setStage(STAGES.RESULTS);
+                        // Reset scroll position to top
+                        window.scrollTo(0, 0);
                       }}
                       style={buttonStyle}
                       theme={message.buttonTheme}
