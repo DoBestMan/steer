@@ -48,6 +48,7 @@ export const getServerSideProps: GetServerSideProps<PageResponse<
     siteProductReviews.isSuccess &&
     !siteProductReviews.data.reviewsList.length
   ) {
+    context.res.statusCode = 404;
     return { props: { errorStatusCode: 404 } };
   }
 
