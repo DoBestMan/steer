@@ -21,7 +21,7 @@ const Advancedlisting = dynamic(
 );
 
 interface Props {
-  fetchNewProducts: (page: number) => Promise<SiteCatalogProducts>;
+  fetchNewProducts: (page: number) => Promise<SiteCatalogProducts | null>;
   productList: SiteCatalogProductItem[];
 }
 
@@ -65,10 +65,15 @@ function CatalogProductGrid({
       ...Array(nextProducts).fill(null),
     ]);
 
+    const siteCatalogProducts = await fetchNewProducts(newPage);
+
+    if (!siteCatalogProducts) {
+      return;
+    }
     const {
       siteCatalogProductsResultList,
       listResultMetadata,
-    } = await fetchNewProducts(newPage);
+    } = siteCatalogProducts;
 
     const newProducts = siteCatalogProductsResultList.filter(
       (result): result is SiteCatalogProductItem =>

@@ -10,7 +10,7 @@ import { SiteCatalogSummary } from '~/data/models/SiteCatalogSummary';
 import { useApiDataWithDefault } from '~/hooks/useApiDataWithDefault';
 import { TIME } from '~/lib/constants';
 import { eventEmitters } from '~/lib/events/emitters';
-import { fetch } from '~/lib/fetch';
+import { fetchWithErrorHandling } from '~/lib/fetch';
 import { AsyncResponse } from '~/lib/fetch/index.types';
 import { getParam, getStringifiedParams } from '~/lib/utils/routes';
 
@@ -209,23 +209,25 @@ function CatalogPageContainer({
         });
       }
 
-      const previewedRes: AsyncResponse<{
+      const response: AsyncResponse<{
         siteCatalogProducts: SiteCatalogProducts;
-      }> = await fetch({
+      }> = await fetchWithErrorHandling({
         endpoint: endpoints.products,
         includeUserRegion: true,
         includeUserZip: true,
         method: 'get',
         query: { ...filters, ...pageParams },
       });
-      if (previewedRes.isSuccess) {
+
+      if (response.isSuccess) {
+        const { siteCatalogProducts } = response.data;
         setPreviewFiltersData({
           totalMatches:
-            previewedRes.data.siteCatalogProducts.listResultMetadata.pagination
-              ?.total || 0,
-          filters: previewedRes.data.siteCatalogProducts.siteCatalogFilters,
+            siteCatalogProducts.listResultMetadata.pagination?.total || 0,
+          filters: siteCatalogProducts.siteCatalogFilters,
         });
       }
+      // TODO: add UI error handling
     },
     [siteCatalogProducts, endpoints.products, pageParams],
   );
@@ -237,14 +239,22 @@ function CatalogPageContainer({
         ...pageParams,
       });
 
-      const { siteCatalogProducts } = await fetch({
+      const response: AsyncResponse<{
+        siteCatalogProducts: SiteCatalogProducts;
+      }> = await fetchWithErrorHandling({
         endpoint: endpoints.products,
         includeUserRegion: true,
         includeUserZip: true,
         method: 'get',
         query: { ...queryParams, page },
       });
-      return siteCatalogProducts;
+
+      if (response.isSuccess) {
+        return response.data.siteCatalogProducts;
+      } else {
+        // TODO: add UI error handling here, use global toast context
+        return null;
+      }
     },
     [pageParams, endpoints.products, query],
   );

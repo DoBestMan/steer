@@ -18,7 +18,7 @@ import { STAGES } from './CatalogSummary/CatalogSummary.constants';
 
 interface Props {
   catalogGridRef: React.Ref<HTMLDivElement>;
-  fetchNewProducts: (page: number) => Promise<SiteCatalogProducts>;
+  fetchNewProducts: (page: number) => Promise<SiteCatalogProducts | null>;
   onPreviewFilters: (filters?: Record<string, string>) => Promise<void>;
   previewFiltersData: { filters: SiteCatalogFilters; totalMatches: number };
   scrollToGrid: () => void;

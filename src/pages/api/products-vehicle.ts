@@ -1,11 +1,15 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
+import { SiteCatalogProducts } from '~/data/models/SiteCatalogProducts';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
 import { backendGetVehicleProducts } from '~/lib/backend/catalog/vehicle';
 import { isProductionDeploy } from '~/lib/utils/deploy';
 import { getStringifiedParams } from '~/lib/utils/routes';
 
-export default async (request: NextApiRequest, response: NextApiResponse) => {
+export default async (
+  request: NextApiRequest,
+  response: NextApiResponse<{ siteCatalogProducts: SiteCatalogProducts }>,
+) => {
   backendBootstrap({ request });
   const { make, model, year, ...rest } = request.query;
 
@@ -13,16 +17,19 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
     console.warn('Make, model, and year are required');
   }
 
-  const productsRes = await backendGetVehicleProducts({
+  const productsResponse = await backendGetVehicleProducts({
     make,
     model,
     year,
     query: getStringifiedParams(rest),
   });
 
-  if (isProductionDeploy()) {
-    response.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
+  if (productsResponse.isSuccess) {
+    if (isProductionDeploy()) {
+      response.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
+    }
+    response.json(productsResponse.data);
+  } else {
+    response.status(productsResponse.error.statusCode).end();
   }
-
-  response.json(productsRes);
 };

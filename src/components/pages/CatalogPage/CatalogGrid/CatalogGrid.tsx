@@ -24,7 +24,7 @@ import useExperimentSkipCurationView from './experiments/useExperimentSkipCurati
 import NoResultsGrid from './NoResultsGrid';
 
 interface Props {
-  fetchNewProducts: (page: number) => Promise<SiteCatalogProducts>;
+  fetchNewProducts: (page: number) => Promise<SiteCatalogProducts | null>;
   hasResults: boolean;
   hasTopPicks: boolean;
   onPreviewFilters: (filters?: Record<string, string>) => Promise<void>;

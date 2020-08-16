@@ -1,11 +1,15 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
+import { SiteCatalogProducts } from '~/data/models/SiteCatalogProducts';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
 import { backendGetBrandProducts } from '~/lib/backend/catalog/brand';
 import { isProductionDeploy } from '~/lib/utils/deploy';
 import { getStringifiedParams } from '~/lib/utils/routes';
 
-export default async (request: NextApiRequest, response: NextApiResponse) => {
+export default async (
+  request: NextApiRequest,
+  response: NextApiResponse<{ siteCatalogProducts: SiteCatalogProducts }>,
+) => {
   backendBootstrap({ request });
   const { brand, categoryOrType, ...rest } = request.query;
 
@@ -13,15 +17,18 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
     console.warn('Brand name and category or type are required');
   }
 
-  const productsRes = await backendGetBrandProducts({
+  const productsResponse = await backendGetBrandProducts({
     brand,
     category: categoryOrType,
     query: getStringifiedParams(rest),
   });
 
-  if (isProductionDeploy()) {
-    response.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
+  if (productsResponse.isSuccess) {
+    if (isProductionDeploy()) {
+      response.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
+    }
+    response.json(productsResponse.data);
+  } else {
+    response.status(productsResponse.error.statusCode).end();
   }
-
-  response.json(productsRes);
 };
