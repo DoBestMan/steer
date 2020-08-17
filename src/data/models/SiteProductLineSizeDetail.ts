@@ -12,6 +12,12 @@ export interface SiteProductLineSizeDetail {
    * @type {string}
    * @memberof SiteProductLineSizeDetail
    */
+  id: string;
+  /**
+   *
+   * @type {string}
+   * @memberof SiteProductLineSizeDetail
+   */
   loadSpeedRating: string;
   /**
    *

@@ -189,6 +189,7 @@ export const siteProductMock: SiteProduct = {
     ],
   },
   siteProductLineSizeDetail: {
+    id: '1',
     size: '215/50 R17',
     loadSpeedRating: '91H',
     price: {
@@ -205,6 +206,7 @@ export const siteProductMock: SiteProduct = {
     },
   },
   siteProductLineRearSizeDetail: {
+    id: '1',
     size: '215/50 R19',
     loadSpeedRating: '91J',
     price: {

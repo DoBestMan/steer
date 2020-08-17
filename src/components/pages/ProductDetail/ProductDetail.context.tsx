@@ -134,12 +134,16 @@ function useContextSetup({
         return;
       }
 
-      // TODO: Replace front and rear by product IDs
+      const {
+        siteProductLineSizeDetail,
+        siteProductLineRearSizeDetail,
+      } = data.siteProduct;
+
       const checkoutURL = getLegacyCheckoutURL({
-        front: '10309',
+        front: siteProductLineSizeDetail.id,
         quantity,
-        rear: data.siteProduct.siteProductLineRearSizeDetail
-          ? '106519'
+        rear: siteProductLineRearSizeDetail
+          ? siteProductLineRearSizeDetail.id
           : undefined,
         roadHazard: shouldAddCoverage,
         userZip: userPersonalizationData?.userLocation?.zip || undefined,
