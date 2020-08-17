@@ -84,6 +84,7 @@ const styles: StylesMap = {
     },
   },
   titleRoot: {
+    cursor: 'pointer',
     display: 'flex',
     justifyContent: 'space-between',
     width: '100%',

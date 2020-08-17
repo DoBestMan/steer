@@ -20,7 +20,7 @@ const styles: StylesMap = {
     typography.secondarySubhead,
     {
       ':before': {
-        color: COLORS.LIGHT.GRAY_70,
+        color: COLORS.GLOBAL.BLACK,
         content: '"•"',
         display: 'inline-block',
         fontSize: 8,
@@ -35,7 +35,7 @@ const styles: StylesMap = {
   label: [
     typography.secondaryHeadline,
     {
-      marginRight: SPACING.SIZE_05,
+      marginRight: SPACING.SIZE_02,
       [MQ.L]: typography.tertiaryHeadline,
     },
   ],
@@ -53,7 +53,7 @@ const styles: StylesMap = {
       paddingBottom: SPACING.SIZE_05,
     },
     [MQ.L]: {
-      paddingBottom: SPACING.SIZE_02,
+      paddingBottom: 4,
     },
   },
 };

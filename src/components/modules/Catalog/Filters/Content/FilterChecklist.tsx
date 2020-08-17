@@ -114,7 +114,7 @@ export default function FilterChecklist({
   return (
     <div css={styles.root}>
       <FilterHeader
-        customHeaderStyles={[styles.header, styles.labelContainer]}
+        customHeaderStyles={styles.header}
         header={header}
         title={<h2 css={lgStyles.title}>{header?.title}</h2>}
         isLarge={isLarge}

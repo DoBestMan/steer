@@ -22,6 +22,8 @@ const styles: StylesMap = {
     },
   ],
   header: {
+    display: 'flex',
+    justifyContent: 'space-between',
     marginBottom: SPACING.SIZE_40,
   },
   label: [
