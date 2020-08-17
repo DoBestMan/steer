@@ -11,6 +11,12 @@ export function bindAppElement() {
   }
 }
 
+/**
+ * Returns true if the string passed is a key of the
+ * STATIC_MODALS object
+ *
+ * @param {string} modalId - A static modal ID
+ */
 export function isValidStaticModal(modalId: string) {
   const isValid = !!STATIC_MODALS[modalId];
   if (!isValid) {

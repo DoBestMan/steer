@@ -1,30 +1,58 @@
-import { keysToCamel, numbersOnly } from './string';
+import {
+  appendTiresToString,
+  capitalize,
+  formatDollars,
+  numbersOnly,
+  removeTireFromQueryParam,
+} from './string';
 
-describe('numbersOnly', () => {
-  it('returns only the numbers of a string', () => {
-    expect(numbersOnly('(123)-456 789 $%ABCabc')).toBe('123456789');
-    expect(numbersOnly('123456789')).toBe('123456789');
+describe('utils/routes', () => {
+  describe('appendTiresToString', () => {
+    it('returns a string with `-tires` appended', () => {
+      expect(appendTiresToString('12-inch-winter')).toBe(
+        '12-inch-winter-tires',
+      );
+      expect(appendTiresToString('continental')).toBe('continental-tires');
+    });
   });
 
-  it('returns empty if there is no number in the input string', () => {
-    expect(numbersOnly('$%ABCabc')).toBe('');
+  describe('capitalize', () => {
+    it('returns a capitalized string', () => {
+      expect(capitalize('akuret')).toBe('Akuret');
+      expect(capitalize('continental')).toBe('Continental');
+    });
   });
-});
 
-describe('keysToCamel', () => {
-  it('returns a camel-cased object based on a kebab-cased one', () => {
-    expect(
-      keysToCamel({
-        single: 0,
-        'kebab-case': 1,
-        camelCase: 2,
-        snake_case: 3, // eslint-disable-line @typescript-eslint/camelcase
-      }),
-    ).toStrictEqual({
-      single: 0,
-      kebabCase: 1,
-      camelCase: 2,
-      snakeCase: 3,
+  describe('formatDollars', () => {
+    it('it returns a dollar formatted string', () => {
+      expect(formatDollars('100')).toBe('$1.00');
+      expect(formatDollars('210')).toBe('$2.10');
+      expect(formatDollars('3599')).toBe('$35.99');
+    });
+  });
+
+  describe('numbersOnly', () => {
+    it('returns only the numbers of a string', () => {
+      expect(numbersOnly('(123)-456 789 $%ABCabc')).toBe('123456789');
+      expect(numbersOnly('123456789')).toBe('123456789');
+    });
+
+    it('returns empty if there is no number in the input string', () => {
+      expect(numbersOnly('$%ABCabc')).toBe('');
+    });
+  });
+
+  describe('removeTireFromQueryParam', () => {
+    it('returns a string without `-tires`', () => {
+      expect(removeTireFromQueryParam('12-inch-winter-tires')).toBe(
+        '12-inch-winter',
+      );
+      expect(removeTireFromQueryParam('winter-tires-another-string')).toBe(
+        'winter-another-string',
+      );
+      expect(removeTireFromQueryParam('winter--tiresanother-string')).toBe(
+        'winter-another-string',
+      );
     });
   });
 });

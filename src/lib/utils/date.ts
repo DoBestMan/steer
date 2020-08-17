@@ -1,12 +1,21 @@
 import format from 'date-fns/format';
 
+export const defaultDateTemplate = 'EEEE, MMMM d';
+
 export function getCurrentYear() {
   return new Date().getFullYear();
 }
 
+/**
+ * Returns a formatted date if a valid one is passed
+ * or null if the value passed isn't a valid date
+ *
+ * @param {string |  number | Date} value - The date value
+ * @param {string} template - The formatting template for the returned date
+ */
 export function formatOrNull(
   value: string | number | Date,
-  template = 'EEEE, MMMM d',
+  template = defaultDateTemplate,
 ) {
   try {
     return format(new Date(value), template);
@@ -15,6 +24,12 @@ export function formatOrNull(
   }
 }
 
+/**
+ * Returns true if date passed is in the `MM/d/yyyy` format and false
+ * if not or if that param is null.
+ *
+ * @param {string | null} data - The date
+ */
 export function isValidPurchaseDate(date: string | null): boolean {
   if (date) {
     const d = new Date(date);

@@ -53,15 +53,6 @@ export const keyToCamel = (text: string): string =>
     $1.toUpperCase().replace('-', '').replace('_', ''),
   );
 
-export const keysToCamel = (object: Record<string, any>): Record<string, any> =>
-  Object.keys(object).reduce(
-    (acc, cur) => ({
-      ...acc,
-      [keyToCamel(cur)]: object[cur],
-    }),
-    {},
-  );
-
 export const minMaxify = (min: number, max: number) => `${min},${max}`;
 
 export const removeInchFromQueryParam = (str: string) =>
