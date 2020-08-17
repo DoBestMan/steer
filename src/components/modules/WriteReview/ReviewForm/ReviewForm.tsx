@@ -320,9 +320,9 @@ function ReviewForm({
         </h1>
       </GridItem>
       <GridItem gridColumnM="3/7" gridColumnL="3/12" gridColumnXL="4/11">
-        <span css={styles.label}>
+        <h2 css={styles.label}>
           {ui('reviews.form.sections.ratings.rateLabel')}
-        </span>
+        </h2>
         <div css={styles.picker}>
           <HorizontalNumberPicker
             customContainerStyles={styles.pickerContainer}

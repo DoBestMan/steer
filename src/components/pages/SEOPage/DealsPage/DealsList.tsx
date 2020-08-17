@@ -60,7 +60,7 @@ export function DealsList({ title, items }: Props) {
           <div css={styles.dealsSepartor}>
             <Separator />
           </div>
-          <div css={styles.dealsListHeading}>{title}</div>
+          <h2 css={styles.dealsListHeading}>{title}</h2>
         </GridItem>
       </Grid>
       <Grid>

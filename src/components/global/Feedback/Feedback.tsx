@@ -80,9 +80,9 @@ function Feedback() {
   return (
     <div css={styles.container}>
       <Icon name={icon} css={styles.icon} />
-      <h3 css={styles.label}>
+      <h2 css={styles.label}>
         <Markdown renderers={{ paragraph: 'span' }}>{label}</Markdown>
-      </h3>
+      </h2>
 
       <div css={styles.buttonContainer}>
         {actions.map((action: FeedbackActionProps) => (

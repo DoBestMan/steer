@@ -35,7 +35,7 @@ function Reviews({
       <GridItem gridColumnL="3/13" gridColumnXL="4/12" css={styles.container}>
         <div css={styles.header}>
           <div css={styles.titleContainer}>
-            <div css={styles.title}>{title}</div>
+            <h2 css={styles.title}>{title}</h2>
             {!!hasSources && (
               <span css={styles.sources}>
                 {!!sources?.simpleTire && (

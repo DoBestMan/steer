@@ -72,7 +72,7 @@ function DealsSignUp() {
 
   return (
     <div css={styles.container}>
-      <p css={styles.heading}>{ui('deals.dealsSignUp.heading')}</p>
+      <h2 css={styles.heading}>{ui('deals.dealsSignUp.heading')}</h2>
       <p css={styles.text}>{ui('deals.dealsSignUp.description')}</p>
       <div css={styles.inputContainer}>
         <Input

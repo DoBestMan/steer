@@ -15,11 +15,11 @@ function ShopWithConfidence() {
   return (
     <Grid>
       <GridItem gridColumnL="3/end" css={styles.heading}>
-        <h3 css={styles.title}>
+        <h2 css={styles.title}>
           {ui('pdp.shopWithConfidence.title')}
 
           <Icon name={ICONS.CHECKMARK} css={styles.checkmark} />
-        </h3>
+        </h2>
 
         <Link
           css={styles.learnMoreButton}

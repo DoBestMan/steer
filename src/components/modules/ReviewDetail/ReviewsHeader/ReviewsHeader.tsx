@@ -50,7 +50,7 @@ function ReviewsHeader({
         <BaseLink href={brandUrl} css={styles.brand}>
           <BrandLogoOrLabel brand={brand} widths={PRODUCT.BRAND_IMAGE_WIDTHS} />
         </BaseLink>
-        <p css={styles.title}>{ui('reviews.tireReviews', { tire })}</p>
+        <h1 css={styles.title}>{ui('reviews.tireReviews', { tire })}</h1>
         <StarsWithRating
           number={ratingStars}
           width={isMobile ? starsWidth * 0.75 : starsWidth}
