@@ -86,7 +86,11 @@ export function buildLinks({
       },
     ],
     linksMobile: [
-      { target: NAV_TARGETS.LEARN, text: ui('links.learn') },
+      {
+        href: ROUTE_MAP[ROUTES.LEARN],
+        isExternal: false,
+        text: ui('links.learn'),
+      },
       ...accountLinks,
       {
         icon: ICONS.LOCATION,

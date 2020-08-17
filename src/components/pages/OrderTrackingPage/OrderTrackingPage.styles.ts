@@ -8,7 +8,7 @@ const styles: StylesMap = {
   description: [
     typography.largeCopy,
     {
-      '> button': [
+      '> a': [
         typography.largeCopy,
         {
           display: 'inline-flex',

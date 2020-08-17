@@ -3,9 +3,8 @@ import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import Link from '~/components/global/Link/Link';
 import PageIllustration from '~/components/global/PageIllustration/PageIllustration';
-import { NAV_TARGETS } from '~/components/modules/Nav/Nav.types';
-import { useNavContext } from '~/context/Nav.context';
-import { LINK_TYPES, THEME } from '~/lib/constants';
+import { THEME } from '~/lib/constants';
+import { getLegacyAccountURL } from '~/lib/utils/legacy-routes';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { uiJSX } from '~/lib/utils/ui-dictionary-jsx';
 
@@ -13,12 +12,6 @@ import OrderTrackingForm from './OrderTrackingForm/OrderTrackingForm';
 import styles from './OrderTrackingPage.styles';
 
 function OrderTrackingPage() {
-  const { setActiveLink, toggleSubNav } = useNavContext();
-  const handleLoginClick = () => {
-    toggleSubNav();
-    setActiveLink(NAV_TARGETS.ACCOUNT);
-  };
-
   return (
     <Grid css={styles.container}>
       <GridItem css={styles.header}>
@@ -27,10 +20,10 @@ function OrderTrackingPage() {
           {uiJSX('tracking.orderTrackingDescription', {
             login: (
               <Link
-                as={LINK_TYPES.BUTTON}
+                href={getLegacyAccountURL()}
                 key="login"
-                onClick={handleLoginClick}
                 theme={THEME.LIGHT}
+                isExternal
               >
                 Login
               </Link>
