@@ -65,13 +65,11 @@ export const styles: CSSObject = {
     display: 'block',
     marginTop: SPACING.SIZE_10,
     opacity: 0,
-    transform: 'translate3d(0, 10px, 0)',
+    transition: `opacity ${TIME.MS300}ms ${EASING.CUBIC_EASE_OUT}`,
   },
   descriptionShow: {
     opacity: 1,
-    transform: 'translate3d(0, 0, 0)',
-    transition: `all ${TIME.MS300}ms ${EASING.CUBIC_EASE_OUT}`,
-    transitionDelay: `${TIME.MS50}ms`,
+    transition: `opacity ${TIME.MS350}ms ${EASING.CUBIC_EASE_OUT} ${TIME.MS300}ms`,
   },
   exploreButton: {
     alignItems: 'center',
@@ -124,7 +122,7 @@ export const styles: CSSObject = {
     display: 'block',
     opacity: 0,
     pointerEvents: 'none',
-    transform: `translate3d(0, ${SPACING.SIZE_15}px, 0)`,
+    transition: `opacity ${TIME.MS300}ms ${EASING.CUBIC_EASE_OUT}`,
   },
 
   titleBottom: {
@@ -201,7 +199,6 @@ export const styles: CSSObject = {
   titleShow: {
     opacity: 1,
     pointerEvents: 'all',
-    transform: 'translate3d(0, 0, 0)',
-    transition: `all ${TIME.MS300}ms ${EASING.CUBIC_EASE_OUT}`,
+    transition: `opacity ${TIME.MS350}ms ${EASING.CUBIC_EASE_OUT} ${TIME.MS300}ms`,
   },
 };

@@ -121,8 +121,7 @@ export const styles: StylesMap = {
     display: 'block',
     marginTop: SPACING.SIZE_15,
     opacity: 0,
-    transform: `translate3d(0, ${SPACING.SIZE_20}px, 0)`,
-    transition: `all ${TIME.MS300}ms ${EASING.CUBIC_EASE_OUT}`,
+    transition: `all ${TIME.MS350}ms ${EASING.CUBIC_EASE_OUT}`,
     visibility: 'hidden',
   },
   ctaItem: {
@@ -130,8 +129,6 @@ export const styles: StylesMap = {
   },
   ctaShow: {
     opacity: 1,
-    transform: 'translate3d(0, 0, 0)',
-    transitionDelay: '100ms',
     visibility: 'visible',
   },
   infoContainer: {
