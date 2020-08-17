@@ -1,6 +1,8 @@
 import { NextPageContext } from 'next';
 
+import { NAV_THEME } from '~/components/modules/Nav/Nav.theme';
 import ErrorPage from '~/components/pages/ErrorPage/ErrorPage';
+import { useNavContext } from '~/context/Nav.context';
 import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { uiJSX } from '~/lib/utils/ui-dictionary-jsx';
@@ -10,6 +12,9 @@ interface Props {
 }
 function Error({ statusCode }: Props) {
   const { customerServiceNumber } = useSiteGlobalsContext();
+  const { setNavTheme } = useNavContext();
+
+  setNavTheme(NAV_THEME.DEFAULT);
 
   const is404 = statusCode === 404;
   const description = is404

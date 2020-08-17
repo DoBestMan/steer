@@ -120,20 +120,11 @@ export function redirectToNotFound(response: ServerResponse) {
   response.end();
 }
 
-export function validateOrRedirectToNotFound({
-  param,
-  pattern,
-  response,
-}: {
-  param: string | string[];
-  pattern: RegExp;
-  response: ServerResponse;
-}) {
-  if (pattern.test(param.toString())) {
-    return;
-  }
-
-  redirectToNotFound(response);
+export function validateRoute(
+  param: string | string[],
+  pattern: RegExp,
+): boolean {
+  return pattern.test(param.toString());
 }
 
 export function getParsedHash(path: string): ParsedQuery | null {

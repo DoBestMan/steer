@@ -11,7 +11,7 @@ import {
   backendGetProductReviews,
 } from '~/lib/backend/product-detail';
 import { RESULTS_PER_PAGE_PDP } from '~/lib/constants';
-import { getStringifiedParams, redirectToNotFound } from '~/lib/utils/routes';
+import { getStringifiedParams } from '~/lib/utils/routes';
 
 const ProductLine = WithErrorPageHandling(ProductDetailContainer);
 
@@ -22,7 +22,8 @@ export const getServerSideProps: GetServerSideProps<PageResponse<
   const { brand, productLine, tireSize } = getStringifiedParams(context.query);
 
   if (!brand || !productLine || !tireSize) {
-    redirectToNotFound(context.res);
+    context.res.statusCode = 404;
+    return { props: { errorStatusCode: 404 } };
   }
 
   const [siteProduct, siteProductReviews] = await Promise.all([

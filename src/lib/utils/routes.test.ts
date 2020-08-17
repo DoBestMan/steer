@@ -1,6 +1,6 @@
 import { CATALOG_ROUTES } from '~/lib/constants';
 
-import { validBrandQuery } from './regex';
+import { validTiresQuery } from './regex';
 import {
   getParsedHash,
   getUrlObject,
@@ -8,7 +8,7 @@ import {
   isInRouteList,
   isRouteDiameterFormat,
   trimSlash,
-  validateOrRedirectToNotFound,
+  validateRoute,
 } from './routes';
 
 describe('utils/routes', () => {
@@ -74,69 +74,27 @@ describe('utils/routes', () => {
     });
   });
 
-  describe('validateOrRedirectToNotFound', () => {
-    let mockSetHeader: any;
-    let mockResponse: any;
-
-    beforeEach(() => {
-      mockSetHeader = jest.fn(() => {});
-      mockResponse = {
-        setHeader: mockSetHeader,
-        statusCode: 200,
-        end: () => {},
-      };
+  describe('validateRoute', () => {
+    it('returns true for validated brand routes', () => {
+      expect(validateRoute('continental-tires', validTiresQuery)).toBeTruthy();
+      expect(validateRoute('jk-tyre-tires', validTiresQuery)).toBeTruthy();
+      expect(
+        validateRoute('friendly-tires-tires', validTiresQuery),
+      ).toBeTruthy();
+      expect(
+        validateRoute('special-character%20 +.~-tires', validTiresQuery),
+      ).toBeTruthy();
     });
 
-    it('returns undefined for validated brand routes', () => {
-      validateOrRedirectToNotFound({
-        param: 'continental-tires',
-        pattern: validBrandQuery,
-        response: mockResponse,
-      });
-
-      validateOrRedirectToNotFound({
-        param: 'jk-tyre-tires',
-        pattern: validBrandQuery,
-        response: mockResponse,
-      });
-
-      validateOrRedirectToNotFound({
-        param: 'friendly-tires-tires',
-        pattern: validBrandQuery,
-        response: mockResponse,
-      });
-
-      validateOrRedirectToNotFound({
-        param: 'special-character%20 +.~-tires',
-        pattern: validBrandQuery,
-        response: mockResponse,
-      });
-
-      expect(mockSetHeader.mock.calls.length).toBe(0);
-      expect(mockResponse.statusCode).toBe(200);
-    });
-
-    it('changes response header redirecting to 404 in case of bad brand param', () => {
-      validateOrRedirectToNotFound({
-        param: 'continental',
-        pattern: validBrandQuery,
-        response: mockResponse,
-      });
-
-      validateOrRedirectToNotFound({
-        param: '-tires',
-        pattern: validBrandQuery,
-        response: mockResponse,
-      });
-
-      validateOrRedirectToNotFound({
-        param: 'continental-tires-abc',
-        pattern: validBrandQuery,
-        response: mockResponse,
-      });
-
-      expect(mockSetHeader.mock.calls.length).toBe(3);
-      expect(mockResponse.statusCode).toBe(302);
+    it('returns false in case of bad brand param', () => {
+      expect(validateRoute('continental', validTiresQuery)).toBeFalsy();
+      expect(validateRoute('-tires', validTiresQuery)).toBeFalsy();
+      expect(
+        validateRoute('continental-tires-abc', validTiresQuery),
+      ).toBeFalsy();
+      expect(
+        validateRoute('special-character%20 +.~-tire', validTiresQuery),
+      ).toBeFalsy();
     });
   });
 

@@ -8,11 +8,8 @@ import WithErrorPageHandling, {
 } from '~/hocs/WithPageErrorHandling';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
 import { backendGetProductDetail } from '~/lib/backend/product-detail';
-import { validBrandQuery } from '~/lib/utils/regex';
-import {
-  getStringifiedParams,
-  validateOrRedirectToNotFound,
-} from '~/lib/utils/routes';
+import { validTiresQuery } from '~/lib/utils/regex';
+import { getStringifiedParams, validateRoute } from '~/lib/utils/routes';
 import { removeTireFromQueryParam } from '~/lib/utils/string';
 
 const WriteAReview = WithErrorPageHandling(WriteAReviewPage);
@@ -22,12 +19,12 @@ export const getServerSideProps: GetServerSideProps<PageResponse<
 >> = async (context) => {
   backendBootstrap({ request: context.req });
   const { brand, productLine } = getStringifiedParams(context.query);
+  const isRouteValid = validateRoute(brand, validTiresQuery);
 
-  validateOrRedirectToNotFound({
-    param: brand,
-    pattern: validBrandQuery,
-    response: context.res,
-  });
+  if (!isRouteValid) {
+    context.res.statusCode = 404;
+    return { props: { errorStatusCode: 404 } };
+  }
 
   const brandName = removeTireFromQueryParam(brand);
 

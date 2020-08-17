@@ -1,4 +1,4 @@
-import { absoluteLink, email, specialLink, validBrandQuery } from './regex';
+import { absoluteLink, email, specialLink, validTiresQuery } from './regex';
 
 describe('utils/regex', () => {
   describe('absoluteLink', () => {
@@ -42,16 +42,16 @@ describe('utils/regex', () => {
     });
   });
 
-  describe('validBrandQuery', () => {
+  describe('validTiresQuery', () => {
     it('returns true string ends in `-tires`', () => {
-      expect(validBrandQuery.test('achilles-tires')).toEqual(true);
-      expect(validBrandQuery.test('12-inch-winter-tires')).toEqual(true);
+      expect(validTiresQuery.test('achilles-tires')).toEqual(true);
+      expect(validTiresQuery.test('12-inch-winter-tires')).toEqual(true);
     });
 
     it('returns false string does not end in `-tires', () => {
-      expect(validBrandQuery.test('achilles-atr-sport-2')).toEqual(false);
+      expect(validTiresQuery.test('achilles-atr-sport-2')).toEqual(false);
       expect(
-        validBrandQuery.test('14-inch-winter-tires-and-more-words'),
+        validTiresQuery.test('14-inch-winter-tires-and-more-words'),
       ).toEqual(false);
     });
   });

@@ -3,31 +3,28 @@ import { GetServerSideProps } from 'next';
 import ReviewListingPage, {
   ReviewListingServerData,
 } from '~/components/pages/ReviewListingPage/ReviewListingPage.container';
+import { PageResponse } from '~/hocs/WithPageErrorHandling';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
 import { backendGetReviewListing } from '~/lib/backend/review-listing';
-import { validBrandQuery as validTiresQuery } from '~/lib/utils/regex';
-import {
-  getStringifiedParams,
-  redirectToNotFound,
-  validateOrRedirectToNotFound,
-} from '~/lib/utils/routes';
+import { validTiresQuery } from '~/lib/utils/regex';
+import { getStringifiedParams, validateRoute } from '~/lib/utils/routes';
 import { removeTireFromQueryParam } from '~/lib/utils/string';
 
 function Reviews(props: ReviewListingServerData) {
   return <ReviewListingPage {...props} />;
 }
 
-export const getServerSideProps: GetServerSideProps<ReviewListingServerData> = async (
-  context,
-) => {
+export const getServerSideProps: GetServerSideProps<PageResponse<
+  ReviewListingServerData
+>> = async (context) => {
   backendBootstrap({ request: context.req });
   const { type, ...params } = context.query;
+  const isRouteValid = validateRoute(type, validTiresQuery);
 
-  validateOrRedirectToNotFound({
-    param: type,
-    pattern: validTiresQuery,
-    response: context.res,
-  });
+  if (!isRouteValid) {
+    context.res.statusCode = 404;
+    return { props: { errorStatusCode: 404 } };
+  }
 
   // Type tire reviews accept params for sort, order and page
   const queryParams = getStringifiedParams(params);
@@ -38,7 +35,8 @@ export const getServerSideProps: GetServerSideProps<ReviewListingServerData> = a
   const tireReviews = await backendGetReviewListing({ query: queryParams });
 
   if (!tireReviews.reviewsList.length) {
-    redirectToNotFound(context.res);
+    context.res.statusCode = 404;
+    return { props: { errorStatusCode: 404 } };
   }
 
   const props: ReviewListingServerData = {
