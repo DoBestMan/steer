@@ -2,7 +2,6 @@ import Image from '~/components/global/Image/Image';
 import { SiteCatalogBrand } from '~/data/models/SiteCatalogBrand';
 import { SiteImageExtended } from '~/data/models/SiteImageExtended';
 import { CSSStylesProp } from '~/lib/constants';
-import { typography } from '~/styles/typography.styles';
 
 import { styles } from './BrandLogoOrLabel.styles';
 
@@ -36,9 +35,7 @@ function BrandLogoOrLabel(props: Props) {
           {...rest}
         />
       ) : (
-        <span css={[typography.secondaryHeadline, customLabelStyles]}>
-          {brand.label}
-        </span>
+        <span css={customLabelStyles || styles.label}>{brand.label}</span>
       )}
     </>
   );

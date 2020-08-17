@@ -1,4 +1,5 @@
 import { PRODUCT, StylesMap } from '~/lib/constants';
+import { typography } from '~/styles/typography.styles';
 
 export const styles: StylesMap = {
   brandImage: {
@@ -13,4 +14,5 @@ export const styles: StylesMap = {
   centered: {
     margin: '0 auto',
   },
+  label: typography.secondaryHeadline,
 };
