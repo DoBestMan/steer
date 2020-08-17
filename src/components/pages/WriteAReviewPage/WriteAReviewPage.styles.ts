@@ -7,10 +7,6 @@ const styles: StylesMap = {
     [MQ.M]: {
       marginBottom: SPACING.SIZE_80,
     },
-
-    [MQ.L]: {
-      marginTop: SPACING.SIZE_80,
-    },
   },
 };
 

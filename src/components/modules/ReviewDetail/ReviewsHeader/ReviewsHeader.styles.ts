@@ -20,10 +20,8 @@ const styles: StylesMap = {
     [MQ.M]: {
       marginBottom: SPACING.SIZE_60,
     },
-
     [MQ.L]: {
       marginBottom: SPACING.SIZE_80,
-      marginTop: SPACING.SIZE_80,
     },
   },
   ratingsContainer: {
