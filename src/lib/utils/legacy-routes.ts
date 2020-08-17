@@ -2,13 +2,13 @@ import queryString from 'query-string';
 
 import { LEGACY_ROUTE_MAP, LEGACY_ROUTES } from '../constants/legacy-routes';
 import { URLS } from '../constants/urls';
+import { isProductionDeploy } from './deploy';
 import { interpolateRoute } from './routes';
 
 export function getLegacyAccountURL(): string {
-  // This function will allow for different URLs in different environments
-  // in the future. For now, we're keepping it simple and, just like checkout,
-  // all Steer environments point to the production account URL.
-  return URLS.ACCOUNT;
+  return isProductionDeploy()
+    ? URLS.ACCOUNT_PRODUCTION
+    : URLS.ACCOUNT_INTEGRATION;
 }
 
 export function getLegacyCheckoutURL({
@@ -51,7 +51,9 @@ export function getLegacyCheckoutURL({
 
   const hasQuery = Object.values(query).some((item) => item !== undefined);
 
-  const baseUrl = URLS.CHECKOUT;
+  const baseUrl = isProductionDeploy()
+    ? URLS.CHECKOUT_PRODUCTION
+    : URLS.CHECKOUT_INTEGRATION;
 
   return `${baseUrl}${parsedBaseRoute}${
     hasQuery ? `?${queryString.stringify(query)}` : ''
