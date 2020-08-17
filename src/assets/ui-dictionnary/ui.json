@@ -382,7 +382,8 @@
     },
     "stickyBar": {
       "label": {
-        "productLine": "{{productLine}}  ∙  {{sizesAvailable}} sizes available",
+        "productLine": "{{productLine}}  ∙  {{sizesAvailable}} size available",
+        "productLinePlural": "{{productLine}}  ∙  {{sizesAvailable}} sizes available",
         "tireSize": "{{productLine}} {{tireSize}}",
         "frontRearSize": "{{productLine}}  ∙  {{tireSize}} + {{rearSize}}"
       },

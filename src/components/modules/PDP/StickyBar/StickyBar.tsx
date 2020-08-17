@@ -41,7 +41,11 @@ function parseLabel({
   'productLine' | 'tireSize' | 'rearSize' | 'sizesAvailable'
 >) {
   if (!tireSize) {
-    return ui('pdp.stickyBar.label.productLine', {
+    const key =
+      sizesAvailable === 1
+        ? 'pdp.stickyBar.label.productLine'
+        : 'pdp.stickyBar.label.productLinePlural';
+    return ui(key, {
       productLine,
       sizesAvailable,
     });
