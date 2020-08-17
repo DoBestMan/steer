@@ -169,6 +169,7 @@ function SearchAutocomplete({
     const selectedItem =
       results[currentResultIndex].siteSearchResultList[currentResultItemIndex];
     onValueSelection(selectedItem);
+    setSelectedItemIndex([0, -1]);
 
     const { action } = selectedItem;
     if (action.type === SearchActionType.LINK && listRef.current) {
@@ -188,6 +189,7 @@ function SearchAutocomplete({
   const handleValueSelection = useCallback(
     (searchResult: SearchResult) => {
       onValueSelection(searchResult);
+      setSelectedItemIndex([0, -1]);
 
       const { action } = searchResult;
       if (action.type === SearchActionType.QUERY) {
@@ -203,7 +205,7 @@ function SearchAutocomplete({
         }
       }
     },
-    [onValueSelection],
+    [onValueSelection, setSelectedItemIndex],
   );
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {

@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { RefObject, useCallback, useState } from 'react';
+import { RefObject, useCallback, useEffect, useState } from 'react';
 
 import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
 import { SiteSearchResultGroup } from '~/data/models/SiteSearchResultGroup';
@@ -111,6 +111,10 @@ function Search({
       setSecondaryQuery({ ...secondaryQuery, ...query });
     }
   };
+
+  useEffect(() => {
+    forwardedRef?.current?.scrollTo(0, 0);
+  }, [forwardedRef, siteSearchResultGroupList]);
 
   const handleClearPastSearchesClick = () => {
     deletePastSearches();
