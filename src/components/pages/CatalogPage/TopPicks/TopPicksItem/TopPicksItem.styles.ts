@@ -1,5 +1,9 @@
 import { WHEEL_WIDTH } from '~/components/global/Car/Car.constants';
 import {
+  SIZES,
+  STICKER_SIZES,
+} from '~/components/global/Sticker/Sticker.styles';
+import {
   COLORS,
   EASING,
   MQ,
@@ -239,9 +243,19 @@ export const styles: StylesMap = {
     transition: `all ${TIME.MS300}ms ${EASING.CUBIC_EASE_OUT}`,
     zIndex: Z_INDEX.BEHIND,
 
-    [MQ.L]: {
+    [MQ.XL]: {
       left: -SPACING.SIZE_10,
       top: -SPACING.SIZE_10,
+    },
+  },
+  stickerCustom: {
+    [MQ.M]: {
+      height: 75,
+      width: 75,
+    },
+    [MQ.XL]: {
+      height: SIZES[STICKER_SIZES.LARGE].XL,
+      width: SIZES[STICKER_SIZES.LARGE].XL,
     },
   },
   stickerShow: {

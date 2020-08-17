@@ -191,7 +191,9 @@ function TopPicksItem(props: TopPickItemsProps) {
               <span css={[styles.sticker, show && styles.stickerShow]}>
                 <Sticker
                   label={ordinalSuffixOf(index + 1)}
-                  size={STICKER_SIZES.MEDIUM}
+                  size={STICKER_SIZES.LARGE}
+                  customCss={styles.stickerCustom}
+                  customTypography={typography.primarySubhead}
                 />
               </span>
             )}
