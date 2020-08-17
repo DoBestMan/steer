@@ -6,6 +6,10 @@ import { backendBootstrap } from '~/lib/backend/bootstrap';
 import { backendGetTireSizeDiameterSummary } from '~/lib/backend/catalog/size-diameter';
 import { isProductionDeploy } from '~/lib/utils/deploy';
 import { getStringifiedParams } from '~/lib/utils/routes';
+import {
+  removeInchFromQueryParam,
+  removeTireFromQueryParam,
+} from '~/lib/utils/string';
 
 export default async (
   request: NextApiRequest,
@@ -24,9 +28,9 @@ export default async (
   }
 
   const summaryRes = await backendGetTireSizeDiameterSummary({
+    category: removeTireFromQueryParam(category),
+    diameter: removeInchFromQueryParam(diameter),
     query: getStringifiedParams(rest),
-    category,
-    diameter,
   });
 
   if (isProductionDeploy()) {

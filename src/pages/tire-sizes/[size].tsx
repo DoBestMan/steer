@@ -25,6 +25,10 @@ import {
   getStringifiedParams,
   isRouteDiameterFormat,
 } from '~/lib/utils/routes';
+import {
+  removeInchFromQueryParam,
+  removeTireFromQueryParam,
+} from '~/lib/utils/string';
 
 interface Props extends CatalogPageData {
   size: string;
@@ -64,8 +68,8 @@ export const getServerSideProps: GetServerSideProps<PageResponse<
   if (isRouteDiameterFormat(context.req.url)) {
     const { category, diameter } = getDiameterCategory(size);
     const diameterApiArgs = {
-      category,
-      diameter,
+      category: removeTireFromQueryParam(category),
+      diameter: removeInchFromQueryParam(diameter),
       query: getStringifiedParams(vehicleParams),
     };
 
