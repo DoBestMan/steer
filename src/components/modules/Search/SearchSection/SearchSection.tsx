@@ -1,9 +1,10 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import BaseLink from '~/components/global/Link/BaseLink';
 import { SiteSearchResultTextItem } from '~/data/models/SiteSearchResultTextItem';
+import { TIME } from '~/lib/constants';
 
 import { useSearchContext } from '../Search.context';
 import { useFocusScrollIntoView } from '../Search.hooks';
@@ -19,6 +20,10 @@ export interface SearchSectionProps {
   siteSearchResultList: SiteSearchResultTextItem[];
 }
 
+const CONSTANTS = {
+  TOUCH_START_DELAY: TIME.MS100,
+};
+
 function SearchSection({
   label,
   onClick,
@@ -26,6 +31,7 @@ function SearchSection({
   sectionIndex,
   selectedItemIndex = [0, -1],
 }: SearchSectionProps) {
+  const isScrolling = useRef(false);
   const { onFocus, pushRefToArray } = useFocusScrollIntoView({});
   const {
     shouldPreventLinkNavigation,
@@ -42,13 +48,20 @@ function SearchSection({
   ) => {
     event.preventDefault();
 
-    if (onClick) {
-      onClick(searchResult);
-    }
+    setTimeout(() => {
+      if (onClick && !isScrolling.current) {
+        onClick(searchResult);
+      }
+    }, CONSTANTS.TOUCH_START_DELAY);
+  };
+
+  const handleTouchMove = () => {
+    isScrolling.current = true;
   };
 
   const handleTouchEnd = (event: React.TouchEvent) => {
     event.preventDefault();
+    isScrolling.current = false;
   };
 
   useEffect(() => {
@@ -126,6 +139,7 @@ function SearchSection({
                   onClick={handleClick(item)}
                   onFocus={onFocus(index)}
                   onTouchStart={handleTouchStart(item)}
+                  onTouchMove={handleTouchMove}
                   onTouchEnd={handleTouchEnd}
                 >
                   {innerContent}
