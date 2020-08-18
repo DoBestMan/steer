@@ -1,5 +1,6 @@
 import { css } from '@emotion/core';
 
+import { feedbackify } from '~/styles/document/feedbackify.styles';
 import { fonts, globalFont } from '~/styles/document/fonts.styles';
 import { modal } from '~/styles/document/modal.styles';
 import { recaptcha } from '~/styles/document/recaptcha.styles';
@@ -9,6 +10,7 @@ import { swiperjs } from '~/styles/document/swiper.styles';
 
 export const global = css`
   ${reset}
+  ${feedbackify}
   ${fonts}
   ${globalFont}
   ${swiperjs}
