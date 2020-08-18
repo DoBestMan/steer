@@ -67,7 +67,7 @@ export const getServerSideProps: GetServerSideProps<PageResponse<
   const apiArgs = {
     brand: brandName,
     category: categoryOrType,
-    query: getStringifiedParams(vehicleParams),
+    query: getStringifiedParams({ ...vehicleParams, pageType: PAGE_TYPE }),
   };
   const [{ siteCatalogSummary }, productsRes] = await Promise.all([
     backendGetBrandSummary(apiArgs),
@@ -86,7 +86,6 @@ export const getServerSideProps: GetServerSideProps<PageResponse<
     props: {
       brand: brandName,
       categoryOrType,
-      pageType: PAGE_TYPE,
       serverData: {
         siteCatalogSummary,
         siteCatalogProducts:
