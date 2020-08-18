@@ -52,6 +52,7 @@ export function mapDataToLinkingData({
   const sellerName = 'SimpleTire';
 
   const offers: Offer[] = siteProductLineAvailableSizeList
+    .slice()
     .sort((a, b) => parseInt(a.priceInCents, 10) - parseInt(b.priceInCents, 10))
     .map((item) => ({
       '@type': 'Offer',
