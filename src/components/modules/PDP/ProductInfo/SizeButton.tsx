@@ -1,18 +1,14 @@
-import dynamic from 'next/dynamic';
 import { useState } from 'react';
 
 import Dropdown from '~/components/global/Dropdown/Dropdown';
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
+import SizeFinder from '~/components/modules/PDP/SizeFinder/SizeFinder';
 import { useProductDetailContext } from '~/components/pages/ProductDetail/ProductDetail.context';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import { ProductInfoProps } from './ProductInfo';
 import styles from './SizeButton.styles';
-
-const DynamicSizeFinder = dynamic(() =>
-  import('~/components/modules/PDP/SizeFinder/SizeFinder'),
-);
 
 type Props = Pick<
   ProductInfoProps,
@@ -42,12 +38,12 @@ function RenderSizeFinder({
 
   return (
     <Dropdown
-      shouldActivateListeners={false}
+      shouldActivateListeners={isOpen}
       contentLabel={ui('pdp.productInfo.selectSizeLabel')}
-      isOpen={!!isOpen}
+      isOpen={isOpen}
       onClose={onClose}
     >
-      <DynamicSizeFinder onChange={handleChangeSize} {...sizeFinder} />
+      <SizeFinder onChange={handleChangeSize} {...sizeFinder} />
     </Dropdown>
   );
 }
@@ -91,6 +87,7 @@ function SizeButton({
       <>
         <button
           aria-expanded={isOpen}
+          disabled={isOpen}
           className="dropdown-button"
           type="button"
           css={styles.root}
@@ -113,6 +110,7 @@ function SizeButton({
     <div>
       <button
         aria-expanded={isOpen}
+        disabled={isOpen}
         className="dropdown-button"
         type="button"
         css={styles.root}

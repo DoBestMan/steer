@@ -49,6 +49,9 @@ const styles: StylesMap = {
   root: [
     typography.primarySubhead,
     {
+      ':empty': {
+        display: 'none',
+      },
       // allow dropdown content to be scrollable with action bar overlaying content
       '> div:first-of-type': [
         hideScrollbar,

@@ -15,6 +15,10 @@ const styles: CSSObject = {
     {
       alignItems: 'center',
       display: 'flex',
+
+      ':disabled': {
+        pointerEvents: 'none',
+      },
     },
   ],
   selectSize: {
