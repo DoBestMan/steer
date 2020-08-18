@@ -16,11 +16,12 @@ const styles: StylesMap = {
     textAlign: 'center',
   },
   column: {
+    alignItems: 'center',
+    display: 'flex',
     padding: `${SPACING.SIZE_20}px 0`,
   },
   container: {
     paddingBottom: `${SPACING.SIZE_40}px`,
-    textAlign: 'left',
     width: '100%',
     [MQ.S]: {
       paddingTop: SPACING.SIZE_20,
@@ -33,7 +34,7 @@ const styles: StylesMap = {
   lastColumn: [
     {
       marginRight: 0,
-      textAlign: 'right',
+      justifyContent: 'flex-end',
     },
   ],
   link: {
