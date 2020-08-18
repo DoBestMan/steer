@@ -30,7 +30,7 @@ const styles: StylesMap = {
     typography.primarySubhead,
     {
       color: COLORS.LIGHT.GRAY_70,
-      display: 'none',
+      marginBottom: SPACING.SIZE_20, // To compensate container's margin
 
       span: [
         typography.primaryHeadline,
@@ -41,6 +41,7 @@ const styles: StylesMap = {
 
       [MQ.L]: {
         display: 'block',
+        marginBottom: 0,
       },
     },
   ],

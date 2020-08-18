@@ -14,10 +14,10 @@ const styles: StylesMap = {
   originalValue: [
     typography.smallCopyTight,
     {
-      marginLeft: SPACING.SIZE_05,
-      marginTop: 3,
-      textDecoration: 'line-through',
       color: COLORS.LIGHT.GRAY_70,
+      marginBottom: SPACING.SIZE_02,
+      marginLeft: SPACING.SIZE_05,
+      textDecoration: 'line-through',
     },
   ],
   originalValuePrefixed: {

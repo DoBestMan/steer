@@ -99,13 +99,11 @@ const styles: StylesMap = {
   },
   pricesWrapper: {
     animation: CONSTANTS.FADE_IN_ANIMATION,
-    marginBottom: SPACING.SIZE_02,
     maxWidth: CONSTANTS.HEADER_MAX_WIDTH,
     textAlign: 'right',
 
     [MQ.L]: {
       textAlign: 'left',
-      marginBottom: 0,
       marginTop: SPACING.SIZE_40,
       maxWidth: '100%',
     },

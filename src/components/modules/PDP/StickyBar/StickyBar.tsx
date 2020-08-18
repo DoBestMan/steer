@@ -2,6 +2,7 @@ import dynamic from 'next/dynamic';
 import { RefObject, useEffect, useState } from 'react';
 
 import StickyBar from '~/components/modules/StickyBar/StickyBar';
+import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
 import { SiteImage } from '~/data/models/SiteImage';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { THEME } from '~/lib/constants';
@@ -78,6 +79,8 @@ function PDPStickyBar({
   const [isActive, setIsActive] = useState(!avoidSection);
   const [theme, setTheme] = useState(THEME.ORANGE);
   const { lessThan } = useBreakpoints();
+  const { vehicle } = useUserPersonalizationContext();
+  const isTireLine = !tireSize && !rearSize;
 
   const secondaryLabel = parseLabel({
     productLine,
@@ -127,6 +130,11 @@ function PDPStickyBar({
       darkSectionObserver.disconnect();
     };
   }, [darkSection]);
+
+  // There's no action to tireline's stickybar when vehicle is known
+  if (isTireLine && vehicle) {
+    return null;
+  }
 
   return (
     <div aria-hidden={!isActive && !lessThan.L} css={styles.root}>
