@@ -68,7 +68,7 @@ function Title({
         <span
           css={[
             styles.description,
-            typography.smallCopyTight,
+            typography.topPicksSubcopy,
             show && styles.descriptionShow,
           ]}
         >

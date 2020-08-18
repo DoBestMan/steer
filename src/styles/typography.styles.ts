@@ -168,4 +168,12 @@ export const typography: { [className: string]: CSSObject[] } = {
       letterSpacing: '-0.02em',
     },
   ],
+  topPicksSubcopy: [
+    fontStyles(12, 15),
+    {
+      fontWeight: 'normal',
+      [MQ.M]: fontStyles(15, 20),
+      [MQ.XL]: fontStyles(18, 24),
+    },
+  ],
 };
