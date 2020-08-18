@@ -146,10 +146,7 @@ describe('BaseLink hook', () => {
         href: '/brands/drupal-tires',
       }),
     ).toEqual({
-      as: {
-        pathname: '/brands/drupal-tires',
-        query: {},
-      },
+      as: '/brands/drupal-tires',
       externalProps: {},
       finalHref: {
         pathname: '/brands/[brand]',
@@ -166,10 +163,7 @@ describe('BaseLink hook', () => {
         href: '/brands/drupal-tires/reviews',
       }),
     ).toEqual({
-      as: {
-        pathname: '/brands/drupal-tires/reviews',
-        query: {},
-      },
+      as: '/brands/drupal-tires/reviews',
       externalProps: {},
       finalHref: {
         pathname: '/brands/[brand]/reviews',
@@ -186,10 +180,41 @@ describe('BaseLink hook', () => {
         href: '/brands/drupal-tires/tractors',
       }),
     ).toEqual({
-      as: {
-        pathname: '/brands/drupal-tires/tractors',
+      as: '/brands/drupal-tires/tractors',
+      externalProps: {},
+      finalHref: {
+        pathname: '/brands/[brand]/[productLine]',
         query: {},
       },
+      isInternal: true,
+      prefetch: undefined,
+    });
+  });
+
+  test('internal dynamic link with hash params', () => {
+    expect(
+      useBaseLinkProps({
+        href: '/brands/drupal-tires/tractors#tireSize=200-r14',
+      }),
+    ).toEqual({
+      as: '/brands/drupal-tires/tractors#tireSize=200-r14',
+      externalProps: {},
+      finalHref: {
+        pathname: '/brands/[brand]/[productLine]',
+        query: {},
+      },
+      isInternal: true,
+      prefetch: undefined,
+    });
+  });
+
+  test('internal dynamic link with anchor', () => {
+    expect(
+      useBaseLinkProps({
+        href: '/brands/drupal-tires/tractors#anchor',
+      }),
+    ).toEqual({
+      as: '/brands/drupal-tires/tractors#anchor',
       externalProps: {},
       finalHref: {
         pathname: '/brands/[brand]/[productLine]',
@@ -206,12 +231,7 @@ describe('BaseLink hook', () => {
         href: '/brands/drupal-tires?trim=LX',
       }),
     ).toEqual({
-      as: {
-        pathname: '/brands/drupal-tires',
-        query: {
-          trim: 'LX',
-        },
-      },
+      as: '/brands/drupal-tires?trim=LX',
       externalProps: {},
       finalHref: {
         pathname: '/brands/[brand]',
@@ -245,10 +265,7 @@ describe('BaseLink hook', () => {
         href: '/my-open-template',
       }),
     ).toEqual({
-      as: {
-        pathname: '/my-open-template',
-        query: {},
-      },
+      as: '/my-open-template',
       externalProps: {},
       finalHref: {
         pathname: '/[slug]',
@@ -274,13 +291,7 @@ describe('BaseLink hook', () => {
           routeQueryParamOptions,
         }),
       ).toEqual({
-        as: {
-          pathname: '/vehicles/honda/civic/2019',
-          query: {
-            brand: 'continental',
-            trim: 'LX',
-          },
-        },
+        as: '/vehicles/honda/civic/2019?brand=continental&trim=LX',
         externalProps: {},
         finalHref: {
           pathname: '/vehicles/[make]/[model]/[year]',
@@ -301,10 +312,7 @@ describe('BaseLink hook', () => {
           routeQueryParamOptions,
         }),
       ).toEqual({
-        as: {
-          pathname: '/brands/drupal-tires',
-          query: {},
-        },
+        as: '/brands/drupal-tires',
         externalProps: {},
         finalHref: {
           pathname: '/brands/[brand]',

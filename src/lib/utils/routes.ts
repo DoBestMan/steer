@@ -5,7 +5,7 @@ import { SiteQueryParams } from '~/data/models/SiteQueryParams';
 
 import { brackets, diameterFormat } from './regex';
 
-export interface SimpleUrlObject {
+interface SimpleUrlObject {
   pathname: string;
   query: ParsedQuery;
 }

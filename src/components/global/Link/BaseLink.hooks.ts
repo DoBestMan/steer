@@ -1,51 +1,17 @@
 import { LinkProps } from 'next/link';
+import queryString from 'query-string';
 
 import { ROUTE_TYPE_MAP } from '~/lib/constants';
 import { absoluteLink, specialLink } from '~/lib/utils/regex';
-import { getUrlObject, SimpleUrlObject, Url } from '~/lib/utils/routes';
+import { getUrlObject, Url } from '~/lib/utils/routes';
 
 // Turn links into regular expressions we can use to match routes from the API
 const routeRegexMap: Record<string, RegExp> = {};
 Object.values(ROUTE_TYPE_MAP).forEach((route) => {
   routeRegexMap[route] = new RegExp(
-    `^${route.replace(/\[\w+\]/g, '[\\w-]+')}$`,
+    `^${route.replace(/\[\w+\]/g, '[\\w-]+')}(#.*)?$`,
   );
 });
-
-/*
-  BaseLink accepts an optional routeQueryParamOptions prop in this format:
-  {
-    routes: [route1, route2],
-    params: {
-      promotion: 'ABC',
-    },
-  };
-
-  In this function:
-  - Check if routes list contains finalHref route
-  - If so, append the specified params to query objects
-
-  Example use case: Apply a promotion filter to all search result links
-  that lead to Vehicle/Tire Size catalog pages.
-*/
-function applyRouteQueryParamOptions(
-  finalHref: SimpleUrlObject,
-  as: SimpleUrlObject,
-  routeQueryParamOptions?: RouteQueryParamOptions,
-) {
-  if (
-    routeQueryParamOptions &&
-    routeQueryParamOptions.routes.includes(finalHref.pathname)
-  ) {
-    const finalQuery = {
-      ...finalHref.query,
-      ...routeQueryParamOptions.params,
-    };
-
-    as.query = finalQuery;
-    finalHref.query = finalQuery;
-  }
-}
 
 export interface RouteQueryParamOptions {
   params: Record<string, string>;
@@ -99,9 +65,34 @@ export function useBaseLinkProps({
         const isDynamic = route.includes('[');
         if (isDynamic) {
           // if link matches a dynamic route, use an "as"
-          as = getUrlObject(pathname, query);
           finalHref = getUrlObject(route, query);
-          applyRouteQueryParamOptions(finalHref, as, routeQueryParamOptions);
+
+          /**
+           * BaseLink accepts an optional routeQueryParamOptions prop in this format:
+           * {
+           *   routes: [route1, route2],
+           *   params: {
+           *     promotion: 'ABC',
+           *   },
+           * };
+
+           * In this function:
+           * - Check if routes list contains finalHref route
+           * - If so, append the specified params to query objects
+
+           * Example use case: Apply a promotion filter to all search result links
+           * that lead to Vehicle/Tire Size catalog pages.
+           */
+          const enhancedQuery = {
+            ...finalHref.query,
+            ...(routeQueryParamOptions?.routes.includes(finalHref.pathname)
+              ? routeQueryParamOptions.params
+              : {}),
+          };
+          finalHref.query = enhancedQuery;
+
+          const parsedQuery = queryString.stringify(enhancedQuery);
+          as = `${pathname}${parsedQuery ? `?${parsedQuery}` : ''}`;
         }
 
         // If we found a match, end the search,
