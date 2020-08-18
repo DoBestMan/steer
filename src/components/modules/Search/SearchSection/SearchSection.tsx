@@ -110,7 +110,7 @@ function SearchSection({
               return (
                 <li
                   className="listItem"
-                  key={index}
+                  key={item.label}
                   ref={pushRefToArray(index)}
                 >
                   <BaseLink
@@ -133,7 +133,11 @@ function SearchSection({
             }
 
             return (
-              <li className="listItem" key={index} ref={pushRefToArray(index)}>
+              <li
+                className="listItem"
+                key={item.label}
+                ref={pushRefToArray(index)}
+              >
                 <button
                   className={`itemButton ${isSelected ? 'isSelected' : ''}`}
                   onClick={handleClick(item)}
