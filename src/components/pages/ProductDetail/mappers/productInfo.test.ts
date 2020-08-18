@@ -12,6 +12,7 @@ describe('pages/ProductDetails/mappers/breadcrumbs', () => {
   it('returns parsed product info props', () => {
     expect(
       mapDataToProductInfo({
+        currentSizeIndex: -1,
         quantity: { front: 4 },
         rearSize: '100-40r17',
         router: routerMock,
@@ -20,7 +21,7 @@ describe('pages/ProductDetails/mappers/breadcrumbs', () => {
         tireSize: '200-40r17',
       }),
     ).toMatchObject({
-      availableSizes: 3,
+      availableSizes: 4,
       brand: {
         image: {
           altText: 'Achilles',
@@ -66,6 +67,7 @@ describe('pages/ProductDetails/mappers/breadcrumbs', () => {
   it('returns road hazard information for single available size', () => {
     expect(
       mapDataToProductInfo({
+        currentSizeIndex: -1,
         quantity: { front: 4 },
         router: routerMock,
         siteProduct: siteProductMock,
@@ -83,6 +85,7 @@ describe('pages/ProductDetails/mappers/breadcrumbs', () => {
   it('returns null road hazard for single unavailable size', () => {
     expect(
       mapDataToProductInfo({
+        currentSizeIndex: -1,
         quantity: { front: 4 },
         router: routerMock,
         siteProduct: {
@@ -103,6 +106,7 @@ describe('pages/ProductDetails/mappers/breadcrumbs', () => {
   it('returns road hazard for front + rear available sizes', () => {
     expect(
       mapDataToProductInfo({
+        currentSizeIndex: -1,
         quantity: { front: 2, rear: 2 },
         router: routerMock,
         siteProduct: siteProductMock,
@@ -120,6 +124,7 @@ describe('pages/ProductDetails/mappers/breadcrumbs', () => {
   it('returns null road hazard for front available + rear unavailable sizes', () => {
     expect(
       mapDataToProductInfo({
+        currentSizeIndex: -1,
         quantity: { front: 2, rear: 2 },
         router: routerMock,
         siteProduct: {
@@ -140,6 +145,7 @@ describe('pages/ProductDetails/mappers/breadcrumbs', () => {
   it('returns null road hazard for front unavailable + rear available sizes', () => {
     expect(
       mapDataToProductInfo({
+        currentSizeIndex: -1,
         quantity: { front: 2, rear: 2 },
         router: routerMock,
         siteProduct: {
@@ -160,6 +166,7 @@ describe('pages/ProductDetails/mappers/breadcrumbs', () => {
   it('returns null road hazard for front + rear available sizes with different durations', () => {
     expect(
       mapDataToProductInfo({
+        currentSizeIndex: -1,
         quantity: { front: 2, rear: 2 },
         rearSize: '100-40r17',
         router: routerMock,
@@ -187,6 +194,35 @@ describe('pages/ProductDetails/mappers/breadcrumbs', () => {
       }),
     ).toMatchObject({
       roadHazard: null,
+    });
+  });
+
+  it('returns tire line false in case of defined tireSize', () => {
+    expect(
+      mapDataToProductInfo({
+        currentSizeIndex: -1,
+        quantity: { front: 2, rear: 2 },
+        router: routerMock,
+        siteProduct: siteProductMock,
+        siteProductReviews: siteProductReviewsMock,
+        tireSize: '200-r14',
+      }),
+    ).toMatchObject({
+      isTireLine: false,
+    });
+  });
+
+  it('returns tire line in case of missing tireSize', () => {
+    expect(
+      mapDataToProductInfo({
+        currentSizeIndex: -1,
+        quantity: { front: 2, rear: 2 },
+        router: routerMock,
+        siteProduct: siteProductMock,
+        siteProductReviews: siteProductReviewsMock,
+      }),
+    ).toMatchObject({
+      isTireLine: true,
     });
   });
 });

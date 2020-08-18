@@ -4,6 +4,7 @@ import Radio from './Radio';
 import styles from './Radio.styles';
 
 interface Props {
+  active?: boolean;
   activeValue?: string;
   count?: number | null;
   description?: string | null;
@@ -16,6 +17,8 @@ interface Props {
 }
 
 export default function TitleRadio({
+  active,
+  activeValue,
   count = null,
   description,
   flair,
@@ -24,7 +27,8 @@ export default function TitleRadio({
   name,
   ...rest
 }: Props) {
-  const isActive = rest.activeValue === rest.value;
+  const isActive = active !== undefined ? active : activeValue === rest.value;
+
   return (
     <label
       css={[styles.titleRoot, isActive ? styles.rootActive : styles.rootHover]}
@@ -37,7 +41,12 @@ export default function TitleRadio({
         isDisabled={isDisabled}
         css={styles.label}
       />
-      <Radio name={name} isDisabled={isDisabled} {...rest} />
+      <Radio
+        name={name}
+        isDisabled={isDisabled}
+        isActive={isActive}
+        {...rest}
+      />
     </label>
   );
 }

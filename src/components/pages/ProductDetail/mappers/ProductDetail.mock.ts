@@ -1257,6 +1257,7 @@ export const siteProductMock: SiteProduct = {
       partNumber: '00000000',
       siteQueryParams: {
         tireSize: '100-40r15',
+        mpn: '1234567893',
       },
     },
     {
@@ -1283,6 +1284,7 @@ export const siteProductMock: SiteProduct = {
       partNumber: '11111111',
       siteQueryParams: {
         tireSize: '100-40r17',
+        mpn: '1234567892',
       },
     },
     {
@@ -1305,10 +1307,38 @@ export const siteProductMock: SiteProduct = {
       priceInCents: '4999',
       rim: 17,
       isFitForCurrentVehicle: false,
-      isSelected: false,
+      isSelected: true,
       partNumber: '12345678',
       siteQueryParams: {
         tireSize: '200-40r17',
+        mpn: '1234567891',
+      },
+    },
+    {
+      size: '200/40R17',
+      loadSpeedRating: '91H',
+      specList: [
+        {
+          label: 'UTQG',
+          value: '700 AB',
+        },
+        {
+          label: 'Sidewall',
+          value: 'BW',
+        },
+        {
+          label: 'Part Nr.',
+          value: '15498150000',
+        },
+      ],
+      priceInCents: '5499',
+      rim: 17,
+      isFitForCurrentVehicle: false,
+      isSelected: false,
+      partNumber: '99999999',
+      siteQueryParams: {
+        tireSize: '200-40r17',
+        mpn: '1234567890',
       },
     },
   ],
@@ -1395,6 +1425,7 @@ export const siteProductReviewsMock: SiteProductReviews = {
 export const productDetailContextMock: ProductDetailContextProps = {
   addToCart: () => {},
   changeSize: () => {},
+  currentSizeIndex: -1,
   data: {
     siteProduct: siteProductMock,
     siteProductReviews: siteProductReviewsMock,

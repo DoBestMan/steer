@@ -67,6 +67,23 @@ const styles: StylesMap = {
       width: 195,
     },
   },
+  loadingSizeSelector: {
+    backgroundColor: COLORS.LIGHT.GRAY_10,
+    height: 20,
+    marginBottom: SPACING.SIZE_05,
+    marginTop: SPACING.SIZE_05,
+    width: 200,
+
+    [MQ.M]: {
+      height: 30,
+      width: 260,
+    },
+
+    [MQ.L]: {
+      height: 35,
+      width: 260,
+    },
+  },
   name: {
     display: 'block',
   },

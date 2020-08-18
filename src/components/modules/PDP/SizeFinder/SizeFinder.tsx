@@ -12,22 +12,22 @@ import { ui } from '~/lib/utils/ui-dictionary';
 import styles from './SizeFinder.styles';
 
 export interface SizeFinderProps {
-  onChange: (size: string) => void;
+  currentIndex: number;
+  onChange: (index: number) => void;
   sizes: SiteProductLineAvailableSizeItem[];
-  value?: string;
 }
 
 export default function SizeFinder({
+  currentIndex,
   sizes,
-  value,
   onChange,
 }: SizeFinderProps) {
   const { vehicle } = useUserPersonalizationContext();
   const { openStaticModal } = useModalContext();
 
   const handleChange = useCallback(
-    (size: string) => {
-      onChange(size);
+    (value: string) => {
+      onChange(parseInt(value, 10));
     },
     [onChange],
   );
@@ -51,24 +51,30 @@ export default function SizeFinder({
             {ui('pdp.productInfo.findMyTireSizeLabel')}
           </Link>
         </div>
-        {sizes?.map((item: SiteProductLineAvailableSizeItem, idx) => (
-          <div css={styles.container} key={idx}>
-            <TitleRadio
-              name="size-finder"
-              key={idx}
-              label={`${item.size} ${item.loadSpeedRating}`}
-              flair={
-                (item.isFitForCurrentVehicle &&
-                  vehicle &&
-                  ui('pdp.sizeFinder.fits', { make: vehicle?.vehicleMake })) ||
-                undefined
-              }
-              onChange={handleChange}
-              value={item.siteQueryParams?.tireSize}
-              activeValue={value}
-            />
-          </div>
-        ))}
+        {sizes?.map((item, idx) => {
+          const isSelected = currentIndex === idx;
+
+          return (
+            <div css={styles.container} key={idx}>
+              <TitleRadio
+                name="size-finder"
+                key={idx}
+                label={`${item.size} ${item.loadSpeedRating}`}
+                flair={
+                  (item.isFitForCurrentVehicle &&
+                    vehicle &&
+                    ui('pdp.sizeFinder.fits', {
+                      make: vehicle?.vehicleMake,
+                    })) ||
+                  undefined
+                }
+                onChange={handleChange}
+                value={idx.toString()}
+                active={isSelected}
+              />
+            </div>
+          );
+        })}
       </div>
     </>
   );

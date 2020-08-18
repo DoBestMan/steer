@@ -57,8 +57,8 @@ describe('modules/PDP/SizeButton', () => {
       <SizeButton
         availableSizes={CONSTANTS.AVAILABLE_SIZES}
         sizeFinder={{
+          currentIndex: -1,
           sizes: siteProductMock.siteProductLineAvailableSizeList,
-          value: undefined,
         }}
       />,
     );
@@ -89,8 +89,8 @@ describe('modules/PDP/SizeButton', () => {
       <SizeButton
         availableSizes={1}
         sizeFinder={{
+          currentIndex: -1,
           sizes: siteProductMock.siteProductLineAvailableSizeList.slice(0, 1),
-          value: undefined,
         }}
       />,
     );
@@ -121,8 +121,8 @@ describe('modules/PDP/SizeButton', () => {
         size="100/40R15"
         loadSpeedRating="89H"
         sizeFinder={{
+          currentIndex: -1,
           sizes: siteProductMock.siteProductLineAvailableSizeList,
-          value: undefined,
         }}
       />,
     );
@@ -139,10 +139,8 @@ describe('modules/PDP/SizeButton', () => {
         size="100/40R15"
         loadSpeedRating="89H"
         sizeFinder={{
+          currentIndex: -1,
           sizes: siteProductMock.siteProductLineAvailableSizeList,
-          value:
-            siteProductMock.siteProductLineAvailableSizeList[0].siteQueryParams
-              ?.tireSize,
         }}
       />,
     );

@@ -3,15 +3,15 @@ import { SiteProduct } from '~/data/models/SiteProduct';
 import { ParsedSizeFinderProps } from '../ProductDetail.hooks';
 
 export function mapDataToSizeFinder({
-  rearSize,
+  currentSizeIndex,
+  isFrontAndRear,
   siteProduct: { siteProductLineAvailableSizeList },
-  tireSize,
 }: {
-  rearSize?: string;
+  currentSizeIndex: number;
+  isFrontAndRear?: boolean;
   siteProduct: SiteProduct;
-  tireSize?: string;
 }): ParsedSizeFinderProps | null {
-  if (rearSize) {
+  if (isFrontAndRear) {
     return null;
   }
 
@@ -21,8 +21,18 @@ export function mapDataToSizeFinder({
     return null;
   }
 
+  /**
+   * If currentSizeIndex is set, then we use it since new data could be still loading.
+   * If currentSizeIndex is not set yet (first load of the page), search for isSelected
+   * in the data (which could be not found '-1').
+   */
+  const currentIndex =
+    currentSizeIndex >= 0
+      ? currentSizeIndex
+      : siteProductLineAvailableSizeList.findIndex((item) => item.isSelected);
+
   return {
+    currentIndex,
     sizes,
-    value: tireSize?.toString(),
   };
 }

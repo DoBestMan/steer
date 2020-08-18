@@ -36,7 +36,8 @@ interface Quantity {
 
 export interface ProductDetailContextProps {
   addToCart: ({ shouldAddCoverage }: { shouldAddCoverage: boolean }) => void;
-  changeSize: (value: string) => void;
+  changeSize: (index: number) => void;
+  currentSizeIndex: number;
   data: ProductDetailResponse | null;
   isLoading: boolean;
   quantity: Quantity;
@@ -87,6 +88,8 @@ function useContextSetup({
     vehicle,
   });
   const isPLA = !!router.pathname.match(CONSTANTS.PLA_ROUTE);
+  // It's necessary to add an individual state in order to show the selected option while loading data
+  const [currentSizeIndex, setCurrentSizeIndex] = useState(-1);
 
   const {
     lockSearchStateToVehicle,
@@ -155,8 +158,16 @@ function useContextSetup({
   );
 
   const changeSize = useCallback(
-    (value) => {
+    (index) => {
       setIsLoading(true);
+      setCurrentSizeIndex(index);
+      const currentSize =
+        data?.siteProduct.siteProductLineAvailableSizeList[index];
+
+      if (!currentSize) {
+        return;
+      }
+
       const interpolatedRoute = interpolateRoute(
         CONSTANTS.PRODUCT_DETAIL_ROUTE,
         {
@@ -166,7 +177,7 @@ function useContextSetup({
       );
       const querystring = queryString.stringify({
         ...hashParams,
-        tireSize: value,
+        ...currentSize.siteQueryParams,
         rearSize: undefined,
       });
 
@@ -175,12 +186,21 @@ function useContextSetup({
         `${interpolatedRoute}#${querystring}`,
       );
     },
-    [isPLA, queryParams, router, hashParams, setIsLoading],
+    [
+      isPLA,
+      queryParams,
+      router,
+      hashParams,
+      setIsLoading,
+      setCurrentSizeIndex,
+      data,
+    ],
   );
 
   return {
     addToCart,
     changeSize,
+    currentSizeIndex,
     data,
     isLoading,
     quantity,

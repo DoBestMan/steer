@@ -25,7 +25,8 @@ describe('pages/ProductDetails/mappers/techinicalSpecs', () => {
           options: [
             {
               label: '100/40R15 89H',
-              link: '/brands/continental-tires/dh2#tireSize=100-40r15',
+              link:
+                '/brands/continental-tires/dh2#mpn=1234567893&tireSize=100-40r15',
               price: '$59.99',
               specs: [
                 {
@@ -49,7 +50,8 @@ describe('pages/ProductDetails/mappers/techinicalSpecs', () => {
           options: [
             {
               label: '100/40R17 89H',
-              link: '/brands/continental-tires/dh2#tireSize=100-40r17',
+              link:
+                '/brands/continental-tires/dh2#mpn=1234567892&tireSize=100-40r17',
               price: '$69.99',
               specs: [
                 {
@@ -68,8 +70,29 @@ describe('pages/ProductDetails/mappers/techinicalSpecs', () => {
             },
             {
               label: '200/40R17 89H',
-              link: '/brands/continental-tires/dh2#tireSize=200-40r17',
+              link:
+                '/brands/continental-tires/dh2#mpn=1234567891&tireSize=200-40r17',
               price: '$49.99',
+              specs: [
+                {
+                  label: 'UTQG',
+                  value: '700 AB',
+                },
+                {
+                  label: 'Sidewall',
+                  value: 'BW',
+                },
+                {
+                  label: 'Part Nr.',
+                  value: '15498150000',
+                },
+              ],
+            },
+            {
+              label: '200/40R17 91H',
+              link:
+                '/brands/continental-tires/dh2#mpn=1234567890&tireSize=200-40r17',
+              price: '$54.99',
               specs: [
                 {
                   label: 'UTQG',

@@ -27,8 +27,8 @@ function RenderSizeFinder({
 }: RenderSizeFinderProps) {
   const { changeSize } = useProductDetailContext();
 
-  function handleChangeSize(value: string) {
-    changeSize(value);
+  function handleChangeSize(index: number) {
+    changeSize(index);
     onClose();
   }
 

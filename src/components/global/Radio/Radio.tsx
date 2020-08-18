@@ -4,7 +4,7 @@ import styles from './Radio.styles';
 
 interface Props  // use custom on change
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
-  activeValue?: string;
+  isActive?: boolean;
   isDisabled?: boolean;
   name: string;
   onChange: (value: string) => void;
@@ -12,7 +12,7 @@ interface Props  // use custom on change
 }
 
 export default function Radio({
-  activeValue,
+  isActive,
   isDisabled,
   onChange,
   value,
@@ -21,7 +21,7 @@ export default function Radio({
   function handleChange() {
     onChange(value);
   }
-  const isActive = activeValue === value;
+
   return (
     <>
       <input

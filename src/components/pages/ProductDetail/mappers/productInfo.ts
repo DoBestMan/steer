@@ -13,6 +13,7 @@ import { interpolateRoute } from '~/lib/utils/routes';
 import { mapDataToRoadHazard } from './roadHazard';
 
 export function mapDataToProductInfo({
+  currentSizeIndex,
   quantity,
   siteProduct,
   siteProductReviews: { performanceRating, reviewsSource },
@@ -22,6 +23,7 @@ export function mapDataToProductInfo({
   },
   tireSize,
 }: {
+  currentSizeIndex: number;
   quantity: { front: number; rear?: number };
   rearSize?: string;
   router: NextRouter;
@@ -57,12 +59,11 @@ export function mapDataToProductInfo({
     siteProductLineSizeDetail?.productStatus ===
     SiteProductLineSizeDetailProductStatusEnum.ProductStatusCallForPricing;
 
-  const listingSize: SiteProductLineAvailableSizeItem | null =
-    (tireSize &&
-      siteProductLineAvailableSizeList.find(
-        (item) => item.siteQueryParams.tireSize === tireSize,
-      )) ||
-    null;
+  const listingSize: SiteProductLineAvailableSizeItem | null | undefined =
+    currentSizeIndex >= 0
+      ? siteProductLineAvailableSizeList[currentSizeIndex]
+      : siteProductLineAvailableSizeList.find((item) => item.isSelected);
+
   const tireSizeLabel = listingSize?.size;
   const loadSpeedRating = listingSize?.loadSpeedRating;
   const price =
@@ -109,6 +110,8 @@ export function mapDataToProductInfo({
     quantity,
   });
 
+  const isTireLine = !tireSize;
+
   return {
     availableSizes,
     brand: {
@@ -122,6 +125,7 @@ export function mapDataToProductInfo({
     },
     brandURL,
     callForPricing,
+    isTireLine,
     loadSpeedRating,
     price,
     priceLabel,

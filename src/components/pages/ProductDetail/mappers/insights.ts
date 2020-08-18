@@ -108,15 +108,15 @@ export function mapDataToInsights({
   );
 
   const onSelectAvailableOption = () => {
-    const firstAvailableSize = siteProductLineAvailableSizeList.find(
+    const firstAvailableSize = siteProductLineAvailableSizeList.findIndex(
       (item) => item.isFitForCurrentVehicle,
     );
 
-    if (!firstAvailableSize) {
+    if (firstAvailableSize === -1) {
       return;
     }
 
-    changeSize(firstAvailableSize.siteQueryParams.tireSize);
+    changeSize(firstAvailableSize);
   };
 
   const onFindTiresThatFit = () => {

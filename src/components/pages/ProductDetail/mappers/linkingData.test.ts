@@ -64,7 +64,7 @@ describe('pages/ProductDetails/mappers/linkingData', () => {
         priceCurrency: 'USD',
         lowPrice: '49.99',
         highPrice: '69.99',
-        offerCount: 3,
+        offerCount: 4,
         offers: [
           {
             '@type': 'Offer',
@@ -76,6 +76,17 @@ describe('pages/ProductDetails/mappers/linkingData', () => {
             seller: { '@type': 'Organization', name: 'SimpleTire' },
             sku: '12345678',
             mpn: '12345678',
+          },
+          {
+            '@type': 'Offer',
+            url: 'https://simpletire.com/brands/continental-tires/dh2',
+            priceCurrency: 'USD',
+            price: '54.99',
+            itemCondition: 'https://schema.org/NewCondition',
+            availability: 'https://schema.org/InStock',
+            seller: { '@type': 'Organization', name: 'SimpleTire' },
+            sku: '99999999',
+            mpn: '99999999',
           },
           {
             '@type': 'Offer',

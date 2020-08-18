@@ -24,6 +24,7 @@ export interface ProductInfoProps {
   brand: SiteCatalogBrand;
   brandURL?: string;
   callForPricing?: boolean;
+  isTireLine: boolean;
   loadSpeedRating?: string;
   price?: SitePrice | null;
   priceLabel?: string | null;
@@ -58,6 +59,7 @@ function ProductInfo({
   brandURL,
   callForPricing,
   volatileAvailability,
+  isTireLine,
   loadSpeedRating,
   openDynamicModal,
   price,
@@ -77,7 +79,6 @@ function ProductInfo({
 }: Props) {
   const { isLoading } = useProductDetailContext();
   const isOutOfStock = (!price || callForPricing) && size;
-  const isTireLine = !size;
 
   if (rearSize && rearPrice) {
     return (
@@ -110,6 +111,8 @@ function ProductInfo({
     );
   }
 
+  const shouldShowSizeSelector = !isLoading || isTireLine || size;
+
   return (
     <>
       <div css={styles.wrapper}>
@@ -119,14 +122,18 @@ function ProductInfo({
             brand={brand}
             brandURL={brandURL}
           />
-          <div css={!rating && styles.sizeNoRating}>
-            <DynamicSizeButton
-              availableSizes={availableSizes}
-              size={size}
-              loadSpeedRating={loadSpeedRating}
-              sizeFinder={sizeFinder}
-            />
-          </div>
+          {shouldShowSizeSelector ? (
+            <div css={!rating && styles.sizeNoRating}>
+              <DynamicSizeButton
+                availableSizes={availableSizes}
+                size={size}
+                loadSpeedRating={loadSpeedRating}
+                sizeFinder={sizeFinder}
+              />
+            </div>
+          ) : (
+            <div css={styles.loadingSizeSelector} />
+          )}
           <Rating rating={rating} />
         </div>
         {isLoading && !isTireLine ? (

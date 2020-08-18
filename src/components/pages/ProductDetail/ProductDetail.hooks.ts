@@ -85,6 +85,7 @@ export const CONSTANTS = {
 function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
   const productDetail = useProductDetailContext();
   const {
+    currentSizeIndex,
     data: contextData,
     quantity,
     queryParams,
@@ -177,6 +178,7 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
   }, [asPath, isPLA, router, queryParams]);
 
   const productInfo = mapDataToProductInfo({
+    currentSizeIndex,
     quantity,
     rearSize: queryParams.rearSize,
     router,
@@ -226,9 +228,9 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
     reviews: mapDataToReviews({ siteProductReviews, router }),
     reviewsAnchor: CONSTANTS.REVIEWS_ANCHOR,
     sizeFinder: mapDataToSizeFinder({
+      currentSizeIndex,
+      isFrontAndRear: !!queryParams.rearSize,
       siteProduct,
-      rearSize: queryParams.rearSize,
-      tireSize: queryParams.tireSize,
     }),
     stickyBar: mapDataToStickyBar({ quantity, siteProduct }),
     technicalSpecs: mapDataToTechnicalSpecs({ siteProduct, router }),
