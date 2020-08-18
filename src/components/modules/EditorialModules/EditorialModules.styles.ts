@@ -1,6 +1,6 @@
 import { COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
 
-const containerSpacing = {
+export const containerSpacing = {
   spacingBottomS50XL60: {
     marginBottom: SPACING.SIZE_50,
     [MQ.L]: {

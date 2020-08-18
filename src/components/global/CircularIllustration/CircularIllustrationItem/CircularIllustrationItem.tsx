@@ -1,68 +1,66 @@
-import BrandLogoOrLabel from '~/components/global/BrandLogoOrLabel/BrandLogoOrLabel';
 import Car from '~/components/global/Car/Car';
-import { Cars } from '~/components/global/Car/Car.enums';
+import Icon from '~/components/global/Icon/Icon';
+import Image from '~/components/global/Image/Image';
 import Sticker from '~/components/global/Sticker/Sticker';
-import { SiteCatalogBrand } from '~/data/models/SiteCatalogBrand';
+import { SiteGraphicTile } from '~/data/models/SiteGraphicTile';
+import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 
 import { styles } from './CircularIllustrationItem.styles';
 
-export enum TitlePosition {
+export enum TitlePlacement {
   'bottom' = 'bottom',
   'top' = 'top',
 }
 
-interface Props {
-  brand?: SiteCatalogBrand;
-  carId?: Cars;
-  subTitle: string;
-  tagLabel?: string;
-  title: string;
-  titlePosition?: TitlePosition;
+export interface CirclularIllustrationProps extends SiteGraphicTile {
+  titlePlacement?: TitlePlacement;
 }
 
 function CircularIllustrationItem({
-  tagLabel,
-  brand,
-  carId,
+  highlight,
+  image,
   title,
-  subTitle,
-  titlePosition = TitlePosition['top'],
-}: Props) {
+  byline,
+  titlePlacement = TitlePlacement['top'],
+}: CirclularIllustrationProps) {
   return (
     <div css={styles.root}>
       <div css={styles.graphic}>
-        {tagLabel && (
+        {highlight && (
           <div css={styles.tag}>
-            <Sticker label={tagLabel} />
+            <Sticker label={highlight} />
           </div>
         )}
         <div css={styles.circle}>
-          {brand && (
-            <BrandLogoOrLabel
-              brand={brand}
-              customContainerStyles={styles.logo}
-              widths={[150, 200, 250]}
-            />
-          )}
-          {carId && !brand && <Car carId={carId} css={styles.car} />}
+          <div css={styles.logoImage}>
+            {image && image.type === ICON_IMAGE_TYPE.IMAGE && (
+              <Image {...image} widths={[150, 200, 250]} />
+            )}
+            {image && image.type === ICON_IMAGE_TYPE.ICON && (
+              <Icon name={image.svgId} />
+            )}
+            {image && image.type === ICON_IMAGE_TYPE.CAR && (
+              <Car carId={image.vehicleType} css={styles.car} />
+            )}
+          </div>
         </div>
       </div>
 
       <div
         css={[
-          titlePosition === 'top' ? styles.title : styles.subTitle,
-          styles.titlePositionTop,
+          titlePlacement === 'top' ? styles.title : styles.byline,
+          styles.titlePlacementTop,
         ]}
       >
-        {titlePosition === 'top' ? title : subTitle}
+        {titlePlacement === 'top' ? title : byline}
       </div>
       <div
         css={[
-          titlePosition === 'top' ? styles.subTitle : styles.title,
-          styles.titlePositionBottom,
+          titlePlacement === 'top' ? styles.byline : styles.title,
+          styles.titlePlacementBottom,
         ]}
       >
-        {titlePosition === 'top' ? subTitle : title}
+        {titlePlacement === 'top' ? byline : title}
       </div>
     </div>
   );

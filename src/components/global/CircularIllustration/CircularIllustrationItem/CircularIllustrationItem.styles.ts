@@ -7,9 +7,17 @@ const CIRCLE_SIZES = {
   LARGE: 174,
 };
 
-const LOGO_WIDTH = 120;
-
 export const styles: StylesMap = {
+  byline: [
+    typography.smallCopyTight,
+    {
+      alignItems: 'center',
+      display: 'flex',
+      justifyContent: 'center',
+      textAlign: 'center',
+      width: '100%',
+    },
+  ],
   car: {
     '.SVGInline-svg': {
       width: '100%',
@@ -60,23 +68,14 @@ export const styles: StylesMap = {
       width: 195,
     },
   },
-  logo: {
-    width: LOGO_WIDTH,
+  logoImage: {
+    width: SPACING.SIZE_110,
+    maxWidth: SPACING.SIZE_110,
   },
   root: {
     position: 'relative',
     width: '100%',
   },
-  subTitle: [
-    typography.smallCopyTight,
-    {
-      alignItems: 'center',
-      display: 'flex',
-      justifyContent: 'center',
-      textAlign: 'center',
-      width: '100%',
-    },
-  ],
   tag: {
     left: 0,
     padding: 3,
@@ -100,10 +99,10 @@ export const styles: StylesMap = {
       width: '100%',
     },
   ],
-  titlePositionBottom: {
+  titlePlacementBottom: {
     marginTop: SPACING.SIZE_02,
   },
-  titlePositionTop: {
+  titlePlacementTop: {
     marginTop: SPACING.SIZE_20,
   },
 };

@@ -8,7 +8,7 @@ import { SiteModuleBreadcrumbs } from '~/data/models/SiteModules';
 function ModuleBreadcrumbs({ breadcrumbs }: SiteModuleBreadcrumbs) {
   return (
     <div data-component="module-breadcrumbs">
-      <Grid css={[styles.breadcrumbContainer, styles.spacingBottomS50XL60]}>
+      <Grid css={[styles.spacingBottomS50XL60]}>
         <GridItem gridColumnL={'2/14'} gridColumnXL={'4/12'}>
           <Breadcrumbs
             navigationItems={transformBreadcrumbsItem(breadcrumbs)}

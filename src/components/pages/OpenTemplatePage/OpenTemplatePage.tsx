@@ -2,7 +2,7 @@ import Meta from '~/components/global/Meta/Meta';
 import EditorialHeaders from '~/components/modules/EditorialHeaders/EditorialHeaders';
 import EditorialModules from '~/components/modules/EditorialModules/EditorialModules';
 import ModuleBreadcrumbs from '~/components/modules/EditorialModules/modules/ModuleBreadcrumbs/ModuleBreadcrumbs';
-import { navigationPaddingTop } from '~/components/modules/Nav/Nav.styles';
+import { navigationBreadcrumbPaddingTop } from '~/components/modules/Nav/Nav.styles';
 import { PageData } from '~/data/models/SiteOpenTemplate';
 
 import { styles } from './OpenTemplatePage.styles';
@@ -13,7 +13,9 @@ type OpenTemplatePageProps = {
 
 function OpenTemplatePage({ pageData }: OpenTemplatePageProps) {
   return (
-    <div css={[styles.openTemplatePageContainer, navigationPaddingTop]}>
+    <div
+      css={[styles.openTemplatePageContainer, navigationBreadcrumbPaddingTop]}
+    >
       {pageData.metadata && pageData.metadata.meta && (
         <Meta {...pageData.metadata.meta} />
       )}

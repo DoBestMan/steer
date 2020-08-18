@@ -11,6 +11,14 @@ const styles: StylesMap = {
     display: 'flex',
     justifyContent: 'center',
   },
+  filename: [
+    typography.bodyCopy,
+    {
+      display: 'block',
+      paddingBottom: SPACING.SIZE_20,
+      height: SPACING.SIZE_20,
+    },
+  ],
   group: {
     paddingBottom: SPACING.SIZE_20,
     paddingTop: SPACING.SIZE_20,
@@ -28,6 +36,7 @@ const styles: StylesMap = {
       },
     },
   ],
+
   link: {
     display: 'inline-block',
     color: COLORS.GLOBAL.BLACK,

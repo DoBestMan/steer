@@ -1,4 +1,5 @@
 import { SiteCatalogProductItem } from './SiteCatalogProductItem';
+import { SiteIcon } from './SiteIcon';
 import { SiteImage } from './SiteImage';
 
 export enum SiteCatalogProductGroupItemEnum {
@@ -7,7 +8,7 @@ export enum SiteCatalogProductGroupItemEnum {
 
 export interface SiteCatalogProductGroupItem {
   description: string;
-  icon: SiteImage | null;
+  icon: SiteImage | SiteIcon | null;
   id: string;
   name: string;
   productList: SiteCatalogProductItem[];

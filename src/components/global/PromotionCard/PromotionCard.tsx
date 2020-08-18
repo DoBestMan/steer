@@ -31,12 +31,12 @@ export interface PromotionCardProps {
         type: 'string';
         value: string;
       }
-  >;
+  > | null;
   handlePromotionClick?: (params: Record<string, string>) => void;
   handleReferAFriendClick?: () => void;
   links: Array<PromotionLinksProps>;
-  moreBody?: string;
-  promoImage?: SiteImage;
+  moreBody?: string | null;
+  promoImage?: SiteImage | null;
 
   title: string;
 }
@@ -65,15 +65,15 @@ function PromotionCard({
 }: PromotionCardProps) {
   const decorators = figures?.map((figure, idx) => {
     if (
-      figure.type === ICON_IMAGE_TYPE.ICON ||
-      figure.type === ICON_IMAGE_TYPE.IMAGE
+      figure?.type === ICON_IMAGE_TYPE.ICON ||
+      figure?.type === ICON_IMAGE_TYPE.IMAGE
     ) {
       return (
         <IconOrImage key={idx} widths={[200, 300, 500, 800]} {...figure} />
       );
     }
 
-    if ('value' in figure) {
+    if (figure && 'value' in figure) {
       return figure.value;
     }
 
@@ -109,7 +109,7 @@ function PromotionCard({
     );
   });
   return (
-    <>
+    <div data-component="promotion-card">
       {promoImage && (
         <div css={styles.promoImage}>
           <Image {...promoImage} widths={[400, 600, 800]} responsive />
@@ -121,6 +121,7 @@ function PromotionCard({
           styles.root,
           promoImage && styles.removeTopRadius,
         ]}
+        data-component="promotion-card-body"
       >
         {figures && (
           <div css={[typography.jumboHeadline, styles.decorator]}>
@@ -171,7 +172,7 @@ function PromotionCard({
         )}
         <div>{dealsLinks}</div>
       </div>
-    </>
+    </div>
   );
 }
 

@@ -1,11 +1,12 @@
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import Markdown from '~/components/global/Markdown/MarkdownDynamic';
+import Meta, { MetaProps } from '~/components/global/Meta/Meta';
 import EditorialHeaders from '~/components/modules/EditorialHeaders/EditorialHeaders';
 import ModuleBreadcrumbs from '~/components/modules/EditorialModules/modules/ModuleBreadcrumbs/ModuleBreadcrumbs';
 import ModuleGraphicGrid from '~/components/modules/EditorialModules/modules/ModuleGraphicGrid/ModuleGraphicGrid';
 import ModuleSeparator from '~/components/modules/EditorialModules/modules/ModuleSeparator/ModuleSeparator';
-import { navigationPaddingTop } from '~/components/modules/Nav/Nav.styles';
+import { navigationBreadcrumbPaddingTop } from '~/components/modules/Nav/Nav.styles';
 import { SiteDeals } from '~/data/models/SiteDeals';
 import { SiteHeaderModule } from '~/data/models/SiteHeaderModule';
 import {
@@ -27,19 +28,28 @@ function DealsPage({ topGraphicGrid, deals }: SiteDeals) {
   };
   const graphicGridItems: Array<SiteModuleGraphicGridItem> =
     topGraphicGrid.items;
-
+  const meta: MetaProps = {
+    title: ui('meta.tireDeals.title'),
+    description: ui('meta.tireDeals.description'),
+  };
   return (
-    <div css={navigationPaddingTop}>
-      <div css={styles.pageHeader}>
-        <ModuleBreadcrumbs breadcrumbs={brandsBreadCrumData} />
-        <EditorialHeaders
-          moduleData={pageHeader}
-          moduleType={pageHeader.type}
-        />
-
-        <ModuleSeparator />
+    <div css={navigationBreadcrumbPaddingTop}>
+      <Meta {...meta} />
+      <ModuleBreadcrumbs breadcrumbs={brandsBreadCrumData} />
+      <EditorialHeaders moduleData={pageHeader} moduleType={pageHeader.type} />
+      <div css={styles.bottomDescription}>
+        <Grid>
+          <GridItem
+            gridColumn={'2/6'}
+            gridColumnM={'2/8'}
+            gridColumnL={'2/14'}
+            gridColumnXL={'4/12'}
+          >
+            <Markdown>{ui('deals.seoBodyCopy')}</Markdown>
+          </GridItem>
+        </Grid>
       </div>
-
+      <ModuleSeparator />
       <div css={styles.topGraphicGrid}>
         <ModuleGraphicGrid
           items={graphicGridItems}
@@ -64,18 +74,6 @@ function DealsPage({ topGraphicGrid, deals }: SiteDeals) {
             <DealsList title={deal.title} items={deal.items} key={index} />
           );
         })}
-      </div>
-      <div css={styles.bottomDescription}>
-        <Grid>
-          <GridItem
-            gridColumn={'2/6'}
-            gridColumnM={'2/8'}
-            gridColumnL={'2/14'}
-            gridColumnXL={'4/12'}
-          >
-            <Markdown>{ui('deals.seoBodyCopy')}</Markdown>
-          </GridItem>
-        </Grid>
       </div>
     </div>
   );

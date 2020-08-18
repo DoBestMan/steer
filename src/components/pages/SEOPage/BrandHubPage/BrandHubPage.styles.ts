@@ -7,6 +7,9 @@ const styles: StylesMap = {
   },
   breadCrumbs: {
     marginBottom: SPACING.SIZE_40,
+    [MQ.L]: {
+      marginBottom: SPACING.SIZE_50,
+    },
   },
   header: [
     typography.primaryHeadline,
@@ -21,10 +24,6 @@ const styles: StylesMap = {
   },
   root: {
     backgroundColor: COLORS.GLOBAL.WHITE,
-    paddingTop: SPACING.SIZE_80,
-    [MQ.L]: {
-      paddingTop: SPACING.SIZE_120,
-    },
   },
   search: {
     marginBottom: SPACING.SIZE_40,

@@ -1,29 +1,25 @@
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import BaseLink from '~/components/global/Link/BaseLink';
-import { BrandListItem } from '~/components/pages/SEOPage/BrandHubPage/BrandHubPage';
+import { SiteGraphicTile } from '~/data/models/SiteGraphicTile';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
-import { BREAKPOINT_SIZES } from '~/lib/constants';
+import { BREAKPOINT_SIZES, CSSStyles } from '~/lib/constants';
 
 import CircularIllustrationItem, {
-  TitlePosition,
+  TitlePlacement,
 } from '../CircularIllustrationItem/CircularIllustrationItem';
 import { styles } from '../CircularIllustrationItem/CircularIllustrationItem.styles';
 
-export enum CircularItemType {
-  'brand' = 'brand',
-  'car' = 'car',
-}
 export interface Props {
-  dataItems: Array<BrandListItem>;
-  dataType: CircularItemType;
-  titlePosition: TitlePosition;
+  dataItems: Array<SiteGraphicTile>;
+  itemCustomStyle?: CSSStyles;
+  titlePlacement?: TitlePlacement;
 }
 
-export function CircularIllustrationItemList({
+export function CircularIllustrationList({
   dataItems,
-  dataType,
-  titlePosition = TitlePosition.top,
+  titlePlacement = TitlePlacement.top,
+  itemCustomStyle,
 }: Props) {
   const gridColumnData = [
     {
@@ -58,14 +54,14 @@ export function CircularIllustrationItemList({
     bk === BREAKPOINT_SIZES.S ? 2 : bk === BREAKPOINT_SIZES.M ? 3 : 4;
   return (
     <Grid>
-      {dataItems.map((dataItem, index) => {
+      {dataItems.map((dataItem: SiteGraphicTile, index) => {
         currentGridColumnPosition =
           currentGridColumnPosition <= nbItemsInARow - 1
             ? currentGridColumnPosition + 1
             : 1;
         return (
           <GridItem
-            css={styles.titlePositionTop}
+            css={[styles.titlePositionTop, itemCustomStyle]}
             gridColumn={
               gridColumnData[currentGridColumnPosition - 1].gridColumn
             }
@@ -80,17 +76,19 @@ export function CircularIllustrationItemList({
             }
             key={index}
           >
-            {dataType && dataType === CircularItemType.brand && (
-              <BaseLink href={dataItem.href}>
+            {dataItem.link && dataItem.link.href && (
+              <BaseLink href={dataItem.link.href}>
                 <CircularIllustrationItem
-                  key={dataItem.brand.label}
-                  title={dataItem.brand.label}
-                  subTitle={dataItem.description}
-                  tagLabel={dataItem.tagLabel}
-                  brand={dataItem.brand}
-                  titlePosition={titlePosition}
+                  {...dataItem}
+                  titlePlacement={titlePlacement}
                 />
               </BaseLink>
+            )}
+            {dataItem && !dataItem.link && (
+              <CircularIllustrationItem
+                {...dataItem}
+                titlePlacement={titlePlacement}
+              />
             )}
           </GridItem>
         );

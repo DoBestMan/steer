@@ -2,7 +2,15 @@
   "meta": {
     "description": "Fast & Free Delivery! Shop for automotive tires online from over 300+ brands. Have them shipped to and installed at one of our 10,000+ installation centers, making the purchase and installation process painless and simple.",
     "title": "Buy Automotive Tires Online for Less",
+    "tireDeals": {
+      "title": "Tire Deals & Rebates from Goodyear, Bridgestone, Hankook & More",
+      "description": "Find the latest Tire Deals from major name brands like Goodyear Tires and Bridgestone Tires that you can use right on the SimpleTire.com website when looking for tires online."
+    },
     "brands": {
+      "brandsHub": {
+        "title": "Shop For Tires by Brand and Manufacturer",
+        "description": "Have a favorite brand of tire? Choose from our wide ranging catalog of tire brands and find the right tire for your vehicle. Simpletire.com carries the largest selection of new tires, all shipped fast and free directly to you, or the shop of your choice."
+      },
       "brand": {
         "categoriesOrTypes": {
           "title": "Buy {{brand}} {{categoryOrType}} Tires | Free Shipping, Fast Install",
@@ -123,6 +131,10 @@
     "tireSize": "Tire size",
     "brand": "Brand"
   },
+  "tireSizeBoard": {
+    "vehicleInfo": "Add Vehicle Info",
+    "tireSize": "Add Tire Size"
+  },
   "catalog": {
     "recirculation": {
       "allOfCatalog": "All of our catalog",
@@ -229,7 +241,7 @@
       "heading": "Get exclusive deals",
       "description": "Sign up for emails and access exclusive content and savings"
     },
-    "seoBodyCopy": "At SimpleTire, we care about your bottom line, which is why we carry top quality tires at the cheapest prices possible with fast, free shipping on every tire we sell! To help make your next tire purchase even more affordable, choose from our selection of the best tire deals available including tire coupons, discounts and rebates.\n\nThroughout the year, here you will find some of the best tire sales in the business - from military discounts to cash back offers and even Black Friday tire deals when the time comes.\n\nNot sure when you’ll need to purchase a new set of tires next? Sign up for emails to receive exclusive tire savings and content."
+    "seoBodyCopy": "At SimpleTire we care about your bottom line. That's why we carry top quality tires at reasonable prices and offer fast, free shipping on every tire we sell. To help make your next tire purchase even more affordable, choose from our available selection of tire deals, including coupons, discounts, and rebates.\n\nThroughout the year you will also find some of the best tire sales in the industry - from military discounts to cash back offers and even Black Friday deals, when the time comes."
   },
   "location": {
     "loadingCurrentLocationLabel": "Getting current location from your browser.",
@@ -651,7 +663,11 @@
       "attach": "Attach a file",
       "submitButton": "Submit",
       "success": "Thank you for sending the message!",
-      "error": "Oops, something went wrong! <br />Please try again."
+      "error": "Oops, something went wrong! <br />Please try again.",
+      "subject": {
+        "subject": "Subject ",
+        "optional": "(optional)"
+      }
     }
   },
   "seoPage": {

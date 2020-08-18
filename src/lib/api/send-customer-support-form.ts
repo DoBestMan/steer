@@ -5,7 +5,7 @@ export async function apiSendCustomerSupportForm(
   input: SiteCustomerSupportFormInput,
 ) {
   return await fetch<null, SiteCustomerSupportFormInput>({
-    endpoint: '/v1/site/customer-support',
+    endpoint: '/customer-support',
     jsonBody: input,
     method: 'post',
   });

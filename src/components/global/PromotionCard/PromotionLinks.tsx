@@ -58,7 +58,7 @@ export function SiteCTAReferFriend({
 export function SiteLinkWithLabel({ label, link }: PromotionLinksProps) {
   return (
     <Link
-      href={link?.href}
+      {...link}
       icon={ICONS.CHEVRON_RIGHT}
       theme={THEME.LIGHT}
       css={styles.links}

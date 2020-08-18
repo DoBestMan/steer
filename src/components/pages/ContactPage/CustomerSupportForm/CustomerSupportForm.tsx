@@ -57,6 +57,7 @@ function SendMessageForm({ selections }: Props) {
   const [isFormValid, setIsFormValid] = useState<boolean>(false);
   const [toastMessage, setToastMessage] = useState<TOAST_TYPE | string>('');
   const [loading, setLoading] = useState(false);
+  const [filename, setFilename] = useState('');
 
   const hasRequiredFieldFilled =
     !!formValues[FIELDS.EMAIL] &&
@@ -64,7 +65,6 @@ function SendMessageForm({ selections }: Props) {
     !!formValues[FIELDS.LAST_NAME] &&
     !!formValues[FIELDS.MESSAGE] &&
     !!formValues[FIELDS.PHONE_NUMBER] &&
-    !!formValues[FIELDS.ATTACHED_FILE] &&
     !!formValues[FIELDS.PHONE_NUMBER] &&
     !!formValues[FIELDS.ORDER_NUMBER] &&
     !!formValues[FIELDS.SUBJECT];
@@ -76,6 +76,8 @@ function SendMessageForm({ selections }: Props) {
   const postFormData = async (formData: SiteCustomerSupportFormInput) => {
     try {
       await apiSendCustomerSupportForm(formData);
+      setToastMessage(TOAST_TYPE.SUCCESS);
+      setFormValues(initialState);
     } catch (error) {
       setToastMessage(TOAST_TYPE.ERROR);
     }
@@ -119,7 +121,7 @@ function SendMessageForm({ selections }: Props) {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
       const file = event.target.files[0];
-
+      setFilename(file.name);
       if (file.size / 1024 < LIMIT_FILE_SIZE) {
         const reader = new FileReader();
         reader.readAsText(file);
@@ -235,6 +237,7 @@ function SendMessageForm({ selections }: Props) {
             />
           </fieldset>
           <fieldset css={[styles.group, styles.relative]}>
+            <span css={styles.filename}>{filename}</span>
             <label htmlFor="attach-file" css={styles.label}>
               <span>{ui('contactPage.message.attach')}</span>
             </label>

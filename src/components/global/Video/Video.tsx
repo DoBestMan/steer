@@ -105,13 +105,7 @@ function Video({
           customVideoStyles,
         ]}
       >
-        <div
-          css={[
-            styles.videoIframe,
-            hasPlayedVideo && activeVideoStyles.videoIframe,
-          ]}
-          id={videoId}
-        />
+        <div css={styles.videoIframe} id={videoId} />
       </div>
     </div>
   );

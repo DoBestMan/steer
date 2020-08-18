@@ -2,7 +2,7 @@ import Meta from '~/components/global/Meta/Meta';
 import EditorialHeaders from '~/components/modules/EditorialHeaders/EditorialHeaders';
 import EditorialModules from '~/components/modules/EditorialModules/EditorialModules';
 import ModuleBreadcrumbs from '~/components/modules/EditorialModules/modules/ModuleBreadcrumbs/ModuleBreadcrumbs';
-import { navigationPaddingTop } from '~/components/modules/Nav/Nav.styles';
+import { navigationBreadcrumbPaddingTop } from '~/components/modules/Nav/Nav.styles';
 
 import {
   customerSupportForm,
@@ -14,7 +14,9 @@ import CustomerSupportForm from './CustomerSupportForm/CustomerSupportForm';
 
 function ContactPage() {
   return (
-    <div css={[styles.openTemplatePageContainer, navigationPaddingTop]}>
+    <div
+      css={[styles.openTemplatePageContainer, navigationBreadcrumbPaddingTop]}
+    >
       {pageUpperData.metadata && pageUpperData.metadata.meta && (
         <Meta {...pageUpperData.metadata.meta} />
       )}

@@ -5,8 +5,6 @@ const styles: StylesMap = {
   bottomDescription: [
     typography.bodyCopy,
     {
-      marginTop: SPACING.SIZE_20,
-      marginBottom: SPACING.SIZE_20,
       p: {
         marginBottom: SPACING.SIZE_10,
       },

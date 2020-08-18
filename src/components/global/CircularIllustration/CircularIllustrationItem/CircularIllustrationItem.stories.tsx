@@ -7,7 +7,7 @@ import { SiteImage } from '~/data/models/SiteImage';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 
 import CircularIllustrationItem, {
-  TitlePosition,
+  TitlePlacement,
 } from './CircularIllustrationItem';
 import { styles } from './CircularIllustrationItem.styles';
 
@@ -22,62 +22,78 @@ export default {
 };
 
 const defaultProps = {
-  brand: {
-    image: {
-      altText: 'Accelera',
-      height: 20,
-      src:
-        'https://images.simpletire.com/image/upload/v1592606314/Accelera_Tires_black_j207to.svg',
-      type: ICON_IMAGE_TYPE.IMAGE,
-      width: 120,
-    } as SiteImage,
-    label: 'Accelera',
+  byline: '1,234 tires',
+  highlight: 'Top rated',
+  image: {
+    altText: 'Accelera',
+    height: 20,
+    src:
+      'https://images.simpletire.com/image/upload/v1592606314/Accelera_Tires_black_j207to.svg',
+    type: ICON_IMAGE_TYPE.IMAGE,
+    width: 120,
+  } as SiteImage,
+  link: {
+    href: '/passenger-tires',
+    isExternal: false,
   },
-  subTitle: '1,234 tires',
-  tagLabel: 'Top rated',
   title: 'Accelera',
-  titlePosition: TitlePosition['top'],
+  titlePlacement: TitlePlacement.top,
 };
 
 export function CircularIllustrationItemForBrandWithKnobs() {
-  const brandId = defaultProps.brand;
-  brandId.image.src = text('Image Src', defaultProps.brand.image.src);
+  const image = defaultProps.image;
+  image.src = text('Image Src', defaultProps.image.src);
   const title = text('Title', defaultProps.title);
-  const subTitle = text('Sub Title', defaultProps.subTitle);
-  const titlePosition = select(
+  const byline = text('Sub Title', defaultProps.byline);
+  const href = text('Sub Title', defaultProps.link.href);
+  const titlePlacement = select(
     'Title Position',
-    TitlePosition,
-    TitlePosition['top'],
+    TitlePlacement,
+    TitlePlacement.top,
   );
-  const tagLabel = text('Tag Label', defaultProps.tagLabel);
+  const link = {
+    href,
+    isExternal: false,
+  };
+  const highlight = text('Tag Label', defaultProps.highlight);
 
   return (
     <CircularIllustrationItem
-      brand={brandId}
+      image={image}
       title={title}
-      subTitle={subTitle}
-      titlePosition={titlePosition}
-      tagLabel={tagLabel}
+      byline={byline}
+      titlePlacement={titlePlacement}
+      highlight={highlight}
+      link={link}
     />
   );
 }
 
 export function CircularIllustrationItemForCarWithKnobs() {
   const car = select('Car', Object.keys(Cars), Object.keys(Cars)[10]) as Cars;
-  const title = text('Title', 'Crossover');
-  const subTitle = text('Sub Title', defaultProps.subTitle);
-  const titlePosition = select(
-    'Title Position',
-    TitlePosition,
-    TitlePosition['top'],
-  );
 
+  const title = text('Title', 'Crossover');
+  const byline = text('Sub Title', defaultProps.byline);
+  const titlePlacement = select(
+    'Title Placement',
+    TitlePlacement,
+    TitlePlacement['top'],
+  );
+  const href = text('Sub Title', defaultProps.link.href);
+  const link = {
+    href,
+    isExternal: false,
+  };
   return (
     <CircularIllustrationItem
-      carId={car}
+      image={{
+        type: ICON_IMAGE_TYPE.CAR,
+        vehicleType: car,
+      }}
       title={title}
-      subTitle={subTitle}
-      titlePosition={titlePosition}
+      byline={byline}
+      titlePlacement={titlePlacement}
+      link={link}
     />
   );
 }
@@ -86,61 +102,65 @@ export function CircularIllustrationItemInGrid() {
   return (
     <Grid>
       <GridItem
-        css={styles.titlePositionTop}
+        css={styles.TitlePlacementTop}
         gridColumn={'2/4'}
         gridColumnM={'2/4'}
         gridColumnL={'2/5'}
         gridColumnXL={'4/6'}
       >
         <CircularIllustrationItem
-          brand={defaultProps.brand}
+          image={defaultProps.image}
           title={defaultProps.title}
-          subTitle={defaultProps.subTitle}
-          titlePosition={defaultProps.titlePosition}
-          tagLabel={defaultProps.tagLabel}
+          byline={defaultProps.byline}
+          titlePlacement={defaultProps.titlePlacement}
+          highlight={defaultProps.highlight}
+          link={defaultProps.link}
         />
       </GridItem>
       <GridItem
-        css={styles.titlePositionTop}
+        css={styles.TitlePlacementTop}
         gridColumn={'4/6'}
         gridColumnM={'4/6'}
         gridColumnL={'5/8'}
         gridColumnXL={'6/8'}
       >
         <CircularIllustrationItem
-          brand={defaultProps.brand}
+          image={defaultProps.image}
           title={defaultProps.title}
-          subTitle={defaultProps.subTitle}
-          titlePosition={defaultProps.titlePosition}
+          byline={defaultProps.byline}
+          titlePlacement={defaultProps.titlePlacement}
+          link={defaultProps.link}
         />
       </GridItem>
       <GridItem
-        css={styles.titlePositionTop}
+        css={styles.TitlePlacementTop}
         gridColumn={'2/4'}
         gridColumnM={'6/8'}
         gridColumnL={'8/11'}
         gridColumnXL={'8/10'}
       >
         <CircularIllustrationItem
-          brand={defaultProps.brand}
+          image={defaultProps.image}
           title={defaultProps.title}
-          subTitle={defaultProps.subTitle}
-          titlePosition={defaultProps.titlePosition}
+          byline={defaultProps.byline}
+          titlePlacement={defaultProps.titlePlacement}
+          link={defaultProps.link}
         />
       </GridItem>
       <GridItem
-        css={styles.titlePositionTop}
+        css={styles.TitlePlacementTop}
         gridColumn={'4/6'}
         gridColumnM={'2/4'}
         gridColumnL={'11/14'}
         gridColumnXL={'10/12'}
       >
         <CircularIllustrationItem
-          brand={defaultProps.brand}
+          image={defaultProps.image}
           title={defaultProps.title}
-          subTitle={defaultProps.subTitle}
-          titlePosition={defaultProps.titlePosition}
-          tagLabel={defaultProps.tagLabel}
+          byline={defaultProps.byline}
+          titlePlacement={defaultProps.titlePlacement}
+          highlight={defaultProps.highlight}
+          link={defaultProps.link}
         />
       </GridItem>
     </Grid>

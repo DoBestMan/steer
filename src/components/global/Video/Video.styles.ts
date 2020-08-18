@@ -79,17 +79,13 @@ const styles: StylesMap = {
   videoIframe: {
     height: '100%',
     width: '100%',
-    opacity: 0,
+    opacity: 1,
   },
 };
 
 export const activeVideoStyles: StylesMap = {
   video: {
     zIndex: Z_INDEX.FRONT,
-  },
-
-  videoIframe: {
-    opacity: 1,
   },
 
   button: {

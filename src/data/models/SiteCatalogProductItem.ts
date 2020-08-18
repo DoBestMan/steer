@@ -1,6 +1,7 @@
 import { PRODUCT_IMAGE_TYPES } from '~/lib/constants/productImage.types';
 
 import { SiteCatalogBrand } from './SiteCatalogBrand';
+import { SiteCatalogProductImageTypeEnum } from './SiteCatalogProductImage';
 import { SiteCatalogPromotionInfo } from './SiteCatalogPromotionInfo';
 import { SiteIcon } from './SiteIcon';
 import { SiteImage } from './SiteImage';
@@ -27,6 +28,7 @@ export interface SiteCatalogProductItem {
   imageList: Array<{
     image: SiteImage;
     productImageType: PRODUCT_IMAGE_TYPES;
+    type?: SiteCatalogProductImageTypeEnum.SiteCatalogProductImage;
   }>;
   link: SiteLink;
   loadSpeedRating: string | null;
