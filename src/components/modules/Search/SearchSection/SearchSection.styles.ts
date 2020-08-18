@@ -22,6 +22,7 @@ const styles: StylesMap = {
       links.borderless,
       {
         display: 'inline-block',
+        textAlign: 'left',
         [MQ.M]: typography.primaryHeadline,
       },
     ],
