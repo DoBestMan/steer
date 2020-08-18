@@ -1,6 +1,5 @@
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
-import BaseLink from '~/components/global/Link/BaseLink';
 import { SiteGraphicTile } from '~/data/models/SiteGraphicTile';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { BREAKPOINT_SIZES, CSSStyles } from '~/lib/constants';
@@ -76,20 +75,10 @@ export function CircularIllustrationList({
             }
             key={index}
           >
-            {dataItem.link && dataItem.link.href && (
-              <BaseLink href={dataItem.link.href}>
-                <CircularIllustrationItem
-                  {...dataItem}
-                  titlePlacement={titlePlacement}
-                />
-              </BaseLink>
-            )}
-            {dataItem && !dataItem.link && (
-              <CircularIllustrationItem
-                {...dataItem}
-                titlePlacement={titlePlacement}
-              />
-            )}
+            <CircularIllustrationItem
+              {...dataItem}
+              titlePlacement={titlePlacement}
+            />
           </GridItem>
         );
       })}

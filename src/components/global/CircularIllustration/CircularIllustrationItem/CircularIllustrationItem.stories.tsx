@@ -3,6 +3,7 @@ import { select, text } from '@storybook/addon-knobs';
 import { Cars } from '~/components/global/Car/Car.enums';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
+import { ICONS } from '~/components/global/Icon/Icon.constants';
 import { SiteImage } from '~/data/models/SiteImage';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 
@@ -89,6 +90,35 @@ export function CircularIllustrationItemForCarWithKnobs() {
       image={{
         type: ICON_IMAGE_TYPE.CAR,
         vehicleType: car,
+      }}
+      title={title}
+      byline={byline}
+      titlePlacement={titlePlacement}
+      link={link}
+    />
+  );
+}
+
+export function CircularIllustrationItemForIconWithKnobs() {
+  const icons = select('Icons', Object.values(ICONS), Object.values(ICONS)[1]);
+
+  const title = text('Title', 'All Season Tires');
+  const byline = text('Sub Title', '1,234 tires');
+  const titlePlacement = select(
+    'Title Placement',
+    TitlePlacement,
+    TitlePlacement['top'],
+  );
+  const href = text('Sub Title', defaultProps.link.href);
+  const link = {
+    href,
+    isExternal: false,
+  };
+  return (
+    <CircularIllustrationItem
+      image={{
+        svgId: icons,
+        type: ICON_IMAGE_TYPE.ICON,
       }}
       title={title}
       byline={byline}

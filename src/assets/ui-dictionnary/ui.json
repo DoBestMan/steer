@@ -50,6 +50,10 @@
         "description": "Shop for the best {{categoryOrType}} tires in the size you need at a low-cost with fast and free shipping direct to you or the installer of your choice."
       }
     },
+    "tireCategories": {
+      "title": "Shop Tires Online by Category",
+      "description": "SimpleTire carries tires from every category to fit the driving and road conditions you need. From all-season to winter and summer tires, mud to all-terrain, high performance and more, we have you covered to ensure you get the right tires at an affordable price with fast and free shipping."
+    },
     "vehicles": {
       "make": {
         "model": {
@@ -677,6 +681,10 @@
       "popularBrandsHeaderCopy": "Popular Brands",
       "allBrandsHeaderCopy": "All Brands",
       "searchInputPlaceholder": "Search brands"
+    },
+    "CategoryHubPage": {
+      "header": "Tires by performance",
+      "subHeader": "We carry tires from every category to fit your driving and road conditions. Every tire has a specific use from performance tires to winter tires. Find tires by their specific use to ensure your get the right car or truck tires online.  Select your performance preference below to view the tire you're looking for."
     }
   }
 }

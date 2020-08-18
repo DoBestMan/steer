@@ -1,4 +1,5 @@
 import { SiteBrands } from '~/data/models/SiteBrands';
+import { SiteCategories } from '~/data/models/SiteCategories';
 import { SiteDeals } from '~/data/models/SiteDeals';
 import { SiteGlobals } from '~/data/models/SiteGlobals';
 import { SiteHero } from '~/data/models/SiteHero';
@@ -69,6 +70,15 @@ export async function backendGetSiteDeals() {
 export async function backendGetSiteBrands() {
   const response = await fetch<SiteBrands>({
     endpoint: '/v1/site/brands',
+    includeAuthorization: true,
+    method: 'get',
+  });
+  return response;
+}
+
+export async function backendGetSiteCategories() {
+  const response = await fetch<SiteCategories>({
+    endpoint: '/v1/site/categories',
     includeAuthorization: true,
     method: 'get',
   });
