@@ -3,7 +3,7 @@ import { STATIC_MODAL_IDS } from '~/lib/constants/staticModals';
 
 export const everyPurchaseIncludesData = [
   {
-    description: 'Fast, free shipping on every tire we sell.',
+    description: 'We accept unmounted tire returns within 30 days.',
     icon: ICONS.FREE_SHIPPING,
     linkLabel: 'Learn more',
     modalId: STATIC_MODAL_IDS.GLOBAL_FREE_SHIPPING,
