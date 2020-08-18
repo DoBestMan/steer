@@ -124,6 +124,10 @@
     "brand": "Brand"
   },
   "catalog": {
+    "recirculation": {
+      "allOfCatalog": "All of our catalog",
+      "seeAllTires": "See all {{number}} tires"
+    },
     "filters": {
       "max": "maximum",
       "min": "minimum",

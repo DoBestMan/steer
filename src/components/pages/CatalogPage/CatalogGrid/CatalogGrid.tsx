@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { DATA_COMPONENT_LABEL } from '~/components/modules/Catalog/Header.constants';
 import HeaderContainer from '~/components/modules/Catalog/Header.container';
 import Recirculation from '~/components/modules/Catalog/Recirculation/Recirculation';
+import SeeAllTires from '~/components/modules/Catalog/Recirculation/SeeAllTires';
 import { useCatalogPageContext } from '~/context/CatalogPage.context';
 import { SiteCatalogFilters } from '~/data/models/SiteCatalogFilters';
 import {
@@ -115,6 +116,7 @@ function CatalogGrid({
     };
   }, [catalogGridHeaderContainer, catalogGridOffsetTop, hasTopPicks]);
 
+  const totalResults = siteCatalogSummary?.siteCatalogSummaryMeta?.totalResults;
   const isGroupedProducts =
     siteCatalogProducts.siteCatalogProductsResultList[0]?.type ===
     SiteCatalogProductGroupItemEnum.SiteCatalogProductGroupItem;
@@ -140,10 +142,15 @@ function CatalogGrid({
                     SiteCatalogProductGroupItemEnum.SiteCatalogProductGroupItem,
                 )}
               />
-              {siteCatalogSummary?.siteCatalogSummaryRecirculation && (
+              {siteCatalogSummary?.siteCatalogSummaryRecirculation ? (
                 <Recirculation
                   handleUpdateResults={handleUpdateResults}
                   {...siteCatalogSummary.siteCatalogSummaryRecirculation}
+                />
+              ) : (
+                <SeeAllTires
+                  totalResults={totalResults}
+                  handleUpdateResults={handleUpdateResults}
                 />
               )}
             </>
