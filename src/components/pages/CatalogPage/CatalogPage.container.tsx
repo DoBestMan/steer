@@ -81,9 +81,10 @@ function CatalogPageContainer({
    * done to solve an issue where the downstream components were
    * receiving the `hasLocalData: true` prop before the updated data.
    */
-  const { error: summaryError } = useApiDataWithDefault<
-    CatalogPageData['serverData']
-  >({
+  const {
+    error: summaryError,
+    revalidate: revalidateSummary,
+  } = useApiDataWithDefault<CatalogPageData['serverData']>({
     ...apiArgs,
     endpoint: endpoints.summary,
     options: {
@@ -97,12 +98,20 @@ function CatalogPageContainer({
   });
 
   useEffect(() => {
-    const handleResetSummary = () => {
+    const handleResetSummary = async ({
+      comesFromSearch,
+    }: {
+      comesFromSearch: boolean;
+    }) => {
       // Reset hasLocalData state on `useApiData` hook
       setSummaryState((summaryState) => ({
         ...summaryState,
         hasLocalData: false,
       }));
+
+      if (comesFromSearch) {
+        await revalidateSummary();
+      }
 
       // Reset scroll position to top
       window.scrollTo(0, 0);
@@ -113,7 +122,7 @@ function CatalogPageContainer({
     return () => {
       eventEmitters.newCatalogSearchQuery.off(handleResetSummary);
     };
-  }, []);
+  }, [revalidateSummary]);
 
   // fetch site catalog products
   const {
