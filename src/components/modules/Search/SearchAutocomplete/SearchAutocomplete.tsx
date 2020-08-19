@@ -6,8 +6,6 @@ import {
   useRef,
   useState,
 } from 'react';
-import { Transition } from 'react-transition-group';
-import { TransitionStatus } from 'react-transition-group/Transition';
 
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
@@ -16,34 +14,36 @@ import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Loading from '~/components/global/Loading/Loading';
 import { useModalContext } from '~/context/Modal.context';
 import { SiteSearchResultGroup } from '~/data/models/SiteSearchResultGroup';
-import { SiteSearchResultImageItem } from '~/data/models/SiteSearchResultImageItem';
-import { SiteSearchResultTextItem } from '~/data/models/SiteSearchResultTextItem';
-import { useBreakpoints } from '~/hooks/useBreakpoints';
-import { ARIA_LIVE, COLORS, KEYCODES, THEME } from '~/lib/constants';
+import { ARIA_LIVE, KEYCODES, THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import { InputQuery } from '../Search';
-import { useAutocompleteSelectedItem } from '../Search.hooks';
+import { useAutocompleteSelectedItem, useHeaderScroll } from '../Search.hooks';
 import {
   SearchActionType,
   SearchInputEnum,
   SearchResult,
-  SearchResultEnum,
   SearchStateCopy,
   SearchStateEnum,
 } from '../Search.types';
-import SearchCarousel from '../SearchCarousel/SearchCarousel';
 import SearchInput from '../SearchInput/SearchInput';
 import SearchLabel from '../SearchLabel/SearchLabel';
-import SearchSection from '../SearchSection/SearchSection';
+import SearchResults from '../SearchResults/SearchResults';
 import CloseSearchButton from './CloseSearchButton';
 import styles from './SearchAutocomplete.styles';
+import SearchError from './SearchError';
 import SearchSecondaryActions from './SearchSecondaryActions';
 
-const CONSTANTS = {
+export const AUTOCOMPLETE_CONSTANTS = {
   DEFAULT_SELECTED_ITEM_INDEX: [0, -1],
   DEFAULT_VALUE: '',
   SHOW_LOADING_TIMEOUT: 800,
+  GRID_COLUMN_PROPS: {
+    gridColumnS: '2/6',
+    gridColumnM: '2/8',
+    gridColumnL: '3/14',
+    gridColumnXL: '3/14',
+  },
 };
 
 export interface Props {
@@ -89,9 +89,10 @@ function SearchAutocomplete({
   const loadingTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const primaryInput = useRef<HTMLInputElement>(null);
   const secondaryInput = useRef<HTMLInputElement>(null);
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const headerRef = useRef<HTMLDivElement>(null);
-  const listRef = useRef<HTMLUListElement>(null);
+  const listRef = useRef<HTMLDivElement>(null);
+
+  const { headerRef, scrollRef } = useHeaderScroll();
+
   const {
     selectNextItemIndex,
     selectPrevItemIndex,
@@ -145,7 +146,7 @@ function SearchAutocomplete({
     if (!loadingTimeout.current) {
       loadingTimeout.current = setTimeout(() => {
         setShouldShowLoading(true);
-      }, CONSTANTS.SHOW_LOADING_TIMEOUT);
+      }, AUTOCOMPLETE_CONSTANTS.SHOW_LOADING_TIMEOUT);
     }
 
     if (!isLoadingResults) {
@@ -175,7 +176,8 @@ function SearchAutocomplete({
     if (action.type === SearchActionType.LINK && listRef.current) {
       // This is gross, but we need to simulate a "click" on BaseLink so that
       // the proper transition occurs.
-      const searchResultList = listRef.current.children[
+      const allSearchResults = listRef.current.querySelector('ul');
+      const searchResultList = allSearchResults?.children[
         currentResultIndex
       ].querySelector('ul');
       const searchResultItem = searchResultList?.children[
@@ -289,29 +291,6 @@ function SearchAutocomplete({
     <div css={styles.clearSecondaryInput}>{ui('search.removeRearTire')}</div>
   );
 
-  const { lessThan } = useBreakpoints();
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!lessThan.L || !headerRef.current) {
-          return;
-        } else if (entry.intersectionRatio === 0) {
-          headerRef.current.style.borderColor = COLORS.DARK.GRAY_80;
-        } else if (entry.intersectionRatio === 1) {
-          headerRef.current.style.borderColor = 'transparent';
-        }
-      });
-    });
-
-    if (scrollRef.current) {
-      observer.observe(scrollRef.current);
-    }
-
-    return () => {
-      observer.disconnect();
-    };
-  }, [lessThan]);
-
   return (
     <div>
       <div css={styles.header} ref={headerRef}>
@@ -353,14 +332,11 @@ function SearchAutocomplete({
             </div>
           </GridItem>
           <GridItem
+            {...AUTOCOMPLETE_CONSTANTS.GRID_COLUMN_PROPS}
             css={[
               styles.autocompleteGridItem,
               isRearTireState && styles.autocompleteGridItemRearTireState,
             ]}
-            gridColumnS="2/6"
-            gridColumnM="2/8"
-            gridColumnL="3/14"
-            gridColumnXL="3/14"
           >
             <SearchInput
               activeInputType={activeInputType}
@@ -382,14 +358,11 @@ function SearchAutocomplete({
           </GridItem>
           {isRearTireState && (
             <GridItem
+              {...AUTOCOMPLETE_CONSTANTS.GRID_COLUMN_PROPS}
               css={[
                 styles.autocompleteGridItem,
                 isRearTireState && styles.autocompleteGridItemRearTireState,
               ]}
-              gridColumnS="2/6"
-              gridColumnM="2/8"
-              gridColumnL="3/14"
-              gridColumnXL="3/14"
             >
               <SearchInput
                 activeInputType={activeInputType}
@@ -431,32 +404,14 @@ function SearchAutocomplete({
         ]}
       >
         <span css={styles.scrollTrigger} ref={scrollRef} />
+
         {(hasNoMatchingResults || hasSearchResultsError) && (
-          <Grid>
-            <GridItem
-              gridColumnS="2/6"
-              gridColumnM="2/8"
-              gridColumnL="3/14"
-              gridColumnXL="3/14"
-            >
-              <div css={styles.errorMessage}>
-                <span css={styles.errorLabel}>
-                  {hasSearchResultsError
-                    ? ui('search.searchError')
-                    : ui('search.searchNoResults')}
-                </span>
-              </div>
-            </GridItem>
-          </Grid>
+          <SearchError hasSearchResultsError={hasSearchResultsError} />
         )}
+
         {shouldShowLoading && (
           <Grid>
-            <GridItem
-              gridColumnS="2/6"
-              gridColumnM="2/8"
-              gridColumnL="3/14"
-              gridColumnXL="3/14"
-            >
+            <GridItem {...AUTOCOMPLETE_CONSTANTS.GRID_COLUMN_PROPS}>
               <Loading
                 customContainerStyles={styles.loading}
                 theme={THEME.DARK}
@@ -464,57 +419,17 @@ function SearchAutocomplete({
             </GridItem>
           </Grid>
         )}
-        <Transition
-          appear
-          mountOnEnter
-          unmountOnExit
-          in={shouldShowListbox}
-          timeout={0}
-        >
-          {(searchTransitionState: TransitionStatus) => {
-            const animationStyles = [
-              styles.listboxRoot,
-              hasActiveSearchState &&
-                queryText.length === 0 &&
-                styles[`listbox_${searchTransitionState}`],
-            ];
 
-            return (
-              <ul css={animationStyles} ref={listRef}>
-                {results.map((searchGroup: SiteSearchResultGroup, index) => {
-                  // We can assume that all items in the list have the same type.
-                  const isCarousel =
-                    searchGroup.siteSearchResultList[0].type ===
-                    SearchResultEnum.IMAGE;
-
-                  return (
-                    <li css={styles.searchResultsGridItem} key={index}>
-                      {isCarousel ? (
-                        <SearchCarousel
-                          label={searchGroup.label}
-                          siteSearchResultList={
-                            searchGroup.siteSearchResultList as SiteSearchResultImageItem[]
-                          }
-                          onClick={handleValueSelection}
-                        />
-                      ) : (
-                        <SearchSection
-                          label={searchGroup.label}
-                          siteSearchResultList={
-                            searchGroup.siteSearchResultList as SiteSearchResultTextItem[]
-                          }
-                          onClick={handleValueSelection}
-                          sectionIndex={index}
-                          selectedItemIndex={selectedItemIndex}
-                        />
-                      )}
-                    </li>
-                  );
-                })}
-              </ul>
-            );
-          }}
-        </Transition>
+        <div ref={listRef}>
+          <SearchResults
+            handleValueSelection={handleValueSelection}
+            hasActiveSearchState={hasActiveSearchState}
+            queryText={queryText}
+            results={results}
+            selectedItemIndex={selectedItemIndex}
+            shouldShowListbox={shouldShowListbox}
+          />
+        </div>
       </div>
     </div>
   );

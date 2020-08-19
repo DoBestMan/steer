@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { RefObject, useCallback, useEffect, useState } from 'react';
+import { RefObject, useCallback, useEffect } from 'react';
 
 import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
 import { SiteSearchResultGroup } from '~/data/models/SiteSearchResultGroup';
@@ -12,6 +12,7 @@ import { scrollTo } from '~/lib/helpers/scroll';
 import debounce from '~/lib/utils/debounce';
 
 import InitialSearch from './InitialSearch';
+import { useInputQuery } from './Search.hooks';
 import styles from './Search.styles';
 import {
   Results,
@@ -71,17 +72,7 @@ function Search({
   shouldPreventLinkNavigation,
 }: Props) {
   const router = useRouter();
-  const [primaryQuery, setPrimaryQuery] = useState<InputQuery>({
-    queryText: '',
-    queryType: '',
-  });
-  const [secondaryQuery, setSecondaryQuery] = useState<InputQuery>({
-    queryText: '',
-    queryType: SearchStateEnum.REAR_TIRE,
-  });
-  const [activeInputType, setActiveInputType] = useState(
-    SearchInputEnum.PRIMARY,
-  );
+
   const delayedSearch = useCallback(
     debounce(({ queryText, queryType }) => {
       onSearchQuery({ queryText, queryType });
@@ -89,28 +80,19 @@ function Search({
     [],
   );
   const { selectVehicle } = useUserPersonalizationContext();
+  const {
+    activeInputType,
+    getCurrentInputQuery,
+    primaryQuery,
+    secondaryQuery,
+    setActiveInputType,
+    setCurrentInputQuery,
+    setInputQuery,
+    setPrimaryQuery,
+    setSecondaryQuery,
+  } = useInputQuery();
 
   const { resultMetadata, siteSearchResultGroupList } = results;
-
-  const getCurrentInputQuery = () =>
-    activeInputType === SearchInputEnum.PRIMARY ? primaryQuery : secondaryQuery;
-  const setCurrentInputQuery = (query: {
-    queryText?: string;
-    queryType?: string;
-  }) => {
-    if (activeInputType === SearchInputEnum.PRIMARY) {
-      setPrimaryQuery({ ...primaryQuery, ...query });
-    } else if (activeInputType === SearchInputEnum.SECONDARY) {
-      setSecondaryQuery({ ...secondaryQuery, ...query });
-    }
-  };
-  const setInputQuery = (inputType: SearchInputEnum, query: InputQuery) => {
-    if (inputType === SearchInputEnum.PRIMARY) {
-      setPrimaryQuery({ ...primaryQuery, ...query });
-    } else if (inputType === SearchInputEnum.SECONDARY) {
-      setSecondaryQuery({ ...secondaryQuery, ...query });
-    }
-  };
 
   useEffect(() => {
     forwardedRef?.current?.scrollTo(0, 0);

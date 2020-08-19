@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 import {
   Results,
+  SearchInputEnum,
   SearchStateEnum,
 } from '~/components/modules/Search/Search.types';
 import { SiteSearchResultActionQuery } from '~/data/models/SiteSearchResultActionQuery';
@@ -10,16 +11,19 @@ import { SiteSearchResultImageItem } from '~/data/models/SiteSearchResultImageIt
 import { SiteSearchResultTextItem } from '~/data/models/SiteSearchResultTextItem';
 import { fromUserHistorySearchToSiteSearchResultGroup } from '~/data/models/UserHistorySearch';
 import { fromSiteSearchResultTextItemToUserHistorySearchItem } from '~/data/models/UserHistorySearchItem';
+import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { apiGetSearchTypeahead, SearchDataParams } from '~/lib/api/search';
 import {
   apiAddUserSearchHistory,
   apiDeleteUserSearchHistory,
   apiGetUserSearchHistory,
 } from '~/lib/api/users';
+import { COLORS } from '~/lib/constants';
 import { FetchErrorCodes } from '~/lib/fetch/FetchError';
 import GA from '~/lib/helpers/analytics';
 import { scrollIntoViewIfNeeded } from '~/lib/utils/accessibility';
 
+import { InputQuery } from './Search';
 import {
   emptyResult,
   emptySiteSearchResultGroup,
@@ -35,9 +39,11 @@ const DEFAULT_CLEARANCE = {
 
 /**
  * This hook takes care of the selection logic for selecting search
- * results via keyboard.
+ * results via keyboard when the input is focused.
  */
 export function useAutocompleteSelectedItem(results: SiteSearchResultGroup[]) {
+  // The first item in the array is a SiteSearchResultList
+  // The second item is the SiteSerachResultTextItem
   const [selectedItemIndex, setSelectedItemIndex] = useState<[number, number]>([
     0,
     -1,
@@ -306,5 +312,84 @@ export function useSearchState({
     searchState,
     setHasLockedSearchState,
     setSearchState,
+  };
+}
+
+export function useInputQuery() {
+  const [primaryQuery, setPrimaryQuery] = useState<InputQuery>({
+    queryText: '',
+    queryType: '',
+  });
+  const [secondaryQuery, setSecondaryQuery] = useState<InputQuery>({
+    queryText: '',
+    queryType: SearchStateEnum.REAR_TIRE,
+  });
+  const [activeInputType, setActiveInputType] = useState(
+    SearchInputEnum.PRIMARY,
+  );
+
+  const getCurrentInputQuery = () =>
+    activeInputType === SearchInputEnum.PRIMARY ? primaryQuery : secondaryQuery;
+  const setCurrentInputQuery = (query: {
+    queryText?: string;
+    queryType?: string;
+  }) => {
+    if (activeInputType === SearchInputEnum.PRIMARY) {
+      setPrimaryQuery({ ...primaryQuery, ...query });
+    } else if (activeInputType === SearchInputEnum.SECONDARY) {
+      setSecondaryQuery({ ...secondaryQuery, ...query });
+    }
+  };
+  const setInputQuery = (inputType: SearchInputEnum, query: InputQuery) => {
+    if (inputType === SearchInputEnum.PRIMARY) {
+      setPrimaryQuery({ ...primaryQuery, ...query });
+    } else if (inputType === SearchInputEnum.SECONDARY) {
+      setSecondaryQuery({ ...secondaryQuery, ...query });
+    }
+  };
+
+  return {
+    activeInputType,
+    getCurrentInputQuery,
+    primaryQuery,
+    secondaryQuery,
+    setActiveInputType,
+    setCurrentInputQuery,
+    setInputQuery,
+    setPrimaryQuery,
+    setSecondaryQuery,
+  };
+}
+
+export function useHeaderScroll() {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+
+  const { lessThan } = useBreakpoints();
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!lessThan.L || !headerRef.current) {
+          return;
+        } else if (entry.intersectionRatio === 0) {
+          headerRef.current.style.borderColor = COLORS.DARK.GRAY_80;
+        } else if (entry.intersectionRatio === 1) {
+          headerRef.current.style.borderColor = 'transparent';
+        }
+      });
+    });
+
+    if (scrollRef.current) {
+      observer.observe(scrollRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [lessThan]);
+
+  return {
+    headerRef,
+    scrollRef,
   };
 }
