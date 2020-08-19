@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
+import { useWindowSize } from '~/hooks/useWindowSize';
 import { getScroll } from '~/lib/helpers/scroll';
 import { hasIntersectionObserver } from '~/lib/utils/browser';
 
@@ -60,6 +61,7 @@ export function useButtonHeight({
 }: UseButtonHeightProps) {
   const [buttonHeight, setButtonHeight] = useState({});
   const buttonRef = useRef<HTMLDivElement>(null);
+  const { height, width } = useWindowSize();
 
   useEffect(() => {
     if (!buttonRef.current) {
@@ -69,10 +71,22 @@ export function useButtonHeight({
     const buttonRect = buttonRef.current.getBoundingClientRect();
     const buttonHeight = supportsPositionSticky ? buttonRect.height : 0;
 
-    setButtonHeight({
-      minHeight: `calc(40vh - ${CONTENT_PEEKING_AMOUNT + buttonHeight}px)`,
-    });
-  }, [buttonRef, CONTENT_PEEKING_AMOUNT, isMobile, supportsPositionSticky]);
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const offsetTop = buttonRect.top + scrollTop;
+    const responsiveSpacer = isMobile ? '40vh' : `${height - offsetTop}px`;
+    const contentSpacerHeight = `calc(${responsiveSpacer} - ${
+      CONTENT_PEEKING_AMOUNT + buttonHeight
+    }px)`;
+
+    setButtonHeight({ minHeight: contentSpacerHeight });
+  }, [
+    buttonRef,
+    CONTENT_PEEKING_AMOUNT,
+    height,
+    isMobile,
+    supportsPositionSticky,
+    width,
+  ]);
 
   return { buttonHeight, buttonRef };
 }
