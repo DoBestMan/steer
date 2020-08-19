@@ -2,6 +2,19 @@ import { BORDERS, COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
+  decorator: {
+    ':after': {
+      content: '"•"',
+      fontSize: 6,
+      padding: SPACING.SIZE_10,
+    },
+    [MQ.L]: {
+      ':after': {
+        content: '""',
+        padding: 'unset',
+      },
+    },
+  },
   disableEvents: {
     pointerEvents: 'none',
   },
@@ -35,18 +48,7 @@ const styles: StylesMap = {
     {
       alignItems: 'center',
       display: 'flex',
-      [MQ.S]: {
-        ':after': {
-          content: '"•"',
-          fontSize: 6,
-          padding: SPACING.SIZE_10,
-        },
-      },
       [MQ.L]: {
-        ':after': {
-          content: '""',
-          padding: 'unset',
-        },
         flexGrow: 1,
       },
     },

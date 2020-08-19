@@ -59,7 +59,7 @@ export default function SubFilters({
 
   return (
     <div css={styles.root}>
-      <p css={styles.results}>
+      <p css={[styles.results, priceFilter && styles.decorator]}>
         {ui('catalog.filters.results', { number: resultsCount })}
       </p>
       {priceFilter && (
