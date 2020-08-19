@@ -9,38 +9,7 @@ import { SiteImage } from '~/data/models/SiteImage';
 import { SitePrice } from '~/data/models/SitePrice';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 
-export const brands: SiteCatalogSummary = {
-  siteCatalogSummaryBuildIn: null,
-  siteCatalogSummaryMeta: null,
-  siteCatalogSummaryPrompt: null,
-  siteCatalogSummaryRecirculation: {
-    title: 'You may also be interested in:',
-    items: [
-      {
-        label: 'Winter tires',
-        description: 'For snow, ice and freezing temperatures.',
-        icon: {
-          type: ICON_IMAGE_TYPE.ICON,
-          svgId: 'tiretype-winter',
-        },
-        siteQueryParams: {
-          type: 'winter',
-        },
-      },
-    ],
-    more: {
-      label: 'See all 253 tires',
-      description: 'All of our catalog',
-      siteQueryParams: {
-        skipGroups: 'true',
-      },
-    },
-  },
-  siteCatalogSummaryTopPicksList: [],
-  siteCatalogSummaryTopPicksMore: null,
-};
-
-export const vehiclesDisambiguation: SiteCatalogSummary = {
+export const vehiclesDisambiguationMock: SiteCatalogSummary = {
   siteCatalogSummaryBuildIn: {
     title: "Ok, let's confirm the tire size of your Civic",
     brandList: null,
@@ -87,7 +56,7 @@ export const vehiclesDisambiguation: SiteCatalogSummary = {
   siteCatalogSummaryTopPicksMore: null,
 };
 
-export const vehiclesNoOeWithSize: SiteCatalogSummary = {
+export const vehiclesNoOeWithSizeMock: SiteCatalogSummary = {
   siteCatalogSummaryBuildIn: {
     title: '232 tires fit your Civic',
     brandList: [
@@ -404,7 +373,7 @@ export const vehiclesNoOeWithSize: SiteCatalogSummary = {
   } as SiteCatalogSummaryTopPicksMore,
 };
 
-export const vehiclesNoResultWithTrim: SiteCatalogSummary = {
+export const vehiclesNoResultWithTrimMock: SiteCatalogSummary = {
   siteCatalogSummaryBuildIn: null,
   siteCatalogSummaryMeta: {
     sceneryType: Sceneries['scenery--urban'],

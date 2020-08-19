@@ -1,7 +1,7 @@
 import React from 'react';
 
 import TireSizeBoard from '~/components/global/TireSizeBoard/TireSizeBoard';
-import { tireSizeBoardPropsMock } from '~/components/global/TireSizeBoard/TireSizeBoard.mocks';
+import { tireSizeBoardPropsMock } from '~/components/global/TireSizeBoard/TireSizeBoard.mock';
 
 export default {
   component: TireSizeBoard,

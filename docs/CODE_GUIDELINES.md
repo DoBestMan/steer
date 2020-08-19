@@ -290,3 +290,16 @@ function ButtonOrLink(props: ButtonProps | LinkProps) {
   return <a href={props.href} />
 }
 ```
+
+## Local Data and Mocks
+
+### Data
+  - Used in components
+  - Filenames follow the `[ComponentName]Data.data` naming pattern
+  - Exported constants follow the `[constantName]Data` naming pattern
+
+### Mocks:
+  - Used in stories
+  - Filenames follow the `[ComponentName]Mock.mock` naming pattern
+  - Exported constants follow the `[constantName]Mock` naming pattern
+

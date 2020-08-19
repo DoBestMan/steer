@@ -1,4 +1,4 @@
-import { mockReviewListing } from '~/components/modules/ReviewListing/ReviewListing.mocks';
+import { reviewListingMock } from '~/components/modules/ReviewListing/ReviewListing.mock';
 
 import { default as HeaderComponent } from './Header';
 
@@ -8,7 +8,7 @@ export default {
 };
 
 export function Header() {
-  const { breadcrumbs, body, filters, title } = mockReviewListing;
+  const { breadcrumbs, body, filters, title } = reviewListingMock;
 
   return (
     <HeaderComponent

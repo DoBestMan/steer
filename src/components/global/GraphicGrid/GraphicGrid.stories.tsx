@@ -1,7 +1,7 @@
 import { boolean } from '@storybook/addon-knobs';
 
 import GraphicGrid from '~/components/global/GraphicGrid/GraphicGrid';
-import { graphicGridItems } from '~/components/global/GraphicGrid/GraphicGrid.mocks';
+import { graphicGridItemsMock } from '~/components/global/GraphicGrid/GraphicGrid.mock';
 
 export default {
   component: GraphicGrid,
@@ -16,7 +16,7 @@ export function GraphicGridWithKnobs() {
     optionsGroupId,
   );
   const gridItems = showCondensedGrid
-    ? graphicGridItems.slice(0, 2)
-    : graphicGridItems;
+    ? graphicGridItemsMock.slice(0, 2)
+    : graphicGridItemsMock;
   return <GraphicGrid graphicGridItems={gridItems} />;
 }

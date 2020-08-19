@@ -5,19 +5,19 @@ import { SiteCatalogFilterList } from '~/data/models/SiteCatalogFilterList';
 
 import { CatalogFilterTypes, FilterContentTypes } from './Filter.types';
 import {
-  filterSort,
-  mockDupeMultipleValSelected,
-  mockDupeSelected,
-  mockItem,
-  mockList,
-  mockListSelected,
-  mockMultipleValSelected,
+  dupeMultipleValSelectedMock,
+  dupeSelectedMock,
+  filterSortMock,
+  itemMock,
+  listMock,
+  listSelectedMock,
   mockRange,
-  mockSiteCatalogFilters,
-  mockToggle,
-  mockUniqueSelected,
-  warrantyFilter,
-} from './Filters.mocks';
+  multipleValSelectedMock,
+  siteCatalogFiltersMock,
+  toggleMock,
+  uniqueSelectedMock,
+  warrantyFilterMock,
+} from './Filters.mock';
 import {
   getAppliedCount,
   getFilterLabel,
@@ -78,26 +78,26 @@ describe('Filters.utils', () => {
 
   describe('getFilterCount', () => {
     it('returns a count of applied filters', () => {
-      expect(getAppliedCount(mockListSelected)).toEqual(1);
-      expect(getAppliedCount(mockList)).toEqual(0);
-      expect(getAppliedCount(mockUniqueSelected)).toEqual(2);
-      expect(getAppliedCount(mockMultipleValSelected)).toEqual(2);
-      expect(getAppliedCount(mockDupeMultipleValSelected)).toEqual(1);
+      expect(getAppliedCount(listSelectedMock)).toEqual(1);
+      expect(getAppliedCount(listMock)).toEqual(0);
+      expect(getAppliedCount(uniqueSelectedMock)).toEqual(2);
+      expect(getAppliedCount(multipleValSelectedMock)).toEqual(2);
+      expect(getAppliedCount(dupeMultipleValSelectedMock)).toEqual(1);
     });
 
     it('does not count duplicates', () => {
-      expect(getAppliedCount(mockDupeSelected)).toEqual(1);
+      expect(getAppliedCount(dupeSelectedMock)).toEqual(1);
     });
   });
 
   describe('getFilterLabel', () => {
     it('returns a label for a toggle filter', () => {
-      expect(getFilterLabel(mockToggle)).toEqual('Toggle Label');
+      expect(getFilterLabel(toggleMock)).toEqual('Toggle Label');
     });
 
     // other filters may have a header field that contains the title
     it('returns a label for non-toggle filters', () => {
-      expect(getFilterLabel(mockList)).toEqual('List Label');
+      expect(getFilterLabel(listMock)).toEqual('List Label');
 
       const mockRange = {
         header: null,
@@ -116,13 +116,17 @@ describe('Filters.utils', () => {
         warranty: '5000,20000',
       };
       const mockFilterList = [
-        ...mockSiteCatalogFilters,
-        { ...warrantyFilter, currentMinValue: 5000, currentMaxValue: 20000 },
+        ...siteCatalogFiltersMock,
+        {
+          ...warrantyFilterMock,
+          currentMinValue: 5000,
+          currentMaxValue: 20000,
+        },
       ] as SiteCatalogFilter[];
 
       const { initialState } = getInitialFiltersState(
         mockFilterList,
-        filterSort,
+        filterSortMock,
       );
 
       expect(initialState).toEqual(mockInitialState);
@@ -143,7 +147,7 @@ describe('Filters.utils', () => {
 
       const { initialState } = getInitialFiltersState(
         mockFilterList,
-        filterSort,
+        filterSortMock,
       );
 
       expect(initialState.category).toEqual('allSeason');
@@ -162,7 +166,7 @@ describe('Filters.utils', () => {
 
       const { initialState: initialStateMultiple } = getInitialFiltersState(
         mockFilterListMultiple,
-        filterSort,
+        filterSortMock,
       );
 
       expect(initialStateMultiple.category).toEqual('allSeason,winter');
@@ -171,9 +175,9 @@ describe('Filters.utils', () => {
     it('does not add identical filters from other groups that exist in state (unique to list)', () => {
       // first group has active val, second group does not
       const mockListDupe = {
-        ...mockList,
+        ...listMock,
         filterGroups: [
-          ...mockList.filterGroups,
+          ...listMock.filterGroups,
           {
             items: [
               {
@@ -214,15 +218,15 @@ describe('Filters.utils', () => {
       const {
         isPopularActive: mockPopularActiveFalse,
       } = getInitialFiltersState(
-        mockSiteCatalogFilters as SiteCatalogFilter[],
-        filterSort,
+        siteCatalogFiltersMock as SiteCatalogFilter[],
+        filterSortMock,
       );
 
       expect(mockPopularActiveFalse).toEqual(false);
 
       const { isPopularActive: mockPopularActiveTrue } = getInitialFiltersState(
-        [...mockSiteCatalogFilters, mockToggle] as SiteCatalogFilter[],
-        filterSort,
+        [...siteCatalogFiltersMock, toggleMock] as SiteCatalogFilter[],
+        filterSortMock,
       );
 
       expect(mockPopularActiveTrue).toEqual(true);
@@ -230,34 +234,38 @@ describe('Filters.utils', () => {
 
     it('handles min/max on range types', () => {
       const mockFilterRange = [
-        { ...warrantyFilter, currentMinValue: 0, currentMaxValue: 20000 },
+        { ...warrantyFilterMock, currentMinValue: 0, currentMaxValue: 20000 },
       ] as SiteCatalogFilter[];
 
       const { initialState } = getInitialFiltersState(
         mockFilterRange,
-        filterSort,
+        filterSortMock,
       );
 
       expect(initialState).toHaveProperty('warranty', '0,20000');
 
       const mockFilterRangeNull = [
-        { ...warrantyFilter, currentMinValue: null, currentMaxValue: null },
+        { ...warrantyFilterMock, currentMinValue: null, currentMaxValue: null },
       ] as SiteCatalogFilter[];
 
       const { initialState: initialStateNull } = getInitialFiltersState(
         mockFilterRangeNull,
-        filterSort,
+        filterSortMock,
       );
 
       expect(initialStateNull).not.toHaveProperty('warranty');
 
       const mockFilterRangeSingle = [
-        { ...warrantyFilter, currentMinValue: null, currentMaxValue: 25000 },
+        {
+          ...warrantyFilterMock,
+          currentMinValue: null,
+          currentMaxValue: 25000,
+        },
       ] as SiteCatalogFilter[];
 
       const { initialState: initialStateSingle } = getInitialFiltersState(
         mockFilterRangeSingle,
-        filterSort,
+        filterSortMock,
       );
 
       expect(initialStateSingle).toHaveProperty('warranty', '0,25000');
@@ -282,11 +290,11 @@ describe('Filters.utils', () => {
           };
 
           // filter item
-          expect(hasActiveValue(mockItem, mockState)).toBe(true);
+          expect(hasActiveValue(itemMock, mockState)).toBe(true);
           // toggle filter
-          expect(hasActiveValue(mockToggle, mockState)).toBe(true);
+          expect(hasActiveValue(toggleMock, mockState)).toBe(true);
           // list filter
-          expect(hasActiveValue(mockList, mockState)).toBe(true);
+          expect(hasActiveValue(listMock, mockState)).toBe(true);
           // range filter
           expect(hasActiveValue(mockRange, mockState)).toBe(true);
         });
@@ -300,9 +308,9 @@ describe('Filters.utils', () => {
 
           // first group has active val, second group does not
           const mockListDupe = {
-            ...mockList,
+            ...listMock,
             filterGroups: [
-              ...mockList.filterGroups,
+              ...listMock.filterGroups,
               {
                 items: [
                   {
@@ -352,9 +360,9 @@ describe('Filters.utils', () => {
           } as unknown) as CatalogFilterTypes;
 
           // toggle filter
-          expect(getValueKeys(mockToggle)).toEqual(['foo']);
+          expect(getValueKeys(toggleMock)).toEqual(['foo']);
           // list filter
-          expect(getValueKeys(mockList)).toEqual(['foo', 'baz']);
+          expect(getValueKeys(listMock)).toEqual(['foo', 'baz']);
           // range filter
           expect(getValueKeys(mockRange)).toEqual(['range']);
           // popular filters

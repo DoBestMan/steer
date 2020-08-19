@@ -1,4 +1,4 @@
-import { browseTiresGroupItems } from '~/components/modules/SubNav/SubNav.mocks';
+import { browseTiresGroupItemsMock } from '~/components/modules/SubNav/SubNav.mock';
 
 import BrowseTiresGroupItem from './BrowseTiresGroupItem';
 
@@ -8,17 +8,17 @@ export default {
 };
 
 export function ImagesAndFlair() {
-  return <BrowseTiresGroupItem {...browseTiresGroupItems.deals} />;
+  return <BrowseTiresGroupItem {...browseTiresGroupItemsMock.deals} />;
 }
 
 export function TitleAndVehicleIcons() {
-  return <BrowseTiresGroupItem {...browseTiresGroupItems.vehicleType} />;
+  return <BrowseTiresGroupItem {...browseTiresGroupItemsMock.vehicleType} />;
 }
 
 export function TitleAndRegularIcons() {
-  return <BrowseTiresGroupItem {...browseTiresGroupItems.tireCategory} />;
+  return <BrowseTiresGroupItem {...browseTiresGroupItemsMock.tireCategory} />;
 }
 
 export function TitleAndIcon() {
-  return <BrowseTiresGroupItem {...browseTiresGroupItems.wheelSizes} />;
+  return <BrowseTiresGroupItem {...browseTiresGroupItemsMock.wheelSizes} />;
 }

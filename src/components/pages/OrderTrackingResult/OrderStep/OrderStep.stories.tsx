@@ -1,6 +1,6 @@
 import { date, select } from '@storybook/addon-knobs';
 
-import { ORDER_TRACKING_LINK } from '../OrderTrackingResult.mocks';
+import { orderTrackingLinkMock } from '../OrderTrackingResult.mock';
 import {
   getOrderSteps,
   OrderStatus,
@@ -32,7 +32,7 @@ export function OrderStepsWithKnobs() {
     createdAt: new Date(createdAt),
     deliveredAt: new Date(deliveredAt),
     trackingLabel: '111111111111',
-    trackingLink: ORDER_TRACKING_LINK,
+    trackingLink: orderTrackingLinkMock,
   });
   const displayedSteps = orderSteps
     .filter((step) => orderStatusHierarchyValue >= step.hierarchyNum)

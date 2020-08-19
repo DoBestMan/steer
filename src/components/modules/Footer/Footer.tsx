@@ -8,7 +8,7 @@ import SupportHeading from '~/components/modules/Support/SupportHeading';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
 
-import { data } from './Footer.data';
+import { footerLinksData } from './Footer.data';
 import styles from './Footer.styles';
 import FooterLinkList from './FooterLinkList/FooterLinkList';
 import FooterMailingList from './FooterMailingList/FooterMailingList';
@@ -105,7 +105,7 @@ function Footer({
         css={styles.companyLinksSection}
       >
         <p css={styles.linksHeading}>{ui('footer.company')}</p>
-        <FooterLinkList links={data.company.links} />
+        <FooterLinkList links={footerLinksData.company.links} />
       </GridItem>
 
       <GridItem
@@ -116,7 +116,7 @@ function Footer({
         css={styles.tiresLinksSection}
       >
         <p css={styles.linksHeading}>{ui('footer.tires')}</p>
-        <FooterLinkList links={data.tires.links} />
+        <FooterLinkList links={footerLinksData.tires.links} />
       </GridItem>
 
       <GridItem
@@ -129,7 +129,7 @@ function Footer({
         <p css={[styles.linksHeading, styles.socialHeading]}>
           {ui('footer.social')}
         </p>
-        <FooterLinkList links={data.social.links} />
+        <FooterLinkList links={footerLinksData.social.links} />
       </GridItem>
 
       <GridItem
@@ -142,7 +142,7 @@ function Footer({
       </GridItem>
 
       <GridItem css={styles.copyrightSection}>
-        <span css={styles.text}>{data.copyright.text}</span>
+        <span css={styles.text}>{footerLinksData.copyright.text}</span>
       </GridItem>
     </Grid>
   );

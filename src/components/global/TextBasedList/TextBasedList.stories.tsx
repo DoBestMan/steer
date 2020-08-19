@@ -2,9 +2,9 @@ import { boolean, text } from '@storybook/addon-knobs';
 
 import TextBasedList from '~/components/global/TextBasedList/TextBasedList';
 import {
-  firstItem,
-  textBasedNavLinks,
-} from '~/components/global/TextBasedList/TextBasedList.mocks';
+  firstItemMock,
+  textBasedNavLinksMock,
+} from '~/components/global/TextBasedList/TextBasedList.mock';
 import { TextBasedNavigationListItem } from '~/data/models/TextBasedNavigationProps';
 
 export default {
@@ -13,27 +13,27 @@ export default {
 };
 
 export function TextBasedListDefault() {
-  return <TextBasedList {...textBasedNavLinks} />;
+  return <TextBasedList {...textBasedNavLinksMock} />;
 }
 
 export function TextBasedListWithKnobs() {
   const optionsGroupId = 'options';
   const showMoreLink = boolean('Show more link', false, optionsGroupId);
   const firstItemGroupId = 'first item';
-  const label = text('Label', firstItem.label, firstItemGroupId);
-  const link = text('Link', firstItem.link.href, firstItemGroupId);
+  const label = text('Label', firstItemMock.label, firstItemGroupId);
+  const link = text('Link', firstItemMock.link.href, firstItemGroupId);
   const isExternal = boolean('External link', false, firstItemGroupId);
   const items: Array<TextBasedNavigationListItem> = [
     {
       label,
       link: { href: link, isExternal },
     },
-    ...textBasedNavLinks.links,
+    ...textBasedNavLinksMock.links,
   ];
   return (
     <TextBasedList
       links={items}
-      moreLink={showMoreLink ? textBasedNavLinks.moreLink : undefined}
+      moreLink={showMoreLink ? textBasedNavLinksMock.moreLink : undefined}
     />
   );
 }

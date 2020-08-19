@@ -6,7 +6,7 @@ import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import { COLORS, MQ } from '~/lib/constants';
 
-import { filterChecklist, warrantyFilter } from '../Filters.mocks';
+import { filterChecklistMock, warrantyFilterMock } from '../Filters.mock';
 import FilterChecklist from './FilterChecklist';
 import FilterRange from './FilterRange';
 
@@ -34,7 +34,7 @@ export function FilterContentChecklist() {
     <>
       <Icon css={closeStyles} name={ICONS.CLOSE} />
       <FilterChecklist
-        {...filterChecklist}
+        {...filterChecklistMock}
         isPreviewLoading={boolean('Loading', false)}
         filtersToApply={{}}
         onChange={onChange()}
@@ -47,7 +47,7 @@ export function FilterContentChecklist() {
 export function FilterContentRange() {
   return (
     <FilterRange
-      {...warrantyFilter}
+      {...warrantyFilterMock}
       isPreviewLoading={boolean('Loading', false)}
       filtersToApply={{}}
       onChange={onChange()}

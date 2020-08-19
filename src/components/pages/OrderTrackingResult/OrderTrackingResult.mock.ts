@@ -1,14 +1,13 @@
-import { Order } from '~/data/models/Order';
 import { SiteImage } from '~/data/models/SiteImage';
 import { SiteLink } from '~/data/models/SiteLink';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 
-export const ORDER_TRACKING_LINK = {
+export const orderTrackingLinkMock = {
   href: 'https://account.simpletire.com/orders/111111111111',
   isExternal: true,
 } as SiteLink;
 
-export const ORDER_ADDRESS = {
+export const orderAddressMock = {
   cityName: 'Brooklyn',
   line1: '244 Water St',
   line2: '5th Floor',
@@ -16,7 +15,7 @@ export const ORDER_ADDRESS = {
   zip: '11201',
 };
 
-export const ORDER_ITEMS = [
+export const orderItemsMock = [
   {
     name: 'Bridgestone Dueler A/T Revo 2 - P215/75R16 - 001311',
     image: {
@@ -54,16 +53,3 @@ export const ORDER_ITEMS = [
     quantity: 2,
   },
 ];
-
-export const MOCK_ORDER = {
-  createdAt: new Date('2020-06-01T12:00:00Z'),
-  deliveredAt: new Date('2020-06-10T12:00:00Z'),
-  deliveryExpectedLabel: null,
-  id: '3170272',
-  orderProductList: ORDER_ITEMS,
-  shippedAt: new Date('2020-06-05T12:00:00Z'),
-  shippingAddress: ORDER_ADDRESS,
-  status: 'delivered',
-  trackingLabel: '111111111111',
-  trackingLink: ORDER_TRACKING_LINK,
-} as Order;

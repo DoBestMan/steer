@@ -1,4 +1,4 @@
-import { mockReviewDetail } from '~/components/modules/ReviewDetail/ReviewDetail.mocks';
+import { reviewDetailMock } from '~/components/modules/ReviewDetail/ReviewDetail.mock';
 
 import ReviewsHeader from './ReviewsHeader';
 
@@ -16,7 +16,7 @@ export function Header() {
     ratingStars,
     stats,
     tire,
-  } = mockReviewDetail;
+  } = reviewDetailMock;
 
   return (
     <ReviewsHeader

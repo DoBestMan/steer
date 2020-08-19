@@ -2,10 +2,10 @@ import { boolean, date, number, select, text } from '@storybook/addon-knobs';
 
 import OrderTrackingResult from './OrderTrackingResult';
 import {
-  ORDER_ADDRESS,
-  ORDER_ITEMS,
-  ORDER_TRACKING_LINK,
-} from './OrderTrackingResult.mocks';
+  orderAddressMock,
+  orderItemsMock,
+  orderTrackingLinkMock,
+} from './OrderTrackingResult.mock';
 import { OrderStatus } from './OrderTrackingResult.utils';
 
 export default {
@@ -39,12 +39,12 @@ export function OrderTrackingResultWithKnobs() {
       deliveryExpectedLabel={deliveryExpected}
       id={orderId}
       isCustomerServiceEnabled={isBusinessHours}
-      orderProductList={ORDER_ITEMS.slice(0, numProducts)}
+      orderProductList={orderItemsMock.slice(0, numProducts)}
       shippedAt={new Date(shippedAt)}
-      shippingAddress={ORDER_ADDRESS}
+      shippingAddress={orderAddressMock}
       status={status}
       trackingLabel="111111111111"
-      trackingLink={ORDER_TRACKING_LINK}
+      trackingLink={orderTrackingLinkMock}
     />
   );
 }

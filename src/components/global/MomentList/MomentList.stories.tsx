@@ -5,9 +5,9 @@ import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import RatingsList from '~/components/global/RatingsList/RatingsList';
 import {
-  mockMomentList,
-  mockRatings,
-} from '~/components/modules/PDP/Reviews/Reviews.mocks';
+  momentListMock,
+  ratingsMock,
+} from '~/components/modules/PDP/Reviews/Reviews.mock';
 import { COLORS, RATINGS_DISPLAY, THEME } from '~/lib/constants';
 
 import MomentList from './MomentList';
@@ -45,9 +45,9 @@ export function MomentListWithKnobs() {
   return (
     <Container theme={theme}>
       <GridItem gridColumnM="2/5" gridColumnL="2/6">
-        <MomentList data={mockMomentList} display={display} theme={theme} />
+        <MomentList data={momentListMock} display={display} theme={theme} />
         {showRatingsList && (
-          <RatingsList display={display} ratings={mockRatings} theme={theme} />
+          <RatingsList display={display} ratings={ratingsMock} theme={theme} />
         )}
       </GridItem>
     </Container>
@@ -58,7 +58,7 @@ export function MomentListDark() {
   return (
     <Container>
       <GridItem gridColumnM="2/5" gridColumnL="2/6">
-        <MomentList data={mockMomentList} theme={THEME.DARK} />
+        <MomentList data={momentListMock} theme={THEME.DARK} />
       </GridItem>
     </Container>
   );
@@ -69,7 +69,7 @@ export function MomentListDarkCompact() {
     <Container>
       <GridItem gridColumn="2/5" gridColumnL="2/6" gridColumnXL="2/5">
         <MomentList
-          data={mockMomentList}
+          data={momentListMock}
           display={RATINGS_DISPLAY.COMPACT}
           theme={THEME.DARK}
         />
@@ -82,7 +82,7 @@ export function MomentListLight() {
   return (
     <Container theme={THEME.LIGHT}>
       <GridItem gridColumnM="2/5" gridColumnL="2/6">
-        <MomentList data={mockMomentList} theme={THEME.LIGHT} />
+        <MomentList data={momentListMock} theme={THEME.LIGHT} />
       </GridItem>
     </Container>
   );
@@ -93,7 +93,7 @@ export function MomentListLightCompact() {
     <Container theme={THEME.LIGHT}>
       <GridItem gridColumn="2/5" gridColumnL="2/6" gridColumnXL="2/5">
         <MomentList
-          data={mockMomentList}
+          data={momentListMock}
           display={RATINGS_DISPLAY.COMPACT}
           theme={THEME.LIGHT}
         />

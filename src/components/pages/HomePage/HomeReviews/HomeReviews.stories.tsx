@@ -4,7 +4,7 @@ import Grid from '~/components/global/Grid/Grid';
 import { COLORS } from '~/lib/constants';
 
 import HomeReviews from './HomeReviews';
-import { mockReviews } from './HomeReviews.mocks';
+import { reviewsMock } from './HomeReviews.mock';
 
 export default {
   component: HomeReviews,
@@ -22,8 +22,8 @@ export function ReviewsWithKnobs() {
   return (
     <Grid css={{ backgroundColor: COLORS.GLOBAL.BLACK }}>
       <HomeReviews
-        {...mockReviews}
-        ratingStars={number('Rating', mockReviews.ratingStars, ratingOptions)}
+        {...reviewsMock}
+        ratingStars={number('Rating', reviewsMock.ratingStars, ratingOptions)}
       />
     </Grid>
   );

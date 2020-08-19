@@ -5,7 +5,7 @@ const handleButtonClick = () => {
   //button handler
 };
 const children = 'Button Label';
-export const ButtonGridMockData: Array<ButtonProps> = [
+export const buttonGridMock: Array<ButtonProps> = [
   {
     as: LINK_TYPES.BUTTON,
     children,

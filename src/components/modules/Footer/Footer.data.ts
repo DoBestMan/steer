@@ -4,7 +4,7 @@ import { LINK_MAP, LINKS } from '~/lib/constants/externalLinks';
 import { getCurrentYear } from '~/lib/utils/date';
 import { ui } from '~/lib/utils/ui-dictionary';
 
-export const data = {
+export const footerLinksData = {
   company: {
     links: [
       { action: ROUTE_MAP[ROUTES.ABOUT], text: ui('links.about') },

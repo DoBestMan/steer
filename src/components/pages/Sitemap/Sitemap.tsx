@@ -4,7 +4,7 @@ import Breadcrumbs from '~/components/global/Breadcrumbs/Breadcrumbs';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import Link from '~/components/global/Link/Link';
-import { data as footerLinks } from '~/components/modules/Footer/Footer.data';
+import { footerLinksData } from '~/components/modules/Footer/Footer.data';
 import { useSiteMenuContext } from '~/context/SiteMenu.context';
 import { SiteMenu } from '~/data/models/SiteMenu';
 import { ROUTE_MAP, ROUTES, THEME } from '~/lib/constants';
@@ -69,11 +69,11 @@ function getGlobalNavLinks(siteMenu: SiteMenu): Array<LinkList | LinkShape> {
     },
     {
       text: ui('footer.company'),
-      links: footerLinks.company.links,
+      links: footerLinksData.company.links,
     },
     {
       text: ui('footer.social'),
-      links: footerLinks.social.links,
+      links: footerLinksData.social.links,
     },
   ];
 }

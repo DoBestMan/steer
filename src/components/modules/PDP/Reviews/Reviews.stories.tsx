@@ -1,7 +1,7 @@
 import { boolean } from '@storybook/addon-knobs';
 
 import Reviews from './Reviews';
-import { mockReviewData } from './Reviews.mocks';
+import { reviewsMock } from './Reviews.mock';
 
 export default {
   component: Reviews,
@@ -20,7 +20,7 @@ export function ReviewsWithKnobs() {
     title,
     writeReviewLink,
     writeReviewLinkLabel,
-  } = mockReviewData;
+  } = reviewsMock;
 
   const hasReviews = boolean('Has reviews', true);
   const hasSources = boolean('Has sources', true);
@@ -47,7 +47,7 @@ export function ReviewsEmpty() {
     seeAllReviewsLinkLabel,
     writeReviewLink,
     writeReviewLinkLabel,
-  } = mockReviewData;
+  } = reviewsMock;
 
   return (
     <Reviews
@@ -68,7 +68,7 @@ export function ReviewsNoSources() {
     title,
     writeReviewLink,
     writeReviewLinkLabel,
-  } = mockReviewData;
+  } = reviewsMock;
 
   return (
     <Reviews
@@ -91,7 +91,7 @@ export function ReviewsNoReviews() {
     title,
     writeReviewLink,
     writeReviewLinkLabel,
-  } = mockReviewData;
+  } = reviewsMock;
 
   return (
     <Reviews

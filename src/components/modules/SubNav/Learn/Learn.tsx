@@ -10,7 +10,7 @@ import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
 
 import SubNavContentWrapper from '../SubNavContentWrapper';
-import { steps } from './Learn.data';
+import { learnStepsData } from './Learn.data';
 import styles from './Learn.styles';
 
 export interface LearnProps extends Pick<SiteMenu, 'siteMenuLearn'> {
@@ -40,9 +40,11 @@ function Learn({
       contentLabel={ui('nav.learn.contentLabel')}
     >
       <GridItem css={styles.root}>
-        <p css={[typography.primaryHeadline, styles.title]}>{steps.title}</p>
+        <p css={[typography.primaryHeadline, styles.title]}>
+          {learnStepsData.title}
+        </p>
         <ol css={styles.stepList}>
-          {steps.list.map((step, idx) => (
+          {learnStepsData.list.map((step, idx) => (
             <li css={styles.step} key={step}>
               <div css={styles.number}>{idx + 1}</div>
               <p css={styles.text}>{step}</p>

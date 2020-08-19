@@ -6,7 +6,7 @@ import GridItem from '~/components/global/Grid/GridItem';
 import { COLORS, THEME } from '~/lib/constants';
 
 import ReviewCard from './ReviewCard';
-import { mockReviews } from './ReviewCard.mocks';
+import { reviewCardMock } from './ReviewCard.mock';
 
 export default {
   component: ReviewCard,
@@ -37,7 +37,7 @@ export function ReviewWithKnobs() {
     momentList,
     ratings,
     ...rest
-  } = mockReviews[0];
+  } = reviewCardMock[0];
   const theme = select('Theme', [THEME.LIGHT, THEME.DARK], THEME.DARK);
   const hasCar = boolean('Has car', true);
   const hasLocation = boolean('Has location', true);
@@ -68,7 +68,7 @@ export function MultipleReviews() {
   return (
     <Container theme={theme}>
       <GridItem gridColumnL="2/7">
-        {mockReviews.map((review) => {
+        {reviewCardMock.map((review) => {
           return <ReviewCard key={review.id} theme={theme} {...review} />;
         })}
       </GridItem>
@@ -82,7 +82,7 @@ export function MultipleReviewsWide() {
   return (
     <Container theme={theme}>
       <GridItem gridColumnL="3/13" gridColumnXL="4/12">
-        {mockReviews.map((review) => {
+        {reviewCardMock.map((review) => {
           return <ReviewCard key={review.id} {...review} theme={theme} />;
         })}
       </GridItem>

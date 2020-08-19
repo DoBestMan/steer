@@ -1,7 +1,7 @@
-import { filterSort } from '~/components/modules/Catalog/Filters/Filters.mocks';
+import { filterSortMock } from '~/components/modules/Catalog/Filters/Filters.mock';
 
 import { default as RatingsComponent } from './RatingsTable';
-import { mockListResultMetadata, mockTireRatings } from './RatingsTable.mocks';
+import { listResultMetadataMock, tireRatingsMock } from './RatingsTable.mock';
 
 export default {
   component: RatingsComponent,
@@ -11,9 +11,9 @@ export default {
 export function RatingsTable() {
   return (
     <RatingsComponent
-      reviews={mockTireRatings}
-      listResultMetadata={mockListResultMetadata}
-      sortList={filterSort}
+      reviews={tireRatingsMock}
+      listResultMetadata={listResultMetadataMock}
+      sortList={filterSortMock}
     />
   );
 }

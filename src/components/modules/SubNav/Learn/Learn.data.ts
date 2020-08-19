@@ -1,6 +1,6 @@
 import { ui } from '~/lib/utils/ui-dictionary';
 
-export const steps = {
+export const learnStepsData = {
   list: [
     ui('nav.learn.step.one'),
     ui('nav.learn.step.two'),

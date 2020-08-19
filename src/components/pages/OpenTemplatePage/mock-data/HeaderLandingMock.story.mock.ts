@@ -4,7 +4,7 @@ import { PageData } from '~/data/models/SiteOpenTemplate';
 import { SiteReviews } from '~/data/models/SiteReviews';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 
-export const headerLandingData: PageData = {
+export const headerLandingMock: PageData = {
   breadcrumbs: [
     {
       type: 'SiteLinkWithLabel',

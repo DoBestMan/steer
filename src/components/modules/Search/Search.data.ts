@@ -5,17 +5,17 @@ import { ui } from '~/lib/utils/ui-dictionary';
 
 import { Results } from './Search.types';
 
-export const emptyResult: Results = {
+export const emptyResultData: Results = {
   resultMetadata: {},
   siteSearchResultGroupList: [],
 };
 
-export const emptySiteSearchResultGroup: SiteSearchResultGroup = {
+export const emptySiteSearchResultGroupData: SiteSearchResultGroup = {
   label: '',
   siteSearchResultList: [],
 };
 
-export const initialSearchVehicle = {
+export const initialSearchVehicleData = {
   action: {
     queryText: '',
     queryType: 'vehicle',
@@ -32,7 +32,7 @@ export const initialSearchVehicle = {
   type: 'SiteSearchResultTextItem',
 } as SiteSearchResultTextItem;
 
-export const initialSearchTireSize = {
+export const initialSearchTireSizeData = {
   action: {
     queryText: '',
     queryType: 'tireSize',
@@ -49,7 +49,7 @@ export const initialSearchTireSize = {
   type: 'SiteSearchResultTextItem',
 } as SiteSearchResultTextItem;
 
-export const initialSearchBrand = {
+export const initialSearchBrandData = {
   action: {
     queryText: '',
     queryType: 'brand',
@@ -83,16 +83,9 @@ export const initialSearchPopular = {
   type: 'SiteSearchResultTextItem',
 } as SiteSearchResultTextItem;
 
-export const initialSearchCategories = [
-  initialSearchVehicle,
-  initialSearchTireSize,
-  initialSearchBrand,
+export const initialSearchCategoriesData = [
+  initialSearchVehicleData,
+  initialSearchTireSizeData,
+  initialSearchBrandData,
   initialSearchPopular,
 ];
-
-export const noSearchResults: Results = {
-  resultMetadata: {
-    noExactMatch: true,
-  },
-  siteSearchResultGroupList: [],
-};

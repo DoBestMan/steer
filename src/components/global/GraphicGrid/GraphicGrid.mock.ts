@@ -6,7 +6,7 @@ import { ui } from '~/lib/utils/ui-dictionary';
 const handleDemoClick = () => {
   //demo handler
 };
-export const graphicGridItems: Array<FeaturedInfoModuleProps> = [
+export const graphicGridItemsMock: Array<FeaturedInfoModuleProps> = [
   {
     action: {
       as: LINK_TYPES.BUTTON,

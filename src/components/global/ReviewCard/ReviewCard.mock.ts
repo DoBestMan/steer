@@ -44,7 +44,7 @@ const ratings = [
   },
 ];
 
-export const mockReviews = [
+export const reviewCardMock = [
   {
     body:
       'Excellent tire and great smooth ride and handling ability. Great tires, handle excellent, 90 mile commute each way highway and nyc streets. <br/><br/>This is our 4th maybe 5th set of tires with different vehicle. I drive mostly highway and mountain roads talking about the famous "Dragon Tail" road up in the Smokie Mountains where I live. Last tires were 54k on it we didn\'t have to replace them but winter was upon us. The other ones still riding on them 48k on them. I believe reasonable price and good quality. Will buy these tires again.',

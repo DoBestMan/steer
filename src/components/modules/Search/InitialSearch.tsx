@@ -8,7 +8,7 @@ import { SiteSearchResultTextItem } from '~/data/models/SiteSearchResultTextItem
 import { LINK_TYPES, THEME, TIME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
-import { initialSearchCategories } from './Search.data';
+import { initialSearchCategoriesData } from './Search.data';
 import styles from './Search.styles';
 import { SearchResult, SearchResultEnum } from './Search.types';
 import SearchSection from './SearchSection/SearchSection';
@@ -63,7 +63,7 @@ function InitialSearch({
         <SearchSection
           label={ui('search.searchBy')}
           onClick={onSearchCategoryClick}
-          siteSearchResultList={initialSearchCategories}
+          siteSearchResultList={initialSearchCategoriesData}
         />
       </div>
       <Transition

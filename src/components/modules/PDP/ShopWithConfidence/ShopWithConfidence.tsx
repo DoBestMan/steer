@@ -6,7 +6,7 @@ import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Markdown from '~/components/global/Markdown/Markdown';
 import { ui } from '~/lib/utils/ui-dictionary';
 
-import { statsMock } from './ShopWithConfidence.mock';
+import { shopWithConfidenceData } from './ShopWithConfidence.data';
 import styles from './ShopWithConfidence.styles';
 
 function ShopWithConfidence() {
@@ -22,7 +22,7 @@ function ShopWithConfidence() {
 
       <GridItem fullbleed css={styles.carouselContainer}>
         <Carousel>
-          {statsMock.map((item) => (
+          {shopWithConfidenceData.map((item) => (
             <div key={item.heading}>
               <span css={styles.statHeading}>{item.heading}</span>
               <span css={styles.statDetail}>

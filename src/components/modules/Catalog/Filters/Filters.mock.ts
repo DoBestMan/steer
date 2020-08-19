@@ -17,7 +17,7 @@ export const filterTypeSelect = [
   FilterContentTypes.SiteCatalogFilterToggle,
 ];
 
-export const warrantyFilter = {
+export const warrantyFilterMock = {
   type: 'SiteCatalogFilterRange',
   id: 'warranty',
   header: {
@@ -32,7 +32,7 @@ export const warrantyFilter = {
   unit: 'UnitMiles',
 } as SiteCatalogFilterRange;
 
-export const mockPriceFilter = {
+export const priceFilterMock = {
   type: 'SiteCatalogFilterRange',
   id: 'price',
   header: {
@@ -47,7 +47,7 @@ export const mockPriceFilter = {
   unit: 'UnitUSD',
 } as SiteCatalogFilterRange;
 
-export const filterSort = [
+export const filterSortMock = [
   {
     title: 'Best match',
     description: 'Fastest delivery, best ratings and value',
@@ -126,7 +126,7 @@ export const filterSort = [
   },
 ] as Array<SiteCatalogSortListItem>;
 
-export const filterChecklist = {
+export const filterChecklistMock = {
   type: 'SiteCatalogFilterList',
   presentationStyle: 'Normal',
   header: {
@@ -235,7 +235,7 @@ export const filterChecklist = {
   ],
 } as SiteCatalogFilterList;
 
-export const mockSiteCatalogFilters = [
+export const siteCatalogFiltersMock = [
   {
     type: 'SiteCatalogFilterToggle',
     item: {
@@ -658,7 +658,7 @@ export const mockSiteCatalogFilters = [
       },
     ],
   },
-  warrantyFilter,
+  warrantyFilterMock,
   {
     type: 'SiteCatalogFilterList',
     presentationStyle: 'Large',
@@ -862,15 +862,15 @@ export const mockSiteCatalogFilters = [
       },
     ],
   },
-  mockPriceFilter,
+  priceFilterMock,
 ];
 
 // mocks for Filters.utils.test.ts
-export const mockItem = ({
+export const itemMock = ({
   value: { foo: 'bar' },
 } as unknown) as SiteCatalogFilterItem;
 
-export const mockToggle = ({
+export const toggleMock = ({
   type: 'SiteCatalogFilterToggle',
   item: {
     state: 'Selected',
@@ -879,7 +879,7 @@ export const mockToggle = ({
   },
 } as unknown) as SiteCatalogFilterToggle;
 
-export const mockList = ({
+export const listMock = ({
   type: FilterContentTypes.SiteCatalogFilterList,
   header: {
     title: 'List Label',
@@ -903,7 +903,7 @@ export const mockRange = {
   id: 'range',
 } as SiteCatalogFilterRange;
 
-export const mockDupeSelected = ({
+export const dupeSelectedMock = ({
   type: 'SiteCatalogFilterList',
   header: {
     title: 'List Label',
@@ -924,7 +924,7 @@ export const mockDupeSelected = ({
   ],
 } as unknown) as SiteCatalogFilterList;
 
-export const mockDupeMultipleValSelected = ({
+export const dupeMultipleValSelectedMock = ({
   type: 'SiteCatalogFilterList',
   header: {
     title: 'List Label',
@@ -945,7 +945,7 @@ export const mockDupeMultipleValSelected = ({
   ],
 } as unknown) as SiteCatalogFilterList;
 
-export const mockListSelected = ({
+export const listSelectedMock = ({
   type: 'SiteCatalogFilterList',
   header: {
     title: 'List Label',
@@ -963,7 +963,7 @@ export const mockListSelected = ({
   ],
 } as unknown) as SiteCatalogFilterList;
 
-export const mockUniqueSelected = ({
+export const uniqueSelectedMock = ({
   type: 'SiteCatalogFilterList',
   header: {
     title: 'List Label',
@@ -984,7 +984,7 @@ export const mockUniqueSelected = ({
   ],
 } as unknown) as SiteCatalogFilterList;
 
-export const mockMultipleValSelected = ({
+export const multipleValSelectedMock = ({
   type: 'SiteCatalogFilterList',
   header: {
     title: 'List Label',

@@ -5,10 +5,10 @@ import { ReactNode } from 'react';
 import { defaultTheme } from '~/components/pages/CatalogPage/CatalogPage.theme';
 
 import {
-  vehiclesDisambiguation,
-  vehiclesNoOeWithSize,
-  vehiclesNoResultWithTrim,
-} from '../CatalogSummary/CatalogSummary.mocks';
+  vehiclesDisambiguationMock,
+  vehiclesNoOeWithSizeMock,
+  vehiclesNoResultWithTrimMock,
+} from '../CatalogSummary/CatalogSummary.mock';
 import {
   BuildInMessage,
   DataMomentMessage,
@@ -31,7 +31,9 @@ function CatalogMessageContainer({ children }: { children: ReactNode }) {
 export function CatalogBuildInNoOeMessage() {
   return (
     <BuildInMessage
-      siteCatalogSummaryBuildIn={vehiclesNoOeWithSize.siteCatalogSummaryBuildIn}
+      siteCatalogSummaryBuildIn={
+        vehiclesNoOeWithSizeMock.siteCatalogSummaryBuildIn
+      }
     />
   );
 }
@@ -40,7 +42,7 @@ export function CatalogBuildInDisambiguationMessage() {
   return (
     <BuildInMessage
       siteCatalogSummaryBuildIn={
-        vehiclesDisambiguation.siteCatalogSummaryBuildIn
+        vehiclesDisambiguationMock.siteCatalogSummaryBuildIn
       }
     />
   );
@@ -52,7 +54,9 @@ export function CatalogDataMomentNoOeMessage() {
       <DataMomentMessage
         setStage={action('set-stage')}
         showLoadingInterstitial={false}
-        siteCatalogSummaryPrompt={vehiclesNoOeWithSize.siteCatalogSummaryPrompt}
+        siteCatalogSummaryPrompt={
+          vehiclesNoOeWithSizeMock.siteCatalogSummaryPrompt
+        }
         openStaticModal={action('Open modal')}
       />
     </CatalogMessageContainer>
@@ -66,7 +70,7 @@ export function CatalogDataMomentDisambiguationMessage() {
         setStage={action('set-stage')}
         showLoadingInterstitial={false}
         siteCatalogSummaryPrompt={
-          vehiclesDisambiguation.siteCatalogSummaryPrompt
+          vehiclesDisambiguationMock.siteCatalogSummaryPrompt
         }
         openStaticModal={action('Open modal')}
       />
@@ -81,7 +85,7 @@ export function CatalogNoResultsMessage() {
       customerServiceNumber={customerServiceNumber}
       onSearchBy={action('Search by click')}
       siteCatalogSummaryPrompt={
-        vehiclesNoResultWithTrim.siteCatalogSummaryPrompt
+        vehiclesNoResultWithTrimMock.siteCatalogSummaryPrompt
       }
     />
   );

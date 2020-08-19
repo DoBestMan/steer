@@ -3,11 +3,12 @@ import {
   TextBasedNavigationProps,
 } from '~/data/models/TextBasedNavigationProps';
 
-export const firstItem: TextBasedNavigationListItem = {
+export const firstItemMock: TextBasedNavigationListItem = {
   label: 'Dynamic label',
   link: { href: 'topic/dynamic-link', isExternal: false },
 };
-export const textBasedNavLinks: TextBasedNavigationProps = {
+
+export const textBasedNavLinksMock: TextBasedNavigationProps = {
   links: [
     {
       label: 'First topic in this list',

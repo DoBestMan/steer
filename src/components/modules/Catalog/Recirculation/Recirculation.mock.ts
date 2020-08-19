@@ -3,7 +3,7 @@ import { SiteCatalogSummaryRecirculation } from '~/data/models/SiteCatalogSummar
 import { SiteIcon } from '~/data/models/SiteIcon';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 
-export const recirculationData: SiteCatalogSummaryRecirculation = {
+export const recirculationMock: SiteCatalogSummaryRecirculation = {
   title: 'You may also be interested in:',
   items: [
     {

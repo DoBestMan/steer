@@ -1,5 +1,5 @@
 import Button from '~/components/global/Button/Button';
-import { mockReviewDetail } from '~/components/modules/ReviewDetail/ReviewDetail.mocks';
+import { reviewDetailMock } from '~/components/modules/ReviewDetail/ReviewDetail.mock';
 import Reviews from '~/components/modules/ReviewDetail/Reviews/Reviews';
 import ReviewsHeader from '~/components/modules/ReviewDetail/ReviewsHeader/ReviewsHeader';
 import StickyBar from '~/components/modules/StickyBar/StickyBar';
@@ -30,7 +30,7 @@ export function FullPage() {
     stats,
     tire,
     title,
-  } = mockReviewDetail;
+  } = reviewDetailMock;
 
   return (
     <div css={styles.container}>

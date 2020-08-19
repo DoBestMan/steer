@@ -2,7 +2,7 @@ import { ICONS } from '~/components/global/Icon/Icon.constants';
 import IconCTA from '~/components/global/Link/IconCTA';
 import { LINK_THEME, THEME } from '~/lib/constants';
 
-import { data } from './Support.data';
+import { supportData } from './Support.data';
 
 export interface Props {
   isCustomerServiceEnabled?: boolean;
@@ -15,8 +15,8 @@ function EmailSupport({
   ...rest
 }: Props) {
   const supportContent = isCustomerServiceEnabled
-    ? data.isBusinessHours
-    : data.isNotBusinessHours;
+    ? supportData.isBusinessHours
+    : supportData.isNotBusinessHours;
 
   return (
     <IconCTA

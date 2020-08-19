@@ -1,8 +1,8 @@
-import { mockReviews } from '~/components/global/ReviewCard/ReviewCard.mocks';
+import { reviewCardMock } from '~/components/global/ReviewCard/ReviewCard.mock';
 import {
-  mockMomentList,
-  mockRatings,
-} from '~/components/modules/PDP/Reviews/Reviews.mocks';
+  momentListMock,
+  ratingsMock,
+} from '~/components/modules/PDP/Reviews/Reviews.mock';
 import { SiteImage } from '~/data/models/SiteImage';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 
@@ -13,7 +13,7 @@ const mockLogo: SiteImage = {
   type: ICON_IMAGE_TYPE.IMAGE,
 };
 
-export const mockReviewDetail = {
+export const reviewDetailMock = {
   brand: {
     image: mockLogo,
     label: 'Pirelli',
@@ -42,11 +42,11 @@ export const mockReviewDetail = {
       url: '/pirelli/reviews/scorpion-verde-all-season-plus',
     },
   ],
-  ratings: mockRatings,
+  ratings: ratingsMock,
   ratingStars: 4.8,
-  reviews: [].concat(...Array(15).fill(mockReviews)),
+  reviews: [].concat(...Array(15).fill(reviewCardMock)),
   sources: { simpleTire: 115, googleShopping: 72 },
-  stats: [mockMomentList[1]],
+  stats: [momentListMock[1]],
   tire: 'Scorpion Verde All Season Plus Tire',
   title: '187 reviews',
 };

@@ -1,4 +1,4 @@
-export const statsMock = [
+export const shopWithConfidenceData = [
   {
     heading: '98%',
     detail: 'of customers approve',

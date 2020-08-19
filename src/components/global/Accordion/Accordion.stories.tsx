@@ -4,7 +4,7 @@ import { COLORS, THEME } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 import Accordion from './Accordion';
-import { firstItem, mockListOfItems } from './Accordion.mocks';
+import { firstItemMock, listOfItemsMock } from './Accordion.mock';
 
 export default {
   component: Accordion,
@@ -32,11 +32,15 @@ export function AccordionWithKnobs() {
   );
 
   const firstItemGroupId = 'first item';
-  const item1Label = text('Title', firstItem.label as string, firstItemGroupId);
+  const item1Label = text(
+    'Title',
+    firstItemMock.label as string,
+    firstItemGroupId,
+  );
   const item1Value = text('Value', '', firstItemGroupId);
   const item1Content = text(
     'Content',
-    firstItem.content as string,
+    firstItemMock.content as string,
     firstItemGroupId,
   );
   const items = [
@@ -44,9 +48,9 @@ export function AccordionWithKnobs() {
       label: item1Label,
       value: item1Value,
       content: item1Content,
-      id: firstItem.id,
+      id: firstItemMock.id,
     },
-    ...mockListOfItems,
+    ...listOfItemsMock,
   ];
 
   return (

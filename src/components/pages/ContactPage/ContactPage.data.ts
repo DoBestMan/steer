@@ -2,7 +2,7 @@ import { SiteHeaderModule } from '~/data/models/SiteHeaderModule';
 import { PageData } from '~/data/models/SiteOpenTemplate';
 import { THEME } from '~/lib/constants';
 
-export const pageUpperData: PageData = {
+export const contactPageUpperData: PageData = {
   breadcrumbs: [
     {
       label: 'Home',
@@ -74,7 +74,7 @@ export const pageUpperData: PageData = {
   ],
 };
 
-export const pageDownData: PageData = {
+export const contactPageDownData: PageData = {
   header: {} as SiteHeaderModule,
   modules: [
     {
@@ -89,7 +89,7 @@ export const pageDownData: PageData = {
   ],
 };
 
-export const customerSupportForm = {
+export const customerSupportFormData = {
   type: 'CustomerSupportForm',
   items: [
     {

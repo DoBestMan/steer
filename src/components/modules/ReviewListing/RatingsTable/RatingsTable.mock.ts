@@ -1,4 +1,4 @@
-export const mockListResultMetadata = {
+export const listResultMetadataMock = {
   noExactMatch: false,
   pagination: {
     offset: 0,
@@ -7,7 +7,7 @@ export const mockListResultMetadata = {
   },
 };
 
-export const mockTireRatings = [
+export const tireRatingsMock = [
   {
     id: '1',
     link: {

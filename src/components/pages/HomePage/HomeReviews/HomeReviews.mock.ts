@@ -2,7 +2,7 @@ import { ICONS } from '~/components/global/Icon/Icon.constants';
 import { SiteReviews } from '~/data/models/SiteReviews';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 
-export const mockReviews: SiteReviews = {
+export const reviewsMock: SiteReviews = {
   body:
     'Shopper Approved actively collects reviews from actual verified customers, which helps more accurately reflect customer’s overall satisfaction with this company.',
   link: {

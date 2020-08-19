@@ -1,7 +1,7 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import preloadAll from 'jest-next-dynamic';
 
-import { emptyCatalogProducts } from '~/components/pages/CatalogPage/CatalogPage.mocks';
+import { emptyCatalogProductsMock } from '~/components/pages/CatalogPage/CatalogPage.mock';
 import { CatalogPageContextProvider } from '~/context/CatalogPage.context';
 import { ModalContextProvider } from '~/context/Modal.context';
 import { SiteGlobalsContext } from '~/context/SiteGlobals.context';
@@ -10,10 +10,10 @@ import { SiteCatalogFilters } from '~/data/models/SiteCatalogFilters';
 import FilterButtonsCarousel from './FilterButtonsCarousel';
 import { FiltersContextProvider } from './Filters.context';
 import {
-  mockList,
-  mockListSelected,
-  mockSiteCatalogFilters,
-} from './Filters.mocks';
+  listMock,
+  listSelectedMock,
+  siteCatalogFiltersMock,
+} from './Filters.mock';
 
 jest.mock('focus-trap', () => {
   const trap = {
@@ -31,11 +31,11 @@ jest.mock('emotion-theming', () => ({
 
 const mockArgs = {
   siteCatalogFilters: {
-    filtersList: mockSiteCatalogFilters,
+    filtersList: siteCatalogFiltersMock,
   } as SiteCatalogFilters,
   onPreviewFilters: jest.fn(() => Promise.resolve()),
   previewFiltersData: {
-    filters: emptyCatalogProducts.siteCatalogFilters as SiteCatalogFilters,
+    filters: emptyCatalogProductsMock.siteCatalogFilters as SiteCatalogFilters,
     totalMatches: 0,
   },
 };
@@ -55,7 +55,7 @@ const tree = (
     <ModalContextProvider>
       <CatalogPageContextProvider {...catalogMockArgs}>
         <FiltersContextProvider {...mockArgs}>
-          <FilterButtonsCarousel popularFilters={[]} filters={[mockList]} />
+          <FilterButtonsCarousel popularFilters={[]} filters={[listMock]} />
         </FiltersContextProvider>
       </CatalogPageContextProvider>
     </ModalContextProvider>
@@ -152,13 +152,13 @@ describe('FilterButtonsCarousel', () => {
             <FiltersContextProvider
               {...mockArgs}
               siteCatalogFilters={{
-                filtersList: [mockListSelected],
+                filtersList: [listSelectedMock],
                 sortList: [],
               }}
             >
               <FilterButtonsCarousel
                 popularFilters={[]}
-                filters={[mockListSelected]}
+                filters={[listSelectedMock]}
               />
             </FiltersContextProvider>
           </CatalogPageContextProvider>

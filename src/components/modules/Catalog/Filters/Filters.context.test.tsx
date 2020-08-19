@@ -2,21 +2,21 @@ import { renderHook } from '@testing-library/react-hooks';
 import { ReactNode } from 'react';
 import { act } from 'react-test-renderer';
 
-import { emptyCatalogProducts } from '~/components/pages/CatalogPage/CatalogPage.mocks';
+import { emptyCatalogProductsMock } from '~/components/pages/CatalogPage/CatalogPage.mock';
 import { CatalogPageContextProvider } from '~/context/CatalogPage.context';
 import { SiteCatalogFilters } from '~/data/models/SiteCatalogFilters';
 
 import { CatalogFilterTypes, FilterContentTypes } from './Filter.types';
 import { useFiltersContextSetup } from './Filters.context';
-import { mockSiteCatalogFilters } from './Filters.mocks';
+import { siteCatalogFiltersMock } from './Filters.mock';
 
 const mockArgs = {
   siteCatalogFilters: {
-    filtersList: mockSiteCatalogFilters,
+    filtersList: siteCatalogFiltersMock,
   } as SiteCatalogFilters,
   onPreviewFilters: jest.fn(() => Promise.resolve()),
   previewFiltersData: {
-    filters: emptyCatalogProducts.siteCatalogFilters as SiteCatalogFilters,
+    filters: emptyCatalogProductsMock.siteCatalogFilters as SiteCatalogFilters,
     totalMatches: 0,
   },
 };

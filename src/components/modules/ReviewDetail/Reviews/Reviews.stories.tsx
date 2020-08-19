@@ -1,4 +1,4 @@
-import { mockReviewDetail } from '~/components/modules/ReviewDetail/ReviewDetail.mocks';
+import { reviewDetailMock } from '~/components/modules/ReviewDetail/ReviewDetail.mock';
 
 import Reviews from './Reviews';
 
@@ -8,7 +8,7 @@ export default {
 };
 
 export function ReviewsWithKnobs() {
-  const { reviews, sources, title } = mockReviewDetail;
+  const { reviews, sources, title } = reviewDetailMock;
 
   return <Reviews reviews={reviews} sources={sources} title={title} />;
 }

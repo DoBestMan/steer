@@ -5,10 +5,10 @@ import ModuleBreadcrumbs from '~/components/modules/EditorialModules/modules/Mod
 import { navigationBreadcrumbPaddingTop } from '~/components/modules/Nav/Nav.styles';
 
 import {
-  customerSupportForm,
-  pageDownData,
-  pageUpperData,
-} from './ContactPage.mock';
+  contactPageDownData,
+  contactPageUpperData,
+  customerSupportFormData,
+} from './ContactPage.data';
 import { styles } from './ContactPage.styles';
 import CustomerSupportForm from './CustomerSupportForm/CustomerSupportForm';
 
@@ -17,21 +17,21 @@ function ContactPage() {
     <div
       css={[styles.openTemplatePageContainer, navigationBreadcrumbPaddingTop]}
     >
-      {pageUpperData.metadata && pageUpperData.metadata.meta && (
-        <Meta {...pageUpperData.metadata.meta} />
+      {contactPageUpperData.metadata && contactPageUpperData.metadata.meta && (
+        <Meta {...contactPageUpperData.metadata.meta} />
       )}
-      {pageUpperData.breadcrumbs && (
-        <ModuleBreadcrumbs breadcrumbs={pageUpperData.breadcrumbs} />
+      {contactPageUpperData.breadcrumbs && (
+        <ModuleBreadcrumbs breadcrumbs={contactPageUpperData.breadcrumbs} />
       )}
-      {pageUpperData.header && (
+      {contactPageUpperData.header && (
         <EditorialHeaders
-          moduleData={pageUpperData.header}
-          moduleType={pageUpperData.header.type}
+          moduleData={contactPageUpperData.header}
+          moduleType={contactPageUpperData.header.type}
         />
       )}
-      {pageUpperData.modules &&
-        pageUpperData.modules.length &&
-        pageUpperData.modules.map((module, index) => (
+      {contactPageUpperData.modules &&
+        contactPageUpperData.modules.length &&
+        contactPageUpperData.modules.map((module, index) => (
           <EditorialModules
             key={`${module.type}_${index}`}
             moduleData={module}
@@ -40,15 +40,15 @@ function ContactPage() {
         ))}
       <CustomerSupportForm
         selections={
-          customerSupportForm.items as Array<{
+          customerSupportFormData.items as Array<{
             label: string;
             value: string;
           }>
         }
       />
-      {pageDownData.modules &&
-        pageDownData.modules.length &&
-        pageDownData.modules.map((module, index) => (
+      {contactPageDownData.modules &&
+        contactPageDownData.modules.length &&
+        contactPageDownData.modules.map((module, index) => (
           <EditorialModules
             key={`${module.type}_${index}`}
             moduleData={module}

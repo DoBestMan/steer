@@ -1,9 +1,9 @@
 import {
-  mockListResultMetadata,
-  mockTireRatings,
-} from '~/components/modules/ReviewListing/RatingsTable/RatingsTable.mocks';
+  listResultMetadataMock,
+  tireRatingsMock,
+} from '~/components/modules/ReviewListing/RatingsTable/RatingsTable.mock';
 
-export const mockReviewListing = {
+export const reviewListingMock = {
   body:
     'All-season or winter tires? Goodyear or Bridgestone? Get the answers you need here.\n\n Hidden text here.',
   breadcrumbs: [
@@ -325,7 +325,7 @@ export const mockReviewListing = {
       ],
     },
   ],
-  listResultMetadata: mockListResultMetadata,
-  ratings: mockTireRatings,
+  listResultMetadata: listResultMetadataMock,
+  ratings: tireRatingsMock,
   title: 'Tire Reviews',
 };

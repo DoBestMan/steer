@@ -1,7 +1,6 @@
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import { SiteIcon } from '~/data/models/SiteIcon';
 import { SiteMenuBrowseGroupItem } from '~/data/models/SiteMenuBrowseGroupItem';
-import { SiteMenuLearn } from '~/data/models/SiteMenuLearn';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 
 const deals: SiteMenuBrowseGroupItem = {
@@ -173,27 +172,9 @@ const wheelSizes = {
   },
 };
 
-export const browseTiresGroupItems = {
+export const browseTiresGroupItemsMock = {
   deals,
   vehicleType,
   tireCategory,
   wheelSizes,
-};
-
-export const siteMenuLearn: SiteMenuLearn = {
-  list: [
-    {
-      label: 'How SimpleTire works',
-      link: { href: '/how-we-work', isExternal: false },
-    },
-    {
-      label: 'Tire maintenance',
-      link: { href: '/tire-maintenance', isExternal: false },
-    },
-    {
-      label: 'Tire size calculator',
-      link: { href: '/tire-size-calculator', isExternal: false },
-    },
-    { label: 'FAQs', link: { href: '/faq', isExternal: false } },
-  ],
 };

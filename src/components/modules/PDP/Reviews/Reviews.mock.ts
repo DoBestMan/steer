@@ -1,6 +1,6 @@
-import { mockReviews } from '~/components/global/ReviewCard/ReviewCard.mocks';
+import { reviewCardMock } from '~/components/global/ReviewCard/ReviewCard.mock';
 
-export const mockMomentList = [
+export const momentListMock = [
   {
     label: "Honda Civic's ranking",
     value: '1st in popularity',
@@ -11,7 +11,7 @@ export const mockMomentList = [
   },
 ];
 
-export const mockRatings = [
+export const ratingsMock = [
   {
     label: 'Dry',
     value: 5.0,
@@ -38,11 +38,11 @@ export const mockRatings = [
   },
 ];
 
-export const mockReviewData = {
-  momentList: mockMomentList,
-  ratings: mockRatings,
+export const reviewsMock = {
+  momentList: momentListMock,
+  ratings: ratingsMock,
   ratingStars: 4.8,
-  reviews: mockReviews,
+  reviews: reviewCardMock,
   seeAllReviewsLink: {
     href: '/',
     isExternal: false,

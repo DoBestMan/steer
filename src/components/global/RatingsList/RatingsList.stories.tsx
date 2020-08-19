@@ -5,9 +5,9 @@ import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import MomentList from '~/components/global/MomentList/MomentList';
 import {
-  mockMomentList,
-  mockRatings,
-} from '~/components/modules/PDP/Reviews/Reviews.mocks';
+  momentListMock,
+  ratingsMock,
+} from '~/components/modules/PDP/Reviews/Reviews.mock';
 import { COLORS, RATINGS_DISPLAY, THEME } from '~/lib/constants';
 
 import RatingsList from './RatingsList';
@@ -56,11 +56,11 @@ export function RatingsListWithKnobs() {
         {showMomentList && (
           <MomentList
             display={display}
-            data={mockMomentList}
+            data={momentListMock}
             theme={theme === THEME.ORANGE ? THEME.LIGHT : theme}
           />
         )}
-        <RatingsList display={display} ratings={mockRatings} theme={theme} />
+        <RatingsList display={display} ratings={ratingsMock} theme={theme} />
       </GridItem>
     </Container>
   );
@@ -70,7 +70,7 @@ export function RatingsListDark() {
   return (
     <Container>
       <GridItem gridColumnM="2/5" gridColumnL="2/6">
-        <RatingsList ratings={mockRatings} theme={THEME.DARK} />
+        <RatingsList ratings={ratingsMock} theme={THEME.DARK} />
       </GridItem>
     </Container>
   );
@@ -82,7 +82,7 @@ export function RatingsListDarkCompact() {
       <GridItem gridColumn="2/5" gridColumnL="2/6" gridColumnXL="2/5">
         <RatingsList
           display={RATINGS_DISPLAY.COMPACT}
-          ratings={mockRatings}
+          ratings={ratingsMock}
           theme={THEME.DARK}
         />
       </GridItem>
@@ -94,7 +94,7 @@ export function RatingsListLight() {
   return (
     <Container theme={THEME.LIGHT}>
       <GridItem gridColumnM="2/5" gridColumnL="2/6">
-        <RatingsList ratings={mockRatings} theme={THEME.LIGHT} />
+        <RatingsList ratings={ratingsMock} theme={THEME.LIGHT} />
       </GridItem>
     </Container>
   );
@@ -106,7 +106,7 @@ export function RatingsListLightCompact() {
       <GridItem gridColumn="2/5" gridColumnL="2/6" gridColumnXL="2/5">
         <RatingsList
           display={RATINGS_DISPLAY.COMPACT}
-          ratings={mockRatings}
+          ratings={ratingsMock}
           theme={THEME.LIGHT}
         />
       </GridItem>
@@ -118,7 +118,7 @@ export function RatingsListOrange() {
   return (
     <Container theme={THEME.ORANGE}>
       <GridItem gridColumnM="2/5" gridColumnL="2/6">
-        <RatingsList ratings={mockRatings} theme={THEME.ORANGE} />
+        <RatingsList ratings={ratingsMock} theme={THEME.ORANGE} />
       </GridItem>
     </Container>
   );
@@ -130,7 +130,7 @@ export function RatingsListOrangeCompact() {
       <GridItem gridColumn="2/5" gridColumnL="2/6" gridColumnXL="2/5">
         <RatingsList
           display={RATINGS_DISPLAY.COMPACT}
-          ratings={mockRatings}
+          ratings={ratingsMock}
           theme={THEME.ORANGE}
         />
       </GridItem>

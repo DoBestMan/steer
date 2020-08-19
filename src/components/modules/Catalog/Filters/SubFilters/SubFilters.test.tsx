@@ -2,7 +2,7 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import preloadAll from 'jest-next-dynamic';
 import ReactModal from 'react-modal';
 
-import { emptyCatalogProducts } from '~/components/pages/CatalogPage/CatalogPage.mocks';
+import { emptyCatalogProductsMock } from '~/components/pages/CatalogPage/CatalogPage.mock';
 import { CatalogPageContextProvider } from '~/context/CatalogPage.context';
 import { ModalContextProvider } from '~/context/Modal.context';
 import { SiteGlobalsContext } from '~/context/SiteGlobals.context';
@@ -11,10 +11,10 @@ import * as windowHook from '~/hooks/useWindowSize';
 
 import { FiltersContextProvider } from '../Filters.context';
 import {
-  filterSort,
-  mockPriceFilter,
-  mockSiteCatalogFilters,
-} from '../Filters.mocks';
+  filterSortMock,
+  priceFilterMock,
+  siteCatalogFiltersMock,
+} from '../Filters.mock';
 import SubFilters from './SubFilters';
 
 ReactModal.setAppElement('*'); // removes warning in tests
@@ -35,11 +35,11 @@ jest.mock('emotion-theming', () => ({
 
 const mockArgs = {
   siteCatalogFilters: {
-    filtersList: mockSiteCatalogFilters,
+    filtersList: siteCatalogFiltersMock,
   } as SiteCatalogFilters,
   onPreviewFilters: jest.fn(() => Promise.resolve()),
   previewFiltersData: {
-    filters: emptyCatalogProducts.siteCatalogFilters as SiteCatalogFilters,
+    filters: emptyCatalogProductsMock.siteCatalogFilters as SiteCatalogFilters,
     totalMatches: 0,
   },
 };
@@ -61,8 +61,8 @@ const tree = (
         <FiltersContextProvider {...mockArgs}>
           <SubFilters
             resultsCount={0}
-            priceFilter={mockPriceFilter}
-            sortList={filterSort}
+            priceFilter={priceFilterMock}
+            sortList={filterSortMock}
           />
         </FiltersContextProvider>
       </CatalogPageContextProvider>

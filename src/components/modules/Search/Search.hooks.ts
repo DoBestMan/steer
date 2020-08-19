@@ -25,11 +25,11 @@ import { scrollIntoViewIfNeeded } from '~/lib/utils/accessibility';
 
 import { InputQuery } from './Search';
 import {
-  emptyResult,
-  emptySiteSearchResultGroup,
-  initialSearchBrand,
-  initialSearchTireSize,
-  initialSearchVehicle,
+  emptyResultData,
+  emptySiteSearchResultGroupData,
+  initialSearchBrandData,
+  initialSearchTireSizeData,
+  initialSearchVehicleData,
 } from './Search.data';
 
 const DEFAULT_CLEARANCE = {
@@ -126,7 +126,7 @@ export function useFocusScrollIntoView({
 
 export function usePastSearches() {
   const [pastSearches, setPastSearches] = useState<SiteSearchResultGroup>(
-    emptySiteSearchResultGroup,
+    emptySiteSearchResultGroupData,
   );
   const getPastSearches = useCallback(async function () {
     try {
@@ -146,7 +146,7 @@ export function usePastSearches() {
     try {
       await apiDeleteUserSearchHistory();
 
-      setPastSearches(emptySiteSearchResultGroup);
+      setPastSearches(emptySiteSearchResultGroupData);
     } catch (err) {
       console.error(err);
     }
@@ -178,7 +178,7 @@ export function usePastSearches() {
 }
 
 export function useSearchResults() {
-  const [searchResults, setSearchResults] = useState<Results>(emptyResult);
+  const [searchResults, setSearchResults] = useState<Results>(emptyResultData);
   const isRequestInProgress = useRef(false);
   const [isLoadingResults, setIsLoadingResults] = useState(false);
   const [hasSearchResultsError, setHasSearchResultsError] = useState(false);
@@ -243,7 +243,7 @@ export function useSearchResults() {
   const clearSearchResults = useCallback(
     function () {
       abortSearchRequest();
-      setSearchResults(emptyResult);
+      setSearchResults(emptyResultData);
     },
     [setSearchResults],
   );
@@ -269,7 +269,7 @@ export function useSearchState({
     const {
       queryText,
       queryType,
-    } = initialSearchVehicle.action as SiteSearchResultActionQuery;
+    } = initialSearchVehicleData.action as SiteSearchResultActionQuery;
     setSearchState(SearchStateEnum.VEHICLE);
     searchQuery({
       queryText,
@@ -282,7 +282,7 @@ export function useSearchState({
     const {
       queryText,
       queryType,
-    } = initialSearchTireSize.action as SiteSearchResultActionQuery;
+    } = initialSearchTireSizeData.action as SiteSearchResultActionQuery;
     setSearchState(SearchStateEnum.TIRE_SIZE);
     searchQuery({
       queryText,
@@ -295,7 +295,7 @@ export function useSearchState({
     const {
       queryText,
       queryType,
-    } = initialSearchBrand.action as SiteSearchResultActionQuery;
+    } = initialSearchBrandData.action as SiteSearchResultActionQuery;
     setSearchState(SearchStateEnum.BRAND);
     searchQuery({
       queryText,

@@ -4,7 +4,7 @@ import GridItem from '~/components/global/Grid/GridItem';
 import { ModalContextProps } from '~/context/Modal.context';
 import { ui } from '~/lib/utils/ui-dictionary';
 
-import { everyPurchaseIncludesData } from './PurchaseIncludes.mock';
+import { everyPurchaseIncludesData } from './PurchaseIncludes.data';
 import PurchaseIncludesCard, {
   Props as CardType,
 } from './PurchaseIncludesCard';

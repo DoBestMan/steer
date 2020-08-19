@@ -1,5 +1,5 @@
 import ButtonGrid from '~/components/global/ButtonGrid/ButtonGrid';
-import { ButtonGridMockData } from '~/components/global/ButtonGrid/ButtonGrid.mocks';
+import { buttonGridMock } from '~/components/global/ButtonGrid/ButtonGrid.mock';
 
 export default {
   component: ButtonGrid,
@@ -7,5 +7,5 @@ export default {
 };
 
 export function ButtonNavigationWithGrid() {
-  return <ButtonGrid buttonGridList={ButtonGridMockData} />;
+  return <ButtonGrid buttonGridList={buttonGridMock} />;
 }

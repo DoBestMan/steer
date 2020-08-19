@@ -1,8 +1,8 @@
-import { filterSort } from '~/components/modules/Catalog/Filters/Filters.mocks';
+import { filterSortMock } from '~/components/modules/Catalog/Filters/Filters.mock';
 import Header from '~/components/modules/ReviewListing/Header/Header';
 import RatingsTable from '~/components/modules/ReviewListing/RatingsTable/RatingsTable';
 
-import { mockReviewListing } from './ReviewListing.mocks';
+import { reviewListingMock } from './ReviewListing.mock';
 
 export default {
   component: RatingsTable,
@@ -17,7 +17,7 @@ export function FullPage() {
     title,
     ratings,
     listResultMetadata,
-  } = mockReviewListing;
+  } = reviewListingMock;
 
   return (
     <div>
@@ -30,7 +30,7 @@ export function FullPage() {
       <RatingsTable
         reviews={ratings}
         listResultMetadata={listResultMetadata}
-        sortList={filterSort}
+        sortList={filterSortMock}
       />
     </div>
   );

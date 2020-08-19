@@ -3,7 +3,7 @@ import ReactModal from 'react-modal';
 
 import { SiteCatalogFilterGroupGroupTypeEnum } from '~/data/models/SiteCatalogFilterGroup';
 
-import { mockList } from '../Filters.mocks';
+import { listMock } from '../Filters.mock';
 import FilterChecklist from './FilterChecklist';
 
 ReactModal.setAppElement('*'); // removes warning in tests
@@ -19,7 +19,7 @@ jest.mock('focus-trap', () => {
 
 const tree = (
   <FilterChecklist
-    {...mockList}
+    {...listMock}
     onChange={jest.fn}
     isLarge={false}
     filtersToApply={{}}
@@ -39,7 +39,7 @@ describe('FilterChecklist', () => {
 
     rerender(
       <FilterChecklist
-        {...mockList}
+        {...listMock}
         onChange={jest.fn}
         isLarge={false}
         filtersToApply={{}}
@@ -68,10 +68,10 @@ describe('FilterChecklist', () => {
 
   it('renders radios', () => {
     const mockListRadio = {
-      ...mockList,
+      ...listMock,
       filterGroups: [
         {
-          ...mockList.filterGroups[0],
+          ...listMock.filterGroups[0],
           groupType: SiteCatalogFilterGroupGroupTypeEnum.Radio,
         },
       ],
@@ -101,11 +101,11 @@ describe('FilterChecklist', () => {
 
   it('renders both checkboxes and radios', () => {
     const mockListBoth = {
-      ...mockList,
+      ...listMock,
       filterGroups: [
-        { ...mockList.filterGroups[0] },
+        { ...listMock.filterGroups[0] },
         {
-          ...mockList.filterGroups[0],
+          ...listMock.filterGroups[0],
           groupType: SiteCatalogFilterGroupGroupTypeEnum.Radio,
         },
       ],

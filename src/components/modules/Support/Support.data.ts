@@ -1,6 +1,6 @@
 import { ROUTE_MAP, ROUTES } from '~/lib/constants';
 
-export const data = {
+export const supportData = {
   isBusinessHours: {
     sales: {
       action: '/',
