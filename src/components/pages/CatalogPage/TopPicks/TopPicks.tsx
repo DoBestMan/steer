@@ -91,6 +91,7 @@ function TopPicks({
 
     swiper.on('sliderMove', () => {
       setShowTitle(false);
+      setIndexHovered(undefined);
     });
 
     swiper.on('touchEnd', () => {
