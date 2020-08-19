@@ -1,4 +1,4 @@
-import { CATALOG_ROUTES } from '~/lib/constants';
+import { CATALOG_ROUTES, CATALOG_ROUTES_REGEX } from '~/lib/constants';
 
 import { validTiresQuery } from './regex';
 import {
@@ -6,6 +6,7 @@ import {
   getUrlObject,
   interpolateRoute,
   isInRouteList,
+  isInRouteRegexList,
   isRouteDiameterFormat,
   trimSlash,
   validateRoute,
@@ -70,6 +71,21 @@ describe('utils/routes', () => {
           '/vehicles/[make]/[model]/[year]?trim=Sport%20Sedan%20%26%20Coupe',
           CATALOG_ROUTES,
         ),
+      ).toBe(true);
+    });
+  });
+
+  describe('isInRouteRegexList', () => {
+    it('returns true if given url is a given list of regexes', () => {
+      expect(isInRouteRegexList('/', CATALOG_ROUTES_REGEX)).toBe(false);
+      expect(
+        isInRouteRegexList(
+          '/brands/toyota/categories/[categoryOrType]',
+          CATALOG_ROUTES_REGEX,
+        ),
+      ).toBe(true);
+      expect(
+        isInRouteRegexList('/tire-sizes/14-5R10', CATALOG_ROUTES_REGEX),
       ).toBe(true);
     });
   });

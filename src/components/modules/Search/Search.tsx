@@ -6,10 +6,11 @@ import { SiteSearchResultGroup } from '~/data/models/SiteSearchResultGroup';
 import { SiteSearchResultImageItem } from '~/data/models/SiteSearchResultImageItem';
 import { SiteSearchResultTextItem } from '~/data/models/SiteSearchResultTextItem';
 import { SearchDataParams } from '~/lib/api/search';
-import { TIME } from '~/lib/constants';
+import { CATALOG_ROUTES_REGEX, TIME } from '~/lib/constants';
 import { eventEmitters } from '~/lib/events/emitters';
 import { scrollTo } from '~/lib/helpers/scroll';
 import debounce from '~/lib/utils/debounce';
+import { isInRouteRegexList } from '~/lib/utils/routes';
 
 import InitialSearch from './InitialSearch';
 import { useInputQuery } from './Search.hooks';
@@ -239,8 +240,14 @@ function Search({
       // If user clicks on the same search query, just close the modal
       const isNewSearchQuery = action.link.href !== router.asPath;
       if (isNewSearchQuery) {
-        // Resets the catalog when creating a new search from a catalog page
-        eventEmitters.newCatalogSearchQuery.emit({ comesFromSearch: true });
+        const isCatalogSearchQuery = isInRouteRegexList(
+          action.link.href,
+          CATALOG_ROUTES_REGEX,
+        );
+        if (isCatalogSearchQuery) {
+          // Resets the catalog when creating a new search from a catalog page
+          eventEmitters.newCatalogSearchQuery.emit({ comesFromSearch: true });
+        }
       } else {
         onCloseSearchClick();
       }

@@ -114,6 +114,9 @@ export const getHrefWithParams = (
 export const isInRouteList = (route: string, routeList: string[]) =>
   routeList.includes(route.split('?')[0]);
 
+export const isInRouteRegexList = (url: string, routeRegexList: RegExp[]) =>
+  routeRegexList.some((regex) => regex.test(url));
+
 export function redirectToNotFound(response: ServerResponse) {
   response.setHeader('location', '/not-found');
   response.statusCode = 302;

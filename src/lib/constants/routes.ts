@@ -106,8 +106,16 @@ export const ROUTE_MAP: { [routeName: string]: string } = {
 
 export const CATALOG_ROUTES = [
   ROUTE_MAP[ROUTES.BRAND_CATEGORY],
+  ROUTE_MAP[ROUTES.BRAND_TYPE],
   ROUTE_MAP[ROUTES.VEHICLE_CATALOG],
   ROUTE_MAP[ROUTES.TIRE_SIZE_CATALOG_OR_CATEGORY],
+];
+
+export const CATALOG_ROUTES_REGEX = [
+  /\/brands\/.*\/categories\/.*/, // '/brands/[brand]/categories/[categoryOrType]'
+  /\/vehicles\/.*\/.*\/.*/, // '/vehicles/[make]/[model]/[year]'
+  /\/tire-sizes\/.*/, // '/tire-sizes/[size]'
+  /\/brands\/.*\/types\/.*/, // '/brands/[brand]/types/[categoryOrType]'
 ];
 
 // null for dynamic labels
