@@ -5,15 +5,14 @@ const styles: StylesMap = {
   container: {
     paddingTop: SPACING.SIZE_70,
     [MQ.M]: {
-      paddingTop: SPACING.SIZE_110,
+      padding: `${SPACING.SIZE_110}px ${SPACING.SIZE_20}px 0`,
     },
     [MQ.L]: {
-      paddingTop: SPACING.SIZE_90,
+      padding: `${SPACING.SIZE_80}px 0 0`,
     },
   },
   contentContainer: {
     color: COLORS.LIGHT.GRAY_70,
-
     p: [
       typography.bodyCopy,
       {
@@ -39,16 +38,12 @@ const styles: StylesMap = {
   },
 
   imageContainer: {
-    marginBottom: SPACING.SIZE_40,
-    marginLeft: -SPACING.SIZE_20,
-    marginRight: -SPACING.SIZE_20,
-
+    margin: `0 ${-SPACING.SIZE_20}px ${SPACING.SIZE_40}px`,
     [MQ.M]: {
-      marginBottom: SPACING.SIZE_60,
+      margin: `0 ${-SPACING.SIZE_40}px ${SPACING.SIZE_60}px`,
     },
     [MQ.L]: {
-      marginLeft: -SPACING.SIZE_60,
-      marginRight: -SPACING.SIZE_60,
+      margin: `0 ${-SPACING.SIZE_60}px ${SPACING.SIZE_60}px`,
     },
   },
   link: [

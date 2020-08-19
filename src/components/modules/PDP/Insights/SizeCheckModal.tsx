@@ -44,6 +44,7 @@ function SizeCheckModal({
       <div
         css={[
           modalContainerStyles.container,
+          styles.container,
           eyebrow ? styles.modalWithEyebrow : undefined,
         ]}
       >
