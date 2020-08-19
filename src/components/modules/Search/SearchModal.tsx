@@ -1,7 +1,7 @@
 import { clearAllBodyScrollLocks, disableBodyScroll } from 'body-scroll-lock';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import Modal from '~/components/global/Modal/Modal';
 import { useSearchContext } from '~/components/modules/Search/Search.context';
@@ -10,9 +10,12 @@ import { useModalContext } from '~/context/Modal.context';
 import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
 import { MODAL_THEME } from '~/lib/constants';
 
+import SearchPageLoading from './SearchPageLoading/SearchPageLoading';
+
 const Search = dynamic(() => import('./Search'));
 
 function SearchModal() {
+  const [showLoading, setShowLoading] = useState(false);
   const { isSearchOpen, toggleIsSearchOpen } = useSearchModalContext();
   const {
     addPastSearch,
@@ -38,6 +41,7 @@ function SearchModal() {
   useEffect(() => {
     if (isSearchOpen) {
       getPastSearches();
+      setShowLoading(false);
     }
   }, [isSearchOpen, getPastSearches]);
 
@@ -70,9 +74,11 @@ function SearchModal() {
   // Close the search modal on route change complete
   // Allows for seamless transition into Category Loading Interstitial
   useEffect(() => {
+    router.events.on('routeChangeStart', () => setShowLoading(true));
     router.events.on('routeChangeComplete', handleCloseSearch);
 
     return () => {
+      router.events.off('routeChangeStart', () => setShowLoading(false));
       router.events.off('routeChangeComplete', handleCloseSearch);
     };
   });
@@ -118,6 +124,8 @@ function SearchModal() {
         searchState={searchState}
         shouldPreventLinkNavigation={shouldPreventLinkNavigation}
       />
+
+      <SearchPageLoading showLoading={showLoading} />
     </Modal>
   );
 }
