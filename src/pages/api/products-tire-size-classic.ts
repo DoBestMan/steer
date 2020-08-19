@@ -31,7 +31,7 @@ export default async (
       response.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
     }
     response.json(productsResponse.data);
-  } else {
-    response.status(productsResponse.error.statusCode).end();
+    return;
   }
+  response.status(productsResponse.error.statusCode).end();
 };

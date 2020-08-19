@@ -64,11 +64,18 @@ export const getServerSideProps: GetServerSideProps<PageResponse<
     year,
     query: getStringifiedParams(vehicleParams),
   };
-  const [{ siteCatalogSummary }, productsRes] = await Promise.all([
+  const [summaryRes, productsRes] = await Promise.all([
     backendGetVehicleSummary(apiArgs),
     backendGetVehicleProducts(apiArgs),
   ]);
 
+  if (!summaryRes.isSuccess) {
+    const errorStatusCode = summaryRes.error.statusCode;
+    context.res.statusCode = errorStatusCode;
+    return { props: { errorStatusCode } };
+  }
+
+  const siteCatalogSummary = summaryRes.data.siteCatalogSummary;
   if (shouldReturnServerError(productsRes, siteCatalogSummary)) {
     const errorStatusCode = !productsRes.isSuccess
       ? productsRes.error.statusCode

@@ -1,6 +1,6 @@
 import { SiteCatalogProducts } from '~/data/models/SiteCatalogProducts';
 import { SiteCatalogSummary } from '~/data/models/SiteCatalogSummary';
-import { fetch, fetchWithErrorHandling } from '~/lib/fetch';
+import { fetchWithErrorHandling } from '~/lib/fetch';
 
 export async function backendGetVehicleSummary({
   make,
@@ -13,7 +13,7 @@ export async function backendGetVehicleSummary({
   query?: Record<string, string>;
   year: string | string[];
 }) {
-  const response = await fetch<{
+  const response = await fetchWithErrorHandling<{
     siteCatalogSummary: SiteCatalogSummary;
   }>({
     endpoint: '/v1/site/catalog/vehicles/{make}/{model}/{year}/summary',

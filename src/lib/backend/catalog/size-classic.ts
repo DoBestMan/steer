@@ -1,6 +1,6 @@
 import { SiteCatalogProducts } from '~/data/models/SiteCatalogProducts';
 import { SiteCatalogSummary } from '~/data/models/SiteCatalogSummary';
-import { fetch, fetchWithErrorHandling } from '~/lib/fetch';
+import { fetchWithErrorHandling } from '~/lib/fetch';
 
 export async function backendGetTireSizeClassicSummary({
   query,
@@ -9,7 +9,7 @@ export async function backendGetTireSizeClassicSummary({
   query?: Record<string, string>;
   size: string | string[];
 }) {
-  const response = await fetch<{
+  const response = await fetchWithErrorHandling<{
     siteCatalogSummary: SiteCatalogSummary;
   }>({
     endpoint: '/v1/site/catalog/tire-sizes/{size}/summary',

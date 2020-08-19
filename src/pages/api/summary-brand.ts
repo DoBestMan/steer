@@ -19,15 +19,18 @@ export default async (
     console.warn('Brand name and category or type are required');
   }
 
-  const siteCatalogSummary = await backendGetBrandSummary({
+  const summaryRes = await backendGetBrandSummary({
     brand,
     category: categoryOrType,
     query: getStringifiedParams(rest),
   });
 
+  if (!summaryRes.isSuccess) {
+    response.status(summaryRes.error.statusCode).end();
+    return;
+  }
   if (isProductionDeploy()) {
     response.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
   }
-
-  response.json(siteCatalogSummary);
+  response.json(summaryRes.data);
 };

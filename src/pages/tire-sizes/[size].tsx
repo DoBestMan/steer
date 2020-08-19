@@ -73,10 +73,25 @@ export const getServerSideProps: GetServerSideProps<PageResponse<
       query: getStringifiedParams(vehicleParams),
     };
 
-    const [{ siteCatalogSummary }, productsRes] = await Promise.all([
+    const [summaryRes, productsRes] = await Promise.all([
       backendGetTireSizeDiameterSummary(diameterApiArgs),
       backendGetTireSizeDiameterProducts(diameterApiArgs),
     ]);
+
+    if (!summaryRes.isSuccess) {
+      const errorStatusCode = summaryRes.error.statusCode;
+      context.res.statusCode = errorStatusCode;
+      return { props: { errorStatusCode } };
+    }
+
+    const siteCatalogSummary = summaryRes.data.siteCatalogSummary;
+    if (shouldReturnServerError(productsRes, siteCatalogSummary)) {
+      const errorStatusCode = !productsRes.isSuccess
+        ? productsRes.error.statusCode
+        : 500;
+      context.res.statusCode = errorStatusCode;
+      return { props: { errorStatusCode } };
+    }
 
     return {
       props: {
@@ -97,11 +112,18 @@ export const getServerSideProps: GetServerSideProps<PageResponse<
     query: getStringifiedParams(vehicleParams),
   };
 
-  const [{ siteCatalogSummary }, productsRes] = await Promise.all([
+  const [summaryRes, productsRes] = await Promise.all([
     backendGetTireSizeClassicSummary(classicApiArgs),
     backendGetTireSizeClassicProducts(classicApiArgs),
   ]);
 
+  if (!summaryRes.isSuccess) {
+    const errorStatusCode = summaryRes.error.statusCode;
+    context.res.statusCode = errorStatusCode;
+    return { props: { errorStatusCode } };
+  }
+
+  const siteCatalogSummary = summaryRes.data.siteCatalogSummary;
   if (shouldReturnServerError(productsRes, siteCatalogSummary)) {
     const errorStatusCode = !productsRes.isSuccess
       ? productsRes.error.statusCode

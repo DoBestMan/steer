@@ -1,6 +1,6 @@
 import { SiteCatalogProducts } from '~/data/models/SiteCatalogProducts';
 import { SiteCatalogSummary } from '~/data/models/SiteCatalogSummary';
-import { fetch, fetchWithErrorHandling } from '~/lib/fetch';
+import { fetchWithErrorHandling } from '~/lib/fetch';
 
 export async function backendGetTireSizeDiameterSummary({
   category,
@@ -11,7 +11,7 @@ export async function backendGetTireSizeDiameterSummary({
   diameter: string | string[];
   query?: Record<string, string>;
 }) {
-  const response = await fetch<{
+  const response = await fetchWithErrorHandling<{
     siteCatalogSummary: SiteCatalogSummary;
   }>({
     endpoint:
