@@ -23,6 +23,12 @@ describe('useBreakpoints', () => {
       L: true,
       XL: true,
     });
+    expect(result.current.greaterThan).toStrictEqual({
+      L: false,
+      M: false,
+      S: false,
+    });
+    expect(result.current.windowHeight).toEqual(600);
   });
 
   it('sets correct properties for medium breakpoint', () => {
@@ -43,6 +49,12 @@ describe('useBreakpoints', () => {
       L: true,
       XL: true,
     });
+    expect(result.current.greaterThan).toStrictEqual({
+      L: false,
+      M: false,
+      S: true,
+    });
+    expect(result.current.windowHeight).toEqual(800);
   });
 
   it('sets correct properties for large breakpoint', () => {
@@ -63,6 +75,12 @@ describe('useBreakpoints', () => {
       L: false,
       XL: true,
     });
+    expect(result.current.greaterThan).toStrictEqual({
+      L: false,
+      M: true,
+      S: true,
+    });
+    expect(result.current.windowHeight).toEqual(800);
   });
 
   it('sets correct properties for extra large breakpoint', () => {
@@ -83,5 +101,11 @@ describe('useBreakpoints', () => {
       L: false,
       XL: false,
     });
+    expect(result.current.greaterThan).toStrictEqual({
+      L: true,
+      M: true,
+      S: true,
+    });
+    expect(result.current.windowHeight).toEqual(1600);
   });
 });
