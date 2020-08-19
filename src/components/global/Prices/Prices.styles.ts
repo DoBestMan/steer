@@ -5,9 +5,6 @@ const styles: StylesMap = {
   currentBlock: {
     display: 'block',
   },
-  label: {
-    fontWeight: 'normal',
-  },
   noPrice: {
     fontWeight: 'normal',
   },

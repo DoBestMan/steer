@@ -50,7 +50,7 @@ function Prices({
                   customPriceStyles,
                 ]}
               >
-                {label && <span css={styles.label}>{label} </span>}
+                {label && <span>{label} </span>}
                 {isStartingAtPrice && ui('common.startingAtPrice') + ' '}
                 {formatDollars(price.salePriceInCents)}
               </span>

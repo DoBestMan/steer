@@ -132,7 +132,7 @@ export const styles: StylesMap = {
     visibility: 'visible',
   },
   infoContainer: {
-    color: COLORS.GLOBAL.BLACK,
+    color: COLORS.ORANGE.SHADE_85,
     display: 'block',
     marginTop: SPACING.SIZE_10,
     textAlign: 'center',

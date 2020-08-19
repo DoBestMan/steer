@@ -417,7 +417,7 @@ function TopPicks({
         </Carousel>
       </div>
       <button type="button" css={styles.exploreButton} onClick={exploreMore}>
-        <span css={typography.tertiaryHeadline}>
+        <span css={typography.primarySubhead}>
           {ui('catalog.topPicks.exploreMoreCTALabel')}
         </span>
         <Icon name="arrow-down" css={styles.exploreButtonIcon} />

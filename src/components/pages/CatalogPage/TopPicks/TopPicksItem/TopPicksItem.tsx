@@ -317,7 +317,7 @@ function TopPicksItem(props: TopPickItemsProps) {
               {rating && (
                 <div css={styles.rating}>
                   <Stars
-                    color={COLORS.GLOBAL.BLACK}
+                    color={COLORS.ORANGE.SHADE_85}
                     number={rating.value}
                     width={HALF_WIDTH_STARS}
                   />
