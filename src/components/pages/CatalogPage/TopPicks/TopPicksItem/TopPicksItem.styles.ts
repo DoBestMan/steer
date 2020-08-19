@@ -316,7 +316,6 @@ export const styles: StylesMap = {
   viewMoreContentTitle: {
     color: COLORS.GLOBAL.WHITE,
     display: 'block',
-    fontWeight: 'normal',
     marginBottom: SPACING.SIZE_10,
   },
   viewMoreSubtitle: {
