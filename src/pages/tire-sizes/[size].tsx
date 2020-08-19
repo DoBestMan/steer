@@ -1,9 +1,8 @@
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 
-import CatalogPageContainer, {
-  CatalogPageData,
-} from '~/components/pages/CatalogPage/CatalogPage.container';
+import CatalogPageContainer from '~/components/pages/CatalogPage/CatalogPage.container';
+import { CatalogPageData } from '~/components/pages/CatalogPage/CatalogPage.types';
 import {
   getDiameterCategory,
   shouldReturnServerError,

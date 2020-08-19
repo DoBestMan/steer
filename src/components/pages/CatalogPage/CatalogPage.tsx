@@ -2,12 +2,9 @@ import { ThemeProvider } from 'emotion-theming';
 import { useEffect } from 'react';
 
 import { NAV_THEME } from '~/components/modules/Nav/Nav.theme';
-import { useCatalogPageContext } from '~/context/CatalogPage.context';
+import { useCatalogProductsContext } from '~/context/CatalogProducts.context';
 import { useCatalogSummaryContext } from '~/context/CatalogSummary.context';
 import { useNavContext } from '~/context/Nav.context';
-import { SiteCatalogFilters } from '~/data/models/SiteCatalogFilters';
-import { SiteCatalogProducts } from '~/data/models/SiteCatalogProducts';
-import { SiteCatalogSummary } from '~/data/models/SiteCatalogSummary';
 
 import CatalogGrid from './CatalogGrid/CatalogGrid';
 import CatalogLoading from './CatalogLoading/CatalogLoading';
@@ -18,25 +15,18 @@ import { STAGES } from './CatalogSummary/CatalogSummary.constants';
 
 interface Props {
   catalogGridRef: React.Ref<HTMLDivElement>;
-  fetchNewProducts: (page: number) => Promise<SiteCatalogProducts | null>;
-  onPreviewFilters: (filters?: Record<string, string>) => Promise<void>;
-  previewFiltersData: { filters: SiteCatalogFilters; totalMatches: number };
-  scrollToGrid: () => void;
-  siteCatalogProducts: SiteCatalogProducts | null;
-  siteCatalogSummary: SiteCatalogSummary;
 }
 
-function CatalogPage({
-  scrollToGrid,
-  catalogGridRef,
-  siteCatalogProducts,
-  siteCatalogSummary,
-  onPreviewFilters,
-  previewFiltersData,
-  fetchNewProducts,
-}: Props) {
+function CatalogPage({ catalogGridRef }: Props) {
   const { setNavTheme, theme: navTheme } = useNavContext();
-  const { isAdvancedView } = useCatalogPageContext();
+  const {
+    fetchNewProducts,
+    isAdvancedView,
+    onPreviewFilters,
+    previewFiltersData,
+    scrollToGrid,
+    siteCatalogProducts,
+  } = useCatalogProductsContext();
   const { contentStage, showSummary, stage } = useCatalogSummaryContext();
 
   const totalResult =
@@ -76,10 +66,9 @@ function CatalogPage({
               hasResults={hasResults}
               previewFiltersData={previewFiltersData}
               onPreviewFilters={onPreviewFilters}
-              siteCatalogProducts={siteCatalogProducts}
               hasTopPicks={showSummary}
-              siteCatalogSummary={siteCatalogSummary}
               fetchNewProducts={fetchNewProducts}
+              siteCatalogProducts={siteCatalogProducts}
             />
           </div>
         </>

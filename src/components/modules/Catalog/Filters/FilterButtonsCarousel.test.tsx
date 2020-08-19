@@ -2,9 +2,9 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import preloadAll from 'jest-next-dynamic';
 
 import { emptyCatalogProductsMock } from '~/components/pages/CatalogPage/CatalogPage.mock';
-import { CatalogPageContextProvider } from '~/context/CatalogPage.context';
-import { ModalContextProvider } from '~/context/Modal.context';
-import { SiteGlobalsContext } from '~/context/SiteGlobals.context';
+import * as CatalogProductsContext from '~/context/CatalogProducts.context';
+import * as ModalContext from '~/context/Modal.context';
+import * as SiteGlobalsContext from '~/context/SiteGlobals.context';
 import { SiteCatalogFilters } from '~/data/models/SiteCatalogFilters';
 
 import FilterButtonsCarousel from './FilterButtonsCarousel';
@@ -25,6 +25,12 @@ jest.mock('focus-trap', () => {
   return () => trap;
 });
 
+jest.mock('next/router', () => ({
+  useRouter: jest.fn(() => ({
+    query: {},
+  })),
+}));
+
 jest.mock('emotion-theming', () => ({
   useTheme: () => ({ header: {} }),
 }));
@@ -40,31 +46,35 @@ const mockArgs = {
   },
 };
 
-const catalogMockArgs = {
-  handleUpdateFilters: jest.fn(),
-};
-
 const tree = (
-  <SiteGlobalsContext.Provider
-    value={{
-      customerServiceEnabled: true,
-      customerServiceNumber: { display: '123', value: '123' },
-      siteTheme: null,
-    }}
-  >
-    <ModalContextProvider>
-      <CatalogPageContextProvider {...catalogMockArgs}>
-        <FiltersContextProvider {...mockArgs}>
-          <FilterButtonsCarousel popularFilters={[]} filters={[listMock]} />
-        </FiltersContextProvider>
-      </CatalogPageContextProvider>
-    </ModalContextProvider>
-  </SiteGlobalsContext.Provider>
+  <FiltersContextProvider {...mockArgs}>
+    <FilterButtonsCarousel popularFilters={[]} filters={[listMock]} />
+  </FiltersContextProvider>
 );
+
+const mockCatalogContext = {
+  displayedProducts: [],
+  fetchNewProducts: jest.fn(),
+  handleUpdateResults: jest.fn(),
+  isAdvancedView: false,
+  isLoading: false,
+  onPreviewFilters: jest.fn(),
+  previewFiltersData: {},
+  scrollToGrid: false,
+  setDisplayedProducts: jest.fn(),
+  setIsAdvancedView: jest.fn(),
+  setIsLoading: jest.fn(),
+  siteCatalogProducts: {},
+};
 
 describe('FilterButtonsCarousel', () => {
   beforeAll(async () => {
     await preloadAll();
+    (ModalContext as any).useModalContext = jest.fn(() => ({}));
+    (SiteGlobalsContext as any).useSiteGlobalsContext = jest.fn(() => ({}));
+    (CatalogProductsContext as any).useCatalogProductsContext = jest.fn(
+      () => mockCatalogContext,
+    );
   });
 
   afterEach(() => {
@@ -128,7 +138,7 @@ describe('FilterButtonsCarousel', () => {
     const applyButton = screen.queryByTestId('primary-button') as HTMLElement;
     fireEvent.click(applyButton);
 
-    expect(catalogMockArgs.handleUpdateFilters).toBeCalledTimes(1);
+    expect(mockCatalogContext.handleUpdateResults).toBeCalledTimes(1);
 
     await waitFor(() =>
       expect(screen.queryByTestId('dropdown-test-id')).toHaveAttribute(
@@ -140,30 +150,18 @@ describe('FilterButtonsCarousel', () => {
 
   it('resets filters', async () => {
     render(
-      <SiteGlobalsContext.Provider
-        value={{
-          customerServiceEnabled: true,
-          customerServiceNumber: { display: '123', value: '123' },
-          siteTheme: null,
+      <FiltersContextProvider
+        {...mockArgs}
+        siteCatalogFilters={{
+          filtersList: [listSelectedMock],
+          sortList: [],
         }}
       >
-        <ModalContextProvider>
-          <CatalogPageContextProvider {...catalogMockArgs}>
-            <FiltersContextProvider
-              {...mockArgs}
-              siteCatalogFilters={{
-                filtersList: [listSelectedMock],
-                sortList: [],
-              }}
-            >
-              <FilterButtonsCarousel
-                popularFilters={[]}
-                filters={[listSelectedMock]}
-              />
-            </FiltersContextProvider>
-          </CatalogPageContextProvider>
-        </ModalContextProvider>
-      </SiteGlobalsContext.Provider>,
+        <FilterButtonsCarousel
+          popularFilters={[]}
+          filters={[listSelectedMock]}
+        />
+      </FiltersContextProvider>,
     );
     const filterButton = screen.queryByRole('button') as HTMLElement;
     fireEvent.click(filterButton);

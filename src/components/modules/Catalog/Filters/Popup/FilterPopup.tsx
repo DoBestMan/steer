@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 
 import Dropdown from '~/components/global/Dropdown/Dropdown';
 import Loading from '~/components/global/Loading/Loading';
-import { useCatalogPageContext } from '~/context/CatalogPage.context';
+import { useCatalogProductsContext } from '~/context/CatalogProducts.context';
 import { useModalContext } from '~/context/Modal.context';
 import { SiteCatalogFilterListPresentationStyleEnum } from '~/data/models/SiteCatalogFilterList';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
@@ -38,7 +38,7 @@ export default function FilterPopup({
     filtersToApply,
     totalMatches,
   } = useFiltersContext();
-  const { isLoading } = useCatalogPageContext();
+  const { isLoading } = useCatalogProductsContext();
   const { openStaticModal, isModalOpen } = useModalContext();
   const prevIsLarge = useRef(isLarge);
   const prevIsOpen = useRef(isOpen);

@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Button from '~/components/global/Button/Button';
 import AdvancedListingPlaceholder from '~/components/modules/Catalog/AdvancedListing/AdvancedListingPlaceholder';
 import ProductGrid from '~/components/modules/Catalog/ProductGrid/ProductGrid';
-import { useCatalogPageContext } from '~/context/CatalogPage.context';
+import { useCatalogProductsContext } from '~/context/CatalogProducts.context';
 import { ListResultMetadata } from '~/data/models/ListResultMetadata';
 import {
   SiteCatalogProductItem,
@@ -35,7 +35,7 @@ function CatalogProductGrid({
     isLoading,
     displayedProducts,
     setDisplayedProducts,
-  } = useCatalogPageContext();
+  } = useCatalogProductsContext();
   const [currentPage, setCurrentPage] = useState(1);
   const [nextProducts, setNextProducts] = useState(pagination?.resultsPerPage);
   const [scrollPosition, setScrollPosition] = useState<number>();

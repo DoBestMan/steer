@@ -1,8 +1,13 @@
 import { ReactNode, useEffect, useState } from 'react';
 
 import { PAGE_TRANSITION_DURATION } from '~/components/modules/App/App.constants';
+import {
+  CatalogApiArgs,
+  CatalogPageData,
+} from '~/components/pages/CatalogPage/CatalogPage.types';
 import { STAGES } from '~/components/pages/CatalogPage/CatalogSummary/CatalogSummary.constants';
 import { SiteCatalogSummary } from '~/data/models/SiteCatalogSummary';
+import { useApiDataWithDefault } from '~/hooks/useApiDataWithDefault';
 import { eventEmitters } from '~/lib/events/emitters';
 import { createContext } from '~/lib/utils/context';
 
@@ -19,9 +24,9 @@ export interface CatalogSummaryContextProps {
 const CatalogSummaryContext = createContext<CatalogSummaryContextProps>();
 
 interface SetupProps {
+  apiArgs: CatalogApiArgs;
   comesFromSearch: boolean;
-  hasLocalData: boolean;
-  siteCatalogSummary: SiteCatalogSummary;
+  endpoint: string;
 }
 
 enum LOADING_STATUS {
@@ -36,6 +41,46 @@ interface CatalogSummaryState {
   showSummary: boolean;
   stage: STAGES;
 }
+
+export const onDataReady = (
+  siteCatalogSummary: SiteCatalogSummary,
+  showLoadingInterstitial: boolean,
+) => {
+  const totalResult =
+    siteCatalogSummary.siteCatalogSummaryMeta?.totalResults || 0;
+  const hasPromptMustShow =
+    siteCatalogSummary.siteCatalogSummaryPrompt?.mustShow;
+  const hasPromptCTAList = !!siteCatalogSummary.siteCatalogSummaryPrompt
+    ?.ctaList?.length;
+  const hasTopPicks = !!siteCatalogSummary.siteCatalogSummaryTopPicksList
+    .length;
+
+  /**
+   * Disambiguation response also has 0 results, but user should see the
+   * loading interstitial. Therefore, only show the NO_RESULTS stage if
+   * there are no CTA objects are present in the `ctaList`
+   */
+  const hasNoResults = totalResult === 0 && !hasPromptCTAList;
+
+  if (showLoadingInterstitial && hasPromptCTAList) {
+    return {
+      contentStage: STAGES.BUILD_IN,
+      stage: STAGES.BUILD_IN,
+    };
+  } else if (hasPromptMustShow) {
+    const newStage = hasNoResults ? STAGES.NO_RESULTS : STAGES.DATA_MOMENT;
+    return {
+      contentStage: newStage,
+      stage: newStage,
+    };
+  } else {
+    return {
+      contentStage: STAGES.RESULTS,
+      showSummary: hasTopPicks,
+      stage: STAGES.RESULTS,
+    };
+  }
+};
 
 /**
  * @param {STAGES} contentStage - Matches the `stage` state but on a delay
@@ -61,9 +106,9 @@ const BUILD_IN_PAUSE = 4000;
 
 // TODO: Exported for testing only
 export function useContextSetup({
+  apiArgs,
   comesFromSearch,
-  hasLocalData,
-  siteCatalogSummary,
+  endpoint,
 }: SetupProps): CatalogSummaryContextProps {
   const [state, setState] = useState<CatalogSummaryState>({
     ...INITIAL_STATE,
@@ -78,6 +123,71 @@ export function useContextSetup({
     showSummary,
     stage,
   } = state;
+
+  /**
+   * Combine the `hasLocalData` and data states, so that they can be
+   * set simultaneously on fetch success.
+   */
+  const [{ hasLocalData, siteCatalogSummary }, setSummaryState] = useState<{
+    hasLocalData: boolean;
+    siteCatalogSummary: SiteCatalogSummary;
+  }>({
+    hasLocalData: false,
+    siteCatalogSummary: apiArgs.defaultData.siteCatalogSummary,
+  });
+
+  /**
+   * Fetch site catalog summary
+   * Note that unusually this hook does not return the data directly,
+   * but sets it to local state via the `onSuccess` callback. This was
+   * done to solve an issue where the downstream components were
+   * receiving the `hasLocalData: true` prop before the updated data.
+   */
+  const { error, revalidate: revalidateSummary } = useApiDataWithDefault<
+    CatalogPageData['serverData']
+  >({
+    ...apiArgs,
+    endpoint,
+    options: {
+      onSuccess: (data) => {
+        setSummaryState({
+          hasLocalData: true,
+          siteCatalogSummary: data.siteCatalogSummary,
+        });
+      },
+    },
+  });
+
+  if (error) {
+    console.error(error);
+  }
+
+  useEffect(() => {
+    const handleResetSummary = async ({
+      comesFromSearch,
+    }: {
+      comesFromSearch: boolean;
+    }) => {
+      // Reset hasLocalData state on `useApiData` hook
+      setSummaryState((summaryState) => ({
+        ...summaryState,
+        hasLocalData: false,
+      }));
+
+      if (comesFromSearch) {
+        await revalidateSummary();
+      }
+
+      // Reset scroll position to top
+      window.scrollTo(0, 0);
+    };
+
+    eventEmitters.newCatalogSearchQuery.on(handleResetSummary);
+
+    return () => {
+      eventEmitters.newCatalogSearchQuery.off(handleResetSummary);
+    };
+  }, [revalidateSummary]);
 
   /**
    * There will always be a LOADING stage when the user lands on the
@@ -127,43 +237,10 @@ export function useContextSetup({
     // Show the nav once loading stage is over
     eventEmitters.setNavVisibility.emit({ isVisible: true });
 
-    const totalResult =
-      siteCatalogSummary.siteCatalogSummaryMeta?.totalResults || 0;
-    const hasPromptMustShow =
-      siteCatalogSummary.siteCatalogSummaryPrompt?.mustShow;
-    const hasPromptCTAList = !!siteCatalogSummary.siteCatalogSummaryPrompt
-      ?.ctaList?.length;
-    const hasTopPicks = !!siteCatalogSummary.siteCatalogSummaryTopPicksList
-      .length;
-
-    /**
-     * Disambiguation response also has 0 results, but user should see the
-     * loading interstitial. Therefore, only show the NO_RESULTS stage if
-     * there are no CTA objects are present in the `ctaList`
-     */
-    const hasNoResults = totalResult === 0 && !hasPromptCTAList;
-
-    if (showLoadingInterstitial && hasPromptCTAList) {
-      setState({
-        ...state,
-        contentStage: STAGES.BUILD_IN,
-        stage: STAGES.BUILD_IN,
-      });
-    } else if (hasPromptMustShow) {
-      const newStage = hasNoResults ? STAGES.NO_RESULTS : STAGES.DATA_MOMENT;
-      setState({
-        ...state,
-        contentStage: newStage,
-        stage: newStage,
-      });
-    } else {
-      setState({
-        ...state,
-        contentStage: STAGES.RESULTS,
-        showSummary: hasTopPicks,
-        stage: STAGES.RESULTS,
-      });
-    }
+    setState({
+      ...state,
+      ...onDataReady(siteCatalogSummary, showLoadingInterstitial),
+    });
   }, [
     dataLoadingStatus,
     hasLocalData,
@@ -234,15 +311,15 @@ interface ProviderProps extends SetupProps {
 }
 
 export function CatalogSummaryContextProvider({
+  apiArgs,
   children,
   comesFromSearch,
-  hasLocalData,
-  siteCatalogSummary,
+  endpoint,
 }: ProviderProps) {
   const value = useContextSetup({
+    apiArgs,
     comesFromSearch,
-    hasLocalData,
-    siteCatalogSummary,
+    endpoint,
   });
   return (
     <CatalogSummaryContext.Provider value={value}>

@@ -8,7 +8,7 @@ import {
   useState,
 } from 'react';
 
-import { useCatalogPageContext } from '~/context/CatalogPage.context';
+import { useCatalogProductsContext } from '~/context/CatalogProducts.context';
 import { SiteCatalogFilters } from '~/data/models/SiteCatalogFilters';
 import { createContext } from '~/lib/utils/context';
 
@@ -92,7 +92,7 @@ export function useFiltersContextSetup({
   previewFiltersData,
   siteCatalogFilters = { filtersList: [], sortList: [] },
 }: ContextArgs) {
-  const { isLoading, handleUpdateResults } = useCatalogPageContext();
+  const { isLoading, handleUpdateResults } = useCatalogProductsContext();
   const [isPreviewLoading, setIsPreviewLoading] = useState(false);
   const { initialState, isPopularActive } = useMemo(
     () =>

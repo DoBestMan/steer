@@ -1,6 +1,6 @@
 import ProductGroupList from '~/components/global/ProductGroupList/ProductGroupList';
 import ProductGroupListPlaceholder from '~/components/global/ProductGroupList/ProductGroupListPlaceholder';
-import { useCatalogPageContext } from '~/context/CatalogPage.context';
+import { useCatalogProductsContext } from '~/context/CatalogProducts.context';
 import { SiteCatalogProductGroupList } from '~/data/models/SiteCatalogProductGroupList';
 
 import styles from './CatalogProductGroups.styles';
@@ -11,7 +11,7 @@ interface Props {
 }
 
 function CatalogProductGroups({ productGroupList, isLoading }: Props) {
-  const { handleUpdateResults } = useCatalogPageContext();
+  const { handleUpdateResults } = useCatalogProductsContext();
   return (
     <div css={styles.root}>
       {isLoading

@@ -3,10 +3,12 @@ import { cleanup, renderHook } from '@testing-library/react-hooks';
 import { Cars } from '~/components/global/Car/Car.enums';
 import { Sceneries } from '~/components/global/Scenery/Scenery.types';
 import { STAGES } from '~/components/pages/CatalogPage/CatalogSummary/CatalogSummary.constants';
+import { SiteCatalogProducts } from '~/data/models/SiteCatalogProducts';
 import { SiteCatalogSummary } from '~/data/models/SiteCatalogSummary';
-import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
+import { SiteImage } from '~/data/models/SiteImage';
+import { Emitter } from '~/lib/utils/Emitter';
 
-import { useContextSetup } from './CatalogSummary.context';
+import { onDataReady, useContextSetup } from './CatalogSummary.context';
 
 const resultsSummary = {
   siteCatalogSummaryBuildIn: {
@@ -19,8 +21,8 @@ const resultsSummary = {
     tireImage: {
       altText: 'Tire',
       src: 'http://te.st',
-      type: ICON_IMAGE_TYPE.IMAGE,
-    },
+      type: 'SiteImage',
+    } as SiteImage,
     totalResults: 232,
     vehicleType: Cars['car--sedan'],
   },
@@ -102,9 +104,18 @@ describe('useCatalogSummaryContextSetup', () => {
   ])('%s', (_, comesFromSearch) => {
     const { result } = renderHook(() =>
       useContextSetup({
+        apiArgs: {
+          defaultData: {
+            siteCatalogProducts: {} as SiteCatalogProducts,
+            siteCatalogSummary: resultsSummary as SiteCatalogSummary,
+          },
+          includeUserRegion: false,
+          includeUserZip: false,
+          query: {},
+          revalidateEmitter: new Emitter<null>(),
+        },
         comesFromSearch,
-        hasLocalData: false,
-        siteCatalogSummary: resultsSummary as SiteCatalogSummary,
+        endpoint: '',
       }),
     );
 
@@ -123,140 +134,127 @@ describe('useCatalogSummaryContextSetup', () => {
 
     cleanup();
   });
+});
 
+describe('onDataReady', () => {
   test.each([
     [
-      'results with Top Picks, from search',
+      'sets correct state for data with Top Picks, from search',
       {
-        props: {
+        params: {
           siteCatalogSummary: resultsSummary,
-          comesFromSearch: true,
+          showLoadingInterstitial: true,
         },
         expected: {
+          contentStage: STAGES.BUILD_IN,
           stage: STAGES.BUILD_IN,
-          showSummary: true,
         },
       },
     ],
     [
-      'results with Top Picks, not from search',
+      'sets correct state for data with Top Picks, not from search',
       {
-        props: {
+        params: {
           siteCatalogSummary: resultsSummary,
-          comesFromSearch: false,
+          showLoadingInterstitial: false,
         },
         expected: {
+          contentStage: STAGES.RESULTS,
           stage: STAGES.RESULTS,
           showSummary: true,
         },
       },
     ],
     [
-      'results without Top Picks, from search',
+      'sets correct state for data without Top Picks, from search',
       {
-        props: {
+        params: {
           siteCatalogSummary: resultsWithoutTopPicksSummary,
-          comesFromSearch: true,
+          showLoadingInterstitial: true,
         },
         expected: {
+          contentStage: STAGES.RESULTS,
           stage: STAGES.RESULTS,
           showSummary: false,
         },
       },
     ],
     [
-      'results without Top Picks, not from search',
+      'sets correct state for data without Top Picks, not from search',
       {
-        props: {
+        params: {
           siteCatalogSummary: resultsWithoutTopPicksSummary,
-          comesFromSearch: false,
+          showLoadingInterstitial: false,
         },
         expected: {
+          contentStage: STAGES.RESULTS,
           stage: STAGES.RESULTS,
           showSummary: false,
         },
       },
     ],
     [
-      'disambiguation, from search',
+      'sets correct state for disambiguation, from search',
       {
-        props: {
+        params: {
           siteCatalogSummary: disambiguationSummary,
-          comesFromSearch: true,
+          showLoadingInterstitial: true,
         },
         expected: {
+          contentStage: STAGES.BUILD_IN,
           stage: STAGES.BUILD_IN,
-          showSummary: true,
         },
       },
     ],
     [
-      'disambiguation, not from search',
+      'sets correct state for disambiguation, not from search',
       {
-        props: {
+        params: {
           siteCatalogSummary: disambiguationSummary,
-          comesFromSearch: false,
+          showLoadingInterstitial: false,
         },
         expected: {
+          contentStage: STAGES.DATA_MOMENT,
           stage: STAGES.DATA_MOMENT,
-          showSummary: true,
         },
       },
     ],
     [
-      'no results, from search',
+      'sets correct state for no results, from search',
       {
-        props: {
+        params: {
           siteCatalogSummary: noResultsSummary,
-          comesFromSearch: true,
+          showLoadingInterstitial: true,
         },
         expected: {
+          contentStage: STAGES.NO_RESULTS,
           stage: STAGES.NO_RESULTS,
-          showSummary: true,
         },
       },
     ],
     [
-      'no results, not from search',
+      'sets correct state for no results, not from search',
       {
-        props: {
+        params: {
           siteCatalogSummary: noResultsSummary,
-          comesFromSearch: false,
+          showLoadingInterstitial: false,
         },
         expected: {
+          contentStage: STAGES.NO_RESULTS,
           stage: STAGES.NO_RESULTS,
-          showSummary: true,
         },
       },
     ],
   ])(
     '%s',
-    async (_, { props: { comesFromSearch, siteCatalogSummary }, expected }) => {
-      const { result, waitForNextUpdate } = renderHook(() =>
-        useContextSetup({
-          comesFromSearch,
-          // Set hasLocalData by default
-          hasLocalData: true,
-          siteCatalogSummary: siteCatalogSummary as SiteCatalogSummary,
-        }),
-      );
-
-      // Initial state
-      expect(result.current).toEqual(
-        expect.objectContaining({
-          contentStage: STAGES.LOADING,
-          showLoadingInterstitial: comesFromSearch,
-          showSummary: true,
-          stage: STAGES.LOADING,
-        }),
-      );
-
-      // Wait for the loading timeout to update `dataLoadingStatus`
-      await waitForNextUpdate();
-
+    async (
+      _,
+      { params: { showLoadingInterstitial, siteCatalogSummary }, expected },
+    ) => {
       // Have props been set correctly (based on data received)
-      expect(result.current.stage).toBe(expected.stage);
-      expect(result.current.showSummary).toBe(expected.showSummary);
+      expect(onDataReady(siteCatalogSummary, showLoadingInterstitial)).toEqual(
+        expected,
+      );
 
       cleanup();
     },

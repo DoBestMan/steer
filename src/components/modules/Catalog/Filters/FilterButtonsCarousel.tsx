@@ -5,7 +5,7 @@ import FilterButton from '~/components/global/Button/FilterButton';
 import FilterButtonToggle from '~/components/global/Button/FilterButtonToggle';
 import FiltersCarousel from '~/components/global/FiltersCarousel/FiltersCarousel';
 import styles from '~/components/global/FiltersCarousel/FiltersCarousel.styles';
-import { useCatalogPageContext } from '~/context/CatalogPage.context';
+import { useCatalogProductsContext } from '~/context/CatalogProducts.context';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import { CatalogFilterTypes, FilterContentTypes } from './Filter.types';
@@ -31,7 +31,7 @@ export default function FilterButtonsCarousel({
     createToggleFilterHandler,
     selectingFilter,
   } = useFiltersContext();
-  const { isLoading } = useCatalogPageContext();
+  const { isLoading } = useCatalogProductsContext();
   const { header } = useTheme();
   const isPopularDropdownOpen = selectingFilter === POPULAR_ID;
   const isPopularActive = popularFilters.some((filter) => {

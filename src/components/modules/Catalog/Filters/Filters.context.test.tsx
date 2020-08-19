@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 import { act } from 'react-test-renderer';
 
 import { emptyCatalogProductsMock } from '~/components/pages/CatalogPage/CatalogPage.mock';
-import { CatalogPageContextProvider } from '~/context/CatalogPage.context';
+import * as CatalogProductsContext from '~/context/CatalogProducts.context';
 import { SiteCatalogFilters } from '~/data/models/SiteCatalogFilters';
 
 import { CatalogFilterTypes, FilterContentTypes } from './Filter.types';
@@ -25,14 +25,23 @@ interface WrapperProps {
   children?: ReactNode;
 }
 
-const handleUpdateFilters = jest.fn();
+const mockCatalogContext = {
+  displayedProducts: [],
+  fetchNewProducts: jest.fn(),
+  handleUpdateResults: jest.fn(),
+  isAdvancedView: false,
+  isLoading: false,
+  onPreviewFilters: jest.fn(),
+  previewFiltersData: {},
+  scrollToGrid: false,
+  setDisplayedProducts: jest.fn(),
+  setIsAdvancedView: jest.fn(),
+  setIsLoading: jest.fn(),
+  siteCatalogProducts: {},
+};
 
 function wrapper({ children }: WrapperProps) {
-  return (
-    <CatalogPageContextProvider handleUpdateFilters={handleUpdateFilters}>
-      {children}
-    </CatalogPageContextProvider>
-  );
+  return <>{children}</>;
 }
 
 const renderFiltersContextSetupHook = () =>
@@ -41,6 +50,12 @@ const renderFiltersContextSetupHook = () =>
   });
 
 describe('useFiltersContextSetup', () => {
+  beforeAll(() => {
+    (CatalogProductsContext as any).useCatalogProductsContext = jest.fn(
+      () => mockCatalogContext,
+    );
+  });
+
   afterEach(() => {
     jest.clearAllMocks();
   });
@@ -184,14 +199,11 @@ describe('useFiltersContextSetup', () => {
     );
 
     // immediately fetches
-    expect(handleUpdateFilters).toHaveBeenCalledTimes(1);
-    expect(handleUpdateFilters).toHaveBeenCalledWith(
-      {
-        brand: 'goodyear,pirelli',
-        foo: 'bar',
-      },
-      undefined, // optional `withoutScroll`
-    );
+    expect(mockCatalogContext.handleUpdateResults).toHaveBeenCalledTimes(1);
+    expect(mockCatalogContext.handleUpdateResults).toHaveBeenCalledWith({
+      brand: 'goodyear,pirelli',
+      foo: 'bar',
+    });
   });
 
   test('toggle filter', async () => {
@@ -203,13 +215,10 @@ describe('useFiltersContextSetup', () => {
       })(),
     );
 
-    expect(handleUpdateFilters).toHaveBeenCalledWith(
-      {
-        brand: 'goodyear,pirelli',
-        foo: 'true',
-      },
-      undefined,
-    );
+    expect(mockCatalogContext.handleUpdateResults).toHaveBeenCalledWith({
+      brand: 'goodyear,pirelli',
+      foo: 'true',
+    });
 
     await act(async () =>
       result.current.createToggleFilterHandler({
@@ -217,13 +226,10 @@ describe('useFiltersContextSetup', () => {
       })(),
     );
 
-    expect(handleUpdateFilters).toHaveBeenCalledWith(
-      {
-        brand: 'goodyear,pirelli',
-        foo: '',
-      },
-      undefined,
-    );
+    expect(mockCatalogContext.handleUpdateResults).toHaveBeenCalledWith({
+      brand: 'goodyear,pirelli',
+      foo: '',
+    });
   });
 
   test('clearing filter dropdown', () => {

@@ -4,7 +4,8 @@ import { DATA_COMPONENT_LABEL } from '~/components/modules/Catalog/Header.consta
 import HeaderContainer from '~/components/modules/Catalog/Header.container';
 import Recirculation from '~/components/modules/Catalog/Recirculation/Recirculation';
 import SeeAllTires from '~/components/modules/Catalog/Recirculation/SeeAllTires';
-import { useCatalogPageContext } from '~/context/CatalogPage.context';
+import { useCatalogProductsContext } from '~/context/CatalogProducts.context';
+import { useCatalogSummaryContext } from '~/context/CatalogSummary.context';
 import { SiteCatalogFilters } from '~/data/models/SiteCatalogFilters';
 import {
   SiteCatalogProductGroupItem,
@@ -15,7 +16,6 @@ import {
   SiteCatalogProductItemEnum,
 } from '~/data/models/SiteCatalogProductItem';
 import { SiteCatalogProducts } from '~/data/models/SiteCatalogProducts';
-import { SiteCatalogSummary } from '~/data/models/SiteCatalogSummary';
 import { getScroll, subscribeScroll } from '~/lib/helpers/scroll';
 import { map } from '~/lib/utils/interpolation';
 
@@ -31,19 +31,18 @@ interface Props {
   onPreviewFilters: (filters?: Record<string, string>) => Promise<void>;
   previewFiltersData: { filters: SiteCatalogFilters; totalMatches: number };
   siteCatalogProducts: SiteCatalogProducts;
-  siteCatalogSummary?: SiteCatalogSummary;
 }
 
 function CatalogGrid({
   hasTopPicks,
   hasResults,
-  siteCatalogSummary,
-  siteCatalogProducts,
   onPreviewFilters,
   previewFiltersData,
   fetchNewProducts,
+  siteCatalogProducts,
 }: Props) {
-  const { isLoading, handleUpdateResults } = useCatalogPageContext();
+  const { siteCatalogSummary } = useCatalogSummaryContext();
+  const { isLoading, handleUpdateResults } = useCatalogProductsContext();
   const catalogGrid = useRef<HTMLDivElement | null>(null);
 
   // Uses a state instead of ref to avoid forwarding refs
@@ -118,7 +117,7 @@ function CatalogGrid({
 
   const totalResults = siteCatalogSummary?.siteCatalogSummaryMeta?.totalResults;
   const isGroupedProducts =
-    siteCatalogProducts.siteCatalogProductsResultList[0]?.type ===
+    siteCatalogProducts?.siteCatalogProductsResultList[0]?.type ===
     SiteCatalogProductGroupItemEnum.SiteCatalogProductGroupItem;
   return (
     <div ref={catalogGrid}>

@@ -1,32 +1,18 @@
 import { useRouter } from 'next/router';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 
 import Meta from '~/components/global/Meta/Meta';
 import { useSearchModalContext } from '~/components/modules/Search/SearchModal.context';
-import { CatalogPageContextProvider } from '~/context/CatalogPage.context';
+import { CatalogProductsContextProvider } from '~/context/CatalogProducts.context';
 import { CatalogSummaryContextProvider } from '~/context/CatalogSummary.context';
-import { SiteCatalogProducts } from '~/data/models/SiteCatalogProducts';
-import { SiteCatalogSummary } from '~/data/models/SiteCatalogSummary';
-import { useApiDataWithDefault } from '~/hooks/useApiDataWithDefault';
-import { TIME } from '~/lib/constants';
 import { eventEmitters } from '~/lib/events/emitters';
-import { fetchWithErrorHandling } from '~/lib/fetch';
-import { AsyncResponse } from '~/lib/fetch/index.types';
-import { getParam, getStringifiedParams } from '~/lib/utils/routes';
+import { getStringifiedParams } from '~/lib/utils/routes';
 
 import CatalogPage from './CatalogPage';
-import { shouldDisplayProductsError } from './CatalogPage.utils';
+import { CatalogApiArgs, CatalogPageData } from './CatalogPage.types';
 import { mapDataToMeta, SearchBy, SearchByParams } from './mapppers/meta';
 
 export const CATALOG_PARAMS = ['group', 'skipGroups'];
-const EMPTY_FILTERS = { filtersList: [], sortList: [] };
-
-export interface CatalogPageData {
-  serverData: {
-    siteCatalogProducts: SiteCatalogProducts | null;
-    siteCatalogSummary: SiteCatalogSummary;
-  };
-}
 
 interface Props extends CatalogPageData {
   endpoints: {
@@ -45,7 +31,7 @@ function CatalogPageContainer({
   searchBy,
   searchByParams,
 }: Props) {
-  const { query, push, pathname, asPath } = useRouter();
+  const { query } = useRouter();
   const { isSearchOpen } = useSearchModalContext();
   const meta = mapDataToMeta({ searchBy, searchByParams });
 
@@ -57,7 +43,7 @@ function CatalogPageContainer({
     ...pageParams,
     page: '1',
   });
-  const apiArgs = {
+  const apiArgs: CatalogApiArgs = {
     defaultData: serverData,
     includeUserRegion: true,
     includeUserZip: true,
@@ -66,233 +52,26 @@ function CatalogPageContainer({
   };
 
   /**
-   * Combine the `hasLocalData` and data states, so that they can be
-   * set simultaneously on fetch success.
-   */
-  const [{ hasLocalData, siteCatalogSummary }, setSummaryState] = useState({
-    hasLocalData: false,
-    siteCatalogSummary: serverData.siteCatalogSummary,
-  });
-
-  /**
-   * Fetch site catalog summary
-   * Note that unusually this hook does not return the data directly,
-   * but sets it to local state via the `onSuccess` callback. This was
-   * done to solve an issue where the downstream components were
-   * receiving the `hasLocalData: true` prop before the updated data.
-   */
-  const {
-    error: summaryError,
-    revalidate: revalidateSummary,
-  } = useApiDataWithDefault<CatalogPageData['serverData']>({
-    ...apiArgs,
-    endpoint: endpoints.summary,
-    options: {
-      onSuccess: (data) => {
-        setSummaryState({
-          hasLocalData: true,
-          siteCatalogSummary: data.siteCatalogSummary,
-        });
-      },
-    },
-  });
-
-  useEffect(() => {
-    const handleResetSummary = async ({
-      comesFromSearch,
-    }: {
-      comesFromSearch: boolean;
-    }) => {
-      // Reset hasLocalData state on `useApiData` hook
-      setSummaryState((summaryState) => ({
-        ...summaryState,
-        hasLocalData: false,
-      }));
-
-      if (comesFromSearch) {
-        await revalidateSummary();
-      }
-
-      // Reset scroll position to top
-      window.scrollTo(0, 0);
-    };
-
-    eventEmitters.newCatalogSearchQuery.on(handleResetSummary);
-
-    return () => {
-      eventEmitters.newCatalogSearchQuery.off(handleResetSummary);
-    };
-  }, [revalidateSummary]);
-
-  // fetch site catalog products
-  const {
-    data: { siteCatalogProducts },
-    error: productsError,
-    revalidate: revalidateProducts,
-    isValidating,
-  } = useApiDataWithDefault<CatalogPageData['serverData']>({
-    ...apiArgs,
-    endpoint: endpoints.products,
-  });
-
-  if (productsError) {
-    console.error(productsError);
-  }
-  if (summaryError) {
-    console.error(summaryError);
-  }
-  if (
-    shouldDisplayProductsError(siteCatalogSummary) &&
-    !siteCatalogProducts &&
-    !isValidating
-  ) {
-    throw new Error(
-      productsError
-        ? productsError.message
-        : 'An error occurred while fetching products',
-    );
-  }
-
-  const scrollToGrid = useCallback(() => {
-    if (catalogGridRef && catalogGridRef.current) {
-      window.scrollTo({
-        behavior: 'smooth',
-        top: catalogGridRef.current.offsetTop,
-      });
-    }
-  }, [catalogGridRef]);
-
-  // appends filters to existing URL query params
-  const handleUpdateFilters = useCallback(
-    async (filters: Record<string, string>, withoutScroll) => {
-      const route = asPath.split('?');
-      const params: Record<string, string> = {};
-
-      // Skip page transition when updating filters
-      eventEmitters.skipPageTransition.emit(null);
-
-      Object.entries({ ...query, ...filters }).forEach(([k, v]) => {
-        const stringifiedVal = getParam(v);
-        if (!!stringifiedVal && !pageParams[k]) {
-          params[k] = stringifiedVal;
-        }
-      });
-
-      const searchString = new URLSearchParams(params).toString();
-      push(`${pathname}?${searchString}`, `${route[0]}?${searchString}`, {
-        shallow: true,
-      });
-
-      // revalidate with newly applied filters
-      await revalidateProducts();
-      if (!withoutScroll) {
-        setTimeout(scrollToGrid, TIME.MS350);
-      }
-    },
-    [
-      asPath,
-      pathname,
-      query,
-      pageParams,
-      push,
-      revalidateProducts,
-      scrollToGrid,
-    ],
-  );
-
-  // preview data and handler for open filter dropdowns
-  const [previewFiltersData, setPreviewFiltersData] = useState({
-    totalMatches:
-      siteCatalogProducts?.listResultMetadata.pagination?.total || 0,
-    filters: siteCatalogProducts?.siteCatalogFilters || EMPTY_FILTERS,
-  });
-
-  const onPreviewFilters = useCallback(
-    async (filters?: Record<string, string>) => {
-      // data was previewed but closed before applying - reset to initial state
-      if (!filters) {
-        setPreviewFiltersData({
-          totalMatches:
-            siteCatalogProducts?.listResultMetadata.pagination?.total || 0,
-          filters: siteCatalogProducts?.siteCatalogFilters || EMPTY_FILTERS,
-        });
-      }
-
-      const response: AsyncResponse<{
-        siteCatalogProducts: SiteCatalogProducts;
-      }> = await fetchWithErrorHandling({
-        endpoint: endpoints.products,
-        includeUserRegion: true,
-        includeUserZip: true,
-        method: 'get',
-        query: { ...filters, ...pageParams },
-      });
-
-      if (response.isSuccess) {
-        const { siteCatalogProducts } = response.data;
-        setPreviewFiltersData({
-          totalMatches:
-            siteCatalogProducts.listResultMetadata.pagination?.total || 0,
-          filters: siteCatalogProducts.siteCatalogFilters,
-        });
-      }
-      // TODO: add UI error handling
-    },
-    [siteCatalogProducts, endpoints.products, pageParams],
-  );
-
-  const fetchNewProducts = useCallback(
-    async (page) => {
-      const queryParams = getStringifiedParams({
-        ...query,
-        ...pageParams,
-      });
-
-      const response: AsyncResponse<{
-        siteCatalogProducts: SiteCatalogProducts;
-      }> = await fetchWithErrorHandling({
-        endpoint: endpoints.products,
-        includeUserRegion: true,
-        includeUserZip: true,
-        method: 'get',
-        query: { ...queryParams, page },
-      });
-
-      if (response.isSuccess) {
-        return response.data.siteCatalogProducts;
-      } else {
-        // TODO: add UI error handling here, use global toast context
-        return null;
-      }
-    },
-    [pageParams, endpoints.products, query],
-  );
-
-  /**
-   * TODO:
-   * - Combine CatalogPageContextProvider & CatalogSummaryContextProvider
-   *   into a single context instance
+   * Note: CatalogSummary context must wrap CatalogPage context, because
+   * CatalogPage context needs to know the stage when loading product data.
    */
   return (
     <>
       {meta && <Meta {...meta} />}
-      <CatalogPageContextProvider handleUpdateFilters={handleUpdateFilters}>
-        <CatalogSummaryContextProvider
-          comesFromSearch={isSearchOpen}
-          hasLocalData={hasLocalData}
-          siteCatalogSummary={siteCatalogSummary}
+      <CatalogSummaryContextProvider
+        apiArgs={apiArgs}
+        comesFromSearch={isSearchOpen}
+        endpoint={endpoints.summary}
+      >
+        <CatalogProductsContextProvider
+          apiArgs={apiArgs}
+          catalogGridRef={catalogGridRef}
+          endpoint={endpoints.products}
+          pageParams={pageParams}
         >
-          <CatalogPage
-            onPreviewFilters={onPreviewFilters}
-            siteCatalogProducts={siteCatalogProducts}
-            siteCatalogSummary={siteCatalogSummary}
-            previewFiltersData={previewFiltersData}
-            scrollToGrid={scrollToGrid}
-            catalogGridRef={catalogGridRef}
-            fetchNewProducts={fetchNewProducts}
-          />
-        </CatalogSummaryContextProvider>
-      </CatalogPageContextProvider>
+          <CatalogPage catalogGridRef={catalogGridRef} />
+        </CatalogProductsContextProvider>
+      </CatalogSummaryContextProvider>
     </>
   );
 }

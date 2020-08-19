@@ -3,13 +3,13 @@ import preloadAll from 'jest-next-dynamic';
 import ReactModal from 'react-modal';
 
 import { emptyCatalogProductsMock } from '~/components/pages/CatalogPage/CatalogPage.mock';
-import { CatalogPageContextProvider } from '~/context/CatalogPage.context';
-import { ModalContextProvider } from '~/context/Modal.context';
-import { SiteGlobalsContext } from '~/context/SiteGlobals.context';
+import * as CatalogProductsContext from '~/context/CatalogProducts.context';
+import * as ModalContext from '~/context/Modal.context';
+import * as SiteGlobalsContext from '~/context/SiteGlobals.context';
 import { SiteCatalogFilters } from '~/data/models/SiteCatalogFilters';
 import * as windowHook from '~/hooks/useWindowSize';
 
-import { FiltersContextProvider } from '../Filters.context';
+import * as FiltersContext from '../Filters.context';
 import {
   filterSortMock,
   priceFilterMock,
@@ -44,35 +44,39 @@ const mockArgs = {
   },
 };
 
-const catalogMockArgs = {
-  handleUpdateFilters: jest.fn(),
-};
-
 const tree = (
-  <SiteGlobalsContext.Provider
-    value={{
-      customerServiceEnabled: true,
-      customerServiceNumber: { display: '123', value: '123' },
-      siteTheme: null,
-    }}
-  >
-    <ModalContextProvider>
-      <CatalogPageContextProvider {...catalogMockArgs}>
-        <FiltersContextProvider {...mockArgs}>
-          <SubFilters
-            resultsCount={0}
-            priceFilter={priceFilterMock}
-            sortList={filterSortMock}
-          />
-        </FiltersContextProvider>
-      </CatalogPageContextProvider>
-    </ModalContextProvider>
-  </SiteGlobalsContext.Provider>
+  <FiltersContext.FiltersContextProvider {...mockArgs}>
+    <SubFilters
+      resultsCount={0}
+      priceFilter={priceFilterMock}
+      sortList={filterSortMock}
+    />
+  </FiltersContext.FiltersContextProvider>
 );
+
+const mockCatalogContext = {
+  displayedProducts: [],
+  fetchNewProducts: jest.fn(),
+  handleUpdateResults: jest.fn(),
+  isAdvancedView: false,
+  isLoading: false,
+  onPreviewFilters: jest.fn(),
+  previewFiltersData: {},
+  scrollToGrid: false,
+  setDisplayedProducts: jest.fn(),
+  setIsAdvancedView: jest.fn(),
+  setIsLoading: jest.fn(),
+  siteCatalogProducts: {},
+};
 
 describe('SubFilters', () => {
   beforeAll(async () => {
     await preloadAll();
+    (CatalogProductsContext as any).useCatalogProductsContext = jest.fn(
+      () => mockCatalogContext,
+    );
+    (SiteGlobalsContext as any).useSiteGlobalsContext = jest.fn(() => ({}));
+    (ModalContext as any).useModalContext = jest.fn(() => ({}));
   });
 
   afterEach(() => {
@@ -127,7 +131,7 @@ describe('SubFilters', () => {
     fireEvent.click(sortBy);
 
     await waitFor(() =>
-      expect(catalogMockArgs.handleUpdateFilters).toHaveBeenCalledTimes(1),
+      expect(mockCatalogContext.handleUpdateResults).toHaveBeenCalledTimes(1),
     );
   });
 });

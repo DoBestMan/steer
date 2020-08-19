@@ -4,7 +4,7 @@ import React, { ReactNode, useState } from 'react';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Link from '~/components/global/Link/Link';
 import Toggle from '~/components/global/Toggle/Toggle';
-import { useCatalogPageContext } from '~/context/CatalogPage.context';
+import { useCatalogProductsContext } from '~/context/CatalogProducts.context';
 import { LINK_ICON_POSITION, LINK_TYPES, THEME } from '~/lib/constants';
 import { scrollTo } from '~/lib/helpers/scroll';
 import { ui } from '~/lib/utils/ui-dictionary';
@@ -36,7 +36,7 @@ export default function HeaderInfo({
     handleUpdateResults,
     setIsAdvancedView,
     isAdvancedView,
-  } = useCatalogPageContext();
+  } = useCatalogProductsContext();
 
   const backToTopPicks = () => {
     scrollTo(0, 1);

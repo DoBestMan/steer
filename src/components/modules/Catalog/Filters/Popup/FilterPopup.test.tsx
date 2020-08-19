@@ -3,9 +3,9 @@ import preloadAll from 'jest-next-dynamic';
 import ReactModal from 'react-modal';
 
 import { emptyCatalogProductsMock } from '~/components/pages/CatalogPage/CatalogPage.mock';
-import { CatalogPageContextProvider } from '~/context/CatalogPage.context';
-import { ModalContextProvider } from '~/context/Modal.context';
-import { SiteGlobalsContext } from '~/context/SiteGlobals.context';
+import * as CatalogProductsContext from '~/context/CatalogProducts.context';
+import * as ModalContext from '~/context/Modal.context';
+import * as SiteGlobalsContext from '~/context/SiteGlobals.context';
 import { SiteCatalogFilterListPresentationStyleEnum } from '~/data/models/SiteCatalogFilterList';
 import { SiteCatalogFilters } from '~/data/models/SiteCatalogFilters';
 import * as windowHook from '~/hooks/useWindowSize';
@@ -36,31 +36,19 @@ const mockArgs = {
 };
 
 const tree = (
-  <SiteGlobalsContext.Provider
-    value={{
-      customerServiceEnabled: true,
-      customerServiceNumber: { display: '123', value: '123' },
-      siteTheme: null,
-    }}
-  >
-    <ModalContextProvider>
-      <CatalogPageContextProvider handleUpdateFilters={jest.fn}>
-        <FiltersContextProvider {...mockArgs}>
-          <FilterPopup
-            hasActionBar
-            isOpen
-            onClose={jest.fn}
-            filter={listMock}
-          />
-        </FiltersContextProvider>
-      </CatalogPageContextProvider>
-    </ModalContextProvider>
-  </SiteGlobalsContext.Provider>
+  <FiltersContextProvider {...mockArgs}>
+    <FilterPopup hasActionBar isOpen onClose={jest.fn} filter={listMock} />
+  </FiltersContextProvider>
 );
 
 describe('FilterPopup', () => {
   beforeAll(async () => {
     await preloadAll();
+    (SiteGlobalsContext as any).useSiteGlobalsContext = jest.fn(() => ({}));
+    (CatalogProductsContext as any).useCatalogProductsContext = jest.fn(
+      () => ({}),
+    );
+    (ModalContext as any).useModalContext = jest.fn(() => ({}));
   });
 
   afterEach(() => {
@@ -95,30 +83,17 @@ describe('FilterPopup', () => {
 
   it('displays a modal for large presentation checklist filters', () => {
     render(
-      <SiteGlobalsContext.Provider
-        value={{
-          customerServiceEnabled: true,
-          customerServiceNumber: { display: '123', value: '123' },
-          siteTheme: null,
-        }}
-      >
-        <ModalContextProvider>
-          <CatalogPageContextProvider handleUpdateFilters={jest.fn}>
-            <FiltersContextProvider {...mockArgs}>
-              <FilterPopup
-                hasActionBar
-                isOpen
-                onClose={jest.fn}
-                filter={{
-                  ...listMock,
-                  presentationStyle:
-                    SiteCatalogFilterListPresentationStyleEnum.Large,
-                }}
-              />
-            </FiltersContextProvider>
-          </CatalogPageContextProvider>
-        </ModalContextProvider>
-      </SiteGlobalsContext.Provider>,
+      <FiltersContextProvider {...mockArgs}>
+        <FilterPopup
+          hasActionBar
+          isOpen
+          onClose={jest.fn}
+          filter={{
+            ...listMock,
+            presentationStyle: SiteCatalogFilterListPresentationStyleEnum.Large,
+          }}
+        />
+      </FiltersContextProvider>,
     );
     const modal = screen.getByRole('dialog', { hidden: true });
 
