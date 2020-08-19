@@ -4,10 +4,12 @@ import Button from '~/components/global/Button/Button';
 import FeaturedInfoModule from '~/components/global/FeaturedInfoModule/FeaturedInfoModule';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Link from '~/components/global/Link/Link';
+import Loading from '~/components/global/Loading/Loading';
 import Markdown from '~/components/global/Markdown/Markdown';
 import BottomCardModal from '~/components/global/Modal/BottomCardModal';
 import { modalContainerStyles } from '~/components/global/Modal/BottomCardModal.styles';
 import RadioSelector from '~/components/global/Radio/RadioSelector';
+import { useProductDetailContext } from '~/components/pages/ProductDetail/ProductDetail.context';
 import { useModalContext } from '~/context/Modal.context';
 import { BUTTON_STYLE, LINK_TYPES, THEME } from '~/lib/constants';
 import { STATIC_MODAL_IDS } from '~/lib/constants/staticModals';
@@ -26,7 +28,6 @@ interface Props {
   durationLabel: string;
   isOpen: boolean;
   onClose: () => void;
-  onConfirm: (hasCoverage: boolean) => void;
   price: string;
 }
 
@@ -51,13 +52,9 @@ function LearnMoreLink({
   );
 }
 
-function RoadHazardModal({
-  durationLabel,
-  isOpen,
-  onClose,
-  onConfirm,
-  price,
-}: Props) {
+function RoadHazardModal({ durationLabel, isOpen, onClose, price }: Props) {
+  const { addToCart, isAddingToCart } = useProductDetailContext();
+
   const { openStaticModal } = useModalContext();
   const [value, setValue] = useState(CONSTANTS.HAS_COVERAGE);
   const [shouldIntercept, setShouldIntercept] = useState(false);
@@ -72,11 +69,11 @@ function RoadHazardModal({
       return;
     }
 
-    onConfirm(value === CONSTANTS.HAS_COVERAGE);
+    addToCart({ shouldAddCoverage: value === CONSTANTS.HAS_COVERAGE });
   }
 
   function handleIntercepAction(_value: string) {
-    onConfirm(_value === CONSTANTS.HAS_COVERAGE);
+    addToCart({ shouldAddCoverage: _value === CONSTANTS.HAS_COVERAGE });
   }
 
   useEffect(() => {
@@ -157,10 +154,20 @@ function RoadHazardModal({
               css={styles.button}
               data-testid="road-hazard-continue"
               onClick={handleConfirm}
+              isDisabled={isAddingToCart}
               theme={THEME.LIGHT}
             >
-              {ui('pdp.roadHazard.continueButtonLabel')}
+              <span>{ui('pdp.roadHazard.continueButtonLabel')}</span>
+              {isAddingToCart && (
+                <div css={styles.buttonLoading}>
+                  <Loading theme={THEME.DARK} />
+                </div>
+              )}
             </Button>
+          ) : isAddingToCart ? (
+            <div css={styles.loading}>
+              <Loading theme={THEME.LIGHT} />
+            </div>
           ) : (
             <>
               <Button

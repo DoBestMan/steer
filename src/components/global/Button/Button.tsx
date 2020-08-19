@@ -86,6 +86,7 @@ function Button(
   return (
     <button
       css={buttonStyles}
+      disabled={isDisabled}
       {...rest}
       ref={ref as MutableRefObject<HTMLButtonElement>}
     >

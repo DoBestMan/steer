@@ -39,6 +39,7 @@ export interface ProductDetailContextProps {
   changeSize: (index: number) => void;
   currentSizeIndex: number;
   data: ProductDetailResponse | null;
+  isAddingToCart: boolean;
   isLoading: boolean;
   quantity: Quantity;
   queryParams: Record<string, string>;
@@ -90,6 +91,9 @@ function useContextSetup({
   const isPLA = !!router.pathname.match(CONSTANTS.PLA_ROUTE);
   // It's necessary to add an individual state in order to show the selected option while loading data
   const [currentSizeIndex, setCurrentSizeIndex] = useState(-1);
+
+  // To add a loading indicator while redirecting to cart
+  const [isAddingToCart, setIsAddingToCart] = useState(false);
 
   const {
     lockSearchStateToVehicle,
@@ -153,8 +157,10 @@ function useContextSetup({
       });
 
       window.location.href = checkoutURL;
+
+      setIsAddingToCart(true);
     },
-    [data, quantity, userPersonalizationData],
+    [data, quantity, userPersonalizationData, setIsAddingToCart],
   );
 
   const changeSize = useCallback(
@@ -202,6 +208,7 @@ function useContextSetup({
     changeSize,
     currentSizeIndex,
     data,
+    isAddingToCart,
     isLoading,
     quantity,
     queryParams,

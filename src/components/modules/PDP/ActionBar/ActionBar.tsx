@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Button from '~/components/global/Button/Button';
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
+import Loading from '~/components/global/Loading/Loading';
 import { useProductDetailContext } from '~/components/pages/ProductDetail/ProductDetail.context';
 import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
 import { THEME } from '~/lib/constants';
@@ -47,6 +48,7 @@ function PDPActionBar({
   const {
     addToCart,
     quantity,
+    isAddingToCart,
     searchForVehicle,
     setQuantity,
   } = useProductDetailContext();
@@ -126,10 +128,18 @@ function PDPActionBar({
             onClick={handleClickAddToCart}
             theme={theme}
             css={styles.addToCart}
+            isDisabled={isAddingToCart}
           >
-            {ui('pdp.stickyBar.addToCart', {
-              value: formatDollars(price),
-            })}
+            <span>
+              {ui('pdp.stickyBar.addToCart', {
+                value: formatDollars(price),
+              })}
+            </span>
+            {isAddingToCart && (
+              <div css={styles.addToCartLoading}>
+                <Loading theme={THEME.DARK} />
+              </div>
+            )}
           </Button>
         </div>
 
@@ -152,6 +162,7 @@ function PDPActionBar({
     );
   }
 
+  // Front and Rear
   return (
     <>
       {!!price && (
@@ -160,10 +171,19 @@ function PDPActionBar({
             data-testid="add-to-cart"
             onClick={handleClickAddToCart}
             theme={theme}
+            isDisabled={isAddingToCart}
+            css={styles.addToCart}
           >
-            {ui('pdp.stickyBar.addToCart', {
-              value: formatDollars(price),
-            })}
+            <span>
+              {ui('pdp.stickyBar.addToCart', {
+                value: formatDollars(price),
+              })}
+            </span>
+            {isAddingToCart && (
+              <div css={styles.addToCartLoading}>
+                <Loading theme={THEME.DARK} />
+              </div>
+            )}
           </Button>
         </div>
       )}

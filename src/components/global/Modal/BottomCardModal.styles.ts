@@ -86,8 +86,9 @@ export const modalContainerStyles: StylesMap = {
     /* eslint-disable sort-keys */
     '> :only-child': {
       width: '100%',
-      display: 'block',
+      justifyContent: 'center',
     },
+
     '> :not(:only-child):first-of-type': {
       marginLeft: SPACING.SIZE_10,
 

@@ -1,5 +1,3 @@
-import { useProductDetailContext } from '~/components/pages/ProductDetail/ProductDetail.context';
-
 import RoadHazardModal from './RoadHazardModal';
 
 interface Props {
@@ -15,18 +13,11 @@ function RoadHazardModalContainer({
   price,
   onClose,
 }: Props) {
-  const { addToCart } = useProductDetailContext();
-
-  function handleConfirm(hasCoverage: boolean) {
-    addToCart({ shouldAddCoverage: hasCoverage });
-  }
-
   return (
     <RoadHazardModal
       durationLabel={durationLabel}
       isOpen={isOpen}
       onClose={onClose}
-      onConfirm={handleConfirm}
       price={price}
     />
   );

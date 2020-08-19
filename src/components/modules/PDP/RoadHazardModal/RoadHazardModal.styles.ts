@@ -1,13 +1,21 @@
-import { COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
+import { COLORS, SPACING, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
   button: {
-    display: 'block',
+    justifyContent: 'center',
     width: '100%',
-    [MQ.L]: {
-      marginTop: 'auto',
+
+    ':disabled': {
+      // To keep button width untouched
+      '> span': {
+        height: 0,
+        visibility: 'hidden',
+      },
     },
+  },
+  buttonLoading: {
+    position: 'absolute',
   },
   copy: [
     typography.bodyCopyTight,
@@ -32,6 +40,9 @@ const styles: StylesMap = {
       color: COLORS.LIGHT.GRAY_70,
     },
   ],
+  loading: {
+    display: 'flex',
+  },
   modalHeaderStyles: {
     marginBottom: SPACING.SIZE_30,
   },

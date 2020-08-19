@@ -1430,6 +1430,7 @@ export const productDetailContextMock: ProductDetailContextProps = {
     siteProduct: siteProductMock,
     siteProductReviews: siteProductReviewsMock,
   },
+  isAddingToCart: false,
   isLoading: false,
   quantity: { front: 2, rear: 2 },
   queryParams: {

@@ -11,6 +11,17 @@ const styles: StylesMap = {
     [MQ.XL]: {
       marginLeft: SPACING.SIZE_10,
     },
+
+    ':disabled': {
+      // To keep button width untouched
+      '> span': {
+        height: 0,
+        visibility: 'hidden',
+      },
+    },
+  },
+  addToCartLoading: {
+    position: 'absolute',
   },
   dropdownIcon: {
     height: 5,
