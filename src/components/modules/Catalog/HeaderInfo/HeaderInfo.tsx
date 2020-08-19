@@ -70,7 +70,7 @@ export default function HeaderInfo({
         onClick={toggleLocation}
         as={LINK_TYPES.BUTTON}
         css={[styles.link, infoStyles]}
-        theme={THEME.ORANGE}
+        theme={isAdvancedView ? THEME.DARK : THEME.ORANGE}
       >
         {location}
       </Link>
