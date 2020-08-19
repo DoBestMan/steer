@@ -14,5 +14,11 @@ export const styles: StylesMap = {
   centered: {
     margin: '0 auto',
   },
-  label: typography.secondaryHeadline,
+  label: [
+    typography.secondaryHeadline,
+    {
+      display: 'inline-block',
+      height: PRODUCT.BRAND_IMAGE_HEIGHT,
+    },
+  ],
 };
