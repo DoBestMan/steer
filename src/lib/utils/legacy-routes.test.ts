@@ -23,6 +23,12 @@ describe('utils/legacy-routes', () => {
   });
 
   describe('getLegacyCheckoutURL', () => {
+    it('returns URL with no params', () => {
+      expect(getLegacyCheckoutURL()).toBe(
+        `${URLS.CHECKOUT_INTEGRATION}/my_cart/checkout`,
+      );
+    });
+
     it('returns URL for checking out a single size tire', () => {
       expect(
         getLegacyCheckoutURL({

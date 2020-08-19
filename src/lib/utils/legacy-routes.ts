@@ -11,43 +11,45 @@ export function getLegacyAccountURL(): string {
     : URLS.ACCOUNT_INTEGRATION;
 }
 
-export function getLegacyCheckoutURL({
-  front,
-  quantity,
-  rear,
-  roadHazard,
-  userZip,
-}: {
+interface CheckoutURLParams {
   front: string;
   quantity: { front: number; rear?: number };
   rear?: string;
   roadHazard?: boolean;
   userZip?: string;
-}): string {
-  const isStaggered = front && rear && quantity.front && quantity.rear;
+}
 
-  const baseRoute = interpolateRoute(
-    LEGACY_ROUTE_MAP[
-      isStaggered ? LEGACY_ROUTES.CHECKOUT_STAGGERED : LEGACY_ROUTES.CHECKOUT
-    ],
-    {
-      a: (quantity.front && front) || (quantity.rear && rear) || '',
-      aQuantity:
-        (quantity.front && quantity.front.toString()) ||
-        (quantity.rear && quantity.rear.toString()) ||
-        '',
-      b: rear || '',
-      bQuantity: (quantity.rear && quantity.rear.toString()) || '',
-    },
-  );
+export function getLegacyCheckoutURL(params?: CheckoutURLParams): string {
+  let baseRoute = LEGACY_ROUTE_MAP[LEGACY_ROUTES.CHECKOUT];
+  let query = {};
 
-  // Remove '//' in case of single size
-  const parsedBaseRoute = baseRoute.replace(/\/\//g, '');
+  if (params) {
+    const { front, quantity, rear, roadHazard, userZip } = params;
+    const isStaggered = front && rear && quantity.front && quantity.rear;
 
-  const query = {
-    rh: roadHazard ? 1 : undefined,
-    zipCode: userZip,
-  };
+    baseRoute = interpolateRoute(
+      LEGACY_ROUTE_MAP[
+        isStaggered ? LEGACY_ROUTES.ADD_CART_STAGGERED : LEGACY_ROUTES.ADD_CART
+      ],
+      {
+        a: (quantity.front && front) || (quantity.rear && rear) || '',
+        aQuantity:
+          (quantity.front && quantity.front.toString()) ||
+          (quantity.rear && quantity.rear.toString()) ||
+          '',
+        b: rear || '',
+        bQuantity: (quantity.rear && quantity.rear.toString()) || '',
+      },
+    );
+
+    // Remove '//' in case of single size
+    baseRoute = baseRoute.replace(/\/\//g, '');
+
+    query = {
+      rh: roadHazard ? 1 : undefined,
+      zipCode: userZip,
+    };
+  }
 
   const hasQuery = Object.values(query).some((item) => item !== undefined);
 
@@ -55,7 +57,7 @@ export function getLegacyCheckoutURL({
     ? URLS.CHECKOUT_PRODUCTION
     : URLS.CHECKOUT_INTEGRATION;
 
-  return `${baseUrl}${parsedBaseRoute}${
+  return `${baseUrl}${baseRoute}${
     hasQuery ? `?${queryString.stringify(query)}` : ''
   }`;
 }

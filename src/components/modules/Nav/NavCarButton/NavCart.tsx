@@ -1,10 +1,17 @@
+import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Link from '~/components/global/Link/Link';
 import { navLink } from '~/components/global/Link/Link.styles';
-import { cartLink } from '~/context/Nav.context';
+import { getLegacyCheckoutURL } from '~/lib/utils/legacy-routes';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import { NavThemeObject } from '../Nav.theme';
 import styles, { badgeColor } from './NavCart.styles';
+
+const cartLink = {
+  href: getLegacyCheckoutURL(),
+  icon: ICONS.VEHICLE_CART,
+  isExternal: false,
+};
 
 function getCartString(quantity: number) {
   let items = ui('nav.cart.multipleItems', { quantity });

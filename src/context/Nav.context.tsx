@@ -40,11 +40,6 @@ export interface NavContextProps {
 
 const NavContext = createContext<NavContextProps>();
 
-export const cartLink = {
-  href: '/',
-  icon: ICONS.VEHICLE_CART,
-  isExternal: false,
-};
 export const dealsLink = {
   href: ROUTE_MAP[ROUTES.DEALS],
   isExternal: false,
