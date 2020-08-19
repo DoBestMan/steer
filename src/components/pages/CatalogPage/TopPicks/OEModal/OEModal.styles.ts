@@ -1,10 +1,15 @@
 import { COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
-import { GAP_COLUMNS } from '~/lib/constants/grid.ts';
 import { typography, typographyStyles } from '~/styles/typography.styles';
 
 export const styles: StylesMap = {
   closeButton: {
     marginTop: SPACING.SIZE_60,
+  },
+  container: {
+    padding: `${SPACING.SIZE_10}px 0`,
+    [MQ.L]: {
+      padding: 0,
+    },
   },
   contentSection: {
     marginTop: SPACING.SIZE_40,
@@ -24,27 +29,17 @@ export const styles: StylesMap = {
     marginTop: SPACING.SIZE_40,
   },
   specItem: {
-    '&:nth-child(even)': {
-      marginLeft: GAP_COLUMNS.S,
-    },
-
     borderBottom: `1px solid ${COLORS.DARK.GRAY_80}`,
     display: 'inline-flex',
     flexDirection: 'column',
+    gridColumn: 'span 2',
     marginTop: SPACING.SIZE_20,
     paddingBottom: SPACING.SIZE_10,
-    width: `calc(50% - ${GAP_COLUMNS.S / 2}px)`,
-
     [MQ.M]: {
-      width: `calc(50% - ${GAP_COLUMNS.M / 2}px)`,
+      gridColumn: 'span 3',
     },
-
     [MQ.L]: {
-      width: `calc(50% - ${GAP_COLUMNS.L / 2}px)`,
-    },
-
-    [MQ.XL]: {
-      width: `calc(50% - ${GAP_COLUMNS.XL / 2}px)`,
+      gridColumn: 'span 6',
     },
   },
   specItemLabel: {
