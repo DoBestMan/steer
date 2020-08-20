@@ -13,7 +13,7 @@ export function TitleCheckbox() {
   return (
     <TitleCheckboxComponent
       label={text('Label', 'Checkbox label')}
-      defaultChecked={boolean('Active', true)}
+      checked={boolean('Active', true)}
       description={text(
         'Description',
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',

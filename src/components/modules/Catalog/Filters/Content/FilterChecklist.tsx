@@ -1,4 +1,3 @@
-import TitleCheckbox from '~/components/global/Checkbox/TitleCheckbox';
 import TitleRadio from '~/components/global/Radio/TitleRadio';
 import {
   SiteCatalogFilterGroup,
@@ -10,8 +9,9 @@ import {
   SiteCatalogFilterListPresentationStyleEnum,
 } from '~/data/models/SiteCatalogFilterList';
 
-import { hasActiveValue, strictEqualsFilterValue } from '../Filters.utils';
+import { strictEqualsFilterValue } from '../Filters.utils';
 import { ChildProps } from '../Popup/FilterPopup.utils';
+import FilterCheckbox from './FilterCheckbox';
 import styles from './FilterChecklist.styles';
 import largeStyles from './FilterChecklistLarge.styles';
 import FilterHeader from './FilterHeader';
@@ -37,17 +37,11 @@ const mapGroupTypeToInput: Record<
   }: GroupProps) {
     return group.items.map((item, idx) => (
       <div css={styles.container} key={idx}>
-        <TitleCheckbox
-          label={item.title}
-          description={item.description}
-          count={item.count}
-          flair={item.flair}
-          isDisabled={
-            item.state === SiteCatalogFilterItemStateEnum.Disabled ||
-            isPreviewLoading
-          }
+        <FilterCheckbox
+          filtersToApply={filtersToApply}
           handleChange={handleChange(item.value)}
-          defaultChecked={hasActiveValue(item, filtersToApply)}
+          isLoading={isPreviewLoading}
+          item={item}
         />
       </div>
     ));

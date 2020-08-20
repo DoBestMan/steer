@@ -1,14 +1,7 @@
-import {
-  MouseEvent,
-  ReactNode,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import { MouseEvent, ReactNode, useEffect, useMemo, useState } from 'react';
 
 import { useCatalogProductsContext } from '~/context/CatalogProducts.context';
+import { useGlobalToastContext } from '~/context/GlobalToast.context';
 import { SiteCatalogFilters } from '~/data/models/SiteCatalogFilters';
 import { createContext } from '~/lib/utils/context';
 
@@ -92,6 +85,7 @@ export function useFiltersContextSetup({
   previewFiltersData,
   siteCatalogFilters = { filtersList: [], sortList: [] },
 }: ContextArgs) {
+  const { setGlobalToastMessage } = useGlobalToastContext();
   const { isLoading, handleUpdateResults } = useCatalogProductsContext();
   const [isPreviewLoading, setIsPreviewLoading] = useState(false);
   const { initialState, isPopularActive } = useMemo(
@@ -108,31 +102,6 @@ export function useFiltersContextSetup({
   const [filtersToApply, setFiltersToApply] = useState<Record<string, string>>(
     initialState,
   );
-
-  const firstRun = useRef(true);
-  useEffect(() => {
-    if (!selectingFilter) {
-      firstRun.current = true;
-      return;
-    }
-
-    // don't preview filters upon opening a dropdown
-    if (firstRun.current) {
-      firstRun.current = false;
-      return;
-    }
-
-    setIsPreviewLoading(true);
-    onPreviewFilters(filtersToApply).then(() => {
-      setIsPreviewLoading(false);
-    });
-  }, [
-    selectingFilter,
-    setIsPreviewLoading,
-    filtersToApply,
-    initialState,
-    onPreviewFilters,
-  ]);
 
   useEffect(() => {
     // wait until new results have come in to rehydrate initial state
@@ -192,43 +161,51 @@ export function useFiltersContextSetup({
       setFiltersToApply(newState);
       handleUpdateResults(newState);
     },
-    createUpdateFilterGroup: useCallback(
-      ({ value, overwrite = false }: UpdateFilterArgs) => () =>
-        setFiltersToApply((prevState) => {
-          const newState = { ...prevState };
+    createUpdateFilterGroup: ({
+      value,
+      overwrite = false,
+    }: UpdateFilterArgs) => async () => {
+      const filters = { ...filtersToApply };
+      Object.entries(value).forEach(([key, value]) => {
+        if (overwrite) {
+          filters[key] = value;
+          return;
+        }
 
-          Object.entries(value).forEach(([key, value]) => {
-            if (overwrite) {
-              newState[key] = value;
-              return;
-            }
+        // key did not exist in state, add it
+        if (!filters[key]) {
+          filters[key] = value;
+          return;
+        }
 
-            // key did not exist in state, add it
-            if (!newState[key]) {
-              newState[key] = value;
-              return;
-            }
+        // filter key exists, add or remove value
+        // existing key does not include value, append to current val
+        if (!filters[key].includes(value)) {
+          filters[key] = `${filters[key]},${value}`;
+          return;
+        }
 
-            // filter key exists, add or remove value
-            // existing key does not include value, append to current val
-            if (!newState[key].includes(value)) {
-              newState[key] = `${newState[key]},${value}`;
-              return;
-            }
+        // value exists, remove it
+        const valArr = filters[key].split(',');
+        const filteredVals = valArr.filter((v) => v !== value);
+        const newVal = filteredVals.join(',');
 
-            // value exists, remove it
-            const valArr = newState[key].split(',');
-            const filteredVals = valArr.filter((v) => v !== value);
-            const newVal = filteredVals.join(',');
+        // set newly modified value
+        filters[key] = newVal;
+        return;
+      });
 
-            // set newly modified value
-            newState[key] = newVal;
-            return;
-          });
-          return newState;
-        }),
-      [],
-    ),
+      setIsPreviewLoading(true);
+      onPreviewFilters(filters)
+        .then(() => {
+          setFiltersToApply(filters);
+          setIsPreviewLoading(false);
+        })
+        .catch((e) => {
+          setGlobalToastMessage(e.message);
+          setIsPreviewLoading(false);
+        });
+    },
     filtersToApply,
     isPopularActive,
     isPreviewLoading,

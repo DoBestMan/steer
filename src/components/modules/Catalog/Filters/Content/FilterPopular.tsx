@@ -1,8 +1,6 @@
-import TitleCheckbox from '~/components/global/Checkbox/TitleCheckbox';
-
 import { FilterContentTypes, SiteCatalogFilterPopular } from '../Filter.types';
-import { hasActiveValue } from '../Filters.utils';
 import { ChildProps } from '../Popup/FilterPopup.utils';
+import FilterCheckbox from './FilterCheckbox';
 import styles from './FilterChecklist.styles';
 
 export default function FilterPopular({
@@ -25,11 +23,11 @@ export default function FilterPopular({
           }
           return (
             <div css={styles.container} key={idx}>
-              <TitleCheckbox
-                isDisabled={isPreviewLoading}
-                label={filter.item.title}
+              <FilterCheckbox
+                filtersToApply={filtersToApply}
+                isLoading={isPreviewLoading}
+                item={filter.item}
                 handleChange={handleChange(filter.item.value)}
-                defaultChecked={hasActiveValue(filter.item, filtersToApply)}
               />
             </div>
           );

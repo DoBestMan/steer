@@ -4,6 +4,7 @@ import ReactModal from 'react-modal';
 
 import { emptyCatalogProductsMock } from '~/components/pages/CatalogPage/CatalogPage.mock';
 import * as CatalogProductsContext from '~/context/CatalogProducts.context';
+import * as GlobalToastContext from '~/context/GlobalToast.context';
 import * as ModalContext from '~/context/Modal.context';
 import * as SiteGlobalsContext from '~/context/SiteGlobals.context';
 import { SiteCatalogFilters } from '~/data/models/SiteCatalogFilters';
@@ -75,6 +76,7 @@ describe('SubFilters', () => {
     (CatalogProductsContext as any).useCatalogProductsContext = jest.fn(
       () => mockCatalogContext,
     );
+    (GlobalToastContext as any).useGlobalToastContext = jest.fn(() => ({}));
     (SiteGlobalsContext as any).useSiteGlobalsContext = jest.fn(() => ({}));
     (ModalContext as any).useModalContext = jest.fn(() => ({}));
   });

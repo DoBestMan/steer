@@ -17,8 +17,10 @@ import { fetchWithErrorHandling } from '~/lib/fetch';
 import { AsyncResponse } from '~/lib/fetch/index.types';
 import { createContext } from '~/lib/utils/context';
 import { getParam, getStringifiedParams } from '~/lib/utils/routes';
+import { ui } from '~/lib/utils/ui-dictionary';
 
 import { useCatalogSummaryContext } from './CatalogSummary.context';
+import { useGlobalToastContext } from './GlobalToast.context';
 
 export interface CatalogProductsContextProps {
   displayedProducts: SiteCatalogProductItem[];
@@ -55,6 +57,7 @@ function useContextSetup({
   endpoint,
   pageParams,
 }: SetupProps) {
+  const { setGlobalToastMessage } = useGlobalToastContext();
   const { query, push, pathname, asPath } = useRouter();
   const { siteCatalogSummary, stage } = useCatalogSummaryContext();
 
@@ -178,15 +181,16 @@ function useContextSetup({
         query: { ...getStringifiedParams(query), ...filters, ...pageParams },
       });
 
-      if (response.isSuccess) {
-        const { siteCatalogProducts } = response.data;
-        setPreviewFiltersData({
-          totalMatches:
-            siteCatalogProducts.listResultMetadata.pagination?.total || 0,
-          filters: siteCatalogProducts.siteCatalogFilters,
-        });
+      if (!response.isSuccess) {
+        throw new Error(ui('error.generic'));
       }
-      // TODO: add UI error handling
+
+      const { siteCatalogProducts: previewedProducts } = response.data;
+      setPreviewFiltersData({
+        totalMatches:
+          previewedProducts.listResultMetadata.pagination?.total || 0,
+        filters: previewedProducts.siteCatalogFilters,
+      });
     },
     [siteCatalogProducts, endpoint, pageParams, query],
   );
@@ -210,12 +214,12 @@ function useContextSetup({
 
       if (response.isSuccess) {
         return response.data.siteCatalogProducts;
-      } else {
-        // TODO: add UI error handling here, use global toast context
-        return null;
       }
+
+      setGlobalToastMessage(ui('error.generic'));
+      return null;
     },
-    [pageParams, endpoint, query],
+    [pageParams, setGlobalToastMessage, endpoint, query],
   );
 
   return {

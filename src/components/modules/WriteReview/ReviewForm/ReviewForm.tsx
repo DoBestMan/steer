@@ -121,7 +121,7 @@ function ReviewForm({
 
   const {
     setGlobalToastMessage,
-    handleShowTostOnNextPage,
+    handleShowToastOnNextPage,
   } = useGlobalToastContext();
   const brandName =
     queryParams.brand && removeTireFromQueryParam(queryParams.brand);
@@ -259,7 +259,7 @@ function ReviewForm({
       setFormValues(initialState);
       setPickerLabels({});
 
-      handleShowTostOnNextPage();
+      handleShowToastOnNextPage();
       setGlobalToastMessage(toastMessages[TOAST_TYPE.SUCCESS]);
 
       router.push(prevRoute, prevUrl);

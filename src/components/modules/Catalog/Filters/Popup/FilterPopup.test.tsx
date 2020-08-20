@@ -4,6 +4,7 @@ import ReactModal from 'react-modal';
 
 import { emptyCatalogProductsMock } from '~/components/pages/CatalogPage/CatalogPage.mock';
 import * as CatalogProductsContext from '~/context/CatalogProducts.context';
+import * as GlobalToastContext from '~/context/GlobalToast.context';
 import * as ModalContext from '~/context/Modal.context';
 import * as SiteGlobalsContext from '~/context/SiteGlobals.context';
 import { SiteCatalogFilterListPresentationStyleEnum } from '~/data/models/SiteCatalogFilterList';
@@ -44,6 +45,7 @@ const tree = (
 describe('FilterPopup', () => {
   beforeAll(async () => {
     await preloadAll();
+    (GlobalToastContext as any).useGlobalToastContext = jest.fn(() => ({}));
     (SiteGlobalsContext as any).useSiteGlobalsContext = jest.fn(() => ({}));
     (CatalogProductsContext as any).useCatalogProductsContext = jest.fn(
       () => ({}),

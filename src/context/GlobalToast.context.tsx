@@ -8,7 +8,7 @@ export interface GlobalToastContextProps {
   globalToastMessage: JSX.Element | string;
   handleClearGlobalToastMessage: () => void;
   handleGlobalToastDismiss: () => void;
-  handleShowTostOnNextPage: () => void;
+  handleShowToastOnNextPage: () => void;
   isGlobalToastOpen: boolean;
   setGlobalToastMessage: (message: JSX.Element | string) => void;
 }
@@ -34,7 +34,7 @@ function useGlobalToastContextSetup() {
     setGlobalToastMessage('');
   }
 
-  function handleShowTostOnNextPage() {
+  function handleShowToastOnNextPage() {
     setShowToastOnNextPage(true);
   }
 
@@ -81,7 +81,7 @@ function useGlobalToastContextSetup() {
     globalToastMessage,
     handleClearGlobalToastMessage,
     handleGlobalToastDismiss,
-    handleShowTostOnNextPage,
+    handleShowToastOnNextPage,
     isGlobalToastOpen,
     setGlobalToastMessage,
   };

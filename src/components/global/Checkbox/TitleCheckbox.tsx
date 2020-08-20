@@ -1,7 +1,6 @@
 import TitleSelectorLabel from '~/components/global/TitleSelectorLabel/TitleSelectorLabel';
 
 import Checkbox from './Checkbox';
-import { useCheckboxManager } from './Checkbox.hooks';
 import styles from './Checkbox.styles';
 
 interface Props {
@@ -10,14 +9,14 @@ interface Props {
   defaultChecked?: boolean;
   description?: string | null;
   flair?: string | null;
-  handleChange?: (value: boolean) => void;
+  handleChange?: () => void;
   isDisabled?: boolean;
   label: string;
 }
 
 export default function TitleCheckbox({
   count = null,
-  defaultChecked,
+  checked,
   description,
   flair,
   isDisabled = false,
@@ -25,10 +24,6 @@ export default function TitleCheckbox({
   handleChange,
   ...rest
 }: Props) {
-  const { onChange, checked } = useCheckboxManager({
-    handleChange,
-    defaultChecked,
-  });
   return (
     <label
       css={[styles.titleRoot, checked ? styles.rootActive : styles.rootHover]}
@@ -42,7 +37,7 @@ export default function TitleCheckbox({
         css={styles.label}
       />
       <Checkbox
-        onChange={onChange}
+        onChange={handleChange}
         checked={checked}
         isDisabled={isDisabled}
         {...rest}

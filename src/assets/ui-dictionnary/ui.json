@@ -206,6 +206,7 @@
     }
   },
   "error": {
+    "generic": "Oops, something went wrong",
     "callCopy": "Please call {{number}} for sales or try to refresh this page.",
     "homeButtonLabel": "Take me home",
     "notFoundDescription": "Oops, looks like we took a <br />wrong turn somewhere.",

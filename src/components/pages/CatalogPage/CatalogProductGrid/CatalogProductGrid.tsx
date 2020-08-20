@@ -57,7 +57,6 @@ function CatalogProductGrid({
 
   const handleLoadMore = async () => {
     const newPage = currentPage + 1;
-    setCurrentPage(newPage);
     setScrollPosition(window.scrollY || window.pageYOffset);
 
     setDisplayedProducts([
@@ -68,8 +67,11 @@ function CatalogProductGrid({
     const siteCatalogProducts = await fetchNewProducts(newPage);
 
     if (!siteCatalogProducts) {
+      setDisplayedProducts(displayedProducts);
       return;
     }
+
+    setCurrentPage(newPage);
     const {
       siteCatalogProductsResultList,
       listResultMetadata,

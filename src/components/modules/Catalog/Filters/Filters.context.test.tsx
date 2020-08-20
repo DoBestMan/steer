@@ -4,6 +4,7 @@ import { act } from 'react-test-renderer';
 
 import { emptyCatalogProductsMock } from '~/components/pages/CatalogPage/CatalogPage.mock';
 import * as CatalogProductsContext from '~/context/CatalogProducts.context';
+import * as GlobalToastContext from '~/context/GlobalToast.context';
 import { SiteCatalogFilters } from '~/data/models/SiteCatalogFilters';
 
 import { CatalogFilterTypes, FilterContentTypes } from './Filter.types';
@@ -51,6 +52,7 @@ const renderFiltersContextSetupHook = () =>
 
 describe('useFiltersContextSetup', () => {
   beforeAll(() => {
+    (GlobalToastContext as any).useGlobalToastContext = jest.fn(() => ({}));
     (CatalogProductsContext as any).useCatalogProductsContext = jest.fn(
       () => mockCatalogContext,
     );
@@ -109,16 +111,16 @@ describe('useFiltersContextSetup', () => {
     expect(mockArgs.onPreviewFilters).toBeCalledTimes(1);
   });
 
-  test('applying a group of filters', () => {
+  test('applying a group of filters', async () => {
     const { result } = renderFiltersContextSetupHook();
 
-    act(() => {
-      result.current.createUpdateFilterGroup({
+    await act(async () => {
+      await result.current.createUpdateFilterGroup({
         value: {
           foo: 'bar',
         },
       })();
-      result.current.createUpdateFilterGroup({
+      await result.current.createUpdateFilterGroup({
         value: {
           foo: 'baz',
         },
@@ -132,10 +134,10 @@ describe('useFiltersContextSetup', () => {
     );
   });
 
-  test('applying a filter with multiple values', () => {
+  test('applying a filter with multiple values', async () => {
     const { result } = renderFiltersContextSetupHook();
 
-    act(() =>
+    await act(() =>
       result.current.createUpdateFilterGroup({
         value: {
           foo: 'bar',
@@ -148,17 +150,17 @@ describe('useFiltersContextSetup', () => {
     expect(result.current.filtersToApply).toHaveProperty('bar', 'baz');
   });
 
-  test('overwriting a value', () => {
+  test('overwriting a value', async () => {
     const { result } = renderFiltersContextSetupHook();
 
-    act(() =>
+    await act(() =>
       result.current.createUpdateFilterGroup({
         value: {
           foo: 'bar',
         },
       })(),
     );
-    act(() =>
+    await act(() =>
       result.current.createUpdateFilterGroup({
         value: {
           foo: 'baz',
@@ -170,17 +172,17 @@ describe('useFiltersContextSetup', () => {
     expect(result.current.filtersToApply).toHaveProperty('foo', 'baz');
   });
 
-  test('unchecking the last item in a group sets empty value in state', () => {
+  test('unchecking the last item in a group sets empty value in state', async () => {
     const { result } = renderFiltersContextSetupHook();
 
-    act(() =>
+    await act(() =>
       result.current.createUpdateFilterGroup({
         value: {
           foo: 'bar',
         },
       })(),
     );
-    act(() =>
+    await act(() =>
       result.current.createUpdateFilterGroup({
         value: {
           foo: 'bar',
@@ -194,9 +196,7 @@ describe('useFiltersContextSetup', () => {
   test('immediately revalidates when toggling a filter', async () => {
     const { result } = renderFiltersContextSetupHook();
 
-    await act(async () =>
-      result.current.createToggleFilterHandler({ foo: 'bar' })(),
-    );
+    await act(() => result.current.createToggleFilterHandler({ foo: 'bar' })());
 
     // immediately fetches
     expect(mockCatalogContext.handleUpdateResults).toHaveBeenCalledTimes(1);
@@ -209,7 +209,7 @@ describe('useFiltersContextSetup', () => {
   test('toggle filter', async () => {
     const { result } = renderFiltersContextSetupHook();
 
-    await act(async () =>
+    await act(() =>
       result.current.createToggleFilterHandler({
         foo: 'true',
       })(),
@@ -251,19 +251,19 @@ describe('useFiltersContextSetup', () => {
     expect(result.current.selectingFilter).toEqual(0);
   });
 
-  test('resetting a group of filters', () => {
+  test('resetting a group of filters', async () => {
     const { result } = renderFiltersContextSetupHook();
 
-    act(() => {
-      result.current.createUpdateFilterGroup({
+    await act(async () => {
+      await result.current.createUpdateFilterGroup({
         value: { foo: 'bar' },
       })();
-      result.current.createUpdateFilterGroup({
+      await result.current.createUpdateFilterGroup({
         value: { bar: 'baz' },
       })();
     });
 
-    act(() =>
+    await act(() =>
       result.current.createResetFiltersHandler(({
         filterGroups: [
           { items: [{ value: { foo: 'bar' } }] },
@@ -277,10 +277,10 @@ describe('useFiltersContextSetup', () => {
     expect(result.current.filtersToApply).toHaveProperty('bar', '');
   });
 
-  test('clearing filters to apply should reset data', () => {
+  test('clearing filters to apply should reset data', async () => {
     const { result } = renderFiltersContextSetupHook();
 
-    act(() => {
+    await act(() => {
       result.current.createUpdateFilterGroup({
         value: { bar: 'baz' },
       })();
@@ -291,6 +291,6 @@ describe('useFiltersContextSetup', () => {
     act(() => result.current.clearFiltersToApply());
 
     expect(result.current.filtersToApply).not.toHaveProperty('bar');
-    expect(mockArgs.onPreviewFilters).toBeCalledTimes(1);
+    expect(mockArgs.onPreviewFilters).toBeCalledTimes(2);
   });
 });
