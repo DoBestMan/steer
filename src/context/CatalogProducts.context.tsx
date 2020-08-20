@@ -173,7 +173,8 @@ function useContextSetup({
         includeUserRegion: true,
         includeUserZip: true,
         method: 'get',
-        query: { ...filters, ...pageParams },
+        // order is important, `pageParams` needs to override `query` values
+        query: { ...getStringifiedParams(query), ...filters, ...pageParams },
       });
 
       if (response.isSuccess) {
@@ -186,7 +187,7 @@ function useContextSetup({
       }
       // TODO: add UI error handling
     },
-    [siteCatalogProducts, endpoint, pageParams],
+    [siteCatalogProducts, endpoint, pageParams, query],
   );
 
   const fetchNewProducts = useCallback(
