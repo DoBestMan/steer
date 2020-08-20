@@ -1,11 +1,11 @@
 import { CSSObject } from '@emotion/core';
 
-import { COLORS, SPACING } from '~/lib/constants';
+import { COLORS } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const styles: CSSObject = {
   icon: {
-    marginLeft: SPACING.SIZE_05,
+    marginLeft: 7,
   },
   loadIndex: {
     fontWeight: 'normal',

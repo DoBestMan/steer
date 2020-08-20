@@ -120,7 +120,7 @@ function SizeButton({
         )}`}
       >
         <span css={styles.size}>
-          {size} <span css={styles.loadSpeedRating}>{loadSpeedRating}</span>
+          {size} <span css={styles.loadIndex}>{loadSpeedRating}</span>
         </span>
         <Icon name={ICONS.CHEVRON_DOWN} css={styles.icon} />
       </button>

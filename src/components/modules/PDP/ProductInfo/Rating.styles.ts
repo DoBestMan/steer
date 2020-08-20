@@ -12,6 +12,9 @@ const styles: StylesMap = {
   reviews: {
     alignItems: 'center',
     display: 'flex',
+    [MQ.M]: {
+      marginTop: 8,
+    },
   },
 };
 

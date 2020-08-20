@@ -18,8 +18,10 @@ const styles: StylesMap = {
     typography.primarySubhead,
     {
       color: COLORS.GLOBAL.ORANGE,
-      marginBottom: 3,
       whiteSpace: 'nowrap',
+      ':not(:only-child):last-of-type': {
+        marginBottom: 3,
+      },
     },
   ],
   prices: [

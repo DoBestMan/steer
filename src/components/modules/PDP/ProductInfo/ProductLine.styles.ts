@@ -1,10 +1,14 @@
-import { SPACING, StylesMap } from '~/lib/constants';
+import { MQ, SPACING, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
   brand: {
+    display: 'inline-block',
     marginBottom: SPACING.SIZE_05,
     span: typography.tertiaryHeadline,
+    [MQ.M]: {
+      marginBottom: SPACING.SIZE_10,
+    },
   },
   productName: typography.primaryHeadline,
   productNameLong: typography.secondaryHeadline,
