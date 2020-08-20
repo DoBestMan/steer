@@ -21,6 +21,10 @@ import { typography } from '~/styles/typography.styles';
 export const CAR_ROTATION_DURATION = 200;
 export const SCENERY_OR_WEATHER_DURATION = 400;
 export const TITLE_DURATION = TIME.MS300;
+export const TITLE_DELAY = {
+  S: 1750,
+  L: 1500,
+};
 const VEHICLE_CONTAINER_DURATION = {
   S: 3000,
   M: 4000,
@@ -31,19 +35,15 @@ export const animations = {
   /* eslint-disable sort-keys */
   [`title_${ENTERING}`]: {
     opacity: 0,
-    transform: 'translate3d(0, 20px, 0)',
   },
   [`title_${ENTERED}`]: {
     opacity: 1,
-    transform: 'translate3d(0, 0, 0)',
   },
   [`title_${EXITING}`]: {
     opacity: 1,
-    transform: 'translate3d(0, 0, 0)',
   },
   [`title_${EXITED}`]: {
     opacity: 0,
-    transform: 'translate3d(0, 20px, 0)',
   },
   [`scenery_${ENTERING}`]: {
     opacity: 0,
@@ -138,16 +138,25 @@ export const styles: StylesMap = {
   description: [
     typography.bodyCopy,
     {
-      transition: `all ${TIME.MS300}ms ${EASING.CUBIC_EASE_OUT} ${TIME.MS100}ms`,
+      transition: `opacity ${TITLE_DURATION}ms ${EASING.CUBIC_EASE_OUT}`,
+      transitionDelay: `${TITLE_DELAY.S}ms`,
+
+      [MQ.L]: {
+        transitionDelay: `${TITLE_DELAY.L}ms`,
+      },
       [MQ.XL]: typography.largeCopy,
     },
   ],
-
   eyebrow: {
     alignItems: 'baseline',
     display: 'inline-flex',
     marginBottom: SPACING.SIZE_10,
     transition: `all ${TIME.MS400}ms ${EASING.CUBIC_EASE_OUT}`,
+    transitionDelay: `${TITLE_DELAY.S}ms`,
+
+    [MQ.L]: {
+      transitionDelay: `${TITLE_DELAY.L}ms`,
+    },
   },
   scenery: {
     bottom: 0,
@@ -174,10 +183,14 @@ export const styles: StylesMap = {
     typography.jumboHeadline,
     {
       marginBottom: SPACING.SIZE_10,
-      transition: `all ${TIME.MS300}ms ${EASING.CUBIC_EASE_OUT} ${TIME.MS50}ms`,
+      transition: `opacity ${TITLE_DURATION}ms ${EASING.CUBIC_EASE_OUT}`,
+      transitionDelay: `${TITLE_DELAY.S}ms`,
 
       [MQ.M]: {
         marginBottom: SPACING.SIZE_20,
+      },
+      [MQ.L]: {
+        transitionDelay: `${TITLE_DELAY.L}ms`,
       },
 
       /* eslint-disable sort-keys */
