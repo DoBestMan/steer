@@ -6,7 +6,7 @@ import Carousel from '~/components/global/Carousel/Carousel';
 import Icon from '~/components/global/Icon/Icon';
 import { SiteCatalogSummaryTopPickItem } from '~/data/models/SiteCatalogSummaryTopPickItem';
 import { SiteCatalogSummaryTopPicksMore } from '~/data/models/SiteCatalogSummaryTopPicksMore';
-import { BREAKPOINTS, TIME } from '~/lib/constants';
+import { TIME } from '~/lib/constants';
 import { PRODUCT_IMAGE_TYPES } from '~/lib/constants/productImage.types';
 import { getScroll, subscribeScroll } from '~/lib/helpers/scroll';
 import { resetTranslateInstance, setTranslate } from '~/lib/helpers/translate';
@@ -15,7 +15,7 @@ import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
 
 import Title from './Title/Title';
-import { NB_SLIDES_PER_BP } from './TopPicks.constants';
+import { CAROUSEL_PARAMS } from './TopPicks.constants';
 import { styles } from './TopPicks.styles';
 import TopPicksItem from './TopPicksItem/TopPicksItem';
 import { TopPickItemsHeader } from './TopPicksItem/TopPicksItems.types';
@@ -186,99 +186,6 @@ function TopPicks({
     setModalOpened(false);
   }, [setModalOpened]);
 
-  const params = {
-    // Could use slidesPerView: NB_SLIDES_PER_BP[bp.bk], but seems better this way
-    // Adding  bunch of "extra" breakpoint because `spaceBetween` needs a fixed width
-    breakpoints: {
-      [BREAKPOINTS.S]: {
-        slidesPerView: NB_SLIDES_PER_BP.S,
-        spaceBetween: -150,
-      },
-      [320]: {
-        slidesPerView: NB_SLIDES_PER_BP.S,
-        spaceBetween: -100,
-      },
-      [375]: {
-        slidesPerView: NB_SLIDES_PER_BP.S,
-        spaceBetween: -150,
-      },
-      [450]: {
-        slidesPerView: NB_SLIDES_PER_BP.S,
-        spaceBetween: -230,
-      },
-      [500]: {
-        slidesPerView: NB_SLIDES_PER_BP.S,
-        spaceBetween: -250,
-      },
-      [BREAKPOINTS.M]: {
-        slidesPerView: NB_SLIDES_PER_BP.M,
-        spaceBetween: -250,
-      },
-      [650]: {
-        slidesPerView: NB_SLIDES_PER_BP.M,
-        spaceBetween: -300,
-      },
-      [750]: {
-        slidesPerView: NB_SLIDES_PER_BP.M,
-        spaceBetween: -350,
-      },
-      [850]: {
-        slidesPerView: NB_SLIDES_PER_BP.M,
-        spaceBetween: -400,
-      },
-      [920]: {
-        slidesPerView: NB_SLIDES_PER_BP.M,
-        spaceBetween: -450,
-      },
-      [BREAKPOINTS.L]: {
-        slidesPerView: NB_SLIDES_PER_BP.L,
-        spaceBetween: -500,
-      },
-      [1024]: {
-        slidesPerView: NB_SLIDES_PER_BP.L,
-        spaceBetween: -510,
-      },
-      [1100]: {
-        slidesPerView: NB_SLIDES_PER_BP.L,
-        spaceBetween: -550,
-      },
-      [BREAKPOINTS.XL]: {
-        slidesPerView: NB_SLIDES_PER_BP.XL,
-        spaceBetween: 0,
-      },
-    },
-    centeredSlides: true,
-    keyboard: {
-      enabled: true,
-      onlyInViewport: false,
-    },
-    longSwipesMs: 50,
-    longSwipesRatio: 0.1,
-    mousewheel: {
-      forceToAxis: true,
-    },
-    on: {
-      init() {
-        // give manually role attributes
-        const carouselContainerEl = document.querySelector(
-          '#top-picks-carousel .swiper-wrapper',
-        );
-        if (carouselContainerEl) {
-          carouselContainerEl.setAttribute('role', 'menubar');
-        }
-
-        const carouselSlideEls = document.querySelectorAll(
-          '#top-picks-carousel .swiper-slide',
-        );
-        for (let i = 0; i < carouselSlideEls.length; i++) {
-          carouselSlideEls[i].setAttribute('role', 'menuitem');
-        }
-      },
-    },
-    shortSwipes: false,
-    shouldSwiperUpdate: true,
-  };
-
   const currentOeModal = picks[currentIndex]
     ? picks[currentIndex].siteCatalogSummaryTopPickItemAdditionalInfo
     : null;
@@ -412,7 +319,7 @@ function TopPicks({
       </div>
 
       <div css={styles.carousel} id="top-picks-carousel">
-        <Carousel params={params} getSwiper={setSwiper}>
+        <Carousel params={CAROUSEL_PARAMS} getSwiper={setSwiper}>
           {carouselItems}
         </Carousel>
       </div>
