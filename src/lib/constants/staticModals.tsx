@@ -113,13 +113,7 @@ const STATIC_MODALS: Record<string, ModalData> = {
       },
       subtitle: 'Tires shipped for free to anywhere in the U.S.',
       title: 'Free shipping',
-      link: {
-        label: 'More info',
-        link: {
-          href: '/',
-          isExternal: false,
-        },
-      },
+      link: null,
       showSupportSection: true,
     },
     type: MODAL_DATA_TYPES.CONTENT,
@@ -156,7 +150,7 @@ const STATIC_MODALS: Record<string, ModalData> = {
       subtitle: null,
       image: null,
       link: {
-        label: 'Visit Our Contact Us Page',
+        label: 'Visit our Contact us page',
         link: {
           href: '/contact',
           isExternal: false,

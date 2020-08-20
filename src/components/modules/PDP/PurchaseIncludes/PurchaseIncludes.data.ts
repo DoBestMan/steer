@@ -3,11 +3,11 @@ import { STATIC_MODAL_IDS } from '~/lib/constants/staticModals';
 
 export const everyPurchaseIncludesData = [
   {
-    description: 'We accept unmounted tire returns within 30 days.',
+    description: 'Fast, free shipping on every tire we sell.',
     icon: ICONS.FREE_SHIPPING,
     linkLabel: 'Learn more',
     modalId: STATIC_MODAL_IDS.GLOBAL_FREE_SHIPPING,
-    title: 'Free Shipping',
+    title: 'Free shipping',
   },
   {
     description:
@@ -18,8 +18,7 @@ export const everyPurchaseIncludesData = [
     title: 'Support local businesses',
   },
   {
-    description:
-      'Sometimes things don’t go as planned. That’s why we accept returns of unmounted tires for up to 30 days.',
+    description: 'We accept unmounted tire returns within 30 days.',
     icon: ICONS.FREE_RETURNS,
     linkLabel: '30 day returns',
     modalId: STATIC_MODAL_IDS.GLOBAL_EASY_RETURN,
