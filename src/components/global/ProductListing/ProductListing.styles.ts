@@ -35,6 +35,7 @@ const styles: StylesMap = {
   brandLabel: [
     typography.largeCopy,
     {
+      display: 'block',
       fontWeight: 'bold',
       lineHeight: `${PRODUCT.BRAND_IMAGE_HEIGHT}px`,
 
