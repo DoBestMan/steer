@@ -12,15 +12,18 @@ import {
  * @param columns number of columns
  * @param includeExtraGutter adds and extra gutter after last column
  * @param includeContainerMargin adds and extra margin to compensate container margin
+ * @param customOperation additional custom operation
  */
 export function getColumnsCalc({
   breakpoint,
   columns = 1,
+  customOperation = '',
   includeContainerMargin,
   includeExtraGutter,
 }: {
   breakpoint: Breakpoint;
   columns: number;
+  customOperation?: string;
   includeContainerMargin?: boolean;
   includeExtraGutter?: boolean;
 }): string {
@@ -37,5 +40,5 @@ export function getColumnsCalc({
     ? ` + ${GRID_MARGIN[breakpoint]}px`
     : '';
 
-  return `calc((${container} - ${gutters}) / ${NB_COLUMNS[breakpoint]} * ${columns}${intermediaryGutters}${extraGutter}${extraContainerMargin})`;
+  return `calc(${customOperation}(${container} - ${gutters}) / ${NB_COLUMNS[breakpoint]} * ${columns}${intermediaryGutters}${extraGutter}${extraContainerMargin})`;
 }

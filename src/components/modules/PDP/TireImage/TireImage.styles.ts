@@ -1,3 +1,4 @@
+import { FULLSCREEN_PADDINGS } from '~/components/global/Modal/Modal.styles';
 import {
   BORDERS,
   COLORS,
@@ -8,9 +9,18 @@ import {
   StylesMap,
   Z_INDEX,
 } from '~/lib/constants';
+import { getColumnsCalc } from '~/lib/utils/grid';
 import { ratioToPercentage } from '~/lib/utils/number';
 
 export const CONSTANTS = {
+  CONTAINER_FULL_SCREEN: {
+    S: 25,
+    M: 60,
+    L: {
+      BOTTOM: 60,
+      TOP: 20,
+    },
+  },
   HEADER_HEIGHT: 75,
   THUMB_INNER_PADDINGS: {
     S: SPACING.SIZE_05,
@@ -97,14 +107,19 @@ const styles: StylesMap = {
   containerFullScreen: {
     /* eslint-disable sort-keys */
     '.swiper-container': {
-      height: `calc(100% - ${CONSTANTS.THUMB_MARGIN}px - ${CONSTANTS.THUMB_SIZES.S}px)`,
+      height: `calc(100% - ${CONSTANTS.THUMB_INNER_PADDINGS.S}px - ${CONSTANTS.THUMB_SIZES.S}px)`,
+      padding: `${CONSTANTS.CONTAINER_FULL_SCREEN.S}px 0`,
 
       [MQ.M]: {
-        height: `calc(100% - ${CONSTANTS.THUMB_MARGIN}px - ${CONSTANTS.THUMB_SIZES.M}px)`,
+        height: `calc(100% - ${CONSTANTS.THUMB_INNER_PADDINGS.M}px - ${CONSTANTS.THUMB_SIZES.M}px)`,
+        padding: `${CONSTANTS.CONTAINER_FULL_SCREEN.M}px 0`,
       },
 
       [MQ.L]: {
-        height: `calc(100% - ${CONSTANTS.THUMB_MARGIN}px - ${CONSTANTS.THUMB_SIZES.L}px)`,
+        border: 'none',
+        height: `calc(100% - ${CONSTANTS.THUMB_INNER_PADDINGS.L}px - ${CONSTANTS.THUMB_SIZES.L}px)`,
+        paddingBottom: CONSTANTS.CONTAINER_FULL_SCREEN.L.BOTTOM,
+        paddingTop: CONSTANTS.CONTAINER_FULL_SCREEN.L.TOP,
       },
     },
 
@@ -118,6 +133,19 @@ const styles: StylesMap = {
     margin: '0 auto',
     maxHeight: '100%',
     maxWidth: '100%',
+
+    [MQ.M]: {
+      maxWidth: getColumnsCalc({
+        breakpoint: 'M',
+        columns: 1, // half column on each side
+        customOperation: `100vw - ${FULLSCREEN_PADDINGS.RIGHT * 2}px - `,
+        includeContainerMargin: false,
+        includeExtraGutter: false,
+      }),
+    },
+    [MQ.L]: {
+      maxWidth: '100%',
+    },
   },
   imageComponentContainer: {
     display: 'flex',

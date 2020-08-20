@@ -44,5 +44,19 @@ describe('utils/grid', () => {
         'calc((100vw - 60px * 2 - 30px * 11) / 12 * 2 + 30px * 1 + 30px + 60px)',
       );
     });
+
+    it('returns a calc() with two columns, with gutter at the end and container margin, a prepended custom operation', () => {
+      expect(
+        getColumnsCalc({
+          breakpoint: 'L',
+          columns: 2,
+          customOperation: '0.5 * ',
+          includeContainerMargin: true,
+          includeExtraGutter: true,
+        }),
+      ).toEqual(
+        'calc(0.5 * (100vw - 60px * 2 - 30px * 11) / 12 * 2 + 30px * 1 + 30px + 60px)',
+      );
+    });
   });
 });
