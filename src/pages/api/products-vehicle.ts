@@ -28,6 +28,11 @@ export default async (
     if (isProductionDeploy()) {
       response.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
     }
+
+    if (!productsResponse.data) {
+      response.status(204).end();
+      return;
+    }
     response.json(productsResponse.data);
     return;
   }
