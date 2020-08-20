@@ -7,9 +7,13 @@ const styles: StylesMap = {
   brandImage: {
     width: 100,
     img: {
-      height: 20,
+      height: 17,
       float: 'right',
       width: 'auto',
+
+      [MQ.M]: {
+        height: 20,
+      },
     },
   },
   container: {
@@ -88,10 +92,10 @@ const styles: StylesMap = {
   heading: [
     typography.primaryHeadline,
     {
-      marginBottom: SPACING.SIZE_20,
+      marginBottom: SPACING.SIZE_10,
 
       [MQ.M]: {
-        marginBottom: SPACING.SIZE_40,
+        marginBottom: SPACING.SIZE_30,
       },
     },
   ],
@@ -99,10 +103,10 @@ const styles: StylesMap = {
   list: {
     '> li': {
       ':not(:last-child)': {
-        marginBottom: SPACING.SIZE_15,
+        marginBottom: SPACING.SIZE_05,
 
         [MQ.M]: {
-          marginBottom: SPACING.SIZE_20,
+          marginBottom: SPACING.SIZE_10,
         },
       },
       alignItems: 'flex-end',
