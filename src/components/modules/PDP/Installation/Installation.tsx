@@ -3,10 +3,8 @@ import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
-import Link from '~/components/global/Link/Link';
 import { SCENERIES } from '~/components/global/Scenery/Scenery.constants';
 import { useInViewport } from '~/hooks/useInViewport';
-import { THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import styles from './Installation.styles';
@@ -77,10 +75,7 @@ function Installation({
           gridRowL="4"
           css={styles.description}
         >
-          {ui('pdp.installation.description')}{' '}
-          <Link href="#" theme={THEME.LIGHT} css={styles.descriptionLink}>
-            {ui('pdp.installation.learnMore')}
-          </Link>
+          {ui('pdp.installation.description')}
         </GridItem>
       </Grid>
     </div>
