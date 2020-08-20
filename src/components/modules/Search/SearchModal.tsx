@@ -8,7 +8,8 @@ import { useSearchContext } from '~/components/modules/Search/Search.context';
 import { useSearchModalContext } from '~/components/modules/Search/SearchModal.context';
 import { useModalContext } from '~/context/Modal.context';
 import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
-import { MODAL_THEME } from '~/lib/constants';
+import { MODAL_THEME, TIME } from '~/lib/constants';
+import { getScroll } from '~/lib/helpers/scroll';
 
 import SearchPageLoading from './SearchPageLoading/SearchPageLoading';
 
@@ -16,6 +17,7 @@ const Search = dynamic(() => import('./Search'));
 
 function SearchModal() {
   const [showLoading, setShowLoading] = useState(false);
+  const scrollY = useRef(getScroll().y);
   const { isSearchOpen, toggleIsSearchOpen } = useSearchModalContext();
   const {
     addPastSearch,
@@ -60,6 +62,9 @@ function SearchModal() {
       return;
     }
 
+    // Move window back to original position (see handleAfterOpenModal function)
+    window.scrollTo(0, scrollY.current);
+
     // Clear search results and state when the modal closes
     clearSearchResults();
     setSearchState('');
@@ -97,6 +102,14 @@ function SearchModal() {
     }
   }, [isModalOpen, isSearchOpen]);
 
+  const handleAfterOpenModal = () => {
+    // Scroll to top in order to fix Android input bug (WCS-1542)
+    setTimeout(() => {
+      scrollY.current = getScroll().y;
+      window.scrollTo(0, 0);
+    }, TIME.MS500);
+  };
+
   return (
     <Modal
       contentLabel="Modal"
@@ -104,7 +117,8 @@ function SearchModal() {
       hasDefaultPadding={false}
       isFullscreen
       isOpen={isSearchOpen}
-      onClose={toggleIsSearchOpen}
+      onAfterOpen={handleAfterOpenModal}
+      onClose={handleCloseSearch}
       theme={MODAL_THEME.ORANGE}
     >
       <Search

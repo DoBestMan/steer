@@ -12,6 +12,7 @@ export interface Props {
   isHalfscreen?: boolean;
   isOpen: boolean;
   onAfterClose?: () => void;
+  onAfterOpen?: () => void;
   onBack?: () => void;
   onClose: () => void;
   theme?: MODAL_THEME;

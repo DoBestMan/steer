@@ -14,7 +14,7 @@ import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Loading from '~/components/global/Loading/Loading';
 import { useModalContext } from '~/context/Modal.context';
 import { SiteSearchResultGroup } from '~/data/models/SiteSearchResultGroup';
-import { ARIA_LIVE, KEYCODES, THEME } from '~/lib/constants';
+import { ARIA_LIVE, KEYCODES, THEME, TIME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import { InputQuery } from '../Search';
@@ -122,7 +122,9 @@ function SearchAutocomplete({
 
   useEffect(() => {
     if (focusOnMount) {
-      focusOnInput();
+      setTimeout(() => {
+        focusOnInput();
+      }, TIME.MS500);
     }
   }, [focusOnMount, focusOnInput]);
 
@@ -133,7 +135,9 @@ function SearchAutocomplete({
   }, [hasResults, isInputEmpty, results, searchState, shouldShowLoading]);
 
   useEffect(() => {
-    focusOnInput();
+    if (searchState) {
+      focusOnInput();
+    }
   }, [focusOnInput, searchState]);
 
   useEffect(() => {

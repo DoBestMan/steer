@@ -30,6 +30,7 @@ function Modal({
   isOpen,
   onBack,
   onAfterClose,
+  onAfterOpen,
   onClose,
   theme = MODAL_THEME.LIGHT,
 }: Props) {
@@ -45,6 +46,7 @@ function Modal({
       contentLabel={contentLabel}
       isOpen={isOpen}
       onAfterClose={onAfterClose}
+      onAfterOpen={onAfterOpen}
       onRequestClose={onClose}
       closeTimeoutMS={TIME.MS350}
       style={{
