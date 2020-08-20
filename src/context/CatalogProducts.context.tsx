@@ -72,6 +72,7 @@ function useContextSetup({
     await handleUpdateFilters(filters, withoutScroll);
     setDisplayedProducts([]);
     setIsLoading(false);
+    eventEmitters.setNavVisibility.emit({ isVisible: true });
   };
 
   // fetch site catalog products
