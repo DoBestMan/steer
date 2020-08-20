@@ -101,7 +101,6 @@ export const styles: StylesMap = {
   },
   brand: {
     color: COLORS.GLOBAL.WHITE,
-    marginBottom: SPACING.SIZE_20,
   },
   brandLabel: {
     fontSize: BRAND_LABEL_FONT_SIZE,
