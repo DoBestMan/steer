@@ -55,7 +55,7 @@ const styles: StylesMap = {
     },
   },
   label: [
-    typography.labelHeadlineLarge,
+    typography.secondaryHeadline,
     {
       color: COLORS.LIGHT.GRAY_70,
       left: 0,
