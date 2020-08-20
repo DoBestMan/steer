@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { useCallback, useEffect, useState } from 'react';
 
 import { SiteCatalogSortListItem } from '~/data/models/SiteCatalogSortListItem';
 import { SiteProductReviewsListingItem } from '~/data/models/SiteProductReviewsListingItem';
@@ -31,6 +32,20 @@ function usePaginationAndSort(
     tireCategory: (category && removeTireFromQueryParam(category)) || '',
     tireType: (type && removeTireFromQueryParam(type)) || '',
   };
+
+  const router = useRouter();
+
+  const updateRatingsAndSort = useCallback(() => {
+    setDisplayedRatings(reviewsList);
+    setSort(sortList);
+  }, [reviewsList, sortList]);
+
+  useEffect(() => {
+    router.events?.on('routeChangeComplete', updateRatingsAndSort);
+    return () => {
+      router.events?.off('routeChangeComplete', updateRatingsAndSort);
+    };
+  }, [router.events, updateRatingsAndSort]);
 
   const handleSeeMoreClick = async () => {
     const newPage = currentPage + 1;
