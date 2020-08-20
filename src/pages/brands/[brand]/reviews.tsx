@@ -9,7 +9,7 @@ import WithErrorPageHandling, {
 import { backendBootstrap } from '~/lib/backend/bootstrap';
 import { backendGetReviewListing } from '~/lib/backend/review-listing';
 import { validTiresQuery } from '~/lib/utils/regex';
-import { getStringifiedParams, validateRoute } from '~/lib/utils/routes';
+import { validateRoute } from '~/lib/utils/routes';
 import { removeTireFromQueryParam } from '~/lib/utils/string';
 
 const Reviews = WithErrorPageHandling(ReviewListingPage);
@@ -18,7 +18,7 @@ export const getServerSideProps: GetServerSideProps<PageResponse<
   ReviewListingServerData
 >> = async (context) => {
   backendBootstrap({ request: context.req });
-  const { brand, ...params } = context.query;
+  const { brand } = context.query;
   const isRouteValid = validateRoute(brand, validTiresQuery);
 
   if (!isRouteValid) {
@@ -27,14 +27,9 @@ export const getServerSideProps: GetServerSideProps<PageResponse<
   }
 
   const brandName = removeTireFromQueryParam(brand);
-
-  // Brand tire reviews accept params for sort, order and page
-  const queryParams = getStringifiedParams(params);
-
-  // Brand acts as a query param for the tire reviews end point so add it to the query params
-  queryParams.brand = brandName;
-
-  const tireReviews = await backendGetReviewListing({ query: queryParams });
+  const tireReviews = await backendGetReviewListing({
+    query: { brand: brandName },
+  });
 
   if (!tireReviews.reviewsList.length) {
     context.res.statusCode = 404;
