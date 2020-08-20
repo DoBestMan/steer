@@ -5,7 +5,7 @@ import { typography, typographyStyles } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
   brandImage: {
-    width: 100,
+    width: 200,
     img: {
       height: 17,
       float: 'right',
@@ -103,10 +103,10 @@ const styles: StylesMap = {
   list: {
     '> li': {
       ':not(:last-child)': {
-        marginBottom: SPACING.SIZE_05,
+        marginBottom: SPACING.SIZE_15,
 
         [MQ.M]: {
-          marginBottom: SPACING.SIZE_10,
+          marginBottom: SPACING.SIZE_20,
         },
       },
       alignItems: 'flex-end',

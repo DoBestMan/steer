@@ -56,13 +56,13 @@ export const MEASUREMENTS = {
   [STAGES.BUILD_IN]: {
     CONTENT_MIN_HEIGHT: {
       S: '40vh',
-      M: '35vh',
-      L: '33.33vh',
+      M: '36vh',
+      L: '36vh',
     },
     CONTENT_TOP: {
       S: 'max(60vh, 385px)',
-      M: 'max(65vh, 517px)',
-      L: 'max(66.6vh, 308px)',
+      M: 'max(64vh, 517px)',
+      L: 'max(64vh, 308px)',
     },
   },
   [STAGES.DATA_MOMENT]: {
@@ -73,8 +73,8 @@ export const MEASUREMENTS = {
     },
     CONTENT_TOP: {
       S: 'max(60vh, 260px)',
-      M: 'max(65vh, 425px)',
-      L: 'max(66.6vh, 408px)',
+      M: 'max(64vh, 425px)',
+      L: 'max(64vh, 408px)',
     },
   },
   [STAGES.RESULTS]: {
