@@ -17,7 +17,7 @@ export function mapDataToSizeFinder({
 
   const sizes = siteProductLineAvailableSizeList;
 
-  if (sizes?.length <= 1) {
+  if (sizes?.length <= 0) {
     return null;
   }
 
