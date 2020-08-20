@@ -143,9 +143,7 @@ export function useContextSetup({
    * done to solve an issue where the downstream components were
    * receiving the `hasLocalData: true` prop before the updated data.
    */
-  const { error, revalidate: revalidateSummary } = useApiDataWithDefault<
-    CatalogPageData['serverData']
-  >({
+  const { error } = useApiDataWithDefault<CatalogPageData['serverData']>({
     ...apiArgs,
     endpoint,
     options: {
@@ -163,20 +161,12 @@ export function useContextSetup({
   }
 
   useEffect(() => {
-    const handleResetSummary = async ({
-      comesFromSearch,
-    }: {
-      comesFromSearch: boolean;
-    }) => {
+    const handleResetSummary = () => {
       // Reset hasLocalData state on `useApiData` hook
       setSummaryState((summaryState) => ({
         ...summaryState,
         hasLocalData: false,
       }));
-
-      if (comesFromSearch) {
-        await revalidateSummary();
-      }
 
       // Reset scroll position to top
       window.scrollTo(0, 0);
@@ -187,7 +177,7 @@ export function useContextSetup({
     return () => {
       eventEmitters.newCatalogSearchQuery.off(handleResetSummary);
     };
-  }, [revalidateSummary]);
+  });
 
   /**
    * There will always be a LOADING stage when the user lands on the

@@ -10,7 +10,7 @@ import { CATALOG_ROUTES_REGEX, TIME } from '~/lib/constants';
 import { eventEmitters } from '~/lib/events/emitters';
 import { scrollTo } from '~/lib/helpers/scroll';
 import debounce from '~/lib/utils/debounce';
-import { isInRouteRegexList } from '~/lib/utils/routes';
+import { isInRouteRegexList, isSamePath } from '~/lib/utils/routes';
 
 import InitialSearch from './InitialSearch';
 import { useInputQuery } from './Search.hooks';
@@ -238,7 +238,7 @@ function Search({
       }
 
       // If user clicks on the same search query, just close the modal
-      const isNewSearchQuery = action.link.href !== router.asPath;
+      const isNewSearchQuery = !isSamePath(action.link.href, router.asPath);
       if (isNewSearchQuery) {
         const isCatalogSearchQuery = isInRouteRegexList(
           action.link.href,

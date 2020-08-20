@@ -1,3 +1,4 @@
+import isStrictEqual from 'fast-deep-equal';
 import { ServerResponse } from 'http';
 import queryString, { ParsedQuery } from 'query-string';
 
@@ -122,6 +123,22 @@ export function redirectToNotFound(response: ServerResponse) {
   response.statusCode = 302;
   response.end();
 }
+
+export const isSamePath = (a: string, b: string): boolean => {
+  const [pathnameA, queryA] = a.split('?');
+  const [pathnameB, queryB] = b.split('?');
+
+  if (pathnameA !== pathnameB) {
+    return false;
+  }
+
+  // Had to use a spread to convert the parsed queryString object into
+  // a primitive object, otherwise it does not work with `isStrictEqual`
+  return isStrictEqual(
+    { ...queryString.parse(queryA) },
+    { ...queryString.parse(queryB) },
+  );
+};
 
 export function validateRoute(
   param: string | string[],

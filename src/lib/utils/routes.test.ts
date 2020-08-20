@@ -8,6 +8,7 @@ import {
   isInRouteList,
   isInRouteRegexList,
   isRouteDiameterFormat,
+  isSamePath,
   trimSlash,
   validateRoute,
 } from './routes';
@@ -86,6 +87,39 @@ describe('utils/routes', () => {
       ).toBe(true);
       expect(
         isInRouteRegexList('/tire-sizes/14-5R10', CATALOG_ROUTES_REGEX),
+      ).toBe(true);
+    });
+  });
+
+  describe('isSamePath', () => {
+    it('returns true if the two given paths have the same pathname and query params', () => {
+      expect(isSamePath('/', '/')).toBe(true);
+      expect(isSamePath('/', '/vehicles/honda-tires/civic/2019')).toBe(false);
+      expect(
+        isSamePath(
+          '/vehicles/honda-tires/civic/2019',
+          '/vehicles/honda-tires/civic/2019',
+        ),
+      ).toBe(true);
+      expect(
+        isSamePath(
+          '/vehicles/honda-tires/civic/2019?tireSize=1-2-3&trim=Sport%20Sedan%20%26%20Coupe',
+          '/vehicles/honda-tires/civic/2019?tireSize=1-2-3&trim=Sport%20Sedan%20%26%20Coupe',
+        ),
+      ).toBe(true);
+      // different query params
+      expect(
+        isSamePath(
+          '/vehicles/honda-tires/civic/2019?tireSize=1-2-3&trim=Sport%20Sedan%20%26%20Coupe',
+          '/vehicles/honda-tires/civic/2019?tireSize=1-2-3',
+        ),
+      ).toBe(false);
+      // same query params, but different order
+      expect(
+        isSamePath(
+          '/vehicles/honda-tires/civic/2019?tireSize=1-2-3&trim=Sport%20Sedan%20%26%20Coupe',
+          '/vehicles/honda-tires/civic/2019?trim=Sport%20Sedan%20%26%20Coupe&tireSize=1-2-3',
+        ),
       ).toBe(true);
     });
   });
