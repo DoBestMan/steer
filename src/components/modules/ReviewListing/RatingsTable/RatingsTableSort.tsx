@@ -51,12 +51,13 @@ export default function RatingsTableSort({
     closeFilterDropdown();
   };
 
+  const copyKey = resultsCount === 1 ? 'reviews.result' : 'reviews.results';
+  const resultCopy = ui(copyKey, { number: resultsCount });
+
   return (
     <Grid>
       <GridItem css={styles.root}>
-        <p css={styles.results}>
-          {ui('catalog.filters.results', { number: resultsCount })}
-        </p>
+        <p css={styles.results}>{resultCopy}</p>
         {sortList && (
           <>
             <p css={styles.sortLabel}>{ui('catalog.filters.sortBy')} </p>

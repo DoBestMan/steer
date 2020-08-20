@@ -57,10 +57,14 @@ export default function SubFilters({
     applyFilters();
   }, [applyFilters, prevPriceFilter, priceFilter, filtersToApply]);
 
+  const copyKey =
+    resultsCount === 1 ? 'catalog.filters.result' : 'catalog.filters.results';
+  const resultCopy = ui(copyKey, { number: resultsCount });
+
   return (
     <div css={styles.root}>
       <p css={[styles.results, priceFilter && styles.decorator]}>
-        {ui('catalog.filters.results', { number: resultsCount })}
+        {resultCopy}
       </p>
       {priceFilter && (
         <PriceFilter

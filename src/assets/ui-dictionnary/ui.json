@@ -158,7 +158,8 @@
       "priceRangeLabel": "Price Range",
       "priceRange": "{{min}} to {{max}}",
       "reset": "Reset filters",
-      "results": "{{number}} results",
+      "result": "{{number}} filtered result",
+      "results": "{{number}} filtered results",
       "viewResults": "View {{number}} tires",
       "popularFilters": "Popular Filters"
     },
@@ -453,6 +454,8 @@
     "tireReviews": "{{tire}} Reviews",
     "viewTire": "View tire",
     "writeReview": "Write a review",
+    "result": "{{number}} result",
+    "results": "{{number}} results",
     "google": {
       "name": "{{number}} {{preposition}} Google Shopping",
       "preposition": "from"
