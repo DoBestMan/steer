@@ -19,7 +19,6 @@ const styles: StylesMap = {
       color: COLORS.GLOBAL.ORANGE,
       display: 'inline-flex',
       marginBottom: 7,
-      padding: `${SPACING.SIZE_05}px 7px`,
     },
   ],
   [SitePromotionStyleEnum.SitePromotionItemDefault]: {
@@ -29,15 +28,18 @@ const styles: StylesMap = {
     backgroundColor: COLORS.GLOBAL.BLACK,
     borderColor: COLORS.GLOBAL.BLACK,
     color: COLORS.GLOBAL.WHITE,
+    padding: `${SPACING.SIZE_05}px 7px`,
   },
   [SitePromotionStyleEnum.SitePromotionItemWhitePill]: {
     borderColor: COLORS.GLOBAL.ORANGE,
     color: COLORS.GLOBAL.ORANGE,
+    padding: `${SPACING.SIZE_05}px 7px`,
   },
   [SitePromotionStyleEnum.SitePromotionItemOrangePill]: {
     backgroundColor: COLORS.GLOBAL.ORANGE,
     borderColor: COLORS.GLOBAL.ORANGE,
     color: COLORS.GLOBAL.WHITE,
+    padding: `${SPACING.SIZE_05}px 7px`,
   },
   uppercase: {
     textTransform: 'uppercase',
