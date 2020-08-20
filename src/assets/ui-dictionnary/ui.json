@@ -1,5 +1,9 @@
 {
   "meta": {
+    "categoryPages": {
+      "title": "Shop for {{category}} Tires Online with Free Shipping",
+      "description": "Shop for the best {{category}} tires online by brand, type, and more at a low cost with fast and free shipping direct to you or one of our 10,000+ installation centers."
+    },
     "description": "Fast & Free Delivery! Shop for automotive tires online from over 300+ brands. Have them shipped to and installed at one of our 10,000+ installation centers, making the purchase and installation process painless and simple.",
     "title": "Buy Automotive Tires Online for Less",
     "tireDeals": {
@@ -75,7 +79,7 @@
   "breadcrumbs": {
     "home": "Home",
     "brands": "All brands",
-    "categories": "All categories",
+    "categories": "Shop by tire category",
     "types": "All types",
     "reviews": "Reviews",
     "tireReviews": "Tire reviews",
@@ -686,5 +690,10 @@
       "header": "Tires by performance",
       "subHeader": "We carry tires from every category to fit your driving and road conditions. Every tire has a specific use from performance tires to winter tires. Find tires by their specific use to ensure your get the right car or truck tires online.  Select your performance preference below to view the tire you're looking for."
     }
+  },
+  "categoryPage": {
+    "mostPopularBrandsHeadlineCopy": "<h2>Most popular brands</h2>",
+    "mostPopularTextCopy":"<p>Not sure where to start? View some of the most popular {{category}} tires on the road by top brands below:</p>",
+    "tireSizeBoardTitle": "<h3>Add your vehicle info or tire size to find the best {{category}} tire recommendation</h3>"
   }
 }

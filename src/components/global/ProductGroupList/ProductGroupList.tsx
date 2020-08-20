@@ -11,7 +11,7 @@ import { CSSStylesProp } from '~/lib/constants';
 import BaseLink from '../Link/BaseLink';
 import styles from './ProductGroupList.styles';
 
-interface ProductGroupListProps extends SiteCatalogProductGroupItem {
+export interface ProductGroupListProps extends SiteCatalogProductGroupItem {
   customHeaderStyles?: CSSStylesProp;
   customItemStyles?: CSSStylesProp;
   onClick?: (params: Record<string, string>) => void;
