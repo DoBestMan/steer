@@ -1,4 +1,4 @@
-import { COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
+import { COLORS, SPACING, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
@@ -29,10 +29,6 @@ const styles: StylesMap = {
     {
       color: COLORS.GLOBAL.WHITE,
       marginBottom: SPACING.SIZE_20,
-
-      [MQ.M]: {
-        marginBottom: SPACING.SIZE_40,
-      },
     },
   ],
 };
