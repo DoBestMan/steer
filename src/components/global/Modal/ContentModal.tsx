@@ -63,6 +63,7 @@ function ContentModal({
               isExternal={link.link.isExternal}
               theme={THEME.LIGHT}
               css={styles.link}
+              onClick={onClose}
             >
               {link.label}
             </Link>
