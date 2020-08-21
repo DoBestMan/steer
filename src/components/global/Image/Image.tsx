@@ -117,6 +117,7 @@ function Image({
             isLoaded && styles.isLoaded,
             ratio && responsive && styles.responsive,
           ]}
+          decoding="async"
           sizes={sizes}
           src={finalSrc}
           srcSet={finalSrcSet}
