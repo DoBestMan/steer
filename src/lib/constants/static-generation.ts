@@ -1,4 +1,4 @@
-/* eslint sort-keys: 0 */
+/* eslint-disable sort-keys */
 export const REVALIDATE = {
   INSTANT: 1,
   EVERY_MINUTE: 60,
@@ -7,4 +7,4 @@ export const REVALIDATE = {
   EVERY_HOUR: 3600,
   EVERY_DAY: 86400,
 };
-/* eslint sort-keys: 1 */
+/* eslint-enable sort-keys */

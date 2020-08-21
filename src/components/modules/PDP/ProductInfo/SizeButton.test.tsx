@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { fireEvent, render, screen } from '@testing-library/react';
 import preloadAll from 'jest-next-dynamic';
 import * as NextRouter from 'next/router';

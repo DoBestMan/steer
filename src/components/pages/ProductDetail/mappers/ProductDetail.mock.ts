@@ -1,5 +1,7 @@
 /* eslint-disable sort-keys */
 
+import { NextRouter } from 'next/dist/next-server/lib/router/router';
+
 import { SearchContextProps } from '~/components/modules/Search/Search.context';
 import { UserPersonalizationProps } from '~/context/UserPersonalization.context';
 import { SiteCatalogProductGroupItemEnum } from '~/data/models/SiteCatalogProductGroupList';
@@ -27,16 +29,16 @@ export const globalsMock = {
     value: '888123456',
   },
   siteTheme: 'light',
-} as any;
+};
 
-export const routerMock = {
+export const routerMock = ({
   asPath: '/brands/continental-tires/dh2',
   pathname: '/brands/[brand]/[productLine]',
   query: {
     brand: 'continental-tires',
     productLine: 'dh2',
   },
-} as any;
+} as unknown) as NextRouter;
 
 export const routerWithTireSizeMock = {
   asPath: '/brands/continental-tires/dh2',
@@ -46,7 +48,7 @@ export const routerWithTireSizeMock = {
     productLine: 'dh2',
     tireSize: '100-40r15',
   },
-} as any;
+};
 
 export const userPersonalizationContextMock: UserPersonalizationProps = {
   locationString: 'Brooklyn, NY',

@@ -1,4 +1,5 @@
 import { SIZE_CHECK_STATES } from '~/components/modules/PDP/Insights/Insights.types';
+import { UserPersonalizationProps } from '~/context/UserPersonalization.context';
 
 import { mapDataToInsights } from './insights';
 import {
@@ -98,8 +99,8 @@ describe('pages/ProductDetails/mappers/insights', () => {
         tireSize: '100-40r15',
         userPersonalization: {
           ...userPersonalizationContextMock,
-          vehicle: {} as any,
-        },
+          vehicle: {},
+        } as UserPersonalizationProps,
       }),
     ).toMatchObject({
       sizeCheckState: SIZE_CHECK_STATES.UNKNOWN,
