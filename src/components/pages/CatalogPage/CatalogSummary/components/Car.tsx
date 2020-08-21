@@ -40,7 +40,7 @@ function styledCarContainer({
   const backWheelTPTransitionDelay = hideCarBody ? 0 : TIMINGS.STAGE_TRANSITION;
 
   const scaleUpVector = getScaleVector(carId, bk);
-  const scaleUpTransform = `scale3d(${scaleUpVector}, ${scaleUpVector}, ${scaleUpVector})`;
+  const scaleUpTransform = `scale(${scaleUpVector})`;
 
   // Note: If not part of the loading interstitial (e.g. only when
   // transitioning from Search), all transitions are set to 'none'.
@@ -60,14 +60,14 @@ function styledCarContainer({
         width: WHEEL_WIDTH.L,
       },
     },
-
-    // By default, the "small" Car scales up on MD + LG brakpoints
-    transform: `scale3d(${DEFAULT_SCALE_VECTOR[bk]}, ${DEFAULT_SCALE_VECTOR[bk]}, ${DEFAULT_SCALE_VECTOR[bk]})`,
-    transformOrigin: '100% 100%',
-    transition: showLoadingInterstitial
-      ? `transform ${TIMINGS.STAGE_TRANSITION}ms ${EASING.CUBIC_EASE_IN_OUT}`
-      : 'none',
-    willChange: 'transform',
+    svg: {
+      // By default, the "small" Car scales up on MD + LG brakpoints
+      transform: `scale(${DEFAULT_SCALE_VECTOR[bk]})`,
+      transformOrigin: '100% 100%',
+      transition: showLoadingInterstitial
+        ? `transform ${TIMINGS.STAGE_TRANSITION}ms ${EASING.CUBIC_EASE_IN_OUT}`
+        : 'none',
+    },
   };
 
   const stageStyles: CSSStyles = {
@@ -77,6 +77,9 @@ function styledCarContainer({
         transition: showLoadingInterstitial
           ? `opacity ${TIMINGS.WHEEL_IN_OUT}ms ${EASING.CUBIC_EASE_IN_OUT} ${TIMINGS.STAGE_TRANSITION}ms`
           : 'none',
+      },
+      svg: {
+        transform: `${scaleUpTransform} translateX(${distanceFrontToRearWheel}px)`,
       },
       'svg .back-wheel': {
         opacity: 0,
@@ -96,19 +99,20 @@ function styledCarContainer({
           ? `opacity ${TIMINGS.WHEEL_IN_OUT}ms ${EASING.CUBIC_EASE_IN_OUT}`
           : 'none',
       },
-
-      transform: `${scaleUpTransform} translate3d(${distanceFrontToRearWheel}px, 0, 0)`,
     },
     [STAGES.RESULTS]: {
       '~ .back-wheel-img': {
         opacity: 0,
-        transform: `translate3d(-${
+        transform: `translateX(-${
           scaleUpVector *
           (distanceFrontToRearWheel - carDetails.distanceFrontToFrontWheel)
-        }px, 0, 0)`,
+        }px)`,
         transition: showLoadingInterstitial
           ? `transform ${TIMINGS.STAGE_TRANSITION}ms ${EASING.CUBIC_EASE_IN_OUT}, opacity ${TIMINGS.WHEEL_IN_OUT}ms ${EASING.CUBIC_EASE_IN_OUT} ${backWheelTPTransitionDelay}ms`
           : 'none',
+      },
+      svg: {
+        transform: `${scaleUpTransform} translateX(${carDetails.distanceFrontToFrontWheel}px)`,
       },
       'svg .back-wheel': {
         opacity: 0,
@@ -119,8 +123,6 @@ function styledCarContainer({
       'svg .front-wheel': {
         opacity: 0,
       },
-
-      transform: `${scaleUpTransform} translate3d(${carDetails.distanceFrontToFrontWheel}px, 0, 0)`,
     },
   };
 
