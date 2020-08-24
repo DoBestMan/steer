@@ -35,7 +35,7 @@ const initialState = {
   [FIELDS.FIRST_NAME]: '',
   [FIELDS.LAST_NAME]: '',
   [FIELDS.MESSAGE]: '',
-  [FIELDS.ORDER_NUMBER]: '',
+  [FIELDS.ORDER_NUMBER]: null,
   [FIELDS.PHONE_NUMBER]: '',
   [FIELDS.SUBJECT]: null,
   [FIELDS.FILE]: null,
@@ -64,10 +64,7 @@ function SendMessageForm({ selections }: Props) {
     !!formValues[FIELDS.FIRST_NAME] &&
     !!formValues[FIELDS.LAST_NAME] &&
     !!formValues[FIELDS.MESSAGE] &&
-    !!formValues[FIELDS.PHONE_NUMBER] &&
-    !!formValues[FIELDS.PHONE_NUMBER] &&
-    !!formValues[FIELDS.ORDER_NUMBER] &&
-    !!formValues[FIELDS.SUBJECT];
+    !!formValues[FIELDS.PHONE_NUMBER];
 
   useEffect(() => {
     setIsFormValid(hasRequiredFieldFilled);

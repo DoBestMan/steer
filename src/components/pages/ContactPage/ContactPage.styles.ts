@@ -1,7 +1,8 @@
-import { StylesMap } from '~/lib/constants';
+import { SPACING, StylesMap } from '~/lib/constants';
 
 export const styles: StylesMap = {
-  openTemplatePageContainer: {
+  root: {
     height: '100%',
+    marginBottom: SPACING.SIZE_60,
   },
 };

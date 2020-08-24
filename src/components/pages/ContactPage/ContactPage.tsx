@@ -14,9 +14,7 @@ import CustomerSupportForm from './CustomerSupportForm/CustomerSupportForm';
 
 function ContactPage() {
   return (
-    <div
-      css={[styles.openTemplatePageContainer, navigationBreadcrumbPaddingTop]}
-    >
+    <div css={[styles.root, navigationBreadcrumbPaddingTop]}>
       {contactPageUpperData.metadata && contactPageUpperData.metadata.meta && (
         <Meta {...contactPageUpperData.metadata.meta} />
       )}
