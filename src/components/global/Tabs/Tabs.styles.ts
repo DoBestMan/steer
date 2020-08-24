@@ -35,7 +35,7 @@ const styles: StylesMap = {
   ],
   tabs: {
     display: 'flex',
-    marginBottom: SPACING.SIZE_30,
+    marginBottom: SPACING.SIZE_20,
   },
   panel: {
     '&[aria-hidden="true"]': {
