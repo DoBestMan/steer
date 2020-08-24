@@ -51,7 +51,7 @@ function BrandTirePage({
   }
 
   return (
-    <div css={[navigationBreadcrumbPaddingTop]}>
+    <div css={[navigationBreadcrumbPaddingTop, styles.spacingBottom60]}>
       <Grid>
         <GridItem gridColumnL={'2/14'} gridColumnXL={'4/12'}>
           <Meta title={capitalize(`${brandName}`)} />
@@ -155,6 +155,7 @@ function BrandTirePage({
                     <Accordion
                       id={`${link.title}_${id}`}
                       items={convertGroupsToAccordionItems(link.groups)}
+                      linkTarget={'_self'}
                       theme={THEME.LIGHT}
                     />
                   )}
