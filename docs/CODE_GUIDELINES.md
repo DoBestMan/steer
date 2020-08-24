@@ -208,13 +208,7 @@ Use `<br />` to insert a line break inside the same HTML element without splitti
 
 ### Scrolling back to the top
 
-Next.js’ `Router.push` event doesn’t automatically scroll the window to the op on route change as `<Link>` does. To force this behavior the following can be added to the `Router.push` promise on each case that requires it: `.then(() => window.scrollTo(0, 0));`
-
-Example:
-
-```
- router.push([params]).then(() => window.scrollTo(0, 0));
-```
+Next.js’ `Router.push` event doesn’t automatically scroll the window to the top on route change as `<Link>` does. To force this behavior by default, we apply `window.scrollTo(0,0)` when `router.pathname` changes in `App.tsx`. We explicitly only do this for `pathname` and not `search` so that it's not triggered when applying query params for filters, for example.
 
 ## Typescript notes
 

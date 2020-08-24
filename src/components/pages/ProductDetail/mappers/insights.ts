@@ -133,12 +133,10 @@ export function mapDataToInsights({
       },
     );
 
-    router
-      .push(
-        ROUTE_MAP[ROUTES.VEHICLE_CATALOG],
-        `${interpolatedRoute}?trim=${vehicle.vehicleTrim}`,
-      )
-      .then(() => window.scrollTo(0, 0));
+    router.push(
+      ROUTE_MAP[ROUTES.VEHICLE_CATALOG],
+      `${interpolatedRoute}?trim=${vehicle.vehicleTrim}`,
+    );
   };
 
   return {

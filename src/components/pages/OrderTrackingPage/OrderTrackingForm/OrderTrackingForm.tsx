@@ -33,14 +33,10 @@ function OrderTrackingForm() {
 
   useEffect(() => {
     if (order && !hasError && !isLoadingOrder) {
-      router
-        .push({
-          pathname: ROUTE_MAP[ROUTES.ORDER_TRACKING_RESULT],
-          query: { orderId, zip: shippingZip },
-        })
-        .then(() => {
-          window.scrollTo(0, 0);
-        });
+      router.push({
+        pathname: ROUTE_MAP[ROUTES.ORDER_TRACKING_RESULT],
+        query: { orderId, zip: shippingZip },
+      });
     }
   });
 

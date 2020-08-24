@@ -69,6 +69,10 @@ function App({ children, ...rest }: Props) {
     }
   }, [isHomepage]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [router.pathname]);
+
   return (
     <div
       css={[styles.root, isHomepage && styles.rootWithOffWhiteBg]}
