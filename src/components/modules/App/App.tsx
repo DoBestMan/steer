@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic';
 import { ReactNode, useEffect, useRef } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
 import { Transition } from 'react-transition-group';
 import { TransitionStatus } from 'react-transition-group/Transition';
 
@@ -8,6 +9,7 @@ import {
   injectFeedbackifyScript,
 } from '~/components/global/Feedback/Feedback.utils';
 import FeedbackDynamic from '~/components/global/Feedback/FeedbackDynamic';
+import GlobalErrorFallback from '~/components/global/GlobalErrorFallback/GlobalErrorFallback';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import Layout from '~/components/global/Layout/Layout';
@@ -82,43 +84,45 @@ function App({ children, ...rest }: Props) {
       <a css={styles.skipToContent} href="#main">
         {ui('a11y.skipToMain')}
       </a>
-      <NavContextProvider>
-        <NavContainer isHomepage={isHomepage} />
-        <Layout>
-          <Transition appear in={!isInRouteTransition} timeout={TIME.MS400}>
-            {(containerTransitionState: TransitionStatus) => {
-              const appStyles = [
-                styles.component,
-                !skipPageTransition &&
-                  animations[`component_${containerTransitionState}`],
-              ];
+      <ErrorBoundary FallbackComponent={GlobalErrorFallback}>
+        <NavContextProvider>
+          <NavContainer isHomepage={isHomepage} />
+          <Layout>
+            <Transition appear in={!isInRouteTransition} timeout={TIME.MS400}>
+              {(containerTransitionState: TransitionStatus) => {
+                const appStyles = [
+                  styles.component,
+                  !skipPageTransition &&
+                    animations[`component_${containerTransitionState}`],
+                ];
 
-              return <div css={appStyles}>{children}</div>;
-            }}
-          </Transition>
-          {globalToastMessage && (
-            <Grid css={styles.globalToast}>
-              <GridItem gridColumnL="10/14" gridColumnXL="11/14">
-                <Toast
-                  isOpen={isGlobalToastOpen}
-                  handleClearMessage={handleClearGlobalToastMessage}
-                  onDismiss={handleGlobalToastDismiss}
-                >
-                  {globalToastMessage}
-                </Toast>
-              </GridItem>
-            </Grid>
-          )}
-        </Layout>
-      </NavContextProvider>
+                return <div css={appStyles}>{children}</div>;
+              }}
+            </Transition>
+            {globalToastMessage && (
+              <Grid css={styles.globalToast}>
+                <GridItem gridColumnL="10/14" gridColumnXL="11/14">
+                  <Toast
+                    isOpen={isGlobalToastOpen}
+                    handleClearMessage={handleClearGlobalToastMessage}
+                    onDismiss={handleGlobalToastDismiss}
+                  >
+                    {globalToastMessage}
+                  </Toast>
+                </GridItem>
+              </Grid>
+            )}
+          </Layout>
+        </NavContextProvider>
 
-      {!isHomepage && <FeedbackDynamic />}
+        {!isHomepage && <FeedbackDynamic />}
 
-      <FooterContainer />
+        <FooterContainer />
 
-      <SearchModal />
+        <SearchModal />
 
-      <LoadingBar isLoading={isRouteLoading} />
+        <LoadingBar isLoading={isRouteLoading} />
+      </ErrorBoundary>
     </div>
   );
 }

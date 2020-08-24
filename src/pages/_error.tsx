@@ -19,7 +19,7 @@ function Error({ statusCode }: Props) {
   const is404 = statusCode === 404;
   const description = is404
     ? ui('error.notFoundDescription')
-    : ui('error.erroDescription');
+    : ui('error.errorDescription');
 
   const callCopy = uiJSX('error.callCopy', {
     number: (

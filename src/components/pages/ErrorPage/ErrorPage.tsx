@@ -17,10 +17,19 @@ interface Props {
   copy?: string | JSX.Element;
   description: string;
   errorCode: string | number;
+  errorMessage?: string;
   hasHomeButton?: boolean;
+  hasRefreshButton?: boolean;
 }
 
-function ErrorPage({ copy, description, errorCode, hasHomeButton }: Props) {
+function ErrorPage({
+  copy,
+  description,
+  errorCode,
+  errorMessage,
+  hasHomeButton,
+  hasRefreshButton,
+}: Props) {
   // Push event to GA dataLayer if 404
   useEffect(() => {
     if (errorCode === 404 || errorCode === '404') {
@@ -29,7 +38,19 @@ function ErrorPage({ copy, description, errorCode, hasHomeButton }: Props) {
         page: document.location.pathname,
       });
     }
-  }, [errorCode]);
+
+    if (errorCode === 500 || errorCode === '500') {
+      GA.addToDataLayer({
+        event: 'is500',
+        page: document.location.pathname,
+        error: errorMessage,
+      });
+    }
+  }, [errorCode, errorMessage]);
+
+  function onReload() {
+    window.location.reload();
+  }
 
   return (
     <div css={[styles.root, navigationPaddingTop]}>
@@ -58,6 +79,16 @@ function ErrorPage({ copy, description, errorCode, hasHomeButton }: Props) {
                 style={BUTTON_STYLE.SOLID}
               >
                 {ui('error.homeButtonLabel')}
+              </Button>
+            )}
+
+            {hasRefreshButton && (
+              <Button
+                onClick={onReload}
+                css={styles.button}
+                style={BUTTON_STYLE.SOLID}
+              >
+                {ui('error.refreshButtonLabel')}
               </Button>
             )}
           </div>
