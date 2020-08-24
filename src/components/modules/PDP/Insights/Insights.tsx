@@ -1,4 +1,8 @@
-import dynamic from 'next/dynamic';
+/**
+ * Note: temporaily removing this for ST MVP launch.
+ * Refer to WCS-1590 for details.
+ */
+// import dynamic from 'next/dynamic';
 import { ReactNode } from 'react';
 import { Transition } from 'react-transition-group';
 import { ENTERED, TransitionStatus } from 'react-transition-group/Transition';
@@ -16,7 +20,11 @@ import styles from './Insights.styles';
 import { SIZE_CHECK_STATES } from './Insights.types';
 import InsightsItem from './InsightsItem';
 
-const DynamicFitButton = dynamic(() => import('./FitButton'));
+/**
+ * Note: temporaily removing this for ST MVP launch.
+ * Refer to WCS-1590 for details.
+ */
+// const DynamicFitButton = dynamic(() => import('./FitButton'));
 
 export interface InsightsProps {
   delivery?: string | null;
@@ -42,19 +50,23 @@ function RenderItem({ children }: { children: ReactNode }) {
 }
 
 function Insights({
-  make,
+  /**
+   * Note: temporaily removing this for ST MVP launch.
+   * Refer to WCS-1590 for details
+   */
+  // make,
+  // onFindTiresThatFit,
+  // onSelectAvailableOption,
+  // onUnselectVehicle,
+  // showFitBar,
+  // sizeCheckState,
+  // vehicle,
   delivery,
   handleChangeLocation,
-  onFindTiresThatFit,
-  onSelectAvailableOption,
-  onUnselectVehicle,
   insightItems = [],
   openDynamicModal,
   rebate,
-  sizeCheckState,
-  showFitBar,
   techSpecsAnchor,
-  vehicle,
   ...rest
 }: Props) {
   const { isLoading } = useProductDetailContext();
@@ -89,7 +101,11 @@ function Insights({
                 </button>
               </RenderItem>
             )}
-            {showFitBar && (
+            {/**
+             * Note: temporaily removing this for ST MVP launch.
+             * Refer to WCS-1590 for details.
+             */}
+            {/* {showFitBar && (
               <RenderItem>
                 <DynamicFitButton
                   make={make}
@@ -100,7 +116,7 @@ function Insights({
                   onUnselectVehicle={onUnselectVehicle}
                 />
               </RenderItem>
-            )}
+            )} */}
             {delivery && (
               <RenderItem>
                 <button

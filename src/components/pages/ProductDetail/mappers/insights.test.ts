@@ -85,7 +85,12 @@ describe('pages/ProductDetails/mappers/insights', () => {
     ).toMatchObject({
       sizeCheckState: SIZE_CHECK_STATES.UNKNOWN,
       vehicle: null,
-      showFitBar: true,
+      /**
+       * Note: temporaily modifying this for ST MVP launch.
+       * Refer to WCS-1590 for details
+       */
+      // showFitBar: true,
+      showFitBar: false,
     });
   });
 
@@ -105,7 +110,12 @@ describe('pages/ProductDetails/mappers/insights', () => {
     ).toMatchObject({
       sizeCheckState: SIZE_CHECK_STATES.UNKNOWN,
       vehicle: null,
-      showFitBar: true,
+      /**
+       * Note: temporaily modifying this for ST MVP launch.
+       * Refer to WCS-1590 for details
+       */
+      // showFitBar: true,
+      showFitBar: false,
     });
   });
 
@@ -121,7 +131,12 @@ describe('pages/ProductDetails/mappers/insights', () => {
       }),
     ).toMatchObject({
       sizeCheckState: SIZE_CHECK_STATES.DOES_NOT_FIT,
-      showFitBar: true,
+      /**
+       * Note: temporaily modifying this for ST MVP launch.
+       * Refer to WCS-1590 for details
+       */
+      // showFitBar: true,
+      showFitBar: false,
       vehicle: `${vehicle?.vehicleMake} ${vehicle?.vehicleModel} ${vehicle?.vehicleYear} ${vehicle?.vehicleTrim}`,
     });
   });
@@ -138,7 +153,12 @@ describe('pages/ProductDetails/mappers/insights', () => {
       }),
     ).toMatchObject({
       sizeCheckState: SIZE_CHECK_STATES.SIZE_FITS,
-      showFitBar: true,
+      /**
+       * Note: temporaily modifying this for ST MVP launch.
+       * Refer to WCS-1590 for details
+       */
+      // showFitBar: true,
+      showFitBar: false,
       vehicle: `${vehicle?.vehicleMake} ${vehicle?.vehicleModel} ${vehicle?.vehicleYear} ${vehicle?.vehicleTrim}`,
     });
   });
@@ -154,7 +174,12 @@ describe('pages/ProductDetails/mappers/insights', () => {
       }),
     ).toMatchObject({
       sizeCheckState: SIZE_CHECK_STATES.TIRE_LINE_FITS,
-      showFitBar: true,
+      /**
+       * Note: temporaily modifying this for ST MVP launch.
+       * Refer to WCS-1590 for details
+       */
+      // showFitBar: true,
+      showFitBar: false,
       vehicle: `${vehicle?.vehicleMake} ${vehicle?.vehicleModel} ${vehicle?.vehicleYear} ${vehicle?.vehicleTrim}`,
     });
   });
@@ -178,7 +203,12 @@ describe('pages/ProductDetails/mappers/insights', () => {
       }),
     ).toMatchObject({
       sizeCheckState: SIZE_CHECK_STATES.TIRE_LINE_DOES_NOT_FIT,
-      showFitBar: true,
+      /**
+       * Note: temporaily modifying this for ST MVP launch.
+       * Refer to WCS-1590 for details
+       */
+      // showFitBar: true,
+      showFitBar: false,
       vehicle: `${vehicle?.vehicleMake} ${vehicle?.vehicleModel} ${vehicle?.vehicleYear} ${vehicle?.vehicleTrim}`,
     });
   });

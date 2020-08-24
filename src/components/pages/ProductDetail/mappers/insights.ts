@@ -65,15 +65,16 @@ function getSizeCheckState({
 }
 
 export function mapDataToInsights({
-  isLoadingData,
+  /**
+   * Note: temporaily removing this for ST MVP launch.
+   * Refer to WCS-1590 for details.
+   */
+  // isLoadingData,
+  // siteProductLineSizeDetail,
   productDetail,
   rearSize,
   router,
-  siteProduct: {
-    siteProductInsights,
-    siteProductLineAvailableSizeList,
-    siteProductLineSizeDetail,
-  },
+  siteProduct: { siteProductInsights, siteProductLineAvailableSizeList },
   tireSize,
   userPersonalization,
 }: {
@@ -91,9 +92,15 @@ export function mapDataToInsights({
     !!vehicle &&
     !!Object.keys(vehicle)?.length &&
     vehicle.constructor === Object;
-  const showFitBar =
-    (!!tireSize && !!siteProductLineSizeDetail) ||
-    (hasVehicle && !isLoadingData);
+  const showFitBar = false;
+
+  /**
+   * Note: temporaily removing this for ST MVP launch.
+   * Refer to WCS-1590 for details.
+   */
+  // const showFitBar =
+  //   (!!tireSize && !!siteProductLineSizeDetail) ||
+  //   (hasVehicle && !isLoadingData);
   const sizeCheckState = getSizeCheckState({
     rearSize,
     siteProductLineAvailableSizeList,

@@ -3,7 +3,11 @@ import { useCallback } from 'react';
 import Link from '~/components/global/Link/Link';
 import TitleRadio from '~/components/global/Radio/TitleRadio';
 import { useModalContext } from '~/context/Modal.context';
-import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
+/**
+ * Note: temporaily removing this for ST MVP launch.
+ * Refer to WCS-1590 for details
+ */
+// import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
 import { SiteProductLineAvailableSizeItem } from '~/data/models/SiteProductLineAvailableSizeItem';
 import { THEME } from '~/lib/constants';
 import { STATIC_MODAL_IDS } from '~/lib/constants/staticModals';
@@ -22,7 +26,11 @@ export default function SizeFinder({
   sizes,
   onChange,
 }: SizeFinderProps) {
-  const { vehicle } = useUserPersonalizationContext();
+  /**
+   * Note: temporaily removing this for ST MVP launch.
+   * Refer to WCS-1590 for details
+   */
+  // const { vehicle } = useUserPersonalizationContext();
   const { openStaticModal } = useModalContext();
 
   const handleChange = useCallback(
@@ -61,11 +69,15 @@ export default function SizeFinder({
                 key={idx}
                 label={`${item.size} ${item.loadSpeedRating}`}
                 flair={
-                  (item.isFitForCurrentVehicle &&
+                  /**
+                   * Note: temporaily removing this for ST MVP launch.
+                   * Refer to WCS-1590 for details
+                   */
+                  /* (item.isFitForCurrentVehicle &&
                     vehicle &&
                     ui('pdp.sizeFinder.fits', {
                       make: vehicle?.vehicleMake,
-                    })) ||
+                    })) || */
                   undefined
                 }
                 onChange={handleChange}
