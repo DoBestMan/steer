@@ -63,7 +63,7 @@ describe('getBackendEnvVariables', () => {
   });
 
   test('production deploy', () => {
-    process.env.NOW_GITHUB_COMMIT_REF = 'master';
+    process.env.VERCEL_GITHUB_COMMIT_REF = 'master';
 
     expect(getBackendEnvVariables()).toEqual({
       backendEndpoint: URLS.MAIN_API_PRODUCTION,
@@ -75,7 +75,7 @@ describe('getBackendEnvVariables', () => {
   test.each(['dev', 'qa', 'uat', 'int-my-branch'])(
     'integration deploy - %s',
     (branch) => {
-      process.env.NOW_GITHUB_COMMIT_REF = branch;
+      process.env.VERCEL_GITHUB_COMMIT_REF = branch;
 
       expect(getBackendEnvVariables()).toEqual({
         backendEndpoint: URLS.MAIN_API_INTEGRATION,
@@ -88,7 +88,7 @@ describe('getBackendEnvVariables', () => {
   test.each(['mock-dev', 'mock-qa', 'my-branch'])(
     'mock deploy - %s',
     (branch) => {
-      process.env.NOW_GITHUB_COMMIT_REF = branch;
+      process.env.VERCEL_GITHUB_COMMIT_REF = branch;
 
       expect(getBackendEnvVariables()).toEqual({
         backendEndpoint: URLS.MAIN_API_MOCK,

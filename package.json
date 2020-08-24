@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "next dev",
     "checks": "yarn lint && yarn ts && yarn test",
-    "build": "if [[ ${NOW_GITHUB_COMMIT_REF} == \"\" || ${NOW_GITHUB_COMMIT_REF} == \"master\" ]]; then yarn build-prod; else yarn build-ci; fi",
+    "build": "if [[ ${VERCEL_GITHUB_COMMIT_REF} == \"\" || ${VERCEL_GITHUB_COMMIT_REF} == \"master\" ]]; then yarn build-prod; else yarn build-ci; fi",
     "build-ci": "next build && build-storybook -o public/storybook",
     "build-prod": "next build",
     "build-prod-profile": "next build --profile",

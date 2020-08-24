@@ -14,6 +14,7 @@ module.exports = withBundleAnalyzer({
     GTM_COOKIES_WIN: process.env.GTM_COOKIES_WIN,
     RECAPTCHA_SITE_KEY: process.env.RECAPTCHA_SITE_KEY,
     SHOW_FEEDBACK_TAB: process.env.SHOW_FEEDBACK_TAB,
+    VERCEL_GITHUB_COMMIT_REF: process.env.VERCEL_GITHUB_COMMIT_REF,
   },
   webpack: (config) => {
     config.module.rules.push({

@@ -16,7 +16,7 @@ describe('utils/legacy-routes', () => {
     });
 
     it('returns a production URL', () => {
-      process.env.NOW_GITHUB_COMMIT_REF = 'master';
+      process.env.VERCEL_GITHUB_COMMIT_REF = 'master';
 
       expect(getLegacyAccountURL()).toBe(`${URLS.ACCOUNT_PRODUCTION}`);
     });
@@ -102,7 +102,7 @@ describe('utils/legacy-routes', () => {
     });
 
     it('returns a production URL', () => {
-      process.env.NOW_GITHUB_COMMIT_REF = 'master';
+      process.env.VERCEL_GITHUB_COMMIT_REF = 'master';
 
       expect(
         getLegacyCheckoutURL({

@@ -209,11 +209,11 @@ now --prod
 
 ### `build` scripts
 
-`yarn build` has conditional behavior depending on the existence of `NOW_GITHUB_COMMIT_REF`, a ZEIT Now environment variable with the current Github branch.
+`yarn build` has conditional behavior depending on the existence of `VERCEL_GITHUB_COMMIT_REF`, a Vercel environment variable with the current Github branch.
 
-- If there's no `NOW_GITHUB_COMMIT_REF` variable because we are deploying from the command line, run `yarn build-prod`
-- If `NOW_GITHUB_COMMIT_REF` is master, run `yarn build-prod`
-- If `NOW_GITHUB_COMMIT_REF` is another else, run `yarn build-ci`
+- If there's no `VERCEL_GITHUB_COMMIT_REF` variable because we are deploying from the command line, run `yarn build-prod`
+- If `VERCEL_GITHUB_COMMIT_REF` is master, run `yarn build-prod`
+- If `VERCEL_GITHUB_COMMIT_REF` is another else, run `yarn build-ci`
 
 `build-prod` will create a Next.js build. `build-ci` will create a Next.js build containing storybook at the `/storybook` route.
 
