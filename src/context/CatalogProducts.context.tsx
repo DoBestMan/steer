@@ -11,7 +11,6 @@ import { SiteCatalogFilters } from '~/data/models/SiteCatalogFilters';
 import { SiteCatalogProductItem } from '~/data/models/SiteCatalogProductItem';
 import { SiteCatalogProducts } from '~/data/models/SiteCatalogProducts';
 import { useApiDataWithDefault } from '~/hooks/useApiDataWithDefault';
-import { TIME } from '~/lib/constants';
 import { eventEmitters } from '~/lib/events/emitters';
 import { fetchWithErrorHandling } from '~/lib/fetch';
 import { AsyncResponse } from '~/lib/fetch/index.types';
@@ -117,6 +116,10 @@ function useContextSetup({
   // appends filters to existing URL query params
   const handleUpdateFilters = useCallback(
     async (filters: Record<string, string>, withoutScroll) => {
+      if (!withoutScroll) {
+        scrollToGrid();
+      }
+
       const route = asPath.split('?');
       const params: Record<string, string> = {};
 
@@ -137,9 +140,6 @@ function useContextSetup({
 
       // revalidate with newly applied filters
       await revalidateProducts();
-      if (!withoutScroll) {
-        setTimeout(scrollToGrid, TIME.MS350);
-      }
     },
     [
       asPath,
