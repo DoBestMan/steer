@@ -7,6 +7,9 @@ const styles: CSSObject = {
   icon: {
     marginLeft: 7,
   },
+  iconNoSize: {
+    color: COLORS.GLOBAL.ORANGE,
+  },
   loadIndex: {
     fontWeight: 'normal',
   },

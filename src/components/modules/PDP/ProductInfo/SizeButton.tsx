@@ -95,7 +95,10 @@ function SizeButton({
           aria-label={`${label}, ${ui('pdp.productInfo.selectSizeLabel')}`}
         >
           <span css={styles.selectSize}>{label}</span>
-          <Icon name={ICONS.CHEVRON_DOWN} css={styles.icon} />
+          <Icon
+            name={ICONS.CHEVRON_DOWN}
+            css={[styles.icon, styles.iconNoSize]}
+          />
         </button>
         <RenderSizeFinder
           isOpen={isOpen}
