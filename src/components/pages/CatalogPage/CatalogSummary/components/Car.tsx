@@ -79,7 +79,7 @@ function styledCarContainer({
           : 'none',
       },
       svg: {
-        transform: `${scaleUpTransform} translateX(${distanceFrontToRearWheel}px)`,
+        transform: `${scaleUpTransform}`,
       },
       'svg .back-wheel': {
         opacity: 0,
@@ -99,6 +99,10 @@ function styledCarContainer({
           ? `opacity ${TIMINGS.WHEEL_IN_OUT}ms ${EASING.CUBIC_EASE_IN_OUT}`
           : 'none',
       },
+      transform: `translateX(${distanceFrontToRearWheel * scaleUpVector}px)`,
+      transition: showLoadingInterstitial
+        ? `transform ${TIMINGS.STAGE_TRANSITION}ms ${EASING.CUBIC_EASE_IN_OUT}`
+        : 'none',
     },
     [STAGES.RESULTS]: {
       '~ .back-wheel-img': {
@@ -112,7 +116,7 @@ function styledCarContainer({
           : 'none',
       },
       svg: {
-        transform: `${scaleUpTransform} translateX(${carDetails.distanceFrontToFrontWheel}px)`,
+        transform: `${scaleUpTransform}`,
       },
       'svg .back-wheel': {
         opacity: 0,
@@ -123,6 +127,12 @@ function styledCarContainer({
       'svg .front-wheel': {
         opacity: 0,
       },
+      transform: `translateX(${
+        carDetails.distanceFrontToFrontWheel * scaleUpVector
+      }px)`,
+      transition: showLoadingInterstitial
+        ? `transform ${TIMINGS.STAGE_TRANSITION}ms ${EASING.CUBIC_EASE_IN_OUT}`
+        : 'none',
     },
   };
 
