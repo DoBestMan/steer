@@ -23,11 +23,25 @@ const styles: StylesMap = {
   addToCartLoading: {
     position: 'absolute',
   },
+  decorator: {
+    ':before': {
+      padding: '0 2ch',
+      content: '"•"',
+      marginTop: 2,
+      fontSize: 6,
+    },
+
+    alignItems: 'center',
+    display: 'flex',
+  },
   dropdownIcon: {
     height: 5,
     marginLeft: SPACING.SIZE_05,
     marginTop: SPACING.SIZE_02,
     width: 8,
+  },
+  price: {
+    display: 'flex',
   },
   root: {
     alignItems: 'center',

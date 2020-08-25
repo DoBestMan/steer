@@ -416,7 +416,7 @@
       "changeQuantity": "{{quantity}} tire",
       "changeQuantityPlural": "{{quantity}} tires",
       "findYourSize": "Find your size",
-      "addToCart": "Add to cart  ∙  {{value}}",
+      "addToCart": "Add to cart{{value}}",
       "startingAtLabel": "Starting at {{value}}"
     },
     "faq": {

@@ -10,6 +10,7 @@ import { useUserPersonalizationContext } from '~/context/UserPersonalization.con
 import { THEME } from '~/lib/constants';
 import { formatDollars } from '~/lib/utils/string';
 import { ui } from '~/lib/utils/ui-dictionary';
+import { uiJSX } from '~/lib/utils/ui-dictionary-jsx';
 
 import styles from './ActionBar.styles';
 
@@ -130,9 +131,13 @@ function PDPActionBar({
             css={styles.addToCart}
             isDisabled={isAddingToCart}
           >
-            <span>
-              {ui('pdp.stickyBar.addToCart', {
-                value: formatDollars(price),
+            <span css={styles.price}>
+              {uiJSX('pdp.stickyBar.addToCart', {
+                value: (
+                  <span key="action-bar-price" css={styles.decorator}>
+                    {formatDollars(price)}
+                  </span>
+                ),
               })}
             </span>
             {isAddingToCart && (
@@ -175,8 +180,12 @@ function PDPActionBar({
             css={styles.addToCart}
           >
             <span>
-              {ui('pdp.stickyBar.addToCart', {
-                value: formatDollars(price),
+              {uiJSX('pdp.stickyBar.addToCart', {
+                value: (
+                  <span key="action-bar-price" css={styles.decorator}>
+                    {formatDollars(price)}
+                  </span>
+                ),
               })}
             </span>
             {isAddingToCart && (
