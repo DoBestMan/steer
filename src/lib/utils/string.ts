@@ -109,3 +109,8 @@ export function replaceAt(str: string, index: number, replacement: string) {
     str.substr(0, index) + replacement + str.substr(index + replacement.length)
   );
 }
+
+export function getUrlExtension(url: string): string {
+  const extension = url.split('.').pop();
+  return extension ? extension : url;
+}

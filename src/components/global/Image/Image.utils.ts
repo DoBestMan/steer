@@ -5,6 +5,7 @@ import {
   Transformations,
 } from '~/lib/utils/cloudinary/cloudinary.types';
 import { isTransformations } from '~/lib/utils/cloudinary/cloudinary.utils';
+import { getUrlExtension } from '~/lib/utils/string';
 
 const IS_CLIENT = typeof window !== 'undefined';
 /* eslint-disable  @typescript-eslint/no-explicit-any */
@@ -36,6 +37,8 @@ export function getSrcset(url: string, q?: TransformationArgs): string {
     queries = q as Record<string, Transformations | Array<Transformations>>;
   }
 
+  const extension = getUrlExtension(url);
+
   const srcset = Object.entries(queries)
     .map((query) => {
       const widthStr = query[0] !== 'all' ? query[0] : '';
@@ -47,7 +50,7 @@ export function getSrcset(url: string, q?: TransformationArgs): string {
       }
 
       // fetchFormat: auto, to fetch webp if no format given
-      if (!transform[0].fetchFormat) {
+      if (!transform[0].fetchFormat && extension !== 'svg') {
         transform[0].fetchFormat = FetchFormat.AUTO;
       }
 
@@ -79,7 +82,9 @@ export function getSrcset(url: string, q?: TransformationArgs): string {
       }
 
       // Apply quality
-      transform[0].quality = quality;
+      if (extension !== 'svg') {
+        transform[0].quality = quality;
+      }
 
       const transformed = transformation(url, transform);
 
