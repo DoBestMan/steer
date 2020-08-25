@@ -144,7 +144,16 @@ export function useFiltersContextSetup({
           newState[key] = '';
         }
       });
-      setFiltersToApply(newState);
+      setIsPreviewLoading(true);
+      onPreviewFilters(newState)
+        .then(() => {
+          setFiltersToApply(newState);
+          setIsPreviewLoading(false);
+        })
+        .catch((e) => {
+          setGlobalToastMessage(e.message);
+          setIsPreviewLoading(false);
+        });
       // Apply reset filters automatically?
       // onApplyFilters(newState);
     },
