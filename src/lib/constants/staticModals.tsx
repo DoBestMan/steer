@@ -209,7 +209,7 @@ const STATIC_MODALS: Record<string, ModalData> = {
       link: {
         label: ui('roadHazard.linkLabel'),
         link: {
-          href: '/road_hazard',
+          href: '/road-hazard-warranty',
           isExternal: true,
         },
       },
