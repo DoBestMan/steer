@@ -48,7 +48,7 @@ function CatalogProductGrid({
 
   useEffect(() => {
     // Reset listing if displayedProducts has been reset (e.g. filters are applied)
-    if (displayedProducts.length === 0) {
+    if (displayedProducts.length === 0 && productList.length > 0) {
       setDisplayedProducts(productList);
       setCurrentPage(1);
       setNextProducts(pagination?.resultsPerPage);
