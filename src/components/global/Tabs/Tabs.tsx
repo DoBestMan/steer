@@ -16,10 +16,17 @@ interface Props {
   children: ReactNode;
   id: string; // To prevent duplicated ids (a11y)
   label?: string;
+  renderCurrentTabOnly?: boolean;
   tabsLabels: string[];
 }
 
-function Tabs({ tabsLabels, label, children, id }: Props) {
+function Tabs({
+  children,
+  id,
+  label,
+  renderCurrentTabOnly,
+  tabsLabels,
+}: Props) {
   const [currentTab, setCurrentTab] = useState(0);
   const [focusTab, setFocusTab] = useState(0);
   const [tabsRefs, setTabsRefs] = useState<RefObject<HTMLButtonElement>[]>([]);
@@ -119,6 +126,10 @@ function Tabs({ tabsLabels, label, children, id }: Props) {
       </div>
       {Children.map(children, (child, idx) => {
         const { buttonId, panelId } = getIds(idx);
+        const isVisible = currentTab === idx;
+        const shouldRenderChild = renderCurrentTabOnly
+          ? isVisible && child
+          : child;
 
         return (
           <div
@@ -126,10 +137,10 @@ function Tabs({ tabsLabels, label, children, id }: Props) {
             role="tabpanel"
             id={panelId}
             aria-labelledby={buttonId}
-            aria-hidden={currentTab !== idx}
+            aria-hidden={!isVisible}
             css={styles.panel}
           >
-            {child}
+            {shouldRenderChild && child}
           </div>
         );
       })}

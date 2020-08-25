@@ -87,6 +87,7 @@ function TechnicalSpecs({
       >
         <Tabs
           id="technical-specs"
+          renderCurrentTabOnly
           tabsLabels={[
             ui('pdp.technicalSpecs.technicalSpecs.tabLabel'),
             ui('pdp.technicalSpecs.tireSizes.tabLabel'),

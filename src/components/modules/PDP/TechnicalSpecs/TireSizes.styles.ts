@@ -4,7 +4,7 @@ import { typography } from '~/styles/typography.styles';
 const styles: StylesMap = {
   label: typography.primarySubhead,
   option: {
-    '&:not(:first-child)': {
+    '&:not(:first-of-type)': {
       marginTop: SPACING.SIZE_30,
     },
   },

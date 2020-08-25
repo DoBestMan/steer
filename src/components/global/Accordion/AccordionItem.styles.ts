@@ -79,7 +79,7 @@ const styles: StylesMap = {
   markdown: {
     a: links.dark,
     p: {
-      '&:not(:last-child)': {
+      '&:not(:last-of-type)': {
         marginBottom: '1em',
       },
     },
