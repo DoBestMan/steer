@@ -5,6 +5,7 @@ import {
   PRODUCT,
   SPACING,
   StylesMap,
+  TIME,
   Z_INDEX,
 } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
@@ -203,6 +204,7 @@ const styles: StylesMap = {
   shadow: {
     bottom: -21,
     left: 0,
+    opacity: 0,
     pointerEvents: 'none',
     position: 'absolute',
     width: '100%',
@@ -218,6 +220,7 @@ const styles: StylesMap = {
   },
   shadowHighlighted: {
     bottom: -36,
+    opacity: 0,
 
     [MQ.M]: {
       bottom: -42,
@@ -230,6 +233,10 @@ const styles: StylesMap = {
     [MQ.XL]: {
       bottom: -48,
     },
+  },
+  shadowLoaded: {
+    opacity: 1,
+    transition: `opacity ${TIME.MS350}ms ease`,
   },
   sticker: {
     left: -SPACING.SIZE_10,

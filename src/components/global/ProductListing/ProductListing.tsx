@@ -40,6 +40,7 @@ function ProductListing({
   isGrouped,
 }: ProductListingProps) {
   const [isHovered, setIsHovered] = useState(false);
+  const [hasImageLoaded, setHasImageLoaded] = useState(false);
   const displayImages = useMemo(() => getProductDisplayImages(imageList), [
     imageList,
   ]);
@@ -77,6 +78,10 @@ function ProductListing({
     setIsHovered(false);
   }
 
+  const handleImageLoad = () => {
+    setHasImageLoaded(true);
+  };
+
   return (
     <div
       css={[
@@ -104,8 +109,15 @@ function ProductListing({
           src={displayedImage.image.src}
           srcTransformationArgs={imageTransformations}
           noPlaceholder
+          onLoad={handleImageLoad}
         />
-        <div css={[styles.shadow, isHighlighted && styles.shadowHighlighted]}>
+        <div
+          css={[
+            styles.shadow,
+            isHighlighted && styles.shadowHighlighted,
+            hasImageLoaded && styles.shadowLoaded,
+          ]}
+        >
           <Image
             width={1400}
             height={800}

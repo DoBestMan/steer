@@ -14,6 +14,7 @@ export interface ImageProps extends SiteImageExtended {
   as?: ReactType;
   height?: string | number;
   noPlaceholder?: boolean;
+  onLoad?: () => void;
   src: string;
   width?: string | number;
 }
@@ -25,6 +26,7 @@ function Image({
   responsive,
   height,
   loading = LOADING_OPTIONS.LAZY,
+  onLoad,
   src,
   srcSet,
   srcTransformationArgs,
@@ -70,6 +72,10 @@ function Image({
 
   function handleImageLoad() {
     setIsLoaded(true);
+
+    if (onLoad) {
+      onLoad();
+    }
   }
 
   // Use paddingBottom technique to create responsive container with correct size
