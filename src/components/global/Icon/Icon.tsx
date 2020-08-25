@@ -62,7 +62,10 @@ function Icon({ name, ...rest }: Props) {
   }, [iconContainerRef, showIcon, setShowIcon]);
 
   if (!iconObject) {
-    console.info(`<Icon />: ${name} is not part of the icon library`);
+    if (process.env.NODE_ENV === 'development') {
+      console.info(`<Icon />: ${name} is not part of the icon library`);
+    }
+
     return null;
   }
 
