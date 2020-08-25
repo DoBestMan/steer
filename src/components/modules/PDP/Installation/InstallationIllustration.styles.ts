@@ -8,7 +8,7 @@ const carEntrance = keyframes({
     right: '120%',
   },
   '100%': {
-    right: 116,
+    right: 136,
   },
 });
 
@@ -53,7 +53,7 @@ const shopEntrance = keyframes({
     right: -200,
   },
   '100%': {
-    right: 20,
+    right: 40,
   },
 });
 
@@ -76,9 +76,14 @@ const animate = (animationName: Keyframes, animationNameM?: Keyframes) => ({
 
 const styles: CSSObject = {
   car: {
-    bottom: -4,
+    bottom: -6,
     position: 'absolute',
     right: 116,
+
+    [MQ.XL]: {
+      bottom: 0,
+      transform: 'translateX(-180px)',
+    },
   },
   carAnimate: [
     animate(carEntrance),
@@ -91,13 +96,17 @@ const styles: CSSObject = {
     overflow: 'hidden',
   },
   scenery: {
-    backgroundSize: 'auto 80px',
+    backgroundSize: 'auto 75px',
     height: '100%',
     left: 0,
     opacity: 0.5,
     position: 'absolute',
     right: 0,
     top: 0,
+
+    [MQ.XL]: {
+      backgroundSize: 'auto 133px',
+    },
   },
   sceneryAnimate: animate(sceneryEntrance, sceneryEntranceM),
   shop: {
@@ -106,8 +115,15 @@ const styles: CSSObject = {
     bottom: 0,
     height: 83,
     position: 'absolute',
-    right: 20,
     width: 130,
+
+    [MQ.XL]: {
+      backgroundSize: 'contain',
+      height: 122,
+      right: 40,
+      transform: 'translateX(-90px)',
+      width: 205,
+    },
   },
   shopAnimate: animate(shopEntrance),
 };

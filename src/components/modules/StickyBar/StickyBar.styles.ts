@@ -123,7 +123,7 @@ const styles: StylesMap = {
     },
   },
   logo: {
-    maxHeight: 16,
+    height: 16,
     marginRight: SPACING.SIZE_40,
     width: 'auto',
   },

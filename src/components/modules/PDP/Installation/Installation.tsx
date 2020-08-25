@@ -40,7 +40,7 @@ function Installation({
           as="h3"
           gridColumn="start/5"
           gridColumnM="start/6"
-          gridColumnL="3/8"
+          gridColumnL="3/7"
           gridColumnXL="3/7"
           gridRowL="2/5"
           css={styles.title}

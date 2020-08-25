@@ -3,6 +3,7 @@ import { STROKE_WIDTH as CAR_STROKE_WIDTH } from '~/components/global/Car/Car.co
 import { CARS } from '~/components/global/Car/CarDetails.constants';
 import Scenary from '~/components/global/Scenery/Scenery';
 import { SCENERIES } from '~/components/global/Scenery/Scenery.constants';
+import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { COLORS } from '~/lib/constants';
 
 import { InstallationProps } from './Installation';
@@ -12,14 +13,15 @@ interface Props extends Pick<InstallationProps, 'vehicleType' | 'sceneryType'> {
   animateIn?: boolean;
 }
 
-const carScale = 0.8;
-
 function InstallationAnimation({
   vehicleType = CARS.AUDI_A6,
   sceneryType = SCENERIES.URBAN,
   animateIn,
   ...rest
 }: Props) {
+  const { lessThan } = useBreakpoints();
+  const carScale = lessThan.XL ? 0.8 : 1;
+
   return (
     <div css={styles.root} {...rest}>
       <Scenary

@@ -1,6 +1,6 @@
 import { CSSObject } from '@emotion/core';
 
-import { BORDERS, COLORS, MQ, SPACING } from '~/lib/constants';
+import { BORDERS, COLORS, GAP_COLUMNS, MQ, SPACING } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const styles: CSSObject = {
@@ -23,7 +23,7 @@ const styles: CSSObject = {
   ],
   illustration: {
     borderBottom: BORDERS.SOLID_GRAY_20_1PX,
-    height: 100,
+    height: 102,
     marginBottom: SPACING.SIZE_30,
     marginTop: SPACING.SIZE_60,
 
@@ -32,9 +32,10 @@ const styles: CSSObject = {
       marginTop: SPACING.SIZE_40,
     },
 
-    [MQ.L]: {
+    [MQ.XL]: {
+      height: 175,
       marginBottom: 0,
-      marginTop: SPACING.SIZE_100,
+      marginTop: SPACING.SIZE_70,
     },
   },
   subtitle: [
@@ -43,6 +44,7 @@ const styles: CSSObject = {
     {
       color: COLORS.LIGHT.GRAY_70,
       display: 'flex',
+      marginBottom: 3,
     },
   ],
   subtitleIcon: {
@@ -53,6 +55,10 @@ const styles: CSSObject = {
     typography.primaryHeadline,
     {
       color: COLORS.GLOBAL.BLACK,
+
+      [MQ.L]: {
+        marginRight: -GAP_COLUMNS.XL,
+      },
     },
   ],
 };

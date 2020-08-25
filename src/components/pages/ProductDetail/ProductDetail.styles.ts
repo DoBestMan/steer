@@ -55,7 +55,7 @@ const styles: StylesMap = {
     defaultSpacing('marginTop'),
     {
       [MQ.L]: {
-        marginTop: SPACING.SIZE_90,
+        marginTop: SPACING.SIZE_120,
       },
     },
   ],
