@@ -7,12 +7,12 @@ const styles: StylesMap = {
   brandImage: {
     width: 200,
     img: {
-      height: 17,
+      height: 10,
       float: 'right',
       width: 'auto',
 
       [MQ.M]: {
-        height: 20,
+        height: 14,
       },
     },
   },
