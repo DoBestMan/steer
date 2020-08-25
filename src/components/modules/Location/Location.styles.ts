@@ -1,5 +1,4 @@
 import { COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
-import { layout } from '~/styles/layout.styles';
 import { typography } from '~/styles/typography.styles';
 
 const GEOLOCATION_ICON_SIZE = {
@@ -74,9 +73,9 @@ export const styles: StylesMap = {
   },
   useCurrentLocationButton: [
     typography.labelHeadlineLarge,
-    layout.container,
     {
       alignItems: 'baseline',
+      display: 'flex',
     },
   ],
   useCurrentLocationContainer: {

@@ -9,7 +9,7 @@ const styles: StylesMap = {
     padding: `${SPACING.SIZE_02}px 0`,
   },
   listboxItem: [
-    typography.secondaryHeadline,
+    typography.labelHeadlineLarge,
     {
       position: 'relative',
     },
@@ -17,7 +17,10 @@ const styles: StylesMap = {
   listboxItemHighlight: {
     color: COLORS.LIGHT.GRAY_70,
   },
-  listboxItemSecondary: [typography.largeCopy, { marginLeft: SPACING.SIZE_10 }],
+  listboxItemSecondary: [
+    typography.bodyCopyTight,
+    { marginLeft: SPACING.SIZE_10 },
+  ],
   listboxItemSelected: {
     outline: BORDERS.FOCUS_STATE,
   },

@@ -34,7 +34,7 @@ const styles: StylesMap = {
   },
   errorMessage: typography.labelHeadlineLarge,
   input: [
-    typography.secondaryHeadline,
+    typography.labelHeadlineLarge,
     disableGlobalFocus,
     {
       backgroundColor: 'inherit',
@@ -55,7 +55,7 @@ const styles: StylesMap = {
     },
   },
   label: [
-    typography.secondaryHeadline,
+    typography.labelHeadlineLarge,
     {
       color: COLORS.LIGHT.GRAY_70,
       left: 0,
