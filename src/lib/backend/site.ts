@@ -6,6 +6,7 @@ import { SiteHero } from '~/data/models/SiteHero';
 import { SiteInsights } from '~/data/models/SiteInsights';
 import { SiteMenu } from '~/data/models/SiteMenu';
 import { SiteReviews } from '~/data/models/SiteReviews';
+import { SiteVehicles } from '~/data/models/SiteVehicles';
 
 import { fetch } from '../fetch';
 
@@ -67,6 +68,7 @@ export async function backendGetSiteDeals() {
   });
   return response;
 }
+
 export async function backendGetSiteBrands() {
   const response = await fetch<SiteBrands>({
     endpoint: '/v1/site/brands',
@@ -82,5 +84,16 @@ export async function backendGetSiteCategories() {
     includeAuthorization: true,
     method: 'get',
   });
+
+  return response;
+}
+
+export async function backendGetSiteVehicles() {
+  const response = await fetch<SiteVehicles>({
+    endpoint: '/v1/site/vehicles',
+    includeAuthorization: true,
+    method: 'get',
+  });
+
   return response;
 }

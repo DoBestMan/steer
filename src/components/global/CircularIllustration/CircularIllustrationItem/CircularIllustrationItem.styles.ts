@@ -8,6 +8,9 @@ const CIRCLE_SIZES = {
 };
 
 export const styles: StylesMap = {
+  baseLink: {
+    display: 'inline-block',
+  },
   byline: [
     typography.smallCopyTight,
     {

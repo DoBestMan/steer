@@ -41,6 +41,7 @@ export enum ROUTES {
   TYPE_LANDING = 'typeLanding',
   TYPE_REVIEWS = 'typeReviews',
   VEHICLE_CATALOG = 'vehicleCatalog',
+  VEHICLES = 'vehicles',
   WRITE_REVIEW = 'writeReview',
 }
 
@@ -102,6 +103,7 @@ export const ROUTE_MAP: { [routeName: string]: string } = {
   [ROUTES.MILITARY_DISCOUNT]: '/military-discount',
   [ROUTES.RETURNS]: '/returns-and-refunds',
   [ROUTES.TIRE_BUYING_GUIDE]: '/tire-buying-guide',
+  [ROUTES.VEHICLES]: '/vehicles',
 };
 
 export const CATALOG_ROUTES = [
@@ -140,4 +142,5 @@ export const ROUTE_LABELS: Record<string, string | null> = {
   [ROUTE_MAP[ROUTES.SITEMAP]]: ui('breadcrumbs.sitemap'),
   [ROUTE_MAP[ROUTES.VEHICLE_CATALOG]]: null,
   [ROUTE_MAP[ROUTES.WRITE_REVIEW]]: ui('breadcrumbs.writeReview'),
+  [ROUTE_MAP[ROUTES.VEHICLES]]: ui('breadcrumbs.vehicles'),
 };

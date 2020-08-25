@@ -27,7 +27,7 @@ function CircularIllustrationItem({
 }: CirclularIllustrationProps) {
   return (
     <div css={styles.root}>
-      <BaseLink href={link.href}>
+      <BaseLink href={link.href} css={styles.baseLink}>
         <div css={styles.graphic}>
           {highlight && (
             <div css={styles.tag}>

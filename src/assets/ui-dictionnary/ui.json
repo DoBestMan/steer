@@ -38,6 +38,10 @@
         }
       }
     },
+    "vehicleHub": {
+      "title": "Shop Online and Find Low-Cost Tires for Your Vehicle",
+      "description": "SimpleTire.com carries the OEM specific tires for nearly every vehicle. Select your vehicle make to find the best online tire prices for your vehicle."
+    },
     "reviewListingPages": {
       "title": "Reviews & Ratings for Tire Brands, Types & Categories",
       "description": "Search for reviews and tire quality ratings from actual consumers across tire brands, types, and categories to get first-hand feedback from people like you on the tires you need.",
@@ -86,7 +90,8 @@
     "tireReviewsTemp": "{{section}} reviews",
     "writeReview": "Write a review",
     "contact": "Customer support",
-    "sitemap": "Sitemap"
+    "sitemap": "Sitemap",
+    "vehicles": "Shop tires by vehicle"
   },
   "common": {
     "ellipsis": "...",
@@ -694,6 +699,16 @@
     "CategoryHubPage": {
       "header": "Tires by performance",
       "subHeader": "We carry tires from every category to fit your driving and road conditions. Every tire has a specific use from performance tires to winter tires. Find tires by their specific use to ensure your get the right car or truck tires online.  Select your performance preference below to view the tire you're looking for."
+    },
+    "vehicleHubPage": {
+      "header": "Shop by vehicle make",
+      "subHeader": "Every car and truck manufacturer has defined specific tires for each of their vehicles based on performance, fuel efficiency, and handling.",
+      "topVehicles": {
+        "title": "Top vehicles",
+        "subTitle": "We've identified some of the best tires for the most popular vehicles on the road today."
+      },
+      "popularMakesTitle": "Popular vehicle makes",
+      "allMakesTitle": "All vehicle makes"
     }
   },
   "categoryPage": {
