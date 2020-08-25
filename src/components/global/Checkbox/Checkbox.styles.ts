@@ -1,10 +1,27 @@
-import { BORDERS, COLORS, RADIUS, SPACING, StylesMap } from '~/lib/constants';
+import {
+  BORDERS,
+  COLORS,
+  MQ,
+  RADIUS,
+  SPACING,
+  StylesMap,
+} from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const INPUT_HEIGHT = 20;
 const INDICATOR_SIZE = 10;
 
 const styles: StylesMap = {
+  checkbox: {
+    display: 'flex',
+    paddingTop: SPACING.SIZE_01,
+    [MQ.M]: {
+      paddingTop: 4,
+    },
+    [MQ.L]: {
+      paddingTop: SPACING.SIZE_01,
+    },
+  },
   container: {
     border: BORDERS.SOLID_GRAY_LIGHT_1PX,
     borderRadius: RADIUS.RADIUS_5,

@@ -36,12 +36,14 @@ export default function TitleCheckbox({
         isDisabled={isDisabled}
         css={styles.label}
       />
-      <Checkbox
-        onChange={handleChange}
-        checked={checked}
-        isDisabled={isDisabled}
-        {...rest}
-      />
+      <div css={styles.checkbox}>
+        <Checkbox
+          onChange={handleChange}
+          checked={checked}
+          isDisabled={isDisabled}
+          {...rest}
+        />
+      </div>
     </label>
   );
 }

@@ -35,7 +35,7 @@ const styles: StylesMap = {
   label: [
     typography.secondaryHeadline,
     {
-      marginRight: SPACING.SIZE_02,
+      marginRight: SPACING.SIZE_05,
       [MQ.L]: typography.tertiaryHeadline,
     },
   ],
