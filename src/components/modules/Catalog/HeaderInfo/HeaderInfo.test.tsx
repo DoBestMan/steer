@@ -4,6 +4,7 @@ import preloadAll from 'jest-next-dynamic';
 
 import * as CatalogProductsContext from '~/context/CatalogProducts.context';
 import * as CatalogSummaryContext from '~/context/CatalogSummary.context';
+import * as GlobalToastContext from '~/context/GlobalToast.context';
 import * as PersonalizationContext from '~/context/UserPersonalization.context';
 import { UserPersonalization } from '~/data/models/UserPersonalization';
 import * as bootstrap from '~/lib/api/bootstrap';
@@ -57,6 +58,7 @@ describe('HeaderInfo', () => {
     (CatalogSummaryContext as any).useCatalogSummaryContext = jest.fn(
       () => ({}),
     );
+    (GlobalToastContext as any).useGlobalToastContext = jest.fn(() => ({}));
   });
 
   beforeEach(() => {
@@ -72,10 +74,12 @@ describe('HeaderInfo', () => {
     (CatalogProductsContext as any).useCatalogProductsContext = jest.fn(
       () => mockCatalogContext,
     );
-    const mockUpdateResults = jest.spyOn(
-      CatalogProductsContext.useCatalogProductsContext(),
-      'handleUpdateResults',
-    );
+    const mockUpdateResults = jest
+      .spyOn(
+        CatalogProductsContext.useCatalogProductsContext(),
+        'handleUpdateResults',
+      )
+      .mockResolvedValue();
     render(tree);
     const advancedViewButton = screen.queryByRole('switch') as HTMLElement;
     fireEvent.click(advancedViewButton);
@@ -95,10 +99,12 @@ describe('HeaderInfo', () => {
       ...mockCatalogContext,
       isAdvancedView: true,
     }));
-    const mockUpdateResults = jest.spyOn(
-      CatalogProductsContext.useCatalogProductsContext(),
-      'handleUpdateResults',
-    );
+    const mockUpdateResults = jest
+      .spyOn(
+        CatalogProductsContext.useCatalogProductsContext(),
+        'handleUpdateResults',
+      )
+      .mockResolvedValue();
     render(tree);
     const advancedViewButton = screen.queryByRole('switch') as HTMLElement;
     fireEvent.click(advancedViewButton);

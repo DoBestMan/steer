@@ -5,6 +5,7 @@ import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Link from '~/components/global/Link/Link';
 import Toggle from '~/components/global/Toggle/Toggle';
 import { useCatalogProductsContext } from '~/context/CatalogProducts.context';
+import { useGlobalToastContext } from '~/context/GlobalToast.context';
 import { LINK_ICON_POSITION, LINK_TYPES, THEME } from '~/lib/constants';
 import { scrollTo } from '~/lib/helpers/scroll';
 import { ui } from '~/lib/utils/ui-dictionary';
@@ -27,6 +28,7 @@ export default function HeaderInfo({
   sizeList = [],
   title,
 }: Props) {
+  const { setGlobalToastMessage } = useGlobalToastContext();
   const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
   function toggleLocation() {
     setIsLocationModalOpen(!isLocationModalOpen);
@@ -87,14 +89,15 @@ export default function HeaderInfo({
   }
 
   const onToggleView = async () => {
-    setIsAdvancedView(!isAdvancedView);
-    if (!isAdvancedView) {
-      await handleUpdateResults({ skipGroups: 'true' });
-    } else {
-      await handleUpdateResults({});
-    }
+    const newParams = isAdvancedView ? {} : { skipGroups: 'true' };
+    handleUpdateResults(newParams as Record<string, string>)
+      .then(() => {
+        setIsAdvancedView(!isAdvancedView);
+      })
+      .catch((e) => {
+        setGlobalToastMessage(e.message);
+      });
   };
-
   return (
     <>
       <div css={styles.header}>

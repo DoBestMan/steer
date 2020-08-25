@@ -27,7 +27,7 @@ export interface CatalogProductsContextProps {
   handleUpdateResults: (
     filters: Record<string, string>,
     withoutScroll?: boolean,
-  ) => void;
+  ) => Promise<void>;
   isAdvancedView: boolean;
   isLoading: boolean;
   onPreviewFilters: (filters?: Record<string, string>) => Promise<void>;
@@ -65,27 +65,37 @@ function useContextSetup({
   const [displayedProducts, setDisplayedProducts] = useState<
     SiteCatalogProductItem[]
   >([]);
+  const [productsData, setProductsData] = useState<
+    CatalogPageData['serverData']['siteCatalogProducts']
+  >(null);
 
   const handleUpdateResults = async (
     filters: Record<string, string>,
     withoutScroll?: boolean,
   ) => {
     setIsLoading(true);
-    await handleUpdateFilters(filters, withoutScroll);
-    setDisplayedProducts([]);
-    setIsLoading(false);
-    eventEmitters.setNavVisibility.emit({ isVisible: true });
+    const response = await handleUpdateFilters(filters, withoutScroll);
+    if (!response.isSuccess) {
+      setIsLoading(false);
+      throw new Error(ui('error.generic'));
+    } else {
+      setDisplayedProducts([]);
+      eventEmitters.setNavVisibility.emit({ isVisible: true });
+      setIsLoading(false);
+    }
   };
 
   // fetch site catalog products
-  const {
-    data: { siteCatalogProducts },
-    error: productsError,
-    revalidate: revalidateProducts,
-    isValidating,
-  } = useApiDataWithDefault<CatalogPageData['serverData']>({
+  const { error: productsError, isValidating } = useApiDataWithDefault<
+    CatalogPageData['serverData']
+  >({
     ...apiArgs,
     endpoint,
+    options: {
+      onSuccess: (data) => {
+        setProductsData(data?.siteCatalogProducts);
+      },
+    },
   });
 
   if (productsError) {
@@ -94,7 +104,7 @@ function useContextSetup({
   if (
     stage === STAGES.RESULTS &&
     shouldDisplayProductsError(siteCatalogSummary) &&
-    !siteCatalogProducts &&
+    !productsData &&
     !isValidating
   ) {
     throw new Error(
@@ -138,25 +148,32 @@ function useContextSetup({
         shallow: true,
       });
 
-      // revalidate with newly applied filters
-      await revalidateProducts();
+      setIsLoading(true);
+
+      const response: AsyncResponse<{
+        siteCatalogProducts: SiteCatalogProducts;
+      }> = await fetchWithErrorHandling({
+        endpoint,
+        includeUserRegion: true,
+        includeUserZip: true,
+        method: 'get',
+        query: { ...params, ...pageParams },
+      });
+
+      if (response.isSuccess) {
+        setIsLoading(false);
+        setProductsData(response.data.siteCatalogProducts);
+      }
+
+      return response;
     },
-    [
-      asPath,
-      pathname,
-      query,
-      pageParams,
-      push,
-      revalidateProducts,
-      scrollToGrid,
-    ],
+    [asPath, pathname, query, pageParams, push, scrollToGrid, endpoint],
   );
 
   // preview data and handler for open filter dropdowns
   const [previewFiltersData, setPreviewFiltersData] = useState({
-    totalMatches:
-      siteCatalogProducts?.listResultMetadata.pagination?.total || 0,
-    filters: siteCatalogProducts?.siteCatalogFilters || EMPTY_FILTERS,
+    totalMatches: productsData?.listResultMetadata.pagination?.total || 0,
+    filters: productsData?.siteCatalogFilters || EMPTY_FILTERS,
   });
 
   const onPreviewFilters = useCallback(
@@ -164,9 +181,8 @@ function useContextSetup({
       // data was previewed but closed before applying - reset to initial state
       if (!filters) {
         setPreviewFiltersData({
-          totalMatches:
-            siteCatalogProducts?.listResultMetadata.pagination?.total || 0,
-          filters: siteCatalogProducts?.siteCatalogFilters || EMPTY_FILTERS,
+          totalMatches: productsData?.listResultMetadata.pagination?.total || 0,
+          filters: productsData?.siteCatalogFilters || EMPTY_FILTERS,
         });
       }
 
@@ -192,7 +208,7 @@ function useContextSetup({
         filters: previewedProducts.siteCatalogFilters,
       });
     },
-    [siteCatalogProducts, endpoint, pageParams, query],
+    [productsData, endpoint, pageParams, query],
   );
 
   const fetchNewProducts = useCallback(
@@ -234,7 +250,7 @@ function useContextSetup({
     setDisplayedProducts,
     setIsAdvancedView,
     setIsLoading,
-    siteCatalogProducts,
+    siteCatalogProducts: productsData,
   };
 }
 
