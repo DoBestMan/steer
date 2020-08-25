@@ -197,7 +197,7 @@ function Autocomplete({
         break;
       case KEYCODES.ENTER:
         e.preventDefault();
-        if (hasResults) {
+        if (hasResults && activedescendant) {
           onItemSelected(selectedIndex);
         }
         break;
