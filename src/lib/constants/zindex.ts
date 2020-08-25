@@ -21,8 +21,8 @@ export enum Z_INDEX {
   TOP = zIndexBase['2'],
   // custom
   NAV = zIndexBase['5'],
-  GLOBAL_TOAST = zIndexBase['6'],
   MODAL = zIndexBase['9'],
+  GLOBAL_TOAST = zIndexBase['10'],
   GRID_HELPER = zIndexBase['10'],
   LOADING_BAR = zIndexBase['10'],
   SKIP_LINK = zIndexBase['10'],
