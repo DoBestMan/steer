@@ -4,9 +4,6 @@ import { randomString } from '~/lib/utils/string';
 
 export const GTM_CONSTANTS = {
   GTM_ID: process.env.GTM_ID || '',
-  GTM_AUTH: process.env.GTM_AUTH,
-  GTM_PREVIEW: process.env.GTM_PREVIEW,
-  GTM_COOKIES_WIN: process.env.GTM_COOKIES_WIN,
 };
 
 interface ExperimentCallback {

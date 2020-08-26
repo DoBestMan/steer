@@ -9,9 +9,6 @@ module.exports = withBundleAnalyzer({
   env: {
     GOOGLE_API_KEY: process.env.GOOGLE_API_KEY,
     GTM_ID: process.env.GTM_ID,
-    GTM_AUTH: process.env.GTM_AUTH,
-    GTM_PREVIEW: process.env.GTM_PREVIEW,
-    GTM_COOKIES_WIN: process.env.GTM_COOKIES_WIN,
     RECAPTCHA_SITE_KEY: process.env.RECAPTCHA_SITE_KEY,
     SHOW_FEEDBACK_TAB: process.env.SHOW_FEEDBACK_TAB,
     VERCEL_GITHUB_COMMIT_REF: process.env.VERCEL_GITHUB_COMMIT_REF,
