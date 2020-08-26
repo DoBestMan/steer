@@ -6,6 +6,6 @@ export function isProductionDeploy(): boolean {
 export function isIntegrationDeploy(): boolean {
   const deployRef = process.env.VERCEL_GITHUB_COMMIT_REF;
   return Boolean(
-    deployRef && /^dev$|^qa$|^uat$|^dev-st$|^int-/.test(deployRef),
+    deployRef && /^dev$|^qa$|^int-/.test(deployRef),
   );
 }

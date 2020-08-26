@@ -7,7 +7,6 @@ on:
     branches:
       - "int-*"
       - dev
-      - dev-st
 
 jobs:
   deploy-against-mock:

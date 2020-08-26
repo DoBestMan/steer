@@ -72,7 +72,7 @@ describe('getBackendEnvVariables', () => {
     });
   });
 
-  test.each(['dev', 'qa', 'uat', 'int-my-branch'])(
+  test.each(['dev', 'qa', 'int-my-branch'])(
     'integration deploy - %s',
     (branch) => {
       process.env.VERCEL_GITHUB_COMMIT_REF = branch;
