@@ -13,6 +13,7 @@ import {
   TIME,
   Z_INDEX,
 } from '~/lib/constants';
+import { typography } from '~/styles/typography.styles';
 
 import {
   TOP_CONTAINER_MIN_HEIGHT,
@@ -175,6 +176,12 @@ export const styles: StylesMap = {
       verticalAlign: 'inherit',
     },
   },
+  price: [
+    typography.topPicksPrice,
+    {
+      [MQ.XL]: typography.topPicksPrice,
+    },
+  ],
   pricesContainer: {
     display: 'block',
     marginTop: SPACING.SIZE_05,

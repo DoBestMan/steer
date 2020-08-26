@@ -287,7 +287,11 @@ function TopPicksItem(props: TopPickItemsProps) {
 
             {/* Price */}
             <span css={styles.pricesContainer}>
-              <Prices isLight priceList={priceList} />
+              <Prices
+                customPriceStyles={styles.price}
+                isLight
+                priceList={priceList}
+              />
             </span>
 
             {/* Product description */}
