@@ -179,7 +179,7 @@ function PDPActionBar({
             isDisabled={isAddingToCart}
             css={styles.addToCart}
           >
-            <span>
+            <span css={styles.price}>
               {uiJSX('pdp.stickyBar.addToCart', {
                 value: (
                   <span key="action-bar-price" css={styles.decorator}>

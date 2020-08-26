@@ -1,4 +1,5 @@
 import { COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
+import { getColumnsCalc } from '~/lib/utils/grid';
 import { typography } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
@@ -10,6 +11,12 @@ const styles: StylesMap = {
     },
     [MQ.XL]: {
       marginLeft: SPACING.SIZE_10,
+      maxWidth: getColumnsCalc({
+        breakpoint: 'XL',
+        columns: 3,
+        includeExtraGutter: false,
+        includeContainerMargin: false,
+      }),
     },
 
     ':disabled': {
