@@ -42,7 +42,7 @@ const styles: StylesMap = {
     typography.smallCopyTight,
     {
       color: COLORS.ORANGE.SHADE_85,
-      marginBottom: SPACING.SIZE_40,
+      marginBottom: SPACING.SIZE_30,
       textAlign: 'right',
 
       [MQ.M]: {
@@ -57,7 +57,7 @@ const styles: StylesMap = {
 
   dataMomentCtaWrapper: {
     '> *': {
-      marginBottom: SPACING.SIZE_10,
+      marginTop: SPACING.SIZE_10,
     },
     // eslint-disable-next-line sort-keys
     '> *:not(:first-of-type)': {
@@ -72,7 +72,6 @@ const styles: StylesMap = {
     flexDirection: 'column',
     flexWrap: 'wrap',
     justifyContent: 'flex-end',
-    marginBottom: SPACING.SIZE_15,
 
     [MQ.M]: {
       flexDirection: 'row',
