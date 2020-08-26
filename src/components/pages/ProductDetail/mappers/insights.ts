@@ -69,8 +69,9 @@ export function mapDataToInsights({
    * Note: temporaily removing this for ST MVP launch.
    * Refer to WCS-1590 for details.
    */
-  // isLoadingData,
   // siteProductLineSizeDetail,
+  error,
+  isLoadingData,
   productDetail,
   rearSize,
   router,
@@ -78,6 +79,7 @@ export function mapDataToInsights({
   tireSize,
   userPersonalization,
 }: {
+  error?: Error;
   isLoadingData: boolean;
   productDetail: ProductDetailContextProps;
   rearSize?: string;
@@ -85,7 +87,11 @@ export function mapDataToInsights({
   siteProduct: SiteProduct;
   tireSize?: string;
   userPersonalization: UserPersonalizationProps;
-}): Omit<InsightsProps, 'handleChangeLocation'> {
+}): Omit<InsightsProps, 'handleChangeLocation'> | null {
+  if (!isLoadingData && error) {
+    return null;
+  }
+
   const { changeSize } = productDetail;
   const { vehicle, unselectVehicle } = userPersonalization;
   const hasVehicle =

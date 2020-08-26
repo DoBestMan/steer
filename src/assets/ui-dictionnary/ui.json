@@ -317,6 +317,7 @@
       "changeSizeLabel": "Select another size",
       "crossSellDescription": "{{results}} other tires are available in this size:",
       "crossSellButtonLabel": "View all {{size}} tires",
+      "fetchError": "Oops, something went wrong! <br />Please try again.",
       "findMyTireSizeLabel": "How to find my size",
       "outOfStock": "Currently out of stock",
       "outOfStockDescription": "Check back soon or view other tires",

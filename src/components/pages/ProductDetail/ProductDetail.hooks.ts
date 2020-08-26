@@ -58,7 +58,7 @@ interface ResponseProps extends Pick<SiteProductLine, 'assetList'> {
   breadcrumbs: BreadcrumbsItem[];
   currentPath: string;
   faq: FAQProps;
-  insights: Omit<InsightsProps, 'handleChangeLocation'>;
+  insights: Omit<InsightsProps, 'handleChangeLocation'> | null;
   installation: InstallationProps | null;
   isLoading: boolean;
   isPLA: boolean;
@@ -179,6 +179,7 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
 
   const productInfo = mapDataToProductInfo({
     currentSizeIndex,
+    error,
     quantity,
     rearSize: queryParams.rearSize,
     router,
@@ -196,6 +197,7 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
     currentPath: asPath,
     faq: mapDataToFAQ({ siteProduct, globals }),
     insights: mapDataToInsights({
+      error,
       isLoadingData: isValidating,
       productDetail,
       rearSize: queryParams.rearSize,

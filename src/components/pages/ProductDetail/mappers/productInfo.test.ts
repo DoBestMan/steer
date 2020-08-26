@@ -225,4 +225,19 @@ describe('pages/ProductDetails/mappers/breadcrumbs', () => {
       isTireLine: true,
     });
   });
+
+  it('returns error in case of fetching issues', () => {
+    expect(
+      mapDataToProductInfo({
+        currentSizeIndex: -1,
+        error: new Error(),
+        quantity: { front: 2, rear: 2 },
+        router: routerMock,
+        siteProduct: siteProductMock,
+        siteProductReviews: siteProductReviewsMock,
+      }),
+    ).toMatchObject({
+      hasError: true,
+    });
+  });
 });

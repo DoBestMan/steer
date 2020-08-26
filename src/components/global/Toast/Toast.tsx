@@ -17,9 +17,9 @@ interface Props {
   autoDismiss?: boolean; // There should be no use cases with auto dismiss disabled, this prop is for testing
   children: ReactChild;
   customContainerStyles?: CSSStylesProp;
-  handleClearMessage: () => void;
+  handleClearMessage?: () => void;
   isOpen?: boolean;
-  onDismiss: () => void;
+  onDismiss?: () => void;
 }
 
 function Toast({
@@ -32,7 +32,7 @@ function Toast({
 }: Props) {
   useEffect(() => {
     if (autoDismiss && isOpen) {
-      const timer = setTimeout(() => onDismiss(), TIME.MS3000);
+      const timer = setTimeout(() => onDismiss && onDismiss(), TIME.MS3000);
       return () => clearTimeout(timer);
     }
     return;
@@ -55,15 +55,17 @@ function Toast({
         role="alert"
       >
         <span>{children}</span>
-        <Link
-          as={LINK_TYPES.BUTTON}
-          aria-hidden
-          aria-label={ui('common.toast.close')}
-          type="button"
-          css={styles.icon}
-          icon={ICONS.CLOSE}
-          onClick={onDismiss}
-        />
+        {onDismiss && (
+          <Link
+            as={LINK_TYPES.BUTTON}
+            aria-hidden
+            aria-label={ui('common.toast.close')}
+            type="button"
+            css={styles.icon}
+            icon={ICONS.CLOSE}
+            onClick={onDismiss}
+          />
+        )}
       </div>
     </CSSTransition>
   );

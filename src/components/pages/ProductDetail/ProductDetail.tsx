@@ -111,13 +111,15 @@ function ProductDetail({ serverData }: ProductDetailData) {
                 />
               </div>
             </GridItem>
-            <GridItem fullbleed css={styles.insights}>
-              <Insights
-                {...insights}
-                handleChangeLocation={toggleModal}
-                openDynamicModal={openDynamicModal}
-              />
-            </GridItem>
+            {insights && (
+              <GridItem fullbleed css={styles.insights}>
+                <Insights
+                  {...insights}
+                  handleChangeLocation={toggleModal}
+                  openDynamicModal={openDynamicModal}
+                />
+              </GridItem>
+            )}
           </Grid>
         </GridItem>
         {positionCuration1 && recirculation && (

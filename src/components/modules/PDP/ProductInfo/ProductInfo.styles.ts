@@ -1,4 +1,12 @@
-import { BORDERS, COLORS, MQ, SPACING, StylesMap, TIME } from '~/lib/constants';
+import {
+  BORDERS,
+  COLORS,
+  MQ,
+  SPACING,
+  StylesMap,
+  TIME,
+  Z_INDEX,
+} from '~/lib/constants';
 import { fadeIn } from '~/styles/animations.styles';
 import { typography } from '~/styles/typography.styles';
 
@@ -45,6 +53,14 @@ const styles: StylesMap = {
       },
     },
   ],
+  error: {
+    zIndex: Z_INDEX.FRONT,
+
+    [MQ.L]: {
+      marginTop: SPACING.SIZE_40,
+      width: '100%',
+    },
+  },
   loadIndex: {
     fontWeight: 'normal',
   },

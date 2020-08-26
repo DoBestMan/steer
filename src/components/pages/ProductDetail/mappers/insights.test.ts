@@ -212,4 +212,18 @@ describe('pages/ProductDetails/mappers/insights', () => {
       vehicle: `${vehicle?.vehicleMake} ${vehicle?.vehicleModel} ${vehicle?.vehicleYear} ${vehicle?.vehicleTrim}`,
     });
   });
+
+  it('returns null in case of fetching issues', () => {
+    expect(
+      mapDataToInsights({
+        error: new Error(),
+        isLoadingData: false,
+        productDetail: productDetailContextMock,
+        router: routerMock,
+        siteProduct: siteProductMock,
+        tireSize: '100-40r15',
+        userPersonalization: userPersonalizationContextMock,
+      }),
+    ).toBeNull();
+  });
 });

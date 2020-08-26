@@ -14,6 +14,7 @@ import { mapDataToRoadHazard } from './roadHazard';
 
 export function mapDataToProductInfo({
   currentSizeIndex,
+  error,
   quantity,
   siteProduct,
   siteProductReviews: { performanceRating, reviewsSource },
@@ -24,6 +25,7 @@ export function mapDataToProductInfo({
   tireSize,
 }: {
   currentSizeIndex: number;
+  error?: Error;
   quantity: { front: number; rear?: number };
   rearSize?: string;
   router: NextRouter;
@@ -111,6 +113,33 @@ export function mapDataToProductInfo({
   });
 
   const isTireLine = !tireSize;
+
+  if (error) {
+    return {
+      availableSizes,
+      brand: {
+        image:
+          (brandName.image && {
+            ...brandName.image,
+            src: transformSrcLogoToBlack(brandName.image.src),
+          }) ||
+          null,
+        label: brandName.label,
+      },
+      brandURL,
+      hasError: true,
+      isTireLine,
+      loadSpeedRating,
+      productName,
+      rating,
+      rearLoadSpeedRating,
+      rearPrice,
+      rearSize: rearSizeLabel,
+      roadHazard,
+      size: tireSizeLabel,
+      startingPrice,
+    };
+  }
 
   return {
     availableSizes,

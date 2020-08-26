@@ -1,12 +1,16 @@
 import dynamic from 'next/dynamic';
+import { useEffect, useState } from 'react';
 
+import Markdown from '~/components/global/Markdown/MarkdownDynamic';
 import { ContentModalProps } from '~/components/global/Modal/Modal.types';
 import { PromoTagProps } from '~/components/global/PromoTag/PromoTag';
 import PromoTagCarousel from '~/components/global/PromoTag/PromoTagCarousel';
+import Toast from '~/components/global/Toast/Toast';
 import { useProductDetailContext } from '~/components/pages/ProductDetail/ProductDetail.context';
 import { SiteCatalogBrand } from '~/data/models/SiteCatalogBrand';
 import { SitePrice } from '~/data/models/SitePrice';
 import { THEME } from '~/lib/constants';
+import { ui } from '~/lib/utils/ui-dictionary';
 
 import { SizeFinderProps } from '../SizeFinder/SizeFinder';
 import OutOfStock from './OutOfStock';
@@ -24,6 +28,7 @@ export interface ProductInfoProps {
   brand: SiteCatalogBrand;
   brandURL?: string;
   callForPricing?: boolean;
+  hasError?: boolean;
   isTireLine: boolean;
   loadSpeedRating?: string;
   price?: SitePrice | null;
@@ -58,7 +63,7 @@ function ProductInfo({
   brand,
   brandURL,
   callForPricing,
-  volatileAvailability,
+  hasError,
   isTireLine,
   loadSpeedRating,
   openDynamicModal,
@@ -76,8 +81,53 @@ function ProductInfo({
   size,
   sizeFinder,
   startingPrice,
+  volatileAvailability,
 }: Props) {
   const { isLoading } = useProductDetailContext();
+  const [shouldDisplayError, setShouldDisplayError] = useState(hasError);
+
+  function handleDismissError() {
+    setShouldDisplayError(false);
+  }
+
+  useEffect(() => {
+    setShouldDisplayError(hasError);
+  }, [setShouldDisplayError, hasError]);
+
+  if (!isLoading && hasError) {
+    return (
+      <>
+        <div css={styles.wrapper}>
+          <div css={styles.nameWrapper}>
+            <ProductLine
+              productName={productName}
+              brand={brand}
+              brandURL={brandURL}
+            />
+            <div css={!rating && styles.sizeNoRating}>
+              <DynamicSizeButton
+                availableSizes={availableSizes}
+                size={size}
+                loadSpeedRating={loadSpeedRating}
+                sizeFinder={sizeFinder}
+              />
+            </div>
+            <Rating rating={rating} />
+          </div>
+          <div css={styles.error}>
+            <Toast
+              isOpen={shouldDisplayError}
+              autoDismiss={false}
+              onDismiss={handleDismissError}
+            >
+              <Markdown>{ui('pdp.productInfo.fetchError')}</Markdown>
+            </Toast>
+          </div>
+        </div>
+      </>
+    );
+  }
+
   const isOutOfStock = (!price || callForPricing) && size;
 
   if (rearSize && rearPrice) {
