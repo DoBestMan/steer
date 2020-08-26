@@ -6,6 +6,7 @@ import { SiteHero } from '~/data/models/SiteHero';
 import { SiteInsights } from '~/data/models/SiteInsights';
 import { SiteMenu } from '~/data/models/SiteMenu';
 import { SiteReviews } from '~/data/models/SiteReviews';
+import { SiteTypes } from '~/data/models/SiteTypes';
 import { SiteVehicles } from '~/data/models/SiteVehicles';
 
 import { fetch } from '../fetch';
@@ -72,6 +73,14 @@ export async function backendGetSiteDeals() {
 export async function backendGetSiteBrands() {
   const response = await fetch<SiteBrands>({
     endpoint: '/v1/site/brands',
+    includeAuthorization: true,
+    method: 'get',
+  });
+  return response;
+}
+export async function backendGetSiteTypes() {
+  const response = await fetch<SiteTypes>({
+    endpoint: '/v1/site/types',
     includeAuthorization: true,
     method: 'get',
   });

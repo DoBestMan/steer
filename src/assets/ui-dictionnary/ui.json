@@ -10,6 +10,10 @@
       "title": "Tire Deals & Rebates from Goodyear, Bridgestone, Hankook & More",
       "description": "Find the latest Tire Deals from major name brands like Goodyear Tires and Bridgestone Tires that you can use right on the SimpleTire.com website when looking for tires online."
     },
+    "types": {
+      "title": "Shop for Different Tire Types Online",
+      "description": "SimpleTire carries every type of tire for all vehicles, from passenger to light truck, ATV/UTV, farm and agriculture, golf, commercial and more. Enjoy fast and free delivery to you or the local shop of your choice."
+    },
     "brands": {
       "brandsHub": {
         "title": "Shop For Tires by Brand and Manufacturer",
@@ -84,7 +88,7 @@
     "home": "Home",
     "brands": "All brands",
     "categories": "Shop by tire category",
-    "types": "All types",
+    "types": "Shop by tire types",
     "reviews": "Reviews",
     "tireReviews": "Tire reviews",
     "tireReviewsTemp": "{{section}} reviews",
@@ -696,6 +700,10 @@
       "popularBrandsHeaderCopy": "Popular Brands",
       "allBrandsHeaderCopy": "All Brands",
       "searchInputPlaceholder": "Search brands"
+    },
+    "typeHubPage": {
+      "header": "Shop by tire type",
+      "bodyData": "Planning for a summer road trip?  Or do you just have some extra yard work to do this weekend?  Whatever the application may be, we have the right tire for you.\n\n At SimpleTire we provide everything from ATV/UTV tires to golf cart tires and trailer tires.  Our vast selection of passenger and light truck tires is unmatched, and our prices are unbeaten.  We strive to give you the freedom of selection without the constraints of price.  Find more tires and save more money, every time, at SimpleTire.com."
     },
     "CategoryHubPage": {
       "header": "Tires by performance",
