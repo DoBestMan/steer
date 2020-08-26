@@ -80,8 +80,10 @@ export const styles: CSSObject = {
     display: 'flex',
     justifyContent: 'space-between',
     padding: 20,
+    position: 'relative',
     textAlign: 'left',
     width: '100%',
+    zIndex: Z_INDEX.FRONT,
 
     [MQ.M]: {
       padding: `${SPACING.SIZE_30}px ${SPACING.SIZE_20}px`,
