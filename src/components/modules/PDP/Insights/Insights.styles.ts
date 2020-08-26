@@ -27,7 +27,16 @@ const styles: StylesMap = {
       position: 'absolute',
       right: GAP_COLUMNS.S,
       top: 0,
-      zIndex: 1,
+      zIndex: Z_INDEX.FRONT,
+
+      [MQ.M]: {
+        left: GAP_COLUMNS.M,
+        right: GAP_COLUMNS.M,
+      },
+      [MQ.L]: {
+        left: GAP_COLUMNS.S,
+        right: GAP_COLUMNS.S,
+      },
     },
 
     // eslint-disable-next-line sort-keys
