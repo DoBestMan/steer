@@ -10,9 +10,6 @@ import { ui } from '~/lib/utils/ui-dictionary';
 import { layout } from '~/styles/layout.styles';
 
 export default function GlobalErrorFallback(props: FallbackProps) {
-  const copy = props.error
-    ? ui('error.errorMessage', { message: props.error.message })
-    : undefined;
   const errorCode = 500;
   const description = ui('error.generic');
 
@@ -28,7 +25,6 @@ export default function GlobalErrorFallback(props: FallbackProps) {
         </GridItem>
       </Grid>
       <ErrorPage
-        copy={copy}
         errorCode={errorCode}
         description={description}
         hasRefreshButton
