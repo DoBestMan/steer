@@ -14,6 +14,7 @@ export interface ImageProps extends SiteImageExtended {
   as?: ReactType;
   height?: string | number;
   noPlaceholder?: boolean;
+  onError?: () => void;
   onLoad?: () => void;
   src: string;
   width?: string | number;
@@ -26,6 +27,7 @@ function Image({
   responsive,
   height,
   loading = LOADING_OPTIONS.LAZY,
+  onError,
   onLoad,
   src,
   srcSet,
@@ -123,7 +125,7 @@ function Image({
             isLoaded && styles.isLoaded,
             ratio && responsive && styles.responsive,
           ]}
-          decoding="async"
+          onError={onError}
           sizes={sizes}
           src={finalSrc}
           srcSet={finalSrcSet}

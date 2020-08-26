@@ -41,6 +41,7 @@ function ProductListing({
 }: ProductListingProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [hasImageLoaded, setHasImageLoaded] = useState(false);
+  const [shouldDisplayAsset, setShouldDisplayAsset] = useState(true);
   const displayImages = useMemo(() => getProductDisplayImages(imageList), [
     imageList,
   ]);
@@ -81,6 +82,9 @@ function ProductListing({
   const handleImageLoad = () => {
     setHasImageLoaded(true);
   };
+  function onImageError() {
+    setShouldDisplayAsset(false);
+  }
 
   return (
     <div
@@ -103,32 +107,38 @@ function ProductListing({
             />
           </div>
         )}
-        <Image
-          widths={imageWidths}
-          altText={displayedImage.image.altText}
-          src={displayedImage.image.src}
-          srcTransformationArgs={imageTransformations}
-          noPlaceholder
-          onLoad={handleImageLoad}
-        />
-        <div
-          css={[
-            styles.shadow,
-            isHighlighted && styles.shadowHighlighted,
-            hasImageLoaded && styles.shadowLoaded,
-          ]}
-        >
-          <Image
-            width={1400}
-            height={800}
-            widths={imageWidths}
-            altText={''}
-            responsive
-            aria-hidden
-            src={SHADOW_SRC}
-            noPlaceholder
-          />
-        </div>
+        {shouldDisplayAsset && (
+          <>
+            <Image
+              widths={imageWidths}
+              altText={displayedImage.image.altText}
+              src={displayedImage.image.src}
+              srcTransformationArgs={imageTransformations}
+              noPlaceholder
+              onError={onImageError}
+              onLoad={handleImageLoad}
+            />
+
+            <div
+              css={[
+                styles.shadow,
+                isHighlighted && styles.shadowHighlighted,
+                hasImageLoaded && styles.shadowLoaded,
+              ]}
+            >
+              <Image
+                width={1400}
+                height={800}
+                widths={imageWidths}
+                altText={''}
+                responsive
+                aria-hidden
+                src={SHADOW_SRC}
+                noPlaceholder
+              />
+            </div>
+          </>
+        )}
       </div>
       <div css={[styles.info, isHighlighted && styles.infoHighlighted]}>
         {brand && (
