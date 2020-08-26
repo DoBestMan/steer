@@ -4,7 +4,6 @@ import { SwiperInstance } from 'react-id-swiper';
 import Carousel from '~/components/global/Carousel/Carousel';
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
-import { FULLSCREEN_PADDINGS as MODAL_PADDINGS } from '~/components/global/Modal/Modal.styles';
 import {
   SiteCatalogProductImage,
   SiteCatalogProductImageTypeEnum,
@@ -21,6 +20,7 @@ import { ui } from '~/lib/utils/ui-dictionary';
 import styles, { CONSTANTS } from './TireImage.styles';
 import TireImageCarouselItem from './TireImageCarouselItem';
 import TireImageThumbs from './TireImageThumbs';
+import { OUTER_PADDING } from './TireImageZoom.styles';
 
 function getItemWidth(
   imageItem: SiteCatalogProductImage | SiteYouTubeVideo,
@@ -110,7 +110,7 @@ function TireImageCarousel({
   setCurrentIndex,
 }: Props) {
   const [swiper, setSwiper] = useState<SwiperInstance>(null);
-  const { bk, windowHeight } = useBreakpoints();
+  const { bk, greaterThan, lessThan, windowHeight } = useBreakpoints();
   const [shouldPauseVideo, setShouldPauseVideo] = useState(false);
   const [wrapperRect, setWrapperRect] = useState<ClientRect | null>(null);
 
@@ -175,16 +175,26 @@ function TireImageCarousel({
     ? Math.round(wrapperRect?.width)
     : undefined;
 
-  // Can't use 100vh in this calculation as it doesn't take into
-  // account the bottom bar in mobile Safari.
-  const containerHeight = `calc(${windowHeight}px -  ${CONSTANTS.HEADER_HEIGHT}px - ${MODAL_PADDINGS.BOTTOM}px - ${MODAL_PADDINGS.TOP}px)`;
+  // We can't use 100vh in this calculation as it doesn't
+  // take into account the bottom bar in mobile Safari.
+  const fullScreenHeaderHeight = greaterThan.M
+    ? CONSTANTS.HEADER_HEIGHT.L
+    : CONSTANTS.HEADER_HEIGHT.S;
+  const fullScreenVerticalPadding = greaterThan.M
+    ? OUTER_PADDING.L
+    : lessThan.M
+    ? OUTER_PADDING.S.VERTICAL
+    : OUTER_PADDING.M;
+  const containerHeight = `calc(${windowHeight}px - ${fullScreenHeaderHeight}px - ${
+    fullScreenVerticalPadding * 2
+  }px)`;
 
   return (
     <div
       css={[
         styles.container,
         isFullscreen && { height: containerHeight },
-        isFullscreen && styles.containerFullScreen,
+        isFullscreen ? styles.containerFullScreen : styles.containerInline,
       ]}
     >
       <Carousel

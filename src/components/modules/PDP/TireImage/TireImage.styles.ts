@@ -12,6 +12,8 @@ import {
 import { getColumnsCalc } from '~/lib/utils/grid';
 import { ratioToPercentage } from '~/lib/utils/number';
 
+import { OUTER_PADDING } from './TireImageZoom.styles';
+
 export const CONSTANTS = {
   CONTAINER_FULL_SCREEN: {
     S: 25,
@@ -21,7 +23,10 @@ export const CONSTANTS = {
       TOP: 20,
     },
   },
-  HEADER_HEIGHT: 75,
+  HEADER_HEIGHT: {
+    S: 40,
+    L: 60,
+  },
   THUMB_INNER_PADDINGS: {
     S: SPACING.SIZE_05,
     M: SPACING.SIZE_10,
@@ -46,16 +51,7 @@ export const MAX_HEIGHT = {
 const styles: StylesMap = {
   container: {
     /* eslint-disable sort-keys */
-    marginBottom: SPACING.SIZE_15,
     position: 'relative',
-
-    [MQ.M]: {
-      marginBottom: SPACING.SIZE_20,
-    },
-
-    [MQ.L]: {
-      marginBottom: 0,
-    },
 
     '.swiper-wrapper': {
       alignItems: 'center',
@@ -106,6 +102,16 @@ const styles: StylesMap = {
   },
   containerFullScreen: {
     /* eslint-disable sort-keys */
+    marginBottom: OUTER_PADDING.S.VERTICAL,
+
+    [MQ.M]: {
+      marginBottom: OUTER_PADDING.M,
+    },
+
+    [MQ.L]: {
+      marginBottom: OUTER_PADDING.L,
+    },
+
     '.swiper-container': {
       height: `calc(100% - ${CONSTANTS.THUMB_INNER_PADDINGS.S}px - ${CONSTANTS.THUMB_SIZES.S}px)`,
       padding: `${CONSTANTS.CONTAINER_FULL_SCREEN.S}px 0`,
@@ -127,6 +133,16 @@ const styles: StylesMap = {
       height: '100%',
     },
     /* eslint-enable sort-keys */
+  },
+  containerInline: {
+    marginBottom: SPACING.SIZE_15,
+    [MQ.M]: {
+      marginBottom: SPACING.SIZE_20,
+    },
+
+    [MQ.L]: {
+      marginBottom: 0,
+    },
   },
   fullscreenContainer: {
     display: 'flex',
