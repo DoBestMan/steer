@@ -148,7 +148,7 @@ const styles: StylesMap = {
     display: 'flex',
     margin: '0 auto',
     maxHeight: '100%',
-    maxWidth: '100%',
+    maxWidth: `calc(100% - ${OUTER_PADDING.S.HORIZONTAL * 2}px)`,
 
     [MQ.M]: {
       maxWidth: getColumnsCalc({

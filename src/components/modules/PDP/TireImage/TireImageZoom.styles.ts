@@ -41,6 +41,8 @@ const styles: StylesMap = {
   },
   closeButton: {
     position: 'absolute',
+    right: OUTER_PADDING.S.HORIZONTAL,
+    top: OUTER_PADDING.S.VERTICAL,
 
     [MQ.M]: {
       right: SPACING.SIZE_30,
