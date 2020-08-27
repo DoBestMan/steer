@@ -129,7 +129,12 @@ const styles: StylesMap = {
 
   noResultsLinkWrapper: {
     '&:not(:last-child)': {
-      marginBottom: SPACING.SIZE_15,
+      marginBottom: SPACING.SIZE_10,
+    },
+    [MQ.XL]: {
+      '&:not(:last-child)': {
+        marginBottom: SPACING.SIZE_05,
+      },
     },
   },
 
@@ -149,7 +154,7 @@ const styles: StylesMap = {
         marginBottom: SPACING.SIZE_10,
 
         [MQ.M]: {
-          marginBottom: SPACING.SIZE_20,
+          marginBottom: SPACING.SIZE_15,
         },
       },
     ],
