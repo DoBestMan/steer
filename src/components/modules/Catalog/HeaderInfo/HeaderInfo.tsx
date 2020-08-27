@@ -3,9 +3,7 @@ import React, { ReactNode, useState } from 'react';
 
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Link from '~/components/global/Link/Link';
-import Toggle from '~/components/global/Toggle/Toggle';
 import { useCatalogProductsContext } from '~/context/CatalogProducts.context';
-import { useGlobalToastContext } from '~/context/GlobalToast.context';
 import { LINK_ICON_POSITION, LINK_TYPES, THEME } from '~/lib/constants';
 import { scrollTo } from '~/lib/helpers/scroll';
 import { ui } from '~/lib/utils/ui-dictionary';
@@ -28,17 +26,12 @@ export default function HeaderInfo({
   sizeList = [],
   title,
 }: Props) {
-  const { setGlobalToastMessage } = useGlobalToastContext();
   const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
   function toggleLocation() {
     setIsLocationModalOpen(!isLocationModalOpen);
   }
   const { header } = useTheme();
-  const {
-    handleUpdateResults,
-    setIsAdvancedView,
-    isAdvancedView,
-  } = useCatalogProductsContext();
+  const { isAdvancedView } = useCatalogProductsContext();
 
   const backToTopPicks = () => {
     scrollTo(0, 1);
@@ -88,16 +81,6 @@ export default function HeaderInfo({
     thirdItem = null;
   }
 
-  const onToggleView = async () => {
-    const newParams = isAdvancedView ? {} : { skipGroups: 'true' };
-    handleUpdateResults(newParams as Record<string, string>)
-      .then(() => {
-        setIsAdvancedView(!isAdvancedView);
-      })
-      .catch((e) => {
-        setGlobalToastMessage(e.message);
-      });
-  };
   return (
     <>
       <div css={styles.header}>
@@ -112,16 +95,6 @@ export default function HeaderInfo({
             {thirdItem}
           </>
         )}
-      </div>
-      <div css={styles.toggle}>
-        <span css={[styles.label, header.advancedLabel]}>
-          {ui('catalog.header.advancedViewLabel')}
-        </span>
-        <Toggle
-          name={ui('catalog.header.advancedViewLabel')}
-          onToggle={onToggleView}
-          defaultChecked={isAdvancedView}
-        />
       </div>
       <LocationModal isOpen={isLocationModalOpen} onClose={toggleLocation} />
     </>

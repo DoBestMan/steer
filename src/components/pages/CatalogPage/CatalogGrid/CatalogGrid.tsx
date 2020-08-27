@@ -21,6 +21,7 @@ import { map } from '~/lib/utils/interpolation';
 
 import CatalogProductGrid from '../CatalogProductGrid/CatalogProductGrid';
 import CatalogProductGroups from '../CatalogProductGroups/CatalogProductGroups';
+import styles from './CatalogGrid.styles';
 import useExperimentSkipCurationView from './experiments/useExperimentSkipCurationView';
 import NoResultsGrid from './NoResultsGrid';
 
@@ -130,7 +131,7 @@ function CatalogGrid({
       />
       {!hasResults && <NoResultsGrid />}
       {hasResults && (
-        <>
+        <div css={styles.results}>
           {isGroupedProducts ? (
             <>
               <CatalogProductGroups
@@ -164,7 +165,7 @@ function CatalogGrid({
               )}
             />
           )}
-        </>
+        </div>
       )}
     </div>
   );

@@ -41,9 +41,6 @@ const styles: StylesMap = {
       marginBottom: SPACING.SIZE_15,
     },
   ],
-  header: {
-    marginBottom: SPACING.SIZE_40,
-  },
   headerContainer: {
     height: '100%',
     left: 0,
@@ -80,30 +77,19 @@ const styles: StylesMap = {
   root: {
     color: COLORS.GLOBAL.WHITE,
     padding: SPACING.SIZE_20,
+    paddingBottom: 0,
     position: 'relative',
     transition: `all ${TIME.MS300}ms ease`,
     width: '100%',
     zIndex: Z_INDEX.TOP,
     [MQ.M]: {
-      padding: `${SPACING.SIZE_30}px ${SPACING.SIZE_40}px ${SPACING.SIZE_30}px`,
+      padding: `${SPACING.SIZE_30}px ${SPACING.SIZE_40}px 0`,
     },
     [MQ.L]: {
-      padding: `${SPACING.SIZE_60}px ${SPACING.SIZE_60}px ${SPACING.SIZE_30}px`,
+      padding: `${SPACING.SIZE_60}px ${SPACING.SIZE_60}px ${SPACING.SIZE_20}px`,
     },
   },
   title: [typography.primaryHeadline, { marginBottom: SPACING.SIZE_10 }],
-  toggle: {
-    alignItems: 'center',
-    display: 'flex',
-    position: 'absolute',
-    right: SPACING.SIZE_20,
-    [MQ.M]: {
-      right: SPACING.SIZE_40,
-    },
-    [MQ.L]: {
-      right: SPACING.SIZE_70,
-    },
-  },
   wrappedLocation: {
     marginTop: SPACING.SIZE_05,
   },

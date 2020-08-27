@@ -15,6 +15,7 @@ import SubFilters from './Filters/SubFilters/SubFilters';
 import { DATA_COMPONENT_LABEL } from './Header.constants';
 import styles from './Header.styles';
 import HeaderInfo from './HeaderInfo/HeaderInfo';
+import HeaderStickyBar from './HeaderStickyBar/HeaderStickyBar';
 
 interface Props {
   hasTopPicks: boolean;
@@ -72,19 +73,19 @@ export default function Header({
             title={siteCatalogProducts.siteCatalogProductsMeta.title}
             {...rest}
           />
-          <p ref={filtersRef} css={[styles.filterLabel, header.text]}>
-            {ui('catalog.header.filterLabel')}:
-          </p>
-          {!isLoading && (
-            <FilterButtonsCarousel
-              popularFilters={
-                groupedFilters ? groupedFilters.popularFilters : []
-              }
-              filters={filtersToMap}
-            />
-          )}
         </div>
       </div>
+      <HeaderStickyBar>
+        <p ref={filtersRef} css={[styles.filterLabel, header.text]}>
+          {ui('catalog.header.filterLabel')}:
+        </p>
+        {!isLoading && (
+          <FilterButtonsCarousel
+            popularFilters={groupedFilters ? groupedFilters.popularFilters : []}
+            filters={filtersToMap}
+          />
+        )}
+      </HeaderStickyBar>
       <SubFilters
         resultsCount={
           siteCatalogProducts.listResultMetadata.pagination?.total || 0

@@ -10,28 +10,16 @@ import { UserPersonalization } from '~/data/models/UserPersonalization';
 import * as bootstrap from '~/lib/api/bootstrap';
 import * as fetch from '~/lib/fetch';
 
-import HeaderInfo from './HeaderInfo';
+import HeaderStickyBar from './HeaderStickyBar';
 
 jest.mock('emotion-theming', () => ({
   useTheme: () => ({ header: {} }),
 }));
-jest.mock('focus-trap', () => {
-  const trap = {
-    activate: () => trap,
-    deactivate: () => trap,
-    pause: () => {},
-    unpause: () => {},
-  };
-  return () => trap;
-});
 
 const tree = (
-  <HeaderInfo
-    isInternal={false}
-    hasTopPicks={false}
-    location="Portland, OR"
-    title="Test title"
-  />
+  <HeaderStickyBar>
+    <div />
+  </HeaderStickyBar>
 );
 
 const mockCatalogContext = {
@@ -49,7 +37,7 @@ const mockCatalogContext = {
   siteCatalogProducts: {},
 };
 
-describe('HeaderInfo', () => {
+describe('HeaderStickyBar', () => {
   beforeAll(async () => {
     await preloadAll();
     (PersonalizationContext as any).useUserPersonalizationContext = jest.fn(
