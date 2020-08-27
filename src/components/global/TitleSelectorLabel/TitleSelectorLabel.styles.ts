@@ -12,7 +12,16 @@ const styles: StylesMap = {
       color: COLORS.LIGHT.GRAY_70,
     },
   ],
-  description: [typography.smallCopyTight, { color: COLORS.LIGHT.GRAY_70 }],
+  description: [
+    typography.smallCopyTight,
+    {
+      color: COLORS.LIGHT.GRAY_70,
+      marginTop: SPACING.SIZE_02,
+      [MQ.L]: {
+        marginTop: 0,
+      },
+    },
+  ],
   disabled: {
     opacity: 0.2,
   },
@@ -36,7 +45,7 @@ const styles: StylesMap = {
     typography.secondaryHeadline,
     {
       marginRight: SPACING.SIZE_05,
-      [MQ.L]: typography.tertiaryHeadline,
+      [MQ.L]: typography.primarySubhead,
     },
   ],
   root: {

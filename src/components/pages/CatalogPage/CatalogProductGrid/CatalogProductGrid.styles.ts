@@ -1,4 +1,4 @@
-import { SPACING, StylesMap } from '~/lib/constants';
+import { MQ, SPACING, StylesMap } from '~/lib/constants';
 
 const styles: StylesMap = {
   advancedListing: {
@@ -8,6 +8,9 @@ const styles: StylesMap = {
     marginTop: SPACING.SIZE_60,
     display: 'flex',
     justifyContent: 'center',
+    [MQ.L]: {
+      marginTop: SPACING.SIZE_80,
+    },
   },
 };
 

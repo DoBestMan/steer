@@ -100,7 +100,7 @@ function CatalogProductGrid({
   };
 
   return (
-    <div css={styles.root}>
+    <>
       {isAdvancedView ? (
         <>
           {displayedProducts.map((product, i) => {
@@ -128,7 +128,7 @@ function CatalogProductGrid({
           </Button>
         </div>
       )}
-    </div>
+    </>
   );
 }
 
