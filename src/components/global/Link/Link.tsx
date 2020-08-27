@@ -68,7 +68,13 @@ function Link({
   const leftIcon = iconPosition === LINK_ICON_POSITION.LEFT && inlineIcon;
   const linkText = children && (
     <span css={styles.linkContainer}>
-      <span css={[styles.link, (borderless || icon) && styles.linkBorderless]}>
+      <span
+        css={[
+          styles.link,
+          (borderless || icon) && styles.linkBorderless,
+          icon && styles.linkWithIcon,
+        ]}
+      >
         {children}
       </span>
     </span>

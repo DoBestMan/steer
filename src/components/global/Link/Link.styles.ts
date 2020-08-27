@@ -62,6 +62,9 @@ const styles: StylesMap = {
   },
   linkBorderless: helpers.inheritFocusBorder,
   linkContainer: helpers.inheritBorderColor,
+  linkWithIcon: {
+    display: 'inline',
+  },
   root: {
     alignItems: 'center',
     display: 'flex',
