@@ -29,7 +29,7 @@ const styles: StylesMap = {
     ':after': {
       content: '"•"',
       fontSize: 10,
-      padding: `0 ${SPACING.SIZE_10}px`,
+      padding: '0 8px',
     },
     alignItems: 'center',
     display: 'flex',
