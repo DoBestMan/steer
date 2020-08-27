@@ -43,6 +43,7 @@ const styles: StylesMap = {
     {
       color: COLORS.ORANGE.SHADE_85,
       marginBottom: SPACING.SIZE_30,
+      marginLeft: 'auto',
       textAlign: 'right',
 
       [MQ.M]: {
@@ -50,7 +51,7 @@ const styles: StylesMap = {
       },
 
       [MQ.L]: {
-        width: `calc(66.66% - ${GAP_COLUMNS.L / 3}px`, // 4 of 6 columns
+        width: `calc(66.66% - ${GAP_COLUMNS.L / 3}px)`, // 4 of 6 columns
       },
     },
   ],
@@ -86,7 +87,14 @@ const styles: StylesMap = {
     },
   },
 
-  dataMomentHelp: [disableGlobalFocus, typography.smallCopyTight, links.light],
+  dataMomentHelp: [
+    disableGlobalFocus,
+    typography.smallCopyTight,
+    links.light,
+    {
+      marginTop: SPACING.SIZE_10,
+    },
+  ],
 
   heading: [
     typography.primaryHeadline,
