@@ -21,6 +21,7 @@ import { NavContextProvider } from '~/context/Nav.context';
 import { useRouterContext } from '~/context/Router.context';
 import { ROUTE_MAP, ROUTES, TIME } from '~/lib/constants';
 import { fixHomepageRoute } from '~/lib/utils/routes';
+import { removeUrlParams } from '~/lib/utils/string';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import FooterContainer from '../Footer/Footer.container';
@@ -58,7 +59,7 @@ function App({ children, ...rest }: Props) {
     }
   }, [containerRef, setContainerEl]);
 
-  const route = fixHomepageRoute(router.asPath || rest.route);
+  const route = removeUrlParams(fixHomepageRoute(router.asPath || rest.route));
 
   const isHomepage = route === ROUTE_MAP[ROUTES.HOME];
 

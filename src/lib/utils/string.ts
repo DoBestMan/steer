@@ -114,3 +114,15 @@ export function getUrlExtension(url: string): string {
   const extension = url.split('.').pop();
   return extension ? extension : url;
 }
+
+export function removeQueryParams(url: string): string {
+  return url.split('?')[0];
+}
+
+export function removeHashParams(url: string): string {
+  return url.split('#')[0];
+}
+
+export function removeUrlParams(url: string): string {
+  return removeHashParams(removeQueryParams(url));
+}
