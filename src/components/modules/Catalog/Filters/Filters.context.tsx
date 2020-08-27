@@ -1,3 +1,4 @@
+import isStrictEqual from 'fast-deep-equal';
 import { MouseEvent, ReactNode, useEffect, useMemo, useState } from 'react';
 
 import { useCatalogProductsContext } from '~/context/CatalogProducts.context';
@@ -125,7 +126,9 @@ export function useFiltersContextSetup({
     },
     clearFiltersToApply: () => {
       setFiltersToApply(initialState);
-      onPreviewFilters();
+      if (!isStrictEqual(filtersToApply, initialState)) {
+        onPreviewFilters();
+      }
     },
     clearSelectingFilter: () => setSelectingFilter(null),
     createOpenFilterHandler: (id: number | string) => (e?: MouseEvent) => {
