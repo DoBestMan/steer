@@ -184,7 +184,7 @@ export const styles: StylesMap = {
   ],
   pricesContainer: {
     display: 'block',
-    marginTop: SPACING.SIZE_05,
+    marginTop: 8,
     textAlign: 'center',
   },
   productIcon: {
