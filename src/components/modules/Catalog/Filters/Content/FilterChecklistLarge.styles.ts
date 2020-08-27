@@ -10,7 +10,7 @@ const styles: StylesMap = {
   groupTitle: [
     typography.secondaryHeadline,
     {
-      marginBottom: SPACING.SIZE_15,
+      marginBottom: SPACING.SIZE_05,
     },
   ],
   label: [

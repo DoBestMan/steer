@@ -1,10 +1,12 @@
 import { ReactNode } from 'react';
 
 import Button from '~/components/global/Button/Button';
+import { CSSStylesProp } from '~/lib/constants';
 
 import styles from './ActionBar.styles';
 
 export interface ActionBarProps {
+  customContainerStyles?: CSSStylesProp;
   isDisabled?: boolean;
   onClickPrimary: () => void;
   onClickSecondary?: () => void;
@@ -13,6 +15,7 @@ export interface ActionBarProps {
 }
 
 function ActionBar({
+  customContainerStyles,
   isDisabled = false,
   primaryLabel,
   onClickPrimary,
@@ -20,7 +23,7 @@ function ActionBar({
   onClickSecondary,
 }: ActionBarProps) {
   return (
-    <div css={styles.root}>
+    <div css={[styles.root, customContainerStyles]}>
       {secondaryLabel && (
         <button
           data-testid="secondary-button"

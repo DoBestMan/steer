@@ -111,7 +111,7 @@ export default function Dropdown({
           css={[
             styles.root,
             isOpen && styles.open,
-            actionBar && styles.actionBarDropdown,
+            actionBar && styles.actionBarContentDropdown,
             !insideCarousel ? styles.defaultDropdown : styles.carouselDropdown,
           ]}
           style={calculatedStyles || {}}
@@ -131,8 +131,13 @@ export default function Dropdown({
       isOpen={isOpen}
       onClose={onClose}
     >
-      <div css={actionBar && styles.actionBarModal}>{children}</div>
-      {!!actionBar && <DynamicActionBar {...actionBar} />}
+      <div css={actionBar && styles.actionBarContentModal}>{children}</div>
+      {!!actionBar && (
+        <DynamicActionBar
+          {...actionBar}
+          customContainerStyles={styles.actionBarModal}
+        />
+      )}
     </BottomCardModal>
   );
 }
