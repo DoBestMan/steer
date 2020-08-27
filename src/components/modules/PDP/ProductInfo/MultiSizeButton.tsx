@@ -7,7 +7,6 @@ import Prices from '~/components/global/Prices/Prices';
 import { useProductDetailContext } from '~/components/pages/ProductDetail/ProductDetail.context';
 import { SitePrice } from '~/data/models/SitePrice';
 import { ui } from '~/lib/utils/ui-dictionary';
-import { typography } from '~/styles/typography.styles';
 
 import styles from './MultiSizeButton.styles';
 import { ProductInfoProps } from './ProductInfo';
@@ -45,7 +44,7 @@ function RenderItem({
       <span css={styles.price}>
         <Prices
           priceList={[{ price: price as SitePrice }]}
-          customPriceStyles={typography.primarySubhead}
+          customPriceStyles={styles.customPriceStyles}
         />
       </span>
       <span css={styles.quantity}>
@@ -112,7 +111,7 @@ function MultiSizeButton({
         </li>
         <li>
           <button
-            css={styles.button}
+            css={[styles.button, styles.rearButton]}
             aria-label={`${rearSize} ${rearLoadSpeedRating}, ${ui(
               'pdp.productInfo.changeSizeLabel',
             )}`}
