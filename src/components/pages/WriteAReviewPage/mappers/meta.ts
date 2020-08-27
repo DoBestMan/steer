@@ -23,5 +23,7 @@ export function mapDataToMeta({
   return {
     title,
     description,
+    hasCanonical: false,
+    robots: 'noindex,nofollow',
   };
 }

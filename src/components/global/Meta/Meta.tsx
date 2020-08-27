@@ -9,6 +9,7 @@ import { ui } from '~/lib/utils/ui-dictionary';
 export interface MetaProps {
   canonical?: string;
   description?: string;
+  hasCanonical?: boolean;
   robots?: string;
   shareImage?: SiteImage;
   title?: string;
@@ -37,7 +38,8 @@ const APPLE_TOUCH_ICON_SIZES = [
 function Meta({
   canonical,
   description = ui('meta.description'),
-  robots = 'index, follow',
+  hasCanonical = true,
+  robots = 'index,follow',
   shareImage,
   title = ui('meta.title'),
 }: MetaProps) {
@@ -57,8 +59,10 @@ function Meta({
   description = description.replace(/&amp;/g, '&');
 
   // Robots
-  // TODO: For MVP, no pages are indexable
-  robots = 'no index, no follow';
+  // TODO: https://simpletire.atlassian.net/browse/WCS-1609
+  // For MVP, no pages are indexable.
+  // Remove this protection when we want the pag to be crawlable
+  robots = 'noindex,nofollow';
 
   return (
     <Head>
@@ -71,11 +75,11 @@ function Meta({
       />
       <meta name="description" content={description} />
       <meta name="robots" content={robots} />
-      {canonical && <link rel="canonical" href={canonical} />}
+      {hasCanonical && <link rel="canonical" href={url} key="canonical" />}
       <link
         rel="manifest"
         href="/static/assets/manifest.json"
-        data-reactid="40"
+        key="manifest"
       ></link>
 
       {/* List of favicons */}
@@ -83,12 +87,14 @@ function Meta({
         rel="shortcut icon"
         href="/static/assets/icons/favicon.ico"
         type="image/x-icon"
+        key="shortcut icon"
       />
 
       <link
         rel="icon"
         sizes="192x192"
         href="/static/assets/icons/android-chrome-192x192.png"
+        key="icon"
       />
 
       {APPLE_TOUCH_ICON_SIZES.map((size) => (
@@ -102,24 +108,29 @@ function Meta({
       <link
         rel="apple-touch-icon-precomposed"
         href="/static/assets/icons/apple-touch-icon-precomposed.png"
+        key="apple-touch-icon-precomposed"
       ></link>
 
       {/* Preconnects */}
-      <link rel="preconnect" href="https://www.google-analytics.com"></link>
+      <link
+        rel="preconnect"
+        href="https://www.google-analytics.com"
+        key="preconnect-ga"
+      ></link>
 
       {/* Socials */}
-      <meta property="og:site_name" content="SimpleTire" />
-      <meta property="og:title" content={title} key={'og:title'} />
+      <meta property="og:site_name" content="SimpleTire" key="og:site_name" />
+      <meta property="og:title" content={title} key="og:title" />
       <meta
         property="og:description"
         content={description}
-        key={'og:description'}
+        key="og:description"
       />
-      <meta property="og:type" content="website" />
-      <meta property="og:url" content={url} />
-      <meta property="og:image" content={shareImage.src} />
-      <meta property="og:image:width" content="1024" />
-      <meta property="og:image:height" content="512" />
+      <meta property="og:type" content="website" key="og:type" />
+      <meta property="og:url" content={url} key="og:url" />
+      <meta property="og:image" content={shareImage.src} key="og:image" />
+      <meta property="og:image:width" content="1024" key="og:image:width" />
+      <meta property="og:image:height" content="512" key="og:image:height" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:card" content="summary_large_image" />
