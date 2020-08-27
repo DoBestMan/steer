@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router';
+
 import HowToModal from '~/components/global/Modal/HowToModal';
 import { useModalContext } from '~/context/Modal.context';
 import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
@@ -18,6 +20,9 @@ function ModalContainer() {
     isModalOpen,
     closeModal,
   } = useModalContext();
+
+  const router = useRouter();
+  router.events?.on('routeChangeStart', closeModal); // always close modal when we change routes
 
   if (!currentModalData) {
     return null;
