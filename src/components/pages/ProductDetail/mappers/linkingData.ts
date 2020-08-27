@@ -95,11 +95,14 @@ export function mapDataToLinkingData({
       name: brandName,
     },
     review: reviews,
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: ratingValue.toString(),
-      reviewCount,
-    },
+    aggregateRating:
+      ratingValue > 0
+        ? {
+            '@type': 'AggregateRating',
+            ratingValue: ratingValue.toString(),
+            reviewCount,
+          }
+        : undefined,
     offers: {
       '@type': 'AggregateOffer',
       priceCurrency: 'USD',
