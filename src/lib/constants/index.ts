@@ -15,6 +15,7 @@ export * from './input.types';
 export * from './keycodes';
 export * from './links.types';
 export * from './links';
+export * from './markdown';
 export * from './modal.types';
 export * from './product';
 export * from './radius';

@@ -2,6 +2,22 @@ import { COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 export const styles: StylesMap = {
+  defaultStyles: {
+    ['ol']: {
+      marginTop: SPACING.SIZE_20,
+      paddingLeft: SPACING.SIZE_40,
+      ['li']: {
+        listStyleType: 'decimal',
+      },
+    },
+    ['ul']: {
+      marginTop: SPACING.SIZE_20,
+      paddingLeft: SPACING.SIZE_40,
+      ['li']: {
+        listStyleType: 'disc',
+      },
+    },
+  },
   editorialMarkdownContainer: {
     ['a']: {
       borderBottomColor: COLORS.LIGHT.GRAY_70,
@@ -42,13 +58,10 @@ export const styles: StylesMap = {
       },
     },
     ['ol']: {
-      marginTop: SPACING.SIZE_20,
-      paddingLeft: SPACING.SIZE_40,
       ['li']: [
         typography.bodyCopy,
         {
           color: COLORS.LIGHT.GRAY_70,
-          listStyleType: 'decimal',
           marginTop: SPACING.SIZE_10,
         },
       ],
@@ -61,13 +74,10 @@ export const styles: StylesMap = {
       },
     ],
     ['ul']: {
-      marginTop: SPACING.SIZE_20,
-      paddingLeft: SPACING.SIZE_40,
       ['li']: [
         typography.bodyCopy,
         {
           color: COLORS.LIGHT.GRAY_70,
-          listStyleType: 'disc',
           marginTop: SPACING.SIZE_10,
         },
       ],

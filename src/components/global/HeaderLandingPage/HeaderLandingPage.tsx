@@ -1,12 +1,11 @@
 import { ReactType, useCallback, useState } from 'react';
-import { NodeType } from 'react-markdown';
 
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Image from '~/components/global/Image/Image';
 import Markdown from '~/components/global/Markdown/MarkdownDynamic';
 import { SiteImage } from '~/data/models/SiteImage';
-import { HEADER_SIZE, THEME } from '~/lib/constants';
+import { HEADER_SIZE, MARKDOWN_PRIMITIVES, THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import styles, { sizeStyles, themeStyles } from './HeaderLandingPage.styles';
@@ -23,16 +22,6 @@ export interface HeaderLandingPageProps {
   titleAs?: ReactType;
   titleSize?: HEADER_SIZE;
 }
-// Allow only the simplest markdown to prevent unexpected markups
-const markdownAllowedTypes: NodeType[] = [
-  'root',
-  'text',
-  'break',
-  'paragraph',
-  'strong',
-  'emphasis',
-  'link',
-];
 
 export default function HeaderLandingPage({
   body,
@@ -74,14 +63,14 @@ export default function HeaderLandingPage({
 
       {subTitle && (
         <SubTitleContainer css={[styles.subTitle, themeStyles[theme].subTitle]}>
-          <Markdown allowedTypes={markdownAllowedTypes} unwrapDisallowed>
+          <Markdown allowedTypes={MARKDOWN_PRIMITIVES} unwrapDisallowed>
             {subTitle}
           </Markdown>
         </SubTitleContainer>
       )}
       {briefBody && (
         <div css={styles.Body}>
-          <Markdown allowedTypes={markdownAllowedTypes} unwrapDisallowed>
+          <Markdown allowedTypes={MARKDOWN_PRIMITIVES} unwrapDisallowed>
             {briefBody}
           </Markdown>
         </div>
@@ -92,7 +81,7 @@ export default function HeaderLandingPage({
           aria-hidden={!showFullBody}
           id="header-detail-page-body"
         >
-          <Markdown allowedTypes={markdownAllowedTypes} unwrapDisallowed>
+          <Markdown allowedTypes={MARKDOWN_PRIMITIVES} unwrapDisallowed>
             {moreBody}
           </Markdown>
         </div>

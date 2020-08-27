@@ -8,4 +8,6 @@ export const MARKDOWN_PRIMITIVES: NodeType[] = [
   'strong',
   'emphasis',
   'link',
+  'list',
+  'listItem',
 ];
