@@ -132,7 +132,7 @@ const styles: StylesMap = {
         display: 'flex',
         justifyContent: 'flex-end',
         li: {
-          '&:not(:last-child)': {
+          '&.listItem:not(:last-child)': {
             marginBottom: 'unset',
           },
           display: 'flex',
@@ -162,7 +162,7 @@ const styles: StylesMap = {
           },
 
           [MQ.XL]: {
-            '&:not(:last-child)': {
+            '&.listItem:not(:last-child)': {
               marginBottom: SPACING.SIZE_15,
             },
             display: 'block',
