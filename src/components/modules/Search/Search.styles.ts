@@ -16,6 +16,8 @@ import {
 } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
+import { animationStyles as listboxAnimationStyles } from './SearchResults/SearchResults.styles';
+
 const animationStyles: CSSObjectType = {
   [`searchSectionWrapper_${ENTERING}`]: {
     opacity: 1,
@@ -44,6 +46,7 @@ const styles: StylesMap = {
   container: {
     backgroundColor: COLORS.GLOBAL.ORANGE,
     height: '100vh',
+    overflowX: 'hidden',
     overflowY: 'auto',
     paddingBottom: SPACING.SIZE_50,
     width: '100%',
@@ -54,6 +57,9 @@ const styles: StylesMap = {
     [MQ.L]: {
       paddingBottom: SPACING.SIZE_160,
     },
+  },
+  initialSearch: {
+    transition: `opacity ${TIME.MS600}ms ease, transform ${TIME.MS300}ms ease`,
   },
   pastSearchBullet: {
     display: 'none',
@@ -74,6 +80,7 @@ const styles: StylesMap = {
     },
   },
   ...animationStyles,
+  ...listboxAnimationStyles,
 };
 
 export default styles;

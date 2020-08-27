@@ -7,7 +7,7 @@ import {
 
 import { MQ, SPACING, StylesMap, TIME } from '~/lib/constants';
 
-const animationStyles = {
+export const animationStyles = {
   [`listbox_${ENTERING}`]: {
     opacity: 0,
     transform: 'translateX(10%)',

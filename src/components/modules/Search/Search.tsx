@@ -1,5 +1,8 @@
 import { useRouter } from 'next/router';
 import { RefObject, useCallback, useEffect } from 'react';
+import Transition, {
+  TransitionStatus,
+} from 'react-transition-group/Transition';
 
 import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
 import { SiteSearchResultGroup } from '~/data/models/SiteSearchResultGroup';
@@ -334,15 +337,32 @@ function Search({
         searchState={searchState}
         secondaryQueryText={secondaryQuery.queryText}
       />
-      {shouldShowInitialSearch && (
-        <InitialSearch
-          onClearPastSearchesClick={handleClearPastSearchesClick}
-          onPastSearchClick={handleValueSelection}
-          onSearchCategoryClick={handleSearchCategoryClick}
-          pastSearches={pastSearches}
-          shouldShowPastSearches={shouldShowPastSearches}
-        />
-      )}
+      <Transition
+        exit={false}
+        mountOnEnter
+        unmountOnExit
+        in={shouldShowInitialSearch}
+        timeout={300}
+      >
+        {(searchTransitionState: TransitionStatus) => {
+          const animationStyles = [
+            styles.initialSearch,
+            styles[`listbox_${searchTransitionState}`],
+          ];
+
+          return (
+            <div css={animationStyles}>
+              <InitialSearch
+                onClearPastSearchesClick={handleClearPastSearchesClick}
+                onPastSearchClick={handleValueSelection}
+                onSearchCategoryClick={handleSearchCategoryClick}
+                pastSearches={pastSearches}
+                shouldShowPastSearches={shouldShowPastSearches}
+              />
+            </div>
+          );
+        }}
+      </Transition>
       {shouldShowSearchSupport && (
         <SearchSupport
           customerServiceNumber={customerServiceNumber}
