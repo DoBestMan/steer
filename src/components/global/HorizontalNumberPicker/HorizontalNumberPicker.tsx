@@ -23,6 +23,7 @@ function HorizontalNumberPicker({
   onSelect,
   subTitle,
   title,
+  ...rest
 }: Props) {
   const [selectedItemIndex, setSelectedItemIndex] = useState<number>(
     initialIndex === undefined ? -1 : initialIndex,
@@ -47,7 +48,7 @@ function HorizontalNumberPicker({
   };
 
   return (
-    <div css={customContainerStyles}>
+    <div css={customContainerStyles} {...rest}>
       <div css={styles.header}>
         <h3 css={styles.title}>{title}</h3>
 

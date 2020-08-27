@@ -21,7 +21,7 @@ interface SubtitleProps {
 
 function Subtitle({ price }: SubtitleProps) {
   return (
-    <p css={styles.subtitle}>
+    <p css={styles.subtitle} data-testid="total-price">
       {ui('pdp.quantitySelector.totalPrice')} <span css={styles.decorator} />{' '}
       {price}
     </p>
@@ -66,6 +66,7 @@ function QuantitySelectorContainer({
       recommendedQuantity={recommendedQuantity}
     >
       <HorizontalNumberPicker
+        data-testid="front-picker"
         initialIndex={selectedFrontIndex}
         customCarouselStyles={styles.carouselStyles}
         {...(isFrontAndRear && {
@@ -83,6 +84,7 @@ function QuantitySelectorContainer({
 
       {isFrontAndRear && (
         <HorizontalNumberPicker
+          data-testid="rear-picker"
           initialIndex={selectedRearIndex}
           customCarouselStyles={styles.carouselStyles}
           numbers={numbers}

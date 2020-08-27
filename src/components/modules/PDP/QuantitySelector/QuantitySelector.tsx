@@ -72,6 +72,7 @@ function QuantitySelector({
                 css={styles.button}
                 onClick={handleInterceptAction(recommendedQuantity)}
                 theme={THEME.LIGHT}
+                data-testid="change-quantity-button"
               >
                 {ui(
                   recommendedQuantity === 1
@@ -87,6 +88,7 @@ function QuantitySelector({
                 onClick={handleInterceptAction(quantity || 0)}
                 style={BUTTON_STYLE.OUTLINED}
                 theme={THEME.LIGHT}
+                data-testid="keep-quantity-button"
               >
                 {ui(
                   quantity === 1
@@ -104,6 +106,7 @@ function QuantitySelector({
               css={styles.button}
               onClick={onConfirm}
               theme={THEME.LIGHT}
+              data-testid="confirm-button"
             >
               {ui('pdp.quantitySelector.confirmButtonLabel')}
             </Button>
