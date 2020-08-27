@@ -8,6 +8,7 @@ import GridItem from '~/components/global/Grid/GridItem';
 import Image from '~/components/global/Image/Image';
 import BaseLink from '~/components/global/Link/BaseLink';
 import { useNavContext } from '~/context/Nav.context';
+import { TIME } from '~/lib/constants';
 import { COOKIES } from '~/lib/constants/cookies';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { disableGlobalFocus } from '~/styles/document/accessibility.styles';
@@ -38,7 +39,7 @@ function Nav({ isHomepage }: Props) {
   const cartQty = cookies[COOKIES.CART_QTY];
 
   return (
-    <Transition appear in={isVisible} timeout={400}>
+    <Transition appear={false} in={isVisible} timeout={TIME.MS400}>
       {(containerTransitionState: TransitionStatus) => {
         const rootStyles = [
           styles.root,

@@ -89,7 +89,11 @@ function App({ children, ...rest }: Props) {
         <NavContextProvider>
           <NavContainer isHomepage={isHomepage} />
           <Layout>
-            <Transition appear in={!isInRouteTransition} timeout={TIME.MS400}>
+            <Transition
+              appear={false}
+              in={!isInRouteTransition}
+              timeout={TIME.MS400}
+            >
               {(containerTransitionState: TransitionStatus) => {
                 const appStyles = [
                   styles.component,
