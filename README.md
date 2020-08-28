@@ -98,6 +98,11 @@ By default, you'll run against the mock server.
 - Update this project's `.env` file's `STEER_BACKEND` value to `"integration"`
 - Run `now dev` to start local development in this project
 
+### To run against a specific version of the integration server:
+
+- Update this project's `.env` file's `STEER_BACKEND` value to the name of the AIP feature branch (e.g. `sqa-424`).
+- Run `now dev` to start local development in this project
+
 ## Other Scripts
 
 Lint files:
@@ -225,7 +230,7 @@ We have a few solutions to this in the codebase:
 
 **Deploy Hooks**
 
-The `dev`, `dev-st`, and `uat` branches have GitHub actions that will trigger deploy hooks when they are merged.
+The `dev` branch have GitHub actions that will trigger deploy hooks when they are merged.
 
 Among other things, this solves the use case where `my-feature-branch` (built against the mock API) is merged into `dev` and we need to kick off a new deploy against the integration API.
 

@@ -72,31 +72,35 @@ describe('getBackendEnvVariables', () => {
     });
   });
 
-  test.each(['dev', 'qa', 'int-my-branch'])(
-    'integration deploy - %s',
-    (branch) => {
-      process.env.VERCEL_GITHUB_COMMIT_REF = branch;
+  test.each(['dev', 'qa'])('integration deploy - %s', (branch) => {
+    process.env.VERCEL_GITHUB_COMMIT_REF = branch;
 
-      expect(getBackendEnvVariables()).toEqual({
-        backendEndpoint: URLS.MAIN_API_INTEGRATION,
-        clientId: 'sharedId',
-        clientSecret: 'integrationSecret',
-      });
-    },
-  );
+    expect(getBackendEnvVariables()).toEqual({
+      backendEndpoint: URLS.MAIN_API_INTEGRATION,
+      clientId: 'sharedId',
+      clientSecret: 'integrationSecret',
+    });
+  });
 
-  test.each(['mock-dev', 'mock-qa', 'my-branch'])(
-    'mock deploy - %s',
-    (branch) => {
-      process.env.VERCEL_GITHUB_COMMIT_REF = branch;
+  test.each(['sqa-001'])('feature branch - %s', (branch) => {
+    process.env.VERCEL_GITHUB_COMMIT_REF = branch;
 
-      expect(getBackendEnvVariables()).toEqual({
-        backendEndpoint: URLS.MAIN_API_MOCK,
-        clientId: 'sharedId',
-        clientSecret: 'mockSecret',
-      });
-    },
-  );
+    expect(getBackendEnvVariables()).toEqual({
+      backendEndpoint: `https://${branch}-services.jenkins.simpletire.com`,
+      clientId: 'sharedId',
+      clientSecret: 'integrationSecret',
+    });
+  });
+
+  test.each(['mock-dev', 'mock-qa'])('mock deploy - %s', (branch) => {
+    process.env.VERCEL_GITHUB_COMMIT_REF = branch;
+
+    expect(getBackendEnvVariables()).toEqual({
+      backendEndpoint: URLS.MAIN_API_MOCK,
+      clientId: 'sharedId',
+      clientSecret: 'mockSecret',
+    });
+  });
 
   test('local development - local backend', () => {
     process.env.STEER_BACKEND = 'local';
@@ -113,6 +117,16 @@ describe('getBackendEnvVariables', () => {
 
     expect(getBackendEnvVariables()).toEqual({
       backendEndpoint: URLS.MAIN_API_INTEGRATION,
+      clientId: 'sharedId',
+      clientSecret: 'integrationSecret',
+    });
+  });
+
+  test('local development - feature branch backend', () => {
+    process.env.STEER_BACKEND = 'sqa-001';
+
+    expect(getBackendEnvVariables()).toEqual({
+      backendEndpoint: 'https://sqa-001-services.jenkins.simpletire.com',
       clientId: 'sharedId',
       clientSecret: 'integrationSecret',
     });

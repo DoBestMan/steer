@@ -3,14 +3,14 @@ import { parseCookies, setCookie } from 'nookies';
 
 import ErrorPage from '~/components/pages/ErrorPage/ErrorPage';
 import { COOKIES } from '~/lib/constants/cookies';
-import { isIntegrationDeploy, isProductionDeploy } from '~/lib/utils/deploy';
+import { isLocal, isMockDeploy } from '~/lib/utils/deploy';
 import { redirectToNotFound } from '~/lib/utils/routes';
 
 interface Data {
   cartQty: string;
 }
 
-const isFakeCheckoutEnabled = !isProductionDeploy() && !isIntegrationDeploy();
+const isFakeCheckoutEnabled = isMockDeploy() || isLocal();
 
 function FakeCheckout({ cartQty }: Data) {
   return (
