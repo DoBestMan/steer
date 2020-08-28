@@ -3,7 +3,7 @@ import { IncomingMessage } from 'http';
 import { UserPersonalization } from '~/data/models/UserPersonalization';
 import { URLS } from '~/lib/constants/urls';
 import {
-  isIntegrationDeploy,
+  isFeatureBranchDeploy,
   isLocal,
   isMockDeploy,
   isProductionDeploy,
@@ -30,14 +30,16 @@ export function getBackendEnvVariables(): {
   clientId?: string;
   clientSecret?: string;
 } {
-  let pointTo = API.FEATURE_BRANCH;
+  let pointTo = API.INTEGRATION;
+  let integrationBranch = undefined;
 
   if (isProductionDeploy()) {
     pointTo = API.PRODUCTION;
   } else if (isMockDeploy()) {
     pointTo = API.MOCK;
-  } else if (isIntegrationDeploy()) {
-    pointTo = API.INTEGRATION;
+  } else if (isFeatureBranchDeploy()) {
+    pointTo = API.FEATURE_BRANCH;
+    integrationBranch = process.env.VERCEL_GITHUB_COMMIT_REF;
   } else {
     if (isLocal()) {
       const backend = process.env.STEER_BACKEND || 'mock';
@@ -51,6 +53,9 @@ export function getBackendEnvVariables(): {
         case 'integration':
           pointTo = API.INTEGRATION;
           break;
+        default:
+          pointTo = API.FEATURE_BRANCH;
+          integrationBranch = backend;
       }
     }
   }
@@ -86,9 +91,6 @@ export function getBackendEnvVariables(): {
       clientSecret: process.env.STEER_CLIENT_SECRET_INTEGRATION,
     };
   }
-
-  const integrationBranch =
-    process.env.VERCEL_GITHUB_COMMIT_REF || process.env.STEER_BACKEND;
 
   return {
     backendEndpoint: URLS.MAIN_API_FEATURE(integrationBranch),

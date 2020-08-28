@@ -3,9 +3,9 @@ export function isProductionDeploy(): boolean {
   return deployRef === 'master';
 }
 
-export function isIntegrationDeploy(): boolean {
+export function isFeatureBranchDeploy(): boolean {
   const deployRef = process.env.VERCEL_GITHUB_COMMIT_REF;
-  return Boolean(deployRef && /^dev$|^qa$/.test(deployRef));
+  return Boolean(deployRef && /^sqa-/.test(deployRef.toLowerCase()));
 }
 
 export function isMockDeploy(): boolean {

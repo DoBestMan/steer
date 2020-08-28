@@ -72,17 +72,8 @@ describe('getBackendEnvVariables', () => {
     });
   });
 
-  test.each(['dev', 'qa'])('integration deploy - %s', (branch) => {
-    process.env.VERCEL_GITHUB_COMMIT_REF = branch;
-
-    expect(getBackendEnvVariables()).toEqual({
-      backendEndpoint: URLS.MAIN_API_INTEGRATION,
-      clientId: 'sharedId',
-      clientSecret: 'integrationSecret',
-    });
-  });
-
-  test.each(['sqa-001'])('feature branch - %s', (branch) => {
+  // TODO: temporarily feature branches are identified by the "sqa-" prefix
+  test.each(['sqa-001', 'SQA-001'])('feature branch - %s', (branch) => {
     process.env.VERCEL_GITHUB_COMMIT_REF = branch;
 
     expect(getBackendEnvVariables()).toEqual({
@@ -91,6 +82,19 @@ describe('getBackendEnvVariables', () => {
       clientSecret: 'integrationSecret',
     });
   });
+
+  test.each(['dev', 'qa', 'any-other-branch'])(
+    'integration deploy - %s',
+    (branch) => {
+      process.env.VERCEL_GITHUB_COMMIT_REF = branch;
+
+      expect(getBackendEnvVariables()).toEqual({
+        backendEndpoint: URLS.MAIN_API_INTEGRATION,
+        clientId: 'sharedId',
+        clientSecret: 'integrationSecret',
+      });
+    },
+  );
 
   test.each(['mock-dev', 'mock-qa'])('mock deploy - %s', (branch) => {
     process.env.VERCEL_GITHUB_COMMIT_REF = branch;
