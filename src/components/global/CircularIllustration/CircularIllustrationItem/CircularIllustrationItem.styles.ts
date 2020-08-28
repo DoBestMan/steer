@@ -109,3 +109,54 @@ export const styles: StylesMap = {
     marginTop: SPACING.SIZE_20,
   },
 };
+
+export const customImageMaxWidth: StylesMap = {
+  vehicleModelMaxWidth: {
+    [MQ.S]: {
+      width: 85.12,
+      maxWidth: 85.12,
+    },
+    [MQ.M]: {
+      width: 104.03,
+      maxWidth: 104.03,
+    },
+    [MQ.XL]: {
+      width: 122.95,
+      maxWidth: 122.95,
+    },
+  },
+  vehicleTypesMaxWidth: {
+    [MQ.S]: {
+      width: 81.45,
+      maxWidth: 81.45,
+    },
+    [MQ.M]: {
+      width: 99.55,
+      maxWidth: 99.55,
+    },
+    [MQ.XL]: {
+      width: 117.65,
+      maxWidth: 117.65,
+    },
+  },
+  logosBrandsMaxWidth: {
+    [MQ.S]: {
+      width: 81,
+      maxWidth: 81,
+    },
+    [MQ.M]: {
+      width: 110.5,
+      maxWidth: 110.5,
+    },
+  },
+  logosMakesMaxWidth: {
+    [MQ.S]: {
+      width: 60,
+      maxWidth: 60,
+    },
+    [MQ.M]: {
+      width: 80,
+      maxWidth: 80,
+    },
+  },
+};

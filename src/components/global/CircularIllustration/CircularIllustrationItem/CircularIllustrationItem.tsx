@@ -5,6 +5,7 @@ import BaseLink from '~/components/global/Link/BaseLink';
 import Sticker from '~/components/global/Sticker/Sticker';
 import { SiteGraphicTile } from '~/data/models/SiteGraphicTile';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
+import { CSSStyles } from '~/lib/constants';
 
 import { styles } from './CircularIllustrationItem.styles';
 
@@ -14,6 +15,7 @@ export enum TitlePlacement {
 }
 
 export interface CirclularIllustrationProps extends SiteGraphicTile {
+  imageMaxWidthCustomStyles?: CSSStyles;
   titlePlacement?: TitlePlacement;
 }
 
@@ -24,6 +26,7 @@ function CircularIllustrationItem({
   title,
   byline,
   titlePlacement = TitlePlacement['top'],
+  imageMaxWidthCustomStyles = styles.logoImage,
 }: CirclularIllustrationProps) {
   return (
     <div css={styles.root}>
@@ -36,15 +39,15 @@ function CircularIllustrationItem({
           )}
           <div css={styles.circle}>
             {image && image.type === ICON_IMAGE_TYPE.IMAGE && (
-              <div css={styles.logoImage}>
-                <Image {...image} widths={[150, 200, 250]} />
+              <div css={imageMaxWidthCustomStyles}>
+                <Image {...image} widths={[80, 100, 200]} />
               </div>
             )}
             {image && image.type === ICON_IMAGE_TYPE.ICON && (
               <Icon name={image.svgId} />
             )}
             {image && image.type === ICON_IMAGE_TYPE.CAR && (
-              <div css={styles.logoImage}>
+              <div css={imageMaxWidthCustomStyles}>
                 <Car carId={image.vehicleType} css={styles.car} />
               </div>
             )}

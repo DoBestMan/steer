@@ -4,6 +4,7 @@ import { SiteImage } from '~/data/models/SiteImage';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 
 import { TitlePlacement } from '../CircularIllustrationItem/CircularIllustrationItem';
+import { customImageMaxWidth } from '../CircularIllustrationItem/CircularIllustrationItem.styles';
 import { CircularIllustrationList } from './CircularIllustrationItemList';
 import { styles } from './CircularIllustrationList.styles';
 
@@ -12,11 +13,9 @@ const brandsMockData: SiteGraphicTile[] = [
     byline: '1,234 tires',
     image: {
       altText: 'Achilles',
-      height: 20,
       src:
         'https://images.simpletire.com/image/upload/v1593195324/manf-logos/1b.svg',
       type: 'SiteImage',
-      width: 100,
     } as SiteImage,
     link: {
       href: '/brands/achilles-tires',
@@ -28,11 +27,9 @@ const brandsMockData: SiteGraphicTile[] = [
     byline: '1,234 tires',
     image: {
       altText: 'Aeolus',
-      height: 20,
       src:
         'https://images.simpletire.com/image/upload/v1593195323/manf-logos/3b.svg',
       type: 'SiteImage',
-      width: 100,
     } as SiteImage,
     link: {
       href: '/brands/aeolus-tires',
@@ -45,11 +42,9 @@ const brandsMockData: SiteGraphicTile[] = [
     highlight: '20% Off',
     image: {
       altText: 'Akuret',
-      height: 50,
       src:
         'https://images.simpletire.com/image/upload/v1593195309/manf-logos/4b.svg',
       type: 'SiteImage',
-      width: 100,
     } as SiteImage,
     link: {
       href: '/brands/akuret-tires',
@@ -62,11 +57,9 @@ const brandsMockData: SiteGraphicTile[] = [
     highlight: '20% Off',
     image: {
       altText: 'Armour',
-      height: 50,
       src:
         'https://images.simpletire.com/image/upload/v1593195322/manf-logos/7b.svg',
       type: 'SiteImage',
-      width: 100,
     } as SiteImage,
     link: {
       href: '/brands/armour-tires',
@@ -78,11 +71,9 @@ const brandsMockData: SiteGraphicTile[] = [
     byline: '1,123 tires',
     image: {
       altText: 'Atlas',
-      height: 50,
       src:
         'https://images.simpletire.com/image/upload/v1593195322/manf-logos/8b.svg',
       type: 'SiteImage',
-      width: 100,
     } as SiteImage,
     link: {
       href: '/brands/atlas-tires',
@@ -95,11 +86,9 @@ const brandsMockData: SiteGraphicTile[] = [
     highlight: 'Top rated',
     image: {
       altText: 'BFGoodrich',
-      height: 20,
       src:
         'https://images.simpletire.com/image/upload/v1593195321/manf-logos/9b.svg',
       type: 'SiteImage',
-      width: 100,
     } as SiteImage,
     link: {
       href: '/brands/bfgoodrich-tires',
@@ -254,6 +243,7 @@ export function TypicalCircularIllustrationListForBrands() {
       dataItems={brandsMockData}
       titlePlacement={TitlePlacement.top}
       itemCustomStyle={styles.listItem}
+      imageMaxWidthCustomStyle={customImageMaxWidth.logosBrandsMaxWidth}
     />
   );
 }
@@ -264,6 +254,7 @@ export function TypicalCircularIllustrationListForCars() {
       dataItems={carsMockData}
       titlePlacement={TitlePlacement.top}
       itemCustomStyle={styles.listItem}
+      imageMaxWidthCustomStyle={customImageMaxWidth.vehicleModelMaxWidth}
     />
   );
 }

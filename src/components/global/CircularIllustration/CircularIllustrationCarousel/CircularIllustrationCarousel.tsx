@@ -7,10 +7,15 @@ import styles from './CircularIllustrationCarousel.styles';
 
 interface Props {
   dataItems: Array<SiteGraphicTile>;
+  imageMaxWidthCustomStyles?: CSSStyles;
   itemCustomStyle?: CSSStyles;
 }
 
-function CircularIllustrationCarousel({ dataItems, itemCustomStyle }: Props) {
+function CircularIllustrationCarousel({
+  dataItems,
+  itemCustomStyle,
+  imageMaxWidthCustomStyles,
+}: Props) {
   return (
     <div css={styles.root}>
       <div css={styles.carousel}>
@@ -24,7 +29,10 @@ function CircularIllustrationCarousel({ dataItems, itemCustomStyle }: Props) {
                 css={[styles.item, itemCustomStyle]}
                 key={`car_carousel_${index}`}
               >
-                <CircularIllustrationItem {...dataItem} />
+                <CircularIllustrationItem
+                  {...dataItem}
+                  imageMaxWidthCustomStyles={imageMaxWidthCustomStyles}
+                />
               </div>
             ))}
           </Carousel>

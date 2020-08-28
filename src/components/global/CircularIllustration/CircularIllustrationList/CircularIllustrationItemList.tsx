@@ -11,6 +11,7 @@ import { styles } from '../CircularIllustrationItem/CircularIllustrationItem.sty
 
 export interface Props {
   dataItems: Array<SiteGraphicTile>;
+  imageMaxWidthCustomStyle?: CSSStyles;
   itemCustomStyle?: CSSStyles;
   titlePlacement?: TitlePlacement;
 }
@@ -19,6 +20,7 @@ export function CircularIllustrationList({
   dataItems,
   titlePlacement = TitlePlacement.top,
   itemCustomStyle,
+  imageMaxWidthCustomStyle,
 }: Props) {
   const gridColumnData = [
     {
@@ -78,6 +80,7 @@ export function CircularIllustrationList({
             <CircularIllustrationItem
               {...dataItem}
               titlePlacement={titlePlacement}
+              imageMaxWidthCustomStyles={imageMaxWidthCustomStyle}
             />
           </GridItem>
         );

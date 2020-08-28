@@ -10,7 +10,7 @@ import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 import CircularIllustrationItem, {
   TitlePlacement,
 } from './CircularIllustrationItem';
-import { styles } from './CircularIllustrationItem.styles';
+import { customImageMaxWidth, styles } from './CircularIllustrationItem.styles';
 
 export default {
   component: CircularIllustrationItem,
@@ -27,11 +27,9 @@ const defaultProps = {
   highlight: 'Top rated',
   image: {
     altText: 'Accelera',
-    height: 20,
     src:
       'https://images.simpletire.com/image/upload/v1592606314/Accelera_Tires_black_j207to.svg',
     type: ICON_IMAGE_TYPE.IMAGE,
-    width: 120,
   } as SiteImage,
   link: {
     href: '/passenger-tires',
@@ -66,6 +64,7 @@ export function CircularIllustrationItemForBrandWithKnobs() {
       titlePlacement={titlePlacement}
       highlight={highlight}
       link={link}
+      imageMaxWidthCustomStyles={customImageMaxWidth.logosBrandsMaxWidth}
     />
   );
 }
@@ -95,6 +94,7 @@ export function CircularIllustrationItemForCarWithKnobs() {
       byline={byline}
       titlePlacement={titlePlacement}
       link={link}
+      imageMaxWidthCustomStyles={customImageMaxWidth.vehicleModelMaxWidth}
     />
   );
 }
