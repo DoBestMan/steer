@@ -3,9 +3,7 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { CookiesProvider } from 'react-cookie';
 
-import SubNav from '~/components/modules/SubNav/SubNav';
 import { useNavContext } from '~/context/Nav.context';
-import { useSiteMenuContext } from '~/context/SiteMenu.context';
 import { ROUTE_MAP, ROUTES } from '~/lib/constants';
 import { trimSlash } from '~/lib/utils/routes';
 
@@ -26,7 +24,6 @@ const ALTERNATE_THEME_ROUTES: string[] = [
 function NavContainer({ isHomepage = false }: Props) {
   const { pathname } = useRouter();
   const { setNavTheme, theme } = useNavContext();
-  const siteMenu = useSiteMenuContext();
 
   /**
    * Change the nav theme based on the route.
@@ -52,7 +49,6 @@ function NavContainer({ isHomepage = false }: Props) {
     <CookiesProvider>
       <ThemeProvider theme={themes[theme]}>
         <Nav isHomepage={isHomepage} />
-        <SubNav {...siteMenu} />
       </ThemeProvider>
     </CookiesProvider>
   );

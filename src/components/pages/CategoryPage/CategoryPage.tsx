@@ -120,7 +120,7 @@ function CategoryPage({ categoryData }: CategoryPageData) {
         </Grid>
       </div>
       <CircularIllustrationCarousel dataItems={categoryData.popularBrands} />
-      {categoryData.curatedProducts.map((obj: any) => {
+      {categoryData.curatedProducts.map((obj) => {
         return (
           <div key={obj.id} css={styles.curatedProductsContainer}>
             <ProductGroupList {...obj} />

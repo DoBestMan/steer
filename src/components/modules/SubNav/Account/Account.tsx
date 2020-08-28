@@ -1,6 +1,7 @@
 import GridItem from '~/components/global/Grid/GridItem';
 import BaseLink from '~/components/global/Link/BaseLink';
-import { accountLinks, useNavContext } from '~/context/Nav.context';
+import { accountLinks } from '~/components/modules/Nav/mappers/links';
+import { useNavContext } from '~/context/Nav.context';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { layout } from '~/styles/layout.styles';
 import { typography } from '~/styles/typography.styles';

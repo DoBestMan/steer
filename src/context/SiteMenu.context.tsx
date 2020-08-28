@@ -1,4 +1,5 @@
-import { ReactNode } from 'react';
+import isStrictEqual from 'fast-deep-equal';
+import { ReactNode, useState } from 'react';
 
 import { SiteMenu } from '~/data/models/SiteMenu';
 import { useApiDataWithDefault } from '~/hooks/useApiDataWithDefault';
@@ -8,11 +9,25 @@ import { createContext } from '~/lib/utils/context';
 const SiteMenuContext = createContext<SiteMenu>();
 
 function useContextSetup(defaultData: SiteMenu) {
-  const { data, error } = useApiDataWithDefault<SiteMenu>({
+  const [dataMenu, setDataMenu] = useState<SiteMenu>(defaultData);
+
+  const { error } = useApiDataWithDefault<SiteMenu>({
     defaultData,
     endpoint: '/menu',
     includeUserRegion: true,
     includeUserZip: true,
+    options: {
+      // Avoid re-rendering SubNav if the data are the same
+      onSuccess: (data) => {
+        if (isStrictEqual(data, dataMenu)) {
+          return;
+        }
+
+        setDataMenu({
+          ...data,
+        });
+      },
+    },
     revalidateEmitter: eventEmitters.userPersonalizationLocationUpdate,
   });
 
@@ -20,7 +35,7 @@ function useContextSetup(defaultData: SiteMenu) {
     console.error(error);
   }
 
-  return data;
+  return dataMenu;
 }
 
 interface Props {

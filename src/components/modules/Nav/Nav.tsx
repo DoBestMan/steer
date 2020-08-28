@@ -1,5 +1,4 @@
 import { useTheme } from 'emotion-theming';
-import { useCookies } from 'react-cookie';
 import { Transition } from 'react-transition-group';
 import { TransitionStatus } from 'react-transition-group/Transition';
 
@@ -9,7 +8,6 @@ import Image from '~/components/global/Image/Image';
 import BaseLink from '~/components/global/Link/BaseLink';
 import { useNavContext } from '~/context/Nav.context';
 import { TIME } from '~/lib/constants';
-import { COOKIES } from '~/lib/constants/cookies';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { disableGlobalFocus } from '~/styles/document/accessibility.styles';
 import { layout } from '~/styles/layout.styles';
@@ -26,17 +24,10 @@ interface Props {
 }
 
 function Nav({ isHomepage }: Props) {
-  const {
-    links,
-    isVisible,
-    toggleSubNav,
-    createSelectLinkHandler,
-  } = useNavContext();
+  const { isVisible, toggleSubNav, createSelectLinkHandler } = useNavContext();
+
   const { toggleIsSearchOpen } = useSearchModalContext();
   const theme: NavThemeObject = useTheme();
-
-  const [cookies] = useCookies([COOKIES.CART_QTY]);
-  const cartQty = cookies[COOKIES.CART_QTY];
 
   return (
     <Transition appear={false} in={isVisible} timeout={TIME.MS400}>
@@ -70,8 +61,6 @@ function Nav({ isHomepage }: Props) {
                 handleOnSearchClick={toggleIsSearchOpen}
                 handleOnSubNavClick={toggleSubNav}
                 isHomepage={isHomepage}
-                links={links}
-                numberOfCartItems={cartQty}
                 theme={theme}
               />
             </Grid>

@@ -1,8 +1,10 @@
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Link from '~/components/global/Link/Link';
 import NavLink from '~/components/global/Link/NavLink';
+import { buildLinks } from '~/components/modules/Nav/mappers/links';
 import { ActionType, LinkType } from '~/components/modules/Nav/Nav.types';
 import { useNavContext } from '~/context/Nav.context';
+import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
 import { SiteMenu } from '~/data/models/SiteMenu';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { THEME } from '~/lib/constants';
@@ -19,10 +21,12 @@ function SubNavLinks({
     activeLink,
     createSelectLinkHandler,
     handleCloseSubNav,
-    linksMobile,
-    links,
   } = useNavContext();
   const { isMobile } = useBreakpoints();
+
+  const { locationString } = useUserPersonalizationContext();
+  const { links, linksMobile } = buildLinks({ locationString });
+
   const navLinks = isMobile ? linksMobile : links;
   const iconLinks = navLinks.filter((link) => !!link.icon);
   const textLinks = navLinks.filter((link) => !link.icon);

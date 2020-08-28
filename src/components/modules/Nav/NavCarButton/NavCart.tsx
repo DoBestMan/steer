@@ -1,6 +1,9 @@
+import { useCookies } from 'react-cookie';
+
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Link from '~/components/global/Link/Link';
 import { navLink } from '~/components/global/Link/Link.styles';
+import { COOKIES } from '~/lib/constants/cookies';
 import { getLegacyCheckoutURL } from '~/lib/utils/legacy-routes';
 import { ui } from '~/lib/utils/ui-dictionary';
 
@@ -33,11 +36,10 @@ function getCartNumber(items: number) {
   return `${items}`;
 }
 
-interface Props extends Pick<NavThemeObject, 'linkTheme'> {
-  numberOfCartItems?: number;
-}
+function NavCart({ linkTheme }: Pick<NavThemeObject, 'linkTheme'>) {
+  const [cookies] = useCookies([COOKIES.CART_QTY]);
+  const numberOfCartItems = cookies[COOKIES.CART_QTY];
 
-function NavCart({ linkTheme, numberOfCartItems }: Props) {
   if (!numberOfCartItems || numberOfCartItems < 1) {
     return null;
   }

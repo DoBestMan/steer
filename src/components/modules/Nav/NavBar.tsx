@@ -2,7 +2,9 @@ import GridItem from '~/components/global/Grid/GridItem';
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import NavLink from '~/components/global/Link/NavLink';
+import { buildLinks } from '~/components/modules/Nav/mappers/links';
 import { ActionType, LinkType } from '~/components/modules/Nav/Nav.types';
+import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import { styles } from './Nav.styles';
@@ -17,8 +19,6 @@ interface Props {
   handleOnSearchClick: () => void;
   handleOnSubNavClick: () => void;
   isHomepage?: boolean;
-  links: Array<LinkType | ActionType>;
-  numberOfCartItems?: number;
   theme: NavThemeObject;
 }
 
@@ -27,10 +27,11 @@ function NavBar({
   handleOnSearchClick,
   handleOnSubNavClick,
   isHomepage,
-  links,
-  numberOfCartItems,
   theme: { border, iconColor, linkTheme, textColor },
 }: Props) {
+  const { locationString } = useUserPersonalizationContext();
+  const { links } = buildLinks({ locationString });
+
   return (
     <GridItem
       as="ul"
@@ -63,7 +64,7 @@ function NavBar({
         </li>
       ))}
       <li css={styles.cart}>
-        <NavCart linkTheme={linkTheme} numberOfCartItems={numberOfCartItems} />
+        <NavCart linkTheme={linkTheme} />
       </li>
       <li css={[styles.listItem, styles.hamburger]}>
         <button

@@ -22,6 +22,13 @@ import CTA from './CTA/CTA';
 import { styles } from './TopPicksItem.styles';
 import { TopPickItemsProps } from './TopPicksItems.types';
 
+const ASSETS_CONSTANTS = {
+  WIDTHS: [300, 450, 600],
+  CUSTOM_CONTAINER_STYLES: {
+    backgroundColor: 'transparent',
+  },
+};
+
 function TopPicksItem(props: TopPickItemsProps) {
   const {
     addVehicleInfo,
@@ -208,8 +215,10 @@ function TopPicksItem(props: TopPickItemsProps) {
                   {...asset}
                   responsive
                   as={'span'}
-                  widths={[300, 450, 600]}
-                  customContainerStyles={{ backgroundColor: 'transparent' }}
+                  widths={ASSETS_CONSTANTS.WIDTHS}
+                  customContainerStyles={
+                    ASSETS_CONSTANTS.CUSTOM_CONTAINER_STYLES
+                  }
                 />
               </span>
             )}

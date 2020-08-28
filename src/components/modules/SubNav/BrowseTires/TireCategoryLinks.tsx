@@ -1,7 +1,8 @@
 import GridItem from '~/components/global/Grid/GridItem';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Link from '~/components/global/Link/Link';
-import { dealsLink, useNavContext } from '~/context/Nav.context';
+import { dealsLink } from '~/components/modules/Nav/mappers/links';
+import { useNavContext } from '~/context/Nav.context';
 import { SiteMenu } from '~/data/models/SiteMenu';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { ui } from '~/lib/utils/ui-dictionary';

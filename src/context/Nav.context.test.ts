@@ -1,26 +1,11 @@
 import { renderHook } from '@testing-library/react-hooks';
 import { act } from 'react-test-renderer';
-import { mocked } from 'ts-jest/utils';
 
 import { NAV_TARGETS } from '~/components/modules/Nav/Nav.types';
 
 import { useNavContextSetup } from './Nav.context';
-import * as UserPersonalizationContextUtils from './UserPersonalization.context';
 
 describe('useNavContextSetup', () => {
-  beforeEach(() => {
-    jest
-      .spyOn(UserPersonalizationContextUtils, 'useUserPersonalizationContext')
-      .mockReturnValue({
-        locationString: '',
-        selectVehicle() {},
-        unselectVehicle() {},
-        updateLocation() {},
-        userPersonalizationData: null,
-        vehicle: null,
-      });
-  });
-
   test('updating active link', () => {
     const { result } = renderHook(() => useNavContextSetup());
 
@@ -95,53 +80,5 @@ describe('useNavContextSetup', () => {
     });
 
     expect(result.current.activeLink).toBeFalsy();
-  });
-
-  test('creating links - no personalization data', () => {
-    const { result } = renderHook(() => useNavContextSetup());
-
-    expect(result.current.links).toEqual(
-      expect.arrayContaining([
-        {
-          icon: 'location',
-          label: 'Select location',
-          target: NAV_TARGETS.LOCATION,
-          text: '',
-        },
-      ]),
-    );
-  });
-
-  test('creating links - personalization data', () => {
-    mocked(
-      UserPersonalizationContextUtils.useUserPersonalizationContext,
-    ).mockReturnValue({
-      locationString: 'Portland, OR',
-      selectVehicle() {},
-      unselectVehicle() {},
-      updateLocation() {},
-      userPersonalizationData: {
-        gaClientId: '123',
-        userLocation: {
-          cityName: 'Portland',
-          region: 1,
-          stateAbbr: 'OR',
-          zip: '12345',
-        },
-      },
-      vehicle: null,
-    });
-    const { result } = renderHook(() => useNavContextSetup());
-
-    expect(result.current.links).toEqual(
-      expect.arrayContaining([
-        {
-          icon: 'location',
-          label: 'Select location',
-          target: NAV_TARGETS.LOCATION,
-          text: 'Portland, OR',
-        },
-      ]),
-    );
   });
 });

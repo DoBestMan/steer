@@ -15,10 +15,12 @@ import GridItem from '~/components/global/Grid/GridItem';
 import Layout from '~/components/global/Layout/Layout';
 import LoadingBar from '~/components/global/LoadingBar/LoadingBar';
 import Toast from '~/components/global/Toast/Toast';
+import NavContainer from '~/components/modules/Nav/Nav.container';
 import SearchModal from '~/components/modules/Search/SearchModal';
 import { useGlobalToastContext } from '~/context/GlobalToast.context';
 import { NavContextProvider } from '~/context/Nav.context';
 import { useRouterContext } from '~/context/Router.context';
+import { useSiteMenuContext } from '~/context/SiteMenu.context';
 import { ROUTE_MAP, ROUTES, TIME } from '~/lib/constants';
 import { fixHomepageRoute } from '~/lib/utils/routes';
 import { removeUrlParams } from '~/lib/utils/string';
@@ -32,8 +34,8 @@ interface Props {
   route: string;
 }
 
-const NavContainer = dynamic(() =>
-  import('~/components/modules/Nav/Nav.container'),
+const SubNavContainer = dynamic(() =>
+  import('~/components/modules/SubNav/SubNav.container'),
 );
 
 function App({ children, ...rest }: Props) {
@@ -50,6 +52,9 @@ function App({ children, ...rest }: Props) {
     handleClearGlobalToastMessage,
     isGlobalToastOpen,
   } = useGlobalToastContext();
+
+  // Put it here to not bundle backend in dynamic <SubNavContainer>
+  const { siteMenuBrowseList, siteMenuLearn } = useSiteMenuContext();
 
   const containerRef = useRef<HTMLDivElement | null>(null);
 
@@ -88,6 +93,10 @@ function App({ children, ...rest }: Props) {
       <ErrorBoundary FallbackComponent={GlobalErrorFallback}>
         <NavContextProvider>
           <NavContainer isHomepage={isHomepage} />
+          <SubNavContainer
+            siteMenuBrowseList={siteMenuBrowseList}
+            siteMenuLearn={siteMenuLearn}
+          />
           <Layout>
             <Transition
               appear={false}
