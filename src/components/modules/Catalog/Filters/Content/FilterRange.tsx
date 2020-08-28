@@ -1,5 +1,3 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
-
 import Range from '~/components/global/Range/Range';
 import { SiteCatalogFilterRange } from '~/data/models/SiteCatalogFilterRange';
 import { ui } from '~/lib/utils/ui-dictionary';
@@ -10,11 +8,10 @@ import {
 } from '../Filters.constants';
 import { ChildProps } from '../Popup/FilterPopup.utils';
 import FilterHeader from './FilterHeader';
+import { useFilterRangeManager } from './FilterRange.hooks';
 import styles from './FilterRange.styles';
 
 export default function FilterRange({
-  currentMaxValue,
-  currentMinValue,
   filtersToApply,
   header,
   id,
@@ -24,6 +21,7 @@ export default function FilterRange({
   onChange,
   openStaticModal,
   step,
+  isPreviewLoading,
   unit,
 }: SiteCatalogFilterRange &
   Pick<
@@ -34,28 +32,22 @@ export default function FilterRange({
     | 'filtersToApply'
     | 'openStaticModal'
   >) {
-  const filterGroup = filtersToApply[id];
-  const [shouldReset, setShouldReset] = useState(!filtersToApply[id]);
-  const handleChange = useCallback(
-    (value: string) => {
-      onChange({ value: { [id]: value }, overwrite: true })();
-    },
-    [id, onChange],
-  );
-
-  const prevFilterGroup = useRef(filterGroup);
-  useEffect(() => {
-    if (prevFilterGroup.current && !filterGroup) {
-      setShouldReset(true);
-    }
-
-    if (!prevFilterGroup.current && filterGroup) {
-      setShouldReset(false);
-    }
-
-    prevFilterGroup.current = filterGroup;
-  }, [filterGroup]);
-
+  const {
+    handleMaxChange,
+    handleMinChange,
+    handleUpdateFilters,
+    maxCurrent,
+    minCurrent,
+    refreshValues,
+    shouldReset,
+  } = useFilterRangeManager({
+    filterGroup: filtersToApply[id],
+    id,
+    isLoading: isPreviewLoading,
+    maxValue,
+    minValue,
+    onChange,
+  });
   return (
     <div css={styles.root}>
       <FilterHeader
@@ -66,16 +58,19 @@ export default function FilterRange({
         openStaticModal={openStaticModal}
       />
       <Range
+        refreshValues={refreshValues}
         formatLabel={mapUnitToLabelFormatter[unit]}
         getAriaText={mapUnitToAriaFormatter[unit]}
         name={ui('catalog.filters.slider', { name: id })}
         interval={step}
-        onUpdate={handleChange}
+        onUpdate={handleUpdateFilters}
         max={maxValue}
         shouldReset={shouldReset}
         min={minValue}
-        maxDefault={currentMaxValue || maxValue}
-        minDefault={currentMinValue || minValue}
+        minCurrent={minCurrent}
+        maxCurrent={maxCurrent}
+        onMaxChange={handleMaxChange}
+        onMinChange={handleMinChange}
       />
     </div>
   );

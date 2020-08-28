@@ -17,6 +17,7 @@ interface Props {
   onChange: (value: number) => void;
   onMouseUp?: () => void;
   railEl: MutableRefObject<HTMLDivElement | null>;
+  refreshValues?: boolean;
   shouldReset?: boolean;
   size: RANGE_SLIDER_SIZE;
   value?: number;

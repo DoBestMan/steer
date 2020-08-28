@@ -17,6 +17,7 @@ interface SliderArgs {
   onChange: (value: number) => void;
   onMouseUp?: () => void;
   railEl: MutableRefObject<HTMLDivElement | null>;
+  refreshValues?: boolean;
   shouldReset?: boolean;
   sliderEl: MutableRefObject<HTMLDivElement | null>;
   value?: number;
@@ -28,6 +29,7 @@ function useRangeSliderManager({
   shouldReset,
   sliderEl,
   value,
+  refreshValues,
   ...rest
 }: SliderArgs) {
   const minEl = useRef<Element | null>(null);
@@ -92,6 +94,17 @@ function useRangeSliderManager({
     // possible TODO: update fill styles via DOM manipulation rather than repaint
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sliderEl]);
+
+  // if the value failed to save set it to initial value
+  useEffect(() => {
+    if (value === undefined || !refreshValues || valueNow.current === value) {
+      return;
+    }
+    valueNow.current = value;
+    setNodeStyle(handlerProps);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [refreshValues]);
+
   return {
     maxCurrent: railMax.current,
     minCurrent: railMin.current,

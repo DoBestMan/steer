@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import {
   mapUnitToLabelFormatter,
   UNITS,
@@ -18,18 +20,22 @@ const styles = {
     width: 500,
   },
 };
+
 export function RangeSlider() {
+  const [minCurrent, setMinCurrent] = useState(0);
+  const [maxCurrent, setMaxCurrent] = useState(100);
+
   return (
     <div css={styles.root}>
       <Range
         {...{
           max: 100,
-          maxDefault: 100,
-          maxLabel: '100',
+          maxCurrent,
           min: 0,
-          minDefault: 0,
-          minLabel: '0',
+          minCurrent,
           name: 'Generic range slider',
+          onMaxChange: setMaxCurrent,
+          onMinChange: setMinCurrent,
         }}
       />
     </div>
@@ -37,17 +43,20 @@ export function RangeSlider() {
 }
 
 export function RangeWithDefaults() {
+  const [minCurrent, setMinCurrent] = useState(15);
+  const [maxCurrent, setMaxCurrent] = useState(57);
+
   return (
     <div css={styles.root}>
       <Range
         {...{
           max: 100,
-          maxDefault: 57,
-          maxLabel: '100',
+          maxCurrent,
           min: 0,
-          minDefault: 15,
-          minLabel: '0',
+          minCurrent,
           name: 'Generic range slider',
+          onMaxChange: setMaxCurrent,
+          onMinChange: setMinCurrent,
         }}
       />
     </div>
@@ -55,6 +64,9 @@ export function RangeWithDefaults() {
 }
 
 export function RangeMileage() {
+  const [minCurrent, setMinCurrent] = useState(0);
+  const [maxCurrent, setMaxCurrent] = useState(30000);
+
   return (
     <div css={styles.root}>
       <Range
@@ -63,12 +75,12 @@ export function RangeMileage() {
           getAriaText: abbreviateThousand,
           interval: 5000,
           max: 30000,
-          maxDefault: 0,
-          maxLabel: '100',
+          maxCurrent,
           min: 0,
-          minDefault: 0,
-          minLabel: '0',
+          minCurrent,
           name: 'Warranty mileage',
+          onMaxChange: setMaxCurrent,
+          onMinChange: setMinCurrent,
         }}
       />
     </div>

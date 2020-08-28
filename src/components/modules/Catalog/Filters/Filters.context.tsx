@@ -1,5 +1,5 @@
 import isStrictEqual from 'fast-deep-equal';
-import { MouseEvent, ReactNode, useEffect, useMemo, useState } from 'react';
+import { MouseEvent, ReactNode, useMemo, useState } from 'react';
 
 import { useCatalogProductsContext } from '~/context/CatalogProducts.context';
 import { useGlobalToastContext } from '~/context/GlobalToast.context';
@@ -87,7 +87,7 @@ export function useFiltersContextSetup({
   siteCatalogFilters = { filtersList: [], sortList: [] },
 }: ContextArgs) {
   const { setGlobalToastMessage } = useGlobalToastContext();
-  const { isLoading, handleUpdateResults } = useCatalogProductsContext();
+  const { handleUpdateResults } = useCatalogProductsContext();
   const [isPreviewLoading, setIsPreviewLoading] = useState(false);
   const { initialState, isPopularActive } = useMemo(
     () =>
@@ -103,20 +103,6 @@ export function useFiltersContextSetup({
   const [filtersToApply, setFiltersToApply] = useState<Record<string, string>>(
     initialState,
   );
-
-  useEffect(() => {
-    // wait until new results have come in to rehydrate initial state
-    if (isLoading) {
-      return;
-    }
-
-    const { initialState } = getInitialFiltersState(
-      siteCatalogFilters.filtersList,
-      siteCatalogFilters.sortList,
-    );
-
-    setFiltersToApply(initialState);
-  }, [isLoading, siteCatalogFilters]);
 
   return {
     activeFilters: initialState,

@@ -1,5 +1,3 @@
-import { useEffect, useRef } from 'react';
-
 import Link from '~/components/global/Link/Link';
 import { SiteCatalogFilterRange } from '~/data/models/SiteCatalogFilterRange';
 import {
@@ -29,8 +27,6 @@ export default function SubFilters({
   priceFilter,
 }: Props) {
   const {
-    filtersToApply,
-    applyFilters,
     clearSelectingFilter,
     createOpenFilterHandler,
     selectingFilter,
@@ -40,22 +36,7 @@ export default function SubFilters({
     (item) => item.state === SiteCatalogSortListItemStateEnum.Selected,
   );
 
-  // refetch results if price changes
-  const prevPriceFilter = useRef(priceFilter && filtersToApply[priceFilter.id]);
-
   const isOpen = selectingFilter === SORT_ID;
-
-  useEffect(() => {
-    if (
-      !priceFilter ||
-      prevPriceFilter.current === filtersToApply[priceFilter.id]
-    ) {
-      return;
-    }
-
-    prevPriceFilter.current = filtersToApply[priceFilter.id];
-    applyFilters();
-  }, [applyFilters, prevPriceFilter, priceFilter, filtersToApply]);
 
   const copyKey =
     resultsCount === 1 ? 'catalog.filters.result' : 'catalog.filters.results';
