@@ -20,7 +20,7 @@ function SeeAllTires({ handleUpdateResults, totalResults = 0 }: Props) {
           <span>
             {ui('catalog.recirculation.seeAllTires', { number: totalResults })}
           </span>
-          <Icon name={ICONS.CHEVRON_RIGHT} />
+          <Icon css={styles.chevron} name={ICONS.CHEVRON_RIGHT} />
         </h3>
       </button>
       <p css={styles.description}>{ui('catalog.recirculation.allOfCatalog')}</p>

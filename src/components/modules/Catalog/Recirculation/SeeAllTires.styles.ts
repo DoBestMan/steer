@@ -2,6 +2,15 @@ import { COLORS, GRID_MARGIN, MQ, SPACING, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
+  chevron: {
+    bottom: 2,
+    paddingLeft: SPACING.SIZE_10,
+    position: 'relative',
+    svg: {
+      height: 15,
+      width: 10,
+    },
+  },
   description: [
     typography.bodyCopyTight,
     {
@@ -18,7 +27,7 @@ const styles: StylesMap = {
     },
   },
   title: [
-    typography.secondaryHeadline,
+    typography.primaryHeadline,
     {
       ':hover': {
         color: COLORS.GLOBAL.ORANGE,
@@ -26,12 +35,6 @@ const styles: StylesMap = {
       alignItems: 'baseline',
       display: 'flex',
       marginBottom: 3,
-      span: {
-        ':first-of-type': {
-          marginRight: SPACING.SIZE_10,
-        },
-        marginBottom: SPACING.SIZE_02,
-      },
     },
   ],
 };
