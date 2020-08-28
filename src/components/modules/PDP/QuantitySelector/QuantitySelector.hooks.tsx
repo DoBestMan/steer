@@ -70,12 +70,8 @@ function useQuantitySelectorContainer({
   const [finalPrice, setFinalPrice] = useState(
     calculatePrice({ tirePrice, rearPrice, quantity, rearQuantity }),
   );
-  const [selectedFrontIndex, setSelectedFrontIndex] = useState(
-    quantity - 1 || 0,
-  );
-  const [selectedRearIndex, setSelectedRearIndex] = useState(
-    rearQuantity ? rearQuantity - 1 : 0,
-  );
+  const [selectedFrontIndex, setSelectedFrontIndex] = useState(0);
+  const [selectedRearIndex, setSelectedRearIndex] = useState(0);
   const [recommendedQuantity, setRecommendedQuantity] = useState(0);
 
   const numbers = CONSTANTS.PICKER_NUMBERS;
@@ -83,6 +79,11 @@ function useQuantitySelectorContainer({
   useEffect(() => {
     setQuantity(initialQuantity.front);
     setRearQuantity(initialQuantity.rear);
+
+    setSelectedFrontIndex(initialQuantity.front - 1);
+    if (initialQuantity.rear) {
+      setSelectedRearIndex(initialQuantity.rear - 1);
+    }
   }, [initialQuantity]);
 
   const onSelectFrontPicker = useCallback(
