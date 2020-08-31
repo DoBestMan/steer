@@ -11,7 +11,12 @@ const styles: StylesMap = {
     },
   },
   productName: typography.primaryHeadline,
-  productNameLong: typography.secondaryHeadline,
+  productNameLong: [
+    typography.secondaryHeadline,
+    {
+      [MQ.L]: typography.primaryHeadline,
+    },
+  ],
 };
 
 export default styles;

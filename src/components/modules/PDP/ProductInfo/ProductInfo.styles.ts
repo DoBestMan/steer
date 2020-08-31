@@ -104,6 +104,8 @@ const styles: StylesMap = {
     display: 'block',
   },
   nameWrapper: {
+    flex: 1,
+
     [MQ.L]: {
       flexBasis: '100%',
     },
