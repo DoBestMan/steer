@@ -100,7 +100,7 @@ By default, you'll run against the mock server.
 
 ### To run against a specific version of the integration server:
 
-- Update this project's `.env` file's `STEER_BACKEND` value to the name of the AIP feature branch (e.g. `sqa-424`).
+- Update this project's `.env` file's `STEER_BACKEND` value to the name of the API feature branch (e.g. `sqa-424`).
 - Run `now dev` to start local development in this project
 
 ## Other Scripts
