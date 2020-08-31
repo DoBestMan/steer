@@ -18,10 +18,7 @@ export const styles: StylesMap = {
     height: '100%',
     paddingBottom: SPACING.SIZE_60,
     [MQ.M]: {
-      padding: `0 ${SPACING.SIZE_20}px ${SPACING.SIZE_50}px ${SPACING.SIZE_20}px`,
-    },
-    [MQ.L]: {
-      padding: `0 0 ${SPACING.SIZE_50}px 0`,
+      paddingBottom: SPACING.SIZE_50,
     },
   },
   currentLocation: [
