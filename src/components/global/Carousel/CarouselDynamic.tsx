@@ -12,15 +12,19 @@ export interface Props extends ReactIdSwiperProps {
   freeScroll?: boolean;
   getSwiper?: (swiper: SwiperInstance) => void;
   params?: {};
+  shortSwipes?: boolean;
+  threshold?: number;
 }
 
 function Carousel({
   activeSlide,
   children,
   centerActiveSlide = false,
+  shortSwipes = false, // By default, prevent short Swipes to avoid (none) clicking bug
   freeScroll = false,
   getSwiper,
   params = {},
+  threshold = 5, // By default, add a threshold of 10 to avoid (none) clicking bug
   ...rest
 }: Props) {
   const [swiper, setSwiper] = useState<SwiperInstance>(null);
@@ -32,7 +36,9 @@ function Carousel({
       freeMode: freeScroll,
       grabCursor: true,
       mousewheel: freeScroll,
+      shortSwipes,
       slidesPerView: 'auto',
+      threshold,
     },
     params,
   );

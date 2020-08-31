@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { MouseEvent, useCallback, useEffect, useState } from 'react';
 
 import Carousel from '~/components/global/Carousel/Carousel';
 import { CSSStylesProp } from '~/lib/constants';
@@ -43,9 +43,15 @@ function HorizontalNumberPicker({
     }
   }, [numbers, onSelect, selectedItemIndex]);
 
-  const handleClick = (index: number) => () => {
+  // Use dataset to retrieve index instead of trusting index from loop (and being able to use useCallback)
+  const handleClick = useCallback((e: MouseEvent<HTMLButtonElement>) => {
+    const buttonEl = e.currentTarget;
+    if (buttonEl === null) {
+      return;
+    }
+    const index = parseInt(buttonEl.dataset.index || '0', 10);
     setSelectedItemIndex(index);
-  };
+  }, []);
 
   return (
     <div css={customContainerStyles} {...rest}>
@@ -60,7 +66,8 @@ function HorizontalNumberPicker({
           {numbers.map((value, index) => (
             <button
               css={styles.numberItem}
-              onClick={handleClick(index)}
+              onClick={handleClick}
+              data-index={index}
               key={index}
             >
               <span
