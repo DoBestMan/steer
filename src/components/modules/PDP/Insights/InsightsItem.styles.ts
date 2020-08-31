@@ -10,6 +10,9 @@ import {
 import { typography } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
+  chevron: {
+    marginLeft: 'auto',
+  },
   container: {
     alignItems: 'center',
     backgroundColor: COLORS.GLOBAL.ORANGE,
