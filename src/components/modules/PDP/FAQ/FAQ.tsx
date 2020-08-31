@@ -25,9 +25,9 @@ function FAQ({
   isCustomerServiceEnabled,
 }: FAQProps) {
   return (
-    <Grid css={styles.root}>
+    <>
       {questions?.length && (
-        <>
+        <Grid>
           <GridItem
             as="h2"
             gridColumn="start/end"
@@ -48,35 +48,37 @@ function FAQ({
               itemsToShowLabel={ui('pdp.faq.showAllLabel')}
             />
           </GridItem>
-        </>
+        </Grid>
       )}
-      <GridItem
-        gridColumn="start/end"
-        gridColumnL="8/13"
-        css={styles.questionsContainer}
-      >
-        <SupportHeading
-          isCustomerServiceEnabled={isCustomerServiceEnabled}
-          css={styles.supportTitle}
-        />
-        <div css={styles.supportOptions}>
-          <div css={styles.supportItem}>
-            <PhoneSupport
-              customerServiceNumber={customerServiceNumber}
-              theme={LINK_THEME.DARK_HIGHLIGHTED}
-              isCustomerServiceEnabled={isCustomerServiceEnabled}
-            />
+      <Grid css={styles.supportContainer}>
+        <GridItem
+          gridColumn="start/end"
+          gridColumnL="8/13"
+          css={styles.questionsContainer}
+        >
+          <SupportHeading
+            isCustomerServiceEnabled={isCustomerServiceEnabled}
+            css={styles.supportTitle}
+          />
+          <div css={styles.supportOptions}>
+            <div css={styles.supportItem}>
+              <PhoneSupport
+                customerServiceNumber={customerServiceNumber}
+                theme={LINK_THEME.DARK_HIGHLIGHTED}
+                isCustomerServiceEnabled={isCustomerServiceEnabled}
+              />
+            </div>
+            <div css={styles.supportItem}>
+              <EmailSupport
+                theme={LINK_THEME.DARK_HIGHLIGHTED}
+                isCustomerServiceEnabled={isCustomerServiceEnabled}
+                css={styles.supportItem}
+              />
+            </div>
           </div>
-          <div css={styles.supportItem}>
-            <EmailSupport
-              theme={LINK_THEME.DARK_HIGHLIGHTED}
-              isCustomerServiceEnabled={isCustomerServiceEnabled}
-              css={styles.supportItem}
-            />
-          </div>
-        </div>
-      </GridItem>
-    </Grid>
+        </GridItem>
+      </Grid>
+    </>
   );
 }
 

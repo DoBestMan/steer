@@ -2,8 +2,9 @@ import { COLORS, SPACING, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
-  root: {
+  supportContainer: {
     marginBottom: -SPACING.SIZE_20,
+    marginTop: SPACING.SIZE_80,
   },
   supportItem: {
     flex: 1,

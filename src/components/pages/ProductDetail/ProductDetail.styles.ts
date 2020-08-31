@@ -36,7 +36,9 @@ const styles: StylesMap = {
       backgroundColor: COLORS.GLOBAL.BLACK,
 
       // eslint-disable-next-line sort-keys
-      '> div:not(:first-of-type)': defaultSpacing('marginTop'),
+      '> div:not(:first-of-type):not(:last-of-type)': defaultSpacing(
+        'marginTop',
+      ),
     },
   ],
   featuredRecirculation: defaultSpacing('marginTop'),
