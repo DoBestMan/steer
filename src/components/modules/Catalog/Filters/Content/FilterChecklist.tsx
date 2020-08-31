@@ -108,6 +108,9 @@ export default function FilterChecklist({
   return (
     <div css={styles.root}>
       <FilterHeader
+        alwaysShow={
+          presentationStyle === SiteCatalogFilterListPresentationStyleEnum.Large
+        }
         customHeaderStyles={styles.header}
         header={header}
         title={<h2 css={lgStyles.title}>{header?.title}</h2>}

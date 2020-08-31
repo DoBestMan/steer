@@ -27,6 +27,7 @@ const styles: StylesMap = {
       [MQ.L]: {
         borderBottom: BORDERS.SOLID_GRAY_20_1PX,
         color: COLORS.LIGHT.GRAY_70,
+        width: '100%',
       },
     },
   ],

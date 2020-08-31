@@ -1,4 +1,4 @@
-import { COLORS, SPACING, StylesMap } from '~/lib/constants';
+import { COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
@@ -25,6 +25,9 @@ const styles: StylesMap = {
     display: 'flex',
     justifyContent: 'space-between',
     marginBottom: SPACING.SIZE_40,
+    [MQ.L]: {
+      marginBottom: 0,
+    },
   },
   label: [
     typography.filterItemLabel,

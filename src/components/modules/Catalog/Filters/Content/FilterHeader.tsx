@@ -8,6 +8,7 @@ import { ChildProps } from '../Popup/FilterPopup.utils';
 import styles from './FilterHeader.styles';
 
 type Props = {
+  alwaysShow?: boolean;
   customHeaderStyles?: CSSStylesProp;
   isGroupHeader?: boolean;
   title: ReactNode;
@@ -15,6 +16,7 @@ type Props = {
   Pick<ChildProps, 'isLarge' | 'openStaticModal'>;
 
 function FilterHeader({
+  alwaysShow,
   customHeaderStyles,
   header,
   isLarge = false,
@@ -27,7 +29,8 @@ function FilterHeader({
     () => header?.infoLink && modalId && isValidStaticModal(modalId),
     [header, modalId],
   );
-  const showHeader = header && (isGroupHeader || !isLarge || hasValidInfoLink);
+  const showHeader =
+    header && (isGroupHeader || !isLarge || hasValidInfoLink || alwaysShow);
 
   function openHeaderModal() {
     if (modalId) {
