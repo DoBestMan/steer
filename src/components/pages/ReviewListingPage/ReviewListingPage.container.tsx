@@ -73,10 +73,10 @@ function ReviewListingPage({
 
   return (
     <div css={[navigationBreadcrumbPaddingTop, styles.root]}>
+      <Meta {...meta} />
       {ratingsDataStructure.products.map((product, i) => (
         <DataStructure key={i} jsonLD={product} />
       ))}
-      <Meta {...meta} />
       <Header
         breadcrumbs={header.breadcrumbs}
         title={header.title}

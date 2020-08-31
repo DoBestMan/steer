@@ -65,8 +65,8 @@ function ReviewDetailPage({ serverData }: ProductDetailData) {
 
   return (
     <div css={navigationBreadcrumbPaddingTop}>
-      <DataStructure jsonLD={ratingsDataStructure} />
       <Meta {...meta} />
+      <DataStructure jsonLD={ratingsDataStructure} />
       <ReviewsHeader
         brand={brandObj}
         brandUrl={brandUrl}
