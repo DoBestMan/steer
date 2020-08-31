@@ -68,6 +68,10 @@ function useContextSetup({
   const [productsData, setProductsData] = useState<
     CatalogPageData['serverData']['siteCatalogProducts']
   >(null);
+  const [previewFiltersData, setPreviewFiltersData] = useState({
+    totalMatches: 0,
+    filters: EMPTY_FILTERS as SiteCatalogFilters,
+  });
 
   const handleUpdateResults = async (
     filters: Record<string, string>,
@@ -94,6 +98,12 @@ function useContextSetup({
     options: {
       onSuccess: (data) => {
         setProductsData(data?.siteCatalogProducts);
+        setPreviewFiltersData({
+          totalMatches:
+            data?.siteCatalogProducts.listResultMetadata.pagination?.total || 0,
+          filters:
+            data?.siteCatalogProducts.siteCatalogFilters || EMPTY_FILTERS,
+        });
       },
     },
   });
@@ -171,11 +181,6 @@ function useContextSetup({
   );
 
   // preview data and handler for open filter dropdowns
-  const [previewFiltersData, setPreviewFiltersData] = useState({
-    totalMatches: productsData?.listResultMetadata.pagination?.total || 0,
-    filters: productsData?.siteCatalogFilters || EMPTY_FILTERS,
-  });
-
   const onPreviewFilters = useCallback(
     async (filters?: Record<string, string>) => {
       // data was previewed but closed before applying - reset to initial state
