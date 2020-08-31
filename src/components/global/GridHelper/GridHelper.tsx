@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
-import { useSearch } from '~/hooks/useSearch';
+import { useQueryParams } from '~/hooks/useQueryParams';
 import { NB_COLUMNS } from '~/lib/constants';
 
 import styles from './GridHelper.styles';
@@ -16,14 +16,14 @@ function GridHelper(props: Props) {
   const { show } = props;
 
   const [hasMounted, setHasMounted] = useState(false);
-  const search = useSearch();
+  const queryParams = useQueryParams();
   const { bk } = useBreakpoints();
 
   useEffect(() => {
     setHasMounted(true);
   }, []);
 
-  if ((!search.grid && !show) || !hasMounted) {
+  if ((!queryParams.grid && !show) || !hasMounted) {
     return null;
   }
 
