@@ -28,6 +28,15 @@ const styles: StylesMap = {
     typography.primaryHeadline,
     { display: 'block', marginBottom: SPACING.SIZE_05 },
   ],
+  pricesPadded: {
+    marginBottom: SPACING.SIZE_20,
+    [MQ.M]: {
+      marginBottom: SPACING.SIZE_30,
+    },
+    [MQ.L]: {
+      marginBottom: 0,
+    },
+  },
   startingPrice: [
     typography.primarySubhead,
     {

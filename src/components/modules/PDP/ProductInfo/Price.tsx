@@ -33,6 +33,10 @@ function Price({
     return null;
   }
 
+  const isSalePrice =
+    parseInt(price.salePriceInCents, 10) <
+    parseInt(price.estimatedRetailPriceInCents, 10);
+
   return (
     <>
       {priceLabel && <p css={styles.priceFeature}>{priceLabel}</p>}
@@ -44,7 +48,10 @@ function Price({
       <Prices
         originalPrefix={ui('common.originalPricePrefix')}
         priceList={[{ price }]}
-        customPriceStyles={styles.prices}
+        customPriceStyles={[
+          styles.prices,
+          !isSalePrice ? styles.pricesPadded : {},
+        ]}
         customOriginalStyles={styles.originalPrice}
       />
     </>
