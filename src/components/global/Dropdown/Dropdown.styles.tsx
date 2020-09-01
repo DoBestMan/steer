@@ -29,7 +29,7 @@ const styles: StylesMap = {
   actionBarContentModal: {
     paddingBottom: ACTION_BAR_HEIGHT.SM,
     [MQ.M]: {
-      paddingBottom: ACTION_BAR_HEIGHT.MED,
+      paddingBottom: SPACING.SIZE_50,
     },
     [MQ.L]: {
       paddingBottom: ACTION_BAR_HEIGHT.LG,
@@ -39,6 +39,14 @@ const styles: StylesMap = {
     [MQ.L]: {
       height: 100,
       padding: `${SPACING.SIZE_25}px ${SPACING.SIZE_30}px`,
+    },
+  },
+  bottomCardModal: {
+    [MQ.M]: {
+      paddingBottom: 0,
+    },
+    [MQ.L]: {
+      paddingBottom: 'inherit',
     },
   },
   carouselDropdown: {

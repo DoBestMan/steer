@@ -128,6 +128,7 @@ export default function Dropdown({
   return (
     <BottomCardModal
       contentLabel={contentLabel}
+      customContentStyles={actionBar ? styles.bottomCardModal : {}}
       isOpen={isOpen}
       onClose={onClose}
     >

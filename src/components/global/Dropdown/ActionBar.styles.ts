@@ -43,12 +43,17 @@ const styles: StylesMap = {
     },
     [MQ.M]: {
       height: ACTION_BAR_HEIGHT.MED,
+      marginLeft: `-${SPACING.SIZE_40}px`,
       padding: `${SPACING.SIZE_25}px ${SPACING.SIZE_40}px`,
-      position: 'absolute',
+      position: 'sticky',
+      width: `calc(100% + ${SPACING.SIZE_40 * 2}px)`,
     },
     [MQ.L]: {
       height: ACTION_BAR_HEIGHT.LG,
+      marginLeft: 0,
       padding: `${SPACING.SIZE_15}px ${SPACING.SIZE_30}px`,
+      position: 'absolute',
+      width: 'auto',
     },
   },
   secondary: [
