@@ -17,13 +17,13 @@ const DROPDOWN_MAX_WIDTH = 400;
 
 const styles: StylesMap = {
   actionBarContentDropdown: {
-    paddingBottom: ACTION_BAR_HEIGHT.SM + SPACING.SIZE_20,
+    paddingBottom: ACTION_BAR_HEIGHT.SM,
     minWidth: DROPDOWN_MIN_WIDTH,
     [MQ.M]: {
-      paddingBottom: ACTION_BAR_HEIGHT.MED + SPACING.SIZE_20,
+      paddingBottom: ACTION_BAR_HEIGHT.MED,
     },
     [MQ.L]: {
-      paddingBottom: ACTION_BAR_HEIGHT.LG + SPACING.SIZE_20,
+      paddingBottom: ACTION_BAR_HEIGHT.LG,
     },
   },
   actionBarContentModal: {
