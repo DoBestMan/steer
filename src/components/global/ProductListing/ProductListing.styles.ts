@@ -139,11 +139,18 @@ const styles: StylesMap = {
     },
   ],
   promos: {
-    marginBottom: -8,
+    alignItems: 'center',
+    display: 'flex',
+    div: {
+      width: 'fit-content',
 
-    'div:first-of-type:not(:only-child)': {
-      marginBottom: -1,
+      ':first-of-type:not(:only-child)': {
+        marginBottom: SPACING.SIZE_05,
+      },
     },
+    flexDirection: 'column',
+    marginBottom: -8,
+    width: '100%',
   },
   rating: {
     alignItems: 'flex-end',
