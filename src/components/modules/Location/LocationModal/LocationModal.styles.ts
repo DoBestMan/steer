@@ -1,4 +1,4 @@
-import { CSSObjectType, SPACING, StylesMap, TIME } from '~/lib/constants';
+import { CSSObjectType, MQ, SPACING, StylesMap, TIME } from '~/lib/constants';
 import { slideFadeInLeft, slideFadeOutLeft } from '~/styles/animations.styles';
 
 export const SLIDE_LEFT: CSSObjectType = {
@@ -19,6 +19,15 @@ const styles: StylesMap = {
   container: {
     height: '100%',
     paddingTop: SPACING.SIZE_120,
+
+    [MQ.M]: {
+      paddingLeft: SPACING.SIZE_20,
+      paddingRight: SPACING.SIZE_20,
+    },
+    [MQ.L]: {
+      paddingLeft: 0,
+      paddingRight: 0,
+    },
   },
   header: {
     display: 'flex',
