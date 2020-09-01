@@ -4,7 +4,7 @@ import { typography } from '~/styles/typography.styles';
 const styles: StylesMap = {
   supportContainer: {
     marginBottom: -SPACING.SIZE_20,
-    marginTop: SPACING.SIZE_80,
+    marginTop: SPACING.SIZE_20,
   },
   supportItem: {
     flex: 1,
