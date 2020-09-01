@@ -72,12 +72,15 @@ describe('getBackendEnvVariables', () => {
     });
   });
 
-  // TODO: temporarily feature branches are identified by the "sqa-" prefix
-  test.each(['sqa-001', 'SQA-001'])('feature branch - %s', (branch) => {
+  test.each([
+    'feature-sqa-001',
+    'feature-SQA-001',
+    'feature-sqa-001-some-description',
+  ])('feature branch - %s', (branch) => {
     process.env.VERCEL_GITHUB_COMMIT_REF = branch;
 
     expect(getBackendEnvVariables()).toEqual({
-      backendEndpoint: `https://${branch}-services.jenkins.simpletire.com`,
+      backendEndpoint: 'https://sqa-001-services.jenkins.simpletire.com',
       clientId: 'sharedId',
       clientSecret: 'integrationSecret',
     });

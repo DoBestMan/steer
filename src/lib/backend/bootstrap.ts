@@ -3,7 +3,7 @@ import { IncomingMessage } from 'http';
 import { UserPersonalization } from '~/data/models/UserPersonalization';
 import { URLS } from '~/lib/constants/urls';
 import {
-  isFeatureBranchDeploy,
+  getFeatureBranchTicketName,
   isLocal,
   isMockDeploy,
   isProductionDeploy,
@@ -18,7 +18,6 @@ import {
 import { backendOauthToken } from './oauth';
 
 enum API {
-  FEATURE_BRANCH = 'feature',
   INTEGRATION = 'integration',
   LOCAL = 'local',
   MOCK = 'mock',
@@ -31,15 +30,12 @@ export function getBackendEnvVariables(): {
   clientSecret?: string;
 } {
   let pointTo = API.INTEGRATION;
-  let integrationBranch = undefined;
+  let integrationBranch = getFeatureBranchTicketName();
 
   if (isProductionDeploy()) {
     pointTo = API.PRODUCTION;
   } else if (isMockDeploy()) {
     pointTo = API.MOCK;
-  } else if (isFeatureBranchDeploy()) {
-    pointTo = API.FEATURE_BRANCH;
-    integrationBranch = process.env.VERCEL_GITHUB_COMMIT_REF;
   } else {
     if (isLocal()) {
       const backend = process.env.STEER_BACKEND || 'mock';
@@ -54,10 +50,19 @@ export function getBackendEnvVariables(): {
           pointTo = API.INTEGRATION;
           break;
         default:
-          pointTo = API.FEATURE_BRANCH;
           integrationBranch = backend;
       }
     }
+  }
+
+  if (integrationBranch) {
+    // eslint-disable-next-line no-console
+    console.log(`Pointing to ${URLS.MAIN_API_FEATURE(integrationBranch)}`);
+    return {
+      backendEndpoint: URLS.MAIN_API_FEATURE(integrationBranch),
+      clientId: process.env.STEER_CLIENT_ID,
+      clientSecret: process.env.STEER_CLIENT_SECRET_INTEGRATION,
+    };
   }
 
   if (pointTo === API.PRODUCTION) {
@@ -84,16 +89,10 @@ export function getBackendEnvVariables(): {
     };
   }
 
-  if (pointTo === API.INTEGRATION) {
-    return {
-      backendEndpoint: URLS.MAIN_API_INTEGRATION,
-      clientId: process.env.STEER_CLIENT_ID,
-      clientSecret: process.env.STEER_CLIENT_SECRET_INTEGRATION,
-    };
-  }
-
+  // eslint-disable-next-line no-console
+  console.log(`Pointing to ${URLS.MAIN_API_INTEGRATION}`);
   return {
-    backendEndpoint: URLS.MAIN_API_FEATURE(integrationBranch),
+    backendEndpoint: URLS.MAIN_API_INTEGRATION,
     clientId: process.env.STEER_CLIENT_ID,
     clientSecret: process.env.STEER_CLIENT_SECRET_INTEGRATION,
   };

@@ -3,9 +3,21 @@ export function isProductionDeploy(): boolean {
   return deployRef === 'master';
 }
 
-export function isFeatureBranchDeploy(): boolean {
+const featureBranchRegex = /^feature-([a-zA-Z]+-[0-9]+).*/;
+
+export function getFeatureBranchTicketName(): string | null {
   const deployRef = process.env.VERCEL_GITHUB_COMMIT_REF;
-  return Boolean(deployRef && /^sqa-/.test(deployRef.toLowerCase()));
+  let branchId = null;
+
+  if (deployRef) {
+    const matches = deployRef.match(featureBranchRegex);
+    if (matches !== null) {
+      [, branchId] = matches;
+      branchId = branchId.toLowerCase();
+    }
+  }
+
+  return branchId;
 }
 
 export function isMockDeploy(): boolean {
