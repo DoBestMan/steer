@@ -10,7 +10,7 @@ function ReferAFriend() {
   }, []);
 
   return (
-    <div css={[styles.root, styles.rootIos]}>
+    <div css={styles.root}>
       <div id="talkable-offer"></div>
     </div>
   );

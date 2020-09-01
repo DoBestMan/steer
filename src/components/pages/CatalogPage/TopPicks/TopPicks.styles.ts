@@ -2,7 +2,15 @@ import { CSSObject } from '@emotion/core';
 
 import { WHEEL_WIDTH } from '~/components/global/Car/Car.constants';
 import { NAV_HEIGHT } from '~/components/modules/Nav/Nav.styles';
-import { COLORS, EASING, MQ, SPACING, TIME, Z_INDEX } from '~/lib/constants';
+import {
+  COLORS,
+  EASING,
+  MQ,
+  SAFARI_ONLY,
+  SPACING,
+  TIME,
+  Z_INDEX,
+} from '~/lib/constants';
 
 export const EXPLORE_BUTTON_HEIGHT = {
   S: 60,
@@ -111,12 +119,9 @@ export const styles: CSSObject = {
     display: 'flex',
     flexDirection: 'column',
     minHeight: '100vh',
-  },
 
-  rootIos: {
-    minHeight: '-webkit-fill-available',
-    [MQ.M]: {
-      minHeight: '100vh',
+    [SAFARI_ONLY]: {
+      minHeight: '-webkit-fill-available',
     },
   },
 

@@ -284,7 +284,7 @@ function TopPicks({
   }
 
   return (
-    <div ref={rootRef} css={[styles.root, styles.rootIos]}>
+    <div ref={rootRef} css={styles.root}>
       <div css={styles.titlesContainer}>
         <div
           css={[styles.titleContainer, showTitle && styles.titleContainerShow]}

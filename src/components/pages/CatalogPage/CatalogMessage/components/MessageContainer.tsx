@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { TransitionStatus } from 'react-transition-group/Transition';
 
-import { COLORS, CSSStyles, EASING, MQ } from '~/lib/constants';
+import { COLORS, CSSStyles, EASING, MQ, SAFARI_ONLY } from '~/lib/constants';
 
 import {
   MEASUREMENTS,
@@ -107,6 +107,10 @@ function styledMessageContainer({
           // Make sure the Content component fills the screen while
           // the TopPicks component loads dynamically
           minHeight: '100vh !important',
+
+          [SAFARI_ONLY]: {
+            minHeight: '-webkit-fill-available !important',
+          },
         },
       ];
     case STAGES.NO_RESULTS:

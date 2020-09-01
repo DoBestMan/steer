@@ -3,6 +3,7 @@ export * from './animation';
 export * from './borders';
 export * from './breakpoints.types';
 export * from './breakpoints';
+export * from './browsers';
 export * from './buttons.types';
 export * from './colors';
 export * from './easing';

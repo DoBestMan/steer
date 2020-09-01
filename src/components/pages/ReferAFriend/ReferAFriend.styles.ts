@@ -1,5 +1,5 @@
 import { NAV_HEIGHT } from '~/components/modules/Nav/Nav.styles';
-import { MQ, StylesMap } from '~/lib/constants';
+import { MQ, SAFARI_ONLY, StylesMap } from '~/lib/constants';
 
 const EXTRA_PADDING = {
   S: 0,
@@ -22,9 +22,10 @@ const styles: StylesMap = {
       paddingBottom: EXTRA_PADDING.L,
       paddingTop: NAV_HEIGHT.L + EXTRA_PADDING.L,
     },
-  },
-  rootIos: {
-    minHeight: '-webkit-fill-available',
+
+    [SAFARI_ONLY]: {
+      minHeight: '-webkit-fill-available',
+    },
   },
 };
 
