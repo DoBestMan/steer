@@ -8,7 +8,7 @@ export const shopWithConfidenceData = [
     detail: 'fastest growing company in US',
   },
   {
-    heading: '10,000+',
+    heading: '20,000+',
     detail: 'certified installers',
   },
   {

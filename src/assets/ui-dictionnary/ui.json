@@ -2,9 +2,9 @@
   "meta": {
     "categoryPages": {
       "title": "Shop for {{category}} Tires Online with Free Shipping",
-      "description": "Shop for the best {{category}} tires online by brand, type, and more at a low cost with fast and free shipping direct to you or one of our 10,000+ installation centers."
+      "description": "Shop for the best {{category}} tires online by brand, type, and more at a low cost with fast and free shipping direct to you or one of our 20,000+ installation centers."
     },
-    "description": "Fast & Free Delivery! Shop for automotive tires online from over 300+ brands. Have them shipped to and installed at one of our 10,000+ installation centers, making the purchase and installation process painless and simple.",
+    "description": "Fast & Free Delivery! Shop for automotive tires online from over 300+ brands. Have them shipped to and installed at one of our 20,000+ installation centers, making the purchase and installation process painless and simple.",
     "title": "Buy Automotive Tires Online for Less",
     "tireDeals": {
       "title": "Tire Deals & Rebates from Goodyear, Bridgestone, Hankook & More",
@@ -26,10 +26,10 @@
         },
         "productLine": {
           "title": "Buy {{brand}} {{productLine}} Tires Online",
-          "description": "Buy new {{brand}} {{productLine}} tires from SimpleTire at the lowest cost and get them delivered directly to you, or one of our 10,000+ installation centers in days. Schedule an installation with your preferred mechanic to make tire buying a painless and simple process.",
+          "description": "Buy new {{brand}} {{productLine}} tires from SimpleTire at the lowest cost and get them delivered directly to you, or one of our 20,000+ installation centers in days. Schedule an installation with your preferred mechanic to make tire buying a painless and simple process.",
           "pdp": {
             "title": "Buy {{brand}} {{productLine}} {{tireSize}} Tires",
-            "description": "Buy {{brand}} {{productLine}} tires in the size you need at a low cost with free shipping direct, to you or one of our 10,000+ installation centers."
+            "description": "Buy {{brand}} {{productLine}} tires in the size you need at a low cost with free shipping direct, to you or one of our 20,000+ installation centers."
           },
           "reviews": {
             "title": "{{brand}} {{productLine}} Tire Reviews & Ratings",
@@ -71,10 +71,10 @@
         "model": {
           "year": {
             "title": "Shop {{year}} {{make}} {{model}} Tires",
-            "description": "Find the best tires for your {{year}} {{make}} {{model}}, shipped free and direct to you or one of our 10,000+ installation centers. Shop for the best deal on your {{year}} {{make}} {{model}}.",
+            "description": "Find the best tires for your {{year}} {{make}} {{model}}, shipped free and direct to you or one of our 20,000+ installation centers. Shop for the best deal on your {{year}} {{make}} {{model}}.",
             "tireSize": {
               "title": "Buy {{make}} {{model}} {{trim}} {{tireSize}} Tires",
-              "description": "Find the best {{tireSize}} tires for your {{make}} {{model}} {{trim}} and have them shipped for free directly to you, or to one of our 10,000+ installation centers making the tire buying process painless and simple."
+              "description": "Find the best {{tireSize}} tires for your {{make}} {{model}} {{trim}} and have them shipped for free directly to you, or to one of our 20,000+ installation centers making the tire buying process painless and simple."
             }
           }
         }
