@@ -8,7 +8,10 @@ import {
   WHEEL_WIDTH,
 } from '~/components/global/Car/Car.constants';
 import { Cars } from '~/components/global/Car/Car.enums';
-import { getScaleVector } from '~/components/global/Car/Car.utils';
+import {
+  getScaleVector,
+  instanceOfCars,
+} from '~/components/global/Car/Car.utils';
 import { CAR_DETAILS } from '~/components/global/Car/CarDetails.constants';
 import { Breakpoint, CSSStyles, EASING, MQ } from '~/lib/constants';
 
@@ -27,6 +30,16 @@ function styledCarContainer({
   showLoadingInterstitial,
   stage,
 }: Props) {
+  const isValidCarId = instanceOfCars(carId);
+
+  // No need to try to return all those CSS rules
+  // The car ID is no valid, therefore there's no car to display
+  if (!isValidCarId) {
+    return {
+      display: 'none',
+    };
+  }
+
   const carDetails = CAR_DETAILS[carId];
   const distanceFrontToRearWheel =
     carDetails.width -
