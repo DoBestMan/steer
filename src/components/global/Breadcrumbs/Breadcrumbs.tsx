@@ -31,8 +31,10 @@ function Breadcrumbs({ navigationItems, theme = THEME.LIGHT }: Props) {
         itemListElement: navigationItems.map((item, index) => ({
           '@type': 'ListItem',
           position: index + 1,
-          name: item.label,
-          item: !item.currentPath ? `${hostUrl}${item.url}` : undefined,
+          item: {
+            '@id': `${hostUrl}${item.url}`,
+            name: item.label,
+          },
         })),
       }
     : null;
