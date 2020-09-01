@@ -136,7 +136,15 @@ const styles: StylesMap = {
   },
   momentList: {
     marginTop: SPACING.SIZE_20,
-    [MQ.XL]: { marginTop: SPACING.SIZE_30 },
+    [MQ.XL]: {
+      // Bottom aligns this block with specs
+      marginBottom: -3,
+      marginTop: SPACING.SIZE_30,
+    },
+
+    'li:last-child': {
+      marginBottom: 0,
+    },
   },
   momentPromo: {
     color: COLORS.GLOBAL.ORANGE,
