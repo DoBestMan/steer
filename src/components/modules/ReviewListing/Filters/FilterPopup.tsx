@@ -38,6 +38,7 @@ export default function FilterPopup({
       insideCarousel
       isOpen={isOpen}
       onClose={onClose}
+      shouldRenderDropdownHtml
     >
       <FilterContent
         filterGroups={filterGroups}

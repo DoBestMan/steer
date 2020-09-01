@@ -22,6 +22,7 @@ interface Props {
   isOpen: boolean;
   onClose: () => void;
   shouldActivateListeners?: boolean;
+  shouldRenderDropdownHtml?: boolean;
 }
 
 export default function Dropdown({
@@ -33,13 +34,14 @@ export default function Dropdown({
   isOpen,
   onClose,
   shouldActivateListeners = true,
+  shouldRenderDropdownHtml,
 }: Props) {
   const { greaterThan } = useBreakpoints();
   const dropdownEl = useRef<HTMLDivElement>(null);
   const [
     calculatedStyles,
     setCalculatedStyles,
-  ] = useState<CSSProperties | null>(null);
+  ] = useState<CSSProperties | null>({ opacity: 0 });
   const { width } = useWindowSize();
 
   const isModal = !greaterThan.M || forceModal;
@@ -97,10 +99,6 @@ export default function Dropdown({
     setCalculatedStyles(stylesFn());
   }, [isOpen, insideCarousel, width]);
 
-  if (!calculatedStyles) {
-    return null;
-  }
-
   if (!isModal) {
     return (
       <FocusTrap active={isOpen && shouldActivateListeners} ref={dropdownEl}>
@@ -118,7 +116,7 @@ export default function Dropdown({
         >
           {/* focus trap and dropdown wrapper need to be in dom to update positioning
           and focus but wait to render children until it's open */}
-          {isOpen && children}
+          {shouldRenderDropdownHtml ? children : isOpen && children}
           {!!actionBar && <DynamicActionBar {...actionBar} />}
         </div>
       </FocusTrap>

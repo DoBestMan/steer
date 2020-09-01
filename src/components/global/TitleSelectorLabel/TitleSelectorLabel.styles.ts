@@ -5,6 +5,9 @@ const styles: StylesMap = {
   containerLabel: {
     display: 'flex',
     flexWrap: 'wrap',
+    [MQ.L]: {
+      paddingTop: SPACING.SIZE_02,
+    },
   },
   count: [
     typography.smallCopyTight,
@@ -62,7 +65,7 @@ const styles: StylesMap = {
       paddingBottom: SPACING.SIZE_05,
     },
     [MQ.L]: {
-      paddingBottom: 4,
+      paddingBottom: SPACING.SIZE_02,
     },
   },
 };
