@@ -63,7 +63,7 @@ export const dStyles = {
         display: 'none',
         [MQ.XL]: {
           display: 'inline',
-          minWidth: SPACING.SIZE_70,
+          minWidth: SPACING.SIZE_100,
         },
       },
     ],
