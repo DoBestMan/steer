@@ -177,6 +177,9 @@ function Autocomplete({
   }, [inputValue, onChange]);
 
   const selectIndex = (index: number) => {
+    if (!hasResults) {
+      return;
+    }
     setActivedescendant(getItemDOMId(ids.listboxItemID, results[index].main));
     setSelectedIndex(index);
   };
