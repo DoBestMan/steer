@@ -1,5 +1,6 @@
 import { BreadcrumbsItem } from '~/components/global/Breadcrumbs/Breadcrumbs';
 import { ROUTE_LABELS, ROUTE_MAP, ROUTES } from '~/lib/constants';
+import { removeUrlParams } from '~/lib/utils/string';
 
 import { absoluteUrlGroups } from './regex';
 import { interpolateRoute } from './routes';
@@ -85,8 +86,12 @@ export function mapPathnameToBreadcrumbs({
     ];
   } else {
     const lastChild = final[final.length - 1];
-    lastChild.url = asPath;
     lastChild.currentPath = true;
+    // Removing URL params on the last child due to a bug that causes
+    // params that shouldn't be added to the url to show up when you hover the link
+    // WCS-1606, WCS-1616
+
+    lastChild.url = removeUrlParams(asPath);
   }
 
   return final;
