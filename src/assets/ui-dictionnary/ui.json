@@ -724,5 +724,9 @@
     "mostPopularBrandsHeadlineCopy": "<h2>Most popular brands</h2>",
     "mostPopularTextCopy": "<p>Not sure where to start? View some of the most popular {{category}} tires on the road by top brands below:</p>",
     "tireSizeBoardTitle": "<h3>Add your vehicle info or tire size to find the best {{category}} tire recommendation</h3>"
+  },
+  "pagination": {
+    "pageNumber": "Page {{selectedPageNumber}} of {{pageCount}}",
+    "older": "Older"
   }
 }
