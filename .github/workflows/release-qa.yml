@@ -2,8 +2,8 @@ name: Release QA
 
 on:
   schedule:
-  # 5:00pm EDT Mon-Fri
-  - cron: '0 21 * * 1-5'
+  # 1:00am UTC Tue-Sat = 9:00pm EDT Mon-Fri
+  - cron: '0 1 * * 2-6'
 
 jobs:
   release:
