@@ -33,9 +33,8 @@ function NavContainer({ isHomepage = false }: Props) {
    * component.
    */
   useEffect(() => {
-    const isAlternateTheme = ALTERNATE_THEME_ROUTES.includes(
-      trimSlash(pathname),
-    );
+    const trimmedRoute = trimSlash(pathname);
+    const isAlternateTheme = ALTERNATE_THEME_ROUTES.includes(trimmedRoute);
     const newTheme = isAlternateTheme ? NAV_THEME.ALTERNATE : NAV_THEME.DEFAULT;
 
     if (newTheme !== theme) {
@@ -43,7 +42,7 @@ function NavContainer({ isHomepage = false }: Props) {
     }
     // This hook should not be called when `navTheme` is updated elsewhere
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathname, setNavTheme]);
+  }, [pathname]);
 
   return (
     <CookiesProvider>
