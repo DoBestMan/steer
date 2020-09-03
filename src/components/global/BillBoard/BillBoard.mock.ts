@@ -12,7 +12,7 @@ const billBoard: BillboardProps = {
   onBrandCTAClick: () => {},
   onTireSizeCTAClick: () => {},
   onVehicleCTAClick: () => {},
-  title: 'Ready to find perfect tire?',
+  title: 'Ready to find the perfect tires?',
 };
 
 export default billBoard;
