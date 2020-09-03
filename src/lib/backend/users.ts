@@ -5,18 +5,28 @@ import { UserPersonalizationUpdate } from '~/data/models/UserPersonalizationUpda
 
 import { fetch } from '../fetch';
 
-export async function backendCreateUserSession({ userIp }: { userIp: string }) {
+export async function backendCreateUserSession({
+  userIp,
+  regionId,
+}: {
+  userIp: string;
+  regionId?: string;
+}) {
   const response = await fetch<
     {
       userPersonalization: UserPersonalization;
       userSessionId: string;
     },
-    { userIp: string }
+    { userIp: string; regionId?: string }
   >({
     endpoint: '/v1/users/session',
     includeAuthorization: true,
     jsonBody: {
       userIp,
+      // regionId comes from an optional `region_id` query param passed by Google on the FE
+      // We want to forward it to the user personalization API call
+      // so the BE can force a certain region instead of relying on Ip detection
+      regionId,
     },
     method: 'post',
   });

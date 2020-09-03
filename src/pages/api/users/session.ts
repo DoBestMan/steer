@@ -28,8 +28,14 @@ async function createUserSession(
     return;
   }
 
+  const regionId =
+    request.query.regionId && typeof request.query.regionId === 'string'
+      ? request.query.regionId
+      : undefined;
+
   const data = await backendCreateUserSession({
     userIp,
+    regionId,
   });
 
   response.json(data);

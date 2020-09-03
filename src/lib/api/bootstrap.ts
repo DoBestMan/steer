@@ -1,5 +1,6 @@
 import lscache from 'lscache';
 
+import { getQueryParams } from '~/hooks/useQueryParams';
 import { LOCAL_STORAGE, PROPERTIES } from '~/lib/constants/localStorage';
 import GA from '~/lib/helpers/analytics';
 
@@ -26,7 +27,26 @@ async function asyncApiBootstrap() {
 
   fetchSetUrlBase('/api');
 
-  const { userPersonalization, userSessionId } = await apiGetUserSession();
+  // region_id is a possible query params passed by Google
+  // We want to forward it to the users/session API call
+  // so the BE can force a certain region instead of relying on Ip detection
+  const { region_id } = getQueryParams();
+  let getUserSessionParams = undefined;
+
+  // We want to make sure we pass only a number converted to string
+  if (
+    typeof region_id !== 'undefined' &&
+    typeof region_id !== 'boolean' &&
+    !Number.isNaN(+region_id)
+  ) {
+    getUserSessionParams = {
+      regionId: String(region_id),
+    };
+  }
+
+  const { userPersonalization, userSessionId } = await apiGetUserSession(
+    getUserSessionParams,
+  );
   fetchSetAuthorizationToken(userSessionId, null);
 
   // Store UserSessionId in GTM
