@@ -104,16 +104,9 @@ function CatalogProductGrid({
       {isAdvancedView ? (
         <>
           {displayedProducts.map((product, i) => {
-            if (product === null) {
-              return (
-                <div css={styles.advancedListing} key={i}>
-                  <AdvancedListingPlaceholder />
-                </div>
-              );
-            }
             return (
-              <div css={styles.advancedListing} key={`${product.name}-${i}`}>
-                <Advancedlisting {...product} />
+              <div css={styles.advancedListing} key={`${product?.name}-${i}`}>
+                <Advancedlisting product={product} />
               </div>
             );
           })}

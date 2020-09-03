@@ -121,52 +121,36 @@ export function AdvancedListingWithKnobs() {
   return (
     <div style={{ paddingTop: '30px' }}>
       <AdvancedListing
-        brand={{
-          image: showBrandLogo ? mockLogo : undefined,
-          label: 'Firestone',
-        }}
-        deliveryInfo={{
-          value: text('Delivery info', '2-day free delivery'),
-          isFeatured: false,
-        }}
-        dataMomentList={[
-          {
-            icon: {
-              svgId: ICONS.FIRE,
-              type: ICON_IMAGE_TYPE.ICON,
-            },
-            label: 'Certified lowest price',
+        product={{
+          brand: {
+            image: showBrandLogo ? mockLogo : undefined,
+            label: 'Firestone',
           },
-          {
-            icon: {
-              svgId: ICONS.STAR,
-              type: ICON_IMAGE_TYPE.ICON,
-            },
-            label: '#1 choice of Civic drivers',
+          dataMomentList: null,
+          deliveryInfo: {
+            value: text('Delivery info', '2-day free delivery'),
+            isFeatured: false,
           },
-        ]}
-        defaultImage={PRODUCT_IMAGE_TYPES.TREADFULL}
-        highlight={text('Highlight', 'Best Seller')}
-        name={text('Name', 'FT140')}
-        performanceRatingList={mockRatingList}
-        priceList={mockPriceList}
-        siteCatalogPromotionInfo={{
-          count: promosToRender,
-          list: mockPromotions.slice(0, promosToRender),
-        }}
-        imageList={mockImages}
-        link={{ href: '/', isExternal: false }}
-        rating={
-          showRatings
+          highlight: text('Highlight', 'best seller'),
+          imageList: mockImages,
+          link: { href: '/', isExternal: false },
+          name: text('Name', 'FT140'),
+          performanceRatingList: mockRatingList,
+          priceList: mockPriceList,
+          rating: showRatings
             ? {
                 quantity: number('Rating quantity', 113),
                 value: number('Rating', 4.3, ratingOptions),
               }
-            : null
-        }
-        size={text('Size', '215/50 R17')}
-        specList={mockSpecList}
-        type={SiteCatalogProductItemEnum.SiteCatalogProductItem}
+            : null,
+          siteCatalogPromotionInfo: {
+            count: promosToRender,
+            list: mockPromotions.slice(0, promosToRender),
+          },
+          size: null,
+          specList: mockSpecList,
+          type: SiteCatalogProductItemEnum.SiteCatalogProductItem,
+        }}
       />
     </div>
   );

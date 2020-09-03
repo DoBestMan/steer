@@ -93,38 +93,39 @@ export function ProductListingWithKnobs() {
         gridColumnL={isHighlighted ? '2 / 8' : '2 / 5'}
       >
         <ProductListing
-          activeFilterValueList={showFilters ? mockFilters : []}
-          gridAttribute={text('Attribute', 'Original tire')}
-          brand={{
-            image: showBrandLogo ? mockLogo : undefined,
-            label: 'Firestone',
-          }}
-          dataMomentList={null}
-          deliveryInfo={{
-            value: text('Delivery info', '2-day free delivery'),
-            isFeatured: false,
-          }}
-          highlight={text('Highlight', 'best seller')}
-          link={{ href: '/', isExternal: false }}
-          loadSpeedRating={text('Load/Speed rating', '91H')}
-          name={text('Name', 'FT140')}
-          priceList={mockPriceList}
-          size={null}
-          siteCatalogPromotionInfo={{
-            count: promosToRender,
-            list: mockPromotions.slice(0, promosToRender),
-          }}
-          imageList={mockImages}
-          isHighlighted={isHighlighted}
-          rating={
-            showRatings
+          product={{
+            activeFilterValueList: showFilters ? mockFilters : [],
+            brand: {
+              image: showBrandLogo ? mockLogo : undefined,
+              label: 'Firestone',
+            },
+            dataMomentList: null,
+            deliveryInfo: {
+              value: text('Delivery info', '2-day free delivery'),
+              isFeatured: false,
+            },
+            gridAttribute: text('Attribute', 'Original tire'),
+            highlight: text('Highlight', 'best seller'),
+            imageList: mockImages,
+            link: { href: '/', isExternal: false },
+            loadSpeedRating: text('Load/Speed rating', '91H'),
+            name: text('Name', 'FT140'),
+            priceList: mockPriceList,
+            rating: showRatings
               ? {
                   quantity: number('Rating quantity', 113),
                   value: number('Rating', 4.3, ratingOptions),
                 }
-              : null
-          }
-          type={SiteCatalogProductItemEnum.SiteCatalogProductItem}
+              : null,
+            siteCatalogPromotionInfo: {
+              count: promosToRender,
+              list: mockPromotions.slice(0, promosToRender),
+            },
+            size: null,
+            type: SiteCatalogProductItemEnum.SiteCatalogProductItem,
+          }}
+          imageList={mockImages}
+          isHighlighted={isHighlighted}
         />
       </GridItem>
     </Grid>
@@ -140,27 +141,30 @@ export function FilteredProductListing() {
         gridColumnL={'2 / 5'}
       >
         <ProductListing
-          activeFilterValueList={mockFilters}
-          brand={{
-            image: mockLogo,
-            label: 'Firestone',
+          product={{
+            activeFilterValueList: mockFilters,
+            brand: {
+              image: mockLogo,
+              label: 'Firestone',
+            },
+            dataMomentList: null,
+            deliveryInfo: null,
+            gridAttribute: null,
+            highlight: null,
+            imageList: mockImages,
+            link: { href: '/', isExternal: false },
+            loadSpeedRating: '91H',
+            name: 'FT140',
+            priceList: mockPriceList,
+            rating: {
+              quantity: 113,
+              value: 4.3,
+            },
+            siteCatalogPromotionInfo: { count: 0, list: [] },
+            size: null,
+            type: SiteCatalogProductItemEnum.SiteCatalogProductItem,
           }}
-          dataMomentList={null}
-          deliveryInfo={null}
-          gridAttribute={null}
-          highlight={null}
-          link={{ href: '/', isExternal: false }}
-          loadSpeedRating="91H"
-          name="FT140"
-          size={null}
-          siteCatalogPromotionInfo={{ count: 0, list: [] }}
-          priceList={mockPriceList}
           imageList={mockImages}
-          rating={{
-            quantity: 113,
-            value: 4.3,
-          }}
-          type={SiteCatalogProductItemEnum.SiteCatalogProductItem}
         />
       </GridItem>
     </Grid>
@@ -176,28 +180,31 @@ export function HighlightedProductListing() {
         gridColumnL={'2 / 8'}
       >
         <ProductListing
-          activeFilterValueList={null}
-          brand={{
-            image: mockLogo,
-            label: 'Firestone',
+          product={{
+            activeFilterValueList: mockFilters,
+            brand: {
+              image: mockLogo,
+              label: 'Firestone',
+            },
+            dataMomentList: null,
+            deliveryInfo: null,
+            gridAttribute: null,
+            highlight: null,
+            imageList: mockImages,
+            link: { href: '/', isExternal: false },
+            loadSpeedRating: '91H',
+            name: 'FT140',
+            priceList: mockPriceList,
+            rating: {
+              quantity: 113,
+              value: 4.3,
+            },
+            siteCatalogPromotionInfo: { count: 0, list: [] },
+            size: null,
+            type: SiteCatalogProductItemEnum.SiteCatalogProductItem,
           }}
-          dataMomentList={null}
-          deliveryInfo={null}
-          gridAttribute={null}
-          highlight={null}
-          link={{ href: '/', isExternal: false }}
-          loadSpeedRating="91H"
-          name="FT140"
-          size={null}
-          siteCatalogPromotionInfo={{ count: 0, list: [] }}
-          priceList={mockPriceList}
           imageList={mockImages}
           isHighlighted
-          rating={{
-            quantity: 113,
-            value: 4.3,
-          }}
-          type={SiteCatalogProductItemEnum.SiteCatalogProductItem}
         />
       </GridItem>
     </Grid>

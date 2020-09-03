@@ -76,7 +76,11 @@ function ProductGroupList({
           {productList.map((product, i) => {
             return (
               <div key={`${name}-${i}`} css={[styles.item, customItemStyles]}>
-                <ProductListing {...product} isGrouped />
+                <ProductListing
+                  product={product}
+                  imageList={product?.imageList || []}
+                  isGrouped
+                />
               </div>
             );
           })}

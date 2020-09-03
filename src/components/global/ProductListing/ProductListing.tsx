@@ -9,8 +9,10 @@ import Stars, { HALF_WIDTH_STARS } from '~/components/global/Stars/Stars';
 import Sticker from '~/components/global/Sticker/Sticker';
 import { STICKER_SIZES } from '~/components/global/Sticker/Sticker.styles';
 import { getProductDisplayImages } from '~/components/pages/CatalogPage/CatalogPage.utils';
+import { useInViewport } from '~/hooks/useInViewport';
 import { COLORS, PRODUCT } from '~/lib/constants';
 import { SHADOW_SRC } from '~/lib/constants/image';
+import { isBrowser } from '~/lib/utils/browser';
 import { getSquareImageTransformations } from '~/lib/utils/cloudinary/cloudinary';
 import { ui } from '~/lib/utils/ui-dictionary';
 
@@ -18,33 +20,65 @@ import Icon from '../Icon/Icon';
 import { ICONS } from '../Icon/Icon.constants';
 import styles from './ProductListing.styles';
 import { ProductListingProps } from './ProductListing.types';
+import ProductListingPlaceholder from './ProductListingPlaceholder';
 
 const MAX_PROMOS = 2;
 
 function ProductListing({
-  activeFilterValueList,
-  gridAttribute,
-  brand,
-  deliveryInfo,
-  dataMomentList,
-  highlight,
-  priceList,
-  siteCatalogPromotionInfo,
-  imageList,
+  product,
   isHighlighted,
-  link,
-  loadSpeedRating,
-  name,
-  rating,
-  size,
+  imageList,
   isGrouped,
-}: ProductListingProps) {
+}: {
+  imageList: ProductListingProps['imageList'];
+  isGrouped?: boolean;
+  isHighlighted?: boolean;
+  product: ProductListingProps | null;
+}) {
   const [isHovered, setIsHovered] = useState(false);
   const [hasImageLoaded, setHasImageLoaded] = useState(false);
   const [shouldDisplayAsset, setShouldDisplayAsset] = useState(true);
+  const { isInViewport, targetRef } = useInViewport({
+    shouldUnsubscribeInViewport: true,
+  });
   const displayImages = useMemo(() => getProductDisplayImages(imageList), [
     imageList,
   ]);
+
+  const imageWidths = useMemo(
+    () => (isHighlighted ? [250, 250, 300] : [140, 180, 200]),
+    [isHighlighted],
+  );
+
+  const imageTransformations = useMemo(
+    () => getSquareImageTransformations(imageWidths),
+    [imageWidths],
+  );
+
+  if ((!isInViewport && isBrowser) || product === null) {
+    return (
+      <div ref={targetRef}>
+        <ProductListingPlaceholder />
+      </div>
+    );
+  }
+
+  const {
+    activeFilterValueList,
+    gridAttribute,
+    brand,
+    deliveryInfo,
+    dataMomentList,
+    highlight,
+    priceList,
+    siteCatalogPromotionInfo,
+    link,
+    loadSpeedRating,
+    name,
+    rating,
+    size,
+  } = product;
+
   const standardImage =
     imageList.find(
       (image) => image.productImageType === displayImages.default,
@@ -60,16 +94,6 @@ function ProductListing({
     siteCatalogPromotionInfo && siteCatalogPromotionInfo.count > MAX_PROMOS
       ? 1
       : MAX_PROMOS;
-
-  const imageWidths = useMemo(
-    () => (isHighlighted ? [250, 250, 300] : [140, 180, 200]),
-    [isHighlighted],
-  );
-
-  const imageTransformations = useMemo(
-    () => getSquareImageTransformations(imageWidths),
-    [imageWidths],
-  );
 
   function handleMouseEnter() {
     setIsHovered(true);
@@ -95,6 +119,7 @@ function ProductListing({
       ]}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      ref={targetRef}
     >
       <div css={[styles.image, isHighlighted && styles.imageHighlighted]}>
         {highlight && (
