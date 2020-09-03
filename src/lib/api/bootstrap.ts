@@ -27,6 +27,7 @@ async function asyncApiBootstrap() {
 
   fetchSetUrlBase('/api');
 
+  /* eslint-disable  @typescript-eslint/camelcase*/
   // region_id is a possible query params passed by Google
   // We want to forward it to the users/session API call
   // so the BE can force a certain region instead of relying on Ip detection
@@ -43,6 +44,7 @@ async function asyncApiBootstrap() {
       regionId: String(region_id),
     };
   }
+  /* eslint-enable  @typescript-eslint/camelcase*/
 
   const { userPersonalization, userSessionId } = await apiGetUserSession(
     getUserSessionParams,
