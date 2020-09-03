@@ -57,12 +57,10 @@ function useContextSetup({
   pageParams,
 }: SetupProps) {
   const { setGlobalToastMessage } = useGlobalToastContext();
-  const { events, query, push, pathname, asPath } = useRouter();
+  const { query, push, pathname, asPath } = useRouter();
   const { siteCatalogSummary, stage } = useCatalogSummaryContext();
 
-  const [isAdvancedView, setIsAdvancedView] = useState(
-    query.skipGroups === 'true',
-  );
+  const [isAdvancedView, setIsAdvancedView] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [displayedProducts, setDisplayedProducts] = useState<
     SiteCatalogProductItem[]
@@ -73,17 +71,6 @@ function useContextSetup({
   const [previewFiltersData, setPreviewFiltersData] = useState({
     totalMatches: 0,
     filters: EMPTY_FILTERS as SiteCatalogFilters,
-  });
-
-  // sync isAdvancedView with current query params
-  events?.on('routeChangeComplete', () => {
-    if (isAdvancedView && query.skipGroups !== 'true') {
-      setIsAdvancedView(false);
-    }
-
-    if (!isAdvancedView && query.skipGroups === 'true') {
-      setIsAdvancedView(true);
-    }
   });
 
   const handleUpdateResults = async (
