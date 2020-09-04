@@ -1,10 +1,13 @@
 import { forwardRef, MutableRefObject } from 'react';
 
+import { CSSStylesProp } from '~/lib/constants';
+
 import styles from './Option.styles';
 import { SelectOption } from './Select';
 
 interface OptionProps {
   baseId?: string;
+  customCss?: CSSStylesProp;
   focusedOptionIndex?: number;
   index?: number;
   option: SelectOption;
@@ -19,6 +22,7 @@ type RefType =
 
 function Option(
   {
+    customCss,
     baseId,
     focusedOptionIndex,
     selectedOptionIndex,
@@ -43,6 +47,7 @@ function Option(
         styles.option,
         isFocused && styles.optionFocused,
         isSelected && styles.optionSelected,
+        customCss,
       ]}
       ref={ref}
       tabIndex={-1}
@@ -55,7 +60,7 @@ function Option(
         tabIndex={-1}
         type="button"
       >
-        {option.text}
+        <span>{option.text}</span>
       </button>
     </li>
   );

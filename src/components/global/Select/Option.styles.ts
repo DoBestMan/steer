@@ -1,14 +1,31 @@
-import {
-  BORDERS,
-  COLORS,
-  MQ,
-  RADIUS,
-  SPACING,
-  StylesMap,
-} from '~/lib/constants';
+import { COLORS, SPACING, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
+const CONSTANTS = {
+  OPACITY_ACTIVE: 0.8,
+  OPACITY_DISABLED: 0.4,
+  SIZE: 50,
+};
+
 const styles: StylesMap = {
+  disabled: {
+    opacity: CONSTANTS.OPACITY_DISABLED,
+    pointerEvents: 'none',
+  },
+  inheritBorder: {
+    borderBottom: '2px dotted',
+    borderBottomColor: 'inherit',
+  },
+  inheritBorderColor: {
+    borderBottomColor: 'inherit',
+  },
+  inheritFocusBorder: {
+    borderBottom: '2px dotted transparent',
+
+    '&:hover, &:focus, &:active': {
+      borderBottomColor: 'inherit',
+    },
+  },
   option: [
     typography.bodyCopy,
     {
@@ -21,24 +38,24 @@ const styles: StylesMap = {
         width: '100%',
       },
       '&:hover': {
-        backgroundColor: COLORS.LIGHT.GRAY_20,
+        span: {
+          color: COLORS.GLOBAL.BLACK,
+          borderBottom: '2px dotted',
+          borderBottomColor: 'inherit',
+        },
       },
-      backgroundColor: COLORS.LIGHT.GRAY_10,
-      border: BORDERS.SOLID_TRANSPARENT_2PX,
-      borderRadius: RADIUS.RADIUS_15,
-      marginBottom: SPACING.SIZE_02,
-      padding: SPACING.SIZE_20,
-      [MQ.M]: {
-        padding: `${SPACING.SIZE_20}px ${SPACING.SIZE_30}px`,
-      },
+      backgroundColor: 'transparent',
+      color: COLORS.LIGHT.GRAY_70,
+      paddingBottom: SPACING.SIZE_05,
+      paddingTop: SPACING.SIZE_05,
       position: 'relative',
     },
   ],
   optionFocused: {
-    backgroundColor: COLORS.LIGHT.GRAY_20,
+    color: COLORS.GLOBAL.ORANGE,
   },
   optionSelected: {
-    backgroundColor: COLORS.LIGHT.GRAY_20,
+    color: COLORS.GLOBAL.ORANGE,
   },
 };
 

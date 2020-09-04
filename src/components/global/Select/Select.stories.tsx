@@ -24,10 +24,17 @@ const list: SelectOption[] = [
   },
 ];
 
+const longList: SelectOption[] = Array(50)
+  .fill(0)
+  .map((_, index) => ({
+    text: `Option${index + 1}`,
+    value: index + 1 + '',
+  }));
+
 const styles: StylesMap = {
   container: {
     padding: SPACING.SIZE_30,
-    '> div': { marginBottom: SPACING.SIZE_60 },
+    '> span': { marginBottom: SPACING.SIZE_60 },
     [MQ.M]: {
       padding: SPACING.SIZE_60,
     },
@@ -41,7 +48,9 @@ export default {
 
 interface TInputStates {
   default?: string;
+  disabled?: string;
   error?: string;
+  long?: string;
 }
 
 export function TypicalSelectWithKnob() {
@@ -60,11 +69,77 @@ export function TypicalSelectWithKnob() {
     <div css={styles.container}>
       <Select
         id="default"
+        label="label"
         list={list}
         placeholder={placeholder}
         disabled={isDisabled}
         onChange={onChange('default')}
         value={values.default}
+      />
+    </div>
+  );
+}
+
+export function SelectWithManyOptions() {
+  const [values, setValues] = useState<TInputStates>({});
+
+  const onChange = (key: string) => (value: string | null) => {
+    setValues({
+      ...values,
+      [key]: value as string,
+    });
+  };
+
+  return (
+    <div css={styles.container}>
+      <Select
+        id="long-list-select"
+        label="label"
+        list={longList}
+        placeholder="Select an option"
+        onChange={onChange('long')}
+        value={values.long}
+      />
+    </div>
+  );
+}
+
+export function SelectStates() {
+  const [values, setValues] = useState<TInputStates>({});
+
+  const onChange = (key: string) => (value: string | null) => {
+    setValues({
+      ...values,
+      [key]: value as string,
+    });
+  };
+  return (
+    <div css={styles.container}>
+      <Select
+        id="default-select"
+        label="Label"
+        list={list}
+        placeholder={'Select an option'}
+        onChange={onChange('default')}
+        value={values.default}
+      />
+      <Select
+        id="disabled-select"
+        label="Label"
+        list={list}
+        placeholder={'Select an option'}
+        onChange={onChange('disabled')}
+        disabled
+        value={values.disabled}
+      />
+      <Select
+        id="error-select"
+        error={{ hasError: true, errorMessage: 'Error message' }}
+        label="Label"
+        list={list}
+        placeholder={'Select an option'}
+        onChange={onChange('error')}
+        value={values.error}
       />
     </div>
   );

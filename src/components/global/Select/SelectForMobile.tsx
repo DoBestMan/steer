@@ -17,6 +17,7 @@ function SelectForMobile(props: Props) {
     required,
     value,
     validationFn,
+    label,
     error = { hasError: false },
     ...rest
   } = props;
@@ -69,6 +70,12 @@ function SelectForMobile(props: Props) {
           isFocused && focusStyles.container,
         ]}
       >
+        <label
+          htmlFor={`${id}__input`}
+          css={[styles.label, (isFocused || !!value) && focusStyles.label]}
+        >
+          {label}
+        </label>
         <select
           id={`${id}__input`}
           disabled={disabled}
@@ -77,11 +84,13 @@ function SelectForMobile(props: Props) {
           onChange={handleChange}
           aria-required={required}
           aria-label={`${id}__label`}
-          css={styles.select}
+          css={[styles.select, (isFocused || !!value) && styles.activeSelect]}
           defaultValue={''}
           {...rest}
         >
-          <option value="">{placeholder}</option>
+          <option value="" hidden>
+            {placeholder}
+          </option>
           {list.map((item) => (
             <option key={item.value} value={item.value}>
               {item.text}

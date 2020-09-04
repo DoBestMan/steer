@@ -21,6 +21,7 @@ export interface Props {
   error?: { errorMessage?: string; hasError: boolean };
   hasError?: boolean;
   id?: string;
+  label: string;
   list: Array<SelectOption>;
   onChange: (value: string | null) => void;
   placeholder: string;
@@ -40,6 +41,7 @@ function Select(props: Props) {
     required,
     validationFn,
     value,
+    label,
     ...rest
   } = props;
   const { hasError, errorMessage } = error;
@@ -198,7 +200,9 @@ function Select(props: Props) {
         onChange={onChange}
         disabled={disabled}
         placeholder={placeholder}
+        label={label}
         list={list}
+        value={value}
         required={required}
         {...rest}
       />
@@ -226,6 +230,15 @@ function Select(props: Props) {
           showErrorState && !disabled && errorStyles.container,
         ]}
       >
+        <label
+          htmlFor={`${baseId}__input`}
+          css={[
+            styles.label,
+            (isActive || !!value) && !showErrorState && focusStyles.label,
+          ]}
+        >
+          {label}
+        </label>
         <button
           onClick={toggle}
           disabled={disabled}
@@ -238,8 +251,11 @@ function Select(props: Props) {
             id={`${baseId}__input`}
             tabIndex={-1}
             disabled={disabled}
-            css={styles.input}
-            aria-label={`${baseId}__input__label`}
+            css={[
+              styles.input,
+              disabled && styles.disabled,
+              (isActive || !!value) && !showErrorState && styles.inputActive,
+            ]}
           />
           <span>
             {isOpen ? (
@@ -250,13 +266,13 @@ function Select(props: Props) {
           </span>
         </button>
       </div>
-      {showErrorState && errorMessage && (
+      {!isOpen && showErrorState && errorMessage && (
         <span role="alert" css={errorStyles.errorMessage}>
           {errorMessage}
         </span>
       )}
       {isOpen && (
-        <span>
+        <span css={styles.dropdown}>
           <ul
             role="listbox"
             aria-activedescendant={
@@ -273,6 +289,7 @@ function Select(props: Props) {
               focusedOptionIndex={focusedOptionIndex}
               selectedOptionIndex={selectedOptionIndex}
               optionClick={handleOnOptionClick}
+              customCss={styles.visuallyHidden}
             />
             {list.map((option, index) => {
               return (
