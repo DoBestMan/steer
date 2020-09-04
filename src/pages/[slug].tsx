@@ -1,4 +1,4 @@
-import { GetServerSidePropsResult, GetStaticProps } from 'next';
+import { GetStaticProps } from 'next';
 
 import OpenTemplatePage from '~/components/pages/OpenTemplatePage/OpenTemplatePage';
 import { PageData } from '~/data/models/SiteOpenTemplate';
