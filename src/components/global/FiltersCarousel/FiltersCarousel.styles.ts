@@ -55,6 +55,13 @@ const styles: StylesMap = {
   filterHide: {
     display: 'none',
   },
+  filterLabel: [
+    typography.labelCopyTight,
+    {
+      color: COLORS.GLOBAL.BLACK,
+      marginBottom: SPACING.SIZE_15,
+    },
+  ],
   label: [
     typography.smallCopy,
     {

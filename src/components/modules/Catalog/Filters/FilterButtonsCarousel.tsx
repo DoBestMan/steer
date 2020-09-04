@@ -1,11 +1,12 @@
 import { useTheme } from 'emotion-theming';
-import { ReactElement } from 'react';
+import { ReactElement, useEffect, useRef } from 'react';
 
 import FilterButton from '~/components/global/Button/FilterButton';
 import FilterButtonToggle from '~/components/global/Button/FilterButtonToggle';
 import FiltersCarousel from '~/components/global/FiltersCarousel/FiltersCarousel';
 import styles from '~/components/global/FiltersCarousel/FiltersCarousel.styles';
 import { useCatalogProductsContext } from '~/context/CatalogProducts.context';
+import { SPACING } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import { CatalogFilterTypes, FilterContentTypes } from './Filter.types';
@@ -24,6 +25,8 @@ export default function FilterButtonsCarousel({
   filters,
   popularFilters,
 }: Props) {
+  const filtersRef = useRef<HTMLParagraphElement | null>(null);
+
   const popularLabel = ui('catalog.filters.popularFilters');
   const {
     activeFilters,
@@ -41,8 +44,26 @@ export default function FilterButtonsCarousel({
     return false;
   });
 
+  const prevSelectingFilter = useRef(selectingFilter);
+
+  useEffect(() => {
+    if (filtersRef.current && selectingFilter && !prevSelectingFilter.current) {
+      window.scroll({
+        top:
+          filtersRef.current.getBoundingClientRect().top -
+          document.body.getBoundingClientRect().top -
+          SPACING.SIZE_30,
+        behavior: 'smooth',
+      });
+    }
+    prevSelectingFilter.current = selectingFilter;
+  }, [selectingFilter]);
+
   return (
     <>
+      <p ref={filtersRef} css={[styles.filterLabel, header.text]}>
+        {ui('catalog.header.filterLabel')}:
+      </p>
       <FiltersCarousel activeFilter={selectingFilter}>
         <FilterButton
           isVisible={!!popularFilters.length}

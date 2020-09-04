@@ -24,13 +24,11 @@ export default function HeaderStickyBar({ children }: Props) {
 
   const onToggleView = async () => {
     const newParams = isAdvancedView ? {} : { skipGroups: 'true' };
-    handleUpdateResults(newParams as Record<string, string>)
-      .then(() => {
-        setIsAdvancedView(!isAdvancedView);
-      })
-      .catch((e) => {
-        setGlobalToastMessage(e.message);
-      });
+    setIsAdvancedView(!isAdvancedView);
+    handleUpdateResults(newParams as Record<string, string>).catch((e) => {
+      setIsAdvancedView(isAdvancedView);
+      setGlobalToastMessage(e.message);
+    });
   };
 
   return (

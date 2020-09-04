@@ -43,7 +43,11 @@ function CatalogGrid({
   siteCatalogProducts,
 }: Props) {
   const { siteCatalogSummary } = useCatalogSummaryContext();
-  const { isLoading, handleUpdateResults } = useCatalogProductsContext();
+  const {
+    isLoading,
+    handleUpdateResults,
+    isAdvancedView,
+  } = useCatalogProductsContext();
   const catalogGrid = useRef<HTMLDivElement | null>(null);
 
   // Uses a state instead of ref to avoid forwarding refs
@@ -118,8 +122,9 @@ function CatalogGrid({
 
   const totalResults = siteCatalogSummary?.siteCatalogSummaryMeta?.totalResults;
   const isGroupedProducts =
+    !isAdvancedView &&
     siteCatalogProducts?.siteCatalogProductsResultList[0]?.type ===
-    SiteCatalogProductGroupItemEnum.SiteCatalogProductGroupItem;
+      SiteCatalogProductGroupItemEnum.SiteCatalogProductGroupItem;
   return (
     <div ref={catalogGrid}>
       <HeaderContainer
