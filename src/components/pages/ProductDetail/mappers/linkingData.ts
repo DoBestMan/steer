@@ -12,11 +12,13 @@ import { formatDollars } from '~/lib/utils/string';
 
 export function mapDataToLinkingData({
   hostUrl,
+  isPLA,
   router: { query },
   siteProduct: { siteProductLine, siteProductLineAvailableSizeList },
   siteProductReviews: { performanceRating, reviewsSource, reviewsList },
 }: {
   hostUrl?: string | null;
+  isPLA?: boolean;
   router: NextRouter;
   siteProduct: SiteProduct;
   siteProductReviews: SiteProductReviews;
@@ -45,8 +47,7 @@ export function mapDataToLinkingData({
     },
     ...(item.additionalComments && { reviewBody: item.additionalComments }),
   }));
-  const relativeUrl = interpolateRoute(ROUTE_MAP[ROUTES.PRODUCT_DETAIL], query);
-  const absoluteUrl = `${hostUrl || ''}${relativeUrl}`;
+
   const itemCondition = 'https://schema.org/NewCondition';
   const availability = 'https://schema.org/InStock';
   const sellerName = 'SimpleTire';
@@ -54,20 +55,36 @@ export function mapDataToLinkingData({
   const offers: Offer[] = siteProductLineAvailableSizeList
     .slice()
     .sort((a, b) => parseInt(a.priceInCents, 10) - parseInt(b.priceInCents, 10))
-    .map((item) => ({
-      '@type': 'Offer',
-      url: absoluteUrl,
-      priceCurrency: 'USD',
-      price: formatDollars(item.priceInCents).slice(1),
-      itemCondition,
-      availability,
-      seller: {
-        '@type': 'Organization',
-        name: sellerName,
-      },
-      sku: item.partNumber,
-      mpn: item.partNumber,
-    }));
+    .sort((a) => (a.isSelected ? -1 : 1))
+    .map((item) => {
+      const { mpn, oem, tireSize } = item.siteQueryParams;
+      const itemQuery = { ...query, ...{ mpn, oem, tireSize } };
+
+      const relativeUrl = interpolateRoute(
+        isPLA
+          ? ROUTE_MAP[ROUTES.PRODUCT_DETAIL_PLA]
+          : ROUTE_MAP[ROUTES.PRODUCT_DETAIL],
+        itemQuery,
+        isPLA,
+      );
+
+      const absoluteUrl = `${hostUrl || ''}${relativeUrl}`;
+
+      return {
+        '@type': 'Offer',
+        url: absoluteUrl,
+        priceCurrency: 'USD',
+        price: formatDollars(item.priceInCents).slice(1),
+        itemCondition,
+        availability,
+        seller: {
+          '@type': 'Organization',
+          name: sellerName,
+        },
+        sku: item.partNumber,
+        mpn: item.partNumber,
+      };
+    });
   const offersLowPrice = Math.min(
     ...offers.map(
       (item) => (item.price && parseFloat(item.price.toString())) || 0,

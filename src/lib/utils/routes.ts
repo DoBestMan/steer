@@ -38,7 +38,21 @@ export function isRouteDiameterFormat(path?: string) {
 export function interpolateRoute(
   route: string,
   templateVars: { [key: string]: string | string[] },
+  withQueryParams?: boolean,
 ): string {
+  if (withQueryParams) {
+    const qs = Object.keys(templateVars)
+      .map((key) =>
+        typeof templateVars[key] !== 'undefined'
+          ? `${key}=${templateVars[key]}`
+          : false,
+      )
+      .filter((item) => item)
+      .join('&');
+
+    return `${route}?${qs}`;
+  }
+
   return route.replace(brackets, function (n: string): string {
     let replaced: string = n;
 

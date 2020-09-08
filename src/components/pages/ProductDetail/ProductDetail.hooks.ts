@@ -76,8 +76,6 @@ interface ResponseProps extends Pick<SiteProductLine, 'assetList'> {
 }
 
 export const CONSTANTS = {
-  DEFAULT_QUANTITY: 4,
-  DEFAULT_FRONT_AND_REAR_QUANTITY: 2,
   REVIEWS_ANCHOR: 'SiteProductReviews',
   TECH_SPECS_ANCHOR: 'SiteProductSpecs',
 };
@@ -91,7 +89,6 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
     queryParams,
     isLoading,
     setData,
-    setQuantity,
     setIsLoading,
   } = productDetail;
   const router = useRouter();
@@ -124,24 +121,6 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
   const assetList = siteProductLine.assetList;
 
   useEffect(() => {
-    if (!queryParams.tireSize || quantity.front) {
-      return;
-    }
-
-    if (queryParams.rearSize) {
-      setQuantity({
-        front: CONSTANTS.DEFAULT_FRONT_AND_REAR_QUANTITY,
-        rear: CONSTANTS.DEFAULT_FRONT_AND_REAR_QUANTITY,
-      });
-      return;
-    }
-
-    setQuantity({
-      front: CONSTANTS.DEFAULT_QUANTITY,
-    });
-  }, [quantity, queryParams, setQuantity]);
-
-  useEffect(() => {
     if (isValidating) {
       return;
     }
@@ -154,8 +133,12 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
   }, [isValidating, siteProduct, siteProductReviews, contextData, setData]);
 
   useEffect(() => {
+    if (isPLA) {
+      return;
+    }
+
     setIsLoading(isValidating);
-  }, [isValidating, setIsLoading]);
+  }, [isValidating, setIsLoading, isPLA]);
 
   /**
    * Reroute query parameters to hash parameters on the client
@@ -211,6 +194,7 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
     isPLA,
     linkingData: mapDataToLinkingData({
       hostUrl,
+      isPLA,
       router,
       siteProduct,
       siteProductReviews,

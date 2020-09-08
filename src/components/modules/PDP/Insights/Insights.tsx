@@ -35,6 +35,7 @@ export interface InsightsProps {
   onSelectAvailableOption: () => void;
   onUnselectVehicle: () => void;
   rebate: SiteProductInsightsRebate | null;
+  shouldTransition?: boolean;
   showFitBar?: boolean;
   sizeCheckState: SIZE_CHECK_STATES;
   techSpecsAnchor: string;
@@ -66,6 +67,7 @@ function Insights({
   insightItems = [],
   openDynamicModal,
   rebate,
+  shouldTransition,
   techSpecsAnchor,
   ...rest
 }: Props) {
@@ -78,7 +80,7 @@ function Insights({
   }
 
   return (
-    <Transition appear in={!isLoading} timeout={0}>
+    <Transition appear={shouldTransition} in={!isLoading} timeout={0}>
       {(containerTransitionState: TransitionStatus) => (
         <div css={styles.root}>
           <ul

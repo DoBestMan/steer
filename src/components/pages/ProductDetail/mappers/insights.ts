@@ -92,6 +92,7 @@ export function mapDataToInsights({
     return null;
   }
 
+  const isPLA = !!router.pathname.match(ROUTE_MAP[ROUTES.PRODUCT_DETAIL_PLA]);
   const { changeSize } = productDetail;
   const { vehicle, unselectVehicle } = userPersonalization;
   const hasVehicle =
@@ -160,6 +161,7 @@ export function mapDataToInsights({
     onSelectAvailableOption,
     onUnselectVehicle: unselectVehicle,
     rebate: siteProductInsights.rebate,
+    shouldTransition: !isPLA,
     showFitBar,
     sizeCheckState,
     techSpecsAnchor: CONSTANTS.TECH_SPECS_ANCHOR,

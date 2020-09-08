@@ -20,6 +20,8 @@ import { appendTiresToString } from '~/lib/utils/string';
 import { ProductDetailResponse } from './ProductDetail.types';
 
 const CONSTANTS = {
+  DEFAULT_QUANTITY: 4,
+  DEFAULT_FRONT_AND_REAR_QUANTITY: 2,
   PRODUCT_DETAIL_ROUTE: ROUTE_MAP[ROUTES.PRODUCT_DETAIL],
   PLA_ROUTE: ROUTE_MAP[ROUTES.PRODUCT_DETAIL_PLA],
 };
@@ -32,6 +34,24 @@ interface Props {
 interface Quantity {
   front: number;
   rear?: number;
+}
+
+export function getDefaultQuantity({
+  queryParams,
+}: {
+  queryParams: Record<string, string>;
+}): { front: number; rear?: number } {
+  if (queryParams.rearSize) {
+    return {
+      front: CONSTANTS.DEFAULT_FRONT_AND_REAR_QUANTITY,
+      rear: CONSTANTS.DEFAULT_FRONT_AND_REAR_QUANTITY,
+    };
+  }
+
+  return {
+    front: CONSTANTS.DEFAULT_QUANTITY,
+    rear: 0,
+  };
 }
 
 export interface ProductDetailContextProps {
@@ -72,23 +92,22 @@ function useContextSetup({
 }: {
   serverData: ProductDetailResponse;
 }): ProductDetailContextProps {
+  const router = useRouter();
+  const isPLA = !!router.pathname.match(CONSTANTS.PLA_ROUTE);
   const { userPersonalizationData } = useUserPersonalizationContext();
   const [data, setData] = useState<ProductDetailResponse | null>(serverData);
-  const router = useRouter();
   const { vehicle } = useUserPersonalizationContext();
   const { query, asPath } = router;
-  const [quantity, setQuantity] = useState<{ front: number; rear?: number }>({
-    front: 0,
-    rear: 0,
-  });
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(!isPLA);
   const [hashParams, setHashParams] = useState(getParsedHash(asPath));
   const queryParams = getQueryParams({
     hashParams,
     queryParams: query,
     vehicle,
   });
-  const isPLA = !!router.pathname.match(CONSTANTS.PLA_ROUTE);
+  const [quantity, setQuantity] = useState<{ front: number; rear?: number }>(
+    getDefaultQuantity({ queryParams }),
+  );
   // It's necessary to add an individual state in order to show the selected option while loading data
   const [currentSizeIndex, setCurrentSizeIndex] = useState(-1);
 
@@ -134,6 +153,14 @@ function useContextSetup({
   useEffect(() => {
     setHashParams(getParsedHash(asPath));
   }, [asPath]);
+
+  useEffect(() => {
+    if (!queryParams.tireSize || quantity.front) {
+      return;
+    }
+
+    setQuantity(getDefaultQuantity({ queryParams }));
+  }, [quantity, queryParams, setQuantity]);
 
   const addToCart = useCallback(
     ({ shouldAddCoverage }: { shouldAddCoverage: boolean }) => {

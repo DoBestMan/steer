@@ -19,7 +19,8 @@ export const getServerSideProps: GetServerSideProps<PageResponse<
   ProductDetailData
 >> = async (context) => {
   backendBootstrap({ request: context.req });
-  const { brand, productLine, tireSize } = getStringifiedParams(context.query);
+  const queryParams = getStringifiedParams(context.query);
+  const { brand, productLine, tireSize } = queryParams;
 
   if (!brand || !productLine || !tireSize) {
     context.res.statusCode = 404;
@@ -30,6 +31,7 @@ export const getServerSideProps: GetServerSideProps<PageResponse<
     backendGetProductDetail({
       brand,
       productLine,
+      query: queryParams,
     }),
     backendGetProductReviews({
       brand,

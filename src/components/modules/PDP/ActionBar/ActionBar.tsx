@@ -34,6 +34,26 @@ interface PDPActionBarProps {
   tireSize?: string | null;
 }
 
+function calculateTotalPrice({
+  isSingleTireSize,
+  quantity,
+  rearPrice,
+  tirePrice,
+}: {
+  isSingleTireSize?: boolean;
+  quantity: {
+    front: number;
+    rear?: number;
+  };
+  rearPrice?: string | null;
+  tirePrice?: string | null;
+}) {
+  return isSingleTireSize
+    ? quantity.front * parseInt(tirePrice || '0', 10)
+    : parseInt(tirePrice || '0', 10) * quantity.front +
+        parseInt(rearPrice || '0', 10) * (quantity.rear || 0);
+}
+
 function PDPActionBar({
   rearPrice,
   rearSize,
@@ -43,9 +63,8 @@ function PDPActionBar({
   tirePrice,
   tireSize,
 }: PDPActionBarProps) {
-  const [isQuantitySelectorOpen, setIsQuantitySelectorOpen] = useState(false);
-  const [isRoadHazardOpen, setIsRoadHazardOpen] = useState(false);
-  const [price, setPrice] = useState(0);
+  const isTireLine = !tireSize && !rearSize;
+  const isSingleTireSize = !!tireSize && !rearSize;
   const {
     addToCart,
     quantity,
@@ -55,14 +74,24 @@ function PDPActionBar({
   } = useProductDetailContext();
   const { vehicle } = useUserPersonalizationContext();
 
-  const isTireLine = !tireSize && !rearSize;
-  const isSingleTireSize = tireSize && !rearSize;
+  const [isQuantitySelectorOpen, setIsQuantitySelectorOpen] = useState(false);
+  const [isRoadHazardOpen, setIsRoadHazardOpen] = useState(false);
+  const [price, setPrice] = useState(
+    calculateTotalPrice({
+      isSingleTireSize,
+      quantity,
+      rearPrice,
+      tirePrice,
+    }),
+  );
 
   useEffect(() => {
-    const price = isSingleTireSize
-      ? quantity.front * parseInt(tirePrice || '0', 10)
-      : parseInt(tirePrice || '0', 10) * quantity.front +
-        parseInt(rearPrice || '0', 10) * (quantity.rear || 0);
+    const price = calculateTotalPrice({
+      isSingleTireSize,
+      quantity,
+      rearPrice,
+      tirePrice,
+    });
 
     setPrice(price);
   }, [quantity, setPrice, isSingleTireSize, tirePrice, rearPrice]);
