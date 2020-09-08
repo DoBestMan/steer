@@ -30,29 +30,29 @@ type .\.nvmrc | %{$_ -replace "v",""} | %{nvm install $_}
 type .\.nvmrc | %{$_ -replace "v",""} | %{nvm use $_}
 ```
 
-Next, install `now` globally on your computer
+Next, install `vercel` globally on your computer
 
 ```bash
-npm i -g now
+npm i -g vercel
 ```
 
 Then, login
 
 ```bash
-now login
+vercel login
 ```
 
 Then, link your local project
 
 ```bash
-now
+vercel
 ```
 
 You'll be asked a few questions, make sure to answer:
 
 ```bash
-$ now
-Now CLI 17.1.1
+$ vercel
+Vercel CLI 20.1.0
 ? Set up and deploy “~/path-to-project/steer”? [Y/n] y
 ? Which scope do you want to deploy to? STEER
 ? Found project “steer/steer”. Link to it? [Y/n] y
@@ -61,7 +61,7 @@ Now CLI 17.1.1
 Then, pull the development environment variables.
 
 ```bash
-now env pull
+vercel env pull
 ```
 
 Finally, install the `node_modules`.
@@ -74,10 +74,10 @@ You're all set!
 
 ## Development
 
-As the project use Now env. variables, to start a local server:
+As the project use Vercel env. variables, to start a local server:
 
 ```bash
-now dev
+vercel dev
 ```
 
 By default, you'll run against the mock server.
@@ -86,22 +86,22 @@ By default, you'll run against the mock server.
 
 - Clone the `steer-api-definition` repo and follow the instructions to start a local server
 - Update this project's `.env` file's `STEER_BACKEND` value to `"local"`
-- Run `now dev` to start local development in this project (it will start on port 3001)
+- Run `vercel dev` to start local development in this project (it will start on port 3001)
 
 ### To run against the mock server:
 
 - Update this project's `.env` file's `STEER_BACKEND` value to `"mock"`
-- Run `now dev` to start local development in this project
+- Run `vercel dev` to start local development in this project
 
 ### To run against the integration server:
 
 - Update this project's `.env` file's `STEER_BACKEND` value to `"integration"`
-- Run `now dev` to start local development in this project
+- Run `vercel dev` to start local development in this project
 
 ### To run against a specific version of the integration server:
 
 - Update this project's `.env` file's `STEER_BACKEND` value to the name of the API feature branch (e.g. `sqa-424`).
-- Run `now dev` to start local development in this project
+- Run `vercel dev` to start local development in this project
 
 ## Other Scripts
 
@@ -203,13 +203,13 @@ Every push generates a URL you can see online.
 But if you wish to deploy your local work on a preview link, at any time
 
 ```bash
-now
+vercel
 ```
 
 To deploy on prod, merge with the `master` branch, or
 
 ```bash
-now --prod
+vercel --prod
 ```
 
 ### `build` scripts
