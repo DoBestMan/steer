@@ -7,16 +7,11 @@ const styles: StylesMap = {
     typography.bodyCopy,
     {
       a: links.dark,
-      p: {
-        '&:not(:last-of-type)': {
-          marginBottom: '1em',
-        },
-      },
     },
   ],
   moreDescription: {
     display: 'none',
-    marginTop: '1em',
+    marginTop: SPACING.SIZE_20,
 
     '&[aria-hidden="false"]': {
       display: 'block',

@@ -25,8 +25,22 @@ export default {
   title: 'Global/Markdown',
 };
 
-const markdownText =
-  'This is an example of a markdown line break\n\n**and text wrapped in a strong tag.**';
+const markdownText = `This is an example of a markdown line break\n\n**and text wrapped in a strong tag.**
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nibh neque, pretium eget ex ut, ornare eleifend justo. Sed a ornare massa.
+
+* one bullet
+* two bullet
+* three bullet
+* four bullet
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nibh neque, pretium eget ex ut, ornare eleifend justo. Sed a ornare massa.
+
+1. one list item
+2. two list item
+3. three list item
+4. four list item
+  `;
 const headlineText = 'Replace tires<br />with up to<br />**60% off.**';
 const headingLevel2 = '<h2>Heading Level 2</h2>';
 const headingLevel3 = '<h3>Heading Level 3</h3>';
@@ -67,7 +81,7 @@ const hr = '<p>Copy above hr</p><hr />';
 const descriptionText =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n\nAenean fermentum a elit non volutpat. Morbi ipsum metus, lobortis sit amet convallis sed, cursus id metus.\n\nDuis nisl lacus, aliquet eget sapien ut, vestibulum gravida magna. Aenean accumsan ex quis nibh congue mollis. Nulla elementum,\n\ndui eget suscipit maximus, sapien ligula semper ipsum, ut congue lorem tortor vel enim. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aenean vitae nibh et neque tincidunt laoreet. Aliquam lobortis dui quis sem tincidunt, nec ultrices orci egestas.';
 
-export function TextWithKnobs() {
+export function GlobalMarkdownStyles() {
   return <Markdown>{text('Markdown Text', markdownText)}</Markdown>;
 }
 
