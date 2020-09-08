@@ -26,7 +26,7 @@ const styles: StylesMap = {
     justifyContent: 'space-between',
     marginBottom: SPACING.SIZE_40,
     [MQ.L]: {
-      marginBottom: 0,
+      marginBottom: SPACING.SIZE_20,
     },
   },
   label: [
