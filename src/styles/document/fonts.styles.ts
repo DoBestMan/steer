@@ -1,4 +1,5 @@
 interface Props {
+  fontDisplay?: string;
   fontFamily: string;
   fontStyle: string;
   fontWeight: string;
@@ -6,10 +7,11 @@ interface Props {
 }
 
 const fontFace = (props: Props): string => {
-  const { fontFamily, fontStyle, fontWeight, source } = props;
+  const { fontDisplay, fontFamily, fontStyle, fontWeight, source } = props;
 
   return `
     @font-face {
+      ${fontDisplay && `font-display: ${fontDisplay};`}
       font-family: "${fontFamily}";
       font-style: ${fontStyle};
       font-weight: ${fontWeight};
@@ -22,6 +24,7 @@ const fontFace = (props: Props): string => {
 
 export const fonts = `
   ${fontFace({
+    fontDisplay: 'swap',
     fontFamily: 'Circular Std',
     fontStyle: 'normal',
     fontWeight: 'normal',
@@ -29,6 +32,7 @@ export const fonts = `
   })}
 
   ${fontFace({
+    fontDisplay: 'swap',
     fontFamily: 'Circular Std',
     fontStyle: 'italic',
     fontWeight: 'normal',
@@ -36,6 +40,7 @@ export const fonts = `
   })}
 
   ${fontFace({
+    fontDisplay: 'swap',
     fontFamily: 'Circular Std',
     fontStyle: 'normal',
     fontWeight: 'bold',
@@ -43,6 +48,7 @@ export const fonts = `
   })}
 
   ${fontFace({
+    fontDisplay: 'swap',
     fontFamily: 'Circular Std',
     fontStyle: 'italic',
     fontWeight: 'bold',
