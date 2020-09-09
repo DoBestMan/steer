@@ -78,8 +78,8 @@ function PDPStickyBar({
 }: PDPStickyBarProps) {
   const [isActive, setIsActive] = useState(!avoidSection);
   const [theme, setTheme] = useState(THEME.ORANGE);
-  const { lessThan } = useBreakpoints();
   const { vehicle } = useUserPersonalizationContext();
+  const { isLoading, lessThan } = useBreakpoints();
   const isTireLine = !tireSize && !rearSize;
 
   const secondaryLabel = parseLabel({
@@ -136,8 +136,10 @@ function PDPStickyBar({
     return null;
   }
 
+  const isHidden = !isActive && (!lessThan.L || isLoading);
+
   return (
-    <div aria-hidden={!isActive && !lessThan.L} css={styles.root}>
+    <div aria-hidden={isHidden} css={styles.root}>
       <StickyBar theme={theme} logo={brandLogo} secondaryLabel={secondaryLabel}>
         <DynamicActionBar
           rearPrice={rearPrice}
