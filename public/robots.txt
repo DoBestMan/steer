@@ -1,24 +1,5 @@
 User-agent: Googlebot
-Allow: /brands/federal-tires/ss595?v=1&tireSize=p215-40r17&mpn=14al7afa
-Allow: /brands/deestone-tires/d265?v=1&tireSize=18-8.50-8&mpn=ds7037
-Allow: /brands/achilles-tires/atr-sport-2?v=1&tireSize=235-50r18&mpn=mab235018
-Allow: /brands/achilles-tires/atr-sport-2?v=1&tireSize=235-45zr18&mpn=mab234518
-Allow: /brands/achilles-tires/desert-hawk-uhp?v=1&tireSize=275-55r20&mpn=mag275520
-Allow: /brands/crosswind-tires/hp010?v=1&tireSize=195-50r15&mpn=pcr2689ll
-Allow: /brands/trailer-king-tires/st-radial-ii?v=1&tireSize=st185-80r13&mpn=tks15t
-Allow: /brands/sailun-tires/s637-trailer-?v=1&tireSize=st235-85r16&mpn=5540993
-Allow: /brands/atturo-tires/trail-blade-x-t?v=1&tireSize=lt285-65r18&mpn=tbxti0048355
-Allow: /brands/maxxis-tires/razr-mt-772?v=1&tireSize=lt35-12.50r17&mpn=tl00392100
-Allow: /brands/americus-tires/rugged-mt?v=1&tireSize=lt35-12.50r17&mpn=amd2466
-Allow: /brands/nitto-tires/nt555-g2?v=1&tireSize=285-35zr20&mpn=211440
-Allow: /brands/power-king-tires/towmax-str-ii?v=1&tireSize=st225-75r15&mpn=max53t
-Allow: /brands/sceptor-tires/4xs?v=1&tireSize=p225-70r16&mpn=rsx76
-Allow: /brands/deestone-tires/d929?v=1&tireSize=22-11.00-8&mpn=ds7321
-Allow: /brands/deestone-tires/d930?v=1&tireSize=22-11.00-8&mpn=ds7341
-Allow: /brands/gladiator-tires/qr25-ts-trailer?v=1&tireSize=205-75r14&mpn=1942002042
-Allow: /brands/kanati-tires/trail-hog?v=1&tireSize=lt285-70r17&mpn=lth1728570e
-Allow: /brands/kenda-tires/klever-r-t-kr601?v=1&tireSize=lt33-10.50r17&mpn=601018
-Allow: /brands/goodyear-tires/wrangler-duratrac?v=1&tireSize=255-75r17&mpn=150684601
+Allow: /paid*
 Disallow: /
 
 User-agent: Bingbot
