@@ -39,6 +39,9 @@ const styles: StylesMap = {
       padding: SPACING.SIZE_60,
     },
   },
+  containerForLongSelect: {
+    padding: SPACING.SIZE_30,
+  },
 };
 
 export default {
@@ -91,7 +94,7 @@ export function SelectWithManyOptions() {
   };
 
   return (
-    <div css={styles.container}>
+    <div css={styles.containerForLongSelect}>
       <Select
         id="long-list-select"
         label="label"

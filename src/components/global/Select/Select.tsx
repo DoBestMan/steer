@@ -4,6 +4,7 @@ import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import useClickOutside from '~/hooks/useClickOutside';
 import useMobileOrTablet from '~/hooks/useMobileOrTablet';
+import useScrollBack from '~/hooks/useScrollBack';
 import { KEYCODES } from '~/lib/constants';
 import { randomString } from '~/lib/utils/string';
 
@@ -50,7 +51,6 @@ function Select(props: Props) {
     text: placeholder,
   };
 
-  const isMobileOrTablet = useMobileOrTablet();
   const [focusedOption, setFocusedOption] = useState<SelectOption | null>(null);
   const [selectedOption, setSelectedOption] = useState<SelectOption | null>(
     null,
@@ -64,6 +64,9 @@ function Select(props: Props) {
   const [optionsRefs, setOptionsRefs] = useState<RefObject<HTMLLIElement>[]>(
     [],
   );
+  const isMobileOrTablet = useMobileOrTablet();
+  const ref = useClickOutside(handleClickOutside);
+  const scrollBackToItem = useScrollBack(ref);
 
   useEffect(() => {
     if (!id) {
@@ -98,6 +101,19 @@ function Select(props: Props) {
     },
     [list],
   );
+
+  function handleClickOutside() {
+    setActive(false);
+    setOpen(false);
+    if (value) {
+      setIsTouched(true);
+      if (validationFn) {
+        validationFn(value);
+      }
+    } else {
+      setIsTouched(false);
+    }
+  }
 
   const toggle = useCallback(() => {
     setOpen((open) => !open);
@@ -174,22 +190,8 @@ function Select(props: Props) {
       validationFn(option.value);
     }
     setOpen(false);
+    scrollBackToItem();
   };
-
-  const handleClickOutside = () => {
-    setActive(false);
-    setOpen(false);
-    if (value) {
-      setIsTouched(true);
-      if (validationFn) {
-        validationFn(value);
-      }
-    } else {
-      setIsTouched(false);
-    }
-  };
-
-  const ref = useClickOutside(handleClickOutside);
 
   const showErrorState = hasError && isTouched;
 
