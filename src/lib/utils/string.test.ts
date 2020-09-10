@@ -43,15 +43,18 @@ describe('utils/routes', () => {
   });
 
   describe('removeTireFromQueryParam', () => {
-    it('returns a string without `-tires`', () => {
+    it('returns a string without `-tires` at the end', () => {
       expect(removeTireFromQueryParam('12-inch-winter-tires')).toBe(
         '12-inch-winter',
       );
+    });
+
+    it('does not remove `-tires` if it is in the middle of a string', () => {
       expect(removeTireFromQueryParam('winter-tires-another-string')).toBe(
-        'winter-another-string',
+        'winter-tires-another-string',
       );
       expect(removeTireFromQueryParam('winter--tiresanother-string')).toBe(
-        'winter-another-string',
+        'winter--tiresanother-string',
       );
     });
   });
