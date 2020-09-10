@@ -307,7 +307,9 @@
     },
     "mobile": {
       "label": "Mobile Menu"
-    }
+    },
+    "size": "Size",
+    "vehicle": "Vehicle"
   },
   "pdp": {
     "breadcrumbs": {
