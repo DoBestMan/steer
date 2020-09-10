@@ -22,9 +22,6 @@ export async function backendCreateUserSession({
     endpoint: '/v1/users/session',
     includeAuthorization: true,
     jsonBody: {
-      // regionId comes from an optional `region_id` query param passed by Google on the FE
-      // We want to forward it to the user personalization API call
-      // so the BE can force a certain region instead of relying on Ip detection
       regionId,
       userIp,
     },
