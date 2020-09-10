@@ -13,7 +13,7 @@ export const contactPageUpperData: PageData = {
       type: 'SiteLinkWithLabel',
     },
     {
-      label: 'Contact Us',
+      label: 'Contact us',
       link: {
         href: '/contact',
         isExternal: false,
@@ -24,7 +24,7 @@ export const contactPageUpperData: PageData = {
   header: {
     body:
       'We’re here to answer any questions you may have and to keep your tire buying experience simple. Check our FAQ section for answers to our most common questions. If you can’t find an answer to your question then fill out the contact form below and we’ll answer you as soon as possible.',
-    title: 'Contact Us',
+    title: 'Contact us',
     type: 'SiteModuleHeaderLanding',
     subTitle: '',
   },
@@ -34,7 +34,7 @@ export const contactPageUpperData: PageData = {
       description:
         'At SimpleTire, we are committed to providing you with the best customer services and support to ensure a positive shopping experience. Please contact us with any questions or concerns you may have regarding your tire purchase.',
       shareImage: undefined,
-      title: 'Contact Us',
+      title: 'Contact us',
     },
     slug: 'customer-support',
   },

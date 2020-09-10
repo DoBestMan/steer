@@ -10,7 +10,7 @@ export const supportData = {
     support: {
       action: ROUTE_MAP[ROUTES.CUSTOMER_SUPPORT],
       icon: 'mail',
-      text: 'Customer Support',
+      text: 'Customer support',
     },
   },
   isNotBusinessHours: {
@@ -22,7 +22,7 @@ export const supportData = {
     support: {
       action: ROUTE_MAP[ROUTES.CUSTOMER_SUPPORT],
       icon: 'mail',
-      text: 'Customer Support',
+      text: 'Customer support',
     },
   },
 };
