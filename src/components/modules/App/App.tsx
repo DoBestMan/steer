@@ -81,6 +81,13 @@ function App({ children, ...rest }: Props) {
     window.scrollTo(0, 0);
   }, [router.pathname]);
 
+  // Scroll restoration happens too early https://github.com/vercel/next.js/issues/3303
+  useEffect(() => {
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+  }, []);
+
   return (
     <div
       css={[styles.root, isHomepage && styles.rootWithOffWhiteBg]}
