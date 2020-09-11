@@ -16,6 +16,8 @@ export function getSrcset(url: string, q?: TransformationArgs): string {
     return '';
   }
 
+  const encodedURL = encodeURI(url);
+
   let queries: Record<string, Transformations | Array<Transformations>> = {};
 
   if (!q) {
@@ -37,7 +39,7 @@ export function getSrcset(url: string, q?: TransformationArgs): string {
     queries = q as Record<string, Transformations | Array<Transformations>>;
   }
 
-  const extension = getUrlExtension(url);
+  const extension = getUrlExtension(encodedURL);
 
   const srcset = Object.entries(queries)
     .map((query) => {
@@ -86,7 +88,7 @@ export function getSrcset(url: string, q?: TransformationArgs): string {
         transform[0].quality = quality;
       }
 
-      const transformed = transformation(url, transform);
+      const transformed = transformation(encodedURL, transform);
 
       return `${transformed} ${widthStr}`;
     })
