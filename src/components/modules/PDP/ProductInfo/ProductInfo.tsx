@@ -42,6 +42,10 @@ export interface ProductInfoProps {
   rearLoadSpeedRating?: string;
   rearPrice?: SitePrice | null;
   rearSize?: string;
+  reviews?: {
+    hasReviews: boolean;
+    refId: string;
+  };
   roadHazard: {
     durationLabel: string;
     price: string;
@@ -75,6 +79,7 @@ function ProductInfo({
   rearLoadSpeedRating,
   rearPrice,
   rearSize,
+  reviews,
   roadHazard,
   sameSizeSearchResults,
   sameSizeSearchURL,
@@ -112,7 +117,7 @@ function ProductInfo({
                 sizeFinder={sizeFinder}
               />
             </div>
-            <Rating rating={rating} />
+            <Rating reviews={reviews} rating={rating} />
           </div>
           <div css={styles.error}>
             <Toast
@@ -138,7 +143,7 @@ function ProductInfo({
           brand={brand}
           brandURL={brandURL}
         />
-        <Rating rating={rating} />
+        <Rating reviews={reviews} rating={rating} />
         <DynamicMultiSizeButton
           size={size}
           loadSpeedRating={loadSpeedRating}
@@ -184,7 +189,7 @@ function ProductInfo({
           ) : (
             <div css={styles.loadingSizeSelector} />
           )}
-          <Rating rating={rating} />
+          <Rating reviews={reviews} rating={rating} />
         </div>
         {isLoading && !isTireLine ? (
           <div css={styles.loading} />

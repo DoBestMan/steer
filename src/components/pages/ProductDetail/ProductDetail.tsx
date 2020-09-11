@@ -79,6 +79,11 @@ function ProductDetail({ serverData }: ProductDetailData) {
     setIsLocationModalOpen(!isLocationModalOpen);
   }
 
+  const reviewsObj = {
+    hasReviews: !!(reviews.reviews && reviews.reviews.length),
+    refId: reviewsAnchor,
+  };
+
   return (
     <>
       <Meta {...meta} />
@@ -107,6 +112,7 @@ function ProductDetail({ serverData }: ProductDetailData) {
                 <ProductInfo
                   sizeFinder={sizeFinder}
                   openDynamicModal={openDynamicModal}
+                  reviews={reviewsObj}
                   {...productInfo}
                 />
               </div>
