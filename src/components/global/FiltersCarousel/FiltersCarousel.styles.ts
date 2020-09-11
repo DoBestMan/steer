@@ -28,6 +28,12 @@ const styles: StylesMap = {
     pointerEvents: 'none',
   },
   filterButton: {
+    '&.focus-visible:focus:not(:active)': {
+      borderColor: COLORS.GLOBAL.BLACK,
+    },
+    '&:focus:not(:active)': {
+      borderColor: COLORS.ORANGE.SHADE_15,
+    },
     pointerEvents: 'auto',
     // order matters to override when dropdown is open
     // eslint-disable-next-line sort-keys
