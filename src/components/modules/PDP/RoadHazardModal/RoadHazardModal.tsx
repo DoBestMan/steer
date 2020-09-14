@@ -128,13 +128,13 @@ function RoadHazardModal({ durationLabel, isOpen, onClose, price }: Props) {
               <>
                 <p css={styles.price}>{formatDollars(price)}</p>
                 <p css={styles.copyHeader}>{ui('pdp.roadHazard.copyHeader')}</p>
-                <p css={styles.copy}>
+                <div css={styles.copy}>
                   <Markdown renderers={{ paragraph: 'span' }}>
                     {ui('pdp.roadHazard.copy', {
                       durationLabel,
                     })}
                   </Markdown>
-                </p>
+                </div>
               </>
             </RadioSelector>
             <RadioSelector

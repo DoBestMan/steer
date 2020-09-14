@@ -6,6 +6,7 @@ import { STAGES } from '~/components/pages/CatalogPage/CatalogSummary/CatalogSum
 import { SiteCatalogProducts } from '~/data/models/SiteCatalogProducts';
 import { SiteCatalogSummary } from '~/data/models/SiteCatalogSummary';
 import { SiteImage } from '~/data/models/SiteImage';
+import * as UseApiDataWithDefault from '~/hooks/useApiDataWithDefault';
 import { Emitter } from '~/lib/utils/Emitter';
 
 import { onDataReady, useContextSetup } from './CatalogSummary.context';
@@ -98,6 +99,12 @@ const noResultsSummary = {
 };
 
 describe('useCatalogSummaryContextSetup', () => {
+  beforeEach(() => {
+    jest
+      .spyOn(UseApiDataWithDefault, 'useApiDataWithDefault')
+      .mockResolvedValue(null as never);
+  });
+
   test.each([
     ['initial state - from search', true],
     ['initial state - deep linked', false],

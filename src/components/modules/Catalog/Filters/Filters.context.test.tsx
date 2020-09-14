@@ -138,7 +138,7 @@ describe('useFiltersContextSetup', () => {
   test('applying a filter with multiple values', async () => {
     const { result } = renderFiltersContextSetupHook();
 
-    await act(() =>
+    await act(async () =>
       result.current.createUpdateFilterGroup({
         value: {
           foo: 'bar',
@@ -154,14 +154,14 @@ describe('useFiltersContextSetup', () => {
   test('overwriting a value', async () => {
     const { result } = renderFiltersContextSetupHook();
 
-    await act(() =>
+    await act(async () =>
       result.current.createUpdateFilterGroup({
         value: {
           foo: 'bar',
         },
       })(),
     );
-    await act(() =>
+    await act(async () =>
       result.current.createUpdateFilterGroup({
         value: {
           foo: 'baz',
@@ -176,14 +176,14 @@ describe('useFiltersContextSetup', () => {
   test('unchecking the last item in a group sets empty value in state', async () => {
     const { result } = renderFiltersContextSetupHook();
 
-    await act(() =>
+    await act(async () =>
       result.current.createUpdateFilterGroup({
         value: {
           foo: 'bar',
         },
       })(),
     );
-    await act(() =>
+    await act(async () =>
       result.current.createUpdateFilterGroup({
         value: {
           foo: 'bar',
@@ -197,7 +197,7 @@ describe('useFiltersContextSetup', () => {
   test('immediately revalidates when toggling a filter', async () => {
     const { result } = renderFiltersContextSetupHook();
 
-    await act(() => result.current.createToggleFilterHandler({ foo: 'bar' })());
+    act(() => result.current.createToggleFilterHandler({ foo: 'bar' })());
 
     // immediately fetches
     expect(mockCatalogContext.handleUpdateResults).toHaveBeenCalledTimes(1);
@@ -210,7 +210,7 @@ describe('useFiltersContextSetup', () => {
   test('toggle filter', async () => {
     const { result } = renderFiltersContextSetupHook();
 
-    await act(() =>
+    act(() =>
       result.current.createToggleFilterHandler({
         foo: 'true',
       })(),
@@ -264,7 +264,7 @@ describe('useFiltersContextSetup', () => {
       })();
     });
 
-    await act(() =>
+    await act(async () =>
       result.current.createResetFiltersHandler(({
         filterGroups: [
           { items: [{ value: { foo: 'bar' } }] },
@@ -281,7 +281,7 @@ describe('useFiltersContextSetup', () => {
   test('clearing filters to apply should reset data', async () => {
     const { result } = renderFiltersContextSetupHook();
 
-    await act(() => {
+    await act(async () => {
       result.current.createUpdateFilterGroup({
         value: { bar: 'baz' },
       })();

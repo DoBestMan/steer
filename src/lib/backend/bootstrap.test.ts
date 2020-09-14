@@ -56,6 +56,7 @@ describe('getBackendEnvVariables', () => {
       STEER_CLIENT_SECRET_PROD: 'prodSecret',
     };
     /* eslint-enable sort-keys */
+    jest.spyOn(global.console, 'log').mockImplementation();
   });
 
   afterEach(() => {

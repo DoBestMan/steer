@@ -13,6 +13,8 @@ describe('utils/modal', () => {
     });
 
     it('should return false when an invalid modal ID is passed', () => {
+      jest.spyOn(global.console, 'info').mockImplementation();
+
       expect(isValidStaticModal('ANINVALIDMODALID')).toEqual(false);
     });
   });

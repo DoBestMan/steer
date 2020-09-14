@@ -11,6 +11,8 @@ global.IntersectionObserver = jest.fn(function () {
   this.disconnect = jest.fn();
 });
 
+global.scroll = jest.fn();
+
 // Access Response/FetchError objects in tests
 // https://github.com/jefflau/jest-fetch-mock/issues/13#issuecomment-299413329
 
