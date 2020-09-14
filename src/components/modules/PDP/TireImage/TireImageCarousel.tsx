@@ -128,6 +128,8 @@ function TireImageCarousel({
 
   const params = {
     centeredSlides: true,
+    longSwipesRatio: 0.2,
+    shortSwipes: true,
     shouldSwiperUpdate: true,
     slidesPerView: 1,
   };
