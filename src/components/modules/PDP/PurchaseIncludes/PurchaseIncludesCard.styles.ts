@@ -78,13 +78,13 @@ const styles: StylesMap = {
       flexDirection: 'column',
       height: 'unset',
       justifyContent: 'flex-start',
+      maxWidth: 250,
       minHeight: 240,
       padding: SPACING.SIZE_25,
-      width: 250,
 
       [MQ.L]: {
+        maxWidth: 300,
         minHeight: 270,
-        width: 300,
         padding: SPACING.SIZE_40,
       },
     },
