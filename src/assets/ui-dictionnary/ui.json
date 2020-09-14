@@ -14,6 +14,10 @@
       "title": "Shop for Different Tire Types Online",
       "description": "SimpleTire carries every type of tire for all vehicles, from passenger to light truck, ATV/UTV, farm and agriculture, golf, commercial and more. Enjoy fast and free delivery to you or the local shop of your choice."
     },
+    "typePages": {
+      "title": "Shop for {{type}} Tires Online",
+      "description": "Shop the largest selection of {{type}} tires by brand, category, size, make, model and more at a low-cost with fast and free shipping direct to you or one of our 10,000+ installation centers."
+    },
     "brands": {
       "brandsHub": {
         "title": "Shop For Tires by Brand and Manufacturer",
@@ -730,5 +734,10 @@
   "pagination": {
     "pageNumber": "Page {{selectedPageNumber}} of {{pageCount}}",
     "older": "Older"
+  },
+  "typePage": {
+    "mostPopularBrandsHeadlineCopy": "<h2>Most popular brands</h2>",
+    "mostPopularTextCopy": "<p>Not sure where to start? View some of the most popular {{type}} tires on the road by top brands below:</p>",
+    "tireSizeBoardTitle": "<h3>Add your vehicle info or tire size to find the best {{type}} tire recommendation</h3>"
   }
 }
