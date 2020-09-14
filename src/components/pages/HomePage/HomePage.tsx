@@ -15,8 +15,8 @@ import { COLORS, TIME } from '~/lib/constants';
 import { getScroll, scrollTo, scrollToRef } from '~/lib/helpers/scroll';
 
 import {
-  useButtonHeight,
   useChangeBackgroundColor,
+  useContentSpacerHeight,
   useIsFallbackSticky,
 } from './HomePage.hooks';
 import styles, { CONTENT_TRANSITION } from './HomePage.styles';
@@ -111,7 +111,7 @@ function HomePage({
     supportsPositionSticky,
   });
 
-  const { buttonHeight, buttonRef } = useButtonHeight({
+  const { spacerHeight, buttonRef } = useContentSpacerHeight({
     CONTENT_PEEKING_AMOUNT,
     isMobile,
     supportsPositionSticky,
@@ -141,7 +141,7 @@ function HomePage({
           <SearchButton onClick={handleOpenModal} />
         </div>
 
-        <div css={[styles.contentSpacer, buttonHeight]}></div>
+        <div css={[styles.contentSpacer, spacerHeight]}></div>
         <div ref={contentContainerRef}>
           <Grid
             css={[

@@ -48,18 +48,20 @@ export function useIsFallbackSticky({
 }
 
 // useButtonHeight Hook
-interface UseButtonHeightProps {
+interface UseContentSpacerHeightProps {
   CONTENT_PEEKING_AMOUNT: number;
   isMobile: boolean;
   supportsPositionSticky: boolean;
 }
 
-export function useButtonHeight({
+const MOBILE_SPACER_HEIGHT = '40vh';
+
+export function useContentSpacerHeight({
   CONTENT_PEEKING_AMOUNT,
   isMobile,
   supportsPositionSticky,
-}: UseButtonHeightProps) {
-  const [buttonHeight, setButtonHeight] = useState({});
+}: UseContentSpacerHeightProps) {
+  const [spacerHeight, setSpacerHeight] = useState({});
   const buttonRef = useRef<HTMLDivElement>(null);
   const { height, width } = useWindowSize();
 
@@ -73,12 +75,14 @@ export function useButtonHeight({
 
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     const offsetTop = buttonRect.top + scrollTop;
-    const responsiveSpacer = isMobile ? '40vh' : `${height - offsetTop}px`;
+    const responsiveSpacer = isMobile
+      ? MOBILE_SPACER_HEIGHT
+      : `${height - offsetTop}px`;
     const contentSpacerHeight = `calc(${responsiveSpacer} - ${
       CONTENT_PEEKING_AMOUNT + buttonHeight
     }px)`;
 
-    setButtonHeight({ minHeight: contentSpacerHeight });
+    setSpacerHeight({ minHeight: contentSpacerHeight });
   }, [
     buttonRef,
     CONTENT_PEEKING_AMOUNT,
@@ -88,7 +92,7 @@ export function useButtonHeight({
     width,
   ]);
 
-  return { buttonHeight, buttonRef };
+  return { spacerHeight, buttonRef };
 }
 
 // useChangeBackgroundColor Hook
