@@ -1,4 +1,4 @@
-import UI from '~/assets/ui-dictionnary/ui.json';
+import UI from '~/assets/ui-dictionary/ui.json';
 
 export type UIType = {
   [key: string]: {} | string | number | boolean;
