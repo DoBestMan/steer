@@ -7,6 +7,7 @@
   },
   "scripts": {
     "dev": "next dev",
+    "dev:e2e": "GTM_ID='' STEER_BACKEND='integration' yarn dev",
     "checks": "yarn lint && yarn ts && yarn test",
     "build": "if [[ ${VERCEL_GITHUB_COMMIT_REF} == \"\" || ${VERCEL_GITHUB_COMMIT_REF} == \"master\" ]]; then yarn build-prod; else yarn build-ci; fi",
     "build-ci": "next build && build-storybook -o public/storybook",
@@ -22,7 +23,10 @@
     "test:watch": "jest --watch",
     "ts": "tsc --noEmit",
     "start": "next start",
-    "storybook": "start-storybook -s ./public -p 6006"
+    "storybook": "start-storybook -s ./public -p 6006",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "e2e:dev": "start-server-and-test dev:e2e 3000 'CYPRESS_BASEURL=http://localhost:3000/ yarn cy:open'"
   },
   "dependencies": {
     "@emotion/babel-preset-css-prop": "^10.0.27",
@@ -96,9 +100,12 @@
     "babel-loader": "^8.1.0",
     "babel-plugin-dynamic-import-node": "^2.3.3",
     "babel-plugin-emotion": "^10.0.33",
+    "cypress": "^5.1.0",
+    "cypress-wait-until": "^1.7.1",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.1",
     "eslint-import-resolver-typescript": "^2.0.0",
+    "eslint-plugin-cypress": "^2.11.1",
     "eslint-plugin-jest": "^23.8.2",
     "eslint-plugin-jest-formatting": "^1.2.0",
     "eslint-plugin-prettier": "^3.1.2",
@@ -115,6 +122,7 @@
     "prettier-plugin-import-sort": "^0.0.4",
     "react-svg-inline": "^2.1.1",
     "react-test-renderer": "^16.13.1",
+    "start-server-and-test": "^1.11.3",
     "ts-jest": "^25.3.1",
     "ts-loader": "^6.2.2",
     "typescript": "^3.8.3",

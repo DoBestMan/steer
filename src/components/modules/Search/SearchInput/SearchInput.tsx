@@ -59,7 +59,10 @@ const SearchInput = forwardRef<HTMLInputElement, AutocompleteInputProps>(
     return (
       <div css={[styles.inputContainer, !isActive && styles.inactive]}>
         {searchStateLabel && (
-          <div css={[styles.inputText, styles.searchState]}>
+          <div
+            css={[styles.inputText, styles.searchState]}
+            data-testid="search-state"
+          >
             {searchStateLabel}
           </div>
         )}
@@ -73,6 +76,7 @@ const SearchInput = forwardRef<HTMLInputElement, AutocompleteInputProps>(
         )}
         <div css={styles.comboboxWrapper}>
           <input
+            data-testid="search-input"
             aria-labelledby={labelID}
             css={[styles.input, styles.inputText]}
             disabled={isDisabled}

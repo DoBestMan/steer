@@ -16,7 +16,10 @@ function Loading({
   theme = THEME.LIGHT,
 }: Props) {
   return (
-    <div css={[styles.container, customContainerStyles]}>
+    <div
+      css={[styles.container, customContainerStyles]}
+      data-testid="loading-indicator"
+    >
       <span css={screenReaderText}>{label}</span>
       <span css={[styles.container, styles.circle, styles[theme]]}></span>
     </div>

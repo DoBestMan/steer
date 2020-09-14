@@ -74,7 +74,7 @@ function SearchSection({
     <Grid css={styles.container}>
       <GridItem gridColumnS="2/6" gridColumnM="2/8" gridColumnL="3/14">
         {label && <h5 css={styles.eyebrow}>{label}</h5>}
-        <ul>
+        <ul data-testid="search-results">
           {siteSearchResultList.map((item, index) => {
             const isSelected =
               sectionIndex === selectedItemIndex[0] &&

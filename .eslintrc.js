@@ -7,6 +7,7 @@ module.exports = {
     'prettier/@typescript-eslint',
     'plugin:prettier/recommended',
     'plugin:jest-formatting/strict',
+    'plugin:cypress/recommended',
   ],
   env: {
     es6: true,

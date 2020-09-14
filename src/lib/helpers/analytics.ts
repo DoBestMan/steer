@@ -38,7 +38,7 @@ class GoogleAnalytics {
   }
 
   initialize() {
-    if (this.init || typeof window === 'undefined') {
+    if (this.init || typeof window === 'undefined' || !GTM_CONSTANTS.GTM_ID) {
       return;
     }
 

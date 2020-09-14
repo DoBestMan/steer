@@ -19,6 +19,7 @@ function SearchButton({ onClick }: Props) {
       <button
         onClick={onClick}
         css={[typography.primaryHeadline, styles.button]}
+        data-testid="search-button"
       >
         <Grid>
           <GridItem

@@ -44,7 +44,7 @@ function SearchResults({
         ];
 
         return (
-          <ul css={animationStyles}>
+          <ul css={animationStyles} data-testid="search-autocomplete-results">
             {results.map((searchGroup: SiteSearchResultGroup, index) => {
               // We can assume that all items in the list have the same type.
               const isCarousel =

@@ -177,7 +177,10 @@ export function DataMomentMessage({
             </Markdown>
           )}
           {siteCatalogSummaryPrompt.ctaList && (
-            <div css={styles.dataMomentCtaWrapper}>
+            <div
+              css={styles.dataMomentCtaWrapper}
+              data-testid="catalog-cta-list"
+            >
               {siteCatalogSummaryPrompt.ctaList.map(
                 ({ label, siteQueryParams }) => {
                   const buttonStyle = hasMultipleCtas
