@@ -18,19 +18,19 @@ interface ContextProviderProps {
 
 /*
  * Filter context props
- * @activeFilters - currently applied filters (see data structure below)
- * @applyFilters - triggers search with newly added filters (filtersToApply)
- * @clearFiltersToApply - resets to initial state if closing dropdown without resetting or applying
- * @clearSelectingFilter - closes filter dropdown
- * @createOpenFilterHandler - opens filter dropdown
- * @createResetFiltersHandler - resets all selected filters from a group
- * @createToggleFilterHandler - used for filters that are immediately applied on click (toggles/sort) with the option to overwrite all values
- * @createUpdateFilterGroup - updates grouped filters to apply once `Apply` is clicked
- * @filtersToApply - selected filters from a currently open popup (not immediately applied)
+ * @activeFilters - filters that are currently applied to catalog
+ * @applyFilters - triggers fetch with newly selected filters (`filtersToApply`), clears open filter popup if applicable
+ * @clearFiltersToApply - resets filters if popup was closed without applying
+ * @clearSelectingFilter - closes filter popup
+ * @createOpenFilterHandler - handler to open filter popup
+ * @createResetFiltersHandler - handler to reset all selected filters from a group (does not trigger new fetch unless actively applied)
+ * @createToggleFilterHandler - handler for filters that are immediately applied on click (toggles/sort)
+ * @createUpdateFilterGroup - updates filter value in `filtersToApply` with the option to overwrite value altogether, previews filters to get updated filter counts
+ * @filtersToApply - selected filters from a currently open popup (not immediately applied on selection)
  * @isPopularActive - determines if popular filter button has active state
- * @isPreviewLoading - loading state for fetching new results
+ * @isPreviewLoading - loading state for fetching new filter counts
  * @previewFiltersData - used to reflect new data for filters in open popup (eg count, disabled states, etc)
- * @selectingFilter - the filter index that has an open dropdown
+ * @selectingFilter - filter id that is currently open
  * @totalMatches - matching results with filters applied
  * Some function props are used in both click event and other scenarios (useEffect or other custom trigger)
  * which is why they might be wrapped with another function
@@ -57,23 +57,6 @@ export interface FiltersContextProps {
 }
 
 const FiltersContext = createContext<FiltersContextProps>();
-
-/*
- * Filters map will run through initial results to determine filters that are marked as selected for initialState
- * As the user applies filters in each group, they will be added to this map and then as query params so they persist
- * Each filter has a value object that may contain multiple values (eg `sort` and `order` from the sort list)
- * Sort filters and range filters will need to overwrite the values in state, while toggle filters will either
- * add the value to the state, or remove it all together if untoggled (if value exists in state already)
- * List filters will be appended as a comma separated list, and removed altogether if the value is empty
- * An example of what this might look like:
- *    {
- *      sort: 'price',
- *      order: 'desc',
- *      deals: 'true',
- *      brand: 'firestone,goodyear',
- *      warranty: 0,5000
- *    }
- */
 
 interface ContextArgs {
   onPreviewFilters: ContextProviderProps['onPreviewFilters'];
@@ -113,6 +96,7 @@ export function useFiltersContextSetup({
     clearFiltersToApply: () => {
       setFiltersToApply(initialState);
       if (!isStrictEqual(filtersToApply, initialState)) {
+        // ensures filter result count is up to date upon reopening
         onPreviewFilters();
       }
     },
@@ -143,8 +127,6 @@ export function useFiltersContextSetup({
           setGlobalToastMessage(e.message);
           setIsPreviewLoading(false);
         });
-      // Apply reset filters automatically?
-      // onApplyFilters(newState);
     },
     createToggleFilterHandler: (value: Record<string, string>) => () => {
       const newState = { ...filtersToApply };
@@ -176,7 +158,6 @@ export function useFiltersContextSetup({
           return;
         }
 
-        // filter key exists, add or remove value
         // existing key does not include value, append to current val
         if (!filters[key].includes(value)) {
           filters[key] = `${filters[key]},${value}`;
