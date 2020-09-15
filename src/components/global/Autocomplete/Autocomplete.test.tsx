@@ -56,8 +56,7 @@ describe('autocomplete', () => {
     expect(screen.queryByText('Invalid input')).toBeInTheDocument();
   });
 
-  // TODO: update and fix these tests as part of https://simpletire.atlassian.net/browse/WCS-40
-  test.skip('autocomplete flow - success', () => {
+  test('autocomplete flow - success', () => {
     const onChange = jest.fn();
     const { rerender } = render(
       <Autocomplete
@@ -112,8 +111,7 @@ describe('autocomplete', () => {
     expect(combobox).toHaveAttribute('aria-expanded', 'false');
   });
 
-  // TODO: update and fix these tests as part of https://simpletire.atlassian.net/browse/WCS-40
-  test.skip('autocomplete flow - success keyboard', () => {
+  test('autocomplete flow - success keyboard', () => {
     const onChange = jest.fn();
     const { rerender } = render(
       <Autocomplete
@@ -161,6 +159,7 @@ describe('autocomplete', () => {
     ).toBeInTheDocument();
 
     // select second result with arrow key
+    fireEvent.keyDown(input, { keyCode: KEYCODES.ARROW_DOWN });
     fireEvent.keyDown(input, { keyCode: KEYCODES.ARROW_DOWN });
     fireEvent.keyDown(input, { keyCode: KEYCODES.ENTER });
 
