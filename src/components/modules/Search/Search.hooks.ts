@@ -100,6 +100,10 @@ export function useAutocompleteSelectedItem(results: SiteSearchResultGroup[]) {
   };
 }
 
+/**
+ * Provides methods that will force the search modal to scroll
+ * to a focused element that is hidden or offscreen.
+ */
 export function useFocusScrollIntoView({
   clearance = DEFAULT_CLEARANCE,
 }: {
@@ -124,6 +128,9 @@ export function useFocusScrollIntoView({
   };
 }
 
+/**
+ * Provides API methods and results for past searches feature.
+ */
 export function usePastSearches() {
   const [pastSearches, setPastSearches] = useState<SiteSearchResultGroup>(
     emptySiteSearchResultGroupData,
@@ -177,6 +184,9 @@ export function usePastSearches() {
   };
 }
 
+/**
+ * Provides API methods, results, and related info for search queries.
+ */
 export function useSearchResults() {
   const [searchResults, setSearchResults] = useState<Results>(emptyResultData);
   const isRequestInProgress = useRef(false);
@@ -257,6 +267,10 @@ export function useSearchResults() {
   };
 }
 
+/**
+ * Manages the 'Search by' state.
+ * Can also "lock" a search to a particular category ("Search by: Vehicle")
+ */
 export function useSearchState({
   searchQuery,
 }: {
@@ -315,6 +329,10 @@ export function useSearchState({
   };
 }
 
+/**
+ * Manages SearchInput values.
+ * FYI: secondaryQuery only appears in front/rear tire search
+ */
 export function useInputQuery() {
   const [primaryQuery, setPrimaryQuery] = useState<InputQuery>({
     queryText: '',

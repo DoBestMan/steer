@@ -58,6 +58,7 @@ const CONSTANTS = {
   DEBOUNCE_DELAY: 400,
 };
 
+// Basic flow of Search rendering: https://whimsical.com/Y6whmACfRLLfv43DGGoFpC
 function Search({
   addPastSearch,
   clearSearchResults,
@@ -84,6 +85,9 @@ function Search({
     [],
   );
   const { selectVehicle } = useUserPersonalizationContext();
+
+  // Most of the time, only the primaryQuery will be used.
+  // The secondaryQuery is used for rear tire search
   const {
     activeInputType,
     getCurrentInputQuery,
@@ -98,6 +102,7 @@ function Search({
 
   const { resultMetadata, siteSearchResultGroupList } = results;
 
+  // Scroll to top of search list when the search results change
   useEffect(() => {
     forwardedRef?.current?.scrollTo(0, 0);
   }, [forwardedRef, siteSearchResultGroupList]);
@@ -114,7 +119,7 @@ function Search({
     const { queryType } = getCurrentInputQuery();
     let currentInputQueryType = queryType;
 
-    // Reset queryType if input is empty
+    // Reset queryType if input is empty and no search state is active
     if (input.length === 0) {
       if (searchState === SearchStateEnum.REAR_TIRE) {
         currentInputQueryType =
@@ -152,6 +157,8 @@ function Search({
       queryType: '',
     };
 
+    // If search is "locked" to a specific "Search by:" category,
+    // don't reset the search state or search results.
     if (hasLockedSearchState) {
       if (queryText) {
         onSearchQuery({ queryText: '', queryType });
@@ -180,6 +187,7 @@ function Search({
         queryType: SearchStateEnum.FRONT_TIRE,
       });
     } else {
+      // Reset both inputs and revert back to "tire size" search.
       onSetSearchState(SearchStateEnum.TIRE_SIZE);
       setActiveInputType(SearchInputEnum.PRIMARY);
       setPrimaryQuery({
@@ -195,65 +203,89 @@ function Search({
     }
   };
 
+  const handleActionQuery = (searchResult: SearchResult) => {
+    const { action } = searchResult;
+
+    if (action.type !== SearchActionType.QUERY) {
+      return;
+    }
+
+    const isInitialRearTireState =
+      !action.queryText &&
+      !!action.additionalQueryText &&
+      action.queryType === SearchStateEnum.REAR_TIRE;
+    const isCurrentRearTireSearch =
+      action.queryType === SearchStateEnum.REAR_TIRE ||
+      action.queryType === SearchStateEnum.REAR_TIRE_WIDTH;
+
+    // If currently searching for a rear tire, additionalQueryText
+    // should match the front tire (and vice-versa).
+    let additionalQueryText = isCurrentRearTireSearch
+      ? action.additionalQueryText
+      : '';
+
+    // If we're switching from front to rear tire, we need to
+    // populate the front tire input with additionalQueryText
+    if (isInitialRearTireState) {
+      setPrimaryQuery({
+        ...primaryQuery,
+        queryText: action.additionalQueryText || '',
+      });
+      additionalQueryText = action.additionalQueryText || '';
+    } else {
+      setCurrentInputQuery({
+        queryType: action.queryType,
+        queryText: action.queryText,
+      });
+    }
+
+    onSearchQuery({
+      additionalQueryText: additionalQueryText || '',
+      queryText: action.queryText,
+      queryType: action.queryType,
+    });
+  };
+
+  const handleActionLink = (searchResult: SearchResult) => {
+    const { action } = searchResult;
+
+    if (action.type !== SearchActionType.LINK) {
+      return;
+    }
+
+    if (action.vehicleMetadata) {
+      selectVehicle(action.vehicleMetadata);
+    }
+
+    addPastSearch(searchResult);
+
+    if (shouldPreventLinkNavigation) {
+      onCloseSearchClick();
+    }
+
+    // If user clicks on the same search query, just close the modal
+    const isNewSearchQuery = !isSamePath(action.link.href, router.asPath);
+    if (isNewSearchQuery) {
+      const isCatalogSearchQuery = isInRouteRegexList(
+        action.link.href,
+        CATALOG_ROUTES_REGEX,
+      );
+      if (isCatalogSearchQuery) {
+        // Resets the catalog when creating a new search from a catalog page
+        eventEmitters.newCatalogSearchQuery.emit({ comesFromSearch: true });
+      }
+    } else {
+      onCloseSearchClick();
+    }
+  };
+
   const handleValueSelection = (searchResult: SearchResult) => {
     const { action } = searchResult;
 
     if (action.type === SearchActionType.QUERY) {
-      const isInitialRearTireState =
-        !action.queryText &&
-        !!action.additionalQueryText &&
-        action.queryType === SearchStateEnum.REAR_TIRE;
-      const isCurrentRearTireSearch =
-        action.queryType === SearchStateEnum.REAR_TIRE ||
-        action.queryType === SearchStateEnum.REAR_TIRE_WIDTH;
-
-      let additionalQueryText = isCurrentRearTireSearch
-        ? action.additionalQueryText
-        : '';
-
-      if (isInitialRearTireState) {
-        setPrimaryQuery({
-          ...primaryQuery,
-          queryText: action.additionalQueryText || '',
-        });
-        additionalQueryText = action.additionalQueryText || '';
-      } else {
-        setCurrentInputQuery({
-          queryType: action.queryType,
-          queryText: action.queryText,
-        });
-      }
-
-      onSearchQuery({
-        additionalQueryText: additionalQueryText || '',
-        queryText: action.queryText,
-        queryType: action.queryType,
-      });
+      handleActionQuery(searchResult);
     } else if (action.type === SearchActionType.LINK) {
-      if (action.vehicleMetadata) {
-        selectVehicle(action.vehicleMetadata);
-      }
-
-      addPastSearch(searchResult);
-
-      if (shouldPreventLinkNavigation) {
-        onCloseSearchClick();
-      }
-
-      // If user clicks on the same search query, just close the modal
-      const isNewSearchQuery = !isSamePath(action.link.href, router.asPath);
-      if (isNewSearchQuery) {
-        const isCatalogSearchQuery = isInRouteRegexList(
-          action.link.href,
-          CATALOG_ROUTES_REGEX,
-        );
-        if (isCatalogSearchQuery) {
-          // Resets the catalog when creating a new search from a catalog page
-          eventEmitters.newCatalogSearchQuery.emit({ comesFromSearch: true });
-        }
-      } else {
-        onCloseSearchClick();
-      }
+      handleActionLink(searchResult);
     }
   };
 
@@ -282,7 +314,8 @@ function Search({
   const handleInputFocus = (inputType: SearchInputEnum) => {
     setActiveInputType(inputType);
 
-    // Only make an additional search query in front/rear tire state
+    // If in the front/rear tire search, we need to trigger another
+    // query on focus in order to show the correct search results.
     if (
       searchState === SearchStateEnum.REAR_TIRE &&
       inputType !== activeInputType
@@ -307,6 +340,7 @@ function Search({
   const { queryText } = getCurrentInputQuery();
   const isInputEmpty = queryText.length < 1;
   const hasResults = siteSearchResultGroupList?.length > 0;
+
   const shouldShowSearchSupport =
     resultMetadata?.noExactMatch && !hasResults && !isInputEmpty;
   const shouldShowInitialSearch =

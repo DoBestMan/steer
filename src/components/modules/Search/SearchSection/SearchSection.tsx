@@ -37,12 +37,15 @@ function SearchSection({
     shouldPreventLinkNavigation,
     routeQueryParamOptions,
   } = useSearchContext();
+
   const handleClick = (searchResult: SiteSearchResultTextItem) => () => {
     if (onClick) {
       onClick(searchResult);
     }
   };
 
+  // We need touchStart in addition to click so that the buttons
+  // are selected with a single tap on touch devices.
   const handleTouchStart = (searchResult: SiteSearchResultTextItem) => (
     event: React.TouchEvent,
   ) => {
@@ -55,10 +58,13 @@ function SearchSection({
     }, CONSTANTS.TOUCH_START_DELAY);
   };
 
+  // We use this to prevent onTouchStart from triggering if the user is scrolling.
   const handleTouchMove = () => {
     isScrolling.current = true;
   };
 
+  // This is necessary because of a weird Chrome issue.
+  // https://github.com/SimpleTire/steer/pull/827
   const handleTouchEnd = (event: React.TouchEvent) => {
     event.preventDefault();
     isScrolling.current = false;

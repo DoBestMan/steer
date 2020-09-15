@@ -6,7 +6,9 @@ import { ui } from '~/lib/utils/ui-dictionary';
 import styles from './Search.styles';
 import SearchSection from './SearchSection/SearchSection';
 
-const getSupportResultMock = (customerServiceNumber: {
+// We need to mock out this search result so that it
+// correctly renders in SearchSection
+const createSupportResultItem = (customerServiceNumber: {
   display: string;
   value: string;
 }) => {
@@ -32,7 +34,7 @@ interface Props {
 
 function SearchSupport({ customerServiceNumber, onClick }: Props) {
   const supportResult = useMemo(
-    () => getSupportResultMock(customerServiceNumber),
+    () => createSupportResultItem(customerServiceNumber),
     [customerServiceNumber],
   );
 

@@ -169,7 +169,7 @@ function SearchAutocomplete({
     onCancelSelection();
   };
 
-  const handleConfirmSelection = () => {
+  const handleEnterKeyDown = () => {
     const [currentResultIndex, currentResultItemIndex] = selectedItemIndex;
     const selectedItem =
       results[currentResultIndex].siteSearchResultList[currentResultItemIndex];
@@ -198,12 +198,15 @@ function SearchAutocomplete({
       setSelectedItemIndex([0, -1]);
 
       const { action } = searchResult;
+
       if (action.type === SearchActionType.QUERY) {
+        // Identify if user just selected the "final" front tire query
         const isInitialRearTireState =
           !action.queryText &&
           !!action.additionalQueryText &&
           action.queryType === SearchStateEnum.REAR_TIRE;
 
+        // If so, we'll switch automatically to the rear tire input
         if (isInitialRearTireState) {
           setIsFrontTireComplete(true);
         } else {
@@ -260,7 +263,7 @@ function SearchAutocomplete({
         break;
       case KEYCODES.ENTER:
         e.preventDefault();
-        handleConfirmSelection();
+        handleEnterKeyDown();
         break;
       case KEYCODES.ESCAPE:
         handleCancelSelection();
