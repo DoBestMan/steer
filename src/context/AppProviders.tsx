@@ -5,6 +5,7 @@ import { SearchModalContextProvider } from '~/components/modules/Search/SearchMo
 import { SiteGlobals } from '~/data/models/SiteGlobals';
 import { SiteMenu } from '~/data/models/SiteMenu';
 
+import { FooterContextProvider } from './Footer.context';
 import { GlobalsContextProvider } from './Globals.context';
 import { GlobalToastContextProvider } from './GlobalToast.context';
 import { ModalContextProvider } from './Modal.context';
@@ -33,15 +34,17 @@ function AppProviders({
       <SiteGlobalsContextProvider value={siteGlobalsContextValue}>
         <SiteMenuContextProvider value={siteMenuContextValue}>
           <UserPersonalizationContextProvider>
-            <SearchContextProvider>
-              <SearchModalContextProvider>
-                <GlobalToastContextProvider>
-                  <RouterContextProvider>
-                    <ModalContextProvider>{children}</ModalContextProvider>
-                  </RouterContextProvider>
-                </GlobalToastContextProvider>
-              </SearchModalContextProvider>
-            </SearchContextProvider>
+            <FooterContextProvider>
+              <SearchContextProvider>
+                <SearchModalContextProvider>
+                  <GlobalToastContextProvider>
+                    <RouterContextProvider>
+                      <ModalContextProvider>{children}</ModalContextProvider>
+                    </RouterContextProvider>
+                  </GlobalToastContextProvider>
+                </SearchModalContextProvider>
+              </SearchContextProvider>
+            </FooterContextProvider>
           </UserPersonalizationContextProvider>
         </SiteMenuContextProvider>
       </SiteGlobalsContextProvider>

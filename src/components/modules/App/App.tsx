@@ -17,6 +17,7 @@ import LoadingBar from '~/components/global/LoadingBar/LoadingBar';
 import Toast from '~/components/global/Toast/Toast';
 import NavContainer from '~/components/modules/Nav/Nav.container';
 import SearchModal from '~/components/modules/Search/SearchModal';
+import { useFooterContext } from '~/context/Footer.context';
 import { useGlobalToastContext } from '~/context/GlobalToast.context';
 import { NavContextProvider } from '~/context/Nav.context';
 import { useRouterContext } from '~/context/Router.context';
@@ -56,6 +57,7 @@ function App({ children, ...rest }: Props) {
   // Put it here to not bundle backend in dynamic <SubNavContainer>
   const { siteMenuBrowseList, siteMenuLearn } = useSiteMenuContext();
 
+  const { isFooterVisible } = useFooterContext();
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -136,9 +138,9 @@ function App({ children, ...rest }: Props) {
           </Layout>
         </NavContextProvider>
 
-        {!isHomepage && <FeedbackDynamic />}
+        {!isHomepage && isFooterVisible && <FeedbackDynamic />}
 
-        <FooterContainer />
+        {isFooterVisible && <FooterContainer />}
 
         <SearchModal />
 

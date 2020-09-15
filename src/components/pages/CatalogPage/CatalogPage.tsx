@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { NAV_THEME } from '~/components/modules/Nav/Nav.theme';
 import { useCatalogProductsContext } from '~/context/CatalogProducts.context';
 import { useCatalogSummaryContext } from '~/context/CatalogSummary.context';
+import { useFooterContext } from '~/context/Footer.context';
 import { useNavContext } from '~/context/Nav.context';
 
 import CatalogGrid from './CatalogGrid/CatalogGrid';
@@ -28,6 +29,7 @@ function CatalogPage({ catalogGridRef }: Props) {
     siteCatalogProducts,
   } = useCatalogProductsContext();
   const { contentStage, showSummary, stage } = useCatalogSummaryContext();
+  const { setIsFooterVisible } = useFooterContext();
 
   const totalResult =
     siteCatalogProducts?.listResultMetadata.pagination?.total || 0;
@@ -53,6 +55,18 @@ function CatalogPage({ catalogGridRef }: Props) {
     // This hook should not be called when `navTheme` is updated elsewhere
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setNavTheme, showSummary]);
+
+  useEffect(() => {
+    // SQA-499: display footer only in the Catalog results page, hide for all interstitial pages.
+    if (stage === STAGES.RESULTS) {
+      setIsFooterVisible(true);
+    } else {
+      setIsFooterVisible(false);
+    }
+    return () => {
+      setIsFooterVisible(true);
+    };
+  }, [stage, setIsFooterVisible]);
 
   return (
     <ThemeProvider
