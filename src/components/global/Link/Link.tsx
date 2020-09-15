@@ -24,6 +24,7 @@ interface Props {
   icon?: IconType;
   iconPosition?: LINK_ICON_POSITION;
   isDisabled?: boolean;
+  testId?: string;
   theme?: THEME.DARK | THEME.LIGHT | THEME.ORANGE | LINK_THEME;
 }
 
@@ -43,6 +44,7 @@ function Link({
   icon,
   iconPosition = LINK_ICON_POSITION.RIGHT,
   isDisabled,
+  testId,
   theme = THEME.DARK,
   ...rest
 }: LinkProps) {
@@ -92,7 +94,7 @@ function Link({
   }
 
   return (
-    <Container css={linkStyles} {...rest}>
+    <Container css={linkStyles} data-testid={testId} {...rest}>
       {leftIcon}
       {linkText}
       {rightIcon}

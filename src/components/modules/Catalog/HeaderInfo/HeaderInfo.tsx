@@ -66,6 +66,7 @@ export default function HeaderInfo({
         as={LINK_TYPES.BUTTON}
         css={[styles.link, infoStyles]}
         theme={isAdvancedView ? THEME.DARK : THEME.ORANGE}
+        data-testid="catalog-header-location"
       >
         {location}
       </Link>
@@ -85,7 +86,7 @@ export default function HeaderInfo({
     <>
       <div css={styles.header}>
         {hasTopPicks && backEl}
-        <h1 data-testid="catalog-title" css={styles.title}>
+        <h1 css={styles.title} data-testid="catalog-title">
           {title}
         </h1>
         {!isInternal && (

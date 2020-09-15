@@ -38,6 +38,7 @@ export default function HeaderStickyBar({ children }: Props) {
           {ui('catalog.header.advancedViewLabel')}
         </span>
         <Toggle
+          testId="advanced-view-toggle"
           name={ui('catalog.header.advancedViewLabel')}
           onToggle={onToggleView}
           defaultChecked={isAdvancedView}

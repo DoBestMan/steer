@@ -29,11 +29,13 @@ function ProductListing({
   isHighlighted,
   imageList,
   isGrouped,
+  testId,
 }: {
   imageList: ProductListingProps['imageList'];
   isGrouped?: boolean;
   isHighlighted?: boolean;
   product: ProductListingProps | null;
+  testId?: string;
 }) {
   const [isHovered, setIsHovered] = useState(false);
   const [hasImageLoaded, setHasImageLoaded] = useState(false);
@@ -120,6 +122,7 @@ function ProductListing({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       ref={targetRef}
+      data-testid={testId}
     >
       <div css={[styles.image, isHighlighted && styles.imageHighlighted]}>
         {highlight && (

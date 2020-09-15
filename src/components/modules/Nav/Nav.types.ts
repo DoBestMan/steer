@@ -5,12 +5,14 @@ export interface LinkType {
   icon?: IconType;
   isExternal: boolean;
   label?: string;
+  testId?: string;
   text?: string;
 }
 
 export interface ActionType {
   icon?: IconType;
   target: NAV_TARGETS;
+  testId?: string;
   text?: string;
 }
 

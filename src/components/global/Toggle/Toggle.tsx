@@ -11,9 +11,15 @@ enum VALUES {
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   onToggle: (isChecked: boolean) => void;
+  testId?: string;
 }
 
-export default function Toggle({ defaultChecked, name, onToggle }: Props) {
+export default function Toggle({
+  defaultChecked,
+  name,
+  onToggle,
+  testId,
+}: Props) {
   const [isChecked, setChecked] = useState(defaultChecked);
   function toggleChecked() {
     setChecked(!isChecked);
@@ -29,6 +35,7 @@ export default function Toggle({ defaultChecked, name, onToggle }: Props) {
       role="switch"
       aria-checked={isChecked}
       aria-label={name}
+      data-testid={testId}
     >
       <LiveRegion text={isChecked ? VALUES.ON : VALUES.OFF} />
       <span css={[styles.slider, isChecked && styles.sliderActive]}>

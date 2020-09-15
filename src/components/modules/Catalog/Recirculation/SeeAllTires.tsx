@@ -15,7 +15,11 @@ function SeeAllTires({ handleUpdateResults, totalResults = 0 }: Props) {
   }
   return (
     <div css={styles.root}>
-      <button type="button" onClick={handleSeeMore}>
+      <button
+        type="button"
+        onClick={handleSeeMore}
+        data-testid="catalog-see-all-button"
+      >
         <h3 css={styles.title}>
           <span>
             {ui('catalog.recirculation.seeAllTires', { number: totalResults })}

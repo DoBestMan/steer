@@ -323,7 +323,12 @@ function TopPicks({
           {carouselItems}
         </Carousel>
       </div>
-      <button type="button" css={styles.exploreButton} onClick={exploreMore}>
+      <button
+        type="button"
+        css={styles.exploreButton}
+        onClick={exploreMore}
+        data-testid="catalog-explore-button"
+      >
         <span css={typography.primarySubhead}>
           {ui('catalog.topPicks.exploreMoreCTALabel')}
         </span>

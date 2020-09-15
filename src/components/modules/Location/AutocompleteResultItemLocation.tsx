@@ -30,6 +30,7 @@ function AutocompleteResultItemLocation({
       <button
         tabIndex={-1}
         onClick={handleItemClicked}
+        data-testid="location-result"
         css={[styles.listBoxButton, isSelected && styles.listboxItemSelected]}
       >
         <span css={styles.listboxItemHighlight}>{inputValue}</span>

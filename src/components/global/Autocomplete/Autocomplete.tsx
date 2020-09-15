@@ -51,6 +51,7 @@ export interface Props {
   onValueSelectionSuccess: (value: AutocompleteResult) => void;
   resultItemComponent?: (resultItemProps: ResultItemProps) => JSX.Element;
   results: AutocompleteResult[];
+  testId?: string;
 }
 
 // Autocomplete combobox with listbox popup
@@ -75,6 +76,7 @@ function Autocomplete({
   onInputResultMatch,
   resultItemComponent: ResultItemComponent = AutocompleteResultItemDefault,
   results,
+  testId,
   ...rest
 }: Props) {
   const [ids, setIds] = useState({
@@ -254,6 +256,7 @@ function Autocomplete({
               aria-autocomplete="list"
               aria-controls={ids.listboxID}
               aria-labelledby={ids.labelID}
+              data-testid={testId}
               css={styles.input}
               maxLength={inputMaxLength}
               onChange={handleOnChange}

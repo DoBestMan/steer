@@ -34,7 +34,7 @@ function ProductGrid({ productList }: Props) {
   const { bk } = useBreakpoints();
 
   return (
-    <Grid>
+    <Grid data-testid="product-grid">
       <GridItem gridColumn="start/end" isGrid>
         {productList.map((product, i) => {
           const pattern = HIGHLIGHT_PATTERNS[bk];
@@ -50,6 +50,7 @@ function ProductGrid({ productList }: Props) {
                 product={product}
                 isHighlighted={isHighlighted}
                 imageList={product?.imageList || []}
+                testId={`product-listing-${i}`}
               />
             </GridItem>
           );

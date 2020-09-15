@@ -197,6 +197,7 @@ function Location({
           onValueSelectionSuccess={onValueSelectionSuccess}
           results={results}
           resultItemComponent={AutocompleteResultItemLocation}
+          testId="location-input"
         />
         {!hasResults && !toastMessage && !hasInvalidInput && (
           <>

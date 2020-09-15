@@ -45,6 +45,7 @@ export function buildLinks({
         icon: ICONS.LOCATION,
         label: ui('links.location'),
         target: NAV_TARGETS.LOCATION,
+        testId: 'nav-location-button',
         text: locationString,
       },
       {

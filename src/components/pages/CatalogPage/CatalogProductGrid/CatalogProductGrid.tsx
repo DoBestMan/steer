@@ -116,7 +116,11 @@ function CatalogProductGrid({
       )}
       {pagination && displayedProducts.length < pagination?.total && (
         <div css={styles.loadMoreButton}>
-          <Button onClick={handleLoadMore} isDisabled={isLoading}>
+          <Button
+            onClick={handleLoadMore}
+            isDisabled={isLoading}
+            data-testid="pagination-button"
+          >
             {ui('catalog.productListing.loadMore')}
           </Button>
         </div>

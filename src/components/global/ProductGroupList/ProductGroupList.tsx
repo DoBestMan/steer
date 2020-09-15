@@ -48,7 +48,7 @@ function ProductGroupList({
 
   return (
     <>
-      <Grid>
+      <Grid data-testid="product-group-list">
         <GridItem css={customHeaderStyles}>
           <h2 css={styles.title}>
             {siteQueryParams ? (

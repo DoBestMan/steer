@@ -86,7 +86,7 @@ function AdvancedListing({
   const shouldAlignTop = hasNoPromos && !rating;
 
   return (
-    <div ref={targetRef}>
+    <div ref={targetRef} data-testid="advanced-listing">
       <Grid css={styles.root}>
         <GridItem css={styles.imageWrapper} gridColumnM="2/5" gridColumnL="2/7">
           <div css={styles.image}>

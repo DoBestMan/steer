@@ -276,6 +276,7 @@ function TopPicksItem(props: TopPickItemsProps) {
           <BaseLink
             href={url}
             ref={contentRef}
+            data-testid="top-pick-button"
             css={[
               styles.linkContainer,
               isCurrent && show && styles.linkContainerIsCurrent,
@@ -320,6 +321,7 @@ function TopPicksItem(props: TopPickItemsProps) {
               {productName && (
                 <span
                   css={[styles.productNameContainer, typography.smallCopyTight]}
+                  data-testid="top-pick-name"
                 >
                   {productName}{' '}
                   {productFeature && <span>・{productFeature}</span>}
