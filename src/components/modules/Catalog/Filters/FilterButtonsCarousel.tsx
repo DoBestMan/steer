@@ -79,6 +79,7 @@ export default function FilterButtonsCarousel({
           onClick={createOpenFilterHandler(POPULAR_ID)}
           theme={header.buttonTheme}
           aria-expanded={isPopularDropdownOpen}
+          data-testid="filter-button-popular"
         />
         {
           (filters.map((filter, idx) => {
@@ -101,6 +102,7 @@ export default function FilterButtonsCarousel({
                 onClick={createOpenFilterHandler(idx + 1)}
                 theme={header.buttonTheme}
                 aria-expanded={isDropdownOpen}
+                data-testid={`filter-button-${filter.type}`}
               />
             ) : (
               <FilterButtonToggle
@@ -110,6 +112,7 @@ export default function FilterButtonsCarousel({
                 isActive={isActive}
                 onClick={createToggleFilterHandler(filter.item.value)}
                 theme={header.buttonTheme}
+                data-testid={`filter-button-${filter.type}`}
               >
                 {label}
               </FilterButtonToggle>

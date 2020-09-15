@@ -36,7 +36,7 @@ const mapGroupTypeToInput: Record<
     isPreviewLoading,
   }: GroupProps) {
     return group.items.map((item, idx) => (
-      <div css={styles.container} key={idx}>
+      <div css={styles.container} data-testid="filter-checkbox-list" key={idx}>
         <FilterCheckbox
           filtersToApply={filtersToApply}
           handleChange={handleChange(item.value)}
