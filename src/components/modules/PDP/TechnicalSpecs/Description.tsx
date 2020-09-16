@@ -42,13 +42,7 @@ function Description({ description }: Props) {
             aria-hidden={!showFullDescription}
             css={styles.moreDescription}
           >
-            <Markdown
-              css={styles.markdown}
-              allowedTypes={MARKDOWN_PRIMITIVES}
-              unwrapDisallowed
-            >
-              {moreDescription}
-            </Markdown>
+            <Markdown css={styles.markdown}>{moreDescription}</Markdown>
           </div>
           <button
             aria-expanded={showFullDescription}
