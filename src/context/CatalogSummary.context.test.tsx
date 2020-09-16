@@ -29,7 +29,9 @@ const resultsSummary = {
   },
   siteCatalogSummaryPrompt: {
     body: 'Most Civic drivers keep original tires',
-    ctaList: [{ label: 'Ok, continue', siteQueryParams: null }],
+    ctaList: [
+      { label: 'Ok, continue', siteQueryParams: null, vehicleMetadata: null },
+    ],
     infoLink: null,
     mustShow: false,
     title: 'From the factory, your Civic came with a Continental or Firestone',
@@ -69,11 +71,25 @@ const disambiguationSummary = {
     ctaList: [
       {
         label: '235/40R18 91W',
-        siteQueryParams: { tireSize: 'p185-60r15' },
+        siteQueryParams: { tireSize: 'p185-60r15', oem: '123' },
+        vehicleMetadata: {
+          vehicleMake: 'Civic',
+          vehicleModel: 'Honda',
+          vehicleOem: '123',
+          vehicleTrim: 'LX',
+          vehicleYear: '2019',
+        },
       },
       {
         label: '235/40R18 95Y XL',
-        siteQueryParams: { tireSize: 'p185-60r18' },
+        siteQueryParams: { tireSize: 'p185-60r18', oem: '456' },
+        vehicleMetadata: {
+          vehicleMake: 'Civic',
+          vehicleModel: 'Honda',
+          vehicleOem: '456',
+          vehicleTrim: 'LX',
+          vehicleYear: '2019',
+        },
       },
     ],
   },

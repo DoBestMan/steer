@@ -3,4 +3,6 @@ export interface VehicleMetadata {
   vehicleModel: string;
   vehicleTrim: string;
   vehicleYear: string;
+  vehicleOem?: string;
+  vehicleTireSize?: string;
 }

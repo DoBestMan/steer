@@ -17,8 +17,10 @@ import { useSearchModalContext } from '~/components/modules/Search/SearchModal.c
 import TopPicks from '~/components/pages/CatalogPage/TopPicks/TopPicks.container';
 import { useCatalogSummaryContext } from '~/context/CatalogSummary.context';
 import { useModalContext } from '~/context/Modal.context';
+import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
 import { SiteCatalogSummaryBuildIn } from '~/data/models/SiteCatalogSummaryBuildIn';
 import { SiteCatalogSummaryPrompt } from '~/data/models/SiteCatalogSummaryPrompt';
+import { VehicleMetadata } from '~/data/models/VehicleMetadata';
 import { BUTTON_STYLE, LINK_TYPES } from '~/lib/constants';
 import { eventEmitters } from '~/lib/events/emitters';
 import { transformSrcLogoToWhite } from '~/lib/utils/cloudinary/cloudinary';
@@ -127,6 +129,7 @@ export function DataMomentMessage({
 }: DataMomentMessageProps) {
   const { message } = useTheme();
   const { asPath } = useRouter();
+  const { selectVehicle } = useUserPersonalizationContext();
 
   /**
    * If coming from Search, set programmatic focus to the message content
@@ -147,8 +150,15 @@ export function DataMomentMessage({
     }
   }
 
-  const handleNewSearchQuery = () => {
-    eventEmitters.newCatalogSearchQuery.emit({ comesFromSearch: false });
+  const createPromptCtaClickHandler = function (
+    vehicleMetadata: VehicleMetadata | null,
+  ) {
+    return function () {
+      eventEmitters.newCatalogSearchQuery.emit({ comesFromSearch: false });
+      if (vehicleMetadata) {
+        selectVehicle(vehicleMetadata);
+      }
+    };
   };
 
   const hasMultipleCtas =
@@ -182,7 +192,7 @@ export function DataMomentMessage({
               data-testid="catalog-cta-list"
             >
               {siteCatalogSummaryPrompt.ctaList.map(
-                ({ label, siteQueryParams }) => {
+                ({ label, siteQueryParams, vehicleMetadata }) => {
                   const buttonStyle = hasMultipleCtas
                     ? message.buttonStyle
                     : BUTTON_STYLE.SOLID;
@@ -193,7 +203,7 @@ export function DataMomentMessage({
                       key={id}
                       as={LINK_TYPES.A}
                       href={href}
-                      onClick={handleNewSearchQuery}
+                      onClick={createPromptCtaClickHandler(vehicleMetadata)}
                       style={buttonStyle}
                       theme={message.buttonTheme}
                     >

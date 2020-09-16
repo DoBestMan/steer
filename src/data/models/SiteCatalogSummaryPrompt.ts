@@ -1,8 +1,10 @@
 import { SiteQueryParams } from './SiteQueryParams';
+import { VehicleMetadata } from './VehicleMetadata';
 
 interface CTA {
   label: string;
   siteQueryParams: SiteQueryParams | null;
+  vehicleMetadata: VehicleMetadata | null;
 }
 
 interface InfoLink {

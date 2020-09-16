@@ -36,11 +36,25 @@ export const vehiclesDisambiguationMock: SiteCatalogSummary = {
         siteQueryParams: {
           tireSize: '23540R1891W',
         },
+        vehicleMetadata: {
+          vehicleMake: 'Civic',
+          vehicleModel: 'Honda',
+          vehicleOem: '123',
+          vehicleTrim: 'LX',
+          vehicleYear: '2019',
+        },
       },
       {
         label: '235/40R18 95Y XL',
         siteQueryParams: {
           tireSize: '23540R1895YXL',
+        },
+        vehicleMetadata: {
+          vehicleMake: 'Civic',
+          vehicleModel: 'Honda',
+          vehicleOem: '456',
+          vehicleTrim: 'LX',
+          vehicleYear: '2019',
         },
       },
     ],
@@ -93,6 +107,7 @@ export const vehiclesNoOeWithSizeMock: SiteCatalogSummary = {
       {
         label: 'Ok, continue',
         siteQueryParams: null,
+        vehicleMetadata: null,
       },
     ],
     infoLink: null,
