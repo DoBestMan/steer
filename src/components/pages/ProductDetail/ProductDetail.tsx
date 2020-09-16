@@ -75,6 +75,7 @@ function ProductDetail({ serverData }: ProductDetailData) {
   const stickyBarDarkSection = useRef<HTMLDivElement>(null);
 
   const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
+
   function toggleModal() {
     setIsLocationModalOpen(!isLocationModalOpen);
   }

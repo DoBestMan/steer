@@ -81,7 +81,7 @@ function App({ children, ...rest }: Props) {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [router.pathname]);
+  }, [router.pathname, router.asPath]);
 
   // Scroll restoration happens too early https://github.com/vercel/next.js/issues/3303
   useEffect(() => {
