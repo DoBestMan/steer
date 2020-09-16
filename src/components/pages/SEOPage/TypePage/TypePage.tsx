@@ -123,7 +123,7 @@ function TypePage({ typeData }: TypePageData) {
         dataItems={typeData.popularBrands}
         imageMaxWidthCustomStyles={styles.logosBrandsMaxWidth}
       />
-      {typeData.curatedProducts.map((obj: any) => {
+      {typeData.curatedProducts.map((obj: ProductGroupListProps) => {
         return (
           <div key={obj.id} css={styles.curatedProductsContainer}>
             <ProductGroupList {...obj} />

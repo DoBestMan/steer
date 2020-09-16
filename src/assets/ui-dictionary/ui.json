@@ -4,7 +4,12 @@
       "title": "Shop for {{category}} Tires Online with Free Shipping",
       "description": "Shop for the best {{category}} tires online by brand, type, and more at a low cost with fast and free shipping direct to you or one of our 20,000+ installation centers."
     },
-    "description": "Fast & Free Delivery! Shop for automotive tires online from over 300+ brands. Have them shipped to and installed at one of our 20,000+ installation centers, making the purchase and installation process painless and simple.",
+
+    "makePages": {
+      "title": "Shop Online for {{make}} Tires",
+      "description": "Browse for the best deals on {{make}} tires. SimpleTire has the best-in-class OEM tire options to fit the performance, fuel efficiency, and handling you need for your {{make}}. "
+    },
+    "description": "Fast & Free Delivery! Shop for automotive tires online from over 300+ brands. Have them shipped to and installed at one of our 10,000+ installation centers, making the purchase and installation process painless and simple.",
     "title": "Buy Automotive Tires Online for Less",
     "tireDeals": {
       "title": "Tire Deals & Rebates from Goodyear, Bridgestone, Hankook & More",
@@ -731,6 +736,7 @@
     "mostPopularTextCopy": "<p>Not sure where to start? View some of the most popular {{category}} tires on the road by top brands below:</p>",
     "tireSizeBoardTitle": "<h3>Add your vehicle info or tire size to find the best {{category}} tire recommendation</h3>"
   },
+
   "pagination": {
     "pageNumber": "Page {{selectedPageNumber}} of {{pageCount}}",
     "older": "Older"
@@ -739,5 +745,10 @@
     "mostPopularBrandsHeadlineCopy": "<h2>Most popular brands</h2>",
     "mostPopularTextCopy": "<p>Not sure where to start? View some of the most popular {{type}} tires on the road by top brands below:</p>",
     "tireSizeBoardTitle": "<h3>Add your vehicle info or tire size to find the best {{type}} tire recommendation</h3>"
-  }
+  },
+  "vehicles": { "makePageTitle" :  "Find the right tires for your {{make}}" },
+  "makePages": {
+      "label": "{{make}} ",
+      "url": "/vehicles/{{make}}-tires"
+    }
 }

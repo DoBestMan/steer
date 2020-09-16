@@ -1,3 +1,4 @@
+import { MakePageProps } from '~/components/pages/VehiclePage/MakePage/MakePage';
 import { SiteBrands } from '~/data/models/SiteBrands';
 import { SiteCategories } from '~/data/models/SiteCategories';
 import { SiteDeals } from '~/data/models/SiteDeals';
@@ -104,5 +105,14 @@ export async function backendGetSiteVehicles() {
     method: 'get',
   });
 
+  return response;
+}
+
+export async function backendGetSiteVehicleMake(make: string | string[]) {
+  const response = await fetch<MakePageProps>({
+    endpoint: `/v1/site/vehicles/${make}`,
+    includeAuthorization: true,
+    method: 'get',
+  });
   return response;
 }

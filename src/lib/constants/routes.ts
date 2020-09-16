@@ -140,7 +140,7 @@ export const ROUTE_LABELS: Record<string, string | null> = {
   [ROUTE_MAP[ROUTES.TYPE_DETAIL]]: null,
   [ROUTE_MAP[ROUTES.TYPE_REVIEWS]]: ui('breadcrumbs.reviews'),
   [ROUTE_MAP[ROUTES.SITEMAP]]: ui('breadcrumbs.sitemap'),
-  [ROUTE_MAP[ROUTES.VEHICLE_CATALOG]]: null,
+  [ROUTE_MAP[ROUTES.VEHICLE_CATALOG]]: ui('breadcrumbs.vehicleCatalog'),
   [ROUTE_MAP[ROUTES.WRITE_REVIEW]]: ui('breadcrumbs.writeReview'),
   [ROUTE_MAP[ROUTES.VEHICLES]]: ui('breadcrumbs.vehicles'),
 };
