@@ -140,6 +140,16 @@ function ProductDetail({ serverData }: ProductDetailData) {
             </GridItem>
           </>
         )}
+        {isPLA && technicalSpecs && (
+          <GridItem fullbleed>
+            <div css={styles.plaTechSpecs} id={technicalSpecsAnchor}>
+              <DynamicTechnicalSpecs
+                openStaticModal={openStaticModal}
+                {...technicalSpecs}
+              />
+            </div>
+          </GridItem>
+        )}
         {installation && (
           <GridItem fullbleed css={styles.installation}>
             <DynamicInstallation {...installation} />
@@ -180,7 +190,7 @@ function ProductDetail({ serverData }: ProductDetailData) {
                 <DynamicReviews {...reviews} />
               </div>
             )}
-            {technicalSpecs && (
+            {!isPLA && technicalSpecs && (
               <div id={technicalSpecsAnchor}>
                 <DynamicTechnicalSpecs
                   openStaticModal={openStaticModal}

@@ -61,6 +61,17 @@ const styles: StylesMap = {
       },
     },
   ],
+  plaTechSpecs: [
+    defaultSpacing('paddingTop'),
+    defaultSpacing('paddingBottom', -SPACING.SIZE_20),
+
+    {
+      background: COLORS.GLOBAL.BLACK,
+    },
+    {
+      [MQ.L]: [defaultSpacing('marginTop')],
+    },
+  ],
   productInfo: {
     [MQ.L]: {
       marginTop: SPACING.SIZE_05,
