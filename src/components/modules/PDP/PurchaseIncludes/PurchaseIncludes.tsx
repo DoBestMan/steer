@@ -20,7 +20,7 @@ function PurchaseIncludes({
       </GridItem>
 
       <GridItem fullbleed>
-        <Carousel freeScroll>
+        <Carousel freeScroll params={{ mousewheel: { forceToAxis: true } }}>
           {everyPurchaseIncludesData.map((item: CardType) => (
             <div css={styles.cardContainer} key={item.title}>
               <PurchaseIncludesCard
