@@ -5,6 +5,7 @@ import { OpenTemplateModules } from '~/data/models/SiteOpenTemplate';
 
 import ModuleAccordion from './modules/ModuleAccordion/ModuleAccordion';
 import ModuleArticleListWithFeatured from './modules/ModuleArticleListWithFeatured/ModuleArticleListWithFeatured';
+import ModuleDataTableVertical from './modules/ModuleDataTableVertical/ModuleDataTableVertical';
 import ModuleFeedback from './modules/ModuleFeedback/ModuleFeedback';
 import ModuleGraphicGrid from './modules/ModuleGraphicGrid/ModuleGraphicGrid';
 import ModuleImage from './modules/ModuleImage/ModuleImage';
@@ -27,6 +28,7 @@ function EditorialModules({ moduleType, moduleData }: EditorialModulesProps) {
     SiteImage: ModuleImage,
     SiteModuleAccordion: ModuleAccordion,
     SiteModuleArticleListWithFeatured: ModuleArticleListWithFeatured,
+    SiteModuleDataTableVertical: ModuleDataTableVertical,
     SiteModuleFeedback: ModuleFeedback,
     SiteModuleGraphicGrid: ModuleGraphicGrid,
     SiteModuleLinkList: ModuleLinkList,

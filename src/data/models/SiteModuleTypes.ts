@@ -12,4 +12,5 @@ export type SiteModuleTypes =
   | 'SiteModuleSeparator'
   | 'SiteModuleTextList'
   | 'SiteModuleTireSearchBillboard'
-  | 'SiteYouTubeVideo';
+  | 'SiteYouTubeVideo'
+  | 'SiteModuleDataTableVertical';

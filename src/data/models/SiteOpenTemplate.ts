@@ -3,6 +3,7 @@ import {
   SiteModuleAccordion,
   SiteModuleArticleListWithFeatured,
   SiteModuleBreadcrumbsItem,
+  SiteModuleDataTableVertical,
   SiteModuleGraphicGrid,
   SiteModuleImage,
   SiteModuleLinkList,
@@ -24,7 +25,8 @@ export type OpenTemplateModules =
   | SiteModuleQuote
   | SiteModuleReviews
   | SiteModuleTextList
-  | SiteModuleYouTubeVideo;
+  | SiteModuleYouTubeVideo
+  | SiteModuleDataTableVertical;
 
 export interface PageData {
   breadcrumbs?: SiteModuleBreadcrumbsItem[];

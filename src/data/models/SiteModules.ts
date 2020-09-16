@@ -1,5 +1,6 @@
 import { AccordionProps } from '~/components/global/Accordion/Accordion';
 import { ArticleListWithFeaturedProps } from '~/components/global/ArticleListWithFeatured/ArticleListWithFeatured';
+import { DataTableProps } from '~/components/global/DataTables/DataTableVertical';
 import { FeaturedInfoModuleProps } from '~/components/global/FeaturedInfoModule/FeaturedInfoModule';
 import { ImageProps } from '~/components/global/Image/Image';
 import { LinkListProps } from '~/components/global/LinkList/LinkList';
@@ -14,6 +15,10 @@ import { TextBasedNavigationProps } from '~/data/models/TextBasedNavigationProps
 export interface SiteModule {
   type: SiteModuleTypes;
 }
+
+export interface SiteModuleDataTableVertical
+  extends DataTableProps,
+    SiteModule {}
 
 export interface SiteModuleAccordion extends SiteModule, AccordionProps {}
 

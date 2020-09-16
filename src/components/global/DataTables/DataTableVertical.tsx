@@ -4,20 +4,30 @@ import Link from '~/components/global/Link/Link';
 import Markdown from '~/components/global/Markdown/MarkdownDynamic';
 import { SiteLink } from '~/data/models/SiteLink';
 import { SiteLinkWithLabel } from '~/data/models/SiteLinkWithLabel';
-import { THEME } from '~/lib/constants';
+import { useBreakpoints } from '~/hooks/useBreakpoints';
+import { Breakpoint, BREAKPOINT_SIZES, THEME } from '~/lib/constants';
 
 import { styles } from './DataTables.styles';
 
+export interface DataTableColumnProps {
+  columnL?: Array<HeaderColumnProps>;
+  columnM?: Array<HeaderColumnProps>;
+  columnS: Array<HeaderColumnProps>;
+  columnXL?: Array<HeaderColumnProps>;
+}
 export interface HeaderColumnProps {
   isFixed?: boolean;
   label: string;
   link?: SiteLink;
   width: number;
 }
+export interface DataTableRows {
+  dataRow: Array<SiteLinkWithLabel>;
+}
 export interface DataTableProps {
   caption: string;
-  columns: Array<HeaderColumnProps>;
-  data: Array<Record<string, SiteLinkWithLabel>>;
+  columns: DataTableColumnProps;
+  data: Array<DataTableRows>;
   height?: number;
   isFirstColumnFixed?: boolean;
   width?: number;
@@ -74,18 +84,49 @@ function Column({
     </div>
   );
 }
-
+function getColumnDataForBreakpoint(
+  columns: DataTableColumnProps,
+  bk: Breakpoint,
+): Array<HeaderColumnProps> {
+  switch (bk) {
+    case BREAKPOINT_SIZES.S:
+      return columns.columnS;
+    case BREAKPOINT_SIZES.M:
+      return columns.columnM ? columns.columnM : columns.columnS;
+    case BREAKPOINT_SIZES.L:
+      return columns.columnL
+        ? columns.columnL
+        : columns.columnM
+        ? columns.columnM
+        : columns.columnS;
+    case BREAKPOINT_SIZES.XL:
+      return columns.columnXL
+        ? columns.columnXL
+        : columns.columnL
+        ? columns.columnL
+        : columns.columnM
+        ? columns.columnM
+        : columns.columnS;
+    default:
+      return columns.columnS;
+  }
+}
 function DataTableVertical({
   columns,
   data,
   isFirstColumnFixed,
   caption,
 }: DataTableProps) {
+  const { bk } = useBreakpoints();
+  const columnsDataForCurrentBreakpoint = getColumnDataForBreakpoint(
+    columns,
+    bk,
+  );
   return (
     <div>
       <Table caption={caption}>
         <Row>
-          {columns.map((column, index) => (
+          {columnsDataForCurrentBreakpoint.map((column, index) => (
             <Column
               width={column.width}
               header
@@ -100,11 +141,10 @@ function DataTableVertical({
         {data.map((row, index) => {
           return (
             <Row key={index}>
-              {Object.keys(row).map((key, index) => {
-                const value = row[key];
+              {row.dataRow.map((value, index) => {
                 return (
                   <Column
-                    width={columns[index].width}
+                    width={columnsDataForCurrentBreakpoint[index].width}
                     key={index}
                     isFixed={index === 0 && isFirstColumnFixed}
                     role={'cell'}

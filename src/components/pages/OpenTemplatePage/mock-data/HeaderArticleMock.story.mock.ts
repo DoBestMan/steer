@@ -57,6 +57,7 @@ export const headerArticleMock: PageData = {
     },
     slug: 'opent-template',
   },
+
   modules: [
     {
       type: 'SiteModuleQuote',
