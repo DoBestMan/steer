@@ -93,7 +93,7 @@ describe('SubFilters', () => {
     ) as HTMLElement;
     fireEvent.click(filterButton);
 
-    expect(screen.queryByTestId('dropdown-test-id')).toBeInTheDocument();
+    expect(screen.queryByTestId('dropdown-test-id-open')).toBeInTheDocument();
   });
 
   it('does not have action buttons on breakpoints > L', () => {

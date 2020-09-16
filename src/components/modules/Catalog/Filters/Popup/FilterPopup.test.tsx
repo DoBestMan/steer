@@ -79,7 +79,7 @@ describe('FilterPopup', () => {
 
   it('displays a dropdown if breakpoint is > L', () => {
     render(tree);
-    const dropdown = screen.getByTestId('dropdown-test-id');
+    const dropdown = screen.getByTestId('dropdown-test-id-open');
 
     expect(dropdown).toBeInTheDocument();
   });

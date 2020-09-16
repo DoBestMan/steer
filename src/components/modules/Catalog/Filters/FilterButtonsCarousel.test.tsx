@@ -89,7 +89,7 @@ describe('FilterButtonsCarousel', () => {
     const filterButton = screen.queryByRole('button') as HTMLElement;
     fireEvent.click(filterButton);
 
-    expect(screen.queryByTestId('dropdown-test-id')).toBeInTheDocument();
+    expect(screen.queryByTestId('dropdown-test-id-open')).toBeInTheDocument();
   });
 
   it('does not preview filters upon opening popup', async () => {
@@ -117,7 +117,7 @@ describe('FilterButtonsCarousel', () => {
     );
 
     expect(checkbox).not.toBeDisabled();
-    expect(screen.queryByTestId('dropdown-test-id')).toBeInTheDocument();
+    expect(screen.queryByTestId('dropdown-test-id-open')).toBeInTheDocument();
   });
 
   it('applies filters', async () => {
