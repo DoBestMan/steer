@@ -119,6 +119,10 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
   const { siteProductLine } = siteProduct;
 
   const assetList = siteProductLine.assetList;
+  const clonedAssetList = JSON.parse(JSON.stringify(assetList));
+  const metaImage = clonedAssetList.length
+    ? clonedAssetList[0].image
+    : undefined;
 
   useEffect(() => {
     if (isValidating) {
@@ -199,11 +203,14 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
       siteProduct,
       siteProductReviews,
     }),
-    meta: mapDataToMeta({
-      brand: productInfo.brand.label,
-      productLine: productInfo.productName,
-      tireSize: productInfo.size,
-    }),
+    meta: {
+      ...mapDataToMeta({
+        brand: productInfo.brand.label,
+        productLine: productInfo.productName,
+        tireSize: productInfo.size,
+      }),
+      shareImage: metaImage,
+    },
     productInfo,
     recirculation: mapDataToRecirculation({ siteProduct }),
     recirculationSize: mapDataToRecirculationSize({

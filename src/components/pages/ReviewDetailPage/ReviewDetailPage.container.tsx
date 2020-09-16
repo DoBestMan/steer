@@ -31,7 +31,6 @@ function ReviewDetailPage({ serverData }: ProductDetailData) {
     siteProductReviews,
     siteProduct,
   });
-  const meta = mapDataToMeta({ siteProduct });
 
   const { total, reviews, sources, title } = siteReviews;
   const {
@@ -63,9 +62,15 @@ function ReviewDetailPage({ serverData }: ProductDetailData) {
     reviews,
   );
 
+  const meta = mapDataToMeta({ siteProduct });
+  const metadata = {
+    ...meta,
+    shareImage: brandObj?.image || undefined,
+  };
+
   return (
     <div css={navigationBreadcrumbPaddingTop}>
-      <Meta {...meta} />
+      <Meta {...metadata} />
       <DataStructure jsonLD={ratingsDataStructure} />
       <ReviewsHeader
         brand={brandObj}

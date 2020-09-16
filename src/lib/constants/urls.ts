@@ -5,6 +5,7 @@ export const URLS = {
   CHECKOUT_INTEGRATION:
     'https://checkout-stage-frontend.jenkins.simpletire.com',
   CHECKOUT_PRODUCTION: 'https://checkout.simpletire.com',
+  HOST_PRODUCTION: 'https://simpletire.com',
   MAIN_API_FEATURE: (branch: string | undefined): string =>
     branch
       ? `https://${branch}-services.jenkins.simpletire.com`

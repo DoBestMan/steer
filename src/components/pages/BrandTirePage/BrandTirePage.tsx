@@ -20,6 +20,7 @@ import { SiteBrandDetails } from '~/data/models/SiteBrandDetails';
 import { ROUTE_MAP, ROUTES, THEME } from '~/lib/constants';
 import { openReferAFriendModal } from '~/lib/helpers/refer-a-friend';
 import { capitalize } from '~/lib/utils/string';
+import { ui } from '~/lib/utils/ui-dictionary';
 
 import { styles } from './BrandTirePage.styles';
 import { convertGroupsToAccordionItems } from './mappers/accordionItems';
@@ -42,6 +43,14 @@ function BrandTirePage({
   const { query, asPath, pathname } = router;
   const { setRouteQueryParamOptions } = useSearchContext();
   const { setIsSearchOpen } = useSearchModalContext();
+  const tirebrand = capitalize(`${brandName}`);
+  const meta = {
+    description: ui('meta.brands.brand.index.description', {
+      brand: tirebrand,
+    }),
+    shareImage: header.image,
+    title: ui('meta.brands.brand.index.title', { brand: tirebrand }),
+  };
   function handlePromotionClick(params: Record<string, string>) {
     setRouteQueryParamOptions({
       routes: [ROUTE_MAP[ROUTES.BRAND_DETAIL]],
@@ -54,7 +63,7 @@ function BrandTirePage({
     <div css={[navigationBreadcrumbPaddingTop, styles.spacingBottom60]}>
       <Grid>
         <GridItem gridColumnL={'2/14'} gridColumnXL={'4/12'}>
-          <Meta title={capitalize(`${brandName}`)} />
+          <Meta {...meta} />
           <Breadcrumbs
             navigationItems={mapPageRouteToBreadcrumbs(
               asPath,

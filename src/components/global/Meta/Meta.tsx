@@ -4,6 +4,9 @@ import { useRouter } from 'next/router';
 import { SiteImage } from '~/data/models/SiteImage';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 import { COLORS } from '~/lib/constants';
+import { URLS } from '~/lib/constants/urls';
+import { isClient } from '~/lib/helpers/browser';
+import { fixHomepageRoute } from '~/lib/utils/routes';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 export interface MetaProps {
@@ -17,7 +20,7 @@ export interface MetaProps {
 
 const DEFAULT_SHARE_IMAGE: SiteImage = {
   altText: '',
-  src: '/static/assets/share/simpletire.jpg',
+  src: `${URLS.HOST_PRODUCTION}/static/assets/share/simpletire.jpg`,
   type: ICON_IMAGE_TYPE.IMAGE,
 };
 
@@ -46,12 +49,18 @@ function Meta({
   const router = useRouter();
 
   // Share Image
-  if (!shareImage) {
-    shareImage = DEFAULT_SHARE_IMAGE;
+  let metaShareImage = '';
+  if (shareImage?.src) {
+    metaShareImage = shareImage.src;
+  } else {
+    metaShareImage = DEFAULT_SHARE_IMAGE.src;
   }
 
   // Canonical
-  const url = canonical ? canonical : router.asPath.split('?')[0];
+  const urlPath = isClient()
+    ? fixHomepageRoute(window.location.pathname)
+    : fixHomepageRoute(router.asPath.split('?')[0]);
+  const url = canonical ? canonical : `${URLS.HOST_PRODUCTION}${urlPath}`;
 
   // Title + description
   title = `${title} | SimpleTire`;
@@ -128,7 +137,7 @@ function Meta({
       />
       <meta property="og:type" content="website" key="og:type" />
       <meta property="og:url" content={url} key="og:url" />
-      <meta property="og:image" content={shareImage.src} key="og:image" />
+      <meta property="og:image" content={metaShareImage} key="og:image" />
       <meta property="og:image:width" content="1024" key="og:image:width" />
       <meta property="og:image:height" content="512" key="og:image:height" />
       <meta name="twitter:title" content={title} />
@@ -138,7 +147,7 @@ function Meta({
       <meta name="twitter:creator" content="@simpletire" />
       <meta name="twitter:text:title" content={title} />
       <meta name="twitter:url" content={url} />
-      <meta name="twitter:image" content={shareImage.src} />
+      <meta name="twitter:image" content={metaShareImage} />
       <meta name="twitter:image:width" content="1024" />
       <meta name="twitter:image:height" content="512" />
 

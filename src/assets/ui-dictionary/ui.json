@@ -33,6 +33,10 @@
           "title": "Buy {{brand}} {{categoryOrType}} Tires | Free Shipping, Fast Install",
           "description": "SimpleTire offers fast, free delivery on {{brand}} {{categoryOrType}} tires, as well as easy installation and setup. Purchase new tires at SimpleTire.com and schedule your new tire installation today."
         },
+        "index": {
+          "title": "Shop {{brand}} Tires Online For Your Vehicle",
+          "description": "Browse new tires and top product lines across a wide variety of {{brand}} tires. Have tires shipped fast and free directly to you, or one of our 20,000+ install centers for a simple and painless process"
+        },
         "productLine": {
           "title": "Buy {{brand}} {{productLine}} Tires Online",
           "description": "Buy new {{brand}} {{productLine}} tires from SimpleTire at the lowest cost and get them delivered directly to you, or one of our 20,000+ installation centers in days. Schedule an installation with your preferred mechanic to make tire buying a painless and simple process.",
