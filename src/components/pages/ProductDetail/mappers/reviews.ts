@@ -6,6 +6,7 @@ import { SiteProductReviews } from '~/data/models/SiteProductReviews';
 import { ROUTE_MAP, ROUTES } from '~/lib/constants';
 import { formatOrNull } from '~/lib/utils/date';
 import { interpolateRoute } from '~/lib/utils/routes';
+import { appendTiresToString } from '~/lib/utils/string';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 export function mapDataToReviews({
@@ -20,10 +21,16 @@ export function mapDataToReviews({
   router: NextRouter;
   siteProductReviews: SiteProductReviews;
 }): ReviewsProps {
-  const {
-    query: { brand, productLine },
-  } = router;
+  const { query } = router;
+  const productLine = query.productLine as string;
 
+  // Force as a string
+  let brand = query.brand as string;
+
+  // Make sure 'brand' includes '-tires'
+  if (!brand.match(/-tires$/)) {
+    brand = appendTiresToString(brand);
+  }
   const momentList = dataMomentList;
   const ratingStars = performanceRating.overall;
   const ratings = performanceRating.ratingList;
