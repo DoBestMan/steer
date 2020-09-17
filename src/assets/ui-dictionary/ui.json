@@ -4,7 +4,6 @@
       "title": "Shop for {{category}} Tires Online with Free Shipping",
       "description": "Shop for the best {{category}} tires online by brand, type, and more at a low cost with fast and free shipping direct to you or one of our 20,000+ installation centers."
     },
-
     "makePages": {
       "title": "Shop Online for {{make}} Tires",
       "description": "Browse for the best deals on {{make}} tires. SimpleTire has the best-in-class OEM tire options to fit the performance, fuel efficiency, and handling you need for your {{make}}. "
@@ -89,7 +88,9 @@
               "title": "Buy {{make}} {{model}} {{trim}} {{tireSize}} Tires",
               "description": "Find the best {{tireSize}} tires for your {{make}} {{model}} {{trim}} and have them shipped for free directly to you, or to one of our 20,000+ installation centers making the tire buying process painless and simple."
             }
-          }
+          },
+          "title": "Find the Best Tires for Your {{make}} {{model}}",
+          "description": "Shop for all {{make}} {{model}} tires by year, size, and trim to find the best tires for your vehicle. All tires ship direct, fast, and free to your home or the local installation center of your choice."
         }
       }
     }
@@ -741,7 +742,6 @@
     "mostPopularTextCopy": "<p>Not sure where to start? View some of the most popular {{category}} tires on the road by top brands below:</p>",
     "tireSizeBoardTitle": "<h3>Add your vehicle info or tire size to find the best {{category}} tire recommendation</h3>"
   },
-
   "pagination": {
     "pageNumber": "Page {{selectedPageNumber}} of {{pageCount}}",
     "older": "Older"
@@ -751,9 +751,12 @@
     "mostPopularTextCopy": "<p>Not sure where to start? View some of the most popular {{type}} tires on the road by top brands below:</p>",
     "tireSizeBoardTitle": "<h3>Add your vehicle info or tire size to find the best {{type}} tire recommendation</h3>"
   },
-  "vehicles": { "makePageTitle" :  "Find the right tires for your {{make}}" },
+  "vehicles": {
+    "makePageTitle": "Find the right tires for your {{make}}",
+    "modelPageTitle": "Find the right tires for your {{model}}"
+  },
   "makePages": {
-      "label": "{{make}} ",
-      "url": "/vehicles/{{make}}-tires"
-    }
+    "label": "{{make}} ",
+    "url": "/vehicles/{{make}}-tires"
+  }
 }

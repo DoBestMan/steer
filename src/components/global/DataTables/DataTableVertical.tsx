@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
 import Link from '~/components/global/Link/Link';
-import Markdown from '~/components/global/Markdown/MarkdownDynamic';
+import Markdown from '~/components/global/Markdown/Markdown';
 import { SiteLink } from '~/data/models/SiteLink';
 import { SiteLinkWithLabel } from '~/data/models/SiteLinkWithLabel';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
@@ -155,10 +155,10 @@ function DataTableVertical({
                         css={styles.link}
                         theme={THEME.LIGHT}
                       >
-                        <Markdown>{value.label}</Markdown>
+                        <Markdown isEditorial>{value.label}</Markdown>
                       </Link>
                     ) : (
-                      <Markdown>{value.label}</Markdown>
+                      <Markdown isEditorial>{value.label}</Markdown>
                     )}
                   </Column>
                 );
