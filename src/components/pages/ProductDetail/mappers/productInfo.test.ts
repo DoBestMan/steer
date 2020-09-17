@@ -59,7 +59,7 @@ describe('pages/ProductDetails/mappers/breadcrumbs', () => {
       sameSizeSearchResults: null,
       sameSizeSearchURL: '/tire-sizes/200-40r17',
       size: '200/40R17',
-      startingPrice: '4999',
+      startingPrice: '5999',
       volatileAvailability: false,
     });
   });

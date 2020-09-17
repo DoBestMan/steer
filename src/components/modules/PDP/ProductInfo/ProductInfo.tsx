@@ -198,9 +198,13 @@ function ProductInfo({
             {!isOutOfStock && (
               <div css={styles.pricesWrapper}>
                 <Price
+                  callForPricing={callForPricing}
                   price={price}
                   priceLabel={priceLabel}
                   startingPrice={isTireLine ? startingPrice : undefined}
+                  sameSizeSearchResults={sameSizeSearchResults}
+                  sameSizeSearchURL={sameSizeSearchURL}
+                  size={size}
                   volatileAvailability={volatileAvailability}
                 />
               </div>

@@ -14,6 +14,13 @@ const styles: StylesMap = {
   originalPrice: {
     [MQ.XL]: typography.bodyCopyTight,
   },
+  outOfStock: {
+    [MQ.L]: {
+      ['p:last-of-type']: {
+        padding: 0,
+      },
+    },
+  },
   priceFeature: [
     typography.primarySubhead,
     {
