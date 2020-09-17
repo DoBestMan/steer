@@ -15,10 +15,8 @@ const styles: StylesMap = {
   reviews: {
     alignItems: 'center',
     display: 'flex',
+    marginTop: SPACING.SIZE_20,
     position: 'relative',
-    [MQ.M]: {
-      marginTop: SPACING.SIZE_10,
-    },
   },
   reviewsLink: {
     position: 'absolute',

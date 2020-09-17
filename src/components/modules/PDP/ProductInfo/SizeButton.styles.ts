@@ -1,11 +1,19 @@
 import { CSSObject } from '@emotion/core';
 
-import { COLORS } from '~/lib/constants';
+import { COLORS, MQ } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const styles: CSSObject = {
   icon: {
-    marginLeft: 7,
+    marginLeft: 15,
+    color: COLORS.LIGHT.GRAY_70,
+
+    [MQ.M]: {
+      marginLeft: 17,
+    },
+    [MQ.XL]: {
+      marginLeft: 12,
+    },
   },
   iconNoSize: {
     color: COLORS.GLOBAL.ORANGE,
@@ -28,7 +36,8 @@ const styles: CSSObject = {
     color: COLORS.GLOBAL.ORANGE,
   },
   size: {
-    color: COLORS.GLOBAL.BLACK,
+    color: COLORS.LIGHT.GRAY_70,
+    borderBottom: '2px dotted currentColor',
   },
 };
 
