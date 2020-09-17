@@ -60,28 +60,35 @@ describe('Catalog', () => {
   });
 
   it('Paginates products in grid view', () => {
-    // Scroll down through the listings
-    cy.get('[data-testid=pagination-button]').scrollIntoView({
-      duration: 5000,
-    });
+    // In the future, we can run tests against stubbed data to ensure there are
+    // enough products to paginate; for now, we'll only make these assertions
+    // when pagination is possible
 
-    // All 35 products are displayed
-    cy.get('[data-testid*=product-listing]').should((listings) => {
-      expect(listings).to.have.length(35);
-    });
+    // If there is a pagination button, we know there are >35 products
+    cy.get('[data-testid=pagination-button]').then(() => {
+      // Scroll down through the listings
+      cy.get('[data-testid=product-placeholder]').last().scrollIntoView({
+        duration: 5000,
+      });
 
-    // Load more results
-    cy.get('[data-testid=pagination-button]').click();
+      // All 35 products are displayed
+      cy.get('[data-testid*=product-listing]').should((listings) => {
+        expect(listings).to.have.length(35);
+      });
 
-    // Wait for the first new product to render, then scroll through the rest
-    cy.get('[data-testid=product-listing-35]').should('exist');
-    cy.get('[data-testid=pagination-button]').scrollIntoView({
-      duration: 5000,
-    });
+      // Load more results
+      cy.get('[data-testid=pagination-button]').click();
 
-    // 70 products are now shown
-    cy.get('[data-testid*=product-listing]').should((listings) => {
-      expect(listings).to.have.length(70);
+      // Wait for the first new product to render
+      cy.get('[data-testid=product-listing-35]').should('exist');
+
+      // Scroll through the rest
+      cy.get('[data-testid=product-placeholder]').last().scrollIntoView({
+        duration: 5000,
+      });
+
+      // No more placeholders are shown
+      cy.get('[data-testid=product-placeholder]').should('not.exist');
     });
   });
 

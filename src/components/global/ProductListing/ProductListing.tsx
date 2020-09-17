@@ -59,7 +59,7 @@ function ProductListing({
 
   if ((!isInViewport && isBrowser) || product === null) {
     return (
-      <div ref={targetRef}>
+      <div ref={targetRef} data-testid="product-placeholder">
         <ProductListingPlaceholder />
       </div>
     );
