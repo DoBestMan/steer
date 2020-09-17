@@ -11,6 +11,7 @@ import styles from './StickyBar.styles';
 
 interface Props {
   children: ReactNode;
+  customContainerStyles?: CSSStylesProp;
   customPrimaryColStyles?: CSSStylesProp;
   icon?: IconType;
   isStickyBottom?: boolean;
@@ -28,6 +29,7 @@ function StickyBar({
   isStickyBottom,
   isStickyTop,
   logo,
+  customContainerStyles,
   customPrimaryColStyles,
   secondaryLabel,
   theme,
@@ -45,6 +47,7 @@ function StickyBar({
         styles[theme],
         isStickyBottom && styles.stickyBottom,
         isStickyTop && styles.stickyTop,
+        customContainerStyles,
       ]}
     >
       {(logo || secondaryLabel || icon) && (

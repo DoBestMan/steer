@@ -140,7 +140,12 @@ function PDPStickyBar({
 
   return (
     <div aria-hidden={isHidden} css={styles.root}>
-      <StickyBar theme={theme} logo={brandLogo} secondaryLabel={secondaryLabel}>
+      <StickyBar
+        customContainerStyles={styles.stickyBar}
+        theme={theme}
+        logo={brandLogo}
+        secondaryLabel={secondaryLabel}
+      >
         <DynamicActionBar
           rearPrice={rearPrice}
           rearSize={rearSize}

@@ -3,6 +3,13 @@ import { MQ, StylesMap, TIME } from '~/lib/constants';
 import { STICKY_BAR_HEIGHT } from '../../StickyBar/StickyBar.styles';
 
 const styles: StylesMap = {
+  stickyBar: {
+    borderTop: 'none',
+    boxShadow: '0px -3px 10px rgba(0, 0, 0, 0.2)',
+    [MQ.L]: {
+      boxShadow: 'none',
+    },
+  },
   root: {
     height: 0,
     pointerEvents: 'none',
