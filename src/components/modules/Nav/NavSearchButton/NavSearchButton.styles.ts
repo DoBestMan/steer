@@ -6,9 +6,10 @@ const styles: StylesMap = {
   button: {
     alignItems: 'center',
     display: 'flex',
+    padding: `${SPACING.SIZE_10}px ${SPACING.SIZE_15}px`,
     [MQ.L]: {
       height: NAV_CONTENT_HEIGHT,
-      paddingBottom: SPACING.SIZE_20,
+      padding: `0 0 ${SPACING.SIZE_20}px 0`,
       textAlign: 'left',
       width: '100%',
     },
@@ -18,9 +19,7 @@ const styles: StylesMap = {
   },
   icon: {
     color: COLORS.GLOBAL.BLACK,
-    [MQ.L]: {
-      marginRight: SPACING.SIZE_10,
-    },
+    marginRight: SPACING.SIZE_10,
   },
 };
 

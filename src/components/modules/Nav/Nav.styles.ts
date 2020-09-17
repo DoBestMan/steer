@@ -84,10 +84,9 @@ export const animations = {
 export const styles: StylesMap = {
   cart: {
     marginRight: -SPACING.SIZE_10,
-    order: -1,
+    marginLeft: SPACING.SIZE_10,
     [MQ.L]: {
       marginLeft: SPACING.SIZE_10,
-      order: 0,
     },
     [MQ.XL]: {
       marginLeft: SPACING.SIZE_20,
@@ -164,9 +163,12 @@ export const styles: StylesMap = {
     },
   },
   searchButton: {
+    alignItems: 'center',
+    display: 'flex',
     marginLeft: SPACING.SIZE_30,
 
     [MQ.L]: {
+      display: 'unset',
       marginLeft: 0,
       marginRight: 'auto',
       width: 200,

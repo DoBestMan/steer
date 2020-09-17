@@ -1,6 +1,13 @@
 import { CSSObject } from '@emotion/core';
 
-import { BORDERS, COLORS, CSSObjectType, MQ, THEME } from '~/lib/constants';
+import {
+  BORDERS,
+  COLORS,
+  CSSObjectType,
+  MQ,
+  RADIUS,
+  THEME,
+} from '~/lib/constants';
 
 export enum NAV_THEME {
   ALTERNATE = 'alternate',
@@ -8,7 +15,7 @@ export enum NAV_THEME {
 }
 
 export interface NavThemeObject {
-  border: CSSObjectType;
+  border: CSSObject | CSSObjectType;
   iconColor: CSSObject | CSSObjectType;
   linkTheme: THEME.LIGHT | THEME.ORANGE;
   logoUrl: string;
@@ -17,14 +24,33 @@ export interface NavThemeObject {
 
 export const themes: { [key in NAV_THEME]: NavThemeObject } = {
   [NAV_THEME.DEFAULT]: {
-    border: { [MQ.L]: { borderBottom: BORDERS.SOLID_GRAY_20_1PX } },
+    border: {
+      border: BORDERS.SOLID_GRAY_20_2PX,
+      borderRadius: RADIUS.PILL,
+      [MQ.L]: {
+        border: 'unset',
+        borderBottom: BORDERS.SOLID_GRAY_20_1PX,
+        borderRadius: 'unset',
+      },
+    },
     iconColor: { [MQ.L]: { color: COLORS.GLOBAL.ORANGE } },
     linkTheme: THEME.LIGHT,
     logoUrl: '/static/assets/logo.svg',
-    textColor: { color: COLORS.LIGHT.GRAY_70 },
+    textColor: {
+      color: COLORS.GLOBAL.BLACK,
+      [MQ.L]: { color: COLORS.LIGHT.GRAY_70 },
+    },
   },
   [NAV_THEME.ALTERNATE]: {
-    border: { [MQ.L]: { borderBottom: BORDERS.SOLID_GRAY_80_1PX } },
+    border: {
+      border: BORDERS.SOLID_ORANGE_TINT_30_2PX,
+      borderRadius: RADIUS.PILL,
+      [MQ.L]: {
+        border: 'unset',
+        borderBottom: BORDERS.SOLID_GRAY_80_1PX,
+        borderRadius: 'unset',
+      },
+    },
     iconColor: { color: COLORS.GLOBAL.WHITE },
     linkTheme: THEME.ORANGE,
     logoUrl: '/static/assets/logo-white.svg',

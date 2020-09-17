@@ -1,19 +1,18 @@
-import { CSSObject } from '@emotion/core';
-
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import SearchLabel from '~/components/modules/Search/SearchLabel/SearchLabel';
-import { BREAKPOINT_SIZES, CSSObjectType } from '~/lib/constants';
+import { useBreakpoints } from '~/hooks/useBreakpoints';
+import { BREAKPOINT_SIZES, CSSStylesProp } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
 
 import styles from './NavSearchButton.styles';
 
 interface Props {
-  border: CSSObjectType;
+  border: CSSStylesProp;
   handleToggleSearch: () => void;
-  iconColor: CSSObject | CSSObjectType;
-  textColor: CSSObject;
+  iconColor: CSSStylesProp;
+  textColor: CSSStylesProp;
 }
 
 function NavSearchButton({
@@ -22,6 +21,7 @@ function NavSearchButton({
   iconColor,
   textColor,
 }: Props) {
+  const { lessThan } = useBreakpoints();
   return (
     <button
       aria-label={ui('common.modal.open', { moduleName: 'search' })}
@@ -34,7 +34,11 @@ function NavSearchButton({
         name={ICONS.SEARCH}
         aria-hidden="true"
       />
-      <SearchLabel fullLabelAt={BREAKPOINT_SIZES.XL} hideOnSmallMedium />
+      {lessThan.L ? (
+        ui('search.navLabel')
+      ) : (
+        <SearchLabel fullLabelAt={BREAKPOINT_SIZES.XL} />
+      )}
     </button>
   );
 }
