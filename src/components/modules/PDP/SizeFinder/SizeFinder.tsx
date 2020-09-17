@@ -83,6 +83,7 @@ export default function SizeFinder({
                 onChange={handleChange}
                 value={idx.toString()}
                 active={isSelected}
+                customRootStyles={styles.titleRadio}
               />
             </div>
           );

@@ -1,4 +1,5 @@
 import TitleSelectorLabel from '~/components/global/TitleSelectorLabel/TitleSelectorLabel';
+import { CSSStylesProp } from '~/lib/constants';
 
 import Radio from './Radio';
 import styles from './Radio.styles';
@@ -7,6 +8,7 @@ interface Props {
   active?: boolean;
   activeValue?: string;
   count?: number | null;
+  customRootStyles?: CSSStylesProp;
   description?: string | null;
   flair?: string | null;
   isDisabled?: boolean;
@@ -20,6 +22,7 @@ export default function TitleRadio({
   active,
   activeValue,
   count = null,
+  customRootStyles,
   description,
   flair,
   isDisabled = false,
@@ -31,7 +34,11 @@ export default function TitleRadio({
 
   return (
     <label
-      css={[styles.titleRoot, isActive ? styles.rootActive : styles.rootHover]}
+      css={[
+        styles.titleRoot,
+        isActive ? styles.rootActive : styles.rootHover,
+        customRootStyles,
+      ]}
     >
       <TitleSelectorLabel
         count={count}

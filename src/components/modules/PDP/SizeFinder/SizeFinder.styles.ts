@@ -10,7 +10,6 @@ const styles: StylesMap = {
     alignItems: 'center',
     display: 'flex',
     justifyContent: 'space-between',
-    ':not(:last-of-type)': { marginBottom: SPACING.SIZE_15 },
   },
   findMyTireSizeLabel: typography.smallCopyTight,
   header: {
@@ -30,7 +29,7 @@ const styles: StylesMap = {
   labelContainer: {
     display: 'flex',
     justifyContent: 'space-between',
-    marginBottom: SPACING.SIZE_15,
+    marginBottom: SPACING.SIZE_10,
   },
   root: {
     minWidth: 200,
@@ -41,6 +40,9 @@ const styles: StylesMap = {
       color: COLORS.LIGHT.GRAY_70,
     },
   ],
+  titleRadio: {
+    padding: 7,
+  },
 };
 
 export default styles;
