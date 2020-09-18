@@ -326,6 +326,13 @@
     "vehicle": "Vehicle"
   },
   "pdp": {
+    "anchorBar": {
+      "insights": "Insights",
+      "description": "Description",
+      "specs": "Specs",
+      "installation": "Installation",
+      "reviews": "Reviews"
+    },
     "breadcrumbs": {
       "home": "Home",
       "allBrands": "All Brands"
@@ -379,8 +386,7 @@
         "viewTiresThatFit": "View tires that fit"
       },
       "fittingChangeVehicle": "Change vehicle",
-      "changeLocation": "Change location",
-      "technicalSpecs": "See technical details"
+      "changeLocation": "Change location"
     },
     "everyPurchaseIncludes": {
       "title": "Every purchase includes"

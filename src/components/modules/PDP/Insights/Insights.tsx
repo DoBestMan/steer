@@ -15,7 +15,7 @@ import { SiteProductInsightsRebate } from '~/data/models/SiteProductInsightsReba
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 import { ui } from '~/lib/utils/ui-dictionary';
 
-import AnchorButton from './AnchorButton';
+import AnchorButton from '../AnchorButton/AnchorButton';
 import styles from './Insights.styles';
 import { SIZE_CHECK_STATES } from './Insights.types';
 import InsightsItem from './InsightsItem';
@@ -38,7 +38,6 @@ export interface InsightsProps {
   shouldTransition?: boolean;
   showFitBar?: boolean;
   sizeCheckState: SIZE_CHECK_STATES;
-  techSpecsAnchor: string;
   vehicle?: string | null;
 }
 
@@ -68,7 +67,6 @@ function Insights({
   openDynamicModal,
   rebate,
   shouldTransition,
-  techSpecsAnchor,
   ...rest
 }: Props) {
   const { isLoading } = useProductDetailContext();
@@ -142,22 +140,19 @@ function Insights({
             {insightItems.map((item, index) => (
               <RenderItem key={`${item.label}_${index}`}>
                 {item.sectionAnchor ? (
-                  <AnchorButton
-                    label={item.label}
-                    icon={item.icon}
-                    target={item.sectionAnchor}
-                  />
+                  <AnchorButton target={item.sectionAnchor}>
+                    <InsightsItem
+                      icon={item.icon}
+                      label={item.label}
+                      hasAction
+                      {...rest}
+                    />
+                  </AnchorButton>
                 ) : (
                   <InsightsItem label={item.label} icon={item.icon} />
                 )}
               </RenderItem>
             ))}
-            <RenderItem>
-              <AnchorButton
-                label={ui('pdp.insights.technicalSpecs')}
-                target={techSpecsAnchor}
-              />
-            </RenderItem>
           </ul>
           <div
             css={styles.loading}

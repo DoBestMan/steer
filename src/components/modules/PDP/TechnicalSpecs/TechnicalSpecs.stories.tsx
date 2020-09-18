@@ -23,6 +23,7 @@ export function TechnicalSpecsWithKnobs() {
         specs={specList}
         sizes={sizesList}
         openStaticModal={action('Open modal')}
+        techSpecsAnchor="tech-specs"
       />
     </div>
   );

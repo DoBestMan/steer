@@ -24,6 +24,7 @@ import { ROUTE_MAP, ROUTES } from '~/lib/constants';
 import { eventEmitters } from '~/lib/events/emitters';
 import { interpolateRoute } from '~/lib/utils/routes';
 
+import { Anchor, mapDataToAnchorList } from './mappers/anchorList';
 import { mapDataToBreadcrumbs } from './mappers/breadcrumbs';
 import { mapDataToFAQ } from './mappers/faq';
 import { mapDataToInsights } from './mappers/insights';
@@ -55,6 +56,7 @@ export type ParsedStickyBarProps = Omit<
 >;
 
 interface ResponseProps extends Pick<SiteProductLine, 'assetList'> {
+  anchorList: Anchor[];
   breadcrumbs: BreadcrumbsItem[];
   currentPath: string;
   faq: FAQProps;
@@ -68,17 +70,10 @@ interface ResponseProps extends Pick<SiteProductLine, 'assetList'> {
   recirculation: SiteCatalogProductGroupList | null;
   recirculationSize: RecirculationSize | null;
   reviews: ReviewsProps;
-  reviewsAnchor: string;
   sizeFinder: ParsedSizeFinderProps | null;
   stickyBar: ParsedStickyBarProps | null;
   technicalSpecs: TechnicalSpecsProps | null;
-  technicalSpecsAnchor: string;
 }
-
-export const CONSTANTS = {
-  REVIEWS_ANCHOR: 'SiteProductReviews',
-  TECH_SPECS_ANCHOR: 'SiteProductSpecs',
-};
 
 function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
   const productDetail = useProductDetailContext();
@@ -164,6 +159,19 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
     );
   }, [asPath, isPLA, router, queryParams]);
 
+  const insights = mapDataToInsights({
+    error,
+    isLoadingData: isValidating,
+    productDetail,
+    rearSize: queryParams.rearSize,
+    router,
+    siteProduct,
+    tireSize: queryParams.tireSize,
+    userPersonalization,
+  });
+
+  const installation = mapDataToInstallation({ siteProduct });
+
   const productInfo = mapDataToProductInfo({
     currentSizeIndex,
     error,
@@ -175,7 +183,15 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
     tireSize: queryParams.tireSize,
   });
 
+  const technicalSpecs = mapDataToTechnicalSpecs({ siteProduct, router });
+
   return {
+    anchorList: mapDataToAnchorList({
+      insights,
+      installation,
+      isPLA,
+      technicalSpecs,
+    }),
     assetList,
     breadcrumbs: mapDataToBreadcrumbs({
       siteProduct,
@@ -183,17 +199,8 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
     }),
     currentPath: asPath,
     faq: mapDataToFAQ({ siteProduct, globals }),
-    insights: mapDataToInsights({
-      error,
-      isLoadingData: isValidating,
-      productDetail,
-      rearSize: queryParams.rearSize,
-      router,
-      siteProduct,
-      tireSize: queryParams.tireSize,
-      userPersonalization,
-    }),
-    installation: mapDataToInstallation({ siteProduct }),
+    insights,
+    installation,
     isLoading,
     isPLA,
     linkingData: mapDataToLinkingData({
@@ -219,15 +226,13 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
       tireSize: queryParams.tireSize,
     }),
     reviews: mapDataToReviews({ siteProductReviews, router }),
-    reviewsAnchor: CONSTANTS.REVIEWS_ANCHOR,
     sizeFinder: mapDataToSizeFinder({
       currentSizeIndex,
       isFrontAndRear: !!queryParams.rearSize,
       siteProduct,
     }),
     stickyBar: mapDataToStickyBar({ quantity, siteProduct }),
-    technicalSpecs: mapDataToTechnicalSpecs({ siteProduct, router }),
-    technicalSpecsAnchor: CONSTANTS.TECH_SPECS_ANCHOR,
+    technicalSpecs,
   };
 }
 

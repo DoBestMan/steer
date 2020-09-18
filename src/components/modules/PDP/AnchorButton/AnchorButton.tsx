@@ -1,16 +1,17 @@
 import queryString from 'query-string';
+import { ReactNode } from 'react';
 
 import { useScrollToAnchor } from '~/hooks/useScrollToAnchor';
 import { getParsedHash } from '~/lib/utils/routes';
 
-import InsightsItem, { InsightsItemProps } from './InsightsItem';
-
-interface Props extends InsightsItemProps {
+interface Props {
+  children: ReactNode;
+  offset?: number;
   target: string;
 }
 
-function AnchorButton({ target, ...rest }: Props) {
-  const { scrollToAnchor } = useScrollToAnchor();
+function AnchorButton({ children, offset, target }: Props) {
+  const { scrollToAnchor } = useScrollToAnchor({ offset });
   const isClient = typeof window !== 'undefined';
   const currentPath = isClient && window.location.href;
   const currentHash = !!currentPath && getParsedHash(currentPath);
@@ -21,7 +22,7 @@ function AnchorButton({ target, ...rest }: Props) {
 
   return (
     <a href={`#${query}`} onClick={scrollToAnchor}>
-      <InsightsItem hasAction {...rest} />
+      {children}
     </a>
   );
 }

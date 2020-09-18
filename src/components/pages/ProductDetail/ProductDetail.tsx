@@ -10,6 +10,7 @@ import Link from '~/components/global/Link/Link';
 import Meta from '~/components/global/Meta/Meta';
 import LocationModal from '~/components/modules/Location/LocationModal/LocationModal';
 import { navigationBreadcrumbPaddingTop } from '~/components/modules/Nav/Nav.styles';
+import AnchorBar from '~/components/modules/PDP/AnchorBar/AnchorBar';
 import FAQ from '~/components/modules/PDP/FAQ/FAQ';
 import Insights from '~/components/modules/PDP/Insights/Insights';
 import ProductInfo from '~/components/modules/PDP/ProductInfo/ProductInfo';
@@ -17,9 +18,11 @@ import PurchaseIncludes from '~/components/modules/PDP/PurchaseIncludes/Purchase
 import ShopWithConfidence from '~/components/modules/PDP/ShopWithConfidence/ShopWithConfidence';
 import TireImage from '~/components/modules/PDP/TireImage/TireImage';
 import { useModalContext } from '~/context/Modal.context';
+import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { LINK_THEME } from '~/lib/constants';
 
 import useExperimentPLA from './experiments/useExperimentPLA';
+import { ANCHORS } from './mappers/anchorList';
 import useProductDetail from './ProductDetail.hooks';
 import styles from './ProductDetail.styles';
 import { ProductDetailData } from './ProductDetail.types';
@@ -41,7 +44,9 @@ const DynamicPDPStickyBar = dynamic(() =>
 );
 
 function ProductDetail({ serverData }: ProductDetailData) {
+  const { lessThan } = useBreakpoints();
   const {
+    anchorList,
     breadcrumbs,
     faq,
     assetList,
@@ -54,11 +59,9 @@ function ProductDetail({ serverData }: ProductDetailData) {
     recirculation,
     recirculationSize,
     reviews,
-    reviewsAnchor,
     sizeFinder,
     stickyBar,
     technicalSpecs,
-    technicalSpecsAnchor,
   } = useProductDetail({
     serverData,
   });
@@ -82,7 +85,7 @@ function ProductDetail({ serverData }: ProductDetailData) {
 
   const reviewsObj = {
     hasReviews: !!(reviews.reviews && reviews.reviews.length),
-    refId: reviewsAnchor,
+    refId: ANCHORS.REVIEWS_ANCHOR,
   };
 
   return (
@@ -118,13 +121,25 @@ function ProductDetail({ serverData }: ProductDetailData) {
                 />
               </div>
             </GridItem>
+            {lessThan.L && (
+              <GridItem fullbleed css={styles.anchorBar}>
+                <AnchorBar anchorList={anchorList} />
+              </GridItem>
+            )}
             {insights && (
               <GridItem fullbleed css={styles.insights}>
-                <Insights
-                  {...insights}
-                  handleChangeLocation={toggleModal}
-                  openDynamicModal={openDynamicModal}
-                />
+                <div id={ANCHORS.INSIGHTS_ANCHOR}>
+                  <Insights
+                    {...insights}
+                    handleChangeLocation={toggleModal}
+                    openDynamicModal={openDynamicModal}
+                  />
+                </div>
+              </GridItem>
+            )}
+            {!lessThan.L && (
+              <GridItem fullbleed css={styles.anchorBar}>
+                <AnchorBar anchorList={anchorList} />
               </GridItem>
             )}
           </Grid>
@@ -142,9 +157,10 @@ function ProductDetail({ serverData }: ProductDetailData) {
         )}
         {isPLA && technicalSpecs && (
           <GridItem fullbleed>
-            <div css={styles.plaTechSpecs} id={technicalSpecsAnchor}>
+            <div css={styles.plaTechSpecs} id={ANCHORS.DESCRIPTION_ANCHOR}>
               <DynamicTechnicalSpecs
                 openStaticModal={openStaticModal}
+                techSpecsAnchor={ANCHORS.TECH_SPECS_ANCHOR}
                 {...technicalSpecs}
               />
             </div>
@@ -152,7 +168,9 @@ function ProductDetail({ serverData }: ProductDetailData) {
         )}
         {installation && (
           <GridItem fullbleed css={styles.installation}>
-            <DynamicInstallation {...installation} />
+            <div id={ANCHORS.INSTALLATION_ANCHOR}>
+              <DynamicInstallation {...installation} />
+            </div>
           </GridItem>
         )}
         {positionCuration2 && recirculation && (
@@ -186,14 +204,15 @@ function ProductDetail({ serverData }: ProductDetailData) {
         <GridItem fullbleed>
           <div ref={stickyBarDarkSection} css={styles.detailsSection}>
             {reviews && (
-              <div id={reviewsAnchor}>
+              <div id={ANCHORS.REVIEWS_ANCHOR}>
                 <DynamicReviews {...reviews} />
               </div>
             )}
             {!isPLA && technicalSpecs && (
-              <div id={technicalSpecsAnchor}>
+              <div id={ANCHORS.DESCRIPTION_ANCHOR}>
                 <DynamicTechnicalSpecs
                   openStaticModal={openStaticModal}
+                  techSpecsAnchor={ANCHORS.TECH_SPECS_ANCHOR}
                   {...technicalSpecs}
                 />
               </div>

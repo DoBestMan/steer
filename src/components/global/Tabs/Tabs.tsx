@@ -100,7 +100,7 @@ function Tabs({
   });
 
   return (
-    <div>
+    <div id={id}>
       <div role="tablist" aria-label={label} css={styles.tabs}>
         {tabsLabels.map((label, idx) => {
           const { buttonId, panelId } = getIds(idx);

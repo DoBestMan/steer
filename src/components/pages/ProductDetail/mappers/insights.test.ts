@@ -42,7 +42,6 @@ describe('pages/ProductDetails/mappers/insights', () => {
           title: '$80 Rebate',
         }),
       },
-      techSpecsAnchor: 'SiteProductSpecs',
     });
   });
 

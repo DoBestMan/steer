@@ -17,6 +17,13 @@ function defaultSpacing(rule: string, offset = 0) {
 }
 
 const styles: StylesMap = {
+  anchorBar: {
+    marginTop: SPACING.SIZE_25,
+
+    [MQ.M]: {
+      marginTop: SPACING.SIZE_40,
+    },
+  },
   breadcrumbs: {
     marginBottom: SPACING.SIZE_20,
 
@@ -43,12 +50,6 @@ const styles: StylesMap = {
   ],
   featuredRecirculation: defaultSpacing('marginTop'),
   insights: {
-    marginTop: SPACING.SIZE_25,
-
-    [MQ.M]: {
-      marginTop: SPACING.SIZE_40,
-    },
-
     [MQ.L]: {
       marginTop: SPACING.SIZE_60,
     },

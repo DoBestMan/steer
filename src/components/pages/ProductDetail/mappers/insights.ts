@@ -10,7 +10,6 @@ import { ROUTE_MAP, ROUTES } from '~/lib/constants';
 import { interpolateRoute } from '~/lib/utils/routes';
 
 import { ProductDetailContextProps } from '../ProductDetail.context';
-import { CONSTANTS } from '../ProductDetail.hooks';
 
 function getSizeCheckState({
   rearSize,
@@ -164,7 +163,6 @@ export function mapDataToInsights({
     shouldTransition: !isPLA,
     showFitBar,
     sizeCheckState,
-    techSpecsAnchor: CONSTANTS.TECH_SPECS_ANCHOR,
     vehicle: hasVehicle
       ? `${vehicle?.vehicleMake} ${vehicle?.vehicleModel} ${vehicle?.vehicleYear} ${vehicle?.vehicleTrim}`
       : null,

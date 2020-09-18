@@ -38,6 +38,7 @@ export interface TechnicalSpecsProps {
 
 interface Props extends TechnicalSpecsProps {
   openStaticModal: (modalId: string) => void;
+  techSpecsAnchor: string;
 }
 
 const TECH_SPECS_ITEMS_TO_SHOW = 5;
@@ -48,6 +49,7 @@ function TechnicalSpecs({
   specs,
   sizes,
   openStaticModal,
+  techSpecsAnchor,
 }: Props) {
   function openTireSizeModal() {
     openStaticModal(STATIC_MODAL_IDS.HOW_TO_FIND_YOUR_SIZE);
@@ -86,7 +88,7 @@ function TechnicalSpecs({
         css={styles.dataContainer}
       >
         <Tabs
-          id="technical-specs"
+          id={techSpecsAnchor}
           renderCurrentTabOnly
           tabsLabels={[
             ui('pdp.technicalSpecs.technicalSpecs.tabLabel'),
