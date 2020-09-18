@@ -2,7 +2,7 @@
 
 This project's `_app.tsx` component includes a `getInitialProps` function to fetch global data such as the site menu items. This is the best way we've found to fetch data needed for every page.
 
-Simplied version below:
+Simplified version below:
 
 ```javascript
 MyApp.getInitialProps = async (appContext: AppContext) => {
