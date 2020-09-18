@@ -1,5 +1,6 @@
 {
   "redirects": [
-    { "source": "/storybook", "destination": "storybook/index.html" }
+    { "source": "/storybook", "destination": "storybook/index.html" },
+    { "source": "/become-a-tire-installer", "destination": "https://checkout.simpletire.com/become-a-tire-installer", "permanent": false }
   ]
 }
