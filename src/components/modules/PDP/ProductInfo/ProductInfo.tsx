@@ -160,6 +160,7 @@ function ProductInfo({
             tireSize={size}
             rearSize={rearSize}
             rearPrice={rearPrice?.salePriceInCents}
+            startingPrice={startingPrice}
           />
         </div>
       </>
@@ -213,6 +214,7 @@ function ProductInfo({
               <DynamicPDPActionBar
                 roadHazard={roadHazard}
                 theme={THEME.LIGHT}
+                startingPrice={startingPrice}
                 tirePrice={price?.salePriceInCents}
                 tireSize={size}
               />

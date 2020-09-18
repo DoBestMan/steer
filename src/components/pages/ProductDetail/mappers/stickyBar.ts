@@ -41,11 +41,7 @@ export function mapDataToStickyBar({
   const rearPrice =
     siteProductLineRearSizeDetail?.price?.salePriceInCents || null;
   const sizesAvailable = siteProductLineAvailableSizeList.length;
-  const startingPrice = Math.min(
-    ...siteProductLineAvailableSizeList.map((item) =>
-      parseInt(item.priceInCents),
-    ),
-  ).toString();
+  const startingPrice = siteProductLine.startingPriceInCents;
   const tireSize =
     siteProductLineSizeDetail &&
     `${siteProductLineSizeDetail.size} ${siteProductLineSizeDetail.loadSpeedRating}`;

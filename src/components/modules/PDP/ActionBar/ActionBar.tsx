@@ -131,11 +131,13 @@ function PDPActionBar({
             })}
           </p>
         )}
-        {!vehicle && (
-          <Button onClick={searchForVehicle} theme={theme}>
-            {ui('pdp.stickyBar.findYourSize')}
-          </Button>
-        )}
+        {startingPrice && startingPrice !== '0'
+          ? !vehicle && (
+              <Button onClick={searchForVehicle} theme={theme}>
+                {ui('pdp.stickyBar.findYourSize')}
+              </Button>
+            )
+          : null}
       </div>
     );
   }

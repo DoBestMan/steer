@@ -131,6 +131,10 @@ function PDPStickyBar({
     };
   }, [darkSection]);
 
+  if ((!startingPrice && !tirePrice) || (startingPrice === '0' && !tirePrice)) {
+    return null;
+  }
+
   // There's no action to tireline's stickybar when vehicle is known
   if (isTireLine && vehicle) {
     return null;

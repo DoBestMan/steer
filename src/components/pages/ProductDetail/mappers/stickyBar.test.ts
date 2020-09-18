@@ -26,7 +26,7 @@ describe('pages/ProductDetails/mappers/stickyBar', () => {
       rearSize: null,
       roadHazard: null,
       sizesAvailable: 4,
-      startingPrice: '4999',
+      startingPrice: '5999',
       tirePrice: null,
       tireSize: null,
     });
@@ -58,7 +58,7 @@ describe('pages/ProductDetails/mappers/stickyBar', () => {
         price: '5208',
       },
       sizesAvailable: 4,
-      startingPrice: '4999',
+      startingPrice: '5999',
       tirePrice: '13296',
       tireSize: '215/50 R17 91H',
     });
@@ -87,7 +87,7 @@ describe('pages/ProductDetails/mappers/stickyBar', () => {
         price: '5208',
       },
       sizesAvailable: 4,
-      startingPrice: '4999',
+      startingPrice: '5999',
       tirePrice: '13296',
       tireSize: '215/50 R17 91H',
     });
