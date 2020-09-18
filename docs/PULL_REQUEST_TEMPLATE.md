@@ -1,6 +1,6 @@
 ## Ticket
 
-WCS-
+SQA-
 
 ## Testing link
 

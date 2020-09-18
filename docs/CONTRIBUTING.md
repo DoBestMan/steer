@@ -1,15 +1,11 @@
 # PR Guidelines
 
-## Naming Commits and Branches
-
-Create branches off our development branch, `dev`. Include a summary of the feature in addition to the JIRA ticket (formatted in caps). Ex: `add-buttons-WCS-123`
-
-Guidelines for commit messages:
+## Commit Message
 
 - Use active voice
 - Include JIRA ticket number in brackets
 
-### Squash and Merge
+## Squash and Merge
 
 If you Squash and Merge your PR, be sure that the final commit has the PR number in the title (GitHub will automatically do this for you):
 
@@ -24,7 +20,7 @@ Before squashing, please remove (preferred) or consolidate the automatically gen
 - Fixed modal tests
 ```
 
-### Rebase and Merge
+## Rebase and Merge
 
 If you Rebase and Merge your PR, each commit should follow proper formatting:
 
@@ -69,20 +65,11 @@ If the base branch is still an open PR when you're done with your work, you may 
 - Be explicit if your PR is a work-in-progress (use the `WIP` label)
 - Before assigning reviewers, add inline comments on your PR for areas of code where you're looking for particular feedback or that require extra explanation
 
-For all PRs that involve creating/updating stories, be sure to:
-
-- Include a link to the relevant ticket(s)
-- Include a link to the relevant story in Storybook (eg: https://`branch`.steer.now.sh/storybook/index.html?path=`path-to-the-story`)
-
-Also be sure to add links to QA branch (eg: https://qa.steer.now.sh/storybook/index.html?path=`path-to-the-story`) to our **Storybook tickets** to help QA.
-
 ## Assigning Reviewers
 
 You do not need to assign specific developers to review your PR. Since one team is working on this project, we can use our judgment on which PRs to review. In general, developers should try to achieve a balance by reviewing parts of the code they know well, and other parts they are less familiar with.
 
 However, you can assign reviewers if you want to specifically request their feedback on your work.
-
-Please assign the entire `w-c-reviewers` group for changes you think the whole team should be aware of. These would include new conventions or big structural changes to the code.
 
 Since not all team members will be looking at all PRs, important discussions should also be posted in the **#simpletire-development** Slack channel to increase visibility.
 
