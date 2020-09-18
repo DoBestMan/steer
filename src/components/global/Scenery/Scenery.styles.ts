@@ -6,33 +6,34 @@ import { SCENERIES, SCENERIES_WIDTH } from './Scenery.constants';
 
 export const backgroundImageRural = keyframes({
   '0%': {
-    backgroundPosition: '0 0',
+    backgroundPositionX: '0',
   },
   '100%': {
-    backgroundPosition: `-${SCENERIES_WIDTH.RURAL}px 0`,
+    backgroundPositionX: `-${SCENERIES_WIDTH.RURAL}px`,
   },
 });
 
 export const backgroundImageSuburban = keyframes({
   '0%': {
-    backgroundPosition: '0 0',
+    backgroundPositionX: '0',
   },
   '100%': {
-    backgroundPosition: `-${SCENERIES_WIDTH.SUBURBAN}px 0`,
+    backgroundPositionX: `-${SCENERIES_WIDTH.SUBURBAN}px`,
   },
 });
 
 export const backgroundImageUrban = keyframes({
   '0%': {
-    backgroundPosition: '0 0',
+    backgroundPositionX: '0',
   },
   '100%': {
-    backgroundPosition: `-${SCENERIES_WIDTH.URBAN}px 0`,
+    backgroundPositionX: `-${SCENERIES_WIDTH.URBAN}px`,
   },
 });
 
 export const styles: StylesMap = {
   container: {
+    backgroundPositionY: 0,
     backgroundRepeat: 'repeat-x',
     height: '130px',
     pointerEvents: 'none',

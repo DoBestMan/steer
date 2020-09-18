@@ -11,7 +11,7 @@ type Props = {
 
 function styledSceneryContainer({ stage }: Props) {
   const base: CSSStyles = {
-    backgroundPosition: '0 100%',
+    backgroundPositionY: 'calc(100% - 40px)',
     height: MEASUREMENTS[stage].CONTENT_TOP.S,
     left: 0,
     opacity: 1,
@@ -20,6 +20,7 @@ function styledSceneryContainer({ stage }: Props) {
     width: '100%',
 
     [MQ.M]: {
+      backgroundPositionY: 'calc(100% - 60px)',
       height: MEASUREMENTS[stage].CONTENT_TOP.M,
     },
 

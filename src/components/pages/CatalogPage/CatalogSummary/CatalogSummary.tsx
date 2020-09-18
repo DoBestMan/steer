@@ -47,6 +47,7 @@ function CatalogSummary({ exploreMore }: Props) {
       <div css={[styles.backgroundContainer, styles.iosBackgroundContainer]}>
         <Background stage={stage} aria-hidden data-component="Background">
           <Scenery
+            animate
             data-component="Scenery"
             sceneryID={sceneryType}
             stage={stage}
@@ -58,6 +59,7 @@ function CatalogSummary({ exploreMore }: Props) {
               stage={stage}
             >
               <Car
+                animateWheel
                 bk={bk}
                 carId={carId}
                 data-component="Car"
