@@ -85,7 +85,9 @@ export default function HeaderInfo({
     <>
       <div css={styles.header}>
         {hasTopPicks && backEl}
-        <h1 css={styles.title}>{title}</h1>
+        <h1 data-testid="catalog-title" css={styles.title}>
+          {title}
+        </h1>
         {!isInternal && (
           <>
             <div css={infoStyles}>

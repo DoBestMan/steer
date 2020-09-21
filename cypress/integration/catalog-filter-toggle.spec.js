@@ -20,7 +20,7 @@ describe('Catalog', () => {
 
     cy.route({
       method: 'GET',
-      url: '**/summary-vehicle**',
+      url: '**/products-vehicle**',
     }).as('applyFilter');
 
     cy.get('[data-testid=filter-button-SiteCatalogFilterToggle]')
