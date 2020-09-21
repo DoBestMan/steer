@@ -22,6 +22,7 @@ export enum ROUTES {
   HOME = 'home',
   INVITE = 'invite',
   LEARN = 'learn',
+  LEARN_CATEGORY_SLUG = 'learnCategorySlug',
   MILITARY_DISCOUNT = 'militaryDiscount',
   OPEN_TEMPLATE = 'openTemplate',
   ORDER_TRACKING = 'orderTracking',
@@ -83,6 +84,7 @@ export const ROUTE_TYPE_MAP: { [routeName: string]: string } = {
   [ROUTES.PRIVACY]: '/privacy-policy',
   [ROUTES.SITEMAP]: '/sitemap',
   [ROUTES.OPEN_TEMPLATE]: '/[slug]',
+  [ROUTES.LEARN_CATEGORY_SLUG]: '/learn/[category]/[slug]',
 };
 
 // This is a master list of all routes

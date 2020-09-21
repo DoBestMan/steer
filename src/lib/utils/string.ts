@@ -135,6 +135,13 @@ export function getUrlExtension(url: string): string {
   return extension ? extension : url;
 }
 
+export function titleCaseSlug(str: string) {
+  return str
+    .split('-')
+    .map((char) => `${char.charAt(0).toUpperCase()}${char.substring(1)}`)
+    .join(' ');
+}
+
 export function removeQueryParams(url: string): string {
   return url.split('?')[0];
 }

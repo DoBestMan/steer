@@ -1,4 +1,4 @@
-import { COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
+import { BORDERS, COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
 
 export const containerSpacing = {
   spacingBottomS50XL60: {
@@ -22,6 +22,9 @@ export const containerSpacing = {
 };
 
 export const styles: StylesMap = {
+  bottomBorder: {
+    borderBottom: BORDERS.SOLID_GRAY_20_1PX,
+  },
   breadcrumbContainer: {
     [MQ.L]: {
       marginTop: SPACING.SIZE_70,

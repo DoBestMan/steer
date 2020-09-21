@@ -16,11 +16,13 @@ export interface SiteModule {
   type: SiteModuleTypes;
 }
 
+export interface SiteModuleAccordion extends SiteModule, AccordionProps {
+  hasBottomBorder?: boolean;
+}
+
 export interface SiteModuleDataTableVertical
   extends DataTableProps,
     SiteModule {}
-
-export interface SiteModuleAccordion extends SiteModule, AccordionProps {}
 
 export interface SiteModuleArticleListWithFeatured
   extends ArticleListWithFeaturedProps,

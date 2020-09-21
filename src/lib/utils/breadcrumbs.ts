@@ -107,7 +107,7 @@ export function mapArrayToBreadcrumbs(
     type?: ROUTES;
     url?: string;
   }[],
-  query?: { [key: string]: string },
+  query?: { [key: string]: string | string[] },
 ): BreadcrumbsItem[] {
   return items
     .map((item, index, array) => {
