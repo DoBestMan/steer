@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-import { ReactNode, useEffect, useRef } from 'react';
+import { ReactNode, useCallback, useEffect, useRef } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { Transition } from 'react-transition-group';
 import { TransitionStatus } from 'react-transition-group/Transition';
@@ -28,6 +28,7 @@ import { removeUrlParams } from '~/lib/utils/string';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import FooterContainer from '../Footer/Footer.container';
+import { PAGE_PATHS_NOT_TO_SCROLL_TOP } from './App.constants';
 import { animations, styles } from './App.styles';
 
 interface Props {
@@ -70,6 +71,10 @@ function App({ children, ...rest }: Props) {
 
   const isHomepage = route === ROUTE_MAP[ROUTES.HOME];
 
+  const shouldNotScrollTopOnRouteChange = useCallback(() => {
+    return PAGE_PATHS_NOT_TO_SCROLL_TOP.indexOf(router.pathname) > -1;
+  }, [router.pathname]);
+
   // TODO WCS-1512: temp bring back the feedback tab
   useEffect(() => {
     // Feedback component on every page injects the script already
@@ -80,8 +85,12 @@ function App({ children, ...rest }: Props) {
   }, [isHomepage]);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [router.pathname, router.asPath]);
+    if (shouldNotScrollTopOnRouteChange()) {
+      return;
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [router.pathname, router.asPath, shouldNotScrollTopOnRouteChange]);
 
   // Scroll restoration happens too early https://github.com/vercel/next.js/issues/3303
   useEffect(() => {
