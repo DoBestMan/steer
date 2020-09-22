@@ -131,10 +131,6 @@ export function useFiltersContextSetup({
     createToggleFilterHandler: (value: Record<string, string>) => () => {
       const newState = { ...filtersToApply };
       Object.keys(value).forEach((key) => {
-        if (newState[key]) {
-          newState[key] = '';
-          return;
-        }
         newState[key] = value[key];
       });
 
