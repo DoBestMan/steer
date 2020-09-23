@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 
 import { createContext } from '~/lib/utils/context';
 
@@ -16,14 +16,26 @@ const SearchModalContext = createContext<SearchModalContextProps>();
 
 function useContextSetup(): SearchModalContextProps {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  useEffect(() => {
+    window.onpopstate = () => {
+      setIsSearchOpen(false);
+    };
+
+    return () => {
+      window.onpopstate = null;
+    };
+  }, [setIsSearchOpen]);
+
   const toggleIsSearchOpen = (callback?: () => void) => {
+    if (!isSearchOpen) {
+      history.pushState(null, '', '');
+    }
     setIsSearchOpen(!isSearchOpen);
 
     if (callback && typeof callback === 'function') {
       callback();
     }
   };
-
   return {
     isSearchOpen,
     setIsSearchOpen,

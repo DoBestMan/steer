@@ -57,14 +57,13 @@ function SearchModal() {
     }
   }, [contentRef, isSearchOpen]);
 
-  const handleCloseSearch = () => {
+  const handleCloseSearch = useCallback(() => {
     if (!isSearchOpen) {
       return;
     }
 
     // Move window back to original position (see handleAfterOpenModal function)
     window.scrollTo(0, scrollY.current);
-
     // Clear search results and state when the modal closes
     clearSearchResults();
     setSearchState('');
@@ -72,7 +71,15 @@ function SearchModal() {
     setShouldPreventLinkNavigation(false);
     setRouteQueryParamOptions();
     toggleIsSearchOpen();
-  };
+  }, [
+    isSearchOpen,
+    clearSearchResults,
+    setSearchState,
+    setHasLockedSearchState,
+    setShouldPreventLinkNavigation,
+    setRouteQueryParamOptions,
+    toggleIsSearchOpen,
+  ]);
 
   const router = useRouter();
 

@@ -1,6 +1,7 @@
 import { NextRouter, useRouter } from 'next/router';
 import { ReactNode, useCallback, useEffect, useState } from 'react';
 
+import { useSearchModalContext } from '~/components/modules/Search/SearchModal.context';
 import { CATALOG_ROUTES, ROUTE_MAP, ROUTES } from '~/lib/constants/';
 import { eventEmitters } from '~/lib/events/emitters';
 import { createContext } from '~/lib/utils/context';
@@ -32,6 +33,8 @@ function useRouterContextSetup() {
   // Used for showing the route change LoadingBar
   const [isRouteLoading, setIsRouteLoading] = useState(false);
   const [skipPageTransition, setSkipPageTransition] = useState(false);
+
+  const { isSearchOpen } = useSearchModalContext();
 
   // For now, the only scenario where the page transition is skipped is
   // the transition into and between Catalog pages
@@ -91,10 +94,15 @@ function useRouterContextSetup() {
 
     // Callback when traversing the `history` stack
     router.beforePopState(({ url, options }) => {
-      // Reset Catalog Search state
-      // Ignore `shallow` route changes, as these signify non-Search route
-      // updates, e.g. filter changes or pagination
-      if (isInRouteList(url, CATALOG_ROUTES) && !options.shallow) {
+      // Reset Catalog Search state, ignoring:
+      // 1. `shallow` route changes, as these signify non-Search route
+      //     updates, e.g. filter changes or pagination
+      // 2. hitting back to close the search modal
+      if (
+        isInRouteList(url, CATALOG_ROUTES) &&
+        !options.shallow &&
+        !isSearchOpen
+      ) {
         eventEmitters.newCatalogSearchQuery.emit({ comesFromSearch: false });
       }
       return true;
