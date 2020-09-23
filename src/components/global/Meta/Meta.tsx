@@ -67,12 +67,6 @@ function Meta({
   title = title.replace(/&amp;/g, '&');
   description = description.replace(/&amp;/g, '&');
 
-  // Robots
-  // TODO: https://simpletire.atlassian.net/browse/WCS-1609
-  // For MVP, no pages are indexable.
-  // Remove this protection when we want the pag to be crawlable
-  robots = 'noindex,nofollow';
-
   return (
     <Head>
       <meta charSet="utf-8" />

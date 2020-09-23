@@ -1,6 +1,4 @@
-User-agent: Googlebot
-Allow: /paid*
-Disallow: /
+User-agent: *
+Allow: /
 
-User-agent: Bingbot
-Disallow: /
+Sitemap: https://simpletire.com/sitemap/sitemap-index.xml
