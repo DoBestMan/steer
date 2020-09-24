@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 
 import { SiteImage } from '~/data/models/SiteImage';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
-import { COLORS } from '~/lib/constants';
+import { COLORS, ROUTE_MAP, ROUTES } from '~/lib/constants';
 import { URLS } from '~/lib/constants/urls';
 import { isClient } from '~/lib/helpers/browser';
 import { fixHomepageRoute } from '~/lib/utils/routes';
@@ -66,7 +66,8 @@ function Meta({
   title = `${title} | SimpleTire`;
   title = title.replace(/&amp;/g, '&');
   description = description.replace(/&amp;/g, '&');
-
+  const isPLA = !!router.pathname.match(ROUTE_MAP[ROUTES.PRODUCT_DETAIL_PLA]);
+  robots = isPLA ? 'noindex,nofollow' : 'index,follow';
   return (
     <Head>
       <meta charSet="utf-8" />
