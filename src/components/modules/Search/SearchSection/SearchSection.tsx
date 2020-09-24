@@ -86,27 +86,31 @@ function SearchSection({
               sectionIndex === selectedItemIndex[0] &&
               index === selectedItemIndex[1];
 
-            const innerContent = (
-              <>
-                {item.labelSegments.length > 0 ? (
-                  item.labelSegments.map((segment, i) => {
-                    // [WCS-1409] Hyphens will break the text if the first character
-                    // Convert to non-breaking hyphens if this happens.
-                    if (segment.label[0] === '-') {
-                      segment.label = segment.label.replace('-', '‑');
-                    }
-
-                    return (
-                      <span key={i} css={segment.matches && styles.searchQuery}>
-                        {segment.label}
-                      </span>
-                    );
-                  })
-                ) : (
-                  <span>{item.label}</span>
-                )}
-              </>
-            );
+            function innerContent(key: string) {
+              return (
+                <>
+                  {item.labelSegments.length > 0 ? (
+                    item.labelSegments.map((segment, i) => {
+                      // [WCS-1409] Hyphens will break the text if the first character
+                      // Convert to non-breaking hyphens if this happens.
+                      if (segment.label[0] === '-') {
+                        segment.label = segment.label.replace('-', '‑');
+                      }
+                      return (
+                        <span
+                          key={`${key}-${i}`}
+                          css={segment.matches && styles.searchQuery}
+                        >
+                          {segment.label}
+                        </span>
+                      );
+                    })
+                  ) : (
+                    <span>{item.label}</span>
+                  )}
+                </>
+              );
+            }
 
             if (
               item.action.type === SearchActionType.LINK &&
@@ -116,7 +120,7 @@ function SearchSection({
               return (
                 <li
                   className="listItem"
-                  key={item.label}
+                  key={`${item.label}_${index}`}
                   ref={pushRefToArray(index)}
                 >
                   <BaseLink
@@ -127,7 +131,7 @@ function SearchSection({
                     onFocus={onFocus(index)}
                     routeQueryParamOptions={routeQueryParamOptions}
                   >
-                    {innerContent}
+                    {innerContent(item.label)}
                   </BaseLink>
                   {item.detailLabel && (
                     <div className="secondaryItemDisplay">
@@ -141,7 +145,7 @@ function SearchSection({
             return (
               <li
                 className="listItem"
-                key={item.label}
+                key={`${item.label}_${index}`}
                 ref={pushRefToArray(index)}
               >
                 <button
@@ -152,7 +156,7 @@ function SearchSection({
                   onTouchMove={handleTouchMove}
                   onTouchEnd={handleTouchEnd}
                 >
-                  {innerContent}
+                  {innerContent(item.label)}
                 </button>
                 {item.detailLabel && (
                   <div className="secondaryItemDisplay">{item.detailLabel}</div>
