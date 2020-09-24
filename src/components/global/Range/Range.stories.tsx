@@ -63,6 +63,28 @@ export function RangeWithDefaults() {
   );
 }
 
+export function RangeWithGraph() {
+  const [minCurrent, setMinCurrent] = useState(0);
+  const [maxCurrent, setMaxCurrent] = useState(100);
+
+  return (
+    <div css={styles.root}>
+      <Range
+        {...{
+          hasGraph: true,
+          max: 100,
+          maxCurrent,
+          min: 0,
+          minCurrent,
+          name: 'Generic range slider',
+          onMaxChange: setMaxCurrent,
+          onMinChange: setMinCurrent,
+        }}
+      />
+    </div>
+  );
+}
+
 export function RangeMileage() {
   const [minCurrent, setMinCurrent] = useState(0);
   const [maxCurrent, setMaxCurrent] = useState(30000);

@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useWindowSize } from '~/hooks/useWindowSize';
 import { ui } from '~/lib/utils/ui-dictionary';
 
+import Graph from './Graph';
 import { RANGE_SLIDER_SIZE } from './Range.constants';
 import styles, { INDICATOR_SIZE } from './Range.styles';
 import Slider from './Slider';
@@ -11,6 +12,7 @@ interface Props {
   defaultValue?: number | string;
   formatLabel?: (value: number) => string;
   getAriaText?: (value: number) => string;
+  hasGraph?: boolean;
   interval?: number;
   isDisabled?: boolean;
   max: number;
@@ -34,6 +36,7 @@ export default function Range({
   minCurrent,
   maxCurrent,
   getAriaText,
+  hasGraph,
   interval = 1,
   isDisabled,
   onMinChange,
@@ -49,6 +52,8 @@ export default function Range({
   const isSmall = size === RANGE_SLIDER_SIZE.SMALL;
   const railEl = useRef<HTMLDivElement | null>(null);
   const [fillStyles, setFillStyles] = useState({});
+  const [maxElmPos, setMaxElmPos] = useState(0);
+  const [minElmPos, setMinElmPos] = useState(0);
   const maxLabel = (formatLabel && formatLabel(maxCurrent)) || maxCurrent;
   const minLabel = (formatLabel && formatLabel(minCurrent)) || minCurrent;
   const { width } = useWindowSize(); // update fill color width if window is resized
@@ -67,6 +72,13 @@ export default function Range({
     const minEl = railEl.current.firstElementChild;
     const maxEl = railEl.current.lastElementChild;
     if (maxEl instanceof HTMLElement && minEl instanceof HTMLElement) {
+      if (hasGraph) {
+        const maxElPos = maxEl.getBoundingClientRect().right;
+        const minElPos = minEl.getBoundingClientRect().left;
+        setMaxElmPos(maxElPos);
+        setMinElmPos(minElPos);
+      }
+
       const indicatorHalf = INDICATOR_SIZE[size] / 2;
       const width = maxEl.offsetLeft - minEl.offsetLeft + indicatorHalf;
       setFillStyles({
@@ -74,12 +86,15 @@ export default function Range({
         width,
       });
     }
-  }, [minCurrent, maxCurrent, size, width]);
+  }, [hasGraph, minCurrent, maxCurrent, size, width]);
 
   return (
     <div css={[isSmall && styles.rootSmall, isDisabled && styles.disable]}>
       {isSmall && <p css={styles.labelSm}>{minLabel}</p>}
       <div css={styles.container}>
+        {hasGraph && (
+          <Graph maxElPosition={maxElmPos} minElPosition={minElmPos} />
+        )}
         <div css={[styles.fillColor, fillStyles]} />
         <div ref={railEl} css={styles.rail}>
           <Slider
