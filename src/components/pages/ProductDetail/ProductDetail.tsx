@@ -220,15 +220,6 @@ function ProductDetail({ serverData }: ProductDetailData) {
             <FAQ {...faq} />
           </div>
         </GridItem>
-        {stickyBar && (
-          <GridItem fullbleed css={styles.stickyBar}>
-            <DynamicPDPStickyBar
-              avoidSection={stickyBarAvoidSection}
-              darkSection={stickyBarDarkSection}
-              {...stickyBar}
-            />
-          </GridItem>
-        )}
       </Grid>
       {recirculation?.length && (
         <Grid css={styles.recirculationContainer}>
@@ -253,6 +244,15 @@ function ProductDetail({ serverData }: ProductDetailData) {
       )}
 
       <LocationModal isOpen={isLocationModalOpen} onClose={toggleModal} />
+      {stickyBar && (
+        <GridItem fullbleed css={styles.stickyBar}>
+          <DynamicPDPStickyBar
+            avoidSection={stickyBarAvoidSection}
+            darkSection={stickyBarDarkSection}
+            {...stickyBar}
+          />
+        </GridItem>
+      )}
     </>
   );
 }
