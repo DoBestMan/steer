@@ -88,7 +88,7 @@ function App({ children, ...rest }: Props) {
     if (shouldNotScrollTopOnRouteChange()) {
       return;
     } else {
-      window.scrollTo(0, 0);
+      setTimeout(() => window.scrollTo(0, 0));
     }
   }, [router.pathname, router.asPath, shouldNotScrollTopOnRouteChange]);
 
