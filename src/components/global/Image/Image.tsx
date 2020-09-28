@@ -1,6 +1,8 @@
 import { ReactType, useRef, useState } from 'react';
 
+import Link from '~/components/global/Link/Link';
 import { SiteImageExtended } from '~/data/models/SiteImageExtended';
+import { SiteLink } from '~/data/models/SiteLink';
 import { CSSStylesProp, LOADING_OPTIONS } from '~/lib/constants';
 import { Transformations } from '~/lib/utils/cloudinary/cloudinary.types';
 import { percentageFromNumber } from '~/lib/utils/number';
@@ -13,6 +15,7 @@ export interface ImageProps extends SiteImageExtended {
   altText: string;
   as?: ReactType;
   height?: string | number;
+  link?: SiteLink;
   noPlaceholder?: boolean;
   onError?: () => void;
   onLoad?: () => void;
@@ -34,6 +37,7 @@ function Image({
   srcTransformationArgs,
   width,
   widths,
+  link,
   noPlaceholder,
   ...rest
 }: ImageProps) {
@@ -108,6 +112,25 @@ function Image({
 
   const Container: ReactType = as;
 
+  function ImageTag() {
+    return (
+      <img
+        css={[
+          styles.image,
+          isLoaded && styles.isLoaded,
+          ratio && responsive && styles.responsive,
+        ]}
+        onError={onError}
+        sizes={sizes}
+        src={finalSrc}
+        srcSet={finalSrcSet}
+        alt={altText}
+        loading={loading}
+        onLoad={handleImageLoad}
+        {...rest}
+      />
+    );
+  }
   return (
     <Container
       ref={imgRef}
@@ -118,23 +141,16 @@ function Image({
         customContainerStyles,
       ]}
     >
-      {finalSrcSet && (
-        <img
-          css={[
-            styles.image,
-            isLoaded && styles.isLoaded,
-            ratio && responsive && styles.responsive,
-          ]}
-          onError={onError}
-          sizes={sizes}
-          src={finalSrc}
-          srcSet={finalSrcSet}
-          alt={altText}
-          loading={loading}
-          onLoad={handleImageLoad}
-          {...rest}
-        />
-      )}
+      {finalSrcSet &&
+        (link ? (
+          <>
+            <Link {...link}>
+              <ImageTag />
+            </Link>
+          </>
+        ) : (
+          <ImageTag />
+        ))}
     </Container>
   );
 }
