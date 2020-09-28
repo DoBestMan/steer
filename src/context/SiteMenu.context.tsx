@@ -8,10 +8,10 @@ import { createContext } from '~/lib/utils/context';
 
 const SiteMenuContext = createContext<SiteMenu>();
 
-function useContextSetup(defaultData: SiteMenu) {
-  const [dataMenu, setDataMenu] = useState<SiteMenu>(defaultData);
+function useContextSetup(defaultData?: SiteMenu) {
+  const [dataMenu, setDataMenu] = useState(defaultData);
 
-  const { error } = useApiDataWithDefault<SiteMenu>({
+  const { error } = useApiDataWithDefault({
     defaultData,
     endpoint: '/menu',
     includeUserRegion: true,
@@ -35,12 +35,17 @@ function useContextSetup(defaultData: SiteMenu) {
     console.error(error);
   }
 
-  return dataMenu;
+  // can't render app without localized or global menu data
+  if (!defaultData && !dataMenu) {
+    throw new Error(error?.message);
+  }
+
+  return dataMenu || defaultData;
 }
 
 interface Props {
   children: ReactNode;
-  value: SiteMenu;
+  value?: SiteMenu;
 }
 
 export function SiteMenuContextProvider({ children, value }: Props) {

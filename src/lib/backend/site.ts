@@ -10,10 +10,10 @@ import { SiteReviews } from '~/data/models/SiteReviews';
 import { SiteTypes } from '~/data/models/SiteTypes';
 import { SiteVehicles } from '~/data/models/SiteVehicles';
 
-import { fetch } from '../fetch';
+import { fetch, fetchWithErrorHandling } from '../fetch';
 
 export async function backendGetSiteGlobals() {
-  const response = await fetch<{
+  const response = await fetchWithErrorHandling<{
     siteGlobals: SiteGlobals;
   }>({
     endpoint: '/v1/site/globals',
@@ -40,7 +40,7 @@ export async function backendGetSiteHome() {
 }
 
 export async function backendGetSiteMenu() {
-  const response = await fetch<SiteMenu>({
+  const response = await fetchWithErrorHandling<SiteMenu>({
     endpoint: '/v1/site/menu',
     includeAuthorization: true,
     includeUserRegion: true,
@@ -51,7 +51,7 @@ export async function backendGetSiteMenu() {
 }
 
 export async function backendGetSiteReviews() {
-  const response = await fetch<{
+  const response = await fetchWithErrorHandling<{
     siteReviews: SiteReviews;
   }>({
     endpoint: '/v1/site/reviews',

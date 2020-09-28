@@ -1,7 +1,7 @@
 import { ListResultMetadata } from '~/data/models/ListResultMetadata';
 import { SiteSearchResultGroup } from '~/data/models/SiteSearchResultGroup';
 
-import { fetch } from '../fetch';
+import { fetchWithErrorHandling } from '../fetch';
 
 export async function backendGetSiteSearch({
   additionalQueryText,
@@ -12,7 +12,7 @@ export async function backendGetSiteSearch({
   queryText: string;
   queryType: string;
 }) {
-  const response = await fetch<{
+  const response = await fetchWithErrorHandling<{
     resultMetadata: ListResultMetadata;
     siteSearchResultGroupList: SiteSearchResultGroup[];
   }>({

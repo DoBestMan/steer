@@ -49,20 +49,21 @@ function FooterMailingList() {
   };
 
   const handleSubmit = async () => {
-    try {
-      await apiSubscribeToNewsletter({
-        email: emailVal,
-        source: 'footer',
-        sourceURL: window.location.href,
-      });
+    const res = await apiSubscribeToNewsletter({
+      email: emailVal,
+      source: 'footer',
+      sourceURL: window.location.href,
+    });
 
-      setToastMessage(TOAST_TYPE.SUCCESS);
-      setEmailVal('');
-      setIsInputValid(false);
-      inputEl.current?.blur();
-    } catch (error) {
+    if (!res.isSuccess) {
       setToastMessage(TOAST_TYPE.ERROR);
+      return;
     }
+
+    setToastMessage(TOAST_TYPE.SUCCESS);
+    setEmailVal('');
+    setIsInputValid(false);
+    inputEl.current?.blur();
   };
 
   const validateEmail = (value: string) => {

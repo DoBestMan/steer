@@ -8,10 +8,15 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
   backendBootstrap({ request });
   const { orderId, zip } = request.query;
 
-  const order = await backendGetOrderTracking({
+  const res = await backendGetOrderTracking({
     orderId,
     zip,
   } as OrderTrackingInput);
 
-  response.json(order);
+  if (res.isSuccess) {
+    response.json(res.data.order);
+    return;
+  }
+
+  response.status(res.error.statusCode).end();
 };

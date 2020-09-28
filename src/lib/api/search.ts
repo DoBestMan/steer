@@ -1,5 +1,5 @@
 import { Results } from '~/components/modules/Search/Search.types';
-import { fetch } from '~/lib/fetch';
+import { fetchWithErrorHandling } from '~/lib/fetch';
 
 import { FetchError, FetchErrorCodes } from '../fetch/FetchError';
 
@@ -16,19 +16,19 @@ export async function apiGetSearchTypeahead({
   queryType,
   signal,
 }: SearchDataParams) {
-  try {
-    const searchData = await fetch<Results>({
-      endpoint: '/search-typeahead',
-      query: { additionalQueryText, queryText, queryType },
-      method: 'get',
-      signal,
-    });
+  const res = await fetchWithErrorHandling<Results>({
+    endpoint: '/search-typeahead',
+    query: { additionalQueryText, queryText, queryType },
+    method: 'get',
+    signal,
+  });
 
-    return searchData;
-  } catch (error) {
+  if (!res.isSuccess) {
     throw new FetchError(
-      FetchErrorCodes[error.code] || FetchErrorCodes.NetworkError,
-      error.name,
+      FetchErrorCodes[res.error.statusCode] || FetchErrorCodes.NetworkError,
+      res.error.message || '',
     );
   }
+
+  return res.data;
 }

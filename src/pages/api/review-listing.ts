@@ -12,13 +12,17 @@ export default async (
 ) => {
   backendBootstrap({ request });
 
-  const siteProductReviews = await backendGetReviewListing({
+  const res = await backendGetReviewListing({
     query: getStringifiedParams(request.query),
   });
 
-  if (isProductionDeploy()) {
-    response.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
+  if (res.isSuccess) {
+    if (isProductionDeploy()) {
+      response.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
+    }
+    response.json(res.data);
+    return;
   }
 
-  response.json(siteProductReviews);
+  response.status(res.error.statusCode).end();
 };

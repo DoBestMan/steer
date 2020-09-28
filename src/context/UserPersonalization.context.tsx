@@ -50,8 +50,11 @@ export function useContextSetup() {
   }, []);
 
   async function updateLocation(body: UserPersonalizationUpdate) {
-    const userPersonalization = await apiUpdateUserPersonalization(body);
-    setUserPersonalizationData(userPersonalization);
+    const res = await apiUpdateUserPersonalization(body);
+
+    if (res.isSuccess) {
+      setUserPersonalizationData(res.data);
+    }
   }
 
   const location = userPersonalizationData?.userLocation;

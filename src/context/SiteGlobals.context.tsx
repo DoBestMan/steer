@@ -9,11 +9,11 @@ export const SiteGlobalsContext = createContext<SiteGlobals>();
 
 const REFRESH_INTERVAL = 600_000; // 10 minutes
 
-function useContextSetup(defaultData: { siteGlobals: SiteGlobals }) {
+function useContextSetup(defaultData: { siteGlobals?: SiteGlobals }) {
   const {
     data: { siteGlobals },
     error,
-  } = useApiDataWithDefault<{ siteGlobals: SiteGlobals }>({
+  } = useApiDataWithDefault<{ siteGlobals?: SiteGlobals }>({
     defaultData,
     endpoint: '/globals',
     options: {
@@ -25,12 +25,21 @@ function useContextSetup(defaultData: { siteGlobals: SiteGlobals }) {
     console.error(error);
   }
 
-  return siteGlobals;
+  return (
+    siteGlobals || {
+      customerServiceEnabled: false,
+      customerServiceNumber: {
+        display: '',
+        value: '',
+      },
+      siteTheme: null,
+    }
+  );
 }
 
 interface Props {
   children: ReactNode;
-  value: SiteGlobals;
+  value?: SiteGlobals;
 }
 
 export function SiteGlobalsContextProvider({ children, value }: Props) {

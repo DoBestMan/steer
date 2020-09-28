@@ -22,12 +22,18 @@ export default async (
 
       const { userLocationGooglePlacesId, userLocationZip } = request.body;
 
-      const { userPersonalization } = await backendUpdateUserPersonalization({
+      const res = await backendUpdateUserPersonalization({
         userLocationGooglePlacesId: String(userLocationGooglePlacesId),
         userLocationZip: String(userLocationZip),
         userSessionId,
       });
-      response.json(userPersonalization);
+
+      if (res.isSuccess) {
+        response.json(res.data.userPersonalization);
+        return;
+      }
+
+      response.status(res.error.statusCode).end();
       return;
     }
   }

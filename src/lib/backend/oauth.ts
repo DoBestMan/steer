@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/camelcase */
-import { fetch } from '../fetch';
+import { fetchWithErrorHandling } from '../fetch';
 
 export async function backendOauthToken({
   clientId,
@@ -8,7 +8,7 @@ export async function backendOauthToken({
   clientId: string;
   clientSecret: string;
 }) {
-  const response = await fetch<{
+  return await fetchWithErrorHandling<{
     access_token: string;
     expires_in: number;
     token_type: string;
@@ -21,9 +21,4 @@ export async function backendOauthToken({
     },
     method: 'post',
   });
-
-  return {
-    clientToken: response.access_token,
-    expiresOn: new Date(Date.now() + response.expires_in * 1000),
-  };
 }

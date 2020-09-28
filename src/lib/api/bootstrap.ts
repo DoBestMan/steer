@@ -46,9 +46,12 @@ async function asyncApiBootstrap() {
   }
   /* eslint-enable  @typescript-eslint/camelcase*/
 
-  const { userPersonalization, userSessionId } = await apiGetUserSession(
-    getUserSessionParams,
-  );
+  const res = await apiGetUserSession(getUserSessionParams);
+  if (!res.isSuccess) {
+    return;
+  }
+
+  const { userPersonalization, userSessionId } = res.data;
   fetchSetAuthorizationToken(userSessionId, null);
 
   // Store UserSessionId in GTM

@@ -71,13 +71,14 @@ function SendMessageForm({ selections }: Props) {
   }, [formValues, hasRequiredFieldFilled]);
 
   const postFormData = async (formData: SiteCustomerSupportFormInput) => {
-    try {
-      await apiSendCustomerSupportForm(formData);
+    const res = await apiSendCustomerSupportForm(formData);
+    if (res.isSuccess) {
       setToastMessage(TOAST_TYPE.SUCCESS);
       setFormValues(initialState);
-    } catch (error) {
-      setToastMessage(TOAST_TYPE.ERROR);
+      return;
     }
+
+    setToastMessage(TOAST_TYPE.ERROR);
   };
 
   const handleDismiss = () => {

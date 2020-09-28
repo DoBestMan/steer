@@ -1,6 +1,6 @@
 import { SiteProductLineReviewItemInput } from '~/data/models/SiteProductLineReviewItemInput';
 
-import { fetch } from '../fetch';
+import { fetchWithErrorHandling } from '../fetch';
 
 export async function backendPostProductReview({
   brand,
@@ -11,7 +11,10 @@ export async function backendPostProductReview({
   input: SiteProductLineReviewItemInput;
   productLine: string | string[];
 }) {
-  const response = await fetch<null, SiteProductLineReviewItemInput>({
+  const response = await fetchWithErrorHandling<
+    null,
+    SiteProductLineReviewItemInput
+  >({
     endpoint: '/v1/site/products/{brand}/{productLine}/reviews',
     includeAuthorization: true,
     jsonBody: input,

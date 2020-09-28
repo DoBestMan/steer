@@ -15,6 +15,12 @@ export default async (
     response.setHeader('Cache-control', 's-maxage=60, stale-while-revalidate');
   }
 
-  const siteMenu = await backendGetSiteMenu();
-  response.json(siteMenu);
+  const res = await backendGetSiteMenu();
+
+  if (res.isSuccess) {
+    response.json(res.data);
+    return;
+  }
+
+  response.status(res.error.statusCode).end();
 };

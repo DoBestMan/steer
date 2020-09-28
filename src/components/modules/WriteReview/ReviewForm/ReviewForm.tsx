@@ -247,25 +247,26 @@ function ReviewForm({
   const postFormData = async (
     reformattedDataForSubmission: SiteProductLineReviewItemInput,
   ) => {
-    try {
-      await apiPostReview(
-        brandName,
-        queryParams.productLine.toString(),
-        reformattedDataForSubmission,
-      );
+    const res = await apiPostReview(
+      brandName,
+      queryParams.productLine.toString(),
+      reformattedDataForSubmission,
+    );
 
-      setHasSubmittedSuccessfully(true);
-      setIsFormValid(false);
-      setFormValues(initialState);
-      setPickerLabels({});
-
-      handleShowToastOnNextPage();
-      setGlobalToastMessage(toastMessages[TOAST_TYPE.SUCCESS]);
-
-      router.push(prevRoute, prevUrl);
-    } catch (error) {
+    if (!res.isSuccess) {
       setGlobalToastMessage(toastMessages[TOAST_TYPE.ERROR]);
+      return;
     }
+
+    setHasSubmittedSuccessfully(true);
+    setIsFormValid(false);
+    setFormValues(initialState);
+    setPickerLabels({});
+
+    handleShowToastOnNextPage();
+    setGlobalToastMessage(toastMessages[TOAST_TYPE.SUCCESS]);
+
+    router.push(prevRoute, prevUrl);
   };
 
   const handleSelectPickerOption = (field: string) => (

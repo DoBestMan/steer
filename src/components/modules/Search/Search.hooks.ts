@@ -136,26 +136,25 @@ export function usePastSearches() {
     emptySiteSearchResultGroupData,
   );
   const getPastSearches = useCallback(async function () {
-    try {
-      const apiPastSearches = await apiGetUserSearchHistory();
-
+    const res = await apiGetUserSearchHistory();
+    if (res.isSuccess) {
       const transformedResults = fromUserHistorySearchToSiteSearchResultGroup(
-        apiPastSearches,
+        res.data,
       );
 
       setPastSearches(transformedResults);
-    } catch (err) {
-      console.error(err);
+      return;
     }
+
+    console.error(res.error.message);
   }, []);
 
   const deletePastSearches = useCallback(async function () {
-    try {
-      await apiDeleteUserSearchHistory();
+    const res = await apiDeleteUserSearchHistory();
 
-      setPastSearches(emptySiteSearchResultGroupData);
-    } catch (err) {
-      console.error(err);
+    setPastSearches(emptySiteSearchResultGroupData);
+    if (!res.isSuccess) {
+      console.error(res.error.message);
     }
   }, []);
 
@@ -167,10 +166,10 @@ export function usePastSearches() {
     );
 
     if (pastSearchItem) {
-      try {
-        await apiAddUserSearchHistory(pastSearchItem);
-      } catch (err) {
-        console.error(err);
+      const res = await apiAddUserSearchHistory(pastSearchItem);
+
+      if (!res.isSuccess) {
+        console.error(res.error.message);
       }
     }
   },

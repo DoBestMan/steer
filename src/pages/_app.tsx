@@ -22,8 +22,8 @@ interface Props extends AppInitialProps {
   hostUrl?: string | null;
   route: string;
   serverData: {
-    siteGlobals: SiteGlobals;
-    siteMenu: SiteMenu;
+    siteGlobals?: SiteGlobals;
+    siteMenu?: SiteMenu;
   };
 }
 
@@ -81,10 +81,16 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
     ctx: { req },
   } = appContext;
 
-  const [{ siteGlobals }, siteMenu] = await Promise.all([
+  const [siteGlobalsRes, siteMenuRes] = await Promise.all([
     backendGetSiteGlobals(),
     backendGetSiteMenu(),
   ]);
+
+  const siteGlobals = siteGlobalsRes.isSuccess
+    ? siteGlobalsRes.data.siteGlobals
+    : undefined;
+
+  const siteMenu = siteMenuRes.isSuccess ? siteMenuRes.data : undefined;
 
   const hostUrl = req?.headers ? `https://${req.headers.host}` : '';
 

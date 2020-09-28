@@ -105,12 +105,16 @@ async function authorizationFunction() {
     throw new Error('Missing clientId or clientSecret');
   }
 
-  const { clientToken, expiresOn } = await backendOauthToken({
+  const res = await backendOauthToken({
     clientId,
     clientSecret,
   });
 
-  fetchSetAuthorizationToken(clientToken, expiresOn);
+  if (res.isSuccess) {
+    const clientToken = res.data.access_token;
+    const expiresOn = new Date(Date.now() + res.data.expires_in * 1000);
+    fetchSetAuthorizationToken(clientToken, expiresOn);
+  }
 }
 
 export function backendBootstrap({

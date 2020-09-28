@@ -17,8 +17,8 @@ import { UserPersonalizationContextProvider } from './UserPersonalization.contex
 interface Props {
   children: ReactNode;
   hostUrl?: string | null;
-  siteGlobalsContextValue: SiteGlobals;
-  siteMenuContextValue: SiteMenu;
+  siteGlobalsContextValue?: SiteGlobals;
+  siteMenuContextValue?: SiteMenu;
 }
 
 // Container to wrap _app.tsx in context providers.

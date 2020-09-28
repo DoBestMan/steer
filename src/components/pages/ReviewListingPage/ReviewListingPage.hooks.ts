@@ -1,10 +1,12 @@
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 
+import { useGlobalToastContext } from '~/context/GlobalToast.context';
 import { SiteCatalogSortListItem } from '~/data/models/SiteCatalogSortListItem';
 import { SiteProductReviewsListingItem } from '~/data/models/SiteProductReviewsListingItem';
 import { apiGetReviewListing } from '~/lib/api/review-listing';
 import { removeTireFromQueryParam } from '~/lib/utils/string';
+import { ui } from '~/lib/utils/ui-dictionary';
 
 interface ResponseProps {
   displayedRatings: SiteProductReviewsListingItem[];
@@ -26,6 +28,7 @@ function usePaginationAndSort(
   const [sort, setSort] = useState<SiteCatalogSortListItem[]>(sortList);
   const [currentPage, setCurrentPage] = useState(1);
   const { brand, type, category } = queryParams;
+  const { setGlobalToastMessage } = useGlobalToastContext();
 
   const formattedParams = {
     brand: (brand && removeTireFromQueryParam(brand)) || '',
@@ -50,24 +53,32 @@ function usePaginationAndSort(
   const handleSeeMoreClick = async () => {
     const newPage = currentPage + 1;
 
-    const moreReviews = await apiGetReviewListing({
+    const res = await apiGetReviewListing({
       page: newPage.toString(),
       ...formattedParams,
     });
 
-    setCurrentPage(newPage);
-    const formattedReviews = moreReviews.reviewsList;
-    setDisplayedRatings([...displayedRatings, ...formattedReviews]);
+    if (res.isSuccess) {
+      setCurrentPage(newPage);
+      const formattedReviews = res.data.reviewsList;
+      setDisplayedRatings([...displayedRatings, ...formattedReviews]);
+      return;
+    }
+    setGlobalToastMessage(ui('error.generic'));
   };
 
   const handleSortClick = async (value: Record<string, string>) => {
-    const moreReviews = await apiGetReviewListing({
+    const res = await apiGetReviewListing({
       ...formattedParams,
       ...value,
     });
 
-    setDisplayedRatings(moreReviews.reviewsList);
-    setSort(moreReviews.siteProductReviewsFilters.sortList);
+    if (res.isSuccess) {
+      setDisplayedRatings(res.data.reviewsList);
+      setSort(res.data.siteProductReviewsFilters.sortList);
+    }
+
+    setGlobalToastMessage(ui('error.generic'));
   };
 
   return {

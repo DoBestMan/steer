@@ -33,12 +33,17 @@ async function createUserSession(
       ? request.query.regionId
       : undefined;
 
-  const data = await backendCreateUserSession({
+  const res = await backendCreateUserSession({
     userIp,
     regionId,
   });
 
-  response.json(data);
+  if (res.isSuccess) {
+    response.json(res.data);
+    return;
+  }
+
+  response.status(res.error.statusCode).end();
 }
 
 async function getUserSession(
@@ -52,14 +57,19 @@ async function getUserSession(
     return;
   }
 
-  const { userPersonalization } = await backendGetUserPersonalization({
+  const res = await backendGetUserPersonalization({
     userSessionId,
   });
 
-  response.json({
-    userPersonalization,
-    userSessionId,
-  });
+  if (res.isSuccess) {
+    response.json({
+      userPersonalization: res.data.userPersonalization,
+      userSessionId,
+    });
+    return;
+  }
+
+  response.status(res.error.statusCode).end();
 }
 
 export default async (

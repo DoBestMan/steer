@@ -10,10 +10,16 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
   const { brand, productLine } = request.query;
   const brandName = removeTireFromQueryParam(brand);
 
-  await backendPostProductReview({
+  const res = await backendPostProductReview({
     brand: brandName,
     productLine,
     input: request.body,
   });
-  response.status(204).end();
+
+  if (res.isSuccess) {
+    response.status(204).end();
+    return;
+  }
+
+  response.status(res.error.statusCode).end();
 };

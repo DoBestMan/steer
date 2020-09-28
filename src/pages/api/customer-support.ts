@@ -6,6 +6,11 @@ import { apiSendCustomerSupportForm } from '~/lib/backend/customer-support';
 export default async (request: NextApiRequest, response: NextApiResponse) => {
   backendBootstrap({ request });
 
-  await apiSendCustomerSupportForm(request.body);
-  response.status(204).end();
+  const res = await apiSendCustomerSupportForm(request.body);
+  if (res.isSuccess) {
+    response.status(204).end();
+    return;
+  }
+
+  response.status(res.error.statusCode).end();
 };

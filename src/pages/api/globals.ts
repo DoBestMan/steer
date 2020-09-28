@@ -17,6 +17,12 @@ export default async (
     response.setHeader('Cache-control', 's-maxage=60, stale-while-revalidate');
   }
 
-  const siteGlobals = await backendGetSiteGlobals();
-  response.json(siteGlobals);
+  const res = await backendGetSiteGlobals();
+
+  if (res.isSuccess) {
+    response.json(res.data);
+    return;
+  }
+
+  response.status(res.error.statusCode).end();
 };

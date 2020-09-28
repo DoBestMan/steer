@@ -18,9 +18,13 @@ const OpenTemplate = WithErrorPageHandling(OpenTemplatePage);
 
 export async function getStaticPaths() {
   backendBootstrap();
-  const pageListData = await backendGetPageSlugList();
+  const res = await backendGetPageSlugList();
 
-  const paths = pageListData.slugs.map((data) => ({
+  if (!res.isSuccess) {
+    return { props: { errorStatusCode: res.error.statusCode } };
+  }
+
+  const paths = res.data.slugs.map((data) => ({
     params: {
       ...data,
     },
@@ -46,24 +50,18 @@ export const getStaticProps: GetStaticProps<PageResponse<
     return { props: { errorStatusCode } };
   }
 
-  try {
-    const pageData = await backendGetPageSlug(slug);
+  const res = await backendGetPageSlug(slug);
 
-    if (!pageData) {
-      const errorStatusCode = 404;
-      return { props: { errorStatusCode } };
-    }
-
-    return {
-      props: {
-        pageData,
-      },
-      revalidate: REVALIDATE.EVERY_MINUTE,
-    };
-  } catch (error) {
-    const errorStatusCode = 500;
-    return { props: { errorStatusCode } };
+  if (!res.isSuccess) {
+    return { props: { errorStatusCode: res.error.statusCode } };
   }
+
+  return {
+    props: {
+      pageData: res.data,
+    },
+    revalidate: REVALIDATE.EVERY_MINUTE,
+  };
 };
 
-export default OpenTemplate;
+export default WithErrorPageHandling(OpenTemplate);

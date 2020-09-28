@@ -1,9 +1,9 @@
 import { SitePageListResponse } from '~/data/models/SitePageListResponse';
 
-import { fetch } from '../fetch';
+import { fetchWithErrorHandling } from '../fetch';
 
 export async function backendGetPageSlugList() {
-  const response = await fetch<SitePageListResponse>({
+  const response = await fetchWithErrorHandling<SitePageListResponse>({
     endpoint: '/v1/site/open-template-pages',
     includeAuthorization: true,
     method: 'get',

@@ -19,24 +19,44 @@ export default async (
     case 'get': {
       const userSessionId = getAndCheckUserSessionId(request, response);
       if (userSessionId) {
-        response.json(await backendGetUserSearchHistory(userSessionId));
+        const res = await backendGetUserSearchHistory(userSessionId);
+        if (res.isSuccess) {
+          response.json(res.data);
+          return;
+        }
+
+        response.status(res.error.statusCode).end();
       }
       break;
     }
     case 'post': {
       const userSessionId = getAndCheckUserSessionId(request, response);
       if (userSessionId) {
-        response.json(
-          await backendAddUserSearchHistory(userSessionId, request.body),
+        const res = await backendAddUserSearchHistory(
+          userSessionId,
+          request.body,
         );
+
+        if (res.isSuccess) {
+          response.json(res.data);
+          return;
+        }
+
+        response.status(res.error.statusCode).end();
       }
       break;
     }
     case 'delete': {
       const userSessionId = getAndCheckUserSessionId(request, response);
       if (userSessionId) {
-        await backendDeleteUserSearchHistory(userSessionId);
-        response.status(204).end();
+        const res = await backendDeleteUserSearchHistory(userSessionId);
+
+        if (res.isSuccess) {
+          response.status(204).end();
+          return;
+        }
+
+        response.status(res.error.statusCode).end();
       }
       break;
     }

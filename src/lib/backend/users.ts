@@ -3,7 +3,7 @@ import { UserHistorySearchItem } from '~/data/models/UserHistorySearchItem';
 import { UserPersonalization } from '~/data/models/UserPersonalization';
 import { UserPersonalizationUpdate } from '~/data/models/UserPersonalizationUpdate';
 
-import { fetch } from '../fetch';
+import { fetchWithErrorHandling } from '../fetch';
 
 export async function backendCreateUserSession({
   regionId,
@@ -12,7 +12,7 @@ export async function backendCreateUserSession({
   regionId?: string;
   userIp: string;
 }) {
-  const response = await fetch<
+  const response = await fetchWithErrorHandling<
     {
       userPersonalization: UserPersonalization;
       userSessionId: string;
@@ -36,7 +36,9 @@ export async function backendGetUserPersonalization({
 }: {
   userSessionId: string;
 }) {
-  const response = await fetch<{ userPersonalization: UserPersonalization }>({
+  const response = await fetchWithErrorHandling<{
+    userPersonalization: UserPersonalization;
+  }>({
     endpoint: '/v1/users/{userSessionId}/personalization',
     includeAuthorization: true,
     method: 'get',
@@ -54,7 +56,7 @@ export async function backendUpdateUserPersonalization({
   userLocationZip,
   userSessionId,
 }: { userSessionId: string } & UserPersonalizationUpdate) {
-  const response = await fetch<
+  const response = await fetchWithErrorHandling<
     { userPersonalization: UserPersonalization },
     UserPersonalizationUpdate
   >({
@@ -75,7 +77,7 @@ export async function backendUpdateUserPersonalization({
 }
 
 export async function backendGetUserSearchHistory(userSessionId: string) {
-  return await fetch<UserHistorySearch>({
+  return await fetchWithErrorHandling<UserHistorySearch>({
     endpoint: '/v1/users/{userSessionId}/history/search',
     includeAuthorization: true,
     method: 'get',
@@ -89,19 +91,21 @@ export async function backendAddUserSearchHistory(
   userSessionId: string,
   item: UserHistorySearchItem,
 ) {
-  return await fetch<UserHistorySearch, UserHistorySearchItem>({
-    endpoint: '/v1/users/{userSessionId}/history/search',
-    includeAuthorization: true,
-    jsonBody: item,
-    method: 'post',
-    params: {
-      userSessionId,
+  return await fetchWithErrorHandling<UserHistorySearch, UserHistorySearchItem>(
+    {
+      endpoint: '/v1/users/{userSessionId}/history/search',
+      includeAuthorization: true,
+      jsonBody: item,
+      method: 'post',
+      params: {
+        userSessionId,
+      },
     },
-  });
+  );
 }
 
 export async function backendDeleteUserSearchHistory(userSessionId: string) {
-  return await fetch<null>({
+  return await fetchWithErrorHandling<null>({
     endpoint: '/v1/users/{userSessionId}/history/search',
     includeAuthorization: true,
     method: 'delete',

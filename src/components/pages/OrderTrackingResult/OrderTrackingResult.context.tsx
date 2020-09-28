@@ -27,18 +27,19 @@ function useContextSetup() {
     setIsLoadingOrder(true);
     hasError && setHasError(false);
 
-    try {
-      const { order } = await apiGetOrderTracking({
-        orderId,
-        zip,
-      });
+    const res = await apiGetOrderTracking({
+      orderId,
+      zip,
+    });
 
-      setOrder(order);
+    if (res.isSuccess) {
+      setOrder(res.data.order);
       setIsLoadingOrder(false);
-    } catch (err) {
-      setIsLoadingOrder(false);
-      setHasError(true);
+      return;
     }
+
+    setIsLoadingOrder(false);
+    setHasError(true);
   };
 
   return {

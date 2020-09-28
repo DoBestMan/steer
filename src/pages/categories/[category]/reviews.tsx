@@ -27,11 +27,16 @@ export const getServerSideProps: GetServerSideProps<PageResponse<
   }
 
   const tireCategory = removeTireFromQueryParam(category);
-  const tireReviews = await backendGetReviewListing({
+  const tireReviewsRes = await backendGetReviewListing({
     query: { tireCategory },
   });
 
-  if (!tireReviews.reviewsList.length) {
+  if (!tireReviewsRes.isSuccess) {
+    context.res.statusCode = tireReviewsRes.error.statusCode;
+    return { props: { errorStatusCode: tireReviewsRes.error.statusCode } };
+  }
+
+  if (!tireReviewsRes.data.reviewsList.length) {
     context.res.statusCode = 404;
     return { props: { errorStatusCode: 404 } };
   }
@@ -39,7 +44,7 @@ export const getServerSideProps: GetServerSideProps<PageResponse<
   const props: ReviewListingServerData = {
     category: tireCategory,
     serverData: {
-      tireReviews,
+      tireReviews: tireReviewsRes.data,
     },
   };
 

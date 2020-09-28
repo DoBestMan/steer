@@ -27,18 +27,23 @@ export const getServerSideProps: GetServerSideProps<PageResponse<
   }
 
   const tireType = removeTireFromQueryParam(type);
-  const tireReviews = await backendGetReviewListing({
+  const tireReviewsRes = await backendGetReviewListing({
     query: { tireType },
   });
 
-  if (!tireReviews.reviewsList.length) {
+  if (!tireReviewsRes.isSuccess) {
+    context.res.statusCode = tireReviewsRes.error.statusCode;
+    return { props: { errorStatusCode: tireReviewsRes.error.statusCode } };
+  }
+
+  if (!tireReviewsRes.data.reviewsList.length) {
     context.res.statusCode = 404;
     return { props: { errorStatusCode: 404 } };
   }
 
   const props: ReviewListingServerData = {
     serverData: {
-      tireReviews,
+      tireReviews: tireReviewsRes.data,
     },
     type: tireType,
   };

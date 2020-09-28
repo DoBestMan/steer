@@ -31,8 +31,11 @@ describe('apiBootstrap', () => {
     mocked(Fetch.fetchSetUserPersonalization).mockReset().mockImplementation();
 
     mocked(Session.apiGetUserSession).mockReset().mockResolvedValue({
-      userPersonalization,
-      userSessionId,
+      data: {
+        userPersonalization,
+        userSessionId,
+      },
+      isSuccess: true,
     });
 
     TEST_apiBootstrapPromiseReset();

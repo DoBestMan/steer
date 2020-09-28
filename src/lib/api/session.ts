@@ -1,13 +1,13 @@
 import { UserPersonalization } from '~/data/models/UserPersonalization';
 
-import { fetch } from '../fetch';
+import { fetchWithErrorHandling } from '../fetch';
 
 interface UserSessionParams {
   regionId?: string;
 }
 
 export async function apiGetUserSession(userSessionParams?: UserSessionParams) {
-  const userSessionData = await fetch<{
+  const userSessionData = await fetchWithErrorHandling<{
     userPersonalization: UserPersonalization;
     userSessionId: string;
   }>({

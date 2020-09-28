@@ -3,6 +3,7 @@ import { GetStaticProps } from 'next';
 import HomePageContainer, {
   HomeServeData,
 } from '~/components/pages/HomePage/HomePage.container';
+import { PageResponse } from '~/hocs/WithPageErrorHandling';
 import { backendGetSiteHome, backendGetSiteReviews } from '~/lib/backend';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
 import { REVALIDATE } from '~/lib/constants';
@@ -12,19 +13,25 @@ function Home(props: HomeServeData) {
 }
 
 // This function runs at build time on the build server
-export const getStaticProps: GetStaticProps<HomeServeData> = async () => {
+export const getStaticProps: GetStaticProps<PageResponse<
+  HomeServeData
+>> = async () => {
   backendBootstrap();
 
-  const [{ siteHero, siteInsights }, { siteReviews }] = await Promise.all([
+  const [{ siteHero, siteInsights }, siteReviewsRes] = await Promise.all([
     backendGetSiteHome(),
     backendGetSiteReviews(),
   ]);
+
+  if (!siteReviewsRes.isSuccess) {
+    return { props: { errorStatusCode: siteReviewsRes.error.statusCode } };
+  }
 
   const props: HomeServeData = {
     serverData: {
       siteHero,
       siteInsights,
-      siteReviews,
+      siteReviews: siteReviewsRes.data.siteReviews,
     },
   };
 

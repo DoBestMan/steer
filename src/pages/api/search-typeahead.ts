@@ -25,15 +25,23 @@ export default async (
     throw new Error('All search paramaters must be a string');
   }
 
-  const siteSearch = await backendGetSiteSearch({
+  const res = await backendGetSiteSearch({
     additionalQueryText,
     queryText,
     queryType,
   });
 
-  if (isProductionDeploy()) {
-    response.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate');
+  if (res.isSuccess) {
+    if (isProductionDeploy()) {
+      response.setHeader(
+        'Cache-Control',
+        's-maxage=60, stale-while-revalidate',
+      );
+    }
+
+    response.json(res.data);
+    return;
   }
 
-  response.json(siteSearch);
+  response.status(res.error.statusCode).end();
 };
