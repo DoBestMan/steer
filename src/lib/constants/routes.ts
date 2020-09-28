@@ -37,6 +37,7 @@ export enum ROUTES {
   TIRE_BUYING_GUIDE = 'tireBuyingGuide',
   TIRE_REVIEWS = 'tireReviews',
   TIRE_REVIEWS_TEMP = 'tireReviewsTempBrandOrCategoryOrType',
+  TIRE_SALES = 'tire-sales',
   TIRE_SIZE_CATALOG_OR_CATEGORY = 'tireSizeCatalogOrCategory',
   TYPE_DETAIL = 'typeDetail',
   TYPE_LANDING = 'typeLanding',
@@ -85,6 +86,7 @@ export const ROUTE_TYPE_MAP: { [routeName: string]: string } = {
   [ROUTES.SITEMAP]: '/sitemap',
   [ROUTES.OPEN_TEMPLATE]: '/[slug]',
   [ROUTES.LEARN_CATEGORY_SLUG]: '/learn/[category]/[slug]',
+  [ROUTES.TIRE_SALES]: '/tire-sales',
 };
 
 // This is a master list of all routes
@@ -145,4 +147,5 @@ export const ROUTE_LABELS: Record<string, string | null> = {
   [ROUTE_MAP[ROUTES.VEHICLE_CATALOG]]: ui('breadcrumbs.vehicleCatalog'),
   [ROUTE_MAP[ROUTES.WRITE_REVIEW]]: ui('breadcrumbs.writeReview'),
   [ROUTE_MAP[ROUTES.VEHICLES]]: ui('breadcrumbs.vehicles'),
+  [ROUTE_MAP[ROUTES.TIRE_SALES]]: ui('breadcrumbs.tireSales'),
 };

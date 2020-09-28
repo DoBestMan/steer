@@ -109,7 +109,8 @@
     "writeReview": "Write a review",
     "contact": "Customer support",
     "sitemap": "Sitemap",
-    "vehicles": "Shop tires by vehicle"
+    "vehicles": "Shop tires by vehicle",
+    "tireSales": "Tire Sales"
   },
   "common": {
     "ellipsis": "...",
@@ -741,6 +742,24 @@
       },
       "popularMakesTitle": "Popular vehicle makes",
       "allMakesTitle": "All vehicle makes"
+    },
+    "tireSalesPage": {
+      "form": {
+        "title": "What can we help you with?",
+        "placeholders": {
+          "firstName": "First name",
+          "lastName": "Last name",
+          "email": "Your e-mail",
+          "tireQuantity": "How many tires do you need?",
+          "vehicleModel": "What is your vehicle make and model?",
+          "tireSize": "What is the size of the tires you need?",
+          "tireBrand": "What tire brand do you prefer?"
+        }
+      },
+      "toast": {
+        "success": "Thank you for sending the message!",
+        "error": "Oops, something went wrong! <br />Please try again."
+      }
     }
   },
   "categoryPage": {
