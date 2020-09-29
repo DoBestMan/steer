@@ -50,7 +50,11 @@ const mockArgs = {
 
 const tree = (
   <FiltersContextProvider {...mockArgs}>
-    <FilterButtonsCarousel popularFilters={[]} filters={[listMock]} />
+    <FilterButtonsCarousel
+      hasPriceFilter
+      popularFilters={[]}
+      filters={[listMock]}
+    />
   </FiltersContextProvider>
 );
 
@@ -161,6 +165,7 @@ describe('FilterButtonsCarousel', () => {
         }}
       >
         <FilterButtonsCarousel
+          hasPriceFilter
           popularFilters={[]}
           filters={[listSelectedMock]}
         />

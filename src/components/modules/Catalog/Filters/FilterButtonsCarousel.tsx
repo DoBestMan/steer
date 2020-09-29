@@ -1,5 +1,5 @@
 import { useTheme } from 'emotion-theming';
-import { ReactElement, useEffect, useRef } from 'react';
+import { ReactElement, useEffect, useMemo, useRef } from 'react';
 
 import FilterButton from '~/components/global/Button/FilterButton';
 import FilterButtonToggle from '~/components/global/Button/FilterButtonToggle';
@@ -10,6 +10,7 @@ import { SPACING } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import { CatalogFilterTypes, FilterContentTypes } from './Filter.types';
+import { addPopularFiltersToFilterList } from './FilterButtonsCarousel.utils';
 import FilterPopups from './FilterPopups';
 import { useFiltersContext } from './Filters.context';
 import { getFilterLabel, hasActiveValue } from './Filters.utils';
@@ -18,11 +19,13 @@ export const POPULAR_ID = 'popular';
 
 interface Props {
   filters: CatalogFilterTypes[];
+  hasPriceFilter: boolean;
   popularFilters: CatalogFilterTypes[];
 }
 
 export default function FilterButtonsCarousel({
   filters,
+  hasPriceFilter,
   popularFilters,
 }: Props) {
   const filtersRef = useRef<HTMLParagraphElement | null>(null);
@@ -43,6 +46,11 @@ export default function FilterButtonsCarousel({
     }
     return false;
   });
+  const catalogResultFilters = useMemo(
+    () =>
+      addPopularFiltersToFilterList(filters, hasPriceFilter, popularFilters),
+    [filters, hasPriceFilter, popularFilters],
+  );
 
   const prevSelectingFilter = useRef(selectingFilter);
 
@@ -65,62 +73,74 @@ export default function FilterButtonsCarousel({
         {ui('catalog.header.filterLabel')}:
       </p>
       <FiltersCarousel activeFilter={selectingFilter}>
-        <FilterButton
-          isVisible={!!popularFilters.length}
-          css={[
-            styles.filterButton,
-            !popularFilters.length && styles.filterHide,
-            isPopularDropdownOpen && styles.disableEvents,
-          ]}
-          isDisabled={isLoading}
-          label={popularLabel}
-          isDropdownOpen={isPopularDropdownOpen}
-          isActive={isPopularActive}
-          onClick={createOpenFilterHandler(POPULAR_ID)}
-          theme={header.buttonTheme}
-          aria-expanded={isPopularDropdownOpen}
-          data-testid="filter-button-popular"
-        />
         {
-          (filters.map((filter, idx) => {
-            const label = getFilterLabel(filter);
-            const isActive = hasActiveValue(filter, activeFilters);
-            const isDropdownOpen = selectingFilter === idx + 1;
-            return filter.type !==
-              FilterContentTypes.SiteCatalogFilterToggle ? (
-              // filter with dropdown
-              <FilterButton
-                css={[
-                  styles.filterButton,
-                  isDropdownOpen && styles.disableEvents,
-                ]}
-                key={idx}
-                label={label}
-                isDropdownOpen={isDropdownOpen}
-                isDisabled={isLoading}
-                isActive={isActive}
-                onClick={createOpenFilterHandler(idx + 1)}
-                theme={header.buttonTheme}
-                aria-expanded={isDropdownOpen}
-                data-testid={`filter-button-${filter.type}`}
-              />
-            ) : (
-              <FilterButtonToggle
-                isDisabled={isLoading}
-                css={styles.filterButton}
-                key={idx}
-                isActive={isActive}
-                onClick={createToggleFilterHandler(filter.item.value)}
-                theme={header.buttonTheme}
-                data-testid={`filter-button-${filter.type}`}
-              >
-                {label}
-              </FilterButtonToggle>
-            );
-          }) as unknown) as ReactElement
+          (catalogResultFilters.map(
+            (filter: CatalogFilterTypes, idx: number) => {
+              const label = getFilterLabel(filter);
+              const isActive = hasActiveValue(filter, activeFilters);
+              const isDropdownOpen = selectingFilter === idx + 1;
+
+              if (filter.type === FilterContentTypes.SiteCatalogFilterPopular) {
+                return (
+                  <FilterButton
+                    key={idx}
+                    isVisible={!!popularFilters.length}
+                    css={[
+                      styles.filterButton,
+                      !popularFilters.length && styles.filterHide,
+                      isPopularDropdownOpen && styles.disableEvents,
+                    ]}
+                    isDisabled={isLoading}
+                    label={popularLabel}
+                    isDropdownOpen={isPopularDropdownOpen}
+                    isActive={isPopularActive}
+                    onClick={createOpenFilterHandler(POPULAR_ID)}
+                    theme={header.buttonTheme}
+                    aria-expanded={isPopularDropdownOpen}
+                    data-testid="filter-button-popular"
+                  />
+                );
+              }
+
+              return filter.type !==
+                FilterContentTypes.SiteCatalogFilterToggle ? (
+                // filter with dropdown
+                <FilterButton
+                  css={[
+                    styles.filterButton,
+                    isDropdownOpen && styles.disableEvents,
+                  ]}
+                  key={idx}
+                  label={label}
+                  isDropdownOpen={isDropdownOpen}
+                  isDisabled={isLoading}
+                  isActive={isActive}
+                  onClick={createOpenFilterHandler(idx + 1)}
+                  theme={header.buttonTheme}
+                  aria-expanded={isDropdownOpen}
+                  data-testid={`filter-button-${filter.type}`}
+                />
+              ) : (
+                <FilterButtonToggle
+                  isDisabled={isLoading}
+                  css={styles.filterButton}
+                  key={idx}
+                  isActive={isActive}
+                  onClick={createToggleFilterHandler(filter.item.value)}
+                  theme={header.buttonTheme}
+                  data-testid={`filter-button-${filter.type}`}
+                >
+                  {label}
+                </FilterButtonToggle>
+              );
+            },
+          ) as unknown) as ReactElement
         }
       </FiltersCarousel>
-      <FilterPopups popularFilters={popularFilters} filters={filters} />
+      <FilterPopups
+        popularFilters={popularFilters}
+        filters={catalogResultFilters}
+      />
     </>
   );
 }

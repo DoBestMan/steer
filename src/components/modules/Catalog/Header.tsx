@@ -2,7 +2,7 @@ import { SiteCatalogFilterRange } from '~/data/models/SiteCatalogFilterRange';
 import { SiteCatalogProducts } from '~/data/models/SiteCatalogProducts';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 
-import { CatalogFilterTypes, FilterContentTypes } from './Filters/Filter.types';
+import { FilterContentTypes } from './Filters/Filter.types';
 import FilterButtonsCarousel from './Filters/FilterButtonsCarousel';
 import { getGroupedFilters } from './Filters/Filters.utils';
 import SubFilters from './Filters/SubFilters/SubFilters';
@@ -28,13 +28,11 @@ export default function Header({
 }: Props) {
   const { siteCatalogFilters: catalogFilters } = siteCatalogProducts;
   const { greaterThan, isLoading } = useBreakpoints();
-  const priceFilter = catalogFilters.filtersList.find(
+  const hasPriceFilter = !!catalogFilters.filtersList.find(
     (f): f is SiteCatalogFilterRange =>
       f.type === FilterContentTypes.SiteCatalogFilterRange && f.id === 'price',
   );
-  const filters = catalogFilters.filtersList.filter(
-    (f: CatalogFilterTypes) => f !== priceFilter,
-  );
+  const filters = catalogFilters.filtersList;
   const groupedFilters = greaterThan.M && getGroupedFilters(filters);
   const filtersToMap = groupedFilters ? groupedFilters.otherFilters : filters;
 
@@ -56,6 +54,7 @@ export default function Header({
       <HeaderStickyBar>
         {!isLoading && (
           <FilterButtonsCarousel
+            hasPriceFilter={hasPriceFilter}
             popularFilters={groupedFilters ? groupedFilters.popularFilters : []}
             filters={filtersToMap}
           />
@@ -65,7 +64,6 @@ export default function Header({
         resultsCount={
           siteCatalogProducts.listResultMetadata.pagination?.total || 0
         }
-        priceFilter={priceFilter}
         sortList={catalogFilters.sortList}
       />
     </>

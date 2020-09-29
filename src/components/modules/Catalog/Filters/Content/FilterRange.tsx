@@ -48,12 +48,20 @@ export default function FilterRange({
     minValue,
     onChange,
   });
+  const isPriceFilter = id === 'price';
   return (
     <div css={styles.root}>
       <FilterHeader
+        alwaysShow={isPriceFilter}
         customHeaderStyles={styles.header}
         header={header}
-        title={<h2 css={styles.title}>{header?.title}</h2>}
+        title={
+          <h2 css={styles.title}>
+            {isPriceFilter
+              ? ui('catalog.filters.priceRangeLabel')
+              : header?.title}
+          </h2>
+        }
         isLarge={isLarge}
         openStaticModal={openStaticModal}
       />
@@ -62,6 +70,7 @@ export default function FilterRange({
         formatLabel={mapUnitToLabelFormatter[unit]}
         getAriaText={mapUnitToAriaFormatter[unit]}
         name={ui('catalog.filters.slider', { name: id })}
+        hasGraph={isPriceFilter}
         interval={step}
         onUpdate={handleUpdateFilters}
         max={maxValue}

@@ -24,7 +24,10 @@ export default function FilterPopups({ filters, popularFilters }: Props) {
         />
       )}
       {filters.map((filter, idx) => {
-        if (filter.type === FilterContentTypes.SiteCatalogFilterToggle) {
+        if (
+          filter.type === FilterContentTypes.SiteCatalogFilterToggle ||
+          filter.type === FilterContentTypes.SiteCatalogFilterPopular
+        ) {
           return null;
         }
         return (
