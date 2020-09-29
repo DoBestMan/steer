@@ -5,6 +5,8 @@ import { OpenTemplateModules } from '~/data/models/SiteOpenTemplate';
 
 import ModuleAccordion from './modules/ModuleAccordion/ModuleAccordion';
 import ModuleArticleListWithFeatured from './modules/ModuleArticleListWithFeatured/ModuleArticleListWithFeatured';
+import ModuleButtonGrid from './modules/ModuleButtonGrid/ModuleButtonGrid';
+import ModuleCircularIllustrationCarousel from './modules/ModuleCircularIllustrationCarousel/ModuleCircularIllustrationCarousel';
 import ModuleDataTableVertical from './modules/ModuleDataTableVertical/ModuleDataTableVertical';
 import ModuleFeedback from './modules/ModuleFeedback/ModuleFeedback';
 import ModuleGraphicGrid from './modules/ModuleGraphicGrid/ModuleGraphicGrid';
@@ -14,6 +16,7 @@ import ModuleMarkdown from './modules/ModuleMarkdown/ModuleMarkdown';
 import ModuleQuote from './modules/ModuleQuote/ModuleQuote';
 import ModuleReview from './modules/ModuleReview/ModuleReview';
 import ModuleSeparator from './modules/ModuleSeparator/ModuleSeparator';
+import ModuleSiteLinkWithLabel from './modules/ModuleSiteLinkWithLabel/ModuleSiteLinkWithLabel';
 import ModuleTextList from './modules/ModuleTextList/ModuleTextList';
 import ModuleTireSearchBillboard from './modules/ModuleTireSearchBillboard/ModuleTireSearchBillboard';
 import ModuleYouTubeVideo from './modules/ModuleYouTubeVideo/ModuleYouTubeVideo';
@@ -28,10 +31,13 @@ function EditorialModules({ moduleType, moduleData }: EditorialModulesProps) {
     SiteImage: ModuleImage,
     SiteModuleAccordion: ModuleAccordion,
     SiteModuleArticleListWithFeatured: ModuleArticleListWithFeatured,
+    SiteModuleButtonGrid: ModuleButtonGrid,
+    SiteModuleCircularIllustrationCarousel: ModuleCircularIllustrationCarousel,
     SiteModuleDataTableVertical: ModuleDataTableVertical,
     SiteModuleFeedback: ModuleFeedback,
     SiteModuleGraphicGrid: ModuleGraphicGrid,
     SiteModuleLinkList: ModuleLinkList,
+    SiteModuleLinkWithLabel: ModuleSiteLinkWithLabel,
     SiteModuleMarkdown: ModuleMarkdown,
     SiteModuleQuote: ModuleQuote,
     SiteModuleReview: ModuleReview,

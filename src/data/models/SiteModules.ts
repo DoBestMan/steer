@@ -1,5 +1,6 @@
 import { AccordionProps } from '~/components/global/Accordion/Accordion';
 import { ArticleListWithFeaturedProps } from '~/components/global/ArticleListWithFeatured/ArticleListWithFeatured';
+import { ButtonGridProps } from '~/components/global/ButtonGrid/ButtonGrid';
 import { DataTableProps } from '~/components/global/DataTables/DataTableVertical';
 import { FeaturedInfoModuleProps } from '~/components/global/FeaturedInfoModule/FeaturedInfoModule';
 import { ImageProps } from '~/components/global/Image/Image';
@@ -11,6 +12,9 @@ import { SiteLinkWithLabel } from '~/data/models/SiteLinkWithLabel';
 import { SiteModuleTypes } from '~/data/models/SiteModuleTypes.ts';
 import { SiteReviews } from '~/data/models/SiteReviews';
 import { TextBasedNavigationProps } from '~/data/models/TextBasedNavigationProps';
+import { THEME } from '~/lib/constants';
+
+import { SiteGraphicTile } from './SiteGraphicTile';
 
 export interface SiteModule {
   type: SiteModuleTypes;
@@ -45,6 +49,11 @@ export interface SiteModuleGraphicGrid extends SiteModule {
   items: SiteModuleGraphicGridItem[];
 }
 
+export interface SiteModuleLinkWithLabel extends SiteLinkWithLabel {
+  marginTop?: number;
+  marginBottom?: number;
+  theme?: THEME;
+}
 export interface SiteModuleImage extends ImageProps, SiteModule {}
 
 export interface SiteModuleLinkList extends LinkListProps, SiteModule {}
@@ -64,3 +73,17 @@ export interface SiteModuleTextList
     SiteModule {}
 
 export interface SiteModuleYouTubeVideo extends VideoProps, SiteModule {}
+
+export interface SiteModuleButtonGrid extends ButtonGridProps, SiteModule {
+  headerText?: string;
+}
+
+export interface SiteModuleCircularIllustrationCarousel extends SiteModule {
+  dataItems: Array<SiteGraphicTile>;
+  headerText?: string;
+  imageTypeForMaxWidth?:
+    | 'vehicleModel'
+    | 'vehicleTypes'
+    | 'logosBrands'
+    | 'logosMakes';
+}

@@ -18,5 +18,8 @@ export const styles: StylesMap = {
     ['[data-component="module-review"] ~ div[data-component]']: {
       marginTop: 0,
     },
+    ['[data-component="module-siteLinkWithLabel"]']: {
+      marginTop: 0,
+    },
   },
 };
