@@ -14,7 +14,7 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
   } as OrderTrackingInput);
 
   if (res.isSuccess) {
-    response.json(res.data.order);
+    response.json(res.data);
     return;
   }
 
