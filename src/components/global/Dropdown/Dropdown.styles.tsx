@@ -70,7 +70,7 @@ const styles: StylesMap = {
       '> div:first-of-type': [
         hideScrollbar,
         {
-          maxHeight: 500,
+          maxHeight: 350,
           minHeight: 150,
           overflow: 'auto',
           padding: SPACING.SIZE_30,

@@ -122,6 +122,7 @@ export function useFiltersContextSetup({
         .then(() => {
           setFiltersToApply(newState);
           setIsPreviewLoading(false);
+          handleUpdateResults(newState, true);
         })
         .catch((e) => {
           setGlobalToastMessage(e.message);
@@ -133,7 +134,6 @@ export function useFiltersContextSetup({
       Object.keys(value).forEach((key) => {
         newState[key] = value[key];
       });
-
       setFiltersToApply(newState);
       handleUpdateResults(newState);
     },
@@ -175,6 +175,7 @@ export function useFiltersContextSetup({
         .then(() => {
           setFiltersToApply(filters);
           setIsPreviewLoading(false);
+          handleUpdateResults(filters, true);
         })
         .catch((e) => {
           setGlobalToastMessage(e.message);

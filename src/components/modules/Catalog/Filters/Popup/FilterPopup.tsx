@@ -12,6 +12,7 @@ import { ui } from '~/lib/utils/ui-dictionary';
 import { CatalogFilterTypes, FilterContentTypes } from '../Filter.types';
 import { useFiltersContext } from '../Filters.context';
 import { getFilterLabel } from '../Filters.utils';
+import FilterOverlay from './FilterOverlay';
 import { mapTypeToContent } from './FilterPopup.utils';
 
 interface Props {
@@ -30,7 +31,7 @@ export default function FilterPopup({
   const { greaterThan } = useBreakpoints();
   const isLarge = greaterThan.M;
   const {
-    applyFilters,
+    clearSelectingFilter,
     clearFiltersToApply,
     isPreviewLoading,
     createResetFiltersHandler,
@@ -84,7 +85,7 @@ export default function FilterPopup({
   const actionBar = hasActionBar
     ? {
         isDisabled: isPreviewLoading,
-        onClickPrimary: applyFilters,
+        onClickPrimary: clearSelectingFilter,
         onClickSecondary: createResetFiltersHandler(filter),
         primaryLabel: isPreviewLoading ? (
           <Loading theme={THEME.DARK} />
@@ -96,16 +97,19 @@ export default function FilterPopup({
     : null;
 
   return (
-    <Dropdown
-      shouldActivateListeners={!isModalOpen}
-      actionBar={actionBar}
-      contentLabel={label}
-      forceModal={forceModal}
-      insideCarousel
-      isOpen={isOpen}
-      onClose={onClose}
-    >
-      {mapTypeToContent[filter.type](childProps)}
-    </Dropdown>
+    <>
+      <FilterOverlay isOpen={isOpen} />
+      <Dropdown
+        shouldActivateListeners={!isModalOpen}
+        actionBar={actionBar}
+        contentLabel={label}
+        forceModal={forceModal}
+        insideCarousel
+        isOpen={isOpen}
+        onClose={onClose}
+      >
+        {mapTypeToContent[filter.type](childProps)}
+      </Dropdown>
+    </>
   );
 }

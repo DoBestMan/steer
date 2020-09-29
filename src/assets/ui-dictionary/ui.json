@@ -181,7 +181,7 @@
       "sortBy": "Sort by",
       "priceRangeLabel": "Price Range",
       "priceRange": "{{min}} to {{max}}",
-      "reset": "Reset filters",
+      "reset": "Reset filter",
       "result": "{{number}} filtered result",
       "results": "{{number}} filtered results",
       "viewResults": "View {{number}} tires",
