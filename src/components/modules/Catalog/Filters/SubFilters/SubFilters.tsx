@@ -1,10 +1,14 @@
 import Link from '~/components/global/Link/Link';
+import Toggle from '~/components/global/Toggle/Toggle';
+import { useCatalogProductsContext } from '~/context/CatalogProducts.context';
+import { useGlobalToastContext } from '~/context/GlobalToast.context';
 import { SiteCatalogFilterRange } from '~/data/models/SiteCatalogFilterRange';
 import {
   SiteCatalogSortListItem,
   SiteCatalogSortListItemStateEnum,
 } from '~/data/models/SiteCatalogSortListItem';
-import { THEME } from '~/lib/constants';
+import { useBreakpoints } from '~/hooks/useBreakpoints';
+import { BREAKPOINT_SIZES, THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import { FilterContentTypes } from '../Filter.types';
@@ -32,9 +36,28 @@ export default function SubFilters({
     selectingFilter,
     createUpdateFilterGroup,
   } = useFiltersContext();
+
+  const { bk } = useBreakpoints();
+  const { setGlobalToastMessage } = useGlobalToastContext();
+
   const sortItem = sortList.find(
     (item) => item.state === SiteCatalogSortListItemStateEnum.Selected,
   );
+
+  const {
+    handleUpdateResults,
+    setIsAdvancedView,
+    isAdvancedView,
+  } = useCatalogProductsContext();
+
+  const onToggleView = async () => {
+    const newParams = isAdvancedView ? {} : { skipGroups: 'true' };
+    setIsAdvancedView(!isAdvancedView);
+    handleUpdateResults(newParams as Record<string, string>).catch((e) => {
+      setIsAdvancedView(isAdvancedView);
+      setGlobalToastMessage(e.message);
+    });
+  };
 
   const isOpen = selectingFilter === SORT_ID;
 
@@ -42,11 +65,25 @@ export default function SubFilters({
     resultsCount === 1 ? 'catalog.filters.result' : 'catalog.filters.results';
   const resultCopy = ui(copyKey, { number: resultsCount });
 
+  const toggleTitle =
+    bk === BREAKPOINT_SIZES.S
+      ? 'catalog.header.showTechSpecsOnS'
+      : 'catalog.header.showTechSpecsOnM';
+
   return (
     <div css={styles.root}>
       <p css={[styles.results, priceFilter && styles.decorator]}>
         {resultCopy}
       </p>
+      <div css={styles.toggle}>
+        <span css={[styles.label]}>{ui(toggleTitle)}</span>
+        <Toggle
+          testId="advanced-view-toggle"
+          name={ui(toggleTitle)}
+          onToggle={onToggleView}
+          defaultChecked={isAdvancedView}
+        />
+      </div>
       {priceFilter && (
         <PriceFilter
           onChange={createUpdateFilterGroup}
@@ -82,3 +119,4 @@ export default function SubFilters({
     </div>
   );
 }
+//

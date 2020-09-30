@@ -28,7 +28,10 @@ import { removeUrlParams } from '~/lib/utils/string';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import FooterContainer from '../Footer/Footer.container';
-import { PAGE_PATHS_NOT_TO_SCROLL_TOP } from './App.constants';
+import {
+  PAGE_PATHS_NOT_TO_SCROLL_TOP,
+  QUERY_PARAMS_NOT_TO_SCROLL_TOP,
+} from './App.constants';
 import { animations, styles } from './App.styles';
 
 interface Props {
@@ -71,9 +74,19 @@ function App({ children, ...rest }: Props) {
 
   const isHomepage = route === ROUTE_MAP[ROUTES.HOME];
 
+  const findIntersection = (array1: Array<string>, array2: Array<string>) =>
+    array1.filter((value: string) => array2.includes(value));
+
   const shouldNotScrollTopOnRouteChange = useCallback(() => {
-    return PAGE_PATHS_NOT_TO_SCROLL_TOP.indexOf(router.pathname) > -1;
-  }, [router.pathname]);
+    const intersection = findIntersection(
+      Object.keys(router.query),
+      QUERY_PARAMS_NOT_TO_SCROLL_TOP,
+    );
+    return (
+      PAGE_PATHS_NOT_TO_SCROLL_TOP.indexOf(router.pathname) > -1 ||
+      intersection.length
+    );
+  }, [router.pathname, router.query]);
 
   // TODO WCS-1512: temp bring back the feedback tab
   useEffect(() => {
@@ -90,7 +103,12 @@ function App({ children, ...rest }: Props) {
     } else {
       setTimeout(() => window.scrollTo(0, 0));
     }
-  }, [router.pathname, router.asPath, shouldNotScrollTopOnRouteChange]);
+  }, [
+    router.pathname,
+    router.asPath,
+    router.query,
+    shouldNotScrollTopOnRouteChange,
+  ]);
 
   // Scroll restoration happens too early https://github.com/vercel/next.js/issues/3303
   useEffect(() => {

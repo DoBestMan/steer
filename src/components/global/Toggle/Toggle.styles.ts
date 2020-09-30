@@ -2,21 +2,21 @@ import { COLORS, RADIUS, StylesMap, TIME } from '~/lib/constants';
 
 const styles: StylesMap = {
   checked: {
-    transform: 'translateX(12px)',
+    transform: 'translateX(17px)',
   },
   indicator: {
     background: COLORS.GLOBAL.WHITE,
     borderRadius: RADIUS.CIRCLE,
     bottom: 2,
     content: '""',
-    height: 9,
+    height: 11,
     left: 2,
     position: 'absolute',
     transition: `${TIME.MS300}ms ease`,
-    width: 9,
+    width: 10,
   },
   slider: {
-    background: COLORS.ORANGE.SHADE_30,
+    background: COLORS.GLOBAL.BLACK,
     borderRadius: RADIUS.PILL,
     bottom: 0,
     cursor: 'pointer',
@@ -31,9 +31,9 @@ const styles: StylesMap = {
   },
   switch: {
     display: 'inline-block',
-    height: 13,
+    height: 15,
     position: 'relative',
-    width: 25,
+    width: 31,
   },
 };
 

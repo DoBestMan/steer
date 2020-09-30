@@ -181,9 +181,9 @@
       "sortBy": "Sort by",
       "priceRangeLabel": "Price Range",
       "priceRange": "{{min}} to {{max}}",
-      "reset": "Reset filter",
-      "result": "{{number}} filtered result",
-      "results": "{{number}} filtered results",
+      "reset": "Reset filters",
+      "result": "{{number}} result",
+      "results": "{{number}} results",
       "viewResults": "View {{number}} tires",
       "popularFilters": "Popular Filters"
     },
@@ -194,7 +194,8 @@
     },
     "header": {
       "returnToTopPicks": "Return to top picks",
-      "advancedViewLabel": "Advanced view",
+      "showTechSpecsOnS": "Show specs",
+      "showTechSpecsOnM": "Show technical specs",
       "back": "Back",
       "dealsFor": "Deals for",
       "filterLabel": "Filter by"

@@ -18,6 +18,14 @@ const styles: StylesMap = {
   disableEvents: {
     pointerEvents: 'none',
   },
+  label: [
+    typography.labelHeadline,
+    {
+      fontWeight: 'normal',
+      color: COLORS.LIGHT.GRAY_70,
+      marginRight: SPACING.SIZE_15,
+    },
+  ],
   range: [
     typography.labelCopyTight,
     {
@@ -48,9 +56,7 @@ const styles: StylesMap = {
     {
       alignItems: 'center',
       display: 'flex',
-      [MQ.L]: {
-        flexGrow: 1,
-      },
+      flexGrow: 1,
     },
   ],
   root: {
@@ -90,7 +96,10 @@ const styles: StylesMap = {
   sort: typography.labelCopy,
   sortBy: {
     display: 'flex',
-    marginLeft: SPACING.SIZE_40,
+    marginLeft: SPACING.SIZE_20,
+    [MQ.M]: {
+      marginLeft: SPACING.SIZE_40,
+    },
   },
   sortLabel: [
     typography.labelCopy,
@@ -99,6 +108,10 @@ const styles: StylesMap = {
       marginRight: SPACING.SIZE_05,
     },
   ],
+  toggle: {
+    alignItems: 'center',
+    display: 'flex',
+  },
 };
 
 export default styles;
