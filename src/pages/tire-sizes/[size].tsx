@@ -54,6 +54,7 @@ function TireCategory({ size, serverData }: Props) {
       pageParams={{ size }}
       searchBy={searchBy}
       searchByParams={searchByParams}
+      hasDefaultAdvancedView
     />
   );
 }

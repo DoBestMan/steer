@@ -43,11 +43,11 @@ interface SetupProps {
   apiArgs: CatalogApiArgs;
   catalogGridRef: RefObject<HTMLDivElement | null>;
   endpoint: string;
+  hasDefaultAdvancedView?: boolean;
   pageParams: Record<string, string>;
 }
 
 const EMPTY_FILTERS = { filtersList: [], sortList: [] };
-
 const CatalogProductsContext = createContext<CatalogProductsContextProps>();
 
 function useContextSetup({
@@ -55,12 +55,15 @@ function useContextSetup({
   catalogGridRef,
   endpoint,
   pageParams,
+  hasDefaultAdvancedView,
 }: SetupProps) {
   const { setGlobalToastMessage } = useGlobalToastContext();
   const { query, push, pathname, asPath } = useRouter();
   const { siteCatalogSummary, stage } = useCatalogSummaryContext();
 
-  const [isAdvancedView, setIsAdvancedView] = useState(false);
+  const [isAdvancedView, setIsAdvancedView] = useState(
+    !!hasDefaultAdvancedView,
+  );
   const [isLoading, setIsLoading] = useState(false);
   const [displayedProducts, setDisplayedProducts] = useState<
     SiteCatalogProductItem[]
@@ -268,12 +271,14 @@ export function CatalogProductsContextProvider({
   catalogGridRef,
   children,
   endpoint,
+  hasDefaultAdvancedView,
   pageParams,
 }: Props) {
   const value = useContextSetup({
     apiArgs,
     catalogGridRef,
     endpoint,
+    hasDefaultAdvancedView,
     pageParams,
   });
 

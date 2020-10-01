@@ -19,6 +19,7 @@ interface Props extends CatalogPageData {
     products: string;
     summary: string;
   };
+  hasDefaultAdvancedView?: boolean;
   pageParams?: Record<string, string>;
   searchBy: SearchBy;
   searchByParams: SearchByParams;
@@ -30,6 +31,7 @@ function CatalogPageContainer({
   pageParams = {},
   searchBy,
   searchByParams,
+  hasDefaultAdvancedView,
 }: Props) {
   const { query } = useRouter();
   const { isSearchOpen } = useSearchModalContext();
@@ -41,6 +43,7 @@ function CatalogPageContainer({
   const queryParams = getStringifiedParams({
     ...query,
     ...pageParams,
+    skipGroups: hasDefaultAdvancedView ? 'true' : 'false',
     page: '1',
   });
   const apiArgs: CatalogApiArgs = {
@@ -68,6 +71,7 @@ function CatalogPageContainer({
           catalogGridRef={catalogGridRef}
           endpoint={endpoints.products}
           pageParams={pageParams}
+          hasDefaultAdvancedView={hasDefaultAdvancedView}
         >
           <CatalogPage catalogGridRef={catalogGridRef} />
         </CatalogProductsContextProvider>
