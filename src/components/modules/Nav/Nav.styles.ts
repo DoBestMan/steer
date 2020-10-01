@@ -56,7 +56,7 @@ export const navigationBreadcrumbPaddingTop: CSSStyles = {
 };
 
 const CONSTANTS = {
-  LOGO_SIZE: 123,
+  LOGO_SIZE: 160,
   LOGO_SIZE_SMALL: 105,
 };
 
@@ -135,7 +135,7 @@ export const styles: StylesMap = {
   },
   logo: {
     width: CONSTANTS.LOGO_SIZE_SMALL,
-    [MQ.L]: {
+    [MQ.M]: {
       width: CONSTANTS.LOGO_SIZE,
     },
   },

@@ -7,6 +7,7 @@ import GridItem from '~/components/global/Grid/GridItem';
 import Image from '~/components/global/Image/Image';
 import BaseLink from '~/components/global/Link/BaseLink';
 import { useNavContext } from '~/context/Nav.context';
+import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { TIME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { disableGlobalFocus } from '~/styles/document/accessibility.styles';
@@ -28,6 +29,7 @@ function Nav({ isHomepage }: Props) {
 
   const { toggleIsSearchOpen } = useSearchModalContext();
   const theme: NavThemeObject = useTheme();
+  const { isMobile } = useBreakpoints();
 
   return (
     <Transition appear={false} in={isVisible} timeout={TIME.MS400}>
@@ -52,7 +54,7 @@ function Nav({ isHomepage }: Props) {
                   <Image
                     altText={ui('logo.alt')}
                     css={styles.logo}
-                    src={theme.logoUrl}
+                    src={isMobile ? theme.logoUrlMobile : theme.logoUrl}
                   />
                 </BaseLink>
               </GridItem>
