@@ -161,7 +161,12 @@ export async function fetch<T, U = never>({
     );
     error.data = data;
     error.statusCode = response.status;
-    console.error(error);
+
+    // avoid logging 404s to keep logs clean
+    if (response.status !== 404) {
+      console.error(error);
+    }
+
     throw error;
   }
 

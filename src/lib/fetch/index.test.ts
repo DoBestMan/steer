@@ -378,7 +378,6 @@ describe('fetch', () => {
     [FetchErrorCodes.BadRequest, 400],
     [FetchErrorCodes.Unauthorized, 401],
     [FetchErrorCodes.Forbidden, 403],
-    [FetchErrorCodes.NotFound, 404],
     [FetchErrorCodes.ServerError, 500],
   ])(
     'rejects with %s for response status code %s',
