@@ -39,6 +39,7 @@ export enum ROUTES {
   TIRE_REVIEWS_TEMP = 'tireReviewsTempBrandOrCategoryOrType',
   TIRE_SALES = 'tire-sales',
   TIRE_SIZE_CATALOG_OR_CATEGORY = 'tireSizeCatalogOrCategory',
+  TIRE_SIZES_LANDING = 'tireSizesLanding',
   TYPE_DETAIL = 'typeDetail',
   TYPE_LANDING = 'typeLanding',
   TYPE_REVIEWS = 'typeReviews',
@@ -84,6 +85,8 @@ export const ROUTE_TYPE_MAP: { [routeName: string]: string } = {
   [ROUTES.PRODUCT_DETAIL_PLA]: '/paid',
   [ROUTES.PRIVACY]: '/privacy-policy',
   [ROUTES.SITEMAP]: '/sitemap',
+  [ROUTES.VEHICLES]: '/vehicles',
+  [ROUTES.TIRE_SIZES_LANDING]: '/tire-sizes',
   [ROUTES.OPEN_TEMPLATE]: '/[slug]',
   [ROUTES.LEARN_CATEGORY_SLUG]: '/learn/[category]/[slug]',
   [ROUTES.TIRE_SALES]: '/tire-sales',
@@ -107,7 +110,6 @@ export const ROUTE_MAP: { [routeName: string]: string } = {
   [ROUTES.MILITARY_DISCOUNT]: '/military-discount',
   [ROUTES.RETURNS]: '/returns-and-refunds',
   [ROUTES.TIRE_BUYING_GUIDE]: '/tire-buying-guide',
-  [ROUTES.VEHICLES]: '/vehicles',
 };
 
 export const CATALOG_ROUTES = [
@@ -147,5 +149,6 @@ export const ROUTE_LABELS: Record<string, string | null> = {
   [ROUTE_MAP[ROUTES.VEHICLE_CATALOG]]: ui('breadcrumbs.vehicleCatalog'),
   [ROUTE_MAP[ROUTES.WRITE_REVIEW]]: ui('breadcrumbs.writeReview'),
   [ROUTE_MAP[ROUTES.VEHICLES]]: ui('breadcrumbs.vehicles'),
+  [ROUTE_MAP[ROUTES.TIRE_SIZES_LANDING]]: ui('breadcrumbs.tireSizes'),
   [ROUTE_MAP[ROUTES.TIRE_SALES]]: ui('breadcrumbs.tireSales'),
 };

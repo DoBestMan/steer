@@ -103,6 +103,14 @@ export const footerLinksData = {
         isExternal: true,
         text: ui('links.registerTires'),
       },
+      {
+        action: ROUTE_MAP[ROUTES.VEHICLES],
+        text: ui('breadcrumbs.vehicles'),
+      },
+      {
+        action: ROUTE_MAP[ROUTES.TIRE_SIZES_LANDING],
+        text: ui('breadcrumbs.tireSizes'),
+      },
     ],
   },
 };
