@@ -81,7 +81,7 @@ export function mapDataToLinkingData({
           '@type': 'Organization',
           name: sellerName,
         },
-        sku: item.partNumber,
+        sku: isPLA && query.itemId ? query.itemId : item.partNumber,
         mpn: item.partNumber,
       };
     });
