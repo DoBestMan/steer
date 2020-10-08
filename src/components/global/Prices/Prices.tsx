@@ -43,7 +43,7 @@ function Prices({
               <span
                 css={[
                   (isSalePrice || isStartingAtPrice) && {
-                    color: COLORS.GLOBAL.ORANGE,
+                    color: COLORS.LIGHT.GRAY_70,
                   },
                   isLight && { color: COLORS.GLOBAL.WHITE },
                   typography.tertiaryHeadline,
@@ -58,7 +58,7 @@ function Prices({
                 <span
                   css={[
                     styles.originalValue,
-                    isLight && { color: COLORS.ORANGE.TINT_70 },
+                    isLight && { color: COLORS.LIGHT.GRAY_70 },
                     originalPrefix && styles.originalValuePrefixed,
                     customOriginalStyles,
                   ]}

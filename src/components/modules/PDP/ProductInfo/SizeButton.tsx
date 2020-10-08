@@ -90,11 +90,11 @@ function SizeButton({
           disabled={isOpen}
           className="dropdown-button"
           type="button"
-          css={styles.root}
+          css={[styles.root, styles.btnRoot]}
           onClick={handleClickButton}
           aria-label={`${label}, ${ui('pdp.productInfo.selectSizeLabel')}`}
         >
-          <span css={styles.selectSize}>{label}</span>
+          <span>{label}</span>
           <Icon
             name={ICONS.CHEVRON_DOWN}
             css={[styles.icon, styles.iconNoSize]}
@@ -116,7 +116,7 @@ function SizeButton({
         disabled={isOpen}
         className="dropdown-button"
         type="button"
-        css={styles.root}
+        css={[styles.root, styles.btnRoot]}
         onClick={handleClickButton}
         aria-label={`${size}-${loadSpeedRating}, ${ui(
           'pdp.productInfo.changeSizeLabel',

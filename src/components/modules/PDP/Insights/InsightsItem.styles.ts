@@ -15,7 +15,7 @@ const styles: StylesMap = {
   },
   container: {
     alignItems: 'center',
-    backgroundColor: COLORS.GLOBAL.ORANGE,
+    backgroundColor: COLORS.ORANGE.SHADE_15_SOLID,
     color: COLORS.GLOBAL.WHITE,
     display: 'flex',
     paddingBottom: SPACING.SIZE_25,

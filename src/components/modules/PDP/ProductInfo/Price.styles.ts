@@ -24,7 +24,7 @@ const styles: StylesMap = {
   priceFeature: [
     typography.primarySubhead,
     {
-      color: COLORS.GLOBAL.ORANGE,
+      color: COLORS.GLOBAL.BLACK,
       whiteSpace: 'nowrap',
       ':not(:only-child):last-of-type': {
         marginBottom: 3,
@@ -34,6 +34,7 @@ const styles: StylesMap = {
   prices: [
     typography.primaryHeadline,
     {
+      color: COLORS.LIGHT.GRAY_70,
       display: 'block',
       marginBottom: 3,
       [MQ.M]: {

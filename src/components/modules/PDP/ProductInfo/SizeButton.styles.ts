@@ -4,9 +4,13 @@ import { COLORS, MQ } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const styles: CSSObject = {
+  btnRoot: {
+    ':hover': {
+      color: COLORS.ORANGE.SHADE_30_SOLID,
+    },
+  },
   icon: {
     marginLeft: 15,
-    color: COLORS.LIGHT.GRAY_70,
 
     [MQ.M]: {
       marginLeft: 17,
@@ -25,6 +29,7 @@ const styles: CSSObject = {
     typography.primaryHeadline,
     {
       alignItems: 'center',
+      color: COLORS.GLOBAL.ORANGE,
       display: 'flex',
 
       ':disabled': {
@@ -32,11 +37,7 @@ const styles: CSSObject = {
       },
     },
   ],
-  selectSize: {
-    color: COLORS.GLOBAL.ORANGE,
-  },
   size: {
-    color: COLORS.LIGHT.GRAY_70,
     borderBottom: '2px dotted currentColor',
   },
 };
