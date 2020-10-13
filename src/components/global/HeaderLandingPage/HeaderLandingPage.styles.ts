@@ -7,9 +7,13 @@ import {
   THEME,
   TIME,
 } from '~/lib/constants';
+import { links } from '~/styles/links.styles';
 import { typography } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
+  Body: {
+    a: links.light,
+  },
   container: typography.bodyCopy,
   imageContainer: {
     marginBottom: SPACING.SIZE_40,
@@ -20,6 +24,7 @@ const styles: StylesMap = {
     '&[aria-hidden="false"]': {
       display: 'block',
     },
+    a: links.light,
   },
   showFullBody: [
     typography.primarySubhead,
@@ -67,51 +72,60 @@ export const sizeStyles = {
 
 export const themeStyles = {
   [THEME.LIGHT]: {
-    container: {
-      color: COLORS.LIGHT.GRAY_70,
-    },
-    title: {
-      color: COLORS.GLOBAL.BLACK,
-    },
-    subTitle: {
-      color: COLORS.GLOBAL.BLACK,
-    },
     buttonHover: {
       '&:hover, &:focus:not(:active)': {
         color: COLORS.GLOBAL.BLACK,
       },
     },
-  },
-  [THEME.DARK]: {
     container: {
-      color: COLORS.DARK.GRAY_40,
+      color: COLORS.LIGHT.GRAY_70,
     },
-    title: {
-      color: COLORS.GLOBAL.WHITE,
+    links: {
+      a: links.LIGHT,
     },
     subTitle: {
-      color: COLORS.GLOBAL.WHITE,
+      color: COLORS.GLOBAL.BLACK,
     },
+    title: {
+      color: COLORS.GLOBAL.BLACK,
+    },
+  },
+  [THEME.DARK]: {
     buttonHover: {
       '&:hover, &:focus:not(:active)': {
         color: COLORS.GLOBAL.WHITE,
       },
     },
-  },
-  [THEME.ORANGE]: {
     container: {
-      color: COLORS.ORANGE.SHADE_85,
+      color: COLORS.DARK.GRAY_40,
+    },
+    links: {
+      a: links.DARK,
+    },
+    subTitle: {
+      color: COLORS.GLOBAL.WHITE,
     },
     title: {
       color: COLORS.GLOBAL.WHITE,
     },
-    subTitle: {
-      color: COLORS.GLOBAL.BLACK,
-    },
+  },
+  [THEME.ORANGE]: {
     buttonHover: {
       '&:hover, &:focus:not(:active)': {
         color: COLORS.GLOBAL.BLACK,
       },
+    },
+    container: {
+      color: COLORS.ORANGE.SHADE_85,
+    },
+    links: {
+      a: links.DARK,
+    },
+    subTitle: {
+      color: COLORS.GLOBAL.BLACK,
+    },
+    title: {
+      color: COLORS.GLOBAL.WHITE,
     },
   },
 };

@@ -5,7 +5,12 @@ import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Image from '~/components/global/Image/Image';
 import Markdown from '~/components/global/Markdown/MarkdownDynamic';
 import { SiteImage } from '~/data/models/SiteImage';
-import { HEADER_SIZE, MARKDOWN_PRIMITIVES, THEME } from '~/lib/constants';
+import {
+  HEADER_SIZE,
+  MARKDOWN_PRIMITIVES,
+  MARKDOWN_PRIMITIVES_WITH_HTML,
+  THEME,
+} from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import styles, { sizeStyles, themeStyles } from './HeaderLandingPage.styles';
@@ -70,7 +75,10 @@ export default function HeaderLandingPage({
       )}
       {briefBody && (
         <div css={styles.Body}>
-          <Markdown allowedTypes={MARKDOWN_PRIMITIVES} unwrapDisallowed>
+          <Markdown
+            allowedTypes={MARKDOWN_PRIMITIVES_WITH_HTML}
+            unwrapDisallowed
+          >
             {briefBody}
           </Markdown>
         </div>
@@ -81,7 +89,10 @@ export default function HeaderLandingPage({
           aria-hidden={!showFullBody}
           id="header-detail-page-body"
         >
-          <Markdown allowedTypes={MARKDOWN_PRIMITIVES} unwrapDisallowed>
+          <Markdown
+            allowedTypes={MARKDOWN_PRIMITIVES_WITH_HTML}
+            unwrapDisallowed
+          >
             {moreBody}
           </Markdown>
         </div>
