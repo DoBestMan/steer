@@ -65,6 +65,7 @@ export interface ProductDetailContextProps {
   queryParams: Record<string, string>;
   searchForVehicle: () => void;
   setData: (_: ProductDetailResponse) => void;
+  setIsAddingToCart: (_: boolean) => void;
   setIsLoading: (_: boolean) => void;
   setQuantity: (_: Quantity) => void;
 }
@@ -241,6 +242,7 @@ function useContextSetup({
     queryParams,
     searchForVehicle,
     setData,
+    setIsAddingToCart,
     setIsLoading,
     setQuantity,
   };

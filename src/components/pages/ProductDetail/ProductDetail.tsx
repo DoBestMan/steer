@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import Breadcrumbs from '~/components/global/Breadcrumbs/Breadcrumbs';
 import DataStructure from '~/components/global/DataStructure/DataStructure';
@@ -79,6 +79,12 @@ function ProductDetail({ serverData }: ProductDetailData) {
 
   const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
 
+  function reloadPageIfPersisted({ persisted }: { persisted: boolean }) {
+    if (persisted) {
+      window.location.reload();
+    }
+  }
+
   function toggleModal() {
     setIsLocationModalOpen(!isLocationModalOpen);
   }
@@ -87,6 +93,18 @@ function ProductDetail({ serverData }: ProductDetailData) {
     hasReviews: !!(reviews.reviews && reviews.reviews.length),
     refId: ANCHORS.REVIEWS_ANCHOR,
   };
+
+  /*
+    implemented for SIM-10712
+    used for browsers (mostly Safari) that cache the previous page
+    when navigating away from simpletire and going back.
+  */
+  useEffect(() => {
+    window.addEventListener('pageshow', reloadPageIfPersisted);
+    return () => {
+      window.removeEventListener('pageshow', reloadPageIfPersisted);
+    };
+  }, []);
 
   return (
     <>

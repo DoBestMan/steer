@@ -70,6 +70,7 @@ function PDPActionBar({
     quantity,
     isAddingToCart,
     searchForVehicle,
+    setIsAddingToCart,
     setQuantity,
   } = useProductDetailContext();
   const { vehicle } = useUserPersonalizationContext();
@@ -102,6 +103,7 @@ function PDPActionBar({
 
   function toggleRoadHazard() {
     setIsRoadHazardOpen((isOpen) => !isOpen);
+    setIsAddingToCart(false);
   }
 
   function openQuantitySelector() {
