@@ -15,7 +15,7 @@ function useIOImage(
   shouldLazyLoad = false,
   srcSet: string,
   imgRef?: RefObject<HTMLElement>,
-  intersectionObserverOptions?: {},
+  intersectionObserverOptions?: Record<string, unknown>,
 ) {
   const [loadedSrc, setLoadedSrc] = useState('');
 

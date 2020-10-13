@@ -4,7 +4,7 @@ import Error from '~/pages/_error';
 
 export type PageResponse<T> = T | { errorStatusCode: number };
 
-const WithErrorPageHandling = <P extends {}>(
+const WithErrorPageHandling = <P extends unknown>(
   Component: ComponentType<P>,
 ): ComponentType<PageResponse<P>> => (props) => {
   if ('errorStatusCode' in props) {

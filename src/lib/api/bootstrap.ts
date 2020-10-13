@@ -27,7 +27,7 @@ async function asyncApiBootstrap() {
 
   fetchSetUrlBase('/api');
 
-  /* eslint-disable  @typescript-eslint/camelcase*/
+  /* eslint-disable  @typescript-eslint/naming-convention*/
   // region_id is a possible query params passed by Google
   // We want to forward it to the users/session API call
   // so the BE can force a certain region instead of relying on Ip detection
@@ -44,7 +44,7 @@ async function asyncApiBootstrap() {
       regionId: String(region_id),
     };
   }
-  /* eslint-enable  @typescript-eslint/camelcase*/
+  /* eslint-enable  @typescript-eslint/naming-convention*/
 
   const res = await apiGetUserSession(getUserSessionParams);
   if (!res.isSuccess) {
@@ -73,7 +73,7 @@ export function apiBootstrap() {
   return apiBootstrapPromise;
 }
 
-// eslint-disable-next-line @typescript-eslint/camelcase
+// eslint-disable-next-line @typescript-eslint/naming-convention
 export function TEST_apiBootstrapPromiseReset() {
   apiBootstrapPromise = null;
 }

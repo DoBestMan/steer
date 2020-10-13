@@ -1,6 +1,6 @@
 declare global {
   interface Window {
-    fby: { push: (array: string[] | {}) => void };
+    fby: { push: (array: (string | Record<string, unknown>)[]) => void };
   }
 }
 

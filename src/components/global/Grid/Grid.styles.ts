@@ -7,7 +7,7 @@ import {
   StylesMap,
 } from '~/lib/constants';
 
-const gridColumnByMQ = (mq: Breakpoint): object => {
+const gridColumnByMQ = (mq: Breakpoint): Record<string, unknown> => {
   return {
     gridColumnGap: `${GAP_COLUMNS[mq]}px`,
     gridTemplateColumns: `[wrapper-start] ${

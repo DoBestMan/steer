@@ -1,7 +1,7 @@
 import UI from '~/assets/ui-dictionary/ui.json';
 
 export type UIType = {
-  [key: string]: {} | string | number | boolean;
+  [key: string]: Record<string, unknown> | string | number | boolean;
 };
 
 export type InterpolationType = {

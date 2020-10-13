@@ -207,7 +207,7 @@ function getIconOthersContent(): string {
 /* eslint no-console: 0 */
 console.log('Step 2: Compile Sprite');
 
-spriter.compile((_error: string, result: object) => {
+spriter.compile((_error: string, result: Record<string, unknown>) => {
   /* Write `result` files to disk */
   for (const mode in result) {
     for (const resource in result[mode]) {

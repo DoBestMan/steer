@@ -11,7 +11,7 @@ if (!fs.existsSync(dir)) {
   fs.mkdirSync(dir);
 }
 
-/* eslint-disable  @typescript-eslint/camelcase*/
+/* eslint-disable  @typescript-eslint/naming-convention*/
 const source = 'public/static/assets/master-icon.png';
 const configuration = {
   appDescription: null,
@@ -39,7 +39,7 @@ const configuration = {
   theme_color: themeColor,
   version: '1.0',
 };
-/* eslint-enable  @typescript-eslint/camelcase*/
+/* eslint-enable  @typescript-eslint/naming-convention*/
 
 const callback = function (err, res) {
   if (err) {

@@ -16,9 +16,9 @@ function ModuleAccordion(props: SiteModuleAccordion) {
             data-component="module-accordion-container"
           >
             <Accordion
+              {...props}
               id={props.id ? props.id : randomString()}
               theme={THEME.LIGHT}
-              {...props}
             />
           </div>
         </GridItem>

@@ -21,7 +21,7 @@ export class Emitter<T> {
     );
   }
 
-  // eslint-disable-next-line @typescript-eslint/camelcase
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   DEBUG_destroy() {
     this.subscribers = [];
   }

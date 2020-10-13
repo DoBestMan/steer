@@ -6,7 +6,10 @@ function Invite() {
   return <ReferAFriend />;
 }
 
-export const getStaticProps: GetStaticProps<{}> = async () => {
+export const getStaticProps: GetStaticProps<Record<
+  string,
+  unknown
+>> = async () => {
   return {
     props: {},
   };

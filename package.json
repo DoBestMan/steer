@@ -94,8 +94,8 @@
     "@types/react-transition-group": "^4.2.4",
     "@types/smoothscroll-polyfill": "^0.3.1",
     "@types/youtube": "^0.0.39",
-    "@typescript-eslint/eslint-plugin": "^2.27.0",
-    "@typescript-eslint/parser": "^2.27.0",
+    "@typescript-eslint/eslint-plugin": "^4.4.0",
+    "@typescript-eslint/parser": "^4.4.0",
     "add": "^2.0.6",
     "babel-loader": "^8.1.0",
     "babel-plugin-dynamic-import-node": "^2.3.3",
@@ -125,7 +125,7 @@
     "start-server-and-test": "^1.11.3",
     "ts-jest": "^25.3.1",
     "ts-loader": "^6.2.2",
-    "typescript": "^3.8.3",
+    "typescript": "^4.0.3",
     "yarn": "^1.22.4"
   },
   "importSort": {

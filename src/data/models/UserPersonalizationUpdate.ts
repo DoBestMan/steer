@@ -16,4 +16,9 @@ export interface UserPersonalizationUpdate {
    * User ZIP Code
    */
   userLocationZip?: string | null;
+
+  /**
+   * User ZIP Code
+   */
+  regionId?: string | null;
 }

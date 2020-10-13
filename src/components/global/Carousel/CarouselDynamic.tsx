@@ -11,7 +11,7 @@ export interface Props extends ReactIdSwiperProps {
   children: ReactIdSwiperChildren;
   freeScroll?: boolean;
   getSwiper?: (swiper: SwiperInstance) => void;
-  params?: {};
+  params?: Record<string, unknown>;
   shortSwipes?: boolean;
   threshold?: number;
 }

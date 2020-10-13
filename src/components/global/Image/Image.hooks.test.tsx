@@ -23,7 +23,7 @@ const fallbackSrc = 'large.jpg';
 
 describe('useImageProps', () => {
   beforeEach(() => {
-    /* eslint-disable @typescript-eslint/ban-ts-ignore */
+    /* eslint-disable @typescript-eslint/ban-ts-comment */
     // @ts-ignore
     global.IntersectionObserver = jest.fn(function () {
       // @ts-ignore
@@ -33,7 +33,7 @@ describe('useImageProps', () => {
       // @ts-ignore
       this.disconnect = jest.fn();
     });
-    /* eslint-enable @typescript-eslint/ban-ts-ignore */
+    /* eslint-enable @typescript-eslint/ban-ts-comment */
   });
 
   test('is responsive, lazy loading - native browser support', () => {
@@ -97,7 +97,7 @@ describe('useImageProps', () => {
     act(() => {
       // Hack to mock IntersectionObserver inspired by
       // https://gist.github.com/ianmcnally/4b68c56900a20840b6ca840e2403771c#file-lazy-image-spec-js-L70
-      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       const observerCallback = global.IntersectionObserver.mock.calls[0][0];
       observerCallback([{ isIntersecting: true }]);
@@ -130,7 +130,7 @@ describe('useImageProps', () => {
     act(() => {
       // Hack to mock IntersectionObserver inspired by
       // https://gist.github.com/ianmcnally/4b68c56900a20840b6ca840e2403771c#file-lazy-image-spec-js-L70
-      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       const observerCallback = global.IntersectionObserver.mock.calls[0][0];
       observerCallback([{ isIntersecting: true }]);
@@ -220,7 +220,7 @@ describe('useImageProps', () => {
     act(() => {
       // Hack to mock IntersectionObserver inspired by
       // https://gist.github.com/ianmcnally/4b68c56900a20840b6ca840e2403771c#file-lazy-image-spec-js-L70
-      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       const observerCallback = global.IntersectionObserver.mock.calls[0][0];
       observerCallback([{ isIntersecting: true }]);

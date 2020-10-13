@@ -55,6 +55,7 @@ export async function backendUpdateUserPersonalization({
   userLocationGooglePlacesId,
   userLocationZip,
   userSessionId,
+  regionId,
 }: { userSessionId: string } & UserPersonalizationUpdate) {
   const response = await fetchWithErrorHandling<
     { userPersonalization: UserPersonalization },
@@ -66,6 +67,7 @@ export async function backendUpdateUserPersonalization({
       gaClientId,
       userLocationGooglePlacesId,
       userLocationZip,
+      regionId,
     },
     method: 'put',
     params: {

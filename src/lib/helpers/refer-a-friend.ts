@@ -10,7 +10,7 @@ let isAppending = false;
 const appendScript = (onLoadCallBack: () => void) => {
   // Inject global variabl first
 
-  /* eslint-disable  @typescript-eslint/camelcase*/
+  /* eslint-disable  @typescript-eslint/naming-convention*/
   window._talkableq = window._talkableq || [];
   window._talkableq.push(['init', { site_id: 'simpletire' }]);
 
@@ -25,7 +25,7 @@ const appendScript = (onLoadCallBack: () => void) => {
   ]);
 
   window._talkableq.push(['register_affiliate', {}]);
-  /* eslint-enable  @typescript-eslint/camelcase*/
+  /* eslint-enable  @typescript-eslint/naming-convention*/
 
   const script = document.createElement('script');
   script.type = 'text/javascript';

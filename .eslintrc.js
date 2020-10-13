@@ -32,6 +32,8 @@ module.exports = {
       'error',
       { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
     ],
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+
     'jest/no-focused-tests': 'error',
     'jest/prefer-inline-snapshots': 'error',
     'jest/no-identical-title': 'error',

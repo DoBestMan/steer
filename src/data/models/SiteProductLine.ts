@@ -50,5 +50,5 @@ export interface SiteProductLine {
    * @type {Array<object>}
    * @memberof SiteProductLine
    */
-  imageList?: Array<object>;
+  imageList?: Array<Record<string, unknown>>;
 }

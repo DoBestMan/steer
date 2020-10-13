@@ -59,7 +59,12 @@ export function uiJSX(
   interpolationParams?: InterpolationType,
 ): JSX.Element {
   const keys = key.split('.');
-  let currentObject: UIType | {} | string | number = UIData;
+  let currentObject:
+    | UIType
+    | Record<string, unknown>
+    | boolean
+    | string
+    | number = UIData;
   let answer: string = key;
 
   keys.forEach((k, i) => {

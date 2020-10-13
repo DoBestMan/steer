@@ -10,8 +10,8 @@ interface FocusTrapInstance {
 interface Window {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   __attentive?: any;
-  _talkableq?: object[];
-  dataLayer?: object[];
+  _talkableq?: unknown[];
+  dataLayer?: unknown[];
   google_optimize?: { get: (experimentID: string) => string | undefined };
   showTalkablePopup?: () => void;
 }

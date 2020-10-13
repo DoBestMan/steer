@@ -4,7 +4,9 @@ let ReactDOMServer: any;
 let createElement: any;
 
 if (!process.browser) {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
   ReactDOMServer = require('react-dom/server');
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
   createElement = require('react').createElement;
 }
 

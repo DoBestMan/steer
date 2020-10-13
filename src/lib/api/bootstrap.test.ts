@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/camelcase */
+/* eslint-disable @typescript-eslint/naming-convention */
 jest.mock('lscache');
 jest.mock('../fetch');
 jest.mock('./session');

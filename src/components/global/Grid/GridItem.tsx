@@ -39,7 +39,7 @@ function gridColumnByMQ(
   nbColumn: number,
   isWrapperStart: boolean,
   isWrapperEnd: boolean,
-): object {
+): Record<string, unknown> {
   const fullbleedStart = isWrapperStart
     ? `[wrapper-start] ${GRID_MARGIN[mq] - GAP_COLUMNS[mq]}px`
     : '';
@@ -88,13 +88,13 @@ function getSubgridTemplate(mq: Breakpoint, gridColumn: string) {
   };
 }
 
-function gridColumnProperty(value = 'start/end'): object {
+function gridColumnProperty(value = 'start/end'): Record<string, unknown> {
   return {
     gridColumn: value,
   };
 }
 
-function gridRowProperty(value?: string): object {
+function gridRowProperty(value?: string): Record<string, unknown> {
   if (!value) {
     return {};
   }
@@ -153,7 +153,7 @@ function styledContainer(props: ContainerProps) {
   };
 }
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 const Container = styled('div')<ContainerProps>(styledContainer);
 

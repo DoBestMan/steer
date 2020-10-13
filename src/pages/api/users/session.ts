@@ -5,6 +5,7 @@ import { backendBootstrap } from '~/lib/backend/bootstrap';
 import {
   backendCreateUserSession,
   backendGetUserPersonalization,
+  backendUpdateUserPersonalization,
 } from '~/lib/backend/users';
 import { getUserSessionId, hasAuthorizationHeader } from '~/lib/utils/api';
 
@@ -12,6 +13,15 @@ type UserSessionResponse = NextApiResponse<{
   userPersonalization: UserPersonalization;
   userSessionId: string;
 }>;
+
+function getRegionIdFromRequest(request: NextApiRequest) {
+  const regionId =
+    request.query.regionId && typeof request.query.regionId === 'string'
+      ? request.query.regionId
+      : undefined;
+
+  return regionId;
+}
 
 async function createUserSession(
   request: NextApiRequest,
@@ -28,14 +38,11 @@ async function createUserSession(
     return;
   }
 
-  const regionId =
-    request.query.regionId && typeof request.query.regionId === 'string'
-      ? request.query.regionId
-      : undefined;
+  const forcedRegionId = getRegionIdFromRequest(request);
 
   const res = await backendCreateUserSession({
     userIp,
-    regionId,
+    regionId: forcedRegionId,
   });
 
   if (res.isSuccess) {
@@ -57,9 +64,19 @@ async function getUserSession(
     return;
   }
 
-  const res = await backendGetUserPersonalization({
-    userSessionId,
-  });
+  const forcedRegionId = getRegionIdFromRequest(request);
+
+  let res = undefined;
+  if (forcedRegionId) {
+    res = await backendUpdateUserPersonalization({
+      userSessionId,
+      regionId: forcedRegionId,
+    });
+  } else {
+    res = await backendGetUserPersonalization({
+      userSessionId,
+    });
+  }
 
   if (res.isSuccess) {
     response.json({
