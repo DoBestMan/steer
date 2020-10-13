@@ -9,15 +9,17 @@ interface Props {
   dataItems: Array<SiteGraphicTile>;
   imageMaxWidthCustomStyles?: CSSStyles;
   itemCustomStyle?: CSSStyles;
+  removeBackground?: boolean;
 }
 
 function CircularIllustrationCarousel({
   dataItems,
   itemCustomStyle,
   imageMaxWidthCustomStyles,
+  removeBackground,
 }: Props) {
   return (
-    <div css={styles.root}>
+    <div css={[styles.root, removeBackground && styles.removeBackground]}>
       <div css={styles.carousel}>
         {dataItems && (
           <Carousel

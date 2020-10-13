@@ -33,6 +33,9 @@ const styles: StylesMap = {
     height: 'auto',
     width: 150,
   },
+  removeBackground: {
+    background: 'none',
+  },
   root: {
     padding: `${SPACING.SIZE_60}px 0`,
     backgroundColor: COLORS.LIGHT.GRAY_10,

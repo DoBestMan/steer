@@ -39,6 +39,11 @@ export const styles: StylesMap = {
   carouselHeader: {
     backgroundColor: COLORS.LIGHT.GRAY_10,
   },
+  carouselItem: {
+    ':first-of-type': {
+      marginLeft: 0,
+    },
+  },
   reviewContainer: [
     containerSpacing.spacingTopS40XL60,
     {
