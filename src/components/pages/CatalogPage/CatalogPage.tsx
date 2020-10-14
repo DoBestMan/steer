@@ -6,9 +6,16 @@ import { useCatalogProductsContext } from '~/context/CatalogProducts.context';
 import { useCatalogSummaryContext } from '~/context/CatalogSummary.context';
 import { useFooterContext } from '~/context/Footer.context';
 import { useNavContext } from '~/context/Nav.context';
+import {
+  SiteCatalogProductItem,
+  SiteCatalogProductItemEnum,
+} from '~/data/models/SiteCatalogProductItem';
+import { LOCAL_STORAGE, PROPERTIES } from '~/lib/constants/localStorage';
+import { isBrowser } from '~/lib/utils/browser';
 
 import CatalogGrid from './CatalogGrid/CatalogGrid';
 import CatalogLoading from './CatalogLoading/CatalogLoading';
+import { scrollToId } from './CatalogPage.helpers';
 import styles from './CatalogPage.styles';
 import { defaultTheme, headerAdvanced } from './CatalogPage.theme';
 import CatalogSummary from './CatalogSummary/CatalogSummary';
@@ -21,10 +28,13 @@ interface Props {
 function CatalogPage({ catalogGridRef }: Props) {
   const { setNavTheme, theme: navTheme } = useNavContext();
   const {
+    displayedProducts,
     fetchNewProducts,
     isAdvancedView,
     onPreviewFilters,
     previewFiltersData,
+    setDisplayedProducts,
+    setIsAdvancedView,
     scrollToGrid,
     siteCatalogProducts,
   } = useCatalogProductsContext();
@@ -67,6 +77,47 @@ function CatalogPage({ catalogGridRef }: Props) {
       setIsFooterVisible(true);
     };
   }, [stage, setIsFooterVisible]);
+
+  useEffect(() => {
+    if (isBrowser()) {
+      const handleSetAdvanceView =
+        window.localStorage &&
+        window.localStorage.getItem(LOCAL_STORAGE[PROPERTIES.ADVANCED_VIEW]) ===
+          'true'
+          ? async () => {
+              const siteCatalogProducts = await fetchNewProducts(1);
+
+              if (!siteCatalogProducts) {
+                setDisplayedProducts(displayedProducts);
+                return;
+              }
+
+              const { siteCatalogProductsResultList } = siteCatalogProducts;
+              const updatedProducts = siteCatalogProductsResultList.filter(
+                (result): result is SiteCatalogProductItem =>
+                  result.type ===
+                  SiteCatalogProductItemEnum.SiteCatalogProductItem,
+              );
+
+              setIsAdvancedView(true);
+              setDisplayedProducts(updatedProducts);
+            }
+          : () => null;
+
+      handleSetAdvanceView();
+    }
+    // This hook should not be called when `fetchNewProducts` and `displayedProducts` is called/set elsewhere
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    setIsAdvancedView,
+    setDisplayedProducts,
+    siteCatalogProducts,
+    isAdvancedView,
+  ]);
+
+  useEffect(() => {
+    scrollToId(scrollToGrid, hasResults);
+  }, [hasResults, displayedProducts, scrollToGrid, siteCatalogProducts]);
 
   return (
     <ThemeProvider

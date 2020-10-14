@@ -150,6 +150,10 @@ export function removeHashParams(url: string): string {
   return url.split('#')[0];
 }
 
+export function removeHashInString(str: string): string {
+  return str.replace('#', '');
+}
+
 export function removeUrlParams(url: string): string {
   return removeHashParams(removeQueryParams(url));
 }

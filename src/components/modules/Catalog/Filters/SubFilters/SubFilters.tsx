@@ -9,6 +9,7 @@ import {
 } from '~/data/models/SiteCatalogSortListItem';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { BREAKPOINT_SIZES, THEME } from '~/lib/constants';
+import { LOCAL_STORAGE, PROPERTIES } from '~/lib/constants/localStorage';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import { FilterContentTypes } from '../Filter.types';
@@ -52,9 +53,20 @@ export default function SubFilters({
 
   const onToggleView = async () => {
     const newParams = isAdvancedView ? {} : { skipGroups: 'true' };
+    const shouldSetToLocalStorage =
+      window && window.localStorage
+        ? (hasAdvancedView: boolean) => {
+            window.localStorage.setItem(
+              LOCAL_STORAGE[PROPERTIES.ADVANCED_VIEW],
+              `${hasAdvancedView}`,
+            );
+          }
+        : () => null;
     setIsAdvancedView(!isAdvancedView);
+    shouldSetToLocalStorage(!isAdvancedView);
     handleUpdateResults(newParams as Record<string, string>).catch((e) => {
       setIsAdvancedView(isAdvancedView);
+      shouldSetToLocalStorage(false);
       setGlobalToastMessage(e.message);
     });
   };

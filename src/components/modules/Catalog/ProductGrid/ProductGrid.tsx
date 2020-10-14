@@ -1,9 +1,11 @@
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import ProductListing from '~/components/global/ProductListing/ProductListing';
+import { addHashForScroll } from '~/components/pages/CatalogPage/CatalogPage.helpers';
 import { SiteCatalogProductItem } from '~/data/models/SiteCatalogProductItem';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { BREAKPOINT_SIZES } from '~/lib/constants';
+import { PRODUCT_GRID_ITEM_HASH } from '~/lib/constants/product';
 
 interface Props {
   isLoading?: boolean;
@@ -32,6 +34,9 @@ const HIGHLIGHT_PATTERNS = {
 
 function ProductGrid({ productList }: Props) {
   const { bk } = useBreakpoints();
+  const handleProductClick = () => () => {
+    addHashForScroll(PRODUCT_GRID_ITEM_HASH);
+  };
 
   return (
     <Grid data-testid="product-grid">
@@ -46,12 +51,14 @@ function ProductGrid({ productList }: Props) {
               gridColumnL={isHighlighted ? 'span 6' : 'span 3'}
               key={`${product?.name}-${i}`}
             >
-              <ProductListing
-                product={product}
-                isHighlighted={isHighlighted}
-                imageList={product?.imageList || []}
-                testId={`product-listing-${i}`}
-              />
+              <div onClick={handleProductClick()}>
+                <ProductListing
+                  product={product}
+                  isHighlighted={isHighlighted}
+                  imageList={product?.imageList || []}
+                  testId={`product-listing-${i}`}
+                />
+              </div>
             </GridItem>
           );
         })}

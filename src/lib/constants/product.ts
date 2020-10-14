@@ -4,3 +4,5 @@ export const PRODUCT = {
   BRAND_IMAGE_WIDTHS: [200, 400, 600],
   NAME_MAX_LENGTH: 40,
 };
+
+export const PRODUCT_GRID_ITEM_HASH = 'product-grid-item';
