@@ -4,7 +4,7 @@ import { typography } from '~/styles/typography.styles';
 const styles: StylesMap = {
   brand: {
     display: 'inline-block',
-    marginBottom: SPACING.SIZE_05,
+    marginBottom: SPACING.SIZE_15,
     span: typography.tertiaryHeadline,
     [MQ.M]: {
       marginBottom: SPACING.SIZE_10,

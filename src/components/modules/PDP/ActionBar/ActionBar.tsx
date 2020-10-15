@@ -6,7 +6,6 @@ import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Loading from '~/components/global/Loading/Loading';
 import { useProductDetailContext } from '~/components/pages/ProductDetail/ProductDetail.context';
-import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
 import { THEME } from '~/lib/constants';
 import { formatDollars } from '~/lib/utils/string';
 import { ui } from '~/lib/utils/ui-dictionary';
@@ -14,14 +13,15 @@ import { uiJSX } from '~/lib/utils/ui-dictionary-jsx';
 
 import styles from './ActionBar.styles';
 
-const DynamicQuantitySelector = dynamic(() =>
-  import('../QuantitySelector/QuantitySelector.container'),
+const DynamicQuantitySelector = dynamic(
+  () => import('../QuantitySelector/QuantitySelector.container'),
 );
-const DynamicRoadHazardModal = dynamic(() =>
-  import('../RoadHazardModal/RoadHazardModal.container'),
+const DynamicRoadHazardModal = dynamic(
+  () => import('../RoadHazardModal/RoadHazardModal.container'),
 );
 
 interface PDPActionBarProps {
+  handleOnDisabled?: (value: boolean) => void;
   rearPrice?: string | null;
   rearSize?: string | null;
   roadHazard: {
@@ -55,6 +55,7 @@ function calculateTotalPrice({
 }
 
 function PDPActionBar({
+  handleOnDisabled,
   rearPrice,
   rearSize,
   roadHazard,
@@ -69,11 +70,10 @@ function PDPActionBar({
     addToCart,
     quantity,
     isAddingToCart,
-    searchForVehicle,
+    // searchForVehicle,
     setIsAddingToCart,
     setQuantity,
   } = useProductDetailContext();
-  const { vehicle } = useUserPersonalizationContext();
 
   const [isQuantitySelectorOpen, setIsQuantitySelectorOpen] = useState(false);
   const [isRoadHazardOpen, setIsRoadHazardOpen] = useState(false);
@@ -123,23 +123,44 @@ function PDPActionBar({
     setQuantity({ front });
   }
 
+  function handleError() {
+    handleOnDisabled && handleOnDisabled(true);
+  }
+
   if (isTireLine) {
     return (
       <div css={styles.root}>
-        {startingPrice && (
+        {!handleOnDisabled && startingPrice && (
           <p css={styles.startingAtValue}>
             {ui('pdp.stickyBar.startingAtLabel', {
               value: startingPrice ? formatDollars(startingPrice) : '',
             })}
           </p>
         )}
-        {startingPrice && startingPrice !== '0'
-          ? !vehicle && (
-              <Button onClick={searchForVehicle} theme={theme}>
-                {ui('pdp.stickyBar.findYourSize')}
-              </Button>
-            )
-          : null}
+        <Button
+          isToggle
+          onClick={openQuantitySelector}
+          theme={theme}
+          css={styles.quantityButton}
+        >
+          {ui(
+            quantity.front === 1
+              ? 'pdp.stickyBar.changeQuantity'
+              : 'pdp.stickyBar.changeQuantityPlural',
+            { quantity: quantity.front },
+          )}
+          <Icon name={ICONS.CHEVRON_DOWN} css={styles.dropdownIcon} />
+        </Button>
+        <span css={styles.buttonWrapper} onClick={handleError}>
+          <Button
+            data-testid="add-to-cart"
+            theme={theme}
+            css={styles.disabledButton}
+            isDisabled
+          >
+            {uiJSX('pdp.stickyBar.addToCart', { value: '' })}
+          </Button>
+        </span>
       </div>
     );
   }

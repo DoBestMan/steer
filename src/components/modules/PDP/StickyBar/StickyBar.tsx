@@ -2,7 +2,8 @@ import dynamic from 'next/dynamic';
 import { RefObject, useEffect, useState } from 'react';
 
 import StickyBar from '~/components/modules/StickyBar/StickyBar';
-import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
+import { useProductDetailContext } from '~/components/pages/ProductDetail/ProductDetail.context';
+// import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
 import { SiteImage } from '~/data/models/SiteImage';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { THEME } from '~/lib/constants';
@@ -78,9 +79,8 @@ function PDPStickyBar({
 }: PDPStickyBarProps) {
   const [isActive, setIsActive] = useState(!avoidSection);
   const [theme, setTheme] = useState(THEME.ORANGE);
-  const { vehicle } = useUserPersonalizationContext();
   const { isLoading, lessThan } = useBreakpoints();
-  const isTireLine = !tireSize && !rearSize;
+  const { setShowSelectError } = useProductDetailContext();
 
   const secondaryLabel = parseLabel({
     productLine,
@@ -135,11 +135,6 @@ function PDPStickyBar({
     return null;
   }
 
-  // There's no action to tireline's stickybar when vehicle is known
-  if (isTireLine && vehicle) {
-    return null;
-  }
-
   const isHidden = !isActive && (!lessThan.L || isLoading);
 
   return (
@@ -158,6 +153,7 @@ function PDPStickyBar({
           theme={theme}
           tirePrice={tirePrice}
           tireSize={tireSize}
+          handleOnDisabled={setShowSelectError}
         />
       </StickyBar>
     </div>

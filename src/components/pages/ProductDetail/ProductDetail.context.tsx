@@ -68,6 +68,8 @@ export interface ProductDetailContextProps {
   setIsAddingToCart: (_: boolean) => void;
   setIsLoading: (_: boolean) => void;
   setQuantity: (_: Quantity) => void;
+  setShowSelectError: (_: boolean) => void;
+  showSelectError: boolean;
 }
 
 const ProductDetailContext = createContext<ProductDetailContextProps>();
@@ -100,6 +102,7 @@ function useContextSetup({
   const { vehicle } = useUserPersonalizationContext();
   const { query, asPath } = router;
   const [isLoading, setIsLoading] = useState(!isPLA);
+  const [showSelectError, setShowSelectError] = useState(false);
   const [hashParams, setHashParams] = useState(getParsedHash(asPath));
   const queryParams = getQueryParams({
     hashParams,
@@ -245,6 +248,8 @@ function useContextSetup({
     setIsAddingToCart,
     setIsLoading,
     setQuantity,
+    setShowSelectError,
+    showSelectError,
   };
 }
 

@@ -81,7 +81,7 @@ function SizeButton({
   if (!size) {
     const label =
       availableSizes > 1
-        ? ui('pdp.productInfo.selectSizeButton', { availableSizes })
+        ? ui('pdp.productInfo.selectSizeButton')
         : ui('pdp.productInfo.selectSingleSizeButton');
     return (
       <>

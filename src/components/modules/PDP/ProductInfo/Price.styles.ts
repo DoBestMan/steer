@@ -55,7 +55,7 @@ const styles: StylesMap = {
     typography.primarySubhead,
     {
       color: COLORS.LIGHT.GRAY_70,
-      marginBottom: SPACING.SIZE_20, // To compensate container's margin
+      // marginBottom: SPACING.SIZE_20, // To compensate container's margin
 
       span: [
         typography.primaryHeadline,

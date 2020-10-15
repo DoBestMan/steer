@@ -30,6 +30,9 @@ const styles: StylesMap = {
   addToCartLoading: {
     position: 'absolute',
   },
+  buttonWrapper: {
+    flex: 1,
+  },
   decorator: {
     ':before': {
       padding: '0 2ch',
@@ -41,6 +44,27 @@ const styles: StylesMap = {
     alignItems: 'center',
     display: 'flex',
   },
+  disabledButton: {
+    justifyContent: 'center',
+    marginLeft: SPACING.SIZE_10,
+    width: '100%',
+
+    [MQ.M]: {
+      marginLeft: SPACING.SIZE_20,
+    },
+    [MQ.XL]: {
+      marginLeft: SPACING.SIZE_10,
+    },
+
+    // eslint-disable-next-line sort-keys
+    ':disabled': {
+      // To keep button width untouched
+      '> span': {
+        height: 0,
+        visibility: 'hidden',
+      },
+    },
+  },
   dropdownIcon: {
     height: 5,
     marginLeft: SPACING.SIZE_05,
@@ -49,6 +73,16 @@ const styles: StylesMap = {
   },
   price: {
     display: 'flex',
+  },
+  quantityButton: {
+    [MQ.XL]: {
+      maxWidth: getColumnsCalc({
+        breakpoint: 'XL',
+        columns: 3,
+        includeExtraGutter: false,
+        includeContainerMargin: false,
+      }),
+    },
   },
   root: {
     alignItems: 'center',
@@ -75,7 +109,7 @@ const styles: StylesMap = {
     },
 
     // eslint-disable-next-line sort-keys
-    '> button:last-of-type': {
+    '> span:last-of-type': {
       flex: 1,
 
       [MQ.L]: {

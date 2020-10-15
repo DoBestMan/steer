@@ -9,7 +9,8 @@ import Toast from '~/components/global/Toast/Toast';
 import { useProductDetailContext } from '~/components/pages/ProductDetail/ProductDetail.context';
 import { SiteCatalogBrand } from '~/data/models/SiteCatalogBrand';
 import { SitePrice } from '~/data/models/SitePrice';
-import { THEME } from '~/lib/constants';
+import { useBreakpoints } from '~/hooks/useBreakpoints';
+import { BREAKPOINT_SIZES, THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import { SizeFinderProps } from '../SizeFinder/SizeFinder';
@@ -88,16 +89,45 @@ function ProductInfo({
   startingPrice,
   volatileAvailability,
 }: Props) {
-  const { isLoading } = useProductDetailContext();
+  const {
+    isLoading,
+    currentSizeIndex,
+    showSelectError,
+    setShowSelectError,
+  } = useProductDetailContext();
   const [shouldDisplayError, setShouldDisplayError] = useState(hasError);
+  const { bk } = useBreakpoints();
 
   function handleDismissError() {
     setShouldDisplayError(false);
   }
 
   useEffect(() => {
+    if (currentSizeIndex > -1) {
+      setShowSelectError(false);
+    }
+  }, [currentSizeIndex, setShowSelectError]);
+
+  useEffect(() => {
     setShouldDisplayError(hasError);
   }, [setShouldDisplayError, hasError]);
+
+  function renderPrice() {
+    return (
+      <div css={[styles.pricesWrapper]}>
+        <Price
+          callForPricing={callForPricing}
+          price={price}
+          priceLabel={priceLabel}
+          startingPrice={isTireLine ? startingPrice : undefined}
+          sameSizeSearchResults={sameSizeSearchResults}
+          sameSizeSearchURL={sameSizeSearchURL}
+          size={size}
+          volatileAvailability={volatileAvailability}
+        />
+      </div>
+    );
+  }
 
   if (!isLoading && hasError) {
     return (
@@ -173,43 +203,53 @@ function ProductInfo({
     <>
       <div css={styles.wrapper}>
         <div css={styles.nameWrapper}>
-          <ProductLine
-            productName={productName}
-            brand={brand}
-            brandURL={brandURL}
-          />
-          {shouldShowSizeSelector ? (
-            <div css={!rating && styles.sizeNoRating}>
-              <DynamicSizeButton
-                availableSizes={availableSizes}
-                size={size}
-                loadSpeedRating={loadSpeedRating}
-                sizeFinder={sizeFinder}
+          <div css={styles.topPart}>
+            <div>
+              <ProductLine
+                productName={productName}
+                brand={brand}
+                brandURL={brandURL}
               />
             </div>
+            <Rating reviews={reviews} rating={rating} />
+          </div>
+          {shouldShowSizeSelector ? (
+            <>
+              <div css={styles.selectorWrapper}>
+                <div>
+                  <DynamicSizeButton
+                    availableSizes={availableSizes}
+                    size={size}
+                    loadSpeedRating={loadSpeedRating}
+                    sizeFinder={sizeFinder}
+                  />
+                </div>
+                {isLoading && !isTireLine
+                  ? null
+                  : [BREAKPOINT_SIZES.M, BREAKPOINT_SIZES.S].includes(bk) &&
+                    !isOutOfStock &&
+                    renderPrice()}
+              </div>
+              {showSelectError && (
+                <span role="alert" css={styles.errorMessage}>
+                  <span css={styles.questionMark}>
+                    {ui('pdp.productInfo.questionMark')}
+                  </span>
+                  {ui('pdp.productInfo.selectError')}
+                </span>
+              )}
+            </>
           ) : (
             <div css={styles.loadingSizeSelector} />
           )}
-          <Rating reviews={reviews} rating={rating} />
         </div>
         {isLoading && !isTireLine ? (
-          <div css={styles.loading} />
+          bk !== BREAKPOINT_SIZES.M && <div css={styles.loading} />
         ) : (
-          <>
-            {!isOutOfStock && (
-              <div css={styles.pricesWrapper}>
-                <Price
-                  callForPricing={callForPricing}
-                  price={price}
-                  priceLabel={priceLabel}
-                  startingPrice={isTireLine ? startingPrice : undefined}
-                  sameSizeSearchResults={sameSizeSearchResults}
-                  sameSizeSearchURL={sameSizeSearchURL}
-                  size={size}
-                  volatileAvailability={volatileAvailability}
-                />
-              </div>
-            )}
+          <div css={styles.priceAndActionBarWrapper}>
+            {![BREAKPOINT_SIZES.M, BREAKPOINT_SIZES.S].includes(bk) &&
+              !isOutOfStock &&
+              renderPrice()}
             <div css={styles.actionBar}>
               <DynamicPDPActionBar
                 roadHazard={roadHazard}
@@ -217,9 +257,10 @@ function ProductInfo({
                 startingPrice={startingPrice}
                 tirePrice={price?.salePriceInCents}
                 tireSize={size}
+                handleOnDisabled={setShowSelectError}
               />
             </div>
-          </>
+          </div>
         )}
       </div>
       {!isLoading && !!promoTags?.length && (

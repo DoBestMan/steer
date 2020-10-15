@@ -352,14 +352,16 @@
       "outOfStock": "Currently out of stock",
       "outOfStockDescription": "Check back soon or view other tires",
       "volatileAvailability": "4 left at this price!",
-      "selectSizeButton": "{{availableSizes}} sizes available",
+      "selectSizeButton": "Select tire size",
       "selectSizeLabel": "Select size",
       "selectSingleSizeButton": "1 size available",
       "sizeQuantity": "{{quantity}} tire",
       "sizeQuantityPlural": "{{quantity}} tires",
       "frontTireSize": "Front {{size}}",
       "rearTireSize": "Rear {{size}}",
-      "startingAtLabel": "Starting at {{value}}"
+      "startingAtLabel": "Starting at {{value}}",
+      "selectError": "You’ll need to select your tire size first.",
+      "questionMark": "?"
     },
     "sizeFinder": {
       "fits": "Fits your {{make}}"

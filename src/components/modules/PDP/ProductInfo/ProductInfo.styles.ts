@@ -61,6 +61,16 @@ const styles: StylesMap = {
       width: '100%',
     },
   },
+  errorMessage: [
+    typography.smallCopyTight,
+    {
+      alignItems: 'center',
+      color: COLORS.GLOBAL.RED,
+      display: 'flex',
+      [MQ.M]: {},
+      [MQ.L]: {},
+    },
+  ],
   loadIndex: {
     fontWeight: 'normal',
   },
@@ -100,6 +110,9 @@ const styles: StylesMap = {
       width: 260,
     },
   },
+  marginTopM20: {
+    marginTop: -SPACING.SIZE_15,
+  },
   name: {
     display: 'block',
   },
@@ -115,20 +128,22 @@ const styles: StylesMap = {
       flexBasis: 'auto',
     },
   },
+  priceAndActionBarWrapper: {
+    alignItems: 'flex-end',
+    display: 'flex',
+    justifyContent: 'space-between',
+    [MQ.L]: { marginTop: SPACING.SIZE_20 },
+    width: '100%',
+  },
   pricesWrapper: {
     animation: CONSTANTS.FADE_IN_ANIMATION,
-    marginBottom: SPACING.SIZE_35,
     maxWidth: CONSTANTS.HEADER_MAX_WIDTH,
+    position: 'absolute',
+    right: 0,
     textAlign: 'right',
-
-    [MQ.M]: {
-      marginBottom: SPACING.SIZE_30,
-    },
-
     [MQ.L]: {
+      position: 'unset',
       textAlign: 'left',
-      marginTop: SPACING.SIZE_40,
-      maxWidth: '100%',
     },
   },
   promoTags: {
@@ -138,6 +153,31 @@ const styles: StylesMap = {
 
     [MQ.L]: {
       marginTop: SPACING.SIZE_20,
+    },
+  },
+  questionMark: {
+    alignItems: 'center',
+    border: `1px solid ${COLORS.ORANGE.SHADE_15_SOLID}`,
+    borderRadius: SPACING.SIZE_05,
+    color: COLORS.ORANGE.SHADE_15_SOLID,
+    display: 'flex',
+    height: SPACING.SIZE_15,
+    justifyContent: 'center',
+    marginRight: SPACING.SIZE_10,
+    width: SPACING.SIZE_15,
+  },
+  selectorWrapper: {
+    alignItems: 'flex-end',
+    display: 'flex',
+    justifyContent: 'space-between',
+    marginBottom: SPACING.SIZE_10,
+    position: 'relative',
+    [MQ.M]: {
+      marginBottom: SPACING.SIZE_10,
+    },
+    [MQ.L]: {
+      marginBottom: SPACING.SIZE_20,
+      marginTop: 0,
     },
   },
   sizeButton: [
@@ -156,6 +196,10 @@ const styles: StylesMap = {
     [MQ.L]: {
       marginBottom: 0,
     },
+  },
+  topPart: {
+    display: 'flex',
+    justifyContent: 'space-between',
   },
   wrapper: {
     alignItems: 'flex-end',

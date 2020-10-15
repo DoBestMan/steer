@@ -18,16 +18,18 @@ function defaultSpacing(rule: string, offset = 0) {
 
 const styles: StylesMap = {
   anchorBar: {
-    marginTop: SPACING.SIZE_25,
+    marginTop: SPACING.SIZE_20,
 
     [MQ.M]: {
-      marginTop: SPACING.SIZE_40,
+      marginTop: SPACING.SIZE_25,
     },
   },
   breadcrumbs: {
+    marginTop: SPACING.SIZE_10,
     marginBottom: SPACING.SIZE_20,
 
     [MQ.M]: {
+      marginTop: 'unset',
       marginBottom: SPACING.SIZE_40,
     },
 

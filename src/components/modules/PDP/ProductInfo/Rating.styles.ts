@@ -1,4 +1,4 @@
-import { COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
+import { COLORS, MQ, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
@@ -13,9 +13,8 @@ const styles: StylesMap = {
     },
   ],
   reviews: {
-    alignItems: 'center',
+    alignItems: 'start',
     display: 'flex',
-    marginTop: SPACING.SIZE_20,
     position: 'relative',
   },
   reviewsLink: {

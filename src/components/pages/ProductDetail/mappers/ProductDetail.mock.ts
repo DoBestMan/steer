@@ -1444,4 +1444,6 @@ export const productDetailContextMock: ProductDetailContextProps = {
   setIsAddingToCart: () => {},
   setIsLoading: () => {},
   setQuantity: () => {},
+  setShowSelectError: () => {},
+  showSelectError: false,
 };

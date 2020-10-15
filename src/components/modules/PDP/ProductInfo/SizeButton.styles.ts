@@ -11,6 +11,7 @@ const styles: CSSObject = {
   },
   icon: {
     marginLeft: 15,
+    color: COLORS.GLOBAL.ORANGE,
 
     [MQ.M]: {
       marginLeft: 17,
@@ -37,7 +38,12 @@ const styles: CSSObject = {
       },
     },
   ],
+  selectSize: {
+    color: COLORS.GLOBAL.ORANGE,
+    borderBottom: '2px dotted currentColor',
+  },
   size: {
+    color: COLORS.GLOBAL.ORANGE,
     borderBottom: '2px dotted currentColor',
   },
 };
