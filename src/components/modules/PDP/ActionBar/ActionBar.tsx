@@ -13,11 +13,11 @@ import { uiJSX } from '~/lib/utils/ui-dictionary-jsx';
 
 import styles from './ActionBar.styles';
 
-const DynamicQuantitySelector = dynamic(
-  () => import('../QuantitySelector/QuantitySelector.container'),
+const DynamicQuantitySelector = dynamic(() =>
+  import('../QuantitySelector/QuantitySelector.container'),
 );
-const DynamicRoadHazardModal = dynamic(
-  () => import('../RoadHazardModal/RoadHazardModal.container'),
+const DynamicRoadHazardModal = dynamic(() =>
+  import('../RoadHazardModal/RoadHazardModal.container'),
 );
 
 interface PDPActionBarProps {

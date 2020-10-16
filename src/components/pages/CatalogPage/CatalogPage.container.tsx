@@ -36,7 +36,6 @@ function CatalogPageContainer({
   const { query } = useRouter();
   const { isSearchOpen } = useSearchModalContext();
   const meta = mapDataToMeta({ searchBy, searchByParams });
-
   const catalogGridRef = useRef<HTMLDivElement | null>(null);
 
   // begin fetching data from /summary and /products

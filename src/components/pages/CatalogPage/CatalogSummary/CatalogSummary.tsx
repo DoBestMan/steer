@@ -20,9 +20,10 @@ import VehicleContainer from './components/VehicleContainer';
 
 interface Props {
   exploreMore: () => void;
+  totalTireCount: number;
 }
 
-function CatalogSummary({ exploreMore }: Props) {
+function CatalogSummary({ exploreMore, totalTireCount }: Props) {
   const {
     contentStage,
     showLoadingInterstitial,
@@ -86,6 +87,7 @@ function CatalogSummary({ exploreMore }: Props) {
           customerServiceEnabled={customerServiceEnabled}
           data-component="MessageContainer"
           exploreMore={exploreMore}
+          totalTireCount={totalTireCount}
         />
       </Content>
     </Root>

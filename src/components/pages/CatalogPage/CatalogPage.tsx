@@ -123,7 +123,12 @@ function CatalogPage({ catalogGridRef }: Props) {
     <ThemeProvider
       theme={{ ...defaultTheme, ...(isAdvancedView && headerAdvanced) }}
     >
-      {showSummary && <CatalogSummary exploreMore={scrollToGrid} />}
+      {showSummary && (
+        <CatalogSummary
+          exploreMore={scrollToGrid}
+          totalTireCount={totalResult}
+        />
+      )}
       {showGrid && siteCatalogProducts && previewFiltersData && (
         <>
           <div css={styles.grid} ref={catalogGridRef}>

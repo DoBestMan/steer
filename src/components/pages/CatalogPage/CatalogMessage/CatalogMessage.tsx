@@ -1,6 +1,6 @@
 import { useTheme } from 'emotion-theming';
 import { useRouter } from 'next/router';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Transition } from 'react-transition-group';
 import { TransitionStatus } from 'react-transition-group/Transition';
 
@@ -21,7 +21,7 @@ import { useUserPersonalizationContext } from '~/context/UserPersonalization.con
 import { SiteCatalogSummaryBuildIn } from '~/data/models/SiteCatalogSummaryBuildIn';
 import { SiteCatalogSummaryPrompt } from '~/data/models/SiteCatalogSummaryPrompt';
 import { VehicleMetadata } from '~/data/models/VehicleMetadata';
-import { BUTTON_STYLE, LINK_TYPES } from '~/lib/constants';
+import { BUTTON_STYLE, LINK_TYPES, THEME } from '~/lib/constants';
 import { eventEmitters } from '~/lib/events/emitters';
 import { transformSrcLogoToWhite } from '~/lib/utils/cloudinary/cloudinary';
 import { isValidStaticModal } from '~/lib/utils/modal';
@@ -115,10 +115,12 @@ export function BuildInMessage({
 }
 
 interface DataMomentMessageProps {
+  exploreMore?: () => void;
   openStaticModal: (modalId: string) => void;
   setStage(stage: STAGES): void;
   showLoadingInterstitial: boolean;
   siteCatalogSummaryPrompt: SiteCatalogSummaryPrompt | null;
+  totalTireCount?: number;
 }
 
 export function DataMomentMessage({
@@ -126,14 +128,24 @@ export function DataMomentMessage({
   showLoadingInterstitial,
   siteCatalogSummaryPrompt,
   openStaticModal,
+  exploreMore,
+  totalTireCount,
 }: DataMomentMessageProps) {
   const { message } = useTheme();
-  const { asPath } = useRouter();
+  const { asPath, query } = useRouter();
   const { selectVehicle } = useUserPersonalizationContext();
-
+  const [step, setStep] = useState<number>(1);
+  let showTopPicks = false;
+  let mustShow = false;
+  if (siteCatalogSummaryPrompt) {
+    mustShow = siteCatalogSummaryPrompt.mustShow;
+  }
   /**
    * If coming from Search, set programmatic focus to the message content
    */
+  if (showLoadingInterstitial && step === 1 && !mustShow) {
+    showTopPicks = true;
+  }
   const titleRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (showLoadingInterstitial && titleRef && titleRef.current) {
@@ -164,7 +176,65 @@ export function DataMomentMessage({
   const hasMultipleCtas =
     siteCatalogSummaryPrompt?.ctaList &&
     siteCatalogSummaryPrompt.ctaList.length > 1;
-
+  if (showTopPicks && step === 1) {
+    return (
+      <Grid css={styles.container}>
+        <GridItem
+          css={styles.containerInner}
+          gridColumnM="4/end"
+          gridColumnL="8/end"
+        >
+          <div ref={titleRef} tabIndex={-1}>
+            <Markdown
+              css={[styles.heading, styles.dataMomentHeading]}
+              renderers={{ paragraph: 'h1' }}
+            >
+              {ui('catalog.message.topPicksTitle')}
+            </Markdown>
+          </div>
+          <div css={styles.dataMomentCtaWrapper} data-testid="catalog-cta-list">
+            <Button
+              onClick={async function () {
+                (await setStage) && setStage(STAGES.RESULTS);
+                if (exploreMore) {
+                  setTimeout(exploreMore, 500);
+                }
+              }}
+              style={BUTTON_STYLE.OUTLINED}
+              theme={THEME.ORANGE}
+            >
+              {totalTireCount && totalTireCount > 0
+                ? ui('catalog.message.showAllButton', { totalTireCount })
+                : ui('catalog.message.showAllButton', {
+                    totalTireCount: 'all',
+                  })}
+            </Button>
+            <Button
+              onClick={function () {
+                if (!query.oem) {
+                  setStage && setStage(STAGES.RESULTS);
+                  // Reset scroll position to top
+                  window.scrollTo(0, 0);
+                  return;
+                }
+                setStep(2);
+              }}
+              style={BUTTON_STYLE.SOLID}
+              theme={message.buttonTheme}
+            >
+              {ui('catalog.message.topPicksButton')}
+            </Button>
+          </div>
+          <Markdown isEditorial css={styles.dataMomentCopy}>
+            {ui('catalog.message.secondaryHeadline')}
+          </Markdown>
+          <Markdown isEditorial css={styles.secondarySubHeadline}>
+            {ui('catalog.message.secondarySubHeadline')}
+          </Markdown>
+        </GridItem>
+      </Grid>
+    );
+  }
   return (
     siteCatalogSummaryPrompt && (
       <Grid css={styles.container}>
@@ -363,12 +433,14 @@ interface CatalogMessageProps {
   customerServiceEnabled?: boolean;
   customerServiceNumber: { display: string; value: string };
   exploreMore: () => void;
+  totalTireCount: number;
 }
 
 function CatalogMessage({
   customerServiceNumber,
   customerServiceEnabled,
   exploreMore,
+  totalTireCount,
 }: CatalogMessageProps) {
   const {
     contentStage,
@@ -406,6 +478,7 @@ function CatalogMessage({
               showLoadingInterstitial={showLoadingInterstitial}
               // used only by top picks
               exploreMore={exploreMore}
+              totalTireCount={totalTireCount}
             />
           )}
         </MessageContainer>

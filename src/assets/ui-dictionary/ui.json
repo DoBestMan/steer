@@ -229,6 +229,13 @@
       "noResultsSizeLabel": "Tire size",
       "noResultsBrandLabel": "Brand",
       "noResultsPopularLabel": "Popular tires"
+    },
+    "message":{
+      "topPicksTitle": "Start with our top 5 picks?",
+      "topPicksButton": "Show top picks",
+      "showAllButton": "Show {{totalTireCount}} tires",
+      "secondaryHeadline": "<h3>Most drivers choose from our top picks</h3>",
+      "secondarySubHeadline": "<b>They include the best matches of this tire size based on popularity, user rating and price.</b>"
     }
   },
   "error": {
