@@ -42,7 +42,7 @@ function Reviews({
   reviews,
   sources,
   seeAllReviewsLink,
-  seeAllReviewsLinkLabel = ui('reviews.seeAll'),
+  seeAllReviewsLinkLabel,
   title = ui('reviews.noReviews'),
   writeReviewLink,
   writeReviewLinkLabel = ui('reviews.writeReview'),

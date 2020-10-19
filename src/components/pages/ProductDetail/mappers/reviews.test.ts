@@ -78,6 +78,7 @@ describe('pages/ProductDetails/mappers/reviews', () => {
         href: '/brands/continental-tires/dh2/reviews',
         isExternal: false,
       },
+      seeAllReviewsLinkLabel: 'See all customer reviews for dh2 tires',
       sources: { googleShopping: 72, simpleTire: 115 },
       title: '187 Reviews',
       writeReviewLink: {

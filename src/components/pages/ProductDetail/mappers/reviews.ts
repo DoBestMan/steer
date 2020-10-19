@@ -26,6 +26,7 @@ export function mapDataToReviews({
 
   // Force as a string
   let brand = query.brand as string;
+  const productLineName = productLine.replace(/-/g, ' ');
 
   // Make sure 'brand' includes '-tires'
   if (!brand.match(/-tires$/)) {
@@ -76,12 +77,17 @@ export function mapDataToReviews({
     isExternal: false,
   };
 
+  const seeAllReviewsLinkLabel = ui('reviews.seeAll', {
+    tire: productLineName,
+  });
+
   return {
     momentList,
     ratings,
     ratingStars,
     reviews,
     seeAllReviewsLink,
+    seeAllReviewsLinkLabel,
     sources,
     title,
     writeReviewLink,
