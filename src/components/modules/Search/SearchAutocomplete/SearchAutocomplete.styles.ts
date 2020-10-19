@@ -17,23 +17,35 @@ const CONSTANTS = {
 // To mirror padding in SerachButton.styles
 const SEARCH_PADDING_XL = 65 / 2;
 
+const DIMENTION_ICON = {
+  S: {
+    width: 15,
+    height: 15,
+  },
+  M: {
+    width: 20,
+    height: 20,
+  },
+  L: {
+    width: 34,
+    height: 34,
+  },
+};
+
 const styles: StylesMap = {
   autocompleteGrid: {
     backgroundColor: COLORS.GLOBAL.ORANGE,
     borderBottom: '1px solid transparent',
     transition: `border-color ${TIME.MS100}ms ease`,
-    [MQ.L]: {
-      borderBottom: BORDERS.SOLID_GRAY_80_1PX,
-    },
   },
   autocompleteGridItem: {
-    padding: `${SPACING.SIZE_25}px ${SPACING.SIZE_50}px ${SPACING.SIZE_25}px 0`,
+    padding: `${SPACING.SIZE_90}px ${SPACING.SIZE_25}px 0 0`,
     position: 'relative',
     [MQ.M]: {
-      padding: `${SPACING.SIZE_30}px 65px ${SPACING.SIZE_30}px 0`,
+      padding: `${SPACING.SIZE_120}px 0px 0 0`,
     },
     [MQ.XL]: {
-      padding: `${SEARCH_PADDING_XL}px 65px ${SEARCH_PADDING_XL}px 0`,
+      padding: `${SEARCH_PADDING_XL}px 0px ${SEARCH_PADDING_XL}px 0`,
     },
   },
   autocompleteGridItemRearTireState: {
@@ -71,7 +83,21 @@ const styles: StylesMap = {
       color: COLORS.GLOBAL.BLACK,
     },
   ],
-  closeSearchButton: [typography.labelCopyTight],
+  closeSearchButton: {
+    '& svg': {
+      color: COLORS.GLOBAL.WHITE,
+      height: DIMENTION_ICON.S.height,
+      width: DIMENTION_ICON.S.width,
+      [MQ.M]: {
+        width: DIMENTION_ICON.M.width,
+        height: DIMENTION_ICON.M.height,
+      },
+      [MQ.L]: {
+        width: DIMENTION_ICON.L.width,
+        height: DIMENTION_ICON.L.height,
+      },
+    },
+  },
   closeSearchButtonRearTire: {
     '&:focus > span': {
       color: COLORS.GLOBAL.ORANGE,
@@ -99,14 +125,14 @@ const styles: StylesMap = {
     top: SPACING.SIZE_30,
     [MQ.M]: {
       right: GRID_MARGIN.M,
-      top: SPACING.SIZE_40,
+      top: SPACING.SIZE_50,
     },
     [MQ.L]: {
       right: GRID_MARGIN.L,
     },
     [MQ.XL]: {
       right: GRID_MARGIN.XL,
-      top: SPACING.SIZE_45,
+      top: SPACING.SIZE_40,
     },
   },
   errorLabel: [
@@ -129,11 +155,9 @@ const styles: StylesMap = {
     },
   ],
   header: {
-    borderBottom: BORDERS.SOLID_TRANSPARENT_1PX,
     left: 0,
     position: 'fixed',
     top: 0,
-    transition: `border-color ${TIME.MS150}ms ease`,
     width: '100%',
     zIndex: Z_INDEX.FRONT,
   },

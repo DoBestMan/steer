@@ -645,7 +645,8 @@
       "stepTwo": "Check the owner’s manual, invoice or insurance card",
       "stepThree": "Contact your manufacturer",
       "title": "Identify your vehicle trim"
-    }
+    },
+    "clear": "Clear"
   },
   "tireReviews": {
     "more": "See more",

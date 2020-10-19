@@ -31,6 +31,7 @@ import {
   initialSearchTireSizeData,
   initialSearchVehicleData,
 } from './Search.data';
+import { SearchResult } from './Search.types';
 
 const DEFAULT_CLEARANCE = {
   bottom: 0,
@@ -192,6 +193,7 @@ export function useSearchResults() {
   const [isLoadingResults, setIsLoadingResults] = useState(false);
   const [hasSearchResultsError, setHasSearchResultsError] = useState(false);
   const abortController = useRef<AbortController | null>(null);
+  const [searchHistory, setSearchHistory] = useState<Array<SearchResult>>([]);
 
   useEffect(() => {
     abortController.current = new AbortController();
@@ -253,14 +255,34 @@ export function useSearchResults() {
     function () {
       abortSearchRequest();
       setSearchResults(emptyResultData);
+      setSearchHistory([]);
     },
-    [setSearchResults],
+    [setSearchResults, setSearchHistory],
   );
+
+  const pushSearchHistory = (search: SearchResult) => {
+    setSearchHistory((current) => [...current, search]);
+  };
+
+  const popSearchHistory = () => {
+    if (!searchHistory.length) {
+      return;
+    }
+    setSearchHistory((current) => {
+      const temp = [...current];
+      temp.pop();
+      return temp;
+    });
+
+    return searchHistory[searchHistory.length - 2];
+  };
 
   return {
     clearSearchResults,
     hasSearchResultsError,
     isLoadingResults,
+    popSearchHistory,
+    pushSearchHistory,
     searchQuery,
     searchResults,
   };
@@ -347,6 +369,7 @@ export function useInputQuery() {
 
   const getCurrentInputQuery = () =>
     activeInputType === SearchInputEnum.PRIMARY ? primaryQuery : secondaryQuery;
+
   const setCurrentInputQuery = (query: {
     queryText?: string;
     queryType?: string;

@@ -39,10 +39,10 @@ export const AUTOCOMPLETE_CONSTANTS = {
   DEFAULT_VALUE: '',
   SHOW_LOADING_TIMEOUT: 800,
   GRID_COLUMN_PROPS: {
-    gridColumnS: '2/6',
+    gridColumnS: '2/8',
     gridColumnM: '2/8',
-    gridColumnL: '3/14',
-    gridColumnXL: '3/14',
+    gridColumnL: '3/13',
+    gridColumnXL: '3/13',
   },
 };
 
@@ -52,6 +52,7 @@ export interface Props {
   hasSearchResultsError: boolean;
   isLoadingResults?: boolean;
   noExactMatch?: boolean;
+  onBackButtonClick: () => void;
   onCancelSelection: () => void;
   onCloseSearchClick: () => void;
   onInputChange: (value: string) => void;
@@ -71,6 +72,7 @@ function SearchAutocomplete({
   hasSearchResultsError,
   isLoadingResults,
   noExactMatch,
+  onBackButtonClick,
   onCancelSelection,
   onCloseSearchClick,
   onInputChange,
@@ -167,6 +169,13 @@ function SearchAutocomplete({
     focusOnInput();
 
     onCancelSelection();
+  };
+
+  const handleBackButtonClick = () => {
+    setSelectedItemIndex([0, -1]);
+    focusOnInput();
+
+    onBackButtonClick();
   };
 
   const handleEnterKeyDown = () => {
@@ -319,26 +328,6 @@ function SearchAutocomplete({
           ]}
         >
           <GridItem
-            gridColumnL="2/3"
-            gridColumnXL="2/3"
-            css={[
-              styles.searchIconGridItem,
-              isRearTireState && styles.searchIconGridRearTire,
-              activeInputType === SearchInputEnum.SECONDARY &&
-                styles.searchIconSecondaryInput,
-            ]}
-          >
-            <div css={styles.searchIconWrapper}>
-              <Icon
-                name={ICONS.MAIN_SEARCH}
-                css={[
-                  styles.searchIcon,
-                  (!!queryText || searchState) && styles.searchIconActive,
-                ]}
-              />
-            </div>
-          </GridItem>
-          <GridItem
             {...AUTOCOMPLETE_CONSTANTS.GRID_COLUMN_PROPS}
             css={[
               styles.autocompleteGridItem,
@@ -354,6 +343,7 @@ function SearchAutocomplete({
               }
               label={<SearchLabel />}
               onChange={handleOnChange}
+              onBackButtonClick={handleBackButtonClick}
               onClearInputClick={handleCancelSelection}
               onFocus={onInputFocus}
               onKeyDown={handleKeyDown}
@@ -376,6 +366,7 @@ function SearchAutocomplete({
                 clearInputComponent={clearSecondaryInputComponent}
                 isDisabled={!isFrontTireComplete}
                 onChange={handleOnChange}
+                onBackButtonClick={onBackButtonClick}
                 onClearInputClick={handleRemoveSecondaryInput}
                 onFocus={onInputFocus}
                 onKeyDown={handleKeyDown}
@@ -387,7 +378,6 @@ function SearchAutocomplete({
             </GridItem>
           )}
         </Grid>
-
         {!isRearTireState && (
           <CloseSearchButton
             isRearTireState={isRearTireState}

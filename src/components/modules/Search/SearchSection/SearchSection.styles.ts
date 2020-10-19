@@ -5,15 +5,8 @@ import { typography } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
   container: {
-    '.listItem': {
-      '&:not(:last-child)': {
-        paddingBottom: SPACING.SIZE_15,
-      },
-      [MQ.L]: {
-        '&:not(:last-child)': {
-          paddingBottom: SPACING.SIZE_10,
-        },
-      },
+    '.isSelected': {
+      borderColor: COLORS.GLOBAL.WHITE,
     },
     '.itemButton': [
       disableGlobalFocus,
@@ -26,6 +19,16 @@ const styles: StylesMap = {
         [MQ.M]: typography.primaryHeadline,
       },
     ],
+    '.listItem': {
+      '&:not(:last-child)': {
+        paddingBottom: SPACING.SIZE_15,
+      },
+      [MQ.L]: {
+        '&:not(:last-child)': {
+          paddingBottom: SPACING.SIZE_10,
+        },
+      },
+    },
     '.secondaryItemDisplay': [
       typography.smallCopyTight,
       {
@@ -34,8 +37,12 @@ const styles: StylesMap = {
         [MQ.M]: typography.bodyCopyTight,
       },
     ],
-    '.isSelected': {
-      borderColor: COLORS.GLOBAL.WHITE,
+    marginTop: 75,
+    [MQ.M]: {
+      marginTop: 115,
+    },
+    [MQ.XL]: {
+      marginTop: 0,
     },
   },
   eyebrow: [

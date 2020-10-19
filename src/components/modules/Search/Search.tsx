@@ -16,7 +16,7 @@ import debounce from '~/lib/utils/debounce';
 import { isInRouteRegexList, isSamePath } from '~/lib/utils/routes';
 
 import InitialSearch from './InitialSearch';
-import { useInputQuery } from './Search.hooks';
+import { useInputQuery, useSearchResults } from './Search.hooks';
 import styles from './Search.styles';
 import {
   Results,
@@ -100,6 +100,8 @@ function Search({
     setSecondaryQuery,
   } = useInputQuery();
 
+  const { popSearchHistory, pushSearchHistory } = useSearchResults();
+
   const { resultMetadata, siteSearchResultGroupList } = results;
 
   // Scroll to top of search list when the search results change
@@ -170,6 +172,15 @@ function Search({
     clearSearchResults();
     onSetSearchState('');
     setCurrentInputQuery(resetQuery);
+  };
+
+  const onBackButtonClick = () => {
+    const previousHistory = popSearchHistory();
+    if (previousHistory) {
+      handleActionQuery(previousHistory);
+    } else {
+      onCancelSelection();
+    }
   };
 
   const onToggleRearTire = (isShowing: boolean) => {
@@ -281,6 +292,7 @@ function Search({
 
   const handleValueSelection = (searchResult: SearchResult) => {
     const { action } = searchResult;
+    pushSearchHistory(searchResult);
 
     if (action.type === SearchActionType.QUERY) {
       handleActionQuery(searchResult);
@@ -291,6 +303,7 @@ function Search({
 
   const handleSearchCategoryClick = (searchResult: SearchResult) => {
     const { action } = searchResult;
+    pushSearchHistory(searchResult);
 
     const category =
       action.type === SearchActionType.QUERY ? action.queryType : '';
@@ -370,6 +383,7 @@ function Search({
         queryText={primaryQuery.queryText}
         searchState={searchState}
         secondaryQueryText={secondaryQuery.queryText}
+        onBackButtonClick={onBackButtonClick}
       />
       <Transition
         exit={false}
