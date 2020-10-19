@@ -42,10 +42,6 @@ function SubNavContentWrapper({
     );
   }
 
-  if (!isOpen) {
-    return null;
-  }
-
   return <>{children}</>;
 }
 
