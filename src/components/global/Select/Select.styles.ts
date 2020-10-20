@@ -49,6 +49,8 @@ const styles: StylesMap = {
     borderRadius: SPACING.SIZE_15,
     boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
     boxSizing: 'border-box',
+    maxHeight: 270,
+    overflowY: 'scroll',
     padding: SPACING.SIZE_30,
     position: 'absolute',
     transform: `translateY(${SPACING.SIZE_80}px)`,
