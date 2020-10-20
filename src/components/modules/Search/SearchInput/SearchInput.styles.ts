@@ -44,6 +44,10 @@ const styles: StylesMap = {
   ],
   comboboxWrapper: {
     flexGrow: 1,
+    height: SPACING.SIZE_30,
+    [MQ.M]: {
+      height: 'auto',
+    },
   },
   inactive: {
     color: COLORS.ORANGE.TINT_70,

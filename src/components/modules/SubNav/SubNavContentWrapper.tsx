@@ -41,6 +41,9 @@ function SubNavContentWrapper({
       </SubNavModal>
     );
   }
+  if (!isOpen) {
+    return null;
+  }
 
   return <>{children}</>;
 }
