@@ -72,35 +72,37 @@ function Accordion({
 
   return (
     <div>
-      {items
-        .slice(0, shouldShowAll ? undefined : itemsToShow)
-        .map((item, idx) => {
-          const isExpanded = expandedItems.includes(idx);
+      {items.map((item, idx) => {
+        const isExpanded = expandedItems.includes(idx);
 
-          return (
-            <div
-              key={idx}
-              ref={itemsRefs[idx]}
-              css={[
-                tStyles[theme].itemContainer,
-                isExpanded && [tStyles[theme].itemContainerActive],
-              ]}
+        return (
+          <div
+            key={idx}
+            ref={itemsRefs[idx]}
+            css={[
+              tStyles[theme].itemContainer,
+              isExpanded && [tStyles[theme].itemContainerActive],
+              !shouldShowAll &&
+                itemsToShow &&
+                idx > itemsToShow &&
+                styles.hideItem,
+            ]}
+          >
+            <AccordionItem
+              label={item.label?.toString() || ''}
+              value={item.value?.toString() || ''}
+              id={`${id}-${idx}`}
+              content={item.content?.toString() || ''}
+              onToggle={toggleItemHandler(idx)}
+              isExpanded={isExpanded}
+              linkTarget={linkTarget}
+              theme={theme}
             >
-              <AccordionItem
-                label={item.label?.toString() || ''}
-                value={item.value?.toString() || ''}
-                id={`${id}-${idx}`}
-                content={item.content?.toString() || ''}
-                onToggle={toggleItemHandler(idx)}
-                isExpanded={isExpanded}
-                linkTarget={linkTarget}
-                theme={theme}
-              >
-                {children && Children.toArray(children)[idx]}
-              </AccordionItem>
-            </div>
-          );
-        })}
+              {children && Children.toArray(children)[idx]}
+            </AccordionItem>
+          </div>
+        );
+      })}
       {!shouldShowAll && (
         <button onClick={showAllHandler} css={[styles.showAll, styles[theme]]}>
           <span>{showAllLabel}</span>

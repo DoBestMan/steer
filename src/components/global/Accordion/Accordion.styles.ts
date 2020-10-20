@@ -36,6 +36,9 @@ export const tStyles = {
   },
 };
 const styles: StylesMap = {
+  hideItem: {
+    display: 'none',
+  },
   showAll: [
     typography.primarySubhead,
     {
