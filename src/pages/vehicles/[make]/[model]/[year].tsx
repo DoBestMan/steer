@@ -54,13 +54,13 @@ export const getServerSideProps: GetServerSideProps<PageResponse<
   CatalogPageData
 >> = async (context) => {
   backendBootstrap({ request: context.req });
-  const { make = '', model, year, ...vehicleParams } = context.query;
+  const { make, model, year, ...vehicleParams } = context.query;
   const formattedMake = removeTireFromQueryParam(make);
 
   const apiArgs = {
     make: formattedMake,
-    model: model || '',
-    year: year || '',
+    model,
+    year,
     query: getStringifiedParams(vehicleParams),
   };
   const [summaryRes, productsRes] = await Promise.all([

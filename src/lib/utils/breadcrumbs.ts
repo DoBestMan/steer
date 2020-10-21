@@ -1,5 +1,3 @@
-import { ParsedUrlQuery } from 'querystring';
-
 import { BreadcrumbsItem } from '~/components/global/Breadcrumbs/Breadcrumbs';
 import { ROUTE_LABELS, ROUTE_MAP, ROUTES } from '~/lib/constants';
 import { removeUrlParams } from '~/lib/utils/string';
@@ -29,7 +27,7 @@ export function mapPathnameToBreadcrumbs({
   asPath: string;
   labels: { [key: string]: string };
   pathname: string;
-  query: { [key: string]: string | string[] } | ParsedUrlQuery;
+  query: { [key: string]: string | string[] };
   querystringNodeLabel?: string | null;
 }): BreadcrumbsItem[] {
   const splitPathname = pathname.match(new RegExp(absoluteUrlGroups, 'g'));
@@ -109,7 +107,7 @@ export function mapArrayToBreadcrumbs(
     type?: ROUTES;
     url?: string;
   }[],
-  query?: ParsedUrlQuery,
+  query?: { [key: string]: string | string[] },
 ): BreadcrumbsItem[] {
   return items
     .map((item, index, array) => {

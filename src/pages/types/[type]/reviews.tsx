@@ -18,7 +18,7 @@ export const getServerSideProps: GetServerSideProps<PageResponse<
   ReviewListingServerData
 >> = async (context) => {
   backendBootstrap({ request: context.req });
-  const { type = '' } = context.query;
+  const { type } = context.query;
   const isRouteValid = validateRoute(type, validTiresQuery);
 
   if (!isRouteValid) {

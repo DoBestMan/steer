@@ -2,7 +2,7 @@ import { InputHTMLAttributes } from 'react';
 
 import styles from './Radio.styles';
 
-interface Props // use custom on change
+interface Props  // use custom on change
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
   isActive?: boolean;
   isDisabled?: boolean;
