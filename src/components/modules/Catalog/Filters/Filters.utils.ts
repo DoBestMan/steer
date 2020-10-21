@@ -161,7 +161,15 @@ export function getInitialFiltersState(
         (key) => (initialState[key] = selectedSort.value[key]),
       );
   }
-
+  const hashCheckQuery = window.location.hash;
+  const availableHashFilter = hashCheckQuery.split('#');
+  if (
+    availableHashFilter.length > 1 &&
+    availableHashFilter[1].includes('speedRating')
+  ) {
+    const speedRating = availableHashFilter[1].split('-');
+    initialState[speedRating[0]] = speedRating[1];
+  }
   return {
     initialState,
     isPopularActive,
