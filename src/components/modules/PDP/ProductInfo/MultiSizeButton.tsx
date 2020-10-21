@@ -11,8 +11,8 @@ import { ui } from '~/lib/utils/ui-dictionary';
 import styles from './MultiSizeButton.styles';
 import { ProductInfoProps } from './ProductInfo';
 
-const DynamicQuantitySelector = dynamic(() =>
-  import('../QuantitySelector/QuantitySelector.container'),
+const DynamicQuantitySelector = dynamic(
+  () => import('../QuantitySelector/QuantitySelector.container'),
 );
 
 type Props = Pick<

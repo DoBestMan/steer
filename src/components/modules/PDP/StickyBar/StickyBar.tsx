@@ -12,8 +12,8 @@ import { ui } from '~/lib/utils/ui-dictionary';
 import { STICKY_BAR_HEIGHT } from '../../StickyBar/StickyBar.styles';
 import styles from './StickyBar.styles';
 
-const DynamicActionBar = dynamic(() =>
-  import('~/components/modules/PDP/ActionBar/ActionBar'),
+const DynamicActionBar = dynamic(
+  () => import('~/components/modules/PDP/ActionBar/ActionBar'),
 );
 
 export interface PDPStickyBarProps {

@@ -209,7 +209,9 @@ function useContextSetup({
         CONSTANTS.PRODUCT_DETAIL_ROUTE,
         {
           ...queryParams,
-          ...(isPLA && { brand: appendTiresToString(router.query.brand) }),
+          ...(isPLA && {
+            brand: appendTiresToString(router.query.brand || ''),
+          }),
         },
       );
       const querystring = queryString.stringify({

@@ -1,6 +1,7 @@
 import isStrictEqual from 'fast-deep-equal';
 import { ServerResponse } from 'http';
 import queryString, { ParsedQuery } from 'query-string';
+import { ParsedUrlQuery } from 'querystring';
 
 import { SiteQueryParams } from '~/data/models/SiteQueryParams';
 
@@ -37,7 +38,7 @@ export function isRouteDiameterFormat(path?: string) {
  */
 export function interpolateRoute(
   route: string,
-  templateVars: { [key: string]: string | string[] },
+  templateVars: { [key: string]: string | string[] } | ParsedUrlQuery,
   withQueryParams?: boolean,
 ): string {
   if (withQueryParams) {

@@ -53,7 +53,7 @@ export const getServerSideProps: GetServerSideProps<PageResponse<
   CatalogPageData
 >> = async (context) => {
   backendBootstrap({ request: context.req });
-  const { brand, categoryOrType, ...vehicleParams } = context.query;
+  const { brand = '', categoryOrType, ...vehicleParams } = context.query;
   const isRouteValid = validateRoute(brand, validTiresQuery);
 
   if (!isRouteValid) {
@@ -65,7 +65,7 @@ export const getServerSideProps: GetServerSideProps<PageResponse<
 
   const apiArgs = {
     brand: brandName,
-    category: categoryOrType,
+    category: categoryOrType || '',
     query: getStringifiedParams({ ...vehicleParams, pageType: PAGE_TYPE }),
   };
   const [summaryRes, productsRes] = await Promise.all([

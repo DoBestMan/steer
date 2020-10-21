@@ -20,7 +20,7 @@ export const getServerSideProps: GetServerSideProps<PageResponse<
   CategoryPageProps
 >> = async (context) => {
   backendBootstrap();
-  const { category } = context.query;
+  const { category = '' } = context.query;
   const isRouteValid = validateRoute(category, validTiresQuery);
 
   if (!isRouteValid) {

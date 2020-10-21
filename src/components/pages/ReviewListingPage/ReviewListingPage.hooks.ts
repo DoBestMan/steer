@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import { ParsedUrlQuery } from 'querystring';
 import { useCallback, useEffect, useState } from 'react';
 
 import { useGlobalToastContext } from '~/context/GlobalToast.context';
@@ -16,9 +17,11 @@ interface ResponseProps {
 }
 
 function usePaginationAndSort(
-  queryParams: {
-    [name: string]: string | string[];
-  },
+  queryParams:
+    | {
+        [name: string]: string | string[];
+      }
+    | ParsedUrlQuery,
   reviewsList: SiteProductReviewsListingItem[],
   sortList: SiteCatalogSortListItem[],
 ): ResponseProps {

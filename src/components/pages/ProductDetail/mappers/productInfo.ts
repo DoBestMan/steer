@@ -42,7 +42,7 @@ export function mapDataToProductInfo({
   } = siteProduct;
   const brandName = siteProductLine.brand;
   const brandURL = interpolateRoute(ROUTE_MAP[ROUTES.BRAND_DETAIL], {
-    brand,
+    brand: brand || '',
   });
   const productName = siteProductLine.name;
   const startingPrice = siteProductLine.startingPriceInCents;
