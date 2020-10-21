@@ -84,50 +84,52 @@ export default function SubFilters({
 
   return (
     <div css={styles.root}>
-      <p css={[styles.results, priceFilter && styles.decorator]}>
-        {resultCopy}
-      </p>
-      <div css={styles.toggle}>
-        <span css={[styles.label]}>{ui(toggleTitle)}</span>
-        <Toggle
-          testId="advanced-view-toggle"
-          name={ui(toggleTitle)}
-          onToggle={onToggleView}
-          defaultChecked={isAdvancedView}
+      <div css={styles.wrapper}>
+        <p css={[styles.results, priceFilter && styles.decorator]}>
+          {resultCopy}
+        </p>
+        <div css={styles.toggle}>
+          <span css={[styles.label]}>{ui(toggleTitle)}</span>
+          <Toggle
+            testId="advanced-view-toggle"
+            name={ui(toggleTitle)}
+            onToggle={onToggleView}
+            defaultChecked={isAdvancedView}
+          />
+        </div>
+        {priceFilter && (
+          <PriceFilter
+            onChange={createUpdateFilterGroup}
+            hasResults={!!resultsCount}
+            priceFilter={priceFilter}
+          />
+        )}
+        {!!sortList.length && (
+          <div css={styles.sortBy}>
+            <p css={styles.sortLabel}>{ui('catalog.filters.sortBy')} </p>
+            <Link
+              data-testid="sort-filter-button"
+              className="dropdown-button"
+              theme={THEME.LIGHT}
+              as="button"
+              onClick={createOpenFilterHandler(SORT_ID)}
+              css={[styles.sort, isOpen && styles.disableEvents]}
+              aria-expanded={isOpen}
+            >
+              {(sortItem && sortItem.title) || sortList[0].title}
+            </Link>
+          </div>
+        )}
+        <FilterPopup
+          hasActionBar={false}
+          isOpen={isOpen}
+          onClose={clearSelectingFilter}
+          filter={{
+            items: sortList,
+            type: FilterContentTypes.SiteCatalogFilterSort,
+          }}
         />
       </div>
-      {priceFilter && (
-        <PriceFilter
-          onChange={createUpdateFilterGroup}
-          hasResults={!!resultsCount}
-          priceFilter={priceFilter}
-        />
-      )}
-      {!!sortList.length && (
-        <div css={styles.sortBy}>
-          <p css={styles.sortLabel}>{ui('catalog.filters.sortBy')} </p>
-          <Link
-            data-testid="sort-filter-button"
-            className="dropdown-button"
-            theme={THEME.LIGHT}
-            as="button"
-            onClick={createOpenFilterHandler(SORT_ID)}
-            css={[styles.sort, isOpen && styles.disableEvents]}
-            aria-expanded={isOpen}
-          >
-            {(sortItem && sortItem.title) || sortList[0].title}
-          </Link>
-        </div>
-      )}
-      <FilterPopup
-        hasActionBar={false}
-        isOpen={isOpen}
-        onClose={clearSelectingFilter}
-        filter={{
-          items: sortList,
-          type: FilterContentTypes.SiteCatalogFilterSort,
-        }}
-      />
     </div>
   );
 }

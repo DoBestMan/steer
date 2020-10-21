@@ -1,5 +1,17 @@
-import { BORDERS, COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
+import {
+  BORDERS,
+  COLORS,
+  MQ,
+  SPACING,
+  StylesMap,
+  Z_INDEX,
+} from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
+
+const TOPS = {
+  S: 110,
+  M: 144,
+};
 
 const styles: StylesMap = {
   decorator: {
@@ -62,20 +74,13 @@ const styles: StylesMap = {
   root: {
     alignItems: 'baseline',
     background: COLORS.GLOBAL.WHITE,
-    borderBottom: BORDERS.SOLID_GRAY_20_1PX,
-    display: 'flex',
-    [MQ.S]: {
-      margin: `0 ${SPACING.SIZE_20}px`,
-      padding: `${SPACING.SIZE_20}px 0`,
-    },
+    position: 'sticky',
+    top: TOPS.S,
+    zIndex: Z_INDEX.FRONT,
     [MQ.M]: {
-      margin: `0 ${SPACING.SIZE_40}px`,
-      padding: `${SPACING.SIZE_30}px 0`,
+      top: TOPS.M,
     },
-    [MQ.L]: {
-      margin: `0 ${SPACING.SIZE_60}px`,
-      padding: `${SPACING.SIZE_30}px 0`,
-    },
+    [MQ.L]: {},
   },
   slider: {
     width: 200,
@@ -111,6 +116,19 @@ const styles: StylesMap = {
   toggle: {
     alignItems: 'center',
     display: 'flex',
+  },
+  wrapper: {
+    borderBottom: BORDERS.SOLID_GRAY_20_1PX,
+    display: 'flex',
+    padding: SPACING.SIZE_20,
+    [MQ.M]: {
+      margin: `0px ${SPACING.SIZE_40}px`,
+      padding: `${SPACING.SIZE_30}px 0px`,
+    },
+    [MQ.L]: {
+      margin: `0px ${SPACING.SIZE_60}px`,
+      padding: `${SPACING.SIZE_30}px 0px`,
+    },
   },
 };
 
