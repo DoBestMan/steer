@@ -63,7 +63,7 @@ export const getServerSideProps: GetServerSideProps<PageResponse<
   CatalogPageData
 >> = async (context) => {
   backendBootstrap({ request: context.req });
-  const { size, ...vehicleParams } = context.query;
+  const { size = '', ...vehicleParams } = context.query;
 
   if (isRouteDiameterFormat(context.req.url)) {
     const { category, diameter } = getDiameterCategory(size);

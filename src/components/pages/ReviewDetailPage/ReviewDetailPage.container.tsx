@@ -44,21 +44,22 @@ function ReviewDetailPage({ serverData }: ProductDetailData) {
   } = header;
 
   const { brand, productLine } = router.query;
-  const brandName = brand && removeTireFromQueryParam(brand);
-
+  const tireBrand = brand || '';
+  const tireProductLine = productLine || '';
+  const brandName = tireBrand && removeTireFromQueryParam(tireBrand);
   const writeReviewUrl = interpolateRoute(ROUTE_MAP[ROUTES.WRITE_REVIEW], {
-    brand,
-    productLine,
+    tireBrand,
+    tireProductLine,
   });
 
   const viewTireUrl = interpolateRoute(ROUTE_MAP[ROUTES.PRODUCT_DETAIL], {
-    brand,
-    productLine,
+    tireBrand,
+    tireProductLine,
   });
 
   const { displayedReviews, handleSeeMoreClick } = usePagination(
     brandName,
-    productLine && productLine.toString(),
+    tireProductLine && tireProductLine.toString(),
     reviews,
   );
 

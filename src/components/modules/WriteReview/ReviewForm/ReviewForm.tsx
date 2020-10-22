@@ -1,3 +1,4 @@
+import { ParsedUrlQuery } from 'querystring';
 import { useEffect, useState } from 'react';
 
 import Button from '~/components/global/Button/Button';
@@ -32,9 +33,11 @@ import styles from './ReviewForm.styles';
 interface Props {
   brand: string;
   onSearchVehicle?: (event: React.MouseEvent) => void;
-  queryParams: {
-    [name: string]: string | string[];
-  };
+  queryParams:
+    | {
+        [name: string]: string | string[];
+      }
+    | ParsedUrlQuery;
   tire: string;
   vehicle?: string | null;
 }
@@ -124,7 +127,7 @@ function ReviewForm({
     handleShowToastOnNextPage,
   } = useGlobalToastContext();
   const brandName =
-    queryParams.brand && removeTireFromQueryParam(queryParams.brand);
+    (queryParams.brand && removeTireFromQueryParam(queryParams.brand)) || '';
 
   const hasRequiredFieldsFilled =
     formValues.performanceRating &&
@@ -249,7 +252,7 @@ function ReviewForm({
   ) => {
     const res = await apiPostReview(
       brandName,
-      queryParams.productLine.toString(),
+      (queryParams && queryParams?.productLine?.toString()) || '',
       reformattedDataForSubmission,
     );
 

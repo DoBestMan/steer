@@ -150,7 +150,8 @@ function useContextSetup({
       eventEmitters.skipPageTransition.emit(null);
 
       Object.entries({ ...query, ...filters }).forEach(([k, v]) => {
-        const stringifiedVal = getParam(v);
+        const value = v || '';
+        const stringifiedVal = getParam(value);
         if (!!stringifiedVal && !pageParams[k]) {
           params[k] = stringifiedVal;
         }

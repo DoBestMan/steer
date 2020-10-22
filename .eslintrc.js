@@ -33,7 +33,6 @@ module.exports = {
       { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
     ],
     '@typescript-eslint/explicit-module-boundary-types': 'off',
-
     'jest/no-focused-tests': 'error',
     'jest/prefer-inline-snapshots': 'error',
     'jest/no-identical-title': 'error',
@@ -52,7 +51,8 @@ module.exports = {
     'react/jsx-no-bind': [
       'error',
       {
-        allowFunctions: true,
+        allowFunctions: true, 
+        allowArrowFunctions: true,
       },
     ],
     'react/jsx-boolean-value': ['error', 'never'],
@@ -70,6 +70,8 @@ module.exports = {
       { caseSensitive: false, natural: true },
     ],
     quotes: ['error', 'single', { avoidEscape: true }],
+    'react/prop-types': [0],
+    'react/display-name': [0, { "ignoreTranspilerName": false }]
   },
   settings: {
     react: { version: 'detect' },

@@ -5,7 +5,7 @@ import { ICONS } from '~/components/global/Icon/Icon.constants';
 
 import styles from './Checkbox.styles';
 
-interface Props  // use custom on change
+interface Props // use custom on change
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
   isDisabled?: boolean;
   onChange?: () => void;
