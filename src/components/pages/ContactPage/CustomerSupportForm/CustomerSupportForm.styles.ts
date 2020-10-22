@@ -50,13 +50,6 @@ const styles: StylesMap = {
   relative: {
     position: 'relative',
   },
-  subjectOptional: [
-    typography.bodyCopy,
-    {
-      fontWeight: 450,
-      color: COLORS.GLOBAL.BLACK,
-    },
-  ],
   subjectTitle: [
     typography.tertiaryHeadline,
     {

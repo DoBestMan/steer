@@ -39,7 +39,7 @@ export interface SiteCustomerSupportFormInput {
    * @type {string}
    * @memberof SendMessageInput
    */
-  subject: string | null;
+  subject: string;
   /**
    * @type {string}
    * @memberof SendMessageInput

@@ -21,7 +21,7 @@ interface FormValues {
   [FIELDS.MESSAGE]: string | null;
   [FIELDS.ORDER_NUMBER]: string | null;
   [FIELDS.PHONE_NUMBER]: string;
-  [FIELDS.SUBJECT]: string | null;
+  [FIELDS.SUBJECT]: string;
   [FIELDS.FILE]: string | null;
   [FIELDS.TOKEN]: string;
 }
@@ -37,7 +37,7 @@ const initialState = {
   [FIELDS.MESSAGE]: '',
   [FIELDS.ORDER_NUMBER]: null,
   [FIELDS.PHONE_NUMBER]: '',
-  [FIELDS.SUBJECT]: null,
+  [FIELDS.SUBJECT]: '',
   [FIELDS.FILE]: null,
   [FIELDS.TOKEN]: '',
 };
@@ -64,7 +64,8 @@ function SendMessageForm({ selections }: Props) {
     !!formValues[FIELDS.FIRST_NAME] &&
     !!formValues[FIELDS.LAST_NAME] &&
     !!formValues[FIELDS.MESSAGE] &&
-    !!formValues[FIELDS.PHONE_NUMBER];
+    !!formValues[FIELDS.PHONE_NUMBER] &&
+    !!formValues[FIELDS.SUBJECT];
 
   useEffect(() => {
     setIsFormValid(hasRequiredFieldFilled);
@@ -203,9 +204,6 @@ function SendMessageForm({ selections }: Props) {
           <fieldset css={styles.group}>
             <h3 css={styles.subjectTitle}>
               {ui('contactPage.message.subject.subject')}
-              <span css={styles.subjectOptional}>
-                {ui('contactPage.message.subject.optional')}
-              </span>
             </h3>
             <div css={styles.radioGroup}>
               {selections.map(({ label, value }) => {

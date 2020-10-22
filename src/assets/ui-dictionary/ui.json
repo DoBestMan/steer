@@ -724,8 +724,7 @@
       "success": "Thank you for sending the message!",
       "error": "Oops, something went wrong! <br />Please try again.",
       "subject": {
-        "subject": "Subject ",
-        "optional": "(optional)"
+        "subject": "Subject"
       }
     }
   },

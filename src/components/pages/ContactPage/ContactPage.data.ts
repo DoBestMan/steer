@@ -94,35 +94,39 @@ export const customerSupportFormData = {
   items: [
     {
       label: 'Pricing',
-      value: '1',
+      value: 'Pricing',
     },
     {
       label: 'Tire size',
-      value: '2',
+      value: 'Tire size',
     },
     {
       label: 'Tire damage',
-      value: '3',
+      value: 'Tire damage',
     },
     {
       label: 'Order delivery',
-      value: '4',
+      value: 'Order delivery',
     },
     {
       label: 'Tire installation',
-      value: '5',
+      value: 'Tire installation',
     },
     {
       label: 'Returns / Replacements',
-      value: '6',
+      value: 'Returns / Replacements',
     },
     {
       label: 'Road hazard claim',
-      value: '7',
+      value: 'Road hazard claim',
     },
     {
       label: 'Website feedback',
-      value: '8',
+      value: 'Website feedback',
+    },
+    {
+      label: 'Other',
+      value: 'Other',
     },
   ],
 };
