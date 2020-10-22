@@ -22,7 +22,7 @@ export function mapDataToHeader({
   const brand = siteProductLine.brand;
 
   const brandUrl = interpolateRoute(ROUTE_MAP[ROUTES.BRAND_DETAIL], {
-    brand: query.brand || '',
+    brand: query.brand,
   });
 
   const breadcrumbs = mapPathnameToBreadcrumbs({

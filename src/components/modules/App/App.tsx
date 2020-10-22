@@ -39,8 +39,8 @@ interface Props {
   route: string;
 }
 
-const SubNavContainer = dynamic(
-  () => import('~/components/modules/SubNav/SubNav.container'),
+const SubNavContainer = dynamic(() =>
+  import('~/components/modules/SubNav/SubNav.container'),
 );
 
 function App({ children, ...rest }: Props) {

@@ -27,20 +27,20 @@ import useProductDetail from './ProductDetail.hooks';
 import styles from './ProductDetail.styles';
 import { ProductDetailData } from './ProductDetail.types';
 
-const DynamicProductGroupList = dynamic(
-  () => import('~/components/global/ProductGroupList/ProductGroupList'),
+const DynamicProductGroupList = dynamic(() =>
+  import('~/components/global/ProductGroupList/ProductGroupList'),
 );
-const DynamicInstallation = dynamic(
-  () => import('~/components/modules/PDP/Installation/Installation'),
+const DynamicInstallation = dynamic(() =>
+  import('~/components/modules/PDP/Installation/Installation'),
 );
-const DynamicReviews = dynamic(
-  () => import('~/components/modules/PDP/Reviews/Reviews'),
+const DynamicReviews = dynamic(() =>
+  import('~/components/modules/PDP/Reviews/Reviews'),
 );
-const DynamicTechnicalSpecs = dynamic(
-  () => import('~/components/modules/PDP/TechnicalSpecs/TechnicalSpecs'),
+const DynamicTechnicalSpecs = dynamic(() =>
+  import('~/components/modules/PDP/TechnicalSpecs/TechnicalSpecs'),
 );
-const DynamicPDPStickyBar = dynamic(
-  () => import('~/components/modules/PDP/StickyBar/StickyBar'),
+const DynamicPDPStickyBar = dynamic(() =>
+  import('~/components/modules/PDP/StickyBar/StickyBar'),
 );
 
 function ProductDetail({ serverData }: ProductDetailData) {

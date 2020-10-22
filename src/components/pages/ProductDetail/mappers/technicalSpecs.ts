@@ -36,10 +36,9 @@ export function mapDataToTechnicalSpecs({
     query: { brand, productLine, ...queryParams },
   } = router;
   const isPLA = !!router.pathname.match(ROUTE_MAP[ROUTES.PRODUCT_DETAIL_PLA]);
-  const brandName = brand || '';
   const baseLink = interpolateRoute(ROUTE_MAP[ROUTES.PRODUCT_DETAIL], {
-    brand: isPLA ? appendTiresToString(brandName) : brandName,
-    productLine: productLine || '',
+    brand: isPLA ? appendTiresToString(brand) : brand,
+    productLine,
   });
 
   const description = siteProductLine.overview || '';
