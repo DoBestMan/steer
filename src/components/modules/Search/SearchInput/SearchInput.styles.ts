@@ -15,13 +15,6 @@ const DIMENTION_ICON = {
 
 const styles: StylesMap = {
   backButton: {
-    marginRight: SPACING.SIZE_20,
-    [MQ.M]: {
-      marginRight: SPACING.SIZE_30,
-    },
-    [MQ.L]: {
-      marginRight: SPACING.SIZE_40,
-    },
     '& svg': {
       color: COLORS.GLOBAL.WHITE,
       width: DIMENTION_ICON.S.width,
@@ -30,6 +23,14 @@ const styles: StylesMap = {
         width: DIMENTION_ICON.M.width,
         height: DIMENTION_ICON.M.height,
       },
+    },
+    marginRight: SPACING.SIZE_20,
+    minWidth: 'unset',
+    [MQ.M]: {
+      marginRight: SPACING.SIZE_30,
+    },
+    [MQ.L]: {
+      marginRight: SPACING.SIZE_40,
     },
   },
   clearButton: [
@@ -43,7 +44,7 @@ const styles: StylesMap = {
     },
   ],
   comboboxWrapper: {
-    flexGrow: 1,
+    flex: 1,
     height: SPACING.SIZE_30,
     [MQ.M]: {
       height: 'auto',
