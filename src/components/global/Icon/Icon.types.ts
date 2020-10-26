@@ -10,6 +10,7 @@ export type Icon =
   | 'arrow-right'
   | 'arrow-up'
   | 'best-price'
+  | 'brands-circular'
   | 'calendar'
   | 'checkmark'
   | 'checkmark-big'

@@ -231,7 +231,7 @@
       "noResultsBrandLabel": "Brand",
       "noResultsPopularLabel": "Popular tires"
     },
-    "message":{
+    "message": {
       "topPicksTitle": "Start with our top 5 picks?",
       "topPicksButton": "Show top picks",
       "showAllButton": "Show {{totalTireCount}} tires",
@@ -274,6 +274,11 @@
     "tires": "Tires 101"
   },
   "homepage": {},
+  "searchByBoard": {
+    "vehicle": "Vehicle",
+    "tireSize": "Tire size",
+    "brand": "Tire brand"
+  },
   "support": {
     "enabled": "Need live support?",
     "disabled": "Need support?"
