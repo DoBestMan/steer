@@ -11,6 +11,7 @@ const zIndexBase = {
   9: 900,
   10: 1000,
   behind: -1,
+  betweenZeroTop: 1,
 };
 
 export enum Z_INDEX {
@@ -19,6 +20,7 @@ export enum Z_INDEX {
   ZERO = zIndexBase['0'],
   FRONT = zIndexBase['1'],
   TOP = zIndexBase['2'],
+  BETWEEN_ZERO_TOP = zIndexBase.betweenZeroTop,
   // custom
   NAV = zIndexBase['5'],
   MODAL = zIndexBase['9'],

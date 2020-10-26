@@ -76,7 +76,7 @@ const styles: StylesMap = {
     background: COLORS.GLOBAL.WHITE,
     position: 'sticky',
     top: TOPS.S,
-    zIndex: Z_INDEX.FRONT,
+    zIndex: Z_INDEX.BETWEEN_ZERO_TOP,
     [MQ.M]: {
       top: TOPS.M,
     },

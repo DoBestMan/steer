@@ -2,7 +2,7 @@ import { boolean, select } from '@storybook/addon-knobs';
 
 import Scenary from '~/components/global/Scenery/Scenery';
 import { Sceneries } from '~/components/global/Scenery/Scenery.types';
-import { COLORS, StylesMap } from '~/lib/constants';
+import { COLORS, StylesMap, Z_INDEX } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 import Car from './Car';
@@ -29,7 +29,7 @@ const styles: StylesMap = {
     bottom: 0,
     right: 50,
     position: 'absolute',
-    zIndex: 2,
+    zIndex: Z_INDEX.BETWEEN_ZERO_TOP,
   },
 };
 

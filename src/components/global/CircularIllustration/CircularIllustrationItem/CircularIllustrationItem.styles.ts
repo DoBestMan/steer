@@ -1,4 +1,4 @@
-import { COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
+import { COLORS, MQ, SPACING, StylesMap, Z_INDEX } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const CIRCLE_SIZES = {
@@ -84,7 +84,7 @@ export const styles: StylesMap = {
     padding: 3,
     position: 'absolute',
     top: 0,
-    zIndex: 1,
+    zIndex: Z_INDEX.BETWEEN_ZERO_TOP,
     [MQ.M]: {
       left: 14,
     },
