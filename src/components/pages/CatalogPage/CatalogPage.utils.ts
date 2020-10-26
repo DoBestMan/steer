@@ -57,7 +57,7 @@ export function getProductDisplayImages(
 export function shouldDisplayProductsError(
   siteCatalogSummary: SiteCatalogSummary,
 ) {
-  return (siteCatalogSummary.siteCatalogSummaryMeta?.totalResults || 0) > 0;
+  return !((siteCatalogSummary.siteCatalogSummaryMeta?.totalResults || 0) > 0);
 }
 
 export function shouldReturnServerError(
