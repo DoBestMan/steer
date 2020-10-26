@@ -24,6 +24,7 @@ export interface Props {
   id?: string;
   label: string;
   list: Array<SelectOption>;
+  name?: string;
   onChange: (value: string | null) => void;
   placeholder: string;
   required?: boolean;
@@ -76,6 +77,8 @@ function Select(props: Props) {
 
   useEffect(() => {
     if (!value) {
+      setSelectedOption(null);
+      setSelectedIndex(-1);
       setIsTouched(false);
     }
   }, [value]);
@@ -246,11 +249,13 @@ function Select(props: Props) {
           disabled={disabled}
           css={styles.button}
           tabIndex={-1}
+          type="button"
         >
           <input
             readOnly
             value={selectedOption ? selectedOption.text : placeholder}
             id={`${baseId}__input`}
+            name={rest.name}
             tabIndex={-1}
             disabled={disabled}
             css={[

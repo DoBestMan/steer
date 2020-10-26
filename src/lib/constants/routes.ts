@@ -6,6 +6,7 @@ import { ui } from '../utils/ui-dictionary';
 export enum ROUTES {
   ABOUT = 'about',
   ADVOCATE_DASHBOARD = 'advocateDashboard',
+  BECOME_A_TIRE_INSTALLER = 'becomeATireInstaller',
   BRAND_CATEGORY = 'brandCategory',
   BRAND_DETAIL = 'brandDetail',
   BRAND_LANDING = 'brandLanding',
@@ -59,6 +60,7 @@ export enum ROUTES {
 export const ROUTE_TYPE_MAP: { [routeName: string]: string } = {
   [ROUTES.HOME]: '/',
   [ROUTES.BRAND_LANDING]: '/brands',
+  [ROUTES.BECOME_A_TIRE_INSTALLER]: '/become-a-tire-installer',
   [ROUTES.BRAND_DETAIL]: '/brands/[brand]',
   [ROUTES.BRAND_REVIEWS]: '/brands/[brand]/reviews',
   [ROUTES.BRAND_TYPE]: '/brands/[brand]/types/[categoryOrType]',

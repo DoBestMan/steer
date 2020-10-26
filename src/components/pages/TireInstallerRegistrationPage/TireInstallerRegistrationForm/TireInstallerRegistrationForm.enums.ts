@@ -1,0 +1,60 @@
+export enum DAYS {
+  FRIDAY = 'Friday',
+  MONDAY = 'Monday',
+  SATURDAY = 'Saturday',
+  SUNDAY = 'Sunday',
+  THURSDAY = 'Thursday',
+  TUESDAY = 'Tuesday',
+  WEDNESDAY = 'Wednesday',
+}
+
+export enum REGISTRATION_FIELD_NAMES {
+  ADDRESS_LINE_ONE = 'addressLine1',
+  ADDRESS_LINE_TWO = 'addressLine2',
+  AUTO_SERVICES = 'autoServices',
+  CELL_PHONE = 'cellPhone',
+  CITY = 'city',
+  COMPANY = 'company',
+  EMAIL_PRIMARY = 'emailPrimary',
+  EMAIL_SERVICE_DESK = 'emailService',
+  FIRST_NAME = 'firstName',
+  FRIDAY_CLOSED = 'fridayClosed',
+  FRIDAY_OPEN = 'fridayOpen',
+  INSTALLATION_AGREEMENT = 'installationAgreement',
+  LAST_NAME = 'lastName',
+  MONDAY_CLOSED = 'mondayClosed',
+  MONDAY_OPEN = 'mondayOpen',
+  PHONE_PRIMARY = 'phonePrimary',
+  PHONE_SERVICE_DESK = 'phoneService',
+  SATURDAY_CLOSED = 'saturdayClosed',
+  SATURDAY_OPEN = 'saturdayOpen',
+  STATE = 'state',
+  STORE_IMAGE = 'storeImage',
+  SUNDAY_CLOSED = 'sundayClosed',
+  SUNDAY_OPEN = 'sundayOpen',
+  THURSDAY_CLOSED = 'thursdayClosed',
+  THURSDAY_OPEN = 'thursdayOpen',
+  TIRE_SERVICES = 'tireServices',
+  TUESDAY_CLOSED = 'tuesdayClosed',
+  TUESDAY_OPEN = 'tuesdayOpen',
+  WEBSITE = 'website',
+  WEDNESDAY_CLOSED = 'wednesdayClosed',
+  WEDNESDAY_OPEN = 'wednesdayOpen',
+  ZIP_CODE = 'zipCode',
+}
+
+export enum TOAST_MESSAGE_LABELS {
+  ATTACH_IMAGE_ERROR = 'attachImageError',
+  ATTACH_IMAGE_SUCCESS = 'attachImageSuccess',
+  FORM_ERROR = 'formError',
+  FORM_SUCCESS = 'formImageSuccess',
+}
+
+export enum TYPES_OF_INPUTS {
+  BUSINESS = 'businessInputs',
+  CONTACT = 'contactInputs',
+  HOURS = 'hoursInputs',
+  INSTALLER = 'installerInput',
+  SERVICES = 'servicesInput',
+  TIRE_SERVICES = 'tireServicesInput',
+}

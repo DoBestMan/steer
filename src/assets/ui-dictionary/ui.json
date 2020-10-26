@@ -102,6 +102,7 @@
     "home": "Home",
     "brands": "All brands",
     "categories": "Shop by tire category",
+    "tireInstallerRegistration": "Become a tire installer",
     "types": "Shop by tire types",
     "reviews": "Reviews",
     "tireReviews": "Tire reviews",
@@ -647,6 +648,102 @@
       "title": "Identify your vehicle trim"
     },
     "clear": "Clear"
+  },
+  "tireInstallerRegistration": {
+    "copy": {
+      "attachedImageInput": {
+        "label": "Add image of store (optional)"
+      },
+      "header": {
+        "body": "- No cost to sign-up or be part of our network\n - Invoices paid within 48 hours\n - Grow sales through additional services you offer\n - Access to our proprietary tire special ordering site",
+        "imageAltText": "Become a tire installer image",
+        "subTitle": "Gain a whole new customer base of online tire buyers who need their vehicle serviced!",
+        "title": "Join our installer partner program"
+      },
+      "installationAgreement": {
+        "copy": "<p>*Able to service vehicles with a 12inch rim to 22inch rim</p><p>*Able to service aspect ratios of 35 and above *Commit to in-taking the customer within 15 min of appointment time</p> <p>**Please note this payment is paid by SIMPLETIRE to the INSTALLER on behalf of the customer within 48 hours of completed service. We will contact INSTALLER after signup is completed with pricing specifics (Range: $15-$24 per tire) and portal training.</p>",
+        "label": "I agree with our SimpleService Prepaid Program"
+      }
+    },
+    "form": {
+      "errors": {
+        "email": "Please enter valid email",
+        "phone": "Phone Number should contain 10 digits"
+      },
+      "labels": {
+        "addressLine1": "Address line 1",
+        "addressLine2": "Address line 2",
+        "cell": "Cell phone",
+        "company": "Company",
+        "city": "City",
+        "closed": "closed",
+        "emailPrimary": "Email (primary)",
+        "emailService": "Email (service desk)",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "open": "open",
+        "phonePrimary": "Phone (primary)",
+        "phoneService": "Phone (service desk)",
+        "state": "State",
+        "to": "to",
+        "zipCode": "Zip code",
+        "website": "Website"
+      },
+      "services": {
+        "airConditioning": "Air Conditioning",
+        "alignments": "Alignments",
+        "battery": "Battery",
+        "brakes": "Brakes",
+        "coolingSystems": "Cooling Systems",
+        "diagnostics": "Diagnostics",
+        "dieselRepair": "Diesel Repair",
+        "drivetrain": "Drivetrain",
+        "electrical": "Electrical",
+        "emissions": "Emissions",
+        "exhaustSystems": "Exhaust Systems",
+        "fullMechanical": "Full Mechanical",
+        "inspections": "Inspections",
+        "installationOf20": "Installation of 20",
+        "oilChanges": "Oil Changes",
+        "preventativeMaintenance": "Preventative Maintenance",
+        "shocksAndStruts": "Shocks & Struts",
+        "shuttleService": "Shuttle Service",
+        "towing": "Towing",
+        "tpmsService": "TPMS Service",
+        "wiFi": "WI-FI"
+      },
+      "tireServices": {
+        "antique": "Antique",
+        "atvUtv": "ATV/UTV",
+        "bicycle": "Bicycle",
+        "commercial": "Commercial",
+        "farm": "Farm",
+        "golf": "Golf",
+        "industrial": "Industrial",
+        "lawnAndGarden": "Lawn & Garden",
+        "lightTruck": "Light Truck",
+        "motorcycle": "Motorcycle",
+        "otr": "OTR",
+        "passenger": "Passenger",
+        "racing": "Racing",
+        "suvCrossover": "SUV/Crossover",
+        "tempSpare": "Temp Spare",
+        "trailer": "Trailer"
+      },
+      "submitButton": {
+        "label": "Submit application"
+      }
+    },
+    "toastMessages": {
+      "errors": {
+        "attachImage": "Oops, something went wrong attaching the image! <br />Please try again.",
+        "form": "Oops, something went wrong! <br />Please try again."
+      },
+      "success": {
+        "attachImage": "Success! Image is attached",
+        "form": "Success! Thank you for registering."
+      }
+    }
   },
   "tireReviews": {
     "more": "See more",
