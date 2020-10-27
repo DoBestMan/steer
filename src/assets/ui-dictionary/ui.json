@@ -339,7 +339,12 @@
       "label": "Mobile Menu"
     },
     "size": "Size",
-    "vehicle": "Vehicle"
+    "vehicle": "Vehicle",
+    "shopTiresBy": {
+      "title": "SHOP <br/>TIRES BY",
+      "vehicle": "Vehicle",
+      "tireSize": "Size"
+    }
   },
   "pdp": {
     "anchorBar": {

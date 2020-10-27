@@ -6,6 +6,7 @@ import {
 } from 'react-transition-group/Transition';
 
 import {
+  BORDERS,
   COLORS,
   CSSStyles,
   EASING,
@@ -177,5 +178,14 @@ export const styles: StylesMap = {
       maxWidth: 420,
       width: '35%',
     },
+  },
+  shopByTiresWrapper: {
+    borderBottom: BORDERS.SOLID_GRAY_10_1PX,
+    borderTop: BORDERS.SOLID_GRAY_10_1PX,
+    marginTop: SPACING.SIZE_20,
+    padding: `${SPACING.SIZE_10}px ${SPACING.SIZE_20}px`,
+  },
+  shopTiresInNav: {
+    transform: `translateY(${-SPACING.SIZE_20}px)`,
   },
 };

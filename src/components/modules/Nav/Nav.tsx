@@ -6,6 +6,7 @@ import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import Image from '~/components/global/Image/Image';
 import BaseLink from '~/components/global/Link/BaseLink';
+import { useSearchContext } from '~/components/modules/Search/Search.context';
 import { useNavContext } from '~/context/Nav.context';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { TIME } from '~/lib/constants';
@@ -17,19 +18,22 @@ import { useSearchModalContext } from '../Search/SearchModal.context';
 import { animations, styles } from './Nav.styles';
 import { NavThemeObject } from './Nav.theme';
 import NavBar from './NavBar';
+import ShopTiresBy from './ShopTiresBy/ShopTiresBy';
 
 export const NAV_ID = 'main-navigation';
 
 interface Props {
   isHomepage?: boolean;
+  isPLA?: boolean;
 }
 
-function Nav({ isHomepage }: Props) {
+function Nav({ isHomepage, isPLA }: Props) {
   const { isVisible, toggleSubNav, createSelectLinkHandler } = useNavContext();
 
   const { toggleIsSearchOpen } = useSearchModalContext();
   const theme: NavThemeObject = useTheme();
   const { isMobile } = useBreakpoints();
+  const { searchQuery, setSearchState } = useSearchContext();
 
   return (
     <Transition appear={false} in={isVisible} timeout={TIME.MS400}>
@@ -58,13 +62,34 @@ function Nav({ isHomepage }: Props) {
                   />
                 </BaseLink>
               </GridItem>
+              {!isMobile && isPLA && (
+                <GridItem
+                  gridColumnM="4/7"
+                  gridColumnL="5/8"
+                  css={styles.shopTiresInNav}
+                >
+                  <ShopTiresBy
+                    onSearchQuery={searchQuery}
+                    onSetSearchState={setSearchState}
+                  />
+                </GridItem>
+              )}
               <NavBar
                 handleOnNavLinkClick={createSelectLinkHandler}
                 handleOnSearchClick={toggleIsSearchOpen}
                 handleOnSubNavClick={toggleSubNav}
                 isHomepage={isHomepage}
+                isPLA={isPLA}
                 theme={theme}
               />
+              {isMobile && isPLA && (
+                <GridItem fullbleed css={styles.shopByTiresWrapper}>
+                  <ShopTiresBy
+                    onSearchQuery={searchQuery}
+                    onSetSearchState={setSearchState}
+                  />
+                </GridItem>
+              )}
             </Grid>
           </div>
         );

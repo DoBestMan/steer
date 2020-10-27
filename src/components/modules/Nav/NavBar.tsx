@@ -19,6 +19,7 @@ interface Props {
   handleOnSearchClick: () => void;
   handleOnSubNavClick: () => void;
   isHomepage?: boolean;
+  isPLA?: boolean;
   theme: NavThemeObject;
 }
 
@@ -27,20 +28,23 @@ function NavBar({
   handleOnSearchClick,
   handleOnSubNavClick,
   isHomepage,
+  isPLA,
   theme: { border, iconColor, linkTheme, textColor },
 }: Props) {
   const { locationString } = useUserPersonalizationContext();
   const { links } = buildLinks({ locationString });
+
+  const showSearchButton = !isHomepage && !isPLA;
 
   return (
     <GridItem
       as="ul"
       css={[styles.nav, styles.container]}
       gridColumn="4/6"
-      gridColumnM="4/8"
-      gridColumnL="4/14"
+      gridColumnM={isPLA ? '7/8' : '4/8'}
+      gridColumnL={isPLA ? '8/14' : '4/14'}
     >
-      {!isHomepage && (
+      {showSearchButton && (
         <li css={styles.searchButton}>
           <NavSearchButton
             border={border}

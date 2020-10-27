@@ -35,6 +35,7 @@ export function useBreakpoints(): UseBreakpointsProps {
       S: BREAKPOINTS[bk] > BREAKPOINTS[BREAKPOINT_SIZES.S],
       M: BREAKPOINTS[bk] > BREAKPOINTS[BREAKPOINT_SIZES.M],
       L: BREAKPOINTS[bk] > BREAKPOINTS[BREAKPOINT_SIZES.L],
+      XL: BREAKPOINTS[bk] > BREAKPOINTS[BREAKPOINT_SIZES.XL],
     },
     is: {
       S: bk === BREAKPOINT_SIZES.S,

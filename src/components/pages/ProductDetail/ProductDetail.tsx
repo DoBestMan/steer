@@ -44,7 +44,7 @@ const DynamicPDPStickyBar = dynamic(() =>
 );
 
 function ProductDetail({ serverData }: ProductDetailData) {
-  const { lessThan } = useBreakpoints();
+  const { isMobile } = useBreakpoints();
   const {
     anchorList,
     breadcrumbs,
@@ -110,7 +110,13 @@ function ProductDetail({ serverData }: ProductDetailData) {
     <>
       <Meta {...meta} />
       {linkingData && <DataStructure jsonLD={linkingData} />}
-      <Grid css={[navigationBreadcrumbPaddingTop, styles.root]}>
+      <Grid
+        css={[
+          navigationBreadcrumbPaddingTop,
+          styles.root,
+          isPLA && isMobile && styles.shopTiresBySpace,
+        ]}
+      >
         <GridItem gridColumnL="start/8" gridRowL="1" css={styles.breadcrumbs}>
           <Breadcrumbs navigationItems={breadcrumbs} />
         </GridItem>
@@ -139,11 +145,9 @@ function ProductDetail({ serverData }: ProductDetailData) {
                 />
               </div>
             </GridItem>
-            {lessThan.L && (
-              <GridItem fullbleed css={styles.anchorBar}>
-                <AnchorBar anchorList={anchorList} />
-              </GridItem>
-            )}
+            <GridItem fullbleed css={styles.anchorBar}>
+              <AnchorBar anchorList={anchorList} />
+            </GridItem>
             {insights && (
               <GridItem fullbleed css={styles.insights}>
                 <div id={ANCHORS.INSIGHTS_ANCHOR}>
@@ -153,11 +157,6 @@ function ProductDetail({ serverData }: ProductDetailData) {
                     openDynamicModal={openDynamicModal}
                   />
                 </div>
-              </GridItem>
-            )}
-            {!lessThan.L && (
-              <GridItem fullbleed css={styles.anchorBar}>
-                <AnchorBar anchorList={anchorList} />
               </GridItem>
             )}
           </Grid>

@@ -27,6 +27,7 @@ describe('useBreakpoints', () => {
       L: false,
       M: false,
       S: false,
+      XL: false,
     });
     expect(result.current.windowHeight).toEqual(600);
   });
@@ -53,6 +54,7 @@ describe('useBreakpoints', () => {
       L: false,
       M: false,
       S: true,
+      XL: false,
     });
     expect(result.current.windowHeight).toEqual(800);
   });
@@ -79,6 +81,7 @@ describe('useBreakpoints', () => {
       L: false,
       M: true,
       S: true,
+      XL: false,
     });
     expect(result.current.windowHeight).toEqual(800);
   });
@@ -105,6 +108,7 @@ describe('useBreakpoints', () => {
       L: true,
       M: true,
       S: true,
+      XL: false,
     });
     expect(result.current.windowHeight).toEqual(1600);
   });

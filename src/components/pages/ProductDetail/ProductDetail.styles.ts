@@ -23,6 +23,9 @@ const styles: StylesMap = {
     [MQ.M]: {
       marginTop: SPACING.SIZE_25,
     },
+    [MQ.L]: {
+      marginTop: SPACING.SIZE_60,
+    },
   },
   breadcrumbs: {
     marginTop: SPACING.SIZE_10,
@@ -53,7 +56,7 @@ const styles: StylesMap = {
   featuredRecirculation: defaultSpacing('marginTop'),
   insights: {
     [MQ.L]: {
-      marginTop: SPACING.SIZE_60,
+      marginTop: SPACING.SIZE_40,
     },
   },
   installation: [
@@ -162,6 +165,9 @@ const styles: StylesMap = {
   },
   rootLoading: {
     opacity: 1,
+  },
+  shopTiresBySpace: {
+    paddingTop: SPACING.SIZE_160 - 10,
   },
   shopWithConfidence: defaultSpacing('marginTop'),
   stickyBar: {

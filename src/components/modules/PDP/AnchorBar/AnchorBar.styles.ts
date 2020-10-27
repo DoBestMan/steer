@@ -28,7 +28,7 @@ const styles: StylesMap = {
     [MQ.L]: {
       backgroundColor: 'transparent',
       height: 'auto',
-      padding: `0 ${SPACING.SIZE_40}px`,
+      padding: 0,
     },
   },
   label: [

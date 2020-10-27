@@ -73,6 +73,7 @@ function App({ children, ...rest }: Props) {
   const route = removeUrlParams(fixHomepageRoute(router.asPath || rest.route));
 
   const isHomepage = route === ROUTE_MAP[ROUTES.HOME];
+  const isPLA = route.includes(ROUTE_MAP[ROUTES.PRODUCT_DETAIL_PLA]);
 
   const findIntersection = (array1: Array<string>, array2: Array<string>) =>
     array1.filter((value: string) => array2.includes(value));
@@ -128,7 +129,7 @@ function App({ children, ...rest }: Props) {
       </a>
       <ErrorBoundary FallbackComponent={GlobalErrorFallback}>
         <NavContextProvider>
-          <NavContainer isHomepage={isHomepage} />
+          <NavContainer isHomepage={isHomepage} isPLA={isPLA} />
           <SubNavContainer
             siteMenuBrowseList={siteMenuBrowseList}
             siteMenuLearn={siteMenuLearn}

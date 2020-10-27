@@ -12,6 +12,7 @@ import { NAV_THEME, themes } from './Nav.theme';
 
 interface Props {
   isHomepage?: boolean;
+  isPLA?: boolean;
 }
 
 const ALTERNATE_THEME_ROUTES: string[] = [
@@ -21,7 +22,7 @@ const ALTERNATE_THEME_ROUTES: string[] = [
   trimSlash(ROUTE_MAP[ROUTES.TYPE_REVIEWS]),
 ];
 
-function NavContainer({ isHomepage = false }: Props) {
+function NavContainer({ isHomepage = false, isPLA = false }: Props) {
   const { pathname } = useRouter();
   const { setNavTheme, theme } = useNavContext();
 
@@ -47,7 +48,7 @@ function NavContainer({ isHomepage = false }: Props) {
   return (
     <CookiesProvider>
       <ThemeProvider theme={themes[theme]}>
-        <Nav isHomepage={isHomepage} />
+        <Nav isHomepage={isHomepage} isPLA={isPLA} />
       </ThemeProvider>
     </CookiesProvider>
   );

@@ -15,8 +15,8 @@ const styles: StylesMap = {
   },
   container: {
     alignItems: 'center',
-    backgroundColor: COLORS.ORANGE.SHADE_15_SOLID,
-    color: COLORS.GLOBAL.WHITE,
+    backgroundColor: COLORS.GLOBAL.WHITE,
+    color: COLORS.GLOBAL.BLACK,
     display: 'flex',
     paddingBottom: SPACING.SIZE_25,
     paddingLeft: GAP_COLUMNS.S,
@@ -31,6 +31,8 @@ const styles: StylesMap = {
     },
 
     [MQ.L]: {
+      backgroundColor: COLORS.LIGHT.GRAY_10,
+      color: COLORS.GLOBAL.BLACK,
       paddingLeft: SPACING.SIZE_40,
       paddingRight: SPACING.SIZE_40,
     },
@@ -40,7 +42,7 @@ const styles: StylesMap = {
 
     // eslint-disable-next-line sort-keys
     ':hover, :focus': {
-      backgroundColor: COLORS.ORANGE.SHADE_30_SOLID,
+      backgroundColor: COLORS.LIGHT.GRAY_20,
     },
   },
   containerHighlight: {
