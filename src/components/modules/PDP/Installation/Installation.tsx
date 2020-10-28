@@ -1,8 +1,6 @@
 import { CARS } from '~/components/global/Car/CarDetails.constants';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
-import Icon from '~/components/global/Icon/Icon';
-import { ICONS } from '~/components/global/Icon/Icon.constants';
 import { SCENERIES } from '~/components/global/Scenery/Scenery.constants';
 import { useInViewport } from '~/hooks/useInViewport';
 import { ui } from '~/lib/utils/ui-dictionary';
@@ -65,7 +63,6 @@ function Installation({
           css={styles.subtitle}
         >
           {ui('pdp.installation.subtitle')}{' '}
-          <Icon name={ICONS.KEYS} css={styles.subtitleIcon} />
         </GridItem>
         <GridItem
           as="p"
