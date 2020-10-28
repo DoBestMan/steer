@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
 import { OrderTrackingInput } from '~/data/models/OrderTrackingInput';
 import { ROUTE_MAP, ROUTES } from '~/lib/constants';
+import { hex2a } from '~/lib/utils/string';
 
 import OrderLoading from './OrderLoading/OrderLoading';
 import OrderTrackingResult from './OrderTrackingResult';
@@ -16,7 +17,14 @@ function OrderTrackingResultContainer() {
   } = useSiteGlobalsContext();
 
   const router = useRouter();
-  const { orderId, zip } = router.query;
+
+  let orderId = router.query.orderId ?? router.query.track_order;
+  let zip = router.query.zip ?? router.query.track_shipping_zip;
+
+  if (orderId && zip && zip.length > 5) {
+    orderId = hex2a(orderId.toString());
+    zip = hex2a(zip.toString());
+  }
 
   const {
     getOrderTracking,

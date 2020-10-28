@@ -157,3 +157,14 @@ export function removeHashInString(str: string): string {
 export function removeUrlParams(url: string): string {
   return removeHashParams(removeQueryParams(url));
 }
+
+export function hex2a(str1: string) {
+  {
+    const hex = str1;
+    let str = '';
+    for (let n = 0; n < hex.length; n += 2) {
+      str += String.fromCharCode(parseInt(hex.substr(n, 2), 16));
+    }
+    return str;
+  }
+}
