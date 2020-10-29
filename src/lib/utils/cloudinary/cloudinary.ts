@@ -139,7 +139,7 @@ export function transformation(
               transformValue = opacity(transformation[key] as number);
               break;
             case 'quality':
-              transformValue = quality(transformation[key] as number);
+              transformValue = quality(transformation[key] as string);
               break;
             case 'radius':
               transformValue = radius(transformation[key] as number);
@@ -213,8 +213,8 @@ function opacity(o: number): string {
   return `o_${o}`;
 }
 
-function quality(percent: number): string {
-  return `q_${percent}`;
+function quality(q: string): string {
+  return `q_${q}`;
 }
 
 function radius(r: number): string {

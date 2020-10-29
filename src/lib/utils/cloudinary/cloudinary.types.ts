@@ -239,7 +239,7 @@ export type Transformations = {
   gravity?: Gravity;
   height?: number;
   opacity?: number;
-  quality?: number;
+  quality?: string;
   radius?: number;
   width?: number;
   x?: number;

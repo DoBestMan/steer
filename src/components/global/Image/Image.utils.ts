@@ -57,7 +57,7 @@ export function getSrcset(url: string, q?: TransformationArgs): string {
       }
 
       // alternate quality depending on user's connectivity
-      let quality = 100;
+      let quality = 'auto:best';
       let type = null;
 
       if (
@@ -80,7 +80,7 @@ export function getSrcset(url: string, q?: TransformationArgs): string {
 
       // Reduce quality
       if (type !== null && type !== 'wifi' && type !== '4g') {
-        quality = 50;
+        quality = '50';
       }
 
       // Apply quality

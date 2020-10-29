@@ -212,7 +212,7 @@ export const headerArticleMock: PageData = {
     {
       altText: '',
       src:
-        'https://images.simpletire.com/image/upload/w_400,f_auto,q_100/v1593547175/article_image.svg',
+        'https://images.simpletire.com/image/upload/w_400,f_auto,q_auto:best/v1593547175/article_image.svg',
       type: 'SiteImage',
     },
     {
@@ -225,7 +225,7 @@ export const headerArticleMock: PageData = {
         altText: '',
         height: 0,
         src:
-          'https://images.simpletire.com/image/upload/f_auto,q_100/v1593547175/article_image.svg',
+          'https://images.simpletire.com/image/upload/f_auto,q_auto:best/v1593547175/article_image.svg',
         type: ICON_IMAGE_TYPE.IMAGE,
         width: 0,
       },

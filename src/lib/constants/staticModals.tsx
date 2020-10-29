@@ -105,7 +105,7 @@ const STATIC_MODALS: Record<string, ModalData> = {
         '* Estimated delivery of 2-4 days\n* Tires delivered by Fedex, UPS & Local Drivers\n\nEvery tire qualifies for free shipping with no minimum purchase required! Have tires delivered to any home, business, or local installation center within 2-4 business days of placing your order.\n\n*Free shipping available in the contiguous United States only.\n\nAt SimpleTire, keeping our customers and employees safe is a top priority. As an e-commerce company we’ve taken measures to protect against the spread of COVID-19 (Coronavirus) and ensure that we’re 100% operational and so are our suppliers and distributors.\n\nThere has been no impact to our supply and we’re also delivering almost 100% of our orders in 2-4 days to our customers.',
       image: {
         src:
-          'https://images.simpletire.com/image/upload/w_1600,f_auto,q_100/v1595012619/steer/seo/free-shipping.jpg',
+          'https://images.simpletire.com/image/upload/w_1600,f_auto,q_auto:best/v1595012619/steer/seo/free-shipping.jpg',
         altText: 'Free shipping',
         type: SiteImageNullableTypeEnum.SiteImage,
         width: 1600,
