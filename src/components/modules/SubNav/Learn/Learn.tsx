@@ -1,5 +1,6 @@
 import GridItem from '~/components/global/Grid/GridItem';
 import Link from '~/components/global/Link/Link';
+import Markdown from '~/components/global/Markdown/Markdown';
 import EmailSupport from '~/components/modules/Support/EmailSupport';
 import PhoneSupport from '~/components/modules/Support/PhoneSupport';
 import SupportHeading from '~/components/modules/Support/SupportHeading';
@@ -47,10 +48,17 @@ function Learn({
           {learnStepsData.list.map((step, idx) => (
             <li css={styles.step} key={step}>
               <div css={styles.number}>{idx + 1}</div>
-              <p css={styles.text}>{step}</p>
+              <Markdown isEditorial css={styles.text}>
+                {step}
+              </Markdown>
             </li>
           ))}
         </ol>
+        <p>
+          <Markdown isEditorial css={[styles.learnText, styles.text]}>
+            {learnStepsData.learnMore}
+          </Markdown>
+        </p>
         <p css={styles.more}>You may also be interested in:</p>
         <ul css={styles.moreLinks}>
           {siteMenuLearn.list.map(({ label, link }) => (

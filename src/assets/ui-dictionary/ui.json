@@ -327,13 +327,14 @@
     "learn": {
       "contentLabel": "Learn more",
       "step": {
-        "one": "Confirm if you need new tires",
-        "two": "Define how many tires you need",
-        "three": "Pick the right sized tire",
-        "four": "Select the right type of tire according to your use",
-        "five": "Schedule online and install in a shop near you"
+        "one": "Inspect your tires and consider replacement of your tires if the [tread depth is 4/32nds of an inch or less](/learn/tire-maintenance-safety/how-to-check-tread-on-tires \"Learn How to Check Your Tire Tread\"), if there is irregular tread wear or if the tire is damaged.",
+        "two": "Determine how many tires to replace from the tire inspection. Replacing all four tires is optimal, but when only replacing 2 tires, install them on the rear axle of the vehicle to help prevent hydroplaning.",
+        "three": "Pick the [right sized tire for your vehicle](/tire-sizes \"Shop for Tires by Tire Size\") using our tire fitment search or by checking the placard sticker located on the driver's side door jamb in newer vehicles.",
+        "four": "Select the tire that best fits your needs and what's most important to your driving experience. Tires can offer a vast array of benefits such as longer lasting, gas saving, off-roading or a number of other characteristcs.",
+        "five": "Schedule your appointment online and install your new tires at one of our trusted installer locations in your area."
       },
-      "title": "Replacing tires in 5 steps."
+	  "title": "Replacing tires in 5 steps.",
+	  "learnMore": "Care to [learn more about tires](/learn \"Learn More About Tires\")?"
     },
     "mobile": {
       "label": "Mobile Menu"

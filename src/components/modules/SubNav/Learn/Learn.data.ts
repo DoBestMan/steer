@@ -9,4 +9,5 @@ export const learnStepsData = {
     ui('nav.learn.step.five'),
   ],
   title: ui('nav.learn.title'),
+  learnMore: ui('nav.learn.learnMore'),
 };

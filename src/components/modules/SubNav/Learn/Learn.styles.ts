@@ -5,6 +5,13 @@ const styles: StylesMap = {
   icon: {
     marginBottom: SPACING.SIZE_20,
   },
+  learnText: {
+    p: {
+      fontSize: '1.5rem',
+      fontWeight: 'bold',
+      letterSpacing: '-0.01em',
+    },
+  },
   link: {
     ':not(:last-of-type)': {
       marginRight: SPACING.SIZE_20,
@@ -13,6 +20,7 @@ const styles: StylesMap = {
   more: {
     color: COLORS.LIGHT.GRAY_70,
     marginBottom: SPACING.SIZE_10,
+    marginTop: SPACING.SIZE_30,
   },
   moreLinks: {
     display: 'flex',
