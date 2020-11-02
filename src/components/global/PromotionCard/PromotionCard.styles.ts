@@ -65,6 +65,18 @@ const styles: StylesMap = {
   },
   eyebrowIcon: {
     paddingLeft: 8,
+    svg: {
+      height: '17px',
+      width: '20px',
+      [MQ.M]: {
+        height: '20px',
+        width: '20px',
+      },
+      [MQ.L]: {
+        height: '25px',
+        width: '32px',
+      },
+    },
   },
   links: {
     ':not(:last-child)': {
