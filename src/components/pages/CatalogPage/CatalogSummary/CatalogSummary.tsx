@@ -20,10 +20,15 @@ import VehicleContainer from './components/VehicleContainer';
 
 interface Props {
   exploreMore: () => void;
+  isSearchForTireSize?: boolean;
   totalTireCount: number;
 }
 
-function CatalogSummary({ exploreMore, totalTireCount }: Props) {
+function CatalogSummary({
+  exploreMore,
+  totalTireCount,
+  isSearchForTireSize,
+}: Props) {
   const {
     contentStage,
     showLoadingInterstitial,
@@ -88,6 +93,7 @@ function CatalogSummary({ exploreMore, totalTireCount }: Props) {
           data-component="MessageContainer"
           exploreMore={exploreMore}
           totalTireCount={totalTireCount}
+          isSearchForTireSize={!!isSearchForTireSize}
         />
       </Content>
     </Root>

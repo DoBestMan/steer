@@ -15,6 +15,7 @@ import { useSearchContext } from '~/components/modules/Search/Search.context';
 import { SearchStateEnum } from '~/components/modules/Search/Search.types';
 import { useSearchModalContext } from '~/components/modules/Search/SearchModal.context';
 import TopPicks from '~/components/pages/CatalogPage/TopPicks/TopPicks.container';
+import { useCatalogProductsContext } from '~/context/CatalogProducts.context';
 import { useCatalogSummaryContext } from '~/context/CatalogSummary.context';
 import { useModalContext } from '~/context/Modal.context';
 import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
@@ -116,6 +117,7 @@ export function BuildInMessage({
 
 interface DataMomentMessageProps {
   exploreMore?: () => void;
+  isSearchForTireSize?: boolean;
   openStaticModal: (modalId: string) => void;
   setStage(stage: STAGES): void;
   showLoadingInterstitial: boolean;
@@ -130,20 +132,25 @@ export function DataMomentMessage({
   openStaticModal,
   exploreMore,
   totalTireCount,
+  isSearchForTireSize,
 }: DataMomentMessageProps) {
+  const { setIsAdvancedView } = useCatalogProductsContext();
   const { message } = useTheme();
   const { asPath, query } = useRouter();
   const { selectVehicle } = useUserPersonalizationContext();
   const [step, setStep] = useState<number>(1);
   let showTopPicks = false;
   let mustShow = false;
-  if (siteCatalogSummaryPrompt) {
+  if (siteCatalogSummaryPrompt && isSearchForTireSize) {
     mustShow = siteCatalogSummaryPrompt.mustShow;
   }
   /**
    * If coming from Search, set programmatic focus to the message content
    */
-  if (showLoadingInterstitial && step === 1 && !mustShow) {
+  if (
+    (showLoadingInterstitial && step === 1 && query.oem) ||
+    (showLoadingInterstitial && step === 1 && isSearchForTireSize && !mustShow)
+  ) {
     showTopPicks = true;
   }
   const titleRef = useRef<HTMLDivElement>(null);
@@ -164,9 +171,11 @@ export function DataMomentMessage({
 
   const createPromptCtaClickHandler = function (
     vehicleMetadata: VehicleMetadata | null,
+    siteQueryParams: Record<string, string>,
   ) {
     return function () {
-      eventEmitters.newCatalogSearchQuery.emit({ comesFromSearch: false });
+      const { oem } = siteQueryParams;
+      eventEmitters.newCatalogSearchQuery.emit({ comesFromSearch: !!oem });
       if (vehicleMetadata) {
         selectVehicle(vehicleMetadata);
       }
@@ -176,7 +185,8 @@ export function DataMomentMessage({
   const hasMultipleCtas =
     siteCatalogSummaryPrompt?.ctaList &&
     siteCatalogSummaryPrompt.ctaList.length > 1;
-  if (showTopPicks && step === 1) {
+
+  function renderTopPicksSection() {
     return (
       <Grid css={styles.container}>
         <GridItem
@@ -211,6 +221,7 @@ export function DataMomentMessage({
             </Button>
             <Button
               onClick={function () {
+                setIsAdvancedView(false);
                 if (!query.oem) {
                   setStage && setStage(STAGES.RESULTS);
                   // Reset scroll position to top
@@ -234,6 +245,9 @@ export function DataMomentMessage({
         </GridItem>
       </Grid>
     );
+  }
+  if (showTopPicks && step === 1) {
+    return renderTopPicksSection();
   }
   return (
     siteCatalogSummaryPrompt && (
@@ -273,7 +287,10 @@ export function DataMomentMessage({
                       key={id}
                       as={LINK_TYPES.A}
                       href={href}
-                      onClick={createPromptCtaClickHandler(vehicleMetadata)}
+                      onClick={createPromptCtaClickHandler(
+                        vehicleMetadata,
+                        siteQueryParams,
+                      )}
                       style={buttonStyle}
                       theme={message.buttonTheme}
                     >
@@ -433,6 +450,7 @@ interface CatalogMessageProps {
   customerServiceEnabled?: boolean;
   customerServiceNumber: { display: string; value: string };
   exploreMore: () => void;
+  isSearchForTireSize?: boolean;
   totalTireCount: number;
 }
 
@@ -441,6 +459,7 @@ function CatalogMessage({
   customerServiceEnabled,
   exploreMore,
   totalTireCount,
+  isSearchForTireSize,
 }: CatalogMessageProps) {
   const {
     contentStage,
@@ -479,6 +498,7 @@ function CatalogMessage({
               // used only by top picks
               exploreMore={exploreMore}
               totalTireCount={totalTireCount}
+              isSearchForTireSize={!!isSearchForTireSize}
             />
           )}
         </MessageContainer>

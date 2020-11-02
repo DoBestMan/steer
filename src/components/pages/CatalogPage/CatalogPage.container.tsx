@@ -20,6 +20,7 @@ interface Props extends CatalogPageData {
     summary: string;
   };
   hasDefaultAdvancedView?: boolean;
+  isSearchForTireSize?: boolean;
   pageParams?: Record<string, string>;
   searchBy: SearchBy;
   searchByParams: SearchByParams;
@@ -32,6 +33,7 @@ function CatalogPageContainer({
   searchBy,
   searchByParams,
   hasDefaultAdvancedView,
+  isSearchForTireSize,
 }: Props) {
   const { query } = useRouter();
   const { isSearchOpen } = useSearchModalContext();
@@ -72,7 +74,10 @@ function CatalogPageContainer({
           pageParams={pageParams}
           hasDefaultAdvancedView={hasDefaultAdvancedView}
         >
-          <CatalogPage catalogGridRef={catalogGridRef} />
+          <CatalogPage
+            catalogGridRef={catalogGridRef}
+            isSearchForTireSize={!!isSearchForTireSize}
+          />
         </CatalogProductsContextProvider>
       </CatalogSummaryContextProvider>
     </>

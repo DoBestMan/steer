@@ -46,6 +46,7 @@ function VehicleCatalog({ serverData, make, model, query, year }: Props) {
       }}
       searchBy={searchBy}
       searchByParams={searchByParams}
+      hasDefaultAdvancedView
     />
   );
 }

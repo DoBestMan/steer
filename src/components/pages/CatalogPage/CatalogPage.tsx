@@ -23,9 +23,10 @@ import { STAGES } from './CatalogSummary/CatalogSummary.constants';
 
 interface Props {
   catalogGridRef: React.Ref<HTMLDivElement>;
+  isSearchForTireSize?: boolean;
 }
 
-function CatalogPage({ catalogGridRef }: Props) {
+function CatalogPage({ catalogGridRef, isSearchForTireSize }: Props) {
   const { setNavTheme, theme: navTheme } = useNavContext();
   const {
     displayedProducts,
@@ -127,6 +128,7 @@ function CatalogPage({ catalogGridRef }: Props) {
         <CatalogSummary
           exploreMore={scrollToGrid}
           totalTireCount={totalResult}
+          isSearchForTireSize={!!isSearchForTireSize}
         />
       )}
       {showGrid && siteCatalogProducts && previewFiltersData && (
