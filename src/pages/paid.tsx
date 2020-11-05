@@ -12,6 +12,7 @@ import {
 } from '~/lib/backend/product-detail';
 import { RESULTS_PER_PAGE_PDP } from '~/lib/constants';
 import { getStringifiedParams } from '~/lib/utils/routes';
+import { removeTireFromQueryParam } from '~/lib/utils/string';
 
 const ProductLine = WithErrorPageHandling(ProductDetailContainer);
 
@@ -21,6 +22,14 @@ export const getServerSideProps: GetServerSideProps<PageResponse<
   backendBootstrap({ request: context.req });
   const queryParams = getStringifiedParams(context.query);
   const { brand, productLine, tireSize } = queryParams;
+  const brandName = removeTireFromQueryParam(brand);
+  const params: Record<string, string> = {};
+  Object.entries(queryParams).map(([key, value]) => {
+    if (typeof value === 'string') {
+      key = key === 'region_id' ? 'regionId' : key;
+      params[key] = value;
+    }
+  });
 
   if (!brand || !productLine || !tireSize) {
     context.res.statusCode = 404;
@@ -29,9 +38,9 @@ export const getServerSideProps: GetServerSideProps<PageResponse<
 
   const [siteProduct, siteProductReviews] = await Promise.all([
     backendGetProductDetail({
-      brand,
+      brand: brandName,
       productLine,
-      query: queryParams,
+      query: params,
     }),
     backendGetProductReviews({
       brand,

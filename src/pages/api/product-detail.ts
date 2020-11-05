@@ -19,6 +19,7 @@ export default async (
   const params: Record<string, string> = {};
   Object.entries(rest).map(([key, value]) => {
     if (typeof value === 'string') {
+      key = key === 'region_id' ? 'regionId' : key;
       params[key] = value;
     }
   });
@@ -26,7 +27,7 @@ export default async (
   const siteProductResponse = await backendGetProductDetail({
     brand: brandName,
     productLine,
-    query: rest,
+    query: params,
   });
 
   if (siteProductResponse.isSuccess) {
