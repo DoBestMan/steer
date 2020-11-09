@@ -50,8 +50,11 @@ const styles: StylesMap = {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    minHeight: '60vh',
+    minHeight: '50vh',
     overflow: 'hidden',
+    [MQ.L]: {
+      minHeight: '56vh',
+    },
   },
   scrollColorContainer: {
     position: 'relative',

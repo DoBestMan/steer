@@ -12,7 +12,7 @@ import { CTAIconTypes } from './SearchByBoard.types';
 
 export interface SearchByBoardProps {
   promotionId?: string;
-  title: string;
+  title?: string;
 }
 
 interface CTA {
@@ -81,7 +81,7 @@ function SearchByBoard({ promotionId, title }: SearchByBoardProps) {
 
   return (
     <div css={styles.container}>
-      <p css={styles.title}>{title}</p>
+      {title && <p css={styles.title}>{title}</p>}
       <ul css={styles.ctaMenu}>
         {CTAList.map((cta) => (
           <li

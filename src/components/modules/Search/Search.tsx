@@ -163,8 +163,23 @@ function Search({
     // don't reset the search state or search results.
     if (hasLockedSearchState) {
       if (queryText) {
-        onSearchQuery({ queryText: '', queryType });
+        const queryTypeMap: Record<string, string> = {
+          makeModel: SearchStateEnum.VEHICLE,
+          widthRatio: SearchStateEnum.TIRE_SIZE,
+        };
+        const searchQueryType = queryTypeMap[queryType]
+          ? queryTypeMap[queryType]
+          : queryType;
+        const updatedSearchQuery = {
+          queryText: '',
+          queryType: searchQueryType,
+        };
+        onSearchQuery(updatedSearchQuery);
+        setCurrentInputQuery(updatedSearchQuery);
+        return;
       }
+      clearSearchResults();
+      onSetSearchState('');
       setCurrentInputQuery(resetQuery);
       return;
     }

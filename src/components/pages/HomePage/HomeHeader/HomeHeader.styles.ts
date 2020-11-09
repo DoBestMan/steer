@@ -122,7 +122,7 @@ export const styles: StylesMap = {
     },
 
     [MQ.L]: {
-      paddingBottom: 60,
+      paddingBottom: SPACING.SIZE_20,
       paddingTop: NAV_HEIGHT.L + 40,
     },
 

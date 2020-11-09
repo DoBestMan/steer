@@ -4,13 +4,34 @@ import { typography, typographyStyles } from '~/styles/typography.styles';
 const styles: StylesMap = {
   container: {
     backgroundColor: COLORS.GLOBAL.ORANGE,
-    padding: `${SPACING.SIZE_30}px ${SPACING.SIZE_20}px`,
+    display: 'flex',
+    flexWrap: 'wrap',
+    padding: `${SPACING.SIZE_20}px ${SPACING.SIZE_20}px`,
+    [MQ.M]: {
+      flexWrap: 'nowrap',
+    },
+    [MQ.XL]: {
+      padding: `${SPACING.SIZE_20}px ${SPACING.SIZE_60}px`,
+    },
   },
   ctaMenu: {
     display: 'flex',
+    flexBasis: '100%',
     justifyContent: 'center',
+    [MQ.M]: {
+      justifyContent: 'flex-start',
+      padding: `0 ${SPACING.SIZE_40}px`,
+    },
+    [MQ.L]: {
+      flexBasis: '60%',
+      justifyContent: 'center',
+      padding: 0,
+    },
   },
   ctaMenuIcon: {
+    '&:hover': {
+      backgroundColor: COLORS.ORANGE.SHADE_30,
+    },
     '&[data-icon-type="brand"]': {
       svg: {
         width: '120px',
@@ -67,7 +88,6 @@ const styles: StylesMap = {
     ':last-of-type': {
       marginRight: 0,
     },
-
     alignItems: 'center',
     cursor: 'pointer',
     display: 'flex',
@@ -92,17 +112,12 @@ const styles: StylesMap = {
       [MQ.M]: [
         typography.primarySubhead,
         {
-          padding: `0 ${SPACING.SIZE_60}px`,
+          flexBasis: '20%',
         },
       ],
-      [MQ.L]: [
-        typographyStyles.tertiaryHeadline,
-        {
-          padding: `0 ${SPACING.SIZE_120}px`,
-        },
-      ],
+      [MQ.L]: [typographyStyles.tertiaryHeadline],
       [MQ.XL]: {
-        padding: `0 ${SPACING.SIZE_180}px`,
+        paddingTop: SPACING.SIZE_10,
       },
     },
   ],
