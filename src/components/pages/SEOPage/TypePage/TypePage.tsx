@@ -32,6 +32,7 @@ interface TypePageData {
 export interface TypePageProps {
   curatedProducts: Array<ProductGroupListProps>;
   header: HeaderLandingPageProps;
+  id: number;
   links?: LinkListProps | null;
   name: string;
   popularBrands: Array<SiteGraphicTile>;
@@ -40,6 +41,9 @@ export interface TypePageProps {
 
 function TypePage({ typeData }: TypePageData) {
   const typeName = typeData.name.replace('-', ' ');
+  const searchParams = {
+    subtype: typeData.id.toString(),
+  };
   const typeBreadCrumData: BreadcrumbsItem[] = mapArrayToBreadcrumbs([
     {
       type: ROUTES.HOME,
@@ -100,6 +104,10 @@ function TypePage({ typeData }: TypePageData) {
           </GridItem>
         </Grid>
       </div>
+      <TireSizeBoardContainer
+        title={tireSizeBoardTitle}
+        params={searchParams}
+      />
       <div css={styles.mostPopularBrandsContainer}>
         <Grid>
           <GridItem
@@ -130,7 +138,6 @@ function TypePage({ typeData }: TypePageData) {
           </div>
         );
       })}
-      <TireSizeBoardContainer title={tireSizeBoardTitle} />
       {typeData.links ? (
         <Grid css={styles.alsoInterestedContainer}>
           <GridItem

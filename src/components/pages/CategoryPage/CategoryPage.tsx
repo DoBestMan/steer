@@ -32,6 +32,7 @@ interface CategoryPageData {
 export interface CategoryPageProps {
   curatedProducts: Array<ProductGroupListProps>;
   header: HeaderLandingPageProps;
+  id: number;
   links?: LinkListProps | null;
   name: string;
   popularBrands: Array<SiteGraphicTile>;
@@ -39,6 +40,9 @@ export interface CategoryPageProps {
 }
 function CategoryPage({ categoryData }: CategoryPageData) {
   const categoryName = categoryData.name.replace('-', ' ');
+  const searchParams = {
+    category: categoryData.id.toString(),
+  };
   const categoryBreadCrumbData: BreadcrumbsItem[] = mapArrayToBreadcrumbs([
     {
       type: ROUTES.HOME,
@@ -100,6 +104,10 @@ function CategoryPage({ categoryData }: CategoryPageData) {
           </GridItem>
         </Grid>
       </div>
+      <TireSizeBoardContainer
+        title={tireSizeBoardTitle}
+        params={searchParams}
+      />
       <div css={styles.mostPopularBrandsContainer}>
         <Grid>
           <GridItem
@@ -127,7 +135,6 @@ function CategoryPage({ categoryData }: CategoryPageData) {
           </div>
         );
       })}
-      <TireSizeBoardContainer title={tireSizeBoardTitle} />
       {categoryData.links ? (
         <Grid css={styles.alsoInterestedContainer}>
           <GridItem
