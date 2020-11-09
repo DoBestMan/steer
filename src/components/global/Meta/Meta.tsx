@@ -66,8 +66,13 @@ function Meta({
   title = `${title} | SimpleTire`;
   title = title.replace(/&amp;/g, '&');
   description = description.replace(/&amp;/g, '&');
+  const isWriteReview = router.pathname === ROUTE_MAP[ROUTES.WRITE_REVIEW];
   const isPLA = !!router.pathname.match(ROUTE_MAP[ROUTES.PRODUCT_DETAIL_PLA]);
-  robots = isPLA ? 'noindex,nofollow' : 'index,follow';
+  robots = isPLA
+    ? 'noindex,nofollow'
+    : isWriteReview
+    ? 'noindex,follow'
+    : 'index,follow';
   return (
     <Head>
       <meta charSet="utf-8" />
