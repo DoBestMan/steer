@@ -8,13 +8,11 @@ import { SiteCatalogSummaryTopPickItem } from '~/data/models/SiteCatalogSummaryT
 import { SiteCatalogSummaryTopPicksMore } from '~/data/models/SiteCatalogSummaryTopPicksMore';
 import { TIME } from '~/lib/constants';
 import { PRODUCT_IMAGE_TYPES } from '~/lib/constants/productImage.types';
-import { getScroll, subscribeScroll } from '~/lib/helpers/scroll';
 import { resetTranslateInstance, setTranslate } from '~/lib/helpers/translate';
-import { map } from '~/lib/utils/interpolation';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
 
-import Title from './Title/Title';
+import Frame from './Frame/Frame';
 import { CAROUSEL_PARAMS } from './TopPicks.constants';
 import { styles } from './TopPicks.styles';
 import TopPicksItem from './TopPicksItem/TopPicksItem';
@@ -33,8 +31,6 @@ interface Props {
   viewMoreData: SiteCatalogSummaryTopPicksMore | null;
 }
 
-const OFFSET_STARTING_ALPHA_INTERPOLATION = 100;
-
 function TopPicks({
   customerServiceNumber,
   exploreMore,
@@ -48,9 +44,8 @@ function TopPicks({
   const [swiper, setSwiper] = useState<SwiperInstance>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [show, setShow] = useState(false);
-  const [rootHeight, setRootHeight] = useState(0);
+  const [, setRootHeight] = useState(0);
   const [modalOpened, setModalOpened] = useState(false);
-  const [showTitle, setShowTitle] = useState(true);
   const [indexHovered, setIndexHovered] = useState<number | undefined>(
     undefined,
   );
@@ -68,7 +63,9 @@ function TopPicks({
 
   const slideTo = useCallback(
     (index: number) => {
-      swiper && swiper.slideTo(index);
+      if (swiper) {
+        swiper.slideTo(index);
+      }
     },
     [swiper],
   );
@@ -90,13 +87,10 @@ function TopPicks({
     });
 
     swiper.on('sliderMove', () => {
-      setShowTitle(false);
       setIndexHovered(undefined);
     });
 
-    swiper.on('touchEnd', () => {
-      setShowTitle(true);
-    });
+    swiper.on('touchEnd', () => {});
 
     return () => {
       resetTranslateInstance();
@@ -136,36 +130,6 @@ function TopPicks({
       window.removeEventListener('resize', resize, false);
     };
   }, [rootRef]);
-
-  // On scroll
-  useEffect(() => {
-    if (!rootRef || !rootRef.current) {
-      return;
-    }
-
-    const scroll = () => {
-      if (!rootRef || !rootRef.current) {
-        return;
-      }
-
-      const y = getScroll().y;
-      const alpha = map(
-        y,
-        OFFSET_STARTING_ALPHA_INTERPOLATION,
-        OFFSET_STARTING_ALPHA_INTERPOLATION + rootHeight * 0.5,
-        1,
-        0,
-      );
-
-      // Directly changing the style to avoid re-render loop
-      rootRef.current.style.opacity = String(alpha);
-    };
-    const subscription = subscribeScroll(scroll);
-
-    return () => {
-      subscription();
-    };
-  }, [rootRef, rootHeight]);
 
   const onItemMouseEnter = useCallback(
     (index: number) => {
@@ -228,11 +192,14 @@ function TopPicks({
       asset = fallbackImage;
     }
 
+    const promotionInfo = pick.product?.siteCatalogPromotionInfo?.list[0];
+
     const key = `${header.titleLine1}-${product?.name}`;
 
     return (
       <div css={styles.pick} key={key}>
         <TopPicksItem
+          pick={pick}
           currentIndex={i}
           addVehicleInfo={addVehicleInfo}
           brand={brand}
@@ -242,6 +209,7 @@ function TopPicks({
           asset={asset}
           deliveryInfo={deliveryInfo}
           index={i}
+          activeIndex={currentIndex}
           isCurrent={i === currentIndex}
           location={location}
           oeModal={siteCatalogSummaryTopPickItemAdditionalInfo}
@@ -257,6 +225,8 @@ function TopPicks({
           onItemMouseLeave={onItemMouseLeave}
           openSearch={openSearch}
           slideTo={slideTo}
+          openModal={openModal}
+          promotionInfo={promotionInfo}
         />
       </div>
     );
@@ -266,6 +236,7 @@ function TopPicks({
     carouselItems.push(
       <div css={styles.pick} key="view-more-pick">
         <TopPicksItem
+          activeIndex={currentIndex}
           currentIndex={picks.length}
           customerServiceNumber={customerServiceNumber}
           viewMoreData={viewMoreData}
@@ -285,39 +256,11 @@ function TopPicks({
 
   return (
     <div ref={rootRef} css={styles.root}>
-      <div css={styles.titlesContainer}>
-        <div
-          css={[styles.titleContainer, showTitle && styles.titleContainerShow]}
-          ref={titleRef}
-          tabIndex={-1}
-        >
-          {picks.map((pick, i) => {
-            return (
-              <Title
-                currentIndex={i}
-                pick={pick}
-                key={`_index_${i}`}
-                isCurrent={
-                  (indexHovered !== undefined && indexHovered === i) ||
-                  (typeof indexHovered === 'undefined' && i === currentIndex)
-                }
-                openModal={openModal}
-              />
-            );
-          })}
-          {viewMoreData && (
-            <Title
-              currentIndex={picks.length}
-              viewMoreData={viewMoreData}
-              isCurrent={
-                (indexHovered && indexHovered === picks.length) ||
-                (showMoreData && indexHovered === undefined)
-              }
-            />
-          )}
-        </div>
-      </div>
-
+      <Frame
+        currentIndex={currentIndex}
+        slideTo={slideTo}
+        length={picks.length}
+      />
       <div css={styles.carousel} id="top-picks-carousel">
         <Carousel params={CAROUSEL_PARAMS} getSwiper={setSwiper}>
           {carouselItems}

@@ -120,9 +120,9 @@ export function TopPicksItemWithKnobs() {
 
   return (
     <div css={styles.root}>
-      <div css={styles.fakeBackground}>
-        <div css={styles.topContent}></div>
-        <div css={styles.bottomContent}></div>
+      <div css={styles.fakeBackground} className="fakeBackground">
+        <div css={styles.topContent} className="topContent"></div>
+        <div css={styles.bottomContent} className="bottomContent"></div>
       </div>
       <TopPicksItem show {...data} currentIndex={0} slideTo={slideTo} />
     </div>

@@ -43,7 +43,7 @@ export default function TPITitleLine2({ header, oeModal, openModal }: Props) {
               theme={LINK_THEME.LIGHT_HIGHLIGHTED}
               as="button"
               onClick={openModal}
-              css={[typography.primaryHeadline, styles.modalButton]}
+              css={styles.modalButton}
             >
               {buttonLabel}
             </Link>

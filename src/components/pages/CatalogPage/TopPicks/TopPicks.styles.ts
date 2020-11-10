@@ -11,6 +11,7 @@ import {
   TIME,
   Z_INDEX,
 } from '~/lib/constants';
+import { typography } from '~/styles/typography.styles';
 
 export const EXPLORE_BUTTON_HEIGHT = {
   S: 60,
@@ -37,8 +38,38 @@ export const TOP_CONTAINER_MIN_HEIGHT = {
   L: 538,
 };
 
+export const SPACING_FROM_TOP = {
+  S: 77,
+  M: 115,
+  L: 141,
+};
+
 export const styles: CSSObject = {
   carousel: {
+    '&:after': {
+      background: COLORS.LIGHT.GRAY_20,
+      borderRadius: '20px 20px 0px 0px',
+      content: '""',
+      display: 'block',
+      height: `calc(100% - ${SPACING_FROM_TOP.S}px)`,
+      left: '50%',
+      opacity: 0.3,
+      position: 'absolute',
+      top: SPACING_FROM_TOP.S,
+      transform: 'translateX(-50%)',
+      width: 300,
+
+      [MQ.M]: {
+        height: `calc(100% - ${SPACING_FROM_TOP.M}px)`,
+        top: SPACING_FROM_TOP.M,
+        width: 478,
+      },
+      [MQ.L]: {
+        height: `calc(100% - ${SPACING_FROM_TOP.L}px)`,
+        top: SPACING_FROM_TOP.L,
+        transform: 'translateX(-50% - 10px)',
+      },
+    },
     '&:hover': {
       '.swiper-slide-active': {
         zIndex: Z_INDEX.TOP,
@@ -60,6 +91,7 @@ export const styles: CSSObject = {
         transition: `opacity ${TIME.MS300}ms ${EASING.CUBIC_EASE_OUT}`,
       },
     },
+
     // above current or next so we can click on it
     '.swiper-slide-prev': {
       zIndex: Z_INDEX.FRONT,
@@ -132,13 +164,19 @@ export const styles: CSSObject = {
     transition: `opacity ${TIME.MS300}ms ${EASING.CUBIC_EASE_OUT}`,
   },
 
-  titleBottom: {
-    display: 'block',
-
-    [MQ.L]: {
+  titleBottom: [
+    typography.primaryHeadline,
+    {
       display: 'inline',
+      fontSize: '15px',
+      [MQ.M]: {
+        fontSize: '22px',
+      },
+      [MQ.L]: {
+        fontSize: '22px',
+      },
     },
-  },
+  ],
 
   // Take whatever space's left
   titleContainer: {
@@ -171,18 +209,22 @@ export const styles: CSSObject = {
   },
 
   titleContainerInner: {
+    color: COLORS.GLOBAL.BLACK,
     display: 'block',
     left: 0,
     pointerEvents: 'none',
     position: 'absolute',
     textAlign: 'center',
-    top: '50%',
-    transform: 'translate3d(0, -50%, 0)',
+    top: SPACING_FROM_TOP.S + 15,
+    transform: 'translate3d(0, 0, 0)',
     width: '100%',
-
+    [MQ.M]: {
+      top: SPACING_FROM_TOP.M + 57,
+    },
     [MQ.L]: {
       left: '50%',
-      transform: 'translate3d(-50%, -50%, 0)',
+      top: SPACING_FROM_TOP.L + 40,
+      transform: 'translate3d(-50%, 0, 0)',
       width: '100vw',
     },
   },
@@ -194,6 +236,20 @@ export const styles: CSSObject = {
     opacity: 1,
     pointerEvents: 'all',
   },
+
+  titleLine1: [
+    typography.primaryHeadline,
+    {
+      display: 'block',
+      fontSize: '15px',
+      [MQ.M]: {
+        fontSize: '22px',
+      },
+      [MQ.L]: {
+        fontSize: '22px',
+      },
+    },
+  ],
 
   titlesContainer: {
     height: `calc(100% - ${EXPLORE_BUTTON_HEIGHT.S}px)`,

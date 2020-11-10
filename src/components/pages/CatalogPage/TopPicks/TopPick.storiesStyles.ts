@@ -1,7 +1,7 @@
 import { CSSObject } from '@emotion/core';
 
 import { NAV_HEIGHT } from '~/components/modules/Nav/Nav.styles';
-import { COLORS, MQ } from '~/lib/constants';
+import { COLORS, MQ, SPACING } from '~/lib/constants';
 
 export const styles: CSSObject = {
   bottomContent: {
@@ -17,6 +17,10 @@ export const styles: CSSObject = {
     right: 0,
     top: 0,
     zIndex: -1,
+  },
+
+  itemWrapper: {
+    padding: SPACING.SIZE_30,
   },
 
   root: {
@@ -36,7 +40,7 @@ export const styles: CSSObject = {
     },
 
     [MQ.L]: {
-      height: '66.66666666vh',
+      height: '66.6666666vh',
       minHeight: 538,
       paddingTop: NAV_HEIGHT.L,
     },

@@ -3,6 +3,7 @@ import { PRODUCT_IMAGE_TYPES } from '~/lib/constants/productImage.types';
 import { SiteCatalogBrand } from './SiteCatalogBrand';
 import { SiteCatalogProductImageTypeEnum } from './SiteCatalogProductImage';
 import { SiteCatalogPromotionInfo } from './SiteCatalogPromotionInfo';
+import { SiteCategory } from './SiteCategory';
 import { SiteIcon } from './SiteIcon';
 import { SiteImage } from './SiteImage';
 import { SiteLink } from './SiteLink';
@@ -41,6 +42,7 @@ export interface SiteCatalogProductItem {
     label: string | null;
     price: SitePrice | null;
   }> | null;
+  category?: SiteCategory | null;
   rating: {
     quantity: number;
     value: number;

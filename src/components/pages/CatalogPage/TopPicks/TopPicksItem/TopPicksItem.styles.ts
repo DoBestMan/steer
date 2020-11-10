@@ -69,6 +69,9 @@ export const styles: StylesMap = {
       width: WHEEL_WIDTH.L,
     },
   },
+  assetHovered: {
+    cursor: 'pointer',
+  },
   assetShow: {
     opacity: 1,
     transform: 'translate3d(0, 0, 0) rotate(0deg)',
@@ -131,6 +134,15 @@ export const styles: StylesMap = {
     opacity: 1,
     visibility: 'visible',
   },
+  currentItem: {
+    '& *': {
+      visibility: 'hidden',
+    },
+  },
+  customOriginalStyles: {
+    color: COLORS.ORANGE.TINT_70,
+    fontSize: 15,
+  },
   infoContainer: {
     color: COLORS.ORANGE.SHADE_85,
     display: 'block',
@@ -168,14 +180,21 @@ export const styles: StylesMap = {
       visibility: 'visible',
     },
   },
-  modalButton: {
-    display: 'inline-block',
-    verticalAlign: 'text-bottom',
-
-    [MQ.L]: {
-      verticalAlign: 'inherit',
+  modalButton: [
+    typography.primaryHeadline,
+    {
+      display: 'inline-block',
+      fontSize: '15px',
+      verticalAlign: 'text-bottom',
+      [MQ.M]: {
+        fontSize: '22px',
+      },
+      [MQ.L]: {
+        fontSize: '22px',
+        verticalAlign: 'inherit',
+      },
     },
-  },
+  ],
   price: [
     typography.topPicksPrice,
     {
@@ -207,6 +226,27 @@ export const styles: StylesMap = {
   productPerkContainer: {
     display: 'block',
   },
+  promotionIcon: {
+    color: COLORS.GLOBAL.WHITE,
+    width: SPACING.SIZE_10,
+    height: SPACING.SIZE_10,
+    marginLeft: SPACING.SIZE_05,
+  },
+  promotionInfo: [
+    {
+      '& > div': {
+        color: COLORS.GLOBAL.WHITE,
+        marginBottom: 0,
+      },
+      alignItems: 'center',
+      display: 'flex',
+      paddingBottom: SPACING.SIZE_10,
+      paddingTop: SPACING.SIZE_10,
+    },
+  ],
+  promotionSpacing: {
+    height: SPACING.SIZE_35,
+  },
   rating: {
     alignItems: 'center',
     display: 'flex',
@@ -217,25 +257,21 @@ export const styles: StylesMap = {
     boxSizing: 'border-box',
     height: '100%',
     margin: '0 auto',
-    width: 250,
+    position: 'relative',
+    width: 300,
 
     [MQ.M]: {
-      width: 400,
+      width: 478,
     },
-
     [MQ.L]: {
-      width: 500,
-    },
-
-    [MQ.XL]: {
-      width: 350,
+      width: '100%',
     },
   },
   rootHovered: {
     opacity: 1,
   },
   rootNotHovered: {
-    opacity: 0.3,
+    opacity: '0.3 !important',
   },
   sticker: {
     left: -SPACING.SIZE_15,

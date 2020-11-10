@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import BrandLogoOrLabel from '~/components/global/BrandLogoOrLabel/BrandLogoOrLabel';
 import Icon from '~/components/global/Icon/Icon';
@@ -6,6 +6,7 @@ import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Image from '~/components/global/Image/Image';
 import BaseLink from '~/components/global/Link/BaseLink';
 import Prices from '~/components/global/Prices/Prices';
+import PromoTag from '~/components/global/PromoTag/PromoTag';
 import Stars, { HALF_WIDTH_STARS } from '~/components/global/Stars/Stars';
 import Sticker from '~/components/global/Sticker/Sticker';
 import { STICKER_SIZES } from '~/components/global/Sticker/Sticker.styles';
@@ -17,6 +18,7 @@ import { ordinalSuffixOf } from '~/lib/utils/string';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
 
+import Title from '../Title/Title';
 import { SPEED_PER_BP } from '../TopPicks.constants';
 import CTA from './CTA/CTA';
 import { styles } from './TopPicksItem.styles';
@@ -28,6 +30,8 @@ const ASSETS_CONSTANTS = {
     backgroundColor: 'transparent',
   },
 };
+
+const TRANSITION_DURATION = '0.5s';
 
 function TopPicksItem(props: TopPickItemsProps) {
   const {
@@ -43,9 +47,8 @@ function TopPicksItem(props: TopPickItemsProps) {
     isCurrent = true,
     indexHovered,
     location,
-    onItemMouseEnter,
-    onItemMouseLeave,
     openSearch,
+    openModal,
     priceList,
     productFeature,
     productName,
@@ -55,12 +58,16 @@ function TopPicksItem(props: TopPickItemsProps) {
     url,
     viewMoreData,
     slideTo,
+    pick,
+    activeIndex,
+    promotionInfo,
   } = props;
 
   if (brand?.image?.src) {
     brand.image.src = transformSrcLogoToWhite(brand.image.src);
   }
 
+  const [assetHovered, setAssetHovered] = useState(false);
   const rootRef = useRef<HTMLDivElement | null>(null);
   const assetRef = useRef<HTMLSpanElement | null>(null);
   const contentRef = useRef<HTMLAnchorElement | null>(null);
@@ -108,7 +115,7 @@ function TopPicksItem(props: TopPickItemsProps) {
 
       if (assetRef.current) {
         const rotate = translate.x / speed;
-        assetRef.current.style.transitionDuration = '50ms';
+        assetRef.current.style.transitionDuration = TRANSITION_DURATION;
         assetRef.current.style.transform = `rotate(${rotate}deg)`;
       }
     };
@@ -118,21 +125,10 @@ function TopPicksItem(props: TopPickItemsProps) {
     return () => {
       subscription();
     };
-  }, [assetRef, show, breakpoints]);
+  }, [assetRef, show, breakpoints, activeIndex]);
 
   const onAddInfoVehicleClick = () => {
     openSearch && openSearch();
-  };
-
-  const onMouseEnter = () => {
-    onItemMouseEnter &&
-      typeof index !== 'undefined' &&
-      !isCurrent &&
-      onItemMouseEnter(index);
-  };
-
-  const onMouseLeave = () => {
-    onItemMouseLeave && onItemMouseLeave();
   };
 
   const ctaLabelStr =
@@ -143,9 +139,6 @@ function TopPicksItem(props: TopPickItemsProps) {
         });
 
   const rootStyles = [styles.root];
-  if (typeof indexHovered !== 'undefined') {
-    rootStyles.push(isHovered ? styles.rootHovered : styles.rootNotHovered);
-  }
 
   const showCta =
     (isCurrent || (breakpoints.greaterThan.M && isHovered)) &&
@@ -181,16 +174,45 @@ function TopPicksItem(props: TopPickItemsProps) {
     contentRef && contentRef.current && contentRef.current.focus();
   };
 
+  const handleAssetClick = () => {
+    if (!isCurrent) {
+      return;
+    }
+    if (ctaRef && ctaRef.current) {
+      ctaRef.current.click();
+    }
+  };
+
+  const handleMouseHoverAsset = () => {
+    setAssetHovered(true);
+  };
+
+  const handleMouseHoverLeave = () => {
+    setAssetHovered(false);
+  };
+
   return (
     <div
-      css={rootStyles}
+      css={[rootStyles, !isCurrent && styles.rootNotHovered]}
       ref={rootRef}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
       onClick={onClick}
       aria-labelledby={idForAriaLabbeledBy}
     >
       <span css={styles.topContent}>
+        <Title
+          currentIndex={currentIndex}
+          pick={pick}
+          isCurrent={isCurrent}
+          openModal={openModal}
+        />
+        {viewMoreData && (
+          <Title
+            currentIndex={currentIndex}
+            viewMoreData={viewMoreData}
+            isCurrent={isCurrent}
+            openModal={openModal}
+          />
+        )}
         <span css={styles.topContentInner}>
           <span css={styles.assetContainer}>
             {/* Sticker (1st, 2nd...) */}
@@ -207,54 +229,69 @@ function TopPicksItem(props: TopPickItemsProps) {
 
             {/* Tire asset */}
             {!viewMoreData && asset && (
-              <span
-                css={[styles.asset, show && styles.assetShow]}
-                ref={assetRef}
-              >
-                <Image
-                  {...asset}
-                  responsive
-                  as={'span'}
-                  widths={ASSETS_CONSTANTS.WIDTHS}
-                  customContainerStyles={
-                    ASSETS_CONSTANTS.CUSTOM_CONTAINER_STYLES
-                  }
-                />
+              <span css={styles.assetWrapper}>
+                <span
+                  css={[
+                    styles.asset,
+                    show && styles.assetShow,
+                    isCurrent && assetHovered && styles.assetHovered,
+                  ]}
+                  ref={assetRef}
+                  onMouseEnter={handleMouseHoverAsset}
+                  onMouseLeave={handleMouseHoverLeave}
+                  onClick={handleAssetClick}
+                >
+                  <Image
+                    {...asset}
+                    responsive
+                    as={'span'}
+                    widths={ASSETS_CONSTANTS.WIDTHS}
+                    customContainerStyles={
+                      ASSETS_CONSTANTS.CUSTOM_CONTAINER_STYLES
+                    }
+                  />
+                </span>
               </span>
             )}
 
             {/* View More */}
             {viewMoreData && exploreMore && (
-              <button
-                css={[
-                  styles.viewMoreContainer,
-                  !isCurrent && styles.unclickable,
-                ]}
-                onClick={exploreMore}
-                ref={viewMoreRef}
-              >
-                <span
-                  css={[typography.secondaryHeadline, styles.viewMoreTitle]}
+              <span css={styles.viewMoreWrapper}>
+                <button
+                  css={[
+                    styles.viewMoreContainer,
+                    !isCurrent && styles.unclickable,
+                  ]}
+                  onClick={exploreMore}
+                  ref={viewMoreRef}
                 >
-                  view more
-                </span>
-                {totalResult && (
                   <span
-                    css={[typography.smallCopyTight, styles.viewMoreSubtitle]}
+                    css={[typography.secondaryHeadline, styles.viewMoreTitle]}
                   >
-                    {ui('catalog.topPicks.viewMoreTire', {
-                      totalResult,
-                    })}
+                    view more
                   </span>
-                )}
-              </button>
+                  {totalResult && (
+                    <span
+                      css={[typography.smallCopyTight, styles.viewMoreSubtitle]}
+                    >
+                      {ui('catalog.topPicks.viewMoreTire', {
+                        totalResult,
+                      })}
+                    </span>
+                  )}
+                </button>
+              </span>
             )}
           </span>
         </span>
       </span>
 
       <span
-        css={[styles.bottomContent, showCta && styles.bottomContentCurrent]}
+        css={[
+          styles.bottomContent,
+          showCta && styles.bottomContentCurrent,
+          !isCurrent && styles.currentItem,
+        ]}
       >
         {/* Need vehicle info */}
         {addVehicleInfo && (
@@ -294,16 +331,25 @@ function TopPicksItem(props: TopPickItemsProps) {
                 />
               </span>
             )}
-
             {/* Price */}
             <span css={styles.pricesContainer}>
               <Prices
                 customPriceStyles={styles.price}
+                customOriginalStyles={styles.customOriginalStyles}
                 isLight
                 priceList={priceList}
               />
             </span>
-
+            {/* Promotion */}
+            {promotionInfo && promotionInfo.label && promotionInfo.icon && (
+              <span css={styles.promotionInfo}>
+                <PromoTag
+                  style={promotionInfo.style}
+                  icon={promotionInfo.icon}
+                  label={promotionInfo.label}
+                />
+              </span>
+            )}
             {/* Product description */}
             <span css={styles.infoContainer}>
               {/* 1st line: deliveryInfo */}
@@ -324,7 +370,7 @@ function TopPicksItem(props: TopPickItemsProps) {
                   data-testid="top-pick-name"
                 >
                   {productName}{' '}
-                  {productFeature && <span>・{productFeature}</span>}
+                  {productFeature && <span> ・ {productFeature}</span>}
                 </span>
               )}
 
@@ -396,6 +442,9 @@ function TopPicksItem(props: TopPickItemsProps) {
             />
           </span>
         )}
+
+        {/* Promotion tag height compensation */}
+        {!promotionInfo && <span css={styles.promotionSpacing}></span>}
       </span>
     </div>
   );

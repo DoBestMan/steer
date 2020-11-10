@@ -44,7 +44,7 @@ function Title({
         css={[styles.title, show && styles.titleShow]}
         id={idForAriaLabbeledBy}
       >
-        <span css={typography.primaryHeadline}>
+        <span css={styles.titleLine1}>
           <TitleLine1
             viewMoreDataTitle={
               showMoreData && viewMoreData ? viewMoreData.header.title : null
@@ -53,7 +53,7 @@ function Title({
           />
         </span>
         {currentHeader?.titleLine2 && (
-          <span css={[styles.titleBottom, typography.primaryHeadline]}>
+          <span css={styles.titleBottom}>
             <TitleLine2
               oeModal={currentOeModal}
               header={currentHeader}

@@ -81,12 +81,12 @@ export const MEASUREMENTS = {
     CONTENT_MIN_HEIGHT: {
       S: '40%',
       M: '35%',
-      L: '33.33%',
+      L: '32.0%',
     },
     CONTENT_TOP: {
       S: 'max(60%, 385px)',
       M: 'max(65%, 517px)',
-      L: 'max(66.666666%, 538px)',
+      L: 'max(67.0%, 549px)',
     },
   },
   [STAGES.NO_RESULTS]: {

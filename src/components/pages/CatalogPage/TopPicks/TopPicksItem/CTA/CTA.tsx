@@ -33,7 +33,13 @@ function CTA(
 ) {
   if (hasPriceList && ctaLabelStr && url) {
     return (
-      <Button as="a" href={url} theme={THEME.ORANGE} css={styles.ctaItem}>
+      <Button
+        as="a"
+        href={url}
+        theme={THEME.ORANGE}
+        css={styles.ctaItem}
+        ref={ref as MutableRefObject<HTMLButtonElement>}
+      >
         {ctaLabelStr}
       </Button>
     );

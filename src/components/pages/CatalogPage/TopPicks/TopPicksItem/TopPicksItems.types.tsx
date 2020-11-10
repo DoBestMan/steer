@@ -1,4 +1,6 @@
 import { SiteCatalogBrand } from '~/data/models/SiteCatalogBrand';
+import { SiteCatalogPromotion } from '~/data/models/SiteCatalogPromotionInfo';
+import { SiteCatalogSummaryTopPickItem } from '~/data/models/SiteCatalogSummaryTopPickItem';
 import { SiteCatalogSummaryTopPickItemAdditionalInfo } from '~/data/models/SiteCatalogSummaryTopPickItemAdditionalInfo';
 import { SiteCatalogSummaryTopPicksMore } from '~/data/models/SiteCatalogSummaryTopPicksMore';
 import { SiteImage } from '~/data/models/SiteImage';
@@ -13,6 +15,7 @@ export interface TopPickItemsHeader {
 }
 
 export interface TopPickItemsProps {
+  activeIndex?: number;
   addVehicleInfo?: boolean;
   asset?: SiteImage | null;
   brand?: SiteCatalogBrand | null;
@@ -32,13 +35,16 @@ export interface TopPickItemsProps {
   oeModal?: SiteCatalogSummaryTopPickItemAdditionalInfo | null;
   onItemMouseEnter?: (index: number) => void;
   onItemMouseLeave?: () => void;
+  openModal?: () => void;
   openSearch?: () => void;
+  pick?: SiteCatalogSummaryTopPickItem;
   priceList?: Array<{
     label: string | null;
     price: SitePrice | null;
   }> | null;
   productFeature?: string | null;
   productName?: string | null;
+  promotionInfo?: SiteCatalogPromotion | null;
   rating?: {
     quantity: number;
     value: number;

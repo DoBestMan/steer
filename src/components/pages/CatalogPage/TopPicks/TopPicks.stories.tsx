@@ -2,6 +2,7 @@ import { SiteCatalogProductItem } from '~/data/models/SiteCatalogProductItem';
 import { SiteCatalogSummaryTopPickItem } from '~/data/models/SiteCatalogSummaryTopPickItem';
 import { SiteCatalogSummaryTopPickItemAdditionalInfo } from '~/data/models/SiteCatalogSummaryTopPickItemAdditionalInfo';
 import { SiteCatalogSummaryTopPicksMore } from '~/data/models/SiteCatalogSummaryTopPicksMore';
+import { SiteIcon } from '~/data/models/SiteIcon';
 import { SiteImage } from '~/data/models/SiteImage';
 import { SitePrice } from '~/data/models/SitePrice';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
@@ -27,6 +28,125 @@ const customerServiceNumber = {
 export function TopPicksWithKnobs() {
   const picks = [
     /* eslint-disable sort-keys */
+    {
+      header: {
+        titleLine1: "Civic's 1st pick:",
+        titleLine2: 'Keep it enough longer so that original tire',
+        subtitle: 'That came with your Honda from the factory',
+        pill: null,
+        additionalInfoLabel: 'original tire',
+      },
+      fallbackImage: null,
+      product: {
+        name: 'Turanaz',
+        loadSpeedRating: '89V',
+        highlight: '30% off',
+        size: '100',
+        gridAttribute: 'Original tire',
+        topPicksAttribute: '60k mile warranty',
+        brand: {
+          image: {
+            altText: '115x25 image',
+            height: 25,
+            src: 'https://via.placeholder.com/115x25',
+            type: ICON_IMAGE_TYPE.IMAGE,
+            width: 115,
+          } as SiteImage,
+          label: 'Continental',
+        },
+        link: {
+          href: '/',
+          isExternal: true,
+        },
+        priceList: [
+          {
+            label: null,
+            price: {
+              salePriceInCents: '23255',
+              estimatedRetailPriceInCents: '37800',
+            } as SitePrice,
+          },
+        ],
+        category: {
+          name: 'Performance',
+          icon: {
+            svgId: 'performance',
+          } as SiteIcon,
+        },
+        rating: {
+          value: 4.8,
+          quantity: 0,
+        },
+        siteCatalogPromotionInfo: {
+          count: 1,
+          list: [
+            {
+              label: 'Spring Sale',
+              icon: {
+                svgId: 'best-price',
+              } as SiteIcon,
+              style: 'SitePromotionItemDefault',
+            },
+          ],
+        },
+        imageList: [
+          {
+            image: {
+              altText: '',
+              height: 800,
+              src:
+                'https://images.simpletire.com/image/upload/v1590590461/playground/mich-sidewall-v1_hpb7aj.png',
+              type: ICON_IMAGE_TYPE.IMAGE,
+              width: 800,
+            } as SiteImage,
+            productImageType: 'sidewall',
+          },
+        ],
+        specList: [
+          {
+            label: 'Warranty',
+            value: '65k mi',
+            concise: '65k mi warranty',
+          },
+        ],
+        performanceRatingList: [
+          {
+            label: 'Dry',
+            value: 4.8,
+          },
+        ],
+        activeFilterValueList: ['filter'],
+        deliveryInfo: {
+          value: '2-day free delivery',
+          isFeatured: true,
+        },
+        dataMomentList: [
+          {
+            label: 'data label',
+            icon: {
+              svgId: 'performance',
+            },
+          },
+        ],
+      } as SiteCatalogProductItem,
+      ctaLabel: 'Select original tire',
+      siteCatalogSummaryTopPickItemAdditionalInfo: {
+        title: 'Original tire',
+        content:
+          'Originally, your Civic came with tires that are no longer being made.\n\nBut don’t worry, we review the original tire specs when selecting your top picks in order to provide the best match in terms of performance, durability and price.',
+        table: {
+          title: 'Original tire specs',
+          items: [
+            { label: 'Warranty', value: '60000 miles' },
+            { label: 'Max speed', value: '168 mph' },
+            { label: 'Max load', value: '1389 lbs' },
+            { label: 'Features', value: 'Runflat, studded, smartway' },
+            { label: 'UTQG', value: '500AA' },
+            { label: 'Type', value: 'Passenger' },
+          ],
+        },
+      },
+    } as SiteCatalogSummaryTopPickItem,
     {
       header: {
         titleLine1: "Civic's 1st pick:",

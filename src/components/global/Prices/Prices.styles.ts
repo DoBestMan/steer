@@ -12,7 +12,6 @@ const styles: StylesMap = {
     typography.smallCopyTight,
     {
       color: COLORS.LIGHT.GRAY_70,
-      marginBottom: SPACING.SIZE_02,
       marginLeft: SPACING.SIZE_05,
       textDecoration: 'line-through',
     },
@@ -21,6 +20,10 @@ const styles: StylesMap = {
     display: 'block',
     marginLeft: 0,
     textDecoration: 'none',
+  },
+  wrapper: {
+    display: 'flex',
+    alignItems: 'center',
   },
 };
 

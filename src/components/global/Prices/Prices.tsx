@@ -39,7 +39,7 @@ function Prices({
             parseInt(price.salePriceInCents, 10) <
             parseInt(price.estimatedRetailPriceInCents, 10);
           return (
-            <div key={price.salePriceInCents}>
+            <div key={price.salePriceInCents} css={styles.wrapper}>
               <span
                 css={[
                   (isSalePrice || isStartingAtPrice) && {
