@@ -23,7 +23,10 @@ import { useGlobalToastContext } from './GlobalToast.context';
 
 export interface CatalogProductsContextProps {
   displayedProducts: SiteCatalogProductItem[];
-  fetchNewProducts: (page: number) => Promise<SiteCatalogProducts | null>;
+  fetchNewProducts: (
+    page: number,
+    skipGroups: boolean,
+  ) => Promise<SiteCatalogProducts | null>;
   handleUpdateResults: (
     filters: Record<string, string>,
     withoutScroll?: boolean,
@@ -220,12 +223,11 @@ function useContextSetup({
   );
 
   const fetchNewProducts = useCallback(
-    async (page) => {
+    async (page, skipGroups) => {
       const queryParams = getStringifiedParams({
         ...query,
         ...pageParams,
       });
-
       const response: AsyncResponse<{
         siteCatalogProducts: SiteCatalogProducts;
       }> = await fetchWithErrorHandling({
@@ -233,7 +235,7 @@ function useContextSetup({
         includeUserRegion: true,
         includeUserZip: true,
         method: 'get',
-        query: { ...queryParams, page },
+        query: { ...queryParams, page, skipGroups },
       });
 
       if (response.isSuccess) {

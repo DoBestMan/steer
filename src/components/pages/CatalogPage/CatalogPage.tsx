@@ -86,7 +86,7 @@ function CatalogPage({ catalogGridRef, isSearchForTireSize }: Props) {
         window.localStorage.getItem(LOCAL_STORAGE[PROPERTIES.ADVANCED_VIEW]) ===
           'true'
           ? async () => {
-              const siteCatalogProducts = await fetchNewProducts(1);
+              const siteCatalogProducts = await fetchNewProducts(1, false);
 
               if (!siteCatalogProducts) {
                 setDisplayedProducts(displayedProducts);
