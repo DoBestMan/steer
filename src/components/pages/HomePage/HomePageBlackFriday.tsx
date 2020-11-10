@@ -1,4 +1,4 @@
-import { RefObject, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import Grid from '~/components/global/Grid/Grid';
 import SearchByBoard from '~/components/global/SearchByBoard/SearchByBoard';
@@ -46,9 +46,6 @@ function HomePageBlackFriday({
   const { supportsPositionSticky } = useSupportsPositionSticky();
 
   const [isContentVisible, setIsContentVisible] = useState(false);
-  const [searchByBoardTitle, setSearchByBoardTitle] = useState(
-    SEARCH_BY_BOARD_TITLE,
-  );
 
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -83,18 +80,6 @@ function HomePageBlackFriday({
       styles.searchButtonStickyFallbackFixed,
   ];
 
-  function handleSearchBoardTitleChange(searchRef: RefObject<HTMLDivElement>) {
-    const searchByBoardPosY = searchRef?.current?.getBoundingClientRect().y;
-
-    if (searchByBoardPosY === 0 && searchByBoardTitle && isMobile) {
-      setSearchByBoardTitle('');
-      return;
-    } else {
-      setSearchByBoardTitle(SEARCH_BY_BOARD_TITLE);
-      return;
-    }
-  }
-
   useEffect(() => {
     // Hiding the content and preventing the scroll color
     // change while the localized data loads
@@ -103,22 +88,6 @@ function HomePageBlackFriday({
     }, TIME.MS1000);
     return () => clearTimeout(timer);
   }, []);
-
-  useEffect(() => {
-    window.addEventListener(
-      'scroll',
-      handleSearchBoardTitleChange.bind(null, buttonRef),
-    );
-
-    return () => {
-      window.removeEventListener(
-        'scroll',
-        handleSearchBoardTitleChange.bind(null, buttonRef),
-      );
-    };
-    // disabling eslint rule here as handleSearchBoardTitleChange should not trigger useEffect
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [buttonRef, isMobile]);
 
   return (
     <>
@@ -131,7 +100,7 @@ function HomePageBlackFriday({
         ref={contentRef}
       >
         <div css={searchButtonContainerStyles} ref={buttonRef}>
-          <SearchByBoard title={searchByBoardTitle} />
+          <SearchByBoard title={SEARCH_BY_BOARD_TITLE} />
         </div>
 
         <div css={[styles.contentSpacer, spacerHeight]}></div>

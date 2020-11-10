@@ -62,7 +62,7 @@ const styles: StylesMap = {
   },
   searchButtonContainer: {
     position: 'sticky',
-    top: 0,
+    top: '-1px',
     transition: `background-color ${TIME.MS300}ms ease-in-out`,
     width: '100%',
     zIndex: Z_INDEX.FRONT,
