@@ -76,8 +76,8 @@ function usePaginationAndSort(
     if (res.isSuccess) {
       setDisplayedRatings(res.data.reviewsList);
       setSort(res.data.siteProductReviewsFilters.sortList);
+      return;
     }
-
     setGlobalToastMessage(ui('error.generic'));
   };
 
