@@ -18,7 +18,13 @@ const styles: StylesMap = {
     textAlign: 'center',
 
     [MQ.M]: {
-      padding: `85px 0 ${SPACING.SIZE_80}px`,
+      padding: `${SPACING.SIZE_60}px 0 ${SPACING.SIZE_80}px`,
+    },
+    [MQ.S]: {
+      marginTop: SPACING.SIZE_60,
+    },
+    [MQ.XL]: {
+      marginTop: SPACING.SIZE_80,
     },
   },
   icon: {

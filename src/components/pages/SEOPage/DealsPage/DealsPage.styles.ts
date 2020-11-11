@@ -5,9 +5,7 @@ const styles: StylesMap = {
   bottomDescription: [
     typography.bodyCopy,
     {
-      p: {
-        marginBottom: SPACING.SIZE_10,
-      },
+      marginTop: SPACING.SIZE_60,
     },
   ],
   breadCrumbs: {

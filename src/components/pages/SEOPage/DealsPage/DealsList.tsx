@@ -3,7 +3,6 @@ import GridItem from '~/components/global/Grid/GridItem';
 import PromotionCard, {
   PromotionCardProps,
 } from '~/components/global/PromotionCard/PromotionCard';
-import Separator from '~/components/global/Separator/Separator';
 import { useSearchContext } from '~/components/modules/Search/Search.context';
 import { useSearchModalContext } from '~/components/modules/Search/SearchModal.context';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
@@ -57,9 +56,7 @@ export function DealsList({ title, items }: Props) {
           gridColumnL={'2/14'}
           gridColumnXL={'4/12'}
         >
-          <div css={styles.dealsSepartor}>
-            <Separator />
-          </div>
+          <div css={styles.dealsSepartor}></div>
           <h2 css={styles.dealsListHeading}>{title}</h2>
         </GridItem>
       </Grid>
