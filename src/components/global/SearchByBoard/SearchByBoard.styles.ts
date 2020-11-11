@@ -11,6 +11,9 @@ const styles: StylesMap = {
     justifyContent: 'center',
   },
   ctaMenuIcon: {
+    '&:hover': {
+      backgroundColor: COLORS.ORANGE.SHADE_30,
+    },
     '&[data-icon-type="brand"]': {
       svg: {
         width: '120px',
