@@ -48,7 +48,7 @@ export const pageDownData: PageData = {
       type: 'SiteModuleMarkdown',
       body: `<h4>HOURS OF OPERATION</h4><p>Support is available during the following hours:<br/><br/>Mon - Fri: 8am - 7pm ET<br/>Sat: 9am - 2pm ET<br/>Sun: Closed<br/><br/>
         For fastest service, please complete the form above. If you would like to speak with a customer support representative during normal operating hours, please call <a href="tel:+18884100604">(888) 410 0604</a></p>
-        <h4>HEADQUARTERS</h4><p>5 Neshaminy Interplex Drive, Suite 101 Trevose, PA 19053-6974</p>`,
+        <h4>HEADQUARTERS</h4><p>8 Neshaminy Interplex Drive, Suite 300 Trevose, PA 19053-6974</p>`,
     },
   ],
 };
