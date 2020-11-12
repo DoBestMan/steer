@@ -52,6 +52,7 @@ module.exports = {
     'react/jsx-no-bind': [
       'error',
       {
+        allowArrowFunctions: true,
         allowFunctions: true,
       },
     ],
@@ -70,6 +71,8 @@ module.exports = {
       { caseSensitive: false, natural: true },
     ],
     quotes: ['error', 'single', { avoidEscape: true }],
+    'react/prop-types': [0],
+    'react/display-name': [0, { ignoreTranspilerName: false }],
   },
   settings: {
     react: { version: 'detect' },

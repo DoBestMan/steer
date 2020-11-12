@@ -69,6 +69,10 @@ function useRouterContextSetup() {
   }, [containerEl, isCatalogTransition, setSkipPageTransition]);
 
   useEffect(() => {
+    if (router.pathname === ROUTE_MAP[ROUTES.PRODUCT_DETAIL]) {
+      setNextUrl(router.asPath);
+    }
+
     const handleRouteChangeStart = (url: string) => {
       // Route change has begun. Show the loading bar
       setIsRouteLoading(true);
@@ -122,7 +126,12 @@ function useRouterContextSetup() {
       eventEmitters.newCatalogSearchQuery.off(handleSkipPageTransition);
       eventEmitters.skipPageTransition.off(handleSkipPageTransition);
     };
-  });
+  }, [
+    router,
+    handleBeforeHistoryChange,
+    handleRouteChangeComplete,
+    isSearchOpen,
+  ]);
 
   return {
     isInRouteTransition: nextUrl !== asPath && !skipPageTransition,
