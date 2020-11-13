@@ -1,6 +1,7 @@
 import { transformation } from '~/lib/utils/cloudinary/cloudinary';
 import {
   FetchFormat,
+  ImageFlags,
   TransformationArgs,
   Transformations,
 } from '~/lib/utils/cloudinary/cloudinary.types';
@@ -86,6 +87,11 @@ export function getSrcset(url: string, q?: TransformationArgs): string {
       // Apply quality
       if (extension !== 'svg') {
         transform[0].quality = quality;
+      }
+
+      // Apply image format flags for pngs
+      if (extension === 'png') {
+        transform[0].imageFlag = ImageFlags.LOSSY;
       }
 
       const transformed = transformation(encodedURL, transform);

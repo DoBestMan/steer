@@ -13,6 +13,7 @@ import {
   Effect,
   FetchFormat,
   Gravity,
+  ImageFlags,
   Transformations,
 } from './cloudinary.types';
 
@@ -129,6 +130,9 @@ export function transformation(
             case 'fetchFormat':
               transformValue = fetchFormat(transformation[key] as FetchFormat);
               break;
+            case 'imageFlag':
+              transformValue = imageFlag(transformation[key] as ImageFlags);
+              break;
             case 'gravity':
               transformValue = gravity(transformation[key] as Gravity);
               break;
@@ -199,6 +203,10 @@ function effect(e: Effect, value: string | number = ''): string {
 
 function fetchFormat(f: FetchFormat): string {
   return `f_${f}`;
+}
+
+function imageFlag(fl: ImageFlags): string {
+  return `fl_${fl}`;
 }
 
 function gravity(g: Gravity): string {

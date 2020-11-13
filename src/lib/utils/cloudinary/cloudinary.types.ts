@@ -238,6 +238,7 @@ export type Transformations = {
   fetchFormat?: FetchFormat;
   gravity?: Gravity;
   height?: number;
+  imageFlag?: ImageFlags;
   opacity?: number;
   quality?: string;
   radius?: number;
