@@ -1,4 +1,5 @@
 import { ThemeProvider } from 'emotion-theming';
+import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 import { NAV_THEME } from '~/components/modules/Nav/Nav.theme';
@@ -41,6 +42,7 @@ function CatalogPage({ catalogGridRef, isSearchForTireSize }: Props) {
   } = useCatalogProductsContext();
   const { contentStage, showSummary, stage } = useCatalogSummaryContext();
   const { setIsFooterVisible } = useFooterContext();
+  const { query } = useRouter();
 
   const totalResult =
     siteCatalogProducts?.listResultMetadata.pagination?.total || 0;
@@ -119,6 +121,9 @@ function CatalogPage({ catalogGridRef, isSearchForTireSize }: Props) {
   useEffect(() => {
     scrollToId(scrollToGrid, hasResults);
   }, [hasResults, displayedProducts, scrollToGrid, siteCatalogProducts]);
+  if (query.utm_source && isSearchForTireSize) {
+    setTimeout(scrollToGrid, 100);
+  }
 
   return (
     <ThemeProvider
