@@ -17,7 +17,8 @@ export const mockDataCards: PromotionCardProps[] = [
         },
       },
     ],
-    moreBody: 'Additional promotion details',
+    moreBody:
+      'Promotion valid Nov 01 - Nov 30, 2020\n\nComplete the mail in form or submit your claim at www.continentaltire-rebates.com. See program terms and conditions on submission form or visit www.continentaltire-rebates.com. Valid only with qualified purchase made in the 50 United States, D.C., or Puerto Rico between 11/1/2020 and 11/30/2020 or while supplies last. Void where prohibited by law. No rain checks. Valid with the copy or original, dated, paid, itemized receipt and invoice for the purchase of four (4) new qualifying CONTINENTAL TIRES from a participating retail dealer and a completed redemption form. Offer may not be combined with any other offer, discount, rebate, or promotion. Tires must be purchased in a single transaction. Offer form must be postmarked or submitted online by 12/31/2020.',
     promoImage: {
       altText: 'Header image on Promotions',
       src:
@@ -40,7 +41,8 @@ export const mockDataCards: PromotionCardProps[] = [
         },
       },
     ],
-    moreBody: 'Additional promotion details',
+    moreBody:
+      'Complete the mail in form or submit your claim at www.continentaltire-rebates.com. See program terms and conditions on submission form or visit www.continentaltire-rebates.com.',
     promoImage: {
       altText: 'Header image on Promotions',
       src:

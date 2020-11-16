@@ -1,10 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 
 import Grid from '~/components/global/Grid/Grid';
+import PromotionCardCarousel from '~/components/global/PromotionCardCarousel/PromotionCardCarousel';
+import PromotionHeader from '~/components/global/PromotionHeader/PromotionHeader';
 import { useSearchModalContext } from '~/components/modules/Search/SearchModal.context';
 import DriverInsights from '~/components/pages/HomePage/DriverInsights/DriverInsights';
 import HomeHeader from '~/components/pages/HomePage/HomeHeader/HomeHeader';
 import HomeReviews from '~/components/pages/HomePage/HomeReviews/HomeReviews';
+import { SiteDealsCarousel } from '~/data/models/SiteDealsCarousel';
 import { SiteGlobals } from '~/data/models/SiteGlobals';
 import { SiteHero } from '~/data/models/SiteHero';
 import { SiteInsights } from '~/data/models/SiteInsights';
@@ -32,6 +35,7 @@ const THEME_COLOR_MAP: Record<string, string> = {
 };
 
 export interface Props {
+  siteDealsCarousel: SiteDealsCarousel;
   siteReviews: SiteReviews;
   siteTheme: SiteGlobals['siteTheme'];
 }
@@ -42,6 +46,7 @@ export interface HomeData {
 }
 
 function HomePage({
+  siteDealsCarousel,
   siteReviews,
   siteHero,
   siteInsights,
@@ -73,6 +78,11 @@ function HomePage({
   const color = getTextColorFromScrollState(thresholdCrossed);
 
   const { isSearchOpen, toggleIsSearchOpen } = useSearchModalContext();
+
+  const {
+    carousel: promotionCarousel,
+    header: promotionHeader,
+  } = siteDealsCarousel;
 
   function handleOpenModal() {
     // Store the current y pos to return to later
@@ -133,14 +143,32 @@ function HomePage({
         <HomeHeader {...siteHero} />
       </div>
 
+      <div css={searchButtonContainerStyles} ref={buttonRef}>
+        <SearchButton onClick={handleOpenModal} />
+      </div>
+
+      <div
+        css={(promotionHeader || promotionCarousel) && styles.promotionSection}
+      >
+        {promotionHeader && (
+          <div css={styles.promotionSectionHeader}>
+            <PromotionHeader
+              iconName={promotionHeader.icon.svgId}
+              promoTagLabel={promotionHeader.pill}
+              subTitle={promotionHeader.subtitle}
+              title={promotionHeader.title}
+            />
+          </div>
+        )}
+        {promotionCarousel && promotionCarousel.dealsCards.length && (
+          <PromotionCardCarousel cards={promotionCarousel.dealsCards} />
+        )}
+      </div>
+
       <div
         css={[styles.scrollColorContainer, { backgroundColor }]}
         ref={contentRef}
       >
-        <div css={searchButtonContainerStyles} ref={buttonRef}>
-          <SearchButton onClick={handleOpenModal} />
-        </div>
-
         <div css={[styles.contentSpacer, spacerHeight]}></div>
         <div ref={contentContainerRef}>
           <Grid

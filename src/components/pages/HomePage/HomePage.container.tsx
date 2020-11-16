@@ -5,6 +5,7 @@ import HomePageBlackFriday, {
   HomeData,
 } from '~/components/pages/HomePage/HomePageBlackFriday';
 import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
+import { SiteDealsCarousel } from '~/data/models/SiteDealsCarousel';
 import { SiteHero } from '~/data/models/SiteHero';
 import { SiteInsights } from '~/data/models/SiteInsights';
 import { SiteReviews } from '~/data/models/SiteReviews';
@@ -13,6 +14,7 @@ import { eventEmitters } from '~/lib/events/emitters';
 
 export interface HomeServeData {
   serverData: {
+    siteDealsCarousel: SiteDealsCarousel;
     siteHero: SiteHero;
     siteInsights: SiteInsights;
     siteReviews: SiteReviews;
@@ -35,7 +37,7 @@ function HomePageContainer({ serverData }: HomeServeData) {
     console.error(error);
   }
 
-  const { siteReviews } = serverData;
+  const { siteDealsCarousel, siteReviews } = serverData;
   const { siteTheme } = useSiteGlobalsContext();
 
   // add back after black friday - ABT-8
@@ -51,6 +53,7 @@ function HomePageContainer({ serverData }: HomeServeData) {
   // remove after black friday - ABT-8
   return (
     <HomePageBlackFriday
+      siteDealsCarousel={siteDealsCarousel}
       siteReviews={siteReviews}
       siteHero={siteHero}
       siteTheme={siteTheme}

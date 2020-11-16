@@ -18,10 +18,10 @@ export const getStaticProps: GetStaticProps<PageResponse<
 >> = async () => {
   backendBootstrap();
 
-  const [{ siteHero, siteInsights }, siteReviewsRes] = await Promise.all([
-    backendGetSiteHome(),
-    backendGetSiteReviews(),
-  ]);
+  const [
+    { siteDealsCarousel, siteHero, siteInsights },
+    siteReviewsRes,
+  ] = await Promise.all([backendGetSiteHome(), backendGetSiteReviews()]);
 
   if (!siteReviewsRes.isSuccess) {
     return { props: { errorStatusCode: siteReviewsRes.error.statusCode } };
@@ -29,6 +29,7 @@ export const getStaticProps: GetStaticProps<PageResponse<
 
   const props: HomeServeData = {
     serverData: {
+      siteDealsCarousel,
       siteHero,
       siteInsights,
       siteReviews: siteReviewsRes.data.siteReviews,

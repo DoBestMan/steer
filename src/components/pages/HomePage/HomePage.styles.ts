@@ -45,6 +45,38 @@ const styles: StylesMap = {
       paddingBottom: 60,
     },
   },
+  promotionSection: {
+    backgroundColor: COLORS.GLOBAL.WHITE,
+    paddingTop: SPACING.SIZE_10,
+    [MQ.L]: {
+      paddingTop: SPACING.SIZE_20,
+    },
+    ['[data-component="promotion-card-carousel"]']: {
+      ['.carousel-pagination']: {
+        margin: `${SPACING.SIZE_30}px auto ${SPACING.SIZE_40}px`,
+      },
+      ['.product-card-carousel']: {
+        ['.swiper-slide:first-of-type']: {
+          marginLeft: 0,
+          [MQ.M]: {
+            marginLeft: SPACING.SIZE_40,
+          },
+          [MQ.L]: {
+            marginLeft: SPACING.SIZE_60,
+          },
+        },
+      },
+    },
+  },
+  promotionSectionHeader: {
+    padding: `${SPACING.SIZE_20}px 0px`,
+    [MQ.M]: {
+      padding: `${SPACING.SIZE_20}px ${SPACING.SIZE_20}px`,
+    },
+    [MQ.L]: {
+      padding: `${SPACING.SIZE_20}px ${SPACING.SIZE_40}px`,
+    },
+  },
   root: {
     background: COLORS.LIGHT.OFF_WHITE,
     display: 'flex',

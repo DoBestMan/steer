@@ -277,6 +277,7 @@
   "searchByBoard": {
     "vehicle": "Vehicle",
     "tireSize": "Tire size",
+    "title": "shop tires by",
     "brand": "Tire brand"
   },
   "support": {
@@ -333,8 +334,8 @@
         "four": "Select the tire that best fits your needs and what's most important to your driving experience. Tires can offer a vast array of benefits such as longer lasting, gas saving, off-roading or a number of other characteristcs.",
         "five": "Schedule your appointment online and install your new tires at one of our trusted installer locations in your area."
       },
-	  "title": "Replacing tires in 5 steps.",
-	  "learnMore": "Care to [learn more about tires](/learn \"Learn More About Tires\")?"
+      "title": "Replacing tires in 5 steps.",
+      "learnMore": "Care to [learn more about tires](/learn \"Learn More About Tires\")?"
     },
     "mobile": {
       "label": "Mobile Menu"

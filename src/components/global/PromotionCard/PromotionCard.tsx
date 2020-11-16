@@ -108,10 +108,14 @@ function PromotionCard({
       />
     );
   });
+  const shouldAddFullHeight =
+    showMoreBody && moreBody && moreBody.length >= 180;
+  const heightAuto = shouldAddFullHeight ? { height: '100%' } : {};
+
   return (
     <div data-component="promotion-card">
       {promoImage && (
-        <div css={styles.promoImage}>
+        <div css={styles.promoImage} data-component="promotion-card-image">
           <Image {...promoImage} widths={[400, 600, 800]} responsive />
         </div>
       )}
@@ -121,6 +125,7 @@ function PromotionCard({
           styles.root,
           promoImage && styles.removeTopRadius,
         ]}
+        style={heightAuto}
         data-component="promotion-card-body"
       >
         {figures && (

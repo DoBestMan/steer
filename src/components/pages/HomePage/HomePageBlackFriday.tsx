@@ -1,10 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 
 import Grid from '~/components/global/Grid/Grid';
+import PromotionCardCarousel from '~/components/global/PromotionCardCarousel/PromotionCardCarousel';
+import PromotionHeader from '~/components/global/PromotionHeader/PromotionHeader';
 import SearchByBoard from '~/components/global/SearchByBoard/SearchByBoard';
 import DriverInsights from '~/components/pages/HomePage/DriverInsights/DriverInsights';
 import HomeHeader from '~/components/pages/HomePage/HomeHeader/HomeHeader';
 import HomeReviews from '~/components/pages/HomePage/HomeReviews/HomeReviews';
+import { SiteDealsCarousel } from '~/data/models/SiteDealsCarousel';
 import { SiteGlobals } from '~/data/models/SiteGlobals';
 import { SiteHero } from '~/data/models/SiteHero';
 import { SiteInsights } from '~/data/models/SiteInsights';
@@ -12,6 +15,7 @@ import { SiteReviews } from '~/data/models/SiteReviews';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { useSupportsPositionSticky } from '~/hooks/useSupportsPositionSticky';
 import { COLORS, TIME } from '~/lib/constants';
+import { ui } from '~/lib/utils/ui-dictionary';
 
 import {
   useChangeBackgroundColor,
@@ -25,9 +29,8 @@ const THEME_COLOR_MAP: Record<string, string> = {
   promotion: COLORS.GLOBAL.BLACK,
 };
 
-const SEARCH_BY_BOARD_TITLE = 'shop tires by';
-
 export interface Props {
+  siteDealsCarousel: SiteDealsCarousel;
   siteReviews: SiteReviews;
   siteTheme: SiteGlobals['siteTheme'];
 }
@@ -38,6 +41,7 @@ export interface HomeData {
 }
 
 function HomePageBlackFriday({
+  siteDealsCarousel,
   siteReviews,
   siteHero,
   siteInsights,
@@ -80,6 +84,11 @@ function HomePageBlackFriday({
       styles.searchButtonStickyFallbackFixed,
   ];
 
+  const {
+    carousel: promotionCarousel,
+    header: promotionHeader,
+  } = siteDealsCarousel;
+
   useEffect(() => {
     // Hiding the content and preventing the scroll color
     // change while the localized data loads
@@ -95,14 +104,32 @@ function HomePageBlackFriday({
         <HomeHeader {...siteHero} />
       </div>
 
+      <div css={searchButtonContainerStyles} ref={buttonRef}>
+        <SearchByBoard title={ui('searchByBoard.title')} />
+      </div>
+
+      <div
+        css={(promotionHeader || promotionCarousel) && styles.promotionSection}
+      >
+        {promotionHeader && (
+          <div css={styles.promotionSectionHeader}>
+            <PromotionHeader
+              iconName={promotionHeader.icon.svgId}
+              promoTagLabel={promotionHeader.pill}
+              subTitle={promotionHeader.subtitle}
+              title={promotionHeader.title}
+            />
+          </div>
+        )}
+        {promotionCarousel && promotionCarousel.dealsCards.length && (
+          <PromotionCardCarousel cards={promotionCarousel.dealsCards} />
+        )}
+      </div>
+
       <div
         css={[styles.scrollColorContainer, { backgroundColor }]}
         ref={contentRef}
       >
-        <div css={searchButtonContainerStyles} ref={buttonRef}>
-          <SearchByBoard title={SEARCH_BY_BOARD_TITLE} />
-        </div>
-
         <div css={[styles.contentSpacer, spacerHeight]}></div>
         <div ref={contentContainerRef}>
           <Grid

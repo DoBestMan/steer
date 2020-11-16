@@ -4,7 +4,14 @@ import { typography, typographyStyles } from '~/styles/typography.styles';
 const styles: StylesMap = {
   container: {
     backgroundColor: COLORS.GLOBAL.ORANGE,
-    padding: `${SPACING.SIZE_30}px ${SPACING.SIZE_20}px`,
+    padding: `${SPACING.SIZE_20}px ${SPACING.SIZE_20}px`,
+    [MQ.M]: {
+      display: 'flex',
+      padding: `${SPACING.SIZE_20}px ${SPACING.SIZE_40}px`,
+    },
+    [MQ.L]: {
+      padding: `${SPACING.SIZE_20}px ${SPACING.SIZE_60}px`,
+    },
   },
   ctaMenu: {
     display: 'flex',
@@ -96,16 +103,20 @@ const styles: StylesMap = {
         typography.primarySubhead,
         {
           padding: `0 ${SPACING.SIZE_60}px`,
+          [MQ.M]: {
+            flexBasis: '26%',
+            padding: 0,
+          },
         },
       ],
       [MQ.L]: [
         typographyStyles.tertiaryHeadline,
         {
-          padding: `0 ${SPACING.SIZE_120}px`,
+          flexBasis: '28%',
         },
       ],
       [MQ.XL]: {
-        padding: `0 ${SPACING.SIZE_180}px`,
+        flexBasis: '36%',
       },
     },
   ],

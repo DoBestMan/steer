@@ -1,4 +1,27 @@
-import { COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
+import { COLORS, MQ, RADIUS, SPACING, StylesMap } from '~/lib/constants';
+
+const carouselNavBtn = {
+  '&.swiper-button-disabled': {
+    display: 'none',
+  },
+  '&:hover': {
+    background: COLORS.GLOBAL.ORANGE,
+    color: COLORS.GLOBAL.WHITE,
+  },
+  background: COLORS.GLOBAL.WHITE,
+  borderRadius: '100%',
+  boxShadow: `0px 0 20px ${COLORS.GLOBAL.GRAY_50}`,
+  color: COLORS.GLOBAL.ORANGE,
+  display: 'flex',
+  height: '93px',
+  right: '4%',
+  svg: {
+    height: '18px',
+    width: '11px',
+  },
+  top: '40%',
+  width: '93px',
+};
 
 const styles: StylesMap = {
   container: {
@@ -27,7 +50,17 @@ const styles: StylesMap = {
       display: 'flex',
 
       ['[data-component="promotion-card-body"]']: {
-        height: '350px',
+        height: '434px',
+      },
+      ['[data-component="promotion-card-image"]']: {
+        backgroundColor: COLORS.LIGHT.GRAY_10,
+        borderTopLeftRadius: RADIUS.RADIUS_15,
+        borderTopRightRadius: RADIUS.RADIUS_15,
+        height: '113px',
+        overflow: 'hidden',
+        [MQ.M]: {
+          height: '125px',
+        },
       },
     },
     '.swiper-button-next': {
@@ -35,42 +68,14 @@ const styles: StylesMap = {
         display: 'none',
       },
       display: 'none',
-      [MQ.L]: {
-        color: COLORS.GLOBAL.ORANGE,
-        display: 'block',
-        right: '39%',
-        top: '530px',
-      },
-      [MQ.XL]: {
-        right: '44%',
-        top: '530px',
-      },
-      // disabling sort-key rule, as this needs to be below other media queries to properly override css
-      // eslint-disable-next-line
-      ['@media (min-width: 1500px)']: {
-        right: '45%',
-      },
+      [MQ.L]: [carouselNavBtn],
     },
     '.swiper-button-prev': {
       '::after': {
         display: 'none',
       },
       display: 'none',
-      [MQ.L]: {
-        color: COLORS.GLOBAL.ORANGE,
-        display: 'block',
-        left: '42%',
-        top: '530px',
-      },
-      [MQ.XL]: {
-        left: '43%',
-        top: '530px',
-      },
-      // disabling sort-key rule, as this needs to be below other media queries to properly override css
-      // eslint-disable-next-line
-      ['@media (min-width: 1500px)']: {
-        left: '44%',
-      },
+      [MQ.L]: [carouselNavBtn],
     },
   },
   '[data-component="promotion-card"]': {

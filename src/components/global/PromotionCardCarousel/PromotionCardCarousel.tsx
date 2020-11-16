@@ -6,7 +6,11 @@ import { ICONS } from '~/components/global/Icon/Icon.constants';
 import PromotionCard, {
   PromotionCardProps,
 } from '~/components/global/PromotionCard/PromotionCard';
+import { useSearchContext } from '~/components/modules/Search/Search.context';
+import { useSearchModalContext } from '~/components/modules/Search/SearchModal.context';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
+import { ROUTE_MAP, ROUTES } from '~/lib/constants';
+import { openReferAFriendModal } from '~/lib/helpers/refer-a-friend';
 
 import {
   CAROUSEL_CLASS_NAMES,
@@ -19,6 +23,8 @@ export interface ProductCardCarouselProps {
 }
 
 function ProductCardCarousel({ cards }: ProductCardCarouselProps) {
+  const { setRouteQueryParamOptions } = useSearchContext();
+  const { setIsSearchOpen } = useSearchModalContext();
   const { greaterThan } = useBreakpoints();
   const [isDynamicPagination, setIsDynamicPagination] = useState(greaterThan.M);
   const carouselParams = {
@@ -64,12 +70,23 @@ function ProductCardCarousel({ cards }: ProductCardCarouselProps) {
     updateOnWindowResize: true,
   };
 
+  function handlePromotionClick(params: Record<string, string>) {
+    setRouteQueryParamOptions({
+      routes: [
+        ROUTE_MAP[ROUTES.VEHICLE_CATALOG],
+        ROUTE_MAP[ROUTES.TIRE_SIZE_CATALOG_OR_CATEGORY],
+      ],
+      params,
+    });
+    setIsSearchOpen(true);
+  }
+
   useEffect(() => {
     setIsDynamicPagination(greaterThan.M);
   }, [greaterThan.M]);
 
   return (
-    <div css={styles.container}>
+    <div css={styles.container} data-component="promotion-card-carousel">
       <Carousel
         params={carouselParams}
         rebuildOnUpdate
@@ -79,7 +96,11 @@ function ProductCardCarousel({ cards }: ProductCardCarouselProps) {
       >
         {cards.map((card, index) => (
           <div css={styles.item} key={`promotion_card__${index}`}>
-            <PromotionCard {...card} />
+            <PromotionCard
+              {...card}
+              handleReferAFriendClick={openReferAFriendModal}
+              handlePromotionClick={handlePromotionClick}
+            />
           </div>
         ))}
       </Carousel>

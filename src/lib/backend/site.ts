@@ -2,6 +2,7 @@ import { MakePageProps } from '~/components/pages/VehiclePage/MakePage/MakePage'
 import { SiteBrands } from '~/data/models/SiteBrands';
 import { SiteCategories } from '~/data/models/SiteCategories';
 import { SiteDeals } from '~/data/models/SiteDeals';
+import { SiteDealsCarousel } from '~/data/models/SiteDealsCarousel';
 import { SiteGlobals } from '~/data/models/SiteGlobals';
 import { SiteHero } from '~/data/models/SiteHero';
 import { SiteInsights } from '~/data/models/SiteInsights';
@@ -26,6 +27,7 @@ export async function backendGetSiteGlobals() {
 
 export async function backendGetSiteHome() {
   const response = await fetch<{
+    siteDealsCarousel: SiteDealsCarousel;
     siteHero: SiteHero;
     siteInsights: SiteInsights;
   }>({
@@ -36,7 +38,15 @@ export async function backendGetSiteHome() {
     method: 'get',
   });
 
-  return response;
+  return {
+    ...response,
+    siteDealsCarousel: response?.siteDealsCarousel
+      ? response?.siteDealsCarousel
+      : {
+          header: null,
+          carousel: null,
+        },
+  };
 }
 
 export async function backendGetSiteMenu() {
