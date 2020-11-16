@@ -130,6 +130,7 @@ function TypePage({ typeData }: TypePageData) {
       <CircularIllustrationCarousel
         dataItems={typeData.popularBrands}
         imageMaxWidthCustomStyles={styles.logosBrandsMaxWidth}
+        params={{ shortSwipes: true }}
       />
       {typeData.curatedProducts.map((obj: ProductGroupListProps) => {
         return (

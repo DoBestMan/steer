@@ -9,6 +9,7 @@ interface Props {
   dataItems: Array<SiteGraphicTile>;
   imageMaxWidthCustomStyles?: CSSStyles;
   itemCustomStyle?: CSSStyles;
+  params?: { [key: string]: boolean | string | number };
   removeBackground?: boolean;
 }
 
@@ -17,6 +18,7 @@ function CircularIllustrationCarousel({
   itemCustomStyle,
   imageMaxWidthCustomStyles,
   removeBackground,
+  params = {},
 }: Props) {
   return (
     <div css={[styles.root, removeBackground && styles.removeBackground]}>
@@ -24,7 +26,7 @@ function CircularIllustrationCarousel({
         {dataItems && (
           <Carousel
             wrapperClass="illustration-carousel"
-            params={{ mousewheel: { forceToAxis: true } }}
+            params={{ mousewheel: { forceToAxis: true }, ...params }}
           >
             {dataItems?.map((dataItem: SiteGraphicTile, index) => (
               <div
