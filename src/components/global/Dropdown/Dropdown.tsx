@@ -34,7 +34,6 @@ export default function Dropdown({
   isOpen,
   onClose,
   shouldActivateListeners = true,
-  shouldRenderDropdownHtml,
 }: Props) {
   const { greaterThan } = useBreakpoints();
   const dropdownEl = useRef<HTMLDivElement>(null);
@@ -114,9 +113,7 @@ export default function Dropdown({
           ]}
           style={calculatedStyles || {}}
         >
-          {/* focus trap and dropdown wrapper need to be in dom to update positioning
-          and focus but wait to render children until it's open */}
-          {shouldRenderDropdownHtml ? children : isOpen && children}
+          {children}
           {!!actionBar && <DynamicActionBar {...actionBar} />}
         </div>
       </FocusTrap>
