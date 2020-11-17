@@ -6,7 +6,9 @@ import { FeaturedInfoModuleProps } from '~/components/global/FeaturedInfoModule/
 import { ImageProps } from '~/components/global/Image/Image';
 import { LinkListProps } from '~/components/global/LinkList/LinkList';
 import { QuoteProps } from '~/components/global/Quote/Quote';
+import { SearchByBoardProps } from '~/components/global/SearchByBoard/SearchByBoard';
 import { VideoProps } from '~/components/global/Video/Video';
+import { InstallationProps } from '~/components/modules/PDP/Installation/Installation';
 import { SiteLink } from '~/data/models/SiteLink';
 import { SiteLinkWithLabel } from '~/data/models/SiteLinkWithLabel';
 import { SiteModuleTypes } from '~/data/models/SiteModuleTypes.ts';
@@ -14,6 +16,7 @@ import { SiteReviews } from '~/data/models/SiteReviews';
 import { TextBasedNavigationProps } from '~/data/models/TextBasedNavigationProps';
 import { THEME } from '~/lib/constants';
 
+import { SiteDealsCarousel } from './SiteDealsCarousel';
 import { SiteGraphicTile } from './SiteGraphicTile';
 
 export interface SiteModule {
@@ -77,6 +80,18 @@ export interface SiteModuleYouTubeVideo extends VideoProps, SiteModule {}
 export interface SiteModuleButtonGrid extends ButtonGridProps, SiteModule {
   headerText?: string;
 }
+
+export interface SiteModulePDPInstallation
+  extends InstallationProps,
+    SiteModule {}
+
+export interface SiteModuleSearchByBoard
+  extends SearchByBoardProps,
+    SiteModule {}
+
+export interface SiteModulePromotionCards
+  extends SiteDealsCarousel,
+    SiteModule {}
 
 export interface SiteModuleCircularIllustrationCarousel extends SiteModule {
   dataItems: Array<SiteGraphicTile>;

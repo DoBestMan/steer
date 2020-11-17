@@ -7,7 +7,6 @@ import Markdown from '~/components/global/Markdown/MarkdownDynamic';
 import { SiteImage } from '~/data/models/SiteImage';
 import {
   HEADER_SIZE,
-  MARKDOWN_PRIMITIVES,
   MARKDOWN_PRIMITIVES_WITH_HTML,
   THEME,
 } from '~/lib/constants';
@@ -63,14 +62,12 @@ export default function HeaderLandingPage({
       <TitleContainer
         css={[sizeStyles[titleSize].title, themeStyles[theme].title]}
       >
-        {title}
+        <Markdown>{title}</Markdown>
       </TitleContainer>
 
       {subTitle && (
         <SubTitleContainer css={[styles.subTitle, themeStyles[theme].subTitle]}>
-          <Markdown allowedTypes={MARKDOWN_PRIMITIVES} unwrapDisallowed>
-            {subTitle}
-          </Markdown>
+          <Markdown>{subTitle}</Markdown>
         </SubTitleContainer>
       )}
       {briefBody && (

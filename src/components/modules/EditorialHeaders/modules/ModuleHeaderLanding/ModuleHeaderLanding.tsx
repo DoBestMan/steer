@@ -7,7 +7,7 @@ function ModuleHeaderLanding(data: SiteHeaderModule) {
   return (
     <Grid>
       <GridItem gridColumnL={'2/14'} gridColumnXL={'4/12'}>
-        <div>
+        <div data-component="module-header-landing-page">
           <HeaderLandingPage {...data} />
         </div>
       </GridItem>

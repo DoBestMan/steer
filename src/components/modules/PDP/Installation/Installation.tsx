@@ -9,8 +9,8 @@ import styles from './Installation.styles';
 import InstallationAnimation from './InstallationIllustration';
 
 export interface InstallationProps {
-  sceneryType: string;
-  vehicleType: string;
+  sceneryType?: string;
+  vehicleType?: string;
 }
 
 function Installation({

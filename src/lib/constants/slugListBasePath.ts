@@ -5,4 +5,5 @@ export const slugListBasePath: Record<string, string> = {
   pressPage: '/press',
   pressReleases: '/press/releases',
   sizeListingPage: '/tire-sizes/diameter',
+  tireDealsPage: '/tire-deals',
 };

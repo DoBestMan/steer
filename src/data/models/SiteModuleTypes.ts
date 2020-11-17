@@ -13,4 +13,7 @@ export type SiteModuleTypes =
   | 'SiteModuleTextList'
   | 'SiteModuleTireSearchBillboard'
   | 'SiteYouTubeVideo'
-  | 'SiteModuleDataTableVertical';
+  | 'SiteModuleDataTableVertical'
+  | 'SiteModulePDPInstallation'
+  | 'SiteModulePromotionCards'
+  | 'SiteModuleSearchByBoard';

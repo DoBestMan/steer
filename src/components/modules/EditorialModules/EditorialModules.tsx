@@ -13,8 +13,11 @@ import ModuleGraphicGrid from './modules/ModuleGraphicGrid/ModuleGraphicGrid';
 import ModuleImage from './modules/ModuleImage/ModuleImage';
 import ModuleLinkList from './modules/ModuleLinkList/ModuleLinkList';
 import ModuleMarkdown from './modules/ModuleMarkdown/ModuleMarkdown';
+import ModulePDPInstallation from './modules/ModulePDPInstallation/ModulePDPInstallation';
+import ModulePromotionCards from './modules/ModulePromotionCards/ModulePromotionCards';
 import ModuleQuote from './modules/ModuleQuote/ModuleQuote';
 import ModuleReview from './modules/ModuleReview/ModuleReview';
+import ModuleSearchByBoard from './modules/ModuleSearchByBoard/ModuleSearchByBoard';
 import ModuleSeparator from './modules/ModuleSeparator/ModuleSeparator';
 import ModuleSiteLinkWithLabel from './modules/ModuleSiteLinkWithLabel/ModuleSiteLinkWithLabel';
 import ModuleTextList from './modules/ModuleTextList/ModuleTextList';
@@ -39,8 +42,11 @@ function EditorialModules({ moduleType, moduleData }: EditorialModulesProps) {
     SiteModuleLinkList: ModuleLinkList,
     SiteModuleLinkWithLabel: ModuleSiteLinkWithLabel,
     SiteModuleMarkdown: ModuleMarkdown,
+    SiteModulePDPInstallation: ModulePDPInstallation,
+    SiteModulePromotionCards: ModulePromotionCards,
     SiteModuleQuote: ModuleQuote,
     SiteModuleReview: ModuleReview,
+    SiteModuleSearchByBoard: ModuleSearchByBoard,
     SiteModuleSeparator: ModuleSeparator,
     SiteModuleTextList: ModuleTextList,
     SiteModuleTireSearchBillboard: ModuleTireSearchBillboard,
