@@ -32,9 +32,9 @@ const styles: StylesMap = {
     {
       '&.swiper-slide': {
         boxSizing: 'border-box',
-        height: ITEM_SIZE.L,
+        height: ITEM_SIZE.S,
         margin: SPACING.SIZE_01,
-        width: ITEM_SIZE.L,
+        width: ITEM_SIZE.S,
 
         /* eslint-disable sort-keys */
         ':not(:last-child)': {
@@ -54,6 +54,14 @@ const styles: StylesMap = {
           [MQ.XL]: { marginRight: GRID_MARGIN.XL },
         },
         /* eslint-enable sort-keys */
+        [MQ.M]: {
+          height: ITEM_SIZE.M,
+          width: ITEM_SIZE.M,
+        },
+        [MQ.L]: {
+          height: ITEM_SIZE.L,
+          width: ITEM_SIZE.L,
+        },
       },
       '&:hover:not([aria-current="true"]) span': {
         border: `2px solid ${COLORS.LIGHT.GRAY_70}`,

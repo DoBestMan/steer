@@ -4,7 +4,7 @@ import BaseLink from '~/components/global/Link/BaseLink';
 import { ArticleProps } from '../Article/Article';
 import styles from './ArticleFeatured.styles';
 
-interface Props extends ArticleProps {
+export interface Props extends ArticleProps {
   hasBorder?: boolean;
 }
 

@@ -1,5 +1,3 @@
-import { createRef, useEffect } from 'react';
-
 import BaseLink from '~/components/global/Link/BaseLink';
 import { SiteLink } from '~/data/models/SiteLink';
 
@@ -22,16 +20,6 @@ function PageItem({
   index,
   ...rest
 }: PageItemProps) {
-  const ref = createRef<HTMLAnchorElement>();
-
-  useEffect(() => {
-    if (!ref || !isSelected) {
-      return;
-    }
-
-    ref.current?.focus();
-  }, [isSelected, ref]);
-
   const handleSelect = (index: number) => (
     event: React.MouseEvent<HTMLAnchorElement>,
   ) => {
@@ -47,7 +35,6 @@ function PageItem({
       aria-label={`page ${index + 1}`}
       aria-current={isSelected}
       onClick={handleSelect(index)}
-      ref={ref}
       css={styles.pageItem}
       {...rest}
     >
