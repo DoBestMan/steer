@@ -64,7 +64,7 @@ export function NotificationListing() {
   return (
     <>
       <Container>
-        <NotificationList notificationData={NotificationsData} />
+        <NotificationList notifications={NotificationsData} />
       </Container>
     </>
   );

@@ -67,13 +67,19 @@ const styles: StylesMap = {
     typography.smallCopyTight,
     {
       color: COLORS.GLOBAL.WHITE,
+      display: 'inline-block',
       marginTop: SPACING.SIZE_05,
       width: '75%',
       [MQ.S]: { width: '82%' },
       [MQ.M]: { width: '75%' },
     },
   ],
-
+  descriptionLink: {
+    textDecoration: 'none',
+    span: {
+      borderBottom: 'none',
+    },
+  },
   icon: [
     {
       alignSelf: 'flex-start',
@@ -120,19 +126,6 @@ const styles: StylesMap = {
     width: 'auto',
   },
 
-  learnMore: [
-    typography.smallCopyTight,
-    {
-      color: COLORS.GLOBAL.WHITE,
-      display: 'inline-flex',
-      paddingLeft: SPACING.SIZE_05,
-      svg: {
-        width: 8,
-        height: 8,
-      },
-    },
-  ],
-
   root: [
     typography.primarySubhead,
     {
@@ -163,6 +156,13 @@ const styles: StylesMap = {
           padding: SPACING.SIZE_10,
         },
       ],
+    },
+  ],
+  title: [
+    typography.primarySubhead,
+    {
+      color: COLORS.GLOBAL.WHITE,
+      display: 'inline-block',
     },
   ],
   wrapper: {

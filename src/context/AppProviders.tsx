@@ -4,6 +4,7 @@ import { SearchContextProvider } from '~/components/modules/Search/Search.contex
 import { SearchModalContextProvider } from '~/components/modules/Search/SearchModal.context';
 import { SiteGlobals } from '~/data/models/SiteGlobals';
 import { SiteMenu } from '~/data/models/SiteMenu';
+import { SiteNotificationList } from '~/data/models/SiteNotificationsList';
 
 import { FooterContextProvider } from './Footer.context';
 import { GlobalsContextProvider } from './Globals.context';
@@ -12,6 +13,7 @@ import { ModalContextProvider } from './Modal.context';
 import { RouterContextProvider } from './Router.context';
 import { SiteGlobalsContextProvider } from './SiteGlobals.context';
 import { SiteMenuContextProvider } from './SiteMenu.context';
+import { SiteNotificationsContextProvider } from './SiteNotifications.context';
 import { UserPersonalizationContextProvider } from './UserPersonalization.context';
 
 interface Props {
@@ -19,6 +21,7 @@ interface Props {
   hostUrl?: string | null;
   siteGlobalsContextValue?: SiteGlobals;
   siteMenuContextValue?: SiteMenu;
+  siteNotificationContextValue?: SiteNotificationList;
 }
 
 // Container to wrap _app.tsx in context providers.
@@ -28,6 +31,7 @@ function AppProviders({
   hostUrl,
   siteGlobalsContextValue,
   siteMenuContextValue,
+  siteNotificationContextValue,
 }: Props) {
   return (
     <GlobalsContextProvider value={{ hostUrl }}>
@@ -39,7 +43,11 @@ function AppProviders({
                 <SearchModalContextProvider>
                   <GlobalToastContextProvider>
                     <RouterContextProvider>
-                      <ModalContextProvider>{children}</ModalContextProvider>
+                      <SiteNotificationsContextProvider
+                        value={siteNotificationContextValue}
+                      >
+                        <ModalContextProvider>{children}</ModalContextProvider>
+                      </SiteNotificationsContextProvider>
                     </RouterContextProvider>
                   </GlobalToastContextProvider>
                 </SearchModalContextProvider>

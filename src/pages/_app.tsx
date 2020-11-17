@@ -10,7 +10,12 @@ import App from '~/components/modules/App/App';
 import AppProviders from '~/context/AppProviders';
 import { SiteGlobals } from '~/data/models/SiteGlobals';
 import { SiteMenu } from '~/data/models/SiteMenu';
-import { backendGetSiteGlobals, backendGetSiteMenu } from '~/lib/backend';
+import { SiteNotificationList } from '~/data/models/SiteNotificationsList';
+import {
+  backendGetSiteGlobals,
+  backendGetSiteMenu,
+  backendGetSiteNotifications,
+} from '~/lib/backend';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
 import GA from '~/lib/helpers/analytics';
 import { global } from '~/styles/document/global.styles';
@@ -24,6 +29,7 @@ interface Props extends AppInitialProps {
   serverData: {
     siteGlobals?: SiteGlobals;
     siteMenu?: SiteMenu;
+    siteNotifications?: SiteNotificationList;
   };
 }
 
@@ -33,19 +39,17 @@ class MyApp extends NextApp<Props> {
     // to preserve across client-side navigation
     serverData: this.props.serverData,
   };
-
   render() {
     const { Component, pageProps, route, hostUrl } = this.props;
-    const { siteGlobals, siteMenu } = this.state.serverData;
-
+    const { siteGlobals, siteMenu, siteNotifications } = this.state.serverData;
     GA.initialize();
-
     return (
       <SWRConfig value={{ revalidateOnFocus: false }}>
         <AppProviders
           hostUrl={hostUrl}
           siteGlobalsContextValue={siteGlobals}
           siteMenuContextValue={siteMenu}
+          siteNotificationContextValue={siteNotifications}
         >
           <Meta />
 
@@ -81,9 +85,14 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
     ctx: { req },
   } = appContext;
 
-  const [siteGlobalsRes, siteMenuRes] = await Promise.all([
+  const [
+    siteGlobalsRes,
+    siteMenuRes,
+    siteNotificationsRes,
+  ] = await Promise.all([
     backendGetSiteGlobals(),
     backendGetSiteMenu(),
+    backendGetSiteNotifications(),
   ]);
 
   const siteGlobals = siteGlobalsRes.isSuccess
@@ -91,6 +100,10 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
     : undefined;
 
   const siteMenu = siteMenuRes.isSuccess ? siteMenuRes.data : undefined;
+
+  const siteNotifications = siteNotificationsRes.isSuccess
+    ? siteNotificationsRes.data
+    : undefined;
 
   const hostUrl = req?.headers ? `https://${req.headers.host}` : '';
 
@@ -101,9 +114,9 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
     serverData: {
       siteGlobals,
       siteMenu,
+      siteNotifications,
     },
   };
-
   return finalProps;
 };
 

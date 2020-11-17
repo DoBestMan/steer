@@ -7,6 +7,7 @@ import { SiteGlobals } from '~/data/models/SiteGlobals';
 import { SiteHero } from '~/data/models/SiteHero';
 import { SiteInsights } from '~/data/models/SiteInsights';
 import { SiteMenu } from '~/data/models/SiteMenu';
+import { SiteNotificationList } from '~/data/models/SiteNotificationsList';
 import { SiteReviews } from '~/data/models/SiteReviews';
 import { SiteTypes } from '~/data/models/SiteTypes';
 import { SiteVehicles } from '~/data/models/SiteVehicles';
@@ -18,6 +19,16 @@ export async function backendGetSiteGlobals() {
     siteGlobals: SiteGlobals;
   }>({
     endpoint: '/v1/site/globals',
+    includeAuthorization: true,
+    method: 'get',
+  });
+
+  return response;
+}
+
+export async function backendGetSiteNotifications() {
+  const response = await fetchWithErrorHandling<SiteNotificationList>({
+    endpoint: '/v1/site/notifications',
     includeAuthorization: true,
     method: 'get',
   });

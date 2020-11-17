@@ -39,6 +39,9 @@ export const styles: StylesMap = {
   component: {
     transition: `all ${PAGE_TRANSITION_DURATION}ms ${EASING.CUBIC_EASE_OUT}`,
   },
+  globalNotifications: {
+    backgroundColor: COLORS.GLOBAL.BLACK,
+  },
   globalToast: {
     bottom: 0,
     marginBottom: SPACING.SIZE_60,
