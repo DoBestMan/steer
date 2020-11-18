@@ -82,7 +82,8 @@ export const contactPageDownData: PageData = {
     },
     {
       type: 'SiteModuleMarkdown',
-      body: `<h4>HOURS OF OPERATION</h4><p>Support is available during the following hours:<br/><br/>Mon - Fri: 8am - 7pm ET<br/>Sat: 9am - 2pm ET<br/>Sun: Closed<br/><br/>
+      body: `<h4>HOURS OF OPERATION</h4><p><br/>Support is available during the following hours:<br/><br/>Mon - Fri: 8am - 7pm ET<br/>Sat: 9am - 2pm ET<br/>Sun: Closed<br/></p>
+        <h4>HOLIDAY HOURS OF OPERATION</h4><p><br/>Support is available during the following hours:<br/><br/>Thanksgiving: Closed<br/>Black Friday: 8 am - 9pm EST<br/>Saturday 11/28: 8am - 9pm EST<br/>Cyber Week Monday 11/30 - Friday 12/4: 8am - 9pm EST<br/>Christmas Eve: 8am - 5pm EST<br/>Christmas: Closed<br/>News Eve: 8am - 5pm EST<br/>News Years Day: Closed<br/><br/>
         For fastest service, please complete the form above. If you would like to speak with a customer support representative during normal operating hours, please call <a href="tel:+18884100604">(888) 410 0604</a></p>
         <h4>HEADQUARTERS</h4><p>8 Neshaminy Interplex Drive, Suite 300 Trevose, PA 19053-6974</p>`,
     },
