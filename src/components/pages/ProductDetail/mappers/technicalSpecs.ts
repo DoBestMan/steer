@@ -91,7 +91,7 @@ export function mapDataToTechnicalSpecs({
     };
   });
 
-  if (!specs.length || !sizes.length) {
+  if (!specs.length) {
     return null;
   }
 
