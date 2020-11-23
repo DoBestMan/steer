@@ -6,8 +6,6 @@ import { COLORS, SPACING, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 import Notification from './Notification';
-import NotificationList from './NotificationList';
-import { NotificationsData } from './NotificationsData.data';
 
 export default {
   component: Notification,
@@ -37,10 +35,10 @@ function Container({ children }: { children: React.ReactChild }) {
     </Grid>
   );
 }
-
 // Auto dismiss off is just for testing purposes
 // There should be no actual use cases with auto dismiss disabled
 export function NotificationItem() {
+  const handleNotificationClick = () => {};
   return (
     <Container>
       <Notification
@@ -52,20 +50,10 @@ export function NotificationItem() {
         id="10001"
         title="Black Friday sale"
         type="Sale"
+        sessionExpiryTime={2}
         suppressFromHomePage={false}
-        startDateTime="2020-11-10T08:00:00Z"
-        endDateTime="2020-11-26T23:59:59Z"
+        handleNotificationClick={handleNotificationClick}
       />
     </Container>
-  );
-}
-
-export function NotificationListing() {
-  return (
-    <>
-      <Container>
-        <NotificationList notifications={NotificationsData} />
-      </Container>
-    </>
   );
 }

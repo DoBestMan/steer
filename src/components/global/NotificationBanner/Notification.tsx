@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
 import GridItem from '~/components/global/Grid/GridItem';
@@ -7,54 +6,27 @@ import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Link from '~/components/global/Link/Link';
 import { SiteNotifications } from '~/data/models/SiteNotifications';
 import { LINK_TYPES, TIME } from '~/lib/constants';
-import { LOCAL_STORAGE, PROPERTIES } from '~/lib/constants/localStorage';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
 
 import styles from './Notification.styles';
+import { setNotificationIdWithExpiryInLocalStorage } from './Notifications.utils';
 
 function Notification({
-  endDateTime,
   icon,
   id,
   labelLink,
-  startDateTime,
   subtext,
   title,
+  sessionExpiryTime = 360,
+  handleNotificationClick,
 }: SiteNotifications) {
-  const newDate = new Date();
-  const currentDate = newDate.toISOString();
-  const [isVisible, setIsVisible] = useState(
-    currentDate > startDateTime && currentDate < endDateTime,
-  );
-  const setNotificationIdInLocalStorage = () => {
-    const sessionIds = window.localStorage.getItem(
-      LOCAL_STORAGE[PROPERTIES.CLOSED_NOTIFICATION_BANNER_IDS],
-    );
-    let notificationStorageIds: string[] = [];
-    if (sessionIds) {
-      notificationStorageIds = JSON.parse(sessionIds);
-      notificationStorageIds.push(id);
-      window.localStorage.setItem(
-        LOCAL_STORAGE[PROPERTIES.CLOSED_NOTIFICATION_BANNER_IDS],
-        JSON.stringify(notificationStorageIds),
-      );
-    } else {
-      notificationStorageIds.push(id);
-      window.localStorage.setItem(
-        LOCAL_STORAGE[PROPERTIES.CLOSED_NOTIFICATION_BANNER_IDS],
-        JSON.stringify(notificationStorageIds),
-      );
-    }
-  };
   const handleDismiss = () => {
-    setIsVisible(false);
-    setNotificationIdInLocalStorage();
+    setNotificationIdWithExpiryInLocalStorage(id, sessionExpiryTime);
+    handleNotificationClick();
   };
-  const bannerClicked = () => {
-    setNotificationIdInLocalStorage();
-  };
-  return isVisible ? (
+
+  return (
     <CSSTransition timeout={{ enter: 0, exit: TIME.MS400 }}>
       <div css={styles.root}>
         <div css={[typography.jumboHeadline, styles.decorator]}>
@@ -65,7 +37,7 @@ function Notification({
             <Link
               css={styles.descriptionLink}
               {...labelLink.link}
-              onClick={bannerClicked}
+              onClick={handleDismiss}
             >
               <span css={styles.title}>{title}</span>
               <br />
@@ -85,7 +57,7 @@ function Notification({
         />
       </div>
     </CSSTransition>
-  ) : null;
+  );
 }
 
 export default Notification;

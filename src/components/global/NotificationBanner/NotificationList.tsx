@@ -1,48 +1,19 @@
-import { useEffect, useState } from 'react';
-
 import Carousel from '~/components/global/Carousel/Carousel';
-import { SiteNotifications } from '~/data/models/SiteNotifications';
-import { SiteNotificationList } from '~/data/models/SiteNotificationsList';
+import { useSiteNotificationsContext } from '~/context/SiteNotifications.context';
 import { CSSStylesProp } from '~/lib/constants';
-import { LOCAL_STORAGE, PROPERTIES } from '~/lib/constants/localStorage';
 
 import Notification from './Notification';
 import styles from './Notification.styles';
 
-export interface NotificationListProps extends SiteNotificationList {
+export interface NotificationListProps {
   customItemStyles?: CSSStylesProp;
 }
 
-function NotificationList({
-  customItemStyles,
-  notifications,
-}: NotificationListProps) {
-  const [notificationsList, setNotificationsList] = useState(notifications);
-
-  useEffect(() => {
-    if (notifications) {
-      let notificationStorageIds: string[] = [];
-      let filteredNotificationData: SiteNotifications[] = notifications;
-      const notificationStorageItem =
-        window.localStorage &&
-        window.localStorage.getItem(
-          LOCAL_STORAGE[PROPERTIES.CLOSED_NOTIFICATION_BANNER_IDS],
-        );
-      notificationStorageIds =
-        notificationStorageItem && JSON.parse(notificationStorageItem);
-      filteredNotificationData = notificationStorageIds
-        ? filteredNotificationData.filter(
-            (notificationItem) =>
-              !notificationStorageIds.includes(notificationItem.id),
-          )
-        : filteredNotificationData;
-      setNotificationsList(filteredNotificationData);
-    }
-    return () => {
-      setNotificationsList(notifications);
-    };
-  }, [notifications, setNotificationsList]);
-
+function NotificationList({ customItemStyles }: NotificationListProps) {
+  const {
+    notifications,
+    handleNotificationClick,
+  } = useSiteNotificationsContext();
   return (
     <>
       <div css={styles.wrapper}>
@@ -51,7 +22,7 @@ function NotificationList({
           params={{ mousewheel: { forceToAxis: true } }}
           shortSwipes
         >
-          {notificationsList.map((sortedNotificationsData, index) => (
+          {notifications.notifications.map((sortedNotificationsData, index) => (
             <div
               key={`notification_${index}`}
               css={[styles.item, customItemStyles]}
@@ -60,6 +31,7 @@ function NotificationList({
                 data-index={index}
                 key={index}
                 {...sortedNotificationsData}
+                handleNotificationClick={handleNotificationClick}
               />
             </div>
           ))}

@@ -23,7 +23,6 @@ import { useGlobalToastContext } from '~/context/GlobalToast.context';
 import { NavContextProvider } from '~/context/Nav.context';
 import { useRouterContext } from '~/context/Router.context';
 import { useSiteMenuContext } from '~/context/SiteMenu.context';
-import { useSiteNotificationsContext } from '~/context/SiteNotifications.context';
 import { ROUTE_MAP, ROUTES, TIME } from '~/lib/constants';
 import { fixHomepageRoute } from '~/lib/utils/routes';
 import { removeUrlParams } from '~/lib/utils/string';
@@ -76,12 +75,7 @@ function App({ children, ...rest }: Props) {
 
   const isHomepage = route === ROUTE_MAP[ROUTES.HOME];
   const isPLA = route.includes(ROUTE_MAP[ROUTES.PRODUCT_DETAIL_PLA]);
-  const { notifications } = useSiteNotificationsContext();
-  const filteredNotificationData = isHomepage
-    ? notifications.filter(
-        (notificationItem) => !notificationItem.suppressFromHomePage,
-      )
-    : notifications;
+
   const findIntersection = (array1: Array<string>, array2: Array<string>) =>
     array1.filter((value: string) => array2.includes(value));
 
@@ -135,13 +129,12 @@ function App({ children, ...rest }: Props) {
         {ui('a11y.skipToMain')}
       </a>
       <ErrorBoundary FallbackComponent={GlobalErrorFallback}>
-        {filteredNotificationData && (
-          <Grid>
-            <GridItem gridColumn="1/15" css={styles.globalNotifications}>
-              <NotificationList notifications={filteredNotificationData} />
-            </GridItem>
-          </Grid>
-        )}
+        <Grid>
+          <GridItem gridColumn="1/15" css={styles.globalNotifications}>
+            <NotificationList />
+          </GridItem>
+        </Grid>
+
         <NavContextProvider>
           <NavContainer isHomepage={isHomepage} isPLA={isPLA} />
           <SubNavContainer

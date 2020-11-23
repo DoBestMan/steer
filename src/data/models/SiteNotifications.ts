@@ -19,10 +19,8 @@ export interface SiteNotifications {
     label: string;
     link: SiteLink;
   };
-
-  startDateTime: string;
-
-  endDateTime: string;
+  sessionExpiryTime?: number;
 
   suppressFromHomePage: boolean;
+  handleNotificationClick: () => void;
 }
