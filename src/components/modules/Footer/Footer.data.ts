@@ -111,6 +111,14 @@ export const footerLinksData = {
         action: ROUTE_MAP[ROUTES.TIRE_SIZES_LANDING],
         text: ui('breadcrumbs.tireSizes'),
       },
+      {
+        action: ROUTE_MAP[ROUTES.TIRE_DEALS_BLACK_FRIDAY],
+        text: ui('links.blackFridayTireDeals'),
+      },
+      {
+        action: ROUTE_MAP[ROUTES.TIRE_DEALS_CYBER_MONDAY],
+        text: ui('links.cyberMondayTireDeals'),
+      },
     ],
   },
 };
