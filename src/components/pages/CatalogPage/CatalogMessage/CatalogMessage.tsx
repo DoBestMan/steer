@@ -134,25 +134,31 @@ export function DataMomentMessage({
   totalTireCount,
   isSearchForTireSize,
 }: DataMomentMessageProps) {
-  const { setIsAdvancedView } = useCatalogProductsContext();
   const { message } = useTheme();
   const { asPath, query } = useRouter();
+  const { setIsAdvancedView } = useCatalogProductsContext();
+
   const { selectVehicle } = useUserPersonalizationContext();
   const [step, setStep] = useState<number>(1);
+  const [comesFromShowTopPicks, setComesFromShowTopPicks] = useState<boolean>(
+    false,
+  );
   let showTopPicks = false;
   let mustShow = false;
-  if (siteCatalogSummaryPrompt && isSearchForTireSize) {
+  if (siteCatalogSummaryPrompt) {
     mustShow = siteCatalogSummaryPrompt.mustShow;
   }
   /**
    * If coming from Search, set programmatic focus to the message content
    */
-  if (
-    (showLoadingInterstitial && step === 1 && query.oem) ||
-    (showLoadingInterstitial && step === 1 && isSearchForTireSize && !mustShow)
-  ) {
+  if (showLoadingInterstitial && step === 1 && !mustShow) {
     showTopPicks = true;
   }
+
+  if (comesFromShowTopPicks) {
+    showTopPicks = false;
+  }
+
   const titleRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (showLoadingInterstitial && titleRef && titleRef.current) {
@@ -206,6 +212,7 @@ export function DataMomentMessage({
             <Button
               onClick={async function () {
                 (await setStage) && setStage(STAGES.RESULTS);
+                setIsAdvancedView(true);
                 if (exploreMore) {
                   setTimeout(exploreMore, 500);
                 }
@@ -221,9 +228,14 @@ export function DataMomentMessage({
             </Button>
             <Button
               onClick={function () {
-                setIsAdvancedView(false);
+                !isSearchForTireSize && setComesFromShowTopPicks(true);
                 if (!query.oem) {
-                  setStage && setStage(STAGES.RESULTS);
+                  if (isSearchForTireSize) {
+                    setStage && setStage(STAGES.RESULTS);
+                  } else {
+                    setStage && setStage(STAGES.DATA_MOMENT);
+                  }
+
                   // Reset scroll position to top
                   window.scrollTo(0, 0);
                   return;
@@ -246,9 +258,11 @@ export function DataMomentMessage({
       </Grid>
     );
   }
+
   if (showTopPicks && step === 1) {
     return renderTopPicksSection();
   }
+
   return (
     siteCatalogSummaryPrompt && (
       <Grid css={styles.container}>

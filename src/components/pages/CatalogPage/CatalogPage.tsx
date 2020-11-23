@@ -82,6 +82,15 @@ function CatalogPage({ catalogGridRef, isSearchForTireSize }: Props) {
   }, [stage, setIsFooterVisible]);
 
   useEffect(() => {
+    if (!isBrowser()) {
+      return;
+    }
+
+    window.localStorage &&
+      window.localStorage.removeItem(LOCAL_STORAGE[PROPERTIES.ADVANCED_VIEW]);
+  }, []);
+
+  useEffect(() => {
     if (isBrowser()) {
       const handleSetAdvanceView =
         window.localStorage &&

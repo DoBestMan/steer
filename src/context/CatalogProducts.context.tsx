@@ -96,10 +96,17 @@ function useContextSetup({
   };
 
   // fetch site catalog products
+  const newQuery = { ...apiArgs.query };
+
+  if (typeof newQuery.skipGroups === 'undefined') {
+    newQuery.skipGroups = isAdvancedView + '';
+  }
+
   const { error: productsError, isValidating } = useApiDataWithDefault<
     CatalogPageData['serverData']
   >({
     ...apiArgs,
+    query: newQuery,
     endpoint,
     options: {
       onSuccess: (data) => {
@@ -273,14 +280,12 @@ export function CatalogProductsContextProvider({
   catalogGridRef,
   children,
   endpoint,
-  hasDefaultAdvancedView,
   pageParams,
 }: Props) {
   const value = useContextSetup({
     apiArgs,
     catalogGridRef,
     endpoint,
-    hasDefaultAdvancedView,
     pageParams,
   });
 

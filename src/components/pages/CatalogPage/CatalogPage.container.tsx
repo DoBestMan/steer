@@ -32,7 +32,6 @@ function CatalogPageContainer({
   pageParams = {},
   searchBy,
   searchByParams,
-  hasDefaultAdvancedView,
   isSearchForTireSize,
 }: Props) {
   const { query } = useRouter();
@@ -44,7 +43,6 @@ function CatalogPageContainer({
   const queryParams = getStringifiedParams({
     ...query,
     ...pageParams,
-    skipGroups: hasDefaultAdvancedView ? 'true' : 'false',
     page: '1',
   });
   const apiArgs: CatalogApiArgs = {
@@ -72,7 +70,6 @@ function CatalogPageContainer({
           catalogGridRef={catalogGridRef}
           endpoint={endpoints.products}
           pageParams={pageParams}
-          hasDefaultAdvancedView={hasDefaultAdvancedView}
         >
           <CatalogPage
             catalogGridRef={catalogGridRef}
