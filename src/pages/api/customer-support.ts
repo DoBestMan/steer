@@ -3,6 +3,14 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
 import { apiSendCustomerSupportForm } from '~/lib/backend/customer-support';
 
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: '5mb',
+    },
+  },
+};
+
 export default async (request: NextApiRequest, response: NextApiResponse) => {
   backendBootstrap({ request });
 

@@ -168,3 +168,9 @@ export function hex2a(str1: string) {
     return str;
   }
 }
+
+export function getMIMEType(str: string) {
+  const mimeTypes = str.match(/data:([a-zA-Z0-9]+\/[a-zA-Z0-9-.+]+).*,.*/);
+
+  return mimeTypes && mimeTypes[1];
+}

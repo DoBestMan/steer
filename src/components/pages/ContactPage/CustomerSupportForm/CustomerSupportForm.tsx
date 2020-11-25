@@ -9,6 +9,7 @@ import TitleRadio from '~/components/global/Radio/TitleRadio';
 import Toast, { TOAST_TYPE } from '~/components/global/Toast/Toast';
 import { SiteCustomerSupportFormInput } from '~/data/models/SiteCustomerSupportFormInput';
 import { apiSendCustomerSupportForm } from '~/lib/api/send-customer-support-form';
+import { getMIMEType } from '~/lib/utils/string';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import { FIELDS } from './CustomerSupportForm.constants';
@@ -23,6 +24,7 @@ interface FormValues {
   [FIELDS.PHONE_NUMBER]: string;
   [FIELDS.SUBJECT]: string;
   [FIELDS.FILE]: string | null;
+  [FIELDS.FILE_MIME_TYPE]: string | null;
   [FIELDS.TOKEN]: string;
 }
 
@@ -35,14 +37,15 @@ const initialState = {
   [FIELDS.FIRST_NAME]: '',
   [FIELDS.LAST_NAME]: '',
   [FIELDS.MESSAGE]: '',
-  [FIELDS.ORDER_NUMBER]: null,
+  [FIELDS.ORDER_NUMBER]: '',
   [FIELDS.PHONE_NUMBER]: '',
   [FIELDS.SUBJECT]: '',
-  [FIELDS.FILE]: null,
+  [FIELDS.FILE]: '',
   [FIELDS.TOKEN]: '',
+  [FIELDS.FILE_MIME_TYPE]: '',
 };
 
-const LIMIT_FILE_SIZE = 5000;
+const LIMIT_FILE_SIZE = 1024 * 4;
 const toastMessages: {
   [key in TOAST_TYPE | string]: JSX.Element | string;
 } = {
@@ -76,9 +79,9 @@ function SendMessageForm({ selections }: Props) {
     if (res.isSuccess) {
       setToastMessage(TOAST_TYPE.SUCCESS);
       setFormValues(initialState);
+      setFilename('');
       return;
     }
-
     setToastMessage(TOAST_TYPE.ERROR);
   };
 
@@ -93,14 +96,17 @@ function SendMessageForm({ selections }: Props) {
         try {
           window.grecaptcha
             .execute(process.env.RECAPTCHA_SITE_KEY || '', { action: 'submit' })
-            .then(function (token: string) {
-              postFormData({
+            .then(async function (token: string) {
+              setLoading(true);
+              await postFormData({
                 ...formValues,
                 [FIELDS.TOKEN]: token,
               } as SiteCustomerSupportFormInput);
+              setLoading(false);
             });
         } catch (error) {
           console.info(error);
+          setLoading(false);
           setToastMessage(TOAST_TYPE.ERROR);
         }
       });
@@ -120,10 +126,11 @@ function SendMessageForm({ selections }: Props) {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
       const file = event.target.files[0];
+      event.target.value = '';
       setFilename(file.name);
       if (file.size / 1024 < LIMIT_FILE_SIZE) {
         const reader = new FileReader();
-        reader.readAsText(file);
+        reader.readAsDataURL(file);
 
         reader.onloadstart = function () {
           setLoading(true);
@@ -136,9 +143,13 @@ function SendMessageForm({ selections }: Props) {
         };
 
         reader.onloadend = function () {
+          const mimeType = getMIMEType(reader.result as string);
+          const base64Content = (reader.result as string).split(',')[1];
+
           setFormValues({
             ...formValues,
-            [FIELDS.FILE]: reader.result as string,
+            [FIELDS.FILE]: base64Content,
+            [FIELDS.FILE_MIME_TYPE]: mimeType,
           });
           setLoading(false);
         };
@@ -240,7 +251,7 @@ function SendMessageForm({ selections }: Props) {
             <input
               id="attach-file"
               type="file"
-              accept=".jpg, .jpeg, .png, .bmp"
+              accept=".jpg, .pdf"
               css={styles.attachFile}
               onChange={handleFileChange}
             />
