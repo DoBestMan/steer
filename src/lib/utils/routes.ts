@@ -82,8 +82,11 @@ export function getParam(param: string | string[]): string {
  * multiple (string[]) into an empty string value
  */
 export function getStringifiedParams(
-  params: Record<string, string | string[] | null | undefined>,
+  params?: Record<string, string | string[] | null | undefined>,
 ): Record<string, string> {
+  if (!params) {
+    return {};
+  }
   const queryParams: Record<string, string> = {};
   Object.entries(params).map(([key, value]) => {
     if (value === null || value === undefined) {
