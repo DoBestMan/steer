@@ -2,7 +2,7 @@ import FeaturedInfoModule from '~/components/global/FeaturedInfoModule/FeaturedI
 import GridItem from '~/components/global/Grid/GridItem';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { LINK_TYPES } from '~/lib/constants';
-import { openAttentiveModal } from '~/lib/helpers/attentive';
+// import { openAttentiveModal } from '~/lib/helpers/attentive';
 import { openReferAFriendModal } from '~/lib/helpers/refer-a-friend';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
@@ -21,12 +21,11 @@ function FooterPromotions() {
         gridColumnL="1/4"
       >
         <FeaturedInfoModule
-          {...PROMOTIONS.signUp}
-          dataVendor={'attentive'}
+          {...PROMOTIONS.giftCard}
           action={{
             as: LINK_TYPES.BUTTON,
-            onClick: openAttentiveModal,
-            text: ui('footer.promotions.signUpAction'),
+            onClick: openReferAFriendModal,
+            text: ui('footer.promotions.giftCardAction'),
           }}
           customTitleStyles={styles.featuredInfoTitle}
           customCopyStyles={typography.bodyCopy}
@@ -41,12 +40,7 @@ function FooterPromotions() {
         gridColumnL="4/7"
       >
         <FeaturedInfoModule
-          {...PROMOTIONS.giftCard}
-          action={{
-            as: LINK_TYPES.BUTTON,
-            onClick: openReferAFriendModal,
-            text: ui('footer.promotions.giftCardAction'),
-          }}
+          {...PROMOTIONS.militaryDiscount}
           customTitleStyles={styles.featuredInfoTitle}
           customCopyStyles={typography.bodyCopy}
           customLinkStyles={styles.featuredInfoLink}
@@ -64,7 +58,7 @@ function FooterPromotions() {
         gridColumnL="7/10"
       >
         <FeaturedInfoModule
-          {...PROMOTIONS.militaryDiscount}
+          {...PROMOTIONS.freeShipping}
           customTitleStyles={styles.featuredInfoTitle}
           customCopyStyles={typography.bodyCopy}
           customLinkStyles={styles.featuredInfoLink}
@@ -78,7 +72,7 @@ function FooterPromotions() {
         gridColumnL="10/13"
       >
         <FeaturedInfoModule
-          {...PROMOTIONS.freeShipping}
+          {...PROMOTIONS.easyReturn}
           customTitleStyles={styles.featuredInfoTitle}
           customCopyStyles={typography.bodyCopy}
           customLinkStyles={styles.featuredInfoLink}

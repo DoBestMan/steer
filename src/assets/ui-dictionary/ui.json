@@ -257,6 +257,9 @@
       "error": "Oops, something went wrong! <br />Please try again."
     },
     "promotions": {
+      "easyReturnCopy": "We return unmounted tire <br />returns within 30 days.",
+      "easyReturnTitle": "Easy returns",
+      "easyReturnAction": "30 days returns",
       "freeShippingCopy": "Fast, free shipping on <br />every tire we sell.",
       "freeShippingTitle": "Free shipping",
       "freeShippingAction": "Learn more",

@@ -4,10 +4,25 @@ import { LINK_TYPES, ROUTE_MAP, ROUTES } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 export const PROMOTIONS: { [key: string]: FeaturedInfoModuleProps } = {
-  signUp: {
-    copy: ui('footer.promotions.signUpCopy'),
-    icon: ICONS.LIGHTNING_OUTLINE,
-    title: ui('footer.promotions.signUpTitle'),
+  easyReturn: {
+    action: {
+      as: LINK_TYPES.A,
+      href: ROUTE_MAP[ROUTES.RETURNS],
+      text: ui('footer.promotions.easyReturnAction'),
+    },
+    copy: ui('footer.promotions.easyReturnCopy'),
+    icon: ICONS.FREE_RETURNS,
+    title: ui('footer.promotions.easyReturnTitle'),
+  },
+  freeShipping: {
+    action: {
+      as: LINK_TYPES.A,
+      href: ROUTE_MAP[ROUTES.FREE_SHIPPING],
+      text: ui('footer.promotions.freeShippingAction'),
+    },
+    copy: ui('footer.promotions.freeShippingCopy'),
+    icon: ICONS.FREE_SHIPPING,
+    title: ui('footer.promotions.freeShippingTitle'),
   },
   giftCard: {
     copy: ui('footer.promotions.giftCardCopy'),
@@ -24,14 +39,9 @@ export const PROMOTIONS: { [key: string]: FeaturedInfoModuleProps } = {
     icon: ICONS.MONEY_BACK,
     title: ui('footer.promotions.militaryDiscountTitle'),
   },
-  freeShipping: {
-    action: {
-      as: LINK_TYPES.A,
-      href: ROUTE_MAP[ROUTES.FREE_SHIPPING],
-      text: ui('footer.promotions.freeShippingAction'),
-    },
-    copy: ui('footer.promotions.freeShippingCopy'),
-    icon: ICONS.FREE_SHIPPING,
-    title: ui('footer.promotions.freeShippingTitle'),
+  signUp: {
+    copy: ui('footer.promotions.signUpCopy'),
+    icon: ICONS.LIGHTNING_OUTLINE,
+    title: ui('footer.promotions.signUpTitle'),
   },
 };
