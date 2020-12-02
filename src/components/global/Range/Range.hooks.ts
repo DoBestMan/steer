@@ -65,7 +65,7 @@ function useRangeSliderManager({
     }
     setNodeStyle(handlerProps);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rest.railEl, width]);
+  }, [handlerProps, rest.railEl, width]);
 
   useEffect(() => {
     initListeners(handlerProps);
