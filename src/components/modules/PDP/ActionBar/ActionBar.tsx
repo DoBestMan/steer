@@ -6,6 +6,7 @@ import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Loading from '~/components/global/Loading/Loading';
 import { useProductDetailContext } from '~/components/pages/ProductDetail/ProductDetail.context';
+import { useRouterContext } from '~/context/Router.context';
 import { THEME } from '~/lib/constants';
 import { formatDollars } from '~/lib/utils/string';
 import { ui } from '~/lib/utils/ui-dictionary';
@@ -74,6 +75,7 @@ function PDPActionBar({
     setIsAddingToCart,
     setQuantity,
   } = useProductDetailContext();
+  const { setIsRouteLoading, setInitTransitionState } = useRouterContext();
 
   const [isQuantitySelectorOpen, setIsQuantitySelectorOpen] = useState(false);
   const [isRoadHazardOpen, setIsRoadHazardOpen] = useState(false);
@@ -97,11 +99,24 @@ function PDPActionBar({
     setPrice(price);
   }, [quantity, setPrice, isSingleTireSize, tirePrice, rearPrice]);
 
+  useEffect(() => {
+    return () => {
+      setIsRouteLoading(false);
+      setInitTransitionState(false);
+    };
+  }, [setIsRouteLoading, setInitTransitionState]);
+
   function toggleQuantitySelector() {
     setIsQuantitySelectorOpen((isOpen) => !isOpen);
   }
 
   function toggleRoadHazard() {
+    if (isRoadHazardOpen) {
+      setIsRouteLoading(true);
+      setInitTransitionState(true);
+      addToCart({ shouldAddCoverage: false });
+    }
+
     setIsRoadHazardOpen((isOpen) => !isOpen);
     setIsAddingToCart(false);
   }

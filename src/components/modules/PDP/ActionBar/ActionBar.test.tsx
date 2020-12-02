@@ -5,6 +5,7 @@ import ReactModal from 'react-modal';
 
 import * as ProductDetailContext from '~/components/pages/ProductDetail/ProductDetail.context';
 import * as ModalContext from '~/context/Modal.context';
+import * as RouterContext from '~/context/Router.context';
 import * as UserPersonalizationContext from '~/context/UserPersonalization.context';
 import { THEME } from '~/lib/constants';
 
@@ -33,6 +34,10 @@ describe('modules/PDP/ActionBar', () => {
     (UserPersonalizationContext as any).useUserPersonalizationContext = jest.fn(
       () => ({}),
     );
+    (RouterContext as any).useRouterContext = jest.fn(() => ({
+      setIsRouteLoading: () => false,
+      setInitTransitionState: () => false,
+    }));
     (ProductDetailContext as any).useProductDetailContext = jest.fn(() => ({
       addToCart,
       quantity: { front: 4 },

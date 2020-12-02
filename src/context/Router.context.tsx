@@ -14,6 +14,8 @@ export interface RouterContextProps {
   prevUrl: string;
   router: NextRouter;
   setContainerEl(containerEl: HTMLDivElement): void;
+  setInitTransitionState(initTransitionState: boolean): void;
+  setIsRouteLoading(isRouteLoading: boolean): void;
   skipPageTransition: boolean;
 }
 
@@ -33,6 +35,7 @@ function useRouterContextSetup() {
   // Used for showing the route change LoadingBar
   const [isRouteLoading, setIsRouteLoading] = useState(false);
   const [skipPageTransition, setSkipPageTransition] = useState(false);
+  const [initTransitionState, setInitTransitionState] = useState(false);
 
   const { isSearchOpen } = useSearchModalContext();
 
@@ -134,12 +137,15 @@ function useRouterContextSetup() {
   ]);
 
   return {
-    isInRouteTransition: nextUrl !== asPath && !skipPageTransition,
+    isInRouteTransition:
+      (nextUrl !== asPath && !skipPageTransition) || initTransitionState,
     isRouteLoading,
     prevRoute,
     prevUrl,
     router,
     setContainerEl,
+    setInitTransitionState,
+    setIsRouteLoading,
     skipPageTransition,
   };
 }
