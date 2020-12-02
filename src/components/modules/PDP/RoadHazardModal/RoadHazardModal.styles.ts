@@ -1,4 +1,4 @@
-import { COLORS, SPACING, StylesMap } from '~/lib/constants';
+import { COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
@@ -34,6 +34,25 @@ const styles: StylesMap = {
       color: COLORS.LIGHT.GRAY_70,
     },
   ],
+  fixWrapper: {
+    backgroundColor: COLORS.GLOBAL.WHITE,
+    bottom: SPACING.SIZE_01,
+    boxShadow: '0px -4px 4px rgba(0, 0, 0, 0.1);',
+    padding: SPACING.SIZE_20,
+    position: 'fixed',
+    right: '0',
+    width: '100% !important;',
+    [MQ.M]: {
+      width: '480px !important;',
+      padding: SPACING.SIZE_60,
+      bottom: '-130px',
+    },
+    [MQ.L]: {
+      width: '480px !important;',
+      padding: SPACING.SIZE_60,
+      bottom: SPACING.SIZE_01,
+    },
+  },
   link: [
     typography.smallCopyTight,
     {
@@ -54,7 +73,7 @@ const styles: StylesMap = {
     },
   ],
   removeCoverageRadio: {
-    marginBottom: SPACING.SIZE_40,
+    marginBottom: SPACING.SIZE_120,
   },
   roadHazardRadio: {
     marginBottom: SPACING.SIZE_10,

@@ -150,20 +150,22 @@ function RoadHazardModal({ durationLabel, isOpen, onClose, price }: Props) {
 
         <div css={modalContainerStyles.ctaGroup}>
           {!shouldIntercept ? (
-            <Button
-              css={styles.button}
-              data-testid="road-hazard-continue"
-              onClick={handleConfirm}
-              isDisabled={isAddingToCart}
-              theme={THEME.LIGHT}
-            >
-              <span>{ui('pdp.roadHazard.continueButtonLabel')}</span>
-              {isAddingToCart && (
-                <div css={styles.buttonLoading}>
-                  <Loading theme={THEME.DARK} />
-                </div>
-              )}
-            </Button>
+            <div css={styles.fixWrapper}>
+              <Button
+                css={styles.button}
+                data-testid="road-hazard-continue"
+                onClick={handleConfirm}
+                isDisabled={isAddingToCart}
+                theme={THEME.LIGHT}
+              >
+                <span>{ui('pdp.roadHazard.continueButtonLabel')}</span>
+                {isAddingToCart && (
+                  <div css={styles.buttonLoading}>
+                    <Loading theme={THEME.DARK} />
+                  </div>
+                )}
+              </Button>
+            </div>
           ) : isAddingToCart ? (
             <div css={styles.loading}>
               <Loading theme={THEME.LIGHT} />
