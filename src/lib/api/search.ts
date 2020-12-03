@@ -25,7 +25,7 @@ export async function apiGetSearchTypeahead({
 
   if (!res.isSuccess) {
     throw new FetchError(
-      FetchErrorCodes[res.error.statusCode] || FetchErrorCodes.NetworkError,
+      FetchErrorCodes[res.error.code] || FetchErrorCodes.NetworkError,
       res.error.message || '',
     );
   }
