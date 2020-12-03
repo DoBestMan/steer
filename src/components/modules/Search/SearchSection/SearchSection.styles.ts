@@ -37,13 +37,6 @@ const styles: StylesMap = {
         [MQ.M]: typography.bodyCopyTight,
       },
     ],
-    marginTop: 75,
-    [MQ.M]: {
-      marginTop: 115,
-    },
-    [MQ.XL]: {
-      marginTop: 0,
-    },
   },
   eyebrow: [
     typography.eyebrow,

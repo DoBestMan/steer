@@ -4,6 +4,7 @@ import Transition, {
   TransitionStatus,
 } from 'react-transition-group/Transition';
 
+import { useSearchModalContext } from '~/components/modules/Search/SearchModal.context';
 import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
 import { SiteSearchResultGroup } from '~/data/models/SiteSearchResultGroup';
 import { SiteSearchResultImageItem } from '~/data/models/SiteSearchResultImageItem';
@@ -16,7 +17,7 @@ import debounce from '~/lib/utils/debounce';
 import { isInRouteRegexList, isSamePath } from '~/lib/utils/routes';
 
 import InitialSearch from './InitialSearch';
-import { useInputQuery, useSearchResults } from './Search.hooks';
+import { useSearchResults } from './Search.hooks';
 import styles from './Search.styles';
 import {
   Results,
@@ -98,7 +99,7 @@ function Search({
     setInputQuery,
     setPrimaryQuery,
     setSecondaryQuery,
-  } = useInputQuery();
+  } = useSearchModalContext();
 
   const { popSearchHistory, pushSearchHistory } = useSearchResults();
 

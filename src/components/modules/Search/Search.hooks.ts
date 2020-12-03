@@ -299,7 +299,6 @@ export function useSearchState({
 }) {
   const [searchState, setSearchState] = useState('');
   const [hasLockedSearchState, setHasLockedSearchState] = useState(false);
-
   const lockSearchStateToVehicle = () => {
     const {
       queryText,

@@ -5,7 +5,6 @@ import {
   initialSearchTireSizeData,
   initialSearchVehicleData,
 } from '~/components/modules/Search/Search.data';
-import { useInputQuery } from '~/components/modules/Search/Search.hooks';
 import {
   SearchActionType,
   SearchResult,
@@ -26,7 +25,7 @@ interface Props {
 }
 
 function ShopTiresBy({ onSearchQuery, onSetSearchState }: Props) {
-  const { setCurrentInputQuery } = useInputQuery();
+  const { toggleIsSearchOpen, setCurrentInputQuery } = useSearchModalContext();
 
   const { greaterThan, lessThan } = useBreakpoints();
   const handleSearchCategoryClick = (searchResult: SearchResult) => {
@@ -53,7 +52,6 @@ function ShopTiresBy({ onSearchQuery, onSetSearchState }: Props) {
     toggleIsSearchOpen();
     handleSearchCategoryClick(data);
   };
-  const { toggleIsSearchOpen } = useSearchModalContext();
   const isSkipHtml = lessThan.L || greaterThan.XL;
 
   return (

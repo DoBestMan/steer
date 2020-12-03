@@ -217,10 +217,13 @@ const styles: StylesMap = {
     marginTop: SPACING.SIZE_05,
   },
   searchResultsGrid: {
-    paddingTop: 75,
+    paddingTop: 130,
     position: 'relative',
     [MQ.M]: {
-      paddingTop: SPACING.SIZE_100,
+      paddingTop: 175,
+    },
+    [MQ.M]: {
+      paddingTop: SPACING.SIZE_120,
     },
   },
   searchResultsGridRearTire: {
