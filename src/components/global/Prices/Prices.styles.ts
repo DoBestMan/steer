@@ -22,7 +22,6 @@ const styles: StylesMap = {
     textDecoration: 'none',
   },
   wrapper: {
-    display: 'flex',
     alignItems: 'center',
   },
 };

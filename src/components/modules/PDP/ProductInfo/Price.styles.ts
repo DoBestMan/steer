@@ -37,9 +37,6 @@ const styles: StylesMap = {
       color: COLORS.LIGHT.GRAY_70,
       display: 'block',
       marginBottom: 3,
-      [MQ.M]: {
-        marginBottom: SPACING.SIZE_10,
-      },
     },
   ],
   pricesPadded: {
@@ -55,7 +52,6 @@ const styles: StylesMap = {
     typography.primarySubhead,
     {
       color: COLORS.LIGHT.GRAY_70,
-      // marginBottom: SPACING.SIZE_20, // To compensate container's margin
 
       span: [
         typography.primaryHeadline,
