@@ -52,7 +52,9 @@ export default function SubFilters({
   } = useCatalogProductsContext();
 
   const onToggleView = async () => {
-    const newParams = isAdvancedView ? {} : { skipGroups: 'true' };
+    const newParams = isAdvancedView
+      ? { skipGroups: 'false' }
+      : { skipGroups: 'true' };
     const shouldSetToLocalStorage =
       window && window.localStorage
         ? (hasAdvancedView: boolean) => {
