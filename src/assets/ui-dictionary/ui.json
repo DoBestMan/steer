@@ -131,6 +131,7 @@
     "form": {
       "email": "Your email address",
       "emailError": "Please enter a valid email",
+      "dateError": "Please enter a valid date format MM/DD/YYYY",
       "yourEmail": "Your email address",
       "orderId": "Order ID",
       "shippingZip": "Shipping ZIP Code",

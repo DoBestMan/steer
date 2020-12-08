@@ -448,6 +448,10 @@ function ReviewForm({
                 contextualLabel={ui(
                   'reviews.form.sections.about.datePurchasedContextual',
                 )}
+                error={{
+                  hasError: !hasValidDate,
+                  errorMessage: ui('common.form.dateError'),
+                }}
               />
             </div>
           </fieldset>
