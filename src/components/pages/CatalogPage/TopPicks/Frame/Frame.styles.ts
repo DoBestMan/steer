@@ -4,7 +4,7 @@ const styles: StylesMap = {
   root: {
     bottom: 0,
     display: 'block',
-    height: 'fit-content',
+    height: 0,
     left: '50%',
     margin: 'auto',
     position: 'absolute',
