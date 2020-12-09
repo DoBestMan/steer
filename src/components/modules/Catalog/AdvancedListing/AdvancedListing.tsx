@@ -153,7 +153,7 @@ function AdvancedListing({
                       })}
                   </li>
                 ))}
-              {deliveryInfo && (
+              {deliveryInfo?.value && (
                 <li css={styles.moment}>
                   <Icon
                     css={[styles.momentIcon, styles.deliveryIcon]}

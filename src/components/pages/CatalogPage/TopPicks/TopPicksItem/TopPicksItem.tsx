@@ -353,7 +353,7 @@ function TopPicksItem(props: TopPickItemsProps) {
             {/* Product description */}
             <span css={styles.infoContainer}>
               {/* 1st line: deliveryInfo */}
-              {deliveryInfo && (
+              {deliveryInfo?.value && (
                 <span css={styles.productPerkContainer}>
                   <Icon name={ICONS.SHIPPING_TRUCK} css={styles.productIcon} />
                   <span css={typography.smallCopyTight}>

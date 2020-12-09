@@ -216,7 +216,7 @@ function ProductListing({
             ))}
           </div>
         )}
-        {isHighlighted && (dataMomentList || deliveryInfo) && (
+        {isHighlighted && (dataMomentList || deliveryInfo?.value) && (
           <ul css={styles.momentList}>
             {deliveryInfo && (
               <li css={styles.moment}>
