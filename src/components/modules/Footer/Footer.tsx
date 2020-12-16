@@ -99,7 +99,7 @@ function Footer({
 
       <GridItem
         gridColumnS="2/4"
-        gridColumnM="2/5"
+        gridColumnM="2/4"
         gridColumnL="2/6"
         gridColumnXL="5/7"
         css={styles.companyLinksSection}
@@ -110,9 +110,20 @@ function Footer({
 
       <GridItem
         gridColumnS="4/6"
-        gridColumnM="5/8"
+        gridColumnM="4/6"
         gridColumnL="6/10"
         gridColumnXL="7/9"
+        css={styles.tiresLinksSection}
+      >
+        <p css={styles.linksHeading}>{ui('footer.customerSupport')}</p>
+        <FooterLinkList links={footerLinksData.tires.links} />
+      </GridItem>
+
+      <GridItem
+        gridColumnS="2/4"
+        gridColumnM="6/8"
+        gridColumnL="10/14"
+        gridColumnXL="9/11"
         css={styles.tiresLinksSection}
       >
         <p css={styles.linksHeading}>{ui('footer.tires')}</p>
@@ -123,25 +134,22 @@ function Footer({
         gridColumnS="3/6"
         gridColumnM="5/8"
         gridColumnL="6/14"
-        gridColumnXL="9/11"
+        gridColumnXL="5/14"
         css={styles.socialLinksSection}
       >
-        <p css={[styles.linksHeading, styles.socialHeading]}>
-          {ui('footer.social')}
-        </p>
         <FooterLinkList links={footerLinksData.social.links} />
       </GridItem>
 
       <GridItem
         gridColumnM="2/8"
-        gridColumnL="10/14"
+        gridColumnL="2/14"
         gridColumnXL="11/14"
         css={styles.mailingListSection}
       >
         <FooterMailingList />
       </GridItem>
 
-      <GridItem css={styles.copyrightSection}>
+      <GridItem gridColumnXL="2/5" css={styles.copyrightSection}>
         <span css={styles.text}>{footerLinksData.copyright.text}</span>
       </GridItem>
     </Grid>

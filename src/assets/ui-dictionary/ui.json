@@ -275,14 +275,16 @@
       "signUpAction": "Get the discount"
     },
     "social": "Social",
-    "tires": "Tires 101"
+    "tires": "Tires 101",
+    "customerSupport": "Customer Support"
   },
   "homepage": {},
   "searchByBoard": {
     "vehicle": "Vehicle",
     "tireSize": "Tire size",
     "title": "shop tires by",
-    "brand": "Tire brand"
+    "brand": "Tire brand",
+    "interplotedTitle": "SHOP {{name}} TIRES BY"
   },
   "support": {
     "enabled": "Need live support?",

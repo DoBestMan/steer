@@ -16,7 +16,7 @@ import Meta from '~/components/global/Meta/Meta';
 import ProductGroupList, {
   ProductGroupListProps,
 } from '~/components/global/ProductGroupList/ProductGroupList';
-import TireSizeBoardContainer from '~/components/global/TireSizeBoard/TireSizeBoard.container';
+import SearchByBoard from '~/components/global/SearchByBoard/SearchByBoard';
 import { SiteGraphicTile } from '~/data/models/SiteGraphicTile';
 import { SiteLinkWithLabel } from '~/data/models/SiteLinkWithLabel';
 import { ROUTES, THEME } from '~/lib/constants';
@@ -25,6 +25,8 @@ import { capitalize } from '~/lib/utils/string';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import styles from './CategoryPage.styles';
+
+const HIDE_CATEGORY_TYPES: Array<string> = ['mud', 'sand', 'trail'];
 
 interface CategoryPageData {
   categoryData: CategoryPageProps;
@@ -40,9 +42,6 @@ export interface CategoryPageProps {
 }
 function CategoryPage({ categoryData }: CategoryPageData) {
   const categoryName = categoryData.name.replace('-', ' ');
-  const searchParams = {
-    category: categoryData.id.toString(),
-  };
   const categoryBreadCrumbData: BreadcrumbsItem[] = mapArrayToBreadcrumbs([
     {
       type: ROUTES.HOME,
@@ -64,9 +63,6 @@ function CategoryPage({ categoryData }: CategoryPageData) {
       category: capitalize(categoryName),
     }),
   };
-  const tireSizeBoardTitle = ui('categoryPage.tireSizeBoardTitle', {
-    category: categoryName,
-  });
 
   return (
     <div css={[styles.root]}>
@@ -104,9 +100,12 @@ function CategoryPage({ categoryData }: CategoryPageData) {
           </GridItem>
         </Grid>
       </div>
-      <TireSizeBoardContainer
-        title={tireSizeBoardTitle}
-        params={searchParams}
+      <SearchByBoard
+        title={ui('searchByBoard.interplotedTitle', {
+          name: capitalize(categoryName),
+        })}
+        hasBrand={false}
+        hasVehicle={!HIDE_CATEGORY_TYPES.includes(categoryName)}
       />
       <div css={styles.mostPopularBrandsContainer}>
         <Grid>

@@ -4,18 +4,21 @@ import { typography, typographyStyles } from '~/styles/typography.styles';
 const styles: StylesMap = {
   container: {
     backgroundColor: COLORS.GLOBAL.ORANGE,
-    padding: `${SPACING.SIZE_20}px ${SPACING.SIZE_20}px`,
+    padding: `${SPACING.SIZE_20}px 0px`,
     [MQ.M]: {
       display: 'flex',
-      padding: `${SPACING.SIZE_20}px ${SPACING.SIZE_40}px`,
+      padding: `${SPACING.SIZE_20}px 0px`,
     },
     [MQ.L]: {
-      padding: `${SPACING.SIZE_20}px ${SPACING.SIZE_60}px`,
+      padding: `${SPACING.SIZE_20}px 0px`,
     },
   },
   ctaMenu: {
     display: 'flex',
     justifyContent: 'center',
+    [MQ.M]: {
+      flex: 1,
+    },
   },
   ctaMenuIcon: {
     '&:hover': {
@@ -94,6 +97,16 @@ const styles: StylesMap = {
       textTransform: 'uppercase',
     },
   ],
+  homepageContainer: {
+    padding: `${SPACING.SIZE_20}px ${SPACING.SIZE_20}px`,
+    [MQ.M]: {
+      display: 'flex',
+      padding: `${SPACING.SIZE_20}px ${SPACING.SIZE_40}px`,
+    },
+    [MQ.L]: {
+      padding: `${SPACING.SIZE_20}px ${SPACING.SIZE_60}px`,
+    },
+  },
   title: [
     typography.eyebrow,
     {
@@ -104,20 +117,11 @@ const styles: StylesMap = {
         {
           padding: `0 ${SPACING.SIZE_60}px`,
           [MQ.M]: {
-            flexBasis: '26%',
             padding: 0,
           },
         },
       ],
-      [MQ.L]: [
-        typographyStyles.tertiaryHeadline,
-        {
-          flexBasis: '28%',
-        },
-      ],
-      [MQ.XL]: {
-        flexBasis: '36%',
-      },
+      [MQ.L]: [typographyStyles.tertiaryHeadline],
     },
   ],
 };

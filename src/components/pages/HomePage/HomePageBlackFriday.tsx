@@ -105,7 +105,7 @@ function HomePageBlackFriday({
       </div>
 
       <div css={searchButtonContainerStyles} ref={buttonRef}>
-        <SearchByBoard title={ui('searchByBoard.title')} />
+        <SearchByBoard title={ui('searchByBoard.title')} isHomepage />
       </div>
 
       <div

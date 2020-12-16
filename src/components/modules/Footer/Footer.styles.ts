@@ -18,9 +18,6 @@ const CONSTANTS = {
 const styles: StylesMap = {
   companyLinksSection: {
     order: 4,
-    [MQ.L]: {
-      order: 3,
-    },
   },
 
   container: {
@@ -86,16 +83,13 @@ const styles: StylesMap = {
       margin: `${SPACING.SIZE_40}px 0`,
       order: 3,
       padding: `${SPACING.SIZE_40}px 0`,
-
       [MQ.L]: {
-        border: 'none',
-        margin: 0,
-        order: 5,
-        padding: 0,
+        marginTop: 0,
       },
-
       [MQ.XL]: {
+        border: 'none',
         order: 7,
+        padding: 0,
       },
     },
   ],
@@ -116,10 +110,10 @@ const styles: StylesMap = {
   socialHeading: {
     display: 'none',
 
-    [MQ.XL]: {
-      display: 'block',
-      marginBottom: SPACING.SIZE_15,
-    },
+    // [MQ.XL]: {
+    //   display: 'block',
+    //   marginBottom: SPACING.SIZE_15,
+    // },
   },
 
   socialLinksSection: [
@@ -146,40 +140,20 @@ const styles: StylesMap = {
             [MQ.L]: {
               width: CONSTANTS.ICON_WIDTH,
             },
-            [MQ.XL]: {
-              marginRight: SPACING.SIZE_15,
-            },
           },
 
           // the second span is the text
           'span:nth-of-type(2)': {
             display: 'none',
             paddingTop: SPACING.SIZE_05,
-
-            [MQ.XL]: {
-              display: 'block',
-            },
           },
-
-          [MQ.XL]: {
-            '&.listItem:not(:last-child)': {
-              marginBottom: SPACING.SIZE_15,
-            },
-            display: 'block',
-            marginLeft: 0,
-          },
-        },
-
-        [MQ.XL]: {
-          display: 'inline',
-          textAlign: 'left',
         },
       },
 
       [MQ.XL]: {
-        border: 'none',
-        margin: 0,
-        padding: 0,
+        order: 9,
+        marginTop: SPACING.SIZE_60,
+        padding: `${SPACING.SIZE_60}px 0`,
       },
     },
   ],
@@ -205,7 +179,7 @@ const styles: StylesMap = {
         paddingBottom: SPACING.SIZE_30,
       },
 
-      [MQ.L]: [
+      [MQ.XL]: [
         borderBottomWithGap,
         {
           marginBottom: SPACING.SIZE_60,
@@ -225,10 +199,15 @@ const styles: StylesMap = {
     },
 
     [MQ.L]: [
+      {
+        padding: `${SPACING.SIZE_60}px 0`,
+      },
+    ],
+
+    [MQ.XL]: [
       borderBottom,
       {
         marginBottom: SPACING.SIZE_60,
-        padding: `${SPACING.SIZE_60}px 0`,
       },
     ],
   },

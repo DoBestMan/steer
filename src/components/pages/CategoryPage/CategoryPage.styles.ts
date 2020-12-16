@@ -49,6 +49,10 @@ const styles: StylesMap = {
     },
   ],
   pageHeader: {
+    marginBottom: SPACING.SIZE_40,
+    [MQ.S]: {
+      marginTop: SPACING.SIZE_40,
+    },
     [MQ.L]: {
       marginTop: SPACING.SIZE_70,
     },

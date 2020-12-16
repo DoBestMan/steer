@@ -7,6 +7,7 @@ import {
   THEME,
   TIME,
 } from '~/lib/constants';
+import { links } from '~/styles/links.styles';
 import { typography } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
@@ -24,6 +25,7 @@ const styles: StylesMap = {
     '&[aria-hidden="false"]': {
       display: 'block',
     },
+    a: links.light,
   },
   showFullBody: [
     typography.primarySubhead,

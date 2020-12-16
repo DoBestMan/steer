@@ -11,6 +11,7 @@ import Link from '~/components/global/Link/Link';
 import Meta from '~/components/global/Meta/Meta';
 import ProductGroupList from '~/components/global/ProductGroupList/ProductGroupList';
 import PromotionCard from '~/components/global/PromotionCard/PromotionCard';
+import SearchByBoard from '~/components/global/SearchByBoard/SearchByBoard';
 import { containerSpacing } from '~/components/modules/EditorialModules/EditorialModules.styles';
 import ModuleMarkdown from '~/components/modules/EditorialModules/modules/ModuleMarkdown/ModuleMarkdown';
 import { navigationBreadcrumbPaddingTop } from '~/components/modules/Nav/Nav.styles';
@@ -74,6 +75,20 @@ function BrandTirePage({
           />
         </GridItem>
       </Grid>
+      {promoImage && (
+        <div css={containerSpacing.spacingTopS40XL60}>
+          <div css={styles.imageSectionSmall}>
+            <Image {...promoImage} widths={[320, 768]} />
+          </div>
+          <div css={styles.imageSectionLarge}>
+            <Grid css={containerSpacing.spacingTopS40XL60}>
+              <GridItem gridColumnL={'2/14'} gridColumnXL={'4/12'}>
+                <Image {...promoImage} widths={[320, 768, 900, 1200]} />
+              </GridItem>
+            </Grid>
+          </div>
+        </div>
+      )}
       <div css={containerSpacing.spacingTopS60XL80}>
         <Grid>
           <GridItem gridColumnL={'2/14'} gridColumnXL={'4/12'}>
@@ -94,20 +109,17 @@ function BrandTirePage({
           </GridItem>
         </Grid>
       </div>
-      {promoImage && (
-        <div css={containerSpacing.spacingTopS40XL60}>
-          <div css={styles.imageSectionSmall}>
-            <Image {...promoImage} widths={[320, 768]} />
-          </div>
-          <div css={styles.imageSectionLarge}>
-            <Grid css={containerSpacing.spacingTopS40XL60}>
-              <GridItem gridColumnL={'2/14'} gridColumnXL={'4/12'}>
-                <Image {...promoImage} widths={[320, 768, 900, 1200]} />
-              </GridItem>
-            </Grid>
-          </div>
-        </div>
-      )}
+      <div
+        css={[
+          containerSpacing.spacingTopS60XL80,
+          containerSpacing.spacingBottomS60XL80,
+        ]}
+      >
+        <SearchByBoard
+          title={ui('searchByBoard.interplotedTitle', { name: tirebrand })}
+          hasBrand={false}
+        />
+      </div>
       {curatedProducts && (
         <div css={styles.spacingTop20}>
           <Grid>

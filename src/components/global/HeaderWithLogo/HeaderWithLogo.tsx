@@ -1,12 +1,15 @@
 import { ReactType, useCallback, useState } from 'react';
-import { NodeType } from 'react-markdown';
 
 import BrandLogoOrLabel from '~/components/global/BrandLogoOrLabel/BrandLogoOrLabel';
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Markdown from '~/components/global/Markdown/MarkdownDynamic';
 import { SiteImage } from '~/data/models/SiteImage';
-import { HEADER_SIZE, THEME } from '~/lib/constants';
+import {
+  HEADER_SIZE,
+  MARKDOWN_PRIMITIVES_WITH_HTML,
+  THEME,
+} from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import styles, { sizeStyles, themeStyles } from './HeaderWithLogo.styles';
@@ -24,16 +27,6 @@ export interface HeaderWithLogoProps {
   titleAs?: ReactType;
   titleSize?: HEADER_SIZE;
 }
-// Allow only the simplest markdown to prevent unexpected markups
-const markdownAllowedTypes: NodeType[] = [
-  'root',
-  'text',
-  'break',
-  'paragraph',
-  'strong',
-  'emphasis',
-  'link',
-];
 
 export default function HeaderWithLogo({
   body,
@@ -79,14 +72,20 @@ export default function HeaderWithLogo({
 
       {subTitle && (
         <SubTitleContainer css={[styles.subTitle, themeStyles[theme].subTitle]}>
-          <Markdown allowedTypes={markdownAllowedTypes} unwrapDisallowed>
+          <Markdown
+            allowedTypes={MARKDOWN_PRIMITIVES_WITH_HTML}
+            unwrapDisallowed
+          >
             {subTitle}
           </Markdown>
         </SubTitleContainer>
       )}
       {briefBody && (
         <div css={styles.Body}>
-          <Markdown allowedTypes={markdownAllowedTypes} unwrapDisallowed>
+          <Markdown
+            allowedTypes={MARKDOWN_PRIMITIVES_WITH_HTML}
+            unwrapDisallowed
+          >
             {briefBody}
           </Markdown>
         </div>
@@ -97,7 +96,10 @@ export default function HeaderWithLogo({
           aria-hidden={!showFullBody}
           id="header-detail-page-body"
         >
-          <Markdown allowedTypes={markdownAllowedTypes} unwrapDisallowed>
+          <Markdown
+            allowedTypes={MARKDOWN_PRIMITIVES_WITH_HTML}
+            unwrapDisallowed
+          >
             {moreBody}
           </Markdown>
         </div>
