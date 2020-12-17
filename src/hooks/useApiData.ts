@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import useSWR, { ConfigInterface } from 'swr';
 
+import { SiteSession } from '~/data/models/SiteSession';
 import { useQueryParams } from '~/hooks/useQueryParams';
 import { apiBootstrap } from '~/lib/api/bootstrap';
 import { fetch } from '~/lib/fetch';
@@ -26,6 +27,7 @@ export interface UseApiDataParams {
   params?: Record<string, string>;
   query?: Record<string, string>;
   revalidateEmitter?: Emitter<null>;
+  siteSession?: SiteSession;
 }
 
 export function useApiData<T>({
@@ -37,6 +39,7 @@ export function useApiData<T>({
   query = {},
   revalidateEmitter,
   options = {},
+  siteSession,
 }: UseApiDataParams): UseApiData<T> {
   const { canFetch = true } = useQueryParams();
   const url = canFetch ? [endpoint, JSON.stringify(query)] : null;
@@ -54,6 +57,7 @@ export function useApiData<T>({
         method: 'get',
         params,
         query: { ...query }, // Clones the object to prevent mutation issues,
+        siteSession,
       });
     },
     options,

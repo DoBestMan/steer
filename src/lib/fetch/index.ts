@@ -1,3 +1,4 @@
+import { SiteSession } from '~/data/models/SiteSession';
 import { UserPersonalization } from '~/data/models/UserPersonalization';
 
 import { FetchError, FetchErrorCodes } from './FetchError';
@@ -45,6 +46,7 @@ interface FetchProps<U> {
   params?: Record<string, string | string[]>;
   query?: Record<string, string>;
   signal?: AbortSignal;
+  siteSession?: SiteSession;
 }
 
 export async function fetch<T, U = never>({
@@ -59,6 +61,7 @@ export async function fetch<T, U = never>({
   params = {},
   query = {},
   signal,
+  siteSession,
 }: FetchProps<U>): Promise<T> {
   const global = typeof globalThis !== undefined ? globalThis : window;
   if (urlBase === '') {
@@ -75,11 +78,15 @@ export async function fetch<T, U = never>({
   if (includeUserZip && currentUserPersonalization.userLocation?.zip) {
     query.userZip = currentUserPersonalization.userLocation.zip;
   }
-
+  if (siteSession) {
+    authorizationHeader = 'Bearer ' + siteSession.access_token;
+    authorizationExpiration = new Date(
+      Date.now() + siteSession.expires_in * 1000,
+    );
+  }
   const hasAuthorizationHeader = Boolean(authorizationHeader);
   const isAuthorizationExpired =
     authorizationExpiration !== null && Date.now() >= +authorizationExpiration;
-
   if (
     includeAuthorization &&
     authorizationFunction &&

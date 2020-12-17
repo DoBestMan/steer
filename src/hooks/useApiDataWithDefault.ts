@@ -10,6 +10,7 @@ export function useApiDataWithDefault<T, U = T>({
   params = {},
   query = {},
   options = {},
+  siteSession,
 }: UseApiDataParams & {
   defaultData: T;
 }): UseApiData<U> & {
@@ -24,6 +25,7 @@ export function useApiDataWithDefault<T, U = T>({
     params,
     query,
     revalidateEmitter,
+    siteSession,
   });
 
   return {

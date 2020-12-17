@@ -5,6 +5,7 @@ import HomePageBlackFriday, {
   HomeData,
 } from '~/components/pages/HomePage/HomePageBlackFriday';
 import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
+import { useSiteSessionContext } from '~/context/SiteSession.context';
 import { SiteDealsCarousel } from '~/data/models/SiteDealsCarousel';
 import { SiteHero } from '~/data/models/SiteHero';
 import { SiteInsights } from '~/data/models/SiteInsights';
@@ -22,6 +23,7 @@ export interface HomeServeData {
 }
 
 function HomePageContainer({ serverData }: HomeServeData) {
+  const { siteSession } = useSiteSessionContext();
   const {
     data: { siteHero, siteInsights },
     error,
@@ -31,6 +33,7 @@ function HomePageContainer({ serverData }: HomeServeData) {
     includeUserRegion: true,
     includeUserZip: true,
     revalidateEmitter: eventEmitters.userPersonalizationLocationUpdate,
+    siteSession,
   });
 
   if (error) {

@@ -5,6 +5,7 @@ import { SearchModalContextProvider } from '~/components/modules/Search/SearchMo
 import { SiteGlobals } from '~/data/models/SiteGlobals';
 import { SiteMenu } from '~/data/models/SiteMenu';
 import { SiteNotificationList } from '~/data/models/SiteNotificationsList';
+import { SiteSession } from '~/data/models/SiteSession';
 
 import { FooterContextProvider } from './Footer.context';
 import { GlobalsContextProvider } from './Globals.context';
@@ -14,6 +15,7 @@ import { RouterContextProvider } from './Router.context';
 import { SiteGlobalsContextProvider } from './SiteGlobals.context';
 import { SiteMenuContextProvider } from './SiteMenu.context';
 import { SiteNotificationsContextProvider } from './SiteNotifications.context';
+import { SiteSessionContextProvider } from './SiteSession.context';
 import { UserPersonalizationContextProvider } from './UserPersonalization.context';
 
 interface Props {
@@ -22,6 +24,7 @@ interface Props {
   siteGlobalsContextValue?: SiteGlobals;
   siteMenuContextValue?: SiteMenu;
   siteNotificationContextValue?: SiteNotificationList;
+  siteSessionContextValue?: SiteSession;
 }
 
 // Container to wrap _app.tsx in context providers.
@@ -32,30 +35,35 @@ function AppProviders({
   siteGlobalsContextValue,
   siteMenuContextValue,
   siteNotificationContextValue,
+  siteSessionContextValue,
 }: Props) {
   return (
     <GlobalsContextProvider value={{ hostUrl }}>
-      <SiteGlobalsContextProvider value={siteGlobalsContextValue}>
-        <SiteMenuContextProvider value={siteMenuContextValue}>
-          <UserPersonalizationContextProvider>
-            <FooterContextProvider>
-              <SearchContextProvider>
-                <SearchModalContextProvider>
-                  <GlobalToastContextProvider>
-                    <RouterContextProvider>
-                      <SiteNotificationsContextProvider
-                        value={siteNotificationContextValue}
-                      >
-                        <ModalContextProvider>{children}</ModalContextProvider>
-                      </SiteNotificationsContextProvider>
-                    </RouterContextProvider>
-                  </GlobalToastContextProvider>
-                </SearchModalContextProvider>
-              </SearchContextProvider>
-            </FooterContextProvider>
-          </UserPersonalizationContextProvider>
-        </SiteMenuContextProvider>
-      </SiteGlobalsContextProvider>
+      <SiteSessionContextProvider value={siteSessionContextValue}>
+        <SiteGlobalsContextProvider value={siteGlobalsContextValue}>
+          <SiteMenuContextProvider value={siteMenuContextValue}>
+            <UserPersonalizationContextProvider>
+              <FooterContextProvider>
+                <SearchContextProvider>
+                  <SearchModalContextProvider>
+                    <GlobalToastContextProvider>
+                      <RouterContextProvider>
+                        <SiteNotificationsContextProvider
+                          value={siteNotificationContextValue}
+                        >
+                          <ModalContextProvider>
+                            {children}
+                          </ModalContextProvider>
+                        </SiteNotificationsContextProvider>
+                      </RouterContextProvider>
+                    </GlobalToastContextProvider>
+                  </SearchModalContextProvider>
+                </SearchContextProvider>
+              </FooterContextProvider>
+            </UserPersonalizationContextProvider>
+          </SiteMenuContextProvider>
+        </SiteGlobalsContextProvider>
+      </SiteSessionContextProvider>
     </GlobalsContextProvider>
   );
 }
