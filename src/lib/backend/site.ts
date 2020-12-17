@@ -9,18 +9,16 @@ import { SiteInsights } from '~/data/models/SiteInsights';
 import { SiteMenu } from '~/data/models/SiteMenu';
 import { SiteNotificationList } from '~/data/models/SiteNotificationsList';
 import { SiteReviews } from '~/data/models/SiteReviews';
-import { SiteSession } from '~/data/models/SiteSession';
 import { SiteTypes } from '~/data/models/SiteTypes';
 import { SiteVehicles } from '~/data/models/SiteVehicles';
 
 import { fetch, fetchWithErrorHandling } from '../fetch';
 
-export async function backendGetSiteGlobals(siteSession?: SiteSession) {
+export async function backendGetSiteGlobals() {
   const response = await fetchWithErrorHandling<{
     siteGlobals: SiteGlobals;
   }>({
     endpoint: '/v1/site/globals',
-    siteSession,
     includeAuthorization: true,
     method: 'get',
   });
@@ -28,18 +26,17 @@ export async function backendGetSiteGlobals(siteSession?: SiteSession) {
   return response;
 }
 
-export async function backendGetSiteNotifications(siteSession?: SiteSession) {
+export async function backendGetSiteNotifications() {
   const response = await fetchWithErrorHandling<SiteNotificationList>({
     endpoint: '/v1/site/notifications',
     includeAuthorization: true,
     method: 'get',
-    siteSession,
   });
 
   return response;
 }
 
-export async function backendGetSiteHome(siteSession?: SiteSession) {
+export async function backendGetSiteHome() {
   const response = await fetch<{
     siteDealsCarousel: SiteDealsCarousel;
     siteHero: SiteHero;
@@ -50,7 +47,6 @@ export async function backendGetSiteHome(siteSession?: SiteSession) {
     includeUserRegion: true,
     includeUserZip: true,
     method: 'get',
-    siteSession,
   });
 
   return {
@@ -64,26 +60,24 @@ export async function backendGetSiteHome(siteSession?: SiteSession) {
   };
 }
 
-export async function backendGetSiteMenu(siteSession?: SiteSession) {
+export async function backendGetSiteMenu() {
   const response = await fetchWithErrorHandling<SiteMenu>({
     endpoint: '/v1/site/menu',
     includeAuthorization: true,
     includeUserRegion: true,
     method: 'get',
-    siteSession,
   });
 
   return response;
 }
 
-export async function backendGetSiteReviews(siteSession?: SiteSession) {
+export async function backendGetSiteReviews() {
   const response = await fetchWithErrorHandling<{
     siteReviews: SiteReviews;
   }>({
     endpoint: '/v1/site/reviews',
     includeAuthorization: true,
     method: 'get',
-    siteSession,
   });
 
   return response;

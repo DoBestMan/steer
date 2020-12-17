@@ -1,6 +1,5 @@
 import { SiteCatalogProducts } from '~/data/models/SiteCatalogProducts';
 import { SiteCatalogSummary } from '~/data/models/SiteCatalogSummary';
-import { SiteSession } from '~/data/models/SiteSession';
 import { Emitter } from '~/lib/utils/Emitter';
 
 export interface CatalogPageData {
@@ -19,5 +18,4 @@ export interface CatalogApiArgs {
   includeUserZip: boolean;
   query: Record<string, string>;
   revalidateEmitter: Emitter<null>;
-  siteSession?: SiteSession;
 }

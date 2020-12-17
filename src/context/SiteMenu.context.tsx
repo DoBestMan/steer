@@ -6,13 +6,11 @@ import { useApiDataWithDefault } from '~/hooks/useApiDataWithDefault';
 import { eventEmitters } from '~/lib/events/emitters';
 import { createContext } from '~/lib/utils/context';
 
-import { useSiteSessionContext } from './SiteSession.context';
-
 const SiteMenuContext = createContext<SiteMenu>();
 
 function useContextSetup(defaultData?: SiteMenu) {
   const [dataMenu, setDataMenu] = useState(defaultData);
-  const { siteSession } = useSiteSessionContext();
+
   const { error } = useApiDataWithDefault({
     defaultData,
     endpoint: '/menu',
@@ -31,7 +29,6 @@ function useContextSetup(defaultData?: SiteMenu) {
       },
     },
     revalidateEmitter: eventEmitters.userPersonalizationLocationUpdate,
-    siteSession,
   });
 
   if (error) {

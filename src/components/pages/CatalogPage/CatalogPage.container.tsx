@@ -5,7 +5,6 @@ import Meta from '~/components/global/Meta/Meta';
 import { useSearchModalContext } from '~/components/modules/Search/SearchModal.context';
 import { CatalogProductsContextProvider } from '~/context/CatalogProducts.context';
 import { CatalogSummaryContextProvider } from '~/context/CatalogSummary.context';
-import { useSiteSessionContext } from '~/context/SiteSession.context';
 import { eventEmitters } from '~/lib/events/emitters';
 import { getStringifiedParams } from '~/lib/utils/routes';
 
@@ -39,7 +38,7 @@ function CatalogPageContainer({
   const { isSearchOpen } = useSearchModalContext();
   const meta = mapDataToMeta({ searchBy, searchByParams });
   const catalogGridRef = useRef<HTMLDivElement | null>(null);
-  const { siteSession } = useSiteSessionContext();
+
   // begin fetching data from /summary and /products
   const queryParams = getStringifiedParams({
     ...query,
@@ -52,7 +51,6 @@ function CatalogPageContainer({
     includeUserZip: true,
     query: queryParams,
     revalidateEmitter: eventEmitters.userPersonalizationLocationUpdate,
-    siteSession,
   };
 
   /**

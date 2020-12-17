@@ -15,7 +15,6 @@ import { PDPStickyBarProps } from '~/components/modules/PDP/StickyBar/StickyBar'
 import { TechnicalSpecsProps } from '~/components/modules/PDP/TechnicalSpecs/TechnicalSpecs';
 import { useGlobalsContext } from '~/context/Globals.context';
 import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
-import { useSiteSessionContext } from '~/context/SiteSession.context';
 import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
 import { SiteCatalogProductGroupList } from '~/data/models/SiteCatalogProductGroupList';
 import { SiteProduct } from '~/data/models/SiteProduct';
@@ -91,7 +90,7 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
   const { asPath } = router;
   const userPersonalization = useUserPersonalizationContext();
   const globals = useSiteGlobalsContext();
-  const { siteSession } = useSiteSessionContext();
+
   const { hostUrl } = useGlobalsContext();
   const isPLA = !!router.pathname.match(ROUTE_MAP[ROUTES.PRODUCT_DETAIL_PLA]);
 
@@ -104,7 +103,6 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
     includeUserZip: true,
     query: queryParams,
     revalidateEmitter: eventEmitters.userPersonalizationLocationUpdate,
-    siteSession,
   });
 
   if (error) {

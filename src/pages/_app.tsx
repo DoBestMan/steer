@@ -11,17 +11,12 @@ import AppProviders from '~/context/AppProviders';
 import { SiteGlobals } from '~/data/models/SiteGlobals';
 import { SiteMenu } from '~/data/models/SiteMenu';
 import { SiteNotificationList } from '~/data/models/SiteNotificationsList';
-import { SiteSession } from '~/data/models/SiteSession';
 import {
   backendGetSiteGlobals,
   backendGetSiteMenu,
   backendGetSiteNotifications,
 } from '~/lib/backend';
-import {
-  backendBootstrap,
-  getBackendEnvVariables,
-} from '~/lib/backend/bootstrap';
-import { backendOauthToken } from '~/lib/backend/oauth';
+import { backendBootstrap } from '~/lib/backend/bootstrap';
 import GA from '~/lib/helpers/analytics';
 import { global } from '~/styles/document/global.styles';
 
@@ -35,7 +30,6 @@ interface Props extends AppInitialProps {
     siteGlobals?: SiteGlobals;
     siteMenu?: SiteMenu;
     siteNotifications?: SiteNotificationList;
-    siteSession?: SiteSession;
   };
 }
 
@@ -47,12 +41,7 @@ class MyApp extends NextApp<Props> {
   };
   render() {
     const { Component, pageProps, route, hostUrl } = this.props;
-    const {
-      siteGlobals,
-      siteMenu,
-      siteNotifications,
-      siteSession,
-    } = this.state.serverData;
+    const { siteGlobals, siteMenu, siteNotifications } = this.state.serverData;
     GA.initialize();
     return (
       <SWRConfig value={{ revalidateOnFocus: false }}>
@@ -61,7 +50,6 @@ class MyApp extends NextApp<Props> {
           siteGlobalsContextValue={siteGlobals}
           siteMenuContextValue={siteMenu}
           siteNotificationContextValue={siteNotifications}
-          siteSessionContextValue={siteSession}
         >
           <Meta />
 
@@ -90,20 +78,8 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
       ...appProps,
     };
   }
-  const { clientId, clientSecret } = getBackendEnvVariables();
 
   backendBootstrap();
-  if (!clientId || !clientSecret) {
-    throw new Error('Missing clientId or clientSecret');
-  }
-
-  const siteSessionRes = await backendOauthToken({
-    clientId,
-    clientSecret,
-  });
-  const siteSession = siteSessionRes.isSuccess
-    ? siteSessionRes.data
-    : undefined;
 
   const {
     ctx: { req },
@@ -114,9 +90,9 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
     siteMenuRes,
     siteNotificationsRes,
   ] = await Promise.all([
-    backendGetSiteGlobals(siteSession),
-    backendGetSiteMenu(siteSession),
-    backendGetSiteNotifications(siteSession),
+    backendGetSiteGlobals(),
+    backendGetSiteMenu(),
+    backendGetSiteNotifications(),
   ]);
 
   const siteGlobals = siteGlobalsRes.isSuccess
@@ -139,7 +115,6 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
       siteGlobals,
       siteMenu,
       siteNotifications,
-      siteSession,
     },
   };
   return finalProps;
