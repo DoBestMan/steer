@@ -13,12 +13,7 @@ const CONSTANTS = {
   US_CENTER_COORDS: { lat: 39.8283459, lng: -98.5794797 },
 };
 
-export const appendGMapsScript = (onLoadCallBack: () => void) => {
-  // if googleapis script is already loaded do nothing.
-  if (document.getElementById(CONSTANTS.SCRIPT_ID)) {
-    return;
-  }
-
+const appendGMapsScript = (onLoadCallBack: () => void) => {
   const script = document.createElement('script');
   script.type = 'text/javascript';
   script.async = true;

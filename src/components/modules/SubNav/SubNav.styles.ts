@@ -38,9 +38,6 @@ const styles: StylesMap = {
       display: 'none',
     },
   },
-  alignContentRight: {
-    justifyContent: 'flex-end',
-  },
   borderMobile: {
     background: COLORS.GLOBAL.ORANGE,
     bottom: 0,
@@ -142,11 +139,6 @@ const styles: StylesMap = {
     position: 'absolute',
     [MQ.M]: {
       position: 'initial',
-    },
-  },
-  locationNav: {
-    [MQ.L]: {
-      padding: `${SPACING.SIZE_40}px ${SPACING.SIZE_60}px`,
     },
   },
   mobileLinks: {

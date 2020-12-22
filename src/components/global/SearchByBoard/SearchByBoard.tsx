@@ -1,15 +1,9 @@
-import { useCallback } from 'react';
-
 import Car from '~/components/global/Car/Car';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import Icon from '~/components/global/Icon/Icon';
-import { ICONS } from '~/components/global/Icon/Icon.constants';
-import { NAV_TARGETS } from '~/components/modules/Nav/Nav.types';
 import { useSearchContext } from '~/components/modules/Search/Search.context';
 import { useSearchModalContext } from '~/components/modules/Search/SearchModal.context';
-import { useNavContext } from '~/context/Nav.context';
-import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
 import { SiteSearchResultActionQuery } from '~/data/models/SiteSearchResultActionQuery';
 import { ROUTE_MAP, ROUTES } from '~/lib/constants';
 import { isBrowser } from '~/lib/utils/browser';
@@ -51,20 +45,6 @@ function SearchByBoard({
     setRouteQueryParamOptions,
   } = useSearchContext();
   const { setIsSearchOpen, setCurrentInputQuery } = useSearchModalContext();
-  const { userPersonalizationData } = useUserPersonalizationContext();
-  const { createSelectLinkHandler, toggleSubNav } = useNavContext();
-  const handleLocationClick = useCallback(() => {
-    const linkHandler = createSelectLinkHandler({
-      target: NAV_TARGETS.LOCATION,
-    });
-
-    if (!linkHandler) {
-      return;
-    }
-
-    linkHandler();
-    toggleSubNav();
-  }, [createSelectLinkHandler, toggleSubNav]);
   const addPromotionParam = (promoId: string | undefined) => {
     if (!isBrowser() || !promoId) {
       return;
@@ -147,26 +127,7 @@ function SearchByBoard({
 
   const renderCTAList = (
     <>
-      <div css={styles.headerSection}>
-        {title && <p css={styles.title}>{title}</p>}
-        <div
-          css={styles.zipSection}
-          onClick={handleLocationClick}
-          role="button"
-          tabIndex={0}
-        >
-          <Icon css={styles.locationIcon} name={ICONS.LOCATION} />
-          {userPersonalizationData?.userLocation?.zip && (
-            <p>
-              {ui('searchByBoard.zipSectionLabel')}{' '}
-              <span css={styles.zipLabel}>
-                {' '}
-                {userPersonalizationData?.userLocation?.zip}
-              </span>
-            </p>
-          )}
-        </div>
-      </div>
+      {title && <p css={styles.title}>{title}</p>}
       <ul css={styles.ctaMenu}>
         {CTAList.filter((cta) => cta.isShow).map((cta) => (
           <li

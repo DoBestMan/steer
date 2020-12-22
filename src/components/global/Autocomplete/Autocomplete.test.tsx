@@ -13,7 +13,6 @@ describe('autocomplete', () => {
         results={[]}
         label="Enter input"
         errorLabel="Invalid input"
-        onIsLoadingValueSelection={jest.fn()}
         onValueSelectionSuccess={jest.fn()}
       />,
     );
@@ -34,13 +33,12 @@ describe('autocomplete', () => {
         results={[]}
         label="Enter input"
         errorLabel="Invalid input"
-        onIsLoadingValueSelection={jest.fn()}
         onValueSelectionSuccess={jest.fn()}
         resultItemComponent={AutocompleteResultItemLocation}
       />,
     );
 
-    const input = screen.getByRole('number');
+    const input = screen.getByRole('textbox');
     const combobox = screen.getByRole('combobox');
 
     // when text is entered with no result
@@ -66,13 +64,12 @@ describe('autocomplete', () => {
         results={[]}
         label="Enter input"
         errorLabel="Invalid input"
-        onIsLoadingValueSelection={jest.fn()}
         onValueSelectionSuccess={jest.fn()}
         resultItemComponent={AutocompleteResultItemLocation}
       />,
     );
 
-    const input = screen.getByRole('number') as HTMLInputElement;
+    const input = screen.getByRole('textbox') as HTMLInputElement;
     const combobox = screen.getByRole('combobox');
 
     // when text is entered with results
@@ -86,7 +83,6 @@ describe('autocomplete', () => {
         ]}
         label="Enter input"
         errorLabel="Invalid input"
-        onIsLoadingValueSelection={jest.fn()}
         onValueSelectionSuccess={jest.fn()}
         resultItemComponent={AutocompleteResultItemLocation}
       />,
@@ -123,13 +119,12 @@ describe('autocomplete', () => {
         results={[]}
         label="Enter input"
         errorLabel="Invalid input"
-        onIsLoadingValueSelection={jest.fn()}
         onValueSelectionSuccess={jest.fn()}
         resultItemComponent={AutocompleteResultItemLocation}
       />,
     );
 
-    const input = screen.getByRole('number') as HTMLInputElement;
+    const input = screen.getByRole('textbox') as HTMLInputElement;
     const combobox = screen.getByRole('combobox');
 
     // when text is entered with results
@@ -143,7 +138,6 @@ describe('autocomplete', () => {
         ]}
         label="Enter input"
         errorLabel="Invalid input"
-        onIsLoadingValueSelection={jest.fn()}
         onValueSelectionSuccess={jest.fn()}
         resultItemComponent={AutocompleteResultItemLocation}
       />,
@@ -181,12 +175,11 @@ describe('autocomplete', () => {
         results={[]}
         label="Enter input"
         errorLabel="Invalid input"
-        onIsLoadingValueSelection={jest.fn()}
         onValueSelectionSuccess={jest.fn()}
       />,
     );
 
-    const input = screen.getByRole('number') as HTMLInputElement;
+    const input = screen.getByRole('textbox') as HTMLInputElement;
     const combobox = screen.getByRole('combobox');
 
     // when text is entered with results
@@ -200,7 +193,6 @@ describe('autocomplete', () => {
         ]}
         label="Enter input"
         errorLabel="Invalid input"
-        onIsLoadingValueSelection={jest.fn()}
         onValueSelectionSuccess={jest.fn()}
       />,
     );
@@ -222,12 +214,11 @@ describe('autocomplete', () => {
         results={[]}
         label="Enter input"
         errorLabel="Invalid input"
-        onIsLoadingValueSelection={jest.fn()}
         onValueSelectionSuccess={jest.fn()}
       />,
     );
 
-    const input = screen.getByRole('number') as HTMLInputElement;
+    const input = screen.getByRole('textbox') as HTMLInputElement;
     const combobox = screen.getByRole('combobox');
 
     // when text is entered with results
@@ -242,7 +233,6 @@ describe('autocomplete', () => {
         label="Enter input"
         errorLabel="Invalid input"
         onValueSelectionSuccess={jest.fn()}
-        onIsLoadingValueSelection={jest.fn()}
         resultItemComponent={AutocompleteResultItemLocation}
       />,
     );

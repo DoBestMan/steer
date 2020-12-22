@@ -7,8 +7,7 @@ const styles: StylesMap = {
     padding: `${SPACING.SIZE_20}px 0px`,
     [MQ.M]: {
       display: 'flex',
-      flexFlow: 'column',
-      padding: `${SPACING.SIZE_20}px ${SPACING.SIZE_40}px`,
+      padding: `${SPACING.SIZE_20}px 0px`,
     },
     [MQ.L]: {
       padding: `${SPACING.SIZE_20}px 0px`,
@@ -98,13 +97,6 @@ const styles: StylesMap = {
       textTransform: 'uppercase',
     },
   ],
-  headerSection: {
-    display: 'flex',
-    marginBottom: SPACING.SIZE_10,
-    [MQ.M]: {
-      marginBottom: 0,
-    },
-  },
   homepageContainer: {
     padding: `${SPACING.SIZE_20}px ${SPACING.SIZE_20}px`,
     [MQ.M]: {
@@ -115,15 +107,10 @@ const styles: StylesMap = {
       padding: `${SPACING.SIZE_20}px ${SPACING.SIZE_60}px`,
     },
   },
-  locationIcon: {
-    height: '16px',
-    marginRight: '10px',
-    width: '12px',
-  },
   title: [
     typography.eyebrow,
     {
-      flex: 1,
+      marginBottom: SPACING.SIZE_20,
       textTransform: 'uppercase',
       [MQ.M]: [
         typography.primarySubhead,
@@ -135,18 +122,6 @@ const styles: StylesMap = {
         },
       ],
       [MQ.L]: [typographyStyles.tertiaryHeadline],
-    },
-  ],
-  zipLabel: {
-    borderBottom: '2px dotted',
-  },
-  zipSection: [
-    typography.labelCopyTight,
-    {
-      alignItems: 'center',
-      color: COLORS.ORANGE.SHADE_85,
-      cursor: 'pointer',
-      display: 'flex',
     },
   ],
 };

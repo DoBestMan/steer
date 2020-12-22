@@ -3,15 +3,12 @@ import { useCallback, useEffect, useState } from 'react';
 import Autocomplete from '~/components/global/Autocomplete/Autocomplete';
 import { AutocompleteResult } from '~/components/global/Autocomplete/AutocompleteResultItem';
 import GridItem from '~/components/global/Grid/GridItem';
-import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
-import Loading from '~/components/global/Loading/Loading';
 import Markdown from '~/components/global/Markdown/Markdown';
+import Toast, { TOAST_TYPE } from '~/components/global/Toast/Toast';
+import { useToastManager } from '~/components/global/Toast/Toast.hooks';
 import { NAV_TARGETS } from '~/components/modules/Nav/Nav.types';
-import { useNavContext } from '~/context/Nav.context';
-import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
 import { UserPersonalizationUpdate } from '~/data/models/UserPersonalizationUpdate';
-import { TIME } from '~/lib/constants';
 import { onlyNumbers } from '~/lib/utils/regex';
 import { ui } from '~/lib/utils/ui-dictionary';
 
@@ -30,11 +27,6 @@ interface Props {
   focusInputOnMount?: boolean;
   onCurrentLocationError?: (error: string) => void;
   onLocationChangeSuccess: (location: UserPersonalizationUpdate) => void;
-}
-
-enum MODAL_MESSAGE_TYPE {
-  ERROR = 'error',
-  SUCCESS = 'success',
 }
 
 const CONSTANTS = {
@@ -71,15 +63,13 @@ function Location({
   const [search, setSearch] = useState('');
   const [isLoadingLocation, setIsLoadingLocation] = useState(false);
   const [hasInvalidInput, setHasInvalidInput] = useState(false);
-  const [modalMessage, setModalMessage] = useState<MODAL_MESSAGE_TYPE | string>(
-    '',
-  );
-  const { handleCloseSubNav } = useNavContext();
   const {
-    hideUseCurrentLocation,
-    isLoadingLocationSearch,
-    setIsLoadingLocationSearch,
-  } = useUserPersonalizationContext();
+    toastMessage,
+    setToastMessage,
+    handleClearMessage,
+    isOpen,
+    handleDismiss,
+  } = useToastManager();
   const onChange = useCallback(
     (input: string) => {
       // We need to clear the results when the input is empty to
@@ -139,30 +129,13 @@ function Location({
     `[aria-label="${ui('nav.close')} ${NAV_TARGETS.LOCATION}"]`,
   ) as HTMLElement;
 
-  useEffect(() => {
-    const isSuccess = modalMessage === MODAL_MESSAGE_TYPE.SUCCESS;
-    let timer: ReturnType<typeof window.setTimeout>;
-    if (isSuccess) {
-      timer = setTimeout(() => {
-        handleCloseSubNav();
-      }, TIME.MS3000);
-    }
-
-    return () => {
-      if (isSuccess) {
-        clearTimeout(timer);
-      }
-    };
-  }, [handleCloseSubNav, modalMessage]);
-
   async function onValueSelectionSuccess(result: AutocompleteResult) {
     try {
       await onLocationChangeSuccess({
         userLocationGooglePlacesId: result.id,
         userLocationZip: result.main,
       });
-      setIsLoadingLocationSearch(false);
-      setModalMessage(MODAL_MESSAGE_TYPE.SUCCESS);
+      setToastMessage(TOAST_TYPE.SUCCESS);
     } catch (error) {
       handleCurrentLocationError(error.code);
     }
@@ -178,29 +151,21 @@ function Location({
     if (onCurrentLocationError) {
       onCurrentLocationError(error);
     }
-    setModalMessage(MODAL_MESSAGE_TYPE.ERROR);
+    setToastMessage(TOAST_TYPE.ERROR);
     console.error(`error: ${error}`);
   }
 
-  const modalMessages: {
-    [key in MODAL_MESSAGE_TYPE | string]: JSX.Element | string;
+  const toastMessages: {
+    [key in TOAST_TYPE | string]: JSX.Element | string;
   } = {
-    [MODAL_MESSAGE_TYPE.SUCCESS]: (
-      <>
-        <Markdown>
-          {ui('location.successMessage', {
-            location: `${currentLocation?.cityName}, ${currentLocation?.stateAbbr}, ${currentLocation?.zip}`,
-          })}
-        </Markdown>
-        <div css={styles.locationShippingMsg}>
-          <Icon css={styles.locationShippingCheckIcon} name={ICONS.CHECKMARK} />
-          {ui('location.successShipMessage')}
-        </div>
-      </>
+    [TOAST_TYPE.SUCCESS]: (
+      <Markdown>
+        {ui('location.successMessage', {
+          location: `${currentLocation?.cityName}, ${currentLocation?.stateAbbr}, ${currentLocation?.zip}`,
+        })}
+      </Markdown>
     ),
-    [MODAL_MESSAGE_TYPE.ERROR]: (
-      <Markdown>{ui('location.errorMessage')}</Markdown>
-    ),
+    [TOAST_TYPE.ERROR]: <Markdown>{ui('location.errorMessage')}</Markdown>,
   };
 
   function handleInvalidInput(isInvalidInput: boolean) {
@@ -229,37 +194,35 @@ function Location({
           minimumCharacterBeforeError={3}
           onChange={onChange}
           onInvalidInput={handleInvalidInput}
-          onIsLoadingValueSelection={setIsLoadingLocationSearch}
           onValueSelectionSuccess={onValueSelectionSuccess}
           results={results}
           resultItemComponent={AutocompleteResultItemLocation}
           testId="location-input"
         />
-        {isLoadingLocationSearch && (
-          <Loading customContainerStyles={styles.loadingIndicator} />
-        )}
-        {!hasResults && !modalMessage && !hasInvalidInput && (
+        {!hasResults && !toastMessage && !hasInvalidInput && (
           <>
             {shouldDisplayCurrenctLocation && (
               <span css={styles.currentLocation}>
-                {`${ui('location.deliverToLabel')} ${
-                  currentLocation?.cityName
-                }, ${currentLocation?.stateAbbr} ${currentLocation?.zip}`}
+                {currentLocation?.cityName}, {currentLocation?.stateAbbr}{' '}
+                {currentLocation?.zip}
               </span>
             )}
-            {!hideUseCurrentLocation && (
-              <UseCurrentLocation
-                onCurrentLocationSuccess={onValueSelectionSuccess}
-                onCurrentLocationError={handleCurrentLocationError}
-              />
-            )}
+            <UseCurrentLocation
+              onCurrentLocationSuccess={onValueSelectionSuccess}
+              onCurrentLocationError={handleCurrentLocationError}
+            />
             <LocationInfo />
           </>
         )}
 
-        {modalMessage && (
-          <p css={styles.infoContainer}>{modalMessages[modalMessage]}</p>
-        )}
+        <Toast
+          handleClearMessage={handleClearMessage}
+          customContainerStyles={styles.toast}
+          isOpen={isOpen}
+          onDismiss={handleDismiss}
+        >
+          {toastMessages[toastMessage]}
+        </Toast>
       </div>
     </GridItem>
   );

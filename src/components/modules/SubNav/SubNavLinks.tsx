@@ -30,10 +30,9 @@ function SubNavLinks({
   const navLinks = isMobile ? linksMobile : links;
   const iconLinks = navLinks.filter((link) => !!link.icon);
   const textLinks = navLinks.filter((link) => !link.icon);
-  const isLocation = activeLink === 'LOCATION';
 
   function renderLink(link: LinkType | ActionType, idx: number) {
-    return isLocation ? null : (
+    return (
       <li css={styles.link} key={idx}>
         <NavLink
           {...link}
@@ -49,10 +48,7 @@ function SubNavLinks({
       <div css={styles.smallShow}>
         <TireCategoryLinks {...{ siteMenuBrowseList }} />
       </div>
-      <ul
-        css={[styles.subnavLinkList, isLocation && styles.locationNav]}
-        {...rest}
-      >
+      <ul css={styles.subnavLinkList} {...rest}>
         <span css={styles.linkSection}>{textLinks.map(renderLink)}</span>
         <span css={[styles.linkSection, styles.linkSectionIcons]}>
           {iconLinks.map(renderLink)}

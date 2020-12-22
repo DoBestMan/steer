@@ -31,10 +31,6 @@ const styles: StylesMap = {
   ],
   comboboxWrapper: {
     width: '100%',
-    'input::-webkit-outer-spin-button, input::-webkit-inner-spin-button': {
-      margin: 0,
-      WebkitAppearance: 'none',
-    },
   },
   errorMessage: typography.labelHeadlineLarge,
   input: [
@@ -43,8 +39,6 @@ const styles: StylesMap = {
     {
       backgroundColor: 'inherit',
       border: 'none',
-      margin: 0,
-      MozAppearance: 'textfield',
       padding: 0,
       width: '100%',
     },

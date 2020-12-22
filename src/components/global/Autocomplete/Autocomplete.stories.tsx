@@ -101,7 +101,6 @@ export function AutocompleteWithKnobs() {
       icon={icon}
       label={label}
       onChange={onChange}
-      onIsLoadingValueSelection={() => {}}
       onInputResultMatch={handleInputResultMatch}
       onValueSelectionSuccess={handleSelectionSuccess}
       results={results}
@@ -122,7 +121,6 @@ export function AutocompleteWithClearIcon() {
       errorLabel={errorLabel}
       label="Type to see icon"
       onChange={onChange}
-      onIsLoadingValueSelection={() => {}}
       onInputResultMatch={handleInputResultMatch}
       onValueSelectionSuccess={handleSelectionSuccess}
       results={results}
@@ -139,7 +137,6 @@ export function LocationSpecificAutocomplete() {
       icon={ICONS.SEARCH}
       label="Enter ZIP Code"
       onChange={onChange}
-      onIsLoadingValueSelection={() => {}}
       onInputResultMatch={handleInputResultMatch}
       onValueSelectionSuccess={handleSelectionSuccess}
       results={results}

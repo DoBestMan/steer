@@ -22,7 +22,6 @@ interface Props {
   animation?: Animation;
   children: ReactNode;
   contentLabel: string;
-  isLocation?: boolean;
   isOpen: boolean;
   mountOnEnter?: boolean;
   onBack?: () => void;
@@ -36,7 +35,6 @@ function SubNavModal({
   animation = Animation.SLIDE_LEFT,
   children,
   contentLabel,
-  isLocation = false,
   isOpen,
   mountOnEnter = false,
   onBack,
@@ -73,7 +71,6 @@ function SubNavModal({
       document.removeEventListener('keydown', onKeypress);
     };
   }, [isOpen, onClose, unlockOnClose]);
-
   return (
     <CSSTransition
       unmountOnExit={unmountOnExit}
@@ -103,20 +100,16 @@ function SubNavModal({
               css={[styles.navContent, animationStyles[state]]}
             >
               {onBack && (
-                <div
-                  css={[styles.actions, isLocation && styles.alignContentRight]}
-                >
-                  {isLocation ? null : (
-                    <button
-                      aria-label={ui('modal.back', {
-                        moduleName: ui('nav.contentLabel'),
-                      })}
-                      onClick={onBack}
-                      css={styles.action}
-                    >
-                      <Icon name={ICONS.CHEVRON_LEFT} />
-                    </button>
-                  )}
+                <div css={styles.actions}>
+                  <button
+                    aria-label={ui('modal.back', {
+                      moduleName: ui('nav.contentLabel'),
+                    })}
+                    onClick={onBack}
+                    css={styles.action}
+                  >
+                    <Icon name={ICONS.CHEVRON_LEFT} />
+                  </button>
                   <button
                     aria-label={ui('common.modal.close', { contentLabel })}
                     onClick={onClose}
