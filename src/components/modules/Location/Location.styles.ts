@@ -40,7 +40,7 @@ export const styles: StylesMap = {
     typography.smallCopyTight,
     {
       color: COLORS.LIGHT.GRAY_70,
-      marginTop: 'auto',
+      marginTop: SPACING.SIZE_20,
       [MQ.M]: typography.bodyCopy,
       [MQ.XL]: typography.bodyCopyTight,
     },
@@ -56,6 +56,28 @@ export const styles: StylesMap = {
       [MQ.XL]: typography.bodyCopyTight,
     },
   ],
+  loadingIndicator: {
+    marginTop: SPACING.SIZE_30,
+  },
+  locationShippingCheckIcon: {
+    marginRight: SPACING.SIZE_10,
+    svg: {
+      height: '15px',
+      width: '20px',
+      [MQ.M]: {
+        height: '16px',
+        width: '22px',
+      },
+    },
+  },
+  locationShippingMsg: [
+    typography.secondaryHeadline,
+    {
+      color: COLORS.LIGHT.GRAY_70,
+      display: 'flex',
+      marginTop: SPACING.SIZE_20,
+    },
+  ],
   locationSubNav: {
     padding: `0 ${SPACING.SIZE_20}px ${SPACING.SIZE_50}px ${SPACING.SIZE_20}px`,
     [MQ.M]: {
@@ -65,14 +87,14 @@ export const styles: StylesMap = {
       paddingLeft: SPACING.SIZE_60,
     },
   },
-  toast: {
-    marginTop: 'auto',
-  },
   useCurrentLocationButton: [
     typography.labelHeadlineLarge,
     {
       alignItems: 'baseline',
       display: 'flex',
+      '&:hover': {
+        color: COLORS.GLOBAL.ORANGE,
+      },
     },
   ],
   useCurrentLocationContainer: {

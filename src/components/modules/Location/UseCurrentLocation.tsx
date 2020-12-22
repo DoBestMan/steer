@@ -27,7 +27,7 @@ const getBrowserLocation = (
   }
 };
 
-const getZipFromAddressComponents = (
+export const getZipFromAddressComponents = (
   addressComponents: google.maps.GeocoderAddressComponent[],
 ) =>
   addressComponents.find((component) => component.types.includes('postal_code'))

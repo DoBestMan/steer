@@ -48,6 +48,7 @@ export interface Props {
   onChange: (value: string) => void;
   onInputResultMatch?: (inputMatchesResult: boolean) => void;
   onInvalidInput?: (isInvalidInput: boolean) => void;
+  onIsLoadingValueSelection: (isLoading: boolean) => void;
   onValueSelectionSuccess: (value: AutocompleteResult) => void;
   resultItemComponent?: (resultItemProps: ResultItemProps) => JSX.Element;
   results: AutocompleteResult[];
@@ -72,6 +73,7 @@ function Autocomplete({
   minimumCharacterBeforeError = CONSTANTS.MINIMUM_CHARACTER_BEFORE_ERROR,
   onChange,
   onInvalidInput,
+  onIsLoadingValueSelection,
   onValueSelectionSuccess,
   onInputResultMatch,
   resultItemComponent: ResultItemComponent = AutocompleteResultItemDefault,
@@ -215,6 +217,7 @@ function Autocomplete({
   };
 
   const onItemSelected = (index: number, shouldFocusInput?: boolean) => {
+    onIsLoadingValueSelection(true);
     setValue(results[index].main);
     setActivedescendant(CONSTANTS.DEFAULT_VALUE);
 
@@ -262,7 +265,8 @@ function Autocomplete({
               onChange={handleOnChange}
               onKeyDown={handleKeyDown}
               ref={textInput}
-              type="text"
+              type="number"
+              role="number"
               value={value}
             />
           </div>

@@ -1,6 +1,7 @@
 import lscache from 'lscache';
 import { ReactNode, useCallback, useEffect, useState } from 'react';
 
+import { AutocompleteResult } from '~/components/global/Autocomplete/AutocompleteResultItem';
 import { UserPersonalization } from '~/data/models/UserPersonalization';
 import { UserPersonalizationUpdate } from '~/data/models/UserPersonalizationUpdate';
 import { VehicleMetadata } from '~/data/models/VehicleMetadata';
@@ -8,6 +9,11 @@ import { apiBootstrap } from '~/lib/api/bootstrap';
 import { apiUpdateUserPersonalization } from '~/lib/api/users';
 import { LOCAL_STORAGE, PROPERTIES } from '~/lib/constants/localStorage';
 import { fetchGetUserPersonalization } from '~/lib/fetch';
+import { getZipFromLatLng } from '~/lib/helpers/google-maps';
+import {
+  browserLocationCheck,
+  LatLng,
+} from '~/lib/helpers/user-personalization';
 import { createContext } from '~/lib/utils/context';
 
 const CONSTANTS = {
@@ -15,8 +21,11 @@ const CONSTANTS = {
 };
 
 export interface UserPersonalizationProps {
+  hideUseCurrentLocation?: boolean;
+  isLoadingLocationSearch: boolean;
   locationString: string;
   selectVehicle: (vehicleMetadata: VehicleMetadata) => void;
+  setIsLoadingLocationSearch: (isLoading: boolean) => void;
   unselectVehicle: () => void;
   updateLocation: (body: UserPersonalizationUpdate) => void;
   userPersonalizationData: UserPersonalization | null;
@@ -38,6 +47,12 @@ export function useContextSetup() {
   const [vehicle, setVehicle] = useState(
     lscache.get(CONSTANTS.VEHICLE_METADATA_KEY) || null,
   );
+  const [isLoadingLocationSearch, setIsLoadingLocationSearch] = useState<
+    boolean
+  >(false);
+  const [hideUseCurrentLocation, setHideUseCurrentLocation] = useState<boolean>(
+    false,
+  );
 
   useEffect(() => {
     async function getData() {
@@ -47,6 +62,42 @@ export function useContextSetup() {
     }
 
     getData();
+  }, []);
+
+  useEffect(() => {
+    async function updateLocationFromBrowser() {
+      const latLngFromBrowser = (await browserLocationCheck().catch(
+        (error) => error || null,
+      )) as LatLng;
+
+      if (!latLngFromBrowser || latLngFromBrowser.isDenied) {
+        const onHideUseLocation = () => {
+          setHideUseCurrentLocation(true);
+          return;
+        };
+
+        return latLngFromBrowser.isDenied ? onHideUseLocation() : null;
+      }
+
+      const zipFromLatLng =
+        latLngFromBrowser &&
+        ((await getZipFromLatLng(latLngFromBrowser).catch(
+          (error) => error && null,
+        )) as AutocompleteResult);
+
+      const userPersonalizationResp = zipFromLatLng
+        ? await apiUpdateUserPersonalization({
+            userLocationGooglePlacesId: zipFromLatLng.id,
+            userLocationZip: zipFromLatLng.main,
+          })
+        : { data: null, isSuccess: false };
+
+      if (userPersonalizationResp.isSuccess) {
+        setUserPersonalizationData(userPersonalizationResp.data);
+      }
+    }
+
+    updateLocationFromBrowser();
   }, []);
 
   async function updateLocation(body: UserPersonalizationUpdate) {
@@ -77,8 +128,11 @@ export function useContextSetup() {
   }, [setVehicle]);
 
   return {
+    hideUseCurrentLocation,
+    isLoadingLocationSearch,
     locationString,
     selectVehicle,
+    setIsLoadingLocationSearch,
     unselectVehicle,
     updateLocation,
     userPersonalizationData,

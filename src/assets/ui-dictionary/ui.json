@@ -284,7 +284,8 @@
     "tireSize": "Tire size",
     "title": "shop tires by",
     "brand": "Tire brand",
-    "interplotedTitle": "SHOP {{name}} TIRES BY"
+    "interplotedTitle": "SHOP {{name}} TIRES BY",
+    "zipSectionLabel": "Deliver to"
   },
   "support": {
     "enabled": "Need live support?",
@@ -304,13 +305,15 @@
   "location": {
     "loadingCurrentLocationLabel": "Getting current location from your browser.",
     "contentLabel": "Location",
+    "deliverToLabel": "Deliver to:",
     "useCurrentLocationLabel": "Use current location",
     "locationSupportError": "Sorry, but Geolocation is not supported by this browser.",
     "inputLabel": "Enter your zip code",
     "errorLabel": "Oops.\n\nPlease enter a valid ZIP code.",
     "locationInfo": "We use your location to provide accurate<br />pricing and help you find local shops.",
     "learnMoreLabel": "Learn More",
-    "successMessage": "Your location has been updated to {{location}}.\n\nWe ship free to this location",
+    "successMessage": "Your location has been updated to {{location}}.",
+    "successShipMessage": "We ship free to this location!",
     "errorMessage": "Oops. Something went wrong, please try again.",
     "geolocationNoResults": "No results found",
     "geocoderFailure": "Geocoder failed due to: {{status}}"
