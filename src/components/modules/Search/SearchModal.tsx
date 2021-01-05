@@ -18,7 +18,11 @@ const Search = dynamic(() => import('./Search'));
 function SearchModal() {
   const [showLoading, setShowLoading] = useState(false);
   const scrollY = useRef(getScroll().y);
-  const { isSearchOpen, toggleIsSearchOpen } = useSearchModalContext();
+  const {
+    isSearchOpen,
+    setPrimaryQuery,
+    toggleIsSearchOpen,
+  } = useSearchModalContext();
   const {
     addPastSearch,
     clearSearchResults,
@@ -61,11 +65,14 @@ function SearchModal() {
     if (!isSearchOpen) {
       return;
     }
-
     // Move window back to original position (see handleAfterOpenModal function)
     window.scrollTo(0, scrollY.current);
     // Clear search results and state when the modal closes
     clearSearchResults();
+    setPrimaryQuery({
+      queryText: '',
+      queryType: '',
+    });
     setSearchState('');
     setHasLockedSearchState(false);
     setShouldPreventLinkNavigation(false);
@@ -74,6 +81,7 @@ function SearchModal() {
   }, [
     isSearchOpen,
     clearSearchResults,
+    setPrimaryQuery,
     setSearchState,
     setHasLockedSearchState,
     setShouldPreventLinkNavigation,

@@ -61,39 +61,40 @@ export function DealsList({ title, items }: Props) {
         </GridItem>
       </Grid>
       <Grid>
-        {items.map((dataItem, index) => {
-          currentGridColumnPosition =
-            currentGridColumnPosition <= nbItemsInARow - 1
-              ? currentGridColumnPosition + 1
-              : 1;
-          return (
-            <GridItem
-              gridColumn={
-                gridColumnData[currentGridColumnPosition - 1].gridColumn
-              }
-              gridColumnM={
-                gridColumnData[currentGridColumnPosition - 1].gridColumnM
-              }
-              gridColumnL={
-                gridColumnData[currentGridColumnPosition - 1].gridColumnL
-              }
-              gridColumnXL={
-                gridColumnData[currentGridColumnPosition - 1].gridColumnXL
-              }
-              key={index}
-            >
-              {dataItem && (
-                <div css={styles.promotionCardItem}>
-                  <PromotionCard
-                    {...dataItem}
-                    handleReferAFriendClick={openReferAFriendModal}
-                    handlePromotionClick={handlePromotionClick}
-                  />
-                </div>
-              )}
-            </GridItem>
-          );
-        })}
+        {items &&
+          items.map((dataItem, index) => {
+            currentGridColumnPosition =
+              currentGridColumnPosition <= nbItemsInARow - 1
+                ? currentGridColumnPosition + 1
+                : 1;
+            return (
+              <GridItem
+                gridColumn={
+                  gridColumnData[currentGridColumnPosition - 1].gridColumn
+                }
+                gridColumnM={
+                  gridColumnData[currentGridColumnPosition - 1].gridColumnM
+                }
+                gridColumnL={
+                  gridColumnData[currentGridColumnPosition - 1].gridColumnL
+                }
+                gridColumnXL={
+                  gridColumnData[currentGridColumnPosition - 1].gridColumnXL
+                }
+                key={index}
+              >
+                {dataItem && (
+                  <div css={styles.promotionCardItem}>
+                    <PromotionCard
+                      {...dataItem}
+                      handleReferAFriendClick={openReferAFriendModal}
+                      handlePromotionClick={handlePromotionClick}
+                    />
+                  </div>
+                )}
+              </GridItem>
+            );
+          })}
       </Grid>
     </>
   );
