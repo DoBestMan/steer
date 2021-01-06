@@ -1,8 +1,6 @@
-name: Deploy branch against mock API
+name: Deploy dev against mock API
 
 on:
-  repository_dispatch:
-    types: [release_qa]
   push:
     branches:
       - dev
@@ -17,9 +15,8 @@ jobs:
     - name: Get new branch name
       shell: bash
       run: |
-        if [[ "${{ github.event_name }}" == "push" ]]; then ORIGINAL_BRANCH="${{ github.ref }}"; else ORIGINAL_BRANCH="refs/heads/qa"; fi
-        NEW_BRANCH="${ORIGINAL_BRANCH/refs\/heads\//}"
-        NEW_BRANCH="mock-${NEW_BRANCH}"
+        ORIGINAL_BRANCH="refs/heads/dev"
+        NEW_BRANCH="refs/heads/mock-dev"
         echo "##[set-output name=new_branch;]$(echo ${NEW_BRANCH})"
         echo "##[set-output name=original_branch;]$(echo ${ORIGINAL_BRANCH})"
       id: extract_branch

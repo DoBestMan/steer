@@ -3,7 +3,7 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
   push:
-    branches: [dev, qa, master]
+    branches: [master]
 jobs:
   ci:
     runs-on: ubuntu-latest
