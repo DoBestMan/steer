@@ -24,6 +24,7 @@ function LocationContainer({ isMobile }: Props) {
       unmountOnExit
       mountOnEnter
       isMobile={isMobile}
+      isLocation={isOpen}
       isOpen={isOpen}
       onClose={handleCloseSubNav}
       onBack={handleClearLink}

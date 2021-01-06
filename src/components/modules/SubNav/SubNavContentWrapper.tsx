@@ -7,6 +7,7 @@ import SubNavModal from './SubNavModal';
 interface Props {
   children: ReactNode;
   contentLabel: string;
+  isLocation?: boolean;
   isMobile?: boolean;
   isOpen: boolean;
   mountOnEnter?: boolean;
@@ -18,6 +19,7 @@ interface Props {
 function SubNavContentWrapper({
   children,
   contentLabel,
+  isLocation,
   isMobile,
   isOpen,
   mountOnEnter = false,
@@ -34,6 +36,7 @@ function SubNavContentWrapper({
         animation={Animation.SLIDE_LEFT}
         contentLabel={contentLabel}
         onBack={onBack}
+        isLocation={isLocation}
         isOpen={isOpen}
         onClose={onClose}
       >

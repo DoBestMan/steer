@@ -51,6 +51,7 @@ export const routerWithTireSizeMock = {
 };
 
 export const userPersonalizationContextMock: UserPersonalizationProps = {
+  isLoadingLocationSearch: false,
   locationString: 'Brooklyn, NY',
   userPersonalizationData: {
     gaClientId: 'GoogleAnalyticsClientId',
@@ -69,6 +70,7 @@ export const userPersonalizationContextMock: UserPersonalizationProps = {
   },
 
   selectVehicle: () => {},
+  setIsLoadingLocationSearch: () => {},
   unselectVehicle: () => {},
   updateLocation: () => {},
 };
