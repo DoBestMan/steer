@@ -18,8 +18,8 @@ jobs:
         git config --local user.name "GitHub Action"
         git fetch --no-tags --prune --unshallow
         git checkout dev
-        git pull -X theirs
-        git merge master
+        git pull --ff-only
+        git merge origin/master
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
