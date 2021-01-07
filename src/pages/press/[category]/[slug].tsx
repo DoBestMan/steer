@@ -13,6 +13,7 @@ type OpenTemplatePageProps = {
   pageData: PageData;
 };
 
+const BASE_PATH = 'press/releases';
 const PressCategory = WithErrorPageHandling(OpenTemplatePage);
 
 export const getServerSideProps: GetServerSideProps<PageResponse<
@@ -32,6 +33,12 @@ export const getServerSideProps: GetServerSideProps<PageResponse<
     const errorStatusCode = pressCategory.error.statusCode;
     context.res.statusCode = errorStatusCode;
     return { props: { errorStatusCode } };
+  }
+
+  if (!pressCategory.data.basePath?.includes(BASE_PATH)) {
+    return {
+      props: { errorStatusCode: 410 },
+    };
   }
 
   return {

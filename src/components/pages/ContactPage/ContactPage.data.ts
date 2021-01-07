@@ -28,6 +28,7 @@ export const contactPageUpperData: PageData = {
     type: 'SiteModuleHeaderLanding',
     subTitle: '',
   },
+  isBasePath: false,
   metadata: {
     meta: {
       canonical: '/contact',
@@ -72,9 +73,12 @@ export const contactPageUpperData: PageData = {
       type: 'SiteModuleAccordion',
     },
   ],
+  slugUrl: '/contact',
 };
 
 export const contactPageDownData: PageData = {
+  slugUrl: '/contact',
+  isBasePath: false,
   header: {} as SiteHeaderModule,
   modules: [
     {

@@ -17,9 +17,22 @@ function Error({ statusCode }: Props) {
   setNavTheme(NAV_THEME.DEFAULT);
 
   const is404 = statusCode === 404;
-  const description = is404
-    ? ui('error.notFoundDescription')
-    : ui('error.errorDescription');
+
+  let description: string;
+
+  switch (statusCode) {
+    case 404:
+      description = ui('error.notFoundDescription');
+      break;
+    case 410:
+      description = ui('error.errorMessage', {
+        message: 'This page no longer exists.',
+      });
+      break;
+    default:
+      description = ui('error.errorDescription');
+      break;
+  }
 
   const callCopy = uiJSX('error.callCopy', {
     number: (

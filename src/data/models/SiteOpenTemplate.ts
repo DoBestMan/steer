@@ -29,6 +29,9 @@ export type OpenTemplateModules =
   | SiteModuleDataTableVertical;
 
 export interface PageData {
+  slugUrl?: string;
+  basePath?: string;
+  isBasePath?: boolean;
   breadcrumbs?: SiteModuleBreadcrumbsItem[];
   header: SiteHeaderModule;
   metadata?: SitePageMetadata;

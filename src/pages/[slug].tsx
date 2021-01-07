@@ -46,6 +46,12 @@ export const getStaticProps: GetStaticProps<PageResponse<
     };
   }
 
+  if (res.data.isBasePath) {
+    return {
+      props: { errorStatusCode: 410 },
+    };
+  }
+
   return {
     props: {
       pageData: res.data,

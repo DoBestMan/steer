@@ -11,6 +11,7 @@ import { backendGetPageSlug } from '~/lib/backend/page-slug';
 import { REVALIDATE } from '~/lib/constants';
 import { getStringifiedParams } from '~/lib/utils/routes';
 
+const BASE_PATH = '/tire-sizes/diameter';
 type OpenTemplatePageProps = {
   pageData: PageData;
 };
@@ -43,6 +44,12 @@ export const getStaticProps: GetStaticProps<PageResponse<
     return {
       props: { errorStatusCode: res.error.statusCode },
       revalidate: REVALIDATE.EVERY_MINUTE,
+    };
+  }
+
+  if (!res.data.basePath?.includes(BASE_PATH)) {
+    return {
+      props: { errorStatusCode: 410 },
     };
   }
 
