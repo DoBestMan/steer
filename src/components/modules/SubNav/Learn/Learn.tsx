@@ -2,6 +2,7 @@ import GridItem from '~/components/global/Grid/GridItem';
 import Link from '~/components/global/Link/Link';
 import Markdown from '~/components/global/Markdown/Markdown';
 import EmailSupport from '~/components/modules/Support/EmailSupport';
+import LiveChatSupport from '~/components/modules/Support/LiveChatSupport';
 import PhoneSupport from '~/components/modules/Support/PhoneSupport';
 import SupportHeading from '~/components/modules/Support/SupportHeading';
 import { NavContextProps } from '~/context/Nav.context';
@@ -82,6 +83,7 @@ function Learn({
             {...{ isCustomerServiceEnabled }}
             css={typography.bodyCopyTight}
           />
+          <LiveChatSupport />
         </span>
       </GridItem>
     </SubNavContentWrapper>

@@ -58,12 +58,8 @@ const styles: StylesMap = {
   },
   support: {
     display: 'flex',
+    justifyContent: 'space-between',
     marginBottom: SPACING.SIZE_50,
-    div: {
-      ':first-of-type': {
-        marginRight: SPACING.SIZE_80,
-      },
-    },
   },
   supportTitle: {
     color: COLORS.LIGHT.GRAY_70,

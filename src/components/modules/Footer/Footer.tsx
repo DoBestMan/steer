@@ -3,6 +3,7 @@ import GridItem from '~/components/global/Grid/GridItem';
 import Image from '~/components/global/Image/Image';
 import BaseLink from '~/components/global/Link/BaseLink';
 import EmailSupport from '~/components/modules/Support/EmailSupport';
+import LiveChatSupport from '~/components/modules/Support/LiveChatSupport';
 import PhoneSupport from '~/components/modules/Support/PhoneSupport';
 import SupportHeading from '~/components/modules/Support/SupportHeading';
 import { ui } from '~/lib/utils/ui-dictionary';
@@ -39,7 +40,7 @@ function Footer({
       <GridItem
         gridColumnS="2/6"
         gridColumnM="2/8"
-        gridColumnL="2/6"
+        gridColumnL="2/4"
         gridColumnXL="2/5"
         css={[typography.secondaryHeadline, styles.supportSection]}
       >
@@ -53,7 +54,7 @@ function Footer({
         as="ul"
         gridColumnS="2/6"
         gridColumnM="2/8"
-        gridColumnL="6/14"
+        gridColumnL="4/13"
         gridColumnXL="5/14"
         isGrid
         css={styles.supportSectionButtons}
@@ -79,13 +80,21 @@ function Footer({
         >
           <EmailSupport isCustomerServiceEnabled={isCustomerServiceEnabled} />
         </GridItem>
+        <GridItem
+          gridColumnM="7/12"
+          gridColumnL="9/14"
+          gridColumnXL="7/10"
+          as="li"
+          css={styles.supportButton}
+        >
+          <LiveChatSupport />
+        </GridItem>
       </GridItem>
 
       <GridItem
         gridColumnS="2/3"
         gridColumnM="2/5"
         gridColumnL="2/6"
-        gridColumnXL="2/5"
         css={styles.logoSection}
       >
         <BaseLink css={styles.logoLink} href="/">
