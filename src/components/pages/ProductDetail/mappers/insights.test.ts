@@ -215,8 +215,8 @@ describe('pages/ProductDetails/mappers/insights', () => {
   it('returns null in case of fetching issues', () => {
     expect(
       mapDataToInsights({
-        error: new Error(),
-        isLoadingData: false,
+        error: new Error(), //SEO-295 display content even if product-detail API is blocked.
+        isLoadingData: true,
         productDetail: productDetailContextMock,
         router: routerMock,
         siteProduct: siteProductMock,

@@ -1,11 +1,9 @@
 import dynamic from 'next/dynamic';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
-import Markdown from '~/components/global/Markdown/MarkdownDynamic';
 import { ContentModalProps } from '~/components/global/Modal/Modal.types';
 import { PromoTagProps } from '~/components/global/PromoTag/PromoTag';
 import PromoTagCarousel from '~/components/global/PromoTag/PromoTagCarousel';
-import Toast from '~/components/global/Toast/Toast';
 import { useProductDetailContext } from '~/components/pages/ProductDetail/ProductDetail.context';
 import { SiteCatalogBrand } from '~/data/models/SiteCatalogBrand';
 import { SitePrice } from '~/data/models/SitePrice';
@@ -95,22 +93,14 @@ function ProductInfo({
     showSelectError,
     setShowSelectError,
   } = useProductDetailContext();
-  const [shouldDisplayError, setShouldDisplayError] = useState(hasError);
-  const { bk } = useBreakpoints();
 
-  function handleDismissError() {
-    setShouldDisplayError(false);
-  }
+  const { bk } = useBreakpoints();
 
   useEffect(() => {
     if (currentSizeIndex > -1) {
       setShowSelectError(false);
     }
   }, [currentSizeIndex, setShowSelectError]);
-
-  useEffect(() => {
-    setShouldDisplayError(hasError);
-  }, [setShouldDisplayError, hasError]);
 
   function renderPrice() {
     return (
@@ -129,41 +119,85 @@ function ProductInfo({
     );
   }
 
+  const isOutOfStock = (!price || callForPricing) && size;
+  const shouldShowSizeSelector = !isLoading || isTireLine || size;
+
   if (!isLoading && hasError) {
     return (
       <>
         <div css={styles.wrapper}>
           <div css={styles.nameWrapper}>
-            <ProductLine
-              productName={productName}
-              brand={brand}
-              brandURL={brandURL}
-            />
-            <div css={!rating && styles.sizeNoRating}>
-              <DynamicSizeButton
-                availableSizes={availableSizes}
-                size={size}
-                loadSpeedRating={loadSpeedRating}
-                sizeFinder={sizeFinder}
-              />
+            <div css={styles.topPart}>
+              <div>
+                <ProductLine
+                  productName={productName}
+                  brand={brand}
+                  brandURL={brandURL}
+                />
+              </div>
+              <Rating reviews={reviews} rating={rating} />
             </div>
-            <Rating reviews={reviews} rating={rating} />
+            {shouldShowSizeSelector ? (
+              <>
+                <div css={styles.selectorWrapper}>
+                  <div>
+                    <DynamicSizeButton
+                      availableSizes={availableSizes}
+                      size={size}
+                      loadSpeedRating={loadSpeedRating}
+                      sizeFinder={sizeFinder}
+                    />
+                  </div>
+                  {isLoading && !isTireLine
+                    ? null
+                    : [BREAKPOINT_SIZES.M, BREAKPOINT_SIZES.S].includes(bk) &&
+                      !isOutOfStock &&
+                      renderPrice()}
+                </div>
+                {showSelectError && (
+                  <span role="alert" css={styles.errorMessage}>
+                    <span css={styles.questionMark}>
+                      {ui('pdp.productInfo.questionMark')}
+                    </span>
+                    {ui('pdp.productInfo.selectError')}
+                  </span>
+                )}
+              </>
+            ) : (
+              <div css={styles.loadingSizeSelector} />
+            )}
           </div>
-          <div css={styles.error}>
-            <Toast
-              isOpen={shouldDisplayError}
-              autoDismiss={false}
-              onDismiss={handleDismissError}
-            >
-              <Markdown>{ui('pdp.productInfo.fetchError')}</Markdown>
-            </Toast>
-          </div>
+          {isLoading && !isTireLine ? (
+            bk !== BREAKPOINT_SIZES.M && <div css={styles.loading} />
+          ) : (
+            <div css={styles.priceAndActionBarWrapper}>
+              {![BREAKPOINT_SIZES.M, BREAKPOINT_SIZES.S].includes(bk) &&
+                !isOutOfStock &&
+                renderPrice()}
+              <div css={styles.actionBar}>
+                <DynamicPDPActionBar
+                  roadHazard={roadHazard}
+                  theme={THEME.LIGHT}
+                  startingPrice={startingPrice}
+                  tirePrice={price?.salePriceInCents}
+                  tireSize={size}
+                  handleOnDisabled={setShowSelectError}
+                />
+              </div>
+            </div>
+          )}
         </div>
+        {!isLoading && !!promoTags?.length && (
+          <div css={styles.promoTags}>
+            <PromoTagCarousel
+              tags={promoTags}
+              openDynamicModal={openDynamicModal}
+            />
+          </div>
+        )}
       </>
     );
   }
-
-  const isOutOfStock = (!price || callForPricing) && size;
 
   if (rearSize && rearPrice) {
     return (
@@ -196,8 +230,6 @@ function ProductInfo({
       </>
     );
   }
-
-  const shouldShowSizeSelector = !isLoading || isTireLine || size;
 
   return (
     <>

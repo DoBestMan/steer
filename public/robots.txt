@@ -1,18 +1,21 @@
 Sitemap: https://simpletire.com/sitemap/sitemap-index.xml
 
 User-agent: Bingbot
+Disallow: /api/product-detail*
 Disallow: /api/users/session
 Disallow: /api/menu
 Disallow: /api/globals
 Disallow: /api/home
 
 User-agent: DuckDuckBot
+Disallow: /api/product-detail*
 Disallow: /api/users/session
 Disallow: /api/menu
 Disallow: /api/globals
 Disallow: /api/home
 
 User-agent: Googlebot
+Disallow: /api/product-detail*
 Disallow: /api/users/session
 Disallow: /api/menu
 Disallow: /api/globals

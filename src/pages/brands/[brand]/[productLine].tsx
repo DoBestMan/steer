@@ -21,7 +21,7 @@ export const getServerSideProps: GetServerSideProps<PageResponse<
   ProductDetailData
 >> = async (context) => {
   backendBootstrap({ request: context.req });
-  const { brand, productLine } = getStringifiedParams(context.query);
+  const { brand, productLine, userZip } = getStringifiedParams(context.query);
   const isRouteValid = validateRoute(brand, validTiresQuery);
 
   if (!isRouteValid) {
@@ -35,6 +35,9 @@ export const getServerSideProps: GetServerSideProps<PageResponse<
     backendGetProductDetail({
       brand: brandName,
       productLine,
+      query: {
+        userZip,
+      },
     }),
     backendGetProductReviews({
       brand: brandName,

@@ -87,7 +87,7 @@ export function mapDataToInsights({
   tireSize?: string;
   userPersonalization: UserPersonalizationProps;
 }): Omit<InsightsProps, 'handleChangeLocation'> | null {
-  if (!isLoadingData && error) {
+  if (isLoadingData && error) {
     return null;
   }
 

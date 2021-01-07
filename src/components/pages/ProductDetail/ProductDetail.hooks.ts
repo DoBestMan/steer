@@ -161,7 +161,7 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
 
   const insights = mapDataToInsights({
     error,
-    isLoadingData: isValidating,
+    isLoadingData: isLoading,
     productDetail,
     rearSize: queryParams.rearSize,
     router,
