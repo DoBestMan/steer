@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { RefObject, useCallback, useEffect, useRef, useState } from 'react';
 
 import { useWindowSize } from '~/hooks/useWindowSize';
 import { getScroll } from '~/lib/helpers/scroll';
@@ -163,4 +163,42 @@ export function useChangeBackgroundColor({
   ]);
 
   return { contentContainerRef, thresholdCrossed };
+}
+
+interface UseStickySearchBar {
+  searchBarRef: RefObject<HTMLDivElement>;
+}
+
+const SCROLL_Y_THRESHOLD = 265;
+
+export function useStickySearchBar({ searchBarRef }: UseStickySearchBar) {
+  const [isSticky, setIsSticky] = useState<boolean>(false);
+  const scrollEventCallback = useCallback(() => {
+    if (!searchBarRef.current) {
+      return;
+    }
+    const searchBarYposition = searchBarRef.current.getBoundingClientRect().y;
+    const isStickyPosition = searchBarYposition === -1;
+
+    if (isStickyPosition && !isSticky && window.scrollY >= SCROLL_Y_THRESHOLD) {
+      setIsSticky(true);
+    } else if (
+      !isStickyPosition &&
+      window.scrollY <= SCROLL_Y_THRESHOLD &&
+      isSticky
+    ) {
+      setIsSticky(false);
+    }
+  }, [isSticky, searchBarRef]);
+
+  useEffect(() => {
+    document.addEventListener('scroll', scrollEventCallback);
+    return () => {
+      document.removeEventListener('scroll', scrollEventCallback);
+    };
+  });
+
+  return {
+    isSticky,
+  };
 }

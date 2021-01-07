@@ -36,6 +36,15 @@ interface CTA {
   type: CTAIconTypes;
 }
 
+export const DATA_ATTRIBUTES = {
+  COMPONENT_HEADER_SECTION: 'searchByBoard-header-section',
+  COMPONENT_ICON_SECTION: 'searchByBoard-icon-section',
+  COMPONENT_MENU: 'searchByBoard-menu',
+  COMPONENT_MENU_ITEM: 'searchByBoard-menu-item',
+  COMPONENT_NAME: 'searchByBoard',
+  COMPONENT_TITLE: 'searchByBoard-title',
+};
+
 function SearchByBoard({
   promotionId,
   title,
@@ -147,8 +156,18 @@ function SearchByBoard({
 
   const renderCTAList = (
     <>
-      <div css={styles.headerSection}>
-        {title && <p css={styles.title}>{title}</p>}
+      <div
+        css={styles.headerSection}
+        data-component-class={DATA_ATTRIBUTES.COMPONENT_HEADER_SECTION}
+      >
+        {title && (
+          <p
+            css={styles.title}
+            data-component-class={DATA_ATTRIBUTES.COMPONENT_TITLE}
+          >
+            {title}
+          </p>
+        )}
         <div
           css={styles.zipSection}
           onClick={handleLocationClick}
@@ -167,16 +186,24 @@ function SearchByBoard({
           )}
         </div>
       </div>
-      <ul css={styles.ctaMenu}>
+      <ul
+        css={styles.ctaMenu}
+        data-component-class={DATA_ATTRIBUTES.COMPONENT_MENU}
+      >
         {CTAList.filter((cta) => cta.isShow).map((cta) => (
           <li
             key={cta.type}
             css={styles.ctaMenuItem}
+            data-component-class={DATA_ATTRIBUTES.COMPONENT_MENU_ITEM}
             onClick={cta.onClick(cta.action)}
             role="button"
             tabIndex={0}
           >
-            <div css={styles.ctaMenuIcon} data-icon-type={cta.type}>
+            <div
+              css={styles.ctaMenuIcon}
+              data-icon-type={cta.type}
+              data-component-class={DATA_ATTRIBUTES.COMPONENT_ICON_SECTION}
+            >
               {iconMap[cta.type]}
             </div>
             <p css={styles.ctaMenuLabel}>{cta.label}</p>
@@ -187,7 +214,10 @@ function SearchByBoard({
   );
 
   return (
-    <div css={[styles.container, isHomepage && styles.homepageContainer]}>
+    <div
+      css={[styles.container, isHomepage && styles.homepageContainer]}
+      data-component={DATA_ATTRIBUTES.COMPONENT_NAME}
+    >
       {isHomepage ? (
         renderCTAList
       ) : (

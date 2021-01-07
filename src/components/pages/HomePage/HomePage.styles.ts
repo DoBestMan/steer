@@ -1,3 +1,4 @@
+import { DATA_ATTRIBUTES } from '~/components/global/SearchByBoard/SearchByBoard';
 import {
   COLORS,
   EASING,
@@ -7,7 +8,6 @@ import {
   TIME,
   Z_INDEX,
 } from '~/lib/constants';
-
 export const CONTENT_PADDING = {
   S: SPACING.SIZE_80,
   M: SPACING.SIZE_100,
@@ -107,6 +107,84 @@ const styles: StylesMap = {
   },
   searchButtonStickySupport: {
     position: 'sticky',
+  },
+  stickySearchBar: {
+    [`[data-component="${DATA_ATTRIBUTES.COMPONENT_NAME}"]`]: {
+      display: 'flex',
+      [`[data-component-class="${DATA_ATTRIBUTES.COMPONENT_TITLE}"]`]: {
+        flexBasis: '10%',
+        [MQ.XL]: {
+          flexBasis: '8%',
+        },
+      },
+      [`[data-component-class="${DATA_ATTRIBUTES.COMPONENT_MENU}"]`]: {
+        flexBasis: '100%',
+
+        [`[data-component-class="${DATA_ATTRIBUTES.COMPONENT_MENU_ITEM}"]`]: {
+          ':last-of-type': {
+            margin: 0,
+          },
+          ['[data-icon-type="brand"]']: {
+            svg: {
+              width: '60px',
+              [MQ.M]: {
+                width: '120px',
+              },
+            },
+          },
+          ['[data-icon-type="tireSize"]']: {
+            svg: {
+              height: '18px',
+              width: '18px',
+              [MQ.M]: {
+                height: '30px',
+                width: '30px',
+              },
+            },
+          },
+          ['[data-icon-type="vehicle"]']: {
+            ['.SVGInline-svg']: {
+              left: '-64%',
+              position: 'absolute',
+              top: '26%',
+              [MQ.M]: {
+                left: '10%',
+                position: 'absolute',
+                top: '36%',
+                width: '72px',
+              },
+            },
+          },
+          marginRight: SPACING.SIZE_30,
+          [MQ.M]: {
+            display: 'flex',
+            flexFlow: 'wrap',
+            justifyContent: 'space-between',
+          },
+          [`[data-component-class="${DATA_ATTRIBUTES.COMPONENT_ICON_SECTION}"]`]: {
+            height: '50px',
+            marginBottom: SPACING.SIZE_10,
+            width: '50px',
+            [MQ.M]: {
+              height: '90px',
+              marginBottom: 0,
+              marginRight: SPACING.SIZE_10,
+              width: '90px',
+            },
+          },
+        },
+      },
+      [`[data-component-class="${DATA_ATTRIBUTES.COMPONENT_HEADER_SECTION}"]`]: {
+        flexFlow: 'column',
+        [MQ.M]: {
+          flexFlow: 'row',
+          marginBottom: SPACING.SIZE_20,
+        },
+        [MQ.L]: {
+          marginBottom: 0,
+        },
+      },
+    },
   },
 };
 

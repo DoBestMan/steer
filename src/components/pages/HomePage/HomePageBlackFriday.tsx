@@ -21,6 +21,7 @@ import {
   useChangeBackgroundColor,
   useContentSpacerHeight,
   useIsFallbackSticky,
+  useStickySearchBar,
 } from './HomePage.hooks';
 import styles from './HomePage.styles';
 import { CONSTANTS as BUTTON_CONSTANTS } from './SearchButton/SearchButton.styles';
@@ -74,6 +75,9 @@ function HomePageBlackFriday({
     isMobile,
     supportsPositionSticky,
   });
+  const { isSticky } = useStickySearchBar({
+    searchBarRef: buttonRef,
+  });
 
   const searchButtonContainerStyles = [
     styles.searchButtonContainer,
@@ -82,6 +86,7 @@ function HomePageBlackFriday({
     !supportsPositionSticky &&
       isFallbackSticky &&
       styles.searchButtonStickyFallbackFixed,
+    isSticky && styles.stickySearchBar,
   ];
 
   const {
