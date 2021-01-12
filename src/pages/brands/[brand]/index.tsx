@@ -1,46 +1,56 @@
-import { GetServerSideProps } from 'next';
+import { GetStaticProps } from 'next';
 
 import BrandTirePage from '~/components/pages/BrandTirePage/BrandTirePage';
 import { SiteBrandDetails } from '~/data/models/SiteBrandDetails';
+import WithFallbackPageHandling from '~/hocs/WithFallbackPageHandling';
 import WithErrorPageHandling, {
   PageResponse,
 } from '~/hocs/WithPageErrorHandling';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
 import { backendGetSiteBrandDetails } from '~/lib/backend/brand-details';
-import { validTiresQuery } from '~/lib/utils/regex';
-import { getStringifiedParams, validateRoute } from '~/lib/utils/routes';
+import { REVALIDATE } from '~/lib/constants';
+import { getStringifiedParams } from '~/lib/utils/routes';
 import { removeTireFromQueryParam } from '~/lib/utils/string';
 
-const BrandTire = WithErrorPageHandling(BrandTirePage);
+const BrandTire = WithFallbackPageHandling(
+  WithErrorPageHandling(BrandTirePage),
+);
 
-export const getServerSideProps: GetServerSideProps<PageResponse<
+export function getStaticPaths() {
+  return {
+    paths: [],
+    fallback: true,
+  };
+}
+
+export const getStaticProps: GetStaticProps<PageResponse<
   SiteBrandDetails
->> = async (context) => {
-  backendBootstrap({ request: context.req });
+>> = async ({ params }) => {
+  backendBootstrap();
 
-  const { brand } = getStringifiedParams(context.query);
+  const { brand } = getStringifiedParams(params);
 
-  const isRouteValid = validateRoute(brand, validTiresQuery);
-
-  if (!isRouteValid) {
-    context.res.statusCode = 404;
-    return { props: { errorStatusCode: 404 } };
+  if (!brand) {
+    const errorStatusCode = 500;
+    return { props: { errorStatusCode } };
   }
 
   const brandName = removeTireFromQueryParam(brand);
-  const brandDetails = await backendGetSiteBrandDetails(brandName);
+  const res = await backendGetSiteBrandDetails(brandName);
 
-  if (!brandDetails.isSuccess) {
-    const errorStatusCode = brandDetails.error.statusCode;
-    context.res.statusCode = errorStatusCode;
-    return { props: { errorStatusCode } };
+  if (!res.isSuccess) {
+    return {
+      props: { errorStatusCode: res.error.statusCode },
+      revalidate: REVALIDATE.EVERY_MINUTE,
+    };
   }
 
   return {
     props: {
-      ...brandDetails.data,
+      ...res.data,
       brandName,
     },
+    revalidate: REVALIDATE.EVERY_MINUTE,
   };
 };
 
