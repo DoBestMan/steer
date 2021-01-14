@@ -9,6 +9,7 @@ import TitleRadio from '~/components/global/Radio/TitleRadio';
 import Toast, { TOAST_TYPE } from '~/components/global/Toast/Toast';
 import { SiteCustomerSupportFormInput } from '~/data/models/SiteCustomerSupportFormInput';
 import { apiSendCustomerSupportForm } from '~/lib/api/send-customer-support-form';
+import { email, phone } from '~/lib/utils/regex';
 import { getMIMEType } from '~/lib/utils/string';
 import { ui } from '~/lib/utils/ui-dictionary';
 
@@ -85,6 +86,8 @@ function SendMessageForm({ selections }: Props) {
     setToastMessage(TOAST_TYPE.ERROR);
   };
 
+  const hasValidEmail = email.test(formValues[FIELDS.EMAIL] || '');
+  const hasValidNumber = phone.test(formValues[FIELDS.PHONE_NUMBER] || '');
   const handleDismiss = () => {
     setToastMessage('');
   };
@@ -193,6 +196,10 @@ function SendMessageForm({ selections }: Props) {
                 onChange={handleSetFormFieldValue(FIELDS.EMAIL)}
                 label={ui('contactPage.message.placeholders.email')}
                 type="email"
+                error={{
+                  hasError: !hasValidEmail,
+                  errorMessage: ui('common.form.emailError'),
+                }}
               />
             </div>
             <div css={styles.input}>
@@ -201,6 +208,12 @@ function SendMessageForm({ selections }: Props) {
                 value={formValues[FIELDS.PHONE_NUMBER]}
                 onChange={handleSetFormFieldValue(FIELDS.PHONE_NUMBER)}
                 label={ui('contactPage.message.placeholders.phoneNumber')}
+                error={{
+                  hasError: !hasValidNumber,
+                  errorMessage: ui(
+                    'tireInstallerRegistration.form.errors.phone',
+                  ),
+                }}
               />
             </div>
             <div css={styles.input}>

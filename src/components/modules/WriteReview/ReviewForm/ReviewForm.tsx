@@ -152,7 +152,7 @@ function ReviewForm({
 
   // Date is valid if empty or valid date
   const hasValidDate = formValues[FIELDS.PURCHASE_DATE] === '' || isValidDate;
-
+  const hasValidEmail = email.test(formValues[FIELDS.EMAIL] || '');
   const hasValidFields =
     email.test(formValues[FIELDS.EMAIL] || '') && hasValidDate;
 
@@ -437,6 +437,10 @@ function ReviewForm({
                 value={formValues[FIELDS.EMAIL]}
                 onChange={handleSetFormFieldValue(FIELDS.EMAIL)}
                 label={ui('reviews.form.sections.about.email')}
+                error={{
+                  hasError: !hasValidEmail,
+                  errorMessage: ui('common.form.emailError'),
+                }}
               />
             </div>
             <div css={styles.input}>

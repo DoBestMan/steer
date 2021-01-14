@@ -31,7 +31,6 @@ export function DealsList({ title, items }: Props) {
       gridColumnXL: '8/12',
     },
   ];
-
   let currentGridColumnPosition = 0;
   const { bk } = useBreakpoints();
   const nbItemsInARow = bk === BREAKPOINT_SIZES.S ? 1 : 2;
