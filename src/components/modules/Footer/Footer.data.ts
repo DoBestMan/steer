@@ -9,8 +9,12 @@ export const footerLinksData = {
     links: [
       { action: ROUTE_MAP[ROUTES.ABOUT], text: ui('links.about') },
       {
-        action: ROUTE_MAP[ROUTES.LEARN],
-        text: ui('links.learnAboutTires'),
+        action: ROUTE_MAP[ROUTES.CUSTOMER_SUPPORT],
+        text: ui('links.customerSupport'),
+      },
+      {
+        action: ROUTE_MAP[ROUTES.PRESS],
+        text: ui('links.press'),
       },
       {
         action: LINK_MAP[LINKS.APPLY],
@@ -18,16 +22,8 @@ export const footerLinksData = {
         text: ui('links.apply'),
       },
       {
-        action: ROUTE_MAP[ROUTES.CUSTOMER_SUPPORT],
-        text: ui('links.customerSupport'),
-      },
-      {
         action: ROUTE_MAP[ROUTES.PRIVACY],
         text: ui('links.privacy'),
-      },
-      {
-        action: ROUTE_MAP[ROUTES.TERMS],
-        text: ui('links.terms'),
       },
       {
         action: ROUTE_MAP[ROUTES.SITEMAP],
@@ -38,6 +34,33 @@ export const footerLinksData = {
 
   copyright: {
     text: `© ${getCurrentYear()} SimpleTire. All Rights Reserved.`,
+  },
+
+  customerSupport: {
+    links: [
+      {
+        action: ROUTE_MAP[ROUTES.TERMS],
+        text: ui('links.terms'),
+      },
+      {
+        action: ROUTE_MAP[ROUTES.FINANCING],
+        text: ui('links.financing'),
+      },
+      {
+        action: ROUTE_MAP[ROUTES.RETURNS],
+        text: ui('links.returns'),
+      },
+      {
+        action: LINK_MAP[LINKS.REGISTER_TIRES],
+        isExternal: true,
+        text: ui('links.registerTires'),
+      },
+      { action: ROUTE_MAP[ROUTES.FAQS], text: ui('links.faqs') },
+      {
+        action: ROUTE_MAP[ROUTES.ORDER_TRACKING],
+        text: ui('links.orderTracking'),
+      },
+    ],
   },
 
   social: {
@@ -78,25 +101,16 @@ export const footerLinksData = {
   tires: {
     links: [
       {
-        action: ROUTE_MAP[ROUTES.TIRE_REVIEWS],
-        text: ui('links.tireReviews'),
+        action: ROUTE_MAP[ROUTES.LEARN],
+        text: ui('links.learnAboutTires'),
       },
       {
         action: ROUTE_MAP[ROUTES.TIRE_BUYING_GUIDE],
         text: ui('links.tireBuyingGuide'),
       },
       {
-        action: ROUTE_MAP[ROUTES.ORDER_TRACKING],
-        text: ui('links.orderTracking'),
-      },
-      { action: ROUTE_MAP[ROUTES.FAQS], text: ui('links.faqs') },
-      {
-        action: ROUTE_MAP[ROUTES.RETURNS],
-        text: ui('links.returns'),
-      },
-      {
-        action: ROUTE_MAP[ROUTES.FINANCING],
-        text: ui('links.financing'),
+        action: ROUTE_MAP[ROUTES.TIRE_REVIEWS],
+        text: ui('links.tireReviews'),
       },
       {
         action: LINK_MAP[LINKS.REGISTER_TIRES],

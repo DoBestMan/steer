@@ -18,7 +18,6 @@ const styles: StylesMap = {
     typography.secondaryHeadline,
     {
       marginBottom: SPACING.SIZE_10,
-      [MQ.L]: typography.tertiaryHeadline,
     },
   ],
   inputContainer: {

@@ -122,10 +122,10 @@ function Footer({
         gridColumnM="4/6"
         gridColumnL="6/10"
         gridColumnXL="7/9"
-        css={styles.tiresLinksSection}
+        css={styles.customerSupportSection}
       >
         <p css={styles.linksHeading}>{ui('footer.customerSupport')}</p>
-        <FooterLinkList links={footerLinksData.tires.links} />
+        <FooterLinkList links={footerLinksData.customerSupport.links} />
       </GridItem>
 
       <GridItem

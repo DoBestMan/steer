@@ -28,6 +28,7 @@ export enum ROUTES {
   OPEN_TEMPLATE = 'openTemplate',
   ORDER_TRACKING = 'orderTracking',
   ORDER_TRACKING_RESULT = 'orderTrackingResult',
+  PRESS = 'press',
   PRIVACY = 'privacy',
   PRODUCT_DETAIL = 'productDetail',
   PRODUCT_DETAIL_PLA = 'productDetailPla',
@@ -114,6 +115,7 @@ export const ROUTE_MAP: { [routeName: string]: string } = {
   [ROUTES.FREE_SHIPPING]: '/free-shipping',
   [ROUTES.LEARN]: '/learn',
   [ROUTES.MILITARY_DISCOUNT]: '/military-discount',
+  [ROUTES.PRESS]: '/press',
   [ROUTES.RETURNS]: '/returns-and-refunds',
   [ROUTES.TIRE_BUYING_GUIDE]: '/tire-buying-guide',
 };

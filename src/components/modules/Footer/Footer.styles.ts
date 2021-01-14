@@ -37,6 +37,14 @@ const styles: StylesMap = {
     ],
   },
 
+  customerSupportSection: {
+    order: 5,
+
+    [MQ.L]: {
+      order: 4,
+    },
+  },
+
   linksHeading: [
     typography.secondaryHeadline,
     {
@@ -109,11 +117,6 @@ const styles: StylesMap = {
 
   socialHeading: {
     display: 'none',
-
-    // [MQ.XL]: {
-    //   display: 'block',
-    //   marginBottom: SPACING.SIZE_15,
-    // },
   },
 
   socialLinksSection: [
@@ -221,7 +224,11 @@ const styles: StylesMap = {
 
   tiresLinksSection: {
     order: 5,
+    marginTop: SPACING.SIZE_40,
 
+    [MQ.M]: {
+      marginTop: 0,
+    },
     [MQ.L]: {
       order: 4,
     },
