@@ -53,6 +53,9 @@ export interface TypePageProps {
 
 function TypePage({ typeData }: TypePageData) {
   const typeName = typeData.name.replace('-', ' ');
+  const searchParams = {
+    subtype: typeData.id.toString(),
+  };
 
   const typeBreadCrumData: BreadcrumbsItem[] = mapArrayToBreadcrumbs([
     {
@@ -117,6 +120,7 @@ function TypePage({ typeData }: TypePageData) {
         })}
         hasBrand={false}
         hasVehicle={!HIDE_VEHICLE_TYPES.includes(typeName)}
+        params={searchParams}
       />
       <div css={styles.mostPopularBrandsContainer}>
         <Grid>

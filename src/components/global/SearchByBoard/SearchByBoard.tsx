@@ -24,6 +24,7 @@ export interface SearchByBoardProps {
   hasTireSize?: boolean;
   hasVehicle?: boolean;
   isHomepage?: boolean;
+  params?: Record<string, string>;
   promotionId?: string;
   title?: string;
 }
@@ -52,6 +53,7 @@ function SearchByBoard({
   hasTireSize = true,
   hasVehicle = true,
   isHomepage,
+  params,
 }: SearchByBoardProps) {
   const {
     lockSearchStateToBrand,
@@ -99,6 +101,14 @@ function SearchByBoard({
       isShow: hasVehicle,
       label: ui('searchByBoard.vehicle'),
       onClick: (action: SiteSearchResultActionQuery) => () => {
+        params &&
+          setRouteQueryParamOptions({
+            routes: [
+              ROUTE_MAP[ROUTES.VEHICLE_CATALOG],
+              ROUTE_MAP[ROUTES.TIRE_SIZE_CATALOG_OR_CATEGORY],
+            ],
+            params,
+          });
         lockSearchStateToVehicle();
         addPromotionParam(promotionId);
         setIsSearchOpen(true);
@@ -118,6 +128,14 @@ function SearchByBoard({
       isShow: hasTireSize,
       label: ui('searchByBoard.tireSize'),
       onClick: (action: SiteSearchResultActionQuery) => () => {
+        params &&
+          setRouteQueryParamOptions({
+            routes: [
+              ROUTE_MAP[ROUTES.VEHICLE_CATALOG],
+              ROUTE_MAP[ROUTES.TIRE_SIZE_CATALOG_OR_CATEGORY],
+            ],
+            params,
+          });
         lockSearchStateToTireSize();
         addPromotionParam(promotionId);
         setIsSearchOpen(true);
@@ -137,6 +155,14 @@ function SearchByBoard({
       isShow: hasBrand,
       label: ui('searchByBoard.brand'),
       onClick: (action: SiteSearchResultActionQuery) => () => {
+        params &&
+          setRouteQueryParamOptions({
+            routes: [
+              ROUTE_MAP[ROUTES.VEHICLE_CATALOG],
+              ROUTE_MAP[ROUTES.TIRE_SIZE_CATALOG_OR_CATEGORY],
+            ],
+            params,
+          });
         lockSearchStateToBrand();
         addPromotionParam(promotionId);
         setIsSearchOpen(true);

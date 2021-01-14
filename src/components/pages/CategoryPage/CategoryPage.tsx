@@ -55,6 +55,9 @@ function CategoryPage({ categoryData }: CategoryPageData) {
     },
   ]);
 
+  const searchParams = {
+    category: categoryData.id.toString(),
+  };
   const meta = {
     title: ui('meta.categoryPages.title', {
       category: capitalize(categoryName),
@@ -106,6 +109,7 @@ function CategoryPage({ categoryData }: CategoryPageData) {
         })}
         hasBrand={false}
         hasVehicle={!HIDE_CATEGORY_TYPES.includes(categoryName)}
+        params={searchParams}
       />
       <div css={styles.mostPopularBrandsContainer}>
         <Grid>
