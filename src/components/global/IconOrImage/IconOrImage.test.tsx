@@ -40,7 +40,15 @@ describe('IconOrImage', () => {
     expect(container.firstChild).toMatchInlineSnapshot(`
       <div
         class="Image"
-      />
+      >
+        <img
+          alt="150x150 image"
+          class="ImageTag"
+          loading="lazy"
+          src="https://via.placeholder.com/150"
+          srcset="https://via.placeholder.com/150 "
+        />
+      </div>
     `);
   });
 });

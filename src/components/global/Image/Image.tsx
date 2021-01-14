@@ -121,9 +121,9 @@ function Image({
           ratio && responsive && styles.responsive,
         ]}
         onError={onError}
-        sizes={sizes}
-        src={finalSrc}
-        srcSet={finalSrcSet}
+        sizes={sizes ? sizes : undefined}
+        src={finalSrc ? finalSrc : src}
+        srcSet={finalSrcSet ? finalSrcSet : (srcSet as string)}
         alt={altText}
         loading={loading}
         onLoad={handleImageLoad}
@@ -141,8 +141,8 @@ function Image({
         customContainerStyles,
       ]}
     >
-      {finalSrcSet &&
-        (link ? (
+      {finalSrcSet ? (
+        link ? (
           <>
             <Link {...link}>
               <ImageTag />
@@ -150,7 +150,16 @@ function Image({
           </>
         ) : (
           <ImageTag />
-        ))}
+        )
+      ) : link ? (
+        <>
+          <Link {...link}>
+            <ImageTag />
+          </Link>
+        </>
+      ) : (
+        <ImageTag />
+      )}
     </Container>
   );
 }
