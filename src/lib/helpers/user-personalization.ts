@@ -3,6 +3,8 @@ import lscache from 'lscache';
 
 import { LOCAL_STORAGE, PROPERTIES } from '~/lib/constants/localStorage';
 
+import { isBrowser } from '../utils/browser';
+
 export interface LatLng {
   isDenied?: boolean;
   latitude: number;
@@ -18,6 +20,14 @@ export interface NavigatorErroCallbackProps {
   message: string;
 }
 
+const setCustomEventForLocationPopup = (allowed: boolean, denied: boolean) => {
+  if (isBrowser() && window.FS) {
+    window.FS.event('ST Location Popup', {
+      Allow: allowed,
+      'Dont Allow': denied,
+    });
+  }
+};
 const LOCATION_PERMISSION_EXPIRATION = 90;
 
 export const browserLocationCheck = () =>
@@ -61,11 +71,12 @@ export const browserLocationCheck = () =>
         resolve(browserLocation);
         return;
       }
-
+      setCustomEventForLocationPopup(true, false);
       lscache.set(
         LOCAL_STORAGE[PROPERTIES.BROWSER_LOCATION_PERMISSION],
         browserResponseMap['allow'](),
       );
+
       resolve(browserLocation);
     };
     const geoError = function (error: NavigatorErroCallbackProps) {
@@ -85,10 +96,12 @@ export const browserLocationCheck = () =>
                   ? browserLocationStorageData.timestamp
                   : null,
               );
+        setCustomEventForLocationPopup(false, true);
         lscache.set(
           LOCAL_STORAGE[PROPERTIES.BROWSER_LOCATION_PERMISSION],
           lscacheData,
         );
+
         reject({ ...error, isDenied: true });
       }
     };
