@@ -30,7 +30,7 @@ export interface SearchContextProps {
   isLoadingResults: boolean;
   lockSearchStateToBrand: () => void;
   lockSearchStateToTireSize: () => void;
-  lockSearchStateToVehicle: () => void;
+  lockSearchStateToVehicle: (vehicleName?: string) => void;
   pastSearches: SiteSearchResultGroup;
   routeQueryParamOptions?: RouteQueryParamOptions;
   searchQuery: ({ queryText, queryType }: SearchDataParams) => void;

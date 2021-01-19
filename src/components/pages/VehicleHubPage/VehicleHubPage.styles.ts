@@ -37,6 +37,9 @@ export const styles: StylesMap = {
   listItem: {
     marginBottom: SPACING.SIZE_40,
   },
+  searchbyBoardSection: {
+    marginTop: SPACING.SIZE_60,
+  },
   title: [
     typography.primaryHeadline,
     {

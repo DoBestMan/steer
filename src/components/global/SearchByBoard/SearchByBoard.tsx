@@ -27,6 +27,7 @@ export interface SearchByBoardProps {
   params?: Record<string, string>;
   promotionId?: string;
   title?: string;
+  vehicleName?: string;
 }
 
 interface CTA {
@@ -47,13 +48,14 @@ export const DATA_ATTRIBUTES = {
 };
 
 function SearchByBoard({
-  promotionId,
-  title,
   hasBrand = true,
   hasTireSize = true,
   hasVehicle = true,
   isHomepage,
   params,
+  promotionId,
+  title = ui('searchByBoard.title'),
+  vehicleName,
 }: SearchByBoardProps) {
   const {
     lockSearchStateToBrand,
@@ -109,13 +111,13 @@ function SearchByBoard({
             ],
             params,
           });
-        lockSearchStateToVehicle();
-        addPromotionParam(promotionId);
-        setIsSearchOpen(true);
         setCurrentInputQuery({
-          queryText: action.queryText,
+          queryText: vehicleName ? vehicleName : action.queryText,
           queryType: action.queryType,
         });
+        lockSearchStateToVehicle(vehicleName);
+        addPromotionParam(promotionId);
+        setIsSearchOpen(true);
       },
       type: CTA_TYPES.VEHICLE,
     },

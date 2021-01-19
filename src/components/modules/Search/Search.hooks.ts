@@ -299,14 +299,14 @@ export function useSearchState({
 }) {
   const [searchState, setSearchState] = useState('');
   const [hasLockedSearchState, setHasLockedSearchState] = useState(false);
-  const lockSearchStateToVehicle = () => {
+  const lockSearchStateToVehicle = (vehicleName?: string) => {
     const {
       queryText,
       queryType,
     } = initialSearchVehicleData.action as SiteSearchResultActionQuery;
     setSearchState(SearchStateEnum.VEHICLE);
     searchQuery({
-      queryText,
+      queryText: vehicleName ? vehicleName : queryText,
       queryType,
     });
     setHasLockedSearchState(true);

@@ -7,6 +7,7 @@ import HeaderWithLogo, {
   HeaderWithLogoProps,
 } from '~/components/global/HeaderWithLogo/HeaderWithLogo';
 import Meta from '~/components/global/Meta/Meta';
+import SearchByBoard from '~/components/global/SearchByBoard/SearchByBoard';
 import TextBasedList from '~/components/global/TextBasedList/TextBasedList';
 import { navigationBreadcrumbPaddingTop } from '~/components/modules/Nav/Nav.styles';
 import { TextBasedNavigationListItem } from '~/data/models/TextBasedNavigationProps';
@@ -16,6 +17,7 @@ import {
   capitalize,
   removeTireFromQueryParam,
   slugify,
+  titleCaseSlug,
 } from '~/lib/utils/string';
 import { ui } from '~/lib/utils/ui-dictionary';
 
@@ -87,6 +89,14 @@ function MakePage({ makeData }: MakePageData) {
           </div>
         </GridItem>
       </Grid>
+      <SearchByBoard
+        hasBrand={false}
+        hasTireSize={false}
+        title={ui('searchByBoard.interplotedTitle', {
+          name: titleCaseSlug(name),
+        })}
+        vehicleName={titleCaseSlug(name)}
+      />
     </div>
   );
 }

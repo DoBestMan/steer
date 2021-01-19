@@ -7,6 +7,7 @@ import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import HeaderLandingPage from '~/components/global/HeaderLandingPage/HeaderLandingPage';
 import Meta, { MetaProps } from '~/components/global/Meta/Meta';
+import SearchByBoard from '~/components/global/SearchByBoard/SearchByBoard';
 import { navigationBreadcrumbPaddingTop } from '~/components/modules/Nav/Nav.styles';
 import { SiteVehicles } from '~/data/models/SiteVehicles';
 import { ROUTES } from '~/lib/constants/routes';
@@ -73,6 +74,9 @@ function VehicleHubPage({ topVehicles, popularMakes, allMakes }: SiteVehicles) {
           </GridItem>
         </Grid>
         <CircularIllustrationCarousel dataItems={topVehicles} />
+      </div>
+      <div css={styles.searchbyBoardSection}>
+        <SearchByBoard hasBrand={false} hasTireSize={false} />
       </div>
       <div css={styles.brandListContainer}>
         <Grid css={styles.titleContainer}>
