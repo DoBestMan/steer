@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 import { NAV_THEME } from '~/components/modules/Nav/Nav.theme';
+import { useSearchModalContext } from '~/components/modules/Search/SearchModal.context';
 import { useCatalogProductsContext } from '~/context/CatalogProducts.context';
 import { useCatalogSummaryContext } from '~/context/CatalogSummary.context';
 import { useFooterContext } from '~/context/Footer.context';
@@ -41,6 +42,7 @@ function CatalogPage({ catalogGridRef, isSearchForTireSize }: Props) {
     siteCatalogProducts,
   } = useCatalogProductsContext();
   const { contentStage, showSummary, stage } = useCatalogSummaryContext();
+  const { fromSearch, setFromSearch } = useSearchModalContext();
   const { setIsFooterVisible } = useFooterContext();
   const { query } = useRouter();
 
@@ -82,13 +84,14 @@ function CatalogPage({ catalogGridRef, isSearchForTireSize }: Props) {
   }, [stage, setIsFooterVisible]);
 
   useEffect(() => {
-    if (!isBrowser()) {
+    if (!isBrowser() || !fromSearch) {
       return;
     }
 
     window.localStorage &&
       window.localStorage.removeItem(LOCAL_STORAGE[PROPERTIES.ADVANCED_VIEW]);
-  }, []);
+    setFromSearch(false);
+  }, [fromSearch, setFromSearch]);
 
   useEffect(() => {
     if (isBrowser()) {

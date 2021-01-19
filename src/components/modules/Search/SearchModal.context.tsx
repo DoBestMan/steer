@@ -12,6 +12,7 @@ interface Props {
 
 export interface SearchModalContextProps {
   activeInputType: SearchInputEnum;
+  fromSearch: boolean;
   getCurrentInputQuery: () => InputQuery;
   isSearchOpen: boolean;
   primaryQuery: InputQuery;
@@ -21,6 +22,7 @@ export interface SearchModalContextProps {
     queryText?: string;
     queryType?: string;
   }) => void;
+  setFromSearch: (value: boolean) => void;
   setInputQuery: (inputType: SearchInputEnum, query: InputQuery) => void;
   setIsSearchOpen: (isSearchOpen: boolean) => void;
   setPrimaryQuery: (value: InputQuery) => void;
@@ -32,6 +34,7 @@ const SearchModalContext = createContext<SearchModalContextProps>();
 
 function useContextSetup(): SearchModalContextProps {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [fromSearch, setFromSearch] = useState<boolean>(false);
   const {
     activeInputType,
     getCurrentInputQuery,
@@ -66,12 +69,14 @@ function useContextSetup(): SearchModalContextProps {
   };
   return {
     activeInputType,
+    fromSearch,
     getCurrentInputQuery,
     isSearchOpen,
     primaryQuery,
     secondaryQuery,
     setActiveInputType,
     setCurrentInputQuery,
+    setFromSearch,
     setInputQuery,
     setIsSearchOpen,
     setPrimaryQuery,

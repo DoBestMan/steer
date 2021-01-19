@@ -23,6 +23,7 @@ import { SiteCatalogSummaryBuildIn } from '~/data/models/SiteCatalogSummaryBuild
 import { SiteCatalogSummaryPrompt } from '~/data/models/SiteCatalogSummaryPrompt';
 import { VehicleMetadata } from '~/data/models/VehicleMetadata';
 import { BUTTON_STYLE, LINK_TYPES, THEME } from '~/lib/constants';
+import { LOCAL_STORAGE, PROPERTIES } from '~/lib/constants/localStorage';
 import { eventEmitters } from '~/lib/events/emitters';
 import { transformSrcLogoToWhite } from '~/lib/utils/cloudinary/cloudinary';
 import { isValidStaticModal } from '~/lib/utils/modal';
@@ -213,6 +214,10 @@ export function DataMomentMessage({
               onClick={async function () {
                 (await setStage) && setStage(STAGES.RESULTS);
                 setIsAdvancedView(true);
+                window.localStorage.setItem(
+                  LOCAL_STORAGE[PROPERTIES.ADVANCED_VIEW],
+                  'true',
+                );
                 if (exploreMore) {
                   setTimeout(exploreMore, 500);
                 }

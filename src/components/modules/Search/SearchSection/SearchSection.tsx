@@ -9,6 +9,7 @@ import { TIME } from '~/lib/constants';
 import { useSearchContext } from '../Search.context';
 import { useFocusScrollIntoView } from '../Search.hooks';
 import { SearchActionType } from '../Search.types';
+import { useSearchModalContext } from '../SearchModal.context';
 import styles from './SearchSection.styles';
 
 export interface SearchSectionProps {
@@ -33,12 +34,20 @@ function SearchSection({
 }: SearchSectionProps) {
   const isScrolling = useRef(false);
   const { onFocus, pushRefToArray } = useFocusScrollIntoView({});
+  const { setFromSearch } = useSearchModalContext();
   const {
     shouldPreventLinkNavigation,
     routeQueryParamOptions,
   } = useSearchContext();
 
-  const handleClick = (searchResult: SiteSearchResultTextItem) => () => {
+  const handleClick = (
+    searchResult: SiteSearchResultTextItem,
+    isButton: boolean,
+  ) => () => {
+    if (!isButton) {
+      setFromSearch(true);
+    }
+
     if (onClick) {
       onClick(searchResult);
     }
@@ -127,7 +136,7 @@ function SearchSection({
                     className={`itemButton ${isSelected ? 'isSelected' : ''}`}
                     href={href}
                     isExternal={isExternal}
-                    onClick={handleClick(item)}
+                    onClick={handleClick(item, false)}
                     onFocus={onFocus(index)}
                     routeQueryParamOptions={routeQueryParamOptions}
                   >
@@ -150,7 +159,7 @@ function SearchSection({
               >
                 <button
                   className={`itemButton ${isSelected ? 'isSelected' : ''}`}
-                  onClick={handleClick(item)}
+                  onClick={handleClick(item, true)}
                   onFocus={onFocus(index)}
                   onTouchStart={handleTouchStart(item)}
                   onTouchMove={handleTouchMove}
