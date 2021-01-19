@@ -66,26 +66,8 @@ export const initialSearchBrandData = {
   type: 'SiteSearchResultTextItem',
 } as SiteSearchResultTextItem;
 
-export const initialSearchPopular = {
-  action: {
-    queryText: '',
-    queryType: 'mostPopularProductLine',
-    type: 'SiteSearchResultActionQuery',
-  } as SiteSearchResultActionQuery,
-  detailLabel: null,
-  label: ui('search.searchCategories.popular'),
-  labelSegments: [
-    {
-      label: ui('search.searchCategories.popular'),
-      matches: false,
-    },
-  ],
-  type: 'SiteSearchResultTextItem',
-} as SiteSearchResultTextItem;
-
 export const initialSearchCategoriesData = [
   initialSearchVehicleData,
   initialSearchTireSizeData,
   initialSearchBrandData,
-  initialSearchPopular,
 ];

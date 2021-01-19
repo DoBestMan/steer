@@ -379,10 +379,6 @@ export function NoResultsMessage({
       labelId: 'catalog.summary.noResultsBrandLabel',
       searchCategory: SearchStateEnum.BRAND,
     },
-    {
-      labelId: 'catalog.summary.noResultsPopularLabel',
-      searchCategory: SearchStateEnum.POPULAR,
-    },
   ];
 
   const onSearchClick = (category: SearchStateEnum) => () => {

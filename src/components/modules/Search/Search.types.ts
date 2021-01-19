@@ -38,7 +38,6 @@ export enum SearchStateEnum {
 
 export const SearchStateCopy: Record<string, string> = {
   [SearchStateEnum.BRAND]: ui('search.searchCategories.brand'),
-  [SearchStateEnum.POPULAR]: ui('search.searchCategories.popular'),
   [SearchStateEnum.TIRE_SIZE]: ui('search.searchCategories.tireSize'),
   [SearchStateEnum.VEHICLE]: ui('search.searchCategories.vehicle'),
 };
@@ -46,7 +45,6 @@ export const SearchStateCopy: Record<string, string> = {
 export const SearchStateQueryType: Record<string, string> = {
   [SearchStateEnum.BRAND]: 'brand',
   [SearchStateEnum.FRONT_TIRE]: 'frontTireSize',
-  [SearchStateEnum.POPULAR]: 'mostPopularProductLine',
   [SearchStateEnum.REAR_TIRE]: 'rearTireSize',
   [SearchStateEnum.REAR_TIRE_WIDTH]: 'rearWidthRatio',
   [SearchStateEnum.TIRE_SIZE]: 'tireSize',
