@@ -37,26 +37,16 @@ enum MODAL_MESSAGE_TYPE {
   SUCCESS = 'success',
 }
 
-const CONSTANTS = {
-  SEARCH_OPTIONS: {
-    componentRestrictions: { country: 'us' },
-    radius: 1,
-    types: ['geocode'],
-  },
-};
-
 const filterPredictions = (
-  predictions: google.maps.places.AutocompletePrediction[],
+  predictions: google.maps.places.PlaceResult[],
+  search: string,
 ) =>
   predictions
-    .filter((prediction) => prediction.types.includes('postal_code'))
+    .filter((result) => result.name.indexOf(search) > 0)
     .map((result) => ({
-      id: result.place_id,
-      main: result.structured_formatting.main_text,
-      secondary: result.structured_formatting.secondary_text.replace(
-        ', USA',
-        '',
-      ),
+      id: result.place_id || '',
+      main: result.name.indexOf(search) === -1 ? '' : search,
+      secondary: result.name.replace(search, ''),
     }));
 
 function Location({
@@ -100,16 +90,15 @@ function Location({
     }
 
     const fetchPredictions = () => {
-      autocomplete.getPlacePredictions(
+      autocomplete.findPlaceFromQuery(
         {
-          input: search,
-          location: latLng,
-          ...CONSTANTS.SEARCH_OPTIONS,
+          query: search,
+          fields: ['name', 'place_id'],
         },
         (predictions, status) => {
           !didCancel &&
             status === window.google.maps.places.PlacesServiceStatus.OK &&
-            setResults(filterPredictions(predictions));
+            setResults(filterPredictions(predictions, search));
 
           setIsLoadingLocation(false);
         },
@@ -214,7 +203,6 @@ function Location({
     currentLocation.cityName &&
     currentLocation.stateAbbr &&
     currentLocation.zip;
-
   return (
     <GridItem css={styles.container} {...rest}>
       <div css={styles.content}>
@@ -226,7 +214,7 @@ function Location({
           focusOnMount={focusInputOnMount}
           inputValidationRegEx={onlyNumbers}
           isLoadingResults={isLoadingLocation}
-          minimumCharacterBeforeError={3}
+          minimumCharacterBeforeError={5}
           onChange={onChange}
           onInvalidInput={handleInvalidInput}
           onIsLoadingValueSelection={setIsLoadingLocationSearch}

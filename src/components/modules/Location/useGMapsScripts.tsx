@@ -37,10 +37,14 @@ export function useGMapsScripts() {
   const [
     autocomplete,
     setAutocomplete,
-  ] = useState<google.maps.places.AutocompleteService | null>(null);
+  ] = useState<google.maps.places.PlacesService | null>(null);
 
   const initGMapsScripts = () => {
-    setAutocomplete(new window.google.maps.places.AutocompleteService());
+    setAutocomplete(
+      new window.google.maps.places.PlacesService(
+        document.createElement('div'),
+      ),
+    );
     setLatLng(new window.google.maps.LatLng(CONSTANTS.US_CENTER_COORDS));
   };
 
