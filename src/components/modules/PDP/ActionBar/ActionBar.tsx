@@ -75,8 +75,11 @@ function PDPActionBar({
     setIsAddingToCart,
     setQuantity,
   } = useProductDetailContext();
-  const { setIsRouteLoading, setInitTransitionState } = useRouterContext();
-
+  const {
+    priceDisplayInAddtoCart,
+    setIsRouteLoading,
+    setInitTransitionState,
+  } = useRouterContext();
   const [isQuantitySelectorOpen, setIsQuantitySelectorOpen] = useState(false);
   const [isRoadHazardOpen, setIsRoadHazardOpen] = useState(false);
   const [price, setPrice] = useState(
@@ -202,10 +205,12 @@ function PDPActionBar({
           >
             <span css={styles.price}>
               {uiJSX('pdp.stickyBar.addToCart', {
-                value: (
+                value: priceDisplayInAddtoCart ? (
                   <span key="action-bar-price" css={styles.decorator}>
                     {formatDollars(price)}
                   </span>
+                ) : (
+                  ''
                 ),
               })}
             </span>

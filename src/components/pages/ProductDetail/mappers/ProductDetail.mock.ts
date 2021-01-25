@@ -24,6 +24,7 @@ import { ProductDetailContextProps } from '../ProductDetail.context';
 
 export const globalsMock = {
   customerServiceEnabled: true,
+  priceDisplayInAddtoCart: true,
   customerServiceNumber: {
     display: '(888) 123 456',
     value: '888123456',

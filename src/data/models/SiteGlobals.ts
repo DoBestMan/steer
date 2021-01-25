@@ -3,6 +3,7 @@
  */
 export interface SiteGlobals {
   customerServiceEnabled: boolean;
+  priceDisplayInAddtoCart: boolean;
 
   customerServiceNumber: {
     display: string;

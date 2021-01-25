@@ -16,6 +16,7 @@ ReactModal.setAppElement('*');
 const roadHazard = { durationLabel: '3 years', price: '5208' };
 const emptyRoadHazard = null;
 const mockActionBar = {
+  priceDisplayInAddtoCart: true,
   rearPrice: null,
   rearSize: null,
   startingPrice: '5999',

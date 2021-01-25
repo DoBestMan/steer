@@ -2,6 +2,7 @@ import { NextRouter, useRouter } from 'next/router';
 import { ReactNode, useCallback, useEffect, useState } from 'react';
 
 import { useSearchModalContext } from '~/components/modules/Search/SearchModal.context';
+import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
 import { CATALOG_ROUTES, ROUTE_MAP, ROUTES } from '~/lib/constants/';
 import { eventEmitters } from '~/lib/events/emitters';
 import { createContext } from '~/lib/utils/context';
@@ -12,6 +13,7 @@ export interface RouterContextProps {
   isRouteLoading: boolean;
   prevRoute: string;
   prevUrl: string;
+  priceDisplayInAddtoCart: boolean;
   router: NextRouter;
   setContainerEl(containerEl: HTMLDivElement): void;
   setInitTransitionState(initTransitionState: boolean): void;
@@ -24,7 +26,7 @@ const RouterContext = createContext<RouterContextProps>();
 function useRouterContextSetup() {
   const router = useRouter();
   const { asPath } = router;
-
+  const { priceDisplayInAddtoCart } = useSiteGlobalsContext();
   const [prevUrl, setPrevUrl] = useState<string>(ROUTE_MAP[ROUTES.HOME]);
   const [prevRoute, setPrevRoute] = useState<string>(ROUTE_MAP[ROUTES.HOME]);
 
@@ -142,6 +144,7 @@ function useRouterContextSetup() {
     isRouteLoading,
     prevRoute,
     prevUrl,
+    priceDisplayInAddtoCart,
     router,
     setContainerEl,
     setInitTransitionState,

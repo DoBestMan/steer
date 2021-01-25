@@ -28,6 +28,7 @@ function useContextSetup(defaultData: { siteGlobals?: SiteGlobals }) {
   return (
     siteGlobals || {
       customerServiceEnabled: false,
+      priceDisplayInAddtoCart: true,
       customerServiceNumber: {
         display: '',
         value: '',
