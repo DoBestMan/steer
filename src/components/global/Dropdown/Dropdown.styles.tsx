@@ -7,7 +7,6 @@ import {
   StylesMap,
   Z_INDEX,
 } from '~/lib/constants';
-import { hideScrollbar } from '~/styles/document/accessibility.styles';
 import { typography } from '~/styles/typography.styles';
 
 import { ACTION_BAR_HEIGHT } from './ActionBar.styles';
@@ -17,8 +16,9 @@ const DROPDOWN_MAX_WIDTH = 400;
 
 const styles: StylesMap = {
   actionBarContentDropdown: {
-    paddingBottom: ACTION_BAR_HEIGHT.SM,
     minWidth: DROPDOWN_MIN_WIDTH,
+    overflow: 'hidden',
+    paddingBottom: ACTION_BAR_HEIGHT.SM,
     [MQ.M]: {
       paddingBottom: ACTION_BAR_HEIGHT.MED,
     },
@@ -68,7 +68,6 @@ const styles: StylesMap = {
       },
       // allow dropdown content to be scrollable with action bar overlaying content
       '> div:first-of-type': [
-        hideScrollbar,
         {
           maxHeight: 350,
           minHeight: 150,

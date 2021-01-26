@@ -4,6 +4,7 @@ import { MouseEvent, ReactNode, useMemo, useState } from 'react';
 import { useCatalogProductsContext } from '~/context/CatalogProducts.context';
 import { useGlobalToastContext } from '~/context/GlobalToast.context';
 import { SiteCatalogFilters } from '~/data/models/SiteCatalogFilters';
+import { isBrowser } from '~/lib/utils/browser';
 import { createContext } from '~/lib/utils/context';
 
 import { CatalogFilterTypes } from './Filter.types';
@@ -100,9 +101,17 @@ export function useFiltersContextSetup({
         onPreviewFilters();
       }
     },
-    clearSelectingFilter: () => setSelectingFilter(null),
+    clearSelectingFilter: () => {
+      if (isBrowser()) {
+        document.body.style.overflow = 'unset';
+      }
+      setSelectingFilter(null);
+    },
     createOpenFilterHandler: (id: number | string) => (e?: MouseEvent) => {
       setSelectingFilter(id);
+      if (isBrowser()) {
+        document.body.style.overflow = 'hidden';
+      }
       if (e?.target instanceof HTMLButtonElement) {
         // force focus, document.activeElement isn't updated if you click
         // a filter button while another filter dropdown is open
