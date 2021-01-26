@@ -36,6 +36,8 @@ export default function FilterCheckbox({
     }
     if (!hasActiveValue(item, filtersToApply)) {
       setIsChecked(false);
+    } else {
+      setIsChecked(true);
     }
   }, [isLoading, filtersToApply, item, isChecked]);
 
