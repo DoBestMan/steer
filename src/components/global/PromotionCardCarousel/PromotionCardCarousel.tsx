@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import isStrictEqual from 'fast-deep-equal';
+import { memo, useEffect, useMemo, useState } from 'react';
 
 import Carousel from '~/components/global/Carousel/Carousel';
 import Icon from '~/components/global/Icon/Icon';
@@ -85,27 +86,30 @@ function ProductCardCarousel({ cards }: ProductCardCarouselProps) {
     setIsDynamicPagination(greaterThan.M);
   }, [greaterThan.M]);
 
-  return (
-    <div css={styles.container} data-component="promotion-card-carousel">
-      <Carousel
-        params={carouselParams}
-        rebuildOnUpdate
-        shortSwipes
-        shouldSwiperUpdate
-        wrapperClass={CAROUSEL_CLASS_NAMES.WRAPPER_CONTAINER}
-      >
-        {cards.map((card, index) => (
-          <div css={styles.item} key={`promotion_card__${index}`}>
-            <PromotionCard
-              {...card}
-              handleReferAFriendClick={openReferAFriendModal}
-              handlePromotionClick={handlePromotionClick}
-            />
-          </div>
-        ))}
-      </Carousel>
-    </div>
-  );
+  return useMemo(() => {
+    return (
+      <div css={styles.container} data-component="promotion-card-carousel">
+        <Carousel
+          params={carouselParams}
+          shortSwipes
+          wrapperClass={CAROUSEL_CLASS_NAMES.WRAPPER_CONTAINER}
+        >
+          {cards.map((card, index) => (
+            <div css={styles.item} key={`promotion_card__${index}`}>
+              <PromotionCard
+                {...card}
+                handleReferAFriendClick={openReferAFriendModal}
+                handlePromotionClick={handlePromotionClick}
+              />
+            </div>
+          ))}
+        </Carousel>
+      </div>
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cards]);
 }
 
-export default ProductCardCarousel;
+export default memo(ProductCardCarousel, (prev, next) =>
+  isStrictEqual(prev, next),
+);
