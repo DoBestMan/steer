@@ -41,7 +41,7 @@ export const getStaticProps: GetStaticProps<PageResponse<
   if (!res.isSuccess) {
     return {
       props: { errorStatusCode: res.error.statusCode },
-      revalidate: REVALIDATE.EVERY_MINUTE,
+      revalidate: REVALIDATE.EVERY_HOUR,
     };
   }
 
@@ -50,7 +50,7 @@ export const getStaticProps: GetStaticProps<PageResponse<
       ...res.data,
       brandName,
     },
-    revalidate: REVALIDATE.EVERY_MINUTE,
+    revalidate: REVALIDATE.EVERY_HOUR,
   };
 };
 
