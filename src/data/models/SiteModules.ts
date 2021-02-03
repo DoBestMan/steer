@@ -3,6 +3,7 @@ import { ArticleListWithFeaturedProps } from '~/components/global/ArticleListWit
 import { ButtonGridProps } from '~/components/global/ButtonGrid/ButtonGrid';
 import { DataTableProps } from '~/components/global/DataTables/DataTableVertical';
 import { FeaturedInfoModuleProps } from '~/components/global/FeaturedInfoModule/FeaturedInfoModule';
+import { GoogleFormProps } from '~/components/global/GoogleForm/GoogleForm';
 import { ImageProps } from '~/components/global/Image/Image';
 import { LinkListProps } from '~/components/global/LinkList/LinkList';
 import { QuoteProps } from '~/components/global/Quote/Quote';
@@ -102,3 +103,5 @@ export interface SiteModuleCircularIllustrationCarousel extends SiteModule {
     | 'logosBrands'
     | 'logosMakes';
 }
+
+export interface SiteModuleGoogleForm extends GoogleFormProps, SiteModule {}

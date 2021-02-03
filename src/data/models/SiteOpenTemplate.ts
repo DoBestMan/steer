@@ -4,6 +4,7 @@ import {
   SiteModuleArticleListWithFeatured,
   SiteModuleBreadcrumbsItem,
   SiteModuleDataTableVertical,
+  SiteModuleGoogleForm,
   SiteModuleGraphicGrid,
   SiteModuleImage,
   SiteModuleLinkList,
@@ -18,6 +19,7 @@ import { SitePageMetadata } from '~/data/models/SitePageMetadata';
 export type OpenTemplateModules =
   | SiteModuleAccordion
   | SiteModuleArticleListWithFeatured
+  | SiteModuleGoogleForm
   | SiteModuleGraphicGrid
   | SiteModuleImage
   | SiteModuleLinkList

@@ -9,6 +9,7 @@ import ModuleButtonGrid from './modules/ModuleButtonGrid/ModuleButtonGrid';
 import ModuleCircularIllustrationCarousel from './modules/ModuleCircularIllustrationCarousel/ModuleCircularIllustrationCarousel';
 import ModuleDataTableVertical from './modules/ModuleDataTableVertical/ModuleDataTableVertical';
 import ModuleFeedback from './modules/ModuleFeedback/ModuleFeedback';
+import ModuleGoogleForm from './modules/ModuleGoogleForm/ModuleGoogleForm';
 import ModuleGraphicGrid from './modules/ModuleGraphicGrid/ModuleGraphicGrid';
 import ModuleImage from './modules/ModuleImage/ModuleImage';
 import ModuleLinkList from './modules/ModuleLinkList/ModuleLinkList';
@@ -38,6 +39,7 @@ function EditorialModules({ moduleType, moduleData }: EditorialModulesProps) {
     SiteModuleCircularIllustrationCarousel: ModuleCircularIllustrationCarousel,
     SiteModuleDataTableVertical: ModuleDataTableVertical,
     SiteModuleFeedback: ModuleFeedback,
+    SiteModuleGoogleForm: ModuleGoogleForm,
     SiteModuleGraphicGrid: ModuleGraphicGrid,
     SiteModuleLinkList: ModuleLinkList,
     SiteModuleLinkWithLabel: ModuleSiteLinkWithLabel,

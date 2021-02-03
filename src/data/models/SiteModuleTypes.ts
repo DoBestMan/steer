@@ -4,6 +4,7 @@ export type SiteModuleTypes =
   | 'SiteModuleArticleListWithFeatured'
   | 'SiteModuleFeedback'
   | 'SiteModuleGraphicGrid'
+  | 'SiteModuleGoogleForm'
   | 'SiteModuleLinkList'
   | 'SiteLinkWithLabel'
   | 'SiteModuleMarkdown'
