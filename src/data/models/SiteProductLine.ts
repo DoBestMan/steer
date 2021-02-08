@@ -44,6 +44,12 @@ export interface SiteProductLine {
    * @type {Array<SiteProductLineFaqList>}
    * @memberof SiteProductLine
    */
+  secondaryDescription?: string;
+  /**
+   *
+   * @type {Array<SiteProductLineFaqList>}
+   * @memberof SiteProductLine
+   */
   faqList: Array<SiteProductLineFaqList>;
   /**
    * Has been renamed to assetList

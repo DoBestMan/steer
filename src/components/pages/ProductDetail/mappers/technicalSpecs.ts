@@ -42,7 +42,7 @@ export function mapDataToTechnicalSpecs({
   });
 
   const description = siteProductLine.overview || '';
-
+  const secondaryDescription = siteProductLine.secondaryDescription || '';
   const treadOnlyImage = siteProductLine.assetList.find(
     (item) =>
       item.type === SiteCatalogProductImageTypeEnum.SiteCatalogProductImage &&
@@ -98,6 +98,7 @@ export function mapDataToTechnicalSpecs({
   return {
     description,
     image: treadOnlyImage && treadOnlyImage.image,
+    secondaryDescription,
     sizes,
     specs,
   };

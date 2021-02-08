@@ -19,6 +19,7 @@ describe('pages/ProductDetails/mappers/techinicalSpecs', () => {
         type: 'SiteImage',
         width: 800,
       },
+      secondaryDescription: '',
       sizes: [
         {
           label: "15''",

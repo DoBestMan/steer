@@ -32,6 +32,7 @@ export interface Size {
 export interface TechnicalSpecsProps {
   description: string;
   image?: SiteImage;
+  secondaryDescription?: string;
   sizes: Size[];
   specs: AccordionItem[];
 }
@@ -48,6 +49,7 @@ function TechnicalSpecs({
   image,
   specs,
   sizes,
+  secondaryDescription,
   openStaticModal,
   techSpecsAnchor,
 }: Props) {
@@ -67,7 +69,7 @@ function TechnicalSpecs({
           gridRowL="2/4"
           css={styles.description}
         >
-          <Description description={description} />
+          <Description description={`${description} ${secondaryDescription}`} />
         </GridItem>
       )}
       {image && (
