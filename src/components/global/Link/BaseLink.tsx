@@ -31,6 +31,7 @@ function BaseLink(
     href,
     isExternal,
     routeQueryParamOptions,
+    title,
     ...rest
   }: BaseLinkProps,
   ref: RefType,
@@ -45,11 +46,13 @@ function BaseLink(
     href,
     isExternal,
     routeQueryParamOptions,
+    title,
   });
   return (
     <Link href={finalHref} as={as} prefetch={prefetch} passHref>
       <a
         href={!isInternal ? href : undefined}
+        title={title}
         {...externalProps}
         {...rest}
         ref={ref as MutableRefObject<HTMLAnchorElement>}

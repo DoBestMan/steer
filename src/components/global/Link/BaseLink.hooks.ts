@@ -22,6 +22,7 @@ export interface UseBaseLinkProps {
   href: string;
   isExternal?: boolean;
   routeQueryParamOptions?: RouteQueryParamOptions;
+  title?: string;
 }
 
 interface ExternalProps {
@@ -34,12 +35,14 @@ export interface UseBaseLinkReturnProps
   externalProps: ExternalProps;
   finalHref: Url;
   isInternal: boolean;
+  title?: string;
 }
 
 export function useBaseLinkProps({
   href,
   isExternal,
   routeQueryParamOptions,
+  title,
 }: UseBaseLinkProps): UseBaseLinkReturnProps {
   const externalProps = isExternal
     ? { rel: 'noopener noreferrer', target: '_blank' }
@@ -115,5 +118,6 @@ export function useBaseLinkProps({
     finalHref,
     isInternal,
     prefetch,
+    title,
   };
 }

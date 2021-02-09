@@ -28,9 +28,10 @@ function CircularIllustrationItem({
   titlePlacement = TitlePlacement['top'],
   imageMaxWidthCustomStyles = styles.logoImage,
 }: CirclularIllustrationProps) {
+  const titleTag = 'Shop ' + title + ' Tires';
   return (
     <div css={styles.root}>
-      <BaseLink href={link.href} css={styles.baseLink}>
+      <BaseLink href={link.href} title={titleTag} css={styles.baseLink}>
         <div css={styles.graphic}>
           {highlight && (
             <div css={styles.tag}>
