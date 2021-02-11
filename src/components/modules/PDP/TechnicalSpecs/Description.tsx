@@ -10,9 +10,10 @@ import styles from './Description.styles';
 
 interface Props {
   description: string;
+  secondaryDescription: string;
 }
 
-function Description({ description }: Props) {
+function Description({ description, secondaryDescription }: Props) {
   const [showFullDescription, setShowFullDescription] = useState(false);
 
   const toggleFullDescription = useCallback(() => {
@@ -23,7 +24,6 @@ function Description({ description }: Props) {
   const briefDescription = splitDescription[0];
   const moreDescription =
     splitDescription.length > 1 && splitDescription.slice(1).join('\n\n');
-
   const moreDescriptionId = 'technical-specs-more-description';
 
   return (
@@ -43,6 +43,7 @@ function Description({ description }: Props) {
             css={styles.moreDescription}
           >
             <Markdown css={styles.markdown}>{moreDescription}</Markdown>
+            <div css={styles.secondaryDescription}>{secondaryDescription}</div>
           </div>
           <button
             aria-expanded={showFullDescription}

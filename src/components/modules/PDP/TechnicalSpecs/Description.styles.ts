@@ -17,6 +17,9 @@ const styles: StylesMap = {
       display: 'block',
     },
   },
+  secondaryDescription: {
+    marginTop: SPACING.SIZE_20,
+  },
   showFullDescription: [
     typography.primarySubhead,
     {

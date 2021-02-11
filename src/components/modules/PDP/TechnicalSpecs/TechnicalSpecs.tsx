@@ -69,7 +69,10 @@ function TechnicalSpecs({
           gridRowL="2/4"
           css={styles.description}
         >
-          <Description description={`${description} ${secondaryDescription}`} />
+          <Description
+            description={`${description}`}
+            secondaryDescription={`${secondaryDescription}`}
+          />
         </GridItem>
       )}
       {image && (
