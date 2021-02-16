@@ -26,7 +26,11 @@ const styles: StylesMap = {
 
   copyrightSection: {
     order: 8,
-    padding: `${SPACING.SIZE_20}px 0 ${SPACING.SIZE_40}px`,
+    padding: `${SPACING.SIZE_50}px 0 ${SPACING.SIZE_40}px`,
+
+    [MQ.M]: {
+      padding: `${SPACING.SIZE_20}px 0 ${SPACING.SIZE_40}px`,
+    },
 
     [MQ.XL]: [
       borderTop,
@@ -70,19 +74,33 @@ const styles: StylesMap = {
     borderTopWithGapAndSpacing,
     {
       alignItems: 'flex-end',
-      display: 'flex',
+      display: 'initial',
       order: 6,
       paddingBottom: 0,
+      position: 'relative',
 
       [MQ.XL]: {
         alignItems: 'flex-start',
         border: 'none',
+        display: 'initial',
         margin: 0,
         order: 3,
         padding: 0,
       },
     },
   ],
+
+  logoTagline: {
+    bottom: -35,
+    left: 0,
+    position: 'absolute',
+    width: 230,
+    [MQ.M]: {
+      width: 215,
+      position: 'inherit',
+      paddingTop: SPACING.SIZE_15,
+    },
+  },
 
   mailingListSection: [
     borderTop,

@@ -19,6 +19,7 @@ export interface NavThemeObject {
   iconColor: CSSObject | CSSObjectType;
   linkTheme: THEME.LIGHT | THEME.ORANGE;
   logoUrl: string;
+  logoUrlHome: string;
   logoUrlMobile: string;
   textColor: CSSObject;
 }
@@ -37,6 +38,7 @@ export const themes: { [key in NAV_THEME]: NavThemeObject } = {
     iconColor: { [MQ.L]: { color: COLORS.GLOBAL.ORANGE } },
     linkTheme: THEME.LIGHT,
     logoUrl: '/static/assets/logo-icon.svg',
+    logoUrlHome: '/static/assets/logo-home.svg',
     logoUrlMobile: '/static/assets/logo.svg',
     textColor: {
       color: COLORS.GLOBAL.BLACK,
@@ -56,6 +58,7 @@ export const themes: { [key in NAV_THEME]: NavThemeObject } = {
     iconColor: { color: COLORS.GLOBAL.WHITE },
     linkTheme: THEME.ORANGE,
     logoUrl: '/static/assets/logo-white.svg',
+    logoUrlHome: '/static/assets/logo-home.svg',
     logoUrlMobile: '/static/assets/logo-white.svg',
     textColor: { color: COLORS.GLOBAL.WHITE },
   },

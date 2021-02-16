@@ -34,7 +34,6 @@ function Nav({ isHomepage, isPLA }: Props) {
   const theme: NavThemeObject = useTheme();
   const { isMobile } = useBreakpoints();
   const { searchQuery, setSearchState } = useSearchContext();
-
   return (
     <Transition appear={false} in={isVisible} timeout={TIME.MS400}>
       {(containerTransitionState: TransitionStatus) => {
@@ -57,8 +56,14 @@ function Nav({ isHomepage, isPLA }: Props) {
                 >
                   <Image
                     altText={ui('logo.alt')}
-                    css={styles.logo}
-                    src={isMobile ? theme.logoUrlMobile : theme.logoUrl}
+                    css={isHomepage ? styles.logoHome : styles.logo}
+                    src={
+                      isMobile
+                        ? theme.logoUrlMobile
+                        : isHomepage
+                        ? theme.logoUrlHome
+                        : theme.logoUrl
+                    }
                   />
                 </BaseLink>
               </GridItem>

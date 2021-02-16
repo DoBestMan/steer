@@ -395,6 +395,9 @@
     "sizeFinder": {
       "fits": "Fits your {{make}}"
     },
+    "tagline": {
+      "alt": "Way Simple Way Better"
+    },
     "tireImage": {
       "nextButtonLabel": "Next",
       "previousButtonLabel": "Previous",

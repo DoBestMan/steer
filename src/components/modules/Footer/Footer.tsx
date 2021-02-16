@@ -94,7 +94,7 @@ function Footer({
       <GridItem
         gridColumnS="2/3"
         gridColumnM="2/5"
-        gridColumnL="2/6"
+        gridColumnL="2/5"
         css={styles.logoSection}
       >
         <BaseLink css={styles.logoLink} href="/">
@@ -102,6 +102,13 @@ function Footer({
             altText={ui('logo.alt')}
             css={styles.logo}
             src="/static/assets/logo.svg"
+          />
+        </BaseLink>
+        <BaseLink css={styles.logoLink} href="/">
+          <Image
+            altText={ui('tagline.alt')}
+            css={styles.logoTagline}
+            src="/static/assets/logo-tagline.svg"
           />
         </BaseLink>
       </GridItem>
