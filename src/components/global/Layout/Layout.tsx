@@ -1,7 +1,10 @@
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useCallback, useEffect, useState } from 'react';
 import SVGInline from 'react-svg-inline';
 
 import GridHelper from '~/components/global/GridHelper/GridHelper';
+import { NAV_TARGETS } from '~/components/modules/Nav/Nav.types';
+import { useNavContext } from '~/context/Nav.context';
+import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
 import { ScrollObject, setScroll } from '~/lib/helpers/scroll';
 
 import styles from './Layout.styles';
@@ -12,6 +15,20 @@ interface Props {
 
 function Layout(props: Props) {
   const [SVGString, setSVGString] = useState<string | null>(null);
+  const { browserLocationFailed } = useUserPersonalizationContext();
+  const { createSelectLinkHandler, toggleSubNav } = useNavContext();
+  const openLocationNav = useCallback(() => {
+    const linkHandler = createSelectLinkHandler({
+      target: NAV_TARGETS.LOCATION,
+    });
+
+    if (!linkHandler) {
+      return;
+    }
+
+    linkHandler();
+    toggleSubNav();
+  }, [createSelectLinkHandler, toggleSubNav]);
 
   useEffect(() => {
     let scrollTicket = false;
@@ -63,6 +80,14 @@ function Layout(props: Props) {
 
     getSVG();
   }, [SVGString]);
+
+  useEffect(() => {
+    if (browserLocationFailed) {
+      openLocationNav();
+    }
+    // this doesn't need to update for openLocationNav
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [browserLocationFailed]);
 
   return (
     <div css={styles.container}>

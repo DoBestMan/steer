@@ -21,10 +21,12 @@ const CONSTANTS = {
 };
 
 export interface UserPersonalizationProps {
+  browserLocationFailed?: boolean;
   hideUseCurrentLocation?: boolean;
   isLoadingLocationSearch: boolean;
   locationString: string;
   selectVehicle: (vehicleMetadata: VehicleMetadata) => void;
+  setBrowserLocationFailed?: (hasFailed: boolean) => void;
   setIsLoadingLocationSearch: (isLoading: boolean) => void;
   unselectVehicle: () => void;
   updateLocation: (body: UserPersonalizationUpdate) => void;
@@ -53,16 +55,9 @@ export function useContextSetup() {
   const [hideUseCurrentLocation, setHideUseCurrentLocation] = useState<boolean>(
     false,
   );
-
-  useEffect(() => {
-    async function getData() {
-      await apiBootstrap();
-      const data = fetchGetUserPersonalization();
-      setUserPersonalizationData(data);
-    }
-
-    getData();
-  }, []);
+  const [browserLocationFailed, setBrowserLocationFailed] = useState<boolean>(
+    false,
+  );
 
   useEffect(() => {
     async function updateLocationFromBrowser() {
@@ -72,6 +67,10 @@ export function useContextSetup() {
 
       if (!latLngFromBrowser || latLngFromBrowser.isDenied) {
         const onHideUseLocation = () => {
+          if (latLngFromBrowser.errorCode === 2) {
+            setBrowserLocationFailed(true);
+          }
+
           setHideUseCurrentLocation(true);
           return;
         };
@@ -97,6 +96,13 @@ export function useContextSetup() {
       }
     }
 
+    async function getData() {
+      await apiBootstrap();
+      const data = fetchGetUserPersonalization();
+      setUserPersonalizationData(data);
+    }
+
+    getData();
     updateLocationFromBrowser();
   }, []);
 
@@ -128,10 +134,12 @@ export function useContextSetup() {
   }, [setVehicle]);
 
   return {
+    browserLocationFailed,
     hideUseCurrentLocation,
     isLoadingLocationSearch,
     locationString,
     selectVehicle,
+    setBrowserLocationFailed,
     setIsLoadingLocationSearch,
     unselectVehicle,
     updateLocation,

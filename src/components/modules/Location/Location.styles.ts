@@ -8,6 +8,13 @@ const GEOLOCATION_ICON_SIZE = {
 };
 
 export const styles: StylesMap = {
+  browserLocationFailedMessage: [
+    typography.labelHeadlineLarge,
+    {
+      alignItems: 'baseline',
+      display: 'flex',
+    },
+  ],
   container: {
     width: '100%',
   },

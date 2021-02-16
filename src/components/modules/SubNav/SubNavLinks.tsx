@@ -24,13 +24,23 @@ function SubNavLinks({
   } = useNavContext();
   const { isMobile } = useBreakpoints();
 
-  const { locationString } = useUserPersonalizationContext();
+  const {
+    locationString,
+    setBrowserLocationFailed,
+  } = useUserPersonalizationContext();
   const { links, linksMobile } = buildLinks({ locationString });
 
   const navLinks = isMobile ? linksMobile : links;
   const iconLinks = navLinks.filter((link) => !!link.icon);
   const textLinks = navLinks.filter((link) => !link.icon);
   const isLocation = activeLink === 'LOCATION';
+
+  const onSubNavClose = () => {
+    handleCloseSubNav();
+    if (setBrowserLocationFailed) {
+      setBrowserLocationFailed(false);
+    }
+  };
 
   function renderLink(link: LinkType | ActionType, idx: number) {
     return isLocation ? null : (
@@ -62,7 +72,7 @@ function SubNavLinks({
               icon={ICONS.CLOSE}
               theme={THEME.LIGHT}
               aria-label={`${ui('nav.close')} ${activeLink}`}
-              onClick={handleCloseSubNav}
+              onClick={onSubNavClose}
               css={styles.closeSubNav}
             />
           </li>

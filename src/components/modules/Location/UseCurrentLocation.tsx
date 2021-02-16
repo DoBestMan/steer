@@ -14,12 +14,12 @@ interface Props {
 
 const getBrowserLocation = (
   callback: PositionCallback,
-  onLocationDenied: () => void,
+  onLocationDenied: (error: number) => void,
 ) => {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(callback, function (error) {
-      if (error.code == error.PERMISSION_DENIED) {
-        onLocationDenied();
+      if (error.code == error.PERMISSION_DENIED || error.code === 2) {
+        onLocationDenied(error.code);
       }
     });
   } else {
@@ -53,7 +53,12 @@ function UseCurrentLocation({
 
         setLatlng(newCoords);
       },
-      () => setIsWaiting(false),
+      (errCode) => {
+        if (errCode === 2) {
+          onCurrentLocationError('location.browserLocationFailedMessage');
+        }
+        setIsWaiting(false);
+      },
     );
   };
 

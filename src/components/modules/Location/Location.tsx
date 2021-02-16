@@ -16,6 +16,7 @@ import { onlyNumbers } from '~/lib/utils/regex';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import AutocompleteResultItemLocation from './AutocompleteResultItemLocation';
+import BrowserLocationFailed from './BrowserLocationFailed';
 import { styles } from './Location.styles';
 import LocationInfo from './LocationInfo';
 import UseCurrentLocation from './UseCurrentLocation';
@@ -64,10 +65,14 @@ function Location({
   const [modalMessage, setModalMessage] = useState<MODAL_MESSAGE_TYPE | string>(
     '',
   );
+  const [specificErrorMessage, setSpecificErrorMessage] = useState('');
+
   const { handleCloseSubNav } = useNavContext();
   const {
+    browserLocationFailed,
     hideUseCurrentLocation,
     isLoadingLocationSearch,
+    setBrowserLocationFailed,
     setIsLoadingLocationSearch,
   } = useUserPersonalizationContext();
   const onChange = useCallback(
@@ -134,6 +139,9 @@ function Location({
     if (isSuccess) {
       timer = setTimeout(() => {
         handleCloseSubNav();
+        if (setBrowserLocationFailed) {
+          setBrowserLocationFailed(false);
+        }
       }, TIME.MS3000);
     }
 
@@ -142,7 +150,7 @@ function Location({
         clearTimeout(timer);
       }
     };
-  }, [handleCloseSubNav, modalMessage]);
+  }, [handleCloseSubNav, modalMessage, setBrowserLocationFailed]);
 
   async function onValueSelectionSuccess(result: AutocompleteResult) {
     try {
@@ -168,6 +176,7 @@ function Location({
       onCurrentLocationError(error);
     }
     setModalMessage(MODAL_MESSAGE_TYPE.ERROR);
+    setSpecificErrorMessage(error);
     console.error(`error: ${error}`);
   }
 
@@ -188,7 +197,7 @@ function Location({
       </>
     ),
     [MODAL_MESSAGE_TYPE.ERROR]: (
-      <Markdown>{ui('location.errorMessage')}</Markdown>
+      <Markdown>{ui(specificErrorMessage || 'location.errorMessage')}</Markdown>
     ),
   };
 
@@ -242,6 +251,7 @@ function Location({
               />
             )}
             <LocationInfo />
+            {browserLocationFailed && <BrowserLocationFailed />}
           </>
         )}
 

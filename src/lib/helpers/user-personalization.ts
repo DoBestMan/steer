@@ -6,6 +6,7 @@ import { LOCAL_STORAGE, PROPERTIES } from '~/lib/constants/localStorage';
 import { isBrowser } from '../utils/browser';
 
 export interface LatLng {
+  errorCode?: number;
   isDenied?: boolean;
   latitude: number;
   longitude: number;
@@ -62,6 +63,7 @@ export const browserLocationCheck = () =>
     const geoSuccess = function ({
       coords: { latitude, longitude },
     }: NavigatorSuccessCallbackProps) {
+      setCustomEventForLocationPopup(true, false);
       const browserLocation = {
         latitude,
         longitude,
@@ -71,7 +73,7 @@ export const browserLocationCheck = () =>
         resolve(browserLocation);
         return;
       }
-      setCustomEventForLocationPopup(true, false);
+
       lscache.set(
         LOCAL_STORAGE[PROPERTIES.BROWSER_LOCATION_PERMISSION],
         browserResponseMap['allow'](),
@@ -102,7 +104,9 @@ export const browserLocationCheck = () =>
           lscacheData,
         );
 
-        reject({ ...error, isDenied: true });
+        reject({ errorCode: error.code, isDenied: true });
+      } else {
+        reject({ errorCode: error.code, isDenied: true });
       }
     };
 

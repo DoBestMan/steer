@@ -303,6 +303,7 @@
     "seoBodyCopy": "At SimpleTire we care about your bottom line. That's why we carry top quality tires at reasonable prices and offer fast, free shipping on every tire we sell. To help make your next tire purchase even more affordable, choose from our available selection of tire deals, including coupons, discounts, and rebates.\n\nThroughout the year you will also find some of the best tire sales in the industry - from military discounts to cash back offers and even Black Friday deals, when the time comes."
   },
   "location": {
+    "browserLocationFailedMessage": "Your browser was not able to retrieve your location.<br />Please enter your zip code for the best site experience.",
     "loadingCurrentLocationLabel": "Getting current location from your browser.",
     "contentLabel": "Location",
     "deliverToLabel": "Deliver to:",
