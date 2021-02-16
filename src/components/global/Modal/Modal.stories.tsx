@@ -1,6 +1,8 @@
 import { boolean, select } from '@storybook/addon-knobs';
+import { ThemeProvider, useTheme } from 'emotion-theming';
 import { useState } from 'react';
 
+import { defaultTheme } from '~/components/pages/CatalogPage/CatalogPage.theme';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import {
   COLORS,
@@ -15,6 +17,7 @@ import Button from '../Button/Button';
 import Link from '../Link/Link';
 import BottomCardModal from './BottomCardModal';
 import Modal from './Modal';
+import SizeConfirmModal from './SizeConfirmModal';
 
 export default {
   component: Modal,
@@ -328,5 +331,57 @@ export function FullscreenModalWithCustomClose() {
         <p css={typography.bodyCopy}>Fullscreen modal content</p>
       </Modal>
     </div>
+  );
+}
+
+function TireSizeConfirmModalContent() {
+  const { message } = useTheme();
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleModal = () => {
+    setIsOpen(!isOpen);
+  };
+
+  return (
+    <div>
+      <ModalButton {...{ toggleModal }} />
+      <SizeConfirmModal
+        isOpen={isOpen}
+        contentLabel="modal"
+        theme={MODAL_THEME.ORANGE}
+      >
+        <h1 css={[typography.secondaryHeadline, { marginBottom: 16 }]}>
+          Confirm the tire size of your Ford
+        </h1>
+        <p css={[typography.bodyCopy, { marginBottom: 32 }]}>
+          Find it on the sidewall of your current tires, the owner&apos;s manual
+          or inside the frame of the driver&apos;s door.
+        </p>
+        <Button
+          onClick={toggleModal}
+          css={{ marginRight: 16 }}
+          style={message.buttonStyle}
+          theme={message.buttonTheme}
+        >
+          235/40R18 91W
+        </Button>
+        <Button
+          onClick={toggleModal}
+          style={message.buttonStyle}
+          theme={message.buttonTheme}
+        >
+          235/40R18 95Y XL
+        </Button>
+      </SizeConfirmModal>
+    </div>
+  );
+}
+
+export function TireSizeConfirmModal() {
+  return (
+    <ThemeProvider theme={defaultTheme}>
+      <TireSizeConfirmModalContent />
+    </ThemeProvider>
   );
 }
