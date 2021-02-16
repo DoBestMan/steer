@@ -32,9 +32,9 @@ function Graph({ maxElPosition, minElPosition }: GraphProps) {
           const elmPos = elm.getBoundingClientRect().left;
 
           if (elmPos < minPos || elmPos > maxPos) {
-            elm.style.backgroundColor = COLORS.GLOBAL.ORANGE;
-          } else {
             elm.style.backgroundColor = COLORS.LIGHT.GRAY_70;
+          } else {
+            elm.style.backgroundColor = COLORS.GLOBAL.ORANGE;
           }
         });
       },
