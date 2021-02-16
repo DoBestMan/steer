@@ -55,7 +55,8 @@ function LearnByCategoryPage({ pageData }: Props) {
     const { breadcrumbs } = pageData;
     event.preventDefault();
     const redirectUrl =
-      `${breadcrumbs[2].link.href}` + (value === 1 ? '' : `?page=${value}`);
+      `${breadcrumbs[1].link.href + breadcrumbs[2].link.href}` +
+      (value === 1 ? '' : `?page=${value}`);
     router.push(redirectUrl);
   };
 
