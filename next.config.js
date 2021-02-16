@@ -13,7 +13,7 @@ module.exports = withBundleAnalyzer({
     SHOW_FEEDBACK_TAB: process.env.SHOW_FEEDBACK_TAB,
     VERCEL_GITHUB_COMMIT_REF: process.env.VERCEL_GITHUB_COMMIT_REF,
   },
-  webpack: (config) => {
+  webpack: (config, { webpack }) => {
     config.module.rules.push({
       issuer: /\.(js|ts)x?$/,
       test: /\.svg$/,
@@ -28,6 +28,13 @@ module.exports = withBundleAnalyzer({
         },
       ],
     });
+
+    // For limiting js chunk files
+    config.plugins.push(
+      new webpack.optimize.LimitChunkCountPlugin({
+        maxChunks: 1,
+      }),
+    );
 
     // Alias
     config.resolve.alias['~'] = path.resolve(__dirname + '/src');
