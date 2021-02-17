@@ -72,6 +72,7 @@ export default function FilterPopup({
     filter,
     filtersToApply,
     isLarge,
+    isOpen,
     isPreviewLoading,
     onChange: createUpdateFilterGroup,
     openStaticModal,

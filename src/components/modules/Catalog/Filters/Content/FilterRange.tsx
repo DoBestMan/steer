@@ -16,6 +16,7 @@ export default function FilterRange({
   header,
   id,
   isLarge,
+  isOpen,
   maxValue,
   minValue,
   onChange,
@@ -28,6 +29,7 @@ export default function FilterRange({
     ChildProps,
     | 'isPreviewLoading'
     | 'isLarge'
+    | 'isOpen'
     | 'onChange'
     | 'filtersToApply'
     | 'openStaticModal'
@@ -49,6 +51,7 @@ export default function FilterRange({
     onChange,
   });
   const isPriceFilter = id === 'price';
+
   return (
     <div css={styles.root}>
       <FilterHeader
@@ -70,7 +73,7 @@ export default function FilterRange({
         formatLabel={mapUnitToLabelFormatter[unit]}
         getAriaText={mapUnitToAriaFormatter[unit]}
         name={ui('catalog.filters.slider', { name: id })}
-        hasGraph={isPriceFilter}
+        hasGraph={isPriceFilter && isOpen}
         interval={step}
         onUpdate={handleUpdateFilters}
         max={maxValue}

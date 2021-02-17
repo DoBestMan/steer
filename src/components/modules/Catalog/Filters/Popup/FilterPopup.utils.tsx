@@ -24,6 +24,7 @@ export interface ChildProps {
   filter: CatalogFilterTypes;
   filtersToApply: Record<string, string>;
   isLarge?: boolean;
+  isOpen?: boolean;
   isPreviewLoading: boolean;
   onChange: FiltersContextProps['createUpdateFilterGroup'];
   openStaticModal: ModalContextProps['openStaticModal'];
@@ -60,6 +61,7 @@ export const mapTypeToContent: Record<
     filter,
     filtersToApply,
     isLarge,
+    isOpen,
     isPreviewLoading,
     onChange,
     openStaticModal,
@@ -72,6 +74,7 @@ export const mapTypeToContent: Record<
         isLarge={isLarge}
         isPreviewLoading={isPreviewLoading}
         filtersToApply={filtersToApply}
+        isOpen={isOpen}
       />
     );
   },

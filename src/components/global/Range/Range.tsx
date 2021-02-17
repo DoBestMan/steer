@@ -52,8 +52,8 @@ export default function Range({
   const isSmall = size === RANGE_SLIDER_SIZE.SMALL;
   const railEl = useRef<HTMLDivElement | null>(null);
   const [fillStyles, setFillStyles] = useState({});
-  const [maxElmPos, setMaxElmPos] = useState(0);
-  const [minElmPos, setMinElmPos] = useState(0);
+  const [maxPercentage, setMaxPercentage] = useState(100);
+  const [minPercentage, setMinPercentage] = useState(0);
   const maxLabel = (formatLabel && formatLabel(maxCurrent)) || maxCurrent;
   const minLabel = (formatLabel && formatLabel(minCurrent)) || minCurrent;
   const { width } = useWindowSize(); // update fill color width if window is resized
@@ -73,10 +73,8 @@ export default function Range({
     const maxEl = railEl.current.lastElementChild;
     if (maxEl instanceof HTMLElement && minEl instanceof HTMLElement) {
       if (hasGraph) {
-        const maxElPos = maxEl.getBoundingClientRect().right;
-        const minElPos = minEl.getBoundingClientRect().left;
-        setMaxElmPos(maxElPos);
-        setMinElmPos(minElPos);
+        setMinPercentage((100 * (minCurrent - min)) / (max - min));
+        setMaxPercentage((100 * (maxCurrent - min)) / (max - min));
       }
 
       const indicatorHalf = INDICATOR_SIZE[size] / 2;
@@ -86,14 +84,14 @@ export default function Range({
         width,
       });
     }
-  }, [hasGraph, minCurrent, maxCurrent, size, width]);
+  }, [hasGraph, minCurrent, maxCurrent, min, max, size, width]);
 
   return (
     <div css={[isSmall && styles.rootSmall, isDisabled && styles.disable]}>
       {isSmall && <p css={styles.labelSm}>{minLabel}</p>}
       <div css={styles.container}>
         {hasGraph && (
-          <Graph maxElPosition={maxElmPos} minElPosition={minElmPos} />
+          <Graph maxPercentage={maxPercentage} minPercentage={minPercentage} />
         )}
         <div css={[styles.fillColor, fillStyles]} />
         <div ref={railEl} css={styles.rail}>
