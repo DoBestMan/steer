@@ -36,6 +36,7 @@ function SearchModal() {
     searchState,
     searchResults,
     setHasLockedSearchState,
+    setQueryParamLabel,
     setSearchState,
     setRouteQueryParamOptions,
     setShouldPreventLinkNavigation,
@@ -77,6 +78,7 @@ function SearchModal() {
     setHasLockedSearchState(false);
     setShouldPreventLinkNavigation(false);
     setRouteQueryParamOptions();
+    setQueryParamLabel();
     toggleIsSearchOpen();
   }, [
     isSearchOpen,
@@ -84,6 +86,7 @@ function SearchModal() {
     setPrimaryQuery,
     setSearchState,
     setHasLockedSearchState,
+    setQueryParamLabel,
     setShouldPreventLinkNavigation,
     setRouteQueryParamOptions,
     toggleIsSearchOpen,

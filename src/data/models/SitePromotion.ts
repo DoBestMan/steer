@@ -35,4 +35,5 @@ export enum SitePromotionStyleEnum {
   SitePromotionItemBlackPill = 'SitePromotionItemBlackPill',
   SitePromotionItemWhitePill = 'SitePromotionItemWhitePill',
   SitePromotionItemOrangePill = 'SitePromotionItemOrangePill',
+  SitePromotionItemFilterPill = 'SitePromotionItemFilterPill',
 }

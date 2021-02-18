@@ -39,10 +39,10 @@ const styles: StylesMap = {
     transition: `border-color ${TIME.MS100}ms ease`,
   },
   autocompleteGridItem: {
-    padding: `${SPACING.SIZE_90}px ${SPACING.SIZE_25}px 0 0`,
+    padding: `${SPACING.SIZE_35}px ${SPACING.SIZE_25}px 0 0`,
     position: 'relative',
     [MQ.M]: {
-      padding: `${SPACING.SIZE_120}px 0px 0 0`,
+      padding: `${SPACING.SIZE_55}px 0 0 0`,
     },
     [MQ.XL]: {
       padding: `${SEARCH_PADDING_XL}px 0px ${SEARCH_PADDING_XL}px 0`,
@@ -154,6 +154,10 @@ const styles: StylesMap = {
       },
     },
   ],
+  filterPill: {
+    marginBottom: `${SPACING.SIZE_20}px`,
+    minHeight: `${SPACING.SIZE_30}px`,
+  },
   header: {
     left: 0,
     position: 'fixed',
@@ -220,22 +224,19 @@ const styles: StylesMap = {
     paddingTop: 130,
     position: 'relative',
     [MQ.M]: {
-      paddingTop: 175,
-    },
-    [MQ.M]: {
-      paddingTop: SPACING.SIZE_120,
+      paddingTop: 155,
     },
   },
   searchResultsGridRearTire: {
-    paddingTop: 230,
+    paddingTop: 300,
     [MQ.M]: {
-      paddingTop: 330,
+      paddingTop: 360,
     },
     [MQ.L]: {
-      paddingTop: 350,
+      paddingTop: 430,
     },
     [MQ.XL]: {
-      paddingTop: 360,
+      paddingTop: 450,
     },
   },
   secondaryActionButton: [

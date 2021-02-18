@@ -263,6 +263,10 @@ const Tiretypewinter = dynamic(
   () => import('~/assets/icons/others/tiretype-winter.svg'),
   { ssr: false },
 );
+const Tiretypessearch = dynamic(
+  () => import('~/assets/icons/others/tire-types-search.svg'),
+  { ssr: false },
+);
 const Trending = dynamic(() => import('~/assets/icons/others/trending.svg'), {
   ssr: false,
 });
@@ -374,6 +378,7 @@ export const ICONS_OTHER_MAP: Record<string, ReactElement> = {
   THUMBS_UP: <Thumbsup />,
   TIP_MECHANIC: <Tipmechanic />,
   TIRE: <Tire />,
+  TIRE_TYPES_SEARCH: <Tiretypessearch />,
   TIRETYPE_ALL_TERRAIN: <Tiretypeallterrain />,
   TIRETYPE_ALL_WEATHER: <Tiretypeallweather />,
   TIRETYPE_ANTIQUE: <Tiretypeantique />,

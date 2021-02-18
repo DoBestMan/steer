@@ -12,8 +12,12 @@ import GridItem from '~/components/global/Grid/GridItem';
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Loading from '~/components/global/Loading/Loading';
+import PromoTag from '~/components/global/PromoTag/PromoTag';
+import { useSearchContext } from '~/components/modules/Search/Search.context';
 import { useModalContext } from '~/context/Modal.context';
+import { SitePromotionStyleEnum } from '~/data/models/SitePromotion';
 import { SiteSearchResultGroup } from '~/data/models/SiteSearchResultGroup';
+import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 import { ARIA_LIVE, KEYCODES, THEME, TIME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
@@ -102,6 +106,11 @@ function SearchAutocomplete({
     setSelectedItemIndex,
   } = useAutocompleteSelectedItem(results);
   const { openStaticModal } = useModalContext();
+  const {
+    queryParamLabel,
+    setQueryParamLabel,
+    setRouteQueryParamOptions,
+  } = useSearchContext();
 
   const isInputEmpty = queryText.length < 1;
   const hasResults = results.length > 0;
@@ -285,6 +294,11 @@ function SearchAutocomplete({
     }
   };
 
+  const handleRemoveFilter = () => {
+    setRouteQueryParamOptions();
+    setQueryParamLabel();
+  };
+
   const getSearchStateLabel = () => {
     if (searchState === SearchStateEnum.REAR_TIRE) {
       return ui('search.frontTire');
@@ -334,6 +348,20 @@ function SearchAutocomplete({
               isRearTireState && styles.autocompleteGridItemRearTireState,
             ]}
           >
+            <div css={styles.filterPill}>
+              {!!queryParamLabel && (
+                <PromoTag
+                  style={SitePromotionStyleEnum.SitePromotionItemFilterPill}
+                  label={ui('search.filterPill', { label: queryParamLabel })}
+                  icon={{
+                    svgId: ICONS.CLEAR_INPUT,
+                    type: ICON_IMAGE_TYPE.ICON,
+                  }}
+                  handleClick={handleRemoveFilter}
+                  isUppercase
+                />
+              )}
+            </div>
             <SearchInput
               activeInputType={activeInputType}
               clearInputComponent={

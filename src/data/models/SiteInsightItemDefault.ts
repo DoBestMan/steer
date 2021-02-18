@@ -4,6 +4,11 @@ import { SiteIcon } from './SiteIcon';
 import { SiteImage } from './SiteImage';
 import { SiteLink } from './SiteLink';
 
+export interface SiteFigureItemDefault {
+  type: 'string';
+  value: string;
+}
+
 /**
  * Insight item, default style, used on the homepage.
  */

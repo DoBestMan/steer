@@ -92,6 +92,7 @@ export type Icon =
   | 'tiretype-track-competition'
   | 'tiretype-uhp'
   | 'tiretype-winter'
+  | 'tire-types-search'
   | 'trending'
   | 'twitter'
   | 'unknown'

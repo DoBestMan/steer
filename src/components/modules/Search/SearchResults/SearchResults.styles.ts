@@ -5,7 +5,7 @@ import {
   EXITING,
 } from 'react-transition-group/Transition';
 
-import { MQ, SPACING, StylesMap, TIME } from '~/lib/constants';
+import { COLORS, MQ, SPACING, StylesMap, TIME } from '~/lib/constants';
 
 export const animationStyles = {
   [`listbox_${ENTERING}`]: {
@@ -25,6 +25,25 @@ export const animationStyles = {
 };
 
 const styles: StylesMap = {
+  divider: {
+    backgroundColor: COLORS.ORANGE.TINT_70,
+    height: '1px',
+    margin: '0px 20px',
+    position: 'relative',
+    [MQ.M]: {
+      display: 'none',
+    },
+  },
+  dividerLabel: {
+    backgroundColor: COLORS.GLOBAL.ORANGE,
+    color: COLORS.ORANGE.TINT_70,
+    fontSize: '0.75rem',
+    left: '50%',
+    padding: '0 11px',
+    position: 'absolute',
+    top: '50%',
+    transform: 'translate(-50%, -50%)',
+  },
   listboxRoot: {
     listStyle: 'none',
     transition: `opacity ${TIME.MS600}ms ease, transform ${TIME.MS300}ms ease`,
