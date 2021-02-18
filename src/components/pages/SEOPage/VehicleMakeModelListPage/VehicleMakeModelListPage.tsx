@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router';
+
 import BreadcrumbsComponent, {
   BreadcrumbsItem,
 } from '~/components/global/Breadcrumbs/Breadcrumbs';
@@ -21,6 +23,9 @@ interface Props {
 
 function VehicleMakeModelList({ pageData }: Props) {
   const { makeName, makeModelName, header, list } = pageData;
+  //We need to use URL make/Model name which are slugged from API.
+  const router = useRouter();
+  const { make, model } = router.query;
   const modelListTableData = mapModelListData(list);
   const pageBreadCrumbData: BreadcrumbsItem[] = mapArrayToBreadcrumbs([
     {
@@ -31,11 +36,11 @@ function VehicleMakeModelList({ pageData }: Props) {
     },
     {
       label: makeName,
-      url: `/vehicles/${makeName.toLowerCase()}-tires`,
+      url: `/vehicles/${make}`,
     },
     {
       label: makeName + ' ' + makeModelName + ' tires',
-      url: `/vehicles/${makeName.toLowerCase()}-tires/${makeModelName.toLowerCase()}`,
+      url: `/vehicles/${make}/${model}`,
     },
   ]);
   const meta: MetaProps = {
