@@ -22,7 +22,7 @@ export interface SiteImage {
   /**
    * Discriminator when icons and images are used with oneOf
    */
-  type: ICON_IMAGE_TYPE.IMAGE | ICON_IMAGE_TYPE.SIZE;
+  type: ICON_IMAGE_TYPE.IMAGE;
 
   /**
    * Width

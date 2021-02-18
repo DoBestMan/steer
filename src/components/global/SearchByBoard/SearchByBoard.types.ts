@@ -1,1 +1,1 @@
-export type CTAIconTypes = 'vehicle' | 'tireSize' | 'brand' | 'type';
+export type CTAIconTypes = 'vehicle' | 'tireSize' | 'brand';

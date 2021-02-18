@@ -41,13 +41,6 @@ const styles: StylesMap = {
     color: COLORS.GLOBAL.WHITE,
     padding: `${SPACING.SIZE_05}px 7px`,
   },
-  [SitePromotionStyleEnum.SitePromotionItemFilterPill]: {
-    backgroundColor: COLORS.GLOBAL.WHITE,
-    border: 'none',
-    borderRadius: RADIUS.RADIUS_8,
-    color: COLORS.GLOBAL.BLACK,
-    padding: `4px ${SPACING.SIZE_10}px`,
-  },
   uppercase: {
     textTransform: 'uppercase',
   },
@@ -84,14 +77,6 @@ export const clickableStyles = {
     },
     ':active': {
       borderColor: COLORS.ORANGE.TINT_30_SOLID,
-    },
-  },
-  [SitePromotionStyleEnum.SitePromotionItemFilterPill]: {
-    ':hover, :focus:not(:active)': {
-      borderColor: COLORS.ORANGE.SHADE_30_SOLID,
-    },
-    ':active': {
-      backgroundColor: COLORS.LIGHT.GRAY_10,
     },
   },
 };

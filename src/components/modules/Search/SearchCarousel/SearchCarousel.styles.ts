@@ -47,7 +47,6 @@ const styles: StylesMap = {
     display: 'flex',
     height: BUTTON_SIZE_S,
     justifyContent: 'center',
-    marginBottom: SPACING.SIZE_10,
     transition: `background-color ${TIME.MS100}ms ease, border-color ${TIME.MS100}ms ease`,
     width: BUTTON_SIZE_S,
     [MQ.M]: {
@@ -66,10 +65,6 @@ const styles: StylesMap = {
     '&:first-of-type': {
       marginLeft: GRID_MARGIN.S,
     },
-    alignItems: 'center',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
     paddingRight: SPACING.SIZE_15,
     [MQ.M]: {
       '&:first-of-type': {
@@ -84,17 +79,6 @@ const styles: StylesMap = {
       paddingRight: SPACING.SIZE_30,
     },
   },
-  carouselLabel: [
-    typography.eyebrow,
-    {
-      color: COLORS.GLOBAL.WHITE,
-    },
-  ],
-  carouselText: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    lineHeight: 1.25,
-  },
   eyebrow: [
     typography.eyebrow,
     {
@@ -105,14 +89,6 @@ const styles: StylesMap = {
       },
     },
   ],
-  logoImage: {
-    width: SPACING.SIZE_65,
-    maxWidth: SPACING.SIZE_65,
-    [MQ.M]: {
-      width: SPACING.SIZE_100,
-      maxWidth: SPACING.SIZE_100,
-    },
-  },
   resultsGrid: {
     width: '100%',
   },

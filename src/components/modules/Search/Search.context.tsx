@@ -30,16 +30,13 @@ export interface SearchContextProps {
   isLoadingResults: boolean;
   lockSearchStateToBrand: () => void;
   lockSearchStateToTireSize: () => void;
-  lockSearchStateToTireType: () => void;
   lockSearchStateToVehicle: (vehicleName?: string) => void;
   pastSearches: SiteSearchResultGroup;
-  queryParamLabel?: string;
   routeQueryParamOptions?: RouteQueryParamOptions;
   searchQuery: ({ queryText, queryType }: SearchDataParams) => void;
   searchResults: Results;
   searchState: string;
   setHasLockedSearchState: (hasLockedSearchState: boolean) => void;
-  setQueryParamLabel: (queryParamLabel?: string) => void;
   setRouteQueryParamOptions: (
     routeQueryParamOptions?: RouteQueryParamOptions,
   ) => void;
@@ -71,7 +68,6 @@ function useContextSetup(): SearchContextProps {
     lockSearchStateToBrand,
     lockSearchStateToTireSize,
     lockSearchStateToVehicle,
-    lockSearchStateToTireType,
     searchState,
     setHasLockedSearchState,
     setSearchState,
@@ -84,7 +80,6 @@ function useContextSetup(): SearchContextProps {
   const [routeQueryParamOptions, setRouteQueryParamOptions] = useState<
     RouteQueryParamOptions | undefined
   >();
-  const [queryParamLabel, setQueryParamLabel] = useState<string | undefined>();
 
   return {
     addPastSearch,
@@ -96,16 +91,13 @@ function useContextSetup(): SearchContextProps {
     isLoadingResults,
     lockSearchStateToBrand,
     lockSearchStateToTireSize,
-    lockSearchStateToTireType,
     lockSearchStateToVehicle,
     pastSearches,
-    queryParamLabel,
     routeQueryParamOptions,
     searchQuery,
     searchResults,
     searchState,
     setHasLockedSearchState,
-    setQueryParamLabel,
     setRouteQueryParamOptions,
     setSearchState,
     setShouldPreventLinkNavigation,

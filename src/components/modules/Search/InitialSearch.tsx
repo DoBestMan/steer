@@ -2,19 +2,15 @@ import { useEffect, useState } from 'react';
 import { Transition } from 'react-transition-group';
 import { TransitionStatus } from 'react-transition-group/Transition';
 
-import Grid from '~/components/global/Grid/Grid';
-import GridItem from '~/components/global/Grid/GridItem';
 import Link from '~/components/global/Link/Link';
 import { SiteSearchResultGroup } from '~/data/models/SiteSearchResultGroup';
 import { SiteSearchResultTextItem } from '~/data/models/SiteSearchResultTextItem';
-import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { LINK_TYPES, THEME, TIME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import { initialSearchCategoriesData } from './Search.data';
 import styles from './Search.styles';
-import { SearchResult, SearchResultEnum, SearchTypeEnum } from './Search.types';
-import SearchCTA from './SearchCTA/SearchCTA';
+import { SearchResult, SearchResultEnum } from './Search.types';
 import SearchSection from './SearchSection/SearchSection';
 
 interface Props {
@@ -33,13 +29,10 @@ function InitialSearch({
   shouldShowPastSearches,
 }: Props) {
   const [visiblePastSearches, setVisiblePastSearches] = useState(pastSearches);
-  const { greaterThan } = useBreakpoints();
 
   useEffect(() => {
     setVisiblePastSearches(pastSearches);
   }, [pastSearches]);
-
-  const isLarge = greaterThan.L;
 
   const pastSearchesEyebrow = (
     <div css={styles.clearPastSearchesWrapper}>
@@ -66,28 +59,13 @@ function InitialSearch({
 
   return (
     <>
-      <Grid css={styles.searchSectionWrapper}>
-        <GridItem gridColumnL="3/13" css={isLarge && styles.searchCTA}>
-          <SearchCTA
-            type={SearchTypeEnum.FUNNEL}
-            label={ui('search.shopTiresBy')}
-            onClick={onSearchCategoryClick}
-            siteSearchResultList={[
-              initialSearchCategoriesData[0],
-              initialSearchCategoriesData[1],
-            ]}
-          />
-          <SearchCTA
-            type={SearchTypeEnum.FILTER}
-            label={ui('search.filterBy')}
-            onClick={onSearchCategoryClick}
-            siteSearchResultList={[
-              initialSearchCategoriesData[2],
-              initialSearchCategoriesData[3],
-            ]}
-          />
-        </GridItem>
-      </Grid>
+      <div css={styles.searchSectionWrapper}>
+        <SearchSection
+          label={ui('search.searchBy')}
+          onClick={onSearchCategoryClick}
+          siteSearchResultList={initialSearchCategoriesData}
+        />
+      </div>
       <Transition
         appear
         mountOnEnter

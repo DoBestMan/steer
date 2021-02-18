@@ -119,10 +119,8 @@ function TypePage({ typeData }: TypePageData) {
           name: capitalize(typeName),
         })}
         hasBrand={false}
-        hasTireType={false}
         hasVehicle={!HIDE_VEHICLE_TYPES.includes(typeName)}
         params={searchParams}
-        queryParamLabel={typeName}
       />
       <div css={styles.mostPopularBrandsContainer}>
         <Grid>

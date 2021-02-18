@@ -2,18 +2,16 @@ import { useState } from 'react';
 
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
-import { CSSStyles } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import styles from './ControlButton.styles';
 
 interface ButtonProps {
   currentIndex: number;
-  customStyles?: CSSStyles;
   slideTo: (index: number) => void;
 }
 
-function PrevButton({ currentIndex, slideTo, customStyles }: ButtonProps) {
+function PrevButton({ currentIndex, slideTo }: ButtonProps) {
   const [isHoverd, setHovered] = useState(false);
 
   function handleClick() {
@@ -34,12 +32,7 @@ function PrevButton({ currentIndex, slideTo, customStyles }: ButtonProps) {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       aria-label={ui('pdp.tireImage.nextButtonLabel')}
-      css={[
-        styles.root,
-        styles.prevButton,
-        isHoverd && styles.isHoverd,
-        customStyles,
-      ]}
+      css={[styles.root, styles.prevButton, isHoverd && styles.isHoverd]}
     >
       <Icon name={ICONS.CHEVRON_LEFT} />
     </button>

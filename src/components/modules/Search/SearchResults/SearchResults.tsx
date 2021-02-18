@@ -8,10 +8,7 @@ import { SiteSearchResultTextItem } from '~/data/models/SiteSearchResultTextItem
 import { SearchResult, SearchResultEnum } from '../Search.types';
 import SearchCarousel from '../SearchCarousel/SearchCarousel';
 import SearchSection from '../SearchSection/SearchSection';
-import Divider from './Divider';
 import styles from './SearchResults.styles';
-
-const TIRE_TYPE_LABELS = ['Vehicle Type', 'Tire Category'];
 
 export interface Props {
   handleValueSelection: (value: SearchResult) => void;
@@ -54,37 +51,28 @@ function SearchResults({
                 searchGroup.siteSearchResultList[0].type ===
                 SearchResultEnum.IMAGE;
 
-              const isTireTypeSearch = TIRE_TYPE_LABELS.includes(
-                searchGroup.label as string,
-              );
-
               return (
-                <>
-                  <li css={styles.searchResultsGridItem} key={index}>
-                    {isCarousel ? (
-                      <SearchCarousel
-                        label={searchGroup.label}
-                        siteSearchResultList={
-                          searchGroup.siteSearchResultList as SiteSearchResultImageItem[]
-                        }
-                        onClick={handleValueSelection}
-                      />
-                    ) : (
-                      <SearchSection
-                        label={searchGroup.label}
-                        siteSearchResultList={
-                          searchGroup.siteSearchResultList as SiteSearchResultTextItem[]
-                        }
-                        onClick={handleValueSelection}
-                        sectionIndex={index}
-                        selectedItemIndex={selectedItemIndex}
-                      />
-                    )}
-                  </li>
-                  {isTireTypeSearch && index < results.length - 1 && (
-                    <Divider />
+                <li css={styles.searchResultsGridItem} key={index}>
+                  {isCarousel ? (
+                    <SearchCarousel
+                      label={searchGroup.label}
+                      siteSearchResultList={
+                        searchGroup.siteSearchResultList as SiteSearchResultImageItem[]
+                      }
+                      onClick={handleValueSelection}
+                    />
+                  ) : (
+                    <SearchSection
+                      label={searchGroup.label}
+                      siteSearchResultList={
+                        searchGroup.siteSearchResultList as SiteSearchResultTextItem[]
+                      }
+                      onClick={handleValueSelection}
+                      sectionIndex={index}
+                      selectedItemIndex={selectedItemIndex}
+                    />
                   )}
-                </>
+                </li>
               );
             })}
           </ul>

@@ -96,7 +96,7 @@ const styles: StylesMap = {
       height: '100%',
       left: 0,
       opacity: 1,
-      paddingBottom: SPACING.SIZE_15,
+      paddingBottom: SPACING.SIZE_10,
       paddingLeft: SPACING.SIZE_20,
       pointerEvents: 'none',
       position: 'absolute',

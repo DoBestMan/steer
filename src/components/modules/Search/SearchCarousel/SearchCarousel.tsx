@@ -3,12 +3,7 @@ import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import Image from '~/components/global/Image/Image';
 import BaseLink from '~/components/global/Link/BaseLink';
-import { useSearchContext } from '~/components/modules/Search/Search.context';
-import { useSearchModalContext } from '~/components/modules/Search/SearchModal.context';
-import { SiteSearchResultActionQuery } from '~/data/models/SiteSearchResultActionQuery';
 import { SiteSearchResultImageItem } from '~/data/models/SiteSearchResultImageItem';
-import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
-import { ROUTE_MAP, ROUTES } from '~/lib/constants';
 
 import { useFocusScrollIntoView } from '../Search.hooks';
 import { SearchActionType } from '../Search.types';
@@ -26,48 +21,8 @@ function SearchCarousel({
   siteSearchResultList,
 }: SearchCarouselProps) {
   const { onFocus, pushRefToArray } = useFocusScrollIntoView({});
-  const {
-    searchState,
-    clearSearchResults,
-    setSearchState,
-    setQueryParamLabel,
-    setRouteQueryParamOptions,
-  } = useSearchContext();
-  const { setCurrentInputQuery } = useSearchModalContext();
-
   const handleClick = (searchResult: SiteSearchResultImageItem) => () => {
-    if (searchState === 'brand') {
-      const {
-        queryText,
-        queryType,
-      } = searchResult.action as SiteSearchResultActionQuery;
-      const params = { [queryType]: queryText };
-
-      const resetQuery = {
-        queryText: '',
-        queryType: '',
-      };
-
-      clearSearchResults();
-      setSearchState('');
-      setCurrentInputQuery(resetQuery);
-
-      const searchInput = document.querySelector(
-        '[data-testid="search-input"]',
-      ) as HTMLInputElement;
-      searchInput?.focus();
-
-      setRouteQueryParamOptions({
-        routes: [
-          ROUTE_MAP[ROUTES.VEHICLE_CATALOG],
-          ROUTE_MAP[ROUTES.TIRE_SIZE_CATALOG_OR_CATEGORY],
-        ],
-        params,
-      });
-      setQueryParamLabel(searchResult.label);
-    } else {
-      onClick(searchResult);
-    }
+    onClick(searchResult);
   };
 
   const widths = [90, 120, 140];
@@ -89,8 +44,6 @@ function SearchCarousel({
           {siteSearchResultList.map((item, index) => {
             if (item.action.type === SearchActionType.LINK) {
               const { href, isExternal } = item.action.link;
-              const isTireSizeType = item.image.type === ICON_IMAGE_TYPE.SIZE;
-
               return (
                 <div
                   css={styles.carouselItem}
@@ -104,22 +57,15 @@ function SearchCarousel({
                     onClick={handleClick(item)}
                     onFocus={onFocus(index)}
                   >
-                    {isTireSizeType ? (
-                      <span css={styles.carouselText}>{item.image.src}</span>
-                    ) : (
-                      <div css={styles.logoImage}>
-                        <Image
-                          altText={item.image.altText}
-                          responsive
-                          src={item.image.src}
-                          widths={widths}
-                        />
-                      </div>
-                    )}
+                    <Image
+                      altText={item.image.altText}
+                      height={item.image.height}
+                      responsive
+                      src={item.image.src}
+                      width={item.image.width || 50} // TODO: with real data, "|| 50" should be useless
+                      widths={widths}
+                    />
                   </BaseLink>
-                  {!isTireSizeType && (
-                    <p css={styles.carouselLabel}>{item.label}</p>
-                  )}
                 </div>
               );
             }
@@ -135,22 +81,14 @@ function SearchCarousel({
                   onClick={handleClick(item)}
                   onFocus={onFocus(index)}
                 >
-                  {item.image.type === ICON_IMAGE_TYPE.SIZE ? (
-                    <span css={styles.carouselText}>{item.image.src}</span>
-                  ) : (
-                    <div css={styles.logoImage}>
-                      <Image
-                        altText={item.image.altText}
-                        responsive
-                        src={item.image.src}
-                        widths={widths}
-                      />
-                    </div>
-                  )}
+                  <Image
+                    altText={item.image.altText}
+                    src={item.image.src}
+                    width={item.image.width || 50} // TODO: with real data, "|| 50" should be useless
+                    height={item.image.height}
+                    widths={widths}
+                  />
                 </button>
-                {item.image.type !== ICON_IMAGE_TYPE.SIZE && (
-                  <p css={styles.carouselLabel}>{item.label}</p>
-                )}
               </div>
             );
           })}

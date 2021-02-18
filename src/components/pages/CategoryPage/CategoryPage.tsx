@@ -108,10 +108,8 @@ function CategoryPage({ categoryData }: CategoryPageData) {
           name: capitalize(categoryName),
         })}
         hasBrand={false}
-        hasTireType={false}
         hasVehicle={!HIDE_CATEGORY_TYPES.includes(categoryName)}
         params={searchParams}
-        queryParamLabel={categoryName}
       />
       <div css={styles.mostPopularBrandsContainer}>
         <Grid>

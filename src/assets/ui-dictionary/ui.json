@@ -284,7 +284,6 @@
     "tireSize": "Tire size",
     "title": "shop tires by",
     "brand": "Tire brand",
-    "tireType": "Tire Type",
     "interplotedTitle": "SHOP {{name}} TIRES BY",
     "zipSectionLabel": "Deliver to"
   },
@@ -635,9 +634,7 @@
     "cancelButtonLabel": "Cancel",
     "cancelButtonClear": "Clear",
     "clearPastSearchesButtonLabel": "Clear all",
-    "filterBy": "Filter By (Optional)",
     "frontTire": "Front:",
-    "filterPill": "{{label}} TIRES ONLY",
     "navLabel": "Shop",
     "notSure": "Not sure?",
     "pastSearches": "Past searches",
@@ -645,17 +642,15 @@
     "removeRearTire": "Remove",
     "searchBy": "Search by",
     "searchByTireSize": "Search by tire size",
-    "searchAutocompleteLabel": "Search by vehicle or tire size",
+    "searchAutocompleteLabel": "Search by vehicle, tire size or brand",
     "searchCategories": {
       "vehicle": "Vehicle",
       "tireSize": "Tire size",
-      "brand": "Tire Brand",
-      "popular": "Popular tires",
-      "tireType": "Tire Type"
+      "brand": "Brand",
+      "popular": "Popular tires"
     },
     "searchNoResults": "Sorry, no matching results found.",
     "searchError": "Sorry, something went wrong.",
-    "shopTiresBy": "Shop Tires By",
     "support": "Need support?",
     "findTireSize": {
       "eyebrow": "How to",

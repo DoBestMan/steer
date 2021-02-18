@@ -29,7 +29,6 @@ import {
   emptySiteSearchResultGroupData,
   initialSearchBrandData,
   initialSearchTireSizeData,
-  initialSearchTireTypeData,
   initialSearchVehicleData,
 } from './Search.data';
 import { SearchResult } from './Search.types';
@@ -339,24 +338,10 @@ export function useSearchState({
     setHasLockedSearchState(true);
   };
 
-  const lockSearchStateToTireType = () => {
-    const {
-      queryText,
-      queryType,
-    } = initialSearchTireTypeData.action as SiteSearchResultActionQuery;
-    setSearchState(SearchStateEnum.TIRE_TYPE);
-    searchQuery({
-      queryText,
-      queryType,
-    });
-    setHasLockedSearchState(true);
-  };
-
   return {
     hasLockedSearchState,
     lockSearchStateToBrand,
     lockSearchStateToTireSize,
-    lockSearchStateToTireType,
     lockSearchStateToVehicle,
     searchState,
     setHasLockedSearchState,
