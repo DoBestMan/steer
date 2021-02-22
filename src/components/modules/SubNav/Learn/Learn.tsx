@@ -1,3 +1,4 @@
+import Button from '~/components/global/Button/Button';
 import GridItem from '~/components/global/Grid/GridItem';
 import Link from '~/components/global/Link/Link';
 import Markdown from '~/components/global/Markdown/Markdown';
@@ -56,9 +57,9 @@ function Learn({
           ))}
         </ol>
         <p>
-          <Markdown isEditorial css={[styles.learnText, styles.text]}>
+          <Button css={[styles.learnText, styles.text]} as="a" href="/learn">
             {learnStepsData.learnMore}
-          </Markdown>
+          </Button>
         </p>
         <p css={styles.more}>You may also be interested in:</p>
         <ul css={styles.moreLinks}>
