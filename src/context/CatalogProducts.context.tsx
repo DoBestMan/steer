@@ -111,6 +111,7 @@ function useContextSetup({
     options: {
       onSuccess: (data) => {
         setProductsData(data?.siteCatalogProducts);
+        setDisplayedProducts([]);
         setPreviewFiltersData({
           totalMatches:
             data?.siteCatalogProducts.listResultMetadata.pagination?.total || 0,
