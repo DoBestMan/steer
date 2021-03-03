@@ -36,12 +36,13 @@ export interface UserPersonalizationProps {
 
 interface Props {
   children: ReactNode;
+  isStorybook?: boolean; // used for storybook only
 }
 
 const UserPersonalizationContext = createContext<UserPersonalizationProps>();
 
 // Exported for testing only
-export function useContextSetup() {
+export function useContextSetup(isStorybook?: boolean) {
   const [
     userPersonalizationData,
     setUserPersonalizationData,
@@ -60,6 +61,11 @@ export function useContextSetup() {
   );
 
   useEffect(() => {
+    // used for storybook only
+    if (isStorybook) {
+      return;
+    }
+
     async function updateLocationFromBrowser() {
       const latLngFromBrowser = (await browserLocationCheck().catch(
         (error) => error || null,
@@ -104,6 +110,9 @@ export function useContextSetup() {
 
     getData();
     updateLocationFromBrowser();
+
+    // this doesn't need to update for isStorybook
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   async function updateLocation(body: UserPersonalizationUpdate) {
@@ -148,8 +157,11 @@ export function useContextSetup() {
   };
 }
 
-export function UserPersonalizationContextProvider({ children }: Props) {
-  const value = useContextSetup();
+export function UserPersonalizationContextProvider({
+  children,
+  isStorybook,
+}: Props) {
+  const value = useContextSetup(isStorybook);
   return (
     <UserPersonalizationContext.Provider value={value}>
       {children}

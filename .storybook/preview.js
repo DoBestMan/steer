@@ -1,19 +1,23 @@
-import { addDecorator, addParameters } from '@storybook/react';
-import { withKnobs } from '@storybook/addon-knobs';
-import { withA11y } from '@storybook/addon-a11y';
+import './mockNextRouter';
 
 import { Global } from '@emotion/core';
-import { global } from '../src/styles/document/global.styles';
-import Layout from '../src/components/global/Layout/Layout'
+import { withA11y } from '@storybook/addon-a11y';
+import { withKnobs } from '@storybook/addon-knobs';
+import { addDecorator, addParameters } from '@storybook/react';
 
-import './mockNextRouter';
+import Layout from '../src/components/global/Layout/Layout';
+import { NavContextProvider } from '../src/context/Nav.context';
+import { UserPersonalizationContextProvider } from '../src/context/UserPersonalization.context';
+import { global } from '../src/styles/document/global.styles';
 
 const withGlobal = (cb) => (
   <>
     <Global styles={global} />
-    <Layout>
-      {cb()}
-    </Layout>
+    <NavContextProvider>
+      <UserPersonalizationContextProvider isStorybook>
+        <Layout>{cb()}</Layout>
+      </UserPersonalizationContextProvider>
+    </NavContextProvider>
   </>
 );
 
