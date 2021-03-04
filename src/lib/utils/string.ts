@@ -59,7 +59,7 @@ export const removeInchFromQueryParam = (str: string) =>
   str.replace('-inch', '');
 
 export const removeTireFromQueryParam = (str: string | string[]): string =>
-  str.toString().replace(/-tires$/, '');
+  str ? str.toString().replace(/-tires$/, '') : '';
 
 export const appendTiresToString = (str: string | string[]): string =>
   `${str.toString()}-tires`;

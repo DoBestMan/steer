@@ -12,6 +12,7 @@ import { SiteSearchResultTextItem } from '~/data/models/SiteSearchResultTextItem
 import { fromUserHistorySearchToSiteSearchResultGroup } from '~/data/models/UserHistorySearch';
 import { fromSiteSearchResultTextItemToUserHistorySearchItem } from '~/data/models/UserHistorySearchItem';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
+import { apiBootstrap } from '~/lib/api/bootstrap';
 import { apiGetSearchTypeahead, SearchDataParams } from '~/lib/api/search';
 import {
   apiAddUserSearchHistory,
@@ -137,6 +138,8 @@ export function usePastSearches() {
     emptySiteSearchResultGroupData,
   );
   const getPastSearches = useCallback(async function () {
+    // awaiting session token before calling apiGetUserSearchHistory which needs authentication
+    await apiBootstrap();
     const res = await apiGetUserSearchHistory();
     if (res.isSuccess) {
       const transformedResults = fromUserHistorySearchToSiteSearchResultGroup(
