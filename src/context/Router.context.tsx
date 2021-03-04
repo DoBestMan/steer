@@ -54,6 +54,7 @@ function useRouterContextSetup() {
     setCookie(null, CJ_CONSTANT.COOKIE_NAME, cjevent.toString(), {
       maxAge: 86400 * 395,
       path: '/',
+      secure: true,
       domain: CJ_CONSTANT.DOMAIN,
     });
   }
