@@ -19,6 +19,7 @@ const styles: StylesMap = {
   },
   secondaryDescription: {
     marginTop: SPACING.SIZE_20,
+    a: links.dark,
   },
   showFullDescription: [
     typography.primarySubhead,

@@ -25,7 +25,6 @@ function Description({ description, secondaryDescription }: Props) {
   const moreDescription =
     splitDescription.length > 1 && splitDescription.slice(1).join('\n\n');
   const moreDescriptionId = 'technical-specs-more-description';
-
   return (
     <>
       <Markdown
@@ -43,7 +42,9 @@ function Description({ description, secondaryDescription }: Props) {
             css={styles.moreDescription}
           >
             <Markdown css={styles.markdown}>{moreDescription}</Markdown>
-            <div css={styles.secondaryDescription}>{secondaryDescription}</div>
+            <Markdown css={styles.secondaryDescription}>
+              {secondaryDescription}
+            </Markdown>
           </div>
           <button
             aria-expanded={showFullDescription}
