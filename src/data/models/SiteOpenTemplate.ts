@@ -3,6 +3,7 @@ import {
   SiteModuleAccordion,
   SiteModuleArticleListWithFeatured,
   SiteModuleBreadcrumbsItem,
+  SiteModuleButtonGrid,
   SiteModuleDataTableVertical,
   SiteModuleGoogleForm,
   SiteModuleGraphicGrid,
@@ -28,7 +29,8 @@ export type OpenTemplateModules =
   | SiteModuleReviews
   | SiteModuleTextList
   | SiteModuleYouTubeVideo
-  | SiteModuleDataTableVertical;
+  | SiteModuleDataTableVertical
+  | SiteModuleButtonGrid;
 
 export interface PageData {
   slugUrl?: string;

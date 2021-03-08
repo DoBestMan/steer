@@ -34,6 +34,11 @@ const styles: StylesMap = {
       padding: `${SPACING.SIZE_180}px 0 ${SPACING.SIZE_80}px 0`,
     },
   },
+  sublink: {
+    marginBottom: SPACING.SIZE_20,
+    marginLeft: SPACING.SIZE_100,
+    width: 'fit-content',
+  },
   title: [
     typography.jumboHeadline,
     {

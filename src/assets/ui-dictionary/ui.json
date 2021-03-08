@@ -14,6 +14,10 @@
       "title": "Tire Deals & Rebates from Goodyear, Bridgestone, Hankook & More",
       "description": "Find the latest Tire Deals from major name brands like Goodyear Tires and Bridgestone Tires that you can use right on the SimpleTire.com website when looking for tires online."
     },
+    "sitemap": {
+      "title": "Sitemap",
+      "description": "Navigate to any page on SimpleTire using this sitemap"
+    },
     "types": {
       "title": "Shop for Different Tire Types Online",
       "description": "SimpleTire carries every type of tire for all vehicles, from passenger to light truck, ATV/UTV, farm and agriculture, golf, commercial and more. Enjoy fast and free delivery to you or the local shop of your choice."
@@ -920,5 +924,12 @@
   "makePages": {
     "label": "{{make}} ",
     "url": "/vehicles/{{make}}-tires"
+  },
+  "sitemap": {
+    "brandSectionTitle": "Shop by tire brand",
+    "vehicleTypeSectionTitle": "Shop tires by type",
+    "tireCategorySectionTitle": "Shop tires by category",
+    "vehicleSectionTitle": "Shop by Vehicle",
+    "tireSizeSectionTitle": "Shop tires by Size"
   }
 }

@@ -17,4 +17,5 @@ export type SiteModuleTypes =
   | 'SiteModuleDataTableVertical'
   | 'SiteModulePDPInstallation'
   | 'SiteModulePromotionCards'
-  | 'SiteModuleSearchByBoard';
+  | 'SiteModuleSearchByBoard'
+  | 'SiteModuleButtonGrid';
