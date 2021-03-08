@@ -1,9 +1,10 @@
 import differenceInDays from 'date-fns/differenceInDays';
 import lscache from 'lscache';
 
+import { FS_EVENT_NAMES } from '~/lib/constants/fullstory';
 import { LOCAL_STORAGE, PROPERTIES } from '~/lib/constants/localStorage';
 
-import { isBrowser } from '../utils/browser';
+import { setFSCustomEvent } from './fullstory';
 
 export interface LatLng {
   errorCode?: number;
@@ -22,12 +23,10 @@ export interface NavigatorErroCallbackProps {
 }
 
 const setCustomEventForLocationPopup = (allowed: boolean, denied: boolean) => {
-  if (isBrowser() && window.FS) {
-    window.FS.event('ST Location Popup', {
-      Allow: allowed,
-      'Dont Allow': denied,
-    });
-  }
+  setFSCustomEvent(FS_EVENT_NAMES.LOCATION_POPUP, {
+    Allow: allowed,
+    'Dont Allow': denied,
+  });
 };
 const LOCATION_PERMISSION_EXPIRATION = 90;
 

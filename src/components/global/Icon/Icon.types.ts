@@ -12,6 +12,8 @@ export type Icon =
   | 'best-price'
   | 'brands-circular'
   | 'calendar'
+  | 'calendar-big'
+  | 'camera'
   | 'checkmark'
   | 'checkmark-big'
   | 'chevron-down'

@@ -18,4 +18,5 @@ export type SiteModuleTypes =
   | 'SiteModulePDPInstallation'
   | 'SiteModulePromotionCards'
   | 'SiteModuleSearchByBoard'
+  | 'SiteModuleSimpleSnapButton'
   | 'SiteModuleButtonGrid';

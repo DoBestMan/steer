@@ -34,6 +34,7 @@ export enum ROUTES {
   PRODUCT_DETAIL_PLA = 'productDetailPla',
   PRODUCT_REVIEWS = 'productReviews',
   RETURNS = 'returns',
+  SIMPLE_SNAP_TIRE_SIZES = 'simplesnap',
   SITEMAP = 'sitemap',
   TERMS = 'terms',
   TIRE_BUYING_GUIDE = 'tireBuyingGuide',
@@ -118,6 +119,7 @@ export const ROUTE_MAP: { [routeName: string]: string } = {
   [ROUTES.PRESS]: '/press',
   [ROUTES.RETURNS]: '/returns-and-refunds',
   [ROUTES.TIRE_BUYING_GUIDE]: '/tire-buying-guide',
+  [ROUTES.SIMPLE_SNAP_TIRE_SIZES]: '/simplesnap',
 };
 
 export const CATALOG_ROUTES = [
@@ -159,4 +161,5 @@ export const ROUTE_LABELS: Record<string, string | null> = {
   [ROUTE_MAP[ROUTES.VEHICLES]]: ui('breadcrumbs.vehicles'),
   [ROUTE_MAP[ROUTES.TIRE_SIZES_LANDING]]: ui('breadcrumbs.tireSizes'),
   [ROUTE_MAP[ROUTES.TIRE_SALES]]: ui('breadcrumbs.tireSales'),
+  [ROUTE_MAP[ROUTES.SIMPLE_SNAP_TIRE_SIZES]]: ui('links.simpleSnap'),
 };

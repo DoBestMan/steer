@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
+import FeaturedGridWithSteps from '~/components/global/FeaturedGridWithSteps/FeaturedGridWithSteps';
 import Grid from '~/components/global/Grid/Grid';
 import PromotionCardCarousel from '~/components/global/PromotionCardCarousel/PromotionCardCarousel';
 import PromotionHeader from '~/components/global/PromotionHeader/PromotionHeader';
@@ -17,6 +18,7 @@ import { useSupportsPositionSticky } from '~/hooks/useSupportsPositionSticky';
 import { COLORS, TIME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
+import { howSimpleTireWorks } from './HomePage.constants';
 import {
   useChangeBackgroundColor,
   useContentSpacerHeight,
@@ -112,6 +114,8 @@ function HomePageBlackFriday({
       <div css={searchButtonContainerStyles} ref={buttonRef}>
         <SearchByBoard title={ui('searchByBoard.title')} isHomepage />
       </div>
+
+      <FeaturedGridWithSteps {...howSimpleTireWorks} />
 
       <div
         css={(promotionHeader || promotionCarousel) && styles.promotionSection}

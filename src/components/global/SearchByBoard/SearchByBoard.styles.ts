@@ -78,15 +78,16 @@ const styles: StylesMap = {
     },
   },
   ctaMenuItem: {
-    ':last-of-type': {
-      marginRight: 0,
+    ':first-of-type': {
+      marginLeft: SPACING.SIZE_15,
     },
-
     alignItems: 'center',
     cursor: 'pointer',
     display: 'flex',
     flexFlow: 'column',
     marginRight: SPACING.SIZE_10,
+    whiteSpace: 'nowrap',
+    width: 'auto',
     [MQ.M]: {
       marginRight: SPACING.SIZE_30,
     },
@@ -101,12 +102,13 @@ const styles: StylesMap = {
   headerSection: {
     display: 'flex',
     marginBottom: SPACING.SIZE_10,
+    padding: `0 ${SPACING.SIZE_20}px`,
     [MQ.M]: {
       marginBottom: 0,
     },
   },
   homepageContainer: {
-    padding: `${SPACING.SIZE_20}px ${SPACING.SIZE_20}px`,
+    padding: `${SPACING.SIZE_20}px 0`,
     [MQ.M]: {
       display: 'flex',
       padding: `${SPACING.SIZE_20}px ${SPACING.SIZE_40}px`,

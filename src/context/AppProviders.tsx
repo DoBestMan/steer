@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 
 import { SearchContextProvider } from '~/components/modules/Search/Search.context';
 import { SearchModalContextProvider } from '~/components/modules/Search/SearchModal.context';
+import { TireSnapModalContextProvider } from '~/components/modules/TireSnap/TireSnapModal.context';
 import { SiteGlobals } from '~/data/models/SiteGlobals';
 import { SiteMenu } from '~/data/models/SiteMenu';
 import { SiteNotificationList } from '~/data/models/SiteNotificationsList';
@@ -41,15 +42,19 @@ function AppProviders({
             <FooterContextProvider>
               <SearchContextProvider>
                 <SearchModalContextProvider>
-                  <GlobalToastContextProvider>
-                    <RouterContextProvider>
-                      <SiteNotificationsContextProvider
-                        value={siteNotificationContextValue}
-                      >
-                        <ModalContextProvider>{children}</ModalContextProvider>
-                      </SiteNotificationsContextProvider>
-                    </RouterContextProvider>
-                  </GlobalToastContextProvider>
+                  <TireSnapModalContextProvider>
+                    <GlobalToastContextProvider>
+                      <RouterContextProvider>
+                        <SiteNotificationsContextProvider
+                          value={siteNotificationContextValue}
+                        >
+                          <ModalContextProvider>
+                            {children}
+                          </ModalContextProvider>
+                        </SiteNotificationsContextProvider>
+                      </RouterContextProvider>
+                    </GlobalToastContextProvider>
+                  </TireSnapModalContextProvider>
                 </SearchModalContextProvider>
               </SearchContextProvider>
             </FooterContextProvider>

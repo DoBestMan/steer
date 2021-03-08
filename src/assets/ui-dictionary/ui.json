@@ -288,6 +288,7 @@
     "tireSize": "Tire size",
     "title": "shop tires by",
     "brand": "Tire brand",
+    "tireSnap": "Simple Snap",
     "interplotedTitle": "SHOP {{name}} TIRES BY",
     "zipSectionLabel": "Deliver to"
   },
@@ -829,6 +830,7 @@
     "returns": "Return / refund policy",
     "shippingPolicy": "Shipping Policy",
     "sitemap": "Sitemap",
+    "simpleSnap": "SimpleSnap tire size capture",
     "terms": "Terms & conditions",
     "tireBuyingGuide": "Tire buying guide",
     "tireReviews": "Tire reviews",
@@ -925,11 +927,63 @@
     "label": "{{make}} ",
     "url": "/vehicles/{{make}}-tires"
   },
-  "sitemap": {
-    "brandSectionTitle": "Shop by tire brand",
-    "vehicleTypeSectionTitle": "Shop tires by type",
-    "tireCategorySectionTitle": "Shop tires by category",
-    "vehicleSectionTitle": "Shop by Vehicle",
-    "tireSizeSectionTitle": "Shop tires by Size"
+  "simpleSnap": {
+    "instruction": "Snap the tire size, located on the sidewall, in the frame below.",
+    "tip1": "Snap within 1 feet",
+    "tip2": "Ensure good lighting",
+    "takePhotoButtonText": "Take photo",
+    "retakePhotoButtonText": "Retake photo",
+    "usePhotoButtonText": "Use photo",
+    "desktopAlertMessage": "This feature is designed for use with a mobile phone",
+    "errorMessages": {
+      "noCameraAccessible": "No camera device accessible. Please connect your camera or try a different browser.",
+      "permissionDenied": "Permission denied. Please refresh and give camera permission.",
+      "switchCamera": "It is not possible to switch camera to different one because there is only one video device accessible.",
+      "canvas": "Canvas is not supported."
+    },
+    "tireSnapModal": {
+      "title": "<span>How to</span><br />Use SimpleSnap.",
+      "instructions": "Locate the tire size on the sidewall of your tire.|Focus your camera on the tire size.|Snap the picture when you’re ready.",
+      "image": {
+        "src": "https://images.simpletire.com/image/upload/v1614798490/steer/simplesnap/tire_size_framed.png",
+        "alt": "Time size image"
+      },
+      "note": "Things to keep in mind.",
+      "description": "Make sure the picture your taking is in good light and not at an angle shooting down or up at the tire’s sidewall. No need to worry about the tire size being upside down.",
+      "buttonText": "All set. I’m ready to take the picture"
+    },
+    "loadingScreen": {
+      "title": "Loading your tire image through<span> SimpleSnap.</span>",
+      "description": "Retrieving your tire size",
+      "image": {
+        "src": "https://images.simpletire.com/image/upload/v1614801454/steer/simplesnap/tire_loader.gif",
+        "alt": "Loading Results"
+      }
+    },
+    "failureScreen": {
+      "message": "We were unable to find your tire size.",
+      "retakePhotoButtonText": "Retake",
+      "searchButtonText": "Search another way",
+      "instructions": "Locate the tire size on the sidewall of your tire.|Focus your camera on the tire size straight on. Avoid high and low angles.|Make sure you are close to the tire to visibly capture the tire size.",
+      "note": "Things to keep in mind:",
+      "image": {
+        "src": "https://images.simpletire.com/image/upload/v1614884214/steer/simplesnap/sad_smiley.png",
+        "alt": "Transaction failed image"
+      }
+    },
+    "successScreen": {
+      "title": "We've found your tire size.",
+      "description": "Redirecting you to your tire results"
+    },
+    "simpleSnapButtonModule": {
+      "userInfo": "<p>To try SimpleSnap , visit simpletire.com <br />on your mobile phone.</p>"
+    },
+    "sitemap": {
+      "brandSectionTitle": "Shop by tire brand",
+      "vehicleTypeSectionTitle": "Shop tires by type",
+      "tireCategorySectionTitle": "Shop tires by category",
+      "vehicleSectionTitle": "Shop by Vehicle",
+      "tireSizeSectionTitle": "Shop tires by Size"
+    }
   }
 }

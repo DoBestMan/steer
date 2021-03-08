@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 import { AccordionProps } from '~/components/global/Accordion/Accordion';
 import { ArticleListWithFeaturedProps } from '~/components/global/ArticleListWithFeatured/ArticleListWithFeatured';
 import { ButtonGridProps } from '~/components/global/ButtonGrid/ButtonGrid';
@@ -15,7 +17,7 @@ import { SiteLinkWithLabel } from '~/data/models/SiteLinkWithLabel';
 import { SiteModuleTypes } from '~/data/models/SiteModuleTypes.ts';
 import { SiteReviews } from '~/data/models/SiteReviews';
 import { TextBasedNavigationProps } from '~/data/models/TextBasedNavigationProps';
-import { THEME } from '~/lib/constants';
+import { BUTTON_STYLE, THEME } from '~/lib/constants';
 
 import { SiteDealsCarousel } from './SiteDealsCarousel';
 import { SiteGraphicTile } from './SiteGraphicTile';
@@ -89,6 +91,12 @@ export interface SiteModulePDPInstallation
 export interface SiteModuleSearchByBoard
   extends SearchByBoardProps,
     SiteModule {}
+
+export interface SiteModuleSimpleSnapButton extends SiteModule {
+  buttonLabel: ReactNode;
+  style?: BUTTON_STYLE;
+  theme?: THEME;
+}
 
 export interface SiteModulePromotionCards
   extends SiteDealsCarousel,

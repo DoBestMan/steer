@@ -132,7 +132,12 @@ const styles: StylesMap = {
       },
     },
   ],
-
+  simpleSnapSection: {
+    order: 5,
+    marginTop: SPACING.SIZE_40,
+    paddingTop: SPACING.SIZE_40,
+    color: COLORS.LIGHT.GRAY_70,
+  },
   socialHeading: {
     display: 'none',
   },

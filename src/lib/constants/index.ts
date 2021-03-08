@@ -24,6 +24,7 @@ export * from './ratings';
 export * from './ratings.types';
 export * from './reviews';
 export * from './routes';
+export * from './simple-snap';
 export * from './spacing';
 export * from './static-generation';
 export * from './storybook';

@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 
 import Car from '~/components/global/Car/Car';
+import Carousel from '~/components/global/Carousel/Carousel';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import Icon from '~/components/global/Icon/Icon';
@@ -8,9 +9,11 @@ import { ICONS } from '~/components/global/Icon/Icon.constants';
 import { NAV_TARGETS } from '~/components/modules/Nav/Nav.types';
 import { useSearchContext } from '~/components/modules/Search/Search.context';
 import { useSearchModalContext } from '~/components/modules/Search/SearchModal.context';
+import { useTireSnapModalContext } from '~/components/modules/TireSnap/TireSnapModal.context';
 import { useNavContext } from '~/context/Nav.context';
 import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
 import { SiteSearchResultActionQuery } from '~/data/models/SiteSearchResultActionQuery';
+import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { ROUTE_MAP, ROUTES } from '~/lib/constants';
 import { isBrowser } from '~/lib/utils/browser';
 import { ui } from '~/lib/utils/ui-dictionary';
@@ -64,8 +67,12 @@ function SearchByBoard({
     setRouteQueryParamOptions,
   } = useSearchContext();
   const { setIsSearchOpen, setCurrentInputQuery } = useSearchModalContext();
+  const { setIsTireSnapOpen } = useTireSnapModalContext();
   const { userPersonalizationData } = useUserPersonalizationContext();
   const { createSelectLinkHandler, toggleSubNav } = useNavContext();
+  const { isMobile } = useBreakpoints();
+  const showSimpleSnap = isMobile ? true : false;
+
   const handleLocationClick = useCallback(() => {
     const linkHandler = createSelectLinkHandler({
       target: NAV_TARGETS.LOCATION,
@@ -175,11 +182,26 @@ function SearchByBoard({
       },
       type: CTA_TYPES.BRAND,
     },
+    {
+      action: {
+        queryText: '',
+        queryType: 'simplesnap',
+        type: 'SiteSearchResultActionQuery',
+      },
+      isShow: showSimpleSnap,
+      label: ui('searchByBoard.tireSnap'),
+      onClick: () => () => {
+        setIsTireSnapOpen(true);
+      },
+      type: CTA_TYPES.SIMPLE_SNAP,
+    },
   ];
   const iconMap = {
+    [CTA_TYPES.SIMPLE_SNAP]: <Icon name={CTA_ICONS.ICON_SIMPLE_SNAP} />,
     [CTA_TYPES.BRAND]: <Icon name={CTA_ICONS.ICON_BRANDS_CIRCULAR} />,
     [CTA_TYPES.TIRE_SIZE]: <Icon name={CTA_ICONS.ICON_TIRE_SIZE} />,
     [CTA_TYPES.VEHICLE]: <Car carId={CTA_ICONS.ICON_VEHICLE} />,
+    [CTA_TYPES.BRAND]: <Icon name={CTA_ICONS.ICON_BRANDS_CIRCULAR} />,
   };
 
   const renderCTAList = (
@@ -214,9 +236,12 @@ function SearchByBoard({
           )}
         </div>
       </div>
-      <ul
+      <Carousel
         css={styles.ctaMenu}
+        WrapperEl={'ul' as any} // eslint-disable-line @typescript-eslint/no-explicit-any
+        freeScroll
         data-component-class={DATA_ATTRIBUTES.COMPONENT_MENU}
+        rebuildOnUpdate
       >
         {CTAList.filter((cta) => cta.isShow).map((cta) => (
           <li
@@ -237,7 +262,7 @@ function SearchByBoard({
             <p css={styles.ctaMenuLabel}>{cta.label}</p>
           </li>
         ))}
-      </ul>
+      </Carousel>
     </>
   );
 

@@ -132,6 +132,16 @@ const styles: StylesMap = {
               },
             },
           },
+          ['[data-icon-type="simpleSnap"]']: {
+            svg: {
+              height: '18px',
+              width: '18px',
+              [MQ.M]: {
+                height: '39px',
+                width: '39px',
+              },
+            },
+          },
           ['[data-icon-type="tireSize"]']: {
             svg: {
               height: '18px',

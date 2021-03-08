@@ -29,6 +29,7 @@ import { removeUrlParams } from '~/lib/utils/string';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import FooterContainer from '../Footer/Footer.container';
+import TireSnapModal from '../TireSnap/TireSnapModal';
 import {
   PAGE_PATHS_NOT_TO_SCROLL_TOP,
   QUERY_PARAMS_NOT_TO_SCROLL_TOP,
@@ -178,7 +179,7 @@ function App({ children, ...rest }: Props) {
         {isFooterVisible && <FooterContainer />}
 
         <SearchModal />
-
+        <TireSnapModal />
         <LoadingBar isLoading={isRouteLoading} />
       </ErrorBoundary>
     </div>

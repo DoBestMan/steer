@@ -20,6 +20,7 @@ import ModuleQuote from './modules/ModuleQuote/ModuleQuote';
 import ModuleReview from './modules/ModuleReview/ModuleReview';
 import ModuleSearchByBoard from './modules/ModuleSearchByBoard/ModuleSearchByBoard';
 import ModuleSeparator from './modules/ModuleSeparator/ModuleSeparator';
+import ModuleSimpleSnapButton from './modules/ModuleSimpleSnapButton/ModuleSimpleSnapButton';
 import ModuleSiteLinkWithLabel from './modules/ModuleSiteLinkWithLabel/ModuleSiteLinkWithLabel';
 import ModuleTextList from './modules/ModuleTextList/ModuleTextList';
 import ModuleTireSearchBillboard from './modules/ModuleTireSearchBillboard/ModuleTireSearchBillboard';
@@ -50,6 +51,7 @@ function EditorialModules({ moduleType, moduleData }: EditorialModulesProps) {
     SiteModuleReview: ModuleReview,
     SiteModuleSearchByBoard: ModuleSearchByBoard,
     SiteModuleSeparator: ModuleSeparator,
+    SiteModuleSimpleSnapButton: ModuleSimpleSnapButton,
     SiteModuleTextList: ModuleTextList,
     SiteModuleTireSearchBillboard: ModuleTireSearchBillboard,
     SiteYouTubeVideo: ModuleYouTubeVideo,

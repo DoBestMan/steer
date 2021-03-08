@@ -62,7 +62,14 @@ export const footerLinksData = {
       },
     ],
   },
-
+  simpleSnapLink: {
+    links: [
+      {
+        action: ROUTE_MAP[ROUTES.SIMPLE_SNAP_TIRE_SIZES],
+        text: ui('links.simpleSnap'),
+      },
+    ],
+  },
   social: {
     links: [
       {

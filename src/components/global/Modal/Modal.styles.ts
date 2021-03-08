@@ -11,6 +11,7 @@ import {
   SPACING,
   StylesMap,
   TIME,
+  Z_INDEX,
 } from '~/lib/constants';
 import {
   fadeIn,
@@ -111,6 +112,7 @@ const styles: StylesMap = {
     [MQ.M]: {
       top: SPACING.SIZE_35,
     },
+    zIndex: Z_INDEX.FRONT,
   },
   fullScreenPadding: {
     padding: `${FULLSCREEN_PADDINGS.TOP}px ${FULLSCREEN_PADDINGS.RIGHT}px ${FULLSCREEN_PADDINGS.BOTTOM}px`,

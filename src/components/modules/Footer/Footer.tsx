@@ -6,6 +6,7 @@ import EmailSupport from '~/components/modules/Support/EmailSupport';
 import LiveChatSupport from '~/components/modules/Support/LiveChatSupport';
 import PhoneSupport from '~/components/modules/Support/PhoneSupport';
 import SupportHeading from '~/components/modules/Support/SupportHeading';
+import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
 
@@ -26,6 +27,7 @@ function Footer({
   isCustomerServiceEnabled,
   showPromotions = true,
 }: Props) {
+  const { isMobile } = useBreakpoints();
   return (
     <Grid as="footer" css={styles.container}>
       <GridItem
@@ -145,7 +147,11 @@ function Footer({
         <p css={styles.linksHeading}>{ui('footer.tires')}</p>
         <FooterLinkList links={footerLinksData.tires.links} />
       </GridItem>
-
+      {isMobile && (
+        <GridItem gridColumn="4/6" css={styles.simpleSnapSection}>
+          <FooterLinkList links={footerLinksData.simpleSnapLink.links} />
+        </GridItem>
+      )}
       <GridItem
         gridColumnS="3/6"
         gridColumnM="5/8"

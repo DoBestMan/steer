@@ -20,6 +20,13 @@ const Brandscircular = dynamic(
 const Calendar = dynamic(() => import('~/assets/icons/others/calendar.svg'), {
   ssr: false,
 });
+const Calendarbig = dynamic(
+  () => import('~/assets/icons/others/calendar-big.svg'),
+  { ssr: false },
+);
+const Camera = dynamic(() => import('~/assets/icons/others/camera.svg'), {
+  ssr: false,
+});
 const Checkmarkbig = dynamic(
   () => import('~/assets/icons/others/checkmark-big.svg'),
   { ssr: false },
@@ -326,6 +333,8 @@ export const ICONS_OTHER_MAP: Record<string, ReactElement> = {
   BEST_PRICE: <Bestprice />,
   BRANDS_CIRCULAR: <Brandscircular />,
   CALENDAR: <Calendar />,
+  CALENDAR_BIG: <Calendarbig />,
+  CAMERA: <Camera />,
   CHECKMARK_BIG: <Checkmarkbig />,
   CUSTOMER_SUPPORT: <Customersupport />,
   DROP_OFF_BIG: <Dropoffbig />,
