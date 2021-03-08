@@ -6,5 +6,6 @@ export interface SiteVehicleMakeModelProps {
   makeName: string;
   makeModelName: string;
   header: HeaderWithLogoProps;
+  body: string;
   list: Array<SiteVehicleMakeModelList>;
 }

@@ -9,6 +9,7 @@ import HeaderWithLogo, {
 import Meta from '~/components/global/Meta/Meta';
 import SearchByBoard from '~/components/global/SearchByBoard/SearchByBoard';
 import TextBasedList from '~/components/global/TextBasedList/TextBasedList';
+import ModuleMarkdown from '~/components/modules/EditorialModules/modules/ModuleMarkdown/ModuleMarkdown';
 import { navigationBreadcrumbPaddingTop } from '~/components/modules/Nav/Nav.styles';
 import { TextBasedNavigationListItem } from '~/data/models/TextBasedNavigationProps';
 import { ROUTES } from '~/lib/constants';
@@ -27,6 +28,7 @@ interface MakePageData {
   makeData: MakePageProps;
 }
 export interface MakePageProps {
+  body: string;
   header: HeaderWithLogoProps;
   models: Array<TextBasedNavigationListItem>;
   name: string;
@@ -34,6 +36,7 @@ export interface MakePageProps {
 
 function MakePage({ makeData }: MakePageData) {
   const name = makeData.name;
+  const body = makeData.body;
 
   const makeUrl = ui('makePages.url', {
     make: slugify(makeData.name),
@@ -84,6 +87,18 @@ function MakePage({ makeData }: MakePageData) {
             <HeaderWithLogo {...makeData.header} />
           </div>
           <h2 css={styles.header}>{pageSubHeader}</h2>
+        </GridItem>
+      </Grid>
+      <div css={styles.body}>
+        <ModuleMarkdown body={body} type={'SiteModuleMarkdown'} />
+      </div>
+      <Grid>
+        <GridItem
+          gridColumn={'2/6'}
+          gridColumnM={'2/8'}
+          gridColumnL={'2/14'}
+          gridColumnXL={'4/12'}
+        >
           <div css={styles.makeList}>
             <TextBasedList links={makeData.models} />
           </div>

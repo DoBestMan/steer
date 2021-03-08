@@ -7,7 +7,12 @@ function ModuleMarkdown({ body }: SiteModuleMarkdown) {
   return (
     <div data-component="module-markdown">
       <Grid>
-        <GridItem gridColumnL={'2/14'} gridColumnXL={'4/12'}>
+        <GridItem
+          gridColumn={'2/6'}
+          gridColumnM={'2/8'}
+          gridColumnL={'2/14'}
+          gridColumnXL={'4/12'}
+        >
           <Markdown isEditorial>{body}</Markdown>
         </GridItem>
       </Grid>

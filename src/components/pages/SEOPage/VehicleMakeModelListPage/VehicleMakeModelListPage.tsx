@@ -8,6 +8,7 @@ import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import HeaderWithLogo from '~/components/global/HeaderWithLogo/HeaderWithLogo';
 import Meta, { MetaProps } from '~/components/global/Meta/Meta';
+import ModuleMarkdown from '~/components/modules/EditorialModules/modules/ModuleMarkdown/ModuleMarkdown';
 import { navigationBreadcrumbPaddingTop } from '~/components/modules/Nav/Nav.styles';
 import { SiteVehicleMakeModelProps } from '~/data/models/SiteVehicleMakeModelResponse';
 import { ROUTES } from '~/lib/constants/routes';
@@ -22,7 +23,7 @@ interface Props {
 }
 
 function VehicleMakeModelList({ pageData }: Props) {
-  const { makeName, makeModelName, header, list } = pageData;
+  const { makeName, makeModelName, header, body, list } = pageData;
   //We need to use URL make/Model name which are slugged from API.
   const router = useRouter();
   const { make, model } = router.query;
@@ -72,6 +73,18 @@ function VehicleMakeModelList({ pageData }: Props) {
               <HeaderWithLogo {...header} imageLabel={`${makeName}`} />
             )}
           </div>
+        </GridItem>
+      </Grid>
+      <div css={styles.body}>
+        <ModuleMarkdown body={body} type={'SiteModuleMarkdown'} />
+      </div>
+      <Grid>
+        <GridItem
+          gridColumn={'2/6'}
+          gridColumnM={'2/8'}
+          gridColumnL={'2/14'}
+          gridColumnXL={'4/12'}
+        >
           <div css={styles.dataTableHeader}>
             {ui('vehicles.modelPageTitle', {
               model: makeName + ' ' + makeModelName,

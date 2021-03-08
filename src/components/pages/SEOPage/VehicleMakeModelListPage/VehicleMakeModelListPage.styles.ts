@@ -2,6 +2,9 @@ import { MQ, SPACING, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
+  body: {
+    marginBottom: SPACING.SIZE_60,
+  },
   breadCrumbs: {
     marginBottom: SPACING.SIZE_40,
   },
@@ -25,9 +28,6 @@ const styles: StylesMap = {
       marginBottom: SPACING.SIZE_20,
     },
   ],
-  pageHeader: {
-    marginBottom: SPACING.SIZE_60,
-  },
 };
 
 export default styles;
