@@ -3,6 +3,7 @@ import Link from '~/components/global/Link/Link';
 import Markdown from '~/components/global/Markdown/Markdown';
 import Modal from '~/components/global/Modal/Modal';
 import EmailSupport from '~/components/modules/Support/EmailSupport';
+import LiveChatSupport from '~/components/modules/Support/LiveChatSupport';
 import PhoneSupport from '~/components/modules/Support/PhoneSupport';
 import SupportHeading from '~/components/modules/Support/SupportHeading';
 import { MODAL_THEME, THEME } from '~/lib/constants';
@@ -83,6 +84,9 @@ function ContentModal({
             </div>
 
             <EmailSupport isCustomerServiceEnabled={isCustomerServiceEnabled} />
+            <div css={styles.liveChatSupport}>
+              <LiveChatSupport />
+            </div>
           </div>
         )}
       </div>

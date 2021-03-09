@@ -52,6 +52,10 @@ const styles: StylesMap = {
       color: COLORS.LIGHT.GRAY_70,
     },
   ],
+  liveChatSupport: {
+    marginTop: SPACING.SIZE_20,
+    marginBottom: SPACING.SIZE_20,
+  },
   noSubtitle: {
     marginBottom: SPACING.SIZE_40,
     [MQ.M]: {
