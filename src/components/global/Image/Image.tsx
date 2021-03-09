@@ -117,7 +117,7 @@ function Image({
       <img
         css={[
           styles.image,
-          isLoaded && styles.isLoaded,
+          (isLoaded || loading === LOADING_OPTIONS.EAGER) && styles.isLoaded,
           ratio && responsive && styles.responsive,
         ]}
         onError={onError}

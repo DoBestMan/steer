@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 
 import { SiteGlobals } from '~/data/models/SiteGlobals';
 import { useApiDataWithDefault } from '~/hooks/useApiDataWithDefault';
+import { VIEWPORTS } from '~/lib/constants/viewport';
 import { createContext } from '~/lib/utils/context';
 
 // exported for testing
@@ -40,13 +41,22 @@ function useContextSetup(defaultData: { siteGlobals?: SiteGlobals }) {
 
 interface Props {
   children: ReactNode;
+  userAgentType?: string;
   value?: SiteGlobals;
 }
 
-export function SiteGlobalsContextProvider({ children, value }: Props) {
+export function SiteGlobalsContextProvider({
+  children,
+  userAgentType,
+  value,
+}: Props) {
   const providerValue = useContextSetup({ siteGlobals: value });
+  const isDesktop = userAgentType === VIEWPORTS.DESKTOP;
+
   return (
-    <SiteGlobalsContext.Provider value={providerValue}>
+    <SiteGlobalsContext.Provider
+      value={{ ...providerValue, isDesktop, userAgentType }}
+    >
       {children}
     </SiteGlobalsContext.Provider>
   );

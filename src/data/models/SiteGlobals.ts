@@ -14,4 +14,6 @@ export interface SiteGlobals {
    * Optional color scheme (used for promotions)
    */
   siteTheme: string | null;
+  isDesktop?: boolean;
+  userAgentType?: string;
 }

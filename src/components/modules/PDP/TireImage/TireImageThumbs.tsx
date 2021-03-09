@@ -4,6 +4,7 @@ import Image from '~/components/global/Image/Image';
 import { SiteCatalogProductImageTypeEnum } from '~/data/models/SiteCatalogProductImage';
 import { SiteProductLine } from '~/data/models/SiteProductLine';
 import { SiteYouTubeVideoTypeEnum } from '~/data/models/SiteYouTubeVideo';
+import { LOADING_OPTIONS } from '~/lib/constants/image';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import styles from './TireImage.styles';
@@ -61,6 +62,7 @@ function TireImageThumbs({
           >
             <Image
               altText={altText || fallbackAlt}
+              loading={LOADING_OPTIONS.EAGER}
               responsive
               src={src || ''}
             />

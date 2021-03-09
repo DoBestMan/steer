@@ -5,6 +5,7 @@ import { ContentModalProps } from '~/components/global/Modal/Modal.types';
 import { PromoTagProps } from '~/components/global/PromoTag/PromoTag';
 import PromoTagCarousel from '~/components/global/PromoTag/PromoTagCarousel';
 import { useProductDetailContext } from '~/components/pages/ProductDetail/ProductDetail.context';
+import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
 import { SiteCatalogBrand } from '~/data/models/SiteCatalogBrand';
 import { SitePrice } from '~/data/models/SitePrice';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
@@ -93,7 +94,7 @@ function ProductInfo({
     showSelectError,
     setShowSelectError,
   } = useProductDetailContext();
-
+  const { isDesktop } = useSiteGlobalsContext();
   const { bk } = useBreakpoints();
 
   useEffect(() => {
@@ -101,6 +102,9 @@ function ProductInfo({
       setShowSelectError(false);
     }
   }, [currentSizeIndex, setShowSelectError]);
+
+  const isOutOfStock = (!price || callForPricing) && size;
+  const shouldShowSizeSelector = !isLoading || isTireLine || size;
 
   function renderPrice() {
     return (
@@ -119,8 +123,27 @@ function ProductInfo({
     );
   }
 
-  const isOutOfStock = (!price || callForPricing) && size;
-  const shouldShowSizeSelector = !isLoading || isTireLine || size;
+  function renderPromotags() {
+    if (!promoTags) {
+      return null;
+    }
+
+    const shouldLoad =
+      (!isLoading && !!promoTags?.length) || !!promoTags?.length;
+
+    return (
+      <>
+        {shouldLoad && (
+          <div css={styles.promoTags}>
+            <PromoTagCarousel
+              tags={promoTags}
+              openDynamicModal={openDynamicModal}
+            />
+          </div>
+        )}
+      </>
+    );
+  }
 
   if (!isLoading && hasError) {
     return (
@@ -187,14 +210,7 @@ function ProductInfo({
             </div>
           )}
         </div>
-        {!isLoading && !!promoTags?.length && (
-          <div css={styles.promoTags}>
-            <PromoTagCarousel
-              tags={promoTags}
-              openDynamicModal={openDynamicModal}
-            />
-          </div>
-        )}
+        {renderPromotags()}
       </>
     );
   }
@@ -258,9 +274,7 @@ function ProductInfo({
                 </div>
                 {isLoading && !isTireLine
                   ? null
-                  : [BREAKPOINT_SIZES.M, BREAKPOINT_SIZES.S].includes(bk) &&
-                    !isOutOfStock &&
-                    renderPrice()}
+                  : !isDesktop && !isOutOfStock && renderPrice()}
               </div>
               {showSelectError && (
                 <span role="alert" css={styles.errorMessage}>
@@ -279,7 +293,8 @@ function ProductInfo({
           bk !== BREAKPOINT_SIZES.M && <div css={styles.loading} />
         ) : (
           <div css={styles.priceAndActionBarWrapper}>
-            {![BREAKPOINT_SIZES.M, BREAKPOINT_SIZES.S].includes(bk) &&
+            {(![BREAKPOINT_SIZES.M, BREAKPOINT_SIZES.S].includes(bk) ||
+              isDesktop) &&
               !isOutOfStock &&
               renderPrice()}
             <div css={styles.actionBar}>
@@ -295,14 +310,7 @@ function ProductInfo({
           </div>
         )}
       </div>
-      {!isLoading && !!promoTags?.length && (
-        <div css={styles.promoTags}>
-          <PromoTagCarousel
-            tags={promoTags}
-            openDynamicModal={openDynamicModal}
-          />
-        </div>
-      )}
+      {renderPromotags()}
       {!isLoading && isOutOfStock && (
         <div css={styles.crossSellWrapper}>
           <OutOfStock

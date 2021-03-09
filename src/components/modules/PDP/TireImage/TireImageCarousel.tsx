@@ -4,6 +4,7 @@ import { SwiperInstance } from 'react-id-swiper';
 import Carousel from '~/components/global/Carousel/Carousel';
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
+import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
 import {
   SiteCatalogProductImage,
   SiteCatalogProductImageTypeEnum,
@@ -14,6 +15,9 @@ import {
   SiteYouTubeVideoTypeEnum,
 } from '~/data/models/SiteYouTubeVideo';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
+import { DEFAULT_PRODUCT_IMAGE_SIZE } from '~/lib/constants/image';
+import { VIEWPORTS } from '~/lib/constants/viewport';
+import { isBrowser } from '~/lib/utils/browser';
 import { getWidthFromMaxHeight } from '~/lib/utils/number';
 import { ui } from '~/lib/utils/ui-dictionary';
 
@@ -113,6 +117,10 @@ function TireImageCarousel({
   const { bk, greaterThan, lessThan, windowHeight } = useBreakpoints();
   const [shouldPauseVideo, setShouldPauseVideo] = useState(false);
   const [wrapperRect, setWrapperRect] = useState<ClientRect | null>(null);
+  const { userAgentType } = useSiteGlobalsContext();
+
+  const initialImageSize =
+    DEFAULT_PRODUCT_IMAGE_SIZE[userAgentType || VIEWPORTS.DESKTOP];
 
   const pagination = !isFullscreen
     ? {
@@ -229,8 +237,8 @@ function TireImageCarousel({
                 isActive={index === currentIndex}
                 shouldPauseVideo={shouldPauseVideo}
                 setShouldPauseVideo={setShouldPauseVideo}
-                height={wrapperRect?.height}
-                width={imageWidth}
+                height={!isBrowser() ? initialImageSize : wrapperRect?.height}
+                width={!isBrowser() ? initialImageSize : imageWidth}
               />
             </div>
           );

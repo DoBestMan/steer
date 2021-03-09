@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
 import { SiteCatalogBrand } from '~/data/models/SiteCatalogBrand';
 import {
   SiteCatalogProductImage,
@@ -7,7 +8,6 @@ import {
   SiteCatalogProductImageTypeEnum,
 } from '~/data/models/SiteCatalogProductImage';
 import { SiteProductLine } from '~/data/models/SiteProductLine';
-import { useBreakpoints } from '~/hooks/useBreakpoints';
 
 import TireImageCarousel from './TireImageCarousel';
 import TireImageZoom from './TireImageZoom';
@@ -24,7 +24,7 @@ function TireImage({ brand, assetList }: Props) {
   const [currentInlineIndex, setCurrentInlineIndex] = useState(0);
   const [currentZoomIndex, setCurrentZoomIndex] = useState(0);
 
-  const { greaterThan } = useBreakpoints();
+  const { isDesktop } = useSiteGlobalsContext();
   const isUnavailable = assetList.some(
     (item) =>
       item.type === SiteCatalogProductImageTypeEnum.SiteCatalogProductImage &&
@@ -42,7 +42,6 @@ function TireImage({ brand, assetList }: Props) {
     return <UnavailableImage image={unavailableImage.image} />;
   }
 
-  const hasThumbs = greaterThan.M;
   const zoomImageList = assetList.filter(
     (item) =>
       item.type === SiteCatalogProductImageTypeEnum.SiteCatalogProductImage,
@@ -78,7 +77,7 @@ function TireImage({ brand, assetList }: Props) {
   return (
     <>
       <TireImageCarousel
-        hasThumbs={hasThumbs}
+        hasThumbs={isDesktop}
         assetList={assetList}
         handleClick={openModal}
         currentIndex={currentInlineIndex}

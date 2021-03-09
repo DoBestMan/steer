@@ -18,6 +18,7 @@ import {
 } from '~/lib/backend';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
 import GA from '~/lib/helpers/analytics';
+import { getUserAgentType } from '~/lib/utils/user-agent';
 import { global } from '~/styles/document/global.styles';
 
 // Add polyfill for smooth scrolling on Safari
@@ -30,6 +31,7 @@ interface Props extends AppInitialProps {
     siteGlobals?: SiteGlobals;
     siteMenu?: SiteMenu;
     siteNotifications?: SiteNotificationList;
+    userAgentType?: string;
   };
 }
 
@@ -41,7 +43,12 @@ class MyApp extends NextApp<Props> {
   };
   render() {
     const { Component, pageProps, route, hostUrl } = this.props;
-    const { siteGlobals, siteMenu, siteNotifications } = this.state.serverData;
+    const {
+      siteGlobals,
+      siteMenu,
+      siteNotifications,
+      userAgentType,
+    } = this.state.serverData;
     GA.initialize();
     return (
       <SWRConfig value={{ revalidateOnFocus: false }}>
@@ -50,6 +57,7 @@ class MyApp extends NextApp<Props> {
           siteGlobalsContextValue={siteGlobals}
           siteMenuContextValue={siteMenu}
           siteNotificationContextValue={siteNotifications}
+          userAgentType={userAgentType}
         >
           <Meta />
 
@@ -115,6 +123,7 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
       siteGlobals,
       siteMenu,
       siteNotifications,
+      userAgentType: getUserAgentType(req?.headers['user-agent'] || ''),
     },
   };
   return finalProps;

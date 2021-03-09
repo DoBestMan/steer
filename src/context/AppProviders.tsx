@@ -23,6 +23,7 @@ interface Props {
   siteGlobalsContextValue?: SiteGlobals;
   siteMenuContextValue?: SiteMenu;
   siteNotificationContextValue?: SiteNotificationList;
+  userAgentType?: string;
 }
 
 // Container to wrap _app.tsx in context providers.
@@ -33,10 +34,14 @@ function AppProviders({
   siteGlobalsContextValue,
   siteMenuContextValue,
   siteNotificationContextValue,
+  userAgentType,
 }: Props) {
   return (
     <GlobalsContextProvider value={{ hostUrl }}>
-      <SiteGlobalsContextProvider value={siteGlobalsContextValue}>
+      <SiteGlobalsContextProvider
+        value={siteGlobalsContextValue}
+        userAgentType={userAgentType}
+      >
         <SiteMenuContextProvider value={siteMenuContextValue}>
           <UserPersonalizationContextProvider>
             <FooterContextProvider>
