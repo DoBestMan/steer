@@ -1,5 +1,4 @@
 import { NextRouter, useRouter } from 'next/router';
-import { setCookie } from 'nookies';
 import { ReactNode, useCallback, useEffect, useState } from 'react';
 
 import { useSearchModalContext } from '~/components/modules/Search/SearchModal.context';
@@ -41,24 +40,6 @@ function useRouterContextSetup() {
   const [initTransitionState, setInitTransitionState] = useState(false);
 
   const { isSearchOpen } = useSearchModalContext();
-
-  //Set CJ Affiliate cookie. FND-532
-  const CJ_CONSTANT = {
-    COOKIE_NAME: 'cje',
-    DOMAIN: '.simpletire.com',
-  };
-
-  const { cjevent } = router.query;
-
-  if (cjevent) {
-    setCookie(null, CJ_CONSTANT.COOKIE_NAME, cjevent.toString(), {
-      maxAge: 86400 * 395,
-      path: '/',
-      secure: true,
-      domain: CJ_CONSTANT.DOMAIN,
-    });
-  }
-  //END CJ Affiliate cookie set.
 
   // For now, the only scenario where the page transition is skipped is
   // the transition into and between Catalog pages

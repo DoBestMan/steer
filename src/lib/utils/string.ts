@@ -174,3 +174,13 @@ export function getMIMEType(str: string) {
 
   return mimeTypes && mimeTypes[1];
 }
+
+export function getParameterByNameFromUrl(name: string, url: string) {
+  /* eslint no-useless-escape: 0 */
+  name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+  const regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+  const results = regex.exec(url);
+  return results === null
+    ? ''
+    : decodeURIComponent(results[1].replace(/\+/g, ' '));
+}
