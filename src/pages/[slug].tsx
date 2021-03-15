@@ -1,62 +1,52 @@
-import { GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 
 import OpenTemplatePage from '~/components/pages/OpenTemplatePage/OpenTemplatePage';
 import { PageData } from '~/data/models/SiteOpenTemplate';
-import WithFallbackPageHandling from '~/hocs/WithFallbackPageHandling';
 import WithErrorPageHandling, {
   PageResponse,
 } from '~/hocs/WithPageErrorHandling';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
 import { backendGetPageSlug } from '~/lib/backend/page-slug';
-import { REVALIDATE } from '~/lib/constants';
 import { getStringifiedParams } from '~/lib/utils/routes';
 
 type OpenTemplatePageProps = {
   pageData: PageData;
 };
 
-const OpenTemplate = WithFallbackPageHandling(
-  WithErrorPageHandling(OpenTemplatePage),
-);
+const OpenTemplate = WithErrorPageHandling(OpenTemplatePage);
 
-export async function getStaticPaths() {
-  return {
-    paths: [],
-    fallback: true,
-  };
-}
-
-export const getStaticProps: GetStaticProps<PageResponse<
+export const getServerSideProps: GetServerSideProps<PageResponse<
   OpenTemplatePageProps
->> = async ({ params }) => {
-  backendBootstrap();
-  const { slug } = getStringifiedParams(params);
+>> = async ({ query, res, req }) => {
+  backendBootstrap({ request: req });
+  const { slug } = getStringifiedParams(query);
 
   if (!slug) {
     const errorStatusCode = 500;
     return { props: { errorStatusCode } };
   }
 
-  const res = await backendGetPageSlug(slug);
+  const apiResponse = await backendGetPageSlug(slug);
 
-  if (!res.isSuccess) {
+  if (!apiResponse.isSuccess) {
+    res.statusCode = apiResponse.error.statusCode;
     return {
-      props: { errorStatusCode: res.error.statusCode },
-      revalidate: REVALIDATE.EVERY_MINUTE,
+      props: { errorStatusCode: apiResponse.error.statusCode },
     };
   }
 
-  if (res.data.isBasePath) {
+  if (apiResponse.data.isBasePath) {
+    const statusCode = 410;
+    res.statusCode = statusCode;
     return {
-      props: { errorStatusCode: 410 },
+      props: { errorStatusCode: statusCode },
     };
   }
 
   return {
     props: {
-      pageData: res.data,
+      pageData: apiResponse.data,
     },
-    revalidate: REVALIDATE.EVERY_MINUTE,
   };
 };
 

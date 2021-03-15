@@ -36,8 +36,10 @@ export const getServerSideProps: GetServerSideProps<PageResponse<
   }
 
   if (!pressCategory.data.basePath?.includes(BASE_PATH)) {
+    const statusCode = 410;
+    context.res.statusCode = statusCode;
     return {
-      props: { errorStatusCode: 410 },
+      props: { errorStatusCode: statusCode },
     };
   }
 
