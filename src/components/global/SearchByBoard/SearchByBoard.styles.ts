@@ -2,6 +2,15 @@ import { COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
 import { typography, typographyStyles } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
+  carouselItem: {
+    pointerEvents: 'auto',
+    ':first-of-type': {
+      marginLeft: SPACING.SIZE_20,
+    },
+    ':last-of-type': {
+      marginRight: SPACING.SIZE_20,
+    },
+  },
   container: {
     backgroundColor: COLORS.GLOBAL.ORANGE,
     padding: `${SPACING.SIZE_20}px 0px`,
@@ -15,6 +24,12 @@ const styles: StylesMap = {
     },
   },
   ctaMenu: {
+    '.search-item': {
+      transitionProperty: 'transform',
+    },
+    '.search-items-carousel': {
+      display: 'flex',
+    },
     display: 'flex',
     justifyContent: 'center',
     [MQ.M]: {
@@ -126,6 +141,8 @@ const styles: StylesMap = {
     typography.eyebrow,
     {
       flex: 1,
+      marginBottom: SPACING.SIZE_20,
+      padding: `0 ${SPACING.SIZE_20}px`,
       textTransform: 'uppercase',
       [MQ.M]: [
         typography.primarySubhead,

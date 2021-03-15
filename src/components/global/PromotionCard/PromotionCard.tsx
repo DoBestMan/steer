@@ -32,7 +32,10 @@ export interface PromotionCardProps {
         value: string;
       }
   > | null;
-  handlePromotionClick?: (params: Record<string, string>) => void;
+  handlePromotionClick?: (
+    params: Record<string, string>,
+    label: string,
+  ) => void;
   handleReferAFriendClick?: () => void;
   links: Array<PromotionLinksProps>;
   moreBody?: string | null;
@@ -102,6 +105,7 @@ function PromotionCard({
     return (
       <Component
         {...link}
+        eyebrow={eyebrow}
         handlePromotionClick={handlePromotionClick}
         key={idx}
         handleReferAFriendClick={handleReferAFriendClick}

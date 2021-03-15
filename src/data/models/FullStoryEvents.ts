@@ -14,4 +14,7 @@ export interface SIMPLESNAP {
   tireResultsSuccess?: boolean;
   searchAnotherWay?: boolean;
 }
-export type FS_EVENT_PROPERTIES = LOCATION_POPUP | SIMPLESNAP;
+export interface SEARCH_BY_BOARD {
+  searchItem: string;
+}
+export type FS_EVENT_PROPERTIES = LOCATION_POPUP | SIMPLESNAP | SEARCH_BY_BOARD;

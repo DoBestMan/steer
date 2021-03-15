@@ -106,16 +106,6 @@ const styles: StylesMap = {
     top: 1,
     width: 5,
   },
-  linkText: {
-    '&::after': {
-      content: '""',
-      height: '100%',
-      left: 0,
-      position: 'absolute',
-      top: 0,
-      width: '100%',
-    },
-  },
   moment: [
     typography.secondarySubhead,
     {
@@ -201,6 +191,7 @@ const styles: StylesMap = {
     flexWrap: 'wrap',
   },
   root: {
+    cursor: 'pointer',
     position: 'relative',
 
     '&:hover > div': {

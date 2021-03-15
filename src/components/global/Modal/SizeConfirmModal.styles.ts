@@ -72,10 +72,10 @@ const styles: StylesMap = {
   content: {
     position: 'relative',
     [MQ.S]: {
-      padding: `${SPACING.SIZE_30}px ${CONTENT_LATERAL_PADDING.S}px`,
+      padding: `${SPACING.SIZE_30}px ${CONTENT_LATERAL_PADDING.S}px ${SPACING.SIZE_60}px `,
     },
     [MQ.M]: {
-      padding: `${SPACING.SIZE_30}px ${CONTENT_LATERAL_PADDING.M}px`,
+      padding: `${SPACING.SIZE_30}px ${CONTENT_LATERAL_PADDING.M}px ${SPACING.SIZE_40}px `,
     },
   },
   root: [

@@ -61,6 +61,16 @@ const styles: StylesMap = {
   initialSearch: {
     transition: `opacity ${TIME.MS600}ms ease, transform ${TIME.MS300}ms ease`,
   },
+  notificationList: {
+    marginLeft: '-20px',
+    marginBottom: SPACING.SIZE_40,
+    [MQ.M]: {
+      marginLeft: '-40px',
+    },
+    [MQ.L]: {
+      marginLeft: '-60px',
+    },
+  },
   pastSearchBullet: {
     display: 'none',
     margin: `0 ${SPACING.SIZE_10}px`,
@@ -68,15 +78,19 @@ const styles: StylesMap = {
       display: 'block',
     },
   },
+  searchCTA: {
+    display: 'flex',
+  },
   searchSectionWrapper: {
-    padding: `${SPACING.SIZE_15}px 0 ${SPACING.SIZE_25}px`,
+    padding: `${SPACING.SIZE_40}px 0 ${SPACING.SIZE_25}px`,
     position: 'relative',
     transition: `opacity ${TIME.MS300}ms ease`,
     [MQ.M]: {
-      padding: `${SPACING.SIZE_30}px 0`,
+      paddingBottom: SPACING.SIZE_30,
+      paddingTop: SPACING.SIZE_110,
     },
     [MQ.L]: {
-      padding: `${SPACING.SIZE_70}px 0 ${SPACING.SIZE_10}px`,
+      padding: `${SPACING.SIZE_80}px 0 ${SPACING.SIZE_10}px`,
     },
   },
   ...animationStyles,

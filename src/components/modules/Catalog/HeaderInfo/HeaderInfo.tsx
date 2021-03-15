@@ -1,18 +1,16 @@
 import { useTheme } from 'emotion-theming';
 import React, { ReactNode, useState } from 'react';
 
-import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Link from '~/components/global/Link/Link';
+import { useFiltersContext } from '~/components/modules/Catalog/Filters/Filters.context';
 import { useCatalogProductsContext } from '~/context/CatalogProducts.context';
 import { LINK_ICON_POSITION, LINK_TYPES, THEME } from '~/lib/constants';
-import { scrollTo } from '~/lib/helpers/scroll';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import LocationModal from '../../Location/LocationModal/LocationModal';
 import styles from '../Header.styles';
 
 interface Props {
-  hasTopPicks: boolean;
   isInternal?: boolean;
   location: string;
   sizeList?: string[];
@@ -20,52 +18,53 @@ interface Props {
 }
 
 export default function HeaderInfo({
-  hasTopPicks,
   isInternal = false,
   location,
   sizeList = [],
   title,
 }: Props) {
+  const {
+    handleUpdateResults,
+    pastFilters,
+    setPastFilters,
+  } = useCatalogProductsContext();
+  const { setFiltersToApply } = useFiltersContext();
+
   const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
+
   function toggleLocation() {
     setIsLocationModalOpen(!isLocationModalOpen);
   }
   const { header } = useTheme();
-  const { isAdvancedView } = useCatalogProductsContext();
 
-  const backToTopPicks = () => {
-    scrollTo(0, 1);
+  const infoStyles = [styles.info];
+
+  const handleBack = () => {
+    const newPastFilters = pastFilters.slice();
+    const currentFilter: Record<
+      string,
+      string
+    > = newPastFilters.pop() as Record<string, string>;
+    const newFilter: Record<string, string> =
+      newPastFilters[newPastFilters.length - 1];
+
+    Object.keys(currentFilter).forEach((key: string) => {
+      if (!newFilter[key]) {
+        newFilter[key] = '';
+      }
+    });
+    setFiltersToApply(newFilter);
+    handleUpdateResults(newFilter, false, true).then(() => {
+      setPastFilters(newPastFilters);
+    });
   };
 
-  const infoStyles = [styles.info, header.text];
-  const backEl = isInternal ? (
-    <Link
-      css={styles.action}
-      href="/"
-      icon={ICONS.CHEVRON_LEFT}
-      iconPosition={LINK_ICON_POSITION.LEFT}
-    >
-      {ui('catalog.header.back')}
-    </Link>
-  ) : (
-    <Link
-      css={[styles.action, styles.back]}
-      as="button"
-      aria-label={ui('catalog.header.returnToTopPicks')}
-      onClick={backToTopPicks}
-      icon={ICONS.ARROW_UP}
-    />
-  );
-
   const locationEl = (
-    <div css={[infoStyles, sizeList[1] && styles.wrappedLocation]}>
-      {ui('catalog.header.dealsFor')}{' '}
-      {/* TODO: location redirect or modal open */}
+    <div css={infoStyles}>
       <Link
         onClick={toggleLocation}
         as={LINK_TYPES.BUTTON}
-        css={[styles.link, infoStyles]}
-        theme={isAdvancedView ? THEME.DARK : THEME.ORANGE}
+        css={[styles.link, styles.info, header.text]}
         data-testid="catalog-header-location"
       >
         {location}
@@ -85,18 +84,28 @@ export default function HeaderInfo({
   return (
     <>
       <div css={styles.header}>
-        {hasTopPicks && backEl}
+        {pastFilters.length > 1 && (
+          <Link
+            theme={THEME.DARK}
+            iconPosition={LINK_ICON_POSITION.LEFT}
+            icon="chevron-left"
+            onClick={handleBack}
+            css={[styles.borderless, styles.darkHighlighted]}
+          >
+            {ui('catalog.header.back')}
+          </Link>
+        )}
         <h1 css={styles.title} data-testid="catalog-title">
           {title}
         </h1>
         {!isInternal && (
-          <>
+          <div css={styles.sizeWrapper}>
             <div css={infoStyles}>
               {sizeList[0] && <span css={styles.decorator}>{sizeList[0]}</span>}
               {secondItem}
             </div>
             {thirdItem}
-          </>
+          </div>
         )}
       </div>
       <LocationModal isOpen={isLocationModalOpen} onClose={toggleLocation} />

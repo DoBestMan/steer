@@ -1,5 +1,7 @@
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
+import { useCatalogProductsContext } from '~/context/CatalogProducts.context';
+import { TIME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import styles from './SeeAllTires.styles';
@@ -10,9 +12,14 @@ interface Props {
 }
 
 function SeeAllTires({ handleUpdateResults, totalResults = 0 }: Props) {
+  const { setIsAdvancedView, scrollToGrid } = useCatalogProductsContext();
+
   function handleSeeMore() {
+    setIsAdvancedView(true);
     handleUpdateResults({ skipGroups: 'true' });
+    setTimeout(scrollToGrid, TIME.MS100);
   }
+
   return (
     <div css={styles.root}>
       <button

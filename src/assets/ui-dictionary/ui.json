@@ -189,9 +189,12 @@
       "priceRangeLabel": "Price Range",
       "priceRange": "{{min}} to {{max}}",
       "reset": "Reset filters",
-      "result": "{{number}} result",
-      "results": "{{number}} results",
+      "curationResult": "Showing {{current}}/{{total}} result",
+      "curationResults": "Showing {{current}}/{{total}} results",
+      "listResult": "Showing {{number}} result",
+      "listResults": "Showing {{number}} results",
       "viewResults": "View {{number}} tires",
+      "viewAllResults": "View all tires",
       "popularFilters": "Popular Filters"
     },
     "noResults": {
@@ -205,10 +208,22 @@
       "showTechSpecsOnM": "Show technical specs",
       "back": "Back",
       "dealsFor": "Deals for",
-      "filterLabel": "Filter by"
+      "filterLabel": "Filter by",
+      "tireType": "Tire type",
+      "brand": "Brand",
+      "price": "Price",
+      "load": "Load",
+      "speedRating": "Speed rating",
+      "warranty": "Warranty",
+      "more": "More"
+    },
+    "notification": {
+      "title": "Search filters removed",
+      "subtext": "Your search returned no results so we removed the extra filters."
     },
     "productListing": {
       "morePromos": "+ {{number}} other deals",
+      "noWarranty": "No Warranty",
       "customerReviews": "{{number}} customer reviews",
       "loadMore": "See more"
     },
@@ -224,6 +239,9 @@
       "oeModal": {
         "closeModalLabel": "Got it"
       },
+      "ordinalLabel": "{{ordinal}} pick",
+      "title": "Top {{count}} tires for {{name}}",
+      "description": "Highly rated, great deals - the perfect fit for your car",
       "viewMoreTire": "{{totalResult}} tires"
     },
     "summary": {
@@ -289,6 +307,7 @@
     "title": "shop tires by",
     "brand": "Tire brand",
     "tireSnap": "Simple Snap",
+    "tireType": "Tire Type",
     "interplotedTitle": "SHOP {{name}} TIRES BY",
     "zipSectionLabel": "Deliver to"
   },
@@ -639,7 +658,9 @@
     "cancelButtonLabel": "Cancel",
     "cancelButtonClear": "Clear",
     "clearPastSearchesButtonLabel": "Clear all",
+    "filterBy": "Filter By (Optional)",
     "frontTire": "Front:",
+    "filterPill": "{{label}} TIRES ONLY",
     "navLabel": "Shop",
     "notSure": "Not sure?",
     "pastSearches": "Past searches",
@@ -647,18 +668,19 @@
     "removeRearTire": "Remove",
     "searchBy": "Search by",
     "searchByTireSize": "Search by tire size",
-    "searchAutocompleteLabel": "Search by vehicle, tire size or brand",
+    "searchAutocompleteLabel": "Search by vehicle or tire size",
     "searchCategories": {
       "vehicle": "Vehicle",
       "tireSize": "Tire size",
-      "brand": "Brand",
-      "popular": "Popular tires"
+      "brand": "Tire Brand",
+      "popular": "Popular tires",
+      "tireType": "Tire Type"
     },
     "searchNoResults": "Sorry, no matching results found.",
     "searchError": "Sorry, something went wrong.",
+    "shopTiresBy": "Shop Tires By",
     "support": "Need support?",
     "findTireSize": {
-      "eyebrow": "How to",
       "imageAlt": "Close-up of tire",
       "modalLabel": "How to find your tire size",
       "stepOne": "Check the sidewall of your tire",

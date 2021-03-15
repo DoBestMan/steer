@@ -14,6 +14,9 @@ const TOPS = {
 };
 
 const styles: StylesMap = {
+  borderless: {
+    borderBottomColor: 'transparent',
+  },
   decorator: {
     ':after': {
       content: '"•"',
@@ -63,11 +66,14 @@ const styles: StylesMap = {
   rangePrefixHide: {
     display: 'none',
   },
+  result: {
+    marginBottom: SPACING.SIZE_05,
+  },
   results: [
     typography.labelHeadline,
     {
-      alignItems: 'center',
       display: 'flex',
+      flexDirection: 'column',
       flexGrow: 1,
     },
   ],
@@ -100,6 +106,7 @@ const styles: StylesMap = {
   },
   sort: typography.labelCopy,
   sortBy: {
+    alignItems: 'center',
     display: 'flex',
     marginLeft: SPACING.SIZE_20,
     [MQ.M]: {

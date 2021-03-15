@@ -5,7 +5,7 @@ import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Link from '~/components/global/Link/Link';
 import { SiteNotifications } from '~/data/models/SiteNotifications';
-import { LINK_TYPES, TIME } from '~/lib/constants';
+import { LINK_TYPES, THEME, TIME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
 
@@ -18,6 +18,7 @@ function Notification({
   labelLink,
   subtext,
   title,
+  theme = THEME.DARK,
   sessionExpiryTime = 360,
   handleNotificationClick,
 }: SiteNotifications) {
@@ -28,12 +29,14 @@ function Notification({
 
   return (
     <CSSTransition timeout={{ enter: 0, exit: TIME.MS400 }}>
-      <div css={styles.root}>
+      <div css={[styles.root, styles[theme]]}>
         <div css={[typography.jumboHeadline, styles.decorator]}>
-          {icon && <Icon css={styles.bannerIcon} name={icon.svgId} />}
+          {icon && (
+            <Icon css={[styles.bannerIcon, styles[theme]]} name={icon.svgId} />
+          )}
         </div>
         <GridItem css={styles.cardContent} gridColumnL="4/8" gridColumnXL="2/6">
-          {labelLink && (
+          {labelLink ? (
             <Link
               css={styles.descriptionLink}
               {...labelLink.link}
@@ -45,6 +48,14 @@ function Notification({
                 {subtext}
               </span>
             </Link>
+          ) : (
+            <span css={styles.descriptionLink}>
+              <span css={styles.title}>{title}</span>
+              <br />
+              <span css={[typography.bodyCopy, styles.description]}>
+                {subtext}
+              </span>
+            </span>
           )}
         </GridItem>
         <Link

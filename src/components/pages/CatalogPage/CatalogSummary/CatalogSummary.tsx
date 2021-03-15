@@ -4,6 +4,7 @@ import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 
 import CatalogMessage from '../CatalogMessage/CatalogMessage';
+import { STAGES } from '../CatalogPage.constants';
 import {
   DEFAULT_IMAGE,
   DEFAULT_SCENERY,
@@ -18,17 +19,7 @@ import Root from './components/Root';
 import Scenery from './components/Scenery';
 import VehicleContainer from './components/VehicleContainer';
 
-interface Props {
-  exploreMore: () => void;
-  isSearchForTireSize?: boolean;
-  totalTireCount: number;
-}
-
-function CatalogSummary({
-  exploreMore,
-  totalTireCount,
-  isSearchForTireSize,
-}: Props) {
+function CatalogSummary() {
   const {
     contentStage,
     showLoadingInterstitial,
@@ -50,50 +41,49 @@ function CatalogSummary({
 
   return (
     <Root>
-      <div css={[styles.backgroundContainer, styles.iosBackgroundContainer]}>
-        <Background stage={stage} aria-hidden data-component="Background">
-          <Scenery
-            animate
-            data-component="Scenery"
-            sceneryID={sceneryType}
-            stage={stage}
-          />
-          <Overlay data-component="Overlay" stage={stage}>
-            <VehicleContainer
-              data-component="VehicleContainer"
-              showLoadingInterstitial={showLoadingInterstitial}
+      {stage === STAGES.NO_RESULTS && (
+        <div css={[styles.backgroundContainer, styles.iosBackgroundContainer]}>
+          <Background stage={stage} aria-hidden data-component="Background">
+            <Scenery
+              animate
+              data-component="Scenery"
+              sceneryID={sceneryType}
               stage={stage}
-            >
-              <Car
-                animateWheel
-                bk={bk}
-                carId={carId}
-                data-component="Car"
+            />
+            <Overlay data-component="Overlay" stage={stage}>
+              <VehicleContainer
+                data-component="VehicleContainer"
                 showLoadingInterstitial={showLoadingInterstitial}
-                solid
                 stage={stage}
-              />
-              <div className="back-wheel-img">
-                <Image
-                  {...image}
-                  aria-hidden
-                  responsive
-                  widths={[175, 260, 230]}
+              >
+                <Car
+                  animateWheel
+                  bk={bk}
+                  carId={carId}
+                  data-component="Car"
+                  showLoadingInterstitial={showLoadingInterstitial}
+                  solid
+                  stage={stage}
                 />
-              </div>
-            </VehicleContainer>
-          </Overlay>
-        </Background>
-      </div>
+                <div className="back-wheel-img">
+                  <Image
+                    {...image}
+                    aria-hidden
+                    responsive
+                    widths={[175, 260, 230]}
+                  />
+                </div>
+              </VehicleContainer>
+            </Overlay>
+          </Background>
+        </div>
+      )}
 
       <Content data-component="Content" stage={contentStage}>
         <CatalogMessage
           customerServiceNumber={customerServiceNumber}
           customerServiceEnabled={customerServiceEnabled}
           data-component="MessageContainer"
-          exploreMore={exploreMore}
-          totalTireCount={totalTireCount}
-          isSearchForTireSize={!!isSearchForTireSize}
         />
       </Content>
     </Root>

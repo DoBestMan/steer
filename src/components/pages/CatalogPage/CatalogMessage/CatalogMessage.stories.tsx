@@ -9,11 +9,7 @@ import {
   vehiclesNoOeWithSizeMock,
   vehiclesNoResultWithTrimMock,
 } from '../CatalogSummary/CatalogSummary.mock';
-import {
-  BuildInMessage,
-  DataMomentMessage,
-  NoResultsMessage,
-} from './CatalogMessage';
+import { DataMomentMessage, NoResultsMessage } from './CatalogMessage';
 
 export default {
   title: 'Catalog/Loading Interstitial/Message',
@@ -26,26 +22,6 @@ const customerServiceNumber = {
 
 function CatalogMessageContainer({ children }: { children: ReactNode }) {
   return <ThemeProvider theme={defaultTheme}>{children}</ThemeProvider>;
-}
-
-export function CatalogBuildInNoOeMessage() {
-  return (
-    <BuildInMessage
-      siteCatalogSummaryBuildIn={
-        vehiclesNoOeWithSizeMock.siteCatalogSummaryBuildIn
-      }
-    />
-  );
-}
-
-export function CatalogBuildInDisambiguationMessage() {
-  return (
-    <BuildInMessage
-      siteCatalogSummaryBuildIn={
-        vehiclesDisambiguationMock.siteCatalogSummaryBuildIn
-      }
-    />
-  );
 }
 
 export function CatalogDataMomentNoOeMessage() {

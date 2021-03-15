@@ -24,7 +24,7 @@ export interface ProductCardCarouselProps {
 }
 
 function ProductCardCarousel({ cards }: ProductCardCarouselProps) {
-  const { setRouteQueryParamOptions } = useSearchContext();
+  const { setQueryParamLabel, setRouteQueryParamOptions } = useSearchContext();
   const { setIsSearchOpen } = useSearchModalContext();
   const { greaterThan } = useBreakpoints();
   const [isDynamicPagination, setIsDynamicPagination] = useState(greaterThan.M);
@@ -71,7 +71,7 @@ function ProductCardCarousel({ cards }: ProductCardCarouselProps) {
     updateOnWindowResize: true,
   };
 
-  function handlePromotionClick(params: Record<string, string>) {
+  function handlePromotionClick(params: Record<string, string>, label: string) {
     setRouteQueryParamOptions({
       routes: [
         ROUTE_MAP[ROUTES.VEHICLE_CATALOG],
@@ -79,6 +79,7 @@ function ProductCardCarousel({ cards }: ProductCardCarouselProps) {
       ],
       params,
     });
+    setQueryParamLabel(label);
     setIsSearchOpen(true);
   }
 

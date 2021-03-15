@@ -16,6 +16,24 @@ const styles: StylesMap = {
       },
     },
   },
+  car: {
+    marginBottom: `${SPACING.SIZE_20}px`,
+
+    '.SVGInline-svg': {
+      '.body-car': {
+        '*': {
+          stroke: COLORS.GLOBAL.WHITE,
+        },
+      },
+      ['.front-wheel, .back-wheel']: {
+        '*': {
+          stroke: COLORS.GLOBAL.WHITE,
+          fill: COLORS.GLOBAL.WHITE,
+        },
+      },
+    },
+  },
+
   container: {
     backgroundColor: COLORS.GLOBAL.ORANGE,
     color: COLORS.GLOBAL.WHITE,
@@ -37,6 +55,21 @@ const styles: StylesMap = {
     flexDirection: 'column',
     textAlign: 'right',
   },
+
+  dataMomentBody: [
+    typography.bodyCopy,
+    {
+      marginBottom: SPACING.SIZE_10,
+
+      [MQ.M]: {
+        width: `calc(75% - ${GAP_COLUMNS.M / 4}px)`, // 3 of 4 columns
+      },
+
+      [MQ.L]: {
+        width: `calc(66.66% - ${GAP_COLUMNS.L / 3}px)`, // 4 of 6 columns
+      },
+    },
+  ],
 
   dataMomentCopy: [
     typography.smallCopyTight,
@@ -70,13 +103,8 @@ const styles: StylesMap = {
     },
     alignItems: 'flex-end',
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'flex-end',
-
-    [MQ.M]: {
-      flexDirection: 'row',
-    },
   },
 
   dataMomentHeading: {
@@ -92,9 +120,32 @@ const styles: StylesMap = {
     typography.smallCopyTight,
     links.light,
     {
-      marginTop: SPACING.SIZE_10,
+      marginBottom: SPACING.SIZE_30,
     },
   ],
+
+  dataMomentTopPicksCtaWrapper: {
+    '> *': {
+      marginTop: SPACING.SIZE_10,
+    },
+    // eslint-disable-next-line sort-keys
+    '> *:not(:first-of-type)': {
+      marginLeft: SPACING.SIZE_10,
+    },
+
+    a: {
+      width: 'fit-content',
+    },
+    alignItems: 'flex-end',
+    display: 'flex',
+    flexDirection: 'column',
+    flexWrap: 'wrap',
+    justifyContent: 'flex-end',
+
+    [MQ.M]: {
+      flexDirection: 'row',
+    },
+  },
 
   heading: [
     typography.primaryHeadline,

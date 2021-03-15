@@ -7,9 +7,13 @@ import styles from './Notification.styles';
 
 export interface NotificationListProps {
   customItemStyles?: CSSStylesProp;
+  types?: string[];
 }
 
-function NotificationList({ customItemStyles }: NotificationListProps) {
+function NotificationList({
+  customItemStyles,
+  types = [],
+}: NotificationListProps) {
   const {
     notifications,
     handleNotificationClick,
@@ -22,19 +26,24 @@ function NotificationList({ customItemStyles }: NotificationListProps) {
           params={{ mousewheel: { forceToAxis: true } }}
           shortSwipes
         >
-          {notifications.notifications.map((sortedNotificationsData, index) => (
-            <div
-              key={`notification_${index}`}
-              css={[styles.item, customItemStyles]}
-            >
-              <Notification
-                data-index={index}
-                key={index}
-                {...sortedNotificationsData}
-                handleNotificationClick={handleNotificationClick}
-              />
-            </div>
-          ))}
+          {notifications.notifications
+            .filter(
+              (notification) =>
+                !types.length || types.includes(notification.type),
+            )
+            .map((sortedNotificationsData, index) => (
+              <div
+                key={`notification_${index}`}
+                css={[styles.item, customItemStyles]}
+              >
+                <Notification
+                  data-index={index}
+                  key={index}
+                  {...sortedNotificationsData}
+                  handleNotificationClick={handleNotificationClick}
+                />
+              </div>
+            ))}
         </Carousel>
       </div>
     </>

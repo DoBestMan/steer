@@ -54,6 +54,7 @@ export interface FiltersContextProps {
   isPreviewLoading: boolean;
   previewFiltersData: SiteCatalogFilters;
   selectingFilter: number | string | null;
+  setFiltersToApply: (filtersToApply: Record<string, string>) => void;
   totalMatches: number;
 }
 
@@ -196,6 +197,7 @@ export function useFiltersContextSetup({
     isPreviewLoading,
     previewFiltersData: previewFiltersData.filters,
     selectingFilter,
+    setFiltersToApply,
     totalMatches: previewFiltersData.totalMatches,
   };
 }

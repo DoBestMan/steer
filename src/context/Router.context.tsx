@@ -54,14 +54,11 @@ function useRouterContextSetup() {
     // Next route has loaded, hide the loading bar
     setIsRouteLoading(false);
 
-    // Show the nav (unless it's a Catalog transition)
-    if (!isCatalogTransition) {
-      eventEmitters.setNavVisibility.emit({ isVisible: true });
-    }
+    eventEmitters.setNavVisibility.emit({ isVisible: true });
 
     // Save the previous url and route
     savePrevUrl();
-  }, [isCatalogTransition, savePrevUrl]);
+  }, [savePrevUrl]);
 
   const handleRouteChangeComplete = useCallback(() => {
     // Route change complete, reset the skipPageTransition state

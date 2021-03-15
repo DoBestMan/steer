@@ -66,8 +66,26 @@ export const initialSearchBrandData = {
   type: 'SiteSearchResultTextItem',
 } as SiteSearchResultTextItem;
 
+export const initialSearchTireTypeData = {
+  action: {
+    queryText: '',
+    queryType: 'tireType',
+    type: 'SiteSearchResultActionQuery',
+  } as SiteSearchResultActionQuery,
+  detailLabel: null,
+  label: ui('search.searchCategories.tireType'),
+  labelSegments: [
+    {
+      label: ui('search.searchCategories.tireType'),
+      matches: false,
+    },
+  ],
+  type: 'SiteSearchResultTextItem',
+} as SiteSearchResultTextItem;
+
 export const initialSearchCategoriesData = [
   initialSearchVehicleData,
   initialSearchTireSizeData,
   initialSearchBrandData,
+  initialSearchTireTypeData,
 ];

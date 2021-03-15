@@ -5,6 +5,7 @@ import ReactModal from 'react-modal';
 
 import { emptyCatalogProductsMock } from '~/components/pages/CatalogPage/CatalogPage.mock';
 import * as CatalogProductsContext from '~/context/CatalogProducts.context';
+import * as CatalogSummaryContext from '~/context/CatalogSummary.context';
 import * as GlobalToastContext from '~/context/GlobalToast.context';
 import * as ModalContext from '~/context/Modal.context';
 import * as SiteGlobalsContext from '~/context/SiteGlobals.context';
@@ -49,6 +50,7 @@ const mockArgs = {
 const tree = (
   <FiltersContext.FiltersContextProvider {...mockArgs}>
     <SubFilters
+      showingResult={0}
       resultsCount={0}
       priceFilter={priceFilterMock}
       sortList={filterSortMock}
@@ -56,11 +58,11 @@ const tree = (
   </FiltersContext.FiltersContextProvider>
 );
 
-const mockCatalogContext = {
+const mockCatalogProductsContext = {
   displayedProducts: [],
   fetchNewProducts: jest.fn(),
   handleUpdateResults: jest.fn(),
-  isAdvancedView: false,
+  isAdvancedView: true,
   isLoading: false,
   onPreviewFilters: jest.fn(),
   previewFiltersData: {},
@@ -71,11 +73,20 @@ const mockCatalogContext = {
   siteCatalogProducts: {},
 };
 
+const mockCatalogSummaryContext = {
+  siteCatalogSummary: {
+    siteCatalogSummaryTopPicksList: [],
+  },
+};
+
 describe('SubFilters', () => {
   beforeAll(async () => {
     await preloadAll();
     (CatalogProductsContext as any).useCatalogProductsContext = jest.fn(
-      () => mockCatalogContext,
+      () => mockCatalogProductsContext,
+    );
+    (CatalogSummaryContext as any).useCatalogSummaryContext = jest.fn(
+      () => mockCatalogSummaryContext,
     );
     (GlobalToastContext as any).useGlobalToastContext = jest.fn(() => ({}));
     (SiteGlobalsContext as any).useSiteGlobalsContext = jest.fn(() => ({}));
@@ -134,7 +145,9 @@ describe('SubFilters', () => {
     fireEvent.click(sortBy);
 
     await waitFor(() =>
-      expect(mockCatalogContext.handleUpdateResults).toHaveBeenCalledTimes(1),
+      expect(
+        mockCatalogProductsContext.handleUpdateResults,
+      ).toHaveBeenCalledTimes(1),
     );
   });
 });

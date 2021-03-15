@@ -93,6 +93,7 @@ export function ProductListingWithKnobs() {
         gridColumnL={isHighlighted ? '2 / 8' : '2 / 5'}
       >
         <ProductListing
+          index={1}
           product={{
             activeFilterValueList: showFilters ? mockFilters : [],
             brand: {
@@ -122,6 +123,7 @@ export function ProductListingWithKnobs() {
               list: mockPromotions.slice(0, promosToRender),
             },
             size: null,
+            specList: [],
             type: SiteCatalogProductItemEnum.SiteCatalogProductItem,
           }}
           imageList={mockImages}
@@ -141,6 +143,7 @@ export function FilteredProductListing() {
         gridColumnL={'2 / 5'}
       >
         <ProductListing
+          index={1}
           product={{
             activeFilterValueList: mockFilters,
             brand: {
@@ -162,6 +165,7 @@ export function FilteredProductListing() {
             },
             siteCatalogPromotionInfo: { count: 0, list: [] },
             size: null,
+            specList: [],
             type: SiteCatalogProductItemEnum.SiteCatalogProductItem,
           }}
           imageList={mockImages}
@@ -180,6 +184,7 @@ export function HighlightedProductListing() {
         gridColumnL={'2 / 8'}
       >
         <ProductListing
+          index={1}
           product={{
             activeFilterValueList: mockFilters,
             brand: {
@@ -201,6 +206,7 @@ export function HighlightedProductListing() {
             },
             siteCatalogPromotionInfo: { count: 0, list: [] },
             size: null,
+            specList: [],
             type: SiteCatalogProductItemEnum.SiteCatalogProductItem,
           }}
           imageList={mockImages}

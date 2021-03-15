@@ -2,7 +2,7 @@ import { SiteCatalogProductItem } from '~/data/models/SiteCatalogProductItem';
 
 export type ProductListingProps = Omit<
   SiteCatalogProductItem,
-  'performanceRatingList' | 'specList' | 'topPicksAttribute'
+  'performanceRatingList' | 'topPicksAttribute'
 > & {
   isGrouped?: boolean;
   isHighlighted?: boolean;

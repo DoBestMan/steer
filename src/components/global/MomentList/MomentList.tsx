@@ -25,15 +25,17 @@ export function MomentList({
     <ul
       css={[styles.container, tStyles[theme].container, customContainerStyles]}
     >
-      {data.map(({ label, value, concise }) => (
-        <li css={[styles.item, dStyles[display].item]} key={label}>
-          {concise && <span css={dStyles[display].concise}>{concise}</span>}
-          <span css={dStyles[display].label}>{label}</span>
-          <span css={[dStyles[display].value, tStyles[theme].value]}>
-            {value}
-          </span>
-        </li>
-      ))}
+      {data
+        .filter(({ value }) => !!value)
+        .map(({ label, value, concise }) => (
+          <li css={[styles.item, dStyles[display].item]} key={label}>
+            {concise && <span css={dStyles[display].concise}>{concise}</span>}
+            <span css={dStyles[display].label}>{label}</span>
+            <span css={[dStyles[display].value, tStyles[theme].value]}>
+              {value}
+            </span>
+          </li>
+        ))}
     </ul>
   );
 }

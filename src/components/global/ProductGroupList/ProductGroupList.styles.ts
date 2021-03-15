@@ -58,6 +58,7 @@ const styles: StylesMap = {
     {
       display: 'flex',
       alignItems: 'center',
+      textTransform: 'capitalize',
     },
   ],
   wrapper: {

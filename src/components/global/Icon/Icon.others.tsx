@@ -78,6 +78,9 @@ const Gift = dynamic(() => import('~/assets/icons/others/gift.svg'), {
 const Grip = dynamic(() => import('~/assets/icons/others/grip.svg'), {
   ssr: false,
 });
+const Info = dynamic(() => import('~/assets/icons/others/info.svg'), {
+  ssr: false,
+});
 const Instagram = dynamic(() => import('~/assets/icons/others/instagram.svg'), {
   ssr: false,
 });
@@ -102,6 +105,12 @@ const Localbusiness = dynamic(
 const Mail = dynamic(() => import('~/assets/icons/others/mail.svg'), {
   ssr: false,
 });
+const Notification = dynamic(
+  () => import('~/assets/icons/others/notification.svg'),
+  {
+    ssr: false,
+  },
+);
 const Moneyback = dynamic(
   () => import('~/assets/icons/others/money-back.svg'),
   { ssr: false },
@@ -270,6 +279,10 @@ const Tiretypewinter = dynamic(
   () => import('~/assets/icons/others/tiretype-winter.svg'),
   { ssr: false },
 );
+const Tiretypessearch = dynamic(
+  () => import('~/assets/icons/others/tire-types-search.svg'),
+  { ssr: false },
+);
 const Trending = dynamic(() => import('~/assets/icons/others/trending.svg'), {
   ssr: false,
 });
@@ -349,6 +362,7 @@ export const ICONS_OTHER_MAP: Record<string, ReactElement> = {
   GEOLOCATION: <Geolocation />,
   GIFT: <Gift />,
   GRIP: <Grip />,
+  INFO: <Info />,
   INSTAGRAM: <Instagram />,
   KEYS: <Keys />,
   LIGHTNING_OUTLINE: <Lightningoutline />,
@@ -357,6 +371,7 @@ export const ICONS_OTHER_MAP: Record<string, ReactElement> = {
   LOCAL_BUSINESS: <Localbusiness />,
   MAIL: <Mail />,
   MONEY_BACK: <Moneyback />,
+  NOTIFICATION: <Notification />,
   PERFORMANCE: <Performance />,
   PHONE: <Phone />,
   PLAY: <Play />,
@@ -383,6 +398,7 @@ export const ICONS_OTHER_MAP: Record<string, ReactElement> = {
   THUMBS_UP: <Thumbsup />,
   TIP_MECHANIC: <Tipmechanic />,
   TIRE: <Tire />,
+  TIRE_TYPES_SEARCH: <Tiretypessearch />,
   TIRETYPE_ALL_TERRAIN: <Tiretypeallterrain />,
   TIRETYPE_ALL_WEATHER: <Tiretypeallweather />,
   TIRETYPE_ANTIQUE: <Tiretypeantique />,

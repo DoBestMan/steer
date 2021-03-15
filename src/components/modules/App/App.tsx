@@ -23,6 +23,7 @@ import { useGlobalToastContext } from '~/context/GlobalToast.context';
 import { NavContextProvider } from '~/context/Nav.context';
 import { useRouterContext } from '~/context/Router.context';
 import { useSiteMenuContext } from '~/context/SiteMenu.context';
+import { SiteNotificationTypes } from '~/data/models/SiteNotificationTypes';
 import { ROUTE_MAP, ROUTES, TIME } from '~/lib/constants';
 import { fixHomepageRoute } from '~/lib/utils/routes';
 import { removeUrlParams } from '~/lib/utils/string';
@@ -132,7 +133,9 @@ function App({ children, ...rest }: Props) {
       <ErrorBoundary FallbackComponent={GlobalErrorFallback}>
         <Grid>
           <GridItem gridColumn="1/15" css={styles.globalNotifications}>
-            <NotificationList />
+            <NotificationList
+              types={[SiteNotificationTypes.Sale, SiteNotificationTypes.System]}
+            />
           </GridItem>
         </Grid>
 

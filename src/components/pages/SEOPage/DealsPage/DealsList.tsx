@@ -34,9 +34,9 @@ export function DealsList({ title, items }: Props) {
   let currentGridColumnPosition = 0;
   const { bk } = useBreakpoints();
   const nbItemsInARow = bk === BREAKPOINT_SIZES.S ? 1 : 2;
-  const { setRouteQueryParamOptions } = useSearchContext();
+  const { setQueryParamLabel, setRouteQueryParamOptions } = useSearchContext();
   const { setIsSearchOpen } = useSearchModalContext();
-  function handlePromotionClick(params: Record<string, string>) {
+  function handlePromotionClick(params: Record<string, string>, label: string) {
     setRouteQueryParamOptions({
       routes: [
         ROUTE_MAP[ROUTES.VEHICLE_CATALOG],
@@ -44,6 +44,7 @@ export function DealsList({ title, items }: Props) {
       ],
       params,
     });
+    setQueryParamLabel(label);
     setIsSearchOpen(true);
   }
   return (

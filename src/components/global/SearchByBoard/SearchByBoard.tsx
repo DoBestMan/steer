@@ -15,6 +15,8 @@ import { useUserPersonalizationContext } from '~/context/UserPersonalization.con
 import { SiteSearchResultActionQuery } from '~/data/models/SiteSearchResultActionQuery';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { ROUTE_MAP, ROUTES } from '~/lib/constants';
+import { FS_EVENT_NAMES } from '~/lib/constants/fullstory';
+import { setFSCustomEvent } from '~/lib/helpers/fullstory';
 import { isBrowser } from '~/lib/utils/browser';
 import { ui } from '~/lib/utils/ui-dictionary';
 
@@ -25,17 +27,19 @@ import { CTAIconTypes } from './SearchByBoard.types';
 export interface SearchByBoardProps {
   hasBrand?: boolean;
   hasTireSize?: boolean;
+  hasTireType?: boolean;
   hasVehicle?: boolean;
   isHomepage?: boolean;
   params?: Record<string, string>;
   promotionId?: string;
+  queryParamLabel?: string;
   title?: string;
   vehicleName?: string;
 }
 
 interface CTA {
   action: SiteSearchResultActionQuery;
-  isShow: boolean;
+  isShow?: boolean;
   label: string;
   onClick: (action: SiteSearchResultActionQuery) => () => void;
   type: CTAIconTypes;
@@ -54,8 +58,10 @@ function SearchByBoard({
   hasBrand = true,
   hasTireSize = true,
   hasVehicle = true,
+  hasTireType = true,
   isHomepage,
   params,
+  queryParamLabel,
   promotionId,
   title = ui('searchByBoard.title'),
   vehicleName,
@@ -64,6 +70,8 @@ function SearchByBoard({
     lockSearchStateToBrand,
     lockSearchStateToTireSize,
     lockSearchStateToVehicle,
+    lockSearchStateToTireType,
+    setQueryParamLabel,
     setRouteQueryParamOptions,
   } = useSearchContext();
   const { setIsSearchOpen, setCurrentInputQuery } = useSearchModalContext();
@@ -85,6 +93,11 @@ function SearchByBoard({
     linkHandler();
     toggleSubNav();
   }, [createSelectLinkHandler, toggleSubNav]);
+  const sendFSCustomEvent = (searchItem: string) => {
+    setFSCustomEvent(FS_EVENT_NAMES.SEARCH_BY_BOARD, {
+      searchItem,
+    });
+  };
   const addPromotionParam = (promoId: string | undefined) => {
     if (!isBrowser() || !promoId) {
       return;
@@ -99,6 +112,7 @@ function SearchByBoard({
       ],
       params,
     });
+    setQueryParamLabel(queryParamLabel);
   };
   const CTAList: CTA[] = [
     {
@@ -110,7 +124,7 @@ function SearchByBoard({
       isShow: hasVehicle,
       label: ui('searchByBoard.vehicle'),
       onClick: (action: SiteSearchResultActionQuery) => () => {
-        params &&
+        if (params) {
           setRouteQueryParamOptions({
             routes: [
               ROUTE_MAP[ROUTES.VEHICLE_CATALOG],
@@ -118,6 +132,9 @@ function SearchByBoard({
             ],
             params,
           });
+          setQueryParamLabel(queryParamLabel);
+          sendFSCustomEvent(CTA_TYPES.VEHICLE);
+        }
         setCurrentInputQuery({
           queryText: vehicleName ? vehicleName : action.queryText,
           queryType: action.queryType,
@@ -137,7 +154,7 @@ function SearchByBoard({
       isShow: hasTireSize,
       label: ui('searchByBoard.tireSize'),
       onClick: (action: SiteSearchResultActionQuery) => () => {
-        params &&
+        if (params) {
           setRouteQueryParamOptions({
             routes: [
               ROUTE_MAP[ROUTES.VEHICLE_CATALOG],
@@ -145,6 +162,8 @@ function SearchByBoard({
             ],
             params,
           });
+          setQueryParamLabel(queryParamLabel);
+        }
         lockSearchStateToTireSize();
         addPromotionParam(promotionId);
         setIsSearchOpen(true);
@@ -152,6 +171,7 @@ function SearchByBoard({
           queryText: action.queryText,
           queryType: action.queryType,
         });
+        sendFSCustomEvent(CTA_TYPES.TIRE_SIZE);
       },
       type: CTA_TYPES.TIRE_SIZE,
     },
@@ -179,8 +199,29 @@ function SearchByBoard({
           queryText: action.queryText,
           queryType: action.queryType,
         });
+        sendFSCustomEvent(CTA_TYPES.BRAND);
       },
       type: CTA_TYPES.BRAND,
+    },
+    {
+      action: {
+        queryText: '',
+        queryType: 'tireType',
+        type: 'SiteSearchResultActionQuery',
+      },
+      isShow: hasTireType,
+      label: ui('searchByBoard.tireType'),
+      onClick: (action: SiteSearchResultActionQuery) => () => {
+        lockSearchStateToTireType();
+        addPromotionParam(promotionId);
+        setIsSearchOpen(true);
+        sendFSCustomEvent(CTA_TYPES.TYPE);
+        setCurrentInputQuery({
+          queryText: action.queryText,
+          queryType: action.queryType,
+        });
+      },
+      type: CTA_TYPES.TYPE,
     },
     {
       action: {
@@ -192,6 +233,7 @@ function SearchByBoard({
       label: ui('searchByBoard.tireSnap'),
       onClick: () => () => {
         setIsTireSnapOpen(true);
+        sendFSCustomEvent(CTA_TYPES.SIMPLE_SNAP);
       },
       type: CTA_TYPES.SIMPLE_SNAP,
     },
@@ -201,7 +243,7 @@ function SearchByBoard({
     [CTA_TYPES.BRAND]: <Icon name={CTA_ICONS.ICON_BRANDS_CIRCULAR} />,
     [CTA_TYPES.TIRE_SIZE]: <Icon name={CTA_ICONS.ICON_TIRE_SIZE} />,
     [CTA_TYPES.VEHICLE]: <Car carId={CTA_ICONS.ICON_VEHICLE} />,
-    [CTA_TYPES.BRAND]: <Icon name={CTA_ICONS.ICON_BRANDS_CIRCULAR} />,
+    [CTA_TYPES.TYPE]: <Icon name={CTA_ICONS.ICON_TYPE} />,
   };
 
   const renderCTAList = (

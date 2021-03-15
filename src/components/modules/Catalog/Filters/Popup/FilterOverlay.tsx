@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-import { COLORS, CSSStyles, SPACING, Z_INDEX } from '~/lib/constants';
+import { COLORS, CSSStyles, MQ, SPACING, Z_INDEX } from '~/lib/constants';
 
 type Props = {
   isOpen: boolean;
@@ -10,7 +10,6 @@ function fiterOverlay(props: Props) {
   const { isOpen } = props;
 
   const base: CSSStyles = {
-    background: COLORS.GLOBAL.BLACK,
     display: 'block',
     height: '100vh',
     left: 0,
@@ -19,6 +18,10 @@ function fiterOverlay(props: Props) {
     position: 'absolute',
     width: '100%',
     zIndex: Z_INDEX.BEHIND,
+
+    [MQ.L]: {
+      background: COLORS.GLOBAL.BLACK,
+    },
   };
 
   return isOpen && base;

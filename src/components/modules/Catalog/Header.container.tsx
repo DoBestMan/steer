@@ -10,12 +10,14 @@ interface Props {
   isInternal?: boolean;
   onPreviewFilters: (filters?: Record<string, string>) => Promise<void>;
   previewFiltersData: { filters: SiteCatalogFilters; totalMatches: number };
+  showingResult: number;
   siteCatalogProducts: SiteCatalogProducts;
   sizeList?: string[];
 }
 
 export default function HeaderContainer({
   hasTopPicks,
+  showingResult,
   siteCatalogProducts,
   sizeList,
   onPreviewFilters,
@@ -31,6 +33,7 @@ export default function HeaderContainer({
       <Header
         siteCatalogProducts={siteCatalogProducts}
         hasTopPicks={hasTopPicks}
+        showingResult={showingResult}
         isInternal={false}
         sizeList={sizeList}
         location={locationString}

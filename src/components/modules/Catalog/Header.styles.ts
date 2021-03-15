@@ -6,6 +6,7 @@ const NAV_OFFSET = {
   M: 120,
   L: 150,
 };
+const transition = `border-color ${TIME.MS100}ms ease, color ${TIME.MS100}ms ease`;
 
 const styles: StylesMap = {
   action: {
@@ -24,6 +25,24 @@ const styles: StylesMap = {
       position: 'absolute',
       right: SPACING.SIZE_60,
     },
+  },
+  borderless: {
+    borderBottomColor: 'transparent',
+  },
+  darkHighlighted: {
+    '&:active': {
+      borderColor: COLORS.DARK.GRAY_40,
+      color: COLORS.DARK.GRAY_40,
+    },
+
+    '&:hover:not(:active), &:focus:not(:active)': {
+      borderColor: COLORS.GLOBAL.WHITE,
+      color: COLORS.GLOBAL.WHITE,
+    },
+
+    color: COLORS.GLOBAL.WHITE,
+    marginBottom: `${SPACING.SIZE_30}px`,
+    transition,
   },
   decorator: {
     ':after': {
@@ -46,6 +65,7 @@ const styles: StylesMap = {
     typography.primarySubhead,
     {
       alignItems: 'baseline',
+      color: COLORS.GLOBAL.WHITE,
       display: 'flex',
     },
   ],
@@ -56,6 +76,7 @@ const styles: StylesMap = {
     },
   ],
   link: {
+    color: COLORS.DARK.GRAY_40,
     marginLeft: SPACING.SIZE_05,
   },
   navOffset: {
@@ -82,10 +103,16 @@ const styles: StylesMap = {
       padding: `${SPACING.SIZE_60}px ${SPACING.SIZE_60}px ${SPACING.SIZE_20}px`,
     },
   },
-  title: [typography.primaryHeadline, { marginBottom: SPACING.SIZE_10 }],
-  wrappedLocation: {
-    marginTop: SPACING.SIZE_05,
+  sizeWrapper: {
+    display: 'flex',
   },
+  title: [
+    typography.primaryHeadline,
+    {
+      marginBottom: SPACING.SIZE_10,
+      textTransform: 'capitalize',
+    },
+  ],
 };
 
 export default styles;

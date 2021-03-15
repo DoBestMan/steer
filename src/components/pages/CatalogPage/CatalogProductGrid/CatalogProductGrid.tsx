@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 
 import Button from '~/components/global/Button/Button';
 import AdvancedListingPlaceholder from '~/components/modules/Catalog/AdvancedListing/AdvancedListingPlaceholder';
-import ProductGrid from '~/components/modules/Catalog/ProductGrid/ProductGrid';
 import { addHashForScroll } from '~/components/pages/CatalogPage/CatalogPage.helpers';
 import { useCatalogProductsContext } from '~/context/CatalogProducts.context';
 import { ListResultMetadata } from '~/data/models/ListResultMetadata';
@@ -35,7 +34,6 @@ function CatalogProductGrid({
   fetchNewProducts,
 }: Props & Pick<ListResultMetadata, 'pagination'>) {
   const {
-    isAdvancedView,
     isLoading,
     displayedProducts,
     setDisplayedProducts,
@@ -109,25 +107,19 @@ function CatalogProductGrid({
 
   return (
     <>
-      {isAdvancedView ? (
-        <>
-          {displayedProducts.map((product, i) => {
-            const scrollId = `${product?.name.split(' ').join('-')}__${i}`;
-            return (
-              <div
-                css={styles.advancedListing}
-                data-scroll-id={scrollId}
-                onClick={handleProductClick(scrollId)}
-                key={`${product?.name}-${i}`}
-              >
-                <Advancedlisting product={product} />
-              </div>
-            );
-          })}
-        </>
-      ) : (
-        <ProductGrid productList={displayedProducts} />
-      )}
+      {displayedProducts.map((product, i) => {
+        const scrollId = `${product?.name.split(' ').join('-')}__${i}`;
+        return (
+          <div
+            css={styles.advancedListing}
+            data-scroll-id={scrollId}
+            onClick={handleProductClick(scrollId)}
+            key={`${product?.name}-${i}`}
+          >
+            <Advancedlisting product={product} />
+          </div>
+        );
+      })}
       {pagination && displayedProducts.length < pagination?.total && (
         <div css={styles.loadMoreButton}>
           <Button

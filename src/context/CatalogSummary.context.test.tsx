@@ -169,8 +169,9 @@ describe('onDataReady', () => {
           showLoadingInterstitial: true,
         },
         expected: {
-          contentStage: STAGES.BUILD_IN,
-          stage: STAGES.BUILD_IN,
+          contentStage: STAGES.RESULTS,
+          showSummary: true,
+          stage: STAGES.RESULTS,
         },
       },
     ],
@@ -224,8 +225,8 @@ describe('onDataReady', () => {
           showLoadingInterstitial: true,
         },
         expected: {
-          contentStage: STAGES.BUILD_IN,
-          stage: STAGES.BUILD_IN,
+          contentStage: STAGES.DATA_MOMENT,
+          stage: STAGES.DATA_MOMENT,
         },
       },
     ],
@@ -268,18 +269,10 @@ describe('onDataReady', () => {
         },
       },
     ],
-  ])(
-    '%s',
-    async (
-      _,
-      { params: { showLoadingInterstitial, siteCatalogSummary }, expected },
-    ) => {
-      // Have props been set correctly (based on data received)
-      expect(onDataReady(siteCatalogSummary, showLoadingInterstitial)).toEqual(
-        expected,
-      );
+  ])('%s', async (_, { params: { siteCatalogSummary }, expected }) => {
+    // Have props been set correctly (based on data received)
+    expect(onDataReady(siteCatalogSummary)).toEqual(expected);
 
-      cleanup();
-    },
-  );
+    cleanup();
+  });
 });

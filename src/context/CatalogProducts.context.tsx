@@ -7,10 +7,14 @@ import {
 } from '~/components/pages/CatalogPage/CatalogPage.types';
 import { shouldDisplayProductsError } from '~/components/pages/CatalogPage/CatalogPage.utils';
 import { STAGES } from '~/components/pages/CatalogPage/CatalogSummary/CatalogSummary.constants';
+import { useSiteNotificationsContext } from '~/context/SiteNotifications.context';
 import { SiteCatalogFilters } from '~/data/models/SiteCatalogFilters';
 import { SiteCatalogProductItem } from '~/data/models/SiteCatalogProductItem';
 import { SiteCatalogProducts } from '~/data/models/SiteCatalogProducts';
+import { SiteNotificationTypes } from '~/data/models/SiteNotificationTypes';
 import { useApiDataWithDefault } from '~/hooks/useApiDataWithDefault';
+import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
+import { THEME, TIME } from '~/lib/constants';
 import { eventEmitters } from '~/lib/events/emitters';
 import { fetchWithErrorHandling } from '~/lib/fetch';
 import { AsyncResponse } from '~/lib/fetch/index.types';
@@ -27,18 +31,23 @@ export interface CatalogProductsContextProps {
     page: number,
     skipGroups: boolean,
   ) => Promise<SiteCatalogProducts | null>;
+  forceClosePopup: boolean;
   handleUpdateResults: (
     filters: Record<string, string>,
     withoutScroll?: boolean,
+    withoutSavingFilters?: boolean,
   ) => Promise<void>;
   isAdvancedView: boolean;
   isLoading: boolean;
   onPreviewFilters: (filters?: Record<string, string>) => Promise<void>;
+  pastFilters: Array<Record<string, string>>;
   previewFiltersData: { filters: SiteCatalogFilters; totalMatches: number };
   scrollToGrid: () => void;
   setDisplayedProducts(products: SiteCatalogProductItem[]): void;
+  setForceClosePopup(forceClosePopup: boolean): void;
   setIsAdvancedView(isAdvancedView: boolean): void;
   setIsLoading(isLoading: boolean): void;
+  setPastFilters(pastFilters: Array<Record<string, string>>): void;
   siteCatalogProducts: SiteCatalogProducts | null;
 }
 
@@ -63,6 +72,7 @@ function useContextSetup({
   const { setGlobalToastMessage } = useGlobalToastContext();
   const { query, push, pathname, asPath } = useRouter();
   const { siteCatalogSummary, stage } = useCatalogSummaryContext();
+  const { addNotification } = useSiteNotificationsContext();
 
   const [isAdvancedView, setIsAdvancedView] = useState(
     !!hasDefaultAdvancedView,
@@ -78,13 +88,23 @@ function useContextSetup({
     totalMatches: 0,
     filters: EMPTY_FILTERS as SiteCatalogFilters,
   });
+  // Force close filter popups once filters are removed forcefully
+  const [forceClosePopup, setForceClosePopup] = useState<boolean>(false);
+  const [pastFilters, setPastFilters] = useState<Array<Record<string, string>>>(
+    [],
+  );
 
   const handleUpdateResults = async (
     filters: Record<string, string>,
     withoutScroll?: boolean,
+    withoutSavingFilters?: boolean,
   ) => {
     setIsLoading(true);
-    const response = await handleUpdateFilters(filters, withoutScroll);
+    const response = await handleUpdateFilters(
+      filters,
+      withoutScroll,
+      withoutSavingFilters,
+    );
     if (!response.isSuccess) {
       setIsLoading(false);
       throw new Error(ui('error.generic'));
@@ -109,12 +129,72 @@ function useContextSetup({
     query: newQuery,
     endpoint,
     options: {
-      onSuccess: (data) => {
-        setProductsData(data?.siteCatalogProducts);
+      onSuccess: async (data) => {
         setDisplayedProducts([]);
+        if (!data?.siteCatalogProducts?.listResultMetadata.pagination?.total) {
+          const route = asPath.split('?');
+          const params: Record<string, string> = {};
+          const { oem, tireSize, trim } = newQuery;
+
+          // Skip page transition when updating filters
+          eventEmitters.skipPageTransition.emit(null);
+
+          Object.entries({ oem, tireSize, trim }).forEach(([k, v]) => {
+            const stringifiedVal = getParam(v);
+            if (!!stringifiedVal && !pageParams[k]) {
+              params[k] = stringifiedVal;
+            }
+          });
+
+          setPastFilters([params]);
+
+          const searchString = new URLSearchParams(params).toString();
+          push(`${pathname}?${searchString}`, `${route[0]}?${searchString}`, {
+            shallow: true,
+          });
+          addNotification({
+            handleNotificationClick: () => {},
+            icon: {
+              svgId: 'notification',
+              type: ICON_IMAGE_TYPE.ICON,
+            },
+            id: new Date().getTime().toString(),
+            subtext: ui('catalog.notification.subtext'),
+            suppressFromHomePage: false,
+            theme: THEME.LIGHT,
+            title: ui('catalog.notification.title'),
+            type: SiteNotificationTypes.Shop,
+          });
+
+          const response: AsyncResponse<{
+            siteCatalogProducts: SiteCatalogProducts;
+          }> = await fetchWithErrorHandling({
+            endpoint,
+            includeUserRegion: true,
+            includeUserZip: true,
+            method: 'get',
+            query: { ...params, ...pageParams },
+          });
+          if (response.isSuccess) {
+            setProductsData(response?.data?.siteCatalogProducts);
+          }
+        } else {
+          if (pastFilters.length === 0) {
+            const params: Record<string, string> = {};
+
+            Object.entries(query).forEach(([k, v]) => {
+              const stringifiedVal = getParam(v);
+              if (!!stringifiedVal && !pageParams[k]) {
+                params[k] = stringifiedVal;
+              }
+            });
+            setPastFilters([params]);
+          }
+          setProductsData(data?.siteCatalogProducts);
+        }
         setPreviewFiltersData({
           totalMatches:
-            data?.siteCatalogProducts.listResultMetadata.pagination?.total || 0,
+            data?.siteCatalogProducts.listResultMetadata.pagination?.total,
           filters:
             data?.siteCatalogProducts.siteCatalogFilters || EMPTY_FILTERS,
         });
@@ -149,10 +229,15 @@ function useContextSetup({
 
   // appends filters to existing URL query params
   const handleUpdateFilters = useCallback(
-    async (filters: Record<string, string>, withoutScroll) => {
+    async (
+      filters: Record<string, string>,
+      withoutScroll,
+      withoutSavingFilters,
+    ) => {
       if (!withoutScroll) {
         scrollToGrid();
       }
+      setIsAdvancedView(!!filters.skipGroups);
 
       const route = asPath.split('?');
       const params: Record<string, string> = {};
@@ -166,6 +251,10 @@ function useContextSetup({
           params[k] = stringifiedVal;
         }
       });
+
+      if (!withoutSavingFilters) {
+        setPastFilters((prevFilters) => [...prevFilters, filters]);
+      }
 
       const searchString = new URLSearchParams(params).toString();
       push(`${pathname}?${searchString}`, `${route[0]}?${searchString}`, {
@@ -185,13 +274,66 @@ function useContextSetup({
       });
 
       if (response.isSuccess) {
-        setIsLoading(false);
-        setProductsData(response.data.siteCatalogProducts);
+        if (
+          !response.data.siteCatalogProducts?.listResultMetadata.pagination
+            ?.total
+        ) {
+          setForceClosePopup(true);
+          addNotification({
+            handleNotificationClick: () => {},
+            icon: {
+              svgId: 'notification',
+              type: ICON_IMAGE_TYPE.ICON,
+            },
+            id: new Date().getTime().toString(),
+            subtext: ui('catalog.notification.subtext'),
+            suppressFromHomePage: false,
+            theme: THEME.LIGHT,
+            title: ui('catalog.notification.title'),
+            type: SiteNotificationTypes.Shop,
+          });
+
+          Object.keys(filters).forEach((key) => delete params[key]);
+          const searchString = new URLSearchParams(params).toString();
+          push(`${pathname}?${searchString}`, `${route[0]}?${searchString}`, {
+            shallow: true,
+          });
+
+          const newResponse: AsyncResponse<{
+            siteCatalogProducts: SiteCatalogProducts;
+          }> = await fetchWithErrorHandling({
+            endpoint,
+            includeUserRegion: true,
+            includeUserZip: true,
+            method: 'get',
+            query: { ...params, ...pageParams },
+          });
+
+          if (newResponse.isSuccess) {
+            setProductsData(newResponse.data.siteCatalogProducts);
+            setTimeout(() => {
+              setIsLoading(false);
+            }, TIME.MS500);
+          }
+        } else {
+          setIsLoading(false);
+          setProductsData(response.data.siteCatalogProducts);
+        }
       }
 
       return response;
     },
-    [asPath, pathname, query, pageParams, push, scrollToGrid, endpoint],
+    [
+      asPath,
+      pathname,
+      query,
+      pageParams,
+      push,
+      scrollToGrid,
+      endpoint,
+      addNotification,
+      setPastFilters,
+    ],
   );
 
   // preview data and handler for open filter dropdowns
@@ -259,15 +401,19 @@ function useContextSetup({
   return {
     displayedProducts,
     fetchNewProducts,
+    forceClosePopup,
     handleUpdateResults,
     isAdvancedView,
     isLoading,
     onPreviewFilters,
+    pastFilters,
     previewFiltersData,
     scrollToGrid,
     setDisplayedProducts,
+    setForceClosePopup,
     setIsAdvancedView,
     setIsLoading,
+    setPastFilters,
     siteCatalogProducts: productsData,
   };
 }

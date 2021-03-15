@@ -6,6 +6,7 @@ import {
   RADIUS,
   SPACING,
   StylesMap,
+  THEME,
   TIME,
   Z_INDEX,
 } from '~/lib/constants';
@@ -18,6 +19,29 @@ import {
 import { typography } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
+  [THEME.DARK]: {
+    backgroundColor: COLORS.DARK.GRAY_95,
+    color: COLORS.GLOBAL.WHITE,
+    svg: {
+      color: COLORS.GLOBAL.ORANGE,
+    },
+  },
+  // Dark orange
+  [THEME.ORANGE]: {
+    backgroundColor: COLORS.ORANGE.SHADE_15_SOLID,
+    color: COLORS.GLOBAL.WHITE,
+    svg: {
+      color: COLORS.GLOBAL.WHITE,
+    },
+  },
+  // Light orange
+  [THEME.LIGHT]: {
+    backgroundColor: COLORS.GLOBAL.ORANGE,
+    color: COLORS.GLOBAL.WHITE,
+    svg: {
+      color: COLORS.GLOBAL.WHITE,
+    },
+  },
   bannerIcon: {
     svg: {
       color: COLORS.GLOBAL.ORANGE,
@@ -131,8 +155,7 @@ const styles: StylesMap = {
     {
       alignItems: 'center',
       animation: `${fadeInUp} ${TIME.MS350}ms ease-in`,
-      backgroundColor: COLORS.DARK.GRAY_95,
-      color: COLORS.GLOBAL.WHITE,
+      borderRadius: RADIUS.RADIUS_8,
       display: 'inline-flex',
       justifyContent: 'center',
       marginBottom: SPACING.SIZE_05,
@@ -142,7 +165,7 @@ const styles: StylesMap = {
       padding: SPACING.SIZE_10,
       position: 'relative',
       textAlign: 'left',
-      width: '320px',
+      width: '280px',
       [MQ.M]: {
         padding: SPACING.SIZE_10,
         width: '330px',
@@ -152,7 +175,6 @@ const styles: StylesMap = {
         {
           alignItems: 'center',
           animation: `${fadeInUp20px} ${TIME.MS200}ms ease-in`,
-          borderRadius: RADIUS.RADIUS_15,
           padding: SPACING.SIZE_10,
         },
       ],

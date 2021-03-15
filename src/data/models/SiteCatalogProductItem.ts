@@ -13,9 +13,16 @@ export enum SiteCatalogProductItemEnum {
   SiteCatalogProductItem = 'SiteCatalogProductItem',
 }
 
+export interface SiteCatalogProductSpec {
+  concise: string;
+  label: string;
+  value: string;
+}
+
 export interface SiteCatalogProductItem {
   activeFilterValueList: Array<string> | null;
   brand: SiteCatalogBrand;
+  ctaLabel?: string | null;
   dataMomentList: Array<{
     icon: SiteIcon;
     label: string;
@@ -49,11 +56,7 @@ export interface SiteCatalogProductItem {
   } | null;
   siteCatalogPromotionInfo: SiteCatalogPromotionInfo | null;
   size: string | null;
-  specList: Array<{
-    concise: string;
-    label: string;
-    value: string;
-  }>;
+  specList: Array<SiteCatalogProductSpec>;
   topPicksAttribute: string | null;
   type: SiteCatalogProductItemEnum;
 }

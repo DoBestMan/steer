@@ -38,6 +38,11 @@ const styles: StylesMap = {
       padding: `${SPACING.SIZE_50}px 0 ${SPACING.SIZE_60}px`,
     },
   },
+  divider: {
+    border: 0,
+    borderTop: `1px solid ${COLORS.LIGHT.GRAY_20}`,
+    margin: 0,
+  },
   eyebrow: [
     typography.primaryHeadline,
     {
@@ -57,12 +62,12 @@ const styles: StylesMap = {
         paddingBottom: SPACING.SIZE_20,
       },
       a: links.dark,
-      color: COLORS.DARK.GRAY_40,
+      color: COLORS.LIGHT.GRAY_70,
       listStyleType: 'inherit',
     },
   ],
   stepList: {
-    padding: `0 0 ${SPACING.SIZE_60}px ${SPACING.SIZE_25}px`,
+    padding: `${SPACING.SIZE_40}px 0 ${SPACING.SIZE_60}px ${SPACING.SIZE_25}px`,
   },
   supportPrompt: {
     padding: `${SPACING.SIZE_60}px 0 0`,
@@ -75,14 +80,12 @@ const styles: StylesMap = {
   supportPromptTitle: [
     typography.tertiaryHeadline,
     {
-      color: COLORS.GLOBAL.WHITE,
       paddingBottom: SPACING.SIZE_20,
     },
   ],
   title: [
     typography.jumboHeadline,
     {
-      color: COLORS.GLOBAL.WHITE,
       margin: `0 0 ${SPACING.SIZE_40}px`,
       [MQ.L]: typographyStyles.primaryHeadline.XL,
     },

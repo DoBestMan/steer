@@ -6,12 +6,13 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import Modal from '~/components/global/Modal/Modal';
 import { useSearchContext } from '~/components/modules/Search/Search.context';
 import { useSearchModalContext } from '~/components/modules/Search/SearchModal.context';
+import CatalogLoading from '~/components/pages/CatalogPage/CatalogLoading/CatalogLoading';
 import { useModalContext } from '~/context/Modal.context';
 import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
 import { MODAL_THEME, TIME } from '~/lib/constants';
 import { getScroll } from '~/lib/helpers/scroll';
 
-import SearchPageLoading from './SearchPageLoading/SearchPageLoading';
+import styles from './SearchModal.styles';
 
 const Search = dynamic(() => import('./Search'));
 
@@ -36,6 +37,7 @@ function SearchModal() {
     searchState,
     searchResults,
     setHasLockedSearchState,
+    setQueryParamLabel,
     setSearchState,
     setRouteQueryParamOptions,
     setShouldPreventLinkNavigation,
@@ -77,6 +79,7 @@ function SearchModal() {
     setHasLockedSearchState(false);
     setShouldPreventLinkNavigation(false);
     setRouteQueryParamOptions();
+    setQueryParamLabel();
     toggleIsSearchOpen();
   }, [
     isSearchOpen,
@@ -84,6 +87,7 @@ function SearchModal() {
     setPrimaryQuery,
     setSearchState,
     setHasLockedSearchState,
+    setQueryParamLabel,
     setShouldPreventLinkNavigation,
     setRouteQueryParamOptions,
     toggleIsSearchOpen,
@@ -134,7 +138,7 @@ function SearchModal() {
       isOpen={isSearchOpen}
       onAfterOpen={handleAfterOpenModal}
       onClose={handleCloseSearch}
-      theme={MODAL_THEME.ORANGE}
+      theme={showLoading ? MODAL_THEME.LIGHT : MODAL_THEME.ORANGE}
     >
       <Search
         addPastSearch={addPastSearch}
@@ -154,7 +158,13 @@ function SearchModal() {
         shouldPreventLinkNavigation={shouldPreventLinkNavigation}
       />
 
-      <SearchPageLoading showLoading={showLoading} />
+      {showLoading && (
+        <div css={styles.loaderWrapper}>
+          <div css={styles.loader}>
+            <CatalogLoading />
+          </div>
+        </div>
+      )}
     </Modal>
   );
 }

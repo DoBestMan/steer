@@ -1,7 +1,7 @@
 import { Cars } from '~/components/global/Car/Car.enums';
 import { SCENERIES } from '~/components/global/Scenery/Scenery.constants';
+import { NAV_HEIGHT } from '~/components/modules/Nav/Nav.styles';
 import { SiteImage } from '~/data/models/SiteImage';
-
 export const DEFAULT_VEHICLE = Cars['car--sedan'];
 export const DEFAULT_SCENERY = SCENERIES.RURAL;
 export const DEFAULT_IMAGE = {
@@ -21,6 +21,7 @@ export enum STAGES {
 
 const overlayIn = 600;
 const stageTransition = 800;
+const headerHeight = '140px';
 
 export const stageToMessageTimeout = {
   [STAGES.LOADING]: { enter: 0, exit: 0 },
@@ -43,9 +44,9 @@ export const TIMINGS = {
 export const MEASUREMENTS = {
   [STAGES.LOADING]: {
     CONTENT_MIN_HEIGHT: {
-      S: '100vh',
-      M: '100vh',
-      L: '100vh',
+      S: NAV_HEIGHT.S,
+      M: NAV_HEIGHT.M,
+      L: headerHeight,
     },
     CONTENT_TOP: {
       S: 0,
@@ -55,38 +56,38 @@ export const MEASUREMENTS = {
   },
   [STAGES.BUILD_IN]: {
     CONTENT_MIN_HEIGHT: {
-      S: '40vh',
-      M: '36vh',
-      L: '36vh',
+      S: NAV_HEIGHT.S,
+      M: NAV_HEIGHT.M,
+      L: headerHeight,
     },
     CONTENT_TOP: {
-      S: 'max(60vh, 385px)',
-      M: 'max(64vh, 517px)',
-      L: 'max(64vh, 308px)',
+      S: 0,
+      M: 0,
+      L: 140,
     },
   },
   [STAGES.DATA_MOMENT]: {
     CONTENT_MIN_HEIGHT: {
-      S: '40vh',
-      M: '35vh',
-      L: '33.33vh',
+      S: NAV_HEIGHT.S,
+      M: NAV_HEIGHT.M,
+      L: headerHeight,
     },
     CONTENT_TOP: {
-      S: 'max(60vh, 260px)',
-      M: 'max(64vh, 425px)',
-      L: 'max(64vh, 408px)',
+      S: 0,
+      M: 0,
+      L: 0,
     },
   },
   [STAGES.RESULTS]: {
     CONTENT_MIN_HEIGHT: {
-      S: '40%',
-      M: '35%',
-      L: '32.0%',
+      S: NAV_HEIGHT.S,
+      M: NAV_HEIGHT.M,
+      L: headerHeight,
     },
     CONTENT_TOP: {
-      S: 'max(60%, 385px)',
-      M: 'max(65%, 517px)',
-      L: 'max(67.0%, 549px)',
+      S: 0,
+      M: 0,
+      L: 0,
     },
   },
   [STAGES.NO_RESULTS]: {

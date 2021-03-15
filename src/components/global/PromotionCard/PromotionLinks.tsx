@@ -8,7 +8,11 @@ import styles from './PromotionCard.styles';
 
 export interface PromotionLinksProps {
   catalogParams?: Record<string, string>;
-  handlePromotionClick?: (params: Record<string, string>) => void;
+  eyebrow?: string | null;
+  handlePromotionClick?: (
+    params: Record<string, string>,
+    label: string,
+  ) => void;
   handleReferAFriendClick?: () => void;
   label: string;
   link?: SiteLink;
@@ -19,10 +23,11 @@ export function SiteCTAOpenCatalog({
   label = ui('deals.viewTirePromotionAction'),
   catalogParams,
   handlePromotionClick,
+  eyebrow,
 }: PromotionLinksProps) {
   const onPromotionClick = () => {
     if (handlePromotionClick && catalogParams) {
-      handlePromotionClick(catalogParams);
+      handlePromotionClick(catalogParams, eyebrow || '');
     }
   };
   return (

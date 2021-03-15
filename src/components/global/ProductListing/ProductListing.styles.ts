@@ -45,6 +45,15 @@ const styles: StylesMap = {
       },
     },
   ],
+  category: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  categoryIcon: {
+    width: 12,
+    height: 12,
+    marginRight: SPACING.SIZE_05,
+  },
   deliveryIcon: {
     position: 'relative',
     left: -3,
@@ -166,14 +175,14 @@ const styles: StylesMap = {
   ],
   root: {
     '&:hover': {
-      borderColor: COLORS.GLOBAL.ORANGE,
+      borderBottom: BORDERS.SOLID_ORANGE_1PX,
     },
 
     alignItems: 'center',
-    borderBottom: BORDERS.SOLID_GRAY_20_1PX,
     display: 'flex',
     flexDirection: 'column',
     height: '100%',
+    marginRight: `${SPACING.SIZE_20}px`,
     padding: `${SPACING.SIZE_25}px ${SPACING.SIZE_10}px`,
     position: 'relative',
 
@@ -287,6 +296,9 @@ const styles: StylesMap = {
       marginTop: SPACING.SIZE_02,
     },
   ],
+  topPickBadge: {
+    zIndex: Z_INDEX.BETWEEN_ZERO_TOP,
+  },
 };
 
 export default styles;

@@ -5,125 +5,37 @@ import { Transition } from 'react-transition-group';
 import { TransitionStatus } from 'react-transition-group/Transition';
 
 import Button from '~/components/global/Button/Button';
-import Casino from '~/components/global/Casino/Casino';
+import Car from '~/components/global/Car/Car';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
-import Image from '~/components/global/Image/Image';
 import BaseLink from '~/components/global/Link/BaseLink';
 import Markdown from '~/components/global/Markdown/Markdown';
+import SizeConfirmModal from '~/components/global/Modal/SizeConfirmModal';
 import { useSearchContext } from '~/components/modules/Search/Search.context';
 import { SearchStateEnum } from '~/components/modules/Search/Search.types';
 import { useSearchModalContext } from '~/components/modules/Search/SearchModal.context';
-import TopPicks from '~/components/pages/CatalogPage/TopPicks/TopPicks.container';
-import { useCatalogProductsContext } from '~/context/CatalogProducts.context';
 import { useCatalogSummaryContext } from '~/context/CatalogSummary.context';
 import { useModalContext } from '~/context/Modal.context';
 import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
-import { SiteCatalogSummaryBuildIn } from '~/data/models/SiteCatalogSummaryBuildIn';
 import { SiteCatalogSummaryPrompt } from '~/data/models/SiteCatalogSummaryPrompt';
 import { VehicleMetadata } from '~/data/models/VehicleMetadata';
-import { BUTTON_STYLE, LINK_TYPES, THEME } from '~/lib/constants';
-import { LOCAL_STORAGE, PROPERTIES } from '~/lib/constants/localStorage';
+import { BUTTON_STYLE, LINK_TYPES, MODAL_THEME } from '~/lib/constants';
 import { eventEmitters } from '~/lib/events/emitters';
-import { transformSrcLogoToWhite } from '~/lib/utils/cloudinary/cloudinary';
 import { isValidStaticModal } from '~/lib/utils/modal';
 import { getHrefWithParams } from '~/lib/utils/routes';
 import { ui } from '~/lib/utils/ui-dictionary';
 
+import CatalogLoading from '../CatalogLoading/CatalogLoading';
 import { STAGES } from '../CatalogPage.constants';
 import { stageToMessageTimeout } from '../CatalogSummary/CatalogSummary.constants';
 import styles from './CatalogMessage.styles';
 import MessageContainer from './components/MessageContainer';
 
-interface BuildInMessageProps {
-  siteCatalogSummaryBuildIn: SiteCatalogSummaryBuildIn | null;
-}
-
-const BRAND_LOGO_SIZES = [100, 200];
-
-export function BuildInMessage({
-  siteCatalogSummaryBuildIn,
-}: BuildInMessageProps) {
-  if (!siteCatalogSummaryBuildIn) {
-    return null;
-  }
-
-  /**
-   * Split the title by digits, and render the Casino component instead
-   * of the digit string (has to be the first word in the string).
-   */
-  const digitsRegex = /(\d+)/;
-  const splitTitle = siteCatalogSummaryBuildIn.title
-    // split by digits
-    .split(digitsRegex)
-    // remove empty strings
-    .filter((s) => s.length)
-    // convert opening digits to number
-    .map((s, i) =>
-      i === 0 && digitsRegex.test(s) ? (
-        <Casino animate numberDisplayed={parseInt(s, 10)} />
-      ) : (
-        s
-      ),
-    );
-
-  return (
-    <Grid css={styles.container}>
-      <GridItem css={styles.containerInner}>
-        {/* TODO: check heading hierarchy */}
-        <h1
-          aria-label={siteCatalogSummaryBuildIn.title}
-          aria-live="polite"
-          css={styles.heading}
-        >
-          {splitTitle.length > 1 ? (
-            <span aria-hidden>
-              {splitTitle.map((s, i) => (
-                <span key={i}>{s}</span>
-              ))}
-            </span>
-          ) : (
-            siteCatalogSummaryBuildIn.title
-          )}
-        </h1>
-        {siteCatalogSummaryBuildIn.brandList && (
-          <ul css={styles.list}>
-            {siteCatalogSummaryBuildIn.brandList.map(({ image, label }) => {
-              if (!image) {
-                return;
-              }
-              const id = label.replace(/\s+/g, '').toLowerCase();
-
-              // image.src should be immutable
-              const src = transformSrcLogoToWhite(image.src);
-
-              return (
-                <li key={id}>
-                  <div css={styles.brandImage}>
-                    <Image
-                      altText={label}
-                      src={src}
-                      widths={BRAND_LOGO_SIZES}
-                    />
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
-        )}
-      </GridItem>
-    </Grid>
-  );
-}
-
 interface DataMomentMessageProps {
-  exploreMore?: () => void;
-  isSearchForTireSize?: boolean;
   openStaticModal: (modalId: string) => void;
   setStage(stage: STAGES): void;
   showLoadingInterstitial: boolean;
   siteCatalogSummaryPrompt: SiteCatalogSummaryPrompt | null;
-  totalTireCount?: number;
 }
 
 export function DataMomentMessage({
@@ -131,34 +43,14 @@ export function DataMomentMessage({
   showLoadingInterstitial,
   siteCatalogSummaryPrompt,
   openStaticModal,
-  exploreMore,
-  totalTireCount,
-  isSearchForTireSize,
 }: DataMomentMessageProps) {
   const { message } = useTheme();
-  const { asPath, query } = useRouter();
-  const { setIsAdvancedView } = useCatalogProductsContext();
+  const { asPath } = useRouter();
 
   const { selectVehicle } = useUserPersonalizationContext();
-  const [step, setStep] = useState<number>(1);
-  const [comesFromShowTopPicks, setComesFromShowTopPicks] = useState<boolean>(
-    false,
+  const [isSizeConfirmModalOpen, setIsSizeConfirmModalOpen] = useState<boolean>(
+    true,
   );
-  let showTopPicks = false;
-  let mustShow = false;
-  if (siteCatalogSummaryPrompt) {
-    mustShow = siteCatalogSummaryPrompt.mustShow;
-  }
-  /**
-   * If coming from Search, set programmatic focus to the message content
-   */
-  if (showLoadingInterstitial && step === 1 && !mustShow) {
-    showTopPicks = true;
-  }
-
-  if (comesFromShowTopPicks) {
-    showTopPicks = false;
-  }
 
   const titleRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -176,6 +68,9 @@ export function DataMomentMessage({
     }
   }
 
+  const toggleSizeConfirmModal = () =>
+    setIsSizeConfirmModalOpen(!isSizeConfirmModalOpen);
+
   const createPromptCtaClickHandler = function (
     vehicleMetadata: VehicleMetadata | null,
     siteQueryParams: Record<string, string>,
@@ -186,6 +81,8 @@ export function DataMomentMessage({
       if (vehicleMetadata) {
         selectVehicle(vehicleMetadata);
       }
+      setStage && setStage(STAGES.RESULTS);
+      toggleSizeConfirmModal();
     };
   };
 
@@ -193,153 +90,76 @@ export function DataMomentMessage({
     siteCatalogSummaryPrompt?.ctaList &&
     siteCatalogSummaryPrompt.ctaList.length > 1;
 
-  function renderTopPicksSection() {
-    return (
-      <Grid css={styles.container}>
-        <GridItem
-          css={styles.containerInner}
-          gridColumnM="4/end"
-          gridColumnL="8/end"
-        >
-          <div ref={titleRef} tabIndex={-1}>
-            <Markdown
-              css={[styles.heading, styles.dataMomentHeading]}
-              renderers={{ paragraph: 'h1' }}
-            >
-              {ui('catalog.message.topPicksTitle')}
-            </Markdown>
-          </div>
-          <div css={styles.dataMomentCtaWrapper} data-testid="catalog-cta-list">
-            <Button
-              onClick={async function () {
-                (await setStage) && setStage(STAGES.RESULTS);
-                setIsAdvancedView(true);
-                window.localStorage.setItem(
-                  LOCAL_STORAGE[PROPERTIES.ADVANCED_VIEW],
-                  'true',
-                );
-                if (exploreMore) {
-                  setTimeout(exploreMore, 500);
-                }
-              }}
-              style={BUTTON_STYLE.OUTLINED}
-              theme={THEME.ORANGE}
-            >
-              {totalTireCount && totalTireCount > 0
-                ? ui('catalog.message.showAllButton', { totalTireCount })
-                : ui('catalog.message.showAllButton', {
-                    totalTireCount: 'all',
-                  })}
-            </Button>
-            <Button
-              onClick={function () {
-                !isSearchForTireSize && setComesFromShowTopPicks(true);
-                if (!query.oem) {
-                  if (isSearchForTireSize) {
-                    setStage && setStage(STAGES.RESULTS);
-                  } else {
-                    setStage && setStage(STAGES.DATA_MOMENT);
-                  }
-
-                  // Reset scroll position to top
-                  window.scrollTo(0, 0);
-                  return;
-                }
-                setStep(2);
-              }}
-              style={BUTTON_STYLE.SOLID}
-              theme={message.buttonTheme}
-            >
-              {ui('catalog.message.topPicksButton')}
-            </Button>
-          </div>
-          <Markdown isEditorial css={styles.dataMomentCopy}>
-            {ui('catalog.message.secondaryHeadline')}
-          </Markdown>
-          <Markdown isEditorial css={styles.secondarySubHeadline}>
-            {ui('catalog.message.secondarySubHeadline')}
-          </Markdown>
-        </GridItem>
-      </Grid>
-    );
-  }
-
-  if (showTopPicks && step === 1) {
-    return renderTopPicksSection();
-  }
-
   return (
     siteCatalogSummaryPrompt && (
-      <Grid css={styles.container}>
-        <GridItem
-          css={styles.containerInner}
-          gridColumnM="4/end"
-          gridColumnL="8/end"
-        >
-          <div ref={titleRef} tabIndex={-1}>
-            <Markdown
-              css={[styles.heading, styles.dataMomentHeading]}
-              renderers={{ paragraph: 'h1' }}
-            >
-              {siteCatalogSummaryPrompt.title}
-            </Markdown>
+      <SizeConfirmModal
+        isOpen={isSizeConfirmModalOpen}
+        contentLabel="modal"
+        theme={MODAL_THEME.ORANGE}
+      >
+        <Car css={styles.car} carId="car--chevrolet-colorado" />
+        <div ref={titleRef} tabIndex={-1}>
+          <Markdown
+            css={[styles.heading, styles.dataMomentHeading]}
+            renderers={{ paragraph: 'h1' }}
+          >
+            {siteCatalogSummaryPrompt.title}
+          </Markdown>
+        </div>
+        {siteCatalogSummaryPrompt.body && (
+          <Markdown css={styles.dataMomentBody}>
+            {siteCatalogSummaryPrompt.body}
+          </Markdown>
+        )}
+        {siteCatalogSummaryPrompt.infoLink && isValid && (
+          <button css={styles.dataMomentHelp} onClick={openModal}>
+            {siteCatalogSummaryPrompt.infoLink.label}
+          </button>
+        )}
+        {siteCatalogSummaryPrompt.ctaList && (
+          <div css={styles.dataMomentCtaWrapper} data-testid="catalog-cta-list">
+            {siteCatalogSummaryPrompt.ctaList.map(
+              ({ label, siteQueryParams, vehicleMetadata }) => {
+                const buttonStyle = hasMultipleCtas
+                  ? message.buttonStyle
+                  : BUTTON_STYLE.SOLID;
+                const id = label.replace(/\s+/g, '').toLowerCase();
+                const href = getHrefWithParams(asPath, siteQueryParams);
+
+                return siteQueryParams ? (
+                  <Button
+                    key={id}
+                    as={LINK_TYPES.A}
+                    href={href}
+                    onClick={createPromptCtaClickHandler(
+                      vehicleMetadata,
+                      siteQueryParams,
+                    )}
+                    style={buttonStyle}
+                    theme={message.buttonTheme}
+                  >
+                    {label}
+                  </Button>
+                ) : (
+                  <Button
+                    key={id}
+                    onClick={function () {
+                      toggleSizeConfirmModal();
+                      setStage && setStage(STAGES.RESULTS);
+                      // Reset scroll position to top
+                      window.scrollTo(0, 0);
+                    }}
+                    style={buttonStyle}
+                    theme={message.buttonTheme}
+                  >
+                    {label}
+                  </Button>
+                );
+              },
+            )}
           </div>
-          {siteCatalogSummaryPrompt.body && (
-            <Markdown css={styles.dataMomentCopy}>
-              {siteCatalogSummaryPrompt.body}
-            </Markdown>
-          )}
-          {siteCatalogSummaryPrompt.ctaList && (
-            <div
-              css={styles.dataMomentCtaWrapper}
-              data-testid="catalog-cta-list"
-            >
-              {siteCatalogSummaryPrompt.ctaList.map(
-                ({ label, siteQueryParams, vehicleMetadata }) => {
-                  const buttonStyle = hasMultipleCtas
-                    ? message.buttonStyle
-                    : BUTTON_STYLE.SOLID;
-                  const id = label.replace(/\s+/g, '').toLowerCase();
-                  const href = getHrefWithParams(asPath, siteQueryParams);
-                  return siteQueryParams ? (
-                    <Button
-                      key={id}
-                      as={LINK_TYPES.A}
-                      href={href}
-                      onClick={createPromptCtaClickHandler(
-                        vehicleMetadata,
-                        siteQueryParams,
-                      )}
-                      style={buttonStyle}
-                      theme={message.buttonTheme}
-                    >
-                      {label}
-                    </Button>
-                  ) : (
-                    <Button
-                      key={id}
-                      onClick={function () {
-                        setStage && setStage(STAGES.RESULTS);
-                        // Reset scroll position to top
-                        window.scrollTo(0, 0);
-                      }}
-                      style={buttonStyle}
-                      theme={message.buttonTheme}
-                    >
-                      {label}
-                    </Button>
-                  );
-                },
-              )}
-            </div>
-          )}
-          {siteCatalogSummaryPrompt.infoLink && isValid && (
-            <button css={styles.dataMomentHelp} onClick={openModal}>
-              {siteCatalogSummaryPrompt.infoLink.label}
-            </button>
-          )}
-        </GridItem>
-      </Grid>
+        )}
+      </SizeConfirmModal>
     )
   );
 }
@@ -455,26 +275,20 @@ export function NoResultsMessage({
 
 const mapMessageToStage = {
   [STAGES.LOADING]: null,
-  [STAGES.BUILD_IN]: BuildInMessage,
+  [STAGES.BUILD_IN]: CatalogLoading,
   [STAGES.DATA_MOMENT]: DataMomentMessage,
-  [STAGES.RESULTS]: TopPicks,
+  [STAGES.RESULTS]: CatalogLoading,
   [STAGES.NO_RESULTS]: NoResultsMessage,
 };
 
 interface CatalogMessageProps {
   customerServiceEnabled?: boolean;
   customerServiceNumber: { display: string; value: string };
-  exploreMore: () => void;
-  isSearchForTireSize?: boolean;
-  totalTireCount: number;
 }
 
 function CatalogMessage({
   customerServiceNumber,
   customerServiceEnabled,
-  exploreMore,
-  totalTireCount,
-  isSearchForTireSize,
 }: CatalogMessageProps) {
   const {
     contentStage,
@@ -484,6 +298,7 @@ function CatalogMessage({
     siteCatalogSummary,
     stage,
   } = useCatalogSummaryContext();
+
   const { openStaticModal } = useModalContext();
 
   const MessageComponent = mapMessageToStage[contentStage];
@@ -510,10 +325,6 @@ function CatalogMessage({
               openStaticModal={openStaticModal}
               setStage={setStage}
               showLoadingInterstitial={showLoadingInterstitial}
-              // used only by top picks
-              exploreMore={exploreMore}
-              totalTireCount={totalTireCount}
-              isSearchForTireSize={!!isSearchForTireSize}
             />
           )}
         </MessageContainer>

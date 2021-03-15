@@ -1,9 +1,17 @@
 import { useEffect, useState } from 'react';
 
 import Button from '~/components/global/Button/Button';
-import { COLORS, SPACING, StylesMap, THEME, TIME } from '~/lib/constants';
+import {
+  COLORS,
+  RADIUS,
+  SPACING,
+  StylesMap,
+  THEME,
+  TIME,
+} from '~/lib/constants';
 
 import Loading from './Loading';
+import Skeleton from './Skeleton';
 
 const styles: StylesMap = {
   buttonContainer: {
@@ -93,6 +101,33 @@ export function LoadingHideAndShow() {
       <div css={[styles.buttonContainer, isLoading && styles.buttonHidden]}>
         <Button onClick={handleClick}>Click Me</Button>
       </div>
+    </div>
+  );
+}
+
+export function SkeletonLoading() {
+  return (
+    <div
+      css={{
+        width: '100%',
+        height: '100vh',
+        padding: SPACING.SIZE_20,
+        backgroundColor: COLORS.GLOBAL.BLACK,
+      }}
+    >
+      <Skeleton theme={THEME.DARK} height="32px" radius={RADIUS.RADIUS_8} />
+      <Skeleton
+        theme={THEME.DARK}
+        width="70%"
+        height="24px"
+        radius={RADIUS.RADIUS_8}
+      />
+      <Skeleton
+        theme={THEME.DARK}
+        width="150%"
+        height="24px"
+        radius={RADIUS.RADIUS_8}
+      />
     </div>
   );
 }

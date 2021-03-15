@@ -11,6 +11,7 @@ interface Props {
   onImageTaken: (image: string | undefined) => void;
 }
 function TireSnap({ onImageTaken }: Props) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onUploadFile = (evt: any) => {
     const file = evt.target.files[0];
     const imageFile = URL.createObjectURL(file);

@@ -16,6 +16,11 @@ export enum SearchResultEnum {
   TEXT = 'SiteSearchResultTextItem',
 }
 
+export enum SearchTypeEnum {
+  FILTER = 'filter',
+  FUNNEL = 'funnel',
+}
+
 export type SearchResultType =
   | 'SiteSearchResultImageItem'
   | 'SiteSearchResultTextItem';
@@ -33,6 +38,7 @@ export enum SearchStateEnum {
   REAR_TIRE = 'rearTireSize',
   REAR_TIRE_WIDTH = 'rearWidthRatio',
   TIRE_SIZE = 'tireSize',
+  TIRE_TYPE = 'tireType',
   VEHICLE = 'vehicle',
 }
 
@@ -40,6 +46,7 @@ export const SearchStateCopy: Record<string, string> = {
   [SearchStateEnum.BRAND]: ui('search.searchCategories.brand'),
   [SearchStateEnum.TIRE_SIZE]: ui('search.searchCategories.tireSize'),
   [SearchStateEnum.VEHICLE]: ui('search.searchCategories.vehicle'),
+  [SearchStateEnum.TIRE_TYPE]: ui('search.searchCategories.tireType'),
 };
 
 export const SearchStateQueryType: Record<string, string> = {
@@ -49,6 +56,7 @@ export const SearchStateQueryType: Record<string, string> = {
   [SearchStateEnum.REAR_TIRE_WIDTH]: 'rearWidthRatio',
   [SearchStateEnum.TIRE_SIZE]: 'tireSize',
   [SearchStateEnum.VEHICLE]: 'vehicle',
+  [SearchStateEnum.TIRE_TYPE]: 'tireType',
 };
 
 export enum SearchInputEnum {

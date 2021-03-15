@@ -1,7 +1,8 @@
 import styled from '@emotion/styled';
 import { TransitionStatus } from 'react-transition-group/Transition';
 
-import { COLORS, CSSStyles, EASING, MQ, SAFARI_ONLY } from '~/lib/constants';
+import { NAV_HEIGHT } from '~/components/modules/Nav/Nav.styles';
+import { COLORS, CSSStyles, EASING, MQ } from '~/lib/constants';
 
 import {
   MEASUREMENTS,
@@ -15,17 +16,13 @@ type Props = {
   transitionStatus: TransitionStatus;
 };
 
-function styledMessageContainer({
-  showLoadingInterstitial,
-  stage,
-  transitionStatus,
-}: Props) {
+function styledMessageContainer({ stage, transitionStatus }: Props) {
   const isEntering = transitionStatus === 'entering';
   const isEntered = transitionStatus === 'entered';
 
   const baseStyles: CSSStyles = {
-    backgroundColor: COLORS.GLOBAL.ORANGE,
-    color: COLORS.GLOBAL.WHITE,
+    backgroundColor: COLORS.GLOBAL.WHITE,
+    color: COLORS.GLOBAL.BLACK,
     minHeight: MEASUREMENTS[stage].CONTENT_MIN_HEIGHT.S,
 
     [MQ.M]: {
@@ -56,60 +53,40 @@ function styledMessageContainer({
       return [
         baseStyles,
         {
-          '> *': {
-            opacity: 0,
-            // transition in and out
-            transition: `opacity ${TIMINGS.CONTENT_IN_OUT}ms ${EASING.CUBIC_EASE_IN_OUT}`,
+          paddingTop: NAV_HEIGHT.S,
+
+          [MQ.M]: {
+            paddingTop: NAV_HEIGHT.M,
           },
-        },
-        isEntering && {
-          '> *': {
-            // prevent flash of transition on appear
-            transition: 'none',
+
+          [MQ.L]: {
+            paddingTop: NAV_HEIGHT.L + 30,
           },
-        },
-        isEntered && {
-          '> *': {
-            opacity: 1,
+
+          [MQ.XL]: {
+            paddingTop: NAV_HEIGHT.XL + 30,
           },
         },
       ];
     case STAGES.DATA_MOMENT:
-      return [
-        baseStyles,
-        {
-          '> *': {
-            opacity: 0,
-            // transition in and out
-            transition: `opacity ${TIMINGS.CONTENT_IN_OUT}ms ${EASING.CUBIC_EASE_IN_OUT}`,
-          },
-        },
-        isEntering && {
-          '> *': {
-            // prevent flash of transition on appear
-            transition: 'none',
-          },
-        },
-        isEntered && {
-          '> *': {
-            opacity: 1,
-            transitionDelay: showLoadingInterstitial
-              ? 0
-              : TIMINGS.STAGE_TRANSITION / 2,
-          },
-        },
-      ];
+      return [baseStyles];
     case STAGES.RESULTS:
       return [
         baseStyles,
         {
           backgroundColor: 'transparent',
-          // Make sure the Content component fills the screen while
-          // the TopPicks component loads dynamically
-          minHeight: '100vh !important',
+          paddingTop: NAV_HEIGHT.S,
 
-          [SAFARI_ONLY]: {
-            minHeight: '-webkit-fill-available !important',
+          [MQ.M]: {
+            paddingTop: NAV_HEIGHT.M,
+          },
+
+          [MQ.L]: {
+            paddingTop: NAV_HEIGHT.L + 30,
+          },
+
+          [MQ.XL]: {
+            paddingTop: NAV_HEIGHT.XL + 30,
           },
         },
       ];

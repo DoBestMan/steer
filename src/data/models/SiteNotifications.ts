@@ -1,3 +1,5 @@
+import { THEME } from '~/lib/constants';
+
 import { SiteIcon } from './SiteIcon';
 import { SiteLink } from './SiteLink';
 
@@ -10,6 +12,8 @@ export interface SiteNotifications {
   type: string;
 
   title: string;
+
+  theme?: THEME.DARK | THEME.ORANGE | THEME.LIGHT;
 
   subtext: string;
 

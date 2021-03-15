@@ -1,14 +1,13 @@
 import Link from '~/components/global/Link/Link';
-import Toggle from '~/components/global/Toggle/Toggle';
 import { useCatalogProductsContext } from '~/context/CatalogProducts.context';
 import { useGlobalToastContext } from '~/context/GlobalToast.context';
 import { SiteCatalogFilterRange } from '~/data/models/SiteCatalogFilterRange';
+import { SiteCatalogProductGroupItemEnum } from '~/data/models/SiteCatalogProductGroupList';
 import {
   SiteCatalogSortListItem,
   SiteCatalogSortListItemStateEnum,
 } from '~/data/models/SiteCatalogSortListItem';
-import { useBreakpoints } from '~/hooks/useBreakpoints';
-import { BREAKPOINT_SIZES, THEME } from '~/lib/constants';
+import { THEME } from '~/lib/constants';
 import { LOCAL_STORAGE, PROPERTIES } from '~/lib/constants/localStorage';
 import { ui } from '~/lib/utils/ui-dictionary';
 
@@ -23,10 +22,12 @@ const SORT_ID = 'sort';
 interface Props {
   priceFilter?: SiteCatalogFilterRange;
   resultsCount: number;
+  showingResult: number;
   sortList: SiteCatalogSortListItem[];
 }
 
 export default function SubFilters({
+  showingResult,
   resultsCount,
   sortList,
   priceFilter,
@@ -38,7 +39,6 @@ export default function SubFilters({
     createUpdateFilterGroup,
   } = useFiltersContext();
 
-  const { bk } = useBreakpoints();
   const { setGlobalToastMessage } = useGlobalToastContext();
 
   const sortItem = sortList.find(
@@ -49,6 +49,7 @@ export default function SubFilters({
     handleUpdateResults,
     setIsAdvancedView,
     isAdvancedView,
+    siteCatalogProducts,
   } = useCatalogProductsContext();
 
   const onToggleView = async () => {
@@ -75,29 +76,37 @@ export default function SubFilters({
 
   const isOpen = selectingFilter === SORT_ID;
 
-  const copyKey =
-    resultsCount === 1 ? 'catalog.filters.result' : 'catalog.filters.results';
-  const resultCopy = ui(copyKey, { number: resultsCount });
+  const isPlural = resultsCount > 1;
 
-  const toggleTitle =
-    bk === BREAKPOINT_SIZES.S
-      ? 'catalog.header.showTechSpecsOnS'
-      : 'catalog.header.showTechSpecsOnM';
+  const isGroupedProducts =
+    !isAdvancedView &&
+    siteCatalogProducts?.siteCatalogProductsResultList[0]?.type ===
+      SiteCatalogProductGroupItemEnum.SiteCatalogProductGroupItem;
+
+  const copyKey = isGroupedProducts
+    ? `catalog.filters.curationResult${isPlural ? 's' : ''}`
+    : `catalog.filters.listResult${isPlural ? 's' : ''}`;
+  const resultCopy = isGroupedProducts
+    ? ui(copyKey, { current: showingResult, total: resultsCount })
+    : ui(copyKey, { number: resultsCount });
 
   return (
     <div css={styles.root}>
       <div css={styles.wrapper}>
-        <p css={[styles.results, priceFilter && styles.decorator]}>
-          {resultCopy}
-        </p>
-        <div css={styles.toggle}>
-          <span css={[styles.label]}>{ui(toggleTitle)}</span>
-          <Toggle
-            testId="advanced-view-toggle"
-            name={ui(toggleTitle)}
-            onToggle={onToggleView}
-            defaultChecked={isAdvancedView}
-          />
+        <div css={styles.results}>
+          <p css={[styles.result, priceFilter && styles.decorator]}>
+            {resultCopy}
+          </p>
+          {isGroupedProducts && (
+            <Link
+              theme={THEME.LIGHT}
+              css={styles.borderless}
+              icon="chevron-right"
+              onClick={onToggleView}
+            >
+              {ui('catalog.filters.viewAllResults')}
+            </Link>
+          )}
         </div>
         {priceFilter && (
           <PriceFilter

@@ -42,10 +42,7 @@ interface CatalogSummaryState {
   stage: STAGES;
 }
 
-export const onDataReady = (
-  siteCatalogSummary: SiteCatalogSummary,
-  showLoadingInterstitial: boolean,
-) => {
+export const onDataReady = (siteCatalogSummary: SiteCatalogSummary) => {
   const totalResult =
     siteCatalogSummary.siteCatalogSummaryMeta?.totalResults || 0;
   const hasPromptMustShow =
@@ -54,7 +51,6 @@ export const onDataReady = (
     ?.ctaList?.length;
   const hasTopPicks = !!siteCatalogSummary.siteCatalogSummaryTopPicksList
     .length;
-
   /**
    * Disambiguation response also has 0 results, but user should see the
    * loading interstitial. Therefore, only show the NO_RESULTS stage if
@@ -62,12 +58,7 @@ export const onDataReady = (
    */
   const hasNoResults = totalResult === 0 && !hasPromptCTAList;
 
-  if (showLoadingInterstitial && hasPromptCTAList) {
-    return {
-      contentStage: STAGES.BUILD_IN,
-      stage: STAGES.BUILD_IN,
-    };
-  } else if (hasPromptMustShow) {
+  if (hasPromptMustShow) {
     const newStage = hasNoResults ? STAGES.NO_RESULTS : STAGES.DATA_MOMENT;
     return {
       contentStage: newStage,
@@ -229,7 +220,7 @@ export function useContextSetup({
 
     setState({
       ...state,
-      ...onDataReady(siteCatalogSummary, showLoadingInterstitial),
+      ...onDataReady(siteCatalogSummary),
     });
   }, [
     dataLoadingStatus,

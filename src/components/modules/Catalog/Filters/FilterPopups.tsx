@@ -1,3 +1,7 @@
+import { useEffect } from 'react';
+
+import { useCatalogProductsContext } from '~/context/CatalogProducts.context';
+
 import { CatalogFilterTypes, FilterContentTypes } from './Filter.types';
 import { POPULAR_ID } from './FilterButtonsCarousel';
 import { useFiltersContext } from './Filters.context';
@@ -9,7 +13,25 @@ interface Props {
 }
 
 export default function FilterPopups({ filters, popularFilters }: Props) {
-  const { clearSelectingFilter, selectingFilter } = useFiltersContext();
+  const {
+    clearSelectingFilter,
+    clearFiltersToApply,
+    selectingFilter,
+  } = useFiltersContext();
+  const { forceClosePopup, setForceClosePopup } = useCatalogProductsContext();
+
+  useEffect(() => {
+    if (forceClosePopup) {
+      clearSelectingFilter();
+      clearFiltersToApply();
+      setForceClosePopup(false);
+    }
+  }, [
+    forceClosePopup,
+    clearSelectingFilter,
+    clearFiltersToApply,
+    setForceClosePopup,
+  ]);
 
   return (
     <>

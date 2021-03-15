@@ -3,7 +3,10 @@ import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import IconOrImage from '~/components/global/IconOrImage/IconOrImage';
 import Link from '~/components/global/Link/Link';
-import { SiteInsightItemDefault } from '~/data/models/SiteInsightItemDefault';
+import {
+  SiteFigureItemDefault,
+  SiteInsightItemDefault,
+} from '~/data/models/SiteInsightItemDefault';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 import { typography } from '~/styles/typography.styles';
 
@@ -28,7 +31,7 @@ function Card({
       );
     }
 
-    return figure.value;
+    return (figure as SiteFigureItemDefault).value;
   });
 
   return (

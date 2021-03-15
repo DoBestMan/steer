@@ -3,12 +3,14 @@ import { useEffect, useRef } from 'react';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import BaseLink from '~/components/global/Link/BaseLink';
+import { SiteSearchResultActionQuery } from '~/data/models/SiteSearchResultActionQuery';
 import { SiteSearchResultTextItem } from '~/data/models/SiteSearchResultTextItem';
-import { TIME } from '~/lib/constants';
+import { ROUTE_MAP, ROUTES, TIME } from '~/lib/constants';
 
 import { useSearchContext } from '../Search.context';
 import { useFocusScrollIntoView } from '../Search.hooks';
-import { SearchActionType } from '../Search.types';
+import { SearchActionType, SearchTypeEnum } from '../Search.types';
+import SearchItemCarousel from '../SearchItemCarousel/SearchItemCarousel';
 import { useSearchModalContext } from '../SearchModal.context';
 import styles from './SearchSection.styles';
 
@@ -19,11 +21,14 @@ export interface SearchSectionProps {
   sectionIndex?: number;
   selectedItemIndex?: [number, number];
   siteSearchResultList: SiteSearchResultTextItem[];
+  type?: SearchTypeEnum;
 }
 
 const CONSTANTS = {
   TOUCH_START_DELAY: TIME.MS100,
 };
+
+const TIRE_TYPE_LABELS = ['Vehicle Type', 'Tire Category'];
 
 function SearchSection({
   label,
@@ -34,7 +39,14 @@ function SearchSection({
 }: SearchSectionProps) {
   const isScrolling = useRef(false);
   const { onFocus, pushRefToArray } = useFocusScrollIntoView({});
-  const { setFromSearch } = useSearchModalContext();
+  const {
+    searchState,
+    clearSearchResults,
+    setSearchState,
+    setQueryParamLabel,
+    setRouteQueryParamOptions,
+  } = useSearchContext();
+  const { setFromSearch, setCurrentInputQuery } = useSearchModalContext();
   const {
     shouldPreventLinkNavigation,
     routeQueryParamOptions,
@@ -48,7 +60,36 @@ function SearchSection({
       setFromSearch(true);
     }
 
-    if (onClick) {
+    if (searchState === 'brand') {
+      const {
+        queryText,
+        queryType,
+      } = searchResult.action as SiteSearchResultActionQuery;
+      const params = { [queryType]: queryText };
+
+      const resetQuery = {
+        queryText: '',
+        queryType: '',
+      };
+
+      clearSearchResults();
+      setSearchState('');
+      setCurrentInputQuery(resetQuery);
+
+      const searchInput = document.querySelector(
+        '[data-testid="search-input"]',
+      ) as HTMLInputElement;
+      searchInput?.focus();
+
+      setRouteQueryParamOptions({
+        routes: [
+          ROUTE_MAP[ROUTES.VEHICLE_CATALOG],
+          ROUTE_MAP[ROUTES.TIRE_SIZE_CATALOG_OR_CATEGORY],
+        ],
+        params,
+      });
+      setQueryParamLabel(searchResult.label);
+    } else if (onClick) {
       onClick(searchResult);
     }
   };
@@ -84,6 +125,17 @@ function SearchSection({
       onFocus(selectedItemIndex[1])();
     }
   }, [onFocus, sectionIndex, selectedItemIndex]);
+
+  const isTireTypeSearch = TIRE_TYPE_LABELS.includes(label as string);
+
+  if (isTireTypeSearch) {
+    return (
+      <SearchItemCarousel
+        title={label as string}
+        items={siteSearchResultList}
+      />
+    );
+  }
 
   return (
     <Grid css={styles.container}>

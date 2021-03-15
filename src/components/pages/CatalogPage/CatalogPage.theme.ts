@@ -11,11 +11,11 @@ export const defaultTheme = {
       color: COLORS.LIGHT.GRAY_70,
     },
     background: {
-      background: COLORS.GLOBAL.ORANGE,
+      background: COLORS.GLOBAL.BLACK,
     },
-    buttonTheme: THEME.ORANGE,
+    buttonTheme: THEME.DARK,
     text: {
-      color: COLORS.ORANGE.SHADE_85,
+      color: COLORS.DARK.GRAY_40,
     },
   },
 };

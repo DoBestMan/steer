@@ -7,8 +7,6 @@ export const setFSCustomEvent = (
   data: FS_EVENT_PROPERTIES,
 ) => {
   if (isBrowser() && window.FS) {
-    console.info('FS EventName: ', eventName);
-    console.info('FS Data: ', data);
     window.FS.event(eventName, data);
   }
 };

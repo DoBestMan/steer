@@ -1,1 +1,6 @@
-export type CTAIconTypes = 'vehicle' | 'tireSize' | 'brand' | 'simpleSnap';
+export type CTAIconTypes =
+  | 'vehicle'
+  | 'tireSize'
+  | 'brand'
+  | 'type'
+  | 'simpleSnap';

@@ -16,12 +16,14 @@ interface Props {
   hasTopPicks: boolean;
   isInternal?: boolean;
   location: string;
+  showingResult: number;
   siteCatalogProducts: SiteCatalogProducts;
   sizeList?: string[];
 }
 
 export default function Header({
   hasTopPicks,
+  showingResult,
   isInternal = false,
   siteCatalogProducts,
   ...rest
@@ -45,7 +47,6 @@ export default function Header({
         <div data-component={DATA_COMPONENT_LABEL}>
           <HeaderInfo
             isInternal={isInternal}
-            hasTopPicks={hasTopPicks}
             title={siteCatalogProducts.siteCatalogProductsMeta.title}
             {...rest}
           />
@@ -61,6 +62,7 @@ export default function Header({
         )}
       </HeaderStickyBar>
       <SubFilters
+        showingResult={showingResult}
         resultsCount={
           siteCatalogProducts.listResultMetadata.pagination?.total || 0
         }

@@ -4,6 +4,7 @@ import { boolean, select, text } from '@storybook/addon-knobs';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import { SitePromotionStyleEnum } from '~/data/models/SitePromotion';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
+import { COLORS, StylesMap } from '~/lib/constants';
 
 import PromoTag, { PromoTagProps } from './PromoTag';
 import PromoTagCarouselComponent from './PromoTagCarousel';
@@ -11,6 +12,13 @@ import PromoTagCarouselComponent from './PromoTagCarousel';
 export default {
   component: PromoTag,
   title: 'Global/Promo Tag',
+};
+
+const styles: StylesMap = {
+  root: {
+    backgroundColor: COLORS.GLOBAL.ORANGE,
+    minHeight: '100vh',
+  },
 };
 
 const styleOptions = {
@@ -84,6 +92,22 @@ export function OrangePillPromoTag() {
       }}
       label="Instant Rebate"
     />
+  );
+}
+
+export function FilterPillPromoTag() {
+  return (
+    <div css={styles.root}>
+      <PromoTag
+        style={SitePromotionStyleEnum.SitePromotionItemFilterPill}
+        label="Continental Tires Only"
+        icon={{
+          svgId: ICONS.CLEAR_INPUT,
+          type: ICON_IMAGE_TYPE.ICON,
+        }}
+        isUppercase
+      />
+    </div>
   );
 }
 
