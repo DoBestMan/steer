@@ -1,13 +1,12 @@
+import { useEffect } from 'react';
+
 import Button from '~/components/global/Button/Button';
-import Grid from '~/components/global/Grid/Grid';
-import GridItem from '~/components/global/Grid/GridItem';
-import Markdown from '~/components/global/Markdown/Markdown';
-import SearchByBoard from '~/components/global/SearchByBoard/SearchByBoard';
 import { useTireSnapModalContext } from '~/components/modules/TireSnap/TireSnapModal.context';
+import { useSiteNotificationsContext } from '~/context/SiteNotifications.context';
+import { SiteIcon } from '~/data/models/SiteIcon';
 import { SiteModuleSimpleSnapButton } from '~/data/models/SiteModules';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { BUTTON_STYLE, THEME } from '~/lib/constants';
-import { ui } from '~/lib/utils/ui-dictionary';
 
 import simpleSnapStyles from './ModuleSimpleSnapButton.styles';
 
@@ -18,7 +17,26 @@ function ModuleSimpleSnapButton({
 }: SiteModuleSimpleSnapButton) {
   const { setIsTireSnapOpen } = useTireSnapModalContext();
   const { isMobile } = useBreakpoints();
+  const { addNotification } = useSiteNotificationsContext();
 
+  useEffect(() => {
+    if (!isMobile) {
+      addNotification({
+        handleNotificationClick: () => {},
+        icon: {
+          svgId: 'tag',
+          type: 'SiteIcon',
+        } as SiteIcon,
+        id: 'SimpleSnap',
+        subtext:
+          'To try SimpleSnap , visit simpletire.com on your mobile phone.',
+        suppressFromHomePage: true,
+        title: 'SimpleSnap',
+        type: 'Sale',
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isMobile]);
   return (
     <div
       data-component="module-simplesnapboardbutton"
@@ -34,20 +52,7 @@ function ModuleSimpleSnapButton({
         >
           {buttonLabel}
         </Button>
-      ) : (
-        <>
-          <Grid>
-            <GridItem fullbleed css={simpleSnapStyles.userInfo}>
-              <Markdown>
-                {ui('simpleSnap.simpleSnapButtonModule.userInfo')}
-              </Markdown>
-            </GridItem>
-            <GridItem fullbleed>
-              <SearchByBoard isHomepage hasBrand={false} />
-            </GridItem>
-          </Grid>
-        </>
-      )}
+      ) : null}
     </div>
   );
 }

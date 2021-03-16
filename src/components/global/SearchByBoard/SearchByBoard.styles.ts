@@ -48,7 +48,11 @@ const styles: StylesMap = {
         },
       },
     },
-
+    '&[data-icon-type="simpleSnap"]': {
+      path: {
+        fill: COLORS.GLOBAL.WHITE,
+      },
+    },
     '.SVGInline-svg': {
       [MQ.M]: {
         left: '-66px',

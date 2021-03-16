@@ -93,9 +93,7 @@ const styles: StylesMap = {
       color: COLORS.GLOBAL.WHITE,
       display: 'inline-block',
       marginTop: SPACING.SIZE_05,
-      width: '75%',
-      [MQ.S]: { width: '82%' },
-      [MQ.M]: { width: '75%' },
+      width: '82%',
     },
   ],
   descriptionLink: {
