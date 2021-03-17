@@ -3,6 +3,7 @@ import { ReactNode, useCallback, useEffect, useState } from 'react';
 
 import { useSearchModalContext } from '~/components/modules/Search/SearchModal.context';
 import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
+import { apiCjToSetCookie } from '~/lib/api/cj';
 import { CATALOG_ROUTES, ROUTE_MAP, ROUTES } from '~/lib/constants/';
 import { eventEmitters } from '~/lib/events/emitters';
 import { createContext } from '~/lib/utils/context';
@@ -41,6 +42,9 @@ function useRouterContextSetup() {
 
   const { isSearchOpen } = useSearchModalContext();
 
+  const setCjCookie = async (cjevent: string) => {
+    return await apiCjToSetCookie(cjevent);
+  };
   // For now, the only scenario where the page transition is skipped is
   // the transition into and between Catalog pages
   const isCatalogTransition = skipPageTransition;
@@ -74,7 +78,11 @@ function useRouterContextSetup() {
     if (router.pathname === ROUTE_MAP[ROUTES.PRODUCT_DETAIL]) {
       setNextUrl(router.asPath);
     }
+    const { cjevent } = router.query;
 
+    if (cjevent && typeof cjevent === 'string') {
+      setCjCookie(cjevent);
+    }
     const handleRouteChangeStart = (url: string) => {
       // Route change has begun. Show the loading bar
       setIsRouteLoading(true);

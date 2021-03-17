@@ -2,7 +2,6 @@ import 'focus-visible';
 
 import { Global } from '@emotion/core';
 import NextApp, { AppContext, AppInitialProps } from 'next/app';
-import { setCookie } from 'nookies';
 import smoothscroll from 'smoothscroll-polyfill';
 import { SWRConfig } from 'swr';
 
@@ -19,7 +18,6 @@ import {
 } from '~/lib/backend';
 import { backendBootstrap } from '~/lib/backend/bootstrap';
 import GA from '~/lib/helpers/analytics';
-import { getParameterByNameFromUrl } from '~/lib/utils/string';
 import { getUserAgentType } from '~/lib/utils/user-agent';
 import { global } from '~/styles/document/global.styles';
 
@@ -78,23 +76,6 @@ class MyApp extends NextApp<Props> {
 MyApp.getInitialProps = async (appContext: AppContext) => {
   // calls page's `getInitialProps` and fills `appProps.pageProps`
   const appProps = await NextApp.getInitialProps(appContext);
-
-  //Set CJ Affiliate cookie. FND-600
-  const CJ_CONSTANT = {
-    COOKIE_NAME: 'cje',
-    DOMAIN: '.simpletire.com',
-  };
-  const queryString = appContext.router.asPath;
-  const cjevent = getParameterByNameFromUrl('cjevent', queryString);
-  if (cjevent) {
-    setCookie(appContext.ctx, CJ_CONSTANT.COOKIE_NAME, cjevent.toString(), {
-      maxAge: 86400 * 395,
-      path: '/',
-      secure: true,
-      domain: CJ_CONSTANT.DOMAIN,
-    });
-  }
-  //END CJ Affiliate cookie set.
 
   // We can return if fetching on the client side because
   // global data is already available in internal state
