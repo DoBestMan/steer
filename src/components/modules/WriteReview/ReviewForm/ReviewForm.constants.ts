@@ -5,6 +5,9 @@ import {
 } from '~/data/models/SiteProductLineReviewItemInput';
 import { ui } from '~/lib/utils/ui-dictionary';
 
+export const RATING_ALL_NOT_APPLICABLE_SELECTION_MSG = ui(
+  'reviews.form.sections.ratings.labels.allna',
+);
 export const RATING_NOT_APPLICABLE = 'NA';
 export const RATING_OPTIONS = [1, 2, 3, 4, 5, RATING_NOT_APPLICABLE];
 

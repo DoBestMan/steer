@@ -588,7 +588,8 @@
             "three": "Fair",
             "four": "Good",
             "five": "Excellent",
-            "na": "Not applicable"
+            "na": "Not applicable",
+            "allna": "Please provide a 1-5 rating for at least one performance attribute"
           },
           "dry": "Dry",
           "wet": "Wet",

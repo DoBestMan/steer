@@ -24,6 +24,7 @@ import {
   EMAIL_SOURCE_VALUE,
   FIELDS,
   RADIO_GROUPS,
+  RATING_ALL_NOT_APPLICABLE_SELECTION_MSG,
   RATING_LABELS,
   RATING_NOT_APPLICABLE,
   RATING_OPTIONS,
@@ -139,6 +140,12 @@ function ReviewForm({
       CONSTANTS.UNSELECTED_PICKER &&
     formValues.performanceRating[FIELDS.TREADWEAR] !==
       CONSTANTS.UNSELECTED_PICKER &&
+    (formValues.performanceRating[FIELDS.DRY] !== 5 ||
+      formValues.performanceRating[FIELDS.WET] !== 5 ||
+      formValues.performanceRating[FIELDS.WINTER] !== 5 ||
+      formValues.performanceRating[FIELDS.COMFORT] !== 5 ||
+      formValues.performanceRating[FIELDS.NOISE] !== 5 ||
+      formValues.performanceRating[FIELDS.TREADWEAR] !== 5) &&
     formValues[FIELDS.NAME] &&
     formValues[FIELDS.EMAIL] &&
     formValues[FIELDS.VEHICLE] &&
@@ -151,6 +158,13 @@ function ReviewForm({
     formValues[FIELDS.PURCHASE_DATE] || '',
   );
 
+  const hasOneRatingFilled =
+    formValues.performanceRating[FIELDS.DRY] == 5 &&
+    formValues.performanceRating[FIELDS.WET] == 5 &&
+    formValues.performanceRating[FIELDS.WINTER] == 5 &&
+    formValues.performanceRating[FIELDS.COMFORT] == 5 &&
+    formValues.performanceRating[FIELDS.NOISE] == 5 &&
+    formValues.performanceRating[FIELDS.TREADWEAR] == 5;
   // Date is valid if empty or valid date
   const hasValidDate = formValues[FIELDS.PURCHASE_DATE] === '' || isValidDate;
   const hasValidEmail = email.test(formValues[FIELDS.EMAIL] || '');
@@ -246,7 +260,9 @@ function ReviewForm({
 
     return pickerValue;
   };
-
+  if (hasOneRatingFilled) {
+    setGlobalToastMessage(RATING_ALL_NOT_APPLICABLE_SELECTION_MSG);
+  }
   const postFormData = async (
     reformattedDataForSubmission: SiteProductLineReviewItemInput,
   ) => {
