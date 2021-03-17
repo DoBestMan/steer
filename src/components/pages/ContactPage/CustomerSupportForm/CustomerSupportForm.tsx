@@ -13,11 +13,13 @@ import { email, phone } from '~/lib/utils/regex';
 import { getMIMEType } from '~/lib/utils/string';
 import { ui } from '~/lib/utils/ui-dictionary';
 
-import { FIELDS } from './CustomerSupportForm.constants';
+import { EMAIL_SOURCE_VALUE, FIELDS } from './CustomerSupportForm.constants';
 import styles from './CustomerSupportForm.styles';
 
 interface FormValues {
   [FIELDS.EMAIL]: string;
+  [FIELDS.EMAIL_SOURCE]: string;
+  [FIELDS.EMAIL_SOURCE_URL]: string | false;
   [FIELDS.FIRST_NAME]: string;
   [FIELDS.LAST_NAME]: string;
   [FIELDS.MESSAGE]: string | null;
@@ -35,6 +37,8 @@ interface Props {
 
 const initialState = {
   [FIELDS.EMAIL]: '',
+  [FIELDS.EMAIL_SOURCE]: '',
+  [FIELDS.EMAIL_SOURCE_URL]: '',
   [FIELDS.FIRST_NAME]: '',
   [FIELDS.LAST_NAME]: '',
   [FIELDS.MESSAGE]: '',
@@ -103,6 +107,8 @@ function SendMessageForm({ selections }: Props) {
               setLoading(true);
               await postFormData({
                 ...formValues,
+                [FIELDS.EMAIL_SOURCE]: EMAIL_SOURCE_VALUE,
+                [FIELDS.EMAIL_SOURCE_URL]: window.location.href,
                 [FIELDS.TOKEN]: token,
               } as SiteCustomerSupportFormInput);
               setLoading(false);

@@ -1,6 +1,10 @@
+import { ui } from '~/lib/utils/ui-dictionary';
+
 export enum FIELDS {
   ATTACHED_FILE = 'attachedFile',
   EMAIL = 'email',
+  EMAIL_SOURCE = 'source',
+  EMAIL_SOURCE_URL = 'sourceURL',
   FILE = 'attachedFile',
   FILE_MIME_TYPE = 'attachedFileType',
   FIRST_NAME = 'firstName',
@@ -11,3 +15,5 @@ export enum FIELDS {
   SUBJECT = 'subject',
   TOKEN = 'token',
 }
+
+export const EMAIL_SOURCE_VALUE = ui('contact.form.source.value');

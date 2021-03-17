@@ -66,6 +66,18 @@ export interface SiteProductLineReviewItemInput {
    */
   email: string;
   /**
+   *
+   * @type {string}
+   * @memberof SiteProductLineReviewItemInput
+   */
+  source: string;
+  /**
+   *
+   * @type {string}
+   * @memberof SiteProductLineReviewItemInput
+   */
+  sourceURL: string;
+  /**
    * Format MM/DD/YYYY
    * @type {string}
    * @memberof SiteProductLineReviewItemInput

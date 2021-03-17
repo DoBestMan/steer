@@ -162,6 +162,13 @@
       "expandBodyCTALabel": "Read more"
     }
   },
+  "contact": {
+    "form": {
+        "source": {
+        "value": "Contact"
+      }
+    }
+  },
   "accordion": {
     "showAllDefaultLabel": "See all"
   },
@@ -566,6 +573,9 @@
       "submit": {
         "invalid": "Complete all fields to submit",
         "valid": "Submit review"
+      },
+      "source": {
+        "value": "Product Review"
       },
       "success": "Thank you for your review!",
       "error": "Oops, something went wrong! <br />Please try again.",

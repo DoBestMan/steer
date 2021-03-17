@@ -21,6 +21,7 @@ import { ui } from '~/lib/utils/ui-dictionary';
 import { uiJSX } from '~/lib/utils/ui-dictionary-jsx';
 
 import {
+  EMAIL_SOURCE_VALUE,
   FIELDS,
   RADIO_GROUPS,
   RATING_LABELS,
@@ -172,6 +173,8 @@ function ReviewForm({
   const handleFormSubmit = async () => {
     const reformattedDataForSubmission = {
       ...formValues,
+      [FIELDS.EMAIL_SOURCE]: EMAIL_SOURCE_VALUE,
+      [FIELDS.EMAIL_SOURCE_URL]: window.location.href,
       [FIELDS.PURCHASE_DATE]:
         formValues[FIELDS.PURCHASE_DATE] === ''
           ? null

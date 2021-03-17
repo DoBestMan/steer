@@ -17,6 +17,8 @@ export const RATING_LABELS = [
   ui('reviews.form.sections.ratings.labels.na'),
 ];
 
+export const EMAIL_SOURCE_VALUE = ui('reviews.form.source.value');
+
 export enum FIELDS {
   ADDITIONAL_COMMENTS = 'additionalComments',
   AVERAGE_MILES_DRIVEN = 'averageMilesDriven',
@@ -25,6 +27,8 @@ export enum FIELDS {
   DRIVING_STYLE = 'drivingStyle',
   DRY = 'dry',
   EMAIL = 'email',
+  EMAIL_SOURCE = 'source',
+  EMAIL_SOURCE_URL = 'sourceURL',
   NAME = 'name',
   NOISE = 'noise',
   PURCHASE_DATE = 'purchaseDate',
