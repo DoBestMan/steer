@@ -2,12 +2,10 @@ import { ThemeProvider } from 'emotion-theming';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
-import { NAV_THEME } from '~/components/modules/Nav/Nav.theme';
 import { useSearchModalContext } from '~/components/modules/Search/SearchModal.context';
 import { useCatalogProductsContext } from '~/context/CatalogProducts.context';
 import { useCatalogSummaryContext } from '~/context/CatalogSummary.context';
 import { useFooterContext } from '~/context/Footer.context';
-import { useNavContext } from '~/context/Nav.context';
 import { LOCAL_STORAGE, PROPERTIES } from '~/lib/constants/localStorage';
 import { isBrowser } from '~/lib/utils/browser';
 
@@ -25,7 +23,6 @@ interface Props {
 }
 
 function CatalogPage({ catalogGridRef, isSearchForTireSize }: Props) {
-  const { setNavTheme, theme: navTheme } = useNavContext();
   const {
     displayedProducts,
     fetchNewProducts,
@@ -52,21 +49,6 @@ function CatalogPage({ catalogGridRef, isSearchForTireSize }: Props) {
    * - once user transitions into Top Picks from the loading interstitial
    */
   const showGrid = contentStage === STAGES.RESULTS;
-
-  // const renderCatalogGrid =
-  //   showGrid && siteCatalogProducts && previewFiltersData;
-
-  useEffect(() => {
-    // When the Catalog Summary is hidden, update Nav theme to `ALTERNATE`
-    // for display on an orange background.
-    const newTheme = showSummary ? NAV_THEME.DEFAULT : NAV_THEME.ALTERNATE;
-
-    if (newTheme !== navTheme) {
-      setNavTheme(newTheme);
-    }
-    // This hook should not be called when `navTheme` is updated elsewhere
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [setNavTheme, showSummary]);
 
   useEffect(() => {
     // SQA-499: display footer only in the Catalog results page, hide for all interstitial pages.
