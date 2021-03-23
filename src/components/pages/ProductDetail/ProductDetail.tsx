@@ -20,6 +20,7 @@ import TireImage from '~/components/modules/PDP/TireImage/TireImage';
 import { useModalContext } from '~/context/Modal.context';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { LINK_THEME } from '~/lib/constants';
+import Error from '~/pages/_error';
 
 import useExperimentPLA from './experiments/useExperimentPLA';
 import { ANCHORS } from './mappers/anchorList';
@@ -62,9 +63,11 @@ function ProductDetail({ serverData }: ProductDetailData) {
     sizeFinder,
     stickyBar,
     technicalSpecs,
+    statusCode,
   } = useProductDetail({
     serverData,
   });
+
   const { openStaticModal, openDynamicModal } = useModalContext();
   const {
     positionCuration0,
@@ -105,6 +108,10 @@ function ProductDetail({ serverData }: ProductDetailData) {
       window.removeEventListener('pageshow', reloadPageIfPersisted);
     };
   }, []);
+
+  if (statusCode) {
+    return <Error statusCode={statusCode} />;
+  }
 
   return (
     <>

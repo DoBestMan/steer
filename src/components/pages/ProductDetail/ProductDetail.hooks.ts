@@ -22,6 +22,7 @@ import { SiteProductLine } from '~/data/models/SiteProductLine';
 import { useApiDataWithDefault } from '~/hooks/useApiDataWithDefault';
 import { ROUTE_MAP, ROUTES } from '~/lib/constants';
 import { eventEmitters } from '~/lib/events/emitters';
+import { FetchError } from '~/lib/fetch/FetchError';
 import { interpolateRoute } from '~/lib/utils/routes';
 
 import { Anchor, mapDataToAnchorList } from './mappers/anchorList';
@@ -71,6 +72,7 @@ interface ResponseProps extends Pick<SiteProductLine, 'assetList'> {
   recirculationSize: RecirculationSize | null;
   reviews: ReviewsProps;
   sizeFinder: ParsedSizeFinderProps | null;
+  statusCode: number | undefined | null;
   stickyBar: ParsedStickyBarProps | null;
   technicalSpecs: TechnicalSpecsProps | null;
 }
@@ -105,8 +107,10 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
     revalidateEmitter: eventEmitters.userPersonalizationLocationUpdate,
   });
 
+  let statusCode = null;
   if (error) {
     console.error(error);
+    statusCode = (error as FetchError).statusCode;
   }
 
   const { siteProductReviews } = serverData;
@@ -231,6 +235,7 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
       isFrontAndRear: !!queryParams.rearSize,
       siteProduct,
     }),
+    statusCode,
     stickyBar: mapDataToStickyBar({ quantity, siteProduct }),
     technicalSpecs,
   };
