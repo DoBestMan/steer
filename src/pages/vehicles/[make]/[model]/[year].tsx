@@ -64,6 +64,12 @@ export const getServerSideProps: GetServerSideProps<PageResponse<
     year,
     query: getStringifiedParams(vehicleParams),
   };
+
+  if (!context.query.trim) {
+    context.res.statusCode = 404;
+    return { props: { errorStatusCode: 404 } };
+  }
+
   const [summaryRes, productsRes] = await Promise.all([
     backendGetVehicleSummary(apiArgs),
     backendGetVehicleProducts(apiArgs),
