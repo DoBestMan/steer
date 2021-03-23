@@ -106,16 +106,18 @@ export function useContextSetup(isStorybook?: boolean) {
       await apiBootstrap();
       const data = fetchGetUserPersonalization();
       setUserPersonalizationData(data);
+      updateLocationFromBrowser();
     }
 
     getData();
-    updateLocationFromBrowser();
 
     // this doesn't need to update for isStorybook
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   async function updateLocation(body: UserPersonalizationUpdate) {
+    // awaiting session token before calling apiGetUserSearchHistory which needs authentication
+    await apiBootstrap();
     const res = await apiUpdateUserPersonalization(body);
 
     if (res.isSuccess) {
