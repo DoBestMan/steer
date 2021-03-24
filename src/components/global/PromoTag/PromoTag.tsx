@@ -2,6 +2,7 @@ import Icon from '~/components/global/Icon/Icon';
 import { SiteCatalogPromotion } from '~/data/models/SiteCatalogPromotionInfo';
 import { SiteDynamicModal } from '~/data/models/SiteDynamicModal';
 import { SitePromotionStyleEnum } from '~/data/models/SitePromotion';
+import { THEME } from '~/lib/constants/theme';
 
 import styles, { clickableStyles } from './PromoTag.styles';
 
@@ -30,7 +31,16 @@ function PromoTag({
         onClick={handleClick}
       >
         {label}
-        {icon && <Icon css={styles.icon} name={icon.svgId} />}
+        {icon && (
+          <Icon
+            css={styles.icon}
+            ssHeight="auto"
+            name={icon.svgId}
+            ssWidth={20}
+            theme={THEME.DARK}
+            ssr
+          />
+        )}
       </button>
     );
   }
@@ -38,7 +48,16 @@ function PromoTag({
   return (
     <div css={sharedStyles}>
       {label}
-      {icon && <Icon css={styles.icon} name={icon.svgId} />}
+      {icon && (
+        <Icon
+          css={styles.icon}
+          ssHeight="auto"
+          name={icon.svgId}
+          ssWidth={20}
+          theme={THEME.DARK}
+          ssr
+        />
+      )}
     </div>
   );
 }

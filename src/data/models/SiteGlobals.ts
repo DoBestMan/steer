@@ -15,5 +15,6 @@ export interface SiteGlobals {
    */
   siteTheme: string | null;
   isDesktop?: boolean;
+  isMobile?: boolean;
   userAgentType?: string;
 }

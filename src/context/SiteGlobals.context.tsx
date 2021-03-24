@@ -52,10 +52,11 @@ export function SiteGlobalsContextProvider({
 }: Props) {
   const providerValue = useContextSetup({ siteGlobals: value });
   const isDesktop = userAgentType === VIEWPORTS.DESKTOP;
+  const isMobile = userAgentType === VIEWPORTS.MOBILE;
 
   return (
     <SiteGlobalsContext.Provider
-      value={{ ...providerValue, isDesktop, userAgentType }}
+      value={{ ...providerValue, isDesktop, isMobile, userAgentType }}
     >
       {children}
     </SiteGlobalsContext.Provider>

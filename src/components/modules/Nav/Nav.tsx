@@ -8,8 +8,8 @@ import Image from '~/components/global/Image/Image';
 import BaseLink from '~/components/global/Link/BaseLink';
 import { useSearchContext } from '~/components/modules/Search/Search.context';
 import { useNavContext } from '~/context/Nav.context';
-import { useBreakpoints } from '~/hooks/useBreakpoints';
-import { TIME } from '~/lib/constants';
+import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
+import { LOADING_OPTIONS, TIME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { disableGlobalFocus } from '~/styles/document/accessibility.styles';
 import { layout } from '~/styles/layout.styles';
@@ -32,8 +32,9 @@ function Nav({ isHomepage, isPLA }: Props) {
 
   const { toggleIsSearchOpen } = useSearchModalContext();
   const theme: NavThemeObject = useTheme();
-  const { isMobile } = useBreakpoints();
   const { searchQuery, setSearchState } = useSearchContext();
+  const { isMobile } = useSiteGlobalsContext();
+
   return (
     <Transition appear={false} in={isVisible} timeout={TIME.MS400}>
       {(containerTransitionState: TransitionStatus) => {
@@ -57,6 +58,7 @@ function Nav({ isHomepage, isPLA }: Props) {
                   <Image
                     altText={ui('logo.alt')}
                     css={isHomepage ? styles.logoHome : styles.logo}
+                    loading={LOADING_OPTIONS.EAGER}
                     src={
                       isMobile
                         ? theme.logoUrlMobile

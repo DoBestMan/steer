@@ -4,12 +4,9 @@
  */
 // import dynamic from 'next/dynamic';
 import { ReactNode } from 'react';
-import { Transition } from 'react-transition-group';
-import { ENTERED, TransitionStatus } from 'react-transition-group/Transition';
 
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import { ContentModalProps } from '~/components/global/Modal/Modal.types';
-import { useProductDetailContext } from '~/components/pages/ProductDetail/ProductDetail.context';
 import { SiteProductInsightItem } from '~/data/models/SiteProductInsightItem';
 import { SiteProductInsightsRebate } from '~/data/models/SiteProductInsightsRebate';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
@@ -66,11 +63,8 @@ function Insights({
   insightItems = [],
   openDynamicModal,
   rebate,
-  shouldTransition,
   ...rest
 }: Props) {
-  const { isLoading } = useProductDetailContext();
-
   function handleOpenRebate() {
     if (rebate?.siteDynamicModal) {
       openDynamicModal(rebate.siteDynamicModal);
@@ -78,89 +72,78 @@ function Insights({
   }
 
   return (
-    <Transition appear={shouldTransition} in={!isLoading} timeout={0}>
-      {(containerTransitionState: TransitionStatus) => (
-        <div css={styles.root}>
-          <ul
-            css={styles.container}
-            aria-hidden={containerTransitionState !== ENTERED}
-            {...rest}
-          >
-            {rebate && (
-              <RenderItem>
-                <button onClick={handleOpenRebate} aria-label={rebate.label}>
-                  <InsightsItem
-                    highlight
-                    icon={{
-                      svgId: ICONS.REBATE,
-                      type: ICON_IMAGE_TYPE.ICON,
-                    }}
-                    label={rebate.label}
-                    hasAction
-                  />
-                </button>
-              </RenderItem>
-            )}
-            {/**
-             * Note: temporaily removing this for ST MVP launch.
-             * Refer to WCS-1590 for details.
-             */}
-            {/* {showFitBar && (
-              <RenderItem>
-                <DynamicFitButton
-                  make={make}
-                  vehicle={vehicle}
-                  sizeCheckState={sizeCheckState}
-                  onFindTiresThatFit={onFindTiresThatFit}
-                  onSelectAvailableOption={onSelectAvailableOption}
-                  onUnselectVehicle={onUnselectVehicle}
+    <div css={styles.root}>
+      <ul css={styles.container} {...rest}>
+        {rebate && (
+          <RenderItem>
+            <button onClick={handleOpenRebate} aria-label={rebate.label}>
+              <InsightsItem
+                highlight
+                icon={{
+                  svgId: ICONS.REBATE,
+                  type: ICON_IMAGE_TYPE.ICON,
+                }}
+                label={rebate.label}
+                hasAction
+                ssr
+              />
+            </button>
+          </RenderItem>
+        )}
+        {/**
+         * Note: temporaily removing this for ST MVP launch.
+         * Refer to WCS-1590 for details.
+         */}
+        {/* {showFitBar && (
+          <RenderItem>
+            <DynamicFitButton
+              make={make}
+              vehicle={vehicle}
+              sizeCheckState={sizeCheckState}
+              onFindTiresThatFit={onFindTiresThatFit}
+              onSelectAvailableOption={onSelectAvailableOption}
+              onUnselectVehicle={onUnselectVehicle}
+            />
+          </RenderItem>
+        )} */}
+        {delivery && (
+          <RenderItem>
+            <button
+              type="button"
+              onClick={handleChangeLocation}
+              aria-label={`${delivery}: ${ui('pdp.insights.changeLocation')}`}
+            >
+              <InsightsItem
+                icon={{
+                  svgId: ICONS.SHIPPING_TRUCK_OUTLINE,
+                  type: ICON_IMAGE_TYPE.ICON,
+                }}
+                label={delivery}
+                hasAction
+                ssr
+              />
+            </button>
+          </RenderItem>
+        )}
+        {insightItems.map((item, index) => (
+          <RenderItem key={`${item.label}_${index}`}>
+            {item.sectionAnchor ? (
+              <AnchorButton target={item.sectionAnchor}>
+                <InsightsItem
+                  icon={item.icon}
+                  label={item.label}
+                  hasAction
+                  {...rest}
+                  ssr
                 />
-              </RenderItem>
-            )} */}
-            {delivery && (
-              <RenderItem>
-                <button
-                  type="button"
-                  onClick={handleChangeLocation}
-                  aria-label={`${delivery}: ${ui(
-                    'pdp.insights.changeLocation',
-                  )}`}
-                >
-                  <InsightsItem
-                    icon={{
-                      svgId: ICONS.SHIPPING_TRUCK_OUTLINE,
-                      type: ICON_IMAGE_TYPE.ICON,
-                    }}
-                    label={delivery}
-                    hasAction
-                  />
-                </button>
-              </RenderItem>
+              </AnchorButton>
+            ) : (
+              <InsightsItem label={item.label} icon={item.icon} ssr />
             )}
-            {insightItems.map((item, index) => (
-              <RenderItem key={`${item.label}_${index}`}>
-                {item.sectionAnchor ? (
-                  <AnchorButton target={item.sectionAnchor}>
-                    <InsightsItem
-                      icon={item.icon}
-                      label={item.label}
-                      hasAction
-                      {...rest}
-                    />
-                  </AnchorButton>
-                ) : (
-                  <InsightsItem label={item.label} icon={item.icon} />
-                )}
-              </RenderItem>
-            ))}
-          </ul>
-          <div
-            css={styles.loading}
-            aria-hidden={containerTransitionState === ENTERED}
-          />
-        </div>
-      )}
-    </Transition>
+          </RenderItem>
+        ))}
+      </ul>
+    </div>
   );
 }
 

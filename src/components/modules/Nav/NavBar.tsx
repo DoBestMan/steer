@@ -63,6 +63,7 @@ function NavBar({
             isActive={false}
             onClick={handleOnNavLinkClick(link)}
             theme={linkTheme}
+            ssr
             {...link}
           />
         </li>

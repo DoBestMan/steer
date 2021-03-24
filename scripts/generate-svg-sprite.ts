@@ -57,6 +57,7 @@ const config = {
   },
   mode: {
     symbol: true, // Create a «symbol» sprite
+    stack: true, // Create a «stack» sprite
   },
 };
 
@@ -110,6 +111,7 @@ fs.readdirSync(iconsOthersSrc).forEach((file: string): void => {
 
   if (hasViewbox) {
     // const destination = `${iconsPublicOthersPath}/${file}`;
+    spriter.add(filepath, null, content);
 
     const SVGObject = {
       content,

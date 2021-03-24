@@ -11,6 +11,11 @@ export interface SiteIcon {
    * Discriminator when icons and images are used with oneOf
    */
   type: ICON_IMAGE_TYPE.ICON;
+
+  /**
+   * Determines if icon should be loaded server side
+   */
+  ssr?: boolean;
 }
 
 export function isSiteIcon(arg: SiteIcon): arg is SiteIcon {

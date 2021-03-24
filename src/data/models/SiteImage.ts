@@ -28,4 +28,9 @@ export interface SiteImage {
    * Width
    */
   width?: number;
+
+  /**
+   * Determines if icon should be loaded server side
+   */
+  ssr?: boolean;
 }

@@ -24,6 +24,7 @@ interface Props {
   icon?: IconType;
   iconPosition?: LINK_ICON_POSITION;
   isDisabled?: boolean;
+  ssr?: boolean;
   testId?: string;
   theme?: THEME.DARK | THEME.LIGHT | THEME.ORANGE | LINK_THEME;
 }
@@ -44,6 +45,7 @@ function Link({
   icon,
   iconPosition = LINK_ICON_POSITION.RIGHT,
   isDisabled,
+  ssr,
   testId,
   theme = THEME.DARK,
   ...rest
@@ -62,8 +64,10 @@ function Link({
   const inlineIcon = icon && (
     <Icon
       aria-hidden={!!children}
-      name={icon}
       css={children && styles[iconPosition]}
+      name={icon}
+      ssr={ssr}
+      theme={THEME.LIGHT}
     />
   );
 

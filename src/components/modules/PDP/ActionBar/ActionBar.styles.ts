@@ -66,10 +66,8 @@ const styles: StylesMap = {
     },
   },
   dropdownIcon: {
-    height: 5,
     marginLeft: SPACING.SIZE_05,
     marginTop: SPACING.SIZE_02,
-    width: 8,
   },
   price: {
     display: 'flex',

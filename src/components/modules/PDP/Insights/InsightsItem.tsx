@@ -13,6 +13,7 @@ export interface InsightsItemProps {
   imageIcon?: string;
   imageIconAlt?: string;
   label: string;
+  ssr?: boolean;
 }
 
 function InsightsItem({
@@ -20,6 +21,7 @@ function InsightsItem({
   icon,
   label,
   hasAction,
+  ssr = false,
 }: InsightsItemProps) {
   return (
     <div
@@ -30,12 +32,19 @@ function InsightsItem({
       ]}
     >
       <span css={styles.icon} aria-hidden>
-        {icon && <IconOrImage {...icon} />}
+        {icon && <IconOrImage {...icon} ssr={ssr} />}
       </span>
       <Markdown renderers={{ paragraph: 'span' }} css={styles.label}>
         {label}
       </Markdown>
-      {hasAction && <Icon name={ICONS.CHEVRON_RIGHT} css={styles.chevron} />}
+      {hasAction && (
+        <Icon
+          name={ICONS.CHEVRON_RIGHT}
+          css={styles.chevron}
+          ssr={ssr}
+          ssWidth={22}
+        />
+      )}
     </div>
   );
 }

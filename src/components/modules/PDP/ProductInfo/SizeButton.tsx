@@ -5,6 +5,7 @@ import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import SizeFinder from '~/components/modules/PDP/SizeFinder/SizeFinder';
 import { useProductDetailContext } from '~/components/pages/ProductDetail/ProductDetail.context';
+import { THEME } from '~/lib/constants/theme';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import { ProductInfoProps } from './ProductInfo';
@@ -98,6 +99,9 @@ function SizeButton({
           <Icon
             name={ICONS.CHEVRON_DOWN}
             css={[styles.icon, styles.iconNoSize]}
+            theme={THEME.ORANGE}
+            ssWidth={12}
+            ssr
           />
         </button>
         <RenderSizeFinder
@@ -125,7 +129,12 @@ function SizeButton({
         <span css={styles.size}>
           {size} <span css={styles.loadIndex}>{loadSpeedRating}</span>
         </span>
-        <Icon name={ICONS.CHEVRON_DOWN} css={styles.icon} />
+        <Icon
+          name={ICONS.CHEVRON_DOWN}
+          css={styles.icon}
+          theme={THEME.ORANGE}
+          ssr
+        />
       </button>
       <RenderSizeFinder
         isOpen={isOpen}

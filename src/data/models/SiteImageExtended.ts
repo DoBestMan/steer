@@ -9,4 +9,5 @@ export interface SiteImageExtended {
   srcTransformationArgs?: TransformationArgs;
   // Shortcut to generate width transformations based on `src` without proving `srcset`
   widths?: Array<number>;
+  ssr?: boolean;
 }

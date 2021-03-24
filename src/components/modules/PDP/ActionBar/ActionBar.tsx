@@ -167,7 +167,12 @@ function PDPActionBar({
               : 'pdp.stickyBar.changeQuantityPlural',
             { quantity: quantity.front },
           )}
-          <Icon name={ICONS.CHEVRON_DOWN} css={styles.dropdownIcon} />
+          <Icon
+            css={styles.dropdownIcon}
+            name={ICONS.CHEVRON_DOWN}
+            ssr
+            ssWidth={8}
+          />
         </Button>
         <span css={styles.buttonWrapper} onClick={handleError}>
           <Button
@@ -194,7 +199,12 @@ function PDPActionBar({
                 : 'pdp.stickyBar.changeQuantityPlural',
               { quantity: quantity.front },
             )}
-            <Icon name={ICONS.CHEVRON_DOWN} css={styles.dropdownIcon} />
+            <Icon
+              css={styles.dropdownIcon}
+              name={ICONS.CHEVRON_DOWN}
+              ssr
+              ssWidth={8}
+            />
           </Button>
           <Button
             data-testid="add-to-cart"

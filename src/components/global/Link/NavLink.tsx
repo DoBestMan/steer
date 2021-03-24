@@ -8,6 +8,7 @@ import { navLink } from './Link.styles';
 interface Props {
   isActive?: boolean;
   label?: string;
+  ssr?: boolean;
   theme?: THEME.LIGHT | THEME.ORANGE;
 }
 
@@ -17,6 +18,7 @@ type NavLinkButton = ActionType & ButtonProps;
 function NavLink({
   isActive = false,
   label,
+  ssr = false,
   text,
   theme = THEME.LIGHT,
   ...rest
@@ -29,6 +31,7 @@ function NavLink({
         css={[typography.primarySubhead, activeStyles]}
         iconPosition={LINK_ICON_POSITION.LEFT}
         aria-label={label || text}
+        ssr={ssr}
         {...rest}
       >
         {text}
@@ -43,6 +46,7 @@ function NavLink({
         css={[typography.primarySubhead, activeStyles]}
         iconPosition={LINK_ICON_POSITION.LEFT}
         aria-label={label || text}
+        ssr={ssr}
         {...rest}
       >
         {text}
