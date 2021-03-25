@@ -7,7 +7,6 @@ import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import HeaderWithLogo from '~/components/global/HeaderWithLogo/HeaderWithLogo';
 import Image from '~/components/global/Image/Image';
-import Link from '~/components/global/Link/Link';
 import Meta from '~/components/global/Meta/Meta';
 import ProductGroupList from '~/components/global/ProductGroupList/ProductGroupList';
 import PromotionCard from '~/components/global/PromotionCard/PromotionCard';
@@ -38,7 +37,6 @@ function BrandTirePage({
   header,
   linkList,
   promoImage,
-  reviewsLink,
 }: BrandTirePageProps) {
   const router = useRouter();
   const { query, asPath, pathname } = router;
@@ -101,17 +99,6 @@ function BrandTirePage({
             {header && (
               <HeaderWithLogo {...header} imageLabel={`${brandName}`} />
             )}
-            <div css={styles.reviewLinkContainer}>
-              {reviewsLink?.link?.href && (
-                <Link
-                  css={styles.spacingTop20}
-                  href={reviewsLink.link.href}
-                  theme={THEME.LIGHT}
-                >
-                  {reviewsLink.label}
-                </Link>
-              )}
-            </div>
           </GridItem>
         </Grid>
       </div>

@@ -3,7 +3,6 @@ import { SiteCatalogProductGroupItem } from '~/data/models/SiteCatalogProductGro
 import { DealsItem } from '~/data/models/SiteDeals';
 import { SiteLink } from '~/data/models/SiteLink';
 import { SiteModuleImage } from '~/data/models/SiteModules';
-import { TextBasedNavigationListItem } from '~/data/models/TextBasedNavigationProps';
 
 export interface SiteBrandDetailsLink {
   type: string;
@@ -29,7 +28,6 @@ export interface SiteBrandDetailsLinkList {
 export interface SiteBrandDetails {
   header: HeaderWithLogoProps;
   promoImage: SiteModuleImage;
-  reviewsLink: TextBasedNavigationListItem;
   curatedProducts: SiteCatalogProductGroupItem[];
   deals: DealsItem[];
   linkList: SiteBrandDetailsLinkList[];

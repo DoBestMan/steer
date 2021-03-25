@@ -11,21 +11,26 @@ import { links } from '~/styles/links.styles';
 import { typography } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
+  body: {
+    a: links.light,
+    '& > div': {
+      display: '-webkit-box',
+      '-webkit-line-clamp': '2',
+      '-webkit-box-orient': 'vertical',
+      overflow: 'hidden',
+    },
+  },
   container: typography.bodyCopy,
+  fullBody: {
+    a: links.light,
+    display: 'block',
+  },
   imageContainer: {
     marginBottom: SPACING.SIZE_20,
     ['img[type="SiteImage"]']: {
       maxWidth: 180,
       maxHeight: 45,
     },
-  },
-  moreBody: {
-    display: 'none',
-    marginTop: '1em',
-    '&[aria-hidden="false"]': {
-      display: 'block',
-    },
-    a: links.light,
   },
   showFullBody: [
     typography.primarySubhead,

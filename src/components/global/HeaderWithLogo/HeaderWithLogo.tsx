@@ -1,4 +1,4 @@
-import { ReactType, useCallback, useState } from 'react';
+import { ReactType, useCallback, useEffect, useRef, useState } from 'react';
 
 import BrandLogoOrLabel from '~/components/global/BrandLogoOrLabel/BrandLogoOrLabel';
 import Icon from '~/components/global/Icon/Icon';
@@ -44,16 +44,29 @@ export default function HeaderWithLogo({
   const TitleContainer = titleAs;
   const SubTitleContainer = subTitleAs;
   const [showFullBody, setShowFullBody] = useState(false);
-
+  const [showMoreButton, setShowMoreButton] = useState(false);
+  const bodyRef = useRef<HTMLDivElement>(null);
   const toggleFullBody = useCallback(() => {
     setShowFullBody(!showFullBody);
   }, [showFullBody, setShowFullBody]);
 
-  const splitBody = body && body.split(/\n\n/g);
-  const briefBody = splitBody && splitBody[0];
-  const moreBody =
-    splitBody && splitBody.length > 1 && splitBody.slice(1).join('\n\n');
-  const showMoreButton = briefBody && splitBody && splitBody.length > 1;
+  useEffect(() => {
+    if (
+      bodyRef === null ||
+      bodyRef.current === null ||
+      typeof window === 'undefined'
+    ) {
+      return;
+    }
+    const firstChildElement = bodyRef.current.firstElementChild;
+    if (
+      firstChildElement &&
+      firstChildElement.scrollHeight > firstChildElement.clientHeight
+    ) {
+      setShowMoreButton(true);
+    }
+  }, [bodyRef]);
+
   const brandLogoProps = {
     image,
     label: imageLabel,
@@ -80,30 +93,17 @@ export default function HeaderWithLogo({
           </Markdown>
         </SubTitleContainer>
       )}
-      {briefBody && (
-        <div css={styles.Body}>
+      {body && (
+        <div css={showFullBody ? styles.fullBody : styles.body} ref={bodyRef}>
           <Markdown
             allowedTypes={MARKDOWN_PRIMITIVES_WITH_HTML}
             unwrapDisallowed
           >
-            {briefBody}
+            {body}
           </Markdown>
         </div>
       )}
-      {moreBody && (
-        <div
-          css={styles.moreBody}
-          aria-hidden={!showFullBody}
-          id="header-detail-page-body"
-        >
-          <Markdown
-            allowedTypes={MARKDOWN_PRIMITIVES_WITH_HTML}
-            unwrapDisallowed
-          >
-            {moreBody}
-          </Markdown>
-        </div>
-      )}
+
       {showMoreButton && (
         <button
           aria-expanded={showFullBody}
