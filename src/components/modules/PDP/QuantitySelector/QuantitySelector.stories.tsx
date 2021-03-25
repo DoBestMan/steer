@@ -3,7 +3,7 @@ import { boolean, number } from '@storybook/addon-knobs';
 import { useEffect, useState } from 'react';
 
 import Button from '~/components/global/Button/Button';
-import HorizontalNumberPicker from '~/components/global/HorizontalNumberPicker/HorizontalNumberPicker';
+import HorizontalNumberPickerWithControls from '~/components/global/HorizontalNumberPicker/HorizontalNumberPickerWithControls';
 import { SPACING } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
@@ -81,9 +81,9 @@ export function QuantitySelectorDefault() {
         onInterceptAction={handleInterceptAction}
         recommendedQuantity={recommendedQuantity}
       >
-        <HorizontalNumberPicker
+        <HorizontalNumberPickerWithControls
           initialIndex={initialIndex}
-          customCarouselStyles={styles.carouselStyles}
+          customCarouselStyles={styles.numberControlsWrapper}
           {...(isFrontAndRear && {
             customContainerStyles: { marginBottom: SPACING.SIZE_30 },
           })}
@@ -98,9 +98,9 @@ export function QuantitySelectorDefault() {
         />
 
         {isFrontAndRear && (
-          <HorizontalNumberPicker
+          <HorizontalNumberPickerWithControls
             initialIndex={initialIndex}
-            customCarouselStyles={styles.carouselStyles}
+            customCarouselStyles={styles.numberControlsWrapper}
             numbers={PICKER_NUMBERS}
             onSelect={handleSelectSecondaryPicker}
             subTitle={

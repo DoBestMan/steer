@@ -1,4 +1,4 @@
-import HorizontalNumberPicker from '~/components/global/HorizontalNumberPicker/HorizontalNumberPicker';
+import HorizontalNumberPickerWithControls from '~/components/global/HorizontalNumberPicker/HorizontalNumberPickerWithControls';
 import { SPACING } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
@@ -18,7 +18,6 @@ interface Props {
 interface SubtitleProps {
   price?: string;
 }
-
 function Subtitle({ price }: SubtitleProps) {
   return (
     <p css={styles.subtitle} data-testid="total-price">
@@ -54,7 +53,6 @@ function QuantitySelectorContainer({
     tirePrice,
     toggleModal,
   });
-
   return (
     <QuantitySelector
       isIntercept={!!recommendedQuantity}
@@ -65,10 +63,10 @@ function QuantitySelectorContainer({
       onInterceptAction={onInterceptAction}
       recommendedQuantity={recommendedQuantity}
     >
-      <HorizontalNumberPicker
+      <HorizontalNumberPickerWithControls
         data-testid="front-picker"
         initialIndex={selectedFrontIndex}
-        customCarouselStyles={styles.carouselStyles}
+        customCarouselStyles={styles.numberControlsWrapper}
         {...(isFrontAndRear && {
           customContainerStyles: { marginBottom: SPACING.SIZE_30 },
         })}
@@ -83,10 +81,10 @@ function QuantitySelectorContainer({
       />
 
       {isFrontAndRear && (
-        <HorizontalNumberPicker
+        <HorizontalNumberPickerWithControls
           data-testid="rear-picker"
           initialIndex={selectedRearIndex}
-          customCarouselStyles={styles.carouselStyles}
+          customCarouselStyles={styles.numberControlsWrapper}
           numbers={numbers}
           onSelect={onSelectRearPicker}
           subTitle={finalPrice.rear && <Subtitle price={finalPrice.rear} />}

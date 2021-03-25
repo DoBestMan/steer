@@ -67,7 +67,7 @@ describe('modules/PDP/QuantitySelector', () => {
     const confirmButton = screen.getByTestId('confirm-button');
 
     const buttons = screen.getByTestId('front-picker');
-    const buttonFive = within(buttons).getByText('5');
+    const buttonFive = within(buttons).getByText('+');
 
     fireEvent.click(buttonFive);
     fireEvent.click(confirmButton);
@@ -88,8 +88,10 @@ describe('modules/PDP/QuantitySelector', () => {
     const confirmButton = screen.getByTestId('confirm-button');
 
     const buttons = screen.getByTestId('front-picker');
-    const buttonOne = within(buttons).getByText('1');
+    const buttonOne = within(buttons).getByText('-');
 
+    fireEvent.click(buttonOne);
+    fireEvent.click(buttonOne);
     fireEvent.click(buttonOne);
     fireEvent.click(confirmButton);
 
@@ -131,8 +133,10 @@ describe('modules/PDP/QuantitySelector', () => {
     const confirmButton = screen.getByTestId('confirm-button');
 
     const buttons = screen.getByTestId('front-picker');
-    const buttonOne = within(buttons).getByText('1');
+    const buttonOne = within(buttons).getByText('-');
 
+    fireEvent.click(buttonOne);
+    fireEvent.click(buttonOne);
     fireEvent.click(buttonOne);
     fireEvent.click(confirmButton);
 
@@ -207,10 +211,10 @@ describe('modules/PDP/QuantitySelector', () => {
     const confirmButton = screen.getByTestId('confirm-button');
 
     const buttonsFront = screen.getByTestId('front-picker');
-    const buttonFrontOne = within(buttonsFront).getByText('1');
+    const buttonFrontOne = within(buttonsFront).getByText('-');
 
     const buttonsRear = screen.getByTestId('rear-picker');
-    const buttonRearThree = within(buttonsRear).getByText('3');
+    const buttonRearThree = within(buttonsRear).getByText('+');
 
     fireEvent.click(buttonFrontOne);
     fireEvent.click(buttonRearThree);
@@ -231,19 +235,19 @@ describe('modules/PDP/QuantitySelector', () => {
 
     const price = screen.getByTestId('total-price');
     const buttons = screen.getByTestId('front-picker');
-    const buttonOne = within(buttons).getByText('1');
-    const buttonFive = within(buttons).getByText('5');
+    const buttonOne = within(buttons).getByText('-');
+    const buttonFive = within(buttons).getByText('+');
 
     fireEvent.click(buttonOne);
 
     expect(price).toHaveTextContent(
-      `${ui('pdp.quantitySelector.totalPrice')} $50.00`,
+      `${ui('pdp.quantitySelector.totalPrice')} $150.00`,
     );
 
     fireEvent.click(buttonFive);
 
     expect(price).toHaveTextContent(
-      `${ui('pdp.quantitySelector.totalPrice')} $250.00`,
+      `${ui('pdp.quantitySelector.totalPrice')} $200.00`,
     );
   });
 
@@ -262,39 +266,39 @@ describe('modules/PDP/QuantitySelector', () => {
     const prices = screen.getAllByTestId('total-price');
 
     const buttonsFront = screen.getByTestId('front-picker');
-    const buttonFrontOne = within(buttonsFront).getByText('1');
-    const buttonFrontTwo = within(buttonsFront).getByText('2');
+    const buttonFrontOne = within(buttonsFront).getByText('+');
+    const buttonFrontTwo = within(buttonsFront).getByText('-');
 
     const buttonsRear = screen.getByTestId('rear-picker');
-    const buttonRearOne = within(buttonsRear).getByText('1');
-    const buttonRearTwo = within(buttonsRear).getByText('2');
+    const buttonRearOne = within(buttonsRear).getByText('+');
+    const buttonRearTwo = within(buttonsRear).getByText('-');
 
     fireEvent.click(buttonFrontOne);
     fireEvent.click(buttonRearOne);
 
     expect(prices[0]).toHaveTextContent(
-      `${ui('pdp.quantitySelector.totalPrice')} $50.00`,
+      `${ui('pdp.quantitySelector.totalPrice')} $250.00`,
     );
     expect(prices[1]).toHaveTextContent(
-      `${ui('pdp.quantitySelector.totalPrice')} $60.00`,
+      `${ui('pdp.quantitySelector.totalPrice')} $120.00`,
     );
 
     fireEvent.click(buttonFrontTwo);
 
     expect(prices[0]).toHaveTextContent(
-      `${ui('pdp.quantitySelector.totalPrice')} $100.00`,
+      `${ui('pdp.quantitySelector.totalPrice')} $200.00`,
     );
     expect(prices[1]).toHaveTextContent(
-      `${ui('pdp.quantitySelector.totalPrice')} $60.00`,
+      `${ui('pdp.quantitySelector.totalPrice')} $120.00`,
     );
 
     fireEvent.click(buttonRearTwo);
 
     expect(prices[0]).toHaveTextContent(
-      `${ui('pdp.quantitySelector.totalPrice')} $100.00`,
+      `${ui('pdp.quantitySelector.totalPrice')} $200.00`,
     );
     expect(prices[1]).toHaveTextContent(
-      `${ui('pdp.quantitySelector.totalPrice')} $120.00`,
+      `${ui('pdp.quantitySelector.totalPrice')} $60.00`,
     );
   });
 });

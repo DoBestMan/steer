@@ -110,7 +110,6 @@ export function useContextSetup(isStorybook?: boolean) {
     }
 
     getData();
-
     // this doesn't need to update for isStorybook
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

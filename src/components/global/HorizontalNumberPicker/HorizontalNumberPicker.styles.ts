@@ -77,6 +77,30 @@ const styles: StylesMap = {
       },
     ],
   },
+  quantityButton: [
+    typography.secondaryHeadline,
+    {
+      alignItems: 'center',
+      border: BORDERS.SOLID_GRAY_20_1PX,
+      borderRadius: RADIUS.CIRCLE,
+      color: COLORS.LIGHT.GRAY_70,
+      display: 'inline-flex',
+      fontSize: '26px',
+      fontWeight: 700,
+      height: ITEM_SIZE.L,
+      justifyContent: 'center',
+      marginLeft: SPACING.SIZE_35,
+      marginRight: SPACING.SIZE_35,
+      width: ITEM_SIZE.L,
+    },
+  ],
+  quantityNumber: [
+    typography.secondaryHeadline,
+    {
+      display: 'inline-flex',
+      color: COLORS.GLOBAL.ORANGE,
+    },
+  ],
   selectedItem: {
     border: `3px solid ${COLORS.GLOBAL.ORANGE}`,
     color: COLORS.GLOBAL.ORANGE,

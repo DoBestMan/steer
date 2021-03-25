@@ -69,6 +69,10 @@ const styles: StylesMap = {
       height: '100%',
     },
   },
+  numberControlsWrapper: {
+    marginTop: SPACING.SIZE_30,
+    textAlign: 'center',
+  },
   pickerContainer: {
     borderTop: BORDERS.SOLID_GRAY_20_1PX,
     marginTop: SPACING.SIZE_30,

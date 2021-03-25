@@ -2,6 +2,7 @@ import { action } from '@storybook/addon-actions';
 import { number, text } from '@storybook/addon-knobs';
 
 import HorizontalNumberPicker from './HorizontalNumberPicker';
+import HorizontalNumberPickerWithControls from './HorizontalNumberPickerWithControls';
 
 export default {
   component: HorizontalNumberPicker,
@@ -31,6 +32,22 @@ export function HorizontalNumberPickerWithKnobs() {
 
   return (
     <HorizontalNumberPicker
+      numbers={Array.from(Array(10).keys())}
+      onSelect={handleSelect}
+      initialIndex={initialIndex}
+      subTitle={<SubTitle />}
+      title={title}
+    />
+  );
+}
+
+export function HorizontalNumberPickerWithControlsWithKnobs() {
+  const handleSelect = action('number-picker-selection');
+  const initialIndex = number('Initial Index', -1);
+  const title = text('Title', 'SELECT TIRE QUANTITY');
+
+  return (
+    <HorizontalNumberPickerWithControls
       numbers={Array.from(Array(10).keys())}
       onSelect={handleSelect}
       initialIndex={initialIndex}
