@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 import { ContentModalProps } from '~/components/global/Modal/Modal.types';
@@ -10,6 +11,7 @@ import { SiteCatalogBrand } from '~/data/models/SiteCatalogBrand';
 import { SitePrice } from '~/data/models/SitePrice';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { BREAKPOINT_SIZES, THEME } from '~/lib/constants';
+import { getParameterByNameFromUrl } from '~/lib/utils/string';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import { SizeFinderProps } from '../SizeFinder/SizeFinder';
@@ -50,6 +52,7 @@ export interface ProductInfoProps {
     durationLabel: string;
     price: string;
   } | null;
+  sameSearchLabel?: string | null;
   sameSizeSearchResults?: number | null;
   sameSizeSearchURL?: string | null;
   size?: string;
@@ -92,6 +95,8 @@ function ProductInfo({
     isLoading,
     currentSizeIndex,
     showSelectError,
+    productCount,
+    getProductCount,
     setShowSelectError,
   } = useProductDetailContext();
   const { isDesktop } = useSiteGlobalsContext();
@@ -110,14 +115,34 @@ function ProductInfo({
     return (
       <div css={[styles.pricesWrapper]}>
         <Price
-          callForPricing={callForPricing}
           price={price}
           priceLabel={priceLabel}
           startingPrice={isTireLine ? startingPrice : undefined}
-          sameSizeSearchResults={sameSizeSearchResults}
-          sameSizeSearchURL={sameSizeSearchURL}
-          size={size}
           volatileAvailability={volatileAvailability}
+        />
+      </div>
+    );
+  }
+
+  const queryString = useRouter();
+  const IsPDP = getParameterByNameFromUrl('tireSize', queryString.asPath);
+  const brandName = brand.label.toLocaleLowerCase();
+
+  if (
+    (!IsPDP && !startingPrice && !price) ||
+    (!IsPDP && startingPrice === '0' && !price)
+  ) {
+    if (!productCount) {
+      getProductCount(brandName);
+    }
+    return (
+      <div css={styles.crossSellWrapper}>
+        <OutOfStock
+          callForPricing={callForPricing}
+          sameSizeSearchResults={productCount}
+          sameSizeSearchURL={brandURL}
+          size={brand.label}
+          sameSearchLabel={'brand'}
         />
       </div>
     );

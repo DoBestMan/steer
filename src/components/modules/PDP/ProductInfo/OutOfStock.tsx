@@ -8,10 +8,15 @@ import { ProductInfoProps } from './ProductInfo';
 
 type Props = Pick<
   ProductInfoProps,
-  'callForPricing' | 'sameSizeSearchResults' | 'sameSizeSearchURL' | 'size'
+  | 'callForPricing'
+  | 'sameSearchLabel'
+  | 'sameSizeSearchResults'
+  | 'sameSizeSearchURL'
+  | 'size'
 >;
 
 function OutOfStock({
+  sameSearchLabel,
   sameSizeSearchResults,
   sameSizeSearchURL,
   size,
@@ -56,6 +61,7 @@ function OutOfStock({
             : 'pdp.productInfo.outOfStockDescription',
           {
             results: sameSizeSearchResults?.toString() || '',
+            label: sameSearchLabel ? sameSearchLabel : 'size',
           },
         )}
       </p>

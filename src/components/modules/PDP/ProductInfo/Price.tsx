@@ -3,44 +3,21 @@ import { formatDollars } from '~/lib/utils/string';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { uiJSX } from '~/lib/utils/ui-dictionary-jsx';
 
-import OutOfStock from './OutOfStock';
 import styles from './Price.styles';
 import { ProductInfoProps } from './ProductInfo';
 
 type Props = Pick<
   ProductInfoProps,
-  | 'callForPricing'
-  | 'price'
-  | 'priceLabel'
-  | 'volatileAvailability'
-  | 'startingPrice'
-  | 'sameSizeSearchResults'
-  | 'sameSizeSearchURL'
-  | 'size'
+  'price' | 'priceLabel' | 'startingPrice' | 'volatileAvailability'
 >;
 
 function Price({
-  callForPricing,
   price,
   priceLabel,
-  sameSizeSearchResults,
-  sameSizeSearchURL,
-  size,
   startingPrice,
   volatileAvailability,
 }: Props) {
-  if ((!startingPrice && !price) || (startingPrice === '0' && !price)) {
-    return (
-      <div css={styles.outOfStock}>
-        <OutOfStock
-          callForPricing={callForPricing}
-          sameSizeSearchResults={sameSizeSearchResults}
-          sameSizeSearchURL={sameSizeSearchURL}
-          size={size}
-        />
-      </div>
-    );
-  } else if (startingPrice) {
+  if (startingPrice && startingPrice !== '0') {
     return (
       <p css={styles.startingPrice}>
         {uiJSX('pdp.productInfo.startingAtLabel', {

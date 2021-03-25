@@ -1437,8 +1437,10 @@ export const productDetailContextMock: ProductDetailContextProps = {
     siteProduct: siteProductMock,
     siteProductReviews: siteProductReviewsMock,
   },
+  getProductCount: () => {},
   isAddingToCart: false,
   isLoading: false,
+  productCount: 256,
   quantity: { front: 2, rear: 2 },
   queryParams: {
     rearSize: '200-r15',
