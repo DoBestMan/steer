@@ -6,6 +6,9 @@ const styles = {
     display: 'flex',
     marginRight: SPACING.SIZE_05,
   },
+  containerServerSide: {
+    margin: `3px ${SPACING.SIZE_05}px 0 0`,
+  },
   rating: {
     lineHeight: 'inherit',
     marginLeft: SPACING.SIZE_10,

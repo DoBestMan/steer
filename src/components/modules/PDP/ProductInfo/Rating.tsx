@@ -44,6 +44,7 @@ function Rating({
           color={COLORS.GLOBAL.BLACK}
           number={rating.value}
           width={lessThan.L ? HALF_WIDTH_STARS : 80}
+          ssr
         />
       </span>
       <span css={styles.ratingValue} aria-hidden>
