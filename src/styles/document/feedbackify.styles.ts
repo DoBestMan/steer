@@ -12,4 +12,8 @@ export const feedbackify = `
             display: block!important;
         }
     }
+    body #feedbackify #fby-form {
+        position: fixed !important;
+        top: 25px !important;
+      },
 `;
