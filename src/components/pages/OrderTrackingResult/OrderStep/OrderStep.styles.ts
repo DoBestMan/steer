@@ -17,6 +17,21 @@ const CONSTANTS = {
 };
 
 const styles: StylesMap = {
+  completeTrackIcon: {
+    '> svg': {
+      width: CONSTANTS.CHECKMARK_WIDTH,
+    },
+    color: COLORS.GLOBAL.WHITE,
+  },
+  completeTrackStop: {
+    alignItems: 'center',
+    backgroundColor: COLORS.GLOBAL.ORANGE,
+    borderRadius: RADIUS.CIRCLE,
+    display: 'flex',
+    height: CONSTANTS.CURRENT_STEP_TRACK_STOP_SIZE,
+    justifyContent: 'center',
+    width: CONSTANTS.CURRENT_STEP_TRACK_STOP_SIZE,
+  },
   content: {
     gridColumn: '2/5',
     paddingBottom: SPACING.SIZE_60,
@@ -30,33 +45,36 @@ const styles: StylesMap = {
   currentLabel: {
     color: COLORS.GLOBAL.ORANGE,
   },
-  currentStepTrackStop: {
+  descriptionComponent: [
+    typography.bodyCopyTight,
+    {
+      color: COLORS.LIGHT.GRAY_70,
+      padding: `${SPACING.SIZE_10}px 0`,
+    },
+  ],
+  incompleteTrackIcon: {
+    '> svg': {
+      width: CONSTANTS.CHECKMARK_WIDTH,
+    },
+    color: COLORS.GLOBAL.ORANGE,
+  },
+  incompleteTrackStop: {
     alignItems: 'center',
-    backgroundColor: COLORS.GLOBAL.ORANGE,
+    backgroundColor: COLORS.GLOBAL.WHITE,
+    border: `2px solid ${COLORS.GLOBAL.ORANGE}`,
     borderRadius: RADIUS.CIRCLE,
     display: 'flex',
     height: CONSTANTS.CURRENT_STEP_TRACK_STOP_SIZE,
     justifyContent: 'center',
     width: CONSTANTS.CURRENT_STEP_TRACK_STOP_SIZE,
   },
-  currentStepTrackStopIcon: {
-    '> svg': {
-      width: CONSTANTS.CHECKMARK_WIDTH,
-    },
-    color: COLORS.GLOBAL.WHITE,
-  },
-  descriptionComponent: [
-    typography.bodyCopyTight,
-    {
-      color: COLORS.LIGHT.GRAY_70,
-    },
-  ],
   label: [
     typography.primarySubhead,
     {
       color: COLORS.LIGHT.GRAY_70,
     },
   ],
+
   track: {
     alignItems: 'center',
     display: 'flex',
@@ -64,6 +82,18 @@ const styles: StylesMap = {
     gridColumn: '1/2',
     justifyContent: 'center',
   },
+  trackingListWrapper: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  trackingShippingStatus: [
+    typography.bodyCopyTight,
+    {
+      color: COLORS.LIGHT.GRAY_70,
+      paddingLeft: SPACING.SIZE_10,
+    },
+  ],
   trackLastStep: {
     justifyContent: 'flex-start',
   },
@@ -72,20 +102,16 @@ const styles: StylesMap = {
     flexGrow: 1,
     width: CONSTANTS.TRACK_LINE_WIDTH,
   },
-  trackLineBeginning: {
-    backgroundColor: COLORS.LIGHT.GRAY_20,
-    height: CONSTANTS.TRACK_LINE_BEGINNING_HEIGHT,
-    width: CONSTANTS.TRACK_LINE_WIDTH,
-  },
   trackOnlyStep: {
     paddingTop: SPACING.SIZE_05,
   },
-  trackStop: {
-    backgroundColor: COLORS.LIGHT.GRAY_20,
-    borderRadius: RADIUS.CIRCLE,
-    height: CONSTANTS.TRACK_STOP_SIZE,
-    width: CONSTANTS.TRACK_STOP_SIZE,
-  },
+  updatedDate: [
+    typography.bodyCopyTight,
+    {
+      color: COLORS.LIGHT.GRAY_70,
+      paddingTop: SPACING.SIZE_02,
+    },
+  ],
   wrapper: {
     display: 'grid',
     gridTemplateColumns: 'repeat(4, 1fr)',

@@ -1,4 +1,4 @@
-import { boolean, date, select, text } from '@storybook/addon-knobs';
+import { boolean, number, select, text } from '@storybook/addon-knobs';
 
 import { OrderStatus } from '../OrderTrackingResult.utils';
 import OrderHeader from './OrderHeader';
@@ -14,18 +14,14 @@ const customerServiceNumber = {
 };
 
 export function OrderHeaderWithKnobs() {
-  const orderId = text('Order ID', '3170272');
+  const orderId = number('Order ID', 3170272);
   const status = select('Order status', OrderStatus, OrderStatus.DELIVERED);
   const deliveryExpected = text('Delivery Expected Label', 'June 6 - June 12');
-
-  const defaultDate = new Date('June 10 2020');
-  const deliveredAt = date('Delivered at', defaultDate);
   const isBusinessHours = boolean('Is Business Hours', true);
 
   return (
     <OrderHeader
       customerServiceNumber={customerServiceNumber}
-      deliveredAt={new Date(deliveredAt)}
       deliveryExpectedLabel={deliveryExpected}
       id={orderId}
       isCustomerServiceEnabled={isBusinessHours}

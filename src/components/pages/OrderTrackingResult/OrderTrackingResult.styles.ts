@@ -7,7 +7,6 @@ import {
   StylesMap,
 } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
-
 const styles: StylesMap = {
   additionalInfo: [
     typography.bodyCopy,
@@ -17,12 +16,12 @@ const styles: StylesMap = {
       },
       color: COLORS.GLOBAL.BLACK,
       display: 'block',
-      gridColumn: '2/5',
+      gridColumn: '1/5',
       [MQ.L]: {
-        gridColumn: '2/4',
+        gridColumn: '1/4',
       },
       [MQ.XL]: {
-        gridColumn: '2/5',
+        gridColumn: '1/5',
       },
     },
   ],
@@ -32,7 +31,7 @@ const styles: StylesMap = {
     paddingBottom: SPACING.SIZE_80,
     [MQ.M]: {
       '> span': {
-        gridColumn: '2/5',
+        gridColumn: '1/5',
       },
       display: 'grid',
       gridTemplateColumns: 'repeat(4, 1fr)',
@@ -40,54 +39,87 @@ const styles: StylesMap = {
     },
     [MQ.L]: {
       '> span': {
-        gridColumn: '2/6',
+        gridColumn: '1/6',
       },
       gridColumnGap: GAP_COLUMNS.L,
       gridTemplateColumns: 'repeat(5, 1fr)',
     },
     [MQ.XL]: {
       '> span': {
-        gridColumn: '2/5',
+        gridColumn: '1/5',
       },
       gridColumnGap: GAP_COLUMNS.XL,
       gridTemplateColumns: 'repeat(4, 1fr)',
     },
   },
-  address: [
+  addressText: [
     typography.bodyCopyTight,
     {
       color: COLORS.LIGHT.GRAY_70,
+    },
+  ],
+  addressTextContainer: {
+    alignItems: 'center',
+    display: 'grid',
+  },
+  appointmentAddress: [
+    typography.bodyCopyTight,
+    {
+      color: COLORS.LIGHT.GRAY_70,
+    },
+  ],
+  appointmentNote: [
+    typography.bodyCopyTight,
+    {
+      color: COLORS.LIGHT.GRAY_LIGHT_SOLID,
       paddingBottom: SPACING.SIZE_40,
+      paddingTop: SPACING.SIZE_10,
       [MQ.M]: {
         paddingBottom: SPACING.SIZE_60,
       },
     },
   ],
-  inTransitStep: {
-    '> span': {
-      display: 'block',
+
+  appointmentWrapper: {
+    paddingBottom: SPACING.SIZE_40,
+  },
+  emailButtonWrapper: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  emailLoader: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingLeft: SPACING.SIZE_10,
+  },
+  emailText: [
+    typography.bodyCopyTight,
+    {
+      color: COLORS.LIGHT.GRAY_70,
+      paddingTop: SPACING.SIZE_15,
     },
-    display: 'block',
-    paddingTop: SPACING.SIZE_20,
+  ],
+  emailWrapper: {
+    paddingBottom: SPACING.SIZE_50,
   },
   orderInfoWrapper: {
-    paddingBottom: SPACING.SIZE_40,
+    [MQ.S]: {
+      paddingTop: SPACING.SIZE_60,
+    },
     [MQ.M]: {
       paddingBottom: SPACING.SIZE_60,
+      paddingTop: 0,
     },
   },
   orderItem: {
     paddingBottom: SPACING.SIZE_30,
   },
   orderItemsList: {
-    borderBottom: BORDERS.SOLID_GRAY_20_1PX,
-    padding: `${SPACING.SIZE_10}px 0`,
-    [MQ.M]: {
-      borderBottom: 'none',
-    },
+    paddingBottom: SPACING.SIZE_50,
   },
   orderStatusWrapper: {
-    padding: `${SPACING.SIZE_110}px 0 ${SPACING.SIZE_60}px`,
+    padding: `${SPACING.SIZE_110}px 0 ${SPACING.SIZE_50}px`,
     [MQ.M]: {
       padding: `${SPACING.SIZE_160}px 0 ${SPACING.SIZE_90}px`,
     },
@@ -99,9 +131,11 @@ const styles: StylesMap = {
     },
   },
   orderTimelineWrapper: {
-    paddingTop: SPACING.SIZE_40,
+    borderBottom: BORDERS.SOLID_GRAY_20_1PX,
+    padding: `${SPACING.SIZE_10}px 0`,
     [MQ.M]: {
       paddingTop: 0,
+      borderBottom: 'none',
     },
   },
   sectionHeader: [
@@ -110,6 +144,15 @@ const styles: StylesMap = {
       paddingBottom: SPACING.SIZE_10,
     },
   ],
+  shippingAddress: [
+    typography.bodyCopyTight,
+    {
+      color: COLORS.LIGHT.GRAY_70,
+      paddingBottom: SPACING.SIZE_40,
+      [MQ.M]: {
+        paddingBottom: SPACING.SIZE_60,
+      },
+    },
+  ],
 };
-
 export default styles;

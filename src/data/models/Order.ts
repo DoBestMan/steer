@@ -1,18 +1,18 @@
 import { OrderStatus } from '~/components/pages/OrderTrackingResult/OrderTrackingResult.utils';
 
+import { OrderAppointment } from './OrderAppointment';
 import { OrderProduct } from './OrderProduct';
-import { SiteLink } from './SiteLink';
+import { OrderShippingStageList } from './OrderShippingStageList';
 import { UserAddress } from './UserAddress';
 
 export interface Order {
-  createdAt: Date;
-  deliveredAt?: Date | null;
   deliveryExpectedLabel?: string | null;
-  id: string;
+  id: number;
+  is_split: boolean;
+  maskedEmail?: string;
+  orderInstallerAppointment?: OrderAppointment | null;
   orderProductList: Array<OrderProduct>;
-  shippedAt?: Date | null;
+  orderShippingStageList: Array<OrderShippingStageList>;
   shippingAddress: UserAddress;
   status: OrderStatus;
-  trackingLabel: string | null;
-  trackingLink: SiteLink | null;
 }

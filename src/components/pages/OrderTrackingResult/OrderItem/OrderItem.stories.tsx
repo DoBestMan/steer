@@ -1,4 +1,4 @@
-import { number, text } from '@storybook/addon-knobs';
+import { boolean, number, text } from '@storybook/addon-knobs';
 
 import { SiteImage } from '~/data/models/SiteImage';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
@@ -32,9 +32,17 @@ export function OrderItemWithKnobs() {
     'Bridgestone Dueler A/T Revo 2 - P215/75R16 - 001311',
   );
   const quantity = number('Quantity', 2);
+  const id = number('ID', 1234);
+  const canCustomerReorder = boolean('Can customer reorder', true);
   return (
     <div css={styles.wrapper}>
-      <OrderItem image={itemImage} name={name} quantity={quantity} />
+      <OrderItem
+        id={id}
+        image={itemImage}
+        name={name}
+        quantity={quantity}
+        canCustomerReorder={canCustomerReorder}
+      />
     </div>
   );
 }

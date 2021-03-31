@@ -2,42 +2,28 @@ import { ui } from '~/lib/utils/ui-dictionary';
 
 import {
   getCancelledContactCopy,
-  getOrderStatusDate,
-  getOrderStatusLabel,
   OrderStatus,
 } from '../OrderTrackingResult.utils';
 import styles from './OrderHeader.styles';
 
 interface Props {
   customerServiceNumber: { display: string; value: string };
-  deliveredAt?: Date | null;
   deliveryExpectedLabel?: string | null;
-  id: string;
+  id: number;
   isCustomerServiceEnabled: boolean;
   orderStatus: OrderStatus;
 }
 
 function OrderHeader({
   customerServiceNumber,
-  deliveredAt,
   deliveryExpectedLabel,
   id,
   isCustomerServiceEnabled,
   orderStatus,
 }: Props) {
-  const orderStatusLabel = getOrderStatusLabel(
-    orderStatus,
-    deliveryExpectedLabel,
-  );
-  const orderStatusDate = getOrderStatusDate({
-    orderStatus,
-    deliveredAt,
-    deliveryExpectedLabel,
-  });
   const isExpectingDelivery =
     orderStatus !== OrderStatus.CANCELLED &&
     orderStatus !== OrderStatus.DELIVERED;
-
   return (
     <>
       <h3 css={styles.orderNumber}>
@@ -49,8 +35,7 @@ function OrderHeader({
           isExpectingDelivery && styles.expectingDelivery,
         ]}
       >
-        {orderStatusLabel && <span>{orderStatusLabel} </span>}
-        {orderStatusDate && <span>{orderStatusDate}</span>}
+        {deliveryExpectedLabel && <span>{deliveryExpectedLabel}</span>}
       </h1>
       {orderStatus === OrderStatus.CANCELLED && (
         <span css={styles.canceledOrderHelp}>

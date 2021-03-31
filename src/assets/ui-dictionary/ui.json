@@ -815,8 +815,6 @@
     "tireHeader": "Tire"
   },
   "tracking": {
-    "additionalInfoTitle": "Have any questions?",
-    "additionalInfoLinks": "Check our {{shipping}} or {{faq}}",
     "cancelledContactServiceEnabled": "Call {{phone}} or {{email}}",
     "cancelledSendEmail": "Send us an email",
     "cancelledHelp": "Need help with a new order?",
@@ -838,7 +836,14 @@
     "tiresOrderedPlural": "{{quantity}} tires ordered",
     "tiresOrderedSingular": "{{quantity}} tire ordered",
     "tiresShipped": "Your new tires have shipped",
-    "trackingNumber": "Tracking #:"
+    "trackingNumber": "Tracking #:",
+    "reorderOption": "Reorder",
+    "returnInfoTitle": "Have any questions about returns?",
+    "returnInfoLinks": "Check our {{returns}}",
+    "appointmentDetails": "Appointment Details",
+    "emailRecieptNotSent": "Email me my reciept",
+    "emailRecieptSent":"Reciept sent",
+    "emailDescription": "An order reciept will be sent to {{maskedEmail}}"
   },
   "links": {
     "about": "About us",

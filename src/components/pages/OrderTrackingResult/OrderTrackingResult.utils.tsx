@@ -1,11 +1,10 @@
 import Link from '~/components/global/Link/Link';
-import { SiteLink } from '~/data/models/SiteLink';
+import { OrderAppointment } from '~/data/models/OrderAppointment';
+import { UserAddress } from '~/data/models/UserAddress';
 import { LINK_THEME, ROUTE_MAP, ROUTES } from '~/lib/constants';
 import { formatOrNull } from '~/lib/utils/date';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { uiJSX } from '~/lib/utils/ui-dictionary-jsx';
-
-import styles from './OrderTrackingResult.styles';
 
 export enum OrderStatus {
   CANCELLED = 'cancelled',
@@ -15,100 +14,38 @@ export enum OrderStatus {
   SHIPPED = 'shipped',
 }
 
-interface OrderStatusDateParms {
-  deliveredAt?: Date | null;
-  deliveryExpectedLabel?: string | null;
-  orderStatus: OrderStatus;
+export function getShippingAddressArray(shippingAddress: UserAddress) {
+  const { cityName, line1, line2, stateAbbr, zip } = shippingAddress;
+  const address = `${cityName ? cityName + ',' : ''} 
+  ${stateAbbr ? stateAbbr : ''} ${zip ? zip : ''}`;
+  return [line1, line2, address];
 }
 
-export const orderStatusHierarchy = {
-  [OrderStatus.CANCELLED]: 0,
-  [OrderStatus.DELIVERED]: 3,
-  [OrderStatus.PREPARED]: 1,
-  [OrderStatus.RECEIVED]: 0,
-  [OrderStatus.SHIPPED]: 2,
-};
-
-export function getOrderSteps({
-  createdAt,
-  deliveredAt,
-  trackingLabel,
-  trackingLink,
-}: {
-  createdAt: Date;
-  deliveredAt: Date | null | undefined;
-  trackingLabel: string | null;
-  trackingLink: SiteLink | null;
-}) {
-  return [
-    {
-      descriptionComponent: <span>{formatOrNull(createdAt)}</span>,
-      hierarchyNum: 0,
-      label: ui('tracking.stepProcessed'),
-    },
-    {
-      descriptionComponent: (
-        <span>{ui('tracking.pendingStepDescription')}</span>
-      ),
-      hierarchyNum: 1,
-      label: ui('tracking.stepPending'),
-    },
-    {
-      descriptionComponent: (
-        <span>
-          <span>{ui('tracking.tiresShipped')}</span>
-          <span css={styles.inTransitStep}>
-            {ui('tracking.trackingNumber')}
-          </span>
-          <Link
-            href={trackingLink?.href || '/'}
-            isExternal={trackingLink?.isExternal}
-            theme={LINK_THEME.LIGHT_HIGHLIGHTED}
-          >
-            {trackingLabel}
-          </Link>
-        </span>
-      ),
-      hierarchyNum: 2,
-      label: ui('tracking.stepInTransit'),
-    },
-    {
-      descriptionComponent: deliveredAt ? (
-        <span>{formatOrNull(deliveredAt, 'EEEE, MMMM d yyyy')}</span>
-      ) : null,
-      hierarchyNum: 3,
-      label: ui('tracking.stepDelivered'),
-    },
-  ];
-}
-
-export function getOrderStatusLabel(
-  orderStatus: OrderStatus,
-  deliveryExpectedLabel?: string | null,
+export function getAppointmentAddressArray(
+  orderInstallerAppointment: OrderAppointment,
 ) {
-  switch (orderStatus) {
-    case OrderStatus.CANCELLED:
-      return ui('tracking.statusCancelled');
-    case OrderStatus.DELIVERED:
-      return ui('tracking.statusDelivered');
-    default:
-      return deliveryExpectedLabel && ui('tracking.statusExpected');
-  }
-}
+  const {
+    installerAddress: { company, city, addressLine1, addressLine2, state, zip },
+    date,
+    timeSlot,
+  } = orderInstallerAppointment;
 
-export function getOrderStatusDate({
-  deliveryExpectedLabel,
-  deliveredAt,
-  orderStatus,
-}: OrderStatusDateParms) {
-  switch (orderStatus) {
-    case OrderStatus.CANCELLED:
-      return null;
-    case OrderStatus.DELIVERED:
-      return deliveredAt && formatOrNull(deliveredAt, 'MMMM d');
-    default:
-      return deliveryExpectedLabel;
-  }
+  const appointmentAddress = `${city ? city + ',' : ''} 
+    ${state ? state : ''} ${zip ? zip : ''}`;
+
+  const appointmentDate = `${date ? formatOrNull(date) : ''} ${
+    timeSlot ? ' | ' + timeSlot : ''
+  }`;
+
+  const resultArray = [
+    company,
+    addressLine1,
+    addressLine2,
+    appointmentAddress,
+    appointmentDate,
+  ];
+
+  return resultArray;
 }
 
 export function getCancelledContactCopy({
@@ -151,24 +88,15 @@ export function getCancelledContactCopy({
   });
 }
 
-export function getAdditionalInfoLinks() {
-  return uiJSX('tracking.additionalInfoLinks', {
-    shipping: (
+export function getReturnInfoLinks() {
+  return uiJSX('tracking.returnInfoLinks', {
+    returns: (
       <Link
         theme={LINK_THEME.LIGHT_HIGHLIGHTED}
-        key="shipping-link"
-        href={ROUTE_MAP[ROUTES.FREE_SHIPPING]}
+        key="returns-link"
+        href={ROUTE_MAP[ROUTES.RETURNS]}
       >
-        {ui('links.shippingPolicy')}
-      </Link>
-    ),
-    faq: (
-      <Link
-        theme={LINK_THEME.LIGHT_HIGHLIGHTED}
-        key="faq-link"
-        href={ROUTE_MAP[ROUTES.FAQS]}
-      >
-        {ui('links.faqs')}
+        {ui('links.returns')}
       </Link>
     ),
   });

@@ -1,10 +1,11 @@
-import { boolean, date, number, select, text } from '@storybook/addon-knobs';
+import { boolean, number, select, text } from '@storybook/addon-knobs';
 
 import OrderTrackingResult from './OrderTrackingResult';
 import {
   orderAddressMock,
+  orderAppointmentMock,
   orderItemsMock,
-  orderTrackingLinkMock,
+  orderShippingStageListMock,
 } from './OrderTrackingResult.mock';
 import { OrderStatus } from './OrderTrackingResult.utils';
 
@@ -19,32 +20,25 @@ const customerServiceNumber = {
 };
 
 export function OrderTrackingResultWithKnobs() {
-  const orderId = text('Order ID', '3170272');
+  const orderId = number('OrderId', 3170272);
   const status = select('Order status', OrderStatus, OrderStatus.DELIVERED);
   const deliveryExpected = text('Delivery Expected Label', 'June 6 - June 12');
-
-  const defaultDate = new Date('June 10 2020');
-  const createdAt = date('Created at', defaultDate);
-  const deliveredAt = date('Delivered at', defaultDate);
-  const shippedAt = date('Shipped at', defaultDate);
-
-  const numProducts = number('Num. products to show (1 - 3)', 2);
+  const maskedEmail = text('Mail', 'a****b@gmail.com');
   const isBusinessHours = boolean('Is Business Hours', true);
 
   return (
     <OrderTrackingResult
-      createdAt={new Date(createdAt)}
       customerServiceNumber={customerServiceNumber}
-      deliveredAt={new Date(deliveredAt)}
       deliveryExpectedLabel={deliveryExpected}
       id={orderId}
       isCustomerServiceEnabled={isBusinessHours}
-      orderProductList={orderItemsMock.slice(0, numProducts)}
-      shippedAt={new Date(shippedAt)}
+      orderProductList={orderItemsMock}
       shippingAddress={orderAddressMock}
       status={status}
-      trackingLabel="111111111111"
-      trackingLink={orderTrackingLinkMock}
+      is_split
+      maskedEmail={maskedEmail}
+      orderInstallerAppointment={orderAppointmentMock}
+      orderShippingStageList={orderShippingStageListMock}
     />
   );
 }

@@ -48,7 +48,6 @@ function OrderTrackingResultContainer() {
   if (isLoadingOrder || !order) {
     return <OrderLoading />;
   }
-
   return (
     <OrderTrackingResult
       {...order}

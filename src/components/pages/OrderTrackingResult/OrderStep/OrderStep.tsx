@@ -1,34 +1,44 @@
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
+import Link from '~/components/global/Link/Link';
+import { OrderShippingStageList } from '~/data/models/OrderShippingStageList';
+import { LINK_THEME } from '~/lib/constants';
+import { formatOrNull } from '~/lib/utils/date';
+import { ui } from '~/lib/utils/ui-dictionary';
 
 import styles from './OrderStep.styles';
 
 interface Props {
-  descriptionComponent: string | JSX.Element | null;
-  isCurrentStep?: boolean;
-  isLastStep?: boolean;
-  isOnlyStep?: boolean;
-  label: string;
+  numberOfSteps: number;
+  stepIndex: number;
 }
+type OrderStepProps = OrderShippingStageList & Props;
 
 function OrderStep({
-  descriptionComponent,
-  isCurrentStep,
-  isLastStep,
-  isOnlyStep,
-  label,
-}: Props) {
-  const beginning = !isCurrentStep && !isOnlyStep && (
-    <div css={styles.trackLineBeginning} />
-  );
-  const middle = isCurrentStep ? (
-    <div css={styles.currentStepTrackStop}>
-      <Icon css={styles.currentStepTrackStopIcon} name={ICONS.CHECKMARK} />
+  displayName,
+  updatedAt,
+  note,
+  isCompleted,
+  orderTrackingNumberList,
+  numberOfSteps,
+  stepIndex,
+}: OrderStepProps) {
+  const isLastStep = stepIndex === numberOfSteps - 1;
+  const isOnlyStep = numberOfSteps === 1;
+  const isCurrentStep = stepIndex === 0;
+
+  const trackIcon = isCompleted ? (
+    <div css={styles.completeTrackStop}>
+      <Icon css={styles.completeTrackIcon} name={ICONS.CHECKMARK} />
     </div>
   ) : (
-    <div css={styles.trackStop} />
+    <div css={styles.incompleteTrackStop}>
+      <Icon css={styles.incompleteTrackIcon} name={ICONS.CHECKMARK} />
+    </div>
   );
-  const end = !isLastStep && !isOnlyStep && <div css={styles.trackLine} />;
+  const trackLine = !isLastStep && !isOnlyStep && (
+    <div css={styles.trackLine} />
+  );
 
   return (
     <div css={styles.wrapper}>
@@ -39,16 +49,40 @@ function OrderStep({
           isOnlyStep && styles.trackOnlyStep,
         ]}
       >
-        {beginning}
-        {middle}
-        {end}
+        {trackIcon}
+        {trackLine}
       </div>
       <div css={styles.content}>
         <div css={[styles.label, isCurrentStep && styles.currentLabel]}>
-          {label}
+          {displayName}
         </div>
-        {descriptionComponent && (
-          <div css={styles.descriptionComponent}>{descriptionComponent}</div>
+        {updatedAt && (
+          <div css={styles.updatedDate}>
+            {formatOrNull(updatedAt.replace(/-/g, '/'))}
+          </div>
+        )}
+        {note && <div css={styles.descriptionComponent}>{note}</div>}
+        {orderTrackingNumberList && orderTrackingNumberList.length > 0 && (
+          <span>
+            <div css={styles.descriptionComponent}>
+              {ui('tracking.trackingNumber')}
+            </div>
+            {orderTrackingNumberList.map((item, i) => (
+              <li css={styles.trackingListWrapper} key={i}>
+                <Link
+                  href={item.trackingLink?.href || '/'}
+                  isExternal={item.trackingLink?.isExternal}
+                  theme={LINK_THEME.LIGHT_HIGHLIGHTED}
+                >
+                  {item.trackingNumber}
+                  {'  '}
+                </Link>
+                {item.status ? (
+                  <h2 css={styles.trackingShippingStatus}>({item.status})</h2>
+                ) : null}
+              </li>
+            ))}
+          </span>
         )}
       </div>
     </div>

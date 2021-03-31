@@ -4,6 +4,8 @@ import GridItem from '~/components/global/Grid/GridItem';
 import Meta from '~/components/global/Meta/Meta';
 import PageIllustration from '~/components/global/PageIllustration/PageIllustration';
 import { Order } from '~/data/models/Order';
+import { useBreakpoints } from '~/hooks/useBreakpoints';
+import { BREAKPOINT_SIZES } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import OrderHeader from './OrderHeader/OrderHeader';
@@ -11,44 +13,104 @@ import OrderItem from './OrderItem/OrderItem';
 import OrderStep from './OrderStep/OrderStep';
 import styles from './OrderTrackingResult.styles';
 import {
-  getAdditionalInfoLinks,
-  getOrderSteps,
-  orderStatusHierarchy,
+  getAppointmentAddressArray,
+  getReturnInfoLinks,
+  getShippingAddressArray,
 } from './OrderTrackingResult.utils';
 
 interface Props {
   customerServiceNumber: { display: string; value: string };
   isCustomerServiceEnabled: boolean;
 }
-
 type OrderTrackingResultProps = Order & Props;
-
 function OrderTrackingResult({
-  createdAt,
   customerServiceNumber,
-  deliveredAt,
   deliveryExpectedLabel,
   id,
   isCustomerServiceEnabled,
   orderProductList,
-  shippingAddress: { cityName, line1, line2, stateAbbr, zip },
+  shippingAddress,
   status,
-  trackingLabel,
-  trackingLink,
+  orderInstallerAppointment,
+  orderShippingStageList,
 }: OrderTrackingResultProps) {
-  const address = `${line1} ${line2} ${cityName} ${stateAbbr} ${zip}`;
+  const shippingAddressArray = getShippingAddressArray(shippingAddress);
 
-  const orderStatusHierarchyValue = orderStatusHierarchy[status];
-  const orderSteps = getOrderSteps({
-    createdAt,
-    deliveredAt,
-    trackingLink,
-    trackingLabel,
-  });
-  const displayedSteps = orderSteps
-    .filter((step) => orderStatusHierarchyValue >= step.hierarchyNum)
-    .reverse();
+  const appointmentDisplayArray =
+    orderInstallerAppointment &&
+    getAppointmentAddressArray(orderInstallerAppointment);
 
+  const note = orderInstallerAppointment?.note;
+
+  const displayedSteps = orderShippingStageList
+    .sort((a, b) => b.sort - a.sort)
+    .slice();
+
+  const { bk } = useBreakpoints();
+
+  const shippingHeader =
+    appointmentDisplayArray && appointmentDisplayArray.length > 0
+      ? ui('tracking.appointmentDetails')
+      : ui('tracking.shippingAddress');
+
+  const displayAddress =
+    appointmentDisplayArray && appointmentDisplayArray.length > 0
+      ? appointmentDisplayArray
+      : shippingAddressArray;
+
+  function renderOrderDetails() {
+    return (
+      <GridItem
+        css={styles.orderInfoWrapper}
+        gridColumnM="2/5"
+        gridColumnL="3/8"
+        gridColumnXL="4/8"
+      >
+        <h5 css={styles.sectionHeader}>{shippingHeader}</h5>
+        <ul css={note ? styles.appointmentAddress : styles.shippingAddress}>
+          {displayAddress.map((item, i) => (
+            <li css={styles.addressTextContainer} key={i}>
+              {item && <div css={styles.addressText}>{item}</div>}
+            </li>
+          ))}
+        </ul>
+        {note && <div css={styles.appointmentNote}>{note}</div>}
+        <h5 css={styles.sectionHeader}>{ui('tracking.orderSummary')}</h5>
+        <ul css={styles.orderItemsList}>
+          {orderProductList.map((item, i) => (
+            <li css={styles.orderItem} key={i}>
+              <OrderItem {...item} />
+            </li>
+          ))}
+        </ul>
+        <div css={styles.additionalInfoWrapper}>
+          <span css={styles.additionalInfo}>
+            {ui('tracking.returnInfoTitle')}
+          </span>
+          <span css={[styles.additionalInfo]}>{getReturnInfoLinks()}</span>
+        </div>
+      </GridItem>
+    );
+  }
+  function renderOrderSteps() {
+    return (
+      <GridItem
+        css={styles.orderTimelineWrapper}
+        gridColumnM="5/8"
+        gridColumnL="8/13"
+        gridColumnXL="8/12"
+      >
+        {displayedSteps.map((item, i) => (
+          <OrderStep
+            {...item}
+            numberOfSteps={orderShippingStageList.length}
+            stepIndex={i}
+            key={i}
+          />
+        ))}
+      </GridItem>
+    );
+  }
   return (
     <>
       <Meta robots="noindex,nofollow" hasCanonical={false} />
@@ -57,63 +119,20 @@ function OrderTrackingResult({
           <OrderHeader
             customerServiceNumber={customerServiceNumber}
             deliveryExpectedLabel={deliveryExpectedLabel}
-            deliveredAt={deliveredAt}
             id={id}
             isCustomerServiceEnabled={isCustomerServiceEnabled}
             orderStatus={status}
           />
         </GridItem>
-        <GridItem
-          css={styles.orderInfoWrapper}
-          gridColumnM="2/5"
-          gridColumnL="3/8"
-          gridColumnXL="4/8"
-        >
-          <h5 css={styles.sectionHeader}>{ui('tracking.shippingAddress')}</h5>
-          <div css={styles.address}>{address}</div>
-          <h5 css={styles.sectionHeader}>{ui('tracking.orderSummary')}</h5>
-          <ul css={styles.orderItemsList}>
-            {orderProductList.map((item, i) => (
-              <li css={styles.orderItem} key={i}>
-                <OrderItem {...item} />
-              </li>
-            ))}
-          </ul>
-        </GridItem>
-        <GridItem
-          css={styles.orderTimelineWrapper}
-          gridColumnM="5/8"
-          gridColumnL="8/13"
-          gridColumnXL="8/12"
-        >
-          {displayedSteps.map(
-            ({ descriptionComponent, hierarchyNum, label }, i) => (
-              <OrderStep
-                isCurrentStep={
-                  hierarchyNum > 0 && hierarchyNum === orderStatusHierarchyValue
-                }
-                isLastStep={i === displayedSteps.length - 1}
-                isOnlyStep={
-                  hierarchyNum === 0 && orderStatusHierarchyValue === 0
-                }
-                label={label}
-                descriptionComponent={descriptionComponent}
-                key={i}
-              />
-            ),
-          )}
-          <div css={styles.additionalInfoWrapper}>
-            <span css={styles.additionalInfo}>
-              {ui('tracking.additionalInfoTitle')}
-            </span>
-            <span css={styles.additionalInfo}>{getAdditionalInfoLinks()}</span>
-          </div>
-        </GridItem>
-
+        {[BREAKPOINT_SIZES.S].includes(bk)
+          ? renderOrderSteps()
+          : renderOrderDetails()}
+        {[BREAKPOINT_SIZES.S].includes(bk)
+          ? renderOrderDetails()
+          : renderOrderSteps()}
         <PageIllustration carId={CARS[CARS_KEYS.COMMERCIAL]} />
       </Grid>
     </>
   );
 }
-
 export default OrderTrackingResult;
