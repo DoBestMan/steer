@@ -42,7 +42,7 @@ function VehicleCatalog({ serverData, make, model, query, year }: Props) {
 
   const COOKIE_CONSTANT = {
     COOKIE_NAME: 'vehicleCookie',
-    DOMAIN: 'localhost',
+    DOMAIN: '.simpletire.com',
   };
   const router = useRouter();
   if (router.pathname === ROUTE_MAP[ROUTES.VEHICLE_CATALOG]) {
