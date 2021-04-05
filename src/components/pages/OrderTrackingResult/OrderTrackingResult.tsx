@@ -1,11 +1,14 @@
+import Button from '~/components/global/Button/Button';
 import { CARS, CARS_KEYS } from '~/components/global/Car/CarDetails.constants';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
+import Loading from '~/components/global/Loading/Loading';
 import Meta from '~/components/global/Meta/Meta';
 import PageIllustration from '~/components/global/PageIllustration/PageIllustration';
 import { Order } from '~/data/models/Order';
+import { OrderTrackingInput } from '~/data/models/OrderTrackingInput';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
-import { BREAKPOINT_SIZES } from '~/lib/constants';
+import { BREAKPOINT_SIZES, THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import OrderHeader from './OrderHeader/OrderHeader';
@@ -20,9 +23,12 @@ import {
 
 interface Props {
   customerServiceNumber: { display: string; value: string };
+  emailSent: boolean;
   isCustomerServiceEnabled: boolean;
+  isSendingEmail: boolean;
+  sendEmailReciept: ({ orderId, zip }: OrderTrackingInput) => void;
 }
-type OrderTrackingResultProps = Order & Props;
+type OrderTrackingResultProps = Order & Props & OrderTrackingInput;
 function OrderTrackingResult({
   customerServiceNumber,
   deliveryExpectedLabel,
@@ -33,6 +39,12 @@ function OrderTrackingResult({
   status,
   orderInstallerAppointment,
   orderShippingStageList,
+  maskedEmail,
+  sendEmailReciept,
+  isSendingEmail,
+  emailSent,
+  orderId,
+  zip,
 }: OrderTrackingResultProps) {
   const shippingAddressArray = getShippingAddressArray(shippingAddress);
 
@@ -57,6 +69,10 @@ function OrderTrackingResult({
     appointmentDisplayArray && appointmentDisplayArray.length > 0
       ? appointmentDisplayArray
       : shippingAddressArray;
+
+  const emailButtonTitle = emailSent
+    ? ui('tracking.emailRecieptSent')
+    : ui('tracking.emailRecieptNotSent');
 
   function renderOrderDetails() {
     return (
@@ -83,6 +99,32 @@ function OrderTrackingResult({
             </li>
           ))}
         </ul>
+        {maskedEmail && (
+          <div css={styles.emailWrapper}>
+            <div css={styles.emailButtonWrapper}>
+              <Button
+                css={styles.button}
+                theme={THEME.LIGHT}
+                isDisabled={emailSent}
+                onClick={() =>
+                  sendEmailReciept({ orderId, zip } as OrderTrackingInput)
+                }
+              >
+                {emailButtonTitle}
+              </Button>
+              {isSendingEmail ? (
+                <div css={styles.emailLoader}>
+                  <Loading />
+                </div>
+              ) : null}
+            </div>
+            <div css={styles.emailText}>
+              {ui('tracking.emailDescription', {
+                maskedEmail,
+              })}
+            </div>
+          </div>
+        )}
         <div css={styles.additionalInfoWrapper}>
           <span css={styles.additionalInfo}>
             {ui('tracking.returnInfoTitle')}

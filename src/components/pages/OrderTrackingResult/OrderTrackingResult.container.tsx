@@ -31,6 +31,9 @@ function OrderTrackingResultContainer() {
     hasError,
     isLoadingOrder,
     order,
+    sendEmailReciept,
+    isSendingEmail,
+    emailSent,
   } = useOrderTrackingContext();
 
   // Get the initial order information when the page loads
@@ -51,6 +54,11 @@ function OrderTrackingResultContainer() {
   return (
     <OrderTrackingResult
       {...order}
+      sendEmailReciept={sendEmailReciept}
+      orderId={String(orderId)}
+      zip={String(zip)}
+      isSendingEmail={isSendingEmail}
+      emailSent={emailSent}
       isCustomerServiceEnabled={customerServiceEnabled}
       customerServiceNumber={customerServiceNumber}
     />
