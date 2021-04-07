@@ -98,6 +98,7 @@ function SearchByBoard({
       searchItem,
     });
   };
+
   const addPromotionParam = (promoId: string | undefined) => {
     if (!isBrowser() || !promoId) {
       return;
@@ -114,6 +115,7 @@ function SearchByBoard({
     });
     setQueryParamLabel(queryParamLabel);
   };
+
   const CTAList: CTA[] = [
     {
       action: {

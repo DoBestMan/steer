@@ -17,13 +17,16 @@ import LoadingBar from '~/components/global/LoadingBar/LoadingBar';
 import NotificationList from '~/components/global/NotificationBanner/NotificationList';
 import Toast from '~/components/global/Toast/Toast';
 import NavContainer from '~/components/modules/Nav/Nav.container';
+import { useSearchContext } from '~/components/modules/Search/Search.context';
 import SearchModal from '~/components/modules/Search/SearchModal';
+import { useSearchModalContext } from '~/components/modules/Search/SearchModal.context';
 import { useFooterContext } from '~/context/Footer.context';
 import { useGlobalToastContext } from '~/context/GlobalToast.context';
 import { NavContextProvider } from '~/context/Nav.context';
 import { useRouterContext } from '~/context/Router.context';
 import { useSiteMenuContext } from '~/context/SiteMenu.context';
 import { SiteNotificationTypes } from '~/data/models/SiteNotificationTypes';
+import { apiPromotionName } from '~/lib/api/promotion-name';
 import { ROUTE_MAP, ROUTES, TIME } from '~/lib/constants';
 import { fixHomepageRoute } from '~/lib/utils/routes';
 import { removeUrlParams } from '~/lib/utils/string';
@@ -63,6 +66,8 @@ function App({ children, ...rest }: Props) {
 
   // Put it here to not bundle backend in dynamic <SubNavContainer>
   const { siteMenuBrowseList, siteMenuLearn } = useSiteMenuContext();
+  const { setQueryParamLabel, setRouteQueryParamOptions } = useSearchContext();
+  const { setIsSearchOpen } = useSearchModalContext();
 
   const { isFooterVisible } = useFooterContext();
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -91,6 +96,39 @@ function App({ children, ...rest }: Props) {
       intersection.length
     );
   }, [router.pathname, router.query]);
+
+  const fetchPromotion = useCallback(async () => {
+    const { query } = router;
+    if (query.promotionId) {
+      const response = await apiPromotionName({
+        promotion: query.promotionId as string,
+      });
+
+      if (response.isSuccess) {
+        const params = { promotion: query.promotionId } as Record<
+          string,
+          string
+        >;
+
+        setRouteQueryParamOptions({
+          routes: [
+            ROUTE_MAP[ROUTES.VEHICLE_CATALOG],
+            ROUTE_MAP[ROUTES.TIRE_SIZE_CATALOG_OR_CATEGORY],
+          ],
+          params,
+        });
+        setQueryParamLabel(response.data.promotionName);
+        setIsSearchOpen(true);
+      } else {
+        // Redirects to homepage if promotionId is invalid
+        router.push('/');
+      }
+    }
+  }, [router, setIsSearchOpen, setQueryParamLabel, setRouteQueryParamOptions]);
+
+  useEffect(() => {
+    fetchPromotion();
+  }, [fetchPromotion]);
 
   // TODO WCS-1512: temp bring back the feedback tab
   useEffect(() => {

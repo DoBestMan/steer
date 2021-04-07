@@ -137,3 +137,12 @@ export async function backendGetSiteVehicleMake(make: string | string[]) {
   });
   return response;
 }
+
+export async function backendGetSitePromotionName(promotionId: number) {
+  const response = await fetchWithErrorHandling<{ promotionName: string }>({
+    endpoint: `/v1/site/promotion/${promotionId}`,
+    includeAuthorization: true,
+    method: 'get',
+  });
+  return response;
+}
