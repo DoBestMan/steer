@@ -39,7 +39,7 @@ function Header({
         />
       </GridItem>
       <GridItem css={styles.filtersContainer}>
-        <Filters filters={filters} />
+        <Filters filters={filters} ssr />
       </GridItem>
     </Grid>
   );

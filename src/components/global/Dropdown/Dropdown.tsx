@@ -102,6 +102,7 @@ export default function Dropdown({
     return (
       <FocusTrap active={isOpen && shouldActivateListeners} ref={dropdownEl}>
         <div
+          data-component="dropdown-component"
           data-testid={`dropdown-test-id${isOpen ? '-open' : ''}`}
           ref={dropdownEl}
           aria-hidden={!isOpen}

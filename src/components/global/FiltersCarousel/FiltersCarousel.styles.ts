@@ -58,6 +58,13 @@ const styles: StylesMap = {
     marginRight: SPACING.SIZE_05,
     whiteSpace: 'nowrap',
   },
+  filterContainerServerSide: {
+    [MQ.M]: {
+      overflowX: 'initial',
+    },
+    display: 'flex',
+    overflowX: 'scroll',
+  },
   filterHide: {
     display: 'none',
   },
