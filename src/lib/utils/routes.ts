@@ -199,3 +199,17 @@ export function fixHomepageRoute(path: string): string {
 
   return path;
 }
+
+/*
+ * build object from url search params
+ */
+export function searchParamToObject(searchParams: string) {
+  return JSON.parse(
+    '{"' +
+      decodeURIComponent(searchParams)
+        .replace(/"/g, '\\"')
+        .replace(/&/g, '","')
+        .replace(/=/g, '":"') +
+      '"}',
+  );
+}

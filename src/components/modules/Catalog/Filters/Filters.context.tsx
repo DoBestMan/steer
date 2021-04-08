@@ -6,6 +6,7 @@ import { useGlobalToastContext } from '~/context/GlobalToast.context';
 import { SiteCatalogFilters } from '~/data/models/SiteCatalogFilters';
 import { isBrowser } from '~/lib/utils/browser';
 import { createContext } from '~/lib/utils/context';
+import { searchParamToObject } from '~/lib/utils/routes';
 
 import { CatalogFilterTypes } from './Filter.types';
 import { getInitialFiltersState, getValueKeys } from './Filters.utils';
@@ -37,6 +38,7 @@ interface ContextProviderProps {
  * which is why they might be wrapped with another function
  */
 interface UpdateFilterArgs {
+  isRangeFilter?: boolean;
   overwrite?: boolean;
   value: Record<string, string>;
 }
@@ -150,8 +152,10 @@ export function useFiltersContextSetup({
     createUpdateFilterGroup: ({
       value,
       overwrite = false,
+      isRangeFilter = false,
     }: UpdateFilterArgs) => async () => {
       const filters = { ...filtersToApply };
+
       Object.entries(value).forEach(([key, value]) => {
         if (overwrite) {
           filters[key] = value;
@@ -180,12 +184,15 @@ export function useFiltersContextSetup({
         return;
       });
 
+      const filterRequest = isRangeFilter
+        ? { ...searchParamToObject(location.search.substring(1)), ...filters }
+        : filters;
       setIsPreviewLoading(true);
-      onPreviewFilters(filters)
+      onPreviewFilters(filterRequest)
         .then(() => {
-          setFiltersToApply(filters);
+          setFiltersToApply(filterRequest);
           setIsPreviewLoading(false);
-          handleUpdateResults(filters, true);
+          handleUpdateResults(filterRequest, true);
         })
         .catch((e) => {
           setGlobalToastMessage(e.message);
@@ -213,6 +220,7 @@ export function FiltersContextProvider({
     siteCatalogFilters,
     onPreviewFilters,
   });
+
   return (
     <FiltersContext.Provider value={value}>{children}</FiltersContext.Provider>
   );

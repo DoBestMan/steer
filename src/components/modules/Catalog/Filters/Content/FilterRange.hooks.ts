@@ -34,7 +34,11 @@ export function useFilterRangeManager({
   const [refreshValues, setRefreshValues] = useState(false);
 
   const handleChange = useCallback(() => {
-    onChange({ value: { [id]: minMax.current }, overwrite: true })();
+    onChange({
+      value: { [id]: minMax.current },
+      overwrite: true,
+      isRangeFilter: true,
+    })();
   }, [id, onChange]);
   const prevIsLoading = useRef(isLoading);
   function handleMaxChange(value: number) {

@@ -21,7 +21,7 @@ function FiltersCarousel({ activeFilter, children, label }: Props) {
     function stopScroll(e: Event) {
       e.stopPropagation();
     }
-    if (!swiper.wrapperEl) {
+    if (!swiper || !swiper.wrapperEl) {
       return;
     }
 
