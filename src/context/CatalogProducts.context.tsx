@@ -134,18 +134,19 @@ function useContextSetup({
         if (!data?.siteCatalogProducts?.listResultMetadata.pagination?.total) {
           const route = asPath.split('?');
           const params: Record<string, string> = {};
-          const { oem, tireSize, trim } = newQuery;
+          const { category, oem, subtype, tireSize, trim } = newQuery;
 
           // Skip page transition when updating filters
           eventEmitters.skipPageTransition.emit(null);
 
-          Object.entries({ oem, tireSize, trim }).forEach(([k, v]) => {
-            const stringifiedVal = getParam(v);
-            if (!!stringifiedVal && !pageParams[k]) {
-              params[k] = stringifiedVal;
-            }
-          });
-
+          Object.entries({ category, oem, subtype, tireSize, trim }).forEach(
+            ([k, v]) => {
+              const stringifiedVal = getParam(v);
+              if (!!stringifiedVal && !pageParams[k]) {
+                params[k] = stringifiedVal;
+              }
+            },
+          );
           setPastFilters([params]);
 
           const searchString = new URLSearchParams(params).toString();
