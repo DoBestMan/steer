@@ -13,7 +13,7 @@ import styles from './SizeButton.styles';
 
 type Props = Pick<
   ProductInfoProps,
-  'size' | 'loadSpeedRating' | 'availableSizes' | 'sizeFinder'
+  'size' | 'loadSpeedRating' | 'availableSizes' | 'sizeFinder' | 'loadRange'
 >;
 
 type RenderSizeFinderProps = Pick<Props, 'sizeFinder'> & {
@@ -52,6 +52,7 @@ function RenderSizeFinder({
 function SizeButton({
   availableSizes,
   size,
+  loadRange,
   loadSpeedRating,
   sizeFinder,
 }: Props) {
@@ -73,7 +74,10 @@ function SizeButton({
     return (
       <div css={styles.root}>
         <span>
-          {size} <span css={styles.loadSpeedRating}>{loadSpeedRating}</span>
+          {size}{' '}
+          <span css={styles.loadSpeedRating}>
+            {loadSpeedRating} {loadRange ? loadRange : ''}
+          </span>
         </span>
       </div>
     );
@@ -122,12 +126,15 @@ function SizeButton({
         type="button"
         css={[styles.root, styles.btnRoot]}
         onClick={handleClickButton}
-        aria-label={`${size}-${loadSpeedRating}, ${ui(
-          'pdp.productInfo.changeSizeLabel',
-        )}`}
+        aria-label={`${size}-${loadSpeedRating} ${
+          loadRange ? loadRange : ''
+        }, ${ui('pdp.productInfo.changeSizeLabel')}`}
       >
         <span css={styles.size}>
-          {size} <span css={styles.loadIndex}>{loadSpeedRating}</span>
+          {size}{' '}
+          <span css={styles.loadIndex}>
+            {loadSpeedRating} {loadRange ? loadRange : ''}
+          </span>
         </span>
         <Icon
           name={ICONS.CHEVRON_DOWN}

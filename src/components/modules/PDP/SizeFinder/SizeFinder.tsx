@@ -67,7 +67,9 @@ export default function SizeFinder({
               <TitleRadio
                 name="size-finder"
                 key={idx}
-                label={`${item.size} ${item.loadSpeedRating}`}
+                label={`${item.size} ${item.loadSpeedRating}  ${
+                  item.loadRange ? item.loadRange : ''
+                }   `}
                 flair={
                   /**
                    * Note: temporaily removing this for ST MVP launch.

@@ -64,6 +64,7 @@ export function mapDataToProductInfo({
 
   const tireSizeLabel = listingSize?.size;
   const loadSpeedRating = listingSize?.loadSpeedRating;
+  const loadRange = listingSize?.loadRange;
   const price =
     (!outOfStock && !callForPricing && siteProductLineSizeDetail?.price) ||
     null;
@@ -126,6 +127,7 @@ export function mapDataToProductInfo({
       callForPricing,
       hasError: true,
       isTireLine,
+      loadRange,
       loadSpeedRating,
       price,
       priceLabel,
@@ -155,6 +157,7 @@ export function mapDataToProductInfo({
     brandURL,
     callForPricing,
     isTireLine,
+    loadRange,
     loadSpeedRating,
     price,
     priceLabel,

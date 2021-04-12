@@ -1243,6 +1243,7 @@ export const siteProductMock: SiteProduct = {
     {
       size: '100/40R15',
       loadSpeedRating: '89H',
+      loadRange: 'Xl',
       specList: [
         {
           label: 'UTQG',
@@ -1270,6 +1271,7 @@ export const siteProductMock: SiteProduct = {
     {
       size: '100/40R17',
       loadSpeedRating: '89H',
+      loadRange: 'Xl',
       specList: [
         {
           label: 'UTQG',
@@ -1297,6 +1299,7 @@ export const siteProductMock: SiteProduct = {
     {
       size: '200/40R17',
       loadSpeedRating: '89H',
+      loadRange: 'Xl',
       specList: [
         {
           label: 'UTQG',
@@ -1324,6 +1327,7 @@ export const siteProductMock: SiteProduct = {
     {
       size: '200/40R17',
       loadSpeedRating: '91H',
+      loadRange: 'Xl',
       specList: [
         {
           label: 'UTQG',

@@ -32,6 +32,7 @@ export interface ProductInfoProps {
   callForPricing?: boolean;
   hasError?: boolean;
   isTireLine: boolean;
+  loadRange?: string | null;
   loadSpeedRating?: string;
   price?: SitePrice | null;
   priceLabel?: string | null;
@@ -72,6 +73,7 @@ function ProductInfo({
   callForPricing,
   hasError,
   isTireLine,
+  loadRange,
   loadSpeedRating,
   openDynamicModal,
   price,
@@ -192,6 +194,7 @@ function ProductInfo({
                     <DynamicSizeButton
                       availableSizes={availableSizes}
                       size={size}
+                      loadRange={loadRange}
                       loadSpeedRating={loadSpeedRating}
                       sizeFinder={sizeFinder}
                     />
@@ -294,6 +297,7 @@ function ProductInfo({
                     availableSizes={availableSizes}
                     size={size}
                     loadSpeedRating={loadSpeedRating}
+                    loadRange={loadRange}
                     sizeFinder={sizeFinder}
                   />
                 </div>

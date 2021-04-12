@@ -17,6 +17,12 @@ export interface SiteProductLineAvailableSizeItem {
    * @type {string}
    * @memberof SiteProductLineAvailableSizeItem
    */
+  loadRange: string | null;
+  /**
+   *
+   * @type {string}
+   * @memberof SiteProductLineAvailableSizeItem
+   */
   loadSpeedRating: string;
   /**
    * True if current vehicle info provided and tire is a fit
