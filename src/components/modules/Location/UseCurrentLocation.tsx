@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { AutocompleteResult } from '~/components/global/Autocomplete/AutocompleteResultItem';
 import Icon from '~/components/global/Icon/Icon';
 import Loading from '~/components/global/Loading/Loading';
+import GA from '~/lib/helpers/analytics';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import { styles } from './Location.styles';
@@ -45,6 +46,12 @@ function UseCurrentLocation({
     getBrowserLocation(
       (e) => {
         const { coords } = e;
+
+        GA.addToDataLayer({
+          event: 'isGeolocation',
+          lat: coords.latitude,
+          lng: coords.longitude,
+        });
 
         const newCoords: google.maps.LatLngLiteral = {
           lat: coords.latitude,

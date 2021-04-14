@@ -3,6 +3,7 @@ import lscache from 'lscache';
 
 import { FS_EVENT_NAMES } from '~/lib/constants/fullstory';
 import { LOCAL_STORAGE, PROPERTIES } from '~/lib/constants/localStorage';
+import GA from '~/lib/helpers/analytics';
 
 import { setFSCustomEvent } from './fullstory';
 
@@ -67,6 +68,12 @@ export const browserLocationCheck = () =>
         latitude,
         longitude,
       };
+
+      GA.addToDataLayer({
+        event: 'isGeolocation',
+        lat: latitude,
+        lng: longitude,
+      });
 
       if (browserLocationStorageData) {
         resolve(browserLocation);
