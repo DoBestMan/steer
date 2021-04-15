@@ -1,8 +1,11 @@
 import { NextRouter, useRouter } from 'next/router';
+import { setCookie } from 'nookies';
 import { ReactNode, useCallback, useEffect, useState } from 'react';
+import { Cookies } from 'react-cookie';
 
 import { useSearchModalContext } from '~/components/modules/Search/SearchModal.context';
 import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
+import useIsClient from '~/hooks/useIsClient';
 import { apiCjToSetCookie } from '~/lib/api/cj';
 import { CATALOG_ROUTES, ROUTE_MAP, ROUTES } from '~/lib/constants/';
 import { eventEmitters } from '~/lib/events/emitters';
@@ -23,6 +26,10 @@ export interface RouterContextProps {
 }
 
 const RouterContext = createContext<RouterContextProps>();
+const COOKIE_CONSTANT = {
+  COOKIE_NAME: 'catalogURLCookie',
+  DOMAIN: '.simpletire.com',
+};
 
 function useRouterContextSetup() {
   const router = useRouter();
@@ -41,10 +48,27 @@ function useRouterContextSetup() {
   const [initTransitionState, setInitTransitionState] = useState(false);
 
   const { isSearchOpen } = useSearchModalContext();
+  const { isClient } = useIsClient();
 
   const setCjCookie = async (cjevent: string) => {
     return await apiCjToSetCookie(cjevent);
   };
+  if (
+    router.pathname === ROUTE_MAP[ROUTES.VEHICLE_CATALOG] ||
+    router.pathname === ROUTE_MAP[ROUTES.TIRE_SIZE_CATALOG_OR_CATEGORY]
+  ) {
+    const cookies = new Cookies();
+    const catalogURL = isClient && window.location.href;
+    if (cookies.get(COOKIE_CONSTANT.COOKIE_NAME) !== catalogURL.toString()) {
+      // setting a Client side cookie for catalogURLCookie.
+      setCookie(null, COOKIE_CONSTANT.COOKIE_NAME, catalogURL.toString(), {
+        maxAge: 86400 * 30,
+        path: '/',
+        secure: false,
+        domain: COOKIE_CONSTANT.DOMAIN,
+      });
+    }
+  }
   // For now, the only scenario where the page transition is skipped is
   // the transition into and between Catalog pages
   const isCatalogTransition = skipPageTransition;
