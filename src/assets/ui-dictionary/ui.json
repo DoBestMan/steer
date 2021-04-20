@@ -991,6 +991,7 @@
     "url": "/vehicles/{{make}}-tires"
   },
   "simpleSnap": {
+    "cta": "Snap an image of your tire to search",
     "instruction": "Snap the tire size, located on the sidewall, in the frame below.",
     "tip1": "Snap within 1 feet",
     "tip2": "Ensure good lighting",

@@ -219,9 +219,7 @@ export const headerLandingMock: PageData = {
         width: 0,
       },
       type: 'SiteYouTubeVideo',
-      video: {
-        youtubeId: 'iQdV2fDR9RY',
-      },
+      videoId: 'iQdV2fDR9RY',
     },
     {
       type: 'SiteModuleFeedback',

@@ -1,5 +1,4 @@
 import { SiteImage } from './SiteImage';
-import { SiteYouTubeVideoVideo } from './SiteYouTubeVideoVideo';
 
 /**
  *
@@ -15,10 +14,9 @@ export interface SiteYouTubeVideo {
   poster: SiteImage;
   /**
    *
-   * @type {SiteYouTubeVideoVideo}
-   * @memberof SiteYouTubeVideo
+   * @type {string}
    */
-  video: SiteYouTubeVideoVideo;
+  videoId: string;
   /**
    *
    * @type {string}

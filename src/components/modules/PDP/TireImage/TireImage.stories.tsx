@@ -27,9 +27,7 @@ const video = {
     width: 1920,
   },
   type: SiteYouTubeVideoTypeEnum.SiteYouTubeVideo,
-  video: {
-    youtubeId: 'iQdV2fDR9RY',
-  },
+  videoId: 'iQdV2fDR9RY',
 };
 
 const assetList: SiteProductLine['assetList'] = [

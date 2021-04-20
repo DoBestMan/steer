@@ -4,20 +4,18 @@ import Button from '~/components/global/Button/Button';
 import { useTireSnapModalContext } from '~/components/modules/TireSnap/TireSnapModal.context';
 import { useSiteNotificationsContext } from '~/context/SiteNotifications.context';
 import { SiteIcon } from '~/data/models/SiteIcon';
-import { SiteModuleSimpleSnapButton } from '~/data/models/SiteModules';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { BUTTON_STYLE, THEME } from '~/lib/constants';
+import { ui } from '~/lib/utils/ui-dictionary';
 
 import simpleSnapStyles from './ModuleSimpleSnapButton.styles';
 
-function ModuleSimpleSnapButton({
-  buttonLabel,
-  theme = THEME.ORANGE,
-  style = BUTTON_STYLE.SOLID,
-}: SiteModuleSimpleSnapButton) {
+function ModuleSimpleSnapButton() {
   const { setIsTireSnapOpen } = useTireSnapModalContext();
   const { isMobile } = useBreakpoints();
   const { addNotification } = useSiteNotificationsContext();
+  const theme = THEME.ORANGE;
+  const style = BUTTON_STYLE.SOLID;
 
   useEffect(() => {
     if (!isMobile) {
@@ -50,7 +48,7 @@ function ModuleSimpleSnapButton({
           style={style}
           css={simpleSnapStyles.simpleSnapButtonSection}
         >
-          {buttonLabel}
+          {ui('simpleSnap.cta')}
         </Button>
       ) : null}
     </div>

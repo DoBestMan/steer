@@ -173,9 +173,7 @@ export const siteProductMock: SiteProduct = {
           width: 1920,
           type: ICON_IMAGE_TYPE.IMAGE,
         },
-        video: {
-          youtubeId: 'iQdV2fDR9RY',
-        },
+        videoId: 'iQdV2fDR9RY',
         type: SiteYouTubeVideoTypeEnum.SiteYouTubeVideo,
       },
     ],

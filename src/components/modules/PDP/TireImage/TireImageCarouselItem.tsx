@@ -74,7 +74,7 @@ function TireImageCarouselItem({
           poster={imageItem.poster}
           sizes={[300, 700]}
           shouldPauseVideo={shouldPauseVideo}
-          video={imageItem.video}
+          videoId={imageItem.videoId}
           setShouldPauseVideo={setShouldPauseVideo}
         />
       )}

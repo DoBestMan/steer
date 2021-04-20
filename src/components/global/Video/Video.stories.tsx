@@ -31,7 +31,7 @@ export function VideoWithKnobs() {
           setShouldPauseVideo={setShouldPauseVideo}
           shouldPauseVideo={shouldPauseVideo}
           sizes={[960]}
-          video={{ youtubeId: 'iQdV2fDR9RY' }}
+          videoId="iQdV2fDR9RY"
         />
       </GridItem>
     </Grid>

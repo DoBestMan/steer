@@ -5,7 +5,6 @@ import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Image from '~/components/global/Image/Image';
 import Loading from '~/components/global/Loading/Loading';
 import { SiteImage } from '~/data/models/SiteImage';
-import { SiteYouTubeVideoVideo } from '~/data/models/SiteYouTubeVideoVideo';
 import { CSSStylesProp, Loading as ImageLoading, THEME } from '~/lib/constants';
 import { ratioToPercentage } from '~/lib/utils/number';
 import { ui } from '~/lib/utils/ui-dictionary';
@@ -23,7 +22,7 @@ export interface VideoProps {
   setShouldPauseVideo?: (shouldPauseVideo: boolean) => void;
   shouldPauseVideo?: boolean;
   sizes: number[];
-  video: SiteYouTubeVideoVideo;
+  videoId: string;
 }
 
 function Video({
@@ -35,15 +34,15 @@ function Video({
   poster,
   shouldPauseVideo,
   sizes,
-  video,
+  videoId,
   setShouldPauseVideo,
 }: VideoProps) {
-  const videoId = `video-${video.youtubeId}`;
+  const youtubeVideoId = `video-${videoId}`;
 
   const { hasPlayedVideo, isLoading, setIsLoading, pauseVideo } = useYoutubeApi(
     {
-      youtubeId: video.youtubeId,
-      videoId,
+      youtubeId: videoId,
+      videoId: youtubeVideoId,
     },
   );
 
@@ -105,7 +104,7 @@ function Video({
           customVideoStyles,
         ]}
       >
-        <div css={styles.videoIframe} id={videoId} />
+        <div css={styles.videoIframe} id={youtubeVideoId} />
       </div>
     </div>
   );
