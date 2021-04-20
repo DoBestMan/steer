@@ -164,7 +164,6 @@ function HomePage({
           <PromotionCardCarousel cards={promotionCarousel.dealsCards} />
         )}
       </div>
-
       <div
         css={[styles.scrollColorContainer, { backgroundColor }]}
         ref={contentRef}

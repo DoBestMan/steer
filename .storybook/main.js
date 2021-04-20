@@ -10,6 +10,8 @@ module.exports = {
     '@storybook/addon-viewport',
     '@storybook/preset-typescript',
     '@storybook/addon-a11y/register',
+    'storybook-addon-designs',
+    'storybook-mobile',
   ],
   webpackFinal: async (config) => {
     // remove svg from existing rule

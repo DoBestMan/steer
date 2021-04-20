@@ -1,3 +1,5 @@
+import { withDesign } from 'storybook-addon-designs';
+
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
@@ -10,6 +12,14 @@ import Notification from './Notification';
 export default {
   component: Notification,
   title: 'Global/Notification',
+  decorators: [withDesign],
+  parameters: {
+    design: {
+      type: 'figma',
+      url:
+        'https://www.figma.com/file/n4o7nhjUg04HvTZ4PyyJIo/Black-Friday-(UX)?node-id=145%3A11944',
+    },
+  },
 };
 
 const styles: StylesMap = {
