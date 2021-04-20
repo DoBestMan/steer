@@ -4,9 +4,17 @@ const CONSTANTS = {
   IMAGE_MAX_WIDTH: 120,
 };
 const styles: StylesMap = {
+  button: {
+    backgroundColor: COLORS.GLOBAL.WHITE,
+    marginRight: SPACING.SIZE_05,
+  },
   buttonsWrapper: {
     display: 'flex',
     flexDirection: 'row',
+  },
+  buttonWrapper: {
+    display: 'flex',
+    paddingTop: SPACING.SIZE_10,
   },
   content: {
     gridColumn: '2 / 5',
@@ -24,22 +32,18 @@ const styles: StylesMap = {
   imageWrapper: {
     gridColumn: '1 / 2',
   },
-  name: [typography.primarySubhead, { color: COLORS.LIGHT.GRAY_70 }],
-  quantity: [typography.bodyCopyTight, { color: COLORS.LIGHT.GRAY_70 }],
-  reorderButton: {
-    backgroundColor: COLORS.GLOBAL.WHITE,
-    marginRight: SPACING.SIZE_05,
-  },
-  reorderButtonWrapper: {
-    display: 'flex',
-    paddingTop: SPACING.SIZE_10,
-  },
-  submitLoader: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingLeft: SPACING.SIZE_02,
-  },
+  name: [
+    typography.primarySubhead,
+    {
+      color: COLORS.LIGHT.GRAY_70,
+    },
+  ],
+  quantity: [
+    typography.bodyCopyTight,
+    {
+      color: COLORS.LIGHT.GRAY_70,
+    },
+  ],
   wrapper: {
     alignItems: 'center',
     display: 'grid',

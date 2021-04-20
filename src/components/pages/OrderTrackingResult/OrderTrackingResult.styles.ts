@@ -11,24 +11,21 @@ const styles: StylesMap = {
   additionalInfo: [
     typography.bodyCopy,
     {
-      a: {
-        display: 'inline-flex',
-      },
-      color: COLORS.GLOBAL.BLACK,
-      display: 'block',
-      gridColumn: '1/5',
       [MQ.L]: {
         gridColumn: '1/4',
       },
       [MQ.XL]: {
         gridColumn: '1/5',
       },
+      a: {
+        display: 'inline-flex',
+      },
+      color: COLORS.GLOBAL.BLACK,
+      display: 'block',
+      gridColumn: '1/5',
     },
   ],
   additionalInfoWrapper: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(4, 1fr)',
-    paddingBottom: SPACING.SIZE_80,
     [MQ.M]: {
       '> span': {
         gridColumn: '1/5',
@@ -51,6 +48,9 @@ const styles: StylesMap = {
       gridColumnGap: GAP_COLUMNS.XL,
       gridTemplateColumns: 'repeat(4, 1fr)',
     },
+    display: 'grid',
+    gridTemplateColumns: 'repeat(4, 1fr)',
+    paddingBottom: SPACING.SIZE_80,
   },
   addressText: [
     typography.bodyCopyTight,
@@ -71,15 +71,14 @@ const styles: StylesMap = {
   appointmentNote: [
     typography.bodyCopyTight,
     {
-      color: COLORS.LIGHT.GRAY_LIGHT_SOLID,
-      paddingBottom: SPACING.SIZE_40,
-      paddingTop: SPACING.SIZE_10,
       [MQ.M]: {
         paddingBottom: SPACING.SIZE_60,
       },
+      color: COLORS.LIGHT.GRAY_LIGHT_SOLID,
+      paddingBottom: SPACING.SIZE_40,
+      paddingTop: SPACING.SIZE_10,
     },
   ],
-
   appointmentWrapper: {
     paddingBottom: SPACING.SIZE_40,
   },
@@ -88,8 +87,8 @@ const styles: StylesMap = {
     flexDirection: 'row',
   },
   emailLoader: {
-    display: 'flex',
     alignItems: 'center',
+    display: 'flex',
     justifyContent: 'center',
     paddingLeft: SPACING.SIZE_10,
   },
@@ -102,6 +101,9 @@ const styles: StylesMap = {
   ],
   emailWrapper: {
     paddingBottom: SPACING.SIZE_50,
+  },
+  errorContainer: {
+    paddingBottom: SPACING.SIZE_20,
   },
   orderInfoWrapper: {
     [MQ.S]: {
@@ -119,24 +121,80 @@ const styles: StylesMap = {
     paddingBottom: SPACING.SIZE_50,
   },
   orderStatusWrapper: {
-    padding: `${SPACING.SIZE_110}px 0 ${SPACING.SIZE_50}px`,
     [MQ.M]: {
-      padding: `${SPACING.SIZE_160}px 0 ${SPACING.SIZE_90}px`,
+      padding: `0px ${SPACING.SIZE_90}px`,
+      paddingTop: SPACING.SIZE_160,
     },
     [MQ.L]: {
-      padding: `200px 0 ${SPACING.SIZE_100}px`,
+      padding: `0px ${SPACING.SIZE_100}px`,
+      paddingTop: '200px',
     },
     [MQ.XL]: {
-      padding: `230px 0 ${SPACING.SIZE_110}px`,
+      padding: `0px ${SPACING.SIZE_110}px`,
+      paddingTop: '200px',
     },
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    padding: `0px ${SPACING.SIZE_50}px`,
+    paddingTop: SPACING.SIZE_110,
   },
   orderTimelineWrapper: {
+    [MQ.M]: {
+      borderBottom: 'none',
+      paddingTop: 0,
+    },
     borderBottom: BORDERS.SOLID_GRAY_20_1PX,
     padding: `${SPACING.SIZE_10}px 0`,
+  },
+  returnContainer: {
     [MQ.M]: {
-      paddingTop: 0,
-      borderBottom: 'none',
+      paddingBottom: SPACING.SIZE_70,
     },
+    [MQ.L]: {
+      paddingBottom: SPACING.SIZE_80,
+    },
+    [MQ.XL]: {
+      paddingBottom: SPACING.SIZE_100,
+    },
+    paddingBottom: SPACING.SIZE_90,
+    paddingTop: SPACING.SIZE_50,
+  },
+  returnInitiateEmailDescription: [
+    typography.bodyCopyTight,
+    {
+      color: COLORS.GLOBAL.GRAY_50,
+      paddingBottom: SPACING.SIZE_15,
+    },
+  ],
+  returnInitiateStepDescription: [
+    typography.bodyCopyTight,
+    {
+      color: COLORS.LIGHT.GRAY_70,
+      paddingBottom: SPACING.SIZE_15,
+    },
+  ],
+  returnInitiateStepTitle: [
+    typography.bodyCopyTight,
+    {
+      color: COLORS.GLOBAL.BLACK,
+      paddingBottom: SPACING.SIZE_15,
+    },
+  ],
+  returnInitiateTitle: [
+    typography.labelCopy,
+    {
+      color: COLORS.GLOBAL.BLACK,
+      paddingBottom: SPACING.SIZE_15,
+    },
+  ],
+  returnRequestContainer: {
+    [MQ.S]: {
+      width: '100%',
+    },
+    alignSelf: 'center',
+    textAlign: 'center',
+    width: '60%',
   },
   sectionHeader: [
     typography.tertiaryHeadline,
@@ -147,11 +205,17 @@ const styles: StylesMap = {
   shippingAddress: [
     typography.bodyCopyTight,
     {
-      color: COLORS.LIGHT.GRAY_70,
-      paddingBottom: SPACING.SIZE_40,
       [MQ.M]: {
         paddingBottom: SPACING.SIZE_60,
       },
+      color: COLORS.LIGHT.GRAY_70,
+      paddingBottom: SPACING.SIZE_40,
+    },
+  ],
+  specialLabel: [
+    typography.labelHeadline,
+    {
+      color: COLORS.GLOBAL.BLACK,
     },
   ],
 };

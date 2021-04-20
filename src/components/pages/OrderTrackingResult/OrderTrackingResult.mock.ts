@@ -85,7 +85,9 @@ export const orderAppointmentMock = {
 
 export const orderItemsMock = [
   {
+    canCustomerCancelReturn: false,
     canCustomerReorder: true,
+    canCustomerReturn: false,
     id: 115189,
     image: {
       altText: 'Tire sidewall',
@@ -99,7 +101,9 @@ export const orderItemsMock = [
     quantity: 2,
   },
   {
+    canCustomerCancelReturn: false,
     canCustomerReorder: false,
+    canCustomerReturn: false,
     id: 128451,
     image: {
       altText: 'Tire sidewall',
@@ -113,3 +117,98 @@ export const orderItemsMock = [
     quantity: 4,
   },
 ];
+
+export const orderItemMock = {
+  canCustomerCancelReturn: false,
+  canCustomerReorder: false,
+  canCustomerReturn: false,
+  id: 22,
+  image: {
+    altText: 'Tire sidewall',
+    height: 800,
+    src:
+      'https://images.simpletire.com/image/upload/v1591705545/line-images/1349/1349-sidetread_f24ld3.png',
+    type: ICON_IMAGE_TYPE.IMAGE,
+    width: 543,
+  } as SiteImage,
+  name: 'Bridgestone Dueler A/T Revo 2 - P215/75R16 - 001311',
+  quantity: 2,
+};
+
+export const returnReasonsMock = [
+  {
+    canAddComment: false,
+    canUploadImage: false,
+    id: 1,
+    reasonName: 'Tires were not delivered in time',
+    terms:
+      'Returns are accepted within 30 days of delivery. Only unused tires that have not been mounted or driven on are eligible for return. Once we receive the tires back in our warehouse we will issue a full refund',
+  },
+  {
+    canAddComment: false,
+    canUploadImage: false,
+    id: 2,
+    reasonName: 'Tires are not the quality I expected',
+    terms:
+      'Returns are accepted within 30 days of delivery. Only unused tires that have not been mounted or driven on are eligible for return. Once we receive the tires back in our warehouse we will issue a full refund',
+  },
+  {
+    canAddComment: false,
+    canUploadImage: false,
+    id: 3,
+    reasonName: 'I ordered the wrong size/model',
+    terms:
+      'Returns are accepted within 30 days of delivery. Only unused tires that have not been mounted or driven on are eligible for return. Once we receive the tires back in our warehouse we will issue a full refund (minus a $15 per tire handling fee) back to the original form of payment. If you ordered the wrong size, don’t panic. We won’t charge a handling fee if you place a new order with us for the correct size.',
+  },
+  {
+    canAddComment: false,
+    canUploadImage: false,
+    id: 4,
+    reasonName: 'I found the tires for a better price elsewhere',
+    terms:
+      'Returns are accepted within 30 days of delivery. Only unused tires that have not been mounted or driven on are eligible for return. Once we receive the tires back in our warehouse we will issue a full refund (minus a $15 per tire handling fee) back to the original form of payment. If you ordered the wrong size, don’t panic. We won’t charge a handling fee if you place a new order with us for the correct size.',
+  },
+  {
+    canAddComment: true,
+    canUploadImage: true,
+    id: 5,
+    reasonName: 'I’m unhappy with the DOT code listed on the tire',
+    terms:
+      'Returns are accepted within 30 days of delivery. Only unused tires that have not been mounted or driven on are eligible for return. One of our Customer Care Representatives will reach out to you for more information regarding your claim.',
+  },
+  {
+    canAddComment: true,
+    canUploadImage: true,
+    id: 6,
+    reasonName: 'I received the incorrect tires',
+    terms:
+      'Returns are accepted within 30 days of delivery. Only unused tires that have not been mounted or driven on are eligible for return. One of our Customer Care Representatives will reach out to you for more information regarding your claim.',
+  },
+  {
+    canAddComment: true,
+    canUploadImage: true,
+    id: 7,
+    reasonName: 'My tires have a manufacturer’s defect',
+    terms:
+      'Returns are accepted within 30 days of delivery. Only unused tires that have not been mounted or driven on are eligible for return. One of our Customer Care Representatives will reach out to you for more information regarding your claim.',
+  },
+];
+
+export const cancelReturnRequestMock = {
+  body: {
+    attachedImages: [],
+    comment: 'testomg',
+    quantity: 1,
+    reasonId: 1,
+  },
+  orderId: '123',
+  productId: '123',
+  type: 'return',
+  zip: '123',
+};
+
+export const getReturnReasonsMock = {
+  ...orderItemMock,
+  zip: '123',
+  orderId: '123',
+};

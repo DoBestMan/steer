@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router';
+
 import { CARS, CARS_KEYS } from '~/components/global/Car/CarDetails.constants';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
@@ -12,10 +14,17 @@ import OrderTrackingForm from './OrderTrackingForm/OrderTrackingForm';
 import styles from './OrderTrackingPage.styles';
 
 function OrderTrackingPage() {
+  const router = useRouter();
+  const isComingForReturn = router.query.return && router.query.return;
+  const title =
+    isComingForReturn === '1'
+      ? ui('tracking.orderReturnTitle')
+      : ui('tracking.orderTrackingTitle');
+
   return (
     <Grid css={styles.container}>
       <GridItem css={styles.header}>
-        <h1 css={styles.title}>{ui('tracking.orderTrackingTitle')}</h1>
+        <h1 css={styles.title}>{title}</h1>
         <p css={styles.description}>
           {uiJSX('tracking.orderTrackingDescription', {
             login: (

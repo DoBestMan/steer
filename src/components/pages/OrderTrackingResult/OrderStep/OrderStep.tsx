@@ -39,7 +39,6 @@ function OrderStep({
   const trackLine = !isLastStep && !isOnlyStep && (
     <div css={styles.trackLine} />
   );
-
   return (
     <div css={styles.wrapper}>
       <div

@@ -2,21 +2,23 @@ import { action } from '@storybook/addon-actions';
 import { boolean, number, text } from '@storybook/addon-knobs';
 import { useState } from 'react';
 
-import { SPACING } from '~/lib/constants';
+import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
 
-import { default as RadioSelector } from './RadioSelector';
-import { default as TitleRadioComponent } from './TitleRadio';
+import styles from './Radio.styles';
+import RadioOptions from './RadioOptions';
+import RadioSelector from './RadioSelector';
+import TitleRadio from './TitleRadio';
 
 export default {
-  component: TitleRadio,
+  component: TitleRadioSelector,
   title: 'Global/Radio',
 };
 
-export function TitleRadio() {
+export function TitleRadioSelector() {
   const active = boolean('Active', true);
   return (
-    <TitleRadioComponent
+    <TitleRadio
       label={text('Label', 'Radio label')}
       description={text(
         'Description',
@@ -33,12 +35,35 @@ export function TitleRadio() {
   );
 }
 
+export function RadioOptionsSelector() {
+  const [activeValue, setActiveValue] = useState('value-1');
+  return (
+    <div css={styles.storybookContainer}>
+      <RadioOptions
+        name="radio"
+        value="value-1"
+        onChange={setActiveValue}
+        label={ui('common.radioOption') + ' 1'}
+        activeValue={activeValue}
+      />
+      <br />
+      <RadioOptions
+        name="radio"
+        value="value-2"
+        onChange={setActiveValue}
+        label={ui('common.radioOption') + ' 2'}
+        activeValue={activeValue}
+      />
+    </div>
+  );
+}
+
 export function TitleRadioGroup() {
   const [activeValue, setActiveValue] = useState('value-1');
   return (
     <>
-      <div css={{ marginBottom: SPACING.SIZE_15 }}>
-        <TitleRadioComponent
+      <div css={styles.storybookContainer}>
+        <TitleRadio
           label="First radio label"
           description="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
           name="radio"
@@ -50,7 +75,7 @@ export function TitleRadioGroup() {
           isDisabled={false}
         />
       </div>
-      <TitleRadioComponent
+      <TitleRadio
         label="Second radio label"
         description={null}
         name="radio"

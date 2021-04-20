@@ -16,6 +16,7 @@ export default function Radio({
   isDisabled,
   onChange,
   value,
+  name,
   ...rest
 }: Props) {
   function handleChange() {
@@ -32,6 +33,8 @@ export default function Radio({
         onClick={handleChange}
         type="radio"
         value={value}
+        className={name ? name : ''}
+        name={name ? name : ''}
         {...rest}
       />
       <span

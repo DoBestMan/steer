@@ -13,6 +13,7 @@ export interface Order {
   orderInstallerAppointment?: OrderAppointment | null;
   orderProductList: Array<OrderProduct>;
   orderShippingStageList: Array<OrderShippingStageList>;
+  returnInitializedReasonId: number | null;
   shippingAddress: UserAddress;
   status: OrderStatus;
 }

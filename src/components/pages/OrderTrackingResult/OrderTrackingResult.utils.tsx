@@ -6,11 +6,15 @@ import { formatOrNull } from '~/lib/utils/date';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { uiJSX } from '~/lib/utils/ui-dictionary-jsx';
 
+import styles from './OrderTrackingResult.styles';
+
 export enum OrderStatus {
   CANCELLED = 'cancelled',
   DELIVERED = 'delivered',
   PREPARED = 'prepared',
   RECEIVED = 'received',
+  RETURN_INITIATED = 'return-initialized',
+  RETURN_REQUESTED = 'return-requested',
   SHIPPED = 'shipped',
 }
 
@@ -100,4 +104,101 @@ export function getReturnInfoLinks() {
       </Link>
     ),
   });
+}
+
+export function checkOrderStatus(status: OrderStatus) {
+  return status === OrderStatus.RETURN_REQUESTED ||
+    status === OrderStatus.RETURN_INITIATED
+    ? true
+    : false;
+}
+
+export function getReturnDescription(
+  status: OrderStatus,
+  returnInitializedReasonId: number | null,
+  maskedEmail: string,
+) {
+  const detailsDisplayArray = [
+    {
+      title: ui('tracking.returnRequestTitle1'),
+      description: ui('tracking.returnRequestDesc1'),
+    },
+    {
+      title: ui('tracking.returnRequestTitle2'),
+      description: ui('tracking.returnRequestDesc2'),
+    },
+  ];
+  const descriptionWithSpecialText: string[] = [];
+
+  if (returnInitializedReasonId === 7 || returnInitializedReasonId === 5) {
+    const addedDescription = {
+      title: ui('tracking.returnRequestRefund'),
+      description: ui('tracking.returnRequestRefundDesc'),
+    };
+    detailsDisplayArray.push(addedDescription);
+  } else if (
+    returnInitializedReasonId === 3 ||
+    returnInitializedReasonId === 15
+  ) {
+    const refundDescription = ui('tracking.returnRequestRefundDescAlt');
+    const positionOfSpecialText = refundDescription.indexOf(
+      ui('tracking.returnRequestDescSpecialText'),
+    );
+
+    if (positionOfSpecialText !== -1) {
+      const firstLine = refundDescription.substring(0, positionOfSpecialText);
+      const secondLine = ui('tracking.returnRequestDescSpecialText');
+      const thirdLine = refundDescription.substring(
+        firstLine.length + secondLine.length,
+      );
+      descriptionWithSpecialText.push(firstLine, secondLine, thirdLine);
+    }
+
+    const addedDescription = {
+      title: ui('tracking.returnRequestRefund'),
+      description: '',
+    };
+    detailsDisplayArray.push(addedDescription);
+  }
+
+  return status === OrderStatus.RETURN_REQUESTED ? (
+    <div css={[styles.returnContainer, styles.returnRequestContainer]}>
+      <h1 css={styles.returnInitiateStepDescription}>
+        {ui('tracking.returnRequestedDescription')}
+      </h1>
+    </div>
+  ) : (
+    status === OrderStatus.RETURN_INITIATED && (
+      <div css={styles.returnContainer}>
+        <h1 css={styles.returnInitiateTitle}>
+          {ui('tracking.returnInitiateTitle')}
+        </h1>
+        <h1 css={styles.returnInitiateEmailDescription}>
+          {ui('tracking.returnInitiateEmailDesc', {
+            maskedEmail,
+          })}
+        </h1>
+        {detailsDisplayArray.map((item, index) => (
+          <div key={index}>
+            <h1 css={styles.returnInitiateStepTitle}>
+              {index + 1}. {item.title}
+            </h1>
+            {item.description ? (
+              <h1 css={styles.returnInitiateStepDescription}>
+                {item.description}
+              </h1>
+            ) : (
+              <span css={styles.returnInitiateStepDescription}>
+                {descriptionWithSpecialText[0]}
+                <span css={styles.specialLabel}>
+                  {descriptionWithSpecialText[1]}
+                </span>
+                {descriptionWithSpecialText[2]}
+              </span>
+            )}
+          </div>
+        ))}
+      </div>
+    )
+  );
 }

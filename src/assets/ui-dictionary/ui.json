@@ -120,6 +120,7 @@
   },
   "common": {
     "ellipsis": "...",
+    "radioOption": "Radio option",
     "feedback": {
       "defaultMessageLabel": "Did you find what <br /> you were looking for?",
       "negativeMessageLabel": "Sorry to hear that. <br /> Let us help you",
@@ -164,7 +165,7 @@
   },
   "contact": {
     "form": {
-        "source": {
+      "source": {
         "value": "Contact"
       }
     }
@@ -824,6 +825,7 @@
     "orderTrackingError": "Please review. Order ID & ZIP Code do not match.",
     "orderTrackingSubmit": "Track order",
     "orderTrackingTitle": "Track your order",
+    "orderReturnTitle": "Return your order",
     "pendingStepDescription": "Your tires will ship soon",
     "shippingAddress": "Shipping address",
     "statusCancelled": "Order cancelled",
@@ -837,13 +839,36 @@
     "tiresOrderedSingular": "{{quantity}} tire ordered",
     "tiresShipped": "Your new tires have shipped",
     "trackingNumber": "Tracking #:",
+    "returnOption": "Return",
+    "cancelOption": "Cancel Return",
     "reorderOption": "Reorder",
     "returnInfoTitle": "Have any questions about returns?",
     "returnInfoLinks": "Check our {{returns}}",
     "appointmentDetails": "Appointment Details",
     "emailRecieptNotSent": "Email me my reciept",
-    "emailRecieptSent":"Reciept sent",
-    "emailDescription": "An order reciept will be sent to {{maskedEmail}}"
+    "emailRecieptSent": "Reciept sent",
+    "emailDescription": "An order reciept will be sent to {{maskedEmail}}",
+    "returnRequestTitle": "Return request form",
+    "returnRequestOptionHeader": "Reason for returning your delivered order",
+    "returnRequestSubmit": "Submit return request",
+    "returnImageProofHeader": "Upload pictures of delivered product",
+    "commentsHeader": "Comments (optional)",
+    "commentsDescription": "Something which you would like to inform",
+    "quantitySelectorTitle": "Sending some tires back?",
+    "quantitySelectorDescription": "You’ll need to send at least one tire back.",
+    "imageReadError": "An error has occured while reading the file. Please try again.",
+    "imageSizeError": "File size is greater than 1MB. Please upload file below 1MB.",
+    "returnRequestedDescription": "Our customer care representative will reach out via email within 24 hours to ensure your issue is handled with the utmost care.",
+    "returnInitiateTitle": "What's next?",
+    "returnInitiateEmailDesc": "Return label(s) are sent to {{maskedEmail}}",
+    "returnRequestDescSpecialText": "(minus a $15 per tire handling fee)",
+    "returnRequestTitle1": "Ready your tires for shipment",
+    "returnRequestTitle2": "Ship your tires to us",
+    "returnRequestDesc1": "Tape each return label directly to the tread of the tires. Make sure the label is secure so it doesn’t fall off during shipping.",
+    "returnRequestDesc2": "With the return labels securely taped to the tires, take the tires to a FedEx location and they will send the tires back to us. If you can’t get to a FedEx location then you can contact us and we’ll schedule a pickup from your home or business.",
+    "returnRequestRefund": "Your refund",
+    "returnRequestRefundDesc": "Once we receive the tires back in our warehouse we will issue a full refund within 48 hours.",
+    "returnRequestRefundDescAlt": "Once we receive the tires back in our warehouse we will issue a refund (minus a $15 per tire handling fee). If you ordered the wrong size, don’t panic. We won’t charge a handling fee if you place a new order with us for the correct size."
   },
   "links": {
     "about": "About us",

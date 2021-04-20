@@ -6,4 +6,6 @@ export interface OrderProduct {
   name: string;
   quantity: number;
   canCustomerReorder: boolean;
+  canCustomerReturn: boolean;
+  canCustomerCancelReturn: boolean;
 }

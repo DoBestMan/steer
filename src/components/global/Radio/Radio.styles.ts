@@ -46,25 +46,51 @@ export const styles: StylesMap = {
     width: INNER_SIZE,
   },
   input: {
-    appearance: 'none',
-    opacity: 0,
-    position: 'absolute',
     ':focus': {
       '+ span': {
         outline: BORDERS.FOCUS_STATE,
       },
     },
+    appearance: 'none',
+    opacity: 0,
+    position: 'absolute',
   },
   label: {
     paddingRight: SPACING.SIZE_10,
   },
-  rootActive: { color: COLORS.GLOBAL.ORANGE },
+  optionsLabel: {
+    paddingLeft: SPACING.SIZE_10,
+  },
+  optionsRoot: {
+    alignItems: 'center',
+    cursor: 'pointer',
+    display: 'flex',
+    width: '100%',
+  },
+  optionsText: [
+    typography.bodyCopyTight,
+    {
+      color: COLORS.LIGHT.GRAY_70,
+      paddingLeft: SPACING.SIZE_15,
+    },
+  ],
+  optionsTextWrapper: {
+    alignItems: 'center',
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  rootActive: {
+    color: COLORS.GLOBAL.ORANGE,
+  },
   rootHover: {
     ':hover': {
       span: {
         borderColor: COLORS.DARK.GRAY_DARK_SOLID,
       },
     },
+  },
+  storybookContainer: {
+    marginBottom: SPACING.SIZE_15,
   },
   titleRoot: {
     cursor: 'pointer',

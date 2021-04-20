@@ -1,12 +1,18 @@
+import { useState } from 'react';
+
 import Button from '~/components/global/Button/Button';
 import { CARS, CARS_KEYS } from '~/components/global/Car/CarDetails.constants';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import Loading from '~/components/global/Loading/Loading';
+import Markdown from '~/components/global/Markdown/Markdown';
 import Meta from '~/components/global/Meta/Meta';
 import PageIllustration from '~/components/global/PageIllustration/PageIllustration';
+import Toast from '~/components/global/Toast/Toast';
 import { Order } from '~/data/models/Order';
+import { OrderProduct } from '~/data/models/OrderProduct';
 import { OrderTrackingInput } from '~/data/models/OrderTrackingInput';
+import { ReturnRequestInput } from '~/data/models/ReturnRequestInput';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { BREAKPOINT_SIZES, THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
@@ -16,19 +22,52 @@ import OrderItem from './OrderItem/OrderItem';
 import OrderStep from './OrderStep/OrderStep';
 import styles from './OrderTrackingResult.styles';
 import {
+  checkOrderStatus,
   getAppointmentAddressArray,
+  getReturnDescription,
   getReturnInfoLinks,
   getShippingAddressArray,
+  OrderStatus,
 } from './OrderTrackingResult.utils';
+
+interface RequestType {
+  type: string;
+}
+
+type ReturnReasonDataProps = OrderProduct & OrderTrackingInput;
+type ReturnRequestProps = ReturnRequestInput & RequestType;
 
 interface Props {
   customerServiceNumber: { display: string; value: string };
   emailSent: boolean;
+  getReturnReasons: ({
+    canCustomerReorder,
+    canCustomerReturn,
+    canCustomerCancelReturn,
+    id,
+    image,
+    name,
+    quantity,
+    zip,
+    orderId,
+  }: ReturnReasonDataProps) => void;
   isCustomerServiceEnabled: boolean;
+  isLoadingReturnReasons: boolean;
   isSendingEmail: boolean;
+  isSendingReturnOrCancelReq: boolean;
+  returnOrCancelReqError: boolean;
+  returnOrCancelReqSent: boolean;
   sendEmailReciept: ({ orderId, zip }: OrderTrackingInput) => void;
+  sendReturnRequest: ({
+    orderId,
+    zip,
+    productId,
+    body,
+  }: ReturnRequestProps) => void;
 }
+
 type OrderTrackingResultProps = Order & Props & OrderTrackingInput;
+
 function OrderTrackingResult({
   customerServiceNumber,
   deliveryExpectedLabel,
@@ -45,8 +84,19 @@ function OrderTrackingResult({
   emailSent,
   orderId,
   zip,
+  returnOrCancelReqError,
+  isLoadingReturnReasons,
+  getReturnReasons,
+  sendReturnRequest,
+  isSendingReturnOrCancelReq,
+  returnOrCancelReqSent,
+  returnInitializedReasonId,
 }: OrderTrackingResultProps) {
+  const [toastMessageStatus, showToastMessage] = useState<boolean>(true);
+
   const shippingAddressArray = getShippingAddressArray(shippingAddress);
+
+  const isOrderInReturnState = checkOrderStatus(status);
 
   const appointmentDisplayArray =
     orderInstallerAppointment &&
@@ -95,10 +145,31 @@ function OrderTrackingResult({
         <ul css={styles.orderItemsList}>
           {orderProductList.map((item, i) => (
             <li css={styles.orderItem} key={i}>
-              <OrderItem {...item} />
+              <OrderItem
+                {...item}
+                orderId={id}
+                zip={String(zip)}
+                isLoadingReturnReasons={isLoadingReturnReasons}
+                getReturnReasons={getReturnReasons}
+                sendReturnRequest={sendReturnRequest}
+                isSendingReturnOrCancelReq={isSendingReturnOrCancelReq}
+                returnOrCancelReqSent={returnOrCancelReqSent}
+              />
             </li>
           ))}
         </ul>
+
+        {returnOrCancelReqError && (
+          <div css={styles.errorContainer}>
+            <Toast
+              isOpen={toastMessageStatus}
+              onDismiss={() => showToastMessage(false)}
+            >
+              <Markdown>{ui('contactPage.message.error')}</Markdown>
+            </Toast>
+          </div>
+        )}
+
         {maskedEmail && (
           <div css={styles.emailWrapper}>
             <div css={styles.emailButtonWrapper}>
@@ -157,7 +228,12 @@ function OrderTrackingResult({
     <>
       <Meta robots="noindex,nofollow" hasCanonical={false} />
       <Grid>
-        <GridItem css={styles.orderStatusWrapper}>
+        <GridItem
+          css={[
+            styles.orderStatusWrapper,
+            !isOrderInReturnState && styles.returnContainer,
+          ]}
+        >
           <OrderHeader
             customerServiceNumber={customerServiceNumber}
             deliveryExpectedLabel={deliveryExpectedLabel}
@@ -165,7 +241,23 @@ function OrderTrackingResult({
             isCustomerServiceEnabled={isCustomerServiceEnabled}
             orderStatus={status}
           />
+          {status === OrderStatus.RETURN_REQUESTED &&
+            getReturnDescription(
+              status,
+              returnInitializedReasonId,
+              maskedEmail ? maskedEmail : '',
+            )}
         </GridItem>
+        {status === OrderStatus.RETURN_INITIATED && (
+          <GridItem gridColumnM="2/5" gridColumnL="3/8" gridColumnXL="4/14">
+            {getReturnDescription(
+              status,
+              returnInitializedReasonId,
+              maskedEmail ? maskedEmail : '',
+            )}
+          </GridItem>
+        )}
+
         {[BREAKPOINT_SIZES.S].includes(bk)
           ? renderOrderSteps()
           : renderOrderDetails()}

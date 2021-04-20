@@ -31,10 +31,23 @@ function OrderTrackingResultContainer() {
     hasError,
     isLoadingOrder,
     order,
+    isLoadingReturnReasons,
+    returnTireData,
     sendEmailReciept,
     isSendingEmail,
     emailSent,
+    isSendingReturnOrCancelReq,
+    returnOrCancelReqSent,
+    returnOrCancelReqError,
+    getReturnReasons,
+    sendReturnRequest,
   } = useOrderTrackingContext();
+
+  useEffect(() => {
+    if (returnOrCancelReqSent) {
+      window.location.reload();
+    }
+  }, [isSendingReturnOrCancelReq, returnOrCancelReqSent]);
 
   // Get the initial order information when the page loads
   useEffect(() => {
@@ -48,17 +61,33 @@ function OrderTrackingResultContainer() {
     hasError && router.push(ROUTE_MAP[ROUTES.ORDER_TRACKING]);
   }, [hasError, router]);
 
+  useEffect(() => {
+    if (!isLoadingReturnReasons && returnTireData) {
+      router.push({
+        pathname: ROUTE_MAP[ROUTES.ORDER_RETURN],
+        query: { orderId, zip, id: returnTireData.id },
+      });
+    }
+  });
+
   if (isLoadingOrder || !order) {
     return <OrderLoading />;
   }
+
   return (
     <OrderTrackingResult
       {...order}
+      isLoadingReturnReasons={isLoadingReturnReasons}
+      getReturnReasons={getReturnReasons}
+      sendReturnRequest={sendReturnRequest}
+      isSendingReturnOrCancelReq={isSendingReturnOrCancelReq}
+      returnOrCancelReqSent={returnOrCancelReqSent}
       sendEmailReciept={sendEmailReciept}
       orderId={String(orderId)}
       zip={String(zip)}
       isSendingEmail={isSendingEmail}
       emailSent={emailSent}
+      returnOrCancelReqError={returnOrCancelReqError}
       isCustomerServiceEnabled={customerServiceEnabled}
       customerServiceNumber={customerServiceNumber}
     />
