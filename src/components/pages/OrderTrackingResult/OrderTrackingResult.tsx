@@ -249,7 +249,7 @@ function OrderTrackingResult({
             )}
         </GridItem>
         {status === OrderStatus.RETURN_INITIATED && (
-          <GridItem gridColumnM="2/5" gridColumnL="3/8" gridColumnXL="4/14">
+          <GridItem gridColumnM="2/8" gridColumnL="3/12" gridColumnXL="4/12">
             {getReturnDescription(
               status,
               returnInitializedReasonId,
