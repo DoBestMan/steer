@@ -10,6 +10,8 @@ import CatalogLoading from '~/components/pages/CatalogPage/CatalogLoading/Catalo
 import { useModalContext } from '~/context/Modal.context';
 import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
 import { MODAL_THEME, TIME } from '~/lib/constants';
+import { FS_EVENT_NAMES } from '~/lib/constants/fullstory';
+import { setFSCustomEvent } from '~/lib/helpers/fullstory';
 import { getScroll } from '~/lib/helpers/scroll';
 
 import styles from './SearchModal.styles';
@@ -45,11 +47,16 @@ function SearchModal() {
   } = useSearchContext();
   const { customerServiceNumber } = useSiteGlobalsContext();
   const { isModalOpen } = useModalContext();
-
+  const setCustomEventForSearchEntry = () => {
+    setFSCustomEvent(FS_EVENT_NAMES.SEARCH_ENTRY, {
+      isSearchOpen: true,
+    });
+  };
   useEffect(() => {
     if (isSearchOpen) {
       getPastSearches();
       setShowLoading(false);
+      setCustomEventForSearchEntry();
     }
   }, [isSearchOpen, getPastSearches]);
 

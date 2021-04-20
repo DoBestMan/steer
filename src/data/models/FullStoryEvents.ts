@@ -2,6 +2,9 @@ export interface LOCATION_POPUP {
   Allow: boolean;
   'Dont Allow': boolean;
 }
+export interface SEARCH_ENTRY {
+  isSearchOpen: boolean;
+}
 export interface SIMPLESNAP {
   allow?: boolean;
   apiResponse?: Record<string, string>;
@@ -17,4 +20,8 @@ export interface SIMPLESNAP {
 export interface SEARCH_BY_BOARD {
   searchItem: string;
 }
-export type FS_EVENT_PROPERTIES = LOCATION_POPUP | SIMPLESNAP | SEARCH_BY_BOARD;
+export type FS_EVENT_PROPERTIES =
+  | LOCATION_POPUP
+  | SIMPLESNAP
+  | SEARCH_BY_BOARD
+  | SEARCH_ENTRY;
