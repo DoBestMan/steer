@@ -175,13 +175,12 @@ export function useFiltersContextSetup({
         }
 
         // value exists, remove it
-        const valArr = filters[key].split(',');
-        const filteredVals = valArr.filter((v) => v !== value);
+        const valArr = value.split(',');
+        const filArr = filters[key].split(',');
+        const fnlValArr = filArr.filter((val) => !valArr.includes(val));
+        const filteredVals = fnlValArr;
         const newVal = filteredVals.join(',');
-
-        // set newly modified value
         filters[key] = newVal;
-        return;
       });
 
       const filterRequest = isRangeFilter
