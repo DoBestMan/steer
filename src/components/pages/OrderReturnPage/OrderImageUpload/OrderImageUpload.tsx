@@ -119,7 +119,7 @@ function OrderImageUpload({
             {'Browse'}
             <input
               type="file"
-              accept=".jpg, .pdf"
+              accept=".jpg, .png"
               onChange={onUploadFile}
               css={{ display: 'none' }}
               disabled={maxImagesUploaded}
