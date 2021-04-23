@@ -5,8 +5,6 @@ import {
   CatalogApiArgs,
   CatalogPageData,
 } from '~/components/pages/CatalogPage/CatalogPage.types';
-import { shouldDisplayProductsError } from '~/components/pages/CatalogPage/CatalogPage.utils';
-import { STAGES } from '~/components/pages/CatalogPage/CatalogSummary/CatalogSummary.constants';
 import { useSiteNotificationsContext } from '~/context/SiteNotifications.context';
 import { SiteCatalogFilters } from '~/data/models/SiteCatalogFilters';
 import { SiteCatalogProductItem } from '~/data/models/SiteCatalogProductItem';
@@ -22,7 +20,6 @@ import { createContext } from '~/lib/utils/context';
 import { getParam, getStringifiedParams } from '~/lib/utils/routes';
 import { ui } from '~/lib/utils/ui-dictionary';
 
-import { useCatalogSummaryContext } from './CatalogSummary.context';
 import { useGlobalToastContext } from './GlobalToast.context';
 
 export interface CatalogProductsContextProps {
@@ -71,7 +68,6 @@ function useContextSetup({
 }: SetupProps) {
   const { setGlobalToastMessage } = useGlobalToastContext();
   const { query, push, pathname, asPath } = useRouter();
-  const { siteCatalogSummary, stage } = useCatalogSummaryContext();
   const { addNotification } = useSiteNotificationsContext();
 
   const [isAdvancedView, setIsAdvancedView] = useState(
@@ -122,7 +118,7 @@ function useContextSetup({
     newQuery.skipGroups = isAdvancedView + '';
   }
 
-  const { error: productsError, isValidating } = useApiDataWithDefault<
+  const { error: productsError } = useApiDataWithDefault<
     CatalogPageData['serverData']
   >({
     ...apiArgs,
@@ -220,18 +216,20 @@ function useContextSetup({
   if (productsError) {
     console.error(productsError);
   }
-  if (
-    stage === STAGES.RESULTS &&
-    shouldDisplayProductsError(siteCatalogSummary) &&
-    !productsData &&
-    !isValidating
-  ) {
-    throw new Error(
-      productsError
-        ? productsError.message
-        : 'An error occurred while fetching products',
-    );
-  }
+  //Need to handle this in new ticket. /keeping the code commented.
+  // if (
+  //   stage === STAGES.RESULTS &&
+  //   shouldDisplayProductsError(siteCatalogSummary) &&
+  //   !productsData &&
+  //   !isValidating
+  // ) {
+  //   TODO handle 500 erros.
+  //   throw new Error(
+  //     productsError
+  //       ? productsError.message
+  //       : 'An error occurred while fetching products',
+  //   );
+  // }
 
   const scrollToGrid = useCallback(() => {
     if (catalogGridRef && catalogGridRef.current) {
