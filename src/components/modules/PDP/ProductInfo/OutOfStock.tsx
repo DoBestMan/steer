@@ -1,3 +1,5 @@
+import React from 'react';
+
 import Button from '~/components/global/Button/Button';
 import BaseLink from '~/components/global/Link/BaseLink';
 import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';

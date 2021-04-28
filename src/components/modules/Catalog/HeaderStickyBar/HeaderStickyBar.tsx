@@ -1,4 +1,4 @@
-import { useTheme } from 'emotion-theming';
+import { useTheme } from '@emotion/react';
 import { ReactNode } from 'react';
 
 import styles from './HeaderStickyBar.styles';
@@ -8,7 +8,8 @@ interface Props {
 }
 
 export default function HeaderStickyBar({ children }: Props) {
-  const { header } = useTheme();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { header }: any = useTheme();
 
   return <div css={[styles.root, header.background]}>{children}</div>;
 }

@@ -44,9 +44,11 @@ describe('IconOrImage', () => {
         <img
           alt="150x150 image"
           class="ImageTag"
+          height="200"
           loading="lazy"
           src="https://via.placeholder.com/150"
           srcset="https://via.placeholder.com/150 "
+          width="200"
         />
       </div>
     `);

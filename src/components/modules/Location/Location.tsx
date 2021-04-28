@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import Autocomplete from '~/components/global/Autocomplete/Autocomplete';
 import { AutocompleteResult } from '~/components/global/Autocomplete/AutocompleteResultItem';

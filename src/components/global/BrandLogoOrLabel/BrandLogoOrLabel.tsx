@@ -1,3 +1,5 @@
+import React from 'react';
+
 import Image from '~/components/global/Image/Image';
 import { SiteCatalogBrand } from '~/data/models/SiteCatalogBrand';
 import { SiteImageExtended } from '~/data/models/SiteImageExtended';

@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { SiteCatalogFilterRange } from '~/data/models/SiteCatalogFilterRange';
 import { SiteCatalogProducts } from '~/data/models/SiteCatalogProducts';
 import { useBreakpoints } from '~/hooks/useBreakpoints';

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ReactIdSwiperChildren, SwiperInstance } from 'react-id-swiper';
 
 import Carousel from '~/components/global/Carousel/CarouselDynamic';

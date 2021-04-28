@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import React, { memo } from 'react';
 
 import CopyCheckbox from '~/components/global/Checkbox/CopyCheckbox';
 import Markdown from '~/components/global/Markdown/Markdown';

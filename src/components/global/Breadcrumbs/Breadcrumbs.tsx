@@ -1,3 +1,4 @@
+import React from 'react';
 import { BreadcrumbList } from 'schema-dts';
 
 import Carousel from '~/components/global/Carousel/Carousel';

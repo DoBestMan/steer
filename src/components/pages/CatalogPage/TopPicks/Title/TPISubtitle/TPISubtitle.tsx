@@ -1,3 +1,5 @@
+import React from 'react';
+
 interface Props {
   basicHeader?: string | null;
   viewMoreDataHeader?: string | null;

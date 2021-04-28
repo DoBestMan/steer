@@ -1,6 +1,6 @@
 import { action } from '@storybook/addon-actions';
 import { boolean, number } from '@storybook/addon-knobs';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Button from '~/components/global/Button/Button';
 import HorizontalNumberPickerWithControls from '~/components/global/HorizontalNumberPicker/HorizontalNumberPickerWithControls';

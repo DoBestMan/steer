@@ -1,8 +1,9 @@
-import { useTheme } from 'emotion-theming';
+import { useTheme } from '@emotion/react';
 
 import styles from './Header.styles';
 
 export default function HeaderBackground() {
-  const { header } = useTheme();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { header }: any = useTheme();
   return <div css={[styles.headerContainer, header.background]}></div>;
 }

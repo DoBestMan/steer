@@ -1,4 +1,4 @@
-import { css } from '@emotion/core';
+import { css } from '@emotion/react';
 
 import { feedbackify } from '~/styles/document/feedbackify.styles';
 import { fonts, globalFont } from '~/styles/document/fonts.styles';

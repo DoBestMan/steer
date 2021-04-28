@@ -1,5 +1,4 @@
 import { ReactChild } from 'react';
-// import { ReactMarkdownProps } from 'react-markdown';
 import { ReactMarkdownProps } from 'react-markdown';
 import ReactMarkdownWithHtml from 'react-markdown/with-html';
 

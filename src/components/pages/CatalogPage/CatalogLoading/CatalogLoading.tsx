@@ -1,3 +1,5 @@
+import React from 'react';
+
 import FilterButton from '~/components/global/Button/FilterButton';
 import Carousel from '~/components/global/Carousel/CarouselDynamic';
 import FiltersCarousel from '~/components/global/FiltersCarousel/FiltersCarousel';

@@ -1,3 +1,5 @@
+import React from 'react';
+
 import Accordion, {
   AccordionItem,
 } from '~/components/global/Accordion/Accordion';

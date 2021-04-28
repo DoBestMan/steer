@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import FeaturedGridWithSteps from '~/components/global/FeaturedGridWithSteps/FeaturedGridWithSteps';
 import Grid from '~/components/global/Grid/Grid';

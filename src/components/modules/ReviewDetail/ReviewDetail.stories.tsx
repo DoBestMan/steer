@@ -1,3 +1,5 @@
+import React from 'react';
+
 import Button from '~/components/global/Button/Button';
 import { reviewDetailMock } from '~/components/modules/ReviewDetail/ReviewDetail.mock';
 import Reviews from '~/components/modules/ReviewDetail/Reviews/Reviews';

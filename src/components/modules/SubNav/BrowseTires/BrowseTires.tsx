@@ -1,3 +1,5 @@
+import React from 'react';
+
 import GridItem from '~/components/global/Grid/GridItem';
 import { SiteMenu } from '~/data/models/SiteMenu';
 

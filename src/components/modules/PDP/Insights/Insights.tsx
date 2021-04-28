@@ -73,7 +73,7 @@ function Insights({
 
   return (
     <div css={styles.root}>
-      <ul css={styles.container} {...rest}>
+      <ul css={styles.container}>
         {rebate && (
           <RenderItem>
             <button onClick={handleOpenRebate} aria-label={rebate.label}>

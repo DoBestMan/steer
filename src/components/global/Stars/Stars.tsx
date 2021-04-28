@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Icon from '~/components/global/Icon/Icon';
 import { ICON_SIZES, ICONS } from '~/components/global/Icon/Icon.constants';

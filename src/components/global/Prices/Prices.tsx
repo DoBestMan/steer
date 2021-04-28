@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { SitePrice } from '~/data/models/SitePrice';
 import { COLORS, CSSStylesProp } from '~/lib/constants';
 import { formatDollars } from '~/lib/utils/string';

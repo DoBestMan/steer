@@ -1,5 +1,5 @@
-import { useTheme } from 'emotion-theming';
-import { ReactElement, useEffect, useMemo, useRef } from 'react';
+import { useTheme } from '@emotion/react';
+import React, { ReactElement, useEffect, useMemo, useRef } from 'react';
 
 import FilterButton from '~/components/global/Button/FilterButton';
 import FilterButtonToggle from '~/components/global/Button/FilterButtonToggle';
@@ -38,7 +38,8 @@ export default function FilterButtonsCarousel({
     selectingFilter,
   } = useFiltersContext();
   const { isLoading } = useCatalogProductsContext();
-  const { header } = useTheme();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { header }: any = useTheme();
   const isPopularDropdownOpen = selectingFilter === POPULAR_ID;
   const isPopularActive = popularFilters.some((filter) => {
     if (filter.type === FilterContentTypes.SiteCatalogFilterToggle) {

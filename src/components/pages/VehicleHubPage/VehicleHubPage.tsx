@@ -1,3 +1,5 @@
+import React from 'react';
+
 import BreadcrumbsComponent, {
   BreadcrumbsItem,
 } from '~/components/global/Breadcrumbs/Breadcrumbs';

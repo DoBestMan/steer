@@ -1,3 +1,5 @@
+import React from 'react';
+
 import Card from '~/components/global/Card/Card';
 import ListCard from '~/components/global/Card/ListCard';
 import GridItem from '~/components/global/Grid/GridItem';

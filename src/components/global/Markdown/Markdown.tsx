@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-import { ReactChild } from 'react';
+import React, { ReactChild } from 'react';
 import { ReactMarkdownProps } from 'react-markdown';
 
 import { styles } from './Markdown.styles';

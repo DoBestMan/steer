@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import { ContentModalProps } from '~/components/global/Modal/Modal.types';
 import { PromoTagProps } from '~/components/global/PromoTag/PromoTag';

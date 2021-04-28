@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 
 import Button from '~/components/global/Button/Button';
 import FeaturedInfoModule from '~/components/global/FeaturedInfoModule/FeaturedInfoModule';

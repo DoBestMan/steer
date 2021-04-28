@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import Grid from '~/components/global/Grid/Grid';
 import PromotionCardCarousel from '~/components/global/PromotionCardCarousel/PromotionCardCarousel';

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
 import { SiteCatalogBrand } from '~/data/models/SiteCatalogBrand';

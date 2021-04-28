@@ -1,3 +1,5 @@
+import React from 'react';
+
 import placeholders from '~/styles/placeholders';
 
 import Carousel from '../Carousel/CarouselDynamic';

@@ -1,6 +1,6 @@
-import { ThemeProvider } from 'emotion-theming';
+import { ThemeProvider } from '@emotion/react';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import { useSearchModalContext } from '~/components/modules/Search/SearchModal.context';
 import { useCatalogProductsContext } from '~/context/CatalogProducts.context';

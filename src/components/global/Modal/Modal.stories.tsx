@@ -1,5 +1,5 @@
+import { ThemeProvider, useTheme } from '@emotion/react';
 import { boolean, select } from '@storybook/addon-knobs';
-import { ThemeProvider, useTheme } from 'emotion-theming';
 import { useState } from 'react';
 
 import { defaultTheme } from '~/components/pages/CatalogPage/CatalogPage.theme';
@@ -335,7 +335,8 @@ export function FullscreenModalWithCustomClose() {
 }
 
 function TireSizeConfirmModalContent() {
-  const { message } = useTheme();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { message }: any = useTheme();
 
   const [isOpen, setIsOpen] = useState(false);
 

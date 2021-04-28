@@ -1,3 +1,5 @@
+import React from 'react';
+
 import ProductGroupList from '~/components/global/ProductGroupList/ProductGroupList';
 import ProductGroupListPlaceholder from '~/components/global/ProductGroupList/ProductGroupListPlaceholder';
 import { addHashForScroll } from '~/components/pages/CatalogPage/CatalogPage.helpers';

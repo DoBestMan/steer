@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import Breadcrumbs from '~/components/global/Breadcrumbs/Breadcrumbs';
 import DataStructure from '~/components/global/DataStructure/DataStructure';
@@ -45,7 +45,11 @@ const DynamicPDPStickyBar = dynamic(() =>
 );
 
 function ProductDetail({ serverData }: ProductDetailData) {
+  const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
+  const stickyBarAvoidSection = useRef<HTMLDivElement>(null);
+  const stickyBarDarkSection = useRef<HTMLDivElement>(null);
   const { isMobile } = useBreakpoints();
+  const { openStaticModal, openDynamicModal } = useModalContext();
   const {
     anchorList,
     breadcrumbs,
@@ -67,8 +71,6 @@ function ProductDetail({ serverData }: ProductDetailData) {
   } = useProductDetail({
     serverData,
   });
-
-  const { openStaticModal, openDynamicModal } = useModalContext();
   const {
     positionCuration0,
     positionCuration1,
@@ -77,10 +79,6 @@ function ProductDetail({ serverData }: ProductDetailData) {
     isPLA,
     hasRecirculation: isPLA && recirculation && recirculation.length > 0,
   });
-  const stickyBarAvoidSection = useRef<HTMLDivElement>(null);
-  const stickyBarDarkSection = useRef<HTMLDivElement>(null);
-
-  const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
 
   function reloadPageIfPersisted({ persisted }: { persisted: boolean }) {
     if (persisted) {

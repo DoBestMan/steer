@@ -1,4 +1,4 @@
-import { ReactType, useRef, useState } from 'react';
+import React, { ReactType, useRef, useState } from 'react';
 
 import Link from '~/components/global/Link/Link';
 import { SiteImageExtended } from '~/data/models/SiteImageExtended';
@@ -124,6 +124,8 @@ function Image({
         sizes={sizes ? sizes : undefined}
         src={finalSrc ? finalSrc : src}
         srcSet={finalSrcSet ? finalSrcSet : (srcSet as string)}
+        width={200}
+        height={200}
         alt={altText}
         loading={loading}
         onLoad={handleImageLoad}

@@ -79,6 +79,8 @@ function Search({
 }: Props) {
   const router = useRouter();
 
+  // TODO: React Hook useCallback received a function whose dependencies are unknown. Pass an inline function instead
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const delayedSearch = useCallback(
     debounce(({ queryText, queryType }) => {
       onSearchQuery({ queryText, queryType });

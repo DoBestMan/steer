@@ -9,7 +9,9 @@ import { useBaseLinkProps } from './BaseLink.hooks';
 
 // Mock of next/link to make sure we're passing the proper
 // `as` and `prefetch` values
-jest.mock('next/link', () => {
+jest.doMock('next/link', () => {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const React = require('react');
   return function MockNextLink({
     children,
     prefetch,
@@ -31,11 +33,11 @@ describe('BaseLink', () => {
     );
 
     expect(container.firstChild).toMatchInlineSnapshot(`
-      <div>
-        <a>
-          Click here
-        </a>
-      </div>
+      <a
+        href="/brands"
+      >
+        Click here
+      </a>
     `);
   });
 
@@ -47,17 +49,13 @@ describe('BaseLink', () => {
     );
 
     expect(container.firstChild).toMatchInlineSnapshot(`
-      <div
-        data-test-prefetch="false"
+      <a
+        href="/tire-brands"
+        rel="noopener noreferrer"
+        target="_blank"
       >
-        <a
-          href="/tire-brands"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          Click here
-        </a>
-      </div>
+        Click here
+      </a>
     `);
   });
 
@@ -67,15 +65,11 @@ describe('BaseLink', () => {
     );
 
     expect(container.firstChild).toMatchInlineSnapshot(`
-      <div
-        data-test-prefetch="false"
+      <a
+        href="http://www.google.com"
       >
-        <a
-          href="http://www.google.com"
-        >
-          Click here
-        </a>
-      </div>
+        Click here
+      </a>
     `);
   });
 
@@ -87,17 +81,13 @@ describe('BaseLink', () => {
     );
 
     expect(container.firstChild).toMatchInlineSnapshot(`
-      <div
-        data-test-prefetch="false"
+      <a
+        href="http://www.google.com"
+        rel="noopener noreferrer"
+        target="_blank"
       >
-        <a
-          href="http://www.google.com"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          Click here
-        </a>
-      </div>
+        Click here
+      </a>
     `);
   });
 
@@ -107,15 +97,11 @@ describe('BaseLink', () => {
     );
 
     expect(container.firstChild).toMatchInlineSnapshot(`
-      <div
-        data-test-prefetch="false"
+      <a
+        href="mailto:sarah@mogin.com"
       >
-        <a
-          href="mailto:sarah@mogin.com"
-        >
-          Click here
-        </a>
-      </div>
+        Click here
+      </a>
     `);
   });
 
@@ -125,15 +111,11 @@ describe('BaseLink', () => {
     );
 
     expect(container.firstChild).toMatchInlineSnapshot(`
-      <div
-        data-test-prefetch="false"
+      <a
+        href="tel:1234567890"
       >
-        <a
-          href="tel:1234567890"
-        >
-          Click here
-        </a>
-      </div>
+        Click here
+      </a>
     `);
   });
 });

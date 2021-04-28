@@ -13,6 +13,32 @@ module.exports = withBundleAnalyzer({
     SHOW_FEEDBACK_TAB: process.env.SHOW_FEEDBACK_TAB,
     VERCEL_GITHUB_COMMIT_REF: process.env.VERCEL_GITHUB_COMMIT_REF,
   },
+  future: {
+    webpack5: true,
+  },
+  async headers() {
+    return [
+      {
+        source: '/static/fonts/',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000',
+          },
+        ],
+      },
+    ];
+  },
+  images: {
+    domains: [
+      'via.placeholder.com',
+      'simpletire.s3.amazonaws.com',
+      'steer-api-definition.now.sh',
+      'i.pravatar.cc',
+      'images.simpletire.com',
+      'picsum.photos',
+    ],
+  },
   webpack: (config, { webpack }) => {
     config.module.rules.push({
       issuer: /\.(js|ts)x?$/,
@@ -40,18 +66,5 @@ module.exports = withBundleAnalyzer({
     config.resolve.alias['~'] = path.resolve(__dirname + '/src');
 
     return config;
-  },
-  async headers() {
-    return [
-      {
-        source: '/static/fonts/',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000',
-          },
-        ],
-      },
-    ];
   },
 });

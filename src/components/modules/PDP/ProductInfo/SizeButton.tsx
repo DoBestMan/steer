@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import Dropdown from '~/components/global/Dropdown/Dropdown';
 import Icon from '~/components/global/Icon/Icon';

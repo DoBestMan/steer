@@ -130,7 +130,7 @@ function BrandTirePage({
         </div>
       )}
       {deals && (
-        <>
+        <Fragment>
           <ModuleMarkdown
             body={'<h2>Promotions</h2>'}
             type={'SiteModuleMarkdown'}
@@ -154,7 +154,7 @@ function BrandTirePage({
               </div>
             </GridItem>
           </Grid>
-        </>
+        </Fragment>
       )}
       <div css={styles.linkSection}>
         {linkList &&

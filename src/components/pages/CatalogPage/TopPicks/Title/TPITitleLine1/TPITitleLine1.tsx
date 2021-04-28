@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { TopPickItemsHeader } from '../../TopPicksItem/TopPicksItems.types';
 
 interface Props {

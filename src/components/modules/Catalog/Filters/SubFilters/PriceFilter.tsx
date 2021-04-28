@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import Link from '~/components/global/Link/Link';
 import Range from '~/components/global/Range/Range';

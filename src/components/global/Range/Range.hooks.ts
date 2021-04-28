@@ -39,6 +39,9 @@ function useRangeSliderManager({
   const railWidth = useRef<number>(0);
   const valueNow = useRef<number>(value || defaultValue);
   const { width } = useWindowSize();
+  // TODO: The 'handlerProps' object makes the dependencies of useEffect Hook (at line 68) change on every render.
+  // To fix this, wrap the initialization of 'handlerProps' in its own useMemo() Hook.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const handlerProps = {
     ...rest,
     maxEl,

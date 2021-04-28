@@ -1,3 +1,5 @@
+import React from 'react';
+
 import Carousel from '~/components/global/Carousel/Carousel';
 import { useSiteNotificationsContext } from '~/context/SiteNotifications.context';
 import { CSSStylesProp } from '~/lib/constants';

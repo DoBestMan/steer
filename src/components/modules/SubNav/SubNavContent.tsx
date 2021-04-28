@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { SiteMenu } from '~/data/models/SiteMenu';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 

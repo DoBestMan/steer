@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 
 import Meta from '~/components/global/Meta/Meta';
 import { useSearchModalContext } from '~/components/modules/Search/SearchModal.context';
@@ -34,10 +34,10 @@ function CatalogPageContainer({
   searchByParams,
   isSearchForTireSize,
 }: Props) {
+  const catalogGridRef = useRef<HTMLDivElement | null>(null);
   const { query } = useRouter();
   const { isSearchOpen } = useSearchModalContext();
   const meta = mapDataToMeta({ searchBy, searchByParams });
-  const catalogGridRef = useRef<HTMLDivElement | null>(null);
 
   // begin fetching data from /summary and /products
   const queryParams = getStringifiedParams({

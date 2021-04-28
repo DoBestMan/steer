@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { THEME } from '~/lib/constants/theme';
 import { hasIntersectionObserver, isBrowser } from '~/lib/utils/browser';

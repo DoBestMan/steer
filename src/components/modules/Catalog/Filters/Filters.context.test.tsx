@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { renderHook } from '@testing-library/react-hooks';
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import { act } from 'react-test-renderer';
 
 import { emptyCatalogProductsMock } from '~/components/pages/CatalogPage/CatalogPage.mock';

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import Dropdown from '~/components/global/Dropdown/Dropdown';
 import FilterSort from '~/components/global/FilterSort/FilterSort';

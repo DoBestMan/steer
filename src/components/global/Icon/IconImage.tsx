@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { ICON_SPRITE_STACK_URL } from '~/lib/constants/icon-name';
 import { THEME } from '~/lib/constants/theme';
 

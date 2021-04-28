@@ -1,3 +1,5 @@
+import React from 'react';
+
 import Icon from '~/components/global/Icon/Icon';
 import { Icon as IconType } from '~/components/global/Icon/Icon.types';
 import Link from '~/components/global/Link/Link';

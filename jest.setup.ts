@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/ban-ts-ignore */
+/* eslint-disable */
 
 import '@testing-library/jest-dom/extend-expect';
 
@@ -11,6 +11,7 @@ global.IntersectionObserver = jest.fn(function () {
   this.disconnect = jest.fn();
 });
 
+// @ts-ignore
 global.scroll = jest.fn();
 
 // Access Response/FetchError objects in tests

@@ -1,5 +1,6 @@
 import './mockNextRouter';
 
+import React from 'react';
 import { Global } from '@emotion/core';
 import { withA11y } from '@storybook/addon-a11y';
 import { withKnobs } from '@storybook/addon-knobs';

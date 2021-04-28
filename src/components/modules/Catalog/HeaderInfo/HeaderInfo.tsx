@@ -1,4 +1,4 @@
-import { useTheme } from 'emotion-theming';
+import { useTheme } from '@emotion/react';
 import React, { ReactNode, useState } from 'react';
 
 import Link from '~/components/global/Link/Link';
@@ -35,7 +35,8 @@ export default function HeaderInfo({
   function toggleLocation() {
     setIsLocationModalOpen(!isLocationModalOpen);
   }
-  const { header } = useTheme();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { header }: any = useTheme();
 
   const infoStyles = [styles.info];
 

@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { InterpolationType, UIData, UIType } from './ui-dictionary.common';
 
 function interpolationJSXFn(

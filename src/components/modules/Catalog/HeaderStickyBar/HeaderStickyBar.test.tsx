@@ -10,7 +10,7 @@ import * as fetch from '~/lib/fetch';
 
 import HeaderStickyBar from './HeaderStickyBar';
 
-jest.mock('emotion-theming', () => ({
+jest.mock('@emotion/react', () => ({
   useTheme: () => ({ header: {} }),
 }));
 

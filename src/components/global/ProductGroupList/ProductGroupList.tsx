@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import Carousel from '~/components/global/Carousel/Carousel';
 import Grid from '~/components/global/Grid/Grid';

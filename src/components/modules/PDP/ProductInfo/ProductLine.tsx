@@ -1,3 +1,5 @@
+import React from 'react';
+
 import BrandLogoOrLabel from '~/components/global/BrandLogoOrLabel/BrandLogoOrLabel';
 import { LOADING_OPTIONS, PRODUCT } from '~/lib/constants';
 

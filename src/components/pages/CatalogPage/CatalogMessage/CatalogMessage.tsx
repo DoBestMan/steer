@@ -1,6 +1,6 @@
-import { useTheme } from 'emotion-theming';
+import { useTheme } from '@emotion/react';
 import { useRouter } from 'next/router';
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Transition } from 'react-transition-group';
 import { TransitionStatus } from 'react-transition-group/Transition';
 
@@ -44,7 +44,8 @@ export function DataMomentMessage({
   siteCatalogSummaryPrompt,
   openStaticModal,
 }: DataMomentMessageProps) {
-  const { message } = useTheme();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { message }: any = useTheme();
   const { asPath } = useRouter();
 
   const { selectVehicle } = useUserPersonalizationContext();

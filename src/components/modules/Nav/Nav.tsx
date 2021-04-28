@@ -1,4 +1,4 @@
-import { useTheme } from 'emotion-theming';
+import { useTheme } from '@emotion/react';
 import { Transition } from 'react-transition-group';
 import { TransitionStatus } from 'react-transition-group/Transition';
 
@@ -16,7 +16,6 @@ import { layout } from '~/styles/layout.styles';
 
 import { useSearchModalContext } from '../Search/SearchModal.context';
 import { animations, styles } from './Nav.styles';
-import { NavThemeObject } from './Nav.theme';
 import NavBar from './NavBar';
 import ShopTiresBy from './ShopTiresBy/ShopTiresBy';
 
@@ -31,7 +30,8 @@ function Nav({ isHomepage, isPLA }: Props) {
   const { isVisible, toggleSubNav, createSelectLinkHandler } = useNavContext();
 
   const { toggleIsSearchOpen } = useSearchModalContext();
-  const theme: NavThemeObject = useTheme();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const theme: any = useTheme();
   const { searchQuery, setSearchState } = useSearchContext();
   const { isMobile } = useSiteGlobalsContext();
 

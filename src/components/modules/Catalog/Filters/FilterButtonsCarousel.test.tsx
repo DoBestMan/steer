@@ -33,7 +33,7 @@ jest.mock('next/router', () => ({
   })),
 }));
 
-jest.mock('emotion-theming', () => ({
+jest.mock('@emotion/react', () => ({
   useTheme: () => ({ header: {} }),
 }));
 

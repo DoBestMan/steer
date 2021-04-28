@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 
 import NotificationList from '~/components/global/NotificationBanner/NotificationList';
 import HeaderContainer from '~/components/modules/Catalog/Header.container';

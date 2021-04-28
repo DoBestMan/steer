@@ -1,3 +1,5 @@
+import React from 'react';
+
 import Link from '~/components/global/Link/Link';
 import { SiteCatalogSummaryTopPickItemAdditionalInfo } from '~/data/models/SiteCatalogSummaryTopPickItemAdditionalInfo';
 import { LINK_THEME, THEME } from '~/lib/constants';

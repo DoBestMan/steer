@@ -1,3 +1,5 @@
+import React from 'react';
+
 import FeaturedInfoModule from '~/components/global/FeaturedInfoModule/FeaturedInfoModule';
 import GridItem from '~/components/global/Grid/GridItem';
 import { useBreakpoints } from '~/hooks/useBreakpoints';

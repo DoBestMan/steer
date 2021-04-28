@@ -1,3 +1,5 @@
+import React from 'react';
+
 import Button from '~/components/global/Button/Button';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';

@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import React, { Fragment, useState } from 'react';
 
 import FilterButton from '~/components/global/Button/FilterButton';
 import FiltersCarousel from '~/components/global/FiltersCarousel/FiltersCarousel';

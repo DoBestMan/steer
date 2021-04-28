@@ -32,7 +32,7 @@ jest.mock('focus-trap', () => {
   return () => trap;
 });
 
-jest.mock('emotion-theming', () => ({
+jest.mock('@emotion/react', () => ({
   useTheme: () => ({ header: {} }),
 }));
 

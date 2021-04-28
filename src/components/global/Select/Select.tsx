@@ -47,6 +47,9 @@ function Select(props: Props) {
     ...rest
   } = props;
   const { hasError, errorMessage } = error;
+  // TODO: The 'defaultOption' object makes the dependencies of useCallback Hook (at line 158) change on every render.
+  // To fix this, wrap the initialization of 'defaultOption' in its own useMemo() Hook.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const defaultOption: SelectOption = {
     value: '',
     text: placeholder,

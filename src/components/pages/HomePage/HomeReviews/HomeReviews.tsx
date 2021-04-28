@@ -1,3 +1,5 @@
+import React from 'react';
+
 import GridItem from '~/components/global/Grid/GridItem';
 import Link from '~/components/global/Link/Link';
 import { SiteReviews } from '~/data/models/SiteReviews';

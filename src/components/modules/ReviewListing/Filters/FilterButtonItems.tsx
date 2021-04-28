@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import React, { Fragment } from 'react';
 
 import FilterButton from '~/components/global/Button/FilterButton';
 import Icon from '~/components/global/Icon/Icon';

@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Link from '~/components/global/Link/Link';
 import NavLink from '~/components/global/Link/NavLink';

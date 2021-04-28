@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import React, { Fragment } from 'react';
 
 import BaseLink from '~/components/global/Link/BaseLink';
 import TitleSelectorLabel from '~/components/global/TitleSelectorLabel/TitleSelectorLabel';

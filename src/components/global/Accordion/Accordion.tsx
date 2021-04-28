@@ -48,23 +48,24 @@ function Accordion({
   linkTarget = '_blank',
   theme = THEME.DARK,
 }: AccordionProps) {
-  const [shouldShowAll, setShouldShowAll] = useState(
-    parseShouldShowAll({ items, itemsToShow }),
-  );
-  const showAllLabel = itemsToShowLabel
-    ? ui(itemsToShowLabel, {
-        total: items.length.toString(),
-      })
-    : undefined;
-
   const { expandedItems, itemsRefs, toggleItemHandler } = useAccordion({
     items,
     singleItemExpandable,
   });
 
+  const [shouldShowAll, setShouldShowAll] = useState(
+    parseShouldShowAll({ items, itemsToShow }),
+  );
+
   const showAllHandler = useCallback(() => {
     setShouldShowAll(true);
   }, [setShouldShowAll]);
+
+  const showAllLabel = itemsToShowLabel
+    ? ui(itemsToShowLabel, {
+        total: items.length.toString(),
+      })
+    : undefined;
 
   useEffect(() => {
     setShouldShowAll(parseShouldShowAll({ items, itemsToShow }));

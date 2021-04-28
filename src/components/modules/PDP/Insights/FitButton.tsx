@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import { Icon as IconType } from '~/components/global/Icon/Icon.types';

@@ -1,4 +1,4 @@
-import { ThemeProvider } from 'emotion-theming';
+import { ThemeProvider } from '@emotion/react';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { CookiesProvider } from 'react-cookie';

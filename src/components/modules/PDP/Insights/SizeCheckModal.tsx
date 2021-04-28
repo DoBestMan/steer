@@ -1,3 +1,5 @@
+import React from 'react';
+
 import FeaturedInfoModule from '~/components/global/FeaturedInfoModule/FeaturedInfoModule';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Link from '~/components/global/Link/Link';

@@ -1,3 +1,5 @@
+import React from 'react';
+
 import Prices from '~/components/global/Prices/Prices';
 import { formatDollars } from '~/lib/utils/string';
 import { ui } from '~/lib/utils/ui-dictionary';
