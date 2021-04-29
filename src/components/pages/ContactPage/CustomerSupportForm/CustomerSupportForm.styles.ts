@@ -50,6 +50,11 @@ const styles: StylesMap = {
   relative: {
     position: 'relative',
   },
+  subjectBG: {
+    backgroundColor: COLORS.LIGHT.GRAY_10,
+    borderRadius: SPACING.SIZE_15,
+    padding: SPACING.SIZE_20,
+  },
   subjectTitle: [
     typography.tertiaryHeadline,
     {

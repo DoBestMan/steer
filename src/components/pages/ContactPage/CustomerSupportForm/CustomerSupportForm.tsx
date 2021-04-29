@@ -231,25 +231,27 @@ function SendMessageForm({ selections }: Props) {
               />
             </div>
           </fieldset>
-          <fieldset css={styles.group}>
-            <h3 css={styles.subjectTitle}>
-              {ui('contactPage.message.subject.subject')}
-            </h3>
-            <div css={styles.radioGroup}>
-              {selections.map(({ label, value }) => {
-                return (
-                  <TitleRadio
-                    activeValue={formValues[FIELDS.SUBJECT] as string}
-                    label={label}
-                    name="subject"
-                    onChange={handleSetFormFieldValue(FIELDS.SUBJECT)}
-                    value={value}
-                    key={value}
-                  />
-                );
-              })}
-            </div>
-          </fieldset>
+          <div css={styles.subjectBG}>
+            <fieldset css={styles.group}>
+              <h3 css={styles.subjectTitle}>
+                {ui('contactPage.message.subject.subject')}
+              </h3>
+              <div css={styles.radioGroup}>
+                {selections.map(({ label, value }) => {
+                  return (
+                    <TitleRadio
+                      activeValue={formValues[FIELDS.SUBJECT] as string}
+                      label={label}
+                      name="subject"
+                      onChange={handleSetFormFieldValue(FIELDS.SUBJECT)}
+                      value={value}
+                      key={value}
+                    />
+                  );
+                })}
+              </div>
+            </fieldset>
+          </div>
           <fieldset css={styles.group}>
             <label htmlFor="message" css={styles.label}>
               {ui('contactPage.message.messageTitle')}
