@@ -1,16 +1,26 @@
 # PR Guidelines
 
+## Branch Strategy
+
+- Use **master** as the base branch to create a feature branch
+- Use JIRA ticket number as branch name
+- If the ticket has both service and frontend changes, user feature-[ticket number] as branch name
+
 ## Commit Message
 
 - Use active voice
-- Include JIRA ticket number in brackets
+- Include JIRA ticket number followed by a colon
+
+```
+WCS-123: Implement PDP header
+```
 
 ## Squash and Merge
 
 If you Squash and Merge your PR, be sure that the final commit has the PR number in the title (GitHub will automatically do this for you):
 
 ```
-[WCS-123] Implement PDP header (#456)
+WCS-123: Implement PDP header (#456)
 ```
 
 Before squashing, please remove (preferred) or consolidate the automatically generated PR description. A consolidated description can be in simple bullet format:
@@ -25,9 +35,9 @@ Before squashing, please remove (preferred) or consolidate the automatically gen
 If you Rebase and Merge your PR, each commit should follow proper formatting:
 
 ```
-[WCS-789] Define Catalog endpoints
-[WCS-789] Wire up Catalog container
-[WCS-789] Implement Catalog page styles
+WCS-789: Define Catalog endpoints
+WCS-789: Wire up Catalog container
+WCS-789: Implement Catalog page styles
 ```
 
 ## Merging PRs
@@ -54,7 +64,7 @@ If the base branch is still an open PR when you're done with your work, you may 
 - Use **human readable** titles on PRs, including JIRA tickets numbers:
 
 ```
-[WCS-123] Setup readme file
+WCS-123: Setup readme file
 ```
 
 - Give detailed description of what your PR addresses; use images, links, or videos to provide context

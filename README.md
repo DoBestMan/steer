@@ -15,7 +15,7 @@ Dependencies
 - [nvm](https://github.com/nvm-sh/nvm)
 - [yarn](https://classic.yarnpkg.com)
 
-Make sure you're a member of https://zeit.co/steer/steer . Ask Chris Vitale (chris.vitale@simpletire.com) or Arnaud Tanielian (tanielian@work.co) for access.
+Make sure you're a member of [https://vercel.com/steer/steer](https://vercel.com/steer/steer) . Ask Chris Vitale (chris.vitale@simpletire.com) or Arnaud Tanielian (tanielian@work.co) for access.
 
 First, make sure to install the correct version of node contained in `.nvmrc`.
 
@@ -45,7 +45,7 @@ vercel login
 Then, link your local project
 
 ```bash
-vercel
+vercel link
 ```
 
 You'll be asked a few questions, make sure to answer:
@@ -74,34 +74,34 @@ You're all set!
 
 ## Development
 
-As the project use Vercel env. variables, to start a local server:
+As the project use Next.js, we don't have to use `vercel dev` to start a local server as suggested [here](https://vercel.com/steer/steer), we can just use:
 
 ```bash
-vercel dev
+yarn dev
 ```
 
-By default, you'll run against the mock server.
+By default, you'll run against the mock server(https://steer-api-definition.now.sh/api).
 
 ### To run against a local server, `http://localhost:3000`:
 
 - Clone the `steer-api-definition` repo and follow the instructions to start a local server
 - Update this project's `.env` file's `STEER_BACKEND` value to `"local"`
-- Run `vercel dev` to start local development in this project (it will start on port 3001)
+- Run `vercel dev` instead of `yarn dev` to start local development in this project (it will start on port 3001 automatically since 3000 is used for api now)
 
 ### To run against the mock server:
 
 - Update this project's `.env` file's `STEER_BACKEND` value to `"mock"`
-- Run `vercel dev` to start local development in this project
+- Run `yarn dev` to start local development in this project
 
 ### To run against the integration server:
 
 - Update this project's `.env` file's `STEER_BACKEND` value to `"integration"`
-- Run `vercel dev` to start local development in this project
+- Run `yarn dev` to start local development in this project
 
 ### To run against a specific version of the integration server:
 
 - Update this project's `.env` file's `STEER_BACKEND` value to the name of the API feature branch (e.g. `sqa-424`).
-- Run `vercel dev` to start local development in this project
+- Run `yarn dev` to start local development in this project
 
 ## Other Scripts
 
@@ -199,8 +199,8 @@ If you need to add more cars, please:
 
 ## Deploying
 
-Every push generates a URL you can see online.
-But if you wish to deploy your local work on a preview link, at any time
+Every push in a feature branch generates a URL you can see online.
+But if you wish to deploy your local work on a preview link, at any time. remember to update this project's `.env` file's `STEER_BACKEND` value to `"integration"`, then
 
 ```bash
 vercel

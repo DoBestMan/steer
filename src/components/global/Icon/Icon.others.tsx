@@ -105,14 +105,12 @@ const Localbusiness = dynamic(
 const Mail = dynamic(() => import('~/assets/icons/others/mail.svg'), {
   ssr: false,
 });
-const Notification = dynamic(
-  () => import('~/assets/icons/others/notification.svg'),
-  {
-    ssr: false,
-  },
-);
 const Moneyback = dynamic(
   () => import('~/assets/icons/others/money-back.svg'),
+  { ssr: false },
+);
+const Notification = dynamic(
+  () => import('~/assets/icons/others/notification.svg'),
   { ssr: false },
 );
 const Performance = dynamic(
@@ -207,6 +205,10 @@ const Tipmechanic = dynamic(
 const Tire = dynamic(() => import('~/assets/icons/others/tire.svg'), {
   ssr: false,
 });
+const Tiretypessearch = dynamic(
+  () => import('~/assets/icons/others/tire-types-search.svg'),
+  { ssr: false },
+);
 const Tiretypeallterrain = dynamic(
   () => import('~/assets/icons/others/tiretype-all-terrain.svg'),
   { ssr: false },
@@ -277,10 +279,6 @@ const Tiretypeuhp = dynamic(
 );
 const Tiretypewinter = dynamic(
   () => import('~/assets/icons/others/tiretype-winter.svg'),
-  { ssr: false },
-);
-const Tiretypessearch = dynamic(
-  () => import('~/assets/icons/others/tire-types-search.svg'),
   { ssr: false },
 );
 const Trending = dynamic(() => import('~/assets/icons/others/trending.svg'), {
