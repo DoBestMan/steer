@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import Button from '~/components/global/Button/Button';
 import { CARS, CARS_KEYS } from '~/components/global/Car/CarDetails.constants';

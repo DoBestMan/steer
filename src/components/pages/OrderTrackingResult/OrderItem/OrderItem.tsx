@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import Button from '~/components/global/Button/Button';
 import Image from '~/components/global/Image/Image';

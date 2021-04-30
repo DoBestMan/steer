@@ -1,3 +1,5 @@
+import React from 'react';
+
 import Button from '~/components/global/Button/Button';
 import FeaturedInfoModule from '~/components/global/FeaturedInfoModule/FeaturedInfoModule';
 import HorizontalNumberPickerWithControls from '~/components/global/HorizontalNumberPicker/HorizontalNumberPickerWithControls';
