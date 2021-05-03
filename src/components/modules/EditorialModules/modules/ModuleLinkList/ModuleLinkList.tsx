@@ -5,7 +5,11 @@ import { styles } from '~/components/modules/EditorialModules/EditorialModules.s
 import { SiteModuleLinkList } from '~/data/models/SiteModules';
 
 function ModuleLinkList(props: SiteModuleLinkList) {
-  return (
+  return props.isColumn ? (
+    <div data-component="module-link-list">
+      <LinkList {...props} />
+    </div>
+  ) : (
     <div data-component="module-link-list">
       <Grid css={styles.spacingTopS40XL60}>
         <GridItem gridColumnL={'2/14'} gridColumnXL={'4/12'}>

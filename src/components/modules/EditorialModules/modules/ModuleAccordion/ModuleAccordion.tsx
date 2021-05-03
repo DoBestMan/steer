@@ -7,20 +7,26 @@ import { THEME } from '~/lib/constants';
 import { randomString } from '~/lib/utils/string';
 
 function ModuleAccordion(props: SiteModuleAccordion) {
-  return (
+  const accordion = (
+    <div
+      css={props.hasBottomBorder && styles.bottomBorder}
+      data-component="module-accordion-container"
+    >
+      <Accordion
+        {...props}
+        id={props.id ? props.id : randomString()}
+        theme={THEME.LIGHT}
+      />
+    </div>
+  );
+
+  return props.isColumn ? (
+    <div data-component="module-accordion">{accordion}</div>
+  ) : (
     <div data-component="module-accordion">
       <Grid css={styles.spacingTopS40XL60}>
         <GridItem gridColumnL={'2/14'} gridColumnXL={'4/12'}>
-          <div
-            css={props.hasBottomBorder && styles.bottomBorder}
-            data-component="module-accordion-container"
-          >
-            <Accordion
-              {...props}
-              id={props.id ? props.id : randomString()}
-              theme={THEME.LIGHT}
-            />
-          </div>
+          {accordion}
         </GridItem>
       </Grid>
     </div>

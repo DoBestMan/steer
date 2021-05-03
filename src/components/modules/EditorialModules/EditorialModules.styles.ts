@@ -1,4 +1,5 @@
 import { BORDERS, COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
+import { typography } from '~/styles/typography.styles';
 
 export const containerSpacing = {
   spacingBottomS50XL60: {
@@ -50,6 +51,37 @@ export const styles: StylesMap = {
       marginLeft: 0,
     },
   },
+  multiColumn2: {
+    ' > div': {
+      width: '50%',
+    },
+  },
+  multiColumn3: {
+    ' > div': {
+      width: '33.33%',
+    },
+  },
+  multiColumn4: {
+    ' > div': {
+      width: '25%',
+    },
+  },
+  multiColumnContainer: {
+    display: 'flex',
+    ' > div': {
+      paddingRight: SPACING.SIZE_30,
+      '&:last-child': {
+        paddingRight: 0,
+      },
+    },
+    h3: {
+      marginBottom: SPACING.SIZE_20,
+    },
+    h4: {
+      marginBottom: SPACING.SIZE_10,
+      marginTop: 0,
+    },
+  },
   reviewContainer: [
     containerSpacing.spacingTopS40XL60,
     {
@@ -73,4 +105,22 @@ export const styles: StylesMap = {
   spacingTopS20XL40: [containerSpacing.spacingTopS20XL40],
   spacingTopS40XL60: [containerSpacing.spacingTopS40XL60],
   spacingTopS60XL80: [containerSpacing.spacingTopS60XL80],
+  tab: [
+    typography.secondarySubhead,
+    {
+      color: COLORS.LIGHT.GRAY_70,
+      cursor: 'pointer',
+      display: 'inline-block',
+      marginBottom: SPACING.SIZE_15,
+      marginRight: SPACING.SIZE_20,
+      textTransform: 'uppercase',
+    },
+  ],
+  tabActive: {
+    color: COLORS.GLOBAL.BLACK,
+    borderBottom: BORDERS.SOLID_BLACK_1PX,
+  },
+  tabsContainer: {
+    borderBottom: BORDERS.SOLID_GRAY_20_1PX,
+  },
 };

@@ -5,7 +5,11 @@ import { styles } from '~/components/modules/EditorialModules/EditorialModules.s
 import { SiteModuleTextList } from '~/data/models/SiteModules';
 
 function ModuleTextList(props: SiteModuleTextList) {
-  return (
+  return props.isColumn ? (
+    <div data-component="module-text-list">
+      <TextBasedList {...props} />
+    </div>
+  ) : (
     <div data-component="module-text-list">
       <Grid css={styles.spacingTopS40XL60}>
         <GridItem gridColumnL={'2/14'} gridColumnXL={'4/12'}>

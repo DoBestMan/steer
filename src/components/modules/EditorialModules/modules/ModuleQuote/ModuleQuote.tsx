@@ -5,7 +5,11 @@ import { styles } from '~/components/modules/EditorialModules/EditorialModules.s
 import { SiteModuleQuote } from '~/data/models/SiteModules';
 
 function ModuleQuote(props: SiteModuleQuote) {
-  return (
+  return props.isColumn ? (
+    <div data-component="module-grid-item">
+      <Quote {...props} />
+    </div>
+  ) : (
     <div data-component="module-grid-item">
       <Grid css={styles.spacingTop20}>
         <GridItem gridColumnL={'2/14'} gridColumnXL={'4/12'}>

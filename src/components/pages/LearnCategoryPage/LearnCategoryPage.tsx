@@ -6,8 +6,8 @@ import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import Meta from '~/components/global/Meta/Meta';
 import EditorialHeaders from '~/components/modules/EditorialHeaders/EditorialHeaders';
+import EditorialModules from '~/components/modules/EditorialModules/EditorialModules';
 import ModuleAccordion from '~/components/modules/EditorialModules/modules/ModuleAccordion/ModuleAccordion';
-import ModuleMarkdown from '~/components/modules/EditorialModules/modules/ModuleMarkdown/ModuleMarkdown';
 import ModuleTireSearchBillboard from '~/components/modules/EditorialModules/modules/ModuleTireSearchBillboard/ModuleTireSearchBillboard';
 import { navigationPaddingTop } from '~/components/modules/Nav/Nav.styles';
 import { SitePageByLearnCategoryResponse } from '~/data/models/SitePageByLearnCategory';
@@ -18,7 +18,7 @@ import { convertQuickLinkToAccordionItem } from './mapper/accordionItems';
 import { mapQueryToBreadcrumbs } from './mapper/breadcrumbs';
 
 function LearnCategoryPage({
-  content,
+  modules,
   header,
   metadata,
   quickLinks,
@@ -28,6 +28,7 @@ function LearnCategoryPage({
   const pageLabel = metadata.meta.title
     ? metadata.meta.title
     : `${titleCaseSlug(`${query.slug}`)}`;
+
   return (
     <>
       <div css={[navigationPaddingTop, styles.spacingBottom40]}>
@@ -50,7 +51,15 @@ function LearnCategoryPage({
             type="SiteModuleAccordion"
           />
         )}
-        <ModuleMarkdown {...content} />
+        {modules &&
+          modules.length &&
+          modules.map((module, id) => (
+            <EditorialModules
+              key={`${module.type}_${id}`}
+              moduleData={module}
+              moduleType={module.type}
+            />
+          ))}
         <ModuleTireSearchBillboard />
       </div>
     </>

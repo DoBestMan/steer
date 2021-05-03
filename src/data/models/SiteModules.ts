@@ -22,6 +22,7 @@ import { SiteGraphicTile } from './SiteGraphicTile';
 
 export interface SiteModule {
   type: SiteModuleTypes;
+  isColumn?: boolean;
 }
 
 export interface SiteModuleAccordion extends SiteModule, AccordionProps {
@@ -31,6 +32,11 @@ export interface SiteModuleAccordion extends SiteModule, AccordionProps {
 export interface SiteModuleDataTableVertical
   extends DataTableProps,
     SiteModule {}
+
+export interface SiteModuleTabbedTable extends SiteModule {
+  tabs: string[];
+  tables: SiteModuleDataTableVertical[];
+}
 
 export interface SiteModuleArticleListWithFeatured
   extends ArticleListWithFeaturedProps,
@@ -64,6 +70,14 @@ export interface SiteModuleLinkList extends LinkListProps, SiteModule {}
 
 export interface SiteModuleMarkdown extends SiteModule {
   body: string;
+}
+
+export interface SiteModuleMultiColumn extends SiteModule {
+  columns: number;
+  column1: SiteModule[];
+  column2: SiteModule[];
+  column3?: SiteModule[];
+  column4?: SiteModule[];
 }
 
 export interface SiteModuleQuote extends QuoteProps, SiteModule {}

@@ -7,7 +7,11 @@ import { SiteModuleArticleListWithFeatured } from '~/data/models/SiteModules';
 function ModuleArticleListWithFeatured(
   props: SiteModuleArticleListWithFeatured,
 ) {
-  return (
+  return props.isColumn ? (
+    <div data-component="module-article-list-with-featured">
+      <ArticleListWithFeatured {...props} />
+    </div>
+  ) : (
     <div data-component="module-article-list-with-featured">
       <Grid css={styles.spacingTopS40XL60}>
         <GridItem gridColumnL={'2/14'} gridColumnXL={'4/12'}>

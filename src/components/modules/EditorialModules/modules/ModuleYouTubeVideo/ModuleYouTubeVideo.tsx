@@ -15,7 +15,11 @@ function ModuleYouTubeVideo(props: SiteModuleYouTubeVideo) {
     props.poster.height = 900;
   }
 
-  return (
+  return props.isColumn ? (
+    <div data-component="module-video">
+      <Video {...props} sizes={[400, 600, 800, 1200, 1600]} />
+    </div>
+  ) : (
     <div data-component="module-video">
       <Grid css={styles.spacingTopS60XL80}>
         <GridItem gridColumnL={'2/14'} gridColumnXL={'4/12'}>
