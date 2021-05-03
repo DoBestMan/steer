@@ -6,6 +6,8 @@ Disallow: /api/users/session
 Disallow: /api/menu
 Disallow: /api/globals
 Disallow: /api/home
+Disallow: /_next/data/
+Disallow: /.well-known/assetlinks.json
 
 User-agent: DuckDuckBot
 Disallow: /api/product-detail*
@@ -13,6 +15,8 @@ Disallow: /api/users/session
 Disallow: /api/menu
 Disallow: /api/globals
 Disallow: /api/home
+Disallow: /_next/data/
+Disallow: /.well-known/assetlinks.json
 
 User-agent: Googlebot
 Disallow: /api/product-detail*
@@ -20,3 +24,5 @@ Disallow: /api/users/session
 Disallow: /api/menu
 Disallow: /api/globals
 Disallow: /api/home
+Disallow: /_next/data/
+Disallow: /.well-known/assetlinks.json
