@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router';
+
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import Image from '~/components/global/Image/Image';
@@ -7,6 +9,7 @@ import LiveChatSupport from '~/components/modules/Support/LiveChatSupport';
 import PhoneSupport from '~/components/modules/Support/PhoneSupport';
 import SupportHeading from '~/components/modules/Support/SupportHeading';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
+import { ROUTE_MAP, ROUTES } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
 
@@ -18,6 +21,7 @@ import FooterPromotions from './FooterPromotions/FooterPromotions';
 
 export interface Props {
   customerServiceNumber: { display: string; value: string };
+  displayLiveChat?: boolean;
   isCustomerServiceEnabled?: boolean;
   showPromotions?: boolean;
 }
@@ -28,6 +32,11 @@ function Footer({
   showPromotions = true,
 }: Props) {
   const { isMobile } = useBreakpoints();
+  const router = useRouter();
+  const displayLiveChat =
+    !!router.pathname.match(ROUTE_MAP[ROUTES.CUSTOMER_SUPPORT]) ||
+    !!router.pathname.match(ROUTE_MAP[ROUTES.ORDER_TRACKING]);
+
   return (
     <Grid as="footer" css={styles.container}>
       <GridItem
@@ -82,15 +91,17 @@ function Footer({
         >
           <EmailSupport isCustomerServiceEnabled={isCustomerServiceEnabled} />
         </GridItem>
-        <GridItem
-          gridColumnM="7/12"
-          gridColumnL="9/14"
-          gridColumnXL="7/10"
-          as="li"
-          css={styles.supportButton}
-        >
-          <LiveChatSupport />
-        </GridItem>
+        {displayLiveChat && (
+          <GridItem
+            gridColumnM="7/12"
+            gridColumnL="9/14"
+            gridColumnXL="7/10"
+            as="li"
+            css={styles.supportButton}
+          >
+            <LiveChatSupport />
+          </GridItem>
+        )}
       </GridItem>
 
       <GridItem
