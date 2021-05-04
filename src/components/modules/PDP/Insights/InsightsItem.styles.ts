@@ -33,7 +33,7 @@ const styles: StylesMap = {
     [MQ.L]: {
       backgroundColor: COLORS.LIGHT.GRAY_10,
       color: COLORS.GLOBAL.BLACK,
-      paddingLeft: SPACING.SIZE_40,
+      paddingLeft: 38,
       paddingRight: SPACING.SIZE_40,
     },
   },
@@ -76,6 +76,13 @@ const styles: StylesMap = {
       whiteSpace: 'pre-line',
     },
   ],
+  vehicleIcon: {
+    alignItems: 'center',
+    display: 'flex',
+    height: 'auto',
+    justifyContent: 'center',
+    width: 30,
+  },
 };
 
 export default styles;

@@ -31,7 +31,12 @@ function InsightsItem({
         hasAction && styles.containerAction,
       ]}
     >
-      <span css={styles.icon} aria-hidden>
+      <span
+        css={
+          icon && icon.type == 'SiteImage' ? styles.vehicleIcon : styles.icon
+        }
+        aria-hidden
+      >
         {icon && <IconOrImage {...icon} ssr={ssr} />}
       </span>
       <Markdown renderers={{ paragraph: 'span' }} css={styles.label}>
