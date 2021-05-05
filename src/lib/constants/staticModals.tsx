@@ -21,6 +21,7 @@ export enum STATIC_MODAL_IDS {
   // TODO update mock data with consistent naming
   HOW_TO_FIND_YOUR_SIZE = 'findYourTireSize',
   ROAD_HAZARD_COVERAGE = 'road-hazard-coverage',
+  WHATS_INCLUDED_WITH_INSTALLATION = 'whats-included-with-installation',
 }
 
 // TODO Implement final content WCS-858
@@ -213,6 +214,18 @@ const STATIC_MODALS: Record<string, ModalData> = {
           isExternal: true,
         },
       },
+      showSupportSection: false,
+    },
+    type: MODAL_DATA_TYPES.CONTENT,
+  },
+  [STATIC_MODAL_IDS.WHATS_INCLUDED_WITH_INSTALLATION]: {
+    props: {
+      content:
+        'Mounting and Balancing: They will replace your current tires with the new ones you ordered, and properly balance them to specifications.\n\nRubber Valve Stems: The key nozzle that allows for inflation. These can age overtime and it is important to get these replaced during every tire replacement.\n\nTire Disposal: No hassle getting your previous tires recycled. This is included in every prepaid install.\n\nTPMS Reset: If your car was built in or after 2007 your vehicle could be equipped with a direct tire pressure monitoring system ("TPMS").\n\nThe TPMS monitors are attached to the inside of the valve stem (one per tire). It is inside the rubber of the tire and touching the metal rim.\n\nIt detects what the pressure is and sends the information wirelessly to your car\'s processor which turns on the light if a tire is low.\n\nThe TPMS monitor needs to be reset when a new tire is installed to synchronize with your car\'s processor',
+      title: 'What’s included with installation:',
+      subtitle: null,
+      image: null,
+      link: null,
       showSupportSection: false,
     },
     type: MODAL_DATA_TYPES.CONTENT,

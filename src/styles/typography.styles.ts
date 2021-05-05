@@ -2,7 +2,7 @@ import { CSSObject } from '@emotion/core';
 
 import { CSSObjectType, MQ } from '~/lib/constants';
 
-const fontStyles = (fontSize: number, lineHeight: number) => ({
+export const fontStyles = (fontSize: number, lineHeight: number) => ({
   fontSize: `${fontSize / 10}rem`,
   lineHeight: lineHeight / fontSize,
 });

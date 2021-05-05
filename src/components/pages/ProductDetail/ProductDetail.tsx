@@ -191,7 +191,10 @@ function ProductDetail({ serverData }: ProductDetailData) {
         {installation && (
           <GridItem fullbleed css={styles.installation}>
             <div id={ANCHORS.INSTALLATION_ANCHOR}>
-              <DynamicInstallation {...installation} />
+              <DynamicInstallation
+                {...installation}
+                openStaticModal={openStaticModal}
+              />
             </div>
           </GridItem>
         )}

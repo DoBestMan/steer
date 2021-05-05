@@ -1,3 +1,4 @@
+import { action } from '@storybook/addon-actions';
 import { select } from '@storybook/addon-knobs';
 
 import { CARS, CARS_KEYS } from '~/components/global/Car/CarDetails.constants';
@@ -22,5 +23,11 @@ export function InstallationWithKnobs() {
   const scenerySelect = select('Scenery', sceneryKeys, SCENERIES_KEYS.URBAN);
   const sceneryType = SCENERIES[scenerySelect as SCENERIES_KEYS];
 
-  return <Installation vehicleType={vehicleType} sceneryType={sceneryType} />;
+  return (
+    <Installation
+      vehicleType={vehicleType}
+      sceneryType={sceneryType}
+      openStaticModal={action('openStaticModal')}
+    />
+  );
 }

@@ -1,14 +1,24 @@
-import { CSSObject } from '@emotion/core';
-
-import { BORDERS, COLORS, GAP_COLUMNS, MQ, SPACING } from '~/lib/constants';
+import {
+  BORDERS,
+  COLORS,
+  GAP_COLUMNS,
+  MQ,
+  SPACING,
+  StylesMap,
+} from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
-const styles: CSSObject = {
+const styles: StylesMap = {
   description: [
     typography.bodyCopy,
 
     {
       color: COLORS.LIGHT.GRAY_70,
+      marginBottom: SPACING.SIZE_20,
+
+      [MQ.M]: {
+        marginBottom: 0,
+      },
     },
   ],
   descriptionLink: {
@@ -18,7 +28,7 @@ const styles: CSSObject = {
   headline: [
     typography.primaryHeadline,
     {
-      color: COLORS.GLOBAL.ORANGE,
+      color: COLORS.GLOBAL.BLACK,
     },
   ],
   illustration: {
@@ -54,10 +64,11 @@ const styles: CSSObject = {
   title: [
     typography.primaryHeadline,
     {
-      color: COLORS.GLOBAL.BLACK,
+      color: COLORS.GLOBAL.ORANGE,
 
       [MQ.L]: {
         marginRight: -GAP_COLUMNS.XL,
+        marginBottom: GAP_COLUMNS.XL,
       },
     },
   ],

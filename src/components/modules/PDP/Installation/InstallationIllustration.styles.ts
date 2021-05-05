@@ -1,7 +1,7 @@
-import { CSSObject, keyframes } from '@emotion/core';
+import { keyframes } from '@emotion/react';
 import { Keyframes } from '@emotion/serialize';
 
-import { EASING, MQ, TIME } from '~/lib/constants';
+import { EASING, MQ, StylesMap, TIME } from '~/lib/constants';
 
 const carEntrance = keyframes({
   '0%': {
@@ -12,7 +12,7 @@ const carEntrance = keyframes({
   },
 });
 
-export const rotateWheel = keyframes({
+export const rotateWheel: Keyframes = keyframes({
   '0%': {
     transform: 'rotateZ(0deg)',
   },
@@ -21,7 +21,7 @@ export const rotateWheel = keyframes({
   },
 });
 
-export const rotateWheelM = keyframes({
+export const rotateWheelM: Keyframes = keyframes({
   '0%': {
     transform: 'rotateZ(0deg)',
   },
@@ -74,7 +74,7 @@ const animate = (animationName: Keyframes, animationNameM?: Keyframes) => ({
   },
 });
 
-const styles: CSSObject = {
+const styles: StylesMap = {
   car: {
     bottom: -6,
     position: 'absolute',
