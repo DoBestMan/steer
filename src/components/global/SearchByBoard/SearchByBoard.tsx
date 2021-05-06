@@ -236,6 +236,9 @@ function SearchByBoard({
       onClick: () => () => {
         setIsTireSnapOpen(true);
         sendFSCustomEvent(CTA_TYPES.SIMPLE_SNAP);
+        setFSCustomEvent(FS_EVENT_NAMES.SIMPLESNAP, {
+          searchByBoardClick: true,
+        });
       },
       type: CTA_TYPES.SIMPLE_SNAP,
     },

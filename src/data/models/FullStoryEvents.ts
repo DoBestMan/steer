@@ -16,6 +16,7 @@ export interface SIMPLESNAP {
   retakePhoto?: boolean;
   tireResultsSuccess?: boolean;
   searchAnotherWay?: boolean;
+  searchByBoardClick?: boolean;
 }
 export interface SEARCH_BY_BOARD {
   searchItem: string;
