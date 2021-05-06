@@ -6,38 +6,71 @@ export const styles: StylesMap = {
   // we are using a bunch of sibling selectors because first-of-type does not work
   // when we're trying to find the first of type of p, ul OR ol.
   defaultStyles: {
-    ['p']: {
-      ['+ p']: {
-        marginTop: SPACING.SIZE_20,
-      },
-      ['+ ol, + ul']: {
-        marginTop: SPACING.SIZE_10,
-      },
+    ['.indented']: {
+      paddingLeft: SPACING.SIZE_20,
     },
-    ['ol, ul']: {
-      paddingLeft: SPACING.SIZE_40,
-      ['+ p']: {
-        marginTop: SPACING.SIZE_20,
-      },
-      ['+ ol, + ul']: {
-        marginTop: SPACING.SIZE_10,
-      },
+    ['blockquote']: {
+      border: `1px solid ${COLORS.LIGHT.GRAY_20}`,
+      borderLeft: 'none',
+      borderRight: 'none',
+      margin: `${SPACING.SIZE_20}px 0`,
+      ['p']: [
+        typography.largeCopy,
+        {
+          color: COLORS.GLOBAL.BLACK,
+        },
+      ],
+      padding: SPACING.SIZE_20,
+      textAlign: 'center',
     },
     ['ol']: {
       ['li']: {
         listStyleType: 'decimal',
       },
     },
-    ['ul']: {
-      ['li']: {
-        listStyleType: 'disc',
+    ['ol > li']: {
+      listStyleType: 'decimal',
+    },
+    ['ol, ul']: {
+      ['+ ol, + ul']: {
+        marginTop: SPACING.SIZE_20,
       },
+      ['+ p']: {
+        marginTop: SPACING.SIZE_20,
+      },
+      ['li']: {
+        ['&::marker']: [
+          typography.primarySubhead,
+          {
+            paddingRight: SPACING.SIZE_40,
+            color: COLORS.GLOBAL.BLACK,
+          },
+        ],
+        paddingLeft: SPACING.SIZE_20,
+      },
+      ['ol']: {
+        paddingLeft: SPACING.SIZE_25,
+      },
+      paddingLeft: SPACING.SIZE_60,
+      ['ul']: {
+        paddingLeft: SPACING.SIZE_20,
+      },
+    },
+    ['p']: {
+      ['+ p']: {
+        marginTop: SPACING.SIZE_20,
+      },
+      ['+ ol, + ul']: {
+        marginTop: SPACING.SIZE_20,
+      },
+    },
+    ['ul > li']: {
+      listStyleType: 'disc',
     },
   },
   editorialMarkdownContainer: {
     ['a']: {
-      borderBottomColor: COLORS.LIGHT.GRAY_70,
-      borderBottom: '2px dotted',
+      borderBottom: `2px dotted ${COLORS.GLOBAL.ORANGE}`,
     },
     ['h2']: [
       typography.primaryHeadline,
@@ -45,9 +78,6 @@ export const styles: StylesMap = {
         marginTop: SPACING.SIZE_60,
         ['+ p']: {
           marginTop: SPACING.SIZE_20,
-        },
-        [MQ.L]: {
-          marginTop: SPACING.SIZE_80,
         },
       },
     ],

@@ -6,7 +6,7 @@ import { SiteHeaderModule } from '~/data/models/SiteHeaderModule';
 function ModuleHeaderLanding(data: SiteHeaderModule) {
   return (
     <Grid>
-      <GridItem gridColumnL={'2/14'} gridColumnXL={'4/12'}>
+      <GridItem gridColumnL={'3/13'} gridColumnXL={'5/11'}>
         <div data-component="module-header-landing-page">
           <HeaderLandingPage {...data} />
         </div>

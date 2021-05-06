@@ -12,7 +12,7 @@ function ModuleTextList(props: SiteModuleTextList) {
   ) : (
     <div data-component="module-text-list">
       <Grid css={styles.spacingTopS40XL60}>
-        <GridItem gridColumnL={'2/14'} gridColumnXL={'4/12'}>
+        <GridItem gridColumnL={'3/13'} gridColumnXL={'5/11'}>
           <TextBasedList {...props} />
         </GridItem>
       </Grid>

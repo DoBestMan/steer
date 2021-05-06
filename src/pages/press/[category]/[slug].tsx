@@ -13,7 +13,7 @@ type OpenTemplatePageProps = {
   pageData: PageData;
 };
 
-const BASE_PATH = 'press/releases';
+const BASE_PATH = 'press/';
 const PressCategory = WithErrorPageHandling(OpenTemplatePage);
 
 export const getServerSideProps: GetServerSideProps<PageResponse<

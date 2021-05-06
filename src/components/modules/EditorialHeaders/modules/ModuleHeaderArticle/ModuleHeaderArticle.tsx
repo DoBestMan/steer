@@ -6,7 +6,7 @@ import { SiteHeaderModule } from '~/data/models/SiteHeaderModule';
 function ModuleHeaderArticle(data: SiteHeaderModule) {
   return (
     <Grid>
-      <GridItem gridColumnL={'2/14'} gridColumnXL={'4/12'}>
+      <GridItem gridColumnL={'3/13'} gridColumnXL={'5/11'}>
         <HeaderArticlePage {...data} />
       </GridItem>
     </Grid>

@@ -10,7 +10,7 @@ function ModuleSeparator(props: { isColumn?: boolean }) {
   ) : (
     <div data-component="module-separator">
       <Grid>
-        <GridItem gridColumnL={'2/14'} gridColumnXL={'4/12'}>
+        <GridItem gridColumnL={'3/13'} gridColumnXL={'5/11'}>
           <Separator />
         </GridItem>
       </Grid>

@@ -8,7 +8,7 @@ function ModuleReview({ siteReviews }: SiteModuleReviews) {
   return (
     <div data-component="module-review">
       <Grid css={styles.reviewContainer}>
-        <GridItem gridColumnL={'2/14'} gridColumnXL={'4/12'}>
+        <GridItem gridColumnL={'3/13'} gridColumnXL={'5/11'}>
           <div css={[styles.spacingTopS60XL80, styles.spacingBottomS50XL60]}>
             {siteReviews && <HomeReviews {...siteReviews} isEditorialModule />}
           </div>

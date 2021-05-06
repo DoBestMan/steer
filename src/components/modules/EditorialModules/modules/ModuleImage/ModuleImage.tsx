@@ -12,7 +12,7 @@ function ModuleImage(props: SiteModuleImage) {
   ) : (
     <div data-component="module-image">
       <Grid css={styles.spacingTopS60XL80}>
-        <GridItem gridColumnL={'2/14'} gridColumnXL={'4/12'}>
+        <GridItem gridColumnL={'3/13'} gridColumnXL={'5/11'}>
           <Image {...props} widths={[400, 800, 1200, 1600]} />
         </GridItem>
       </Grid>

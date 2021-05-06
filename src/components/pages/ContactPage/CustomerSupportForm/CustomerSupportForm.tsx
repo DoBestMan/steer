@@ -173,10 +173,10 @@ function SendMessageForm({ selections }: Props) {
 
   return (
     <Grid>
-      <GridItem gridColumnXL={'4/12'}>
+      <GridItem gridColumnL={'3/13'} gridColumnXL={'5/11'}>
         <h2 css={styles.title}>{ui('contactPage.message.title')}</h2>
       </GridItem>
-      <GridItem gridColumnXL={'4/12'}>
+      <GridItem gridColumnL={'3/13'} gridColumnXL={'5/11'}>
         <form>
           <fieldset css={styles.group}>
             <div css={styles.input}>

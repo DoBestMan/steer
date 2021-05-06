@@ -10,7 +10,7 @@ function ModuleButtonGrid(props: SiteModuleButtonGrid) {
     <div data-component="module-button-grid">
       {props.headerText && (
         <Grid>
-          <GridItem gridColumnL={'2/14'} gridColumnXL={'4/12'}>
+          <GridItem gridColumnL={'3/13'} gridColumnXL={'5/11'}>
             <Markdown isEditorial>{props.headerText}</Markdown>
           </GridItem>
         </Grid>

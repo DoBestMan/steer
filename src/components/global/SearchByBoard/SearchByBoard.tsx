@@ -325,8 +325,8 @@ function SearchByBoard({
           <GridItem
             gridColumn={'2/6'}
             gridColumnM={'2/8'}
-            gridColumnL={'2/14'}
-            gridColumnXL={'4/12'}
+            gridColumnL={'3/13'}
+            gridColumnXL={'5/11'}
           >
             {renderCTAList}
           </GridItem>

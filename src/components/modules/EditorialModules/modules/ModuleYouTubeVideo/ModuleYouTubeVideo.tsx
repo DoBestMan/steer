@@ -22,7 +22,7 @@ function ModuleYouTubeVideo(props: SiteModuleYouTubeVideo) {
   ) : (
     <div data-component="module-video">
       <Grid css={styles.spacingTopS60XL80}>
-        <GridItem gridColumnL={'2/14'} gridColumnXL={'4/12'}>
+        <GridItem gridColumnL={'3/13'} gridColumnXL={'5/11'}>
           <Video {...props} sizes={[400, 600, 800, 1200, 1600]} />
         </GridItem>
       </Grid>

@@ -10,12 +10,12 @@ export interface ButtonGridProps {
 function ButtonGrid({ buttonGridList }: ButtonGridProps) {
   let gridStartForS = 2;
   let gridStartForM = 2;
-  let gridStartForL = 2;
-  let gridStartForXL = 4;
+  let gridStartForL = 3;
+  let gridStartForXL = 5;
   let gridEndForS = 4;
   let gridEndForM = 4;
-  let gridEndForL = 5;
-  let gridEndForXL = 6;
+  let gridEndForL = 6;
+  let gridEndForXL = 7;
   const setGridVal = (index: number) => {
     if (index !== 0) {
       gridStartForS = gridStartForS + 2;
@@ -35,13 +35,13 @@ function ButtonGrid({ buttonGridList }: ButtonGridProps) {
       gridStartForM = 2;
       gridEndForM = 4;
     }
-    if (gridStartForL === 14) {
-      gridStartForL = 2;
-      gridEndForL = 5;
+    if (gridStartForL === 12) {
+      gridStartForL = 3;
+      gridEndForL = 6;
     }
-    if (gridStartForXL === 12) {
-      gridStartForXL = 4;
-      gridEndForXL = 6;
+    if (gridStartForXL === 11) {
+      gridStartForXL = 5;
+      gridEndForXL = 7;
     }
 
     return {

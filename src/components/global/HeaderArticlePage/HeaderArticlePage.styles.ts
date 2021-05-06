@@ -43,10 +43,11 @@ const styles: StylesMap = {
     [MQ.M]: { marginTop: SPACING.SIZE_20 },
   },
   title: [
-    typography.secondaryHeadline,
+    typography.primaryHeadline,
     {
       color: COLORS.GLOBAL.BLACK,
       marginBottom: SPACING.SIZE_20,
+      textAlign: 'center',
     },
   ],
 };

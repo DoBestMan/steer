@@ -6,7 +6,7 @@ function ModuleGoogleForm({ ...props }: SiteModuleGoogleForm) {
   return (
     <div data-component="module-googleform">
       <Grid>
-        <GridItem gridColumnL={'2/14'} gridColumnXL={'4/12'}>
+        <GridItem gridColumnL={'3/13'} gridColumnXL={'5/11'}>
           <GoogleForm {...props} />
         </GridItem>
       </Grid>

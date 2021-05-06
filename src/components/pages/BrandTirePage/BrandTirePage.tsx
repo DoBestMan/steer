@@ -67,7 +67,7 @@ function BrandTirePage({
   return (
     <div css={[navigationBreadcrumbPaddingTop, styles.spacingBottom60]}>
       <Grid>
-        <GridItem gridColumnL={'2/14'} gridColumnXL={'4/12'}>
+        <GridItem gridColumnL={'3/13'} gridColumnXL={'5/11'}>
           <Meta {...meta} />
           <Breadcrumbs
             navigationItems={mapPageRouteToBreadcrumbs(
@@ -86,7 +86,7 @@ function BrandTirePage({
           </div>
           <div css={styles.imageSectionLarge}>
             <Grid css={containerSpacing.spacingTopS40XL60}>
-              <GridItem gridColumnL={'2/14'} gridColumnXL={'4/12'}>
+              <GridItem gridColumnL={'3/13'} gridColumnXL={'5/11'}>
                 <Image {...promoImage} widths={[320, 768, 900, 1200]} />
               </GridItem>
             </Grid>
@@ -95,7 +95,7 @@ function BrandTirePage({
       )}
       <div css={containerSpacing.spacingTopS60XL80}>
         <Grid>
-          <GridItem gridColumnL={'2/14'} gridColumnXL={'4/12'}>
+          <GridItem gridColumnL={'3/13'} gridColumnXL={'5/11'}>
             {header && (
               <HeaderWithLogo {...header} imageLabel={`${brandName}`} />
             )}
@@ -119,7 +119,7 @@ function BrandTirePage({
       {curatedProducts && (
         <div css={styles.spacingTop20}>
           <Grid>
-            <GridItem gridColumnL={'2/14'} gridColumnXL={'4/14'}>
+            <GridItem gridColumnL={'3/13'} gridColumnXL={'5/11'}>
               {curatedProducts.map((product, id) => (
                 <div key={`${product.id}_${id}`}>
                   <ProductGroupList {...product} />
@@ -136,7 +136,7 @@ function BrandTirePage({
             type={'SiteModuleMarkdown'}
           />
           <Grid css={styles.spacingTop20}>
-            <GridItem gridColumnL="2/14" gridColumnXL="4/12">
+            <GridItem gridColumnL={'3/13'} gridColumnXL={'5/11'}>
               <div css={styles.promotionSection}>
                 {deals.map((deal, id) => (
                   <Fragment key={`${deal.title}_${id}`}>
@@ -167,7 +167,7 @@ function BrandTirePage({
                 />
               )}
               <Grid>
-                <GridItem gridColumnL={'2/14'} gridColumnXL={'4/12'}>
+                <GridItem gridColumnL={'3/13'} gridColumnXL={'5/11'}>
                   {link.groups && (
                     <Accordion
                       id={`${link.title}_${id}`}

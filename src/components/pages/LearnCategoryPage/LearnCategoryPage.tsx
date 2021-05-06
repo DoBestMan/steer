@@ -33,7 +33,7 @@ function LearnCategoryPage({
     <>
       <div css={[navigationPaddingTop, styles.spacingBottom40]}>
         <Grid css={styles.breadcrumbsContainer}>
-          <GridItem gridColumnL={'2/14'} gridColumnXL={'4/12'}>
+          <GridItem gridColumnL={'3/13'} gridColumnXL={'5/11'}>
             <Meta {...metadata.meta} />
             <Breadcrumbs
               navigationItems={mapQueryToBreadcrumbs(query, pageLabel)}
