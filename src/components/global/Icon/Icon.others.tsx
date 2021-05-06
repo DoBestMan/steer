@@ -120,6 +120,9 @@ const Performance = dynamic(
 const Phone = dynamic(() => import('~/assets/icons/others/phone.svg'), {
   ssr: false,
 });
+const Pintrest = dynamic(() => import('~/assets/icons/others/pintrest.svg'), {
+  ssr: false,
+});
 const Play = dynamic(() => import('~/assets/icons/others/play.svg'), {
   ssr: false,
 });
@@ -372,6 +375,7 @@ export const ICONS_OTHER_MAP: Record<string, ReactElement> = {
   NOTIFICATION: <Notification />,
   PERFORMANCE: <Performance />,
   PHONE: <Phone />,
+  PINTREST: <Pintrest />,
   PLAY: <Play />,
   PRO_TIP_SMALL: <Protipsmall />,
   QUANTITY_SELECTOR_CAR: <Quantityselectorcar />,

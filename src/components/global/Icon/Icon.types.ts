@@ -54,6 +54,7 @@ export type Icon =
   | 'notification'
   | 'performance'
   | 'phone'
+  | 'pintrest'
   | 'play'
   | 'pro-tip-small'
   | 'quantity-selector-car'

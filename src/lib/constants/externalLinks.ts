@@ -3,6 +3,7 @@ export enum LINKS {
   FACEBOOK = 'facebook',
   INSTAGRAM = 'instagram',
   LINKEDIN = 'linkedin',
+  PINTREST = 'pintrest',
   REGISTER_TIRES = 'registerTires',
   TWITTER = 'twitter',
   YOUTUBE = 'youtube',
@@ -17,4 +18,5 @@ export const LINK_MAP: Record<LINKS, string> = {
     'https://register.cimstireregistration.com/index.cfm?id=simple-tire',
   [LINKS.TWITTER]: 'https://twitter.com/SimpleTire',
   [LINKS.YOUTUBE]: 'https://www.youtube.com/channel/UCi4wQYLwGg_iE2FwOjTNH3Q',
+  [LINKS.PINTREST]: 'https://www.pinterest.com/simpletire/',
 };

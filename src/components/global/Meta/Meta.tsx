@@ -159,6 +159,7 @@ function Meta({
       />
       <meta name="theme-color" content={COLORS.LIGHT.OFF_WHITE} />
       <meta name="application-name" content="SimpleTire" />
+      <meta name="p:domain_verify" content="d9dac2fd8d4b607872c1b61d6fac137b" />
 
       {/* MS */}
       <meta name="msapplication-TileColor" content={COLORS.LIGHT.OFF_WHITE} />

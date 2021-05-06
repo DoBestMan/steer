@@ -102,6 +102,12 @@ export const footerLinksData = {
         isExternal: true,
         text: ui('links.linkedin'),
       },
+      {
+        action: LINK_MAP[LINKS.PINTREST],
+        icon: ICONS.PINTREST,
+        isExternal: true,
+        text: ui('links.pintrest'),
+      },
     ],
   },
 
