@@ -33,6 +33,7 @@ export function CatalogDataMomentNoOeMessage() {
         siteCatalogSummaryPrompt={
           vehiclesNoOeWithSizeMock.siteCatalogSummaryPrompt
         }
+        siteCatalogSummaryMeta={vehiclesNoOeWithSizeMock.siteCatalogSummaryMeta}
         openStaticModal={action('Open modal')}
       />
     </CatalogMessageContainer>
@@ -48,6 +49,7 @@ export function CatalogDataMomentDisambiguationMessage() {
         siteCatalogSummaryPrompt={
           vehiclesDisambiguationMock.siteCatalogSummaryPrompt
         }
+        siteCatalogSummaryMeta={vehiclesNoOeWithSizeMock.siteCatalogSummaryMeta}
         openStaticModal={action('Open modal')}
       />
     </CatalogMessageContainer>

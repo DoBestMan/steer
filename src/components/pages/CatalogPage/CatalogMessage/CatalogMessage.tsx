@@ -17,6 +17,7 @@ import { useSearchModalContext } from '~/components/modules/Search/SearchModal.c
 import { useCatalogSummaryContext } from '~/context/CatalogSummary.context';
 import { useModalContext } from '~/context/Modal.context';
 import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
+import { SiteCatalogSummaryMeta } from '~/data/models/SiteCatalogSummaryMeta';
 import { SiteCatalogSummaryPrompt } from '~/data/models/SiteCatalogSummaryPrompt';
 import { VehicleMetadata } from '~/data/models/VehicleMetadata';
 import { BUTTON_STYLE, LINK_TYPES, MODAL_THEME } from '~/lib/constants';
@@ -35,12 +36,14 @@ interface DataMomentMessageProps {
   openStaticModal: (modalId: string) => void;
   setStage(stage: STAGES): void;
   showLoadingInterstitial: boolean;
+  siteCatalogSummaryMeta: SiteCatalogSummaryMeta | null;
   siteCatalogSummaryPrompt: SiteCatalogSummaryPrompt | null;
 }
 
 export function DataMomentMessage({
   setStage,
   showLoadingInterstitial,
+  siteCatalogSummaryMeta,
   siteCatalogSummaryPrompt,
   openStaticModal,
 }: DataMomentMessageProps) {
@@ -52,7 +55,6 @@ export function DataMomentMessage({
   const [isSizeConfirmModalOpen, setIsSizeConfirmModalOpen] = useState<boolean>(
     true,
   );
-
   const titleRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (showLoadingInterstitial && titleRef && titleRef.current) {
@@ -92,13 +94,14 @@ export function DataMomentMessage({
     siteCatalogSummaryPrompt.ctaList.length > 1;
 
   return (
-    siteCatalogSummaryPrompt && (
+    siteCatalogSummaryPrompt &&
+    siteCatalogSummaryMeta && (
       <SizeConfirmModal
         isOpen={isSizeConfirmModalOpen}
         contentLabel="modal"
         theme={MODAL_THEME.ORANGE}
       >
-        <Car css={styles.car} carId="car--chevrolet-colorado" />
+        <Car css={styles.car} carId={siteCatalogSummaryMeta.vehicleType} />
         <div ref={titleRef} tabIndex={-1}>
           <Markdown
             css={[styles.heading, styles.dataMomentHeading]}
