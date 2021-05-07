@@ -1,5 +1,12 @@
 {
   "redirects": [
-    { "source": "/storybook", "destination": "storybook/index.html" }
+    {
+      "source": "/storybook",
+      "destination": "storybook/index.html"
+    },
+    {
+      "source": "/installer-signup",
+      "destination": "become-a-tire-installer"
+    }
   ]
 }
