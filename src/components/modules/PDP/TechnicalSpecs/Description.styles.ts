@@ -7,6 +7,16 @@ const styles: StylesMap = {
     typography.bodyCopy,
     {
       a: links.dark,
+      ['ol, ul']: {
+        ['li']: {
+          ['&::marker']: [
+            {
+              color: COLORS.DARK.GRAY_40,
+            },
+          ],
+          paddingLeft: SPACING.SIZE_05,
+        },
+      },
     },
   ],
   moreDescription: {
