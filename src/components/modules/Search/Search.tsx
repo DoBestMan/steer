@@ -422,8 +422,13 @@ function Search({
                 onClearPastSearchesClick={handleClearPastSearchesClick}
                 onPastSearchClick={handleValueSelection}
                 onSearchCategoryClick={handleSearchCategoryClick}
+                onValueSelection={handleValueSelection}
+                isLoadingResults={isLoadingResults}
                 pastSearches={pastSearches}
+                searchState={searchState}
                 shouldShowPastSearches={shouldShowPastSearches}
+                results={siteSearchResultGroupList}
+                queryText={primaryQuery.queryText}
               />
             </div>
           );

@@ -111,6 +111,7 @@ function SearchAutocomplete({
     queryParamLabel,
     setQueryParamLabel,
     setRouteQueryParamOptions,
+    clearSearchResults,
   } = useSearchContext();
   const { handleNotificationClick } = useSiteNotificationsContext();
 
@@ -300,6 +301,7 @@ function SearchAutocomplete({
     handleNotificationClick();
     setRouteQueryParamOptions();
     setQueryParamLabel();
+    clearSearchResults();
   };
 
   const getSearchStateLabel = () => {

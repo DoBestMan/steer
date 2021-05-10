@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Transition } from 'react-transition-group';
 import { TransitionStatus } from 'react-transition-group/Transition';
 
@@ -18,16 +18,23 @@ import { LOCAL_STORAGE, PROPERTIES } from '~/lib/constants/localStorage';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import { initialSearchCategoriesData } from './Search.data';
+import { useAutocompleteSelectedItem } from './Search.hooks';
 import styles from './Search.styles';
 import { SearchResult, SearchResultEnum, SearchTypeEnum } from './Search.types';
 import SearchCTA from './SearchCTA/SearchCTA';
+import SearchResults from './SearchResults/SearchResults';
 import SearchSection from './SearchSection/SearchSection';
 
 interface Props {
+  isLoadingResults?: boolean;
   onClearPastSearchesClick: () => void;
   onPastSearchClick: (value: SearchResult) => void;
   onSearchCategoryClick: (searchResult: SiteSearchResultTextItem) => void;
+  onValueSelection: (value: SearchResult) => void;
   pastSearches: SiteSearchResultGroup;
+  queryText: string;
+  results: SiteSearchResultGroup[];
+  searchState: string;
   shouldShowPastSearches: boolean;
 }
 
@@ -35,21 +42,69 @@ function InitialSearch({
   onClearPastSearchesClick,
   onPastSearchClick,
   onSearchCategoryClick,
+  onValueSelection,
+  isLoadingResults,
   pastSearches,
+  searchState,
   shouldShowPastSearches,
+  queryText,
+  results,
 }: Props) {
   const [visiblePastSearches, setVisiblePastSearches] = useState(pastSearches);
+  const [shouldShowListbox, setShouldShowListbox] = useState(false);
+  const [shouldShowLoading, setShouldShowLoading] = useState(true);
+  const loadingTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const { greaterThan } = useBreakpoints();
 
-  const { queryParamLabel } = useSearchContext();
+  const {
+    routeQueryParamOptions,
+    queryParamLabel,
+    clearSearchResults,
+    searchQuery,
+  } = useSearchContext();
   const {
     addNotification,
     handleNotificationClick,
   } = useSiteNotificationsContext();
+  const {
+    selectedItemIndex,
+    setSelectedItemIndex,
+  } = useAutocompleteSelectedItem(results);
 
   useEffect(() => {
     setVisiblePastSearches(pastSearches);
   }, [pastSearches]);
+
+  useEffect(() => {
+    if (!searchState) {
+      const { params } = routeQueryParamOptions || {};
+      if (params?.brand) {
+        searchQuery({ queryText: params.brand, queryType: 'brand' });
+      }
+    }
+  }, [searchState, routeQueryParamOptions, searchQuery]);
+
+  useEffect(() => {
+    setShouldShowListbox(
+      results.length > 0 && !searchState && !shouldShowLoading,
+    );
+  }, [results, searchState, shouldShowLoading]);
+
+  useEffect(() => {
+    if (!loadingTimeout.current) {
+      loadingTimeout.current = setTimeout(() => {
+        setShouldShowLoading(true);
+      }, TIME.MS800);
+    }
+
+    if (!isLoadingResults) {
+      if (loadingTimeout.current) {
+        clearTimeout(loadingTimeout.current);
+        loadingTimeout.current = null;
+      }
+      setShouldShowLoading(false);
+    }
+  }, [isLoadingResults]);
 
   useEffect(() => {
     const isFilterNotificationAdded = window.localStorage.getItem(
@@ -76,8 +131,17 @@ function InitialSearch({
     }
   }, [queryParamLabel, addNotification]);
 
+  const handleValueSelection = useCallback(
+    (searchResult: SearchResult) => {
+      onValueSelection(searchResult);
+      setSelectedItemIndex([0, -1]);
+    },
+    [onValueSelection, setSelectedItemIndex],
+  );
+
   const handleClickCTA = (searchResult: SiteSearchResultTextItem) => {
     handleNotificationClick();
+    clearSearchResults();
     onSearchCategoryClick(searchResult);
   };
 
@@ -124,15 +188,17 @@ function InitialSearch({
               initialSearchCategoriesData[1],
             ]}
           />
-          <SearchCTA
-            type={SearchTypeEnum.FILTER}
-            label={ui('search.filterBy')}
-            onClick={handleClickCTA}
-            siteSearchResultList={[
-              initialSearchCategoriesData[2],
-              initialSearchCategoriesData[3],
-            ]}
-          />
+          {!queryParamLabel && (
+            <SearchCTA
+              type={SearchTypeEnum.FILTER}
+              label={ui('search.filterBy')}
+              onClick={handleClickCTA}
+              siteSearchResultList={[
+                initialSearchCategoriesData[2],
+                initialSearchCategoriesData[3],
+              ]}
+            />
+          )}
         </GridItem>
       </Grid>
       <Transition
@@ -159,6 +225,17 @@ function InitialSearch({
           );
         }}
       </Transition>
+
+      {!searchState && (
+        <SearchResults
+          handleValueSelection={handleValueSelection}
+          hasActiveSearchState={false}
+          queryText={queryText}
+          results={results}
+          selectedItemIndex={selectedItemIndex}
+          shouldShowListbox={shouldShowListbox}
+        />
+      )}
     </>
   );
 }
