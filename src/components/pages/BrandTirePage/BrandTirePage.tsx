@@ -79,7 +79,7 @@ function BrandTirePage({
           />
         </GridItem>
       </Grid>
-      {promoImage && (
+      {promoImage?.src && (
         <div css={containerSpacing.spacingTopS40XL60}>
           <div css={styles.imageSectionSmall}>
             <Image {...promoImage} widths={[320, 768]} />
