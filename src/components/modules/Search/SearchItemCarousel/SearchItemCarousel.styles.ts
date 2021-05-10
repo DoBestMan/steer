@@ -58,6 +58,10 @@ const styles: StylesMap = {
           stroke: COLORS.LIGHT.OFF_WHITE_40,
         },
       },
+      '.electric-car-symbol': {
+        stroke: COLORS.GLOBAL.WHITE,
+        fill: COLORS.GLOBAL.WHITE,
+      },
       ['.front-wheel, .back-wheel']: {
         '*': {
           stroke: COLORS.GLOBAL.WHITE,

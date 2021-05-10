@@ -24,6 +24,7 @@ export enum Cars {
   'car--dodge-charger' = 'car--dodge-charger',
   'car--dodge-durango' = 'car--dodge-durango',
   'car--electric' = 'car--electric',
+  'car--electric-vehicle' = 'car--electric-vehicle',
   'car--farm' = 'car--farm',
   'car--ford-edge' = 'car--ford-edge',
   'car--ford-escape' = 'car--ford-escape',

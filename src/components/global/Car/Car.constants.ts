@@ -49,6 +49,7 @@ export const CAR_DETAILS_TYPES: Record<Cars, CarTypes> = {
   'car--dodge-charger': CAR_TYPES.PASSENGER_AND_LIGHT_TRUCK_MODEL,
   'car--dodge-durango': CAR_TYPES.PASSENGER_AND_LIGHT_TRUCK_MODEL,
   'car--electric': CAR_TYPES.BODY_TYPE,
+  'car--electric-vehicle': CAR_TYPES.VEHICLE_TYPE,
   'car--farm': CAR_TYPES.VEHICLE_TYPE,
   'car--ford-edge': CAR_TYPES.PASSENGER_AND_LIGHT_TRUCK_MODEL,
   'car--ford-escape': CAR_TYPES.PASSENGER_AND_LIGHT_TRUCK_MODEL,
