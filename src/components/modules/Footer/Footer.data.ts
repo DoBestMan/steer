@@ -22,6 +22,10 @@ export const footerLinksData = {
         text: ui('links.apply'),
       },
       {
+        action: ROUTE_MAP[ROUTES.AFFILIATE],
+        text: ui('links.affiliate'),
+      },
+      {
         action: ROUTE_MAP[ROUTES.PRIVACY],
         text: ui('links.privacy'),
       },
