@@ -130,6 +130,7 @@ function useContextSetup({
         if (!data?.siteCatalogProducts?.listResultMetadata.pagination?.total) {
           const route = asPath.split('?');
           const params: Record<string, string> = {};
+
           const {
             category,
             oem,
@@ -142,12 +143,16 @@ function useContextSetup({
 
           // Skip page transition when updating filters
           eventEmitters.skipPageTransition.emit(null);
-
+          // When 0 Result matching Remove Promotion filter and redirect to without promotion
+          const ArrPromotion = promotion.split(',');
+          const fnlPromotion = ArrPromotion.filter(
+            (val) => !ArrPromotion.includes(val),
+          );
           Object.entries({
             brand,
             category,
+            fnlPromotion,
             oem,
-            promotion,
             subtype,
             tireSize,
             trim,
