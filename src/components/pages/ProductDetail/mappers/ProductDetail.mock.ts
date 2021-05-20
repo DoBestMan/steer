@@ -1439,9 +1439,14 @@ export const productDetailContextMock: ProductDetailContextProps = {
     siteProduct: siteProductMock,
     siteProductReviews: siteProductReviewsMock,
   },
+  getPriceOnLoad: () => {},
   getProductCount: () => {},
   isAddingToCart: false,
   isLoading: false,
+  productPrice: {
+    estimatedRetailPriceInCents: '1255',
+    salePriceInCents: '1155',
+  },
   productCount: 256,
   quantity: { front: 2, rear: 2 },
   queryParams: {

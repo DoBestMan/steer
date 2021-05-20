@@ -6,9 +6,11 @@ import { ReactNode, useCallback, useEffect, useState } from 'react';
 import { useSearchContext } from '~/components/modules/Search/Search.context';
 import { useSearchModalContext } from '~/components/modules/Search/SearchModal.context';
 import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
+import { SitePrice } from '~/data/models/SitePrice';
 import { VehicleMetadata } from '~/data/models/VehicleMetadata';
 import { apiBootstrap } from '~/lib/api/bootstrap';
 import { apiGetSiteBrandProductCount } from '~/lib/api/product-count';
+import { apiGetSiteProductPrice } from '~/lib/api/single-product-price';
 import { ROUTE_MAP, ROUTES } from '~/lib/constants';
 import { createContext } from '~/lib/utils/context';
 import { getLegacyCheckoutURL } from '~/lib/utils/legacy-routes';
@@ -61,10 +63,12 @@ export interface ProductDetailContextProps {
   changeSize: (index: number) => void;
   currentSizeIndex: number;
   data: ProductDetailResponse | null;
+  getPriceOnLoad: (id: string) => void;
   getProductCount: (brand: string) => void;
   isAddingToCart: boolean;
   isLoading: boolean;
   productCount: number | null;
+  productPrice: SitePrice | null;
   quantity: Quantity;
   queryParams: Record<string, string>;
   searchForVehicle: () => void;
@@ -113,6 +117,7 @@ function useContextSetup({
     queryParams: query,
     vehicle,
   });
+  const { itemId } = queryParams;
   const [quantity, setQuantity] = useState<{ front: number; rear?: number }>(
     getDefaultQuantity({ queryParams }),
   );
@@ -122,6 +127,7 @@ function useContextSetup({
   // To add a loading indicator while redirecting to cart
   const [isAddingToCart, setIsAddingToCart] = useState(false);
   const [productCount, setProductCount] = useState<number | null>(null);
+  const [productPrice, setPriceOnLoad] = useState<SitePrice | null>(null);
   const {
     lockSearchStateToVehicle,
     setShouldPreventLinkNavigation,
@@ -145,6 +151,22 @@ function useContextSetup({
       return;
     }
   }, []);
+
+  const getPriceOnLoad = useCallback(async function (id: string) {
+    await apiBootstrap();
+    const result = await apiGetSiteProductPrice(id);
+    if (result.isSuccess) {
+      setPriceOnLoad(result.data.sitePrice);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!itemId) {
+      return;
+    }
+    getPriceOnLoad(itemId);
+  }, [getPriceOnLoad, itemId]);
+
   const onHashChange = useCallback(
     (url) => {
       const newHashParams = getParsedHash(url);
@@ -211,7 +233,12 @@ function useContextSetup({
       setCurrentSizeIndex(index);
       const currentSize =
         data?.siteProduct.siteProductLineAvailableSizeList[index];
-
+      const id =
+        data?.siteProduct.siteProductLineAvailableSizeList[index]
+          .siteQueryParams.itemId;
+      if (id) {
+        setPriceOnLoad(null);
+      }
       if (!currentSize) {
         return;
       }
@@ -250,10 +277,12 @@ function useContextSetup({
     changeSize,
     currentSizeIndex,
     data,
+    getPriceOnLoad,
     getProductCount,
     isAddingToCart,
     isLoading,
     productCount,
+    productPrice,
     quantity,
     queryParams,
     searchForVehicle,

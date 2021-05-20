@@ -98,6 +98,7 @@ function ProductInfo({
     currentSizeIndex,
     showSelectError,
     productCount,
+    productPrice,
     getProductCount,
     setShowSelectError,
   } = useProductDetailContext();
@@ -120,6 +121,19 @@ function ProductInfo({
           price={price}
           priceLabel={priceLabel}
           startingPrice={isTireLine ? startingPrice : undefined}
+          volatileAvailability={volatileAvailability}
+        />
+      </div>
+    );
+  }
+
+  function rendePriceOnLoad() {
+    return (
+      <div css={[styles.pricesWrapper]}>
+        <Price
+          price={productPrice}
+          priceLabel={priceLabel}
+          startingPrice={null}
           volatileAvailability={volatileAvailability}
         />
       </div>
@@ -318,6 +332,7 @@ function ProductInfo({
             <div css={styles.loadingSizeSelector} />
           )}
         </div>
+        {isLoading && productPrice ? rendePriceOnLoad() : ''}
         {isLoading && !isTireLine ? (
           bk !== BREAKPOINT_SIZES.M && <div css={styles.loading} />
         ) : (
