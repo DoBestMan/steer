@@ -14,9 +14,12 @@ const styles: StylesMap = {
   body: {
     a: links.light,
     '& > div': {
-      display: '-webkit-box',
-      '-webkit-line-clamp': '2',
+      '& > p:not(:first-child)': {
+        display: 'none',
+      },
       '-webkit-box-orient': 'vertical',
+      '-webkit-line-clamp': '2',
+      display: '-webkit-box',
       overflow: 'hidden',
     },
   },
