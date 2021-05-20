@@ -118,4 +118,10 @@ export interface SiteModuleCircularIllustrationCarousel extends SiteModule {
     | 'logosMakes';
 }
 
+export interface SiteModuleMailingListSignUp extends SiteModule {
+  heading: string;
+  description: string;
+  emailSource: string;
+}
+
 export interface SiteModuleGoogleForm extends GoogleFormProps, SiteModule {}

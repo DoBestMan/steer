@@ -13,6 +13,7 @@ import ModuleGoogleForm from './modules/ModuleGoogleForm/ModuleGoogleForm';
 import ModuleGraphicGrid from './modules/ModuleGraphicGrid/ModuleGraphicGrid';
 import ModuleImage from './modules/ModuleImage/ModuleImage';
 import ModuleLinkList from './modules/ModuleLinkList/ModuleLinkList';
+import ModuleMailingListSignUp from './modules/ModuleMailingListSignUp/ModuleMailingListSignUp';
 import ModuleMarkdown from './modules/ModuleMarkdown/ModuleMarkdown';
 import ModuleMultiColumn from './modules/ModuleMultiColumn/ModuleMultiColumn';
 import ModulePDPInstallation from './modules/ModulePDPInstallation/ModulePDPInstallation';
@@ -51,6 +52,7 @@ function EditorialModules({
     SiteModuleGraphicGrid: ModuleGraphicGrid,
     SiteModuleLinkList: ModuleLinkList,
     SiteModuleLinkWithLabel: ModuleSiteLinkWithLabel,
+    SiteModuleMailingListSignUp: ModuleMailingListSignUp,
     SiteModuleMarkdown: ModuleMarkdown,
     SiteModuleMultiColumn: ModuleMultiColumn,
     SiteModulePDPInstallation: ModulePDPInstallation,

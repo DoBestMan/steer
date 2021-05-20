@@ -13,6 +13,12 @@ import { ui } from '~/lib/utils/ui-dictionary';
 
 import styles from './FooterMailingList.styles';
 
+export interface Props {
+  description?: string;
+  emailSource?: string;
+  heading?: string;
+}
+
 const toastMessages: {
   [key in TOAST_TYPE | string]: JSX.Element | string;
 } = {
@@ -20,7 +26,7 @@ const toastMessages: {
   [TOAST_TYPE.ERROR]: <Markdown>{ui('footer.mailingList.error')}</Markdown>,
 };
 
-function FooterMailingList() {
+function FooterMailingList({ description, emailSource, heading }: Props) {
   const [isInputValid, setIsInputValid] = useState(false);
   const [emailVal, setEmailVal] = useState('');
   const {
@@ -51,7 +57,7 @@ function FooterMailingList() {
   const handleSubmit = async () => {
     const res = await apiSubscribeToNewsletter({
       email: emailVal,
-      source: 'footer',
+      source: emailSource ? emailSource : 'footer',
       sourceURL: window.location.href,
     });
 
@@ -73,8 +79,12 @@ function FooterMailingList() {
 
   return (
     <>
-      <p css={styles.heading}>{ui('footer.mailingList.heading')}</p>
-      <p css={styles.text}>{ui('footer.mailingList.description')}</p>
+      <p css={styles.heading}>
+        {heading ? heading : ui('footer.mailingList.heading')}
+      </p>
+      <p css={styles.text}>
+        {description ? description : ui('footer.mailingList.description')}
+      </p>
       <div css={styles.inputContainer}>
         <Input
           customContainerStyles={styles.inputHeight}

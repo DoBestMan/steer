@@ -9,6 +9,7 @@ import {
   SiteModuleGraphicGrid,
   SiteModuleImage,
   SiteModuleLinkList,
+  SiteModuleMailingListSignUp,
   SiteModuleMarkdown,
   SiteModuleQuote,
   SiteModuleReviews,
@@ -30,7 +31,8 @@ export type OpenTemplateModules =
   | SiteModuleTextList
   | SiteModuleYouTubeVideo
   | SiteModuleDataTableVertical
-  | SiteModuleButtonGrid;
+  | SiteModuleButtonGrid
+  | SiteModuleMailingListSignUp;
 
 export interface PageData {
   slugUrl?: string;
