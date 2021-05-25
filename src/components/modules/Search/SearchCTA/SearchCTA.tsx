@@ -3,6 +3,7 @@ import Icon from '~/components/global/Icon/Icon';
 import { useSearchContext } from '~/components/modules/Search/Search.context';
 import { SearchSectionProps } from '~/components/modules/Search/SearchSection/SearchSection';
 import { SiteSearchResultTextItem } from '~/data/models/SiteSearchResultTextItem';
+import { searchCTACarExclusion } from '~/lib/utils/regex';
 
 import { SearchTypeEnum } from '../Search.types';
 import { CTA_ICONS, CTA_TYPES } from './SearchCTA.data';
@@ -35,6 +36,10 @@ function SearchCTA({
         key={cta.type}
         css={[
           styles.ctaMenuItem,
+          queryParamLabel &&
+            cta.label.toLowerCase() === 'vehicle' &&
+            searchCTACarExclusion.test(queryParamLabel) &&
+            styles.ctaMenuItemHidden,
           !!queryParamLabel &&
             type === SearchTypeEnum.FILTER &&
             styles.ctaMenuItemDisabled,

@@ -374,7 +374,7 @@ function SearchAutocomplete({
                   ? clearPrimaryInputComponent
                   : undefined
               }
-              label={<SearchLabel />}
+              label={<SearchLabel queryParamLabel={queryParamLabel} />}
               onChange={handleOnChange}
               onBackButtonClick={handleBackButtonClick}
               onClearInputClick={handleCancelSelection}

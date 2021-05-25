@@ -1,5 +1,6 @@
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { Breakpoint, BREAKPOINT_SIZES, CSSStylesProp } from '~/lib/constants';
+import { searchCTACarExclusion } from '~/lib/utils/regex';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import styles from './SearchLabel.styles';
@@ -8,12 +9,14 @@ interface Props {
   customContainerStyles?: CSSStylesProp;
   fullLabelAt?: Breakpoint;
   hideOnSmallMedium?: boolean;
+  queryParamLabel?: string;
 }
 
 function SearchLabel({
   customContainerStyles,
   fullLabelAt = BREAKPOINT_SIZES.L,
   hideOnSmallMedium = false,
+  queryParamLabel,
 }: Props) {
   const { lessThan } = useBreakpoints();
 
@@ -44,7 +47,13 @@ function SearchLabel({
       </span>
     );
   }
-  return <span css={styles.label}>{ui('search.searchAutocompleteLabel')}</span>;
+  return (
+    <span css={styles.label}>
+      {queryParamLabel && searchCTACarExclusion.test(queryParamLabel)
+        ? ui('search.searchByTireSize')
+        : ui('search.searchAutocompleteLabel')}
+    </span>
+  );
 }
 
 export default SearchLabel;

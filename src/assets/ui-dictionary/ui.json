@@ -725,7 +725,10 @@
       "stepThree": "Contact your manufacturer",
       "title": "Identify your vehicle trim"
     },
-    "clear": "Clear"
+    "clear": "Clear",
+    "filterTireSize": "Enter your tire size to continue",
+    "filterSubText": "Enter your vehicle or tire size to continue",
+    "filterTitle": "Filter applied"
   },
   "tireInstallerRegistration": {
     "copy": {

@@ -15,6 +15,7 @@ import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 import { LINK_TYPES, THEME, TIME } from '~/lib/constants';
 import { LOCAL_STORAGE, PROPERTIES } from '~/lib/constants/localStorage';
+import { searchCTACarExclusion } from '~/lib/utils/regex';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import { initialSearchCategoriesData } from './Search.data';
@@ -107,10 +108,21 @@ function InitialSearch({
   }, [isLoadingResults]);
 
   useEffect(() => {
-    const isFilterNotificationAdded = window.localStorage.getItem(
+    if (queryParamLabel) {
+      window.localStorage.setItem(
+        LOCAL_STORAGE[PROPERTIES.ADD_FILTER_NOTIFICATION],
+        new Boolean(true).toString(),
+      );
+    }
+    let isFilterNotificationAdded = window.localStorage.getItem(
       LOCAL_STORAGE[PROPERTIES.ADD_FILTER_NOTIFICATION],
     );
-    if (!isFilterNotificationAdded && queryParamLabel) {
+    isFilterNotificationAdded =
+      isFilterNotificationAdded && JSON.parse(isFilterNotificationAdded);
+    if (isFilterNotificationAdded && queryParamLabel) {
+      const subtext = searchCTACarExclusion.test(queryParamLabel)
+        ? ui('search.filterTireSize')
+        : ui('search.filterSubText');
       addNotification({
         handleNotificationClick: () => {},
         icon: {
@@ -118,18 +130,19 @@ function InitialSearch({
           type: ICON_IMAGE_TYPE.ICON,
         },
         id: new Date().getTime().toString(),
-        subtext: 'Enter your vehicle or tire size to continue',
+        subtext,
         suppressFromHomePage: false,
         theme: THEME.ORANGE,
-        title: 'Filter applied',
+        title: ui('search.filterTitle'),
         type: SiteNotificationTypes.Filter,
       });
       window.localStorage.setItem(
         LOCAL_STORAGE[PROPERTIES.ADD_FILTER_NOTIFICATION],
-        new Boolean(true).toString(),
+        new Boolean(false).toString(),
       );
     }
-  }, [queryParamLabel, addNotification]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [queryParamLabel]);
 
   const handleValueSelection = useCallback(
     (searchResult: SearchResult) => {
@@ -169,7 +182,6 @@ function InitialSearch({
     }
   });
   siteSearchResultTextList = siteSearchResultTextList.slice(0, 5); // we only want the first 5 results
-
   return (
     <>
       <Grid css={styles.searchSectionWrapper}>

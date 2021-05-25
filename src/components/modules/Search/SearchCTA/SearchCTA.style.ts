@@ -100,6 +100,9 @@ const styles: StylesMap = {
     opacity: 0.45,
     pointerEvents: 'none',
   },
+  ctaMenuItemHidden: {
+    display: 'none',
+  },
   ctaMenuLabel: [
     typography.eyebrow,
     {

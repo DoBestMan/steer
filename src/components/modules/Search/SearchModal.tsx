@@ -9,6 +9,7 @@ import { useSearchModalContext } from '~/components/modules/Search/SearchModal.c
 import CatalogLoading from '~/components/pages/CatalogPage/CatalogLoading/CatalogLoading';
 import { useModalContext } from '~/context/Modal.context';
 import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
+import { useSiteNotificationsContext } from '~/context/SiteNotifications.context';
 import { MODAL_THEME, TIME } from '~/lib/constants';
 import { FS_EVENT_NAMES } from '~/lib/constants/fullstory';
 import { setFSCustomEvent } from '~/lib/helpers/fullstory';
@@ -20,6 +21,8 @@ const Search = dynamic(() => import('./Search'));
 
 function SearchModal() {
   const [showLoading, setShowLoading] = useState(false);
+  const { handleNotificationClick } = useSiteNotificationsContext();
+
   const scrollY = useRef(getScroll().y);
   const {
     isSearchOpen,
@@ -88,6 +91,7 @@ function SearchModal() {
     setRouteQueryParamOptions();
     setQueryParamLabel();
     toggleIsSearchOpen();
+    handleNotificationClick();
   }, [
     isSearchOpen,
     clearSearchResults,
@@ -98,6 +102,7 @@ function SearchModal() {
     setShouldPreventLinkNavigation,
     setRouteQueryParamOptions,
     toggleIsSearchOpen,
+    handleNotificationClick,
   ]);
 
   const router = useRouter();
