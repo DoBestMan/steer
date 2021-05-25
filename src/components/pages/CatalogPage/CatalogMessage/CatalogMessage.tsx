@@ -51,6 +51,7 @@ export function DataMomentMessage({
   const { message }: any = useTheme();
   const { asPath } = useRouter();
 
+  const { toggleIsSearchOpen } = useSearchModalContext();
   const { selectVehicle } = useUserPersonalizationContext();
   const [isSizeConfirmModalOpen, setIsSizeConfirmModalOpen] = useState<boolean>(
     true,
@@ -152,6 +153,8 @@ export function DataMomentMessage({
                       setStage && setStage(STAGES.RESULTS);
                       // Reset scroll position to top
                       window.scrollTo(0, 0);
+                      // Open search modal as 0 results matched
+                      toggleIsSearchOpen();
                     }}
                     style={buttonStyle}
                     theme={message.buttonTheme}

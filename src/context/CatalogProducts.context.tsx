@@ -127,33 +127,20 @@ function useContextSetup({
     options: {
       onSuccess: async (data) => {
         setDisplayedProducts([]);
-        if (!data?.siteCatalogProducts?.listResultMetadata.pagination?.total) {
+        if (
+          data &&
+          !data?.siteCatalogProducts?.listResultMetadata.pagination?.total
+        ) {
           const route = asPath.split('?');
           const params: Record<string, string> = {};
 
-          const {
-            category,
-            oem,
-            subtype,
-            tireSize,
-            trim,
-            brand,
-            promotion,
-          } = newQuery;
+          const { oem, tireSize, trim } = newQuery;
 
           // Skip page transition when updating filters
           eventEmitters.skipPageTransition.emit(null);
-          // When 0 Result matching Remove Promotion filter and redirect to without promotion
-          const ArrPromotion = promotion.split(',');
-          const fnlPromotion = ArrPromotion.filter(
-            (val) => !ArrPromotion.includes(val),
-          );
+
           Object.entries({
-            brand,
-            category,
-            fnlPromotion,
             oem,
-            subtype,
             tireSize,
             trim,
           }).forEach(([k, v]) => {
@@ -165,9 +152,15 @@ function useContextSetup({
           setPastFilters([params]);
 
           const searchString = new URLSearchParams(params).toString();
-          push(`${pathname}?${searchString}`, `${route[0]}?${searchString}`, {
-            shallow: true,
-          });
+          if (searchString) {
+            push(`${pathname}?${searchString}`, `${route[0]}?${searchString}`, {
+              shallow: true,
+            });
+          } else {
+            push(pathname, route[0], {
+              shallow: true,
+            });
+          }
           addNotification({
             handleNotificationClick: () => {},
             icon: {
@@ -191,8 +184,14 @@ function useContextSetup({
             method: 'get',
             query: { ...params, ...pageParams },
           });
-          if (response.isSuccess) {
+          if (
+            response.isSuccess &&
+            response?.data?.siteCatalogProducts?.listResultMetadata.pagination
+              ?.total
+          ) {
             setProductsData(response?.data?.siteCatalogProducts);
+          } else {
+            setProductsData(null);
           }
         } else {
           if (pastFilters.length === 0) {

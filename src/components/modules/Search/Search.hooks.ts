@@ -237,10 +237,14 @@ export function useSearchResults() {
           page: document && document.location.pathname,
           queryText,
           queryType,
-          resultTotal: apiSearchResults.resultMetadata.pagination?.total,
+          resultTotal: apiSearchResults.resultMetadata?.pagination?.total || 0,
         });
 
-        setSearchResults(apiSearchResults);
+        if (!apiSearchResults.resultMetadata) {
+          setSearchResults(emptyResultData);
+        } else {
+          setSearchResults(apiSearchResults);
+        }
       } catch (error) {
         console.error(error);
 
