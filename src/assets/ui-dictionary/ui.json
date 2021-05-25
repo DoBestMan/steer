@@ -482,6 +482,9 @@
         "details": "More details"
       }
     },
+    "insightRebate": {
+      "useCode": "Use code"
+    },
     "quantitySelector": {
       "modalLabel": "Select a quantity",
       "confirmButtonLabel": "Confirm",

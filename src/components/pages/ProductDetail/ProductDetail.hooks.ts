@@ -6,6 +6,7 @@ import { Product as ProductLinkingData } from 'schema-dts';
 import { BreadcrumbsItem } from '~/components/global/Breadcrumbs/Breadcrumbs';
 import { MetaProps } from '~/components/global/Meta/Meta';
 import { FAQProps } from '~/components/modules/PDP/FAQ/FAQ';
+import { InsightsRebateProps } from '~/components/modules/PDP/InsightRebate/InsightRebate';
 import { InsightsProps } from '~/components/modules/PDP/Insights/Insights';
 import { InstallationProps } from '~/components/modules/PDP/Installation/Installation';
 import { ProductInfoProps } from '~/components/modules/PDP/ProductInfo/ProductInfo';
@@ -63,6 +64,7 @@ interface ResponseProps extends Pick<SiteProductLine, 'assetList'> {
   faq: FAQProps;
   insights: Omit<InsightsProps, 'handleChangeLocation'> | null;
   installation: InstallationProps | null;
+  instantRebateInsight?: InsightsRebateProps[];
   isLoading: boolean;
   isPLA: boolean;
   linkingData: ProductLinkingData | null;
@@ -116,13 +118,12 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
   const { siteProductReviews } = serverData;
 
   const { siteProductLine } = siteProduct;
-
   const assetList = siteProductLine.assetList;
   const clonedAssetList = JSON.parse(JSON.stringify(assetList));
   const metaImage = clonedAssetList.length
     ? clonedAssetList[0].image
     : undefined;
-
+  const instantRebateInsight = siteProductLine.instantRebateInsight;
   useEffect(() => {
     if (isValidating) {
       return;
@@ -205,6 +206,7 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
     faq: mapDataToFAQ({ siteProduct, globals }),
     insights,
     installation,
+    instantRebateInsight,
     isLoading,
     isPLA,
     linkingData: mapDataToLinkingData({

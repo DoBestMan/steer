@@ -1,3 +1,5 @@
+import { InsightsRebateProps } from '~/components/modules/PDP/InsightRebate/InsightRebate';
+
 import { SiteCatalogBrand } from './SiteCatalogBrand';
 import { SiteCatalogProductImage } from './SiteCatalogProductImage';
 import { SiteProductLineFaqList } from './SiteProductLineFaqList';
@@ -57,4 +59,6 @@ export interface SiteProductLine {
    * @memberof SiteProductLine
    */
   imageList?: Array<Record<string, unknown>>;
+
+  instantRebateInsight?: InsightsRebateProps[];
 }

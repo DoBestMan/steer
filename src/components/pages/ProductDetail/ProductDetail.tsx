@@ -57,6 +57,7 @@ function ProductDetail({ serverData }: ProductDetailData) {
     assetList,
     insights,
     installation,
+    instantRebateInsight,
     isPLA,
     linkingData,
     meta,
@@ -94,7 +95,6 @@ function ProductDetail({ serverData }: ProductDetailData) {
     hasReviews: !!(reviews.reviews && reviews.reviews.length),
     refId: ANCHORS.REVIEWS_ANCHOR,
   };
-
   /*
     implemented for SIM-10712
     used for browsers (mostly Safari) that cache the previous page
@@ -110,7 +110,6 @@ function ProductDetail({ serverData }: ProductDetailData) {
   if (statusCode) {
     return <Error statusCode={statusCode} />;
   }
-
   return (
     <>
       <Meta {...meta} />
@@ -158,6 +157,7 @@ function ProductDetail({ serverData }: ProductDetailData) {
                 <div id={ANCHORS.INSIGHTS_ANCHOR}>
                   <Insights
                     {...insights}
+                    instantRebateInsight={instantRebateInsight}
                     handleChangeLocation={toggleModal}
                     openDynamicModal={openDynamicModal}
                   />

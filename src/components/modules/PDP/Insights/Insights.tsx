@@ -9,10 +9,12 @@ import { ICONS } from '~/components/global/Icon/Icon.constants';
 import { ContentModalProps } from '~/components/global/Modal/Modal.types';
 import { SiteProductInsightItem } from '~/data/models/SiteProductInsightItem';
 import { SiteProductInsightsRebate } from '~/data/models/SiteProductInsightsRebate';
+import { SiteProductInstantRebate } from '~/data/models/SiteProductInstantRebate';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import AnchorButton from '../AnchorButton/AnchorButton';
+import InsightRebate from '../InsightRebate/InsightRebate';
 import styles from './Insights.styles';
 import { SIZE_CHECK_STATES } from './Insights.types';
 import InsightsItem from './InsightsItem';
@@ -27,6 +29,7 @@ export interface InsightsProps {
   delivery?: string | null;
   handleChangeLocation: () => void;
   insightItems: SiteProductInsightItem[];
+  instantRebateInsight?: SiteProductInstantRebate[];
   make?: string | null;
   onFindTiresThatFit: () => void;
   onSelectAvailableOption: () => void;
@@ -63,6 +66,7 @@ function Insights({
   insightItems = [],
   openDynamicModal,
   rebate,
+  instantRebateInsight,
   ...rest
 }: Props) {
   function handleOpenRebate() {
@@ -70,10 +74,18 @@ function Insights({
       openDynamicModal(rebate.siteDynamicModal);
     }
   }
-
   return (
     <div css={styles.root}>
       <ul css={styles.container}>
+        {instantRebateInsight?.map((item, index) => (
+          <RenderItem key={`${item.label}_${index}`}>
+            <InsightRebate
+              couponCode={item.couponCode}
+              label={item.label}
+              icon={item.icon}
+            />
+          </RenderItem>
+        ))}
         {rebate && (
           <RenderItem>
             <button onClick={handleOpenRebate} aria-label={rebate.label}>
