@@ -26,7 +26,7 @@ export const PROMOTIONS: { [key: string]: FeaturedInfoModuleProps } = {
   },
   giftCard: {
     copy: ui('footer.promotions.giftCardCopy'),
-    icon: ICONS.GIFT,
+    icon: ICONS.FIND_TIRES_BIG,
     title: ui('footer.promotions.giftCardTitle'),
   },
   militaryDiscount: {

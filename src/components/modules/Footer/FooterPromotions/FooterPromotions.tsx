@@ -4,8 +4,8 @@ import FeaturedInfoModule from '~/components/global/FeaturedInfoModule/FeaturedI
 import GridItem from '~/components/global/Grid/GridItem';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { LINK_TYPES } from '~/lib/constants';
-// import { openAttentiveModal } from '~/lib/helpers/attentive';
-import { openReferAFriendModal } from '~/lib/helpers/refer-a-friend';
+import { openAttentiveModal } from '~/lib/helpers/attentive';
+// import { openReferAFriendModal } from '~/lib/helpers/refer-a-friend';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
 
@@ -26,7 +26,7 @@ function FooterPromotions() {
           {...PROMOTIONS.giftCard}
           action={{
             as: LINK_TYPES.BUTTON,
-            onClick: openReferAFriendModal,
+            onClick: openAttentiveModal,
             text: ui('footer.promotions.giftCardAction'),
           }}
           customTitleStyles={styles.featuredInfoTitle}
