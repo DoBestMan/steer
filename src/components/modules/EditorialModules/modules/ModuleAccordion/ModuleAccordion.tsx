@@ -26,16 +26,6 @@ function ModuleAccordion(props: SiteModuleAccordion) {
     <div data-component="module-accordion">
       <Grid css={styles.spacingTopS40XL60}>
         <GridItem gridColumnL={'3/13'} gridColumnXL={'5/11'}>
-          <div
-            css={props.hasBottomBorder && styles.bottomBorder}
-            data-component="module-accordion-container"
-          >
-            <Accordion
-              {...props}
-              id={props.id ? props.id : randomString()}
-              theme={THEME.LIGHT}
-            />
-          </div>
           {accordion}
         </GridItem>
       </Grid>
