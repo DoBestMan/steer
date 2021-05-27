@@ -456,7 +456,9 @@
         "viewTiresThatFit": "View tires that fit"
       },
       "fittingChangeVehicle": "Change vehicle",
-      "changeLocation": "Change location"
+      "changeLocation": "Change location",
+      "confirmFitDecisionModal": "confirmFitDecisionModal",
+      "vehicleSelectorModal": "vehicleSelectorModal"
     },
     "everyPurchaseIncludes": {
       "title": "Every purchase includes"

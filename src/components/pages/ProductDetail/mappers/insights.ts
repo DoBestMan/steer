@@ -153,6 +153,7 @@ export function mapDataToInsights({
   };
 
   return {
+    confirmFitItems: siteProductInsights.siteProductConfirmFitInsightList,
     delivery: siteProductInsights.delivery,
     insightItems,
     make: vehicle?.vehicleMake,

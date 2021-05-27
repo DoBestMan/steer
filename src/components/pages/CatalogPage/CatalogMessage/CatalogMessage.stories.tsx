@@ -35,6 +35,7 @@ export function CatalogDataMomentNoOeMessage() {
         }
         siteCatalogSummaryMeta={vehiclesNoOeWithSizeMock.siteCatalogSummaryMeta}
         openStaticModal={action('Open modal')}
+        updateParamsForConfirmFit={action('Update params for confirm fit')}
       />
     </CatalogMessageContainer>
   );
@@ -51,6 +52,7 @@ export function CatalogDataMomentDisambiguationMessage() {
         }
         siteCatalogSummaryMeta={vehiclesNoOeWithSizeMock.siteCatalogSummaryMeta}
         openStaticModal={action('Open modal')}
+        updateParamsForConfirmFit={action('Update params for confirm fit')}
       />
     </CatalogMessageContainer>
   );
