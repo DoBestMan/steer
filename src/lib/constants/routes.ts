@@ -24,6 +24,7 @@ export enum ROUTES {
   HOME = 'home',
   INVITE = 'invite',
   LEARN = 'learn',
+  LEARN_CATEGORY = 'learnCategory',
   LEARN_CATEGORY_SLUG = 'learnCategorySlug',
   MILITARY_DISCOUNT = 'militaryDiscount',
   OPEN_TEMPLATE = 'openTemplate',
@@ -99,6 +100,7 @@ export const ROUTE_TYPE_MAP: { [routeName: string]: string } = {
   [ROUTES.VEHICLES]: '/vehicles',
   [ROUTES.TIRE_SIZES_LANDING]: '/tire-sizes',
   [ROUTES.OPEN_TEMPLATE]: '/[slug]',
+  [ROUTES.LEARN_CATEGORY]: '/learn/[category]',
   [ROUTES.LEARN_CATEGORY_SLUG]: '/learn/[category]/[slug]',
   [ROUTES.TIRE_SALES]: '/tire-sales',
 };

@@ -15,9 +15,13 @@ import { titleCaseSlug } from '~/lib/utils/string';
 
 import { styles } from './LearnCategoryPage.styles';
 import { convertQuickLinkToAccordionItem } from './mapper/accordionItems';
-import { mapQueryToBreadcrumbs } from './mapper/breadcrumbs';
+import {
+  mapQueryToBreadcrumbs,
+  transformBreadcrumbsItemLearnPage,
+} from './mapper/breadcrumbs';
 
 function LearnCategoryPage({
+  breadcrumbs,
   modules,
   header,
   metadata,
@@ -35,9 +39,20 @@ function LearnCategoryPage({
         <Grid css={styles.breadcrumbsContainer}>
           <GridItem gridColumnL={'3/13'} gridColumnXL={'5/11'}>
             <Meta {...metadata.meta} />
-            <Breadcrumbs
-              navigationItems={mapQueryToBreadcrumbs(query, pageLabel)}
-            />
+            {/* use breadCrumbs from contentful if present. */}
+            {breadcrumbs ? (
+              <Breadcrumbs
+                navigationItems={transformBreadcrumbsItemLearnPage(
+                  breadcrumbs,
+                  pageLabel,
+                  query.slug?.toString(),
+                )}
+              />
+            ) : (
+              <Breadcrumbs
+                navigationItems={mapQueryToBreadcrumbs(query, pageLabel)}
+              />
+            )}
           </GridItem>
         </Grid>
       </div>
