@@ -188,6 +188,16 @@ export function strictEqualsFilterValue(
   return Object.keys(value).every((key) => activeFilters[key] === value[key]);
 }
 
+export function checkValue(key: string, value: string) {
+  let ids = [];
+  if (key?.includes(',')) {
+    ids = key.split(',');
+  } else {
+    ids[0] = key;
+  }
+  return !!ids.find((id) => id === value);
+}
+
 /**
  * Based on the shape of a filter, determines if any values exist in state
  * @returns boolean
@@ -198,8 +208,8 @@ export function hasActiveValue(
 ): boolean {
   // SiteCatalogFilterItem
   if ('value' in filter) {
-    return Object.keys(filter.value).some(
-      (key) => !!activeFilters[key]?.includes(filter.value[key]),
+    return Object.keys(filter.value).some((key) =>
+      checkValue(activeFilters[key], filter?.value[key]),
     );
   }
 

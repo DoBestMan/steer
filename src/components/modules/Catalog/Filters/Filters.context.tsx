@@ -9,7 +9,11 @@ import { createContext } from '~/lib/utils/context';
 import { searchParamToObject } from '~/lib/utils/routes';
 
 import { CatalogFilterTypes } from './Filter.types';
-import { getInitialFiltersState, getValueKeys } from './Filters.utils';
+import {
+  checkValue,
+  getInitialFiltersState,
+  getValueKeys,
+} from './Filters.utils';
 
 interface ContextProviderProps {
   children: ReactNode;
@@ -169,7 +173,8 @@ export function useFiltersContextSetup({
         }
 
         // existing key does not include value, append to current val
-        if (!filters[key].includes(value)) {
+
+        if (!checkValue(filters[key], value)) {
           filters[key] = `${filters[key]},${value}`;
           return;
         }
