@@ -2,7 +2,6 @@
 
 import { NextRouter } from 'next/dist/next-server/lib/router/router';
 
-import { mockDefaultParams } from '~/components/modules/PDP/ConfirmFitInsight/ConfirmFitInsight.mock';
 import { SearchContextProps } from '~/components/modules/Search/Search.context';
 import { UserPersonalizationProps } from '~/context/UserPersonalization.context';
 import { SiteCatalogProductGroupItemEnum } from '~/data/models/SiteCatalogProductGroupList';
@@ -1219,7 +1218,6 @@ export const siteProductMock: SiteProduct = {
       },
     },
     delivery: 'Free 2-day shipping to Brooklyn, NY',
-    siteProductConfirmFitInsightList: mockDefaultParams,
     siteProductInsightList: [
       {
         label: 'Best seller for Honda Civic \nNew line',

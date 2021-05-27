@@ -19,9 +19,8 @@ import { useModalContext } from '~/context/Modal.context';
 import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
 import { SiteCatalogSummaryMeta } from '~/data/models/SiteCatalogSummaryMeta';
 import { SiteCatalogSummaryPrompt } from '~/data/models/SiteCatalogSummaryPrompt';
-import { SiteQueryParams } from '~/data/models/SiteQueryParams';
 import { VehicleMetadata } from '~/data/models/VehicleMetadata';
-import { BUTTON_STYLE, LINK_TYPES, MODAL_THEME, THEME } from '~/lib/constants';
+import { BUTTON_STYLE, LINK_TYPES, MODAL_THEME } from '~/lib/constants';
 import { eventEmitters } from '~/lib/events/emitters';
 import { isValidStaticModal } from '~/lib/utils/modal';
 import { getHrefWithParams } from '~/lib/utils/routes';
@@ -34,13 +33,11 @@ import styles from './CatalogMessage.styles';
 import MessageContainer from './components/MessageContainer';
 
 interface DataMomentMessageProps {
-  isComingFromConfirmFit?: boolean;
   openStaticModal: (modalId: string) => void;
   setStage(stage: STAGES): void;
   showLoadingInterstitial: boolean;
   siteCatalogSummaryMeta: SiteCatalogSummaryMeta | null;
   siteCatalogSummaryPrompt: SiteCatalogSummaryPrompt | null;
-  updateParamsForConfirmFit(siteQueryParams: SiteQueryParams | null): void;
 }
 
 export function DataMomentMessage({
@@ -49,8 +46,6 @@ export function DataMomentMessage({
   siteCatalogSummaryMeta,
   siteCatalogSummaryPrompt,
   openStaticModal,
-  isComingFromConfirmFit,
-  updateParamsForConfirmFit,
 }: DataMomentMessageProps) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { message }: any = useTheme();
@@ -130,24 +125,13 @@ export function DataMomentMessage({
           <div css={styles.dataMomentCtaWrapper} data-testid="catalog-cta-list">
             {siteCatalogSummaryPrompt.ctaList.map(
               ({ label, siteQueryParams, vehicleMetadata }) => {
-                const buttonStyle = isComingFromConfirmFit
-                  ? BUTTON_STYLE.OUTLINED
-                  : hasMultipleCtas
+                const buttonStyle = hasMultipleCtas
                   ? message.buttonStyle
                   : BUTTON_STYLE.SOLID;
                 const id = label.replace(/\s+/g, '').toLowerCase();
                 const href = getHrefWithParams(asPath, siteQueryParams);
 
-                return isComingFromConfirmFit && siteQueryParams ? (
-                  <Button
-                    key={id}
-                    onClick={() => updateParamsForConfirmFit(siteQueryParams)}
-                    style={BUTTON_STYLE.OUTLINED}
-                    theme={THEME.ORANGE}
-                  >
-                    {label}
-                  </Button>
-                ) : siteQueryParams ? (
+                return siteQueryParams ? (
                   <Button
                     key={id}
                     as={LINK_TYPES.A}
@@ -348,7 +332,6 @@ function CatalogMessage({
               openStaticModal={openStaticModal}
               setStage={setStage}
               showLoadingInterstitial={showLoadingInterstitial}
-              updateParamsForConfirmFit={() => null}
             />
           )}
         </MessageContainer>

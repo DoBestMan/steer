@@ -283,17 +283,7 @@ function Search({
     }
 
     if (action.vehicleMetadata) {
-      let vehicleMetadata = action.vehicleMetadata;
-      if (action.link.href) {
-        const vehicleOem = new URLSearchParams(action.link.href).get('oem');
-        if (vehicleOem) {
-          vehicleMetadata = {
-            ...vehicleMetadata,
-            vehicleOem,
-          };
-        }
-      }
-      selectVehicle(vehicleMetadata);
+      selectVehicle(action.vehicleMetadata);
     }
 
     addPastSearch(searchResult);

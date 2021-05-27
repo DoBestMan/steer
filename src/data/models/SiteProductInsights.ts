@@ -1,4 +1,3 @@
-import { ConfirmFitInsightData } from './ConfirmFitInsightData';
 import { SiteProductInsightItem } from './SiteProductInsightItem';
 import { SiteProductInsightsRebate } from './SiteProductInsightsRebate';
 
@@ -8,12 +7,6 @@ import { SiteProductInsightsRebate } from './SiteProductInsightsRebate';
  * @interface SiteProductInsights
  */
 export interface SiteProductInsights {
-  /**
-   *
-   * @type {Array<ConfirmFitInsightData>}
-   * @memberof SiteProductInsights
-   */
-  siteProductConfirmFitInsightList: Array<ConfirmFitInsightData>;
   /**
    *
    * @type {Array<SiteProductInsightItem>}
