@@ -65,23 +65,24 @@ function CatalogGrid({
     !isAdvancedView &&
     siteCatalogProducts?.siteCatalogProductsResultList[0]?.type ===
       SiteCatalogProductGroupItemEnum.SiteCatalogProductGroupItem;
+  const totalGroupResult: number =
+    siteCatalogProducts && siteCatalogProducts.listResultMetadata.pagination
+      ? siteCatalogProducts.listResultMetadata.pagination.total
+      : 0;
+  const resultsPerPage: number =
+    siteCatalogProducts &&
+    siteCatalogProducts.listResultMetadata.pagination?.resultsPerPage
+      ? siteCatalogProducts.listResultMetadata.pagination.resultsPerPage
+      : 0;
 
   const showingResult = isGroupedProducts
-    ? (siteCatalogProducts?.siteCatalogProductsResultList || [])
-        .filter(
-          (result): result is SiteCatalogProductGroupItem =>
-            result.type ===
-            SiteCatalogProductGroupItemEnum.SiteCatalogProductGroupItem,
-        )
-        .reduce(
-          (total, cur) => total + cur.productList.length,
-          siteCatalogSummary.siteCatalogSummaryTopPicksList.length,
-        )
+    ? totalGroupResult <= resultsPerPage
+      ? totalGroupResult
+      : resultsPerPage
     : siteCatalogProducts.siteCatalogProductsResultList.filter(
         (result): result is SiteCatalogProductItem =>
           result.type === SiteCatalogProductItemEnum.SiteCatalogProductItem,
       ).length;
-
   return (
     <div ref={catalogGrid}>
       <HeaderContainer
