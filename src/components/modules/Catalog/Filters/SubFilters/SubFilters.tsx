@@ -23,6 +23,7 @@ interface Props {
   priceFilter?: SiteCatalogFilterRange;
   resultsCount: number;
   showingResult: number;
+  sizeList?: string[];
   sortList: SiteCatalogSortListItem[];
 }
 
@@ -31,6 +32,7 @@ export default function SubFilters({
   resultsCount,
   sortList,
   priceFilter,
+  sizeList = [],
 }: Props) {
   const {
     clearSelectingFilter,
@@ -75,7 +77,6 @@ export default function SubFilters({
   };
 
   const isOpen = selectingFilter === SORT_ID;
-
   const isPlural = resultsCount > 1;
 
   const isGroupedProducts =
@@ -87,16 +88,20 @@ export default function SubFilters({
     ? `catalog.filters.curationResult${isPlural ? 's' : ''}`
     : `catalog.filters.listResult${isPlural ? 's' : ''}`;
   const resultCopy = isGroupedProducts
-    ? ui(copyKey, { current: showingResult, total: resultsCount })
-    : ui(copyKey, { number: resultsCount });
+    ? ui(copyKey, {
+        current: showingResult,
+        total: resultsCount,
+        tireSize: sizeList[0],
+      })
+    : ui(copyKey, { number: resultsCount, tireSize: sizeList[0] });
 
   return (
     <div css={styles.root}>
       <div css={styles.wrapper}>
         <div css={styles.results}>
-          <p css={[styles.result, priceFilter && styles.decorator]}>
+          <h2 css={[styles.result, priceFilter && styles.decorator]}>
             {resultCopy}
-          </p>
+          </h2>
           {isGroupedProducts && (
             <Link
               theme={THEME.LIGHT}

@@ -26,6 +26,7 @@ interface Props {
 export default function Header({
   hasTopPicks,
   showingResult,
+  sizeList = [],
   isInternal = false,
   siteCatalogProducts,
   ...rest
@@ -69,6 +70,7 @@ export default function Header({
           siteCatalogProducts.listResultMetadata.pagination?.total || 0
         }
         sortList={catalogFilters.sortList}
+        sizeList={sizeList}
       />
     </>
   );

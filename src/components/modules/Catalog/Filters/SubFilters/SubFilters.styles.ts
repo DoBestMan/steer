@@ -75,6 +75,7 @@ const styles: StylesMap = {
       display: 'flex',
       flexDirection: 'column',
       flexGrow: 1,
+      width: '60%',
     },
   ],
   root: {
@@ -127,6 +128,9 @@ const styles: StylesMap = {
   wrapper: {
     borderBottom: BORDERS.SOLID_GRAY_20_1PX,
     display: 'flex',
+    div: {
+      flexShrink: 0,
+    },
     padding: SPACING.SIZE_20,
     [MQ.M]: {
       margin: `0px ${SPACING.SIZE_40}px`,

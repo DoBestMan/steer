@@ -64,7 +64,6 @@ module.exports = withBundleAnalyzer({
 
     // Alias
     config.resolve.alias['~'] = path.resolve(__dirname + '/src');
-
     return config;
   },
 });

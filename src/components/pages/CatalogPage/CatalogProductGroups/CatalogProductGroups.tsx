@@ -60,12 +60,7 @@ function CatalogProductGroups({
                 id="top"
                 name={ui('catalog.topPicks.title', {
                   count: filteredTopPicks.length,
-                  name: (
-                    siteCatalogProducts.siteCatalogProductsMeta.title || ''
-                  )
-                    .split(' ')
-                    .slice(3)
-                    .join(' '),
+                  name: 'Your Search',
                 })}
                 description={ui('catalog.topPicks.description')}
                 type={
