@@ -40,7 +40,7 @@ export const getServerSideProps: GetServerSideProps<PageResponse<
   }
 
   const {
-    data: { siteProductLine },
+    data: { siteProductLine, siteProductSpecs },
   } = siteProduct;
 
   return {
@@ -48,6 +48,7 @@ export const getServerSideProps: GetServerSideProps<PageResponse<
       serverData: {
         tire: siteProductLine.name,
         brand: siteProductLine.brand.label,
+        specs: siteProductSpecs,
       },
     },
   };

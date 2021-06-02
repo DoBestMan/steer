@@ -37,6 +37,7 @@ interface Props {
   queryParams: {
     [name: string]: string | string[];
   };
+  shouldShowVehicleInfo?: boolean;
   tire: string;
   vehicle?: string | null;
 }
@@ -100,6 +101,7 @@ const initialState = {
 function ReviewForm({
   brand,
   tire,
+  shouldShowVehicleInfo = false,
   queryParams,
   vehicle,
   onSearchVehicle,
@@ -479,40 +481,42 @@ function ReviewForm({
             </div>
           </fieldset>
 
-          <fieldset css={styles.group}>
-            <h2 css={styles.groupTitle}>
-              {ui('reviews.form.sections.vehicle.title')}
-            </h2>
-            <p css={styles.groupDescription}>
-              {ui('reviews.form.sections.vehicle.description')}
-            </p>
-            <div css={styles.input}>
-              <div css={styles.vehicleInput}>
-                <Input
-                  aria-label={ui('reviews.form.sections.vehicle.search')}
-                  id="vehicle"
-                  readonly
-                  value={formValues[FIELDS.VEHICLE]}
-                  onChange={handleSetFormFieldValue(FIELDS.VEHICLE)}
-                  label={ui('reviews.form.sections.vehicle.label')}
-                />
-                {onSearchVehicle && (
-                  <button
-                    onClick={onSearchVehicle}
-                    css={styles.vehicleSearchButton}
-                  >
-                    <Icon name={ICONS.CHEVRON_RIGHT} />
-                  </button>
-                )}
+          {shouldShowVehicleInfo && (
+            <fieldset css={styles.group}>
+              <h2 css={styles.groupTitle}>
+                {ui('reviews.form.sections.vehicle.title')}
+              </h2>
+              <p css={styles.groupDescription}>
+                {ui('reviews.form.sections.vehicle.description')}
+              </p>
+              <div css={styles.input}>
+                <div css={styles.vehicleInput}>
+                  <Input
+                    aria-label={ui('reviews.form.sections.vehicle.search')}
+                    id="vehicle"
+                    readonly
+                    value={formValues[FIELDS.VEHICLE]}
+                    onChange={handleSetFormFieldValue(FIELDS.VEHICLE)}
+                    label={ui('reviews.form.sections.vehicle.label')}
+                  />
+                  {onSearchVehicle && (
+                    <button
+                      onClick={onSearchVehicle}
+                      css={styles.vehicleSearchButton}
+                    >
+                      <Icon name={ICONS.CHEVRON_RIGHT} />
+                    </button>
+                  )}
+                </div>
+                <button
+                  onClick={handleClearVehicle}
+                  css={styles.vehicleClearSearch}
+                >
+                  {ui('reviews.form.sections.vehicle.clear')}
+                </button>
               </div>
-              <button
-                onClick={handleClearVehicle}
-                css={styles.vehicleClearSearch}
-              >
-                {ui('reviews.form.sections.vehicle.clear')}
-              </button>
-            </div>
-          </fieldset>
+            </fieldset>
+          )}
 
           <fieldset css={styles.group}>
             <h2 css={styles.groupTitle}>

@@ -17,6 +17,7 @@ export function Form() {
           brand: 'continental-tires',
           productLine: 'surecontact-rx',
         }}
+        shouldShowVehicleInfo
       />
     </div>
   );
