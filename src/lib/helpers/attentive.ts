@@ -1,6 +1,6 @@
 const CONSTANTS = {
-  DESKTOP_MODAL_ID: 23342,
-  MOBILE_MODAL_ID: 23343,
+  DESKTOP_MODAL_ID: 82280,
+  MOBILE_MODAL_ID: 82279,
   SCRIPT_ID: 'attentive',
   SCRIPT_SRC: 'https://cdn.attn.tv/simpletire/dtag.js',
   TRIALS: 10,
