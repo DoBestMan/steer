@@ -1,4 +1,14 @@
-import { COLORS, MQ, SPACING, StylesMap, TIME, Z_INDEX } from '~/lib/constants';
+import {
+  BORDERS,
+  COLORS,
+  GAP_COLUMNS,
+  MQ,
+  RADIUS,
+  SPACING,
+  StylesMap,
+  TIME,
+  Z_INDEX,
+} from '~/lib/constants';
 import { getColumnsCalc } from '~/lib/utils/grid';
 import { typography } from '~/styles/typography.styles';
 
@@ -40,6 +50,38 @@ const styles: StylesMap = {
       marginBottom: SPACING.SIZE_60,
     },
   },
+  confirmFitContainer: {
+    [MQ.L]: {
+      borderTopLeftRadius: RADIUS.RADIUS_15,
+      borderTopRightRadius: RADIUS.RADIUS_15,
+      overflow: 'hidden',
+    },
+  },
+  confirmFitItem: {
+    '&:not(:first-of-type):before': {
+      [MQ.M]: {
+        left: GAP_COLUMNS.M,
+        right: GAP_COLUMNS.M,
+      },
+      [MQ.L]: {
+        left: GAP_COLUMNS.S,
+        right: GAP_COLUMNS.S,
+      },
+      borderBottom: BORDERS.SOLID_ORANGE_SHADE_15_1PX,
+      content: '""',
+      display: 'block',
+      left: GAP_COLUMNS.S,
+      position: 'absolute',
+      right: GAP_COLUMNS.S,
+      top: 0,
+      zIndex: Z_INDEX.FRONT,
+    },
+    '> button': {
+      textAlign: 'left',
+      width: '100%',
+    },
+    position: 'relative',
+  },
   detailsSection: [
     defaultSpacing('marginTop'),
     defaultSpacing('paddingBottom', -SPACING.SIZE_20),
@@ -58,6 +100,11 @@ const styles: StylesMap = {
     [MQ.L]: {
       marginTop: SPACING.SIZE_40,
     },
+  },
+  insightStickyBar: {
+    top: 0,
+    position: 'sticky',
+    zIndex: Z_INDEX.FRONT,
   },
   installation: [
     defaultSpacing('marginTop'),

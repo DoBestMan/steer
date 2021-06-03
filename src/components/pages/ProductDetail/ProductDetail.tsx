@@ -11,12 +11,15 @@ import Meta from '~/components/global/Meta/Meta';
 import LocationModal from '~/components/modules/Location/LocationModal/LocationModal';
 import { navigationBreadcrumbPaddingTop } from '~/components/modules/Nav/Nav.styles';
 import AnchorBar from '~/components/modules/PDP/AnchorBar/AnchorBar';
+import ConfirmFitInsight from '~/components/modules/PDP/ConfirmFitInsight/ConfirmFitInsight';
+import { ConfirmFitType } from '~/components/modules/PDP/ConfirmFitInsight/ConfirmFitInsight.utils';
 import FAQ from '~/components/modules/PDP/FAQ/FAQ';
 import Insights from '~/components/modules/PDP/Insights/Insights';
 import ProductInfo from '~/components/modules/PDP/ProductInfo/ProductInfo';
 import PurchaseIncludes from '~/components/modules/PDP/PurchaseIncludes/PurchaseIncludes';
 import ShopWithConfidence from '~/components/modules/PDP/ShopWithConfidence/ShopWithConfidence';
 import TireImage from '~/components/modules/PDP/TireImage/TireImage';
+import { useProductDetailContext } from '~/components/pages/ProductDetail/ProductDetail.context';
 import { useModalContext } from '~/context/Modal.context';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { LINK_THEME } from '~/lib/constants';
@@ -43,11 +46,16 @@ const DynamicTechnicalSpecs = dynamic(() =>
 const DynamicPDPStickyBar = dynamic(() =>
   import('~/components/modules/PDP/StickyBar/StickyBar'),
 );
+const DynamicConfirmFitStickyBar = dynamic(() =>
+  import('~/components/modules/PDP/ConfirmFitStickyBar/ConfirmFitStickyBar'),
+);
 
 function ProductDetail({ serverData }: ProductDetailData) {
   const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
   const stickyBarAvoidSection = useRef<HTMLDivElement>(null);
   const stickyBarDarkSection = useRef<HTMLDivElement>(null);
+  const stickyBarInsightBottomSection = useRef<HTMLDivElement>(null);
+  const stickyBarInsightTopSection = useRef<HTMLDivElement>(null);
   const { isMobile } = useBreakpoints();
   const { openStaticModal, openDynamicModal } = useModalContext();
   const {
@@ -80,6 +88,8 @@ function ProductDetail({ serverData }: ProductDetailData) {
     isPLA,
     hasRecirculation: isPLA && recirculation && recirculation.length > 0,
   });
+
+  const { isLoading } = useProductDetailContext();
 
   function reloadPageIfPersisted({ persisted }: { persisted: boolean }) {
     if (persisted) {
@@ -114,6 +124,20 @@ function ProductDetail({ serverData }: ProductDetailData) {
     <>
       <Meta {...meta} />
       {linkingData && <DataStructure jsonLD={linkingData} />}
+      <GridItem fullbleed css={styles.insightStickyBar}>
+        {insights &&
+          insights.confirmFitItems &&
+          insights.confirmFitItems.length === 1 &&
+          insights.confirmFitItems[0].type === ConfirmFitType.DEFAULT &&
+          productInfo &&
+          productInfo.size && (
+            <DynamicConfirmFitStickyBar
+              avoidSection={stickyBarInsightBottomSection}
+              avoidTopSection={stickyBarInsightTopSection}
+              data={insights.confirmFitItems[0]}
+            />
+          )}
+      </GridItem>
       <Grid
         css={[
           navigationBreadcrumbPaddingTop,
@@ -130,7 +154,9 @@ function ProductDetail({ serverData }: ProductDetailData) {
           gridRowL="2/3"
           css={styles.tireImage}
         >
-          <TireImage assetList={assetList} brand={productInfo.brand} />
+          <div ref={stickyBarInsightTopSection}>
+            <TireImage assetList={assetList} brand={productInfo.brand} />
+          </div>
         </GridItem>
         <GridItem
           fullbleed
@@ -152,11 +178,45 @@ function ProductDetail({ serverData }: ProductDetailData) {
             <GridItem fullbleed css={styles.anchorBar}>
               <AnchorBar anchorList={anchorList} />
             </GridItem>
+            <GridItem
+              fullbleed
+              css={[styles.insights, styles.confirmFitContainer]}
+            >
+              <div ref={stickyBarInsightBottomSection}>
+                {insights &&
+                  insights.confirmFitItems &&
+                  productInfo &&
+                  productInfo.size &&
+                  insights.confirmFitItems.map((item, index) => (
+                    <li
+                      key={index}
+                      data-component={`${item.type}-your-vehicle-component`}
+                      css={styles.confirmFitItem}
+                    >
+                      <ConfirmFitInsight
+                        {...item}
+                        isLoading={isLoading}
+                        tireSize={productInfo.size}
+                      />
+                    </li>
+                  ))}
+              </div>
+            </GridItem>
             {insights && (
-              <GridItem fullbleed css={styles.insights}>
+              <GridItem
+                fullbleed
+                css={
+                  (!insights.confirmFitItems ||
+                    !productInfo.size ||
+                    isLoading) &&
+                  styles.insights
+                }
+              >
                 <div id={ANCHORS.INSIGHTS_ANCHOR}>
                   <Insights
                     {...insights}
+                    size={productInfo.size}
+                    isLoading={isLoading}
                     instantRebateInsight={instantRebateInsight}
                     handleChangeLocation={toggleModal}
                     openDynamicModal={openDynamicModal}

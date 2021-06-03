@@ -7,6 +7,7 @@ import { ReactNode } from 'react';
 
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import { ContentModalProps } from '~/components/global/Modal/Modal.types';
+import { ConfirmFitInsightData } from '~/data/models/ConfirmFitInsightData';
 import { SiteProductInsightItem } from '~/data/models/SiteProductInsightItem';
 import { SiteProductInsightsRebate } from '~/data/models/SiteProductInsightsRebate';
 import { SiteProductInstantRebate } from '~/data/models/SiteProductInstantRebate';
@@ -23,9 +24,9 @@ import InsightsItem from './InsightsItem';
  * Note: temporaily removing this for ST MVP launch.
  * Refer to WCS-1590 for details.
  */
-// const DynamicFitButton = dynamic(() => import('./FitButton'));
 
 export interface InsightsProps {
+  confirmFitItems: ConfirmFitInsightData[];
   delivery?: string | null;
   handleChangeLocation: () => void;
   insightItems: SiteProductInsightItem[];
@@ -42,7 +43,9 @@ export interface InsightsProps {
 }
 
 interface Props extends InsightsProps {
+  isLoading?: boolean;
   openDynamicModal: (modalData: ContentModalProps) => void;
+  size: string | undefined | null;
 }
 
 function RenderItem({ children }: { children: ReactNode }) {
@@ -65,8 +68,11 @@ function Insights({
   handleChangeLocation,
   insightItems = [],
   openDynamicModal,
+  confirmFitItems,
+  size,
   rebate,
   instantRebateInsight,
+  isLoading,
   ...rest
 }: Props) {
   function handleOpenRebate() {
@@ -74,9 +80,20 @@ function Insights({
       openDynamicModal(rebate.siteDynamicModal);
     }
   }
+
+  const doConfirmFitParamsExist =
+    confirmFitItems && confirmFitItems.length > 0 && size && !isLoading;
+
   return (
     <div css={styles.root}>
-      <ul css={styles.container}>
+      <ul
+        css={
+          doConfirmFitParamsExist
+            ? styles.containerWithConfirmFit
+            : styles.container
+        }
+      >
+        {doConfirmFitParamsExist && <div css={styles.confirmFitSeperator} />}
         {instantRebateInsight?.map((item, index) => (
           <RenderItem key={`${item.label}_${index}`}>
             <InsightRebate
