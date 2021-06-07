@@ -35,6 +35,7 @@ export interface CatalogProductsContextProps {
     withoutSavingFilters?: boolean,
   ) => Promise<void>;
   isAdvancedView: boolean;
+  isLoaded: boolean;
   isLoading: boolean;
   onPreviewFilters: (filters?: Record<string, string>) => Promise<void>;
   pastFilters: Array<Record<string, string>>;
@@ -74,6 +75,8 @@ function useContextSetup({
     !!hasDefaultAdvancedView,
   );
   const [isLoading, setIsLoading] = useState(false);
+  // Show loading indicator until first fetch is finished
+  const [isLoaded, setIsLoaded] = useState(false);
   const [displayedProducts, setDisplayedProducts] = useState<
     SiteCatalogProductItem[]
   >([]);
@@ -152,28 +155,34 @@ function useContextSetup({
           setPastFilters([params]);
 
           const searchString = new URLSearchParams(params).toString();
+          const newPath = searchString
+            ? `${route[0]}?${searchString}`
+            : route[0];
           if (searchString) {
-            push(`${pathname}?${searchString}`, `${route[0]}?${searchString}`, {
+            push(`${pathname}?${searchString}`, newPath, {
               shallow: true,
             });
           } else {
-            push(pathname, route[0], {
+            push(pathname, newPath, {
               shallow: true,
             });
           }
-          addNotification({
-            handleNotificationClick: () => {},
-            icon: {
-              svgId: 'notification',
-              type: ICON_IMAGE_TYPE.ICON,
-            },
-            id: new Date().getTime().toString(),
-            subtext: ui('catalog.notification.subtext'),
-            suppressFromHomePage: false,
-            theme: THEME.LIGHT,
-            title: ui('catalog.notification.title'),
-            type: SiteNotificationTypes.Shop,
-          });
+
+          if (asPath !== newPath) {
+            addNotification({
+              handleNotificationClick: () => {},
+              icon: {
+                svgId: 'notification',
+                type: ICON_IMAGE_TYPE.ICON,
+              },
+              id: new Date().getTime().toString(),
+              subtext: ui('catalog.notification.subtext'),
+              suppressFromHomePage: false,
+              theme: THEME.LIGHT,
+              title: ui('catalog.notification.title'),
+              type: SiteNotificationTypes.Shop,
+            });
+          }
 
           const response: AsyncResponse<{
             siteCatalogProducts: SiteCatalogProducts;
@@ -184,14 +193,8 @@ function useContextSetup({
             method: 'get',
             query: { ...params, ...pageParams },
           });
-          if (
-            response.isSuccess &&
-            response?.data?.siteCatalogProducts?.listResultMetadata.pagination
-              ?.total
-          ) {
+          if (response.isSuccess) {
             setProductsData(response?.data?.siteCatalogProducts);
-          } else {
-            setProductsData(null);
           }
         } else {
           if (pastFilters.length === 0) {
@@ -213,6 +216,7 @@ function useContextSetup({
           filters:
             data?.siteCatalogProducts.siteCatalogFilters || EMPTY_FILTERS,
         });
+        setIsLoaded(true);
       },
     },
   });
@@ -421,6 +425,7 @@ function useContextSetup({
     forceClosePopup,
     handleUpdateResults,
     isAdvancedView,
+    isLoaded,
     isLoading,
     onPreviewFilters,
     pastFilters,

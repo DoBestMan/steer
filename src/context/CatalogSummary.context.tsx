@@ -51,6 +51,7 @@ export const onDataReady = (siteCatalogSummary: SiteCatalogSummary) => {
     ?.ctaList?.length;
   const hasTopPicks = !!siteCatalogSummary.siteCatalogSummaryTopPicksList
     .length;
+
   /**
    * Disambiguation response also has 0 results, but user should see the
    * loading interstitial. Therefore, only show the NO_RESULTS stage if

@@ -24,6 +24,7 @@ interface Props {
 
 function CatalogPage({ catalogGridRef, isSearchForTireSize }: Props) {
   const {
+    isLoaded,
     displayedProducts,
     fetchNewProducts,
     onPreviewFilters,
@@ -41,7 +42,7 @@ function CatalogPage({ catalogGridRef, isSearchForTireSize }: Props) {
   const hasResults = totalResult > 0;
 
   const showLoadingIndicator =
-    stage === STAGES.LOADING || stage == STAGES.DATA_MOMENT;
+    stage === STAGES.LOADING || stage == STAGES.DATA_MOMENT || !isLoaded;
 
   /**
    * Grid should be visible when `contentStage` is set to `RESULTS`
@@ -96,7 +97,13 @@ function CatalogPage({ catalogGridRef, isSearchForTireSize }: Props) {
           </div>
         </>
       )}
-      {showLoadingIndicator && <CatalogLoading />}
+      {showLoadingIndicator && (
+        <div
+          css={[stage === STAGES.RESULTS && !isLoaded && styles.loaderWrapper]}
+        >
+          <CatalogLoading />
+        </div>
+      )}
     </ThemeProvider>
   );
 }

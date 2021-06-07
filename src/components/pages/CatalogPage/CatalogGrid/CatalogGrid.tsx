@@ -83,6 +83,7 @@ function CatalogGrid({
         (result): result is SiteCatalogProductItem =>
           result.type === SiteCatalogProductItemEnum.SiteCatalogProductItem,
       ).length;
+
   return (
     <div ref={catalogGrid}>
       <HeaderContainer
