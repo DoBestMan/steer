@@ -1,13 +1,16 @@
 import { ReactNode } from 'react';
 
 import { SiteDynamicModal } from '~/data/models/SiteDynamicModal';
-import { MODAL_DATA_TYPES, MODAL_THEME } from '~/lib/constants';
+import { CSSStylesProp, MODAL_DATA_TYPES, MODAL_THEME } from '~/lib/constants';
 
 export interface Props {
   children: ReactNode;
+  contentCss?: { [key: string]: string };
   contentLabel: string;
+  customStyle?: CSSStylesProp;
   hasCloseButton?: boolean;
   hasDefaultPadding?: boolean;
+  id?: string;
   isFullscreen?: boolean;
   isHalfscreen?: boolean;
   isOpen: boolean;

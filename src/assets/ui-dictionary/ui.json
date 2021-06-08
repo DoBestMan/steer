@@ -183,6 +183,32 @@
     "tireSize": "Add Tire Size"
   },
   "catalog": {
+    "compare": {
+      "hide": "Hide",
+      "show": "Show",
+      "addTire": "Add a tire",
+      "compare": "Compare",
+      "modal": {
+        "contentLabel": "compare modal",
+        "title": "Comparison chart",
+        "description": "Add 2 to 5 tires to see side by side • ",
+        "tireSize": "Tire size: {{tireSize}}"
+      },
+      "notification": {
+        "maxAlert": {
+          "subtext": "To compare your most recent tire selection, remove one of these first.",
+          "title": "The max number of tires is five."
+        },
+        "dupAlert":{
+          "title": "Tire already added",
+          "subtext": "The tire you added is already in the compare list"
+        }
+      },
+      "drawer": {
+        "title": "Compare Tires",
+        "subtitle": "Add 2 to 5 tires to see side by side"
+      }
+    },
     "recirculation": {
       "allOfCatalog": "All of our catalog",
       "seeAllTires": "See all {{number}} tires"

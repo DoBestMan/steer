@@ -8,6 +8,7 @@ import { SiteIcon } from './SiteIcon';
 import { SiteImage } from './SiteImage';
 import { SiteLink } from './SiteLink';
 import { SitePrice } from './SitePrice';
+import { SiteProductLineSizeDetailRoadHazard } from './SiteProductLineSizeDetailRoadHazard';
 
 export enum SiteCatalogProductItemEnum {
   SiteCatalogProductItem = 'SiteCatalogProductItem',
@@ -17,9 +18,11 @@ export interface SiteCatalogProductSpec {
   concise: string;
   label: string;
   value: string;
+  description?: string;
 }
 
 export interface SiteCatalogProductItem {
+  productId?: string;
   activeFilterValueList: Array<string> | null;
   brand: SiteCatalogBrand;
   ctaLabel?: string | null;
@@ -59,4 +62,6 @@ export interface SiteCatalogProductItem {
   specList: Array<SiteCatalogProductSpec>;
   topPicksAttribute: string | null;
   type: SiteCatalogProductItemEnum;
+  siteProductLineSizeDetailRoadHazard?: SiteProductLineSizeDetailRoadHazard | null;
+  curationType: string;
 }

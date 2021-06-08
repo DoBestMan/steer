@@ -24,7 +24,7 @@ function Notification({
 }: SiteNotifications) {
   const handleDismiss = () => {
     setNotificationIdWithExpiryInLocalStorage(id, sessionExpiryTime);
-    handleNotificationClick();
+    handleNotificationClick && handleNotificationClick();
   };
 
   return (
@@ -58,14 +58,16 @@ function Notification({
             </span>
           )}
         </GridItem>
-        <Link
-          as={LINK_TYPES.BUTTON}
-          aria-label={ui('common.toast.close')}
-          type="button"
-          css={styles.icon}
-          icon={ICONS.CLOSE}
-          onClick={handleDismiss}
-        />
+        {handleNotificationClick && (
+          <Link
+            as={LINK_TYPES.BUTTON}
+            aria-label={ui('common.toast.close')}
+            type="button"
+            css={styles.icon}
+            icon={ICONS.CLOSE}
+            onClick={handleDismiss}
+          />
+        )}
       </div>
     </CSSTransition>
   );

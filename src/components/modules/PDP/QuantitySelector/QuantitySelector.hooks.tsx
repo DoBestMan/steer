@@ -1,9 +1,13 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import { useProductDetailContext } from '~/components/pages/ProductDetail/ProductDetail.context';
 import { formatDollars } from '~/lib/utils/string';
 
+interface Quantity {
+  front: number;
+  rear?: number;
+}
 interface QuantitySelectorContainerProps {
+  initialQuantity: Quantity;
   isFrontAndRear?: boolean;
   onChangeQuantity: (values: { front: number; rear?: number }) => void;
   rearPrice?: string;
@@ -63,8 +67,8 @@ function useQuantitySelectorContainer({
   rearPrice,
   tirePrice,
   toggleModal,
+  initialQuantity,
 }: QuantitySelectorContainerProps): UseQuantitySelectorContainerProps {
-  const { quantity: initialQuantity } = useProductDetailContext();
   const [quantity, setQuantity] = useState(initialQuantity.front);
   const [rearQuantity, setRearQuantity] = useState(initialQuantity.rear);
   const [finalPrice, setFinalPrice] = useState(

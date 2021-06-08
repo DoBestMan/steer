@@ -28,7 +28,6 @@ function Carousel({
   ...rest
 }: Props) {
   const [swiper, setSwiper] = useState<SwiperInstance>(null);
-
   const finalParams = Object.assign(
     {},
     {

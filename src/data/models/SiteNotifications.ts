@@ -26,5 +26,5 @@ export interface SiteNotifications {
   sessionExpiryTime?: number;
 
   suppressFromHomePage: boolean;
-  handleNotificationClick: () => void;
+  handleNotificationClick?: () => void;
 }

@@ -54,6 +54,40 @@ const styles: StylesMap = {
       fontSize: `${22 / 10}rem`,
     },
   },
+  checkbox: {
+    '& label': {
+      display: 'flex',
+      cursor: 'pointer',
+    },
+    '& label > span:last-of-type': {
+      marginRight: SPACING.SIZE_05,
+    },
+    '& label span:first-of-type': {
+      order: -1,
+    },
+    ':hover&:not(:disabled)': {
+      span: {
+        borderColor: COLORS.DARK.GRAY_DARK_SOLID,
+      },
+    },
+    display: 'flex',
+    position: 'absolute',
+    right: SPACING.SIZE_20,
+    top: SPACING.SIZE_20,
+    zIndex: 1,
+  },
+  checkLabel: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  checkTitle: [
+    typography.smallCopyTight,
+    {
+      color: '#181818',
+      marginRight: '7px',
+      order: -1,
+    },
+  ],
   deliveryIcon: {
     position: 'relative',
     left: -4,

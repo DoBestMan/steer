@@ -292,6 +292,7 @@ export const siteProductMock: SiteProduct = {
             },
             label: 'Achilles',
           },
+          curationType: 'top',
           priceList: [
             {
               label: null,
@@ -404,6 +405,7 @@ export const siteProductMock: SiteProduct = {
             },
             label: 'AG-Dura',
           },
+          curationType: 'top',
           priceList: [
             {
               label: null,
@@ -516,6 +518,7 @@ export const siteProductMock: SiteProduct = {
             },
             label: 'Advanta',
           },
+          curationType: 'top',
           priceList: [
             {
               label: null,
@@ -628,6 +631,7 @@ export const siteProductMock: SiteProduct = {
             },
             label: 'Agstar',
           },
+          curationType: 'top',
           priceList: [
             {
               label: null,
@@ -733,6 +737,7 @@ export const siteProductMock: SiteProduct = {
             image: null,
             label: 'Continental',
           },
+          curationType: 'top',
           priceList: [
             {
               label: null,
@@ -845,6 +850,7 @@ export const siteProductMock: SiteProduct = {
             },
             label: 'Achilles',
           },
+          curationType: 'top',
           priceList: [
             {
               label: null,
@@ -957,6 +963,7 @@ export const siteProductMock: SiteProduct = {
             },
             label: 'AG-Dura',
           },
+          curationType: 'top',
           priceList: [
             {
               label: null,
@@ -1069,6 +1076,7 @@ export const siteProductMock: SiteProduct = {
             },
             label: 'Advanta',
           },
+          curationType: 'top',
           priceList: [
             {
               label: null,

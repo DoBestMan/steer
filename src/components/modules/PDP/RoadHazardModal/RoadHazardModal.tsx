@@ -9,8 +9,9 @@ import Markdown from '~/components/global/Markdown/Markdown';
 import BottomCardModal from '~/components/global/Modal/BottomCardModal';
 import { modalContainerStyles } from '~/components/global/Modal/BottomCardModal.styles';
 import RadioSelector from '~/components/global/Radio/RadioSelector';
-import { useProductDetailContext } from '~/components/pages/ProductDetail/ProductDetail.context';
+import { Quantity } from '~/components/pages/ProductDetail/ProductDetail.context';
 import { useModalContext } from '~/context/Modal.context';
+import { SiteCatalogProductItem } from '~/data/models/SiteCatalogProductItem';
 import { BUTTON_STYLE, LINK_TYPES, THEME } from '~/lib/constants';
 import { STATIC_MODAL_IDS } from '~/lib/constants/staticModals';
 import { formatDollars } from '~/lib/utils/string';
@@ -25,10 +26,22 @@ export const CONSTANTS = {
 };
 
 interface Props {
+  addToCart: ({
+    product,
+    quantity,
+    shouldAddCoverage,
+  }: {
+    product?: SiteCatalogProductItem;
+    quantity?: Quantity;
+    shouldAddCoverage: boolean;
+  }) => void;
   durationLabel: string;
+  isAddingToCart: boolean;
   isOpen: boolean;
   onClose: () => void;
   price: string;
+  product?: SiteCatalogProductItem;
+  quantity?: Quantity;
 }
 
 function LearnMoreLink({
@@ -52,9 +65,16 @@ function LearnMoreLink({
   );
 }
 
-function RoadHazardModal({ durationLabel, isOpen, onClose, price }: Props) {
-  const { addToCart, isAddingToCart } = useProductDetailContext();
-
+function RoadHazardModal({
+  durationLabel,
+  isOpen,
+  onClose,
+  price,
+  addToCart,
+  isAddingToCart,
+  product,
+  quantity,
+}: Props) {
   const { openStaticModal } = useModalContext();
   const [value, setValue] = useState(CONSTANTS.HAS_COVERAGE);
   const [shouldIntercept, setShouldIntercept] = useState(false);
@@ -69,11 +89,19 @@ function RoadHazardModal({ durationLabel, isOpen, onClose, price }: Props) {
       return;
     }
 
-    addToCart({ shouldAddCoverage: value === CONSTANTS.HAS_COVERAGE });
+    addToCart({
+      product,
+      quantity,
+      shouldAddCoverage: value === CONSTANTS.HAS_COVERAGE,
+    });
   }
 
   function handleIntercepAction(_value: string) {
-    addToCart({ shouldAddCoverage: _value === CONSTANTS.HAS_COVERAGE });
+    addToCart({
+      product,
+      quantity,
+      shouldAddCoverage: _value === CONSTANTS.HAS_COVERAGE,
+    });
   }
 
   useEffect(() => {

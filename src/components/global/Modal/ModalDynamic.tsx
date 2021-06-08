@@ -32,7 +32,10 @@ function Modal({
   onAfterClose,
   onAfterOpen,
   onClose,
+  id,
   theme = MODAL_THEME.LIGHT,
+  contentCss,
+  customStyle,
 }: Props) {
   const linkTheme = theme === MODAL_THEME.LIGHT ? THEME.LIGHT : THEME.DARK;
   const { lessThan } = useBreakpoints();
@@ -41,8 +44,10 @@ function Modal({
   const animationStyles = fullscreen
     ? animation[MODAL_ANIMATION.FADE]
     : animation[MODAL_ANIMATION.SLIDE_LEFT];
+
   return (
     <ReactModal
+      id={id}
       contentLabel={contentLabel}
       isOpen={isOpen}
       onAfterClose={onAfterClose}
@@ -60,6 +65,7 @@ function Modal({
         },
         content: {
           overflow: 'auto',
+          ...contentCss,
         },
       }}
       css={[
@@ -69,10 +75,11 @@ function Modal({
         animationStyles.default,
         hasDefaultPadding && fullscreen && styles.fullScreenPadding,
         isOpen && animationStyles.open,
+        customStyle,
       ]}
     >
       {(onBack || hasCloseButton) && (
-        <div css={styles.actions}>
+        <div css={styles.actions} className="close-button">
           {onBack && (
             <Link
               as="button"

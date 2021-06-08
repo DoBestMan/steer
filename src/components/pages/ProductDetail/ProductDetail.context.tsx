@@ -6,6 +6,7 @@ import { ReactNode, useCallback, useEffect, useState } from 'react';
 import { useSearchContext } from '~/components/modules/Search/Search.context';
 import { useSearchModalContext } from '~/components/modules/Search/SearchModal.context';
 import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
+import { SiteCatalogProductItem } from '~/data/models/SiteCatalogProductItem';
 import { SitePrice } from '~/data/models/SitePrice';
 import { VehicleMetadata } from '~/data/models/VehicleMetadata';
 import { apiBootstrap } from '~/lib/api/bootstrap';
@@ -35,7 +36,7 @@ interface Props {
   serverData: ProductDetailResponse;
 }
 
-interface Quantity {
+export interface Quantity {
   front: number;
   rear?: number;
 }
@@ -59,7 +60,15 @@ export function getDefaultQuantity({
 }
 
 export interface ProductDetailContextProps {
-  addToCart: ({ shouldAddCoverage }: { shouldAddCoverage: boolean }) => void;
+  addToCart: ({
+    product,
+    quantity,
+    shouldAddCoverage,
+  }: {
+    product?: SiteCatalogProductItem;
+    quantity?: Quantity;
+    shouldAddCoverage: boolean;
+  }) => void;
   changeSize: (index: number) => void;
   currentSizeIndex: number;
   data: ProductDetailResponse | null;
@@ -82,7 +91,7 @@ export interface ProductDetailContextProps {
 
 const ProductDetailContext = createContext<ProductDetailContextProps>();
 
-function getQueryParams({
+export function getQueryParams({
   hashParams,
   queryParams,
   vehicle,
@@ -200,7 +209,13 @@ function useContextSetup({
   }, [quantity, queryParams, setQuantity]);
 
   const addToCart = useCallback(
-    ({ shouldAddCoverage }: { shouldAddCoverage: boolean }) => {
+    ({
+      shouldAddCoverage,
+    }: {
+      product?: SiteCatalogProductItem;
+      quantity?: Quantity;
+      shouldAddCoverage: boolean;
+    }) => {
       if (!data || !data.siteProduct.siteProductLineSizeDetail) {
         return;
       }

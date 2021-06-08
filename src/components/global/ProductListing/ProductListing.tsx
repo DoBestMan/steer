@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from 'react';
 
 import BrandLogoOrLabel from '~/components/global/BrandLogoOrLabel/BrandLogoOrLabel';
+import Checkbox from '~/components/global/Checkbox/Checkbox';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Image from '~/components/global/Image/Image';
 import BaseLink from '~/components/global/Link/BaseLink';
@@ -28,6 +29,19 @@ import ProductListingPlaceholder from './ProductListingPlaceholder';
 
 const MAX_PROMOS = 2;
 
+interface Props {
+  imageList: ProductListingProps['imageList'];
+  index: number;
+  isChecked?: boolean;
+  isGrouped?: boolean;
+  isHighlighted?: boolean;
+  isTopPicksGroup?: boolean;
+  onCheckChange?: (value?: boolean) => void;
+  openTopTireDetails?: (index: number) => void;
+  product: ProductListingProps | null;
+  testId?: string;
+}
+
 function ProductListing({
   product,
   isHighlighted,
@@ -37,16 +51,9 @@ function ProductListing({
   index,
   testId,
   openTopTireDetails,
-}: {
-  imageList: ProductListingProps['imageList'];
-  index: number;
-  isGrouped?: boolean;
-  isHighlighted?: boolean;
-  isTopPicksGroup?: boolean;
-  openTopTireDetails?: (index: number) => void;
-  product: ProductListingProps | null;
-  testId?: string;
-}) {
+  onCheckChange,
+  isChecked,
+}: Props) {
   const [isHovered, setIsHovered] = useState(false);
   const [hasImageLoaded, setHasImageLoaded] = useState(false);
   const [shouldDisplayAsset, setShouldDisplayAsset] = useState(true);
@@ -122,11 +129,16 @@ function ProductListing({
     setIsHovered(false);
   }
 
-  const handleImageLoad = () => {
+  function handleImageLoad() {
     setHasImageLoaded(true);
-  };
+  }
+
   function onImageError() {
     setShouldDisplayAsset(false);
+  }
+
+  function handleCheckChange(event: React.MouseEvent<HTMLDivElement>) {
+    event.stopPropagation();
   }
 
   return (
@@ -142,6 +154,20 @@ function ProductListing({
       data-testid={testId}
     >
       <div css={[styles.image, isHighlighted && styles.imageHighlighted]}>
+        {onCheckChange && (
+          <div css={styles.checkbox} onClick={handleCheckChange}>
+            <label css={styles.checkLabel}>
+              <Checkbox
+                checked={isChecked}
+                onChange={onCheckChange}
+                data-testid={'checkbox' + product.productId}
+              />
+              <span css={styles.checkTitle}>
+                {ui('catalog.compare.compare')}
+              </span>
+            </label>
+          </div>
+        )}
         {highlight && (
           <div
             css={[styles.sticker, isHighlighted && styles.stickerHighlighted]}

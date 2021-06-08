@@ -9,6 +9,7 @@ import IconOrImage from '~/components/global/IconOrImage/IconOrImage';
 import TopTireDetailsModal from '~/components/global/Modal/TopTireDetailsModal';
 import ProductListing from '~/components/global/ProductListing/ProductListing';
 import { SiteCatalogProductGroupItem } from '~/data/models/SiteCatalogProductGroupList';
+import { SiteCatalogProductItem } from '~/data/models/SiteCatalogProductItem';
 import { SiteCatalogSummary } from '~/data/models/SiteCatalogSummary';
 import { CSSStylesProp } from '~/lib/constants';
 
@@ -16,10 +17,15 @@ import BaseLink from '../Link/BaseLink';
 import styles from './ProductGroupList.styles';
 
 export interface ProductGroupListProps extends SiteCatalogProductGroupItem {
+  checkSelection?: (product: SiteCatalogProductItem) => boolean;
   customHeaderStyles?: CSSStylesProp;
   customItemStyles?: CSSStylesProp;
+  id: string;
   isTopPicksGroup?: boolean;
+  onCheckChange?: (product: SiteCatalogProductItem) => () => void;
   onClick?: (params: Record<string, string>) => void;
+  productListToCompare?: SiteCatalogProductItem[];
+  setOpenCompareDrawer?: (value: boolean) => void;
   siteCatalogSummary?: SiteCatalogSummary;
 }
 
@@ -34,9 +40,10 @@ function ProductGroupList({
   onClick,
   customItemStyles,
   siteCatalogSummary,
+  checkSelection,
+  onCheckChange,
 }: ProductGroupListProps) {
   const [selectedProductIndex, setSelectedProductIndex] = useState(-1);
-
   const isHeadingButton = onClick && siteQueryParams;
   const HeadingEl = isHeadingButton ? 'button' : BaseLink;
   function handleHeadingClick(filters: Record<string, string>) {
@@ -101,6 +108,10 @@ function ProductGroupList({
                   isTopPicksGroup={isTopPicksGroup}
                   isGrouped
                   openTopTireDetails={openTopTireDetails}
+                  onCheckChange={
+                    onCheckChange ? onCheckChange(product) : undefined
+                  }
+                  isChecked={checkSelection && checkSelection(product)}
                 />
               </div>
             );

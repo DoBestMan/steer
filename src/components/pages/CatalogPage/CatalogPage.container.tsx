@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import React, { useRef } from 'react';
 
 import Meta from '~/components/global/Meta/Meta';
+import { CompareContextProvider } from '~/components/modules/Compare/Compare.context';
 import { useSearchModalContext } from '~/components/modules/Search/SearchModal.context';
 import { CatalogProductsContextProvider } from '~/context/CatalogProducts.context';
 import { CatalogSummaryContextProvider } from '~/context/CatalogSummary.context';
@@ -71,10 +72,12 @@ function CatalogPageContainer({
           endpoint={endpoints.products}
           pageParams={pageParams}
         >
-          <CatalogPage
-            catalogGridRef={catalogGridRef}
-            isSearchForTireSize={!!isSearchForTireSize}
-          />
+          <CompareContextProvider>
+            <CatalogPage
+              catalogGridRef={catalogGridRef}
+              isSearchForTireSize={!!isSearchForTireSize}
+            />
+          </CompareContextProvider>
         </CatalogProductsContextProvider>
       </CatalogSummaryContextProvider>
     </>

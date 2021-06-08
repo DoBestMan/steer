@@ -4,7 +4,6 @@ import { fireEvent, render, screen, within } from '@testing-library/react';
 import preloadAll from 'jest-next-dynamic';
 import ReactModal from 'react-modal';
 
-import * as ProductDetailContext from '~/components/pages/ProductDetail/ProductDetail.context';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import QuantitySelectorContainer from './QuantitySelector.container';
@@ -28,9 +27,6 @@ const defaultFrontAndRearQuantity = {
 describe('modules/PDP/QuantitySelector', () => {
   beforeEach(async () => {
     await preloadAll();
-    (ProductDetailContext as any).useProductDetailContext = jest.fn(() => ({
-      quantity: defaultFrontOnlyQuantity,
-    }));
   });
 
   afterEach(() => {
@@ -44,6 +40,7 @@ describe('modules/PDP/QuantitySelector', () => {
         onChangeQuantity={changeQuantity}
         toggleModal={toggleModal}
         tirePrice="5000"
+        initialQuantity={defaultFrontOnlyQuantity}
       />,
     );
 
@@ -61,6 +58,7 @@ describe('modules/PDP/QuantitySelector', () => {
         onChangeQuantity={changeQuantity}
         toggleModal={toggleModal}
         tirePrice="5000"
+        initialQuantity={defaultFrontOnlyQuantity}
       />,
     );
 
@@ -82,6 +80,7 @@ describe('modules/PDP/QuantitySelector', () => {
         onChangeQuantity={changeQuantity}
         toggleModal={toggleModal}
         tirePrice="5000"
+        initialQuantity={defaultFrontOnlyQuantity}
       />,
     );
 
@@ -127,6 +126,7 @@ describe('modules/PDP/QuantitySelector', () => {
         onChangeQuantity={changeQuantity}
         toggleModal={toggleModal}
         tirePrice="5000"
+        initialQuantity={defaultFrontOnlyQuantity}
       />,
     );
 
@@ -170,10 +170,6 @@ describe('modules/PDP/QuantitySelector', () => {
   });
 
   it('confirms front and rear default quantities', async () => {
-    (ProductDetailContext as any).useProductDetailContext = jest.fn(() => ({
-      quantity: defaultFrontAndRearQuantity,
-    }));
-
     render(
       <QuantitySelectorContainer
         isFrontAndRear
@@ -182,6 +178,7 @@ describe('modules/PDP/QuantitySelector', () => {
         toggleModal={toggleModal}
         tirePrice="5000"
         rearPrice="6000"
+        initialQuantity={defaultFrontAndRearQuantity}
       />,
     );
 
@@ -193,10 +190,6 @@ describe('modules/PDP/QuantitySelector', () => {
   });
 
   it('changes front and rear quantities and confirm', async () => {
-    (ProductDetailContext as any).useProductDetailContext = jest.fn(() => ({
-      quantity: defaultFrontAndRearQuantity,
-    }));
-
     render(
       <QuantitySelectorContainer
         isFrontAndRear
@@ -205,6 +198,7 @@ describe('modules/PDP/QuantitySelector', () => {
         toggleModal={toggleModal}
         tirePrice="5000"
         rearPrice="6999"
+        initialQuantity={defaultFrontAndRearQuantity}
       />,
     );
 
@@ -230,6 +224,7 @@ describe('modules/PDP/QuantitySelector', () => {
         onChangeQuantity={changeQuantity}
         toggleModal={toggleModal}
         tirePrice="5000"
+        initialQuantity={defaultFrontOnlyQuantity}
       />,
     );
 
@@ -260,6 +255,7 @@ describe('modules/PDP/QuantitySelector', () => {
         toggleModal={toggleModal}
         tirePrice="5000"
         rearPrice="6000"
+        initialQuantity={defaultFrontOnlyQuantity}
       />,
     );
 

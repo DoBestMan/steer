@@ -174,6 +174,9 @@ const Shippingtruckoutline = dynamic(
 const Shopsbig = dynamic(() => import('~/assets/icons/others/shops-big.svg'), {
   ssr: false,
 });
+const Sidewall = dynamic(() => import('~/assets/icons/others/sidewall.svg'), {
+  ssr: false,
+});
 const Smiley = dynamic(() => import('~/assets/icons/others/smiley.svg'), {
   ssr: false,
 });
@@ -390,6 +393,7 @@ export const ICONS_OTHER_MAP: Record<string, ReactElement> = {
   SHIPPING_TRUCK: <Shippingtruck />,
   SHIPPING_TRUCK_OUTLINE: <Shippingtruckoutline />,
   SHOPS_BIG: <Shopsbig />,
+  SIDEWALL: <Sidewall />,
   SMILEY: <Smiley />,
   SMILEY_CONCERNED: <Smileyconcerned />,
   SMILEY_WINK: <Smileywink />,

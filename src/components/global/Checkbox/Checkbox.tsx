@@ -8,7 +8,7 @@ import styles from './Checkbox.styles';
 interface Props  // use custom on change
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
   isDisabled?: boolean;
-  onChange?: () => void;
+  onChange?: (value?: boolean) => void;
 }
 
 export default function Checkbox({
@@ -17,6 +17,11 @@ export default function Checkbox({
   onChange,
   ...rest
 }: Props) {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.checked;
+    onChange && onChange(value);
+  };
+
   return (
     <>
       <input
@@ -26,7 +31,7 @@ export default function Checkbox({
         type="checkbox"
         checked={checked}
         disabled={isDisabled}
-        onChange={onChange}
+        onChange={handleChange}
         {...rest}
       />
       <span

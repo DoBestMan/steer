@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 
 import Button from '~/components/global/Button/Button';
 import AdvancedListingPlaceholder from '~/components/modules/Catalog/AdvancedListing/AdvancedListingPlaceholder';
+import { useCompareContext } from '~/components/modules/Compare/Compare.context';
 import { addHashForScroll } from '~/components/pages/CatalogPage/CatalogPage.helpers';
 import { useCatalogProductsContext } from '~/context/CatalogProducts.context';
 import { ListResultMetadata } from '~/data/models/ListResultMetadata';
@@ -38,6 +39,12 @@ function CatalogProductGrid({
     displayedProducts,
     setDisplayedProducts,
   } = useCatalogProductsContext();
+  const {
+    addToList,
+    removeFromList,
+    includedInList,
+    checkSelection,
+  } = useCompareContext();
   const [currentPage, setCurrentPage] = useState(1);
   const [nextProducts, setNextProducts] = useState(pagination?.resultsPerPage);
   const [scrollPosition, setScrollPosition] = useState<number>();
@@ -105,6 +112,23 @@ function CatalogProductGrid({
     addHashForScroll(scrollId);
   };
 
+  const onCheckChange = (product: SiteCatalogProductItem) => (
+    value?: boolean,
+  ) => {
+    const isInList = includedInList(product.productId as string);
+
+    if (!isInList && value) {
+      addToList(product);
+
+      return;
+    }
+
+    if (isInList && !value) {
+      removeFromList && removeFromList(product.productId as string);
+      return;
+    }
+  };
+
   return (
     <>
       {displayedProducts.map((product, i) => {
@@ -116,7 +140,11 @@ function CatalogProductGrid({
             onClick={handleProductClick(scrollId)}
             key={`${product?.name}-${i}`}
           >
-            <Advancedlisting product={product} />
+            <Advancedlisting
+              product={product}
+              onCheckChange={onCheckChange(product)}
+              isChecked={checkSelection(product)}
+            />
           </div>
         );
       })}

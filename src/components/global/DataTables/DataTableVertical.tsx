@@ -32,11 +32,11 @@ export interface DataTableProps {
   isFirstColumnFixed?: boolean;
   width?: number;
 }
-interface TableProps {
+export interface TableProps {
   caption: string;
   children: ReactNode;
 }
-interface RowProps {
+export interface RowProps {
   children: ReactNode;
 }
 interface ColumnProps {
@@ -47,7 +47,8 @@ interface ColumnProps {
   role: string;
   width: number;
 }
-function Table({ children, caption }: TableProps) {
+
+export function Table({ children, caption }: TableProps) {
   return (
     <div css={styles.tableWrapper} role="table" aria-label={caption}>
       {children}
@@ -55,7 +56,7 @@ function Table({ children, caption }: TableProps) {
   );
 }
 
-function Row({ children }: RowProps) {
+export function Row({ children }: RowProps) {
   return (
     <div css={[styles.tableRow]} role="row">
       <div css={styles.tableRowWrapper}>{children}</div>

@@ -71,7 +71,6 @@ function PDPActionBar({
     addToCart,
     quantity,
     isAddingToCart,
-    // searchForVehicle,
     setIsAddingToCart,
     setQuantity,
   } = useProductDetailContext();
@@ -237,6 +236,7 @@ function PDPActionBar({
           onChangeQuantity={handleChangeQuantity}
           toggleModal={toggleQuantitySelector}
           tirePrice={tirePrice}
+          initialQuantity={quantity}
         />
 
         {!!roadHazard && (
@@ -245,6 +245,8 @@ function PDPActionBar({
             onClose={toggleRoadHazard}
             durationLabel={roadHazard?.durationLabel}
             price={roadHazard?.price}
+            addToCart={addToCart}
+            isAddingToCart={isAddingToCart}
           />
         )}
       </>
@@ -287,6 +289,8 @@ function PDPActionBar({
           onClose={toggleRoadHazard}
           durationLabel={roadHazard?.durationLabel}
           price={roadHazard?.price}
+          addToCart={addToCart}
+          isAddingToCart={isAddingToCart}
         />
       )}
     </>

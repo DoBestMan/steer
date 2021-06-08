@@ -27,7 +27,7 @@ function CatalogLoading() {
   ];
 
   return (
-    <>
+    <div css={styles.root}>
       <div css={styles.header}>
         <Skeleton
           width="100%"
@@ -120,7 +120,7 @@ function CatalogLoading() {
           ))}
         </Carousel>
       </div>
-    </>
+    </div>
   );
 }
 

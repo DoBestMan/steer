@@ -126,6 +126,7 @@ export function AdvancedListingWithKnobs() {
             image: showBrandLogo ? mockLogo : undefined,
             label: 'Firestone',
           },
+          curationType: 'top',
           dataMomentList: null,
           deliveryInfo: {
             value: text('Delivery info', '2-day free delivery'),

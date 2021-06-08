@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import React, { useRef, useState } from 'react';
 
 import BrandLogoOrLabel from '~/components/global/BrandLogoOrLabel/BrandLogoOrLabel';
+import Checkbox from '~/components/global/Checkbox/Checkbox';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
 import Icon from '~/components/global/Icon/Icon';
@@ -41,7 +42,11 @@ import AdvancedListingPlaceholder from './AdvancedListingPlaceholder';
 
 function AdvancedListing({
   product,
+  onCheckChange,
+  isChecked,
 }: {
+  isChecked?: boolean;
+  onCheckChange?: (value?: boolean) => void;
   product: AdvancedListingProps | null;
 }) {
   const router = useRouter();
@@ -123,6 +128,25 @@ function AdvancedListing({
             gridColumnL="2/7"
           >
             <div css={styles.image}>
+              {onCheckChange && (
+                <div
+                  css={styles.checkbox}
+                  onClick={(event) => {
+                    event.stopPropagation();
+                  }}
+                >
+                  <label css={styles.checkLabel}>
+                    <span css={styles.checkTitle}>
+                      {ui('catalog.compare.compare')}
+                    </span>
+                    <Checkbox
+                      onChange={onCheckChange}
+                      checked={isChecked}
+                      data-testid={'checkbox' + product.productId}
+                    />
+                  </label>
+                </div>
+              )}
               {highlight && (
                 <div css={styles.sticker}>
                   <Sticker label={highlight} size={STICKER_SIZES.LARGE} />

@@ -2,7 +2,6 @@ import { COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const styles: StylesMap = {
-  asset: {},
   assetContainer: {
     display: 'flex',
     justifyContent: 'center',
@@ -76,6 +75,10 @@ const styles: StylesMap = {
     [MQ.L]: {
       padding: `${SPACING.SIZE_60}px ${SPACING.SIZE_60}px ${SPACING.SIZE_30}px`,
     },
+  },
+  root: {
+    overflow: 'hidden',
+    width: '100%',
   },
   sortBy: {
     display: 'flex',

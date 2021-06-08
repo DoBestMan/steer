@@ -4,6 +4,9 @@ import NotificationList from '~/components/global/NotificationBanner/Notificatio
 import HeaderContainer from '~/components/modules/Catalog/Header.container';
 import Recirculation from '~/components/modules/Catalog/Recirculation/Recirculation';
 import SeeAllTires from '~/components/modules/Catalog/Recirculation/SeeAllTires';
+import { useCompareContext } from '~/components/modules/Compare/Compare.context';
+import CompareDrawer from '~/components/modules/Compare/CompareDrawer/CompareDrawer';
+import CompareModal from '~/components/modules/Compare/CompareModal/CompareModal';
 import { useCatalogProductsContext } from '~/context/CatalogProducts.context';
 import { useCatalogSummaryContext } from '~/context/CatalogSummary.context';
 import { SiteCatalogFilters } from '~/data/models/SiteCatalogFilters';
@@ -17,6 +20,7 @@ import {
 } from '~/data/models/SiteCatalogProductItem';
 import { SiteCatalogProducts } from '~/data/models/SiteCatalogProducts';
 import { SiteNotificationTypes } from '~/data/models/SiteNotificationTypes';
+import { ui } from '~/lib/utils/ui-dictionary';
 
 import CatalogProductGrid from '../CatalogProductGrid/CatalogProductGrid';
 import CatalogProductGroups from '../CatalogProductGroups/CatalogProductGroups';
@@ -50,8 +54,18 @@ function CatalogGrid({
     handleUpdateResults,
     isAdvancedView,
   } = useCatalogProductsContext();
+  const {
+    productListToCompare,
+    removeFromList,
+    openCompareDrawer,
+    setOpenCompareDrawer,
+    handleCompare,
+    setRemovingProductIndex,
+    setShowDupAlert,
+    showDupAlert,
+    showCompareDrawer,
+  } = useCompareContext();
   const catalogGrid = useRef<HTMLDivElement | null>(null);
-
   // Experiment
   useExperimentSkipCurationView({
     isLoading,
@@ -59,6 +73,14 @@ function CatalogGrid({
       handleUpdateResults({ skipGroups: 'true' }, true);
     },
   });
+
+  const onCloseCompareDrawer = () => {
+    setOpenCompareDrawer(false);
+  };
+
+  const onToggleCompareDrawer = () => {
+    setOpenCompareDrawer((state) => !state);
+  };
 
   const totalResults = siteCatalogSummary?.siteCatalogSummaryMeta?.totalResults;
   const isGroupedProducts =
@@ -135,6 +157,25 @@ function CatalogGrid({
               )}
             />
           )}
+          <CompareDrawer
+            hide={showCompareDrawer}
+            title={ui('catalog.compare.drawer.title')}
+            subtitle={ui('catalog.compare.drawer.subtitle')}
+            open={openCompareDrawer}
+            onClose={onCloseCompareDrawer}
+            onToggle={onToggleCompareDrawer}
+            isDisabled={
+              2 > productListToCompare.length || 5 < productListToCompare.length
+            }
+            productList={productListToCompare}
+            onRemove={removeFromList}
+            onAddTire={onCloseCompareDrawer}
+            onCompare={handleCompare}
+            setRemovingProductIndex={setRemovingProductIndex}
+            showDupAlert={showDupAlert}
+            setShowDupAlert={setShowDupAlert}
+          />
+          <CompareModal />
         </div>
       )}
     </div>

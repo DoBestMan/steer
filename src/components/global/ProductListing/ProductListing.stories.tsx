@@ -100,6 +100,7 @@ export function ProductListingWithKnobs() {
               image: showBrandLogo ? mockLogo : undefined,
               label: 'Firestone',
             },
+            curationType: 'top',
             dataMomentList: null,
             deliveryInfo: {
               value: text('Delivery info', '2-day free delivery'),
@@ -150,6 +151,7 @@ export function FilteredProductListing() {
               image: mockLogo,
               label: 'Firestone',
             },
+            curationType: 'top',
             dataMomentList: null,
             deliveryInfo: null,
             gridAttribute: null,
@@ -191,6 +193,7 @@ export function HighlightedProductListing() {
               image: mockLogo,
               label: 'Firestone',
             },
+            curationType: 'top',
             dataMomentList: null,
             deliveryInfo: null,
             gridAttribute: null,

@@ -6,10 +6,16 @@ import QuantitySelector from './QuantitySelector';
 import useQuantitySelectorContainer from './QuantitySelector.hooks';
 import styles from './QuantitySelector.styles';
 
+interface Quantity {
+  front: number;
+  rear?: number;
+}
 interface Props {
+  initialQuantity: Quantity;
   isFrontAndRear?: boolean;
   isOpen: boolean;
   onChangeQuantity: (values: { front: number; rear?: number }) => void;
+  onClose?: () => void;
   rearPrice?: string;
   tirePrice: string;
   toggleModal: () => void;
@@ -34,6 +40,8 @@ function QuantitySelectorContainer({
   rearPrice,
   tirePrice,
   toggleModal,
+  initialQuantity,
+  onClose,
 }: Props) {
   const {
     finalPrice,
@@ -47,6 +55,7 @@ function QuantitySelectorContainer({
     selectedFrontIndex,
     selectedRearIndex,
   } = useQuantitySelectorContainer({
+    initialQuantity,
     isFrontAndRear,
     onChangeQuantity,
     rearPrice,
@@ -58,7 +67,7 @@ function QuantitySelectorContainer({
       isIntercept={!!recommendedQuantity}
       isOpen={isOpen}
       quantity={quantity}
-      onClose={toggleModal}
+      onClose={onClose || toggleModal}
       onConfirm={onConfirm}
       onInterceptAction={onInterceptAction}
       recommendedQuantity={recommendedQuantity}

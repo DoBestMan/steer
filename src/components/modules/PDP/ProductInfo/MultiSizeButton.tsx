@@ -137,6 +137,7 @@ function MultiSizeButton({
           toggleModal={toggleQuantitySelector}
           tirePrice={price.salePriceInCents}
           rearPrice={rearPrice?.salePriceInCents}
+          initialQuantity={quantity}
         />
       )}
     </>

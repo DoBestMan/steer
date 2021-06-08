@@ -5,7 +5,9 @@ import { randomString } from '~/lib/utils/string';
 
 export enum SCROLL_DIRECTION {
   DOWN = 'down',
+  LEFT = 'left',
   NONE = '',
+  RIGHT = 'right',
   UP = 'up',
 }
 
@@ -95,8 +97,18 @@ export const setScroll = (scrollObject: ScrollObject) => {
     scrollObject.y = 0;
   }
 
-  scroll.direction =
-    scroll.y > scrollObject.y ? SCROLL_DIRECTION.UP : SCROLL_DIRECTION.DOWN;
+  if (scroll.y > scrollObject.y) {
+    scroll.direction = SCROLL_DIRECTION.UP;
+  } else if (scroll.y < scrollObject.y) {
+    scroll.direction = SCROLL_DIRECTION.DOWN;
+  }
+
+  if (scroll.x > scrollObject.x) {
+    scroll.direction = SCROLL_DIRECTION.LEFT;
+  } else if (scroll.x < scrollObject.x) {
+    scroll.direction = SCROLL_DIRECTION.RIGHT;
+  }
+
   scroll.x = scrollObject.x;
   scroll.y = scrollObject.y;
 

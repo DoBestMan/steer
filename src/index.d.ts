@@ -1,6 +1,7 @@
 declare module '*.svg';
 declare module 'focus-trap';
 declare module 'jest-next-dynamic';
+declare module 'react-scroll-sync';
 
 interface FocusTrapInstance {
   activate: function;

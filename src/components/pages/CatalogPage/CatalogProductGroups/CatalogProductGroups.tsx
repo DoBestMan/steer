@@ -2,6 +2,7 @@ import React from 'react';
 
 import ProductGroupList from '~/components/global/ProductGroupList/ProductGroupList';
 import ProductGroupListPlaceholder from '~/components/global/ProductGroupList/ProductGroupListPlaceholder';
+import { useCompareContext } from '~/components/modules/Compare/Compare.context';
 import { addHashForScroll } from '~/components/pages/CatalogPage/CatalogPage.helpers';
 import { useCatalogProductsContext } from '~/context/CatalogProducts.context';
 import { useCatalogSummaryContext } from '~/context/CatalogSummary.context';
@@ -30,12 +31,44 @@ function CatalogProductGroups({
     siteCatalogProducts,
   } = useCatalogProductsContext();
   const { siteCatalogSummary } = useCatalogSummaryContext();
+  const {
+    addToList,
+    checkSelection,
+    removeFromList,
+    includedInList,
+    setShowDupAlert,
+    setOpenCompareDrawer,
+    productListToCompare,
+  } = useCompareContext();
+
   const filteredTopPicks = (
     siteCatalogSummary.siteCatalogSummaryTopPicksList || []
   ).filter((topPick) => !!topPick.product);
 
   const handleClick = (groupId: string) => () => {
     addHashForScroll(groupId);
+  };
+
+  const onCheckChange = (product: SiteCatalogProductItem) => () => {
+    const isInList =
+      includedInList && includedInList(product.productId as string);
+    const isChecked = checkSelection && checkSelection(product);
+
+    if (isInList) {
+      setOpenCompareDrawer(true);
+      setShowDupAlert(true);
+      return;
+    }
+
+    if (!isInList && !isChecked) {
+      addToList(product);
+      return;
+    }
+
+    if (isInList && isChecked) {
+      removeFromList && removeFromList(product.productId as string);
+      return;
+    }
   };
 
   return (
@@ -77,6 +110,10 @@ function CatalogProductGroups({
                 siteCatalogSummary={siteCatalogSummary}
                 siteQueryParams={null}
                 isTopPicksGroup
+                checkSelection={checkSelection}
+                setOpenCompareDrawer={setOpenCompareDrawer}
+                productListToCompare={productListToCompare}
+                onCheckChange={onCheckChange}
               />
             </div>
           )}
@@ -90,6 +127,10 @@ function CatalogProductGroups({
               <ProductGroupList
                 onClick={handleUpdateResults}
                 isTopPicksGroup={false}
+                checkSelection={checkSelection}
+                setOpenCompareDrawer={setOpenCompareDrawer}
+                productListToCompare={productListToCompare}
+                onCheckChange={onCheckChange}
                 {...group}
               />
             </div>
