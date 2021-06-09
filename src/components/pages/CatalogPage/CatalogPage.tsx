@@ -1,5 +1,4 @@
 import { ThemeProvider } from '@emotion/react';
-import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 
 import { useSearchModalContext } from '~/components/modules/Search/SearchModal.context';
@@ -22,7 +21,7 @@ interface Props {
   isSearchForTireSize?: boolean;
 }
 
-function CatalogPage({ catalogGridRef, isSearchForTireSize }: Props) {
+function CatalogPage({ catalogGridRef }: Props) {
   const {
     isLoaded,
     displayedProducts,
@@ -35,7 +34,6 @@ function CatalogPage({ catalogGridRef, isSearchForTireSize }: Props) {
   const { contentStage, showSummary, stage } = useCatalogSummaryContext();
   const { fromSearch, setFromSearch } = useSearchModalContext();
   const { setIsFooterVisible } = useFooterContext();
-  const { query } = useRouter();
 
   const totalResult =
     siteCatalogProducts?.listResultMetadata.pagination?.total || 0;
@@ -76,9 +74,6 @@ function CatalogPage({ catalogGridRef, isSearchForTireSize }: Props) {
   useEffect(() => {
     scrollToId(scrollToGrid, hasResults);
   }, [hasResults, displayedProducts, scrollToGrid, siteCatalogProducts]);
-  if (query.utm_source && isSearchForTireSize) {
-    setTimeout(scrollToGrid, 100);
-  }
 
   return (
     <ThemeProvider theme={{ ...defaultTheme }}>
