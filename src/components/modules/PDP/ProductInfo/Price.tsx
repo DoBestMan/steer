@@ -1,28 +1,30 @@
-import { useRouter } from 'next/router';
 import React from 'react';
 
 import Prices from '~/components/global/Prices/Prices';
-import { formatDollars, getParameterByNameFromUrl } from '~/lib/utils/string';
+import { formatDollars } from '~/lib/utils/string';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { uiJSX } from '~/lib/utils/ui-dictionary-jsx';
 
 import styles from './Price.styles';
 import { ProductInfoProps } from './ProductInfo';
 
-type Props = Pick<
-  ProductInfoProps,
-  'price' | 'priceLabel' | 'startingPrice' | 'volatileAvailability'
->;
+interface PriceProps
+  extends Pick<
+    ProductInfoProps,
+    'price' | 'priceLabel' | 'startingPrice' | 'volatileAvailability'
+  > {
+  handleClickBestPrice?: () => void;
+  isPdp: boolean;
+}
 
 function Price({
   price,
   priceLabel,
   startingPrice,
   volatileAvailability,
-}: Props) {
-  const queryString = useRouter();
-  const isPdp = getParameterByNameFromUrl('tireSize', queryString.asPath);
-
+  isPdp,
+  handleClickBestPrice,
+}: PriceProps) {
   if (startingPrice && startingPrice !== '0' && isPdp) {
     return (
       <p css={styles.startingPrice}>
@@ -45,10 +47,14 @@ function Price({
 
   return (
     <>
-      {priceLabel && <p css={styles.priceFeature}>{priceLabel}</p>}
+      {priceLabel && (
+        <p css={styles.priceFeature} className="p-tag">
+          {priceLabel}
+        </p>
+      )}
       {volatileAvailability && (
         <p css={styles.priceFeature}>
-          {ui('pdp.productInfo.volatileAvailability')}
+          ]{ui('pdp.productInfo.volatileAvailability')}
         </p>
       )}
       <Prices
@@ -59,6 +65,7 @@ function Price({
           !isSalePrice ? styles.pricesPadded : {},
         ]}
         customOriginalStyles={styles.originalPrice}
+        handleClickBestPrice={handleClickBestPrice}
       />
     </>
   );

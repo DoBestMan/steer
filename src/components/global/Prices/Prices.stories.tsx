@@ -1,9 +1,11 @@
 import { boolean, select, text } from '@storybook/addon-knobs';
 
 import { COLORS } from '~/lib/constants';
+import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
 
 import Prices from './Prices';
+import { bestPriceStyle } from './Prices.styles';
 
 export default {
   component: Prices,
@@ -182,4 +184,33 @@ export function StartAtPrice() {
   ];
 
   return <Prices priceList={priceList} isStartingAtPrice />;
+}
+
+export function PriceWithBestPriceGaurantee() {
+  const priceList = [
+    {
+      label: null,
+      price: {
+        salePriceInCents: '16499',
+        estimatedRetailPriceInCents: '17996',
+      },
+    },
+  ];
+
+  const isSalePrice =
+    parseInt(priceList[0].price.salePriceInCents, 10) <
+    parseInt(priceList[0].price.estimatedRetailPriceInCents, 10);
+
+  return (
+    <Prices
+      originalPrefix={ui('common.originalPricePrefix')}
+      priceList={priceList}
+      customPriceStyles={[
+        bestPriceStyle.prices,
+        !isSalePrice ? bestPriceStyle.pricesPadded : {},
+      ]}
+      customOriginalStyles={bestPriceStyle.originalPrice}
+      handleClickBestPrice={() => {}}
+    />
+  );
 }

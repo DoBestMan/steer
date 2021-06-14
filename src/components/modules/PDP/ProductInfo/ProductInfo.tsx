@@ -6,7 +6,6 @@ import { ContentModalProps } from '~/components/global/Modal/Modal.types';
 import { PromoTagProps } from '~/components/global/PromoTag/PromoTag';
 import PromoTagCarousel from '~/components/global/PromoTag/PromoTagCarousel';
 import { useProductDetailContext } from '~/components/pages/ProductDetail/ProductDetail.context';
-import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
 import { SiteCatalogBrand } from '~/data/models/SiteCatalogBrand';
 import { SitePrice } from '~/data/models/SitePrice';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
@@ -31,6 +30,7 @@ export interface ProductInfoProps {
   brandURL?: string;
   callForPricing?: boolean;
   hasError?: boolean;
+  isBestPriceGuarantee?: boolean;
   isTireLine: boolean;
   loadRange?: string | null;
   loadSpeedRating?: string;
@@ -92,6 +92,7 @@ function ProductInfo({
   sizeFinder,
   startingPrice,
   volatileAvailability,
+  isBestPriceGuarantee,
 }: Props) {
   const {
     isLoading,
@@ -102,7 +103,6 @@ function ProductInfo({
     getProductCount,
     setShowSelectError,
   } = useProductDetailContext();
-  const { isDesktop } = useSiteGlobalsContext();
   const { bk } = useBreakpoints();
 
   useEffect(() => {
@@ -113,8 +113,13 @@ function ProductInfo({
 
   const isOutOfStock = (!price || callForPricing) && size;
   const shouldShowSizeSelector = !isLoading || isTireLine || size;
+  const queryString = useRouter();
+  const IsPDP = getParameterByNameFromUrl('tireSize', queryString.asPath);
 
   function renderPrice() {
+    const handleClickBestPrice = () => {
+      //open up the modal
+    };
     return (
       <div css={[styles.pricesWrapper]}>
         <Price
@@ -122,6 +127,10 @@ function ProductInfo({
           priceLabel={priceLabel}
           startingPrice={isTireLine ? startingPrice : undefined}
           volatileAvailability={volatileAvailability}
+          isPdp={!!IsPDP}
+          handleClickBestPrice={
+            isBestPriceGuarantee ? handleClickBestPrice : undefined
+          }
         />
       </div>
     );
@@ -135,13 +144,12 @@ function ProductInfo({
           priceLabel={priceLabel}
           startingPrice={null}
           volatileAvailability={volatileAvailability}
+          isPdp={!!IsPDP}
         />
       </div>
     );
   }
 
-  const queryString = useRouter();
-  const IsPDP = getParameterByNameFromUrl('tireSize', queryString.asPath);
   const brandName = brand.label.toLocaleLowerCase();
 
   if (
@@ -213,11 +221,10 @@ function ProductInfo({
                       sizeFinder={sizeFinder}
                     />
                   </div>
-                  {isLoading && !isTireLine
-                    ? null
-                    : [BREAKPOINT_SIZES.M, BREAKPOINT_SIZES.S].includes(bk) &&
-                      !isOutOfStock &&
-                      renderPrice()}
+                  {!isOutOfStock && renderPrice()}
+                  <div css={styles.ratingWrapper}>
+                    <Rating reviews={reviews} rating={rating} />
+                  </div>
                 </div>
                 {showSelectError && (
                   <span role="alert" css={styles.errorMessage}>
@@ -236,9 +243,10 @@ function ProductInfo({
             bk !== BREAKPOINT_SIZES.M && <div css={styles.loading} />
           ) : (
             <div css={styles.priceAndActionBarWrapper}>
-              {![BREAKPOINT_SIZES.M, BREAKPOINT_SIZES.S].includes(bk) &&
-                !isOutOfStock &&
-                renderPrice()}
+              {!isOutOfStock && renderPrice()}
+              <div css={styles.ratingWrapper}>
+                <Rating reviews={reviews} rating={rating} />
+              </div>
               <div css={styles.actionBar}>
                 <DynamicPDPActionBar
                   roadHazard={roadHazard}
@@ -301,7 +309,9 @@ function ProductInfo({
                 brandURL={brandURL}
               />
             </div>
-            <Rating reviews={reviews} rating={rating} />
+            <div css={styles.rating}>
+              <Rating reviews={reviews} rating={rating} />
+            </div>
           </div>
           {shouldShowSizeSelector ? (
             <>
@@ -315,9 +325,6 @@ function ProductInfo({
                     sizeFinder={sizeFinder}
                   />
                 </div>
-                {isLoading && !isTireLine
-                  ? null
-                  : !isDesktop && !isOutOfStock && renderPrice()}
               </div>
               {showSelectError && (
                 <span role="alert" css={styles.errorMessage}>
@@ -337,10 +344,10 @@ function ProductInfo({
           bk !== BREAKPOINT_SIZES.M && <div css={styles.loading} />
         ) : (
           <div css={styles.priceAndActionBarWrapper}>
-            {(![BREAKPOINT_SIZES.M, BREAKPOINT_SIZES.S].includes(bk) ||
-              isDesktop) &&
-              !isOutOfStock &&
-              renderPrice()}
+            {!isOutOfStock && renderPrice()}
+            <div css={styles.ratingWrapper}>
+              <Rating reviews={reviews} rating={rating} />
+            </div>
             <div css={styles.actionBar}>
               <DynamicPDPActionBar
                 roadHazard={roadHazard}

@@ -61,6 +61,7 @@ export function mapDataToProductInfo({
     currentSizeIndex >= 0
       ? siteProductLineAvailableSizeList[currentSizeIndex]
       : siteProductLineAvailableSizeList.find((item) => item.isSelected);
+  const isBestPriceGuarantee = listingSize?.isBestPriceGuarantee;
 
   const tireSizeLabel = listingSize?.size;
   const loadSpeedRating = listingSize?.loadSpeedRating;
@@ -156,6 +157,7 @@ export function mapDataToProductInfo({
     },
     brandURL,
     callForPricing,
+    isBestPriceGuarantee,
     isTireLine,
     loadRange,
     loadSpeedRating,

@@ -1,17 +1,20 @@
 import React from 'react';
 
+import Link from '~/components/global/Link/Link';
 import { SitePrice } from '~/data/models/SitePrice';
-import { COLORS, CSSStylesProp } from '~/lib/constants';
+import { COLORS, CSSStylesProp, THEME } from '~/lib/constants';
 import { formatDollars } from '~/lib/utils/string';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { typography } from '~/styles/typography.styles';
 
+import { ICONS } from '../Icon/Icon.constants';
 import CallForPricing from './CallForPricing';
-import styles from './Prices.styles';
+import styles, { bestPriceStyle } from './Prices.styles';
 
 interface Props {
   customOriginalStyles?: CSSStylesProp;
   customPriceStyles?: CSSStylesProp;
+  handleClickBestPrice?: () => void;
   isLight?: boolean;
   isStartingAtPrice?: boolean;
   originalPrefix?: string;
@@ -28,6 +31,7 @@ function Prices({
   isLight,
   isStartingAtPrice,
   originalPrefix,
+  handleClickBestPrice,
 }: Props) {
   return (
     <>
@@ -56,24 +60,37 @@ function Prices({
                 {isStartingAtPrice && ui('common.startingAtPrice') + ' '}
                 {formatDollars(price.salePriceInCents)}
               </span>
-              {!isStartingAtPrice && isSalePrice && (
-                <span
-                  css={[
-                    styles.originalValue,
-                    isLight && { color: COLORS.LIGHT.GRAY_70 },
-                    originalPrefix && styles.originalValuePrefixed,
-                    customOriginalStyles,
-                  ]}
-                  aria-label={`${ui(
-                    'common.originalPricePrefix',
-                  )}${formatDollars(price.estimatedRetailPriceInCents)}`}
-                >
-                  <span aria-hidden>
-                    {originalPrefix}
-                    {formatDollars(price.estimatedRetailPriceInCents)}
+              <div css={styles.infoWrapper}>
+                {!isStartingAtPrice && isSalePrice && (
+                  <span
+                    css={[
+                      styles.originalValue,
+                      isLight && { color: COLORS.LIGHT.GRAY_70 },
+                      originalPrefix && styles.originalValuePrefixed,
+                      customOriginalStyles,
+                    ]}
+                    aria-label={`${ui(
+                      'common.originalPricePrefix',
+                    )}${formatDollars(price.estimatedRetailPriceInCents)}`}
+                  >
+                    <span aria-hidden>
+                      {originalPrefix}
+                      {formatDollars(price.estimatedRetailPriceInCents)}
+                    </span>
                   </span>
-                </span>
-              )}
+                )}
+                {handleClickBestPrice && (
+                  <Link
+                    as="button"
+                    theme={THEME.LIGHT}
+                    icon={ICONS.REVIEW_VERIFIED}
+                    css={bestPriceStyle.originalPrice}
+                    onClick={handleClickBestPrice}
+                  >
+                    {ui('pdp.productInfo.bestPrice')}
+                  </Link>
+                )}
+              </div>
             </div>
           );
         })

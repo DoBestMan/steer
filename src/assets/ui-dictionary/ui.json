@@ -449,7 +449,8 @@
       "rearTireSize": "Rear {{size}}",
       "startingAtLabel": "Starting at {{value}}",
       "selectError": "You’ll need to select your tire size first.",
-      "questionMark": "?"
+      "questionMark": "?",
+      "bestPrice": "・Best price guaranteed"
     },
     "sizeFinder": {
       "fits": "Fits your {{make}}"

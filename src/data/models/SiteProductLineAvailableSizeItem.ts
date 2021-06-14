@@ -66,4 +66,10 @@ export interface SiteProductLineAvailableSizeItem {
    * @memberof SiteProductLineAvailableSizeItem
    */
   partNumber: string;
+  /**
+   *
+   * @type {boolean}
+   * @memberof SiteProductLineAvailableSizeItem
+   */
+  isBestPriceGuarantee?: boolean;
 }

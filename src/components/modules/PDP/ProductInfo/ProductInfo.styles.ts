@@ -132,15 +132,17 @@ const styles: StylesMap = {
     alignItems: 'flex-end',
     display: 'flex',
     justifyContent: 'space-between',
+    marginTop: SPACING.SIZE_20,
+    [MQ.M]: {
+      marginTop: SPACING.SIZE_15,
+    },
     [MQ.L]: { marginTop: SPACING.SIZE_20 },
     width: '100%',
   },
   pricesWrapper: {
     animation: CONSTANTS.FADE_IN_ANIMATION,
     maxWidth: CONSTANTS.HEADER_MAX_WIDTH,
-    position: 'absolute',
     right: 0,
-    textAlign: 'right',
     [MQ.L]: {
       position: 'unset',
       textAlign: 'left',
@@ -165,6 +167,18 @@ const styles: StylesMap = {
     justifyContent: 'center',
     marginRight: SPACING.SIZE_10,
     width: SPACING.SIZE_15,
+  },
+  rating: {
+    display: 'none',
+    [MQ.L]: {
+      display: 'block',
+    },
+  },
+  ratingWrapper: {
+    alignSelf: 'flex-start',
+    [MQ.L]: {
+      display: 'none',
+    },
   },
   selectorWrapper: {
     alignItems: 'flex-end',

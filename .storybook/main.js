@@ -15,21 +15,8 @@ module.exports = {
   ],
   webpackFinal: async (config) => {
     // remove svg from existing rule
-    config.module.rules = config.module.rules.map((rule) => {
-      if (
-        String(rule.test) ===
-        String(
-          /\.(svg|ico|jpg|jpeg|png|gif|eot|otf|webp|ttf|woff|woff2|cur|ani|pdf)(\?.*)?$/,
-        )
-      ) {
-        return {
-          ...rule,
-          test: /\.(ico|jpg|jpeg|png|gif|eot|otf|webp|ttf|woff|woff2|cur|ani|pdf)(\?.*)?$/,
-        };
-      }
-
-      return rule;
-    });
+    const fileLoaderRule = config.module.rules.find(rule => rule.test && rule.test.test('.svg'));
+    fileLoaderRule.exclude = /\.svg$/;
 
     config.module.rules.push({
       issuer: /\.(js|ts)x?$/,
