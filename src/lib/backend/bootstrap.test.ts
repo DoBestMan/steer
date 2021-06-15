@@ -104,7 +104,18 @@ describe('getBackendEnvVariables', () => {
     process.env.VERCEL_GITHUB_COMMIT_REF = branch;
 
     expect(getBackendEnvVariables()).toEqual({
-      backendEndpoint: URLS.MAIN_API_MOCK,
+      backendEndpoint: 'https://steer-api-definition.vercel.app/api',
+      clientId: 'sharedId',
+      clientSecret: 'mockSecret',
+    });
+  });
+
+  test.each(['mock-sqa-001'])('mock feature branch - %s', (branch) => {
+    process.env.VERCEL_GITHUB_COMMIT_REF = branch;
+
+    expect(getBackendEnvVariables()).toEqual({
+      backendEndpoint:
+        'https://steer-api-definition-git-sqa-001-steer.vercel.app/api',
       clientId: 'sharedId',
       clientSecret: 'mockSecret',
     });
@@ -144,7 +155,7 @@ describe('getBackendEnvVariables', () => {
     process.env.STEER_BACKEND = 'mock';
 
     expect(getBackendEnvVariables()).toEqual({
-      backendEndpoint: URLS.MAIN_API_MOCK,
+      backendEndpoint: 'https://steer-api-definition.vercel.app/api',
       clientId: 'sharedId',
       clientSecret: 'mockSecret',
     });
@@ -154,7 +165,7 @@ describe('getBackendEnvVariables', () => {
     process.env.STEER_BACKEND = undefined;
 
     expect(getBackendEnvVariables()).toEqual({
-      backendEndpoint: URLS.MAIN_API_MOCK,
+      backendEndpoint: 'https://steer-api-definition.vercel.app/api',
       clientId: 'sharedId',
       clientSecret: 'mockSecret',
     });

@@ -4,6 +4,7 @@ import { UserPersonalization } from '~/data/models/UserPersonalization';
 import { URLS } from '~/lib/constants/urls';
 import {
   getFeatureBranchTicketName,
+  getMockBranchTicketName,
   isLocal,
   isMockDeploy,
   isProductionDeploy,
@@ -31,6 +32,7 @@ export function getBackendEnvVariables(): {
 } {
   let pointTo = API.INTEGRATION;
   let integrationBranch = getFeatureBranchTicketName();
+  const mockBranch = getMockBranchTicketName();
 
   if (isProductionDeploy()) {
     pointTo = API.PRODUCTION;
@@ -83,7 +85,7 @@ export function getBackendEnvVariables(): {
 
   if (pointTo === API.MOCK) {
     return {
-      backendEndpoint: URLS.MAIN_API_MOCK,
+      backendEndpoint: URLS.MAIN_API_MOCK(mockBranch),
       clientId: process.env.STEER_CLIENT_ID,
       clientSecret: process.env.STEER_CLIENT_SECRET_MOCK,
     };

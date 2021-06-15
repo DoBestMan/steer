@@ -12,6 +12,9 @@ export const URLS = {
       : 'https://master-services.jenkins.simpletire.com',
   MAIN_API_INTEGRATION: 'https://master-services.jenkins.simpletire.com',
   MAIN_API_LOCAL: 'http://localhost:3000/api',
-  MAIN_API_MOCK: 'https://steer-api-definition.now.sh/api',
+  MAIN_API_MOCK: (branch: string | null): string =>
+    branch
+      ? `https://steer-api-definition-git-${branch}-steer.vercel.app/api`
+      : 'https://steer-api-definition.vercel.app/api',
   MAIN_API_PRODUCTION: 'https://services.simpletire.com',
 };
