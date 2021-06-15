@@ -54,12 +54,6 @@ function CatalogProductGroups({
       includedInList && includedInList(product.productId as string);
     const isChecked = checkSelection && checkSelection(product);
 
-    if (isInList) {
-      setOpenCompareDrawer(true);
-      setShowDupAlert(true);
-      return;
-    }
-
     if (!isInList && !isChecked) {
       addToList(product);
       return;
@@ -67,6 +61,12 @@ function CatalogProductGroups({
 
     if (isInList && isChecked) {
       removeFromList && removeFromList(product.productId as string);
+      return;
+    }
+
+    if (isInList) {
+      setOpenCompareDrawer(true);
+      setShowDupAlert(true);
       return;
     }
   };

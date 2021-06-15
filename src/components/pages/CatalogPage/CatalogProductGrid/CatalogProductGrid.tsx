@@ -44,6 +44,8 @@ function CatalogProductGrid({
     removeFromList,
     includedInList,
     checkSelection,
+    setOpenCompareDrawer,
+    setShowDupAlert,
   } = useCompareContext();
   const [currentPage, setCurrentPage] = useState(1);
   const [nextProducts, setNextProducts] = useState(pagination?.resultsPerPage);
@@ -125,6 +127,12 @@ function CatalogProductGrid({
 
     if (isInList && !value) {
       removeFromList && removeFromList(product.productId as string);
+      return;
+    }
+
+    if (isInList) {
+      setOpenCompareDrawer(true);
+      setShowDupAlert(true);
       return;
     }
   };
