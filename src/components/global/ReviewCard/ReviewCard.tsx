@@ -73,7 +73,7 @@ function ReviewCard({
 
       <div css={[layout.container, layout.centeredHorizontal]}>
         <div css={styles.customerInfo}>
-          {car && <span>{car}</span>}
+          {car && !car.includes('undefined') && <span>{car}</span>}
           {location && <span>{location}</span>}
           {isVerified && (
             <div css={styles.verifiedCustomer}>
