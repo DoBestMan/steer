@@ -9,6 +9,7 @@ import { backendBootstrap } from '~/lib/backend/bootstrap';
 import {
   backendGetProductDetail,
   backendGetProductReviews,
+  backendGetSiteProductLineFaqs,
 } from '~/lib/backend/product-detail';
 import { validTiresQuery } from '~/lib/utils/regex';
 import { getStringifiedParams, validateRoute } from '~/lib/utils/routes';
@@ -30,13 +31,16 @@ export const getServerSideProps: GetServerSideProps<PageResponse<
 
   const brandName = removeTireFromQueryParam(brand);
 
-  const [siteProduct, siteProductReviews] = await Promise.all([
+  const [siteProduct, siteProductReviews, siteFaqs] = await Promise.all([
     backendGetProductDetail({
       brand: brandName,
       productLine,
     }),
     backendGetProductReviews({
       brand: brandName,
+      productLine,
+    }),
+    backendGetSiteProductLineFaqs({
       productLine,
     }),
   ]);
@@ -61,11 +65,18 @@ export const getServerSideProps: GetServerSideProps<PageResponse<
     return { props: { errorStatusCode } };
   }
 
+  if (!siteFaqs.isSuccess) {
+    const errorStatusCode = siteFaqs.error.statusCode;
+    context.res.statusCode = errorStatusCode;
+    return { props: { errorStatusCode } };
+  }
+
   return {
     props: {
       serverData: {
         siteProduct: siteProduct.data,
         siteProductReviews: siteProductReviews.data,
+        siteFaqs: siteFaqs.data,
       },
     },
   };

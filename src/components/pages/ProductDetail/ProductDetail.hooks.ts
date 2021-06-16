@@ -18,6 +18,7 @@ import { useGlobalsContext } from '~/context/Globals.context';
 import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
 import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
 import { SiteCatalogProductGroupList } from '~/data/models/SiteCatalogProductGroupList';
+import { SiteModuleProductLineFAQs } from '~/data/models/SiteModules';
 import { SiteProduct } from '~/data/models/SiteProduct';
 import { SiteProductLine } from '~/data/models/SiteProductLine';
 import { useApiDataWithDefault } from '~/hooks/useApiDataWithDefault';
@@ -73,6 +74,7 @@ interface ResponseProps extends Pick<SiteProductLine, 'assetList'> {
   recirculation: SiteCatalogProductGroupList | null;
   recirculationSize: RecirculationSize | null;
   reviews: ReviewsProps;
+  siteFaqs: SiteModuleProductLineFAQs;
   sizeFinder: ParsedSizeFinderProps | null;
   statusCode: number | undefined | null;
   stickyBar: ParsedStickyBarProps | null;
@@ -115,8 +117,7 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
     statusCode = (error as FetchError).statusCode;
   }
 
-  const { siteProductReviews } = serverData;
-
+  const { siteProductReviews, siteFaqs } = serverData;
   const { siteProductLine } = siteProduct;
   const assetList = siteProductLine.assetList;
   const clonedAssetList = JSON.parse(JSON.stringify(assetList));
@@ -129,12 +130,21 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
       return;
     }
 
-    if (isStrictEqual({ siteProduct, siteProductReviews }, contextData)) {
+    if (
+      isStrictEqual({ siteProduct, siteProductReviews, siteFaqs }, contextData)
+    ) {
       return;
     }
 
-    setData({ siteProduct, siteProductReviews });
-  }, [isValidating, siteProduct, siteProductReviews, contextData, setData]);
+    setData({ siteProduct, siteProductReviews, siteFaqs });
+  }, [
+    isValidating,
+    siteProduct,
+    siteProductReviews,
+    contextData,
+    setData,
+    siteFaqs,
+  ]);
 
   useEffect(() => {
     if (isPLA) {
@@ -232,6 +242,7 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
       tireSize: queryParams.tireSize,
     }),
     reviews: mapDataToReviews({ siteProductReviews, router }),
+    siteFaqs,
     sizeFinder: mapDataToSizeFinder({
       currentSizeIndex,
       isFrontAndRear: !!queryParams.rearSize,

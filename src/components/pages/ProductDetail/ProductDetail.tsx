@@ -8,12 +8,12 @@ import GridItem from '~/components/global/Grid/GridItem';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Link from '~/components/global/Link/Link';
 import Meta from '~/components/global/Meta/Meta';
+import ModuleProductLineFAQs from '~/components/modules/EditorialModules/modules/ModuleProductLineFAQs/ModuleProductLineFAQs';
 import LocationModal from '~/components/modules/Location/LocationModal/LocationModal';
 import { navigationBreadcrumbPaddingTop } from '~/components/modules/Nav/Nav.styles';
 import AnchorBar from '~/components/modules/PDP/AnchorBar/AnchorBar';
 import ConfirmFitInsight from '~/components/modules/PDP/ConfirmFitInsight/ConfirmFitInsight';
 import { ConfirmFitType } from '~/components/modules/PDP/ConfirmFitInsight/ConfirmFitInsight.utils';
-import FAQ from '~/components/modules/PDP/FAQ/FAQ';
 import Insights from '~/components/modules/PDP/Insights/Insights';
 import ProductInfo from '~/components/modules/PDP/ProductInfo/ProductInfo';
 import PurchaseIncludes from '~/components/modules/PDP/PurchaseIncludes/PurchaseIncludes';
@@ -61,7 +61,6 @@ function ProductDetail({ serverData }: ProductDetailData) {
   const {
     anchorList,
     breadcrumbs,
-    faq,
     assetList,
     insights,
     installation,
@@ -77,6 +76,7 @@ function ProductDetail({ serverData }: ProductDetailData) {
     stickyBar,
     technicalSpecs,
     statusCode,
+    siteFaqs,
   } = useProductDetail({
     serverData,
   });
@@ -302,7 +302,7 @@ function ProductDetail({ serverData }: ProductDetailData) {
                 />
               </div>
             )}
-            <FAQ {...faq} />
+            {siteFaqs && <ModuleProductLineFAQs {...siteFaqs} />}
           </div>
         </GridItem>
       </Grid>

@@ -9,6 +9,7 @@ import { backendBootstrap } from '~/lib/backend/bootstrap';
 import {
   backendGetProductDetail,
   backendGetProductReviews,
+  backendGetSiteProductLineFaqs,
 } from '~/lib/backend/product-detail';
 import { RESULTS_PER_PAGE_PDP } from '~/lib/constants';
 import { validTiresQuery } from '~/lib/utils/regex';
@@ -31,7 +32,7 @@ export const getServerSideProps: GetServerSideProps<PageResponse<
 
   const brandName = removeTireFromQueryParam(brand);
 
-  const [siteProduct, siteProductReviews] = await Promise.all([
+  const [siteProduct, siteProductReviews, siteFaqs] = await Promise.all([
     backendGetProductDetail({
       brand: brandName,
       productLine,
@@ -46,6 +47,9 @@ export const getServerSideProps: GetServerSideProps<PageResponse<
         resultsPerPage: RESULTS_PER_PAGE_PDP.toString(),
       },
     }),
+    backendGetSiteProductLineFaqs({
+      productLine,
+    }),
   ]);
 
   if (!siteProduct.isSuccess) {
@@ -59,12 +63,18 @@ export const getServerSideProps: GetServerSideProps<PageResponse<
     context.res.statusCode = errorStatusCode;
     return { props: { errorStatusCode } };
   }
+  if (!siteFaqs.isSuccess) {
+    const errorStatusCode = siteFaqs.error.statusCode;
+    context.res.statusCode = errorStatusCode;
+    return { props: { errorStatusCode } };
+  }
 
   return {
     props: {
       serverData: {
         siteProduct: siteProduct.data,
         siteProductReviews: siteProductReviews.data,
+        siteFaqs: siteFaqs.data,
       },
     },
   };

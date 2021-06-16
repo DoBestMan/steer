@@ -20,4 +20,5 @@ export type SiteModuleTypes =
   | 'SiteModuleSearchByBoard'
   | 'SiteModuleSimpleSnapButton'
   | 'SiteModuleButtonGrid'
-  | 'SiteModuleMailingListSignUp';
+  | 'SiteModuleMailingListSignUp'
+  | 'SiteModuleProductLineFAQs';

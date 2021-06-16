@@ -1,8 +1,10 @@
 import Head from 'next/head';
 import { BreadcrumbList, Product } from 'schema-dts';
 
+import { SiteModuleProductLineFAQs } from '~/data/models/SiteModules';
+
 interface Props {
-  jsonLD?: BreadcrumbList | Product;
+  jsonLD?: BreadcrumbList | Product | SiteModuleProductLineFAQs;
 }
 
 function DataStructure({ jsonLD }: Props) {

@@ -12,6 +12,7 @@ import {
 } from '~/data/models/SiteCatalogProductImage';
 import { SiteCatalogProductItemEnum } from '~/data/models/SiteCatalogProductItem';
 import { SiteImageNullableTypeEnum } from '~/data/models/SiteImageNullable';
+import { SiteModuleProductLineFAQs } from '~/data/models/SiteModules';
 import { SiteProduct } from '~/data/models/SiteProduct';
 import { SiteProductInstallationStatusEnum } from '~/data/models/SiteProductInstallation';
 import { SiteProductLineSizeDetailProductStatusEnum } from '~/data/models/SiteProductLineSizeDetail';
@@ -103,6 +104,15 @@ export const searchContextMock: SearchContextProps = {
   setHasLockedSearchState: () => {},
 };
 
+export const siteFaqMock: SiteModuleProductLineFAQs = {
+  '@context': '',
+  '@type': '',
+  type: 'SiteModuleProductLineFAQs',
+  productLine: '',
+  heading: '',
+  mainEntity: [],
+  includeNeedAssistance: false,
+};
 export const siteProductMock: SiteProduct = {
   siteProductLine: {
     name: 'DH2',
@@ -1446,6 +1456,7 @@ export const productDetailContextMock: ProductDetailContextProps = {
   changeSize: () => {},
   currentSizeIndex: -1,
   data: {
+    siteFaqs: siteFaqMock,
     siteProduct: siteProductMock,
     siteProductReviews: siteProductReviewsMock,
   },

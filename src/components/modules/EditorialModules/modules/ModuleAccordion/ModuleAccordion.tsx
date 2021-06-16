@@ -15,7 +15,7 @@ function ModuleAccordion(props: SiteModuleAccordion) {
       <Accordion
         {...props}
         id={props.id ? props.id : randomString()}
-        theme={THEME.LIGHT}
+        theme={props.theme ? props.theme : THEME.LIGHT}
       />
     </div>
   );

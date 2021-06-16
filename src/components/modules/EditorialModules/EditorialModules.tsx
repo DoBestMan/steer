@@ -17,6 +17,7 @@ import ModuleMailingListSignUp from './modules/ModuleMailingListSignUp/ModuleMai
 import ModuleMarkdown from './modules/ModuleMarkdown/ModuleMarkdown';
 import ModuleMultiColumn from './modules/ModuleMultiColumn/ModuleMultiColumn';
 import ModulePDPInstallation from './modules/ModulePDPInstallation/ModulePDPInstallation';
+import ModuleProductLineFaqs from './modules/ModuleProductLineFAQs/ModuleProductLineFAQs';
 import ModulePromotionCards from './modules/ModulePromotionCards/ModulePromotionCards';
 import ModuleQuote from './modules/ModuleQuote/ModuleQuote';
 import ModuleReview from './modules/ModuleReview/ModuleReview';
@@ -56,6 +57,7 @@ function EditorialModules({
     SiteModuleMarkdown: ModuleMarkdown,
     SiteModuleMultiColumn: ModuleMultiColumn,
     SiteModulePDPInstallation: ModulePDPInstallation,
+    SiteModuleProductLineFAQs: ModuleProductLineFaqs,
     SiteModulePromotionCards: ModulePromotionCards,
     SiteModuleQuote: ModuleQuote,
     SiteModuleReview: ModuleReview,

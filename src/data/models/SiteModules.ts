@@ -19,6 +19,7 @@ import { THEME } from '~/lib/constants';
 
 import { SiteDealsCarousel } from './SiteDealsCarousel';
 import { SiteGraphicTile } from './SiteGraphicTile';
+import { SiteModuleProductLineFAQsItem } from './SiteModuleProductLineFAQsItem';
 
 export interface SiteModule {
   type: SiteModuleTypes;
@@ -122,6 +123,15 @@ export interface SiteModuleMailingListSignUp extends SiteModule {
   heading: string;
   description: string;
   emailSource: string;
+}
+
+export interface SiteModuleProductLineFAQs extends SiteModule {
+  productLine?: string;
+  mainEntity: Array<SiteModuleProductLineFAQsItem>;
+  heading: string;
+  includeNeedAssistance?: boolean;
+  '@context': string;
+  '@type': string;
 }
 
 export interface SiteModuleGoogleForm extends GoogleFormProps, SiteModule {}
