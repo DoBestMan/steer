@@ -29,6 +29,7 @@ export function validateInputFields(fields: RegistrationFormFields) {
     REGISTRATION_FIELD_NAMES.PHONE_PRIMARY,
     REGISTRATION_FIELD_NAMES.AUTO_SERVICES,
     REGISTRATION_FIELD_NAMES.TIRE_SERVICES,
+    REGISTRATION_FIELD_NAMES.INSTALLER_INFO,
     REGISTRATION_FIELD_NAMES.INSTALLATION_AGREEMENT,
   ];
   let isValidCount = 0;
@@ -70,6 +71,7 @@ export function convertFormToReqObj(
     state,
     storeImage,
     tireServices,
+    installerInfo,
     website,
     zipCode,
     ...fields
@@ -107,6 +109,7 @@ export function convertFormToReqObj(
   };
   const servicesOffered = removeCommaFromString(autoServices).split(',');
   const typesOfTiresServices = removeCommaFromString(tireServices).split(',');
+  const typesOfInstallerInfo = removeCommaFromString(installerInfo).split(',');
 
   return {
     businessInfo: {
@@ -117,6 +120,7 @@ export function convertFormToReqObj(
       hours,
       servicesOffered,
       state,
+      typesOfInstallerInfo,
       typesOfTiresServices,
       website,
       zipCode,
@@ -132,6 +136,10 @@ export function convertFormToReqObj(
       storeImage,
     },
     installationAgreement,
+    managerInfo: {
+      firstName,
+      lastName,
+    },
     token,
   };
 }
@@ -217,6 +225,18 @@ export const shouldComponentUpdate = (
       formFieldsNext[REGISTRATION_FIELD_NAMES.STORE_IMAGE],
     toastMessage: nextToastMessage,
   };
+  const nextManagerInputs = {
+    [REGISTRATION_FIELD_NAMES.FIRST_NAME]:
+      formFieldsNext[REGISTRATION_FIELD_NAMES.FIRST_NAME],
+    [REGISTRATION_FIELD_NAMES.LAST_NAME]:
+      formFieldsNext[REGISTRATION_FIELD_NAMES.LAST_NAME],
+  };
+  const prevManagerInputs = {
+    [REGISTRATION_FIELD_NAMES.FIRST_NAME]:
+      formFieldsPrev[REGISTRATION_FIELD_NAMES.FIRST_NAME],
+    [REGISTRATION_FIELD_NAMES.LAST_NAME]:
+      formFieldsPrev[REGISTRATION_FIELD_NAMES.LAST_NAME],
+  };
   const prevHoursInputs = {
     [REGISTRATION_FIELD_NAMES.SUNDAY_OPEN]:
       formFieldsPrev[REGISTRATION_FIELD_NAMES.SUNDAY_OPEN],
@@ -289,10 +309,18 @@ export const shouldComponentUpdate = (
     formFieldsPrev[REGISTRATION_FIELD_NAMES.TIRE_SERVICES];
   const nextTireServicesInput =
     formFieldsNext[REGISTRATION_FIELD_NAMES.TIRE_SERVICES];
+  const prevInstallerInfoInput =
+    formFieldsPrev[REGISTRATION_FIELD_NAMES.INSTALLER_INFO];
+  const nextInstallerInfoInput =
+    formFieldsNext[REGISTRATION_FIELD_NAMES.INSTALLER_INFO];
   const formInputs: FormInputsForReactMemoFunc = {
     [TYPES_OF_INPUTS.BUSINESS]: {
       next: nextBusinessInputs,
       prev: prevBusinessInputs,
+    },
+    [TYPES_OF_INPUTS.MANAGER]: {
+      next: nextManagerInputs,
+      prev: prevManagerInputs,
     },
     [TYPES_OF_INPUTS.CONTACT]: {
       next: nextContactInputs,
@@ -309,6 +337,10 @@ export const shouldComponentUpdate = (
     [TYPES_OF_INPUTS.SERVICES]: {
       next: nextServicesInput,
       prev: prevServicesInput,
+    },
+    [TYPES_OF_INPUTS.INSTALLER_INFO]: {
+      next: nextInstallerInfoInput,
+      prev: prevInstallerInfoInput,
     },
     [TYPES_OF_INPUTS.TIRE_SERVICES]: {
       next: nextTireServicesInput,

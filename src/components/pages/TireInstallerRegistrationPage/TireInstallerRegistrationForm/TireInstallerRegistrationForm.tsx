@@ -14,6 +14,8 @@ import BusinessInfoInputs from './BusinessInfoInputs/BusinessInfoInputs';
 import ContactInfoInputs from './ContactInfoInputs/ContactInfoInputs';
 import HoursInfoInputs from './HoursInfoInputs/HoursInfoInputs';
 import InstallerAgreementInput from './InstallerAgreementInput/InstallerAgreementInput';
+import InstallerInfoInputs from './InstallerInfoInputs/InstallerInfoInputs';
+import ManagerInfoInputs from './ManagerInfoInputs/ManagerInfoInputs';
 import ServicesOfferedInputs from './ServicesOfferedInputs/ServicesOfferedInputs';
 import {
   INPUTS_TO_VALIDATE,
@@ -140,6 +142,15 @@ function TireInstallerRegistrationForm() {
           onChangeHandler={createChangeHandler}
           formFields={formFields}
         />
+        <ManagerInfoInputs
+          formFields={formFields}
+          inputsToValidate={inputsToValidate}
+          onChangeHandler={createChangeHandler}
+          onValidateInput={validateInputHandler}
+          onHandleClearToastMessage={onHandleDismiss}
+          onToastMessageDismiss={onHandleDismiss}
+          toastMessage={toastMessage}
+        />
         <HoursInfoInputs
           onChangeHandler={createChangeHandler}
           formFields={formFields}
@@ -160,6 +171,10 @@ function TireInstallerRegistrationForm() {
           formFields={formFields}
         />
         <TireServicesOfferedInputs
+          onChangeHandler={createChangeHandler}
+          formFields={formFields}
+        />
+        <InstallerInfoInputs
           onChangeHandler={createChangeHandler}
           formFields={formFields}
         />

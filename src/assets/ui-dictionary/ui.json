@@ -790,17 +790,25 @@
         "emailPrimary": "Email (primary)",
         "emailService": "Email (service desk)",
         "firstName": "First Name",
+        "serviceManagerfirstName": "Service Mananger First Name",
+        "storeManagerfirstName": "Store Mananger First Name",
         "lastName": "Last Name",
+        "serviceManagerLastName": "Service Mananger Last Name",
+        "storeManagerLastName": "Store Mananger Last Name",
         "open": "open",
         "phonePrimary": "Phone (primary)",
         "phoneService": "Phone (service desk)",
         "state": "State",
         "to": "to",
         "zipCode": "Zip code",
-        "website": "Website"
+        "website": "Website",
+        "moreInstallerInfo": "More Installation Center Information",
+        "checkAllInfo": "Check all that apply.",
+        "management": "Management"
       },
       "services": {
         "airConditioning": "Air Conditioning",
+        "airAndCabinFilterReplacement": "Air and cabin filter replacement",
         "alignments": "Alignments",
         "battery": "Battery",
         "brakes": "Brakes",
@@ -809,18 +817,30 @@
         "dieselRepair": "Diesel Repair",
         "drivetrain": "Drivetrain",
         "electrical": "Electrical",
+        "electricVehicles": "Electric vehicles",
         "emissions": "Emissions",
+        "engineRepair": "Engine repair",
         "exhaustSystems": "Exhaust Systems",
         "fullMechanical": "Full Mechanical",
+        "headlightAndtraillinghtServices": "Headlight & taillight services",
+        "hybridVehicles": "Hybrid vehicles",
         "inspections": "Inspections",
         "installationOf20": "Installation of 20",
+        "mufflerAndExhaustServices": "Muffler & exhaust services",
         "oilChanges": "Oil Changes",
         "preventativeMaintenance": "Preventative Maintenance",
+        "runFlatServices": "Run flat services",
         "shocksAndStruts": "Shocks & Struts",
         "shuttleService": "Shuttle Service",
+        "steering": "Steering",
+        "suspension": "Suspension",
         "towing": "Towing",
         "tpmsService": "TPMS Service",
-        "wiFi": "WI-FI"
+        "tireStorage": "Tire storage",
+        "transmissionRepair": "Transmission repair",
+        "waitingRoom": "Waiting room",
+        "wiFi": "WI-FI",
+        "windshieldWipersFluid": "Windshield wipers & fluid"
       },
       "tireServices": {
         "antique": "Antique",
@@ -839,6 +859,11 @@
         "suvCrossover": "SUV/Crossover",
         "tempSpare": "Temp Spare",
         "trailer": "Trailer"
+      },
+      "installerInfo": {
+        "bbbMember": "BBB Member",
+        "aaaApproved": "AAA Approved",
+        "technicalCertificate": "Technicians certified by the National Institute for Automotive Service Excellence (ASE)"
       },
       "submitButton": {
         "label": "Submit application"

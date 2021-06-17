@@ -74,6 +74,7 @@ export const REGISTRATION_FORM_FIELDS = {
   [REGISTRATION_FIELD_NAMES.THURSDAY_CLOSED]: '',
   [REGISTRATION_FIELD_NAMES.THURSDAY_OPEN]: '',
   [REGISTRATION_FIELD_NAMES.TIRE_SERVICES]: '',
+  [REGISTRATION_FIELD_NAMES.INSTALLER_INFO]: '',
   [REGISTRATION_FIELD_NAMES.TUESDAY_OPEN]: '',
   [REGISTRATION_FIELD_NAMES.TUESDAY_CLOSED]: '',
   [REGISTRATION_FIELD_NAMES.WEBSITE]: '',
@@ -640,8 +641,20 @@ export const contactInfoInputs = [
   },
 ];
 
+export const serviceManagerInfoInputs = [
+  {
+    label: ui('tireInstallerRegistration.form.labels.serviceManagerfirstName'),
+    name: REGISTRATION_FIELD_NAMES.FIRST_NAME,
+  },
+  {
+    label: ui('tireInstallerRegistration.form.labels.serviceManagerLastName'),
+    name: REGISTRATION_FIELD_NAMES.LAST_NAME,
+  },
+];
+
 export const servicesOfferedInputs = {
   autoServices: [
+    ui('tireInstallerRegistration.form.services.airAndCabinFilterReplacement'),
     ui('tireInstallerRegistration.form.services.airConditioning'),
     ui('tireInstallerRegistration.form.services.alignments'),
     ui('tireInstallerRegistration.form.services.battery'),
@@ -650,19 +663,33 @@ export const servicesOfferedInputs = {
     ui('tireInstallerRegistration.form.services.diagnostics'),
     ui('tireInstallerRegistration.form.services.dieselRepair'),
     ui('tireInstallerRegistration.form.services.drivetrain'),
+    ui('tireInstallerRegistration.form.services.electricVehicles'),
     ui('tireInstallerRegistration.form.services.electrical'),
     ui('tireInstallerRegistration.form.services.emissions'),
+    ui('tireInstallerRegistration.form.services.engineRepair'),
     ui('tireInstallerRegistration.form.services.exhaustSystems'),
     ui('tireInstallerRegistration.form.services.fullMechanical'),
+    ui(
+      'tireInstallerRegistration.form.services.headlightAndtraillinghtServices',
+    ),
+    ui('tireInstallerRegistration.form.services.hybridVehicles'),
     ui('tireInstallerRegistration.form.services.inspections'),
     ui('tireInstallerRegistration.form.services.installationOf20'),
+    ui('tireInstallerRegistration.form.services.mufflerAndExhaustServices'),
     ui('tireInstallerRegistration.form.services.oilChanges'),
     ui('tireInstallerRegistration.form.services.preventativeMaintenance'),
+    ui('tireInstallerRegistration.form.services.runFlatServices'),
     ui('tireInstallerRegistration.form.services.shocksAndStruts'),
     ui('tireInstallerRegistration.form.services.shuttleService'),
+    ui('tireInstallerRegistration.form.services.steering'),
+    ui('tireInstallerRegistration.form.services.suspension'),
     ui('tireInstallerRegistration.form.services.towing'),
     ui('tireInstallerRegistration.form.services.tpmsService'),
+    ui('tireInstallerRegistration.form.services.tireStorage'),
+    ui('tireInstallerRegistration.form.services.transmissionRepair'),
+    ui('tireInstallerRegistration.form.services.waitingRoom'),
     ui('tireInstallerRegistration.form.services.wiFi'),
+    ui('tireInstallerRegistration.form.services.windshieldWipersFluid'),
   ],
   tireServices: [
     ui('tireInstallerRegistration.form.tireServices.antique'),
@@ -681,6 +708,11 @@ export const servicesOfferedInputs = {
     ui('tireInstallerRegistration.form.tireServices.suvCrossover'),
     ui('tireInstallerRegistration.form.tireServices.tempSpare'),
     ui('tireInstallerRegistration.form.tireServices.trailer'),
+  ],
+  installerInfo: [
+    ui('tireInstallerRegistration.form.installerInfo.bbbMember'),
+    ui('tireInstallerRegistration.form.installerInfo.aaaApproved'),
+    ui('tireInstallerRegistration.form.installerInfo.technicalCertificate'),
   ],
 };
 

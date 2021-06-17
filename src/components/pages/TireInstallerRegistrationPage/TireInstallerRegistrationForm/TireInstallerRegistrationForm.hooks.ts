@@ -33,7 +33,8 @@ export function useForm(
   ) => (value: boolean | string | null) => {
     if (
       (key === REGISTRATION_FIELD_NAMES.AUTO_SERVICES && serviceType) ||
-      (key === REGISTRATION_FIELD_NAMES.TIRE_SERVICES && serviceType)
+      (key === REGISTRATION_FIELD_NAMES.TIRE_SERVICES && serviceType) ||
+      (key === REGISTRATION_FIELD_NAMES.INSTALLER_INFO && serviceType)
     ) {
       setFormFields((prev: RegistrationFormFields) => {
         const currentFields = JSON.parse(JSON.stringify(prev));

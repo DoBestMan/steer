@@ -1,5 +1,7 @@
 import { BusinessInfoInputsProps } from './BusinessInfoInputs/BusinessInfoInputs';
 import { ContactInfoInputsProps } from './ContactInfoInputs/ContactInfoInputs';
+import { InstallerInfoInputsProps } from './InstallerInfoInputs/InstallerInfoInputs';
+import { ManagerInfoInputsProps } from './ManagerInfoInputs/ManagerInfoInputs';
 import { ServicesOfferedInputsProps } from './ServicesOfferedInputs/ServicesOfferedInputs';
 import { REGISTRATION_FIELD_NAMES } from './TireInstallerRegistrationForm.enums';
 
@@ -7,6 +9,7 @@ export interface RegistrationFormFields {
   [REGISTRATION_FIELD_NAMES.ADDRESS_LINE_ONE]: string;
   [REGISTRATION_FIELD_NAMES.ADDRESS_LINE_TWO]?: string;
   [REGISTRATION_FIELD_NAMES.AUTO_SERVICES]: string;
+  [REGISTRATION_FIELD_NAMES.INSTALLER_INFO]: string;
   [REGISTRATION_FIELD_NAMES.CELL_PHONE]?: string;
   [REGISTRATION_FIELD_NAMES.CITY]: string;
   [REGISTRATION_FIELD_NAMES.COMPANY]: string;
@@ -85,6 +88,7 @@ export interface RegistrationFormRequestObj {
     };
     servicesOffered: string[];
     state: string;
+    typesOfInstallerInfo: string[];
     typesOfTiresServices: string[];
     website?: string;
     zipCode: string;
@@ -100,6 +104,10 @@ export interface RegistrationFormRequestObj {
     storeImage?: string;
   };
   installationAgreement: boolean | string;
+  managerInfo: {
+    firstName: string;
+    lastName: string;
+  };
   token: string;
 }
 
@@ -125,6 +133,11 @@ export interface ContactInputsForReactMemoFunc {
   toastMessage: string;
 }
 
+export interface ManagerInputsForReactMemoFunc {
+  [REGISTRATION_FIELD_NAMES.FIRST_NAME]: string;
+  [REGISTRATION_FIELD_NAMES.LAST_NAME]: string;
+}
+
 export interface HoursInputsForReactMemoFunc {
   [REGISTRATION_FIELD_NAMES.SUNDAY_OPEN]: string;
   [REGISTRATION_FIELD_NAMES.SUNDAY_CLOSED]: string;
@@ -147,6 +160,7 @@ export type NextPrevValues =
   | boolean
   | BusinessInputsForReactMemoFunc
   | ContactInputsForReactMemoFunc
+  | ManagerInputsForReactMemoFunc
   | HoursInputsForReactMemoFunc;
 
 export interface FormInputsForReactMemoFunc {
@@ -159,4 +173,6 @@ export interface FormInputsForReactMemoFunc {
 export type ShouldComponentUpdateProps =
   | BusinessInfoInputsProps
   | ServicesOfferedInputsProps
+  | InstallerInfoInputsProps
+  | ManagerInfoInputsProps
   | ContactInfoInputsProps;

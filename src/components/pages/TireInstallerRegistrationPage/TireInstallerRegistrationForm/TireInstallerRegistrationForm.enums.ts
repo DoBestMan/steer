@@ -21,6 +21,7 @@ export enum REGISTRATION_FIELD_NAMES {
   FRIDAY_CLOSED = 'fridayClosed',
   FRIDAY_OPEN = 'fridayOpen',
   INSTALLATION_AGREEMENT = 'installationAgreement',
+  INSTALLER_INFO = 'installerInfo',
   LAST_NAME = 'lastName',
   MONDAY_CLOSED = 'mondayClosed',
   MONDAY_OPEN = 'mondayOpen',
@@ -55,6 +56,8 @@ export enum TYPES_OF_INPUTS {
   CONTACT = 'contactInputs',
   HOURS = 'hoursInputs',
   INSTALLER = 'installerInput',
+  INSTALLER_INFO = 'installerInfoInput',
+  MANAGER = 'managerInputs',
   SERVICES = 'servicesInput',
   TIRE_SERVICES = 'tireServicesInput',
 }
