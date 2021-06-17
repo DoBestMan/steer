@@ -43,7 +43,7 @@ function SearchSection({
     searchState,
     clearSearchResults,
     setSearchState,
-    setQueryParamLabel,
+    setFilterPills,
     setRouteQueryParamOptions,
   } = useSearchContext();
   const { setFromSearch, setCurrentInputQuery } = useSearchModalContext();
@@ -88,7 +88,9 @@ function SearchSection({
         ],
         params,
       });
-      setQueryParamLabel(searchResult.label);
+      if (searchResult.label) {
+        setFilterPills([{ type: 'brand', label: searchResult.label }]);
+      }
     } else if (onClick) {
       onClick(searchResult);
     }

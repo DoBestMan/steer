@@ -1,3 +1,6 @@
+import React, { useMemo } from 'react';
+
+import { useSearchContext } from '~/components/modules/Search/Search.context';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { Breakpoint, BREAKPOINT_SIZES, CSSStylesProp } from '~/lib/constants';
 import { searchCTACarExclusion } from '~/lib/utils/regex';
@@ -9,16 +12,23 @@ interface Props {
   customContainerStyles?: CSSStylesProp;
   fullLabelAt?: Breakpoint;
   hideOnSmallMedium?: boolean;
-  queryParamLabel?: string;
 }
 
 function SearchLabel({
   customContainerStyles,
   fullLabelAt = BREAKPOINT_SIZES.L,
   hideOnSmallMedium = false,
-  queryParamLabel,
 }: Props) {
   const { lessThan } = useBreakpoints();
+  const { filterPills } = useSearchContext();
+
+  const shouldNotVehicleOptionPresent = useMemo(() => {
+    return filterPills.some(
+      (filterPill) =>
+        filterPill.type === 'tireType' &&
+        searchCTACarExclusion.test(filterPill.label),
+    );
+  }, [filterPills]);
 
   if (lessThan[fullLabelAt]) {
     return (
@@ -47,9 +57,10 @@ function SearchLabel({
       </span>
     );
   }
+
   return (
     <span css={styles.label}>
-      {queryParamLabel && searchCTACarExclusion.test(queryParamLabel)
+      {shouldNotVehicleOptionPresent
         ? ui('search.searchByTireSize')
         : ui('search.searchAutocompleteLabel')}
     </span>

@@ -122,7 +122,7 @@ function TypePage({ typeData }: TypePageData) {
         hasTireType={false}
         hasVehicle={!HIDE_VEHICLE_TYPES.includes(typeName)}
         params={searchParams}
-        queryParamLabel={typeName}
+        filterPills={[{ type: 'subtype', label: typeName }]}
       />
       <div css={styles.mostPopularBrandsContainer}>
         <Grid>

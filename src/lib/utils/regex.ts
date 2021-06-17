@@ -15,4 +15,4 @@ export const diameterFormat = /([\d]*)-(inch)-([a-zA-Z]*)-(tires)/;
 
 export const validTiresQuery = /^.+(-tires)$/;
 
-export const searchCTACarExclusion = /Commercial|Farm|ATV\/UTV|Lawn & Garden|Trailer|Industrial|OTR|Golf|Racing/;
+export const searchCTACarExclusion = /Commercial|Farm|ATV\/UTV|Lawn & Garden|Trailer|Industrial|OTR|Golf|Racing/i;

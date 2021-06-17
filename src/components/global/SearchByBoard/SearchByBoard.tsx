@@ -12,6 +12,7 @@ import { useSearchModalContext } from '~/components/modules/Search/SearchModal.c
 import { useTireSnapModalContext } from '~/components/modules/TireSnap/TireSnapModal.context';
 import { useNavContext } from '~/context/Nav.context';
 import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
+import { SiteSearchFilterPill } from '~/data/models/SiteSearchFilterPill';
 import { SiteSearchResultActionQuery } from '~/data/models/SiteSearchResultActionQuery';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { ROUTE_MAP, ROUTES } from '~/lib/constants';
@@ -25,6 +26,7 @@ import styles from './SearchByBoard.styles';
 import { CTAIconTypes } from './SearchByBoard.types';
 
 export interface SearchByBoardProps {
+  filterPills?: SiteSearchFilterPill[];
   hasBrand?: boolean;
   hasTireSize?: boolean;
   hasTireType?: boolean;
@@ -32,7 +34,6 @@ export interface SearchByBoardProps {
   isHomepage?: boolean;
   params?: Record<string, string>;
   promotionId?: string;
-  queryParamLabel?: string;
   title?: string;
   vehicleName?: string;
 }
@@ -61,7 +62,7 @@ function SearchByBoard({
   hasTireType = true,
   isHomepage,
   params,
-  queryParamLabel,
+  filterPills = [],
   promotionId,
   title = ui('searchByBoard.title'),
   vehicleName,
@@ -71,7 +72,7 @@ function SearchByBoard({
     lockSearchStateToTireSize,
     lockSearchStateToVehicle,
     lockSearchStateToTireType,
-    setQueryParamLabel,
+    setFilterPills,
     setRouteQueryParamOptions,
   } = useSearchContext();
   const { setIsSearchOpen, setCurrentInputQuery } = useSearchModalContext();
@@ -113,7 +114,7 @@ function SearchByBoard({
       ],
       params,
     });
-    setQueryParamLabel(queryParamLabel);
+    setFilterPills(filterPills);
   };
 
   const CTAList: CTA[] = [
@@ -134,7 +135,7 @@ function SearchByBoard({
             ],
             params,
           });
-          setQueryParamLabel(queryParamLabel);
+          setFilterPills(filterPills);
           sendFSCustomEvent(CTA_TYPES.VEHICLE);
         }
         setCurrentInputQuery({
@@ -164,7 +165,7 @@ function SearchByBoard({
             ],
             params,
           });
-          setQueryParamLabel(queryParamLabel);
+          setFilterPills(filterPills);
         }
         lockSearchStateToTireSize();
         addPromotionParam(promotionId);

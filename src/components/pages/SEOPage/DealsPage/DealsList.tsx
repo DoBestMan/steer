@@ -36,7 +36,7 @@ export function DealsList({ title, items }: Props) {
   let currentGridColumnPosition = 0;
   const { bk } = useBreakpoints();
   const nbItemsInARow = bk === BREAKPOINT_SIZES.S ? 1 : 2;
-  const { setQueryParamLabel, setRouteQueryParamOptions } = useSearchContext();
+  const { setFilterPills, setRouteQueryParamOptions } = useSearchContext();
   const { setIsSearchOpen } = useSearchModalContext();
   function handlePromotionClick(params: Record<string, string>, label: string) {
     setRouteQueryParamOptions({
@@ -46,7 +46,7 @@ export function DealsList({ title, items }: Props) {
       ],
       params,
     });
-    setQueryParamLabel(label);
+    setFilterPills([{ type: 'promotion', label }]);
     setIsSearchOpen(true);
   }
   return (

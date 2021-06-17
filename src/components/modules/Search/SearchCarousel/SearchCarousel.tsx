@@ -30,7 +30,7 @@ function SearchCarousel({
     searchState,
     clearSearchResults,
     setSearchState,
-    setQueryParamLabel,
+    setFilterPills,
     setRouteQueryParamOptions,
   } = useSearchContext();
   const { setCurrentInputQuery } = useSearchModalContext();
@@ -64,7 +64,9 @@ function SearchCarousel({
         ],
         params,
       });
-      setQueryParamLabel(searchResult.label);
+      if (searchResult.label) {
+        setFilterPills([{ type: 'brand', label: searchResult.label }]);
+      }
     } else {
       onClick(searchResult);
     }

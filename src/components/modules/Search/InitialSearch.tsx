@@ -59,7 +59,7 @@ function InitialSearch({
 
   const {
     routeQueryParamOptions,
-    queryParamLabel,
+    filterPills,
     clearSearchResults,
     searchQuery,
   } = useSearchContext();
@@ -108,19 +108,16 @@ function InitialSearch({
   }, [isLoadingResults]);
 
   useEffect(() => {
-    if (queryParamLabel) {
-      window.localStorage.setItem(
-        LOCAL_STORAGE[PROPERTIES.ADD_FILTER_NOTIFICATION],
-        new Boolean(true).toString(),
-      );
-    }
-    let isFilterNotificationAdded = window.localStorage.getItem(
+    const isFilterNotificationAdded = window.localStorage.getItem(
       LOCAL_STORAGE[PROPERTIES.ADD_FILTER_NOTIFICATION],
     );
-    isFilterNotificationAdded =
-      isFilterNotificationAdded && JSON.parse(isFilterNotificationAdded);
-    if (isFilterNotificationAdded && queryParamLabel) {
-      const subtext = searchCTACarExclusion.test(queryParamLabel)
+    if (!isFilterNotificationAdded && filterPills.length > 0) {
+      const shouldNotVehicleOptionPresent = filterPills.some(
+        (filterPill) =>
+          filterPill.type === 'tireType' &&
+          searchCTACarExclusion.test(filterPill.label),
+      );
+      const subtext = shouldNotVehicleOptionPresent
         ? ui('search.filterTireSize')
         : ui('search.filterSubText');
       addNotification({
@@ -138,11 +135,10 @@ function InitialSearch({
       });
       window.localStorage.setItem(
         LOCAL_STORAGE[PROPERTIES.ADD_FILTER_NOTIFICATION],
-        new Boolean(false).toString(),
+        new Boolean(true).toString(),
       );
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [queryParamLabel]);
+  }, [filterPills, addNotification]);
 
   const handleValueSelection = useCallback(
     (searchResult: SearchResult) => {
@@ -182,6 +178,7 @@ function InitialSearch({
     }
   });
   siteSearchResultTextList = siteSearchResultTextList.slice(0, 5); // we only want the first 5 results
+
   return (
     <>
       <Grid css={styles.searchSectionWrapper}>
@@ -200,7 +197,7 @@ function InitialSearch({
               initialSearchCategoriesData[1],
             ]}
           />
-          {!queryParamLabel && (
+          {filterPills.length === 0 && (
             <SearchCTA
               type={SearchTypeEnum.FILTER}
               label={ui('search.filterBy')}

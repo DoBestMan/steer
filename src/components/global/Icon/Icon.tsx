@@ -11,6 +11,7 @@ import IconImage from './IconImage';
 
 interface Props {
   name: IconName;
+  onClick?: (event: React.MouseEvent) => void;
   ssHeight?: number | string;
   ssWidth?: number;
   ssr?: boolean;

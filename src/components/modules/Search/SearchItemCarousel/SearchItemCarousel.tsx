@@ -30,7 +30,8 @@ function SearchItemCarousel({ items, title }: Props) {
   const lastSearchItemRef = useRef<HTMLLIElement>(null);
   const [showNext, setShowNext] = useState(false);
   const {
-    setQueryParamLabel,
+    searchState,
+    setFilterPills,
     setRouteQueryParamOptions,
     setSearchState,
     clearSearchResults,
@@ -103,6 +104,8 @@ function SearchItemCarousel({ items, title }: Props) {
       queryType: '',
     };
 
+    setFilterPills([{ type: searchState, label: searchResult.label }]);
+
     clearSearchResults();
     setSearchState('');
     setCurrentInputQuery(resetQuery);
@@ -119,7 +122,6 @@ function SearchItemCarousel({ items, title }: Props) {
       ],
       params,
     });
-    setQueryParamLabel(searchResult.label);
   };
 
   return (

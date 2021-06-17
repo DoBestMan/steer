@@ -87,6 +87,7 @@ export const searchContextMock: SearchContextProps = {
   searchResults: { resultMetadata: {}, siteSearchResultGroupList: [] },
   searchState: '',
   shouldPreventLinkNavigation: false,
+  filterPills: [],
 
   addPastSearch: () => {},
   clearSearchResults: () => {},
@@ -97,7 +98,7 @@ export const searchContextMock: SearchContextProps = {
   lockSearchStateToTireType: () => {},
   lockSearchStateToVehicle: () => {},
   searchQuery: () => {},
-  setQueryParamLabel: () => {},
+  setFilterPills: () => {},
   setRouteQueryParamOptions: () => {},
   setSearchState: () => {},
   setShouldPreventLinkNavigation: () => {},

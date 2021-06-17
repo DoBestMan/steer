@@ -2,6 +2,7 @@ import { ReactNode, useState } from 'react';
 
 import { RouteQueryParamOptions } from '~/components/global/Link/BaseLink.hooks';
 import { Results } from '~/components/modules/Search/Search.types';
+import { SiteSearchFilterPill } from '~/data/models/SiteSearchFilterPill';
 import { SiteSearchResultGroup } from '~/data/models/SiteSearchResultGroup';
 import { SiteSearchResultImageItem } from '~/data/models/SiteSearchResultImageItem';
 import { SiteSearchResultTextItem } from '~/data/models/SiteSearchResultTextItem';
@@ -24,6 +25,7 @@ export interface SearchContextProps {
   ) => void;
   clearSearchResults: () => void;
   deletePastSearches: () => void;
+  filterPills: SiteSearchFilterPill[];
   getPastSearches: () => void;
   hasLockedSearchState: boolean;
   hasSearchResultsError: boolean;
@@ -33,13 +35,12 @@ export interface SearchContextProps {
   lockSearchStateToTireType: () => void;
   lockSearchStateToVehicle: (vehicleName?: string) => void;
   pastSearches: SiteSearchResultGroup;
-  queryParamLabel?: string;
   routeQueryParamOptions?: RouteQueryParamOptions;
   searchQuery: ({ queryText, queryType }: SearchDataParams) => void;
   searchResults: Results;
   searchState: string;
+  setFilterPills: (filterPills: SiteSearchFilterPill[]) => void;
   setHasLockedSearchState: (hasLockedSearchState: boolean) => void;
-  setQueryParamLabel: (queryParamLabel?: string) => void;
   setRouteQueryParamOptions: (
     routeQueryParamOptions?: RouteQueryParamOptions,
   ) => void;
@@ -84,12 +85,13 @@ function useContextSetup(): SearchContextProps {
   const [routeQueryParamOptions, setRouteQueryParamOptions] = useState<
     RouteQueryParamOptions | undefined
   >();
-  const [queryParamLabel, setQueryParamLabel] = useState<string | undefined>();
+  const [filterPills, setFilterPills] = useState<SiteSearchFilterPill[]>([]);
 
   return {
     addPastSearch,
     clearSearchResults,
     deletePastSearches,
+    filterPills,
     getPastSearches,
     hasLockedSearchState,
     hasSearchResultsError,
@@ -99,13 +101,12 @@ function useContextSetup(): SearchContextProps {
     lockSearchStateToTireType,
     lockSearchStateToVehicle,
     pastSearches,
-    queryParamLabel,
     routeQueryParamOptions,
     searchQuery,
     searchResults,
     searchState,
+    setFilterPills,
     setHasLockedSearchState,
-    setQueryParamLabel,
     setRouteQueryParamOptions,
     setSearchState,
     setShouldPreventLinkNavigation,

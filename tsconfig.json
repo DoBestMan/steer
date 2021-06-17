@@ -8,8 +8,10 @@
     "jsx": "preserve",
     "lib": [
       "dom",
+      "dom.iterable",
       "esnext"
     ],
+    "downlevelIteration": true,
     "module": "esnext",
     "moduleResolution": "node",
     "noFallthroughCasesInSwitch": true,

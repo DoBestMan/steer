@@ -24,7 +24,7 @@ export interface ProductCardCarouselProps {
 }
 
 function ProductCardCarousel({ cards }: ProductCardCarouselProps) {
-  const { setQueryParamLabel, setRouteQueryParamOptions } = useSearchContext();
+  const { setFilterPills, setRouteQueryParamOptions } = useSearchContext();
   const { setIsSearchOpen } = useSearchModalContext();
   const { greaterThan } = useBreakpoints();
   const [isDynamicPagination, setIsDynamicPagination] = useState(greaterThan.M);
@@ -79,7 +79,7 @@ function ProductCardCarousel({ cards }: ProductCardCarouselProps) {
       ],
       params,
     });
-    setQueryParamLabel(label);
+    setFilterPills([{ type: 'promotion', label }]);
     setIsSearchOpen(true);
   }
 

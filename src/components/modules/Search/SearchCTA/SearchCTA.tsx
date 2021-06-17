@@ -1,3 +1,5 @@
+import React, { useMemo } from 'react';
+
 import Car from '~/components/global/Car/Car';
 import Icon from '~/components/global/Icon/Icon';
 import { useSearchContext } from '~/components/modules/Search/Search.context';
@@ -15,7 +17,15 @@ function SearchCTA({
   onClick,
   siteSearchResultList,
 }: SearchSectionProps) {
-  const { queryParamLabel } = useSearchContext();
+  const { filterPills } = useSearchContext();
+
+  const shouldNotVehicleOptionPresent = useMemo(() => {
+    return filterPills.some(
+      (filterPill) =>
+        filterPill.type === 'tireType' &&
+        searchCTACarExclusion.test(filterPill.label),
+    );
+  }, [filterPills]);
 
   const handleClick = (searchResult: SiteSearchResultTextItem) => () => {
     if (onClick) {
@@ -36,13 +46,12 @@ function SearchCTA({
         key={cta.type}
         css={[
           styles.ctaMenuItem,
-          queryParamLabel &&
-            cta.label.toLowerCase() === 'vehicle' &&
-            searchCTACarExclusion.test(queryParamLabel) &&
-            styles.ctaMenuItemHidden,
-          !!queryParamLabel &&
+          filterPills.length > 0 &&
             type === SearchTypeEnum.FILTER &&
             styles.ctaMenuItemDisabled,
+          cta.label.toLowerCase() === 'vehicle' &&
+            shouldNotVehicleOptionPresent &&
+            styles.ctaMenuItemHidden,
         ]}
         onClick={handleClick(cta)}
         role="button"

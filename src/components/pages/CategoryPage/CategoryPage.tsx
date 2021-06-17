@@ -111,7 +111,7 @@ function CategoryPage({ categoryData }: CategoryPageData) {
         hasTireType={false}
         hasVehicle={!HIDE_CATEGORY_TYPES.includes(categoryName)}
         params={searchParams}
-        queryParamLabel={categoryName}
+        filterPills={[{ type: 'category', label: categoryName }]}
       />
       <div css={styles.mostPopularBrandsContainer}>
         <Grid>

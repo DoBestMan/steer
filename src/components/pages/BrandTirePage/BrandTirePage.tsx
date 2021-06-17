@@ -40,7 +40,7 @@ function BrandTirePage({
 }: BrandTirePageProps) {
   const router = useRouter();
   const { query, asPath, pathname } = router;
-  const { setQueryParamLabel, setRouteQueryParamOptions } = useSearchContext();
+  const { setFilterPills, setRouteQueryParamOptions } = useSearchContext();
   const { setIsSearchOpen } = useSearchModalContext();
 
   const tirebrand = capitalize(`${brandName}`);
@@ -60,7 +60,7 @@ function BrandTirePage({
       routes: [ROUTE_MAP[ROUTES.BRAND_DETAIL]],
       params,
     });
-    setQueryParamLabel(label);
+    setFilterPills([{ type: 'promotion', label }]);
     setIsSearchOpen(true);
   }
 
@@ -113,7 +113,7 @@ function BrandTirePage({
           hasBrand={false}
           hasTireType={false}
           params={searchParams}
-          queryParamLabel={tirebrand}
+          filterPills={[{ type: 'brand', label: tirebrand }]}
         />
       </div>
       {curatedProducts && (

@@ -8,6 +8,7 @@ import styles, { clickableStyles } from './PromoTag.styles';
 
 export interface PromoTagProps extends SiteCatalogPromotion {
   handleClick?: (event: React.MouseEvent) => void;
+  shouldClickOnIcon?: boolean;
   siteDynamicModal?: SiteDynamicModal;
 }
 
@@ -16,6 +17,7 @@ function PromoTag({
   label,
   icon,
   isUppercase,
+  shouldClickOnIcon = false,
   handleClick,
 }: PromoTagProps) {
   const sharedStyles = [
@@ -25,24 +27,43 @@ function PromoTag({
   ];
 
   if (handleClick) {
-    return (
-      <button
-        css={[...sharedStyles, clickableStyles[style]]}
-        onClick={handleClick}
-      >
-        {label}
-        {icon && (
-          <Icon
-            css={styles.icon}
-            ssHeight="auto"
-            name={icon.svgId}
-            ssWidth={20}
-            theme={THEME.DARK}
-            ssr
-          />
-        )}
-      </button>
-    );
+    if (shouldClickOnIcon) {
+      return (
+        <button css={sharedStyles}>
+          {label}
+          {icon && (
+            <Icon
+              css={styles.icon}
+              ssHeight="auto"
+              name={icon.svgId}
+              ssWidth={20}
+              theme={THEME.DARK}
+              onClick={handleClick}
+              ssr
+            />
+          )}
+        </button>
+      );
+    } else {
+      return (
+        <button
+          css={[...sharedStyles, clickableStyles[style]]}
+          onClick={handleClick}
+        >
+          {label}
+          {icon && (
+            <Icon
+              css={styles.icon}
+              ssHeight="auto"
+              name={icon.svgId}
+              ssWidth={20}
+              theme={THEME.DARK}
+              ssr
+            />
+          )}
+        </button>
+      );
+    }
   }
 
   return (

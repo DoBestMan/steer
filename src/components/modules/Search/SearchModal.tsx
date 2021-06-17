@@ -42,7 +42,7 @@ function SearchModal() {
     searchState,
     searchResults,
     setHasLockedSearchState,
-    setQueryParamLabel,
+    setFilterPills,
     setSearchState,
     setRouteQueryParamOptions,
     setShouldPreventLinkNavigation,
@@ -89,7 +89,7 @@ function SearchModal() {
     setHasLockedSearchState(false);
     setShouldPreventLinkNavigation(false);
     setRouteQueryParamOptions();
-    setQueryParamLabel();
+    setFilterPills([]);
     toggleIsSearchOpen();
     handleNotificationClick();
   }, [
@@ -98,7 +98,7 @@ function SearchModal() {
     setPrimaryQuery,
     setSearchState,
     setHasLockedSearchState,
-    setQueryParamLabel,
+    setFilterPills,
     setShouldPreventLinkNavigation,
     setRouteQueryParamOptions,
     toggleIsSearchOpen,

@@ -3,6 +3,7 @@ import {
   KeyboardEvent,
   useCallback,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from 'react';
@@ -108,8 +109,8 @@ function SearchAutocomplete({
   } = useAutocompleteSelectedItem(results);
   const { openStaticModal } = useModalContext();
   const {
-    queryParamLabel,
-    setQueryParamLabel,
+    filterPills,
+    setFilterPills,
     setRouteQueryParamOptions,
     clearSearchResults,
   } = useSearchContext();
@@ -175,6 +176,18 @@ function SearchAutocomplete({
       setShouldShowLoading(false);
     }
   }, [isLoadingResults]);
+
+  const filterPillLabel = useMemo(() => {
+    if (filterPills.length === 0) {
+      return '';
+    }
+    if (filterPills.length === 1) {
+      return ui('search.filterPill', { label: filterPills[0].label });
+    }
+    return `${ui('search.filterPill', { label: filterPills[0].label })} • +${
+      filterPills.length - 1
+    }`;
+  }, [filterPills]);
 
   const handleCancelSelection = () => {
     setSelectedItemIndex([0, -1]);
@@ -300,7 +313,7 @@ function SearchAutocomplete({
   const handleRemoveFilter = () => {
     handleNotificationClick();
     setRouteQueryParamOptions();
-    setQueryParamLabel();
+    setFilterPills([]);
     clearSearchResults();
   };
 
@@ -354,16 +367,17 @@ function SearchAutocomplete({
             ]}
           >
             <div css={styles.filterPill}>
-              {!!queryParamLabel && (
+              {filterPills.length > 0 && (
                 <PromoTag
                   style={SitePromotionStyleEnum.SitePromotionItemFilterPill}
-                  label={ui('search.filterPill', { label: queryParamLabel })}
+                  label={filterPillLabel}
                   icon={{
                     svgId: ICONS.CLEAR_INPUT,
                     type: ICON_IMAGE_TYPE.ICON,
                   }}
                   handleClick={handleRemoveFilter}
                   isUppercase
+                  shouldClickOnIcon
                 />
               )}
             </div>
@@ -374,7 +388,7 @@ function SearchAutocomplete({
                   ? clearPrimaryInputComponent
                   : undefined
               }
-              label={<SearchLabel queryParamLabel={queryParamLabel} />}
+              label={<SearchLabel />}
               onChange={handleOnChange}
               onBackButtonClick={handleBackButtonClick}
               onClearInputClick={handleCancelSelection}
