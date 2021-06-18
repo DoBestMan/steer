@@ -246,6 +246,9 @@ function useContextSetup(): CompareContextProps {
   };
 
   const checkSelection = (product: SiteCatalogProductItem) => {
+    if (!product) {
+      return false;
+    }
     const { productId, curationType } = product;
     const foundProduct = productListToCompare.find(
       (item) =>
