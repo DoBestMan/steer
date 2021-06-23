@@ -192,16 +192,19 @@ function App({ children, ...rest }: Props) {
         );
       }
 
-      setFilterPills(filterPills);
+      if (filterPills.length) {
+        setFilterPills(filterPills);
 
-      setRouteQueryParamOptions({
-        routes: [
-          ROUTE_MAP[ROUTES.VEHICLE_CATALOG],
-          ROUTE_MAP[ROUTES.TIRE_SIZE_CATALOG_OR_CATEGORY],
-        ],
-        params,
-      });
-      setIsSearchOpen(true);
+        setRouteQueryParamOptions({
+          routes: [
+            ROUTE_MAP[ROUTES.VEHICLE_CATALOG],
+            ROUTE_MAP[ROUTES.TIRE_SIZE_CATALOG_OR_CATEGORY],
+          ],
+          params,
+        });
+
+        setIsSearchOpen(true);
+      }
     }
   }, [asPath, setIsSearchOpen, setFilterPills, setRouteQueryParamOptions]);
 
