@@ -17,15 +17,15 @@ import styles, {
   tStyles,
 } from './TableCells.styles';
 
-function CellText({ value }: SiteCompareTableCell) {
-  return <span css={styles.cellText}>{value}</span>;
-}
-
 const CONSTANTS = {
   RATING_HIGHLIGHT_THRESHOLD: 4,
 };
 
-function PriceWithPromotion({ value, promotion }: SiteCompareTableCell) {
+export function CellText({ value }: SiteCompareTableCell) {
+  return <span css={styles.cellText}>{value}</span>;
+}
+
+export function PriceWithPromotion({ value, promotion }: SiteCompareTableCell) {
   return (
     <div css={priceWithPromotion.root}>
       <div css={priceWithPromotion.priceGroup}>
@@ -44,7 +44,7 @@ function PriceWithPromotion({ value, promotion }: SiteCompareTableCell) {
                 <span css={styles.cellText}>
                   {formatDollars(price.salePriceInCents)}
                 </span>
-                {isSalePrice && (
+                {isSalePrice ? (
                   <span
                     css={[styles.cellText, priceWithPromotion.lineThrough]}
                     aria-label={`${ui(
@@ -55,6 +55,11 @@ function PriceWithPromotion({ value, promotion }: SiteCompareTableCell) {
                       {formatDollars(price.estimatedRetailPriceInCents)}
                     </span>
                   </span>
+                ) : (
+                  <span
+                    css={priceWithPromotion.hiddenSalePrice}
+                    aria-hidden
+                  ></span>
                 )}
               </div>
             );
@@ -73,7 +78,7 @@ function PriceWithPromotion({ value, promotion }: SiteCompareTableCell) {
   );
 }
 
-function BarRating({ value }: SiteCompareTableCell) {
+export function BarRating({ value }: SiteCompareTableCell) {
   const isRatingHighlighted =
     value && value >= CONSTANTS.RATING_HIGHLIGHT_THRESHOLD;
   const theme = isRatingHighlighted ? THEME.ORANGE : THEME.LIGHT;
@@ -108,7 +113,7 @@ function BarRating({ value }: SiteCompareTableCell) {
   );
 }
 
-function StarRating({ value, quantity }: SiteCompareTableCell) {
+export function StarRating({ value, quantity }: SiteCompareTableCell) {
   if (!quantity) {
     return null;
   }
@@ -131,5 +136,3 @@ function StarRating({ value, quantity }: SiteCompareTableCell) {
     </div>
   );
 }
-
-export { StarRating, BarRating, CellText, PriceWithPromotion };

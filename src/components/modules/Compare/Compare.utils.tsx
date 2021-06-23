@@ -17,11 +17,22 @@ const compactArray = <T extends unknown>(array: Array<T>) => {
   return filtered;
 };
 
-const generableTableColumns = ['Price', 'Warranty', 'Category'];
-
 export const tableContentFactory = (
   products: Array<SiteCatalogProductItem>,
-): Array<SiteCompareTable> => {
+  isPDP: boolean,
+): Array<SiteCompareTable> | null => {
+  if (!products.length) {
+    return null;
+  }
+  const generableTableColumns = ['Price', 'Warranty', 'Category'];
+  const pdpTechSpecColumns = [
+    'Max Speed',
+    'Load Index',
+    'UTQG',
+    'Load Range',
+    'Sidewall',
+  ];
+
   const generalTable: SiteCompareTable = {
     caption: '',
     columns: [{ description: '', label: 'Price', type: 'priceWithPromotion' }],
@@ -120,6 +131,38 @@ export const tableContentFactory = (
 
   specTable.data = compactArray(specTable.data);
 
+  if (isPDP) {
+    generalTable.columns.push({
+      description: '',
+      label: 'Overall customer rating',
+      type: 'rating',
+    });
+    generalTable.data.push(ratingTable.data[0]);
+
+    const pdpSpecTable: SiteCompareTable = {
+      caption: 'Techincal specs',
+      columns: [],
+      data: [],
+    };
+
+    pdpTechSpecColumns.forEach((columnLabel, index) => {
+      const foundColumn = specTable.columns.find(
+        (column) => column.label === columnLabel,
+      );
+      const foundIndex = specTable.columns.findIndex(
+        (column) => column.label === columnLabel,
+      );
+
+      if (foundColumn) {
+        pdpSpecTable.columns.push(
+          index === 0 ? { ...foundColumn, label: 'Speed Rating' } : foundColumn, // need to replace Max Speed with Speed rating
+        );
+        pdpSpecTable.data.push(specTable.data[foundIndex]);
+      }
+    });
+
+    return [generalTable, pdpSpecTable];
+  }
   return [generalTable, ratingTable, specTable];
 };
 

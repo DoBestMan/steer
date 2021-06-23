@@ -26,6 +26,7 @@ export interface ProductGroupListProps extends SiteCatalogProductGroupItem {
   onClick?: (params: Record<string, string>) => void;
   productListToCompare?: SiteCatalogProductItem[];
   setOpenCompareDrawer?: (value: boolean) => void;
+  setShowDupAlert?: (value: boolean) => void;
   siteCatalogSummary?: SiteCatalogSummary;
 }
 

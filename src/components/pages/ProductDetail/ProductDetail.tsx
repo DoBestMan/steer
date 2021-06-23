@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { RefObject, useEffect, useRef, useState } from 'react';
+import { ScrollSync, ScrollSyncPane } from 'react-scroll-sync';
 
 import Breadcrumbs from '~/components/global/Breadcrumbs/Breadcrumbs';
 import DataStructure from '~/components/global/DataStructure/DataStructure';
@@ -8,6 +9,13 @@ import GridItem from '~/components/global/Grid/GridItem';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Link from '~/components/global/Link/Link';
 import Meta from '~/components/global/Meta/Meta';
+import CTAList from '~/components/modules/Compare/CompareModal/CTAList/CTAList';
+import TireWithInfoList from '~/components/modules/Compare/CompareModal/TireWithInfoList/TireWithInfoList';
+import CompareTable from '~/components/modules/Compare/CompareTable/CompareTable';
+import {
+  SCROLLBAR_DIRRECTION,
+  useHasScrollBar,
+} from '~/components/modules/Compare/CompareTable/CompareTable.hooks';
 import ModuleProductLineFAQs from '~/components/modules/EditorialModules/modules/ModuleProductLineFAQs/ModuleProductLineFAQs';
 import LocationModal from '~/components/modules/Location/LocationModal/LocationModal';
 import { navigationBreadcrumbPaddingTop } from '~/components/modules/Nav/Nav.styles';
@@ -23,6 +31,7 @@ import { useProductDetailContext } from '~/components/pages/ProductDetail/Produc
 import { useModalContext } from '~/context/Modal.context';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 import { LINK_THEME } from '~/lib/constants';
+import { ui } from '~/lib/utils/ui-dictionary';
 import Error from '~/pages/_error';
 
 import useExperimentPLA from './experiments/useExperimentPLA';
@@ -76,6 +85,9 @@ function ProductDetail({ serverData }: ProductDetailData) {
     stickyBar,
     technicalSpecs,
     statusCode,
+    popularTableData,
+    popularCompareList,
+    addToCartFromCompareList,
     siteFaqs,
   } = useProductDetail({
     serverData,
@@ -87,6 +99,10 @@ function ProductDetail({ serverData }: ProductDetailData) {
   } = useExperimentPLA({
     isPLA,
     hasRecirculation: isPLA && recirculation && recirculation.length > 0,
+  });
+
+  const { ref: compareTableWrapper, hasScrollbar } = useHasScrollBar({
+    direction: SCROLLBAR_DIRRECTION.HORIZONTAL,
   });
 
   const { isLoading } = useProductDetailContext();
@@ -306,6 +322,66 @@ function ProductDetail({ serverData }: ProductDetailData) {
           </div>
         </GridItem>
       </Grid>
+      {popularTableData && popularCompareList && (
+        <ScrollSync vertical={false}>
+          <div>
+            <div css={styles.header}>
+              <h3 css={styles.title}>{ui('catalog.popularCompare.title')}</h3>
+              <p css={styles.subTitle}>
+                {ui('catalog.popularCompare.subTitle')}
+              </p>
+            </div>
+            <ScrollSyncPane>
+              <div css={styles.tireWithInfoList}>
+                <TireWithInfoList
+                  productList={popularCompareList}
+                  customRootStyle={styles.tireWithInfoListRootStyle}
+                />
+              </div>
+            </ScrollSyncPane>
+            <ScrollSyncPane>
+              <div css={styles.ctaListWrapper}>
+                <CTAList
+                  productList={popularCompareList}
+                  addToCart={addToCartFromCompareList}
+                  customRootStyle={styles.ctaListRoot}
+                />
+              </div>
+            </ScrollSyncPane>
+            {popularTableData &&
+              popularTableData.map(({ caption, columns, data }, index) => {
+                return (
+                  <>
+                    {caption && (
+                      <h3 css={styles.caption}>
+                        <span>{caption}</span>
+                      </h3>
+                    )}
+                    <ScrollSyncPane key={index}>
+                      <div
+                        css={[
+                          styles.tableListWrapper,
+                          index === popularTableData.length - 1 &&
+                            styles.lastTable,
+                        ]}
+                        ref={compareTableWrapper as RefObject<HTMLDivElement>}
+                      >
+                        <CompareTable
+                          columns={columns}
+                          data={data}
+                          caption={caption}
+                          hasScrollbar={hasScrollbar}
+                          customRootStyle={styles.compareTableRoot}
+                          headerStyle={styles.tableHeader}
+                        />
+                      </div>
+                    </ScrollSyncPane>
+                  </>
+                );
+              })}
+          </div>
+        </ScrollSync>
+      )}
       {recirculation?.length && (
         <Grid css={styles.recirculationContainer}>
           {recirculation.slice(isPLA ? 1 : 0).map((item) => (

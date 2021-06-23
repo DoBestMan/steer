@@ -4,6 +4,7 @@ import BrandLogoOrLabel from '~/components/global/BrandLogoOrLabel/BrandLogoOrLa
 import Icon from '~/components/global/Icon/Icon';
 import { ICONS } from '~/components/global/Icon/Icon.constants';
 import Image from '~/components/global/Image/Image';
+import BaseLink from '~/components/global/Link/BaseLink';
 import { SiteCatalogProductItem } from '~/data/models/SiteCatalogProductItem';
 import { PRODUCT, TIME } from '~/lib/constants';
 import { SHADOW_SRC } from '~/lib/constants/image';
@@ -15,9 +16,9 @@ import styles from './TireWithInfo.styles';
 
 interface Props {
   index: number;
-  onClose: (productId: string) => void;
+  onClose?: (productId: string) => void;
   product: SiteCatalogProductItem;
-  setRemovingProductIndex: (index: number) => void;
+  setRemovingProductIndex?: (index: number) => void;
 }
 
 function TireWithInfo({
@@ -31,7 +32,7 @@ function TireWithInfo({
   const [shouldDisplayAsset, setShouldDisplayAsset] = useState(true);
 
   const imageList = product?.imageList || [];
-  const { brand, loadSpeedRating, name } = product;
+  const { brand, loadSpeedRating, name, link } = product;
 
   const displayedImage =
     imageList.find(
@@ -55,23 +56,25 @@ function TireWithInfo({
 
   const handleClose = () => {
     setIsRemoving(true);
-    setRemovingProductIndex(index);
+    setRemovingProductIndex && setRemovingProductIndex(index);
     setTimeout(() => {
-      onClose(product.productId as string);
+      onClose && onClose(product.productId as string);
     }, TIME.MS750);
   };
 
   return (
     <div css={[styles.root, isRemoving && ANIMATION.removing]}>
-      <span
-        css={[styles.closeButton, styles.blackButton]}
-        onClick={handleClose}
-        aria-label="close"
-        role="button"
-        tabIndex={-1}
-      >
-        <Icon name={ICONS.CLOSE} />
-      </span>
+      {onClose && (
+        <span
+          css={[styles.closeButton, styles.blackButton]}
+          onClick={handleClose}
+          aria-label="close"
+          role="button"
+          tabIndex={-1}
+        >
+          <Icon name={ICONS.CLOSE} />
+        </span>
+      )}
       <div css={[styles.image]}>
         {shouldDisplayAsset && (
           <>
@@ -112,8 +115,10 @@ function TireWithInfo({
             />
           </span>
         )}
-        <h3 css={styles.subcopy}>
-          {name} {loadSpeedRating}
+        <h3 css={styles.subcopy} className="sub-copy1">
+          <BaseLink css={styles.linkText} href={link.href}>
+            {name} {loadSpeedRating}
+          </BaseLink>
         </h3>
       </div>
     </div>

@@ -10,18 +10,20 @@ export default {
 export function CompareTableDefault() {
   const mappedTableData = tableContentFactory(
     mockServerData.siteCatalogCompareList,
+    false,
   );
 
   return (
     <div>
-      {mappedTableData.map(({ caption, columns, data }, index) => (
-        <CompareTable
-          key={index}
-          columns={columns}
-          data={data}
-          caption={caption}
-        />
-      ))}
+      {mappedTableData &&
+        mappedTableData.map(({ caption, columns, data }, index) => (
+          <CompareTable
+            key={index}
+            columns={columns}
+            data={data}
+            caption={caption}
+          />
+        ))}
     </div>
   );
 }

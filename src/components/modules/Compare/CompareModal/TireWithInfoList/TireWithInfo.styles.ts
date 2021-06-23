@@ -85,6 +85,16 @@ const styles: StylesMap = {
     flexDirection: 'column',
     textAlign: 'center',
   },
+  linkText: {
+    '&::after': {
+      content: '""',
+      height: '100%',
+      left: 0,
+      position: 'absolute',
+      top: 0,
+      width: '100%',
+    },
+  },
   root: {
     alignItems: 'center',
     display: 'flex',

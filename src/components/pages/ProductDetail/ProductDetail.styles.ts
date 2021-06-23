@@ -25,6 +25,46 @@ function defaultSpacing(rule: string, offset = 0) {
     },
   };
 }
+const TABLE_BG_COLOR = '#F4F4F4';
+
+const paddingForBK = {
+  [MQ.M]: {
+    paddingLeft: getColumnsCalc({
+      breakpoint: 'M',
+      columns: 0,
+      includeExtraGutter: true,
+    }),
+    paddingRight: getColumnsCalc({
+      breakpoint: 'M',
+      columns: 0,
+      includeExtraGutter: true,
+    }),
+  },
+  [MQ.L]: {
+    paddingLeft: getColumnsCalc({
+      breakpoint: 'L',
+      columns: 1,
+      includeExtraGutter: true,
+    }),
+    paddingRight: getColumnsCalc({
+      breakpoint: 'L',
+      columns: 1,
+      includeExtraGutter: true,
+    }),
+  },
+  [MQ.XL]: {
+    paddingLeft: getColumnsCalc({
+      breakpoint: 'XL',
+      columns: 2,
+      includeExtraGutter: true,
+    }),
+    paddingRight: getColumnsCalc({
+      breakpoint: 'XL',
+      columns: 2,
+      includeExtraGutter: true,
+    }),
+  },
+};
 
 const styles: StylesMap = {
   anchorBar: {
@@ -50,6 +90,20 @@ const styles: StylesMap = {
       marginBottom: SPACING.SIZE_60,
     },
   },
+  caption: [
+    typography.eyebrow,
+    {
+      background: '#cccccc',
+      padding: SPACING.SIZE_20,
+      paddingLeft: SPACING.SIZE_20,
+      position: 'sticky',
+      top: 271,
+      width: '100%',
+      zIndex: Z_INDEX.FRONT - 1,
+    },
+    paddingForBK,
+  ],
+  compareTableRoot: paddingForBK,
   confirmFitContainer: {
     [MQ.L]: {
       borderTopLeftRadius: RADIUS.RADIUS_15,
@@ -82,6 +136,15 @@ const styles: StylesMap = {
     },
     position: 'relative',
   },
+  ctaListRoot: paddingForBK,
+  ctaListWrapper: {
+    '&::-webkit-scrollbar': {
+      display: 'none',
+    },
+    background: COLORS.GLOBAL.ORANGE,
+    display: 'flex',
+    overflowX: 'scroll',
+  },
   detailsSection: [
     defaultSpacing('marginTop'),
     defaultSpacing('paddingBottom', -SPACING.SIZE_20),
@@ -96,6 +159,18 @@ const styles: StylesMap = {
     },
   ],
   featuredRecirculation: defaultSpacing('marginTop'),
+  header: [
+    {
+      padding: `${SPACING.SIZE_45}px ${SPACING.SIZE_20}px 0 ${SPACING.SIZE_20}px`,
+      [MQ.M]: {
+        paddingTop: SPACING.SIZE_80,
+      },
+      [MQ.XL]: {
+        paddingTop: SPACING.SIZE_120,
+      },
+    },
+    paddingForBK,
+  ],
   insights: {
     [MQ.L]: {
       marginTop: SPACING.SIZE_40,
@@ -114,6 +189,11 @@ const styles: StylesMap = {
       },
     },
   ],
+  lastTable: {
+    [MQ.M]: {
+      paddingBottom: SPACING.SIZE_60,
+    },
+  },
   plaTechSpecs: [
     defaultSpacing('paddingTop'),
     defaultSpacing('paddingBottom', -SPACING.SIZE_20),
@@ -222,6 +302,51 @@ const styles: StylesMap = {
     position: 'sticky',
     zIndex: Z_INDEX.FRONT,
   },
+  subTitle: {
+    color: COLORS.LIGHT.GRAY_70,
+    fontSize: 12,
+    [MQ.M]: {
+      fontSize: 15,
+    },
+    [MQ.XL]: {
+      fontSize: 18,
+    },
+  },
+  tableHeader: {
+    [MQ.M]: {
+      '& > div': {
+        width: `min(calc(100vw - ${SPACING.SIZE_80}px), 760px)`, //760px is the width of 5 items of 152 px tires
+      },
+      left: getColumnsCalc({
+        breakpoint: 'M',
+        columns: 0,
+        includeExtraGutter: true,
+      }),
+    },
+    [MQ.L]: {
+      left: getColumnsCalc({
+        breakpoint: 'L',
+        columns: 1,
+        includeExtraGutter: true,
+      }),
+    },
+    [MQ.XL]: {
+      left: getColumnsCalc({
+        breakpoint: 'XL',
+        columns: 2,
+        includeExtraGutter: true,
+      }),
+    },
+  },
+  tableListWrapper: {
+    '&::-webkit-scrollbar': {
+      display: 'none',
+    },
+    background: TABLE_BG_COLOR,
+    display: 'flex',
+    overflowX: 'scroll',
+    paddingBottom: SPACING.SIZE_20,
+  },
   tireImage: {
     marginBottom: SPACING.SIZE_10,
     width: '100%',
@@ -234,6 +359,19 @@ const styles: StylesMap = {
       marginBottom: 0,
     },
   },
+  tireWithInfoList: {
+    '&::-webkit-scrollbar': {
+      display: 'none',
+    },
+    background: `linear-gradient(360deg, ${COLORS.GLOBAL.ORANGE} 30%, hsla(18, 16%, 53%, 0) 30%)`,
+    display: 'flex',
+    overflowX: 'scroll',
+    position: 'sticky',
+    top: 0,
+    zIndex: Z_INDEX.FRONT,
+  },
+  tireWithInfoListRootStyle: paddingForBK,
+  title: [typography.primaryHeadline],
 };
 
 export default styles;

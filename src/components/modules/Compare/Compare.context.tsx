@@ -179,7 +179,9 @@ function useContextSetup(): CompareContextProps {
       });
 
       setProductList(newProductList);
-      setTablesData(tableContentFactory(res.data.siteCatalogCompareList));
+      setTablesData(
+        tableContentFactory(res.data.siteCatalogCompareList, false),
+      );
     } else {
       console.error('error', res.error);
       if (res.error.code !== FetchErrorCodes.AbortError) {

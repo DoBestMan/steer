@@ -183,6 +183,10 @@
     "tireSize": "Add Tire Size"
   },
   "catalog": {
+    "popularCompare": {
+      "title": "Popular All Seasons tires",
+      "subTitle": "Top choices from drivers near you."
+    },
     "compare": {
       "hide": "Hide",
       "show": "Show",

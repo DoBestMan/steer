@@ -1,6 +1,11 @@
 import { ANIMATION, NUMBER_OF_TIRES } from '../Compare.constants';
 import styles from './CompareTable.styles';
-import { BaseProps, CompareTableProps, TableProps } from './CompareTable.types';
+import {
+  BaseProps,
+  ColumnHeaderProps,
+  CompareTableProps,
+  TableProps,
+} from './CompareTable.types';
 import { mapTypeToContent } from './CompareTable.util';
 import SingleAccordion from './SingleAccordion/SingleAccordion';
 
@@ -22,15 +27,15 @@ function Row({ children, customStyle }: BaseProps) {
 
 function Thead({ children, customStyle }: BaseProps) {
   return (
-    <div css={[styles.thead, customStyle]} role="columnheader">
-      <div css={styles.xSticky}>{children}</div>
+    <div css={styles.thead} role="columnheader">
+      <div css={[styles.xSticky, customStyle]}>{children}</div>
     </div>
   );
 }
 
-function TCell({ children, customStyle }: BaseProps) {
+function TCell({ children, customStyle, ...rest }: BaseProps) {
   return (
-    <div css={[styles.tcell, customStyle]} role="cell">
+    <div css={[styles.tcell, customStyle]} role="cell" {...rest}>
       <div css={styles.tcellContent}>{children}</div>
     </div>
   );
@@ -40,13 +45,10 @@ function ColumnHeader({
   description,
   label,
   hasScrollbar,
-}: {
-  description?: string;
-  hasScrollbar: boolean;
-  label: string;
-}) {
+  headerStyle,
+}: ColumnHeaderProps) {
   return (
-    <Thead>
+    <Thead customStyle={headerStyle}>
       {description ? (
         <SingleAccordion
           id={label}
@@ -67,9 +69,12 @@ function CompareTable({
   caption,
   removingProductIndex,
   hasScrollbar,
+  customRootStyle,
+  hasAddTire,
+  headerStyle,
 }: CompareTableProps) {
   return (
-    <div css={styles.root}>
+    <div css={[styles.root, customRootStyle]}>
       <Table caption={caption}>
         {columns.map(({ label, description, type }, index) => (
           <Row key={label}>
@@ -77,6 +82,7 @@ function CompareTable({
               description={description}
               label={label}
               hasScrollbar={!!hasScrollbar}
+              headerStyle={headerStyle}
             />
             <div css={styles.cellsWrapper}>
               {data[index].map((cell, index) => (
@@ -91,8 +97,8 @@ function CompareTable({
                   {mapTypeToContent[type](cell)}
                 </TCell>
               ))}
-              {data[index].length < NUMBER_OF_TIRES.MAX && (
-                <TCell customStyle={styles.borderNone} />
+              {hasAddTire && data[index].length < NUMBER_OF_TIRES.MAX && (
+                <TCell customStyle={styles.borderNone} aria-hidden />
               )}
             </div>
           </Row>

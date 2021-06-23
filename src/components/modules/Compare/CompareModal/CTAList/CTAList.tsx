@@ -1,4 +1,5 @@
 import { SiteCatalogProductItem } from '~/data/models//SiteCatalogProductItem';
+import { CSSStylesProp } from '~/lib/constants';
 
 import { NUMBER_OF_TIRES } from '../../Compare.constants';
 import CTAGroup, { Quantity } from './CTAGroup';
@@ -14,13 +15,21 @@ interface Props {
     quantity?: Quantity;
     shouldAddCoverage: boolean;
   }) => void;
+  customRootStyle?: CSSStylesProp;
+  hasAddTire?: boolean;
   productList: SiteCatalogProductItem[];
-  removingProductIndex: number;
+  removingProductIndex?: number;
 }
 
-function CTAList({ productList, addToCart, removingProductIndex }: Props) {
+function CTAList({
+  productList,
+  addToCart,
+  removingProductIndex,
+  customRootStyle,
+  hasAddTire,
+}: Props) {
   return (
-    <div css={styles.root}>
+    <div css={[styles.root, customRootStyle]}>
       {productList.map((product, index) => (
         <CTAGroup
           key={index}
@@ -30,7 +39,7 @@ function CTAList({ productList, addToCart, removingProductIndex }: Props) {
           removingProductIndex={removingProductIndex}
         />
       ))}
-      {productList.length < NUMBER_OF_TIRES.MAX && (
+      {hasAddTire && productList.length < NUMBER_OF_TIRES.MAX && (
         <div css={{ width: '152px' }}></div>
       )}
     </div>

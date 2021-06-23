@@ -82,6 +82,9 @@ const ratingBar: StylesMap = {
 };
 
 const priceWithPromotion: StylesMap = {
+  hiddenSalePrice: {
+    minHeight: SPACING.SIZE_20,
+  },
   root: {
     flexGrow: 1,
     display: 'flex',
@@ -92,7 +95,8 @@ const priceWithPromotion: StylesMap = {
     textDecoration: 'line-through',
   },
   promoTagWrapper: {
-    marginTop: SPACING.SIZE_10,
+    display: 'inline-block',
+    marginTop: SPACING.SIZE_15,
   },
 };
 

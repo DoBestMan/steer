@@ -48,7 +48,7 @@ interface Props {
   }) => void;
   index: number;
   product: SiteCatalogProductItem;
-  removingProductIndex: number;
+  removingProductIndex?: number;
 }
 
 function CTAGroup({ addToCart, product, removingProductIndex, index }: Props) {

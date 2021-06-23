@@ -5,6 +5,7 @@ import { Product as ProductLinkingData } from 'schema-dts';
 
 import { BreadcrumbsItem } from '~/components/global/Breadcrumbs/Breadcrumbs';
 import { MetaProps } from '~/components/global/Meta/Meta';
+import { tableContentFactory } from '~/components/modules/Compare/Compare.utils';
 import { FAQProps } from '~/components/modules/PDP/FAQ/FAQ';
 import { InsightsRebateProps } from '~/components/modules/PDP/InsightRebate/InsightRebate';
 import { InsightsProps } from '~/components/modules/PDP/Insights/Insights';
@@ -18,6 +19,9 @@ import { useGlobalsContext } from '~/context/Globals.context';
 import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
 import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
 import { SiteCatalogProductGroupList } from '~/data/models/SiteCatalogProductGroupList';
+import { SiteCatalogProductItem } from '~/data/models/SiteCatalogProductItem';
+import { SiteCompareProductsResult } from '~/data/models/SiteCompareProductsResult';
+import { SiteCompareTable } from '~/data/models/SiteCompareTable';
 import { SiteModuleProductLineFAQs } from '~/data/models/SiteModules';
 import { SiteProduct } from '~/data/models/SiteProduct';
 import { SiteProductLine } from '~/data/models/SiteProductLine';
@@ -25,6 +29,7 @@ import { useApiDataWithDefault } from '~/hooks/useApiDataWithDefault';
 import { ROUTE_MAP, ROUTES } from '~/lib/constants';
 import { eventEmitters } from '~/lib/events/emitters';
 import { FetchError } from '~/lib/fetch/FetchError';
+import { getLegacyCheckoutURL } from '~/lib/utils/legacy-routes';
 import { interpolateRoute } from '~/lib/utils/routes';
 
 import { Anchor, mapDataToAnchorList } from './mappers/anchorList';
@@ -57,8 +62,20 @@ export type ParsedStickyBarProps = Omit<
   PDPStickyBarProps,
   'avoidSection' | 'darkSection'
 >;
-
+interface Quantity {
+  front: number;
+  rear?: number;
+}
 interface ResponseProps extends Pick<SiteProductLine, 'assetList'> {
+  addToCartFromCompareList: ({
+    product,
+    quantity,
+    shouldAddCoverage,
+  }: {
+    product?: SiteCatalogProductItem;
+    quantity?: Quantity;
+    shouldAddCoverage: boolean;
+  }) => void;
   anchorList: Anchor[];
   breadcrumbs: BreadcrumbsItem[];
   currentPath: string;
@@ -70,6 +87,8 @@ interface ResponseProps extends Pick<SiteProductLine, 'assetList'> {
   isPLA: boolean;
   linkingData: ProductLinkingData | null;
   meta: MetaProps;
+  popularCompareList: SiteCatalogProductItem[] | undefined;
+  popularTableData: Array<SiteCompareTable> | null;
   productInfo: ParsedProductInfoProps;
   recirculation: SiteCatalogProductGroupList | null;
   recirculationSize: RecirculationSize | null;
@@ -81,6 +100,7 @@ interface ResponseProps extends Pick<SiteProductLine, 'assetList'> {
   technicalSpecs: TechnicalSpecsProps | null;
 }
 
+const POPULAR_IDs = ['most-popular', 'most-popular-category'];
 function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
   const productDetail = useProductDetailContext();
   const {
@@ -119,6 +139,55 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
 
   const { siteProductReviews, siteFaqs } = serverData;
   const { siteProductLine } = siteProduct;
+  const recirculation = mapDataToRecirculation({ siteProduct });
+
+  const popularProductList = recirculation?.find((item) =>
+    POPULAR_IDs.includes(item.id),
+  );
+
+  const recirculationNoPopular =
+    recirculation?.filter((item) => !POPULAR_IDs.includes(item.id)) || null;
+
+  const productIds =
+    popularProductList &&
+    popularProductList.productList.map((item) => item.productId);
+
+  const compareProductIds = productIds?.slice(1).join(',') as string;
+
+  const { data: compareData, error: compareError } = useApiDataWithDefault<
+    SiteCompareProductsResult
+  >({
+    defaultData: { siteCatalogCompareList: [] },
+    endpoint: '/compare-products',
+    includeUserRegion: true,
+    includeUserZip: true,
+    query: {
+      compareProductIds,
+      productId: (productIds && productIds[0]) as string,
+    },
+    revalidateEmitter: eventEmitters.userPersonalizationLocationUpdate,
+  });
+
+  if (compareError) {
+    console.error(compareError);
+  }
+
+  const popularCompareList = popularProductList?.productList.map(
+    (product, index) => {
+      const tempProduct = {
+        ...product,
+        siteProductLineSizeDetailRoadHazard: compareData.siteCatalogCompareList[
+          index
+        ]
+          ? compareData.siteCatalogCompareList[index]
+              .siteProductLineSizeDetailRoadHazard
+          : null,
+      };
+
+      return tempProduct;
+    },
+  );
+
   const assetList = siteProductLine.assetList;
   const clonedAssetList = JSON.parse(JSON.stringify(assetList));
   const metaImage = clonedAssetList.length
@@ -200,7 +269,33 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
 
   const technicalSpecs = mapDataToTechnicalSpecs({ siteProduct, router });
 
+  const addToCartFromCompareList = ({
+    product,
+    quantity,
+    shouldAddCoverage,
+  }: {
+    product?: SiteCatalogProductItem;
+    quantity?: Quantity;
+    shouldAddCoverage: boolean;
+  }) => {
+    if (!product || !quantity) {
+      return;
+    }
+
+    const checkoutURL = getLegacyCheckoutURL({
+      front: product.productId as string,
+      quantity,
+      rear: product.productId as string,
+      roadHazard: shouldAddCoverage,
+      userZip:
+        userPersonalization.userPersonalizationData?.userLocation?.zip ||
+        undefined,
+    });
+
+    window.location.href = checkoutURL;
+  };
   return {
+    addToCartFromCompareList,
     anchorList: mapDataToAnchorList({
       insights,
       installation,
@@ -234,8 +329,13 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
       }),
       shareImage: metaImage,
     },
+    popularCompareList,
+    popularTableData: tableContentFactory(
+      compareData.siteCatalogCompareList,
+      true,
+    ),
     productInfo,
-    recirculation: mapDataToRecirculation({ siteProduct }),
+    recirculation: recirculationNoPopular,
     recirculationSize: mapDataToRecirculationSize({
       siteProduct,
       rearSize: queryParams.rearSize,

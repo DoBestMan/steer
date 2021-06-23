@@ -62,6 +62,7 @@ const styles: StylesMap = {
     display: 'flex',
     margin: 'auto',
     maxWidth: PRODUCT_WIDTH.BIG,
+    minHeight: SPACING.SIZE_45,
     paddingBottom: SPACING.SIZE_20,
     width: PRODUCT_WIDTH.BIG,
   },

@@ -110,6 +110,7 @@ function CatalogProductGroups({
                 siteCatalogSummary={siteCatalogSummary}
                 siteQueryParams={null}
                 isTopPicksGroup
+                setShowDupAlert={setShowDupAlert}
                 checkSelection={checkSelection}
                 setOpenCompareDrawer={setOpenCompareDrawer}
                 productListToCompare={productListToCompare}
@@ -128,6 +129,7 @@ function CatalogProductGroups({
                 onClick={handleUpdateResults}
                 isTopPicksGroup={false}
                 checkSelection={checkSelection}
+                setShowDupAlert={setShowDupAlert}
                 setOpenCompareDrawer={setOpenCompareDrawer}
                 productListToCompare={productListToCompare}
                 onCheckChange={onCheckChange}

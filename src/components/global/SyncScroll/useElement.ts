@@ -1,14 +1,12 @@
-import { useCallback, useState } from 'react';
-
-type CallbackRef<T> = (element: T | undefined) => void;
+import { RefCallback, useCallback, useState } from 'react';
 
 export const useElement = <T extends HTMLElement>(): [
   HTMLElement | undefined,
-  CallbackRef<T>,
+  RefCallback<T>,
 ] => {
   // Adapted from [official hooks FAQ](https://reactjs.org/docs/hooks-faq.html#how-can-i-measure-a-dom-node)
   const [element, setElement] = useState<T>();
-  const ref = useCallback<CallbackRef<T>>((el) => {
+  const ref = useCallback<RefCallback<T>>((el) => {
     if (el === null) {
       return;
     }
