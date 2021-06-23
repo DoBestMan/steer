@@ -207,7 +207,6 @@ function ProductInfo({
                   brandURL={brandURL}
                 />
               </div>
-              <Rating reviews={reviews} rating={rating} />
             </div>
             {shouldShowSizeSelector ? (
               <>
@@ -221,7 +220,6 @@ function ProductInfo({
                       sizeFinder={sizeFinder}
                     />
                   </div>
-                  {!isOutOfStock && renderPrice()}
                   <div css={styles.ratingWrapper}>
                     <Rating reviews={reviews} rating={rating} />
                   </div>
@@ -240,7 +238,8 @@ function ProductInfo({
             )}
           </div>
           {isLoading && !isTireLine ? (
-            bk !== BREAKPOINT_SIZES.M && <div css={styles.loading} />
+            bk !== BREAKPOINT_SIZES.M &&
+            (productPrice ? rendePriceOnLoad() : <div css={styles.loading} />)
           ) : (
             <div css={styles.priceAndActionBarWrapper}>
               {!isOutOfStock && renderPrice()}
@@ -309,9 +308,6 @@ function ProductInfo({
                 brandURL={brandURL}
               />
             </div>
-            <div css={styles.rating}>
-              <Rating reviews={reviews} rating={rating} />
-            </div>
           </div>
           {shouldShowSizeSelector ? (
             <>
@@ -324,6 +320,9 @@ function ProductInfo({
                     loadRange={loadRange}
                     sizeFinder={sizeFinder}
                   />
+                </div>
+                <div css={styles.rating}>
+                  <Rating reviews={reviews} rating={rating} />
                 </div>
               </div>
               {showSelectError && (
@@ -339,9 +338,9 @@ function ProductInfo({
             <div css={styles.loadingSizeSelector} />
           )}
         </div>
-        {isLoading && productPrice ? rendePriceOnLoad() : ''}
         {isLoading && !isTireLine ? (
-          bk !== BREAKPOINT_SIZES.M && <div css={styles.loading} />
+          bk !== BREAKPOINT_SIZES.M &&
+          (productPrice ? rendePriceOnLoad() : <div css={styles.loading} />)
         ) : (
           <div css={styles.priceAndActionBarWrapper}>
             {!isOutOfStock && renderPrice()}

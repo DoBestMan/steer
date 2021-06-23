@@ -78,11 +78,12 @@ const styles: StylesMap = {
     backgroundColor: COLORS.LIGHT.GRAY_10,
     height: 25,
     marginBottom: SPACING.SIZE_20,
-    marginTop: SPACING.SIZE_40,
+    marginTop: SPACING.SIZE_20,
     paddingTop: SPACING.SIZE_20,
     width: 70,
 
     [MQ.M]: {
+      marginTop: SPACING.SIZE_40,
       height: 40,
       width: 120,
     },
@@ -181,7 +182,7 @@ const styles: StylesMap = {
     },
   },
   selectorWrapper: {
-    alignItems: 'flex-end',
+    alignItems: 'flex-start',
     display: 'flex',
     justifyContent: 'space-between',
     marginBottom: SPACING.SIZE_10,
@@ -216,14 +217,10 @@ const styles: StylesMap = {
     justifyContent: 'space-between',
   },
   wrapper: {
-    alignItems: 'flex-end',
     display: 'flex',
+    flexDirection: 'column',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
-
-    [MQ.L]: {
-      flexFlow: 'row wrap',
-    },
   },
 };
 

@@ -80,14 +80,13 @@ export default function ConfirmFitInsight({
   const { openStaticModal } = useModalContext();
 
   useEffect(() => {
-    // start the animation one second after component is mounted
     const timerForCar = setTimeout(() => {
       setIsAnimating(hasMotion);
       setCarAnimStatus(true);
-    }, TIME.MS1000);
+    }, TIME.MS50);
     const timerForFade = setTimeout(() => {
       setFadeAnimStatus(true);
-    }, TIME.MS2000);
+    }, TIME.MS500);
     return () => {
       clearTimeout(timerForFade);
       clearTimeout(timerForCar);
