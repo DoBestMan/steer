@@ -124,6 +124,7 @@ const styles: StylesMap = {
     padding: `0 ${SPACING.SIZE_20}px`,
     [MQ.M]: {
       marginBottom: 0,
+      padding: 0,
     },
   },
   homepageContainer: {
@@ -146,7 +147,6 @@ const styles: StylesMap = {
     {
       flex: 1,
       marginBottom: SPACING.SIZE_20,
-      padding: `0 ${SPACING.SIZE_20}px`,
       textTransform: 'uppercase',
       [MQ.M]: [
         typography.primarySubhead,
@@ -166,7 +166,6 @@ const styles: StylesMap = {
   zipSection: [
     typography.labelCopyTight,
     {
-      alignItems: 'center',
       color: COLORS.ORANGE.SHADE_85,
       cursor: 'pointer',
       display: 'flex',

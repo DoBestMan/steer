@@ -1,6 +1,7 @@
 import 'focus-visible';
 
-import { Global } from '@emotion/core';
+import { CacheProvider, Global } from '@emotion/core';
+import { cache } from 'emotion';
 import NextApp, { AppContext, AppInitialProps } from 'next/app';
 import smoothscroll from 'smoothscroll-polyfill';
 import { SWRConfig } from 'swr';
@@ -42,6 +43,23 @@ class MyApp extends NextApp<Props> {
     serverData: this.props.serverData,
   };
 
+  componentDidMount() {
+    // Used to remove duplicate style blocks created from CSS-Emotion
+    const duplicateCssTags = document.querySelectorAll(
+      '[data-emotion="css-global"]',
+    );
+
+    if (duplicateCssTags.length) {
+      duplicateCssTags.forEach((elm) => {
+        if (!elm) {
+          return;
+        }
+
+        elm.remove();
+      });
+    }
+  }
+
   render() {
     const { Component, pageProps, route, hostUrl } = this.props;
     const {
@@ -52,23 +70,25 @@ class MyApp extends NextApp<Props> {
     } = this.state.serverData;
     GA.initialize();
     return (
-      <SWRConfig value={{ revalidateOnFocus: false }}>
-        <AppProviders
-          hostUrl={hostUrl}
-          siteGlobalsContextValue={siteGlobals}
-          siteMenuContextValue={siteMenu}
-          siteNotificationContextValue={siteNotifications}
-          userAgentType={userAgentType}
-        >
-          <Meta />
+      <CacheProvider value={cache}>
+        <SWRConfig value={{ revalidateOnFocus: false }}>
+          <AppProviders
+            hostUrl={hostUrl}
+            siteGlobalsContextValue={siteGlobals}
+            siteMenuContextValue={siteMenu}
+            siteNotificationContextValue={siteNotifications}
+            userAgentType={userAgentType}
+          >
+            <Meta />
 
-          <Global styles={global} />
+            <Global styles={global} />
 
-          <App route={route}>
-            <Component {...pageProps} />
-          </App>
-        </AppProviders>
-      </SWRConfig>
+            <App route={route}>
+              <Component {...pageProps} />
+            </App>
+          </AppProviders>
+        </SWRConfig>
+      </CacheProvider>
     );
   }
 }

@@ -1,4 +1,4 @@
-import React, { ReactType, useRef, useState } from 'react';
+import React, { ReactType, useEffect, useRef, useState } from 'react';
 
 import Link from '~/components/global/Link/Link';
 import { SiteImageExtended } from '~/data/models/SiteImageExtended';
@@ -43,6 +43,7 @@ function Image({
 }: ImageProps) {
   const imgRef = useRef<HTMLDivElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [clientSrcSet, setClientSrcSet] = useState<string | null>(null);
 
   // If no srcsrt provided, then we try a few other things
   if (!srcSet) {
@@ -112,6 +113,15 @@ function Image({
 
   const Container: ReactType = as;
 
+  useEffect(() => {
+    const isCloudinaryImage = Boolean(finalSrcSet.match(/images.simpletire/gi));
+
+    if (isCloudinaryImage) {
+      const newSrcSet = finalSrcSet.replace(/q_auto:eco/gi, 'q_auto:best');
+      setClientSrcSet(newSrcSet);
+    }
+  }, [finalSrcSet]);
+
   function ImageTag() {
     return (
       <img
@@ -123,7 +133,7 @@ function Image({
         onError={onError}
         sizes={sizes ? sizes : undefined}
         src={finalSrc ? finalSrc : src}
-        srcSet={finalSrcSet ? finalSrcSet : (srcSet as string)}
+        srcSet={finalSrcSet ? clientSrcSet || finalSrcSet : (srcSet as string)}
         width={200}
         height={200}
         alt={altText}

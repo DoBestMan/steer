@@ -58,7 +58,7 @@ export function getSrcset(url: string, q?: TransformationArgs): string {
       }
 
       // alternate quality depending on user's connectivity
-      let quality = 'auto:best';
+      let quality = 'auto:eco';
       let type = null;
 
       if (

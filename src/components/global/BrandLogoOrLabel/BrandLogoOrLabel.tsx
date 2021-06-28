@@ -3,7 +3,7 @@ import React from 'react';
 import Image from '~/components/global/Image/Image';
 import { SiteCatalogBrand } from '~/data/models/SiteCatalogBrand';
 import { SiteImageExtended } from '~/data/models/SiteImageExtended';
-import { CSSStylesProp } from '~/lib/constants';
+import { CSSStylesProp, LOADING_OPTIONS } from '~/lib/constants';
 
 import { styles } from './BrandLogoOrLabel.styles';
 
@@ -34,6 +34,7 @@ function BrandLogoOrLabel(props: Props) {
           aria-label={brand.label}
           css={isCentered && styles.centered}
           customContainerStyles={customContainerStyles || styles.brandImage}
+          loading={LOADING_OPTIONS.EAGER}
           {...rest}
         />
       ) : (

@@ -38,6 +38,7 @@ function NavSearchButton({
         css={[styles.icon, iconColor]}
         theme={isDesktop && THEME.ORANGE}
         name={ICONS.SEARCH}
+        ssHeight={15}
         ssr
       />
       {lessThan.L ? (

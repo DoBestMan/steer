@@ -17,7 +17,7 @@ import { navigationBreadcrumbPaddingTop } from '~/components/modules/Nav/Nav.sty
 import { useSearchContext } from '~/components/modules/Search/Search.context';
 import { useSearchModalContext } from '~/components/modules/Search/SearchModal.context';
 import { SiteBrandDetails } from '~/data/models/SiteBrandDetails';
-import { ROUTE_MAP, ROUTES, THEME } from '~/lib/constants';
+import { LOADING_OPTIONS, ROUTE_MAP, ROUTES, THEME } from '~/lib/constants';
 import { openReferAFriendModal } from '~/lib/helpers/refer-a-friend';
 import { capitalize } from '~/lib/utils/string';
 import { ui } from '~/lib/utils/ui-dictionary';
@@ -81,16 +81,22 @@ function BrandTirePage({
       </Grid>
       {promoImage?.src && (
         <div css={containerSpacing.spacingTopS40XL60}>
-          <div css={styles.imageSectionSmall}>
-            <Image {...promoImage} widths={[320, 768]} />
-          </div>
-          <div css={styles.imageSectionLarge}>
-            <Grid css={containerSpacing.spacingTopS40XL60}>
-              <GridItem gridColumnL={'3/13'} gridColumnXL={'5/11'}>
-                <Image {...promoImage} widths={[320, 768, 900, 1200]} />
-              </GridItem>
-            </Grid>
-          </div>
+          <Grid
+            css={[containerSpacing.spacingTopS40XL60, styles.imageContainer]}
+          >
+            <GridItem
+              gridColumn={'1/8'}
+              gridColumnM={'1/9'}
+              gridColumnL={'3/13'}
+              gridColumnXL={'5/11'}
+            >
+              <Image
+                {...promoImage}
+                loading={LOADING_OPTIONS.EAGER}
+                widths={[320, 768, 900, 1200]}
+              />
+            </GridItem>
+          </Grid>
         </div>
       )}
       <div css={containerSpacing.spacingTopS60XL80}>

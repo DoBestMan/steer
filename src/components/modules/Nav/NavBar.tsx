@@ -76,7 +76,7 @@ function NavBar({
           aria-label={ui('nav.mobile.label')}
           onClick={handleOnSubNavClick}
         >
-          <Icon css={iconColor} name={ICONS.MENU} />
+          <Icon css={iconColor} name={ICONS.MENU} ssHeight={10} ssr />
         </button>
       </li>
     </GridItem>

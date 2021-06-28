@@ -4,6 +4,17 @@ import { COLORS, MQ } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
 const styles: CSSObject = {
+  btnContainer: {
+    height: 30,
+    width: 320,
+    [MQ.M]: {
+      width: 340,
+    },
+    [MQ.XL]: {
+      height: 47,
+      width: 400,
+    },
+  },
   btnRoot: {
     ':hover': {
       color: COLORS.ORANGE.SHADE_30_SOLID,

@@ -23,7 +23,7 @@ const styles: StylesMap = {
       overflow: 'hidden',
     },
   },
-  container: typography.bodyCopy,
+  container: [typography.bodyCopy],
   fullBody: {
     a: links.light,
     display: 'block',

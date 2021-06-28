@@ -1,4 +1,4 @@
-import { ReactType, useCallback, useEffect, useRef, useState } from 'react';
+import { ReactType, useCallback, useState } from 'react';
 
 import BrandLogoOrLabel from '~/components/global/BrandLogoOrLabel/BrandLogoOrLabel';
 import Icon from '~/components/global/Icon/Icon';
@@ -44,28 +44,10 @@ export default function HeaderWithLogo({
   const TitleContainer = titleAs;
   const SubTitleContainer = subTitleAs;
   const [showFullBody, setShowFullBody] = useState(false);
-  const [showMoreButton, setShowMoreButton] = useState(false);
-  const bodyRef = useRef<HTMLDivElement>(null);
+  const showMoreButton = body && body.length >= 169;
   const toggleFullBody = useCallback(() => {
     setShowFullBody(!showFullBody);
   }, [showFullBody, setShowFullBody]);
-
-  useEffect(() => {
-    if (
-      bodyRef === null ||
-      bodyRef.current === null ||
-      typeof window === 'undefined'
-    ) {
-      return;
-    }
-    const firstChildElement = bodyRef.current.firstElementChild;
-    if (
-      firstChildElement &&
-      firstChildElement.scrollHeight > firstChildElement.clientHeight
-    ) {
-      setShowMoreButton(true);
-    }
-  }, [bodyRef]);
 
   const brandLogoProps = {
     image,
@@ -94,7 +76,7 @@ export default function HeaderWithLogo({
         </SubTitleContainer>
       )}
       {body && (
-        <div css={showFullBody ? styles.fullBody : styles.body} ref={bodyRef}>
+        <div css={showFullBody ? styles.fullBody : styles.body}>
           <Markdown
             allowedTypes={MARKDOWN_PRIMITIVES_WITH_HTML}
             unwrapDisallowed

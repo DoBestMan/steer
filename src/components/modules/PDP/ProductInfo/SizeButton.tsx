@@ -89,7 +89,7 @@ function SizeButton({
         ? ui('pdp.productInfo.selectSizeButton')
         : ui('pdp.productInfo.selectSingleSizeButton');
     return (
-      <>
+      <div css={styles.btnContainer}>
         <button
           aria-expanded={isOpen}
           disabled={isOpen}
@@ -113,12 +113,12 @@ function SizeButton({
           onClose={handleClose}
           sizeFinder={sizeFinder}
         />
-      </>
+      </div>
     );
   }
 
   return (
-    <div>
+    <div css={styles.btnContainer}>
       <button
         aria-expanded={isOpen}
         disabled={isOpen}

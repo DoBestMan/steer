@@ -1,16 +1,10 @@
 import { MQ, RADIUS, SPACING, StylesMap } from '~/lib/constants';
 
 export const styles: StylesMap = {
-  imageSectionLarge: {
-    display: 'none',
-    [MQ.L]: {
-      display: 'block',
-    },
-  },
-  imageSectionSmall: {
-    [MQ.L]: {
-      display: 'none',
-    },
+  imageContainer: {
+    height: '100%',
+    objectFit: 'cover',
+    width: '100%',
   },
   linkSection: {
     marginTop: SPACING.SIZE_20,

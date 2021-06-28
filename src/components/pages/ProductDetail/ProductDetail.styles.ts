@@ -348,15 +348,18 @@ const styles: StylesMap = {
     paddingBottom: SPACING.SIZE_20,
   },
   tireImage: {
+    height: 238,
     marginBottom: SPACING.SIZE_10,
     width: '100%',
 
     [MQ.M]: {
       marginBottom: SPACING.SIZE_15,
+      height: 393,
     },
 
     [MQ.L]: {
       marginBottom: 0,
+      height: 510,
     },
   },
   tireWithInfoList: {
