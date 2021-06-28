@@ -1,6 +1,6 @@
 import isStrictEqual from 'fast-deep-equal';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Product as ProductLinkingData } from 'schema-dts';
 
 import { BreadcrumbsItem } from '~/components/global/Breadcrumbs/Breadcrumbs';
@@ -20,12 +20,12 @@ import { useSiteGlobalsContext } from '~/context/SiteGlobals.context';
 import { useUserPersonalizationContext } from '~/context/UserPersonalization.context';
 import { SiteCatalogProductGroupList } from '~/data/models/SiteCatalogProductGroupList';
 import { SiteCatalogProductItem } from '~/data/models/SiteCatalogProductItem';
-import { SiteCompareProductsResult } from '~/data/models/SiteCompareProductsResult';
 import { SiteCompareTable } from '~/data/models/SiteCompareTable';
 import { SiteModuleProductLineFAQs } from '~/data/models/SiteModules';
 import { SiteProduct } from '~/data/models/SiteProduct';
 import { SiteProductLine } from '~/data/models/SiteProductLine';
 import { useApiDataWithDefault } from '~/hooks/useApiDataWithDefault';
+import { apiGetSiteCompareProductsResult } from '~/lib/api/compare-products';
 import { ROUTE_MAP, ROUTES } from '~/lib/constants';
 import { eventEmitters } from '~/lib/events/emitters';
 import { FetchError } from '~/lib/fetch/FetchError';
@@ -57,6 +57,8 @@ export type QueryParams = Record<string, string>;
 export type ParsedProductInfoProps = Omit<ProductInfoProps, 'sizeFinder'>;
 
 export type ParsedSizeFinderProps = Omit<SizeFinderProps, 'onChange'>;
+
+const POPULAR_IDs = ['most-popular', 'most-popular-category'];
 
 export type ParsedStickyBarProps = Omit<
   PDPStickyBarProps,
@@ -100,7 +102,6 @@ interface ResponseProps extends Pick<SiteProductLine, 'assetList'> {
   technicalSpecs: TechnicalSpecsProps | null;
 }
 
-const POPULAR_IDs = ['most-popular', 'most-popular-category'];
 function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
   const productDetail = useProductDetailContext();
   const {
@@ -154,18 +155,9 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
 
   const compareProductIds = productIds?.slice(1).join(',') as string;
 
-  const { data: compareData, error: compareError } = useApiDataWithDefault<
-    SiteCompareProductsResult
-  >({
-    defaultData: { siteCatalogCompareList: [] },
-    endpoint: '/compare-products',
-    includeUserRegion: true,
-    includeUserZip: true,
-    query: {
-      compareProductIds,
-      productId: (productIds && productIds[0]) as string,
-    },
-    revalidateEmitter: eventEmitters.userPersonalizationLocationUpdate,
+  const { siteCatalogCompareList, error: compareError } = useCompareData({
+    compareProductIds,
+    id: (productIds && productIds[0]) as string,
   });
 
   if (compareError) {
@@ -176,12 +168,10 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
     (product, index) => {
       const tempProduct = {
         ...product,
-        siteProductLineSizeDetailRoadHazard: compareData.siteCatalogCompareList[
-          index
-        ]
-          ? compareData.siteCatalogCompareList[index]
-              .siteProductLineSizeDetailRoadHazard
-          : null,
+        siteProductLineSizeDetailRoadHazard:
+          siteCatalogCompareList && siteCatalogCompareList[index]
+            ? siteCatalogCompareList[index].siteProductLineSizeDetailRoadHazard
+            : null,
       };
 
       return tempProduct;
@@ -330,10 +320,7 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
       shareImage: metaImage,
     },
     popularCompareList,
-    popularTableData: tableContentFactory(
-      compareData.siteCatalogCompareList,
-      true,
-    ),
+    popularTableData: tableContentFactory(siteCatalogCompareList || [], true),
     productInfo,
     recirculation: recirculationNoPopular,
     recirculationSize: mapDataToRecirculationSize({
@@ -352,6 +339,49 @@ function useProductDetail({ serverData }: ProductDetailData): ResponseProps {
     stickyBar: mapDataToStickyBar({ quantity, siteProduct }),
     technicalSpecs,
   };
+}
+
+interface ErrorType {
+  code: string;
+  message?: string | undefined;
+  statusCode: number;
+}
+
+function useCompareData({
+  compareProductIds,
+  id,
+}: {
+  compareProductIds: string;
+  id: string;
+}) {
+  const [siteCatalogCompareList, setCatalogCompareList] = useState<
+    SiteCatalogProductItem[]
+  >();
+  const [error, setError] = useState<ErrorType>();
+
+  const fetchCompareData = useCallback(async () => {
+    const res = await apiGetSiteCompareProductsResult({
+      includeUserRegion: true,
+      includeUserZip: true,
+      query: { compareProductIds, productId: id },
+    });
+
+    if (res.isSuccess) {
+      setCatalogCompareList(res.data.siteCatalogCompareList);
+    } else {
+      setError(res.error);
+    }
+  }, [compareProductIds, id]);
+
+  useEffect(() => {
+    if (typeof compareProductIds === 'undefined' || typeof id === 'undefined') {
+      return;
+    }
+
+    fetchCompareData();
+  }, [compareProductIds, fetchCompareData, id]);
+
+  return { siteCatalogCompareList, error };
 }
 
 export default useProductDetail;

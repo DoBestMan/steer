@@ -6,6 +6,7 @@ export async function apiGetSiteCompareProductsResult({
   signal,
   includeUserRegion,
   includeUserZip,
+  ...rest
 }: {
   includeUserRegion: boolean;
   includeUserZip: boolean;
@@ -22,5 +23,6 @@ export async function apiGetSiteCompareProductsResult({
     method: 'get',
     query,
     signal,
+    ...rest,
   });
 }
