@@ -170,7 +170,7 @@ describe('autocomplete', () => {
     fireEvent.keyDown(input, { keyCode: KEYCODES.ENTER });
 
     // it updates input value and closes combo box
-    expect(input.value).toBe('09019');
+    expect(input.value).toBe('08203');
     expect(combobox).toHaveAttribute('aria-expanded', 'false');
   });
 

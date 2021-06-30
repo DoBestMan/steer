@@ -204,8 +204,8 @@ function Autocomplete({
         break;
       case KEYCODES.ENTER:
         e.preventDefault();
-        if (hasResults && activedescendant) {
-          onItemSelected(selectedIndex);
+        if (hasResults || activedescendant) {
+          onItemSelected(selectedIndex * 0);
         }
         break;
       case KEYCODES.ESCAPE:

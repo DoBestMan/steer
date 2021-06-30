@@ -1,6 +1,8 @@
 import { ResultItemProps } from '~/components/global/Autocomplete/Autocomplete';
 import { getItemDOMId } from '~/components/global/Autocomplete/Autocomplete.utils';
 import AutocompleteResultsItem from '~/components/global/Autocomplete/AutocompleteResultItem';
+import Button from '~/components/global/Button/Button';
+import { BUTTON_STYLE, THEME } from '~/lib/constants';
 
 import styles from './AutocompleteResultItemLocation.styles';
 
@@ -18,7 +20,12 @@ function AutocompleteResultItemLocation({
   const handleItemClicked = () => {
     onItemSelected(index, true);
   };
-
+  const ButtonStyle = {
+    display: 'flex',
+    justifyContent: 'space-between',
+    width: '100%',
+  };
+  const ButtonLabel = 'Select';
   return (
     <AutocompleteResultsItem
       id={id}
@@ -32,12 +39,24 @@ function AutocompleteResultItemLocation({
         onClick={handleItemClicked}
         data-testid="location-result"
         css={[styles.listBoxButton, isSelected && styles.listboxItemSelected]}
+        style={ButtonStyle}
       >
-        <span css={styles.listboxItemHighlight}>{inputValue}</span>
-        {main.replace(inputValue, '')}{' '}
-        {secondary && (
-          <span css={styles.listboxItemSecondary}>{secondary}</span>
-        )}
+        <div>
+          <span css={styles.listboxItemHighlight}>{inputValue}</span>
+          {main.replace(inputValue, '')}{' '}
+          {secondary && (
+            <span css={styles.listboxItemSecondary}>{secondary}</span>
+          )}
+        </div>
+        <div>
+          <Button
+            css={styles.button}
+            style={BUTTON_STYLE.OUTLINED}
+            theme={THEME.LIGHT}
+          >
+            {ButtonLabel}
+          </Button>
+        </div>
       </button>
     </AutocompleteResultsItem>
   );
