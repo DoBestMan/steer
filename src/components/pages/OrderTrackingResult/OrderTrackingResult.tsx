@@ -4,7 +4,6 @@ import Button from '~/components/global/Button/Button';
 import { CARS, CARS_KEYS } from '~/components/global/Car/CarDetails.constants';
 import Grid from '~/components/global/Grid/Grid';
 import GridItem from '~/components/global/Grid/GridItem';
-import Loading from '~/components/global/Loading/Loading';
 import Markdown from '~/components/global/Markdown/Markdown';
 import Meta from '~/components/global/Meta/Meta';
 import PageIllustration from '~/components/global/PageIllustration/PageIllustration';
@@ -14,9 +13,10 @@ import { OrderProduct } from '~/data/models/OrderProduct';
 import { OrderTrackingInput } from '~/data/models/OrderTrackingInput';
 import { ReturnRequestInput } from '~/data/models/ReturnRequestInput';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
-import { BREAKPOINT_SIZES, THEME } from '~/lib/constants';
+import { BREAKPOINT_SIZES, LINK_TYPES, THEME } from '~/lib/constants';
 import { ui } from '~/lib/utils/ui-dictionary';
 
+import OrderAppointment from './OrderAppointment/OrderAppointment';
 import OrderHeader from './OrderHeader/OrderHeader';
 import OrderItem from './OrderItem/OrderItem';
 import OrderStep from './OrderStep/OrderStep';
@@ -24,6 +24,7 @@ import styles from './OrderTrackingResult.styles';
 import {
   checkOrderStatus,
   getAppointmentAddressArray,
+  getOrderRecieptURL,
   getReturnDescription,
   getReturnInfoLinks,
   getShippingAddressArray,
@@ -44,7 +45,7 @@ interface Props {
     canCustomerReorder,
     canCustomerReturn,
     canCustomerCancelReturn,
-    id,
+    productId,
     image,
     name,
     quantity,
@@ -55,6 +56,7 @@ interface Props {
   isLoadingReturnReasons: boolean;
   isSendingEmail: boolean;
   isSendingReturnOrCancelReq: boolean;
+  pdfDownloaded: boolean;
   returnOrCancelReqError: boolean;
   returnOrCancelReqSent: boolean;
   sendEmailReciept: ({ orderId, zip }: OrderTrackingInput) => void;
@@ -64,6 +66,8 @@ interface Props {
     productId,
     body,
   }: ReturnRequestProps) => void;
+  setPDFdownloaded: (value: boolean) => void;
+  showBackButton: boolean;
 }
 
 type OrderTrackingResultProps = Order & Props & OrderTrackingInput;
@@ -73,15 +77,12 @@ function OrderTrackingResult({
   deliveryExpectedLabel,
   id,
   isCustomerServiceEnabled,
-  orderProductList,
+  orderProducts,
   shippingAddress,
   status,
   orderInstallerAppointment,
   orderShippingStageList,
   maskedEmail,
-  sendEmailReciept,
-  isSendingEmail,
-  emailSent,
   orderId,
   zip,
   returnOrCancelReqError,
@@ -91,6 +92,9 @@ function OrderTrackingResult({
   isSendingReturnOrCancelReq,
   returnOrCancelReqSent,
   returnInitializedReasonId,
+  setPDFdownloaded,
+  pdfDownloaded,
+  showBackButton,
 }: OrderTrackingResultProps) {
   const [toastMessageStatus, showToastMessage] = useState<boolean>(true);
 
@@ -110,41 +114,25 @@ function OrderTrackingResult({
 
   const { bk } = useBreakpoints();
 
-  const shippingHeader =
-    appointmentDisplayArray && appointmentDisplayArray.length > 0
-      ? ui('tracking.appointmentDetails')
-      : ui('tracking.shippingAddress');
-
-  const displayAddress =
-    appointmentDisplayArray && appointmentDisplayArray.length > 0
-      ? appointmentDisplayArray
-      : shippingAddressArray;
-
-  const emailButtonTitle = emailSent
-    ? ui('tracking.emailRecieptSent')
-    : ui('tracking.emailRecieptNotSent');
+  const isLorXLScreen =
+    [BREAKPOINT_SIZES.L].includes(bk) || [BREAKPOINT_SIZES.XL].includes(bk);
 
   function renderOrderDetails() {
+    const recieptURL = getOrderRecieptURL({ orderId, zip });
     return (
       <GridItem
-        css={styles.orderInfoWrapper}
-        gridColumnM="2/5"
-        gridColumnL="3/8"
-        gridColumnXL="4/8"
+        css={[!isLorXLScreen && styles.orderInfoWrapper]}
+        gridColumnL="8/13"
+        gridColumnXL="8/12"
       >
-        <h5 css={styles.sectionHeader}>{shippingHeader}</h5>
-        <ul css={note ? styles.appointmentAddress : styles.shippingAddress}>
-          {displayAddress.map((item, i) => (
-            <li css={styles.addressTextContainer} key={i}>
-              {item && <div css={styles.addressText}>{item}</div>}
-            </li>
-          ))}
-        </ul>
-        {note && <div css={styles.appointmentNote}>{note}</div>}
-        <h5 css={styles.sectionHeader}>{ui('tracking.orderSummary')}</h5>
-        <ul css={styles.orderItemsList}>
-          {orderProductList.map((item, i) => (
-            <li css={styles.orderItem} key={i}>
+        <h5 css={styles.orderHeader}>{ui('tracking.orderSummary')}</h5>
+        <h5 css={styles.orderSubHeader}>
+          {ui('tracking.yourTires').toLocaleUpperCase()}
+        </h5>
+
+        <ul>
+          {orderProducts.map((item, i) => (
+            <li css={[styles.orderItem, styles.seperator]} key={i}>
               <OrderItem
                 {...item}
                 orderId={id}
@@ -158,7 +146,12 @@ function OrderTrackingResult({
             </li>
           ))}
         </ul>
-
+        <OrderAppointment
+          note={note}
+          shippingAddressArray={shippingAddressArray}
+          appointmentDisplayArray={appointmentDisplayArray}
+          showShippingAddress
+        />
         {returnOrCancelReqError && (
           <div css={styles.errorContainer}>
             <Toast
@@ -170,32 +163,21 @@ function OrderTrackingResult({
           </div>
         )}
 
-        {maskedEmail && (
-          <div css={styles.emailWrapper}>
-            <div css={styles.emailButtonWrapper}>
-              <Button
-                css={styles.button}
-                theme={THEME.LIGHT}
-                isDisabled={emailSent}
-                onClick={() =>
-                  sendEmailReciept({ orderId, zip } as OrderTrackingInput)
-                }
-              >
-                {emailButtonTitle}
-              </Button>
-              {isSendingEmail ? (
-                <div css={styles.emailLoader}>
-                  <Loading />
-                </div>
-              ) : null}
-            </div>
-            <div css={styles.emailText}>
-              {ui('tracking.emailDescription', {
-                maskedEmail,
-              })}
-            </div>
+        <div css={styles.pdfWrapper}>
+          <div css={styles.pdfButtonWrapper}>
+            <Button
+              as={LINK_TYPES.A}
+              isExternal
+              href={recieptURL}
+              css={styles.button}
+              theme={THEME.LIGHT}
+              onClick={() => setPDFdownloaded(!pdfDownloaded)}
+            >
+              {ui('tracking.pdfDownload')}
+            </Button>
           </div>
-        )}
+          <div css={styles.pdfText}>{ui('tracking.pdfDescription')}</div>
+        </div>
         <div css={styles.additionalInfoWrapper}>
           <span css={styles.additionalInfo}>
             {ui('tracking.returnInfoTitle')}
@@ -208,11 +190,15 @@ function OrderTrackingResult({
   function renderOrderSteps() {
     return (
       <GridItem
-        css={styles.orderTimelineWrapper}
-        gridColumnM="5/8"
-        gridColumnL="8/13"
-        gridColumnXL="8/12"
+        css={[
+          !isLorXLScreen
+            ? styles.orderTimelineWrapper
+            : styles.orderTimelinePosition,
+        ]}
+        gridColumnL="3/8"
+        gridColumnXL="3/8"
       >
+        {isLorXLScreen && <div css={styles.orderTimelineSeperator} />}
         {displayedSteps.map((item, i) => (
           <OrderStep
             {...item}
@@ -240,6 +226,7 @@ function OrderTrackingResult({
             id={id}
             isCustomerServiceEnabled={isCustomerServiceEnabled}
             orderStatus={status}
+            showBackButton={showBackButton}
           />
           {status === OrderStatus.RETURN_REQUESTED &&
             getReturnDescription(
@@ -257,13 +244,8 @@ function OrderTrackingResult({
             )}
           </GridItem>
         )}
-
-        {[BREAKPOINT_SIZES.S].includes(bk)
-          ? renderOrderSteps()
-          : renderOrderDetails()}
-        {[BREAKPOINT_SIZES.S].includes(bk)
-          ? renderOrderDetails()
-          : renderOrderSteps()}
+        {renderOrderSteps()}
+        {renderOrderDetails()}
         <PageIllustration carId={CARS[CARS_KEYS.COMMERCIAL]} />
       </Grid>
     </>

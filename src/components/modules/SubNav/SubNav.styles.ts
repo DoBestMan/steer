@@ -211,6 +211,12 @@ const styles: StylesMap = {
       display: 'none',
     },
   },
+  ssoLink: {
+    '&:hover': {
+      color: COLORS.GLOBAL.ORANGE,
+    },
+    color: COLORS.GLOBAL.BLACK,
+  },
   subnav: {
     backgroundColor: COLORS.LIGHT.OFF_WHITE,
     display: 'flex',

@@ -27,7 +27,7 @@ export interface OrderTrackingContextProps {
   errorInReturnReasons: boolean;
   getOrderTracking: ({ orderId, zip }: OrderTrackingInput) => void;
   getReturnReasons: ({
-    id,
+    productId,
     image,
     name,
     quantity,
@@ -40,6 +40,7 @@ export interface OrderTrackingContextProps {
   isSendingEmail: boolean;
   isSendingReturnOrCancelReq: boolean;
   order: Order | null;
+  pdfDownloaded: boolean;
   returnOrCancelReqError: boolean;
   returnOrCancelReqSent: boolean;
   returnReasons: Array<ReturnReason>;
@@ -51,6 +52,7 @@ export interface OrderTrackingContextProps {
     productId,
     body,
   }: ReturnRequestProps) => void;
+  setPDFdownloaded: (value: boolean) => void;
 }
 
 const OrderTrackingContext = createContext<OrderTrackingContextProps>();
@@ -73,6 +75,8 @@ function useContextSetup() {
 
   const [isSendingEmail, setIsSendingEmail] = useState<boolean>(false);
   const [emailSent, setEmailSent] = useState<boolean>(false);
+
+  const [pdfDownloaded, setPDFdownloaded] = useState<boolean>(false);
 
   const [isSendingReturnOrCancelReq, setReturnOrCancelReqLoading] = useState<
     boolean
@@ -183,12 +187,14 @@ function useContextSetup() {
     isSendingEmail,
     isSendingReturnOrCancelReq,
     order,
+    pdfDownloaded,
     returnOrCancelReqError,
     returnOrCancelReqSent,
     returnReasons,
     returnTireData,
     sendEmailReciept,
     sendReturnRequest,
+    setPDFdownloaded,
   };
 }
 

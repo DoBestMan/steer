@@ -1,7 +1,14 @@
 import { COLORS, MQ, SPACING, StylesMap } from '~/lib/constants';
 import { typography } from '~/styles/typography.styles';
 
+const CONSTANTS = {
+  RETURN_ICON_SIZE: 20,
+};
 const styles: StylesMap = {
+  backIcon: {
+    height: CONSTANTS.RETURN_ICON_SIZE,
+    width: CONSTANTS.RETURN_ICON_SIZE,
+  },
   canceledOrderHelp: {
     '> span': [
       typography.largeCopy,
@@ -31,22 +38,16 @@ const styles: StylesMap = {
   orderNumber: [
     typography.tertiaryHeadline,
     {
-      paddingBottom: SPACING.SIZE_10,
-      textAlign: 'center',
       [MQ.M]: {
         paddingBottom: SPACING.SIZE_20,
       },
+      paddingBottom: SPACING.SIZE_10,
+      textAlign: 'center',
     },
   ],
   orderStatusLabel: [
     typography.jumboHeadline,
     {
-      '> span': {
-        display: 'block',
-      },
-      color: COLORS.GLOBAL.ORANGE,
-      lineHeight: 1,
-      textAlign: 'center',
       [MQ.M]: {
         '> span': {
           display: 'inline',
@@ -55,6 +56,34 @@ const styles: StylesMap = {
       [MQ.XL]: {
         lineHeight: 1,
       },
+      '> span': {
+        display: 'block',
+      },
+      color: COLORS.GLOBAL.ORANGE,
+      lineHeight: 1,
+      textAlign: 'center',
+    },
+  ],
+  returnHomeContainer: {
+    [MQ.S]: {
+      paddingBottom: SPACING.SIZE_20,
+    },
+    alignItems: 'center',
+    alignSelf: 'flex-start',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  subTitleText: [
+    typography.largeCopy,
+    {
+      '> a': [
+        typography.largeCopy,
+        {
+          display: 'inline-flex',
+        },
+      ],
+      textAlign: 'center',
     },
   ],
 };

@@ -1,5 +1,6 @@
 import { UserPersonalization } from '~/data/models/UserPersonalization';
 
+import { getSSOBaseURL } from '../utils/sso';
 import { FetchError, FetchErrorCodes } from './FetchError';
 import { AsyncResponse } from './index.types';
 
@@ -45,6 +46,80 @@ interface FetchProps<U> {
   params?: Record<string, string | string[]>;
   query?: Record<string, string>;
   signal?: AbortSignal;
+  ssoToken?: string;
+}
+
+export async function fetchFromSSO<T, U = never>({
+  jsonBody,
+  formBody,
+  endpoint,
+  signal,
+  params = {},
+  query = {},
+  method,
+  includeAuthorization,
+  ssoToken,
+}: FetchProps<U>): Promise<AsyncResponse<T>> {
+  try {
+    const global = typeof globalThis !== undefined ? globalThis : window;
+    const headers: Record<string, string> = {};
+    let body;
+    if (includeAuthorization) {
+      headers.Authorization = `Bearer ${ssoToken}`;
+    }
+
+    if (jsonBody) {
+      headers['Content-Type'] = 'application/json';
+      body = JSON.stringify(jsonBody);
+    } else if (formBody) {
+      headers['Content-Type'] = 'application/x-www-form-urlencoded';
+      body = new URLSearchParams(formBody).toString();
+    }
+    let response: Response;
+    const urlBase = getSSOBaseURL();
+    const url = buildUrl(`${urlBase}${endpoint}`, params, query);
+
+    try {
+      response = await global.fetch(url, {
+        body,
+        headers,
+        method,
+        signal,
+      });
+    } catch (error) {
+      console.error(error);
+
+      throw new FetchError(
+        FetchErrorCodes[error.name] || FetchErrorCodes.NetworkError,
+        error,
+      );
+    }
+
+    let data: T | null = null;
+    try {
+      data = (await response.json()) as T;
+    } catch (error) {
+      if (response.status !== 204 && response.status !== 404) {
+        console.error(error);
+        throw new FetchError(FetchErrorCodes.InvalidJson, error);
+      }
+    }
+
+    const extractedData = data as T;
+    return {
+      data: extractedData,
+      isSuccess: true,
+    };
+  } catch (e) {
+    return {
+      error: {
+        code: e.code,
+        message: e.message,
+        statusCode: e.statusCode || 500,
+      },
+      isSuccess: false,
+    };
+  }
 }
 
 export async function fetch<T, U = never>({

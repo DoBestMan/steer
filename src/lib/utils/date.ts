@@ -2,6 +2,8 @@ import format from 'date-fns/format';
 
 export const defaultDateTemplate = 'EEEE, MMMM d';
 
+export const dateTemplateWithYear = 'EEEE, MMMM d y';
+
 export function getCurrentYear() {
   return new Date().getFullYear();
 }
@@ -16,6 +18,17 @@ export function getCurrentYear() {
 export function formatOrNull(
   value: string | number | Date,
   template = defaultDateTemplate,
+) {
+  try {
+    return format(new Date(value), template);
+  } catch (e) {
+    return null;
+  }
+}
+
+export function formatWithYear(
+  value: string | number | Date,
+  template = dateTemplateWithYear,
 ) {
   try {
     return format(new Date(value), template);

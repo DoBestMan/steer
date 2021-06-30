@@ -26,6 +26,7 @@ export function OrderHeaderWithKnobs() {
       id={orderId}
       isCustomerServiceEnabled={isBusinessHours}
       orderStatus={status}
+      showBackButton={false}
     />
   );
 }

@@ -52,8 +52,8 @@ export function OrderTrackingResultWithKnobs() {
   const deliveryExpected = text('Delivery Expected Label', 'June 6 - June 12');
   const maskedEmail = text('Mail', 'a****b@gmail.com');
   const isBusinessHours = boolean('Is Business Hours', true);
-  const isSendingEmail = boolean('Is Sending Email', false);
-  const isEmailSent = boolean('Is Email Sent', false);
+  const isSendingEmail = boolean('Is Sending Email/PDF', false);
+  const isEmailSent = boolean('Is Email/PDF Sent', false);
   const zipCode = '12345';
   const isSendingReturnOrCancelReq = boolean(
     'Is Sending Return or Cancel Request',
@@ -69,7 +69,7 @@ export function OrderTrackingResultWithKnobs() {
   );
   const isLoadingReturnReasons = boolean('Is loading Return Reasons', false);
 
-  const sendEmailReciept = ({ orderId, zip }: OrderTrackingInput) => {
+  const setOrderDetails = ({ orderId, zip }: OrderTrackingInput) => {
     setOrderIdZip({ ...orderDetails, orderId, zip });
   };
 
@@ -95,16 +95,18 @@ export function OrderTrackingResultWithKnobs() {
       deliveryExpectedLabel={deliveryExpected}
       id={Number(orderID)}
       isCustomerServiceEnabled={isBusinessHours}
-      orderProductList={orderItemsMock}
+      orderProducts={orderItemsMock}
       shippingAddress={orderAddressMock}
       status={status}
       is_split
       maskedEmail={maskedEmail}
       orderInstallerAppointment={orderAppointmentMock}
       orderShippingStageList={orderShippingStageListMock}
-      sendEmailReciept={sendEmailReciept}
+      sendEmailReciept={setOrderDetails}
       isSendingEmail={isSendingEmail}
       emailSent={isEmailSent}
+      setPDFdownloaded={() => null}
+      pdfDownloaded={isEmailSent}
       orderId={orderID}
       zip={zipCode}
       isSendingReturnOrCancelReq={isSendingReturnOrCancelReq}
@@ -113,6 +115,7 @@ export function OrderTrackingResultWithKnobs() {
       isLoadingReturnReasons={isLoadingReturnReasons}
       getReturnReasons={getReturnReasons}
       sendReturnRequest={sendReturnRequest}
+      showBackButton={false}
     />
   );
 }

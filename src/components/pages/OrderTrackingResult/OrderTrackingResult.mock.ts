@@ -1,6 +1,17 @@
+import { SiteCatalogBrand } from '~/data/models/SiteCatalogBrand';
 import { SiteImage } from '~/data/models/SiteImage';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 
+export const orderBrandMock = {
+  image: {
+    altText: 'Nankang',
+    height: 200,
+    src: 'https://images.simpletire.com/images/manf-logos/65b/nankang.svg',
+    type: 'SiteImage',
+    width: 500,
+  } as SiteImage,
+  label: 'Nankang',
+};
 export const orderAddressMock = {
   cityName: 'Brooklyn',
   line1: '244 Water St',
@@ -85,10 +96,11 @@ export const orderAppointmentMock = {
 
 export const orderItemsMock = [
   {
+    brand: orderBrandMock as SiteCatalogBrand,
     canCustomerCancelReturn: false,
     canCustomerReorder: true,
     canCustomerReturn: false,
-    id: 115189,
+    extendedPrice: 123,
     image: {
       altText: 'Tire sidewall',
       height: 800,
@@ -98,13 +110,16 @@ export const orderItemsMock = [
       width: 543,
     } as SiteImage,
     name: 'Bridgestone Dueler A/T Revo 2 - P215/75R16 - 001311',
+    price: 123,
+    productId: 115189,
     quantity: 2,
   },
   {
+    brand: orderBrandMock as SiteCatalogBrand,
     canCustomerCancelReturn: false,
     canCustomerReorder: false,
     canCustomerReturn: false,
-    id: 128451,
+    extendedPrice: 123,
     image: {
       altText: 'Tire sidewall',
       height: 800,
@@ -114,25 +129,30 @@ export const orderItemsMock = [
       width: 800,
     } as SiteImage,
     name: 'Bridgestone Dueler A/T Revo 2 - P215/75R16 - 001311',
+    price: 123,
+    productId: 128451,
     quantity: 4,
   },
 ];
 
 export const orderItemMock = {
+  brand: orderBrandMock as SiteCatalogBrand,
   canCustomerCancelReturn: false,
   canCustomerReorder: false,
   canCustomerReturn: false,
-  id: 22,
+  extendedPrice: 123,
   image: {
     altText: 'Tire sidewall',
     height: 800,
     src:
-      'https://images.simpletire.com/image/upload/v1591705545/line-images/1349/1349-sidetread_f24ld3.png',
+      'https://images.simpletire.com/image/upload/v1590590461/playground/mich-sidewall-v1_hpb7aj.png',
     type: ICON_IMAGE_TYPE.IMAGE,
-    width: 543,
+    width: 800,
   } as SiteImage,
   name: 'Bridgestone Dueler A/T Revo 2 - P215/75R16 - 001311',
-  quantity: 2,
+  price: 123,
+  productId: 128451,
+  quantity: 4,
 };
 
 export const returnReasonsMock = [

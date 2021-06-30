@@ -10,6 +10,7 @@ import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 import {
   cancelReturnRequestMock,
   getReturnReasonsMock,
+  orderBrandMock,
 } from '../OrderTrackingResult.mock';
 import OrderItem from './OrderItem';
 
@@ -53,6 +54,7 @@ export function OrderItemWithKnobs() {
   );
   const quantity = number('Quantity', 2);
   const id = number('ID', 1234);
+  const price = number('Price', 123);
   const canCustomerReorder = boolean('Can customer reorder', true);
   const canCustomerCancel = boolean('Can customer cancel', true);
   const canCustomerReturn = boolean('Can customer return', true);
@@ -84,7 +86,7 @@ export function OrderItemWithKnobs() {
         canCustomerReorder={canCustomerReorder}
         canCustomerCancelReturn={canCustomerCancel}
         canCustomerReturn={canCustomerReturn}
-        id={id}
+        productId={id}
         image={itemImage}
         name={name}
         orderId={id}
@@ -95,6 +97,9 @@ export function OrderItemWithKnobs() {
         isLoadingReturnReasons={isLoadingReturnReasons}
         getReturnReasons={getReturnReasons}
         sendReturnRequest={sendReturnRequest}
+        brand={orderBrandMock}
+        price={price}
+        extendedPrice={price}
       />
     </div>
   );

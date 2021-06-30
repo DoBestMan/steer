@@ -67,8 +67,8 @@ function SubNav({
             >
               <GridItem
                 gridColumnM="1/9"
-                gridColumnL="1/10"
-                gridColumnXL="1/8"
+                gridColumnL="1/8"
+                gridColumnXL="1/10"
                 css={styles.smallHide}
               >
                 <SubNavLinks siteMenuBrowseList={siteMenuBrowseList} />

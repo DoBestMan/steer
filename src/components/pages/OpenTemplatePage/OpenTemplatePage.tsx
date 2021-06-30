@@ -13,31 +13,33 @@ type OpenTemplatePageProps = {
 
 function OpenTemplatePage({ pageData }: OpenTemplatePageProps) {
   return (
-    <div
-      css={[styles.openTemplatePageContainer, navigationBreadcrumbPaddingTop]}
-    >
-      {pageData.metadata && pageData.metadata.meta && (
-        <Meta {...pageData.metadata.meta} />
-      )}
-      {pageData.breadcrumbs && (
-        <ModuleBreadcrumbs breadcrumbs={pageData.breadcrumbs} />
-      )}
-      {pageData.header && (
-        <EditorialHeaders
-          moduleData={pageData.header}
-          moduleType={pageData.header.type}
-        />
-      )}
-      {pageData.modules &&
-        pageData.modules.length &&
-        pageData.modules.map((module, id) => (
-          <EditorialModules
-            key={`${module.type}_${id}`}
-            moduleData={module}
-            moduleType={module.type}
+    pageData && (
+      <div
+        css={[styles.openTemplatePageContainer, navigationBreadcrumbPaddingTop]}
+      >
+        {pageData.metadata && pageData.metadata.meta && (
+          <Meta {...pageData.metadata.meta} />
+        )}
+        {pageData.breadcrumbs && (
+          <ModuleBreadcrumbs breadcrumbs={pageData.breadcrumbs} />
+        )}
+        {pageData.header && (
+          <EditorialHeaders
+            moduleData={pageData.header}
+            moduleType={pageData.header.type}
           />
-        ))}
-    </div>
+        )}
+        {pageData.modules &&
+          pageData.modules.length &&
+          pageData.modules.map((module, id) => (
+            <EditorialModules
+              key={`${module.type}_${id}`}
+              moduleData={module}
+              moduleType={module.type}
+            />
+          ))}
+      </div>
+    )
   );
 }
 

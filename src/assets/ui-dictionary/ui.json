@@ -203,7 +203,7 @@
           "subtext": "To compare your most recent tire selection, remove one of these first.",
           "title": "The max number of tires is five."
         },
-        "dupAlert":{
+        "dupAlert": {
           "title": "Tire already added",
           "subtext": "The tire you added is already in the compare list"
         }
@@ -894,7 +894,7 @@
     "cancelledContactServiceEnabled": "Call {{phone}} or {{email}}",
     "cancelledSendEmail": "Send us an email",
     "cancelledHelp": "Need help with a new order?",
-    "orderNumber": "Order number #{{number}}",
+    "orderNumber": "Order #{{number}}",
     "orderSummary": "Order summary",
     "orderTrackingDescription": "Enter the Order ID we emailed to you when you made your purchase, or {{login}}",
     "orderTrackingError": "Please review. Order ID & ZIP Code do not match.",
@@ -943,7 +943,55 @@
     "returnRequestDesc2": "With the return labels securely taped to the tires, take the tires to a FedEx location and they will send the tires back to us. If you can’t get to a FedEx location then you can contact us and we’ll schedule a pickup from your home or business.",
     "returnRequestRefund": "Your refund",
     "returnRequestRefundDesc": "Once we receive the tires back in our warehouse we will issue a full refund within 48 hours.",
-    "returnRequestRefundDescAlt": "Once we receive the tires back in our warehouse we will issue a refund (minus a $15 per tire handling fee). If you ordered the wrong size, don’t panic. We won’t charge a handling fee if you place a new order with us for the correct size."
+    "returnRequestRefundDescAlt": "Once we receive the tires back in our warehouse we will issue a refund (minus a $15 per tire handling fee). If you ordered the wrong size, don’t panic. We won’t charge a handling fee if you place a new order with us for the correct size.",
+    "yourTires": "Your Tires",
+    "serviceAppointment": "Service Appointment",
+    "shipping": "Shipping",
+    "pdfDownload": "Download & print receipt",
+    "pdfDescription": "We will generate a .pdf for you to save."
+  },
+  "account": {
+    "userAccountTitle": "Hey, {{username}}",
+    "userAccountDescription": "Welcome back! Manage your orders and account details with the options below.",
+    "returnToAccountHome": "Back",
+    "myGarageHeader": "My Garage",
+    "myGarageDescription": "Add and manage your vehicles.",
+    "searchTires": "Search tires",
+    "addToGarage": "Add vehicle to garage",
+    "myOrdersHeader": "My Orders",
+    "myOrdersDescription": "Check the status of your orders and make any necessary changes.",
+    "myOrderCancellation": "Orders may be cancelled up to 30 minutes after placing. If 30 minutes has passed, you can always refund or return your order on the order details screen.",
+    "tireInstallation": "Tire installation",
+    "appointmentInfo": "Appointment Information",
+    "cancelOrder": "Cancel Order",
+    "newOrder": "New Order",
+    "purchasedDate": "Purchased date",
+    "amount": "Amount",
+    "shipping": "Shipping",
+    "shippingDescription": "Multiple deliveries by {{carrier}}",
+    "orderQuantity": "Qty: {{quantity}}",
+    "orderCancelled": "Order cancelled successfully!",
+    "addVehicleSuccess": "Your {{vehicle}} added successfully!",
+    "deleteVehicleSuccess": "Your {{vehicle}} deleted successfully!",
+    "updateVehicleError": "Oops. Something went wrong, please try again.",
+    "myGarageDetails": {
+      "line1": "Adding a vehicle in your garage to make your shopping experience more personalised.",
+      "line2": "Quickly search for tires by your vehicle.",
+      "line3": "Saves your time while shopping."
+    },
+    "accountRedirects": {
+      "myOrdersTitle": "My orders & returns",
+      "myOrdersDesc": "Track or return items",
+      "changePassTitle": "Change password",
+      "changePassDesc": "Edit your password",
+      "editAccountTitle": "Account details",
+      "editAccountDesc": "Edit name and email address",
+      "myGarageTitle": "My garage",
+      "myGarageDesc": "Manage your vehicles"
+    },
+    "accountNotificationHeader": "Account updated",
+    "accountNotificationDesc": "All your changes have been saved.",
+    "logout": "Logout"
   },
   "links": {
     "about": "About us",
@@ -976,7 +1024,8 @@
     "twitter": "Twitter",
     "youtube": "YouTube",
     "press": "Press",
-    "pintrest": "Pintrest"
+    "pintrest": "Pintrest",
+    "logout": "Log out"
   },
   "contactPage": {
     "message": {

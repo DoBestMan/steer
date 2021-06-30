@@ -6,7 +6,7 @@ import {
 } from '~/components/modules/Nav/Nav.types';
 import { UserPersonalizationProps } from '~/context/UserPersonalization.context';
 import { ROUTE_MAP, ROUTES } from '~/lib/constants';
-import { getLegacyAccountURL } from '~/lib/utils/legacy-routes';
+import { checkSSOTokenInCookie, getSSOLoginURL } from '~/lib/utils/sso';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 export const dealsLink = {
@@ -15,18 +15,33 @@ export const dealsLink = {
   text: ui('links.deals'),
 };
 
-export const accountLinks = [
-  {
-    href: getLegacyAccountURL(),
-    isExternal: true,
-    text: ui('links.account'),
-  },
-  {
-    href: ROUTE_MAP[ROUTES.ORDER_TRACKING],
-    isExternal: false,
-    text: ui('links.orderTracking'),
-  },
-];
+export function generateAccountLinks() {
+  let accountLinks = [
+    {
+      href: getSSOLoginURL(),
+      isExternal: false,
+      text: ui('links.account'),
+    },
+    {
+      href: ROUTE_MAP[ROUTES.ORDER_TRACKING],
+      isExternal: false,
+      text: ui('links.orderTracking'),
+    },
+  ];
+
+  const isUserLoggedIn = checkSSOTokenInCookie();
+  if (isUserLoggedIn) {
+    accountLinks = [
+      ...accountLinks,
+      {
+        href: '/',
+        isExternal: false,
+        text: ui('links.logout'),
+      },
+    ];
+  }
+  return accountLinks;
+}
 
 export function buildLinks({
   locationString,
@@ -36,6 +51,7 @@ export function buildLinks({
   links: Array<LinkType | ActionType>;
   linksMobile: Array<LinkType | ActionType>;
 } {
+  const accountLinks = generateAccountLinks();
   return {
     links: [
       { target: NAV_TARGETS.BROWSE_TIRES, text: ui('links.browseTires') },

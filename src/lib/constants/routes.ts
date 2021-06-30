@@ -27,6 +27,8 @@ export enum ROUTES {
   LEARN_CATEGORY = 'learnCategory',
   LEARN_CATEGORY_SLUG = 'learnCategorySlug',
   MILITARY_DISCOUNT = 'militaryDiscount',
+  MY_GARAGE = 'myGarage',
+  MY_ORDERS = 'myOrders',
   OPEN_TEMPLATE = 'openTemplate',
   ORDER_RETURN = 'orderReturn',
   ORDER_TRACKING = 'orderTracking',
@@ -51,6 +53,7 @@ export enum ROUTES {
   TYPE_DETAIL = 'typeDetail',
   TYPE_LANDING = 'typeLanding',
   TYPE_REVIEWS = 'typeReviews',
+  USER_ACCOUNT = 'userAccount',
   VEHICLE_CATALOG = 'vehicleCatalog',
   VEHICLES = 'vehicles',
   WRITE_REVIEW = 'writeReview',
@@ -103,6 +106,9 @@ export const ROUTE_TYPE_MAP: { [routeName: string]: string } = {
   [ROUTES.LEARN_CATEGORY]: '/learn/[category]',
   [ROUTES.LEARN_CATEGORY_SLUG]: '/learn/[category]/[slug]',
   [ROUTES.TIRE_SALES]: '/tire-sales',
+  [ROUTES.USER_ACCOUNT]: '/account/',
+  [ROUTES.MY_GARAGE]: '/account/my-garage',
+  [ROUTES.MY_ORDERS]: '/account/my-orders',
 };
 
 // This is a master list of all routes

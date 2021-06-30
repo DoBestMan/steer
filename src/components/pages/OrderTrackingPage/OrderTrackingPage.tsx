@@ -6,7 +6,7 @@ import GridItem from '~/components/global/Grid/GridItem';
 import Link from '~/components/global/Link/Link';
 import PageIllustration from '~/components/global/PageIllustration/PageIllustration';
 import { THEME } from '~/lib/constants';
-import { getLegacyAccountURL } from '~/lib/utils/legacy-routes';
+import { getSSOLoginURL } from '~/lib/utils/sso';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { uiJSX } from '~/lib/utils/ui-dictionary-jsx';
 
@@ -29,10 +29,10 @@ function OrderTrackingPage() {
           {uiJSX('tracking.orderTrackingDescription', {
             login: (
               <Link
-                href={getLegacyAccountURL()}
+                href={getSSOLoginURL()}
                 key="login"
                 theme={THEME.LIGHT}
-                isExternal
+                isExternal={false}
               >
                 Login
               </Link>

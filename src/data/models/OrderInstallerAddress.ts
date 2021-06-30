@@ -5,4 +5,5 @@ export interface OrderInstallerAddress {
   addressLine2?: string | null;
   state: string;
   zip: string;
+  phone?: string;
 }

@@ -62,9 +62,9 @@ function OrderReturnPageContainer() {
   useEffect(() => {
     if (!returnTireData && !isLoadingReturnReasons && order) {
       // checking if the product ID exist in the URL
-      const { orderProductList } = order;
-      const orderInQuery = orderProductList.filter(
-        (item: OrderProduct) => item.id.toString() === id,
+      const { orderProducts } = order;
+      const orderInQuery = orderProducts.filter(
+        (item: OrderProduct) => item.productId.toString() === id,
       );
       if (orderInQuery && orderInQuery.length > 0) {
         // checking if the user can return/cancel return

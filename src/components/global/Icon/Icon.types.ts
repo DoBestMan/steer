@@ -81,6 +81,7 @@ export type Icon =
   | 'thumbs-up'
   | 'tip-mechanic'
   | 'tire'
+  | 'tire-installation'
   | 'tire-types-search'
   | 'tiretype-all-terrain'
   | 'tiretype-all-weather'

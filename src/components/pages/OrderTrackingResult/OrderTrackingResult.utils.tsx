@@ -1,8 +1,10 @@
 import Link from '~/components/global/Link/Link';
 import { OrderAppointment } from '~/data/models/OrderAppointment';
+import { OrderTrackingInput } from '~/data/models/OrderTrackingInput';
 import { UserAddress } from '~/data/models/UserAddress';
 import { LINK_THEME, ROUTE_MAP, ROUTES } from '~/lib/constants';
-import { formatOrNull } from '~/lib/utils/date';
+import { isClient } from '~/lib/helpers/browser';
+import { formatWithYear } from '~/lib/utils/date';
 import { ui } from '~/lib/utils/ui-dictionary';
 import { uiJSX } from '~/lib/utils/ui-dictionary-jsx';
 
@@ -37,16 +39,13 @@ export function getAppointmentAddressArray(
   const appointmentAddress = `${city ? city + ',' : ''} 
     ${state ? state : ''} ${zip ? zip : ''}`;
 
-  const appointmentDate = `${date ? formatOrNull(date) : ''} ${
-    timeSlot ? ' | ' + timeSlot : ''
-  }`;
-
   const resultArray = [
     company,
     addressLine1,
     addressLine2,
     appointmentAddress,
-    appointmentDate,
+    formatWithYear(date),
+    timeSlot,
   ];
 
   return resultArray;
@@ -201,4 +200,13 @@ export function getReturnDescription(
       </div>
     )
   );
+}
+
+export function getOrderRecieptURL({ orderId, zip }: OrderTrackingInput) {
+  if (isClient()) {
+    const hostName = window.location.host;
+    const urlProtocol = hostName.includes('localhost') ? 'http' : 'https';
+    return `${urlProtocol}://${hostName}/api/order-reciept?orderId=${orderId}&zip=${zip}`;
+  }
+  return '/';
 }

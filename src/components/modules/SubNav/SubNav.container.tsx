@@ -7,6 +7,8 @@ import { useNavContext } from '~/context/Nav.context';
 import { SiteMenu } from '~/data/models/SiteMenu';
 import { useBreakpoints } from '~/hooks/useBreakpoints';
 
+import { AccountContextProvider } from '../Account/Account.context';
+
 function SubNavContainer({ siteMenuBrowseList, siteMenuLearn }: SiteMenu) {
   const {
     activeCategory,
@@ -47,15 +49,17 @@ function SubNavContainer({ siteMenuBrowseList, siteMenuLearn }: SiteMenu) {
   ]);
 
   return (
-    <SubNav
-      siteMenuBrowseList={siteMenuBrowseList}
-      siteMenuLearn={siteMenuLearn}
-      handleClearCategory={handleClearCategory}
-      handleCloseSubNav={handleCloseSubNav}
-      isSubNavOpen={isSubNavOpen}
-      activeLink={activeLink}
-      isMobile={isMobile}
-    />
+    <AccountContextProvider>
+      <SubNav
+        siteMenuBrowseList={siteMenuBrowseList}
+        siteMenuLearn={siteMenuLearn}
+        handleClearCategory={handleClearCategory}
+        handleCloseSubNav={handleCloseSubNav}
+        isSubNavOpen={isSubNavOpen}
+        activeLink={activeLink}
+        isMobile={isMobile}
+      />
+    </AccountContextProvider>
   );
 }
 

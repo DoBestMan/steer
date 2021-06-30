@@ -20,6 +20,7 @@ function OrderTrackingResultContainer() {
 
   let orderId = router.query.orderId ?? router.query.track_order;
   let zip = router.query.zip ?? router.query.track_shipping_zip;
+  const isComingFromMyOrders = router.query.fromMyOrder;
 
   if (orderId && zip && zip.length > 5) {
     orderId = hex2a(orderId.toString());
@@ -41,6 +42,8 @@ function OrderTrackingResultContainer() {
     returnOrCancelReqError,
     getReturnReasons,
     sendReturnRequest,
+    setPDFdownloaded,
+    pdfDownloaded,
   } = useOrderTrackingContext();
 
   useEffect(() => {
@@ -65,7 +68,7 @@ function OrderTrackingResultContainer() {
     if (!isLoadingReturnReasons && returnTireData) {
       router.push({
         pathname: ROUTE_MAP[ROUTES.ORDER_RETURN],
-        query: { orderId, zip, id: returnTireData.id },
+        query: { orderId, zip, id: returnTireData.productId },
       });
     }
   });
@@ -90,6 +93,9 @@ function OrderTrackingResultContainer() {
       returnOrCancelReqError={returnOrCancelReqError}
       isCustomerServiceEnabled={customerServiceEnabled}
       customerServiceNumber={customerServiceNumber}
+      setPDFdownloaded={setPDFdownloaded}
+      pdfDownloaded={pdfDownloaded}
+      showBackButton={isComingFromMyOrders ? true : false}
     />
   );
 }

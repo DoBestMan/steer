@@ -1,16 +1,11 @@
-import { COLORS, SPACING, StylesMap } from '~/lib/constants';
-import { typography } from '~/styles/typography.styles';
-const CONSTANTS = {
-  IMAGE_MAX_WIDTH: 120,
-};
+import { MQ, SPACING, StylesMap } from '~/lib/constants';
+
 const styles: StylesMap = {
-  buttonsWrapper: {
+  buttonContainer: {
+    alignItems: 'center',
     display: 'flex',
-    flexDirection: 'row',
-  },
-  content: {
-    gridColumn: '2 / 5',
-    marginLeft: SPACING.SIZE_20,
+    flexDirection: 'column',
+    justifyContent: 'center',
   },
   dropdownIcon: {
     height: 5,
@@ -18,32 +13,26 @@ const styles: StylesMap = {
     marginTop: SPACING.SIZE_02,
     width: 8,
   },
-  image: {
-    maxWidth: CONSTANTS.IMAGE_MAX_WIDTH,
-  },
-  imageWrapper: {
-    gridColumn: '1 / 2',
-  },
-  name: [typography.primarySubhead, { color: COLORS.LIGHT.GRAY_70 }],
-  quantity: [typography.bodyCopyTight, { color: COLORS.LIGHT.GRAY_70 }],
   reorderButton: {
-    backgroundColor: COLORS.GLOBAL.WHITE,
-    marginRight: SPACING.SIZE_05,
-  },
-  reorderButtonWrapper: {
+    [MQ.M]: {
+      width: '60%',
+    },
+    [MQ.L]: {
+      width: '90%',
+    },
+    [MQ.XL]: {
+      width: '90%',
+    },
     display: 'flex',
-    paddingTop: SPACING.SIZE_10,
+    justifyContent: 'center',
+    marginTop: SPACING.SIZE_10,
+    width: '90%',
   },
   submitLoader: {
+    alignItems: 'center',
     display: 'flex',
-    alignItems: 'center',
     justifyContent: 'center',
-    paddingLeft: SPACING.SIZE_02,
-  },
-  wrapper: {
-    alignItems: 'center',
-    display: 'grid',
-    gridTemplateColumns: 'repeat(4, 1fr)',
+    padding: `${SPACING.SIZE_20}px 0px`,
   },
 };
 export default styles;

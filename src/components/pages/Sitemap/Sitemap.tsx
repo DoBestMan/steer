@@ -12,7 +12,7 @@ import { SiteLinkWithLabel } from '~/data/models/SiteLinkWithLabel';
 import { SiteMenu } from '~/data/models/SiteMenu';
 import { ROUTE_MAP, ROUTES, THEME } from '~/lib/constants';
 import { mapPathnameToBreadcrumbs } from '~/lib/utils/breadcrumbs';
-import { getLegacyAccountURL } from '~/lib/utils/legacy-routes';
+import { getSSOLoginURL } from '~/lib/utils/sso';
 import { ui } from '~/lib/utils/ui-dictionary';
 
 import { learnTiresLinks } from './Sitemap.constants';
@@ -133,8 +133,8 @@ function getGlobalNavLinks(
     },
     {
       text: ui('links.account'),
-      action: getLegacyAccountURL(),
-      isExternal: true,
+      action: getSSOLoginURL(),
+      isExternal: false,
     },
     {
       text: ui('footer.company'),

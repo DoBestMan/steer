@@ -49,9 +49,12 @@ interface Props {
 
 type OrderReturnPageProps = OrderProduct & Props;
 function OrderReturnPage({
+  brand,
+  price,
+  extendedPrice,
   name,
   quantity,
-  id,
+  productId,
   image,
   orderId,
   orderStatus,
@@ -86,19 +89,22 @@ function OrderReturnPage({
     sendReturnRequest({
       body,
       orderId: String(orderId),
-      productId: String(id),
+      productId: String(productId),
       type: 'return',
       zip: String(zip),
     });
   };
   function renderOrderDetails() {
     const productDetails = {
+      brand,
       canCustomerCancelReturn: false,
       canCustomerReorder: false,
       canCustomerReturn: false,
-      id,
+      extendedPrice,
       image,
       name,
+      price,
+      productId,
       quantity,
     };
     return (
@@ -235,6 +241,7 @@ function OrderReturnPage({
             id={orderId}
             isCustomerServiceEnabled={isCustomerServiceEnabled}
             orderStatus={orderStatus}
+            showBackButton={false}
           />
         </GridItem>
         {renderOrderDetails()}

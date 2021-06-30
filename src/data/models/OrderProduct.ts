@@ -1,11 +1,15 @@
+import { SiteCatalogBrand } from './SiteCatalogBrand';
 import { SiteImage } from './SiteImage';
 
 export interface OrderProduct {
-  id: number;
-  image: SiteImage;
-  name: string;
-  quantity: number;
+  brand: SiteCatalogBrand;
+  canCustomerCancelReturn: boolean;
   canCustomerReorder: boolean;
   canCustomerReturn: boolean;
-  canCustomerCancelReturn: boolean;
+  extendedPrice: number;
+  image: SiteImage;
+  name: string;
+  price: number;
+  productId: number;
+  quantity: number;
 }

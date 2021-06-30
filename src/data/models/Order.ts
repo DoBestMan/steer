@@ -11,7 +11,7 @@ export interface Order {
   is_split: boolean;
   maskedEmail?: string;
   orderInstallerAppointment?: OrderAppointment | null;
-  orderProductList: Array<OrderProduct>;
+  orderProducts: Array<OrderProduct>;
   orderShippingStageList: Array<OrderShippingStageList>;
   returnInitializedReasonId: number | null;
   shippingAddress: UserAddress;

@@ -20,7 +20,7 @@ const styles: StylesMap = {
       a: {
         display: 'inline-flex',
       },
-      color: COLORS.GLOBAL.BLACK,
+      color: COLORS.LIGHT.GRAY_70,
       display: 'block',
       gridColumn: '1/5',
     },
@@ -82,45 +82,38 @@ const styles: StylesMap = {
   appointmentWrapper: {
     paddingBottom: SPACING.SIZE_40,
   },
-  emailButtonWrapper: {
-    display: 'flex',
-    flexDirection: 'row',
-  },
-  emailLoader: {
-    alignItems: 'center',
-    display: 'flex',
+  button: {
     justifyContent: 'center',
-    paddingLeft: SPACING.SIZE_10,
-  },
-  emailText: [
-    typography.bodyCopyTight,
-    {
-      color: COLORS.LIGHT.GRAY_70,
-      paddingTop: SPACING.SIZE_15,
-    },
-  ],
-  emailWrapper: {
-    paddingBottom: SPACING.SIZE_50,
+    width: '100%',
   },
   errorContainer: {
     paddingBottom: SPACING.SIZE_20,
   },
+  orderHeader: [
+    typography.secondaryHeadline,
+    {
+      paddingBottom: SPACING.SIZE_40,
+    },
+  ],
   orderInfoWrapper: {
     [MQ.S]: {
       paddingTop: SPACING.SIZE_60,
     },
     [MQ.M]: {
-      paddingBottom: SPACING.SIZE_60,
+      marginBottom: SPACING.SIZE_60,
+      marginLeft: '10%',
+      marginRight: '10%',
+      maxWidth: '80%',
       paddingTop: 0,
     },
   },
   orderItem: {
     paddingBottom: SPACING.SIZE_30,
   },
-  orderItemsList: {
-    paddingBottom: SPACING.SIZE_50,
-  },
   orderStatusWrapper: {
+    [MQ.S]: {
+      paddingTop: SPACING.SIZE_110,
+    },
     [MQ.M]: {
       padding: `0px ${SPACING.SIZE_90}px`,
       paddingTop: SPACING.SIZE_160,
@@ -139,13 +132,55 @@ const styles: StylesMap = {
     padding: `0px ${SPACING.SIZE_50}px`,
     paddingTop: SPACING.SIZE_110,
   },
+  orderSubHeader: [
+    typography.eyebrow,
+    {
+      color: COLORS.LIGHT.GRAY_70,
+      paddingBottom: SPACING.SIZE_30,
+      paddingLeft: SPACING.SIZE_05,
+    },
+  ],
+  orderTimelinePosition: {
+    position: 'relative',
+  },
+  orderTimelineSeperator: {
+    borderRight: BORDERS.SOLID_GRAY_20_1PX,
+    bottom: '10%',
+    position: 'absolute',
+    right: -10,
+    top: 0,
+  },
   orderTimelineWrapper: {
     [MQ.M]: {
-      borderBottom: 'none',
+      marginBottom: SPACING.SIZE_30,
+      marginLeft: '10%',
+      marginRight: '10%',
+      maxWidth: '80%',
       paddingTop: 0,
     },
     borderBottom: BORDERS.SOLID_GRAY_20_1PX,
     padding: `${SPACING.SIZE_10}px 0`,
+  },
+  pdfButtonWrapper: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  pdfLoader: {
+    alignItems: 'center',
+    display: 'flex',
+    justifyContent: 'center',
+    paddingLeft: SPACING.SIZE_10,
+  },
+  pdfText: [
+    typography.bodyCopyTight,
+    {
+      color: COLORS.LIGHT.GRAY_70,
+      paddingTop: SPACING.SIZE_15,
+      textAlign: 'center',
+    },
+  ],
+  pdfWrapper: {
+    paddingBottom: SPACING.SIZE_50,
   },
   returnContainer: {
     [MQ.M]: {
@@ -202,6 +237,10 @@ const styles: StylesMap = {
       paddingBottom: SPACING.SIZE_10,
     },
   ],
+  seperator: {
+    borderBottom: BORDERS.SOLID_GRAY_20_1PX,
+    marginBottom: SPACING.SIZE_30,
+  },
   shippingAddress: [
     typography.bodyCopyTight,
     {
