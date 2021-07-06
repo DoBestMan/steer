@@ -17,6 +17,7 @@ export interface Props extends ContentModalProps {
   isOpen: boolean;
   onAfterClose: () => void;
   onClose: () => void;
+  useSliderToClose?: boolean;
 }
 
 function ContentModal({
@@ -26,6 +27,7 @@ function ContentModal({
   isCustomerServiceEnabled,
   isOpen,
   link,
+  useSliderToClose = false,
   onClose,
   onAfterClose,
   showSupportSection = true,
@@ -39,6 +41,7 @@ function ContentModal({
       onClose={onClose}
       onAfterClose={onAfterClose}
       isOpen={isOpen}
+      useSliderToClose={useSliderToClose}
     >
       <div css={styles.container}>
         <h1 css={[styles.title, !subtitle && styles.noSubtitle]}>{title}</h1>

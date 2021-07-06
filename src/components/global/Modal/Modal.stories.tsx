@@ -176,6 +176,7 @@ export function BottomCardModalDefault() {
         contentLabel="Modal"
         onClose={toggleModal}
         isOpen={isOpen}
+        useSliderToClose
       >
         <p css={typography.bodyCopy}>Bottom Card Modal</p>
       </BottomCardModal>

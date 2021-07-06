@@ -125,6 +125,16 @@ const styles: StylesMap = {
       top: 34,
     },
   },
+  closeSlider: {
+    borderBottom: `3px solid ${COLORS.LIGHT.GRAY_LIGHTER_SOLID}`,
+    cursor: 'grab',
+    height: 12,
+    left: '50%',
+    position: 'absolute',
+    top: 4,
+    transform: 'translate(-50%, 0)',
+    width: 40,
+  },
   content: {
     position: 'relative',
     [MQ.S]: {

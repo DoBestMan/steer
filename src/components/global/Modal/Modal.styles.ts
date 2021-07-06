@@ -114,6 +114,16 @@ const styles: StylesMap = {
     },
     zIndex: Z_INDEX.FRONT,
   },
+  closeSlider: {
+    borderBottom: `3px solid ${COLORS.LIGHT.GRAY_LIGHTER_SOLID}`,
+    cursor: 'grab',
+    height: 12,
+    left: '50%',
+    position: 'absolute',
+    top: 4,
+    transform: 'translate(-50%, 0)',
+    width: 40,
+  },
   fullScreenPadding: {
     padding: `${FULLSCREEN_PADDINGS.TOP}px ${FULLSCREEN_PADDINGS.RIGHT}px ${FULLSCREEN_PADDINGS.BOTTOM}px`,
   },

@@ -19,6 +19,7 @@ export interface Props {
   onBack?: () => void;
   onClose: () => void;
   theme?: MODAL_THEME;
+  useSliderToClose?: boolean;
 }
 
 export type ContentModalProps = Omit<SiteDynamicModal, 'type'>;

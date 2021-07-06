@@ -17,6 +17,7 @@ interface Props extends HowToModalProps {
   isOpen: boolean;
   onAfterClose: () => void;
   onClose: () => void;
+  useSliderToClose?: boolean;
 }
 
 function HowToModal({
@@ -26,6 +27,7 @@ function HowToModal({
   imageSrc,
   isCustomerServiceEnabled,
   isOpen,
+  useSliderToClose = false,
   modalLabel,
   onClose,
   onAfterClose,
@@ -49,6 +51,7 @@ function HowToModal({
       onClose={onClose}
       onAfterClose={onAfterClose}
       isOpen={isOpen}
+      useSliderToClose={useSliderToClose}
     >
       <Container css={styles.container}>
         <GridItem gridColumnL="1/15">

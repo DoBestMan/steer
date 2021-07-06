@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import ReactModal from 'react-modal';
 
 import { useBreakpoints } from '~/hooks/useBreakpoints';
@@ -20,11 +21,19 @@ import { Props } from './Modal.types';
 
 bindAppElement();
 
+const SLIDER_MOVE_OFFSET = 20;
+
+interface Position {
+  x: number;
+  y: number;
+}
+
 function Modal({
   children,
   contentLabel,
   hasCloseButton = true,
   hasDefaultPadding = true,
+  useSliderToClose = false,
   isFullscreen = false,
   isHalfscreen,
   isOpen,
@@ -38,12 +47,32 @@ function Modal({
   customStyle,
 }: Props) {
   const linkTheme = theme === MODAL_THEME.LIGHT ? THEME.LIGHT : THEME.DARK;
-  const { lessThan } = useBreakpoints();
+  const { lessThan, isMobile } = useBreakpoints();
   const fullscreen = lessThan.L || isFullscreen;
   const rootStyles = fullscreen ? MODAL_TYPE.FULLSCREEN : MODAL_TYPE.OVERLAY;
   const animationStyles = fullscreen
     ? animation[MODAL_ANIMATION.FADE]
     : animation[MODAL_ANIMATION.SLIDE_LEFT];
+
+  const position = useRef<Position | null>(null);
+
+  const handleMouseDown = (event: React.MouseEvent) => {
+    position.current = {
+      x: event.clientX,
+      y: event.clientY,
+    };
+    window.addEventListener('mouseup', handleMouseUp);
+  };
+
+  const handleMouseUp = (event: MouseEvent) => {
+    if (
+      position?.current &&
+      event.clientY - position.current.y >= SLIDER_MOVE_OFFSET
+    ) {
+      onClose();
+    }
+    window.removeEventListener('mouseup', handleMouseUp);
+  };
 
   return (
     <ReactModal
@@ -101,6 +130,9 @@ function Modal({
             />
           )}
         </div>
+      )}
+      {useSliderToClose && isMobile && (
+        <div css={styles.closeSlider} onMouseDown={handleMouseDown} />
       )}
       {children}
     </ReactModal>

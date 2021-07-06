@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import React, { ReactNode, useRef } from 'react';
 import ReactModal from 'react-modal';
 
 import { ICONS } from '~/components/global/Icon/Icon.constants';
@@ -12,6 +12,13 @@ import styles, { overlayBkStyles } from './BottomCardModal.styles';
 
 bindAppElement();
 
+const SLIDER_MOVE_OFFSET = 20;
+
+interface Position {
+  x: number;
+  y: number;
+}
+
 interface Props {
   children: ReactNode;
   contentLabel: string;
@@ -19,6 +26,7 @@ interface Props {
   isOpen: boolean;
   onBack?: () => void;
   onClose: () => void;
+  useSliderToClose?: boolean;
 }
 
 function BottomCardModal({
@@ -26,10 +34,32 @@ function BottomCardModal({
   contentLabel,
   customContentStyles,
   isOpen,
+  useSliderToClose = false,
   onBack,
   onClose,
 }: Props) {
-  const { bk } = useBreakpoints();
+  const { bk, isMobile } = useBreakpoints();
+
+  const position = useRef<Position | null>(null);
+
+  const handleMouseDown = (event: React.MouseEvent) => {
+    position.current = {
+      x: event.clientX,
+      y: event.clientY,
+    };
+    window.addEventListener('mouseup', handleMouseUp);
+  };
+
+  const handleMouseUp = (event: MouseEvent) => {
+    if (
+      position?.current &&
+      event.clientY - position.current.y >= SLIDER_MOVE_OFFSET
+    ) {
+      onClose();
+    }
+    window.removeEventListener('mouseup', handleMouseUp);
+  };
+
   return (
     <ReactModal
       contentLabel={contentLabel}
@@ -73,6 +103,9 @@ function BottomCardModal({
             css={!onBack && styles.close}
           />
         </div>
+        {useSliderToClose && isMobile && (
+          <div css={styles.closeSlider} onMouseDown={handleMouseDown} />
+        )}
         {children}
       </div>
     </ReactModal>
