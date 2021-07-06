@@ -2,8 +2,8 @@ export const URLS = {
   ACCOUNT_INTEGRATION:
     'https://checkout-stage-frontend.jenkins.simpletire.com/my_customers/login',
   ACCOUNT_PRODUCTION: 'https://checkout.simpletire.com/my_customers/login',
-  CHECKOUT_INTEGRATION: 'https://opt-505-frontend.jenkins.simpletire.com/',
-  // 'https://checkout-stage-frontend.jenkins.simpletire.com',
+  CHECKOUT_INTEGRATION:
+    'https://checkout-stage-frontend.jenkins.simpletire.com',
   CHECKOUT_PRODUCTION: 'https://checkout.simpletire.com',
   HOST_PRODUCTION: 'https://simpletire.com',
   MAIN_API_FEATURE: (branch: string | undefined): string =>

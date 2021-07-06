@@ -14,6 +14,7 @@ import {
   SSOTokenInput,
   SSOTokenResponse,
 } from '~/lib/constants/sso.types';
+import { isProductionDeploy } from '~/lib/utils/deploy';
 import { getStringifiedParams } from '~/lib/utils/routes';
 
 const MyAccount = WithErrorPageHandling(AccountContainer);
@@ -27,10 +28,13 @@ export const getServerSideProps: GetServerSideProps<PageResponse<
   const ssoTokenInCookie = cookies[SSO_COOKIE_CONSTANTS.SIMPLETIRE_SSO];
   const csrfTokenInCookie = cookies[SSO_COOKIE_CONSTANTS.SIMPLETIRE_CSRF];
   const redirectUri = cookies[SSO_COOKIE_CONSTANTS.ACCOUNT_REDIRECT];
+  const clientSecret = isProductionDeploy()
+    ? process.env.STEER_CLIENT_SECERET_SSO
+    : process.env.STEER_CLIENT_SECERET_SSO_INTEGRATION;
 
   const body = {
     client_id: 'steer',
-    client_secret: process.env.STEER_CLIENT_SECERET_SSO,
+    client_secret: clientSecret,
     code,
     grant_type: 'authorization_code',
     redirect_uri: redirectUri,
@@ -52,38 +56,42 @@ export const getServerSideProps: GetServerSideProps<PageResponse<
       const data = (res.data as unknown) as SSOTokenResponse;
       // we are saving two cookies after recieving the sso token
       // the first is saved without domain for local/vercel builds
-      nookies.set(
-        context,
-        SSO_COOKIE_CONSTANTS.SIMPLETIRE_SSO,
-        data.access_token,
-        {
-          maxAge: 86400 * 30,
-          path: '/',
-        },
-      );
-      // the second one is saved with .simpletire.com domain for it to be accessible by checkout
-      nookies.set(
-        context,
-        SSO_COOKIE_CONSTANTS.SIMPLETIRE_SSO,
-        data.access_token,
-        {
-          maxAge: 86400 * 30,
-          path: '/',
-          domain: SSO_COOKIE_CONSTANTS.DOMAIN,
-        },
-      );
-      const userDetailsResponse = await backendGetUserIdFromSSOToken(
-        data.access_token,
-      );
-      if (userDetailsResponse) {
-        const username = userDetailsResponse.firstName
-          ? `${userDetailsResponse.firstName} ${userDetailsResponse.lastName}`
-          : 'User';
-        userDetails = {
-          username,
-          email: userDetailsResponse?.username,
-          hasToken: true,
-        };
+      if (data.access_token) {
+        nookies.set(
+          context,
+          SSO_COOKIE_CONSTANTS.SIMPLETIRE_SSO,
+          data.access_token,
+          {
+            maxAge: 86400 * 30,
+            path: '/',
+          },
+        );
+        // the second one is saved with .simpletire.com domain for it to be accessible by checkout
+        nookies.set(
+          context,
+          SSO_COOKIE_CONSTANTS.SIMPLETIRE_SSO,
+          data.access_token,
+          {
+            maxAge: 86400 * 30,
+            path: '/',
+            domain: SSO_COOKIE_CONSTANTS.DOMAIN,
+          },
+        );
+        const userDetailsResponse = await backendGetUserIdFromSSOToken(
+          data.access_token,
+        );
+        if (userDetailsResponse) {
+          const username = userDetailsResponse.firstName
+            ? `${userDetailsResponse.firstName} ${userDetailsResponse.lastName}`
+            : 'User';
+          userDetails = {
+            username,
+            email: userDetailsResponse?.username,
+            hasToken: true,
+          };
+        }
+      } else {
+        return { props: { errorStatusCode: 404 } };
       }
     }
   } else if (!ssoTokenInCookie && !code && !state) {
