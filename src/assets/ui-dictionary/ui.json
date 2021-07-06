@@ -121,6 +121,7 @@
   "common": {
     "ellipsis": "...",
     "radioOption": "Radio option",
+    "paidPDP": "Paid_PDP",
     "feedback": {
       "defaultMessageLabel": "Did you find what <br /> you were looking for?",
       "negativeMessageLabel": "Sorry to hear that. <br /> Let us help you",

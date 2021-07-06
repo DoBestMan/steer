@@ -53,6 +53,14 @@ export const keyToCamel = (text: string): string =>
     $1.toUpperCase().replace('-', '').replace('_', ''),
   );
 
+export const camelToKey = (text: string): string =>
+  text.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`);
+
+export const keyToKebab = (text: string): string =>
+  capitalize(text).replace(/(-[a-z])/g, ($1) =>
+    $1.toUpperCase().replace('-', '_'),
+  );
+
 export const minMaxify = (min: number, max: number) => `${min},${max}`;
 
 export const removeInchFromQueryParam = (str: string) =>

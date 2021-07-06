@@ -25,6 +25,12 @@ export interface SiteProductLine {
   brand: SiteCatalogBrand;
   /**
    *
+   * @type {number}
+   * @memberof SiteProductLine
+   */
+  brandTire: number;
+  /**
+   *
    * @type {Array<SiteCatalogProductImage | SiteYouTubeVideo>}
    * @memberof SiteProductLine
    */

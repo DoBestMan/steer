@@ -13,6 +13,7 @@ import { SiteNotificationTypes } from '~/data/models/SiteNotificationTypes';
 import { useApiDataWithDefault } from '~/hooks/useApiDataWithDefault';
 import { ICON_IMAGE_TYPE } from '~/lib/backend/icon-image.types';
 import { THEME, TIME } from '~/lib/constants';
+import { LOCAL_STORAGE, PROPERTIES } from '~/lib/constants/localStorage';
 import { eventEmitters } from '~/lib/events/emitters';
 import { fetchWithErrorHandling } from '~/lib/fetch';
 import { AsyncResponse } from '~/lib/fetch/index.types';
@@ -119,6 +120,24 @@ function useContextSetup({
 
   if (typeof newQuery.skipGroups === 'undefined') {
     newQuery.skipGroups = isAdvancedView + '';
+  }
+  if (typeof window !== 'undefined') {
+    const productDetailsStr = window.localStorage.getItem(
+      LOCAL_STORAGE[PROPERTIES.PRODUCT_DETAILS],
+    );
+    if (productDetailsStr) {
+      const productDetails = JSON.parse(productDetailsStr);
+      const expirationDuration = 30 * 24 * 60 * 60 * 1000; // 30 Days
+      if (
+        new Date().getTime() <=
+        new Date(productDetails.date).getTime() + expirationDuration
+      ) {
+        newQuery.merchBrand = productDetails.brand;
+        newQuery.merchCategory = productDetails.category;
+        newQuery.merchBrandTire = productDetails.brandTire;
+        newQuery.merchSubtype = productDetails.subtype;
+      }
+    }
   }
 
   const { error: productsError } = useApiDataWithDefault<

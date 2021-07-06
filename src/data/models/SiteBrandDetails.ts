@@ -27,6 +27,7 @@ export interface SiteBrandDetailsLinkList {
 
 export interface SiteBrandDetails {
   header: HeaderWithLogoProps;
+  brandTire: number;
   promoImage: SiteModuleImage;
   curatedProducts: SiteCatalogProductGroupItem[];
   deals: DealsItem[];

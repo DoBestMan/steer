@@ -128,6 +128,7 @@ export const siteProductMock: SiteProduct = {
       },
       label: 'Achilles',
     },
+    brandTire: 1,
     assetList: [
       {
         image: {
